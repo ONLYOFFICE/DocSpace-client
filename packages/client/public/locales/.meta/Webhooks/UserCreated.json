@@ -3,7 +3,7 @@
   "content": "User created",
   "content_en_sha1_hash": "e159a1be85770f93799fe38346253342f8e0dd31",
   "created_at": "2025-05-19T21:30:49.856Z",
-  "updated_at": "2026-03-20T09:07:45.615Z",
+  "updated_at": "2026-04-08T19:04:34.307Z",
   "comment": {
     "text": "This translation key is used to display the text \"User created\" in a user interface component, likely a webhook trigger selection option, allowing users to select when they want to receive notifications for new user creations.",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation 'Потребителят е създаден' is a literal translation and doesn't accurately convey the meaning of \"User created\" in the context of a webhook event. It implies the system created a user, but a webhook event signifies a user *was* created elsewhere and the system received a notification.",
-          "suggestion": "Потребител създаден"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -54,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Uživatel vytvořil' literally translates to 'User created'. While technically correct, it's not idiomatic for a webhook event. Webhooks typically represent events *happening* to a user, not actions performed *by* a user. A more appropriate translation would convey that a user was created.",
-          "suggestion": "Uživatel byl vytvořen"
+          "description": "The Czech translation 'Uživatel vytvořil' means 'User created [something]' (active voice, implying the user is the actor). In the context of a webhook trigger, it should mean 'A user has been created' (passive voice/event description).",
+          "suggestion": "Vytvoření uživatele"
         }
       ],
       "approved_at": null
@@ -63,25 +57,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Benutzer erstellt' is a literal translation but doesn't quite convey the meaning of 'User created' in the context of a webhook event. It implies an active creation by the system, rather than the fact that a user exists.",
-          "suggestion": "Benutzer angelegt"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ο χρήστης δημιουργήθηκε' literally translates to 'The user was created'. This implies a passive voice, while the English 'User created' is an active voice and implies an action performed *by* someone or something. A more accurate translation, reflecting the active voice, would be 'Δημιουργήθηκε χρήστης'.",
-          "suggestion": "Δημιουργήθηκε χρήστης"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -105,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Օգտատերը ստեղծված է' literally translates to 'The user is created'. This implies the user *became* created, which is not the intended meaning. It should indicate that a user *has been* created.",
-          "suggestion": "Օգտատեր է ստեղծվել (Ogtater e stegcdvel) - 'A user has been created' or Օգտատեր է ավելացվել (Ogtater e avelacvel) - 'A user has been added'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -123,25 +99,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"ユーザーが作成されました\" is technically correct, it sounds somewhat formal and passive for a webhook event. A more natural and common phrasing would be more active and concise.",
-          "suggestion": "ユーザーが作成"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation '사용자가 생성되었습니다' translates more literally to 'A user has been created'. While not technically wrong, it's a passive voice construction that can sound less natural in Korean. '사용자가 생성됨' or '새로운 사용자가 생성되었습니다' would be more common and feel more natural.",
-          "suggestion": "새로운 사용자가 생성되었습니다"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -153,13 +117,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Lietotājs izveidots' literally translates to 'User created' but implies the user was created *by* something, rather than the act of creating a user. A more accurate translation would reflect the event of a user being created.",
-          "suggestion": "Lietotājs reģistrēts"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -177,13 +135,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Utilizador criado\" is technically correct, a more natural and commonly used translation for \"User created\" in Portuguese (especially in a technical context like webhooks) would be \"Usuário criado\". \"Utilizador\" is more common in European Portuguese, while \"Usuário\" is standard in Brazilian Portuguese, which is generally preferred for broader audience.",
-          "suggestion": "Usuário criado"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -195,13 +147,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Utilizatorul a fost creat' is a passive voice construction. A more natural and direct translation of 'User created' would be 'Utilizator nou' or 'Utilizator creat'. While 'Utilizatorul a fost creat' is grammatically correct, it's less concise and less commonly used in this context.",
-          "suggestion": "Utilizator nou"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -213,61 +159,31 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"පරිශීලකයෙකු විසින් සාදන ලදී\" (Parishilakayekun vishesan sadan ladi) literally translates to 'Created by a user'. While technically correct, it's a passive construction that is less natural in Sinhala for this context. A more natural and direct translation for 'User created' would be something like 'නව පරිශීලකයා' (Nava parishilakayaa) - 'New User' or 'පරිශීලකයා නිර්මාණය කරන ලදී' (Parishilakaya nirmanaya karan ladi) - 'User is created'.",
-          "suggestion": "නව පරිශීලකයා (Nava parishilakayaa) or පරිශීලකයා නිර්මාණය කරන ලදී (Parishilakaya nirmanaya karan ladi)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Používateľ vytvorený' is a literal translation and doesn't sound natural in Slovak. A more appropriate translation would convey the action of user creation, not just the state of being created.",
-          "suggestion": "Používateľ bol vytvorený"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Uporabnik ustvarjen' is a literal translation and grammatically incorrect in Slovenian. The passive voice is not natural here.",
-          "suggestion": "Uporabnik je ustvarjen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Корисник креиран\" is a literal translation and doesn't quite convey the intended meaning of 'User created' in the context of a webhook event. It implies the user was simply created, not necessarily that a new user has been added to the system.",
-          "suggestion": "A more natural and accurate translation would be something like \"Нови корисник креиран\" (New user created) or \"Корисник додатан\" (User added)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation \"Korisnik kreiran\" is a literal translation of 'User created' but doesn't convey the intended meaning in a natural way in Serbian. It implies the user was *made* rather than *created an account* or *registered*. The passive voice is awkward.",
-          "suggestion": "Korisnik je kreiran (passive, more formal) or, ideally, Korisnik napravio nalog/Korisnik se registrovao (User created an account/User registered)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -279,13 +195,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Користувача створено\" is grammatically correct but not the most natural or idiomatic way to express \"User created\" in Ukrainian. It implies that the user was created *by* something, which isn't always the intended meaning. A more natural translation would depend on the context, but a direct and common equivalent would be something like \"Створено користувача\" or \"Користувач створений\".",
-          "suggestion": "Створено користувача"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -295,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

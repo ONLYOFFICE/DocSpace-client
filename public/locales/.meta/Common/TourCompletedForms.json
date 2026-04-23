@@ -3,7 +3,7 @@
   "content": "Each folder contains all submitted copies of a specific form, organized by submission.",
   "content_en_sha1_hash": "eb68d864a7b2ec38725d903d6ffa54cb0f976347",
   "created_at": "2026-03-31T15:18:26.724Z",
-  "updated_at": "2026-03-31T15:18:26.724Z",
+  "updated_at": "2026-04-07T21:18:49.886Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -20,7 +20,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Arabic translation adds 'تاريخ' (date), translating 'by submission' as 'by submission date', which is an addition not present in the source text.",
+          "suggestion": "يحتوي كل مجلد على جميع النسخ المُقدَّمة لنموذج معين، مُنظَّمة حسب التقديم."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -104,7 +110,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation uses nonsensical words ('karaktēra' instead of 'mape', 'anākai' instead of 'forma') that do not correspond to the English meaning.",
+          "suggestion": "Katrā mape ir saglabātas visas iesniegtās konkrētas formas kopijas, organizētas pēc iesniegšanas."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -152,13 +164,25 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The word 'папка' is in Cyrillic (Russian) instead of Latin script (Slovak).",
+          "suggestion": "Každá priečinok obsahuje všetky predložené kópie konkrétneho formulára, usporiadané podľa predloženia."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'submission' is translated as 'področju' (field/area), which changes the meaning from 'the act of submitting' to 'a geographical or topical area'.",
+          "suggestion": "Vsaka mapa vsebuje vse poslate kopije specifičnega obrazca, organizirane po prijavi."
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {
@@ -170,7 +194,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'предране' (predrane) is used incorrectly. It likely stems from a mistranslation of 'submitted' or is a typo for 'предате' (predate). 'Предране' is not a standard Serbian word in this context and sounds like 'torn' or 'ripped' in some dialects, or is simply a nonsensical term here.",
+          "suggestion": "Свака папка садржи све предате копије одређеног обрасца, организоване по поднешењу."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

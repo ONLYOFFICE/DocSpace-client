@@ -3,7 +3,7 @@
   "content": "If you do not think you will use the space and would like to delete your space permanently, submit your request using the Delete button. Please, keep in mind that you will not be able to reactivate your space or recover any information associated with it.",
   "content_en_sha1_hash": "b1a7d4babcdcd1022c5cd930e0d4027f04cfa974",
   "created_at": "2025-05-19T21:30:52.223Z",
-  "updated_at": "2025-09-26T15:21:06.290Z",
+  "updated_at": "2026-04-09T01:59:51.398Z",
   "comment": {
     "text": "This translation key is used to display a warning message when a user requests to permanently delete their space. It informs users that they will not be able to recover any associated information once deletion is confirmed. This text appears as a helper text in the UI.",
     "is_auto": true,
@@ -27,18 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"If you do not think you will use the space\" is translated as \"إذا كنت لا تعتقد أنك ستستخدم المساحة\". While technically correct, a more natural and common phrasing in Arabic would be something like \"إذا كنت لا تنوي استخدام المساحة\" (If you do not intend to use the space).",
-          "suggestion": "إذا كنت لا تنوي استخدام المساحة"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"permanently\" is translated as \"نهائيًا\". While correct, a more common and fluent term would be \"بشكل دائم\".",
-          "suggestion": "بشكل دائم"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -47,13 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'space' is consistently translated as 'domeni'. While 'domeni' can sometimes refer to a space, in this context, 'space' likely refers to a user's personal area within a portal. A more accurate translation might be something like 'bölgəniz' or 'sahəniz'.",
-          "suggestion": "Consider translating 'space' as 'bölgəniz' or 'sahəniz' to better reflect the intended meaning."
-        },
-        {
-          "type": "formatting",
-          "description": "The original English text uses a comma before 'Please, keep in mind'. The Azerbaijani translation replicates this but it isn't natural in Azerbaijani. Removing the comma would improve flow.",
-          "suggestion": "Remove the comma before 'Nəzərə alın ki'."
+          "description": "The term 'space' (referring to the ONLYOFFICE DocSpace) has been translated as 'domen' (domain), which is a different technical concept and changes the meaning of the UI context.",
+          "suggestion": "Əgər sahədən istifadə etməyi planlaşdırmırsınızsa və sahənizi həmişəlik silmək istəyirsinizsə, lütfən, Sil düyməsini istifadə edərək sorğunuzu göndərin. Nəzərə alın ki, siz sahənizi yenidən aktivləşdirə və ya onunla əlaqəli hər hansı məlumatı bərpa edə bilməzsiniz."
         }
       ],
       "approved_at": null
@@ -73,30 +57,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Space' is repeated unnecessarily throughout the translation. It's acceptable to use it once, then use 'es' or similar pronoun for subsequent references.",
-          "suggestion": "Wenn Sie glauben, dass Sie das Space nicht nutzen werden, und Ihr Space endgültig löschen möchten, übermitteln Sie Ihren Antrag über die Schaltfläche Löschen. Bitte bedenken Sie, dass Sie es nicht reaktivieren oder die damit verbundenen Informationen wiederherstellen können."
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, using 'es' feels slightly less natural. A more fluent phrasing would replace 'es' with a synonym.",
-          "suggestion": "Wenn Sie glauben, dass Sie das Space nicht nutzen werden, und Ihr Space endgültig löschen möchten, übermitteln Sie Ihren Antrag über die Schaltfläche Löschen. Bitte bedenken Sie, dass Sie den Space nicht reaktivieren oder die damit verbundenen Informationen wiederherstellen können."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Greek translation uses quotes («Διαγραφή») that are not consistently used or necessary. It would be more standard to use simpler quotes (''Διαγραφή'') or no quotes at all.",
-          "suggestion": "Replace «Διαγραφή» with ''Διαγραφή'' or Διαγραφή."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -120,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The phrase \"Ջնջել կոճակի միջոցով\" (through the Delete button) is a bit clunky. It would be more natural to say 'միջոցով Ջնջելու ակոճակում' (through the Delete button).",
-          "suggestion": "միջոցով Ջնջելու ակոճակում"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -138,36 +99,25 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The translation omits the critical warning that information associated with the space cannot be recovered.",
+          "suggestion": "スペースを使用する予定がなく、永久に削除したい場合は、「削除」ボタンを使ってリクエストを送信してください。なお、削除されたスペースは再活性化することができず、関連する情報も復元できないため、ご注意ください。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Please, keep in mind\" is awkwardly translated as \"명심하시기 바랍니다.\" While not technically wrong, it sounds overly formal and stiff in this context. A more natural and friendly phrasing would be better.",
-          "suggestion": "Consider a more conversational alternative like \"참고하시기 바랍니다\" or simply removing it and restructuring the sentence for flow."
-        },
-        {
-          "type": "formatting",
-          "description": "The use of a full stop after \"바랍니다\" feels a bit abrupt. A smoother transition might be achieved by a slightly different sentence structure.",
-          "suggestion": "Re-evaluate sentence structure to ensure a more natural flow after \"바랍니다\". Perhaps join it directly to the preceding clause."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Lao translation uses a comma after 'ກະລຸນາ' which is not standard Lao punctuation. It's more common to use a period or no punctuation at all.",
-          "suggestion": "Replace ',' with '.' or remove it entirely."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -191,42 +141,19 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The phrase \"Please, keep in mind\" is translated to \"Tenha em mente\". While technically correct, it sounds slightly less natural in this context in Portuguese.  A more natural phrasing would be something like \"Esteja ciente de que\" or \"Lembre-se que\".",
-          "suggestion": "Lembre-se que não será possível reativar o seu espaço ou recuperar qualquer informação associada ao mesmo."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Please, keep in mind' is awkwardly translated to 'Por favor, tenha em atenção'. A more natural and common translation would be 'Esteja ciente de que' or 'Esteja atento de que'.",
-          "suggestion": "Se você acha que não usará o espaço e gostaria de excluir seu espaço permanentemente, envie sua solicitação usando o botão Excluir. Esteja ciente de que não poderá reativar o seu espaço nem recuperar qualquer informação associada ao mesmo."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The pronoun 'your' (seu/sua) appears inconsistently in the Portuguese translation. While generally correct, a slight improvement in flow could be achieved with consistent usage.",
-          "suggestion": "Se você acha que não usará o espaço e gostaria de excluir **o** espaço permanentemente, envie sua solicitação usando o botão Excluir. Esteja ciente de que não poderá reativar **o** seu espaço nem recuperar qualquer informação associada a **ele**."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation uses the word 'Ștergere' (Deletion) with a capitalized 'Ș'. While technically correct as a noun, it's more natural to use the lowercase 'ștergere' in this context, following the flow of the text.",
-          "suggestion": "Dacă credeţi că nu veţi mai folosi spaţiul şi doriţi să îl ştergeţi definitiv, trimiteţi o solicitare folosind butonul ștergere."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -235,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word \"portal\" is consistently used. While it's technically correct, 'space' might be more natural in this context depending on the user's understanding of the term 'portal'. Consider whether 'пространство' would be a better fit for clarity.",
-          "suggestion": "Consider replacing 'портал' with 'пространство' in some or all instances for improved clarity, depending on the context and target audience."
+          "description": "The English text refers to a 'space', but the Russian translation uses 'портал' (portal). While they are related in context, 'space' is a specific entity in ONLYOFFICE DocSpace, and changing it to 'portal' is a terminology inconsistency.",
+          "suggestion": "Если вы считаете, что не будете пользоваться пространством, и хотите удалить пространство навсегда, отправьте запрос с помощью кнопки Удалить. Пожалуйста, имейте в виду, что вы не сможете снова активировать свое пространство или восстановить любую информацию, связанную с ним."
         }
       ],
       "approved_at": null
@@ -244,30 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ආශ්‍රිත තොරතුරු කිසිවක්\" is a bit clunky. A more natural translation of \"any information associated with it\" would be something like \"ඒ හා සම්බන්ධ කිසිදු තොරතුරක්\" or \"ඒ හා බැඳුණු කිසිදු තොරතුරක්\".",
-          "suggestion": "Replace \"ආශ්‍රිත තොරතුරු කිසිවක්\" with \"ඒ හා සම්බන්ධ කිසිදු තොරතුරක්\" or \"ඒ හා බැඳුණු කිසිදු තොරතුරක්\"."
-        },
-        {
-          "type": "grammar",
-          "description": "While technically correct, the sentence \"ඔබගේ අවකාශය නැවත සක්‍රිය කිරීමට හෝ ආශ්‍රිත තොරතුරු කිසිවක් ප්‍රතිසාධනයට නොහැකි වන බව මතක තබා ගන්න.\" could flow better. A more natural phrasing would emphasize the consequence more directly.",
-          "suggestion": "Consider rephrasing to something like \"ඔබගේ අවකාශය නැවත සක්‍රිය කිරීමටවත්, ඒ හා සම්බන්ධ කිසිදු තොරතුරක් ප්‍රතිසාධනය කිරීමටවත් ඔබට හැකියාව නොමැති බවoubliezපත් කරන්න.\" (Remember that you will not be able to reactivate your space or recover any associated information.)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Slovak translation includes quotation marks around the word \"Vymazať\" within the sentence. This is not present in the English original and disrupts the flow. It's likely intended to highlight the button name, but in Slovak, this is typically achieved through other means (e.g., bolding).",
-          "suggestion": "Remove the quotation marks around \"Vymazať\". The sentence should read: \"Ak si myslíte, že priestor nebudete využívať a chceli by ste ho natrvalo vymazať, odošlite žiadosť kliknutím na tlačidlo Vymazať.\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -279,25 +189,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translated text uses quotation marks (“”) for the 'Delete' button label. It's recommended to use standard single quotes (') or remove the quotes entirely for consistency with UI conventions.",
-          "suggestion": "Use single quotes ('Izbriši') or remove the quotes altogether."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Serbian translation includes quotes around the word 'Izbriši' (Delete). While technically correct, it's more natural to omit the quotes in this context, as it's an instruction rather than a direct reference to the button label.",
-          "suggestion": "Ako ne planirate koristiti prostor i želite trajno da ga izbrišete, pošaljite zahtev pritiskom na dugme Izbriši."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -309,28 +207,22 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation uses quotation marks («Видалити») which are not standard Ukrainian quotation marks. Standard quotation marks are «».",
-          "suggestion": "Replace «Видалити» with \"Видалити\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation uses \"Xóa\" for \"Delete\". While understandable, \"Xóa\" is more of an action and less of a label. Using a more descriptive label like \"Yêu cầu Xóa\" (Delete Request) would be more aligned with the English phrasing. The current wording slightly shifts the meaning.",
-          "suggestion": "Replace 'nút Xóa' with 'nút Yêu cầu Xóa' or 'nút Tùy chọn Xóa' to be more precise."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

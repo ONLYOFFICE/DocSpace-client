@@ -3,7 +3,7 @@
   "content": "Register a new application",
   "content_en_sha1_hash": "a837b93db395ef80c1fdcc0f221a96f5a578b9b7",
   "created_at": "2025-05-19T21:30:53.992Z",
-  "updated_at": "2025-08-04T07:30:01.446Z",
+  "updated_at": "2026-04-07T19:35:05.165Z",
   "comment": {
     "text": "\"Register a new application\" is used as a label for a button to prompt users to create a new application. It appears in a UI component where users have access to developer tools and can interact with it when clicked.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Yeni tətbiqi qeydiyyatdan keçirin' is a bit literal. A more natural phrasing would be something like 'Yeni bir tətbiq yarat' or 'Yeni tətbiq qeydiyat et'.",
-          "suggestion": "Yeni bir tətbiq yarat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -87,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Գրանցել նոր դիմում' literally translates to 'Register new application'. While understandable, a more natural and idiomatic translation for 'Register a new application' in Armenian would be something like 'Ստեղծել նոր հավելված' (Shtegtsel nor havelvad) or 'Հավելված գրանցել' (Havelvad granvel).",
-          "suggestion": "Consider 'Ստեղծել նոր հավելված' (Shtegtsel nor havelvad) or 'Հավելված գրանցել' (Havelvad granvel)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -141,13 +129,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Registar uma nova candidatura' doesn't fully capture the meaning of 'Register a new application'. 'Candidatura' typically refers to an application for a position or opportunity, not a software application.",
-          "suggestion": "Registar uma nova aplicação"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -159,18 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Înregistrare aplicație nouă\" is a very literal translation and lacks the nuance of \"Register a new application.\" A more natural Romanian phrasing would be preferred.",
-          "suggestion": "Înregistrează o aplicație nouă"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation lacks a definite article before 'aplicație' which makes it sound slightly awkward in Romanian.",
-          "suggestion": "Înregistrează o aplicație nouă"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

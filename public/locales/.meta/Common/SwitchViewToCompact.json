@@ -3,7 +3,7 @@
   "content": "Switch to compact view",
   "content_en_sha1_hash": "00089d46aa530f8ca9b4dd1cc4f17fed0a89d0bf",
   "created_at": "2025-05-19T21:30:49.242Z",
-  "updated_at": "2025-12-17T07:49:08.163Z",
+  "updated_at": "2026-04-07T22:09:10.993Z",
   "comment": {
     "text": "This translation key is used to display a label that switches between compact and thumbnail views. It is displayed as an icon in a view selector component, indicating the current mode of operation. The text \"Switch to compact view\" or its alternative, depending on the selected view.",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Yığcam görüntüyə keç\" is a possible translation, a more natural and accurate translation of \"Switch to compact view\" would be \"Kompakt rejimə keç\". \"Yığcam\" can sometimes imply a compressed or reduced form, which isn't necessarily the intended meaning of 'compact' in this context.",
-          "suggestion": "Kompakt rejimə keç"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -84,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Finnish translation \"Suppeat tiedot\" does not accurately convey the meaning of \"Switch to compact view\". \"Suppeat tiedot\" translates to \"Detailed information\" or \"Complete information\", which is not the intended meaning.",
-          "suggestion": "A more accurate translation would be something like \"Siirry tiiviöönäkymään\" or \"Vaihda tiiviöönäkymään\".  \"Tiiviöönäkymä\" translates to 'compact view'."
+          "description": "The Finnish translation 'Suppeat tiedot' means 'Sparse information' or 'Scanty data', which is a completely different meaning from the action 'Switch to compact view'.",
+          "suggestion": "Vaihda tiiviiseen näkymään"
         }
       ],
       "approved_at": null
@@ -93,13 +87,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Activer la vue compacte' while understandable, doesn't directly translate 'Switch to'. 'Switch to' implies a change, while 'Activer' implies enabling. A more accurate translation would convey the action of switching.",
-          "suggestion": "Basculer vers la vue compacte"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -111,13 +99,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Attiva visualizzazione compatta' is understandable, a more accurate and natural translation of 'Switch to compact view' would be 'Passa alla visualizzazione compatta' or 'Visualizza in modalità compatta'. 'Attiva' implies activation of a feature, whereas 'Switch to' implies changing to a different view.",
-          "suggestion": "Passa alla visualizzazione compatta"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -135,13 +117,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation \"ປ່ຽນເປັນມຸມເບິ່ງທີ່ຫນາແຫນ້ນ\" (pian pen mum beng thi na haen) doesn't perfectly capture the meaning of 'Switch to compact view'. While 'ຫນາແຫນ້ນ' (na haen) means 'dense' or 'compact', the phrasing 'ມຸມເບິ່ງທີ່ຫນາແຫນ້ນ' (mum beng thi na haen) is a bit awkward. A more natural rendering would focus on the action of making something smaller or condensed.",
-          "suggestion": "ປ່ຽນເປັນຮູບແບບຫົດຕົວ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -189,13 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'සංගත දැක්මට මාරුව' doesn't accurately convey the meaning of 'Switch to compact view'. 'සංගත' (sangatha) typically means 'organized' or 'integrated', not 'compact'. The word 'compact' implies a smaller, more condensed view.",
-          "suggestion": "A more accurate translation would be something like 'සුක්ෂ්ම දැක්මට මාරුව' (sukshma dekmath maruva) which conveys 'Switch to a finer/more detailed/smaller view' or 'ක්ෂුද්‍ර දැක්මට මාරුව' (khudra dekmath maruva) which means 'Switch to a miniature view'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -204,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation 'Prepnúť do presného zobrazenia' doesn't accurately convey the meaning of 'Switch to compact view'. 'Presné zobrazenie' translates to 'precise view' or 'detailed view,' which is the opposite of 'compact view'.",
-          "suggestion": "A more accurate translation would be something like 'Prepnúť na zobrazenie v zmenšenom režime' or 'Prepnúť do zobrazenia v kompaktnej forme'."
+          "description": "The word 'presného' means 'precise' or 'accurate', whereas the English 'compact' refers to a layout density/size. The translation implies switching to a 'precise view' instead of a 'compact view'.",
+          "suggestion": "Prepnúť do kompaktného zobrazenia"
         }
       ],
       "approved_at": null
@@ -219,30 +189,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Пребаци се на компактни приказ' is not the most natural or accurate translation of 'Switch to compact view'. While technically correct, it sounds slightly awkward. A more natural phrasing would be something like 'Пребаци у компактни приказ' or 'Пређи на компактни приказ'. The 'се' implies a reflexive action that isn't inherent in the English phrase.",
-          "suggestion": "Пребаци у компактни приказ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Prebaci se na kompaktni prikaz' is not the most natural or accurate translation of 'Switch to compact view'. 'Prebaciti' implies transferring something. A more accurate translation would use a verb that implies switching or changing to.",
-          "suggestion": "Promeni na kompaktni prikaz"
-        },
-        {
-          "type": "grammar",
-          "description": "While grammatically correct, 'Prebaci se na kompaktni prikaz' is somewhat verbose. The reflexive pronoun 'se' isn't strictly necessary and can be omitted for a more concise phrasing.",
-          "suggestion": "Promeni na kompaktni prikaz"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -260,25 +213,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Chuyển sang xem đơn giản\" doesn't fully capture the meaning of 'Switch to compact view'. 'Đơn giản' translates to 'simple,' while 'compact' implies a condensed or streamlined view. It misses the nuance of reduction or minimizing visual elements.",
-          "suggestion": "Chuyển sang chế độ thu gọn"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"转到紧凑视图\" is understandable, it's a somewhat literal translation. A more natural and commonly used phrasing for 'Switch to compact view' in Chinese would be something like '切换到精简视图' or '切换到简洁视图'. '紧凑' focuses on compactness in a physical sense, whereas '精简' or '简洁' convey a more streamlined or reduced visual layout, which is likely the intended meaning in a UI context.",
-          "suggestion": "切换到精简视图"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

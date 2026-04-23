@@ -3,7 +3,7 @@
   "content": "Enable two-factor authentication for a more secure {{productName}} access for users.",
   "content_en_sha1_hash": "6ce1a1af78378b2613e5ff44bb9f6cce9bf8079c",
   "created_at": "2025-05-19T21:30:53.013Z",
-  "updated_at": "2026-03-26T08:26:58.256Z",
+  "updated_at": "2026-04-09T00:16:37.339Z",
   "comment": {
     "text": "This translation key is used to display a message explaining the benefits of enabling two-factor authentication in {{productName}}, which appears on a settings page or during a confirmation dialog. It helps users understand why two-factor authentication enhances security for accessing {{productName}}.",
     "is_auto": true,
@@ -33,30 +33,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"لحماية أكثر\" (li himāyah akthar) translates to \"for more protection\" which is slightly awkward in this context. A more natural phrasing would emphasize enhanced security.",
-          "suggestion": "تفعيل المصادقة ثنائية العوامل لزيادة أمان وصول المستخدمين لـ {{productName}}."
-        },
-        {
-          "type": "formatting",
-          "description": "While technically correct, the spacing before and after the product name should be standardized. Consistency is key for a professional appearance.",
-          "suggestion": "تفعيل المصادقة ثنائية العوامل لزيادة أمان وصول المستخدمين لـ {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation uses a lowercase 'i' in 'İstifadəçilərə', which should be capitalized to match the English 'users'.",
-          "suggestion": "İstifadəçilərə"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -68,25 +51,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'pro bezpečnější přístup uživatelů do {{productName}}' could be improved. It translates to 'for a more secure access of users to {{productName}}'. A more natural Czech phrasing would be 'k {{productName}}'.",
-          "suggestion": "Povolte dvoufázové ověřování pro bezpečnější přístup uživatelů k {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation maintains the double curly braces `{{productName}}` which might not be appropriate for all contexts. It's generally better to localize this separately or use a more platform-appropriate formatting (e.g., placeholders).",
-          "suggestion": "Consider if `{{productName}}` needs to be localized separately or if a different placeholder format is preferable."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -98,13 +69,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'para que los usuarios tengan' is slightly awkward and less natural in Spanish. A more direct translation of 'for' would improve flow.",
-          "suggestion": "Active la autenticación de dos factores para un acceso más seguro de los usuarios a {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -124,9 +89,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Armenian translation uses a colon (:) at the end of the sentence, which might be more appropriate for a title or a question rather than a descriptive sentence. A period (.) might be more suitable.",
-          "suggestion": "Միացնել երկգործոն նույնականացումը՝ օգտատերերի համար ավելի ապահով {{productName}} մուտքի համար։"
+          "type": "incorrect_translation",
+          "description": "The Armenian translation contains a tautology/repetition error: '...մուտքի համար' (for access) is used twice in the same sentence, making the structure 'Enable two-factor authentication for more secure {{productName}} access for users for access.'",
+          "suggestion": "Միացրեք երկգործոն նույնականացումը՝ օգտատերերի համար {{productName}} ավելի ապահով մուտքն ապահովելու նպատակով:"
         }
       ],
       "approved_at": null
@@ -140,25 +105,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'より安全に{{productName}}にアクセスできるようになります' is a bit literal and slightly awkward. It translates to 'You will be able to access {{productName}} more safely.' A more natural Japanese phrasing would emphasize the security benefit for the user.",
-          "suggestion": "二要素認証を有効にすることで、{{productName}}へのアクセスをより安全に保つことができます。(Ni yōso shōnin o yūko ni suru koto de, {{productName}} e no accessu o yori anzen ni tamotsu koto ga dekimasu.) - This translates to 'Enabling two-factor authentication allows you to keep access to {{productName}} secure.'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"사용자의 보다 안전한 {{productName}} 액세스를 위해 이중 인증을 활성화하세요\" is a bit formal and doesn't flow naturally. A more conversational and user-friendly phrasing would improve readability. While technically correct, it's not the best choice for a user-facing setting description.",
-          "suggestion": "사용자의 {{productName}} 계정을 더욱 안전하게 보호하기 위해 이중 인증을 활성화하세요."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -200,13 +153,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Activați autentificarea cu doi factori pentru a securiza accesul tuturor utilizatorilor la {{productName}}' is a bit literal and could be improved for natural flow in Romanian. 'Securiza accesul' is less common than 'pentru o mai bună securitate a accesului'.",
-          "suggestion": "Activați autentificarea cu doi factori pentru o mai bună securitate a accesului utilizatorilor la {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -220,14 +167,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'පරිශ්‍රීලකයින්ට' (parashreelayakinta) is a less common and potentially incorrect form. 'පරිශ්‍රමකරුවන්' (parashramakarawan) or simply 'පරිශ්‍රමකරුවන්ට' (parashramakaruwanta) would be more natural and accurate for 'users'.",
-          "suggestion": "පරිශ්‍රමකරුවන්"
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure 'පරිශ්‍රීලකයින්ට වඩාත් ආරක්‍ෂිතව {{productName}} වෙත ප්‍රවේශ වීමට' could be improved for better flow and clarity.  Consider rephrasing.",
-          "suggestion": "පරිශ්‍රමකරුවන් {{productName}} වෙත ප්‍රවේශ වීමේ ආරක්ෂාව වැඩි කිරීමට ද්වි-සාධක සත්‍යාපනය සබල කරන්න."
+          "type": "incorrect_translation",
+          "description": "The word 'පරිශ්‍රීලකයින්ට' (parishrilakayinta) is a misspelling of 'පරිශීලකයින්ට' (parishilakayinta - users). The current spelling is nonsensical in Sinhala.",
+          "suggestion": "පරිශීලකයින්ට වඩාත් ආරක්‍ෂිතව {{productName}} වෙත ප්‍රවේශ වීමට ද්වි-සාධක සත්‍යාපනය සබල කරන්න."
         }
       ],
       "approved_at": null
@@ -247,13 +189,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'аутентификацију' (authentication) should be written with a soft sign (ъ) in the middle. The correct spelling is 'аутентификацију'.",
-          "suggestion": "Омогући двофакторску аутентификацију (with ъ) за безбеднији {{productName}} приступ за кориснике."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -265,13 +201,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Kullanıcılar için daha güvenli bir {{productName}} erişimi için iki faktörlü kimlik doğrulamayı etkinleştirin.' is a bit literal and could be improved for naturalness in Turkish. A more common phrasing would emphasize the benefit to the user.",
-          "suggestion": "Daha güvenli bir {{productName}} deneyimi için iki faktörlü kimlik doğrulamayı etkinleştirin."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -287,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

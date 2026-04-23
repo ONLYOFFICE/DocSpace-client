@@ -3,7 +3,7 @@
   "content": "To buy license, click the button below.",
   "content_en_sha1_hash": "6ff3e5f18d12e6aba3cc51048b79a77014459828",
   "created_at": "2025-05-26T07:15:40.054Z",
-  "updated_at": "2026-02-19T13:36:33.178Z",
+  "updated_at": "2026-04-08T18:08:09.219Z",
   "comment": {
     "text": "This translation key is used for the \"To buy license, click the button below\" text that appears on a purchase page, guiding users to activate their license. It may appear as a button or within a dialog in the UI, prompting users to initiate the licensing process.",
     "is_auto": true,
@@ -205,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

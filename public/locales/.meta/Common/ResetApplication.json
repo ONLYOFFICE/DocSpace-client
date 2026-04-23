@@ -3,7 +3,7 @@
   "content": "Reset application",
   "content_en_sha1_hash": "93e3b88bc025a8b58df20fb4ea9f533c792cfd53",
   "created_at": "2025-05-19T21:30:47.892Z",
-  "updated_at": "2025-08-11T18:11:59.152Z",
+  "updated_at": "2026-04-08T01:25:54.259Z",
   "comment": {
     "text": "This translation key is used to display a reset application button label in various parts of the user interface, including a modal dialog and a login settings section. It prompts users to \"Reset Application\" and is typically displayed as a prominent action button or link.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"إعادة  تشغيل التطبيق\" while understandable, isn't the most accurate translation of \"Reset application\". \"Reset\" can also imply restoring to a default state, which \"إعادة  تشغيل التطبيق\" primarily means 'restart'.",
-          "suggestion": "Consider using \"استعادة التطبيق\" (Istia'adat at-Tatbeeq) for 'restore application' or \"إعادة ضبط التطبيق\" (I'adat Dabt at-Tatbeeq) for 'reset application' to more closely reflect the English meaning. The best choice depends on the specific context of 'reset'."
+          "description": "The Arabic translation 'إعادة تشغيل التطبيق' means 'Restart application' instead of 'Reset application'. 'Reset' in a technical context (clearing settings/data) should be 'إعادة ضبط'.",
+          "suggestion": "إعادة ضبط التطبيق"
         }
       ],
       "approved_at": null
@@ -111,25 +111,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"애플리케이션 리셋\" is understandable, it's a direct transliteration of 'application reset'. A more natural Korean phrasing for 'Reset application' would be '애플리케이션 초기화' (Application initialization).",
-          "suggestion": "애플리케이션 초기화"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation \"ຕັ້ງຄ່າແອບຄືນ\" literally translates to \"set up app again.\" While it conveys a similar idea, a more accurate translation of \"Reset application\" would be something along the lines of \"ຣີເຊັດແອັບພິເຄຊັນ\" (using the English loanword 'reset') or a phrase that better conveys the meaning of returning the application to a default state.",
-          "suggestion": "Consider using \"ຣີເຊັດແອັບພິເຄຊັນ\" or a more contextually appropriate phrase that clearly signifies a reset to default settings."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -153,7 +141,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The verb 'Repor' means 'to replenish' or 'to replace' (like restocking supplies). In a software context for 'Reset application', the correct term is 'Redefinir' or 'Restaurar'.",
+          "suggestion": "Redefinir aplicação"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -195,13 +189,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Ресетуј апликацију\" while understandable, is a transliteration rather than a true translation. A more appropriate translation would be something like \"Поврати апликацију\" or \"Иницијализирај апликацију\". \"Ресетуј\" is borrowing the English term.",
-          "suggestion": "Поврати апликацију"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -219,13 +207,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Скинути налаштування програми' is a bit too literal and verbose. A more natural and common way to say 'Reset application' in Ukrainian would be 'Перезавантажити програму' or 'Відновити програму'.",
-          "suggestion": "Перезавантажити програму"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -238,6 +220,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Albanian translation 'Rivendos aplikacionin' means 'Reclaim the application' or 'Claim the application' instead of 'Reset the application' (restoring to default settings).",
+          "suggestion": "Rifilloni aplikacionin"
+        }
+      ],
       "approved_at": null
     }
   }

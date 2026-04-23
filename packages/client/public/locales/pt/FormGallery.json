@@ -3,10 +3,12 @@
   "EmptyFormGalleryScreenDescription": "Nenhum resultado correspondente à sua consulta foi encontrado",
   "ErrorViewDescription": "Por favor, tente novamente mais tarde",
   "ErrorViewDescriptionNetworkError": "Parece que não há conexão com a Internet",
-  "SuggestChanges": "Sugerir alterações",
-  "TemplateInfo": "Informação do modelo",
-  "ViewAllTemplates": "Ver todos os modelos",
   "ErrorViewHeader": "Galeria temporariamente indisponível",
   "SelectTemplate": "Selecionar modelo",
-  "UploadGallery": "Carregar na Galeria"
+  "SuggestChanges": "Sugerir alterações",
+  "TemplateInfo": "Informação do modelo",
+  "UploadGallery": "Carregar na Galeria",
+  "ViewAllTemplates": "Ver todos os modelos",
+  "GalleryTitle": "Galeria de Modelos {{organizationName}}",
+  "SubmitToGalleryDialogMainInfo": "Envie seu modelo para a galeria pública para que outros possam usá-lo em seus trabalhos. Assim que o modelo for aprovado pela moderação, você será notificado e recompensado por sua contribuição."
 }

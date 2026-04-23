@@ -30,7 +30,7 @@ import { useNavigate, useLocation } from "react-router";
 import elementResizeDetectorMaker from "element-resize-detector";
 import React, { useEffect, useRef, useCallback, useMemo, use } from "react";
 
-import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
+import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
 
 import { TableContainer, TableBody } from "@docspace/ui-kit/components/table";
 import { injectDefaultTheme } from "@docspace/shared/utils";

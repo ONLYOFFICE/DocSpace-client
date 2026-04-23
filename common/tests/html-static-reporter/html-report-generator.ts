@@ -60,6 +60,7 @@ export class HtmlReportGenerator {
       0,
     )
     const totalUnhandledErrors = this.unhandledErrors.length
+    const clearWrongValues = process.env.CLEAR_WRONG_VALUES === 'true'
 
     return `<!DOCTYPE html>
 <html lang="en">
@@ -77,6 +78,18 @@ export class HtmlReportGenerator {
       <h1>Test Report</h1>
       <div class="meta">Generated on ${timestamp}</div>
     </div>
+
+    ${clearWrongValues ? `
+    <div class="clear-notice">
+      <div class="clear-notice-icon">⚠</div>
+      <div class="clear-notice-body">
+        <strong>CLEAR_WRONG_VALUES mode was active</strong>
+        <p>Wrong values in translation files have been automatically cleared for the following tests:
+          <em>WrongTranslationVariablesTest</em>, <em>WrongTranslationTagsTest</em>, <em>WrongScriptTest</em>, <em>ForbiddenValueElementsTest</em>, <em>EmptyValueKeysTest</em>.
+          The failed tests below show which keys were affected. Re-run the tests to verify the changes.</p>
+      </div>
+    </div>
+    ` : ''}
 
     <div class="summary">
       ${totalPassedTests > 0 ? `
@@ -614,6 +627,44 @@ export class HtmlReportGenerator {
 
     .empty-state p {
       color: #999;
+    }
+
+    .clear-notice {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: #fffbe6;
+      border: 1px solid #ffe58f;
+      border-left: 4px solid #faad14;
+      padding: 16px 40px;
+      font-size: 13px;
+      color: #614700;
+    }
+
+    .clear-notice-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      color: #faad14;
+      line-height: 1.4;
+    }
+
+    .clear-notice-body strong {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .clear-notice-body p {
+      color: #7c5a00;
+      line-height: 1.6;
+    }
+
+    .clear-notice-body em {
+      font-style: normal;
+      font-weight: 600;
+      background: #fff1b8;
+      padding: 1px 5px;
+      border-radius: 3px;
     }
 
     .footer {

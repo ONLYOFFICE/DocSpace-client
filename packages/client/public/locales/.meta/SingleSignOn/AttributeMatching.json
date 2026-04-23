@@ -3,7 +3,7 @@
   "content": "Attribute Mapping",
   "content_en_sha1_hash": "3c36e2ea92c694eb893c563ee8f8242b35bfedcc",
   "created_at": "2025-05-19T21:30:50.063Z",
-  "updated_at": "2025-08-12T19:46:26.203Z",
+  "updated_at": "2026-04-08T23:39:22.787Z",
   "comment": {
     "text": "Attribute Matching is used as a label to describe a field mapping feature that allows users to map attributes between different systems. It appears in a UI component where users can configure attribute mappings, providing context for users configuring this setting.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"تعيين البيانات\" (Ta'yeen al-Bayanaat) is a literal translation of 'Attribute Mapping,' it lacks the specificity of 'mapping' in the technical context of Single Sign-On. It simply means 'data assignment,' which might be misinterpreted.",
-          "suggestion": "Consider a more precise translation that incorporates the concept of 'mapping,' such as \"تطابق السمات\" (Tataabuq as-Samaat) or \"ربط السمات\" (Rabt as-Samaat)."
+          "description": "The translation 'تعيين البيانات' means 'Data Assignment' or 'Data Setting', which fails to capture the technical concept of 'Mapping' (linking/matching fields) described in the context.",
+          "suggestion": "ربط السمات"
         }
       ],
       "approved_at": null
@@ -45,13 +45,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Мапинг на атрибути' is understandable, 'Мапинг' is a direct transliteration of 'Mapping' and doesn't reflect the established Bulgarian terminology for attribute mapping in IT. A more accurate translation would use a more accepted Bulgarian term.",
-          "suggestion": "Определяне на атрибути"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -117,13 +111,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"ການສ້າງແຜນທີ່ຄຸນລັກສະນະ\" (kan saang phaan tii khun lak sa na) is a literal translation, it could be improved for better clarity and flow. \"ແຜນທີ່ຄຸນລັກສະນະ\" (phaan tii khun lak sa na) or \"ການຕັ້ງຄ່າການຈັບຄູ່ຄຸນລັກສະນະ\" (kan tang kha kan jap khu khun lak sa na) might be more natural and accurate depending on the specific context of 'Attribute Mapping'.",
-          "suggestion": "Consider \"ແຜນທີ່ຄຸນລັກສະນະ\" or \"ການຕັ້ງຄ່າການຈັບຄູ່ຄຸນລັກສະນະ\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -159,13 +147,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Mapare atribute\" is understandable, a more accurate and idiomatic translation of \"Attribute Mapping\" would be \"Asocierea atributelor\". \"Mapare\" often implies a more technical mapping process, while \"Asociere\" is a broader term that captures the concept of linking attributes.",
-          "suggestion": "Asocierea atributelor"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -173,9 +155,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'аттрибутов' is a misspelling of 'атрибутов'.",
-          "suggestion": "атрибутов"
+          "type": "incorrect_translation",
+          "description": "The word 'аттрибутов' is a spelling error in Russian; the correct spelling is 'атрибутов' (one 'т').",
+          "suggestion": "Сопоставление атрибутов"
         }
       ],
       "approved_at": null
@@ -185,14 +167,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The term 'උපලක්‍ෂණ' is a possible spelling error. It seems to be intended to represent 'attributes'.  A more common and potentially accurate spelling would be 'විශේෂතා' or 'ලක්ෂණ'.",
-          "suggestion": "විශේෂතා අනුරූපණය or ලක්ෂණ අනුරූපණය"
-        },
-        {
           "type": "incorrect_translation",
-          "description": "While 'අනුරූපණය' is a valid translation for 'mapping', in the context of 'Attribute Mapping' in Single Sign-On, a more accurate and natural-sounding translation might be 'සමාන කිරීම' or 'එකතු කිරීම'. 'අනුරූපණය' feels somewhat formal and detached.",
-          "suggestion": "විශේෂතා සමාන කිරීම or ලක්ෂණ සමාන කිරීම"
+          "description": "The Sinhala word 'උපලක්‍ෂණ' (Upalakshana) typically refers to 'benefits' or 'perks' (often used in HR/payroll contexts), which is incorrect for a technical 'Attribute' in a data mapping context. The correct technical term for 'Attribute' in this context should be 'ගුණාංග' (Gunanga) or 'ලක්ෂණ' (Lakshana).",
+          "suggestion": "ගුණාංග අනුරූපණය"
         }
       ],
       "approved_at": null
@@ -200,7 +177,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English term 'Mapping' refers to the process of linking or matching data fields, whereas the Slovak translation 'Zobrazenie' means 'Display' or 'View'. This changes the functional meaning of the feature.",
+          "suggestion": "Mapovanie atribútov"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -212,13 +195,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Мапирање атрибута\" is understandable, a more accurate and common translation of 'Attribute Mapping' would be 'Упоредба атрибута' or 'Додељивање атрибута'. \"Мапирање\" directly translates to 'mapping' which isn't always the best fit in this context.",
-          "suggestion": "Упоредба атрибута"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -249,6 +226,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Harta e atributeve' means 'Map of attributes' (as in a geographical or conceptual map), whereas the English 'Attribute Mapping' refers to the technical process of linking/matching data fields.",
+          "suggestion": "Lidhja e atributeve"
+        }
+      ],
       "approved_at": null
     }
   }

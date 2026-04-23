@@ -3,7 +3,7 @@
   "content": "To use manage connection, you need to connect {{mcpServers}} inside room settings",
   "content_en_sha1_hash": "8b74de859fa41700ee1ba0cad31c4cff054d2a67",
   "created_at": "2025-12-18T11:15:07.721Z",
-  "updated_at": "2026-02-19T13:36:33.088Z",
+  "updated_at": "2026-04-08T14:37:27.639Z",
   "comment": {
     "text": "This text appears as a tooltip on a button within room settings. It instructs users to connect Minecraft server instances (MCP servers) to manage connections. The `{{mcpServers}}` placeholder will be replaced with a label for MCP settings.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation is grammatically incorrect and changes the meaning. '{{mcpServers}} qoşulmalısınız' means 'You must connect {{mcpServers}}', whereas the English 'connect {{mcpServers}} inside room settings' implies that the user needs to perform the action of connecting the servers within that specific menu. The current phrasing is awkward and doesn't clearly state that the servers themselves need to be connected.",
+          "suggestion": "Bağlantını idarə etmək üçün otaq parametrlərində {{mcpServers}} qoşmalısınız"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -111,7 +117,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The verb 'pasaver' is not a valid Latvian word in this context; it appears to be a hallucination or a typo for 'piesaistīt' (to connect) or 'konfigurēt' (to configure).",
+          "suggestion": "Lai izmantotu savienojuma pārvaldību, jums ir jāpiesaistīt {{mcpServers}} telpas iestatījumos"
+        }
+      ],
       "approved_at": null
     },
     "nl": {

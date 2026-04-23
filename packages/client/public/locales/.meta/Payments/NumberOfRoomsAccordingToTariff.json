@@ -3,7 +3,7 @@
   "content": "Number of rooms according to your tariff plan: {{currentValue}}/{{maxValue}}",
   "content_en_sha1_hash": "50c21689104208a689abc871f03f39356411633c",
   "created_at": "2025-05-19T21:30:53.710Z",
-  "updated_at": "2025-05-24T06:47:31.029Z",
+  "updated_at": "2026-04-07T19:35:05.173Z",
   "comment": {
     "text": "This translation key displays the number of rooms available according to a user's tariff plan. It is used in an invite quota warning dialog to show the current room count and maximum available rooms by quota.",
     "is_auto": true,
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"خطة التعريف الخاصة بك\" (khitat al-ta'rif al-khassa bik) literally translates to 'your private tariff plan.' While understandable, a more natural and common phrasing for 'tariff plan' in this context would be \"خطة التسعير\" (khitat al-tas'eer) or simply \"التعريفة\" (al-ta'rifa).",
-          "suggestion": "عدد الغرف وفقًا للتعريفة الخاصة بك: {{currentValue}}/{{maxValue}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -147,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Limita' (limit) doesn't perfectly convey the meaning of 'Number'. While it's related, 'Număr' would be a more direct and accurate translation of 'Number'.",
-          "suggestion": "Număr de săli permis conform planului dvs tarifar: {{currentValue}}/{{maxValue}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -165,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ඔබේ' (oba'e) should be 'ඔබගේ' (obage) for grammatical correctness when referring to 'your'.",
-          "suggestion": "ඔබගේ ගාමි සැලැස්මට අනුව"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -189,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word \"тарифном\" should be spelled as \"тарифном\".",
-          "suggestion": "тарифном"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -225,18 +201,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of \"tariff plan\" is inaccurate. \"费用版本\" (feiyong banben) literally translates to \"fee version\" which isn't the intended meaning of \"tariff plan.\" A more accurate translation would convey the concept of a pricing tier or rate plan.",
-          "suggestion": "您的套餐价格中包含的房间数量为：{{currentValue}}/{{maxValue}}"
-        },
-        {
-          "type": "formatting",
-          "description": "While technically correct, the colon after '您的套餐价格中包含的房间数量为' may feel slightly abrupt in Chinese. A softer transition might improve flow.",
-          "suggestion": "您的套餐价格中包含的房间数量是：{{currentValue}}/{{maxValue}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "Choose a template to fill in",
   "content_en_sha1_hash": "e588726e89d2172e61388d0a1f0845c3d70ae964",
   "created_at": "2026-03-31T15:18:14.978Z",
-  "updated_at": "2026-03-31T15:18:14.978Z",
+  "updated_at": "2026-04-08T06:09:30.797Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -158,7 +158,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovenian translation 'Izberite predlago za poplnilno uporabo' translates roughly to 'Choose a template for full use', which does not convey the meaning of 'to fill in' (completing/filling out a form/template).",
+          "suggestion": "Izberite predlogo za izpolnjevanje"
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {

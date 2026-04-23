@@ -3,7 +3,7 @@
   "content": "User quota",
   "content_en_sha1_hash": "e848c684e600a150cf50f9258ca8622add08c8f9",
   "created_at": "2025-05-19T21:30:54.255Z",
-  "updated_at": "2025-08-11T18:11:59.237Z",
+  "updated_at": "2026-04-07T19:35:05.147Z",
   "comment": {
     "text": "The \"User quota\" translation key is used to display a label in UI elements, such as field labels and tooltips. It provides a clear and concise description of the quota setting being configured or edited within the LDAP integration settings.",
     "is_auto": true,
@@ -57,13 +57,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Ποσοστό χρήστη' translates literally to 'User quota/percentage', it doesn't fully capture the meaning of 'quota' in an LDAP context, which refers to a limit or allowance.  'Ποσοστό χρήστη' implies a percentage, not necessarily a limit.",
-          "suggestion": "Consider alternatives like 'Όριο χρήστη' (User limit) or 'Χώρος χρήστη' (User space) depending on the specific LDAP feature being described. The best option would depend on the context of the feature."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -99,13 +93,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"ユーザーのストレージ容量\" (user no storage capacity) is a literal translation but doesn't quite capture the meaning of \"User quota\" in the LDAP context. A quota generally refers to a limit or allowance, not just the storage capacity itself.",
-          "suggestion": "Consider a translation like \"ユーザー割り当て容量\" (user allocated capacity) or \"ユーザーの利用制限\" (user usage limits) to more accurately convey the intended meaning of a quota."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -117,13 +105,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ກຳນົດສູງສຸດຂອງຜູ້ໃຊ້' literally translates to 'maximum limit of user'. While understandable, it's not the most natural or idiomatic translation of 'User quota'. 'Quota' implies an allocated amount or limit, and a more direct translation would be preferable.",
-          "suggestion": "Consider alternatives like 'ກໍານົດຈຳນວນຜູ້ໃຊ້' (defined number of users) or 'ອັດຕະrašະຜູ້ໃຊ້' (user allowance/allocation)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -141,13 +123,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation \"Limit użytkowników\" doesn't accurately convey the meaning of \"User quota\". While \"limit\" is related, \"quota\" implies a defined allocation or allowance, which \"limit użytkowników\" doesn't fully capture. It translates more to \"user limit\".",
-          "suggestion": "Consider \"Przydział użytkowników\" or \"Limity użytkowników\" to more closely reflect the concept of a user quota."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -165,18 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation \"Cotă de utilizatori \" is a literal translation but doesn't quite convey the intended meaning of 'User quota' in the context of LDAP. It suggests a quota *for* users, rather than a quota *per* user.",
-          "suggestion": "Cotă utilizator"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation has an unnecessary space before the quotation mark.",
-          "suggestion": "Cotă utilizator"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

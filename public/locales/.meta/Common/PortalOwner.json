@@ -3,7 +3,7 @@
   "content": "{{productName}} owner",
   "content_en_sha1_hash": "e8aa10492ad74ad965ab75de5d6375a78839f508",
   "created_at": "2025-05-19T21:30:47.420Z",
-  "updated_at": "2026-02-19T13:36:33.123Z",
+  "updated_at": "2026-04-08T02:31:57.120Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"{{productName}} owner\" in various UI contexts. It appears on user profiles and other views related to ownership, indicating whether a user has full access or not.",
     "is_auto": true,
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"տնօրինող\" while technically meaning 'owner' or 'manager', doesn't perfectly capture the nuance of 'owner' in the context of a portal. It can sound formal and potentially misleading. A more accurate and natural-sounding translation might depend on the specific nature of the 'portal' and the desired level of formality.",
-          "suggestion": "Consider alternatives like \"կազմող\" (creator), \"պատվաստող\" (responsible party), or \"դիրքորեն պատասխանատու\" (officially responsible), depending on the context. A less formal option could be just \"սեփականատեր\" (owner)."
+          "description": "The word 'տնօրինող' (tnorinoğ) means 'administrator' or 'manager' rather than 'owner'. In the context of software ownership/permissions, 'ባለաճապ' or 'տեր' is more accurate for 'owner'.",
+          "suggestion": "{{productName}}-ի տեր"
         }
       ],
       "approved_at": null
@@ -135,13 +135,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Portuguese translation 'Proprietário do {{productName}}' is a literal translation and might not be the most natural or accurate way to express \"{{productName}} owner\". It sounds slightly clunky.",
-          "suggestion": "Consider alternatives like 'Dono do {{productName}}' or 'Responsável pelo {{productName}}', depending on the intended nuance. 'Administrador do {{productName}}' could also be appropriate."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -183,13 +177,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'власник' is a direct translation of 'owner' but might not be the most natural or idiomatic way to express this in a user interface context. Depending on the product and its usage, a more appropriate translation might be 'пользователь', 'корисник', or something more specific.",
-          "suggestion": "Consider alternatives like 'пользователь', 'корисник', or a product-specific term that better reflects the role of the 'owner'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -217,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

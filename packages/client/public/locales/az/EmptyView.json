@@ -2,6 +2,7 @@
   "CollaborationRoomEmptyTitle": "Əməkdaşlıq otağına xoş gəlmisiniz",
   "CollaboratorEmptyTitle": "Otaq boşdur.",
   "CreateAIAgent": "Yeni agent yarat",
+  "CreateAIAgentDescription": "İlk {{aiAgent}}-inizi qurmağa başlayın",
   "CreateDocument": "Yeni sənəd yaradın",
   "CreateDocumentDescription": "Geniş mətn emal funksiyasından yararlanın.",
   "CreateForm": "Yeni PDF forması yaradın",
@@ -16,7 +17,14 @@
   "CreateSpreadsheetDescription": "Minimum səylə dəqiq hesablamalar aparın.",
   "CustomRoomEmptyTitle": "Şəxsi otağa xoş gəlmisiniz",
   "DefaultFolderDescription": "Faylları bura atın və ya yenilərini yaradın.",
+  "EmptyAIAgentsAIDisabledDescription": "Bu bölmə istifadəçilərə {{aiAgents}} — sənədlərlə və digər tapşırıqlarla məşğul olmaq üçün ağıllı assistentlərlə işləməyə imkan verir.\nOnlardan istifadə etməyə başlamaq üçün, AI funksiyaları xidməti sizin {{productName}} administratorunuz tərəfindən aktivləşdirilməlidir.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "{{aiAgents}} yaratmaq və istifadə etmək üçün, pul qeydiyyatınızı bağlayın və {{productName}} parametrlərində AI funksiyalarının xidmətini aktivləşdirin. İş tamamlandıqdan sonra, {{aiAgents}} ilə işləyə biləcəksiniz və komandanızla əməkdaşlıq edə biləcəksiniz.",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "Cüzdanınızı qoşun və süni intellekt xüsusiyyətlərini aktivləşdirin",
+  "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} hələ mövcud deyil",
+  "EmptyAIAgentsAIEnabledUserDescription": "Komandanız sizi əməkdaşlıq etməyə dəvət etdikdən sonra, {{aiAgents}} burada görünəcək və sənədlər, bilik idarəetməsi və gündəlik tapşırıqlar sahəsində kömək etməyə hazır olacaq.",
+  "EmptyAIAgentsDescription": "Bilik bazası əlavə etməklə, ideal modeli seçməklə və bir {{mcpServer}} qoşmaqla komandanız üçün şəxsi köməkçi qurun. Həmkarlarınızı əməkdaşlıq etməyə dəvət edin və agentin söhbət imkanlarından maksimum dərəcədə istifadə edin.",
+  "EmptyAIAgentsTitle": "{{aiAgent}}-inizi yaradın",
+  "EmptyAIAgentsUserTitle": "Hələ {{aiAgents}} mövcud deyil",
   "EmptyDescription": "Sürətli əməliyyatlara başlayın:",
   "EmptyFavoritesDescription": "Ulduzlaq fayl və qovluqları, onlar asan əldə edilə bilən və çatdırılabilən olsunlar.",
   "EmptyFavoritesTitle": "Hələ ki sevimli hec nə yoxdur",
@@ -56,6 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "Cihazdan yükləyin",
   "UploadFromPortalTitle": "{{productName}} dan yükləyin",
   "UploadPDFFormOptionDescription": "{{productName}}-də mövcud olan hazır PDF formasını seçin və onu otağa yükləyin.",
-  "VirtualDataRoomEmptyTitle": "Virtual Məlumat Otağına xoş gəlmisiniz",
-  "EmptyAIAgentsTitle": "{{aiAgent}}-inizi yaradın"
+  "VirtualDataRoomEmptyTitle": "Virtual Məlumat Otağına xoş gəlmisiniz"
 }

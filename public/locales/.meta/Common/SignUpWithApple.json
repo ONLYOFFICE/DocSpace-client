@@ -3,7 +3,7 @@
   "content": "Sign up with Apple",
   "content_en_sha1_hash": "73ca824af2283271f333afbfd3ba3a3054f212ed",
   "created_at": "2025-05-19T21:30:48.817Z",
-  "updated_at": "2026-03-26T08:26:58.371Z",
+  "updated_at": "2026-04-10T08:21:04.401Z",
   "comment": {
     "text": "This translation key is used to display a message that invites users to sign up with their Apple account. It appears in UI elements related to provider authentication, such as buttons or dialogs. Translators should provide a clear and concise version of this phrase for users in different languages.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 459,
+      "line_number": 461,
       "context": "return `${t(\"Common:Disconnect\")} ${providerLabel}`;\n }\n \n switch (provider) {\n case \"apple\":\n return signUp ? t(\"Common:SignUpWithApple\") : t(\"Common:SignInWithApple\");\n case \"google\":\n return signUp\n ? t(\"Common:SignUpWithGoogle\")\n : t(\"Common:SignInWithGoogle\");\n case \"facebook\":",
       "module": "/packages/shared"
     }
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"تسجيل دخول بواسطة Apple\" translates to \"Sign in with Apple\", not \"Sign up with Apple\".  'تسجيل دخول' means 'sign in' while 'تسجيل' implies 'sign up'.",
-          "suggestion": "تسجيل الاشتراك بواسطة Apple"
+          "description": "The Arabic translation means 'Sign in with Apple' instead of 'Sign up with Apple'. 'تسجيل دخول' refers to logging in/signing in, whereas 'Sign up' requires 'إنشاء حساب' or 'التسجيل'.",
+          "suggestion": "إنشاء حساب بواسطة Apple"
         }
       ],
       "approved_at": null
@@ -48,7 +48,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Влезте чрез Apple\" translates to \"Log in with Apple\". The original English phrase \"Sign up with Apple\" indicates a registration process, not a login. \"Влезте\" implies an existing account.",
+          "description": "The Bulgarian translation means 'Sign in with Apple' (Log in) instead of 'Sign up with Apple' (Register/Create account).",
           "suggestion": "Регистрирайте се с Apple"
         }
       ],
@@ -63,7 +63,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The German translation 'Anmeldung bei Apple' translates to 'Sign in with Apple' or 'Login with Apple', whereas the English source is 'Sign up with Apple' (registration).",
+          "suggestion": "Mit Apple registrieren"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -81,13 +87,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Rekisteröidy Applella' is not the most natural or accurate translation of \"Sign up with Apple.\" It literally translates to 'Register with Apple'.  A better phrasing would be something like 'Luo tili Applella' (Create an account with Apple) or 'Kirjaudu sisään Applella' (Sign in with Apple), depending on the intended user flow.  'Rekisteröidy' often implies a more formal registration process.",
-          "suggestion": "Luo tili Applella"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -99,13 +99,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, the Armenian translation 'Գրանցվեք Apple-ով' is a bit literal and doesn't flow naturally. A more idiomatic translation would be 'Մուտքագրվեք Apple-ի միջոցով' or 'Ստեղծեք հաշիվ Apple-ի միջոցով'.",
-          "suggestion": "Մուտքագրվեք Apple-ի միջոցով"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -132,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເຂົ້າສູ່ລະບົບດ້ວຍ Apple\" literally translates to \"Log in with Apple.\" The English phrase \"Sign up with Apple\" implies registration, not login.",
-          "suggestion": "ເຂົ້າສູ່ການລົງທະບຽນດ້ວຍ Apple"
+          "description": "The Lao translation means 'Sign in with Apple' instead of 'Sign up with Apple'. 'ເຂົ້າສູ່ລະບົບ' means 'Sign in/Log in', whereas 'Sign up' should be 'ລົງທະບຽນ'.",
+          "suggestion": "ລົງທະບຽນດ້ວຍ Apple"
         }
       ],
       "approved_at": null
@@ -147,7 +141,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Dutch translation 'Aanmelden' typically means 'Sign in' or 'Log in'. For 'Sign up' (creating a new account), 'Registreren' or 'Aanmelden bij' is more accurate to distinguish from 'Sign in'.",
+          "suggestion": "Registreren via Apple"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -155,8 +155,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The Polish translation contains a spelling error. 'ssię' should be 'się'.",
+          "type": "incorrect_translation",
+          "description": "The Polish translation contains a typo: 'ssię' instead of 'się'.",
           "suggestion": "Zarejestruj się przez Apple"
         }
       ],
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Inscreva-se na Apple' is a literal translation and doesn't convey the intended meaning of 'Sign up with Apple' in a natural Portuguese way. It sounds awkward.",
-          "suggestion": "Consider a more natural Portuguese phrasing like 'Criar conta com a Apple' or 'Registar-se com a Apple' depending on the regional dialect. 'Continuar com a Apple' could also be suitable depending on the context."
+          "description": "The translation 'Inscreva-se na Apple' implies signing up *inside* or *at* Apple, rather than using an Apple account as an authentication method. In the context of OAuth/Social Login, 'com a Apple' or 'usando a Apple' is the correct way to express 'with Apple'.",
+          "suggestion": "Inscreva-se com a Apple"
         }
       ],
       "approved_at": null
@@ -177,13 +177,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Cadastre-se com Apple\" is a very literal translation and doesn't flow naturally in Brazilian Portuguese. A more common and idiomatic phrase would be 'Inscreva-se com Apple' or 'Criar conta com Apple'. \"Cadastre-se\" often implies a more complex or detailed registration process.",
-          "suggestion": "Inscreva-se com Apple"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -192,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Conectare prin Apple' while understandable, doesn't perfectly capture the meaning of 'Sign up with Apple'. 'Conectare' implies a connection, but 'Sign up' implies creating an account. A more accurate translation would use a verb signifying registration or account creation.",
-          "suggestion": "Înscrie-te cu Apple"
+          "description": "The Romanian translation 'Conectare prin Apple' means 'Sign in with Apple' or 'Connect via Apple', whereas the English source is 'Sign up with Apple' (creating a new account).",
+          "suggestion": "Înregistrare cu Apple"
         }
       ],
       "approved_at": null
@@ -207,13 +201,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ඇපල් සමඟ ලියාපදිංචිය' is a literal translation of 'with Apple' and while understandable, it's not the most natural way to say 'Sign up with Apple' in Sinhala.  A more idiomatic translation would be preferable.",
-          "suggestion": "Consider 'ඇපල් භාවිතා කොට ලියාපදිංචිය' (Apple udā gaha lakudīḍiñciya) or 'ඇපල් ඔස්සේ ලියාපදිංචිය' (Apple ossae lakudīḍiñciya).  Both options flow better and are more commonly used."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -225,37 +213,19 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Vpiši se z Apple\" is not the most natural or accurate translation of \"Sign up with Apple.\" While understandable, \"Prijavi se z Apple\" would be more common and idiomatic in Slovenian.",
-          "suggestion": "Prijavi se z Apple"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Региструј се путем Apple-а\" is not the most natural or accurate translation of \"Sign up with Apple.\" It literally translates to 'Register via Apple.' A more common and idiomatic translation would be something like 'Пријави се са Apple-ом' or 'Креирај налог са Apple-ом'.",
-          "suggestion": "Пријави се са Apple-ом"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While understandable, \"Registruj se putem Apple-a\" is a somewhat literal translation and not the most natural phrasing in Serbian. A more idiomatic translation would be something like \"Prijavi se sa Apple-om\" or \"Kreiraj nalog sa Apple-om\".",
-          "suggestion": "Prijavi se sa Apple-om"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -279,13 +249,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"用 Apple 帐号注册\" is understandable, it's a bit literal and doesn't flow naturally in Chinese. A more idiomatic translation would be better.",
-          "suggestion": "使用 Apple ID 注册 (Shǐyòng Apple ID zhùcè)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

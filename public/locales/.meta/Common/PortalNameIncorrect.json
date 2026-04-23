@@ -3,7 +3,7 @@
   "content": "Incorrect account name",
   "content_en_sha1_hash": "514e507c4bfba26b6fec61ecedbb846fb1c81756",
   "created_at": "2025-05-19T21:30:52.239Z",
-  "updated_at": "2026-03-26T08:26:58.121Z",
+  "updated_at": "2026-04-08T02:36:57.272Z",
   "comment": {
     "text": "This translation key is used to display an error message when a user attempts to save a portal name that does not meet the required length or format. It appears in the portal renaming dialog and will be displayed if the input value fails validation. Translators should provide a clear indication of this error for users.",
     "is_auto": true,
@@ -39,13 +39,25 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English source refers to a 'Portal Name' (based on the technical context and key 'PortalNameIncorrect'), but the Arabic translation uses 'Account Name' (اسم حساب). This is a semantic mismatch between the UI intent and the translation.",
+          "suggestion": "اسم بوابة غير صحيح"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English source refers to a 'Portal Name' (based on the technical context and key 'PortalNameIncorrect'), but the translation uses 'hesab adı' which means 'account name'. In the context of DocSpace, a portal name and an account name are different entities.",
+          "suggestion": "Yanlış portal adı"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -54,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Incorrect account name\" is not perfectly captured by \"Неправилно име на профила\". \"Account name\" refers to the username or login name. \"Профила\" refers to the profile. While understandable, it's not the most accurate translation.",
-          "suggestion": "Неправилно име на потребителя"
+          "description": "The English source refers to a 'portal name' (based on the technical context and key 'PortalNameIncorrect'), but the Bulgarian translation uses 'профила' (profile), which refers to a user account/profile rather than a portal/domain name.",
+          "suggestion": "Неправилно име на портала"
         }
       ],
       "approved_at": null
@@ -63,37 +75,73 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English source refers to a 'Portal Name' (based on the technical context and key 'PortalNameIncorrect'), but the Czech translation uses 'účtu' (account), which refers to a financial or user account rather than a portal/domain name.",
+          "suggestion": "Nesprávný název portálu"
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English source refers to a 'Portal Name' (based on the technical context and key 'PortalNameIncorrect'), but the German translation uses 'Kontoname' (Account name). In the context of DocSpace, a Portal Name and an Account Name are different entities.",
+          "suggestion": "Ungültiger Portalname"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English source refers to a 'Portal Name' (based on the technical context and key 'PortalNameIncorrect'), but the Greek translation refers to an 'Account Name' (λογαριασμού). This is a critical semantic error in the context of portal renaming.",
+          "suggestion": "Λανθασμένο όνομα πόρταλ"
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English source refers to a 'Portal Name' (based on the technical context and key 'PortalNameIncorrect'), but the Spanish translation uses 'cuenta' (account), which refers to a user account rather than a portal/domain name.",
+          "suggestion": "Nombre de portal incorrecto"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text refers to a 'portal name' (based on the technical context and key 'PortalNameIncorrect'), but the Finnish translation refers to an 'account name' (tili). In the context of ONLYOFFICE DocSpace, 'portal' and 'account' are distinct entities.",
+          "suggestion": "Virheellinen portaalin nimi"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English source refers to a 'portal name' (as per context and key 'PortalNameIncorrect'), but the French translation uses 'compte' (account), which is a different entity.",
+          "suggestion": "Nom du portail incorrect"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -102,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Incorrect account name' is a bit more specific than the Armenian translation 'Հաշվի սխալ անուն'. 'Հաշվի սխալ անուն' literally translates to 'Incorrect account name', which is not wrong but potentially lacks the nuance of the original phrase, especially in the context of settings.",
-          "suggestion": "Consider a more natural or idiomatic Armenian equivalent. Something like 'Մուտքագրման սխալ անուն' (Incorrect login name) or 'Սխալվող անուն' (Incorrect name) depending on the precise intent."
+          "description": "The translation 'Հաշվի սխալ անուն' means 'Account's wrong name' or 'Wrong name of the account', whereas the context and English source indicate the error is about the 'Portal Name' being incorrect. In Armenian, 'Հաշիվ' refers to a financial account or a user account, while the context specifies this is for a Portal Name validation error.",
+          "suggestion": "Պորտալի անունը սխալ է"
         }
       ],
       "approved_at": null
@@ -111,7 +159,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English source refers to a 'Portal Name' (as per context and key 'PortalNameIncorrect'), but the Italian translation uses 'account name', which is a different entity.",
+          "suggestion": "Nome del portale errato"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -120,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'アカウント名が無効です。' (akauntōmei wa muko desu) translates to 'account name is invalid'. While functionally similar to 'Incorrect account name', '無効' (muko) implies an invalid or unusable state. A more accurate and natural-sounding translation for 'Incorrect account name' would be something like 'アカウント名が正しくありません' (akauntōmei ga seishiku arimasen) or 'アカウント名が違います' (akauntōmei ga chigaimasu).",
-          "suggestion": "アカウント名が正しくありません (akauntōmei ga seishiku arimasen) or アカウント名が違います (akauntōmei ga chigaimasu)"
+          "description": "The English source refers to 'account name', but the technical context (metadata and code) explicitly states this error is for 'Portal Name'. The Japanese translation uses 'アカウント名' (Account name) instead of 'ポータル名' (Portal name), which will confuse users during the portal renaming process.",
+          "suggestion": "ポータル名が無効です。"
         }
       ],
       "approved_at": null
@@ -129,7 +183,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English source refers to a 'Portal Name' (based on the technical context and key 'PortalNameIncorrect'), but the Korean translation uses 'Account Name' (계정 이름). This is a mismatch between the UI element being validated and the error message displayed.",
+          "suggestion": "포털 이름이 잘못되었습니다"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -138,13 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ບໍ່ຖືກຕ້ອງ ບັນຊີ ຊື່ ' does not accurately convey the meaning of 'Incorrect account name'. It translates to 'Not correct account name'. A more accurate translation would include a word meaning 'name' that corresponds to 'account'.",
-          "suggestion": "Consider 'ຊື່ບັນຊີບໍ່ຖືກຕ້ອງ' (Sue banchee bot tooktong) which translates to 'Account name incorrect' or 'Incorrect account name'."
-        },
-        {
-          "type": "grammar",
-          "description": "The Lao sentence structure is slightly awkward. While understandable, it's not the most natural phrasing.",
-          "suggestion": "Reconsider sentence flow, as suggested in the incorrect translation section."
+          "description": "The word order in Lao is unnatural and grammatically incorrect for an error message. 'ບໍ່ຖືກຕ້ອງ ບັນຊີ ຊື່' translates literally to 'Incorrect account name' but in a fragmented way that reads like 'Incorrect account name' with the words in the wrong sequence, making it sound like 'Incorrect account name' is a list of words rather than a coherent sentence.",
+          "suggestion": "ຊື່ບັນຊີບໍ່ຖືກຕ້ອງ"
         }
       ],
       "approved_at": null
@@ -152,37 +207,73 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English source refers to a 'portal name' (based on the technical context and key 'PortalNameIncorrect'), but the Latvian translation uses 'konta nosaukums' (account name). This is a semantic mismatch between the UI intent and the translation.",
+          "suggestion": "Nepareizs portāla nosaukums"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English source refers to a 'Portal Name' (as per context and code key 'PortalNameIncorrect'), but the Dutch translation uses 'accountnaam' (account name). This is a semantic mismatch between the UI context and the translation.",
+          "suggestion": "Onjuiste portalnaam"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English source refers to a 'portal name' (based on the technical context and key 'PortalNameIncorrect'), but the Polish translation refers to an 'account name' (nazwa konta).",
+          "suggestion": "Nieprawidłowa nazwa portalu"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English source refers to a 'portal name' (as per context and code key 'PortalNameIncorrect'), but the translation uses 'conta' (account). In the context of ONLYOFFICE DocSpace, a portal name and an account name are different entities.",
+          "suggestion": "Nome do portal incorreto"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English source refers to a 'portal name' (as per context and key 'PortalNameIncorrect'), but the translation uses 'conta' (account), which refers to a different entity in a software ecosystem.",
+          "suggestion": "Nome do portal incorreto"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English source refers to a 'Portal Name' (based on the technical context and key 'PortalNameIncorrect'), but the Romanian translation uses 'account name' (Denumirea contului). In the context of ONLYOFFICE DocSpace, a Portal Name and an Account Name are different entities.",
+          "suggestion": "Numele portalului este incorect"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -191,8 +282,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Incorrect account name\" is not perfectly conveyed by \"Неверное имя портала\". While \"Неверное имя\" is correct for 'incorrect name', \"портала\" (of the portal) implies a specific type of account that might not be intended.  'Account name' can be more generic. A better translation might be 'Неправильное имя учетной записи' or 'Неверное имя учетной записи'.",
-          "suggestion": "Неправильное имя учетной записи"
+          "description": "The English text refers to an 'account name', but the Russian translation refers to a 'portal name' (имя портала). While the technical context suggests this is for a portal name, the translation must match the provided English source string provided for verification.",
+          "suggestion": "Неверное имя аккаунта"
         }
       ],
       "approved_at": null
@@ -203,8 +294,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ගිණුමේ නම වැරදිය' while literally meaning 'name of the account is wrong,' doesn't perfectly capture the meaning of 'Incorrect account name'. A more natural translation for this context, which implies a setting error, would be something like 'අවලංගු ගිණුමේ නම' (Avalangu Ginumae Nama - Invalid Account Name) or 'මිසමිත ගිණුමේ නම' (Misamith Ginumae Nama - Mismatched Account Name).",
-          "suggestion": "අවලංගු ගිණුමේ නම"
+          "description": "The English text refers to 'account name', but the technical context and code usage (PortalNameIncorrect) indicate this error is specifically for a 'Portal name'. The Sinhala translation 'ගිණුමේ නම' means 'Account name', which is misleading in the context of renaming a portal.",
+          "suggestion": "පෝටල් නම වැරදිය"
         }
       ],
       "approved_at": null
@@ -212,13 +303,25 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English source refers to a 'Portal name' (based on the technical context and key 'PortalNameIncorrect'), but the Slovak translation refers to an 'account name' (účtu).",
+          "suggestion": "Nesprávny názov portálu"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English source 'Incorrect account name' refers to a 'Portal Name' according to the technical context (PortalNameIncorrect), but the Slovenian translation 'Napačno ime računa' translates to 'Incorrect bank/account name'. In a software context, 'račun' usually refers to a financial account or a user account, whereas the context specifies this is for a portal/domain name.",
+          "suggestion": "Napačno ime portala"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -233,8 +336,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Netačno ime naloga' while literally correct, might be overly formal or technical for a user-facing setting. 'Netačno korisničko ime' (Incorrect username) or 'Pogrešno ime naloga' (Wrong account name) might be more natural and user-friendly.",
-          "suggestion": "Consider 'Netačno korisničko ime' or 'Pogrešno ime naloga'."
+          "description": "The English source refers to a 'Portal Name' (based on the technical context and key 'PortalNameIncorrect'), but the translation uses 'ime naloga' which means 'account name'. In the context of renaming a portal, this is misleading.",
+          "suggestion": "Netačno ime portala"
         }
       ],
       "approved_at": null
@@ -242,25 +345,61 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English source refers to a 'Portal Name' (based on the technical context and key 'PortalNameIncorrect'), but the Turkish translation uses 'hesap adı' (account name). In the context of ONLYOFFICE DocSpace, a portal name and an account name are different entities.",
+          "suggestion": "Geçersiz portal adı"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English source refers to a 'Portal Name' (based on the technical context and key 'PortalNameIncorrect'), but the translation refers to an 'Account Name' (облікового запису).",
+          "suggestion": "Неправильна назва порталу"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English source refers to a 'Portal name' (based on the technical context/key 'PortalNameIncorrect'), but the translation uses 'Tên tài khoản' which means 'Account name'. This is a semantic mismatch between the UI intent and the translated text.",
+          "suggestion": "Tên cổng thông tin không chính xác"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English source refers to 'account name', but the technical context (metadata and code) explicitly states this error is for 'Portal Name' validation. Translating it as 'account name' (账户名称) is misleading to the user in the context of renaming a portal.",
+          "suggestion": "门户名称不正确"
+        }
+      ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English source refers to a 'Portal Name' (as per context and key 'PortalNameIncorrect'), but the translation refers to an 'Account Name' (llogarisë). In the context of DocSpace, the portal name and account name are distinct entities.",
+          "suggestion": "Emri i gabuar i portalit"
+        }
+      ],
       "approved_at": null
     }
   }

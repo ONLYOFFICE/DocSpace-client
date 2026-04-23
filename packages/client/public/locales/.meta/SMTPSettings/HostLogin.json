@@ -3,7 +3,7 @@
   "content": "Host login",
   "content_en_sha1_hash": "c57f88c2a517d5a218b031a85d5cce0f95053075",
   "created_at": "2025-05-19T21:30:53.303Z",
-  "updated_at": "2025-12-09T12:12:27.329Z",
+  "updated_at": "2026-04-08T21:55:50.721Z",
   "comment": {
     "text": "This translation key is used to display the label \"Host login\" in the application. It appears as a title within an SMTP settings page and is used to indicate the authentication section of the form, prompting users to enter their host credentials.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Ev sahibi girişi' is technically correct, it doesn't convey the intended meaning of 'Host login' in the context of SMTPSettings. 'Host login' usually refers to the login credentials for a mail server, not a physical host.",
-          "suggestion": "Consider alternatives like 'Poçt serveri giriş məlumatları' (Mail server login details) or 'Server giriş məlumatları' (Server login details)."
+          "description": "The term 'Ev sahibi' refers to a person (a host/landlord) in a social context. In technical SMTP/server settings, 'Host' refers to the server or machine. 'Host girişi' or 'Server girişi' would be more appropriate, but 'Ev sahibi' is a literal translation error for technical terminology.",
+          "suggestion": "Host girişi"
         }
       ],
       "approved_at": null
@@ -45,37 +45,37 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Вход за хост' is a literal translation and doesn't fully convey the intended meaning. 'Host login' typically refers to credentials used to access a mail server, not simply 'entry for a host'.",
-          "suggestion": "Consider a more contextually accurate translation, such as 'Потребителско име за хост' (Username for host) or 'Данни за достъп до хост' (Access credentials for host), depending on the specific context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation 'Přihlášení hostitele' means 'Host's login' (as in a person who is a host), whereas in the context of SMTP settings, 'Host login' refers to the credentials for the mail server host. In Czech technical terminology, this should refer to the login for the host/server.",
+          "suggestion": "Přihlášení k hostiteli"
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The German translation 'Host-Login' uses a hyphen where a space might be more natural in German, though not strictly incorrect. It's a stylistic choice that depends on the overall tone and context of the settings.",
-          "suggestion": "Consider 'Host Login' for a potentially more readable option, but 'Host-Login' is acceptable."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Σύνδεση κεντρικού υπολογιστή' means 'Connection of a central computer' or 'Host computer connection'. In the context of SMTP settings, 'Host login' refers to the credentials/authentication for the mail server host, not a physical central computer.",
+          "suggestion": "Σύνδεση κεντρικού διακομιστή"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Käyttäjätunnus\" means 'username', 'Host login' refers to the credentials used to log into the SMTP server. 'Käyttäjätunnus' is a component of those credentials, not the entire concept. A more accurate translation might be something like 'Palvelinkäyttäjätunnus' (server username) or 'Kirjautumistunnus' (login credential).",
-          "suggestion": "Palvelinkäyttäjätunnus or Kirjautumistunnus"
+          "description": "The Finnish translation 'Käyttäjätunnus' means 'Username', whereas the English 'Host login' refers to the host's login credentials/authentication. In the context of SMTP settings, 'Host login' implies the login details for the mail server host, not just a generic username.",
+          "suggestion": "Isännän kirjautuminen"
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Identifiant' is a general term for 'identifier'. While it can sometimes be appropriate, 'Host login' specifically refers to the credentials needed to access a host. A more accurate translation would depend on the specific context and what 'Host login' represents (username, password combination, etc.).  'Identifiant' doesn't convey that specificity.",
-          "suggestion": "Consider 'Nom d'utilisateur et mot de passe' (username and password) or 'Informations de connexion à l'hôte' if a more general term is needed."
+          "description": "The translation 'Identifiant' means 'Username' or 'ID', whereas the English 'Host login' refers to the credentials/login for the host server in an SMTP context.",
+          "suggestion": "Connexion de l'hôte"
         }
       ],
       "approved_at": null
@@ -111,13 +111,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Հոսթի մուտք\" is a literal translation of 'Host login', it might not be the most natural or idiomatic way to express this in Armenian, particularly in a technical context. 'Host login' often refers to the username/password required to access a host server.",
-          "suggestion": "Consider alternatives like \"Հաշվեկշիռի տվյալներ\" (Account details), \"Մուտքի տվյալներ\" (Login details), or a more descriptive phrase depending on the specific functionality."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -126,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Login dominio\" is understandable, it's not the most accurate or natural translation of \"Host login\". \"Dominio\" refers to the domain, but \"Host login\" implies the login credentials for the host server itself. A better translation would depend on the specific context but could be something like \"Accesso host\", \"Login server\", or \"Credenziali host\".",
-          "suggestion": "Consider \"Accesso host\", \"Login server\", or \"Credenziali host\" depending on context."
+          "description": "The translation 'Login dominio' means 'Domain login', which changes the meaning from 'Host login'. In the context of SMTP settings, 'Host' refers to the server/host, not a domain.",
+          "suggestion": "Login host"
         }
       ],
       "approved_at": null
@@ -138,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Japanese translation \"ログインを開催\" is not an accurate translation of \"Host login\".  It literally translates to \"hold login\" which doesn't convey the intended meaning.  The term \"Host login\" implies login credentials related to a host server.",
-          "suggestion": "Consider alternatives such as \"ホストへのログイン\" (hosuto e no login - login to the host), \"ホストログイン情報\" (hosuto login jōhō - host login information), or a more context-specific phrase depending on the broader use case."
+          "description": "The translation 'ログインを開催' means 'Hold/Host a login event' (like hosting a party or meeting), which is a complete mistranslation of the technical term 'Host login' (referring to the SMTP host authentication).",
+          "suggestion": "ホストのログイン"
         }
       ],
       "approved_at": null
@@ -150,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation '로그인 개최' does not accurately convey the meaning of 'Host login'. '개최' typically means 'holding' or 'hosting' an event, which doesn't align with the concept of host login.",
-          "suggestion": "A more appropriate translation might be '호스트 로그인' (host login) or '호스트 계정 로그인' (host account login), depending on the context."
+          "description": "The translation '로그인 개최' means 'Login hosting/holding an event'. In the context of SMTP settings, 'Host' refers to the server host, not 'hosting an event'. The translation should refer to the host's login credentials.",
+          "suggestion": "호스트 로그인"
         }
       ],
       "approved_at": null
@@ -162,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"ເຂົ້າສູ່ລະບົບແບບເຈົ້າພາບ\" is a literal translation, it might not be the most natural or accurate rendering of 'Host login' in the context of SMTP settings. 'Host login' typically refers to the username or credentials used to authenticate with the SMTP server. A more accurate translation might be something like 'ຊື່ຜູ້ໃຊ້ ແລະ ລະຫັດລັບຂອງເຈົ້າພາບ' (username and password of the host) or 'ການເຂົ້າສູ່ລະບົບຂອງເຈົ້າພາບ' (host login process).",
-          "suggestion": "Consider 'ການເຂົ້າສູ່ລະບົບຂອງເຈົ້າພາບ' or 'ຊື່ຜູ້ໃຊ້ ແລະ ລະຫັດລັບຂອງເຈົ້າພາບ' depending on the specific context."
+          "description": "The term 'ເຈົ້າພາບ' (Host) is used in a literal sense meaning 'host of a party/event'. In a technical SMTP/Server context, 'Host' refers to the server or machine. The translation sounds like 'Login as a party host' rather than 'Host authentication/login'.",
+          "suggestion": "ເຂົ້າສູ່ລະບົບຂອງໂຮສ"
         }
       ],
       "approved_at": null
@@ -171,13 +165,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation \"Hosta logins\" is not the most accurate or natural rendering of \"Host login.\" \"Hosta pieteikums\" or \"Hosta iestatījumi\" would be more appropriate depending on the context.",
-          "suggestion": "Consider \"Hosta pieteikums\" or \"Hosta iestatījumi\" based on the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -192,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Zaloguj się z hostem\" is not an accurate or natural translation of \"Host login\". It implies logging in *with* a host, which isn't the intended meaning. 'Host login' usually refers to the hostname or login credentials for a server.",
-          "suggestion": "Consider options like \"Nazwa hosta\", \"Logowanie do hosta\", or a more context-specific translation depending on the precise meaning of 'Host login'."
+          "description": "The Polish translation 'Zaloguj się z hostem' means 'Log in with a host', which implies a person or entity performing the login. In the context of SMTP settings, 'Host login' refers to the 'Login for the host' or 'Host authentication credentials'.",
+          "suggestion": "Logowanie hosta"
         }
       ],
       "approved_at": null
@@ -201,7 +189,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "In the context of SMTP settings and server authentication, 'Host' refers to the mail server/host machine, not a person (Anfitrião). 'Login do host' or 'Autenticação do host' is the correct technical term.",
+          "suggestion": "Login do host"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -216,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Nume de conectare gazdă\" is understandable, a more natural and common translation for \"Host login\" would be \"Autentificare gazdă\" or \"Date de autentificare gazdă\". \"Nume de conectare gazdă\" is a bit literal and less idiomatic.",
-          "suggestion": "Autentificare gazdă"
+          "description": "The translation 'Nume de conectare gazdă' translates to 'Host username'. In the context of SMTP settings, 'Host login' refers to the authentication credentials (login/username) for the host server, but 'login' in English UI often implies the action or the specific field for the username. However, 'Nume de conectare' is a literal translation of 'Login name'. The critical issue is that 'Host login' in technical SMTP contexts usually refers to the 'Username' used for authentication. While 'Nume de conectare' is acceptable, 'Gazdă' is a literal translation of 'Host' which in networking/SMTP context is often better translated as 'Server' or left as 'Host' if referring to the entity. More importantly, 'Host login' is often interpreted as 'Autentificare host'.",
+          "suggestion": "Autentificare host"
         }
       ],
       "approved_at": null
@@ -227,9 +221,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation \"Логин\" is too short and doesn't fully convey the meaning of \"Host login\". While \"Логин\" means \"login\", \"Host login\" refers to the username or login credentials used to access a host server. A more accurate translation would be something like \"Имя пользователя хоста\" or \"Логин для хоста\".",
-          "suggestion": "Имя пользователя хоста"
+          "type": "missing_content",
+          "description": "The word 'Host' is missing from the translation. The current translation 'Логин' only means 'Login', whereas the source 'Host login' specifies the type of login (credentials for the host).",
+          "suggestion": "Логин хоста"
         }
       ],
       "approved_at": null
@@ -240,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"සත්කාරකයට පිවිසුම\" is understandable, it's not the most natural or accurate translation of \"Host login.\" \"Host login\" refers to the credentials used to access a host server. A more suitable translation would emphasize access credentials rather than just the act of entering.",
-          "suggestion": "A better translation might be \"සත්කාරක යෙදුම\" (Sathakaraka yeduma) which translates to 'Host Credentials' or \"සත්කාරක ල໊ගින්\" (Sathakaraka login) which directly uses the English loanword."
+          "description": "The word 'සත්කාරකයට' (to the host/hostess) implies a person or an entity being hosted, rather than the technical 'Host' (server/machine) required for SMTP settings. In a technical context, 'Host' should refer to the server address/host machine.",
+          "suggestion": "සර්වර් පිවිසුම"
         }
       ],
       "approved_at": null
@@ -252,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Prihlasovacie meno' is a reasonable translation, 'Host login' more accurately refers to the username used to access a mail server. 'Prihlasovacie meno' is more general for any login. A better translation might be 'Názov používateľa pre server' or 'Serverové prihlasovacie meno'.",
-          "suggestion": "Názov používateľa pre server"
+          "description": "The English 'Host login' refers to the credentials/username of the host (SMTP server), whereas the Slovak 'Prihlasovacie meno' means 'Username' or 'Login name'. In the context of SMTP settings, 'Host login' implies the login used for the host, but 'Prihlasovacie meno hosta' or 'Prihlasovacie údaje hosta' would be more accurate to avoid confusion with a general user login.",
+          "suggestion": "Prihlasovacie údaje hosta"
         }
       ],
       "approved_at": null
@@ -264,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Prihlasovacie meno\" is closer to \"Username\" than \"Host login.\" \"Host login\" refers to the login credentials used to access a mail server, usually a username and password, used by the server itself. \"Prihlasovacie meno\" more accurately describes a user's login name.",
-          "suggestion": "Consider alternatives like \"Ime gostitelja\" (Host Name) or \"Gostiteljsko uporabnisko ime\" (Host Username) depending on the precise meaning intended."
+          "description": "The Slovenian translation 'Prihlasovacie meno' is actually Slovak, not Slovenian. Additionally, it translates to 'Login name' rather than 'Host login'.",
+          "suggestion": "Prijava gostitelja"
         }
       ],
       "approved_at": null
@@ -276,8 +270,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Хост пријава\" is a literal translation of 'Host login' but doesn't convey the intended meaning accurately in Serbian.  'Prijava' typically means 'login' or 'sign-in'. A more natural and accurate translation would use a term that encompasses server authentication.",
-          "suggestion": "Хост аутентификација"
+          "description": "The translation 'Хост пријава' is a literal word-for-word translation that sounds unnatural in Serbian. In the context of SMTP settings/authentication, 'Host login' refers to the login credentials for the host. A more accurate translation would be 'Пријава на хост' or 'Корисничко име хоста'. However, 'Хост пријава' sounds like 'Host is logging in' rather than a label for a login field.",
+          "suggestion": "Пријава на хост"
         }
       ],
       "approved_at": null
@@ -303,19 +297,31 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Đăng nhập Host\" is a literal translation and not idiomatic Vietnamese. \"Host\" is often left untranslated in this context, but a more natural phrasing would be \"Tên đăng nhập Host\" or simply \"Tên đăng nhập\".",
-          "suggestion": "Tên đăng nhập Host"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "In the context of SMTP settings, 'Host login' refers to the authentication credentials (username/password) for the mail server host. '主机登录' (Zhǔjī dēnglù) literally means 'Host machine login' or 'Logging into the host computer', which is technically inaccurate for email server authentication settings.",
+          "suggestion": "SMTP 登录"
+        }
+      ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Identifikimi i pritësit' means 'Identification of the host'. In the context of SMTP settings and authentication, 'Host login' refers to the 'Login for the host' or 'Host credentials/username'. 'Identifikimi' is a literal translation of 'identification' rather than 'login' (which should be 'logini' or 'hyrja').",
+          "suggestion": "Logini i pritësit"
+        }
+      ],
       "approved_at": null
     }
   }

@@ -31,6 +31,7 @@ import cloneDeep from "lodash/cloneDeep";
 import api from "@docspace/shared/api";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
+import type { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { TData, toastr } from "@docspace/ui-kit/components/toast";
 import type {
@@ -43,7 +44,10 @@ import type { ModalDialogProps } from "@docspace/ui-kit/components/modal-dialog/
 import type { TTranslation } from "@docspace/shared/types";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
-import SocketHelper, { SocketEvents, TChangeWebPluginData } from "@docspace/ui-kit/utils/socket";
+import SocketHelper, {
+  SocketEvents,
+  TChangeWebPluginData,
+} from "@docspace/ui-kit/utils/socket";
 
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
@@ -108,6 +112,8 @@ class PluginStore {
 
   private userStore: UserStore = {} as UserStore;
 
+  private currentTariffStatusStore: CurrentTariffStatusStore | null = null;
+
   plugins: TPlugin[] = [];
 
   contextMenuItems: Map<string, IContextMenuItemClient> = new Map();
@@ -161,10 +167,12 @@ class PluginStore {
     settingsStore: SettingsStore,
     selectedFolderStore: SelectedFolderStore,
     userStore: UserStore,
+    currentTariffStatusStore: CurrentTariffStatusStore,
   ) {
     this.settingsStore = settingsStore;
     this.selectedFolderStore = selectedFolderStore;
     this.userStore = userStore;
+    this.currentTariffStatusStore = currentTariffStatusStore;
 
     makeAutoObservable(this);
 
@@ -173,7 +181,7 @@ class PluginStore {
   }
 
   wsChangeWebPlugin = () => {
-     SocketHelper?.emit(SocketCommands.Subscribe, {
+    SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: "change-web-plugin",
     });
 
@@ -301,6 +309,10 @@ class PluginStore {
     this.pluginMediaViewerProps = value;
   };
 
+  get isNotPaidPeriod() {
+    return this.currentTariffStatusStore?.isNotPaidPeriod;
+  }
+
   get pluginFloatingOperationsArray(): IFloatingOperationsButtonClient[] {
     return Array.from(this.pluginFloatingOperationsButtons.values());
   }
@@ -369,6 +381,8 @@ class PluginStore {
   };
 
   initPlugins = async () => {
+    if (this.isNotPaidPeriod) return;
+
     const frame = document.createElement("iframe");
     frame.id = "plugin-iframe";
     frame.width = "0px";
@@ -386,6 +400,8 @@ class PluginStore {
   };
 
   updatePlugins = async (fromList?: boolean) => {
+    if (this.isNotPaidPeriod) return;
+
     const abortController = new AbortController();
     this.settingsStore.addAbortControllers(abortController);
 
@@ -1081,7 +1097,7 @@ class PluginStore {
 
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
-  
+
     Array.from(items).forEach(([key, value]) => {
       const correctUserType = value.usersType
         ? value.usersType.includes(userRole)
@@ -1137,10 +1153,7 @@ class PluginStore {
         });
       }
 
-      const onClick = createMainButtonClickHandler(
-        value,
-        plugin.name,
-      );
+      const onClick = createMainButtonClickHandler(value, plugin.name);
 
       this.mainButtonItems.set(key, {
         ...value,

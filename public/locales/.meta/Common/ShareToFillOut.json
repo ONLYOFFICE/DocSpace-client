@@ -3,7 +3,7 @@
   "content": "Share to fill out",
   "content_en_sha1_hash": "5c8172fbb258b81d360cc5a4197d7c9df62993f9",
   "created_at": "2025-05-19T21:30:48.707Z",
-  "updated_at": "2026-02-19T13:36:32.545Z",
+  "updated_at": "2026-04-07T23:08:20.946Z",
   "comment": {
     "text": "\"Used as a title for a share-to-fill-out dialog, displayed when a file is shared to fill out its metadata.\"",
     "is_auto": true,
@@ -33,25 +33,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation \"مشاركة للتعبئة \" doesn't fully capture the meaning of \"Share to fill out\".  \"التعبئة\" typically refers to filling something with a substance, not completing a form or document. A more accurate translation would convey the action of sharing to allow someone to complete something.",
-          "suggestion": "مشاركة لإكمال"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Doldurmaq üçün paylaşın\" is a literal translation, it's not the most natural or idiomatic way to express \"Share to fill out\" in Azerbaijani. It sounds slightly awkward.",
-          "suggestion": "Consider alternatives like \"Formanı doldurmaq üçün paylaşın\" (Share to fill out the form) or \"Doldurmaq üçün bölüşdürün\" (Share to fill out - using 'bölüşdürün' which is a more common word for sharing in this context)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -111,25 +99,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"記入用の共有\" is a literal translation that doesn't convey the intended meaning of \"Share to fill out.\" It sounds unnatural in Japanese. A more natural translation would express the purpose of the sharing action.",
-          "suggestion": "Consider alternatives like \"入力用リンクの共有\" (Share input link) or \"記入フォームの共有\" (Share fillable form), depending on the specific context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation \"작성을 위해 공유\" is a literal translation and doesn't fully capture the intended meaning of 'Share to fill out'. It translates to 'Share for writing/filling out'. While understandable, it's not the most natural way to express this in Korean.  A more idiomatic translation would depend on the context.",
-          "suggestion": "Consider alternatives like: \"작성하려면 공유하세요\" (To fill out, share it), \"작성 링크 공유\" (Share the writing link), or \"작성하기 위해 공유\" (To write/fill out, share)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -177,13 +153,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Предоставить доступ для заполнения' is a more formal and indirect rendering of 'Share to fill out'. While technically correct, it doesn't capture the brevity and directness of the original. A more natural and closer translation might be something like 'Поделиться для заполнения' or 'Отправить для заполнения'.",
-          "suggestion": "Поделиться для заполнения"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -192,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'කරන්න බෙදා ගන්න' doesn't accurately convey the meaning of 'Share to fill out.' It translates to something like 'Do and share' which is not the intended meaning. The phrase 'Share to fill out' implies sharing a form or document for completion.",
-          "suggestion": "A more accurate translation could be something like ' සම්පූර්ණ කිරීමට බෙදා ගන්න' (sampurna karaminni beda ganne) - 'Share to complete', or 'පිරවීමට බෙදා ගන්න' (pirivaminni beda ganne) - 'Share to fill'."
+          "description": "The Sinhala translation 'කරන්න බෙදා ගන්න' translates to 'Do share' or 'Share to do', which is grammatically awkward and fails to convey the specific meaning of 'Share [a file] to fill out [metadata]'.",
+          "suggestion": "පිරවීමට බෙදා ගන්න"
         }
       ],
       "approved_at": null
@@ -213,13 +183,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Подели за попуњавање\" is not the most natural or accurate translation of \"Share to fill out.\" It's quite literal and clunky. A more common and understandable phrasing would be something like \"Подели да би се попунило\" or \"Подели за попуну\".",
-          "suggestion": "Подели да би се попунило"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -231,30 +195,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Doldurmak için paylaşın\" sounds a bit awkward and less natural in Turkish. A more idiomatic translation would better convey the intended meaning.",
-          "suggestion": "Paylaşarak doldurun"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The original English phrase \"Share to fill out\" suggests sharing a form or document for someone else to complete. \"Doldurmak için paylaşın\" is a more literal translation that loses some of this nuance.",
-          "suggestion": "Başkasının doldurabilmesi için paylaşın"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Почати заповнення' while technically meaning 'Start filling out', doesn't quite capture the nuance of 'Share to fill out'. It implies initiating the filling process, while 'Share to fill out' suggests sharing a form for others to complete.",
-          "suggestion": "Розподілити для заповнення"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -266,13 +213,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"共享以填写\" while technically correct, doesn't fully capture the nuance of 'Share to fill out'. It sounds a bit formal and doesn't convey the intent of sharing something for others to complete. A more natural translation would depend on the context, but a better alternative might be '分享填写' or '可分享填写'.",
-          "suggestion": "Consider '分享填写' or '可分享填写' depending on context.  Investigate if a more colloquial or user-friendly translation is appropriate."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

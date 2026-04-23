@@ -3,7 +3,7 @@
   "content": "New general link created successfully",
   "content_en_sha1_hash": "58f4db47be46603e5a6da54723f845b9713e485d",
   "created_at": "2025-08-26T11:15:03.764Z",
-  "updated_at": "2026-02-19T13:36:32.412Z",
+  "updated_at": "2026-04-08T08:22:17.393Z",
   "comment": {
     "text": "This message confirms the successful creation of a new general link after an existing one has been revoked. It appears as a success notification (using `toastr`) in the UI, typically when sharing a link in a primary room or form. Translators should ensure the wording conveys both the revocation and creation aspects of the action.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/components/share/hooks/useShare.tsx",
-      "line_number": 312,
+      "line_number": 313,
       "context": "? newLink\n : l,\n ),\n );\n if (!isReactivate)\n toastr.success(t(\"Common:GeneralLinkRevokedAndCreatedSuccessfully\"));\n } else {\n deleteLink(link.sharedTo.id);\n toastr.success(t(\"Common:LinkRemoved\"));\n }\n } catch (error) {",
       "module": "/packages/shared"
     }
@@ -33,7 +33,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English source key 'GeneralLinkRevokedAndCreatedSuccessfully' and the context indicate that the action involves both revoking an old link and creating a new one. The Arabic translation only mentions the creation of the new link, omitting the 'revoked' aspect of the process.",
+          "suggestion": "تم إلغاء الرابط العام وإنشاء رابط جديد بنجاح"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -45,13 +51,25 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English source key 'GeneralLinkRevokedAndCreatedSuccessfully' and the context indicate that the action involves both revoking an old link and creating a new one. The Bulgarian translation only mentions the creation, omitting the 'revoked' aspect which is crucial for the user to understand why the previous link stopped working.",
+          "suggestion": "Новият главен линк беше оттеглен и създаден успешно"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English source key 'GeneralLinkRevokedAndCreatedSuccessfully' and the context imply that a link was both revoked and a new one created. The Czech translation only mentions the creation of the new link, omitting the 'revoked' aspect which is critical for the user to understand why the previous link no longer works.",
+          "suggestion": "Nový obecný odkaz byl úspěšně vytvořen po zrušení předchozího"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -69,7 +87,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Spanish translation fails to convey the 'revocation' aspect mentioned in the English key 'GeneralLinkRevokedAndCreatedSuccessfully' and the provided context. While the English string provided for verification is 'New general link created successfully', the metadata explicitly states the message should convey both the revocation and creation aspects.",
+          "suggestion": "Se ha revocado el enlace anterior y se ha creado un nuevo enlace general correctamente"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -81,7 +105,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English source key 'GeneralLinkRevokedAndCreatedSuccessfully' and the context indicate that the action involves both revoking an old link and creating a new one. The French translation only mentions the creation, omitting the 'revoked' aspect which is critical for user understanding of the process.",
+          "suggestion": "Nouveau lien général créé avec succès après révocation"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -99,13 +129,25 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English key 'GeneralLinkRevokedAndCreatedSuccessfully' and the context indicate that the action involves both revoking an old link and creating a new one. The Japanese translation only mentions the creation of the new link, omitting the 'revoked' aspect which is critical for user understanding of the state change.",
+          "suggestion": "新しい一般リンクの失効と作成が正常に完了しました"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English key 'GeneralLinkRevokedAndCreatedSuccessfully' and the context indicate that the action involves both revoking an old link and creating a new one. The Korean translation only mentions the creation of the new link, omitting the 'revoked' aspect which is critical for user understanding of the state change.",
+          "suggestion": "기존 일반 링크가 취소되고 새로운 일반 링크가 생성되었습니다"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -135,7 +177,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English key 'GeneralLinkRevokedAndCreatedSuccessfully' and the context indicate that the action involves both revoking an old link and creating a new one. The Portuguese translation only mentions the creation, omitting the revocation aspect mentioned in the metadata and the technical key name.",
+          "suggestion": "Novo link geral revogado e criado com sucesso"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -147,19 +195,37 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The translation fails to convey the 'revocation' aspect mentioned in the context and the English key 'GeneralLinkRevokedAndCreatedSuccessfully'. While the English string provided is 'New general link created successfully', the metadata indicates this specific key is intended to confirm both the revocation of the old link and the creation of the new one.",
+          "suggestion": "Un nou link general a fost revocat și creat cu succes"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English key 'GeneralLinkRevokedAndCreatedSuccessfully' and the context indicate that the action involves both revoking an old link and creating a new one. The Russian translation only mentions the creation of the new link, omitting the 'revoked' aspect which is critical for user understanding of the state change.",
+          "suggestion": "Старая общая ссылка отозвана, новая успешно создана"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English source key 'GeneralLinkRevokedAndCreatedSuccessfully' and the context imply that a link was both revoked and a new one created. The Sinhala translation only mentions the creation of the new link, omitting the 'revoked' aspect mentioned in the metadata and the technical key name.",
+          "suggestion": "නව සාමාන්‍ය සබැඳිය අවලංගු කර සාර්ථකව අලුත් සබැඳියක් නිර්මාණය කරන ලදී"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,7 +249,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The translation fails to convey the 'revocation' aspect mentioned in the context and the key name 'GeneralLinkRevokedAndCreatedSuccessfully'. The English source provided for verification is 'New general link created successfully', but the metadata indicates the intent is to communicate that a link was both revoked and a new one was created.",
+          "suggestion": "Нови генерални линк је успешно повучен и креиран"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -195,13 +267,25 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English source key 'GeneralLinkRevokedAndCreatedSuccessfully' and the context imply that a link was both revoked and a new one was created. The current Turkish translation only mentions the creation of the new link, omitting the 'revoked' aspect which is crucial for the user to understand why the previous link no longer works.",
+          "suggestion": "Yeni genel bağlantı iptal edildi ve başarıyla oluşturuldu"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English key 'GeneralLinkRevokedAndCreatedSuccessfully' and the context imply that a link was both revoked and a new one created. The current Ukrainian translation only mentions the creation of the new link, omitting the 'revoked' aspect which is crucial for the user to understand why the old link no longer works.",
+          "suggestion": "Нове загальне посилання успішно створено, старе було анульовано"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -213,7 +297,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English key 'GeneralLinkRevokedAndCreatedSuccessfully' and the context indicate that the action involves both revoking an old link and creating a new one. The current Chinese translation only mentions the creation of the new link, omitting the 'revoked' aspect which is critical for user understanding of the state change.",
+          "suggestion": "已成功撤销旧链接并创建新的通用链接"
+        }
+      ],
       "approved_at": null
     }
   }

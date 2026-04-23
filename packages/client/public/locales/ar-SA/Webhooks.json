@@ -1,4 +1,7 @@
 {
+  "AgentCreated": "تم إنشاء وكيل الذكاء الاصطناعي",
+  "AgentDeleted": "تم حذف وكيل الذكاء الاصطناعي",
+  "AgentUpdated": "تم تحديث الوكيل بالذكاء الاصطناعي",
   "Before": "قبل",
   "CreateWebhook": "إنشاء ويب هوك",
   "DeleteHint": "سيتم حذف ويب هوك بشكل دائم.\nلن تتمكن من التراجع عن هذا الإجراء.",
@@ -33,6 +36,9 @@
   "FolderRestored": "تم استعادة المجلد",
   "FolderTrashed": "تم نقل المجلد إلى المهملات",
   "FolderUpdated": "تم تحديث المجلد",
+  "FormFilledOut": "تم ملء النموذج",
+  "FormStopped": "توقف النموذج",
+  "FormSubmit": "تم إرسال النموذج",
   "From": "من",
   "Generate": "إنشاء",
   "GroupCreated": "تم إنشاء المجموعة",

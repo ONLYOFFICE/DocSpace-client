@@ -3,7 +3,7 @@
   "content": "Deactivate",
   "content_en_sha1_hash": "d65ded94286c61f4f34527624be77ef1afce3b5a",
   "created_at": "2025-05-19T21:30:44.433Z",
-  "updated_at": "2025-12-19T13:32:33.693Z",
+  "updated_at": "2026-04-08T12:26:14.416Z",
   "comment": {
     "text": "The translation key \"Deactivate\" is used to display the text \"Deactivate\" on buttons and labels in UI elements that allow users to deactivate or disable certain features, typically related to account management or data removal. This text appears in button components, such as confirm deletion or suspension buttons, in portal settings pages and login interfaces.",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Deaktiv edin\" is a command form (imperative) meaning \"Deactivate it/them.\" The English word \"Deactivate\" is a verb that can be used in various contexts. A more neutral and accurate translation might be \"Dəaktivasiya et\" or \"Xətlərin dəf etməsi\" depending on the specific context of the original English content. \"Deaktiv edin\" might not be appropriate if the English text isn't giving a direct command.",
-          "suggestion": "Consider \"Dəaktivasiya et\" or \"Xətlərin dəf etməsi\", or evaluate if the context requires the imperative form."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -57,7 +51,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English word 'Deactivate' is a verb (imperative/action), whereas the Czech translation 'Deaktivace' is a noun (the process of deactivation). For a button label, the verb form 'Deaktivovat' should be used.",
+          "suggestion": "Deaktivovat"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -93,13 +93,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation \"Ապագործունացնել\" is a very uncommon and somewhat awkward way to translate \"Deactivate.\" It implies a forceful removal of activity or purpose, which might not be the intended meaning. A more common and clearer translation would be something like \"չմաշտել\" (ch'mashtel) or \"գործնազործել\" (gorznazordzel).",
-          "suggestion": "Consider using \"չմաշտել\" (ch'mashtel) or \"գործնազործել\" (gorznazordzel) as a more natural and accurate translation of \"Deactivate.\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -111,13 +105,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation \"停止する\" (teishi suru) translates to 'stop' or 'cease' rather than 'deactivate'. While 'deactivate' can involve stopping something, it implies a process of removing activation. A more appropriate translation would depend on the context, but alternatives like \"無効にする\" (mueki ni suru - to invalidate/disable) or \"解除する\" (kaisetsu suru - to release/cancel) might be better depending on the specific meaning of 'deactivate'.",
-          "suggestion": "Consider alternatives like \"無効にする\" (mueki ni suru) or \"解除する\" (kaisetsu suru) depending on context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -141,13 +129,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Dutch translation \"Deactiveer\" is a direct transliteration of \"Deactivate\" and doesn't reflect the proper Dutch verb form. The correct Dutch translation would be \"Deactiveren\".",
-          "suggestion": "Deactiveren"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -229,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

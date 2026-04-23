@@ -3,7 +3,7 @@
   "content": "Folder not available",
   "content_en_sha1_hash": "e2620e8a4f8771e2e1c12697fa8bb94fd77939c9",
   "created_at": "2025-10-13T13:22:03.877Z",
-  "updated_at": "2026-03-31T15:18:46.264Z",
+  "updated_at": "2026-04-08T09:10:15.195Z",
   "comment": {
     "text": "This text is displayed as the title when a folder is unavailable to the user. It appears in error messages, likely presented via a toastr notification, to explain why a folder cannot be accessed. Translators should ensure the wording conveys that the folder is inaccessible and may require action.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2684,
+      "line_number": 2689,
       "context": ": t(\"Common:RoomLinkExpired\");\n \n const title = isFile\n ? t(\"Common:FileNotAvailable\")\n : isFolder\n ? t(\"Common:FolderNotAvailable\")\n : t(\"Common:RoomNotAvailable\");\n \n return toastr.error(description, title);\n }",
       "module": "/packages/client"
     }
@@ -123,7 +123,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian word 'fails' means 'failure' or 'fail' (noun/verb), whereas the English 'Folder' refers to a directory. The correct term for a digital folder in Latvian is 'mape'.",
+          "suggestion": "Mape nav pieejama"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -171,7 +177,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'Dostupná priečina chýba' literally means 'Available folder is missing', which is contradictory and conveys the opposite of the intended meaning (that the folder is simply not accessible/available).",
+          "suggestion": "Priečina nie je dostupná"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -189,7 +201,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Фасцикла' (Fascikla) in Serbian typically refers to a physical folder/file folder or a booklet, whereas in a digital UI context for 'Folder' (directory), the correct term is 'Овдељење' or 'Фолдер'.",
+          "suggestion": "Фолдер није доступан"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

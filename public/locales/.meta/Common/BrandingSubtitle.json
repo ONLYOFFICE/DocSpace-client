@@ -3,7 +3,7 @@
   "content": "Use this option to provide on-brand experience to users.",
   "content_en_sha1_hash": "af0e4b897992b3cd3dfa107a17d4b8837acdc69d",
   "created_at": "2025-05-26T07:15:40.986Z",
-  "updated_at": "2026-02-19T13:36:32.715Z",
+  "updated_at": "2026-04-08T16:06:18.970Z",
   "comment": {
     "text": "This translation key provides an on-brand experience for users, describing the functionality of a specific category. It is displayed on the Portal Settings page and appears below the Brand Name component. Translators should focus on conveying this information in a way that maintains the brand's tone and style.",
     "is_auto": true,
@@ -141,7 +141,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation adds significant extra meaning ('creştere a implicării şi de conştientizare a mărcii' - increasing engagement and brand awareness) that is not present in the English source text.",
+          "suggestion": "Utilizaţi această opţiune pentru a oferi utilizatorilor o experienţă în conformitate cu identitatea mărcii."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'පරිශ්‍රීලකයින්ට' (parishrilakayinta) is a misspelling/incorrect word for 'පරිශීලකයින්ට' (parishilakayinta - users).",
+          "suggestion": "පරිශීලකයින්ට ඔබගේ සන්නාමයේ අත්දැකීම ලබා දීමට මෙම විකල්පය භාවිතා කරන්න."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -202,6 +214,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Albanian translation includes an entire extra sentence ('Këto cilësime do të jenë efektive për të gjitha portalet tuaja.') that does not exist in the English source text.",
+          "suggestion": "Përdorni këtë opsion për të ofruar një përvojë me markë për përdoruesit tuaj."
+        }
+      ],
       "approved_at": null
     }
   }

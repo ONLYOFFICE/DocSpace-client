@@ -85,6 +85,7 @@ import HelpCenterReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
 import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import AISvgUrl from "PUBLIC_DIR/images/icons/16/AI.svg?url";
+import spreadsheetUrl from "PUBLIC_DIR/images/icons/16/spreadsheet.svg?url";
 import DotsHorizontalUrl from "PUBLIC_DIR/images/icons/16/dots-horizontal.react.svg?url";
 
 import CreateTemplateSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
@@ -119,6 +120,7 @@ import {
   removeOptions,
 } from "SRC_DIR/helpers/filesUtils";
 import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
+import { OPERATIONS_NAME } from "@docspace/ui-kit/constants";
 import {
   RoomsType,
   Events,
@@ -148,6 +150,7 @@ import {
 } from "@docspace/shared/constants";
 import {
   isFile as isFileUtil,
+  isFolder,
   isFolder as isFolderUtil,
   isRoom as isRoomUtil,
 } from "@docspace/shared/utils/typeGuards";
@@ -161,6 +164,7 @@ import {
   showInfoPanel,
 } from "SRC_DIR/helpers/info-panel";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
+import { XlsxUpdateService } from "@docspace/shared/services/xlsx-update.service";
 import { showCreatedPDFFormDialog } from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
 
 const LOADER_TIMER = 500;
@@ -466,8 +470,8 @@ class ContextOptionsStore {
       .setFavoriteAction(action, items)
       .then(() =>
         action === "mark"
-          ? toastr.success(t("MarkedAsFavorite"))
-          : toastr.success(t("RemovedFromFavorites")),
+          ? toastr.success(t("Common:MarkedAsFavorite"))
+          : toastr.success(t("Common:RemovedFromFavorites")),
       )
       .catch((err) => toastr.error(err));
   };
@@ -1425,7 +1429,6 @@ class ContextOptionsStore {
   };
 
   onCreateTemplate = async () => {
-    this.oformsStore.setTemplateGalleryVisible(false);
     this.oformsStore.setIsVisibleInfoPanelTemplateGallery(false);
 
     const event = new Event(Events.CREATE);
@@ -1589,6 +1592,52 @@ class ContextOptionsStore {
     const selectedFolder = getSelectedFolder();
 
     downloadAction("", selectedFolder).catch((err) => toastr.error(err));
+  };
+
+  onSyncXlsxData = async (item, t) => {
+    const { clearSecondaryProgressData, setSecondaryProgressBarData } =
+      this.filesActionsStore.uploadDataStore.secondaryProgressDataStore;
+
+    try {
+      const response = await XlsxUpdateService.start(item.id, isFolder(item));
+
+      if (!response) return;
+
+      const { form, task, isNewFile } = response;
+
+      if (task.isCompleted) {
+        XlsxUpdateService.assertTaskSucceeded(task);
+      } else {
+        const basePayload = {
+          operationId: task.id,
+          operation: OPERATIONS_NAME.other,
+        };
+
+        setSecondaryProgressBarData({ ...basePayload, percent: 0 });
+
+        await XlsxUpdateService.poll(form.id, task.id, (progress) => {
+          setSecondaryProgressBarData({
+            ...basePayload,
+            percent: progress?.percentage ?? 100,
+            completed: progress?.isCompleted ?? true,
+          });
+        }).catch((error) => {
+          clearSecondaryProgressData(task.id, OPERATIONS_NAME.other);
+          throw error;
+        });
+      }
+
+      const messageVar = { formName: form.title };
+
+      toastr.success(
+        isNewFile
+          ? t("Common:SpreadsheetGenerated", messageVar)
+          : t("Common:SpreadsheetUpdated", messageVar),
+      );
+    } catch (error) {
+      toastr.error(error);
+      console.error(error);
+    }
   };
 
   createMenuGroup = (options, groupConfig, t) => {
@@ -2030,6 +2079,14 @@ class ContextOptionsStore {
           !this.treeFoldersStore.isFavoritesFolder &&
           !this.treeFoldersStore.isRecentFolder &&
           Boolean(item.external && item.isLinkExpired),
+      },
+      {
+        id: "option_sync_xlsx_data",
+        key: "update-xlsx-data",
+        label: t("Common:SyncXlsxData"),
+        icon: spreadsheetUrl,
+        onClick: () => this.onSyncXlsxData(item, t),
+        disabled: false,
       },
       {
         id: "option_fill-form",
@@ -2488,7 +2545,7 @@ class ContextOptionsStore {
       {
         id: "option_mark-as-favorite",
         key: "mark-as-favorite",
-        label: t("MarkAsFavorite"),
+        label: t("Common:MarkAsFavorite"),
         icon: FavoritesReactSvgUrl,
         onClick: () => this.onClickFavorite("mark", [item], t),
         disabled: false,
@@ -2507,7 +2564,10 @@ class ContextOptionsStore {
         label: t("Common:RemoveFromList"),
         icon: CircleCrossSvgUrl,
         onClick: () => this.onRemoveSharedFilesOrFolder([item]),
-        disabled: this.userStore?.user?.isAdmin || this.userStore?.user?.isOwner || !item.external,
+        disabled:
+          this.userStore?.user?.isAdmin ||
+          this.userStore?.user?.isOwner ||
+          !item.external,
       },
       {
         id: "option_download-as",
@@ -2608,7 +2668,7 @@ class ContextOptionsStore {
       {
         id: "option_remove-from-favorites",
         key: "remove-from-favorites",
-        label: t("RemoveFromFavorites"),
+        label: t("Common:RemoveFromFavorites"),
         icon: FavoritesFillReactSvgUrl,
         onClick: () => this.onClickFavorite("remove", [item], t),
         disabled: false,
@@ -2913,7 +2973,14 @@ class ContextOptionsStore {
       const groups = item.isFolder
         ? [
             ["select", "open", "mark-read", "open-location"],
-            ["share", "move", "copy-to", "download", "rename"],
+            [
+              "update-xlsx-data",
+              "share",
+              "move",
+              "copy-to",
+              "download",
+              "rename",
+            ],
             ["mark-as-favorite", "show-info"],
             ["restore"],
             ["remove-from-favorites", "remove-shared-folder-or-file", "delete"],
@@ -2933,7 +3000,15 @@ class ContextOptionsStore {
             ],
             ["filling-status", "reset-and-start-filling"],
             ["ask-ai"],
-            ["share", "move", "copy-to", "download", "edit-index", "rename"],
+            [
+              "update-xlsx-data",
+              "share",
+              "move",
+              "copy-to",
+              "download",
+              "edit-index",
+              "rename",
+            ],
             [
               "mark-as-favorite",
               "block-unblock-version",
@@ -3558,14 +3633,14 @@ class ContextOptionsStore {
 
     const uploadFiles = {
       key: "upload-files",
-      label: t("Article:UploadFiles"),
+      label: t("Common:UploadFiles"),
       onClick: () => this.onUploadAction("file"),
       icon: ActionsUploadReactSvgUrl,
     };
 
     const uploadFolder = {
       key: "upload-folder",
-      label: t("Article:UploadFolder"),
+      label: t("Common:UploadFolder"),
       onClick: () => this.onUploadAction("folder"),
       icon: ActionsUploadReactSvgUrl,
     };

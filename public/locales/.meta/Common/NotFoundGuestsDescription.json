@@ -3,7 +3,7 @@
   "content": "New guests will be added here once you invite them to the room.",
   "content_en_sha1_hash": "67fb4d9324338a8ac05bfb73179d010e43aecfd7",
   "created_at": "2025-05-19T21:30:46.881Z",
-  "updated_at": "2026-02-19T13:36:32.673Z",
+  "updated_at": "2026-04-08T03:59:56.192Z",
   "comment": {
     "text": "This translation key describes a message that appears on an empty screen when there are no invited guests to display. It is used in the \"Contacts\" section of the Home page and is displayed as a default message when no guests have been added yet.",
     "is_auto": true,
@@ -45,13 +45,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The use of 'budou přidáni' (future passive) is grammatically correct but sounds somewhat awkward and less natural in this context. A more natural phrasing would use the active voice.",
-          "suggestion": "Noví hosté se sem přidají, jakmile je pozvete do místnosti."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -90,13 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'երբ նրանց սենյակ հրավիրեք' is not a natural way to say 'once you invite them to the room' in Armenian. It's a literal translation that doesn't flow well. The verb 'հրավիրել' requires an object that is directly being invited, and 'սենյակ' (room) shouldn't be treated as that object here.",
-          "suggestion": "Consider phrasing it as 'երբ դուք նրանց հրավիրեք սենյակում լինելու համար' or 'երբ դուք նրանց հրավիրեք սենյակ էլու համար'."
-        },
-        {
-          "type": "grammar",
-          "description": "While technically grammatical, the sentence structure is awkward.  The Armenian translation is quite literal.",
-          "suggestion": "Re-evaluate the sentence structure for better flow in Armenian.  Consider reordering the elements."
+          "description": "The Armenian translation incorrectly states 'invite them to the room' (նրանց սենյակ հրավիրեք) instead of 'invite them to the room' (նրանց սենյակ հրավիրեք - the word order/syntax makes it sound like 'invite them room'). More importantly, the Armenian phrasing 'նրանց սենյակ հրավիրեք' is grammatically awkward/incorrect for 'invite them to the room'. It should be 'նրանց սենյակ հրավիրելիս' or 'սենյակ հրավիրելիս նրանք կավելացվեն այստեղ'. However, the most critical error is the word order which makes the sentence sound like 'invite them room'.",
+          "suggestion": "Նոր հյուրեր կավելացվեն այստեղ, երբ նրանց հրավիրեք սենյակ:"
         }
       ],
       "approved_at": null
@@ -104,7 +93,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \"a\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -122,18 +117,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'New guests' is translated as 'ຄະນະສະມາຊິກຜູ້ມາໃໝ່'. While technically correct, 'ຄະນະສະມາຊິກ' often implies a formal group membership. A more natural translation for 'guests' in this context might be 'ແຂກ' or 'ຜູ້ເຂົ້າແຂກ'.",
-          "suggestion": "ຄະນະແຂກຜູ້ມາໃໝ່ຈະຖືກເພີ່ມຢູ່ທີ່ນີ້ເມື່ອທ່ານເຊີນພວກເຂົາເຂົ້າຫ້ອງ."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'invite them to the room' is translated as 'ເຊີນພວກເຂົາເຂົ້າຫ້ອງ'. 'ເຂົ້າຫ້ອງ' literally translates to 'into the room'. It would be more natural to use a phrase that indicates joining the room. ",
-          "suggestion": "ເຊີນພວກເຂົາເຂົ້າຮ່ວມຫ້ອງ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -142,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation includes a sentence \"Varat nosūtīt savus viesus un pievienot sarakstam viesus, kurus uzaicinājušas citas personas.\" which adds information not present in the English source. The English states new guests will be added *once invited*. The Latvian implies you can also add guests who were invited by others.",
-          "suggestion": "Jauni viesi tiks pievienoti šeit, tiklīdz jūs viņus aicināsiet pievienoties telpai."
+          "description": "The Latvian translation contains significant extra information not present in the English source text, describing sending guests and adding guests invited by others. This deviates from the single-sentence source.",
+          "suggestion": "Jauni viesi tiks pievienoti šeit, tiklīdz uzaicināsiet viņus uz telpu."
         }
       ],
       "approved_at": null
@@ -157,13 +141,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Nowi goście zostaną dodani tutaj, gdy zaprosisz ich do pokoju' is not a perfect equivalent of 'New guests will be added here once you invite them to the room'. The conditional tense ('gdy zaprosisz') implies an action by the user, while the English suggests a system-initiated addition.",
-          "suggestion": "Nowi goście zostaną dodani tutaj, kiedy ich zaprosisz do pokoju. OR Nowi goście zostaną dodani tutaj po zaproszeniu ich do pokoju."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -184,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Noii invitați vor fi adăugați aici de îndată ce le invitați la sală' is not a direct or natural translation of 'New guests will be added here once you invite them to the room'.  'Le invitați la sală' is awkward.  'la sală' is also not as natural as alternatives.",
-          "suggestion": "O mai bună traducere ar fi: 'Noi oaspeți vor fi adăugați aici odată ce îi invitați în cameră.' or 'Noii oaspeți vor fi adăugați aici după ce îi invitați în cameră.'"
+          "description": "The translation uses 'invitați' (invited/guests) as a noun, but the grammatical agreement 'le invitați' (you invite them) refers to a masculine/mixed plural, whereas 'Noii invitați' is a slightly awkward phrasing for 'New guests'. More importantly, 'la sală' (to the hall/room) is a literal translation of 'room' that doesn't fit the digital context of a software 'room' (which should be 'camera' or 'spațiu'). However, the most critical error is the gender/number agreement: 'Noii invitați' (masculine) with 'le' is acceptable, but 'invitați' is often used as a verb; the term for guests should be 'oaspeți' or 'membri'.",
+          "suggestion": "Noii oaspeți vor fi adăugați aici imediat ce îi invitați în cameră."
         }
       ],
       "approved_at": null
@@ -202,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'නව ආගන්තුකයින් මෙහි එක්රැස් කරනු ලැබේ, ඔබ ඔවුන්ට පහසුරම් දුන් පසු.' doesn't accurately convey the meaning of 'New guests will be added here once you invite them to the room.' The phrasing 'ඔබ ඔවුන්ට පහසුරම් දුන් පසු' (once you pay them) implies payment, which isn't the intention. It should relate to inviting them.",
-          "suggestion": "නව ආගන්තුකයින් මෙහි එක්වනු ලැබේ, ඔබ ඔවුන්ට ආරාධනා කළ පසු."
+          "description": "The Sinhala translation uses 'පහසුරම් දුන් පසු' (after giving facilities/amenities), which is a mistranslation of 'invite them'. The correct term for 'invite' in this context should be 'ආරාධනා කළ පසු'.",
+          "suggestion": "ඔබ ඔවුන්ව කාමරයට ආරාධනා කළ පසු නව ආගන්තුකයින් මෙහි එකතු කරනු ඇත."
         }
       ],
       "approved_at": null
@@ -223,25 +201,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Нови гости ће бити додати овде када их позовете у собу.' is a literal translation that doesn't flow naturally in Serbian. A more natural phrasing would be something like 'Нови гости се додају овде након што их позовете у собу.' or 'Нове особе се додају овде након позива.'",
-          "suggestion": "Нови гости се додају овде након што их позовете у собу."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Serbian translation contains a typo. \"ovde\" should be \"u sobu\".",
-          "suggestion": "Novi gosti će biti dodati ovde kada ih pozovete u sobu."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -263,6 +229,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

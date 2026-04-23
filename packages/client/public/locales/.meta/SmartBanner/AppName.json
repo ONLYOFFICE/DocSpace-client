@@ -3,7 +3,7 @@
   "content": "{{organizationName}} Documents",
   "content_en_sha1_hash": "db01b8765ec0bbda9628a90d2f7c09d5e66f8c63",
   "created_at": "2025-05-19T21:30:50.041Z",
-  "updated_at": "2026-02-19T13:36:32.291Z",
+  "updated_at": "2026-04-08T22:07:15.408Z",
   "comment": {
     "text": "This translation key is used to display the title of a smart banner component on mobile devices. It will be translated as \"{{organizationName}} Documents\" and appears in the banner's title field when displayed on touch-enabled devices.",
     "is_auto": true,
@@ -57,25 +57,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation 'Έγγραφα {{organizationName}}' lacks the article 'of' that would be present in a more natural English equivalent ('{{organizationName}} Documents' translates more closely to 'Έγγραφα του {{organizationName}}').",
-          "suggestion": "Έγγραφα του {{organizationName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English content '{{organizationName}} Documents' is more naturally translated as 'Documentos de {{organizationName}}' in Spanish.  The current translation omits the preposition 'de'.",
-          "suggestion": "Documentos de {{organizationName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -87,13 +75,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The French translation lacks a colon after 'Documents'. The English version includes a colon, and it's common to maintain that in translated titles/labels for consistency.",
-          "suggestion": "Documents : {{organizationName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -105,13 +87,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Italian translation 'Documenti {{organizationName}}' is not a natural or idiomatic way to express \"{{organizationName}} Documents\". It lacks an article (like 'I' or 'Gli') before 'Documenti'.",
-          "suggestion": "I Documenti {{organizationName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -141,13 +117,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Dutch translation uses a hyphen instead of a space between '{{organizationName}}' and 'documenten'. This can make the text less readable and less natural in Dutch.",
-          "suggestion": "{{organizationName}} documenten"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -159,37 +129,19 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Documentos {{organizationName}}\" doesn't accurately convey the original meaning of \"{{organizationName}} Documents\".  A more accurate translation would be \"Documentos da {{organizationName}}\" or \"Documentos {{organizationName}} (of)\". The omission of a preposition makes the translation less natural in Portuguese.",
-          "suggestion": "Documentos da {{organizationName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Documentos {{organizationName}}\" is too literal and doesn't flow naturally in Portuguese. A better translation would incorporate the organization name more seamlessly, e.g., \"Documentos da {{organizationName}}\" or \"Documentos {{organizationName}}\" (with a more contextual phrase preceding).",
-          "suggestion": "Documentos da {{organizationName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The Romanian translation \"{{organizationName}} Documente\" uses the plural form of \"document\" (Documente). Since the English version uses the plural form \"Documents\", this is acceptable. However, depending on the context, using the singular form \"{{organizationName}} Document\" might be more appropriate.",
-          "suggestion": "Consider using \"{{organizationName}} Document\" if referring to a single document."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -237,13 +189,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Документи {{organizationName}}' is technically correct but lacks the article 'of' or similar preposition that would be present in the English version '{{organizationName}} Documents'. A more natural Ukrainian translation would include a preposition connecting the two parts.",
-          "suggestion": "Документи {{organizationName}} або Документи від {{organizationName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -253,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

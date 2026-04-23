@@ -3,10 +3,12 @@
   "EmptyFormGalleryScreenDescription": "検索条件に一致する結果は見つかりませんでした",
   "ErrorViewDescription": "後で再試行してください",
   "ErrorViewDescriptionNetworkError": "インターネット接続が見当たらないようです。",
-  "SuggestChanges": "変更点のご提案",
-  "TemplateInfo": "テンプレート情報",
-  "ViewAllTemplates": "テンプレート一覧を見る",
   "ErrorViewHeader": "ギャラリーは現在利用できません。",
   "SelectTemplate": "テンプレートを選択",
-  "UploadGallery": "ギャラリーにアップロード"
+  "SuggestChanges": "変更点のご提案",
+  "TemplateInfo": "テンプレート情報",
+  "UploadGallery": "ギャラリーにアップロード",
+  "ViewAllTemplates": "テンプレート一覧を見る",
+  "GalleryTitle": "{{organizationName}} テンプレートギャラリー",
+  "SubmitToGalleryDialogMainInfo": "テンプレートをパブリックギャラリーに提出して、他のユーザーが作業で利用できるようにしましょう。テンプレートが承認されると、通知され、貢献に対して報酬が与えられます。"
 }

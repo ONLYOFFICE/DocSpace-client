@@ -3,7 +3,7 @@
   "content": "Copy and keep all",
   "content_en_sha1_hash": "971cae02621d8baa4bdf72eccc28d0438d12ba3d",
   "created_at": "2025-05-19T21:30:43.738Z",
-  "updated_at": "2026-02-19T13:36:32.372Z",
+  "updated_at": "2026-04-08T14:18:26.635Z",
   "comment": {
     "text": "This translation key is used as a default message for a button that allows users to copy and keep all files in a conflict resolution dialog. The exact wording may vary depending on the specific context where it appears, but its purpose remains consistent: to provide an alternative action when multiple files are involved.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation 'انسخ واحتفظ بالجميع' translates to 'Copy and keep everyone/all people', which is incorrect in the context of files. In Arabic, 'الجميع' (al-jami') refers to people/persons, whereas 'الكل' (al-kull) or 'جميع الملفات' (all files) should be used for objects/files.",
+          "suggestion": "نسخ والاحتفاظ بالكل"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -45,13 +51,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Zkopírovat a uchovat všechny\" is a bit literal and less natural in Czech. A more idiomatic translation would convey the same meaning more effectively.",
-          "suggestion": "Consider alternatives like \"Kopírovat a ponechat všechny\" or \"Zkopírovat a uložit všechny\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Copier et garder tous' is a literal translation and doesn't quite convey the intended meaning of 'Copy and keep all' in a natural French way. While grammatically correct, it sounds awkward.",
-          "suggestion": "A more natural translation would be 'Conserver et copier tout' or 'Copier et conserver tout' depending on the desired emphasis.  'Sauvegarder et copier tout' is also a possibility if the intention is to preserve the copies."
+          "description": "The French translation 'garder tous' is grammatically incomplete and incorrect in this context. 'Tous' (all) requires a noun or a pronoun to function correctly in French. Since the context refers to files, it should be 'tout' (everything) or 'tous les fichiers' (all files). In a UI button context, 'Tout copier et conserver' or 'Copier et conserver tout' is the correct way to convey 'Copy and keep all'.",
+          "suggestion": "Copier et tout conserver"
         }
       ],
       "approved_at": null
@@ -93,13 +93,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Պատճենել և պահել բոլորը\" is a literal translation that might not be the most natural or idiomatic way to express \"Copy and keep all\" in Armenian. While technically correct, it could sound awkward.",
-          "suggestion": "Consider alternatives like \"Պատճենել և պահպանել ամեն ինչ\" (Copy and preserve everything) or \"Պատճենել բոլորը և պահպանել\" (Copy all and preserve)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -117,13 +111,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"모두 복사하여 보관\" (modu boksa haneun bogwan) while technically correct, doesn't fully capture the nuance of \"Copy and keep all\". \"모두 복사하여 보관\" translates to 'Copy all and store/keep'. It lacks the immediacy or emphasis of the original phrase. It sounds more formal and passive.",
-          "suggestion": "Consider alternatives like \"전부 복사해서 보관\" (jeonbu boksa haeseo bogwan - copy everything and keep) or \"모두 복사 후 보관\" (modu boksa hu bogwan - copy all then keep). Alternatively, \"전부 복사\" (jeonbu boksa - copy all) could be more concise, depending on the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -177,13 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"පිටපත් කර සියල්ල තබා ගන්න\" is a literal translation that sounds slightly unnatural in Sinhala. A more natural phrasing would be \"සියල්ල පිටපත් කර ගන්න\" or \"සියල්ල නමින් පිටපත් කරන්න\".",
-          "suggestion": "සියල්ල පිටපත් කර ගන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -232,6 +214,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Albanian translation 'të gjithë/a' refers to people (all of them/everyone) rather than objects/files. In the context of files, 'të gjitha' (feminine plural for 'files/skedarët') or 'të gjithë' (masculine plural) should be used, but 'të gjithë/a' is grammatically awkward for a UI button and implies people.",
+          "suggestion": "Kopjoni dhe ruani të gjitha"
+        }
+      ],
       "approved_at": null
     }
   }

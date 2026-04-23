@@ -3,7 +3,7 @@
   "content": "Upload picture",
   "content_en_sha1_hash": "0a024e54cb81f9e05f0faa90496774cb8e76dcae",
   "created_at": "2025-05-19T21:30:53.320Z",
-  "updated_at": "2026-03-20T09:07:45.709Z",
+  "updated_at": "2026-04-09T06:49:18.739Z",
   "comment": {
     "text": "Upload picture is a button label used to trigger uploading an image. It appears as a label on a UI element that allows users to select or upload images.",
     "is_auto": true,
@@ -81,7 +81,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The French word 'Télécharger' means 'to download'. For 'upload', the correct term is 'Téléverser' or 'Charger'.",
+          "suggestion": "Téléverser l'image"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -99,13 +105,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"画像のアップロード\" (Gazou no Appurodo) is technically correct, it's a very literal and slightly unnatural translation. A more natural phrasing would be something like \"写真のアップロード\" (Shashin no Appurodo) or simply \"アップロード\" (Appurodo).",
-          "suggestion": "写真のアップロード (Shashin no Appurodo) or アップロード (Appurodo)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -153,13 +153,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Încărcare imagine' is understandable, it's not the most natural Romanian translation for 'Upload picture'. 'Încărcare imagine' literally translates to 'Image loading'. A more common and idiomatic translation would be 'Încarcă imagine' or 'Încărcați o imagine'.",
-          "suggestion": "Încarcă imagine"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -189,13 +183,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Учитај слику\" is a literal translation of \"Upload picture\" but is not the typical or most natural way to express this action in Serbian. A more natural translation would be \"Отпреми слику\" or \"Убаци слику\". \"Учитај\" implies loading into memory, not uploading.",
-          "suggestion": "Отпреми слику"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -216,7 +204,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Передати зображення' is a literal translation of 'transmit image' and doesn't accurately convey the meaning of 'Upload picture'. It implies sending an image, not uploading it.",
+          "description": "The word 'Передати' means 'to transfer' or 'to hand over' (e.g., passing a physical object or transferring data), whereas 'Upload' in a UI context for files should be 'Завантажити'.",
           "suggestion": "Завантажити зображення"
         }
       ],
@@ -232,6 +220,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Albanian translation 'Ngarkoni pikturën' means 'Upload THE picture' (definite article), whereas the English source 'Upload picture' is a general action command. In UI button labels, the definite article makes it sound like a specific, previously mentioned picture rather than a general action.",
+          "suggestion": "Ngarkoni foto"
+        }
+      ],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "Review",
   "content_en_sha1_hash": "e29a79fe0c349724caeaa1762fa917f5543248ca",
   "created_at": "2025-05-19T21:30:47.938Z",
-  "updated_at": "2026-03-31T15:18:46.228Z",
+  "updated_at": "2026-04-08T01:03:49.873Z",
   "comment": {
     "text": "This translation key is used to display the label \"Review\" in various UI elements, such as filters and sharing settings. It appears in sections like room filters and share settings, indicating a specific type of room that allows users to review content.",
     "is_auto": true,
@@ -87,13 +87,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech translation \"Prověřit\" while technically meaning 'to verify' or 'to check', doesn't fully capture the nuance of 'Review' in the context of a feature or product. 'Review' often implies a more comprehensive and detailed assessment. \"Prověřit\" can sound more like a quick check.",
-          "suggestion": "Consider alternative translations like \"Recenze\" (more accurate for a formal review) or \"Zhodnocení\" (evaluation/assessment) depending on the specific context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -111,13 +105,25 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'Review' in this context refers to a noun (a type of room/permission), whereas 'Revisar' is a verb (to review). In UI labels for room types and access rights, the noun 'Revisión' is more accurate.",
+          "suggestion": "Revisión"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Arvostelu' typically means a 'review' in the sense of a critique or a rating (like a product review). In the context of ONLYOFFICE DocSpace (ReviewRoom, ShareRights.Review), it refers to a permission level or a room type for reviewing/checking documents. In Finnish UI contexts for document workflows, 'Tarkastelu' is the correct term for the action of reviewing/inspecting content.",
+          "suggestion": "Tarkastelu"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -132,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Նախադիտել\" (Nahaditel) translates to \"Preview\" rather than \"Review\". While similar, they have distinct meanings. \"Review\" implies a critical assessment, whereas \"Preview\" means to view something before it's fully available.",
-          "suggestion": "Consider \"Արձագանք\" (Arzagank) or \"Մեկնաբանություն\" (Mekanabanut’yun) for a more accurate translation of 'Review'."
+          "description": "The Armenian word 'Նախադիտել' (Nakhaditel) means 'to preview' or 'to pre-view'. In the context of 'ReviewRoom' and 'ShareRights.Review', the English 'Review' refers to the permission or mode to 'examine/check/evaluate' (e.g., commenting or auditing), not just a preview. 'Նախադիտում' or 'Վերանայում' would be more appropriate for a review mode/right.",
+          "suggestion": "Վերանայում"
         }
       ],
       "approved_at": null
@@ -183,13 +189,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Portuguese translation \"Rever\" is not the most accurate or natural translation of \"Review\". While \"Rever\" is a verb meaning 'to review' or 'to reconsider', \"Review\" as a noun typically translates to \"análise\", \"avaliação\", or \"opinião\".",
-          "suggestion": "Consider using \"análise\", \"avaliação\", or \"opinião\" as alternatives."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -246,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Ön izleme' translates to 'preview' or 'advance screening', not 'review'. While it's related to a review process, it's not a direct translation.",
-          "suggestion": "Consider 'İnceleme', 'Değerlendirme', or 'Gözden Geçirme' for a more accurate translation of 'Review'."
+          "description": "The translation 'Ön izleme' means 'Preview'. In the context of room types (ReviewRoom) and sharing rights (ShareRights.Review), the correct meaning is 'İnceleme' (the act of reviewing/inspecting content).",
+          "suggestion": "İnceleme"
         }
       ],
       "approved_at": null
@@ -255,7 +255,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'Review' in this context refers to a noun (a type of room/access level), whereas 'Перевірити' is a verb meaning 'to check' or 'to verify'. In UI filters and sharing settings, it should be a noun.",
+          "suggestion": "Огляд"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -267,13 +273,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'审阅' is a formal and somewhat archaic term for 'review'. While not strictly incorrect, it may sound overly formal or stilted in modern contexts. '评论' or '评价' might be more natural and common translations for 'Review' depending on the intended nuance.",
-          "suggestion": "Consider '评论' or '评价' as alternatives, or clarify the intended meaning of 'Review' to determine the most appropriate translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

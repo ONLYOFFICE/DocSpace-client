@@ -3,7 +3,7 @@
   "content": "JPG, PNG or SVG, 32x32",
   "content_en_sha1_hash": "1baf4b76e0d607b049dde3a0f3e90399140b17e4",
   "created_at": "2025-05-19T21:30:53.905Z",
-  "updated_at": "2026-03-26T08:26:58.169Z",
+  "updated_at": "2026-04-07T19:35:05.164Z",
   "comment": {
     "text": "This translation key is used to describe file formats and sizes that are accepted as icons. It appears on a form component in the OAuth settings page, guiding users on what types of images can be uploaded as icons.",
     "is_auto": true,
@@ -27,18 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The dimensions '32x32' are incorrectly represented as '3232x' in the Arabic translation. This creates a nonsensical dimension.",
-          "suggestion": "JPG أو PNG أو SVG، بحجم 32x32"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The concatenation of the numbers '32' creates an incorrect representation of the required dimensions. It loses the 'x' character which separates width and height.",
-          "suggestion": "JPG أو PNG أو SVG، بحجم 32 × 32"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -68,13 +57,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation 'JPG, PNG ή SVG, 32x32' is a direct transliteration and doesn't accurately convey the meaning of 'or' in the context of supported file types.  'ή' is a simple 'or' connector. A more natural Greek phrasing would be needed to reflect the 'acceptable formats' meaning.",
-          "suggestion": "JPG, PNG και SVG, 32x32"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -134,13 +117,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Dutch translation uses 'of' instead of 'of'. While understandable, 'of' is not the correct preposition in this context. It should be 'of' to mirror the original.",
-          "suggestion": "JPG, PNG of SVG, 32x32"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -176,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Sinhala translation maintains the same formatting as the English content. While technically correct, it might be more natural to add a punctuation mark (e.g., a comma or period) after 'SVG' to improve readability in Sinhala. However, this is a minor stylistic preference and doesn't constitute an error.",
-          "suggestion": "Consider adding a punctuation mark after 'SVG', e.g., 'JPG, PNG හෝ SVG, 32x32.' or 'JPG, PNG හෝ SVG, 32x32'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -200,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'или' (ili) is used for 'or' in Serbian, but in this context, 'ili' should be 'ili'.",
-          "suggestion": "JPG, PNG или SVG, 32x32"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

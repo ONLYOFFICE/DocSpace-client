@@ -3,7 +3,7 @@
   "content": "No records found",
   "content_en_sha1_hash": "96f4f9b2d6ff4a7e639152ace9aeefde1231d331",
   "created_at": "2025-05-19T21:30:54.896Z",
-  "updated_at": "2025-09-22T10:04:13.866Z",
+  "updated_at": "2026-04-07T19:35:05.118Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that no records were found, typically appearing on an \"Empty\" screen in a UI, such as a data visualization or search results section. It provides context to users when no relevant data is available.",
     "is_auto": true,
@@ -87,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Գրառումները չեն գտնվել' while technically understandable, isn't the most natural or idiomatic way to say 'No records found' in Armenian. It translates literally as 'The records were not found'.",
-          "suggestion": "A more natural and idiomatic translation would be something like 'չկան գրանցումներ' (ch'kan granacumner) or 'ոչինչ չկայաց' (nochich ch'kayac)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -165,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'වාර්තා කිසිවක් හමු නොවීය.' is a literal translation and doesn't flow naturally in Sinhala. A more common and natural phrasing would be something like 'දත්ත කිසිවක් හමු නොවීය' or 'නොරොක් දත්ත හමු නොවීය'.",
-          "suggestion": "Consider using 'දත්ත කිසිවක් හමු නොවීය' or 'නොරොක් දත්ත හමු නොවීය'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

@@ -3,7 +3,7 @@
   "content": "Account name is empty",
   "content_en_sha1_hash": "bc7fcc32b6bbe8a24d9fe8f945809e85db12bdce",
   "created_at": "2025-05-26T07:15:46.227Z",
-  "updated_at": "2026-03-26T08:26:58.120Z",
+  "updated_at": "2026-04-08T02:38:54.983Z",
   "comment": {
     "text": "The \"Account name is empty\" translation key indicates that an account name field should be filled in. It appears on a UI element where users can rename portals and appears when the input field is left blank. Translators should replace the existing English content with their own language equivalent.",
     "is_auto": true,
@@ -87,7 +87,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is grammatically incomplete in French. It lacks the definite article 'Le', which is necessary for a natural and correct error message in this context.",
+          "suggestion": "Le nom du compte est vide"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -117,7 +123,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ບັນຊີ ຊື່ ແມ່ນ ເປົ່າ' is grammatically awkward and translates literally to 'Account name is empty' in a way that sounds like 'Account name is a void/emptiness'. In a UI context for a validation error, it should state that the name is missing or not entered.",
+          "suggestion": "ຊື່ບັນຊີວ່າງເປົ່າ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -141,7 +153,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Não colocou um nome para a conta' (You didn't put a name for the account) is phrased as a personal accusation/statement directed at the user, whereas the English 'Account name is empty' is a neutral system validation message. In UI/UX, error messages should describe the state of the field rather than the user's action.",
+          "suggestion": "O nome da conta está vazio"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -153,7 +171,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'necompletată' means 'incomplete' or 'not filled out', whereas the English 'empty' specifically refers to the field being blank/null. In a UI validation context, 'empty' is more accurately translated as 'gol'.",
+          "suggestion": "Numele contului este gol"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -211,6 +235,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,10 +3,12 @@
   "EmptyFormGalleryScreenDescription": "Ni bilo mogoče najti rezultatov, ki bi ustrezali vaši poizvedbi",
   "ErrorViewDescription": "Prosimo, poskusite kasneje",
   "ErrorViewDescriptionNetworkError": "Zdi se, da interneta ni na voljo",
-  "SuggestChanges": "Predlagaj spremembe",
-  "TemplateInfo": "Informacije o predlogi",
-  "ViewAllTemplates": "Poglej vse predloge",
   "ErrorViewHeader": "Galerija je trenutno nedostopna.",
   "SelectTemplate": "Izberi predlogo",
-  "UploadGallery": "Naložite v Galerijo"
+  "SuggestChanges": "Predlagaj spremembe",
+  "TemplateInfo": "Informacije o predlogi",
+  "UploadGallery": "Naložite v Galerijo",
+  "ViewAllTemplates": "Poglej vse predloge",
+  "GalleryTitle": "Galerija predlogov {{organizationName}}",
+  "SubmitToGalleryDialogMainInfo": "Pošljite svoj predložak v javno galerijo, da ga drugi lahko uporabijo v svojem delu. Ko preide predložak revizijo, vas bomo obvestili in nagradili za vaš prispevek."
 }

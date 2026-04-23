@@ -3,7 +3,7 @@
   "content": "Restore",
   "content_en_sha1_hash": "3cbe6d6b9a8d1596bb5bca12e14d81c9e108a1a3",
   "created_at": "2025-05-26T07:15:46.895Z",
-  "updated_at": "2026-03-26T08:26:58.102Z",
+  "updated_at": "2026-04-08T01:23:47.811Z",
   "comment": {
     "text": "This translation key \"Common:RestoreBackup\" is used to display the text \"Restore\" on a UI element, likely a button or link, that allows users to restore backups in the data management section of a portal settings page. The text should be clear and concise, indicating the action's purpose without revealing sensitive information.",
     "is_auto": true,
@@ -18,19 +18,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 226,
-      "context": "return t(\"ManagementCategoryDataManagement\");\n case \"LdapSettings\":\n return t(\"Ldap:LdapSettings\");\n case \"LdapSyncTitle\":\n return t(\"Ldap:LdapSyncTitle\");\n case \"Common:RestoreBackup\":\n return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":\n return t(\"PortalDeletion\", { productName: t(\"Common:ProductName\") });\n case \"Common:DeveloperTools\":\n return t(\"Common:DeveloperTools\");",
+      "line_number": 222,
+      "context": "return t(\"ManagementCategoryDataManagement\");\n case \"LdapSettings\":\n return t(\"Ldap:LdapSettings\");\n case \"LdapSyncTitle\":\n return t(\"Ldap:LdapSyncTitle\");\n case \"Common:RestoreBackup\":\n return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":\n return t(\"PortalDeletion\", { productName: t(\"Common:ProductName\") });\n case \"Common:Bonus\":\n return t(\"Common:Bonus\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 307,
+      "line_number": 324,
       "context": "{\n id: \"portal-settings_catalog-restore\",\n key: \"3\",\n type: PageType.restore,\n link: \"restore\",\n tKey: \"Common:RestoreBackup\",\n isHeader: true,\n children: [\n {\n key: \"3-0\",\n icon: \"\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 307,
+      "line_number": 324,
       "context": "{\n id: \"portal-settings_catalog-restore\",\n key: \"3\",\n type: PageType.restore,\n link: \"restore\",\n tKey: \"Common:RestoreBackup\",\n isHeader: true,\n children: [\n {\n key: \"3-0\",\n icon: \"\",",
       "module": "/packages/client"
     },
@@ -75,25 +75,49 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English word 'Restore' is a verb (action), whereas the German translation 'Datenwiederherstellung' is a noun (the process/concept). For a UI button or link, the imperative verb 'Wiederherstellen' should be used to match the intent of the action.",
+          "suggestion": "Wiederherstellen"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English source is 'Restore', but the Greek translation 'Επαναφορά Δεδομένων' means 'Restore Data'. While contextually accurate, it adds the word 'Data' which is not present in the source string, potentially causing UI overflow or inconsistency with other single-word actions.",
+          "suggestion": "Επαναφορά"
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English source is a verb/action ('Restore'), but the Spanish translation is a noun phrase ('Restauración de datos' - Data restoration). In a UI context for a button or link, the verb form is required.",
+          "suggestion": "Restaurar"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Tiedon Palautus' (Data Restoration) is a noun phrase, whereas the English 'Restore' is a verb/action. In a UI context for a button or link, the verb form is required.",
+          "suggestion": "Palauta"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -105,7 +129,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Տվյալների վերականգնում' means 'Data restoration' (a noun phrase), whereas the English source 'Restore' is a verb/action command. For a UI button or link, the imperative verb form is required.",
+          "suggestion": "Վերականգնել"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -123,13 +153,25 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English source is 'Restore', but the Korean translation '데이터 복원' (Data Restore) adds the word 'Data'. While contextually accurate, it is an expansion of the original single-word command.",
+          "suggestion": "복원"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ຂໍ້ມູນ ຟື້ນຟູ' means 'Data Restore' or 'Restore Data'. The English source is simply 'Restore'. While contextually related to backups, adding 'ຂໍ້ມູນ' (Data) changes the concise nature of the UI button/title.",
+          "suggestion": "ຟື້ນຟູ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -141,19 +183,37 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text is a verb ('Restore') representing an action, whereas the Dutch translation is a noun ('Dataherstel' meaning 'Data recovery'). For a UI button or link, the verb form is required.",
+          "suggestion": "Herstellen"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text 'Restore' is a verb (action), whereas the Polish translation 'Odzyskiwanie danych' is a noun phrase meaning 'Data recovery'. For a UI button or header, the imperative verb form is required.",
+          "suggestion": "Przywróć"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English source is 'Restore', but the Portuguese translation 'Restaurar Dados' adds the word 'Dados' (Data). While contextually related, the translation adds information not present in the source string, which may lead to UI inconsistency if the English string is used in other contexts.",
+          "suggestion": "Restaurar"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -165,7 +225,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Restaurarea datelor' (Data restoration) is a noun phrase, whereas the English 'Restore' is a verb/action command. In a UI context for a button or link, the imperative verb form is required.",
+          "suggestion": "Restaurare"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -177,7 +243,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala word 'ප්‍රත්‍යර්පණය' (Prathyarpanya) is a highly formal/academic term often used for 'restitution' or 'reimbursement' in legal or complex contexts. For a UI button intended to 'Restore' a backup, it is overly complex and unnatural. A more standard UI term for restoring data/backups is needed.",
+          "suggestion": "පුනර්ස්ථාපනය කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -213,7 +285,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English source is 'Restore', but the Ukrainian translation 'Відновити дані' adds 'дані' (data). While contextually accurate, it deviates from the concise single-word command requested for a UI element like a button or title.",
+          "suggestion": "Відновити"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -223,6 +301,18 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text is a single verb 'Restore', whereas the Chinese translation '数据恢复' means 'Data Recovery' (a noun). For a UI button or action, it should be a verb.",
+          "suggestion": "恢复"
+        }
+      ],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

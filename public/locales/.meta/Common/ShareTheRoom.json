@@ -3,7 +3,7 @@
   "content": "the room",
   "content_en_sha1_hash": "47a42f9a1dbc2961c03e3f7866f26a097ca7e7ef",
   "created_at": "2025-08-26T11:15:00.756Z",
-  "updated_at": "2026-02-19T13:36:33.115Z",
+  "updated_at": "2026-04-07T23:09:07.589Z",
   "comment": {
     "text": "This key displays the text \"Share the room\" when sharing a room item. It appears as part of a sharing option, likely indicating the item being shared is a room. Translators should ensure the wording accurately conveys the action of sharing access to a room.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'oтаğ' is a mix of Latin and Cyrillic characters and is not a valid Azerbaijani word. The correct word for 'the room' in Azerbaijani is 'otağı'.",
+          "suggestion": "otağı"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -51,7 +57,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English text includes the definite article 'the', which is missing in the German translation. In the context of 'Share the room', 'den Raum' is required to maintain the grammatical structure and meaning.",
+          "suggestion": "den Raum"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -63,13 +75,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'la sala' can mean 'the room', it's more accurately 'the living room' or 'the room' in a more formal setting. 'La habitación' is a more direct translation of 'the room' in a general sense.",
-          "suggestion": "Consider using 'la habitación' for a more general translation of 'the room'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -81,13 +87,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'la salle' is a possible translation of 'the room', it's not the most natural or universally applicable. 'La salle' typically refers to a specific room, like a classroom or meeting room. 'The room' can be more generic.",
-          "suggestion": "Consider 'la pièce' as a more general translation of 'the room'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -129,7 +129,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The translation 'kamer' is missing the definite article 'de', which is necessary to match the meaning of 'the room' in this context.",
+          "suggestion": "de kamer"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -189,25 +195,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'соба' does not accurately translate 'the room'. 'Соба' means 'room' in Serbian but misses the definite article 'the'.",
-          "suggestion": "The correct translation should include the definite article. A suitable translation would be 'собa'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'the room' translates to 'soba' is not entirely accurate. 'Soba' can mean room, but depending on the context, 'soba' might be ambiguous. A more accurate translation would depend on the specific type of room being referred to (e.g., 'prostorija' for a general room, 'sala' for a hall, 'komora' for a chamber).",
-          "suggestion": "Consider context. Alternatives: prostorija, sala, komora.  If 'soba' is suitable, ensure context supports it."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

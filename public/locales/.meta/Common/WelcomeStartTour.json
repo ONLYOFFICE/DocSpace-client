@@ -3,7 +3,7 @@
   "content": "Take a tour",
   "content_en_sha1_hash": "b245023902dcb919c6f7e365c884a616fd86bd76",
   "created_at": "2026-03-31T15:18:27.035Z",
-  "updated_at": "2026-03-31T15:18:27.035Z",
+  "updated_at": "2026-04-07T20:01:01.794Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -32,13 +32,25 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Bulgarian translation 'Изследване' means 'Research' or 'Exploration', which does not accurately convey the call-to-action 'Take a tour' (an introductory walkthrough).",
+          "suggestion": "Разгледайте"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation 'Prohlédnout si' is an infinitive verb phrase meaning 'To view' or 'To look at', whereas 'Take a tour' implies an action or a guided experience. It lacks the imperative or noun-based nuance of 'taking a tour'.",
+          "suggestion": "Prohlédnout si prohlídku"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -62,7 +74,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The translation 'Tutki' means 'Explore' or 'Examine', which misses the 'tour' aspect of the original phrase.",
+          "suggestion": "Käy kierroksella"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -74,7 +92,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'Զբոսաշրջություն սկսել' means 'To start tourism' or 'Start a tour (as in travel/vacation)', which is incorrect for a software UI context. In software, 'Take a tour' refers to a product walkthrough or guided tutorial.",
+          "suggestion": "Ծանոթացեք հնարավորություններին"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -98,13 +122,25 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ທຳທ່ຽວ' means 'to go traveling' or 'to go on a vacation', which is incorrect for a UI context. In a software UI, 'Take a tour' refers to a guided walkthrough of the features.",
+          "suggestion": "ສຳຫຼວດການນຳໃຊ້"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation 'Pārliecinieties' means 'Make sure' or 'Ensure', which is a completely different meaning from 'Take a tour'.",
+          "suggestion": "Ejiet ekspedīcijā"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -134,7 +170,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The translation 'Explorează' (Explore) is too broad and misses the specific concept of a 'tour' (a guided walkthrough or sequence of steps).",
+          "suggestion": "Fă un tur"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -158,7 +200,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovenian translation 'Prevedite turnej' means 'Translate the tournament', which is completely different from the English 'Take a tour' (which implies a guided walkthrough of the interface).",
+          "suggestion": "Prehodite skozi vodnik"
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {

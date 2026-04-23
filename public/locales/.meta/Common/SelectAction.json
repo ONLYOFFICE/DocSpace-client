@@ -3,7 +3,7 @@
   "content": "Select",
   "content_en_sha1_hash": "8598222918d3c6e513d63060cf55e2971ded729a",
   "created_at": "2025-05-19T21:30:48.355Z",
-  "updated_at": "2026-03-31T15:18:45.974Z",
+  "updated_at": "2026-04-10T08:21:04.291Z",
   "comment": {
     "text": "This translation key is used to display a label for selecting an action, such as choosing a file or folder, in various UI elements. It appears in a placeholder position within a dialog and on a component that handles file selection. Translators should provide a descriptive text that indicates the user's ability to make a choice.",
     "is_auto": true,
@@ -113,14 +113,8 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/shared/transaction-history/index.tsx",
-      "line_number": 671,
-      "context": "<PeopleSelector\n withCancelButton\n onCancel={onCloseContactSelector}\n cancelButtonLabel=\"\"\n disableSubmitButton={false}\n submitButtonLabel={t(\"Common:SelectAction\")}\n onSubmit={onSubmitContactSelector}\n withHeader\n headerProps={{\n onCloseClick: onCloseContactSelector,\n isCloseable: true,",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2018,
+      "line_number": 2017,
       "context": "const optionsModel = [\n {\n id: \"option_select\",\n key: \"select\",\n label: t(\"Common:SelectAction\"),\n icon: CheckBoxReactSvgUrl,\n onClick: () => this.onSelect(item),\n disabled: false,\n },\n withOpen && {",
       "module": "/packages/client"
     },
@@ -189,7 +183,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Seçmək' is an infinitive verb ('To select'), whereas the English 'Select' in this UI context (button label/action) should be an imperative verb ('Select').",
+          "suggestion": "Seç"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -297,13 +297,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation \"Selectare\" isn't the most natural or common translation for \"Select\" in this context. \"Selectare\" is technically correct as a verb (to select), but \"Select\" is usually translated as \"Selectare\" or simply \"Select\" in UI contexts.",
-          "suggestion": "Consider using \"Select\" or \"Selecție\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -315,25 +309,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'තෝරන්න' (thoranna) means 'to select' or 'to choose', it's more of an action word. 'Select' as a label on a UI element is better conveyed by a more noun-like translation. A better option would be 'ఎంపిక' (emhika) which means 'selection' or 'choice'.",
-          "suggestion": "ఎంపిక (emhika)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Vyberať' is a possible translation for 'Select', it implies the action of selecting repeatedly or choosing from a set of options. 'Select' in this context, especially as a label or button text, often refers to a single, definitive choice. A more accurate and commonly used translation would be 'Výber' (Selection) or 'Zvoliť' (To choose).",
-          "suggestion": "Consider using 'Výber' or 'Zvoliť' depending on the specific context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -345,13 +327,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Изабери' translates to 'Choose' or 'Pick', not 'Select'. While similar, 'Select' has a more specific meaning in a user interface context.",
-          "suggestion": "Consider 'Одабери' (Odaberi) which more closely aligns with the meaning of 'Select' in a UI context, or 'Изабери' if 'Choose' is acceptable within the application's design."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -379,6 +355,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

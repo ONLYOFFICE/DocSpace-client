@@ -3,7 +3,7 @@
   "content": "This is a ready-made form template that you can use as a starting point for your document. Pick it, customize the fields to match your needs, then share it for filling. Completed forms are saved to My Forms where you can review, download, or process them with AI agents.",
   "content_en_sha1_hash": "b2d5dbe0b1bfcfe8325bca8df1aae536f937e2f5",
   "created_at": "2026-03-31T15:18:15.154Z",
-  "updated_at": "2026-03-31T15:18:15.154Z",
+  "updated_at": "2026-04-08T05:58:03.281Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -50,7 +50,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Grammatical gender mismatch in Greek: 'Αυτή είναι ένα έτοιμο πρότυπο φόρμα' is incorrect. 'Πρότυπο' is neuter, so it should be 'Αυτό είναι ένα έτοιμο πρότυπο φόρμα'.",
+          "suggestion": "Αυτό είναι ένα έτοιμο πρότυπο φόρμα που μπορείτε να χρησιμοποιήσετε ως σημείο εκκίνησης για το έγγραφό σας. Επιλέξτε το, προσαρμόστε τα πεδία ώστε να ταιριάζουν με τις ανάγκες σας, και στη συνέχεια μοιραστείτε το για συμπλήρωση. Οι συμπληρωμένες φόρμες αποθηκεύονται στα My Forms όπου μπορείτε να τις ελέγξετε, να τις κατεβάσετε ή να τις επεξεργαστείτε με βοηθούς ΤΝ (AI agents)."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -152,7 +158,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'hotovo vypracovaná' is grammatically incorrect in Slovak; it should be 'hotová' or 'vopred vypracovaná'. Additionally, 'výchoší' is a typo for 'výchozí' (Czech) or 'výchozí bod' (Slovak uses 'východiskový bod').",
+          "suggestion": "Toto je hotová šablóna formulára, ktorú môžete použiť ako východiskový bod pre váš dokument. Vyberte ju, prispôsobte políčka podľa vašich potrieb a potom ju zdieľajte na vyplnenie. Vyplnené formuláre sa ukladajú do Moje formuláre, kde ich môžete prehliadať, stiahnuť alebo spracovať pomocou AI agentov."
+        }
+      ],
       "approved_at": null
     },
     "sl": {

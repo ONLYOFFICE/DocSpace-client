@@ -2,7 +2,6 @@
   "AuthViaNTLM": "Autorizare prin NTLM",
   "EnableSSL": "Activare autentificare unică",
   "EnterDomain": "Introduceți domeniul",
-  "EnterEmail": "Introduceți adresa de e-mail",
   "EnterLogin": "Introduceți nume de conectare",
   "EnterPort": "Introduceți numărul de port",
   "Host": "Gazdă",

@@ -3,7 +3,7 @@
   "content": "No results match this filter. Try a different one or clear filter to view all items.",
   "content_en_sha1_hash": "27002996de1d43e168e2639dc22f37e3c277047d",
   "created_at": "2025-05-19T21:30:49.777Z",
-  "updated_at": "2025-09-22T10:04:13.945Z",
+  "updated_at": "2026-04-08T19:48:54.034Z",
   "comment": {
     "text": "This translation key is used to display a message when filtering results do not match any items. It appears as a tooltip or button label on a clear filter button in a UI component, prompting users to try again or remove the filter.",
     "is_auto": true,
@@ -30,13 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation 'لا تتطابق نتائج البحث مع هذه المدخلات. حاول مدخلات أخرى أو قم بمسح المدخلات لمعاينة جميع العناصر.' doesn't accurately convey the meaning of 'No results match this filter. Try a different one or clear filter to view all items.'.  'مدخلات' (madkhalat) translates to 'inputs' or 'entries,' which isn't the intended meaning of 'filter'.  The overall phrasing is also a bit awkward and not idiomatic.",
-          "suggestion": "لا توجد نتائج مطابقة لهذا الفلتر. حاول فلترًا آخر أو امسح الفلتر لعرض جميع العناصر."
-        },
-        {
-          "type": "formatting",
-          "description": "The Arabic translation uses a mixture of transliteration (filter) and Arabic words. While not inherently wrong, consistency would improve readability. Replacing 'فلتر' with its Arabic equivalent would be better.",
-          "suggestion": "لا توجد نتائج مطابقة لهذا الفلتر. حاول فلترًا آخر أو امسح الفلتر لعرض جميع العناصر."
+          "description": "The Arabic translation uses 'مدخلات' (inputs/entries) instead of 'مرشحات' (filters). This changes the meaning from 'filter' to 'input', which is technically inaccurate for a filtering UI component.",
+          "suggestion": "لا تتطابق أي نتائج مع هذا المرشح. جرب مرشحًا آخر أو امسح المرشح لعرض جميع العناصر."
         }
       ],
       "approved_at": null
@@ -80,13 +75,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'kohteet' (items) is a bit formal and may not be the most natural translation of 'items' in this context. A more conversational term like 'tuotteet' (products) or simply removing it might be preferable.",
-          "suggestion": "Ei tuloksia, jotka vastaavat tätä suodatinta. Kokeile erilaista tai tyhjennä suodatin nähdäksesi kaikki."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -101,13 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Փորձեք մեկ այլ կամ մաքուր զտիչ' is awkward. 'Կամ' implies an either/or, but the intent is to suggest either a different filter or clearing the existing one.",
-          "suggestion": "Փորձեք մեկ այլ զտիչ կամ մաքրեք ներկայիս զտիչը"
-        },
-        {
-          "type": "formatting",
-          "description": "The sentence structure is slightly long and could benefit from better flow. Splitting it into two sentences would improve readability.",
-          "suggestion": "Ոչ մի արդյունք չի համապատասխանում այս ֆիլտրին։ Փորձեք մեկ այլ զտիչ կամ մաքրեք ներկայիս զտիչը՝ բոլոր տարրերը դիտելու համար։"
+          "description": "The phrase 'մաքուր զտիչ' (makur ztich) is a literal/calque translation of 'clear filter' that sounds unnatural in Armenian. In this context, 'clear' is a verb (to clear/remove), but the translation uses it as an adjective (clean/pure) or a noun phrase, making the sentence grammatically awkward and semantically unclear.",
+          "suggestion": "Ոչ մի արդյունք չի համապատասխանում այս ֆիլտրին: Փորձեք մեկ այլ կամ ջնջեք զտիչը՝ բոլոր տարրերը դիտելու համար:"
         }
       ],
       "approved_at": null
@@ -121,42 +105,19 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"このフィルターに一致する結果はありません。別のフィルタを試すか、フィルタをクリアしてすべてのアイテムを表示します。\" is a literal translation but sounds slightly unnatural in Japanese. A more natural phrasing would emphasize 'if you want to see all items'.",
-          "suggestion": "このフィルターに一致する結果はありません。別のフィルタを試すか、フィルタをクリアしてすべてのアイテムを表示できます。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase '다른 항목을 사용하거나' is not the best translation for 'Try a different one'. It literally translates to 'use another item' which sounds awkward in this context. It should convey 'try a different filter'.",
-          "suggestion": "다른 필터를 사용하거나"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase '필터를 삭제하세요' is a bit too direct for a user-friendly interface. '필터를 지우세요' or '필터를 해제하세요' would be more natural-sounding.",
-          "suggestion": "필터를 지우세요"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ຕົວກັ່ນຕອງ' has a spelling error. It should be 'ຕົວກັ່ນຕອງ'.",
-          "suggestion": "ຕົວກັ່ນຕອງ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -192,13 +153,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Filtru nu a produs rezultate' is a literal translation and sounds unnatural in Romanian. A more natural phrasing would be 'Niciun rezultat nu a fost găsit pentru acest filtru' or 'Nu s-au găsit rezultate pentru acest filtru'.",
-          "suggestion": "Nu s-au găsit rezultate pentru acest filtru."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -212,14 +167,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation of \"Try a different one\" is missing. The existing translation only addresses the \"No results match this filter\" and \"view all items\" portions.  It doesn't convey the suggestion to try a different filter.",
-          "suggestion": "මෙම පෙරහනට ගැළපෙන ප්‍රතිඵල නැත. වෙනත් පෙරහනක් උත්සාහ කරන්න, සියල්ල බැලීමට පෙරහන හිස් කරන්න."
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'අථක' is likely a misspelling. It should likely be 'අංගය' or 'අයිතමය' to properly convey 'items'.",
-          "suggestion": "මෙම පෙරහනට ගැළපෙන ප්‍රතිඵල නැත. සියලුම අයිතමය/අංගය බැලීමට පෙරහන හිස් කරන්න."
+          "type": "missing_content",
+          "description": "The translation omits the instruction 'Try a different one' (වෙනත් පෙරහනක් උත්සාහ කරන්න), which is a key part of the English sentence.",
+          "suggestion": "මෙම පෙරහනට ගැළපෙන ප්‍රතිඵල නැත. වෙනත් පෙරහනක් උත්සාහ කරන්න හෝ සියලුම අයිතම බැලීමට පෙරහන ඉවත් කරන්න."
         }
       ],
       "approved_at": null
@@ -239,18 +189,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'филтеру' is spelled incorrectly. It should be 'филтру'.",
-          "suggestion": "филтру"
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'ова филтеру' is grammatically awkward. It should be 'овом филтру'.",
-          "suggestion": "овом филтру"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -281,6 +220,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'ose të pastër' is grammatically incorrect and changes the meaning. 'Të pastër' means 'to clean' (adjective/noun), whereas the English 'clear filter' is a verb phrase. It should be 'pastroni filtrin' or 'hiqni filtrin'.",
+          "suggestion": "Asnjë rezultat nuk përputhet me këtë filtër. Provoni një tjetër ose pastroni filtrin për të parë të gjithë artikujt."
+        }
+      ],
       "approved_at": null
     }
   }

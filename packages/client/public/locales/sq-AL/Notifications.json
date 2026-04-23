@@ -12,5 +12,8 @@
   "SuccessConnected": "{{serviceName}} është lidhur me sukses si kanal njoftimi. Tani do të merrni përditësime atje.",
   "SuccessDisconnected": "{{serviceName}} është shkëputur me sukses. Njoftimet nuk do të dërgohen më atje.",
   "UsefulTips": "Këshilla të dobishme për {{productName}}",
-  "UsefulTipsDescription": "Merrni udhëzues të dobishëm rreth {{productName}}"
+  "UsefulTipsDescription": "Merrni udhëzues të dobishëm rreth {{productName}}",
+  "ActionsWithFilesDescription": "Etiketët do të nxjerrin në pah aktivitetin e skedarëve — ngarkimet, redaktimet ose ndarjet — në seksionet {{rooms}}, {{shared}}, {{documents}}, dhe {{aiAgents}}.",
+  "RoomsActivityDescription": "Merr njoftime e menjëhershme me email për skedarë/dosje të reja të ndara dhe aktivitet brenda {{rooms}} dhe {{aiAgents}} tuaj.",
+  "RoomUpdateNotify": "Përmbajtja e përbashkët, aktivitetet e {{rooms}} dhe {{aiAgents}}"
 }

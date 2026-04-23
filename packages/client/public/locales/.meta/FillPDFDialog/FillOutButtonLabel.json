@@ -3,7 +3,7 @@
   "content": "Fill in",
   "content_en_sha1_hash": "d20fc7ca1f2cd76352a54a4eafef3df897d87c84",
   "created_at": "2025-05-19T21:30:55.156Z",
-  "updated_at": "2025-05-26T07:57:32.307Z",
+  "updated_at": "2026-04-07T19:35:05.100Z",
   "comment": {
     "text": "The translation key \"FillOutButtonLabel\" is used to display the label on a button that prompts users to fill in information. In this case, it appears as part of a dialog titled \"FillPDFDialog\", where the user is prompted to fill in data.",
     "is_auto": true,
@@ -99,13 +99,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"작성: \" does not accurately convey the meaning of \"Fill in\". \"작성: \" translates to \"Writing:\" or \"Compose:\". \"Fill in\" implies completing a form, not necessarily writing something from scratch.",
-          "suggestion": "Consider alternatives like \"채우기\" (chaeugi - to fill) or \"작성하기\" (jaksyeonghagi - to write/compose\") depending on the specific context, or \"입력:\" (ipnyeok - input) to align better with form filling."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -147,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Completare' is a valid Romanian word, it doesn't perfectly capture the nuance of 'Fill in' in this context (specifically referring to filling out a form). It's more literal and less idiomatic.",
-          "suggestion": "Consider 'Completează' or 'Introdu datele' which are more commonly used for filling out forms."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -183,25 +171,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Попуни' doesn't accurately convey the meaning of \"Fill in\". While it literally means 'fill up', in the context of a form, 'Fill in' implies completing the fields. A more appropriate translation would be 'Испуни' (Ispuni) or 'Унеси' (Unesi).",
-          "suggestion": "Испуни"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Popuni' can mean 'fill in', it's not the most natural or common translation of 'Fill in' in the context of a button label for a PDF form. A more accurate and user-friendly translation would be 'Ispuni'.",
-          "suggestion": "Ispuni"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

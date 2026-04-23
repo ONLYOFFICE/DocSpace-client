@@ -3,7 +3,7 @@
   "content": "Badges",
   "content_en_sha1_hash": "2c578dc888bc9805915a1839502adddce2592af7",
   "created_at": "2025-05-19T21:30:54.078Z",
-  "updated_at": "2025-12-15T14:04:24.012Z",
+  "updated_at": "2026-04-07T19:35:05.158Z",
   "comment": {
     "text": "The \"Badges\" translation key is used to display a label for user profile notifications related to achievements or rewards. This text appears on a notification component in the user's profile section.",
     "is_auto": true,
@@ -81,25 +81,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation \"Տեղեկաքարտ\" translates to 'Information card' or 'Information plaque,' which is not an accurate translation of \"Badges.\" 'Badges' refers to a visual indicator of achievement or status, often displayed as an icon or emblem.",
-          "suggestion": "Possible suggestions include: 'Մարքեր' (Markers), 'Շքանշաններ' (Medals/Awards), or a more contextual translation depending on the specific meaning of 'Badges' in the application."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The singular form 'Badge' is used when the English key 'Badges' is plural. This implies multiple badges are being referred to.",
-          "suggestion": "Consider using the Italian plural form, 'Badge' (plural) or a more accurate translation depending on the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -123,13 +111,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation \"Žetoni\" translates to 'tokens' or 'chips' and doesn't accurately convey the meaning of 'badges' in the context of notifications. 'Badges' refers to visual indicators of achievement or status.",
-          "suggestion": "Consider using \"Atzinības zīmes\" or \"Pagodinājumi\" which more accurately represent 'badges' in this context. Alternatively, a more literal but potentially less user-friendly translation could be 'Epruzetes'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -141,13 +123,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation \"Etykiety\" translates to \"Labels\" which is not the same as \"Badges\". While \"etykiety\" can sometimes be used in a similar context, it doesn't convey the intended meaning of a visual indicator of achievement or a count of unread notifications.",
-          "suggestion": "Consider alternatives like \"Odznaki\", \"Licznik powiadomień\", or a more context-dependent translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -177,25 +153,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'චිහ්න' (chihna) translates to 'sign' or 'mark' rather than 'badges'. 'Badges' typically refer to emblems or indicators of achievement. A more accurate translation would depend on the specific context, but options could include 'ත්‍යාගම්' (thyagam - awards), 'බැජ්' (badge - transliteration), or a descriptive phrase.",
-          "suggestion": "Consider 'ත්‍යාගම්' (thyagam - awards), 'බැජ්' (badge - transliteration), or a descriptive phrase conveying the meaning of achievement indicators."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation \"Menovky\" generally refers to \"name tags\" or \"labels\" rather than \"badges\" in the context of app notifications. A more accurate translation would convey the sense of a counter or indicator.",
-          "suggestion": "Zvonkohry (for bells or chimes), Počítadlá (counters), or possibly a more descriptive phrase depending on the precise visual representation of the badges."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -207,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Значке\" is a valid Serbian (Cyrillic) word, it's the genitive/dative plural form of 'значка' (badge). The correct nominative plural form, which is generally preferred for labels and UI elements, would be \"Значице\".",
-          "suggestion": "Значице"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -243,13 +201,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"弹窗\" (tan chuang) means \"pop-up window\" and doesn't accurately represent the meaning of \"Badges\" in the context of notifications. \"Badges\" typically refers to a visual indicator (like a number) on an icon representing the number of unread notifications.",
-          "suggestion": "Consider alternatives like \"徽章\" (hui zhang), which translates to \"badge,\" or a more descriptive phrase that conveys the concept of a notification indicator, like \"通知数\" (tongzhi shu, 'notification count')."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

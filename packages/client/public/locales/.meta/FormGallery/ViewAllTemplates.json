@@ -3,7 +3,7 @@
   "content": "View all templates",
   "content_en_sha1_hash": "3a859c9aaad47200c7553fa022222df53e96715a",
   "created_at": "2025-05-19T21:30:55.125Z",
-  "updated_at": "2026-03-20T09:07:45.457Z",
+  "updated_at": "2026-04-07T19:35:05.103Z",
   "comment": {
     "text": "The \"ViewAllTemplates\" translation key is used to display a label that shows all templates. It appears as a dropdown item in a category filter on desktop views and mobile view of the same page, allowing users to select all available templates.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"إظهار كافة القوالب\" is understandable, a more natural and common translation for \"View all templates\" would be \"عرض جميع القوالب\" or \"رؤية جميع القوالب\". \"إظهار\" (ʾiẓhār) implies 'displaying' something that wasn't previously visible, whereas 'عرض' (ʿarḍ) or 'رؤية' (ruʾya) are more general for showing or viewing.",
-          "suggestion": "عرض جميع القوالب"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -87,13 +81,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'templates' is translated as 'formulaires'. While 'formulaires' can mean forms, 'templates' implies a pre-designed structure or framework, which is not perfectly conveyed by 'formulaires'. A more accurate translation might be 'modèles' or 'patrons'.",
-          "suggestion": "Consider using 'modèles' or 'patrons' instead of 'formulaires'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -105,13 +93,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Visualizzare' can mean 'View', in this context, 'Vedere' would be a more natural and common translation for 'View'. 'Visualizzare' often implies a more complex process like visualizing data or a complex image.",
-          "suggestion": "Vedere tutti i modelli"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -177,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"සියලුම අච්චු පෙන්වන්න\" is a literal translation of 'all molds show'. While understandable, it's not the most natural or idiomatic way to say 'View all templates' in Sinhala. \"Templates\" often refers to pre-designed layouts or formats.",
-          "suggestion": "Possible better translations include: \"සියලුම සාම්පල බලන්න\" (Siyaalluma saampala balanna - View all samples), \"සියලුම නිර්මාණ බලන්න\" (Siyaalluma nirmaana balaanna - View all designs) or \"සියලුම ආකර බලන්න\" (Siyaalluma aakara balaanna - View all formats)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -231,13 +207,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"查看模板大全\" is understandable, a more natural and direct translation of 'View all templates' would be '查看所有模板'. '模板大全' implies a comprehensive collection, which isn't necessarily the meaning of 'all templates'.",
-          "suggestion": "查看所有模板"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

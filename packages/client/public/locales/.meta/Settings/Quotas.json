@@ -3,7 +3,7 @@
   "content": "Quotas",
   "content_en_sha1_hash": "34ed58657019e0ff061ea2eef787a27a97813fe2",
   "created_at": "2025-05-19T21:30:52.354Z",
-  "updated_at": "2026-02-19T13:36:32.950Z",
+  "updated_at": "2026-04-09T01:49:37.174Z",
   "comment": {
     "text": "The translation key \"Quotas\" corresponds to a title that displays storage management quotas. It is used in the \"Storage Management\" category of the Portal Settings page, appearing as a main title on screen, likely in a section header or button label.",
     "is_auto": true,
@@ -57,7 +57,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek word 'Ποσοστώσεις' means 'Percentages'. In the context of storage management, 'Quotas' refers to limits or allocations (Όρια or Διαθέσιμα), not mathematical percentages.",
+          "suggestion": "Όρια"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -90,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Italian translation \"Quote\" is not an accurate translation of \"Quotas\". \"Quotas\" refers to limits or restrictions, while \"Quote\" means quotation or price.",
-          "suggestion": "Consider translations like \"Limiti\", \"Quote\", or \"Massimi\" depending on the specific context within the settings."
+          "description": "The Italian word 'Quote' typically refers to 'quotations' (as in price quotes or literary quotes). In the context of storage management and technical limits, the correct term is 'Quote' (plural of 'quota').",
+          "suggestion": "Quote"
         }
       ],
       "approved_at": null
@@ -99,13 +105,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"容量制限\" (ryou gen-shou) can sometimes translate to \"quota,\" it's more accurately \"capacity limit\" or \"storage limit.\" \"Quota\" often implies a defined allowance or entitlement, which isn't directly conveyed by this translation.",
-          "suggestion": "Consider alternatives like \"割り当て量\" (wari-ate-ryou - allocated amount) or \"利用制限\" (riyo-shigen - usage limit) depending on the specific context of 'Quotas'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -129,13 +129,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word \"Quotas\" (plural) has been translated to \"Quota\" (singular) in Dutch. This doesn't reflect the original meaning.",
-          "suggestion": "Quota's"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -159,13 +153,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Cote' does not accurately convey the meaning of 'Quotas'. 'Quotas' refers to limits or restrictions, while 'Cote' primarily means 'side' or 'corner'.",
-          "suggestion": "Consider translations like 'Limite', 'Cote', 'Restricții', or 'Limite de utilizare', depending on the specific context of the 'Settings:Quotas' key."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -180,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"සලාක\" does not accurately convey the meaning of \"Quotas\". \"Quotas\" refers to limits or restrictions, and \"සලාක\" has a different connotation.",
-          "suggestion": "A more appropriate translation might be \"කොටා\" (kota) or \"අධිකාරණ සීමාව\" (adhikaarana seemawa) depending on the specific context."
+          "description": "The Sinhala word 'සලාක' (Salaka) is not the correct term for 'Quotas' in the context of storage management. It appears to be a phonetic transliteration or an incorrect term. The correct term for an allocated limit or quota in Sinhala is 'සීමාවන්' (Limits) or 'කොටස්' (Portions/Quotas).",
+          "suggestion": "සීමාවන්"
         }
       ],
       "approved_at": null
@@ -201,13 +189,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Квоте\" is the correct plural form of 'Quotas'. \"Квоте\" is the appropriate translation for the English term \"Quotas\". \"Квоте\" is a more accurate translation than \"Квоте\".",
-          "suggestion": "Квоте"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -235,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

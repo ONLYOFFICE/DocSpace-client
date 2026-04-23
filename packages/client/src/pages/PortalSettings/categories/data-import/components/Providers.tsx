@@ -32,7 +32,7 @@ import { ReactSVG } from "react-svg";
 import { Text } from "@docspace/ui-kit/components/text";
 
 import GoogleWorkspaceSvgUrl from "PUBLIC_DIR/images/workspace.google.react.svg?url";
-import NextcloudWorkspaceSvgUrl from "PUBLIC_DIR/images/workspace.nextcloud.react.svg?url";
+import NextcloudWorkspaceSvgUrl from "PUBLIC_DIR/images/thirdparties/nextcloud.svg?url";
 import WorkspaceSvgUrl from "PUBLIC_DIR/images/workspace.onlyoffice.react.svg?url";
 import GoogleWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.google.react.svg?url";
 import NextcloudWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.nextcloud.react.svg?url";

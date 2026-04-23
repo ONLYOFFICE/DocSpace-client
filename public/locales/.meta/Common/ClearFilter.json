@@ -3,7 +3,7 @@
   "content": "Clear filter",
   "content_en_sha1_hash": "b667d6f9f635decfb59140eb7361aedc90b3b761",
   "created_at": "2025-05-19T21:30:43.475Z",
-  "updated_at": "2026-03-20T09:07:45.434Z",
+  "updated_at": "2026-04-10T08:21:04.286Z",
   "comment": {
     "text": "The translation key \"ClearFilter\" is used to display a clear filter button or link that resets filters in a search or filtering interface. It appears as a prominent action item on pages like Form Gallery and Contacts Body, where it helps users remove existing filters.",
     "is_auto": true,
@@ -75,12 +75,6 @@
       "line_number": 57,
       "context": "const options = [\n {\n key: \"empty-view-filter\",\n to: \"\",\n description: t(\"Common:ClearFilter\"),\n icon: <ClearEmptyFilterSvg />,\n onClick: clearFilters,\n },\n ];",
       "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/shared/transaction-history/index.tsx",
-      "line_number": 647,
-      "context": "onClick={onClearFilter}\n textDecoration=\"underline dotted\"\n dataTestId=\"clear_filter_button\"\n className={styles.clearFilter}\n >\n {t(\"Common:ClearFilter\")}\n </Link>\n ) : null}\n </div>\n );",
-      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -102,7 +96,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Filtri silin\" is understandable, a more natural and accurate translation of \"Clear filter\" in Azerbaijani would be \"Filtri təmizlə\". \"Silin\" translates to \"delete\" which isn't quite the intended meaning of \"clear\".",
+          "description": "The translation 'Filtri silin' means 'Delete the filter', which implies removing the filter object/rule entirely. In a UI context for resetting a search, 'Clear filter' should mean resetting the selection/criteria. 'Filtri təmizlə' is the standard term for clearing/resetting a filter.",
           "suggestion": "Filtri təmizlə"
         }
       ],
@@ -165,25 +159,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"フィルターのクリア\" is understandable, a more natural and common translation of \"Clear filter\" in Japanese would be \"フィルターをクリアする\" or simply \"クリア\". \"クリアする\" implies the action of clearing, which is more aligned with the functionality of a 'Clear Filter' button.",
-          "suggestion": "フィルターをクリアする or クリア"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"필터 삭제\" is a technically correct translation of \"Clear filter\", it might sound a little abrupt or formal for a user interface element. A more natural and user-friendly translation would be \"필터 지우기\" or \"필터 초기화\".",
-          "suggestion": "Consider using \"필터 지우기\" or \"필터 초기화\" for a more natural user experience."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -222,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Filtro limpo\" is understandable, it's not the most natural or common translation for \"Clear filter\" in Brazilian Portuguese. \"Limpar filtro\" or \"Redefinir filtro\" would be more accurate and idiomatic.",
-          "suggestion": "Redefinir filtro"
+          "description": "The translation 'Filtro limpo' means 'Filter cleaned' (past participle/adjective), whereas the English 'Clear filter' is an imperative command/action to reset the filter.",
+          "suggestion": "Limpar filtro"
         }
       ],
       "approved_at": null
@@ -231,13 +213,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'Golire filtru' is not the most natural or accurate translation of 'Clear filter'. While 'golire' means emptying or clearing, it's less commonly used in this context. A better translation would convey the action of removing a filter.",
-          "suggestion": "Șterge filtru"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -249,13 +225,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"පෙරහන හිස් කරන්න\" (perahana his karan'na) is a literal translation but doesn't quite capture the nuance of 'Clear filter'. While technically correct, it might sound a bit formal or awkward in a user interface context. A more natural translation might be \"පෙරහන් ඉවත් කරන්න\" or \"පෙරහන් පවිත්‍ර කරන්න\".",
-          "suggestion": "Consider using \"පෙරහන් ඉවත් කරන්න\" or \"පෙරහන් පවිත්‍ර කරන්න\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -273,13 +243,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Обриши филтер\" is a literal translation and sounds less natural in Serbian. A more idiomatic translation would be something like \"Уклони филтер\" or \"Скини филтер\".",
-          "suggestion": "Уклони филтер"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -307,6 +271,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

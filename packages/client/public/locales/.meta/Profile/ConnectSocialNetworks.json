@@ -3,7 +3,7 @@
   "content": "Connect your social networks",
   "content_en_sha1_hash": "3a18b50746f026e86d03625c28c76cefe4402bb9",
   "created_at": "2025-05-19T21:30:53.342Z",
-  "updated_at": "2026-02-19T13:36:32.973Z",
+  "updated_at": "2026-04-09T07:11:25.857Z",
   "comment": {
     "text": "This translation key is used to display the text \"Connect your social networks\" in the profile section of a client application. It appears as a bold heading below a set of buttons, prompting users to connect their social media accounts.",
     "is_auto": true,
@@ -65,9 +65,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'Сonecte sus redes sociales' uses Cyrillic characters, which is Russian, not Spanish. The correct Spanish translation should be 'Conecta tus redes sociales' or 'Conecte sus redes sociales'.",
-          "suggestion": "Conecta tus redes sociales"
+          "type": "wrong_language",
+          "description": "The translation uses a Cyrillic 'С' (U+0421) instead of a Latin 'C' (U+0043) at the beginning of the sentence, which will cause rendering issues or incorrect character display in a Spanish context.",
+          "suggestion": "Conecte sus redes sociales"
         }
       ],
       "approved_at": null
@@ -99,13 +99,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"SNSに接続する\" (SNS ni tsunagu suru) is understandable, it's a very literal translation. It might be perceived as a bit technical or abrupt in some contexts. A more natural and user-friendly translation would be something like \"ソーシャルネットワークと連携する\" (so-sharu netto-waku to rensei suru) or \"ソーシャルネットワークとつなぐ\" (so-sharu netto-waku to tsunagu).",
-          "suggestion": "ソーシャルネットワークと連携する (so-sharu netto-waku to rensei suru) or ソーシャルネットワークとつなぐ (so-sharu netto-waku to tsunagu)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -129,13 +123,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Sluit uw sociale netwerken aan' is a literal translation of 'Connect your social networks' that doesn't convey the intended meaning naturally in Dutch. 'Sluit aan' implies joining or closing, not connecting in the context of social networks. A more natural translation would imply linking or associating.",
-          "suggestion": "Koppel uw sociale netwerken"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -171,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"ඔබගේ සමාජ ජාල සබඳින්න\" is not the most natural or accurate translation of \"Connect your social networks.\" 'සබඳින්න' implies establishing a relationship, but 'Connect' suggests linking or integrating.",
-          "suggestion": "Possible better translations include: \"ඔබගේ සමාජ ජාලාංගම් සම්බන්ධ කරන්න\" (Connect your social network accounts), \"ඔබගේ සමාජ ජාලාංගම් ඒකාංග කරන්න\" (Integrate your social network accounts) or simply \"සමාජ ජාලාංගම් සම්බන්ධ කරන්න\" (Connect social network accounts)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -195,13 +177,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Повежи' is a grammatical incorrect form. It should be 'Уповежи'.",
-          "suggestion": "Уповежи"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -229,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -48,7 +48,21 @@ export default function useFormsSocket(
     if (!socketUrl || isInit.current) return;
 
     isInit.current = true;
-    SocketHelper?.connect(socketUrl, "");
+
+    const doConnect = () => SocketHelper?.connect(socketUrl, "");
+    const win = window as Window & {
+      requestIdleCallback?: (
+        cb: () => void,
+        opts?: { timeout: number },
+      ) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+    if (win.requestIdleCallback) {
+      const id = win.requestIdleCallback(doConnect, { timeout: 1000 });
+      return () => win.cancelIdleCallback?.(id);
+    }
+    const id = window.setTimeout(doConnect, 500);
+    return () => window.clearTimeout(id);
   }, [socketUrl]);
 
   const folderIdsKey = folderIds.filter(Boolean).join(",");

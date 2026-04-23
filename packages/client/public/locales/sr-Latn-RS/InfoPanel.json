@@ -2,6 +2,7 @@
   "AddedRoomTags": "Tagovi dodati.",
   "Administration": "Administracija",
   "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> preimenovan u <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Pogledajte detalje o {{aiAgents}} ovde",
   "AndMoreLabel": "i <1>{{count}} više</1>",
   "CreationDate": "Datum izrade",
   "Data": "Podaci",
@@ -60,11 +61,14 @@
   "IndexChanged": "Indeks promenjen",
   "ItemsSelected": "Stavke odabrane",
   "LastModifiedBy": "Zadnje modifikovano od strane",
+  "LastUpdateInfo": "Poslednje ažuriranje",
   "LifetimeEnds": "Vek trajanja ističe",
   "MembersEmptyScreenText": "Pogledajte detalje o članovima ovde",
+  "NoAgent": "Nema {{aiAgent}}",
   "NoRecordsFound": "Nema pronađenih zapisa",
   "Properties": "Svojstva",
   "Resolution": "Odluka",
+  "RoomChangeOwner": "Vlasnik sobe je promenjen.",
   "RoomCreateUserCount": "Dodati korisnici ({{count}}).",
   "RoomDenyDownloadDisabled": "Preuzimanje i kopiranje bez ograničenja",
   "RoomDenyDownloadEnabled": "Preuzimanje i kopiranje ograničeno",
@@ -98,6 +102,5 @@
   "SubmenuHistory": "Istorija",
   "UserFileUpdated": "Datoteka ažurirana.",
   "Users": "Korisnici",
-  "Versions": "Verzije",
-  "LastUpdateInfo": "Poslednje ažuriranje"
+  "Versions": "Verzije"
 }

@@ -3,7 +3,7 @@
   "content": "Ask from DB",
   "content_en_sha1_hash": "2b1d6f7379a09232aa1460006ef0340dc562988a",
   "created_at": "2026-03-31T15:18:05.423Z",
-  "updated_at": "2026-03-31T15:18:05.423Z",
+  "updated_at": "2026-04-08T16:43:56.740Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -92,7 +92,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation '문의' (inquiry/ask a question) implies asking a person or a support team, whereas 'Ask from DB' in a technical context usually means 'Fetch/Request data from the database'.",
+          "suggestion": "DB에서 요청"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -170,7 +176,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian word 'Упит' (Upit) means 'Query' or 'Inquiry', whereas the English 'Ask' in this context (likely a button or action) implies the verb 'to ask'. While 'Upit iz baze' is a common technical term, 'Ask from DB' is slightly non-standard English, but the translation 'Упит из базе података' translates more accurately to 'Query from database'. However, the primary issue is that 'Упит' is a noun, while 'Ask' is a verb.",
+          "suggestion": "Pitaj bazu podataka"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

@@ -3,7 +3,7 @@
   "content": "Data display settings",
   "content_en_sha1_hash": "a3c510d4ebfdbe955be8697ef65b42208a7ea4eb",
   "created_at": "2025-05-19T21:30:54.443Z",
-  "updated_at": "2026-03-20T09:07:45.591Z",
+  "updated_at": "2026-04-07T19:35:05.129Z",
   "comment": {
     "text": "\"This translation key is used for the 'Data Display' subheader that appears on multiple pages in the PortalSettings categories, providing a consistent title and helping users navigate the settings.\"",
     "is_auto": true,
@@ -45,13 +45,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Məlumatların göstərilməsi parametrləri\" is a bit literal and clunky. While technically correct, it doesn't flow naturally in Azerbaijani. \"Data display settings\" implies a more concise and user-friendly phrasing.",
-          "suggestion": "Məlumat göstərişləri"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -135,18 +129,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Dutch translation 'Instellingen weergave gegevens' is a literal translation but doesn't flow naturally in Dutch. 'Weergave' is a bit clunky here. A more natural phrasing would focus on displaying data.",
-          "suggestion": "Instellingen datavisualisatie"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'gegevens' is technically correct, 'data' is commonly used in a technological context and might be better suited for consistency with the English term.",
-          "suggestion": "Instellingen dataweergave"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {

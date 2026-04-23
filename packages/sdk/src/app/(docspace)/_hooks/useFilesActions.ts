@@ -11,6 +11,7 @@ import { useSDKConfig } from "@/providers/SDKConfigProvider";
 import type { TFileItem } from "@/app/(docspace)/_hooks/useItemList";
 import { useMediaViewerStore } from "@/app/(docspace)/_store/MediaViewerStore";
 
+import { OpenFileContext } from "../_contexts/OpenFileContext";
 import { useFilesSettingsStore } from "../_store/FilesSettingsStore";
 import { useSettingsStore } from "../_store/SettingsStore";
 
@@ -21,6 +22,7 @@ export default function useFilesActions({ t }: UseFilesActionsProps) {
   const { filesSettings } = useFilesSettingsStore();
   const { shareKey } = useSettingsStore();
   const { setMediaViewerData } = useMediaViewerStore();
+  const openFileOverride = React.useContext(OpenFileContext);
 
   const openFile = React.useCallback(
     (
@@ -36,13 +38,20 @@ export default function useFilesActions({ t }: UseFilesActionsProps) {
         });
         return;
       }
-      const fileId = file.id;
+
       const isMediaOrImage =
         file.viewAccessibility.ImageView || file.viewAccessibility.MediaView;
+
+      if (!isMediaOrImage && openFileOverride) {
+        openFileOverride(file, preview);
+        return;
+      }
 
       if (isMediaOrImage) {
         return setMediaViewerData({ id: file.id, visible: true });
       }
+
+      const fileId = file.id;
 
       const searchParams = new URLSearchParams();
 
@@ -75,14 +84,21 @@ export default function useFilesActions({ t }: UseFilesActionsProps) {
       setMediaViewerData,
       shareKey,
       sdkConfig?.events?.onFileManagerClick,
+      openFileOverride,
     ],
   );
 
   const copyFileLink = React.useCallback(
     async (itemId: number) => {
-      const itemLink = await api.files.getFileLink(itemId);
-      copyShareLink(itemLink.sharedTo.shareLink);
-      toastr.success(t("Common:LinkCopySuccess"));
+      try {
+        const itemLink = await api.files.getFileLink(itemId);
+        copyShareLink(itemLink.sharedTo.shareLink);
+        toastr.success(t("Common:LinkCopySuccess"));
+      } catch (error) {
+        toastr.error(
+          error instanceof Error ? error.message : String(error),
+        );
+      }
     },
     [t],
   );

@@ -3,7 +3,7 @@
   "content": "Rooms",
   "content_en_sha1_hash": "3a28d6f078fd35a505195a0f8ec6f59e9801d7c2",
   "created_at": "2025-05-19T21:30:48.236Z",
-  "updated_at": "2026-03-31T15:18:45.981Z",
+  "updated_at": "2026-04-08T00:20:26.505Z",
   "comment": {
     "text": "The \"Rooms\" translation key is used to display the content \"Rooms\" in various parts of the user interface. This includes a file selector and a dialog box where it appears as a section title, providing context for users navigating room templates or reassigning data. It appears in UI elements such as buttons, text labels, and progress indicators.",
     "is_auto": true,
@@ -153,7 +153,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English word 'Rooms' is plural, but the German translation 'Raum' is singular. Based on the code context (e.g., '{group.totalRooms} {t(\"Common:Rooms\")}', '!noRooms'), the UI expects a plural form.",
+          "suggestion": "Räume"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -264,8 +270,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Miestností' is a valid Slovak word, it's the genitive plural form. 'Rooms' in English typically translates to 'izby' (nominative plural) or 'miestnosti' (nominative plural). The genitive form implies possession or relationship, which isn't suitable for a simple label like 'Rooms'.",
-          "suggestion": "miestnosti"
+          "description": "The Slovak translation 'Miestností' is in the genitive plural form, which is used after certain quantities or prepositions. For a UI label, section title, or standalone noun, the nominative plural 'Izby' or 'Miestnosti' should be used to ensure grammatical correctness in all contexts (e.g., as a header or a button).",
+          "suggestion": "Miestnosti"
         }
       ],
       "approved_at": null
@@ -276,8 +282,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Săli' is incorrect for 'Rooms'. The correct translation should be 'Sobě'. 'Săli' translates to 'Halls' or 'Rooms (as in meeting rooms)', whereas 'Sobě' is the general term for rooms.",
-          "suggestion": "Sobě"
+          "description": "The translation 'Săli' uses a character 'ă' which is not part of the Slovenian alphabet (it is Romanian). The correct Slovenian word for 'Rooms' in a digital/software context is 'Sobe'.",
+          "suggestion": "Sobe"
         }
       ],
       "approved_at": null
@@ -288,8 +294,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Собе\" is not an accurate translation of \"Rooms\". \"Собе\" translates to \"Rooms\" in the plural, but the English term \"Rooms\" can also be singular. A more accurate translation, depending on context, might be \"Соба\" (singular) or \"Комнате\" (plural, more formal).",
-          "suggestion": "Consider \"Соба\" (singular) or \"Комнате\" (plural) depending on context."
+          "description": "The translation 'Собе' is an incomplete word or a misspelling. In Serbian, the plural for 'Rooms' is 'Sobe' (Latin) or 'Собе' (Cyrillic). The provided translation 'Собе' is missing the correct vowel or is a truncated version of the word.",
+          "suggestion": "Собе"
         }
       ],
       "approved_at": null
@@ -319,6 +325,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

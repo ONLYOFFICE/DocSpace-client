@@ -1,4 +1,7 @@
 {
+  "AgentCreated": "Agente de IA Creado",
+  "AgentDeleted": "Agente IA Eliminado",
+  "AgentUpdated": "Agente IA Actualizado",
   "Before": "Antes de",
   "CreateWebhook": "Crear webhook",
   "DeleteHint": "El webhook se eliminará de forma permanente.\nUsted no podrá deshacer esta acción.",
@@ -33,6 +36,9 @@
   "FolderRestored": "Carpeta restaurada",
   "FolderTrashed": "Carpeta movida a la papelera",
   "FolderUpdated": "Carpeta actualizada",
+  "FormFilledOut": "Formulario completado",
+  "FormStopped": "Formulario Detenido",
+  "FormSubmit": "Formulario enviado",
   "From": "Desde",
   "Generate": "Generar",
   "GroupCreated": "Grupo creado",

@@ -3,7 +3,7 @@
   "content": "This is your main workspace. All your PDF forms are stored here. Upload new forms or create them from scratch.",
   "content_en_sha1_hash": "591aedc85b906cbd9ea66b4dbb7209010c3a07e8",
   "created_at": "2026-03-31T15:18:26.814Z",
-  "updated_at": "2026-03-31T15:18:26.814Z",
+  "updated_at": "2026-04-07T21:12:47.271Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -62,7 +62,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "Part of the translation is still in English instead of Finnish.",
+          "suggestion": "Tämä on päätyöskentelyalueesi. Kaikki PDF-lomakkeesi tallennetaan tänne. Lataa uusia lomakkeita tai luo ne alusta alkaen."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -104,7 +110,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'nozīmē' (meaning) is used instead of 'sākotnēji' or 'no nulles' (from scratch). The translation 'izveidojiet tās nozīmē' translates to 'create them in meaning', which is nonsensical in this context.",
+          "suggestion": "Šī ir Jūsu galvenā darba vieta. Visas Jūsu PDF formas ir saglabātas šeit. Augšupielādējiet jaunas formas vai izveidojiet tās no nulles."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -176,7 +188,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Grammatical error in the second sentence: 'Sve vaše PDF obrasce su sačuvane' is incorrect. The subject 'obrasci' (forms) is masculine, but the verb/participle 'sačuvane' is feminine. It should be 'Svi vaši PDF obrasci su sačuvani'.",
+          "suggestion": "Ovo je vaš glavni radni prostor. Svi vaši PDF obrasci su sačuvani ovde. Učitajte nove obrasce ili ih kreirajte od nule."
+        }
+      ],
       "approved_at": null
     },
     "tr": {

@@ -3,7 +3,7 @@
   "content": "The file will be deleted permanently {{date}}",
   "content_en_sha1_hash": "430bd41ec3bbb225ab43c50741aef944921b95dd",
   "created_at": "2025-05-19T21:30:45.324Z",
-  "updated_at": "2025-12-17T07:49:08.138Z",
+  "updated_at": "2026-04-08T09:27:38.143Z",
   "comment": {
     "text": "This translation key is used for a permanent delete confirmation message that appears on a quick button when a file is about to be permanently deleted. It displays the expected date of deletion and is typically shown in a tooltip or dialog box. The message informs the user that the action will result in permanent data loss.",
     "is_auto": true,
@@ -27,37 +27,37 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation 'سيتم حذف الملف في {{date}} ' translates to 'The file will be deleted in {{date}}'. The original English states the file will be deleted *permanently*. The Arabic lacks this crucial detail.",
-          "suggestion": "سيتم حذف الملف بشكل دائم في {{date}} "
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The date placeholder {{date}} is present in both the English and Azerbaijani versions, indicating a placeholder that should be handled programmatically and not directly translated.",
-          "suggestion": "Ensure the placeholder is handled by the application and not included in the translated text."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Bulgarian translation omits the word 'permanently' (назавсе), which is critical for a warning about irreversible data loss.",
+          "suggestion": "Файлът ще бъде изтрит назавсе {{date}}"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The word 'permanently' (trvale) is missing from the Czech translation, which is critical for a warning about irreversible data loss.",
+          "suggestion": "Soubor bude trvale smazán {{date}}"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -69,7 +69,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Greek translation omits the word 'permanently' (μόνιμα), which is critical for a warning message about irreversible data loss.",
+          "suggestion": "Το αρχείο θα διαγραφεί μόνιμα {{date}}"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -83,8 +89,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'will be deleted permanently' is not fully conveyed. While 'poistetaan' indicates deletion, the 'permanently' aspect is lost. A more precise translation would include a word that emphasizes permanence.",
+          "type": "missing_content",
+          "description": "The word 'permanently' (pysyvästi) is missing from the Finnish translation, which is critical for a warning about permanent data loss.",
           "suggestion": "Tiedosto poistetaan pysyvästi {{date}}"
         }
       ],
@@ -111,13 +117,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ファイルは{{date}}に完全に削除されます' uses '完全に削除されます' which implies a forceful deletion. A more natural phrasing for a user notification might be '削除されます' or '消去されます'.",
-          "suggestion": "ファイルは{{date}}に削除されます"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -137,9 +137,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Fails tiks izdzēsts {{date}}' is not an accurate translation of 'The file will be deleted permanently {{date}}'. 'Fails' means 'file' but the structure of the sentence is awkward. It should be 'Datums tiks izdzēsts {{date}}' or 'Šis fails tiks izdzēsts {{date}}'.",
-          "suggestion": "Šis fails tiks izdzēsts {{date}}"
+          "type": "missing_content",
+          "description": "The word 'permanently' (Latvian: 'neatgriezīgi') is missing from the translation, which is critical for a warning about permanent data loss.",
+          "suggestion": "Fails tiks neatgriezīgi izdzēsts {{date}}"
         }
       ],
       "approved_at": null
@@ -153,7 +153,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The word 'permanently' (na stałe) is missing from the Polish translation, which changes the severity of the message from a permanent deletion to a standard deletion.",
+          "suggestion": "Plik zostanie usunięty na stałe {{date}}"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -161,9 +167,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'O ficheiro será eliminado {{date}}' is a literal translation but could be improved for naturalness in Portuguese. 'Eliminado' is acceptable, but 'removido' or 'apagado' are more common for file deletion.",
-          "suggestion": "O ficheiro será removido {{date}}"
+          "type": "missing_content",
+          "description": "The word 'permanently' (permanente/definitivamente) is missing from the Portuguese translation, which changes the severity of the warning.",
+          "suggestion": "O ficheiro será eliminado permanentemente {{date}}"
         }
       ],
       "approved_at": null
@@ -179,8 +185,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'șters' should be 'șters'",
+          "type": "incorrect_translation",
+          "description": "The Romanian translation contains a spelling error in the verb 'ștears' (should be 'șters') which changes the word from a valid participle to an incorrect form, potentially affecting readability and professionalism.",
           "suggestion": "Fișierul va fi șters definitiv la data de {{date}}"
         }
       ],
@@ -203,9 +209,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "While \"vymazaný\" is a valid translation for \"deleted\", \"zmazaný\" is more common and natural in Slovak when referring to files being deleted. \"Vymazaný\" can imply a more thorough or official erasure.",
-          "suggestion": "Súbor bude zmazaný {{date}}"
+          "type": "missing_content",
+          "description": "The word 'permanently' (trvalo/navždy) is missing from the Slovak translation, which is critical for a warning about irreversible data loss.",
+          "suggestion": "Súbor bude vymazaný navždy {{date}}"
         }
       ],
       "approved_at": null
@@ -213,7 +219,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The word 'permanently' (trajno) is missing from the Slovenian translation, which changes the severity of the message.",
+          "suggestion": "Datoteka bo trajno izbrisana {{date}}"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -233,9 +245,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Turkish translation \"Dosya silinecek {{date}}\" is a literal translation but loses some nuance. A more natural Turkish phrasing would be \"Dosya, {{date}} tarihinde kalıcı olarak silinecektir.\" or \"Dosya {{date}} tarihinde silinecektir.\" ",
-          "suggestion": "Dosya, {{date}} tarihinde kalıcı olarak silinecektir."
+          "type": "missing_content",
+          "description": "The word 'permanently' (kalıcı olarak) is missing from the Turkish translation, which is critical for a warning about permanent data loss.",
+          "suggestion": "Dosya {{date}} tarihinde kalıcı olarak silinecek"
         }
       ],
       "approved_at": null
@@ -243,7 +255,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The word 'permanently' (назавжди) is missing from the Ukrainian translation, which is critical for a warning about irreversible data loss.",
+          "suggestion": "Файл буде видалено назавжди {{date}}"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -251,14 +269,20 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'Tập tin sẽ bị xóa {{date}}' is a literal translation but sounds slightly unnatural in Vietnamese. A more natural phrasing would be 'Tập tin sẽ bị xóa vĩnh viễn {{date}}' or 'Tập tin sẽ bị xóa khỏi hệ thống {{date}}'.",
+          "type": "missing_content",
+          "description": "The word 'permanently' (vĩnh viễn) is missing from the Vietnamese translation, which is critical for a warning about irreversible data loss.",
           "suggestion": "Tập tin sẽ bị xóa vĩnh viễn {{date}}"
         }
       ],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

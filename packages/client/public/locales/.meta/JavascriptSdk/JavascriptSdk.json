@@ -3,7 +3,7 @@
   "content": "Javascript SDK",
   "content_en_sha1_hash": "e6c94f16090ac34b87010e6e2af5e5e55d93af88",
   "created_at": "2025-05-19T21:30:54.548Z",
-  "updated_at": "2026-03-20T09:07:45.585Z",
+  "updated_at": "2026-04-10T08:21:04.348Z",
   "comment": {
     "text": "\"Javascript SDK\" is a label used to describe presets or settings related to the JavaScript SDK, likely found in developer tools or settings pages, guiding users through configuration options.",
     "is_auto": true,
@@ -11,14 +11,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/index.js",
-      "line_number": 68,
-      "context": "const location = useLocation();\n \n const [currentTabId, setCurrentTabId] = useState();\n \n const { t, ready } = useTranslation([\n \"JavascriptSdk\",\n \"Webhooks\",\n \"Settings\",\n \"WebPlugins\",\n \"Common\",\n \"OAuth\",",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 101,
+      "line_number": 93,
       "context": "image: theme.isBase ? PortalImg : PortalImgDark,\n handleOnClick: navigateToPortal,\n },\n {\n title: t(\"Common:PublicRoom\"),\n description: t(\"JavascriptSdk:PublicRoomPresetInfo\"),\n image: theme.isBase ? PublicRoomImg : PublicRoomImgDark,\n handleOnClick: navigateToPublicRoom,\n },\n {\n title: t(\"Common:Editor\"),",
       "module": "/packages/client"
     },
@@ -81,13 +75,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'مجموعة أدوات تطوير البرمجيات بلغة جافا سكربت' is a very literal and verbose translation of 'Javascript SDK'. While technically correct, it's not idiomatic and doesn't capture the conciseness of the English term. A more natural translation might be something like 'حزمة تطوير جافا سكريبت' or 'Java Script SDK'.",
-          "suggestion": "Consider a more concise translation like 'حزمة تطوير جافا سكريبت' or 'Java Script SDK'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -135,18 +123,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The French translation \"SDK Javascript\" reverses the order of the terms. The standard order is 'Javascript SDK'.",
-          "suggestion": "Javascript SDK"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation appears to lack a space between 'SDK' and 'Javascript'.",
-          "suggestion": " Javascript SDK"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -158,18 +135,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Italian translation \"SDK Javascript\" reverses the order of the terms. The standard and more natural order would be \"Javascript SDK\".",
-          "suggestion": "Javascript SDK"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, placing the acronym before the full term is less common and can appear unnatural in Italian. It's generally better to keep the full term first.",
-          "suggestion": "Javascript SDK"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -205,18 +171,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation 'SDK Javascript' reverses the order of the terms. 'Javascript SDK' should be translated as 'SDK JavaScript' to maintain the original meaning and order.",
-          "suggestion": "SDK JavaScript"
-        },
-        {
-          "type": "formatting",
-          "description": "While not a strict error, the translation could benefit from capitalization consistency. It's conventional to capitalize 'JavaScript' in Polish as well.",
-          "suggestion": "SDK JavaScript"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -234,35 +189,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation \"SDK Javascript\" reverses the order of the terms. It's more natural and common to place the specific term ('Javascript') before the abbreviation ('SDK').",
-          "suggestion": "Javascript SDK"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the reversed order creates a slightly awkward phrasing.",
-          "suggestion": "Javascript SDK"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Пакет SDK для Javascript' is understandable, a more accurate and common translation for 'Javascript SDK' would be 'JavaScript SDK' or 'SDK для JavaScript'. Using 'Пакет' (Package) is not incorrect, but less precise in this context.",
-          "suggestion": "SDK для JavaScript"
-        },
-        {
-          "type": "formatting",
-          "description": "The Russian translation does not capitalize 'JavaScript'. It's best to follow the English capitalization convention when translating tech terms.",
-          "suggestion": "SDK для JavaScript"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -304,18 +237,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'SDK Javascript' reverses the order of the terms. In English, 'Javascript SDK' is the correct phrasing, and a direct translation should ideally maintain that order. While understandable, it is not the most natural or idiomatic Ukrainian translation.",
-          "suggestion": "Javascript SDK"
-        },
-        {
-          "type": "formatting",
-          "description": "The terms 'SDK' and 'Javascript' are separated by a space, which is acceptable, but a hyphen could improve readability and flow in Ukrainian. Consider if a hyphenated version is more common in Ukrainian technical contexts.",
-          "suggestion": "SDK JavaScript"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

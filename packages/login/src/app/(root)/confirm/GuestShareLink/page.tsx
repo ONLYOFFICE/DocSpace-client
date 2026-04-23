@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { redirect } from "next/navigation";
 import {
   getSettings,
   getUserByEncEmail,
@@ -57,6 +58,13 @@ async function Page(props: GuestShareLinkProps) {
     getUserFromConfirm(uid, confirmKey),
     getUserByEncEmail(encemail, confirmKey),
   ]);
+
+  if (
+    initiator === "access-restricted" ||
+    guest === "access-restricted"
+  ) {
+    redirect("/access-restricted");
+  }
 
   const settingsCulture =
     typeof settings === "string" ? undefined : settings?.culture;

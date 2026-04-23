@@ -3,7 +3,7 @@
   "content": "Português (Brasil)",
   "content_en_sha1_hash": "d53cc7ed60de7a3d7011da44b3d0e6c11cb1b68d",
   "created_at": "2025-05-19T21:30:44.144Z",
-  "updated_at": "2025-05-24T01:17:19.150Z",
+  "updated_at": "2026-04-08T13:08:44.218Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -38,7 +38,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Czech translation is identical to the English text and contains Portuguese, not Czech.",
+          "suggestion": "Portugalština (Brazílie)"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -50,25 +56,49 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Portuguese instead of Greek.",
+          "suggestion": "Πορτογαλικά (Βρασιλίας)"
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Spanish translation is actually Portuguese, not Spanish.",
+          "suggestion": "Portugués (Brasil)"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation is identical to the English text and does not translate the language name into Finnish.",
+          "suggestion": "Portugali (Brasilia)"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The French translation is actually Portuguese, not French.",
+          "suggestion": "Portugais (Brésil)"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -80,25 +110,49 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Portuguese instead of Italian.",
+          "suggestion": "Portoghese (Brasile)"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Japanese translation is identical to the English text and does not use the Japanese script or appropriate localization for the language name.",
+          "suggestion": "ポルトガル語 (ブラジル)"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Latin script (English/Portuguese) instead of the target Korean script (Hangul).",
+          "suggestion": "포르투갈어 (브라질)"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Latin script (Portuguese) instead of the Lao script, failing to translate the language name into the target language.",
+          "suggestion": "ພາສາປອກຕຸເກດ (ບຣາຊິນ)"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -110,7 +164,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Dutch translation is identical to the English text and contains Portuguese, not Dutch.",
+          "suggestion": "Portugees (Brazilië)"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -146,7 +206,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation uses the Latin script instead of the Sinhala script. Language names should be transliterated or translated into the target language's script.",
+          "suggestion": "පෘතුගීසි (බ්‍රසීලය)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -176,13 +242,25 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Portuguese instead of Turkish.",
+          "suggestion": "Portekizce (Brezilya)"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Portuguese instead of Ukrainian. Language names should be translated into the target language.",
+          "suggestion": "Португальська (Бразилія)"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -195,6 +273,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Portuguese, not Albanian.",
+          "suggestion": "Portugalis (Brazili)"
+        }
+      ],
       "approved_at": null
     }
   }

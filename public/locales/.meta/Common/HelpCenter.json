@@ -3,7 +3,7 @@
   "content": "Help Center",
   "content_en_sha1_hash": "110158257eb2f2c817d5a9d691e7637cfd12a11a",
   "created_at": "2025-05-19T21:30:45.755Z",
-  "updated_at": "2026-03-20T09:07:45.678Z",
+  "updated_at": "2026-04-08T07:06:06.827Z",
   "comment": {
     "text": "The \"Help Center\" translation key is used to display a link to the help center, providing users with access to support resources. It appears in various UI elements, such as buttons and dropdowns, typically when the user needs assistance or has questions about a specific feature or process. Translators should ensure that the text accurately reflects local language equivalents of \"Help Center\".",
     "is_auto": true,
@@ -63,13 +63,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Hilfe-Center' is a direct transliteration of 'Help Center' and doesn't follow standard German naming conventions. While understandable, it's not idiomatic.",
-          "suggestion": "Hilfecenter or Hilfezentrum"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -90,7 +84,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation includes \"(englanniksi)\", which means \"(in English)\". This is unnecessary and inaccurate for a localized Help Center. The core translation \"Ohjekeskus\" is correct, but the added phrase is redundant.",
+          "description": "The translation includes '(englanniksi)', which means '(in English)'. This adds information not present in the source and changes the meaning from a simple label to a description of the language used.",
           "suggestion": "Ohjekeskus"
         }
       ],
@@ -141,13 +135,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Help en ondersteuning\" is a reasonable translation of \"Help Center\", it's more literal and verbose. A more concise and commonly used translation would be \"Hulp\" or \"Help\". \"Help Center\" often implies a central hub for assistance, which \"Hulp en ondersteuning\" doesn't fully convey.",
-          "suggestion": "Hulp"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -174,7 +162,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Centrum pomoci' is understandable, it's not the most natural Romanian translation for 'Help Center'. 'Centru de ajutor' would be more common and idiomatic.",
+          "description": "The word 'Centrum' is incorrect in Romanian; the correct word is 'Centru'. 'Centrum' is Latin/other language spelling.",
           "suggestion": "Centru de ajutor"
         }
       ],
@@ -235,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

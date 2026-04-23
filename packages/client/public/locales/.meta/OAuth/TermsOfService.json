@@ -3,7 +3,7 @@
   "content": "Terms of Service",
   "content_en_sha1_hash": "0c8a9a95e21aeb403402ed64338810d787cc5f91",
   "created_at": "2025-05-19T21:30:54.051Z",
-  "updated_at": "2025-08-12T19:46:26.145Z",
+  "updated_at": "2026-04-07T19:35:05.168Z",
   "comment": {
     "text": "The \"TermsOfService\" translation key is used to display the label for a link to view the terms of service in an OAuth information dialog, likely found on a portal settings page. The link is used when hovering over a button or similar element, indicating its purpose.",
     "is_auto": true,
@@ -141,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation \"Condiții de furnizare a serviciului\" is a literal translation of \"Terms of Service\" and doesn't quite capture the meaning in common Romanian usage. While technically correct, it's not the typical phrasing.",
-          "suggestion": "Condiții de utilizare"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -177,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Serbian (Cyrillic) translation 'Услови коришћења' appears to be a generally acceptable translation of 'Terms of Service', but the word 'коришћења' is slightly informal and might benefit from a more formal equivalent depending on the context. While widely understood, 'Услови употребе' would be a more formal alternative.",
-          "suggestion": "Consider 'Услови употребе' for a more formal tone, although 'Услови коришћења' is also acceptable."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -201,13 +189,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Умови\" is a general term for \"Terms\" or \"Conditions\" but doesn't specifically convey \"Terms of Service\". A more accurate translation would include the word \"послуг\" to denote 'services'.",
-          "suggestion": "Умови надання послуг"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

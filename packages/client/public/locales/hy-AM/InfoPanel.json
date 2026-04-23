@@ -2,6 +2,7 @@
   "AddedRoomTags": "Պիտակները ավելացվել են։",
   "Administration": "Ադմինիստրացիա",
   "AgentRenamed": "Գործակալ <1>«{{oldRoomTitle}}»-ը</1> վերանվանվել է <2>«{{roomTitle}}»-ի</2>",
+  "AIAgentsEmptyScreenTent": "Տեսեք {{aiAgents}}-ի մանրամասները այստեղ",
   "AndMoreLabel": "և <1>{{count}} ավելի</1>",
   "CreationDate": "Ստեղծման ամսաթիվ",
   "Data": "Տվյալներ",
@@ -60,11 +61,14 @@
   "IndexChanged": "Ինդեքսը փոխվել է",
   "ItemsSelected": "Ընտրված միավորները",
   "LastModifiedBy": "Վերջին անգամ փոփոխվել է՝",
+  "LastUpdateInfo": "Վերջին թարմացում",
   "LifetimeEnds": "Մշտական լիցենզիան ավարտվում է",
   "MembersEmptyScreenText": "Անդամների մանրամասները կարող եք տեսնել այստեղ",
+  "NoAgent": "Չկա {{aiAgent}}",
   "NoRecordsFound": "Գրառումները չեն գտնվել",
   "Properties": "Հատկություններ",
   "Resolution": "Թույլատրելիություն",
+  "RoomChangeOwner": "Սենակի տերը փոխվեց։",
   "RoomCreateUserCount": "Օգտատերերն ավելացվել են ({{count}})։",
   "RoomDenyDownloadDisabled": "Ներբեռնումը և պատճենումը անսահմանափակ են",
   "RoomDenyDownloadEnabled": "Ներբեռնումը և պատճենումը սահմանափակված են",
@@ -98,6 +102,5 @@
   "SubmenuHistory": "Պատմություն",
   "UserFileUpdated": "Ֆայլը թարմացվել է:",
   "Users": "Օգտատերեր",
-  "Versions": "Տարբերակներ",
-  "LastUpdateInfo": "Վերջին թարմացում"
+  "Versions": "Տարբերակներ"
 }

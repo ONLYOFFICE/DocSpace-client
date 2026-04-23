@@ -3,7 +3,7 @@
   "content": "{{count}} Free days left",
   "content_en_sha1_hash": "00a662738fd8c9e8f2a747858170f89777247fd7",
   "created_at": "2025-05-26T07:15:43.878Z",
-  "updated_at": "2026-02-19T13:36:33.180Z",
+  "updated_at": "2026-04-08T08:36:03.957Z",
   "comment": {
     "text": "This translation key is used to display a countdown message indicating free trial days remaining. It appears in the UI as a label on a payments component, providing users with a visual representation of their trial period duration.",
     "is_auto": true,
@@ -199,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

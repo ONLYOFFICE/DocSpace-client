@@ -3,7 +3,7 @@
   "content": "Starting the form filling process",
   "content_en_sha1_hash": "6ee9c62e2fdb707a20025b9ce66b0fa659b90f7a",
   "created_at": "2025-05-19T21:30:55.139Z",
-  "updated_at": "2025-05-24T10:56:24.740Z",
+  "updated_at": "2026-04-07T19:35:05.101Z",
   "comment": {
     "text": "This translation key is used to display a message starting the form filling process. It appears as the header of a guidance tip dialog in the application, providing a descriptive text for users to understand the next step in the form filling process.",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Стартиране процеса по попълване на формуляр' is somewhat literal and could be improved for naturalness in Bulgarian. 'Starting the form filling process' implies an initial action. A more natural phrasing would emphasize the beginning of the process.",
-          "suggestion": "Започване на попълване на формуляр"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -147,18 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'Demararea completării a formularului' is a bit awkward. 'Demararea' implies initiation, but 'completării a formularului' sounds too literal and cumbersome. A more natural phrasing would be needed.",
-          "suggestion": "Începerea completării formularului"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly wrong, the Romanian translation uses genitive case ('a formularului'). Using nominative ('formularul') would be more common and natural.",
-          "suggestion": "Începerea completării formularul"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -170,18 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ආරම්භ කරයි' (aarambakarei) is not the best choice. It literally translates to 'starts'. A more natural phrasing would convey 'beginning' or 'commencing'.",
-          "suggestion": "පෝරම පුරවීමේ ක්‍රියාවලිය ආරම්භ වේ"
-        },
-        {
-          "type": "grammatical",
-          "description": "While grammatically correct, the current translation sounds a bit too literal and stilted. It could be improved for better flow.",
-          "suggestion": "පෝරම පුරවීමේ ක්‍රියාවලිය ආරම්භ වේ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -229,13 +201,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"开始填写表单进程\" is not the most natural or accurate rendering of \"Starting the form filling process.\"  \"进程\" (jìnchéng) typically refers to a process in a more technical or system-level sense. For this context, a more natural phrasing is needed.",
-          "suggestion": "开始填写表格"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

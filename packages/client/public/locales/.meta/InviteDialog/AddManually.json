@@ -3,7 +3,7 @@
   "content": "Add manually",
   "content_en_sha1_hash": "a1d9c2688fa98be5480201c7e6b27025a703a3f7",
   "created_at": "2025-05-19T21:30:54.711Z",
-  "updated_at": "2026-02-19T13:36:32.531Z",
+  "updated_at": "2026-04-07T19:35:05.123Z",
   "comment": {
     "text": "This translation key is used for a button label that instructs users to add information manually. It appears on an invite input form and helps users understand what action they can take next.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Əl ilə əlavə edin' is a very literal translation and sounds unnatural in Azerbaijani. A more idiomatic and natural phrasing would be preferred.",
-          "suggestion": "Consider alternatives like 'Daxil et' or 'Özəl olaraq əlavə et'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -57,25 +51,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Manuell einfügen' is understandable, a more natural and idiomatic translation of 'Add manually' in a user interface context would be 'Manuell hinzufügen'. 'Einfügen' implies insertion, while 'hinzufügen' is more aligned with the action of adding.",
-          "suggestion": "Manuell hinzufügen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Προσθήκη με μη αυτόματο τρόπο\" is a literal translation of \"Add manually\" but sounds awkward and overly formal in Greek. It's not the most natural way a native Greek speaker would express this.",
-          "suggestion": "A more natural and concise translation would be \"Προσθήκη χειροκίνητα\" or \"Χειροκίνητη προσθήκη\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -171,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'අතින් යොදන්න' is understandable, it's a rather literal translation. A more natural and idiomatic Sinhala translation for 'Add manually' in a UI context would be something like 'අතින් එක් කරන්න' or 'මානුෂ්‍ය අතින් එක් කරන්න'.",
-          "suggestion": "අතින් එක් කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -219,13 +195,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Thêm vào một cách thủ công\" is understandable, it's a bit verbose and not the most natural translation of \"Add manually.\" It literally translates to 'Add in a manual way'.",
-          "suggestion": "Thêm thủ công"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

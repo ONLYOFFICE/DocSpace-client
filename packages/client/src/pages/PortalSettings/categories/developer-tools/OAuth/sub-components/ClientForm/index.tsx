@@ -60,6 +60,7 @@ const ClientForm = ({
   scopeList,
 
   fetchScopes,
+  fetchClients,
 
   resetDialogVisible,
   setResetDialogVisible,
@@ -157,10 +158,14 @@ const ClientForm = ({
         await setJwtToken!();
 
         await addClient?.(form);
+
+        await fetchClients?.();
       } else {
         await setJwtToken!();
 
         await updateClient?.(clientId, form);
+
+        await fetchClients?.();
       }
 
       onCancelClick();
@@ -502,6 +507,7 @@ export default inject(
       scopeList,
 
       fetchScopes,
+      fetchClients,
 
       setResetDialogVisible,
       resetDialogVisible,
@@ -518,6 +524,7 @@ export default inject(
       scopeList,
 
       fetchScopes,
+      fetchClients,
 
       setResetDialogVisible,
       currentDeviceType,

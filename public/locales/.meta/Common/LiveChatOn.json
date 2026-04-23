@@ -3,7 +3,7 @@
   "content": "Live chat was successfully connected",
   "content_en_sha1_hash": "7bcf42efaa0f21c0fcd4e7feb04b48e397e369c3",
   "created_at": "2025-05-19T21:30:46.253Z",
-  "updated_at": "2026-02-19T13:36:33.026Z",
+  "updated_at": "2026-04-08T05:25:15.853Z",
   "comment": {
     "text": "This translation key is used to display a success message when live chat is successfully connected. It appears as a toast notification and indicates that the live chat feature is now active.",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Чата на живо е успешно свързан' is a literal translation that doesn't convey the natural meaning of 'Live chat was successfully connected'. It translates 'Live Chat' as 'Chat on Live,' which is not idiomatic.",
-          "suggestion": "Успешно свързана е чат на живо"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -93,13 +87,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'La chat dal vivo è stata collegata con successo' is a very literal and slightly awkward translation. A more natural Italian phrasing would be more common.",
-          "suggestion": "La chat in diretta è stata collegata correttamente"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -138,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Czat na żywo został rozpoczęty\" doesn't accurately reflect the meaning of \"Live chat was successfully connected\". \"Rozpoczęty\" implies that the chat was initiated, but the original English phrase indicates a successful connection that was already in progress or establishing a connection.",
-          "suggestion": "Czat na żywo został połączony pomyślnie"
+          "description": "The Polish translation 'Czat na żywo został rozpoczęty' means 'Live chat has been started', which implies the initiation of a session. The English source 'Live chat was successfully connected' refers to the technical connection/establishment of the service. While close, 'został połączony' is the accurate technical equivalent for 'connected'.",
+          "suggestion": "Czat na żywo został pomyślnie połączony"
         }
       ],
       "approved_at": null
@@ -147,13 +135,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'O chat ao vivo foi ligado com êxito' is a literal translation of 'Live chat was successfully connected' and implies the chat was 'turned on'.  A more natural and accurate translation would convey the sense of a successful connection.",
-          "suggestion": "O chat ao vivo foi conectado com sucesso."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -179,9 +161,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation \"සජීව සංවාදයට සම්බන්ධ විය\" is a literal translation of 'connected to live conversation'. A more natural and accurate translation for 'Live chat was successfully connected' would emphasize the successful connection.",
-          "suggestion": "ත langsung සංවාදය සාර්ථකව සම්බන්ධ කරන ලදී (th langsung sanwaadaya saathakava santhakarna laded)"
+          "type": "missing_content",
+          "description": "The translation 'සජීව සංවාදයට සම්බන්ධ විය' means 'Connected to live chat' (an action), whereas the English 'Live chat was successfully connected' is a status notification indicating the connection was successful. The word 'successfully' is missing, which is critical for a success toast notification.",
+          "suggestion": "සජීවී සංවාදය සාර්ථකව සම්බන්ධ විය"
         }
       ],
       "approved_at": null
@@ -201,13 +183,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Ћаскање уживо' is a reasonable translation of 'Live chat', 'повезано' doesn't quite capture the nuance of 'connected' in this context. A more natural phrasing would imply the chat is active and working.",
-          "suggestion": "Ћаскање уживо је успешно почето"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -237,13 +213,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"实时聊天已开始\" (Real-time chat has started) doesn't fully capture the meaning of \"Live chat was successfully connected\". The original English implies a connection was made, which 'started' doesn't explicitly convey.",
-          "suggestion": "实时聊天已连接 (Shi shi lian ting yi lian jie) - Real-time chat is connected"
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

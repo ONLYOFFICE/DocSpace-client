@@ -3,7 +3,7 @@
   "content": "Missing a useful integration or component in {{organizationName}} {{productName}}? Leave a request to our team and we will look into that.",
   "content_en_sha1_hash": "da782db9c5d551ef807b855ecc4b97622a8a8f10",
   "created_at": "2025-05-19T21:30:51.703Z",
-  "updated_at": "2026-03-20T09:07:45.636Z",
+  "updated_at": "2026-04-09T02:49:32.265Z",
   "comment": {
     "text": "This translation key is used to display a message requesting users to leave a request for a missing integration or component in a specific product. The text appears as a button label on the PortalSettings page, likely prompting users to submit their requests to the team.",
     "is_auto": true,
@@ -30,13 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"المجموعة المكتبية المتكاملة ل {{productName}}\" is a literal translation of 'Integrated Office Suite for {{productName}}' which doesn't accurately convey the meaning of '{{productName}}'. It's likely {{productName}} already implies an integrated product. A more natural translation would be something like 'في {{productName}}' or 'ضمن {{productName}}'.",
-          "suggestion": "هل تفتقد تكاملاً مفيداً أو مكوناً مفيداً في {{productName}}؟"
-        },
-        {
-          "type": "formatting",
-          "description": "The parenthesis around 'المجموعة المكتبية المتكاملة ل {{productName}}' seem unnecessary and disrupt the flow of the sentence. It makes it appear like a clarification that is not needed.",
-          "suggestion": "هل تفتقد تكاملاً مفيداً أو مكوناً مفيداً في {{productName}} (المجموعة المكتبية المتكاملة ل {{productName}})؟"
+          "description": "The translation adds significant extra text '(المجموعة المكتبية المتكاملة ل ...)' which is not present in the source English text. This changes the structure and meaning of the sentence.",
+          "suggestion": "هل تفتقد تكاملاً مفيداً أو مكوناً في {{organizationName}} {{productName}}؟ اترك طلباً لفريقنا وسننظر في ذلك."
         }
       ],
       "approved_at": null
@@ -44,13 +39,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Azerbaijani translation retains the double curly braces around `organizationName` and `productName`, which is not standard practice in Azerbaijani and might confuse users. It's better to remove them or replace them with a more natural way of incorporating the names.",
-          "suggestion": "Consider replacing `{{organizationName}}` and `{{productName}}` with a more natural phrase, such as '{{organizationName}}-in {{productName}}-də' or simply removing the braces and integrating the names into the sentence more smoothly."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -68,35 +57,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"we will look into that\" is translated as \"wir werden uns darum kümmern.\" While not incorrect, a more direct translation, reflecting the active investigation implied in the English, could be 'wir werden uns das ansehen'. The current translation leans more towards 'we will take care of it,' which isn't quite the same.",
-          "suggestion": "wir werden uns das ansehen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Σας λείπει μια χρήσιμη ενσωμάτωση ή ένα στοιχείο\" translates literally to \"Are you missing a useful integration or an element\". While understandable, a more natural Greek phrasing would be closer to 'Do you need a useful integration or component...'.",
-          "suggestion": "Θέλετε μια χρήσιμη ενσωμάτωση ή ένα στοιχείο..."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'στην ομάδα μας' (in our team) is grammatically correct, but can sound a little formal in this context. A slightly more conversational and natural phrasing would be better. The direct translation of 'to our team' is 'στην ομάδα μας'.",
-          "suggestion": "στην ομάδα μας"
-        },
-        {
-          "type": "formatting",
-          "description": "The semicolon (;) after '{{organizationName}} {{productName}}' breaks the flow and is not typical in Greek conversational style.",
-          "suggestion": "Remove the semicolon after '{{organizationName}} {{productName}}'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -120,30 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Բացակայո՞ւմ եք\" (Bacakanum ek) is a bit awkward. While technically correct, it's not the most natural way to ask 'Are you missing...'. A more natural phrasing would be something along the lines of \"Ձեռքը չկա՞յն օգտակար ինտեգրում...\" (Dzerki chkayin ogutagar integrum...).",
-          "suggestion": "Ձեռքը չկա՞յն օգտակար ինտեգրում կամ բաղադրիչ {{organizationName}} {{productName}}-ում:"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'request' is translated as 'Խնդրանք' (xndranq), which literally means 'prayer' or 'petition'. While understandable, 'անուն' (anun) or 'ներդրում' (nerdrum) might be more appropriate for 'request' in this context.",
-          "suggestion": "Խնդիր թողեք մեր թիմին"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Lo studieremo\" is a literal translation of \"we will look into that\" and sounds awkward in Italian. A more natural phrasing would imply consideration and potential action.",
-          "suggestion": "Consider using a phrase like \"Valuteremo la tua richiesta\" (We will evaluate your request) or \"Prenderemo in considerazione la tua richiesta\" (We will consider your request)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -151,14 +101,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Missing a useful integration or component\" is not accurately conveyed by \"お探しですか？\".  It implies searching rather than a feeling of absence or need. A more accurate translation might convey the feeling of something being lacking.",
-          "suggestion": "「{{organizationName}} {{productName}}で必要な統合やコンポーネントが見つかりませんか？"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Leave a request to our team\" is a little awkward in Japanese. A more natural phrasing would be to solicit a request directly.",
-          "suggestion": "私たちのチームにリクエストをご希望でしたら、お気軽にお申し付けください。"
+          "type": "missing_content",
+          "description": "The second sentence of the English text ('Leave a request to our team and we will look into that.') is missing in the Japanese translation. The Japanese version only translates the first sentence as a question.",
+          "suggestion": "{{organizationName}} {{productName}}に便利な統合やコンポーネントが足りませんか？私たちのチームにリクエストを送ってください。検討させていただきます。"
         }
       ],
       "approved_at": null
@@ -175,13 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ອອກຈາກການຮ້ອງຂໍ\" is awkward and doesn't accurately convey \"Leave a request.\" A more natural phrasing would be something like \"ສົ່ງຄໍາຮ້ອງຂໍ\" or \"ສະເຫນີຄໍາຮ້ອງຂໍ\".",
-          "suggestion": "ສົ່ງຄໍາຮ້ອງຂໍໃຫ້ທີມງານຂອງພວກເຮົາ"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word \"ກວດເບິ່ງ\" (guet beung) isn't the best fit for \"look into.\" It literally means 'check'. A more appropriate translation would be 'ກວດກາ' (guat-gah) which means 'investigate' or 'review'.",
-          "suggestion": "ພວກເຮົາຈະກວດກາ"
+          "description": "The phrase 'ອອກຈາກການຮ້ອງຂໍ' (Leave from the request) is a mistranslation of 'Leave a request'. In Lao, this implies exiting or leaving a request rather than submitting/sending one. Additionally, the sentence ends with 'ພວກເຮົາຈະກວດເບິ່ງວ່າ' which translates to 'we will look into that...' but is grammatically incomplete/awkward in Lao.",
+          "suggestion": "ຂາດການເຊື່ອມໂຍງ ຫຼື ອົງປະກອບທີ່ເປັນປະໂຫຍດໃນ {{organizationName}} {{productName}} ແມ່ນບໍ? ສົ່ງຄຳຮ້ອງຂໍໃຫ້ທີມງານຂອງພວກເຮົາ ແລະ ພວກເຮົາຈະກວດສອບເລື່ອງນີ້."
         }
       ],
       "approved_at": null
@@ -201,64 +141,25 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Zostaw nam wiadomość\" is a bit literal and informal. A more natural translation for \"Leave a request\" in this context would be something like \"Napisz do nas\" or \"Prześlij zapytanie\".",
-          "suggestion": "Napisz do nas"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word \"niezwłocznie\" (immediately) is a bit formal and might be too strong for a friendly request. It implies a very immediate response which might not be guaranteed.",
-          "suggestion": "przyjrzymy się temu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The phrase 'Deixe um pedido à nossa equipa' could be improved for better flow and naturalness in Portuguese. While grammatically correct, it sounds slightly awkward.",
-          "suggestion": "Deixe um pedido para a nossa equipa"
-        },
-        {
-          "type": "formatting",
-          "description": "The curly braces `{{organizationName}} {{productName}}` are consistent with the English content. It is crucial that these variables are replaced with the actual values in the final output, maintaining the formatting for dynamic content.",
-          "suggestion": "Ensure that `{{organizationName}}` and `{{productName}}` are correctly resolved during rendering. No change to the translated text itself is needed."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Leave a request\" is better translated as 'Envie uma solicitação' or 'Faça uma solicitação' in Portuguese. 'Deixe uma solicitação' is grammatically correct but sounds less natural and less action-oriented.",
-          "suggestion": "Envie uma solicitação para nossa equipe e analisaremos isso."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"soluție de integrare\" is a more literal translation of 'integration' than simply 'integrare'. While not incorrect, it's slightly less natural in Romanian in this context. 'Integrare' alone would be more common and flow better.",
-          "suggestion": "Vă lipsește o integrare utilă sau o componentă în {{productName}} {{organizationName}}?"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'propunerea dvs.' (your proposal) is a bit formal and not the most accurate translation of 'request'. It implies a suggestion rather than a simple request.",
-          "suggestion": "Trimiteți o solicitare către echipa noastră și vom analiza cererea dvs."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -270,18 +171,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'අස්ථානගත වී තිබේද' might not be the most natural or common way to express 'missing' in this context. It implies something was displaced, not necessarily missing.",
-          "suggestion": "Consider using a simpler and more direct term for 'missing,' such as 'නැවතී තිබේද' or 'තියුණු අතරතුර'."
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure '{{organizationName}} {{productName}} හි' feels slightly awkward. A more fluent phrasing might be preferred.",
-          "suggestion": "Consider restructuring to '{{organizationName}} {{productName}} සඳහා' or '{{organizationName}} {{productName}} තුළ'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -299,37 +189,19 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The preposition 'у' is repeated unnecessarily after 'productName'. It should appear only once.",
-          "suggestion": "Недостаје вам корисна интеграција или компонента у {{organizationName}} {{productName}}? Оставите захтев нашем тиму и истражићемо то."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Serbian translation includes an unnecessary hyphen after 'productName'.",
-          "suggestion": "Nedostaje vam korisna integracija ili komponenta u {{organizationName}} {{productName}}? Ostavite zahtev našem timu i istražićemo to."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'we will look into that' is translated as 'bununla ilgilenelim'. While technically correct, it's a bit informal and doesn't convey the same level of commitment as 'we will look into that'. A more professional translation would be 'bunu değerlendireceğiz' or 'bunu inceleyeceğiz'.",
-          "suggestion": "bunu değerlendireceğiz"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -345,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

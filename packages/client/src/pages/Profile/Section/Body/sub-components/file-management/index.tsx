@@ -138,7 +138,7 @@ const FileManagement = ({
             isChecked={storeOriginalFiles}
             dataTestId="save_copy_original_toggle_button"
           />
-          <Text>{t("OriginalCopy")}</Text>
+          <Text>{t("Common:OriginalCopy")}</Text>
         </div>
 
         <div className={styles.toggleBtnWrapper}>
@@ -149,7 +149,7 @@ const FileManagement = ({
             dataTestId="display_notification_toggle_button"
           />
           <Text>
-            {t("TrashMoveConfirmation", {
+            {t("Common:TrashMoveConfirmation", {
               sectionName: t("Common:TrashSection"),
             })}
           </Text>
@@ -176,7 +176,7 @@ const FileManagement = ({
             isChecked={displayFileExtension}
             dataTestId="display_file_extension_toggle_button"
           />
-          <Text>{t("DisplayFileExtension")}</Text>
+          <Text>{t("Common:DisplayFileExtension")}</Text>
         </div>
         <div className={styles.toggleBtnWrapper}>
           <ToggleButton

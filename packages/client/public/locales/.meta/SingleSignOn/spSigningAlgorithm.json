@@ -3,7 +3,7 @@
   "content": "Signing Algorithm",
   "content_en_sha1_hash": "5876cdfee061eaf6c6ae5e34c3638b9562c92889",
   "created_at": "2025-05-19T21:30:50.175Z",
-  "updated_at": "2025-05-24T02:58:50.790Z",
+  "updated_at": "2026-04-08T22:24:18.987Z",
   "comment": {
     "text": "This translation key is used to display the \"Signing Algorithm\" label, likely appearing on a form or settings page related to single sign-on certificates. It's part of the UI component that allows users to manage and configure their certificate settings.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation \"Alqoritmin imzalanması\" does not accurately convey the meaning of \"Signing Algorithm\". It translates more literally as \"Algorithm's signing\". A better translation would focus on the action of signing using an algorithm.",
-          "suggestion": "Algoritmlə İmzalanması (Signing with Algorithm)"
+          "description": "The Azerbaijani translation 'Alqoritmin imzalanması' means 'Signing of the algorithm', whereas the English 'Signing Algorithm' refers to the type of algorithm used for signing.",
+          "suggestion": "İmzalama alqoritmi"
         }
       ],
       "approved_at": null
@@ -66,7 +66,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Υπογραφή αλγορίθμου\" while technically correct, is a very literal translation and sounds awkward in Greek. 'Signing Algorithm' refers to the algorithm used to sign a message, not a signature *of* an algorithm. A more natural translation would be something like \"Αλγόριθμος υπογραφής\" or \"Μέθοδος υπογραφής\".",
+          "description": "The Greek translation 'Υπογραφή αλγορίθμου' means 'Algorithm signature' (the signature of an algorithm), whereas the English 'Signing Algorithm' refers to the 'Algorithm used for signing'.",
           "suggestion": "Αλγόριθμος υπογραφής"
         }
       ],
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຂັ້ນຕອນການເຊັນຊື່\" (khan ton kan sen sue) translates to 'Signing Process' or 'Procedure for Signing', not 'Signing Algorithm'. The term 'Algorithm' implies a specific set of rules or steps used in a process, which is not conveyed by the Lao translation.",
-          "suggestion": "Consider a more accurate translation such as \"ວິທີການເຊັນຊື່\" (withi kan sen sue) which means 'Signing Method' or 'Signing Algorithm'."
+          "description": "The Lao translation 'ຂັ້ນຕອນການເຊັນຊື່' means 'Signing Process' or 'Steps for signing', whereas the English 'Signing Algorithm' refers to a mathematical method/logic (Algorithm).",
+          "suggestion": "ອັນກໍຣິທຶມການເຊັນຊື່"
         }
       ],
       "approved_at": null
@@ -135,7 +135,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Dutch translation 'Ondertekening Algoritme' is a literal word-for-word translation that is grammatically incorrect in Dutch. In Dutch, compound nouns should be joined or used with a preposition. 'Ondertekeningsalgoritme' is the correct technical term.",
+          "suggestion": "Ondertekeningsalgoritme"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -165,25 +171,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation includes a colon (:) which wasn't present in the English source. This might indicate a stylistic choice that needs verification against the project's style guide.",
-          "suggestion": "Consider removing the colon (:) if the project style guide dictates a more literal translation. Otherwise, confirm the colon is intentional."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Sinhala word 'ඇල්ගොරිතම' (algorithama) is a transliteration and not a native Sinhala term for algorithm. While understandable, it lacks fluency.",
-          "suggestion": "Consider using a more established Sinhala term if one exists, or adapting the phrase to be more natural in Sinhala. Researching existing Sinhala technical vocabulary would be beneficial. A possible alternative could be 'සත්සන් ක්‍රමවේදය' (sathsan kramevedaya) but its appropriateness needs verification in context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -204,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Алгоритам пријављивања\" literally translates to \"Signing Algorithm\". While understandable, it's not the most natural or precise translation of 'Signing Algorithm' in a technical context. 'Signing Algorithm' refers to the cryptographic algorithm used for digital signatures. A more appropriate translation would be 'Алгоритма за потписивање' or 'Алгоритма за дигитални потпис'.",
-          "suggestion": "Алгоритма за потписивање"
+          "description": "The translation 'пријављивања' means 'logging in' or 'signing in' (authentication), whereas 'Signing Algorithm' in the context of certificates refers to 'digital signing' (cryptographic signature).",
+          "suggestion": "Алгоритам потписивања"
         }
       ],
       "approved_at": null
@@ -216,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Algoritam prijavljivanja' is a literal translation of 'Signing Algorithm' but doesn't accurately convey the technical meaning in this context. 'Signing Algorithm' refers to a cryptographic algorithm used for digital signatures, not a general login algorithm.",
-          "suggestion": "Algoritam za digitalni potpis"
+          "description": "The translation 'Algoritam prijavljivanja' means 'Login Algorithm' or 'Sign-in Algorithm'. In the context of certificates and SSO (as indicated by 'spSigningAlgorithm'), 'Signing' refers to the cryptographic process of creating a digital signature, not the user authentication process.",
+          "suggestion": "Algoritam potpisivanja"
         }
       ],
       "approved_at": null
@@ -237,16 +231,16 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Thuật toán ký tên\" is a literal translation of \"Signing Algorithm\", it's not the most natural or commonly used terminology in Vietnamese for this context. A more suitable translation would convey the meaning of a cryptographic algorithm used for signing.",
-          "suggestion": "Thuật toán chữ ký"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

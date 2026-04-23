@@ -27,6 +27,7 @@
 import React from "react";
 import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import isNil from "lodash/isNil";
 
 import ConflictResolve from "@docspace/shared/dialogs/conflict-resolve";
 import { toastr, type TData } from "@docspace/ui-kit/components/toast";
@@ -67,6 +68,7 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     setFillPDFDialogData,
     setIsShareFormData,
     setAssignRolesDialogData,
+    startFillingInFormRoom,
   } = props;
 
   const { t, ready } = useTranslation(["Common"]);
@@ -175,15 +177,23 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
       sessionStorage.setItem("filesSelectorPath", `${destFolderId}`);
       const result = await itemOperationToFolder(data);
 
-      if (
-        result &&
-        selectedFolder &&
-        fromShareCollectSelector &&
-        result.files?.length === 1 &&
-        createDefineRoomType === RoomsType.VirtualDataRoom
-      ) {
-        const [resultFile] = result.files;
-        setAssignRolesDialogData(true, selectedFolder.title, resultFile);
+      const hasFile =
+        result && !isNil(result.files) && result.files.length === 1;
+
+      if (!hasFile || !fromShareCollectSelector) return;
+
+      const [resultFile] = result.files ?? [];
+
+      switch (createDefineRoomType) {
+        case RoomsType.FormRoom:
+          await startFillingInFormRoom(resultFile);
+          break;
+        case RoomsType.VirtualDataRoom:
+          if (!selectedFolder) return;
+          setAssignRolesDialogData(true, selectedFolder.title, resultFile);
+          break;
+        default:
+          break;
       }
     } catch (error: unknown) {
       console.error(error);
@@ -339,7 +349,13 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
 };
 
 export default inject<TStore>(
-  ({ dialogsStore, uploadDataStore, filesStore, filesActionsStore }) => {
+  ({
+    dialogsStore,
+    uploadDataStore,
+    filesStore,
+    filesActionsStore,
+    contextOptionsStore,
+  }) => {
     const {
       conflictResolveDialogVisible: visible,
       setConflictResolveDialogVisible,
@@ -371,6 +387,8 @@ export default inject<TStore>(
       updateActiveFolders,
       setSelected,
     } = filesStore;
+
+    const { startFillingInFormRoom } = contextOptionsStore;
 
     const files = items
       ? (items as TFile[]).filter((f: TFile) => {
@@ -411,6 +429,7 @@ export default inject<TStore>(
       setFillPDFDialogData,
       setIsShareFormData,
       setAssignRolesDialogData,
+      startFillingInFormRoom,
     };
   },
 )(observer(ConflictResolveDialog));

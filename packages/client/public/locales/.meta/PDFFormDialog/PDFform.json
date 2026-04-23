@@ -3,7 +3,7 @@
   "content": "PDF form",
   "content_en_sha1_hash": "3ca9af6a134077a287add11f88e394868153a2c0",
   "created_at": "2025-05-19T21:30:53.760Z",
-  "updated_at": "2026-02-19T13:36:32.402Z",
+  "updated_at": "2026-04-07T19:35:05.169Z",
   "comment": {
     "text": "The translation key \"PDFform\" is used to display the label for a PDF form element in a modal dialog. It appears on a dialog's header and is typically translated to \"PDF form\".",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'PDF forması' is technically a correct word, it literally translates to 'PDF form/uniform'. A more natural and accurate translation for 'PDF form' in Azerbaijani would be 'PDF forması' or 'PDF doldurulabilən forması'.",
-          "suggestion": "PDF forması"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -147,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Formular PDF\" is understandable, a more accurate and natural Romanian translation of \"PDF form\" would be \"Formular PDF-ului\" (PDF form) or \"Model PDF\". \"Formular PDF\" can be interpreted as \"PDF Formular\" which is the inverse of what's intended.",
-          "suggestion": "Formular PDF-ului or Model PDF"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -171,13 +159,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Formulár PDF' is understandable, a more natural and accurate translation of 'PDF form' in Slovak would be 'PDF formulár'. The word order is typically reversed in Slovak when combining a file type with a noun.",
-          "suggestion": "PDF formulár"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -189,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Serbian word 'образац' is technically correct, but in the context of a PDF form, 'образац' (obrasac) is better than 'образац' (obrazac). While both are valid, 'obrasac' aligns more closely with the common usage and understanding of 'form' in this digital context.",
-          "suggestion": "PDF образац (PDF obrasac)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

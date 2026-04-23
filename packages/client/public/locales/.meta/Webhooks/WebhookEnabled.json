@@ -3,7 +3,7 @@
   "content": "Webhook enabled",
   "content_en_sha1_hash": "8c79b8000073cc21ee1f30fb7d537fe079a7a6b3",
   "created_at": "2025-05-19T21:30:49.876Z",
-  "updated_at": "2025-09-17T13:43:01.951Z",
+  "updated_at": "2026-04-08T18:57:40.654Z",
   "comment": {
     "text": "The \"WebhookEnabled\" translation key is used to display a success message when enabling or disabling a webhook. It will show \"Webhook enabled\" when the webhook is active and \"Webhook disabled\" when it's inactive. This text appears in an alert dialog after toggling a webhooks setting.",
     "is_auto": true,
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'تم تفعيل Webhook' while conveying the general meaning, is not the most natural or precise translation of 'Webhook enabled'. A more accurate and common phrasing would be 'Webhook مُفَعَّل' or 'Webhook مُشَغَّل'.",
-          "suggestion": "Webhook مُفَعَّل"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -93,25 +87,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation \" Webhook abilitato\" has a leading space.",
-          "suggestion": "Webhook abilitato"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ウェブフック有効' is technically correct but could be more natural. 'ウェブフック有効' directly translates to 'Webhook valid/effective'. A more common and natural phrasing for 'Webhook enabled' would be 'ウェブフックが有効になっています' or 'ウェブフックは有効です'.",
-          "suggestion": "ウェブフックが有効になっています"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -129,13 +111,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation \"Tīmekļa aizķere ir iespējota\" does not accurately translate \"Webhook enabled.\" \"Tīmekļa aizķere\" translates to \"web traffic\" or \"web congestion\", not \"webhook\".",
-          "suggestion": "A more accurate translation would be something like \"Webhook ir aktivizēts\" or \"Webhook iespējots\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -165,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Webhook-ul a fost activat' is overly literal and sounds unnatural in Romanian. A more natural translation would be 'Webhook activat' or 'Webhook-uri activate'.",
-          "suggestion": "Webhook activat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -183,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"වෙබ්හුක් සක්‍රිය කරන ලදි\" literally translates to 'Webhook was enabled'. The English 'Webhook enabled' implies a current state, not a past action. A more accurate translation would convey that the webhook is currently enabled.",
-          "suggestion": "වෙබ්හුක් ක්‍රියාත්මකයි"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -207,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Webhook омогућен' while technically correct, could be improved for clarity and naturalness. 'Омогућен' implies 'enabled' but is a bit formal in this context. A more common and user-friendly option would be 'Активиран Webhook'.",
-          "suggestion": "Активиран Webhook"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -241,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

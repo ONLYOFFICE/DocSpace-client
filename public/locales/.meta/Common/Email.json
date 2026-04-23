@@ -3,7 +3,7 @@
   "content": "Email",
   "content_en_sha1_hash": "84add5b2952787581cb9a8851eef63d1ec75d22b",
   "created_at": "2025-05-19T21:30:44.776Z",
-  "updated_at": "2026-02-19T13:36:32.485Z",
+  "updated_at": "2026-04-08T11:11:19.944Z",
   "comment": {
     "text": "This translation key represents the label for displaying a user's email address, typically shown alongside their name in a welcome message or profile section. It appears in various UI elements, such as social authentication dialogs and contact filtering interfaces, where users' email addresses need to be displayed. The translated text should correspond to the English content \"Email\".",
     "is_auto": true,
@@ -147,25 +147,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'E-mail' is a common French adaptation of 'Email', it's not the most accurate or preferred translation. 'Courriel' is the officially recommended and more accurate translation.",
-          "suggestion": "Courriel"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'էլ. հասցե' is a common way to represent 'email' in Armenian, it's more literally 'electronic address'. A more direct and arguably more appropriate translation would be 'էլեկտրոնային փոստ' (elektronayen post).",
-          "suggestion": "էլեկտրոնային փոստ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -231,19 +219,19 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Russian translation uses Latin script ('Email') instead of Cyrillic.",
+          "suggestion": "Электронная почта"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'වි-තැපෑල' (vi-tæpæla) while understandable, is not the most common or natural translation of 'Email'. The most common and widely accepted translation is 'ඊමේල්' (īmēla), which is a transliteration of the English word.",
-          "suggestion": "ඊමේල් (īmēla)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -261,7 +249,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation uses the Latin script ('Email') instead of the required Serbian Cyrillic script.",
+          "suggestion": "Е-пошта"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -289,6 +283,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

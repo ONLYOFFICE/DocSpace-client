@@ -3,7 +3,7 @@
   "content": "Download {{organizationName}} Documents on the App Store",
   "content_en_sha1_hash": "88fe15e78deb10b6391b1f522b2fad3eee7ccb8d",
   "created_at": "2025-05-19T21:30:46.567Z",
-  "updated_at": "2025-08-21T11:22:39.948Z",
+  "updated_at": "2026-04-08T04:43:21.179Z",
   "comment": {
     "text": "This translation key is used for the \"Download {{organizationName}} Documents on the App Store\" text displayed in an app store download button. The button likely appears when users tap or click within a specific UI component, such as a component marked as `onClick` event handler, to prompt them to download organization-specific documents from the App Store.",
     "is_auto": true,
@@ -29,9 +29,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The word 'من' (min) translates to 'from'. While technically correct, a more natural phrasing in Arabic would use a word that implies obtaining or accessing, not just being 'from'.",
-          "suggestion": "حمّل {{organizationName}} Documents من خلال/عبر متجر Apple"
+          "type": "missing_content",
+          "description": "The translation omits 'App Store', using the generic 'المتجر' (The Store) instead. This is critical as the English text specifically references the 'App Store'.",
+          "suggestion": "حمّل {{organizationName}} Documents من متجر التطبيقات"
         }
       ],
       "approved_at": null
@@ -57,25 +57,31 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The German translation uses 'im AppStore' which is not standard. It should be 'im App Store'.",
-          "suggestion": "Laden Sie {{organizationName}} Documents im App Store herunter"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Documents' was not translated into Greek, leaving it in English, which breaks the linguistic consistency of the UI string.",
+          "suggestion": "Λήψη {{organizationName}} Εγγράφων από το App Store"
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Documents' was not translated into Spanish, leaving it in English, which breaks the linguistic consistency of the UI string.",
+          "suggestion": "Descargar documentos de {{organizationName}} en el App Store"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -87,7 +93,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The definite article 'l'' is missing before 'App Store', which is grammatically necessary in French to convey the correct meaning ('sur l'App Store').",
+          "suggestion": "Télécharger {{organizationName}} Documents sur l'App Store"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -95,9 +107,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word \"Dփաստաթղթերը\" seems to be a misspelling or incomplete Armenian word. It likely intends to represent \"Documents\".",
-          "suggestion": "Փաստաթղթերը"
+          "type": "incorrect_translation",
+          "description": "The word 'Dփաստաթղթերը' contains a typo/extra character 'D' at the beginning, which makes it nonsensical in Armenian.",
+          "suggestion": "Ներբեռնել {{organizationName}} փաստաթղթերը App Store-ում"
         }
       ],
       "approved_at": null
@@ -149,9 +161,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Portuguese translation uses 'Faça o download' which is a bit formal for an app store description. A more natural phrasing might be preferred.",
-          "suggestion": "Baixe"
+          "type": "incorrect_translation",
+          "description": "The translation treats 'Documents' as part of the organization name or a literal noun, whereas in the English source, 'Documents' is part of the app name/description. In Portuguese, 'Documents' is left in English, which makes the sentence 'Faça o download do {{organizationName}} Documents' grammatically awkward and potentially confusing as it mixes languages mid-phrase.",
+          "suggestion": "Baixe os documentos da {{organizationName}} na App Store"
         }
       ],
       "approved_at": null
@@ -165,7 +177,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Documents' was not translated into Romanian, leaving the sentence in a mix of Romanian and English.",
+          "suggestion": "Descarcă documentele {{organizationName}} din App Store"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -177,13 +195,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'බාගන්නන්න' is overly informal and sounds awkward in this context. A more formal and appropriate verb for 'download' in this situation would be 'ගන්නා' or 'බාගත'.",
-          "suggestion": "{{organizationName}} ලේඛන ඇප් ස්ටෝర్‌లో ගන්නා or {{organizationName}} ලේඛන ඇප් ස්ටෝర్‌లో බාගත"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -201,13 +213,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The word \"App Store-у\" is using an incorrect case/form.  It's a genitive case, but the more common and natural phrasing for a title or link would use the nominative case: \"App Store\".",
-          "suggestion": "Преузми {{organizationName}} Документа на App Store"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -225,7 +231,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Documents' was not translated into Ukrainian, leaving it in English, which breaks the linguistic consistency of the UI string.",
+          "suggestion": "Завантажити {{organizationName}} Документи в App Store"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -240,15 +252,16 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Docs' for 'Documents' is too literal and doesn't convey the full meaning in a natural way in Chinese. 'Documents' refers to a collection of files.",
-          "suggestion": "在App Store上下载{{organizationName}} 的文件"
-        },
-        {
-          "type": "formatting",
-          "description": "While technically not incorrect, adding a particle before “文件” (file) would read more naturally.  Consider adding 的.",
-          "suggestion": "在App Store上下载{{organizationName}} 的文件"
+          "description": "The word 'Documents' is translated as 'Docs', which is an abbreviation. While understandable, it is a loss of formal meaning compared to the source 'Documents'.",
+          "suggestion": "在App Store上下载{{organizationName}}文档"
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

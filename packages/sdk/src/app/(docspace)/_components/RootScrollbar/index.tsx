@@ -44,6 +44,7 @@ const RootScrollbar = ({ children }: React.PropsWithChildren) => {
       id="customScrollBar"
       className={styles.rootScrollbar}
       autoHide={currentDeviceType === DeviceType.mobile}
+      noScrollX
     >
       {children}
     </Scrollbar>

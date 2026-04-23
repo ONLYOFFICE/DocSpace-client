@@ -3,7 +3,7 @@
   "content": "Invite via link",
   "content_en_sha1_hash": "a8314a068e610756fa8088a3772ae621fcd59e37",
   "created_at": "2025-05-19T21:30:54.730Z",
-  "updated_at": "2026-02-19T13:36:32.527Z",
+  "updated_at": "2026-04-07T19:35:05.124Z",
   "comment": {
     "text": "This translation key is used to display the text \"Invite via link\" in a UI component, likely as a button label or header. It appears in an external links panel and is associated with invite actions when accessing paid role options.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Keçidlə dəvət edin' is a somewhat literal and less natural translation of 'Invite via link'. A more idiomatic translation would be more appropriate.",
-          "suggestion": "Consider 'Link vasitəsilə dəvət edin' or 'Link ilə dəvət edin' for a more natural phrasing."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -81,13 +75,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Inviter via le lien' is not the most natural or idiomatic way to say 'Invite via link' in French. While grammatically correct, it sounds slightly awkward.",
-          "suggestion": "Utiliser une formulation plus naturelle comme 'Inviter par lien' ou 'Envoyer un lien d'invitation'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -183,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Позови путем линка\" is understandable, a more natural and precise translation of \"Invite via link\" in Serbian (Cyrillic) would be \"Позови преко везе\" or \"Позови путем везе\". \"Линка\" is a borrowed word and feels slightly awkward in this context.",
-          "suggestion": "Позови преко везе"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

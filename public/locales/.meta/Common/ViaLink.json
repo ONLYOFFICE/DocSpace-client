@@ -3,7 +3,7 @@
   "content": "Via link",
   "content_en_sha1_hash": "82b77d2291896256b99fa9e0bc5d62490fdcf53d",
   "created_at": "2025-08-27T10:14:18.067Z",
-  "updated_at": "2025-10-13T20:26:42.877Z",
+  "updated_at": "2026-04-07T20:33:56.379Z",
   "comment": {
     "text": "This key displays a link label, likely a button or link text, indicating a connection or pathway. It appears conditionally based on the `requestToken` property of an item, suggesting it provides access to a related resource or page. Translators should consider a term that accurately conveys the idea of a connection or pathway.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Bağlantı vasitəsilə\" is a literal and somewhat awkward translation of \"Via link.\" It's more accurately translated as \"through link\" or \"via.\" The current translation is too formal and doesn't flow naturally in Azerbaijani.",
-          "suggestion": "Consider a more natural translation like \"Vasitə ilə\" or simply \"Vasitə\" depending on the surrounding context. If emphasizing the link itself is important, \"Bağlantı yolu ilə\" could be used, but it's still longer than necessary."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -81,25 +75,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Via le lien\" is a literal translation, it sounds awkward in French. A more natural phrasing would be \"Par lien\" or \"Via un lien\".",
-          "suggestion": "Par lien"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation \"Հղումով\" (Hghumov) translates to 'with a link' or 'by link' rather than simply 'Via link'. It doesn't convey the same meaning as the English phrase, which often refers to a direct link or a link within a particular context.",
-          "suggestion": "Consider alternatives like \"մասին\" (masin - about) combined with 'link' or a more descriptive phrasing depending on the context. For example, \"Մասին հղումով\" (Masin hghumov) - 'About the link', or simply using the English term 'Via link' transliterated into Armenian if appropriate."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -132,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation \"Pēc saites\" does not accurately convey the meaning of \"Via link\". \"Pēc saites\" translates to \"After the link\" or \"By the link\", implying a sequence or action following the link, not the link itself. A more accurate translation would depend on the specific context, but common alternatives include \"caur saiti\", \"ar saiti\", or a more descriptive phrase depending on the intended meaning.",
-          "suggestion": "Consider \"caur saiti\" (through the link) or \"ar saiti\" (with the link) for a more accurate translation. Alternatively, provide context for a more appropriate translation."
+          "description": "The Latvian translation 'Pēc saites' means 'After the link' or 'Following the link' (temporal/sequential), whereas the English 'Via link' means 'By means of a link' (method/instrumental).",
+          "suggestion": "Saite"
         }
       ],
       "approved_at": null
@@ -147,7 +129,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Polish translation is identical to the English text, meaning it is not actually translated into Polish.",
+          "suggestion": "Przez link"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -201,37 +189,19 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Путем линка\" is understandable, it's a somewhat literal and not the most natural way to say \"Via link\" in Serbian. A more common and idiomatic translation would be something like \"Преко везе\" (Preko veze) or \"Через линк\" (Čerez link). \"Путем линка\" sounds slightly awkward.",
-          "suggestion": "Consider using \"Преко везе\" (Preko veze) or \"Через линк\" (Čerez link) for a more natural-sounding translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation \"Putem linka\" does not accurately convey the meaning of \"Via link\". \"Putem\" means \"through\" or \"by way of,\" which isn't the core meaning of \"Via link\" indicating a direct link.",
-          "suggestion": "A more accurate translation would be something like \"Preko linka\" (meaning 'through a link'), or possibly 'Direktan link' (Direct link) depending on the intended context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Bağlantı yoluyla\" is a literal translation of \"Via link\", it's not the most natural or idiomatic Turkish phrasing. \"Via link\" often implies a direct link or connection, and a more fitting translation would be something like \"Üzerinden\" or \"Aracılığıyla\".",
-          "suggestion": "Consider alternatives like \"Üzerinden\" or \"Aracılığıyla\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

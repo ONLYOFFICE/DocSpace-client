@@ -6,6 +6,7 @@
   "AutomaticIndexing": "自动索引",
   "AutomaticIndexingDescription": "启用自动索引，通过序列号对文件和文件夹进行索引。所有用户的默认排序方式将设置为按序号排序。",
   "ChooseRoomType": "选择房间类型",
+  "ConfigureDatabaseConnection": "配置数据库连接，在集成 → 第三方服务中",
   "CreateRoomConfirmation": "继续且不连接存储？\n您已选择尚未连接的第三方存储选项。如果在未连接服务的情况下继续，则不会添加此选项。",
   "CreateRoomWatermarksConfirmation": "您尚未设置应用于此房间文档的水印。您可以随时在房间编辑设置中添加水印。是否不使用水印继续？",
   "CreateTagOption": "创建标签",
@@ -39,5 +40,9 @@
   "UserName": "用户名称",
   "ViewerInfo": "查看者信息",
   "WatermarkPreview": "水印预览",
-  "WatermarkPreviewHelp": "此图像预览将大致展示水印在您的文件中的显示效果"
+  "WatermarkPreviewHelp": "此图像预览将大致展示水印在您的文件中的显示效果",
+  "GoToIntegrations": "前往集成",
+  "NeedMoreIntegrations": "需要更多集成吗？",
+  "NeedMoreIntegrationsDescription": "使用 Webhooks 将数据发送到您自己的系统，或通过 Zapier 将表单连接到数千个服务。",
+  "NoDatabaseConnections": "未配置数据库连接"
 }

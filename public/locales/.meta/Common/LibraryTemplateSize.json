@@ -3,7 +3,7 @@
   "content": "Size",
   "content_en_sha1_hash": "b7152342a267362add3c0d7f69f720f7a9c76c9e",
   "created_at": "2026-03-31T15:18:15.093Z",
-  "updated_at": "2026-03-31T15:18:15.093Z",
+  "updated_at": "2026-04-08T05:53:35.870Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -26,7 +26,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Ölçek' means 'Scale' (as in a map scale or a ratio). For 'Size' (dimensions/magnitude), the correct term is 'Ölçü'.",
+          "suggestion": "Ölçü"
+        }
+      ],
       "approved_at": null
     },
     "bg": {

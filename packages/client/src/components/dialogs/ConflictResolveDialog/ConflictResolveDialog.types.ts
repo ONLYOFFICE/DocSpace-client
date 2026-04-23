@@ -107,4 +107,5 @@ export interface ConflictResolveDialogProps {
   cancelUploadAction: () => void;
 
   setAssignRolesDialogData: TStore["dialogsStore"]["setAssignRolesDialogData"];
+  startFillingInFormRoom: TStore["contextOptionsStore"]["startFillingInFormRoom"];
 }

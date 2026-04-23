@@ -3,7 +3,7 @@
   "content": "Turn off disk space limit for this {{productName}}.",
   "content_en_sha1_hash": "00f04ca4180774b7c9a26c6f91babcdac9551e23",
   "created_at": "2025-05-19T21:30:49.361Z",
-  "updated_at": "2026-02-19T13:36:33.139Z",
+  "updated_at": "2026-04-07T21:02:05.404Z",
   "comment": {
     "text": "This translation key is used to display a message that allows users to turn off the disk space limit feature in the {{productName}} application. The text appears in a dialog box when users need to change storage quota settings. It provides context for translators to ensure the correct phrase is used in the corresponding language.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'söndürün' (turn off) is not the most natural way to express disabling a limit in this context. A more appropriate term would convey disabling or removing the limit.",
-          "suggestion": "Bu {{productName}} üçün disk sahəsi limitini deaktiv edin."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -54,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech translation \"pro tento prostor {{productName}}\" is inaccurate. 'prostor' means 'space' in a more general sense (like 'area' or 'room'). It doesn't accurately convey the meaning of 'for this {{productName}}' in the context of a product.",
-          "suggestion": "Vypnutí limitu místa na disku pro tento {{productName}}."
+          "description": "The Czech translation is a noun phrase ('Turning off...') instead of an imperative command ('Turn off...'). In a UI context, this changes the meaning from an action/instruction to a description of a state or process.",
+          "suggestion": "Vypněte limit místa na disku pro tento {{productName}}."
         }
       ],
       "approved_at": null
@@ -63,7 +57,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \"n\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -81,13 +81,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ota levytilaraja pois käytöstä tämän {{productName}} osalta' is slightly awkward. 'Osalta' implies 'regarding' or 'in terms of', which isn't the most natural phrasing for this context. A more natural Finnish way to express 'for this {{productName}}' would be 'tälle {{productName}}' or 'tästä {{productName}}'.",
-          "suggestion": "Ota levytilaraja pois käytöstä tälle {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -99,13 +93,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Անջատեք սկավառակի տարածքի սահմանափակումն այս {{productName}}-ի համար:' is a bit literal and could be improved for naturalness. While technically correct, it doesn't flow as smoothly in Armenian.",
-          "suggestion": "Consider a more natural phrasing like 'Հանել սկավառակի տարածքի սահմանափակումն այս {{productName}}-ից:' or 'Արձակել սկավառակի տարածքի սահմանափակումն այս {{productName}}-ի համար:''"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -132,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ປິດຈໍາກັດເນື້ອທີ່ໂຕ້ຫນາ\" is not the most natural or accurate translation of \"Turn off disk space limit.\"  While technically understandable, it's a bit awkward.",
-          "suggestion": "ປິດການກໍານົດຂະໜາດໂຕ້ຫນາສໍາລັບ {{productName}} ນີ້."
+          "description": "The term 'ໂຕ້ຫນາ' (to be thick/bold) is used instead of 'ຈັດເກັບຂໍ້ມູນ' (storage) or 'ໜ່ວຍຄວາມຈໍາ' (memory/disk). 'ໂຕ້ຫນາ' is a nonsensical translation for 'disk space' in this context.",
+          "suggestion": "ປິດການຈໍາກັດເນື້ອທີ່ຈັດເກັບຂໍ້ມູນສໍາລັບ {{productName}} ນີ້."
         }
       ],
       "approved_at": null
@@ -174,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Dezactivare limita spatiul de stocare pentru acest spațiu {{productName}}' is not accurate. 'spațiu' (space) is redundant and incorrect in this context. It should translate to 'disk space limit' more directly.",
-          "suggestion": "Dezactivare limita de stocare pentru acest {{productName}}."
+          "description": "The Romanian translation uses a noun phrase ('Dezactivare limita...') which translates to 'Deactivation of the limit...', whereas the English text is an imperative command ('Turn off...'). In a UI context, this changes the tone from an action/button command to a descriptive label.",
+          "suggestion": "Dezactivează limita de spațiu pe disc pentru acest {{productName}}."
         }
       ],
       "approved_at": null
@@ -189,37 +177,19 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'තැටියේ' is a slightly awkward phrasing. While technically correct, it's not the most natural way to say 'disk' in Sinhala in this context.",
-          "suggestion": "Consider using 'ආචரண' or 'ඩ්‍රයිව්' for 'disk'.  For example: 'මෙම {{productName}} සඳහා ආචரண ඉඩ සීමාව අක්‍රිය කරන්න.' or 'මෙම {{productName}} සඳහා ඩ්‍රයිව් ඉඩ සීමාව අක්‍රිය කරන්න.'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'priestor' (space) is used incorrectly. It should refer to the product name, not a physical space.",
-          "suggestion": "Vypnite limit miesta na disku pre toto {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'prostor' is incorrect in this context. It means 'space' in a general sense. The correct word for 'disk' in this context is 'disk' or potentially 'trdi disk'.",
-          "suggestion": "Izklopite omejitev prostora na disku za ta disk {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

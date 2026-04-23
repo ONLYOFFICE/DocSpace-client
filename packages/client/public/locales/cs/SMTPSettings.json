@@ -2,7 +2,6 @@
   "AuthViaNTLM": "Autentizace prostřednictvím NTLM",
   "EnableSSL": "Povolit SSL",
   "EnterDomain": "Zadejte doménu",
-  "EnterEmail": "Zadejte e-mail",
   "EnterLogin": "Zadejte přihlašovací jméno",
   "EnterPort": "Zadat port",
   "Host": "Hostitel",

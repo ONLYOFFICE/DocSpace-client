@@ -3,7 +3,7 @@
   "content": "Sign in with Facebook",
   "content_en_sha1_hash": "fbd1e9ae71740f8ee4b988eca5c601f8a0636814",
   "created_at": "2025-05-19T21:30:48.753Z",
-  "updated_at": "2026-03-26T08:26:58.373Z",
+  "updated_at": "2026-04-10T08:21:04.401Z",
   "comment": {
     "text": "Signs in a social media authentication process, typically appearing on buttons or dialogs to confirm selection of Facebook as an account provider.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 467,
+      "line_number": 469,
       "context": "? t(\"Common:SignUpWithGoogle\")\n : t(\"Common:SignInWithGoogle\");\n case \"facebook\":\n return signUp\n ? t(\"Common:SignUpWithFacebook\")\n : t(\"Common:SignInWithFacebook\");\n case \"twitter\":\n return signUp\n ? t(\"Common:SignUpWithTwitter\")\n : t(\"Common:SignInWithTwitter\");\n case \"linkedin\":",
       "module": "/packages/shared"
     }
@@ -29,14 +29,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation \"تسجيل الدخول Facebook\" is a literal transliteration of \"Sign in with Facebook\" instead of a proper translation. It doesn't convey the intended meaning naturally in Arabic.",
-          "suggestion": "تسجيل الدخول باستخدام فيسبوك (Tasjeel al-dukhool bi-istikhdaam Facebook)"
-        },
-        {
-          "type": "formatting",
-          "description": "The Arabic text lacks proper spacing and potentially punctuation to appear more natural in a UI context. While technically correct, it's not ideal for presentation.",
-          "suggestion": "تسجيل الدخول باستخدام فيسبوك (Tasjeel al-dukhool bi-istikhdaam Facebook)"
+          "type": "missing_content",
+          "description": "The preposition 'with' is missing in the Arabic translation, making the phrase 'Sign in Facebook' instead of 'Sign in with Facebook'.",
+          "suggestion": "تسجيل الدخول باستخدام Facebook"
         }
       ],
       "approved_at": null
@@ -62,13 +57,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'Login' is a more literal translation of 'Sign in'. A more idiomatic German equivalent would be 'Anmelden'",
-          "suggestion": "Anmelden über Facebook"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -98,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Մուտք գործել Facebook-ով\" is a very literal translation. A more natural and idiomatic Armenian phrase would be preferable. 'Մուտքագրվել Facebook-ի միջոցով' or 'Մուտքագրվել Facebook-ով' (using a shortened form) would sound more fluent.",
-          "suggestion": "Մուտքագրվել Facebook-ի միջոցով"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -158,25 +141,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Entrar com Facebook\" is a literal translation but doesn't convey the same level of formality or user experience as \"Sign in with Facebook\". A more natural and commonly used translation would be \"Acessar com Facebook\" or \"Fazer login com Facebook\".",
-          "suggestion": "Acessar com Facebook"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Conectare cu Facebook' is understandable, a more accurate and common translation for 'Sign in with Facebook' would be 'Autentificare cu Facebook' or 'Logare cu Facebook'. 'Conectare' implies a general connection, whereas 'Autentificare' or 'Logare' specifically refer to the authentication/login process.",
-          "suggestion": "Autentificare cu Facebook"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -206,13 +177,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Пријави се путем Facebook-а' is a literal translation but sounds slightly unnatural in Serbian. A more idiomatic translation would be 'У loguj се са Facebook-ом' or 'Пријави се са Facebook-ом'.",
-          "suggestion": "У loguj се са Facebook-ом"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -242,19 +207,19 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Chinese translation means 'Unbind Facebook login' (解绑), which is the opposite of 'Sign in' (登录).",
+          "suggestion": "使用 Facebook 登录"
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Identifikohuni me Facebook' is understandable, a more natural and commonly used translation would be 'Kyquni me Facebook' or 'Hyni me Facebook'. 'Identifikohuni' is more formal and less frequently used in this context.",
-          "suggestion": "Kyquni me Facebook"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

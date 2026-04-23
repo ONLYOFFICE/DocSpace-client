@@ -3,7 +3,7 @@
   "content": "Webhook details",
   "content_en_sha1_hash": "fab9b0a82d59909c30061f70e790f5909f513155",
   "created_at": "2025-05-19T21:30:49.870Z",
-  "updated_at": "2025-05-24T02:05:09.142Z",
+  "updated_at": "2026-04-08T18:59:34.228Z",
   "comment": {
     "text": "This translation key is used for the label of a dropdown menu that displays details about webhooks. It appears in a table view within the Webhook History section and contains the text \"Webhook details\" when displayed as an option.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/DetailsNavigationHeader.js",
-      "line_number": 132,
+      "line_number": 128,
       "context": "isFill\n onClick={onBack}\n className=\"arrow-button\"\n />\n <Heading type=\"content\" truncate className=\"headline\">\n {t(\"WebhookDetails\")}\n </Heading>\n </div>\n \n <IconButton\n className=\"retry\"",
       "module": "/packages/client"
     },
@@ -51,13 +51,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Подробности за уеб кука\" is understandable, a more accurate and commonly used translation for \"Webhook details\" would be \"Информация за уебкук\" or \"Детайли за уебкук\". \"Уеб кука\" is not a standard term.",
-          "suggestion": "Информация за уебкук"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -123,25 +117,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation includes the English word 'Webhook' without any attempt to translate it. While loanwords are common, maintaining consistency and considering the target audience would benefit from exploring a localized term if available or at least ensuring consistent formatting (e.g., always italicized or enclosed in quotes).",
-          "suggestion": "Consider investigating a Lao equivalent for 'Webhook' or consistently formatting 'Webhook' (e.g., 'ລາຍລະອຽດ Webhook' or 'ລາຍລະອຽດ *Webhook*')."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation \"Sīkāka informācija par tīmekļa aizķeri\" translates to 'More information about web congestion'. This is not an accurate translation of 'Webhook details'. 'Webhook' is a technical term that should be preserved or adequately explained.",
-          "suggestion": "Consider alternatives like \"Webhooku detaļas\", \"Webhooku izdevumi\", or \"Webhooku ziņas\" depending on the specific context and intended meaning.  A more explanatory translation like \"Webhooku informācija\" might also be suitable."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -171,13 +153,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Detalii Webhook' is a direct transliteration and lacks proper Romanian grammatical flow. 'Webhook' is an English term and shouldn't be directly incorporated into the Romanian phrase in this manner. A more natural translation would consider the context of 'Webhook details'.",
-          "suggestion": "Posibile sugestii: 'Informații despre webhook', 'Specificații webhook', 'Setări webhook', or a more descriptive phrase depending on the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -235,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

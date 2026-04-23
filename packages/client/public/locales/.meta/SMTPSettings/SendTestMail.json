@@ -3,7 +3,7 @@
   "content": "Send Test Mail",
   "content_en_sha1_hash": "9cc6d411269baaf5e4d72721b6423d33917cbfc8",
   "created_at": "2025-05-19T21:30:53.311Z",
-  "updated_at": "2025-12-09T12:12:27.328Z",
+  "updated_at": "2026-04-08T21:44:35.218Z",
   "comment": {
     "text": "This translation key is used to display a message for sending a test email when a button is clicked. It appears in a UI component where users can configure SMTP settings and triggers an action that simulates sending an email.",
     "is_auto": true,
@@ -87,30 +87,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Inivia messaggio di prova' is not the most natural or idiomatic Italian for 'Send Test Mail'. While technically correct, 'Invia' can sound a bit formal in this context.",
-          "suggestion": "Invia una email di prova"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Japanese translation includes unnecessary spaces between 'テスト' and 'メール'.",
-          "suggestion": "テストメールを送信する"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'テスト　メールを送信する' is a very literal translation. A more natural Japanese phrasing would be 'テストメール送信' or 'テストメール送信機能'.",
-          "suggestion": "テストメール送信"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -164,19 +147,19 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English text is an imperative command ('Send Test Mail'), whereas the Russian translation is a noun phrase ('Test Mail'). The action 'Send' is missing.",
+          "suggestion": "Отправить тестовое письмо"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While the translation is understandable, \"අත්හදා බැලීමේ තැපෑලක් යවන්න\" is a bit literal and verbose. A more natural translation of \"Send Test Mail\" would be something like \"පරීක්ෂණ තැපෑලක් යවන්න\" or \"මුහුණත්තු තැපෑලක් යවන්න\".",
-          "suggestion": "පරීක්ෂණ තැපෑලක් යවන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -194,25 +177,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'пошту' is missing a softening sign (пошту́).",
-          "suggestion": "Пошаљите пробну пошту́"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation \"Pošaljite probnu poštu\" is a literal translation and slightly awkward in common usage. While technically correct, it's not how a native speaker would naturally phrase this.",
-          "suggestion": "Pošaljite test e-mail"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -234,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

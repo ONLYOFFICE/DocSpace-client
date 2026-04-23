@@ -3,10 +3,12 @@
   "EmptyFormGalleryScreenDescription": "Es konnten keine Ergebnisse gefunden werden, die Ihrer Anfrage entsprechen",
   "ErrorViewDescription": "Bitte versuchen Sie es später noch einmal",
   "ErrorViewDescriptionNetworkError": "Anscheinend ist keine Internetverbindung verfügbar",
+  "ErrorViewHeader": "Die Galerie ist vorübergehend nicht verfügbar",
+  "GalleryTitle": "{{organizationName}} Vorlagen-Galerie",
+  "SelectTemplate": "Vorlage auswählen",
+  "SubmitToGalleryDialogMainInfo": "Reichen Sie Ihre Vorlage in die öffentliche Galerie ein, damit andere sie in ihrer Arbeit verwenden können. Sobald die Vorlage die Moderation bestanden hat, werden Sie über Ihren Beitrag benachrichtigt und belohnt.",
   "SuggestChanges": "Änderungen vorschlagen",
   "TemplateInfo": "Informationen zur Vorlage",
-  "ViewAllTemplates": "Alle Vorlagen ansehen",
-  "ErrorViewHeader": "Die Galerie ist vorübergehend nicht verfügbar",
-  "SelectTemplate": "Vorlage auswählen",
-  "UploadGallery": "In die Galerie hochladen"
+  "UploadGallery": "In die Galerie hochladen",
+  "ViewAllTemplates": "Alle Vorlagen ansehen"
 }

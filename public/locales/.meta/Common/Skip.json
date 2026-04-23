@@ -3,7 +3,7 @@
   "content": "Skip",
   "content_en_sha1_hash": "3da474537ac378c616d6b301acc1674bc348cecd",
   "created_at": "2026-03-31T15:18:26.591Z",
-  "updated_at": "2026-03-31T15:18:26.591Z",
+  "updated_at": "2026-04-07T22:50:02.576Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -104,7 +104,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian word 'Pielāgot' means 'Customize' or 'Adjust', which is the opposite of the English 'Skip'.",
+          "suggestion": "Izlaist"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -134,7 +140,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Să sar' means 'To jump' (physical movement), whereas 'Skip' in a UI context means to bypass or omit a step.",
+          "suggestion": "Omite"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -164,7 +176,13 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Albanian word 'Shkepo' means 'to detach' or 'to unfasten' (like a clip or a button), whereas 'Skip' in a UI context means to bypass or move past something.",
+          "suggestion": "Anashkaloj"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

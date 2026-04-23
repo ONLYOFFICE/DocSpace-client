@@ -3,7 +3,7 @@
   "content": "Users can only access the rooms they are invited to by admins. They can't create own rooms, folders or files.<br/><1>In {{agentSection}}</1>: can view the {{aiAgent}} results and shared chats if they were invited, but cannot create chats or modify the knowledge base.",
   "content_en_sha1_hash": "ef129e1554a846afbdb03bc4bbcb2555fbc97db8",
   "created_at": "2025-12-19T10:16:38.171Z",
-  "updated_at": "2025-12-22T09:41:19.134Z",
+  "updated_at": "2026-04-10T08:58:38.050Z",
   "comment": {
     "text": "This key provides a description of the limitations for new users, explaining they can only access invited rooms and cannot create content. It appears within user access option descriptions and user type descriptions, likely in a UI element explaining user roles or permissions. Translators should ensure the description clearly conveys the restricted functionality for new users.",
     "is_auto": true,
@@ -51,7 +51,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation 'na které je administrátory pozvali' is grammatically incorrect and changes the meaning. It translates to 'which they invited by admins' (passive/active confusion). It should be 'na které byli pozváni administrátory' (which they were invited to by admins).",
+          "suggestion": "Uživatelé mohou přistupovat pouze do místností, na které byli pozváni administrátory. Nemohou vytvářet vlastní místnosti, složky ani soubory.<br/><1>V {{agentSection}}</1>: mohou prohlížet výsledky {{aiAgent}} a sdílené chaty, pokud byli pozváni, ale nemohou vytvářet chaty ani upravovat znalostní bázi."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -63,7 +69,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Greek translation contains a fragment of Latin/English text 'xemάνε' instead of a pure Greek word.",
+          "suggestion": "Οι χρήστες μπορούν να έχουν πρόσβαση μόνο στις αίθουσες στις οποίες τους έχουν προσκαλέσει οι διαχειριστές. Δεν μπορούν να δημιουργήσουν δικές τους αίθουσες, φακέλους ή αρχεία.<br/><1>Στο {{agentSection}}</1>: μπορούν να δουν τα αποτελέσματα {{aiAgent}} και τις κοινοποιημένες συνομιλίες εάν τους έχουν προσκαλέσει, αλλά δεν μπορούν να δημιουργήσουν συνομιλίες ή να τροποποιήσουν τη βάση γνώσης."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -75,7 +87,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation says 'huonekantoja' (room databases/collections) instead of 'huoneita' (rooms), which changes the meaning of the restriction.",
+          "suggestion": "Käyttäjät voivat käyttää vain huoneita, joihin heidät ylläpitäjät ovat kutsuneet. He eivät voi luoda omia huoneita, kansioita tai tiedostoja.<br/><1>Kohdassa {{agentSection}}</1>: he voivat tarkastella {{aiAgent}}-tuloksia ja jaettuja keskusteluja, jos heidät on kutsuttu, mutta eivät voi luoda keskusteluja tai muokata tietopankkia."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -87,7 +105,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'admins' was translated as 'վարորդների' (drivers) instead of 'ադմինիստրատորների' (administrators).",
+          "suggestion": "Օգտատերերը կարող են մուտք գործել միայն այն սենյակներին, որոնց հրավիրվել են ադմինիստրատորների կողմից։ Նրանք չեն կարող ստեղծել սեփական սենյակներ, թղթապանակներ կամ ֆայլեր։<br/><1>{{agentSection}}</1>-ում՝ կարող են տեսնել {{aiAgent}} արդյունքները և կիսված զրույցները, եթե հրավիրվել են, բայց չեն կարող ստեղծել զրույցներ կամ փոփոխել գիտելիքների բազան։"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -117,7 +141,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'folders' was translated as 'karaktēras' (characters), which is incorrect in this context. It should be 'mappes'.",
+          "suggestion": "Lietotāji var piekļūt tikai tiem istabām, kurās viņiem ir iesaistīti no administratoriem. Viņi nevar izveidot savas istabas, mappes vai failus.<br/><1>Katrā {{agentSection}}</1>: var redzēt {{aiAgent}} rezultātus un dalītos sarunas, ja viņiem ir iesaistīti, bet nevar izveidot sarunas vai rediģēt zināšanas bāzi."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -165,7 +195,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'ak im boli pozvaní' is grammatically incorrect in Slovak and changes the meaning slightly; it should be 'ak boli pozvaní' (if they were invited) or 'ak boli pozvaní do nich' to match the English 'if they were invited'.",
+          "suggestion": "Používatelia môžu pristupovať iba miestnostiam, na ktoré ich administrátori pozvali. Nemôžu vytvárať vlastné miestnosti, adresáre alebo súbory.<br/><1>V {{agentSection}}</1>: môžu prehliadať výsledky {{aiAgent}} a zdieľané chaty, ak boli pozvaní, ale nemôžu vytvárať chaty ani upravovať znalostnú bázu."
+        }
+      ],
       "approved_at": null
     },
     "sl": {

@@ -3,7 +3,7 @@
   "content": "Room notifications disabled",
   "content_en_sha1_hash": "66e212657f39607ac6632eb53f57a7c8a6d38fe5",
   "created_at": "2025-05-19T21:30:56.101Z",
-  "updated_at": "2026-03-31T15:18:46.669Z",
+  "updated_at": "2026-04-07T19:35:05.093Z",
   "comment": {
     "text": "This translation key is used to display a message when room notifications are disabled. It is displayed as an error toast in a notification system, informing the user of their settings choice. Translators should provide a local equivalent that reflects this specific context.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1427,
+      "line_number": 1432,
       "context": "if (muteStatus) {\n treeFolders[treeIndex].newItems = newCount >= 0 ? count - newCount : 0;\n } else treeFolders[treeIndex].newItems = count + newCount;\n }\n \n let notificationsDisabled = t(\"RoomNotificationsDisabled\");\n let notificationsEnabled = t(\"RoomNotificationsEnabled\");\n \n if (isAIAgent) {\n notificationsDisabled = t(\"AIAgentNotificationsDisabled\", {\n aiAgent: t(\"Common:AIAgent\"),",
       "module": "/packages/client"
     }
@@ -45,13 +45,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Oznámení o místnosti vypnuta\" is not the most natural or accurate translation of \"Room notifications disabled.\" While technically correct, it sounds slightly awkward.",
-          "suggestion": "A better translation would be \"Vypnuto upozornění na místnosti\" or \"Upozornění na místnosti jsou vypnuta\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -99,13 +93,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"ルームの通知が無効\" is technically correct, but a more natural and common phrasing would be \"ルームの通知を無効にしました\" (Room notifications have been disabled) or \"ルームの通知はオフになっています\" (Room notifications are turned off).  The original Japanese translation is passive and sounds slightly awkward in this context.",
-          "suggestion": "ルームの通知を無効にしました"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -129,13 +117,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Kamer meldingen uitgeschakeld' is a bit clunky. A more natural phrasing would be 'Kamermeldingen zijn uitgeschakeld' or 'Kamermeldingen zijn ingeschakeld' depending on the intended meaning (disabled vs. enabled). The original 'disabled' implies something was previously enabled.",
-          "suggestion": "Kamermeldingen zijn uitgeschakeld"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -159,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Notificările pentru sala sunt dezactivate' is a literal translation and sounds somewhat unnatural in Romanian. A more natural phrasing would emphasize the disabled state.",
-          "suggestion": "Notificări pentru sală dezactivate"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -177,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'කාමරයේ දැනුම්දීම් අබලයි' while conveying the general idea of 'Room notifications disabled', isn't the most natural or precise rendering in Sinhala. A more common and accurate phrasing would emphasize the action of disabling.",
-          "suggestion": "කාමරයේ දැනුම්දීම් නිශ්චලයි (Kamara ya danum dim nischala-yi) - 'Room notifications deactivated/switched off'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -195,37 +165,19 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The Slovenian translation uses a passive voice construction ('are disabled'). While grammatically correct, it sounds slightly awkward in this context. A more natural phrasing would use an active voice.",
-          "suggestion": "Obvestila za sobo so onemogočena"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Нотификације собе онемогућене\" is a bit literal and doesn't sound natural in Serbian. A more natural phrasing would convey the meaning more clearly.",
-          "suggestion": "Онемогућени просторни обавештења"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Notifikacije sobe onemogućene' is a literal translation and sounds unnatural in Serbian. A more natural phrasing would be 'Isključene obavijesti za sobu' or 'Soba, obavijesti isključene'.",
-          "suggestion": "Isključene obavijesti za sobu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -249,13 +201,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"房间通知禁用\" is understandable, a more natural and idiomatic translation would be \"关闭房间通知\" or \"禁用房间通知提醒\". \"禁用\" can sound a bit abrupt in this context.",
-          "suggestion": "关闭房间通知"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

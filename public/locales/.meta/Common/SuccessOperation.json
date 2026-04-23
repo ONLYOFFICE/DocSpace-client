@@ -3,7 +3,7 @@
   "content": "{{operationName}}: Done",
   "content_en_sha1_hash": "04781275fa66b683183ee66ac77fb3465c3b5eef",
   "created_at": "2025-05-26T07:15:48.679Z",
-  "updated_at": "2025-10-14T02:18:55.322Z",
+  "updated_at": "2026-04-07T22:12:18.898Z",
   "comment": {
     "text": "This translation key is used for a success message displayed on an operations progress button. It indicates that an operation has been completed successfully, likely in response to user interaction or a timer expiration. The translated text will be rendered above a button or similar UI element.",
     "is_auto": true,
@@ -57,13 +57,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Τέλος' can mean 'end', in the context of a successful operation, a more appropriate translation would be something that conveys completion or success, like 'Ολοκληρώθηκε' (Oloκληróthike) or 'Επιτυχία' (Epitihía). 'Τέλος' can sound abrupt or incomplete.",
-          "suggestion": "{{operationName}}: Ολοκληρώθηκε"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -87,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"{{operationName}}՝ արված է\" is a literal translation and doesn't fully convey the meaning of \"Done\" in this context. It implies 'made' rather than 'completed' or 'finished'. A more natural Armenian phrasing would be needed to accurately represent the original meaning.",
-          "suggestion": "{{operationName}}՝ ավարտվել է"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -120,7 +108,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"{{operationName}}: ເປັນບອກແລ້ວ\" doesn't accurately convey the meaning of \"{{operationName}}: Done\". \"ເປັນບອກແລ້ວ\" generally means \"it's been told\" or \"it's announced,\" which isn't equivalent to 'Done'. A more accurate translation would indicate completion.",
+          "description": "The Lao translation 'ເປັນບອກແລ້ວ' translates roughly to 'is told already' or 'has been informed', which does not mean 'Done' or 'Completed' in the context of an operation status.",
           "suggestion": "{{operationName}}: ສຳເລັດແລ້ວ"
         }
       ],
@@ -150,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Portuguese translation 'Gotowe' is Polish, not Portuguese. It means 'Ready' in Polish. The translation should be in Portuguese.",
-          "suggestion": "Determine the correct Portuguese translation for 'Done'. A possible suggestion is 'Concluído' or 'Finalizado', depending on the specific context of 'operationName'."
+          "description": "The word 'Gotowe' is Polish, not Portuguese. The correct Portuguese word for 'Done' in this context is 'Concluído' or 'Pronto'.",
+          "suggestion": "{{operationName}}: Concluído"
         }
       ],
       "approved_at": null
@@ -231,13 +219,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Kryer' can mean 'done', a more natural and idiomatic translation for 'Done' in the context of an operation completion would be 'Përfunduar'. 'Kryer' implies something was carried out or performed, while 'Përfunduar' better conveys completion.",
-          "suggestion": "{{operationName}}: Përfunduar"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

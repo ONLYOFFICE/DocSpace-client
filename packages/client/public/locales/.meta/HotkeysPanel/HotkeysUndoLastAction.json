@@ -3,7 +3,7 @@
   "content": "Undo the last action",
   "content_en_sha1_hash": "a3d3ea26f243caecc9bb50b4df97676274dd58f5",
   "created_at": "2025-05-19T21:30:55.098Z",
-  "updated_at": "2026-02-19T13:36:32.504Z",
+  "updated_at": "2026-04-07T19:35:05.110Z",
   "comment": {
     "text": "This translation key describes the text that appears next to a keyboard shortcut (# Ctrl + z) on a HotkeysPanel component in the actions block section, instructing users to undo their last action.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Son hərəkəti ləğv edin' is understandable, a more natural and accurate translation of 'Undo the last action' would be 'Əvvəlki hərəkəti geri qaytarın' or 'Son hərəkəti geri al'. 'Ləğv edin' implies cancellation rather than reverting.",
-          "suggestion": "Əvvəlki hərəkəti geri qaytarın"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -51,25 +45,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Vrátit poslední akci' is too literal and doesn't convey the nuance of 'Undo'. It literally translates to 'Return the last action.' A more natural translation for 'Undo' in this context would be 'Zrušit poslední akci'.",
-          "suggestion": "Zrušit poslední akci"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Rückgängig machen\" is a general term for \"Undo\" and doesn't specifically convey \"the last action.\" While understandable, it lacks the nuance of the English phrase.",
-          "suggestion": "Rückgängig machen der letzten Aktion"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -99,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Հետարկել վերջին գործողությունը\" (Hetarkel verjin gortsoghutyun) is a literal translation that is not the most natural way to express \"Undo the last action\" in Armenian. While technically correct, it can sound slightly awkward.",
-          "suggestion": "Consider a more idiomatic translation like \"Չեղարկել վերջին գործողությունը\" (Chelegarkel verjin gortsoghutyun) or \"Ավազել վերջին գործողությունը\" (Avazel verjin gortsoghutyun).  The best option depends on the overall tone and style of the application."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -123,25 +99,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"마지막 작업 실행 취소\" is a literal translation of \"Undo the last action.\" While understandable, a more natural and idiomatic Korean expression for \"Undo\" in this context would be \"실행 취소\". The current phrasing feels slightly robotic.",
-          "suggestion": "실행 취소"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Lao word 'ກະ' is misspelled. It should be 'ກໍ'.",
-          "suggestion": "ຍົກເລີກການກະກໍ ທຳ ສຸດທ້າຍ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -189,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"අවසාන ක්‍රියාව පෙරසේ තබන්න\" is a literal translation and doesn't convey the intended meaning of 'Undo' in the context of hotkeys. 'Undo' implies reverting to a previous state, not simply 'putting the last action before'.",
-          "suggestion": "පසු ක්‍රියාව අවලංගු කරන්න (Pasu kriyawa avalangu karanna) - This translates to 'Cancel the previous action' and is more aligned with the function of an 'Undo' hotkey."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -219,13 +177,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Poništi poslednju radnju\" while understandable, isn't the most natural or precise translation of \"Undo the last action\". \"Poništi\" implies a more complete deletion or reset, while \"Undo\" suggests reverting to a previous state.",
-          "suggestion": "Razmisliti o opcijama kao što su \"Ponovi poslednju radnju\" ili \"Vrati poslednju radnju\". \"Vrati poslednju radnju\" sounds the most natural and accurately conveys the meaning of 'Undo'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -249,13 +201,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '撤销上次的行动' is a literal translation and sounds slightly awkward in Chinese. While technically correct, it's not the most natural way to express 'Undo the last action' in a UI context.",
-          "suggestion": "撤销上一步 or 撤销"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

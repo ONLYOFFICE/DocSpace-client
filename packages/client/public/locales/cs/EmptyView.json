@@ -2,6 +2,7 @@
   "CollaborationRoomEmptyTitle": "Vítejte v místnosti pro spolupráci",
   "CollaboratorEmptyTitle": "Místnost je prázdná.",
   "CreateAIAgent": "Vytvořit nového agenta",
+  "CreateAIAgentDescription": "Začněte vytvářet svého prvního {{aiAgent}}",
   "CreateDocument": "Vytvoření nového dokumentu",
   "CreateDocumentDescription": "Využijte rozsáhlé funkce pro zpracování textu.",
   "CreateForm": "Vytvoření nového formuláře PDF",
@@ -16,7 +17,14 @@
   "CreateSpreadsheetDescription": "Provádějte přesné výpočty s minimálním úsilím.",
   "CustomRoomEmptyTitle": "Vítejte ve Vlastní místnosti",
   "DefaultFolderDescription": "Vložte sem soubory nebo vytvořte nové.",
+  "EmptyAIAgentsAIDisabledDescription": "Tato sekce umožňuje uživatelům pracovat s {{aiAgents}} – chytrými asistenty pro zpracování dokumentů a další úkoly. \nPro jejich používání musí být služba AI funkcí povolena administrátorem {{productName}}.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Pro vytvoření a používání {{aiAgents}} připojte svou peněženku a povolte službu AI funkcí v nastavení {{productName}}. Jakmile to bude hotovo, budete moci pracovat s {{aiAgents}} a spolupracovat se svým týmem.",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "Připojte svou peněženku a povolte funkce AI.",
+  "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} nejsou ještě dostupné",
+  "EmptyAIAgentsAIEnabledUserDescription": "Jakmile vás váš tým pozve k spolupráci, se zde objeví {{aiAgents}}, připravený k pomoci s dokumenty, správou znalostí a každodenními úkoly.",
+  "EmptyAIAgentsDescription": "Nastavte personalizovaného asistenta pro váš tým přidáním znalostní báze, výběrem ideálního modelu a připojením {{mcpServer}}. Pozvěte své kolegy na spolupráci a plně využijte chatovací schopnosti agenta.",
+  "EmptyAIAgentsTitle": "Vytvořte si svého {{aiAgent}}",
+  "EmptyAIAgentsUserTitle": "Žádné {{aiAgents}} dostupné zatím",
   "EmptyDescription": "Začněte s rychlými akcemi:",
   "EmptyFavoritesDescription": "Označte soubory a složky, abyste je měli snadno dostupné a na dosah ruky.",
   "EmptyFavoritesTitle": "Ještě žádné oblíbené položky.",
@@ -56,6 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "Nahrávání ze zařízení",
   "UploadFromPortalTitle": "Nahrát z {{productName}}",
   "UploadPDFFormOptionDescription": "Vyberte připravený PDF formulář dostupný v {{productName}} a nahrajte jej do místnosti.",
-  "VirtualDataRoomEmptyTitle": "Vítejte ve virtuální datové místnosti",
-  "EmptyAIAgentsTitle": "Vytvořte si svého {{aiAgent}}"
+  "VirtualDataRoomEmptyTitle": "Vítejte ve virtuální datové místnosti"
 }

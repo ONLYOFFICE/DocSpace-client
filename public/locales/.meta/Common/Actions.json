@@ -3,7 +3,7 @@
   "content": "Actions",
   "content_en_sha1_hash": "c3cd636a585b20c40ac2df5ffb403e83cb2eef51",
   "created_at": "2025-05-19T21:30:42.878Z",
-  "updated_at": "2026-03-31T15:18:45.854Z",
+  "updated_at": "2026-04-08T18:11:05.834Z",
   "comment": {
     "text": "This translation key is used to display a button or label that indicates actions available in an article or profile section. It appears on a main button and in some header sections, where it shows a title such as \"Actions\" or \"Invite\", depending on the context.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 681,
+      "line_number": 674,
       "context": "if (!isAccountsPage) return onCreateRoom();\n if (isContactsGroupsPage) return createGroup();\n };\n \n const mainButtonText =\n isRoomAdmin && isAccountsPage ? t(\"Common:Invite\") : t(\"Common:Actions\");\n \n let isDisabled = false;\n \n if (isSettingsPage) {\n isDisabled = isSettingsPage;",
       "module": "/packages/client"
     },
@@ -81,7 +81,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The German word 'Vorgänge' typically refers to 'processes', 'procedures', or 'transactions'. In a UI context for a button or menu (as seen in the code snippets), 'Aktionen' is the standard and correct translation for 'Actions'.",
+          "suggestion": "Aktionen"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -129,25 +135,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'Actions' can have multiple Korean translations depending on the context. '작업' (jak-up) generally means 'work' or 'task', which isn't always the best fit for 'Actions' in a UI/software context. Alternatives like '행동' (haeng-dong - action) or '동작' (dong-jak - movement/action) might be more accurate, but require understanding the specific usage of 'Actions'.",
-          "suggestion": "Consider alternatives like '행동' or '동작', or further context to determine the most appropriate translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"ການດໍາເນີນການ\" is a valid Lao word, it's a rather formal and literal translation of \"Actions.\"  It doesn't quite capture the nuance of the English term, which can imply a range of actions, not just 'operations' or 'procedures'. A more natural translation might be something like \"ການກະເຮັດ\" or \"ປະຕິບັດງານ\", depending on the context.",
-          "suggestion": "Consider \"ການກະເຮັດ\" or \"ປະຕິບັດງານ\" as potentially more appropriate alternatives, depending on context.  Further context would help determine the most suitable translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -241,6 +235,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -9,7 +9,7 @@ RUN apt-get -y update && \
     apt-get install -yq
     
 # Install PNPM
-RUN npm install -g pnpm@10.28.2
+RUN npm install -g pnpm@10.33.0
 
 WORKDIR /app
 

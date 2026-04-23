@@ -3,7 +3,7 @@
   "content": "Number of active employees: {{count}}",
   "content_en_sha1_hash": "3426852c597717b5b595fdec1fb5d104c8bf3d3c",
   "created_at": "2025-05-19T21:30:52.083Z",
-  "updated_at": "2026-02-19T13:36:32.950Z",
+  "updated_at": "2026-04-09T02:17:59.554Z",
   "comment": {
     "text": "This translation key displays the number of active employees. It appears as part of a main information section on a portal settings page and is used to show the current count of active users in a human-readable format.",
     "is_auto": true,
@@ -199,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

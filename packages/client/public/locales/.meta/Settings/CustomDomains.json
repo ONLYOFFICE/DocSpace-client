@@ -3,7 +3,7 @@
   "content": "Custom domains",
   "content_en_sha1_hash": "b18c921ec5318c9e2ce5dfcd1e4ec6b536183c22",
   "created_at": "2025-05-19T21:30:50.996Z",
-  "updated_at": "2026-03-26T08:26:58.271Z",
+  "updated_at": "2026-04-09T03:50:28.641Z",
   "comment": {
     "text": "This translation key controls the label and value displayed for custom domain options on a portal settings page. It appears as a dropdown or select field in the UI where users can choose between \"All Domains\" or \"Custom Domains\".",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"İstifadəçi domenləri\" while technically meaning 'user domains', doesn't accurately convey the meaning of 'Custom domains'. 'Custom domains' implies domains configured by the user, not just any user domain. A more appropriate translation would capture the 'custom' aspect.",
-          "suggestion": "Xüsusi domenlər"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -63,13 +57,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Προσαρμοσμένα domain\" while technically understandable, isn't the most natural or accurate translation of \"Custom domains\". \"Προσαρμοσμένα domain\" is a direct translation and sounds a bit clunky. A more idiomatic translation might be \"Δυναμικά domains\" or \"Εξατομικευμένα domains\".",
-          "suggestion": "Consider using \"Δυναμικά domains\" or \"Εξατομικευμένα domains\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -84,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Finnish translation \"Käytössä\" translates to \"In use\" or \"Enabled,\" not \"Custom domains.\" It doesn't accurately reflect the English meaning.",
-          "suggestion": "A more accurate translation for \"Custom domains\" would be something like \"Mukautetut verkkotunnukset\" or \"Omat verkkotunnukset\"."
+          "description": "The Finnish translation 'Käytössä' means 'In use' or 'Enabled', which is a completely different meaning from 'Custom domains'.",
+          "suggestion": "Omat verkkotunnukset"
         }
       ],
       "approved_at": null
@@ -96,7 +84,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Domaines autorisés' is a literal translation, but it doesn't fully capture the meaning of 'Custom Domains' in a technical context. 'Domaines personnalisés' would be a more accurate translation, or 'Domaines définis par l'utilisateur'. 'Autorisés' implies a permission granted, whereas 'custom' implies a user-defined configuration.",
+          "description": "The French translation 'Domaines autorisés' means 'Authorized domains' or 'Allowed domains', which changes the meaning from 'Custom domains' (user-defined domains).",
           "suggestion": "Domaines personnalisés"
         }
       ],
@@ -108,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Հարմարեցնել տիրույթները' while literally meaning 'Adapt domains' doesn't accurately convey the meaning of 'Custom domains' which refers to user-defined domains. A better translation would emphasize user control or personalization.",
-          "suggestion": "Possible alternatives include: Թույլտվություն տված դոմեիններ (Authorized domains), Պատվաստված դոմեիններ (Registered domains), Կազմավորված դոմեիններ (Configured domains), or Օգտագործողի դոմեիններ (User domains)."
+          "description": "The Armenian translation 'Հարմարեցնել տիրույթները' means 'Customize domains' (verb phrase), whereas the English 'Custom domains' is a noun phrase used as a label for a category/option.",
+          "suggestion": "Custom տիրույթներ"
         }
       ],
       "approved_at": null
@@ -138,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ກຳນົດເອງ ໂດເມນ\" is a literal translation of \"custom domains\" and doesn't convey the intended meaning. 'ກຳນົດເອງ' means 'defined by oneself' or 'customized' which doesn't accurately reflect the concept of custom domains used in a technical context.",
-          "suggestion": "A more accurate translation would be something along the lines of \"ໂດເມນທີ່ກຳນົດໄວ້\" (domains that are specified) or \"ໂດເມນຕາມຄວາມຕ້ອງການ\" (domains according to requirements)."
+          "description": "The word order is reversed and the phrasing is unnatural. 'ກຳນົດເອງ ໂດເມນ' translates literally to 'Self-defined Domain' in a way that sounds like a broken machine translation. In Lao UI context, 'Custom Domains' should be translated as 'ໂດເມນທີ່ກຳນົດເອງ'.",
+          "suggestion": "ໂດເມນທີ່ກຳນົດເອງ"
         }
       ],
       "approved_at": null
@@ -150,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Pielāgota domēnu' is not grammatically correct in Latvian. 'Pielāgoti domēni' would be the correct plural form.",
-          "suggestion": "Pielāgoti domēni"
+          "description": "The Latvian translation uses the singular form 'domēnu' (of the domain) instead of the plural 'domēni' (domains), which changes the grammatical meaning and fails to match the English plural 'Custom domains'.",
+          "suggestion": "Pielāgota domēni"
         }
       ],
       "approved_at": null
@@ -186,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Domeniu particularizat\" is a possible translation, it's not the most common or natural rendering of 'Custom domains' in Romanian. 'Domenii personalizate' would be a more accurate and idiomatic translation.",
-          "suggestion": "Domenii personalizate"
+          "description": "The Romanian translation uses the singular form 'Domeniu particularizat', whereas the English source is plural 'Custom domains'. In a UI selection context (All Domains vs Custom Domains), the number must match.",
+          "suggestion": "Domenii particularizate"
         }
       ],
       "approved_at": null
@@ -201,13 +189,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"අභිරුචි වසම්\" does not accurately convey the meaning of \"Custom domains\". \"අභිරුචි\" means \"custom\" or \"personalized\", but \"වසම්\" is not the correct term for \"domains\". It seems to be a combination of words and not a standard Sinhala term.",
-          "suggestion": "A more accurate translation would be something like \"ප්‍රවේශක ඩොමේනුවන්\" (Pravesaka Domenaun) or \"අපේක්ෂිත ඩොමේනුවන්\" (Apekshitha Domenaun), but ideally, a review with a localization expert is recommended for the best fit."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -225,13 +207,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Прилагођени домени' while understandable, isn't the most natural or commonly used translation for 'Custom domains' in Serbian (Cyrillic). A better translation would be 'Кориснички домени'.",
-          "suggestion": "Кориснички домени"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -252,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Ukrainian translation \"Дозволити вхід з довірених доменів\" translates to \"Allow access from trusted domains\". This is not a direct or accurate translation of \"Custom domains\". It describes a function, not the term itself.",
-          "suggestion": "A more accurate translation would be something closer to \"Власні домени\" or \"Користувацькі домени\", or \"Налаштування доменів\" depending on the context."
+          "description": "The translation 'Дозволити вхід з довірених доменів' (Allow login from trusted domains) describes a specific action/setting, whereas the English 'Custom domains' is a noun phrase used as a label for a selection option.",
+          "suggestion": "Власні домени"
         }
       ],
       "approved_at": null
@@ -265,6 +241,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

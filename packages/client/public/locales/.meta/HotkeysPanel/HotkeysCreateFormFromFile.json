@@ -3,7 +3,7 @@
   "content": "Create form template from file",
   "content_en_sha1_hash": "70f54a7f5feedcf15d4f7789a07e062bd260a28d",
   "created_at": "2025-05-19T21:30:55.040Z",
-  "updated_at": "2026-02-19T13:36:32.510Z",
+  "updated_at": "2026-04-07T19:35:05.105Z",
   "comment": {
     "text": "This translation key is used to display the label for a button or action that allows users to create a form template from a file. The text appears in the UI as \"HotkeysCreateFormFromFile\" and provides context for translators on where it's used (e.g., hotkey shortcut information).",
     "is_auto": true,
@@ -27,25 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'أنشيء نموذج قالب من ملف' is a literal translation but doesn't convey the intended meaning of 'Create form template from file' in a natural and idiomatic way in Arabic. It can be improved to be more fluent.",
-          "suggestion": "إنشاء نموذج من ملف"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Fayldan forma şablonu yaradın\" uses the verb \"yaradın\" (you created). The English \"Create form template from file\" implies a command or option, suggesting a more generic 'create' or 'generate' should be used.",
-          "suggestion": "Fayldan forma şablonu yarada bilərsiniz"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -129,18 +117,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Formuliersjabloon maken van bestand\" doesn't accurately convey the meaning of 'Create form template from file'. \"Formulier\" should be \"Formulier\". The word order could also be improved.",
-          "suggestion": "Formuliermallen maken van bestand"
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'Formuliersjabloon' is misspelled. It should be 'Formuliermallen'.",
-          "suggestion": "Formuliermallen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -158,13 +135,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Create form template' implies a template for creating forms, not a 'master form' (formulário mestre).  'Template' better conveys the intended meaning.",
-          "suggestion": "Criar modelo de formulário a partir do arquivo"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -182,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"ගොනුවකින් ආකෘතිපත්‍ර අච්චුවක් සාදන්න\" while understandable, isn't the most natural or precise translation of \"Create form template from file.\"  'ආකෘතිපත්‍ර අච්චුවක්' (aakruthipathra achchuk) refers to a mold or die and doesn't directly convey the concept of creating a form template. A more accurate term for 'template' would be 'ආකාරය' (akaaraya) or 'පත්‍රපත්‍රය' (pathrapathraya).",
-          "suggestion": "ගොනුවකින් ආකෘතියක් සාදන්න (Gonuwakin aakruthiyak saadanna) or ගොනුවකින් පත්‍රපත්‍රයක් සාදන්න (Gonuwakin pathrapathrayak saadanna)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -236,13 +201,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '将文件创建为表单模板' implies 'create a form template *from* a file', which isn't the intended meaning. It seems the intended meaning is 'create a form template *using* a file as a basis or pattern.'",
-          "suggestion": "从文件创建表单模板 (Cong wenjian chuangjian biaodan moxing)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

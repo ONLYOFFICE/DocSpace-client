@@ -2,6 +2,7 @@
   "CollaborationRoomEmptyTitle": "Bienvenido/a a la Sala de colaboración",
   "CollaboratorEmptyTitle": "La sala está vacía.",
   "CreateAIAgent": "Crear un nuevo agente",
+  "CreateAIAgentDescription": "Comienza a construir tu primer {{aiAgent}}",
   "CreateDocument": "Crear un nuevo documento",
   "CreateDocumentDescription": "Aproveche las amplias funciones de procesamiento de textos.",
   "CreateForm": "Crear un nuevo formulario PDF",
@@ -16,7 +17,14 @@
   "CreateSpreadsheetDescription": "Realice cálculos precisos con el mínimo esfuerzo.",
   "CustomRoomEmptyTitle": "Bienvenido/a a la Sala personalizada",
   "DefaultFolderDescription": "Arrastre y suelte archivos aquí o cree otros nuevos.",
+  "EmptyAIAgentsAIDisabledDescription": "Esta sección permite a los usuarios trabajar con {{aiAgents}} — asistentes inteligentes para gestionar documentos y otras tareas.\nPara empezar a utilizarlos, el servicio de funciones de IA debe estar habilitado por el administrador de {{productName}}.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Para crear y usar {{aiAgents}}, conecta tu billetera y habilita el servicio de funciones de IA en la configuración de {{productName}}. Una vez hecho esto, podrás trabajar con {{aiAgents}} y colaborar con tu equipo.",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "Conecte su monedero y habilite las funciones de IA",
+  "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} aún no están disponibles",
+  "EmptyAIAgentsAIEnabledUserDescription": "Una vez que su equipo lo invite a colaborar, {{aiAgents}} aparecerá aquí, listo para ayudar con documentos, gestión del conocimiento y tareas cotidianas.",
+  "EmptyAIAgentsDescription": "Configure un asistente personalizado para su equipo añadiendo una base de conocimiento, seleccionando el modelo ideal y conectando un {{mcpServer}}. Invite a sus colegas a colaborar y aprovechar al máximo las capacidades de chat del agente.",
+  "EmptyAIAgentsTitle": "Crea tu {{aiAgent}}",
+  "EmptyAIAgentsUserTitle": "No hay {{aiAgents}} disponibles aún",
   "EmptyDescription": "Empiece con acciones rápidas:",
   "EmptyFavoritesDescription": "Marque con estrellas los archivos y carpetas para tenerlos fácilmente accesibles y a mano.",
   "EmptyFavoritesTitle": "Aún no hay favoritos",
@@ -56,6 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "Subir desde el dispositivo",
   "UploadFromPortalTitle": "Subir desde {{productName}}",
   "UploadPDFFormOptionDescription": "Seleccione un formulario PDF listo disponible en {{productName}} y cárguelo en la sala.",
-  "VirtualDataRoomEmptyTitle": "Bienvenido/a a la Sala de datos virtuales",
-  "EmptyAIAgentsTitle": "Crea tu {{aiAgent}}"
+  "VirtualDataRoomEmptyTitle": "Bienvenido/a a la Sala de datos virtuales"
 }

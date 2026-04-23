@@ -3,7 +3,7 @@
   "content": "Your personal storage quota exceeded",
   "content_en_sha1_hash": "baa884cd19f66c0a45febb66fb84ad79ad659338",
   "created_at": "2025-05-19T21:30:54.110Z",
-  "updated_at": "2025-11-18T14:41:49.666Z",
+  "updated_at": "2026-04-07T19:35:05.153Z",
   "comment": {
     "text": "The \"PersonalQuotaHeader\" translation key is used to display an error message indicating that a user's personal storage quota has been exceeded. This text appears in the UI when a user attempts to access a file or resource exceeding their allocated quota.",
     "is_auto": true,
@@ -27,30 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'لقد تجاوزت حصة التخزين الشخصية الخاصة بك' is too literal and sounds unnatural in Arabic. While technically correct, a more natural phrasing would be preferred.",
-          "suggestion": "تجاوزت حصتك الشخصية للتخزين"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Şəxsi yaddaş kvotanız limiti keçib\" is not the most natural or accurate rendering of \"Your personal storage quota exceeded.\" While understandable, \"limiti keçib\" (exceeded the limit) is a bit literal. A more fluent translation would convey the sense of surpassing the quota.",
-          "suggestion": "Şəxsi yaddaş kvotanızın həddi aşılıb"
-        },
-        {
-          "type": "spelling",
-          "description": "While 'kvota' is commonly used, using a more Azerbaijani-ized spelling is better for consistency.",
-          "suggestion": "Şəxsi yaddaş kvotanız həddini aşdı"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -158,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Cota dvs de stocare personală a depășit limita permisă' is a bit literal and formal. A more natural and user-friendly translation would convey the same meaning more clearly.",
-          "suggestion": "Cota dvs. de stocare personală a fost depășită"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -188,30 +165,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The Slovenian translation uses the past participle 'presežen' directly after the noun 'kvota'.  It sounds unnatural. It needs a verb to connect it to the subject.",
-          "suggestion": "Vaša osebna kvota za shranjevanje je bila presežena."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation uses \"складишна\" (skladishna) which translates to 'storage' in a warehousing sense. A more appropriate term for a personal storage quota would be \"лична корисничка квота\" (lichna korisnička kvota) or simply \"лична квота\" (lichna kvota).",
-          "suggestion": "Ваша лична корисничка квота је прекорачена"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, using the more concise \"Ваша лична квота је прекорачена\" would be more natural in Serbian.",
-          "suggestion": "Ваша лична квота је прекорачена"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -229,13 +189,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Перевищено вашу персональну квоту пам'яті' is a literal translation of 'Your personal storage quota exceeded' but could be improved for naturalness in Ukrainian.  'Пам'яті' (memory) is acceptable but might be better conveyed as 'місця' (space) or 'обсягу' (volume).",
-          "suggestion": "Перевищено вашу персональну квоту місця"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

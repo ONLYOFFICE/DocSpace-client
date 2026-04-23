@@ -2,7 +2,6 @@
   "AuthViaNTLM": "Auth via NTLM",
   "EnableSSL": "Activeer SSL",
   "EnterDomain": "Voer domein in",
-  "EnterEmail": "Voer e-mail in",
   "EnterLogin": "Voer login in",
   "EnterPort": "Voer poort in",
   "Host": "Host",

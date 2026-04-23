@@ -2,6 +2,7 @@
   "CollaborationRoomEmptyTitle": "コラボレーションルームへようこそ",
   "CollaboratorEmptyTitle": "ルームは空です。",
   "CreateAIAgent": "新規エージェントを作成",
+  "CreateAIAgentDescription": "最初の{{aiAgent}}の構築を開始しましょう。",
   "CreateDocument": "新規ドキュメントを作成する",
   "CreateDocumentDescription": "豊富なワープロ機能を活用しましょう。",
   "CreateForm": "新規PDFフォームを作成する",
@@ -16,7 +17,10 @@
   "CreateSpreadsheetDescription": "最小限の労力で正確な計算を実行する",
   "CustomRoomEmptyTitle": "カスタムルームへようこそ",
   "DefaultFolderDescription": "ここにファイルをドロップするか、新しいファイルを作成してください。",
+  "EmptyAIAgentsAIDisabledDescription": "このセクションでは、ユーザーは{{aiAgents}} — ドキュメントやその他のタスクを処理するためのスマートアシスタント — を使用できます。\nそれらを使用するには、{{productName}}管理者によってAI機能サービスが有効になっている必要があります。",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "{{aiAgents}}を作成および使用するには、ウォレットを接続し、{{productName}}の設定でAI機能サービスを有効にしてください。完了すると、{{aiAgents}}を使用したり、チームと共同作業したりできるようになります。",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "AI機能を有効にするには、ウォレットを接続してください",
+  "EmptyAIAgentsTitle": "{{aiAgent}}を作成してください。",
   "EmptyDescription": "クイックアクションで始めましょう：",
   "EmptyFavoritesDescription": "スターを付けたファイルやフォルダは、簡単にアクセスできるように手の届く範囲に保ちます。",
   "EmptyFavoritesTitle": "お気に入りはまだありません",
@@ -57,5 +61,8 @@
   "UploadFromPortalTitle": "{{productName}}からアップロード",
   "UploadPDFFormOptionDescription": "{{productName}}で利用可能なPDFフォームを選択し、ルームにアップロードする。",
   "VirtualDataRoomEmptyTitle": "バーチャルデータルームへようこそ",
-  "EmptyAIAgentsTitle": "{{aiAgent}}を作成してください。"
+  "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} はまだご利用いただけません",
+  "EmptyAIAgentsAIEnabledUserDescription": "チームがコラボレーションに招待すると、{{aiAgents}} がここに表示され、ドキュメント、ナレッジマネジメント、日常のタスクをサポートする準備が整います。",
+  "EmptyAIAgentsDescription": "ナレッジベースを追加し、最適なモデルを選択し、{{mcpServer}}を接続することで、チーム用のパーソナライズされたアシスタントを設定します。同僚を招待して共同作業を行い、エージェントのチャット機能を最大限に活用しましょう。",
+  "EmptyAIAgentsUserTitle": "{{aiAgents}} はまだ利用できません"
 }

@@ -3,7 +3,7 @@
   "content": "Delivery time",
   "content_en_sha1_hash": "fac21896589baac71fc217cd87162f623e22647d",
   "created_at": "2025-05-19T21:30:49.693Z",
-  "updated_at": "2025-05-24T02:30:10.611Z",
+  "updated_at": "2026-04-08T20:27:50.362Z",
   "comment": {
     "text": "This translation key is used for displaying the \"Delivery Time\" label in a specific UI component, typically seen on portal settings pages, such as the webhook event details. The key is used to format and display localized time values, providing context to users about when their packages are expected to be delivered.",
     "is_auto": true,
@@ -66,7 +66,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Spanish translation \"Tiempo de ejecución\" translates to \"Execution time\" or \"Runtime\" which is not the equivalent of \"Delivery time.\" It implies the duration something takes to complete, rather than the time it takes to be delivered.",
+          "description": "The Spanish translation 'Tiempo de ejecución' means 'Execution time' or 'Runtime', which refers to how long a process takes to run. The English 'Delivery time' in this context refers to the time/date a package or event is delivered.",
           "suggestion": "Tiempo de entrega"
         }
       ],
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Վավերականության ժամկետ\" translates to \"Validity period\" or \"Expiration date,\" not \"Delivery time.\" This is a significant semantic error.",
-          "suggestion": "The correct Armenian translation for \"Delivery time\" is likely \"Դիտվողության ժամանակ\" or \"Մատուցման ժամանակահատված\"."
+          "description": "The Armenian translation 'Վավերականության ժամկետ' means 'Validity period' or 'Expiration date', which is not the same as 'Delivery time'.",
+          "suggestion": "Հասաքման ժամկետ"
         }
       ],
       "approved_at": null
@@ -183,25 +183,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Рок испоруке' is understandable, a more common and natural translation of 'Delivery time' in Serbian (Cyrillic) would be 'Vreme isporuke'. 'Рок испоруке' implies a deadline or term.",
-          "suggestion": "Vreme isporuke"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Rok isporuke' translates to 'Delivery deadline' or 'Delivery date', not 'Delivery time'. 'Delivery time' would be better translated as 'Vreme isporuke'.",
-          "suggestion": "Vreme isporuke"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -228,10 +216,16 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Chinese translation \"发送时间\" (fasong shijian) translates to \"Sending time\" not \"Delivery time\". This is a semantic error.",
-          "suggestion": "The correct translation for \"Delivery time\" should be something like \"交付时间\" (jiaofu shijian) or \"送达时间\" (songda shijian)."
+          "description": "The translation '发送时间' means 'Sending time' or 'Time sent', which refers to the moment an action is initiated. In the context of 'Delivery time' (the time a package/event is expected to arrive or the duration of delivery), '送达时间' is the accurate term.",
+          "suggestion": "送达时间"
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "File updated",
   "content_en_sha1_hash": "9550e8ec24af33e7a5898da2edb027d6e0b2b0de",
   "created_at": "2025-05-19T21:30:49.738Z",
-  "updated_at": "2025-05-24T02:24:55.180Z",
+  "updated_at": "2026-04-08T20:04:46.330Z",
   "comment": {
     "text": "This translation key \"FileUpdated\" is used to display the phrase \"File updated\" when a file has been successfully modified or saved in the Portal Settings categories. It appears as part of the UI's feedback or success message after the file operation is completed.",
     "is_auto": true,
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເຟັ້ນຖືກປັບປຸງແລ້ວ\" translates more literally to \"File was adjusted/modified.\" While not entirely wrong, \"updated\" implies a more comprehensive change, and a more direct translation would be preferable. \"ເອກະສານຖືກປັບປຸງແລ້ວ\" would be a closer equivalent to 'File updated'.",
-          "suggestion": "ເອກະສານຖືກປັບປຸງແລ້ວ"
+          "description": "The word 'ເຟັ້ນ' (fen) is a phonetic transliteration that does not mean 'File' in Lao. The correct term for 'File' in a computing context is 'ໄຟລ໌'.",
+          "suggestion": "ໄຟລ໌ຖືກປັບປຸງແລ້ວ"
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Fails atjaunināts' while literally meaning 'File updated', doesn't fully capture the nuance of 'File updated' in a webhook context. It sounds a bit formal and might not be the most natural phrasing.",
-          "suggestion": "Faila atjauninājums"
+          "description": "The word 'Fails' is used instead of 'Failes' (the Latvian word for file). 'Fails' in English means to be unsuccessful, which completely changes the meaning of the success message.",
+          "suggestion": "Failes atjaunināts"
         }
       ],
       "approved_at": null
@@ -153,13 +153,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Romanian translation has a trailing space.",
-          "suggestion": "Fișierul a fost actualizat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -174,7 +168,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ප්‍රතිලේඛනය යාවත්කාලීන කරන ලදී' while technically meaning 'document updated', isn't the most natural or concise translation of 'File updated'. 'ගොනුව යාවත්කාලීන කරන ලදී' would be a more direct and common translation for 'File updated'.",
+          "description": "The Sinhala word 'ප්‍රතිලේඛනය' (Prathilekhanaya) is a highly technical/uncommon term that doesn't accurately represent 'File' in a standard UI context. The standard term for 'File' in Sinhala computing contexts is 'ගොනුව' (Gonuwa).",
           "suggestion": "ගොනුව යාවත්කාලීන කරන ලදී"
         }
       ],
@@ -223,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

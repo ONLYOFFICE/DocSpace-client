@@ -28,6 +28,7 @@
 
 "use client";
 
+import { useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { observer } from "mobx-react";
 
 import {
@@ -37,7 +38,6 @@ import {
 } from "@docspace/ui-kit/components/selection-area";
 import { checkIsSSR, getCountTilesInRow } from "@docspace/shared/utils";
 import useFilesSelection from "@/app/(docspace)/_hooks/useFilesSelection";
-import { useLayoutEffect, useMemo, useState } from "react";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 
@@ -101,6 +101,25 @@ const SelectionArea = observer(() => {
 
   useLayoutEffect(() => {
     setIsSSR(checkIsSSR());
+  }, []);
+
+  useEffect(() => {
+    const onMouseDown = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target?.closest("#sectionScroll")) {
+        document.body.classList.add("no-select");
+      }
+    };
+    const onMouseUp = () => document.body.classList.remove("no-select");
+
+    document.addEventListener("mousedown", onMouseDown);
+    document.addEventListener("mouseup", onMouseUp);
+
+    return () => {
+      document.removeEventListener("mousedown", onMouseDown);
+      document.removeEventListener("mouseup", onMouseUp);
+      document.body.classList.remove("no-select");
+    };
   }, []);
 
   return isSSR ? null : (

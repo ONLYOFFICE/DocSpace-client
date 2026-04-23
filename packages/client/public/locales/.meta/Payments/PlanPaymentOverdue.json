@@ -1,0 +1,28 @@
+{
+  "key_path": "PlanPaymentOverdue",
+  "content": "Cannot add new users, create new rooms or AI agents. {{planName}} plan payment overdue.",
+  "content_en_sha1_hash": "b96c27020148d7f6f42515beb5d244a46ae2511d",
+  "created_at": "2026-04-03T21:51:37.315Z",
+  "updated_at": "2026-04-03T21:56:52.923Z",
+  "comment": {
+    "text": "Displays a warning message in the Invite Quota Warning Dialog when a plan's payment is overdue. It informs the user of specific functional restrictions, such as the inability to add new users, rooms, or AI agents, and includes a placeholder for the plan name.",
+    "is_auto": true,
+    "updated_at": "2026-04-03T21:56:52.923Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/index.js",
+      "line_number": 116,
+      "context": "const contentForGracePeriod = (\n <>\n <Text fontWeight={700}>\n {standalone\n ? t(\"LicenseExpired\")\n : t(\"PlanPaymentOverdue\", {\n planName: currentTariffPlanTitle,\n })}\n </Text>\n <br />\n <Text as=\"div\">",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

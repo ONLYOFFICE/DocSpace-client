@@ -3,7 +3,7 @@
   "content": "Fill out the original form with other recipients in VDR.",
   "content_en_sha1_hash": "f7ea31f31e087897513403fc518f11e1da026c4b",
   "created_at": "2025-10-13T13:22:10.804Z",
-  "updated_at": "2026-02-19T13:36:32.428Z",
+  "updated_at": "2026-04-08T01:47:35.533Z",
   "comment": {
     "text": "This description appears in a dialog or panel related to sharing a form, likely within a virtual data room. It explains how to complete the original form with other recipients. Translators should ensure the description accurately reflects the action of pre-filling the form for recipients.",
     "is_auto": true,
@@ -165,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'අථත්‍ය' (athathya) is a misspelling or incorrect word choice for 'Virtual'. In the context of 'Virtual Data Room', it should be 'අතථ්‍ය' (athathya) or more commonly 'අතථ්‍ය දත්ත කාමරය'. However, 'අථත්‍ය' is not a standard Sinhala word and appears to be a typo.",
+          "suggestion": "VDR හි අනෙකුත් ලබන්නන් සමඟ මුල් පෝරමය පුරවන්න."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,7 +189,13 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \"R\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -201,7 +213,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation contains a repetitive duplication of the sentence, essentially saying the same thing twice in a row.",
+          "suggestion": "VDR'deki diğer alıcılarla birlikte orijinal formu doldurun."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

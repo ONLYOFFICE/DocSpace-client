@@ -3,7 +3,7 @@
   "content": "Support & Legal info",
   "content_en_sha1_hash": "7ce901e3351f432410ccf2530e8f58ea4855b320",
   "created_at": "2025-05-19T21:30:54.048Z",
-  "updated_at": "2026-03-26T08:26:58.172Z",
+  "updated_at": "2026-04-07T19:35:05.168Z",
   "comment": {
     "text": "This translation key is used to display \"Support & Legal info\" in the user interface, specifically in a support block component within an OAuth client form, likely as a header or title. It appears alongside a field where users can input a policy URL, and also in an information dialog box for privacy policies.",
     "is_auto": true,
@@ -57,13 +57,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "Hyphen usage is inconsistent. The English uses '&', while the German uses a hyphen. While acceptable, consistency would be preferred.",
-          "suggestion": "Consider using '&' instead of '-' for visual consistency with the English version: 'Support & Rechtsinformationen'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -117,13 +111,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"ຂໍ້ມູນສະຫນັບສະຫນູນ & ຂໍ້ມູນທາງການຜະລິດ\" doesn't accurately convey the meaning of \"Support & Legal info\". \"ຂໍ້ມູນທາງການຜະລິດ\" translates to 'production information' which isn't synonymous with 'Legal info'.",
-          "suggestion": "ຂໍ້ມູນສະຫນັບສະຫນູນ & ຂໍ້ມູນກົດຫມູ່ຽນ (Support & Legal info)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -159,13 +147,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Asistență\" is a valid translation for \"Support\", \"informații juridice\" is a more literal and potentially less user-friendly translation of \"Legal info\". The term \"Legal info\" is often shortened or paraphrased in Romanian to convey the same meaning more naturally.",
-          "suggestion": "Consider \"Informații legale\" or \"Informații despre legislație\" as more natural alternatives to \"informații juridice\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -195,13 +177,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Подршка' is a good translation for 'Support', 'правне информације' is a more formal and slightly less natural translation of 'Legal info'. A more colloquial and frequently used translation would be 'Законе информације'.",
-          "suggestion": "Законе информације"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

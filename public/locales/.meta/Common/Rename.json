@@ -3,7 +3,7 @@
   "content": "Rename",
   "content_en_sha1_hash": "d3f4cb898fbe0c7a7ac4f721438c4c26ad1a2513",
   "created_at": "2025-05-19T21:30:47.845Z",
-  "updated_at": "2026-03-31T15:18:46.116Z",
+  "updated_at": "2026-04-10T08:21:04.292Z",
   "comment": {
     "text": "The translation key \"Rename\" is used to display the label for renaming options on various UI elements, such as buttons and dialogs. It typically appears in contexts where user interaction with files or media items requires renaming, often alongside an icon representing a pencil or text editing action. This text helps to clearly communicate the purpose of the feature in different parts of the application.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2533,
+      "line_number": 2532,
       "context": "},\n indexOptions,\n {\n id: \"option_rename\",\n key: \"rename\",\n label: t(\"Common:Rename\"),\n icon: RenameReactSvgUrl,\n onClick: () => this.onClickRename(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
@@ -57,13 +57,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Adını dəyiş\" literally translates to \"Change its name,\" it doesn't fully capture the nuance of \"Rename.\" \"Rename\" implies giving something a new name, which \"Adını dəyiş\" doesn't necessarily convey.",
-          "suggestion": "Consider \"Yeni ad vermək\" (To give a new name) or \"Başqa ad qoşmaq\" (To add another name) for a more accurate translation, depending on the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -123,13 +117,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"名前の変更\" is a literal translation of 'Rename', it's not the most natural or commonly used term in Japanese for this context. It's quite formal.",
-          "suggestion": "Consider alternatives like \"変更する\" (henkou suru - to change) or a more specific term depending on what is being renamed (e.g., \"ファイル名を変更する\" for renaming a file)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -147,7 +135,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian word 'Pārdēvēt' means 'to resell' or 'to re-sell', which is completely different from the English 'Rename' (to change a name).",
+          "suggestion": "Pārnamedot"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -192,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"නම් කරන්න\" is a literal translation of 'to name' and doesn't quite capture the meaning of 'Rename' which implies changing an existing name. It's a bit too formal and doesn't convey the action of replacing a name.",
-          "suggestion": "පැරණ නම වෙනස් කරන්න (Parana nama venas karanna) - meaning 'change the old name' or වෙනත් නම දාන්න (Venatha nama danna) - meaning 'put another name'."
+          "description": "The Sinhala translation 'නම් කරන්න' (Nam karanna) means 'to name' or 'to call something by a name', which is grammatically a verb phrase. In a UI context for a button or menu item, 'Rename' should be translated as 'නම වෙනස් කරන්න' (Nama venas karanna) to accurately convey the action of changing an existing name.",
+          "suggestion": "නම වෙනස් කරන්න"
         }
       ],
       "approved_at": null
@@ -241,6 +235,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "Sign in with Zoom",
   "content_en_sha1_hash": "4bf90e936ec81803bddf7c8046ea7c8f393f6d8b",
   "created_at": "2025-05-19T21:30:48.808Z",
-  "updated_at": "2026-03-26T08:26:58.377Z",
+  "updated_at": "2026-04-10T08:21:04.402Z",
   "comment": {
     "text": "This translation key is used for the \"Sign in with Zoom\" button on a login form. It prompts users to sign in with their Zoom account when using two-factor authentication.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 483,
+      "line_number": 485,
       "context": "? t(\"Common:SignUpWithMicrosoft\")\n : t(\"Common:SignInWithMicrosoft\");\n case \"sso\":\n return signUp ? t(\"Common:SignUpWithSso\") : t(\"Common:SignInWithSso\");\n case \"zoom\":\n return signUp ? t(\"Common:SignUpWithZoom\") : t(\"Common:SignInWithZoom\");\n case \"weixin\":\n return signUp\n ? t(\"Common:SignUpWithWechat\")\n : t(\"Common:SignInWithWechat\");\n default:",
       "module": "/packages/shared"
     }
@@ -29,8 +29,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'تسجيل الدخول Zoom' is a literal translation and lacks fluency. It doesn't convey the action of signing in *with* Zoom. A more natural translation would incorporate the idea of using Zoom to sign in.",
+          "type": "missing_content",
+          "description": "The preposition 'with' is missing in the Arabic translation, making the phrase 'Sign Zoom' instead of 'Sign in with Zoom'.",
           "suggestion": "تسجيل الدخول باستخدام Zoom"
         }
       ],
@@ -45,13 +45,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Влез с Zoom\" is a literal translation of 'Sign in with Zoom' and, while understandable, could be improved for a more natural and idiomatic expression in Bulgarian.  A more suitable translation would be something like 'Вход през Zoom' or 'Удостоверяване през Zoom'.",
-          "suggestion": "Вход през Zoom"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -63,13 +57,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Login über Zoom\" is understandable, \"Sign in with Zoom\" generally translates better as \"Anmelden mit Zoom\". \"Login\" is often used in English but less common and less natural in German for this context.",
-          "suggestion": "Anmelden mit Zoom"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -87,13 +75,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Kirjaudu sisään Zoomillä\" is understandable, a more natural and accurate Finnish translation of \"Sign in with Zoom\" would be \"Kirjaudu Zoomin kautta\" or \"Kirjaudu sisään Zoomin avulla\".  'Zoomillä' implies using Zoom as a tool directly, which isn't the intended meaning of 'Sign in with Zoom'.",
-          "suggestion": "Kirjaudu Zoomin kautta"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -105,25 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Մուտք գործել Zoom-ով' is a literal translation and might not be the most natural way to say \"Sign in with Zoom\" in Armenian. While technically correct, it sounds a bit awkward.",
-          "suggestion": "Consider alternatives like 'Մուտքագրվել Zoom-ի միջոցով' or 'Մուտքագրվել Zoom-ով' depending on the desired tone. 'Zoom-ով մուտքագրվել' might be more fluid, though still slightly literal."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Accedere con Zoom' is grammatically correct, it's a more literal translation of 'access' rather than the more natural 'Sign in with Zoom'. The intended meaning is authentication, not just accessing something.",
-          "suggestion": "In Italian, a better translation for 'Sign in with Zoom' would be 'Entra con Zoom' or 'Accedi con Zoom (using Zoom)' depending on the desired nuance."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -177,13 +147,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Conectare cu Zoom\" is understandable, \"Autentificare cu Zoom\" or \"Logare cu Zoom\" would be more accurate translations of \"Sign in with Zoom.\" \"Conectare\" primarily means 'connect,' which is not the core action of signing in.",
-          "suggestion": "Autentificare cu Zoom"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -195,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"සූම් සමඟ පිවිසෙන්න\" is a literal translation of \"Sign in with Zoom,\" it could be more naturally phrased for Sinhala. \"සූම් භාවිතා කොට පිවිසෙන්න\" or \"සූම් ඔස්සේ පිවිසෙන්න\" might read more fluidly.",
-          "suggestion": "සූම් භාවිතා කොට පිවිසෙන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -219,18 +177,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Пријави се путем Zoom-а' is a literal translation that sounds slightly unnatural in Serbian. A more idiomatic translation would be 'Улазак са Zoom-ом' or 'Пријава преко Zoom-а'.",
-          "suggestion": "Улазак са Zoom-ом"
-        },
-        {
-          "type": "formatting",
-          "description": "While not incorrect, using a hyphen between 'Zoom' and 'а' ('Zoom-а') is stylistically less common in modern Serbian. Using just 'Zoom-ом' is preferable.",
-          "suggestion": "Zoom-ом"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -242,13 +189,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Zoom hesabınız ile giriş yapın' is a literal translation that could be improved for naturalness. A more idiomatic translation would be 'Giriş yapmak için Zoom hesabınızı kullanın.' or 'Zoom ile giriş yapın'.",
-          "suggestion": "Giriş yapmak için Zoom hesabınızı kullanın"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -269,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"使用Zoom登录\" is understandable, a more natural and accurate translation of \"Sign in with Zoom\" would be \"通过Zoom登录\" or \"用Zoom登录\". \"使用Zoom登录\" implies a more general 'using' rather than specifically signing in.",
-          "suggestion": "通过Zoom登录"
+          "description": "The Chinese translation '解绑Zoom登录' means 'Unbind Zoom login', which is the opposite of the intended action 'Sign in with Zoom'.",
+          "suggestion": "使用 Zoom 登录"
         }
       ],
       "approved_at": null

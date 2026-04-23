@@ -3,7 +3,7 @@
   "content": "Create config object with required parameters:",
   "content_en_sha1_hash": "52212a696c6564a4944c6c9b41e7ded8ec80a8bc",
   "created_at": "2025-05-19T21:30:54.589Z",
-  "updated_at": "2026-03-20T09:07:45.602Z",
+  "updated_at": "2026-04-07T19:35:05.136Z",
   "comment": {
     "text": "This translation key is used to display a brief instruction on how to create a config object with required parameters. It appears as part of the UI in the \"Code To Insert\" component, guiding users to input necessary data to complete the configuration process.",
     "is_auto": true,
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The term 'Config Object' is in English within the Arabic translation. While understandable, it's preferable to have a consistent Arabic term or transliteration for technical terms to maintain consistency.",
-          "suggestion": "Consider using a consistent Arabic transliteration for 'Config Object' throughout the documentation, or defining it with an initial Arabic equivalent and then using the English term in parentheses. For example: \"أنشئوا كائن إعدادات (كائن تكوين) يحتوي على المعلمات المطلوبة:\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -45,13 +39,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'предмет' (predmet) translates to 'object' or 'item' in English, but in this context, 'object' is a more accurate term for a JavaScript object. 'Item' doesn't fit the meaning.",
-          "suggestion": "Създайте конфигурационен обект с необходимите параметри:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -105,13 +93,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '必要なパラメータでコンフィグオブジェクトを作成：' could be improved for clarity and naturalness. While technically correct, it reads a bit stiffly. A more natural phrasing might better convey the intended meaning.",
-          "suggestion": "必要なパラメータを含むコンフィグオブジェクトを作成する："
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -123,18 +105,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ສ້າງຕົວແກ້ໄຂການຕັ້ງຄ່າດ້ວຍຕົວຊ່ວຍການຕັ້ງຄ່າທີ່ຕ້ອງການ:' doesn't accurately reflect the English meaning 'Create config object with required parameters:'. 'ຕົວແກ້ໄຂການຕັ້ງຄ່າ' (config editor) and 'ຕົວຊ່ວຍການຕັ້ງຄ່າ' (config helper) are not the correct terms to use in this context.  It implies a tool or editor rather than the creation of a configuration object itself.",
-          "suggestion": "ສ້າງອົງການຕັ້ງຄ່າດ້ວຍຕົວຕ່າງຂອງການຕັ້ງຄ່າທີ່ຕ້ອງການ:"
-        },
-        {
-          "type": "spelling",
-          "description": "While 'ຕົວຕ່າງຂອງການຕັ້ງຄ່າ' is a potential suggestion, it might still be slightly awkward. Consider if a more direct translation of 'parameters' is possible and natural in Lao in this technical context. The goal is clarity and accuracy.",
-          "suggestion": "Requires review of Lao technical terminology for 'parameters' to ensure the most natural and accurate translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -182,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'වින්‍යාස' (vinyasa) is a valid word but in this context 'අවශ්‍යතා' (avashyata) – meaning 'requirements' or 'necessities' – might be more appropriate, leading to a more natural flow. While 'विन‍යාස' isn't wrong, it might suggest a more complex configuration than the English implies.",
-          "suggestion": "අවශ්‍යතා සහිත වස්තුවක් සාදන්න:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -206,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'објектат' is a typo. It should be 'објекат'.",
-          "suggestion": "објекат"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -224,13 +183,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Gerekli parametrelerle config nesneleri oluşturun:  \" is a literal translation that doesn't quite capture the intended meaning of \"Create config object with required parameters:\". It implies creating multiple config objects, whereas the original implies creating one.",
-          "suggestion": "Gerekli parametrelerle bir config nesnesi oluşturun: "
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

@@ -335,7 +335,7 @@ const ManualBackup = ({
     setErrorMessage("");
     setBackupProgressError("");
     setBackupProgressWarning("");
-    
+
     const storageParams = getStorageParams(
       isCheckedThirdPartyStorage,
       selectedFolder,
@@ -701,3 +701,4 @@ const ManualBackup = ({
 };
 
 export default ManualBackup;
+

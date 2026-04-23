@@ -3,7 +3,7 @@
   "content": "Restore",
   "content_en_sha1_hash": "3cbe6d6b9a8d1596bb5bca12e14d81c9e108a1a3",
   "created_at": "2025-05-19T21:30:47.901Z",
-  "updated_at": "2026-03-31T15:18:46.062Z",
+  "updated_at": "2026-04-10T08:21:04.291Z",
   "comment": {
     "text": "The translation key \"Restore\" is used to display a button label or header in various UI elements, such as buttons and dialogs. It indicates an action of recovering or returning a file or room to its original state. This translation key appears on screens like Restore Room Dialogs where users can restore a room.",
     "is_auto": true,
@@ -42,31 +42,31 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2524,
+      "line_number": 2523,
       "context": "},\n ...moveActions,\n {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: this.onRestoreAction,\n disabled: false,\n },\n indexOptions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2524,
+      "line_number": 2523,
       "context": "},\n ...moveActions,\n {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: this.onRestoreAction,\n disabled: false,\n },\n indexOptions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2524,
+      "line_number": 2523,
       "context": "},\n ...moveActions,\n {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: this.onRestoreAction,\n disabled: false,\n },\n indexOptions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2524,
+      "line_number": 2523,
       "context": "},\n ...moveActions,\n {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: this.onRestoreAction,\n disabled: false,\n },\n indexOptions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2547,
+      "line_number": 2552,
       "context": "itemsCollection\n .set(\"download\", download)\n .set(\"downloadAs\", downloadAs)\n .set(\"restore\", {\n id: \"menu-restore\",\n label: t(\"Common:Restore\"),\n onClick: () => setRestorePanelVisible(true),\n iconUrl: MoveReactSvgUrl,\n })\n .set(\"delete\", deleteOption)\n .set(\"showInfo\", showInfo);",
       "module": "/packages/client"
     },
@@ -237,7 +237,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Restabilire' means 're-establishment' or 'reinstatement' (often used for connections, order, or status). For a UI button action to recover a file or room, 'Restaurare' is the correct technical term.",
+          "suggestion": "Restaurare"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -252,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'ප්‍රත්‍යර්පණය' (pratyarpanaya) is a valid Sinhala word, it primarily means 'repayment', 'offering', or 'dedication'.  'Restore' in the context of data or a system usually implies returning something to a previous state, which is better translated as ' නැවත ස්ථානගත කිරීම' (naewath sthaanagath karuma) or ' නැවත පහසකිරීම' (naewath pahasakareema).",
-          "suggestion": "Consider 'නැවත ස්ථානගත කිරීම' (naewath sthaanagath karuma) or 'නැවත පහසකිරීම' (naewath pahasakareema)"
+          "description": "The Sinhala word 'ප්‍රත්‍යර්පණය' (Prathyarpanya) is a highly formal/academic term often used for 'restitution' or 'reimbursement' in legal or complex contexts. In a UI context for recovering a file or room, it sounds unnatural and overly complex. A more standard UI term for 'Restore' is 'පුනර්ස්ථාපනය කරන්න' or simply 'පුනර්ස්ථාපනය'.",
+          "suggestion": "පුනර්ස්ථාපනය"
         }
       ],
       "approved_at": null
@@ -273,13 +279,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Поврати\" can mean \"return\" or \"restore\" in some contexts, it's not the most common or natural translation of \"Restore\" in this context. A more accurate and common translation would be \"Врати\" or potentially \"Обнови\" depending on the precise nuance intended.",
-          "suggestion": "Врати"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -291,7 +291,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish word 'Onar' means 'to repair' or 'to fix' (like repairing a broken object). In the context of recovering a file, room, or data to its original state, 'Geri Yükle' is the correct technical term for 'Restore'.",
+          "suggestion": "Geri Yükle"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -307,6 +313,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

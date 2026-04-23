@@ -3,7 +3,7 @@
   "content": "Create presentation",
   "content_en_sha1_hash": "945036abbd4301f04943e2bfbf1a4f36b6435144",
   "created_at": "2025-05-19T21:30:55.042Z",
-  "updated_at": "2026-02-19T13:36:32.509Z",
+  "updated_at": "2026-04-07T19:35:05.106Z",
   "comment": {
     "text": "Create presentation key is used to display the hotkey for creating a new presentation when the user presses Shift + p in the HotkeysPanel component. This text appears as part of a UI element, suggesting that it might be related to a button or menu option.",
     "is_auto": true,
@@ -99,13 +99,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '프리젠 테이션을 만듭니다' is a literal translation of 'Create presentation.' While understandable, a more natural and common Korean phrase would be '프레젠테이션 만들기' or '프레젠테이션 생성'. The '-니다' ending implies a declarative statement rather than an instruction or option.",
-          "suggestion": "프레젠테이션 만들기"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {

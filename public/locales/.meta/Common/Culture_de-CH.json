@@ -3,7 +3,7 @@
   "content": "Deutsch (Schweiz)",
   "content_en_sha1_hash": "fb62b7f221268b49be4a25eaebd2376eaa6eb5f3",
   "created_at": "2025-05-19T21:30:43.987Z",
-  "updated_at": "2025-05-24T01:18:32.585Z",
+  "updated_at": "2026-04-08T13:39:24.401Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -20,7 +20,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in German (Latin script) instead of Arabic.",
+          "suggestion": "الألمانية (سويسرا)"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -50,67 +56,133 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in German instead of Greek. The English text 'Deutsch (Schweiz)' refers to the German language variant for Switzerland, but the Greek translation should be the Greek equivalent of that language name.",
+          "suggestion": "Γερμανικά (Ελβετία)"
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Spanish translation is identical to the English text, which is German. It should be translated into Spanish.",
+          "suggestion": "Alemán (Suiza)"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Finnish translation is actually German, not Finnish.",
+          "suggestion": "Saksa (Sveitsi)"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The French translation is actually German, not French.",
+          "suggestion": "Allemand (Suisse)"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in German (Latin script) instead of Armenian.",
+          "suggestion": "Գերմաներեն (Շվեյցարիա)"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Italian translation is actually German, not Italian.",
+          "suggestion": "Tedesco (Svizzera)"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Japanese translation is identical to the English text and does not use the Japanese script or translate the language name.",
+          "suggestion": "ドイツ語 (スイス)"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Korean translation is identical to the English text and uses the Latin script instead of Korean script (Hangul). While 'Deutsch (Schweiz)' is a language name, in a Korean UI context, it should typically be transliterated or translated to reflect the target language's script.",
+          "suggestion": "독일어 (스위스)"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation uses Latin script instead of the Lao script. While the text is a proper noun (language name), it should be transliterated or translated into Lao script for a Lao localization.",
+          "suggestion": "ເດຍຊ໌ (ສະວິດເຊີແລນ)"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in German instead of Latvian.",
+          "suggestion": "Vācu valoda (Šveĭcija)"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in German instead of Dutch. 'Deutsch (Schweiz)' means 'German (Switzerland)' in German; the Dutch equivalent should be 'Duits (Zwitserland)'.",
+          "suggestion": "Duits (Zwitserland)"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -122,13 +194,25 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in German, not Portuguese. The text should represent the language name in Portuguese.",
+          "suggestion": "Alemão (Suíça)"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is in German instead of Portuguese (Brazil). The text should be translated to 'Alemão (Suíça)'.",
+          "suggestion": "Alemão (Suíça)"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -140,13 +224,25 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Russian translation is identical to the English text and uses the Latin script instead of Cyrillic for the language name.",
+          "suggestion": "Немецкий (Швейцария)"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Latin script (German) instead of Sinhala script.",
+          "suggestion": "ජර්මන් (ස්විට්සර්ලන්තය)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -158,7 +254,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in German, not Slovenian.",
+          "suggestion": "Nemščina (Švica)"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -182,7 +284,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in German (Latin script) instead of Ukrainian (Cyrillic script).",
+          "suggestion": "Німецька (Швейцарія)"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -195,6 +303,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in German, not Albanian. The Albanian translation for 'Deutsch (Schweiz)' should be 'Gjermanisht (Zvicër)'.",
+          "suggestion": "Gjermanisht (Zvicër)"
+        }
+      ],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "The form is completed",
   "content_en_sha1_hash": "1e9a173543cf2b12acb0a11ca5d2efc71faafb87",
   "created_at": "2025-05-19T21:30:57.191Z",
-  "updated_at": "2026-02-19T13:36:33.049Z",
+  "updated_at": "2026-04-07T19:35:05.240Z",
   "comment": {
     "text": "The translation key \"CompletedForm:Title\" is used to display a completion message on an empty form layout. It appears as a heading in the UI and provides feedback when the form has been completed without any content.",
     "is_auto": true,
@@ -171,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'формулар' is a misspelling of 'образац'.",
-          "suggestion": "образац"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -201,13 +195,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Biểu mẫu đã được hoàn thành' is a literal translation but sounds slightly unnatural in Vietnamese. A more natural phrasing would be 'Biểu mẫu đã hoàn thành'.",
-          "suggestion": "Biểu mẫu đã hoàn thành"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

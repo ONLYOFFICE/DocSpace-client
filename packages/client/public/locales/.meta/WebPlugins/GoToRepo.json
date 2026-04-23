@@ -3,7 +3,7 @@
   "content": "Go to repository",
   "content_en_sha1_hash": "7cec9604549289db044b7db17751318a97d2170a",
   "created_at": "2025-05-19T21:30:49.909Z",
-  "updated_at": "2025-08-04T07:30:01.449Z",
+  "updated_at": "2026-04-08T18:44:53.371Z",
   "comment": {
     "text": "The translation key \"GoToRepo\" represents the English content \"Go to repository\", used as a button label in a portal settings page, prompting users to open a repository in their default browser.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Anbara gedin\" is a literal translation of 'Go to warehouse', while the context implies 'Go to repository' (likely referring to a code repository).  'Anbar' refers to a storage warehouse, not a software repository.",
-          "suggestion": "Consider translations like \"Ekrana keçid\" (Go to screen), \"Kod ehanəsinə keçid\" (Go to code repository), or \"Depoğa keçid\" (Go to depot/repository) depending on the precise desired nuance."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -57,13 +51,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Zum Repository gehen' is not the most natural or preferred way to say 'Go to repository' in German. 'Repository' is an Anglicism, and while understandable, it's better to use a German equivalent or a more fluent phrasing.",
-          "suggestion": "Gehe zum Repository / Gehe in das Repository / Navigiere zum Repository"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -81,13 +69,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Siirry\" correctly means \"Go to\", \"arkistoon\" can have multiple meanings and \"repository\" is more specifically \"varasto\" or \"arkisto\". However, 'arkisto' is closer in meaning.",
-          "suggestion": "Siirry arkistoon is acceptable but a more direct translation could be 'Siirry varastoon' or 'Siirry säilöön' if a more literal meaning is intended."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -99,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Գնալ պահեստ' translates literally to 'Go to warehouse'.  'Repository' typically refers to a software repository or code repository, not a warehouse. A more accurate translation would reflect that.",
-          "suggestion": "Consider 'Մեկնել դեպոսիտ' (Menkel depotisit) which translates closer to 'Go to repository' or 'Go to codebase' depending on the context. Another option is 'Բացել պահեստը' (Bacel pahresti) which would mean 'Open the repository'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -114,7 +90,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vai su GitHub' is too specific. It directly mentions GitHub. The English phrase 'Go to repository' should refer to the repository in general, not a specific platform.",
+          "description": "The translation specifies a specific platform ('GitHub') instead of the generic 'repository' mentioned in the English source. This limits the functionality if the repository is hosted elsewhere (e.g., GitLab, Bitbucket).",
           "suggestion": "Vai al repository"
         }
       ],
@@ -147,13 +123,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ga naar repository' is too literal. 'Repository' is often used in English software development contexts and it's more natural to translate it to a more familiar Dutch equivalent, especially for non-technical users. A more suitable translation might be 'Ga naar de codeopslag' or 'Ga naar het project'.",
-          "suggestion": "Ga naar de codeopslag"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -180,7 +150,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "“Acces depozit” is a literal translation but doesn't quite convey the intended meaning of 'Go to repository.' It translates to 'Access deposit,' which is not the same as navigating to a repository.",
+          "description": "The translation 'Acces depozit' means 'Repository access' (a noun phrase), whereas the English 'Go to repository' is an imperative action/command for a button.",
           "suggestion": "Mergi la depozit"
         }
       ],
@@ -198,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'කෝෂ්ඨය වෙත යන්න' literally translates to 'to the cluster/node/mass go'. While understandable, it's not the most natural or common way to say 'Go to repository' in Sinhala. A more accurate and natural translation would convey the meaning of accessing or navigating to a code repository.",
-          "suggestion": "Consider using a translation like 'repository වෙත යන්න' (repository vetha yanna) or 'repository පෙන්වා' (repository penwa - pointing to the repository)."
+          "description": "The word 'කෝෂ්ඨය' (Kōṣṭhaya) refers to a biological cavity, a stomach, or a cell in a botanical context. It is not the correct technical term for a software 'repository'.",
+          "suggestion": "රිපොසිටරිය වෙත යන්න"
         }
       ],
       "approved_at": null
@@ -219,25 +189,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Иди у репозиторијум' is not the most natural or accurate translation of 'Go to repository'. While it is understandable, it's a literal translation and sounds awkward. A more common and idiomatic way to say 'Go to repository' in Serbian (Cyrillic) would be 'Пређи у репозиторијум' or 'Оди у репозиторијум'.",
-          "suggestion": "Пређи у репозиторијум"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'repozitorijum' is spelled incorrectly. The correct spelling is 'repOzitorijum'.",
-          "suggestion": "repOzitorijum"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -261,13 +219,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"转到仓库\" (zhuǎn dào cāngkù) is understandable, it's not the most natural or idiomatic translation of \"Go to repository.\" \"转到\" (zhuǎn dào) implies a turning or redirection, which isn't the primary meaning here.  \"Go to\" often implies navigation or access.",
-          "suggestion": "前往仓库 (qiánwǎng cāngkù) or 访问仓库 (fǎngwèn cāngkù) would be more appropriate.  \"前往\" (qiánwǎng) means 'to go to', and '访问' (fǎngwèn) means 'to visit' or 'access'."
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

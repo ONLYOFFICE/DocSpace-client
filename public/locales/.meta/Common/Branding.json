@@ -3,7 +3,7 @@
   "content": "Branding",
   "content_en_sha1_hash": "d17dc3843de8e54fc084f0b952690209018ca128",
   "created_at": "2025-05-26T07:15:40.963Z",
-  "updated_at": "2026-03-26T08:26:58.126Z",
+  "updated_at": "2026-04-08T16:08:10.575Z",
   "comment": {
     "text": "The \"Branding\" translation key is used to display the name of a portal setting category in the UI. It is shown on a settings page and appears as part of the data structure in the /packages/client/src/pages/PortalSettings/categories/common/index.js file. Translators should provide a phrase that describes this concept, commonly found in branding or marketing contexts.",
     "is_auto": true,
@@ -75,7 +75,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek word 'Επωνυμία' means 'Company Name' or 'Trade Name'. In the context of UI settings for 'Branding' (which includes logos, colors, and visual identity), 'Branding' should be translated as 'Προϊόντα Εμπορίου' or more commonly 'Brand Identity' / 'Εμπορική Ταυτότητα'. 'Επωνυμία' is too narrow as it only refers to the legal name.",
+          "suggestion": "Εμπορική Ταυτότητα"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -93,7 +99,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Personnalisation' (Customization) is a different concept from 'Branding' (Identité de marque). While related, branding specifically refers to visual identity and brand assets, whereas customization is a broader term for changing settings.",
+          "suggestion": "Identité de marque"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -105,7 +117,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "In the context of software settings and portal customization, 'Branding' refers to the visual identity/customization (e.g., logos, colors, themes), whereas 'Marchio' refers to a specific trademark or brand name. 'Branding' as a category should be translated as 'Brand identity' or 'Personalizzazione brand'.",
+          "suggestion": "Branding"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -171,7 +189,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala word 'සන්නමනය' (Sannamanaya) is not a standard or correct term for 'Branding'. It appears to be a non-existent or incorrectly formed word. The correct term for branding in a marketing/identity context is 'සන්නාමකරණය'.",
+          "suggestion": "සන්නාමකරණය"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -220,6 +244,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Markimi' means 'marking' or 'labeling' (the act of putting a mark on something), whereas in a UI settings context for 'Branding', it should refer to the visual identity or brand representation.",
+          "suggestion": "Brendimi"
+        }
+      ],
       "approved_at": null
     }
   }

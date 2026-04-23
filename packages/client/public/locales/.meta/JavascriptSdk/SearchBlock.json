@@ -3,7 +3,7 @@
   "content": "Search block",
   "content_en_sha1_hash": "56c6cf7793ee4ba51ec0088f1810351bb7bb5a27",
   "created_at": "2025-05-19T21:30:54.653Z",
-  "updated_at": "2026-03-20T09:07:45.518Z",
+  "updated_at": "2026-04-07T19:35:05.139Z",
   "comment": {
     "text": "This translation key is used for a UI component that represents a search block. It is typically displayed as a label and may also include an image, and appears in various contexts such as panels, tooltips, or dialog boxes, guiding users to search functionality.",
     "is_auto": true,
@@ -45,13 +45,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Bloku axtarın\" is understandable, a more natural and accurate translation of \"Search block\" in Azerbaijani would be something like \"Blok axtarışı\" or \"Blok üçün axtarış\". \"Bloku axtarın\" literally translates to \"Search the block,\" which implies searching *within* a block, rather than a search *for* a block.",
-          "suggestion": "Blok axtarışı"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -75,13 +69,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Πλαίσιο αναζήτησης\" literally translates to \"search frame\" or \"search box\". While not entirely wrong, it's not the most natural or accurate translation of \"search block\". A more precise translation would convey the concept of a block of search results or a section dedicated to searching.",
-          "suggestion": "Αναζήτηση μπλοκ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -105,13 +93,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Որոնման բլոկ\" is literally \"Search block\", it might sound awkward in Armenian. A more natural phrasing would be something like \"Բլոկ որոնողություն\" or \"Որոնել բլոկ\".",
-          "suggestion": "Consider alternatives like \"Բլոկ որոնողություն\" or \"Որոնել բլոկ\" for a more natural flow in Armenian."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -141,13 +123,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Meklēšanas bloks' is technically correct, it's a very literal translation. A more natural and idiomatic translation of 'Search block' would be something like 'Meklējumu bloks' or 'Meklēšanas funkcija'.  'Meklēšanas bloks' suggests a physical block containing search functionality, which is likely not the intended meaning.",
-          "suggestion": "Meklējumu bloks"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -159,13 +135,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation \"Pole wyszukiwania\" literally translates to 'search field'. While it's related to 'search block', it's not a direct or accurate translation of the English phrase. A better translation might be something along the lines of \"Blok wyszukiwania\" or \"Obszar wyszukiwania\" to reflect the block concept.",
-          "suggestion": "Blok wyszukiwania"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -177,25 +147,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Bloco de pesquisa' is technically correct, a more natural and idiomatic translation for \"Search block\" in a technical context (like a Javascript SDK) would be \"Bloco de busca\". \"Pesquisa\" usually implies a more detailed investigation, whereas \"busca\" is more aligned with searching.",
-          "suggestion": "Bloco de busca"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Bloc căutare\" is a literal translation but doesn't convey the intended meaning of \"Search block\" in the context of a Javascript SDK. It sounds awkward and unclear. A more appropriate translation would depend on the specific functionality of the SDK. Considering the context, options like \"Căutare bloc\" or \"Bloc de căutare\" might be more suitable, depending on whether the search is *within* a block or *for* a block.",
-          "suggestion": "Consider alternatives like \"Căutare bloc\" or \"Bloc de căutare\" based on the exact function this key refers to."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -207,13 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"සෙවුම් අඩය\" literally translates to \"search area\" or \"search zone\", which isn't the most accurate representation of \"Search block\".  A 'block' in this context likely refers to a blockchain block, not a general area for searching.",
-          "suggestion": "Consider alternatives like \"බ්ලොක් සෙවීම\" (Block Search) or \"බ්ලොක් විමසුම\" (Block Inquiry)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -225,37 +177,19 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Išči blok\" is technically a translation of \"Search block,\" it sounds awkward and lacks the proper nuance. A more natural Slovenian translation would emphasize the action of searching *within* a block, or the block's details.",
-          "suggestion": "Raziskanje bloka"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Блок за претрагу\" is understandable, a more accurate and common translation of \"Search block\" would be \"Блок за претраживање\" or simply \"Претрага\". \"Претрагу\" is the most concise option if the context allows.",
-          "suggestion": "Блок за претраживање"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Blok za pretragu\" is understandable, a more accurate and natural translation of \"Search block\" would be \"Potraga bloka\" or \"Blok pretrage\". \"Blok za pretragu\" implies a block *for* searching, rather than a block being searched.",
-          "suggestion": "Potraga bloka"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -279,13 +213,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"搜索板块\" (sōusuō bǎokuǎn) is a possible translation, it's not the most accurate for \"Search block.\" \"板块\" typically refers to a section or panel, not a block of data or a block in the blockchain sense.  A more accurate translation would depend on the context of 'Search block' (e.g., searching a specific block in a blockchain).",
-          "suggestion": "Consider alternatives like \"区块搜索\" (qūdú sōusuō) for 'block search' in the blockchain context, or \"搜索模块\" (sōusuō mókuài) for a more general 'search module'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

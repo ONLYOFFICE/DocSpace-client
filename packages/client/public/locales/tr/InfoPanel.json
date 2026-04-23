@@ -2,6 +2,7 @@
   "AddedRoomTags": "Etiketler eklendi.",
   "Administration": "Yönetim",
   "AgentRenamed": "Temsilci <1>«{{oldRoomTitle}}»</1> adını <2>«{{roomTitle}}»</2> olarak değiştirdi",
+  "AIAgentsEmptyScreenTent": "Buradaki {{aiAgents}} detaylarını görün",
   "AndMoreLabel": "ve <1>{{count}} daha</1>",
   "CreationDate": "Oluşturulma tarihi",
   "Data": "Veri",
@@ -60,11 +61,14 @@
   "IndexChanged": "Dizin değişti",
   "ItemsSelected": "Seçili öğeler",
   "LastModifiedBy": "Son Düzenleyen",
+  "LastUpdateInfo": "Son güncelleme",
   "LifetimeEnds": "Yaşam süresi sona eriyor",
   "MembersEmptyScreenText": "Üye ayrıntılarını burada görüntüleyin",
+  "NoAgent": "Hayır {{aiAgent}}",
   "NoRecordsFound": "Kayıt bulunamadı",
   "Properties": "Özellikler",
   "Resolution": "Çözünürlük",
+  "RoomChangeOwner": "Oda sahibi değişti.",
   "RoomCreateUserCount": "Kullanıcılar eklendi ({{count}}).",
   "RoomDenyDownloadDisabled": "İndirme ve kopyalama sınırlandırılmıştır",
   "RoomDenyDownloadEnabled": "İndirme ve kopyalama sınırlandırılmamıştır",
@@ -98,6 +102,5 @@
   "SubmenuHistory": "Geçmiş",
   "UserFileUpdated": "Dosya güncellendi.",
   "Users": "Kullanıcılar",
-  "Versions": "Sürümler",
-  "LastUpdateInfo": "Son güncelleme"
+  "Versions": "Sürümler"
 }

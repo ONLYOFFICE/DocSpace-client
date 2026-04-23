@@ -3,7 +3,7 @@
   "content": "Complete the setup",
   "content_en_sha1_hash": "1bf0c07dc9bdea39a6c1bbaaf41f773da850cc1c",
   "created_at": "2025-05-19T21:30:57.412Z",
-  "updated_at": "2025-12-15T14:04:24.286Z",
+  "updated_at": "2026-04-07T19:35:05.253Z",
   "comment": {
     "text": "This translation key is used to display a label that indicates a setup process has been completed. It appears as a bold and truncated text element in the UI.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'أكملوا الإعداد' uses the plural imperative form (أكملوا). While technically correct, it implies a command to multiple people. 'Complete the setup' is often a single action, so a singular imperative would be more appropriate.",
-          "suggestion": "أكمل الإعداد (Akmil al-'I'dad)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -111,13 +105,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"설정 완료\" (Seoljeong Wanlyo) is understandable, a more natural and accurate translation of 'Complete the setup' would be '설정 완료하기' (Seoljeong Wanlyo Hagi) or '설정 마치기' (Seoljeong Machigi). The original translation lacks the verb indicating completion.",
-          "suggestion": "설정 완료하기"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -171,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"සැකසීම සම්පූර්ණ කරන්න.\" is a more literal translation. A more natural and idiomatic Sinhala translation of \"Complete the setup\" would be something like \"මාර්ගගත කිරීම අවසාන්නන්න\" (Maarganaath karamawa asaannanna) or \"අවසාදනය කරන්න\" (awasadaanaya karanna).",
-          "suggestion": "මාර්ගගත කිරීම අවසාන්නන්න (Maarganaath karamawa asaannanna) or අවසාදනය කරන්න (awasadaanaya karanna)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

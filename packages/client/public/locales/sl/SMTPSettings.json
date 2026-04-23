@@ -2,7 +2,6 @@
   "AuthViaNTLM": "Avtentikacija preko NTLM",
   "EnableSSL": "Omogoči SSL",
   "EnterDomain": "Vnesi domeno",
-  "EnterEmail": "Vnesi email",
   "EnterLogin": "Vnesi prijavo",
   "EnterPort": "Vnesi vrata",
   "Host": "Gostitelj",

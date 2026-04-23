@@ -3,7 +3,7 @@
   "content": "Unblock",
   "content_en_sha1_hash": "12aabd251c4213f1cebfe4cb83e6547df55552c3",
   "created_at": "2025-05-19T21:30:49.379Z",
-  "updated_at": "2026-03-31T15:18:46.650Z",
+  "updated_at": "2026-04-10T08:21:04.375Z",
   "comment": {
     "text": "This translation key is used to display the text \"Unblock\" in a file context, indicating that the file has been unlocked. It appears on a quick button or dialog and is used when unlocking a previously blocked file.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2463,
+      "line_number": 2462,
       "context": "),\n },\n {\n id: \"option_block-unblock-version\",\n key: \"block-unblock-version\",\n label: item.locked ? t(\"Common:UnblockFile\") : t(\"Common:BlockFile\"),\n icon: LockedReactSvgUrl,\n onClick: () => this.lockFile(item, t),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation \"فَكَّ الحِجَار\" literally translates to 'break the stones' or 'remove the rocks'. It doesn't accurately convey the meaning of 'Unblock', which implies releasing or freeing something. It's too literal and doesn't capture the intended meaning.",
-          "suggestion": "A more appropriate translation would be something like \"تَحرير\" (tahrir - meaning 'release', 'free') or \"إزالة الحظر\" (izalat al-hazr - meaning 'remove the ban/blockade'), depending on the specific context."
+          "description": "The Arabic translation 'فَكَّ الحِجَار' literally means 'breaking the stones' or 'removing the rocks', which is a nonsensical translation for 'Unblock' in a digital file context. It does not convey the meaning of unlocking a file.",
+          "suggestion": "إلغاء القفل"
         }
       ],
       "approved_at": null
@@ -51,13 +51,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Blokdan çıxarın' literally translates to 'Remove from block' or 'Extract from block'. While conceptually related to 'Unblock,' it's not the most accurate or natural rendering of the English word 'Unblock'. A better translation would convey the idea of releasing or freeing from a block.",
-          "suggestion": "Xalsızlaşdırın"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -84,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Greek translation 'Ξεμπλόκαρε' is in the imperative form (command). 'Unblock' can function as a noun or verb in English. The imperative form might not be appropriate depending on the context. A more neutral translation like 'Απομπλόκαρε' or 'Ξεμπλοκάρισμα' might be more suitable.",
-          "suggestion": "Consider 'Απομπλόκαρε' or 'Ξεμπλοκάρισμα' depending on context."
+          "description": "The Greek translation 'Ξεμπλόκαρε' is in the past tense (meaning 'unblocked'), whereas the English 'Unblock' is an imperative/action command. In a UI context for a button, the infinitive/imperative form is required.",
+          "suggestion": "Ξεκλείδωμα"
         }
       ],
       "approved_at": null
@@ -102,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Finnish translation \"Avaa tukos\" is a literal translation of \"Open blockage\" and doesn't accurately convey the meaning of \"Unblock.\" \"Unblock\" implies removing a restriction or allowing access.",
-          "suggestion": "A more accurate translation would be something like \"Poista esto\" (Remove block/restriction) or \"Avaa\" (Open - in the sense of allowing access)."
+          "description": "The translation 'Avaa tukos' means 'Open a blockage/clog' (like a physical pipe), whereas in the context of file locking/unlocking, it should refer to releasing a lock on a file.",
+          "suggestion": "Poista lukitus"
         }
       ],
       "approved_at": null
@@ -129,13 +123,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'ブロック解除' (block kaikei) is a valid translation for 'Unblock', it can sound a bit formal or technical depending on the context. A more natural or user-friendly translation might be preferable, depending on the application. '解除' implies removing a block, which is accurate, but 'ブロック解除' might not be the most common phrasing.",
-          "suggestion": "Consider 'ブロック解除' or '解除' depending on the desired tone and user understanding. Research common phrasing in relevant software or UI contexts."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -198,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"අනවහිර කරන්න\" is a command (\"Unblock it\") rather than a noun (\"Unblock\"). A more accurate translation that maintains the noun form would be \"අනවහජනය\" or \"විවෘත කිරීම\".",
-          "suggestion": "අනවහජනය"
+          "description": "The Sinhala translation 'අනවහිර කරන්න' means 'Unblock' in the sense of 'un-restricting' or 'removing a block' (like unblocking a user), but in the context of file locking/unlocking, it translates to 'removing a restriction' rather than 'releasing a lock'. More importantly, 'අනවහිර කරන්න' is often used for 'Unblock' (as in unblocking a website/user), whereas for a file that is 'locked', the correct action is 'අගුළු හරින්න' (Unlock).",
+          "suggestion": "අගුළු හරින්න"
         }
       ],
       "approved_at": null
@@ -207,7 +195,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'Odomknúť' means 'To unlock' (as in a lock/key), whereas the English 'Unblock' in the context of a blocked file/user usually refers to 'Odboriť' or 'Odblokovať'. However, more critically, 'Odomknúť' is the opposite of 'Zablokovať' (Block), but in software UI, 'Unblock' is specifically 'Odblokovať'.",
+          "suggestion": "Odblokovať"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -216,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Odpri' translates to 'Open' in English, not 'Unblock'. While 'Open' can sometimes be a suitable replacement for 'Unblock' depending on the context, it doesn't directly convey the same meaning. 'Unblock' implies removing a restriction.",
-          "suggestion": "Consider 'Razblokiiraj' or 'Odblokiraj', which more directly translates to 'Unblock'."
+          "description": "The translation 'Odpri' means 'Open'. In the context of file locking/blocking, 'Unblock' should be translated as 'Odblokiraj'.",
+          "suggestion": "Odblokiraj"
         }
       ],
       "approved_at": null
@@ -243,13 +237,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Engellemeyi Kaldır\" directly translates to \"Remove Blocking\" which isn't the most natural way to express \"Unblock\" in Turkish. A more common and idiomatic translation would be something like \"Kilidi Aç\" or \"Serbest Bırak\".",
-          "suggestion": "Kilidi Aç"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -264,8 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Vietnamese translation \"Khôi phục\" (Restore) does not accurately convey the meaning of \"Unblock\". \"Unblock\" implies removing a restriction or allowing access, while \"Khôi phục\" means to restore something to a previous state. A more appropriate translation would be something like \"Mở khóa\" (Unlock) or \"Hủy bỏ lệnh chặn\" (Cancel block).",
-          "suggestion": "Mở khóa"
+          "description": "The Vietnamese translation 'Khôi phục' means 'Restore' or 'Recover', which is used for recovering deleted files or previous versions. For unlocking a file (reversing a lock/block state), the correct term is 'Bỏ chặn' or 'Mở khóa'.",
+          "suggestion": "Bỏ chặn"
         }
       ],
       "approved_at": null

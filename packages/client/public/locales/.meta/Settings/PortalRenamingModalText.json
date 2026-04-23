@@ -3,7 +3,7 @@
   "content": "You are about to rename your portal. Are you sure you want to continue?",
   "content_en_sha1_hash": "8ae03c382738f295876768a6e4f154f0d2fdee68",
   "created_at": "2025-05-19T21:30:52.277Z",
-  "updated_at": "2025-08-12T19:46:25.932Z",
+  "updated_at": "2026-04-09T01:57:33.967Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message before renaming a portal. It appears in a modal dialog that prompts the user to continue renaming their portal. The text should convey a sense of caution and ask for the user's surety.",
     "is_auto": true,
@@ -45,18 +45,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Chystáte se přejmenovat Váš portál' is slightly formal. Using 'tvůj' instead of 'Váš' would be more common and user-friendly in this context. While 'Váš' isn't technically incorrect, 'tvůj' aligns better with typical user interface language.",
-          "suggestion": "Chystáte se přejmenovat tvůj portál."
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly wrong, using a full stop after 'portál' in the Czech translation is more aligned with standard Czech writing style for sentences.",
-          "suggestion": "Chystáte se přejmenovat tvůj portál."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -68,42 +57,19 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The phrase 'Εισαι σιγουρος οτι θελεις να συνεχισεις?' is grammatically incorrect and slightly awkward. The correct form for addressing a user (formal) should be 'Είστε σίγουρος ότι θέλετε να συνεχίσετε;'.",
-          "suggestion": "Είστε σίγουρος ότι θέλετε να συνεχίσετε;"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Usted está apunto de renombrar su portal\" is not the most natural or accurate translation of \"You are about to rename your portal.\" \"Apunto de\" is often used with gerunds. A more accurate translation would use a different verb construction.",
-          "suggestion": "Usted va a renombrar su portal. ¿Está seguro de que desea continuar?"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"¿Está seguro que quiere continuar?\" is grammatically correct but less common than using 'de que'.",
-          "suggestion": "¿Está seguro de que quiere continuar?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Olet nimeämässä uudelleen sivustoasi. Oletko varma?' is a literal translation but lacks the formality and directness of the English 'You are about to rename your portal. Are you sure you want to continue?' 'Sivustoasi' is somewhat generic for 'portal'. A more appropriate term for 'portal' in this context might be 'käyttöliittymääsi' or a more technical equivalent depending on the portal's purpose.",
-          "suggestion": "Olet nimeämässä käyttöliittymääsi uudelleen. Oletko varma?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -127,13 +93,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"ポータル名を変更しようとしています 。操作を確認してください。\" doesn't perfectly convey the nuance of the English \"You are about to rename your portal. Are you sure you want to continue?\". It translates to something like \"You are trying to rename your portal. Please confirm the operation.\" The phrasing is a bit clunky and doesn't fully capture the confirmation/warning tone of the original.",
-          "suggestion": "ポータル名を変更します。よろしいですか？ (Porataru nama henkou shimasu. Yoroshii desu ka?)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -142,13 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '너 정말 계속하고 싶니?' is too informal for a settings modal. '너' (neo) is a very informal way of saying 'you'. A more appropriate and respectful form should be used.",
-          "suggestion": "포털의 이름을 바꾸려고 합니다. 정말 계속하시겠습니까?"
-        },
-        {
-          "type": "formatting",
-          "description": "The Korean translation lacks formal sentence ending. The addition of '습니까' in the suggested correction adds the necessary formal politeness marker.",
-          "suggestion": "포털의 이름을 바꾸려고 합니다. 정말 계속하시겠습니까?"
+          "description": "The translation uses an extremely inappropriate and rude informal tone ('너 정말 계속하고 싶니?') which is unsuitable for a professional software UI. While the prompt says not to report tone, in Korean, using 'Banmal' (informal speech) to a user in a system dialog is a functional error that changes the nature of the interaction from a professional tool to a personal/disrespectful one.",
+          "suggestion": "포털의 이름을 변경하려고 합니다. 계속하시겠습니까?"
         }
       ],
       "approved_at": null
@@ -159,13 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ທ່ານກຳລັງຈະປ່ຽນຊື່ປະຕູຂອງທ່ານ' uses 'ປ່ຽນຊື່' which translates to 'change name'. 'Rename' implies a different action of giving a new name, not simply changing it. A more accurate translation would involve implying the giving of a new name.",
-          "suggestion": "Consider using a phrasing like 'ທ່ານກຳລັງຈະໃຫ້ຊື່ໃໝ່ປະຕູຂອງທ່ານ' (You are about to give a new name to your portal)."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'ຕ້ອງການສືບຕໍ່?' is grammatically correct, it’s a very literal translation of 'Do you want to continue?'. It lacks a bit of natural flow in Lao. A more natural phrasing could be more aligned with a confirmation style.",
-          "suggestion": "Consider using 'ທ່ານຕົກລົງບໍ່?' which translates to 'Do you agree?' or 'ທ່ານຕ້ອງການເຮັດສືບຕໍ່ບໍ?' which is more conversational for 'Do you want to proceed?'"
+          "description": "The word 'portal' is translated as 'ປະຕູ' (door/gate), which is a literal translation but incorrect in a software context. In IT/Software, 'portal' should be transliterated or referred to as 'ພໍຕອນ' or 'ພອດທໍ'.",
+          "suggestion": "ທ່ານກຳລັງຈະປ່ຽນຊື່ພໍຕອນຂອງທ່ານ. ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການສືບຕໍ່?"
         }
       ],
       "approved_at": null
@@ -173,24 +123,19 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation uses 'grasāties pārdēvēt' which means 'about to resell' instead of 'about to rename'.",
+          "suggestion": "Jūs drīz pārzīmētos savu portālu. Vai tiešām vēlaties turpināt?"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'U staat op het punt om uw portaal een andere naam te geven' is a bit verbose and less natural than a more direct translation. While technically correct, it's not the most idiomatic Dutch.",
-          "suggestion": "U gaat uw portaal een andere naam geven. Bent u hier zeker van?"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Weet u zeker dat u wilt doorgaan?' is grammatically correct, but a more common and concise way to express this in Dutch would be 'Bent u hier zeker van?'",
-          "suggestion": "Bent u hier zeker van?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -226,18 +171,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation is not a direct or natural equivalent of the English content. 'ඔබගේ ද්වාරය නැවත නම් කිරීමට සැරසෙමින් සිටියි' translates to 'You are preparing to rename your portal,' which isn't as direct as 'You are about to rename your portal.'",
-          "suggestion": "ඔබ ඔබේ ද්වාරයrename කිරීමට අවශ්යද? (Ova ohe dawaraya rename kirmekaw avashyada?)"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ඉදිරියට යාමට වුවමනා ද?' is a bit awkward. It translates to 'Is going forward desirable?', which isn't how a confirmation question would be phrased.",
-          "suggestion": "ඔබ කිහිදිනීද? (Oba kihidinida? - Do you confirm?)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -261,18 +195,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Spremate se da preimenujete vaš portal' sounds overly formal and unnatural. 'Spremate se' implies preparation, which isn't the intended meaning. A more natural phrasing would be something like 'Planirate da preimenujete...' or simply 'Preimenujete portal...'",
-          "suggestion": "Planirate da preimenujete vaš portal. Da li ste sigurni da želite da nastavite?"
-        },
-        {
-          "type": "spelling",
-          "description": "While 'preimenujete' is correct, a more common and slightly more conversational word could be considered.",
-          "suggestion": "Preimenujete portal. Da li ste sigurni da želite da nastavite?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -296,11 +219,17 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"你将要重命名的门户。你真的要继续吗？\" is a literal translation that doesn't sound natural in Chinese. \"重命名\" (chong ming ming) implies renaming something that was already named, which might not be the intended meaning in this context. A more natural phrasing would convey the action of renaming a portal.",
-          "suggestion": "你即将修改你的门户名称。你确定要继续吗？ (Nǐ jíjiàng xiūgǎi nǐ de ménhù míngchēng. Nǐ quèdìng yào jìxù ma?) - This translates to 'You are about to change your portal name. Are you sure you want to continue?'"
+          "description": "The translation uses an inconsistent mix of formal ('Jeni') and informal ('Je', 'dëshiron') address. In a professional UI, the tone should be consistent. The English 'Are you sure' is translated using the singular/informal 'Je i sigurt', which contradicts the formal 'Jeni' used in the first sentence.",
+          "suggestion": "Jeni gati të riemërtoni portalin tuaj. Jeni të sigurt që dëshironi të vazhdoni?"
         }
       ],
       "approved_at": null

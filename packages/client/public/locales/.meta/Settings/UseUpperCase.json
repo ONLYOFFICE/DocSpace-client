@@ -3,7 +3,7 @@
   "content": "Use capital letters",
   "content_en_sha1_hash": "46692682ba9edf8eab489c503a17a3f4762a1d45",
   "created_at": "2025-05-19T21:30:53.184Z",
-  "updated_at": "2026-03-26T08:26:58.267Z",
+  "updated_at": "2026-04-08T23:55:50.100Z",
   "comment": {
     "text": "Use capital letters when creating a strong password.",
     "is_auto": true,
@@ -69,13 +69,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Sisällettävä isoja kirjaimia\" doesn't accurately convey the meaning of 'Use capital letters'. It literally means 'Contain big letters', which isn't the intended functionality.",
-          "suggestion": "Käytä isoja kirjaimia"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -114,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ໃຊ້ ນະຄອນຫຼວງ ຕົວອັກສອນ' does not accurately translate 'Use capital letters'. 'ນະຄອນຫຼວງ' means 'capital city' which is irrelevant. 'ຕົວອັກສອນ' means 'characters/letters' but the entire phrase is incorrect.",
-          "suggestion": "A more accurate translation would be something like 'ນໍາໃຊ້ຕົວພິມໃຫຍ່' (nam sa thim hai ya) which means 'use uppercase'."
+          "description": "The translation uses 'ນະຄອນຫຼວງ' (Nakhon Luang), which means 'Capital City', instead of 'ຕົວອັກສອນໃຫຍ່' (Capital Letters/Uppercase).",
+          "suggestion": "ໃຊ້ຕົວອັກສອນໃຫຍ່"
         }
       ],
       "approved_at": null
@@ -153,13 +147,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Utilizare majuscule\" is a literal translation but doesn't convey the meaning of \"Use capital letters\" effectively. It's more like 'Using capital letters' rather than 'Use capital letters'.",
-          "suggestion": "Folosește majuscule"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -174,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ලොකුකුරු භාවිතා කරන්න\" is a literal translation but doesn't fully capture the nuance of 'Use capital letters' in a settings context. It sounds a bit awkward.",
-          "suggestion": "Ideally, a more contextually appropriate translation would be something like \"අක්ෂර අකුරු භාවිතා කරන්න\" or \"විශේෂ අක්ෂර භාවිතා කරන්න\" which directly implies using capital letters for a specific purpose."
+          "description": "The Sinhala translation 'ලොකුකුරු භාවිතා කරන්න' literally means 'Use big letters/scribbles' or 'Use large writing', which is colloquial and imprecise for a technical UI context regarding uppercase characters. A more accurate term for 'capital letters' in a technical sense is 'මහ අකුරු' or 'විශාල අකුරු'.",
+          "suggestion": "මහ අකුරු භාවිතා කරන්න"
         }
       ],
       "approved_at": null
@@ -192,7 +180,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Uporabi veliko začetnico\" literally translates to \"Use a large initial.\" This isn't the intended meaning of \"Use capital letters.\" It implies using a specific capital letter, not using capitalization in general.",
+          "description": "The translation 'Uporabi veliko začetnico' means 'Use an uppercase letter' (singular), whereas the English 'Use capital letters' (plural) refers to the requirement of using uppercase characters in general for password strength.",
           "suggestion": "Uporabi velike črke"
         }
       ],
@@ -201,30 +189,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Користи велика слова' is not the most natural or accurate translation of 'Use capital letters'. While literally 'uses big words,' the intended meaning is to use uppercase letters.",
-          "suggestion": "Користите велика слова"
-        },
-        {
-          "type": "grammar",
-          "description": "The verb 'Користи' is in the present tense. While technically grammatically correct, 'Користите' (imperative, plural/formal 'you') is more appropriate for a settings option indicating an action to be taken.",
-          "suggestion": "Користите"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Koristi velika slova\" is understandable, a more natural and accurate translation of \"Use capital letters\" would be \"Upotrebite velika slova\" or \"Koristićete velika slova\". \"Koristi velika slova\" is more of a direct, literal translation, and less idiomatic for this context.",
-          "suggestion": "Upotrebite velika slova"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -248,13 +219,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"必须包含大写字母\" (bìxū bāohán dàxiě zìmǔ) translates to \"Must contain capital letters\". While technically correct, it's a very literal and potentially overly strict interpretation of \"Use capital letters\".  It implies a requirement to *always* use capital letters, which might not be the intended meaning. It doesn't capture the nuance of a setting that *allows* or *encourages* capital letters.",
-          "suggestion": "A more appropriate translation could be something like \"使用大写字母\" (shǐyòng dàxiě zìmǔ) which means \"Use capital letters\" or \"允许使用大写字母\" (yǔnxǔ shǐyòng dàxiě zìmǔ) meaning \"Allow the use of capital letters\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

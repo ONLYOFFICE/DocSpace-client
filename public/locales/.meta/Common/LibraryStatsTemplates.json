@@ -3,7 +3,7 @@
   "content": "{{count}} templates available in {{language}}",
   "content_en_sha1_hash": "f606522655b8534cbc5dce042034cee409567bbc",
   "created_at": "2026-03-31T15:18:15.032Z",
-  "updated_at": "2026-03-31T15:18:15.032Z",
+  "updated_at": "2026-04-08T06:07:08.231Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -104,7 +104,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'pieejami' (available) is used incorrectly in this grammatical context. In Latvian, when describing the quantity of items available, the construction should use 'pieejami' as an adjective or a different phrasing to sound natural, but 'šablonu pieejami' is grammatically incorrect (it should be 'pieejami {{count}} šablonu').",
+          "suggestion": "{{count}} šablonu pieejami valodā {{language}}"
+        }
+      ],
       "approved_at": null
     },
     "nl": {

@@ -3,7 +3,7 @@
   "content": "Storage type",
   "content_en_sha1_hash": "8f4523e42a13768b2f537d048ba0d978c0098600",
   "created_at": "2025-05-19T21:30:54.967Z",
-  "updated_at": "2026-03-26T08:26:58.069Z",
+  "updated_at": "2026-04-07T19:35:05.122Z",
   "comment": {
     "text": "This translation key is used to display different storage type labels in a user interface. It appears on an info panel and is referenced in code when displaying various storage-related information. Translators should provide equivalent descriptions for \"Storage Type\" in different languages.",
     "is_auto": true,
@@ -117,13 +117,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Type opslag' while understandable, is not the most natural or idiomatic Dutch translation for 'Storage type'. A better option would be 'Opslagtype'.",
-          "suggestion": "Opslagtype"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -159,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"ආචයන වර්ගය\" is not the most accurate translation of \"Storage type\". While \"vargaya\" (vargaya) correctly translates to 'type', \"ආචයන\" (aachayana) doesn't precisely convey 'storage'. It often relates to a ritualistic offering or worship. A more appropriate translation would use a term relating to 'storage' or 'capacity'.",
-          "suggestion": "Consider alternative translations like \"ගබඩාවේ වර්ගය\" (gabadawe vargaya - warehouse type) or \"ඇත්තිරි වර්ගය\" (atiri vargaya - capacity type), depending on the specific context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -183,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Тип складишта' is understandable, it's a rather literal translation. 'Storage type' often implies the *kind* of storage, not necessarily a physical storage facility. A more accurate translation might be 'Тип меморије' or 'Тип складишног простора', depending on the context.",
-          "suggestion": "Consider 'Тип меморије' or 'Тип складишног простора' for better accuracy depending on context. If it refers to the facility, 'Тип складишта' is acceptable but less precise."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

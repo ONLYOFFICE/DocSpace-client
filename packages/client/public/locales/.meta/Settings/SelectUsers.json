@@ -3,7 +3,7 @@
   "content": "Select users",
   "content_en_sha1_hash": "8f2012e6097eda31bbf0f7e51ae403b08862e983",
   "created_at": "2025-05-19T21:30:52.552Z",
-  "updated_at": "2025-10-03T10:07:11.704Z",
+  "updated_at": "2026-04-09T01:31:19.952Z",
   "comment": {
     "text": "\"Select users\" is used to describe a step or action in data import processes within Google Workspace and OnlyOffice Workspaces. It appears on a settings page as part of a stepper component, guiding users through selecting specific files or users for import.",
     "is_auto": true,
@@ -89,8 +89,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The French translation 'Sélectionnez utilisateur' uses the singular 'utilisateur' while the English 'Select users' implies a plural form. It should agree in number.",
+          "type": "missing_content",
+          "description": "The French translation uses the singular 'utilisateur' instead of the plural 'utilisateurs', which fails to convey the plural meaning of 'users'.",
           "suggestion": "Sélectionnez les utilisateurs"
         }
       ],
@@ -173,9 +173,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'පරිශ්‍රීලකයින්' (parishreelakayin) appears to be a typo or an uncommon/archaic word for 'users'. The standard and more commonly understood term is 'භාවිතරයන්' (bhavitharakayan).",
-          "suggestion": "පරිශ්‍රීලකයින් -> භාවිතරයන්"
+          "type": "incorrect_translation",
+          "description": "The Sinhala word 'පරිශ්‍රීලකයින්' is a misspelling of 'පරිශීලකයින්'. The extra '්‍ර' (ra-karaya) makes the word nonsensical.",
+          "suggestion": "පරිශීලකයින් තෝරන්න"
         }
       ],
       "approved_at": null
@@ -195,13 +195,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Изабери кориснике' is grammatically correct, a more natural and commonly used translation for 'Select users' in Serbian (Cyrillic) would be 'Избери кориснике'. 'Изабери' implies a more formal or deliberate selection, while 'Избери' is more general and frequently used in UI contexts.",
-          "suggestion": "Избери кориснике"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -213,13 +207,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Kullanıcıları seç' is too literal. A more natural and user-friendly translation would be 'Kullanıcı seçin'.",
-          "suggestion": "Kullanıcı seçin"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -235,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

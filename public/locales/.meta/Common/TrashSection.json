@@ -3,7 +3,7 @@
   "content": "Trash",
   "content_en_sha1_hash": "e3bf62bb7f5af7ba291b2df1a11d573bdb55d7e9",
   "created_at": "2025-05-19T21:30:49.325Z",
-  "updated_at": "2026-03-26T08:26:57.928Z",
+  "updated_at": "2026-04-07T21:08:46.872Z",
   "comment": {
     "text": "This translation key is used to display \"Trash\" as a label for a section in the file system and in a delete profile dialog. It appears in an empty view container and a body component of a delete profile ever dialog, providing context for users navigating file systems or managing profiles.",
     "is_auto": true,
@@ -193,7 +193,7 @@
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/index.tsx",
       "line_number": 153,
-      "context": "isChecked={confirmDelete}\n dataTestId=\"display_notification_toggle_button\"\n />\n <Text>\n {t(\"TrashMoveConfirmation\", {\n sectionName: t(\"Common:TrashSection\"),\n })}\n </Text>\n </div>\n \n <div className={styles.toggleBtnWrapper}>",
+      "context": "isChecked={confirmDelete}\n dataTestId=\"display_notification_toggle_button\"\n />\n <Text>\n {t(\"Common:TrashMoveConfirmation\", {\n sectionName: t(\"Common:TrashSection\"),\n })}\n </Text>\n </div>\n \n <div className={styles.toggleBtnWrapper}>",
       "module": "/packages/client"
     },
     {
@@ -273,25 +273,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Κάδος απορριμάτων\" (Kados aporymaton) literally translates to \"Waste bin\" or \"Garbage can.\" While related to \"Trash,\" it's a more specific term. \"Trash\" is a broader term encompassing various discarded items.",
-          "suggestion": "Consider a more general term like \"Απορρίμματα\" (Aporrimmata), which means \"Waste\" or \"Rubbish\", or \"Σκουπίδια\" (Skoupidia), which is a common word for \"Trash\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Papelera de reciclaje\" (recycling bin) is not a direct translation of \"Trash\". While trash often goes into a recycling bin, the term \"Trash\" refers to waste material, not specifically recyclable material.",
-          "suggestion": "Basura"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -321,13 +309,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation \"ごみ箱\" (gomi-bako) literally means \"trash box\" or \"garbage can\". While it conveys the general idea of \"Trash\", it's a more specific translation than the English term. \"Trash\" could also be translated more directly as \"ごみ\" (gomi).",
-          "suggestion": "ごみ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -339,7 +321,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ຂີ້ກໍາລ້າງ' is nonsensical or a misspelling. It appears to be a combination of words that do not form the standard term for 'Trash' (Recycle Bin) in a computing context.",
+          "suggestion": "ຖັງຂີ້ເຫຍື້ອ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -348,8 +336,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Akritne\" is a valid Latvian word, it doesn't directly translate to \"Trash\". It means \"ash\" or \"cinders\".  A more appropriate translation for \"Trash\" would depend on the specific context (e.g., \"atkritumi\" for general waste, \"atkritumu konteiners\" for trash can).",
-          "suggestion": "Consider using \"atkritumi\" for general waste, or a more specific term depending on the intended meaning of 'Trash'."
+          "description": "The Latvian word 'Akritne' means 'Acne' (skin condition), which is completely unrelated to the English 'Trash' (deleted files/bin).",
+          "suggestion": "Zemniecība"
         }
       ],
       "approved_at": null
@@ -381,13 +369,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation \"Recycle Bin\" doesn't perfectly align with the English term \"Trash\". While \"Recycle Bin\" is a related concept, \"Trash\" refers to discarded items, not necessarily those intended for recycling.",
-          "suggestion": "Consider \"Gunoi\" or \"Deșeuri\" for a more accurate translation of 'Trash'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -402,8 +384,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'කුණුකූඩයට' (kunukudayata) literally translates to 'to the garbage bin/dump'. While 'trash' can be associated with garbage, it's not the direct translation. A more appropriate translation for 'Trash' would be 'ජාවාරි' (javari) or 'පල්ලා' (palla), depending on the context (e.g., leftover food vs. general waste). 'කුණුකූඩයට' implies a destination, which 'Trash' as a label doesn't necessarily do.",
-          "suggestion": "ජාවාරි (javari) or පල්ලා (palla)"
+          "description": "The Sinhala translation 'කුණුකූඩයට' means 'to the trash can' (directional/dative case), whereas the English 'Trash' is a noun used as a label for a section or folder. The translation should be the noun form.",
+          "suggestion": "කුණු කූඩය"
         }
       ],
       "approved_at": null
@@ -423,7 +405,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Отпад' means 'waste' or 'scrap' in a general sense, but in the context of a file system (Trash/Recycle Bin), the standard term is 'Корпа за отпаде' or simply 'Корпа'. 'Отпад' sounds unnatural for a UI folder name.",
+          "suggestion": "Корпа"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -447,25 +435,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Thùng rác\" technically means \"Trash Can\", the English content is simply \"Trash\". \"Thùng rác\" is too specific. A more accurate translation would be a direct equivalent.",
-          "suggestion": "Rác"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"回收站\" (Huíshōu zhàn) generally means \"recycling center\" or \"recycling bin\", not simply \"Trash\". While it's related, it's not a direct translation.",
-          "suggestion": "Consider a more direct translation like \"垃圾\" (Lājī), which means \"Trash\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

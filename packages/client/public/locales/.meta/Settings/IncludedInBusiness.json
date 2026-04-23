@@ -3,7 +3,7 @@
   "content": "Included in Business plan",
   "content_en_sha1_hash": "f0ee5ea479390ebc0f4a6bb7724c68cd6e5c93e9",
   "created_at": "2025-05-19T21:30:51.695Z",
-  "updated_at": "2026-03-20T09:07:45.636Z",
+  "updated_at": "2026-04-09T02:50:11.803Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Included in Business plan\" in a portal settings category. It appears as a label within a business plan section on a webpage, likely used to indicate whether a third-party service is included in a business plan.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'تم إضافتها في خطة عمل' (tam idhafiha fi khittat 'amal) literally translates to 'It has been added to a business plan'. While understandable, it's not the most natural or accurate rendering of 'Included in Business plan'. A more direct and natural translation would better convey the meaning.",
-          "suggestion": "مدرجة في خطة الأعمال"
+          "description": "The Arabic translation uses a feminine plural verb/pronoun 'تم إضافتها' (They were added), which implies multiple items were added. The English source 'Included in Business plan' is a passive state/label. In a UI context for a single feature or category, it should be more direct.",
+          "suggestion": "مشمول في خطة الأعمال"
         }
       ],
       "approved_at": null
@@ -63,24 +63,19 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'επιχειρηματικό σχέδιο' translates to 'business plan' in the sense of a strategic document or a project proposal. In the context of software pricing/subscription tiers, 'Business plan' should be translated as 'επιχειρηματικό πακέτο' or 'Business plan' (as a proper noun/tier name) to indicate a subscription level.",
+          "suggestion": "Περιλαμβάνεται στο Business plan"
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Incluido en el plan Business' doesn't properly translate 'Included in Business plan'. The word 'Business' should be translated as 'Empresarial' or 'de Negocios' to maintain the meaning.",
-          "suggestion": "Incluido en el plan Empresarial"
-        },
-        {
-          "type": "formatting",
-          "description": "The word 'Business' appears in English within the Spanish translation. It should be consistently translated.",
-          "suggestion": "Consistent capitalization and translation of 'Business' throughout the application."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -92,13 +87,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While the translation is understandable, 'plan Business' is not the standard or most natural way to say 'Business plan' in French. 'Plan d'affaires' is the correct term.",
-          "suggestion": "Inclus dans le plan d'affaires"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -149,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Polish translation \"Stanowi część planu Biznes\" is not the most natural or accurate translation of \"Included in Business plan.\" While literally it means \"Forms part of the Business plan,\" it's stiff and doesn't convey the intended meaning as clearly.",
-          "suggestion": "Consider \"Zawarte w planie biznesowym\" or \"W planie biznesowym\" as more idiomatic and accurate alternatives. \"W planie biznesowym\" is simpler and generally preferred."
+          "description": "The Polish translation 'planu Biznes' is grammatically incorrect; 'Biznes' is the nominative form, but it should be in the genitive case ('Biznesowego') to function as an adjective or part of a proper noun phrase in this context.",
+          "suggestion": "Zawarte w planie Biznes"
         }
       ],
       "approved_at": null
@@ -164,7 +153,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'plano de negócios' refers to a 'business plan' in the sense of a strategic document/model. In the context of software pricing/subscriptions, 'Business plan' refers to a specific subscription tier, which should be translated as 'plano Business' or 'plano Empresarial'.",
+          "suggestion": "Incluído no plano Business"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -182,13 +177,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"ව්‍යාපාර සැලසුමේ ඇත\" (vyāpāra saḷanumé athā) is a literal translation and doesn't convey the intended meaning of 'Included in Business plan' naturally. It translates to 'is in the business plan', which is not the same as 'included in'.",
-          "suggestion": "A more natural translation would be something like \"ව්‍යාපාර සැලසුමට ඇතුළත්\" (vyāpāra saḷanuma ethulaṯ) which means 'included in the business plan' or \"ව්‍යාපාර සැලසුමේ කොටසකි\" (vyāpāra saḷanumé koṭasakī) which means 'is a part of the business plan'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -224,18 +213,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Входить до плану Business' is a literal translation and not idiomatic Ukrainian. It doesn't flow naturally. 'Business' should also be translated.",
-          "suggestion": "Увійшов до бізнес-плану"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Business' is left untranslated. It should be translated to Ukrainian.",
-          "suggestion": "Замінити 'Business' на 'бізнес'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -247,13 +225,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '专业版方案中包括' while understandable, doesn't perfectly capture the nuance of 'Included in Business plan'. '专业版' directly translates to 'Professional Version,' which isn't necessarily the same as a 'Business plan'.",
-          "suggestion": "Consider alternatives like '商业版方案中包含' (shāngyè bǎn fāng'àn zhōng bāohán) which more accurately reflects a 'Business plan' or '包含在商业版方案' (bāohán zài shāngyè bǎn fāng'àn)."
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

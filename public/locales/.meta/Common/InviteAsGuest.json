@@ -3,7 +3,7 @@
   "content": "invite as guest",
   "content_en_sha1_hash": "4af13b83671f74562036c77dedfbc2b8b7a372cd",
   "created_at": "2025-05-19T21:30:45.973Z",
-  "updated_at": "2026-02-19T13:36:32.531Z",
+  "updated_at": "2026-04-08T06:32:43.243Z",
   "comment": {
     "text": "This translation key is used for a button label that invites users to \"invite as guest\" when adding an email. It appears in an invite panel, likely on a website or application where users can send emails to others. The translator should provide a neutral description of this action.",
     "is_auto": true,
@@ -57,13 +57,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"πρόσκληση ως καλεσμένος\" is technically correct, it's a very literal translation and sounds unnatural in Greek. A more natural phrasing would be something like \"κάλεσε ως καλεσμένος\" or simply \"κάλεσε καλεσμένο\".",
-          "suggestion": "κάλεσε ως καλεσμένος"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -135,13 +129,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'convide como convidado' is technically correct, it's a very literal and somewhat awkward translation. A more natural and idiomatic Portuguese phrasing would be 'convidar como convidado' or 'adicionar como convidado'. The verb 'convidar' is generally preferred over 'convide' in this context.",
-          "suggestion": "convidar como convidado"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -165,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"අමුත්තෙකු ලෙස ආරාධනා කරන්න\" is a bit literal and formal for 'invite as guest'. It translates more directly to 'invite as a guest'. A more natural phrasing would be something closer to 'හමුදෙනෙකු ලෙස ආරාධනය කරන්න' (hamudena ek lesa aaraadhanya karanna), or 'හමුදෙනෙකුට ආරාධනය කරන්න' (hamudena ekta aaraadhanya karanna).",
-          "suggestion": "Consider using a more natural phrasing like 'හමුදෙනෙකුට ආරාධනය කරන්න' or 'හමුදෙනෙකු ලෙස ආරාධනය කරන්න' to better reflect the intended meaning of 'invite as guest'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -213,13 +195,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"mời với tư cách khách\" is not the most natural or accurate rendering of \"invite as guest.\" It's a bit literal and formal. A more common and idiomatic translation would be something like \"mời làm khách\" or \"mời như khách\".",
-          "suggestion": "mời làm khách"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
@@ -228,10 +204,16 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"邀请为访客\" (yāo qǐng wèi fǎng kè) is technically correct, a more natural and common translation of \"invite as guest\" would be \"以访客身份邀请\" (yǐ fǎng kè shēn fù yāo qǐng) or \"作为访客邀请\" (zuò wéi fǎng kè yāo qǐng). The current translation is a bit literal and sounds slightly awkward in Chinese.",
-          "suggestion": "以访客身份邀请 (yǐ fǎng kè shēn fù yāo qǐng) or 作为访客邀请 (zuò wéi fǎng kè yāo qǐng)"
+          "description": "The translation '邀请为访客' is grammatically awkward in Chinese for a button label. It literally translates to 'Invite as a visitor/guest' in a way that sounds like a direct word-for-word conversion, which is unnatural. In UI contexts, '以访客身份邀请' or '作为访客邀请' is more standard, but more importantly, '邀请为访客' can be interpreted as 'Invite [someone] to become a guest' rather than the action of 'Inviting [someone] as a guest'.",
+          "suggestion": "以访客身份邀请"
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

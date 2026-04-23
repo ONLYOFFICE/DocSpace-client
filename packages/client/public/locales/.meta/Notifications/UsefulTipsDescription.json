@@ -3,7 +3,7 @@
   "content": "Get useful guides about {{productName}}",
   "content_en_sha1_hash": "04ac5330b45383f4fd3a8bf806312a34a2d970b3",
   "created_at": "2025-05-19T21:30:54.093Z",
-  "updated_at": "2025-12-15T14:04:24.016Z",
+  "updated_at": "2026-04-07T19:35:05.159Z",
   "comment": {
     "text": "\"This translation key is used to describe a notification section on a profile page, providing useful guides related to a specific product. It appears in a sub-component within the 'Notifications' section of a 'Profile' page.\"",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Поучавайте' (Pou4ayavate) implies receiving something as a lesson or instruction, rather than simply 'get' or 'receive' useful tips. A more accurate translation would convey the idea of obtaining or accessing the tips.",
-          "suggestion": "Получавайте полезни напътствия за {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -75,18 +69,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Saa hyödyllisiä oppaita {{productName}}-sta' is not a natural or accurate translation of 'Get useful guides about {{productName}}'. The '-sta' suffix on {{productName}} doesn't fit the context. It implies origin or possession, which isn't intended.",
-          "suggestion": "Hanki hyödyllisiä oppaita {{productName}}-sta"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Hanki' is an improvement, a more natural translation would be 'Saat hyödyllisiä oppaita {{productName}}' or 'Löydä hyödyllisiä oppaita {{productName}}'.",
-          "suggestion": "Löydä hyödyllisiä oppaita {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -152,25 +135,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Portuguese translation 'Obtenha' is a bit formal for this context. A more natural and user-friendly translation would be 'Receba' or 'Consiga'. 'Obtenha' implies a more official or earned acquisition.",
-          "suggestion": "Receba guias úteis sobre o {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Obţineţi instrucţiuni utile privind {{productName}}' is a bit too formal for a notification. 'Obține' is more common and conversational.",
-          "suggestion": "Obține instrucțiuni utile despre {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -182,30 +153,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '{{productName}} ගැන ප්‍රයෝජනවත් මාර්ගෝපදේශ ලබා ගන්න' is a literal translation but might not be the most natural phrasing in Sinhala. A more natural phrasing would emphasize 'learn' or 'discover' rather than simply 'get'.",
-          "suggestion": "{{productName}} පිළිබඳව ප්‍රයෝජනවත් මාර්ගෝපදේශ දැනගන්න"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of double curly braces '{{productName}}' might be inconsistent with the rest of the application or style guide. Verify if single curly braces are preferred.",
-          "suggestion": "Check application style guide for preferred variable notation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation 'Získajte užitočných sprievodcov o {{productName}}' literally translates to 'Get useful guides about {{productName}}'. However, it's grammatically awkward. 'Užitočných' (useful - plural genitive) suggests multiple guides, which might not be the intended meaning. The wording doesn't flow naturally in Slovak.",
-          "suggestion": "Získajte užitočné rady o {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -217,25 +171,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Добиј корисне водиче о {{productName}}-у\" is grammatically correct, but the phrasing isn't the most natural.  The 'o' construction implies a general topic, which may not be the intended meaning.  A more natural phrasing might convey 'about' or 'regarding' the product.  Consider whether 'regarding' would better suit the intent.",
-          "suggestion": "Добиј корисне водиче у вези са {{productName}}-ом"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The preposition 'o' should be followed by the dative case. Since '{{productName}}' is in the nominative case, 'o' is incorrect.",
-          "suggestion": "Dobij korisne vodiče za {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

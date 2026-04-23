@@ -12,5 +12,8 @@
   "SuccessConnected": "{{serviceName}} 已成功关联为通知渠道，您将通过该渠道接收更新。",
   "SuccessDisconnected": "{{serviceName}} 已成功断开与通知渠道的关联，后续通知将不再发送至该渠道。",
   "UsefulTips": "有用的{{productName}}提示",
-  "UsefulTipsDescription": "获取有关{{productName}}的有用指南"
+  "UsefulTipsDescription": "获取有关{{productName}}的有用指南",
+  "ActionsWithFilesDescription": "徽章将高亮显示 {{rooms}}、{{shared}}、{{documents}} 和 {{aiAgents}} 部分中的文件活动——包括上传、编辑或分享。",
+  "RoomsActivityDescription": "获取关于您在 {{rooms}} 和 {{aiAgents}} 中新共享文件/文件夹和活动的的即时电子邮件通知。",
+  "RoomUpdateNotify": "共享内容，{{rooms}} 和 {{aiAgents}} 活动"
 }

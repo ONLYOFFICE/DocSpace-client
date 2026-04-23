@@ -3,7 +3,7 @@
   "content": "SP Single Logout URL (support POST and Redirect binding):",
   "content_en_sha1_hash": "bbcacaf910ad331ef2d63b42e6cbc9b2fcf51fe8",
   "created_at": "2025-05-19T21:30:50.180Z",
-  "updated_at": "2025-09-26T15:21:06.402Z",
+  "updated_at": "2026-04-08T22:19:02.952Z",
   "comment": {
     "text": "This translation key represents the URL for single sign-out (SSO) logout functionality on a Single Sign-On (SSO) provider. It is used in the PortalSettings categories integration and appears as a placeholder text in a UI field, guiding users to enter the correct SSO logout callback URL.",
     "is_auto": true,
@@ -27,18 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term \"SP Single Logout URL\" is best translated as \"عنوان URL لتسجيل الخروج الفردي لـ SP\". The current translation uses \"عنوان رابط\" which is less precise.  \"عنوان URL\" is the standard term for URL.",
-          "suggestion": "عنوان URL لتسجيل الخروج الفردي لـ SP"
-        },
-        {
-          "type": "formatting",
-          "description": "The colon after \"SP\" should be placed after \"تسجيل الخروج الفردي\".",
-          "suggestion": "عنوان URL لتسجيل الخروج الفردي لـ SP:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -46,14 +35,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation of 'Single' is not optimal. 'Birdəfəlik' implies 'one-time' rather than 'single' in the sense of 'single sign-on'.",
-          "suggestion": "SP Tək çıxış URL (POST və Dolaylı bağlamasını dəstəkləyir)"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Dolaylı' is not the most natural translation for 'Redirect' in this context. It translates to 'indirect'.",
-          "suggestion": "SP Tək çıxış URL (POST və Yönləndirmə bağlamasını dəstəkləyir)"
+          "type": "punctuation_mismatch",
+          "description": "English ends with \":\" but translation ends with \")\"",
+          "suggestion": ""
         }
       ],
       "approved_at": null
@@ -64,13 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'URL за единично отписване на доставчика на услуги' is a bit verbose and technically not entirely accurate. 'Single Logout' typically refers to the action performed by the Identity Provider (IdP), not the Service Provider (SP). While SPs *use* the URL, the phrase 'URL за единично отписване на доставчика на услуги' implies the URL *is* the logout functionality of the SP.",
-          "suggestion": "URL за отписване на доставчика на услуги (поддръжка на POST и пренасочване):"
-        },
-        {
-          "type": "formatting",
-          "description": "The colon after 'пренасочване' should be consistent with the English version (present).",
-          "suggestion": "URL за отписване на доставчика на услуги (поддръжка на POST и пренасочване):"
+          "description": "The translation 'доставчика на услуги' (service provider) is used instead of 'SP' (Service Provider) in the context of Single Sign-On. While 'SP' stands for Service Provider, in SSO terminology, 'SP Single Logout' refers to the Service Provider's logout URL. The current translation implies the URL belongs to the service provider, but it changes the technical term 'SP' into a descriptive phrase that might confuse users looking for the 'SP' acronym or specific technical designation.",
+          "suggestion": "SP URL за единично отписване (поддръжка на POST и пренасочване):"
         }
       ],
       "approved_at": null
@@ -80,14 +59,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'Adresa URL spotřebitele tvrzení SP' is not a direct or accurate translation of 'SP Single Logout URL'. 'Spotřebitele tvrzení' (assertion consumer) is not the correct terminology for 'Single Logout'.",
-          "suggestion": "Adresa URL pro odhlášení SP"
+          "type": "punctuation_mismatch",
+          "description": "English ends with \":\" but translation ends with \")\"",
+          "suggestion": ""
         },
         {
-          "type": "formatting",
-          "description": "The phrase 'podpora vazeb POST a přesměrování' is grammatically correct, but can be improved for flow and readability within the sentence.",
-          "suggestion": "s podporou vazeb POST a přesměrování"
+          "type": "incorrect_translation",
+          "description": "The translation refers to 'Assertion Consumer URL' (Adresa URL spotřebitele tvrzení) instead of 'Single Logout URL'. These are two different technical concepts in SAML/SSO.",
+          "suggestion": "URL pro Single Logout SP (podpora vazeb POST a přesměrování):"
         }
       ],
       "approved_at": null
@@ -101,18 +80,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ενιαία διεύθυνση URL αποσύνδεσης παρόχου υπηρεσιών' is a bit verbose and could be simplified. While technically correct, 'SPSingleLogoutURL' is often understood in a technical context and shortening the translation might improve readability.",
-          "suggestion": "Διεύθυνση URL αποσύνδεσης παρόχου υπηρεσιών (υποστήριξη POST και δέσμευσης ανακατεύθυνσης):"
-        },
-        {
-          "type": "formatting",
-          "description": "The parentheses around 'υποστήριξη POST και δέσμευσης ανακατεύθυνσης' could be moved to the end of the entire phrase for better flow and consistency with typical technical documentation.",
-          "suggestion": "Ενιαία διεύθυνση URL αποσύνδεσης παρόχου υπηρεσιών (υποστήριξη POST και δέσμευσης ανακατεύθυνσης)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -120,14 +88,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation \"URL del consumidor de aserciones SP\" doesn't accurately reflect the meaning of \"SP Single Logout URL\".  'Consumidor de aserciones' refers to an Assertion Consumer Service (ACS), not the SP's logout URL. It's missing the core concept of a logout URL.",
-          "suggestion": "URL de cierre de sesión único SP (compatible con POST y redirección)"
+          "type": "punctuation_mismatch",
+          "description": "English ends with \":\" but translation ends with \")\"",
+          "suggestion": ""
         },
         {
-          "type": "formatting",
-          "description": "The translation combines the meaning of \"Single Sign On\" (implied in 'SP') with the explicit description of the URL. It's better to explicitly state 'Single Sign On' to maintain clarity, especially for a technical setting.",
-          "suggestion": "URL de cierre de sesión único SP (compatible con POST y redirección)"
+          "type": "incorrect_translation",
+          "description": "The translation refers to 'Assertion Consumer Service' (ACS) instead of 'Single Logout' (SLO). In SAML/SSO, the Assertion Consumer Service is for login/authentication, whereas the English text specifically asks for the Single Logout URL.",
+          "suggestion": "URL de cierre de sesión única de SP (compatible con POST y redirección):"
         }
       ],
       "approved_at": null
@@ -137,14 +105,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'uudelleenohjausvelvoite' (obligation to redirect) is not the most accurate translation for 'Redirect binding'. A more suitable translation would be 'uusintaohjaus'.",
-          "suggestion": "SP yksittäinen uloskirjautuminen URL (POST-tuki ja uusintaohjaus)"
+          "type": "punctuation_mismatch",
+          "description": "English ends with \":\" but translation ends with \")\"",
+          "suggestion": ""
         },
         {
-          "type": "formatting",
-          "description": "The translation lacks proper capitalization after the colon. The beginning of the sentence should start with a capital letter.",
-          "suggestion": "SP yksittäinen uloskirjautuminen URL (POST-tuki ja uusintaohjaus):"
+          "type": "incorrect_translation",
+          "description": "The term 'Redirect binding' is incorrectly translated as 'uudelleenohjausvelvoite' (redirect obligation/requirement), which changes the technical meaning from a protocol binding type to a mandatory requirement.",
+          "suggestion": "SP yksittäinen uloskirjautuminen URL (tukee POST- ja uudelleenohjaussidontaa):"
         }
       ],
       "approved_at": null
@@ -158,25 +126,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation of 'support' is inaccurate. 'աջակցում է' (ajatsq'um e) literally translates to 'supports' which is too literal and doesn't flow naturally. A more appropriate translation would convey the meaning of 'compatible with' or 'allows'.",
-          "suggestion": "SP Single Logout URL (ուղարկում է POST-ին և Redirect binding):"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'support POST and Redirect binding' is not accurately translated. 'binding' has no direct equivalent in this context, and the phrasing sounds awkward. A more natural Italian translation would convey the idea of supporting both POST and Redirect methods.",
-          "suggestion": "SP Single Logout URL (supporta i metodi POST e reindirizzamento):"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -184,9 +140,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The translation lacks a colon (:) at the end of the sentence, mirroring the English content.",
-          "suggestion": "SP シングルログアウト URL (POSTおよびRedirectバインディングをサポート):"
+          "type": "punctuation_mismatch",
+          "description": "English ends with \":\" but translation ends with \")\"",
+          "suggestion": ""
         }
       ],
       "approved_at": null
@@ -200,35 +156,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Lao word for 'support' (ຮອງຮັບ) is correct, but it might be helpful to clarify that it's the technical 'support' in the context of binding protocols.",
-          "suggestion": "SP Single Logout URL (ຮອງຮັບການເຊື່ອມຕໍ່ POST ແລະ Redirect):"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'vientras' appears to be a typo and should be 'vienstāves'.",
-          "suggestion": "SP vienstāves atteikšanās vietrādis URL"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Single Logout URL' is best translated as 'Vienreizējā atteikšanās URL' instead of 'vienstāves atteikšanās vietrādis URL'.  While 'vienstāves' can mean 'single', in this context, 'vienreizējā' (one-time) is more appropriate. The phrase 'vienstāves atteikšanās vietrādis URL' is unnecessarily verbose and slightly awkward.",
-          "suggestion": "SP vienreizējā atteikšanās URL"
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase 'atbalsta POST un novirzīšanas saistīšanu' is a literal translation. A more natural phrasing in Latvian might be 'atbalsta POST un pārslēgšanas saistību' or simply 'atbalsta POST un novirzīšanu'.",
-          "suggestion": "SP vienreizējā atteikšanās URL (atbalsta POST un novirzīšanu)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -240,13 +174,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The colon after \"Redirect\" is missing in the Polish translation.",
-          "suggestion": "Adres URL pojedynczego wylogowania usługodawcy (obsługa powiązań POST i Redirect):"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -255,18 +183,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Single SignOn:SPSingleLogoutURL' is not translated and the overall translation doesn't accurately convey the English meaning. 'Single SignOn:SPSingleLogoutURL' refers to a specific configuration setting. The translation, 'Terminar Sessão Único PS', loosely translates to 'Unique Session Termination PS', which is not a proper representation.",
-          "suggestion": "Consider translating the key name separately if needed. A more accurate translation for the entire content could be: 'URL de Terminação de Sessão SP (suporta POST e Redirecionamento)'."
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'enlace' is used, which typically means 'link'. 'URL' is more specific and appropriate in this context.",
-          "suggestion": "Replace 'enlace' with 'URL'."
-        },
-        {
-          "type": "grammar",
-          "description": "The phrasing 'Redireccionamento do enlace' is slightly awkward. It would be more natural to say 'Redirecionamento' on its own.",
-          "suggestion": "Change 'Redireccionamento do enlace' to 'Redirecionamento'."
+          "description": "The translation 'Terminar Sessão Único PS' is a poor translation of 'SP Single Logout URL'. 'SP' (Service Provider) is a technical term that should not be translated as 'PS', and 'Single Logout' is incorrectly translated as 'Terminar Sessão Único'. Most importantly, the word 'URL' is missing entirely from the Portuguese translation.",
+          "suggestion": "URL de Single Logout do SP (suporta POST e Redirect binding):"
         }
       ],
       "approved_at": null
@@ -274,13 +192,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation uses parentheses instead of colons after 'Single Logout URL'. While acceptable, using colons is more consistent with English and common practice in technical documentation.",
-          "suggestion": "URL de logout único do SP (suporte POST e ligação de redirecionamento):"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -289,13 +201,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'furnizorului de servicii' (service provider) is too literal and doesn't quite convey the meaning of 'SP' in this context. 'SP' refers to the Service Provider, and it's common practice to use 'SP' directly or clarify its meaning once.",
-          "suggestion": "Consider using 'SP' directly and adding a brief explanation if needed, like: 'Adresa URL a deconectării unice SP (acceptare POST şi Redirecționare legătură):' or 'Adresa URL a deconectării unice a furnizorului de servicii (SP) (acceptare POST şi Redirecționare legătură):'"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of 'ş' and 'Redirecționare' could be improved for readability. Consider replacing 'Redirecționare' with 'redirecționare'.",
-          "suggestion": "Adresa URL a deconectării unice a furnizorului de servicii (acceptare POST şi redirecționare legătură):"
+          "description": "The term 'Redirecționare legătură' is a literal and incorrect translation of 'Redirect binding'. In technical SSO/SAML contexts, 'binding' refers to the protocol mechanism, and 'legătură' means 'link/connection', which is incorrect here. It should be 'legătură de redirecționare' or simply 'binding de redirecționare'.",
+          "suggestion": "Adresa URL a deconectării unice a furnizorului de servicii (acceptă POST și binding de redirecționare):"
         }
       ],
       "approved_at": null
@@ -303,18 +210,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'SingleSignOn:SPSingleLogoutURL' implies a specific context related to Single Sign-On. The translation should ideally reflect this context, rather than just a literal translation of 'URL-адрес единого выхода поставщика сервиса'. A more precise translation incorporating the context of 'Single Sign-On' or 'Identity Provider' might be better.",
-          "suggestion": "URL-адрес единого выхода поставщика услуг (Single Sign-On):"
-        },
-        {
-          "type": "formatting",
-          "description": "The colon (:) is not consistently used. English uses a colon, while the Russian translation does not directly follow the same structure. This can cause some confusion.",
-          "suggestion": "URL-адрес единого выхода поставщика сервиса (поддерживаются привязки Redirect и POST):"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -322,14 +218,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The term 'ඒ.ස.නි.' is likely an abbreviation that needs clarification or translation. It's unclear what it represents in this context. It may be an acronym for something that needs to be translated to Sinhala.",
-          "suggestion": "Investigate what 'ඒ.ස.නි.' represents and translate it to a more understandable Sinhala term. Alternatively, provide a brief explanation in parentheses after the term."
-        },
-        {
-          "type": "formatting",
-          "description": "The colon (:) at the end of the Sinhala translation is unconventional.  While not strictly incorrect, it might feel awkward or out of place in typical Sinhala sentence structure.",
-          "suggestion": "Remove the colon at the end of the sentence for better flow."
+          "type": "incorrect_translation",
+          "description": "The term 'ඒ.ස.නි.' (A.S.N.) is an incorrect abbreviation for 'URL'. In Sinhala, 'URL' is typically transliterated as 'URL' or referred to as 'සබැඳි ලිපිනය' (web address). 'ඒ.ස.නි.' does not convey the meaning of a Uniform Resource Locator.",
+          "suggestion": "SP තනි නික්මීමේ URL එක (POST සහ Redirect බැඳීම් සඳහා සහාය දක්වයි):"
         }
       ],
       "approved_at": null
@@ -337,18 +228,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English term \"Single Logout\" is best translated as \"vylúčenie\" instead of \"odhlásenie\" in this context to be more precise and aligned with technical terminology.",
-          "suggestion": "URL jednorazové vylúčenie SP (podpora spojenia POST a presmerovania):"
-        },
-        {
-          "type": "formatting",
-          "description": "The colon at the end of the translated sentence should be enclosed in parentheses to match the original English formatting.",
-          "suggestion": "URL jednorazové vylúčenie SP (podpora spojenia POST a presmerovania):)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -356,9 +236,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'vezava' could be more accurately translated as 'usmerjanje' or 'povezava' in this context. 'Vezava' can imply a binding in a more general sense, while 'usmerjanje' or 'povezava' more directly refers to redirection.",
-          "suggestion": "SP enkratna odjava URL (podpira POST in usmerjanje/povezavo):"
+          "type": "incorrect_translation",
+          "description": "The term 'enkratna odjava' is a literal translation of 'single logout' but in technical SSO contexts in Slovenian, 'enotna odjava' is the standard term for 'Single Logout'. Furthermore, 'podporni' (supporting) is used incorrectly as an adjective for the protocols; it should describe the capability of the URL.",
+          "suggestion": "SP URL za enotno odjavo (podporuje vezavo POST in preusmeritve):"
         }
       ],
       "approved_at": null
@@ -366,35 +246,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'SingleLogout' is better translated as 'odjava' rather than 'једнострано одјављивање'. While the current translation isn't *wrong*, it's unnecessarily verbose and less common in Serbian technical terminology.",
-          "suggestion": "SP URL за одјављивање (подршка за POST и Redirect везивање):"
-        },
-        {
-          "type": "formatting",
-          "description": "While technically not an issue, consider adding a colon after 'SingleLogout' (or 'odjava' if the suggestion above is adopted) for consistency and readability.",
-          "suggestion": "SP URL за одјављивање: (подршка за POST и Redirect везивање):"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Single Sign-On' is not accurately translated. 'Single Sign-On' is typically rendered as 'Jedinstveni ulaz' or 'Jedinstveni prijavni sistem' in Serbian (Latin). Using 'jednostrano odjavljivanje' focuses solely on the logout aspect and misses the core concept of single sign-on.",
-          "suggestion": "Consider translating 'Single Sign-On' as 'Jedinstveni ulaz' or 'Jedinstveni prijavni sistem'. For example, the full translation could be: 'Jedinstveni ulaz URL za odjavljivanje (podrška za POST i Redirect vezivanje)'"
-        },
-        {
-          "type": "formatting",
-          "description": "The colon at the end of the English content is replicated in the Serbian translation. This is technically correct, but it can sometimes make the text feel less natural in Serbian. Consider removing it.",
-          "suggestion": "Remove the colon at the end of the translation: 'SP URL za jednostrano odjavljivanje (podrška za POST i Redirect vezivanje)'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -408,14 +266,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The translation lacks a colon (:) at the end of the phrase, mirroring the English content.",
-          "suggestion": "URL-адреса єдиного виходу постачальника сервісу (підтримуються зв’язування POST та Redirect):"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "“SP” is not translated. It's common practice to translate or explain acronyms on first use.",
-          "suggestion": "URL-адреса єдиного виходу сервісу (постачальника послуг) (підтримуються зв’язування POST та Redirect):"
+          "type": "punctuation_mismatch",
+          "description": "English ends with \":\" but translation ends with \")\"",
+          "suggestion": ""
         }
       ],
       "approved_at": null
@@ -426,13 +279,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "“ĐĂNG TẢI” is not the correct translation for “POST”. It means “upload”. The correct term should be 'POST' itself or a transliteration like 'P.O.S.T'.",
+          "description": "The term 'POST' (an HTTP method) was incorrectly translated as 'ĐĂNG TẢI' (which means 'uploading'). In a technical SSO context, 'POST' should remain 'POST'.",
           "suggestion": "URL đăng xuất SP một lần (hỗ trợ POST và chuyển hướng ràng buộc):"
-        },
-        {
-          "type": "formatting",
-          "description": "The capitalization of 'ĐĂNG TẢI' in the translation is inconsistent with the English source. It should be lowercase as it's not a proper noun in this context.",
-          "suggestion": "URL đăng xuất SP một lần (hỗ trợ post và chuyển hướng ràng buộc):"
         }
       ],
       "approved_at": null
@@ -441,6 +289,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Single Logout' is translated as 'e vetme e daljes', which means 'the only logout'. In the context of SSO, 'Single Logout' is a technical term (SLO) meaning one logout session that terminates all sessions. The correct technical translation should reflect 'Single Logout' as a concept, not 'the only logout'.",
+          "suggestion": "URL e Single Logout të SP (mbështet lidhjen POST dhe Redirect):"
+        }
+      ],
       "approved_at": null
     }
   }

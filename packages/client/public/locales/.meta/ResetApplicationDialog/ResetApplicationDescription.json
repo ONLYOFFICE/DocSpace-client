@@ -3,7 +3,7 @@
   "content": "Authenticator application configuration will be reset.",
   "content_en_sha1_hash": "ffbed1b3d21982dae035e132087888bf52daaf37",
   "created_at": "2025-05-19T21:30:53.322Z",
-  "updated_at": "2025-05-24T06:04:51.078Z",
+  "updated_at": "2026-04-09T06:55:22.293Z",
   "comment": {
     "text": "This translation key is used to display a message when resetting an authenticator application's configuration. It appears in a modal dialog and serves as a warning or notification to the user about the upcoming action.",
     "is_auto": true,
@@ -35,9 +35,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'Autentifikasiya üçün tətbiq sıfırlanacaq' translates to 'Application will be reset for authentication'. While technically correct, it's not the most natural or clear way to express 'Authenticator application configuration will be reset.' It focuses on the 'for authentication' part, which is less important than the fact that the *configuration* is being reset.",
-          "suggestion": "Tətbiqin autentifikasiya konfiqurasiyası sıfırlanacaq."
+          "type": "missing_content",
+          "description": "The translation omits the word 'configuration', changing the meaning from 'the configuration will be reset' to 'the application will be reset'.",
+          "suggestion": "Autentifikasiya tətbiqinin konfiqurasiyası sıfırlanacaq."
         }
       ],
       "approved_at": null
@@ -69,13 +69,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Los ajustes de aplicación para autenticación se resetearán' is a bit literal and clunky. 'Ajustes de aplicación para autenticación' can be simplified.",
-          "suggestion": "La configuración de la aplicación de autenticación se restablecerá."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -93,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ԻՍԿՈՐՈՇԻՉ' (Iskoroshich) is a literal, non-standard translation for 'Authenticator'. In a technical context, 'Authenticator' should be transliterated or referred to as 'Ավտենտիֆիկատոր'.",
+          "suggestion": "Ավտենտիֆիկատոր հավելվածի կարգավորումները կվերականգնվեն:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -111,19 +111,19 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '인증자 애플리케이션 구성이 리셋됩니다' is a literal translation and sounds unnatural in Korean. '인증 앱 설정이 초기화됩니다' or '인증 앱 구성이 초기화됩니다' would be more natural and idiomatic.",
-          "suggestion": "인증 앱 설정이 초기화됩니다"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'ຄໍາຮ້ອງສະຫມັກ' (application/request form) is used instead of 'ແອັບພລິເຄຊັນ' (software application). In this technical context, 'Authenticator application' refers to a software app, not a formal request or application form.",
+          "suggestion": "ການຕັ້ງຄ່າແອັບພລິເຄຊັນຢັ້ງຢືນຈະຖືກຕັ້ງຄືນໃຫມ່."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ද්වි-සාධක යෙදුමේ වින්‍යාසය යළි සැකසෙනු ඇත' translates to 'Authenticator application configuration will be re-arranged/re-fabricated.' While technically not incorrect, 'reset' implies a return to a default state, and 'යළි සැකසෙනු ඇත' is closer to a re-arrangement.  A more accurate translation for 'reset' would convey that action more precisely.",
-          "suggestion": "ද්වි-සාධක යෙදුමේ වින්‍යාසය නැවත ස්ථාපනය කෙරේ (Dwī-sādhaka yedumē vin̄yāsaya naēvata sthānapana kerē) - Authenticator application configuration will be re-installed/restored."
+          "description": "The Sinhala translation uses 'ද්වි-සාධක යෙදුම' (Two-factor application) instead of 'Authenticator application'. While related, 'Authenticator' refers to the specific type of app, and the translation shifts the meaning slightly towards the concept of 2FA rather than the specific tool being reset.",
+          "suggestion": "අවසාධක යෙදුමේ (Authenticator application) වින්‍යාසය යළි සැකසෙනු ඇත."
         }
       ],
       "approved_at": null
@@ -195,30 +195,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Конфигурација за аутентификациону апликацију ће да буде ресетована.\" is a bit wordy and less idiomatic for 'Authenticator application configuration will be reset.' A more natural translation would use a more direct phrasing.",
-          "suggestion": "Конфигурација аутентификационе апликације ће бити ресетована."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation \"Konfiguracija za autentifikacionu aplikaciju će da bude resetovana\" is overly verbose and not a natural way to express the meaning of \"Authenticator application configuration will be reset.\" It includes 'će da bude,' which is not necessary and makes the sentence clunky.",
-          "suggestion": "Konfiguracija autentifikacione aplikacije će biti resetovana."
-        },
-        {
-          "type": "formatting",
-          "description": "The translation uses a space before 'će' which is less common and less preferred in modern Serbian.  It's better to omit the space.",
-          "suggestion": "Konfiguracija autentifikacione aplikacije će biti resetovana."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -230,13 +213,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Буде скинута конфігурація програми автентифікації' is technically correct but sounds slightly awkward and less natural in Ukrainian. A more natural phrasing would be closer to 'Конфігурація програми автентифікації буде скинута' or 'Налаштування програми автентифікації буде скинуто'.",
-          "suggestion": "Налаштування програми автентифікації буде скинуто"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -246,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

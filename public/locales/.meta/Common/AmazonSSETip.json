@@ -3,7 +3,7 @@
   "content": "The Server-side encryption algorithm used when storing this object in S3.",
   "content_en_sha1_hash": "5d5c634f9a40979a80d716a3c7dd5683bb5800a3",
   "created_at": "2025-05-26T07:15:40.425Z",
-  "updated_at": "2026-02-19T13:36:33.073Z",
+  "updated_at": "2026-04-08T16:57:37.266Z",
   "comment": {
     "text": "The \"AmazonSSETip\" translation key is used to display the server-side encryption algorithm name when storing objects in Amazon S3. It appears as a tooltip in the settings dialog. Translators should provide the English phrase that describes this encryption method.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation expands 'S3' to a long descriptive phrase 'خدمة التخزين السحابي المقدمة من أمازون ويب' (Cloud storage service provided by Amazon Web), which is an inaccurate and overly verbose translation of the technical term 'S3'. In a technical UI context, 'S3' should be kept as 'S3' to maintain technical accuracy and brevity.",
+          "suggestion": "خوارزمية التشفير من جانب الخادم المستخدمة عند تخزين هذا الكائن في S3."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -105,7 +111,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation uses 'ຂັ້ນຕອນ' (process/procedure) instead of 'ອັນກໍຣິທຶມ' (algorithm). This changes the meaning from describing the mathematical method to describing a sequence of steps.",
+          "suggestion": "ອັນກໍຣິທຶມການເຂົ້າລະຫັດດ້ານເຊີບເວີທີ່ໃຊ້ໃນເວລາເກັບຮັກສາວັດຖຸນີ້ຢູ່ໃນ S3."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -153,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation changes the sentence structure from a descriptive noun phrase ('The algorithm used...') to an active sentence ('...uses the algorithm'), which changes the grammatical function of the tooltip text.",
+          "suggestion": "මෙම වස්තුව S3 තුළ ගබඩා කිරීමේදී භාවිතා කරන සේවාදායකයේ පස සංකේතන ඇල්ගොරිතමයයි."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -199,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "Payload is too large to display.",
   "content_en_sha1_hash": "2438fb4af4a1a90475310b4c809c6e49d9f54ebe",
   "created_at": "2025-05-19T21:30:49.782Z",
-  "updated_at": "2026-02-19T13:36:32.822Z",
+  "updated_at": "2026-04-08T19:43:57.632Z",
   "comment": {
     "text": "This translation key is used to display a message when the response payload exceeds a certain size limit. It is intended to be shown as an alternative label in a button. Translators should provide a concise and clear equivalent for this message that can be displayed in various UI contexts, such as buttons or error messages.",
     "is_auto": true,
@@ -33,24 +33,19 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Məlumat yükü göstərilməyəcək qədər böyükdür' is too literal and doesn't convey the intended meaning as clearly as it could.  'Göstərilməyəcək qədər böyükdür' translates to 'too large to display' but is a bit clunky.",
-          "suggestion": "Consider a more natural phrasing like 'Yükləmənin həddi çoxdur' or 'Yükləmənin ölçüsü çoxdur' (The load size is too large)."
-        },
-        {
-          "type": "formatting",
-          "description": "While not a major issue, the phrasing could be made more concise and user-friendly.  The current translation is slightly verbose.",
-          "suggestion": "Aim for a more direct and simpler sentence structure."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Полезният товар' is a literal translation of 'Payload' used in logistics/shipping, which is incorrect in a technical/IT context. In software, 'payload' refers to the data content of a request or response.",
+          "suggestion": "Данните са твърде големи за показване."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -59,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Náklad je příliš velký na to, aby se zobrazil' is a literal translation that doesn't flow naturally in Czech. 'Náklad' typically refers to cargo or goods, not data payloads. A more appropriate translation would use a word like 'zpráva' (message) or 'data'.",
-          "suggestion": "Zpráva je příliš velká na zobrazení."
+          "description": "The word 'Náklad' refers to physical cargo or freight. In a technical/IT context regarding data, 'Payload' should be translated as 'Datový obsah', 'Payload' (as a technical term), or 'Obsah'.",
+          "suggestion": "Payload je příliš velký na zobrazení."
         }
       ],
       "approved_at": null
@@ -74,7 +69,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'φορτίο' (cargo/load) is used in a physical/logistics sense. In a technical/software context regarding data, 'payload' should be translated as 'δεδομένα' (data) or 'περιεχόμενο' (content), or kept as 'payload' if the technical term is preferred. 'Το φορτίο' sounds like a shipping container or a physical weight.",
+          "suggestion": "Το περιεχόμενο είναι πολύ μεγάλο για να εμφανιστεί."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -86,18 +87,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Tietosisältö on liian suuri näytettäväksi' is a literal translation and doesn't flow naturally in Finnish. 'Tietosisältö' (content) is overly formal and 'näytettäväksi' (to be displayed) is cumbersome.",
-          "suggestion": "A more natural translation would be 'Viesti on liian suuri näytettäväksi' or 'Kuorma on liian suuri näytettäväksi'."
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the punctuation feels slightly off. It's possible the intended meaning requires a different structure.",
-          "suggestion": "Consider re-evaluating the punctuation if clarity or flow are prioritized."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -112,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Օգտակար բեռը չափազանց մեծ է ցուցադրելու համար:\" is a literal translation and sounds somewhat unnatural in Armenian. A more natural phrasing would convey the idea that the payload exceeds a limit or capacity.",
-          "suggestion": "Բեռը չափազանց մեծ է, չի կարող ցուցադրվել։ (Ber@ chaphazanz medz e, chi karogh cuqadrel.) or Բեռի չափը գերազանցում է սահմանվածի։ (Beri chap@ gerazancum e sahmanvats.)"
+          "description": "The term 'Օգտակար բեռ' (Useful load) is a literal and incorrect translation of 'Payload' in a technical/computing context. In IT, 'Payload' refers to the data part of a packet or response, which should be translated as 'բեռնվածք' or 'տվյալների բեռնվածք'. 'Օգտակար բեռ' is typically used in aviation or logistics to mean 'useful load/capacity'.",
+          "suggestion": "Տվյալների բեռնվածքը չափազանց մեծ է ցուցադրելու համար:"
         }
       ],
       "approved_at": null
@@ -148,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, the translation 'Lietderīgā slodze ir pārāk liela, lai to parādītu' is a bit formal and wordy for a user-facing error message. A more natural and concise translation would improve the user experience.",
-          "suggestion": "Slodze ir pārāk liela."
+          "description": "The word 'Lietderīgā' means 'useful' or 'beneficial', which is a mistranslation of 'Payload' (data transmitted). In a technical context, 'Payload' should be translated as 'Datu lādiņš' or 'Svarīgais datu daļa'.",
+          "suggestion": "Datu lādiņš ir pārāk liels, lai to parādītu."
         }
       ],
       "approved_at": null
@@ -163,18 +153,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Dane właściwe są zbyt obszerne, aby je wyświetlić' is a literal translation and sounds unnatural in Polish. 'Dane właściwe' (proper data) isn't the most accurate way to describe a webhook payload. It's too formal and doesn't convey the meaning effectively for a user-facing error message.",
-          "suggestion": "Wiadomość jest zbyt duża, aby ją wyświetlić."
-        },
-        {
-          "type": "formatting",
-          "description": "The translation uses a somewhat complex sentence structure which can make it harder for users to quickly understand the problem. A more direct and simpler construction would improve readability.",
-          "suggestion": "Wiadomość jest zbyt duża, aby ją wyświetlić."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -192,7 +171,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Sarcina' in Romanian means 'task', 'burden', or 'load' in a general sense, but in a technical/computing context regarding data, 'Payload' should be translated as 'Payload' or 'Conținutul datelor'. Using 'Sarcina' is a semantic error that misleads the user into thinking there is a task to perform rather than a data size issue.",
+          "suggestion": "Payload-ul este prea mare pentru a fi afișat."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -204,36 +189,25 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'මෙම payload පෙන්වීමට විශාල වැඩිය' is not the most natural or accurate translation of 'Payload is too large to display.' While understandable, it's a bit literal and clunky. 'Payload' is a technical term and might be better handled with a slightly more idiomatic phrasing.",
-          "suggestion": "Payload ප්‍රමාණය පෙන්වා ගැනීමට වැඩිය."
-        },
-        {
-          "type": "spelling",
-          "description": "While 'payload' is used in English and sometimes adopted directly into Sinhala, it's often better to use a descriptive alternative if the target audience may not be familiar with the term.",
-          "suggestion": "While 'payload' isn't inherently incorrect, consider alternatives like 'දත්ත ප්‍රමාණය' (data size) depending on the target audience."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Dátový obsah je príliš veľký na to, aby sa mohol zobraziť' is a bit verbose and not a direct equivalent of 'Payload is too large to display.' A more natural and concise translation would be better.",
-          "suggestion": "Dátový balík je príliš veľký na zobrazenie."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Uporabni podatki' means 'User data', whereas the English 'Payload' in a technical context refers to the 'podatkovni paket' or 'vsebina' (the data transmitted in a response).",
+          "suggestion": "Podatkovni paket je prevelik za prikaz."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -257,13 +231,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Корисне навантаження завелике для показу' is technically correct but sounds unnatural in Ukrainian. 'Payload' is often translated as 'дані' (dany) or 'інформація' (informatsiya).  'Для показу' isn't the most fluent way to express 'to display'.",
-          "suggestion": "Розмір даних завеликий для відображення."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -278,10 +246,16 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"负载过高，无法显示\" directly translates to \"Payload is too high, cannot display.\" While conveying a similar meaning, \"负载\" (load) isn't the most accurate translation of \"Payload\" in this context. \"Payload\" typically refers to the data being transmitted. A more accurate translation would focus on the size or data volume.",
-          "suggestion": "数据过大，无法显示。"
+          "description": "The term '负载过高' (load is too high) typically refers to system load/CPU/memory usage, whereas the English 'Payload is too large' refers to the size/volume of data. In a technical context regarding response bodies, '数据量过大' or '负载数据过大' is more accurate.",
+          "suggestion": "数据量过大，无法显示。"
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

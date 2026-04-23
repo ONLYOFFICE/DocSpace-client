@@ -3,7 +3,7 @@
   "content": "The key will be deactivated after: {{date}}",
   "content_en_sha1_hash": "b465399fcec21b53de8879de01ae3f16030e7fc9",
   "created_at": "2025-05-19T21:30:50.507Z",
-  "updated_at": "2025-12-19T13:32:33.704Z",
+  "updated_at": "2026-04-09T04:17:15.590Z",
   "comment": {
     "text": "The APIKeyDeactivated translation key is used to display a message indicating when an API key will be deactivated, typically on a settings or configuration page. This text appears as a tooltip when the \"API Key Deactivated\" status is displayed in a UI component.",
     "is_auto": true,
@@ -66,7 +66,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Spanish translation contains a repeated word 'después'. It's redundant.",
+          "description": "The translation contains a repetitive word error ('después después de'), which is a grammatical redundancy.",
           "suggestion": "La clave se desactivará después de: {{date}}"
         }
       ],
@@ -75,13 +75,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Avain poistuu käytöstä: {{date}} jälkeen\" is not the most natural or accurate rendering of \"The key will be deactivated after: {{date}}\". A better phrasing would convey the idea that the deactivation *occurs* after the specified date, rather than the key 'leaving' use.",
-          "suggestion": "Avain deaktivoidaan: {{date}} jälkeen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -93,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'The key will be deactivated after' is not perfectly captured by 'Բանալին կանջատվի հետո'. A more accurate translation might be 'Բանալին անործի գալու է {{date}} հետո' or 'Բանալին կանջատվի {{date}} թիվը' to be more precise. The current translation feels slightly awkward and lacks clarity regarding the timeframe.",
-          "suggestion": "Բանալին անործի գալու է {{date}} հետո"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -117,7 +105,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation incorrectly interprets 'after: {{date}}' as 'after {{date}} days'. The English text implies a specific timestamp/date, whereas the Korean text '{{date}}일 후' means 'after {{date}} days'.",
+          "suggestion": "키는 {{date}} 후에 비활성화됩니다"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -183,7 +177,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The preposition 'po' in Slovenian means 'after' in the sense of 'following an event' or 'according to', but when referring to a specific point in time (a date), 'po' is grammatically incorrect and sounds unnatural. It should use 'po' only if followed by a duration, or 'od'/'v' depending on context, but for a specific timestamp, 'po' is a mistranslation of the temporal meaning.",
+          "suggestion": "Ključ bo deaktiviran po datumu: {{date}}"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -213,25 +213,19 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"vô hiệu hóa\" technically translates to 'deactivated,' it carries a stronger connotation of being rendered useless or nullified. 'Deactivated' implies a temporary or reversible state, which might be more appropriate in this context. A more accurate translation might be 'bị vô hiệu hóa' or 'sẽ ngừng hoạt động'.",
-          "suggestion": "Consider using 'sẽ ngừng hoạt động' or 'bị vô hiệu hóa' for a more precise translation of 'deactivated'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '该密钥将于该时间后无效：{{date}}' is not the most natural or accurate rendering of 'The key will be deactivated after: {{date}}'. '将于该时间后' is a bit clunky. A more natural phrasing would be '将于...失效' or '将于...过期'.",
-          "suggestion": "该密钥将于{{date}}失效"
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

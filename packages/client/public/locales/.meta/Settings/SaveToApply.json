@@ -3,7 +3,7 @@
   "content": "Click the <strong>Save</strong> button at the bottom to apply.",
   "content_en_sha1_hash": "7174b893d5a162ea27c6dae6791a9ca97ef72408",
   "created_at": "2025-05-19T21:30:52.481Z",
-  "updated_at": "2026-03-26T08:26:58.253Z",
+  "updated_at": "2026-04-09T01:39:30.287Z",
   "comment": {
     "text": "This translation key is used to display a message encouraging users to click the \"Save\" button at the bottom of a form or section. It appears in a smaller font size below a larger title, and its purpose is to provide a clear call-to-action for users to complete their settings changes.",
     "is_auto": true,
@@ -59,9 +59,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The word 'التطبيق' (al-tatbeeq) in the Arabic translation has a broader meaning of 'application' or 'implementation'.  In this context, it should be closer to 'apply' or 'use'.",
-          "suggestion": "انقر على <strong>حفظ</strong> في الأسفل للتفعيل."
+          "type": "missing_content",
+          "description": "The word 'button' is missing from the Arabic translation, which makes the sentence 'Click on Save at the bottom to apply' instead of 'Click the Save button...'",
+          "suggestion": "انقر على زر <strong>حفظ</strong> في الأسفل للتطبيق."
         }
       ],
       "approved_at": null
@@ -69,59 +69,25 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The strong tag is correctly placed, mirroring the English content.",
-          "suggestion": null
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The strong tag placement seems correct, mirroring the English.",
-          "suggestion": null
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'proveďte aplikaci' (perform the application) is an overly formal and unnatural way to express 'apply' in this context. A more natural translation would be something like 'přijměte změny' or 'použijte změny'.",
-          "suggestion": "Kliknutím na tlačítko <strong>Uložit</strong> v dolní části přijměte změny."
-        },
-        {
-          "type": "formatting",
-          "description": "The formatting on the Czech translation is correct, but it is important to maintain consistent formatting with the English version (using strong tags for emphasis).",
-          "suggestion": "No change needed, ensuring consistency with the English version."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"to apply\" is translated as \"die Einstellungen zu übernehmen\". While technically correct, \"anwenden\" would be a more natural and common translation for 'apply' in the context of applying settings.",
-          "suggestion": "Klicken Sie auf die Schaltfläche <strong>Speichern</strong> am Ende der Seite, um die Einstellungen anzuwenden."
-        },
-        {
-          "type": "formatting",
-          "description": "The English uses 'bottom' and the German uses 'Ende der Seite'. While not incorrect, maintaining consistency in terminology would be preferable. 'Unten' would be a direct translation of 'bottom'.",
-          "suggestion": "Klicken Sie auf die Schaltfläche <strong>Speichern</strong> unten, um die Einstellungen anzuwenden."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -129,9 +95,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The strong tag is present in both English and Greek, which is correct, but the HTML should ideally be consistent across all translations. Verify that the rendering is identical to the English version.",
-          "suggestion": "Ensure consistent HTML rendering for the 'strong' tag."
+          "type": "incorrect_translation",
+          "description": "The Greek translation ends with 'για να εφαρμογή', which is grammatically incorrect and incomplete. It translates to 'to the apply' instead of 'to apply' (the verb is missing its proper conjugation or the noun is used incorrectly).",
+          "suggestion": "Κάντε κλικ στο κουμπί <strong>Αποθήκευση</strong> στο κάτω μέρος για να εφαρμόσετε τις αλλαγές."
         }
       ],
       "approved_at": null
@@ -139,13 +105,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The strong tag is correctly applied, maintaining the emphasis on 'Save'/'Guardar'.",
-          "suggestion": null
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -154,13 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'asetaaksesi' doesn't perfectly convey the meaning of 'apply' in this context. While it literally translates to 'to set,' it sounds overly formal and doesn't reflect the user action of applying settings.",
-          "suggestion": "Klikkaa alaosan <strong>Tallenna</strong>-painiketta voimaan/päivityksen tekemiseksi."
-        },
-        {
-          "type": "formatting",
-          "description": "The formatting of the strong tag is maintained correctly, but the sentence structure could be improved for natural flow in Finnish.",
-          "suggestion": "Klikkaa alaosan <strong>Tallenna</strong>-painiketta voidaksesi käyttää muutoksia/käyttää päivitystä."
+          "description": "The Finnish translation 'asettaaksesi' (to set/to place) is grammatically incomplete and semantically incorrect in this context. It lacks an object (e.g., 'asettaaksesi muutokset' - to apply changes) and sounds like a broken sentence.",
+          "suggestion": "Klikkaa alaosan <strong>Tallenna</strong>-painiketta tallentaaksesi muutokset."
         }
       ],
       "approved_at": null
@@ -168,25 +123,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The strong tag is correctly used for 'Save' and 'Enregistrer', maintaining the emphasis.",
-          "suggestion": null
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Armenian translation preserves the strong tag, which may not be desired in the final presentation. It's best to confirm if this is intentional.",
-          "suggestion": "Remove the `<strong/>` tags or confirm their intended use."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -194,9 +137,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The strong tag is present in both the English and Italian versions. While technically correct, it might be preferable to ensure consistency in how strong tags are handled across the entire application.  This depends on the overall styling guide.",
-          "suggestion": "Review application styling guide for consistent usage of strong tags. If not specified, consider removing the tag in Italian or ensuring it is consistently applied in English as well."
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \"e\"",
+          "suggestion": ""
         }
       ],
       "approved_at": null
@@ -204,25 +147,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The strong tag is applied correctly, preserving the emphasis on 'Save' which is good.",
-          "suggestion": null
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Korean translation includes a strong tag (<strong>) around \"저장\" which matches the English's \"Save\". This formatting should be maintained.",
-          "suggestion": "No change needed. Formatting consistent."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -234,83 +165,37 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Lai lietotu\" is a slightly awkward translation of \"to apply\". A more natural translation would be something like \"Lai piemērotu\" or simply remove it and rephrase the sentence to flow better. 'Lai lietotu' implies using something, not applying a change.",
-          "suggestion": "Consider rephrasing to \"Lai piemērotu, noklikšķiniet uz pogas <strong>Saglabāt</strong>.\" or \"Noklikšķiniet uz pogas <strong>Saglabāt</strong>, lai piemērotu.\""
-        },
-        {
-          "type": "formatting",
-          "description": "The strong tag is correctly used to bold 'Saglabāt', matching the English 'Save'.",
-          "suggestion": "No change needed."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The strong tag is present in both the English and Dutch translations, maintaining the emphasis on the button name. This is good.",
-          "suggestion": null
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Aby zastosować wprowadzone zmiany\" is a bit too verbose and formal for the context of a simple UI instruction. A more direct translation of 'apply' would improve clarity.",
-          "suggestion": "Aby zastosować, kliknij przycisk <strong>Zapisz</strong> u dołu sekcji."
-        },
-        {
-          "type": "formatting",
-          "description": "The Polish translation includes \"u dołu sekcji\" (at the bottom of the section). The English doesn't mention a 'section'. Consider whether this detail is necessary or if a simpler 'na dole' would be better.",
-          "suggestion": "Aby zastosować, kliknij przycisk <strong>Zapisz</strong> na dole."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML strong tag (<strong/>) is preserved in the translation, which may not be desirable. It should be reviewed to see if the styling is appropriate for the Portuguese context.",
-          "suggestion": "Consider removing the <strong/> tags if the styling isn't intended, or ensure the styling is consistent with the surrounding Portuguese text."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML strong tag is preserved in the Portuguese translation, which might not be desirable or consistent with the application's style guide.",
-          "suggestion": "Consider removing the strong tags or using a Portuguese-specific formatting style."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The strong tag is correctly applied in the Romanian translation, mirroring the English content.",
-          "suggestion": null
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -322,30 +207,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Save' (English) is translated as 'සුරකින්න' (Surakinna) which literally means 'to protect/hide'. While 'Save' can sometimes mean protect, in the context of applying settings, 'ගැළපෙනවා' (Galapena) or 'අනුගමනය' (Anugamana) would be more accurate.",
-          "suggestion": "යෙදීමට පහත <strong>ගැළපෙනවා</strong> බොත්තම ඔබන්න."
-        },
-        {
-          "type": "formatting",
-          "description": "The strong tag is correctly used to preserve the bolding, however, a more natural Sinhala phrasing might not require the strong tag to emphasize 'Save'.",
-          "suggestion": "යෙදීමට පහත ගැළපෙනවා බොත්තම ඔබන්න."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation \"aby ste uložili nastavenia\" (to save settings) doesn't directly correspond to the English \"to apply.\" The original English implies applying changes, not just saving them.",
-          "suggestion": "Kliknite na tlačidlo <strong>Uložiť</strong> v dolnej časti, aby ste aplikovali zmeny."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -354,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'apply' in the English sentence refers to applying the settings, not logging in. 'Prijavo' translates to 'login'.",
-          "suggestion": "Klikni gumb <strong>Shrani</strong> na dnu za uporabo."
+          "description": "The word 'prijavo' means 'login' or 'registration', whereas the English text 'apply' in this context means 'to apply changes' (uveljaviti/potrditi).",
+          "suggestion": "Klikni gumb <strong>Shrani</strong> na dnu, da uveljaviš spremembe."
         }
       ],
       "approved_at": null
@@ -363,49 +231,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The strong tag is present and correctly used, mirroring the English content. No issue here.",
-          "suggestion": null
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The strong tag is correctly used to highlight 'Save' and 'Sačuvaj', indicating proper preservation of emphasis.",
-          "suggestion": null
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The strong tag is correctly used in both the English and Turkish content, preserving the emphasis on the button label.",
-          "suggestion": null
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The strong tag is correctly used, maintaining the emphasis on 'Save'/'Зберегти'.",
-          "suggestion": null
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -417,16 +261,17 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"使其生效\" (shǐ qí shēngxiào) translates to \"make it effective\" or \"make it take effect\". While not entirely wrong, it's more natural to say something like \"立即生效\" (lìjí shēngxiào) which means 'take effect immediately' or 'become effective immediately' in this context.  A more direct translation of 'apply' would be something along the lines of '应用' (yìngyòng).",
-          "suggestion": "Consider revising to: \"点击底部的<strong>保存</strong>按钮，立即生效\" or \"点击底部的<strong>保存</strong>按钮，应用更改\"."
-        },
-        {
-          "type": "formatting",
-          "description": "The strong tag is preserved, which is good.  However, consistency should be ensured throughout the application's translations.",
-          "suggestion": "Confirm that all instances of emphasis (using strong tags) are consistently translated in a similar manner."
+          "description": "The word 'Ruani' is the imperative verb form (Save!), whereas in the context of a button label, it should be the noun/infinitive form 'Ruaj' or 'Ruajeni'. Using 'Ruani' inside the strong tag makes the sentence read 'Click the Save! button', which is grammatically awkward for a UI label.",
+          "suggestion": "Klikoni butonin <strong>Ruaj</strong> në fund për të aplikuar."
         }
       ],
       "approved_at": null

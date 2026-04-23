@@ -3,7 +3,7 @@
   "content": "Me",
   "content_en_sha1_hash": "94563ec383e29aa3743abd9b337b2e084fb199fb",
   "created_at": "2025-05-19T21:30:46.429Z",
-  "updated_at": "2026-03-31T15:18:45.858Z",
+  "updated_at": "2026-04-08T04:51:31.375Z",
   "comment": {
     "text": "This translation key \"MeLabel\" is used to display a user's name when they have ownership rights or are the current room owner in various UI components, such as dialogs and templates. The text appears next to the username in a bold font and indicates that the user has specific permissions or access.",
     "is_auto": true,
@@ -219,7 +219,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Io' (I) is a subject pronoun, whereas in this UI context (indicating 'Me' as the current user in a list), the disjunctive/object pronoun 'Me' is required for natural Italian usage.",
+          "suggestion": "Me"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -231,7 +237,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '나' is too informal for a professional UI context. In a system where this label identifies the current user (e.g., 'John Doe (Me)'), the standard Korean UI convention is '나' (informal) or '본인' (formal/self). However, '나' sounds unnatural in a parenthetical label next to a name in a professional software interface.",
+          "suggestion": "본인"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -264,7 +276,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Portuguese translation \"A mim\" does not accurately convey the meaning of \"Me\". \"Me\" is a reflexive pronoun indicating the person being acted upon. \"A mim\" is a dative pronoun and is not the correct equivalent for this context.",
+          "description": "The translation 'A mim' is a prepositional phrase used in specific grammatical contexts (e.g., 'to me'). In a UI context where 'Me' is used as a label to identify the current user (e.g., 'John Doe (Me)'), the correct and standard translation is 'Eu'.",
           "suggestion": "Eu"
         }
       ],
@@ -337,6 +349,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

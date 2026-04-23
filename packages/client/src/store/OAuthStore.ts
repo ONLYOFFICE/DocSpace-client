@@ -283,7 +283,7 @@ class OAuthStore {
         });
       };
 
-      fetchUsers();
+      await fetchUsers();
 
       runInAction(() => {
         this.clients = [...clientList.data];
@@ -364,7 +364,7 @@ class OAuthStore {
       });
     };
 
-    fetchUsers();
+    await fetchUsers();
 
     runInAction(() => {
       this.currentPage = clientList.page;

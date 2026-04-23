@@ -3,7 +3,7 @@
   "content": "Generate",
   "content_en_sha1_hash": "fc45f9b7a9a6e8b48f0e28821ec1981804dd1eb6",
   "created_at": "2025-05-26T07:15:43.935Z",
-  "updated_at": "2026-02-19T13:36:33.166Z",
+  "updated_at": "2026-04-08T08:20:08.038Z",
   "comment": {
     "text": "The translation key \"GenerateLogoButton\" is used to display the text \"Generate\" on a button in branding settings, allowing users to create or edit logo functionality.",
     "is_auto": true,
@@ -187,6 +187,24 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

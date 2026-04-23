@@ -3,7 +3,7 @@
   "content": "Quota per user",
   "content_en_sha1_hash": "34fbae11ee29d4cda07c3fec52be82daaf84c7c0",
   "created_at": "2025-05-19T21:30:52.346Z",
-  "updated_at": "2026-03-26T08:26:58.277Z",
+  "updated_at": "2026-04-09T01:50:19.332Z",
   "comment": {
     "text": "The QuotaPerUser translation key is used to display the label \"Quota per user\" in the PortalSettings category. It appears on a mobile component that manages storage quotas and allows users to set their individual quota limits.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 461,
+      "line_number": 478,
       "context": "{\n id: \"portal-settings_catalog-storageManagement_quota-per-user\",\n key: \"6-0-2\",\n icon: \"\",\n link: \"quota-per-user\",\n tKey: \"QuotaPerUser\",\n },\n ],\n },\n ],\n },",
       "module": "/packages/client"
     }
@@ -66,13 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"Quota\" is better translated as \"Kontingent\" in this context, as \"Quote\" refers to a direct quotation.",
+          "description": "The German word 'Quote' means 'quotation' (as in a price quote or a literary quote). In the context of storage limits, the correct term is 'Kontingent' or 'Limit'.",
           "suggestion": "Kontingent pro Benutzer"
-        },
-        {
-          "type": "spelling",
-          "description": "While technically correct, \"Benutzer\" could be replaced with \"Nutzer\" which is more common and modern.",
-          "suggestion": "Kontingent pro Nutzer"
         }
       ],
       "approved_at": null
@@ -80,7 +75,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek word 'Ποσόστωση' (Posostosi) refers to 'proportionality' or 'proportioning', which is incorrect in the context of storage limits. The correct term for 'Quota' in a technical/storage context is 'Όριο' (Limit) or 'Ποσοστό' (Percentage/Quota) depending on context, but specifically 'Quota' as a fixed amount is best translated as 'Όριο' or 'Ποσό' (Amount). However, 'Ποσόστωση' is a semantic error.",
+          "suggestion": "Όριο ανά χρήστη"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -98,19 +99,19 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The French translation 'Quota pour l'utilisateur' implies a quota for a specific, single user (singular), whereas the English 'Quota per user' refers to a setting applied to all users (plural/distributive).",
+          "suggestion": "Quota par utilisateur"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Քվոտա մեկ օգտագործողի համար\" is a very literal translation and sounds unnatural in Armenian. A more idiomatic translation would be something like \"Օգտագործողի համար տրվող քվոտա\" or \"Մեկ օգտագործողի համար քվոտա\" which convey the same meaning in a more natural way.",
-          "suggestion": "Օգտագործողի համար տրվող քվոտա or Մեկ օգտագործողի համար քվոտա"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -122,13 +123,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"ユーザーあたりの容量制限\" is technically correct, it's a bit literal and verbose for a settings key. A more natural and concise translation would be preferable.",
-          "suggestion": "ユーザー制限 (Yūzā Sekigen)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -158,13 +153,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Limit na użytkownika\" doesn't fully capture the meaning of \"Quota per user\". \"Quota\" implies a specific, allocated amount, which 'limit' doesn't entirely convey. A more accurate translation would consider options like \"Przydział na użytkownika\" or \"Limity dla użytkownika\".",
-          "suggestion": "Przydział na użytkownika"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -197,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"පරිශ්‍රීලකයෙක්ට සලාකය\" does not accurately convey the meaning of \"Quota per user.\"  \"සලාකය\" means 'salary' or 'wage,' which is unrelated to quota.",
-          "suggestion": "A more accurate translation would be something like \"පරිශ්‍රමිකරුවෙකුට හිමි කොත\" (Parishramikaruwakata himi kota) which translates to \"Quota allocated to a user\" or \"පරිශ්‍රමිකරුවෙකු සඳහා වූ කොත\" (Parishramikaruwa satha gawath kota) which translates to 'Quota for a user'."
+          "description": "The Sinhala translation 'පරිශ්‍රීලකයෙක්ට සලාකය' is nonsensical. 'පරිශ්‍රීලකයෙක්ට' is a misspelling/incorrect word for 'user', and 'සලාකය' is not the correct term for 'quota'.",
+          "suggestion": "පරිශීලකයෙකු සඳහා කෝටාව"
         }
       ],
       "approved_at": null
@@ -246,6 +235,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

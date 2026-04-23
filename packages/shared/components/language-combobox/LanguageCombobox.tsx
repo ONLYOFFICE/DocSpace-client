@@ -32,7 +32,7 @@ import {
   ComboBoxSize,
   ComboBox,
 } from "@docspace/ui-kit/components/combobox";
-import { mapCulturesToArray } from "../../utils/common";
+import { mapCulturesToArray } from "../../utils/cultures";
 import { TCulture, ComboboxProps } from "./LanguageCombobox.types";
 import styles from "./LanguageCombobox.module.scss";
 

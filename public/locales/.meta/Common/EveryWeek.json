@@ -3,7 +3,7 @@
   "content": "Every week",
   "content_en_sha1_hash": "043058e2050c0345ef7aac78bd9025d3adce099a",
   "created_at": "2025-05-19T21:30:45.186Z",
-  "updated_at": "2025-09-07T07:53:15.440Z",
+  "updated_at": "2026-04-08T10:05:20.426Z",
   "comment": {
     "text": "This translation key is used to display the frequency at which data should be backed up automatically. It appears in a file backup settings page, where users can select how often backups are performed. Translators, please update this key to reflect the desired frequency in English for the \"EveryWeek\" category.",
     "is_auto": true,
@@ -205,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

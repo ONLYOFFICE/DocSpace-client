@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2026-03-31T15:18:45.862Z",
+  "updated_at": "2026-04-10T13:53:52.406Z",
   "comment": {
     "text": "This translation key is used for the \"Cancel\" button in various UI elements such as dialogs and form buttons. It provides the text to be displayed when a user clicks the cancel action, allowing them to terminate an operation or return to their previous state. This key appears in files such as Dialog.js, QuotaForm, and ShareCollectSelector.",
     "is_auto": true,
@@ -365,12 +365,6 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/SalesDepartmentRequestDialog/index.js",
-      "line_number": 256,
-      "context": "tabIndex={3}\n testId=\"send_sales_request_button\"\n />\n <Button\n className=\"cancel-button\"\n label={t(\"Common:CancelButton\")}\n size=\"normal\"\n onClick={onCloseModal}\n isLoading={isLoading}\n isDisabled={isLoading}\n tabIndex={3}",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/components/dialogs/SendInviteDialog/index.js",
       "line_number": 104,
       "context": "isLoading={isRequestRunning}\n isDisabled={!userIds.length}\n />\n <Button\n id=\"send-inite-again-modal_cancel\"\n label={t(\"Common:CancelButton\")}\n size=\"normal\"\n scale\n onClick={onClose}\n isDisabled={isRequestRunning}\n />",
@@ -392,12 +386,6 @@
       "file_path": "/packages/client/src/components/dialogs/SharePDFFormDialog/SharePDFFormDialog.tsx",
       "line_number": 104,
       "context": "<Button\n scale\n tabIndex={0}\n onClick={handleOnClose}\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n />\n </ModalDialog.Footer>\n </ModalDialog>\n );\n },",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/StorageTariffDeactiveted/index.tsx",
-      "line_number": 169,
-      "context": "onClick={onClick}\n testId=\"go_to_service_button\"\n />\n <Button\n className=\"cancel-button\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n onClick={onCloseModal}\n testId=\"close_storage_tariff_deactivated_button\"\n />\n </ModalDialog.Footer>",
       "module": "/packages/client"
     },
     {
@@ -558,7 +546,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ai-services-management.tsx",
-      "line_number": 279,
+      "line_number": 280,
       "context": "onSaveClick={onSave}\n onCancelClick={onCancel}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n saveButtonDataTestId=\"ai_services_management_save_button\"\n cancelButtonDataTestId=\"ai_services_management_cancel_button\"",
       "module": "/packages/client"
     },
@@ -713,60 +701,6 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/main-tariff/sub-components/UpdatePlanButtonContainer.js",
-      "line_number": 385,
-      "context": "onClick={onUpdateTariff}\n testId=\"confirm_payment_button\"\n />\n <Button\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n testId=\"cancel_payment_button\"\n />",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/panels/additional-storage/ButtonContainer.tsx",
-      "line_number": 118,
-      "context": "}\n testId=\"storage_plan_upgrade_ok_button\"\n />\n <Button\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n isDisabled={isLoading}\n testId=\"storage_plan_upgrade_cancel_button\"",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/panels/additional-storage/GracePeriodModal.tsx",
-      "line_number": 111,
-      "context": "onClick={onClick}\n testId=\"grace_period_ok_button\"\n />\n <Button\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n onClick={onClose}\n testId=\"grace_period_cancel_button\"\n />\n </ModalDialog.Footer>",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/panels/ai-service/PricingBillingBody.tsx",
-      "line_number": 403,
-      "context": "isLoading={false}\n testId=\"top_up_button\"\n />\n <Button\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n isDisabled={false}\n testId=\"cancel_top_up_button\"",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/sub-components/ConfirmationDialog.tsx",
-      "line_number": 84,
-      "context": "primary\n scale\n testId=\"service-confirmation-dialog-continue-button\"\n />\n <Button\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n onClick={onClose}\n testId=\"service-confirmation-dialog-close-button\"\n scale\n />",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/shared/top-up-balance/sub-components/AutoPayments.tsx",
-      "line_number": 300,
-      "context": "}\n testId=\"save_auto_payment_button\"\n />\n <Button\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.small}\n onClick={onClose}\n isDisabled={isDisabled || isLoading}\n testId=\"cancel_auto_payment_button\"\n />",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/shared/top-up-balance/sub-components/TopUpButtons.tsx",
-      "line_number": 145,
-      "context": "isLoading={isLoading}\n testId=\"top_up_button\"\n />\n <Button\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={() => onClose(false)}\n isDisabled={isLoading}\n testId=\"cancel_top_up_button\"",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/shared/transaction-history/sub-components/FilterPanel.tsx",
-      "line_number": 153,
-      "context": "testId=\"apply_filter_button\"\n />\n <Button\n onClick={closeFilterDialog}\n size={ButtonSize.medium}\n label={t(\"Common:CancelButton\")}\n scale\n testId=\"cancel_filter_button\"\n />\n </ModalDialog.Footer>\n </ModalDialog>",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/wallet/WalletRefilledModal.tsx",
-      "line_number": 149,
-      "context": "isLoading={isLoading}\n testId=\"wallet_refilled_save_button\"\n />\n <Button\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onCloseDialog}\n testId=\"wallet_refilled_cancel_button\"\n />",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/adminMessage.js",
       "line_number": 211,
       "context": "onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n additionalClassSaveButton=\"admin-message-save\"\n additionalClassCancelButton=\"admin-message-cancel\"\n saveButtonDataTestId=\"administrator_message_save_button\"",
@@ -786,8 +720,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
-      "line_number": 342,
-      "context": "onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n additionalClassSaveButton=\"ip-security-save\"\n additionalClassCancelButton=\"ip-security-cancel\"",
+      "line_number": 343,
+      "context": "onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n saveButtonDisabled={errorMessages.some((e) => e !== null)}\n additionalClassSaveButton=\"ip-security-save\"",
       "module": "/packages/client"
     },
     {
@@ -817,13 +751,13 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/index.js",
       "line_number": 110,
-      "context": "productName: t(\"Common:ProductName\"),\n })}\n latestText={t(\"LoginLatestText\")}\n storagePeriod={t(\"StoragePeriod\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n securityLifetime={securityLifetime}\n lifetime={securityLifetime.auditTrailLifeTime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"DownloadReportBtnText\")}",
+      "context": "productName: t(\"Common:ProductName\"),\n })}\n latestText={t(\"LoginLatestText\")}\n storagePeriod={t(\"StoragePeriod\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n securityLifetime={securityLifetime}\n lifetime={securityLifetime.auditTrailLifeTime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"Common:DownloadReportBtnText\")}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/login-history/index.js",
       "line_number": 94,
-      "context": "loginHistory\n subHeader={t(\"LoginSubheaderTitle\")}\n latestText={t(\"LoginLatestText\")}\n storagePeriod={t(\"StoragePeriod\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n lifetime={securityLifetime.loginHistoryLifeTime}\n securityLifetime={securityLifetime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"DownloadReportBtnText\")}",
+      "context": "loginHistory\n subHeader={t(\"LoginSubheaderTitle\")}\n latestText={t(\"LoginLatestText\")}\n storagePeriod={t(\"StoragePeriod\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n lifetime={securityLifetime.loginHistoryLifeTime}\n securityLifetime={securityLifetime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"Common:DownloadReportBtnText\")}",
       "module": "/packages/client"
     },
     {
@@ -1068,7 +1002,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation \"الغاء\" (Ilgha') is a valid word meaning 'cancellation' or 'cancel', but it's a more formal term. A more common and user-friendly translation for a 'Cancel' button would be \"إلغاء\" (Ilg'aa').",
+          "description": "The Arabic translation 'الغاء' is missing the mandatory Alef Hamza (إلغاء). In UI contexts, 'الغاء' is grammatically incorrect and looks unprofessional; 'إلغاء' is the correct spelling for 'Cancel'.",
           "suggestion": "إلغاء"
         }
       ],
@@ -1077,13 +1011,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Ləğv edin\" is a possible translation for 'Cancel', it is more accurately \"Delete\" or \"Remove\". \"Cancel\" typically implies stopping an action in progress, and \"Ləğv edin\" has a more final connotation.",
-          "suggestion": "Consider alternatives like \"Saxla\" (Hold), \"Dayandır\" (Stop), or a more context-specific translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -1203,13 +1131,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation \"අවලංගු\" (awalangu) doesn't accurately convey the meaning of \"Cancel\". It translates to 'invalid' or 'illegitimate' which is not the intended meaning of a cancel button. A more appropriate translation would be something like \"ඉවතලන්න\" (iwatalanna) or \"రద్దు කරන්න\" (raddu karanna).",
-          "suggestion": "Consider using \"ඉවතලන්න\" (iwatalanna) or \"රద్దు කරන්න\" (raddu karanna)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -1227,13 +1149,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Откажи' is a valid Serbian word related to cancellation, 'Cancel' typically implies a button action. 'Откажи' is an imperative form and might sound abrupt for a button label. A more appropriate translation, considering the context, would be 'Otkaži' (Otkaži) or 'Ponisti' (Reset).",
-          "suggestion": "Consider 'Otkaži' or 'Ponisti' for a more user-friendly button label."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -1261,6 +1177,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

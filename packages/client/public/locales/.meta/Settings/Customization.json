@@ -3,7 +3,7 @@
   "content": "Customization",
   "content_en_sha1_hash": "d7f0ac9e007291a6ccc21d036f4711505ad9d0b1",
   "created_at": "2025-05-19T21:30:51.004Z",
-  "updated_at": "2026-03-26T08:26:58.096Z",
+  "updated_at": "2026-04-09T03:49:48.338Z",
   "comment": {
     "text": "This translation key is used to display the label \"Customization\" in the Portal Settings. It appears as a header title and is associated with a customization setting, likely related to user or application settings.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 196,
+      "line_number": 192,
       "context": "const mapKeys = (tKey) => {\n switch (tKey) {\n case \"AccessRights\":\n return t(\"Common:AccessRights\");\n case \"Customization\":\n return t(\"Customization\");\n case \"SettingsGeneral\":\n return t(\"SettingsGeneral\");\n case \"StudioTimeLanguageSettings\":\n return t(\"StudioTimeLanguageSettings\");",
       "module": "/packages/client"
     },
@@ -183,7 +183,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovenian word 'Prilagoditev' is in the singular form, whereas 'Customization' in a UI header context (referring to a section of settings) typically requires the plural form 'Prilagajanje' or 'Prilagoditve'. More importantly, 'Prilagoditev' is grammatically incomplete/incorrect in this context.",
+          "suggestion": "Prilagajanje"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -207,13 +213,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Ukrainian translation 'Налаштування' generally translates to 'Settings' or 'Configurations,' not 'Customization.' While it can sometimes be used in a related context, it's not the most accurate equivalent for 'Customization.'",
-          "suggestion": "Consider 'Персоналізація' for a closer translation of 'Customization.'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -223,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -12,5 +12,8 @@
   "SuccessConnected": "{{serviceName}} は通知チャネルとして正常に接続されました。これで、そちらで更新情報を受け取ることができます。",
   "SuccessDisconnected": "{{serviceName}}は通知チャネルとして正常に切断されました。通知はそこに送信されなくなります。",
   "UsefulTips": "{{productName}}の使い方やヒント",
-  "UsefulTipsDescription": "{{productName}}に関するお役立ちガイドをゲット"
+  "UsefulTipsDescription": "{{productName}}に関するお役立ちガイドをゲット",
+  "ActionsWithFilesDescription": "バッジは、{{rooms}}、{{shared}}、{{documents}}、および{{aiAgents}}セクション全体で、アップロード、編集、または共有などのファイルアクティビティをハイライトします。",
+  "RoomsActivityDescription": "{{rooms}} および {{aiAgents}} 内の新しい共有ファイル/フォルダやアクティビティに関するメール通知を即座に受け取れます。",
+  "RoomUpdateNotify": "共有コンテンツ、{{rooms}} および {{aiAgents}} のアクティビティ"
 }

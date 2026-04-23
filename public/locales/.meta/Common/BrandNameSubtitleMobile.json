@@ -3,7 +3,7 @@
   "content": "Enter your company or brand name which will be displayed in notifications, exported spreadsheets, and other resources.",
   "content_en_sha1_hash": "d3355c5c354b7d41afd6a94ee2b9e9c1634eedda",
   "created_at": "2025-05-26T07:15:41.035Z",
-  "updated_at": "2026-02-19T13:36:33.163Z",
+  "updated_at": "2026-04-08T15:58:00.392Z",
   "comment": {
     "text": "The BrandNameSubtitleMobile translation key is used to display a brand name subtitle on mobile notifications and other UI elements. It appears in a mobile view of branding settings, where users enter their company or brand name that will be displayed in various resources.",
     "is_auto": true,
@@ -69,7 +69,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'viedyissä' is a typo or a non-existent word in Finnish; it should be 'viedyissä' (exported).",
+          "suggestion": "Syötä yrityksesi tai brändinimi, joka näytetään ilmoituksissa, viedyissä laskentataulukoissa ja muissa resursseissa."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -183,13 +189,43 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Vietnamese sentence structure is grammatically broken, making it sound like 'Enter your company name will be displayed...', which is nonsensical. It lacks a relative pronoun or a connecting structure to link the action of entering the name to the fact that the name will be displayed.",
+          "suggestion": "Nhập tên công ty hoặc thương hiệu của bạn; tên này sẽ được hiển thị trong thông báo, bảng tính được xuất và các tài nguyên khác."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Hyni' means 'Enter' in the sense of 'to go inside' or 'to log in'. In the context of a text input field, 'Shkruani' (Write) or 'Vendosni' (Put/Place) should be used.",
+          "suggestion": "Shkruani emrin e kompanisë ose markës tuaj, i cili do të shfaqet në njoftimet, tabelat e skemëruar dhe burime të tjera."
+        }
+      ],
       "approved_at": null
     }
   }

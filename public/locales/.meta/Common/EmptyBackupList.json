@@ -3,7 +3,7 @@
   "content": "No backups have been created yet. Create one or more backups for them to appear in this list.",
   "content_en_sha1_hash": "c8e0282d83b01b0512d122cb0201d9e8cdff6a93",
   "created_at": "2025-05-26T07:15:42.873Z",
-  "updated_at": "2025-08-11T09:02:44.098Z",
+  "updated_at": "2026-04-08T11:07:03.940Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that no backups have been created yet, appearing as an empty list in a UI component. It provides context for when a user attempts to view backup information and no data exists.",
     "is_auto": true,
@@ -105,7 +105,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'ສໍາລັບການໃຫ້ເຂົາເຈົ້າປາກົດ' (for letting them appear) is a literal and unnatural translation of 'for them to appear'. In Lao, 'ເຂົາເຈົ້າ' (them) refers to people/persons, but in this context, 'them' refers to the 'backups' (inanimate objects). This makes the sentence sound like the user is creating backups so that people can appear in the list.",
+          "suggestion": "ຍັງບໍ່ມີການສ້າງການສຳຮອງຂໍ້ມູນໃດໆເທື່ອ. ກະລຸນາສ້າງການສຳຮອງຂໍ້ມູນໜຶ່ງ ຫຼື ຫຼາຍອັນ ເພື່ອໃຫ້ຂໍ້ມູນເຫຼົ່ານັ້ນສະແດງຢູ່ໃນລາຍການນີ້."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -199,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

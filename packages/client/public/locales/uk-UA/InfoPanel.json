@@ -2,6 +2,7 @@
   "AddedRoomTags": "Теги додано.",
   "Administration": "Адміністрування",
   "AgentRenamed": "Агент <1>«{{oldRoomTitle}}»</1> перейменовано на <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Перегляньте деталі щодо {{aiAgents}} тут",
   "AndMoreLabel": "і ще <1>{{count}}</1>",
   "CreationDate": "Дата створення",
   "Data": "Дані",
@@ -60,11 +61,14 @@
   "IndexChanged": "Індекс змінено",
   "ItemsSelected": "Вибрані елементи",
   "LastModifiedBy": "Автор останньої зміни",
+  "LastUpdateInfo": "Останнє оновлення",
   "LifetimeEnds": "Період існування закінчується",
   "MembersEmptyScreenText": "Див. інформацію про учасників тут",
+  "NoAgent": "Немає {{aiAgent}}",
   "NoRecordsFound": "Записів не знайдено",
   "Properties": "Властивості",
   "Resolution": "Роздільна здатність",
+  "RoomChangeOwner": "Власник кімнати змінено.",
   "RoomCreateUserCount": "Користувачів додано ({{count}}).",
   "RoomDenyDownloadDisabled": "Завантаження та копіювання не обмежено",
   "RoomDenyDownloadEnabled": "Завантаження та копіювання обмежено",
@@ -98,6 +102,5 @@
   "SubmenuHistory": "Історія",
   "UserFileUpdated": "Файл оновлено.",
   "Users": "Користувачі",
-  "Versions": "Версії",
-  "LastUpdateInfo": "Останнє оновлення"
+  "Versions": "Версії"
 }

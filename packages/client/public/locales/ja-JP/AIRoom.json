@@ -14,5 +14,18 @@
   "ResponseQualityNode": "<1>注:</1> モデルによって応答品質は異なります。最新のモデルを使用すると最良の結果が得られます。",
   "ResultStorage": "結果ストレージ",
   "UploadFilesDevice": "個人用デバイスからファイルをアップロードする",
-  "UploadFilesPortal": "{{sectionNameFirst}}または{{sectionNameSecond}}からファイルをアップロードする"
+  "UploadFilesPortal": "{{sectionNameFirst}}または{{sectionNameSecond}}からファイルをアップロードする",
+  "AgentInViewModeWarning": "この{{aiAgent}}は<strong>閲覧専用</strong>モードです。他のユーザーの{{aiChat}}のアクティビティの結果を閲覧できます。",
+  "CreateChatDescription": "{{aiChat}} タブに移動して開始してください。",
+  "EmptyKnowledgeDescription": "ここにアップロードされたファイルはインデックス化され、{{aiChat}} タブのコンテキストとして使用されます。AIに質問したり、コンテンツを生成したり、情報について共同作業したりするために、ファイルを追加してください（各ファイル最大 10 MB）。",
+  "EmptyResultsDescription": "{{aiChat}}で生成されたファイルはここに自動的に表示されます。コンテンツを生成したり、チャットを開始したり、出力を伴うメッセージを送信したりするたびに、結果がこのセクションに保存されます。",
+  "EmptyResultsViewerDescription": "他のユーザーの{{aiChat}}アクティビティの結果は、利用可能になり次第、ここに表示されます。",
+  "InstructionsDescriptionAgent": "{{aiAgent}}がどのように振る舞い、応答すべきかを記述してください。その役割、トーン、および主なタスクを定義してください。",
+  "Knowledge": "ナレッジベース",
+  "KnowledgeUnavailableDescription": "ナレッジベースは現在無効になっています。{{aiAgents}}のセマンティック検索とドキュメント処理を有効にするには、{{productName}}の設定で埋め込みプロバイダーを設定してください。",
+  "KnowledgeUnavailableDescriptionUser": "ナレッジベースは現在無効になっています。{{aiAgents}}のセマンティック検索とドキュメント処理を有効にするには、埋め込みプロバイダーを設定するために{{productName}}の管理者に連絡してください。",
+  "MCPDescriptionServers": "管理者によって接続された{{mcpServers}}を使用して、AIによるチャット体験を強化します。{{mcpServers}}は、データ抽出、要約、スマートな提案などで役立ちます。",
+  "Model": "{{aiProvider}} およびモデル",
+  "ModelDescription": "このルームのチャットで使用する{{aiProvider}}とモデルを選択してください。この設定は必須であり、すべての参加者に適用されます。",
+  "NoAccessAIAgentTitle": "申し訳ありませんが、この{{aiAgent}}にはアクセスできません"
 }

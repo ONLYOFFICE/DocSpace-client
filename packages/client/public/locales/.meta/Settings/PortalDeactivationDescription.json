@@ -3,7 +3,7 @@
   "content": "Use this option to deactivate your space temporarily.",
   "content_en_sha1_hash": "173ddeb92e310d8df9c3efe67b3c5b32e8a55258",
   "created_at": "2025-05-19T21:30:52.185Z",
-  "updated_at": "2025-09-17T13:43:01.765Z",
+  "updated_at": "2026-04-09T02:05:00.480Z",
   "comment": {
     "text": "This translation key is used to display a temporary deactivation message for a portal. It appears on a page where an owner can temporarily deactivate their space and is part of the UI when activating or deactivating employee status.",
     "is_auto": true,
@@ -30,7 +30,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word \"إستضافتك\" (istadafatuk) translates to \"your hosting\" or \"your accommodation\", which doesn't accurately convey the meaning of \"your space\" in the English context. The English text refers to a user's area or space within a platform, not necessarily hosting or accommodation.",
+          "description": "The word 'إستضافتك' (your hosting) is used instead of 'مساحتك' (your space). In the context of ONLYOFFICE DocSpace, 'Space' refers to a specific workspace/portal entity, not web hosting services.",
           "suggestion": "استخدم هذا الخيار لإلغاء تنشيط مساحتك مؤقتًا."
         }
       ],
@@ -39,7 +39,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation uses 'Domeninizi' (Your domain) instead of 'space' (məkan/sahə), which changes the technical object being deactivated.",
+          "suggestion": "Məkanınızı müvəqqəti olaraq deaktiv etmək üçün bu seçimdən istifadə edin."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -153,7 +159,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text refers to 'your space', but the Russian translation uses 'портала' (portal). In the context of ONLYOFFICE DocSpace, 'space' and 'portal' are distinct entities.",
+          "suggestion": "Используйте эту опцию для временной деактивации вашего пространства."
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -174,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'S to možnostjo začasno deaktivirate svoj prostor' is a bit literal and could be improved for natural flow. While technically correct, it sounds slightly awkward in Slovenian. A more natural phrasing might be 'Uporabite to možnost za začasno deaktivacijo svojega prostora.' or 'S to možnostjo lahko začasno deaktivirate svoj prostor.'",
-          "suggestion": "Uporabite to možnost za začasno deaktivacijo svojega prostora."
+          "description": "The Slovenian translation is grammatically nonsensical and does not convey the meaning of the English sentence. 'S to možnostjo začasno deaktivirate svoj prostor' translates roughly to 'With this option you temporarily deactivate your space', but the structure is broken/incorrect in Slovenian.",
+          "suggestion": "To možnost uporabite za začasno deaktivacijo svojega prostora."
         }
       ],
       "approved_at": null
@@ -211,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

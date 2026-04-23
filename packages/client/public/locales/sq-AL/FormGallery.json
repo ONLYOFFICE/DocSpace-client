@@ -3,10 +3,12 @@
   "EmptyFormGalleryScreenDescription": "Nuk u gjend asnjë rezultat që përputhet me pyetjen tuaj",
   "ErrorViewDescription": "Ju lutem provojeni përsëri më vonë",
   "ErrorViewDescriptionNetworkError": "Shkruan se nuk ka lidhje me internet.",
-  "SuggestChanges": "Sugjeroni ndryshime",
-  "TemplateInfo": "Info shablloni",
-  "ViewAllTemplates": "Shikoni të gjitha shabllonet",
   "ErrorViewHeader": "Galeria është përkohësisht e padisponueshme",
   "SelectTemplate": "Zgjidhni shabllon",
-  "UploadGallery": "Ngarko në Galeri"
+  "SuggestChanges": "Sugjeroni ndryshime",
+  "TemplateInfo": "Info shablloni",
+  "UploadGallery": "Ngarko në Galeri",
+  "ViewAllTemplates": "Shikoni të gjitha shabllonet",
+  "GalleryTitle": "{{organizationName}} Galeria e Shablloneve",
+  "SubmitToGalleryDialogMainInfo": "Dërgoni shabllonin tuaj në galerinë publike që të lejoni të përdorësojnë të tjerët në punën e tyre. Pasi shablloni të kalojë moderimin, do të jeni njoftuar dhe të shpëtonuar për kontributin tuaj."
 }

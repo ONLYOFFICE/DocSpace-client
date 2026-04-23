@@ -3,7 +3,7 @@
   "content": "Italiano (Italia)",
   "content_en_sha1_hash": "8712d78f19829847a61322838bef26e32301d64c",
   "created_at": "2025-05-19T21:30:44.068Z",
-  "updated_at": "2025-05-24T01:17:50.189Z",
+  "updated_at": "2026-04-08T13:22:01.657Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -20,19 +20,37 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Latin script (Italian) instead of the required Arabic script for the Arabic (Saudi Arabia) locale.",
+          "suggestion": "الإيطالية (إيطاليا)"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is identical to the English text and does not use the Azerbaijani language for the language name.",
+          "suggestion": "İtalyan dili (İtaliya)"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Bulgarian translation uses Italian instead of Bulgarian. The language name should be 'Италиански'.",
+          "suggestion": "Италиански (Италия)"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -44,13 +62,25 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The German translation uses the Italian language name instead of the German name 'Italienisch'.",
+          "suggestion": "Italienisch (Italien)"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Greek translation is actually Italian text, not Greek.",
+          "suggestion": "Ιταλικά (Ιταλία)"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -62,19 +92,37 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation uses the Italian language name instead of the Finnish name for the language.",
+          "suggestion": "Italia (italia)"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The French translation is actually Italian. The correct French translation for 'Italiano (Italia)' should be 'Italien (Italie)'.",
+          "suggestion": "Italien (Italie)"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Italian (Latin script) instead of Armenian.",
+          "suggestion": "Իտալերեն (Իտալիա)"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -86,19 +134,37 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Japanese translation uses Latin script instead of Japanese script (Katakana/Kanji) for the language name.",
+          "suggestion": "イタリア語 (イタリア)"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Italian/Latin script instead of Korean. For language selection UI, the language name should be written in the target language (Korean) or the native name should be used correctly, but here the Korean string is an exact copy of the Italian text.",
+          "suggestion": "이탈리아어 (이탈리아)"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Latin script (Italian) instead of the Lao script.",
+          "suggestion": "ອີຕາລີ (ອີຕາລີ)"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -110,7 +176,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Dutch translation is actually Italian. The Dutch equivalent for 'Italian (Italy)' should be 'Italiaans (België/Nederland)' or similar, but specifically for the language name, it should be 'Italiaans'.",
+          "suggestion": "Italiaans (Italië)"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -140,13 +212,25 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Russian translation uses Latin script instead of Cyrillic for the language name.",
+          "suggestion": "Italiano (Italia)"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Latin script (Italian) instead of the required Sinhala script.",
+          "suggestion": "ඉතාලි (ඉතාලිය)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -158,13 +242,25 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is in Italian, not Slovenian. The Slovenian translation for 'Italiano (Italia)' should be 'italijanščina (Italija)'.",
+          "suggestion": "italijanščina (Italija)"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Italian, not Serbian (Cyrillic).",
+          "suggestion": "Италијански (Италија)"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -182,16 +278,34 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Italian/Latin script instead of Ukrainian.",
+          "suggestion": "Італійська (Італія)"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Vietnamese translation is identical to the English text and does not use the Vietnamese language for the language name.",
+          "suggestion": "Tiếng Ý (Ý)"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

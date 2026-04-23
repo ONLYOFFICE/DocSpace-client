@@ -3,7 +3,7 @@
   "content": "Disable quota",
   "content_en_sha1_hash": "13a8e1d1f088c27730510bb9d3e85366580a74b1",
   "created_at": "2025-05-19T21:30:44.544Z",
-  "updated_at": "2026-02-19T13:36:32.293Z",
+  "updated_at": "2026-04-08T11:57:35.107Z",
   "comment": {
     "text": "This translation key is used to display the label \"Disable quota\" in various UI elements, such as a storage management dialog and a settings menu. It appears on buttons and menus that allow users to disable or customize their quota limitations. The key should be translated to provide a clear indication of this action's purpose for end-users.",
     "is_auto": true,
@@ -63,13 +63,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Disable quota\" implies a setting or feature being turned off. \"Kvotanı deaktiv edin\" translates more literally to \"Disable my quota.\" The possessive \"my\" isn't present in the English source, making the translation slightly off.  A more accurate translation would depend on the context. If it's a system setting, a more general disablement might be preferable.",
-          "suggestion": "Consider a more general translation like \"Kvotanı ləğv edin\" or \"Kvotanı söndürün\" depending on the specific system functionality."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -81,7 +75,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text 'Disable quota' is singular, but the Czech translation 'Zakázat kvóty' is plural ('Disable quotas'). This changes the meaning from a specific action on a single quota to a general action on multiple quotas.",
+          "suggestion": "Zakázat kvótu"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Quote deaktivieren' is not the accurate translation of 'Disable quota'. 'Quote' refers to quotations, not 'quota'. The correct translation would convey the removal or deactivation of a quota system.",
-          "suggestion": "Deaktivierung der Kontingente"
+          "description": "The German word 'Quote' means 'quotation' (as in a citation or price quote). In the context of storage management and limits, the correct term is 'Kontingent'.",
+          "suggestion": "Kontingent deaktivieren"
         }
       ],
       "approved_at": null
@@ -123,13 +123,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Անջատել քվոտան\" is literally \"Disable the quota\", a more natural and idiomatic translation in Armenian would be \"Աջակայել քվոտան\" or \"Դադարեցնել քվոտան\". \"Անջատել\" often implies a complete disconnection, which might not be the intended meaning of 'disable'.",
-          "suggestion": "Consider using \"Աջակայել քվոտան\" or \"Դադարեցնել քվոտան\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -159,7 +153,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation 'Atspējot kvotu' uses a gerund/participle form ('Disabling quota') instead of the imperative/infinitive form ('Disable quota') required for a UI button or menu action.",
+          "suggestion": "Atspēgt kvotu"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -204,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"සලාකය අබල කරන්න\" doesn't accurately convey the meaning of \"Disable quota\". \"සලාකය\" (salakaya) means 'salad' or 'mixture', which is unrelated to quotas. \"අබල කරන්න\" (abala karanna) means 'to waste' or 'to spoil', which doesn't align with disabling a quota.",
-          "suggestion": "A more accurate translation might be \"කොටාව අයින් කරන්න\" (kotawa aain karanna - remove the quota) or \"කොටාව නිශ්ක්‍රීය කරන්න\" (kotawa nishkriya karanna - deactivate the quota)."
+          "description": "The Sinhala translation 'සලාකය අබල කරන්න' is incorrect. 'සලාකය' (Salakaya) means 'a stick/branch/rod', which is a mistranslation of 'quota'. The correct term for quota in this context should relate to an allocation or limit.",
+          "suggestion": "කොටස අබල කරන්න"
         }
       ],
       "approved_at": null
@@ -231,13 +231,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Onemogući kvotu\" is a literal translation of 'Disable quota' but doesn't convey the intended meaning naturally in Serbian. A more appropriate translation would express the idea of removing or deactivating the quota.",
-          "suggestion": "Consider alternatives like \"Uključi kvotu\" (which implies removing the limit, depending on context) or a phrase clarifying the action being performed on the quota."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -259,6 +253,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

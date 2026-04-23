@@ -69,13 +69,13 @@ export default function withQuickButtons(WrappedComponent) {
 
       if (item?.isFavorite) {
         setFavoriteAction("remove", [item])
-          .then(() => toastr.success(t("RemovedFromFavorites")))
+          .then(() => toastr.success(t("Common:RemovedFromFavorites")))
           .catch((err) => toastr.error(err));
         return;
       }
 
       setFavoriteAction("mark", [item])
-        .then(() => toastr.success(t("MarkedAsFavorite")))
+        .then(() => toastr.success(t("Common:MarkedAsFavorite")))
         .catch((err) => toastr.error(err));
     };
 

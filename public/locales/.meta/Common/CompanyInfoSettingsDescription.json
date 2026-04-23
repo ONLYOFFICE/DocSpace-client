@@ -3,7 +3,7 @@
   "content": "This information will be displayed in the <1>{{link}}</1> window.",
   "content_en_sha1_hash": "feea1754462fa327a2109f784fab5e00ffad9082",
   "created_at": "2025-05-26T07:15:41.415Z",
-  "updated_at": "2026-02-19T13:36:33.162Z",
+  "updated_at": "2026-04-10T08:58:38.057Z",
   "comment": {
     "text": "This translation key is used for a description displayed in a dialog window. When users view certain settings, this text will be shown explaining where the information can be accessed further.",
     "is_auto": true,
@@ -205,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

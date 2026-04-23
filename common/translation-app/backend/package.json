@@ -9,23 +9,20 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "generate-metadata": "node src/scripts/generate-metadata.js",
     "save-meta-keys-usage": "node src/scripts/save-meta-keys-usage.js",
-    "generate-auto-comments-metadata": "node src/scripts/generate-auto-comments-metadata.js"
+    "generate-auto-comments-metadata": "node src/scripts/generate-auto-comments-metadata.js",
+    "clear-meta-issues": "node src/scripts/clear-meta-issues.js"
   },
   "dependencies": {
-    "@fastify/cors": "^11.0.0",
-    "@vitalets/google-translate-api": "^9.2.0",
+    "@fastify/cors": "^11.2.0",
     "app-root-path": "^3.1.0",
-    "axios": "1.13.5",
-    "dotenv": "^17.2.2",
-    "fastify": "^5.7.4",
-    "fs-extra": "^11.3.1",
-    "glob": "^11.0.3",
-    "https-proxy-agent": "^7.0.5",
-    "node-fetch": "^3.3.2",
-    "ollama": "^0.5.17",
+    "dotenv": "^17.4.1",
+    "fastify": "^5.8.4",
+    "fs-extra": "^11.3.4",
+    "glob": "^13.0.6",
+    "ollama": "^0.6.3",
     "socket.io": "^4.8.3"
   },
   "devDependencies": {
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.14"
   }
 }

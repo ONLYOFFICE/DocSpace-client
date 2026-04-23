@@ -3,7 +3,7 @@
   "content": "Confirmation",
   "content_en_sha1_hash": "3424edc2354c7c55f6eb740b673d349b02d27c8d",
   "created_at": "2025-05-19T21:30:43.625Z",
-  "updated_at": "2026-03-26T08:26:57.972Z",
+  "updated_at": "2026-04-10T08:21:04.298Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message in a user interface. It appears as the title of a dialog header, indicating that the application is seeking user confirmation before proceeding with an action such as canceling an operation or deleting a file or room.",
     "is_auto": true,
@@ -32,36 +32,6 @@
       "file_path": "/packages/client/src/components/dialogs/ResetConfirmationDialog/ResetConfirmationModal.js",
       "line_number": 44,
       "context": "contentHeight=\"100%\"\n displayType=\"modal\"\n onClose={closeResetModal}\n visible={confirmationResetModal}\n >\n <ModalDialog.Header>{t(\"Common:Confirmation\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <Text>{t(\"Common:ConfirmationText\")}</Text>\n </ModalDialog.Body>",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/index.tsx",
-      "line_number": 146,
-      "context": "};\n }, []);\n \n const confirmationDialogContent = {\n [BACKUP_SERVICE]: {\n title: t(\"Common:Confirmation\"),\n body: !isCurrentConfirmState\n ? t(\"Services:EnableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n })\n : isFreeTariff",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/index.tsx",
-      "line_number": 146,
-      "context": "};\n }, []);\n \n const confirmationDialogContent = {\n [BACKUP_SERVICE]: {\n title: t(\"Common:Confirmation\"),\n body: !isCurrentConfirmState\n ? t(\"Services:EnableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n })\n : isFreeTariff",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/pages/ai-tools/AiPage.tsx",
-      "line_number": 203,
-      "context": "}\n };\n \n const confirmationDialogContent = isAiToolsServiceOn\n ? {\n title: t(\"Common:Confirmation\"),\n body: [\n t(\"Services:DisableAIToolsConfirm\", {\n organizationName: logoText,\n }),\n <Trans",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/pages/ai-tools/AiPage.tsx",
-      "line_number": 203,
-      "context": "}\n };\n \n const confirmationDialogContent = isAiToolsServiceOn\n ? {\n title: t(\"Common:Confirmation\"),\n body: [\n t(\"Services:DisableAIToolsConfirm\", {\n organizationName: logoText,\n }),\n <Trans",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/pages/backup/BackupPage.tsx",
-      "line_number": 109,
-      "context": "setIsLoading(false);\n }\n };\n \n const confirmationDialogContent = {\n title: t(\"Common:Confirmation\"),\n \n body: !isBackupServiceOn\n ? t(\"Services:EnableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n })",
       "module": "/packages/client"
     },
     {
@@ -147,7 +117,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation '確認事項' means 'Items for confirmation' or 'Points to check', which is more specific than the general English 'Confirmation'. In a UI dialog header context, '確認' or '確認ダイアログ' is more appropriate for a general confirmation prompt.",
+          "suggestion": "確認"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -162,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ການຢັ້ງຢືນຕົວຕົນ\" literally translates to \"identity verification\" which is a more specific meaning than the English \"Confirmation\". While it's a related concept, it's not a direct equivalent.",
-          "suggestion": "Consider alternatives like \"ການຮັບຮອງ\" (karp roong) which means 'acknowledgment' or 'approval', or \"ການยืนຢືນ\" (kan yeun yeun) which is closer to 'verification' but less specific than 'identity verification'."
+          "description": "The Lao translation 'ການຢັ້ງຢືນຕົວຕົນ' means 'Identity Verification' or 'Identity Confirmation', which is too specific. The English 'Confirmation' is a general UI term for a dialog header used to confirm actions (like deleting or canceling).",
+          "suggestion": "ການຢືນຢັນ"
         }
       ],
       "approved_at": null
@@ -231,7 +207,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Конфирмација' is a transliteration of the English word rather than a proper Serbian translation. In a UI context for a dialog header, 'Потврда' is the correct and standard term.",
+          "suggestion": "Потврда"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -259,6 +241,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

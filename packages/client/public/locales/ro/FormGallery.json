@@ -3,10 +3,12 @@
   "EmptyFormGalleryScreenDescription": "Nu a putut fi găsit niciun rezultat care să corespundă interogării dvs",
   "ErrorViewDescription": "Încercați din nou mai târziu.",
   "ErrorViewDescriptionNetworkError": "Se pare că nu aveți conexiune la Internet.",
-  "SuggestChanges": "Propuneri privind modificări",
-  "TemplateInfo": "Informații despre șablon",
-  "ViewAllTemplates": "Afișează toate șabloanele",
   "ErrorViewHeader": "Galeria este temporar indisponibilă",
   "SelectTemplate": "Selectează șablon",
-  "UploadGallery": "Încarcă în Galerie"
+  "SuggestChanges": "Propuneri privind modificări",
+  "TemplateInfo": "Informații despre șablon",
+  "UploadGallery": "Încarcă în Galerie",
+  "ViewAllTemplates": "Afișează toate șabloanele",
+  "GalleryTitle": "Galerie de șabloane {{organizationName}}",
+  "SubmitToGalleryDialogMainInfo": "Trimiteți șablonul în galeria publică pentru ca alții să îl folosească în munca lor. După ce șablonul trece de moderare, veți fi notificat și răsplătit pentru contribuția dumneavoastră."
 }

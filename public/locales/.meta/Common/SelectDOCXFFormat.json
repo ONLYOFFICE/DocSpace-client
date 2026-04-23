@@ -3,7 +3,7 @@
   "content": "Select .DOCXF file",
   "content_en_sha1_hash": "c87578509cc70195115bab940d290a60e663f6d1",
   "created_at": "2025-05-19T21:30:48.383Z",
-  "updated_at": "2026-02-19T13:36:32.255Z",
+  "updated_at": "2026-04-07T23:51:49.407Z",
   "comment": {
     "text": "The translation key \"SelectDOCXFFormat\" is used to display a label for selecting .DOCXF file formats in a UI component. It appears on a dialog related to file filtering and should be translated to indicate the specific format being selected.",
     "is_auto": true,
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'اختر ملف بصيغة DOCXF' is a literal translation, but a more natural and user-friendly translation would be 'اختر ملف DOCXF'. Using 'بصيغة' sounds slightly formal and less conversational.",
-          "suggestion": "اختر ملف DOCXF"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -99,13 +93,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, the Japanese translation \"を選択してください\" (o select shite kudasai) is overly polite for a simple file selection action. It's a bit stiff and formal.",
-          "suggestion": ".DOCXF ファイルを選択"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -119,9 +107,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ເລືອກ​ເອກະສານ .DOCXF' translates to 'Select document .DOCXF'. While understandable, a more natural and precise translation would emphasize that it's a *file* selection.",
-          "suggestion": "ເລືອກ​ເອກະສານໄພ໌ .DOCXF"
+          "type": "missing_content",
+          "description": "The word 'file' is missing from the translation. The Lao translation 'ເລືອກ​ເອກະສານ .DOCXF' translates to 'Select .DOCXF document', which is acceptable, but it lacks the specific 'file' nuance if 'file' is considered a distinct requirement. However, more critically, the translation is missing the specific file extension context if it were to be treated as a variable, but since it is hardcoded, the main issue is the omission of the word 'file' (ໄຟລ໌) which makes it slightly less precise than the English source.",
+          "suggestion": "ເລືອກໄຟລ໌ .DOCXF"
         }
       ],
       "approved_at": null
@@ -171,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While the translation is understandable, 'Select .DOCXF file' is more accurately translated as something like \"DOCXF ගොනුව ඇතුළත් කරන්න\" (DOCXF file include/attach) or \"DOCXF ගොනුව ලබා ගන්න\" (Get DOCXF file). 'තෝරන්න' (thoranna) literally means 'to pick' or 'to choose', which, while not wrong, isn't the most natural phrasing for selecting a file.",
-          "suggestion": "DOCXF ගොනුව ඇතුළත් කරන්න or DOCXF ගොනුව ලබා ගන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -195,25 +177,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Изабери .DOCXF датотеку' is a literal translation and doesn't flow naturally in Serbian. A more idiomatic translation would be 'Избери .DOCXF фајл' or 'Изаберите .DOCXF датотеку'.",
-          "suggestion": "Избери .DOCXF фајл"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Izaberi .DOCXF datoteku' is not the most natural-sounding way to say 'Select .DOCXF file' in Serbian (Latin). A more common and idiomatic translation would be 'Odaberi .DOCXF datoteku'. 'Izaberi' implies a selection from a limited number of options, while 'Odaberi' is a more general term for choosing something.",
-          "suggestion": "Odaberi .DOCXF datoteku"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -231,10 +201,22 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The translation omitted the file extension '.DOCXF', which is critical for the user to identify the specific format being selected.",
+          "suggestion": "Chọn tập tin .DOCXF"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

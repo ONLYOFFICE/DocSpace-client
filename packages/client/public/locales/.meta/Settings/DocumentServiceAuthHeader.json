@@ -3,7 +3,7 @@
   "content": "Authorization header",
   "content_en_sha1_hash": "b4e71c87b167fcd1f2219f26ed7bbc978140646c",
   "created_at": "2025-05-19T21:30:51.346Z",
-  "updated_at": "2026-03-20T09:07:45.623Z",
+  "updated_at": "2026-04-09T03:12:40.222Z",
   "comment": {
     "text": "The \"Authorization header\" translation key is used to display a label for an input field in portal settings, asking users to enter authentication details. It appears on a form where advanced settings are shown, likely as part of configuring integration options with Document Service.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'رأس التفويض' translates to 'Authorization Head' or 'Delegation Head'. In a technical/HTTP context, 'header' should be translated as 'ترويسة' or 'رأس' (as in header field), but 'التفويض' refers to the act of delegating authority rather than the technical 'Authorization' credential/scheme used in HTTP headers.",
+          "suggestion": "ترويسة المصادقة"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -81,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Ավտորիզացիայի վերնագրի դաշտ\" literally translates to 'Authorization header field'. While not entirely wrong, it's more verbose than the English 'Authorization header'. A more concise and accurate translation would be \"Հեղինակման վերնագիր\" or \"Հեղինակչության վերնագիր\".",
-          "suggestion": "Հեղինակման վերնագիր"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -113,9 +113,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The Lao word for 'header' (ຫົວ) is technically correct but might be more natural to use 'ຫົວຂໍ້' as a compound word to be more specific.",
-          "suggestion": "ຫົວຂໍ້ການອະນຸຍາດ"
+          "type": "incorrect_translation",
+          "description": "The word 'ຫົວຂໍ້' (Hua kho) means 'Topic' or 'Subject' in Lao. In a technical context regarding HTTP/API headers, 'header' should be translated as 'ສ່ວນຫົວ' (Suan hua) or 'header' (transliterated) to avoid confusion with a subject line or a topic.",
+          "suggestion": "ສ່ວນຫົວການອະນຸຍາດ"
         }
       ],
       "approved_at": null
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"අනුමැතිය හිඟස්සම\" does not accurately convey the meaning of \"Authorization header\".  \"අනුමැතිය\" translates to 'permission' or 'authorization', but \"හිඟස්සම\" is not a standard word or phrase related to headers in a technical context.  It appears to be a garbled or incorrect combination of words.",
-          "suggestion": "A more accurate translation would depend on the specific technical context. Some possibilities include: \"ප්‍රධානතනතුර අනුමැතිය\" (Pradhānathanthura Anumādhiya - Authorization Header), \"අනතුරුමැදි ප්‍රධානතනතුර\" (Anumādhi Pradhānathanthura - Authorization Header), or a more literal approach like \"අවසර ප්‍රධානතනතුර\" (Awashar Pradhānathanthura - Authorization Header). It's recommended to consult with a Sinhala technical translator."
+          "description": "The Sinhala translation 'අනුමැතිය හිඟස්සම' is nonsensical. 'හිඟස්සම' is not a technical term for 'header' and appears to be a hallucination or incorrect word choice. In a technical context, 'header' should be translated as 'ශීර්ෂකය' (sheershakaya).",
+          "suggestion": "අනු authorization ශීර්ෂකය"
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Glava avtorizacije' is technically correct, it's a rather literal and less natural translation. 'Authorization header' generally refers to the header itself, not a 'header of authorization'. A more idiomatic translation would be 'Avtorizacijska glava' or 'Naslov avtorizacije'.",
-          "suggestion": "Naslov avtorizacije"
+          "description": "The word 'Glava' means 'head' in a biological or physical sense. In a technical context (HTTP headers), the correct term is 'Gibavica' or more commonly 'Header'. 'Glava avtorizacije' sounds like a literal translation of a human head.",
+          "suggestion": "Header avtorizacije"
         }
       ],
       "approved_at": null
@@ -195,13 +195,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Заглавље за ауторизацију\" is technically correct, but less common and slightly less natural than alternatives. 'Authorization header' typically translates to something like 'Header za autorizaciju' or 'Autorizacioni header'.",
-          "suggestion": "Header za autorizaciju"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -228,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Tiêu đề ủy quyền\" is a literal translation, it's not the most natural or common way to refer to an 'Authorization header' in Vietnamese. It's overly formal and slightly awkward.",
-          "suggestion": "Chính quyền (Authorization) hoặc Tiêu đề xác thực (Authentication Header)"
+          "description": "In a technical/HTTP context, 'Authorization header' refers to the 'HTTP header' used for authentication. 'Tiêu đề' means 'title' or 'heading' in a general sense, whereas 'Header' in networking/web development is standardly translated as 'Header' or 'Thanh tiêu đề' (though 'Header' is preferred in IT). More importantly, 'ủy quyền' means 'authorization' in the sense of granting permission/delegation, whereas in technical authentication contexts, 'Authorization' is often kept as 'Authorization' or translated as 'Xác thực' (Authentication) depending on the specific protocol, but 'Tiêu đề ủy quyền' sounds like a document title rather than an HTTP header field.",
+          "suggestion": "Header Authorization"
         }
       ],
       "approved_at": null
@@ -237,11 +231,17 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"授权标头\" is understandable, it's not the most natural or precise translation of \"Authorization header.\" \"授权\" is correct for 'Authorization' but \"标头\" (biaotou) is a more literal translation of 'header' and sounds slightly technical and clunky in this context. A more common and natural translation would be \"授权头\".",
-          "suggestion": "授权头"
+          "description": "The word 'Koka' in Albanian means 'Head' (anatomical) or 'Top'. In a technical context regarding HTTP headers, 'Header' should be translated as 'Koka e autorizimit' is a literal but incorrect translation for a technical field; 'Header' in networking is typically translated as 'Header' or 'Koka e informacionit', but 'Koka' alone is highly unnatural and sounds like a human head. However, more critically, 'Koka e autorizimit' is a literal translation of 'Head of authorization' rather than the technical term for an HTTP header.",
+          "suggestion": "Headeri i autorizimit"
         }
       ],
       "approved_at": null

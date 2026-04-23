@@ -3,7 +3,7 @@
   "content": "Uploader",
   "content_en_sha1_hash": "d1c7310f3bc833ce522db3329fe0f4f539e9c27d",
   "created_at": "2025-05-19T21:30:49.434Z",
-  "updated_at": "2026-03-26T08:26:58.037Z",
+  "updated_at": "2026-04-10T08:21:04.319Z",
   "comment": {
     "text": "This translation key is used to display the \"Uploader\" label in a settings plugin dialog. It appears as part of a UI component that displays information about file uploads, likely on a button or similar interactive element.",
     "is_auto": true,
@@ -18,14 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 138,
+      "line_number": 130,
       "context": "}),\n image: theme.isBase ? CustomImg : CustomImgDark,\n handleOnClick: navigateToCustom,\n },\n {\n title: t(\"Common:Uploader\"),\n description: t(\"UploaderDescription\"),\n image: theme.isBase ? UploaderImg : UploaderImgDark,\n handleOnClick: navigateToUploader,\n },\n ];",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 583,
-      "context": "{\n id: \"portal-settings_catalog-javascript-sdk_uploader\",\n key: \"8-1-7\",\n icon: \"\",\n link: \"uploader\",\n tKey: \"Common:Uploader\",\n },\n ],\n },\n {\n id: \"portal-settings_catalog-plugin-sdk\",",
       "module": "/packages/client"
     }
   ],
@@ -42,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation \"تم التحميل بواسطة\" literally translates to \"Uploaded by\". While understandable, it's a more verbose translation of \"Uploader\". A more direct and concise translation would be preferable for UI elements.",
-          "suggestion": "قم بالرفع"
+          "description": "The English word 'Uploader' is a noun referring to the entity/person who uploads. The Arabic translation 'تم التحميل بواسطة' is a phrase meaning 'Uploaded by', which changes the grammatical function from a label/noun to a passive sentence fragment.",
+          "suggestion": "المُحمِّل"
         }
       ],
       "approved_at": null
@@ -60,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Качващо устройство\" (Kachvashto urustvo) literally translates to 'uploading device'. While technically related to an 'uploader', it's not the most natural or accurate translation in many contexts. 'Uploader' often refers to the person or software performing the upload.",
-          "suggestion": "Consider alternatives like \"Качващ\" (kachvash - uploading/uploader) or a more descriptive phrase depending on the specific context, such as \"Софтуер за качване\" (Software for uploading)."
+          "description": "The Bulgarian translation 'Качващо устройство' means 'Uploading device' (hardware), whereas the English 'Uploader' in this context refers to the person or entity performing the upload (the user/actor).",
+          "suggestion": "Качващ"
         }
       ],
       "approved_at": null
@@ -72,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech translation \"Nahrál/a\" is a verb (uploaded) and not a noun, which is what \"Uploader\" (a person or system uploading content) implies. While \"Nahrál/a\" *can* describe the act of uploading, it doesn't accurately represent the *role* of the uploader.",
-          "suggestion": "Consider using a noun like \"Nahrávač\" (uploader) or \"Osoba nahrávající\" (person uploading) depending on the specific context. Another option, if referring to the system, could be \"Nahrávací systém\"."
+          "description": "The English 'Uploader' is a noun referring to the person or entity that uploaded the file. The Czech 'Nahrál/a' is a verb (past tense, masculine/feminine) meaning 'Uploaded'.",
+          "suggestion": "Nahrávač"
         }
       ],
       "approved_at": null
@@ -81,31 +75,25 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation 'Hochgeladen von' translates to 'Uploaded by'. While not incorrect, it doesn't directly equate to 'Uploader'. A more direct translation for 'Uploader' might be 'Uploadender' (though less common) or 'Hochlader' (more colloquial). 'Hochgeladen von' implies the agent who uploaded something, not the tool or person doing the uploading.",
-          "suggestion": "Consider 'Hochlader' or 'Uploadender' as alternatives, depending on the desired level of formality and common usage."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation \"Πρόγραμμα μεταφόρτωσης\" translates to \"Uploading program\" which is a more descriptive phrase than the English term \"Uploader\". It doesn't convey the core meaning of a user or process that uploads files.",
-          "suggestion": "Consider a translation like \"Αναρτητής\" (Anartitis) which means 'uploader' or 'poster,' or \"Φορτωτής\" (Fortotis) which is closer in meaning to 'uploader' and implies the action."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "In a software/UI context, 'Uploader' refers to the person or entity that uploaded a file. 'Cargador' in Spanish typically refers to a physical charger (like for a battery) or a loader (mechanical). The correct term for a person/entity performing an upload is 'Subidor' or, more commonly in UI, 'Usuario que subió' or 'Autor de la carga'. However, in the context of a label for a component, 'Subidor' or 'Persona que carga' is preferred, but 'Cargador' is a semantic error as it implies a hardware device.",
+          "suggestion": "Subidor"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -120,7 +108,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Chargeur' can mean 'charger' (to upload), in the context of a user who uploads files, a more accurate translation would be 'Téléchargeur'. 'Chargeur' typically refers to a device that charges something, not a person performing the action of uploading.",
+          "description": "The term 'Chargeur' in French refers to a hardware charger (like a phone charger) or a loader/magazine. In the context of a file upload UI component, 'Uploader' refers to the person or system performing the upload, or the action/component itself. 'Chargeur' is a mistranslation for a software uploader.",
           "suggestion": "Téléchargeur"
         }
       ],
@@ -135,19 +123,19 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Caricatore' in Italian refers to a physical device (like a charger or a magazine for a firearm). In a software UI context for file uploads, 'Uploader' refers to the person or process performing the upload. 'Caricatore' is a literal, incorrect translation for this context.",
+          "suggestion": "Chi carica"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'アップロードした人' (Appuro-do shita hito) literally translates to 'the person who uploaded.' While not entirely wrong, it's a very literal and somewhat clunky translation for 'Uploader.' A more natural and concise translation would be something like 'アップロード担当' (Appuro-do tantou) or 'アップローダー' (Appuro-daa) which adopts the English term directly.",
-          "suggestion": "Consider 'アップロード担当' (Appuro-do tantou) or 'アップローダー' (Appuro-daa) for a more natural and concise translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -162,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຕົວໂຫລດອັບ\" is a transliteration of 'Uploader' rather than a true translation. While understandable, it lacks nuance and a more natural Lao equivalent would be preferred.",
-          "suggestion": "Consider alternatives such as \"ຜູ້ໂຫຼດຂໍ້ມູນ\" (phu lod khomun), meaning 'data uploader', or a more context-specific term depending on the function of the uploader."
+          "description": "The Lao translation 'ຕົວໂຫລດອັບ' (Tua loat up) literally translates to 'Upload tool' or 'Upload body/object', which is awkward and doesn't clearly represent the person or entity performing the upload (the Uploader) in a UI context. A more accurate term for a person/entity who uploads is 'ຜູ້ໂຫລດ' (Phu loat).",
+          "suggestion": "ຜູ້ໂຫລດ"
         }
       ],
       "approved_at": null
@@ -171,13 +159,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation \"Augšupielādētājs\" is a literal translation of 'Uploader' (one who uploads) and might not be the most natural or idiomatic term in Latvian.  It's technically correct, but less common and potentially clunky depending on the context.",
-          "suggestion": "Consider alternatives like 'ielādētājs' or a more context-specific term depending on the platform or application. A direct equivalent of 'uploader' in certain contexts might be 'izdevējs' (publisher) if referring to someone publishing content."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -195,7 +177,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "In a software/UI context, 'Uploader' refers to the person or system that uploads files. 'Carregador' in Portuguese typically refers to a physical charger (like for a phone) or a loader/carrier. For a user/entity that performs an upload, 'Uploaders' or 'Quem enviou' is more appropriate, but in UI labels for a person/role, 'Remetente' or 'Usuário que enviou' is used. However, specifically for the action/entity of uploading, 'Upload' is often used as a loanword or 'Enviador' is used. 'Carregador' is a semantic error in this technical context.",
+          "suggestion": "Upload"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -204,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Carregado\" does not accurately convey the meaning of \"Uploader.\" \"Carregado\" means \"Uploaded\" or \"Loaded.\" \"Uploader\" refers to the person or entity performing the uploading action.",
-          "suggestion": "Consider alternatives such as \"Enviador\", \"Responsável pelo envio\", or a more contextual translation depending on the application."
+          "description": "The English 'Uploader' refers to the person or entity that uploads (the actor), whereas 'Carregado' is the past participle meaning 'Uploaded' (the state of the file).",
+          "suggestion": "Uploadador"
         }
       ],
       "approved_at": null
@@ -219,13 +207,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Средство загрузки\" is a literal translation of \"Uploader,\" it's not the most natural or commonly used term in Russian for this function. It sounds somewhat technical and clunky. A more suitable translation would depend on the context, but options like \"Загрузчик\" or simply using the English word 'Uploader' (transliterated as \"Аплоудер\") are often preferred.",
-          "suggestion": "Consider \"Загрузчик\" or transliterated \"Аплоудер\" for a more natural translation. The best option depends on the specific context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -234,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'පුද්ගලයා' translates to 'person' in Sinhala. 'Uploader' refers to a person who uploads content, but 'පුද්ගලයා' is too generic. A more accurate translation would convey the action of uploading.",
-          "suggestion": "Consider 'ආප්ලෝඩර්' (adaptation of the English word) or 'බාගතන්නා' (one who downloads/uploads)."
+          "description": "The Sinhala translation 'පුද්ගලයා' means 'The Person', which is a generic noun. In the context of a file upload UI, 'Uploader' refers to the entity or tool performing the upload. A more accurate term would refer to the person who uploaded or the uploading process/tool.",
+          "suggestion": "උඩුගත කරන්නා"
         }
       ],
       "approved_at": null
@@ -255,25 +237,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Особа која је отпремила' translates literally to 'Person who uploaded'. While technically correct, it's overly verbose and not a natural equivalent of 'Uploader'. A more concise and appropriate translation would be 'Уплоадер' (transliteration) or potentially 'Надписник' (depending on context).",
-          "suggestion": "Consider 'Уплоадер' or 'Надписник'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation \"Osoba koja je otpremila\" is a literal translation (\"Person who uploaded\") but doesn't convey the concise meaning of \"Uploader.\" It's too verbose.",
-          "suggestion": "Consider a more concise and idiomatic translation, such as \"Članak,\" \"Kreirali,\" or something similar depending on the context of how \"Uploader\" is being used. A more accurate translation would require understanding the specific purpose of the term."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -288,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Ukrainian translation 'Хто вивантажив' translates to 'Who uploaded' or 'Who downloaded'. It does not accurately convey the meaning of 'Uploader' which refers to the role or system performing the uploading action. A more accurate translation would depend on the context (e.g., 'Завантажувач' for a tool, 'Опублікувальник' for a publisher).",
-          "suggestion": "Consider alternatives like 'Завантажувач' (uploader - tool), 'Опублікувальник' (publisher), or a contextual equivalent depending on the specific meaning of 'Uploader'."
+          "description": "The translation 'Хто вивантажив' (Who uploaded) is a full sentence/clause, whereas the English 'Uploader' is a noun/label. In a UI context for a settings plugin or a label, a noun is required.",
+          "suggestion": "Завантажувач"
         }
       ],
       "approved_at": null

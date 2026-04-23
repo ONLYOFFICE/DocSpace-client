@@ -2,6 +2,7 @@
   "CollaborationRoomEmptyTitle": "Bun venit în Sala de colaborare",
   "CollaboratorEmptyTitle": "Această sală este vidă.",
   "CreateAIAgent": "Creare un agent nou",
+  "CreateAIAgentDescription": "Începe să construiești primul tău {{aiAgent}}",
   "CreateDocument": "Crearea unui document nou",
   "CreateDocumentDescription": "Profitați de o gamă vastă de instrumente de procesare de text.",
   "CreateForm": "Crearea unui formular PDF nou",
@@ -16,7 +17,10 @@
   "CreateSpreadsheetDescription": "Efectuați calcule precise cu un efort minim.",
   "CustomRoomEmptyTitle": "Bun venit în Sala particularizată",
   "DefaultFolderDescription": "Plasați fișierele aici sau creați cele noi",
+  "EmptyAIAgentsAIDisabledDescription": "Această secțiune permite utilizatorilor să lucreze cu {{aiAgents}} — asistenți inteligenți pentru gestionarea documentelor și a altor sarcini.\nPentru a începe să îi utilizați, serviciul de funcții IA trebuie activat de administratorul {{productName}}.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Pentru a crea și utiliza {{aiAgents}}, conectează-ți portofelul și activează serviciul de funcții IA în setările {{productName}}. Odată ce este finalizat, vei putea lucra cu {{aiAgents}} și colabora cu echipa ta.",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "Conectați portofelul dvs și activați caracteristicile de IA",
+  "EmptyAIAgentsTitle": "Creează-ți {{aiAgent}}",
   "EmptyDescription": "Începeţi cu acţiuni rapide:",
   "EmptyFavoritesDescription": "Marcați fișiere și foldere cu stea încât acestea să fie ușor accesibile și la îndemână.",
   "EmptyFavoritesTitle": "Lista de favorite este goală",
@@ -57,5 +61,8 @@
   "UploadFromPortalTitle": "Încărcare de pe {{productName}}",
   "UploadPDFFormOptionDescription": "Selectați un formular PDF existent de pe {{productName}} și încărcați-l în sala.",
   "VirtualDataRoomEmptyTitle": "Bun venit în Sală virtuală de date",
-  "EmptyAIAgentsTitle": "Creează-ți {{aiAgent}}"
+  "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} nu sunt încă disponibile",
+  "EmptyAIAgentsAIEnabledUserDescription": "După ce echipa dumneavoastră vă invită să colaborați, {{aiAgents}} va apărea aici, pregătit să vă asiste cu documente, managementul cunoștințelor și sarcinile de zi cu zi.",
+  "EmptyAIAgentsDescription": "Configurați un asistent personalizat pentru echipa dumneavoastră adăugând o bază de cunoștințe, selectând modelul ideal și conectând un {{mcpServer}}. Invitați colegii să colaboreze și să maximizeze capacitățile de chat ale agentului.",
+  "EmptyAIAgentsUserTitle": "Nu există încă {{aiAgents}} disponibile"
 }

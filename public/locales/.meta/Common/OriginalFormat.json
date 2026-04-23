@@ -3,7 +3,7 @@
   "content": "Original format",
   "content_en_sha1_hash": "32d4ceda713d1116543fff259f4533b8366ff84f",
   "created_at": "2025-05-19T21:30:47.157Z",
-  "updated_at": "2026-03-31T15:18:46.659Z",
+  "updated_at": "2026-04-10T08:21:04.377Z",
   "comment": {
     "text": "The translation key \"OriginalFormat\" is used to display the original format when a file has a custom format or is an image. It appears in the download dialog box and will be displayed if the file does not have a specified single document format.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2775,
+      "line_number": 2774,
       "context": "if (downloadOption && downloadAsOption) {\n const originalDownloadOption = {\n ...downloadOption,\n key: \"download-original\",\n label: t(\"Common:OriginalFormat\"),\n };\n \n newOptions = [\n ...newOptions.filter((option) => option.key !== \"download\"),\n originalDownloadOption,",
       "module": "/packages/client"
     },
@@ -279,13 +279,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Оригинални формат' translates to 'Original formats' in English, not 'Original format'. It's in plural form.",
-          "suggestion": "Оригинални формат (singular)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -300,8 +294,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Orijinal tür' is a literal translation, 'format' often implies a structure or arrangement. A more accurate translation would capture this nuance.",
-          "suggestion": "Orijinal biçim"
+          "description": "The word 'tür' means 'type' or 'kind', whereas 'format' in a technical context (file format) should be translated as 'format'.",
+          "suggestion": "Orijinal format"
         }
       ],
       "approved_at": null
@@ -319,6 +313,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

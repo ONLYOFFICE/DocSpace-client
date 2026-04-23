@@ -3,7 +3,7 @@
   "content": "The new file will replace the existing one as a new version.",
   "content_en_sha1_hash": "0d9f5c9f81c7babac9ce4dd02769692be95654fb",
   "created_at": "2025-05-19T21:30:47.186Z",
-  "updated_at": "2026-02-19T13:36:32.370Z",
+  "updated_at": "2026-04-08T03:22:40.387Z",
   "comment": {
     "text": "The translation key \"OverwriteDescription\" is used to display a message when a user chooses to overwrite an existing file. This message informs users that their new file will replace the current one as a new version. It appears in dialog boxes, such as the ConflictResolveDialog, where users can select action options.",
     "is_auto": true,
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation 'Fayl, versiyası ilə eyni adı olan fayla əlavə olunacaq' does not accurately reflect the meaning of 'The new file will replace the existing one as a new version.' It translates to something like 'The file will be added to a file with the same name as its version.' This implies addition, not replacement.",
-          "suggestion": "Fayl mövcud olanı əvəz edərək yeni versiya kimi qeydə alınacaq."
+          "description": "The translation states the file will be 'added' (əlavə olunacaq) to a file with the same name, whereas the English source explicitly states it will 'replace' (replace/overwrite) the existing one as a new version.",
+          "suggestion": "Yeni fayl mövcud faylı yeni versiya kimi əvəz edəcək."
         }
       ],
       "approved_at": null
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Bulgarian translation 'Файлът ще бъде добавен към файла със същото име като версия.' does not accurately convey the meaning of 'The new file will replace the existing one as a new version.' It implies appending instead of overwriting.",
-          "suggestion": "Файлът ще замени съществуващия файл като нова версия."
+          "description": "The translation states the file will be 'added' (добавен) to the existing file, whereas the English source states it will 'replace' (replace) the existing one. This changes the core action from replacement to appending/merging.",
+          "suggestion": "Новият файл ще замени съществуващия като нова версия."
         }
       ],
       "approved_at": null
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech translation 'Soubor bude přidán do souboru se stejným názvem jako verze' does not accurately reflect the meaning of the English content 'The new file will replace the existing one as a new version.' It implies the file will be appended, not replaced. The English content indicates a replacement with a new version.",
-          "suggestion": "Soubor nahradí stávající verzi."
+          "description": "The Czech translation states that the file will be 'added to a file with the same name as a version', which implies a merge or an addition, whereas the English text explicitly states the new file will 'replace' the existing one.",
+          "suggestion": "Nový soubor nahradí stávající soubor jako novou verzi."
         }
       ],
       "approved_at": null
@@ -75,7 +75,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The German translation implies the existing file is being replaced by a new version, whereas the English text specifies that the *new file* is what will replace the existing one as a new version. The German version loses the subject 'The new file'.",
+          "suggestion": "Die neue Datei wird die vorhandene Datei als neue Version ersetzen."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -96,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Finnish translation 'Tiedosto lisätään tiedostoon samalla nimellä versiona' doesn't accurately convey the meaning of 'The new file will replace the existing one as a new version.' It implies the file is being *added* to another file, rather than replacing it. The 'overwrite' aspect is missing.",
-          "suggestion": "A more accurate translation would be something like 'Uusi tiedosto korvaa vanhan tiedoston uutena versiona' (The new file replaces the old file as a new version)."
+          "description": "The translation implies the file is being 'added to' (lisätään tiedostoon) rather than 'replacing' (korvaa) the existing one, which changes the technical meaning of an overwrite action.",
+          "suggestion": "Uusi tiedosto korvaa olemassa olevan tiedoston uutena versiona."
         }
       ],
       "approved_at": null
@@ -117,13 +123,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Il nuovo file sostituisce quello già esistente come una versione nuova' is a literal translation and sounds unnatural in Italian. It doesn't convey the meaning of 'as a new version' effectively. The 'come una versione nuova' is redundant and awkward.",
-          "suggestion": "Il nuovo file sovrascrive quello esistente, creando una nuova versione."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Japanese translation 'このファイルは、同名のファイルにバージョンが追加されます。' does not accurately convey the meaning of 'The new file will replace the existing one as a new version.'  It translates to 'This file will add a version to a file with the same name.' which implies an addition, not a replacement.",
-          "suggestion": "Consider a translation like: 'このファイルは、既存のファイルを上書きして新しいバージョンになります。' (Kono fairu wa, kizai no fairu o overwraite, atarashii bājon ni narimasu.) - 'This file will overwrite the existing file, becoming a new version.'"
+          "description": "The Japanese translation implies that a version is being added to a file with the same name, whereas the English text explicitly states that the new file will 'replace' the existing one as a new version. The current Japanese phrasing is passive and slightly ambiguous regarding the replacement action.",
+          "suggestion": "新しいファイルは、既存のファイルの新しいバージョンとして上書きされます。"
         }
       ],
       "approved_at": null
@@ -144,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation \"파일이 같은 이름의 파일에 추가됩니다.\" translates to \"The file will be added to a file with the same name.\" This does not accurately convey the meaning of \"The new file will replace the existing one as a new version.\" It implies appending, not overwriting.",
-          "suggestion": "파일이 기존 파일을 덮어쓰고 새로운 버전으로 대체됩니다."
+          "description": "The Korean translation says 'The file will be added to a file with the same name', which implies merging or appending, whereas the English text explicitly states the new file will 'replace' the existing one as a 'new version'.",
+          "suggestion": "새 파일이 기존 파일을 새 버전으로 대체합니다."
         }
       ],
       "approved_at": null
@@ -155,9 +155,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ໄຟລ໌໌ທີ່ມີຢູ່ແລ້ວຈະຖືກແທນດ້ວຍໄຟລ໌ໃໝ່' translates to 'The existing file will be replaced by a new file.' While not entirely wrong, it doesn't capture the nuance of 'as a new version.' It doesn't convey the idea of the new file *becoming* the new version.",
-          "suggestion": "ໄຟລ໌໌ໃໝ່ຈະປ່ຽນໄຟລ໌ທີ່ມີຢູ່ແລ້ວ ແລະກາຍເປັນສະບັບໃໝ່."
+          "type": "missing_content",
+          "description": "The translation omits the specific detail that the file is being replaced 'as a new version', which is a key piece of information in the context of version control/conflict resolution.",
+          "suggestion": "ໄຟລ໌ໃໝ່ຈະຖືກນຳໃຊ້ແທນທີ່ໄຟລ໌ທີ່ມີຢູ່ແລ້ວ ໃນຖານະເປັນເວີຊັນໃໝ່."
         }
       ],
       "approved_at": null
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation 'Fails tiks pievienots failam ar tādu pašu nosaukumu kā versijai' does not accurately reflect the meaning of 'The new file will replace the existing one as a new version.' It translates to something like 'A file will be added to the file with the same name as a version.' This suggests an addition, not a replacement.",
-          "suggestion": "A more accurate translation could be something like: 'Jauns fails pārrakstīs esošo failu, kļūstot par jaunu versiju.' or 'Virsraksta fails nomainīs esošo failu un kļūs par jaunu versiju.'"
+          "description": "The Latvian translation says the file will be 'added' (pievienots) as a version, whereas the English text explicitly states the new file will 'replace' (replace) the existing one. This changes the core logic of the action from 'overwrite/replace' to 'append/add'.",
+          "suggestion": "Jaunais fails aizstāses ar esošo kā jauna versija."
         }
       ],
       "approved_at": null
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Dutch translation 'Het bestand zal worden toegevoegd aan het bestand met dezelfde naam als een versie' doesn't accurately reflect the English meaning. It implies the file is being *added* to an existing file, rather than *replacing* it.",
-          "suggestion": "Het bestand overschrijft het bestaande bestand als een nieuwe versie."
+          "description": "The Dutch translation states the file will be 'added to the file with the same name' (toegevoegd aan), whereas the English source states it will 'replace' (vervangen) the existing one.",
+          "suggestion": "Het nieuwe bestand zal het bestaande bestand vervangen als een nieuwe versie."
         }
       ],
       "approved_at": null
@@ -189,13 +189,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Nowy plik zastąpi istniejący jako jego nowa wersja' is a literal translation and doesn't flow naturally in Polish. The phrase 'jako jego nowa wersja' sounds awkward.",
-          "suggestion": "Nowy plik zastąpi istniejący i stanie się jego nową wersją."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -210,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Portuguese translation \"O arquivo será adicionado ao arquivo com o mesmo nome como uma versão.\" doesn't accurately convey the meaning of 'The new file will replace the existing one as a new version.' It implies the file will be appended rather than replacing.",
-          "suggestion": "O novo arquivo substituirá o arquivo existente, criando uma nova versão."
+          "description": "The translation states the file will be 'added' (adicionado), whereas the English source explicitly states it will 'replace' (replace) the existing one. This changes the fundamental meaning of the overwrite action.",
+          "suggestion": "O novo arquivo substituirá o existente como uma nova versão."
         }
       ],
       "approved_at": null
@@ -222,13 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Fișierul va fi ajutat ca o versiune a fișierului cu același nume' does not accurately convey the meaning of 'The new file will replace the existing one as a new version.' The verb 'ajutat' (helped) is used incorrectly. It implies assistance rather than replacement.",
-          "suggestion": "Fișierul va înlocui versiunea existentă ca o versiune nouă."
-        },
-        {
-          "type": "grammar",
-          "description": "The construction 'va fi ajutat' is grammatically awkward and doesn't align with the intended meaning.",
-          "suggestion": "Use a more direct verb like 'va înlocui' (will replace)."
+          "description": "The translation is nonsensical and conveys a completely different meaning. It translates roughly to 'The file will be helped as a version of the file with the same name', which does not communicate that the new file will replace the existing one.",
+          "suggestion": "Noul fișier va înlocui fișierul existent ca o nouă versiune."
         }
       ],
       "approved_at": null
@@ -236,30 +225,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Новый файл заменит существующий файл как новая версия' is overly literal and slightly awkward. The phrase 'как новая версия' (as a new version) doesn't quite convey the intended meaning. It's not the most natural way to express the concept of replacing a file with a newer version.",
-          "suggestion": "Новый файл заменит существующий."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'නව ගොනුව පවතින ගොනුවෙහි නව අනුවාදයක් ලෙස ප්‍රතිස්ථාපනය කෙරෙනු ඇත' is overly formal and doesn't quite capture the simple and clear meaning of 'The new file will replace the existing one as a new version.'  'ප්‍රතිස්ථාපනය කෙරෙනු ඇත' is a very formal way to say 'will replace'.",
-          "suggestion": "නව ගොනුව පැවති ගොනුවට අනුග්‍රහණය කරනු ඇත."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'අනුග්‍රහණය' (anugrahanya) in the suggested correction is a bit awkward. A more natural phrasing would better convey the meaning.",
-          "suggestion": "නව ගොනුව පැවති ගොනුව ආදේශ කරනු ඇත."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -268,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation 'Súbor bude pridaný do súboru s rovnakým názvom ako verzia' does not accurately convey the meaning of 'The new file will replace the existing one as a new version.' It implies the file is being appended or added as a version, not replaced.",
-          "suggestion": "Súbor prepíše existujúci súbor a vytvorí novú verziu."
+          "description": "The translation changes the meaning from 'replacing the existing file' to 'adding to a file with the same name', which is a different action and potentially confusing in a conflict resolution context.",
+          "suggestion": "Nový súbor nahradí existujúci súbor ako novú verziu."
         }
       ],
       "approved_at": null
@@ -280,8 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Datoteka bo dodana datoteki z istim imenom kot različica' does not accurately convey the meaning of 'The new file will replace the existing one as a new version.' It implies the file is being *added* as a version, not *replacing* the existing one.",
-          "suggestion": "Datoteka bo nadomestila obstoječo datoteko kot nova različica."
+          "description": "The translation states that the file will be 'added' (dodana) to the existing one, whereas the English source explicitly states it will 'replace' (replace) the existing one. This changes the core meaning of the overwrite action.",
+          "suggestion": "Nova datoteka bo zamenjala obstoječo kot nova različica."
         }
       ],
       "approved_at": null
@@ -289,13 +261,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Нова датотека ће заменити постојећу као нова верзија' is a literal translation and doesn't quite convey the same nuance as the English 'The new file will replace the existing one as a new version.' It sounds a little clunky in Serbian. A more natural phrasing would be something along the lines of 'Нова датотека ће заменити стару, представљајући новију верзију.'",
-          "suggestion": "Нова датотека ће заменити стару, представљајући новију верзију."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -310,13 +276,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"Dosya, aynı ada sahip dosyaya bir versiyon olarak eklenecektir\" doesn't accurately convey the meaning of \"The new file will replace the existing one as a new version.\" It suggests the file is being *added* as a version, not replacing the existing one.  It lacks the sense of overwriting.",
-          "suggestion": "Dosya mevcut dosyayı yeni bir versiyon olarak üzerine yazacaktır."
-        },
-        {
-          "type": "grammar",
-          "description": "The Turkish translation uses passive voice (\"Dosya...eklenecektir\"). While acceptable, a more active voice would improve clarity and naturalness, aligning better with the directness of the English.",
-          "suggestion": "Dosya mevcut dosyayı yeni bir versiyon olarak değiştirecektir."
+          "description": "The Turkish translation says the file will be 'added' (eklenecektir) as a version, whereas the English text explicitly states it will 'replace' (replace) the existing one. This changes the core meaning of the overwrite action.",
+          "suggestion": "Yeni dosya, mevcut olanın yerine yeni bir versiyon olarak geçecektir."
         }
       ],
       "approved_at": null
@@ -327,8 +288,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Ukrainian translation \"Файл буде додано до файлу з таким же іменем, як версія.\" does not accurately reflect the meaning of the English content \"The new file will replace the existing one as a new version.\"  It translates to \"The file will be added to a file with the same name as a version.\" implying an addition rather than a replacement.",
-          "suggestion": "Файл замінить існуючий файл, ставши новою версією."
+          "description": "The translation incorrectly states that the file will be 'added to a file with the same name' (implying a merge or append), whereas the English source clearly states the new file will 'replace' the existing one as a new version.",
+          "suggestion": "Новий файл замінить існуючий як нову версію."
         }
       ],
       "approved_at": null
@@ -339,8 +300,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Vietnamese translation \"Tệp sẽ được thêm vào tệp có cùng tên như một phiên bản\" does not accurately reflect the meaning of 'The new file will replace the existing one as a new version.' It suggests appending, not replacing. The word 'thêm vào' implies addition rather than overwriting.",
-          "suggestion": "Tệp mới sẽ thay thế tệp hiện có, trở thành phiên bản mới."
+          "description": "The translation implies the file will be 'added to' (thêm vào) the existing file, whereas the English source states it will 'replace' (thay thế) the existing one. This changes the core meaning of the overwrite action.",
+          "suggestion": "Tệp mới sẽ thay thế tệp hiện có dưới dạng một phiên bản mới."
         }
       ],
       "approved_at": null
@@ -351,15 +312,16 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"文件与同名文件将作为不同版本存在\" doesn't accurately convey the meaning of \"The new file will replace the existing one as a new version.\" It implies the files will co-exist as different versions, rather than one replacing the other.",
-          "suggestion": "文件将覆盖现有文件，成为新版本。"
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure \"文件与同名文件将作为不同版本存在\" is awkward in Chinese. While grammatically correct, it's not the most natural way to express the concept.",
-          "suggestion": "文件将覆盖现有文件，成为新版本。"
+          "description": "The translation conveys the opposite meaning. The English text states the file WILL replace the existing one, whereas the Chinese text states they will exist as different versions (implying no replacement/overwrite occurs).",
+          "suggestion": "新文件将作为新版本替换现有文件。"
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

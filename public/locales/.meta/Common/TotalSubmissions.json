@@ -3,7 +3,7 @@
   "content": "Total submissions",
   "content_en_sha1_hash": "5b3201416a97db9ccabb5284544ae7cca2973e50",
   "created_at": "2026-03-31T15:18:24.699Z",
-  "updated_at": "2026-03-31T15:18:24.699Z",
+  "updated_at": "2026-04-07T21:30:17.170Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -152,7 +152,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak word 'preditých' is a misspelling or incorrect form of 'predaných' (sold) or 'predaných' (submitted/sent is usually 'odoslaných'). 'Preditých' is not a standard Slovak word in this context. Furthermore, 'submissions' in a software context usually refers to 'odoslania' or 'podania'.",
+          "suggestion": "Celkový počet odoslaní"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -176,7 +182,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The translation is an incomplete phrase. 'Ukupan broj podnetih' translates to 'Total number of submitted', leaving the noun (e.g., 'submissions' or 'applications') missing.",
+          "suggestion": "Ukupan broj podnesenih prijava"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

@@ -3,7 +3,7 @@
   "content": "Access",
   "content_en_sha1_hash": "2f81a22de0af5e9eab19326e19693f86ce612518",
   "created_at": "2025-05-19T21:30:53.771Z",
-  "updated_at": "2025-08-12T19:46:26.143Z",
+  "updated_at": "2026-04-07T19:35:05.159Z",
   "comment": {
     "text": "This translation key is used for a UI element displaying the text \"Access\" in a portal settings category. It appears as part of an InfoDialog component and is styled to be displayed prominently. Translators should provide a localized version of this word.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'Giriş' translates to 'entry' or 'entrance', not 'access'. 'Access' in the context of OAuth refers to authorization or permission to use a resource.",
-          "suggestion": "Consider using 'İstifadə' or 'Rəsmiyyət' which better reflects the meaning of 'access' in an OAuth context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -51,13 +45,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech translation 'Přístup na' is not an accurate translation of 'Access' in the context of OAuth. It implies access *to* something, while 'Access' in this context refers to the access itself (e.g., an access token).",
-          "suggestion": "Consider 'Přístup' or 'Oprávnění' which are more general and contextually appropriate.  A more precise translation would require understanding the broader OAuth context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -93,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation \"Մուտք\" translates to 'Entrance' or 'Entry', not 'Access'. While related, it doesn't convey the specific meaning of 'Access' in an OAuth context, which refers to permissions and authorization.",
-          "suggestion": "Consider alternatives like \"Մուտքի իրավունք\" (Access Right), \"Առանձնացում\" (Authorization), or \"Համատեղում\" (Permission) depending on the precise context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -189,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Приступ\" does not accurately convey the meaning of \"Access\" in the context of OAuth. \"Access\" refers to authorization or the ability to use a resource. \"Приступ\" primarily means 'approach' or 'access' in the physical sense, not digital authorization.",
-          "suggestion": "A more appropriate translation would be \"Приступ\" (with correct usage of the word in the specific OAuth context - which can vary depending on nuance needed) or potentially something like \"Право Приступа\" (Right of Access), or a phrase more accurately reflecting the authorization aspect."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -225,13 +201,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"访问\" (fǎngwèn) can sometimes be used to mean 'access', it's a broader term. In the context of OAuth, a more precise translation might be '授权访问' (shòuquán fǎngwèn) or simply '授权' (shòuquán), depending on the specific usage and surrounding text. \"访问\" alone lacks the nuance of granting permission.",
-          "suggestion": "Consider '授权访问' (shòuquán fǎngwèn) or '授权' (shòuquán) for greater accuracy."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

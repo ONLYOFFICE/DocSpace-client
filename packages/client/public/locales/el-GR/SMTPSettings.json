@@ -2,7 +2,6 @@
   "AuthViaNTLM": "Αυθεντικοποίηση μέσω NTLM",
   "EnableSSL": "Ενεργοποίηση SSL",
   "EnterDomain": "Εισάγετε τομέα",
-  "EnterEmail": "Εισάγετε email",
   "EnterLogin": "Εισάγετε σύνδεση",
   "EnterPort": "Εισάγετε θύρα",
   "Host": "Κεντρικός υπολογιστής",

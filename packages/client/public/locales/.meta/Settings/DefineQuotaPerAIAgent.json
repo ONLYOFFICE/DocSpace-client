@@ -3,7 +3,7 @@
   "content": "Define quota per {{aiAgent}}",
   "content_en_sha1_hash": "67bd11cee455fc7d91c09f4826591aa3fd7fa108",
   "created_at": "2025-12-19T13:03:35.396Z",
-  "updated_at": "2025-12-22T10:10:15.552Z",
+  "updated_at": "2026-04-09T03:32:49.853Z",
   "comment": {
     "text": "This key provides the label for a button or toggle used to define a quota specifically for an AI agent. It appears in the Portal Settings, within the storage management section, and refers to the AI agent, which is a common term for an automated assistant. Translators should ensure the phrasing accurately conveys the action of setting a limit for an AI agent's resource usage.",
     "is_auto": true,
@@ -81,7 +81,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'քուտան' is a transliteration of the English word 'quota' rather than using the proper Armenian term 'ցանկացած քվոտա' or 'սահմանաչափ'. While understandable, it is a phonetic error in a professional UI.",
+          "suggestion": "Սահմանել սահմանաչափ յուրաքանչյուր {{aiAgent}} համար"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -111,7 +117,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The preposition 'par' in Latvian means 'about' or 'for' in the sense of 'concerning', whereas the English 'per' implies a distribution or allocation (e.g., 'for each'). 'Par' makes the sentence sound like 'Define quota about {{aiAgent}}'.",
+          "suggestion": "Definējiet kvotu katram {{aiAgent}}"
+        }
+      ],
       "approved_at": null
     },
     "nl": {

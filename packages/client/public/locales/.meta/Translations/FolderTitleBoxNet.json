@@ -3,7 +3,7 @@
   "content": "Box directory",
   "content_en_sha1_hash": "7056ec1377ffca6bb76af1d08bec304bee885375",
   "created_at": "2025-05-19T21:30:49.970Z",
-  "updated_at": "2025-10-27T16:14:33.350Z",
+  "updated_at": "2026-04-08T21:20:00.795Z",
   "comment": {
     "text": "This translation key is used to display the label \"Box directory\" in various UI elements, likely in cloud storage or file management contexts, such as a cloud storage provider's directory view.",
     "is_auto": true,
@@ -45,13 +45,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Adresář schránky\" doesn't accurately convey the meaning of \"Box directory\". \"Adresář\" means directory, but \"schránky\" translates to \"of the box\" which is not idiomatic or accurate in this context. It's also not clear why it's using genitive case ('schránky').",
-          "suggestion": "A more accurate translation would be \"Boxový adresář\" or simply \"Adresář boxů\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -63,13 +57,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Κατάλογος Box\" is understandable, a more natural and accurate translation of \"Box directory\" in Greek would be \"Φάκελος Box\" or \"Λίστα Box\". \"Κατάλογος\" typically refers to a list of items, not a directory.",
-          "suggestion": "Φάκελος Box"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -87,13 +75,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Répertoire de Box\" is technically correct, but \"Dossier de Box\" would be more natural and common in French. \"Répertoire\" is a bit formal for this context.",
-          "suggestion": "Dossier de Box"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -102,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation 'Տուփի գրացուցակ' literally translates to 'box list' which isn't the most natural or accurate translation for 'Box directory'. 'Directory' implies a hierarchical structure of files and folders.",
-          "suggestion": "Consider 'Տուփի ուղենարցույց' (Tupi ughēnartsuyts) which translates to 'Box guide/directory' or 'Ֆայլերի տուփ' (Failleri tup) which translates to 'File box' depending on the context."
+          "description": "The Armenian word 'գրացուցակ' means 'list' or 'index', whereas 'directory' in a file management context refers to a 'folder' or 'directory' (տնօրենություն/թղթապանակ). 'Տուփի գրացուցակ' translates to 'Box list'.",
+          "suggestion": "Տուփի թղթապանակ"
         }
       ],
       "approved_at": null
@@ -111,37 +93,19 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Cartella di Box\" is understandable, a more natural and idiomatic Italian translation for \"Box directory\" would be \"Directory di Box\" or \"Cartelle di Box\". \"Cartella di Box\" sounds slightly awkward.",
-          "suggestion": "Directory di Box"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Japanese translation uses a space between \"ボックス\" and \"ディレクトリ\". While not strictly incorrect, it's more common and natural to use a hyphen or no space for compound nouns like this in Japanese UI elements.  Using a hyphen would improve readability and consistency with common UI conventions.",
-          "suggestion": "ボックス-ディレクトリ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Korean translation includes a space before the Korean character '디렉토리'.",
-          "suggestion": "Box 디렉토리 -> Box디렉토리"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -150,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ກ່ອງບັນຊີ\" (kong bansee) literally translates to 'box account' or 'box record'. It doesn't accurately convey the meaning of 'Box directory', which refers to a folder or directory containing Box files. A more accurate translation would convey the idea of a folder containing files.",
-          "suggestion": "Consider \"ໂຟນເອກະສານຂອງ Box\" (fon ekasan khong Box) which translates to 'Box document folder' or \"ໄດເລກະທໍරිຂອງ Box\" (direkthori khong Box) which incorporates the loanword 'directory'."
+          "description": "The Lao translation 'ກ່ອງບັນຊີ' means 'Account box' or 'Account box/folder' (often used in banking/accounting contexts), whereas 'Box directory' in this context refers to a file directory/folder structure for the service 'Box'.",
+          "suggestion": "ໂຟນເດີ Box"
         }
       ],
       "approved_at": null
@@ -159,13 +123,25 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Kastes direktorijs' translates to 'Box (container/crate) directory'. In the context of cloud storage (Box.com), 'Box' is a proper noun referring to the service provider, not a physical container.",
+          "suggestion": "Box direktorijs"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is identical to the English text, meaning it failed to translate the term into Dutch. 'Box directory' should be translated to Dutch.",
+          "suggestion": "Box-map"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -177,13 +153,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Diretório da Caixa\" is technically correct but doesn't convey the same naturalness as \"Pasta da Caixa\". 'Diretório' is a more formal term and 'Pasta' is more commonly used for a folder or directory in this context.",
-          "suggestion": "Pasta da Caixa"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -195,13 +165,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'Director Box' is not an accurate translation of 'Box directory'. It's a literal translation that doesn't convey the meaning of a folder or directory within a Box account.",
-          "suggestion": "Dosar Box"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -213,25 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'බොක්ස් නාමාවලිය' directly translates to 'Box list'. While understandable, 'directory' implies a hierarchical structure, which 'list' does not necessarily convey.  'නාමාවලිය' is correct for 'list', but the core meaning isn't perfectly captured.",
-          "suggestion": "බොක්ස් ෆෝල්ඩර් (Box Folder) or බොක්ස් ෆයිල්dirname (Box File Name) would be a closer translation, incorporating the English word 'folder' to retain clarity, as direct translations can be ambiguous."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Priečinok Box' is a literal translation but doesn't fully capture the meaning of \"Box directory\". It implies a directory *is* Box, rather than a directory *containing* Box files or being associated with Box. A more natural translation might be something along the lines of 'Box priečinok' or 'Zložka Box'.",
-          "suggestion": "Consider 'Box priečinok' or 'Zložka Box' for a more natural-sounding translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -243,31 +195,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Box директоријум\" is a literal translation of 'Box directory'. While understandable, it's not the most natural or commonly used phrasing in Serbian. 'Box' is often translated as 'Кутија' (kutija) or remains as 'Box' depending on the context. 'Directory' is often rendered as 'фасцикла' (fasikla) or 'подаци' (podaci).  A more natural translation might depend on the specific context of where this title is being used.",
-          "suggestion": "Consider alternatives like 'Кутија фасцикла' or 'Box фасцикла' depending on the specific context. If 'Box' must remain 'Box', the best option might be 'Box директоријум' if the original intention was to be as close to the original as possible, although even then, 'Box фасцикла' is preferable."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'direktorijum' is in the instrumental case (meaning 'with/by means of a directory'), whereas the English 'Box directory' is a noun phrase in the nominative case. It should be 'Box direktorijum' (if Box is a name) or 'Direktorijum Box-a'. However, the most critical error is the grammatical case mismatch for a UI label.",
+          "suggestion": "Box direktorijum"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Kutu' translates to 'Box', 'dizini' is a more formal term for 'directory' than commonly used in user interfaces. A more natural and user-friendly translation would be 'Klasör' or 'Klasörü'.",
-          "suggestion": "Klasör"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -288,10 +234,16 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"框的目录\" is not an accurate translation of \"Box directory\". \"框\" (kuàng) generally refers to a frame or box, but in this context, 'Box' refers to a cloud storage service (Box.com). A more appropriate translation would reflect this.",
-          "suggestion": "云盒目录"
+          "description": "The translation '框的目录' literally means 'directory of the box/frame' (as in a geometric shape or a UI container), whereas in the context of cloud storage (Box, Dropbox), 'Box' is a proper noun referring to the service or the storage container. The current translation treats 'Box' as a common noun.",
+          "suggestion": "Box 目录"
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

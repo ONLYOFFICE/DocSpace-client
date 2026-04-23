@@ -3,7 +3,7 @@
   "content": "View your personal data",
   "content_en_sha1_hash": "0db0ed34f072a40f813c6ae1a47728048dd3a1e9",
   "created_at": "2025-05-19T21:30:47.028Z",
-  "updated_at": "2025-09-07T07:53:15.531Z",
+  "updated_at": "2026-04-08T03:44:11.957Z",
   "comment": {
     "text": "The translation key \"OAuthOpenidOpenidDescription\" is used to display a user-friendly message for viewing their personal data in an OAuth/OpenID context. It appears on a dialog or settings page related to profile management, where users can view and manage their identity information.",
     "is_auto": true,
@@ -125,9 +125,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'Twoje dane osobowe' is a literal translation of 'your personal data' but doesn't quite convey the intended meaning of 'View your personal data'. It translates to 'Your personal data' which lacks the 'View' aspect of the original.",
-          "suggestion": "Przejrzyj swoje dane osobowe"
+          "type": "missing_content",
+          "description": "The English text is an imperative verb phrase ('View your personal data'), whereas the Polish translation is just a noun phrase ('Your personal data'). The action/verb 'View' is missing.",
+          "suggestion": "Zobacz swoje dane osobowe"
         }
       ],
       "approved_at": null
@@ -171,19 +171,19 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The verb 'Poglej' means 'Look at' or 'Watch' (as in watching a movie), whereas 'View' in this context means 'To see/access information'. The correct term for viewing data/information is 'Preglej' or 'Oglej'.",
+          "suggestion": "Preglej svoje osebne podatke"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Прикажи своје личне податке' is a literal translation of 'View your personal data'. While understandable, a more natural and user-friendly phrasing in Serbian would be 'Погледајте своје личне податке' or 'Прегледајте своје личне податке'.",
-          "suggestion": "Погледајте своје личне податке"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -211,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

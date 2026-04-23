@@ -2,7 +2,6 @@
   "AuthViaNTLM": "Authentification via NTLM",
   "EnableSSL": "Activer le SSL",
   "EnterDomain": "Entrez le domaine",
-  "EnterEmail": "Saisir l'adresse e-mail",
   "EnterLogin": "Saisir le login",
   "EnterPort": "Saisir le port",
   "Host": "Hôte",

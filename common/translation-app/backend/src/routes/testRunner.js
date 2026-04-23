@@ -71,14 +71,25 @@ async function testRunnerRoutes(fastify) {
       console.log(`Tests directory: ${testsDir}`);
 
       // Execute command as a promise
-      const executeCommand = (command, args, workDir) => {
+      const executeCommand = (command, args, workDir, extraEnv = {}) => {
         return new Promise((resolve, reject) => {
           console.log(`Executing in ${workDir}: ${command} ${args.join(" ")}`);
+
+          // Ensure node_modules/.bin is in PATH so locally-installed binaries
+          // are found on all platforms including Windows.
+          const binPath = path.join(workDir, "node_modules", ".bin");
+          const pathSep = process.platform === "win32" ? ";" : ":";
+          const env = {
+            ...process.env,
+            PATH: `${binPath}${pathSep}${process.env.PATH || ""}`,
+            ...extraEnv,
+          };
 
           const proc = spawn(command, args, {
             cwd: workDir,
             shell: true,
             stdio: "pipe",
+            env,
           });
 
           let stdout = "";
@@ -111,17 +122,13 @@ async function testRunnerRoutes(fastify) {
       };
 
       try {
-        // // First ensure npm dependencies are installed
-        // console.log("Installing test dependencies...");
-        // const installResult = await executeCommand(
-        //   "npm",
-        //   ["install"],
-        //   testsDir
-        // );
-        // console.log(
-        //   "Install completed",
-        //   installResult ? "successfully" : "with issues"
-        // );
+        // Install dependencies if node_modules is missing
+        const vitestPkgPath = path.join(testsDir, "node_modules", "vitest", "package.json");
+        if (!fs.existsSync(vitestPkgPath)) {
+          console.log("Installing test dependencies...");
+          await executeCommand("npm", ["install"], testsDir);
+          console.log("Install completed");
+        }
 
         let testResult;
         let testSuccess = true;
@@ -129,12 +136,27 @@ async function testRunnerRoutes(fastify) {
         let testStderr = "";
 
         try {
-          // Then run the test command
-          console.log(`Executing test command: ${testCommand}`);
+          // Run vitest directly instead of via npm run → cross-env → cross-spawn,
+          // which fails on Windows because cross-spawn can't find vitest.cmd.
+          // Set the env var directly and use vitest.cmd on Windows.
+          const envVarMap = {
+            "skip-base-languages": { SKIP_BASE_LANGUAGES_TEST: "true" },
+            "only-base-languages": { ONLY_BASE_LANGUAGES_TEST: "true" },
+          };
+          // Resolve the vitest CLI entry point from its package.json — avoids
+          // .cmd / cross-spawn issues on Windows entirely.
+          const vitestPkg = JSON.parse(fs.readFileSync(vitestPkgPath, "utf8"));
+          const vitestBinRelative =
+            typeof vitestPkg.bin === "string"
+              ? vitestPkg.bin
+              : vitestPkg.bin?.vitest ?? "dist/cli.mjs";
+          const vitestCli = path.join(testsDir, "node_modules", "vitest", vitestBinRelative);
+          console.log(`Executing test command: node ${vitestCli} run locales.test.js`);
           testResult = await executeCommand(
-            "npm",
-            ["run", `test:${testType}`],
-            testsDir
+            "node",
+            [vitestCli, "run", "locales.test.js"],
+            testsDir,
+            envVarMap[testType] ?? {}
           );
 
           // Extract stdout and stderr from the result
@@ -146,7 +168,13 @@ async function testRunnerRoutes(fastify) {
           console.log("Test execution completed with errors");
 
           testStdout = testError.stdout || "";
-          testStderr = testError.stderr || "";
+          // Surface spawn errors (ENOENT, etc.) into stderr so the client sees them
+          testStderr =
+            testError.stderr ||
+            (testError.error
+              ? `spawn error: ${testError.error.message}\ncode: ${testError.error.code}`
+              : "") ||
+            (testError.code !== undefined ? `exit code: ${testError.code}` : "");
           console.error("Test error:", testError);
         }
 

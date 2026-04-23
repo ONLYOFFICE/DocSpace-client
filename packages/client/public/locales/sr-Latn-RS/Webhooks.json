@@ -89,5 +89,11 @@
   "WebhookRemoved": "Webhook uklonjen",
   "Webhooks": "Webhooks",
   "WebhooksGuide": "Webhooks vodič",
-  "WebhooksInfo": "Koristite webhooks da biste izvršili prilagođene akcije na strani bilo koje aplikacije ili web stranice koju koristite na osnovu različitih događaja u {{organizationName}} {{productName}}-u. Ovde možete kreirati i upravljati svim svojim webhook-ovima, konfigurisati ih i pregledati istoriju svakog webhook-a kako biste proverili njihovu izvedbu."
+  "WebhooksInfo": "Koristite webhooks da biste izvršili prilagođene akcije na strani bilo koje aplikacije ili web stranice koju koristite na osnovu različitih događaja u {{organizationName}} {{productName}}-u. Ovde možete kreirati i upravljati svim svojim webhook-ovima, konfigurisati ih i pregledati istoriju svakog webhook-a kako biste proverili njihovu izvedbu.",
+  "AgentCreated": "Kreiran AI Agent",
+  "AgentDeleted": "AI Agent Obrisan",
+  "AgentUpdated": "Agent AI ažuriran",
+  "FormFilledOut": "Popunjeni obrazac",
+  "FormStopped": "Obrazac je zaustavljen",
+  "FormSubmit": "Podneseno"
 }

@@ -3,7 +3,7 @@
   "content": "File content copy restriction",
   "content_en_sha1_hash": "22485d0ba5b777269282cce9513e5ec6c9422dba",
   "created_at": "2025-05-19T21:30:54.486Z",
-  "updated_at": "2025-05-24T09:21:46.292Z",
+  "updated_at": "2026-04-07T19:35:05.131Z",
   "comment": {
     "text": "This translation key is used to restrict access to a file content copy feature. It will appear as a button or link in a UI element where users can choose to copy file content.",
     "is_auto": true,
@@ -33,30 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Fayl məzmununun nüxsəsinin məhdudlaşdırılması\" is overly literal and complex for a user-facing key. 'Nüxsəsi' (copy) is awkward in this context. A more natural translation is needed.",
-          "suggestion": "Faylın məzmununun kopyalanmasına məhdudiyyət"
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase is a bit long and could be shortened for better readability and UI placement.",
-          "suggestion": "Fayl məzmunu kopyalama məhdudiyyəti"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Ограничение за копиране съдържанието на файла\" is overly literal. A more natural translation would convey the restriction on copying file content.",
-          "suggestion": "Ограничение при копиране на файл"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -92,13 +75,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Limite de copie du contenu d'un fichier' is a bit clunky and verbose. A more natural and concise translation would be better.",
-          "suggestion": "Restriction de copie de fichier"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -176,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'තහනම' (tahanama) while generally correct, can be slightly formal for this context. A more common and slightly less formal phrasing might be more suitable.",
-          "suggestion": "ගොනු අන්තර්ගත පිටපත් කිරීමේ තහනම"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -200,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term \"Рестрикција\" (Restrikcija) is a direct transliteration of 'restriction' and might not be the most natural or easily understood term in Serbian. While technically correct, a more common and accessible term would improve clarity.",
-          "suggestion": "Ограничење копирања садржаја датотеке"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

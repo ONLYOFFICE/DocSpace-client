@@ -1,0 +1,194 @@
+"use client";
+
+// (c) Copyright Ascensio System SIA 2009-2026
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
+
+import { getFileInfo } from "@docspace/shared/api/files";
+import type { TFile } from "@docspace/ui-kit/types";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
+import { frameCallEvent, getFrameId } from "@docspace/shared/utils/common";
+import { useSDKConfig } from "@/providers/SDKConfigProvider";
+
+const Chat = dynamic(() => import("@docspace/ui-kit/ai-agent/chat"), {
+  ssr: false,
+});
+
+const fullSize: React.CSSProperties = { width: "100%", height: "100%" };
+
+type ChatPageProps = {
+  agentId: string;
+  fileId: string;
+  chatId: string;
+};
+
+const ChatPageClient = ({ agentId, fileId, chatId }: ChatPageProps) => {
+  useSDKConfig();
+
+  const [attachmentFile, setAttachmentFile] = useState<Partial<TFile> | null>(
+    null,
+  );
+  const [isFileLoading, setIsFileLoading] = useState(!!fileId);
+  const [isChatReady, setIsChatReady] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!agentId) {
+      frameCallEvent({
+        event: "onAppError",
+        data: "agentId is required",
+      });
+      return;
+    }
+
+    frameCallEvent({ event: "onAppReady", data: { frameId: getFrameId() } });
+  }, [agentId]);
+
+  useEffect(() => {
+    if (!fileId) return;
+
+    let cancelled = false;
+
+    setIsFileLoading(true);
+
+    getFileInfo(fileId)
+      .then((file) => {
+        if (!cancelled) setAttachmentFile(file as unknown as Partial<TFile>);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch file info:", err);
+        frameCallEvent({
+          event: "onAppError",
+          data: String(err),
+        });
+      })
+      .finally(() => {
+        if (!cancelled) setIsFileLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [fileId]);
+
+  // Detect when Chat finishes internal initialization.
+  // ChatContainer sets data-testid="chat-container" (without "-loading" suffix)
+  // when isLoadingChat becomes false. We watch both attribute changes (normal
+  // transition) and childList (ChatCore may swap the entire ChatContainer element
+  // in the error/no-access path).
+  useEffect(() => {
+    const el = wrapperRef.current;
+    if (!el || !agentId) return;
+
+    const check = () =>
+      !!el.querySelector('[data-testid="chat-container"]');
+
+    if (check()) {
+      setIsChatReady(true);
+      return;
+    }
+
+    const observer = new MutationObserver(() => {
+      if (check()) {
+        setIsChatReady(true);
+        observer.disconnect();
+      }
+    });
+
+    observer.observe(el, {
+      subtree: true,
+      childList: true,
+      attributes: true,
+      attributeFilter: ["data-testid"],
+    });
+
+    // Fallback: if Chat gets stuck loading, reveal it after 15 s so the user
+    // can at least see whatever state it ended up in.
+    const timerId = window.setTimeout(() => {
+      if (!isChatReady) {
+        setIsChatReady(true);
+        observer.disconnect();
+      }
+    }, 15_000);
+
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(timerId);
+    };
+  }, [agentId]);
+
+  const clearAttachmentFile = useCallback(() => setAttachmentFile(null), []);
+
+  if (!agentId) {
+    return null;
+  }
+
+  return (
+    <div
+      ref={wrapperRef}
+      style={{ ...fullSize, position: "relative" }}
+    >
+      {!isChatReady && (
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 1,
+          }}
+        >
+          <Loader type={LoaderTypes.dualRing} size="40px" />
+        </div>
+      )}
+      <div
+        style={{
+          ...fullSize,
+          visibility: isChatReady ? "visible" : "hidden",
+        }}
+      >
+        <Chat
+          agentId={agentId}
+          selectedModel=""
+          standalone
+          attachmentFile={attachmentFile}
+          clearAttachmentFile={clearAttachmentFile}
+          allowAttachFiles
+          allowSelectChat
+          isLoading={isFileLoading}
+          width="100%"
+          height="100%"
+          style={fullSize}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default ChatPageClient;

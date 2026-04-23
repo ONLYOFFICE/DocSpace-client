@@ -3,7 +3,7 @@
   "content": "Use special characters",
   "content_en_sha1_hash": "4fd46a4ca880394c20ea7a80b64f2c6478a48924",
   "created_at": "2025-05-19T21:30:53.176Z",
-  "updated_at": "2026-03-26T08:26:58.268Z",
+  "updated_at": "2026-04-08T23:56:34.583Z",
   "comment": {
     "text": "This translation key is used to display a checkbox label that enables users to select \"Use special characters\" in password strength settings. The checkbox appears on a form in a portal settings page, allowing users to toggle this feature on or off.",
     "is_auto": true,
@@ -69,13 +69,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Sisällettävä erikoismerkkejä' doesn't accurately convey the meaning of 'Use special characters'. It translates to something like 'Containing special characters'. The correct meaning should imply enabling the use of special characters, not just that they are present.",
-          "suggestion": "Käytä erikoismerkkejä"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -108,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '특수 문자를 사용하여' is too literal and doesn't quite capture the natural flow of the English phrase 'Use special characters' in a UI setting. It implies *actively* using special characters, which isn't necessarily what the setting controls.",
-          "suggestion": "Consider a more concise and natural translation like '특수 문자 허용' or '특수 문자 사용' depending on the specific functionality."
+          "description": "The Korean translation '특수 문자를 사용하여' means 'By using special characters' or 'Using special characters' (an adverbial phrase), which is grammatically incomplete for a checkbox label. A checkbox label should be a noun phrase or a command, such as 'Use special characters'.",
+          "suggestion": "특수 문자 사용"
         }
       ],
       "approved_at": null
@@ -120,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ໃຊ້ ພິເສດ ຕົວອັກສອນ' translates to 'Use special characters' literally, but might not convey the intended meaning of allowing or enabling the use of special characters in settings. A more natural translation might be 'ອະນຸຍາດໃຊ້ຕົວອັກສອນພິເສດ' or 'ເປີດໃຊ້ຕົວອັກສອນພິເສດ'.",
-          "suggestion": "ອະນຸຍາດໃຊ້ຕົວອັກສອນພິເສດ"
+          "description": "The word order in Lao is unnatural and the meaning is fragmented. 'ໃຊ້ ພິເສດ ຕົວອັກສອນ' translates roughly to 'Use special characters' but the syntax is broken, making it sound like 'Use special character-letters' in a disjointed way. A more natural way to say 'Use special characters' in Lao is 'ໃຊ້ຕົວອັກສອນພິເສດ'.",
+          "suggestion": "ໃຊ້ຕົວອັກສອນພິເສດ"
         }
       ],
       "approved_at": null
@@ -171,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation uses 'අකුරු' (letters/alphabets) instead of 'සංකේත' (symbols/characters). In the context of password strength, 'special characters' refers to symbols like @, #, $, etc., not different types of letters.",
+          "suggestion": "විශේෂ සංකේත භාවිතා කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -201,13 +201,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Özel karakterler kullan' is a literal translation but doesn't fully capture the nuance of 'Use special characters' in a settings context. It reads more like an instruction to use special characters generally, rather than enabling a feature that allows them.",
-          "suggestion": "Consider a more contextually appropriate translation like 'Özel karakterlere izin ver' (Allow special characters) or 'Özel karakter kullanımı' (Special character usage)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -228,10 +222,16 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"必须包含特殊字符\" (bì xū bāo hán tè shū zì fù) translates to \"Must include special characters\", which is a more restrictive meaning than the original \"Use special characters\". The English phrase suggests the *option* to use special characters, whereas the Chinese translation implies it's a requirement.",
-          "suggestion": "考虑使用更合适的表达方式，例如 “使用特殊字符” (shǐ yòng tè shū zì fù), “允许使用特殊字符” (yǔn xǔ shǐ yòng tè shū zì fù), or “可使用特殊字符” (kě shǐ yòng tè shū zì fù) to more accurately convey the intended meaning of 'Use special characters'."
+          "description": "The translation '必须包含特殊字符' means 'Must contain special characters', which implies a requirement/rule. The English 'Use special characters' is a command/option for a checkbox to enable a feature. This changes the meaning from a setting toggle to a validation rule.",
+          "suggestion": "使用特殊字符"
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "{{aiAgents}} unpinned",
   "content_en_sha1_hash": "7ec56e28d30d408ecbdd037d51b46f952dc04451",
   "created_at": "2025-12-19T13:03:48.291Z",
-  "updated_at": "2026-03-31T15:18:46.665Z",
+  "updated_at": "2026-04-03T21:51:41.150Z",
   "comment": {
     "text": "This key displays a message indicating that one or more AI agents have been unpinned. It's used to confirm the action to the user, likely triggered by a button or similar UI element related to managing AI agent pins. The text should be straightforward and understandable to users interacting with AI agents.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1350,
+      "line_number": 1355,
       "context": "translationForOneItem = isPin\n ? t(\"AIAgentPinned\", { aiAgent: t(\"Common:AIAgent\") })\n : t(\"AIAgentUnpinned\", { aiAgent: t(\"Common:AIAgent\") });\n translationForSeverals = isPin\n ? t(\"AIAgentsPinned\", { aiAgents: t(\"Common:AIAgents\") })\n : t(\"AIAgentsUnpinned\", { aiAgents: t(\"Common:AIAgents\") });\n } else {\n translationForOneItem = isPin ? t(\"RoomPinned\") : t(\"RoomUnpinned\");\n translationForSeverals = isPin\n ? t(\"RoomsPinned\", { count: elems.length })\n : t(\"RoomsUnpinned\", { count: elems.length });",
       "module": "/packages/client"
     }

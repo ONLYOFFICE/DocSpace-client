@@ -14,7 +14,6 @@
   "LdapConnectionTypeStartTls": "StartTLS",
   "LdapConnectionTypeStartTlsTooltip": "Funkce StartTLS nabízí způsob, jak povýšit textové připojení na šifrované (TLS nebo SSL) namísto použití samostatného portu pro šifrovanou komunikaci.",
   "LdapConnectionTypeUnencrypted": "Nešifrovaná komunikace",
-  "LdapDisclaimer": "Nezapomeňte, že e-mail uživatele portálu bude převzat z nastavení „Mail Attribute“. Pokud chybí, bude vytvořen následujícím způsobem: „Login Attribute + @ + LDAP Domain“. V případě, že takový e-mail neexistuje, uživatel nedostane žádné oznámení portálu.",
   "LdapGroupAttribute": "Atribut skupiny",
   "LdapGroupAttributeTooltip": "Zadejte atribut objektu skupiny, který určuje, jaké uživatele tato skupina zahrnuje.",
   "LdapGroupDN": "Skupina DN",
@@ -60,7 +59,6 @@
   "LdapSettingsValidUntil": "Platí do",
   "LdapSyncButton": "Uživatelé synchronizace",
   "LdapSyncCronTitle": "Zde můžete nastavit, jak často chcete automaticky synchronizovat uživatele LDAP",
-  "LdapSyncDescription": "Synchronizace dat LDAP je způsob synchronizace změn dat mezi portálem a serverem LDAP. Povolte možnost „Automatická synchronizace“ a nastavte časové období pro automatickou aktualizaci informací.",
   "LdapSyncTitle": "Synchronizace dat LDAP",
   "LdapToggle": "Ověřování LDAP",
   "LdapToggleDescription": "Tuto možnost povolte, pokud chcete uživatele ze serveru LDAP přidávat do {{productName}} automaticky. Přidaní uživatelé se budou moci autorizovat pomocí svých pověření ze serveru LDAP. {{productName}} neukládá hesla uživatelů lokálně a bude ověřovat uživatele odesláním jejich přihlašovacího jména a hesla na server LDAP.",
@@ -71,5 +69,7 @@
   "LdapUserFilterTooltip": "Pomocí vyhledávacího filtru LDAP vyberte uživatele, kteří musí být importováni.",
   "LdapUserQuotaTooltip": "Chcete-li nastavit kvótu úložiště pro uživatele, přidejte atribut v adresáři LDAP (například UsersQuotaLimit) a zadejte pro tento atribut celočíselnou hodnotu. Zobrazí se hodnota kvóty v bytech. Zde zadejte pouze název atributu. Tento atribut bude použit pouze při prvním nastavení a později jej lze ručně změnit v sekci {{contactsName}}.",
   "LdapUsersType": "Typ uživatele",
-  "LdapUserTypeTooltip": "Všichni uživatelé budou přidáni do {{productName}} s vybraným typem."
+  "LdapUserTypeTooltip": "Všichni uživatelé budou přidáni do {{productName}} s vybraným typem.",
+  "LdapDisclaimer": "Upozornění: e-mail uživatele portálu bude brán z nastavení „Atribut e-mailu“. Pokud bude chybět, bude vytvořen následovně: „Atribut přihlášení + @ + LDAP doména“. V případě, že takový e-mail neexistuje, uživatel nebude dostávat žádná oznámení portálu.",
+  "LdapSyncDescription": "Synchronizace dat LDAP je způsob, jak synchronizovat změny dat mezi vaším portalem a serverem LDAP. Zapněte možnost „Automatická synchronizace“ a nastavte časový interval pro automatickou aktualizaci informací."
 }

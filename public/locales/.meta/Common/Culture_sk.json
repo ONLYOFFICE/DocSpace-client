@@ -3,7 +3,7 @@
   "content": "Slovenčina (Slovensko)",
   "content_en_sha1_hash": "d5ef46559b8bfba248eedb8ee01f487c19de4ec5",
   "created_at": "2025-05-19T21:30:44.181Z",
-  "updated_at": "2025-05-24T01:16:55.524Z",
+  "updated_at": "2026-04-08T12:58:28.579Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -20,19 +20,37 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Slovak, not Arabic. It failed to translate the language name into the target language script.",
+          "suggestion": "السلوفاكية (سلوفاكيا)"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is identical to the English text, which is Slovak, not Azerbaijani. The Azerbaijani translation for 'Slovenčina (Slovensko)' should be 'Sloven dili (Slovakiya)'.",
+          "suggestion": "Sloven dili (Slovakiya)"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Bulgarian translation is actually Slovak, not Bulgarian. It uses Latin script instead of Cyrillic.",
+          "suggestion": "Словенски (Словения)"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -44,109 +62,217 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The German translation is actually Slovak, not German.",
+          "suggestion": "Slowenisch (Slowenien)"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Slovak, not Greek.",
+          "suggestion": "Σλοβητικά (Σλοβενία)"
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Spanish translation is actually Slovak, not Spanish.",
+          "suggestion": "Esloveno (Eslovenia)"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation is actually Slovak, not Finnish. It fails to translate the language name.",
+          "suggestion": "Slovenia (Slovenia)"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The French translation is identical to the English text, which is actually Slovak, not French.",
+          "suggestion": "Slovaque (Slovaquie)"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Armenian translation is identical to the English text and does not use the Armenian language or script.",
+          "suggestion": "Սլովենական (Սլովենիա)"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Italian translation is actually Slovak, not Italian.",
+          "suggestion": "Sloveno (Slovenia)"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation is identical to the English text and does not translate the language name into Japanese.",
+          "suggestion": "スロバキア語 (スロバキア)"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is not in Korean; it is a direct copy of the Slovak English source text.",
+          "suggestion": "슬로바키아어 (슬로바키아)"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Latin script/English instead of Lao script.",
+          "suggestion": "ສະໂລແວກ (ສະໂລເວນກຽ)"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Slovak, not Latvian. The correct Latvian translation for 'Slovenčina (Slovensko)' is 'Slovēņu valoda (Slovākija)'.",
+          "suggestion": "Slovēņu valoda (Slovākija)"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Dutch translation is actually Slovak, not Dutch. It should be translated to Dutch.",
+          "suggestion": "Slowaaks (Slowakije)"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Polish translation uses the Slovak language name instead of the Polish equivalent.",
+          "suggestion": "Słowacki (Słowacja)"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Portuguese translation is identical to the English text, which is actually Slovak. The Portuguese translation for 'Slovenčina (Slovensko)' should be 'Eslovaco (Eslováquia)'.",
+          "suggestion": "Eslovaco (Eslováquia)"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is in Slovak, not Portuguese (Brazil). It is a direct copy of the English source text which is actually Slovak.",
+          "suggestion": "Eslovaco (Eslováquia)"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is in Slovak, not Romanian. The Romanian translation for 'Slovenčina (Slovensko)' should be 'Slovenă (Slovacia)'.",
+          "suggestion": "Slovenă (Slovacia)"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Russian translation is identical to the English text and is written in Slovak, not Russian.",
+          "suggestion": "Словацкий (Словакия)"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is not in Sinhala; it is a direct copy of the Slovak/English text in Latin script.",
+          "suggestion": "ස්ලොවැකියන් (ස්ලොවැකියාව)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -158,43 +284,91 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Slovak, not Slovenian. 'Slovenčina' means Slovak language in Slovak; the Slovenian word for the Slovenian language is 'Slovenščina'.",
+          "suggestion": "Slovenščina (Slovenija)"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation refers to 'Slovak' (Словачки) instead of 'Slovenian' (Словенски).",
+          "suggestion": "Словенски (Словенија)"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is in Slovak, not Serbian. 'Slovenčina' means Slovak language in Slovak/Czech, whereas in Serbian it should be 'Slovenački'.",
+          "suggestion": "Slovenački (Slovenija)"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Slovak, not Turkish. The Turkish translation for 'Slovenčina (Slovensko)' should be 'Slovence (Slovenya)'.",
+          "suggestion": "Slovence (Slovenya)"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Slovak, not Ukrainian. The text should be translated into Ukrainian.",
+          "suggestion": "Словенська (Словенсько)"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is not in Vietnamese; it is a copy of the Slovak text.",
+          "suggestion": "Tiếng Slovak (Slovakia)"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Slovak, not Albanian.",
+          "suggestion": "Slovenisht (Sllovenia)"
+        }
+      ],
       "approved_at": null
     }
   }

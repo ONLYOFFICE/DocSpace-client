@@ -3,7 +3,7 @@
   "content": "Disconnect cloud",
   "content_en_sha1_hash": "a5b7688e92dbb7d83b8bac246bf83858ab95995f",
   "created_at": "2025-05-26T07:15:42.574Z",
-  "updated_at": "2026-02-19T13:36:33.144Z",
+  "updated_at": "2026-04-08T11:54:36.477Z",
   "comment": {
     "text": "This translation key is used to display the text \"Disconnect cloud\" in a modal dialog that prompts users to disconnect from a third-party service. The text appears as the header of the dialog and is translated by the key \"Common:DisconnectCloudTitle\".",
     "is_auto": true,
@@ -111,7 +111,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'mākoni' refers to a 'cloud' in the sense of a weather formation (cumulus cloud). In a computing/IT context, 'cloud' should be translated as 'mākoņpakalpojums' or simply 'mākoņs' (though 'mākoņs' is also meteorological, 'atvienot mākoņpakalpojumu' is the standard technical term). However, 'mākoni' is specifically the accusative form of a weather cloud, making the translation feel unnatural for software.",
+          "suggestion": "Atvienot mākoņpakalpojumu"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -129,7 +135,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'núvem' (cloud) is incorrectly accented in Portuguese. In this context, 'nuvem' should not have an acute accent.",
+          "suggestion": "Desassociar nuvem"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -153,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'මේඝය' (Meghaya) refers to a literal weather cloud/meteorological cloud. In a computing context, 'cloud' should be translated as 'Cloud' (transliterated) or 'වලාකුළ' (though transliteration is standard for technical services).",
+          "suggestion": "Cloud විසන්ධි කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +195,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Isključi oblak' literally means 'Turn off the cloud' (as in a weather phenomenon or a physical object), whereas in a technical context, 'Disconnect cloud' refers to disconnecting a cloud service/account. 'Isključi' is an imperative for turning something off, and 'oblak' is the literal word for a cloud in the sky.",
+          "suggestion": "Isključi cloud"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -199,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

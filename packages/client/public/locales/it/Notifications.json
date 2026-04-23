@@ -12,5 +12,8 @@
   "SuccessConnected": "{{serviceName}} è stato collegato con successo come canale di notifica. Riceverai ora gli aggiornamenti lì.",
   "SuccessDisconnected": "{{serviceName}} è stato scollegato con successo come canale di notifica. Le notifiche non saranno più inviate lì.",
   "UsefulTips": "Suggerimenti utili per {{productName}}",
-  "UsefulTipsDescription": "Ottieni guide utili su {{productName}}"
+  "UsefulTipsDescription": "Ottieni guide utili su {{productName}}",
+  "ActionsWithFilesDescription": "I badge evidenzieranno l'attività sui file — caricamenti, modifiche o condivisioni — nelle sezioni {{rooms}}, {{shared}}, {{documents}} e {{aiAgents}}.",
+  "RoomsActivityDescription": "Ricevi notifiche email istantanee su nuovi file/cartelle condivisi e attività all'interno dei tuoi {{rooms}} e {{aiAgents}}.",
+  "RoomUpdateNotify": "Contenuti condivisi, attività di {{rooms}} e {{aiAgents}}"
 }

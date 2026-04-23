@@ -3,7 +3,7 @@
   "content": "Third-party services",
   "content_en_sha1_hash": "871d2b6d2f4209a2045939948478b5ad9e16f6a2",
   "created_at": "2025-05-19T21:30:50.013Z",
-  "updated_at": "2026-02-19T13:36:32.392Z",
+  "updated_at": "2026-04-08T20:54:07.536Z",
   "comment": {
     "text": "This translation key is used to display \"Third-party services\" as a title in various UI components, such as a link and a category name, often found in settings or configuration pages. It appears on a page that lists integration options for third-party services.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"الخدمات الجهة الخارجية\" is a very literal translation. A more natural and commonly used Arabic term for 'third-party services' would be \"خدمات من جهات خارجية\" or \"خدمات من جهات خارجية\". The current phrasing feels clunky and less idiomatic.",
-          "suggestion": "خدمات من جهات خارجية"
+          "description": "The Arabic translation is grammatically incorrect and uses an awkward phrasing ('الخدمات الجهة الخارجية') that does not correctly convey 'Third-party services'. It lacks the proper possessive/adjectival structure.",
+          "suggestion": "خدمات الطرف الثالث"
         }
       ],
       "approved_at": null
@@ -183,13 +183,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Услуге трећих страна' is more accurate. 'Услуге' is the correct plural form of 'услуга' (service), and 'трећих страна' is the correct genitive plural form for 'third parties'. The current translation 'Услуге трећих страна' lacks proper grammatical agreement.",
-          "suggestion": "Услуге трећих страна"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -207,22 +201,28 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'служби' (services/agencies/departments) in Ukrainian often refers to government agencies or emergency services. In the context of software integrations and IT, 'сервіси' is the standard and accurate term for 'services'.",
+          "suggestion": "Сторонні сервіси"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Dịch vụ của bên thứ ba\" is a very literal and somewhat clunky translation. A more natural and idiomatic translation would be something like \"Dịch vụ của bên ngoài\" or \"Dịch vụ từ bên thứ ba\".",
-          "suggestion": "Dịch vụ của bên ngoài"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

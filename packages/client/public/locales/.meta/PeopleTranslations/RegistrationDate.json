@@ -3,7 +3,7 @@
   "content": "Registration date",
   "content_en_sha1_hash": "c498221a5aad95b5674daf56badfb16892c6ed05",
   "created_at": "2025-05-19T21:30:53.492Z",
-  "updated_at": "2025-12-17T07:49:07.868Z",
+  "updated_at": "2026-04-07T19:35:05.178Z",
   "comment": {
     "text": "This translation key is used to display the registration date of a user in the application. It appears as a label on an info panel and is rendered when the user's status is active. Translators should provide a human-readable version of this date in their respective language.",
     "is_auto": true,
@@ -153,13 +153,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation \"Înregistrat la data de\" is not the most accurate or natural translation of \"Registration date\". It literally translates to \"Registered on the date of\". A more accurate and natural translation would be \"Data înregistrării\" or \"Data înscrierii\".",
-          "suggestion": "Consider using \"Data înregistrării\" or \"Data înscrierii\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -171,18 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'පහregister කිරීමේ දිනය' is not an accurate translation of 'Registration date'. It seems to be a direct transliteration and incorrect combination of English and Sinhala words. The word 'register' shouldn't be used in this context in Sinhala.",
-          "suggestion": "නි ලියාපදිංචි කිරීමේ දිනය (ni liyāpadiñci kirimē dinaya) - which translates to 'date of registration'"
-        },
-        {
-          "type": "spelling",
-          "description": "Although 'register' is not a Sinhala word, it is transliterated, and this transliteration is not standardized, potentially leading to confusion for readers.",
-          "suggestion": "Avoid direct transliterations. Use appropriate Sinhala vocabulary."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

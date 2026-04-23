@@ -3,7 +3,7 @@
   "content": "Room archived",
   "content_en_sha1_hash": "b0fe8680eef92430227094a89413563c2fe2f5ac",
   "created_at": "2025-05-19T21:30:49.816Z",
-  "updated_at": "2025-06-02T10:22:25.622Z",
+  "updated_at": "2026-04-08T19:23:35.235Z",
   "comment": {
     "text": "This translation key is used to display the text \"Room archived\" when a room is archived through a webhook. It is likely used in a UI element that notifies users of changes to rooms, such as an update or confirmation message on a page for portal settings.",
     "is_auto": true,
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ຫ້ອງຖືກໂຄສະນາແລ້ວ' translates to 'The room has been advertised'. It doesn't accurately convey the meaning of 'Room archived'. 'Archived' implies removal or storage, not advertisement.",
-          "suggestion": "A more accurate translation could be something like 'ຫ້ອງຖືກລຶບແລ້ວ' (hong thuk lup laeo) which means 'The room has been deleted' or 'ຫ້ອງຖືກເກັບໄວ້ແລ້ວ' (hong thuk kep vai laeo) which means 'The room has been stored'."
+          "description": "The Lao translation 'ຫ້ອງຖືກໂຄສະນາແລ້ວ' means 'Room has been advertised' instead of 'Room archived'.",
+          "suggestion": "ຫ້ອງຖືກເກັບເຂົ້າບັງຄັບແລ້ວ"
         }
       ],
       "approved_at": null
@@ -147,7 +147,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text refers to a 'Room', but the Romanian translation uses 'Grupul' (Group), which is a different entity in the system.",
+          "suggestion": "Camera a fost arhivată"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -177,13 +183,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Соба архивирана\" is a mistranslation. \"Соба\" means \"room\" in a generic sense, not a digital room or space. The intended meaning is 'room archived'.",
-          "suggestion": "Simply changing to \"Архивирана соба\" would be closer to the English. A more accurate option, depending on the specific context, would be something like \"Архивирана просторија\" (archived space) or a more localized term reflecting the specific type of room."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -210,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Vietnamese translation \"Phòng đã được sao lưu\" translates to \"Room has been backed up\", not \"Room archived\". The intended meaning of 'archived' is not accurately conveyed.",
-          "suggestion": "Phòng đã bị lưu trữ"
+          "description": "The Vietnamese translation uses 'sao lưu' (backup) instead of 'lưu trữ' (archive). In a software context, 'archived' refers to moving data to long-term storage/hiding it, whereas 'sao lưu' refers to creating a copy for data protection.",
+          "suggestion": "Phòng đã được lưu trữ"
         }
       ],
       "approved_at": null
@@ -220,6 +220,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Dhoma u zhvendos te Arkivi' means 'The room was moved to the Archive', which implies a movement action rather than the state of being 'archived'.",
+          "suggestion": "Dhoma u arkivua"
+        }
+      ],
       "approved_at": null
     }
   }

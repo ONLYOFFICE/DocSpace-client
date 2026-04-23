@@ -3,7 +3,7 @@
   "content": "You have unsaved changes",
   "content_en_sha1_hash": "5ea3902f149163da1cf57472568ec3a89d52e790",
   "created_at": "2025-05-19T21:30:53.245Z",
-  "updated_at": "2026-04-02T09:32:33.339Z",
+  "updated_at": "2026-04-10T08:21:04.339Z",
   "comment": {
     "text": "This translation key is used to display a reminder message when unsaved changes are made to a form or settings, prompting the user to save their work before leaving the page. It appears in various UI elements such as save buttons and dialogs, alerting users of potential data loss. The translation should convey a clear warning without being too intrusive.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ai-services-management.tsx",
-      "line_number": 277,
+      "line_number": 278,
       "context": "<SaveCancelButtons\n className={styles.saveCancelButtons}\n onSaveClick={onSave}\n onCancelClick={onCancel}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}",
       "module": "/packages/client"
     },
@@ -72,7 +72,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
-      "line_number": 340,
+      "line_number": 341,
       "context": "<SaveCancelButtons\n className={styles.saveCancelButtons}\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}",
       "module": "/packages/client"
     },
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"لقد قمت بعدم حفظ التغييرات\" literally translates to \"You have done not saving the changes.\" It's an awkward and unnatural phrasing in Arabic. A more natural and accurate translation would convey the meaning of 'unsaved changes' more directly.",
-          "suggestion": "لديك تغييرات لم تحفظ (Ladayka taghyyratun lam tahfath)"
+          "description": "The Arabic translation literally means 'You have not saved the changes' (as an action you performed), whereas the English means 'There are changes that have not been saved' (a state of the data). The current translation sounds like the user intentionally chose not to save, rather than alerting them to unsaved work.",
+          "suggestion": "لديك تغييرات غير محفوظة"
         }
       ],
       "approved_at": null
@@ -165,13 +165,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'dəyişiklikləriniz' is misspelled. It should be 'dəyişikliklərin var'.",
-          "suggestion": "Yadda saxlanmayan dəyişikliklərin var"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -216,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The French translation 'Vous avec des modifications non-sauvegardées' contains a grammatical error. 'avec' should be 'avez'.",
-          "suggestion": "Vous avez des modifications non-sauvegardées"
+          "description": "The French translation contains a grammatical error that changes the meaning: 'avec' (with) is used instead of 'avez' (have). This makes the sentence 'You with unsaved changes' instead of 'You have unsaved changes'.",
+          "suggestion": "Vous avez des modifications non sauvegardées"
         }
       ],
       "approved_at": null
@@ -225,13 +219,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Դուք չպահված փոփոխություններ ունեք' is a literal translation but doesn't flow naturally in Armenian. It can be improved for better readability and user experience. A more natural phrasing would use a more common construction for expressing 'unsaved changes'.",
-          "suggestion": "Consider 'Ձեր փոփոխությունները դեռ չեն պահպանվել' (Dzer popoxut'yunnerner dter chen p'ahpanvel) which translates to 'Your changes have not yet been saved.'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -246,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"未保存変更はあります。\" while technically correct, sounds somewhat formal and stiff for a user-facing message. A more natural and user-friendly phrasing would be preferred.",
-          "suggestion": "変更が保存されていません。"
+          "description": "The Japanese translation '未保存変更はあります。' is grammatically unnatural and sounds like 'There are unsaved changes exist.' It lacks the necessary particle to connect the noun and verb correctly, making it sound robotic or broken.",
+          "suggestion": "未保存の変更があります。"
         }
       ],
       "approved_at": null
@@ -297,18 +285,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Nu ați salvat modificările efectuate de dvs' is overly formal and verbose for a typical user interface message like 'You have unsaved changes.' The phrase 'efectuate de dvs' (made by you) is unnecessary and clunky.",
-          "suggestion": "A more natural and concise translation would be 'Aveți modificări nesalvate' or 'Modificări nesalvate'."
-        },
-        {
-          "type": "formatting",
-          "description": "The translation lacks consistency in capitalization.  While Romanian capitalization rules are different from English, for UI elements, maintaining a lowercase start is often preferable for consistency.",
-          "suggestion": "Consider starting the translation with a lowercase 'a' - 'aveți modificări nesalvate'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -338,30 +315,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Имате несачуване промене' is not a correct translation of \"You have unsaved changes.\" The term 'несачуване' is not standard Serbian. It appears to be a combination of words that doesn't convey the intended meaning clearly. 'Промене' is also an unusual construction in this context.",
-          "suggestion": "You have unsaved changes should be translated as 'Имате несaчуване измене' or 'Имате неизвршене измене'."
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'промене' is likely a misspelling of 'измене'.",
-          "suggestion": "Correct 'промене' to 'измене'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'nesačuvane' is misspelled. The correct spelling is 'nesačuvane'.",
-          "suggestion": "Imate nesačuvane promene"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -379,13 +339,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While the translation is understandable, 'Bạn có các thay đổi chưa được lưu' is a bit literal and not the most natural way to express 'You have unsaved changes' in Vietnamese. A more idiomatic translation would be more appropriate.",
-          "suggestion": "Bạn có những thay đổi chưa lưu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

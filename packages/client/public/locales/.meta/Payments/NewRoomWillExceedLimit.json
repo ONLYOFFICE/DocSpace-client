@@ -3,7 +3,7 @@
   "content": "Creating this room is not possible since the limit is reached for the number of rooms included in your current plan.",
   "content_en_sha1_hash": "a04a1156e2e2826b884b0b81d56586ced44b5f15",
   "created_at": "2025-05-19T21:30:53.704Z",
-  "updated_at": "2025-05-24T06:48:15.205Z",
+  "updated_at": "2026-04-07T19:35:05.172Z",
   "comment": {
     "text": "This translation key is used to display a message when creating a new room exceeds the limit of rooms included in a user's current plan. It appears as part of an alert dialog warning the user that their plan has reached its room capacity. The message aims to inform users of this constraint and encourage them to choose a new plan if needed.",
     "is_auto": true,
@@ -153,18 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation is accurate in conveying the meaning, but could be slightly more natural sounding in Sinhala. The phrasing 'මෙම කාමරය නිර්මාණය කිරීමේ හැකියාවක් නැත' (this room cannot be created) feels a bit formal.",
-          "suggestion": "ඔබේ වත්මන් සැලැස්මේ කාමර සංඛ්‍යාව අවමحدිතය. එම නිසා මෙම කාමරය නිර්මාණය කිරීමට නොහැකිය."
-        },
-        {
-          "type": "formatting",
-          "description": "The translation includes a somewhat long sentence. Breaking it into two sentences might improve readability.",
-          "suggestion": "ඔබේ වත්මන් සැලැස්මේ ඇතුළත් කර ඇති කාමර සංඛ්‍යාව සඳහා සීමාව ළඟා වී ඇත. එම නිසා මෙම කාමරය නිර්මාණය කිරීමට හැකියාවක් නැත."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -182,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'просторије' is technically correct but can sound a bit formal or archaic in this context. 'Соби' would be a more natural and commonly used term for 'rooms' in this situation.",
-          "suggestion": "Креирање ове собе није могуће јер је достигнут лимит за број соба укључених у ваш тренутни план."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -218,18 +201,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '由于当前费用版本的房间数量已达上限' is a bit too formal and technical for a user-facing error message. '费用版本' (fee version) is not a typical term users understand. A simpler phrasing would be more user-friendly.",
-          "suggestion": "由于您当前的套餐已达到房间数量上限，因此无法创建该房间。"
-        },
-        {
-          "type": "formatting",
-          "description": "The sentence structure is slightly clunky. While grammatically correct, it could flow better.",
-          "suggestion": "由于您当前的套餐已达到房间数量上限，因此无法创建该房间。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

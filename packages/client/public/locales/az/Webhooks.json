@@ -1,4 +1,7 @@
 {
+  "AgentCreated": "AI Agent Yaradıldı",
+  "AgentDeleted": "AI Agent Silinmiş",
+  "AgentUpdated": "AI Agent yeniləndi",
   "Before": "Əvvəlki",
   "CreateWebhook": "Webhook yaradın",
   "DeleteHint": "Webhook həmişəlik silinəcək.\nBu əməliyyatı geri qaytara bilməzsiniz.",
@@ -33,6 +36,9 @@
   "FolderRestored": "Qovluq bərpa edildi",
   "FolderTrashed": "Qovluq zibil qutusuna göndərildi",
   "FolderUpdated": "Qovluq yeniləndi",
+  "FormFilledOut": "Form Dolduruldu",
+  "FormStopped": "Forma dayandırıldı",
+  "FormSubmit": "Form Göndərildi",
   "From": "Etibarən",
   "Generate": "Yaradın",
   "GroupCreated": "Qrup yaradıldı",

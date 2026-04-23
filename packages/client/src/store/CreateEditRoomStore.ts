@@ -585,6 +585,8 @@ class CreateEditRoomStore {
       prompt,
       providerId,
       modelId,
+      saveFormAsXLSX,
+      sendFormToExternalDB,
     } = roomParams;
 
     const isThirdparty = storageLocation.isThirdparty;
@@ -638,6 +640,8 @@ class CreateEditRoomStore {
           modelId,
         },
       }),
+      saveFormAsXLSX,
+      sendFormToExternalDB,
     };
 
     this.setIsLoading(true);

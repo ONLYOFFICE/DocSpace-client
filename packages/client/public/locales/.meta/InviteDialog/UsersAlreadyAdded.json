@@ -3,7 +3,7 @@
   "content": "Some users have already been added",
   "content_en_sha1_hash": "11ba705efbb4050c93a4d4827ad25f4eb90bb39d",
   "created_at": "2025-05-19T21:30:54.741Z",
-  "updated_at": "2026-02-19T13:36:32.382Z",
+  "updated_at": "2026-04-07T19:35:05.125Z",
   "comment": {
     "text": "\"This translation key is used to display a message when a user has already been added to a group or panel, indicating that they cannot be added again. It appears in warning notifications and dialog boxes, typically triggered by actions such as adding users to a group or editing invite panels.\"",
     "is_auto": true,
@@ -135,13 +135,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ບາງຄົນ' (bang khon) is generally acceptable, but in this context, 'ບາງທ່ານ' (bang tan) might be slightly more formal and appropriate for addressing users.",
-          "suggestion": "Consider replacing 'ບາງຄົນ' with 'ບາງທ່ານ'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -177,13 +171,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The Romanian translation uses the feminine plural form 'adăugate' which doesn't agree with 'utilizatori' (users), which is masculine plural.  While grammatically possible, it's not the natural or preferred form.",
-          "suggestion": "Anumite utilizatori sunt deja adăugați."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -213,13 +201,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Неки корисници су већ додати' while grammatically correct, doesn't quite capture the nuance of 'Some users have already been added.' A more natural-sounding translation might be 'Неки корисници су већ додати' or 'Већ су неки корисници додати'.",
-          "suggestion": "Већ су неки корисници додати"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

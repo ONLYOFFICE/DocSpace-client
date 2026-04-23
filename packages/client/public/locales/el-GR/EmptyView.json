@@ -2,6 +2,7 @@
   "CollaborationRoomEmptyTitle": "Καλώς ήρθατε στο δωμάτιο Συνεργασίας",
   "CollaboratorEmptyTitle": "Το δωμάτιο είναι άδειο.",
   "CreateAIAgent": "Δημιουργία νέου πράκτορα",
+  "CreateAIAgentDescription": "Ξεκινήστε να δημιουργείτε τον πρώτο σας {{aiAgent}}",
   "CreateDocument": "Δημιουργία νέου εγγράφου",
   "CreateDocumentDescription": "Επωφεληθείτε από τις απεριόριστες λειτουργίες επεξεργασίας κειμένου.",
   "CreateForm": "Δημιουργήστε μια νέα φόρμα PDF",
@@ -16,7 +17,14 @@
   "CreateSpreadsheetDescription": "Πραγματοποιήστε ακριβείς υπολογισμούς με ελάχιστη προσπάθεια.",
   "CustomRoomEmptyTitle": "Καλώς ήρθατε στο Προσαρμοσμένο δωμάτιο",
   "DefaultFolderDescription": "Αποθέστε αρχεία εδώ ή δημιουργήστε νέα.",
+  "EmptyAIAgentsAIDisabledDescription": "Αυτή η ενότητα επιτρέπει στους χρήστες να συνεργαστούν με {{aiAgents}} — έξυπνους βοηθούς για τη διαχείριση εγγράφων και άλλων εργασιών. \nΓια να ξεκινήσετε να τους χρησιμοποιείτε, η υπηρεσία λειτουργιών AI πρέπει να είναι ενεργοποιημένη από τον διαχειριστή του {{productName}}.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Για να δημιουργήσετε και να χρησιμοποιήσετε {{aiAgents}}, συνδέστε το πορτοφόλι σας και ενεργοποιήστε την υπηρεσία λειτουργιών AI στις ρυθμίσεις του {{productName}}. Μόλις ολοκληρωθεί, θα μπορείτε να εργαστείτε με {{aiAgents}} και να συνεργαστείτε με την ομάδα σας.",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "Συνδέστε το πορτοφόλι σας και ενεργοποιήστε τις δυνατότητες AI",
+  "EmptyAIAgentsAIDisabledUserTitle": "Τα {{aiAgents}} δεν είναι ακόμη διαθέσιμα",
+  "EmptyAIAgentsAIEnabledUserDescription": "Μόλις η ομάδα σας σας προσκαλέσει να συνεργαστείτε, το {{aiAgents}} θα εμφανιστεί εδώ, έτοιμο να βοηθήσει με έγγραφα, διαχείριση γνώσης και καθημερινές εργασίες.",
+  "EmptyAIAgentsDescription": "Ρυθμίστε έναν εξατομικευμένο βοηθό για την ομάδα σας προσθέτοντας μια βάση γνώσης, επιλέγοντας το ιδανικό μοντέλο και συνδέοντας ένα {{mcpServer}}. Εγκάλεστε τους συναδέλφους σας να συνεργαστούν και να αξιοποιήσουν πλήρως τις δυνατότητες συνομιλίας του agent.",
+  "EmptyAIAgentsTitle": "Δημιουργήστε το {{aiAgent}} σας",
+  "EmptyAIAgentsUserTitle": "Δεν υπάρχουν διαθέσιμοι {{aiAgents}} ακόμα",
   "EmptyDescription": "Ξεκινήστε με γρήγορες ενέργειες:",
   "EmptyFavoritesDescription": "Αστερίσκος σε αρχεία και φακέλους για να τα διατηρείτε εύκολα προσβάσιμα και στα χέρια σας.",
   "EmptyFavoritesTitle": "Δεν υπάρχουν ακόμα αγαπημένα",
@@ -56,6 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "Μεταφόρτωση από τη συσκευή",
   "UploadFromPortalTitle": "Μεταφόρτωση από {{productName}}",
   "UploadPDFFormOptionDescription": "Επιλέξτε μια έτοιμη φόρμα PDF που είναι διαθέσιμη στο {{productName}} και μεταφορτώστε την στο δωμάτιο.",
-  "VirtualDataRoomEmptyTitle": "Καλώς ήρθατε στο Εικονικό Δωμάτιο Δεδομένων",
-  "EmptyAIAgentsTitle": "Δημιουργήστε το {{aiAgent}} σας"
+  "VirtualDataRoomEmptyTitle": "Καλώς ήρθατε στο Εικονικό Δωμάτιο Δεδομένων"
 }

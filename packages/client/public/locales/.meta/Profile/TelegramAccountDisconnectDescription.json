@@ -3,7 +3,7 @@
   "content": "Your @{{username}} account is connected for Telegram notifications. You can disconnect from this account. In this case, you will not receive notifications.",
   "content_en_sha1_hash": "95c57b78036ac34ad47ddaf4ffde62ac2b15acc2",
   "created_at": "2025-10-13T13:22:22.961Z",
-  "updated_at": "2025-10-13T14:27:47.715Z",
+  "updated_at": "2026-04-09T06:57:27.115Z",
   "comment": {
     "text": "This text explains to the user that their Telegram account is connected for notifications and provides the option to disconnect. It appears within a disconnect account dialog, informing the user that disconnecting will prevent them from receiving Telegram notifications. The username will be dynamically inserted into the text.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'ayrılığa çıxa bilərsiniz' means 'you can go on vacation/leave'. The correct term for disconnecting an account is 'bağlantını kəsə bilərsiniz' or 'ayrılmaq bilərsiniz'.",
+          "suggestion": "Sizin @{{username}} hesabınız Telegram bildirişləri üçün qoşuludur. Siz bu hesabdan bağlantını kəsə bilərsiniz. Bu halda, siz bildirişlər almayacaqsınız."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -141,7 +147,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Vă puteți deconecta acest cont' is grammatically incorrect in Romanian and changes the meaning slightly; it should be 'Vă puteți deconecta de acest cont' (You can disconnect FROM this account) to match the English 'disconnect from this account'.",
+          "suggestion": "Contul dvs. @{{username}} este conectat pentru a primi notificările prin Telegram. Vă puteți deconecta de acest cont. În acest caz, nu veți primi notificări."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -171,7 +183,13 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The phrase 'from this account' (shkëputeni nga kjo llogari) is missing in the Albanian translation, which slightly changes the clarity of what is being disconnected.",
+          "suggestion": "Llogaria juaj @{{username}} është lidhur për njoftime në Telegram. Mund të shkëputeni nga kjo llogari. Në atë rast, nuk do të merrni më njoftime."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

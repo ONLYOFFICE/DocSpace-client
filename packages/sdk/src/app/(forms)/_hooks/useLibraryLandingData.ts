@@ -48,6 +48,8 @@ export type CategoryData = {
   isLoading: boolean;
 };
 
+const MAX_CONCURRENT_FETCHES = 4;
+
 export default function useLibraryLandingData(folders: TFolder[]) {
   const [categories, setCategories] = useState<CategoryData[]>([]);
   const abortRef = useRef<AbortController | null>(null);
@@ -67,8 +69,7 @@ export default function useLibraryLandingData(folders: TFolder[]) {
       folders.map((folder) => ({ folder, items: [], isLoading: true })),
     );
 
-    for (const [idx, folder] of folders.entries()) {
-      void (async () => {
+    const fetchCategory = async (idx: number, folder: TFolder) => {
       try {
         const filter = FilesFilter.getDefault();
         filter.page = 0;
@@ -138,8 +139,25 @@ export default function useLibraryLandingData(folders: TFolder[]) {
           ),
         );
       }
-      })();
-    }
+    };
+
+    void (async () => {
+      const queue = folders.map((folder, idx) => ({ idx, folder }));
+      let cursor = 0;
+
+      const runNext = async (): Promise<void> => {
+        const entry = queue[cursor++];
+        if (!entry || controller.signal.aborted) return;
+        await fetchCategory(entry.idx, entry.folder);
+        return runNext();
+      };
+
+      const workers = Array.from(
+        { length: Math.min(MAX_CONCURRENT_FETCHES, queue.length) },
+        () => runNext(),
+      );
+      await Promise.all(workers);
+    })();
 
     return () => controller.abort();
   }, [folderIds]); // eslint-disable-line react-hooks/exhaustive-deps

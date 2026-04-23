@@ -3,7 +3,7 @@
   "content": "Install now",
   "content_en_sha1_hash": "8607e4bae1d0e9652aa19e26a8ea7706b6066429",
   "created_at": "2025-05-19T21:30:53.433Z",
-  "updated_at": "2025-11-18T14:41:50.072Z",
+  "updated_at": "2026-04-09T07:13:12.268Z",
   "comment": {
     "text": "This translation key is used for a button label that says \"Install now\" and is typically displayed as a link in private room invitations. Its purpose is to prompt users to initiate the installation process of a privacy-related feature.",
     "is_auto": true,
@@ -153,7 +153,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The word 'now' is missing from the Sinhala translation. The current translation only means 'Install'.",
+          "suggestion": "දැන් ස්ථාපනය කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,13 +189,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Şimdi kur\" while understandable, is a bit too literal. A more natural and idiomatic translation for \"Install now\" would be something like \"Hemen yükle\" or \"Şimdi yükleyin\". \"Kur\" implies a more foundational installation, while \"yükle\" is more commonly used for software.",
-          "suggestion": "Hemen yükle"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -205,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "Cancel import",
   "content_en_sha1_hash": "a4b5358b5d50407c88f27bef1900ad0b73db2767",
   "created_at": "2025-05-19T21:30:50.865Z",
-  "updated_at": "2025-11-13T07:58:08.211Z",
+  "updated_at": "2026-04-09T03:58:45.471Z",
   "comment": {
     "text": "This translation key is used for a \"Cancel Import\" button in data import steps within the portal settings. It appears as a label on a save button and, when clicked, triggers cancellation of the import process.",
     "is_auto": true,
@@ -141,13 +141,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Anuluj importowanie' is not the most natural or idiomatic way to say 'Cancel import' in Polish. While technically correct, it's a bit verbose and literal.",
-          "suggestion": "Anuluj import"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -183,13 +177,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Zrušiť importovanie' is a literal translation of 'Cancel import', it's not the most natural or common phrasing in Slovak. 'Zrušiť import' would be a more idiomatic and concise option.",
-          "suggestion": "Zrušiť import"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -201,13 +189,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Откажи увоз' is not the most natural or accurate translation of 'Cancel import' in Serbian (Cyrillic). 'Увоз' refers to import in general, and 'Откажи' implies a direct command or order to cancel, which doesn't fully capture the meaning of a button label.",
-          "suggestion": "Прекини увоз"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -235,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

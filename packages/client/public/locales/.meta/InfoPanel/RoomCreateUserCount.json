@@ -3,7 +3,7 @@
   "content": "Users added ({{count}}).",
   "content_en_sha1_hash": "8c7b1ab7b60a1cc8856412fa9c57d6d974a69ffb",
   "created_at": "2025-05-19T21:30:54.905Z",
-  "updated_at": "2025-11-03T12:10:35.115Z",
+  "updated_at": "2026-04-07T19:35:05.118Z",
   "comment": {
     "text": "This translation key is used to display a count of users added to a room. It appears on a history view and is likely part of a button or label that displays this information to the user.",
     "is_auto": true,
@@ -51,13 +51,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The Czech translation uses the masculine plural form 'přidáni' which doesn't agree with the concept of users being added. It should be feminine plural.",
-          "suggestion": "Uživatelky přidány ({{count}})."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -153,13 +147,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Utilizatorul a fost adăugat ({{count}}).\" is not accurate. It translates to 'The user was added ({{count}}).' The original English implies multiple users were added. It should reflect the plural.",
-          "suggestion": "Utilizatorii au fost adăugați ({{count}})."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -171,18 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'පරිශීලකයින්' (parishiilakayin) is a less common and potentially inaccurate translation for 'Users'.  'භාවිතාකරන්නන්' (bhavithakaaranannan) or 'පරිශීලකයන්' (parishiilakayaan) are more standard and appropriate.",
-          "suggestion": "පරිශීලකයින් -> පරිශීලකයන් or භාවිතාකරන්නන්"
-        },
-        {
-          "type": "grammar",
-          "description": "The verb 'එකතු කරන ලදි' (ekathu karan ladi) translates to 'were added'. The passive voice isn't always the best choice. Consider a more active phrasing.",
-          "suggestion": "එකතු කරන ලදි -> එක්වුයේ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -200,25 +177,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Додати корисници ({{count}}).' is not an accurate translation of 'Users added ({{count}}).'. 'Додати' means 'Added', but a more appropriate translation would convey the action of adding users. The phrase 'Додати корисници' sounds awkward in Serbian.",
-          "suggestion": "Корисници додани ({{count}})."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Serbian translation is missing the period at the end of the sentence, consistent with English.",
-          "suggestion": "Dodati korisnici ({{count}})."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

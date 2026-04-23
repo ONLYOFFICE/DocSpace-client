@@ -26,12 +26,16 @@
 
 "use client";
 
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
+import { DeviceType } from "@docspace/shared/enums";
+
+import useDeviceType from "@/hooks/useDeviceType";
 
 import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
 import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
@@ -60,6 +64,18 @@ export default function WelcomeTourDialog({
   onSkip,
 }: WelcomeTourDialogProps) {
   const { t } = useTranslation(["Common"]);
+  const { currentDeviceType } = useDeviceType();
+  const canTakeTour = currentDeviceType !== DeviceType.mobile;
+
+  const [reduceMotion, setReduceMotion] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduceMotion(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setReduceMotion(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
 
   return (
     <ModalDialog visible={visible} onClose={onSkip} autoMaxHeight autoMaxWidth isLarge isHuge>
@@ -72,10 +88,12 @@ export default function WelcomeTourDialog({
             <div className={styles.videoContainer}>
               <video
                 className={styles.video}
-                autoPlay
-                loop
+                autoPlay={!reduceMotion}
+                loop={!reduceMotion}
                 muted
                 playsInline
+                preload="auto"
+                controls={reduceMotion}
               >
                 <source
                   src={AiFormsTutorialUrl}
@@ -125,16 +143,19 @@ export default function WelcomeTourDialog({
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
-        <Button
-          label={t("Common:WelcomeStartTour", "Take a tour")}
-          size={ButtonSize.normal}
-          primary
-          scale
-          onClick={onStart}
-        />
+        {canTakeTour && (
+          <Button
+            label={t("Common:WelcomeStartTour", "Take a tour")}
+            size={ButtonSize.normal}
+            primary
+            scale
+            onClick={onStart}
+          />
+        )}
         <Button
           label={t("Common:WelcomeStartUsing", "Start using")}
           size={ButtonSize.normal}
+          primary={!canTakeTour}
           scale
           onClick={onSkip}
         />

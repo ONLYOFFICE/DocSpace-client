@@ -244,7 +244,7 @@ const CustomSettings = (props) => {
           onChange={onChange}
           onValidateInput={onValidateEmailInput}
           hasError={errors[SENDER_EMAIL_ADDRESS] ?? false}
-          placeholder={t("EnterEmail")}
+          placeholder={t("Common:EnterEmail")}
           scale
           dataTestId="smtp_sender_email_input"
         />
@@ -276,3 +276,4 @@ export default inject(({ settingsStore, setup }) => {
 
   return { theme, settings, setSMTPSettings, isLoading, setSMTPErrors, errors };
 })(observer(CustomSettings));
+

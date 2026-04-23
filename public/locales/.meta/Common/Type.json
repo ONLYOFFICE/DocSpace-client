@@ -3,7 +3,7 @@
   "content": "Type",
   "content_en_sha1_hash": "3deb7456519697ecf4eefc455516c969a3681bae",
   "created_at": "2025-05-19T21:30:49.370Z",
-  "updated_at": "2026-03-31T15:18:46.270Z",
+  "updated_at": "2026-04-10T08:21:04.327Z",
   "comment": {
     "text": "This translation key is used to display a label indicating the type of an item or entity. It appears in various UI elements, such as titles, labels, and field headers, where it provides a brief description of the item's classification (e.g., \"Type\" for a data entry field).",
     "is_auto": true,
@@ -137,18 +137,6 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/shared/transaction-history/sub-components/FilterPanel.tsx",
-      "line_number": 106,
-      "context": "<div className={styles.filterDialogContent}>\n {!hideTypeFilter ? (\n <>\n <div className={styles.filterDialogSection}>\n <Text fontWeight={600} fontSize=\"15px\">\n {t(\"Common:Type\")}\n </Text>\n <ComboBox\n options={typeOfHistoty}\n selectedOption={selectedType}\n onSelect={onSelectType}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/shared/transaction-history/sub-components/TableView/TableHeader.tsx",
-      "line_number": 56,
-      "context": "active: true,\n minWidth: 150,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: true,\n resizable: true,\n minWidth: 120,\n },\n {",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
       "line_number": 600,
       "context": "/>\n {isBetaLanguage ? <BetaBadge place=\"bottom-end\" /> : null}\n </div>\n \n <Text as=\"div\" className={styles.label}>\n {t(\"Common:Type\")}\n </Text>\n <div className={styles.userTypeContainer}>\n <Text fontWeight={600} truncate title={profile!.displayName}>\n {getUserTypeName(\n isOwner,",
@@ -186,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Bulgarian translation \"Закачи\" (Zakachi) translates to 'attach' or 'hang up,' which does not accurately convey the meaning of \"Type\" in this context. \"Type\" refers to a category or kind.",
-          "suggestion": "A more appropriate translation would be \"Тип\" or \"Вид\"."
+          "description": "The Bulgarian translation 'Закачи' means 'Attach' or 'Pin', which is a verb. The English source 'Type' is a noun referring to a classification or category. This is a complete change in meaning.",
+          "suggestion": "Тип"
         }
       ],
       "approved_at": null
@@ -261,7 +249,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian word 'Tips' means 'Advice' or 'Hint'. For a classification/category label (e.g., 'Storage Type'), the correct term is 'Tips' (as in 'veids' or 'kategorija'). In Latvian, 'Tips' is a false friend in this context.",
+          "suggestion": "Veids"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -315,7 +309,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovenian word 'Tip' is a false friend in this context. While it can mean 'type' in some contexts, in UI/UX for classification/category, 'Vrsta' is the correct and standard term. 'Tip' often refers to a 'hint' or 'advice' in Slovenian, which would be confusing for a label indicating an entity's classification.",
+          "suggestion": "Vrsta"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

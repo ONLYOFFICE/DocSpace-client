@@ -2,6 +2,7 @@
   "CollaborationRoomEmptyTitle": "Vitajte v Miestnosti na spoluprácu",
   "CollaboratorEmptyTitle": "Miestnosť je prázdna.",
   "CreateAIAgent": "Vytvoriť nového agenta",
+  "CreateAIAgentDescription": "Začnite vytvárať svojho prvého {{aiAgent}}",
   "CreateDocument": "Vytvoriť nový dokument",
   "CreateDocumentDescription": "Využite rozsiahle funkcie spracovania textu.",
   "CreateForm": "Vytvoriť nový formulár PDF",
@@ -16,7 +17,10 @@
   "CreateSpreadsheetDescription": "Vykonávajte presné výpočty s minimálnym úsilím.",
   "CustomRoomEmptyTitle": "Vitajte vo Vlastnej miestnosti",
   "DefaultFolderDescription": "Vložte sem súbory alebo vytvorte nové.",
+  "EmptyAIAgentsAIDisabledDescription": "Táto sekcia umožňuje používateľom pracovať s {{aiAgents}} – inteligentnými asistentmi na spracovanie dokumentov a iných úloh.\nNa začatie ich používania musí váš {{productName}} administrátor povoliť službu AI funkcie.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Ak chcete vytvárať a používať {{aiAgents}}, prepojte svoju peňaženku a povoľte službu AI funkcie v nastaveniach {{productName}}. Po dokončení budete môcť pracovať s {{aiAgents}} a spolupracovať so svojím tímom.",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "Pripojte peňaženku a povoľte funkcie AI",
+  "EmptyAIAgentsTitle": "Vytvorte svojho {{aiAgent}}",
   "EmptyDescription": "Začnite s rýchlymi akciami:",
   "EmptyFavoritesDescription": "Označte súbory a priečinky, aby ste ich mali ľahko prístupné a na dosahu.",
   "EmptyFavoritesTitle": "Zatiaľ nemám žiadne obľúbené položky.",
@@ -57,5 +61,8 @@
   "UploadFromPortalTitle": "Nahrať z {{productName}}",
   "UploadPDFFormOptionDescription": "Vyberte pripravený PDF formulár dostupný v {{productName}} a nahrajte ho do miestnosti.",
   "VirtualDataRoomEmptyTitle": "Vitajte vo Virtuálnej dátovej miestnosti",
-  "EmptyAIAgentsTitle": "Vytvorte svojho {{aiAgent}}"
+  "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} nie sú ešte dostupné",
+  "EmptyAIAgentsAIEnabledUserDescription": "Poďte, keď vás váš tím pozýva na spoluprácu, {{aiAgents}} sa tu zobrazí a bude pripravený na pomoc s dokumentmi, správou znalostí a každodennými úlohami.",
+  "EmptyAIAgentsDescription": "Nastavte personalizovaného asistentu pre váš tím pridaním základnej znalosti, výberom ideálneho modelu a pripojením {{mcpServer}}. Zapínačte svojich kolegov na spoluprácu a využite chatové možnosti agenta na maximum.",
+  "EmptyAIAgentsUserTitle": "Žiadne {{aiAgents}} ešte nie sú dostupné"
 }

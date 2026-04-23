@@ -3,7 +3,7 @@
   "content": "Room not available",
   "content_en_sha1_hash": "9133dc18fe95f3b8f20a7849bdab1ce0384389ce",
   "created_at": "2025-05-19T21:30:48.227Z",
-  "updated_at": "2026-03-31T15:18:46.265Z",
+  "updated_at": "2026-04-08T00:23:16.897Z",
   "comment": {
     "text": "The \"RoomNotAvailable\" translation key is used to display a message indicating that a room is not available, typically appearing in error messages or notifications on expired shared links. This message aims to inform users of the room's unavailability. It is used within error handling contexts, such as in error messages or password entry dialogs.",
     "is_auto": true,
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2685,
+      "line_number": 2690,
       "context": "const title = isFile\n ? t(\"Common:FileNotAvailable\")\n : isFolder\n ? t(\"Common:FolderNotAvailable\")\n : t(\"Common:RoomNotAvailable\");\n \n return toastr.error(description, title);\n }\n \n if (isLockedSharedRoom(item))",
       "module": "/packages/client"
     }
@@ -45,13 +45,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'متاحة' (mutaaha) should be 'متوفرة' (mutawaffira) for a more natural and accurate translation of 'available' in this context.  'متاحة' is more appropriate for things like 'available for use' but 'متوفرة' better reflects a room not being offered.",
-          "suggestion": "الغرفة غير متوفرة"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -177,13 +171,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'කාමරය නොමැත' while literally meaning 'room not exists', doesn't convey the intended meaning of 'Room not available'. A more appropriate translation would emphasize the room's unavailability.",
-          "suggestion": "කාමරය అందుబాటులో లేదు (Kamara anduvaloo leedu) - Room is not available"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -204,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Соба није доступна\" incorrectly translates 'Room'. It should be 'Собе' (Sobе). 'Соба' means 'room' in singular form, while 'Собе' is the correct plural form based on the English phrase 'Room not available'.",
-          "suggestion": "Собе није доступна"
+          "description": "The word 'Соба' (Soba) is a misspelling or incorrect form; in Serbian, 'room' is 'Soba' (Собa), but the translation provided 'Соба' is often interpreted as a typo or lacks the correct grammatical context for a title. More importantly, 'Соба' is not the standard way to refer to a digital 'room' in this context; however, the primary error is that 'Соба' is a misspelling of 'Собa' or simply an incorrect noun usage for a digital space.",
+          "suggestion": "Собa није доступна"
         }
       ],
       "approved_at": null
@@ -235,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

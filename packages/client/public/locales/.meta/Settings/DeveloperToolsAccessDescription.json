@@ -3,7 +3,7 @@
   "content": "This setting allows you to make the Developer Tools section visible to all users except guests. If you want to restrict access to this section, making it accessible to the owner and {{productName}} administrators only, select Disable and click Save button.",
   "content_en_sha1_hash": "01d2a8045315e8f0f4963266d4c08d273e77ec34",
   "created_at": "2025-07-10T11:10:58.987Z",
-  "updated_at": "2026-03-26T08:26:58.254Z",
+  "updated_at": "2026-04-09T03:26:11.149Z",
   "comment": {
     "text": "This translation key is used to describe a setting that controls access to Developer Tools on a portal. It will appear in a dialog or settings page, providing guidance on how to restrict or enable access to this section.",
     "is_auto": true,
@@ -159,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation contains a logical error in the conditional clause. The English says 'If you want to restrict access... select Disable', but the Sinhala translation says 'If you want to restrict access... if it is accessible to the owner... select Disable', which creates a redundant and confusing 'if... if...' structure that fails to clearly instruct the user on the action to take.",
+          "suggestion": "මෙම සැකසුම මඟින් සංවර්ධක මෙවලම් කොටස අමුත්තන්ට හැර අනෙකුත් සියලුම පරිශීලකයින්ට දෘශ්‍යමාන කිරීමට ඉඩ සලසයි. ඔබට මෙම කොටසට ප්‍රවේශය සීමා කර, එය හිමිකරුට සහ {{productName}} පරිපාලකයින්ට පමණක් ප්‍රවේශ විය හැකි ලෙස සැකසීමට අවශ්‍ය නම්, 'අක්‍රීය කරන්න' (Disable) තෝරා 'සුරකින්න' (Save) බොත්තම ක්ලික් කරන්න."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

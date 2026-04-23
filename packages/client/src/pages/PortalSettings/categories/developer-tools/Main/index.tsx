@@ -98,29 +98,29 @@ const Main = (props: { apiBasicLink: string }) => {
             color={globalColors.secondGreen}
             linkTitle={t("Common:ReadInstructions")} 
           />
-          <Card 
-            icon={<WebhookSvg />} 
-            title={t("Webhooks:Webhooks")} 
-            description={t("Settings:WebhooksDescription", { organizationName: t("Common:OrganizationName"), productName: t("Common:ProductName") })} 
-            url="/developer-tools/webhooks" 
+          <Card
+            icon={<WebhookSvg />}
+            title={t("Webhooks:Webhooks")}
+            description={t("Settings:WebhooksDescription", { organizationName: t("Common:OrganizationName"), productName: t("Common:ProductName") })}
+            url="/developer-tools/webhooks?create=true"
             color={globalColors.mainRed}
-            linkTitle={t("Webhooks:CreateWebhook")} 
+            linkTitle={t("Webhooks:CreateWebhook")}
           />
-          <Card 
-            icon={<OAuthSvg />} 
-            title={t("OAuth:OAuth")} 
-            description={t("Settings:OAuthDescription", { organizationName: t("Common:OrganizationName"), productName: t("Common:ProductName") })} 
-            url="/developer-tools/oauth" 
+          <Card
+            icon={<OAuthSvg />}
+            title={t("OAuth:OAuth")}
+            description={t("Settings:OAuthDescription", { organizationName: t("Common:OrganizationName"), productName: t("Common:ProductName") })}
+            url="/developer-tools/oauth/create"
             color={globalColors.purple}
-            linkTitle={t("Settings:RegisterApp")} 
+            linkTitle={t("Settings:RegisterApp")}
           />
-          <Card 
-            icon={<KeySvg />} 
-            title={t("Settings:ApiKeys")} 
-            description={t("Settings:ApiKeysCardDescription", { organizationName: t("Common:OrganizationName"), productName: t("Common:ProductName") })} 
-            url="/developer-tools/api-keys" 
+          <Card
+            icon={<KeySvg />}
+            title={t("Settings:ApiKeys")}
+            description={t("Settings:ApiKeysCardDescription", { organizationName: t("Common:OrganizationName"), productName: t("Common:ProductName") })}
+            url="/developer-tools/api-keys?create=true"
             color={globalColors.lightGrayDark}
-            linkTitle={t("Settings:CreateKey")} 
+            linkTitle={t("Settings:CreateKey")}
           />
         </div>
       </div>

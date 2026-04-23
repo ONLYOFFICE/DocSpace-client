@@ -3,7 +3,7 @@
   "content": "Other actions",
   "content_en_sha1_hash": "28ee59aa4a0d2debd33eaa04e0f4d44c8e894a17",
   "created_at": "2025-05-19T21:30:54.988Z",
-  "updated_at": "2026-02-19T13:36:32.523Z",
+  "updated_at": "2026-04-07T19:35:05.104Z",
   "comment": {
     "text": "\"This translation key is used to display a label for an 'Other actions' section in a hotkeys preview panel. It appears as a heading and is related to user interface controls.\"",
     "is_auto": true,
@@ -51,13 +51,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Sonstiges\" is a valid German word, it doesn't perfectly capture the meaning of \"Other actions\" in this context. \"Sonstiges\" is more general and might imply miscellaneous items rather than actions. A more suitable translation would convey the idea of actions not directly listed.",
-          "suggestion": "Alternative suggestions include: \"Weitere Aktionen\", \"Zusätzliche Aktionen\", or \"Weitere Funktionen\" depending on the specific application of 'Other actions'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -105,13 +99,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"기타 작업\" (gita jageop) is technically correct, it's a rather formal and literal translation of \"Other actions.\" For a hotkey panel, a more natural and user-friendly translation would be preferable.",
-          "suggestion": "Consider alternatives like \"추가 작업\" (chuga jageop - additional actions) or \"다른 작업\" (dameun jageop - other actions) for a more conversational tone."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -183,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Друге радње\" is a literal translation of \"Other actions\" but doesn't convey the intended meaning in the context of a user interface. It would be better to use a phrasing that implies a list of additional actions or options.",
-          "suggestion": "Могуће радње"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

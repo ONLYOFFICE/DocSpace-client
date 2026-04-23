@@ -26,9 +26,9 @@
 
 import React from "react";
 import { useNavigate, useLocation } from "react-router";
-import { useStores } from "@onlyoffice/ai-chat";
 
 import { Tabs, TTabItem } from "@docspace/ui-kit/components/tabs";
+import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 import {
   AiModels,
   ModelAssignment,

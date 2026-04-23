@@ -3,7 +3,7 @@
   "content": "Accesses",
   "content_en_sha1_hash": "3e2ca80db95767e37d4fe7d8f846aa94cb667515",
   "created_at": "2025-05-19T21:30:42.828Z",
-  "updated_at": "2025-12-22T14:25:01.338Z",
+  "updated_at": "2026-04-08T18:22:15.077Z",
   "comment": {
     "text": "This translation key is used for displaying the title of a tab on a page that lists access details. It appears as the name of a button or tab in an info panel header.",
     "is_auto": true,
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation \"الصلاحيات\" (Al-Salahiyat) generally translates to \"permissions\" or \"authorizations,\" not \"accesses.\" While related, \"accesses\" implies the act of gaining access, while \"الصلاحيات\" focuses on the authority or right to access.",
-          "suggestion": "Consider a translation closer to \"وصول\" (Wusool) which means \"access\" or a phrasing that conveys the action of accessing, such as \"عمليات الوصول\" (Amaliyat Al-Wusool) - 'Access Operations'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -51,13 +45,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech translation \"Přístupy\" is a possible translation of \"Accesses\", but it lacks the specific nuance of the English word in this context. \"Přístupy\" generally means \"approaches\" or \"access points\". A more accurate translation, depending on the intended meaning, might be \"vstupy\" (entries), \"přístupy\" (accesses, but more like permissions), or a rephrasing of the sentence to better convey the meaning.",
-          "suggestion": "Consider alternatives like \"vstupy\" or \"přístupy\" and review context to ensure accuracy. A rephrased solution might be preferable."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -81,13 +69,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'Accesses' refers to permissions or rights of access. 'Oikeudet' is a good translation but may be too broad depending on the context. A more precise translation might be 'Pääsykerrat' (access instances) or 'Käyttöoikeudet' (usage rights) depending on what 'Accesses' refers to.",
-          "suggestion": "Consider 'Pääsykerrat' or 'Käyttöoikeudet' for greater specificity."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -99,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation \"Մուտքի իրավունքներ\" translates to \"Access Rights\" which is more specific than the English term \"Accesses\". While not entirely wrong, it loses the broader meaning of simply 'accesses' which could refer to instances or occurrences of access.",
-          "suggestion": "Consider a more literal translation like \"Մուտքեր\" (Mutker) which translates to 'accesses' as a plural noun, or \"մուտքային\" (mutqayin) which conveys access-related items, depending on the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -141,13 +117,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Dutch translation \"Toegang tot\" is a literal translation of \"Accesses\" but doesn't capture the full meaning. \"Accesses\" in this context likely refers to a count or list of accesses, not simply 'access to'. A more accurate translation would depend on the specific context (e.g., 'Aantal toegangken', 'Toegangen', or a rephrased sentence).",
-          "suggestion": "Requires further context to provide an accurate translation. Possible alternatives: 'Aantal toegangken', 'Toegangen', or rephrase the sentence."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -204,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Приступи\" does not accurately translate \"Accesses.\" \"Приступи\" means \"approach\" or \"proceed.\" A more accurate translation would depend on the context of \"Accesses\".",
-          "suggestion": "Requires context to determine the correct translation. Potential alternatives could include: \"Приступити\" (to access), \"Прилази\" (approaches), or a more specific term based on the intended meaning."
+          "description": "The translation 'Приступи' means 'Proceed' or 'Approach' (imperative verb), whereas the English 'Accesses' in this context refers to 'Permissions' or 'Access rights' (plural noun).",
+          "suggestion": "Приступања"
         }
       ],
       "approved_at": null
@@ -235,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

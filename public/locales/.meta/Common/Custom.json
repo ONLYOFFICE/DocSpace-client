@@ -3,7 +3,7 @@
   "content": "Custom",
   "content_en_sha1_hash": "081ae3fdc403609cf6e760849ebb14117b7a50cb",
   "created_at": "2025-05-19T21:30:44.262Z",
-  "updated_at": "2026-03-26T08:26:58.125Z",
+  "updated_at": "2026-04-10T08:21:04.341Z",
   "comment": {
     "text": "This translation key is used for \"Custom\" labels and descriptions in the Portal Settings page, particularly in the categories and developer tools sections. It appears as a title or heading, indicating custom themes or settings. Translators should provide an equivalent label that accurately reflects the UI context.",
     "is_auto": true,
@@ -18,14 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 130,
+      "line_number": 122,
       "context": "description: t(\"FileSelectorDescription\"),\n image: theme.isBase ? FileSelectorImg : FileSelectorImgDark,\n handleOnClick: navigateToFileSelector,\n },\n {\n title: t(\"Common:Custom\"),\n description: t(\"CustomDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n image: theme.isBase ? CustomImg : CustomImgDark,\n handleOnClick: navigateToCustom,",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 541,
-      "context": "{\n id: \"portal-settings_catalog-javascript-sdk_custom\",\n key: \"8-1-1\",\n icon: \"\",\n link: \"custom\",\n tKey: \"Common:Custom\",\n },\n {\n id: \"portal-settings_catalog-javascript-sdk_room-selector\",\n key: \"8-1-2\",\n icon: \"\",",
       "module": "/packages/client"
     },
     {
@@ -75,13 +69,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation \"Προσαρμοσμένα\" (Prosarmozmena) translates more closely to 'Customized' or 'Adapted' rather than simply 'Custom'. While related, it doesn't perfectly capture the meaning of 'Custom'.",
-          "suggestion": "Consider alternatives like \"Εξατομικευμένο\" (Exatomikeymeno) which translates to 'Personalized' or 'Custom', or a more literal translation depending on the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -102,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Personnalisées\" is acceptable, but \"Personnalisé\" (singular) might be more appropriate depending on the context. \"Personnalisées\" implies a plural meaning, while \"Custom\" can often refer to a single customized item.",
-          "suggestion": "Consider 'Personnalisé' if the context suggests a single custom item."
+          "description": "The translation 'Personnalisées' is feminine plural, whereas the English 'Custom' is a neutral adjective/label. In a UI context for a heading or category, it should be the masculine singular 'Personnalisé' or the noun 'Personnalisation' to avoid gender agreement errors with unknown subsequent nouns.",
+          "suggestion": "Personnalisé"
         }
       ],
       "approved_at": null
@@ -114,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Հարմարեցնել\" (Harmartsetnel) translates to 'to adapt' or 'to customize', but it's a verb. \"Custom\" is an adjective or noun and requires a different translation to accurately convey its meaning.",
-          "suggestion": "Consider using a noun like \"Մարմնավորում\" (Marmnavorum - embodiment/customization) or \"Անհատականություն\" (Anhatakanut'yun - individuality/customization) depending on the context."
+          "description": "The Armenian translation 'Հարմարեցնել' means 'to adjust' or 'to adapt' (a verb). In the context of UI labels for themes or settings, 'Custom' should be an adjective/noun meaning 'customized' or 'user-defined'.",
+          "suggestion": "Անհատական"
         }
       ],
       "approved_at": null
@@ -165,7 +153,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English word 'Custom' is an adjective meaning 'personalized' or 'bespoke' (e.g., Custom Themes). The Portuguese translation 'Personalizar' is a verb meaning 'to customize'. In a UI heading context, the adjective 'Personalizado' or the noun 'Personalização' should be used.",
+          "suggestion": "Personalizado"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -177,13 +171,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Particularizat' can sometimes be appropriate, it doesn't accurately convey the meaning of 'Custom' in most contexts. 'Custom' often refers to personalized, bespoke, or tailored options. 'Particularizat' implies something that has been categorized or made specific.",
-          "suggestion": "Consider alternatives like 'Personalizat', 'Modificat', 'Individualizat', or 'Specializat', depending on the intended context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -207,31 +195,25 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Po meri' means 'tailor-made' or 'according to my measure' in a literal/physical sense. In a UI context for settings, themes, or developer tools, 'Custom' should be translated as 'Prilagojeno' to denote user-defined or customized configurations.",
+          "suggestion": "Prilagojeno"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Прилагођени' while technically meaning 'adapted' or 'adjusted', isn't the most accurate or natural translation of 'Custom'. It implies a modification rather than something created or designed specifically.",
-          "suggestion": "Consider 'Примерски' (Primerski) which directly translates to 'custom' or 'bespoke', or 'Направљен по мери' (Napračen po meri) which means 'made to measure'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Prilagođeni' can be a valid translation for 'Custom,' it implies 'adjusted' or 'adapted'. 'Custom' often refers to something made or designed specifically, and a more accurate translation might be 'Posebno izrađeni' (specially made) or 'Individualni' (individual).",
-          "suggestion": "Consider 'Posebno izrađeni' or 'Individualni' for a more precise translation of 'Custom'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -243,13 +225,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Налаштовуваний\" is a possible translation for \"Custom,\" it's quite formal and potentially less suitable depending on the context. A more common and often better translation, especially for UI elements, would be \"Власноруч\" or \"Змінюваний\".  \"Налаштовуваний\" implies a complex, detailed customization process.",
-          "suggestion": "Consider \"Власноруч\" or \"Змінюваний\" depending on the specific context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -259,6 +235,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

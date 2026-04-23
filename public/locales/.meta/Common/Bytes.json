@@ -3,7 +3,7 @@
   "content": "bytes",
   "content_en_sha1_hash": "daf529a73101c2be626b99fc6938163e7a27620b",
   "created_at": "2025-05-19T21:30:43.348Z",
-  "updated_at": "2026-03-26T08:26:58.340Z",
+  "updated_at": "2026-04-10T08:21:04.388Z",
   "comment": {
     "text": "The \"Bytes\" translation key is used to display the unit \"byte\" in various parts of the application. It appears on a quota form, where users can select options such as kilobytes or gigabytes, indicating that this key is used for file size units in a UI context.",
     "is_auto": true,
@@ -14,18 +14,6 @@
       "file_path": "/packages/shared/components/quota-form/index.tsx",
       "line_number": 88,
       "context": "return 2;\n };\n \n const getOptions = (t: TTranslation) => [\n { key: 0, label: t(\"Common:Bytes\") },\n { key: 1, label: t(\"Common:Kilobyte\") },\n { key: 2, label: t(\"Common:Megabyte\") },\n { key: 3, label: t(\"Common:Gigabyte\") },\n { key: 4, label: t(\"Common:Terabyte\") },\n ];",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 705,
-      "context": ") => {\n let power = 0;\n let resultSize = bytes;\n \n const sizeNames = [\n t(\"Common:Bytes\"),\n t(\"Common:Kilobyte\"),\n t(\"Common:Megabyte\"),\n t(\"Common:Gigabyte\"),\n t(\"Common:Terabyte\"),\n t(\"Common:Petabyte\"),",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 705,
-      "context": ") => {\n let power = 0;\n let resultSize = bytes;\n \n const sizeNames = [\n t(\"Common:Bytes\"),\n t(\"Common:Kilobyte\"),\n t(\"Common:Megabyte\"),\n t(\"Common:Gigabyte\"),\n t(\"Common:Terabyte\"),\n t(\"Common:Petabyte\"),",
       "module": "/packages/shared"
     }
   ],
@@ -39,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English term 'bytes' is plural, while the Arabic translation 'بايت' is singular. In a UI context listing units (Kilobyte, Megabyte, etc.), the plural form 'بايتات' or the contextually appropriate plural is required to match the English 'bytes'.",
+          "suggestion": "بايتات"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -51,7 +45,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in English instead of Bulgarian (Cyrillic script).",
+          "suggestion": "байтове"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Finnish translation 'bitit' translates to 'bits' in English, not 'bytes'. The correct translation for 'bytes' in Finnish is 'tavuja'.",
-          "suggestion": "tavuja"
+          "description": "The translation 'bitit' refers to 'bits', whereas the English source 'bytes' refers to 'bytes'. In computing, these are different units of measurement (1 byte = 8 bits).",
+          "suggestion": "tavut"
         }
       ],
       "approved_at": null
@@ -93,7 +93,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English term 'bytes' refers to a unit of digital information. In French, the correct term is 'octets'. Using 'bytes' in French is an anglicism and technically incorrect in a localized UI context.",
+          "suggestion": "octets"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -129,7 +135,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian word 'baiti' is a phonetic transliteration that is not the standard or correct term for the digital unit 'bytes'. The correct term is 'bajti'.",
+          "suggestion": "bajti"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -165,19 +177,19 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The singular form \"байт\" (bajt) is provided for the English word \"bytes\" which is plural. The singular form of 'byte' is correct, but the provided translation doesn't account for the plural form.",
-          "suggestion": "байт(ы)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'බයිට' is an incomplete transliteration of 'bytes'. It sounds like 'byte' (singular) but is phonetically truncated and does not correctly represent the plural unit in a technical context.",
+          "suggestion": "බයිට්ස්"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -189,13 +201,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation \"bajtov\" is the genitive plural form of \"bajt.\"  The English word \"bytes\" is a plural noun, but the context is not provided to justify the genitive case. The nominative plural, \"baji\" or the singular \"bajt\" might be more appropriate depending on the intended meaning.",
-          "suggestion": "Consider \"baji\" (nominative plural) or \"bajt\" (singular) if the genitive case is not necessary. More context is needed to determine the correct translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -207,13 +213,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation \"Bajtovi\" is a plural form. The English content is a singular noun (\"bytes\"). While \"Bajtovi\" can be used in some contexts, a more accurate singular translation would be \"Bajt\".",
-          "suggestion": "Bajt"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -235,6 +235,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

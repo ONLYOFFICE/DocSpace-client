@@ -3,7 +3,7 @@
   "content": "Data import from Nextcloud to {{organizationName}} {{productName}} is complete!",
   "content_en_sha1_hash": "3fc84e679584c3062a1a842d78944f1be35528d6",
   "created_at": "2025-05-19T21:30:51.627Z",
-  "updated_at": "2025-10-03T10:07:11.718Z",
+  "updated_at": "2026-04-09T02:54:42.411Z",
   "comment": {
     "text": "This translation key is used to display a success message after completing data import from Nextcloud to an organization. It appears in the UI as a confirmation message, typically on a button or dialog that indicates successful import completion.",
     "is_auto": true,
@@ -39,25 +39,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Входирането' (Vhodirane) isn't the best translation for 'import' in this context. It implies a more formal or bureaucratic import process. A more natural translation for data import would be 'Прехвърлянето' (Prehvarlyane) or 'Импортирането' (Importirane).",
-          "suggestion": "Прехвърлянето на данни от Nextcloud към {{organizationName}} {{productName}} приключи!"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'dokončen' while technically correct, might sound slightly formal or bureaucratic in this context. A more natural phrasing would be 'Hotovo!' or 'Ukončený!'",
-          "suggestion": "Import dat z Nextcloudu do {{organizationName}} {{productName}} je Hotovo!"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -69,13 +57,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'στο {{productName}} του {{organizationName}}' which is a literal translation and sounds awkward in Greek. A more natural phrasing would be 'στο {{productName}} της {{organizationName}}'. While 'του' and 'της' both mean 'of', they are used for masculine and feminine nouns respectively.  {{organizationName}} is likely a feminine noun, so 'της' is more appropriate.",
-          "suggestion": "Η εισαγωγή δεδομένων από το Nextcloud στο {{productName}} της {{organizationName}} ολοκληρώθηκε!"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -87,13 +69,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The colon after 'Nextcloudista' creates an awkward reading flow. While grammatically correct, it's not typical in this context and breaks the natural flow of the sentence.",
-          "suggestion": "Tietojen tuonti Nextcloudista {{organizationName}} {{productName}} on suoritettu!"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -105,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ավարտված է' directly translates to 'is finished'. While technically correct, it's less natural in Armenian. A more idiomatic phrasing would be 'կայացել է' which implies successful completion.",
-          "suggestion": "Nextcloud-ից տվյալների ներմուծումը {{organizationName}} {{productName}} կայացել է:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -159,37 +129,19 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The translation uses 'A importação' which is grammatically incorrect. It should be 'A importação de'.",
-          "suggestion": "A importação de dados do Nextcloud para o {{organizationName}} {{productName}} está concluída!"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'A importação de dados do Nextcloud para o {{organizationName}} {{productName}} está concluída!' is grammatically correct but slightly awkward. A more natural and common phrasing would be 'A importação de dados do Nextcloud para o {{organizationName}} {{productName}} foi concluída!'",
-          "suggestion": "A importação de dados do Nextcloud para o {{organizationName}} {{productName}} foi concluída!"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'date' which means 'day' or 'date' as a noun. 'Import' should be translated to 'Importul' to match the English word.",
-          "suggestion": "Importul datelor din Nextcloud în {{organizationName}} {{productName}} este finalizat!"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -219,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Serbian translation maintains the English formatting with placeholders {{organizationName}} {{productName}}, which is appropriate.",
-          "suggestion": null
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -257,11 +203,17 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"工作区\" (gōngzuòqū) which translates to \"workspace\" is not necessarily accurate for describing a Nextcloud instance. It is not explicitly mentioned in the English text. A more generic term like \"Nextcloud\" or \"来源平台\" (láiyuán píngtái - source platform) might be more appropriate.",
-          "suggestion": "从 Nextcloud 或 来源平台到 {{organizationName}}{{productName}} 的数据导入已完成！"
+          "type": "missing_content",
+          "description": "The Chinese translation adds the word '工作区' (workspace) which is not present in the English source text.",
+          "suggestion": "从 Nextcloud 到 {{organizationName}}{{productName}} 的数据导入已完成！"
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

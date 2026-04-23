@@ -3,7 +3,7 @@
   "content": "Sign up with LinkedIn",
   "content_en_sha1_hash": "cafda06fad6c2d6b9cfd279731174dd21f604a9b",
   "created_at": "2025-05-19T21:30:48.844Z",
-  "updated_at": "2026-03-26T08:26:58.374Z",
+  "updated_at": "2026-04-10T08:21:04.402Z",
   "comment": {
     "text": "The translation key \"SignUpWithLinkedIn\" is used to display the text \"Sign up with LinkedIn\" in a UI component, likely a sign-up or login form, where users can choose to register using their LinkedIn account. This text appears as an option for users to select when signing up for an account.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 474,
+      "line_number": 476,
       "context": "return signUp\n ? t(\"Common:SignUpWithTwitter\")\n : t(\"Common:SignInWithTwitter\");\n case \"linkedin\":\n return signUp\n ? t(\"Common:SignUpWithLinkedIn\")\n : t(\"Common:SignInWithLinkedIn\");\n case \"microsoft\":\n return signUp\n ? t(\"Common:SignUpWithMicrosoft\")\n : t(\"Common:SignInWithMicrosoft\");",
       "module": "/packages/shared"
     }
@@ -42,7 +42,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Bulgarian translation \"Влезте чрез LinkedIn\" translates to \"Log in with LinkedIn\". The English content \"Sign up with LinkedIn\" implies a registration process, not just logging in. \"Влезте\" implies logging in to an existing account.",
+          "description": "The Bulgarian translation means 'Log in with LinkedIn' (SignIn) instead of 'Sign up with LinkedIn' (SignUp).",
           "suggestion": "Регистрирайте се чрез LinkedIn"
         }
       ],
@@ -99,13 +99,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, the translation 'Linkedinでサインアップする' is a very literal translation. A more natural and common phrasing would be 'LinkedInで登録する' (LinkedIn de tōroku suru). 'サインアップする' sounds slightly awkward in this context.",
-          "suggestion": "LinkedInで登録する"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -120,7 +114,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເຂົ້າສູ່ລະບົບດ້ວຍ LinkedIn\" translates to 'Log in with LinkedIn'. The English phrase 'Sign up with LinkedIn' means to create a new account.",
+          "description": "The Lao translation means 'Log in with LinkedIn' instead of 'Sign up with LinkedIn'. 'ເຂົ້າສູ່ລະບົບ' is for Sign in/Log in, whereas 'ລົງທະບຽນ' should be used for Sign up.",
           "suggestion": "ລົງທະບຽນດ້ວຍ LinkedIn"
         }
       ],
@@ -153,13 +147,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Cadastre-se com Linkedin' is a slightly formal and less common phrasing for 'Sign up with LinkedIn' in Brazil. A more natural translation would use 'Inscreva-se' or 'Crie uma conta'.",
-          "suggestion": "Inscreva-se com LinkedIn"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -168,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Conectare prin LinkedIn' is understandable, 'Sign up with LinkedIn' implies creating an account, whereas 'Conectare prin LinkedIn' suggests connecting an existing account. A more accurate translation might be 'Înregistrare cu LinkedIn' or 'Creează cont cu LinkedIn'.",
-          "suggestion": "Înregistrare cu LinkedIn"
+          "description": "The Romanian translation 'Conectare prin LinkedIn' means 'Log in with LinkedIn' or 'Connection via LinkedIn', which corresponds to 'Sign in'. The English source is 'Sign up', which refers to registration/creating a new account.",
+          "suggestion": "Înregistrare prin LinkedIn"
         }
       ],
       "approved_at": null
@@ -183,13 +171,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ලින්ක්ඩින්' (LinkedIn) is spelled correctly, but a hyphen or space might improve readability depending on the context.",
-          "suggestion": "Consider adding a hyphen or space after 'ලින්ක්ඩින්' if the design or surrounding text benefits from it. For example: 'ලින්ක්ඩින් - සමඟ' or 'ලින්ක්ඩින් සමඟ'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -201,25 +183,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Vpiši se z LinkedIn' doesn't quite capture the meaning of 'Sign up with LinkedIn.' While 'Vpiši se' means 'Enter' or 'Log in,' 'Sign up' implies creating a new account. A more accurate translation would convey the act of registration.",
-          "suggestion": "Prijavi se z LinkedIn"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Региструј се путем LinkedIn-а\" is a bit clunky. A more natural and common translation would be \"Пријави се путем LinkedIn-а\" or \"Повежи се са LinkedIn-ом\". \"Региструј се\" implies a more complex registration process.",
-          "suggestion": "Пријави се путем LinkedIn-а"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -249,13 +219,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While '用领英帐号注册' is understandable, a more accurate and natural translation would be closer to '使用领英账户注册' or '通过领英注册'. The current phrasing feels slightly awkward and less idiomatic.",
-          "suggestion": "使用领英账户注册"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

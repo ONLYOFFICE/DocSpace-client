@@ -70,7 +70,7 @@ const KnowledgeSettings = () => {
 								src={ActionsUploadReactSvgUrl}
 							/>
 						}
-						label={t("Article:UploadFiles")}
+						label={t("Common:UploadFiles")}
 						scale
 						filled
 						filledStroke

@@ -3,7 +3,7 @@
   "content": "Invitations sent again:",
   "content_en_sha1_hash": "cbf7c99c124eac8971e3b2796ff08f71fe296890",
   "created_at": "2025-05-19T21:30:54.934Z",
-  "updated_at": "2025-11-03T12:10:35.116Z",
+  "updated_at": "2026-04-07T19:35:05.120Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that invitations have been resent again, likely found on a button or in a confirmation dialog in the room update access section of the InfoPanel.",
     "is_auto": true,
@@ -87,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Կրկին ուղարկված հրավերներ:\" is a literal translation of \"Invitations sent again:\". While technically correct, it sounds slightly unnatural in Armenian. A more natural phrasing might be something like \"Ուղարկվեցին նոր հրավերներ:\" or \"Հրավերները կրկին ուղարկվեցին:\"",
-          "suggestion": "Հրավերները կրկին ուղարկվեցին:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -123,13 +117,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Uzaicinājumi, kas ir nosūtīti vēlreiz:' is too literal and sounds awkward in Latvian. A more natural translation would be 'Uzaicinājumi atkārtoti nosūtīti:' or 'Uzaicinājumi nosūtīti atkārtoti:'",
-          "suggestion": "Uzaicinājumi atkārtoti nosūtīti:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -171,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ආරාධනා නැවත එවුව:' is a literal translation and sounds unnatural in Sinhala. A more natural phrasing would be something like 'ආරාධනා නැවත යවා ඇත:' or 'ආරාධනා නැවත යවා ඇත්තෙමු:'",
-          "suggestion": "ආරාධනා නැවත යවා ඇත:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -195,13 +177,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Позивнице поново послате:' is a literal translation and sounds slightly unnatural in Serbian. A more natural phrasing would be something like 'Позивнице су поново послате' or 'Поново су послате позивнице'.",
-          "suggestion": "Позивнице су поново послате:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

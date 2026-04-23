@@ -3,7 +3,7 @@
   "content": "Delivery",
   "content_en_sha1_hash": "9631af52c66f1a5cd964380b009c74efdee01947",
   "created_at": "2025-05-19T21:30:49.687Z",
-  "updated_at": "2025-05-24T02:30:37.678Z",
+  "updated_at": "2026-04-08T20:30:00.132Z",
   "comment": {
     "text": "This translation key is used for displaying the title of a column in a table related to webhooks, specifically indicating \"Delivery\". It is likely used on a history table page where users view past webhook events.",
     "is_auto": true,
@@ -99,13 +99,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"전송\" (jeonsong) can mean 'delivery', in the context of webhooks, a more accurate and commonly used translation would be '전달' (jeondal) or '전송' (jeonsong) depending on the specific nuance desired.  '전달' implies conveying something, while '전송' refers to sending data.  '전송' is acceptable but '전달' might be more precise.",
-          "suggestion": "Consider '전달' (jeondal) or keeping '전송' (jeonsong) depending on context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -204,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Đã gửi' translates to 'Sent' or 'Dispatched,' which isn't a direct equivalent of 'Delivery'. 'Delivery' implies the process of delivering something, whereas 'Đã gửi' implies the action of sending something.  A more accurate translation might be 'Giao hàng' or 'Phân phối'.",
-          "suggestion": "Giao hàng"
+          "description": "The English word 'Delivery' is a noun referring to the act or process of delivering. The Vietnamese translation 'Đã gửi' means 'Sent' (past tense verb), which describes a status rather than a column title/category.",
+          "suggestion": "Chuyển phát"
         }
       ],
       "approved_at": null
@@ -216,10 +210,16 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"传递\" (chuan di) can mean delivery, it's a very general term. In the context of webhooks, a more accurate and commonly used translation would be \"交付\" (jiaofu) or \"推送\" (tuisong), which better convey the technical meaning of 'delivery' as in data delivery.",
-          "suggestion": "Consider using \"交付\" (jiaofu) or \"推送\" (tuisong) instead of \"传递\" (chuan di)."
+          "description": "In the context of webhooks and event history, 'Delivery' refers to the successful transmission or dispatch of a payload to a destination. '传递' (chuándì) is too abstract and often used for passing objects or information in a general sense. In technical UI for webhooks, '投递' or '发送状态' is more accurate for the delivery status/process.",
+          "suggestion": "投递"
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

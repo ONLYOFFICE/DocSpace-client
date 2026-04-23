@@ -3,7 +3,7 @@
   "content": "Title",
   "content_en_sha1_hash": "768e0c1c69573fb588f61f1308a015c11468e05f",
   "created_at": "2025-05-19T21:30:49.298Z",
-  "updated_at": "2026-03-20T09:07:45.517Z",
+  "updated_at": "2026-04-07T21:43:08.243Z",
   "comment": {
     "text": "This translation key is used to display the title of a header or panel element. It appears as a label on buttons, checkboxes, and other UI elements in various applications, such as panels, sections, and settings pages. Translators should focus on translating this content to provide clear and consistent titles throughout the product.",
     "is_auto": true,
@@ -201,13 +201,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation \"සිරැසිය\" translates to \"trouble\", \"difficulty\", or \"misery\". It does not accurately represent the English word \"Title\".",
-          "suggestion": "The correct translation for \"Title\" in Sinhala is \"ගිණුම\" (ginuma)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

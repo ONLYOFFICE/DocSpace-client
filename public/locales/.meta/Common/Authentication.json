@@ -3,7 +3,7 @@
   "content": "Authentication",
   "content_en_sha1_hash": "ee1acfa55eb1476c86c5c4a68f256a67b25289ab",
   "created_at": "2025-05-19T21:30:43.148Z",
-  "updated_at": "2025-12-09T12:12:27.308Z",
+  "updated_at": "2026-04-08T16:36:40.078Z",
   "comment": {
     "text": "This translation key is used for the label of a toggle button that enables or disables authentication settings, typically found in SMTP settings. The text appears as a button label and is labeled as \"Authentication\" to indicate its purpose. Translators should focus on providing a clear and concise description of this setting within the context of email account management.",
     "is_auto": true,
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation 'İdentifikasiya' while technically meaning 'identification', doesn't fully convey the meaning of 'Authentication'. 'Authentication' implies verifying identity and granting access. 'İdentifikasiya' is a more general term.",
-          "suggestion": "Consider 'Təsdiqləmə' or 'Zəmanət' which better reflect the concept of authentication."
+          "description": "The translation 'İdentifikasiya' means 'Identification'. In the context of SMTP/LDAP settings, 'Authentication' refers to the process of proving identity (verifying credentials), which is 'Autentifikasiya' in Azerbaijani. 'Identification' is the act of claiming an identity, whereas 'Authentication' is the verification of it.",
+          "suggestion": "Autentifikasiya"
         }
       ],
       "approved_at": null
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Заверка' can sometimes be used to mean verification, it's not the most accurate translation of 'Authentication' in a technical or security context. 'Удостоверяване' or 'Проверка за автентичност' would be more appropriate.",
-          "suggestion": "Удостоверяване"
+          "description": "The Bulgarian word 'Заверка' means 'Verification' or 'Validation'. In the context of SMTP/LDAP settings, 'Authentication' refers to the process of proving identity (logging in), which should be translated as 'Автентикация'.",
+          "suggestion": "Автентикация"
         }
       ],
       "approved_at": null
@@ -141,7 +141,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Poświadczenie' in Polish typically refers to 'attestation', 'certification', or 'endorsement'. In the context of SMTP/LDAP settings and authentication protocols, the correct technical term is 'Uwierzytelnianie'.",
+          "suggestion": "Uwierzytelnianie"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -174,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'තහවුරුව' while close in meaning, isn't the most common or direct translation of 'Authentication'. It implies 'confirmation' or 'verification' rather than the process of establishing identity.",
-          "suggestion": "Consider alternatives like 'අauthentification' (transliteration), 'අත්‍ථිකතැබීම' (aththikathabēma - validation), or 'ඔත්තිකය' (oththikaya - identification). The best choice depends on the specific context and desired level of formality."
+          "description": "The Sinhala word 'තහවුරුව' (Thahavuruva) means 'confirmation' or 'assurance'. In the context of SMTP/LDAP settings, 'Authentication' refers to the process of verifying identity (proving who you are), which is 'සත්‍යාපනය' (Sathyapanaya).",
+          "suggestion": "සත්‍යාපනය"
         }
       ],
       "approved_at": null
@@ -189,7 +195,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Preverjanje pristnosti' means 'Authenticity verification' (checking if something is genuine), whereas 'Authentication' in the context of SMTP/LDAP refers to 'Identity verification' (proving who you are).",
+          "suggestion": "Avtentikacija"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -223,6 +235,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

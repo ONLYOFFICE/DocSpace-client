@@ -34,7 +34,7 @@ import {
 } from "@docspace/ui-kit/components/table";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
-import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
+import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";

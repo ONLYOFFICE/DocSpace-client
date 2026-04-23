@@ -18,7 +18,6 @@
   "RegistrationDate": "ວັນທີລົງທະບຽນ",
   "RemoveData": "ລຶບຂໍ້ມູນສ່ວນຕົວ",
   "RemoveGuest": "ຖອນແຂກອອກ",
-  "RemoveGuestDescription": "แขກ <strong>{{userName}}</strong> ຈະຖືກຖອນອອກຈາກຫ້ອງທັງຫມົດທີ່ທ່ານເຊີນພວກເຂົາເຂົ້າຮ່ວມ ການກະ ທຳ ນີ້ບໍ່ສາມາດຍົກເລີກໄດ້",
   "RemoveGuests": "ຖອນແຂກອອກ",
   "RemoveGuestsDescription": "ບັນແຍກແຂກຄົນເດັ່ນອອກຈາກຫ້ອງທັງໝົດທີ່ທ່ານເຊີນພວກເຂົາເຂົ້າໄປ. ການກະ ທຳ ນີ້ບໍ່ສາມາດຍົກເລີກໄດ້.",
   "ResetAuth": "ຣີເຊັດການພິສູດຢືນຢັນ",
@@ -34,5 +33,6 @@
   "SuccessDeletePersonalData": "ຂໍ້ມູນສ່ວນຕົວໄດ້ຖືກລຶບອອກສໍາເລັດ",
   "SuccessSentInvitation": "ການເຊື້ອເຊີນໄດ້ຖືກສົ່ງສໍາເລັດ",
   "SuccessSentMultipleInvitatios": "ສົ່ງຄຳເຊີນສຳເລັດແລ້ວ",
-  "WithoutGroup": "ໂດຍບໍ່ມີກຸ່ມ"
+  "WithoutGroup": "ໂດຍບໍ່ມີກຸ່ມ",
+  "RemoveGuestDescription": "ແຂກ <strong>{{userName}}</strong> ຈະຖືກລຶບອອກຈາກທຸກໆຫ້ອງທີ່ທ່ານໄດ້ເຊີນເຂົາເຈົ້າມາ. ການດຳເນີນການນີ້ບໍ່ສາມາດຍົກເລີກໄດ້."
 }

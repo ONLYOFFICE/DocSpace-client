@@ -3,7 +3,7 @@
   "content": "The account name must be between {{minLength}} and {{maxLength}} characters long",
   "content_en_sha1_hash": "fc3643edea764dc1006d640f4f99f132b319f558",
   "created_at": "2025-05-26T07:15:46.250Z",
-  "updated_at": "2026-03-26T08:26:58.120Z",
+  "updated_at": "2026-04-08T02:32:44.264Z",
   "comment": {
     "text": "The PortalNameLength translation key is used to describe the error message when an account name's length exceeds the allowed range. It appears in UI elements that validate and restrict input field lengths, providing context for users who enter invalid characters or exceed maximum allowed characters. This key helps translators clarify the exact requirements for account names in the application.",
     "is_auto": true,
@@ -93,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation uses '{{minLength}}-ից {{maxLength}}', which translates to 'from {{minLength}} to {{maxLength}}' but lacks the necessary prepositional structure to convey 'between X and Y' correctly in this context, making it sound like 'from min to max characters'. More importantly, the Armenian phrasing '{{minLength}}-ից {{maxLength}} նիշ' is grammatically incomplete/incorrect for expressing a range.",
+          "suggestion": "Հաշվի անունը պետք է լինի {{minLength}}-ից {{maxLength}} նիշ երկարություն"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,7 +111,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese phrasing '～文字がある必要です' is grammatically unnatural and sounds like a direct machine translation. While it conveys the idea, '～文字である必要があります' or '～文字以内で入力してください' is the standard way to express requirements in a UI error message.",
+          "suggestion": "アカウント名は{{minLength}}～{{maxLength}}文字である必要があります。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -165,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Sinhala translation omits the word 'characters' (අකුරු/අක්ෂර), which is essential to specify that the range refers to character count rather than a numerical value.",
+          "suggestion": "ගිණුමේ නම අකුරු {{minLength}} සහ {{maxLength}} අතර ප්‍රමාණයකින් යුක්ත විය යුතුය"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,13 +201,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'налога' (tax/levy) is used instead of 'налога' (account/name context). In Serbian, 'account name' in this context should be 'име налога' (if referring to a deposit account) or more accurately 'име профила/налога' depending on the specific entity, but 'налог' in Serbian most commonly means 'tax' or 'order/command'. However, the primary error is that 'име налога' translates to 'tax name' or 'order name', whereas the English 'account name' in a portal context usually refers to 'налог' (account) in banking, but the phrasing 'Име налога мора бити...' is awkward. More critically, 'дугачко' is an adjective used for physical length (like a rope) and is grammatically incorrect/unnatural here for character count.",
+          "suggestion": "Име налога мора бити између {{minLength}} и {{maxLength}} знакова"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'dugačko' at the end of the sentence is grammatically incorrect and sounds like a literal, broken translation of 'long'. In Serbian, the length requirement is expressed differently.",
+          "suggestion": "Ime naloga mora imati između {{minLength}} i {{maxLength}} karaktera"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -211,6 +241,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

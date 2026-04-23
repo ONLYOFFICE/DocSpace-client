@@ -3,7 +3,6 @@
   "AdvancedSettings": "Configurações Avançadas",
   "AdvancedSettingsTooltip": "Ocultar página de autenticação predefinida e redirecionar automaticamente para o serviço SSO.",
   "AttributeMatching": "Mapeamento de Atributos",
-  "AttributeMatchingTooltip": "A correspondência dos atributos do Início de Sessão Único às entradas da secção \"Contas”.",
   "Binding": "Vinculativo:",
   "CertificateExist": "Já existe um certificado com o mesmo tipo de acção",
   "CustomEntryButton": "Legenda dos botões personalizados para iniciar sessão",
@@ -59,5 +58,6 @@
   "TurnOnSSOCaption": "Ative esta opção se quiser adicionar automaticamente utilizadores do serviço SSO ao seu espaço.",
   "UploadXML": "Carregue os metadados através de um XML para preencher os campos obrigatórios automaticamente.",
   "UploadXMLPlaceholder": "URL para o XML com os metadados do IdP",
-  "UsedFor": "Utilizar para"
+  "UsedFor": "Utilizar para",
+  "AttributeMatchingTooltip": "A correspondência dos atributos de Single Sign-On com as entradas da seção 'Contas'."
 }

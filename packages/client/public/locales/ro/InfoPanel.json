@@ -2,6 +2,7 @@
   "AddedRoomTags": "Etichete adăugate.",
   "Administration": "Administrare",
   "AgentRenamed": "Sala <1>«{{oldRoomTitle}}»</1> a agentului a fost redenumită <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Vezi detalii despre {{aiAgents}} aici",
   "AndMoreLabel": "și <1>{{count}} mai multe</1>",
   "CreationDate": "Data creării",
   "Data": "Date",
@@ -60,11 +61,14 @@
   "IndexChanged": "Indexul a fost modificat",
   "ItemsSelected": "Elemente selectate",
   "LastModifiedBy": "Modificat ultima dată de către",
+  "LastUpdateInfo": "Ultima actualizare",
   "LifetimeEnds": "Durată de viață se încheie",
   "MembersEmptyScreenText": "Detaliile membrilor aici",
+  "NoAgent": "Niciun {{aiAgent}}",
   "NoRecordsFound": "Nu s-au găsit înregistrări",
   "Properties": "Proprietăţi",
   "Resolution": "Rezoluție",
+  "RoomChangeOwner": "Proprietarul sălii a fost schimbat.",
   "RoomCreateUserCount": "Utilizatorul a fost adăugat ({{count}}).",
   "RoomDenyDownloadDisabled": "Încărcarea și copierea nu sunt restricționate",
   "RoomDenyDownloadEnabled": "Încărcarea și copierea sunt restricționate",
@@ -98,6 +102,5 @@
   "SubmenuHistory": "Istoric",
   "UserFileUpdated": "Fişier actualizat.",
   "Users": "Utilizatori",
-  "Versions": "Versiuni",
-  "LastUpdateInfo": "Ultima actualizare"
+  "Versions": "Versiuni"
 }

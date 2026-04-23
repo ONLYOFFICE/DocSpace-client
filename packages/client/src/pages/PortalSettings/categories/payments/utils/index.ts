@@ -30,6 +30,14 @@
 export const toAbsoluteUrl = (url: string): string =>
   url.startsWith("http") || url.startsWith("/") ? url : `/${url}`;
 
+export const PAYMENT_ROUTES = {
+  portalPayments: `/portal-settings/payments/portal-payments`,
+  services: `/portal-settings/payments/services`,
+  aiServices: `/portal-settings/payments/services/ai-services`,
+  backup: `/portal-settings/payments/services/backup`,
+  diskStorage: `/portal-settings/payments/services/disk-storage`,
+} as const;
+
 export function getTwoDotsReplacing(translation: string) {
   const newTranslation = translation;
 

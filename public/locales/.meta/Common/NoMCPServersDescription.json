@@ -3,7 +3,7 @@
   "content": "Please connect {{mcpServers}} in {{productName}} settings to use them in the {{aiAgent}}.",
   "content_en_sha1_hash": "cb7d0b5345d622db847157a2457d0c1cff8e3cce",
   "created_at": "2025-12-19T10:16:33.807Z",
-  "updated_at": "2025-12-22T09:41:52.033Z",
+  "updated_at": "2026-04-08T04:04:38.581Z",
   "comment": {
     "text": "This text explains to the user that they need to connect Minecraft server(s) within the application settings to enable them for use with the AI agent. It appears in a screen displaying a lack of configured Minecraft servers. Translators should understand \"mcpServers\" refers to the Minecraft server configuration setting.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation changes the meaning from 'connect {{mcpServers}}' to 'via {{mcpServers}}' (vasitəsilə), which implies the servers are the tool used to connect, rather than the objects being connected.",
+          "suggestion": "{{mcpServers}}-i {{productName}} ayarlarında bağlayın ki, onları {{aiAgent}}-də istifadə edə biləsiniz."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -111,7 +117,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translator added '(roles)' which is not in the source text and changes the semantic flow, potentially confusing the user about what 'mcpServers' refers to.",
+          "suggestion": "Lūdzu, savienojiet {{mcpServers}} {{productName}} iestatījumos, lai tos izmantotu {{aiAgent}}."
+        }
+      ],
       "approved_at": null
     },
     "nl": {

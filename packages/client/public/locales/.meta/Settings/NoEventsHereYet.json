@@ -3,7 +3,7 @@
   "content": "No events here yet",
   "content_en_sha1_hash": "d5dabb69303d00324a084b615296dcb2481cba3d",
   "created_at": "2025-05-19T21:30:52.033Z",
-  "updated_at": "2025-09-17T13:43:01.895Z",
+  "updated_at": "2026-04-09T02:20:50.671Z",
   "comment": {
     "text": "This translation key is used to display a message when there are currently no events logged or tracked in an audit trail. It appears as a header text on a screen where user activity is expected to be logged. Translators should provide a localized version of this phrase to indicate that no data is available.",
     "is_auto": true,
@@ -93,18 +93,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"まだイベントはありません\" is technically correct, it's a bit formal and stiff for a user interface message like \"No events here yet.\" A more natural and user-friendly translation would be better.",
-          "suggestion": "イベントはまだありません (Ivento wa mada arimasen)"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'まだ' (mada) implies 'not yet'. While accurate, a simpler phrasing might feel more approachable for a UI message.",
-          "suggestion": "イベントはありません (Ivento wa arimasen)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -116,13 +105,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation \"ຫາກໍ່ວ່າ ບໍ່ມີເຫດການໃດໆຢູ່ທີ່ນີ້ເທື່ອ\" is a bit literal and doesn't flow naturally. \"ຫາກໍ່ວ່າ\" (hak ko wa) means \"just now\" or \"recently\", which isn't the intended meaning.  It suggests events *used to* be here but aren't anymore.",
-          "suggestion": "A more natural and accurate translation would be something like \"ເທື່ອບໍ່ມີເຫດການໃດໆຢູ່ທີ່ນີ້\" (thua bo mi hetkan dai dai yu thi ni) or \"ບໍ່ມີເຫດການໃດໆຢູ່ທີ່ນີ້ເທື່ອ\" (bo mi hetkan dai dai yu thi ni)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -218,13 +201,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"这里目前没有事件\" is a literal translation and while technically correct, it sounds somewhat formal and stiff for a user interface element like 'No events here yet'. It's not the most natural phrasing.",
-          "suggestion": "Consider a more conversational translation like \"暂无活动\" (Zàn wú huódòng) which translates to 'No activities yet' or \"还没有活动\" (Hái méiyǒu huódòng) which translates to 'Not yet any activities'."
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

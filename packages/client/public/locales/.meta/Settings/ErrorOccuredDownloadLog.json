@@ -3,7 +3,7 @@
   "content": "Errors occurred during data import. Download the log to check them.",
   "content_en_sha1_hash": "aabe25d4edb5d4821ac11cc9654982a6b1cee13a",
   "created_at": "2025-05-19T21:30:51.549Z",
-  "updated_at": "2025-05-26T07:57:32.522Z",
+  "updated_at": "2026-04-09T03:01:32.561Z",
   "comment": {
     "text": "This translation key is used for an error message that displays when data import fails. It prompts users to download a log file to diagnose and resolve issues. This text appears as an error notification in the \"Import Complete Step\" component.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'jurnalı' is a less common and potentially less clear translation of 'log'. While technically correct, 'qeydləri' or 'qeyd faylı' might be more natural and understandable to Azerbaijani speakers in this context.",
-          "suggestion": "Məlumatı idxal edərkən xətalar baş verdi. Onları yoxlamaq üçün qeydləri endirin. or Məlumatı idxal edərkən xətalar baş verdi. Onları yoxlamaq üçün qeyd faylını endirin."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -87,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'գրանցամատյանը' (grantsamatyanə) can be translated as 'logbook' or 'register'. While not strictly incorrect, 'գրանցման գրանցում' (grantsmanin grantsum) or simply 'գրանցում' (grantsum) which means 'log' or 'record' is a more standard and clearer translation in this context.",
-          "suggestion": "Սխալներ են տեղի ունեցել տվյալների ներմուծման ժամանակ: Ներբեռնեք գրանցումը՝ դրանք ստուգելու համար:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -114,13 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"가져오기하는 동안\" is awkward and not the most natural way to say \"during data import\". It's a literal translation that doesn't flow well in Korean.",
-          "suggestion": "데이터 가져오는 과정에서"
-        },
-        {
-          "type": "grammar",
-          "description": "While technically correct, \"확인하세요\" is a more formal ending. For a user-facing error message, a less formal ending would be better.",
-          "suggestion": "확인해 보세요"
+          "description": "The phrase '가져오기하는' is grammatically awkward/incorrect in Korean. It should be '가져오는' or '가져오기'.",
+          "suggestion": "데이터를 가져오는 동안 오류가 발생했습니다. 로그를 다운로드하여 확인하세요."
         }
       ],
       "approved_at": null
@@ -130,14 +113,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ບັນທຶກ' (ban-took) translates to 'record' or 'log' in English. While not strictly incorrect, 'ບັນທຶກລອກ' (ban-took log) would be more specific and clearer, explicitly stating 'error log' or 'download log'.",
-          "suggestion": "ສິ່ງຜິດພາດເກີດຂຶ້ນໃນຂະນະນໍາເຂົ້ານິເທດຂໍ້ມູນ. ດາວໂຫຼດບັນທຶກລອກເພື່ອກວດກາພວກມັນ."
-        },
-        {
           "type": "incorrect_translation",
-          "description": "While 'ພວກມັນ' (puang mun) translates to 'them', in this context, it's more accurate to specify what 'them' refers to. It is implied to be the errors or log entries.",
-          "suggestion": "ສິ່ງຜິດພາດເກີດຂຶ້ນໃນຂະນະນໍາເຂົ້ານິເທດຂໍ້ມູນ. ດາວໂຫຼດບັນທຶກລອກເພື່ອກວດກາຄວາມຜິດພາດເຫຼົ່ານັ້ນ."
+          "description": "The word 'ນິເທດ' (nithet) used in the translation is incorrect in this context. It typically refers to a sermon or a religious discourse. The correct term for 'data' in a technical context is 'ຂໍ້ມູນ' (khomun), which is already present, but the phrase 'ນໍາເຂົ້ານິເທດຂໍ້ມູນ' is nonsensical. It should be 'ການນໍາເຂົ້າຂໍ້ມູນ'.",
+          "suggestion": "ສິ່ງຜິດພາດເກີດຂຶ້ນໃນຂະນະນໍາເຂົ້າຂໍ້ມູນ. ດາວໂຫຼດບັນທຶກເພື່ອກວດກາພວກມັນ."
         }
       ],
       "approved_at": null
@@ -175,13 +153,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Download the log to check them' is not accurately reflected in the Romanian translation. 'Jurnalul de activități' (activity log) is a less specific term than simply 'log'. The intention is to download a specific error log.",
-          "suggestion": "Au intervenit erori în timpul importului de date. Descărcați fișierul jurnal de erori pentru a le verifica."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -193,13 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'බාගත' (baagatha) could be more accurately translated as 'ගන්නා' (gannaa) in this context for a more natural flow. 'බාගත' is more formal and might not be the best choice for a user-facing message.",
-          "suggestion": "ගන්නා (gannaa)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -217,25 +183,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Download the log' is translated as 'Преузмите записник'. While 'записник' can mean log, in this context, 'Преузмите датотеку' (Download the file) would be a more natural and accurate translation.",
-          "suggestion": "Преузмите датотеку"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Download the log' is translated as 'Preuzmite zapisnik'. While 'zapisnik' can mean a log, it's more commonly associated with a meeting minutes or official record.  'Preuzmite log' would be a more direct and natural translation in this context, especially given the English source uses 'log'.",
-          "suggestion": "Preuzmite log"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -257,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

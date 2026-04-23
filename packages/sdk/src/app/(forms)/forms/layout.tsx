@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { headers, cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { FilterType, FolderType } from "@docspace/shared/enums";
@@ -35,10 +36,13 @@ import { getSelf } from "@/api/people";
 import { getDefaultProvider } from "@/api/ai";
 import { getSettings } from "@/api/settings";
 import {
+  FILTER_HEADER,
   LIBRARY_ID_HEADER,
+  PAGE_COUNT,
   ROOM_ID_HEADER,
   PATHNAME_HEADER,
 } from "@/utils/constants";
+import { FormsSection } from "@/types/forms";
 
 import FormsShell from "./layout.client";
 
@@ -61,6 +65,18 @@ export default async function FormsServerLayout({
     pathname.endsWith("/my-forms") ||
     pathname.endsWith("/forms") ||
     pathname.endsWith("/forms/");
+  const isInProgressRoute =
+    pathname.endsWith("/in-progress") || pathname.endsWith("/in-progress/");
+  const isCompletedRoute =
+    pathname.endsWith("/completed-forms") ||
+    pathname.endsWith("/completed-forms/");
+
+  const filterHeader = hdrs.get(FILTER_HEADER) || "";
+  const filterParams = new URLSearchParams(filterHeader);
+  const providerName = filterParams.get("providerName") || "";
+  const inviteKey = filterParams.get("inviteKey") || "";
+  const emplType = filterParams.get("emplType") || "";
+  const uid = filterParams.get("uid") || "";
 
   const [filesSettings, user, defaultProvider, portalSettings, roomData] =
     await Promise.all([
@@ -81,6 +97,28 @@ export default async function FormsServerLayout({
         : undefined,
     ]);
 
+  if (!user && providerName) {
+    const proto = hdrs.get("x-forwarded-proto") || "https";
+    const host = hdrs.get("x-forwarded-host") || hdrs.get("host") || "";
+    const returnPath = pathname || "/forms/my-forms";
+    const returnParams = new URLSearchParams();
+    if (roomId) returnParams.set("roomId", roomId);
+    if (libraryId) returnParams.set("libraryId", libraryId);
+    const showMenu = filterParams.get("showMenu");
+    if (showMenu) returnParams.set("showMenu", showMenu);
+    const returnQs = returnParams.toString();
+    const successRedirectURL = `${proto}://${host}/sdk${returnPath}${returnQs ? `?${returnQs}` : ""}`;
+
+    const authParams = new URLSearchParams();
+    authParams.set("providerName", providerName);
+    if (inviteKey) authParams.set("inviteKey", inviteKey);
+    if (emplType) authParams.set("emplType", emplType);
+    if (uid) authParams.set("uid", uid);
+    authParams.set("successRedirectURL", successRedirectURL);
+
+    redirect(`/auth?${authParams.toString()}`);
+  }
+
   const socketUrl =
     portalSettings && typeof portalSettings !== "string"
       ? (portalSettings.socketUrl ?? "")
@@ -100,6 +138,32 @@ export default async function FormsServerLayout({
   const initialFiles = isMyFormsRoute ? roomData?.files : undefined;
   const initialTotal = isMyFormsRoute ? roomData?.total : undefined;
 
+  const virtualFolderIdToPrefetch = isInProgressRoute
+    ? inProgressFolderId
+    : isCompletedRoute
+      ? doneFolderId
+      : undefined;
+
+  const virtualFolderData = virtualFolderIdToPrefetch
+    ? await getFormsFolder(
+        virtualFolderIdToPrefetch,
+        (() => {
+          const f = FilesFilter.getDefault();
+          f.pageCount = PAGE_COUNT;
+          return f;
+        })(),
+      ).catch(() => undefined)
+    : undefined;
+
+  const initialFolders = virtualFolderData?.folders;
+  const initialSection = isMyFormsRoute
+    ? FormsSection.MyForms
+    : isInProgressRoute
+      ? FormsSection.InProgress
+      : isCompletedRoute
+        ? FormsSection.CompletedForms
+        : undefined;
+
   return (
     <FormsShell
       commonData={{
@@ -118,6 +182,8 @@ export default async function FormsServerLayout({
         inProgressFolderId,
         initialFiles,
         initialTotal,
+        initialFolders,
+        initialSection,
       }}
     >
       {children}

@@ -3,7 +3,7 @@
   "content": "Define quota per room",
   "content_en_sha1_hash": "47a3cb53c72a46cf615a95cb8036dc8ac249a47d",
   "created_at": "2025-05-19T21:30:51.096Z",
-  "updated_at": "2025-05-24T05:22:10.569Z",
+  "updated_at": "2026-04-09T03:32:21.323Z",
   "comment": {
     "text": "This translation key defines the label for a button that allows users to set the quota per room. The label is used on a form element where users can define their storage limits. It appears in the UI as part of a settings dialog or form page.",
     "is_auto": true,
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The German translation \"Quote pro Raum definieren\" is not a natural or accurate translation of \"Define quota per room.\" \"Quote\" translates to \"Zitat\" in this context. The intended meaning is likely to define a limit or allowance.",
-          "suggestion": "Definieren Sie die Raumkontingente"
+          "description": "The German word 'Quote' means 'quotation' (as in a price quote or a literary quote). The correct technical term for a storage limit or allocation is 'Kontingent' or 'Quota'.",
+          "suggestion": "Kontingent pro Raum definieren"
         }
       ],
       "approved_at": null
@@ -87,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Սահմանել քվոտա մեկ սենյակի համար' is a literal translation and while understandable, it's a bit clunky. A more natural phrasing would be something like 'Մեկ սենյակի համար սահմանել քվոտա' or 'Սահմանեք սենյակի համար քվոտա'.",
-          "suggestion": "Consider 'Մեկ սենյակի համար սահմանել քվոտա' or 'Սահմանեք սենյակի համար քվոտա'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -105,13 +99,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"ルームごとの容量制限を定義する\" is technically correct but could be improved for clarity and naturalness in Japanese. 'Quota' isn't directly translated to '容量制限'. While '容量制限' (capacity limit) conveys a similar meaning, it's not the most precise equivalent.",
-          "suggestion": "ルームごとの利用制限を設定する (Rūmu gotono riyō seigen o setto suru) - This translates to 'Set usage limits per room' and is a more natural way to express the intended meaning."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -159,13 +147,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Stabilire' is correct, 'cotă' might not be the best translation for 'quota' in this context. 'Cota' often refers to a specific numerical quota. 'Limita' or 'Număr maxim' might be more appropriate depending on the exact meaning of 'quota' in the settings.",
-          "suggestion": "Consider 'Stabilire limită per sală' or 'Stabilire număr maxim per sală'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -180,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"කාමරයකට සලාකය දක්වන්න\" doesn't accurately convey the meaning of \"Define quota per room.\"  'සලාකය' typically refers to a 'slice' or 'portion' and isn't the correct term for a quota. The meaning is lost.",
-          "suggestion": "කාමරයකට කොට්ටාව තීරණය කරන්න (Kamarayakata kotthawa theeradena katananna)"
+          "description": "The word 'සලාකය' (salākaya) means 'portion' or 'share' in a general sense, but in a technical/computing context for storage limits, 'quota' should be translated as 'කොටස' (quota/limit) or more accurately 'සීමාව' (limit). More importantly, 'දක්වන්න' means 'to show/display', whereas the English 'Define' means 'to set/establish'.",
+          "suggestion": "කාමරයකට කොටසක් නියම කරන්න"
         }
       ],
       "approved_at": null
@@ -201,18 +183,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Дефиниши квоту по соби' doesn't accurately convey 'Define quota per room'. 'по соби' translates to 'by room' or 'per room', but 'Дефиниши' implies a command or instruction rather than the concept of defining a quota.",
-          "suggestion": "Definisanje kvote po sobi"
-        },
-        {
-          "type": "grammar",
-          "description": "The verb 'Дефиниши' (Define) is in the imperative form, which might not be the most appropriate for a settings label. The infinitive or present tense might be more suitable.",
-          "suggestion": "Definisanje kvote po sobi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -240,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -71,6 +71,8 @@ async function Page() {
     getPortalCultures(),
   ]);
 
+  if (passwordSettings === "access-restricted") redirect("/access-restricted");
+
   const commonResources = objectSettings?.externalResources?.common?.entries;
   const forumLinkUrl = objectSettings?.externalResources?.forum?.domain;
 

@@ -3,7 +3,7 @@
   "content": "The guest status was successfully changed",
   "content_en_sha1_hash": "40916ce817239977dd00d9f59371f44af34698d8",
   "created_at": "2025-05-19T21:30:53.519Z",
-  "updated_at": "2025-08-04T07:30:01.061Z",
+  "updated_at": "2026-04-09T07:23:47.465Z",
   "comment": {
     "text": "This translation key is used to display a success message when a guest's status is successfully changed. It will be shown in a toast notification when the user confirms the change in a dialog box.",
     "is_auto": true,
@@ -87,7 +87,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text refers to 'The guest status' (singular), but the Italian translation uses 'Lo stato degli ospiti' (plural: 'The status of the guests').",
+          "suggestion": "Lo stato dell'ospite è stato modificato con successo"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -159,13 +165,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Status hosťa bol úspešne zmenený' is a bit formal and awkward for a user-facing message. A more natural and user-friendly translation would be better.",
-          "suggestion": "The phrase 'Štátus hosťa bol zmenený' is simpler and more common, while still accurately conveying the meaning. Alternatively, 'Hosťovský štátus bol zmenený' could be used."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -183,13 +183,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Status gosta je uspešno promenjen' while understandable, is not the most natural way to express 'The guest status was successfully changed'. A more accurate and common phrasing would be 'Uspešno je promenjen status gosta'.",
-          "suggestion": "Uspešno je promenjen status gosta"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -211,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

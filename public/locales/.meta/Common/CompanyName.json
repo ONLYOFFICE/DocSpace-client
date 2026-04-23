@@ -3,7 +3,7 @@
   "content": "Company name",
   "content_en_sha1_hash": "1e5f7dc45cec3cd7bc991d3b958e0053fc564b67",
   "created_at": "2025-05-19T21:30:43.606Z",
-  "updated_at": "2026-02-19T13:36:33.163Z",
+  "updated_at": "2026-04-08T14:58:20.564Z",
   "comment": {
     "text": "This translation key is used for the display name \"Company Name\" in the branding settings section of a company information page. It is likely displayed as a label above a text input field where users can edit their company name.",
     "is_auto": true,
@@ -87,13 +87,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Italian translation 'Nome azienda' is a literal translation, but it's not the most natural way to express 'Company name' in Italian. It lacks the article and could be misinterpreted.",
-          "suggestion": "Società"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -131,9 +125,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Polish translation 'Nama Perusahaan' is not Polish. It appears to be Indonesian for 'Company Name'.",
-          "suggestion": "The correct Polish translation should be 'Nazwa firmy' or 'Nazwa spółki'."
+          "type": "wrong_language",
+          "description": "The translation 'Nama Perusahaan' is in Indonesian, not Polish.",
+          "suggestion": "Nazwa firmy"
         }
       ],
       "approved_at": null
@@ -211,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

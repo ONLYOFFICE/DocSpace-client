@@ -3,7 +3,7 @@
   "content": "Logo for {{editorName}} editor",
   "content_en_sha1_hash": "89f9e561b961db8b10235d97e4f4165c31621ca9",
   "created_at": "2025-08-11T10:23:37.730Z",
-  "updated_at": "2026-02-19T13:36:33.170Z",
+  "updated_at": "2026-04-10T08:58:38.053Z",
   "comment": {
     "text": "This key displays a label indicating the logo is specifically for a particular editor, such as \"Documents.\" It appears as a text label within the WhiteLabel branding settings page, showing the logo's dimensions alongside its designation. Translators should ensure the text accurately conveys the logo's purpose and association with the specified editor.",
     "is_auto": true,
@@ -123,7 +123,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ບັນນາທິການ' (editor) in Lao refers to a human person (an editor/journalist). In the context of software, 'editor' refers to a tool or application. Using 'ບັນນາທິການ' makes it sound like the logo is for a human professional rather than a software component.",
+          "suggestion": "ໂລໂກ້ສຳລັບຕົວແກ້ໄຂ {{editorName}}"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -195,13 +201,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word order in Serbian is incorrect, making it sound like 'Logo for editor Documents' instead of 'Logo for the Documents editor'. In Serbian, the noun 'уредник' (editor) should precede the name of the editor to function correctly as a descriptor, or the phrasing should be adjusted to 'Лого за уредник {{editorName}}'.",
+          "suggestion": "Лого за уредник {{editorName}}"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The noun 'uređivač' is in the nominative case, but in this context (following 'za'), it must be in the accusative case ('uređivač' is the same for masculine, but the phrasing 'Logo za {{editorName}} editor' implies the editor is the object of the preposition, and in Serbian, the noun phrase 'Logo za [ime] editor' requires the correct grammatical case for the noun following the variable). More importantly, 'uređivač' is a literal translation of 'editor' as a person/device, whereas in software UI, 'editor' (the tool) is often better expressed or requires specific declension. However, the primary error is the grammatical case mismatch for the noun following the preposition 'za'.",
+          "suggestion": "Logo za {{editorName}} editor"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

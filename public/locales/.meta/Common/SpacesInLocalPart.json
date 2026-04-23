@@ -3,7 +3,7 @@
   "content": "Local part can't contain spaces",
   "content_en_sha1_hash": "1303a27e549235cda77cad1ed3ebba10af960eb5",
   "created_at": "2025-05-19T21:30:48.980Z",
-  "updated_at": "2026-03-26T08:26:57.976Z",
+  "updated_at": "2026-04-10T08:21:04.300Z",
   "comment": {
     "text": "The translation key \"SpacesInLocalPart\" is used to display an error message when a local part of a username or email address contains spaces. This error typically appears in dialogs or input fields where users can edit their account information. The goal is to prevent usernames from being set up incorrectly and to ensure consistency with standard naming conventions.",
     "is_auto": true,
@@ -13,12 +13,6 @@
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeEmailDialog/index.js",
       "line_number": 139,
-      "context": "case ErrorKeys.PunycodeLocalPart:\n return t(\"Common:PunycodeLocalPart\");\n case ErrorKeys.IncorrectLocalPart:\n return t(\"Common:IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:\n return t(\"Common:SpacesInLocalPart\");\n case ErrorKeys.MaxLengthExceeded:\n return t(\"Common:MaxLengthExceeded\");\n case ErrorKeys.IncorrectEmail:\n return t(\"Common:IncorrectEmail\");\n case ErrorKeys.ManyEmails:",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/SalesDepartmentRequestDialog/index.js",
-      "line_number": 129,
       "context": "case ErrorKeys.PunycodeLocalPart:\n return t(\"Common:PunycodeLocalPart\");\n case ErrorKeys.IncorrectLocalPart:\n return t(\"Common:IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:\n return t(\"Common:SpacesInLocalPart\");\n case ErrorKeys.MaxLengthExceeded:\n return t(\"Common:MaxLengthExceeded\");\n case ErrorKeys.IncorrectEmail:\n return t(\"Common:IncorrectEmail\");\n case ErrorKeys.ManyEmails:",
       "module": "/packages/client"
     },
@@ -48,13 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Lokal yolda boşluqlar icazə verilmir\" while understandable, doesn't directly translate 'can't contain spaces'. A more accurate translation would convey a prohibition.",
-          "suggestion": "Lokal hissədə boşluqlar qadağandır"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'yolda' (in/on the way) isn't appropriate in this context. 'Hissədə' (in the part) would be better.",
-          "suggestion": "Lokal hissədə boşluqlar icazə verilmir"
+          "description": "The term 'Lokal yol' means 'Local path' (as in a file path), whereas the context refers to the 'Local part' of an email or username. This is a semantic error that changes the technical meaning.",
+          "suggestion": "Lokal hissədə boşluqlara icazə verilmir"
         }
       ],
       "approved_at": null
@@ -77,7 +66,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Lokaler Teil beinhaltet Leerzeichen\" doesn't accurately convey the meaning of \"Local part can't contain spaces.\" \"Beinhaltet\" implies 'contains', while the English implies a restriction.",
+          "description": "The German translation conveys the opposite meaning. The English says 'can't contain' (prohibition), while the German says 'beinhaltet' (contains/includes), which sounds like a statement of fact rather than an error message.",
           "suggestion": "Lokaler Teil darf keine Leerzeichen enthalten"
         }
       ],
@@ -106,9 +95,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The verb conjugation 'ne peux pas' is incorrect. It should be 'ne peut pas'.",
-          "suggestion": "Le local ne peut pas contenir d'espace"
+          "type": "incorrect_translation",
+          "description": "The term 'Le local' is a literal translation of 'Local part' that is semantically incorrect in French in this context. In technical terms regarding email/usernames, 'partie locale' should be used. Additionally, 'peux' is a conjugation error (should be 'peut'), though the primary critical issue is the semantic error of 'Le local' meaning 'the local place/premises' instead of 'the local part'.",
+          "suggestion": "La partie locale ne peut pas contenir d'espaces"
         }
       ],
       "approved_at": null
@@ -116,13 +105,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Տեղական մասը չի կարող բացատներ պարունակել' while technically correct, doesn't flow naturally in Armenian. A more natural phrasing would convey the same meaning with better readability.",
-          "suggestion": "Տեղական մասում չի կարող լինել բացատներ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -149,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ພື່ນທີ່ທ້ອງຖິ້ນບໍ່ພຽງພໍ\" does not accurately convey the meaning of \"Local part can't contain spaces\".  'ພື່ນທີ່ທ້ອງຖິ້ນ' translates roughly to 'local area' or 'local part', but 'ບໍ່ພຽງພໍ' means 'insufficient' or 'not enough'. The English sentence means that spaces are not allowed, not that the local part is insufficient.",
-          "suggestion": "A more accurate translation would be something like \"ສ່ວນພື້ນທີ່ທ້ອງຖິ່ນຫ້າມມີຊ່ອງຫວ່າງ\" (Suan phuen thi thong thin ham mi chong wang) - 'Local part is not allowed to have spaces'."
+          "description": "The Lao translation means 'Local area is insufficient' or 'Not enough local space', which refers to storage capacity. The English text refers to a syntax error where a 'local part' (of an email/username) cannot contain 'spaces'.",
+          "suggestion": "ສ່ວນທ້ອງຖິ່ນບໍ່ສາມາດມີຍະຫວ່າງໄດ້"
         }
       ],
       "approved_at": null
@@ -173,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Identyfikator użytkownika\" is a valid translation for 'local part', it's not the most natural or easily understood phrasing for a general user in this context. 'Local part' refers to the username before the '@' in an email address or similar identifier. A more user-friendly translation would capture that meaning.",
-          "suggestion": "Nazwa użytkownika nie może zawierać spacji"
+          "description": "The translation 'Identyfikator użytkownika nie może zawierać spacji' means 'User ID cannot contain spaces', whereas the English source 'Local part can't contain spaces' refers specifically to the 'local part' (the part of an email or username before the @ symbol). This is a semantic mismatch in a technical context.",
+          "suggestion": "Część lokalna nie może zawierać spacji"
         }
       ],
       "approved_at": null
@@ -203,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Имя почтового ящика содержит пробелы\" is too literal and doesn't accurately convey the meaning of \"Local part can't contain spaces.\" It implies that the local part *does* contain spaces, which is the problem being described.",
-          "suggestion": "A more accurate translation would be something like \"Локальная часть не может содержать пробелы\" or \"В локальной части не допускаются пробелы\"."
+          "description": "The Russian translation changes the subject from 'Local part' (the part of an email address before the @) to 'Mailbox name' (Имя почтового ящика), which is a different technical concept.",
+          "suggestion": "Локальная часть не может содержать пробелы"
         }
       ],
       "approved_at": null
@@ -215,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ස්ථානීය කොටසේ හිස්තැන් අඩංගු නොවිය යුතුය' while technically conveying the meaning, is a rather formal and literal translation. A more natural and common way to express this in Sinhala would be something closer to 'දේශීය කොටසට හිස්තැන් තිබිය යුතු නැත' or 'දේශීය කොටසට ඉඩ තිබිය යුතු නැත'.",
-          "suggestion": "දේශීය කොටසට හිස්තැන් තිබිය යුතු නැත"
+          "description": "The term 'ස්ථානීය කොටස' (Sthāniya kotasa) translates to 'local part' in a geographical or physical sense (e.g., a local area). In the context of an email or username 'local part' (the part before the @ symbol), this is a mistranslation. A more accurate technical term is needed.",
+          "suggestion": "ප්‍රාදේශීය කොටසෙහි හිස්තැන් තිබිය නොහැක"
         }
       ],
       "approved_at": null
@@ -239,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Лоцал парт не сме садржати размаке' is a literal transliteration of \"Local part can't contain spaces\" and doesn't accurately convey the meaning in natural Serbian. A more idiomatic translation would be something like 'Локални део не може да садржи размаке'. The word 'Лоцал' is not standard Serbian.  'Локални део' is preferred over a transliteration of 'local part'.",
-          "suggestion": "Локални део не може да садржи размаке"
+          "description": "The term 'Local part' is transliterated into Serbian ('Лоцал парт') instead of being translated. This is a phonetic transcription of English words, which is incorrect for a professional UI translation.",
+          "suggestion": "Локални део не сме садржати размаке"
         }
       ],
       "approved_at": null

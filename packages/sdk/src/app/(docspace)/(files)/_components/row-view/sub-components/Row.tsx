@@ -39,12 +39,19 @@ import {
 import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import Badges from "@docspace/shared/components/badges";
+import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
+import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 
 import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
+import useFavoritesActions from "@/app/(docspace)/_hooks/useFavoritesActions";
 import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 import useContextMenuModel from "../../../../_hooks/useContextMenuModel";
+import { ShareContext } from "../../../../_contexts/ShareContext";
+import { DeleteContext } from "../../../../_contexts/DeleteContext";
+import { FileOperationsContext } from "../../../../_contexts/FileOperationsContext";
+import { RenameContext } from "../../../../_contexts/RenameContext";
 import { generateFilesItemValue } from "../../../_utils";
 
 import { RowContent } from "./RowContent";
@@ -62,31 +69,74 @@ const Row = observer(
     isSSR,
   }: RowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
+    const filesListStore = useFilesListStore();
     const { isItemActive } = useActiveItemsStore();
+
+    // Use the observable item from MobX store so isFavorite changes are reactive
+    const storeItem = filesListStore.items.find((i) => i.id === item.id);
+    const observableItem = storeItem ?? item;
 
     const { t } = useTranslation(["Common"]);
     const { isBase } = useTheme();
     const { openFile } = useFilesActions({ t });
+    const { markAsFavorite, removeFromFavorites } = useFavoritesActions({ t });
+    const onShareClick = React.useContext(ShareContext);
+    const deleteCtx = React.useContext(DeleteContext);
+    const fileOpsCtx = React.useContext(FileOperationsContext);
+    const renameCtx = React.useContext(RenameContext);
 
-    const { getContextMenuModel } = useContextMenuModel({ item });
+    const { getContextMenuModel } = useContextMenuModel({
+      item: observableItem,
+      onShareClick: onShareClick ?? undefined,
+      onDeleteClick: deleteCtx?.deleteItem,
+      onCopyClick: fileOpsCtx?.copyItem,
+      onMoveClick: fileOpsCtx?.moveItem,
+      onDuplicateClick: fileOpsCtx?.duplicateItem,
+      onRestoreClick: fileOpsCtx?.restoreItem,
+      onRenameClick: renameCtx?.renameItem,
+    });
 
     const element = (
       <RoomIcon logo={item.icon} title={item.title} showDefault={false} />
     );
+
+    const onClickFavorite = () => {
+      if (observableItem.isFavorite) {
+        removeFromFavorites(observableItem);
+      } else {
+        markAsFavorite(observableItem);
+      }
+    };
 
     const badgesComponent = (
       <Badges
         className={styles.badgesComponent}
         t={t}
         themeIsBase={isBase}
-        item={item}
+        item={observableItem}
         viewAs="row"
         showNew={false}
         onFilesClick={() => {
-          if (!item.isFolder) {
-            openFile(item);
+          if (!observableItem.isFolder) {
+            openFile(observableItem);
           }
         }}
+        onClickFavorite={onClickFavorite}
+      />
+    );
+
+    const handleShareClick = React.useCallback(() => {
+      onShareClick?.(observableItem);
+    }, [onShareClick, observableItem]);
+
+    const quickButtonsComponent = (
+      <QuickButtons
+        t={t}
+        item={observableItem}
+        viewAs="row"
+        onClickFavorite={onClickFavorite}
+        onClickShare={onShareClick ? handleShareClick : undefined}
+        openShareTab={onShareClick ? handleShareClick : undefined}
       />
     );
 
@@ -127,6 +177,7 @@ const Row = observer(
             key={item.id}
             checked={isChecked}
             mode="modern"
+            withoutBorder
             isIndexEditingMode={false}
             folderCategory={false}
             isActive={false}
@@ -143,6 +194,7 @@ const Row = observer(
             contextOptions={contextMenuModel}
             getContextModel={getContextMenuModel}
             badgesComponent={badgesComponent}
+            contentElement={quickButtonsComponent}
             inProgress={inProgress}
           >
             <RowContent

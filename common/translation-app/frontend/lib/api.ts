@@ -186,6 +186,24 @@ export const translateNamespace = (
     model,
   });
 
+export const translateProject = (
+  projectName: string,
+  sourceLanguage: string,
+  targetLanguage: string,
+  model: string,
+  jobId: string
+) =>
+  api.post("/ollama/translate/project", {
+    projectName,
+    sourceLanguage,
+    targetLanguage,
+    model,
+    jobId,
+  });
+
+export const stopProjectTranslation = (jobId: string) =>
+  api.post("/ollama/translate/project/stop", { jobId });
+
 // Validation with Ollama LLM
 export const validateTranslation = (
   projectName: string,

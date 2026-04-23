@@ -3,7 +3,7 @@
   "content": "Months",
   "content_en_sha1_hash": "200dcdce9b5a0627b291634c6a82ae25ce09f789",
   "created_at": "2025-05-19T21:30:46.604Z",
-  "updated_at": "2026-03-26T08:26:57.999Z",
+  "updated_at": "2026-04-10T08:21:04.307Z",
   "comment": {
     "text": "This translation key is used to display the label for a dropdown menu or input field that allows users to select a period (\"Days\", \"Months\", or \"Years\") in a file lifetime settings context. The text appears in a dialog component and is translated using the provided keys.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 501,
+      "line_number": 503,
       "context": ") => {\n switch (period) {\n case 0:\n return t(\"Common:Days\").toLowerCase();\n case 1:\n return t(\"Common:Months\").toLowerCase();\n case 2:\n return t(\"Common:Years\").toLowerCase();\n \n default:\n return t(\"Common:Days\").toLowerCase();",
       "module": "/packages/shared"
     }
@@ -114,7 +114,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເດືອນໆ\" while meaning 'months', includes a reduplication (ເດືອນໆ). While reduplication can be used for emphasis or continuity in Lao, it's not necessary here and makes it sound less formal or slightly repetitive for a simple translation of 'Months'. A more standard and accurate translation would be 'ເດືອນ'.",
+          "description": "The Lao translation 'ເດືອນໆ' uses the repetition symbol (ໆ), which implies 'months and months' or 'repeatedly'. In a UI dropdown for selecting a period, it should be the singular/standard noun 'Months'.",
           "suggestion": "ເດືອນ"
         }
       ],
@@ -159,7 +159,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Russian translation 'Месяцев' is in the genitive plural form (meaning 'of months'), whereas the English source 'Months' is a nominative plural label. In the context of a dropdown menu or selection list (Days, Months, Years), the nominative form 'Месяцы' is required for grammatical correctness and UI consistency.",
+          "suggestion": "Месяцы"
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -180,7 +186,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovenian translation \"Mesecev\" is the genitive singular form of \"mesec\" (month). The correct translation for \"Months\" (plural) should be \"Meseci\".",
+          "description": "The Slovenian translation 'Mesecev' is in the genitive case (meaning 'of months'). For a standalone UI label or dropdown option, the nominative plural 'Meseci' should be used to match the English 'Months'.",
           "suggestion": "Meseci"
         }
       ],
@@ -201,7 +207,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English word 'Months' is plural, but the Turkish translation 'Ay' is singular (Month). In the context of a period selection (Days, Months, Years), the plural form is required for consistency.",
+          "suggestion": "Aylar"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -222,10 +234,16 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"月数\" (yuè shù) is a literal translation of 'number of months', 'Months' in this context likely refers to the list of months or a data field containing the names of months.  '月数' implies a quantity. A better translation would be '月份' (yuè fèn).",
-          "suggestion": "月份"
+          "description": "The translation '月数' means 'number of months' (a count), whereas the English 'Months' in this context refers to the unit of time (a period selection).",
+          "suggestion": "月"
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

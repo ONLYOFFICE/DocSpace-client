@@ -3,10 +3,12 @@
   "EmptyFormGalleryScreenDescription": "Nema rezultata koji odgovaraju vašem upitu",
   "ErrorViewDescription": "Molimo vas pokušajte ponovo kasnije",
   "ErrorViewDescriptionNetworkError": "Izgleda da nema internet konekcije",
-  "SuggestChanges": "Predloži promene",
-  "TemplateInfo": "Info za šablon",
-  "ViewAllTemplates": "Pregledaj sve šablone",
   "ErrorViewHeader": "Galerija je trenutno nedostupna.",
   "SelectTemplate": "Izaberite šablon",
-  "UploadGallery": "Pošaljite u Galeriju"
+  "SuggestChanges": "Predloži promene",
+  "TemplateInfo": "Info za šablon",
+  "UploadGallery": "Pošaljite u Galeriju",
+  "ViewAllTemplates": "Pregledaj sve šablone",
+  "GalleryTitle": "Galerija predložaka {{organizationName}}",
+  "SubmitToGalleryDialogMainInfo": "Pošaljite svoj predložak u javnu galeriju kako bi ga drugi mogli koristiti u svom radu. Nakon što prođe moderaciju, bićete obavešteni i nagrađeni za vaš doprinos."
 }

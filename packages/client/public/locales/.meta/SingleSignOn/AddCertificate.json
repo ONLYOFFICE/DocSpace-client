@@ -3,7 +3,7 @@
   "content": "Add certificate",
   "content_en_sha1_hash": "631b330b27d1a4930628f96ea352593dfee627ba",
   "created_at": "2025-05-19T21:30:50.051Z",
-  "updated_at": "2025-08-11T18:11:59.255Z",
+  "updated_at": "2026-04-08T23:40:57.895Z",
   "comment": {
     "text": "This translation key is used to display the label for a button that adds a certificate, found on the Single Sign-On page in the Portal Settings. The button is disabled when SSO is not enabled or an XML file is being loaded.",
     "is_auto": true,
@@ -205,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

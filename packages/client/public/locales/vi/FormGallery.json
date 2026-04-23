@@ -3,10 +3,12 @@
   "EmptyFormGalleryScreenDescription": "Không tìm thấy kết quả nào phù hợp với truy vấn của bạn",
   "ErrorViewDescription": "Xin vui lòng thử lại sau",
   "ErrorViewDescriptionNetworkError": "Có vẻ như không có kết nối Internet",
-  "SuggestChanges": "Đề xuất thay đổi",
-  "TemplateInfo": "Thông tin biểu mẫu",
-  "ViewAllTemplates": "Xem tất cả các mẫu",
   "ErrorViewHeader": "Thư viện ảnh hiện đang tạm thời không khả dụng",
   "SelectTemplate": "Chọn Mẫu",
-  "UploadGallery": "Tải lên trong Thư viện ảnh"
+  "SuggestChanges": "Đề xuất thay đổi",
+  "TemplateInfo": "Thông tin biểu mẫu",
+  "UploadGallery": "Tải lên trong Thư viện ảnh",
+  "ViewAllTemplates": "Xem tất cả các mẫu",
+  "GalleryTitle": "Thư viện Mẫu {{organizationName}}",
+  "SubmitToGalleryDialogMainInfo": "Gửi mẫu của bạn đến thư viện công cộng để người khác sử dụng trong công việc của họ. Sau khi mẫu được kiểm duyệt, bạn sẽ được thông báo và nhận phần thưởng cho đóng góp của mình."
 }

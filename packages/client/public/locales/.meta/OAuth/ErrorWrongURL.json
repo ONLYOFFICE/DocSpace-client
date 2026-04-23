@@ -3,7 +3,7 @@
   "content": "URL not valid, example",
   "content_en_sha1_hash": "350049133db4d2b9f084821bdef5f6282c6d77ec",
   "created_at": "2025-05-19T21:30:53.887Z",
-  "updated_at": "2026-03-26T08:26:58.166Z",
+  "updated_at": "2026-04-07T19:35:05.163Z",
   "comment": {
     "text": "The \"ErrorWrongURL\" translation key is used to display a generic error message when an invalid URL is entered. It appears in various UI elements, including input fields and support blocks, providing a clear indication that the URL is not valid. Translators should provide a descriptive message that conveys this information while maintaining consistency across different contexts.",
     "is_auto": true,
@@ -99,25 +99,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"URLが無効です。例：\" is a literal translation and could be improved for better readability and flow in Japanese. While technically correct, it sounds slightly awkward. '例:' (rei) implies an example is following, which isn't necessary or helpful in this context. The phrase 'URLが無効です' is accurate, but a more natural wording could be beneficial.",
-          "suggestion": "URLが無効です。 (URL wa mukō desu.) - 'The URL is invalid.'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '유효하지 않은 URL, 예' is a literal translation but could be improved for naturalness in Korean. While technically correct, it sounds a little stiff.",
-          "suggestion": "Consider alternatives like: '잘못된 URL입니다. 예시:' or 'URL이 올바르지 않습니다. 예시:'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -129,13 +117,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Vietrādis URL nav derīgs, piemērs' is not a direct or accurate translation of 'URL not valid, example.' 'Vietrādis' seems to be a mistranslation or misspelling. 'Vietrādis' doesn't accurately convey the meaning of 'URL'.",
-          "suggestion": "Pareizais URL nav derīgs, piemērs"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -177,25 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'URL වලංගු නැත, උදාහරණය' doesn't fully capture the meaning of 'URL not valid, example.' While 'URL වලංගු නැත' correctly translates to 'URL not valid,' the inclusion of 'example' feels awkward and literal. A more natural translation would incorporate the concept of an example within the explanation.",
-          "suggestion": "URL වලංගු නැත. නිවැරදි උදාහරණයකි: [example URL]"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation 'URL nie je platná, príklad' is not a direct or ideal translation of 'URL not valid, example'. 'platná' implies 'valid' but the structure feels awkward in Slovak. A better translation would prioritize fluency and naturalness.",
-          "suggestion": "URL nie je platná, napríklad"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -237,13 +207,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'URL 无效，例如：' is a literal translation and may not be the most natural or user-friendly way to convey the error in Chinese. '例如' (example) is a bit abrupt in this context.",
-          "suggestion": "Consider a more natural phrasing like 'URL 无效，请检查网址' (URL is invalid, please check the URL) or 'URL 格式不正确' (Incorrect URL format)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

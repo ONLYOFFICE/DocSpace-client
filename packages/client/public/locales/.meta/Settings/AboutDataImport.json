@@ -3,7 +3,7 @@
   "content": "Data import includes several steps: data upload, parsing, import configuration, and import. Your backup file will be stored in {{organizationName}} {{productName}} servers for 24 hours, and then it will be automatically deleted.",
   "content_en_sha1_hash": "e0f675b298d8f6211666ee36285131ed498e9ed6",
   "created_at": "2025-05-19T21:30:50.265Z",
-  "updated_at": "2025-05-26T07:57:32.545Z",
+  "updated_at": "2026-04-10T08:58:38.065Z",
   "comment": {
     "text": "The \"AboutDataImport\" translation key describes the data import process, including the storage duration of uploaded files on {{organizationName}} {{productName}} servers. It appears in a step layout component, providing context to users about the process and expected outcome. The purpose is to inform users about the automatic deletion of their backup file after 24 hours.",
     "is_auto": true,
@@ -29,9 +29,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Arabic translation uses a full stop ('.') at the end of each sentence, which is common in formal writing but may feel slightly less natural in a user interface setting. Consider using a more conversational tone, potentially omitting the full stop after the first sentence.",
-          "suggestion": "يتضمن استيراد البيانات عدة خطوات: تحميل البيانات وتحليلها وتكوين الاستيراد. سيتم تخزين ملف النسخ الاحتياطي الخاص بك في خوادم {{organizationName}} {{productName}} لمدة 24 ساعة، ومن ثم سيتم حذفه تلقائيا."
+          "type": "missing_content",
+          "description": "The English text lists four steps (data upload, parsing, import configuration, and import), but the Arabic translation only lists three (تحميل البيانات وتحليلها وتكوين الاستيراد), omitting the final 'import' step.",
+          "suggestion": "يتضمن استيراد البيانات عدة خطوات: تحميل البيانات، والتحليل، وتكوين الاستيراد، والاستيراد. سيتم تخزين ملف النسخ الاحتياطي الخاص بك في خوادم {{organizationName}} {{productName}} لمدة 24 ساعة، ومن ثم سيتم حذفه تلقائيا."
         }
       ],
       "approved_at": null
@@ -51,18 +51,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'syntaktickou analýzu' is a bit formal and potentially confusing for a general user. While technically correct, it might be better simplified.",
-          "suggestion": "syntaktickou analýzu -> zpracování dat"
-        },
-        {
-          "type": "formatting",
-          "description": "The Czech translation retains the English variable names {{organizationName}} and {{productName}}. This may not be ideal for Czech localization and requires consideration of how these variables should be localized.",
-          "suggestion": "Consider localizing {{organizationName}} and {{productName}} appropriately for the Czech audience."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -92,13 +81,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The phrase 'celui-ci sera automatiquement supprimé' is grammatically awkward.  'Celui-ci' refers back to 'fichier de sauvegarde', but the sentence structure is not ideal. It sounds better to directly state what will be deleted.",
-          "suggestion": "Votre fichier de sauvegarde sera automatiquement supprimé."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -131,13 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'parsing' is directly transliterated as 'parsing' without a Lao equivalent. It's a technical term and should be translated to accurately reflect its meaning (e.g., 'ການວິເຄາະຂໍ້ມູນ' - 'data analysis').",
-          "suggestion": "ການວິເຄາະຂໍ້ມູນ"
-        },
-        {
-          "type": "formatting",
-          "description": "The Lao translation uses a mix of Lao and English terms which can break the flow. While it keeps the variables {{organizationName}} {{productName}}, the surrounding text should ideally be consistent.",
-          "suggestion": "Consider translating 'servers' to ເສີບເວີ (if it's already common usage) or ເສີບເວີຂອງ..."
+          "description": "The term 'parsing' was left in English (Latin script) instead of being translated into Lao, which is inconsistent with the rest of the localized string.",
+          "suggestion": "ການ​ນໍາ​ເຂົ້າ​ຂໍ້​ມູນ​ປະ​ກອບ​ມີ​ຫຼາຍ​ຂັ້ນ​ຕອນ​: ການ​ອັບ​ໂຫຼດ​ຂໍ້​ມູນ​, ການ​ວິເຄາະ​ຂໍ້ມູນ​, ການ​ຕັ້ງ​ຄ່າ​ການ​ນໍາ​ເຂົ້າ​, ແລະ​ການ​ນໍາ​ເຂົ້າ​. ໄຟລ໌ສຳຮອງຂອງເຈົ້າຈະຖືກເກັບໄວ້ໃນເຊີບເວີ {{organizationName}} {{productName}} ເປັນເວລາ 24 ຊົ່ວໂມງ, ແລະຈາກນັ້ນມັນຈະຖືກລຶບໂດຍອັດຕະໂນມັດ."
         }
       ],
       "approved_at": null
@@ -177,9 +155,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The Romanian translation uses 'după ce va fi șters automat' which implies the file is deleted *after* a specific action. The English 'and then it will be automatically deleted' implies deletion *after* the 24-hour period.  The phrasing is slightly awkward in Romanian.",
-          "suggestion": "Fișierul dvs. de rezervă va fi stocat pe serverele {{organizationName}} {{productName}} timp de 24 de ore, după care va fi șters automat."
+          "type": "incorrect_translation",
+          "description": "The Romanian translation changes the meaning of the second sentence. The English says the file will be stored for 24 hours AND THEN deleted. The Romanian says it will be stored for 24 hours AFTER which it will be deleted, but the phrasing 'după ce va fi șters automat' (after it will be deleted automatically) is logically flawed/inverted in this context, implying the deletion happens before the storage or as a condition of the storage period ending incorrectly.",
+          "suggestion": "Import de date include mai multe etape: încărcarea datelor, analizarea, configurarea importului și importul. Fișierul dvs. de rezervă va fi stocat pe serverele {{organizationName}} {{productName}} timp de 24 de ore, iar apoi va fi șters automat."
         }
       ],
       "approved_at": null
@@ -196,18 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ආනයන වින්‍යාසය\" (import configuration) is slightly awkward and could be improved. While technically correct, it doesn't flow naturally in Sinhala.",
-          "suggestion": "Consider using \"ආනයන සැකසුම්\" (import settings) or \"ආනයන වැඩපිළිවෙල\" (import process) for better flow."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word \"සේවකයන්\" (servants/workers) used for \"servers\" is not the correct terminology. It's a literal translation and doesn't convey the intended meaning.",
-          "suggestion": "Use \"සgetServerන්\" or \"සgetServerන් පද්ධතිය\" (server system) for a more accurate translation of 'servers'."
-        },
-        {
-          "type": "formatting",
-          "description": "The use of spaces around the curly brackets `{{organizationName}}` and `{{productName}}` might look strange to Sinhala readers. Consistent spacing is preferred.",
-          "suggestion": "Remove the spaces around the curly brackets: `{{organizationName}}` and `{{productName}}`."
+          "description": "The word 'servers' was translated as 'සේවකයන්' (sewakayan), which means 'employees/workers' instead of 'සර්වර්' (servers) or 'සේවාදායකයන්' (service providers/servers). This changes the meaning from technical infrastructure to human personnel.",
+          "suggestion": "දත්ත ආනයනයට පියවර කිහිපයක් ඇතුළත් වේ: දත්ත උඩුගත කිරීම, විශ්ලේෂණය, ආනයන වින්‍යාසය සහ ආනයනය. ඔබේ උපස්ථ ගොනුව {{organizationName}} {{productName}} සර්වර්වල පැය 24ක් තබා ගන්නා අතර, ඉන්පසුව එය ස්වයංක්‍රීයව මකා දමනු ලැබේ."
         }
       ],
       "approved_at": null
@@ -215,18 +183,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'odosielanie údajov' is a literal translation of 'data upload' but might sound awkward in Slovak. A more natural phrasing would be something like 'nahrávanie údajov'.",
-          "suggestion": "nahrávanie údajov"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'parsovanie' is acceptable but 'spracovanie údajov' is often preferred for broader understanding.",
-          "suggestion": "spracovanie údajov"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -244,18 +201,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'fajl' is a colloquial spelling of 'fajl'. The more formal and preferred spelling is 'datoteka'.",
-          "suggestion": "Replace 'fajl' with 'datoteka'."
-        },
-        {
-          "type": "grammar",
-          "description": "While technically correct, the phrase 'sačuvan na serverima' sounds slightly awkward. A smoother phrasing could use the dative case.",
-          "suggestion": "Replace 'sačuvan na serverima' with 'sačuvan na {{organizationName}} {{productName}} serverima'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -276,13 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'parsing' is awkwardly translated as 'phân tích cú pháp parsing'.  'Parsing' is a technical term and should be translated more naturally in context. While 'phân tích cú pháp' is a literal translation, it's not common usage and the English term is repeated.",
-          "suggestion": "Consider using a more natural phrasing for 'parsing' depending on the specific context. Possible options include: 'xử lý dữ liệu', 'kiểm tra dữ liệu', or simply omitting it if the meaning is clear without it. For example: 'Việc nhập dữ liệu bao gồm một số bước: tải lên dữ liệu, xử lý dữ liệu, nhập cấu hình và nhập dữ liệu.'"
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence 'Tập tin sao lưu của bạn sẽ được lưu trữ trong máy chủ {{organizationName}} {{productName}} trong 24 giờ và sau đó nó sẽ bị xóa tự động.' could be improved for flow. The 'nó' (it) is a little ambiguous.",
-          "suggestion": "Rewrite the sentence to avoid the pronoun 'nó'. For example: 'Tập tin sao lưu của bạn sẽ được lưu trữ trong máy chủ {{organizationName}} {{productName}} trong 24 giờ và sau đó sẽ bị xóa tự động.' or 'Tập tin sao lưu của bạn sẽ được lưu trữ trong máy chủ {{organizationName}} {{productName}} trong 24 giờ và sau đó tự động bị xóa.'"
+          "description": "The translation 'phân tích cú pháp parsing' is redundant and awkward. It translates to 'parsing syntax parsing', which is a repetitive error in the technical term.",
+          "suggestion": "Việc nhập dữ liệu bao gồm một số bước: tải lên dữ liệu, phân tích cú pháp, cấu hình nhập và nhập dữ liệu. Tập tin sao lưu của bạn sẽ được lưu trữ trên máy chủ {{organizationName}} {{productName}} trong 24 giờ và sau đó nó sẽ bị xóa tự động."
         }
       ],
       "approved_at": null
@@ -290,13 +231,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The spacing around the '{{organizationName}}{{productName}}' is incorrect. It should be visually separated by a space.",
-          "suggestion": "数据导入包括几个步骤：数据上传、解析、导入配置和导入。您的备份文件将存储在 {{organizationName}} {{productName}}服务器中 24 小时，然后会自动删除。"
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

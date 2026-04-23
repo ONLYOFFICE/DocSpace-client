@@ -3,7 +3,7 @@
   "content": "Send",
   "content_en_sha1_hash": "9bc2575c3930437e80555f78757b783c842e8e66",
   "created_at": "2025-05-19T21:30:48.532Z",
-  "updated_at": "2026-02-19T13:36:32.344Z",
+  "updated_at": "2026-04-10T08:21:04.301Z",
   "comment": {
     "text": "The translation key \"SendButton\" is used to display the label \"Send\" in various contexts, including buttons and dialog footers. It appears on change email and password dialogs, as well as a phone erasure description in another dialog. Its purpose is to provide a clear action for users to confirm changes or initiate actions.",
     "is_auto": true,
@@ -32,12 +32,6 @@
       "file_path": "/packages/client/src/components/dialogs/DeleteSelfProfileDialog/index.js",
       "line_number": 96,
       "context": "</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"DeleteSelfSendBtn\"\n label={t(\"Common:SendButton\")}\n size=\"normal\"\n scale\n primary\n onClick={this.onDeleteSelfProfileInstructions}\n isLoading={isRequestRunning}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/SalesDepartmentRequestDialog/index.js",
-      "line_number": 245,
-      "context": "</FieldContainer>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"send-button\"\n label={isLoading ? t(\"Common:Sending\") : t(\"Common:SendButton\")}\n size=\"normal\"\n primary\n onClick={onSendRequest}\n isLoading={isLoading}\n isDisabled={isLoading}",
       "module": "/packages/client"
     },
     {
@@ -81,13 +75,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Göndərin' is a valid Azerbaijani word, it's the imperative form ('Send!' or 'You send!') and doesn't quite capture the neutral meaning of 'Send' in a button label. A more appropriate translation would be 'Göndər' (Send).",
-          "suggestion": "Göndər"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -253,6 +241,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

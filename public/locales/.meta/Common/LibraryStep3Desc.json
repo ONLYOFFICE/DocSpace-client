@@ -3,7 +3,7 @@
   "content": "Get results from filled forms and use AI agents to process the data",
   "content_en_sha1_hash": "ac73558e6262b8ebaa90045e211167a65f6e1aa4",
   "created_at": "2026-03-31T15:18:14.956Z",
-  "updated_at": "2026-03-31T15:18:14.956Z",
+  "updated_at": "2026-04-08T06:01:08.261Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -26,7 +26,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'filled' (as in completed forms) was translated as 'Nəmləndirilmiş', which means 'moistened' or 'dampened'. This is a semantic error.",
+          "suggestion": "Doldurulmuş formlardan nəticələr alın və məlumatları emal etmək üçün süni intellekt agentlərindən istifadə edin"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -50,7 +56,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The verb 'Εκάγετε' is a non-existent word/typo. It appears to be a misspelling of 'Αποκτήστε' (Get) or a failed attempt at a conjugation, making the sentence grammatically nonsensical.",
+          "suggestion": "Αποκτήστε αποτελέσματα από συμπληρωμένα στοιχεία και χρησιμοποιήστε AI agents για την επεξεργασία των δεδομένων"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -170,13 +182,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Добрите' is a misspelling or incorrect conjugation of the verb 'Get'. In Serbian, 'Добрите' is not a valid imperative form for 'Get' (obtaining/retrieving); it looks like a mistranslation of the adjective 'good'. The correct imperative verb should be 'Преузмите' or 'Добијте'.",
+          "suggestion": "Преузмите резултате из попуњених формулара и користите AI агенте за обраду података"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Dobdite' is a typo; the correct word is 'Dobijte'.",
+          "suggestion": "Dobijte rezultate iz popunjenih formulara i koristite AI agente za obradu podataka"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

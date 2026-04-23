@@ -3,7 +3,7 @@
   "content": "Last modified date",
   "content_en_sha1_hash": "db142287f88a07da18a28455cfab95c90749ca33",
   "created_at": "2025-05-19T21:30:46.056Z",
-  "updated_at": "2026-03-31T15:18:46.212Z",
+  "updated_at": "2026-04-08T06:19:07.701Z",
   "comment": {
     "text": "The translation key \"LastModifiedDate\" refers to a date field that displays the last modified date of a file or item. It is used in sorting and filtering contexts to allow users to sort results by this field. This label appears in various UI elements such as filters, sorting menus, and data tables.",
     "is_auto": true,
@@ -59,8 +59,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Czech translation \"Modifikováno\" while technically meaning 'modified', doesn't accurately convey the full meaning of \"Last modified date\". It's missing the 'date' component. A more accurate translation would include the concept of 'date'.",
+          "type": "missing_content",
+          "description": "The translation 'Modifikováno' means 'Modified'. It omits the 'date' part of the English source 'Last modified date', which is important for clarity in sorting/filtering contexts.",
           "suggestion": "Datum poslední modifikace"
         }
       ],
@@ -95,8 +95,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The French translation \"Modifié\" is incomplete and doesn't accurately represent the English phrase \"Last modified date\". It only translates \"Modified\".",
+          "type": "missing_content",
+          "description": "The translation 'Modifié' (Modified) is missing the 'date' component of the English source 'Last modified date'. In a sorting/filtering context, this changes the meaning from a specific attribute (the date) to a state (the action of being modified).",
           "suggestion": "Date de dernière modification"
         }
       ],
@@ -117,13 +117,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While '変更日' (henkoubi) is a reasonable translation for 'Last modified date', it lacks the specificity implied by the English. 'Last modified date' directly refers to the date of the last change, whereas '変更日' is a more general 'change date'.",
-          "suggestion": "Consider a more precise translation such as \"最終更新日\" (saishuu koushinbi) which directly translates to 'last updated date'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -191,8 +185,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation \"Modifikované\" is incomplete and doesn't accurately convey the meaning of \"Last modified date\". It only translates to \"Modified\".",
+          "type": "missing_content",
+          "description": "The translation 'Modifikované' means 'Modified' (adjective/past participle), but it omits the 'date' part of the English string 'Last modified date'.",
           "suggestion": "Dátum poslednej modifikácie"
         }
       ],
@@ -235,6 +229,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "Log out from {{platform}} {{browser}}?",
   "content_en_sha1_hash": "229f1ff3f1b7fecb7a9e75830718a8d7d88e0175",
   "created_at": "2025-05-19T21:30:53.370Z",
-  "updated_at": "2025-05-26T07:57:32.318Z",
+  "updated_at": "2026-04-09T07:04:49.951Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message for logging out from a specific platform and browser combination. It appears in a logout dialog modal, asking the user to confirm their action. The text includes placeholders for platform and browser names to ensure accurate representation of the device being logged out from.",
     "is_auto": true,
@@ -36,13 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Log out from\" is not accurately translated. 'Çıxılsın' implies a passive voice ('should be logged out') rather than a direct command to log out. A more accurate translation would use a more active voice.",
-          "suggestion": "\"{{platform}} {{browser}}'dən çıx edin?\" or \"{{platform}} {{browser}}'dən təkcə çıxın?\""
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase 'Log out from' introduces the platform and browser information via variable placeholders. While the Azerbaijani translation uses placeholders, it is unclear if this structure is maintained consistently throughout the application's language files.  It's crucial that this consistency is verified.",
-          "suggestion": "Verify the use of placeholders is consistent across all related strings in the application."
+          "description": "The Azerbaijani translation 'çıxılsın?' is in the passive/imperative form (meaning 'Let it be logged out?'), which sounds unnatural and grammatically incorrect for a user confirmation dialog. It should be a direct question to the user.",
+          "suggestion": "{{platform}} {{browser}} platformasından çıxış etmək istəyirsiniz?"
         }
       ],
       "approved_at": null
@@ -56,13 +51,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Odhlášení z\" is too literal. A more natural Czech phrasing for \"Log out from\" would be \"Odhlásit se z\". \"Odhlášení z\" emphasizes the action of logging out, rather than the act of initiating the logout process.",
-          "suggestion": "Odhlásit se z"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -74,13 +63,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Greek translation uses a semicolon (;) instead of a question mark (?) at the end.  The English phrase is a question, so the Greek should also be a question.",
-          "suggestion": "Replace ';' with '?'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -107,13 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Դուրս գալ {{platform}} {{browser}}-ից:' is a literal translation and sounds unnatural in Armenian. A more natural phrasing would be 'Դուրս գալ {{platform}} {{browser}}'-ի՞ց։' or 'Դուրս գալ {{platform}} {{browser}}'-ից՞։'",
-          "suggestion": "Consider translating as 'Դուրս գալ {{platform}} {{browser}}'-ի՞ց։' or 'Դուրս գալ {{platform}} {{browser}}'-ից՞։'"
-        },
-        {
-          "type": "formatting",
-          "description": "The question mark placement and the addition of the '՞' mark indicate a question. Ensure this is the intended meaning and adjust the phrasing if a statement is desired.",
-          "suggestion": "If a statement, remove the question mark and the '՞' mark."
+          "description": "The Armenian translation ends with a colon (:) instead of a question mark (?), changing the sentence from a question to a statement/label, which fails to convey the confirmation intent of the English source.",
+          "suggestion": "Դուրս գալ {{platform}} {{browser}}-ից՞"
         }
       ],
       "approved_at": null
@@ -121,30 +99,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Log out from' is better translated as 'Esci da' or 'Disconnetti da' in Italian, not 'Vuoi uscire da'. 'Vuoi uscire da' translates to 'Do you want to exit from...'.",
-          "suggestion": "Vuoi disconnetterti da {{platform}} {{browser}}?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Log out from' is not directly translated accurately. 'Log out' is more commonly used and natural in Japanese. 'From' is unnecessary and makes the phrasing awkward.",
-          "suggestion": "ログアウトしますか？"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation includes the same placeholders {{platform}} {{browser}} as the English original. While functional, it might be better to re-evaluate if these are truly necessary or if a more natural phrasing could be used without them.",
-          "suggestion": "If possible, consider alternatives that don't rely on these specific placeholders. Alternatively, ensure the placeholders are consistently used throughout the application."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -162,13 +123,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Log out from' is not directly translated correctly. 'Log out' is typically translated as 'Izrakstīties' in Latvian. 'No' is appropriate here.",
-          "suggestion": "Vai izrakstīties no {{platform}} {{browser}}?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -180,25 +135,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation 'Wylogować z {{platform}} na {{browser}}?' doesn't accurately reflect the meaning of 'Log out from {{platform}} {{browser}}?'. 'Na' implies 'on' or 'using', which isn't the correct preposition to use with 'logout'.",
-          "suggestion": "Wylogować się z {{platform}} używając {{browser}}? or Wylogować z {{platform}} w {{browser}}?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Log out from' is not accurately translated. 'Log out' is more commonly translated as 'Sair de' in Portuguese. 'Terminar a sessão' is a more formal and less direct equivalent.",
-          "suggestion": "Sair de {{platform}} {{browser}}?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -210,18 +153,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Doriţi să vă deconectați de la {{platform}} {{browser}}?\" is a bit formal and literal. A more natural Romanian phrasing for \"Log out from\" would be \"Deconectați-vă de la...\" or \"Părăsiți...\" (leave). 'Doriţi să vă deconectați' translates to 'Do you want to log out?' which is less direct than simply prompting for logout.",
-          "suggestion": "Consider using 'Deconectați-vă de la {{platform}} {{browser}}?' or 'Părăsiți {{platform}} {{browser}}?'"
-        },
-        {
-          "type": "formatting",
-          "description": "While the variable placeholders are correct, the use of \"de la\" combined with 'Deconectați-vă' creates a slightly awkward flow. It's more common to simply say 'Deconectați-vă din...'",
-          "suggestion": "Consider using 'Deconectați-vă din {{platform}} {{browser}}?'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -233,18 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '{{platform}} {{browser}} වෙතින් නික්මෙන්න ද?' is a literal translation and doesn't sound natural in Sinhala. A more natural phrasing would convey the action of logging out rather than just 'leaving'.",
-          "suggestion": "{{platform}} {{browser}} වෙතින් تسجيلයෙන් පිටවන්න?"
-        },
-        {
-          "type": "formatting",
-          "description": "The inclusion of the question mark 'ද?' at the end is somewhat awkward. While questions can end with this, it feels unnatural given the context of a confirmation prompt.",
-          "suggestion": "Remove the question mark.  {{platform}} {{browser}} වෙතින් නික්මෙන්න."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -262,13 +183,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Serbian translation uses a question mark at the end, which is appropriate for a question. However, the original English also includes a question mark, so the consistency is maintained.",
-          "suggestion": null
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -280,13 +195,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"{{platform}} {{browser}} oturumu kapatılsın mı?\" is a bit awkward. While technically correct, it translates to \"Should {{platform}} {{browser}} session be closed?\" which isn't the most natural way to ask someone to log out. A more natural phrasing would be '{{platform}} {{browser}}'den çıkış yapın mı?' or '{{platform}} {{browser}}'den oturumu kapatın mı?'",
-          "suggestion": "'{{platform}} {{browser}}'den çıkış yapın mı?' or '{{platform}} {{browser}}'den oturumu kapatın mı?'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -302,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

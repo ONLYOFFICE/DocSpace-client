@@ -3,7 +3,7 @@
   "content": "Filling form",
   "content_en_sha1_hash": "7d83d7eca125edcf45bdc6c74e4efc3a8e517850",
   "created_at": "2025-05-19T21:30:45.351Z",
-  "updated_at": "2026-03-31T15:18:46.226Z",
+  "updated_at": "2026-04-08T09:23:43.725Z",
   "comment": {
     "text": "The translation key \"FillingFormRooms\" is used to display the label for a filter option in the Home page's room filtering section, specifically when selecting rooms of type \"Filling Forms Room\". This text will appear as the label on a filter dropdown.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text 'Filling form' is a noun phrase acting as a label for a room type ('Filling Forms Room'). The Arabic translation 'قم بتعبئة الاستمارة' is an imperative command ('Fill out the form'), which is grammatically incorrect for a UI filter label/category name.",
+          "suggestion": "غرف تعبئة النماذج"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -45,7 +51,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'Filling form' (referring to a room type for filling forms) is translated as 'Form for filling' (a noun phrase describing an object), which changes the meaning from a category/type to a specific document.",
+          "suggestion": "Стая за попълване на формуляри"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -63,25 +75,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Φόρμα συμπλήρωσης\" while literally meaning 'Form of filling', doesn't quite capture the concise meaning of \"Filling form\". A more natural Greek translation would better convey the intended meaning.",
-          "suggestion": "Consider using something like \"Συμπλήρωση φόρμας\" (Symplirosi formass) or \"Φόρμα για συμπλήρωση\" (Forma gia symplirosi) which means 'Form to fill' or 'Form filling'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Relleno de formularios\" is a literal translation, it doesn't quite capture the nuance of \"Filling form.\" It implies the act of *filling* a form, not the form itself. A better translation would convey the concept of the form itself.",
-          "suggestion": "Formulario"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Täyttölomake\" is a valid Finnish word, it's a compound word literally meaning 'filling form'. A more natural and concise translation for \"Filling form\" would be \"Täytettävä lomake\" or simply \"Lomake\". \"Täyttölomake\" sounds somewhat clunky.",
-          "suggestion": "Täytettävä lomake"
+          "description": "The English 'Filling form' (referring to the action/process or the type of room for filling forms) is translated as 'Täyttölomake', which means 'Filling form' as a noun (the form itself). In the context of a room type label, it should describe the room's purpose or the action. However, more critically, 'Filling form' in English is grammatically awkward for a label; if it refers to 'Filling Forms Room', the Finnish 'Täyttölomake' translates to 'Filling form' (singular), whereas the context implies a category of rooms for filling forms.",
+          "suggestion": "Lomakkeiden täyttöhuoneet"
         }
       ],
       "approved_at": null
@@ -102,13 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Salles de remplissages de formulaires\" is overly literal and doesn't convey the intended meaning of 'Filling form' in a natural French way. It translates to 'Rooms of filling out forms', which is awkward.",
-          "suggestion": "A more appropriate translation would be \"Formulaires à remplir\" or \"Remplissage de formulaires\" depending on the context. \"Formulaires à remplir\" is a common phrase meaning 'Forms to fill out'.  \"Remplissage de formulaires\" would translate to 'Form filling'."
-        },
-        {
-          "type": "grammar",
-          "description": "Even if we interpret 'Salles de remplissages de formulaires' as intended, the construction 'de remplissages' is grammatically unusual. It implies a collection of filling processes.",
-          "suggestion": "If 'salles' (rooms) is truly needed, it could be rephrased as 'Salles de formulaire à remplir' (Rooms for filling out forms)."
+          "description": "The English source 'Filling form' is a gerund/action phrase, but the French translation 'Salles de remplissages de formulaires' translates to 'Rooms for filling forms'. While the metadata suggests the key refers to a room type, the actual string provided for translation is 'Filling form', making the French translation an over-translation that adds information (Rooms) not present in the source text.",
+          "suggestion": "Remplissage de formulaire"
         }
       ],
       "approved_at": null
@@ -119,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Լրացման ձև\" (Lracman rev) literally translates to 'Form for filling'. While understandable, a more natural Armenian translation for 'Filling form' would be something along the lines of 'Լրացվող ձև' (Lracvog rev) which means 'Form to be filled'.",
-          "suggestion": "Լրացվող ձև"
+          "description": "The Armenian translation 'Լրացման ձև' means 'Form for filling' or 'Filling form' (as a noun phrase), whereas the context indicates this is a label for a room type 'Filling Forms Room'. In Armenian, the current translation sounds like a physical document/form rather than a room dedicated to the activity of filling forms.",
+          "suggestion": "Լրացման ձևերի սենյակ"
         }
       ],
       "approved_at": null
@@ -155,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Aizpildīšanas veidlapa' is too literal. While technically correct, it's not the most natural or common way to say 'Filling form' in Latvian.  'Aizpildīšanas' implies the action of filling. A more natural translation would focus on the form itself.",
-          "suggestion": "Forms for filling out (Aizpildāmas formas) or Filling forms (Aizpildīšanas formas)."
+          "description": "The Latvian translation 'Aizpildīšanas veidlapa' means 'Filling form' (as in the act of filling a single form) or 'Form for filling', whereas the context indicates this is a label for a room type 'Filling Forms Room'. The current translation is grammatically awkward for a filter label and implies a single form rather than the category of rooms.",
+          "suggestion": "Aizpildīšanai paredzētas telpas"
         }
       ],
       "approved_at": null
@@ -188,13 +183,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Completare formular\" is not the most natural or accurate translation of \"Filling form.\" While \"completare\" means 'to complete,' \"formular\" is the diminutive form of \"formular\", it's better to use \"formularul\" or just \"formular\".",
-          "suggestion": "Completarea formularului"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -206,13 +195,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'පුරවන ආකෘතිපත්‍ර' (Puravana aakruthipatara) is a literal translation of 'Filling form'. While technically correct, it's not the most natural or common way to express this in Sinhala. A more fluent translation would be 'ආකෘතිය පුරවා' (Akruthiyu purawa) or 'ආකෘතිය පිරවෙන' (Akruthiyu pirawene).",
-          "suggestion": "Consider 'ආකෘතිය පුරවා' (Akruthiyu purawa) or 'ආකෘතිය පිරවෙන' (Akruthiyu pirawene)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -224,13 +207,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Obrazec za izpolnjevanje' while technically correct, is a bit literal and clunky. 'Obrazec za izpolnitev' would be a more natural and idiomatic translation of 'Filling form' in this context, suggesting a form to be filled out.",
-          "suggestion": "Obrazec za izpolnitev"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -251,7 +228,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Doldurma formu\" is not the most natural or accurate translation of \"Filling form.\" \"Doldurma formu\" literally translates to \"filling form,\" but a more common and idiomatic translation would be something like \"Form doldurma\" or \"Formu doldurma\".",
+          "description": "The Turkish translation 'Doldurma formu' means 'Form for filling' or 'Filling form' (as in a noun phrase), whereas the context indicates this is a label for a room type 'Filling Forms Room'. In Turkish, 'Form doldurma odası' or 'Form doldurma' would be more appropriate for a category/type label. 'Doldurma formu' sounds like a specific document rather than a room type/category.",
           "suggestion": "Form doldurma"
         }
       ],
@@ -270,6 +247,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

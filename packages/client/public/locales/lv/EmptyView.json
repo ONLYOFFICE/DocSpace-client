@@ -2,6 +2,7 @@
   "CollaborationRoomEmptyTitle": "Laipni lūdzam sadarbības telpā",
   "CollaboratorEmptyTitle": "Telpa ir tukša.",
   "CreateAIAgent": "Izveidot jaunu aģentu",
+  "CreateAIAgentDescription": "Sāciet veidot savu pirmo {{aiAgent}}",
   "CreateDocument": "Izveidot jaunu dokumentu",
   "CreateDocumentDescription": "Izmantojiet plašo teksta apstrādes funkcionalitāti.",
   "CreateForm": "Izveidot jaunu PDF veidlapu",
@@ -16,7 +17,10 @@
   "CreateSpreadsheetDescription": "Veiciet precīzus aprēķinus ar minimālu piepūli.",
   "CustomRoomEmptyTitle": "Laipni lūdzam pielāgotajā telpā",
   "DefaultFolderDescription": "Nometiet failus šeit vai izveidojiet jaunus.",
+  "EmptyAIAgentsAIDisabledDescription": "Šī sadaļa ļauj lietotājiem strādāt ar {{aiAgents}} — viedajiem asistentiem dokumentu un citu uzdevumu apstrādei.\nLai sāktu tos lietot, jūsu {{productName}} administratoram ir jāieslēdz MI funkciju pakalpojums.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Lai izveidotu un izmantotu {{aiAgents}}, savienojiet savu maku un aktivizējiet MI funkciju pakalpojumu {{productName}} iestatījumos. Kad tas būs izdarīts, jūs varēsiet strādāt ar {{aiAgents}} un sadarboties ar savu komandu.",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "Pievienojiet savu maku un iespējojiet MI funkcijas",
+  "EmptyAIAgentsTitle": "Izveido savu {{aiAgent}}",
   "EmptyDescription": "Sāciet ar ātrām darbībām:",
   "EmptyFavoritesDescription": "Noņem zvaigznītes failiem un mapēm, lai tie būtu viegli pieejami un rokas stienī.",
   "EmptyFavoritesTitle": "Vēl nav iecienītāko.",
@@ -57,5 +61,8 @@
   "UploadFromPortalTitle": "Augšupielādēt no {{productName}}",
   "UploadPDFFormOptionDescription": "Izvēlieties gatavu PDF veidlapu, kas pieejama šeit: {{productName}}, un augšupielādējiet to telpā.",
   "VirtualDataRoomEmptyTitle": "Laipni lūdzam virtuālajā datu telpā",
-  "EmptyAIAgentsTitle": "Izveido savu {{aiAgent}}"
+  "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} vēl nav pieejami",
+  "EmptyAIAgentsAIEnabledUserDescription": "Kad jūsu komanda jūs vietoikīs sadarbībai, šeit parādīsies {{aiAgents}}, gatavi palīdzēt ar dokumentiem, zināšanu pārvaldību un ikdienas uzdevumiem.",
+  "EmptyAIAgentsDescription": "Izveidojiet personalizētu asistantu savai komandai, pievienojot zināšanu bāzi, izvēlot ideālo modeli un savienojot ar {{mcpServer}}. Ielietojiet savus kolēģus, lai sadarbotu un maksimāli izmantotu agenta sarunas spējas.",
+  "EmptyAIAgentsUserTitle": "Nopierdisi {{aiAgents}} pieejami"
 }

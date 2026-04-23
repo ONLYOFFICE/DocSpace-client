@@ -3,7 +3,7 @@
   "content": "Viewer",
   "content_en_sha1_hash": "dbad9f126b33570e09839a2d60720898de1a512d",
   "created_at": "2025-05-19T21:30:48.141Z",
-  "updated_at": "2025-12-19T13:32:31.681Z",
+  "updated_at": "2026-04-08T00:37:58.351Z",
   "comment": {
     "text": "The translation key \"Common:RoleViewer\" is used to display the text \"Viewer\" in various UI elements, such as buttons and labels. It appears in dialogues like the Create Edit Room Dialog and in page components like the InfoPanel Body's MembersHelper. The text is meant to represent a role or access level for users.",
     "is_auto": true,
@@ -45,13 +45,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"عارض\" (ʿāriḍ) can mean viewer, it often implies a temporary or casual viewing. A more precise translation for \"Viewer\" in the context of a role or permission might be something like \"مشاهد\" (mushāhid) which conveys a more dedicated or authorized viewing.",
-          "suggestion": "مشاهد (mushāhid)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -69,13 +63,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Prohlížeč' can mean 'viewer', in the context of roles and permissions (given the key 'Common:RoleViewer'), a more appropriate translation might be 'Čtenář' (Reader) or 'Pozorovatel' (Observer). 'Prohlížeč' often refers to a software viewer, not a role.",
-          "suggestion": "Consider 'Čtenář' or 'Pozorovatel' as alternative translations."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -117,7 +105,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "In the context of software user roles and access levels, 'Spettatore' (spectator/audience member) is incorrect. The correct term for a user with read-only access is 'Visualizzatore'.",
+          "suggestion": "Visualizzatore"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -126,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Japanese translation \"閲覧用\" (ronbyou) directly translates to \"for viewing\" or \"viewing use.\" It doesn't accurately convey the meaning of \"Viewer\" which implies a role or permission. A more appropriate translation would depend on the context, but \"閲覧者\" (ronshya - viewer) or a phrase indicating viewing permissions would be better.",
-          "suggestion": "Consider \"閲覧者\" (ronshya - viewer) or a contextual phrase indicating viewing permissions."
+          "description": "The translation '閲覧用' (For viewing/For browsing) describes a purpose or a mode, whereas the context 'Common:RoleViewer' indicates a user role. In a UI context for roles (e.g., alongside 'Editor'), it should be a noun representing the person/role.",
+          "suggestion": "閲覧者"
         }
       ],
       "approved_at": null
@@ -138,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"확인자\" (hwaginja) generally means 'verifier' or 'inspector,' not 'viewer.' While a viewer *could* verify, the core meaning is lost.",
-          "suggestion": "Consider alternative translations like \"조회자\" (johwaya - viewer), \"보기\" (bogi - view), or \"감상자\" (gamsangja - watcher) depending on the specific context of 'RoleViewer'."
+          "description": "The translation '확인자' means 'Verifier' or 'Checker' (someone who confirms something), whereas the context 'Common:RoleViewer' and 'ShareAccessRights.ReadOnly' indicates a user role with read-only access. In a software UI context, 'Viewer' should be translated as '뷰어' (transliteration) or '조회자' (one who views/inquires).",
+          "suggestion": "뷰어"
         }
       ],
       "approved_at": null
@@ -159,43 +153,31 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Kijker' refers to a person who is watching something (like a spectator), whereas in the context of software roles and access levels, 'Lezer' (Reader) is the standard term for a 'Viewer' role.",
+          "suggestion": "Lezer"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation \"Przeglądający\" while technically meaning 'viewer' or 'browsing,' doesn't fully capture the specific connotation of 'Viewer' as a role or permission level. It sounds more like an action or a person doing the viewing rather than the *role* of a viewer.",
-          "suggestion": "Consider alternatives like \"Oglądacz\" (more general viewer), \"Widzący\" (someone who sees), or a more descriptive phrase depending on the context.  If possible, confirm the intended meaning of 'Viewer' within the application to choose the most appropriate Polish equivalent."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Visualizador\" is a valid Portuguese word, it doesn't perfectly capture the specific meaning of \"Viewer\" in a role or access context. \"Visualizador\" generally means 'viewer' in the sense of watching something (like a video). \"Viewer\" in this context often implies someone who has permission or access to view something, not just someone who is watching.",
-          "suggestion": "Consider alternatives like \"Acessador\", \"Observador\" or \"Visualizador de Acessos\" to better reflect the 'RoleViewer' context. The best option would depend on the broader application."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Visualizador\" is a valid Portuguese word, it doesn't perfectly convey the meaning of \"Viewer\" in the context of roles and permissions. \"Visualizador\" typically refers to a software or system that displays something visually. \"Viewer\" in this context implies someone who has viewing access. A more accurate translation would depend on the specific nuance required.",
-          "suggestion": "Consider alternatives like 'Observador' (Observer), 'Acessador de Visualização' (Viewing Accessor), or 'Leitor' (Reader) depending on the precise role definition."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -207,7 +189,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Зритель' refers to an audience member (e.g., in a cinema or theater). In the context of software roles and access levels (ReadOnly access), the correct term is 'Просмотр' or 'Наблюдатель'. Given the context of user roles, 'Читатель' or 'Просматривающий' are also possible, but 'Зритель' is semantically incorrect for a software permission role.",
+          "suggestion": "Просмотр"
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -219,13 +207,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation \"Prehliadač\" primarily means 'browser'. While it can imply viewing, it's not the most accurate translation for 'Viewer' in the context of a role or permission.",
-          "suggestion": "Consider \"Zobrazovateľ\" or \"Pozorovateľ\" as more accurate translations for 'Viewer' in this context, denoting someone who views or observes something."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -249,19 +231,19 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Turkish translation \"Görüntüleyici\" while technically meaning 'viewer' doesn't fully capture the nuanced meaning of 'Viewer' in the context of a role or permission. It sounds more like a software application name rather than a role.",
-          "suggestion": "Consider \"İzleyici\" or \"Görüntü Yetkilisi\" depending on the specific context. \"İzleyici\" is a more common and natural translation for 'viewer' in a role context. \"Görüntü Yetkilisi\" explicitly indicates viewing authority."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Глядач' (spectator/viewer of a show) is inappropriate for a software user role. In the context of access levels and permissions (ReadOnly), 'Переглядач' is the standard technical term.",
+          "suggestion": "Переглядач"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -276,10 +258,16 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"可查看\" (ke kan) literally means \"can view\" or \"able to view\". While it conveys the general sense of \"Viewer\", it's not a direct or idiomatic translation. \"Viewer\" refers to a role or permission, and the Chinese should reflect that.",
-          "suggestion": "Consider \"查看者\" (cha kan zhe) which directly translates to \"viewer\" as a role, or \"用户\" (yong hu) which means \"user\" depending on the context. Another option could be \"观察员\" (guancha yuan) which means \"observer\"."
+          "description": "The translation '可查看' means 'can view' (a verb phrase/action), whereas the English 'Viewer' refers to a user role (a noun). In the context of access levels and roles, it should be a noun.",
+          "suggestion": "查看者"
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

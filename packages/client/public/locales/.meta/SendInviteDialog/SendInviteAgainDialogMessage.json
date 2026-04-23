@@ -3,7 +3,7 @@
   "content": "After users accept the invitation, their status will be changed to 'Active'.",
   "content_en_sha1_hash": "ca00a33b999745953583a0dd0b93a69885f3ca4b",
   "created_at": "2025-05-19T21:30:53.274Z",
-  "updated_at": "2025-05-24T06:00:15.499Z",
+  "updated_at": "2026-04-09T06:42:12.626Z",
   "comment": {
     "text": "This translation key is used to display a message explaining that after accepting an invitation, users will be marked as 'Active'. It appears in a modal dialog component.",
     "is_auto": true,
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'their status will be changed' is not accurately conveyed by the Arabic phrase 'سيتم تغيير حالتهم'. A more natural translation would emphasize the change in their status *to* Active.",
-          "suggestion": "بعد قبول المستخدمين للدعوة ، ستتغير حالتهم إلى 'نشط'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -57,18 +51,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The German sentence structure is awkward. The verb 'bekommen' (to receive) isn't the most natural fit here. A more accurate translation would imply a change is made *to* their status.",
-          "suggestion": "Nachdem Benutzer die Einladung annehmen, wird ihr Status auf 'Aktiv' geändert."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'bekommen' implies receiving, rather than the status *changing*. The English implies a change.",
-          "suggestion": "Nachdem Benutzer die Einladung annehmen, wird ihr Status auf 'Aktiv' gesetzt."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -104,13 +87,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The verb 'cambierà' (will change) is passive voice and sounds unnatural in this context. A more active construction would improve the flow.",
-          "suggestion": "Dopo che gli utenti hanno accettato l'invito, il loro stato diventerà 'Attivo'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -128,18 +105,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'their status will be changed' is not accurately reflected in the Lao translation. 'ປ່ຽນເປັນ' implies a direct change rather than a status update.",
-          "suggestion": "ຫຼັງຈາກຜູ້ໃຊ້ຍອມຮັບການເຊີນ, ສະຖານະພາບຂອງພວກເຂົາຈະຖືກປ່ຽນເປັນ 'ເຄື່ອນໄຫວຢູ່' or ຫຼັງຈາກຜູ້ໃຊ້ຍອມຮັບການເຊີນ, ສະຖານະພາບຂອງພວກເຂົາຈະຖືກອັບເດດເປັນ 'ເຄື່ອນໄຫວຢູ່'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Active' is translated to 'ໃຊ້ງານຢູ່'. While understandable, 'ເຄື່ອນໄຫວຢູ່' is a more natural and common translation in this context.",
-          "suggestion": "Replace 'ໃຊ້ງານຢູ່' with 'ເຄື່ອນໄຫວຢູ່'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -177,9 +143,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The Romanian sentence uses the verb 'a schimba' (to change) incorrectly. It should be 'se va schimba' (will change).",
-          "suggestion": "Odată ce utilizatorul acceptă invitația, statutul se va schimba în Activ."
+          "type": "incorrect_translation",
+          "description": "The verb 'va schimba' (will change [something]) is used instead of the passive form 'va fi schimbat' (will be changed). In the current version, it implies the status itself is performing an action rather than being acted upon.",
+          "suggestion": "Odată ce utilizatorii acceptă invitația, statutul lor va fi schimbat în 'Activ'."
         }
       ],
       "approved_at": null
@@ -187,13 +153,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'After users accept the invitation' is not perfectly captured by 'После того, как пользователи подтвердят приглашение на портал'. The addition of 'на портал' (on the portal) is not present in the English and may be unnecessary or misleading depending on the context. The original implies accepting the invitation in general, not specifically through a portal.",
-          "suggestion": "После того, как пользователи подтвердят приглашение."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -201,14 +161,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'පරිශ්‍රීලකයින්' (parishiilakayin) is a less common and somewhat archaic way to say 'users'. It's not incorrect, but a more common and natural word would be better.",
-          "suggestion": "පරිශ්‍රෙයකරුවන් (parishrekarawo)"
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure could be improved for better flow and naturalness in Sinhala. While grammatically correct, it feels slightly stiff.",
-          "suggestion": "ආරාධනය පිළිගත් පරිශ්‍රෙයකරුවන්ගේ තත්වය 'සක්‍රිය' ලෙස වෙනස් වනු ඇත."
+          "type": "incorrect_translation",
+          "description": "The word 'පරිශ්‍රීලකයින්' (parishrilakayin) is a misspelling/incorrect word for 'users'. The correct term should be 'පරිශීලකයින්' (parishilakayin).",
+          "suggestion": "පරිශීලකයින් ආරාධනය පිළිගත් පසු, ඔවුන්ගේ තත්ත්වය 'සක්‍රියයි' ලෙස වෙනස් වනු ඇත."
         }
       ],
       "approved_at": null
@@ -240,7 +195,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \"'\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -261,10 +222,16 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Active' is translated as '活动' which means 'activity' or 'event' and doesn't accurately convey the intended meaning of 'Active' in the context of a user status. It implies a temporary state rather than a permanent one.",
-          "suggestion": "用户接受邀请后，其状态将被变更为‘激活’ (yònghù jiēshòu yāoqíng hòu, qí zhuàngtài jiāng bèi biànwéi ‘jīhuó’)."
+          "description": "The term 'Active' is translated as '活动' (huódòng), which usually means 'activity' or 'event'. In the context of a user status in software, '已激活' (activated) or '活跃' (active) is the standard technical term. '活动' sounds like a noun for an event rather than a status.",
+          "suggestion": "用户接受邀请后，其状态将被变更为“已激活”。"
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

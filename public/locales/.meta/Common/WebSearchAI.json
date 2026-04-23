@@ -3,7 +3,7 @@
   "content": "Web search",
   "content_en_sha1_hash": "381ceddd75a893f19764c7e4cf9cd12c0f6e88c3",
   "created_at": "2025-11-21T08:21:51.294Z",
-  "updated_at": "2026-03-20T09:07:45.561Z",
+  "updated_at": "2026-04-07T20:06:20.228Z",
   "comment": {
     "text": "This key refers to the text \"Web search\" and is used to label or describe web search functionality within the AI settings section of the portal. It appears in both the settings overview and a reset dialog related to web search features. Translators should ensure the text accurately conveys the meaning of accessing or disabling web search capabilities.",
     "is_auto": true,
@@ -75,7 +75,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The translation 'Axtarış' means only 'Search'. It omits the 'Web' component of 'Web search', which is necessary to distinguish it from local or internal searches within the context of AI settings.",
+          "suggestion": "Veb axtarış"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -153,7 +159,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation 'Meklēšana ar tīmekļa vietnēm' means 'Searching with websites', which is semantically different from 'Web search' (searching the web).",
+          "suggestion": "Tīmekļa meklēšana"
+        }
+      ],
       "approved_at": null
     },
     "nl": {

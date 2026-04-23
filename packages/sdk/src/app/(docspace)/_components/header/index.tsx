@@ -26,7 +26,7 @@
 
 "use client";
 
-import { useCallback, useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import classnames from "classnames";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
@@ -36,20 +36,18 @@ import Navigation, {
   TNavigationItem,
 } from "@docspace/ui-kit/components/navigation";
 import { TableGroupMenu } from "@docspace/ui-kit/components/table";
-import { WhiteLabelLogoType } from "@docspace/shared/enums";
-import { getLogoUrl } from "@docspace/shared/utils/common";
 import styles from "@docspace/shared/styles/SectionHeader.module.scss";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
-
+import { FolderType } from "@docspace/shared/enums";
 import useDeviceType from "@/hooks/useDeviceType";
 import { useNavigationStore } from "../../_store/NavigationStore";
 import { useFilesSelectionStore } from "../../_store/FilesSelectionStore";
 import { useFilesListStore } from "../../_store/FilesListStore";
-import { useSettingsStore } from "../../_store/SettingsStore";
 
 import useFolderActions from "../../_hooks/useFolderActions";
 import useContextMenuModel from "../../_hooks/useContextMenuModel";
 import useHeaderMenu from "../../_hooks/useHeaderMenu";
+import { DeleteContext } from "../../_contexts/DeleteContext";
+import { FileOperationsContext } from "../../_contexts/FileOperationsContext";
 
 import type { HeaderProps } from "./Header.types";
 
@@ -60,6 +58,9 @@ const Header = ({
   pathParts,
   isEmptyList,
   showTitle = true,
+  onBurgerClick,
+  isInfoPanelVisible = false,
+  onToggleInfoPanel,
 }: HeaderProps) => {
   const searchParams = useSearchParams();
 
@@ -68,16 +69,28 @@ const Header = ({
     return value === "true" ? true : value === "false" ? false : value;
   };
 
-  showTitle = getValue("showTitle") as boolean;
+  const showTitleParam = getValue("showTitle");
+  if (showTitleParam !== null) showTitle = showTitleParam as boolean;
 
   const navigationStore = useNavigationStore();
   const filesSelectionStore = useFilesSelectionStore();
   const filesListStore = useFilesListStore();
-  const { displayAbout } = useSettingsStore();
   const { currentDeviceType } = useDeviceType();
-  const { getHeaderContextMenuModel } = useContextMenuModel({});
+  const deleteCtx = React.useContext(DeleteContext);
+  const fileOpsCtx = React.useContext(FileOperationsContext);
+  const isTrashSection = filesListStore.rootFolderType === FolderType.TRASH;
+  const { getHeaderContextMenuModel } = useContextMenuModel({
+    onDeleteClick: deleteCtx?.deleteItem,
+    onDeleteSelectedClick: deleteCtx?.deleteItems,
+    onCopyClick: !isTrashSection ? fileOpsCtx?.copyItem : undefined,
+    onMoveClick: !isTrashSection ? fileOpsCtx?.moveItem : undefined,
+    onDuplicateClick: !isTrashSection ? fileOpsCtx?.duplicateItem : undefined,
+    onRestoreClick: isTrashSection ? fileOpsCtx?.restoreItem : undefined,
+    onCopySelectedClick: !isTrashSection ? fileOpsCtx?.copyItems : undefined,
+    onMoveSelectedClick: !isTrashSection ? fileOpsCtx?.moveItems : undefined,
+    onRestoreSelectedClick: isTrashSection ? fileOpsCtx?.restoreItems : undefined,
+  });
   const { getHeaderMenu, onCheckboxChange } = useHeaderMenu();
-  const { isBase: isBaseTheme } = useTheme();
 
   const tableGroupMenuVisible = filesSelectionStore.selection.length > 0;
   const isChecked =
@@ -87,19 +100,15 @@ const Header = ({
 
   const { openFolder } = useFolderActions({ t });
 
-  const { title, rootFolderId, id } = current;
+  const title = current?.title;
+  const rootFolderId = current?.rootFolderId;
+  const id = current?.id;
 
-  const isRoomsFolder = pathParts[0].id === rootFolderId;
-
-  const logo = displayAbout
-    ? getLogoUrl(WhiteLabelLogoType.LightSmall, !isBaseTheme)
-    : "";
-
-  const burgerLogo = displayAbout
-    ? getLogoUrl(WhiteLabelLogoType.LeftMenu, !isBaseTheme)
-    : "";
+  const isRoomsFolder = pathParts?.[0]?.id === rootFolderId;
 
   const navigationItems: TNavigationItem[] = useMemo(() => {
+    if (!pathParts) return [];
+
     const items = pathParts
       .map((p) => ({
         id: p.id,
@@ -115,8 +124,8 @@ const Header = ({
 
   useEffect(() => {
     navigationStore.setNavigationItems(navigationItems);
-    navigationStore.setCurrentFolderId(id);
-    navigationStore.setCurrentTitle(title);
+    if (id !== undefined) navigationStore.setCurrentFolderId(id);
+    if (title !== undefined) navigationStore.setCurrentTitle(title);
     navigationStore.setCurrentIsRootRoom(isRoomsFolder);
   }, [title, navigationItems, navigationStore, id, isRoomsFolder]);
 
@@ -124,6 +133,7 @@ const Header = ({
     navigationStore.navigationItems ?? navigationItems;
 
   const onBackToParentFolder = useCallback(() => {
+    if (!currentNavigationItems.length) return;
     openFolder(currentNavigationItems[0].id, currentNavigationItems[0].title);
   }, [currentNavigationItems, openFolder]);
 
@@ -135,10 +145,12 @@ const Header = ({
     };
   }, [onBackToParentFolder]);
 
+  if (!current || !pathParts) return null;
+
   return (
     <div
       className={classnames(styles.headerContainer, {
-        [styles.infoPanelVisible]: false,
+        [styles.infoPanelVisible]: isInfoPanelVisible,
         [styles.isExternalFolder]: false,
         [styles.isLifetimeEnabled]: false,
       })}
@@ -146,14 +158,14 @@ const Header = ({
       {tableGroupMenuVisible ? (
         <TableGroupMenu
           withComboBox
-          withoutInfoPanelToggler
+          withoutInfoPanelToggler={!onToggleInfoPanel}
           isChecked={isChecked}
           isIndeterminate={!isChecked}
           headerMenu={getHeaderContextMenuModel()}
           onClick={() => {}}
           onChange={onCheckboxChange}
-          toggleInfoPanel={() => {}}
-          isInfoPanelVisible={false}
+          toggleInfoPanel={onToggleInfoPanel ?? (() => {})}
+          isInfoPanelVisible={isInfoPanelVisible}
           checkboxOptions={getHeaderMenu()}
         />
       ) : (
@@ -167,7 +179,6 @@ const Header = ({
               currentNavigationItems.length === 0 ? "" : pathParts[0].title
             }
             isDesktop={false}
-            isFrame
             navigationItems={currentNavigationItems}
             getContextOptionsPlus={() => []}
             getContextOptionsFolder={() => []}
@@ -183,8 +194,6 @@ const Header = ({
             isEmptyFilesList={isEmptyList}
             onBackToParentFolder={onBackToParentFolder}
             showRootFolderTitle={false}
-            withLogo={logo}
-            burgerLogo={burgerLogo}
             withMenu={!isRoomsFolder}
             currentDeviceType={currentDeviceType}
             titleIcon=""
@@ -192,11 +201,12 @@ const Header = ({
             showNavigationButton={false}
             isCurrentFolderInfo={false}
             showTitle={showTitle}
-            isPublicRoom
             isRoom={!!current.roomType}
-            isInfoPanelVisible={false}
-            toggleInfoPanel={() => {}}
-            onLogoClick={() => {}}
+            isInfoPanelVisible={isInfoPanelVisible}
+            toggleInfoPanel={onToggleInfoPanel ?? (() => {})}
+            withLogo=""
+            burgerLogo=""
+            onLogoClick={onBurgerClick ?? (() => {})}
             hideInfoPanel={() => {}}
             clearTrash={() => {}}
             showFolderInfo={() => {}}

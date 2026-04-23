@@ -3,7 +3,7 @@
   "content": "Webhook created",
   "content_en_sha1_hash": "4fec41e584d1c46a1ba94ed9b46ff397d40c5ee9",
   "created_at": "2025-05-19T21:30:49.867Z",
-  "updated_at": "2026-03-20T09:07:45.618Z",
+  "updated_at": "2026-04-08T19:00:35.039Z",
   "comment": {
     "text": "The \"WebhookCreated\" translation key is used to display a success message when a new webhook is created. It appears in a notification dialog after submitting the webhook settings. The exact wording may vary depending on whether the webhooks are being edited or created for the first time.",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Създадена уеб кука' is a literal translation of 'Webhook created'. While understandable, a more natural and accurate translation would be 'Създаден уебхук'.  'Уебхук' is the standard term for 'Webhook' in Bulgarian, especially in technical contexts.",
-          "suggestion": "Създаден уебхук"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -84,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The French translation 'Webhook creé' is not grammatically correct for indicating a webhook has been created. It should be in the past participle form, used with 'a été' or similar.",
-          "suggestion": "Webhook a été créé"
+          "description": "The French translation is missing the required accent on the letter 'e' in 'créé', which is a spelling error in French.",
+          "suggestion": "Webhook créé"
         }
       ],
       "approved_at": null
@@ -120,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Webhook ສ້າງ' is a literal translation of 'Webhook created'. While understandable, a more natural and accurate translation would convey the sense of completion and addition to a list or system.  'Webhook ສ້າງແລ້ວ' (Webhook created already) or 'ສ້າງ Webhook' (Created Webhook) might be more appropriate depending on the specific context.",
-          "suggestion": "Consider 'Webhook ສ້າງແລ້ວ' or 'ສ້າງ Webhook' depending on context."
+          "description": "The Lao translation 'Webhook ສ້າງ' translates to 'Webhook create' (verb form) rather than 'Webhook created' (past participle/completed action). It lacks the grammatical structure to indicate a successful completion.",
+          "suggestion": "ສ້າງ Webhook ສຳເລັດແລ້ວ"
         }
       ],
       "approved_at": null
@@ -129,13 +123,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Tīmekļa aizķere ir izveidota\" is not an accurate translation of \"Webhook created.\" \"Aizķere\" means \"congestion\" or \"blockage.\" Webhooks are not congestion.",
-          "suggestion": "Webhook izveidots"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -165,13 +153,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Webhook creat\" is an incomplete translation of \"Webhook created\". It's missing the verb ending and doesn't convey the full meaning.",
-          "suggestion": "Webhook a fost creat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -201,25 +183,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Webhook креиран' is an incorrect translation of 'Webhook created'. The correct translation should be 'Webhook створен'. 'Креиран' means 'created' in a more general sense, while 'створен' specifically refers to something being created or generated.",
-          "suggestion": "Webhook створен"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Webhook kreiran' is grammatically incorrect. The verb 'kreirati' (to create) is needed, and it should be conjugated correctly in the past tense. The correct past tense form is 'kreiran je'.",
-          "suggestion": "Webhook kreiran je"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -243,11 +213,17 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Webhook 已被创建' is grammatically correct but sounds slightly passive and less natural. A more common and concise way to express 'Webhook created' would be 'Webhook 已创建'.",
-          "suggestion": "Webhook 已创建"
+          "description": "The Albanian translation 'u kriju' is grammatically incomplete/incorrect; the correct past participle for 'created' is 'u krijua'.",
+          "suggestion": "Webhook u krijua"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Delete application",
   "content_en_sha1_hash": "62dfa2a86c09f3b9db6276cb5ae7e819355cc43f",
   "created_at": "2025-05-19T21:30:53.847Z",
-  "updated_at": "2026-02-19T13:36:32.787Z",
+  "updated_at": "2026-04-07T19:35:05.162Z",
   "comment": {
     "text": "This translation key is used for \"Delete Application\", a label that appears in an OAuth settings dialog when deleting an application. Its purpose is to inform users about the action being performed, and it is translated based on the context of whether multiple applications are being deleted (in which case \"DeleteApplications\" is used) or only one application (where \"DeleteApplication\" is used).",
     "is_auto": true,
@@ -93,13 +93,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"申請を削除する\" (shinkō o sakujo suru) literally translates to 'Delete application'. However, in the context of OAuth, 'application' often refers to a registered application on the platform. A more natural and accurate translation would be something like 'アプリケーションを削除する' (apuriikeshon o sakujo suru) or '登録済みアプリケーションを削除する' (tōrokushimono apuriikeshon o sakujo suru) to specify that a registered application is being deleted.",
-          "suggestion": "アプリケーションを削除する"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -111,13 +105,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"ລົບການໃຊ້ງານ\" is understandable, a more accurate and natural translation of \"Delete application\" would be something like \"ລຶບແອັບພິເຄຊັນ\" (Lueb application) or \"ລົບແອັບຯ\" (Lop app). \"ການໃຊ້ງານ\" generally refers to usage or function, not the application itself.",
-          "suggestion": "ລຶບແອັບພິເຄຊັນ or ລົບແອັບຯ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -183,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Обриши апликацију' is understandable, 'Delete application' implies a more permanent removal. 'Обриши' implies a more casual deletion, like moving to the trash. A more precise translation might use a word indicating permanent deletion.",
-          "suggestion": "Упозори апликацију"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

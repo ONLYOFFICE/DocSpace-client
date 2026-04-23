@@ -89,5 +89,11 @@
   "WebhookRemoved": "Webhook odstránený",
   "Webhooks": "Webhooky",
   "WebhooksGuide": "Sprievodca webhookmi",
-  "WebhooksInfo": "Pomocou webhookov môžete vykonávať vlastné operácie na strane akejkoľvek aplikácie alebo webových stránok, ktoré používate, na základe rôznych udalostí v {{organizationName}} {{productName}}.\nTu môžete vytvárať a spravovať všetky svoje webhooky, konfigurovať ich a prechádzať históriu každého webhooku a kontrolovať ich výkon."
+  "WebhooksInfo": "Pomocou webhookov môžete vykonávať vlastné operácie na strane akejkoľvek aplikácie alebo webových stránok, ktoré používate, na základe rôznych udalostí v {{organizationName}} {{productName}}.\nTu môžete vytvárať a spravovať všetky svoje webhooky, konfigurovať ich a prechádzať históriu každého webhooku a kontrolovať ich výkon.",
+  "AgentCreated": "AI Agent vytvorený",
+  "AgentDeleted": "AI Agent Odstrnený",
+  "AgentUpdated": "Aktualizovaný AI Agent",
+  "FormFilledOut": "Vyplnený formulár",
+  "FormStopped": "Formulár zastavený",
+  "FormSubmit": "Odoslanie formulára"
 }

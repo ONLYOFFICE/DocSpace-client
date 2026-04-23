@@ -3,7 +3,7 @@
   "content": "Automatically analyze and process responses",
   "content_en_sha1_hash": "dbdd0c940852dce39f897bcf0671e80f9ac60945",
   "created_at": "2026-03-31T15:18:26.957Z",
-  "updated_at": "2026-03-31T15:18:26.957Z",
+  "updated_at": "2026-04-07T20:02:38.511Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -26,7 +26,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation 'Avtomatik analiz edib cavablara emal edin' translates to 'Automatically analyze and process TO the responses', which changes the object of the action. The English implies processing the responses themselves.",
+          "suggestion": "Cavabları avtomatik analiz edin və emal edin"
+        }
+      ],
       "approved_at": null
     },
     "bg": {

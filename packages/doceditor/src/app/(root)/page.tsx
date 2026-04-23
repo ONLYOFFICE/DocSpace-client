@@ -41,7 +41,7 @@ import { logger } from "@/../logger.mjs";
 import { RootPageProps } from "@/types";
 import Root from "@/components/Root";
 import FilePassword from "@/components/file-password";
-import { TFrameConfig } from "@docspace/shared/types/Frame";
+import type { TFrameConfig, TFrameTheme } from "@docspace/shared/types/Frame";
 
 const initialSearchParams: Awaited<RootPageProps["searchParams"]> = {
 	fileId: undefined,
@@ -51,6 +51,7 @@ const initialSearchParams: Awaited<RootPageProps["searchParams"]> = {
 	action: undefined,
 	share: undefined,
 	editorType: undefined,
+	withoutGoBackText: undefined,
 	withTool: undefined,
 };
 
@@ -70,21 +71,26 @@ async function Page(props: RootPageProps) {
 		theme,
 		is_file,
 		editorGoBack,
+		withoutGoBackText,
 		isSDK,
 		withTool,
 	} = searchParams ?? initialSearchParams;
 
-	const baseSdkConfig: TFrameConfig & { is_file?: boolean; isSDK?: boolean } = {
+	const baseSdkConfig: TFrameConfig & {
+		is_file?: boolean;
+		isSDK?: boolean;
+		withoutGoBackText?: boolean;
+	} = {
 		frameId: "",
-		mode: "",
 		src: "",
 		editorCustomization: { uiTheme: theme },
 		editorGoBack,
+		withoutGoBackText,
 		editorType,
 		id: fileId,
 		locale,
 		requestToken: share,
-		theme,
+		theme: theme as TFrameTheme,
 		is_file,
 		isSDK,
 	};

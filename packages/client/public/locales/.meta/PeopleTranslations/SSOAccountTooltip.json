@@ -3,7 +3,7 @@
   "content": "This user account is loaded from SSO. If you need to change the user name and email address, refer to the SSO server.",
   "content_en_sha1_hash": "1d49453415a6a5acd60e0631a6a68b712b362f82",
   "created_at": "2025-05-19T21:30:53.515Z",
-  "updated_at": "2026-02-19T13:36:32.666Z",
+  "updated_at": "2026-04-09T07:25:10.595Z",
   "comment": {
     "text": "This translation key displays a message explaining that the user account is loaded from Single Sign-On (SSO) and provides instructions on how to update the username and email address. It appears in tooltips next to badges indicating SSO-loaded accounts, likely on profile or information pages. The text helps users understand their account's origin and provides context for changing their details.",
     "is_auto": true,
@@ -42,13 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"İstifadəçi adı və e-poçt ünvanını dəyişmək lazımdırsa\" translates to \"If you need to change the username and email address\". A more natural and accurate translation would be \"If you need to change the username and email address, please refer to the SSO server.\"  The current wording sounds a little abrupt and like an instruction rather than an explanation.",
-          "suggestion": "If you need to change the username and email address, please refer to the SSO server."
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase \"SSO serverini yoxlayın\" translates to \"check the SSO server.\" It's more polite and clear to use the phrase “refer to the SSO server” or “consult the SSO server” in this context. While 'yoxlayın' isn't wrong, it's less professional.",
-          "suggestion": "refer to the SSO server"
+          "description": "The phrase 'refer to the SSO server' is translated as 'SSO serverini yoxlayın' (check the SSO server), which implies inspecting or verifying the server rather than consulting or contacting it for changes. A more accurate translation for 'refer to' in this context is 'müraciət edin'.",
+          "suggestion": "Bu istifadəçi hesabı SSO-dan yüklənib. İstifadəçi adı və e-poçt ünvanını dəyişmək lazımdırsa, SSO serverinə müraciət edin."
         }
       ],
       "approved_at": null
@@ -118,14 +113,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Korean translation includes 'SSO' without a space before it. It should be 'SSO '. This improves readability.",
-          "suggestion": "이 사용자 계정은 SSO 에서 로드되었습니다."
-        },
-        {
           "type": "incorrect_translation",
-          "description": "While not strictly incorrect, '로드되었습니다' (rodeu-seumnida) is a more technical term for 'loaded.' A more natural phrasing for a tooltip might be 'SSO에서 가져왔습니다' (SSO-eseo gajeo-atseumnida) which translates to 'imported from SSO'.",
-          "suggestion": "이 사용자 계정은 SSO에서 가져왔습니다."
+          "description": "The Korean translation lacks necessary spacing between words and the term 'SSO', which makes it look like a single concatenated word ('계정은SSO에서', '경우SSO'). While technically readable, it is a typographical error in Korean spacing rules that affects professional UI quality.",
+          "suggestion": "이 사용자 계정은 SSO에서 로드되었습니다. 사용자명과 이메일 주소를 변경해야 하는 경우 SSO 서버를 참고하세요."
         }
       ],
       "approved_at": null
@@ -136,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ຄູ່ມືການໃຊ້ງານ\" (khoo-mee-gaan-chai-ngaan) translates to 'user manual' or 'operations manual'. While not entirely wrong, it's a bit formal and could be simplified. A more natural phrasing for \"refer to\" would be something like \"ຕິດຕໍ່ຫາ\" (contact) or \"ກວດເບິ່ງ\" (check).",
-          "suggestion": "ບັນຊີຜູ້ໃຊ້ສະບັບນີ້ຖືກໂຫຼດມາຈາກ SSO ຖ້າທ່ານຕ້ອງການປ່ຽນຊື່ຜູ້ໃຊ້ ແລະ ທີ່ຢູ່ອີເມລ໌ ກະລຸນາຕິດຕໍ່ຫາເຄື່ອງແມ່ຂ່າຍ SSO."
+          "description": "The Lao translation adds 'ຄູ່ມືການໃຊ້ງານ' (user manual) which is not in the English source. The English says 'refer to the SSO server', whereas the Lao says 'refer to the SSO server user manual'.",
+          "suggestion": "ບັນຊີຜູ້ໃຊ້ສະບັບນີ້ຖືກໂຫຼດມາຈາກ SSO. ຖ້າທ່ານຕ້ອງການປ່ຽນຊື່ຜູ້ໃຊ້ ແລະ ທີ່ຢູ່ອີເມລ໌, ກະລຸນາອ້າງອີງໄປທີ່ເຄື່ອງແມ່ຂ່າຍ SSO."
         }
       ],
       "approved_at": null
@@ -159,14 +149,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase \"Dane konto użytkownika\" is grammatically incorrect. It should be \"Konto użytkownika\".",
-          "suggestion": "Konto użytkownika"
-        },
-        {
-          "type": "grammar",
-          "description": "The verb conjugation \"jest ładowane\" is slightly awkward.  A more natural phrasing would be \"jest ładowane\" or even better, potentially using a passive voice construction that better aligns with the original English.",
-          "suggestion": "jest załadowane"
+          "type": "incorrect_translation",
+          "description": "Grammatical error in the first sentence: 'Dane konto użytkownika' is incorrect. 'Dane' (data) is plural, while 'konto' (account) is singular. It should be 'To konto użytkownika' or 'Dane tego konta użytkownika'.",
+          "suggestion": "To konto użytkownika jest ładowane z SSO. Aby zmienić nazwę użytkownika i adres e-mail, należy zwrócić się do serwera SSO."
         }
       ],
       "approved_at": null
@@ -186,13 +171,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'utilizator' is repeated unnecessarily.",
-          "suggestion": "Contul acestui utilizator este încărcat prin SSO. Dacă doriți să schimbați numele și adresa de e-mail, accesați serverul SSO."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -204,23 +183,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'මෙම' should likely be 'මෙම' (this). Although technically correct, 'මෙම' feels slightly unnatural in this context.",
-          "suggestion": "මෙම"
-        },
-        {
-          "type": "grammar",
-          "description": "The phrasing 'පරිශීලක ගිණුම පැටවිනි' is slightly awkward. It's passive and a more active construction might read better.",
-          "suggestion": "මෙම පරිශීලක ගිණුම SSO වෙතින් ලබාගෙන ඇත."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'සේවාදායකය' (server) is technically correct for 'server' but in a user-facing tooltip, 'සිස්ටම්' (system) or a more colloquial term might be more accessible. The original emphasizes a technical detail that might not be necessary.",
-          "suggestion": "මෙම පරිශීලක ගිණුම SSO වෙතින් පැටවිනි. ඔබට පරිශීලක නම සහ විද්‍යුත් ලිපිනය වෙනස් කිරීමට අවශ්‍ය නම්, SSO සිස්ටම් වෙත යොමු වන්න."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -238,25 +201,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'email' is transliterated as 'емаил'. The correct Serbian word is 'e-mail'.",
-          "suggestion": "емаил -> e-mail"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'email' is written as 'email' in the translation. While understandable, 'e-mail' is more common in Serbian.",
-          "suggestion": "email -> e-mail"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -278,6 +229,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

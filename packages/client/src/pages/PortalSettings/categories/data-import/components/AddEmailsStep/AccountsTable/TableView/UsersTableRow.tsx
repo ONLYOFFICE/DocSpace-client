@@ -167,7 +167,7 @@ const UsersTableRow = (props: AddEmailTableRowProps) => {
         {isEmailOpen ? (
           <div className={styles.emailInputWrapper} ref={emailInputRef}>
             <EmailInput
-              placeholder={t("SMTPSettings:EnterEmail")}
+              placeholder={t("Common:EnterEmail")}
               className="import-email-input"
               value={tempEmail}
               onChange={handleEmailChange}
@@ -216,3 +216,4 @@ export default inject<TStore>(({ importAccountsStore }) => {
     changeEmail,
   };
 })(observer(UsersTableRow));
+

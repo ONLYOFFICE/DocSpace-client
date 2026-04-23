@@ -33,11 +33,11 @@ import classNames from "classnames";
 import {
   createPasswordHash,
   getSelectZone,
-  mapCulturesToArray,
   mapTimezonesToArray,
   setLanguageForUnauthorized,
   setTimezoneForUnauthorized,
 } from "@docspace/shared/utils/common";
+import { mapCulturesToArray } from "@docspace/shared/utils/cultures";
 import { Text } from "@docspace/ui-kit/components/text";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { EmailInput, TValidate } from "@docspace/ui-kit/components/email-input";

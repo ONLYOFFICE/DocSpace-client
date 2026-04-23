@@ -3,7 +3,7 @@
   "content": "Agent managers can manage the assigned {{aiAgent}}, invite new users, and assign roles below their level.\nThey can use the chat, upload knowledge files, work with Result storage, and manage chat settings.",
   "content_en_sha1_hash": "cc775f7206bb72ef36c1f9ccb45b183e8348c5d8",
   "created_at": "2025-12-19T10:16:37.940Z",
-  "updated_at": "2025-12-22T09:41:30.171Z",
+  "updated_at": "2026-04-08T00:55:05.542Z",
   "comment": {
     "text": "This text describes the permissions and capabilities of an \"Agent Manager\" role within an AI Room. It appears as a description associated with the role, explaining their ability to manage AI agents, users, roles, chat interactions, and settings. Translators should ensure the term \"Agent Manager\" and \"AI Agent\" are accurately translated within the target language.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'təyin edilmiş {{aiAgent}} idarə edə' is grammatically incorrect in Azerbaijani. It lacks the necessary accusative case suffix for the object '{{aiAgent}}', making the sentence structure broken.",
+          "suggestion": "Agent menecerləri təyin edilmiş {{aiAgent}}-i idarə edə, yeni istifadəçilər dəvət edə və səviyyələrindən aşağı rollar təyin edə bilərlər.\nOnlar chatdan istifadə edə, bilik faylları yükləyə, Result yaddaş sahəsi ilə işləyə və chat parametrlərini idarə edə bilərlər."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -111,7 +117,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation contains several semantic errors: 'apvienotais' (unified/combined) is used instead of 'asignēto' (assigned); 'ikvitēt' is not a valid Latvian word (should be 'ievietot' or 'uzaicināt'); 'papildus savā līmenī' means 'additional at their level' instead of 'below their level'; 'apkristīt' means 'to descend/drip' instead of 'upload' (augšupielādēt); 'Result uzglabāšana' is a literal/clunky translation of 'Result storage'.",
+          "suggestion": "Agentu vadītāji var pārvaldīt piešķirto {{aiAgent}}, uzaicināt jaunus lietotājus un piešķirt lomas, kas ir zem viņu līmeņa. Viņi var izmantot čatu, augšupielādēt zināšanu failus, strādāt ar Rezultātu glabvietu un pārvaldīt čata iestatījumus."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -141,7 +153,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase '{{aiAgent}} al atribuit' is grammatically incorrect in Romanian. In this context, 'atribuit' (assigned) refers to the agent, but the word order and article usage make it sound like 'the assigned of the agent'. It should be '{{aiAgent}} atribuit'.",
+          "suggestion": "Managerii de agenți pot gestiona {{aiAgent}} atribuit, invita utilizatori noi și pot atribui roluri sub nivelul lor.\nPot folosi chat-ul, să încarce fișiere de cunoștințe, să lucreze cu Result storage și să gestioneze setările chat-ului."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'invite new users' is translated as 'නව පරිශීලකයින් ආරාධනා කිරීමට' which is grammatically incomplete in Sinhala (it lacks the preposition 'වෙත' or 'සතුටින්' or a proper verb structure to mean 'invite new users'). More importantly, 'assign roles below their level' is translated as 'ඔවුන්ගේ මට්ටමට පහළ මට්ටම්වල භූමිකාවන් පවරා දිය හැකිය', which is redundant and awkward ('below their level, roles of lower levels').",
+          "suggestion": "ඒජන්ට් කළමනාකරුවන්ට පවරා ඇති {{aiAgent}} කළමනාකරණය කිරීමට, නව පරිශීලකයින්ට ආරාධනා කිරීමට සහ ඔවුන්ගේ මට්ටමට පහළ භූමිකාවන් පවරා දීමට හැකිය. ඔවුන්ට චැට් භාවිතා කිරීමට, දැනුම් ගොනු උඩුගත කිරීමට, Result storage සමඟ වැඩ කිරීමට සහ චැට් සැකසීම් කළමනාකරණය කිරීමට හැකිය."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -165,7 +189,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Agent managers' is translated as 'Skupni nadzorniki agentov', which means 'Common agent managers' or 'Shared agent managers'. This changes the specific role name 'Agent Manager' to something else.",
+          "suggestion": "Upravljavci agentov lahko upravljajo dodeljenega {{aiAgent}}, povabijo nove uporabnike in dodeljujejo vloge pod svojo raven.\nLahko uporabljajo pogovor, nalagajo datoteke znanja, delujejo z Result shranjevališčem in upravljajo nastavitve pogovora."
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {
@@ -207,7 +237,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Result storage' is translated as 'Result 存储器' (Result memory/storage device), which sounds like hardware. In a software context, 'Result storage' should be translated as '结果存储' to refer to the data storage feature.",
+          "suggestion": "智能体管理员可以管理分配的 {{aiAgent}}，邀请新用户，并分配低于其级别的角色。\n他们可以使用聊天功能，上传知识文件，使用结果存储，并管理聊天设置。"
+        }
+      ],
       "approved_at": null
     }
   }

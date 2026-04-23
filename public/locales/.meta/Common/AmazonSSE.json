@@ -3,7 +3,7 @@
   "content": "Server-Side Encryption",
   "content_en_sha1_hash": "d1934d0b621ff15e462a56a14f0ce0b75e8ef972",
   "created_at": "2025-05-26T07:15:40.413Z",
-  "updated_at": "2026-02-19T13:36:33.072Z",
+  "updated_at": "2026-04-08T16:58:23.991Z",
   "comment": {
     "text": "This translation key is used to display \"Server-Side Encryption\" in a UI component. It is likely displayed as an option or a placeholder when configuring Amazon Storage settings, such as selecting a storage provider or enabling server-side encryption.",
     "is_auto": true,
@@ -153,7 +153,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'සේවාදායකයේ පස සංකේතනය' translates to 'Server's soil encryption' or 'Server's earth encryption'. The word 'පස' (pasa) means 'soil/earth' instead of 'side' (පැත්ත/අංශය).",
+          "suggestion": "සේවාදායක පාර්ශවීය සංකේතනය"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -199,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

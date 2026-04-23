@@ -3,7 +3,7 @@
   "content": "Select specific users from {{productName}} and invite them to fill out the original form.",
   "content_en_sha1_hash": "3be65286af53e08e26a1e63c3c611aff14f48e44",
   "created_at": "2025-09-23T07:24:16.886Z",
-  "updated_at": "2026-02-19T13:36:33.049Z",
+  "updated_at": "2026-04-07T23:03:37.595Z",
   "comment": {
     "text": "This text describes a button or option within a dialog that allows users to invite specific individuals from the product to complete a form. It's used to share a form with selected users. The product name will be dynamically inserted into the description.",
     "is_auto": true,
@@ -27,25 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'وادعوهم لملء النموذج الأصلي' could be improved for clarity and naturalness. While technically correct, it's a bit formal. A more natural phrasing would be 'لإكمال النموذج الأصلي' or 'لإرسال النموذج الأصلي'. The use of 'لإكمال' or 'لإرسال' is more common in this context.",
-          "suggestion": "اختاروا مستخدمين محددين من {{productName}} وادعوهم لإكمال النموذج الأصلي.  OR  اختاروا مستخدمين محددين من {{productName}} وادعوهم لإرسال النموذج الأصلي."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation maintains the use of {{productName}}, which is good, preserving the placeholder as in the original.",
-          "suggestion": null
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -75,13 +63,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'fill out the original form' is translated as 'rellenar el formulario original.' While technically correct, 'rellenar' can imply filling something *in*. A more accurate translation to convey the intent of inviting users to *complete* the form would be 'completar el formulario original'.",
-          "suggestion": "Seleccione usuarios específicos de {{productName}} e invítelos a completar el formulario original."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -117,7 +99,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation '원본 양식 작성을 초대합니다' (invites the writing of the original form) is grammatically awkward and implies inviting the 'act of writing' rather than inviting 'users to fill out' the form. It should be '사용자를 초대하여 양식을 작성하도록 합니다'.",
+          "suggestion": "{{productName}}에서 특정 사용자를 선택하여 원본 양식을 작성하도록 초대합니다."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -153,19 +141,24 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_variable",
+          "description": "Missing variable(s): {{productName}}",
+          "suggestion": ""
+        },
+        {
+          "type": "extra_variable",
+          "description": "Extra variable(s) not in English: {{ productName }}",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'Selectați utilizatorii ai {{productName}}' is grammatically awkward and doesn't accurately convey the English meaning. The preposition 'ai' is incorrect here.",
-          "suggestion": "Selectați utilizatori specifici din {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -177,13 +170,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Sinhala translation maintains the {{productName}} placeholder, which is consistent with the English source.  However, consider whether this placeholder needs specific formatting considerations in the Sinhala context (e.g., ensuring correct variable substitution).",
-          "suggestion": "Review placeholder implementation to ensure proper substitution within the Sinhala context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -207,13 +194,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'позови' (pozoivi) translates to 'call' in the sense of a phone call, not 'invite'.  'Invite' is a more accurate translation of 'invite' in this context. A better translation would be something like 'позивати' (pozivati) or 'упоредити' (uporediti).",
-          "suggestion": "Изабери одређене кориснике из {{productName}} и позивати их да попуне оригиналну форму."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -225,13 +206,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The double curly braces {{ }} are used for variables in the English content, and should be maintained in the Turkish translation to indicate a variable. The Turkish translation doesn't include the double curly braces.",
-          "suggestion": "'{{productName}}'den belirli kullanıcıları seçin ve onlara orijinal formu doldurmak üzere davetiye gönderin."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

@@ -3,7 +3,7 @@
   "content": "The destination already contains files with the same name.",
   "content_en_sha1_hash": "98478c230a84dcee9c8eb888686df966c0230a3f",
   "created_at": "2025-05-19T21:30:45.279Z",
-  "updated_at": "2026-02-19T13:36:32.367Z",
+  "updated_at": "2026-04-08T09:35:02.288Z",
   "comment": {
     "text": "The translation key \"FilesAlreadyContains\" is used to display a message when adding files to a destination that already contains files with the same name. This message appears in a dialog box when trying to resolve conflicts while uploading or importing files.",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Дестинацията' (Destinatsiyata) sounds overly formal and technical for this context. 'Папка' (Papka - folder) or a more general term for 'location' would be more natural.",
-          "suggestion": "Проверете дали съществува по-разговорна алтернатива на 'Дестинацията', например 'Папка' (Papka) или подобна."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -147,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Fișiere cu acelaşi nume există deja la destinație' is technically correct but sounds somewhat unnatural in Romanian. A more idiomatic translation would be closer to 'Există deja fișiere cu același nume în destinație.' or 'Destinația conține deja fișiere cu același nume.'",
-          "suggestion": "Destinația conține deja fișiere cu același nume."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -165,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ගමනාන්තයේ දැනටමත් එකම නමින් ගොනු අඩංගු වේ.' while understandable, isn't the most natural way to phrase this in Sinhala. A more common and idiomatic translation would be something like 'ඉලක්කගත ස්ථානයේ එවැනි නම් සහිත ගොනු දැනටමත් පවතී.'",
-          "suggestion": "ඉලක්කගත ස්ථානයේ එවැනි නම් සහිත ගොනු දැනටමත් පවතී."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -217,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -89,5 +89,11 @@
   "WebhookRemoved": "Tīmekļa aizķere ir noņemta",
   "Webhooks": "Tīmekļa aizķeres",
   "WebhooksGuide": "Tīmekļa aizķeru rokasgrāmata",
-  "WebhooksInfo": "Izmantojiet tīmekļa aizķeres, lai veiktu pielāgotas darbības jebkurā izmantotajā lietojumprogrammā vai tīmekļa vietnē, pamatojoties uz dažādiem notikumiem {{organizationName}} {{productName}}.\nŠeit varat izveidot un pārvaldīt visus savus tīmekļa aizķeres, konfigurēt tās un pārlūkot katra tīmekļa aizķeres vēsturi, lai pārbaudītu to veiktspēju."
+  "WebhooksInfo": "Izmantojiet tīmekļa aizķeres, lai veiktu pielāgotas darbības jebkurā izmantotajā lietojumprogrammā vai tīmekļa vietnē, pamatojoties uz dažādiem notikumiem {{organizationName}} {{productName}}.\nŠeit varat izveidot un pārvaldīt visus savus tīmekļa aizķeres, konfigurēt tās un pārlūkot katra tīmekļa aizķeres vēsturi, lai pārbaudītu to veiktspēju.",
+  "AgentCreated": "AI Agent izveidots",
+  "AgentDeleted": "AI Agent Deleted",
+  "AgentUpdated": "AI Agent atjaunināts",
+  "FormFilledOut": "Paskaidots augstājs",
+  "FormStopped": "Forma pārtraukta",
+  "FormSubmit": "Forma iesniegta"
 }

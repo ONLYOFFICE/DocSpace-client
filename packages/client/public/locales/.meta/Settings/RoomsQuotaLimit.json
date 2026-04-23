@@ -3,7 +3,7 @@
   "content": "{{roomsQuotaLimit}} for rooms",
   "content_en_sha1_hash": "ee9270f5c126fdf6af89661d474505448542d564",
   "created_at": "2025-05-19T21:30:52.473Z",
-  "updated_at": "2025-05-26T07:57:32.340Z",
+  "updated_at": "2026-04-09T01:40:04.272Z",
   "comment": {
     "text": "This translation key is used to display a quota limit value for rooms. It appears in a warning quota dialog and will be translated as a string of numbers followed by \" for rooms\".",
     "is_auto": true,
@@ -69,13 +69,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation lacks a space after the word 'Huoneiden'.",
-          "suggestion": "Huoneiden {{roomsQuotaLimit}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -87,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Armenian translation uses 'սենյակների համար' which translates to 'for rooms'. While technically correct, it might be more natural to use a phrasing that implies 'of' or 'allowed for' depending on the intended meaning of the original English phrase.  Consider the context of 'RoomsQuotaLimit' - is it a maximum or an allowance?",
-          "suggestion": "Consider alternatives like 'սենյակների քանակ' (number of rooms) or 'սենյակների թույլատրելի քանակ' (allowable number of rooms) depending on the intended meaning. Without more context, it's hard to give a perfect suggestion."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -108,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ルームごとに{{roomsQuotaLimit}} \" doesn't quite convey the meaning of 'for rooms'. It literally translates to '{{roomsQuotaLimit}} per room'. It's not necessarily *wrong*, but it's not the most natural or precise translation. A more accurate translation would incorporate the concept of a limit applied to each room.",
-          "suggestion": "ルームあたり{{roomsQuotaLimit}}まで"
+          "description": "The Japanese translation 'ルームごとに{{roomsQuotaLimit}}' means '{{roomsQuotaLimit}} per room', which changes the meaning from the English '{{roomsQuotaLimit}} for rooms' (a total quota for all rooms).",
+          "suggestion": "ルームの制限: {{roomsQuotaLimit}}"
         }
       ],
       "approved_at": null
@@ -117,25 +105,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation \"룸에 대한 {{roomsQuotaLimit}}\" directly translates to \"{{roomsQuotaLimit}} for rooms,\" which is awkward. A more natural Korean phrasing would indicate a limit *of* rooms.",
-          "suggestion": "룸별 {{roomsQuotaLimit}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ສູງສຸດ\" (sung soot) directly translates to \"maximum\". While acceptable, a more natural Lao phrasing for 'limit' in this context might be \"ຈຳນວນເຕັມທີ່\" (jamnuan tem thi) or simply rephrasing the entire sentence to convey the meaning more clearly.",
-          "suggestion": "Consider rephrasing to something like: \"ຈຳນວນຫ້ອງທີ່ສາມາດກຳນົດໄດ້ສູງສຸດແມ່ນ {{roomsQuotaLimit}}\" (Jamnuan hong thi samart kamnot dai sung soot maen {{roomsQuotaLimit}})"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -183,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'කාමර සඳහා' (kamara saha) literally translates to 'for rooms'. While not inherently wrong, it's not the most natural way to express a limit on rooms. A more accurate and natural phrasing might be something along the lines of 'කාමර ප්‍රමාණය' (kamara pramaṇaya) meaning 'room quantity/amount' or 'කාමර ප්‍රමාණයකට' (kamara pramaṇayakata) meaning 'to the quantity of rooms'.",
-          "suggestion": "කාමර ප්‍රමාණයකට (kamara pramaṇayakata) or කාමර ප්‍රමාණය (kamara pramaṇaya)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -207,13 +177,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'просторије' (prostorije) translates to 'rooms' but implies a larger, more formal space than just 'rooms'. A more accurate translation for the context of a quota limit might be 'собе' (sobe).",
-          "suggestion": "Change 'просторије' to 'собе'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -225,13 +189,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Odalar için {{roomsQuotaLimit}}\" is not the most natural or precise translation of \"{{roomsQuotaLimit}} for rooms.\" A more natural translation would be something like \"Odalar için {{roomsQuotaLimit}} adet\" or \"{{roomsQuotaLimit}} adet oda\".  The current translation doesn't clearly indicate that the number represents a limit or quantity.",
-          "suggestion": "Odalar için {{roomsQuotaLimit}} adet"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -249,13 +207,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '的房间限制' (de fangjian xianzhi) literally translates to 'limit of rooms'. While understandable, it's not the most natural way to express 'rooms quota limit' in Chinese. It sounds slightly awkward.",
-          "suggestion": "Consider a more natural phrasing like '房间配额限制' (fangjian pei'e xianzhi) which directly translates to 'rooms quota limit' or '房间数量上限' (fangjian shuliang shàngxian) which means 'maximum number of rooms'."
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

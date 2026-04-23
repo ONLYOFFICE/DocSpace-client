@@ -6,6 +6,7 @@
   "AutomaticIndexing": "Otomatik dizinleme",
   "AutomaticIndexingDescription": "Dosya ve klasörleri seri numarasına göre dizinlemek için otomatik dizinlemeyi etkinleştirin. Numaraya göre sıralama tüm kullanıcılar için varsayılan olarak ayarlanacaktır.",
   "ChooseRoomType": "Oda tipini seç",
+  "ConfigureDatabaseConnection": "Entegrasyon → Üçüncü taraf hizmetlerinde veritabanı bağlantısını yapılandırın",
   "CreateRoomConfirmation": "Depolamayı bağlamadan devam edilsin mi?\nHenüz bağlanmamış bir üçüncü taraf depolama seçeneği seçtiniz. Servisi bağlamadan devam ederseniz bu seçenek eklenmeyecektir.",
   "CreateRoomWatermarksConfirmation": "Bu odadaki belgelere uygulanacak bir filigran ayarlamadınız. Oda düzenleme ayarlarından her zaman bir filigran ekleyebilirsiniz. Filigran olmadan devam edilsin mi?",
   "CreateTagOption": "Etiket oluştur",
@@ -39,5 +40,9 @@
   "UserName": "Kullanıcı Adı",
   "ViewerInfo": "Görüntüleyici bilgisi",
   "WatermarkPreview": "Filigran Ön izlemesi",
-  "WatermarkPreviewHelp": "Bu görüntü ön izlemesi, filigranın dosyalarınızda nasıl görüntüleneceğini kabaca gösterir."
+  "WatermarkPreviewHelp": "Bu görüntü ön izlemesi, filigranın dosyalarınızda nasıl görüntüleneceğini kabaca gösterir.",
+  "GoToIntegrations": "Entegrasyonlara Git",
+  "NeedMoreIntegrations": "Daha fazla entegrasyona ihtiyacınız var mı?",
+  "NeedMoreIntegrationsDescription": "Web kancaları kullanarak verileri kendi sisteminize gönderebilir veya Zapier aracılığıyla binlerce hizmete formu bağlayabilirsiniz.",
+  "NoDatabaseConnections": "Veritabanı bağlantısı yapılandırılmadı"
 }

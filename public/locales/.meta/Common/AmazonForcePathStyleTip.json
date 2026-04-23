@@ -3,7 +3,7 @@
   "content": "When true, requests will always use path style addressing.",
   "content_en_sha1_hash": "aa8a003db2e4e29f43424dc59bd485653b72906d",
   "created_at": "2025-06-08T12:02:00.501Z",
-  "updated_at": "2026-02-19T13:36:33.073Z",
+  "updated_at": "2026-04-08T17:05:08.699Z",
   "comment": {
     "text": "This translation key is used for a tooltip that explains the meaning of \"force path style\" in Amazon settings. When checked, this option ensures requests always use path style addressing. It appears as a tooltip when users hover over or click a button related to backup storage options.",
     "is_auto": true,
@@ -111,13 +111,30 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \"u\"",
+          "suggestion": ""
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'true' is translated as 'patiess' (meaning 'truthful' or 'honest'), which is a semantic error in a technical context. In programming/settings contexts, 'When true' refers to a boolean value being enabled/active.",
+          "suggestion": "Ja vērtība ir 'true', pieprasījumi vienmēr izmantos ceļa stila adresāciju"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'true' is used as a literal boolean value in English, but in Dutch, 'Indien true' is grammatically incorrect and sounds like a placeholder error. It should be translated to 'ingeschakeld' (enabled) or 'waar' (true) to make sense in a UI context.",
+          "suggestion": "Indien ingeschakeld, zullen verzoeken altijd gebruik maken van path-stijl adressering."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -141,7 +158,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation is completely unrelated to the English source. The English text discusses 'path style addressing' for Amazon settings, while the Romanian text discusses 'authentication keys for connecting third-party services'.",
+          "suggestion": "Când este activată, cererile vor utiliza întotdeauna adresarea de tip path."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -165,19 +188,37 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Če je postavljeno na pravilno' (If set to correct) is a mistranslation of 'When true'. In a technical context involving boolean values, 'true' should be translated as 'resnica' or 'vključeno'.",
+          "suggestion": "Če je vrednost resnica, bodo zahteve vedno uporabljale naslavljanje v slogu poti."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'true' is transliterated as 'труе' instead of being translated or handled as a boolean value. In Serbian, 'When true' should be translated as 'Kada je tačno' or 'Kada je uključeno' to make sense in a technical context.",
+          "suggestion": "Када је тачно, захтеви ће увек користити адресирање путање."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'true' is left untranslated in a way that makes the sentence grammatically incorrect and confusing in Serbian. In technical contexts, 'true' refers to a boolean value, but it should be integrated naturally (e.g., 'Kada je vrednost true' or 'Kada je uključeno').",
+          "suggestion": "Kada je true, zahtevi će uvek koristiti adresiranje putem putanje."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -199,6 +240,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "Not sent",
   "content_en_sha1_hash": "587c501eb4069b3a59c57ceec50534b82deec57e",
   "created_at": "2025-05-19T21:30:49.779Z",
-  "updated_at": "2025-08-04T07:30:01.458Z",
+  "updated_at": "2026-04-08T19:45:35.462Z",
   "comment": {
     "text": "This translation key is used to display the text \"Not sent\" as a status indicator for webhooks in the Portal Settings. It appears on a badge component within a dialog filter tool, providing users with quick visual feedback about the status of their webhooks.",
     "is_auto": true,
@@ -51,13 +51,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Nebylo odesláno' is grammatically correct but doesn't perfectly convey the concise meaning of 'Not sent'. It's more literal and verbose. A better translation, more aligned with the original's brevity, would be 'Nezasláno'.",
-          "suggestion": "Nezasláno"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -168,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"නොයැවිණි\" while meaning \"not sent\", doesn't perfectly capture the nuance of \"Not sent\" which is often used as a status or label. \"නොයැවිණි\" sounds more like a description of an action that didn't happen.",
-          "suggestion": "Consider \"නොතැවරී\" or \"නොමැතී\" which are more commonly used as status labels or markings indicating something hasn't been sent. Alternatively, \"නොයවා ඇත\" might work better, but is more verbose."
+          "description": "The Sinhala translation 'නොයැවිණි' is in a highly literary/poetic past tense form (meaning 'did not go/travel') which is inappropriate for a technical UI status indicator. A standard status indicator should use a more direct form like 'යවා නැත' or 'නොයැවූ'.",
+          "suggestion": "යවා නැත"
         }
       ],
       "approved_at": null
@@ -213,16 +207,16 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Không được gửi đi\" is a valid way to say 'Not sent' but it's a bit verbose and formal for a status like 'Not sent'. A more common and concise translation would be \"Không gửi\" or \"Chưa gửi\".",
-          "suggestion": "Consider using \"Không gửi\" or \"Chưa gửi\" for a more natural feel."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

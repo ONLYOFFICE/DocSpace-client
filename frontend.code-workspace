@@ -38,7 +38,7 @@
     "editor.formatOnSave": true,
     "VsCodeTaskButtons.tasks": [
       {
-        "label": "Server (Aspire)",
+        "label": "Server",
         "tasks": [
           {
             "label": "Aspire : run CE (Community Edition) - frontend-dev",
@@ -84,122 +84,6 @@
             "label": "Aspire : clear Docker artifacts",
             "task": "Backend | clear Aspire (Docker)",
             "tooltip": "🛠️ Start the \"backend aspire clear Docker\" task"
-          }
-        ],
-        "tooltip": "🛠️ Server tasks (Aspire)"
-      },
-      {
-        "label": "Server",
-        "tasks": [
-          {
-            "label": "Docker : Build-CE",
-            "task": "Backend | build CE",
-            "tooltip": "🛠️ Start the \"backend docker build CE\" task"
-          },
-          {
-            "label": "Docker : Run-CE (skip build)",
-            "task": "Backend | run CE",
-            "tooltip": "🛠️ Start the \"backend docker run CE\" task"
-          },
-          {
-            "label": "Docker : Build-EE",
-            "task": "Backend | build EE",
-            "tooltip": "🛠️ Start the \"backend docker build EE\" task"
-          },
-          {
-            "label": "Docker : Run-EE (skip build)",
-            "task": "Backend | run EE",
-            "tooltip": "🛠️ Start the \"backend docker run EE\" task"
-          },
-          {
-            "label": "Docker : ReBuild-EE",
-            "task": "Backend | rebuild EE",
-            "tooltip": "🛠️ Start the \"backend docker rebuild EE\" task"
-          },
-          {
-            "label": "Docker : Build-EE + dnsmasq",
-            "task": "Backend | build EE + dnsmasq",
-            "tooltip": "🛠️ Start the \"backend docker build EE + dnsmasq\" task"
-          },
-          {
-            "label": "Docker : Build-EE + identity",
-            "task": "Backend | build EE + identity",
-            "tooltip": "🛠️ Start the \"backend docker build EE + identity\" task"
-          },
-          {
-            "label": "Docker : Build-EE + dnsmasq + identity",
-            "task": "Backend | build EE + dnsmasq + identity",
-            "tooltip": "🛠️ Start the \"backend docker build EE + dnsmasq + identity\" task"
-          },
-          {
-            "label": "Docker : Build-DE",
-            "task": "Backend | build DE",
-            "tooltip": "🛠️ Start the \"backend docker build DE\" task"
-          },
-          {
-            "label": "Docker : Run-DE (skip build)",
-            "task": "Backend | run DE",
-            "tooltip": "🛠️ Start the \"backend docker build DE\" task"
-          },
-          {
-            "label": "Docker : ReBuild-DE",
-            "task": "Backend | rebuild DE",
-            "tooltip": "🛠️ Start the \"backend docker rebuild DE\" task"
-          },
-          {
-            "label": "Docker : Build-DE + dnsmasq",
-            "task": "Backend | build DE + dnsmasq",
-            "tooltip": "🛠️ Start the \"backend docker build DE + dnsmasq\" task"
-          },
-          {
-            "label": "Docker : Build-DE + identity",
-            "task": "Backend | build DE + identity",
-            "tooltip": "🛠️ Start the \"backend docker build DE + identity\" task"
-          },
-          {
-            "label": "Docker : Build-DE + dnsmasq + identity",
-            "task": "Backend | build DE + dnsmasq + identity",
-            "tooltip": "🛠️ Start the \"backend docker build DE + dnsmasq + identity\" task"
-          },
-          {
-            "label": "Docker : Build-SAAS + dnsmasq",
-            "task": "Backend | build SAAS + dnsmasq",
-            "tooltip": "🛠️ Start the \"backend docker build SAAS + dnsmasq\" task"
-          },
-          {
-            "label": "Docker : Run-SAAS + dnsmasq (skip build)",
-            "task": "Backend | run SAAS + dnsmasq",
-            "tooltip": "🛠️ Start the \"backend docker build SAAS + dnsmasq\" task"
-          },
-          {
-            "label": "Docker : Build-SAAS + dnsmasq + identity",
-            "task": "Backend | build SAAS + dnsmasq + identity",
-            "tooltip": "🛠️ Start the \"backend docker build SAAS + dnsmasq + identity\" task"
-          },
-          {
-            "label": "Docker : ReBuild-SAAS + dnsmasq",
-            "task": "Backend | rebuild SAAS + dnsmasq",
-            "tooltip": "🛠️ Start the \"backend docker rebuild SAAS + dnsmasq\" task"
-          },
-          {
-            "label": "Docker : Clear",
-            "task": "Backend | clear",
-            "tooltip": "🛠️ Start the \"backend docker clear\" task"
-          },
-          {
-            "label": "Docker : Stop",
-            "task": "Backend | stop",
-            "tooltip": "🛠️ Start the \"backend docker stop\" task"
-          },
-          {
-            "label": "Docker : Start",
-            "task": "Backend | start",
-            "tooltip": "🛠️ Start the \"backend docker start\" task"
-          },
-          {
-            "label": "Docker : Restart",
-            "task": "Backend | restart",
-            "tooltip": "🛠️ Start the \"backend docker restart\" task"
           }
         ],
         "tooltip": "🛠️ Server tasks"
@@ -317,6 +201,11 @@
             "label": "Test translations (common)",
             "task": "Test | Jest:translations",
             "tooltip": "🛠️ Start the \"Test | Jest:translations\" task"
+          },
+          {
+            "label": "Test translations: clear wrong values",
+            "task": "Test | Jest:translations:clear-wrong",
+            "tooltip": "🛠️ Run translation tests with CLEAR_WRONG_VALUES=true — clears bad variables, tags and forbidden values"
           },
           {
             "label": "Test images (common)",
@@ -600,6 +489,57 @@
             "tooltip": "🛠️ Remove unified E2E Docker image and volumes"
           },
         ]
+      },
+      {
+        "label": "Tools",
+        "tasks": [
+          {
+            "label": "Translation App : Start (with metadata)",
+            "task": "Translation App | start",
+            "tooltip": "🌐 Start translation app (backend + frontend + generate metadata)"
+          },
+          {
+            "label": "Translation App : Start (skip meta)",
+            "task": "Translation App | start (skip meta)",
+            "tooltip": "⚡ Start translation app quickly — skip metadata generation"
+          },
+          {
+            "label": "Translation Stats",
+            "task": "Translation App | translation stats",
+            "tooltip": "📊 Show translation statistics (keys, coverage, size per language)"
+          },
+          {
+            "label": "Verify Translations (fast, no LLM)",
+            "task": "Translation App | verify translations (no LLM)",
+            "tooltip": "🔍 Run deterministic checks: variables, tags, scripts, brackets — instant"
+          },
+          {
+            "label": "Verify Translations (LLM)",
+            "task": "Translation App | verify translations (LLM)",
+            "tooltip": "🤖 Run full LLM-based spell-check verification (slow)"
+          },
+          {
+            "label": "Update Metadata",
+            "task": "Translation App | update metadata",
+            "tooltip": "🔄 Regenerate all .meta files (generate-metadata + save-meta-keys-usage + auto-comments)"
+          },
+          {
+            "label": "Clear Meta Issues",
+            "task": "Translation App | clear meta issues",
+            "tooltip": "🗑️ Reset all ai_spell_check_issues in .meta files to empty"
+          },
+          {
+            "label": "──────────────────────",
+            "task": "separator",
+            "tooltip": ""
+          },
+          {
+            "label": "Screenshot Comparison : Start",
+            "task": "Screenshot Comparison | start",
+            "tooltip": "🖼️ Start screenshot comparison tool"
+          }
+        ],
+        "tooltip": "🛠️ Common tools"
       }
     ],
     "licenser.author": "Ascensio System SIA",

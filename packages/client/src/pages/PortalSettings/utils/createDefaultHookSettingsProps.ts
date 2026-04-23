@@ -41,7 +41,6 @@ import { TfaStore } from "@docspace/shared/store/TfaStore";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { AuthStore } from "@docspace/shared/store/AuthStore";
 import PaymentStore from "SRC_DIR/store/PaymentStore";
-import ServicesStore from "SRC_DIR/store/ServicesStore";
 import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 import DefaultTemplatesStore from "SRC_DIR/store/portal-settings/DefaultTemplatesStore";
 
@@ -64,7 +63,6 @@ export interface DefaultHookSettingsPropsParams {
   ldapStore?: LdapFormStore;
   common?: CommonStore;
   paymentStore?: PaymentStore;
-  servicesStore?: ServicesStore;
   currentTariffStatusStore?: CurrentTariffStatusStore;
   defaultTemplatesStore?: DefaultTemplatesStore;
 }
@@ -88,7 +86,6 @@ export const createDefaultHookSettingsProps = ({
   ldapStore,
   common,
   paymentStore,
-  servicesStore,
   currentTariffStatusStore,
   defaultTemplatesStore,
 }: DefaultHookSettingsPropsParams) => ({
@@ -129,7 +126,7 @@ export const createDefaultHookSettingsProps = ({
     language: authStore?.language,
     isBackupPaid: currentQuotaStore?.isBackupPaid,
     maxFreeBackups: currentQuotaStore?.maxFreeBackups,
-    setServiceQuota: paymentStore?.setServiceQuota,
+    handleServiceQuota: paymentStore?.handleServiceQuota,
     fetchPayerInfo: currentTariffStatusStore?.fetchPayerInfo,
     setBackupsCount: backupStore?.setBackupsCount,
     setIsInited: backupStore?.setIsInited,
@@ -188,15 +185,8 @@ export const createDefaultHookSettingsProps = ({
     addAbortControllers: settingsStore?.addAbortControllers,
   },
   payment: {
-    initPayments: paymentStore?.init,
-    walletInit: paymentStore?.walletInit,
     initPaymentsStandalone: paymentStore?.standaloneInit,
     standalone: settingsStore?.standalone,
-    servicesInit: servicesStore?.servicesInit,
-    paymentMethodInit: paymentStore?.paymentMethodInit,
-  },
-  services: {
-    servicesInit: servicesStore?.servicesInit,
-    initServiceData: servicesStore?.initServiceData,
   },
 });
+

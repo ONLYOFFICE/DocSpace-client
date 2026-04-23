@@ -3,7 +3,7 @@
   "content": "Default quota",
   "content_en_sha1_hash": "74e18c6f0fe3effdc2053a9286b7b902f2d9c1b1",
   "created_at": "2025-05-19T21:30:44.442Z",
-  "updated_at": "2026-03-31T15:18:46.328Z",
+  "updated_at": "2026-04-08T12:23:40.774Z",
   "comment": {
     "text": "The \"DefaultQuota\" translation key is used to display the label for the default quota option in a filter section. It appears on a page where users can customize their filters and provides an alternative label when the default quota option is selected. This text should be translated to provide a consistent user experience across different languages.",
     "is_auto": true,
@@ -45,18 +45,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word \"Default\" is misspelled as \"Defolt\".",
-          "suggestion": "Default"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While \"kvota\" is a valid loanword for \"quota\" in Azerbaijani, \"Default\" is best translated as \"standart\". The current translation misses the intended meaning.",
-          "suggestion": "Standart kvota"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -116,13 +105,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"デフォルトな容量制限\" is overly literal and slightly awkward. While technically correct, \"デフォルト容量\" or \"初期容量制限\" would be more natural and commonly used in Japanese.",
-          "suggestion": "デフォルト容量 or 初期容量制限"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -185,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"පෙරනිමි සලාකය\" does not accurately convey the meaning of \"Default quota\". \"පෙරනිමි\" (peranimu) translates to 'previous' or 'former,' and \"සලාකය\" (salakaya) translates to 'slice' or 'portion.' This combination doesn't capture the concept of a default quota.",
-          "suggestion": "A more accurate translation would be something like \"නිර්දේශිත වාරකය\" (nirdeshitha varakaya) which translates to 'recommended quota' or \"ප්‍රස්ථාරණාත්මක වාරකය\" (prastharanathmakatha varakaya) which translates to 'default quota'."
+          "description": "The word 'සලාකය' (salāka) means 'a small piece of cloth' or 'a rag', which is completely unrelated to 'quota' (an allocation or limit).",
+          "suggestion": "පෙරනිමි කෝටාව"
         }
       ],
       "approved_at": null
@@ -206,13 +189,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Подразумевана квота\" translates to \"Implied quota\" or \"Assumed quota,\" which doesn't fully capture the meaning of \"Default quota.\" \"Default\" implies a pre-set or standard value.",
-          "suggestion": "Почетна квота"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -240,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

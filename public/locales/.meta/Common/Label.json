@@ -3,7 +3,7 @@
   "content": "Name",
   "content_en_sha1_hash": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
   "created_at": "2025-05-19T21:30:46.029Z",
-  "updated_at": "2026-03-31T15:18:45.973Z",
+  "updated_at": "2026-04-08T06:21:17.406Z",
   "comment": {
     "text": "The \"Label\" translation key is used to display a descriptive title for input fields, such as group names or room tags. It appears in a dialog box, specifically within the CreateEditGroupDialog and CreateEditRoomDialog components, where it provides context for users to enter a name. Translators should replace the English content with a translated version of \"Name\" while maintaining this descriptive purpose.",
     "is_auto": true,
@@ -165,13 +165,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation 'Bezeichnung' while technically meaning 'designation' or 'description', isn't the most natural or direct translation of 'Name'. It implies a more formal or technical identification.",
-          "suggestion": "Consider 'Name' or 'Beiname' for a more direct translation of 'Name'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -264,7 +258,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Etichetă\" does not accurately convey the meaning of \"Name.\" \"Etichetă\" translates to \"Label.\" A more appropriate translation for \"Name\" would be \"Nume.\" ",
+          "description": "The English source is 'Name', but the Romanian translation 'Etichetă' means 'Label'. While the metadata mentions the key is 'Label', the task is to verify the translation of the provided English text 'Name'.",
           "suggestion": "Nume"
         }
       ],
@@ -300,8 +294,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Ознака\" translates to 'mark', 'sign', or 'characteristic', which doesn't accurately convey the meaning of 'Name'. 'Name' generally refers to the identifying label of something.",
-          "suggestion": "Consider alternatives like \"Име\" (Ime) which is the standard translation for 'Name' in Serbian (Cyrillic)."
+          "description": "The Serbian word 'Ознака' means 'Mark', 'Label', or 'Sign', whereas the English source 'Name' refers to the identity of the object (e.g., Group Name). In the context of input fields for names, 'Име' is the correct translation.",
+          "suggestion": "Име"
         }
       ],
       "approved_at": null
@@ -309,7 +303,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Oznaka' means 'Label', 'Mark', or 'Tag', whereas the English source 'Name' refers to the identity of the object (Group or Room). In the context of a 'Name' input field, 'Ime' or 'Naziv' is the correct translation.",
+          "suggestion": "Naziv"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -331,6 +331,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

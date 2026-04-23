@@ -113,7 +113,7 @@ const InviteQuotaWarningDialog = (props) => {
       <Text fontWeight={700}>
         {standalone
           ? t("LicenseExpired")
-          : t("BusinessPlanPaymentOverdue", {
+          : t("PlanPaymentOverdue", {
               planName: currentTariffPlanTitle,
             })}
       </Text>
@@ -179,7 +179,9 @@ const InviteQuotaWarningDialog = (props) => {
         <Button
           key="OKButton"
           label={
-            isPaymentPageAvailable ? t("UpgradePlan") : t("Common:OKButton")
+            isPaymentPageAvailable
+              ? t("Common:UpgradePlan")
+              : t("Common:OKButton")
           }
           size="normal"
           primary
@@ -228,3 +230,4 @@ export default inject(
     };
   },
 )(observer(withTranslation(["Payments", "Common"])(InviteQuotaWarningDialog)));
+

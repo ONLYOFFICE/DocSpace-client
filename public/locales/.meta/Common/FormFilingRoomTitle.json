@@ -3,7 +3,7 @@
   "content": "Form Filling Room",
   "content_en_sha1_hash": "ce16b03553997eee69758275d881c1e1971387c2",
   "created_at": "2025-05-19T21:30:45.511Z",
-  "updated_at": "2026-03-20T09:07:45.596Z",
+  "updated_at": "2026-04-08T08:49:52.445Z",
   "comment": {
     "text": "This translation key is used to display the title \"Form Filling Room\" in various UI elements. It is typically displayed on a room type selection filter or as a label in developer tools, and its purpose is to provide a clear indication of the form-filling function.",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"غرفة تعبئة النموذج\" is a literal translation, it's not the most natural or common way to describe a 'Form Filling Room' in Saudi Arabia. It sounds somewhat technical and less user-friendly.",
-          "suggestion": "Consider alternatives like \"مكتب معالجة النماذج\" (office for processing forms) or \"غرفة ملء النماذج\" (room for filling forms), which are more commonly used and sound more natural."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -69,13 +63,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Räume zum Formularausfüllen\" is a literal translation but not the most natural phrasing in German. While technically correct, it sounds somewhat clunky.",
-          "suggestion": "Consider a more idiomatic translation such as \"Formularausfüllraum\" (Form Filling Room) or \"Formularzimmer\" (Form Room) depending on the context.  A slightly more descriptive option could be \"Raum für die Formularausfüllung\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -111,13 +99,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Stanza per la compilazione moduli\" is understandable, a more natural and accurate translation of 'Form Filling Room' would be 'Sala per la compilazione moduli' or 'Ufficio per la compilazione moduli'. 'Stanza' can imply a smaller, less formal space.",
-          "suggestion": "Sala per la compilazione moduli"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -132,13 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation '양식 작성 룸에서' translates to 'In the form writing room'. While not strictly incorrect, it's a very literal and slightly awkward translation. A more natural and common Korean phrasing would be better.",
-          "suggestion": "Consider '양식 작성실' (Yangshik Jaksil) for 'Form Filling Room'. It's a more concise and natural term."
-        },
-        {
-          "type": "formatting",
-          "description": "The translation includes the particle '에서' which implies a location. While not always wrong, it might be better to consider if the context demands a location indicator or just a title.",
-          "suggestion": "Evaluate if '양식 작성실' (Yangshik Jaksil) or '양식 작성 룸' (Yangshik Jaksil Room) is more appropriate for the context. If it's a title, removing '에서' might be preferable."
+          "description": "The Korean translation '양식 작성 룸에서' includes the particle '에서' (meaning 'in' or 'at'), which turns the title into a phrase meaning 'In the Form Filling Room'. As a UI label/title, it should be a noun phrase without the locative particle.",
+          "suggestion": "양식 작성 룸"
         }
       ],
       "approved_at": null
@@ -185,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Sală Completare formular' is understandable, a more natural Romanian translation for 'Form Filling Room' would be 'Camera de completare formulare' or 'Sala de completare formulare'. 'Completare formular' sounds a bit literal and not idiomatic.",
-          "suggestion": "Sala de completare formulare"
+          "description": "The Romanian translation 'Sală Completare formular' is grammatically incorrect and sounds like a literal word-for-word translation. In Romanian, 'Sală' (Room) requires a preposition or a different structure to connect with 'Completare formular' (Form filling). It should be 'Sală de completare a formularului' or 'Sală pentru completarea formularului' to be semantically correct.",
+          "suggestion": "Sală de completare a formularului"
         }
       ],
       "approved_at": null
@@ -218,13 +195,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Просторија за попуњавање формулара\" is understandable, it's a bit verbose and not the most natural-sounding translation. A more concise and common translation would be preferred.",
-          "suggestion": "Просторија за попуњавање образаца"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -248,16 +219,16 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Phòng Điền Biểu mẫu\" is not the most natural or idiomatic translation of 'Form Filling Room'. 'Điền' means 'to fill', which is redundant since 'Biểu mẫu' already implies filling. A more common and clear translation would be 'Phòng Nhập Liệu Mẫu' or 'Phòng Xử Lý Mẫu'.",
-          "suggestion": "Phòng Nhập Liệu Mẫu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

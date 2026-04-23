@@ -3,7 +3,7 @@
   "content": "Add allowed IP address",
   "content_en_sha1_hash": "af9c05a9deff4df886dbc45b353bc08a5f221460",
   "created_at": "2025-05-19T21:30:50.310Z",
-  "updated_at": "2026-03-26T08:26:58.264Z",
+  "updated_at": "2026-04-09T04:32:00.204Z",
   "comment": {
     "text": "\"This translation key is used for the 'Add Allowed IP address' label in the access portal settings, which appears as a button label.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
-      "line_number": 308,
+      "line_number": 309,
       "context": "{enable ? (\n <UserFields\n className={styles.userFields}\n inputs={ips}\n buttonLabel={t(\"AddAllowedIP\")}\n onChangeInput={onChangeInput}\n onDeleteInput={onDeleteInput}\n onClickAdd={onClickAdd}\n onBlurAction={(index) => onCheckValid(ips[index], index)}\n validateFunc={isValidIp}",
       "module": "/packages/client"
     }
@@ -47,8 +47,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The Czech translation 'Přidat povolenou IP adresy' uses the plural form 'adresy' (IP addresses). The English 'Add allowed IP address' refers to a single IP address. The correct form should be singular.",
+          "type": "incorrect_translation",
+          "description": "Grammatical error in number agreement: 'povolenou' is singular, but 'adresy' is plural, making the phrase nonsensical. It should be 'povolenou IP adresu' (singular) or 'povolené IP adresy' (plural). Given the context of a button to add an entry, singular is preferred.",
           "suggestion": "Přidat povolenou IP adresu"
         }
       ],
@@ -111,30 +111,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While the Lao translation is understandable, a more natural translation of 'Add allowed IP address' would be something like 'ເພີ່ມທີ່ຢູ່ IP ທີ່ຮັບອະນຸຍາດ' or 'ເພີ່ມທີ່ຢູ່ IP ທີ່ສາມາດໃຊ້ໄດ້'. The current translation, while technically correct, sounds slightly awkward.",
-          "suggestion": "ເພີ່ມທີ່ຢູ່ IP ທີ່ຮັບອະນຸຍາດ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Pievienot atļauto interneta protokola (IP) adresi\" is overly literal and somewhat awkward in Latvian. While technically correct, it's not the most natural phrasing.",
-          "suggestion": "Pievienot atļauto IP adresi"
-        },
-        {
-          "type": "formatting",
-          "description": "The inclusion of \"interneta protokola\" is redundant as IP is commonly understood. The abbreviation 'IP' is standard and removes unnecessary words.",
-          "suggestion": "Remove 'interneta protokola' and just use 'IP'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -179,13 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ඉඩදෙන අ.ජා.කෙ. (IP) ලිපින යොදන්න\" is not the most natural or accurate translation of \"Add allowed IP address\".  'අ.ජා.කෙ.' is an abbreviation for 'අන්තර්ජාල ක්‍රෙඩන්షియල්' (Internet Credentials) which isn't directly related to an IP address.  A more accurate translation would emphasize the 'allowed' nature of the IP.",
-          "suggestion": "Consider using a translation like \"ඉඩකඩ ඇති IP ලිපිනය එක් කරන්න\" (Add IP address with access) or \"අනුමැත IP ලිපිනය එක් කරන්න\" (Add approved IP address)."
-        },
-        {
-          "type": "formatting",
-          "description": "While the use of parenthesis around 'IP' is not inherently incorrect, it's common to use parentheses less frequently in Sinhala compared to English.  It might read slightly awkward.",
-          "suggestion": "Consider removing the parentheses, such as \"ඉඩකඩ ඇති IP ලිපිනය එක් කරන්න\" or \"අනුමැත IP ලිපිනය එක් කරන්න\"."
+          "description": "The Sinhala translation uses 'අ.ජා.කෙ.' which is an incorrect and non-standard abbreviation for IP address. In technical Sinhala, 'IP' is typically kept in English or transliterated, as the provided abbreviation does not convey the technical meaning of 'Internet Protocol'.",
+          "suggestion": "අවසර දෙන IP ලිපින එක් කරන්න"
         }
       ],
       "approved_at": null
@@ -233,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

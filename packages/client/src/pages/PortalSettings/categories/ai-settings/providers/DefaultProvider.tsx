@@ -98,7 +98,7 @@ const DefaultProviderComponent = ({
 
     return {
       key: model.modelId,
-      label: aiConfig?.modelAliases?.[model.modelId] || model.modelId,
+      label: model.alias || model.modelId,
     };
   };
 
@@ -197,7 +197,7 @@ const DefaultProviderComponent = ({
     return (
       defaultProviderModels?.map((m) => ({
         key: m.modelId,
-        label: aiConfig?.modelAliases?.[m.modelId] || m.modelId,
+        label: m.alias || m.modelId,
       })) || []
     );
   };
@@ -208,13 +208,13 @@ const DefaultProviderComponent = ({
     return (
       <div style={{ display: "contents" }}>
         {defaultProviderModels.map((m) => {
-          const label = aiConfig?.modelAliases?.[m.modelId] || m.modelId;
+          const label = m.alias || m.modelId;
           const isSelected = m.modelId === selectedModelId;
           const safeFormat = (v: number) =>
             formatAiModelsCurrency ? formatAiModelsCurrency(v) : String(v);
           const priceLabel =
             m.price != null
-              ? t("Services:AIModelPrice", {
+              ? t("Common:AIModelPrice", {
                   inputPrice: safeFormat(m.price.prompt),
                   outputPrice: safeFormat(m.price.completion),
                 })

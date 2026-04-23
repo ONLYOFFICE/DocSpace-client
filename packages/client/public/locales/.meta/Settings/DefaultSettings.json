@@ -3,7 +3,7 @@
   "content": "Default settings",
   "content_en_sha1_hash": "57afbebd04d4d02458682eb7fa90339a9d41caac",
   "created_at": "2025-05-19T21:30:51.088Z",
-  "updated_at": "2026-03-20T09:07:45.624Z",
+  "updated_at": "2026-04-09T03:38:30.484Z",
   "comment": {
     "text": "This translation key is used to display a label for a button or dialog that refers to default settings. It appears in various UI components such as buttons and save/cancel dialogs, prompting users to reset to default settings when they have unsaved changes. The exact placement may vary across different files.",
     "is_auto": true,
@@ -51,18 +51,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Defolt' is a misspelling of 'Default'.",
-          "suggestion": "Default"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "'parametrlər' translates to 'parameters' which isn't the best equivalent for 'settings'. 'Parametrlər' is closer to configuration options, whereas 'settings' is more general.",
-          "suggestion": "A more appropriate translation would be 'Quraşdırılmış parametrlər' or 'Başlanğıc parametrləri' depending on the specific nuance desired. Alternatively, 'Ayarlar' can be used which translates to 'Settings'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -178,8 +167,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation \"По умолчанию\" while technically meaning 'by default', isn't the most natural or precise translation for \"Default settings\". It lacks the sense of 'settings' being implied in the original English phrase.",
+          "type": "missing_content",
+          "description": "The translation 'По умолчанию' means 'By default' (an adverbial phrase), whereas the English 'Default settings' is a noun phrase. The word 'settings' (настройки) is missing, which is critical for a button label intended to reset to specific configurations.",
           "suggestion": "Настройки по умолчанию"
         }
       ],
@@ -188,18 +177,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Sinhala word 'පෙරනිමි' (peranim) appears to be a misspelling or uncommon phrasing. It's unclear what it intends to convey.",
-          "suggestion": "Consider using 'ප්‍රdefaultValueමී සැකසුම්' (pradamika säkasum) which directly translates to 'default settings'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "'පෙරනිමි' doesn't accurately convey the meaning of 'default'. It implies something 'old' or 'previous' which is not the intended meaning.",
-          "suggestion": "Use 'ප්‍රdefaultValueමී' (pradamika) to convey 'default'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -217,13 +195,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Подразумевана подешавања' is understandable, a more accurate and common translation of 'Default settings' in Serbian (Cyrillic) would be 'Зобарне подешавања'. 'Подразумевана' implies 'implied' or 'assumed' which isn't the primary meaning of 'default'.",
-          "suggestion": "Зобарне подешавања"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -251,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

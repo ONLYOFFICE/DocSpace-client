@@ -85,7 +85,7 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
 
     if (!anchor.current || !ref.current) return onClose();
 
-    const cleanup = autoUpdate(anchor.current, ref.current, () => {
+    const updatePosition = () => {
       if (!anchor.current || !ref.current || isMobile) return;
 
       computePosition(anchor.current, ref.current, {
@@ -104,9 +104,24 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
         ref.current.style.left = `${x}px`;
         ref.current.style.top = `${y}px`;
       });
-    });
+    };
 
-    return cleanup;
+    const cleanup = autoUpdate(anchor.current, ref.current, updatePosition);
+
+    const viewport = window.visualViewport;
+
+    if (isTablet && viewport) {
+      viewport.addEventListener("resize", updatePosition);
+      viewport.addEventListener("scroll", updatePosition);
+    }
+
+    return () => {
+      cleanup();
+      if (isTablet && viewport) {
+        viewport.removeEventListener("resize", updatePosition);
+        viewport.removeEventListener("scroll", updatePosition);
+      }
+    };
   }, [anchor, anchor.current, ref, isMobile, onClose]);
 
   const element = (
@@ -153,4 +168,3 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
 
   return createPortal(element, document.body);
 };
-

@@ -3,7 +3,7 @@
   "content": "When handling documents in a mobile browser, users can be offered (or not) the choice of opening the file in a browser or in the mobile app.",
   "content_en_sha1_hash": "afb876d6cee5ba727fb68bd3489940d7d4460ac1",
   "created_at": "2025-05-19T21:30:50.957Z",
-  "updated_at": "2026-02-19T13:36:32.703Z",
+  "updated_at": "2026-04-09T03:54:36.673Z",
   "comment": {
     "text": "When users are configuring deep linking options for mobile documents, this translation key is used to provide a brief explanation of how the file can be opened in either a browser or the mobile app. It appears alongside a radio button group and a mobile category wrapper in the Portal Settings customization page.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The phrase '(or not)' from the English source is missing in the Arabic translation, which changes the nuance of the setting's optionality.",
+          "suggestion": "عند التعامل مع المستندات في متصفح الجوال، يمكن للمستخدمين أن يُعرض عليهم (أو لا) خيار فتح الملف في المتصفح أو في التطبيق."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -41,14 +47,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"istifadəçilərə faylı brauzerdə və ya mobil proqramda açmaq imkanı verilə bilər (ya da verilməyə bilər)\" is a bit clunky and overly literal.  The \"(ya da verilməyə bilər)\" (or not) feels tacked on and disrupts the flow. A more natural phrasing would convey the same meaning more elegantly.",
-          "suggestion": "Mobil brauzerdə sənədləri təqdim edərkən istifadəçilərə faylı brauzerdə və ya mobil proqramda açmaq təklif edilə bilər."
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \")\"",
+          "suggestion": ""
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'təqdim edərkən' (when presenting) is slightly awkward. While technically correct, it doesn't perfectly capture the nuance of 'handling'.",
-          "suggestion": "Mobil brauzerdə sənədləri işləyərkən..."
+          "description": "The Azerbaijani translation uses 'təqdim edərkən' (while presenting/offering), which changes the meaning from 'handling documents' (managing/working with documents) to 'presenting documents'.",
+          "suggestion": "Mobil brauzerdə sənədlərlə işləyərkən istifadəçilərə faylı brauzerdə və ya mobil proqramda açmaq imkanı verilə bilər (ya da verilməyə bilər)"
         }
       ],
       "approved_at": null
@@ -62,30 +68,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase '(nebo ne)' translates to '(or not)' and while technically correct, it's awkward and unnatural in Czech. It's better to rephrase to avoid the double negative or express the optionality more elegantly.",
-          "suggestion": "Při práci s dokumenty v mobilním prohlížeči uživatelům může být nabídnuta možnost otevřít soubor v prohlížeči nebo v mobilní aplikaci, případně ne."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Při práci s dokumenty' is a bit clunky. A more natural phrasing could be used.",
-          "suggestion": "Při zobrazení dokumentů v mobilním prohlížeči"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"(or not)\" in the English content is overly literal and a bit awkward in the German translation. It disrupts the flow.",
-          "suggestion": "Consider rephrasing to something like \"oder die Datei in der mobilen App öffnen kann\" to avoid the parenthetical insertion, implying the choice exists either way."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -115,13 +104,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Armenian translation includes unnecessary parentheses around \"(կամ ոչ)\". This disrupts the natural flow of the sentence.",
-          "suggestion": "Remove the parentheses:  «Բջջային զննարկիչում փաստաթղթերով աշխատելիս՝ օգտատերերին կարելի է առաջարկել ֆայլը բացել զննարկիչում կամ բջջային հավելվածում:»"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -133,41 +116,25 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"(or not)\" is awkwardly translated as \"（またはされない）場合があります\". It's overly formal and doesn't flow naturally. It could be misinterpreted as suggesting the choice is sometimes unavailable even when it should be.",
-          "suggestion": "モバイルブラウザで文書を扱う際、ユーザーにはファイルをブラウザで開くかモバイルアプリで開くかの選択肢が表示されることがあります。"
-        },
-        {
-          "type": "formatting",
-          "description": "The parentheses and Japanese character usage feels a bit clunky. The long pause represented by “（またはされない）場合があります” disrupts the flow.",
-          "suggestion": "モバイルブラウザで文書を扱う際、ユーザーにはファイルをブラウザで開くかモバイルアプリで開くかの選択肢が表示されることがあります。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"선택권을 제공할 수 있습니다(또는 제공하지 않을 수 있습니다)\" is overly literal and somewhat awkward in Korean. The 'or not' part is redundant and makes the sentence clunky. It doesn't flow naturally.",
-          "suggestion": "선택지를 제공하거나, 제공하지 않을 수 있습니다."
-        },
-        {
-          "type": "formatting",
-          "description": "The use of parentheses around \"(또는 제공하지 않을 수 있습니다)\" creates a visual break in the sentence and makes it feel disjointed. It's better to integrate that information more smoothly.",
-          "suggestion": "선택지를 제공하거나, 제공하지 않을 수 있습니다."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ສະເີ' (sae) is an incomplete/broken word. It appears to be a typo for 'ສະເໜີ' (sa-noe), which means 'to offer'. As it stands, 'ສະເີ' has no meaning in Lao.",
+          "suggestion": "ເມື່ອຈັດການເອກະສານໃນບຣາວເຊີມືຖື, ຜູ້ໃຊ້ສາມາດສະເໜີ (ຫຼື ບໍ່) ໃຫ້ເລືອກເປີດໄຟລ໌ໃນບຣາວເຊີ ຫຼື ໃນແອັບມືຖື."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -185,35 +152,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The phrase 'Obsługując dokumenty...' feels slightly awkward. A more natural phrasing would be 'Podczas obsługi dokumentów...' or 'Gdy użytkownik obsługuje dokumenty...'",
-          "suggestion": "Gdy użytkownik obsługuje dokumenty w przeglądarce mobilnej..."
-        },
-        {
-          "type": "grammar",
-          "description": "The use of 'bądź' instead of 'lub' is grammatically correct but feels slightly formal and less common in modern Polish. 'Lub' is more widely used and natural.",
-          "suggestion": "lub"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The phrase 'pode ser oferecida' is a bit awkward. A more natural phrasing would be 'pode ser oferecida aos utilizadores' or 'os utilizadores podem receber'.",
-          "suggestion": "Os utilizadores podem receber (ou não) a opção de abrir o ficheiro num browser ou na aplicação móvel."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrasing 'When handling documents' is quite formal. 'Ao tratar documentos' is a direct translation, but in a mobile context, a more approachable phrase like 'Quando se abre um documento' or 'Se um documento é aberto' would be better.",
-          "suggestion": "Quando se abre um documento num browser móvel, os utilizadores podem receber (ou não) a opção de abrir o ficheiro num browser ou na aplicação móvel."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -228,13 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Dacă lucrați cu documente\" is too literal and doesn't quite convey the intended meaning of 'When handling documents'. It sounds like it's addressing the person doing the handling, not the user.",
-          "suggestion": "Când utilizatorii accesează documente din browser de mobil..."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'le va oferi (sau nu)' is awkward and less natural in Romanian. It's a literal translation of 'can be offered (or not)'.",
-          "suggestion": "pot primi (sau nu) opțiunea..."
+          "description": "The subject of the sentence is incorrect. The English says 'users can be offered', but the Romanian says 'utilizatorilor le va oferi' (it will offer to users), which lacks a clear subject and implies the system/action will offer it, but the grammatical structure is awkward and shifts the agency incorrectly compared to the passive/conditional English sense.",
+          "suggestion": "Când se gestionează documente într-un browser de pe dispozitivul mobil, utilizatorilor le poate fi oferită (sau nu) opțiunea de a deschide fișierul într-un browser sau în aplicația mobilă."
         }
       ],
       "approved_at": null
@@ -251,13 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'offered (or not)' is awkwardly translated as '(හෝ නොකර)'. A more natural Sinhala phrasing would convey the optionality more clearly. The sentence implies the choice might not be presented.",
-          "suggestion": "පරිශීලකයින්ට හැකි (හෝ අනිද්දක්) තේරීම ඉදිරිපත් කළ හැකිය"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'yeḍuma' (යෙදුම) is a direct transliteration and while understandable, 'application' or a more culturally relevant term might be preferred in this context.",
-          "suggestion": "පරිශීලකයින්ට (හෝ නොකර) ගොනුව බ්‍රවුසරයක හෝ ජංගම අප්ලිකේෂන් එකක විවෘත කිරීමට තේරීම ඉදිරිපත් කළ හැකිය."
+          "description": "The phrase '(හෝ නොකර)' is a literal and incorrect translation of '(or not)'. In Sinhala, this translates to '(or not doing)', which makes the sentence nonsensical. It should convey the idea of the option being optional or not being offered.",
+          "suggestion": "ජංගම බ්‍රවුසරයකින් ලේඛන හැසිරවීමේදී, පරිශීලකයින්ට ගොනුව බ්‍රවුසරයක හෝ ජංගම යෙදුමක විවෘත කිරීමට තේරීම ලබා දිය හැකිය (හෝ ලබා නොදිය හැකිය)."
         }
       ],
       "approved_at": null
@@ -265,13 +200,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The phrase 'môžete používateľom ponúknuť (alebo neponúknuť)' is slightly awkward. The double negative feel is a bit clunky in Slovak.",
-          "suggestion": "Používateľom môžete ponúknuť alebo neponúknuť možnosť..."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -283,18 +212,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"може (или не мора)\" is an awkward and unnatural translation of \"can (or not)\".  It implies an obligation that doesn't exist. It's overly literal.",
-          "suggestion": "може или не"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'фајл' is a loanword from English, while 'датотека' is the more common Serbian word for 'file'. While 'фајл' is understood, 'датотека' would be a more natural choice for a formal context.",
-          "suggestion": "датотеку"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -312,13 +230,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The phrase '(чи ні)' is somewhat awkward and less natural in Ukrainian. While technically correct, it breaks the flow.",
-          "suggestion": "Consider replacing '(чи ні)' with a more fluid option like 'за бажанням' or 'за потреби' which conveys the same meaning but reads better."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -326,14 +238,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The word 'file' is translated as 'tập'. While 'tập' can mean 'file' in some contexts, here it's better to use a more specific term like 'tài liệu' (document) to maintain consistency with the English original and clarity.",
-          "suggestion": "Khi xử lý tài liệu trong trình duyệt di động, người dùng có thể được cung cấp (hoặc không) lựa chọn mở tài liệu trong trình duyệt hoặc trong ứng dụng di động."
-        },
-        {
-          "type": "formatting",
-          "description": "The parentheses and 'or not' section feels slightly awkward in Vietnamese. While grammatically correct, it could be made more natural.",
-          "suggestion": "Khi xử lý tài liệu trong trình duyệt di động, người dùng có thể được cung cấp tùy chọn mở tài liệu trong trình duyệt hoặc trong ứng dụng di động, hoặc không."
+          "type": "missing_content",
+          "description": "The word 'file' is incomplete in the Vietnamese translation ('tập' instead of 'tập tin' or 'tệp'), which makes the sentence grammatically incomplete and potentially confusing.",
+          "suggestion": "Khi xử lý tài liệu trong trình duyệt di động, người dùng có thể được cung cấp (hoặc không) lựa chọn mở tệp trong trình duyệt hoặc trong ứng dụng di động."
         }
       ],
       "approved_at": null
@@ -341,18 +248,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation focuses on 'setting' the option, whereas the original English emphasizes the *possibility* of offering the choice. The nuance of choice being offered (or not) is lost.",
-          "suggestion": "移动端浏览器处理文档时，用户可以选择是否通过浏览器或移动应用打开文件。"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase “在移动应用打开” is a bit clunky. While technically correct, it could be more natural.",
-          "suggestion": "移动端浏览器处理文档时，用户可以选择是否通过浏览器或移动应用打开文件。"
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "Disable (not recommended)",
   "content_en_sha1_hash": "2222ade3230450dee89ad7ab51ac827335c5017b",
   "created_at": "2025-05-19T21:30:49.695Z",
-  "updated_at": "2025-08-04T07:30:01.466Z",
+  "updated_at": "2026-04-08T20:26:35.207Z",
   "comment": {
     "text": "This translation key is used to describe the \"Disable SSL\" option on a settings page, likely a button or toggle that disables Secure Sockets Layer (SSL) verification. Its purpose is to inform users about the consequences of this action and provide context for developers. It appears in the Portal Settings category.",
     "is_auto": true,
@@ -102,13 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"비활성화(비추)\" while conveying the meaning of 'disable (not recommended)', is too abbreviated for a setting description. '비추' is a shortened form of '비권장(비추천)' which is informal and may not be appropriate for a technical setting.",
-          "suggestion": "비활성화 (권장하지 않음)"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of parentheses is good, but the space before the '(' should be consistent with other descriptions. Consider a more formal tone.",
-          "suggestion": "비활성화 (권장하지 않습니다)"
+          "description": "The translation '비추' is highly informal slang (short for 비추천) which is inappropriate for a professional software UI. It changes the tone from a formal warning to casual internet slang.",
+          "suggestion": "비활성화(권장하지 않음)"
         }
       ],
       "approved_at": null
@@ -164,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"අබල කරන්න (නිර්දේශ නොකරයි)\" while understandable, doesn't perfectly capture the nuance of \"Disable (not recommended)\". \"අබල කරන්න\" translates to 'disable' or 'cancel' which is accurate, but \"නිර්දේශ නොකරයි\" is a somewhat literal and slightly awkward translation of 'not recommended'. A more natural phrasing could be something like \"අයින් කරන්න (අනතුරු ඇත්නම්)\" or \"අයින් කිරීම් (සාවධානයෙන්)\".",
-          "suggestion": "Consider alternatives like \"අයින් කරන්න (අනතුරු ඇත්නම්)\" or \"අයින් කිරීම් (සාවධානයෙන්)\" to better convey the meaning."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -194,13 +183,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Onemogući (nije preporučljivo)' while conveying the meaning, doesn't perfectly capture the nuance of 'Disable (not recommended)'. 'Onemogući' implies a more complete disabling. 'Disable' can sometimes mean just temporary or a configuration setting. A closer translation, keeping the sense of a potentially temporary or configurable setting, would be something like 'Isključite (nije preporučljivo)' or 'Omogućite onemogućavanje (nije preporučljivo)' although the latter is more verbose.",
-          "suggestion": "Consider 'Isključite (nije preporučljivo)' for a more accurate and common translation of 'Disable'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -222,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

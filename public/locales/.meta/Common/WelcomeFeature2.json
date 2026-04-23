@@ -3,7 +3,7 @@
   "content": "Monitor progress and submissions instantly",
   "content_en_sha1_hash": "677a209dd0b24ee5f78ffea7d28f2549dd265a98",
   "created_at": "2026-03-31T15:18:26.923Z",
-  "updated_at": "2026-03-31T15:18:26.923Z",
+  "updated_at": "2026-04-07T20:03:37.594Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -62,7 +62,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Finnish translation uses the singular 'lähetystä' (submission), whereas the English text uses the plural 'submissions'.",
+          "suggestion": "Seuraa edistymistä ja lähetyksiä välittömästi"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -104,7 +110,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'instantiski' is an anglicism/loanword that is not standard Latvian; 'uzreiz' or 'nekavējoties' should be used for a professional UI.",
+          "suggestion": "Monitorējiet progresu un iesniegšanas procesus uzreiz"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -152,7 +164,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'nadviazanie' (connection/linking) was incorrectly added, making the sentence nonsensical. It translates to 'Monitor progress and connection of submissions instantly' instead of 'Monitor progress and submissions instantly'.",
+          "suggestion": "Monitorujte pokrok a predloženia okamžite"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -176,7 +194,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'podnošenja' is in the genitive case, which makes the sentence grammatically incorrect and awkward in Serbian. It should be in the accusative case to match 'napredak'.",
+          "suggestion": "Pratite napredak i podneske trenutno"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

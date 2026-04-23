@@ -3,7 +3,7 @@
   "content": "Shared files and folders",
   "content_en_sha1_hash": "8cb552a10fc5a2919fbca9ebc6f9dfb0566bbf62",
   "created_at": "2025-10-03T10:07:00.002Z",
-  "updated_at": "2025-11-13T07:58:08.217Z",
+  "updated_at": "2026-04-09T00:59:14.968Z",
   "comment": {
     "text": "This text labels a checkbox within the \"Settings\" section of the Portal data import process. It indicates whether to import shared files and folders during the import. Translators should ensure the translation accurately reflects the action of importing shared resources.",
     "is_auto": true,

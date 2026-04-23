@@ -3,7 +3,7 @@
   "content": "Private Key",
   "content_en_sha1_hash": "ade5ddaf2557ee93225fc565adbfe1ade3bae3a0",
   "created_at": "2025-05-19T21:30:50.121Z",
-  "updated_at": "2025-05-24T03:16:31.252Z",
+  "updated_at": "2026-04-08T23:10:01.966Z",
   "comment": {
     "text": "This translation key is used for the label \"Private Key\" in a modal window or dialog box where users can add and manage Single Sign-On certificates. It appears as a field name in the UI, prompting users to input their private key details.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Личен ключ' translates to 'Personal key'. In a cryptographic/SSO context, 'Private Key' must be translated as 'Частен ключ'.",
+          "suggestion": "Частен ключ"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -81,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Անձնական բանալի\" is a literal translation of \"Private Key\", it's not the standard or most accurate term used in the context of Single Sign-On. A more appropriate translation would be something like \" մասնավոր բանալի\" (masnavor banali) or \"համակարգի մասնավոր բանալի\" (hamakargi masnavor banali) which convey the technical meaning better.",
-          "suggestion": "Consider \"մասնավոր բանալի\" (masnavor banali) or \"համակարգի մասնավոր բանալի\" (hamakargi masnavor banali)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -126,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Dutch translation 'Privé Sleute' is not the most accurate or common translation for 'Private Key'. A more accurate translation would be 'Private Sleutel'. The word 'Sleutel' is the singular form of 'keys' and is the correct term in this context.",
-          "suggestion": "Private Sleutel"
+          "description": "The Dutch translation 'Privé Sleute' is grammatically incorrect and incomplete; 'Sleute' is not a valid word in Dutch. The correct term for 'Key' in this context is 'sleutel'.",
+          "suggestion": "Privésleutel"
         }
       ],
       "approved_at": null
@@ -159,13 +159,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation includes a colon (:) at the end, which is not present in the English source. This may be unnecessary or impact readability depending on the application's style guide.",
-          "suggestion": "Consider removing the colon (:) at the end: \"Закрытый ключ\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -189,13 +183,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Serbian (Cyrillic) translation uses the word 'кључ' (key) which is the correct transliteration. However, contextually 'Privatni ključ' should be 'Приватни кључ'.",
-          "suggestion": "Приватни кључ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -222,13 +210,19 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Private Key' is more accurately translated as 'Khóa riêng tư' or 'Khóa bí mật cá nhân' rather than just 'Mã bí mật'. 'Mã bí mật' is more commonly used for passwords or codes, not cryptographic keys.",
+          "description": "In the context of SSO certificates and cryptography, 'Private Key' refers to a specific cryptographic component. 'Mã bí mật' translates to 'Secret code', which is too generic and technically inaccurate for a private key field.",
           "suggestion": "Khóa riêng tư"
         }
       ],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "User updated",
   "content_en_sha1_hash": "6a0cc45d2e57ea19072e2ebdd78d91ae9a462f14",
   "created_at": "2025-05-19T21:30:49.863Z",
-  "updated_at": "2025-05-24T02:06:42.284Z",
+  "updated_at": "2026-04-08T19:02:36.410Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a user's information has been updated. It is likely displayed in a UI element such as a button or dialog when a user's profile is edited or updated. Translators should provide a concise and accurate translation for this context.",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Потребителят е актуализиран' literally translates to 'The user is updated,' which is grammatically awkward and doesn't convey the intended meaning of 'User updated' in the context of a webhook.  It implies the user *became* updated, rather than *was* updated.",
-          "suggestion": "Потребител актуализиран"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -63,7 +57,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation 'Ο χρήστης ενημερώθηκε' means 'The user was updated' (passive voice), implying the person themselves was modified. In a UI context for a webhook or status message, it should mean 'User information updated' or simply 'User updated' (referring to the action/entity).",
+          "suggestion": "Ενημέρωση χρήστη"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -75,13 +75,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Käyttäjä päivitetty\" is a literal translation of 'User updated' and doesn't convey the meaning correctly in Finnish. It implies the user *is* updated, rather than that an update *happened* to the user.",
-          "suggestion": "Tarkempi käännös voisi olla 'Käyttäjä tiedot päivitetty' (User data updated) tai 'Käyttäjä päivitetty' (User updated - though less preferable) or 'Käyttäjämuutokset tehty' (User changes made)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -96,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Օգտատերը թարմացված է' literally translates to 'The user is updated'. While understandable, it's not the most natural or idiomatic way to express this in Armenian. A more accurate and common phrasing would convey the action of updating the user.",
-          "suggestion": "Consider 'Օգտատերը թարմացվել է' (Ogtateru tarmacvel e) which means 'The user has been updated' or 'User was updated.'"
+          "description": "The Armenian translation 'Օգտատերը թարմացված է' means 'The user is updated' (describing the state of the user), whereas the English 'User updated' in this context (webhook trigger/notification) means 'User has been updated' or 'User information updated'. The current translation sounds like a description of a person's status rather than an action/event notification.",
+          "suggestion": "Օգտատերը թարմացվել է"
         }
       ],
       "approved_at": null
@@ -117,7 +111,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation '사용자가 업데이트되었습니다' means 'The user has been updated' (passive voice), which implies the user object itself was modified. In the context of a webhook trigger or a status message for 'User updated', it should more accurately reflect that the user's information/profile was updated, or simply 'User updated' as a status. However, the current translation is grammatically a complete sentence describing an event that happened to the user, whereas 'User updated' in UI contexts often refers to the action/status of the entity.",
+          "suggestion": "사용자 업데이트됨"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -141,25 +141,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Zaktualizowano użytkownika\" is understandable, a more natural and commonly used translation for 'User updated' would be 'Użytkownik zaktualizowany'. The current translation implies something was updated *about* the user, whereas the English suggests the user themselves was updated.",
-          "suggestion": "Użytkownik zaktualizowany"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Utilizador atualizado' is understandable, a more natural and common translation of 'User updated' in Portuguese would be 'Utilizador atualizou' or 'Usuário atualizado'. 'Utilizador atualizado' implies the user *is* updated, not that an update *happened* to the user.",
-          "suggestion": "Utilizador atualizou or Usuário atualizado"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -171,49 +159,25 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Utilizatorul a fost actualizat' is a literal translation and doesn't convey the intended meaning of 'User updated' in a webhook context. It sounds passive and awkward.",
-          "suggestion": "A more natural and accurate translation would be 'Utilizator actualizat' or 'Utilizatorul a fost modificat'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Пользователь обновлен\" is technically correct but doesn't quite capture the nuance of 'User updated'. It implies the user *has been* updated, rather than indicating an action of updating. A more accurate translation would convey the action of updating.",
-          "suggestion": "Пользователь был обновлен"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'පරිශීලකයා යාවත්කාලීන කරන ලදී' while technically correct, is quite formal and lengthy for a webhook event name. A more concise and common translation would be more appropriate.",
-          "suggestion": "පරිශීලකයා යාවත්කාලීන"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Používateľ aktualizovaný\" is grammatically correct but doesn't accurately reflect the English phrase \"User updated.\" It's a literal translation that sounds awkward in Slovak. A more natural translation would convey the action of updating the user, not just describe the user as being updated.",
-          "suggestion": "Zmeniť na \"Používateľ bol aktualizovaný\" alebo \"Aktualizácia používateľa\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -222,7 +186,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'osvežen' can mean 'refreshed', in the context of user data updates, 'posodobljen' is a more accurate translation of 'updated'. 'Osvežen' implies a superficial change.",
+          "description": "The Slovenian word 'osvežen' means 'refreshed' (as in a page refresh), whereas the English 'updated' in this context refers to data/information being modified or changed.",
           "suggestion": "Uporabnik posodobljen"
         }
       ],
@@ -231,25 +195,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Корисник ажуриран\" is technically correct but sounds unnatural in Serbian. \"Ажуриран\" implies a technical update rather than a general user update. A more natural translation would emphasize that the user's information has been changed.",
-          "suggestion": "Корисник измењен"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Korisnik ažuriran' is a literal translation of 'User updated'. While understandable, it's not the most natural phrasing in Serbian. It implies the user *is* updated, rather than that an update *occurred* for the user.",
-          "suggestion": "Korisnik je ažuriran"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -271,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

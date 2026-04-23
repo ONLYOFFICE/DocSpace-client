@@ -3,7 +3,7 @@
   "content": "All types supported by {{organizationName}} editors",
   "content_en_sha1_hash": "e88815dbb9850791b79a763a35440577b1498286",
   "created_at": "2025-05-19T21:30:54.362Z",
-  "updated_at": "2026-03-20T09:07:45.590Z",
+  "updated_at": "2026-04-07T19:35:05.126Z",
   "comment": {
     "text": "The translation key \"AllTypesSupportedByEditor\" is used to display a label that indicates all types supported by {{organizationName}} editors. This label appears in a file selector dialog and is intended to provide clarity to users about the editor's capabilities.",
     "is_auto": true,
@@ -27,18 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'جميع الأنواع مدعومة من قبل محرري {{organizationName}}.' is a literal translation and doesn't flow naturally in Arabic. A more natural phrasing would emphasize that the editors *support* all types.",
-          "suggestion": "أنواع مدعومة بالكامل من قبل محرري {{organizationName}}."
-        },
-        {
-          "type": "formatting",
-          "description": "While technically correct, the placement of 'من قبل' (by) is slightly less common and can be improved for a more fluid reading. It's more common to omit it or restructure the sentence.",
-          "suggestion": "أنواع مدعومة من محرري {{organizationName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -50,25 +39,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Всички видове, поддържани от редакторите на {{organizationName}}\" is a literal translation and doesn't flow naturally in Bulgarian. It would be more natural to say something like \"Всички типове, които се поддържат от редакторите на {{organizationName}}\" or \"Всички типове, поддържани от редакторите на {{organizationName}}\".",
-          "suggestion": "Всички типове, които се поддържат от редакторите на {{organizationName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Všechny typy podporované editory {{organizationName}}' is a literal translation but doesn't quite convey the intended meaning in a natural Czech way. It sounds somewhat awkward. The word 'editory' is fine, but the whole phrase could be improved.",
-          "suggestion": "Všechny podporované typy pro editory {{organizationName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -92,18 +69,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Kaikki {{organizationName}}:n editorien tukemat tyypit ' is a literal translation but doesn't flow naturally in Finnish. It's clunky and emphasizes 'supported by' unnecessarily.",
-          "suggestion": "A more natural translation would be something like '{{organizationName}}:n editorien tukemat tyypit kaikki' or 'Kaikki tyypit, joita {{organizationName}}:n editorit tukevat'."
-        },
-        {
-          "type": "formatting",
-          "description": "The colon after '{{organizationName}}' in the Finnish translation creates an awkward reading experience.",
-          "suggestion": "Remove the colon. Consider restructuring the sentence to avoid it altogether, as suggested in the incorrect translation note."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -115,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Բոլոր տեսակներն աջակցվում են {{organizationName}} խմբագիրների կողմից' literally translates to 'All types are supported by the editors of {{organizationName}}'. While not entirely wrong, it's less natural. A more accurate and natural phrasing would convey the meaning of 'All types are supported by {{organizationName}} editors'.",
-          "suggestion": "Բոլոր տեսակները աջակցվում են {{organizationName}} խմբագիրների կողմից կամ Բոլոր տեսակները աջակցվում են {{organizationName}} խմբագիրներից"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -151,13 +111,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Visi {{organizationName}} redaktoru atbalstītie veidi\" doesn't fully capture the meaning of \"All types supported by {{organizationName}} editors.\" A more accurate translation would convey the idea of types *that the editors support*. The current translation implies the types are supported *by* the editors, but the original phrase is intended to mean that the editors can handle all types.",
-          "suggestion": "Visi tipi, kurus atbalsta {{organizationName}} redaktori"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -187,18 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Toate tipuri sunt acceptate de editori {{organizationName}}\" is not the most natural or accurate translation of \"All types supported by {{organizationName}} editors\".  A better translation would convey that the editors support all types.",
-          "suggestion": "Toate tipurile sunt suportate de editorii {{organizationName}}"
-        },
-        {
-          "type": "grammar",
-          "description": "While grammatically correct, 'sunt acceptate' sounds less idiomatic than 'sunt suportate' in this context.",
-          "suggestion": "sunt suportate"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -210,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '{{organizationName}} සංස්කාරකවරුන් විසින් සහාය දක්වන සියලුම වර්ග' doesn't accurately convey the meaning of 'All types supported by {{organizationName}} editors'. The phrase 'සහාය දක්වන' (sahaya dākavan) translates to 'support', while the English implies 'supported' as in, the editors can handle those types. A more accurate translation would emphasize the 'supported' aspect.",
-          "suggestion": "{{organizationName}} සංස්කාරකවරුන් භාවිතා කරන සියලුම වර්ග ({{organizationName}} sanskārakvarun vadata veda siyālum vaga)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -234,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'podržani od strane' is a more verbose and less natural way to say 'supported by' in Serbian. A more concise and common translation would be 'подржани од' or even just 'подржани'.",
-          "suggestion": "Сви типови подржани од {{organizationName}} уређивача"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -264,13 +195,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Tất cả các loại được hỗ trợ bởi trình chỉnh sửa {{organizationName}} ' is a literal translation and lacks natural flow in Vietnamese. A more natural phrasing would be 'Tất cả các kiểu dữ liệu được hỗ trợ bởi trình chỉnh sửa {{organizationName}}' or 'Các kiểu dữ liệu được hỗ trợ bởi trình chỉnh sửa {{organizationName}}'.",
-          "suggestion": "Các kiểu dữ liệu được hỗ trợ bởi trình chỉnh sửa {{organizationName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

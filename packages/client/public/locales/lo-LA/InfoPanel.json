@@ -2,6 +2,7 @@
   "AddedRoomTags": "ຄຳ ແນະ ນຳ ໃສ່ ຕິດ ເພີ່ມ.",
   "Administration": "ບໍລິຫານ",
   "AgentRenamed": "ຕົວແທນ <1>«{{oldRoomTitle}}»</1> ໄດ້ປ່ຽນຊື່ເປັນ <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "ເບິ່ງລາຍລະອຽດຂອງ {{aiAgents}} ທີ່ນີ້",
   "AndMoreLabel": "ແລະ <1>{{count}} ເພີ່ມເຕີມ</1>",
   "CreationDate": "ວັນທີສ້າງ",
   "Data": "ຂໍ້ມູນ",
@@ -60,11 +61,14 @@
   "IndexChanged": "ຕົວຊີ້ບອກປ່ຽນແລ້ວ",
   "ItemsSelected": "ລາຍການທີ່ເລືອກ",
   "LastModifiedBy": "ດັດແກ້ຫຼ້າສຸດໂດຍ",
+  "LastUpdateInfo": "ອັບເດດລ່າສຸດ",
   "LifetimeEnds": "ຊີວິດສິ້ນສຸດ",
   "MembersEmptyScreenText": "ເບິ່ງລາຍລະອຽດສະມາຊິກຢູ່ທີ່ນີ້",
+  "NoAgent": "ບໍ່ມີ {{aiAgent}}",
   "NoRecordsFound": "ບໍ່ພົບຂໍ້ມູນໃດໆ",
   "Properties": "ຄຸນສົມບັດ",
   "Resolution": "ຄວາມລະອຽດ",
+  "RoomChangeOwner": "ເຈົ້າຂອງຫ້ອງປ່ຽນແປງ.",
   "RoomCreateUserCount": "ຜູ້ໃຊ້ເພີ່ມເຕີມ ({{count}}).",
   "RoomDenyDownloadDisabled": "ດາວໂຫຼດ ແລະ ກ໊ອບີ້ແບບບໍ່ຈຳກັດ",
   "RoomDenyDownloadEnabled": "ດາວໂຫຼດ ແລະ ກ໊ອບເຜີຍ ສ່ວນທີ່ຖືກຈຳກັດ",
@@ -98,6 +102,5 @@
   "SubmenuHistory": "ປະຫວັດ",
   "UserFileUpdated": "ເອກະສານຖືກປັບປຸງແລ້ວ.",
   "Users": "ຜູ້ໃຊ້",
-  "Versions": "ຮຸ່ນ",
-  "LastUpdateInfo": "ອັບເດດລ່າສຸດ"
+  "Versions": "ຮຸ່ນ"
 }

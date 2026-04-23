@@ -3,7 +3,7 @@
   "content": "Read more",
   "content_en_sha1_hash": "ad086cf55b834c375e209972840f1342401d8c41",
   "created_at": "2025-05-19T21:30:49.786Z",
-  "updated_at": "2025-08-04T07:30:01.466Z",
+  "updated_at": "2026-04-08T19:40:36.861Z",
   "comment": {
     "text": "This translation key is used to display a label for a link that indicates users should \"Read more\" when viewing content. It typically appears as a button or hyperlink in UI contexts where more information is available but not displayed by default, such as in documentation or settings pages.",
     "is_auto": true,
@@ -123,31 +123,25 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The translation 'Więcej' means 'More', omitting the verb 'Read' (Czytaj). While common in UI, it does not fully convey the 'Read more' meaning.",
+          "suggestion": "Czytaj więcej"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Consulte Mais informação\" is understandable, it's a rather formal and less idiomatic translation of 'Read more'. A more natural and common translation would be something like 'Saiba Mais' or 'Leia Mais'.",
-          "suggestion": "Saiba Mais"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Consulte Mais informação\" is understandable, it's not the most natural or idiomatic translation for \"Read more\" in Brazilian Portuguese. It's a bit formal and literal.",
-          "suggestion": "Saiba Mais"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -211,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

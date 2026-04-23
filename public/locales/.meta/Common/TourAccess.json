@@ -3,7 +3,7 @@
   "content": "Manage who can access this forms room. Add Form Admins and Form Managers to control permissions.",
   "content_en_sha1_hash": "078fcc4c3542bc262bcd04cb949d8d84b3073446",
   "created_at": "2026-03-31T15:18:26.607Z",
-  "updated_at": "2026-03-31T15:18:26.607Z",
+  "updated_at": "2026-04-07T21:27:55.410Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -38,7 +38,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation uses the dative case ('Přidejte administrátorům...') which means 'Add TO the admins', whereas the English 'Add Form Admins' implies adding the users themselves to the role (accusative case).",
+          "suggestion": "Spravujte, kdo může přistupovat do této sekce formulářů. Přidejte administrátory formulářů a manažery formulářů, abyste mohli kontrolovat oprávnění."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -62,7 +68,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The terms 'Form Admins' and 'Form Managers' are translated as 'lomakehallintoja' (form administrations) and 'lomakehoitajia' (form nurses/caretakers), which is semantically incorrect for user roles.",
+          "suggestion": "Hallinnoi, kenellä on pääsy tähän lomakkeiden tilaan. Lisää lomakeylläpitäjiä ja lomakkeiden hallinnoijia hallitsemaan käyttöoikeuksia."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -104,7 +116,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Paprāti' means 'informally' or 'on the fly' in Latvian, which is a mistranslation of 'Manage'. The correct verb for managing/controlling is 'Vadīt' or 'Pārvaldīt'.",
+          "suggestion": "Vadiet, kurš var piekļūt šai formu telpai. Pievienojiet Form Admins un Form Managers, lai kontrolētu atļaujas."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -170,7 +188,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Управляujte' is a non-existent word in Serbian (likely a direct calque from English 'Manage'). Additionally, 'ове форме простор' is grammatically incorrect and nonsensical in Serbian.",
+          "suggestion": "Управљајте тим ко може да приступи овом простору форма. Додајте администраторе форма и менаџере форма како бисте контролисали дозволе."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -182,7 +206,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation repeats 'Form Yöneticilerini' twice, failing to distinguish between 'Form Admins' and 'Form Managers'.",
+          "suggestion": "Bu form alanına kimlerin erişebileceğini yönetin. İzinleri kontrol etmek için Form Yöneticilerini ve Form Düzenleyicilerini ekleyin."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

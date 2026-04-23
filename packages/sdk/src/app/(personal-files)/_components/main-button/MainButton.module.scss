@@ -1,0 +1,18 @@
+@use "@docspace/ui-kit/styles/mixins";
+
+.mainButtonWrapper {
+	padding: 0 20px 16px;
+	max-width: 100%;
+}
+
+.mobileButton {
+	position: fixed;
+	z-index: 200;
+	inset-inline-end: 24px;
+	bottom: 24px;
+
+	@include mixins.mobile {
+		inset-inline-end: 16px;
+		bottom: 16px;
+	}
+}

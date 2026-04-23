@@ -3,7 +3,7 @@
   "content": "Change Logo",
   "content_en_sha1_hash": "71fe1b5c775dc620d259a03165596a8d06a2c87c",
   "created_at": "2025-05-26T07:15:41.148Z",
-  "updated_at": "2026-02-19T13:36:33.167Z",
+  "updated_at": "2026-04-08T15:43:51.980Z",
   "comment": {
     "text": "The translation key \"ChangeLogoButton\" is used to display a button label that allows users to change their logo. It appears as a text input in the UI and is located on the branding settings page, enabling users to update their logo image.",
     "is_auto": true,
@@ -307,6 +307,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

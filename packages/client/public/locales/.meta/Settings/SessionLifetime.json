@@ -3,7 +3,7 @@
   "content": "Session Lifetime",
   "content_en_sha1_hash": "7ccf450db4f16d0c0261e57e956afbad34c6eb8f",
   "created_at": "2025-05-19T21:30:52.636Z",
-  "updated_at": "2026-03-26T08:26:58.261Z",
+  "updated_at": "2026-04-09T01:10:05.374Z",
   "comment": {
     "text": "The SessionLifetime translation key is used to display the duration for which a user's session will be active. It appears in the mobile view of the PortalSettings page as the title and subtitle of a category, providing context for users when accessing settings related to security features.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 238,
+      "line_number": 255,
       "context": "{\n id: \"portal-settings_catalog-session-life-time\",\n key: \"1-0-8\",\n icon: \"\",\n link: \"lifetime\",\n tKey: \"SessionLifetime\",\n },\n ],\n },\n {\n id: \"portal-settings_catalog-access-rights\",",
       "module": "/packages/client"
     }
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເຊດຊັນຕະຫຼອດຊີວິດ\" literally translates to \"Session throughout life.\" This doesn't accurately convey the meaning of \"Session Lifetime,\" which refers to the duration a session lasts.",
-          "suggestion": "A more accurate translation would be something along the lines of \"ໄລຍະເວລາຂອງເຊດຊັນ\" (lai ya we la khong session) which means 'Session duration' or \"ເວລາໃຊ້ງານເຊດຊັນ\" (we la chai ngan session) which means 'Session usage time'."
+          "description": "The Lao translation 'ເຊດຊັນຕະຫຼອດຊີວິດ' literally means 'Session for the whole life' or 'Lifetime session' (as in biological life), which is a mistranslation of the technical term 'Session Lifetime' (the duration/period of a session).",
+          "suggestion": "ໄລຍະເວລາຂອງເຊດຊັນ"
         }
       ],
       "approved_at": null
@@ -159,13 +159,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation \"Durata de expirare a sesiunii \" is a literal translation that doesn't quite capture the meaning of \"Session Lifetime\". It translates to \"Session expiration duration\". A more natural Romanian translation would be something like \"Durata sesiunii\" or \"Durata valabilității sesiunii\".",
-          "suggestion": "Durata sesiunii"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -180,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"වාරයේ ආයුකාලය\" (waaraye aayukaalaya) is understandable, it's a very literal translation of 'Lifetime'. A more natural and commonly used translation for 'Session Lifetime' in a technical context would be something like \"සෙසියන් කාලසීමාව\" (sesiyan kaalasimaawa) or \"කාලසීමාව\" (kaalasimaawa) depending on the desired level of formality.",
-          "suggestion": "Consider using \"සෙසියන් කාලසීමාව\" (sesiyan kaalasimaawa) or \"කාලසීමාව\" (kaalasimaawa)."
+          "description": "The word 'වාරයේ' (Vārayē) refers to a 'turn' or 'round' (like a turn in a game), whereas 'Session' in a technical/software context refers to a user session (සැසය/සබඳතාවය).",
+          "suggestion": "සැසයෙහි ආයුකාලය"
         }
       ],
       "approved_at": null
@@ -198,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovenian translation \"Tempo da sessão\" is Portuguese, not Slovenian. \"Session Lifetime\" should be translated to Slovenian.",
-          "suggestion": "Trajanje seje"
+          "description": "The translation 'Tempo da sessão' is in Portuguese, not Slovenian. Additionally, 'tempo da sessão' means 'session time' in a general sense, whereas 'Session Lifetime' in a security context refers to the duration/validity period.",
+          "suggestion": "Trajanje seznana"
         }
       ],
       "approved_at": null
@@ -235,6 +229,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

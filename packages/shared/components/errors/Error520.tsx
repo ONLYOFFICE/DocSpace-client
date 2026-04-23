@@ -56,7 +56,7 @@ const Error520 = ({
     const reportWithDescription = Object.assign(report, {
       description: "AUTO SEND",
     });
-    await firebaseHelper.sendCrashReport(reportWithDescription);
+    await firebaseHelper?.sendCrashReport(reportWithDescription);
   };
 
   useEffect(() => {

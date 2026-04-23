@@ -3,7 +3,7 @@
   "content": "Head of group",
   "content_en_sha1_hash": "b90a369c4ac1fd6c6e346e3e7ad26070e42c2ccc",
   "created_at": "2025-05-19T21:30:45.746Z",
-  "updated_at": "2026-02-19T13:36:32.383Z",
+  "updated_at": "2026-04-08T07:06:48.485Z",
   "comment": {
     "text": "The translation key \"HeadOfGroup\" is used to display the English content \"Head of group\". It appears in a header component within a dialogue window, indicating who the user is managing groups. Translators should provide an equivalent phrase that accurately conveys this meaning in their respective language.",
     "is_auto": true,
@@ -111,13 +111,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation 'グループ代表' (group daihyo) translates to 'group representative' or 'group leader', not directly 'Head of group'. While close in meaning, it lacks the nuance of 'Head'.",
-          "suggestion": "Consider 'グループ長' (group chou) which more closely aligns with 'Head of group' signifying the person in charge."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -195,25 +189,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Лидер групе\" while containing the correct concepts, is not the most natural or idiomatic translation of \"Head of group\" in Serbian. \"Лидер групе\" implies the leader *of* a group, but doesn't perfectly capture the directness of 'Head of group'. A more accurate translation would consider alternatives.",
-          "suggestion": "Consider alternatives like \"Вођа групе\" or \"Начелник групе\" depending on the specific context and desired formality."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Lider grupe' is understandable, a more accurate and idiomatic translation of 'Head of group' in Serbian (Latin) would be 'Vođa grupe'. 'Lider' is a loanword and might not be the most natural choice.",
-          "suggestion": "Vođa grupe"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -235,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "Completed submissions",
   "content_en_sha1_hash": "1fd53940677c024b1bb98327953b52df8c3ec2c8",
   "created_at": "2026-03-31T15:18:26.702Z",
-  "updated_at": "2026-03-31T15:18:26.702Z",
+  "updated_at": "2026-04-07T21:20:02.709Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -26,7 +26,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Təqdim edilmiş tamamlanmışlar' is grammatically incorrect and semantically awkward. It literally translates to 'Submitted completed ones', which does not convey the meaning of 'Completed submissions' (finished forms/entries).",
+          "suggestion": "Tamamlanmış müraciətlər"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -38,7 +44,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation uses the singular form 'odeslání' (submission/sending), whereas the English text uses the plural 'submissions'.",
+          "suggestion": "Dokončená odeslání"
+        }
+      ],
       "approved_at": null
     },
     "de": {

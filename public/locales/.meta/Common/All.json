@@ -3,7 +3,7 @@
   "content": "All",
   "content_en_sha1_hash": "6a72085653e4c5be8c7640c868ef787cbcf063d1",
   "created_at": "2025-05-19T21:30:42.972Z",
-  "updated_at": "2026-03-31T15:18:46.222Z",
+  "updated_at": "2026-04-08T17:15:17.076Z",
   "comment": {
     "text": "This translation key displays the text \"All\" as a category label in a list or dropdown, likely used in settings or permission management screens. It appears when all permissions or options are selected.",
     "is_auto": true,
@@ -147,13 +147,25 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Wszystko' means 'Everything'. In the context of a category label or filter (e.g., 'All permissions', 'All users'), the correct Polish term is 'Wszystkie' or 'Wszystko' depending on gender, but 'Wszystko' is generally used for 'everything' (objects/concepts), whereas 'Wszystkie' is used for 'all' (plural items/categories). Given the context of tabs and permissions, 'Wszystkie' is the standard UI translation.",
+          "suggestion": "Wszystkie"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Tudo' means 'Everything' (referring to objects/things), whereas in the context of categories, tabs, or permissions (e.g., 'All', 'Restricted'), the correct term is 'Todos' (referring to items/people/options).",
+          "suggestion": "Todos"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -223,6 +235,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "State",
   "content_en_sha1_hash": "a72502067518684f9deeec70cf119fd26326cd33",
   "created_at": "2025-05-19T21:30:49.847Z",
-  "updated_at": "2026-02-19T13:36:32.749Z",
+  "updated_at": "2026-04-08T19:09:09.640Z",
   "comment": {
     "text": "This translation key represents the label for a table header column that displays information about API keys or webhooks in a developer tool. The key is used to render the English word \"State\" as displayed on-screen in various UI components.",
     "is_auto": true,
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech word 'Stát' translates to 'State' or 'Country' in English, not 'State' in the context of a webhook state (e.g., 'pending', 'success', 'failed'). A more appropriate translation would depend on the specific meaning of 'State' in the original English.",
-          "suggestion": "Consider alternatives like 'Stav' (condition), 'Status' (borrowed word), or a more descriptive phrase based on the specific states being represented."
+          "description": "The Czech word 'Stát' means 'a country/nation' or 'to stand'. In the context of a table header for API keys or webhooks, 'State' refers to the status or condition of an object (e.g., active, inactive).",
+          "suggestion": "Stav"
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Պետություն\" (Petut'yun) typically refers to a nation-state or country, not the technical term 'State' as in 'Webhooks:State' which likely refers to a status or condition.  A more appropriate translation would depend on the precise context of 'State' in webhooks, but it's likely something along the lines of 'չափավարություն' (chaph'avarut'yun - status/condition) or 'վիճակ' (vichak - state/condition).",
-          "suggestion": "Consider 'չափավարություն' or 'վիճակ' based on the context of 'Webhooks:State'."
+          "description": "The Armenian translation 'Պետություն' means 'Nation' or 'State' in a political/governmental sense. In the context of a table header for API keys or webhooks, 'State' refers to the status or condition of an object (e.g., Active, Inactive).",
+          "suggestion": "Վիճակ"
         }
       ],
       "approved_at": null
@@ -129,7 +129,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ລັດ' means 'State' in the sense of a nation or country (e.g., a sovereign state). In the context of a UI table header for API keys or webhooks, 'State' refers to the status or condition of an object (e.g., Active, Inactive).",
+          "suggestion": "ສະຖານະ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -138,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation 'Valsts' generally translates to 'State' in the political or national sense, not the technical 'State' as in the context of a webhook's state (e.g., pending, active, failed).",
-          "suggestion": "Consider alternatives like 'Stāvoklis' (status/condition) or 'Situācija' (situation) which better capture the technical meaning of 'State' in a webhook context."
+          "description": "The English word 'State' in this context refers to the status or condition of an object (e.g., active, inactive, pending), whereas the Latvian translation 'Valsts' means 'a nation/country'.",
+          "suggestion": "Stāvoklis"
         }
       ],
       "approved_at": null
@@ -156,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Polish translation \"Województwo\" translates to \"Province\" or \"Voivodeship,\" which doesn't accurately reflect the English term \"State\" in the context of webhooks. \"State\" in this context likely refers to the status or condition of a webhook (e.g., active, inactive, pending).",
-          "suggestion": "A more appropriate translation might be \"Stan\" (which can mean 'state' or 'condition') or \"Status\" (borrowed directly, and commonly used in Polish IT contexts)."
+          "description": "The English word 'State' in the context of API keys/webhooks refers to the status or condition of an object (e.g., active, inactive). The Polish translation 'Województwo' means a 'Province' or 'Voivodeship' (administrative division), which is completely incorrect for a technical status field.",
+          "suggestion": "Stan"
         }
       ],
       "approved_at": null
@@ -192,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"තත්‍වය\" (thathwaya) primarily means \"truth\" or \"reality.\" While it can have a sense of verification or state in certain contexts, it's not the most accurate translation for \"State\" in the context of Webhooks. \"State\" here likely refers to the status or condition of a webhook, such as 'pending', 'active', or 'failed'.",
-          "suggestion": "Consider alternatives like \"స్థితి\" (sthithi - in some contexts, although needs proper context validation) or a descriptive phrase depending on the desired nuance. A more accurate translation requires deeper understanding of the webhook's 'State' meaning in this specific application."
+          "description": "The Sinhala word 'තත්‍වය' (Tatvaya) means 'essence', 'principle', or 'element' in a philosophical or scientific sense. In the context of a UI table header for API keys or webhooks, 'State' refers to the current status or condition (e.g., Active, Inactive).",
+          "suggestion": "තත්ත්වය"
         }
       ],
       "approved_at": null
@@ -210,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Država\" (State/Country) doesn't accurately reflect the English term \"State\" in the context of webhooks. \"State\" in this context refers to the status or condition of a webhook (e.g., active, inactive, pending).",
-          "suggestion": "A more appropriate translation would be \"Stanje\" which means 'status' or 'condition'."
+          "description": "The translation 'Država' means 'Country' or 'Nation'. In the context of a developer tool (API keys/webhooks), 'State' refers to the status or condition of an object (e.g., Active, Inactive).",
+          "suggestion": "Stanje"
         }
       ],
       "approved_at": null
@@ -250,6 +256,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Albanian translation 'Shtetit' is in the dative/genitive case (meaning 'to the state' or 'of the state'). For a UI table header label, the nominative case 'Gjendja' (meaning 'Status/State') or 'Shteti' (meaning 'State/Nation') should be used depending on the specific context. Given the context of API keys/webhooks, 'State' refers to 'Status', which is 'Gjendja' in Albanian.",
+          "suggestion": "Gjendja"
+        }
+      ],
       "approved_at": null
     }
   }

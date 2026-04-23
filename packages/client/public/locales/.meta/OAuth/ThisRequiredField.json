@@ -3,7 +3,7 @@
   "content": "This is a required field",
   "content_en_sha1_hash": "8b9935b76dee8b4f3542cbeb70533edc0011464f",
   "created_at": "2025-05-19T21:30:54.058Z",
-  "updated_at": "2026-03-26T08:26:58.112Z",
+  "updated_at": "2026-04-07T19:35:05.168Z",
   "comment": {
     "text": "\"This is a required field\" is a notification that appears when a user attempts to submit the form without filling in the \"name\" field. It indicates that this field is mandatory and must be completed before proceeding. This message is displayed in an input group element within forms.",
     "is_auto": true,
@@ -159,13 +159,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation 'Dane pole jest wymagane' is not a natural or accurate translation of 'This is a required field'. It's grammatically awkward and doesn't convey the meaning correctly. 'Dane' translates to 'data', 'pole' to 'field', and 'jest wymagane' to 'is required'. It's an overly literal and incorrect rendering.",
-          "suggestion": "A more appropriate translation would be 'To pole jest obowiązkowe' or 'Wypełnienie tego pola jest wymagane'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -195,18 +189,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While the translation is understandable, 'ක්ෂේත්‍රයක් වේ' is a bit formal and indirect for a required field message. A more common and natural phrasing would be more appropriate.",
-          "suggestion": "මෙය අවශ්‍යයි (Meya avashyayi) - This is necessary."
-        },
-        {
-          "type": "formatting",
-          "description": "The translation contains a period at the end, which is a standard practice, however, depending on the UI context, it might be better to remove it for consistent styling.",
-          "suggestion": "මෙය අවශ්‍ය ක්ෂේත්‍රයක් වේ (without the period)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

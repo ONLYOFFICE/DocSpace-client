@@ -3,7 +3,7 @@
   "content": "Connection URL",
   "content_en_sha1_hash": "22b85b6a5b0bef41e8b971f0d7606df9f534107e",
   "created_at": "2025-05-26T07:15:41.520Z",
-  "updated_at": "2026-02-19T13:36:33.141Z",
+  "updated_at": "2026-04-08T14:38:40.201Z",
   "comment": {
     "text": "This translation key is used to display the connection URL label in a dialogue box, providing users with clear information about the required field. It appears as a label above a text input field, guiding users to enter a valid connection URL.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'رابط الصلة' is a literal and awkward translation of 'Connection URL'. In a technical context, 'رابط الاتصال' is the standard and correct term for a connection URL.",
+          "suggestion": "رابط الاتصال"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -111,7 +117,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'vietrādis' is a misspelling or incorrect form of 'vietne' (website) or 'adrese' (address). In Latvian, 'Connection URL' is typically translated as 'Savienojuma URL'.",
+          "suggestion": "Savienojuma URL"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -153,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation uses 'ඒ.ස.නි.' which is an abbreviation for 'ඇතුළත් කළ යුතු නම' (Name to be entered) or similar, rather than 'URL'. In a technical context, 'URL' should be transliterated or kept as 'URL' to ensure user understanding.",
+          "suggestion": "සම්බන්ධතා URL එක"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -199,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

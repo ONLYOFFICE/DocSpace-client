@@ -3,7 +3,7 @@
   "content": "Enable SSL verification",
   "content_en_sha1_hash": "b1de2c8be8ca70dc18509559f44e4759b65a0684",
   "created_at": "2025-05-19T21:30:49.698Z",
-  "updated_at": "2025-05-24T02:29:44.108Z",
+  "updated_at": "2026-04-08T20:25:46.652Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -192,6 +192,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

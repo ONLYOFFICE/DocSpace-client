@@ -3,7 +3,7 @@
   "content": "People",
   "content_en_sha1_hash": "b37554f695b15005fd23907b9488e0a8ad4bca5f",
   "created_at": "2025-05-19T21:30:47.324Z",
-  "updated_at": "2025-10-03T10:07:11.719Z",
+  "updated_at": "2026-04-08T02:49:14.718Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"People\" in various contexts throughout the application, such as step names and export details. It appears in a workspace settings component, indicating it likely refers to user or employee information.",
     "is_auto": true,
@@ -93,13 +93,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation \"方々\" (kata kata) translates to \"places\", \"various places\", or \"around\", not \"people\". It doesn't accurately convey the meaning of \"People\".",
-          "suggestion": "A more appropriate translation for \"People\" would depend on the context. Possible suggestions include: 人々 (hitobito - people), 住民 (jūmin - residents), or simply 人 (hito - person)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -205,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

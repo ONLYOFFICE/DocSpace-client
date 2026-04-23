@@ -3,7 +3,7 @@
   "content": "The destination already contains files and folders with the same name.",
   "content_en_sha1_hash": "c342c02419e200d1d798c694ecfc21ddc3b9d5a4",
   "created_at": "2025-05-19T21:30:45.288Z",
-  "updated_at": "2026-02-19T13:36:32.368Z",
+  "updated_at": "2026-04-08T09:34:21.811Z",
   "comment": {
     "text": "This translation key is used to display a message when a user attempts to add files or folders to a destination that already contains items with the same name. It appears in a conflict resolution dialog box, indicating that an overwrite option may be available.",
     "is_auto": true,
@@ -93,42 +93,19 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'コピー先に同じ名前のファイルとフォルダが既に存在します。' is a literal translation, but could be more natural in Japanese. A more common and user-friendly phrasing would be 'コピー先に同じ名前のファイルやフォルダがあります。'",
-          "suggestion": "コピー先に同じ名前のファイルやフォルダがあります。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '목표에 이미 같은 이름의 파일과 폴더가 있습니다.' while understandable, is not the most natural phrasing. '목표' (goal/target) isn't the best choice for 'destination' in this context. It implies a final goal, rather than a location.",
-          "suggestion": "대상 위치에 이미 같은 이름의 파일과 폴더가 있습니다."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ຈຸດຫມາຍປັດຈຸບັນມີແລ້ວບັນຈຸເອກະສານແລະໂຟນເດີທີ່ມີຊື່ດຽວກັນ' is a literal translation but sounds awkward. A more natural phrasing might be 'ຈຸດໝາຍປ້າຍນີ້ມີເອກະສານ ແລະ ໂຟນເດີທີ່ມີຊື່ດຽວກັນຢູ່ແລ້ວ' or 'ມີເອກະສານ ແລະ ໂຟນເດີທີ່ມີຊື່ດຽວກັນຢູ່ແລ້ວໃນຈຸດໝາຍປ້າຍນີ້'.",
-          "suggestion": "ຈຸດຫມາຍປ້າຍນີ້ມີເອກະສານ ແລະ ໂຟນເດີທີ່ມີຊື່ດຽວກັນຢູ່ແລ້ວ"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of 'ແລະ' twice is a bit clunky. Combining 'ເອກະສານແລະໂຟນເດີ' into a single term might be preferable in a more formal context.",
-          "suggestion": "ຈຸດຫມາຍປ້າຍນີ້ມີເອກະສານແລະໂຟນເດີທີ່ມີຊື່ດຽວກັນຢູ່ແລ້ວ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -176,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ෆෝල්ඩර' (folder) is misspelled. The correct spelling is 'ෆෝල්ඩර්'.",
-          "suggestion": "ෆෝල්ඩර්"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -200,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'фолдере' is a slightly awkward wording. While technically correct, 'фасцикле' or 'чаршије' might be more natural in this context, depending on the intended tone. 'Фолдре' is acceptable, but potentially not ideal for a more formal tone.",
-          "suggestion": "Consider using 'фасцикле' or 'чаршије' instead of 'фолдере'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -234,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

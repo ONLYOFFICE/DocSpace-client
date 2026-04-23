@@ -40,13 +40,15 @@ type FormRoomBlockProps = {
   setRoomParams: (params: Record<string, unknown>) => void;
   isDisabled?: boolean;
   hasDatabaseConnection?: boolean;
+  isRoomAdmin?: boolean;
 };
 
 const FormRoomBlock = ({
   t,
   roomParams,
-  setRoomParams,
   isDisabled,
+  isRoomAdmin,
+  setRoomParams,
   hasDatabaseConnection,
 }: FormRoomBlockProps) => {
   const onSaveFormAsXLSXChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,17 +77,19 @@ const FormRoomBlock = ({
         onCheckedChange={onSaveFormAsXLSXChange}
         isDisabled={isDisabled}
       />
-
       <ToggleParam
         id="send-form-to-external-db"
         title={t("Common:ExportResultsToDatabase")}
         description={t("Common:ExportResultsToDatabaseDescription")}
         isChecked={roomParams.sendFormToExternalDB || false}
         onCheckedChange={onSendFormToExternalDBChange}
-        isDisabled={isDisabled}
+        isDisabled={isDisabled || !hasDatabaseConnection}
       />
-
-      <IntegrationBar t={t} hasDatabaseConnection={hasDatabaseConnection} />
+      <IntegrationBar
+        t={t}
+        isRoomAdmin={isRoomAdmin}
+        hasDatabaseConnection={hasDatabaseConnection}
+      />
     </div>
   );
 };

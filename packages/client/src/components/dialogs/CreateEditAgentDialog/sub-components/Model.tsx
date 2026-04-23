@@ -52,14 +52,12 @@ import { ProviderType } from "@docspace/shared/api/ai/enums";
 
 type ModelSettingsProps = {
   agentParams: TAgentParams;
-  modelAliases?: TAIConfig["modelAliases"];
   systemAiEnabled?: TAIConfig["systemAiEnabled"];
   setAgentParams: (value: Partial<TAgentParams>) => void;
 };
 
 const ModelSettings = ({
   agentParams,
-  modelAliases,
   systemAiEnabled,
   setAgentParams,
 }: ModelSettingsProps) => {
@@ -85,6 +83,9 @@ const ModelSettings = ({
 
   const [isProvidersLoading, setIsProvidersLoading] = React.useState(false);
   const [isProvidersFetched, setIsProvidersFetched] = React.useState(false);
+  const [isModelsLoading, setIsModelsLoading] = React.useState(false);
+  const [hasProviderBeenSwitched, setHasProviderBeenSwitched] =
+    React.useState(false);
 
   const prevSelectedModel = React.useRef<TModel | null>(null);
 
@@ -239,11 +240,14 @@ const ModelSettings = ({
 
         setSelectedModel(preferredModel);
       }
+      setIsModelsLoading(false);
       return;
     }
 
     setSelectedModel(null);
-    fetchModels();
+    fetchModels().finally(() => {
+      setIsModelsLoading(false);
+    });
   }, [selectedProvider?.id]);
 
   const providerOptions = React.useMemo(() => {
@@ -276,6 +280,8 @@ const ModelSettings = ({
       setSelectedProvider(provider);
       setSelectedModel(null);
       setError(null);
+      setIsModelsLoading(true);
+      setHasProviderBeenSwitched(true);
     },
     [providers, selectedProvider.id],
   );
@@ -284,22 +290,22 @@ const ModelSettings = ({
     return models.map((model) => ({
       key: model.modelId,
       value: model.modelId,
-      label: modelAliases?.[model.modelId] ?? model.modelId,
+      label: model.alias ?? model.modelId,
     }));
-  }, [models, modelAliases]);
+  }, [models]);
 
   const modelSelectedOptions = React.useMemo(() => {
     return selectedModel
       ? {
           key: selectedModel.modelId,
           value: selectedModel.modelId,
-          label: modelAliases?.[selectedModel.modelId] ?? selectedModel.modelId,
+          label: selectedModel.alias ?? selectedModel.modelId,
         }
       : {
           key: "empty-selected-option",
-          label: t("Common:NoModelsFound"),
+          label: isModelsLoading ? "" : t("Common:NoModelsFound"),
         };
-  }, [selectedModel, modelAliases, t]);
+  }, [selectedModel, isModelsLoading, t]);
 
   const onSelectModel = React.useCallback(
     (option: TOption) => {
@@ -336,6 +342,10 @@ const ModelSettings = ({
 
     prevSelectedModel.current = selectedModel;
   }, [selectedModel, setAgentParams, error]);
+
+  const isModelLoading =
+    isModelsLoading ||
+    (!selectedModel?.modelId && !error && !hasProviderBeenSwitched);
 
   return (
     <StyledParam increaseGap>
@@ -400,24 +410,21 @@ const ModelSettings = ({
             />
           </FieldContainer>
         )}
-        {!selectedModel && !error ? (
-          <RectangleSkeleton width="100%" height="32px" />
-        ) : (
-          <ComboBox
-            options={modelOptions}
-            selectedOption={modelSelectedOptions}
-            onSelect={onSelectModel}
-            scaled
-            scaledOptions
-            dropDownMaxHeight={modelOptions.length > 7 ? 300 : undefined}
-            isDefaultMode
-            className="ai-combobox"
-            displaySelectedOption
-            dropDownClassName="not-selectable"
-            isDisabled={!!error}
-            dataTestId="create_agent_model_combobox"
-          />
-        )}
+        <ComboBox
+          options={modelOptions}
+          selectedOption={modelSelectedOptions}
+          onSelect={onSelectModel}
+          scaled
+          scaledOptions
+          dropDownMaxHeight={modelOptions.length > 7 ? 300 : undefined}
+          isDefaultMode
+          className="ai-combobox"
+          displaySelectedOption
+          dropDownClassName="not-selectable"
+          isDisabled={!!error || isModelLoading}
+          isLoading={isModelLoading}
+          dataTestId="create_agent_model_combobox"
+        />
       </div>
     </StyledParam>
   );

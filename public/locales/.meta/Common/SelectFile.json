@@ -3,7 +3,7 @@
   "content": "Select file",
   "content_en_sha1_hash": "63f72dce85635b76fe31d3931ae500471aa30d71",
   "created_at": "2025-05-19T21:30:48.410Z",
-  "updated_at": "2026-03-31T15:18:46.111Z",
+  "updated_at": "2026-04-07T23:49:25.520Z",
   "comment": {
     "text": "This translation key is used to display the label for a file selection action, appearing as \"Select File\" in various UI elements such as buttons or dialogs. It is part of a set of translations related to file management and appears on the FilesSelector component.",
     "is_auto": true,
@@ -207,13 +207,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Selectare fișier' isn't the most natural or idiomatic translation of 'Select file'. While technically correct, it sounds somewhat formal and awkward. A more common and natural translation would be 'Alege fișier' or 'Selectează fișier'.",
-          "suggestion": "Alege fișier"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -243,13 +237,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Изабери датотеку' while technically understandable, is not the most natural or idiomatic translation of 'Select file' in Serbian (Cyrillic). A more common and preferred translation would be 'Избери датотеку'.",
-          "suggestion": "Избери датотеку"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -261,13 +249,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Dosya Seç' is a literal word-for-word translation but sounds awkward and isn't the most natural way to say 'Select file' in Turkish. It lacks a grammatical connector.",
-          "suggestion": "Dosya seçin"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -283,6 +265,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "The user status was successfully changed",
   "content_en_sha1_hash": "5a045d1563039d47bcc45200906a8f30b72d2afc",
   "created_at": "2025-05-19T21:30:53.521Z",
-  "updated_at": "2025-08-04T07:30:01.061Z",
+  "updated_at": "2026-04-09T07:23:14.452Z",
   "comment": {
     "text": "This translation key is used to display a success message when a user's status is successfully changed. It appears in a notification toast when the \"Change User Status\" dialog is closed, and its content may vary depending on whether the action affects a guest or an actual user.",
     "is_auto": true,
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'පරිශ්‍රීලකයාගේ තත්‍වය වෙනස් කෙරිණි' doesn't accurately convey the meaning of 'The user status was successfully changed.' 'තත්‍වය' is incorrect here. 'තත්වය' or 'స్థితి' would be more appropriate.",
-          "suggestion": "පරිශ්‍රීලකයාගේ ಸ್ಥිතිය වෙනස් කෙරිණි"
+          "description": "The word 'පරිශ්‍රීලකයාගේ' (parishrilakayage) is a misspelling/incorrect derivation of 'පරිශීලකයාගේ' (parishilakayage - user's). Additionally, 'තත්‍වය' (thathwaya) means 'essence' or 'principle' rather than 'status' (තත්ත්වය - thaththwaya).",
+          "suggestion": "පරිශීලකයාගේ තත්ත්වය සාර්ථකව වෙනස් කරන ලදී"
         }
       ],
       "approved_at": null
@@ -205,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "Sales department request",
   "content_en_sha1_hash": "0e3ac6e1bce337108997dca6f6f3b9a728a8e578",
   "created_at": "2025-05-19T21:30:53.281Z",
-  "updated_at": "2026-02-19T13:36:32.454Z",
+  "updated_at": "2026-04-09T06:46:04.524Z",
   "comment": {
     "text": "This translation key is used for the \"Sales department request\" text that appears in a dialogue box, specifically in the SalesDepartmentRequestDialog component where users can submit requests. The text is intended to provide clear context for the user's action.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Satış şöbəsinə müraciət\" is understandable, it's a slightly literal translation. A more natural and idiomatic translation of 'Sales department request' would be something like 'Satış departamenti üçün xidmət sorğusu' or 'Satış şöbəsindən xidmət sifarişi'.",
-          "suggestion": "Satış departamenti üçün xidmət sorğusu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -60,7 +54,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Anfrage zur Verkaufsabteilung' is not the most natural or accurate translation of 'Sales department request'. 'zur' implies movement towards the sales department, which isn't the intended meaning. A more appropriate translation would reflect a request *from* or *concerning* the sales department.",
+          "description": "The German translation 'Anfrage zur Verkaufsabteilung' means 'Inquiry regarding/to the sales department', whereas the English 'Sales department request' implies a request being made BY or FOR the sales department (a request originating from or directed to the department as a subject). In the context of a dialog box for submitting requests, 'Anfrage der Verkaufsabteilung' or 'Verkaufsabteilungsanfrage' would be more accurate.",
           "suggestion": "Anfrage der Verkaufsabteilung"
         }
       ],
@@ -81,13 +75,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Pyyntö myyntiosastolle' literally translates to 'Request to the sales department'. While understandable, it's slightly less natural than a direct translation of 'Sales department request'. A more natural phrasing would be 'Myyntiosaston pyyntö'.",
-          "suggestion": "Myyntiosaston pyyntö"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -111,13 +99,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '営業部への依頼' (Eigyō-bu e no irai) while literally meaning 'request to the sales department,' doesn't fully capture the nuance of 'Sales department request'. It sounds more like a specific request *made* to the sales department, rather than the request *itself* being a request *from* the sales department.",
-          "suggestion": "Consider alternatives like '営業部からの依頼' (Eigyō-bu kara no irai) which translates to 'request *from* the sales department' or '営業部の要望' (Eigyō-bu no yōbō) which translates to 'sales department's request/need'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -129,7 +111,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ຄໍາ​ຮ້ອງ​ສະ​ຫມັກ' means 'application' or 'enrollment' (like applying for a job or a course), whereas the English 'request' in this context refers to a formal submission or inquiry (e.g., a service request).",
+          "suggestion": "ຄໍາ​ຮ້ອງ​ຂໍ​ຂອງ​ພະ​ແນກ​ການ​ຂາຍ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -177,13 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"අලෙවි ක්‍රියාංශයට ඉල්ලීමකි\" is a possible translation, it sounds somewhat formal and not idiomatic for a simple 'sales department request'. A more natural and common translation might be closer to 'මුදාගත් අලෙවි දෙපාර්තමේන්තුව ඉල්ලීම' or 'අලෙවි දෙපාර්තමේන්තුවෙන් ඉල්ලීම'.",
-          "suggestion": "Consider 'මුදාගත් අලෙවි දෙපාර්තමේන්තුව ඉල්ලීම' or 'අලෙවි දෙපාර්තමේන්තුවෙන් ඉල්ලීම'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -201,13 +183,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation \"Захтев одељења продаје\" is a literal translation but not idiomatic. A more natural phrasing would be \"Зајавке одељења продаје\" or \"Зајавница одељења продаје\".  \"Захтев\" is used for a demand or request *from* someone, not a request *by* a department.",
-          "suggestion": "Зајавке одељења продаје"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -235,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

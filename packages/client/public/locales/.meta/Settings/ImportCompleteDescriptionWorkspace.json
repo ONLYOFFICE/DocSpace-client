@@ -3,7 +3,7 @@
   "content": "Data import from {{organizationName}} Workspace to {{organizationName}} {{productName}} is complete!",
   "content_en_sha1_hash": "ea8ba6a6ff5ddf5f347029bd6ff6ae943f26e62e",
   "created_at": "2025-05-19T21:30:51.634Z",
-  "updated_at": "2025-11-18T14:41:49.928Z",
+  "updated_at": "2026-04-09T02:54:21.414Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that data import from an organization's Workspace has been completed successfully. It appears in the UI as part of a data import process, specifically on a completion step or button, and includes placeholders for the product name and organization name.",
     "is_auto": true,
@@ -33,18 +33,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation reverses the order of 'organizationName' and 'productName'. The English says 'Data import from {{organizationName}} Workspace to {{productName}} {{organizationName}}'. The Arabic translation, as written, implies the product is within the workspace.",
-          "suggestion": "اكتمل استيراد البيانات من مساحة عمل {{organizationName}} إلى {{productName}} {{organizationName}}!"
-        },
-        {
-          "type": "formatting",
-          "description": "The placement of 'organizationName' at the end of the Arabic sentence feels unnatural and disrupts the flow. While technically a direct translation, it's not stylistically ideal.",
-          "suggestion": "اكتمل استيراد البيانات من مساحة عمل {{organizationName}} إلى {{productName}} التابعة لـ {{organizationName}}!"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -62,13 +51,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Czech translation uses 'do' instead of 'do' (into) which feels slightly less natural when referring to a process moving data into a system. While understandable, it can be improved.",
-          "suggestion": "Import dat z {{organizationName}} Workspace do {{organizationName}} {{productName}} je dokončen! -> Import dat z {{organizationName}} Workspace do {{organizationName}} {{productName}} je kompletní!"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -80,13 +63,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Greek translation retains the double curly braces {{ }} which are meant for placeholders and should be removed.",
-          "suggestion": "Remove the double curly braces from the Greek translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -98,13 +75,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The colon after '{{organizationName}}' is unnecessary and disrupts the flow. It's better to omit it.",
-          "suggestion": "Tietojen tuonti {{organizationName}} Workspacesta {{organizationName}} {{productName}}:n on suoritettu!"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -116,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Armenian translation uses a hyphen (-) instead of a space after 'Workspace'.",
-          "suggestion": "Տվյալների ներմուծումը {{organizationName}} Workspace ից {{organizationName}} {{productName}} ավարտված է:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -166,9 +131,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'Worskspace' is misspelled. It should be 'Workspace'.",
-          "suggestion": "Workspace"
+          "type": "incorrect_translation",
+          "description": "The word 'Workspace' is misspelled as 'Worskpace' in the Polish translation.",
+          "suggestion": "Import danych z {{organizationName}} Workspace do {{organizationName}} {{productName}} został zakończony!"
         }
       ],
       "approved_at": null
@@ -176,25 +141,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The Portuguese translation uses 'A importação' which is grammatically incorrect. It should be 'A importação de'.",
-          "suggestion": "A importação de dados do {{organizationName}} Workspace para o {{organizationName}} {{productName}} foi concluída!"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The phrase 'A importação de dados...' should be 'A importação dos dados...' The preposition 'de' implies 'of', while 'dos' correctly indicates 'of the' when referring to data (plural).",
-          "suggestion": "A importação dos dados do {{organizationName}} Workspace para o {{organizationName}} {{productName}} foi concluída!"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -212,18 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'ආනයනය සම්පූර්ණයි!' is a literal translation of 'import is complete'. A more natural and idiomatic phrasing would be 'මිපදවා ගැනීම් අවසන්' (mipadawa gatim avasan) or something similar that conveys the meaning of 'import completed'.",
-          "suggestion": "{{organizationName}} Workspace සිට {{organizationName}} {{productName}} වෙත දත්ත මිපදවා ගැනීම් අවසන්!"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of `{{organizationName}}` and `{{productName}}` is consistent with the English content, but ensure that these variables are properly handled during rendering in Sinhala environments.",
-          "suggestion": "Ensure proper variable substitution for `{{organizationName}}` and `{{productName}}` during rendering."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -241,13 +183,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Увоз' is potentially incorrect. 'Увоз' can mean 'import' but in this context 'Увожење' might be more suitable for a more formal tone, reflecting a completed process.",
-          "suggestion": "Увожење"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -275,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

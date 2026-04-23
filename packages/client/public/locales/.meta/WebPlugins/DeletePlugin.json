@@ -3,7 +3,7 @@
   "content": "Delete plugin",
   "content_en_sha1_hash": "78509ae90f9433b054c76f9f8003b75eef79307f",
   "created_at": "2025-05-19T21:30:49.895Z",
-  "updated_at": "2025-12-19T13:32:31.885Z",
+  "updated_at": "2026-04-08T18:48:35.637Z",
   "comment": {
     "text": "This translation key is used to display the text \"Delete plugin\" on a button within a settings plugin dialog. It is intended to be translated by users who want to customize the UI of their application, and it appears in the button label when deleting an option has been selected.",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation uses a noun phrase ('Odstranění zásuvného modulu' - 'Removal of plugin') instead of an imperative verb phrase ('Smazat plugin' - 'Delete plugin') which is required for a button label.",
+          "suggestion": "Smazat plugin"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -111,7 +117,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'spraudnis' in Latvian refers to a physical electrical plug or a connector, not a software plugin. The correct term for a software plugin is 'pielikne'.",
+          "suggestion": "Izdzēst pielikni"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -141,13 +153,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ștergere plugin' is a literal translation and might not be the most natural or clear way to express 'Delete plugin' in Romanian. 'Ștergere' implies deletion, but a more user-friendly term might be preferable.",
-          "suggestion": "Consider using 'Șterge plugin' or 'Elimină plugin' for a more natural flow. 'Dezinstalează plugin' is also possible if it refers to the plugin uninstalling process."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -162,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'පේනුව මකන්න' while technically meaning 'delete plugin', isn't the most natural or commonly used phrasing in Sinhala. A more idiomatic translation would be 'plugin එක මකා දමන්න' or 'plugin මකා දමන්න'.",
-          "suggestion": "plugin එක මකා දමන්න"
+          "description": "The Sinhala translation 'පේනුව මකන්න' means 'Erase the pen', which is completely incorrect for the context of deleting a software plugin.",
+          "suggestion": "ප්ලගිනය මකා දමන්න"
         }
       ],
       "approved_at": null
@@ -183,13 +189,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Обриши додатак\" is understandable, a more accurate and commonly used translation for 'Delete plugin' would be \"Избриши додатак\". \"Обриши\" implies wiping or erasing, whereas \"Избриши\" specifically denotes deletion.",
-          "suggestion": "Избриши додатак"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -217,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

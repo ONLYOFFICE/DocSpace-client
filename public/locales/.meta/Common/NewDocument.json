@@ -3,7 +3,7 @@
   "content": "New document",
   "content_en_sha1_hash": "762b84690217181b9f127d2cfc1991e0892e844a",
   "created_at": "2025-05-19T21:30:46.732Z",
-  "updated_at": "2026-03-31T15:18:46.232Z",
+  "updated_at": "2026-04-10T08:21:04.325Z",
   "comment": {
     "text": "This translation key displays a label for new document creation options in the editor. It is used in buttons and contexts where users can create a new document, such as file formats dropdowns or dialog prompts.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3504,
+      "line_number": 3503,
       "context": "(parentRoomType === FolderType.FormRoom && isFolder);\n \n const createNewDoc = {\n id: \"personal_new-document\",\n key: \"new-document\",\n label: t(\"Common:NewDocument\"),\n onClick: () => this.onCreate(\"docx\"),\n icon: ActionsDocumentsReactSvgUrl,\n };\n \n const createNewSpreadsheet = {",
       "module": "/packages/client"
     },
@@ -203,8 +203,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Ukrainian translation \"Документ\" simply means \"Document\". It does not convey the meaning of \"New Document\". It lacks the 'new' qualifier.",
+          "type": "missing_content",
+          "description": "The word 'New' is missing from the translation. The English text is 'New document', but the Ukrainian translation 'Документ' only means 'Document'.",
           "suggestion": "Новий документ"
         }
       ],
@@ -217,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "Edit comment",
   "content_en_sha1_hash": "3b168257183896cf72ca48607075940bcabeb683",
   "created_at": "2025-05-19T21:30:49.937Z",
-  "updated_at": "2025-11-17T11:52:35.692Z",
+  "updated_at": "2026-04-08T20:40:32.931Z",
   "comment": {
     "text": "EditComment is used in a version history page to display the text \"Edit comment\" in a button or edit panel, prompting users to modify the comment associated with a specific version.",
     "is_auto": true,
@@ -153,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"අදහස සංස්කරණය\" (adahas sanskaranya) is understandable, it's a slightly literal translation. A more natural and commonly used translation for 'Edit comment' would be something like \"අදහස වෙනස් කිරීම\" (adahas venas kirima) or \"අදහස සංශෝධනය\" (adahas sanshodhana).",
-          "suggestion": "Consider \"අදහස වෙනස් කිරීම\" (adahas venas kirima) or \"අදහස සංශෝධනය\" (adahas sanshodhana)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -205,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

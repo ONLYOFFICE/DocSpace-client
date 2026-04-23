@@ -3,7 +3,7 @@
   "content": "Add forms",
   "content_en_sha1_hash": "618d61c52ca4f7bfbad26c6f0f99aaae94c1982d",
   "created_at": "2026-03-31T15:18:26.853Z",
-  "updated_at": "2026-03-31T15:18:26.853Z",
+  "updated_at": "2026-04-07T21:10:07.153Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -104,7 +104,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation 'ekrānbalstības formu' means 'screen support form', which is a completely different meaning from 'Add forms'.",
+          "suggestion": "Pievienot formas"
+        }
+      ],
       "approved_at": null
     },
     "nl": {

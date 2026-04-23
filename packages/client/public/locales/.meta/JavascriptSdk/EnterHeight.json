@@ -3,7 +3,7 @@
   "content": "Enter height",
   "content_en_sha1_hash": "584df7fd9c2be290b3a2f821fb9d0d47cf3681b4",
   "created_at": "2025-05-19T21:30:54.473Z",
-  "updated_at": "2025-08-04T07:30:01.407Z",
+  "updated_at": "2026-04-07T19:35:05.131Z",
   "comment": {
     "text": "This translation key is used for labeling a placeholder that asks users to input their height. It appears as a dialog prompt or a form field, and its purpose is to provide guidance to the user.",
     "is_auto": true,
@@ -81,18 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Մուտքագրել բարձրություն ը' is not a natural or accurate translation of 'Enter height'.  The trailing 'ը' makes the phrase awkward and grammatically incorrect.  It's likely a remnant of an earlier attempt or a misunderstanding of the original phrase.",
-          "suggestion": "Մուտքագրել բարձրություն (Mutqagrel bardzrutyun)"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, adding a space after 'Մուտքագրել' would improve readability. The current phrasing feels slightly compressed.",
-          "suggestion": "Մուտքագրել  բարձրություն"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -110,13 +99,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"높이 입력\" is understandable, a more natural and commonly used translation for \"Enter height\" in Korean would be \"키 입력\" or \"신장 입력\". \"높이\" refers to the height of an object, not a person's height.",
-          "suggestion": "키 입력"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -170,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'උස යොදන්න' while literally meaning 'Enter height', sounds slightly unnatural in Sinhala for this context. A more natural phrasing would be 'වශයෙන් උස දාන්න' or 'උස ඇතුළත් කරන්න'.",
-          "suggestion": "වශයෙන් උස දාන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -200,13 +177,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Unesi visinu' is not the most natural or accurate translation of 'Enter height'. While 'unesi' means 'enter', 'visinu' refers to 'height' in the accusative case. The most common and accurate translation would be 'Unesite visinu'.",
-          "suggestion": "Unesite visinu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

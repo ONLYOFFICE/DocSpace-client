@@ -3,7 +3,7 @@
   "content": "Enable this setting to disable downloads of files and folders from this room shared via a link",
   "content_en_sha1_hash": "2ea92290a035527ea6287be4963fdb388e78c6ae",
   "created_at": "2025-08-26T11:15:03.614Z",
-  "updated_at": "2026-02-19T13:36:33.129Z",
+  "updated_at": "2026-04-08T02:18:21.966Z",
   "comment": {
     "text": "This text appears in a dialog (likely an \"Edit Link Panel\") and describes a setting that prevents users from downloading files and folders shared via a link within a room. It explains the functionality of disabling downloads for shared content.",
     "is_auto": true,

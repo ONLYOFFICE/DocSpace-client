@@ -29,7 +29,7 @@ import React, { useEffect, useMemo } from "react";
 import { withTranslation } from "react-i18next";
 
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
-import { mapCulturesToArray } from "@docspace/shared/utils/common";
+import { mapCulturesToArray } from "@docspace/shared/utils/cultures";
 import i18n from "../i18n";
 
 interface ComponentWithCultureNamesProps {

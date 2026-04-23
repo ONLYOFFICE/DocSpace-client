@@ -3,7 +3,7 @@
   "content": "Chat with the AI agent about this form using data from a connected database.",
   "content_en_sha1_hash": "951d51462445a1776ef0b3aade946410e50711c0",
   "created_at": "2026-03-31T15:18:26.741Z",
-  "updated_at": "2026-03-31T15:18:26.741Z",
+  "updated_at": "2026-04-07T21:17:45.520Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -104,7 +104,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation uses 'ChatGPT' instead of the verb 'Chat'. In Latvian, 'ChatGPT' is a noun, making the sentence grammatically nonsensical as a command/action.",
+          "suggestion": "Sarunājies ar AI agentu par šo formu, izmantojot datus no savienotā datubāzes."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -158,7 +164,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Razgvarjajte' is a nonsensical or incorrect term in this context. It appears to be a mistranslation of 'Chat'. The correct Slovenian verb for 'to chat' is 'Klepetajte'.",
+          "suggestion": "Klepetajte z AI agentom o tem obrazcu z uporabo podatkov iz povezane baze podatkov."
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {

@@ -3,7 +3,7 @@
   "content": "Selecting items",
   "content_en_sha1_hash": "ff107295cec9a49c5dc0fa042fb492445682889f",
   "created_at": "2025-05-19T21:30:55.086Z",
-  "updated_at": "2026-02-19T13:36:32.521Z",
+  "updated_at": "2026-04-07T19:35:05.109Z",
   "comment": {
     "text": "This translation key is used for the \"Selecting items\" text that appears as a header in a panel, likely indicating the selection mode or options. It is displayed on a file located at /packages/client/src/components/panels/HotkeysPanel/index.js, line 122. Translators should provide an equivalent phrase to indicate this action's purpose in their language.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Elementlərin seçilməsi\" is technically correct, it's a very literal translation. \"Selecting items\" in a UI context usually refers to choosing something from a list or panel. A more natural translation might be \"Seçim\" or \"Seçilmişlər\" or something similar that conveys the action of choosing from a set of options.",
-          "suggestion": "Seçim"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -87,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Միավորների ընտրություն' directly translates to 'Points Selection'. While understandable, it might not perfectly convey the intended meaning of 'Selecting items' in a UI context. It implies selecting points, which might be confusing.",
-          "suggestion": "Consider 'Պարկուշակի ընտրություն' (Item Selection) or 'Բաների ընտրություն' (Things Selection) for a more accurate reflection of 'Selecting items'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -123,13 +111,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Vienumu atlase\" while technically correct, doesn't quite capture the nuance of \"Selecting items\" in a user interface context. \"Vienumu atlase\" sounds slightly formal and less user-friendly. A more natural phrasing for a hotkey panel might be more direct.",
-          "suggestion": "Izvēle"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -147,13 +129,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"A escolher itens\" is not the most natural or accurate translation of \"Selecting items\". While literally translatable, it implies the action of choosing, rather than selecting from a list or panel. A more accurate translation would convey the act of *choosing* from a set of options.",
-          "suggestion": "Consider alternatives like \"Seleção de itens\" or \"Itens selecionáveis\" to better reflect the meaning of \"Selecting items\" in the context of a hotkeys panel."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -171,25 +147,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Выделение\" while technically meaning 'selection' or 'highlighting', is not the best fit for 'Selecting items' in the context of hotkeys. It lacks the action implied by 'selecting'. A more accurate translation would convey the act of choosing or picking something.",
-          "suggestion": "Выбор"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation \"අථක තේරීම\" does not accurately convey the meaning of \"Selecting items.\" \"අථක\" is related to 'decay' or 'damage' and doesn't fit the context of selection. \"Selection\" is best translated as something closer to \"ප්‍රතිපාදනය\" (pratipadanyā), \"මැහුම්\" (mehum), or \"අවස්ථාව තේරීම\" (avasthava thērim).",
-          "suggestion": "Consider alternatives such as \"ප්‍රතිපාදනය\" (pratipadanyā), \"මැහුම්\" (mehum), or \"අවස්ථාව තේරීම\" (avasthava thērim)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -207,37 +171,19 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Одабир ставки' doesn't accurately convey the meaning of 'Selecting items'. 'Одабир' seems to be a combination of words and 'ставки' typically refers to bets or stakes. The intended meaning is 'Selecting items' or 'Item selection'.",
-          "suggestion": "Избор ставки (Izbor stavki) - 'Selection of stakes/bets',  or Избор предмета (Izbor predmeta) - 'Item selection' would be more accurate. Another option could be Избор елемената (Izbor elemenata) - 'Selection of items'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Odabir stavki\" is grammatically correct, it translates more literally to \"Selecting items\" or \"Choosing items\" but not precisely \"Selecting items.\" A more natural and idiomatic translation for 'Selecting items' within a hotkeys panel context would be 'Izbor stavki' or 'Odabir tastera'.",
-          "suggestion": "Izbor stavki"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Öğelerin seçilmesi\" is a literal translation of 'Selecting items'. It's grammatically correct but sounds awkward and overly formal in Turkish. A more natural translation would convey the action of selecting, rather than the act of being selected.",
-          "suggestion": "Seçim"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -249,13 +195,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Chọn mục' is technically correct, it's not the most natural or idiomatic translation for 'Selecting items' in this context (likely referring to a list of items to select). A more appropriate translation might convey the action of choosing or picking.",
-          "suggestion": "Chọn lựa"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

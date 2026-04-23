@@ -3,7 +3,7 @@
   "content": "Search options",
   "content_en_sha1_hash": "5616c8722256385e28abb27ee4233728e13a8882",
   "created_at": "2025-05-19T21:30:42.953Z",
-  "updated_at": "2026-03-31T15:18:46.339Z",
+  "updated_at": "2026-04-08T17:43:52.029Z",
   "comment": {
     "text": "AdvancedFilter key is used to display a filter button that allows users to adjust search settings, appearing on the Home page's filter section.",
     "is_auto": true,
@@ -81,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Որոնման ընտրանքներ\" (Qronman entrankner) is a very literal translation of \"Search options\". A more natural and idiomatic Armenian translation might be something like \"Փնտրելու եղանակներ\" (Pntrelu eganak) which translates to 'Search methods' or 'Search ways'. \"Որոնման ընտրանքներ\" sounds a bit clunky and formal.",
-          "suggestion": "Consider using \"Փնտրելու եղանակներ\" (Pntrelu eganak) or a similar phrasing that sounds more natural in Armenian."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -131,9 +125,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Polish translation 'Opções de pesquisa' is Portuguese, not Polish. It translates to 'Search options' in Portuguese.",
-          "suggestion": "The correct Polish translation should be something like 'Opcje wyszukiwania' or 'Możliwości wyszukiwania'."
+          "type": "wrong_language",
+          "description": "The translation is in Portuguese, not Polish.",
+          "suggestion": "Opcje wyszukiwania"
         }
       ],
       "approved_at": null
@@ -183,13 +177,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Претражи опције' means 'Search options' as an imperative command (Search the options), whereas the English 'Search options' is a noun phrase referring to the settings/parameters of the search. In UI context, it should be 'Опције претраге'.",
+          "suggestion": "Опције претраге"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Pretraži opcije' means 'Search options' as a command (imperative), implying the action of searching through options. The English 'Search options' in this context refers to the 'Options for searching' (noun phrase).",
+          "suggestion": "Opcije pretrage"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -211,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

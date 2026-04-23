@@ -3,7 +3,7 @@
   "content": "You are about to delete a file version. It will be no possible to see or restore it anymore. Are you sure you want to continue?",
   "content_en_sha1_hash": "dc5e1b687bf6879d5fbaab0918c52db128223479",
   "created_at": "2025-05-19T21:30:49.935Z",
-  "updated_at": "2025-08-12T19:46:25.912Z",
+  "updated_at": "2026-04-08T20:42:14.475Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message before deleting a file version, warning users that they will lose access to the deleted version. It appears in a dialog box, specifically in a modal dialog header and body. Translators should provide a message that conveys this important information in a clear and concise manner.",
     "is_auto": true,
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'المتابعة' (al-mutaba'a) is used for 'continue'. While not incorrect, 'تستمر' (tastamirr) might be a more natural and common phrasing in this context, emphasizing continuation of the action.",
-          "suggestion": "أنتم متأكدون من الاستمرار؟"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -69,13 +63,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Está a punto de eliminar\" sounds slightly unnatural in Spanish. A more common and natural phrasing would be \"Va a eliminar\" or \"Está eliminando\".",
-          "suggestion": "Va a eliminar una versión de archivo."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -96,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Հավատո՞ւմ եք, որ ցանկանում եք շարունակել\" is a literal translation of 'Do you believe that you want to continue?' It's awkward and not idiomatic Armenian. A more natural way to express confirmation would be something like 'Դո՞ւք համոզվեցիք, որ շարունակելու եք։' or 'Դո՞ւք համոզված եք, որ ցանկանում եք շարունակել։'",
-          "suggestion": "Դո՞ւք համոզվեցիք, որ շարունակելու եք։"
+          "description": "The final question 'Are you sure you want to continue?' is translated as 'Do you believe that you want to continue?' (Հավատո՞ւմ եք, որ ցանկանում եք շարունակել), which changes the meaning from a confirmation of intent to a question about the user's belief/certainty regarding their own desires.",
+          "suggestion": "Դուք պատրաստվում եք ջնջել ֆայլի տարբերակը։ Այն այլևս հնարավոր չի լինի դիտել կամ վերականգնել։ Համոզվա՞ծ եք, որ ցանկանում եք շարունակել։"
         }
       ],
       "approved_at": null
@@ -111,42 +99,19 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Japanese translation uses a direct question ending ('-masu ka?'). While grammatically correct, it might sound slightly formal in this context. A more conversational phrasing might improve user experience.",
-          "suggestion": "ファイルのバージョンを削除しようとしています。これ以上見たり復元したりできなくなります。よろしいですか？"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Korean translation uses a question mark at the end of the final sentence. While grammatically correct, it might be more appropriate to use an exclamation point to match the urgency of the action (deletion) in the English version. This is a stylistic consideration.",
-          "suggestion": "Replace '?' with '!'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ມັນຈະບໍ່ສາມາດເບິ່ງຫຼືກູ້ຄືນໄດ້ອີກຕໍ່ໄປ\" is a bit awkward. 'ກູ້ຄືນ' specifically means 'to recover' or 'to retrieve,' and while understood, 'restore' is a better fit in this context. The overall flow could be improved.",
-          "suggestion": "ມັນຈະບໍ່ສາມາດເບິ່ງຫຼືກວດຄືນໄດ້ອີກຕໍ່ໄປ"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ດໍາເນີນການຕໍ່ບໍ\" is not a natural way to ask \"Are you sure you want to continue?\".",
-          "suggestion": "ທ່ານຕ້ອງການດໍາເນີນການຕໍ່ບໍ?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -158,18 +123,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'It will be no possible' is grammatically incorrect and doesn't accurately reflect the meaning of 'It will be impossible'.",
-          "suggestion": "It will be impossible"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The Dutch translation uses 'Weet u zeker dat u door wilt gaan?', which translates to 'Do you know for sure you want to continue?'. While understandable, a more natural and common phrasing would be 'Bent u zeker dat u verder wilt gaan?'",
-          "suggestion": "Bent u zeker dat u verder wilt gaan?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -208,13 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ඔබ පැරණි ගොනුවක් මකා දැමීමට සුදානමින් සිටී\" translates more literally to 'You are ready to delete an old file'. While understandable, a more accurate translation would be something like 'You are about to delete a file version' to directly reflect the English content.  The current phrasing doesn't accurately convey 'version'.",
-          "suggestion": "ඔබ පැරණි ගොනුවක අනුවාදයකි මකා දැමීමට සුදානමින් සිටී."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'ප්‍රතිෂ්ඨාපනය' (prathisthapana) translates to 'restoration' or 'reinstatement', which is a more formal term.  For a user-facing message, a simpler word would be more appropriate.",
-          "suggestion": "ඔබට එය නැවත ලබා ගැනීමට හැකියාවක් නොවනු ඇත."
+          "description": "The Sinhala translation says 'old file' (පැරණි ගොනුවක්) instead of 'file version' (ගොනු අනුවාදයක්). This changes the technical meaning from deleting a specific version to deleting an entire old file.",
+          "suggestion": "ඔබ ගොනු අනුවාදයක් මකා දැමීමට සුදානමින් සිටී. එය නැවත දැකීමට හෝ ප්‍රතිෂ්ඨාපනය කිරීමට හැකියාවක් නොවනු ඇත. ඔබට ඉදිරියට යාමට අවශ්‍යද?"
         }
       ],
       "approved_at": null
@@ -234,30 +183,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'обришете' (obrišete) is slightly awkward in this context. While grammatically correct, 'избришете' (izbrišete) is more commonly used for 'delete' in this type of notification.",
-          "suggestion": "Спремате се да избришете верзију фајла."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'spremazete' is likely a typo. It should be 'spreman/spremana' (depending on the gender of the user being addressed).",
-          "suggestion": "Spreman/Spremana ste da obrišete verziju fajla."
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'Da li ste sigurni da želite da nastavite?' is grammatically correct, but sounds slightly formal for a user prompt. A more conversational option could be used.",
-          "suggestion": "Da li ste sigurni da želite da nastavite?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -282,6 +214,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The verb 'shuar' is incorrect in this context. 'Shuar' means 'to dry' or 'to wither'. The correct verb for 'to delete' in Albanian is 'fshini'. Additionally, 'version skedarësh' (files version) is grammatically awkward compared to 'versionin e skedarit' (the file version).",
+          "suggestion": "Jeni duke fshirë një version të skedarit. Nuk do të jetë e mundur ta shihni ose ta rivendosni atë më. Jeni të sigurt që doni të vazhdoni?"
+        }
+      ],
       "approved_at": null
     }
   }

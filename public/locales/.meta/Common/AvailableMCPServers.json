@@ -3,7 +3,7 @@
   "content": "Available {{mcpServers}}",
   "content_en_sha1_hash": "9684aad5701521b48b37d8cea8feb7399340b203",
   "created_at": "2025-12-19T10:16:18.690Z",
-  "updated_at": "2025-12-22T09:46:05.909Z",
+  "updated_at": "2026-04-08T16:30:21.086Z",
   "comment": {
     "text": "This key displays a header label for a selection dialog or similar UI element listing available Minecraft server options. The `{{mcpServers}}` placeholder will be replaced with the title of the MCP setting, allowing for dynamic content. Translators should consider this as a descriptive title for a selection interface.",
     "is_auto": true,
@@ -63,7 +63,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Spanish translation 'Disponible' is singular, whereas the English 'Available' in this context (referring to a list of servers) implies a plural state or a header for multiple items. More importantly, 'Disponible' alone sounds like an adjective describing a single object, whereas 'Available {{mcpServers}}' functions as a header. In Spanish, when used as a header for a list, 'Disponibles' (plural) is the correct form to match the context of multiple servers.",
+          "suggestion": "Disponibles {{mcpServers}}"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -75,7 +81,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The French translation 'Disponible' is singular, whereas the English 'Available' in this context (referring to a list of servers) implies a plural state or a header for multiple items. More importantly, 'Disponible' is an adjective that lacks the necessary agreement or context to function as a header for a list of servers in French. A more natural and accurate translation for a UI header would be 'Serveurs {{mcpServers}} disponibles' or simply 'Disponibles : {{mcpServers}}', but strictly speaking, 'Disponible' is grammatically mismatched for a plural list.",
+          "suggestion": "Disponibles {{mcpServers}}"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -129,13 +141,25 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Portuguese translation 'Disponível' is singular, whereas the English 'Available' in this context (a header for a list of servers) implies a plural state or a collective availability. More importantly, 'Disponível' alone sounds like an adjective describing a single item rather than a header for a collection.",
+          "suggestion": "Disponíveis {{mcpServers}}"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Portuguese translation uses the singular 'Disponível', whereas the English 'Available' refers to a plural set of servers. In this context, it should be plural to match the likely content of the variable.",
+          "suggestion": "Disponíveis {{mcpServers}}"
+        }
+      ],
       "approved_at": null
     },
     "ro": {

@@ -3,7 +3,7 @@
   "content": "Document conversion",
   "content_en_sha1_hash": "f96037ca2ed0cf02f83458fa984002b431ca5108",
   "created_at": "2025-05-19T21:30:56.882Z",
-  "updated_at": "2026-02-19T13:36:32.376Z",
+  "updated_at": "2026-04-07T19:35:05.052Z",
   "comment": {
     "text": "This translation key is used for the title \"Document conversion\" in a file upload dialog. It appears as the header of a modal dialog when converting a single file, and also as an alternative title when uploading multiple files.",
     "is_auto": true,
@@ -153,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ලේඛනය හැරවීම' while technically meaning 'document conversion,' is not the most natural or common way to express this in Sinhala. A more accurate and natural translation would be 'ලේඛන පරිවර්තනය'.",
-          "suggestion": "ලේඛන පරිවර්තනය"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

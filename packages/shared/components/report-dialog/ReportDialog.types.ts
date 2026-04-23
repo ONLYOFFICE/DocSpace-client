@@ -40,7 +40,7 @@ export type ReportDialogProps = {
   /** Application version string */
   version: string;
   /** Firebase helper instance for crash reporting */
-  firebaseHelper: FirebaseHelper;
+  firebaseHelper?: FirebaseHelper;
   /** Current device type (desktop, mobile, etc.) */
   currentDeviceType: DeviceType;
 };

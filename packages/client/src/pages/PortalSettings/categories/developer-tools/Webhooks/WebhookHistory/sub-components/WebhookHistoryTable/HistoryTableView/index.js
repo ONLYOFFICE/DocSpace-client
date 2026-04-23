@@ -30,7 +30,7 @@ import { useState, useRef } from "react";
 
 import { TableBody, TableContainer } from "@docspace/ui-kit/components/table";
 
-import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
+import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
 import { formatFilters } from "SRC_DIR/helpers/webhooks";
 import HistoryTableRow from "./HistoryTableRow";
 import HistoryTableHeader from "./HistoryTableHeader";

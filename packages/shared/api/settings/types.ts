@@ -33,7 +33,7 @@ export type TTfa = {
   id: string;
   title: string;
   enabled: boolean;
-  avaliable: boolean;
+  available: boolean;
 };
 
 export type TGetSsoSettings = {
@@ -132,7 +132,7 @@ export type TSettings = {
   externalResources: TExternalResources;
   externalDbEnabled: boolean;
   licenseAgreementsUrl?: string;
-	aiEnabled?: boolean;
+  aiEnabled?: boolean;
 };
 
 export type TCustomSchema = {
@@ -541,5 +541,6 @@ export type TNotificationChannel = {
 };
 
 export type TAiServicesSettings = {
-	enabled: boolean;
+  enabled: boolean;
 };
+

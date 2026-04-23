@@ -3,7 +3,7 @@
   "content": "Ask from DB",
   "content_en_sha1_hash": "2b1d6f7379a09232aa1460006ef0340dc562988a",
   "created_at": "2026-03-31T15:18:26.758Z",
-  "updated_at": "2026-03-31T15:18:26.758Z",
+  "updated_at": "2026-04-07T21:16:49.638Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -92,7 +92,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation '문의' means 'to inquire' or 'to ask a question/consultation', whereas 'Ask from DB' in a technical context usually means 'Retrieve/Fetch from DB'.",
+          "suggestion": "DB에서 가져오기"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -116,13 +122,25 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The preposition 'z' (from) is used incorrectly in Polish in this context. 'Zapytaj z DB' sounds like asking something out of a database, whereas 'Ask from DB' in a technical context usually implies querying the database. A more natural and accurate translation would use 'w' (in) or 'do' (to), or rephrase to 'Zapytaj bazę danych'. However, strictly following the 'Ask from' logic, 'Zapytaj w DB' or 'Pobierz z DB' is more appropriate.",
+          "suggestion": "Zapytaj w DB"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The preposition 'de' in 'Consultar de DB' is grammatically incorrect in Portuguese for this context; it should be 'no' (in the) or 'ao' (to the), or simply 'Consultar DB'. 'Consultar de' implies 'Consulting from of DB'.",
+          "suggestion": "Consultar DB"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -170,7 +188,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Упит' is not a valid Serbian word and appears to be a typo or a non-existent term. It likely intended to be 'Упитaj' (Ask), but as it stands, it is nonsensical.",
+          "suggestion": "Упитaj из DB"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

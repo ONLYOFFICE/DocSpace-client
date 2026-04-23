@@ -3,7 +3,7 @@
   "content": "URLs added here are used to improve the OAuth redirect security.",
   "content_en_sha1_hash": "b91fa47198899abef0fcb42efe9d338f64b5361f",
   "created_at": "2025-05-19T21:30:53.784Z",
-  "updated_at": "2025-08-04T07:30:01.431Z",
+  "updated_at": "2026-04-07T19:35:05.159Z",
   "comment": {
     "text": "\"This translation key is used for a help button that provides instructions on how URLs added to improve OAuth redirect security are utilized in the application.\"",
     "is_auto": true,
@@ -81,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The term 'URL-ներն' contains a hyphen where it's not needed. It should be 'URLներն'.",
-          "suggestion": "URLներն"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -117,13 +111,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'vietrāži URL' is not the standard or most natural way to refer to URLs in Latvian in this context. 'URL adresi' or simply 'adreses' would be more accurate and commonly used.",
-          "suggestion": "Šeit pievienotās adreses URL tiek izmantotas, lai uzlabotu OAuth novirzīšanas drošību."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -153,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Adresele URL care au fost adăugate aici sunt folosite pentru a oferi un nivel mai înalt de securitate al redirecționării OAuth\" is a bit verbose and less direct than the English original. \"a oferi un nivel mai înalt de securitate\" is more descriptive than the English 'to improve'.",
-          "suggestion": "Adresele URL adăugate aici sunt folosite pentru a îmbunătăți securitatea redirecționării OAuth."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -171,18 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'යලි නැවත හරවන ආරක්ෂාව වැඩිදියුණු කිරීම සඳහා මෙහි එක් කරන ලද URL භාවිතා කරනු ලැබේ.' is a bit wordy and not the most natural way to express the meaning. A more concise and accurate translation would be better.",
-          "suggestion": "යලි නැවත හරවන ආරක්ෂාව වැඩිදියුණු කිරීමට මෙහි එක් කරන URL භාවිතා වේ."
-        },
-        {
-          "type": "spelling",
-          "description": "While technically not incorrect, the repetition of 'යලි' (yali) and 'හරවන' (haravana) makes it feel awkward. It would be more natural to rephrase.",
-          "suggestion": "The overall phrasing could be improved for better flow."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -200,25 +171,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'URL-ови' is not standard Serbian. It is a transliteration from English and should be written as 'URL-ovi'.",
-          "suggestion": "URL-ovi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'URL-ovi' should be 'URL-ovi'. The hyphen is placed correctly in this case.",
-          "suggestion": "URL-ovi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

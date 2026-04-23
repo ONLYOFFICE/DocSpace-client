@@ -12,5 +12,8 @@
   "SuccessConnected": "{{serviceName}} успішно підключено як канал сповіщень. Ви тепер отримуватимете оновлення там.",
   "SuccessDisconnected": "{{serviceName}} було успішно від’єднано як канал сповіщень. Сповіщення туди більше не надсилатимуться.",
   "UsefulTips": "Корисні поради щодо {{productName}}",
-  "UsefulTipsDescription": "Отримати корисні посібники з {{productName}}"
+  "UsefulTipsDescription": "Отримати корисні посібники з {{productName}}",
+  "ActionsWithFilesDescription": "Бейджі підсвічуватимуть активність файлів — завантаження, редагування чи поширення — у розділах {{rooms}}, {{shared}}, {{documents}} та {{aiAgents}}.",
+  "RoomsActivityDescription": "Отримуйте миттєві сповіщення електронною поштою про нові спільні файли/папки та активність у ваших {{rooms}} та {{aiAgents}}.",
+  "RoomUpdateNotify": "Спільний контент, активність у {{rooms}} та {{aiAgents}}"
 }

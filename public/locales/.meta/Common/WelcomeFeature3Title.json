@@ -3,7 +3,7 @@
   "content": "AI Processing",
   "content_en_sha1_hash": "56cdb0eb53c5f0eba01491c2be88894ec37f3e2c",
   "created_at": "2026-03-31T15:18:26.977Z",
-  "updated_at": "2026-03-31T15:18:26.977Z",
+  "updated_at": "2026-04-07T20:02:12.165Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -26,7 +26,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Emeliyyat emalı' translates to 'Operation processing' or 'Processing of operations', which is redundant and does not accurately convey 'AI Processing'.",
+          "suggestion": "Süni İntellekt emalı"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -170,7 +176,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Обрадама процесирања' is grammatically incorrect and nonsensical; it translates roughly to 'Processing to processings' or 'Processings of processing'.",
+          "suggestion": "AI обрада"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

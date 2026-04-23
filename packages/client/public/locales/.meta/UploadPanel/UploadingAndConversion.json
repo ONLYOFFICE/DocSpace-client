@@ -3,7 +3,7 @@
   "content": "Uploading & Conversion",
   "content_en_sha1_hash": "62063df26c306ea5a37b06a791b0446140db5797",
   "created_at": "2025-05-19T21:30:49.952Z",
-  "updated_at": "2025-05-24T02:33:20.579Z",
+  "updated_at": "2026-04-08T20:48:05.094Z",
   "comment": {
     "text": "This translation key is used to display the text \"Uploading & Conversion\" on a file upload component. It likely appears as a title or label in an upload panel dialog.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term \"Dönüşüm\" is generally used for transformation, not conversion in this context. A more appropriate term for 'Conversion' in this context (likely referring to file conversion) would be 'Çevrilmə'.",
-          "suggestion": "Yükləmə və Çevrilmə"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -81,7 +75,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The French word 'Téléchargement' typically refers to 'Downloading'. For 'Uploading', the correct term is 'Téléversement'.",
+          "suggestion": "Téléversement et conversion"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Uploading & Conversion' implies a process of both uploading files and converting them to another format. 'යොමු කිරීම සහ පරිවර්තනය' while containing ' පරිවර්තනය' (conversion) has 'යොමු කිරීම' which translates to 'referring' or 'pointing' rather than 'uploading'. A more accurate translation for 'Uploading' would be 'බා උප්තං කිරීම' (ba upthang kirima) or similar.",
-          "suggestion": "Consider 'බා උප්තං කිරීම සහ පරිවර්තනය' (ba upthang kirima saha parivarthanaya) or a similar phrase accurately conveying 'Uploading and Conversion'."
+          "description": "The Sinhala word 'යොමු කිරීම' (Yomu kirima) means 'referring', 'submitting', or 'directing', which is incorrect for the technical context of 'Uploading' files. The correct term for uploading is 'උඩුගත කිරීම' (Udugatha kirima).",
+          "suggestion": "උඩුගත කිරීම සහ පරිවර්තනය"
         }
       ],
       "approved_at": null
@@ -214,6 +214,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text is a noun phrase ('Uploading & Conversion'), whereas the Albanian translation is an imperative command ('Ngarkoni dhe konvertoni skedarët' - 'Upload and convert files'). This changes the grammatical function from a title/label to an instruction.",
+          "suggestion": "Ngarkimi dhe Konvertimi"
+        }
+      ],
       "approved_at": null
     }
   }

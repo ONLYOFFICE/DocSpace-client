@@ -6,6 +6,7 @@
   "AutomaticIndexing": "Samodejno indeksiranje",
   "AutomaticIndexingDescription": "Omogočite samodejno indeksiranje za indeksiranje datotek in map po serijski številki. Razvrščanje po številki bo nastavljeno kot privzeto za vse uporabnike.",
   "ChooseRoomType": "Izberi tip sobe",
+  "ConfigureDatabaseConnection": "Konfigurirajte povezavo z bazo podatkov v Integracije → Tretje strani",
   "CreateRoomConfirmation": "Nadaljuj brez povezovanja pomnilnika?\nIzbrali ste možnost shranjevanja tretje osebe, ki še ni povezana. Če nadaljujete brez povezave s storitvijo, ta možnost ne bo dodana.",
   "CreateRoomWatermarksConfirmation": "Za dokumente v tej sobi niste nastavili vodnega žiga. Vodni žig lahko vedno dodate v nastavitvah urejanja sobe. Želite nadaljevati brez vodnega žiga?",
   "CreateTagOption": "Ustvari oznako",
@@ -39,5 +40,9 @@
   "UserName": "Uporabniško ime",
   "ViewerInfo": "Informacije o ogledovalcu",
   "WatermarkPreview": "Predogled vodnega žiga",
-  "WatermarkPreviewHelp": "Ta predogled približno prikazuje, kako bo vodni žig prikazan v vaših datotekah."
+  "WatermarkPreviewHelp": "Ta predogled približno prikazuje, kako bo vodni žig prikazan v vaših datotekah.",
+  "GoToIntegrations": "Pojdite na Integracije",
+  "NeedMoreIntegrations": "Potrebujete več integracij?",
+  "NeedMoreIntegrationsDescription": "Uporabite webhooks za pošiljanje podatkov v vašo lastno sistemo ali povežite obrazce z tisoči storitev preko Zapier.",
+  "NoDatabaseConnections": "Ni konfiguriranih povezav z bazama podatkov"
 }

@@ -3,7 +3,7 @@
   "content": "Sign in with LinkedIn",
   "content_en_sha1_hash": "c3ef8d2884998eed756a696c641cca91c150684a",
   "created_at": "2025-05-19T21:30:48.771Z",
-  "updated_at": "2026-03-26T08:26:58.375Z",
+  "updated_at": "2026-04-10T08:21:04.402Z",
   "comment": {
     "text": "The translation key \"SignInWithLinkedIn\" is used to display a label for signing in with LinkedIn on the login screen. It appears as part of a button or similar UI element, allowing users to connect their LinkedIn account to access the application. The text should be clear and concise for internationalization purposes.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 475,
+      "line_number": 477,
       "context": "? t(\"Common:SignUpWithTwitter\")\n : t(\"Common:SignInWithTwitter\");\n case \"linkedin\":\n return signUp\n ? t(\"Common:SignUpWithLinkedIn\")\n : t(\"Common:SignInWithLinkedIn\");\n case \"microsoft\":\n return signUp\n ? t(\"Common:SignUpWithMicrosoft\")\n : t(\"Common:SignInWithMicrosoft\");\n case \"sso\":",
       "module": "/packages/shared"
     }
@@ -29,14 +29,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'تسجيل الدخول LinkedIn' is a literal transcription of 'Sign in with LinkedIn'. It doesn't accurately convey the meaning of signing *with* LinkedIn, rather it just states 'Login LinkedIn'. A more accurate translation would incorporate the concept of using LinkedIn to sign in.",
+          "type": "missing_content",
+          "description": "The preposition 'with' is missing in the Arabic translation, making the phrase 'Sign in LinkedIn' instead of 'Sign in with LinkedIn'.",
           "suggestion": "تسجيل الدخول باستخدام LinkedIn"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the English name 'LinkedIn' is retained in the Arabic translation. It might be preferable to use a localized equivalent or phrase if one exists and is common in Saudi Arabia, although this depends on user familiarity.  Keeping the English name is common practice, so this is a minor point.",
-          "suggestion": "Consider if a localized alternative for 'LinkedIn' exists and would improve clarity and user experience."
         }
       ],
       "approved_at": null
@@ -62,13 +57,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Login über LinkedIn' is understandable, 'Sign in with LinkedIn' implies an authentication process. 'Login' is a more general term for accessing an account. A more accurate translation would be 'Anmelden über LinkedIn'.",
-          "suggestion": "Anmelden über LinkedIn"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -188,13 +177,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Пријави се путем LinkedIn-а' while understandable, isn't the most natural or common phrasing for 'Sign in with LinkedIn' in Serbian.  'Prijavi se uz pomoć LinkedIn-a' or 'Prijavi se preko LinkedIn-a' would be more idiomatic.",
-          "suggestion": "Пријави се уз помоћ LinkedIn-а"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -206,13 +189,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'LinkedIn hesabınız ile giriş yapın' is a bit literal and not the most natural-sounding Turkish for 'Sign in with LinkedIn'. A more common and idiomatic phrasing would be 'LinkedIn ile giriş yapın'.",
-          "suggestion": "LinkedIn ile giriş yapın"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -230,19 +207,19 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Chinese translation '解绑LinkedIn登录' means 'Unbind LinkedIn login', which is the opposite of the English 'Sign in with LinkedIn'.",
+          "suggestion": "使用 LinkedIn 登录"
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Identifikohuni me LinkedIn' is a literal translation of 'Identify yourself with LinkedIn' which is not the most natural phrasing in Albanian. A more idiomatic translation would be 'Kyquni me LinkedIn' or 'Hyni me LinkedIn'.",
-          "suggestion": "Kyquni me LinkedIn"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

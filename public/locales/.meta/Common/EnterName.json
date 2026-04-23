@@ -3,7 +3,7 @@
   "content": "Enter name",
   "content_en_sha1_hash": "5df85959e93e078f85961a413efbd7ba4ef678d2",
   "created_at": "2025-05-19T21:30:44.990Z",
-  "updated_at": "2026-03-31T15:18:45.970Z",
+  "updated_at": "2026-04-08T10:25:10.495Z",
   "comment": {
     "text": "\"Enter name\" is used as a placeholder text in various input fields within the application, prompting users to provide a name. It appears in dialogue boxes, room setting pages, and other forms where user-inputted names are required.",
     "is_auto": true,
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Saisir un prénom' translates to 'Enter a first name', which is too specific. 'Enter name' is more general and should reflect that.",
-          "suggestion": "Saisir le nom"
+          "description": "The English 'name' is generic (can be a person's name, a room name, or a group name), but the French 'prénom' specifically means 'first name'. This is a semantic error in the context of room and group names.",
+          "suggestion": "Saisir un nom"
         }
       ],
       "approved_at": null
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ເຂົ້າ ຊື່' is a literal transliteration and not a proper translation of 'Enter name'. It doesn't convey the intended meaning of providing a name in a form or field.",
-          "suggestion": "A more accurate translation would be something like 'ໃສ່ຊື່' (sai suei) which means 'enter name' or 'input name'."
+          "description": "The Lao translation 'ເຂົ້າ ຊື່' literally means 'Enter name' in a way that sounds like 'Entering a name' or 'To enter a name' (verb phrase), but in the context of a UI placeholder, it is grammatically awkward and lacks the imperative sense of 'Please enter a name' or 'Type a name'. More importantly, 'ເຂົ້າ' (Khao) can mean 'to enter' (a room/place) or 'rice', making it ambiguous. A more accurate UI placeholder for 'Enter [something]' in Lao is 'ປ້ອນຊື່'.",
+          "suggestion": "ປ້ອນຊື່"
         }
       ],
       "approved_at": null
@@ -207,13 +207,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'නම ලියන්න' while literally meaning 'Write name', is not the most natural or common way to say 'Enter name' in Sinhala. A more suitable translation would convey the action of entering or typing a name.",
-          "suggestion": "ඇතුළත් කරන්න (Athulath karanna) - Enter, or නම් ඇතුළත් කරන්න (Nam athulath karanna) - Enter name"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -237,13 +231,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Unesi ime' literally translates to 'Enter my name'. The intended meaning of 'Enter name' is a prompt for the user to input their name, not to indicate that the system is entering the user's name.",
-          "suggestion": "Unesite ime"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -265,6 +253,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

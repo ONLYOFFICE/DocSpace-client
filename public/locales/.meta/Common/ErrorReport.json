@@ -3,7 +3,7 @@
   "content": "Error report",
   "content_en_sha1_hash": "4e31c347b987a17f7cb3d98f8aa8b10ea251a784",
   "created_at": "2025-05-19T21:30:45.100Z",
-  "updated_at": "2026-02-19T13:36:33.104Z",
+  "updated_at": "2026-04-08T10:12:50.073Z",
   "comment": {
     "text": "This translation key is used for the \"Error report\" label in a report dialog component, typically found in an error reporting feature. It describes the content of the label displayed to users when viewing or submitting error reports.",
     "is_auto": true,
@@ -177,7 +177,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Извештај грешке' literally means 'Report of an error' or 'Error's report', which sounds unnatural in Serbian for a UI label. In Serbian, the standard term for an error report is 'Извештај о грешкама' or simply 'Извештај о грешци'.",
+          "suggestion": "Извештај о грешци"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -186,7 +192,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Izveštaj greške\" is understandable, \"Izveštaj o grešci\" would be a more accurate and natural translation of 'Error report'. 'O' is needed to indicate 'report *about* an error'.",
+          "description": "The translation 'Izveštaj greške' literally means 'Report of an error' (singular/specific), whereas in the context of a UI label for a feature or a file title, 'Izveštaj o grešci' or 'Izveštaj o greškama' is the standard way to express 'Error report'. 'Izveštaj greške' sounds unnatural in Serbian.",
           "suggestion": "Izveštaj o grešci"
         }
       ],
@@ -211,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -89,5 +89,11 @@
   "WebhookRemoved": "Webhook rimosso",
   "Webhooks": "Webhook",
   "WebhooksGuide": "Guida ai webhook",
-  "WebhooksInfo": "Utilizza i webhook per eseguire azioni personalizzate su qualsiasi applicazione o sito Web che stai utilizzando in base a vari eventi in {{organizationName}} {{productName}}.\nQui puoi creare e gestire tutti i tuoi webhook, configurarli e sfogliare la cronologia di ogni webhook per controllarne le prestazioni."
+  "WebhooksInfo": "Utilizza i webhook per eseguire azioni personalizzate su qualsiasi applicazione o sito Web che stai utilizzando in base a vari eventi in {{organizationName}} {{productName}}.\nQui puoi creare e gestire tutti i tuoi webhook, configurarli e sfogliare la cronologia di ogni webhook per controllarne le prestazioni.",
+  "AgentCreated": "Agente AI creato",
+  "AgentDeleted": "Agente AI eliminato",
+  "AgentUpdated": "Agente AI Aggiornato",
+  "FormFilledOut": "Modulo compilato",
+  "FormStopped": "Modulo interrotto",
+  "FormSubmit": "Modulo inviato"
 }

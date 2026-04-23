@@ -89,5 +89,11 @@
   "WebhookRemoved": "Webhook kaldırıldı",
   "Webhooks": "Webhook’lar",
   "WebhooksGuide": "Webhook Kılavuzu",
-  "WebhooksInfo": "{{organizationName}} {{productName}}'deki çeşitli olaylara dayalı olarak kullandığınız herhangi bir uygulama veya web sitesinin yanında özel eylemler gerçekleştirmek için webhook kullanın. Burada, tüm webhook’larını oluşturup yönetebilir, yapılandırabilir ve performanslarını denetlemek için her bir webhook’un geçmişine göz atabilirsiniz."
+  "WebhooksInfo": "{{organizationName}} {{productName}}'deki çeşitli olaylara dayalı olarak kullandığınız herhangi bir uygulama veya web sitesinin yanında özel eylemler gerçekleştirmek için webhook kullanın. Burada, tüm webhook’larını oluşturup yönetebilir, yapılandırabilir ve performanslarını denetlemek için her bir webhook’un geçmişine göz atabilirsiniz.",
+  "AgentCreated": "Yapay Zeka Ajanı Oluşturuldu",
+  "AgentDeleted": "Yapay Zeka Ajanı Silindi",
+  "AgentUpdated": "Yapay Zeka Aracısı Güncellendi",
+  "FormFilledOut": "Form Dolduruldu",
+  "FormStopped": "Form Durduruldu",
+  "FormSubmit": "Form Gönderildi"
 }

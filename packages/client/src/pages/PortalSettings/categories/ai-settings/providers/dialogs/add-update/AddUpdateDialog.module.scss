@@ -53,9 +53,74 @@
   margin-top: 4px;
   color: variables.$gray;
 
-
   &.fieldHintError {
     color: var(--input-error-color);
   }
 }
 
+.selectedModelsField {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-top: 5px;
+}
+
+.selectedModelsLabel {
+  margin-bottom: 13px;
+}
+
+.requiredMark {
+  color: var(--input-error-color);
+}
+
+.addButtonAnchor {
+  display: inline-flex;
+  cursor: pointer;
+}
+
+.selectedModelsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  row-gap: 4px;
+  :global(.add-model-tag) {
+    width: 32px;
+    min-height: 24px;
+    max-width: 32px;
+    pointer-events: none;
+
+    svg {
+      width: 12px;
+      height: 12px;
+    }
+  }
+
+  :global(.model-tag) {
+    min-height: 24px;
+    max-width: calc(100% - 40px);
+    overflow: hidden;
+    pointer-events: none;
+    font-weight: 400;
+    border-color: #{variables.$light-gray-selected};
+
+    :global(.dark) & {
+      border-color: #{variables.$gray-dark-strong};
+    }
+
+    &:hover {
+      background: var(--tag-background) !important;
+      border: var(--tag-border) !important;
+    }
+  }
+
+  &.selectedModelsError {
+    :global(.add-model-tag) {
+      border-color: var(--input-error-color) !important;
+    }
+  }
+}
+
+.selectedModelsErrorText {
+  color: var(--input-error-color);
+  margin-top: 4px;
+}

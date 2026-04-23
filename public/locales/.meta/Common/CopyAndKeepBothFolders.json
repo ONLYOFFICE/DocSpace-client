@@ -3,7 +3,7 @@
   "content": "Copy and keep both folders",
   "content_en_sha1_hash": "176432b01539932c5ac6c8eb8c154f33251b3418",
   "created_at": "2025-05-19T21:30:43.753Z",
-  "updated_at": "2026-02-19T13:36:32.372Z",
+  "updated_at": "2026-04-08T14:16:49.817Z",
   "comment": {
     "text": "This translation key is used to display the text \"Copy and keep both folders\" in a file conflict resolution dialog. It is likely displayed as a button or option within the dialog, prompting users to choose whether to copy the contents of both source and destination folders.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Grammatical error in Arabic: 'بكلتا' (feminine dual) is used with 'المجلدين' (masculine dual). It should be 'بكلِّ' or 'بكلتا المجلّدتين' if folders were feminine, but since 'مجلد' is masculine, it must be 'بكل المجلدين' or 'بالمجلدين معاً'.",
+          "suggestion": "انسخ واحتفظ بكلا المجلدين"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -57,13 +63,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Αντιγραφή και διατήρηση και των δύο φακέλων\" is technically correct but slightly verbose and awkward. While 'και των δύο' (and both) is present, it's a bit redundant with 'και' already indicating a plural. A more natural phrasing would be preferred.",
-          "suggestion": "Αντιγραφή και διατήρηση των δύο φακέλων"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -99,37 +99,19 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Copy and keep both folders\" implies duplication and retention. The Japanese translation \"両方のフォルダをコピーして保存する\" translates to \"Copy both folders and save them.\" While similar, \"save\" has a slightly different connotation than \"keep.\" \"Keep\" often implies retaining them in their original state, whereas \"save\" might suggest some form of preservation or archiving.",
-          "suggestion": "Consider alternatives that more closely mirror the nuance of 'keep,' such as \"両方のフォルダをコピーして保持する\" (ryouhou no folderu o kopii shite hozon suru - Copy both folders and retain them) or \"両方のフォルダをコピーしてそのまま保管する\" (ryouhou no folderu o kopii shite sono mama hokan suru - Copy both folders and store them as is)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While '두 폴더 모두 복사하여 보관' is understandable, it's a slightly formal and literal translation. A more natural and common way to express 'Copy and keep both folders' in Korean would be '두 폴더를 모두 복사해서 보관하세요' or '두 폴더를 모두 복사하고 보관하세요'. The addition of a particle '를' clarifies the object being copied and kept.",
-          "suggestion": "두 폴더를 모두 복사해서 보관하세요 or 두 폴더를 모두 복사하고 보관하세요"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'keep' is incorrectly translated. 'ຮັກສາ' (haksah) primarily means 'protect' or 'preserve', not 'keep' in the sense of retaining something.",
-          "suggestion": "Consider using 'ເກັບໄວ້' (kep wai) which more accurately translates to 'keep' in the context of retaining both folders."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -177,43 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ෆෝල්ඩර' (folder) is spelled correctly.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'දෙකම' (both) is spelled correctly.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'පිටපත්' (copy) is spelled correctly.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'කර' (do) is spelled correctly.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'තබා' (keep) is spelled correctly.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'ගන්න' (get/take) is spelled correctly.",
-          "suggestion": null
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While the translation is understandable, a more natural translation might be 'ෆෝල්ඩර දෙකම බේකප් කර ගන්න' (folder dekama backup kara ganne). 'තබා ගන්න' (thaba ganne) implies holding onto something, while 'backup' is a more accurate representation of the action intended by 'copy'.",
-          "suggestion": "ෆෝල්ඩර දෙකම බේකප් කර ගන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -259,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

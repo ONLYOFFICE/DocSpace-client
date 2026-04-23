@@ -3,7 +3,7 @@
   "content": "Create spreadsheet",
   "content_en_sha1_hash": "aabb914cc2d4d7ca8505c225cce9704135be3dbf",
   "created_at": "2025-05-19T21:30:55.044Z",
-  "updated_at": "2026-02-19T13:36:32.509Z",
+  "updated_at": "2026-04-07T19:35:05.106Z",
   "comment": {
     "text": "This translation key is used for the text \"Create spreadsheet\" in a Hotkeys panel within a file creation process. It appears as a label next to a hotkey combination (Shift + s) that allows users to create a new spreadsheet. The translation of this key will be displayed on the UI, guiding users to associate the specific keyboard shortcut with the corresponding action.",
     "is_auto": true,
@@ -99,13 +99,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '스프레드 시트를 만듭니다' is technically correct but sounds slightly unnatural in Korean. A more natural phrasing would be '스프레드시트 만들기' or '스프레드시트 생성'.",
-          "suggestion": "스프레드시트 만들기"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -189,13 +183,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Elektronik Tablo Oluştur\" is understandable, a more natural and common translation for \"spreadsheet\" in this context would be \"Excel Tablosu\". \"Elektronik Tablo\" is a more literal translation and less idiomatic.",
-          "suggestion": "Excel Tablosu Oluştur"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

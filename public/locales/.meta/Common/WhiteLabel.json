@@ -3,7 +3,7 @@
   "content": "Logo settings",
   "content_en_sha1_hash": "cde0dbbc94f797482701f082adcc8ce183018e62",
   "created_at": "2025-05-26T07:15:49.607Z",
-  "updated_at": "2026-03-26T08:26:58.279Z",
+  "updated_at": "2026-04-07T19:59:31.693Z",
   "comment": {
     "text": "The \"Logo settings\" translation key is used to display a description for a logo-related setting in the portal settings. It appears in the branding section of the portal and might be seen in a header or on a button related to logo customization. Translators should provide a clear and concise text that explains the purpose of logo settings.",
     "is_auto": true,
@@ -69,13 +69,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Logo Einstellungen' is too literal. A more natural German translation would be 'Logoeinstellungen' or 'Logo-Einstellungen'. The direct translation doesn't flow well in German.",
-          "suggestion": "Logoeinstellungen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -156,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Portuguese translation \"Definições de login\" translates to \"Login settings\" which is not the same as \"Logo settings\". It implies login configurations instead of logo customization.",
-          "suggestion": "Configurações de logotipo"
+          "description": "The Portuguese translation 'Definições de login' means 'Login settings', which is completely different from the English 'Logo settings'.",
+          "suggestion": "Definições de logótipo"
         }
       ],
       "approved_at": null
@@ -183,18 +177,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ලාංඡනය' (Laanchchhana) is the correct spelling for 'Logo'.",
-          "suggestion": "No change needed. The spelling is correct."
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'ලාංඡනයේ සැකසුම්' (Laanchchhanae Saekasuum) is grammatically correct and means 'Logo Settings'. However, a more natural phrasing in Sinhala could potentially be 'ලාංඡන සැකසුම්' (Laanchchhana Saekasuum) - removing the locative case marker.",
-          "suggestion": "Consider 'ලාංඡන සැකසුම්' (Laanchchhana Saekasuum) for a slightly more natural phrasing."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -215,12 +198,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Логотип подешавања\" doesn't accurately convey \"Logo settings\". \"Подешавања\" translates to \"settings\", but \"Логотип подешавања\" is a bit clunky. A better translation would be more direct.",
-          "suggestion": "Логотип подесиоца"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Логотип подешавања\" sounds unnatural in Serbian. A more natural phrasing would use a different grammatical structure.",
+          "description": "The word order is incorrect, making it sound like 'Logo settings' (noun phrase) is 'Logo is settings' or 'Logo configuration' in a broken way. In Serbian, the noun being modified should come first, or a preposition should be used.",
           "suggestion": "Подешавања логотипа"
         }
       ],
@@ -229,7 +207,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word order is unnatural in Serbian. 'Logotip podešavanja' sounds like 'Logo settings' in a literal, broken way. In Serbian, the noun being modified should come first, or a preposition should be used.",
+          "suggestion": "Podešavanja logotipa"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -247,13 +231,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Cài đặt Logo\" is understandable, a more natural and common translation for 'Logo settings' would be 'Thiết lập logo'. 'Cài đặt' often implies installation, which isn't the intended meaning here.",
-          "suggestion": "Thiết lập logo"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

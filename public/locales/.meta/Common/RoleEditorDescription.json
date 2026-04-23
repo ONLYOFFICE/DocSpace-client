@@ -3,7 +3,7 @@
   "content": "Operations with existing files: viewing, editing, form filling, reviewing, commenting.",
   "content_en_sha1_hash": "9f355c9883cbf811bb7d07dfef49aac22ce21e3e",
   "created_at": "2025-05-19T21:30:48.012Z",
-  "updated_at": "2026-02-19T13:36:33.111Z",
+  "updated_at": "2026-04-08T00:51:11.325Z",
   "comment": {
     "text": "This translation key is used to display a description for operations related to existing files, such as viewing, editing, and commenting. It appears in UI elements that allow file interaction, providing context for users and helping to guide their actions.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'form filling' is translated as 'ملء النماذج' which is technically correct but sounds slightly awkward in this context. A more natural phrasing might be 'إكمال النماذج' (filling out forms).",
-          "suggestion": "Replace 'ملء النماذج' with 'إكمال النماذج'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -51,13 +45,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'ревю' is an uncommon and potentially incorrect translation for 'review' in this context. It's more commonly associated with fashion shows or product launches, not file reviews.",
-          "suggestion": "Преглед (pregled) is a more appropriate and common translation for 'review' in this context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -66,7 +54,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'prohlížení' (viewing) is repeated. The English text only mentions 'viewing' once.",
+          "description": "The word 'reviewing' is translated as 'prohlížení', which is a duplicate of 'viewing' (also 'prohlížení'). In this context, 'reviewing' should be translated as 'revize' or 'posuzování' to distinguish it from 'viewing'.",
           "suggestion": "Operace s existujícími soubory: prohlížení, editace, vyplňování formulářů, revize, komentování."
         }
       ],
@@ -96,13 +84,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"lomakkeen arkistointi\" is an unusual and potentially inaccurate translation of 'form filling'. It implies archiving a form, not filling it out.  'Form filling' implies adding information to a form.",
-          "suggestion": "Lomakkeen täyttäminen"
+          "description": "The word 'editing' in English is translated as 'lomakkeen arkistointi' (archiving forms) in Finnish, which is a completely different action. The correct term should relate to editing/modifying.",
+          "suggestion": "Toimenpiteet olemassa olevien tiedostojen kanssa: katselu, muokkaaminen, lomakkeen täyttäminen, tarkistaminen, kommentointi."
         },
         {
-          "type": "formatting",
-          "description": "The Finnish translation uses a colon after 'kanssa', which doesn't perfectly mirror the English formatting.  While not strictly incorrect, it deviates from the source.",
-          "suggestion": "Toimenpiteet olemassa olevien tiedostojen kanssa: katselu, lomakkeen täyttäminen, tarkistaminen, kommentointi."
+          "type": "missing_content",
+          "description": "The English term 'editing' is missing from the Finnish translation (it was replaced by an incorrect term), and 'form filling' was translated as 'lomakkeen arkistointi' (archiving) instead of 'lomakkeen täyttäminen' (filling).",
+          "suggestion": "Toimenpiteet olemassa olevien tiedostojen kanssa: katselu, muokkaaminen, lomakkeen täyttäminen, tarkistaminen, kommentointi."
         }
       ],
       "approved_at": null
@@ -116,13 +104,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Armenian translation uses a dash (-) to separate list items. While not strictly incorrect, a hyphen (–) is more common and visually cleaner for lists in Armenian.",
-          "suggestion": "Replace '-' with '–'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -148,14 +130,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Lao translation uses a long series of 'ການ' (kan) at the beginning of each activity. While technically not incorrect, it's stylistically repetitive and less fluent than alternatives. Consider streamlining the phrasing.",
-          "suggestion": "ການດໍາເນີນງານກັບໄຟລ໌ທີ່ມີຢູ່ແລ້ວ: ເບິ່ງ, ແກ້ໄຂ, ຕື່ມຂໍ້ມູນ, ທົບທວນ, ແລະໃຫ້ຄໍາເຫັນ."
-        },
-        {
           "type": "incorrect_translation",
-          "description": "“ການຕື່ມຮູບແບບການ” is a somewhat awkward translation of 'form filling'. It directly translates 'form' as 'ການຮູບແບບ' (kan hoop map) which isn't idiomatic.",
-          "suggestion": "ຕື່ມຂໍ້ມູນ"
+          "description": "The translation for 'form filling' is 'ການ​ຕື່ມ​ຮູບ​ແບບ​ການ' which is grammatically incorrect and nonsensical in Lao. It translates roughly to 'filling the form-ing' or 'filling the pattern-ing'.",
+          "suggestion": "ການ​ດໍາ​ເນີນ​ງານ​ກັບ​ໄຟລ​໌​ທີ່​ມີ​ຢູ່​ແລ້ວ​: ການ​ເບິ່ງ​, ການ​ແກ້​ໄຂ​, ການ​ຕື່ມ​ແບບຟອມ​, ການ​ທົບ​ທວນ​ຄືນ​, ການ​ໃຫ້​ຄໍາ​ເຫັນ​."
         }
       ],
       "approved_at": null
@@ -181,13 +158,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ficheiros' is a valid Portuguese word, but 'arquivos' might be more common and natural in this context, particularly when referring to digital files.",
-          "suggestion": "Operações com arquivos existentes: visualização, edição, preenchimento de formulários, revisão, comentários."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -211,13 +182,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'අදහස්' (adahas) is likely a typo. It should be 'අදහස් දැක්වීම්' (adahas dekvimv).",
-          "suggestion": "අදහස් දැක්වීම්"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -259,25 +224,19 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'form filling' is not perfectly captured by 'điền biểu mẫu'. A more accurate translation might be 'điền vào biểu mẫu' to emphasize the action of filling *into* a form.",
-          "suggestion": "điền vào biểu mẫu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Chinese translation uses a colon and a description after '支持的文件操作'. While not strictly incorrect, it's more common in Chinese UI to simply list operations with commas or a bulleted list for clarity.",
-          "suggestion": "支持的文件操作：查看、编辑、填写表单、审阅、评论。 -> 支持的文件操作：查看、编辑、填写表单、审阅，评论。"
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "Delete theme forever?",
   "content_en_sha1_hash": "1d2674e0456d07559023c5c5291d664180c2f00b",
   "created_at": "2025-05-19T21:30:51.150Z",
-  "updated_at": "2025-05-26T07:57:32.488Z",
+  "updated_at": "2026-04-09T03:28:31.294Z",
   "comment": {
     "text": "This translation key is used for a modal dialog that prompts users to confirm deleting their theme forever. The text appears in the footer of a modal dialog and is displayed when the user interacts with a delete button.",
     "is_auto": true,
@@ -45,25 +45,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Smazat téma navždy?' is a literal translation of 'Delete theme forever?'. While understandable, a more natural Czech phrasing would be 'Odstranit téma trvale?' or 'Vymazat téma trvale?'.  'Smazat' can sometimes imply a more superficial deletion.",
-          "suggestion": "Odstranit téma trvale?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Thema für immer löschen?' is a literal translation and could be improved for natural German phrasing. While technically correct, it sounds slightly awkward.",
-          "suggestion": "Theme dauerhaft löschen?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -93,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ջնջե՞լ ոճը ընդմիշտ:' is a literal translation and doesn't flow naturally in Armenian. A more natural phrasing would be 'Մշտապես ջնջել ոճը?' or 'Ջնջելու եք ոճը ընդմիշտ?'",
-          "suggestion": "Մշտապես ջնջել ոճը?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -114,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'このテーマを永遠に解除しますか？' literally translates to 'Will you permanently release this theme?'. It doesn't convey the meaning of 'Delete forever?'. A better translation would focus on 'Delete' rather than 'Release'.",
-          "suggestion": "このテーマを完全に削除しますか？"
+          "description": "The Japanese translation uses '解除' (cancel/release/deactivate) instead of '削除' (delete). This changes the meaning from deleting the theme to merely deactivating or unbinding it.",
+          "suggestion": "このテーマを永久に削除しますか？"
         }
       ],
       "approved_at": null
@@ -129,25 +111,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ລຶບຮູບແບບສີສັນຖາວອນບໍ?' while understandable, isn't the most natural or accurate translation of 'Delete theme forever?'. The term 'ຮູບແບບສີສັນ' is a bit verbose for 'theme'.",
-          "suggestion": "ລຶບທິມແທ້ບໍ?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'dizains' (design) doesn't perfectly capture the meaning of 'theme' in this context. 'Tēma' would be a more accurate translation.",
-          "suggestion": "Vai izdzēst tēmu uz visiem laikiem?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -165,13 +135,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Pretende eliminar o tema permanentemente?' is grammatically correct but sounds overly formal for a simple confirmation dialog. A more natural phrasing would be closer to 'Quer eliminar o tema permanentemente?' or 'Eliminar o tema permanentemente?'",
-          "suggestion": "Quer eliminar o tema permanentemente?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -183,13 +147,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Doriţi să ştergeţi tema pentru totdeauna?' is a bit formal. While grammatically correct, it's more suitable for a desktop application. For a mobile app or a more conversational UI, a less formal phrasing would be better.",
-          "suggestion": "Consider a more casual phrasing like 'Vrei să ştergi tema definitiv?' or 'Vrei să ştergi tema pentru totdeauna?' (though the latter is closer to the original)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -201,25 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'සදහටම' is a valid Sinhala word but can be improved for clarity and flow in this context. While it literally translates to 'forever,' it might sound a bit formal or slightly unnatural in a UI confirmation dialog.",
-          "suggestion": "තේමාව සම්පූර්ණයෙන්ම මකන්නද?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Chcete natrvalo vymazať tému?' is a literal translation and sounds unnatural in Slovak. A more natural phrasing would convey the sense of permanently deleting a theme.",
-          "suggestion": "Consider 'Chcete tému nenávratne odstrániť?' or 'Chcete tému trvale zmazať?'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -228,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Trajen izbris teme?' is grammatically correct but doesn't fully capture the nuance of 'Delete theme forever?'. 'Trajen' implies permanence, but 'izbris' (deletion) is more common. A more natural translation would convey the finality of the action.",
-          "suggestion": "Potrdilo za trajno izbris teme?"
+          "description": "The word 'Trajen' is an adjective meaning 'permanent/lasting', but the sentence structure 'Trajen izbris teme?' is grammatically incorrect and translates roughly to 'Permanent deletion of theme?' rather than the interrogative 'Delete theme forever?'. It lacks the verb necessary to convey the action of deleting.",
+          "suggestion": "Izbrišite temo za vedno?"
         }
       ],
       "approved_at": null
@@ -237,25 +183,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Обриши тему заувек?\" while understandable, doesn't perfectly capture the formality and directness of \"Delete theme forever?\". \"Заувек\" implies 'forever' but can feel slightly less formal than 'forever' in this context.  A more accurate translation emphasizing the finality would be preferable.",
-          "suggestion": "Избриши тему трајно?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Obriši temu zauvek?' while understandable, isn't the most natural way to express \"Delete theme forever?\" in Serbian. 'Zauvek' translates directly to 'forever' but feels a bit literal in this context. A more idiomatic translation would use a phrase conveying permanence or irrecoverability.",
-          "suggestion": "Obriši temu trajno?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -277,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

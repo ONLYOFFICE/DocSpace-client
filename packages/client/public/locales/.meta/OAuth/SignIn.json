@@ -3,7 +3,7 @@
   "content": "Sign in with {{productName}}",
   "content_en_sha1_hash": "fe0a426c94ba375b201a50dc71c51007d0da07a3",
   "created_at": "2025-05-19T21:30:54.045Z",
-  "updated_at": "2025-05-24T07:05:19.543Z",
+  "updated_at": "2026-04-07T19:35:05.167Z",
   "comment": {
     "text": "This translation key is used to display a sign-in label that includes a product name placeholder. It appears in a social button component within an OAuth preview dialog and allows users to sign in using their account associated with the referenced product.",
     "is_auto": true,
@@ -69,13 +69,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Kirjaudu sisään sovellukseen {{productName}}' literally translates to 'Log in to the application {{productName}}'.  While understandable, a more natural Finnish phrasing for 'Sign in with {{productName}}' would be something like 'Kirjaudu sisään {{productName}} avulla' (Log in with {{productName}}).",
-          "suggestion": "Kirjaudu sisään {{productName}} avulla"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -87,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Մուտք գործել {{productName}}-ով\" is a literal translation and doesn't convey the natural phrasing for 'Sign in with {{productName}}' in Armenian. It sounds awkward.",
-          "suggestion": "Մուտքագրվել {{productName}}-ի միջոցով or Գրանցվել {{productName}}-ով"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -111,13 +99,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Korean translation lacks a space after the product name placeholder and before the verb '로그인'.",
-          "suggestion": "{{productName}} 로그인 "
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -159,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Conectare prin' is understandable, 'Sign in with' is more accurately translated as 'Autentificare cu' or 'Logare cu'. 'Conectare prin' implies a connection rather than authentication.",
-          "suggestion": "Autentificare cu {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -177,18 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"{{productName}} සමඟ ලගා වන්න\" doesn't fully convey the meaning of 'Sign in with {{productName}}'. 'ලගා වන්න' implies 'come closer' or 'get closer', which isn't the primary action of signing in. A more accurate translation would use a verb relating to authentication or accessing an account.",
-          "suggestion": "{{productName}} ඇතුළුවන්න"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'ඇතුළුවන්න' (athuluvanna) is a better suggestion, a more natural translation might involve using 'තුළට බැසන්න' (thulatha basanna) which means 'to log in'.",
-          "suggestion": "{{productName}} තුළට බැසන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -206,25 +171,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation \"Пријавите се путем {{productName}}\" translates to \"Sign in via {{productName}}\". While understandable, it's less common and slightly less natural than a more direct translation like \"Пријавите се са {{productName}}\" (Sign in with {{productName}}).",
-          "suggestion": "Пријавите се са {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Prijavite se putem {{productName}}' is not the most natural or idiomatic way to say 'Sign in with {{productName}}'. While technically correct, it's a bit clunky.",
-          "suggestion": "Prijavite se uz pomoć {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -248,13 +201,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, '使用{{productName}}登录' is a very literal translation. A more natural and common phrasing in Chinese would be '通过{{productName}}登录' or '用{{productName}}登录'. '使用' often implies a more involved process.",
-          "suggestion": "通过{{productName}}登录"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

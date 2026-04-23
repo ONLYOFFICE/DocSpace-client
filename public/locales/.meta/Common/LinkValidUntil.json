@@ -3,7 +3,7 @@
   "content": "This link will be valid until",
   "content_en_sha1_hash": "529ee7a00442d6f484c8d84c00051941ecc9d956",
   "created_at": "2025-08-26T11:15:03.492Z",
-  "updated_at": "2026-02-19T13:36:32.541Z",
+  "updated_at": "2026-04-08T05:29:55.427Z",
   "comment": {
     "text": "This key displays the text \"This link will be valid until\" to indicate the expiration date of a link within a dialog. It's used to inform the user how long a link remains active. Translators should ensure the phrasing accurately conveys the link's expiration timeframe.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The translation 'Bu keçid vaxta qədər etibarlı olacaq' means 'This link will be valid until the time', which is an incomplete thought in Azerbaijani. It fails to convey that the link is valid *until a specific date/time* (the 'until' part is grammatically dangling).",
+          "suggestion": "Bu keçid son etibarlılıq müddəti:"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -75,7 +81,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Finnish translation 'Tämä linkki on voimassa' means 'This link is valid', missing the crucial 'until' part which indicates the expiration timeframe.",
+          "suggestion": "Tämä linkki on voimassa siihen asti kuin"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -159,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'සබැඳිය වලංගු කාලය:' means 'Link validity period:' or 'Link valid time:', which changes the sentence from a statement ('This link will be valid until') to a label. This alters the grammatical function and tone of the UI string.",
+          "suggestion": "මෙම සබැඳිය වලංගු වන්නේ:"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

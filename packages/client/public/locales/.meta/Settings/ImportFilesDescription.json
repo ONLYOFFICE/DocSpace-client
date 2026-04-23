@@ -3,7 +3,7 @@
   "content": "User files and documents will be imported into <1>{{sectionName}}</1>.",
   "content_en_sha1_hash": "a233453e375951494b46863dca81b3b1cf6f3d48",
   "created_at": "2025-10-03T10:06:58.941Z",
-  "updated_at": "2025-11-13T07:58:08.216Z",
+  "updated_at": "2026-04-09T02:53:28.041Z",
   "comment": {
     "text": "This text explains where user files and documents will be imported. It appears within an import process, likely associated with a step or dialog, and the destination is dynamically determined by the `sectionName` (e.g., \"My Documents\"). Translators should ensure the `sectionName` is translated appropriately to accurately reflect the import location.",
     "is_auto": true,
@@ -99,7 +99,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation uses '가져오기 됩니다', which is grammatically awkward and sounds like a direct, unnatural machine translation of 'will be imported'. It translates more like 'is being imported' or 'becomes importing'.",
+          "suggestion": "사용자 파일 및 문서는 <1>{{sectionName}}</1>(으)로 가져오기 됩니다."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {

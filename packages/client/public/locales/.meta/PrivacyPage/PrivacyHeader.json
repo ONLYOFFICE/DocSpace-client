@@ -3,7 +3,7 @@
   "content": "This document is encrypted",
   "content_en_sha1_hash": "bcb0db122a3fba433a7d7bc8a1f4b05a5bcac4ca",
   "created_at": "2025-05-19T21:30:53.431Z",
-  "updated_at": "2025-11-18T14:41:50.069Z",
+  "updated_at": "2026-04-09T07:13:37.499Z",
   "comment": {
     "text": "This translation key is used for a header that displays a warning about encryption when viewing private rooms. It appears in a prominent center-aligned text on the Private Rooms page.",
     "is_auto": true,
@@ -129,13 +129,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'is encrypted' is best translated as 'criptografado' in Portuguese, not 'encriptado'. While 'encriptado' is sometimes used, 'criptografado' is the more standard and accurate term.",
-          "suggestion": "Este documento está criptografado"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -205,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

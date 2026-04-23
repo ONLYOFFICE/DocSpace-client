@@ -3,7 +3,7 @@
   "content": "Language and Time Zone Settings is a way to change the language of the whole portal for all portal users and to configure the time zone so that all the events of the portal will be shown with the correct date and time.",
   "content_en_sha1_hash": "9503b26b14f5ba17a6a5797217e4af9ffe524df3",
   "created_at": "2025-05-19T21:30:51.767Z",
-  "updated_at": "2026-02-19T13:36:32.715Z",
+  "updated_at": "2026-04-09T02:38:51.819Z",
   "comment": {
     "text": "This translation key describes a navigation label that explains the purpose of customizing language and time zone settings on a portal. It appears in a mobile category section, guiding users to configure these settings for accurate event dates and times.",
     "is_auto": true,
@@ -27,35 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"حيث يمكنهم متابعة\" (haytha yumkinuhum mutaaba'ah) translates to 'where they can follow' which doesn't accurately convey the meaning of 'so that all the events of the portal will be shown'. A more accurate translation would indicate the purpose of the timezone configuration.",
-          "suggestion": "حيث ستُعرض (haythu satu'radh) - 'so that it will be displayed' or 'لضمان عرض (li-damaan 'ardh)' - 'to ensure display' "
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The wording \"إعدادات اللغة والمنطقة الزمنية هي طريقة لتغير\" (I'idaadaat allughah walminṭaqat az-zamaniyyah hiya ṭarīqah li-taghayyur) reads as 'Language and Time Zone Settings is a way to change'. While technically correct, a more natural and fluent phrasing would be beneficial.",
-          "suggestion": "تتيح إعدادات اللغة والمنطقة الزمنية (tutih i'idaadaat allughah walminṭaqat az-zamaniyyah) - 'Language and Time Zone Settings allows' or 'تُمكن إعدادات اللغة والمنطقة الزمنية (tumakkin i'idaadaat allughah walminṭaqat az-zamaniyyah) - 'Language and Time Zone Settings enables'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The phrase 'portaldakı bütün hadisələrin düzgün tarix və vaxtla göstərilməsi' is slightly awkward. It could be improved for better flow.",
-          "suggestion": "portaldakı bütün hadisələrin düzgün tarix və vaxt ilə göstərilməsi"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of '–' (en dash) is not standard in Azerbaijani. It should be a regular hyphen '-'.",
-          "suggestion": "Replace '–' with '-'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -103,18 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ամբողջ պորտալի լեզուն փոխելու\" is slightly awkward. While technically correct, it could be phrased more naturally.  A more common phrasing would avoid the double genitive.",
-          "suggestion": "Լեզվի կարգավորումները պորտալի բոլոր օգտագործողների համար լեզուն փոխելու միջոց է"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ժամային գոտին այնպես կարգավորելու\" is also a bit clunky.  It implies a manner of configuration rather than simply configuration.",
-          "suggestion": "Ժամային գոտին կարգավորելու համար"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -126,18 +93,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"は、すべてのポータルユーザーのためにポータル全体の言語を変更し\" is a bit clunky. A more natural way to express 'for all portal users' would be something like \"すべてのポータルユーザー向けの\". The phrasing also implies the change affects the entire portal at once, which might not be the intended meaning.",
-          "suggestion": "言語とタイムゾーンの設定は、すべてのポータルユーザー向けのポータル全体の言語を変更し"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The overall sentence structure is a bit passive and verbose for Japanese. It reads more like a direct translation of the English rather than a natural Japanese expression.",
-          "suggestion": "言語とタイムゾーンの設定を使用すると、ポータル全体の言語をすべてのユーザー向けに変更したり、すべてのイベントの正しい日付と時刻表示のためにタイムゾーンを設定したりできます。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -152,18 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'ປະຕູ' (portal) is used repeatedly. While it technically means 'door' or 'gate', in the context of a digital portal, it's not the most natural word. 'ເວັບໄຊ້' (website) or a more general term for 'platform' might be better.",
-          "suggestion": "Consider replacing 'ປະຕູ' with 'ເວັບໄຊ້' or a more appropriate term depending on the target audience and the overall tone. For example: 'ເວັບໄຊ້' or 'ລະບົບ'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ເຫດການທັງໝົດຂອງປະຕູຈະສະແດງດ້ວຍວັນທີ ແລະເວລາທີ່ຖືກຕ້ອງ' could be more clearly translated. It's a bit literal and doesn't flow naturally.",
-          "suggestion": "Consider rephrasing to something like: 'ເຫດການທັງໝົດໃນລະບົບຈະຖືກສະແດງດ້ວຍວັນທີ ແລະເວລາທີ່ຖືກຕ້ອງ' or 'ເຫດການທັງໝົດຈະຖືກສະແດງດ້ວຍວັນທີ ແລະເວລາທີ່ຖືກຕ້ອງຕາມເຂດເວລາທີ່ກຳນົດໄວ້'."
-        },
-        {
-          "type": "formatting",
-          "description": "The Lao translation is grammatically correct, but the flow could be improved by breaking up some of the longer clauses.  This would improve readability.",
-          "suggestion": "Consider adding conjunctions or restructuring sentences for better flow and readability. For example, break up the first sentence."
+          "description": "The term 'portal' is translated literally as 'ປະຕູ' (door/gate), which is incorrect in a software context. In IT/Software localization, 'portal' should be transliterated or referred to as a digital platform/portal.",
+          "suggestion": "ການຕັ້ງຄ່າພາສາ ແລະ ເຂດເວລາ ແມ່ນວິທີການປ່ຽນພາສາຂອງທົ່ວທັງ Portal ສຳລັບຜູ້ໃຊ້ Portal ທັງໝົດ ແລະ ກຳນົດເຂດເວລາ ເພື່ອໃຫ້ເຫດການທັງໝົດຂອງ Portal ສະແດງວັນທີ ແລະ ເວລາທີ່ຖືກຕ້ອງ."
         }
       ],
       "approved_at": null
@@ -179,14 +125,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase 'Taal- en tijdzone-instellingen' is grammatically awkward. While understandable, a more natural phrasing would be 'Taal- en tijdzone instellingen' or 'Instellingen voor taal en tijdzone'.",
-          "suggestion": "Taal- en tijdzone instellingen"
-        },
-        {
-          "type": "grammar",
-          "description": "The repetition of 'portaal' can be improved. It's a bit clunky to read.",
-          "suggestion": "Taal- en tijdzone instellingen is een manier om de taal van de hele website te wijzigen voor alle gebruikers en om de tijdzone te configureren, zodat alle gebeurtenissen met de juiste datum en tijd worden weergegeven."
+          "type": "incorrect_translation",
+          "description": "The Dutch translation uses 'de hele portaal' (incorrect gender) and 'van de portal' (inconsistent spelling/gender), but more importantly, 'de hele portaal' is grammatically incorrect as 'portaal' is a neuter noun ('het portaal'). However, per the strict instructions to only report CRITICAL errors that change meaning, the most significant error is the inconsistent spelling of 'portaal' vs 'portal' which can lead to confusion in a UI context.",
+          "suggestion": "Taal- en tijdzone-instellingen is een manier om de taal van het hele portaal te wijzigen voor alle portaalgebruikers en om de tijdzone te configureren, zodat alle gebeurtenissen van het portaal met de juiste datum en tijd worden weergegeven."
         }
       ],
       "approved_at": null
@@ -214,19 +155,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase 'pentru că ora și data evenimentelor de pe portal este afișată corect' is grammatically awkward. It implies the events themselves are being displayed correctly, rather than the date and time *of* the events.",
-          "suggestion": "pentru ca data și ora evenimentelor de pe portal să fie afișate corect."
-        },
-        {
           "type": "incorrect_translation",
-          "description": "The English content uses 'a way to change'. The Romanian translation doesn't have a direct equivalent to convey the meaning of 'a method' or 'a means'.",
-          "suggestion": "Setări limbă și fus orar reprezintă modul de a schimba..."
-        },
-        {
-          "type": "formatting",
-          "description": "The sentence is quite long and could benefit from being broken down for better readability in Romanian. A semicolon or connecting word could improve flow.",
-          "suggestion": "Setări limbă și fus orar reprezintă modul de a schimba limba portalului pentru toți utilizatorii portalului, și de a configura fusul orar pentru ca data și ora evenimentelor de pe portal să fie afișate corect."
+          "description": "The Romanian translation changes the meaning of the second clause from 'so that all events... will be shown' (purpose/result) to 'because the time and date... is displayed' (causality), which alters the logical flow of the instruction.",
+          "suggestion": "Setări limbă și fus orar este modul de a schimba limba întregului portal pentru toți utilizatorii portalului și de a configura fusul orar, astfel încât toate evenimentele portalului să fie afișate cu data și ora corecte."
         }
       ],
       "approved_at": null
@@ -242,24 +173,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'way to change the language of the whole portal for all portal users' is not accurately reflected in the translation. The Sinhala translation implies users can change settings through their profile, which isn't the primary meaning of the English text (admin changing language for all users).",
-          "suggestion": "භාෂාව සහ වේලා කලාපයේ සැකසුම් මගින් සියලුම පරිශ්‍රීලකයින් සඳහාPortal හි භාෂාව සැකසීමට හැකිය."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'configure the time zone so that all the events of the portal will be shown with the correct date and time' is not fully conveyed. The Sinhala translation implies a more personalized setting rather than a portal-wide configuration.",
-          "suggestion": "Portal හි සියලුම ක්‍රියාකාරකම්වල දිනය සහ වේලාව නිවැරදිව පෙන්වීමට වේලා කලාපය සැකසීමට හැකිය."
-        },
-        {
-          "type": "grammatical",
-          "description": "The sentence 'Portal හි සියලුම ක්‍රියාකාරකම්වල දිනය සහ වේලාව නිවැරදිව පෙන්වීමට වේලා කලාපය සැකසීමට හැකිය' can be improved for better flow and clarity.",
-          "suggestion": "වේලා කලාපය සැකසීමෙන් Portal හි සියලුම ක්‍රියාකාරකම්වල දිනය සහ වේලාව නිවැරදිව පෙන්විය හැක."
-        },
-        {
-          "type": "spelling",
-          "description": "There is a minor consistency issue. 'Portal' is used in Sinhala. It is preferable to maintain consistency using the same term in both languages or to create a more localized alternative if the portal is primarily used by Sinhala speakers.",
-          "suggestion": "Consider using a localized alternative for 'Portal' if appropriate for the target audience."
+          "type": "missing_content",
+          "description": "The Sinhala translation includes an extra sentence ('පරිශ්‍රීලකයින්ට තමන්ගේ පැතිකඩ හරහා ද රිසි පරිදි මෙම සැකසුම් වෙනස් කිරීමට හැකිය.') that is not present in the English source text.",
+          "suggestion": "භාෂාව සහ වේලා කලාපයේ සැකසුම් මගින් සමස්ත ද්වාරයේම (portal) භාෂාව සියලුම පරිශීලකයින් සඳහා වෙනස් කිරීමට සහ සියලුම ද්වාර සිදුවීම් නිවැරදි දිනය සහ වේලාවෙන් පෙන්වීම සඳහා වේලා කලාපය වින්යාසගත කිරීමට හැකිය."
         }
       ],
       "approved_at": null
@@ -279,103 +195,43 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Поставке' should ideally be 'Подешавања' for better consistency with common terminology relating to settings.",
-          "suggestion": "Подешавања језика и временске зоне"
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'тако да ће сви догађаји на порталу бити приказани' can be improved for better flow.  It's a little clunky in Serbian.",
-          "suggestion": "тако да ће сви догађаји на порталу бити приказани са тачним датумом и временом."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Postavke' is correctly spelled, but might be more formally 'Podešavanja' depending on the desired tone. 'Postavke' is common and understandable, though.",
-          "suggestion": "Consider 'Podešavanja' for a more formal tone."
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'tako da će' is grammatically correct, but could be slightly improved for flow. While accurate, it's a bit clunky.",
-          "suggestion": "tako da se"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation is a very long sentence and difficult to parse. It should be broken down for better readability.",
-          "suggestion": "Consider splitting the sentence into two or three shorter sentences. For example: 'Dil ve Saat Dilimi Ayarları, tüm portal kullanıcıları için portalın dilini değiştirmenizi sağlar. Ayrıca, portaldaki tüm olayların doğru tarih ve saatle gösterilmesini sağlamak için saat dilimini yapılandırabilirsiniz.'"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'bir yoludur' (is a way) feels a bit awkward in this context.  A more natural phrasing would be to describe it directly.",
-          "suggestion": "Replace 'bir yoludur' with something more direct, like 'size olanak tanır' (allows you) or 'sağlar' (provides)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation uses a long dash (—) which might not be the standard convention in all Ukrainian texts. A hyphen (-) might be more common or preferred.",
-          "suggestion": "Consider replacing the long dash (—) with a hyphen (-)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Language and Time Zone Settings' is translated as 'Cài đặt ngôn ngữ và múi giờ'. While technically correct, a more natural translation might be 'Thiết lập ngôn ngữ và múi giờ' or 'Cài đặt ngôn ngữ và thời gian'.",
-          "suggestion": "Thiết lập ngôn ngữ và múi giờ"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'portal' is translated as 'cổng thông tin'. While acceptable, it's a bit literal. A more natural translation would be 'nền tảng' or 'trang web' depending on the context.",
-          "suggestion": "nền tảng"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'to configure' is translated as 'định cấu hình'. While technically correct, it can be simplified to 'thiết lập'.",
-          "suggestion": "thiết lập"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"适用于所有门户用户\" (suitable for all portal users) is a bit awkward and doesn't quite capture the original meaning of \"a way to change the language of the whole portal for all portal users\". It implies the setting *applies* to all users, rather than being *for* changing the language *for* them.",
-          "suggestion": "语言和时区设置可以用于更改整个门户的语言，并配置时区，方便所有门户用户。"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"让门户中所有事件以正确的日期和时间显示\" (let all events in the portal be displayed with the correct date and time) is a little clumsy and indirect. The English version directly states the purpose.",
-          "suggestion": "确保门户中所有事件以正确的日期和时间显示。"
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

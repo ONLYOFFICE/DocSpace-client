@@ -3,7 +3,7 @@
   "content": "The paid {{aiServices}} will be deactivated.",
   "content_en_sha1_hash": "643e1bbcdfeeb50d81382ef8e043be2d9fa556ea",
   "created_at": "2026-03-26T08:26:46.857Z",
-  "updated_at": "2026-03-26T08:28:20.146Z",
+  "updated_at": "2026-04-09T03:20:52.402Z",
   "comment": {
     "text": "This key displays a message within a dialog informing the user that paid AI services are being deactivated. It's used to explain the consequence of disabling AI services, likely in a settings or configuration dialog. The `{{aiServices}}` variable should be replaced with the specific name of the AI service.",
     "is_auto": true,
@@ -19,6 +19,270 @@
   ],
   "languages": {
     "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation uses the singular form 'المدفوع' (the paid [one]), which implies only one service is paid. The English source uses the plural 'paid {{aiServices}}'.",
+          "suggestion": "سيتم إلغاء تنشيط خدمات {{aiServices}} المدفوعة."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Bulgarian translation uses a singular masculine form ('Платеният {{aiServices}} ще бъде деактивиран'), whereas the English source uses a plural form ('The paid {{aiServices}} will be deactivated'). Since {{aiServices}} represents multiple services, the Bulgarian translation should be plural.",
+          "suggestion": "Платените {{aiServices}} ще бъдат деактивирани."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Grammatical number mismatch: 'Platné {{aiServices}} bude deaktivováno' uses singular verb/adjective forms, but 'aiServices' (services) is plural. This changes the meaning from 'services will be deactivated' to 'service will be deactivated'.",
+          "suggestion": "Platné {{aiServices}} budou deaktivovány."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation uses the singular neuter form 'Το πληρωμένο {{aiServices}} θα απενεργοποιηθεί', which implies a single paid service. Since 'services' is plural in English, the Greek translation should use the plural form to maintain the correct meaning.",
+          "suggestion": "Οι πληρωμένες {{aiServices}} θα απενεργοποιηθούν."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation uses the singular form 'Maksullinen' (Paid), but the English source uses the plural 'The paid {{aiServices}}'. Since {{aiServices}} is a variable that can represent multiple services, the adjective should ideally be pluralized or the sentence structure adjusted to avoid a grammatical mismatch in Finnish.",
+          "suggestion": "Maksulliset {{aiServices}} poistetaan käytöstä."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text uses the plural 'services', but the French translation uses the singular 'service'. This creates a grammatical mismatch when the variable {{aiServices}} contains multiple items.",
+          "suggestion": "Les services payants {{aiServices}} seront désactivés."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Iegrofīninās' is not a valid Latvian word and appears to be a hallucination or a severe misspelling. The intended meaning 'will be deactivated' is not conveyed.",
+          "suggestion": "Maksas {{aiServices}} tiks deaktivētas."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Portuguese translation uses a singular noun phrase ('O {{aiServices}} pago será desativado'), whereas the English source uses a plural noun phrase ('The paid {{aiServices}} will be deactivated'). This creates a grammatical mismatch when the variable contains multiple services.",
+          "suggestion": "Os {{aiServices}} pagos serão desativados."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Portuguese translation uses the singular form ('O {{aiServices}} pago será desativado'), whereas the English source is plural ('The paid {{aiServices}} will be deactivated'). This creates a grammatical mismatch when the variable contains multiple services.",
+          "suggestion": "Os {{aiServices}} pagos serão desativados."
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation uses a singular form ('plătit va fi dezactivat'), whereas the English source uses a plural form ('paid {{aiServices}} will be deactivated'). This creates a grammatical mismatch if {{aiServices}} represents multiple services.",
+          "suggestion": "{{aiServices}} plătite vor fi dezactivate."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'ගෙවන {{aiServices}}' literally means 'paying {{aiServices}}' (as in a person who pays) rather than 'paid {{aiServices}}' (services that have been paid for). This changes the subject of the sentence.",
+          "suggestion": "ගෙවීම් කර ඇති {{aiServices}} අක්‍රිය කරනු ඇත."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Grammatical number mismatch: 'Platné {{aiServices}}' (plural) is paired with 'zostane deaktivované' (singular), which creates a logical error in Slovak. More importantly, the English 'The paid {{aiServices}}' implies the services themselves are paid, whereas the Slovak 'Platné' can be interpreted as 'The paid [amount/fee]...'. To match the English meaning of 'paid services', the noun must agree with the plural variable.",
+          "suggestion": "Platené {{aiServices}} budú deaktivované."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Zaplačna' is an incorrect adjective for 'paid' in this context. 'Zaplačna' refers to something related to paying/crying (from 'plačati' or 'plač'), whereas 'paid services' should be translated as 'plačane storitve'.",
+          "suggestion": "Plačane {{aiServices}} bodo deaktivirane."
+        }
+      ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

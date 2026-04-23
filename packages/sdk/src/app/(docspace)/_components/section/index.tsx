@@ -28,11 +28,10 @@
 
 import React from "react";
 import { observer } from "mobx-react";
-import { usePathname, useSearchParams } from "next/navigation";
-
-import FilesFilter from "@docspace/shared/api/files/filter";
+import { useSearchParams } from "next/navigation";
 
 import Section from "@docspace/ui-kit/components/section";
+import type { TViewAs } from "@docspace/ui-kit/types";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import { useSettingsStore } from "../../_store/SettingsStore";
@@ -47,6 +46,7 @@ type SectionProps = {
 
   showFilter?: boolean;
   showHeader?: boolean;
+  viewAs?: TViewAs;
 };
 
 export const SectionWrapper = observer(
@@ -57,27 +57,19 @@ export const SectionWrapper = observer(
     isEmptyPage,
     filesFilter,
     showFilter = true,
+    viewAs,
   }: SectionProps) => {
     const searchParams = useSearchParams();
-    const pathname = usePathname();
 
-    const getValue = (key: string) => {
-      const value = searchParams.get(key);
-      return value === "true" ? true : value === "false" ? false : value;
-    };
-
-    showFilter = getValue("showFilter") as boolean;
-
-    const [isFiltered, setIsFiltered] = React.useState(() =>
-      FilesFilter.getFilter({
-        search: `?${filesFilter}`,
-        pathname,
-      } as Location)!.isFiltered(),
-    );
-
-    React.useEffect(() => {
-      setIsFiltered(FilesFilter.getFilter(window.location)!.isFiltered());
-    }, [searchParams]);
+    const showFilterParam = searchParams.get("showFilter");
+    const effectiveShowFilter =
+      showFilterParam === null
+        ? showFilter
+        : showFilterParam === "true"
+          ? true
+          : showFilterParam === "false"
+            ? false
+            : showFilter;
 
     const settingsStore = useSettingsStore();
     const { currentDeviceType } = useDeviceType();
@@ -88,20 +80,14 @@ export const SectionWrapper = observer(
       <Section
         withBodyScroll
         settingsStudio={false}
-        viewAs="row"
+        viewAs={viewAs ?? settingsStore.filesViewAs ?? "row"}
         isEmptyPage={isEmptyList}
         currentDeviceType={currentDeviceType}
       >
         <Section.SectionHeader>{sectionHeaderContent}</Section.SectionHeader>
 
         <Section.SectionFilter>
-          {showFilter
-            ? !isEmptyList
-              ? sectionFilterContent
-              : !isFiltered
-                ? null
-                : sectionFilterContent
-            : null}
+          {effectiveShowFilter ? sectionFilterContent : null}
         </Section.SectionFilter>
 
         <Section.SectionBody>{sectionBodyContent}</Section.SectionBody>

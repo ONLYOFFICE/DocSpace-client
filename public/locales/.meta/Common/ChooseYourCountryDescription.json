@@ -3,7 +3,7 @@
   "content": "Select a language to browse available form templates",
   "content_en_sha1_hash": "574338d250ff1757c26dc808e2ccb0092a976b92",
   "created_at": "2026-03-31T15:18:06.609Z",
-  "updated_at": "2026-03-31T15:18:06.609Z",
+  "updated_at": "2026-04-08T15:28:00.056Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -26,7 +26,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is semantically incorrect. 'Müstəvi' means 'flat' or 'plane', which does not appear in the English source. Additionally, 'nəzərdə tutulan dilini' implies 'the language intended for...', which is a clumsy and inaccurate rendering of 'to browse available form templates'.",
+          "suggestion": "Mövcud form şablonlarına baxmaq üçün dil seçin"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -62,7 +68,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'lomapäinetyyppejä' is a typo/nonsense word. It seems to be a combination of 'lomake' (form) and 'tyyppi' (type), but it is not a valid Finnish word.",
+          "suggestion": "Valitse kieli, jotta voit selata saatavilla olevia lomakepohjia"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -104,7 +116,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation contains a redundant repetition of the word 'veidņu' (templates), resulting in 'veidņu paraugu veidņus' (template samples templates).",
+          "suggestion": "Izvēlieties valodu, lai apskatītu pieejamos veidņu paraugus."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -176,7 +194,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The word 'templates' (šablone) is missing; the translation only mentions 'forms' (obrasce).",
+          "suggestion": "Izaberite jezik da biste pregledali dostupne šablone obrazaca"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

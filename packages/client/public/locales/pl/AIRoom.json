@@ -6,7 +6,6 @@
   "EmptyKnowledgeDescriptionActions": "Spróbuj wykonać te czynności, aby zacząć:",
   "EmptyKnowledgeTitle": "Jeszcze nie przesłano żadnych plików.",
   "EmptyResultsTitle": "Brak wyników na razie",
-  "InstructionsDescriptionAgentExample": "Przykład: „Jesteś asystentem PR AI, który pomaga w pisaniu i redagowaniu komunikatów prasowych. Zachowuj profesjonalny, pewny siebie i przyjazny mediom ton. Wyraźnie podkreślaj kluczowe przesłania, unikaj żargonu i utrzymuj tekst zwięzły i angażujący.”",
   "KnowledgeDescription": "Prześlij pliki z komputera lub {{productName}}, aby zapewnić lepszy kontekst dla rozmowy. Zwróć uwagę: część lub całość przesłanych treści może zostać ujawniona podczas rozmowy.",
   "KnowledgeSelectIn": "Wybierz w {{productName}}",
   "KnowledgeUnavailable": "Baza wiedzy niedostępna",
@@ -14,5 +13,19 @@
   "ResponseQualityNode": "<1>Uwaga:</1> Jakość odpowiedzi może się różnić w zależności od modelu; zaleca się używanie nowszych modeli, aby uzyskać najlepsze wyniki.",
   "ResultStorage": "Przechowywanie wyników",
   "UploadFilesDevice": "Wgraj pliki z urządzenia osobistego.",
-  "UploadFilesPortal": "Wgraj pliki z {{sectionNameFirst}} lub {{sectionNameSecond}}"
+  "UploadFilesPortal": "Wgraj pliki z {{sectionNameFirst}} lub {{sectionNameSecond}}",
+  "AgentInViewModeWarning": "Jesteś w trybie <strong>wyświetlania tylko do czytania</strong> dla tego {{aiAgent}}. Możesz zobaczyć wyniki aktywności {{aiChat}} innych użytkowników.",
+  "CreateChatDescription": "Przejdź do zakładki {{aiChat}}, aby rozpocząć.",
+  "EmptyKnowledgeDescription": "Pliki przesłane tutaj zostaną indeksowane i użyte jako kontekst w zakładce {{aiChat}}. Dodaj pliki (do 10 MB każdy), aby zadawać pytania AI, generować treści lub współpracować nad informacjami.",
+  "EmptyResultsDescription": "Pliki wygenerowane w {{aiChat}} pojawią się tutaj automatycznie. Za każdym razem, gdy generujesz zawartość, rozpoczynasz czat lub wysyłasz wiadomość z wynikiem, wynik zostanie zapisany w tej sekcji.",
+  "EmptyResultsViewerDescription": "Zobaczysz tutaj wyniki aktywności {{aiChat}} innych użytkowników, gdy tylko będą dostępne.",
+  "InstructionsDescriptionAgent": "Opisz, jak {{aiAgent}} powinien się zachowywać i odpowiadać. Zdefiniuj jego rolę, ton i główne zadania.",
+  "Knowledge": "Baza wiedzy",
+  "KnowledgeUnavailableDescription": "Baza wiedzy jest obecnie wyłączona. Aby aktywować wyszukiwanie semantyczne i przetwarzanie dokumentów dla {{aiAgents}}, skonfiguruj dostawcę osadzeń w ustawieniach {{productName}}.",
+  "KnowledgeUnavailableDescriptionUser": "Baza wiedzy jest obecnie wyłączona. Aby aktywować wyszukiwanie semantyczne i przetwarzanie dokumentów dla {{aiAgents}}, skontaktuj się z administratorem {{productName}}, aby skonfigurować dostawcę osadzeń.",
+  "MCPDescriptionServers": "Wykorzystaj {{mcpServers}} podłączone przez administratora, aby ulepszyć doświadczenie czatu z AI. {{mcpServers}} może pomóc w ekstrakcji danych, podsumowaniach, inteligentnych sugestiach itp.",
+  "Model": "{{aiProvider}} i model",
+  "ModelDescription": "Wybierz {{aiProvider}} i model, które mają być używane w czatach tego pokoju. Ustawienie to jest obowiązkowe i dotyczy wszystkich uczestników.",
+  "NoAccessAIAgentTitle": "Przepraszam, nie ma Pan/Pani dostępu do {{aiAgent}}",
+  "InstructionsDescriptionAgentExample": "Przykład: „Jesteś asystentem PR AI, który pomaga pisać i edytować komunikaty prasowe. Zachowaj profesjonalny, pewny siebie i przyjazny dla mediów ton. Wyraźnie podkreślaj kluczowe przekazy, unikaj żargonu oraz dbaj o to, aby tekst był zwięzły i angażujący”."
 }

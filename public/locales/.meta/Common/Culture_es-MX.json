@@ -3,7 +3,7 @@
   "content": "Español (México)",
   "content_en_sha1_hash": "dd8f0fa3150566d9dc84c30636d4a951e3f8da24",
   "created_at": "2025-05-19T21:30:44.032Z",
-  "updated_at": "2025-05-24T01:18:10.938Z",
+  "updated_at": "2026-04-08T13:31:54.063Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -20,37 +20,73 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Spanish (Latin script) instead of Arabic script.",
+          "suggestion": "الإسبانية (المكسيك)"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Spanish, not Azerbaijani.",
+          "suggestion": "İspan dili (Meksika)"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Bulgarian translation is actually Spanish, not Bulgarian.",
+          "suggestion": "Испански (Мексико)"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Czech translation is actually Spanish, not Czech.",
+          "suggestion": "Španělština (Mexiko)"
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The German translation is actually Spanish, not German.",
+          "suggestion": "Spanisch (Mexiko)"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Greek translation is actually Spanish, not Greek.",
+          "suggestion": "Ισπανικά (Μεξικό)"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -62,91 +98,181 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Finnish translation is actually Spanish, not Finnish.",
+          "suggestion": "Espanja (Meksiko)"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The French translation is actually Spanish, not French.",
+          "suggestion": "Espagnol (Mexique)"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Armenian translation is identical to the English text and does not use the Armenian language or script.",
+          "suggestion": "Իսպաներեն (Մեքսիկա)"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Spanish instead of Italian.",
+          "suggestion": "Spagnolo (Messico)"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation is identical to the English text and does not translate the language name into Japanese.",
+          "suggestion": "スペイン語 (メキシコ)"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Korean translation is identical to the English text and does not use the Korean script or translate the language name.",
+          "suggestion": "스페인어 (멕시코)"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Spanish/Latin script instead of Lao script.",
+          "suggestion": "ພາສາអេ Spanyol (ເມັກຊິໂກ)"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Spanish, not Latvian.",
+          "suggestion": "Spāņu (Meksika)"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Dutch translation is actually Spanish, not Dutch.",
+          "suggestion": "Spaans (Mexico)"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Polish translation is actually Spanish, not Polish.",
+          "suggestion": "Hiszpański (Meksyk)"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Portuguese translation uses the Spanish word 'Español' instead of the Portuguese 'Espanhol'.",
+          "suggestion": "Espanhol (México)"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation uses the Spanish name for the language instead of the Portuguese name.",
+          "suggestion": "Espanhol (México)"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Spanish, not Romanian.",
+          "suggestion": "Spaniolă (Mexica)"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Russian translation is identical to the English text and is written in Spanish/Latin script instead of Russian.",
+          "suggestion": "Испанский (Мексика)"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Spanish/Latin script instead of Sinhala script.",
+          "suggestion": "ස්පාඤ්ඤය (මෙක්සිකෝව)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -176,25 +302,55 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Turkish translation is identical to the English text and is actually Spanish, not Turkish.",
+          "suggestion": "İspanyolca (Meksika)"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Spanish instead of Ukrainian.",
+          "suggestion": "Іспанська (Мексика)"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Spanish instead of Vietnamese.",
+          "suggestion": "Tiếng Tây Ban Nha (Mexico)"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Spanish, not Albanian.",
+          "suggestion": "Spanjisht (Meksikë)"
+        }
+      ],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "Enter title",
   "content_en_sha1_hash": "0f84658cc7db030dad659aafdf53069d1f3f7f96",
   "created_at": "2025-05-19T21:30:51.532Z",
-  "updated_at": "2025-10-03T13:19:30.540Z",
+  "updated_at": "2026-04-09T03:02:35.154Z",
   "comment": {
     "text": "The \"EnterTitle\" translation key is used to display a placeholder text in a form field on a welcome page. It will be visible until the title is entered by the user and appears as a dynamic placeholder when the form is in a loading state.",
     "is_auto": true,
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation 'Ievadiet nosaukums' is not the most natural or accurate translation of 'Enter title'. 'Nosaukums' means 'name', but 'title' has a more specific meaning. A more appropriate translation would use a word like 'nosaukuma'.",
-          "suggestion": "Ievadiet nosaukuma"
+          "description": "The Latvian translation 'Ievadiet nosaukums' is grammatically incorrect in a way that affects the meaning; 'nosaukums' is in the nominative case, but after the imperative verb 'ievadiet', it must be in the accusative case ('nosaukumu').",
+          "suggestion": "Ievadiet nosaukumu"
         }
       ],
       "approved_at": null
@@ -159,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"සිරැසිය යොදන්න\" doesn't accurately convey the meaning of 'Enter title'. 'සිරැසිය' primarily means 'beauty' or 'grace' and 'යොදන්න' means 'to add' or 'to apply'. The intended meaning is to input a title.",
-          "suggestion": "කාර්තුවන ශීර්ෂකය ඇතුළත් කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -189,13 +183,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Unesi naslov\" is a literal translation and doesn't quite capture the meaning of 'Enter title' in a UI context. A more natural translation would be 'Naslov:' or 'Unesite naslov:'",
-          "suggestion": "Naslov:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -217,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

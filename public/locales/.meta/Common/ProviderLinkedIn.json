@@ -3,7 +3,7 @@
   "content": "LinkedIn",
   "content_en_sha1_hash": "6b6390a4416131f82b6ffb509f6e779e5dd9630f",
   "created_at": "2025-05-19T21:30:47.568Z",
-  "updated_at": "2026-03-26T08:26:58.370Z",
+  "updated_at": "2026-04-08T02:09:30.694Z",
   "comment": {
     "text": "The \"LinkedIn\" translation key is used to display the name of the LinkedIn social network in various contexts. It is likely used as a label or button text in UI elements such as buttons, menus, or dialog boxes, providing a clear and consistent way to refer to the platform.",
     "is_auto": true,
@@ -201,13 +201,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'LinkedIn领英' includes the English name, it's generally sufficient to just use '领英' as the established Chinese translation of 'LinkedIn'. Adding 'LinkedIn' is redundant and potentially confusing.",
-          "suggestion": "领英"
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

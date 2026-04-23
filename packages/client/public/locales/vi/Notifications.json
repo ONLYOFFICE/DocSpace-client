@@ -12,5 +12,8 @@
   "SuccessConnected": "{{serviceName}} đã được kết nối thành công như một kênh thông báo. Bạn sẽ nhận được thông báo ở đó từ bây giờ.",
   "SuccessDisconnected": "{{serviceName}} đã được hủy kết nối thành công như một kênh thông báo. Thông báo sẽ không còn được gửi đến đó.",
   "UsefulTips": "Các mẹo hữu ích sử dụng {{productName}}",
-  "UsefulTipsDescription": "Nhận hướng dẫn hữu ích về {{productName}}"
+  "UsefulTipsDescription": "Nhận hướng dẫn hữu ích về {{productName}}",
+  "ActionsWithFilesDescription": "Các huy hiệu sẽ làm nổi bật hoạt động tệp — tải lên, chỉnh sửa hoặc chia sẻ — trên các mục {{rooms}}, {{shared}}, {{documents}} và {{aiAgents}}.",
+  "RoomsActivityDescription": "Nhận thông báo email tức thì về các tệp/thư mục được chia sẻ mới và hoạt động bên trong {{rooms}} và {{aiAgents}} của bạn.",
+  "RoomUpdateNotify": "Nội dung được chia sẻ, hoạt động của {{rooms}} và {{aiAgents}}"
 }

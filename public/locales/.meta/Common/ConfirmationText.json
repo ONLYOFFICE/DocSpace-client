@@ -3,7 +3,7 @@
   "content": "All the data you entered will be lost. Are you sure you want to continue?",
   "content_en_sha1_hash": "e99a68715daa80c6d8b8fffc16f35951fc75370e",
   "created_at": "2025-05-19T21:30:43.634Z",
-  "updated_at": "2025-08-12T19:46:25.937Z",
+  "updated_at": "2026-04-08T14:50:39.846Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message when a user wants to reset data, warning them that all entered data will be lost. It appears in a modal dialog footer and is translated from the English content \"All the data you entered will be lost. Are you sure you want to continue?\".",
     "is_auto": true,
@@ -153,18 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"ඔබ ඇතුල් කළ සියළුම දත්ත නැති වී යනු ඇත. ඔබට ඉදිරියට යාමට වුවමනා ද?\" doesn't fully capture the tone and directness of the English 'Are you sure you want to continue?'. It's a bit verbose and indirect.",
-          "suggestion": "ඔබ ඇතුල් කළ සියළු දත්ත නැතිවීしまうවා. ඉදිරියට යා යුතුද?"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of 'යාමට' is a little clunky. While grammatically correct, it doesn't flow as naturally as a more direct phrasing.",
-          "suggestion": "ඔබ ඇතුල් කළ සියළුම දත්ත නැති වී යනු ඇත. ඉදිරියට යා යුතුද?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -182,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Сви' (Svi) is used instead of 'Сави' (Savi). 'Сви' means 'all' in the general sense, while 'Сави' is more appropriate when referring to a specific set of data.",
-          "suggestion": "Сви подаци које сте унели сави ће бити изгубљени."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -216,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

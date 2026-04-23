@@ -3,7 +3,7 @@
   "content": "Deactivate {{productName}}",
   "content_en_sha1_hash": "54fe2d3e5e6088fc60b02a8e670df55142d8e8e1",
   "created_at": "2025-05-19T21:30:52.177Z",
-  "updated_at": "2026-03-26T08:26:58.136Z",
+  "updated_at": "2026-04-09T02:05:40.318Z",
   "comment": {
     "text": "Deactivate {{productName}} is used to display a button label in the Portal Settings page, which allows users to deactivate portal access. The translation key appears on a category page where users can manage their account settings.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 640,
+      "line_number": 541,
       "context": "},\n {\n key: \"9-1\",\n icon: \"\",\n link: \"deactivation\",\n tKey: \"PortalDeactivation\",\n isCategory: true,\n },\n ],\n },\n {",
       "module": "/packages/client"
     }
@@ -39,25 +39,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"قم بإلغاء تنشيط\" is a somewhat formal and less natural way to say 'Deactivate' in this context. A more common and user-friendly translation would be \"تعطيل\" or \"إيقاف\".",
-          "suggestion": "تعطيل {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"{{productName}}-i deaktiv edin\" is not the most natural way to express \"Deactivate {{productName}}\" in Azerbaijani. While technically correct, it lacks fluency. A more natural phrasing would be \"{{productName}}-i söndürün\" or \"{{productName}}-i bağlayın\".",
-          "suggestion": "{{productName}}-i söndürün"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -69,7 +57,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text is an imperative verb phrase ('Deactivate {{productName}}') used for a button label, whereas the Czech translation is a noun phrase ('Deaktivace {{productName}}' - meaning 'Deactivation of {{productName}}'). For a button, the imperative form is required.",
+          "suggestion": "Deaktivovat {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -105,13 +99,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation \"Ապագործունացնել {{productName}}-ը\" is not a natural or accurate translation of \"Deactivate {{productName}}\".  \"Ապագործունացնել\" is a very uncommon and somewhat awkward verb form. A more common and understandable translation would be something like \"չեղծել {{productName}}\" or \"դադարեցնել {{productName}}\".",
-          "suggestion": "դադարեցնել {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -147,25 +135,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'deactiveren' is not the standard Dutch word for 'deactivate'. The correct translation is 'uitschakelen' or 'deactiveren' (more literal).",
-          "suggestion": "uitschakelen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation 'Dezaktywuj' is a direct transliteration and doesn't accurately convey the meaning of 'Deactivate' in a user-friendly way. A more natural Polish translation would be 'Wyłącz' or 'Wyłączenie'.",
-          "suggestion": "Wyłącz {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -213,13 +189,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Деактивирај' (Deaktiviraj) is technically correct but feels unnatural in this context. 'Деактивирај' is an imperative form, suitable for a command. A more natural and user-friendly translation would use a more descriptive phrasing.",
-          "suggestion": "Деактивација {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -247,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

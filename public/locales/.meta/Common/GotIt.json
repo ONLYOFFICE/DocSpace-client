@@ -3,7 +3,7 @@
   "content": "Got it",
   "content_en_sha1_hash": "5b8027fa0e819719a62305a6b15f3f1c10769f7f",
   "created_at": "2025-05-19T21:30:45.641Z",
-  "updated_at": "2025-08-11T18:11:59.365Z",
+  "updated_at": "2026-04-08T08:16:07.212Z",
   "comment": {
     "text": "The \"GotIt\" translation key is used to display a confirmation button that indicates agreement or acceptance of information in UI elements such as buttons and dialogs. It is typically used in scenarios where the user needs to acknowledge understanding or accept terms, allowing them to proceed with the desired action. This text appears on primary buttons in dialog components and guidance sections.",
     "is_auto": true,
@@ -117,13 +117,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'Snap ik' is a literal translation that doesn't convey the same meaning as 'Got it.' While it translates to 'I understand,' 'Got it' is often used as an acknowledgement or to signal understanding in a more conversational way. A more appropriate translation would depend on the context, but options like 'Oké,' 'Begrepen,' or 'Goed,' might be better.",
-          "suggestion": "Consider alternatives like 'Oké,' 'Begrepen,' or 'Goed,' depending on the intended nuance."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -138,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Portuguese translation \"Apanhei\" doesn't accurately convey the meaning of \"Got it\". \"Apanhei\" primarily means \"I caught\" or \"I grabbed\". \"Got it\" in this context implies understanding or acknowledgement.",
-          "suggestion": "Consider alternatives like \"Entendi\", \"OK\", \"Combinado\", or \"Certo\", depending on the specific context."
+          "description": "The translation 'Apanhei' means 'I caught' or 'I picked up' (physically), which is an incorrect way to express 'I understand' or 'Understood' in a UI button context in Portuguese.",
+          "suggestion": "Entendi"
         }
       ],
       "approved_at": null
@@ -171,7 +165,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Mám to' is a literal translation of 'I have it' or 'I got it' (as in 'I understand/possess it'), which sounds unnatural for a UI confirmation button in Slovak. In a UI context for acknowledging information, 'Rozumiem' or 'OK' is the standard.",
+          "suggestion": "Rozumiem"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -211,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

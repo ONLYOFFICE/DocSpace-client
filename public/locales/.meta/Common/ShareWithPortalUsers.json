@@ -3,7 +3,7 @@
   "content": "Sharing with {{productName}} users",
   "content_en_sha1_hash": "fa06dae4b65dd82f0df19959cee1423e63f3cf26",
   "created_at": "2025-09-23T07:24:16.874Z",
-  "updated_at": "2026-02-19T13:36:33.048Z",
+  "updated_at": "2026-04-10T08:58:38.049Z",
   "comment": {
     "text": "This key displays text for a sharing option, indicating that the file will be shared with users of the {{productName}} product. It appears as part of a sharing dialog or form, likely as a button or option label. Translators should ensure the wording accurately conveys sharing access to the product's user base.",
     "is_auto": true,
@@ -27,30 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation \"المشاركة مع مستخدمي {{productName}} \" literally translates to 'Sharing with users of {{productName}}'. While understandable, a more natural phrasing in Arabic might be 'مشاركة مع مستخدمي {{productName}}'.",
-          "suggestion": "مشاركة مع مستخدمي {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"{{productName}} istifadəçiləri ilə paylaşma\" is a literal translation and doesn't quite convey the intended meaning of 'Sharing with {{productName}} users'. It sounds slightly awkward in Azerbaijani. A more natural phrasing would emphasize the act of sharing.",
-          "suggestion": "{{productName}} istifadəçiləri ilə paylaşılır"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'paylaşma' creates a noun form of 'sharing', where 'paylaşılır' is a more appropriate verb form indicating an action of sharing.",
-          "suggestion": "Removing 'ma' from paylaşma to obtain paylaşılır"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -74,13 +57,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Κοινή χρήση με χρήστες του {{productName}}' is a literal translation but doesn't flow naturally in Greek. A more natural phrasing would be something like 'Διαμοιρασμός με χρήστες του {{productName}}' or 'Πρόσβαση για χρήστες του {{productName}}'. The best choice depends on the specific context of 'sharing'.",
-          "suggestion": "Consider 'Διαμοιρασμός με χρήστες του {{productName}}' or 'Πρόσβαση για χρήστες του {{productName}}' depending on the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -98,25 +75,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Partage avec les utilisateurs {{productName}}' is too literal and not idiomatic French. A more natural phrasing would be 'Accès pour les utilisateurs {{productName}}' or 'Partage d'accès avec les utilisateurs {{productName}}'.",
-          "suggestion": "Accès pour les utilisateurs {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Կիսվել {{productName}} օգտատերերի հետ' while grammatically correct, doesn't perfectly capture the nuance of 'Sharing with {{productName}} users'. A more accurate translation might be 'Համերձում {{productName}} օգտատերերի հետ' or 'Տեղաբացում {{productName}} օգտատերերի հետ', depending on the specific context and desired emphasis.",
-          "suggestion": "Consider 'Համերձում {{productName}} օգտատերերի հետ' or 'Տեղաբացում {{productName}} օգտատերերի հետ'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -149,7 +114,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation 'Kopīgums ar {{productName}} lietotājiem' is not the most natural way to express \"Sharing with {{productName}} users\". 'Kopīgums' translates to 'commonality' or 'sharing', but the entire phrase sounds awkward. A better translation would convey the act of sharing.",
+          "description": "The word 'Kopīgums' means 'a community' or 'a commonality' in Latvian, whereas the English 'Sharing' in this context refers to the action of sharing access. The correct verbal noun or gerund form should be used.",
           "suggestion": "Dalīšanās ar {{productName}} lietotājiem"
         }
       ],
@@ -176,43 +141,31 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "extra_variable",
+          "description": "Extra variable(s) not in English: {{ productName }}",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Partajare cu utilizatorii ai {{productName}}' is not the most natural or accurate rendering of 'Sharing with {{productName}} users'. The phrase 'utilizatorii ai' is redundant and grammatically awkward. It should be 'utilizatorii' or 'utilizatorii {{productName}}'.",
-          "suggestion": "Partajare cu utilizatorii {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Предоставление доступа пользователям {{productName}}' is a literal translation of 'Providing access to {{productName}} users', which is not equivalent to 'Sharing with {{productName}} users'. It lacks the nuance of 'sharing'.",
-          "suggestion": "Раскрытие доступа для пользователей {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"{{productName}} පරිශීලකයින් සමඟ බෙදා ගැනීම\" is a literal translation and doesn't quite capture the natural flow of 'Sharing with {{productName}} users' in Sinhala. A more natural phrasing would emphasize the act of sharing *to* or *for* the users.",
-          "suggestion": "{{productName}} පරිශීලකයින් සඳහා බෙදා ගැනීම"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -230,13 +183,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Duke ndarë me përdoruesit e {{productName}}\" literally translates to 'Sharing with the users of {{productName}}'. While technically correct, it's not the most natural way to express 'Sharing with {{productName}} users' in Albanian. A more fluent translation would emphasize the sharing *to* the users.",
-          "suggestion": "Ndani me përdoruesit e {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -254,13 +201,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '{{productName}} kullanıcıları ile paylaşma' doesn't quite convey the meaning of 'Sharing with {{productName}} users'. It's more literally 'Sharing with {{productName}} users'. A more natural Turkish phrasing would be '{{productName}} kullanıcılarına paylaşım' or '{{productName}} kullanıcılarıyla paylaşım'.",
-          "suggestion": "{{productName}} kullanıcılarına paylaşım"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

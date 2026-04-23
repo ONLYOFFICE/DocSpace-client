@@ -14,5 +14,18 @@
   "ResponseQualityNode": "<1>Lưu ý:</1> Chất lượng phản hồi có thể khác nhau tùy theo mô hình; nên sử dụng các mô hình mới hơn để có kết quả tốt nhất.",
   "ResultStorage": "Lưu trữ kết quả",
   "UploadFilesDevice": "Tải lên tệp từ thiết bị cá nhân của bạn.",
-  "UploadFilesPortal": "Tải lên tệp từ {{sectionNameFirst}} hoặc {{sectionNameSecond}}"
+  "UploadFilesPortal": "Tải lên tệp từ {{sectionNameFirst}} hoặc {{sectionNameSecond}}",
+  "CreateChatDescription": "Truy cập tab {{aiChat}} để bắt đầu.",
+  "EmptyKnowledgeDescription": "Các tệp tải lên tại đây sẽ được lập chỉ mục và sử dụng làm ngữ cảnh trong tab {{aiChat}}. Thêm tệp (tối đa 10 MB mỗi tệp) để hỏi AI, tạo nội dung hoặc cộng tác về thông tin.",
+  "EmptyResultsDescription": "Các tệp được tạo trong {{aiChat}} sẽ tự động xuất hiện tại đây. Bất cứ khi nào bạn tạo nội dung, bắt đầu trò chuyện, hoặc gửi tin nhắn có kết quả, kết quả đó sẽ được lưu trong phần này.",
+  "EmptyResultsViewerDescription": "Bạn sẽ thấy kết quả hoạt động {{aiChat}} của người dùng khác tại đây khi chúng có sẵn.",
+  "InstructionsDescriptionAgent": "Mô tả cách {{aiAgent}} nên hành xử và phản hồi. Xác định vai trò, giọng điệu và các nhiệm vụ chính của nó.",
+  "Knowledge": "Cơ sở kiến thức",
+  "KnowledgeUnavailableDescription": "Cơ sở kiến thức hiện đang bị vô hiệu hóa. Để kích hoạt tìm kiếm ngữ nghĩa và xử lý tài liệu cho {{aiAgents}} của bạn, vui lòng cấu hình nhà cung cấp nhúng trong cài đặt {{productName}}.",
+  "KnowledgeUnavailableDescriptionUser": "Cơ sở kiến thức hiện đang bị vô hiệu hóa. Để kích hoạt tìm kiếm ngữ nghĩa và xử lý tài liệu cho {{aiAgents}}, vui lòng liên hệ quản trị viên {{productName}} của bạn để cấu hình nhà cung cấp nhúng.",
+  "MCPDescriptionServers": "Sử dụng {{mcpServers}} được quản trị viên kết nối để nâng cao trải nghiệm trò chuyện với AI. {{mcpServers}} có thể hỗ trợ trích xuất dữ liệu, tóm tắt, gợi ý thông minh, v.v.",
+  "Model": "{{aiProvider}} và mô hình",
+  "ModelDescription": "Vui lòng chọn {{aiProvider}} và mô hình sẽ được sử dụng trong các cuộc trò chuyện của phòng này. Cài đặt này là bắt buộc và áp dụng cho tất cả người tham gia.",
+  "NoAccessAIAgentTitle": "Xin lỗi, bạn không có quyền truy cập vào {{aiAgent}}",
+  "AgentInViewModeWarning": "Bạn đang ở chế độ <strong>chỉ xem</strong> cho {{aiAgent}} này. Bạn có thể xem kết quả hoạt động của {{aiChat}} từ những người dùng khác."
 }

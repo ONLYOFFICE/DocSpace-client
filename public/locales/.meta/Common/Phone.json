@@ -3,7 +3,7 @@
   "content": "Phone",
   "content_en_sha1_hash": "77064d5265236e0ac252f3fc4a5ba7b274b6a583",
   "created_at": "2025-05-19T21:30:47.371Z",
-  "updated_at": "2026-02-19T13:36:32.867Z",
+  "updated_at": "2026-04-08T02:45:05.572Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Phone\" in various UI elements. It is commonly seen as a label or prompt in forms and fields, typically asking users to input their phone number. This key appears in multiple places across the application, including contact information pages and profile settings.",
     "is_auto": true,
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Nömrə' can sometimes refer to a phone number, 'Phone' typically refers to the device itself. 'Nömrə' only translates to 'number'.",
-          "suggestion": "Consider alternatives like 'Telefon' which directly translates to 'Phone'."
+          "description": "The English word 'Phone' refers to the device or the concept of a telephone, whereas the Azerbaijani translation 'Nömrə' means 'Number'. While often used interchangeably in UI contexts, 'Telefon' or 'Telefon nömrəsi' would be a more accurate translation for the label 'Phone'.",
+          "suggestion": "Telefon"
         }
       ],
       "approved_at": null
@@ -147,7 +147,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Telemóvel' refers to the physical mobile device (cell phone), whereas the context and English source 'Phone' refer to the telephone number/contact field.",
+          "suggestion": "Telefone"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -217,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

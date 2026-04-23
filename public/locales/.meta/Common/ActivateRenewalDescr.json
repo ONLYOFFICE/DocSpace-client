@@ -3,7 +3,7 @@
   "content": "To activate the renewal you already bought, upload it below and click the Activate button.",
   "content_en_sha1_hash": "44652f8b7615a6229d376a59d8e429fdd28a95ca",
   "created_at": "2025-05-26T07:15:40.090Z",
-  "updated_at": "2025-08-04T07:30:01.740Z",
+  "updated_at": "2026-04-08T18:06:11.531Z",
   "comment": {
     "text": "This translation key is used to describe the action of activating a renewal purchase. It appears as a button or link in a UI component, instructing users to upload their existing renewal and click an \"Activate\" button to complete the process.",
     "is_auto": true,
@@ -69,7 +69,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The word 'renewal' (uudistus/jatkotilaus) is translated as 'subscription' (tilaus), which changes the specific meaning of the action.",
+          "suggestion": "Aktivoidaksesi jo ostamasi uudistuksen, lataa se alapuolelta ja klikkaa Aktivoi-painiketta."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -153,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation contains a spelling error in the word 'Activate' (සක්‍රිය කරන්නැති), which changes the meaning to 'the button that does not activate' instead of 'the Activate button'.",
+          "suggestion": "ඔබ මිලදීගත් අලුත් කිරීම සක්‍රිය කිරීමට, එය පහතින් උඩුගත කර 'Activate' බොත්තම මත ක්ලික් කරන්න."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -189,7 +201,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'upload' is translated as 'передайте' (transfer/pass), which is imprecise for a file upload action in a UI context. In software, 'upload' should be 'завантажте'.",
+          "suggestion": "Щоб активувати оновлення, яке ви вже купили, завантажте його нижче та натисніть «Активувати»."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -199,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

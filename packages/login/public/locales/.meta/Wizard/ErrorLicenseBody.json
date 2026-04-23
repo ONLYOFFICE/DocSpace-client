@@ -3,7 +3,7 @@
   "content": "The license is not valid. Make sure you select the correct file.",
   "content_en_sha1_hash": "c341f78e4aeff67e1ff38612677f3f38cb476b47",
   "created_at": "2025-05-19T21:30:57.213Z",
-  "updated_at": "2025-12-19T13:32:34.593Z",
+  "updated_at": "2026-04-07T19:35:05.252Z",
   "comment": {
     "text": "This translation key is used to display an error message when a license file is invalid or missing. It appears in a file input field within a wizard page. The text informs users to select the correct file.",
     "is_auto": true,
@@ -63,13 +63,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The verb tense 'selecciona' (you select) is incorrect. It should be in the subjunctive mood as it expresses uncertainty or suggestion.",
-          "suggestion": "La licencia no es válida. Asegúrese de que seleccione el archivo correcto."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -177,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'лиценца' is a misspelling of 'лиценца'.",
-          "suggestion": "Лиценца is correct."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

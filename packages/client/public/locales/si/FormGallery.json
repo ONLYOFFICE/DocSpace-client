@@ -3,10 +3,12 @@
   "EmptyFormGalleryScreenDescription": "ඔබගේ විමසුමට කිසිවක් නොගැළපේ",
   "ErrorViewDescription": "නැවත උත්සාහ කරන්න",
   "ErrorViewDescriptionNetworkError": "අන්තර්ජාල සම්බන්ධතාවයක් නැති බව පෙනේ.",
-  "SuggestChanges": "වෙනස්කම් යෝජනා කරන්න",
-  "TemplateInfo": "අච්චුවේ තොරතුරු",
-  "ViewAllTemplates": "සියලුම අච්චු පෙන්වන්න",
   "ErrorViewHeader": "ගැලරිය තාවකාලිකව ලබා ගත නොහැක",
   "SelectTemplate": "සැකිල්ල තෝරන්න",
-  "UploadGallery": "ගැලරියට උඩුගත කරන්න"
+  "SuggestChanges": "වෙනස්කම් යෝජනා කරන්න",
+  "TemplateInfo": "අච්චුවේ තොරතුරු",
+  "UploadGallery": "ගැලරියට උඩුගත කරන්න",
+  "ViewAllTemplates": "සියලුම අච්චු පෙන්වන්න",
+  "SubmitToGalleryDialogMainInfo": "ඔබගේ සැකිල්ල පොදු ගැලරියට ඉදිරිපත් කිරීමෙන් අන් අය ඔවුන්ගේ කාර්යයන්හි එය භාවිතා කිරීමට ඉඩ දෙන්න. සැකිල්ල සංශෝධනයෙන් පසු, ඔබ දැනුවත් කරන අතර ඔබේ දායකත්වය වෙනුවෙන් ඔබට ත්‍යාගයක් ලැබෙනු ඇත.",
+  "GalleryTitle": "{{organizationName}} හි සැකිලි ගැලරිය"
 }

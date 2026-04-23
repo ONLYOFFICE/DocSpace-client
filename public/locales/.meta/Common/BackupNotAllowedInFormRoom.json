@@ -3,7 +3,7 @@
   "content": "The backup file cannot be saved to the Form Filling room since this room type can only contain PDF forms.",
   "content_en_sha1_hash": "958a8d0ffe13dd2a81d00247f69196aca2a96216",
   "created_at": "2025-05-26T07:15:40.760Z",
-  "updated_at": "2026-02-19T13:36:32.256Z",
+  "updated_at": "2026-04-08T16:24:57.718Z",
   "comment": {
     "text": "This translation key is used to display an error message when attempting to save a backup file in a room that only supports PDF forms, such as the Form Filling room. The message informs users that backing up files is not allowed in this type of room. It appears in various UI components where file operations are being performed.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/sub-components/RoomsModule/RoomsModule.tsx",
-      "line_number": 159,
+      "line_number": 161,
       "context": "const isModuleDisabled = !isMaxProgress || isStartCopy;\n \n const formProps = useMemo(\n () => ({\n isRoomFormAccessible: false,\n message: t(\"Common:BackupNotAllowedInFormRoom\"),\n }),\n [t],\n );\n \n return (",
       "module": "/packages/shared"
     }
@@ -81,7 +81,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \"a\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -214,6 +220,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \"F\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     }
   }

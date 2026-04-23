@@ -31,7 +31,7 @@ import CommonStore from "SRC_DIR/store/CommonStore";
 import DefaultTemplatesStore from "SRC_DIR/store/portal-settings/DefaultTemplatesStore";
 
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { mapCulturesToArray } from "@docspace/shared/utils/common";
+import { mapCulturesToArray } from "@docspace/shared/utils/cultures";
 import i18n from "SRC_DIR/i18n";
 
 export type UseCommonProps = {

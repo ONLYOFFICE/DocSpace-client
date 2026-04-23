@@ -3,7 +3,7 @@
   "content": "Enter token",
   "content_en_sha1_hash": "8293c89bf4b9c4be1629063bd19ace32ceafc29a",
   "created_at": "2025-05-19T21:30:53.878Z",
-  "updated_at": "2026-02-19T13:36:32.811Z",
+  "updated_at": "2026-04-07T19:35:05.163Z",
   "comment": {
     "text": "This translation key is used for the \"Enter token\" placeholder text in a text input field, typically found in an OAuth revoke developer token dialog. It instructs users to enter their token to complete the action.",
     "is_auto": true,
@@ -57,13 +57,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Εισαγωγή διακριτικού\" is a rather formal and technical translation for \"Enter token\". A more user-friendly and natural translation would be more appropriate for a user interface.",
-          "suggestion": "Εισαγάγετε κωδικό"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -87,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Մուտքագրել նշանը\" is understandable, a more natural and accurate translation of \"Enter token\" would be something like \"Մուտքագրեք տոկենը\" or \"Տոկենը մուտքագրել\" . The word 'նշանը' (nshany) typically means 'sign' or 'symbol', not 'token'.",
-          "suggestion": "Մուտքագրեք տոկենը"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -123,13 +111,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Ievadiet marķieri\" is technically a valid translation, 'marķieris' primarily means 'marker' (like a pen marker) rather than an 'OAuth token'. A more accurate translation would convey the concept of a 'token' used for authentication.",
-          "suggestion": "Ievadiet atslēgu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -141,13 +123,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Enter token\" implies inputting a token. \"Dodaj token\" translates to \"Add token,\" which has a slightly different meaning. While not entirely wrong, it's not the most accurate translation.",
-          "suggestion": "Wprowadź token"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -207,13 +183,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Token gir' is a literal translation and while understandable, it lacks the natural flow of Turkish for user interfaces. A more natural translation would be 'Tokeninizi girin'.",
-          "suggestion": "Tokeninizi girin"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

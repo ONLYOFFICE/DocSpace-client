@@ -3,7 +3,7 @@
   "content": "Download copy",
   "content_en_sha1_hash": "f779a16e5bd57fac3371cd6ff082decdc8a0baad",
   "created_at": "2025-05-26T07:15:42.718Z",
-  "updated_at": "2026-03-20T09:07:45.758Z",
+  "updated_at": "2026-04-08T11:40:14.483Z",
   "comment": {
     "text": "This translation key is used to display a button that triggers manual backups, allowing users to download a copy of their data. It appears on a page with a backup settings interface and is likely used in a dialog or modal window when the user initiates a manual backup process. The translated text should read \"Download copy\".",
     "is_auto": true,
@@ -105,7 +105,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ດາວໂຫລດ ໄດ້ ສຳເນົາ' is grammatically incorrect and reads like a fragmented list of words ('Download can copy') rather than a cohesive action. It lacks the proper verb-object structure for a button command.",
+          "suggestion": "ດາວໂຫລດສຳເນົາ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -199,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

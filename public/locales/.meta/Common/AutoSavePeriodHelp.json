@@ -3,7 +3,7 @@
   "content": "The time shown below corresponds to the time zone set in the {{productName}}.",
   "content_en_sha1_hash": "fc425c15b268cad321e77bf210b8507fc99e1b7e",
   "created_at": "2025-05-26T07:15:40.662Z",
-  "updated_at": "2025-08-04T07:30:01.748Z",
+  "updated_at": "2026-04-08T16:30:52.017Z",
   "comment": {
     "text": "This translation key is used to provide contextual information about auto-saving periods in a scheduling component. It displays the time shown below in relation to the user's set time zone and is likely found within a schedule or calendar interface.",
     "is_auto": true,
@@ -129,7 +129,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'tempo' in Portuguese refers to 'time' in a general sense (duration/weather), whereas 'fuso horário' (time zone) is the correct context. However, the English sentence says 'The time shown below...', which refers to a specific clock time/timestamp. The Portuguese translation 'O tempo mostrado abaixo' is ambiguous and can be interpreted as 'The duration shown below'. A more accurate translation for a specific time/timestamp is 'A hora'.",
+          "suggestion": "A hora mostrada abaixo corresponde ao fuso horário definido no {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -141,7 +147,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation uses the future tense ('va corespunde'), which implies a future event, whereas the English text uses the present tense ('corresponds') to state a current fact/setting. This changes the nuance from a descriptive statement to a predictive one.",
+          "suggestion": "Ora afișată mai jos corespunde fusului orar setat în {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -199,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

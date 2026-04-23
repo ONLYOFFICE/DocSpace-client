@@ -3,10 +3,12 @@
   "EmptyFormGalleryScreenDescription": "Результатів, що відповідають вашому запиту, не знайдено",
   "ErrorViewDescription": "Повторіть спробу пізніше",
   "ErrorViewDescriptionNetworkError": "Здається, немає підключення до Інтернету",
-  "SuggestChanges": "Запропонувати зміни",
-  "TemplateInfo": "Інформація про шаблон",
-  "ViewAllTemplates": "Подивитися всі шаблони",
   "ErrorViewHeader": "Галерея тимчасово недоступна",
   "SelectTemplate": "Виберіть шаблон",
-  "UploadGallery": "Завантажити в Галерею"
+  "SuggestChanges": "Запропонувати зміни",
+  "TemplateInfo": "Інформація про шаблон",
+  "UploadGallery": "Завантажити в Галерею",
+  "ViewAllTemplates": "Подивитися всі шаблони",
+  "GalleryTitle": "Галерея шаблонів {{organizationName}}",
+  "SubmitToGalleryDialogMainInfo": "Надішліть свій шаблон до публічної галереї, щоб інші могли використовувати його у своїй роботі. Після проходження модерації ви будете повідомлені та винагороджені за ваш внесок."
 }

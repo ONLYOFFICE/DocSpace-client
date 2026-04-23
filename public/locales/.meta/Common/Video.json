@@ -3,7 +3,7 @@
   "content": "Video",
   "content_en_sha1_hash": "bc17c1f0179a888f2a7e8389f67d4f2cf5cf4531",
   "created_at": "2025-05-19T21:30:49.512Z",
-  "updated_at": "2025-10-13T20:21:56.330Z",
+  "updated_at": "2026-04-07T20:32:28.144Z",
   "comment": {
     "text": "This translation key is used to display the type of a file. It appears as \"Video\" on files categorized as videos in a UI component.",
     "is_auto": true,
@@ -162,7 +162,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"දෘශ්‍යකය\" while technically meaning 'visual' or 'image', isn't the most natural or common translation for 'Video'. It's a bit too literal and formal. A more common and readily understood translation would be \"වීඩියෝ\" (videyo), which is a transliteration of the English word.",
+          "description": "The Sinhala word 'දෘශ්‍යකය' (drushyakaya) refers to a 'visual object' or 'visual entity' rather than the media format 'Video'. In a UI context for file types, 'වීඩියෝ' (Video) is the standard and accurate term.",
           "suggestion": "වීඩියෝ"
         }
       ],

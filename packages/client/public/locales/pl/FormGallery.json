@@ -3,10 +3,12 @@
   "EmptyFormGalleryScreenDescription": "Brak rezultatów pasujących do Twojego zapytania",
   "ErrorViewDescription": "Spróbuj ponownie później",
   "ErrorViewDescriptionNetworkError": "Wygląda na to, że nie ma połączenia z Internetem.",
-  "SuggestChanges": "Zasugeruj zmiany",
-  "TemplateInfo": "Dane szablonu",
-  "ViewAllTemplates": "Zobacz wszystkie szablony",
   "ErrorViewHeader": "Galeria jest tymczasowo niedostępna",
   "SelectTemplate": "Wybierz szablon",
-  "UploadGallery": "Wyślij do Galerii"
+  "SuggestChanges": "Zasugeruj zmiany",
+  "TemplateInfo": "Dane szablonu",
+  "UploadGallery": "Wyślij do Galerii",
+  "ViewAllTemplates": "Zobacz wszystkie szablony",
+  "GalleryTitle": "Galeria szablonów {{organizationName}}",
+  "SubmitToGalleryDialogMainInfo": "Wyślij swój szablon do publicznej galerii, aby inni mogli z niego korzystać w swojej pracy. Po przejściu moderacji zostaniesz o tym poinformowany i nagrodzony za swój wkład."
 }

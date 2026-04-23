@@ -43,26 +43,38 @@ const Scripts = () => {
       <Script id="portal-config" strategy="beforeInteractive">
         {`
           console.log("It's SDK INIT");
-          fetch("/static/scripts/config.json?hash=${configHash}")
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("HTTP error " + response.status);
-              }
-              return response.json();
-            })
-            .then((config) => {
-              window.ClientConfig = {
-                ...window.ClientConfig,
-                ...config,
-              };
-            })
-            .catch((e) => {
-              window.ClientConfig = {
-                ...window.ClientConfig,
-                errorOnLoad: e,
-              };
-              console.error("Failed to load config:", e);
-            });
+          (function () {
+            var url = "/static/scripts/config.json?hash=${configHash}";
+            var backoffs = [0, 300, 900];
+            var hasTimeout = typeof AbortSignal !== "undefined" && typeof AbortSignal.timeout === "function";
+            function attempt(i) {
+              var init = hasTimeout ? { signal: AbortSignal.timeout(5000) } : {};
+              return fetch(url, init)
+                .then(function (res) {
+                  if (!res.ok) throw new Error("HTTP " + res.status);
+                  return res.json();
+                })
+                .catch(function (err) {
+                  if (i + 1 < backoffs.length) {
+                    return new Promise(function (r) { setTimeout(r, backoffs[i + 1]); })
+                      .then(function () { return attempt(i + 1); });
+                  }
+                  throw err;
+                });
+            }
+            attempt(0)
+              .then(function (config) {
+                window.ClientConfig = Object.assign({}, window.ClientConfig, config);
+              })
+              .catch(function (err) {
+                window.ClientConfig = Object.assign(
+                  { api: { origin: window.location.origin } },
+                  window.ClientConfig,
+                  { errorOnLoad: String(err) }
+                );
+                console.error("Failed to load config after retries:", err);
+              });
+          })();
           `}
       </Script>
     </>

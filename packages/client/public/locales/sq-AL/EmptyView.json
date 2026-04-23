@@ -2,6 +2,7 @@
   "CollaborationRoomEmptyTitle": "Mirë se vini në dhomën e bashkëpunimit",
   "CollaboratorEmptyTitle": "Dhoma është bosh",
   "CreateAIAgent": "Krijo një agjent të ri",
+  "CreateAIAgentDescription": "Filloni të ndërtoni agentin tuaj të parë {{aiAgent}}",
   "CreateDocument": "Krijoni një dokument të ri",
   "CreateDocumentDescription": "Përfitoni nga funksionaliteti i gjerë i përpunimit të tekstit.",
   "CreateForm": "Krijoni një format të ri PDF",
@@ -16,7 +17,10 @@
   "CreateSpreadsheetDescription": "Kryni llogaritjet e sakta me përpjekje minimale.",
   "CustomRoomEmptyTitle": "Mirë se vini në dhomën e personalizimit",
   "DefaultFolderDescription": "Hidhni skedarët këtu ose krijoni të rinj.",
+  "EmptyAIAgentsAIDisabledDescription": "Ky seksion lejon përdoruesit të punojnë me {{aiAgents}} — asistentë inteligjentë për menaxhimin e dokumenteve dhe detyrave të tjera. \nPër të filluar përdorimin e tyre, shërbimi i veçorive të AI duhet të aktivizohet nga administratori juaj i {{productName}}.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Për të krijuar dhe përdorur {{aiAgents}}, lidhni portofolin tuaj dhe mundësoni shërbimin e veçorive të AI në cilësimet e {{productName}}. Pasi të përfundohet, do të jeni në gjendje të punoni me {{aiAgents}} dhe të bashkëpunoni me ekipin tuaj.",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "Lidh portofolin tënd dhe aktivizo veçoritë e inteligjencës artificiale",
+  "EmptyAIAgentsTitle": "Krijo {{aiAgent}}-n tënd",
   "EmptyDescription": "Filloni me veprime të shpejta:",
   "EmptyFavoritesDescription": "Yllëzo skedarët dhe dosjet për t’i pasur lehtësisht të arritshme.",
   "EmptyFavoritesTitle": "Nuk ka asnjë të preferuar ende",
@@ -57,5 +61,8 @@
   "UploadFromPortalTitle": "Ngarkoni nga {{productName}}",
   "UploadPDFFormOptionDescription": "Selektoni një formular të gatshëm PDF të disponueshëm në {{productName}} dhe ngarkojeni në dhomë.",
   "VirtualDataRoomEmptyTitle": "Mirë se vini në dhomën e të dhënave virtuale",
-  "EmptyAIAgentsTitle": "Krijo {{aiAgent}}-n tënd"
+  "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} nuk janë të disponueshëm ende",
+  "EmptyAIAgentsAIEnabledUserDescription": "Pasi ekipi juaj të fton për të bashkëpunuar, {{aiAgents}} do të shfaqen këtu, të gatshëm për të ndihmuar me dokumente, menaxhimin e njohurive dhe detyrat e përditshme.",
+  "EmptyAIAgentsDescription": "Krijoni një asistent të personalizuar për ekipin tuaj duke shtuar një bazë të dijeve, duke zgjedhur modelin ideal, dhe duke lidhur një {{mcpServer}}. Ftoni kolegët tuaj për të bashkëpunuar dhe për të përdorur më së miri aftësitë e chat-it të agjentit.",
+  "EmptyAIAgentsUserTitle": "Nuk ka {{aiAgents}} të disponueshëm ende"
 }

@@ -12,5 +12,8 @@
   "SuccessConnected": "{{serviceName}} foi conectado com sucesso como um canal de notificação. Você agora receberá atualizações lá.",
   "SuccessDisconnected": "{{serviceName}} foi desconectado com sucesso como canal de notificação. As notificações não serão mais enviadas para lá.",
   "UsefulTips": "Dicas úteis para o {{productName}}",
-  "UsefulTipsDescription": "Obtenha guias úteis sobre o {{productName}}"
+  "UsefulTipsDescription": "Obtenha guias úteis sobre o {{productName}}",
+  "ActionsWithFilesDescription": "As etiquetas destacarão a atividade do arquivo — uploads, edições ou compartilhamentos — nas seções {{rooms}}, {{shared}}, {{documents}} e {{aiAgents}}.",
+  "RoomsActivityDescription": "Receba notificações instantâneas por e-mail sobre novos arquivos/pastas compartilhados e atividades dentro dos seus {{rooms}} e {{aiAgents}}.",
+  "RoomUpdateNotify": "Conteúdo compartilhado, atividade de {{rooms}} e {{aiAgents}}"
 }

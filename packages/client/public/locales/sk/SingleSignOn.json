@@ -3,7 +3,6 @@
   "AdvancedSettings": "Rozšírené nastavenia",
   "AdvancedSettingsTooltip": "Skryť predvolenú autorizačnú stránku a automaticky presmerovať na službu SSO.",
   "AttributeMatching": "Zobrazenie atribútov",
-  "AttributeMatchingTooltip": "Zhoda atribútov jednotného prihlásenia so záznamami v sekcii „Účty“.",
   "Binding": "Spojenie:",
   "CertificateExist": "Certifikát s rovnakým typom akcie už existuje",
   "CustomEntryButton": "Vlastný popis tlačidla prihlásenia",
@@ -59,5 +58,6 @@
   "TurnOnSSOCaption": "Povoľte túto možnosť, ak chcete automaticky pridávať používateľov zo služby SSO do vášho priestoru.",
   "UploadXML": "Načítajte metadáta z XML a automaticky vyplňte požadované polia.",
   "UploadXMLPlaceholder": "URL do IdP Metadáta XML",
-  "UsedFor": "Použiť pre"
+  "UsedFor": "Použiť pre",
+  "AttributeMatchingTooltip": "Zodpovednosť atribútov Single Sign-On záznamom v sekcii „Účty“."
 }

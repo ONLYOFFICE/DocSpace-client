@@ -3,7 +3,7 @@
   "content": "Room «{{folderTitle}}»",
   "content_en_sha1_hash": "60abd312bf4a00aa9ee7d366c372357f1866c4bf",
   "created_at": "2025-05-19T21:30:54.784Z",
-  "updated_at": "2025-12-17T07:49:07.855Z",
+  "updated_at": "2026-04-07T19:35:05.112Z",
   "comment": {
     "text": "This translation key is used to display the label \"Room «{{folderTitle}}»\" in various sections of an application, likely in a folder or room information panel. It appears on a page displaying historical data and is part of a larger system for organizing and navigating content, possibly within a client-side interface.",
     "is_auto": true,
@@ -159,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'කාමරය «{{folderTitle}}»' is a literal translation of \"Room\". While understandable, it's a bit clunky in Sinhala. A more natural phrasing might be something like \"මාලිගය «{{folderTitle}}»\" (Maligaya) or \"បន្ទប់ «{{folderTitle}}»\" (Danthaya). The best choice depends on the context of 'folderTitle'.",
-          "suggestion": "Consider alternatives like \"මාලිගය «{{folderTitle}}»\" or \"បន្ទប់ «{{folderTitle}}»\" for a more natural sound, depending on the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -183,25 +177,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Просторија «{{folderTitle}}»\" is a literal translation of 'Room' as 'Просторија'. While technically correct, 'Соба' would be a more natural and commonly used word for 'Room' in this context (especially within a UI).",
-          "suggestion": "Просторија should be replaced with Соба."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Room' (English) is translated as 'Prostorija' in Serbian. While 'Prostorija' can mean room, a more natural and common translation for 'Room' in this context, especially when referring to a folder or location within a system, would be 'Soba'.",
-          "suggestion": "Soba «{{folderTitle}}»"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

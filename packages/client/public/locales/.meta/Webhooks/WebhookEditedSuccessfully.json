@@ -3,7 +3,7 @@
   "content": "Webhook configuration edited successfully",
   "content_en_sha1_hash": "7dd5195411b7f7442a0ee6ded6f503de931fd1a6",
   "created_at": "2025-05-19T21:30:49.874Z",
-  "updated_at": "2026-03-20T09:07:45.618Z",
+  "updated_at": "2026-04-08T18:58:13.667Z",
   "comment": {
     "text": "This translation key is used to display a success message when a webhook configuration is edited successfully. It is typically shown in a dialog or confirmation modal after submitting changes, providing feedback to the user that the update was successful.",
     "is_auto": true,
@@ -81,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Webhook-ի կոնֆիգուրացիան հաջողությամբ խմբագրվել է' is a literal translation and sounds slightly unnatural in Armenian. A more natural phrasing would convey the same meaning with better flow.",
-          "suggestion": "Կոնֆիգուրացիան webhook-ի խմբագրվել է հաջողությամբ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -105,13 +99,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation 'Webhooks:WebhookEditedSuccessfully' appears to be a key name, not a translated sentence. It doesn't convey the meaning of 'Webhook configuration edited successfully'.",
-          "suggestion": "웹훅 구성이 성공적으로 편집되었습니다"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -123,30 +111,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Tīmekļa aizķeres konfigurācija ir veiksmīgi rediģēta' uses 'aizķere' which translates to 'obstacle' or 'delay'. The correct term for 'Webhook' in this context is likely 'Webhook konfigurācija'.",
-          "suggestion": "Webhook konfigurācija ir veiksmīgi rediģēta"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Webhook configuratie succesvol bewerkt' is not the most natural or idiomatic Dutch translation for 'Webhook configuration edited successfully'. While technically correct, it sounds slightly awkward.",
-          "suggestion": "Webhook configuratie succesvol aangepast"
-        },
-        {
-          "type": "formatting",
-          "description": "The word 'succesvol' (successfully) and 'bewerkt' (edited) are separated by a single space. It's more common and looks better with a comma: 'Webhook configuratie, succesvol bewerkt'. However, the suggested alternative 'Webhook configuratie, succesvol aangepast' is preferable as it fixes the translation issue as well.",
-          "suggestion": "Webhook configuratie, succesvol bewerkt"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -182,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Webhook වින්‍යාසය සංශෝධනය කෙරිණි' is a literal translation but doesn't flow naturally in Sinhala. A more natural phrasing would be closer to 'Webhook සැකසීම සාර්ථක විය'.",
-          "suggestion": "Webhook සැකසීම සාර්ථක විය"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -206,18 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation uses \"конфигурација\" which is a more formal term for 'configuration.' A more natural and common term for 'configuration' in this context, especially for user-facing messages, would be 'подешавање'.",
-          "suggestion": "Webhook подешавање успешно уређено"
-        },
-        {
-          "type": "spelling",
-          "description": "While technically correct, \"уређена\" might sound a bit stiff in this context. A more conversational alternative could be used.",
-          "suggestion": "Webhook подешавање успешно изменено"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -245,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

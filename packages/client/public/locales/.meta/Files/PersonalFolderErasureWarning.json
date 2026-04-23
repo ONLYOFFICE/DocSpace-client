@@ -3,7 +3,7 @@
   "content": "Your user type has been changed to Guest. Personal files will be deleted in 30 days.",
   "content_en_sha1_hash": "f6fa951b2bbdfb41512638cf7e8424c88af869a1",
   "created_at": "2025-05-19T21:30:55.955Z",
-  "updated_at": "2026-03-20T09:07:45.551Z",
+  "updated_at": "2026-04-07T19:35:05.091Z",
   "comment": {
     "text": "This translation key is used to display a warning message when a user's personal folder has been changed to Guest mode, informing them that their files will be deleted in 30 days. The text appears as a warning notification on the Home page of the application. It should be translated to indicate a clear and concise warning about the impending deletion of personal files.",
     "is_auto": true,
@@ -81,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Your user type has been changed to Guest' is not accurately conveyed. 'Ձեր օգտատիրոջ տեսակը փոխվել է հյուրի' literally translates to 'Your user type has changed to guest.' While understandable, it lacks the clarity and formality of the original.",
-          "suggestion": "Ձեր օգտատիրոջ տեսակը փոխվել է դեպի հյուրի (Dzer ogtatiroj tesaki poxvel e depi hyuri) - 'Your user type has changed to Guest' (more formal)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -159,18 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ආරාධිත' (aaraaditha) which translates to 'guest' can be ambiguous. It's more accurate to use a term directly meaning 'Guest' in this context to avoid potential misinterpretations.",
-          "suggestion": "Consider using 'මුළුතැන්පත්' (muluthenpoth) which directly translates to 'Guest' or a more specific term if applicable."
-        },
-        {
-          "type": "grammar",
-          "description": "While grammatically correct, the sentence structure could be improved for better flow and naturalness in Sinhala. The current phrasing can feel a bit stiff.",
-          "suggestion": "Consider rephrasing to something like: 'ඔබේ පරිශීලක වර්ගය මුළුතැන්පත් ලෙස වෙනස් කර ඇත. ඔබේ පුද්ගලික ගොනු 30 දිනකින් මකා දැමීමට නියමිතයි.' (Your user type has been changed to Guest. Your personal files are scheduled to be deleted in 30 days.)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -182,13 +165,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The verb 'spremenjena' (changed) should agree with the subject 'tip uporabnika' (user type). It should be in the masculine singular form.",
-          "suggestion": "Vaš tip uporabnika je bil spremenjen v Gost."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

@@ -3,7 +3,7 @@
   "content": "File restored",
   "content_en_sha1_hash": "fee819996fcbfcc915c66348fa0bee7d60dc5640",
   "created_at": "2025-05-19T21:30:49.731Z",
-  "updated_at": "2025-05-24T02:26:00.941Z",
+  "updated_at": "2026-04-08T20:06:25.636Z",
   "comment": {
     "text": "This translation key is used to display a notification message when a file is restored after being trashed. It appears in the UI as part of a webhooks trigger, providing users with visual feedback about the status change. Translators should focus on conveying a positive action (file restoration) to maintain consistency across the application.",
     "is_auto": true,
@@ -57,13 +57,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Έγινε επαναφορά αρχείου\" is understandable, a more direct and common translation of 'File restored' in a technical context would be 'Αποκαταστάθηκε το αρχείο'. 'Επαναφορά' implies a reset or return to a previous state, whereas 'αποκατάσταση' more accurately conveys the restoration of a file.",
-          "suggestion": "Αποκαταστάθηκε το αρχείο"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -120,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation 'Fails atjaunots' is not the most natural or accurate translation of 'File restored'. While technically correct, 'Atjaunots fails' would be more idiomatic in Latvian.",
-          "suggestion": "Atjaunots fails"
+          "description": "The Latvian word 'Fails' is a misspelling or incorrect term; it likely intended to use 'Fails' (English) or is a typo for 'Failes' (not a Latvian word). The correct term for 'File' in Latvian is 'Fails'. However, the translation 'Fails atjaunots' is grammatically awkward or uses a typo. More importantly, 'atjaunots' can mean 'updated' or 'renewed', whereas 'restored' in the context of a trash bin is typically 'atgriezts'.",
+          "suggestion": "Fails atgriezts"
         }
       ],
       "approved_at": null
@@ -165,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ගොනුව ප්‍රතිෂ්ඨාපනය කෙරිණි' while containing elements of the meaning, is not the most natural or idiomatic way to say 'File restored' in Sinhala. 'ප්‍රතිෂ්ඨාපනය' leans towards 'restoration' in a more formal sense. A more common and direct translation would be something like 'ගොනුව යථා තත්ත්වයට පත් කෙරිණි' or 'ගොනුව නැවතී තිබේ'.",
-          "suggestion": "Consider 'ගොනුව යථා තත්ත්වයට පත් කෙරිණි' or 'ගොනුව නැවතී තිබේ'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -189,13 +177,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Фајл враћен\" is understandable, a more accurate and natural translation of \"File restored\" in Serbian (Cyrillic) would be \"Повраћен фајл\" or \"Враћена датотека\". \"Враћен фајл\" sounds a bit literal and less idiomatic.",
-          "suggestion": "Повраћен фајл"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -223,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

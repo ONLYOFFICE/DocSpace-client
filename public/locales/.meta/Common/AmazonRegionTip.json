@@ -3,7 +3,7 @@
   "content": "Enter the AWS region where your Amazon bucket resides.",
   "content_en_sha1_hash": "8b30b6e8c00c36cc42c9387f6a8891f2053a78a2",
   "created_at": "2025-05-26T07:15:40.388Z",
-  "updated_at": "2026-02-19T13:36:33.073Z",
+  "updated_at": "2026-04-08T17:02:14.667Z",
   "comment": {
     "text": "\"Used in a tooltip within a region selection input field, indicating the user to enter the AWS region of their Amazon bucket.\"",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation incorrectly translates 'AWS region' as 'منطقة مجموعة الخدمات السحابية' (Cloud Services Group Region) and 'Amazon bucket' as 'محفظة أمازون' (Amazon Wallet). In a technical cloud context, 'AWS region' should be 'منطقة AWS' and 'bucket' should be 'حاوية' (container/bucket). Using 'Wallet' (محفظة) is a critical semantic error for cloud storage.",
+          "suggestion": "أدخل منطقة AWS التي توجد بها حاوية Amazon الخاصة بك."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -39,7 +45,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'кофа' is a literal translation of 'bucket' as a physical container for water, which is incorrect in a technical cloud storage context. In Bulgarian IT terminology, 'bucket' is either left untranslated or referred to as 'S3 bucket' or 'хранилище'.",
+          "suggestion": "Въведете AWS региона, където се намира вашият Amazon bucket."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -75,13 +87,25 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'bucket' in the context of AWS/Amazon S3 refers to a storage container, but it was translated as 'panier', which means a physical shopping basket.",
+          "suggestion": "Saisissez la région AWS dans laquelle se trouve votre bucket Amazon."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation uses 'պարունակը' (content) instead of 'bucket' (տարայի/բաքեթ). In the context of AWS, 'bucket' is a specific technical term for storage, and translating it as 'content' changes the meaning from a location to the data itself.",
+          "suggestion": "Մուտքագրեք AWS տարածաշրջանը, որտեղ գտնվում է ձեր Amazon բաքեթը:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -111,7 +135,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The translation is incomplete; it ends abruptly after 'jūsu' (your) and fails to mention the 'Amazon bucket'.",
+          "suggestion": "Ievadiet AWS reģionu, kurā atrodas jūsu Amazon krātuve."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -141,7 +171,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'găleata' is a literal translation of 'bucket' (the container), but in the context of Amazon S3, 'bucket' is a technical term that should not be translated literally into Romanian as it sounds unnatural and incorrect to technical users.",
+          "suggestion": "Indicaţi regiunea AWS unde se află bucket-ul dvs. Amazon."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -165,7 +201,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Amazon bucket' is translated as 'Amazon košarica'. In cloud computing (AWS), a 'bucket' is a technical term for a storage container and should not be translated as 'košarica' (shopping basket).",
+          "suggestion": "Vnesite regijo AWS, kjer se nahaja vaša Amazon košara."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -189,16 +231,34 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'bucket' in the context of Amazon S3 is a technical term referring to a storage container. The translation uses 'кошик', which means a physical shopping basket or a trash/recycle bin, making the instruction nonsensical for a cloud storage setup.",
+          "suggestion": "Введіть регіон AWS, де знаходиться ваш бакет Amazon"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'lưu trú' is used incorrectly. In Vietnamese, 'lưu trú' refers to people staying/residing in a place (like a hotel or a country). For digital data or storage, 'nằm ở' or 'tọa lạc' is more appropriate, but specifically for cloud storage, 'được đặt tại' or simply 'nằm tại' is the standard technical term.",
+          "suggestion": "Nhập vùng AWS nơi Amazon bucket của bạn tọa lạc."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

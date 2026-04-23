@@ -3,7 +3,7 @@
   "content": "Ελληνικά (Ελλάδα)",
   "content_en_sha1_hash": "3788b90891387df51981f692ece3bd1e7b7552c0",
   "created_at": "2025-05-19T21:30:43.996Z",
-  "updated_at": "2025-05-24T01:18:23.167Z",
+  "updated_at": "2026-04-08T13:36:09.594Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -20,31 +20,61 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Greek instead of Arabic.",
+          "suggestion": "اليونانية (اليونان)"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Greek instead of Azerbaijani.",
+          "suggestion": "Yunan dili (Yunaniston)"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Bulgarian translation is actually Greek text, not Bulgarian.",
+          "suggestion": "Гръцки (Гърция)"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Czech translation is identical to the English text and is written in Greek script instead of Czech.",
+          "suggestion": "Řečtina (Řecko)"
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The German translation is written in Greek script instead of German.",
+          "suggestion": "Griechisch (Griechenland)"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -56,145 +86,301 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Spanish translation is written in Greek script instead of Spanish.",
+          "suggestion": "Griego (Grecia)"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Finnish translation is actually Greek text, not Finnish.",
+          "suggestion": "Kreikka (Kreikka)"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The French translation is written in Greek script instead of French.",
+          "suggestion": "Grec (Grèce)"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Armenian translation is identical to the English text and is written in the Greek script instead of the Armenian script.",
+          "suggestion": "Հունարեն (Հունաստան)"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Italian translation is actually Greek, not Italian.",
+          "suggestion": "Greco (Grecia)"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Japanese translation is actually Greek text, not Japanese.",
+          "suggestion": "ギリシャ語 (ギリシャ)"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Greek instead of Korean.",
+          "suggestion": "그리스어 (그리스)"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Greek script instead of Lao script.",
+          "suggestion": "ພາສາເກຣັກ (ກຣີສ)"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Latvian translation is actually Greek text, not Latvian.",
+          "suggestion": "Grēku valoda (Latvija)"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Dutch translation is written in Greek script instead of Dutch.",
+          "suggestion": "Grieks (Griekenland)"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Polish translation is written in Greek script instead of Polish.",
+          "suggestion": "Grecki (Grecja)"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Portuguese translation is written in Greek instead of Portuguese.",
+          "suggestion": "Grego (Grécia)"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Portuguese (Brazil) translation is identical to the English text and is written in Greek script instead of Portuguese.",
+          "suggestion": "Grego (Grécia)"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Romanian translation is actually Greek text, not Romanian.",
+          "suggestion": "Grec (Grecia)"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Russian translation is written in Greek script instead of Cyrillic.",
+          "suggestion": "Greek (Greece)"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Sinhala translation is actually Greek text, not Sinhala script.",
+          "suggestion": "ග්‍රීක (ග්‍රීසිය)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Slovak translation is identical to the English text and is written in Greek script, not Slovak.",
+          "suggestion": "Gréčtina (Grécko)"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Slovenian translation is actually Greek text, not Slovenian.",
+          "suggestion": "Grščina (Grčija)"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Greek, not Serbian (Cyrillic).",
+          "suggestion": "Грчки (Гречка)"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Serbian (Latin) translation is actually Greek text, not Serbian.",
+          "suggestion": "Grčki (Grčka)"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Turkish translation is identical to the English text and is written in the Greek script instead of Turkish.",
+          "suggestion": "Yunanca (Yunanistan)"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Ukrainian translation is actually Greek text, not Ukrainian.",
+          "suggestion": "Грецька (Греція)"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Vietnamese translation is actually Greek text, not Vietnamese.",
+          "suggestion": "Tiếng Hy Lạp (Hy Lạp)"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Greek instead of Chinese (Simplified).",
+          "suggestion": "希腊语 (希腊)"
+        }
+      ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in Greek, not Albanian.",
+          "suggestion": "Greqisht (Greqi)"
+        }
+      ],
       "approved_at": null
     }
   }

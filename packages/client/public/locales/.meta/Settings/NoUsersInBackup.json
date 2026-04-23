@@ -3,7 +3,7 @@
   "content": "No users found. Try again or upload other backup files.",
   "content_en_sha1_hash": "8260f4328d4c5850393c2d05baaf45d6f9ff5b07",
   "created_at": "2025-05-19T21:30:52.066Z",
-  "updated_at": "2025-12-11T12:25:41.941Z",
+  "updated_at": "2026-04-09T02:18:20.317Z",
   "comment": {
     "text": "This translation key is used to display an error message when no users are found during a data import process. It appears in a component where a file selection step is taking place, likely as part of a data import interface within a portal settings page. The message suggests trying again or uploading another backup file.",
     "is_auto": true,
@@ -107,19 +107,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The Lao translation contains several spelling errors. The repeated 'ື' characters are incorrect and make the text unreadable. 'ຊື້ມັ່ງຄືນ' should be 'ສື້ມັ່ງຄືນ'.",
-          "suggestion": "ບໍ່ພົບຜູ້ໃຊ້ໃດໆ ສື້ມັ່ງຄືນອີຫລືຶືືືືືືືືືືືືືືືືືືືືືືືືືືືືືືື"
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure is awkward and could be improved for better readability.",
-          "suggestion": "ບໍ່ພົບຜູ້ໃຊ້ໃດໆ ກະລຸນາລອງອີຫລືຶືືືືືືືືືືືືືືືືືືືືືືືືືືືືືືື"
-        },
-        {
           "type": "incorrect_translation",
-          "description": "The phrase 'Try again' is not accurately translated. 'ສື້ມັ່ງຄືນອີຫລືຶືືືືືືືືືືືືືືືືືືືືືືືືືືືືືືື' is not a standard or clear way to express this.",
-          "suggestion": "ກະລຸນາລອງອີຫລືຶືືືືືືືືືືືືືືືືືືືືືືືືືືືືືືື"
+          "description": "The Lao translation contains a massive string of repeated characters ('ືືືື...') at the end, which is nonsensical and appears to be a technical glitch or input error. Additionally, the word 'ຊື້ມັ່ງຄືນ' is an incorrect translation for 'Try again'.",
+          "suggestion": "ບໍ່ພົບຜູ້ໃຊ້ໃດໆ. ກະລຸນາລອງໃໝ່ອີກຄັ້ງ ຫຼື ອັບໂຫຼດໄຟລ໌ສຳຮອງອື່ນ."
         }
       ],
       "approved_at": null
@@ -169,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'පරිශීලකයින්' (parishilakayin) is a less common and slightly awkward way to say 'users'.  A more natural and widely understood term is 'පරිශීලකයන්' (parishilakayan).",
-          "suggestion": "පරිශීලකයින් → පරිශීලකයන්"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -221,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

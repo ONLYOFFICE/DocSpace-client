@@ -2,7 +2,6 @@
   "AuthViaNTLM": "NTLMによる認証",
   "EnableSSL": "SSLを有効に",
   "EnterDomain": "ドメインを入力",
-  "EnterEmail": "メールアドレスを入力",
   "EnterLogin": "ログインを入力",
   "EnterPort": "ポートを入力",
   "Host": "ホスト",

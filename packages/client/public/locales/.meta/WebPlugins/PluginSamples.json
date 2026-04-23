@@ -3,7 +3,7 @@
   "content": "Plugin samples",
   "content_en_sha1_hash": "52548adb731eeeda86b2df3c051c254dd28ffc5b",
   "created_at": "2025-05-19T21:30:49.918Z",
-  "updated_at": "2025-08-04T07:30:01.451Z",
+  "updated_at": "2026-04-08T18:36:59.289Z",
   "comment": {
     "text": "This translation key is used to display \"Plugin samples\" as a heading in the developer tools section of the Portal Settings page. It appears as a bold title above a list of plugin SDK-related content when the user clicks on a link or navigates to this page.",
     "is_auto": true,
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"عينات الاضافات\" is a literal translation, a more natural and accurate translation for \"Plugin samples\" in a software or technical context might be something like \"نماذج الإضافات\" or \"أمثلة الإضافات\". \"عينات\" often implies physical samples, which isn't the intended meaning here.",
-          "suggestion": "نماذج الإضافات"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -51,7 +45,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'zásuvné moduly' refers to physical electrical plug-in modules (like for a power strip or wall socket). In a software context, 'plugin' should be translated as 'plugin' or 'doplňkový modul'.",
+          "suggestion": "Ukázky pluginů"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -63,7 +63,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation uses the singular 'πρόσθετου' (plugin), whereas the English source is plural 'Plugin samples'. In a developer context, this should refer to multiple samples of plugins.",
+          "suggestion": "Δείγματα πρόσθετων"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -75,13 +81,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Laajennusmallit' is a possible translation, 'Plugin samples' more accurately conveys the meaning of sample plugins. 'Laajennusmallit' translates to 'extension models' or 'expansion models', which doesn't align with the original meaning of 'samples'.",
-          "suggestion": "Lisäosesan mallit"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -153,13 +153,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Plugin samples\" implies a collection of plugin examples. \"Exemple de plugin-uri\" is technically correct but lacks the nuance of \"samples.\" It suggests individual examples rather than a group.",
-          "suggestion": "Consider \"Mostre de plugin-uri\" or \"Exemple de plugin-uri multiple\" to better convey the meaning of 'samples'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -174,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ආදර්ශ පේනු' is not the most accurate translation for 'Plugin samples'. 'ආදර්ශ' translates to 'example' or 'model', and 'පේනු' means 'plugins'. A more accurate translation would convey the idea of sample plugins or demonstration plugins.",
-          "suggestion": "Possible suggestions include: 'ප්ලගින් උදාහරණ' (Plugin Udaharana - Plugin Examples) or 'ප්ලගින් සාම්පල' (Plugin Sampala - Plugin Samples)."
+          "description": "The Sinhala translation 'ආදර්ශ පේනු' means 'Sample pens'. In a technical context, 'Plugin' refers to software extensions, not writing instruments.",
+          "suggestion": "ප්ලගින් ආදර්ශ"
         }
       ],
       "approved_at": null
@@ -189,7 +183,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'vtičnik' refers to a physical electrical plug/socket. In a software context (SDK/Developer tools), 'plugin' should be translated as 'vtičnik' only in very specific hardware contexts, but for software extensions, 'dodatek' or 'plugin' is the standard technical term. 'Vzorci' can mean 'patterns' or 'samples', but in this context, 'Primeri' (examples) is the correct term for code samples.",
+          "suggestion": "Primeri dodatkov"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -198,7 +198,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Узорци додатака' is a literal translation, a more natural and idiomatic translation for 'Plugin samples' in a technical context might be 'Примери додатка' or 'Примерци додатка'. 'Узорци' often implies decorative patterns, which isn't the intended meaning here.",
+          "description": "The word 'Узорци' (Patterns/Ornaments) is an incorrect translation for 'Samples' in a software/developer context. The correct term for code or plugin samples is 'Примери'.",
           "suggestion": "Примери додатка"
         }
       ],
@@ -207,7 +207,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Uzorci' in Serbian typically refers to 'patterns' or 'templates'. In a software development context for 'Plugin samples', the correct term is 'Primeri'.",
+          "suggestion": "Primeri dodataka"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -229,6 +235,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

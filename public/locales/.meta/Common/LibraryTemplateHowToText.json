@@ -3,7 +3,7 @@
   "content": "Click \"Use Template\" to add a copy to My Forms. From there you can edit the form fields, set up the filling flow, and share it with recipients. Once filled, the results are collected automatically.",
   "content_en_sha1_hash": "f0990df8a4218f8a375ff12af06ec90ff3c9f876",
   "created_at": "2026-03-31T15:18:15.194Z",
-  "updated_at": "2026-03-31T15:18:15.194Z",
+  "updated_at": "2026-04-08T05:55:20.735Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -50,7 +50,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'στα Τα Φόρμα μου' is grammatically incorrect and nonsensical in Greek (it translates to 'to the My Forms'). It should be 'στα Τα φόρμα μου' or simply 'στα δικά μου φόρμα'. Additionally, 'φορμάρ' is a typo for 'φόρμα'.",
+          "suggestion": "Κάντε κλικ στο \"Χρήση Προτύπου\" για να προσθέσετε ένα αντίγραφο στα Τα φόρμα μου. Από εκεί μπορείτε να επεξεργαστείτε τα πεδία της φόρμας, να ρυθμίσετε τη ροή συμπλήρωσης και να το μοιραστείτε με τους παραλήπτες. Μόλις συμπληρωθούν, τα αποτελέσματα συλλέγονται αυτόματα."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -158,7 +164,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Odzapovedi' (meaning 'Cancellations') is used instead of 'Od tam' (meaning 'From there'). This completely changes the meaning of the sentence.",
+          "suggestion": "Kliknite na \"Use Template\", da dodate kopijo v Moje obrazce. Od tam lahko uredite polja obrazca, nastavite tok popunjavanja in ga delite z prejemniki. Ko je popunjeno, se rezultati zbirajo avtomatsko."
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {
@@ -182,7 +194,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \"\"\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

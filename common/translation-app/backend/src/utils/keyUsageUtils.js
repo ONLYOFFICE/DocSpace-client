@@ -1,5 +1,5 @@
-const fs = require('fs-extra');
-const { writeJsonWithConsistentEol } = require('./fsUtils');
+const fs = require("fs-extra");
+const { writeJsonWithConsistentEol } = require("./fsUtils");
 const path = require("path");
 const readline = require("readline");
 const { appRootPath, projectLocalesMap } = require("../config/config");
@@ -24,12 +24,12 @@ async function findMetadataFile(projectName, namespace, keyPath) {
     console.warn(`Project ${projectName} not found in configuration`);
     return null;
   }
-  
+
   const projectPath = path.join(appRootPath, localesPath);
-  const metaDir = path.join(projectPath, '.meta');
+  const metaDir = path.join(projectPath, ".meta");
   const namespacePath = path.join(metaDir, namespace);
   const metadataFilePath = path.join(namespacePath, `${keyPath}.json`);
-  
+
   if (await fs.pathExists(metadataFilePath)) {
     try {
       const data = await fs.readJson(metadataFilePath);
@@ -39,7 +39,7 @@ async function findMetadataFile(projectName, namespace, keyPath) {
       return null;
     }
   }
-  
+
   return null;
 }
 
@@ -51,37 +51,45 @@ async function findMetadataFile(projectName, namespace, keyPath) {
  * @param {Object} data - Optional default data
  * @returns {Promise<{filePath: string, data: Object}>} Created metadata file
  */
-async function createOrUpdateMetadataFile(projectName, namespace, keyPath, data = {}) {
+async function createOrUpdateMetadataFile(
+  projectName,
+  namespace,
+  keyPath,
+  data = {},
+) {
   const localesPath = projectLocalesMap[projectName];
   if (!localesPath) {
     throw new Error(`Project ${projectName} not found in configuration`);
   }
-  
+
   const projectPath = path.join(appRootPath, localesPath);
-  const metaDir = path.join(projectPath, '.meta');
+  const metaDir = path.join(projectPath, ".meta");
   const namespacePath = path.join(metaDir, namespace);
   const metadataFilePath = path.join(namespacePath, `${keyPath}.json`);
-  
+
   // Create directories if they don't exist
   await fs.ensureDir(namespacePath);
-  
+
   let metadata;
-  
+
   // Check if file exists
   if (await fs.pathExists(metadataFilePath)) {
     try {
       metadata = await fs.readJson(metadataFilePath);
     } catch (error) {
-      console.warn(`Error reading existing metadata file ${metadataFilePath}, creating new one:`, error);
+      console.warn(
+        `Error reading existing metadata file ${metadataFilePath}, creating new one:`,
+        error,
+      );
       metadata = {};
     }
   } else {
     metadata = {};
   }
-  
+
   // Update metadata with new data
   const now = new Date().toISOString();
-  
+
   metadata = {
     key_path: keyPath,
     namespace,
@@ -89,12 +97,12 @@ async function createOrUpdateMetadataFile(projectName, namespace, keyPath, data 
     created_at: metadata.created_at || now,
     updated_at: now,
     ...metadata,
-    ...data
+    ...data,
   };
-  
+
   // Write updated metadata
   await writeJsonWithConsistentEol(metadataFilePath, metadata);
-  
+
   return { filePath: metadataFilePath, data: metadata };
 }
 
@@ -108,35 +116,44 @@ async function createOrUpdateMetadataFile(projectName, namespace, keyPath, data 
  * @param {string} context - Code context
  * @returns {Promise<Object>} Updated metadata
  */
-async function recordKeyUsage(projectName, namespace, keyPath, filePath, lineNumber, context) {
+async function recordKeyUsage(
+  projectName,
+  namespace,
+  keyPath,
+  filePath,
+  lineNumber,
+  context,
+) {
   // Find or create metadata file
   const metadata = await findMetadataFile(projectName, namespace, keyPath);
-  
+
   // If metadata doesn't exist, create it
   const now = new Date().toISOString();
-  const relativeFilePath = filePath.replace(appRootPath, '').replace(/^\/+/, '');
-  
+  const relativeFilePath = filePath
+    .replace(appRootPath, "")
+    .replace(/^\/+/, "");
+
   let updatedMetadata;
-  
+
   if (metadata) {
     // Update existing metadata
     if (!metadata.data.usage) {
       metadata.data.usage = [];
     }
-    
+
     // Check if this usage already exists
-    const existingIndex = metadata.data.usage.findIndex(u => 
-      u.file_path === relativeFilePath && u.line_number === lineNumber
+    const existingIndex = metadata.data.usage.findIndex(
+      (u) => u.file_path === relativeFilePath && u.line_number === lineNumber,
     );
-    
+
     const usage = {
       id: Date.now().toString(),
       file_path: relativeFilePath,
       line_number: lineNumber,
-      context: context || '',
-      created_at: now
+      context: context || "",
+      created_at: now,
     };
-    
+
     if (existingIndex >= 0) {
       // Update existing usage
       metadata.data.usage[existingIndex] = usage;
@@ -144,27 +161,34 @@ async function recordKeyUsage(projectName, namespace, keyPath, filePath, lineNum
       // Add new usage
       metadata.data.usage.push(usage);
     }
-    
+
     // Update timestamp
     metadata.data.updated_at = now;
-    
+
     // Save updated metadata
     await writeJsonWithConsistentEol(metadata.filePath, metadata.data);
     updatedMetadata = metadata.data;
   } else {
     // Create new metadata file
-    const result = await createOrUpdateMetadataFile(projectName, namespace, keyPath, {
-      usage: [{
-        id: Date.now().toString(),
-        file_path: relativeFilePath,
-        line_number: lineNumber,
-        context: context || '',
-        created_at: now
-      }]
-    });
+    const result = await createOrUpdateMetadataFile(
+      projectName,
+      namespace,
+      keyPath,
+      {
+        usage: [
+          {
+            id: Date.now().toString(),
+            file_path: relativeFilePath,
+            line_number: lineNumber,
+            context: context || "",
+            created_at: now,
+          },
+        ],
+      },
+    );
     updatedMetadata = result.data;
   }
-  
+
   return updatedMetadata;
 }
 
@@ -175,31 +199,31 @@ async function recordKeyUsage(projectName, namespace, keyPath, filePath, lineNum
 async function clearKeyUsageData() {
   let clearedFiles = 0;
   const projects = Object.keys(projectLocalesMap);
-  
+
   for (const project of projects) {
     const localesPath = projectLocalesMap[project];
     if (!localesPath) continue;
-    
+
     const projectPath = path.join(appRootPath, localesPath);
-    const metaDir = path.join(projectPath, '.meta');
-    
+    const metaDir = path.join(projectPath, ".meta");
+
     if (!(await fs.pathExists(metaDir))) continue;
-    
+
     const namespaceDirs = await fs.readdir(metaDir);
-    
+
     for (const namespace of namespaceDirs) {
       const namespacePath = path.join(metaDir, namespace);
       if (!(await fs.stat(namespacePath)).isDirectory()) continue;
-      
+
       const files = await fs.readdir(namespacePath);
-      
+
       for (const file of files) {
-        if (!file.endsWith('.json')) continue;
-        
+        if (!file.endsWith(".json")) continue;
+
         try {
           const filePath = path.join(namespacePath, file);
           const data = await fs.readJson(filePath);
-          
+
           if (data.usage) {
             // Remove usage data
             delete data.usage;
@@ -213,9 +237,9 @@ async function clearKeyUsageData() {
       }
     }
   }
-  
+
   return clearedFiles;
-};
+}
 
 /**
  * Extracts code context surrounding a specific line
@@ -368,12 +392,12 @@ async function analyzeCodebase() {
           filePath &&
           searchPattern.test(filePath) &&
           !filePath.includes(".test.") &&
-          !filePath.includes(".stories.")
+          !filePath.includes(".stories."),
       );
     });
 
     console.log(
-      `Found ${javascripts.length} JavaScript and TypeScript files to analyze`
+      `Found ${javascripts.length} JavaScript and TypeScript files to analyze`,
     );
 
     // Process files in batches to avoid memory issues
@@ -390,18 +414,18 @@ async function analyzeCodebase() {
 
           for (const { key, lineNumber, matchText } of keys) {
             // Extract namespace and key path
-            let namespace = 'common';
+            let namespace = "common";
             let keyPath = key;
-            
-            if (key.includes(':')) {
-              const parts = key.split(':');
+
+            if (key.includes(":")) {
+              const parts = key.split(":");
               namespace = parts[0];
               keyPath = parts[1];
             }
 
             // Get the code context
             const context = await getCodeContext(filePath, lineNumber);
-            
+
             // Determine project from file path
             const module = identifyModule(filePath);
 
@@ -412,49 +436,30 @@ async function analyzeCodebase() {
               keyPath,
               filePath,
               lineNumber,
-              context
+              context,
             );
-            
+
             keysProcessed.add(`${module}:${namespace}:${keyPath}`);
           }
-        })
+        }),
       );
 
       processedCount += batch.length;
       console.log(`Processed ${processedCount}/${javascripts.length} files`);
     }
 
-    console.log(`Recorded usage for ${keysProcessed.size} unique translation keys`);
+    console.log(
+      `Recorded usage for ${keysProcessed.size} unique translation keys`,
+    );
     console.log("Analysis complete");
   } catch (error) {
     console.error("Error analyzing codebase:", error);
   }
-
 }
 
 const { Ollama } = require("ollama");
 const { ollamaConfig } = require("../config/config");
-
-/**
- * Verify Ollama is available
- * @returns {Promise<boolean>} true if Ollama is available
- */
-async function verifyOllamaConnection() {
-  try {
-    const response = await fetch(`${ollamaConfig.apiUrl}/api/tags`);
-    if (!response.ok) {
-      console.log(
-        `Ollama connection failed: ${response.status} ${response.statusText}`
-      );
-      return false;
-    }
-    const data = await response.json();
-    return true;
-  } catch (error) {
-    console.log(`Ollama connection error: ${error.message}`);
-    return false;
-  }
-}
+const { verifyOllamaConnection } = require("./ollamaUtils");
 
 /**
  * Generate an enhanced comment for a translation key using Ollama
@@ -512,20 +517,30 @@ Your comment should be informative and helpful for translators who need to under
 
     // Use Ollama to generate the comment
     const ollamaClient = new Ollama({ host: ollamaConfig.apiUrl });
-    const model = process.env.OLLAMA_DEFAULT_MODEL || "gemma3:12b";
+    const model = process.env.OLLAMA_DEFAULT_MODEL || "gemma4:latest";
 
     console.log(
-      `Generating enhanced comment for key: ${key} using model: ${model}`
+      `Generating enhanced comment for key: ${key} using model: ${model}`,
     );
 
-    const { response } = await ollamaClient.generate({
-      model,
-      prompt,
-      stream: false,
-      options: {
-        temperature: 0.2, // Slightly creative but mostly factual
-      },
-    });
+    const timeoutMs = ollamaConfig.requestTimeout;
+    const { response } = await Promise.race([
+      ollamaClient.generate({
+        model,
+        prompt,
+        stream: false,
+        options: {
+          temperature: 0.2, // Slightly creative but mostly factual
+        },
+      }),
+      new Promise((_, reject) =>
+        setTimeout(
+          () =>
+            reject(new Error(`Ollama request timed out after ${timeoutMs}ms`)),
+          timeoutMs,
+        ),
+      ),
+    ]);
 
     // Clean up the response - remove any extraneous formatting
     const cleanedResponse = response
@@ -582,7 +597,7 @@ async function getCodeContexts(db, keyId) {
       WHERE key_id = ?
       LIMIT 5
     `,
-      keyId
+      keyId,
     );
 
     return contexts.map((c) => c.context);
@@ -615,7 +630,7 @@ async function generateAutoComments(db) {
         GROUP BY module
         ORDER BY count DESC
       `,
-        id
+        id,
       );
 
       if (usages.length === 0) continue;
@@ -647,3 +662,4 @@ module.exports = {
   getCodeContext,
   identifyModule,
 };
+

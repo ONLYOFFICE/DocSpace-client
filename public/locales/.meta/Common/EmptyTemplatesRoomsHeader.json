@@ -3,7 +3,7 @@
   "content": "No templates found",
   "content_en_sha1_hash": "f11224d0c5d283fb61cb849c74ff0e760a29e1b4",
   "created_at": "2025-05-19T21:30:44.914Z",
-  "updated_at": "2026-02-19T13:36:32.385Z",
+  "updated_at": "2026-04-08T10:42:03.844Z",
   "comment": {
     "text": "The \"EmptyTemplatesRoomsHeader\" translation key is used to display a message when no templates are found in a room's template selection. It appears as a header label in a modal dialog that allows users to create or edit rooms.",
     "is_auto": true,
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'No se ha encontrado plantillas' is not the most natural or accurate translation of 'No templates found'. While technically correct, it sounds slightly awkward.",
-          "suggestion": "No se encontraron plantillas"
+          "description": "Grammatical error in Spanish: 'No se ha encontrado' is singular, but 'plantillas' is plural. It should be 'No se han encontrado plantillas'.",
+          "suggestion": "No se han encontrado plantillas"
         }
       ],
       "approved_at": null
@@ -159,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'සැකිලි හමු නොවීය' literally translates to 'Templates not found'. While understandable, a more natural and common phrasing in Sinhala for 'No templates found' would be 'සැකිලි නොවීය' or 'සැකිලි කිසිවもなく'.",
-          "suggestion": "සැකිලි නොවීය"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -177,25 +171,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ni najdenih predlog' is technically correct but lacks the plural form to match the English 'No templates found'. It translates to 'No template found'.",
-          "suggestion": "Ni najdenih predlogov"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Нема шаблона' while understandable, is a literal translation and could be improved for naturalness in Serbian. A more idiomatic translation would be 'Nema pronađenih šablona'.",
-          "suggestion": "Nema pronađenih šablona"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -223,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

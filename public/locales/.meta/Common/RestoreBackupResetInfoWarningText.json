@@ -3,7 +3,7 @@
   "content": "All current passwords will be reset. {{productName}} users will get an email with the access restoration link.",
   "content_en_sha1_hash": "3531a741576e6d7f3c7d70f497013990e0744339",
   "created_at": "2025-05-26T07:15:46.918Z",
-  "updated_at": "2026-02-19T13:36:33.212Z",
+  "updated_at": "2026-04-10T08:58:38.050Z",
   "comment": {
     "text": "This translation key is used to display a warning message when users need to reset their passwords after restoring backup data. The message informs them that all current passwords will be reset and provides an access restoration link via email for {{productName}} users. It appears in UI components related to data recovery, such as restore backup pages.",
     "is_auto": true,
@@ -111,7 +111,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ການເຊື່ອມຕໍ່ການຟື້ນຟູການເຂົ້າເຖິງ' translates to 'access restoration connection', whereas the English 'access restoration link' refers to a URL/hyperlink. In a UI context, 'link' should be translated as 'ລິ້ງ' or 'ລິງກ໌' to avoid confusion with a network connection.",
+          "suggestion": "ລະຫັດຜ່ານປັດຈຸບັນທັງໝົດຈະຖືກຣີເຊັດ. ຜູ້ໃຊ້ {{productName}} ຈະໄດ້ຮັບອີເມວທີ່ມີລິ້ງຟື້ນຟູການເຂົ້າເຖິງ."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -171,13 +177,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word order in the second sentence is nonsensical in Serbian ('приступом линку за обнову' translates roughly to 'with access link for renewal' but the syntax is broken/unnatural). It should be 'линком за обнушавање приступа'.",
+          "suggestion": "Све тренутне лозинке ће бити ресетоване. {{productName}} корисници ће добити емаил са линком за обнушавање приступа."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'sa pristupom linku za obnovu' is grammatically incorrect and semantically awkward in Serbian. It translates roughly to 'with access link for restoration' but the word order 'pristupom linku' is incorrect. It should be 'linkom za obnovu pristupa'.",
+          "suggestion": "Sve trenutne lozinke će biti resetovane. {{productName}} korisnici će dobiti email sa linkom za obnovu pristupa."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -199,6 +217,18 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

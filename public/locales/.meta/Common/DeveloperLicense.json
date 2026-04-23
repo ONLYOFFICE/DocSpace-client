@@ -3,7 +3,7 @@
   "content": "Developer",
   "content_en_sha1_hash": "7e08ebec5e6f80a136fa4076e041dd0c811a5e70",
   "created_at": "2025-05-19T21:30:44.508Z",
-  "updated_at": "2026-03-20T09:07:45.752Z",
+  "updated_at": "2026-04-08T12:07:56.709Z",
   "comment": {
     "text": "This translation key is used to display the label \"Developer\" in various contexts within the application, typically appearing as a header or title. It appears on standalone components related to benefits and enterprise settings, where it's used to differentiate between developer and enterprise licenses.",
     "is_auto": true,
@@ -51,67 +51,115 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in English instead of Arabic.",
+          "suggestion": "مطور"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is identical to the English source, meaning the Azerbaijani translation is missing. 'Developer' in Azerbaijani is 'Tərtibatçı'.",
+          "suggestion": "Tərtibatçı"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in English instead of Bulgarian. Bulgarian uses the Cyrillic script.",
+          "suggestion": "Разработчик"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in English instead of Czech.",
+          "suggestion": "Vývojář"
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The German translation is identical to the English text, which is not a German word. The correct term for 'Developer' in this context is 'Entwickler'.",
+          "suggestion": "Entwickler"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Greek translation is identical to the English text (Latin script) instead of using the Greek alphabet.",
+          "suggestion": "Προγραμματιστής"
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "There is an extra space at the end of the Spanish translation.",
-          "suggestion": "Developer"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation is identical to the English text, meaning it was not translated.",
+          "suggestion": "Kehittäjä"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The French translation is identical to the English text, which is not a French translation.",
+          "suggestion": "Développeur"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in English instead of Armenian.",
+          "suggestion": "Ծրագրավորող"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -123,19 +171,37 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Japanese translation is identical to the English text (Latin script) instead of using Japanese characters.",
+          "suggestion": "開発者"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in English instead of Korean.",
+          "suggestion": "개발자"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in English (Latin script) instead of Lao script.",
+          "suggestion": "ນັກພັດທະນາ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -159,13 +225,25 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is in English instead of Portuguese.",
+          "suggestion": "Desenvolvedor"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is in English instead of Portuguese (Brazil).",
+          "suggestion": "Desenvolvedor"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -177,13 +255,25 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Russian translation is provided in English (Latin script) instead of Russian (Cyrillic script).",
+          "suggestion": "Разработчик"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in English instead of Sinhala.",
+          "suggestion": "සංවර්ධකයා"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -201,7 +291,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in English instead of Serbian (Cyrillic).",
+          "suggestion": "Развојник"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -213,22 +309,46 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is identical to the English source, meaning the Turkish translation is missing. 'Developer' should be translated to Turkish.",
+          "suggestion": "Geliştirici"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Ukrainian translation is identical to the English text, using the Latin script instead of the required Cyrillic script.",
+          "suggestion": "Розробник"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is in English instead of Vietnamese.",
+          "suggestion": "Nhà phát triển"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

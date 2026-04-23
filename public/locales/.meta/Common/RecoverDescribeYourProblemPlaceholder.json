@@ -3,7 +3,7 @@
   "content": "Describe your problem",
   "content_en_sha1_hash": "a3f26ab859868b6ad1c8933f5b3794feee142cae",
   "created_at": "2025-05-19T21:30:47.762Z",
-  "updated_at": "2026-02-19T13:36:33.106Z",
+  "updated_at": "2026-04-08T01:43:42.561Z",
   "comment": {
     "text": "This translation key is used as a placeholder text for a question that users are asked to describe their problem or issue in a recover access modal dialog.",
     "is_auto": true,
@@ -99,18 +99,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation \"ご質問を説明ください\" is not a natural or accurate translation of \"Describe your problem.\" It's a literal and awkward construction. \"ご質問を説明ください\" roughly translates to 'Please explain your question'.",
-          "suggestion": "問題をご説明ください (Mondai o go-setsumei kudasai) - Please explain the problem. or  どのような問題ですか (Dono you na mondai desu ka?) - What problem are you experiencing?"
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase \"ご質問を説明ください\" uses an unnatural verb construction. Using \"説明ください\" directly after \"ご質問を\" sounds stiff and not conversational.",
-          "suggestion": "Using a more natural phrasing like \"問題をご説明ください (Mondai o go-setsumei kudasai)\" or \"どのような問題ですか (Dono you na mondai desu ka?)\" would improve the grammar."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -170,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ගැටලුව පැහැදිලි කරන්න' while understandable, isn't the most natural way to translate 'Describe your problem'. A more common and idiomatic translation would be 'ඔබේ ගැටලුව විස්තර කරන්න' or 'ඔබට ඇති ගැටලුව පැහැදිලි කරන්න'. 'ගැටලුව පැහැදිලි කරන්න' can be interpreted as 'Explain the problem' rather than 'Describe your problem'.",
-          "suggestion": "ඔබේ ගැටලුව විස්තර කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -222,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

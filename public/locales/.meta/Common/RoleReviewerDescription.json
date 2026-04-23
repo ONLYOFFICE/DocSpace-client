@@ -3,7 +3,7 @@
   "content": "Operations with existing files: viewing, reviewing, commenting.",
   "content_en_sha1_hash": "47084e89cece6c67096d21cb0a5b610942ae04f5",
   "created_at": "2025-05-19T21:30:48.095Z",
-  "updated_at": "2026-02-19T13:36:33.111Z",
+  "updated_at": "2026-04-08T00:42:02.407Z",
   "comment": {
     "text": "This translation key is used for the label that describes the role of a user who can review files, and its purpose is to provide a clear explanation in the UI. It appears on buttons or dialogs related to file sharing and access permissions. Translators should focus on conveying this concept in their target language.",
     "is_auto": true,
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'RoleReviewerDescription' implies a description of the role of a reviewer. The current translation, while technically correct, doesn't convey the meaning of a *description* of the reviewer's role. It simply translates the actions they perform.",
-          "suggestion": "استعراض مهام مدقق الملفات: عرض ومراجعة وإبداء الملاحظات."
+          "description": "The word 'المراجع' (Al-Muraji') means 'The Reviewer' (a person/noun), whereas the English text uses 'reviewing' (a gerund/action). In the context of describing operations/permissions, it should be the action 'المراجعة'.",
+          "suggestion": "العمليات على الملفات الحالية: العرض والمراجعة والتعليق."
         }
       ],
       "approved_at": null
@@ -57,13 +57,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'review' is better translated as 'преглед и оценка' or 'оценка'. 'Ревю' is an Anglicism and while understood, it's not the most accurate or natural translation in this context.",
-          "suggestion": "Операции със съществуващи файлове: преглед, оценка, коментари."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -72,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech translation contains a repetition of 'prohlížení' (viewing). It should appear only once.",
-          "suggestion": "Operace s existujícími soubory: prohlížení, komentování."
+          "description": "The translation contains a repetition of the word 'prohlížení' (viewing), which results in 'viewing, viewing, commenting' instead of 'viewing, reviewing, commenting'.",
+          "suggestion": "Operace s existujícími soubory: prohlížení, revize, komentování."
         }
       ],
       "approved_at": null
@@ -111,13 +105,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Armenian translation uses a colon (:) at the end of the phrase, which is not standard for this type of description. It's more natural to omit it.",
-          "suggestion": "Գործողություններ գոյություն ունեցող ֆայլերով՝ դիտում, վերանայում, մեկնաբանում"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -141,7 +129,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'commenting' is translated as 'ຄໍາເຫັນ' (comment/opinion), which is a noun. In this context, it should be a gerund/action (the act of commenting) to match 'viewing' and 'reviewing'.",
+          "suggestion": "ການປະຕິບັດງານກັບໄຟລ໌ທີ່ມີຢູ່: ການເບິ່ງ, ການທົບທວນຄືນ, ການໃຫ້ຄໍາເຫັນ."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -189,13 +183,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'අදහස් දැක්වීම්' (adahas dekvim) is a bit verbose. While technically correct, a more natural phrasing might be better.",
-          "suggestion": "Consider 'අදහස් දක්වීම' (adahas dakvima) or 'අදහස්' (adahas) for a more concise and natural feel."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -213,18 +201,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Операције' is transliterated from 'Operations' and while technically correct, it's a less common/natural way to express it in this context. A more natural Serbian word would be 'Radnje'.",
-          "suggestion": "Radnje sa postojećim datotekama: pregledaње, recenziranje, komentarisanje."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'рецензирање' is a valid Serbian word (recenziranje) it is more formal and implies a professional review. 'Pregledaње' is suitable for 'viewing'. The use of 'рецензирање' might be too formal for the context. 'Recenziranje' is technically the correct transliteration and a more common usage.",
-          "suggestion": "Radnje sa postojećim datotekama: pregledaње, recenziranje, komentarisanje."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -254,18 +231,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"支持的文件操作\" (Supports file operations) is too literal and doesn't accurately convey the nuance of 'Operations with existing files'. It implies creation and not just interaction with existing files.",
-          "suggestion": "Consider a more accurate translation like \"现有文件操作：查看、审阅、评论\" (Operations on existing files: viewing, reviewing, commenting) or \"对现有文件的操作：查看、审阅、评论\" (Operations on existing files: viewing, reviewing, commenting)."
-        },
-        {
-          "type": "formatting",
-          "description": "The colon after \"支持的文件操作\" is abrupt and could be improved for better flow.",
-          "suggestion": "Replace the colon with a more natural connector, or remove it entirely and adjust surrounding phrasing (as suggested in the 'incorrect_translation' correction)."
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

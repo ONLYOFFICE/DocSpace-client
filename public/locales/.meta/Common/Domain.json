@@ -3,7 +3,7 @@
   "content": "Domain",
   "content_en_sha1_hash": "9b10914d8b0a097ace7176e8973f5c3dee92bb44",
   "created_at": "2025-05-19T21:30:44.590Z",
-  "updated_at": "2025-12-19T13:32:34.597Z",
+  "updated_at": "2026-04-08T11:50:07.591Z",
   "comment": {
     "text": "The translation key \"Domain\" is used to display a user's domain or machine name. It appears in various UI elements such as information sections and input fields within the login wizard and configuration settings, providing context for users about their account or system details.",
     "is_auto": true,
@@ -39,55 +39,37 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Domen:\" is a transliteration of \"Domain,\" it's not a common or natural-sounding translation in Azerbaijani.  It doesn't convey the meaning of 'Domain' effectively in most contexts. The colon is also unnecessary.",
-          "suggestion": "Domən"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Домейн:' is a valid transliteration of 'Domain', it lacks the context of being a key name. A more appropriate translation, considering it's a key, might be 'Ключ: Домейн:' or simply 'Домейн' depending on the style guide.",
-          "suggestion": "Consider 'Ключ: Домейн:' or 'Домейн' depending on the overall style guide and context of the key name."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Doména:\" is a literal translation of \"Domain:,\" the colon usage is slightly awkward in Czech.  It's more common to see a simple \"Doména\" or \"Doména (Domain)\" for clarity, especially if this is a label or header.",
-          "suggestion": "Consider \"Doména\" or \"Doména (Domain)\" for a more natural phrasing."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation includes a colon (:) after 'Domain', while the English content does not. This might be unnecessary and affect readability/consistency.",
-          "suggestion": "Remove the colon: 'Domain'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek word 'Τομέας' means 'Sector' or 'Field of activity'. In the context of IT, networking, and login credentials (as specified in the metadata), 'Domain' should be translated as 'Δομήν' or 'Πεδίο' (though 'Domain' is often kept as 'Domain' in technical Greek contexts). 'Τομέας' is a semantic mismatch for a machine/network domain.",
+          "suggestion": "Domain"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -99,48 +81,31 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word 'Domain' is generally translated as 'Toimialue' in Finnish, especially in a technical or business context. 'Verkkotunnus:' specifically refers to a web domain and doesn't fully capture the meaning of 'Domain' which can refer to a broader concept.",
-          "suggestion": "Consider 'Toimialue:' or 'Alue:' depending on the specific context."
-        },
-        {
-          "type": "formatting",
-          "description": "The translation includes a colon ':'. While colons are sometimes used, it's important to ensure consistency and verify if the original English content had a colon, and if it's standard practice to include it for 'Domain' in Finnish.",
-          "suggestion": "Check if the colon is necessary and consistent with other similar translations."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Domaine:' is a possible translation for 'Domain:', it's not the most common or precise translation in all contexts. It depends heavily on the specific meaning of 'Domain' being conveyed. 'Domaine:' implies a field, area, or scope, which might not always be accurate. A more versatile translation might be 'Domaine' or 'Domaine:'.",
-          "suggestion": "Consider context. Alternatives include: 'Domaine', 'Domaine:' or a more specific translation based on the intended meaning."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation includes a colon (':') which is not present in the English source. In UI labels, adding punctuation that isn't in the source can break layout or consistency.",
+          "suggestion": "Տիրույթ"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Italian translation includes a colon after 'Dominio'. While colons are sometimes used in Italian, they are not typically used when translating terms like 'Domain' directly. It's more appropriate to leave it off unless the context dictates otherwise.",
-          "suggestion": "Dominio"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -164,18 +129,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Domēns:' is a possible translation for 'Domain', it's incomplete and lacks the same nuance. It's more of a literal translation that functions as a label rather than a general term. A better translation might depend on the context where 'Domain' is used (e.g., 'jomas' could be more appropriate in some contexts).",
-          "suggestion": "Consider 'jomas' or a context-specific translation for a more accurate representation of 'Domain'."
-        },
-        {
-          "type": "formatting",
-          "description": "The colon after 'Domēns' suggests it's a label or a title. Ensure this formatting is consistent with the overall design and intended usage.",
-          "suggestion": "Evaluate the necessity of the colon based on the context. If it's intended as a simple label, it's acceptable; otherwise, remove it."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -187,13 +141,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word \"Domain\" is often used in technical contexts (like web domains or organizational domains). \"Domena\" is a correct translation, but a more precise translation depending on the context might be required. Without more context, it's difficult to say if \"Domena\" is the best translation.",
-          "suggestion": "Consider the context and whether a more specific translation like \"Obszar\" (area), \"Dziedzina\" (field/domain), or \"Kraj domeny\" (domain name) would be more accurate."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -205,25 +153,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation includes a colon (:) which is not present in the English source. This could lead to parsing or display issues depending on the context of its usage.",
-          "suggestion": "Remove the colon from the translation, making it 'Domínio'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Domeniu:' doesn't fully capture the meaning of 'Domain' in the context of a key name. While 'Domeniu' is the Romanian word for 'Domain', adding a colon might be confusing or unnecessary in this specific case. It's likely best to simply translate it as 'Domeniu' without the colon.",
-          "suggestion": "Domeniu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -238,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"වසම\" (vasama) does not accurately translate \"Domain\". \"වසම\" typically refers to 'peace' or 'harmony'. A more appropriate translation for 'Domain' would depend on the context (e.g., internet domain, area of expertise, etc.).",
-          "suggestion": "Requires context-dependent translation. Potential alternatives include: களප (kalapa - for internet domain), ප්‍රදේශය (pradeshiya - for area/region), or ක්ෂේත්‍රය (kshethraya - for field/area of expertise)."
+          "description": "The Sinhala word 'වසම' (vasama) means 'the same' or 'identical'. It does not mean 'Domain' in a technical/network context.",
+          "suggestion": "ඩොමේන්"
         }
       ],
       "approved_at": null
@@ -265,25 +201,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Domen' is a valid Serbian word, it's not the most common or precise translation for 'Domain' in the context of computing or online spaces. 'Domena' is the more accurate and widely understood Serbian term.",
-          "suggestion": "Domena"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Alan:' directly translates 'Domain' to 'Area:' but adds a colon. While 'Alan' is a possible translation for 'Domain' in certain contexts (like area of expertise), it doesn't accurately convey the technical meaning of 'Domain' (as in internet domain). A more appropriate translation might depend on the specific context. Simply adding ':' isn't inherently wrong, but warrants consideration of the context.",
-          "suggestion": "Consider the context. If it's referring to an internet domain, a better translation might be something like 'Etki Alanı:' or 'Alan Adı:' (Domain Name)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -298,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Miền:\" while conveying a general sense of 'Domain', might not be the most accurate or natural translation depending on the context. 'Miền' primarily means 'region' or 'area'.  'Domain' in technical contexts often refers to a specific digital asset or a controlled territory. A more precise translation might be 'Tên miền:' (for internet domains) or a more contextual translation.",
-          "suggestion": "Consider 'Tên miền:' or a context-specific alternative like 'Lĩnh vực:' or 'Cùng:' depending on the application of 'Domain'."
+          "description": "In the context of IT, networking, and user accounts (as specified in the metadata), 'Domain' should be translated as 'Tên miền' or 'Miền' (without the colon if the colon is not in the source). However, 'Miền' in Vietnamese often refers to a geographical region. For a technical domain (e.g., example.com), 'Tên miền' is the standard and accurate term.",
+          "suggestion": "Tên miền"
         }
       ],
       "approved_at": null
@@ -310,10 +234,16 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '域：' while technically meaning 'Domain:', is an unusual and potentially confusing translation for 'Domain' in this context. It includes a colon which may not be necessary and changes the tone. It lacks the directness expected for a key name.",
-          "suggestion": "领域"
+          "description": "The translation includes a colon '：' which is not present in the English source. In UI development, adding punctuation that isn't in the source can break layout or cause issues when the string is used as a standalone label or in different contexts.",
+          "suggestion": "域"
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "Add trusted domain",
   "content_en_sha1_hash": "4d8d1f52d9615d9c81391e0cd5314c57146e0a06",
   "created_at": "2025-05-19T21:30:50.373Z",
-  "updated_at": "2026-03-26T08:26:58.272Z",
+  "updated_at": "2026-04-09T04:28:24.493Z",
   "comment": {
     "text": "The translation key \"AddTrustedDomain\" is used to display the label \"Add trusted domain\" in a UI element, likely a button or input field, where users can add a trusted mail domain to access secure content. It appears in a category dialog related to security settings for an access portal.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'domain' is spelled incorrectly. It should be 'domen'.",
-          "suggestion": "domen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -51,31 +45,25 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text is singular ('domain'), but the Czech translation is plural ('domény').",
+          "suggestion": "Přidat důvěryhodnou doménu"
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Sichere Domain hinzufügen\" is understandable, it's not the most accurate translation of \"Add trusted domain.\" \"Sichern\" implies securing something, rather than simply adding it to a list of trusted domains. A more accurate translation might emphasize the addition and trust aspect.",
-          "suggestion": "Vertrauenswürdige Domain hinzufügen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Προσθήκη αξιόπιστου domain\" is a very literal translation and sounds unnatural in Greek. A more fluent and natural phrasing would be preferred.",
-          "suggestion": "Προσθήκη αξιόπιστου τομέα"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -93,13 +81,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Ajouter domaine autorisé\" is understandable, a more accurate and idiomatic translation of \"Add trusted domain\" would be \"Ajouter un domaine de confiance\". \"Autorisé\" implies permission, while \"de confiance\" conveys the idea of trustworthiness.",
-          "suggestion": "Ajouter un domaine de confiance"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -123,13 +105,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation '신뢰할 수있는 도메인을 추가' is a literal translation and sounds unnatural. A more natural phrasing would be '신뢰할 도메인 추가'.",
-          "suggestion": "신뢰할 도메인 추가"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -138,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While the individual words are mostly correct, the phrasing \"ຕື່ມ ເຊື່ອຖືໄດ້ ໂດ​ເມນ\" is not the most natural or idiomatic translation of \"Add trusted domain.\"  \"ຕື່ມ\" can mean 'add' but in this context, a more suitable verb might be 'ເພີ່ມ' (pherm) or a phrasing that emphasizes adding to a list or configuration.",
-          "suggestion": "Consider using a phrasing like \"ເພີ່ມ ໂດ​ເມນທີ່ເຊື່ອຖືໄດ້\" (pherm domain thee suea thit dai) or \"ຕື່ມໂດ​ເມນທີ່ຖືກເຊື່ອຖື\" (toem domain thee thug suea thit)."
+          "description": "The Lao translation is a literal word-for-word substitution that results in nonsensical grammar. 'ຕື່ມ' (to add/fill) is used incorrectly in this context, and 'ເຊື່ອຖືໄດ້ ໂດ​ເມນ' is a broken phrase that does not function as 'trusted domain'.",
+          "suggestion": "ເພີ່ມໂດເມນທີ່ເຊື່ອຖືໄດ້"
         }
       ],
       "approved_at": null
@@ -189,18 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'වසම' (vasama) should be 'වරපත්‍රය' (warapatraya) for 'domain' in this context. 'වසම' translates to 'realm' or 'domain' in a broader sense, but 'වරපත්‍රය' is the more accurate term for a trusted domain in a technical context.",
-          "suggestion": "Change 'වසම' to 'වරපත්‍රය'"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'විශ්වසනීය' (vishvasaniya) correctly translates to 'trusted', the overall phrasing could be improved for clarity in a user interface. A more natural translation might prioritize conciseness.",
-          "suggestion": "Consider 'නැඹුරු වරපත්‍රය' (nemberu warapatraya) - 'Add domain' or 'ගණනය කළ යුතු වරපත්‍රය' (gananaya kaluthuwa warapatraya) - 'Register domain'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -246,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

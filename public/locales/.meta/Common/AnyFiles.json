@@ -3,7 +3,7 @@
   "content": "Any files",
   "content_en_sha1_hash": "25cb674472e7736c4e2fb2cacafaa8f86ba8980d",
   "created_at": "2026-03-20T09:07:38.461Z",
-  "updated_at": "2026-03-20T09:07:38.461Z",
+  "updated_at": "2026-04-08T16:53:34.842Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -12,6 +12,258 @@
   "usage": [],
   "languages": {
     "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Bulgarian translation 'Всички файлове' means 'All files', whereas the English source 'Any files' implies a selection or a non-specific quantity (e.g., 'Any of the files').",
+          "suggestion": "Някои файлове"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'Any files' implies a selection or a possibility (e.g., 'Select any files'), whereas the Finnish 'Kaikki tiedostot' means 'All files'.",
+          "suggestion": "Mitä tahansa tiedostoja"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation uses a plural noun 'ֆայլեր' with the quantifier 'Ցանկացած', which is grammatically incorrect in Armenian. 'Ցանկացած' (Any) requires a singular noun to convey 'Any file' or 'Any single file'. If the intent is 'Any files', it should be phrased differently to avoid the grammatical clash.",
+          "suggestion": "Ցանկացած ֆայլ"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English text 'Any files' implies a plural or indefinite quantity, whereas the Korean '파일' (File) is singular and lacks the 'any' nuance.",
+          "suggestion": "모든 파일"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Dutch translation uses 'Elke' (singular) with 'bestanden' (plural), which is grammatically incorrect and fails to convey the intended meaning of 'Any files'.",
+          "suggestion": "Alle bestanden"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Grammatical disagreement between the quantifier 'Qualquer' (singular) and the noun 'arquivos' (plural). In Portuguese, 'Any files' should be 'Quaisquer arquivos' or 'Todos os arquivos' depending on context, but 'Qualquer arquivos' is grammatically incorrect and changes the intended meaning of plurality.",
+          "suggestion": "Quaisquer arquivos"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'ඕනෑම ගොනු' is grammatically incorrect. 'ඕනෑම' (Any) is singular, while 'ගොනු' (files) is plural. In Sinhala, 'Any files' should be translated as 'ඕනෑම ගොනුවක්' (Any single file) or 'ඕනෑම ගොනු ප්‍රමාණයක්' (Any amount of files), but in a UI context for 'Any files', 'ඕනෑම ගොනු' sounds unnatural/broken.",
+          "suggestion": "ඕනෑම ගොනුවක්"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'Akčné súbory' means 'Action files' instead of 'Any files'.",
+          "suggestion": "Akékoľvek súbory"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovenian translation 'Nobene datoteke' means 'No files' (singular), which is the opposite of 'Any files'.",
+          "suggestion": "Katere koli datoteke"
+        }
+      ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Albanian word 'Ndërsa' means 'While' or 'Whereas', which changes the meaning from 'Any' (referring to quantity/selection) to a conjunction of time or contrast.",
+          "suggestion": "Çdo skedar"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Herhangi dosyalar' is grammatically incorrect in Turkish and fails to convey the meaning of 'Any files'. It lacks the necessary suffix to connect the words.",
+          "suggestion": "Herhangi bir dosya"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

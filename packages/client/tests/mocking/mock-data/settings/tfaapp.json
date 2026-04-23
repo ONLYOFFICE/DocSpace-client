@@ -5,13 +5,13 @@
       "id": "sms",
       "title": "By SMS",
       "enabled": false,
-      "avaliable": false
+      "available": false
     },
     {
       "id": "app",
       "title": "By authenticator app",
       "enabled": false,
-      "avaliable": true
+      "available": true
     }
   ],
   "status": 0,

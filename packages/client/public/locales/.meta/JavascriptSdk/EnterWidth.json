@@ -3,7 +3,7 @@
   "content": "Enter width",
   "content_en_sha1_hash": "b11870b5aaf02a2746e893393870b5196d610f17",
   "created_at": "2025-05-19T21:30:54.481Z",
-  "updated_at": "2025-08-04T07:30:01.414Z",
+  "updated_at": "2026-04-07T19:35:05.131Z",
   "comment": {
     "text": "Enter width is used as a placeholder text for a user input field in a Width Setter component, allowing users to enter a value for setting a width. It appears on a specific sub-component within a Portal Settings page.",
     "is_auto": true,
@@ -63,13 +63,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Especificar ancho\" is a valid translation, it's slightly formal for a UI label like \"Enter width\". A more common and user-friendly translation might be better.",
-          "suggestion": "Consider alternatives like \"Ingrese ancho\" or \"Introduzca ancho\" which are more conversational."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -87,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Մուտքագրել լայնությունը\" is technically correct, a more natural and idiomatic translation of 'Enter width' in this context would be something like 'Նշեք լայնությունը' (Nsheq laynut'y) or 'Մուտքագրեք լայնությունը' (Mut'yagreq laynut'y). \"Մուտքագրել\" emphasizes typing, while the original English phrase is more general.",
-          "suggestion": "Նշեք լայնությունը"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -111,13 +99,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While '너비 입력' is a literal translation of 'Enter width,' it's not the most natural or idiomatic way to express that in Korean for a UI label. A more common and user-friendly phrasing would be '너비 입력하기' or '너비 입력하세요'.",
-          "suggestion": "너비 입력하기"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -135,13 +117,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Voor breedte\" is not the most natural or accurate translation of \"Enter width\". While \"voor\" can mean 'for', in this context, it doesn't convey the intended meaning of providing or inputting a width value.",
-          "suggestion": "Vul breedte in"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -177,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"පළල යොදන්න\" while containing the word for 'width' (පළල), the verb 'යොදන්න' (yodannā) which means 'add' or 'introduce' is not an accurate translation of 'Enter width'. The English phrase implies inputting a width value.",
-          "suggestion": "A more accurate translation might be \"వెడల్పు నమోదు చేయండి\" (Wedalp namudam karanne) or \"వెడల్పు ඇතුළත් చేయండి\" (Wedalp aethulat karanne) – 'Enter width'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -207,13 +177,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Unesi širinu' doesn't accurately convey the meaning of 'Enter width'. It literally translates to 'Enter width-accusative', which is grammatically incorrect and doesn't match the intended action.",
-          "suggestion": "Ulazi širinu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

@@ -3,7 +3,7 @@
   "content": "Free access to {{license}} solution",
   "content_en_sha1_hash": "67e196ff367f561eecc1cb56cec37845211b879f",
   "created_at": "2025-05-19T21:30:45.567Z",
-  "updated_at": "2026-03-26T08:26:58.281Z",
+  "updated_at": "2026-04-08T08:36:46.737Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that there is free access to a licensed version of a solution. It appears in UI elements where licensing information is relevant, such as portal settings pages or licensing dialogs. Translators should provide a phrase that conveys this idea in the target language.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 700,
+      "line_number": 601,
       "context": "{\n id: \"portal-settings_catalog-portal-bonus\",\n key: \"11-0\",\n icon: \"\",\n link: \"\",\n tKey: \"Common:FreeAccessToLicensedVersion\",\n isCategory: true,\n },\n ],\n },\n ];",
       "module": "/packages/client"
     }
@@ -27,25 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'الوصول المجاني إلى حل {{license}}' is a literal translation, but a more natural and idiomatic Arabic phrasing for 'Free access to {{license}} solution' would be 'إمكانية الوصول المجاني إلى حل {{license}}' or 'الحصول على حل {{license}} مجانًا'. The current phrasing is grammatically correct but sounds less fluent.",
-          "suggestion": "إمكانية الوصول المجاني إلى حل {{license}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"{{license}} üçün pulsuz giriş\" doesn't perfectly capture the meaning of \"Free access to {{license}} solution\". \"Üçün\" implies 'for' in the sense of purpose, while 'solution' is missing. A better translation would convey the idea of access to a solution. ",
-          "suggestion": "{{license}} həllinə pulsuz giriş"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -57,7 +45,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word order in Czech is grammatically incorrect for the intended meaning. '{{license}} řešení' implies 'the solution of {{license}}', whereas the English '{{license}} solution' implies a solution that is of the type {{license}}. In Czech, the adjective/modifier should precede the noun or be phrased differently to avoid sounding like a broken literal translation.",
+          "suggestion": "Bezplatný přístup k řešení {{license}}"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -93,25 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation \"Անվճար մուտք դեպի {{license}} տարբերակ\" doesn't perfectly convey the meaning of 'Free access to {{license}} solution'.  'Դեպի' (to/towards) implies movement or direction. A more accurate translation for 'access' in this context would be a word like 'ունենալ' (to have) or a more descriptive phrase. The word 'տարբերակ' (version) is acceptable, but could be slightly improved depending on the desired nuance.",
-          "suggestion": "Consider alternatives like \"Անվճար {{license}} լուծույթի մուտք\" or \"Անվճար մուտք {{license}} լուծույթին\" (Free access to the {{license}} solution)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Free access to {{license}} solution' implies a benefit or privilege. The Italian translation 'Accesso gratuito alla soluzione {{license}}' literally translates to 'Free access to the solution {{license}}'. While not strictly incorrect, it lacks the subtle nuance of 'Free access to a {{license}} solution' which suggests a solution that is accessible due to the license.",
-          "suggestion": "Consider 'Accesso gratuito alla soluzione con licenza {{license}}' to better convey the meaning, or 'Accesso gratuito alla versione con licenza {{license}}' (Free access to the version with license)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -132,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ການເຂົ້າໃຊ້ຟຣີ ຫາ {{license}} ວິທີແກ້ໄຂ' is not a perfect translation of 'Free access to {{license}} solution'. 'ຫາ' implies 'to' or 'towards', but in this context, 'to' signifies direct access. A more accurate translation would emphasize direct accessibility.",
-          "suggestion": "ການເຂົ້າເຖິງຟຣີ ຂອງ {{license}} ວິທີແກ້ໄຂ"
+          "description": "The Lao translation uses 'ວິທີແກ້ໄຂ' (method of solving/solution) in a way that sounds like a literal dictionary translation of 'solution' rather than a software/product solution. More importantly, the word order '{{license}} ວິທີແກ້ໄຂ' is grammatically incorrect in Lao for this context; it should be 'ວິທີແກ້ໄຂ {{license}}' to mean '{{license}} solution'.",
+          "suggestion": "ການເຂົ້າໃຊ້ {{license}} ວິທີແກ້ໄຂຟຣີ"
         }
       ],
       "approved_at": null
@@ -153,13 +135,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Bezpłatny dostęp do rozwiązania {{license}}\" is a literal translation but doesn't sound natural in Polish. A more idiomatic translation would be \"Darmowy dostęp do rozwiązania {{license}}\" or \"Dostęp do rozwiązania {{license}} za darmo\".",
-          "suggestion": "Darmowy dostęp do rozwiązania {{license}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -189,30 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"{{license}} විසඳුම සඳහා නොමිලේ ප්‍රවේශය\" is a literal translation that may not flow naturally in Sinhala. A more natural phrasing would be something like '{{license}} විසඳුමට නොමිලයේ ප්‍රවේශය' or '{{license}} විසඳුම නොමිලයේ ලබාගත හැක'.",
-          "suggestion": "{{license}} විසඳුමට නොමිලයේ ප්‍රවේශය"
-        },
-        {
-          "type": "formatting",
-          "description": "The Sinhala translation uses a mixture of Sinhala and English characters in the template variable {{license}}. While technically acceptable, consistency in using only Sinhala (if possible) would improve the overall presentation.",
-          "suggestion": "Consider if the license name can be rendered in Sinhala. If not, keep the English variable as is."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Bezplatný prístup k riešeniu {{license}} ' is a literal translation, but a more natural Slovak phrasing might be 'Voľný prístup k riešeniu {{license}}'. 'Voľný' often conveys 'free' in the context of access or availability better than 'bezplatný'.",
-          "suggestion": "Voľný prístup k riešeniu {{license}} "
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -224,13 +183,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Бесплатан приступ {{license}} решењу' is a literal translation of 'Free access to {{license}} solution'. A more natural Serbian translation would be 'Besplatan pristup {{license}} rešenju' or 'Омogućен бесплатан приступ {{license}} решењу'. The current translation sounds slightly awkward.",
-          "suggestion": "Бесплатан приступ {{license}} решењу or Омогућен бесплатан приступ {{license}} решењу"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -242,13 +195,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Turkish translation uses \"çözümüne\" which implies dative case. While grammatically correct, it might sound slightly less natural than using the locative case, depending on the desired tone. Using \"çözümünde\" would emphasize the solution itself.",
-          "suggestion": "{{license}} çözümünde ücretsiz erişim"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -260,25 +207,19 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Free access to {{license}} solution' implies access to a specific solution provided by a license. The Vietnamese translation 'Tiếp cận phần mềm {{license}} miễn phí' translates to 'Free access to {{license}} software'. While functionally similar, 'software' is more specific than 'solution'. The best translation depends on the context, but 'solution' is more accurate in many cases.  'Tiếp cận' is fine, but the noun choice should be re-evaluated based on the intended meaning.",
-          "suggestion": "Consider 'Tiếp cận giải pháp {{license}} miễn phí' if 'solution' is the intended meaning. If referring to a software license specifically, the current translation is acceptable."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Free access to {{license}} solution' implies the ability to use the solution without cost or restriction. The Chinese translation '免费使用 {{license}} 解决方案' translates to 'Free to use {{license}} solution'. While close, 'access' is better conveyed by a word suggesting permission or availability rather than just 'use'.",
-          "suggestion": "免费获取 {{license}} 解决方案 (Miǎnfèi huòqǔ {{license}} jiějuéfāng'àn) - This translates to 'Free to obtain {{license}} solution', which more accurately reflects 'free access'."
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

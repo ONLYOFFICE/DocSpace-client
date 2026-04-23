@@ -3,7 +3,7 @@
   "content": "Request activation once again",
   "content_en_sha1_hash": "d92ae80e8cd52b009bd09980e39a20c69c79d8a6",
   "created_at": "2025-05-19T21:30:54.123Z",
-  "updated_at": "2025-09-26T15:21:06.058Z",
+  "updated_at": "2026-04-07T19:35:05.154Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Request activation once again\" as a button label in various places within the application, including confirmation email bars and portal deletion dialogs. The purpose of this text is to prompt users to activate their accounts or portals again.",
     "is_auto": true,
@@ -45,42 +45,19 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Yenidən aktivləşdirmə tələb edin' is a literal translation and sounds unnatural in Azerbaijani. A more natural phrasing would convey the request for reactivation.",
-          "suggestion": "Yenidən aktivlaşdırılmasını xahiş edin"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Отново заявете активиране' is grammatically correct but not the most natural or idiomatic way to say \"Request activation once again\" in Bulgarian. It sounds slightly formal and less fluent.",
-          "suggestion": "Заявете активиране отново"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Znovu požádat o o aktivaci' is not idiomatic Czech. It translates literally to 'Request again about activation,' which is awkward. It should be more concisely expressed.",
-          "suggestion": "Znovu požádat o aktivaci"
-        },
-        {
-          "type": "grammar",
-          "description": "The double 'o' in 'o o aktivaci' is incorrect. It should be just one 'o'.",
-          "suggestion": "Znovu požádat o aktivaci"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -116,13 +93,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Խնդրեք ակտիվացում ևս մեկ անգամ\" (Khndreq aktivatsum yes mek angam) is a literal translation and sounds somewhat unnatural in Armenian. While technically correct, a more natural phrasing would be preferred for UI text.",
-          "suggestion": "Մուծեք ակտիվացման հարտակարարումը ևս մեկ անգամ (Mudzek aktivatsman hartakararum e yes mek angam) or Կրկնակի՛ր ակտիվացման հարտակարարումը (Krknakir aktivatsman hartakararum e)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -134,13 +105,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, the translation 'もう一度アクティベーションを要求する' sounds overly formal and robotic for a user-facing prompt like \"Request activation once again.\" It lacks the natural flow of a user request.",
-          "suggestion": "Consider a more conversational translation like 'アクティベーションを再度リクエストしてください' or 'アクティベーションをもう一度リクエストしてください'.  The nuance is more natural for a request."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -158,13 +123,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation \"Vēreiz pieprasīt aktivizāciju\" is not a natural or accurate translation of \"Request activation once again.\" 'Vēreiz' doesn't convey the meaning of 'once again.'",
-          "suggestion": "A more accurate translation could be \"Pieprasīt aktivizāciju vēlreiz\" or \"Aktivizāciju pieprasīt vēlreiz\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -224,37 +183,19 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Затражи активацију још једном' while understandable, is not the most natural or common way to express 'Request activation once again' in Serbian. A more idiomatic translation would be 'Поново затражи активацију'.",
-          "suggestion": "Поново затражи активацију"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Zatraži' is misspelled. It should be 'Ponovo zatraži'.",
-          "suggestion": "Ponovo zatraži aktivaciju"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Tekrar aktivasyon iste' is a literal translation and doesn't sound natural in Turkish. A more idiomatic translation would be preferred.",
-          "suggestion": "Tekrar aktivasyon talep et"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

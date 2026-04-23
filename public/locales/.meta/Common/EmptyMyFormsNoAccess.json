@@ -3,7 +3,7 @@
   "content": "There are no forms available yet.",
   "content_en_sha1_hash": "9f9f31306c6de5f541cf1d38ec573ffbe28ff39e",
   "created_at": "2026-03-31T15:18:11.122Z",
-  "updated_at": "2026-03-31T15:18:11.122Z",
+  "updated_at": "2026-04-08T10:48:45.760Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -50,7 +50,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation refers to 'form elements' (στοιχεία φόρμας) instead of 'forms' (φόρμες).",
+          "suggestion": "Δεν υπάρχουν διαθέσιμες φόρμες ακόμα."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -104,7 +110,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian word 'ekrānkārta' means 'widget', whereas the English text refers to 'forms'.",
+          "suggestion": "Nav pieejamas nekādas velapas."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -152,7 +164,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Grammatical error in Slovak: 'Nie je' (singular) does not agree with 'formuláre' (plural). It should be 'Nie sú'.",
+          "suggestion": "Zatiaľ nie sú k dispozícii žiadne formuláre."
+        }
+      ],
       "approved_at": null
     },
     "sl": {

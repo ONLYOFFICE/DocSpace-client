@@ -6,7 +6,6 @@
   "EmptyKnowledgeDescriptionActions": "Skúste tieto kroky, aby ste začali:",
   "EmptyKnowledgeTitle": "Zatiaľ neboli nahraté žiadne súbory.",
   "EmptyResultsTitle": "Zatiaľ žiadne výsledky.",
-  "InstructionsDescriptionAgentExample": "Príklad: „Ste AI PR asistent, ktorý pomáha písať a upravovať tlačové správy. Udržiavajte profesionálny, sebavedomý a pre médiá priateľský tón. Jasne zvýrazňujte kľúčové posolstvá, vyhýbajte sa žargónu a udržujte text stručný a zaujímavý.“",
   "KnowledgeDescription": "Nahrajte súbory z vášho počítača alebo z {{productName}}, aby ste poskytli kontext pre chat. Upozornenie: počas konverzácie môžu byť niektoré alebo všetky nahraté údaje zverejnené.",
   "KnowledgeSelectIn": "Vyberte v {{productName}}",
   "KnowledgeUnavailable": "Základňa vedomostí nedostupná",
@@ -14,5 +13,19 @@
   "ResponseQualityNode": "<1>Poznámka:</1> Kvalita odpovede sa môže líšiť v závislosti od modelu; na dosiahnutie najlepších výsledkov sa odporúčajú novšie modely.",
   "ResultStorage": "Ukladanie výsledkov",
   "UploadFilesDevice": "Nahrajte súbory z vášho osobného zariadenia.",
-  "UploadFilesPortal": "Uploadnite súbory z {{sectionNameFirst}} alebo {{sectionNameSecond}}"
+  "UploadFilesPortal": "Uploadnite súbory z {{sectionNameFirst}} alebo {{sectionNameSecond}}",
+  "CreateChatDescription": "Prejdite na záložku {{aiChat}}, aby ste začali.",
+  "EmptyKnowledgeDescription": "Nahrané súboré tu budú indexované a použité ako kontext v tabu {{aiChat}}. Pridajte súbory (do 10 MB každý), aby ste mohli položiť otázky AI, vygenerovať obsah alebo spolupracovať na informáciách.",
+  "EmptyResultsDescription": "Súbory vygenerované v {{aiChat}} sa tu automaticky zobrazia. Keď kedykoľvek vygenerujete obsah, začnete chat alebo pošlete správu s výstupom, výsledok bude uložený v tejto sekcii.",
+  "EmptyResultsViewerDescription": "Zatiaľ tu uvidíte výsledky aktivity {{aiChat}} od iných používateľov, keď budú dostupné.",
+  "InstructionsDescriptionAgent": "Popíšte, ako sa {{aiAgent}} má správať a odpovedať. Definujte jeho úlohu, tón a hlavné úlohy.",
+  "Knowledge": "Základ wiedzie",
+  "KnowledgeUnavailableDescription": "Základné znalosti sú v súčasnosti deaktivované. Ak chcete aktivovať semantické vyhľadávanie a spracovanie dokumentov pre vaše {{aiAgents}}, nakonfigurujte poskytovateľa vložení v nastaveníach {{productName}}.",
+  "KnowledgeUnavailableDescriptionUser": "Základné znalosti sú momentálne deaktivované. Ak chcete aktivovať semantické vyhľadávanie a spracovanie dokumentov pre {{aiAgents}}, kontaktujte administrátora vášho {{productName}} a nakonfigurujte poskytovateľa vložení (embeddings provider).",
+  "MCPDescriptionServers": "Použite {{mcpServers}}, ktoré ich administrátor pripojil, na vylepšenie chatu s umelou inteligenciou. {{mcpServers}} môže pomôcť pri extrakcii údajov, zhrnutí, inteligentných návrhov atď.",
+  "Model": "{{aiProvider}} a model",
+  "ModelDescription": "Vyberte {{aiProvider}} a model, ktorý sa bude používať v chatach v tomto miestnosti. Toto nastavenie je povinné a platí pre všetkých účastníkov.",
+  "NoAccessAIAgentTitle": "Prepáčte, nemáte prístup k tomuto {{aiAgent}}",
+  "AgentInViewModeWarning": "Ste v režime <strong>len pre zobrazenie</strong> pre tento {{aiAgent}}. Môžete vidieť výsledky aktivity {{aiChat}} ostatných používateľov.",
+  "InstructionsDescriptionAgentExample": "Príklad: „Ste AI asistent pre PR, ktorý pomáha s písaním a úpravou tlačových výhlasov. Udržujte profesionálny, sebavrstný a médiám priaznivý tón. Jasne zvýraznite kľúčové posolstvá, vyhnite sa odbornému žargónu a udržujte text stručný a pútavý.“"
 }

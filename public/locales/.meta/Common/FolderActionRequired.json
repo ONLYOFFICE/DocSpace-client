@@ -3,7 +3,7 @@
   "content": "The destination already contains a folder named «<1>{{folderName}}</1>».",
   "content_en_sha1_hash": "84e03768c28e7d8864816ce977c8c2b9f91a4f66",
   "created_at": "2025-05-19T21:30:45.425Z",
-  "updated_at": "2026-02-19T13:36:32.366Z",
+  "updated_at": "2026-04-10T08:58:38.055Z",
   "comment": {
     "text": "This translation key is used to display a message when a user attempts to add a new folder that already exists in the destination. The message informs the user that a folder with the same name already exists and cannot be created. It appears in the ConflictResolveDialog component where the user encounters conflicting actions for resolving folder additions.",
     "is_auto": true,
@@ -27,30 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The opening and closing angle brackets « and » are not consistently mirrored with the opening and closing tags <1> and </1>.",
-          "suggestion": "Ensure consistent use of angle brackets or tags. Consider using «</1>{{folderName}}<1>» or <1>{{folderName}}</1>»."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While the translation conveys the general meaning, the phrase 'الوجهة تحتوي بالفعل على مجلد اسمه' is slightly awkward and could be improved for natural flow in Arabic. A more natural phrasing would focus on the existence of the folder.",
-          "suggestion": "Consider 'الوجهة تحتوي بالفعل على مجلد باسم' or 'يوجد بالفعل مجلد باسم' (There is already a folder named)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Azerbaijani translation maintains the formatting tags «<1>» and «</1>» which should be consistent with the original English. While not an error, it's important to confirm if this is intended.",
-          "suggestion": "Verify if the formatting tags are intentionally preserved in the Azerbaijani translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -98,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Armenian translation includes a colon (:) at the end of the sentence which isn't present in the English source. This might be unnecessary and may not align with the intended style.",
-          "suggestion": "Remove the colon at the end of the sentence: Նպատակակետն արդեն պարունակում է «<1>{{folderName}}</1>» անունով թղթապանակ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -116,30 +93,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The angle brackets \"<1>\" and \"</1>\" are correctly replicated in the Japanese translation.",
-          "suggestion": null
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Korean translation correctly uses the same formatting tags («<1>{{folderName}}</1>») as the English content. No formatting issues detected.",
-          "suggestion": null
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While the translation is understandable, a more natural and precise rendering of 'The destination already contains' would be '목표 위치에 이미' (mokpyo wi-che-e imi) instead of '목표에 이미' (mokpyo-e imi). The latter is grammatically correct but less idiomatic.",
-          "suggestion": "목표 위치에 이미 «<1>{{folderName}}</1>» 이름의 폴더가 있습니다."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -181,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The XML tags «<1>...</1>» are inconsistent between the English and Romanian versions. The English version uses «<1>{{folderName}}</1>», while the Romanian uses «<1>{{folderName}}</1>».",
-          "suggestion": "Ensure consistency in the XML tag formatting. Use «<1>{{folderName}}</1>» in the Romanian translation to match the English."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -199,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Sinhala translation includes «<1>{{folderName}}</1>» which matches the English. However, confirm that this format is consistently used in all Sinhala translations and is appropriate for the target platform/audience. It's possible this needs adjustment.",
-          "suggestion": "Confirm the correct formatting of the placeholder for Sinhala and ensure consistency with other translated content."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -217,18 +165,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The quotation marks are incorrect and incomplete. The English content uses « and » while the Slovenian translation uses standard quotes.",
-          "suggestion": "Replace « with « and » with » to match the English formatting."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation 'z imenom' is too literal. A more natural translation would be 'po imenu'.",
-          "suggestion": "Change 'z imenom' to 'po imenu'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -240,30 +177,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Serbian translation accurately reproduces the XML-like formatting from the English content. The use of « and » is correct.",
-          "suggestion": null
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Odredište' is a valid translation for 'destination', 'folder sa nazivom' is a bit verbose. A more natural phrasing would be 'folder imenom'.",
-          "suggestion": "Odredište već sadrži folder imenom «<1>{{folderName}}</1>»."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The angle brackets « and » are used incorrectly in the Turkish translation. They are inconsistent with the English original.",
-          "suggestion": "Maintain the English formatting of angle brackets: «<1>{{folderName}}</1>»"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -275,25 +195,19 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Vietnamese translation includes a space after the closing angle bracket in «<1>{{folderName}} </1>» which is not present in the English source. This creates a minor visual inconsistency.",
-          "suggestion": "Remove the space after the closing angle bracket: «<1>{{folderName}}</1>»"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Chinese translation preserves the angle brackets «<1>{{folderName}} </1>» exactly as in the English source. While technically correct, it's stylistically unusual in Chinese UI text and might be better adjusted for natural flow. Consider removing the space before the closing angle bracket.",
-          "suggestion": "目标位置中已存在名为«<1>{{folderName}}</1>»的文件夹。"
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

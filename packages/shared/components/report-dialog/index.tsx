@@ -91,7 +91,7 @@ const ReportDialog = (props: ReportDialogProps) => {
 			const reportWithDescription = Object.assign(report, {
 				description,
 			});
-			await firebaseHelper.sendCrashReport(reportWithDescription);
+			await firebaseHelper?.sendCrashReport(reportWithDescription);
 			toastr.success(t("ErrorReportSuccess"));
 			onCloseAction();
 		} catch (err) {

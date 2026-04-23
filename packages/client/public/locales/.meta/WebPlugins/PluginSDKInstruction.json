@@ -3,7 +3,7 @@
   "content": "Click the button for the detailed instructions on how to create your own plugins.",
   "content_en_sha1_hash": "a1cac081a5c41e00e53cb58353aba707600844f1",
   "created_at": "2025-05-19T21:30:49.923Z",
-  "updated_at": "2025-08-04T07:30:01.451Z",
+  "updated_at": "2026-04-08T18:30:45.150Z",
   "comment": {
     "text": "This translation key is used for a button label that directs users to detailed instructions on creating their own plugins. It appears as a \"Read Instructions\" button in a UI element, prompting users to access further guidance on plugin development.",
     "is_auto": true,
@@ -69,13 +69,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Klikkaa' is a transliteration of 'Click'. While understandable, it's less formal and potentially jarring for some users. 'Paina painiketta' or 'Valitse painike' would be more appropriate for a professional context.",
-          "suggestion": "Paina painiketta"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -161,14 +155,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'පේනු' (penu) is likely a misspelling. It probably refers to 'plugin' which would be 'ප්ලගින්' (plagin) in Sinhala when transliterated.",
-          "suggestion": "Replace 'පේනු' with 'ප්ලගින්'."
-        },
-        {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'ඔබගේම' (obageema) is slightly less natural in this context. A more common phrasing would be 'ඔබට' (obata) or simply removing it.",
-          "suggestion": "Consider replacing 'ඔබගේම' with 'ඔබට' or omitting it entirely."
+          "description": "The word 'plugins' was translated as 'පේනු' (pens), which is a literal translation for writing instruments, instead of the technical term for software plugins.",
+          "suggestion": "ඔබගේම ප්ලගින් (plugins) සාදා ගන්නේ කෙසේදැයි පිළිබඳ සවිස්තරාත්මක උපදෙස් සඳහා බොත්තම ඔබන්න."
         }
       ],
       "approved_at": null
@@ -188,18 +177,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of 'plugins' is 'додатке'. While technically correct, 'plugins' often refers to something more specialized in a technical context. 'Додаци' is a more general term for 'add-ons'. A more accurate translation might be 'проширења' or 'додаци' depending on the specific context.",
-          "suggestion": "Consider 'проширења' or 'додаци' instead of 'додатке' to better reflect the technical meaning of 'plugins'."
-        },
-        {
-          "type": "formatting",
-          "description": "The sentence structure, while grammatically correct, could be improved for clarity and a more natural flow in Serbian. The literal translation makes it slightly awkward.",
-          "suggestion": "Consider rephrasing to 'Кликните на дугме за детаљне инструкције за прављење сопствених додатке.' or 'Кликните на дугме да бисте видели детаљне инструкције за прављење сопствених додатке.'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -231,11 +209,17 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation '单击该按钮了解如何创建您自己的插件' is a literal translation and sounds slightly awkward in Chinese. A more natural phrasing would be '点击此按钮，查看如何创建您自己的插件' or '点击按钮以获取创建您自己插件的详细说明。'",
-          "suggestion": "点击此按钮，查看如何创建您自己的插件"
+          "type": "missing_content",
+          "description": "The translation omits the concept of 'detailed instructions', translating it simply as 'how to create' (了解如何创建), which loses the emphasis on the depth of the information provided.",
+          "suggestion": "单击该按钮了解如何创建您自己的插件的详细说明。"
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

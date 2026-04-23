@@ -3,7 +3,7 @@
   "content": "{{productName}} will become unavailable during the restore process. After the restore is complete all the changes made after the date of the selected restore point will be lost.",
   "content_en_sha1_hash": "95f4959d72ad296d2309ba5ebff78078d35592ae",
   "created_at": "2025-05-26T07:15:46.930Z",
-  "updated_at": "2026-02-19T13:36:33.211Z",
+  "updated_at": "2026-04-10T08:58:38.050Z",
   "comment": {
     "text": "This translation key is used for a warning message that informs users about potential data loss during the restore process of their {productName}. It appears in a UI component that displays settings or options related to file restoration.",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word order in the second sentence is grammatically incorrect in Bulgarian, making the sentence structure awkward and potentially confusing ('...точка за възстановяване промени ще бъдат загубени' instead of '...промените, направени след датата на избраната точка за възстановяване, ще бъдат загубени').",
+          "suggestion": "{{productName}} ще бъде недостъпен по време на процеса на възстановяване. След като възстановяването приключи, всички промени, направени след датата на избраната точка за възстановяване, ще бъдат загубени."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -75,7 +81,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation '{{productName}}:n ei ole pääsyä' (literally: 'there is no access to {{productName}}') is grammatically awkward and conveys a slightly different meaning than 'will become unavailable'. In Finnish, a product itself doesn't 'lack access'; rather, it 'becomes unavailable' or 'cannot be used'.",
+          "suggestion": "{{productName}} ei ole käytettävissä palautusprosessin aikana. Palautuksen jälkeen kaikki valitun palautuspisteen jälkeen tehdyt muutokset häviävät."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -147,7 +159,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation changes the meaning of the second sentence. The English says changes made after the 'date of the selected restore point' will be lost, whereas the Romanian says changes made after the 'creation of a restore point' (crearea unui punct de restaurare) will be lost. This is a logical error because it implies any restore point creation triggers data loss, rather than the specific date selected by the user.",
+          "suggestion": "În timpul procesului de restaurare {{productName}} va deveni indisponibil. Odată ce procesul de restaurare este finalizat, toate modificările efectuate după data punctului de restaurare selectat vor fi pierdute."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -199,6 +217,24 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation changes the logic of the data loss warning. The English text states changes made after the 'date of the selected restore point' will be lost. The Chinese translation says changes made after 'clicking the restore button' will be lost. This is a critical distinction: the user loses data from the time of the backup point, not just from the moment they click the button.",
+          "suggestion": "{{productName}}在恢复过程中将不可用。恢复完成后，自所选恢复点日期以来所做的所有更改都将丢失。"
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

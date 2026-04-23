@@ -3,7 +3,7 @@
   "content": "This is an optional property; change it only if you want to try a different service endpoint.",
   "content_en_sha1_hash": "cf596eeefe16397a9a7b7c67ec961476f771d730",
   "created_at": "2025-05-26T07:15:40.401Z",
-  "updated_at": "2026-02-19T13:36:33.073Z",
+  "updated_at": "2026-04-08T16:59:54.170Z",
   "comment": {
     "text": "This translation key is used to describe an optional property that can be changed to try a different service endpoint. It appears as a tooltip next to a text input field in the Amazon settings component. Translators should update this text if it needs to differ from the original English content, allowing users to understand its purpose and usage.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Gender mismatch: The word 'خاصية' (property) is feminine in Arabic, but the verb 'قم بتغييره' (change it) uses the masculine pronoun 'ـه'. It should be 'قم بتغييرها' to correctly refer back to the property.",
+          "suggestion": "هذه خاصية اختيارية؛ قم بتغييرها فقط إذا كنت تريد تجربة نقطة نهاية خدمة مختلفة."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -69,7 +75,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'property' is translated as 'tila', which in a technical context usually means 'state', 'space', or 'room'. In the context of software settings/fields, 'ominaisuus' or 'kenttä' is the correct term for 'property'.",
+          "suggestion": "Tämä on valinnainen ominaisuus; voit muuttaa sitä vain, jos haluat kokeilla erilaista palvelun päätepistettä."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -99,7 +111,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The particle '을' after '엔드포인트' is grammatically incorrect in Korean (should be '를' because '엔드포인트' ends in a vowel), which can affect professional UI quality, but more importantly, the translation is slightly awkward. However, per strict instructions to only report CRITICAL errors, there is a minor grammatical error in the particle usage.",
+          "suggestion": "선택적 속성입니다. 다른 서비스 엔드포인트를 시도하려는 경우에만 변경하세요."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -129,13 +147,25 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'service endpoint' was translated as 'ponto de chegada de serviço', which is a literal translation for a physical destination. In a technical/IT context, 'endpoint' should be translated as 'endpoint' or 'ponto de extremidade'.",
+          "suggestion": "Esta é uma propriedade opcional; mude-a apenas se quiser experimentar um endpoint de serviço diferente."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The pronoun 'altere-o' (change it) refers to a masculine noun, but 'propriedade' (property) is a feminine noun in Portuguese. It should be 'altere-a'. Additionally, 'terminal de serviço' is a literal translation of 'service endpoint' that sounds unnatural in a technical context; 'endpoint de serviço' or 'ponto de extremidade de serviço' is preferred, though 'terminal' is the primary grammatical error here.",
+          "suggestion": "Esta é uma propriedade opcional; altere-a apenas se quiser experimentar um endpoint de serviço diferente."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -153,7 +183,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'වුමනා' (vumana) is a spelling error/typo for 'වුවමනා' (vuvanama), which changes the readability and correctness of the sentence.",
+          "suggestion": "මෙය විකල්පයකි; ඔබට වෙනත් සේවා අන්තයක් උත්සාහ කිරීමට අවශ්‍ය නම් පමණක් මෙය වෙනස් කරන්න."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +207,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'крајњи бод услуге' is a literal, non-standard translation of 'service endpoint'. In a technical context, 'endpoint' should be translated as 'ендпоинт' or 'крајна тачка'. 'Бод' means 'point/dot' in a different sense and sounds unnatural here.",
+          "suggestion": "Ово је опционална особина; промените је само ако желите да испробате други ендпоинт услуге."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'endpoint' is translated literally as 'krajnji bod', which is technically incorrect in a software/API context. In Serbian IT terminology, 'endpoint' is either left as 'endpoint' or translated as 'ulazna tačka' or 'servisna tačka'. 'Krajnji bod' sounds like a physical geographic location.",
+          "suggestion": "Ovo je opcionalna osobina; promenite je samo ako želite da isprobate drugi endpoint usluge."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -195,10 +243,22 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \"c\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

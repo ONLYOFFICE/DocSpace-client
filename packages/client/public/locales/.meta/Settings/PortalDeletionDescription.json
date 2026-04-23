@@ -3,7 +3,7 @@
   "content": "Use this option to delete your space permanently.",
   "content_en_sha1_hash": "eda8701798195496d0dcc13393b3bf9f69ca3417",
   "created_at": "2025-05-19T21:30:52.208Z",
-  "updated_at": "2025-09-26T15:21:06.290Z",
+  "updated_at": "2026-04-09T02:01:13.375Z",
   "comment": {
     "text": "This translation key is used for a description that informs users about the permanent deletion of their space. It appears on a button in the Portal Settings page when the user has not activated their account.",
     "is_auto": true,
@@ -30,7 +30,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"استخدم هذا الخيار لحذف إستضافتك بشكل دائم\" translates to \"Use this option to permanently delete your hosting.\" The English content refers to 'space', not 'hosting'. 'Space' needs to be accurately reflected in the Arabic translation.",
+          "description": "The word 'إستضافتك' (your hosting) is used instead of 'مساحتك' (your space). In the context of ONLYOFFICE DocSpace, 'Space' is a specific technical entity, and 'hosting' changes the meaning of the action.",
           "suggestion": "استخدم هذا الخيار لحذف مساحتك بشكل دائم."
         }
       ],
@@ -39,7 +39,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation uses 'Domeninizi' (Your domain) instead of 'space' (məkan/sahə). This changes the technical object being deleted.",
+          "suggestion": "Məkanınızı həmişəlik silmək üçün bu seçimdən istifadə edin."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -57,13 +63,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'endgültig zu löschen' is slightly awkward. While technically correct, it's more natural to say 'dauerhaft löschen' or 'vollständig löschen' for 'permanently delete' in this context.",
-          "suggestion": "Verwenden Sie diese Option, um Ihr Space dauerhaft zu löschen."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -105,13 +105,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'このオプションを使用すると、スペースを永久に削除することができます。' is overly formal and verbose for a settings description. A more natural and concise translation would be better.",
-          "suggestion": "このオプションで、スペースを完全に削除します。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -168,7 +162,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'portal' ('портал') is used instead of 'space'. While 'portal' can be a reasonable translation in some contexts, in this case, 'space' is more accurate given the English content refers to a user's personal area.",
+          "description": "The English text refers to 'your space', but the Russian translation uses 'портал' (portal). While related, in the context of ONLYOFFICE DocSpace, 'space' (пространство) and 'portal' (портал) are distinct entities. The translation changes the object being deleted.",
           "suggestion": "Используйте эту опцию, чтобы удалить ваше пространство навсегда."
         }
       ],
@@ -189,36 +183,25 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovenian translation 'S to možnostjo trajno izbrišete svoj prostor' translates to 'With this option you permanently delete your space', which changes the imperative 'Use this option...' to a declarative statement. While close, it lacks the direct instruction of the original.",
+          "suggestion": "To možnost uporabite za trajno izbris svojega prostora."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Користи ову опцију да обришеш трајно свој простор.' is a bit too informal. The verb 'обришеш' (obrišes) is in the 2nd person singular, informal imperative. A more formal and professional tone would be more appropriate for settings related to deletion.",
-          "suggestion": "Користите ову опцију да трајно избришете свој простор."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'простор' (prostor) translates to 'space' but may not be the best fit depending on the specific context of the setting. It's a general term.",
-          "suggestion": "Consider a more specific term if applicable, such as 'налог' (account), 'профил' (profile), or 'област' (area)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Koristi ovu opciju da obrišeš trajno svoj prostor.' is a bit awkward. 'Obrisać' should be 'izbrisati'. Also, the sentence structure could be improved for better flow.",
-          "suggestion": "Koristi ovu opciju da trajno izbrišeš svoj prostor."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -230,13 +213,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'permanently' is not accurately reflected by 'остаточного'. While 'остаточного' implies finality, 'permanently' suggests an irreversible action, which is better conveyed by a word like 'безповоротно' or 'назавжди'.",
-          "suggestion": "Використовуйте цей параметр для безповоротного видалення вашого простору."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -246,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

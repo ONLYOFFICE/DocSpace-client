@@ -3,7 +3,7 @@
   "content": "Merge and overwrite",
   "content_en_sha1_hash": "eb9c66da688e2f80d058216855946cdad7300b1b",
   "created_at": "2025-05-19T21:30:46.458Z",
-  "updated_at": "2026-02-19T13:36:32.369Z",
+  "updated_at": "2026-04-08T04:49:20.366Z",
   "comment": {
     "text": "The translation key \"MergeAndOverwrite\" is used to describe a merge and overwrite action in a conflict resolution dialog. This text appears as a title in a file-based merge dialog, instructing the user on what action they are about to take. It should be translated to convey a similar sense of merging content with an option to replace it.",
     "is_auto": true,
@@ -81,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation \"Միավորել և վերագրանցել\" doesn't accurately convey the meaning of 'Merge and overwrite'. 'Վերագրանցել' (veragrantsel) implies re-registering or re-enrolling, which isn't the intended meaning of 'overwrite'. A better translation would focus on replacing existing data.",
-          "suggestion": "Consider alternatives like \"Միավորել և գրել վրայում\" (Miavorgel ev grel vrayum) which translates to 'Merge and write on top' or \"Միավորել և փոխարինել\" (Miavorgel ev poxarinel) which translates to 'Merge and replace'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -99,18 +93,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"結合＆上書き\" doesn't fully capture the meaning of 'Merge and overwrite'. '結合' (ketsugou) means 'combination' or 'union' which is close to 'merge', but '上書き' (uwagaki) is a more technical term for 'overwrite' and might not be understood by a general audience. A more natural translation would depend on the specific context.",
-          "suggestion": "Consider alternative translations like \"マージ＆上書き\" (Maaji & uwagaki - using the katakana for 'merge') or a more descriptive phrase like \"統合と上書き\" (tougou to uwagaki - integration and overwrite)."
-        },
-        {
-          "type": "formatting",
-          "description": "The use of '＆' (ampersand) in a Japanese translation can feel slightly unnatural. While understandable, it's more common to use 'と' (to) or a hyphen.",
-          "suggestion": "Replace '＆' with 'と' or a hyphen. For example: \"結合と上書き\" or \"結合-上書き\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -173,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"එදාට ඒකාබද්ධ කර පෙර ලිවීම\" doesn't accurately convey the meaning of \"Merge and overwrite\". \"එදාට\" implies a past tense or specific date, which isn't part of the English phrase. \"පෙර ලිවීම\" (pera l'ivima) means 're-writing' or 'overwriting' but the 'merge' aspect is missing. A better translation would incorporate both merging and overwriting.",
-          "suggestion": "Consider \"එකතුකරමින් පෙර ලිවීම\" (ekathukaramin pera l'ivima) which implies merging and overwriting, or \"එකතුකරලා පෙර ලිවීම\" (ekathukarla pera l'ivima)."
+          "description": "The Sinhala translation 'එදාට ඒකාබද්ධ කර පෙර ලිවීම' translates to 'Merge and overwrite on that day' or 'Merge and overwrite then'. The word 'එදාට' (on that day/then) is irrelevant and changes the meaning of the command.",
+          "suggestion": "ඒකාබද්ධ කර පෙර ලියන්න"
         }
       ],
       "approved_at": null
@@ -194,37 +177,19 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Споји и препиши\" is understandable, it doesn't perfectly capture the nuance of \"Merge and overwrite.\" \"Merge\" often implies combining data, while \"overwrite\" suggests replacing existing data. A more accurate translation would consider that context.",
-          "suggestion": "Consider alternatives like \"Упореди и замени\" (Compare and replace) or \"Споји и замени\" (Merge and replace), depending on the specific use case.  A more nuanced option could be \"Упореди и надпиши\" (Compare and write over)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation \"Spoji i prepiši\" doesn't accurately convey the meaning of 'Merge and overwrite'. 'Spoji' means 'join' and 'prepiši' means 'copy'. While it's close, it lacks the 'overwrite' aspect which is crucial to the meaning.",
-          "suggestion": "A better translation might be \"Sjedini i prepisi\" or \"Sjedini i zapiši preko\" depending on the desired level of formality and accuracy. \"Sjedini\" captures the merging aspect more directly."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Birleştir ve üzerine yaz\" is technically a translation of \"Merge and overwrite\", it's not the most natural or idiomatic way to express it in Turkish. It sounds somewhat literal.",
-          "suggestion": "Consider alternatives like \"Birleștirme ve üzerine yaz\" or \"Birleștirilip üzerine yaz.\" A more context-dependent and natural option might be needed depending on the specific use case. A specialist should review the best translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -240,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

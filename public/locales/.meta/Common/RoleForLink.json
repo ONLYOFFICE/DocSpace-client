@@ -3,7 +3,7 @@
   "content": "Role for link",
   "content_en_sha1_hash": "69c2c795dae8fa5a3e6f70b13ed8b5690d284d62",
   "created_at": "2025-08-26T11:15:03.689Z",
-  "updated_at": "2026-02-19T13:36:32.535Z",
+  "updated_at": "2026-04-08T00:50:14.751Z",
   "comment": {
     "text": "Label for a dropdown or selection field within an Edit Link Panel, indicating the role or permission associated with the link. This text helps users specify who can access the link. It appears in the RoleLinkBlock component.",
     "is_auto": true,
@@ -147,7 +147,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Rol pentru link-ul' is grammatically incomplete and implies 'Role for the link' (with a definite article), which changes the noun phrase structure. More importantly, in UI contexts for labels, 'Rol pentru link' is the correct way to translate 'Role for link'.",
+          "suggestion": "Rol pentru link"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -159,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation uses 'මුද්දරයක්' (stamp) instead of 'සබැඳියක්' (link). The current translation means 'Role for a stamp'.",
+          "suggestion": "සබැඳිය සඳහා භූමිකාව"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

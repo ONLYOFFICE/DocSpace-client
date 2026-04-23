@@ -4,7 +4,6 @@
   "DisableGuestDescription": "Če onemogočite tega gosta, se ne bo mogel prijaviti v {{productName}}.",
   "DisableGuests": "Onemogoči goste",
   "DisableGuestsDescription": "Če onemogočite te goste, se ne bodo mogli prijaviti v {{productName}}.",
-  "DisableGuestsGeneralDescription": "You can later delete or enable the disabled guests if needed.",
   "DisableUser": "Onemogoči uporabnika",
   "DisableUserDescription": "Če onemogočite tega uporabnika, se ne bo mogel prijaviti v {{productName}}, njegovi dokumenti in podatki pa bodo ostali nedotaknjeni.",
   "DisableUsers": "Onemogoči uporabnike",
@@ -16,5 +15,6 @@
   "EnableUser": "Omogoči uporabnika",
   "EnableUserDescription": "Če omogočite tega uporabnika, se bo lahko ponovno prijavil v {{productName}} in dostopal do svojih dokumentov in podatkov.",
   "EnableUsers": "Omogoči uporabnike",
-  "EnableUsersDescription": "Če omogočite te uporabnike, se bodo lahko znova prijavili v {{productName}} in dostopali do svojih dokumentov in podatkov."
+  "EnableUsersDescription": "Če omogočite te uporabnike, se bodo lahko znova prijavili v {{productName}} in dostopali do svojih dokumentov in podatkov.",
+  "DisableGuestsGeneralDescription": "Pozneje lahko izbrišete ali omogočite onemogočene goste, če je to potrebno."
 }

@@ -3,7 +3,7 @@
   "content": "Switch to thumbnails view",
   "content_en_sha1_hash": "7319bf6b4edb601de0b266f9131c2c8f253e74c9",
   "created_at": "2025-05-19T21:30:49.233Z",
-  "updated_at": "2025-12-17T07:49:08.164Z",
+  "updated_at": "2026-04-07T22:09:38.059Z",
   "comment": {
     "text": "This translation key is used for the \"Switch to thumbnails view\" text in a view selector component. It appears as an icon label on a button and is displayed when switching between different views. Translators should replace \"Switch to thumbnails view\" with the desired localized equivalent.",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Eskiz rejiminə keçin' doesn't accurately convey the meaning of 'Switch to thumbnails view'. 'Eskiz rejimi' translates to 'Sketch mode' or 'Draft mode', not thumbnails.",
-          "suggestion": "Consider alternatives such as 'Kiçik görünü görünüşünə keçin' (Switch to small view) or 'Minilükə keçin' (Switch to miniatures/thumbnails)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -66,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Thumbnails aktivieren' implies 'enable thumbnails', rather than 'switch to thumbnails view'. It's a functional difference.",
-          "suggestion": "Thumbnails anzeigen"
+          "description": "The German translation 'Thumbnails aktivieren' means 'Activate thumbnails', which implies turning a feature on/off, whereas the English 'Switch to thumbnails view' refers to changing the visual layout/mode.",
+          "suggestion": "Zur Miniaturansicht wechseln"
         }
       ],
       "approved_at": null
@@ -174,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"සිඟිති රූ දැක්මට මාරුව\" while containing correct words, doesn't fully capture the meaning of 'Switch to thumbnails view'. It translates more literally as 'Change to see thumbnails', which is not as direct or natural as a typical UI label.",
-          "suggestion": "A more accurate and natural translation could be \"ගෝන රූ දැක්මක් බැලීමට මාරුව\" or \"చిన్న රූපයන් දැක්මට මාරුව\" (depending on desired level of formality)."
+          "description": "The word 'සිඟිති' (singithi) means 'tiny', 'small', or 'infant/child-like', which is an incorrect way to describe 'thumbnails' in a UI context. It implies something cute or miniature rather than the technical term for image previews.",
+          "suggestion": "කුඩා රූප දැක්මට මාරු වන්න"
         }
       ],
       "approved_at": null
@@ -201,18 +195,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Prebaci se na prikaz sličica' while understandable, isn't the most natural way to express 'Switch to thumbnails view'. 'Prebaciti' implies a transfer or shift, which isn't entirely wrong, but could be more direct.",
-          "suggestion": "Prikazuj sličice"
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'prikazuj' is more appropriate for the context.",
-          "suggestion": "Prikazuj"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -224,13 +207,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Переключитися на подання ескізів' is a literal translation and while understandable, it's not the most natural or idiomatic way to express 'Switch to thumbnails view' in Ukrainian. 'Ескізів' (thumbnails) sounds a bit too formal and precise. A more natural phrasing would focus on viewing thumbnails, rather than focusing on the act of creating them.",
-          "suggestion": "Перегляд у вигляді мініатюр"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

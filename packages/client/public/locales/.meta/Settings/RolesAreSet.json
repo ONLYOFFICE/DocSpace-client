@@ -3,7 +3,7 @@
   "content": "Roles already set for the selected users.",
   "content_en_sha1_hash": "257dd5e7c55b84f09c6e056798f95277ffabdfb9",
   "created_at": "2025-05-19T21:30:52.435Z",
-  "updated_at": "2025-11-18T14:41:49.921Z",
+  "updated_at": "2026-04-09T01:41:18.482Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that roles have already been set for selected users. It appears as a label in a UI component to inform users about their role settings.",
     "is_auto": true,
@@ -51,25 +51,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'الأدوار التي تم تعيينها بالفعل للمستخدمين المحددين' is a literal translation and sounds overly formal and slightly awkward in natural Arabic conversation. A more natural phrasing would convey the same meaning with better flow.",
-          "suggestion": "الأدوار مُعيّنة بالفعل للمستخدمين المحددين."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Seçilmiş istifadəçilər üçün əvvəlcədən təyin edilmiş rollar' is a literal translation and doesn't convey the meaning of 'Roles already set'. It implies the roles were pre-defined, not necessarily already assigned.",
-          "suggestion": "Seçilmiş istifadəçilərə rollar artıq təyin edilmişdir."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -117,13 +105,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Դերերն արդեն սահմանված են ընտրված օգտատերերի համար:' is a literal translation, but doesn't quite capture the natural flow of the English sentence. A more natural-sounding Armenian translation would be preferable.",
-          "suggestion": "Consider alternatives like: 'Ընտրված օգտատերերի համար դերերը նախկինում սահմանվել են' or 'Դերերը նախկինում սահմանվել են ընտրված օգտատերերի համար։'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -147,13 +129,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ບົດບາດຖືກກຳນົດໄວ້ແລ້ວ ສຳລັບຜູ້ໃຊ້ທີ່ເລືອກ' is a literal translation but sounds slightly awkward in Lao. A more natural phrasing would convey the meaning more clearly.",
-          "suggestion": "ບົດບາດຖືກຕັ້ງໄວ້ແລ້ວ ສຳລັບຜູ້ໃຊ້ທີ່ເລືອກ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -171,13 +147,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The Polish translation uses the plural form 'Role' (Role zostały) instead of the singular form ('Rola została') because the English says 'Roles'. It implies there are multiple roles being set. While technically not incorrect, it would be more accurate to use the singular if the English refers to a single role set for each user.",
-          "suggestion": "Rola została już ustawiona dla wybranych użytkowników."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -207,23 +177,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'පහත තෝරාගත් පරිශීලකයින් සඳහා කාර්යභාර දැනටමත් සැකසී ඇත.' is not the most natural or accurate translation of 'Roles already set for the selected users.' The word 'පහත' (pahaata) meaning 'below' is unnecessary and changes the meaning. 'පරිශීලකයින්' (parishilakayin) is a more formal/less common term for 'users'. 'කාර්යභාර' (kaaryabhaara) is a literal translation of 'roles', and might be better rendered in a more idiomatic way.",
-          "suggestion": "තෝරාගත් පරිශීලකයින් සඳහා අනුබලතා දැනටමත් සකසվել ඇත."
-        },
-        {
-          "type": "spelling",
-          "description": "While not technically incorrect, 'පරිශීලකයින්' (parishilakayin) is less common. 'පරිශීලකයන්' (parishilakayan) is a more commonly used spelling.",
-          "suggestion": "පරිශීලකයන්"
-        },
-        {
-          "type": "grammatical",
-          "description": "The sentence structure is grammatically correct, but not the most fluent for Sinhala. It would read more naturally with a slight restructuring.",
-          "suggestion": "තෝරාගත් පරිශීලකයින් සඳහා දැනටමත් කාර්යභාර සකසවා ඇත."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -241,13 +195,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Улоге су већ постављене за одабране кориснике' is a literal translation, but sounds unnatural in Serbian. A more natural phrasing would be 'Пологе су већ дефинисане за одабране кориснике' or 'Пологе су већ додељене одабраним корисницима'.",
-          "suggestion": "Пологе су већ додељене одабраним корисницима."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -275,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

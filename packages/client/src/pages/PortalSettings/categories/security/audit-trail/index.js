@@ -112,8 +112,8 @@ const AuditTrail = (props) => {
         lifetime={securityLifetime.auditTrailLifeTime}
         setLifetimeAuditSettings={setLifetimeAuditSettings}
         content={getContent()}
-        downloadReport={t("DownloadReportBtnText")}
-        downloadReportDescription={t("ReportSaveLocation", {
+        downloadReport={t("Common:DownloadReportBtnText")}
+        downloadReportDescription={t("Common:ReportSaveLocation", {
           sectionName: t("Common:MyDocuments"),
         })}
         getReport={getAuditTrailReport}
@@ -149,3 +149,4 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     resetIsInit,
   };
 })(withTranslation("Settings")(AuditTrail));
+

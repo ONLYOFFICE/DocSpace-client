@@ -26,7 +26,7 @@
 
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
-import { ROOM_ID_HEADER } from "@/utils/constants";
+import { FILTER_HEADER, ROOM_ID_HEADER } from "@/utils/constants";
 
 export default async function SettingsRoot({
   searchParams,
@@ -37,5 +37,8 @@ export default async function SettingsRoot({
   const params = await searchParams;
   const roomId = hdrs.get(ROOM_ID_HEADER) || params.roomId || "";
 
-  redirect(`/forms/settings/billing${roomId ? `?roomId=${roomId}` : ""}`);
+  const filterHeader = hdrs.get(FILTER_HEADER) || "";
+  const qs = filterHeader || new URLSearchParams(params).toString();
+
+  redirect(`/forms/settings/billing${qs ? `?${qs}` : roomId ? `?roomId=${roomId}` : ""}`);
 }

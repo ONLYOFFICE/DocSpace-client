@@ -3,7 +3,7 @@
   "content": "Google directory",
   "content_en_sha1_hash": "59a0c0b37463b360cc851a7f2f339d4d973c22fc",
   "created_at": "2025-05-19T21:30:49.976Z",
-  "updated_at": "2025-10-27T16:14:33.351Z",
+  "updated_at": "2026-04-08T21:15:57.057Z",
   "comment": {
     "text": "This translation key is used to display the title of a Google directory in the UI. It will appear as the folder title when viewing a list of folders related to \"Google\" or \"GoogleDrive\". Translators should provide a localized version of the English content \"Google directory\" for this key.",
     "is_auto": true,
@@ -45,13 +45,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Adresář\" is a valid Czech word for \"directory\", it's less common and might sound overly formal or technical for a folder title. \"Google složka\" or \"Google adresář\" (less preferred) would be more natural and understandable to a wider audience.",
-          "suggestion": "Consider \"Google složka\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -93,13 +87,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Cartella di Google\" is understandable, a more natural and accurate translation of \"Google directory\" would be \"Directory di Google\" or \"La directory di Google\". \"Cartella\" usually refers to a folder on a local computer, not a directory in a cloud service.",
-          "suggestion": "Directory di Google"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -120,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ບັນຊີ Google\" translates to \"Google account\" and not \"Google directory\". While an account could be considered a directory in some contexts, it's not the most accurate translation of \"directory\".",
-          "suggestion": "ບັນຊີໂຟນເດີຂອງ Google (Google folder)"
+          "description": "The Lao word 'ບັນຊີ' means 'Account'. The English text 'directory' refers to a folder or a list of files/folders. Translating 'Google directory' as 'Google Account' changes the technical meaning of the UI element.",
+          "suggestion": "ໂຟນເດີ Google"
         }
       ],
       "approved_at": null
@@ -162,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Director Google' is not the most natural or accurate translation of 'Google directory'. 'Director' implies a person, while 'directory' refers to a list or organized collection of resources.  A more accurate translation would be something like 'Director Google' or 'Directorul Google'.",
-          "suggestion": "Directorul Google"
+          "description": "The word 'Director' in Romanian refers to a person (a manager or director), whereas 'directory' in this technical context refers to a folder or a list of items. The correct term should be 'director Google' (lowercase) or 'dosar Google', but 'Director' as a title implies a human role.",
+          "suggestion": "Director Google"
         }
       ],
       "approved_at": null
@@ -183,13 +171,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Priečinok Google' is a literal translation but doesn't fully capture the meaning of 'Google directory' in a user interface context. A more natural Slovak translation would be 'Google Účet' or 'Moje Účet Google'.",
-          "suggestion": "Google Účet"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -201,13 +183,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Google директоријум' is a literal transliteration of 'directory' and doesn't convey the intended meaning of 'Google directory'. It sounds awkward and unnatural in Serbian.",
-          "suggestion": "Google-ова папка"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -216,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'direktorijum' is a valid Serbian word for 'directory', 'Google direktorijum' sounds slightly awkward. A more natural phrasing would be 'Google mapa' (Google Maps) or 'Google foldera' (Google folders). However, without more context, it's difficult to determine the best translation.",
-          "suggestion": "Consider 'Google mapa' or 'Google foldera' depending on the context."
+          "description": "The Serbian translation 'Google direktorijum' is in the accusative case (direct object), whereas the English source 'Google directory' is a nominative noun phrase used as a title. In UI titles, the nominative case should be used.",
+          "suggestion": "Google direktorijum"
         }
       ],
       "approved_at": null
@@ -244,6 +220,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Drejtoria' in Albanian means 'The Directorate' or 'The Management/Headquarters'. In the context of computing and file systems, 'directory' should be translated as 'dosja' (folder) or 'direktoria' (technical term for directory). However, 'Drejtoria e Google' implies 'Google's Management/Headquarters', which is a semantic error for a UI folder title.",
+          "suggestion": "Direktoria e Google"
+        }
+      ],
       "approved_at": null
     }
   }

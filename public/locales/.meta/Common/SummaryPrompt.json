@@ -3,7 +3,7 @@
   "content": "Give me a brief summary of all collected data from \"{{formName}}\"",
   "content_en_sha1_hash": "96482520f78e714238c33b115b1d3b0a79b68c95",
   "created_at": "2026-03-31T15:18:23.908Z",
-  "updated_at": "2026-03-31T15:18:23.908Z",
+  "updated_at": "2026-04-07T22:10:46.736Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -158,7 +158,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovenian translation adds 'Natisnite gumb, da vam dam' (Press the button so I can give you), which changes the imperative command 'Give me' into a conditional instruction about a button that does not exist in the source text.",
+          "suggestion": "Podaj mi kratek povzetek vseh zbranih podatkov iz \"{{formName}}\""
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {

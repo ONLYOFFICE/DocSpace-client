@@ -3,7 +3,7 @@
   "content": "Storage space amount is about to be exceeded: {{currentValue}} / {{maxValue}}",
   "content_en_sha1_hash": "c7505cb8d4b5ee00b1538b7c710c4fb40adfc6a9",
   "created_at": "2025-05-19T21:30:54.141Z",
-  "updated_at": "2025-11-18T14:41:49.670Z",
+  "updated_at": "2026-04-07T19:35:05.155Z",
   "comment": {
     "text": "This translation key is used to display a warning message when storage space is about to be exceeded. It shows the current and maximum storage values in a specific format. This message appears as a header in a UI component that displays quota information.",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Storage space amount\" is not accurately translated. \"Yaddaş sahəsinin həcmi\" is more accurately 'memory area volume' rather than 'storage space amount'.",
-          "suggestion": "Yaddaş həcmidir keçmək üzrədir : {{currentValue}} / {{maxValue}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -93,18 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Պահեստային տարածքի քանակը քիչ է մնում գերազանցվի' is not a direct or natural translation of 'Storage space amount is about to be exceeded'. A more accurate translation would convey the sense of impending exceedance.",
-          "suggestion": "Պահեստային տարածքը այնպես է մոտենում գերազանցմանը, որ {{currentValue}} / {{maxValue}}"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'գերազանցվի' (will be exceeded) is grammatically correct, but 'գերազանցմանը' is more natural in this context.",
-          "suggestion": "No change needed for grammar itself, but see overall suggestion above"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -140,13 +123,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The phrasing 'staat op het punt overschreden te worden' is grammatically awkward in Dutch. A more natural phrasing would be 'overschreden te worden' or 'wordt overschreden'.",
-          "suggestion": "De hoeveelheid opslagruimte staat er op het punt overschreden te worden: {{currentValue}} / {{maxValue}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -158,13 +135,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"A capacidade de armazenamento do espaço está prestes a ser excedida\" is a bit awkward. \"A capacidade de armazenamento\" can be simplified. \"Espaço\" is redundant.",
-          "suggestion": "A capacidade de armazenamento está prestes a ser excedida: {{currentValue}} / {{maxValue}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -188,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ආචයනයේ ඉඩ ඉක්මවීමට ආසන්නයි' is not a natural or accurate translation of 'Storage space amount is about to be exceeded'. 'ආචයනය' refers to a ritual or ceremony, which doesn't fit the context of storage space. A better translation would convey the concept of 'storage space' or 'available space'.",
-          "suggestion": "A more appropriate translation might be something like 'ගබඩාවේ ඉඩ ඉක්මවීමට ආසන්නයි: {{currentValue}} / {{maxValue}}' (Gabadawae ida ikmavamituk aasannai: {{currentValue}} / {{maxValue}}), where 'ගබඩාවේ' (Gabadawae) means 'storage' or 'warehouse'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -212,13 +177,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ц́е' is not standard Serbian Cyrillic. The correct form should be 'ће'.",
-          "suggestion": "ће"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

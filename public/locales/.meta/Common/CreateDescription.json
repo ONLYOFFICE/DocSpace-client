@@ -3,7 +3,7 @@
   "content": "There will be two different files in the folder.",
   "content_en_sha1_hash": "f5a9a4d6d05f3820e3d7543868c93f4b514a48f4",
   "created_at": "2025-05-19T21:30:43.866Z",
-  "updated_at": "2026-02-19T13:36:32.372Z",
+  "updated_at": "2026-04-08T13:55:32.453Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that two files will be copied. It appears in a conflict resolution dialog and provides context for users when choosing how to proceed with conflicting file names.",
     "is_auto": true,
@@ -57,18 +57,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Es werden zwei verschiedene Dateien in dem Ordner vorhanden sein' is overly formal and verbose. A more natural translation would be 'Es gibt zwei verschiedene Dateien im Ordner.' or 'In dem Ordner befinden sich zwei verschiedene Dateien.'",
-          "suggestion": "Es gibt zwei verschiedene Dateien im Ordner."
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'vorhanden sein' is grammatically correct but sounds unnecessarily formal and clunky in this context. It's better to use a more direct construction.",
-          "suggestion": "Removed 'vorhanden sein' and restructured the sentence"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -119,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation '폴더에 두 개의 다른 파일이 저장됩니다' implies that the files are being saved into the folder. The English sentence only states they exist within the folder, not that they are being saved.",
-          "suggestion": "폴더 안에 두 개의 다른 파일이 있습니다."
+          "description": "The Korean translation says 'files will be saved' (저장됩니다), whereas the English text states 'there will be' (exist/be present). In the context of a conflict resolution dialog, the English describes the resulting state of the folder, while the Korean implies an action of saving is occurring.",
+          "suggestion": "폴더에 두 개의 서로 다른 파일이 있게 됩니다."
         }
       ],
       "approved_at": null
@@ -128,19 +117,19 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation \"ໃນໂຟນເດີ້ຈະມີ 2 ໄຟລ໌ແຕກຕ່າງກັນ.\" while conveying the general meaning, is slightly awkward. A more natural translation would emphasize the distinct nature of the files.",
-          "suggestion": "ໃນໂຟນເດີ້ຈະມີໄຟລ໌ສອງຢ່າງທີ່ແຕກຕ່າງກັນ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Mapē' is a misspelling or incorrect word choice; it appears to be a typo for 'Mapē' (which doesn't exist in this context) or a confusion with 'Māpē' (in the folder). The current spelling 'Mapē' is incorrect in Latvian.",
+          "suggestion": "Māpē būs divi dažādi faili."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -173,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Două fișiere diferite vor fi salvate în dosarul' implies that the files *will be saved* in the folder. The English sentence simply states their existence *in* the folder. The Romanian translation adds an action that isn't present in the original.",
-          "suggestion": "Două fișiere diferite vor fi în dosar."
+          "description": "The Romanian translation is grammatically incomplete and ends abruptly with a preposition ('în dosarul'), making it nonsensical. It translates to 'Two different files will be saved in the folder.' but the sentence structure is broken.",
+          "suggestion": "În folder vor fi două fișiere diferite."
         }
       ],
       "approved_at": null
@@ -191,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'බහාලුමෙහි වෙනස් ගොනු දෙකක් ඇත' while conveying the general meaning, is not the most natural or accurate translation of 'There will be two different files in the folder.' A more appropriate translation would use a word for 'folder' that is more commonly used in this context. 'බහාලුම' can mean a basket or container, but a more direct equivalent of 'folder' would enhance clarity.",
-          "suggestion": "There are several options. Consider 'සමූහයෙහි වෙනස් ගොනු දෙකක් ඇත' (samūhayehi venaś gōnu dekak athā) where 'සමූහය' (samūhaya) translates closer to 'group' or 'collection' which is a better equivalent for 'folder' in this context. Alternatively, 'ලේඛන සාමග්‍රහියේ වෙනස් ගොනු දෙකක් ඇත' (lēkhana sāmāgrahīye venaś gōnu dekak athā) is also possible with 'ලේඛන සාමග්‍රහිය' meaning 'document repository' which can be used for a folder."
+          "description": "The Sinhala translation uses the present tense ('are' / 'ඇත') instead of the future tense ('will be' / 'වනු ඇත') used in the English source. In the context of a conflict resolution dialog, this changes the meaning from a prediction of what will happen to a statement of current state.",
+          "suggestion": "බහාලුමෙහි වෙනස් ගොනු දෙකක් වනු ඇත."
         }
       ],
       "approved_at": null
@@ -212,13 +201,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The word 'folder' is transliterated as 'фолдеру'. While understandable, using the Serbian equivalent 'фасцикула' would be more natural and culturally appropriate.",
-          "suggestion": "Биће две различите датотеке у фасцикула."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -236,7 +219,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Grammatical error in noun-adjective agreement: 'два різних файли' is grammatically incorrect in Ukrainian. It should be 'два різні файли'.",
+          "suggestion": "У папці буде два різні файли."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -246,6 +235,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

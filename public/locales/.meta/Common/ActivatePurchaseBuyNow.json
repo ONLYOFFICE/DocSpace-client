@@ -3,7 +3,7 @@
   "content": "Buy now",
   "content_en_sha1_hash": "c38860a3ba58e9263dba3ac926101f8b2358d4c9",
   "created_at": "2025-06-08T12:02:00.173Z",
-  "updated_at": "2025-08-11T18:11:59.377Z",
+  "updated_at": "2026-04-08T18:07:21.115Z",
   "comment": {
     "text": "This translation key is used to display the button label \"Buy now\" on a payment button component, located in the /packages/shared/pages/Payments/Standalone/sub-components/ButtonContainer.tsx file. It appears as a primary action button when clicked. Translators should provide a phrase that encourages immediate purchase.",
     "is_auto": true,
@@ -57,7 +57,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation 'Αγορά τώρα' uses the noun 'Αγορά' (Purchase/Market) instead of the imperative verb 'Αγοράστε' (Buy). In the context of a call-to-action button, 'Αγορά τώρα' translates to 'Purchase now' (noun phrase) rather than the command 'Buy now'.",
+          "suggestion": "Αγοράστε τώρα"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -69,7 +75,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The translation 'Osta' (Buy) misses the 'now' component of the English phrase 'Buy now', which is critical for the call-to-action urgency specified in the context.",
+          "suggestion": "Osta nyt"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -141,7 +153,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Cumpărare acum' uses a noun ('Purchase now') instead of an imperative verb ('Buy now'), which fails to act as a call-to-action for a button.",
+          "suggestion": "Cumpără acum"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -199,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

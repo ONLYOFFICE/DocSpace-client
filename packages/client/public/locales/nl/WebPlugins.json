@@ -8,13 +8,13 @@
   "NeedSettings": "Instellingen invoeren",
   "NoPlugins": "Geen plug-ins toegevoegd",
   "NotNeedSettings": "Instellingen invoeren is niet nodig",
+  "PluginCacheWarningDescription": "Plugins worden gecached op basis van hun versienummer. Om ervoor te zorgen dat uw wijzigingen worden toegepast, verhoogt u het versienummer in uw <1>package.json</1> bestand voordat u het uploadt. Het systeem zal een plugin niet bijwerken als het versienummer hetzelfde blijft.",
+  "PluginDeletedSuccessfully": "Plugin succesvol verwijderd",
   "PluginIsNotCompatible": "De plugin SDK-versie komt niet overeen met de versie van {{productName}}. Werk alsjeblieft bij naar een compatibele versie.",
   "PluginLoadedSuccessfully": "Plugin succesvol geladen",
   "PluginSamples": "Plugin-voorbeelden",
   "PluginSDK": "Plugin SDK",
   "PluginSDKDescription": "Met behulp van Plugin SDK kunt u uw {{productName}} functionaliteit uitbreiden, services van derden aansluiten of de bestaande gebruikerservaring verbeteren. Hier vindt u de plug-ins met broncode die beschikbaar is op GitHub.",
   "PluginSDKInstruction": "Klik op de knop voor de gedetailleerde instructies om uw eigen plug-ins te maken.",
-  "UploadDescription": "U kunt plug-ins toevoegen om de functionaliteit van {{productName}} uit te breiden met extra functies. Klik op Plug-in uploaden of plaats een bestand in het ZIP-archief.",
-  "PluginCacheWarningDescription": "Plugins worden gecached op basis van hun versienummer. Om ervoor te zorgen dat uw wijzigingen worden toegepast, verhoogt u het versienummer in uw <1>package.json</1> bestand voordat u het uploadt. Het systeem zal een plugin niet bijwerken als het versienummer hetzelfde blijft.",
-  "PluginDeletedSuccessfully": "Plugin succesvol verwijderd"
+  "UploadDescription": "U kunt plug-ins toevoegen om de functionaliteit van {{productName}} uit te breiden met extra functies. Klik op Plug-in uploaden of plaats een bestand in het ZIP-archief."
 }

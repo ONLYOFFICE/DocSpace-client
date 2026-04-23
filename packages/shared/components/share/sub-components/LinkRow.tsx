@@ -72,6 +72,7 @@ const LinkRow = ({
   onAccessRightsSelect,
   removedExpiredLink,
   onCopyLink,
+  hideLinkTypeSelector,
 }: LinkRowProps) => {
   const { t } = useTranslation("Common");
 
@@ -158,13 +159,15 @@ const LinkRow = ({
           />
         </div>
         <div className={styles.linkActions}>
-          <LinkTypeSelector
-            isLoaded={isLoaded}
-            canEditInternal={canEditInternal}
-            onSelect={(item) => changeShareOption(item, link)}
-            selectedOption={shareOption}
-            options={shareOptions}
-          />
+          {!hideLinkTypeSelector && (
+            <LinkTypeSelector
+              isLoaded={isLoaded}
+              canEditInternal={canEditInternal}
+              onSelect={(item) => changeShareOption(item, link)}
+              selectedOption={shareOption}
+              options={shareOptions}
+            />
+          )}
           <AccessRightSelector
             link={link}
             isFolder={isFolder}

@@ -3,7 +3,7 @@
   "content": "Settings have been successfully updated",
   "content_en_sha1_hash": "a3e0f1940499fb1b34253a9a7b050c2136e1f58b",
   "created_at": "2025-05-26T07:15:48.667Z",
-  "updated_at": "2026-03-26T08:26:58.115Z",
+  "updated_at": "2026-04-10T08:21:04.339Z",
   "comment": {
     "text": "The translation key \"SuccessfullySaveSettingsMessage\" is used to display a success message after saving portal settings. It appears in UI elements such as buttons or dialogs that trigger setting updates, providing feedback to the user that changes have been successfully applied.",
     "is_auto": true,
@@ -84,13 +84,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ai-services-management.tsx",
-      "line_number": 175,
+      "line_number": 176,
       "context": "setIsSaving(true);\n await setAiAccessSettings(type);\n setAiServicesEnabled(type);\n await fetchTreeFolders();\n setShowReminder(false);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (e) {\n toastr.error(e as string);\n } finally {\n setIsSaving(false);\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ai-services-management.tsx",
-      "line_number": 175,
+      "line_number": 176,
       "context": "setIsSaving(true);\n await setAiAccessSettings(type);\n setAiServicesEnabled(type);\n await fetchTreeFolders();\n setShowReminder(false);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (e) {\n toastr.error(e as string);\n } finally {\n setIsSaving(false);\n }",
       "module": "/packages/client"
     },
@@ -162,7 +162,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
-      "line_number": 238,
+      "line_number": 239,
       "context": "saveToSessionStorage(\"defaultIPSettings\", {\n enable,\n ips,\n });\n setShowReminder(false);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n }\n \n setIsSaving(false);",
       "module": "/packages/client"
     },
@@ -299,9 +299,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ajustes se han actualizado correctamente' is not the most natural or accurate rendering of 'Settings have been successfully updated'. A more natural translation would be 'La configuración se ha actualizado correctamente' or 'Los ajustes se han actualizado correctamente'.",
-          "suggestion": "La configuración se ha actualizado correctamente"
+          "type": "missing_content",
+          "description": "The definite article 'Los' is missing at the beginning of the sentence, which makes the Spanish translation sound unnatural/incomplete for a UI notification.",
+          "suggestion": "Los ajustes se han actualizado correctamente"
         }
       ],
       "approved_at": null

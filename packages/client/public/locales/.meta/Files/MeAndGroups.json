@@ -3,7 +3,7 @@
   "content": "Me and groups ({{ groupsCount }})",
   "content_en_sha1_hash": "056c8e719cd461f48ae982914d1324e06bffa247",
   "created_at": "2025-05-19T21:30:55.833Z",
-  "updated_at": "2025-11-13T07:42:11.143Z",
+  "updated_at": "2026-04-07T19:35:05.088Z",
   "comment": {
     "text": "This translation key is used to display a phrase indicating whether the user has a Me and Groups section. If groups are available, it shows the number of groups; otherwise, it displays an empty string. It appears in a dialog component at line 107, likely as part of a button or label.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, the translation 'Mən və qruplar' sounds a bit formal and less natural in Azerbaijani. A more common and natural phrasing would be 'Mən və ya qruplar'.",
-          "suggestion": "Mən və ya qruplar ({{ groupsCount }})"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -57,13 +51,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The direct translation 'Ich und Gruppen' is grammatically incorrect in German. The correct phrasing is 'Ich und die Gruppen' or 'Ich und Gruppen'. While 'Gruppen' is acceptable in some contexts, 'die Gruppen' would be more natural and grammatically precise.",
-          "suggestion": "Ich und die Gruppen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -87,13 +75,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The French translation 'Moi et groupes' is not the most natural or accurate translation of 'Me and groups'. A better translation would be 'Moi et mes groupes' or 'Moi et les groupes'. 'Groupes' alone implies a general collection of groups, not specifically 'my groups' or 'the groups'.",
-          "suggestion": "Moi et mes groupes"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -105,13 +87,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Italian translation 'Io e gruppi' is grammatically incorrect. In Italian, when referring to 'me and groups', the correct construction requires the preposition 'e' to be followed by the definite article 'i' when referring to a group of people.",
-          "suggestion": "Io e i gruppi ({{groupsCount}})"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -135,13 +111,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Es un grupas ({{ groupsCount }})' is not grammatically correct and doesn't accurately convey the meaning of 'Me and groups'. 'Grupas' is plural, but 'Es' (I) requires a corresponding noun in the nominative case.  It should use the singular form 'grupas' to agree with 'Es'.",
-          "suggestion": "Es un grupa ({{ groupsCount }})"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -171,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'Eu și grupuri' is a literal translation that doesn't sound natural in Romanian. It's more common to use 'Mine și grupuri' or 'Eu și grupurile'.",
-          "suggestion": "Mine și grupuri"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -231,13 +195,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Tôi và nhóm' while literally meaning 'Me and group', doesn't fully capture the nuance of 'Me and groups'. 'Nhóm' implies a single group. The English refers to multiple groups, so 'những nhóm' or 'các nhóm' would be more accurate.",
-          "suggestion": "Tôi và các nhóm ({{ groupsCount }})"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

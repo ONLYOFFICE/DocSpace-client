@@ -3,7 +3,7 @@
   "content": "Authorized apps",
   "content_en_sha1_hash": "11e78f3225bdb139c3dd990870261501db2f65b8",
   "created_at": "2025-05-19T21:30:53.823Z",
-  "updated_at": "2026-03-20T09:07:45.681Z",
+  "updated_at": "2026-04-07T19:35:05.161Z",
   "comment": {
     "text": "The translation key \"AuthorizedApps\" is used to display a list of authorized applications. It appears as content in a UI element, specifically in a page that manages profile settings, and displays translated text for users to select from a list.",
     "is_auto": true,
@@ -99,25 +99,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While '인증된 앱' is a possible translation, it's a bit formal and doesn't perfectly capture the nuance of \"Authorized apps\". '인증된 앱' implies apps that have *received* authorization. A more natural and commonly used translation would be '허용된 앱' or '승인된 앱'.",
-          "suggestion": "Consider '허용된 앱' or '승인된 앱' for a more natural feel."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation \"ແອບພຶດິການອະນຸຍາດ\" is a literal translation of \"authorized application\" rather than \"authorized apps.\" It's too formal and doesn't convey the intended meaning of a list of approved applications.",
-          "suggestion": "Consider alternatives like \"ແອບທີ່ໄດ້ຮັບອະນຸຍາດ\" (apps that have permission) or \"ແອບທີ່ເຊື່ອຖືໄດ້\" (trusted apps). The best option will depend on the specific context and target audience."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -183,18 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ауторизоване апликације' is not the most natural or accurate translation of 'Authorized apps'. While technically correct, it sounds somewhat formal and less idiomatic.",
-          "suggestion": "A more natural translation would be 'Овлашћене апликације' or 'Апликације са овлашћењем'."
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'Ауторизоване апликације' uses the instrumental plural form of 'авторизовати' (authorize). While understandable, it's less common and less preferred compared to other options for describing 'authorized apps' in Serbian.",
-          "suggestion": "Consider using 'овлашћене апликације' which uses the 'овлашћен' form, indicating 'empowered' or 'authorized'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -224,13 +201,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"已认证的应用\" is understandable, a more natural and precise translation of \"Authorized apps\" would be \"授权应用\" or \"授权的应用\". \"已认证\" implies a prior certification process, which isn't necessarily the case for authorized applications.",
-          "suggestion": "授权应用"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "Info",
   "content_en_sha1_hash": "4b631f69842530d659306c8f06dbad594a6b1807",
   "created_at": "2025-05-19T21:30:45.900Z",
-  "updated_at": "2026-02-19T13:36:32.670Z",
+  "updated_at": "2026-04-08T06:46:28.165Z",
   "comment": {
     "text": "This translation key is used for the text \"Info\", which is displayed as a header or label in various UI components, including an info panel and an OAuth information dialog. The purpose of this text is to provide basic information or context, often accompanied by icons. It appears in places such as headers, dialogs, and context options.",
     "is_auto": true,
@@ -123,13 +123,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation 'Informationen' is a valid translation of 'Info' but lacks the brevity and generality of the English term. 'Info' often serves as a shorthand or placeholder, and 'Informationen' is a more specific and formal term.",
-          "suggestion": "Consider alternatives like 'Info' (borrowed from English and commonly used in German) or a more context-dependent translation, depending on the intended meaning and the overall tone of the content."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -189,13 +183,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Informācija' translates to 'Information' rather than 'Info'. While related, they aren't direct equivalents.",
-          "suggestion": "Consider 'Info' or a more contextually appropriate term if 'Info' is intended to retain its original meaning (e.g., a shortened label)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -283,6 +271,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "Sign up with WeChat",
   "content_en_sha1_hash": "eaa5ec6158c53c45e60af3d05f3b76814061ccc5",
   "created_at": "2025-09-09T10:39:43.575Z",
-  "updated_at": "2026-03-26T08:26:58.377Z",
+  "updated_at": "2026-04-10T08:21:04.402Z",
   "comment": {
     "text": "This key displays the text for a button or link allowing users to sign up or sign in using their WeChat account. It's used within a social login flow, likely on a registration or login screen. Translators should ensure the wording accurately reflects the action of using WeChat for account creation or access.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 486,
+      "line_number": 488,
       "context": "return signUp ? t(\"Common:SignUpWithSso\") : t(\"Common:SignInWithSso\");\n case \"zoom\":\n return signUp ? t(\"Common:SignUpWithZoom\") : t(\"Common:SignInWithZoom\");\n case \"weixin\":\n return signUp\n ? t(\"Common:SignUpWithWechat\")\n : t(\"Common:SignInWithWechat\");\n default:\n return \"\";\n }\n }",
       "module": "/packages/shared"
     }
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation 'التسجيل باستخدام WeChat ' directly transliterates 'WeChat' and doesn't convey the meaning of 'Sign up with'. A more natural translation would be something along the lines of 'تسجيل الدخول باستخدام WeChat' or 'إنشاء حساب باستخدام WeChat'.",
-          "suggestion": "تسجيل الدخول باستخدام WeChat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -45,25 +39,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Регистрирайте се с WeChat' is a bit formal for a signup button. A more natural phrasing would be 'Вход с WeChat' (Log in with WeChat) or 'Създайте профил с WeChat' (Create a profile with WeChat).",
-          "suggestion": "Вход с WeChat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Sign up\" translates to \"Zaregistrujte se\" in Czech, not \"Přihlaste se\". \"Přihlaste se\" means \"Log in\".",
-          "suggestion": "Change \"Přihlaste se\" to \"Zaregistrujte se\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -87,13 +69,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Rekisteröidy WeChatilla' is understandable, a more natural and accurate translation would be something like 'Liity WeChatin avulla' or 'Kirjaudu sisään WeChatilla'. The current translation literally translates 'Sign up with WeChat' as 'Register with WeChat', which isn't the most idiomatic way to express it in Finnish in this context.",
-          "suggestion": "Liity WeChatin avulla"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -105,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Գրանցվել WeChat-ով\" is a very literal translation. A more natural-sounding Armenian translation would consider rephrasing to better reflect the common usage of 'Sign up with...'.",
-          "suggestion": "Consider alternatives like \"WeChat-ով գրանցվել\" or \"Գրանցվել WeChat-ի միջոցով\" (Sign up via WeChat) for a more natural flow."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -141,13 +111,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation \"Reģistrēties ar WeChat\" is a literal translation but doesn't flow naturally in Latvian. It's more common to use a phrasing like 'Pievienoties, izmantojot WeChat' or 'Reģistrēties, izmantojot WeChat'.",
-          "suggestion": "Pievienoties, izmantojot WeChat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -171,13 +135,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Cadastre-se no WeChat\" is a very literal and somewhat awkward translation. \"Cadastre-se\" is more often used for formal registrations or databases. A more natural and user-friendly translation would be something like \"Inscreva-se com o WeChat\" or \"Use o WeChat para se cadastrar\".",
-          "suggestion": "Inscreva-se com o WeChat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -195,37 +153,19 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Sinhala translation uses 'WeChat' in English, while it's preferable to have a Sinhala transliteration if possible.",
-          "suggestion": "Consider a Sinhala transliteration of 'WeChat' like 'වීචැට්' or a more descriptive term if a direct transliteration isn't suitable."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Prihláste sa cez WeChat' is grammatically correct, it translates more closely to 'Log in with WeChat' rather than 'Sign up with WeChat'. 'Sign up' implies creating a new account, while 'Log in' implies accessing an existing one.",
-          "suggestion": "Prihláste sa s WeChat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Prijavite se z WeChat' while understandable, isn't the most natural or idiomatic way to translate 'Sign up with WeChat' in Slovenian. A more accurate and common phrasing would involve using 'prijava' and specifying 's' as in 's WeChat'.",
-          "suggestion": "Prijavite se s WeChat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
@@ -237,30 +177,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Региструј се помоћу WeChat-а\" is a bit clunky. A more natural translation would be \"Пријави се путем WeChat-а\" or \"Региструј се преко WeChat-а\".",
-          "suggestion": "Пријави се путем WeChat-а"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of a hyphen after 'WeChat' is a direct transliteration and might sound less natural.  Consider if maintaining the English name is necessary or if a more localized term is preferred.",
-          "suggestion": "Региструј се помоћу WeChat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Registruj se pomoću WeChat-a' sounds slightly unnatural in Serbian. A more idiomatic translation would be 'Prijavi se putem WeChat-a' or 'Registruj se preko WeChat-a'. 'Pomoću' is often used, but 'putem' or 'preko' flow better in this context.",
-          "suggestion": "Prijavi se putem WeChat-a"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -272,13 +195,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Зареєструйтеся з WeChat\" is a bit formal and not the most natural way to say 'Sign up with WeChat' in Ukrainian. A more common and user-friendly option would be more conversational.",
-          "suggestion": "Реєструйтеся з WeChat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

@@ -3169,7 +3169,7 @@ class FilesActionStore {
     return this.uploadDataStore.itemOperationToFolder(operationData);
   };
 
-  onLeaveRoom = (t, isOwner = false) => {
+  onLeaveRoom = (t, isOwner = false, force = false) => {
     const { selection, setSelected, bufferSelection } = this.filesStore;
     const { user } = this.userStore;
 
@@ -3196,6 +3196,7 @@ class FilesActionStore {
     return api.rooms
       .updateRoomMemberRole(roomId, {
         invitations: [{ id: user?.id, access: ShareAccessRights.None }],
+        force,
       })
       .then(() => {
         if (!isAdmin) {

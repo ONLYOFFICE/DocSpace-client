@@ -3,7 +3,7 @@
   "content": "Developer Tools",
   "content_en_sha1_hash": "b0608ab1bd96359355856ec5aafa9740f6d63c4d",
   "created_at": "2025-05-19T21:30:44.517Z",
-  "updated_at": "2026-03-26T08:26:58.103Z",
+  "updated_at": "2026-04-08T12:06:21.875Z",
   "comment": {
     "text": "The \"Developer Tools\" translation key is used to display a header title in the Portal Settings page. It appears as a heading on the page, providing a clear label for users to navigate to developer-related tools and settings.",
     "is_auto": true,
@@ -11,27 +11,21 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 230,
-      "context": "return t(\"Ldap:LdapSyncTitle\");\n case \"Common:RestoreBackup\":\n return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":\n return t(\"PortalDeletion\", { productName: t(\"Common:ProductName\") });\n case \"Common:DeveloperTools\":\n return t(\"Common:DeveloperTools\");\n case \"Common:Bonus\":\n return t(\"Common:Bonus\");\n case \"Common:FreeAccessToLicensedVersion\":\n return \"Common:FreeAccessToLicensedVersion\";",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DeveloperToolsHeader.tsx",
+      "line_number": 77,
+      "context": "return t(\"Settings:EmbedSDK\");\n if (pathname.includes(\"/developer-tools/plugin-sdk\"))\n return t(\"WebPlugins:PluginSDK\");\n if (pathname.includes(\"/developer-tools/webhooks\")) return t(\"Webhooks:Webhooks\");\n if (pathname.includes(\"/developer-tools/oauth\")) return t(\"OAuth:OAuth\");\n return t(\"Common:DeveloperTools\");\n };\n \n const isSubPage = (pathname: string): boolean => {\n const path = pathname.replace(/\\/$/, \"\");\n const segments = path.split(\"/\").filter(Boolean);",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 510,
-      "context": "{\n id: \"portal-settings_catalog-developer-tools\",\n key: \"8\",\n type: PageType.developerTools,\n link: \"developer-tools\",\n tKey: \"Common:DeveloperTools\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-api\",\n key: \"8-0\",",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
+      "line_number": 53,
+      "context": "const Main = (props: { apiBasicLink: string }) => {\n const { t, ready } = useTranslation([\"Common\", \"Settings\", \"JavascriptSdk\", \"WebPlugins\", \"Webhooks\", \"OAuth\"]);\n const { apiBasicLink } = props;\n \n useEffect(() => {\n if (ready) setDocumentTitle(t(\"Common:DeveloperTools\"));\n }, [ready]);\n \n useEffect(() => {\n const elements = document.querySelectorAll<HTMLElement>(\n \".section-sticky-container, .section-header\",",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 510,
-      "context": "{\n id: \"portal-settings_catalog-developer-tools\",\n key: \"8\",\n type: PageType.developerTools,\n link: \"developer-tools\",\n tKey: \"Common:DeveloperTools\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-api\",\n key: \"8-0\",",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 510,
-      "context": "{\n id: \"portal-settings_catalog-developer-tools\",\n key: \"8\",\n type: PageType.developerTools,\n link: \"developer-tools\",\n tKey: \"Common:DeveloperTools\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-api\",\n key: \"8-0\",",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
+      "line_number": 53,
+      "context": "const Main = (props: { apiBasicLink: string }) => {\n const { t, ready } = useTranslation([\"Common\", \"Settings\", \"JavascriptSdk\", \"WebPlugins\", \"Webhooks\", \"OAuth\"]);\n const { apiBasicLink } = props;\n \n useEffect(() => {\n if (ready) setDocumentTitle(t(\"Common:DeveloperTools\"));\n }, [ready]);\n \n useEffect(() => {\n const elements = document.querySelectorAll<HTMLElement>(\n \".section-sticky-container, .section-header\",",
       "module": "/packages/client"
     }
   ],
@@ -189,25 +183,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Алати програмера\" is a literal translation, \"Developer Tools\" often refers to a specific integrated development environment feature. A more idiomatic translation might be \"Средства за програмирање\" or \"Инструменти за програмере\".",
-          "suggestion": "Consider \"Средства за програмирање\" or \"Инструменти за програмере\" for a more natural feel."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Alati programera' does not accurately convey the meaning of 'Developer Tools'. 'Alati' means 'wings' and 'programera' is a plural form related to programmers, but the combination doesn't align with the intended meaning of tools used by developers.",
-          "suggestion": "A more accurate translation could be 'Alati za razvoj' or 'Alati za programere' (Tools for developers)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -229,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

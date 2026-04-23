@@ -3,7 +3,7 @@
   "content": "Once the restoring process is over, you'll be automatically redirected to your {{productName}}.",
   "content_en_sha1_hash": "60714cd70ca7d13efc48745ab7823e95ca812d51",
   "created_at": "2025-05-19T21:30:53.442Z",
-  "updated_at": "2026-02-19T13:36:33.203Z",
+  "updated_at": "2026-04-08T02:24:50.908Z",
   "comment": {
     "text": "The PreparationPortalDescription translation key is used to display a message that will be shown after the restoring process is complete, informing users that they will be automatically redirected to their product name. This text appears in the UI on a screen where a progress indicator and percentage are displayed, likely on a preparation portal page.",
     "is_auto": true,
@@ -63,13 +63,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The passive voice 'usted será redirigido' is somewhat stiff and less common in modern Spanish. A more natural phrasing would be using an active voice.",
-          "suggestion": "Una vez terminado el proceso de restauración, te redirigiremos a tu {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -77,9 +71,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Siinä vaiheessa kun\" is a somewhat verbose and unnatural way to say \"Once\" in this context. A more natural translation would be something like \"Kun\" or \"Heti kun\".",
-          "suggestion": "Kun palautuksen prosessi on ohi, sinut siirretään automaattisesti {{productName}}."
+          "type": "missing_content",
+          "description": "The Finnish translation is missing the preposition 'to' (tai 'kohti') before the variable, making the sentence grammatically incomplete in Finnish ('...siirretään automaattisesti {{productName}}' instead of '...siirretään automaattisesti {{productName}}-palveluun/sivulle').",
+          "suggestion": "Kun palautusprosessi on päättynyt, sinut ohjataan automaattisesti {{productName}}-palveluun."
         }
       ],
       "approved_at": null
@@ -87,13 +81,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The French translation uses 'est terminé' which is grammatically incorrect in this context. It should be 'est terminée' to agree with 'processus' (masculine).",
-          "suggestion": "Une fois le processus de restauration est terminée, vous serez automatiquement redirigé vers votre {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -120,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"redirected\" is not ideal. \"리디렉션됩니다\" is a direct transliteration of 'redirect' and might not be the most natural way to express the idea in Korean. A more common and natural phrasing would be \"이동됩니다\" or \"넘어갑니다\".",
-          "suggestion": "복원 과정이 끝나면 포털로 자동으로 {{productName}}로 이동됩니다."
+          "description": "The Korean translation contains a redundant and nonsensical phrase '포털로 자동으로 {{productName}}로'. It translates to 'automatically to the portal to {{productName}}', which is grammatically broken and adds an extra destination ('portal') not present in the source.",
+          "suggestion": "복원 과정이 끝나면 {{productName}}로 자동으로 리디렉션됩니다."
         }
       ],
       "approved_at": null
@@ -135,7 +123,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation is grammatically incorrect in a way that changes the subject of the sentence. 'jūs automātiski pārsūtīs' implies 'you will redirect [someone else]', whereas the English 'you'll be automatically redirected' is passive. It should be 'jūs tiksiet automātiski pārsūtīts'.",
+          "suggestion": "Kad atjaunošanas process būs pabeigts, jūs tiksiet automātiski pārsūtīts uz savu {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -149,9 +143,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The sentence uses the masculine form 'przekierowany'. Assuming the user can be male or female, it should be gender-neutral.",
-          "suggestion": "Po zakończeniu procesu przywracania zostaniesz automatycznie przekierowany/a do {{productName}}."
+          "type": "missing_content",
+          "description": "The Polish translation is missing the subject 'you' (zostaniesz), making the sentence grammatically incomplete or implying a passive voice that lacks the intended recipient in a way that feels unnatural in this context, though the primary issue is the missing reflexive/personal aspect of 'you will be redirected'.",
+          "suggestion": "Po zakończeniu procesu przywracania zostaniesz automatycznie przekierowany do {{productName}}."
         }
       ],
       "approved_at": null
@@ -159,13 +153,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The phrase 'Uma vez que' can sound slightly formal or clunky in this context. While grammatically correct, a more natural phrasing would improve readability.",
-          "suggestion": "Assim que o processo de restauração terminar, você será automaticamente redirecionado para o {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -189,18 +177,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ප්‍රත්‍යර්පණ' is a complex term. While it's generally understood as 'restoration', a more common and accessible term in this context might be 'නැවත සකස් කිරීම' or 'අලුත්වැඩියාව'.",
-          "suggestion": "Consider replacing 'ප්‍රත්‍යර්පණ' with 'නැවත සකස් කිරීම' or 'අලුත්වැඩියාව' for improved clarity."
-        },
-        {
-          "type": "grammar",
-          "description": "While the sentence structure is technically correct, it might sound a little formal for a user-facing message. A slightly more conversational tone could be beneficial.",
-          "suggestion": "Consider restructuring the sentence to something like: 'ඔබගේ {{productName}} වෙත යවා දීමට, ප්‍රත්‍යර්පණ ක්‍රියාවලිය අවසානයේ ඔබව ස්වයංක්‍රීයව යවා දමනු ඇත.' (After the restoring process is complete, you will automatically be redirected to your {{productName}}.)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -246,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

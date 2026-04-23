@@ -1,3 +1,5 @@
+@use "@docspace/ui-kit/styles/mixins";
+
 /* ── Root ── */
 .root {
   display: flex;
@@ -348,7 +350,7 @@
 }
 
 /* ── Responsive ── */
-@media (max-width: 1023.9px) {
+@include mixins.tablet-and-below {
   .heroContent {
     flex-direction: column;
     align-items: center;
@@ -360,7 +362,7 @@
   }
 }
 
-@media (max-width: 767.9px) {
+@include mixins.mobile {
   .root {
     gap: 32px;
     padding-inline: 16px;

@@ -3,7 +3,7 @@
   "content": "Spaces",
   "content_en_sha1_hash": "9b584b52b28402594628cea231d8d1cd0eb03d50",
   "created_at": "2025-05-19T21:30:48.971Z",
-  "updated_at": "2026-03-20T09:07:45.713Z",
+  "updated_at": "2026-04-07T22:35:56.608Z",
   "comment": {
     "text": "This translation key is used for the label of a settings section titled \"Spaces\", which appears on a management settings page. It displays the text when the user navigates to this section, serving as a header or title. The translation should accurately convey the concept of spaces in the context of management settings.",
     "is_auto": true,
@@ -123,7 +123,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ຊ່ອງຫວ່າງ' means 'empty space' or 'gap' (physical or temporal). In the context of ONLYOFFICE DocSpace, 'Spaces' refers to collaborative work environments or digital containers, which should be translated as 'ສະເປສ' (transliteration) or a term denoting 'workspaces/areas'.",
+          "suggestion": "ສະເປສ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {

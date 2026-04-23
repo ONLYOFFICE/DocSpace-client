@@ -3,7 +3,7 @@
   "content": "Groups added ({{count}}).",
   "content_en_sha1_hash": "cb7ab7bb6fa0e53d6c5b716aea922f323488eec3",
   "created_at": "2025-05-19T21:30:54.923Z",
-  "updated_at": "2025-11-03T12:10:35.117Z",
+  "updated_at": "2026-04-07T19:35:05.119Z",
   "comment": {
     "text": "This translation key displays the number of groups added to a room, typically shown on an info panel or in a history view. It is used when displaying recent activity related to adding group members, such as a \"Groups added\" count.",
     "is_auto": true,
@@ -45,13 +45,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Групи добавени ({{count}}).' is not grammatically correct. It needs a verb form indicating action. It should be in the past tense as it describes groups that *were* added.",
-          "suggestion": "Групи бяха добавени ({{count}})."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -153,13 +147,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Grupuri au fost adăugate ({{count}}).\" is technically correct but sounds awkward and less natural in Romanian. A more natural phrasing would be 'Grupuri adăugate ({{count}}).' or 'S-au adăugat {{count}} grupuri.'",
-          "suggestion": "Grupuri adăugate ({{count}})."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -171,18 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'කණ්ඩායම් එකතු කරන ලදි ({{count}}).' doesn't perfectly convey the meaning of \"Groups added ({{count}}).\". While 'කණ්ඩායම්' correctly translates to 'Groups', 'එකතු කරන ලදි' implies 'were added' or 'are being added'. A more accurate translation would emphasize the completed action of adding groups.",
-          "suggestion": "කණ්ඩායම් යොදා ඇත ({{count}})."
-        },
-        {
-          "type": "formatting",
-          "description": "The placeholder `{{count}}` is correctly placed, but it's crucial to ensure consistency with other translations using the same placeholder format throughout the application.",
-          "suggestion": "No change needed, but ensure consistent placeholder usage."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -200,25 +177,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Групе додате ({{count}}).' implies 'Groups added to [something]'. The English 'Groups added' implies a count of groups added, not groups added *to* something. A more accurate translation would be 'Додате групе ({{count}}).' or 'Додата група ({{count}}).' depending on whether the count is singular or plural.",
-          "suggestion": "Додате групе ({{count}})."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian word 'Grupe' is plural. The English 'Groups' is also plural, so the translation is technically correct. However, 'Grupe dodate' sounds slightly awkward. A more natural phrasing would be 'Dodate grupe'.",
-          "suggestion": "Dodate grupe ({{count}})."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

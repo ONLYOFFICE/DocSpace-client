@@ -100,7 +100,7 @@ const SessionsTableRow = (props) => {
               {country}
               {country && city ? ", " : null}
               {city}
-              <span className="divider" />
+              {ip ? <span className={styles.rowDivider} /> : null}
             </>
           ) : null}
           {ip}
@@ -136,3 +136,4 @@ export default inject(({ setup, settingsStore, userStore }) => {
     setPlatformModalData,
   };
 })(observer(SessionsTableRow));
+

@@ -3,10 +3,12 @@
   "EmptyFormGalleryScreenDescription": "Nevarēja atrast jūsu vaicājumam atbilstošus rezultātus",
   "ErrorViewDescription": "Mēģiniet vēlreiz vēlāk",
   "ErrorViewDescriptionNetworkError": "Šķiet, nav pieejams interneta savienojums.",
-  "SuggestChanges": "Ieteikt izmaiņas",
-  "TemplateInfo": "Informācija par veidni",
-  "ViewAllTemplates": "Skatīt visas veidnes",
   "ErrorViewHeader": "Galerija ir īslaicīgi pieejama.",
   "SelectTemplate": "Izvēlieties veidni",
-  "UploadGallery": "Augšupielādēt Galerijā"
+  "SuggestChanges": "Ieteikt izmaiņas",
+  "TemplateInfo": "Informācija par veidni",
+  "UploadGallery": "Augšupielādēt Galerijā",
+  "ViewAllTemplates": "Skatīt visas veidnes",
+  "GalleryTitle": "{{organizationName}} Šablonu galerija",
+  "SubmitToGalleryDialogMainInfo": "Iesniegiet savu šablonu publisajā galerijā, lai citi varētu izmantot to savā darbam. Pēc moderācijas apstiprināšanas jums paziņosim un atbalstīsiet par jūsu ieguldījumu."
 }

@@ -3,7 +3,7 @@
   "content": "Save to Public room",
   "content_en_sha1_hash": "b0398b1b707409a986e91a9ea5fb56db1a4d3012",
   "created_at": "2025-05-19T21:30:48.318Z",
-  "updated_at": "2025-08-12T19:46:26.363Z",
+  "updated_at": "2026-04-08T00:02:08.033Z",
   "comment": {
     "text": "The translation key \"SaveToPublicRoom\" is used to display the text \"Save to Public room\" in a public room backup confirmation dialog. This text is expected to appear on a button or label within the dialog, prompting the user to save changes to a publicly accessible location.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Ümumi otaqda yadda saxlayın\" while generally understandable, is a bit literal and not the most natural way to express \"Save to Public room\" in Azerbaijani. It translates to \"Save in the public room\".",
-          "suggestion": "Consider a more idiomatic translation like \"Hromadlıq otağa kaydedin\" or \"Hromadlıq otağa qeyd edin\". \"Qeyd etmək\" is a common verb for saving/recording."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -57,13 +51,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Im öffentlichen Raum speichern' is too literal and doesn't fully capture the nuance of 'Save to Public room'. It implies saving something *into* a public space, rather than saving *to* a public room (like a shared space).",
-          "suggestion": "Speichern im öffentlichen Bereich"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -153,37 +141,19 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Salvare în Sală publică\" sounds unnatural in Romanian. A more natural phrasing would use 'Publică' as an adjective, not a noun.",
-          "suggestion": "Salvare în cameră publică"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Сохранить в публичную комнату' is technically correct but could be improved for naturalness. 'В публичную комнату' is a bit clunky. A more common and natural phrasing would be 'в общедоступную комнату' or 'в общую комнату'.",
-          "suggestion": "Сохранить в общедоступную комнату"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'ප්‍රසිද්ධ කාමරයේ සුරකින්න' (Prasiddha kamarayē surakkinna) literally translates to 'Save in the public room', a more natural and idiomatic translation for 'Save to Public room' would be 'ප්‍රසිද්ධ කුමරයට සුරකින්න' (Prasiddha kumaratā surakkinna). The preposition 'යට' (yata) indicates saving *to* a place.",
-          "suggestion": "ප්‍රසිද්ධ කුමරයට සුරකින්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -201,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Сачувај' is spelled correctly. However, a more natural and commonly used phrasing in Serbian might be 'Сними у...' or 'Зачувај у...' depending on the specific action being performed.",
-          "suggestion": "Consider 'Сними у Јавну собу' or 'Зачувај у Јавну собу'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -219,19 +183,19 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Herkese açık odaya kaydet' while understandable, isn't the most natural or precise way to convey 'Save to Public room'. 'Herkese açık odaya' literally translates to 'to everyone's public room' which isn't quite the intended meaning. A better phrasing would focus on saving *within* the public room.",
-          "suggestion": "Herkese açık odada kaydet"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Ukrainian translation uses the prepositional case ('в публічній кімнаті' - 'in a public room'), which implies the action is happening inside a room, whereas the English 'Save to Public room' is an imperative command/action directed towards a destination ('to').",
+          "suggestion": "Зберегти в публічну кімнату"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -241,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

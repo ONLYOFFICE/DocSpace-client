@@ -2,6 +2,7 @@
   "AddedRoomTags": "Etiketat e shtuara.",
   "Administration": "Administrata",
   "AgentRenamed": "Agjenti <1>«{{oldRoomTitle}}»</1> u riemërua në <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Shikoni detajet e {{aiAgents}} këtu",
   "AndMoreLabel": "dhe <1>{{count}} më shumë</1>",
   "CreationDate": "Data e krijimit",
   "Data": "Data",
@@ -60,11 +61,14 @@
   "IndexChanged": "Indeksi ka ndryshuar",
   "ItemsSelected": "Artikujt e selektuar",
   "LastModifiedBy": "Ndryshuar së fundi nga",
+  "LastUpdateInfo": "Përditësim i fundit",
   "LifetimeEnds": "Jeta përfundon",
   "MembersEmptyScreenText": "Shikoni detajet e anëtarëve këtu",
+  "NoAgent": "Asnjë {{aiAgent}}",
   "NoRecordsFound": "Nuk u gjend asnjë regjistrim",
   "Properties": "Vetitë",
   "Resolution": "Rezolucioni",
+  "RoomChangeOwner": "Pronari i dhomës u ndryshua.",
   "RoomCreateUserCount": "Përdoruesit e shtuar ({{count}}).",
   "RoomDenyDownloadDisabled": "Shkarkimi dhe kopjimi i pakufizuar",
   "RoomDenyDownloadEnabled": "Shkarkimi dhe kopjimi i kufizuar",
@@ -98,6 +102,5 @@
   "SubmenuHistory": "Histori",
   "UserFileUpdated": "Skedari u përditësua.",
   "Users": "Përdoruesit",
-  "Versions": "Versionet",
-  "LastUpdateInfo": "Përditësim i fundit"
+  "Versions": "Versionet"
 }

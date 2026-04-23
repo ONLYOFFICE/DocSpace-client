@@ -3,7 +3,7 @@
   "content": "Upload date",
   "content_en_sha1_hash": "176ef9cf9d99c91f93d8c6ccfedafea96c16e2ca",
   "created_at": "2025-05-19T21:30:49.425Z",
-  "updated_at": "2026-03-20T09:07:45.511Z",
+  "updated_at": "2026-04-07T20:44:22.910Z",
   "comment": {
     "text": "The \"UploadDate\" translation key is used to display the upload date of a file. It appears in a settings plugin dialog and is displayed next to an uploaded file's timestamp. The translation should be provided as a plain text representation, likely in a format like \"YYYY-MM-DD\".",
     "is_auto": true,
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Bulgarian translation 'Качи дата' is not an accurate translation of 'Upload date'. 'Качи' means 'upload' or 'put up' and 'дата' means 'date'. The literal translation is 'Upload date', but it lacks the proper phrasing for a user-facing label.",
-          "suggestion": "The correct translation should be something like 'Дата на качване' which means 'Date of upload'."
+          "description": "The Bulgarian translation 'Качи дата' is a literal, grammatically incorrect translation that sounds like an imperative command ('Upload date!'). It should be a noun phrase indicating the date of upload.",
+          "suggestion": "Дата на качване"
         }
       ],
       "approved_at": null
@@ -117,7 +117,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Augšuplādes' is a non-existent word in Latvian. It appears to be a literal, incorrect attempt to translate 'Upload'. The correct term for 'Upload' in Latvian is 'Augšupielāde'.",
+          "suggestion": "Augšupielādes datums"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -150,7 +156,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Încărcare data' is not the accurate translation of 'Upload date'. 'Încărcare' means 'uploading', but the translation requires a noun form.",
+          "description": "The word order is incorrect in Romanian, making it sound like 'Upload data' (as in information) rather than 'Date of upload'.",
           "suggestion": "Data încărcării"
         }
       ],
@@ -180,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Naloži datum' doesn't accurately convey the meaning of 'Upload date'. 'Naloži' means 'upload' or 'load', which is redundant. It should describe the date of upload.",
-          "suggestion": "Datums nalaganja"
+          "description": "The translation 'Naloži datum' uses the imperative verb form 'Naloži' (Upload!), which sounds like a command to perform an action. For a label describing a property (the date on which something was uploaded), the noun 'Datum naloga' or 'Datum nalaganja' should be used.",
+          "suggestion": "Datum nalaganja"
         }
       ],
       "approved_at": null
@@ -192,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Датум отпреме\" doesn't accurately convey the meaning of \"Upload date.\" \"Отпреме\" typically refers to shipping or dispatch, not uploading.",
-          "suggestion": "The correct translation should be \"Датум закачивања\" or \"Датум учитавања\"."
+          "description": "The word 'отпреме' is grammatically incorrect and does not mean 'upload'. It appears to be a truncated or incorrectly formed word. The correct term for 'upload' in Serbian is 'отпремање' or 'постављање'.",
+          "suggestion": "Датум отпремања"
         }
       ],
       "approved_at": null
@@ -201,13 +207,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation \"Datum otpreme\" translates to \"Shipping date\" or \"Dispatch date,\" not \"Upload date.\" \"Upload date\" would be better translated as \"Datum otpreme na server\" or \"Datum kačenja\".",
-          "suggestion": "Datum kačenja"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -219,7 +219,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'вивантаження' (download/extraction) is the opposite of 'upload' (завантаження) in a technical context. 'Вивантаження' usually refers to downloading or exporting data, whereas 'Upload date' refers to the date a file was sent to the server.",
+          "suggestion": "Дата завантаження"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

@@ -3,7 +3,7 @@
   "content": "Change",
   "content_en_sha1_hash": "64fbd995d3b6b156ee26ae3c03e6516434c34c12",
   "created_at": "2025-05-19T21:30:43.398Z",
-  "updated_at": "2026-02-19T13:36:32.235Z",
+  "updated_at": "2026-04-08T15:44:38.456Z",
   "comment": {
     "text": "This translation key is used for the text \"Change\" which appears as a label on a button in various UI components, such as change owner or user type dialogs and room settings. It prompts the user to make a change action.",
     "is_auto": true,
@@ -138,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ການປ່ຽນແປງ\" (kan piān paēng) translates to \"change\" or \"transformation\" in a broader sense. While technically acceptable, it's a more formal and longer word than necessary for a simple \"Change\" button label. A more direct and concise translation would be better.",
-          "suggestion": "ປ່ຽນ (piān)"
+          "description": "The Lao translation 'ການປ່ຽນແປງ' means 'a change' or 'the act of changing' (noun). For a UI button label representing an action (verb), it should be 'ປ່ຽນ' (Change).",
+          "suggestion": "ປ່ຽນ"
         }
       ],
       "approved_at": null
@@ -207,25 +207,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Промени' is a valid word but might not be the most accurate translation of 'Change' in this context, which likely refers to a button action. 'Измени' would be a more appropriate translation for a 'Change' button, implying modification or alteration.",
-          "suggestion": "Измени"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Promeni' doesn't accurately convey the meaning of 'Change' in the context of a button label. 'Promena' is a more suitable translation for 'Change' in this context.",
-          "suggestion": "Promena"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -250,6 +238,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ndyshoni' means 'to differ' or 'to be different' (descriptive), whereas the English 'Change' in this UI context is an imperative verb meaning 'to modify' or 'to switch' (action).",
+          "suggestion": "Ndrysho"
+        }
+      ],
       "approved_at": null
     }
   }

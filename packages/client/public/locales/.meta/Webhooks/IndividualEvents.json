@@ -3,7 +3,7 @@
   "content": "Individual events",
   "content_en_sha1_hash": "500875d6366d707999bfdf9346e38456a552c5b2",
   "created_at": "2025-05-19T21:30:49.775Z",
-  "updated_at": "2026-03-20T09:07:45.618Z",
+  "updated_at": "2026-04-08T19:51:41.198Z",
   "comment": {
     "text": "This translation key is used to display the label \"Individual events\" in a dropdown menu or form, indicating an option for selecting individual events in a trigger. It appears in a triggers form within developer tools on the portal settings page.",
     "is_auto": true,
@@ -87,13 +87,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Italian translation \" Eventi individuali\" has a leading space.",
-          "suggestion": "Eventi individuali"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -111,13 +105,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation \"ເຫດການສ່ວນຕົວ\" (het-kaan suan-dtua) translates to 'personal events' or 'private events'. While it's related to 'individual events', it doesn't convey the precise meaning in the context of webhooks, which typically refers to events pertaining to a single entity or record.",
-          "suggestion": "Consider \"ເຫດການສະບ້ານົວຽກ” (het-kaan sa-ban nuak) or “ເຫດການແຕ່ລະອັນ” (het-kaan dtae-la an) for a more accurate translation, although a completely equivalent translation might be difficult without further context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -153,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Evenimente personale\" is technically a translation, it doesn't fully capture the meaning of \"Individual events\" in a technical context related to webhooks. \"Individual events\" refers to events that are specific to a single entity, record, or user.",
-          "suggestion": "Consider \"Evenimente individuale\" or \"Evenimente specifice\" to better reflect the technical meaning. \"Evenimente dedicate\" could also work."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -213,16 +195,16 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Các sự kiện cá nhân\" is grammatically correct, it's not the most natural or accurate translation of \"Individual events\" in this context (Webhooks).  It implies events belonging to a specific person. A better translation would convey the meaning of individual, discrete events.",
-          "suggestion": "Các sự kiện riêng lẻ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

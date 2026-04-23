@@ -3,7 +3,7 @@
   "content": "Comment",
   "content_en_sha1_hash": "153d7a58b3a3e898fcbdd04c462af308414bd09d",
   "created_at": "2025-05-19T21:30:43.541Z",
-  "updated_at": "2026-02-19T13:36:33.110Z",
+  "updated_at": "2026-04-08T15:12:02.032Z",
   "comment": {
     "text": "This translation key is used for the label of a comment feature in a share component. It appears on a button or similar UI element where users can add comments to a shared item. The translation should be used for text related to commenting on a file or document.",
     "is_auto": true,
@@ -69,37 +69,19 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation \"Коментирай\" (Komentirai) translates to \"Comment (imperative)\" or \"Post a comment.\" It's an action, not a noun representing the word \"Comment.\" The English word 'Comment' is a noun.",
-          "suggestion": "Consider \"Коментар\" (Komentar) which is the noun form of 'Comment'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech translation \"Okomentovat\" means \"to comment\" or \"to provide a comment.\" It's not a direct translation of \"Comment,\" which is a noun. A more accurate translation would be \"Komentář\".",
-          "suggestion": "Komentář"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation \"Kommentieren\" means \"to comment\" (verb). The English \"Comment\" refers to a comment itself (noun).",
-          "suggestion": "Kommentar"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -195,13 +177,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Russian translation \"Комментирование\" translates to \"Commenting\" or \"Commenting process\" which is more formal than the simple English word \"Comment\". A more direct and common translation would be \"Комментарий\".",
-          "suggestion": "Комментарий"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -253,6 +229,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

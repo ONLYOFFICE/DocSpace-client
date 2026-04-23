@@ -3,7 +3,7 @@
   "content": "Data import",
   "content_en_sha1_hash": "783af5b205a3e0c3c3b5feadf95d2a786442a1fe",
   "created_at": "2025-05-19T21:30:51.050Z",
-  "updated_at": "2026-03-26T08:26:58.103Z",
+  "updated_at": "2026-04-10T08:21:04.335Z",
   "comment": {
     "text": "This translation key is used to display the label \"Data Import\" on a UI component. It is part of a data import process in a portal settings page, and its purpose is to provide a clear indication of what action is being performed or which option has been selected.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/index.tsx",
       "line_number": 33,
-      "context": "import { inject, observer } from \"mobx-react\";\n import { useTranslation } from \"react-i18next\";\n import { setDocumentTitle } from \"SRC_DIR/helpers/utils\";\n import useViewEffect from \"SRC_DIR/Hooks/useViewEffect\";\n \n import { DataImportProps, InjectedDataImportProps } from \"./types\";\n \n import { Component as Providers } from \"./components/Providers\";\n import { Component as NextcloudWorkspace } from \"./NextcloudWorkspace\";\n import { Component as GoogleWorkspace } from \"./GoogleWorkspace\";\n import { Component as OnlyofficeWorkspace } from \"./OnlyofficeWorkspace\";",
+      "context": "import { inject, observer } from \"mobx-react\";\n import { useTranslation } from \"react-i18next\";\n import { setDocumentTitle } from \"SRC_DIR/helpers/utils\";\n import useViewEffect from \"@docspace/ui-kit/hooks/useViewEffect\";\n \n import { DataImportProps, InjectedDataImportProps } from \"./types\";\n \n import { Component as Providers } from \"./components/Providers\";\n import { Component as NextcloudWorkspace } from \"./NextcloudWorkspace\";\n import { Component as GoogleWorkspace } from \"./GoogleWorkspace\";\n import { Component as OnlyofficeWorkspace } from \"./OnlyofficeWorkspace\";",
       "module": "/packages/client"
     },
     {
@@ -42,14 +42,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 236,
-      "context": "return t(\"Common:DeveloperTools\");\n case \"Common:Bonus\":\n return t(\"Common:Bonus\");\n case \"Common:FreeAccessToLicensedVersion\":\n return \"Common:FreeAccessToLicensedVersion\";\n case \"DataImport\":\n return t(\"DataImport\");\n case \"StorageManagement\":\n return t(\"StorageManagement\");\n case \"Services\":\n return t(\"Services\");",
+      "line_number": 230,
+      "context": "return t(\"PortalDeletion\", { productName: t(\"Common:ProductName\") });\n case \"Common:Bonus\":\n return t(\"Common:Bonus\");\n case \"Common:FreeAccessToLicensedVersion\":\n return \"Common:FreeAccessToLicensedVersion\";\n case \"DataImport\":\n return t(\"DataImport\");\n case \"StorageManagement\":\n return t(\"StorageManagement\");\n case \"Services\":\n return t(\"Services\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
       "line_number": 373,
-      "context": "? t(\"ImportFromNextcloud\")\n : workspace === \"Workspace\"\n ? t(\"ImportFromPortal\", {\n organizationName: logoText,\n })\n : t(\"DataImport\")\n : !standalone && isPaymentPage\n ? t(\"Billing\")\n : t(header, {\n organizationName: logoText,\n license: t(\"Common:EnterpriseLicense\"),",
+      "context": "? t(\"ImportFromNextcloud\")\n : workspace === \"Workspace\"\n ? t(\"ImportFromPortal\", {\n organizationName: logoText,\n })\n : t(\"DataImport\")\n : !standalone && isPaymentPage\n ? t(\"Common:Billing\")\n : t(header, {\n organizationName: logoText,\n license: t(\"Common:EnterpriseLicense\"),",
       "module": "/packages/client"
     },
     {
@@ -60,7 +60,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 422,
+      "line_number": 439,
       "context": "{\n id: \"portal-settings_catalog-data-import\",\n key: \"5\",\n type: PageType.dataImport,\n link: \"data-import\",\n tKey: \"DataImport\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-data-import-child\",\n key: \"5-0\",",
       "module": "/packages/client"
     }
@@ -87,25 +87,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Входиране на данни\" is not the most natural or common way to express \"Data import\" in Bulgarian. While technically understandable, it's not idiomatic.",
-          "suggestion": "Зареждане на данни\" or \"Импортиране на данни\" would be more natural and commonly used translations. \"Зареждане на данни\" is generally preferred."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Import dat' is not the most natural or accurate Czech translation for 'Data import'. While 'Import' is correct, 'dat' is an abbreviated and informal way to say 'data'.",
-          "suggestion": "Import dat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -201,25 +189,31 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation \"Import date\" translates to \"Import date\" which is not equivalent to the English \"Data import\". It should convey the action of importing data, not refer to a date.",
-          "suggestion": "Import de date"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Russian translation 'Перенос данных' means 'Data migration' or 'Data transfer', which implies moving data from one place to another. The English 'Data import' specifically refers to the process of bringing data into the system. In a UI context, 'Импорт данных' is the accurate term.",
+          "suggestion": "Импорт данных"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala word 'ආයාතය' (āyātaya) is a noun meaning 'the act of entering' or 'entry', but in a UI context for 'Data Import', the correct term should be 'ආනයනය' (ānyanaya) or 'ආයාත කිරීම' (āyāta kirīma) to denote the process of importing data.",
+          "suggestion": "දත්ත ආනයනය"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -237,13 +231,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Увоз података' while containing the correct root words, doesn't perfectly capture the meaning of 'Data import'. 'Увоз' generally implies importing goods or commodities. A more accurate translation would be 'Унос података'.",
-          "suggestion": "Унос података"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -271,6 +259,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

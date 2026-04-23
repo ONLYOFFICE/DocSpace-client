@@ -6,6 +6,7 @@
   "AutomaticIndexing": "자동 인덱싱",
   "AutomaticIndexingDescription": "일련 번호로 파일과 폴더를 인덱싱하기 위해 자동 인덱싱을 활성화하세요. 모든 사용자에게 번호순 정렬이 기본으로 설정됩니다.",
   "ChooseRoomType": "방 유형 선택",
+  "ConfigureDatabaseConnection": "통합 → 타사 서비스에서 데이터베이스 연결을 구성하세요.",
   "CreateRoomConfirmation": "스토리지를 연결하지 않고 계속하시겠습니까?\n아직 연결되지 않은 제3자 스토리지 옵션을 선택했습니다. 서비스에 연결하지 않은 상태에서 진행하면 이 옵션이 추가되지 않을 것입니다.",
   "CreateRoomWatermarksConfirmation": "이 룸의 문서에 적용할 워터마크를 설정하지 않았습니다. 룸 편집 설정에서 언제든지 워터마크를 추가할 수 있습니다. 워터마크 없이 계속 하시겠습니까?",
   "CreateTagOption": "태그 생성",
@@ -39,5 +40,9 @@
   "UserName": "사용자 이름",
   "ViewerInfo": "뷰어 정보",
   "WatermarkPreview": "워터마크 미리보기",
-  "WatermarkPreviewHelp": "이 이미지 미리보기는 워터마크가 파일에 어떻게 표시되는지 대략적으로 보여줍니다. "
+  "WatermarkPreviewHelp": "이 이미지 미리보기는 워터마크가 파일에 어떻게 표시되는지 대략적으로 보여줍니다. ",
+  "GoToIntegrations": "통합 기능으로 이동",
+  "NeedMoreIntegrations": "더 많은 통합이 필요하신가요?",
+  "NeedMoreIntegrationsDescription": "웹훅을 사용하여 데이터를 자체 시스템으로 전송하거나 Zapier를 통해 수천 개의 서비스에 양식을 연결하세요.",
+  "NoDatabaseConnections": "데이터베이스 연결이 구성되지 않았습니다"
 }

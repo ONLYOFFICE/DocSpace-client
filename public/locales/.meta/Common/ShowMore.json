@@ -3,7 +3,7 @@
   "content": "Show more",
   "content_en_sha1_hash": "25911d48e023cd10fc08d378641ee620f5e39d86",
   "created_at": "2025-05-19T21:30:48.725Z",
-  "updated_at": "2025-11-06T18:29:15.954Z",
+  "updated_at": "2026-04-07T23:00:51.356Z",
   "comment": {
     "text": "This translation key is used to display the text \"Show more\" when a list length exceeds 5 items. It appears as a button label in UI components that showcase paginated lists of rooms and users, prompting users to view more results if available.",
     "is_auto": true,
@@ -183,13 +183,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Прикажи више\" is understandable, a more natural and common translation of \"Show more\" in Serbian (Cyrillic) would be \"Prikaži više\". The subtle difference in pronunciation and flow makes \"Prikaži više\" preferable.",
-          "suggestion": "Prikaži više"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -216,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Chi tiết' translates to 'details' in English, not 'Show more'. While it can convey a similar meaning in some contexts, it's not a direct or accurate translation of 'Show more'.",
-          "suggestion": "Consider 'Xem thêm' or 'Xem tất cả' for a more accurate translation of 'Show more'."
+          "description": "The Vietnamese translation 'Chi tiết' means 'Details', which implies viewing more information about a specific item. The English 'Show more' is a functional command to expand a list or load more items. In the context of a button to expand a list of rooms/users, 'Xem thêm' is the accurate translation.",
+          "suggestion": "Xem thêm"
         }
       ],
       "approved_at": null

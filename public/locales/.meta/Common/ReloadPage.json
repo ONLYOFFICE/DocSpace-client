@@ -3,7 +3,7 @@
   "content": "Reload page",
   "content_en_sha1_hash": "37614e96d9e32dc327e92508fa0e8ec4ca3d2c51",
   "created_at": "2025-05-19T21:30:47.790Z",
-  "updated_at": "2026-02-19T13:36:32.239Z",
+  "updated_at": "2026-04-08T01:37:05.230Z",
   "comment": {
     "text": "The translation key \"ReloadPage\" is used to display a button label indicating that a page should be reloaded. It appears in an error message component, prompting users to reload the page after an error occurs.",
     "is_auto": true,
@@ -45,25 +45,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Səhifəni Təkrar yükləyin\" sounds somewhat unnatural and overly literal. A more common and natural phrasing would be preferred.",
-          "suggestion": "Səhifəni yeniləyin"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Презареждане на страницата' is a more literal translation of 'reloading the page'. While understandable, 'Reload page' is often translated as 'Зареждане на страницата отново' or 'Обнови страницата' for better user experience and natural flow in Bulgarian.",
-          "suggestion": "Consider 'Зареждане на страницата отново' or 'Обнови страницата' for a more natural and concise translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -81,13 +69,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation 'Επανάληψη Φόρτωσης Σελίδας' is a literal translation but sounds unnatural. A more common and natural way to say 'Reload page' in Greek is 'Ανανέωση Σελίδας'.",
-          "suggestion": "Ανανέωση Σελίδας"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -174,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Reîmprospătare pagina' is understandable, it's a bit formal and not the most common way to say 'Reload page' in Romanian. A more natural and commonly used translation would be 'Împrospătare pagina' or 'Reîncărcare pagina'.",
-          "suggestion": "Împrospătare pagina"
+          "description": "The Romanian translation 'Reîmprospătare pagina' is grammatically incorrect. It uses a noun ('Reîmprospătare') followed by a noun without a preposition or proper declension, making it sound like 'Refresh page' (noun phrase) but incorrectly structured. For a button action (imperative), it should be 'Reîncarcă pagina'.",
+          "suggestion": "Reîncarcă pagina"
         }
       ],
       "approved_at": null
@@ -189,13 +171,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'පිටුව යළි පූරණය' while literally meaning 'page refill', isn't the most natural or accurate translation for 'Reload page'.  A more common and understood translation would be 'පිටු නැවත පැloadFile' or 'පිටු යළිගන්න'.",
-          "suggestion": "පිටු නැවත පැloadFile"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -216,7 +192,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Релоад паге' is a transliteration of the English phrase 'Reload page'. It's not a proper Serbian translation. The correct translation should be something like 'Освежи страницу' or 'Поново учитај страницу'.",
+          "description": "The translation is a phonetic transliteration of the English words into Cyrillic characters rather than a translation into the Serbian language. 'Релоад паге' is not a valid Serbian phrase.",
           "suggestion": "Освежи страницу"
         }
       ],
@@ -225,13 +201,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Osveži stranicu' while understandable, isn't the most natural or common way to say 'Reload page'. A more accurate and common translation would be 'Učitaj stranicu ponovo' or 'Ponovo učitaj stranicu'.",
-          "suggestion": "Učitaj stranicu ponovo"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -249,16 +219,16 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Tải lại Trang' is understandable, a more natural and accurate translation of 'Reload page' would be 'Làm mới trang'. 'Tải lại' implies downloading, while 'Reload' refers to refreshing the current page.",
-          "suggestion": "Làm mới trang"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

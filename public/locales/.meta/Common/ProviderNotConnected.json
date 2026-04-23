@@ -3,7 +3,7 @@
   "content": "Provider is not connected to your account",
   "content_en_sha1_hash": "ed6647eb55027d0d5abf74e208b43017b22a7669",
   "created_at": "2025-05-19T21:30:47.595Z",
-  "updated_at": "2026-02-19T13:36:33.065Z",
+  "updated_at": "2026-04-08T02:07:49.936Z",
   "comment": {
     "text": "The \"ProviderNotConnected\" translation key is used to display an error message when a user attempts to log in but their account provider is not connected. This message is typically displayed in a login form dialog or notification. The message informs the user that they must reconnect their provider to access their account.",
     "is_auto": true,
@@ -33,18 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Provayder sizin hesabınızla əlaqəli deyil' is not the most natural or accurate translation of 'Provider is not connected to your account.' While understandable, 'əlaqəli deyil' (not related) doesn't fully convey the meaning of a connection being absent.",
-          "suggestion": "Provayder hesabınızla bağlı deyil"
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'Provayder' appears to be a transliteration of 'Provider'.",
-          "suggestion": "Provider"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -80,13 +69,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Palveluntarjoajaa ei ole yhdistetty tiliisi' is a literal translation and sounds unnatural in Finnish. A more natural phrasing would be closer to 'Palveluntarjoaja ei ole yhdistettynä tiliisi' or 'Palveluntarjoaja ei ole kytketty tiliisi'.",
-          "suggestion": "Palveluntarjoaja ei ole yhdistettynä tiliisi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -98,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Մատակարարը միացված չէ ձեր հաշվին' while technically correct, is a bit literal. A more natural Armenian phrasing would better convey the meaning of 'Provider is not connected to your account'.",
-          "suggestion": "Մատակարարը չի միացած ձեր հաշվին (Matak’araru chi miatsadz dzer hashvin) or Մատակարարը հաշվին չի միացած (Matak’araru hashvin chi miatsadz)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -119,13 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is overly formal and literal. It doesn't convey the same natural flow as the English original. 'お客様のアカウントに接続されていない場合' (Okyakusama no akanto ni setsuzukotte inai baai) is very stiff.",
-          "suggestion": "プロバイダーがアカウントに接続されていません"
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase 'お客様のアカウントに接続されていない場合' is a full sentence construction when a simpler phrasing would be more appropriate for a UI message. It adds unnecessary complexity.",
-          "suggestion": "プロバイダーがアカウントに接続されていません"
+          "description": "The Japanese translation changes the meaning from a statement of fact ('is not connected') to a conditional clause ('if it is not connected'). This is an error for an error message that should state the current status.",
+          "suggestion": "プロバイダーはお客様のアカウントに接続されていません"
         }
       ],
       "approved_at": null
@@ -133,7 +105,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation '공급자가 고객님의 계정에 연결할 수 없습니다' means 'The provider cannot connect to your account' (implying the provider is unable to perform the action), whereas the English 'Provider is not connected to your account' describes a state (the connection does not exist).",
+          "suggestion": "공급자가 고객님의 계정에 연결되어 있지 않습니다"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -163,13 +141,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'O fornecedor não está ligado à sua conta' is not an accurate translation of 'Provider is not connected to your account'. 'Ligado' means 'connected' in the sense of 'turned on' or 'attached,' not the intended meaning of a service being connected to an account.",
-          "suggestion": "O fornecedor não está conectado à sua conta"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -211,25 +183,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Провајдер није повезан на ваш налог' is not the most natural or accurate translation of 'Provider is not connected to your account.' A more appropriate translation would convey the provider's lack of connection to the user's account.",
-          "suggestion": "Провајдер није повезан са вашим налогом"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Provajder nije povezan na vaš nalog' is a literal translation but doesn't quite convey the intended meaning. 'Connected to your account' implies an active connection.  A more natural Serbian translation would emphasize the absence of a connection.",
-          "suggestion": "Provajder nije povezan sa vašim nalogom"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -251,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

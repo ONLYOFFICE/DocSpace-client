@@ -2,7 +2,6 @@
   "AuthViaNTLM": "NTLM aracılığıyla kimlik doğrulama",
   "EnableSSL": "SSL'yi etkinleştir",
   "EnterDomain": "Alan adını girin",
-  "EnterEmail": "E-posta girin",
   "EnterLogin": "Login girin",
   "EnterPort": "Bağlantı noktasını girin",
   "Host": "Sunucu",

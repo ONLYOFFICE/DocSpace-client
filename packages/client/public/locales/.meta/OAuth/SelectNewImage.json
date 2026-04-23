@@ -3,7 +3,7 @@
   "content": "Select new image",
   "content_en_sha1_hash": "0cfab96c757b48543e5dee1d93361135769c716e",
   "created_at": "2025-05-19T21:30:54.043Z",
-  "updated_at": "2026-03-26T08:26:58.114Z",
+  "updated_at": "2026-04-07T19:35:05.167Z",
   "comment": {
     "text": "This translation key is used to display the label \"Select new image\" on a form element. It is likely part of a select component in a UI field container and appears as a button or option within a larger form. Translators should provide a clear and concise alternative text that reflects this functionality.",
     "is_auto": true,
@@ -159,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'නව පරිකර්මයක් තෝරන්න' (nawa parikarmayak thoranna) literally translates to 'Select a new mechanism/device'. While close in concept, 'image' has a more specific meaning in this context. A more accurate translation would emphasize the image itself.",
-          "suggestion": "නව ඡායාරූපය තෝරන්න (nawa chayaarupaya thoranna) - 'Select new image'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

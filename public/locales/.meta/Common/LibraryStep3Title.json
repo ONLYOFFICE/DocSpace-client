@@ -3,7 +3,7 @@
   "content": "Collect and analyze",
   "content_en_sha1_hash": "03a906c3acdd379eda4fd4e1b6481b7891e507af",
   "created_at": "2026-03-31T15:18:14.938Z",
-  "updated_at": "2026-03-31T15:18:14.938Z",
+  "updated_at": "2026-04-08T05:59:43.382Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -104,7 +104,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian word 'Saglabāt' means 'to save' or 'to keep', whereas the English word 'Collect' means 'to gather' or 'to accumulate'.",
+          "suggestion": "Kolektēt un analizēt"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -146,7 +152,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation means 'Edit and analyze' instead of 'Collect and analyze'. 'සංස්කරණය' (Sanskaranaya) means 'Edit'.",
+          "suggestion": "එකතු කර විශ්ලේෂණය කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

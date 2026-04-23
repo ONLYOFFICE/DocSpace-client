@@ -3,7 +3,7 @@
   "content": "Sorry, this file format isn't supported",
   "content_en_sha1_hash": "44faa0a5086202b59ef30646e8573a659f5c5bc0",
   "created_at": "2025-05-19T21:30:46.955Z",
-  "updated_at": "2026-02-19T13:36:32.981Z",
+  "updated_at": "2026-04-08T03:51:51.569Z",
   "comment": {
     "text": "This translation key is used to display an error message when a file format is not supported, typically appearing as a notification in UI elements such as the Avatar Editor Dialog or File Input component. The intended message informs the user that the selected file cannot be processed due to its unsupported format.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'dəstəklənmir' is a valid word, but it may be slightly formal for a user-facing message. Consider a more conversational alternative.",
-          "suggestion": "Consider using 'dəstəklənməyib' or 'dəstəklənilmir' for a more natural feel. However, 'dəstəklənmir' is grammatically correct."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -78,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Ei sitten niin mitenkään\" is an awkward and non-standard way to express lack of support. It's colloquial and doesn't accurately convey the meaning of 'isn't supported'.",
-          "suggestion": "Ei tueta."
+          "description": "The translation includes an extra, nonsensical phrase 'Ei sitten niin mitenkään' (meaning something like 'Not in any particular way' or 'Not really') which is not present in the English source and changes the tone/meaning of the error message.",
+          "suggestion": "Tätä tiedostomuotoa ei tueta"
         }
       ],
       "approved_at": null
@@ -149,9 +143,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase 'este tipo arquivo' is grammatically incorrect. It should be 'este tipo de arquivo'.",
-          "suggestion": "Este tipo de arquivo"
+          "type": "missing_content",
+          "description": "The preposition 'de' is missing between 'tipo' and 'arquivo', making the sentence grammatically incomplete in Portuguese.",
+          "suggestion": "Lamentamos, este tipo de arquivo não é suportado"
         }
       ],
       "approved_at": null
@@ -171,18 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'කණගාටුයි' is a valid spelling, but can be replaced with 'මාෆ්' or 'දුශී' for a slightly more modern and casual tone, depending on the overall brand voice.",
-          "suggestion": "මාෆ්, දුශී"
-        },
-        {
-          "type": "grammar",
-          "description": "While grammatically correct, the sentence could be slightly rephrased for better flow. The use of 'සාහාය නොදක්වයි' is a bit formal. ",
-          "suggestion": "මෙම ගොනු ආකෘතියට අපි සහාය කරන්නේ නැහැ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -230,13 +213,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, the translation '很抱歉，系统暂不支持此文件格式' is a bit formal and verbose for a simple error message. A more natural and user-friendly translation might be preferable.",
-          "suggestion": "很抱歉，文件格式暂不支持 (Hěn bàoqiàn, wénjiàn géshì zàn bù zhīchí) - 'Sorry, this file format is not supported.'"
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

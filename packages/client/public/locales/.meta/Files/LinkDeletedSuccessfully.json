@@ -3,7 +3,7 @@
   "content": "Link deleted successfully",
   "content_en_sha1_hash": "1d0682ce997a2ffc32592cbebffe9839b47dab71",
   "created_at": "2025-05-19T21:30:55.776Z",
-  "updated_at": "2026-03-31T15:18:46.024Z",
+  "updated_at": "2026-04-07T19:35:05.086Z",
   "comment": {
     "text": "This translation key is used to display a success message when a link is deleted successfully. It appears as an alert in a delete confirmation dialog and info panel, providing feedback to users that their link has been removed.",
     "is_auto": true,
@@ -159,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'සබැඳිය මැකිණි' (sabandiya makiyani) literally translates to 'The link erased' or 'The link is erased'. While conveying a similar meaning, 'deleted' has a more formal and positive connotation in this context, which is usually expected for a success message. A more accurate translation would convey 'removed' or 'taken away'.",
-          "suggestion": "Consider 'සබැඳිය ඉවත් කරන ලදි' (sabandiya ivat karana ladi) which means 'The link was removed' or 'සබැඳිය අයින් කරන ලදි' (sabandiya ain karan ladi) meaning 'The link was taken away'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -183,25 +177,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Линк' is commonly used but 'Веза' or 'Дозвола' would be a more formal and accurate translation of 'Link' in this context.",
-          "suggestion": "Веза обрисана успешно"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'obrisan' is misspelled. The correct spelling is 'obrisan'.",
-          "suggestion": "Link obrisan uspešno"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

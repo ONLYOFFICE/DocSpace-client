@@ -3,7 +3,7 @@
   "content": "Room copied",
   "content_en_sha1_hash": "84a37f78a1044b9e21ef84fec5b8c4ffddbd830b",
   "created_at": "2025-05-19T21:30:49.819Z",
-  "updated_at": "2026-03-20T09:07:45.616Z",
+  "updated_at": "2026-04-08T19:22:01.113Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message when a room has been successfully copied. The text will appear in a UI context where rooms are being duplicated or transferred, providing feedback to users about the outcome of this action.",
     "is_auto": true,
@@ -144,7 +144,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Grupul a fost copiat' translates to 'The group was copied'. This doesn't accurately reflect the English 'Room copied', which implies a room (e.g., a chat room) has been duplicated or replicated. 'Grupul' refers to a group, not a room.",
+          "description": "The Romanian translation uses 'Grupul' (Group) instead of 'Camera' (Room), which changes the subject of the message.",
           "suggestion": "Camera a fost copiată"
         }
       ],
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Соба копирана\" translates to \"Room copied\" literally, but it appears there's an error. 'Соба' (Soba) means 'room' but should be 'Ауторска соба' or a similar term indicating a copyright room/space.",
-          "suggestion": "Consider using 'Ауторска соба копирана' or a more contextually accurate translation for 'Room copied' related to copyright or a designated space. Without more context, it's difficult to offer a definitively correct suggestion."
+          "description": "The word 'Соба' (Soba) is a misspelling or incorrect form; in Serbian, 'room' is 'Soba' (Собе/Соба is not a standard grammatical form here). More importantly, 'Соба' is not a valid word in this context; the correct noun is 'Soba' (Соба is often a typo for 'Soba' or refers to something else entirely). The translation uses an incorrect word for 'Room'.",
+          "suggestion": "Soba kopirana"
         }
       ],
       "approved_at": null
@@ -211,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

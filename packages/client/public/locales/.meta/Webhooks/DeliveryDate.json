@@ -3,7 +3,7 @@
   "content": "Delivery date",
   "content_en_sha1_hash": "1093fae5fbc2f03091a8f32f8add755d266e6d58",
   "created_at": "2025-05-19T21:30:49.690Z",
-  "updated_at": "2026-02-19T13:36:32.825Z",
+  "updated_at": "2026-04-08T20:29:04.120Z",
   "comment": {
     "text": "The \"DeliveryDate\" translation key is used to display the date related to deliveries. It appears in a filter dialog within the application, allowing users to select and manage dates. Translators should provide an alternative text for this date format as it may vary across languages.",
     "is_auto": true,
@@ -93,13 +93,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While '配信日' (Haisinbi) can technically mean 'delivery date' in some contexts, it more commonly translates to 'release date' or 'distribution date' in relation to digital content. 'Delivery date' in the context of physical goods or scheduled deliveries would be better translated using different terminology.",
-          "suggestion": "Consider using a translation more accurately conveying the meaning of 'delivery date,' such as '納品日' (Nappinbi) for physical goods or '配達予定日' (Haitatsu yotei bi) for a scheduled delivery date."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -108,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation \"전송 날짜\" (jeonseong naljja) translates to 'transmission date' or 'sending date', not 'delivery date'. It doesn't convey the intended meaning of when the goods will be delivered.",
-          "suggestion": "배송 날짜 (baesong naljja)"
+          "description": "The term '전송 날짜' (Transmission/Sending date) is used for data transfer or messaging. In the context of a 'Delivery date' for logistics or item delivery, '배송 날짜' is the correct term.",
+          "suggestion": "배송 날짜"
         }
       ],
       "approved_at": null
@@ -162,7 +156,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Russian translation \"Дата отправки\" translates to \"Shipping date\" or \"Dispatch date\", not \"Delivery date\". While related, they are not equivalent.",
+          "description": "The English 'Delivery date' refers to the date when an item is received/delivered, whereas the Russian 'Дата отправки' means 'Dispatch date' or 'Shipping date' (the date it is sent).",
           "suggestion": "Дата доставки"
         }
       ],
@@ -189,13 +183,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Датум доставе\" is not the most natural or accurate translation of \"Delivery date\". While \"Датум\" is correct for \"date\", \"доставe\" is an incomplete or incorrect form related to delivery. It lacks the proper verb construction to accurately convey 'delivery'.",
-          "suggestion": "A more appropriate translation would be \"Датум доставе\" (Datum dostave) or \"Рок доставе\" (Rok dostave).  \"Рок доставе\" directly translates to 'delivery deadline' and is commonly used."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -222,7 +210,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Vietnamese translation \"Ngày gửi\" translates to \"Sending date\" or \"Dispatch date\", not \"Delivery date\". It doesn't accurately convey the meaning of \"Delivery date\".",
+          "description": "The Vietnamese translation 'Ngày gửi' means 'Date sent' or 'Sending date', which refers to the moment an item leaves a sender. 'Delivery date' refers to the moment an item arrives at its destination. In a logistics/filter context, 'Ngày giao hàng' or 'Ngày nhận hàng' is more accurate.",
           "suggestion": "Ngày giao hàng"
         }
       ],
@@ -234,10 +222,16 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"传递日期\" (chuan di ri qi) literally translates to \"transmission date\" or \"delivery date\", but \"传递\" (chuan di) emphasizes the act of transmitting rather than the date of delivery itself. It doesn't quite capture the intended meaning of 'Delivery date'.",
-          "suggestion": "Consider using a more direct translation like \"交付日期\" (jia chu ri qi) which means 'delivery date' or 'handover date', or \"送达日期\" (song da ri qi) which means 'date of delivery'."
+          "description": "The term '传递日期' (chuándì rìqī) refers to the act of transmitting or passing something (like a signal or a message). In the context of a delivery date for goods or services, '交付日期' (jiāofù rìqī) or '送达日期' (sòngdá rìqī) is the standard and correct terminology.",
+          "suggestion": "交付日期"
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

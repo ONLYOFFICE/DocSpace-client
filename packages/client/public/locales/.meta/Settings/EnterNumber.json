@@ -3,7 +3,7 @@
   "content": "Enter number",
   "content_en_sha1_hash": "b616e9721b5f222875a21a2bf6becfa2cd88a749",
   "created_at": "2025-05-19T21:30:51.515Z",
-  "updated_at": "2025-09-26T15:21:06.426Z",
+  "updated_at": "2026-04-09T03:03:30.533Z",
   "comment": {
     "text": "The \"EnterNumber\" translation key is used to display a label for an input field that collects a numerical value. This text appears in a security settings page and provides context for users when they are prompted to enter a number.",
     "is_auto": true,
@@ -132,7 +132,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Insira numeros' is not a direct or accurate translation of 'Enter number'. 'Insira' means 'insert' and 'numeros' means 'numbers' (plural). The correct translation should be singular.",
+          "description": "The Portuguese translation 'Insira numeros' means 'Enter numbers' (plural), whereas the English source 'Enter number' is singular. In the context of a security setting for 'number of attempts', this changes the meaning from a single value to multiple values.",
           "suggestion": "Insira um número"
         }
       ],
@@ -144,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Enter number' translates more accurately to 'Digite um número' or 'Insira um número'. 'Insira numeros' is grammatically incorrect and translates to 'Insert numbers', which is plural.",
-          "suggestion": "Digite um número"
+          "description": "The Portuguese translation 'Insira numeros' is plural ('Enter numbers'), whereas the English source 'Enter number' is singular. In the context of 'brute_force_protection_number_attempts_input', the user is expected to enter a single specific number of attempts.",
+          "suggestion": "Insira um número"
         }
       ],
       "approved_at": null
@@ -153,7 +153,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Introducere număr' is a noun phrase meaning 'Number entry' or 'Number insertion'. Since the English text 'Enter number' is used as a placeholder in an input field, it should be an imperative verb phrase (a command to the user).",
+          "suggestion": "Introdu numărul"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -189,25 +195,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Unesi broj' is a literal translation of 'Enter number' but doesn't quite capture the intended meaning in a user interface context. It translates to 'Enter a number,' which is not always the best phrasing. A more natural translation would be 'Uneti broj' or 'Broj'.",
-          "suggestion": "Uneti broj"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Numarayı gir' is a literal translation of 'Enter number' but sounds less natural in Turkish. A more idiomatic translation would be 'Sayıyı girin'.",
-          "suggestion": "Sayıyı girin"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -228,10 +222,16 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"输入编号\" is not the most natural or accurate translation of \"Enter number\". While \"输入\" (input) is correct, \"编号\" (number/ID) is not the direct equivalent of \"number\".  \"数字\" would be a more accurate translation for \"number\".",
+          "description": "The English 'Enter number' in this context (brute_force_protection_number_attempts_input) refers to a quantity or count of attempts, whereas '输入编号' means 'Enter ID number' or 'Enter serial number'.",
           "suggestion": "输入数字"
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

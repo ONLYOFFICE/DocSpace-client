@@ -3,7 +3,7 @@
   "content": "Disable",
   "content_en_sha1_hash": "9a7d4e0687b14e2b7cda406900b802782cd50a62",
   "created_at": "2025-05-19T21:30:44.526Z",
-  "updated_at": "2026-03-26T08:26:57.984Z",
+  "updated_at": "2026-04-10T08:21:04.302Z",
   "comment": {
     "text": "This translation key is used to display a label that enables users to disable guest access. In the \"ChangeUserStatusDialog\", it will be displayed as part of a button's label depending on the user type. It appears in a dialog for changing user status.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ai-services-management.tsx",
-      "line_number": 264,
+      "line_number": 265,
       "context": "value: \"true\",\n dataTestId: \"ai_services_management_enable\",\n },\n {\n id: \"disabled\",\n label: t(\"Common:Disable\"),\n value: \"false\",\n dataTestId: \"ai_services_management_disabled\",\n },\n ]}\n selected={type.toString()}",
       "module": "/packages/client"
     },
@@ -57,13 +57,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Deaktiv edin\" is a command form (imperative) of 'disable'. The English word 'Disable' functions as a noun or adjective in this context (e.g., 'Common:Disable' - likely a setting). A more appropriate translation would be a noun or an adjective in its base form.",
-          "suggestion": "İləsiz et"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -123,13 +117,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"無効にする\" is a valid translation for 'Disable', it's a rather formal and technical term. A more common and natural translation, depending on the context, might be \"オフにする\" or simply \"無効\". '無効にする' implies an action being performed to disable something.",
-          "suggestion": "Consider \"オフにする\" or \"無効\" depending on the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -147,7 +135,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation 'Atspējot' is a gerund/participle meaning 'By disabling' or 'Disabling'. For a button label or a command, the imperative form 'Atspiet' or the infinitive 'Atspējošana' (depending on UI style) is required. However, 'Atspējot' specifically implies an action in progress or a method, which is grammatically incorrect for a direct action button.",
+          "suggestion": "Atspiet"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -192,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'අබල කරන්න' while literally meaning 'to disable', is a more active or forceful way to disable something. A more accurate and neutral translation of 'Disable' would be 'නො ක්‍රියාත්මක කරන්න' (no kriya thmakthak kanna) or 'අවලංගු කරන්න' (awalangu karanna).",
-          "suggestion": "Replace 'අබල කරන්න' with 'නො ක්‍රියාත්මක කරන්න' or 'අවලංගු කරන්න'."
+          "description": "The Sinhala term 'අබල කරන්න' (Abala karanna) is often used in legal or formal contexts meaning 'to invalidate' or 'to nullify'. In a software UI context for toggling a status (Enable/Disable), 'අක්‍රිය කරන්න' (Akriya karanna) is the standard and correct technical term for 'Disable'.",
+          "suggestion": "අක්‍රිය කරන්න"
         }
       ],
       "approved_at": null
@@ -219,25 +213,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation \"Onemogući\" is a valid verb meaning 'disable,' but it doesn't directly map to the English word 'Disable' which functions as a noun or adjective (e.g., 'Disable feature', 'Disabled'). A more appropriate translation, depending on the context, could be 'Isključi' or 'Onemogućavanje'.  'Onemogući' is an imperative form (command).",
-          "suggestion": "Consider 'Isključi' or 'Onemogućavanje' as alternatives, depending on the desired meaning. For a noun, 'Onemogućavanje' is the closest option."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Devre dışı bırak\" is a literal translation of \"Disable,\" it's often too verbose for UI elements or short labels. A more common and concise translation would be \"Kapalı\" or \"Devre Dışı\".",
-          "suggestion": "Kapalı"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -253,6 +235,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

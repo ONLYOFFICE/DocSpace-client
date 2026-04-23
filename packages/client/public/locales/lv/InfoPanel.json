@@ -2,6 +2,7 @@
   "AddedRoomTags": "Pievienotas atzīmes.",
   "Administration": "Administrācija",
   "AgentRenamed": "Aģents <1>«{{oldRoomTitle}}»</1> pārdēvēts par <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Skatīt {{aiAgents}} detaļas šeit",
   "AndMoreLabel": "un <1>{{count}} vēl</1>",
   "CreationDate": "Izveides datums",
   "Data": "Dati",
@@ -60,11 +61,14 @@
   "IndexChanged": "Indekss ir mainīts",
   "ItemsSelected": "Atlasītie vienumi",
   "LastModifiedBy": "Pēdējo reizi modificēja:",
+  "LastUpdateInfo": "Pēdējais atjauninājums",
   "LifetimeEnds": "Kalpošanas laika beigas",
   "MembersEmptyScreenText": "Skatiet informāciju par dalībniekiem šeit",
+  "NoAgent": "Nav {{aiAgent}}",
   "NoRecordsFound": "Ieraksti nav atrasti",
   "Properties": "Īpašības",
   "Resolution": "Rezolūcija",
+  "RoomChangeOwner": "Īpašnieks telpā mainīts.",
   "RoomCreateUserCount": "Lietotāji pievienoti ({{count}}).",
   "RoomDenyDownloadDisabled": "Lejupielāde un kopēšana bez ierobežojumiem",
   "RoomDenyDownloadEnabled": "Ierobežota lejupielāde un kopēšana",
@@ -98,6 +102,5 @@
   "SubmenuHistory": "Vēsture",
   "UserFileUpdated": "Fails ir atjaunināts.",
   "Users": "Lietotāji",
-  "Versions": "Versijas",
-  "LastUpdateInfo": "Pēdējais atjauninājums"
+  "Versions": "Versijas"
 }

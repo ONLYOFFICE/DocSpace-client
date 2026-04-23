@@ -3,7 +3,7 @@
   "content": "To be able to use this attribute, enable user quota in the <0>Storage management settings</0>",
   "content_en_sha1_hash": "b74fa70749a0470fd1d26e0810e4ffe636260943",
   "created_at": "2025-05-19T21:30:54.258Z",
-  "updated_at": "2025-08-11T18:11:59.238Z",
+  "updated_at": "2026-04-07T19:35:05.147Z",
   "comment": {
     "text": "This translation key is used to display a message when enabling user quota in storage management settings. It will be displayed as part of a UI element, likely in a category or settings page, to inform users about the attribute's purpose.",
     "is_auto": true,
@@ -27,25 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The bracketed section <0>Storage management settings</0> is not properly reflected in the Arabic translation. It appears as <0>إعدادات إدارة مساحة  التخزين</0>, which is correct but doesn't clearly indicate it's a section to be highlighted or referenced.",
-          "suggestion": "Consider adding a visual cue, like bolding or a different font style, to match the original formatting."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The tag <0> is present in both the English and Azerbaijani content. This needs to be consistent and likely should be handled by the UI rendering logic, not the translation itself. The translation should be independent of the tag.",
-          "suggestion": "Remove the <0> tags from the Azerbaijani translation. The translation should be: 'Bu funksiyadan istifadə etmək üçün istifadəçi kvotasını aktiv edin'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -63,49 +51,25 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"user quota\" is translated as \"Quote per Benutzer\" which is not the most natural or accurate translation. \"Benutzerquote\" would be a more idiomatic and accurate translation for \"user quota\".",
-          "suggestion": "Um dieses Attribut nutzen zu können, aktivieren Sie die Benutzerquote in den <0>Speicherverwaltungseinstellungen</0>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The angle brackets `<0>` are present in both the English and Greek translations. These should be consistently handled and may indicate a placeholder that needs to be addressed in the integration process.",
-          "suggestion": "Ensure the placeholder `<0>` is handled correctly during integration, potentially by removing or replacing it with the intended display mechanism."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The angle brackets <0>...</0> are inconsistently used. They should be consistent throughout the document.",
-          "suggestion": "Ensure consistent use of angle brackets or remove them entirely if they are purely for formatting purposes and not integral to the translated text."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The `<0>` tags are present in both the English and Finnish text, indicating a formatting consistency issue.  While the tags themselves aren't necessarily incorrect, their presence in the translation mirrors the original and may need to be reviewed for relevance in the final product.",
-          "suggestion": "Review the purpose of the `<0>` tags and determine if they are necessary or should be removed from the Finnish translation. If retained, ensure their usage aligns with the intended functionality."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -117,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The tag <0> is not consistently rendered in Armenian. It seems the surrounding spaces might be needed.",
-          "suggestion": "Ensure proper spacing around the <0> tag in the Armenian translation:  `Որպեսզի կարողանաք օգտագործել այս հատկանիշը, միացրեք օգտվողի քվոտան <0>Պահպանման կառավարման կարգավորումներում</0>`"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -135,18 +93,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"To be able to use this attribute\" is not accurately reflected in the Japanese translation. 'この属性を使用するには' directly translates to 'To use this attribute,' which is correct, but the surrounding context implies enabling a specific setting, which isn't fully conveyed.",
-          "suggestion": "この属性を使用するには、<0>ストレージ管理設定</0>でユーザーのストレージ制限機能を有効にする必要があります。(This attribute requires you to enable the user storage limit function in the <0>Storage management settings</0>)"
-        },
-        {
-          "type": "formatting",
-          "description": "The zero-width tags `<0>` are present in both the English and Japanese text. While consistent, it's important to verify that these tags are intended and will be correctly interpreted by the system consuming the translation. No changes recommended, but awareness is needed.",
-          "suggestion": "Confirm the purpose and functionality of the `<0>` tags."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -158,13 +105,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term \"Storage management settings\" is translated as \"ການຕັ້ງຄ່າການຄຸ້ມຄອງເອກະສານ\". \"ເອກະສານ\" (documents) doesn't accurately convey \"Storage management\". A better translation would be something along the lines of \"ການຄຸ້ມຄອງຄຸ້ມ້າຮັກສາຂໍ້ມູນ\" or \"ການຕັ້ງຄ່າຄຸ້ມ້າຮັກສາຂໍ້ມູນ\".",
-          "suggestion": "Consider translating \"Storage management settings\" as \"ການຄຸ້ມຄອງຄຸ້ມ້າຮັກສາຂໍ້ມູນ\" or \"ການຕັ້ງຄ່າຄຸ້ມ້າຮັກສາຂໍ້ມູນ\" for better accuracy."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -182,25 +123,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of \"Storage management settings\" as \"Ustawienia zarządzania pamięcią\" is technically correct but could be more user-friendly. \"Ustawienia zarządzania przestrzenią dyskową\" might be a better option to specifically refer to disk space management, which is often what user quotas are tied to.",
-          "suggestion": "Ustawienia zarządzania przestrzenią dyskową"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tags `<0>` are not properly closed and are inconsistent with the English content. They should be closed.",
-          "suggestion": "Para poder utilizar este atributo, active a quota do utilizador nas <0>configurações de gestão de armazenamento</0>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -212,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Romanian translation maintains the <0> tags from the English source. While technically correct, it might be better to remove these tags for a cleaner presentation in the final product.",
-          "suggestion": "Remove the <0> tags from the translated text.  The text should read: \"Pentru a putea folosi acest atribut, activați cota de stocare pentru utilizatori în secțiunea Setările de gestionare a spațiului de stocare.\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -230,25 +153,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The tag `<0>` is inconsistent with the English version. The Sinhala translation maintains the tag which is correct but should be verified for consistent usage across all translations.",
-          "suggestion": "Confirm the consistent use of `<0>` tags across all localized content."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The tag `<0>` is present in both the English and Slovak versions. It's important to ensure consistent tag usage.",
-          "suggestion": "Verify that the tag `<0>` is consistently used and correctly processed by the localization system."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -260,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The angle brackets around 'Storage management settings' are not consistently applied in the Serbian translation. They should match the English format.",
-          "suggestion": "Change 'Подешавања управљања складиштем' to '<0>Подешавања управљања складиштем</0>'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -284,25 +189,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The bracketed section '<0>Storage management settings</0>' in the English content is correctly represented as '<0>Параметри керування сховищем</0>' in the Ukrainian translation. However, consistency in formatting should be ensured throughout all translations to maintain a professional look.",
-          "suggestion": "Ensure consistent formatting for bracketed sections across all translated content."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The bracketed section `<0>Storage management settings</0>` is not properly translated within the Vietnamese translation. It should reflect the original formatting.",
-          "suggestion": "Để có thể sử dụng thuộc tính này, hãy bật hạn mức người dùng trong <0>Cài đặt quản lý lưu trữ</0>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

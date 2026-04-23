@@ -3,7 +3,7 @@
   "content": "Room created",
   "content_en_sha1_hash": "e6343cefd4d7c4911de4502175b5289b119c5532",
   "created_at": "2025-05-19T21:30:56.082Z",
-  "updated_at": "2025-09-22T10:04:13.949Z",
+  "updated_at": "2026-04-07T19:35:05.093Z",
   "comment": {
     "text": "This translation key is used to display the message \"Room created\" in various parts of the application. It appears as a notification or confirmation message when a new room is created, typically on a button or dialog triggered by user action.",
     "is_auto": true,
@@ -81,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ստեղծվել է սենյակ' while literally meaning 'A room was created', doesn't convey the same meaning as 'Room created'. It's passive voice and less concise.",
-          "suggestion": "Consider 'Սենյակ ստեղծվեց' or 'Սենյակը ստեղծվեց' (depending on whether 'the' is appropriate in the context) which are more active and closer to the original meaning."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -177,25 +171,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Соба креирана\" is not the correct translation of \"Room created.\" \"Соба\" means \"room\", but it should be \"Упориште\" or \"Просторија\". \"Креирана\" is the correct form of 'created'.",
-          "suggestion": "Упориште креирано"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Soba kreirana' doesn't quite capture the meaning of 'Room created'. 'Kreirana' implies that the room was *created* in a specific, possibly artistic or designed, sense. 'Created' in this context likely refers to a room being added to a system or database.",
-          "suggestion": "Soba je kreirana"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

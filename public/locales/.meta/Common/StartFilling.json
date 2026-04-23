@@ -3,7 +3,7 @@
   "content": "Start filling",
   "content_en_sha1_hash": "3e49f427774cb5019a379c9d210feb129e86c45e",
   "created_at": "2025-05-19T21:30:49.045Z",
-  "updated_at": "2026-03-31T15:18:46.639Z",
+  "updated_at": "2026-04-10T08:21:04.373Z",
   "comment": {
     "text": "This translation key is used to display the text \"Start filling\" in various UI elements, such as a modal dialog header and a dropdown option, where it serves as an action label or button text.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2192,
+      "line_number": 2191,
       "context": "isSeparator: true,\n },\n {\n id: \"option_start-filling\",\n key: \"start-filling\",\n label: t(\"Common:StartFilling\"),\n icon: FormFillRectSvgUrl,\n onClick: () => this.onClickStartFilling(item, t),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
@@ -39,13 +39,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Doldurmağa başlayın' is technically correct but sounds somewhat formal and less natural for a simple instruction like 'Start filling'. A more common and user-friendly translation would be better.",
-          "suggestion": "Başlamağa doldur"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -93,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Սկսել լրացնելը' is a bit literal and clunky. While technically correct, it's not the most natural way to say 'Start filling' in Armenian. It emphasizes the *act* of starting to fill, rather than just 'Start filling'.",
-          "suggestion": "Consider a more natural phrasing such as 'Լրացնել սկսել' (Lracnel sksel) or simply 'Սկսեք լրացնել' (Sks'ek lracnel) depending on the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -117,13 +105,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation '작성 시작' translates to 'Start writing' or 'Writing start', not directly 'Start filling'. While it could be contextually appropriate, it's not a literal translation.",
-          "suggestion": "Consider '채우기 시작' for a more literal translation of 'Start filling', or evaluate if '작성 시작' fits the intended meaning in context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -132,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ເລີ່ມຕື່ນຕົວແລ້ວ' (reem dtun dtua laeo) translates to 'Start waking up' or 'Begin to wake up'. It doesn't directly mean 'Start filling' which is the intended meaning of the English phrase. It carries a different connotation of awakening or becoming active.",
-          "suggestion": "A more accurate translation for 'Start filling' would depend on the context. Possible suggestions include: ຕື່ມຂໍ້ມູນເລີ່ມຕົ້ນ (teum khomnum reem ton - start filling in information), ຫຼື ພິມຂໍ້ມູນເລີ່ມຕົ້ນ (phim khomnum reem ton - start typing information)."
+          "description": "The Lao translation 'ເລີ່ມຕື່ນຕົວແລ້ວ' means 'Already started to wake up' or 'Already started to become active', which is contextually incorrect for a UI action like 'Start filling' (e.g., filling a form).",
+          "suggestion": "ເລີ່ມຕື່ມຂໍ້ມູນ"
         }
       ],
       "approved_at": null
@@ -186,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'ආරම්භ කරන්න පුරනවා.' is not an accurate translation of 'Start filling'. 'ආරම්භ කරන්න' means 'start' or 'begin', but 'පුරනවා' means 'to fill' or 'to complete'. The combination suggests 'start filling' but is awkward and not idiomatic Sinhala. A more natural translation would focus on the action of filling.",
-          "suggestion": "පිරවන්න ගණන් (Pirawanna ganan) or පිරවන්න شروع කරන්න (Pirawanna suruwa karanawa)."
+          "description": "The Sinhala translation 'ආරම්භ කරන්න පුරනවා.' translates to 'Start to fill' or 'Starting to fill' in a descriptive/sentence form, which is grammatically awkward for a UI action label or button. It sounds like a statement rather than a command/action.",
+          "suggestion": "පුරන්න ආරම්භ කරන්න"
         }
       ],
       "approved_at": null
@@ -207,25 +189,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Почните са попуњавањем' while technically correct, isn't the most natural or concise way to say 'Start filling' in Serbian. A more common and flowing translation would be 'Почни са попуњавањем' or 'Започни попуњавање'.",
-          "suggestion": "Почни са попуњавањем"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Počnite sa popunjavanjem\" is understandable, a more natural and concise translation of \"Start filling\" in Serbian (Latin) would be \"Popunite\". \"Počnite sa popunjavanjem\" is a bit too literal and verbose.",
-          "suggestion": "Popunite"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

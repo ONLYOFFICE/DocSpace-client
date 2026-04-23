@@ -3,7 +3,23 @@
  * Verify Language Translations and Update Spell Check Issues Metadata
  *
  * This script scans the locales directories, compares non-English translations with English ones,
- * and updates the ai_spell_check_issues field in the metadata files with issues found by Ollama.
+ * and updates the ai_spell_check_issues field in the metadata files with issues found by an LLM.
+ *
+ * Supports two providers:
+ *   --provider=ollama      (default) Use local Ollama instance
+ *   --provider=openrouter  Use OpenRouter API (requires OPENROUTER_API_KEY in .env)
+ *
+ * Usage:
+ *   node verify-translations-spell-check.js [languages] [--provider=ollama|openrouter]
+ *
+ * Options:
+ *   --no-llm                   Run only deterministic checks (no API calls, very fast)
+ *
+ * Examples:
+ *   node verify-translations-spell-check.js fr,de
+ *   node verify-translations-spell-check.js --provider=openrouter
+ *   node verify-translations-spell-check.js fr,de --provider=openrouter
+ *   node verify-translations-spell-check.js --no-llm
  */
 const fs = require("fs-extra");
 const { writeJsonWithConsistentEol } = require("../utils/fsUtils");
@@ -13,35 +29,46 @@ const {
   appRootPath,
   projectLocalesMap,
   ollamaConfig,
+  openRouterConfig,
 } = require("../config/config");
-const axios = require("axios");
-const { translate } = require("@vitalets/google-translate-api");
-const { HttpsProxyAgent } = require("https-proxy-agent");
+const { Ollama } = require("ollama");
+const { verifyOllamaConnection } = require("../utils/ollamaUtils");
+const { spellCheck: spellCheckPrompt } = require("../prompts/spell-check");
 
-const MODEL = process.env.OLLAMA_SPELLCHECK_MODEL || "gemma3n:latest";
-const LANGUAGES_TO_CHECK = process.argv[2] ? process.argv[2].split(",") : null;
-const OLLAMA_TIMEOUT = parseInt(process.env.OLLAMA_TIMEOUT, 10) || 90000;
-const USE_GOOGLE_PRECHECK = process.env.USE_GOOGLE_PRECHECK === "true"; // Default false
-const SIMILARITY_THRESHOLD =
-  parseFloat(process.env.SIMILARITY_THRESHOLD) || 0.85; // 85% similarity
-const GOOGLE_TRANSLATE_DELAY =
-  parseInt(process.env.GOOGLE_TRANSLATE_DELAY, 10) || 100; // 100ms delay between requests
-const PROXY_TIMEOUT = parseInt(process.env.PROXY_TIMEOUT, 10) || 5000; // 5 seconds max for proxy request
-const PROXY_API_URL =
-  process.env.PROXY_API_URL ||
-  "https://proxylist.geonode.com/api/proxy-list?limit=500&page=1&sort_by=lastChecked&sort_type=desc&protocols=http%2Chttps";
-const PROXY_BLACKLIST_FILE = path.join(appRootPath, "proxy-blacklist.json");
+// ─── CLI args ─────────────────────────────────────────────────────────────────
+
+const cliArgs = process.argv.slice(2);
+const providerArg = cliArgs.find((a) => a.startsWith("--provider="));
+const positionalArgs = cliArgs.filter((a) => !a.startsWith("--"));
+
+const NO_LLM = cliArgs.includes("--no-llm");
+
+// Auto-detect provider: use openrouter if key is set and no explicit --provider
+const PROVIDER = NO_LLM
+  ? "none"
+  : providerArg
+    ? providerArg.split("=")[1]
+    : openRouterConfig.apiKey
+      ? "openrouter"
+      : "ollama";
+
+const OLLAMA_MODEL = process.env.OLLAMA_SPELLCHECK_MODEL || "gemma4:latest";
+const OPENROUTER_MODEL = process.env.OPENROUTER_SPELLCHECK_MODEL || openRouterConfig.model;
+const MODEL = PROVIDER === "openrouter" ? OPENROUTER_MODEL : OLLAMA_MODEL;
+
+const LANGUAGES_TO_CHECK = positionalArgs[0] ? positionalArgs[0].split(",") : null;
 const CHECKPOINT_FILE = path.join(appRootPath, "verification-checkpoint.json");
 
-// Dynamic proxy list - will be loaded from API
-let PROXY_LIST = [];
-let currentProxyIndex = 0;
-const failedProxies = new Set();
-const proxyBlacklist = new Set(); // Persistent blacklist
-let useProxyMode = false; // Start without proxy, enable only on rate limit
-let lastDirectAttempt = 0; // Timestamp of last direct connection attempt
-let directConnectionAttempts = 0; // Counter for direct connection attempts
-const DIRECT_RETRY_INTERVAL = 60000; // Try direct connection every 60 seconds
+/**
+ * Convert an absolute metadata file path to a portable relative key.
+ * "/any/path/to/public/locales/.meta/Common/About.json" → ".meta/Common/About.json"
+ * "C:\\Users\\...\\public\\locales\\.meta\\Common\\About.json" → ".meta/Common/About.json"
+ */
+function toPortablePath(filePath) {
+  const normalized = filePath.replace(/\\/g, "/");
+  const metaIdx = normalized.lastIndexOf(".meta/");
+  return metaIdx !== -1 ? normalized.slice(metaIdx) : path.basename(filePath);
+}
 
 // Checkpoint data
 let checkpoint = {
@@ -94,29 +121,6 @@ const languageMap = {
   "uk-UA": "Ukrainian",
   vi: "Vietnamese",
 };
-
-/**
- * Checks if Ollama is running and available
- * @returns {Promise<boolean>} True if Ollama is running
- */
-async function isOllamaRunning() {
-  try {
-    const response = await axios.get(ollamaConfig.apiUrl + "/api/tags", {
-      timeout: 2000, // 2 second timeout
-    });
-    if (response.status === 200) {
-      console.log("Successfully connected to Ollama.");
-      return true;
-    }
-    console.log(
-      `Ollama connection check failed with status: ${response.status}`
-    );
-    return false;
-  } catch (error) {
-    console.log(`Ollama connection check failed: ${error.message}`);
-    return false;
-  }
-}
 
 /**
  * Load checkpoint from file
@@ -185,400 +189,666 @@ function clearCheckpoint() {
   }
 }
 
+// ─── Provider: generate completion ────────────────────────────────────────────
+
 /**
- * Load proxy blacklist from file
- * @returns {Set<string>} Set of blacklisted proxy URLs
+ * Generate a streaming completion via Ollama
+ * @param {string} prompt
+ * @returns {Promise<string>} The response text
  */
-function loadProxyBlacklist() {
-  try {
-    if (fs.existsSync(PROXY_BLACKLIST_FILE)) {
-      const data = fs.readFileSync(PROXY_BLACKLIST_FILE, "utf8");
-      const blacklist = JSON.parse(data);
-      console.log(
-        `📋 Loaded ${blacklist.length} blacklisted proxies from file`
-      );
-      return new Set(blacklist);
+/**
+ * Detects when a model enters a repetition loop.
+ * Maintains a sliding window; when the same phrase repeats 3+ times, returns true.
+ */
+class RepetitionDetector {
+  constructor({ maxRepeats = 3, windowSize = 3000 } = {}) {
+    this.maxRepeats = maxRepeats;
+    this.windowSize = windowSize;
+    this.buffer = "";
+  }
+  feed(text) {
+    this.buffer += text;
+    if (this.buffer.length > this.windowSize) {
+      this.buffer = this.buffer.slice(-this.windowSize);
     }
-  } catch (error) {
-    console.warn(`⚠️  Failed to load proxy blacklist: ${error.message}`);
-  }
-  return new Set();
-}
-
-/**
- * Save proxy blacklist to file
- */
-function saveProxyBlacklist() {
-  try {
-    const blacklistArray = Array.from(proxyBlacklist);
-    fs.writeFileSync(
-      PROXY_BLACKLIST_FILE,
-      JSON.stringify(blacklistArray, null, 2),
-      "utf8"
-    );
-    console.log(
-      `💾 Saved ${blacklistArray.length} blacklisted proxies to file`
-    );
-  } catch (error) {
-    console.error(`❌ Failed to save proxy blacklist: ${error.message}`);
-  }
-}
-
-/**
- * Fetch fresh proxy list from API
- * @returns {Promise<Array>} Array of proxy URLs
- */
-async function fetchProxyList() {
-  try {
-    console.log("🔄 Fetching fresh proxy list from API...");
-    const response = await axios.get(PROXY_API_URL, { timeout: 10000 });
-
-    if (
-      response.data &&
-      response.data.data &&
-      Array.isArray(response.data.data)
-    ) {
-      const allProxies = response.data.data
-        .filter((proxy) => proxy.protocols && proxy.protocols.includes("http"))
-        .map((proxy) => {
-          const protocol = proxy.protocols.includes("https") ? "https" : "http";
-          return `${protocol}://${proxy.ip}:${proxy.port}`;
-        });
-
-      // Filter out blacklisted proxies
-      const proxies = allProxies.filter((proxy) => !proxyBlacklist.has(proxy));
-
-      const filtered = allProxies.length - proxies.length;
-      console.log(
-        `✅ Loaded ${proxies.length} fresh proxies (filtered ${filtered} blacklisted)`
-      );
-      return proxies;
+    const buf = this.buffer;
+    if (buf.length < 100) return false;
+    for (const patLen of [150, 80, 40, 20]) {
+      if (buf.length < patLen * 2) continue;
+      const pattern = buf.slice(-patLen);
+      let count = 0;
+      let pos = 0;
+      while ((pos = buf.indexOf(pattern, pos)) !== -1) {
+        count++;
+        pos += patLen;
+      }
+      if (count >= this.maxRepeats) return true;
     }
-
-    console.warn("⚠️  Failed to parse proxy list from API");
-    return [];
-  } catch (error) {
-    console.error(`❌ Failed to fetch proxy list: ${error.message}`);
-    return [];
+    return false;
   }
 }
 
-/**
- * Enable proxy mode when rate limit is hit
- */
-async function enableProxyMode() {
-  if (!useProxyMode) {
-    useProxyMode = true;
-    lastDirectAttempt = Date.now();
-    console.log("\n⚠️  Rate limit detected! Enabling proxy mode...");
+async function generateOllama(prompt) {
+  const ollamaClient = new Ollama({ host: ollamaConfig.apiUrl });
+  const loopDetector = new RepetitionDetector();
+  let activeTimeout = null;
+  const resetInactivityTimer = (stream) => {
+    clearTimeout(activeTimeout);
+    activeTimeout = setTimeout(() => {
+      stream.abort();
+    }, ollamaConfig.inactivityTimeout);
+  };
 
-    // Fetch fresh proxy list if empty
-    if (PROXY_LIST.length === 0) {
-      PROXY_LIST = await fetchProxyList();
+  let fullResponse = "";
+  let thinkingStarted = false;
+  let responseStarted = false;
 
-      if (PROXY_LIST.length === 0) {
-        console.error("❌ No proxies available! Continuing without proxy...");
-        useProxyMode = false;
-        return;
+  const stream = await ollamaClient.generate({
+    model: MODEL,
+    prompt: prompt,
+    stream: true,
+    think: true,
+    options: {
+      temperature: 0.1,
+      num_predict: 8192,
+    },
+  });
+
+  activeTimeout = setTimeout(() => {
+    stream.abort();
+  }, ollamaConfig.firstTokenTimeout);
+
+  try {
+    for await (const chunk of stream) {
+      const thinkingToken = chunk.thinking ?? "";
+      if (thinkingToken) {
+        if (!thinkingStarted) {
+          process.stdout.write("  [think] ");
+          thinkingStarted = true;
+        }
+        process.stdout.write(thinkingToken);
+        resetInactivityTimer(stream);
+      }
+
+      const token = chunk.response ?? "";
+      if (token) {
+        if (!responseStarted) {
+          if (thinkingStarted) process.stdout.write("\n");
+          process.stdout.write("  [response] ");
+          responseStarted = true;
+        }
+        fullResponse += token;
+        process.stdout.write(token);
+        resetInactivityTimer(stream);
+
+        if (loopDetector.feed(token)) {
+          console.warn("\n  [ABORT] Repetition loop detected — stopping generation");
+          stream.abort();
+          break;
+        }
       }
     }
-
-    console.log(
-      `📡 Available proxies: ${PROXY_LIST.length - failedProxies.size}/${
-        PROXY_LIST.length
-      }\n`
-    );
+    if (thinkingStarted || responseStarted) process.stdout.write("\n");
+  } finally {
+    clearTimeout(activeTimeout);
   }
+
+  return fullResponse;
 }
 
 /**
- * Disable proxy mode when direct connection works again
+ * Generate a streaming completion via OpenRouter (OpenAI-compatible API)
+ * @param {string} prompt
+ * @returns {Promise<string>} The response text
  */
-function disableProxyMode() {
-  if (useProxyMode) {
-    useProxyMode = false;
-    console.log("\n✅ Rate limit lifted! Disabling proxy mode...\n");
+async function generateOpenRouter(prompt) {
+  const controller = new AbortController();
+  const loopDetector = new RepetitionDetector();
+  let activeTimeout = null;
+  const resetInactivityTimer = () => {
+    clearTimeout(activeTimeout);
+    activeTimeout = setTimeout(() => {
+      controller.abort();
+    }, openRouterConfig.inactivityTimeout);
+  };
+
+  // First-token timeout
+  activeTimeout = setTimeout(() => {
+    controller.abort();
+  }, openRouterConfig.firstTokenTimeout);
+
+  const response = await fetch(`${openRouterConfig.apiUrl}/chat/completions`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${openRouterConfig.apiKey}`,
+    },
+    body: JSON.stringify({
+      model: MODEL,
+      messages: [{ role: "user", content: prompt }],
+      temperature: 0.1,
+      max_tokens: 8192,
+      stream: true,
+    }),
+    signal: controller.signal,
+  });
+
+  if (!response.ok) {
+    const body = await response.text();
+    throw new Error(`OpenRouter API error ${response.status}: ${body}`);
   }
+
+  let fullResponse = "";
+  let responseStarted = false;
+
+  // Parse SSE stream
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = "";
+
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split("\n");
+      buffer = lines.pop(); // keep incomplete line in buffer
+
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed || !trimmed.startsWith("data: ")) continue;
+        const data = trimmed.slice(6);
+        if (data === "[DONE]") continue;
+
+        try {
+          const parsed = JSON.parse(data);
+          const delta = parsed.choices?.[0]?.delta;
+          if (!delta) continue;
+
+          // Handle reasoning tokens (some OpenRouter models support this)
+          const reasoning = delta.reasoning || delta.reasoning_content || "";
+          if (reasoning) {
+            if (!responseStarted) {
+              process.stdout.write("  [think] ");
+            }
+            process.stdout.write(reasoning);
+            resetInactivityTimer();
+          }
+
+          const content = delta.content || "";
+          if (content) {
+            if (!responseStarted) {
+              process.stdout.write("  [response] ");
+              responseStarted = true;
+            }
+            fullResponse += content;
+            process.stdout.write(content);
+            resetInactivityTimer();
+
+            if (loopDetector.feed(content)) {
+              console.warn("\n  [ABORT] Repetition loop detected — stopping generation");
+              controller.abort();
+              break;
+            }
+          }
+        } catch {
+          // skip malformed SSE chunks
+        }
+      }
+    }
+    if (responseStarted) process.stdout.write("\n");
+  } finally {
+    clearTimeout(activeTimeout);
+  }
+
+  return fullResponse;
 }
 
 /**
- * Check if we should try direct connection
- * @returns {boolean} True if should try direct
+ * Generate completion using the active provider
+ * @param {string} prompt
+ * @returns {Promise<string>} The response text
  */
-function shouldTryDirectConnection() {
-  if (!useProxyMode) {
-    return true; // Always use direct if not in proxy mode
+async function generateCompletion(prompt) {
+  if (PROVIDER === "openrouter") {
+    return generateOpenRouter(prompt);
   }
-
-  const now = Date.now();
-  const timeSinceLastAttempt = now - lastDirectAttempt;
-
-  // Try direct connection every DIRECT_RETRY_INTERVAL
-  if (timeSinceLastAttempt >= DIRECT_RETRY_INTERVAL) {
-    lastDirectAttempt = now;
-    directConnectionAttempts++;
-    console.log(
-      `🔍 Attempting direct connection (attempt #${directConnectionAttempts})...`
-    );
-    return true;
-  }
-
-  return false;
+  return generateOllama(prompt);
 }
 
 /**
- * Get next working proxy from the list
- * @returns {Promise<string|null>} Proxy URL or null if proxy mode is disabled
+ * Verify provider connectivity
+ * @returns {Promise<boolean>}
  */
-async function getNextProxy() {
-  if (!useProxyMode || PROXY_LIST.length === 0) {
+async function verifyProviderConnection() {
+  if (PROVIDER === "openrouter") {
+    if (!openRouterConfig.apiKey) {
+      console.error("OPENROUTER_API_KEY is not set in .env");
+      return false;
+    }
+    try {
+      const response = await fetch(`${openRouterConfig.apiUrl}/models`, {
+        headers: { Authorization: `Bearer ${openRouterConfig.apiKey}` },
+      });
+      if (!response.ok) {
+        console.error(`OpenRouter connection failed: ${response.status} ${response.statusText}`);
+        return false;
+      }
+      return true;
+    } catch (error) {
+      console.error(`OpenRouter connection error: ${error.message}`);
+      return false;
+    }
+  }
+  return verifyOllamaConnection();
+}
+
+// ─── Key context from metadata ────────────────────────────────────────────────
+
+/**
+ * Extract context (comment + usage examples) from a metadata object.
+ * Mirrors readKeyContext() from ollama.js routes.
+ * @param {Object} metadata - Parsed .meta JSON
+ * @returns {Object|null} { comment, usages } or null if no context available
+ */
+function extractKeyContext(metadata) {
+  if (!metadata) return null;
+
+  const comment = metadata.comment?.text || null;
+  const usages = (metadata.usage || [])
+    .slice(0, 3) // limit to 3 usage examples to keep prompt concise
+    .map((u) => u.context?.trim())
+    .filter(Boolean);
+
+  if (!comment && usages.length === 0) return null;
+  return { comment, usages };
+}
+
+/**
+ * Build a context block string for inclusion in the verification prompt.
+ * @param {Object|null} keyContext - from extractKeyContext()
+ * @returns {string} Context block or empty string
+ */
+function formatContextBlock(keyContext) {
+  if (!keyContext) return "";
+
+  const parts = [];
+  if (keyContext.comment) {
+    parts.push(`**Context:** ${keyContext.comment}`);
+  }
+  if (keyContext.usages && keyContext.usages.length > 0) {
+    parts.push(`**Usage in code:**\n${keyContext.usages.map((u) => `- \`${u}\``).join("\n")}`);
+  }
+  return parts.join("\n");
+}
+
+// ─── Deterministic checks (no LLM) ───────────────────────────────────────────
+
+// Forbidden literal values in translations (should use {{productName}} etc.)
+// Mirrors ForbiddenValueElementsTest from locales.test.js
+const FORBIDDEN_ELEMENTS = ["ONLYOFFICE", "DOCSPACE"];
+const SKIP_FORBIDDEN_KEYS = new Set([
+  "OrganizationName", "ProductName", "ProductEditorsName",
+]);
+
+// Languages that use non-Latin primary scripts
+const NON_LATIN_LANGUAGES = new Set([
+  "ar-SA", "ja-JP", "zh-CN", "ko-KR", "hy-AM", "el-GR",
+  "lo-LA", "si", "uk-UA", "ru", "bg", "sr-Cyrl-RS",
+]);
+
+/**
+ * Extract all {{variable}} tokens from a string
+ * @param {string} text
+ * @returns {string[]} Sorted array of variable names
+ */
+function extractVariables(text) {
+  const matches = text.match(/\{\{[^}]+\}\}/g) || [];
+  return matches.sort();
+}
+
+/**
+ * Extract all React Trans tags (<0>, </0>, <1>, etc.) and HTML tags from a string
+ * @param {string} text
+ * @returns {string[]} Sorted array of tags
+ */
+function extractTags(text) {
+  const matches = text.match(/<\/?[a-zA-Z][^>]*\/?>/g) || [];
+  return matches.sort();
+}
+
+/**
+ * Extract all HTML entities (&nbsp;, &amp;, etc.) from a string
+ * @param {string} text
+ * @returns {string[]} Sorted array of entities
+ */
+function extractHtmlEntities(text) {
+  const matches = text.match(/&[a-zA-Z]+;/g) || [];
+  return matches.sort();
+}
+
+/**
+ * Check if a string contains at least one non-ASCII/non-punctuation character
+ * (i.e., at least one character from a non-Latin script)
+ * @param {string} text
+ * @returns {boolean}
+ */
+function hasNonLatinChars(text) {
+  // Strip variables, tags, numbers, punctuation, spaces — check if anything non-ASCII remains
+  const stripped = text
+    .replace(/\{\{[^}]+\}\}/g, "")
+    .replace(/<\/?[^>]+>/g, "")
+    .replace(/&[a-zA-Z]+;/g, "")
+    .replace(/[0-9\s\p{P}\p{S}]/gu, "");
+  // Check for characters outside basic Latin
+  return /[^\u0000-\u007F]/.test(stripped);
+}
+
+/**
+ * Run all deterministic checks on a single translation pair.
+ * Returns issues in the same format as LLM issues: { type, description, suggestion }
+ *
+ * @param {string} englishContent - English source text
+ * @param {string} translatedContent - Translated text
+ * @param {string} language - Language code
+ * @param {string} keyName - The bare key name (without namespace prefix)
+ * @returns {Array<Object>} Array of detected issues
+ */
+function runDeterministicChecks(englishContent, translatedContent, language, keyName = "") {
+  const issues = [];
+
+  // 1. Empty / whitespace-only translation
+  if (!translatedContent || !translatedContent.trim()) {
+    issues.push({
+      type: "empty_translation",
+      description: "Translation is empty or contains only whitespace",
+      suggestion: "",
+    });
+    return issues; // no point checking further
+  }
+
+  // 2. Missing {{variables}}
+  const enVars = extractVariables(englishContent);
+  const trVars = extractVariables(translatedContent);
+  if (enVars.length > 0 || trVars.length > 0) {
+    const missingVars = enVars.filter((v) => !trVars.includes(v));
+    const extraVars = trVars.filter((v) => !enVars.includes(v));
+    if (missingVars.length > 0) {
+      issues.push({
+        type: "missing_variable",
+        description: `Missing variable(s): ${missingVars.join(", ")}`,
+        suggestion: "",
+      });
+    }
+    if (extraVars.length > 0) {
+      issues.push({
+        type: "extra_variable",
+        description: `Extra variable(s) not in English: ${extraVars.join(", ")}`,
+        suggestion: "",
+      });
+    }
+  }
+
+  // 3. Missing/extra React & HTML tags
+  //    Normalize tags (collapse internal whitespace) for comparison,
+  //    but flag malformed tags with extra spaces separately.
+  const normalizeTag = (t) => t.replace(/\s+/g, " ").replace(/\s>/g, ">").replace(/\s\/>/g, "/>");
+  const enTags = extractTags(englishContent).map(normalizeTag);
+  const trTagsRaw = extractTags(translatedContent);
+  const trTags = trTagsRaw.map(normalizeTag);
+
+  if (enTags.length > 0 || trTags.length > 0) {
+    const missingTags = enTags.filter((t) => !trTags.includes(t));
+    const extraTags = trTags.filter((t) => !enTags.includes(t));
+    if (missingTags.length > 0) {
+      issues.push({
+        type: "missing_tag",
+        description: `Missing tag(s): ${missingTags.join(", ")}`,
+        suggestion: "",
+      });
+    }
+    if (extraTags.length > 0) {
+      issues.push({
+        type: "extra_tag",
+        description: `Extra tag(s) not in English: ${extraTags.join(", ")}`,
+        suggestion: "",
+      });
+    }
+  }
+
+  // 3b. Malformed tags — tags with internal whitespace (e.g., "<strong >" instead of "<strong>")
+  const malformedTags = trTagsRaw.filter((t) => /\s+\/?>/.test(t) || /<\s+/.test(t));
+  if (malformedTags.length > 0) {
+    issues.push({
+      type: "malformed_tag",
+      description: `Tag(s) with extra whitespace: ${malformedTags.join(", ")}`,
+      suggestion: malformedTags.map(normalizeTag).join(", "),
+    });
+  }
+
+  // 4. HTML entity mismatch
+  const enEntities = extractHtmlEntities(englishContent);
+  const trEntities = extractHtmlEntities(translatedContent);
+  if (enEntities.join(",") !== trEntities.join(",")) {
+    const missing = enEntities.filter((e) => !trEntities.includes(e));
+    const extra = trEntities.filter((e) => !enEntities.includes(e));
+    const parts = [];
+    if (missing.length) parts.push(`missing: ${missing.join(", ")}`);
+    if (extra.length) parts.push(`extra: ${extra.join(", ")}`);
+    if (parts.length > 0) {
+      issues.push({
+        type: "html_entity_mismatch",
+        description: `HTML entity mismatch — ${parts.join("; ")}`,
+        suggestion: "",
+      });
+    }
+  }
+
+  // 5. Suspicious length ratio (only for strings > 10 chars to avoid false positives on short labels)
+  //    CJK languages use fewer characters per concept, so use looser thresholds.
+  const CJK_LANGUAGES = new Set(["ja-JP", "zh-CN", "ko-KR"]);
+  const isCJK = CJK_LANGUAGES.has(language);
+  const minRatio = isCJK ? 0.05 : 0.15;
+  const maxRatio = isCJK ? 8 : 5;
+
+  if (englishContent.length > 10) {
+    const ratio = translatedContent.length / englishContent.length;
+    if (ratio > maxRatio) {
+      issues.push({
+        type: "suspicious_length",
+        description: `Translation is ${ratio.toFixed(1)}x longer than English (${translatedContent.length} vs ${englishContent.length} chars) — possibly duplicated text`,
+        suggestion: "",
+      });
+    } else if (ratio < minRatio) {
+      issues.push({
+        type: "suspicious_length",
+        description: `Translation is ${ratio.toFixed(2)}x the length of English (${translatedContent.length} vs ${englishContent.length} chars) — possibly truncated`,
+        suggestion: "",
+      });
+    }
+  }
+
+  // 6. Non-Latin script check — translation contains only ASCII for languages that should use other scripts
+  //    Skip if translation is identical to English (intentional: brand names, product names, etc.)
+  //    Require English text > 15 chars (after stripping markup) to avoid flagging short
+  //    terms, abbreviations, and proper nouns (e.g. "PDFs", "E-mail", "OAuth 2.0").
+  if (NON_LATIN_LANGUAGES.has(language) && englishContent !== translatedContent) {
+    const enTextOnly = englishContent
+      .replace(/\{\{[^}]+\}\}/g, "")
+      .replace(/<\/?[^>]+>/g, "")
+      .replace(/&[a-zA-Z]+;/g, "")
+      .trim();
+
+    if (enTextOnly.length > 15 && !hasNonLatinChars(translatedContent)) {
+      issues.push({
+        type: "wrong_script",
+        description: `Translation for ${language} contains only Latin/ASCII characters — likely untranslated`,
+        suggestion: "",
+      });
+    }
+  }
+
+  // 7. Trailing punctuation consistency
+  //    Only check structural punctuation (:) for all languages.
+  //    Period/exclamation checks only for Latin-script languages — many other
+  //    scripts (Arabic, CJK, etc.) have different sentence-ending conventions.
+  const LATIN_SCRIPT_LANGUAGES = new Set([
+    "de", "de-CH", "fr", "es", "es-MX", "it", "pt", "pt-BR",
+    "pl", "nl", "cs", "sk", "ro", "lv", "sl", "fi", "tr",
+    "sq-AL", "sr-Latn-RS", "az", "vi",
+  ]);
+
+  const enTrimmed = englishContent.trim();
+  const trTrimmed = translatedContent.trim();
+  if (enTrimmed.length > 20) {
+    const enEndChar = enTrimmed.slice(-1);
+    const trEndChar = trTrimmed.slice(-1);
+
+    // Colon check for all languages (structural, not stylistic)
+    if (enEndChar === ":" && trEndChar !== ":" && trEndChar !== "：") {
+      issues.push({
+        type: "punctuation_mismatch",
+        description: `English ends with ":" but translation ends with "${trEndChar}"`,
+        suggestion: "",
+      });
+    }
+
+    // Period/exclamation check only for Latin-script languages
+    if (LATIN_SCRIPT_LANGUAGES.has(language) && ".!".includes(enEndChar) && trEndChar !== enEndChar) {
+      const equivalentEnds = {
+        ".": ["."],
+        "!": ["!", "！"],
+      };
+      const allowed = equivalentEnds[enEndChar] || [enEndChar];
+      if (!allowed.includes(trEndChar)) {
+        issues.push({
+          type: "punctuation_mismatch",
+          description: `English ends with "${enEndChar}" but translation ends with "${trEndChar}"`,
+          suggestion: "",
+        });
+      }
+    }
+  }
+
+  // 8. Unpaired brackets/quotes
+  const bracketPairs = [
+    ["(", ")"],
+    ["[", "]"],
+    ["{", "}"],
+    ["\u00AB", "\u00BB"], // « »
+  ];
+  for (const [open, close] of bracketPairs) {
+    // Skip {{variable}} braces — they are checked separately
+    if (open === "{") continue;
+    const openCount = (translatedContent.match(new RegExp(`\\${open}`, "g")) || []).length;
+    const closeCount = (translatedContent.match(new RegExp(`\\${close}`, "g")) || []).length;
+    if (openCount !== closeCount) {
+      issues.push({
+        type: "unpaired_bracket",
+        description: `Unpaired "${open}${close}" in translation: ${openCount} open vs ${closeCount} close`,
+        suggestion: "",
+      });
+    }
+  }
+
+  // 8b. Smart-quote pairing: „ (U+201E), " (U+201C), " (U+201D) — total count must be even
+  //     Languages like de, cs, bg use „..." (U+201E + U+201C), en uses "..." (U+201C + U+201D)
+  const smartQuoteTotal =
+    (translatedContent.match(/\u201C/g) || []).length +
+    (translatedContent.match(/\u201D/g) || []).length +
+    (translatedContent.match(/\u201E/g) || []).length;
+  if (smartQuoteTotal > 0 && smartQuoteTotal % 2 !== 0) {
+    issues.push({
+      type: "unpaired_bracket",
+      description: `Odd number of smart quotes (\u201C\u201D\u201E): ${smartQuoteTotal} total (should be even)`,
+      suggestion: "",
+    });
+  }
+
+  // 9. Forbidden literal values (ONLYOFFICE, DOCSPACE) — should use {{productName}} etc.
+  //    Mirrors ForbiddenValueElementsTest from locales.test.js
+  if (!SKIP_FORBIDDEN_KEYS.has(keyName)) {
+    const upperTranslation = translatedContent.toUpperCase();
+    const found = FORBIDDEN_ELEMENTS.filter((el) => upperTranslation.includes(el));
+    if (found.length > 0) {
+      issues.push({
+        type: "forbidden_value",
+        description: `Translation contains hardcoded brand name(s): ${found.join(", ")} — should use a template variable like {{productName}}`,
+        suggestion: "",
+      });
+    }
+  }
+
+  return issues;
+}
+
+/**
+ * Check for orphan keys — keys present in a language file but missing from English.
+ * These are stale translations that should be removed.
+ * Mirrors NotFoundEnKey test from locales.test.js.
+ *
+ * @param {Object} enData - { namespace → { key → value } } for English
+ * @param {Object} langData - { namespace → { key → value } } for the target language
+ * @returns {Array<Object>} Array of { namespace, key } orphan entries
+ */
+function findOrphanKeys(enData, langData) {
+  const orphans = [];
+  for (const ns of Object.keys(langData)) {
+    const enNs = enData[ns] || {};
+    const langNs = langData[ns] || {};
+    for (const key of Object.keys(langNs)) {
+      if (!(key in enNs)) {
+        orphans.push({ namespace: ns, key });
+      }
+    }
+  }
+  return orphans;
+}
+
+// ─── Verification logic (LLM) ────────────────────────────────────────────────
+
+/**
+ * Extracts and parses JSON from LLM response text
+ * @param {string} responseText - Raw response text
+ * @returns {Array|null} Parsed array or null on failure
+ */
+function parseIssuesFromResponse(responseText) {
+  let jsonText = responseText.trim();
+
+  // Remove markdown code blocks if present
+  if (jsonText.startsWith("```")) {
+    const firstNewline = jsonText.indexOf("\n");
+    if (firstNewline !== -1) {
+      jsonText = jsonText.substring(firstNewline + 1);
+    }
+    const lastBackticks = jsonText.lastIndexOf("```");
+    if (lastBackticks !== -1) {
+      jsonText = jsonText.substring(0, lastBackticks);
+    }
+    jsonText = jsonText.trim();
+  }
+
+  // Check if response is truncated or corrupted
+  if (jsonText.includes(">]>]>]>]") || jsonText.length > 10000) {
     return null;
   }
 
-  const availableProxies = PROXY_LIST.filter(
-    (_, index) => !failedProxies.has(index)
-  );
+  // Fix improperly escaped brackets in strings
+  jsonText = jsonText.replace(/\\\[/g, "[").replace(/\\\]/g, "]");
 
-  if (availableProxies.length === 0) {
-    // All proxies failed - try to fetch fresh list
-    console.log("⚠️  All proxies failed, fetching fresh list...");
-    failedProxies.clear();
-    currentProxyIndex = 0;
-
-    // Try to fetch new proxies
-    const newProxies = await fetchProxyList();
-    if (newProxies.length > 0) {
-      PROXY_LIST = newProxies;
-      console.log(`✅ Loaded ${PROXY_LIST.length} new proxies`);
-      return PROXY_LIST[0];
-    }
-
-    // If still no proxies, return first one from old list
-    return PROXY_LIST.length > 0 ? PROXY_LIST[0] : null;
-  }
-
-  // Round-robin through available proxies
-  const proxy = PROXY_LIST[currentProxyIndex];
-  currentProxyIndex = (currentProxyIndex + 1) % PROXY_LIST.length;
-
-  // Skip failed proxies
-  if (failedProxies.has(currentProxyIndex - 1)) {
-    return await getNextProxy();
-  }
-
-  return proxy;
+  const issues = JSON.parse(jsonText);
+  return Array.isArray(issues) ? issues : null;
 }
 
 /**
- * Mark proxy as failed
- * @param {string} proxyUrl - Proxy URL to mark as failed
- * @param {string} reason - Reason for failure
- */
-function markProxyAsFailed(proxyUrl, reason = "unknown") {
-  const index = PROXY_LIST.indexOf(proxyUrl);
-  if (index !== -1 && !failedProxies.has(index)) {
-    failedProxies.add(index);
-
-    // Add to persistent blacklist for certain errors
-    const permanentErrors = [
-      "ECONNREFUSED",
-      "ETIMEDOUT",
-      "timeout",
-      "ENOTFOUND",
-      "EHOSTUNREACH",
-    ];
-    if (permanentErrors.includes(reason) || reason.startsWith("slow:")) {
-      if (!proxyBlacklist.has(proxyUrl)) {
-        proxyBlacklist.add(proxyUrl);
-        // Save blacklist every 10 new entries to avoid too many writes
-        if (proxyBlacklist.size % 10 === 0) {
-          saveProxyBlacklist();
-        }
-      }
-    }
-
-    const remaining = PROXY_LIST.length - failedProxies.size;
-    console.log(
-      `❌ Proxy failed (${reason}): ${proxyUrl} | Remaining: ${remaining}/${PROXY_LIST.length}`
-    );
-  }
-}
-
-/**
- * Quick pre-check using Google Translate to see if translation is accurate
- * @param {string} translatedContent - The translated content
- * @param {string} englishContent - The English content
- * @param {string} language - The language code
- * @returns {Promise<boolean>} True if translation seems accurate, false otherwise
- */
-async function quickTranslationCheck(
-  translatedContent,
-  englishContent,
-  language
-) {
-  const maxRetries = 3;
-  let lastError = null;
-  let triedDirect = false;
-
-  for (let attempt = 0; attempt < maxRetries; attempt++) {
-    let proxyUrl = null;
-    const startTime = Date.now();
-    const tryDirect = shouldTryDirectConnection();
-
-    try {
-      // Add delay to avoid rate limiting (only when not using proxy)
-      if (!useProxyMode || tryDirect) {
-        await new Promise((resolve) =>
-          setTimeout(resolve, GOOGLE_TRANSLATE_DELAY)
-        );
-      }
-
-      // Get proxy only if proxy mode is enabled AND not trying direct
-      if (!tryDirect) {
-        proxyUrl = await getNextProxy();
-      } else {
-        triedDirect = true;
-      }
-
-      const fetchOptions = {};
-
-      if (proxyUrl) {
-        fetchOptions.agent = new HttpsProxyAgent(proxyUrl);
-      }
-
-      // Translate the foreign language back to English with timeout
-      const translatePromise = translate(translatedContent, {
-        from: language,
-        to: "en",
-        fetchOptions,
-      });
-
-      let result;
-
-      if (proxyUrl) {
-        // Add timeout for proxy requests
-        const timeoutPromise = new Promise((_, reject) => {
-          const timer = setTimeout(() => {
-            reject(new Error("PROXY_TIMEOUT"));
-          }, PROXY_TIMEOUT);
-          // Ensure timer is cleared
-          return timer;
-        });
-
-        try {
-          result = await Promise.race([translatePromise, timeoutPromise]);
-        } catch (raceError) {
-          // Re-throw to be caught by outer catch
-          throw raceError;
-        }
-      } else {
-        result = await translatePromise;
-      }
-
-      const requestTime = Date.now() - startTime;
-
-      // Mark slow proxies as failed
-      if (proxyUrl && requestTime > PROXY_TIMEOUT * 0.8) {
-        markProxyAsFailed(proxyUrl, `slow: ${requestTime}ms`);
-      }
-
-      const backTranslated = result.text.toLowerCase().trim();
-      const original = englishContent.toLowerCase().trim();
-
-      // Calculate simple similarity
-      const similarity = calculateSimilarity(backTranslated, original);
-
-      // If direct connection succeeded while in proxy mode, disable proxy mode
-      if (triedDirect && useProxyMode) {
-        disableProxyMode();
-      }
-
-      return similarity >= SIMILARITY_THRESHOLD;
-    } catch (error) {
-      lastError = error;
-
-      // Enable proxy mode on rate limit
-      if (error.message && error.message.includes("Too Many Requests")) {
-        // If we tried direct and got rate limited, stay in proxy mode
-        if (triedDirect) {
-          console.log(
-            "⚠️  Direct connection still rate limited, continuing with proxies"
-          );
-        }
-        await enableProxyMode();
-        // Retry immediately with proxy
-        continue;
-      }
-
-      // Mark proxy as failed if it was used
-      if (proxyUrl) {
-        if (error.message === "PROXY_TIMEOUT") {
-          markProxyAsFailed(proxyUrl, "timeout");
-        } else if (
-          error.code === "ECONNREFUSED" ||
-          error.code === "ETIMEDOUT"
-        ) {
-          markProxyAsFailed(proxyUrl, error.code);
-        } else if (error.code) {
-          markProxyAsFailed(proxyUrl, error.code);
-        } else {
-          // Unknown error with proxy
-          markProxyAsFailed(proxyUrl, "error");
-        }
-      }
-
-      // If it's the last attempt, log and return false
-      if (attempt === maxRetries - 1) {
-        if (error.message.includes("Too Many Requests")) {
-          console.warn(
-            `Google Translate rate limit reached for ${language}, falling back to Ollama`
-          );
-        } else {
-          console.warn(
-            `Google Translate failed for ${language} after ${maxRetries} attempts: ${error.message}`
-          );
-        }
-        return false;
-      }
-
-      // Wait a bit before retrying
-      await new Promise((resolve) => setTimeout(resolve, 300));
-    }
-  }
-
-  return false;
-}
-
-/**
- * Calculate similarity between two strings (0-1 scale)
- * @param {string} str1 - First string
- * @param {string} str2 - Second string
- * @returns {number} Similarity score between 0 and 1
- */
-function calculateSimilarity(str1, str2) {
-  const longer = str1.length > str2.length ? str1 : str2;
-  const shorter = str1.length > str2.length ? str2 : str1;
-
-  if (longer.length === 0) return 1.0;
-
-  // Simple word-based comparison
-  const words1 = new Set(str1.split(/\s+/));
-  const words2 = new Set(str2.split(/\s+/));
-
-  const intersection = new Set([...words1].filter((x) => words2.has(x)));
-  const union = new Set([...words1, ...words2]);
-
-  // Jaccard similarity
-  return intersection.size / union.size;
-}
-
-/**
- * Verifies a translation against the English version using Ollama with retry mechanism
+ * Verifies a translation against the English version with retry mechanism
  * @param {string} keyPath - The key path
  * @param {string} englishContent - The English content
  * @param {string} translatedContent - The translated content
  * @param {string} language - The language code
  * @param {Object} progress - Progress tracking object with current, total, keyIndex, totalKeys
+ * @param {Object|null} keyContext - Context from metadata (comment + usages)
  * @returns {Promise<Array>} Array of identified issues
  */
 async function verifyTranslation(
@@ -586,88 +856,26 @@ async function verifyTranslation(
   englishContent,
   translatedContent,
   language,
-  progress = null
+  progress = null,
+  keyContext = null,
 ) {
   // Skip if content is empty
   if (!englishContent || !translatedContent) {
     console.log(
-      `Skipping verification for ${keyPath} in ${language}: insufficient data`
+      `Skipping verification for ${keyPath} in ${language}: insufficient data`,
     );
     return [];
   }
 
-  // Quick pre-check with Google Translate if enabled
-  if (USE_GOOGLE_PRECHECK) {
-    const keyProgressStr =
-      progress && progress.keyIndex && progress.totalKeys
-        ? `[${progress.keyIndex}/${progress.totalKeys}] `
-        : "";
-    const langProgressStr = progress
-      ? ` [${progress.current}/${progress.total}]`
-      : "";
-
-    console.log(
-      `${keyProgressStr}Quick check for ${keyPath} in ${language}${langProgressStr}`
-    );
-
-    const isAccurate = await quickTranslationCheck(
-      translatedContent,
-      englishContent,
-      language
-    );
-
-    if (isAccurate) {
-      console.log(
-        `${keyProgressStr}✓ Translation seems accurate, skipping Ollama check for ${keyPath} in ${language}${langProgressStr}`
-      );
-      return [];
-    }
-
-    console.log(
-      `${keyProgressStr}⚠ Translation may have issues, proceeding with Ollama check for ${keyPath} in ${language}${langProgressStr}`
-    );
-  }
-
   const languageName = languageMap[language] || language;
+  const contextBlock = formatContextBlock(keyContext);
 
-  // Create prompt for Ollama
-  const prompt = `
-# Translation Verification Task
-
-You are a translation quality checker. Your ONLY task is to find CRITICAL translation errors.
-
-## Content to verify:
-- **English:** "${englishContent}"
-- **${languageName}:** "${translatedContent}"
-
-## Your task:
-Check if the ${languageName} translation accurately conveys the SAME MEANING as the English text.
-
-## Report ONLY these CRITICAL issues:
-1. **incorrect_translation** - Translation has completely wrong or opposite meaning
-2. **missing_content** - Important words or information are missing
-3. **wrong_language** - Text is in the wrong language
-
-## DO NOT report:
-- Minor grammar improvements
-- Style preferences
-- Alternative wording that means the same thing
-- Punctuation differences
-- Capitalization differences
-
-## Response format:
-Return a JSON array. Each issue must have:
-- "type": One of: incorrect_translation, missing_content, wrong_language
-- "description": Brief explanation of the critical error
-- "suggestion": Corrected translation
-
-If the translation correctly conveys the meaning, return an empty array [].
-
-**IMPORTANT:** 
-- Respond with ONLY the JSON array
-- Be strict: only report CRITICAL errors that change meaning
-- Do not escape [ ] brackets in strings
-  `;
+  const prompt = spellCheckPrompt({
+    englishContent,
+    translatedContent,
+    languageName,
+    contextBlock,
+  });
 
   // Retry configuration
   const maxRetries = 3;
@@ -686,109 +894,64 @@ If the translation correctly conveys the meaning, return an empty array [].
       const retryStr =
         retries > 0 ? ` (attempt ${retries + 1}/${maxRetries})` : "";
       console.log(
-        `${keyProgressStr}Verifying translation for ${keyPath} in ${language}${langProgressStr}${retryStr}`
+        `${keyProgressStr}Verifying translation for ${keyPath} in ${language}${langProgressStr}${retryStr}`,
       );
 
-      // Call Ollama API with timeout
-      const response = await axios.post(
-        ollamaConfig.apiUrl + "/api/generate",
-        {
-          model: MODEL,
-          prompt: prompt,
-          stream: false,
-        },
-        {
-          timeout: OLLAMA_TIMEOUT, // 90 second timeout
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const fullResponse = await generateCompletion(prompt);
 
       // Parse the response
-      if (response.data && response.data.response) {
-        const responseText = response.data.response.trim();
+      if (fullResponse) {
         try {
-          // Check if response is wrapped in markdown code blocks and extract the JSON
-          let jsonText = responseText;
-
-          // Remove markdown code blocks if present
-          // Handle both ```json and ``` variants
-          if (jsonText.startsWith("```")) {
-            // Find the first newline after opening ```
-            const firstNewline = jsonText.indexOf("\n");
-            if (firstNewline !== -1) {
-              jsonText = jsonText.substring(firstNewline + 1);
-            }
-            // Remove closing ```
-            const lastBackticks = jsonText.lastIndexOf("```");
-            if (lastBackticks !== -1) {
-              jsonText = jsonText.substring(0, lastBackticks);
-            }
-            jsonText = jsonText.trim();
-          }
-
-          // Check if response is truncated or corrupted
-          if (jsonText.includes(">]>]>]>]") || jsonText.length > 10000) {
+          const issues = parseIssuesFromResponse(fullResponse);
+          if (issues === null) {
             console.warn(
-              `Corrupted or truncated response for ${keyPath} in ${language}, skipping`
+              `Unexpected response format for ${keyPath} in ${language}`,
             );
             return [];
           }
-
-          // Clean up common JSON issues from LLM responses
-          // Fix improperly escaped brackets in strings
-          jsonText = jsonText.replace(/\\\[/g, "[").replace(/\\\]/g, "]");
-
-          // Try to parse as JSON
-          const issues = JSON.parse(jsonText);
-          if (Array.isArray(issues)) {
-            return issues;
+          if (issues.length === 0) {
+            console.log(`  ✓ OK`);
           } else {
-            console.warn(
-              `Unexpected response format for ${keyPath} in ${language}: not an array`
-            );
-            return [];
+            console.log(`  ✗ ${issues.length} issue(s): ${issues.map((i) => i.type).join(", ")}`);
           }
+          return issues;
         } catch (parseError) {
           console.warn(
-            `Failed to parse Ollama response as JSON for ${keyPath} in ${language}: ${parseError.message}`
+            `Failed to parse response as JSON for ${keyPath} in ${language}: ${parseError.message}`,
           );
-          console.warn(`Response was: ${responseText.substring(0, 500)}...`);
+          console.warn(`Response was: ${fullResponse.substring(0, 500)}...`);
           return [];
         }
       } else {
-        throw new Error(
-          `Unexpected Ollama response format: ${JSON.stringify(response.data)}`
-        );
+        throw new Error("Empty response from model");
       }
     } catch (error) {
       lastError = error;
       retries++;
 
-      // Log the error
       console.error(
-        `Error calling Ollama (attempt ${retries}/${maxRetries}):`,
-        error.message
+        `Error calling ${PROVIDER} (attempt ${retries}/${maxRetries}):`,
+        error.message,
       );
 
-      // If it's a socket hang up or timeout, wait before retrying
       if (
         error.code === "ECONNRESET" ||
         error.code === "ETIMEDOUT" ||
+        error.name === "AbortError" ||
         error.message.includes("socket hang up") ||
-        error.message.includes("timeout")
+        error.message.includes("timeout") ||
+        error.message.includes("aborted")
       ) {
         console.log(
-          `Network error detected. Waiting before retry... ${error.message}`
+          `Network error detected. Waiting before retry... ${error.message}`,
         );
-        console.log(
-          `ollama api url: '${ollamaConfig.apiUrl}' model: '${MODEL}'`
-        );
-        // Wait for a few seconds before retrying (increasing with each retry)
+        if (PROVIDER === "ollama") {
+          console.log(`ollama api url: '${ollamaConfig.apiUrl}' model: '${MODEL}'`);
+        } else {
+          console.log(`openrouter api url: '${openRouterConfig.apiUrl}' model: '${MODEL}'`);
+        }
         await new Promise((resolve) => setTimeout(resolve, 2000 * retries));
       } else if (retries < maxRetries) {
-        // For other errors, wait a shorter time
         await new Promise((resolve) => setTimeout(resolve, 1000));
       }
     }
@@ -796,7 +959,7 @@ If the translation correctly conveys the meaning, return an empty array [].
 
   console.error(
     `Failed to verify translation for ${keyPath} in ${language} after ${maxRetries} attempts:`,
-    lastError ? lastError.message : "Unknown error"
+    lastError ? lastError.message : "Unknown error",
   );
   return [];
 }
@@ -828,7 +991,7 @@ function getTranslationContent(translations, namespace, key, language) {
     return translations[language]?.[namespace]?.[key] || null;
   } catch (error) {
     console.error(
-      `Error reading translation for ${key} in ${language} from cache: ${error.message}`
+      `Error reading translation for ${key} in ${language} from cache: ${error.message}`,
     );
     return null;
   }
@@ -858,7 +1021,7 @@ async function loadAllTranslations(projectPath, languages) {
           translations[lang][namespace] = await fs.readJson(filePath);
         } catch (error) {
           console.error(
-            `Error reading JSON file ${filePath}: ${error.message}`
+            `Error reading JSON file ${filePath}: ${error.message}`,
           );
         }
       }
@@ -903,7 +1066,7 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
 
     const allLanguages = await getAvailableLanguages(projectPath);
     console.log(
-      `Found ${allLanguages.length} languages: ${allLanguages.join(", ")}`
+      `Found ${allLanguages.length} languages: ${allLanguages.join(", ")}`,
     );
 
     const languages = LANGUAGES_TO_CHECK
@@ -911,7 +1074,7 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
       : allLanguages.filter((lang) => lang !== "en");
 
     console.log(
-      `Will check ${languages.length} languages: ${languages.join(", ")}`
+      `Will check ${languages.length} languages: ${languages.join(", ")}`,
     );
 
     languages.forEach((lang) => {
@@ -923,23 +1086,72 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
     const translations = await loadAllTranslations(projectPath, languages);
     console.log("Translation files loaded.");
 
+    // Phase 0: Orphan key detection — keys in translations that don't exist in English
+    const enData = translations["en"] || {};
+    for (const language of languages) {
+      const langData = translations[language] || {};
+      const orphans = findOrphanKeys(enData, langData);
+      if (orphans.length > 0) {
+        console.log(
+          `  [orphan] ${language}: ${orphans.length} key(s) not found in English`,
+        );
+        for (const { namespace, key: orphanKey } of orphans) {
+          const orphanKeyPath = `${namespace}:${orphanKey}`;
+          const issue = {
+            type: "orphan_key",
+            description: `Key "${orphanKey}" exists in ${language}/${namespace}.json but not in English — stale translation`,
+            suggestion: "Remove this key from the translation file",
+          };
+          appendIssueToTSV(
+            tsvFilename,
+            project,
+            `${projectPath}/.meta/${namespace}/${orphanKey}.json`,
+            orphanKeyPath,
+            language,
+            "",
+            translations[language]?.[namespace]?.[orphanKey] || "",
+            issue,
+          );
+          counters.totalIssuesFound++;
+          stats.updatedIssues++;
+          if (!stats.languages[language]) {
+            stats.languages[language] = { processed: 0, updated: 0, issues: 0 };
+          }
+          stats.languages[language].updated++;
+          stats.languages[language].issues++;
+        }
+      }
+    }
+
     const metaPattern = path
       .join(projectPath, ".meta", "**", "*.json")
       .replace(/\\/g, "/");
     const metadataFiles = glob.sync(metaPattern);
     console.log(`Found ${metadataFiles.length} metadata files`);
 
-    // Skip files until we reach checkpoint if resuming
-    let skipUntilFile = resuming ? checkpoint.lastMetadataFile : null;
+    // Skip files until we reach checkpoint if resuming.
+    // Use basename for comparison — checkpoint may be from a different OS/machine
+    // with different absolute paths. basename (e.g. "Guest.json") is stable.
+    let skipUntilKey = resuming && checkpoint.lastMetadataFile
+      ? toPortablePath(checkpoint.lastMetadataFile)
+      : null;
+
+    // When resuming, also skip languages already done for the checkpoint key
+    let resumeAtLanguage = resuming ? checkpoint.lastLanguage : null;
+
+    let skippedKeys = 0;
 
     for (const metadataFile of metadataFiles) {
       // Skip files until checkpoint
-      if (skipUntilFile && metadataFile !== skipUntilFile) {
-        continue;
-      }
-      if (skipUntilFile && metadataFile === skipUntilFile) {
-        console.log(` Resuming from file: ${path.basename(metadataFile)}`);
-        skipUntilFile = null; // Found checkpoint, process from here
+      if (skipUntilKey) {
+        const currentKey = toPortablePath(metadataFile);
+        if (currentKey !== skipUntilKey) {
+          skippedKeys++;
+          continue;
+        }
+        console.log(` Resuming from file: ${currentKey} (skipped ${skippedKeys} already-processed keys)`);
+        stats.totalKeys = skippedKeys; // so progress counter continues from where we left off
+        skipUntilKey = null; // Found checkpoint, process from here
       }
 
       try {
@@ -950,11 +1162,14 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
 
         const metadata = await fs.readJson(metadataFile);
 
+        // Extract context from metadata (comment + usage examples)
+        const keyContext = extractKeyContext(metadata);
+
         const englishContent = getTranslationContent(
           translations,
           namespace,
           key,
-          "en"
+          "en",
         );
         if (!englishContent) {
           console.log(`Skipping ${keyPath}: English content not found`);
@@ -967,13 +1182,26 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
 
         let metadataUpdated = false;
 
+        // On the first key after resume, skip languages already processed
+        let skipLangsUntil = null;
+        if (resumeAtLanguage) {
+          skipLangsUntil = resumeAtLanguage;
+          resumeAtLanguage = null; // only for the first key
+        }
+
         for (let langIndex = 0; langIndex < languages.length; langIndex++) {
           const language = languages[langIndex];
+
+          // Skip already-processed languages for resumed key
+          if (skipLangsUntil) {
+            if (language !== skipLangsUntil) continue;
+            skipLangsUntil = null; // found it, process from here
+          }
 
           // Save checkpoint when starting new language
           if (checkpoint.lastLanguage !== language) {
             checkpoint.lastProject = project;
-            checkpoint.lastMetadataFile = metadataFile;
+            checkpoint.lastMetadataFile = toPortablePath(metadataFile);
             checkpoint.lastLanguage = language;
             saveCheckpoint();
           }
@@ -983,7 +1211,7 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
               translations,
               namespace,
               key,
-              language
+              language,
             );
             if (!translatedContent) {
               continue;
@@ -996,13 +1224,43 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
               totalKeys: metadataFiles.length,
             };
 
-            const issues = await verifyTranslation(
-              keyPath,
+            // Phase 1: deterministic checks (instant, no LLM)
+            const deterministicIssues = runDeterministicChecks(
               englishContent,
               translatedContent,
               language,
-              progress
+              key,
             );
+
+            if (deterministicIssues.length > 0) {
+              console.log(
+                `  [static] ${deterministicIssues.length} issue(s): ${deterministicIssues.map((i) => i.type).join(", ")}`,
+              );
+            }
+
+            // Phase 2: LLM verification (skip if --no-llm or deterministic found critical structural issues)
+            const hasStructuralIssue = deterministicIssues.some((i) =>
+              ["empty_translation", "wrong_script"].includes(i.type),
+            );
+
+            let llmIssues = [];
+            if (!NO_LLM && !hasStructuralIssue) {
+              llmIssues = await verifyTranslation(
+                keyPath,
+                englishContent,
+                translatedContent,
+                language,
+                progress,
+                keyContext,
+              );
+            }
+
+            // Merge: deterministic issues that overlap with LLM types are deduplicated
+            const llmTypes = new Set(llmIssues.map((i) => i.type));
+            const uniqueDeterministic = deterministicIssues.filter(
+              (i) => !llmTypes.has(i.type),
+            );
+            const issues = [...uniqueDeterministic, ...llmIssues];
 
             if (!metadata.languages) metadata.languages = {};
             if (!metadata.languages[language]) {
@@ -1025,23 +1283,12 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
               stats.languages[language].updated++;
               stats.languages[language].issues += issues.length;
               console.log(
-                `Found ${issues.length} issues for ${keyPath} in ${language}`
+                `Found ${issues.length} issues for ${keyPath} in ${language}`,
               );
 
               // Save issues to CSV immediately
               for (const issue of issues) {
-                const issueData = {
-                  project: project,
-                  metadataFile: metadataFile,
-                  keyPath: keyPath,
-                  language: language,
-                  englishContent: englishContent,
-                  translatedContent: translatedContent,
-                  issueType: issue.type,
-                  description: issue.description,
-                  suggestion: issue.suggestion || "",
-                };
-                await appendIssueToTSV(
+                appendIssueToTSV(
                   tsvFilename,
                   project,
                   metadataFile,
@@ -1049,14 +1296,14 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
                   language,
                   englishContent,
                   translatedContent,
-                  issue
+                  issue,
                 );
                 counters.totalIssuesFound++;
               }
             }
           } catch (langError) {
             console.error(
-              `Error processing ${keyPath} for ${language}: ${langError.message}`
+              `Error processing ${keyPath} for ${language}: ${langError.message}`,
             );
             stats.errors.push({
               file: metadataFile,
@@ -1075,7 +1322,7 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
         }
       } catch (fileError) {
         console.error(
-          `Error processing metadata file ${metadataFile}: ${fileError.message}`
+          `Error processing metadata file ${metadataFile}: ${fileError.message}`,
         );
         stats.errors.push({ file: metadataFile, error: fileError.message });
         // Save checkpoint on error
@@ -1089,7 +1336,7 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
     return stats;
   } catch (error) {
     console.error(
-      `Error verifying translations for project ${project}: ${error.message}`
+      `Error verifying translations for project ${project}: ${error.message}`,
     );
     stats.errors.push({ project: project, error: error.message });
     stats.endTime = new Date();
@@ -1121,7 +1368,7 @@ function escapeTsvField(field) {
  * @param {string} translatedContent - Translated content
  * @param {Object} issue - Issue object
  */
-function appendIssueToTSV(
+function appendIssueToTSV( // sync — no async needed
   tsvFilename,
   project,
   metadataFile,
@@ -1129,12 +1376,18 @@ function appendIssueToTSV(
   language,
   englishContent,
   translatedContent,
-  issue
+  issue,
 ) {
   const tsvPath = path.join(appRootPath, tsvFilename);
+  // Store relative path in TSV so the file is portable across machines
+  const relativeMetaFile = metadataFile.replace(/\\/g, "/");
+  const metaIdx = relativeMetaFile.lastIndexOf(".meta/");
+  const portableMetaPath = metaIdx !== -1
+    ? relativeMetaFile.slice(metaIdx)
+    : path.basename(metadataFile);
   const row = [
     project,
-    metadataFile,
+    portableMetaPath,
     keyPath,
     language,
     escapeTsvField(englishContent),
@@ -1148,10 +1401,10 @@ function appendIssueToTSV(
 
   // Update checkpoint (will be saved when language changes)
   checkpoint.lastProject = project;
-  checkpoint.lastMetadataFile = metadataFile;
+  checkpoint.lastMetadataFile = toPortablePath(metadataFile);
   checkpoint.lastLanguage = language;
   checkpoint.processedKeys.add(
-    `${project}:${metadataFile}:${keyPath}:${language}`
+    `${project}:${toPortablePath(metadataFile)}:${keyPath}:${language}`,
   );
 }
 
@@ -1166,64 +1419,32 @@ async function verifyAllTranslationsSpellCheck() {
   checkpoint = loadCheckpoint();
   const resuming = checkpoint.lastProject !== null;
 
-  // Load proxy blacklist at startup
-  proxyBlacklist.clear();
-  const loadedBlacklist = loadProxyBlacklist();
-  loadedBlacklist.forEach((proxy) => proxyBlacklist.add(proxy));
-
-  // console all variables
-  console.log("OLLAMA_MODEL: ", MODEL);
-  console.log("OLLAMA_TIMEOUT: ", OLLAMA_TIMEOUT);
+  console.log("PROVIDER: ", PROVIDER);
+  console.log("MODEL: ", MODEL);
   console.log("LANGUAGES_TO_CHECK: ", LANGUAGES_TO_CHECK);
-  console.log("USE_GOOGLE_PRECHECK: ", USE_GOOGLE_PRECHECK);
-  console.log("SIMILARITY_THRESHOLD: ", SIMILARITY_THRESHOLD);
-  console.log("GOOGLE_TRANSLATE_DELAY: ", GOOGLE_TRANSLATE_DELAY, "ms");
-  console.log(
-    "PROXY_MODE: ",
-    useProxyMode ? "enabled" : "disabled (will enable on rate limit)"
-  );
-  console.log("PROXY_TIMEOUT: ", PROXY_TIMEOUT, "ms");
-  console.log("PROXY_API_URL: ", PROXY_API_URL);
-  console.log("PROXY_BLACKLIST_FILE: ", PROXY_BLACKLIST_FILE);
-  console.log("BLACKLISTED_PROXIES: ", proxyBlacklist.size);
   console.log("CHECKPOINT_FILE: ", CHECKPOINT_FILE);
   console.log("RESUMING: ", resuming ? "yes" : "no");
-  console.log(
-    "DIRECT_RETRY_INTERVAL: ",
-    DIRECT_RETRY_INTERVAL / 1000,
-    "seconds"
-  );
 
-  const ollamaRunning = await isOllamaRunning();
-  if (!ollamaRunning) {
-    console.error("Ollama is not running. Aborting verification process.");
-    process.exit(1);
+  if (!NO_LLM) {
+    const providerReady = await verifyProviderConnection();
+    if (!providerReady) {
+      console.error(`${PROVIDER} is not available. Aborting verification process.`);
+      process.exit(1);
+    }
   }
 
-  // Use existing TSV file if resuming, otherwise create new one
-  let tsvFilename;
-  if (resuming && checkpoint.tsvFilename) {
-    tsvFilename = checkpoint.tsvFilename;
-    console.log(` Resuming with existing TSV file: ${tsvFilename}`);
-  } else {
-    const timestamp = new Date()
-      .toISOString()
-      .replace(/[:.]/g, "-")
-      .slice(0, -5);
-    tsvFilename = `spell-check-issues-${timestamp}.tsv`;
-    checkpoint.tsvFilename = tsvFilename;
-    saveCheckpoint();
-  }
+  // Single TSV file — always append. Created with header if missing.
+  const tsvFilename = "spell-check-issues.tsv";
+  checkpoint.tsvFilename = tsvFilename;
   const tsvPath = path.join(appRootPath, tsvFilename);
 
-  // Only write header if file doesn't exist (new run)
   if (!fs.existsSync(tsvPath)) {
     const tsvHeader =
       "Project\tMetadata File\tKey\tLanguage\tEnglish Content\tTranslated Content\tIssue Type\tDescription\tSuggestion\n";
     fs.writeFileSync(tsvPath, tsvHeader, "utf8");
     console.log(` Created TSV file: ${tsvPath}`);
   } else {
-    console.log(` Continuing with existing TSV file: ${tsvPath}`);
+    console.log(` Appending to existing TSV file: ${tsvPath}`);
   }
   console.log("Issues will be saved incrementally as they are found.\n");
 
@@ -1258,6 +1479,7 @@ async function verifyAllTranslationsSpellCheck() {
     }
     if (skipUntilProject && project === skipUntilProject) {
       foundCheckpoint = true;
+      skipUntilProject = null; // clear so subsequent projects are not skipped
       console.log(` Resuming from project: ${project}`);
     }
 
@@ -1266,7 +1488,7 @@ async function verifyAllTranslationsSpellCheck() {
       const projectStats = await verifyTranslationsSpellCheck(
         project,
         tsvFilename,
-        counters
+        counters,
       );
 
       overallStats.projects[project] = projectStats;
@@ -1289,11 +1511,11 @@ async function verifyAllTranslationsSpellCheck() {
           overallStats.languages[lang].processed += langStats.processed || 0;
           overallStats.languages[lang].updated += langStats.updated || 0;
           overallStats.languages[lang].issues += langStats.issues || 0;
-        }
+        },
       );
 
       overallStats.errors = overallStats.errors.concat(
-        projectStats.errors || []
+        projectStats.errors || [],
       );
     } catch (error) {
       console.error(`Error processing project ${project}: ${error.message}`);
@@ -1308,12 +1530,10 @@ async function verifyAllTranslationsSpellCheck() {
   // Report final TSV status
   if (counters.totalIssuesFound > 0) {
     console.log(` Total issues saved to TSV: ${counters.totalIssuesFound}`);
-    console.log(` TSV file location: ${tsvPath}`);
   } else {
-    // Remove empty TSV file if no issues found
-    await fs.unlink(tsvPath).catch(() => {});
-    console.log("\nNo issues found - TSV file not created.");
+    console.log("\nNo new issues found in this run.");
   }
+  console.log(` TSV file: ${tsvPath}`);
 
   // Clear checkpoint on successful completion
   clearCheckpoint();
@@ -1324,19 +1544,13 @@ async function verifyAllTranslationsSpellCheck() {
 // Run the script if executed directly
 verifyAllTranslationsSpellCheck()
   .then((stats) => {
-    // Save final blacklist
-    if (proxyBlacklist.size > 0) {
-      saveProxyBlacklist();
-    }
-
     console.log("\n=== Verification Complete ===");
     console.log(`Total issues found: ${stats.updatedIssues}`);
     if (checkpoint.tsvFilename) {
       console.log(
-        `Results saved to: ${path.join(appRootPath, checkpoint.tsvFilename)}`
+        `Results saved to: ${path.join(appRootPath, checkpoint.tsvFilename)}`,
       );
     }
-    console.log(`Blacklisted proxies: ${proxyBlacklist.size}`);
     console.log("\nThank you for using the translation verification tool!");
 
     console.log("\n=== Translation Verification Complete ===\n");
@@ -1356,7 +1570,7 @@ verifyAllTranslationsSpellCheck()
     console.log("\nLanguage Statistics:");
     Object.entries(stats.languages).forEach(([lang, langStats]) => {
       console.log(
-        `- ${lang}: Processed ${langStats.processed}, Updated ${langStats.updated}, Total Issues ${langStats.issues}`
+        `- ${lang}: Processed ${langStats.processed}, Updated ${langStats.updated}, Total Issues ${langStats.issues}`,
       );
     });
 
@@ -1365,7 +1579,7 @@ verifyAllTranslationsSpellCheck()
       console.log("\nErrors:");
       stats.errors.slice(0, 10).forEach((error, index) => {
         console.log(
-          `${index + 1}. ${error.file || error.project}: ${error.error}`
+          `${index + 1}. ${error.file || error.project}: ${error.error}`,
         );
       });
 
@@ -1380,8 +1594,9 @@ verifyAllTranslationsSpellCheck()
     console.error("\n=== Error During Verification ===");
     console.error(error);
     console.log(
-      "\n Checkpoint saved. You can resume by running the script again."
+      "\n Checkpoint saved. You can resume by running the script again.",
     );
     saveCheckpoint();
     process.exit(1);
   });
+

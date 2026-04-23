@@ -337,7 +337,12 @@ const BackupListModalDialog = ({
               size={ButtonSize.normal}
               label={t("Common:Restore")}
               onClick={onRestorePortal}
-              isDisabled={isCopyingToLocal || !isChecked}
+              isDisabled={
+                isCopyingToLocal ||
+                !isChecked ||
+                filesList.length === 0 ||
+                !state.selectedFileId
+              }
               testId="backup_list_restore_button"
             />
             <Button
@@ -355,3 +360,4 @@ const BackupListModalDialog = ({
 };
 
 export default BackupListModalDialog;
+

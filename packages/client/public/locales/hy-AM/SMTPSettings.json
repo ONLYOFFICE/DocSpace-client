@@ -2,7 +2,6 @@
   "AuthViaNTLM": "Հաստատում NTLM-ի միջոցով",
   "EnableSSL": "Միացնել SSL-ը",
   "EnterDomain": "Մուտքագրեք տիրույթը",
-  "EnterEmail": "Մուտքագրեք էլ",
   "EnterLogin": "Մուտքագրեք մուտք",
   "EnterPort": "Մուտքագրեք պորտը",
   "Host": "Հյուրընկալող",

@@ -3,7 +3,7 @@
   "content": "PDF Form",
   "content_en_sha1_hash": "d6182f70d8b22eaa5700e3917f6ccb00e1d25bdb",
   "created_at": "2025-05-19T21:30:49.997Z",
-  "updated_at": "2026-03-31T15:18:45.852Z",
+  "updated_at": "2026-04-10T08:21:04.285Z",
   "comment": {
     "text": "The translation key \"Translations:NewForm\" represents the text \"PDF Form\". It is used to display this text in a button within an empty folder container.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 519,
+      "line_number": 512,
       "context": "const formActions = {\n id: \"actions_template\",\n className: \"main-button_drop-down\",\n icon: FormReactSvgUrl,\n label: t(\"Translations:NewForm\"),\n key: \"new-form\",\n items: [createTemplateBlankPDF, showSelectorDocx],\n };\n \n if (",
       "module": "/packages/client"
     },
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3589,
+      "line_number": 3588,
       "context": "const formActions = [\n {\n id: \"personal_form-template\",\n icon: FormReactSvgUrl,\n label: t(\"Translations:NewForm\"),\n key: \"new-form-base\",\n items: [createTemplateForm, createTemplateNewFormFile],\n },\n ];",
       "module": "/packages/client"
     }
@@ -45,13 +45,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term \"form\" is best translated as \"şəkil\" in Azerbaijani when referring to a PDF form. \"forma\" is a loanword from Italian/French and sounds unnatural in this context. \"Şəkil\" is the standard Azerbaijani equivalent.",
-          "suggestion": "PDF şəklində"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -99,13 +93,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Ձև\" (Dev) is a valid translation for \"Form\", it lacks the specificity of a PDF form. A more accurate translation might consider incorporating \"էլեկտրոնային\" (electronic) or \"գրաբառային\" (template) depending on the context.",
-          "suggestion": "Consider \"PDF էլեկտրոնային ձև\" or \"PDF գրաբառային ձև\" for a more accurate and contextually relevant translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -135,13 +123,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'PDF veidlapa' is understandable, a more accurate and common translation of 'PDF Form' in Latvian would be 'PDF veidnis'. 'Veidlapa' more accurately translates to 'form sheet' or 'form paper', whereas 'veidnis' conveys the meaning of a template or form.",
-          "suggestion": "PDF veidnis"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -186,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"ආකෘතිපත්‍ර අච්චුව\" (aakruthipathra accchuwa) does not accurately convey the meaning of \"PDF Form\". \"අච්චුව\" (accchuwa) means 'mold' or 'matrix', which is not relevant to a PDF form. A more accurate translation would be something like \"PDF පත්‍රපත\" (PDF pathrapata) or \"PDF ආකෘතිය\" (PDF aakruthinya).",
-          "suggestion": "PDF පත්‍රපත (PDF pathrapata) or PDF ආකෘතිය (PDF aakruthinya)"
+          "description": "The translation 'ආකෘතිපත්‍ර අච්චුව' means 'Form Template' or 'Form Pattern', whereas the English text is 'PDF Form'. It fails to include the specific file format 'PDF' which is essential for the user to know what type of file is being created.",
+          "suggestion": "PDF ආකෘතිපත්‍රය"
         }
       ],
       "approved_at": null
@@ -195,13 +177,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Formulár PDF' is understandable, a more accurate and natural translation of 'PDF Form' would be 'PDF formulár'. The word order is slightly off, placing 'PDF' as an adjective modifying 'formulár'.",
-          "suggestion": "PDF formulár"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -219,13 +195,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation \"PDF obrazac\" is a literal translation but might not be the most natural or common term in Serbian for \"PDF Form\". \"PDF obrazac\" is technically correct, but \"PDF формула\" or \"PDF образац\" might be more idiomatic, depending on the context and target audience.",
-          "suggestion": "Consider alternatives like \"PDF формула\" or \"PDF образац\" for a more natural-sounding translation. Investigate common Serbian terminology for PDF forms."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -247,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "Uploading: {{progress}}%",
   "content_en_sha1_hash": "62a096b1f2d9276190d5ee373a3fd25a88fc4180",
   "created_at": "2025-05-19T21:30:56.294Z",
-  "updated_at": "2025-10-27T16:14:33.362Z",
+  "updated_at": "2026-04-07T19:35:05.098Z",
   "comment": {
     "text": "UploadingProgress is used to display a progress update when uploading a file. It appears on the client's upload interface and shows the current percentage of the upload process. Translators should focus on phrases that convey the idea of progress or completion during an upload action.",
     "is_auto": true,
@@ -183,13 +183,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The placement of the percentage sign (%) is incorrect. In Turkish, it should precede the value within the string. The original English has the percentage sign after the variable, while the Turkish translation puts it before.",
-          "suggestion": "Yükleniyor: {{progress}}%"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

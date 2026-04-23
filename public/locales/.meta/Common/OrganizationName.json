@@ -3,7 +3,7 @@
   "content": "ONLYOFFICE",
   "content_en_sha1_hash": "c1cd17a947d45060963b486bba7fd3346227bbee",
   "created_at": "2025-05-19T21:30:47.141Z",
-  "updated_at": "2026-03-26T08:26:57.931Z",
+  "updated_at": "2026-04-10T08:21:04.280Z",
   "comment": {
     "text": "This translation key is used to display the organization's name, such as \"ONLYOFFICE\", when a user needs help or wants to learn more about the product. It appears in various UI elements like dialog boxes and about pages, ensuring accessibility for users who need assistance with the application.",
     "is_auto": true,
@@ -60,13 +60,43 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ai-services-management.tsx",
-      "line_number": 232,
+      "line_number": 233,
       "context": "{t(\"AiServicesManagementDescription\", {\n productName: t(\"Common:ProductName\"),\n aiAgents: t(\"Common:AIAgents\"),\n aiSettings: t(\"AISettings\"),\n aiServices: t(\"Common:AIServices\"),\n organizationName: t(\"Common:OrganizationName\"),\n })}\n </Text>\n {aiServicesManagementUrl ? (\n <Link\n className=\"link-learn-more\"",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
+      "line_number": 73,
+      "context": "return (\n <ConfirmWrapper height=\"100%\">\n <div className={styles.main}>\n <div className={styles.header}>\n <Text fontSize=\"23px\" fontWeight={700} lineHeight=\"28px\">{t(\"Common:DeveloperTools\")}</Text>\n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\">{t(\"Settings:DeveloperToolsDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}</Text>\n </div>\n <div className={styles.grid}>\n <Card\n icon={<DevToolsSvg />}\n title={t(\"Settings:RestAPI\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
+      "line_number": 73,
+      "context": "return (\n <ConfirmWrapper height=\"100%\">\n <div className={styles.main}>\n <div className={styles.header}>\n <Text fontSize=\"23px\" fontWeight={700} lineHeight=\"28px\">{t(\"Common:DeveloperTools\")}</Text>\n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\">{t(\"Settings:DeveloperToolsDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}</Text>\n </div>\n <div className={styles.grid}>\n <Card\n icon={<DevToolsSvg />}\n title={t(\"Settings:RestAPI\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
+      "line_number": 73,
+      "context": "return (\n <ConfirmWrapper height=\"100%\">\n <div className={styles.main}>\n <div className={styles.header}>\n <Text fontSize=\"23px\" fontWeight={700} lineHeight=\"28px\">{t(\"Common:DeveloperTools\")}</Text>\n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\">{t(\"Settings:DeveloperToolsDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}</Text>\n </div>\n <div className={styles.grid}>\n <Card\n icon={<DevToolsSvg />}\n title={t(\"Settings:RestAPI\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
+      "line_number": 73,
+      "context": "return (\n <ConfirmWrapper height=\"100%\">\n <div className={styles.main}>\n <div className={styles.header}>\n <Text fontSize=\"23px\" fontWeight={700} lineHeight=\"28px\">{t(\"Common:DeveloperTools\")}</Text>\n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\">{t(\"Settings:DeveloperToolsDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}</Text>\n </div>\n <div className={styles.grid}>\n <Card\n icon={<DevToolsSvg />}\n title={t(\"Settings:RestAPI\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
+      "line_number": 73,
+      "context": "return (\n <ConfirmWrapper height=\"100%\">\n <div className={styles.main}>\n <div className={styles.header}>\n <Text fontSize=\"23px\" fontWeight={700} lineHeight=\"28px\">{t(\"Common:DeveloperTools\")}</Text>\n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\">{t(\"Settings:DeveloperToolsDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}</Text>\n </div>\n <div className={styles.grid}>\n <Card\n icon={<DevToolsSvg />}\n title={t(\"Settings:RestAPI\")}",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/Shell.jsx",
-      "line_number": 113,
+      "line_number": 115,
       "context": "});\n \n const { t, ready } = useTranslation([\"Common\", \"SmartBanner\"]);\n \n useEffect(() => {\n if (!logoText) setLogoText(t(\"Common:OrganizationName\"));\n }, [logoText, setLogoText]);\n \n useEffect(() => {\n try {\n loadBaseInfo();",
       "module": "/packages/client"
     },
@@ -283,6 +313,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

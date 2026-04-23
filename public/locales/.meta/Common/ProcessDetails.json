@@ -3,7 +3,7 @@
   "content": "Process details",
   "content_en_sha1_hash": "4953bc29de892cdbb1d582430dd71fda1ac51f15",
   "created_at": "2025-05-19T21:30:47.485Z",
-  "updated_at": "2026-02-19T13:36:33.134Z",
+  "updated_at": "2026-04-08T02:16:18.728Z",
   "comment": {
     "text": "This translation key is used for displaying process details in a UI. It's displayed as a heading in a filling status panel and related to file information.",
     "is_auto": true,
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Bulgarian translation 'Обработи данни' translates to 'Processes data' or 'Data processing', which doesn't accurately reflect the English 'Process details'. 'Process details' refers to information *about* a process, not the act of processing data.",
-          "suggestion": "A more accurate translation could be 'Подробности за процеса' (Podrobnosti za protsesa), 'Детайли за процеса' (Detaili za protsesa), or 'Информация за процеса' (Informatsiya za protsesa)."
+          "description": "The Bulgarian translation 'Обработи данни' means 'Process data' (imperative verb phrase), whereas the English 'Process details' is a noun phrase referring to information about a process.",
+          "suggestion": "Детайли за процеса"
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Գործընթացի ամնրամասներ\" does not accurately convey the meaning of \"Process details.\" \"ամնրամասներ\" translates to 'segments' or 'parts,' which isn't the best fit for 'details.'",
-          "suggestion": "A more accurate translation could be \"Դատաստանայի մանրամասներ\" (Datastanayi manramaser) which means 'Process details', or \"Գործընթացի մանրամասերը\" (Gorts'entaci manramaser) which is a more literal translation of 'Process details'."
+          "description": "The Armenian word 'ամնրամասներ' is a misspelling or a non-existent word. The correct term for 'details' in this context should be 'մանրամասներ'.",
+          "suggestion": "Գործընթացի մանրամասներ"
         }
       ],
       "approved_at": null
@@ -117,13 +117,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"ລາຍລະອຽດຂອງການປະມວນຜົນ\" is a literal translation, it sounds somewhat formal and clunky in Lao. A more natural phrasing for \"Process details\" would be something like \"ລາຍລະອຽດຂອງຂະບວນການ\" or \"ລາຍລະອຽດຂະບວນການ\".",
-          "suggestion": "ລາຍລະອຽດຂອງຂະບວນການ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -171,13 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ප්‍රති ක්‍රියාවලියේ විස්තරాలు' while containing the correct root words, is a slightly verbose and less common phrasing for 'Process details'. A more natural and concise translation would be preferable.",
-          "suggestion": "ප ක්‍රියාවලියේ තොරතුරු"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -219,16 +207,22 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Chi tiết về Quy trình\" is understandable, a more natural and accurate translation of \"Process details\" would be \"Chi tiết quy trình\". The phrase \"về Quy trình\" feels a bit clunky in Vietnamese.",
-          "suggestion": "Chi tiết quy trình"
+          "description": "In the context of a 'filling status panel' and 'file information', 'Process' refers to a workflow or a procedure (e.g., a document approval or filling process), not a computer system 'process' (running program). '进程' (jìnchéng) specifically refers to OS-level processes. '流程' (liúchéng) is the correct term for a business or document workflow.",
+          "suggestion": "流程详情"
         }
       ],
       "approved_at": null
     },
-    "zh-CN": {
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

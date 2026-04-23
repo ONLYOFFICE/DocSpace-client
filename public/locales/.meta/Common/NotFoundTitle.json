@@ -3,7 +3,7 @@
   "content": "Nothing found",
   "content_en_sha1_hash": "fed1f5cd946a327d187f842db23041ecd3553315",
   "created_at": "2025-05-19T21:30:46.918Z",
-  "updated_at": "2026-02-19T13:36:32.306Z",
+  "updated_at": "2026-04-08T03:55:32.015Z",
   "comment": {
     "text": "This translation key is used for \"Nothing found\" content, appearing as a header or button text in various screens of the application, such as an empty screen filter or gallery page. It indicates that no data or items were found based on user filters or criteria.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation 'لا يوجد معلومات' means 'No information exists', which is more specific and wordy than the generic 'Nothing found'. In a UI context for filters or galleries, 'لم يتم العثور على شيء' or 'لا توجد نتائج' is more accurate for 'Nothing found'.",
+          "suggestion": "لم يتم العثور على شيء"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -57,13 +63,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Keine Suchergebnisse\" is a reasonable translation, \"Nothing found\" implies a broader sense of absence, not specifically related to a search.  \"Keine Ergebnisse\" would be a more literal and generally applicable translation.",
-          "suggestion": "Keine Ergebnisse"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -99,13 +99,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While grammatically correct, \"Non è stato trovato nulla\" is a somewhat literal and slightly awkward translation of \"Nothing found\". A more natural and idiomatic Italian translation would be \"Nessun risultato\" or \"Niente trovato\".",
-          "suggestion": "Nessun risultato"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -217,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

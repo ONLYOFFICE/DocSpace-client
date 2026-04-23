@@ -3,7 +3,7 @@
   "content": "Delete {{productName}}",
   "content_en_sha1_hash": "c9a087cf0ab00ea2fbdf46a5931658150f1b19eb",
   "created_at": "2025-12-23T10:27:43.700Z",
-  "updated_at": "2026-02-19T13:36:32.416Z",
+  "updated_at": "2026-04-08T12:16:44.057Z",
   "comment": {
     "text": "This key displays a confirmation message in a dialog or button related to deleting a portal. The text includes the portal's name (which will be dynamically inserted) and is used in several settings-related files, including the Portal Settings page and Delete Portal dialog. Translators should ensure the wording clearly conveys the action of portal deletion.",
     "is_auto": true,
@@ -63,7 +63,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text 'Delete {{productName}}' is an imperative verb (an action/command), whereas the Czech translation 'Odstranění prostoru {{productName}}' is a noun phrase (the act of deleting). In UI contexts like buttons or headers, the imperative form is required.",
+          "suggestion": "Smazat {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -111,7 +117,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese verb '解除する' (to cancel/release/deactivate) does not mean 'Delete'. In the context of a portal, '削除する' (to delete) is the correct term.",
+          "suggestion": "{{productName}}を削除する"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {

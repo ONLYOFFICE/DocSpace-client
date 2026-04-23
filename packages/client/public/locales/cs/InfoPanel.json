@@ -2,6 +2,7 @@
   "AddedRoomTags": "Přidané značky.",
   "Administration": "Správa",
   "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> přejmenován na <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Zobrazte podrobnosti o {{aiAgents}} zde",
   "AndMoreLabel": "a <1>{{count}} další</1>",
   "CreationDate": "Datum vytvoření",
   "Data": "Data",
@@ -60,11 +61,14 @@
   "IndexChanged": "Změna indexu",
   "ItemsSelected": "Vybrané položky",
   "LastModifiedBy": "Naposledy upravil(a)",
+  "LastUpdateInfo": "Poslední aktualizace",
   "LifetimeEnds": "Konec životnosti",
   "MembersEmptyScreenText": "Podrobnosti o členech naleznete zde",
+  "NoAgent": "Žádný {{aiAgent}}",
   "NoRecordsFound": "Nebyly nalezeny žádné záznamy",
   "Properties": "Vlastnosti",
   "Resolution": "Rozlišení",
+  "RoomChangeOwner": "Majitel místnosti se změnil.",
   "RoomCreateUserCount": "Uživatelé přidáni ({{count}}).",
   "RoomDenyDownloadDisabled": "Stahování a kopírování bez omezení",
   "RoomDenyDownloadEnabled": "Stahování a kopírování s omezením",
@@ -98,6 +102,5 @@
   "SubmenuHistory": "Historie",
   "UserFileUpdated": "Soubor aktualizován.",
   "Users": "Uživatelé",
-  "Versions": "Verze",
-  "LastUpdateInfo": "Poslední aktualizace"
+  "Versions": "Verze"
 }

@@ -1,4 +1,7 @@
 {
+  "AgentCreated": "Създан AI Агент",
+  "AgentDeleted": "Изтрит AI Агент",
+  "AgentUpdated": "AI Агент Обновено",
   "Before": "Преди",
   "CreateWebhook": "Създайте уеб кука",
   "DeleteHint": "Уеб куката ще бъде изтрита завинаги. \nНяма да можете да отмените това действие.",
@@ -33,6 +36,9 @@
   "FolderRestored": "Папката е възстановена",
   "FolderTrashed": "Папката е изхвърлена",
   "FolderUpdated": "Папката е актуализирана",
+  "FormFilledOut": "Попълнена форма",
+  "FormStopped": "Прекрачен формуляр",
+  "FormSubmit": "Изпратен формуляр",
   "From": "От",
   "Generate": "Генерирай",
   "GroupCreated": "Групата е създадена",

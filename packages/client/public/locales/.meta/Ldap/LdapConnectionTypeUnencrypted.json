@@ -3,7 +3,7 @@
   "content": "Unencrypted communication",
   "content_en_sha1_hash": "bc1d8c39d5290a229552fb64a476b343bca25d9c",
   "created_at": "2025-05-19T21:30:54.196Z",
-  "updated_at": "2025-08-11T18:11:59.240Z",
+  "updated_at": "2026-04-07T19:35:05.144Z",
   "comment": {
     "text": "This translation key is used for the label of a checkbox indicating unencrypted LDAP connection type. It appears in a settings page within a file, and its purpose is to display the description of this option to users, allowing them to understand what \"unencrypted communication\" means in the context of LDAP connections.",
     "is_auto": true,
@@ -69,13 +69,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation 'Salattu viestintä' means 'Encrypted communication'. The English content refers to 'Unencrypted communication'.",
-          "suggestion": "Salaamaton viestintä"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -159,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ක්‍රීප්ටෝ නොකරන ලද සන්නිවේදනය' literally translates to 'uncrypted communication'. While 'uncrypted' conveys a similar concept to 'unencrypted', it's not a standard term and might be misleading. 'නොමිතිකෘත්‍යාංකිත' (nomithikaŗthankaŗita) would be a more accurate translation for 'unencrypted'.",
-          "suggestion": "ක්‍රීප්ටෝ නොමිතිකෘත්‍යාංකිත සන්නිවේදනය (or a more concise equivalent)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -207,13 +195,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Liên lạc không được mã hóa' is technically correct, it's a bit literal and not the most natural phrasing in Vietnamese for 'Unencrypted communication.' A more common and idiomatic translation would be something like 'Truyền thông không mã hóa' or 'Kết nối không mã hóa'.",
-          "suggestion": "Truyền thông không mã hóa"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

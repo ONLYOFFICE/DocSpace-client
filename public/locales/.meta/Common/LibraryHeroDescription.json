@@ -3,7 +3,7 @@
   "content": "Pick a template, edit and fill it in, then collect and analyze responses with AI agents",
   "content_en_sha1_hash": "012f1a828de9e96d7d886497d65bc76f3223234c",
   "created_at": "2026-03-31T15:18:14.806Z",
-  "updated_at": "2026-03-31T15:18:14.806Z",
+  "updated_at": "2026-04-08T06:11:53.535Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -50,7 +50,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The verb 'επεξεργαστείτε' is reflexive (meaning 'to edit oneself'), whereas the English 'edit' refers to editing the template. The correct non-reflexive form is 'επεξεργαστείτε το' or simply 'επεξεργαστείτε' used as a transitive verb, but in this context, 'επεξεργαστείτε' implies the user is editing themselves.",
+          "suggestion": "Επιλέξτε ένα πρότυπο, επεξεργαστείτε το και συμπληρώστε το, και στη συνέχεια συλλέξτε και αναλύστε τις απαντήσεις με πράκτορες AI"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -104,7 +110,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'aprietiet' is a misspelling/incorrect form of 'apstrādājiet' (process) or 'aizpildiet' (fill in). In Latvian, 'aprietiet' is not a standard verb for 'to process' or 'to fill in' in this context.",
+          "suggestion": "Izvēlieties šablonu, rediējiet un aizpildiet to, pēc tam savāciet un analizējiet atbildes ar AI agentiem"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -158,7 +170,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The noun 'predlago' is in the wrong grammatical case (accusative instead of genitive/partitive or incorrect declension for the imperative context) and the pronoun 'jo' (feminine) does not match the gender of 'predlog' (masculine).",
+          "suggestion": "Izberite predlogo, uredite jo in napolnite, nato zberite in analizirajte odgovore z AI agenti"
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {

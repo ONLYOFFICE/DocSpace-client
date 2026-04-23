@@ -3,7 +3,7 @@
   "content": "Send invitation once again",
   "content_en_sha1_hash": "cd053eb31b3f6c6a7b0b220abd4009c2b352e163",
   "created_at": "2025-05-19T21:30:53.512Z",
-  "updated_at": "2025-05-26T07:57:32.331Z",
+  "updated_at": "2026-04-09T07:28:38.158Z",
   "comment": {
     "text": "The translation key \"SendInviteAgain\" is used to display a message that allows users to resend an invitation. It appears in a modal dialog box when sending another invite button is clicked. Translators should provide a text that conveys this functionality for internationalization purposes.",
     "is_auto": true,
@@ -199,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -63,6 +63,7 @@ import IndicatorLoader from "./components/IndicatorLoader";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 import DialogsWrapper from "./components/dialogs/DialogsWrapper";
 import useCreateFileError from "./Hooks/useCreateFileError";
+import { SectionNavigationProvider } from "./contexts/SectionNavigationContext";
 
 import ReactSmartBanner from "./components/SmartBanner";
 
@@ -527,27 +528,29 @@ const Shell = ({ page = "home", ...rest }) => {
   const isMobileOnly = currentDeviceType === DeviceType.mobile;
 
   return (
-    <Layout>
-      {toast}
-      <RootTooltip />
-      {isMobileOnly && !isFrame ? (
-        <ReactSmartBanner t={t} ready={ready} />
-      ) : null}
-      {withoutNavMenu ? null : <NavMenu />}
-      <IndicatorLoader />
-      <ScrollToTop />
-      <DialogsWrapper t={t} />
-
-      <Main isDesktop={isDesktop}>
-        {!isMobileOnly && !isFrame ? (
+    <SectionNavigationProvider>
+      <Layout>
+        {toast}
+        <RootTooltip />
+        {isMobileOnly && !isFrame ? (
           <ReactSmartBanner t={t} ready={ready} />
         ) : null}
-        {barTypeInFrame !== "none" ? <MainBar /> : null}
-        <div className="main-container">
-          <Outlet />
-        </div>
-      </Main>
-    </Layout>
+        {withoutNavMenu ? null : <NavMenu />}
+        <IndicatorLoader />
+        <ScrollToTop />
+        <DialogsWrapper t={t} />
+
+        <Main isDesktop={isDesktop}>
+          {!isMobileOnly && !isFrame ? (
+            <ReactSmartBanner t={t} ready={ready} />
+          ) : null}
+          {barTypeInFrame !== "none" ? <MainBar /> : null}
+          <div className="main-container">
+            <Outlet />
+          </div>
+        </Main>
+      </Layout>
+    </SectionNavigationProvider>
   );
 };
 

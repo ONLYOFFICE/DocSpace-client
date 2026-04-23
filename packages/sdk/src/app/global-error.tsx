@@ -26,31 +26,38 @@
 
 "use client";
 
-import { useCallback, useState, useLayoutEffect, useMemo } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { ThemeProviderComponent } from "@docspace/ui-kit/components/theme-provider";
 import { Error520SSR } from "@docspace/shared/components/errors/Error520";
 import { getUser } from "@docspace/shared/api/people";
 import { getSettings } from "@docspace/shared/api/settings";
 import type { TUser } from "@docspace/shared/api/people/types";
-import type {
-  TFirebaseSettings,
-  TSettings,
-} from "@docspace/shared/api/settings/types";
+import type { TSettings } from "@docspace/shared/api/settings/types";
 
 import useTheme from "@/hooks/useTheme";
 import useDeviceType from "@/hooks/useDeviceType";
 import useI18N from "@/hooks/useI18N";
 
-import FirebaseHelper from "@docspace/shared/utils/firebase";
+import type FirebaseHelper from "@docspace/shared/utils/firebase";
 
 import pkg from "../../package.json";
 
+const CHUNK_RELOAD_FLAG = "sdk.chunkErrorReloaded";
+
+const isChunkLoadError = (error: Error) =>
+  error.name === "ChunkLoadError" ||
+  /Loading chunk [\w-]+ failed/i.test(error.message ?? "");
+
 export default function GlobalError({ error }: { error: Error }) {
+  const [shouldReload] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    if (!isChunkLoadError(error)) return false;
+    return !window.sessionStorage.getItem(CHUNK_RELOAD_FLAG);
+  });
+
   const [user, setUser] = useState<TUser>();
   const [settings, setSettings] = useState<TSettings>();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isError, setError] = useState<boolean>(false);
 
   const { i18n } = useI18N({ settings, user });
   const { currentDeviceType } = useDeviceType();
@@ -58,49 +65,72 @@ export default function GlobalError({ error }: { error: Error }) {
     initialTheme: user?.theme,
     i18n,
   });
-  const firebaseHelper = useMemo(() => {
-    return new FirebaseHelper(settings?.firebase ?? ({} as TFirebaseSettings));
+  const [firebaseHelper, setFirebaseHelper] = useState<
+    FirebaseHelper | undefined
+  >(undefined);
+
+  useEffect(() => {
+    const fb = settings?.firebase;
+    if (!fb?.apiKey) return;
+    let cancelled = false;
+    import("@docspace/shared/utils/firebase").then((mod) => {
+      if (cancelled) return;
+      setFirebaseHelper(new mod.default(fb));
+    });
+    return () => {
+      cancelled = true;
+    };
   }, [settings?.firebase]);
 
   const getData = useCallback(async () => {
-    try {
-      setIsLoading(true);
-      const [userData, settingsData] = await Promise.all([
-        getUser(),
-        getSettings(),
-      ]);
+    const [userData, settingsData] = await Promise.all([
+      getUser().catch(() => undefined),
+      getSettings().catch(() => undefined),
+    ]);
 
+    if (userData) setUser(userData);
+    if (settingsData && typeof settingsData !== "string")
       setSettings(settingsData);
-      setUser(userData);
-    } catch (e) {
-      setError(true);
-      console.error(e);
-    } finally {
-      setIsLoading(false);
-    }
   }, []);
 
-  useLayoutEffect(() => {
-    getData();
-  }, [getData]);
+  useEffect(() => {
+    if (shouldReload) {
+      window.sessionStorage.setItem(CHUNK_RELOAD_FLAG, "1");
+      window.location.reload();
+      return;
+    }
 
-  if (isError) return;
+    getData();
+  }, [getData, shouldReload]);
+
+  if (shouldReload) {
+    return (
+      <html lang="en">
+        <body />
+      </html>
+    );
+  }
 
   return (
     <html lang="en">
       <body>
-        {!isLoading ? (
-          <ThemeProviderComponent theme={theme}>
-            <Error520SSR
-              i18nProp={i18n}
-              errorLog={error}
-              version={pkg.version}
-              user={user ?? ({} as TUser)}
-              firebaseHelper={firebaseHelper}
-              currentDeviceType={currentDeviceType}
-            />
-          </ThemeProviderComponent>
-        ) : null}
+        <ThemeProviderComponent theme={theme}>
+          <Error520SSR
+            key={
+              firebaseHelper
+                ? "with-firebase"
+                : settings
+                  ? "with-settings"
+                  : "initial"
+            }
+            i18nProp={i18n}
+            errorLog={error}
+            version={pkg.version}
+            user={user ?? ({} as TUser)}
+            firebaseHelper={firebaseHelper}
+            currentDeviceType={currentDeviceType}
+          />
+        </ThemeProviderComponent>
       </body>
     </html>
   );

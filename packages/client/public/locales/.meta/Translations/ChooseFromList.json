@@ -3,7 +3,7 @@
   "content": "Choose from list",
   "content_en_sha1_hash": "e284f61fe00c23c301b217153f5427eb75cab3eb",
   "created_at": "2025-05-19T21:30:49.956Z",
-  "updated_at": "2026-03-31T15:18:45.907Z",
+  "updated_at": "2026-04-08T21:25:12.048Z",
   "comment": {
     "text": "This translation key is used to display a message that prompts the user to select from a list of options in various UI components, including buttons and dialogs. The purpose of this text is to provide clear instructions to the user in moments when they need to make a choice from a predefined set of values. It appears as a label on a button component, guiding users through interactive elements.",
     "is_auto": true,
@@ -171,25 +171,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Escolha a partir da lista' is a literal translation and not the most natural phrasing in Portuguese. It can sound a bit awkward.",
-          "suggestion": "Escolha da lista"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Escolha da lista' is a literal translation but not the most natural or common way to say 'Choose from list' in Portuguese (Brazil). While understandable, it's not idiomatic.",
-          "suggestion": "A better translation would be 'Selecione da lista' or 'Escolha na lista'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -207,13 +195,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'පහතින් තෝරන්න' while understandable, isn't the most accurate or natural translation of 'Choose from list'. It literally translates to 'Choose from below'. A more natural translation might be 'ලේඛනයෙන් තෝරන්න' (Lekhanayen thoranna - Choose from the list) or 'รายการයෙන් තෝරන්න' if referring to a list.",
-          "suggestion": "ලේඛනයෙන් තෝරන්න (Lekhanayen thoranna) or รายการයෙන් තෝරන්න (Raayakaranayen thoranna)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -231,13 +213,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Изабери са листе' is not the most natural or accurate translation of 'Choose from list'. While understandable, 'Изабери' is a bit formal. A better option would be 'Одабери са листе'.",
-          "suggestion": "Одабери са листе"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -265,6 +241,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

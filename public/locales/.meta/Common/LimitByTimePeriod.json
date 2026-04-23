@@ -3,7 +3,7 @@
   "content": "Limit by time period",
   "content_en_sha1_hash": "03e40a5e784a8aec64ccc72778ffd126b2588b86",
   "created_at": "2025-08-26T11:15:03.626Z",
-  "updated_at": "2026-02-19T13:36:32.541Z",
+  "updated_at": "2026-04-08T05:46:59.178Z",
   "comment": {
     "text": "This text appears as the header for a dialog or panel allowing users to set an expiration date for a link. It indicates the option to limit the link's availability by a specific time period. Translators should ensure the translation accurately conveys the concept of setting a time-based expiration.",
     "is_auto": true,

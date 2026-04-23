@@ -3,7 +3,7 @@
   "content": "Your turn",
   "content_en_sha1_hash": "8a4e60471b34b8af985c6dd2d93792af71788f57",
   "created_at": "2025-05-19T21:30:49.657Z",
-  "updated_at": "2026-03-31T15:18:46.824Z",
+  "updated_at": "2026-04-07T19:50:15.488Z",
   "comment": {
     "text": "\"This translation key displays the message 'Your turn' to indicate whose action is being requested or awaited. It is used in UI elements where a user's input or submission is required.\"",
     "is_auto": true,
@@ -99,13 +99,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation '고객님의 차례입니다' literally translates to 'It is your customer's turn.' While understandable in some contexts, it's not the most natural or direct translation of 'Your turn.' It implies the turn belongs to the customer, which may be incorrect depending on the application.",
-          "suggestion": "Consider a more direct translation such as '당신의 차례입니다' (Dangsinui chareieumnida - Your turn) or '차례입니다' (Chareieumnida - It's your turn)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -114,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'ເປັນຂອງເຈົ້າແລ້ວ' translates more closely to 'It's your thing' or 'It's up to you' rather than 'Your turn.' It doesn't convey the meaning of taking a turn in a game or conversation.",
-          "suggestion": "A more accurate translation for 'Your turn' might be 'ຖ້າຂອງເຈົ້າ' (tha kong jao) or 'ຕາມຄືນຂອງເຈົ້າ' (tam khuen kong jao)."
+          "description": "The Lao translation 'ເປັນຂອງເຈົ້າແລ້ວ' means 'It is already yours' (ownership), whereas the English 'Your turn' refers to a sequence of actions or a waiting state in a process.",
+          "suggestion": "ຮອດຕາເຈົ້າແລ້ວ"
         }
       ],
       "approved_at": null
@@ -207,13 +201,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Vietnamese translation \"Phiên của bạn\" does not accurately convey the meaning of \"Your turn.\" \"Phiên của bạn\" translates to \"Your session\" or \"Your version.\" The correct translation for 'Your turn' should reflect a turn in a game or conversation.",
-          "suggestion": "Lượt của bạn"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
@@ -225,13 +213,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Radha jote' doesn't perfectly capture the nuance of 'Your turn'. While 'Radha' means 'turn', 'jote' means 'your'. A more accurate translation would depend on the specific context, but a possibility is 'Dheu yt' or a more conversational equivalent like 'Tani je ti'.",
-          "suggestion": "Consider 'Dheu yt' or a contextually appropriate alternative like 'Tani je ti'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

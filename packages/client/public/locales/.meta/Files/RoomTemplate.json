@@ -3,7 +3,7 @@
   "content": "Room template",
   "content_en_sha1_hash": "fdbb1ce823b57a9b8c778f4202dca453bf47d748",
   "created_at": "2025-05-19T21:30:56.152Z",
-  "updated_at": "2026-02-19T13:36:32.625Z",
+  "updated_at": "2026-04-07T19:35:05.094Z",
   "comment": {
     "text": "Room template is a key used to translate the text \"Room template\" in the UI, which appears on a bar component (/packages/client/src/pages/Home/InfoPanel/Body/views/Details/index.js, line 144), likely as part of a file management system.",
     "is_auto": true,
@@ -141,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Șablon sală\" is understandable, a more accurate and natural Romanian translation for \"Room template\" would be \"Șablon de cameră\" or \"Model de cameră\". \"Șablon sală\" sounds slightly awkward as 'șablon' typically refers to a pattern or mold.",
-          "suggestion": "Șablon de cameră"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -159,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation \"කොටස සැකිල්ල\" (kotasa sekilla) while understandable, isn't the most natural or precise translation for \"Room template.\" 'Kotasa' often implies a more formal or structured template, while 'sekilla' is a common term for template. A more accurate and natural translation would use terms that convey the idea of a pre-designed room layout.",
-          "suggestion": "Consider alternatives like \"මාර්ගගත සැලසුම්\" (maaragatasa selanum) - which means pre-designed plan/layout, or \"කාර්යසැල මාධූරිය\" (kaaryasala maadhuriya) - which means room design template. The best choice will depend on the specific context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -183,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Шаблон собе\" is incomplete. It translates to \"Room template\" but only includes 'room'. The full phrase 'template' is missing.",
-          "suggestion": "Шаблон просторије"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

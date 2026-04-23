@@ -1,0 +1,21 @@
+{
+  "key_path": "OpenPortalBilling",
+  "content": "Go to portal billing",
+  "content_en_sha1_hash": "28d60736c33a7e913b50b827b7a1dc5604a6f771",
+  "created_at": "2026-04-10T08:20:53.270Z",
+  "updated_at": "2026-04-10T08:20:53.270Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

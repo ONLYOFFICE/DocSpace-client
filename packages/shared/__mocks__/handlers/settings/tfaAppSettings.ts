@@ -35,13 +35,13 @@ const tfaAppSettingsSuccess = {
       id: "sms",
       title: "By SMS",
       enabled: false,
-      avaliable: false,
+      available: false,
     },
     {
       id: "app",
       title: "By authenticator app",
       enabled: false,
-      avaliable: true,
+      available: true,
     },
   ],
   count: 2,
@@ -61,13 +61,13 @@ const tfaAppSettingsEnabledSuccess = {
       id: "sms",
       title: "By SMS",
       enabled: false,
-      avaliable: false,
+      available: false,
     },
     {
       id: "app",
       title: "By authenticator app",
       enabled: true,
-      avaliable: true,
+      available: true,
     },
   ],
   count: 2,
@@ -96,3 +96,4 @@ export const tfaAppSettingsHandler = (port: string, isEnabled?: boolean) => {
     },
   );
 };
+

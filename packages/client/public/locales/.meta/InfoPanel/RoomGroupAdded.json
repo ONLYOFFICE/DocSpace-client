@@ -3,7 +3,7 @@
   "content": "Groups added.",
   "content_en_sha1_hash": "b5a565f02102919ca707ad4dfe829242fca68461",
   "created_at": "2025-05-19T21:30:54.921Z",
-  "updated_at": "2025-11-03T12:10:35.117Z",
+  "updated_at": "2026-04-07T19:35:05.119Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Groups added\" in a user interface. It appears as the title of an info panel or modal window, possibly after a group has been successfully created or updated. The goal is to inform users that their group has been successfully added or updated.",
     "is_auto": true,
@@ -159,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'කණ්ඩායම් එකතු කරන ලදි' is a descriptive phrase indicating an action in progress ('groups being added'). The English 'Groups added' is a statement of completion. A more accurate translation would imply completion.",
-          "suggestion": "කණ්ඩායම් එක්රැස් කරන ලදි."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -183,37 +177,19 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Групе додате.' translates to 'Groups added' but is in the plural, feminine accusative case. The English 'Groups added' implies that multiple groups were added. The singular accusative case would be more appropriate if referring to a single room group being added.",
-          "suggestion": "Consider using 'Група додате.' (Grupa dodate.) which translates to 'Group added.'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The correct plural form of 'group' in Serbian (Latin) is 'grupe'. The translation 'Grupe dodate' translates to 'Groups added' which is technically correct but a more natural and common phrasing would be 'Dodate grupe.'",
-          "suggestion": "Dodate grupe."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Gruplar ekledi' translates to 'Groups added' but implies that someone *added* the groups, not that groups *were* added. The English 'Groups added' is a statement of fact.",
-          "suggestion": "Gruplar eklendi."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

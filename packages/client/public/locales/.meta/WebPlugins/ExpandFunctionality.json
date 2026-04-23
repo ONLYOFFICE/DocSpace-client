@@ -3,7 +3,7 @@
   "content": "Expand functionality using Plugin SDK",
   "content_en_sha1_hash": "b0cd50976232d5cc7c67eef755691af18a4c9286",
   "created_at": "2025-05-19T21:30:49.907Z",
-  "updated_at": "2025-08-04T07:30:01.450Z",
+  "updated_at": "2026-04-08T18:46:07.275Z",
   "comment": {
     "text": "This translation key is used for the label that expands to show more information about expanding plugin functionality in the Plugin SDK. It appears as a button in the developer tools section of portal settings, allowing users to learn more about using the SDK effectively.",
     "is_auto": true,
@@ -30,13 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"قم بتوسيع الوظائف باستخدام اضافات SDK\" is a literal translation that doesn't fully capture the nuance of 'Expand functionality using Plugin SDK'.  'إضافات' (idafat) translates to 'add-ons' or 'additions,' which is not quite the same as 'plugins'.",
-          "suggestion": "توسيع نطاق الوظائف باستخدام حزمة تطوير البرامج (SDK) للمكونات الإضافية"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, using 'SDK' directly in Arabic is common but slightly less natural.  While understandable, a more tailored term would improve readability.",
-          "suggestion": "حزمة تطوير البرامج (SDK) للمكونات الإضافية"
+          "description": "The translation uses 'اضافات SDK' (SDK Add-ons) instead of 'Plugin SDK'. In a technical context, 'Plugin SDK' refers to the specific Software Development Kit for plugins, whereas the Arabic translation implies using 'SDK add-ons' to expand functionality, which changes the technical meaning.",
+          "suggestion": "قم بتوسيع الوظائف باستخدام SDK الملحقات"
         }
       ],
       "approved_at": null
@@ -44,13 +39,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'SDK plaginindən istifadə edərək funksionallığı genişləndirin' while technically correct, sounds slightly awkward in Azerbaijani. 'Plugin SDK-dan istifadə etməklə funksionallığı genişləndirin' would be a more natural phrasing.  'İstifadə edərək' is grammatically correct, but 'etməklə' flows better in this context.",
-          "suggestion": "Plugin SDK-dan istifadə etməklə funksionallığı genişləndirin"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -86,18 +75,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Laajenna toimintoja SDK-laajennuksen avulla' is not the most natural or idiomatic way to express 'Expand functionality using Plugin SDK' in Finnish. While technically correct, it sounds a bit clunky.",
-          "suggestion": "Laajenna toiminnallisuutta Plugin SDK:n avulla"
-        },
-        {
-          "type": "formatting",
-          "description": "The term 'Plugin SDK' would be better formatted as 'Plugin SDK:n' to show proper case and possessive usage in Finnish.",
-          "suggestion": "Plugin SDK:n"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -139,7 +117,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'spraudnis' is a literal translation of 'plug' (electrical) and is not the correct technical term for 'plugin' in Latvian software localization. The standard term is 'pielikne'.",
+          "suggestion": "Izvērst funkcionalitāti, izmantojot pieliknes SDK"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -169,13 +153,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Extinderea funcționalității cu ajutorul kit-ului de dezvoltare a plugin-urilor' is a bit verbose and not a direct equivalent to 'Expand functionality using Plugin SDK'. A more concise and accurate translation would be closer to 'Extinderea funcționalității prin SDK-ul de plugin-uri' or 'Extinde funcționalitatea cu SDK-ul de plugin-uri'. The current translation emphasizes 'with the help of' which isn't necessary.",
-          "suggestion": "Extinde funcționalitatea cu SDK-ul de plugin-uri"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -190,13 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'පේනු SDK භාවිතා කර පුළුල් ක්‍රියාකාරීත්‍වයක් අත්විඳින්න' is a bit awkward. 'අත්විඳින්න' (experience) doesn't quite capture the meaning of 'Expand functionality'.  A more accurate translation would suggest utilizing the Plugin SDK to add or extend functionality.",
-          "suggestion": "පේනු SDK භාවිතා කර ක්‍රියාකාරීත්වය වැඩිදියුණු කරන්න (Pēnu SDK vastunā kara kriyākāritva vadhidayu karanna)"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of 'පේනු' instead of 'පෙනුම්' (Plugins) is not standard Sinhala transliteration or terminology.  While understandable, it's not ideal.",
-          "suggestion": "පෙනුම් SDK භාවිතා කර ක්‍රියාකාරීත්වය වැඩිදියුණු කරන්න (Penum SDK vastunā kara kriyākāritva vadhidayu karanna)"
+          "description": "The translation uses 'පේනු' (Pen) instead of 'ප්ලගින්' (Plugin). 'පේනු' refers to a writing pen, which is a complete mistranslation of the technical term 'Plugin'.",
+          "suggestion": "Plugin SDK භාවිතා කර ක්‍රියාකාරීත්වය පුළුල් කරන්න"
         }
       ],
       "approved_at": null
@@ -219,13 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation uses \"Прошири\" which is a less common and slightly less precise translation of \"Expand\" in this context. \"Прошири\" can imply broadening or widening, while a more appropriate translation in this context would be \"Допуни\" (Supplement) or \"Додај\" (Add).",
-          "suggestion": "Допуни функционалност користећи Plugin SDK (SDK за додатке)"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of parentheses around \"SDK за додатке\" is a little awkward. It's implying that the abbreviation is being explained, which might not be necessary for the target audience.",
-          "suggestion": "Допуни функционалност користећи Plugin SDK."
+          "description": "The word 'фукционалност' is a typo; the correct spelling in Serbian is 'функционалност' (missing 'н').",
+          "suggestion": "Прошири функционалност користећи Plugin SDK (SDK за додатке)"
         }
       ],
       "approved_at": null
@@ -236,13 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Proširi fukcionalnost koristeći Plugin SDK (SDK za dodatke)' is a bit verbose. While not incorrect, it's more literal than necessary. The addition of '(SDK za dodatke)' is somewhat redundant as 'Plugin SDK' is already understood.",
-          "suggestion": "Proširi funkcionalnost pomoću Plugin SDK."
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'fukcionalnost' is a misspelling. The correct spelling is 'funkcionalnost'.",
-          "suggestion": "funkcionalnost"
+          "description": "The word 'fukcionalnost' is a typo; the correct spelling in Serbian is 'funkcionalnost'.",
+          "suggestion": "Proširi funkcionalnost koristeći Plugin SDK (SDK za dodatke)"
         }
       ],
       "approved_at": null
@@ -256,13 +219,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Розширити функціональність за допомогою SDK плагінів\" is a literal translation but could be improved for naturalness in Ukrainian. 'SDK плагінів' is a bit awkward. It would be more idiomatic to use something like 'SDK для плагінів' or 'плагінний SDK'.",
-          "suggestion": "Розширити функціональність за допомогою SDK для плагінів"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -272,6 +229,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

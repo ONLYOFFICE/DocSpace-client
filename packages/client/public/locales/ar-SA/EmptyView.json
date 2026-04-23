@@ -2,6 +2,7 @@
   "CollaborationRoomEmptyTitle": "مرحبًا بك في غرفة التعاون",
   "CollaboratorEmptyTitle": "الغرفة فارغة.",
   "CreateAIAgent": "إنشاء وكيل جديد",
+  "CreateAIAgentDescription": "ابدأ في بناء أول {{aiAgent}} لديك",
   "CreateDocument": "إنشاء مستند جديد",
   "CreateDocumentDescription": "استفد من إمكانيات معالجة النصوص الواسعة.",
   "CreateForm": "إنشاء نموذج PDF جديد",
@@ -16,7 +17,14 @@
   "CreateSpreadsheetDescription": "إجراء حسابات دقيقة بأقل جهد.",
   "CustomRoomEmptyTitle": "مرحبًا بك في الغرفة المخصصة",
   "DefaultFolderDescription": "قم بإسقاط الملفات هنا أو إنشاء ملفات جديدة.",
+  "EmptyAIAgentsAIDisabledDescription": "يسمح هذا القسم للمستخدمين بالعمل مع {{aiAgents}} – المساعدون الذكيون لمعالجة المستندات والمهام الأخرى. \nلبدء استخدامهم، يجب تمكين خدمة ميزات الذكاء الاصطناعي بواسطة مسؤول {{productName}}.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "لإنشاء واستخدام {{aiAgents}}، قم بتوصيل محفظتك وتمكين خدمة ميزات الذكاء الاصطناعي في إعدادات {{productName}}. بمجرد الانتهاء من ذلك، ستتمكن من العمل مع {{aiAgents}} والتعاون مع فريقك.",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "قوموا بتوصيل محفظتكم وتمكين ميزات الذكاء الاصطناعي",
+  "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} غير متوفرة بعد",
+  "EmptyAIAgentsAIEnabledUserDescription": "بمجرد أن يدعوك فريقك للتعاون، ستظهر {{aiAgents}} هنا، وجاهزة للمساعدة في المستندات، وإدارة المعرفة، والمهام اليومية.",
+  "EmptyAIAgentsDescription": "قم بإعداد مساعد شخصي لفريقك عن طريق إضافة قاعدة معرفية، واختيار النموذج المثالي، وربط {{mcpServer}}. ادعُ زملائك للتعاون والاستفادة القصوى من قدرات الدردشة الخاصة بالوكيل.",
+  "EmptyAIAgentsTitle": "أنشئ {{aiAgent}} الخاص بك",
+  "EmptyAIAgentsUserTitle": "لا يتوفر أي {{aiAgents}} بعد",
   "EmptyDescription": "ابدأ بالإجراءات السريعة:",
   "EmptyFavoritesDescription": "قوموا بتمييز الملفات والمجلدات بنجمة لإبقائها في متناول أيديكم ويسهل الوصول إليها. ",
   "EmptyFavoritesTitle": "لا توجد مفضلات بعد ",
@@ -56,6 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "تحميل من الجهاز",
   "UploadFromPortalTitle": "تحميل من {{productName}}",
   "UploadPDFFormOptionDescription": "حدد نموذج  PDFجاهزًا متاحًا في {{productName}} وقم بتحميله إلى الغرفة. ",
-  "VirtualDataRoomEmptyTitle": "مرحبًا بك في غرفة البيانات الافتراضية",
-  "EmptyAIAgentsTitle": "أنشئ {{aiAgent}} الخاص بك"
+  "VirtualDataRoomEmptyTitle": "مرحبًا بك في غرفة البيانات الافتراضية"
 }

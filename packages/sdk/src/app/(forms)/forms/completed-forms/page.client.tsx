@@ -56,8 +56,19 @@ const CompletedPage = () => {
   React.useEffect(() => {
     if (tourStore.showMockItems) return;
     if (completedFolder) return;
-    fetchSectionRef.current(FormsSection.CompletedForms);
 
+    const ssrHasData =
+      formsListStore.section === FormsSection.CompletedForms &&
+      !formsListStore.isLoading &&
+      formsListStore.folders.length > 0;
+    if (ssrHasData) return;
+
+    fetchSectionRef.current(FormsSection.CompletedForms);
+  }, [completedFolder, tourStore.showMockItems, formsListStore]);
+
+  React.useEffect(() => {
+    if (tourStore.showMockItems) return;
+    if (completedFolder) return;
     if (hasManagementAccess) {
       aiStoreRef.current.setCurrentFolder(null);
     }

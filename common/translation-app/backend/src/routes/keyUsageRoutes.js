@@ -1,7 +1,6 @@
 const fs = require("fs-extra");
 const path = require("path");
 const glob = require("glob");
-const { exec } = require("child_process");
 const { appRootPath, projectLocalesMap } = require("../config/config");
 const { writeJsonWithConsistentEol } = require("../utils/fsUtils");
 
@@ -78,97 +77,128 @@ async function findMetadataFiles(key) {
 }
 
 /**
+ * Finds all metadata files across all projects
+ * @returns {Promise<Array<{project: string, namespace: string, key: string, metaPath: string, data: Object}>>}
+ */
+async function findAllMetadataFiles() {
+  const metadataFiles = [];
+  const projects = Object.keys(projectLocalesMap);
+
+  for (const project of projects) {
+    const localesPath = projectLocalesMap[project];
+    if (!localesPath) continue;
+
+    const projectPath = path.join(appRootPath, localesPath);
+    const metaDir = path.join(projectPath, ".meta");
+
+    if (!(await fs.pathExists(metaDir))) continue;
+
+    const namespaceDirs = await fs.readdir(metaDir);
+
+    for (const namespace of namespaceDirs) {
+      const namespacePath = path.join(metaDir, namespace);
+      if (!(await fs.stat(namespacePath)).isDirectory()) continue;
+
+      const namespacePathPattern = path
+        .join(namespacePath, "*.json")
+        .replace(/\\/g, "/");
+
+      const keyFiles = glob.sync(namespacePathPattern);
+
+      for (const keyFile of keyFiles) {
+        try {
+          const keyData = await fs.readJson(keyFile);
+          const keyPath = keyData.key_path || path.basename(keyFile, ".json");
+
+          metadataFiles.push({
+            project,
+            namespace,
+            key: keyPath,
+            metaPath: keyFile,
+            data: keyData,
+          });
+        } catch (error) {
+          console.error(`Error reading metadata file ${keyFile}:`, error);
+        }
+      }
+    }
+  }
+
+  return metadataFiles;
+}
+
+/**
  * Search for a specific key in the codebase
  * @param {string} key - The translation key to search for
  * @param {string} namespace - Optional namespace to restrict the search pattern
  * @returns {Promise<Array<Object>>} - Array of usage locations with file paths and line numbers
  */
 async function findKeyUsageInCodebase(key, namespace) {
-  return new Promise((resolve, reject) => {
-    const usages = [];
-    const searchPattern = namespace ? `${namespace}:${key}` : key;
+  const searchPattern = namespace ? `${namespace}:${key}` : key;
 
-    // Use different search patterns to catch common translation usage patterns
-    const searchPatterns = [
-      `t\("${searchPattern}"\)`, // t("Common:Key")
-      `t\([\'\"]+${searchPattern}[\'\"]+\)`, // t('Common:Key')
-      `useTranslation\([\'\"]${namespace || ".*"}[\'\"]\).+${key}`, // useTranslation().t("Key")
-      `\{t\([\'\"]${searchPattern}[\'\"]\)\}`, // {t("Common:Key")}
-    ];
+  // Escape regex special characters to prevent regex injection from key/namespace values
+  const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const escapedPattern = escapeRegex(searchPattern);
+  const escapedKey = escapeRegex(key);
+  const escapedNs = namespace ? escapeRegex(namespace) : null;
 
-    const rootPath = path.resolve(appRootPath, "..");
+  // Build regex patterns matching common i18next usage forms
+  const searchRegexes = [
+    new RegExp(`t\\("${escapedPattern}"\\)`), // t("Common:Key")
+    new RegExp(`t\\(['"]+${escapedPattern}['"]+\\)`), // t('Common:Key')
+    new RegExp(`\\{t\\(["']${escapedPattern}["']\\)\\}`), // {t("Common:Key")}
+    escapedNs
+      ? new RegExp(`useTranslation\\(['"]${escapedNs}['"]\\).+${escapedKey}`)
+      : new RegExp(`useTranslation\\(['"'][^'"]*['"]\\).+${escapedKey}`),
+  ];
 
-    // Get all code file patterns
-    const patterns = [
-      `${rootPath}/**/*.ts`,
-      `${rootPath}/**/*.tsx`,
-      `${rootPath}/**/*.js`,
-      `${rootPath}/**/*.jsx`,
-    ];
+  const rootPath = path.resolve(appRootPath, "..");
+  const patterns = [
+    `${rootPath}/**/*.ts`,
+    `${rootPath}/**/*.tsx`,
+    `${rootPath}/**/*.js`,
+    `${rootPath}/**/*.jsx`,
+  ];
 
+  const codeFiles = glob.sync(patterns, {
+    ignore: ["**/node_modules/**", "**/dist/**", "**/build/**"],
+  });
+
+  const results = [];
+
+  for (const filePath of codeFiles) {
+    let content;
     try {
-      // Use glob to find all code files
-      const codeFiles = glob.sync(patterns, {
-        ignore: ["**/node_modules/**", "**/dist/**", "**/build/**"],
-      });
+      content = fs.readFileSync(filePath, "utf8");
+    } catch {
+      continue;
+    }
 
-      let pendingSearches = 0;
-      const results = [];
-
-      if (codeFiles.length === 0) {
-        resolve([]);
-        return;
-      }
-
-      // Search each pattern in each file
-      for (const pattern of searchPatterns) {
-        pendingSearches++;
-
-        const grepCommand = `grep -n "${pattern}" ${codeFiles.join(" ")} 2>/dev/null || true`;
-
-        exec(grepCommand, (error, stdout) => {
-          if (stdout) {
-            const lines = stdout.split("\n").filter((line) => line.trim());
-
-            for (const line of lines) {
-              // Parse grep output (format: path/to/file.js:line_number:matched_line)
-              const match = line.match(/^(.+):(\d+):(.*)$/);
-
-              if (match) {
-                const [, filePath, lineNumber, context] = match;
-
-                results.push({
-                  file_path: filePath,
-                  line_number: parseInt(lineNumber),
-                  context: context.trim(),
-                  module: filePath.includes("/packages/")
-                    ? filePath.match(/\/packages\/([^\/]+)/)[1]
-                    : path.basename(path.dirname(filePath)),
-                });
-              }
-            }
-          }
-
-          pendingSearches--;
-          if (pendingSearches === 0) {
-            // Remove duplicates
-            const uniqueResults = results.filter(
-              (result, index, self) =>
-                index ===
-                self.findIndex(
-                  (r) =>
-                    r.file_path === result.file_path &&
-                    r.line_number === result.line_number
-                )
-            );
-            resolve(uniqueResults);
-          }
+    const lines = content.split("\n");
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      if (searchRegexes.some((re) => re.test(line))) {
+        results.push({
+          file_path: filePath,
+          line_number: i + 1,
+          context: line.trim(),
+          module: filePath.includes("/packages/")
+            ? filePath.match(/\/packages\/([^/]+)/)[1]
+            : path.basename(path.dirname(filePath)),
         });
       }
-    } catch (error) {
-      reject(error);
     }
-  });
+  }
+
+  // Remove duplicates (same file + line)
+  return results.filter(
+    (result, index, self) =>
+      index ===
+      self.findIndex(
+        (r) =>
+          r.file_path === result.file_path && r.line_number === result.line_number
+      )
+  );
 }
 
 /**

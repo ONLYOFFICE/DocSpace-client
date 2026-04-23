@@ -3,7 +3,7 @@
   "content": "Commenter",
   "content_en_sha1_hash": "bf4df9c00c605d80b4491471e60b45b6eaaca147",
   "created_at": "2025-05-19T21:30:47.984Z",
-  "updated_at": "2025-12-19T13:32:32.696Z",
+  "updated_at": "2026-04-08T00:52:59.496Z",
   "comment": {
     "text": "This translation key is used to display \"Commenter\" as a role label in the application's UI. It appears on various screens where user roles are displayed, such as information panels and room member settings, helping users understand their permissions and access levels.",
     "is_auto": true,
@@ -117,13 +117,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ນັກສະແດງຄວາມຄິດເຫັນ' literally translates to 'person who expresses opinions/thoughts'. While not entirely wrong, it's a more verbose and formal translation of 'Commenter'. A more concise and commonly used translation would be better.",
-          "suggestion": "Consider 'ຄຳເຫັນ' or 'ຜູ້ໃຫ້ຄຳເຫັນ'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -147,13 +141,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Portuguese translation \"Comentador\" is not the most natural or accurate translation of \"Commenter\". While it is technically a valid word, \"Comentador\" has connotations of someone who excessively comments or criticizes, which may not align with the intended meaning of 'Commenter'. A better translation would be 'Comentário' or 'Participante'.",
-          "suggestion": "Consider using 'Comentário' (Comment) or 'Participante' (Participant) instead of 'Comentador'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -177,13 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'අදහස් දක්වන්නා' is a literal translation of 'Commenter,' it's quite formal and lengthy. A more natural and concise translation might be 'අදහස් කියන්නෙක්' or simply 'අදහස්කාරයා'.",
-          "suggestion": "Consider 'අදහස් කියන්නෙක්' or 'අදහස්කාරයා' for a more natural feel."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -225,13 +207,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Người nhận xét\" is a possible translation, \"Commenter\" generally refers to someone who leaves comments, not necessarily someone who reviews or critiques. \"Người bình luận\" would be a more accurate translation.",
-          "suggestion": "Người bình luận"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
@@ -240,10 +216,16 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'可评论' translates to 'can comment' or 'able to comment', which doesn't accurately represent the meaning of 'Commenter'. A 'Commenter' is someone who comments.",
-          "suggestion": "评论者 (píng lùn zhě)"
+          "description": "The translation '可评论' means 'Can comment' (an action/capability), whereas the English 'Commenter' refers to a person/role. In the context of user roles, it should be a noun.",
+          "suggestion": "评论者"
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

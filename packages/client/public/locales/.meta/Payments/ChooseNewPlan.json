@@ -3,7 +3,7 @@
   "content": "Would you like to choose a new pricing plan?",
   "content_en_sha1_hash": "827866603046faa49bb9d21d0bd4785aba26a659",
   "created_at": "2025-05-19T21:30:53.677Z",
-  "updated_at": "2025-05-24T06:56:17.430Z",
+  "updated_at": "2026-04-07T19:35:05.171Z",
   "comment": {
     "text": "This translation key is used to display a message asking users to choose a new pricing plan, typically found in contexts where user plans need to be upgraded or changed.",
     "is_auto": true,
@@ -147,18 +147,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'abonament' implies a subscription, which might not be the intended meaning of 'pricing plan'. 'Plan de prețuri' would be a more direct translation.",
-          "suggestion": "Plan de prețuri"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation uses the formal 'Doriți' which is appropriate but consider if a less formal tone ('Vrei') is more suitable for the application's overall voice.",
-          "suggestion": "Vrei să alegeți un plan de prețuri?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -176,13 +165,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'tarifný program' is a possible translation for 'pricing plan', it leans towards a more technical or service-specific plan. 'Cenový plán' would be a more direct and generally understood translation for 'pricing plan' in this context.",
-          "suggestion": "Chcete si vybrať nový cenový plán?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -224,18 +207,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '是否选择新的定价版本？' is a literal translation that doesn't flow naturally in Chinese. '版本' (version) isn't the most common term for a pricing plan in this context. It sounds a bit technical and formal.",
-          "suggestion": "是否选择新的套餐？ (Shìfǒu xuǎnzé xīn de tàocān?)"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, '是否' sounds slightly stiff. A more conversational approach would be better.",
-          "suggestion": "您想选择新的套餐吗？ (Nín xiǎng xuǎnzé xīn de tàocān ma?)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

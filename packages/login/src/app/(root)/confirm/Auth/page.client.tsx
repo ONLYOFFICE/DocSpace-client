@@ -150,7 +150,7 @@ const AuthHandler = () => {
           errorMessage = knownError;
         }
 
-        frameCallEvent({ event: "onAppError", data: error });
+        frameCallEvent({ event: "onAppError", data: errorMessage });
         replaced.current = false;
         toastr.error(errorMessage);
       }

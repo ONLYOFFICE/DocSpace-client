@@ -26,7 +26,7 @@
 
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 import { usePathname } from "next/navigation";
@@ -46,75 +46,35 @@ import { FormsSection } from "@/types/forms";
 
 import useFormsActions from "../../_hooks/useFormsActions";
 import useFormsContextMenu from "../../_hooks/useFormsContextMenu";
-import { useFormsListStore } from "../../_store/FormsListStore";
+import useFormThumbnail from "../../_hooks/useFormThumbnail";
 import { sectionFromPathname } from "../../_utils/sectionFromPathname";
-import { getThumbnail, setThumbnail } from "../../_utils/thumbnailCache";
+import { stripHost } from "../../_utils/thumbnailUrl";
 import FormStatusBadge from "./FormStatusBadge";
 import styles from "./FormsTile.module.scss";
 
 type FormsTileProps = {
   item: TFileItem;
+  originalFile: TFile;
   getIcon: TGetIcon;
 };
 
-const FormsTile = ({ item, getIcon }: FormsTileProps) => {
+const FormsTile = ({ item, originalFile, getIcon }: FormsTileProps) => {
   const tileRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation("Common");
   const { filesSettings } = useFilesSettingsStore();
   const { openForm } = useFormsActions({ t });
   const { getContextMenuModel } = useFormsContextMenu();
-  const { items } = useFormsListStore();
   const pathname = usePathname();
   const activeSection = sectionFromPathname(pathname);
 
-  const thumbUrl = item.thumbnailUrl
-    ? item.thumbnailUrl.replace(/^https?:\/\/[^/]+/, "")
-    : "";
-  const [blobThumbnail, setBlobThumbnail] = useState(
-    () => (thumbUrl && getThumbnail(thumbUrl)) || "",
-  );
-
-  useEffect(() => {
-    if (!thumbUrl || item.providerItem) return;
-
-    const cached = getThumbnail(thumbUrl);
-    if (cached) {
-      setBlobThumbnail(cached);
-      return;
-    }
-
-    let cancelled = false;
-    fetch(thumbUrl, { credentials: "include" })
-      .then((res) => {
-        if (!res.ok) throw new Error(`${res.status}`);
-        return res.blob();
-      })
-      .then((blob) => {
-        if (cancelled) return;
-        const blobUrl = URL.createObjectURL(blob);
-        setThumbnail(thumbUrl, blobUrl);
-        setBlobThumbnail(blobUrl);
-      })
-      .catch(() => {});
-
-    return () => {
-      cancelled = true;
-    };
-  }, [thumbUrl, item.providerItem]);
-
-  useEffect(() => {
-    return () => {
-      setBlobThumbnail("");
-    };
-  }, []);
+  const thumbUrl = stripHost(item.thumbnailUrl);
+  const blobThumbnail = useFormThumbnail(thumbUrl, !item.providerItem);
 
   const displayFileExtension = Boolean(filesSettings?.displayFileExtension);
 
   const temporaryExtension =
     item.id === -1 ? `.${item.fileExst}` : item.fileExst;
   const temporaryIcon = getIcon(temporaryExtension, 96, item.contentLength);
-
-  const originalFile = items.find((f) => f.id === item.id);
 
   const getDefaultAction = React.useCallback(
     (file: TFile) => {

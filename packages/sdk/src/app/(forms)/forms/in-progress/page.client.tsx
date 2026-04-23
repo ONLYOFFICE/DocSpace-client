@@ -31,6 +31,7 @@ import { observer } from "mobx-react";
 
 import { FormsSection } from "@/types/forms";
 
+import { useFormsListStore } from "../../_store/FormsListStore";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import { useFormsTourStore } from "../../_store/FormsTourStore";
@@ -38,6 +39,7 @@ import { useFormsDataContext } from "../../_context/FormsDataContext";
 import FormsGrid from "../../_components/forms-grid";
 
 const InProgressPage = () => {
+  const formsListStore = useFormsListStore();
   const formsSettingsStore = useFormsSettingsStore();
   const { editingFile, inProgressFolder, goBackToInProgressRoot } =
     useFormsNavigationStore();
@@ -49,8 +51,15 @@ const InProgressPage = () => {
   React.useEffect(() => {
     if (tourStore.showMockItems) return;
     if (inProgressFolder) return;
+
+    const ssrHasData =
+      formsListStore.section === FormsSection.InProgress &&
+      !formsListStore.isLoading &&
+      formsListStore.folders.length > 0;
+    if (ssrHasData) return;
+
     fetchSectionRef.current(FormsSection.InProgress);
-  }, [inProgressFolder, tourStore.showMockItems]);
+  }, [inProgressFolder, tourStore.showMockItems, formsListStore]);
 
   React.useEffect(() => {
     if (!inProgressFolder || editingFile) return;

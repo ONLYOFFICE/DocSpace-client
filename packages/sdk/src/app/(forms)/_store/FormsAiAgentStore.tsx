@@ -77,6 +77,8 @@ import {
   type FolderAgentEntry,
   type PanelPosition,
 } from "../_api/aiAgentSettings";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import i18n from "i18next";
 
 class FormsAiAgentStore {
   isPanelVisible = false;
@@ -107,6 +109,15 @@ class FormsAiAgentStore {
     number,
     Promise<FolderAgentEntry | null>
   >();
+  private _askFromDbInitPromise: Promise<void> | null = null;
+  private _askFromDbInitRoomId: string | number | null = null;
+  private _autoEnableAttempted = new Set<string>();
+  private _roomMembersCache: {
+    roomId: string | number;
+    promise: Promise<Awaited<ReturnType<typeof getRoomMembers>>>;
+    ts: number;
+  } | null = null;
+  private static ROOM_MEMBERS_TTL_MS = 30_000;
 
   constructor() {
     makeAutoObservable(this, {
@@ -117,8 +128,35 @@ class FormsAiAgentStore {
       _pendingCreations: false,
       _savePanelWidthTimer: false,
       _createAgentForFolderImpl: false,
+      _askFromDbInitPromise: false,
+      _askFromDbInitRoomId: false,
+      _autoEnableAttempted: false,
+      _roomMembersCache: false,
     } as Record<string, false>);
   }
+
+  private getRoomMembersCached = () => {
+    const now = Date.now();
+    const cached = this._roomMembersCache;
+    if (
+      cached &&
+      cached.roomId === this._roomId &&
+      now - cached.ts < FormsAiAgentStore.ROOM_MEMBERS_TTL_MS
+    ) {
+      return cached.promise;
+    }
+
+    const promise = getRoomMembers(this._roomId, { count: 100 });
+    this._roomMembersCache = { roomId: this._roomId, promise, ts: now };
+
+    promise.catch(() => {
+      if (this._roomMembersCache?.promise === promise) {
+        this._roomMembersCache = null;
+      }
+    });
+
+    return promise;
+  };
 
   setDefaultProvider = (provider: TDefaultProvider) => {
     this.defaultProvider = provider;
@@ -274,7 +312,6 @@ class FormsAiAgentStore {
     this._userKey = userId ? String(userId) : undefined;
     this.folderAgentsMap = loadFolderAgentsMap(roomId, this._userKey);
     this.aiAgentEnabled = loadAiEnabled(roomId, this._userKey);
-    this.initAskFromDBAgent();
     this.userExplicitlyDisabled = loadUserExplicitlyDisabled(
       roomId,
       this._userKey,
@@ -286,40 +323,61 @@ class FormsAiAgentStore {
     }
   };
 
-  private initAskFromDBAgent = async () => {
-    const saved = loadAskFromDBAgentId(this._roomId, this._userKey);
-    if (saved) {
-      const valid = await this.validateAgent(saved);
-      if (valid) {
-        runInAction(() => {
-          this.askFromDBAgentId = saved;
-        });
-        this.syncAgentMembers(saved).catch(() => {});
-        return;
+  initAskFromDBAgent = (): Promise<void> => {
+    if (
+      this._askFromDbInitPromise &&
+      this._askFromDbInitRoomId === this._roomId
+    ) {
+      return this._askFromDbInitPromise;
+    }
+
+    const roomIdForRun = this._roomId;
+    this._askFromDbInitRoomId = roomIdForRun;
+
+    const work = (async () => {
+      const saved = loadAskFromDBAgentId(roomIdForRun, this._userKey);
+      if (saved) {
+        const valid = await this.validateAgent(saved);
+        if (valid) {
+          runInAction(() => {
+            this.askFromDBAgentId = saved;
+          });
+          this.syncAgentMembers(saved).catch(() => {});
+          return;
+        }
+        // Saved agent is stale — fall through to create a new one
       }
-      // Saved agent is stale — fall through to create a new one
-    }
 
-    try {
-      const agent = await createAIAgent({
-        title: "Ask from DB",
-        attachDefaultTools: true,
-        ...(this.defaultProvider && {
-          chatSettings: {
-            providerId: this.defaultProvider.providerId,
-            modelId: this.defaultProvider.defaultModel,
-          },
-        }),
-      });
+      try {
+        const agent = await createAIAgent({
+          title: "Ask from DB",
+          attachDefaultTools: true,
+          ...(this.defaultProvider && {
+            chatSettings: {
+              providerId: this.defaultProvider.providerId,
+              modelId: this.defaultProvider.defaultModel,
+            },
+          }),
+        });
 
-      saveAskFromDBAgentId(this._roomId, agent.id, this._userKey);
-      runInAction(() => {
-        this.askFromDBAgentId = agent.id;
-      });
-      await this.syncAgentMembers(agent.id);
-    } catch {
-      // best-effort
-    }
+        saveAskFromDBAgentId(roomIdForRun, agent.id, this._userKey);
+        runInAction(() => {
+          this.askFromDBAgentId = agent.id;
+        });
+        await this.syncAgentMembers(agent.id);
+      } catch {
+        // best-effort
+      }
+    })();
+
+    this._askFromDbInitPromise = work;
+    work.finally(() => {
+      if (this._askFromDbInitPromise === work) {
+        this._askFromDbInitPromise = null;
+      }
+    });
+
+    return work;
   };
 
   setDoneFolderId = (id: number | null) => {
@@ -341,22 +399,30 @@ class FormsAiAgentStore {
 
   setCurrentFolder = async (folderId: number | null) => {
     const version = ++this._folderVersion;
-    this.currentFolderId = folderId;
-    this.agentChatSettings = undefined;
+    runInAction(() => {
+      this.currentFolderId = folderId;
+      this.agentChatSettings = undefined;
+      if (folderId) {
+        this.overrideAgentId = null;
+        this.pendingAttachmentFile = null;
+      }
+    });
 
     if (folderId) {
-      this.overrideAgentId = null;
-      this.pendingAttachmentFile = null;
       const entry = this.folderAgentsMap[folderId];
       if (entry?.agentId) {
         const valid = await this.validateAgent(entry.agentId);
         if (version !== this._folderVersion) return;
         if (valid) {
-          this.isPanelVisible = true;
+          runInAction(() => {
+            this.isPanelVisible = true;
+          });
           await this.fetchAgentChatSettings(entry.agentId, version);
         } else {
-          const { [folderId]: _, ...rest } = this.folderAgentsMap;
-          this.folderAgentsMap = rest;
+          runInAction(() => {
+            const { [folderId]: _, ...rest } = this.folderAgentsMap;
+            this.folderAgentsMap = rest;
+          });
           this.persistMap();
         }
       }
@@ -440,7 +506,9 @@ class FormsAiAgentStore {
               return vectorizeFiles(kbFiles.map((f) => f.id));
             }
           })
-          .catch(() => {}),
+          .catch(() => {
+            toastr.error(i18n.t("Common:SomethingWentWrong"));
+          }),
       );
     }
 
@@ -543,11 +611,13 @@ class FormsAiAgentStore {
         const allKbFileIds = updatedKbFiles.map((f) => f.id);
 
         if (allKbFileIds.length > 0) {
-          await vectorizeFiles(allKbFileIds).catch(() => {});
+          await vectorizeFiles(allKbFileIds).catch(() => {
+            toastr.error(i18n.t("Common:SomethingWentWrong"));
+          });
         }
       }
     } catch {
-      // ignore
+      toastr.error(i18n.t("Common:SomethingWentWrong"));
     } finally {
       runInAction(() => {
         this.isSyncingKB = false;
@@ -651,7 +721,7 @@ class FormsAiAgentStore {
 
     try {
       const [roomRes, agentRes] = await Promise.all([
-        getRoomMembers(this._roomId, { count: 100 }),
+        this.getRoomMembersCached(),
         getRoomMembers(agentId, { count: 100 }),
       ]);
 
@@ -724,6 +794,10 @@ class FormsAiAgentStore {
 
   autoEnableIfAvailable = async () => {
     if (this.userExplicitlyDisabled) return;
+
+    const attemptKey = `${this._roomId}:${this._userKey ?? ""}`;
+    if (this._autoEnableAttempted.has(attemptKey)) return;
+    this._autoEnableAttempted.add(attemptKey);
 
     // AI already enabled — ensure agents exist for all Done subfolders
     if (this.aiAgentEnabled) {

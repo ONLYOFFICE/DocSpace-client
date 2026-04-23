@@ -3,7 +3,7 @@
   "content": "Enter login",
   "content_en_sha1_hash": "14efd71c30a11df3374e3d9d55ad60a5ddeeb0b0",
   "created_at": "2025-05-19T21:30:53.298Z",
-  "updated_at": "2025-12-09T12:12:27.329Z",
+  "updated_at": "2026-04-08T21:59:07.878Z",
   "comment": {
     "text": "The translation key \"EnterLogin\" is used to display a placeholder text in a user input field within the SMTP settings page. Translators should provide a translated version of this text that users can enter when setting up email integration.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'أدخل تسجيل الدخول' while literally meaning 'Enter login', doesn't convey the intended meaning as effectively as alternatives. A more natural translation would be something along the lines of 'أدخل بيانات الدخول' (Enter login credentials) or 'تسجيل الدخول' (Login).",
-          "suggestion": "أدخل بيانات الدخول"
+          "description": "The translation 'أدخل تسجيل الدخول' means 'Enter the login process/action' rather than 'Enter login [credentials/username]'. In the context of a placeholder for an input field, it should refer to the login name or username itself.",
+          "suggestion": "أدخل اسم المستخدم"
         }
       ],
       "approved_at": null
@@ -39,7 +39,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Daxil olun' means 'Log in' (an action/command), whereas the English 'Enter login' in the context of a placeholder refers to the 'Login name' or 'Username' to be typed into the field.",
+          "suggestion": "Giriş adını daxil edin"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -51,73 +57,37 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Enter login\" is a directive to input a username. The Czech translation \"Zadejte přihlašovací jméno\" translates to \"Enter login name\". While technically correct, it's a bit wordy and doesn't perfectly capture the intended concise meaning of the English prompt. A more natural and concise translation might be \"Přihlašovací jméno\" or \"Uživatelské jméno\".",
-          "suggestion": "Consider \"Přihlašovací jméno\" or \"Uživatelské jméno\" for a more concise and natural translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Geben Sie Login ein\" is not ideal. While technically correct, \"Login\" is often used in German without translation. A more natural phrasing would be \"Login eingeben\" or \"Bitte Login eingeben\".",
-          "suggestion": "Login eingeben"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Εισάγετε σύνδεση\" is a literal translation of 'Enter login' and doesn't convey the intended meaning of 'Enter your login credentials' or 'Enter your username and password'.",
-          "suggestion": "Εισάγετε τα στοιχεία εισόδου σας"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Introduzca nombre de inicio de sesión' is too literal and not idiomatic. 'Enter login' typically translates to something more concise and user-friendly.",
-          "suggestion": "Iniciar sesión"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation 'Syötä käyttäjätunnus' translates to 'Enter username', while the English 'Enter login' implies entering a login credential (username or password). 'Syötä kirjautumistiedot' would be a closer translation.",
-          "suggestion": "Syötä kirjautumistiedot"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Saisir le login' is understandable, a more natural and accurate translation of 'Enter login' would be 'Entrez le login' or 'Introduisez le login'. 'Saisir' is used for inputting data, but 'entrer' or 'introduire' better reflects the prompt of entering login credentials.",
-          "suggestion": "Entrez le login"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -126,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Մուտքագրեք մուտք\" is a literal translation of \"Enter login\" and doesn't convey the intended meaning. It translates to 'Enter entry'. The correct translation should convey the idea of providing login credentials.",
-          "suggestion": "Մուտքագրեք գործողության տվյալներ (Enter credentials) or Գործողության տվյալներ (Credentials)"
+          "description": "The translation 'Մուտքագրեք մուտք' is a tautology (literally 'Enter entry') and does not correctly convey the meaning of 'Enter login' (the username/identifier).",
+          "suggestion": "Մուտքագրեք մուտքանունը"
         }
       ],
       "approved_at": null
@@ -141,7 +111,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation 'ログインを入力' means 'Input the login' (as an instruction to perform an action), whereas the English 'Enter login' in the context of a placeholder should mean 'Login name' or 'Enter your login ID'. In Japanese UI design, 'ログインを入力' sounds like a command to type something, but for a placeholder, it is more natural and accurate to use 'ログイン名' (Login name) or 'ログインID' (Login ID).",
+          "suggestion": "ログイン名"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -150,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '로그인 입력' while understandable, isn't the most natural or idiomatic way to say 'Enter login' in Korean. A more natural phrasing would be '로그인 정보 입력' (Login Information Input) or simply '로그인' (Login).",
-          "suggestion": "로그인 정보 입력"
+          "description": "The translation '로그인 입력' means 'Input login' or 'Enter the login (action)', whereas in the context of a placeholder, it should mean 'Enter your login ID/username'. In Korean UI design, '로그인' refers to the act of logging in, while the field itself requires a '사용자 이름' (Username) or '로그인 ID'.",
+          "suggestion": "로그인 ID 입력"
         }
       ],
       "approved_at": null
@@ -162,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເຂົ້າ​ສູ່​ລະ​ບົບ\" literally translates to \"enter system\". While functionally similar to \"enter login\", it's not the most direct or natural translation for the English phrase \"Enter login\". A more accurate translation might be something like \"ໃສ່ຊື່ເຂົ້າສູ່ລະບົບ\" (sai sueu khao suu rabop) which means 'enter username and password' or \"ເຂົ້າ​ສູ່​ການ​ເຂົ້າສູ່ລະບົບ\" (khao suu gaan khao suu rabop) which means 'enter the login process'.",
-          "suggestion": "ໃສ່ຊື່ເຂົ້າສູ່ລະບົບ"
+          "description": "The Lao translation 'ເຂົ້າ​ສູ່​ລະ​ບົບ' means 'Log in' (an action/button), whereas the English text 'Enter login' is a placeholder instruction for a user to input their username/login ID.",
+          "suggestion": "ປ້ອນຊື່ເຂົ້າໃຊ້"
         }
       ],
       "approved_at": null
@@ -171,13 +147,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ievadiet pieteikšanās vārdu' literally translates to 'Enter login name'. The English 'Enter login' is more general and refers to entering login credentials (username/password). 'Ievadiet pieteikšanās vārdu' is too specific.",
-          "suggestion": "Ievadiet lietotājvārdu un paroli"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -195,37 +165,19 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Introduzir login\" is a literal translation and may not be the most natural or user-friendly way to say \"Enter login\" in Portuguese. A more common and idiomatic translation would be 'Inserir login' or 'Login'.",
-          "suggestion": "Inserir login"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Digite login' is a literal translation but not ideal. 'Login' is often used directly in Portuguese (Brazil) and a more natural phrasing would be 'Insira login' or 'Digite seu login'.",
-          "suggestion": "Insira login"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Introduceți nume de conectare\" is understandable, a more accurate and common translation of 'Enter login' in this context would be 'Introduceți datele de autentificare'. \"Nume de conectare\" is too literal and slightly awkward.",
-          "suggestion": "Introduceți datele de autentificare"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -237,19 +189,19 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'පිවිසුම ඇතුල් කරන්න' means 'Enter the entry/access' rather than 'Enter login' (the username/ID). In the context of an SMTP settings input field, 'Login' refers to the user identifier.",
+          "suggestion": "ලොගින් නම ඇතුළත් කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Zadajte prihlasovacie meno\" is a bit literal and formal for a user interface label. A more natural and user-friendly translation would be 'Prihláste sa' or 'Zadajte používateľské meno'.",
-          "suggestion": "Prihláste sa"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -258,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Vnesi prijavo\" is not the most natural or accurate translation of \"Enter login\". \"Vnesi uporabniško ime in geslo\" (Enter username and password) or \"Vnesti prijavne podatke\" (Enter login details) would be more appropriate.",
-          "suggestion": "Vnesi uporabniško ime in geslo"
+          "description": "The translation 'Vnesi prijavo' means 'Enter application' or 'Enter registration', whereas the context requires a placeholder for a username/login credential.",
+          "suggestion": "Vnesi uporabniški stevilo"
         }
       ],
       "approved_at": null
@@ -273,13 +225,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Unesi login' is not the most natural or accurate translation of 'Enter login'. While 'Unesi' is a verb meaning 'enter', it's a bit awkward in this context. 'Upiši login' or 'Unesite login' would be better alternatives.",
-          "suggestion": "Upiši login"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -297,25 +243,19 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Enter login\" is not a common or idiomatic expression. A more accurate translation would focus on the action of entering login credentials. \"Nhập thông tin đăng nhập\" is a reasonable translation of that action, but it doesn't directly translate \"Enter login\".",
-          "suggestion": "Consider re-evaluating the source English to ensure it accurately reflects the intended meaning. If the intent is simply to request login credentials, \"Nhập thông tin đăng nhập\" is acceptable but could be more specific depending on the UI context (e.g., 'Tên đăng nhập' - Username, 'Mật khẩu' - Password)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '输入登录名' literally translates to 'Enter username'. While related to the concept of login, it's not a direct and accurate translation of 'Enter login'. 'Enter login' implies entering login credentials, which '输入登录名' doesn't convey.",
-          "suggestion": "输入登录凭据"
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

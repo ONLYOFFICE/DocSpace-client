@@ -3,7 +3,7 @@
   "content": "Who has access",
   "content_en_sha1_hash": "b82540c6a77efe28089091e2a93027edf47bac9e",
   "created_at": "2025-08-26T11:15:03.431Z",
-  "updated_at": "2025-11-13T07:58:08.610Z",
+  "updated_at": "2026-04-07T19:57:33.966Z",
   "comment": {
     "text": "This key displays the text \"Who has access\" as a label within an access selector block, likely in a dialog or panel where users manage link permissions. It's used to clearly indicate what the following options pertain to – the individuals or groups who currently have access.",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation \"Kimə giriş var\" literally translates to \"Who has access?\" but might not be the most natural or idiomatic way to phrase this question in Azerbaijani. While understandable, a more nuanced translation might be preferable.",
-          "suggestion": "Consider alternatives like \"Kim daxil ola bilir?\" (Who can log in?) or \"Kimə icazə var?\" (Who has permission?)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -93,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Ով ունի մուտքի իրավունք\" is a literal translation, it's a bit clunky and formal for the simple phrase \"Who has access\". A more natural and common translation would be \"Ուզում եմ իմանալ ով ունի մուտք\" or simply \"Ով ունի մուտք\".",
-          "suggestion": "Consider using \"Ով ունի մուտք\" or \"Ուզում եմ իմանալ ով ունի մուտք\" for a more natural feel."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -111,13 +99,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"アクセスできるユーザー\" (akusesu dekiru yūzā) is a possible translation, it's quite literal and verbose for \"Who has access.\" A more natural and concise translation would be something like \"アクセス権限を持つ人\" (akusesu kenmei o motsu hito) or simply \"アクセス権限\" (akusesu kenmei).",
-          "suggestion": "Consider \"アクセス権限を持つ人\" or \"アクセス権限\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -129,13 +111,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation \"ໃຜມີການເຂົ້າເຖິງ\" is a literal translation and sounds slightly awkward in Lao. A more natural phrasing would be preferred.",
-          "suggestion": "ໃຜສາມາດເຂົ້າໄດ້"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -207,13 +183,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Ко има приступ\" is understandable, a more natural and idiomatic translation of \"Who has access\" would be \"Ко има дозволу\" or \"Ко може да приступи\". \"Приступ\" often implies physical access rather than authorization.",
-          "suggestion": "Ко има дозволу"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -243,13 +213,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"谁拥有访问权限\" is technically correct, it's a bit formal and verbose for the English phrase \"Who has access.\" A more natural and common translation would be more concise.",
-          "suggestion": "谁有权限"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

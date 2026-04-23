@@ -2,7 +2,6 @@
   "AuthViaNTLM": "Uwierzytelnianie przez NTLM",
   "EnableSSL": "Włącz protokół SSL",
   "EnterDomain": "Wpisz domenę",
-  "EnterEmail": "Wpisz e-mail",
   "EnterLogin": "Wpisz login",
   "EnterPort": "Wpisz port",
   "Host": "Host",

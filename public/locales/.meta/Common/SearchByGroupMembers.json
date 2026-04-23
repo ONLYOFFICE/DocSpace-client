@@ -3,7 +3,7 @@
   "content": "Search by group members",
   "content_en_sha1_hash": "184145132a97e055ac3dffd682c055646ed6d938",
   "created_at": "2025-10-07T15:38:57.553Z",
-  "updated_at": "2025-10-07T15:39:51.357Z",
+  "updated_at": "2026-04-07T23:57:45.870Z",
   "comment": {
     "text": "This key provides the placeholder text for a search input field within a group members edit dialog. It allows users to search for members within a group by name or other identifying information. Translators should ensure the phrasing encourages users to search for group members.",
     "is_auto": true,

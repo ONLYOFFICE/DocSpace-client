@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
@@ -63,8 +64,10 @@ const ApiKeys = (props: ApiKeysProps) => {
 
   const { t, ready } = useTranslation(["Settings", "Common"]);
 
-  const [createKeyDialogIsVisible, setCreateKeyDialogIsVisible] =
-    useState(false);
+  const [searchParams] = useSearchParams();
+  const [createKeyDialogIsVisible, setCreateKeyDialogIsVisible] = useState(
+    () => searchParams.get("create") === "true",
+  );
   const [deleteKeyDialogIsVisible, setDeleteKeyDialogIsVisible] =
     useState(false);
   const [actionItem, setActionItem] = useState<TApiKey | null>(null);

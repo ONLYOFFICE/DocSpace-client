@@ -12,5 +12,8 @@
   "SuccessConnected": "{{serviceName}}-ը հաջողությամբ միացվել է որպես ծանուցումների ալիք։ Այժմ դուք կստանաք թարմացումներ այնտեղ։",
   "SuccessDisconnected": "{{serviceName}}-ը հաջողությամբ անջատվել է որպես ծանուցումների ալիք։ Ծանուցումներ այլևս չեն ուղարկվի այնտեղ։",
   "UsefulTips": "Օգտակար {{productName}} խորհուրդներ",
-  "UsefulTipsDescription": "Ստացեք օգտակար ուղեցույցներ {{productName}}-ի մասին"
+  "UsefulTipsDescription": "Ստացեք օգտակար ուղեցույցներ {{productName}}-ի մասին",
+  "ActionsWithFilesDescription": "Պիտակները կընդգծեն ֆայլի գործունեությունը՝ վերբեռնումները, խմբագրումները կամ կիսումները՝ {{rooms}}, {{shared}}, {{documents}}, և {{aiAgents}} բաժիններում։",
+  "RoomsActivityDescription": "Ստացեք անմիջական էլեկտրոնային հաղորդակցություններ նոր կիսվող ֆայլերի/հանգամանային և գործունեության մասին ձեր {{rooms}}-ում և {{aiAgents}}-ում։",
+  "RoomUpdateNotify": "{} բովանդակություն, {{rooms}} և {{aiAgents}} գործունեություն"
 }

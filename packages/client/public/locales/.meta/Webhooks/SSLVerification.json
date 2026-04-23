@@ -3,7 +3,7 @@
   "content": "SSL verification",
   "content_en_sha1_hash": "2450230a66301a4510305fe23394616284bb507b",
   "created_at": "2025-05-19T21:30:49.844Z",
-  "updated_at": "2025-05-24T02:09:07.463Z",
+  "updated_at": "2026-04-08T19:10:01.386Z",
   "comment": {
     "text": "The \"SSL Verification\" translation key is used to display a confirmation message when verifying an SSL connection. In the PortalSettings page, this translation appears in a UI element related to developer tools, where it likely informs users about the security validation process for webhooks.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'مصادقة' (Authentication) is used instead of 'التحقق من' (Verification). In a technical context, SSL Verification refers to the process of validating a certificate, whereas Authentication refers to proving identity.",
+          "suggestion": "التحقق من SSL"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -69,7 +75,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation 'SSL-varmenne' means 'SSL certificate', whereas the English 'SSL verification' refers to the process of verifying/validating the SSL. This changes the meaning from an action/process to a noun/object.",
+          "suggestion": "SSL-varmennus"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -199,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

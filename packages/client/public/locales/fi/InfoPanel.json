@@ -2,6 +2,7 @@
   "AddedRoomTags": "Tägit lisätty.",
   "Administration": "Hallinto",
   "AgentRenamed": "Agentti <1>«{{oldRoomTitle}}»</1> nimennettiin uudelleen <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Katso {{aiAgents}} tiedot täältä",
   "AndMoreLabel": "ja <1>{{count}} enemmän</1>",
   "CreationDate": "Luontipäivä",
   "Data": "Tiedot",
@@ -60,11 +61,14 @@
   "IndexChanged": "Hakemisto muutettu",
   "ItemsSelected": "Valitut kohteet",
   "LastModifiedBy": "Viimeksi muokannut",
+  "LastUpdateInfo": "Viimeisin päivitys",
   "LifetimeEnds": "Käyttöikä päättyy",
   "MembersEmptyScreenText": "Katso jäsentiedot täältä",
+  "NoAgent": "Ei {{aiAgent}}ia",
   "NoRecordsFound": "Merkintöjä ei löydy",
   "Properties": "Ominaisuudet",
   "Resolution": "Päätös",
+  "RoomChangeOwner": "Huoneen omistaja vaihtui.",
   "RoomCreateUserCount": "Käyttäjät lisätty ({{count}}).",
   "RoomDenyDownloadDisabled": "Lataaminen ja kopiointi rajoittamaton",
   "RoomDenyDownloadEnabled": "Lataaminen ja kopiointi rajoitettu",
@@ -98,6 +102,5 @@
   "SubmenuHistory": "Historia",
   "UserFileUpdated": "Tiedosto päivitetty.",
   "Users": "Käyttäjät",
-  "Versions": "Versiot",
-  "LastUpdateInfo": "Viimeisin päivitys"
+  "Versions": "Versiot"
 }

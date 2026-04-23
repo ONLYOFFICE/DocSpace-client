@@ -3,7 +3,7 @@
   "content": "Section \"Users\" includes the users you selected in the previous step. By default, it is always enabled and can't be unselected.",
   "content_en_sha1_hash": "a1aa96cf088012a8b3bb36cb32c986c521187c04",
   "created_at": "2025-05-19T21:30:53.169Z",
-  "updated_at": "2025-11-13T07:58:08.214Z",
+  "updated_at": "2026-04-08T23:57:42.814Z",
   "comment": {
     "text": "The \"UsersSectionDescription\" translation key provides a textual explanation for the \"Users\" section in the import step process. It helps to inform users that this section always includes selected users and cannot be disabled by default. This text typically appears on-screen as a tooltip or within an import component.",
     "is_auto": true,
@@ -27,37 +27,19 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The quotation marks around \"Users\" are not consistently used. English uses double quotes, while Arabic appears to be using Arabic quotes.",
-          "suggestion": "Ensure consistent use of double quotes (\"\") for the \"Users\" section name to match the English source and maintain consistency within the application."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'default' is misspelled as 'defolt'.",
-          "suggestion": "default"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The quotation marks used for \"Потребители\" are incorrect for Bulgarian. They should be guillemets (« »).",
-          "suggestion": "Replace \"Потребители\" with «Потребители»"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -81,7 +63,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Gender disagreement: 'La sección' (feminine) is referred to as 'habilitado' (masculine). It should be 'habilitada' to match the subject.",
+          "suggestion": "La sección \"Usuarios\" incluye los usuarios que ha seleccionado en el paso anterior. De forma predeterminada, siempre está habilitada y no se puede deseleccionar."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -96,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"can't be unselected\" is translated as \"impossible à désactiver\". While technically correct, it's a bit clunky and less natural in French. A more fluid translation would be \"ne peut pas être désactivée\" or \"n'est pas désactivable\".",
-          "suggestion": "ne peut pas être désactivée"
+          "description": "Grammatical error in the past participle: 'sélectionné' should be 'sélectionnés' to agree with the plural direct object 'utilisateurs' placed before the verb.",
+          "suggestion": "La section Utilisateurs comprend les utilisateurs que vous avez sélectionnés à l'étape précédente. Par défaut, cette option est toujours activée et impossible à désactiver."
         }
       ],
       "approved_at": null
@@ -105,13 +93,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word \"Օգտատերեր\" should be \"Օգտվողներ\". It is a common misspelling but \"Օգտվողներ\" is the correct term for 'users'.",
-          "suggestion": "Օգտվողներ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -119,8 +101,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The verb agreement is incorrect. 'abilitato' should agree with 'sezione' which is feminine. It should be 'abilitata'.",
+          "type": "incorrect_translation",
+          "description": "Gender disagreement: 'La sezione' (feminine) is referred to as 'abilitato' and 'deselezionato' (masculine). It should be 'abilitata' and 'deselezionata' to match the subject 'sezione'.",
           "suggestion": "La sezione \"Utenti\" include gli utenti selezionati nel passaggio precedente. Per impostazione predefinita, è sempre abilitata e non può essere deselezionata."
         }
       ],
@@ -149,9 +131,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Latvian translation uses a slightly verbose phrasing that could be more concise while maintaining clarity. While not strictly incorrect, it feels less natural than it could be.",
-          "suggestion": "Consider a more concise phrasing such as: \"Sadaļā 'Lietotāji' ir iekļauti lietotāji, kurus iepriekš izvēlējāties. Tas ir vienmēr aktivizēts un to nevar atslēgt.\""
+          "type": "incorrect_translation",
+          "description": "The Latvian translation uses 'tas' (it - masculine) to refer to 'Sadaļa' (Section - feminine), and 'to' (them - accusative) to refer to 'Sadaļa' (Section - feminine), creating grammatical gender disagreement that obscures whether the 'section' or the 'users' cannot be unselected.",
+          "suggestion": "Sadaļā \"Lietotāji\" ir iekļauti lietotāji, kurus atlasījāt iepriekšējā darbībā. Pēc noklusējuma tā vienmēr ir iespējota un to nevar izslēgt."
         }
       ],
       "approved_at": null
@@ -159,19 +141,19 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The use of \"Deze\" is ambiguous. It's unclear what it refers to (the section or the default state). It should be more specific.",
-          "suggestion": "Change \"Deze is standaard altijd ingeschakeld\" to \"Het gedeelte is standaard altijd ingeschakeld\" or \"Dit is standaard altijd ingeschakeld\" depending on the intended reference."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Ukownicy' is not a valid Polish word (likely a hallucination or typo for 'Użytkownicy'). Additionally, 'wona' is not a valid Polish word in this context (likely a typo for 'włączona').",
+          "suggestion": "Sekcja „Użytkownicy” zawiera użytkowników wybranych w poprzednim kroku. Domyślnie jest ona zawsze włączona i nie można jej odznaczyć."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -180,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word \"ativado\" (enabled) isn't the most natural translation for \"enabled\" in this context. \"Habilitado\" or \"ativo\" would be better.",
-          "suggestion": "A seção \"Usuários\" inclui os usuários selecionados na etapa anterior. Por padrão, está sempre habilitado/ativo e não pode ser desmarcado."
+          "description": "Gender disagreement: 'A seção' (feminine) is referred to as 'ativado' and 'desmarcado' (masculine). It should be 'ativada' and 'desmarcada' to agree with 'seção'.",
+          "suggestion": "A seção \"Usuários\" inclui os usuários selecionados na etapa anterior. Por padrão, está sempre ativada e não pode ser desmarcada."
         }
       ],
       "approved_at": null
@@ -192,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'ativado' (activated) doesn't quite capture the meaning of 'enabled' in this context. While technically correct, 'habilitado' would be a more accurate and natural-sounding translation for 'enabled' when referring to a section or feature.",
-          "suggestion": "A seção \"Usuários\" inclui os usuários selecionados na etapa anterior. Por padrão, está sempre habilitada e não pode ser desmarcada."
+          "description": "Gender disagreement: 'A seção' (feminine) is referred to as 'ativado' and 'desmarcado' (masculine). It should be 'ativada' and 'desmarcada' to agree with 'seção'.",
+          "suggestion": "A seção \"Usuários\" inclui os usuários selecionados na etapa anterior. Por padrão, está sempre ativada e não pode ser desmarcada."
         }
       ],
       "approved_at": null
@@ -213,7 +195,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word for 'Users' is misspelled as 'පරිශ්‍රීලකයින්' (parishrilakayin) instead of the correct 'පරිශීලකයින්' (parishilakayin). This is a critical spelling error in a key technical term.",
+          "suggestion": "\"පරිශීලකයින්\" කොටසට ඔබ කලින් පියවරේ දී තෝරාගත් පරිශීලකයින් ඇතුළත් වේ. පෙරනිමි පරිදි එය සැමවිටම සබල අතර තේරීම ඉවතලීමට නොහැකිය."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -225,19 +213,19 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovenian translation uses the masculine gender 'ga' (referring to 'razdelek') when it should refer to the section 'razdelek' or the state of being enabled. More importantly, 'preklicati' (to cancel/revoke) is an incorrect translation for 'unselected' in the context of a checkbox or setting; 'odklopljeno' or 'izbrano' would be more accurate. However, the most critical error is the gender mismatch: 'Razdelek... je vedno omogočeno' (Masculine subject + Neuter predicate).",
+          "suggestion": "Razdelek \"Uporabniki\" vključuje uporabnike, ki ste jih izbrali v prejšnjem koraku. Privzeto je vedno omogočen in ga ni mogoče izklopiti."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'odзначити' (odznaciti) should be 'онемогућити' (onemogućiti) for better clarity and accuracy in this context.",
-          "suggestion": "онемогућити"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -267,13 +255,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Chinese translation includes double quotes around the word \"用户\" (User). While quotation marks can be used in Chinese, in this context they are unnecessary and slightly awkward. They make it appear as if 'User' is a variable or a term being specifically defined.",
-          "suggestion": "Remove the double quotes around “用户”. The translation should be: “用户部分包括您在上一步中选择的用户。默认情况下，它始终处于启用状态，无法取消选择。”"
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

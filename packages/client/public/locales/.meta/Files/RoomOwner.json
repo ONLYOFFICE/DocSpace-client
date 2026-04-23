@@ -3,7 +3,7 @@
   "content": "Room owner",
   "content_en_sha1_hash": "6282abf238c9bcb457f0cd3c0cbd37e7971ec3f5",
   "created_at": "2025-05-19T21:30:56.110Z",
-  "updated_at": "2026-02-19T13:36:32.234Z",
+  "updated_at": "2026-04-07T19:35:05.093Z",
   "comment": {
     "text": "The \"RoomOwner\" translation key is used to display the English phrase \"Room owner\" in a specific UI component, likely within a file management or room editing dialog. It appears as a label and is displayed next to an option for changing the room's owner.",
     "is_auto": true,
@@ -201,13 +201,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"房间所有者\" (Fángjiān suǒyǒuzhě) is technically correct, it's a very formal and somewhat stiff translation of \"Room owner.\" A more natural and common translation would be \"房主\" (fángzhǔ).",
-          "suggestion": "房主"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

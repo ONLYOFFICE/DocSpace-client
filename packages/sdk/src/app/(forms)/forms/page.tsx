@@ -26,7 +26,7 @@
 
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
-import { ROOM_ID_HEADER } from "@/utils/constants";
+import { FILTER_HEADER, ROOM_ID_HEADER } from "@/utils/constants";
 
 export default async function FormsRoot({
   searchParams,
@@ -37,5 +37,8 @@ export default async function FormsRoot({
   const params = await searchParams;
   const roomId = hdrs.get(ROOM_ID_HEADER) || params.roomId || "";
 
-  redirect(`/forms/my-forms${roomId ? `?roomId=${roomId}` : ""}`);
+  const filterHeader = hdrs.get(FILTER_HEADER) || "";
+  const qs = filterHeader || new URLSearchParams(params).toString();
+
+  redirect(`/forms/my-forms${qs ? `?${qs}` : roomId ? `?roomId=${roomId}` : ""}`);
 }

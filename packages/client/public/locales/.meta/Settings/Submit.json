@@ -3,7 +3,7 @@
   "content": "Submit",
   "content_en_sha1_hash": "2dacf65959849884a011f36f76a04eebea94c5ea",
   "created_at": "2025-05-19T21:30:52.819Z",
-  "updated_at": "2026-03-20T09:07:45.515Z",
+  "updated_at": "2026-04-09T00:46:17.894Z",
   "comment": {
     "text": "This translation key is used to display the label \"Submit\" on a button in various UI contexts, such as a portal settings page and a delete portal dialog. Its purpose is to provide a clear and consistent action label for users to confirm their actions. The translation key is used on buttons that trigger specific actions, like submitting requests or deleting portals.",
     "is_auto": true,
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ສົ່ງອອກ\" (song ok) translates to \"export\" or \"release\" which doesn't align with the English word \"Submit\". \"Submit\" implies sending or presenting something for consideration or approval.",
-          "suggestion": "Consider alternatives like \"ສົ່ງຕໍ່\" (song to - forward/send), \"ຖ້າອກ\" (tha ok - present/offer), or \"ຕົກລົງ\" (tok long - agree/confirm), depending on the specific context of the 'Settings' section."
+          "description": "The Lao translation 'ສົ່ງອອກ' means 'Export', which is incorrect for a 'Submit' button action. 'Submit' in a UI context (confirming/sending data) should be translated as 'ສົ່ງ' or 'ຢືນຢັນ'.",
+          "suggestion": "ສົ່ງ"
         }
       ],
       "approved_at": null
@@ -156,7 +156,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Remitere\" doesn't accurately convey the meaning of \"Submit\" in the context of a settings button. \"Remitere\" translates more closely to 'surrender' or 'relinquish'.  A more appropriate translation would be something like \"Trimite\" or \"Înaintează\".",
+          "description": "The word 'Remitere' in Romanian means 'remission' (as in a disease) or 'forgiveness/pardon'. It does not mean 'to submit' a form or an action in a UI context.",
           "suggestion": "Trimite"
         }
       ],
@@ -171,13 +171,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'යොමන්න' doesn't perfectly convey the meaning of 'Submit'. While it can imply 'send' or 'deliver', 'Submit' in a settings context typically means to finalize and send data, often with confirmation. 'යොමන්න' can be more general.",
-          "suggestion": "Consider alternatives like 'ඉرسත් කරන්න' (irsath kannela) or 'ගැළපෙනවා' (galapenawa) depending on the specific functionality."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -198,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Поднеси\" does not accurately convey the meaning of \"Submit\" in the context of settings. \"Поднеси\" typically means \"bring\" or \"present\". A more appropriate translation would be something like \"Pošalji\" (Send) or \"Proslijedi\" (Forward).",
-          "suggestion": "Pošalji"
+          "description": "The translation 'Поднеси' is an imperative verb meaning 'to present' or 'to offer' (like a gift or a document), but it is grammatically incorrect for a UI button action in Serbian. In UI contexts for 'Submit', the standard terms are 'Пошаљи' (Send/Submit) or 'Одобри' (Approve/Confirm). 'Поднеси' sounds like a literal translation of 'to submit a formal application' but is awkward for general button actions like 'Submit to gallery' or 'Submit request'.",
+          "suggestion": "Пошаљи"
         }
       ],
       "approved_at": null
@@ -207,13 +201,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Podnesi' is a valid Serbian word, it's not the most common or natural translation for 'Submit' in a settings context. It often implies presenting or handing something over formally. A more typical and user-friendly translation would be 'Pošalji' or 'Izvrši'.",
-          "suggestion": "Pošalji"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -222,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Kaydet' can mean 'Save', 'Submit' has a more specific meaning in a settings context. 'Kaydet' is acceptable, but not the most precise translation.",
-          "suggestion": "Consider 'Gönder' or 'Tamamla' for a more accurate translation depending on the specific function of the 'Submit' button."
+          "description": "The Turkish translation 'Kaydet' means 'Save', whereas the English 'Submit' implies sending data or confirming an action (like 'Gönder' or 'Onayla'). In the context of a delete dialog or submitting a request, 'Kaydet' is semantically incorrect.",
+          "suggestion": "Gönder"
         }
       ],
       "approved_at": null
@@ -241,6 +229,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "File renamed.",
   "content_en_sha1_hash": "d161ba5e979b2ce7b737df41fd08388f7fc79240",
   "created_at": "2025-05-19T21:30:54.823Z",
-  "updated_at": "2025-08-04T07:30:01.220Z",
+  "updated_at": "2026-04-07T19:35:05.114Z",
   "comment": {
     "text": "This translation key is used to display the message \"File renamed.\" when a user's file has been updated on their feed. It appears in a UI component where user file updates are listed, likely as part of an info panel or history view.",
     "is_auto": true,
@@ -45,25 +45,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English content 'File renamed.' refers to a single file. The Bulgarian translation 'Преименувани файлове.' translates to 'Files renamed.' which is plural. This is an incorrect translation of the singular English content.",
-          "suggestion": "Преименуван файл."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'File renamed' refers to a singular file. The Czech translation 'Soubory přejmenovány' means 'Files renamed' which is plural. This suggests the translation is too general and doesn't accurately reflect the original meaning.",
-          "suggestion": "Soubor přejmenován"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -75,18 +63,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Το αρχείου μετονομάστηκε.\" is not the most natural or accurate translation of \"File renamed.\" It literally translates to \"The file was renamed.\" A more natural translation would use a passive construction with 'έχει μετονομαστεί'.",
-          "suggestion": "Το αρχείο μετονομάστηκε."
-        },
-        {
-          "type": "grammar",
-          "description": "The word 'αρχείου' (archiou) is in the genitive case, which is grammatically incorrect in this context.  It should be in the nominative case.",
-          "suggestion": "Replace 'αρχείου' with 'αρχείο'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -98,13 +75,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English \"File renamed\" refers to a single file. The Finnish translation \"Tiedostot nimetty uudelleen\" translates to \"Files renamed\", implying multiple files. This is a potential mismatch in scope.",
-          "suggestion": "Consider using \"Tiedosto nimetty uudelleen\" to accurately reflect the singular nature of the English original."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -146,13 +117,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Fails ir pārdēvēts' is a literal translation and while understandable, it's not the most natural phrasing in Latvian. A more common and natural way to say 'File renamed' would be 'Datums ir pārdēvēts' or 'Faila nosaukums ir mainīts'.",
-          "suggestion": "Datums ir pārdēvēts"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -182,13 +147,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Fişier a fost redenumit\" is a literal translation of 'File was renamed'. A more natural Romanian phrasing would be 'Fișierul a fost redenumit' or 'Fișierul a fost redenumit.'. The definite article 'Fișierul' is generally preferred in this context.",
-          "suggestion": "Fișierul a fost redenumit."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -200,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'නම්' is spelled incorrectly. The correct spelling is 'නම්'.",
-          "suggestion": "නම්"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -224,13 +177,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Датотека' is a more formal term. A more common and natural word for 'File' in this context would be 'Фајл'.",
-          "suggestion": "Фајл је преименован."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

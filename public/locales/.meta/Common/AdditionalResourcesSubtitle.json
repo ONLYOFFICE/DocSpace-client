@@ -3,7 +3,7 @@
   "content": "Configure the display of links to helpful resources for your users.",
   "content_en_sha1_hash": "207d43ec234881509b12de9b417938815cee3ede",
   "created_at": "2025-05-26T07:15:40.240Z",
-  "updated_at": "2026-02-19T13:36:33.163Z",
+  "updated_at": "2026-04-08T17:52:14.193Z",
   "comment": {
     "text": "This translation key is used to display a subtitle that explains the purpose of links to helpful resources on mobile devices. It appears in a specific branding page and is rendered when a certain setting is enabled, allowing users to access extra information about their account.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation changes the meaning from 'links to helpful resources' (plural) to 'the link to get better resources' (singular/different intent). It implies the link itself is for getting better resources, rather than the links being to resources that are helpful.",
+          "suggestion": "قم بتهيئة عرض الروابط الخاصة بالموارد المفيدة لمستخدميك."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -87,7 +93,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is missing the first letter 'C', resulting in 'onfigura' instead of 'Configura'.",
+          "suggestion": "Configura la visualizzazione dei collegamenti a risorse utili per i tuoi utenti."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -153,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'පරිශ්‍රීලකයින්ට' (parishrilakayinta) is a misspelling of 'පරිශීලකයින්ට' (parishilakayinta). While it looks similar, it is a non-existent word in Sinhala.",
+          "suggestion": "ඔබගේ පරිශීලකයින්ට ප්‍රයෝජනවත් සම්පත් වෙත සබැඳි පෙන්වීම වින්‍යාස කරන්න."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -199,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

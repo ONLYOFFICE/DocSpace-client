@@ -3,7 +3,7 @@
   "content": "New space name",
   "content_en_sha1_hash": "09609f05aae47160f36f4e04d315dc2f8abf446b",
   "created_at": "2025-05-19T21:30:52.270Z",
-  "updated_at": "2025-10-03T13:19:30.538Z",
+  "updated_at": "2026-04-09T01:58:18.709Z",
   "comment": {
     "text": "The translation key \"PortalRenamingLabelText\" is used to display a label for renaming portal names. In the Portal Settings page, this text appears as the label for a form field where users can enter their desired new name for their portal. Translators should provide a clear and concise \"New space name\" that reflects the purpose of this field in the user interface.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text refers to a 'space name', but the Bulgarian translation uses 'портала' (portal). While the context mentions portal renaming, the specific string to be translated is 'New space name'. In the context of ONLYOFFICE DocSpace, 'space' and 'portal' are distinct entities.",
+          "suggestion": "Ново име на пространството"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -84,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Նոր կայքէջի անուն\" (Nor kayk'ej'i anun) literally translates to 'New website name'. The English content 'New space name' is more general and could refer to a broader concept of a 'space' within a system, not strictly a website.  'Կայքէջ' is too specific.",
-          "suggestion": "Նոր տարածքի անուն (Nor tarazdgi anun) - This translates to 'New area/space name' and is a more accurate reflection of the English meaning."
+          "description": "The Armenian translation uses 'կայքէջ' (website/webpage) instead of 'space' (կայք/տարածք/սփեյս). In the context of ONLYOFFICE DocSpace, 'space' refers to a specific workspace/portal, not a general website.",
+          "suggestion": "Նոր տարածքի անուն"
         }
       ],
       "approved_at": null
@@ -93,13 +99,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Nome dello spazio nuovo\" is a literal translation and sounds unnatural in Italian. A more idiomatic translation would be 'Nuovo nome dello spazio'.",
-          "suggestion": "Nuovo nome dello spazio"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -120,13 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ໃໝ່ ປະຕູ ຊື່ \" literally translates to \"New door name\". It doesn't accurately convey the meaning of \"New space name\". \"ປະຕູ\" (door) is likely an incorrect word choice.",
-          "suggestion": "Consider a translation that uses a word for \"space\" or \"area\" instead of \"door\". For example, \"ຊື່ເຂດໃໝ່\" (New area name) or \"ຊື່ສະຖານທີ່ໃໝ່\" (New place name) might be more appropriate."
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the spacing in the Lao translation appears slightly off and could be improved for readability. There are spaces before and after the words.",
-          "suggestion": "Remove the extra spaces around the words: \"ໃໝ່ ປະຕູ ຊື່\" should be \"ໃໝ່ປະຕູຊື່\" or, with a more appropriate term, \"ໃໝ່ເຂດຊື່\""
+          "description": "The Lao translation 'ໃໝ່ ປະຕູ ຊື່' is grammatically incorrect and uses the wrong word for 'space'. 'ປະຕູ' means 'door', whereas in the context of ONLYOFFICE DocSpace, 'space' refers to a workspace/area. The word order is also unnatural.",
+          "suggestion": "ຊື່ ສະເປສໃໝ່"
         }
       ],
       "approved_at": null
@@ -146,7 +141,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text refers to a 'space' (space name), while the Polish translation uses 'portal' (nazwa portalu). In the context of ONLYOFFICE DocSpace, 'space' and 'portal' are distinct entities.",
+          "suggestion": "Nowa nazwa przestrzeni"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -170,19 +171,19 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text refers to a 'space' (New space name), but the Russian translation refers to a 'portal' (Новое имя портала). While the key name mentions 'Portal', the source text provided for verification is 'New space name', creating a semantic mismatch between the provided English string and the Russian translation.",
+          "suggestion": "Новое имя пространства"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'අවකාශයේ නව නම' literally translates to 'New name of the space'. While understandable, it's slightly more verbose than the English 'New space name'. It doesn't capture the brevity of the English original as well. A more direct translation might be preferable.",
-          "suggestion": "අළුත් අංගනය නම (Aḷuta aṅganaya nama)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -200,13 +201,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Ново име простора\" while technically correct, is a bit literal. A more natural translation for a settings label, particularly related to renaming a space, would be something like \"Ново име\" or \"Име простора\"",
-          "suggestion": "Ново име"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -218,13 +213,25 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation 'Yeni alan adı' means 'New domain name' (as in a URL/DNS domain), whereas the context specifies this is for renaming a 'space' or 'portal'. In Turkish, 'alan adı' is the standard term for a web domain.",
+          "suggestion": "Yeni alan ismi"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text refers to a 'space name', but the Ukrainian translation refers to a 'portal name'. While the context mentions portal renaming, the literal translation of the string provided is inconsistent with the source text.",
+          "suggestion": "Нова назва простору"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -236,13 +243,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '协作空间的新名称' is too literal and doesn't flow naturally for a label indicating a field to enter a new space name. It translates to 'New name of collaborative space'.",
-          "suggestion": "新名称 (Xīn míngchēng) or 空间名称 (Kōngjiān míngchēng)"
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

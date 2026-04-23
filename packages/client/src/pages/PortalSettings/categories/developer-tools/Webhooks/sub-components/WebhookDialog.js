@@ -254,7 +254,7 @@ const WebhookDialog = (props) => {
             value={webhookInfo.targetId}
             onChange={onInputChange}
             isDisabled={isLoading}
-            maxLength={36}
+            maxLength={255}
             dataTestId="target-id-input"
           />
           <button
@@ -298,3 +298,4 @@ export default inject(({ userStore }) => {
     user: userStore?.user,
   };
 })(observer(WebhookDialog));
+

@@ -3,7 +3,7 @@
   "content": "Sessions",
   "content_en_sha1_hash": "e11e37a9253b34ff1c7224447e143fabca1be9fd",
   "created_at": "2025-05-19T21:30:48.560Z",
-  "updated_at": "2025-08-11T18:11:59.298Z",
+  "updated_at": "2026-04-07T23:28:29.962Z",
   "comment": {
     "text": "This translation key is used for the title of a table header in a user profile page, displaying \"Sessions\" to the user. It should be translated as \"Sessions\" to match the English content, and will appear on a component within the \"/packages/client/src/pages/Profile\" section of the UI.",
     "is_auto": true,
@@ -48,7 +48,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech translation \"Relace\" while technically meaning 'relations' or 'relationships', isn't the most accurate translation for \"Sessions\" in this context. \"Sezení\" would be a more appropriate translation for 'Sessions,' particularly if referring to meetings, appointments, or periods of time.",
+          "description": "The Czech word 'Relace' refers to 'rehearsals' or 'performances' (as in theater), which is incorrect for a user profile context. In the context of user sessions/logins, the correct term is 'Sezení' or 'Relace' is a mistranslation of 'Sessions'.",
           "suggestion": "Sezení"
         }
       ],
@@ -141,7 +141,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English word 'Sessions' is plural, but the Portuguese translation 'Sessão' is singular. In a table header context, this should be plural to match the source.",
+          "suggestion": "Sessões"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -162,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"වාර\" (vaar) does not accurately convey the meaning of \"Sessions.\" \"Sessions\" typically refers to periods of time or meetings, whereas \"වාර\" generally means 'times,' 'days,' or 'periods,' but lacks the specific connotation of scheduled meetings or events.",
-          "suggestion": "Consider alternatives like \"සමුළු\" (samul) for meetings, \"සිදුරු\" (siduuru) for periods, or a more descriptive phrase depending on the context."
+          "description": "The Sinhala word 'වාර' (vāra) typically means 'times' or 'occasions' (e.g., 'three times'). In the context of a user profile table header for 'Sessions' (referring to login sessions or active connections), 'සැසි' (sæsi) is the correct technical term.",
+          "suggestion": "සැසි"
         }
       ],
       "approved_at": null
@@ -171,7 +177,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak word 'Sesiuni' is not a valid word. The correct plural form of 'session' (sesia) in Slovak is 'Sesiie'.",
+          "suggestion": "Sesiie"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -211,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

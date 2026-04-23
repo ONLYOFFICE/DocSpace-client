@@ -3,7 +3,7 @@
   "content": "Share your form via a Virtual Data Room. Assign recipient roles to the room participants so they can fill out the form accordingly. Select an existing room or create a new one.",
   "content_en_sha1_hash": "b92f861d3ca32b57c91d73b768f3aed5580a6695",
   "created_at": "2025-10-13T13:22:12.853Z",
-  "updated_at": "2026-02-19T13:36:32.288Z",
+  "updated_at": "2026-04-07T23:39:25.250Z",
   "comment": {
     "text": "This text explains how to share a form using a Virtual Data Room (VDR). It guides users to assign roles to participants and either select an existing room or create a new one, appearing in an informational bar within the form sharing process.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Grammatical error in the first sentence: 'formanızın paylaşın' is grammatically incorrect in Azerbaijani. It should be 'formanızı paylaşın' (accusative case) to correctly convey 'share your form'.",
+          "suggestion": "Virtual Data Otağı vasitəsilə formanızı paylaşın. Otaq iştirakçılarına müvafiq rollar təyin edin ki, onlar formanı uyğun şəkildə doldura bilsinlər. Mövcud otağı seçin və ya yeni bir otaq yaradın."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -63,7 +69,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The second sentence in Greek is a noun phrase ('Assignment of recipient roles...') instead of an imperative command ('Assign recipient roles...'), which changes the instructional tone and grammatical structure of the original English text.",
+          "suggestion": "Μοιραστείτε την φόρμα σας μέσω ενός Εικονικού Χώρου Δεδομένων. Ανάθετε ρόλους παραληπτών στους συμμετέχοντες του χώρου, ώστε να συμπληρώσουν τη φόρμα ανάλογα. Επιλέξτε έναν υπάρχοντα χώρο ή δημιουργήστε έναν νέο."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -165,7 +177,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Priraďte účastníkom miestnosti role účastníkov' is redundant and tautological (translates to 'Assign to room participants the roles of participants'), which makes the sentence awkward and slightly changes the intended flow of 'Assign recipient roles to the room participants'.",
+          "suggestion": "Zdieľajte svoj formulár prostredníctvom virtuálnej dátovej miestnosti. Priraďte role príjemcom v rámci účastníkov miestnosti, aby mohli formulár vyplniť podľa potreby. Vyberte existujúcu miestnosť alebo vytvorte novú."
+        }
+      ],
       "approved_at": null
     },
     "sl": {

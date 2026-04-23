@@ -3,7 +3,7 @@
   "content": "Edit color scheme",
   "content_en_sha1_hash": "e4b8ec853d190dec813a72518343f018e0a210e4",
   "created_at": "2025-05-19T21:30:51.466Z",
-  "updated_at": "2026-03-26T08:26:58.123Z",
+  "updated_at": "2026-04-09T03:05:33.449Z",
   "comment": {
     "text": "EditColorScheme is used in settings pages to display a button that allows users to edit their color scheme. It appears as \"Edit Color Scheme\" and is likely part of a UI element such as a dialog or settings panel, allowing users to modify their appearance preferences.",
     "is_auto": true,
@@ -57,25 +57,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Επεξεργασία χρωμάτων\" literally translates to \"Color editing.\" While related, \"Edit color scheme\" implies a broader scope, referring to the overall color scheme settings, not just the act of editing colors.",
-          "suggestion": "Επεξεργασία χρωματικού συνόλου"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Editar combinación de colores\" is understandable, it's not the most natural or common translation for \"Edit color scheme.\" \"Esquema de color\" is a more direct and widely used term for 'color scheme'.",
-          "suggestion": "Editar esquema de color"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -93,25 +81,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Խմբագրել գունավորումը\" is a literal translation of \"Edit color scheme\", it might not be the most natural or idiomatic way to express the concept in Armenian. A more user-friendly translation might be 'Գունային ծաղկաձևի խմբագրում' (Gunayin tsaghakadzi hamargrum) or 'Գունատոնի փոփոխություն' (Gunatoni popoxutyun).",
-          "suggestion": "Consider 'Գունային ծաղկաձևի խմբագրում' or 'Գունատոնի փոփոխություն' for a more natural phrasing."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Modifica la combinazione di colori' is a functional equivalent but not the most natural or accurate translation of 'Edit color scheme'. While 'combinazione di colori' means 'color combination', 'Edit' implies a more direct modification or adjustment.",
-          "suggestion": "Modifica lo schema colori"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -165,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Editare schemă culori' is a literal translation but sounds slightly awkward in Romanian. A more natural phrasing would be 'Modificare schemă de culori' or 'Personalizare schemă de culori'.",
-          "suggestion": "Modificare schemă de culori"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -186,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'වත්මන් තේමාව සංස්කරණය' (Vathman themeawa sanskaranya) literally translates to 'Edit current theme'. While functionally close, 'Edit color scheme' implies a broader scope than just the current theme. A more accurate translation would capture the concept of color scheme editing, not just theme editing.",
-          "suggestion": "වැඩරູບ පාටల පද්ධතිය සංස්කරණය (Wedarupa pata lathiyama sanskaranya) - 'Edit color scheme'"
+          "description": "The Sinhala translation means 'Edit current theme' instead of 'Edit color scheme'. While 'theme' and 'color scheme' are related, 'color scheme' specifically refers to colors, whereas 'theme' is a broader UI concept.",
+          "suggestion": "වර්ණ රටාව සංස්කරණය කරන්න"
         }
       ],
       "approved_at": null
@@ -235,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

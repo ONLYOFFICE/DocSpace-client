@@ -3,7 +3,7 @@
   "content": "{{aiServices}} Management",
   "content_en_sha1_hash": "f4923bbe665d8a6f338bef657a66364c9b39476a",
   "created_at": "2026-03-26T08:26:46.810Z",
-  "updated_at": "2026-03-26T08:29:40.173Z",
+  "updated_at": "2026-04-10T08:21:04.339Z",
   "comment": {
     "text": "This key is used for the title of the \"Ai Services Management\" category or section within the Portal Settings, likely displayed in a navigation menu or sidebar. It refers to the management of AI services and may appear alongside a description providing more detail about these services. Translators should consider the context of AI service management within the product.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ai-services-management.tsx",
-      "line_number": 51,
-      "context": "import LoaderCustomization from \"../sub-components/loaderCustomization\";\n import { createDefaultHookSettingsProps } from \"../../../utils/createDefaultHookSettingsProps\";\n import useCommon from \"../useCommon\";\n import DisableAiServicesDialog from \"SRC_DIR/components/dialogs/DisableAiServicesDialog\";\n \n interface AiServicesManagementProps {\n isMobileView: boolean;\n aiServicesEnabled: boolean;\n setAiServicesEnabled: (value: boolean) => void;\n isLoaded: boolean;\n loadBaseInfo: (page: string) => Promise<void>;",
+      "line_number": 52,
+      "context": "import { createDefaultHookSettingsProps } from \"../../../utils/createDefaultHookSettingsProps\";\n import useCommon from \"../useCommon\";\n import DisableAiServicesDialog from \"SRC_DIR/components/dialogs/DisableAiServicesDialog\";\n import { AI_ENUM } from \"@docspace/ui-kit/billing/constants\";\n \n interface AiServicesManagementProps {\n isMobileView: boolean;\n aiServicesEnabled: boolean;\n setAiServicesEnabled: (value: boolean) => void;\n isLoaded: boolean;\n loadBaseInfo: (page: string) => Promise<void>;",
       "module": "/packages/client"
     },
     {
@@ -31,6 +31,204 @@
   ],
   "languages": {
     "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word order is reversed in Arabic, which changes the meaning from 'Management of {{aiServices}}' to '{{aiServices}} is management'. In Arabic, the noun being managed (the object) should come before the action (management).",
+          "suggestion": "{{aiServices}} الإدارة"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word order in Greek is reversed compared to the English meaning. '{{aiServices}} Διαχείριση' translates to '{{aiServices}} Management' in a way that sounds like 'Management of {{aiServices}}' but the syntax is awkward for a UI title. In Greek, the noun being managed should typically come first, or the structure should be 'Διαχείριση {{aiServices}}'.",
+          "suggestion": "Διαχείριση {{aiServices}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "User quota has been successfully disabled.",
   "content_en_sha1_hash": "585603e4624841cd6229d6ab3952af2f88d04b1e",
   "created_at": "2025-05-19T21:30:53.131Z",
-  "updated_at": "2026-02-19T13:36:33.214Z",
+  "updated_at": "2026-04-10T08:21:04.399Z",
   "comment": {
     "text": "This translation key is used to display a success message when user quota is disabled. It is typically displayed after clicking a button or submitting a form that affects user quota settings, and appears in a toast notification dialog.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/store/CurrentQuotaStore.ts",
-      "line_number": 505,
+      "line_number": 508,
       "context": "try {\n await setDefaultUserQuota(isEnable, +quota);\n const toastrText = isEnable\n ? t(\"UserQuotaEnabled\")\n : t(\"UserQuotaDisabled\");\n \n toastr.success(toastrText);\n } catch (e: unknown) {\n toastr.error(e as TData);\n }",
       "module": "/packages/shared"
     }
@@ -45,7 +45,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text uses the singular 'User quota', while the Czech translation uses the plural 'Uživatelské kvóty' (User quotas).",
+          "suggestion": "Uživatelský kvót byl úspěšně zakázán."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -69,13 +75,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'disabled' is more accurately translated as 'poistettu käytöstä' (deactivated/removed from use) rather than 'otettu pois käytöstä' (taken out of use). While 'otettu pois käytöstä' isn't *wrong*, it's a slightly more verbose and less common phrasing in this context.",
-          "suggestion": "Käyttäjäkiintiö on poistettu käytöstä."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"Numuru kvota\" literally translates to \"Number quota\".  While it might be understood, \"User quota\" implies a broader restriction not limited to just numbers. A more accurate translation would depend on the specific context of the quota. Considering it likely refers to a user's overall resource allowance, a more appropriate translation might be something like \"Lietotāja kvota\" (User quota) or \"Lietotāja resursu ierobežojums\" (User resource limit).",
-          "suggestion": "Consider using \"Lietotāja kvota\" or \"Lietotāja resursu ierobežojums\" for greater accuracy."
+          "description": "The word 'Numuru' means 'Numbers' in Latvian, whereas the English text refers to 'User quota'. The correct term for 'User' in this context is 'Lietotāja'.",
+          "suggestion": "Lietotāja kvota ir veiksmīgi atspējota."
         }
       ],
       "approved_at": null
@@ -138,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Limit użytkowników został wyłączony' doesn't accurately convey the meaning of 'User quota has been successfully disabled.' 'Limit użytkowników' translates to 'User limit,' while 'quota' implies a specific allocation or allowance. The translation suggests simply disabling a user limit, not necessarily a quota.",
-          "suggestion": "Limity użytkowników zostały wyłączone."
+          "description": "The Polish translation 'Limit użytkowników' means 'User limit', whereas the English text refers to 'User quota'. In a technical context, 'quota' and 'limit' can be different concepts, but more importantly, 'Limit użytkowników' can be interpreted as a limit on the *number* of users, rather than a quota *assigned* to users.",
+          "suggestion": "Kwota użytkowników została pomyślnie wyłączona."
         }
       ],
       "approved_at": null
@@ -159,18 +159,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Cotă de stocare pentru utilizator a fost dezactivată cu succes' is overly literal and slightly awkward in Romanian. While technically correct, it's not the most natural phrasing.",
-          "suggestion": "Cota de utilizator a fost dezactivată cu succes."
-        },
-        {
-          "type": "formatting",
-          "description": "The translation includes extra words, making it longer than the English original. Shorter, more concise phrasing is generally preferred in UI translations.",
-          "suggestion": "Cota de utilizator a fost dezactivată cu succes."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -228,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

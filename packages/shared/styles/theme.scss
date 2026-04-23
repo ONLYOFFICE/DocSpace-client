@@ -2208,6 +2208,16 @@
   --settings-payment-color: #{$light-status-warning};
   --settings-payment-border: 1px solid #{$gray-light};
   --settings-payment-bg-benefits-color: #{$gray-light};
+  --payment-price-color: #{$gray-text};
+  --payment-storage-size-title: #{$gray};
+  --payment-tariff-text: #{$gray-text};
+  --payment-price-container-bg-text: #{$light-gray-hover};
+  --payment-price-container-bg: transparent;
+  --payment-price-container-border: 1px solid #{$gray-strong};
+  --payment-price-container-feature-text: #{$gray};
+  --payment-price-container-disable-color: #{$gray};
+  --payment-price-container-disable-price-color: #{$gray};
+  --payment-benefits-icons-color: #{$light-gray-dark};
 }
 
 .dark {
@@ -2215,6 +2225,16 @@
   --settings-payment-color: #{$dark-status-warning};
   --settings-payment-border: 1px solid #{$gray-dark-strong};
   --settings-payment-bg-benefits-color: #{$black};
+  --payment-price-color: #{$dark-gray-dark};
+  --payment-storage-size-title: #{$gray};
+  --payment-tariff-text: #{$gray-dark-pressed};
+  --payment-price-container-bg-text: #{$light-dark-gray-hover};
+  --payment-price-container-bg: #{$dark-gray-light};
+  --payment-price-container-border: 1px solid #{$dark-gray-light};
+  --payment-price-container-feature-text: #{$gray-dark};
+  --payment-price-container-disable-color: #{$gray-dark};
+  --payment-price-container-disable-price-color: #{$gray-dark-text};
+  --payment-benefits-icons-color: #{$dark-gray-dark};
 }
 
 .light {
@@ -2777,5 +2797,5 @@
 
 .dark {
   --dev-tools-card-border: 1px solid #{$gray-dark-strong};
-  --dev-tools-card-divider: #{$gray-dark-mid};
+  --dev-tools-card-divider: #{$gray-dark-strong};
 }

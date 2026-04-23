@@ -3,10 +3,12 @@
   "EmptyFormGalleryScreenDescription": "Не бяха намерени резултати, съвпадащи със заявката Ви",
   "ErrorViewDescription": "Молим да опитате отново по-късно",
   "ErrorViewDescriptionNetworkError": "Изглежда няма интернет връзка",
+  "ErrorViewHeader": "Галерията е временно недостъпна",
+  "GalleryTitle": "{{organizationName}} Шаблонна галерия",
+  "SelectTemplate": "Изберете шаблон",
+  "SubmitToGalleryDialogMainInfo": "Изпратете вашия шаблон в публичната галерия, за да го използват другите в работата си. След като шаблонът премине модерация, ще бъдете уведомени и наградени за приноса си.",
   "SuggestChanges": "Предложи промени",
   "TemplateInfo": "Информация за шаблона",
-  "ViewAllTemplates": "Прегледай всички шаблони",
-  "ErrorViewHeader": "Галерията е временно недостъпна",
-  "SelectTemplate": "Изберете шаблон",
-  "UploadGallery": "Качете в Галерията"
+  "UploadGallery": "Качете в Галерията",
+  "ViewAllTemplates": "Прегледай всички шаблони"
 }

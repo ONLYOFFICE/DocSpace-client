@@ -3,7 +3,7 @@
   "content": "Action required",
   "content_en_sha1_hash": "a5f995a22060510a354c12efb27296065c533247",
   "created_at": "2025-05-19T21:30:42.869Z",
-  "updated_at": "2026-02-19T13:36:32.375Z",
+  "updated_at": "2026-04-08T18:11:49.416Z",
   "comment": {
     "text": "The \"ActionRequired\" translation key is used to display a message indicating that an action needs to be taken in conflict resolution dialogues, such as a file conflict. This text typically appears on a button or header label, prompting users to take further action. Its purpose is to guide the user through resolving conflicts in a clear and concise manner.",
     "is_auto": true,
@@ -51,13 +51,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Požadovaná opatření' is a possible translation, it's quite formal and literal. A more natural and commonly used translation of 'Action required' would be 'Nutná akce' or 'Je nutné jednat'. 'Požadovaná opatření' implies a more bureaucratic or official request.",
-          "suggestion": "Consider 'Nutná akce' or 'Je nutné jednat' for a more natural translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -111,13 +105,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation '필요한 작업' while literally meaning 'required work' doesn't fully capture the urgency and directness of 'Action required'. It's a more formal and less immediate phrasing.",
-          "suggestion": "Consider alternatives like '조치 필요' (jochi pilyo - action needed) or '필요 조치' (pilyo jochi - necessary action) for a closer meaning."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -126,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ຕ້ອງດໍາລົງການ' (tong damlong kan) translates more literally to 'must perform' or 'must undertake'. While not entirely wrong, it's a more formal and less common way to express 'Action required'. A more natural and direct translation would be closer to 'ຕ້ອງເຮັດ' (tong het) meaning 'must do' or 'need to do'.",
-          "suggestion": "ຕ້ອງເຮັດ (tong het)"
+          "description": "The Lao translation 'ຕ້ອງດໍາລົງການ' means 'must maintain/sustain/carry on' (often used in the context of holding a position or status), which does not convey the meaning of 'Action required' (needing to perform a task or take a step to resolve a conflict).",
+          "suggestion": "ຕ້ອງມີການດໍາເນີນການ"
         }
       ],
       "approved_at": null
@@ -138,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Veicamās darbības\" is not the most accurate or natural translation of \"Action required.\" While it literally means \"Tasks to be performed,\" it's not idiomatic for conveying the sense of urgency or necessity implied by \"Action required.\" A better translation would convey a sense of urgency or direct action needed.",
-          "suggestion": "Consider alternatives such as \"Nepieciešama rīcība\" (Action needed) or \"Jāveic darbības\" (Actions must be taken)."
+          "description": "The Latvian translation 'Veicamās darbības' means 'Actions to be performed' or 'To-do list', whereas the English 'Action required' implies a necessity or a requirement (an imperative state).",
+          "suggestion": "Nepieciešama darbība"
         }
       ],
       "approved_at": null
@@ -189,25 +177,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Požadované opatrenia' is a literal translation of 'Action required', it lacks the urgency and directness of the original English phrase. 'Action required' often implies immediate attention and a specific task. 'Požadované opatrenia' sounds more formal and general.",
-          "suggestion": "Consider alternatives like 'Vyžaduje sa akcia', 'Je potrebné konať', or 'Dôležitá akcia' depending on the specific context. 'Vyžaduje sa akcia' is perhaps the closest in terms of conveying urgency."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Potrebna je aktivnost\" is technically correct, it's a slightly literal and less natural translation of \"Action required.\" A more idiomatic Slovenian phrase would be better.",
-          "suggestion": "Consider alternatives like \"Zahtevana akcija\" or \"Potrebno je ukrepati\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -228,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"Form sahibi\" translates to \"Form owner\" which does not accurately convey the meaning of \"Action required\".",
-          "suggestion": "A more appropriate translation would be something like \"İşlem Gerekli\" or \"Yapılması Gereken\"."
+          "description": "The Turkish translation 'Form sahibi' means 'Form owner', which is completely different from the English 'Action required'.",
+          "suggestion": "İşlem gerekiyor"
         }
       ],
       "approved_at": null
@@ -247,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

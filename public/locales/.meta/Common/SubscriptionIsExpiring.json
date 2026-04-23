@@ -3,7 +3,7 @@
   "content": "Your subscription is expiring on {{date}}",
   "content_en_sha1_hash": "8188a3ae6c5b0e34b2926ddc70d79038d6e78b7f",
   "created_at": "2025-05-19T21:30:49.205Z",
-  "updated_at": "2026-02-19T13:36:32.299Z",
+  "updated_at": "2026-04-07T22:14:48.569Z",
   "comment": {
     "text": "This translation key is used to display a notification about an expiring subscription on the client's tariff bar. The date of expiration is inserted into the translated string. It appears in the tariff bar component, typically as an orange notification indicator.",
     "is_auto": true,
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'اشتراكك سوف ينتهي في {{date}}' is a literal translation but sounds unnatural in Arabic. A more natural phrasing would be 'سوف تنتهي صلاحية اشتراكك في {{date}}' or 'سيتم انتهاء اشتراكك في {{date}}'.",
-          "suggestion": "سوف تنتهي صلاحية اشتراكك في {{date}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -117,13 +111,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Jūsu abonementa derīguma termiņš beidzas šajā datumā: {{date}}\" is a bit too verbose and formal for a user-facing notification. A more natural and concise translation would improve clarity and user experience.",
-          "suggestion": "Jūsu abonements beidzas: {{date}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -165,18 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '{{date}} දී ඔබගේ දායකත්‍වය ඉකුත් වේ' is a literal translation and sounds awkward in Sinhala. While understandable, a more natural phrasing would be better.",
-          "suggestion": "{{date}} වන විට ඔබේ දායකත්වය අවසන් වනු ඇත"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word ' දී ' (di) is not the best fit for describing the expiration. ' වන විට ' (wanita) is a better alternative.",
-          "suggestion": "Use ' වන විට ' instead of ' දී '."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -194,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'subscription' is best translated as 'pretplata' rather than 'istina' in this context. 'Istina' means 'truth'.",
-          "suggestion": "Ваша претплата истиче {{date}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -224,13 +195,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Gói dịch vụ đăng ký' is a bit verbose. A simpler and more natural translation for 'subscription' would be 'đăng ký' or 'gói cước'.",
-          "suggestion": "Gói cước của bạn sẽ hết hạn vào {{date}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

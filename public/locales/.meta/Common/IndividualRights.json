@@ -3,7 +3,7 @@
   "content": "Individual rights in the room",
   "content_en_sha1_hash": "50106622971aec0a90a7902b87dffefc200e8765",
   "created_at": "2025-10-07T15:38:57.539Z",
-  "updated_at": "2026-02-19T13:36:33.152Z",
+  "updated_at": "2026-04-08T06:49:19.318Z",
   "comment": {
     "text": "Text displayed in a tooltip within a group member dialog, indicating whether the member has individual rights within the room. Translators should choose between \"IndividualRights\" (for rooms) and \"IndividualRightsShare\" as appropriate. This helps users understand the permissions associated with a member.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'правомощия' (powers/authorities) is used instead of 'права' (rights). In the context of user permissions/rights, 'права' is the correct term. 'Отделни' can also imply 'separate' rather than 'individual' in this context.",
+          "suggestion": "Индивидуални права в стаята"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -75,7 +81,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Autorisations' (Authorizations/Permissions) is used instead of 'Droits' (Rights). In the context of user permissions/rights, 'Droits individuels' is the standard and accurate translation for 'Individual rights'.",
+          "suggestion": "Droits individuels dans la salle"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -93,7 +105,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term '個人権限' (Individual Authority/Privilege) is used, but in the context of software permissions and 'Individual rights', '権限' (Permissions/Rights) is acceptable, however, '個人権' is a legal term for 'Human Rights'. In a UI context for permissions, '個別の権限' (Individual permissions) is the correct technical term to distinguish from group-level permissions.",
+          "suggestion": "ルームでの個別の権限"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -129,19 +147,37 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The gender of the article 'no' (masculine) does not match the noun 'sala' (feminine). It should be 'na sala'.",
+          "suggestion": "Direitos individuais na sala"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The gender of the noun 'sala' is incorrect. In Portuguese, 'sala' is a feminine noun, so the article must be 'na' (em + a) instead of 'no' (em + o).",
+          "suggestion": "Direitos individuais na sala"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'sala' in Romanian refers to a physical room/hall, whereas in the context of DocSpace (software), 'room' refers to a digital space or chat room. 'În sala' is also grammatically incomplete/incorrect in this context.",
+          "suggestion": "Permisiuni individuale în cameră"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -195,7 +231,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text refers to 'the room', but the Ukrainian translation uses 'групі' (group). While contextually related, 'room' in ONLYOFFICE DocSpace terminology refers to a specific entity (room/кімната), and changing it to 'group' changes the technical meaning of the UI element.",
+          "suggestion": "Індивідуальні права в кімнаті"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

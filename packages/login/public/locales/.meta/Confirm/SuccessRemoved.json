@@ -3,7 +3,7 @@
   "content": "Your account has been successfully removed. In 10 seconds you will be redirected to the <1>site</1>.",
   "content_en_sha1_hash": "ded5fa686d70c749e7d37045876d5285b2515f6e",
   "created_at": "2025-05-19T21:30:57.400Z",
-  "updated_at": "2025-08-21T11:22:39.931Z",
+  "updated_at": "2026-04-07T19:35:05.246Z",
   "comment": {
     "text": "The \"SuccessRemoved\" translation key is used to display a message when an account is successfully removed from the system. It will be displayed as part of a confirmation dialog after the account removal process.",
     "is_auto": true,
@@ -63,30 +63,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'redirected' should be translated to a more natural Spanish equivalent of 'redireccionado/a'. The gender agreement also needs to be checked based on the user.",
-          "suggestion": "Su cuenta ha sido eliminada correctamente. En 10 segundos será redirigido/a a <1>site</1>."
-        },
-        {
-          "type": "formatting",
-          "description": "The HTML tags <1>site</1> are duplicated and the closing tag is missing the respective slash.",
-          "suggestion": "Su cuenta ha sido eliminada correctamente. En 10 segundos será redirigido/a a <1>site</1>."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'site' is translated as 'sivusto'. While 'sivusto' means 'website', a more natural translation in this context might be 'palvelu' (service) or 'nettisivu' (webpage).",
-          "suggestion": "Tilisi on onnistuneesti poistettu. 10 sekunnin päästä sinut ohjataan <1>palvelu</1>."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -98,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The angle brackets `<1>site</1>` are not consistently rendered in Armenian. They should also surround the Armenian word for 'site'.",
-          "suggestion": "Replace `<1>կայք</1>` with `<1>կայքին</1> (or a more appropriate Armenian equivalent for 'site' based on context)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -128,13 +105,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tag `<1>` is present in both the English and Lao translations. While technically correct, it's unusual to include these tags in user-facing text. They should likely be removed or handled in the UI.",
-          "suggestion": "Remove the `<1>` tags from the Lao translation: \"ບັນຊີຂອງທ່ານໄດ້ຖືກເອົາອອກສຳເລັດແລ້ວ. ໃນ 10 ວິນາທີທ່ານຈະຖືກໂອນໄປຫາ ເວັບໄຊ.\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -152,25 +123,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Your account has been successfully removed' is not perfectly captured in the Polish translation. While 'Twoje konto zostało usunięte' is understandable, a more precise translation would be 'Twoje konto zostało pomyślnie usunięte' to reflect the 'successfully' aspect.",
-          "suggestion": "Twoje konto zostało pomyślnie usunięte."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The gendered pronoun 'redirecionado(a)' is used. While technically correct, it's better to use a gender-neutral alternative or rephrase to avoid gendered language unless the user's gender is known.",
-          "suggestion": "A sua conta foi removida com êxito. Em 10 segundos será redirecionado para o <1>site</1>."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -182,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The tag <1> is correctly replicated in both the English and Romanian versions, ensuring consistency in formatting.",
-          "suggestion": null
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -200,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Sinhala translation uses a Devanagari numeral '𑇪' instead of a standard Sinhala numeral '10'.",
-          "suggestion": "Replace 𑇪 with 10."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -224,25 +171,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'site' is translated as 'сите'. While understandable, a more accurate and common translation for 'site' in this context would be 'сајт'.",
-          "suggestion": "Change 'сите' to 'сајт'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The tag `<1>` is inconsistent. The English content also uses `<1>`. The Serbian translation should maintain the same tag to ensure proper rendering.",
-          "suggestion": "Ensure the tag `<1>` is consistent with the original English content."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -260,30 +195,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'site' has been translated as 'trang'. While 'trang' means 'page', 'site' in this context refers to the website. A more accurate translation would be 'trang web'.",
-          "suggestion": "Replace 'trang' with 'trang web'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"删除成功\" (delete success) is a less natural phrasing in Chinese. A more common and natural way to express 'successfully removed' would be '已成功移除' or '已成功移除'.",
-          "suggestion": "您的账户已成功移除。10 秒钟后，您将被重新转到<1>site</1>。"
-        },
-        {
-          "type": "formatting",
-          "description": "The <1>site</1> tags appear to be preserving the English word \"site.\" This may not be appropriate for a Chinese audience and might need localization depending on the context.",
-          "suggestion": "Consider localizing the <1>site</1> tag to a Chinese equivalent like <1>网站</1> or removing the tag altogether if the website name is already localized elsewhere."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

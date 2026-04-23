@@ -2,6 +2,7 @@
   "AddedRoomTags": "태그가 추가되었습니다.",
   "Administration": "관리",
   "AgentRenamed": "에이전트 <1>«{{oldRoomTitle}}»</1>을(를) <2>«{{roomTitle}}»</2>로 이름이 변경되었습니다.",
+  "AIAgentsEmptyScreenTent": "여기에서 {{aiAgents}} 세부 정보를 확인하세요.",
   "AndMoreLabel": "및 <1>{{count}} 이상</1>",
   "CreationDate": "생성 날짜",
   "Data": "데이터",
@@ -60,11 +61,14 @@
   "IndexChanged": "인덱스가 변경되었습니다",
   "ItemsSelected": "선택된 항목",
   "LastModifiedBy": "최종 편집자",
+  "LastUpdateInfo": "최종 업데이트",
   "LifetimeEnds": "수명 만료",
   "MembersEmptyScreenText": "여기에서 멤버 세부 정보를 확인하세요",
+  "NoAgent": "No {{aiAgent}}",
   "NoRecordsFound": "기록을 찾을 수 없습니다",
   "Properties": "속성",
   "Resolution": "결의",
+  "RoomChangeOwner": "방 주인이 변경되었습니다.",
   "RoomCreateUserCount": "사용자 추가됨 ({{count}}).",
   "RoomDenyDownloadDisabled": "다운로드 및 복사가 제한되지 않습니다",
   "RoomDenyDownloadEnabled": "다운로드 및 복사가 제한되었습니다",
@@ -98,6 +102,5 @@
   "SubmenuHistory": "기록",
   "UserFileUpdated": "파일이 업데이트되었습니다. 역할",
   "Users": "사용자",
-  "Versions": "버전",
-  "LastUpdateInfo": "최종 업데이트"
+  "Versions": "버전"
 }

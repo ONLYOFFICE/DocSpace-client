@@ -3,7 +3,7 @@
   "content": "Your logo",
   "content_en_sha1_hash": "bcf2253991976c9d41f18ecca9f3eed026899b53",
   "created_at": "2025-05-26T07:15:49.731Z",
-  "updated_at": "2026-02-19T13:36:33.166Z",
+  "updated_at": "2026-04-07T19:51:15.703Z",
   "comment": {
     "text": "This translation key is used to display a placeholder text for a logo input field. It appears as the initial value of the \"YourLogo\" text when the component is loaded or disabled.",
     "is_auto": true,
@@ -101,9 +101,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Korean translation \"로고\" is a direct transliteration of 'logo' and does not convey the full meaning of \"Your logo\". It lacks the possessive \"Your\".",
-          "suggestion": "Consider a more descriptive translation such as \"귀사의 로고\" (Gwisa-ui logo - Your company's logo) or \"님의 로고\" (Nim-ui logo - Your logo) depending on the intended level of formality."
+          "type": "missing_content",
+          "description": "The word 'Your' is missing from the translation. The English text specifies ownership ('Your logo'), whereas the Korean translation only says 'Logo'.",
+          "suggestion": "사용자 로고"
         }
       ],
       "approved_at": null
@@ -141,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Logo-ul dvs\" is a possible translation, it's quite formal. A more common and natural translation for 'Your logo' would be 'Logo-ul tău'. \"Dvs\" is very formal and might not be appropriate depending on the context.",
-          "suggestion": "Logo-ul tău"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -174,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Ваш лого' is a literal translation of 'Your logo' but lacks the possessive adjective 'Your'. A more natural and accurate translation would be 'Твој лого' (informal) or 'Ваш логотип' (formal).",
-          "suggestion": "Твој лого / Ваш логотип"
+          "description": "The word 'лого' (logo) is a neuter noun in Serbian, but 'Ваш' is the masculine form of the possessive pronoun. It should be 'Ваш логотип' or 'Ваше лого'.",
+          "suggestion": "Ваше лого"
         }
       ],
       "approved_at": null

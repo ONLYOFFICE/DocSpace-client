@@ -3,7 +3,7 @@
   "content": "Editing",
   "content_en_sha1_hash": "3b9ba1a2515114c2d31fe79b93a1d942f595ac41",
   "created_at": "2025-05-19T21:30:44.758Z",
-  "updated_at": "2026-02-19T13:36:33.109Z",
+  "updated_at": "2026-04-08T11:26:34.893Z",
   "comment": {
     "text": "This translation key is used to display \"Editing\" as a label for editing permissions in a share component, likely on a share settings button or within a settings dialog. The translator should focus on creating a clear and concise phrase that accurately represents this permission type.",
     "is_auto": true,
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation \"Redaktə edilir\" means \"is being edited.\" The English word \"Editing\" refers to the act of editing itself, not the process of being edited. A more accurate translation would be \"Redaktə\" or \"Yayım\".",
-          "suggestion": "Redaktə"
+          "description": "The translation 'Redaktə edilir' means 'is being edited' (a continuous action/state), whereas the context requires a noun/label for a permission type ('Editing').",
+          "suggestion": "Redaktə etmə"
         }
       ],
       "approved_at": null
@@ -117,7 +117,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '編集中' (Editing/Currently editing) describes a continuous action or state, whereas the context specifies this is a permission label (the right to edit). In Japanese UI for permissions, '編集' (Edit) or '編集権限' (Editing permission) is more appropriate.",
+          "suggestion": "編集"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -126,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation '편집 중' literally translates to 'Editing in progress' or 'Currently editing'. While not entirely wrong, it implies an ongoing process, whereas 'Editing' in English refers to the activity itself, not necessarily the state of being in progress.",
-          "suggestion": "편집 (Edit)"
+          "description": "The translation '편집 중' means 'Currently editing' (progressive state), whereas the context indicates this is a permission label (the right to edit). In a permissions menu, '편집' or '편집 권한' is more appropriate.",
+          "suggestion": "편집"
         }
       ],
       "approved_at": null
@@ -228,7 +234,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Đang chỉnh sửa\" is a possible translation for \"Editing,\" it implies an ongoing process. \"Editing\" can also mean the act of editing itself, not necessarily happening right now. A more versatile translation might be \"Chỉnh sửa\".",
+          "description": "The translation 'Đang chỉnh sửa' implies a continuous action (Present Continuous: 'is editing' or 'currently editing'). In the context of a permission label (Share Rights), it should be a noun or a capability (e.g., 'Chỉnh sửa' or 'Quyền chỉnh sửa').",
           "suggestion": "Chỉnh sửa"
         }
       ],
@@ -238,6 +244,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Duke u edituar' is grammatically incorrect and means 'Being edited' (passive voice), whereas the context requires a noun or gerund representing the permission level 'Editing'.",
+          "suggestion": "Editim"
+        }
+      ],
       "approved_at": null
     }
   }

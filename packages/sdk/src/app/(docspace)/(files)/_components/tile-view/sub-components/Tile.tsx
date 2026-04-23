@@ -40,8 +40,10 @@ import Badges from "@docspace/shared/components/badges";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 
 import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
+import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
+import useFavoritesActions from "@/app/(docspace)/_hooks/useFavoritesActions";
 import type {
   TFileItem,
   TFolderItem,
@@ -52,6 +54,10 @@ import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionSt
 import { generateFilesItemValue } from "@/app/(docspace)/(files)/_utils";
 import useContextMenuModel from "@/app/(docspace)/_hooks/useContextMenuModel";
 import useDownloadActions from "@/app/(docspace)/_hooks/useDownloadActions";
+import { ShareContext } from "@/app/(docspace)/_contexts/ShareContext";
+import { DeleteContext } from "@/app/(docspace)/_contexts/DeleteContext";
+import { FileOperationsContext } from "@/app/(docspace)/_contexts/FileOperationsContext";
+import { RenameContext } from "@/app/(docspace)/_contexts/RenameContext";
 
 import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 import type { TileProps } from "../TileView.types";
@@ -72,6 +78,7 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
   const { t } = useTranslation("Common");
   const { isBase } = useTheme();
   const { filesSettings } = useFilesSettingsStore();
+  const filesListStore = useFilesListStore();
 
   const {
     isCheckedItem,
@@ -81,10 +88,28 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
     setBufferSelection,
   } = useFilesSelectionStore();
 
+  // Use the observable item from MobX store so isFavorite changes are reactive
+  const storeItem = filesListStore.items.find((i) => i.id === item.id);
+  const observableItem = storeItem ?? item;
+
   const { openFile } = useFilesActions({ t });
   const { openFolder } = useFolderActions({ t });
-  const { getContextMenuModel } = useContextMenuModel({ item });
+  const onShareClick = React.useContext(ShareContext);
+  const deleteCtx = React.useContext(DeleteContext);
+  const fileOpsCtx = React.useContext(FileOperationsContext);
+  const renameCtx = React.useContext(RenameContext);
+  const { getContextMenuModel } = useContextMenuModel({
+    item: observableItem,
+    onShareClick: onShareClick ?? undefined,
+    onDeleteClick: deleteCtx?.deleteItem,
+    onCopyClick: fileOpsCtx?.copyItem,
+    onMoveClick: fileOpsCtx?.moveItem,
+    onDuplicateClick: fileOpsCtx?.duplicateItem,
+    onRestoreClick: fileOpsCtx?.restoreItem,
+    onRenameClick: renameCtx?.renameItem,
+  });
   const { downloadAction } = useDownloadActions();
+  const { markAsFavorite, removeFromFavorites } = useFavoritesActions({ t });
   const { isItemActive } = useActiveItemsStore();
 
   const displayFileExtension = Boolean(filesSettings?.displayFileExtension);
@@ -135,28 +160,43 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
     />
   );
 
+  const onClickFavorite = () => {
+    if (observableItem.isFavorite) {
+      removeFromFavorites(observableItem);
+    } else {
+      markAsFavorite(observableItem);
+    }
+  };
+
   const badgesComponent = (
     <Badges
       t={t}
       themeIsBase={isBase}
-      item={item}
+      item={observableItem}
       viewAs="tile"
       showNew={false}
       onFilesClick={() => {
-        if (!item.isFolder) {
-          openFile(item);
+        if (!observableItem.isFolder) {
+          openFile(observableItem);
         }
       }}
+      onClickFavorite={onClickFavorite}
     />
   );
+
+  const handleShareClick = React.useCallback(() => {
+    onShareClick?.(observableItem);
+  }, [onShareClick, observableItem]);
 
   const quickButtonsComponent = (
     <QuickButtons
       t={t}
-      item={item}
+      item={observableItem}
       viewAs="tile"
-      isPublicRoom
-      onClickDownload={() => downloadAction(item)}
+      onClickDownload={() => downloadAction(observableItem)}
+      onClickFavorite={onClickFavorite}
+      onClickShare={onShareClick ? handleShareClick : undefined}
+      openShareTab={onShareClick ? handleShareClick : undefined}
     />
   );
 

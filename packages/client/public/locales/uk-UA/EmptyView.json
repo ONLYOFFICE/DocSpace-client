@@ -2,6 +2,7 @@
   "CollaborationRoomEmptyTitle": "Ласкаво просимо до кімнати співпраці",
   "CollaboratorEmptyTitle": "Кімната порожня.",
   "CreateAIAgent": "Створити нового агента",
+  "CreateAIAgentDescription": "Почніть створювати свого першого {{aiAgent}}",
   "CreateDocument": "Створити новий документ",
   "CreateDocumentDescription": "Скористайтеся широкими можливостями обробки текстів.",
   "CreateForm": "Створити нову PDF-форму",
@@ -16,7 +17,10 @@
   "CreateSpreadsheetDescription": "Виконуйте точні обчислення з мінімальними зусиллями.",
   "CustomRoomEmptyTitle": "Вітаємо в налаштовуваній кімнаті",
   "DefaultFolderDescription": "Перетягніть файли сюди або створіть нові.",
+  "EmptyAIAgentsAIDisabledDescription": "Цей розділ дозволяє користувачам працювати з {{aiAgents}} — розумними помічниками для обробки документів та інших завдань. \nЩоб почати їх використовувати, службу функцій AІ має бути активовано вашим {{productName}} адміністратором.",
+  "EmptyAIAgentsAIDisabledSaasAdminDescription": "Щоб створити та використовувати {{aiAgents}}, підключіть свій гаманець та увімкніть сервіс AI-функцій у налаштуваннях {{productName}}. Після цього ви зможете працювати з {{aiAgents}} та співпрацювати зі своєю командою.",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "Підключіть свій гаманець та увімкніть функції ШІ",
+  "EmptyAIAgentsTitle": "Створіть свого {{aiAgent}}",
   "EmptyDescription": "Почніть зі швидких дій:",
   "EmptyFavoritesDescription": "Закладайте файли та папки, щоб тримати їх у легкому доступі та під рукою.",
   "EmptyFavoritesTitle": "Поки що немає улюблених",
@@ -57,5 +61,8 @@
   "UploadFromPortalTitle": "Передати з {{productName}}",
   "UploadPDFFormOptionDescription": "Виберіть готову PDF-форму, доступну в {{productName}}, і передайте її до кімнати.",
   "VirtualDataRoomEmptyTitle": "Ласкаво просимо до віртуальної кімнати даних",
-  "EmptyAIAgentsTitle": "Створіть свого {{aiAgent}}"
+  "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} ще недоступні",
+  "EmptyAIAgentsAIEnabledUserDescription": "Після того, як ваша команда запросить вас до співпраці, тут з'являться {{aiAgents}}, готові допомогти з документами, управлінням знаннями та повсякденними завданнями.",
+  "EmptyAIAgentsDescription": "Налаштуйте персоналізованого помічника для вашої команди, додавши базу знань, вибравши ідеальну модель та підключивши {{mcpServer}}. Запросіть колег для спільної роботи та максимально використайте можливості чату агента.",
+  "EmptyAIAgentsUserTitle": "Поки що немає доступних {{aiAgents}}"
 }

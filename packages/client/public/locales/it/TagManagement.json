@@ -1,1 +1,8 @@
-{}
+{
+  "ChangesToTag": "Le modifiche a questo tag influenzeranno tutte le stanze in cui viene utilizzato.",
+  "DeleteTag": "Elimina tag",
+  "DeleteTagCannotBeUndone": "Questa azione non può essere annullata.",
+  "DeleteTagConfirmation": "Eliminare questo tag lo rimuoverà da tutte le stanze in cui è utilizzato.",
+  "EditTag": "Modifica tag",
+  "RemoveTag": "Rimosso il tag <1>{{tag}}</1>."
+}

@@ -3,7 +3,7 @@
   "content": "Other",
   "content_en_sha1_hash": "6e6a6f2086bb5fe5dbfd17d8d5f502d48759834b",
   "created_at": "2025-05-19T21:30:47.177Z",
-  "updated_at": "2026-03-31T15:18:46.332Z",
+  "updated_at": "2026-04-08T03:23:22.756Z",
   "comment": {
     "text": "This translation key is used to display \"Other\" when the filter includes a user who is not the current user (\"Me\"). It appears in the UI as a label on a filter component.",
     "is_auto": true,
@@ -165,7 +165,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Altă' is a feminine form of 'Other' used only before feminine nouns. In a UI filter context where the noun is unspecified or generic, 'Altele' (plural/neutral) or 'Altul' (masculine) is typically used, but 'Altă' is grammatically incomplete/incorrect as a standalone label.",
+          "suggestion": "Altele"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -201,13 +207,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Drugo' is a valid word but might not be the most accurate or natural translation of 'Other' in this context. 'Ostalo' might be a more suitable alternative depending on the specific meaning intended (e.g., 'Other items' or 'The rest').",
-          "suggestion": "Consider 'Ostalo' as an alternative translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -229,6 +229,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

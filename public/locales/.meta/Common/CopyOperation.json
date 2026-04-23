@@ -3,7 +3,7 @@
   "content": "Copying",
   "content_en_sha1_hash": "43b7de9894fd26b8d14ca6988e963239baff6ad4",
   "created_at": "2025-05-19T21:30:43.791Z",
-  "updated_at": "2026-03-20T09:07:45.529Z",
+  "updated_at": "2026-04-08T14:09:10.862Z",
   "comment": {
     "text": "This translation key \"CopyOperation\" is used to display a message that indicates an operation where content will be duplicated or mimicked. It is displayed as a label on a button in UI elements, typically allowing users to initiate a copy action, such as copying files or data.",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation \"Köçürülür\" translates to \"being copied\" or \"is copying\", which is a continuous tense. The English word \"Copying\" is a gerund or a noun/verb acting as a noun describing the action. A more accurate translation would be \"Köçürmə\" or \"Nüsxə\" to reflect the noun-like function of 'Copying'.",
-          "suggestion": "Köçürmə"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -63,13 +57,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word \"Copying\" refers to the action of copying something. \"Kopieren\" is the noun 'copy' or 'to copy' but doesn't convey the action itself. A more accurate translation would be something like 'Das Kopieren' or 'Kopieren'.",
-          "suggestion": "Das Kopieren"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -87,25 +75,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Kopioidaan' is grammatically correct and means 'being copied' or 'copying (in progress)', it's a continuous tense. 'Copying' in English often refers to the action of copying in a more general sense, not necessarily an ongoing process. A more accurate translation might be 'kopiointi' (copying - noun) or 'kopioi' (copies - present tense, third person singular) depending on the context.",
-          "suggestion": "Consider 'kopiointi' or 'kopioi' for a more general translation of 'Copying'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The French translation \"copier\" is the infinitive form of the verb \"to copy.\" The correct translation of \"Copying\" (present participle) should be \"en cours de copie\" or \"copie en cours\". \"Copier\" doesn't accurately convey the ongoing action of copying.",
-          "suggestion": "Consider using \"en cours de copie\" or \"copie en cours\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -120,7 +96,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Italian translation \"Sta copiando\" translates to \"Is copying\" or \"He/She/It is copying\". While technically correct, it's more literal than the English \"Copying,\" which functions as a gerund or a label. A more fitting translation would be something like \"Copia\" or \"Copiatura\".",
+          "description": "The Italian translation 'Sta copiando' uses the present continuous form (He/She/It is copying), which implies an active subject performing the action. In a UI context for a button or status label, 'Copying' should be a gerund or a noun indicating the process itself.",
           "suggestion": "Copia"
         }
       ],
@@ -150,7 +126,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Kopē\" is the imperative form of 'copy' (copy!). It doesn't convey the ongoing action of \"Copying\". A more accurate translation would be something like \"Kopēšana\" (Copying - noun) or \"Kopšanas process\" (Copying process).",
+          "description": "The Latvian word 'Kopē' is grammatically incorrect and does not convey the meaning of the ongoing process 'Copying'. 'Kopē' is not a standard Latvian word for this context; the correct participle for the action of copying is 'Kopēšana'.",
           "suggestion": "Kopēšana"
         }
       ],
@@ -174,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"A copiar\" while understandable, isn't the most natural or precise translation of \"Copying.\" It literally translates to \"Copying\" (as in, the act of copying is happening). A more appropriate translation would depend on the context. For example, if it's a button label, \"Copiar\" would be better. If it's describing the process, \"Está a copiar\" or \"Em cópia\" might be more suitable.",
-          "suggestion": "Consider 'Copiar' (for a button/action) or 'Está a copiar' / 'Em cópia' (for describing the process)."
+          "description": "The translation 'A copiar' implies a continuous action (present continuous) or a state, whereas in the context of a UI button label/status for an operation, 'Copiando' is the standard and correct term for 'Copying'.",
+          "suggestion": "Copiando"
         }
       ],
       "approved_at": null
@@ -192,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Copiază' is an imperative form (you copy). The English 'Copying' is a present participle, describing an ongoing action. A more accurate translation would be something like 'Copierea' (The Copying) or 'În copiere' (In copying).",
-          "suggestion": "Consider 'Copierea' or 'În copiere' for a more accurate translation."
+          "description": "The Romanian translation 'Copiază' is an imperative verb (command) meaning 'Copy!', whereas the English 'Copying' is a present participle indicating a continuous process or state. In the context of a button label showing progress (e.g., 'Copying...'), the correct Romanian form should be the gerund/continuous form.",
+          "suggestion": "Copiere"
         }
       ],
       "approved_at": null
@@ -207,13 +183,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation \"පිටපත් වෙමින්\" (pitapat vemin) while literally meaning \"copying\", doesn't quite capture the continuous/ongoing nature of \"Copying\" as a title or label. It implies an action in progress, which may not be the intended meaning in the context of a user interface or heading.",
-          "suggestion": "Consider \"පිටපතනය\" (pitapatanaya) which translates to 'copying' as a noun or \"පිටපත් කිරීම\" (pitapat kirima) which is a more formal and potentially more appropriate translation for a title or label."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -261,11 +231,17 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While '复制中' (fùzhì zhōng) literally translates to 'Copying', it implies an ongoing process. 'Copying' in this context is likely referring to the act of copying, not the state of copying. A more accurate translation might be '复制' (fùzhì).",
-          "suggestion": "复制"
+          "description": "The Albanian translation 'Duke u kopjuar' is grammatically incorrect and uses a passive/reflexive form that doesn't make sense in this context. It translates more like 'Being copied' (as in the object being acted upon) rather than the action of 'Copying'.",
+          "suggestion": "Duke kopjuar"
         }
       ],
       "approved_at": null

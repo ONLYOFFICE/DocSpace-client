@@ -3,7 +3,7 @@
   "content": "Revoke link",
   "content_en_sha1_hash": "60f184b7c84ca59ba034898a93f823c5c9571552",
   "created_at": "2025-08-26T11:15:03.776Z",
-  "updated_at": "2026-03-31T15:18:46.026Z",
+  "updated_at": "2026-04-08T00:59:33.229Z",
   "comment": {
     "text": "This key displays text on a button or dialog header, indicating the action of revoking a shared link. It appears in DeleteLinkDialog and LinkRow components, and the displayed text changes based on whether it's a public room or form room. Translators should consider the nuance of \"revoke\" versus \"delete\" in this context.",
     "is_auto": true,
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/shared/components/share/hooks/useShare.tsx",
-      "line_number": 403,
+      "line_number": 404,
       "context": "key: \"delete-link-separator\",\n isSeparator: true,\n },\n {\n key: \"delete-link-key\",\n label: link.canRevoke ? t(\"Common:RevokeLink\") : t(\"Common:Delete\"),\n icon: link.canRevoke ? OutlineReactSvgUrl : TrashReactSvgUrl,\n onClick: () => removeLink(link),\n },\n ];\n };",
       "module": "/packages/shared"
     }
@@ -93,7 +93,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Supprimer le lien' means 'Delete the link', whereas the English 'Revoke link' implies invalidating or withdrawing access without necessarily deleting the link object itself. The code context distinguishes between 'RevokeLink' and 'DeleteLink', so using 'Supprimer' (Delete) for 'Revoke' creates a semantic collision with the 'DeleteLink' key.",
+          "suggestion": "Révoquer le lien"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -171,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'සබැඳිය ඉවතලන්න' translates to 'Leave the link' or 'Withdraw from the link' (as if the user is exiting a connection), rather than 'Revoke the link' (invalidating the link's access).",
+          "suggestion": "සබැඳිය අවලංගු කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

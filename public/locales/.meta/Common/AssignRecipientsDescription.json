@@ -3,7 +3,7 @@
   "content": "The form was successfully submitted to {{roomName}}. Assign recipient roles to the chosen users to enable form filling. Do you want to proceed now or get back to it later?",
   "content_en_sha1_hash": "c88f7efd58dd5b1fb5dc72749d4d0da3498a1d92",
   "created_at": "2025-10-13T13:21:58.757Z",
-  "updated_at": "2025-10-13T14:26:37.082Z",
+  "updated_at": "2026-04-08T16:40:27.522Z",
   "comment": {
     "text": "This text appears in a modal dialog, explaining that a form has been submitted and prompting the user to assign recipient roles to enable form filling. It provides a choice to proceed with assigning roles or returning to it later. Translators should ensure the meaning of proceeding to role assignment is clear.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase '{{roomName}} vasitəsilə' means 'via {{roomName}}' or 'through {{roomName}}', whereas the English 'to {{roomName}}' implies the destination/target of the submission. In the context of a DocSpace room, the form is submitted TO the room, not via it.",
+          "suggestion": "Forma uğurla {{roomName}}-ə göndərilmişdir. Formanı doldurmaq üçün seçilmiş istifadəçilərə alıcı rolu təyin edin. İndi davam etmək istəyirsiniz, yoxsa daha sonra geri dönmək?"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -57,7 +63,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The second sentence in Greek is a noun phrase ('Assignment of recipient roles...') instead of a complete imperative sentence ('Assign recipient roles...'). This changes the grammatical structure from an instruction to a fragment, which is awkward in a UI context.",
+          "suggestion": "Η φόρμα υποβλήθηκε επιτυχώς στο {{roomName}}. Ανάθετε ρόλους παραλήπτη στους επιλεγμένους χρήστες για να επιτρέψετε τη συμπλήρωση της φόρμας. Θέλετε να προχωρήσετε τώρα ή να επιστρέψετε σε αυτήν αργότερα;"
+        }
+      ],
       "approved_at": null
     },
     "es": {

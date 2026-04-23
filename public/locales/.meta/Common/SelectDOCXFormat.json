@@ -3,7 +3,7 @@
   "content": "Select .DOCX file",
   "content_en_sha1_hash": "bff9ac62060c554eef777047f11e53f604167bf2",
   "created_at": "2025-05-19T21:30:48.392Z",
-  "updated_at": "2026-02-19T13:36:32.254Z",
+  "updated_at": "2026-04-07T23:50:50.567Z",
   "comment": {
     "text": "The translation key \"SelectDOCXFormat\" is used to translate the text that appears when selecting a .DOCX file in the UI, likely as a filter or option in a dialog box. It appears in the FilesSelector component and its corresponding modal.",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation uses a more literal translation of 'Select .DOCX file.' It would be more natural in Azerbaijani to phrase it as 'DOCX faylı seçin' or '.DOCX faylını seçin'.",
-          "suggestion": ".DOCX faylını seçin"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -63,49 +57,25 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Datei im DOCX-Format auswählen' is a bit verbose and not the most natural way to say 'Select .DOCX file' in German. A more idiomatic translation would be 'DOCX-Datei auswählen'.",
-          "suggestion": "DOCX-Datei auswählen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Επιλέξτε το αρχείο σε μορφή .DOCX' is a literal translation and sounds slightly unnatural in Greek. A more natural phrasing would be 'Επιλέξτε αρχείο .DOCX'.",
-          "suggestion": "Επιλέξτε αρχείο .DOCX"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Seleccione el archivo en formato .DOCX' is a literal translation and sounds less natural in Spanish. A more idiomatic translation would be 'Seleccione un archivo .DOCX' or 'Elija un archivo .DOCX'.",
-          "suggestion": "Seleccione un archivo .DOCX"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Valitse tiedosto .DOCX-muodossa' is a literal translation of 'Select .DOCX file' but sounds less natural in Finnish. A more idiomatic translation would be something like 'Valitse .DOCX-tiedosto' or 'Valitse .DOCX-muotoinen tiedosto'.",
-          "suggestion": "Valitse .DOCX-tiedosto"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -135,13 +105,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation, '.DOCX 형식의 파일을 선택해주세요', is a literal translation but sounds slightly unnatural in Korean. A more natural phrasing would be something like '.DOCX 파일을 선택하세요'.",
-          "suggestion": ".DOCX 파일을 선택하세요"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -149,9 +113,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Lao translation uses a space before the period in '. ຮູບແບບ DOCX'. It is more common to omit the space.",
-          "suggestion": "ເລືອກໄຟລ໌ໃນ .ຮູບແບບ DOCX"
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ເລືອກໄຟລ໌ໃນ . ຮູບແບບ DOCX' translates to 'Select file in . DOCX format', which adds unnecessary words ('in', 'format') and changes the direct imperative 'Select .DOCX file' to a more awkward phrasing. More importantly, the placement of the dot and the structure is grammatically unnatural for a UI instruction.",
+          "suggestion": "ເລືອກໄຟລ໌ .DOCX"
         }
       ],
       "approved_at": null
@@ -159,25 +123,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Atlasīt failu .DOCX formātā' is a literal translation and sounds slightly unnatural in Latvian. A more natural phrasing would be something like 'Izvēlēties .DOCX failu' or 'Atvērt .DOCX failu'. While technically correct, the current phrasing lacks fluency.",
-          "suggestion": "Izvēlēties .DOCX failu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Selecteer het bestand in .DOCX formaat\" is overly literal and not the most natural way to say 'Select .DOCX file' in Dutch. It emphasizes the format rather than the selection action.",
-          "suggestion": "Selecteer een .DOCX bestand"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -189,13 +141,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Selecionar um ficheiro no formato .DOCX' is a bit literal. A more natural translation would be 'Selecionar arquivo .DOCX' or 'Escolher arquivo .DOCX'. The 'um ficheiro no formato' part is unnecessarily verbose.",
-          "suggestion": "Selecionar arquivo .DOCX"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -210,12 +156,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Selectare fișier format.DOCX\" is not an accurate translation of \"Select .DOCX file\". It literally translates to \"Selecting file format.DOCX\". The correct meaning of 'Select' is missing.",
-          "suggestion": "Selectați fișier .DOCX"
-        },
-        {
-          "type": "formatting",
-          "description": "The Romanian translation includes a space before the file extension (.DOCX). While not strictly incorrect, it's less common in Romanian and would benefit from removing the extra space.",
+          "description": "The Romanian translation 'Selectare fișier format.DOCX' translates to 'Selecting DOCX format file' or 'Selection of DOCX format file', which changes the imperative command 'Select .DOCX file' into a noun phrase. In a UI context, 'Select' should be an imperative verb.",
           "suggestion": "Selectați fișier .DOCX"
         }
       ],
@@ -230,13 +171,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \".DOCX ගොනුව තෝරන්න\" is a very literal translation. A more natural and idiomatic Sinhala phrasing would be more user-friendly. \"DOCX ගොනුවක් තෝරන්න\" or \"DOCX ෆයිල් එක තෝරන්න\" would be better.",
-          "suggestion": "DOCX ගොනුවක් තෝරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -248,37 +183,19 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Izberi datoteko v .DOCX formatu' is a literal translation. A more natural and idiomatic Slovenian phrasing would be preferred.  'Format' isn't necessary as '.DOCX' inherently implies a format.",
-          "suggestion": "Izberi .DOCX datoteko"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Изабери .DOCX датотеку' is a literal translation but not the most natural phrasing in Serbian. A more idiomatic translation would be 'Избери .DOCX датотеку' or 'Учитај .DOCX датотеку'.",
-          "suggestion": "Избери .DOCX датотеку"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Izaberi .DOCX datoteku' uses 'datoteku' which translates to 'file' but a more accurate and natural translation would use 'dokument' (document). While 'datoteka' is correct, 'dokument' is more common in this context.",
-          "suggestion": "Izaberi .DOCX dokument"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -287,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Dosyayı .DOCX biçiminde seç' is a literal translation that isn't idiomatic. It translates to 'Select file in .DOCX format.' A more natural Turkish phrasing would be something like 'DOCX dosyasını seç' or '.DOCX dosyasını seç'.",
-          "suggestion": ".DOCX dosyasını seç"
+          "description": "The Turkish translation changes the meaning from 'Select a .DOCX file' (selecting a specific file type) to 'Select the file in .DOCX format' (selecting an existing file and applying a format), which is semantically different in a file selector context.",
+          "suggestion": ".DOCX dosyası seç"
         }
       ],
       "approved_at": null
@@ -296,37 +213,25 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Вибрати файл в форматі .DOCX' is too literal. A more natural Ukrainian translation for 'Select .DOCX file' would be something like 'Оберіть файл .DOCX' or 'Виберіть файл .DOCX'.",
-          "suggestion": "Оберіть файл .DOCX"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Chọn tệp có định dạng .DOCX' is technically correct but sounds slightly unnatural in Vietnamese. A more natural phrasing would be 'Chọn file .DOCX'.",
-          "suggestion": "Chọn file .DOCX"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '选择.DOCX格式的文件' literally translates to 'Select .DOCX format file'. A more natural and concise translation would be '选择DOCX文件' or '选择.DOCX文件'.  The addition of '格式' (format) is redundant.",
-          "suggestion": "选择DOCX文件"
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

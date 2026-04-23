@@ -1,0 +1,21 @@
+{
+  "key_path": "BillingAICardDesc",
+  "content": "AI credits, model settings, and usage",
+  "content_en_sha1_hash": "57c16903d5b8334eda721aba86dbe5771ea21e53",
+  "created_at": "2026-04-10T08:20:53.289Z",
+  "updated_at": "2026-04-10T08:20:53.289Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

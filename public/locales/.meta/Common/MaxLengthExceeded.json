@@ -3,7 +3,7 @@
   "content": "The maximum length of a user name or another local part is 64 characters.",
   "content_en_sha1_hash": "ba7b9b65a0fda5b91b2999cd6da74cf668a5cc1d",
   "created_at": "2025-05-19T21:30:46.386Z",
-  "updated_at": "2026-03-26T08:26:57.977Z",
+  "updated_at": "2026-04-10T08:21:04.300Z",
   "comment": {
     "text": "\"This translation key is used to display an error message when a user name exceeds the maximum allowed length of 64 characters. It appears in dialogs where users are prompted to update their email address or local part.\"",
     "is_auto": true,
@@ -13,12 +13,6 @@
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeEmailDialog/index.js",
       "line_number": 141,
-      "context": "case ErrorKeys.IncorrectLocalPart:\n return t(\"Common:IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:\n return t(\"Common:SpacesInLocalPart\");\n case ErrorKeys.MaxLengthExceeded:\n return t(\"Common:MaxLengthExceeded\");\n case ErrorKeys.IncorrectEmail:\n return t(\"Common:IncorrectEmail\");\n case ErrorKeys.ManyEmails:\n return t(\"Common:ManyEmails\");\n case ErrorKeys.EmptyEmail:",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/SalesDepartmentRequestDialog/index.js",
-      "line_number": 131,
       "context": "case ErrorKeys.IncorrectLocalPart:\n return t(\"Common:IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:\n return t(\"Common:SpacesInLocalPart\");\n case ErrorKeys.MaxLengthExceeded:\n return t(\"Common:MaxLengthExceeded\");\n case ErrorKeys.IncorrectEmail:\n return t(\"Common:IncorrectEmail\");\n case ErrorKeys.ManyEmails:\n return t(\"Common:ManyEmails\");\n case ErrorKeys.EmptyEmail:",
       "module": "/packages/client"
     },
@@ -48,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Elektron poçtun maksimal uzunluğu 64 simvoldur' translates to 'The maximum length of an email is 64 characters.' The English content refers to usernames or another 'local part,' not specifically email.  This is a mistranslation of the scope.",
-          "suggestion": "Istifadəçi adı və ya yerli hissənin maksimal uzunluğu 64 simvoldur."
+          "description": "The translation changes the subject from 'user name or another local part' to 'email address' (Elektron poçtun), which is a different technical entity.",
+          "suggestion": "İstifadəçi adının və ya digər lokal hissənin maksimum uzunluğu 64 simvoldur."
         }
       ],
       "approved_at": null
@@ -69,13 +63,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'characters' (as in, letters and numbers) is translated as 'Symbole'. 'Symbole' translates to 'symbols' which is a more general term and doesn't specifically refer to characters in a username. This can lead to confusion.",
-          "suggestion": "Die maximale Länge für den Benutzernamen oder anderen lokalen Teil beträgt 64 Zeichen."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -149,14 +137,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation uses \"identyfikatora użytkownika\" which translates to \"user identifier\". The original sentence refers to a username or any 'local part'. 'Local part' is a more precise technical term here, which doesn't have a direct equivalent in Polish and requires more context. \"identyfikatora użytkownika\" is too specific.",
-          "suggestion": "Consider rephrasing to something like \"Maksymalna długość nazwy użytkownika lub innego fragmentu adresu wynosi 64 znaków.\" or \"Maksymalna długość segmentu identyfikującego użytkownika wynosi 64 znaki.\" depending on the intended audience."
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the translation could benefit from punctuation consistency. Polish often uses a slightly different punctuation style.",
-          "suggestion": "Consider adding a comma after \"Maksymalna długość\" for better readability. E.g., \"Maksymalna długość, identyfikatora użytkownika...\""
+          "type": "missing_content",
+          "description": "The translation omits the mention of 'another local part', which is important context for email address validation errors.",
+          "suggestion": "Maksymalna długość nazwy użytkownika lub innego elementu lokalnego wynosi 64 znaki."
         }
       ],
       "approved_at": null
@@ -184,9 +167,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation uses \"имя почтового ящика\" (mailbox name) which is not equivalent to \"user name or another local part\". It's a more specific term.",
-          "suggestion": "Максимальная длина имени пользователя или другой локальной части - 64 символов."
+          "type": "missing_content",
+          "description": "The English text specifies that the limit applies to 'a user name or another local part', whereas the Russian translation only mentions 'mailbox name' (имени почтового ящика), omitting the 'local part' nuance.",
+          "suggestion": "Максимальная длина имени пользователя или другой локальной части составляет 64 символа."
         }
       ],
       "approved_at": null
@@ -197,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'අකුරු' (akuru) means 'letters' and while technically correct, it's more natural to use a term implying characters or length. The original English emphasizes 'characters'.",
-          "suggestion": "පරිශ්‍රීලක නාමයක හෝ වෙනත් ස්ථානීය කොටසක උපරිම දිග 64 අක්ෂර කි."
+          "description": "The word 'පරිශ්‍රීලක' (parishrīlaka) is a misspelling/incorrect term for 'user'. The correct term for 'user' in Sinhala is 'පරිශීලක' (parishīlaka).",
+          "suggestion": "පරිශීලක නාමයක හෝ වෙනත් ස්ථානීය කොටසක උපරිම දිග අකුරු 64 කි."
         }
       ],
       "approved_at": null
@@ -246,6 +229,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

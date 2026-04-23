@@ -26,28 +26,82 @@
 
 const MAX_CACHE_SIZE = 100;
 
-const cache = new Map<string, string>();
+type CacheEntry = { blobUrl: string; refCount: number };
 
-export function getThumbnail(key: string): string | undefined {
-  return cache.get(key);
+const cache = new Map<string, CacheEntry>();
+const inFlight = new Map<string, Promise<string>>();
+const pendingRefs = new Map<string, number>();
+
+const evictIfFull = () => {
+  if (cache.size < MAX_CACHE_SIZE) return;
+  for (const [key, entry] of cache) {
+    if (entry.refCount <= 0) {
+      URL.revokeObjectURL(entry.blobUrl);
+      cache.delete(key);
+      return;
+    }
+  }
+};
+
+export function getThumbnailSync(key: string): string | undefined {
+  return cache.get(key)?.blobUrl;
 }
 
-export function setThumbnail(key: string, blobUrl: string): void {
-  if (cache.has(key)) {
-    const existing = cache.get(key)!;
-    if (existing !== blobUrl) {
-      URL.revokeObjectURL(existing);
-    }
-    cache.delete(key);
+export function acquireThumbnail(key: string): Promise<string> {
+  if (!key) return Promise.reject(new Error("empty thumbnail key"));
+
+  const existing = cache.get(key);
+  if (existing) {
+    existing.refCount += 1;
+    return Promise.resolve(existing.blobUrl);
   }
 
-  if (cache.size >= MAX_CACHE_SIZE) {
-    const oldest = cache.keys().next().value;
-    if (oldest !== undefined) {
-      URL.revokeObjectURL(cache.get(oldest)!);
-      cache.delete(oldest);
-    }
+  const pending = inFlight.get(key);
+  if (pending) {
+    pendingRefs.set(key, (pendingRefs.get(key) ?? 0) + 1);
+    return pending;
   }
 
-  cache.set(key, blobUrl);
+  pendingRefs.set(key, 1);
+
+  const p = fetch(key, { credentials: "include" })
+    .then((res) => {
+      if (!res.ok) throw new Error(String(res.status));
+      return res.blob();
+    })
+    .then((blob) => {
+      const blobUrl = URL.createObjectURL(blob);
+      const refCount = pendingRefs.get(key) ?? 0;
+      pendingRefs.delete(key);
+
+      if (refCount <= 0) {
+        URL.revokeObjectURL(blobUrl);
+        return blobUrl;
+      }
+
+      evictIfFull();
+      cache.set(key, { blobUrl, refCount });
+      return blobUrl;
+    })
+    .finally(() => {
+      inFlight.delete(key);
+    });
+
+  inFlight.set(key, p);
+  return p;
+}
+
+export function releaseThumbnail(key: string): void {
+  if (!key) return;
+
+  const entry = cache.get(key);
+  if (entry) {
+    if (entry.refCount > 0) entry.refCount -= 1;
+    return;
+  }
+
+  if (inFlight.has(key)) {
+    const n = pendingRefs.get(key) ?? 0;
+    pendingRefs.set(key, n - 1);
+  }
 }

@@ -3,7 +3,7 @@
   "content": "Remove user",
   "content_en_sha1_hash": "1ea12968c343f58a25b3bbd9b25661f76829d3bb",
   "created_at": "2025-05-19T21:30:53.549Z",
-  "updated_at": "2025-08-12T19:46:25.934Z",
+  "updated_at": "2026-04-07T19:35:05.176Z",
   "comment": {
     "text": "The \"RemoveUser\" translation key is used to display a confirmation message when removing a user, typically appearing in a modal dialog footer. Its purpose is to provide a clear indication of the action being performed.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"İstifadəçini silin\" is understandable, a more natural and commonly used translation for \"Remove user\" would be \"İstifadəçini etmələrin\". \"Silin\" implies deletion, which might not always be the intended action (e.g., deactivation).",
-          "suggestion": "İstifadəçini etmələrin"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -75,13 +69,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Poista käyttäj' is incomplete. It is missing the ending of the word 'käyttäjä'.",
-          "suggestion": "Poista käyttäjä"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -117,13 +105,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation \"ຖອນລົບຜູ້ໃຊ້\" is not the most natural or accurate translation of \"Remove user.\" While \"ຖອນ\" (thon) can mean remove and \"ລົບ\" (lop) can mean delete, using both together is redundant and sounds awkward. \"ຜູ້ໃຊ້\" is correct for 'user'.",
-          "suggestion": "A better translation would be \"ລົບຜູ້ໃຊ້\" (lop phu sai) or \"ຖອນຜູ້ໃຊ້\" (thon phu sai)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -135,13 +117,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Verwijderen gebruiker' is technically correct but sounds unnatural in Dutch. A more idiomatic translation would be 'Gebruiker verwijderen'.",
-          "suggestion": "Gebruiker verwijderen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -177,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'පරිශීලකය' (parashilakaya) is a less common and potentially slightly awkward way to say 'user'. A more natural translation would be 'වියත්කරැ' (viaththakaraya).",
-          "suggestion": "පරිශීලකය -> වියත්කරැ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -201,25 +171,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Уклони корисника\" does not accurately convey the meaning of \"Remove user.\" \"Уклони\" means \"avoid\" or \"evade.\" The correct translation should reflect the action of deleting or removing a user.",
-          "suggestion": "Избриши корисника (Izbriši korisnika) - meaning \"Delete user\", or Уклони/Обриши корисника (Ukloni/Obriši korisnika) - meaning \"Remove/Delete user\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ukloni korisnika' is not the most natural or accurate translation of 'Remove user'. 'Ukloni' implies removal of something physical or an obstruction. For a user account, 'Obriši korisnika' or 'Izbriši korisnika' are more appropriate.",
-          "suggestion": "Obriši korisnika"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

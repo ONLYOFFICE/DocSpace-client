@@ -3,7 +3,7 @@
   "content": "How many times has the form \"{{formName}}\" been submitted?",
   "content_en_sha1_hash": "e0f429db1b42b106eec7f0e62a00cf8810eab3d9",
   "created_at": "2026-03-31T15:18:24.717Z",
-  "updated_at": "2026-03-31T15:18:24.717Z",
+  "updated_at": "2026-04-07T21:29:23.688Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -104,7 +104,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation implies that the form itself performed the action of submitting ('the form has submitted'), whereas the English text asks how many times the form has been submitted (passive voice).",
+          "suggestion": "Cik reizes ir iesniegta formula \"{{formName}}\"?"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -134,7 +140,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'trimars' is misspelled; it should be 'trimis'.",
+          "suggestion": "Câte ori a fost trimis formularul \"{{formName}}\" ?"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -152,7 +164,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Grammatical gender mismatch: 'formulár' is masculine in Slovak, but the past participle 'odooslané' is neuter. It should be 'odooslaný'.",
+          "suggestion": "Koľko krát bol formulár \"{{formName}}\" odooslaný?"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -164,13 +182,25 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Albanian translation uses the plural form 'formularët' (the forms) instead of the singular 'formularin' (the form), which contradicts the English singular 'the form'.",
+          "suggestion": "Sa shpeshtë është dërguar formulari \"{{formName}}\"?"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The noun 'обрасци' is in plural form, but the verb 'поднет' is in singular form, and the context implies a single form name. It should be singular 'образац'.",
+          "suggestion": "Колико пута је образац \"{{formName}}\" поднет?"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

@@ -6,6 +6,7 @@
   "AutomaticIndexing": "Indexação automática",
   "AutomaticIndexingDescription": "Ative a indexação automática para indexar arquivos e pastas por número de série. A classificação por número será definida como padrão para todos os usuários.",
   "ChooseRoomType": "Escolha o tipo de quarto",
+  "ConfigureDatabaseConnection": "Configure a conexão com o banco de dados em Integração → Serviços de terceiros",
   "CreateRoomConfirmation": "Continuar sem conectar o armazenamento?\nVocê selecionou uma opção de armazenamento de terceiros que ainda não está conectada. Se você continuar sem conectar o serviço, esta opção não será adicionada.",
   "CreateRoomWatermarksConfirmation": "Você não definiu uma marca d'água a ser aplicada aos documentos nesta sala. Você sempre pode adicionar uma marca d'água nas configurações de edição da sala. Continuar sem uma marca d'água?",
   "CreateTagOption": "Criar etiqueta",
@@ -39,5 +40,9 @@
   "UserName": "Nome do usuário",
   "ViewerInfo": "Informações do visualizador",
   "WatermarkPreview": "Visualização da marca d'água",
-  "WatermarkPreviewHelp": "Esta visualização da imagem mostra aproximadamente como a marca d'água será exibida em seus arquivos."
+  "WatermarkPreviewHelp": "Esta visualização da imagem mostra aproximadamente como a marca d'água será exibida em seus arquivos.",
+  "GoToIntegrations": "Ir para Integrações",
+  "NeedMoreIntegrations": "Precisa de mais integrações?",
+  "NeedMoreIntegrationsDescription": "Use webhooks para enviar dados para o seu próprio sistema ou conecte formulários a milhares de serviços via Zapier.",
+  "NoDatabaseConnections": "Nenhuma conexão de banco de dados configurada"
 }

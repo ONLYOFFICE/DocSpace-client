@@ -3,7 +3,7 @@
   "content": "Suggest changes",
   "content_en_sha1_hash": "9ffcb5afef6f8967083c097c71996bf3bcc700c1",
   "created_at": "2025-05-19T21:30:55.122Z",
-  "updated_at": "2026-03-31T15:18:46.281Z",
+  "updated_at": "2026-04-10T08:21:04.328Z",
   "comment": {
     "text": "This translation key is used for a button that suggests changes to a gallery. It appears as part of an info panel on the home page, allowing users to open a file in a new tab and suggest modifications to it.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1479,
+      "line_number": 1478,
       "context": "key: \"separator\",\n isSeparator: true,\n },\n {\n key: \"suggest-changes\",\n label: t(\"FormGallery:SuggestChanges\"),\n onClick: () => this.onSuggestOformChanges(item),\n },\n ];\n };",
       "module": "/packages/client"
     }
@@ -177,13 +177,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Предложи промене' is grammatically correct but doesn't quite capture the nuance of 'Suggest changes.' A more appropriate translation would emphasize a proposal or recommendation.",
-          "suggestion": "Предложите измене"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -195,13 +189,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Değişiklik öner' is understandable, a more accurate and natural translation of 'Suggest changes' in Turkish would be 'Değişiklikler öner' or 'Değişiklik önerme'. 'Değişiklik öner' implies a single change being suggested, whereas 'Suggest changes' is plural.",
-          "suggestion": "Değişiklikler öner"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

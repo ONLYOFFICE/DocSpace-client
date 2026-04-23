@@ -3,7 +3,7 @@
   "content": "Switch to full {{license}} version",
   "content_en_sha1_hash": "10205017c424194a55840b404d24c3f602f462f3",
   "created_at": "2025-05-26T07:15:40.125Z",
-  "updated_at": "2025-09-19T15:39:23.372Z",
+  "updated_at": "2026-04-10T08:58:38.058Z",
   "comment": {
     "text": "Switch to full {{license}} version is used as a button label in a payment trial container to indicate the option to upgrade to a full license. It appears on line 55 of /packages/shared/pages/Payments/Standalone/TrialContainer.tsx and utilizes the \"ActivateSwithToProHeader\" translation key with variables for different license types.",
     "is_auto": true,
@@ -199,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

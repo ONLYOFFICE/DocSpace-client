@@ -12,5 +12,8 @@
   "SuccessConnected": "{{serviceName}} ir veiksmīgi pievienots kā paziņojumu kanāls. Jūs tagad saņemsiet atjauninājumus tur.",
   "SuccessDisconnected": "{{serviceName}} ir veiksmīgi atvienots kā paziņojumu kanāls. Tur paziņojumi vairs netiks sūtīti.",
   "UsefulTips": "Noderīgi {{productName}} padomi",
-  "UsefulTipsDescription": "Iegūt noderīgus ceļvežus par {{productName}}"
+  "UsefulTipsDescription": "Iegūt noderīgus ceļvežus par {{productName}}",
+  "ActionsWithFilesDescription": "Badges papildinās failu aktivitāti — auglošanu, rediēšanu vai dalīšanos — visās {{rooms}}, {{shared}}, {{documents}} un {{aiAgents}} sadaļās.",
+  "RoomsActivityDescription": "Saņemiet instant e-pasta paziņojumus par jauni dalītie faili/karaktēri un aktivitāti savā {{rooms}} un {{aiAgents}} iekšpusē.",
+  "RoomUpdateNotify": "Dalīts saturs, {{rooms}} un {{aiAgents}} aktivitāte"
 }

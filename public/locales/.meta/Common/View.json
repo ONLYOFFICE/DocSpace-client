@@ -3,7 +3,7 @@
   "content": "View",
   "content_en_sha1_hash": "69bd4ef9fbd0894a22759c3766b859defbdedbc8",
   "created_at": "2025-05-19T21:30:49.521Z",
-  "updated_at": "2026-03-31T15:18:46.203Z",
+  "updated_at": "2026-04-10T08:21:04.295Z",
   "comment": {
     "text": "This translation key is used to display the text \"View\" as a label for a button or similar UI element. It appears in various contexts, including a Smart Banner component and a filter section on the Home page, where it serves as a placeholder for an action that allows users to view content or settings.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2112,
+      "line_number": 2111,
       "context": "key: \"view\",\n label:\n this.treeFoldersStore.isRecentFolder ||\n this.treeFoldersStore.isFavoritesFolder\n ? t(\"Open\")\n : t(\"Common:View\"),\n icon: EyeReactSvgUrl,\n onClick: (fileId) => this.onMediaFileClick(fileId, item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
@@ -51,25 +51,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Baxın\" can mean \"View\" in certain contexts, it more commonly translates to \"Look\" or \"Watch.\" \"View\" in the context of a user interface (like a list or gallery) is better conveyed by a more neutral term.",
-          "suggestion": "Consider using \"Görünüş\" or \"Rəy\" depending on the specific UI context. \"Görünüş\" is closer to the concept of \"View\" as a visual representation, while \"Rəy\" can mean 'opinion' or 'view' in a more abstract sense, which might be appropriate if 'View' refers to a display of data."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Преглед\" can sometimes translate to \"View\", it's more commonly associated with \"Review\" or \"Overview.\" \"View\" in the context of a user interface element (e.g., \"View Profile\") often requires a more specific translation depending on the specific meaning.",
-          "suggestion": "Consider alternatives like \"Гледане\" (gledane) for a more literal 'viewing' or explore context-specific options."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -81,13 +69,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Anzeigen\" can mean \"View\" in certain contexts (like displaying something), it's not the most accurate or common translation of \"View\" in the general sense, especially when referring to a visual viewpoint or the act of viewing content. A more suitable translation might be \"Betrachten\" or \"Ansehen\".",
-          "suggestion": "Consider \"Betrachten\" or \"Ansehen\" as alternatives to \"Anzeigen\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -111,13 +93,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Afficher\" can mean 'to display' or 'to show', it's not the most natural translation of 'View' in this context, which likely refers to a visual perspective or access to information.  A more appropriate translation would depend on the specific context of 'View'.",
-          "suggestion": "Consider alternatives like 'Voir' (to see), 'Consulter' (to consult/view), or 'Présentation' (Presentation) depending on context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -150,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"ມຸມມອງ\" (mum mong) can be understood to mean 'view' or 'perspective,' it's a more complex meaning than the English 'View' which often refers to a visual perspective or a way to see something (e.g., 'view a website' or 'view a photo'). A more direct translation for the common meaning of 'View' might be 'ວິວ' (wiw) or 'ການເບິ່ງ' (kan boeng).",
-          "suggestion": "Consider using 'ວິວ' (wiw) or 'ການເບິ່ງ' (kan boeng) for a more direct translation."
+          "description": "The Lao word 'ມຸມມອງ' means 'perspective' or 'point of view' (noun). In the context of a UI button or action (e.g., 'View' in a Smart Banner or 'View' as an action to open a file), the translation should be a verb meaning 'to see' or 'to view' (e.g., 'ເບິ່ງ').",
+          "suggestion": "ເບິ່ງ"
         }
       ],
       "approved_at": null
@@ -177,13 +153,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Portuguese translation \"Ver\" while literally meaning 'to see' or 'to view', isn't the most natural translation for 'View' in the context of a UI element or a permission. A more appropriate translation would be 'Visualizar' or 'Exibir'.",
-          "suggestion": "Visualizar"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -207,13 +177,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation \"දකින්න\" (dakinna) primarily means \"to see\" or \"to watch,\" and while it can imply viewing, it's not the most accurate translation of \"View\" in the context of a UI element or a system capability. It carries a more active sense of observation.",
-          "suggestion": "Consider \"පෙනුම්\" (penum) which is closer to \"view\" in the sense of appearance or a visual representation, or \"ලක්ශණය\" (lakshanaya) which can mean \"characteristic\" or \"feature\" depending on the context. The best choice depends on the precise role of 'View' in the application."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -222,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Vyhliadka\" can mean 'view', in the context of a UI element like a 'View' in software, it doesn't quite convey the intended meaning. It suggests a scenic overlook rather than a display or perspective.",
-          "suggestion": "Consider alternatives like \"Zobrazenie\", \"Pohľad\" or \"Perspektíva\" which better capture the UI element sense of 'View'."
+          "description": "The Slovak word 'Vyhliadka' means 'Prospect' or 'View' in the sense of a landscape/scenery. In a UI context for a button (action to view content), the correct term is 'Zobraziť'.",
+          "suggestion": "Zobraziť"
         }
       ],
       "approved_at": null
@@ -237,13 +201,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'Преглед' while acceptable, isn't the most common or direct translation of 'View' in the context of UI elements or displays. 'Поглед' might be a closer equivalent, depending on the specific application. 'Преглед' often implies a review or overview.",
-          "suggestion": "Consider 'Поглед' as a possible alternative, or further context needed to determine the best fit."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -255,13 +213,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Görüntüle' can mean 'View', it's more accurately translated as 'Display' or 'Show'. 'View' in the context of user interface (e.g., 'View Details') is often better translated as 'İzleme' or 'Görünüm' depending on the nuance.",
-          "suggestion": "Consider 'İzleme' or 'Görünüm' as alternatives depending on context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -285,7 +237,13 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Shikoni' is the imperative form (command) addressed to 'you' (plural/formal). In UI design for buttons/actions, 'View' should be translated as a noun or an infinitive-style action. 'Shikoni' sounds like a command to the user to look at something, rather than a label for the action of viewing.",
+          "suggestion": "Shiko"
+        }
+      ],
       "approved_at": null
     }
   }

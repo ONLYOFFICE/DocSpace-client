@@ -3,7 +3,7 @@
   "content": "This API key has expired and is no longer active",
   "content_en_sha1_hash": "5498c70b6165069d2e537997b766fe0372503688",
   "created_at": "2025-05-19T21:30:50.515Z",
-  "updated_at": "2026-02-19T13:36:32.744Z",
+  "updated_at": "2026-04-09T04:15:54.157Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that an API key has expired. It appears as a tooltip in a UI element and provides context for users who need to update or deactivate their API key. The exact appearance may vary depending on the application's design, but its purpose remains consistent: to inform users of their account's current status.",
     "is_auto": true,
@@ -81,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Այս API բանալին ժամկետանց է եւ այլեւս գործող չէ' while generally accurate, could be slightly more natural-sounding in Armenian. 'ժամկետանց է' is correct for 'expired', but the overall phrasing feels a bit stiff.",
-          "suggestion": "Այս API բանալին սպառվել է եւ այլեւս գործող չէ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -114,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ຄີ API ນີ້ໝົດອາຍຸ ແລະບໍ່ເຄີຍໃຊ້ງານອີກຕໍ່ໄປ' translates to 'This API key has expired and has never been usable again.' While conveying the general idea of expiration, the phrasing 'ບໍ່ເຄີຍໃຊ້ງານອີກຕໍ່ໄປ' (never been usable again) is stronger than 'is no longer active' in the English content. It implies the key was never valid, which isn't necessarily the case.",
-          "suggestion": "ຄີ API ນີ້ໝົດອາຍຸ ແລະບໍ່ສາມາດໃຊ້ງານໄດ້ອີກ"
+          "description": "The Lao translation uses 'ບໍ່ເຄີຍໃຊ້ງານອີກຕໍ່ໄປ' which means 'never used again' or 'has never been used again'. This changes the meaning from 'is no longer active' (current state) to a statement about past usage history.",
+          "suggestion": "ຄີ API ນີ້ໝົດອາຍຸແລ້ວ ແລະ ບໍ່ສາມາດໃຊ້ງານໄດ້ອີກຕໍ່ໄປ"
         }
       ],
       "approved_at": null
@@ -165,18 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'යතුර' (yatura) is used for 'key', which is correct. However, the term API might be better rendered with a transliteration (eg. 'ඒපීඅයි'). While understandable, using a transliteration could improve clarity for Sinhala speakers unfamiliar with English technical terms.",
-          "suggestion": "Consider using a transliteration of 'API' (e.g., 'ඒපීඅයි') for better clarity."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'තවදුරටත් ක්‍රියාත්මක නොවේ' (thavadurata ath krīyāthmaka navē) is a bit verbose for 'is no longer active'. A more concise and natural translation might be preferable.",
-          "suggestion": "Consider a more concise translation like 'නැවත ක්‍රියාත්මක නොවේ' (nāwata krīyāthmaka navē) or 'අවලංගු වී ඇත' (awalangu vē ath)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -222,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

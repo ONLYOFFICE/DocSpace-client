@@ -1,6 +1,8 @@
+@use "@docspace/ui-kit/styles/mixins";
+
 .floatingButton {
   position: absolute;
-  bottom: 24px;
+  bottom: calc(24px + env(safe-area-inset-bottom, 0));
   z-index: 100;
   width: 48px;
   height: 48px;
@@ -15,7 +17,8 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   transition:
     transform 0.15s ease,
-    box-shadow 0.15s ease;
+    box-shadow 0.15s ease,
+    bottom 0.2s ease;
 
   &:hover {
     transform: scale(1.08);
@@ -32,6 +35,20 @@
 
   &[data-position="right"] {
     right: 24px;
+  }
+
+  &[data-shift-up="true"] {
+    bottom: calc(88px + env(safe-area-inset-bottom, 0));
+  }
+
+  @include mixins.mobile {
+    &[data-position="left"] {
+      left: 16px;
+    }
+
+    &[data-position="right"] {
+      right: 16px;
+    }
   }
 
   .icon {

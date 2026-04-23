@@ -2,6 +2,7 @@
   "AddedRoomTags": "已添加标签。",
   "Administration": "管理",
   "AgentRenamed": "智能体<1>«{{oldRoomTitle}}»</1>已重命名为<2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "请在此处查看 {{aiAgents}} 详情",
   "AndMoreLabel": "以及<1>另外 {{count}} 个</1>",
   "CreationDate": "创建日期",
   "Data": "数据",
@@ -60,11 +61,14 @@
   "IndexChanged": "索引已更改",
   "ItemsSelected": "选定的项目",
   "LastModifiedBy": "最近修改者",
+  "LastUpdateInfo": "上次更新",
   "LifetimeEnds": "有效期到期",
   "MembersEmptyScreenText": "在此处查看成员详情",
+  "NoAgent": "没有 {{aiAgent}}",
   "NoRecordsFound": "未找到记录",
   "Properties": "属性",
   "Resolution": "分辨率",
+  "RoomChangeOwner": "房间所有者已更改。",
   "RoomCreateUserCount": "用户已添加 ({{count}})。",
   "RoomDenyDownloadDisabled": "已解除下载和复制限制",
   "RoomDenyDownloadEnabled": "已添加下载和复制限制",
@@ -98,6 +102,5 @@
   "SubmenuHistory": "历史记录",
   "UserFileUpdated": "文件已更新。",
   "Users": "用户",
-  "Versions": "版本",
-  "LastUpdateInfo": "上次更新"
+  "Versions": "版本"
 }

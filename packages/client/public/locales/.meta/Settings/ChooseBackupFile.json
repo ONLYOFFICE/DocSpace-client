@@ -3,7 +3,7 @@
   "content": "Choose the backup file",
   "content_en_sha1_hash": "813a6a6a5479025ab20127d56506502802337776",
   "created_at": "2025-05-19T21:30:50.904Z",
-  "updated_at": "2025-12-11T12:25:41.937Z",
+  "updated_at": "2026-04-09T03:56:37.863Z",
   "comment": {
     "text": "\"Choose a backup file to upload. This text is used as a label on a file input field in a data import component, guiding users to select a backup file.\"",
     "is_auto": true,
@@ -105,13 +105,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Lao word 'ສໍາຮອງຂໍ້ມູນ' (sam-hong-kho-moon) is a generally accepted translation for 'backup file', but it could be more concisely rendered as 'ໄຟລ໌สำรอง' (file sam-hong).",
-          "suggestion": "ໄຟລ໌สำรอง"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -177,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Изабери резервну датотеку\" is technically correct but could be improved for naturalness in this context. \"Изабери датотеку за резервну копију\" would be more idiomatic Serbian (Cyrillic).",
-          "suggestion": "Изабери датотеку за резервну копију"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -211,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

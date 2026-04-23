@@ -3,7 +3,7 @@
   "content": "File copied",
   "content_en_sha1_hash": "4a6bc2861eef671be7f536859194a8d6b3428164",
   "created_at": "2025-05-19T21:30:49.720Z",
-  "updated_at": "2025-05-24T02:26:51.674Z",
+  "updated_at": "2026-04-08T20:12:26.451Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -101,8 +101,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເຟັ້ນຖືກສຳເນົາແລ້ວ\" doesn't accurately convey the meaning of \"File copied.\" \"ເຟັ້ນ\" refers to a strainer or filter, which is not related to file copying. \"ສຳເນົາ\" means copy, but the initial part is incorrect.",
-          "suggestion": "A more accurate translation would be something like \"ເອກະສານຖືກສຳເນົາແລ້ວ\" (Dokkar thuk samnea laew) which means \"The document has been copied\" or \"ເອກະສານຖືກຖ່າຍອອກແລ້ວ\" (Dokkar thuk thai ok laew) which means \"The document has been transferred.\" Alternatively, \"ໄຟຖືກແບ່ງປັນແລ້ວ\" (Fai thuk baeng pin laew) could be used, loosely translating as “File shared”."
+          "description": "The Lao word 'ເຟັ້ນ' (fen) is a misspelling or incorrect term for 'file'. The correct term for file in this context is 'ໄຟລ໌'.",
+          "suggestion": "ໄຟລ໌ຖືກສຳເນົາແລ້ວ"
         }
       ],
       "approved_at": null
@@ -110,7 +110,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian word 'Fails' means 'Fail' (as in unsuccessful/failure), whereas the English 'File' refers to a document/data object. The correct term for 'File' in Latvian is 'Fails' (noun) but in this context, it is a misspelling or incorrect usage of 'Fails' (failure) vs 'Fails' (file). Actually, 'Fails' in Latvian means 'Failures'. The correct word for 'File' is 'Fails' (noun), but 'Fails nokopēts' translates to 'Failure copied'.",
+          "suggestion": "Fails nokopēta"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -155,8 +161,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'ප්‍රතිලේඛනය කරන ලදී' (pratileyakanaya karan ladi) translates to 'recorded' or 'duplicated' rather than 'copied'. The correct meaning of 'File copied' refers to the action of creating a duplicate of a file.",
-          "suggestion": "A more accurate translation would be something along the lines of 'ឯකតា කරන ලදී' (ekata karan ladi) which means 'copied'."
+          "description": "The Sinhala translation 'ප්‍රතිලේඛනය කරන ලදී' means 'replicated' or 'reproduced', which is not the standard or accurate term for 'copied' in a file management context.",
+          "suggestion": "ගොනුව පිටපත් කරන ලදී"
         }
       ],
       "approved_at": null
@@ -164,13 +170,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation 'Súbor skopírovaný' is a literal translation and sounds unnatural. A more natural and idiomatic translation for 'File copied' would be 'Skopírovaný súbor' or 'Prehľadávač súboru'.",
-          "suggestion": "Skopírovaný súbor"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -210,6 +210,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -12,5 +12,8 @@
   "SuccessConnected": "{{serviceName}} ໄດ້ຖືກເຊື່ອມຕໍ່ສຳເລັດເປັນຊ່ອງການແຈ້ງເຕືອນແລ້ວ. ໃນປັດຈຸບັນທ່ານຈະໄດ້ຮັບການປັບປຸງຢູ່ທີ່ນັ້ນ.",
   "SuccessDisconnected": "{{serviceName}} ຖືກຕັດການເຊື່ອມຕໍ່ເປັນຊ່ອງທາງການແຈ້ງເຕືອນສຳເລັດແລ້ວ. ການແຈ້ງເຕືອນຈະບໍ່ຖືກສົ່ງໄປບ່ອນນັ້ນອີກຕໍ່ໄປ.",
   "UsefulTips": "ຄໍາແນະນໍາ {{productName}} ທີ່ເປັນປະໂຫຍດ",
-  "UsefulTipsDescription": "ຂໍຄຳແນະນຳທີ່ເປັນປະໂຫຍດກ່ຽວກັບ {{productName}}"
+  "UsefulTipsDescription": "ຂໍຄຳແນະນຳທີ່ເປັນປະໂຫຍດກ່ຽວກັບ {{productName}}",
+  "ActionsWithFilesDescription": "ປ້າຍຈະເນັ້ນກິດຈະກໍາຂອງໄຟລ໌ — ການອັບໂຫຼດ, ການແກ້ໄຂ, ຫຼື ການແບ່ງປັນ — ໃນພາກສ່ວນ {{rooms}}, {{shared}}, {{documents}}, ແລະ {{aiAgents}}.",
+  "RoomsActivityDescription": "ຮັບການແຈ້ງເຕືອນທາງອີເມວທັນທີກ່ຽວກັບໄຟລ໌/ໂຟນເດີທີ່ແບ່ງປັນໃໝ່ ແລະກິດຈະກໍາພາຍໃນ {{rooms}} ແລະ {{aiAgents}} ຂອງທ່ານ.",
+  "RoomUpdateNotify": "ເນື້ອຫາທີ່ແບ່ງປັນ, ກິດຈະກໍາຂອງ {{rooms}} ແລະ {{aiAgents}}"
 }

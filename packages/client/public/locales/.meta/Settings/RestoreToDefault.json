@@ -3,7 +3,7 @@
   "content": "Restore to default",
   "content_en_sha1_hash": "4679ca338a63ec93afce427c08feb4f9b69c6008",
   "created_at": "2025-05-19T21:30:52.427Z",
-  "updated_at": "2025-09-26T15:21:06.427Z",
+  "updated_at": "2026-04-09T01:41:40.192Z",
   "comment": {
     "text": "RestoreToDefault is used as a label for the cancel button on a portal settings page, prompting users to revert to default brute force protection settings. This translation key appears in a dialog box where users can customize security settings.",
     "is_auto": true,
@@ -27,47 +27,19 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'العودة إلى الإعدادات الإفتراضية ' while generally conveying the meaning, could be more accurately rendered as 'إعادة ضبط الإعدادات الافتراضية' which translates to 'Reset default settings'. 'العودة إلى' (Return to) is a bit verbose and 'إعادة ضبط' (reset) is more common and natural in this context.",
-          "suggestion": "إعادة ضبط الإعدادات الافتراضية"
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'الإفتراضية' is written as 'الإفتراضية' which has a spelling error. The correct spelling is 'الافتراضية'.",
-          "suggestion": "الافتراضية"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Defolt olaraq bərpa edin' is not a natural or accurate rendering of 'Restore to default'. 'Defolt' is a misspelling of 'Default' and 'bərpa edin' doesn't quite capture the meaning of 'Restore'.",
-          "suggestion": "A more accurate translation would be 'Sıfır olaraq qaytar' or 'Başlanğıc qiymətlərə qaytar'."
-        },
-        {
-          "type": "spelling",
-          "description": "'Defolt' is a misspelling of 'Default'.",
-          "suggestion": "Default"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Възстановяване към фабрични настройки' is understandable, it's a more literal translation of 'Restore to factory settings.' 'Restore to default' is often understood as reverting to the initial, uncustomized state, which might be better conveyed with a more concise option.",
-          "suggestion": "Възстановяване на настройките по подразбиране"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -109,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Վերականգնել լռելյայն' is a literal translation of 'Restore to default' but doesn't convey the intended meaning naturally in Armenian. 'Վերականգնել լռելյայն' translates to 'Restore silence' which isn't what is meant. A more accurate and natural translation would be something like 'Դեֆոլտ վիճակի վերականգնում' or 'Վերադառնալ դեֆոլտ վիճակ' or 'Դեֆոլտի վերականգնում'.",
-          "suggestion": "Consider 'Դեֆոլտ վիճակի վերականգնում', 'Վերադառնալ դեֆոլտ վիճակ', or 'Դեֆոլտի վերականգնում'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -142,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ກວດແກ້ຄືນສູ່ຄ່າເລີ່ມຕົ້ນ\" literally translates to \"Check back to initial value.\" While understandable, it doesn't perfectly capture the nuance of 'Restore to default'. 'Restore' implies returning something to its original state, not simply checking a value.",
-          "suggestion": "Consider \"ສືບສືບຄືນສູ່ຄ່າເລີ່ມຕົ້ນ\" (Suep suen khuen su khia leum ton) - which means 'Return to initial value', or \"ຟື້ນຟູຄືນສູ່ຄ່າເລີ່ມຕົ້ນ\" (Fuen fu khuen su khia leum ton) - which means 'Restore to initial value'."
+          "description": "The Lao translation 'ກວດແກ້ຄືນສູ່ຄ່າເລີ່ມຕົ້ນ' means 'Edit/Correct back to default settings'. The word 'ກວດແກ້' (edit/correct) adds an action of modifying/fixing that is not present in 'Restore'. A more accurate translation for 'Restore' in this context is 'ຄືນຄ່າ' (return value).",
+          "suggestion": "ຄືນຄ່າເລີ່ມຕົ້ນ"
         }
       ],
       "approved_at": null
@@ -193,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'පෙරනිදි වලට නැවත හරවන්න' is a literal translation that isn't the most natural way to say 'Restore to default' in Sinhala. While understandable, it sounds a bit clunky.",
-          "suggestion": "A more natural translation would be something like 'setDefault කරා' (setDefault kara) or 'පහේපත් වලට නැවත හරවන්න' (pahēpata valata nēvath haravanna) – which translates closer to 'restore settings to the default settings'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -220,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Повратак на подразумевано' while understandable, isn't the most natural or common way to say 'Restore to default' in Serbian (Cyrillic). A more accurate and idiomatic translation would be something like 'Враћање на подразумевана подешавања' or 'Повратак на фабричка подешавања'.",
-          "suggestion": "Враћање на подразумевана подешавања"
+          "description": "The word 'Повратак' is a noun meaning 'Return' or 'The act of returning'. For a button action (command), the verb form 'Врати' (Restore/Return) should be used.",
+          "suggestion": "Врати на подразумевано"
         }
       ],
       "approved_at": null
@@ -251,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

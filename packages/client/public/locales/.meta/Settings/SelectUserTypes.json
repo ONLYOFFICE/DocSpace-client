@@ -3,7 +3,7 @@
   "content": "Select user types",
   "content_en_sha1_hash": "e927a3a263b9c357799a240f53e6fae4a0f1665a",
   "created_at": "2025-05-19T21:30:52.590Z",
-  "updated_at": "2025-10-03T10:07:11.706Z",
+  "updated_at": "2026-04-09T01:16:55.407Z",
   "comment": {
     "text": "\"Select user types\" is a label used to describe a step or option in a workflow that allows users to select different types of users. This translation key is used in UI elements such as buttons, dialog titles, and descriptions, where it appears in contexts like data import steps for Google Workspace, Nextcloud Workspace, and Onlyoffice Workspace.",
     "is_auto": true,
@@ -93,7 +93,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English text is plural ('user types'), but the French translation is singular ('le type d'utilisateur'). This changes the meaning from selecting multiple types to selecting a single type.",
+          "suggestion": "Sélectionner les types d'utilisateur"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -162,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Selectare tip de utilizator' is not the most natural or accurate translation of 'Select user types'. 'Selectare' implies a process of selecting, which isn't the direct meaning. 'Tip de utilizator' is correct for 'user type', but the overall phrasing feels awkward.",
-          "suggestion": "Selectați tipurile de utilizatori"
+          "description": "The Romanian translation is singular ('tip de utilizator' - user type), whereas the English source is plural ('user types'). This changes the meaning of the instruction.",
+          "suggestion": "Selectare tipuri de utilizatori"
         }
       ],
       "approved_at": null
@@ -179,9 +185,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'පරිශ්‍රීලකයින්' (parishiilakayin) is a less common and potentially incorrect transliteration of 'users'. A more standard and understandable term would be 'භාවිතකරුවන්' (bhavitakaruwan).",
-          "suggestion": "Replace 'පරිශ්‍රීලකයින්' with 'භාවිතකරුවන්'."
+          "type": "incorrect_translation",
+          "description": "The word 'පරිශ්‍රීලකයින්' (parishrilakayin) is a misspelling/incorrect word for 'users'. The correct term for users in Sinhala is 'පරිශීලකයින්' (parishilakayin).",
+          "suggestion": "පරිශීලකයින් වර්ග තෝරන්න"
         }
       ],
       "approved_at": null
@@ -201,13 +207,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Изабери типове корисника' while understandable, isn't the most natural or precise translation of 'Select user types'. A more common and idiomatic translation would be 'Избор типова корисника' or 'Одаберите типове корисника'.",
-          "suggestion": "Избор типова корисника"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -235,6 +235,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

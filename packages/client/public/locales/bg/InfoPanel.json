@@ -2,6 +2,7 @@
   "AddedRoomTags": "Добавени тагове.",
   "Administration": "Администрация",
   "AgentRenamed": "Агент <1>«{{oldRoomTitle}}»</1> преименуван на <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Вижте подробности за {{aiAgents}} тук",
   "AndMoreLabel": "и <1>още {{count}}</1>",
   "CreationDate": "Дата на създаване",
   "Data": "Данни",
@@ -60,11 +61,14 @@
   "IndexChanged": "Индексът е променен",
   "ItemsSelected": "Избрани елементи",
   "LastModifiedBy": "Последно модифициран от",
+  "LastUpdateInfo": "Последна актуализация",
   "LifetimeEnds": "Животът приключва",
   "MembersEmptyScreenText": "Вижте детайли за членовете тук",
+  "NoAgent": "Няма {{aiAgent}}",
   "NoRecordsFound": "Няма намерени записи",
   "Properties": "Свойства",
   "Resolution": "Резолюция",
+  "RoomChangeOwner": "Собственикът на стаята беше променен.",
   "RoomCreateUserCount": "Потребители добавени ({{count}}).",
   "RoomDenyDownloadDisabled": "Неограничено изтегляне и копиране",
   "RoomDenyDownloadEnabled": "Ограничено изтегляне и копиране",
@@ -98,7 +102,5 @@
   "SubmenuHistory": "История",
   "UserFileUpdated": "Актуализиран файл.",
   "Users": "Потребители",
-  "Versions": "Версии",
-  "LastUpdateInfo": "Последна актуализация",
-  "RoomChangeOwner": "Собственикът на стаята беше променен."
+  "Versions": "Версии"
 }

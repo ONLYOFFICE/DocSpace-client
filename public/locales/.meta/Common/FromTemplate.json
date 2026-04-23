@@ -3,7 +3,7 @@
   "content": "From template",
   "content_en_sha1_hash": "00c3e6cfbaa52740f50102742f3efa926a33d341",
   "created_at": "2025-05-19T21:30:45.596Z",
-  "updated_at": "2026-02-19T13:36:32.384Z",
+  "updated_at": "2026-04-08T08:34:10.495Z",
   "comment": {
     "text": "This translation key is used to display \"From template\" in a room creation dialogue. It appears as a header label and is related to templates for creating new rooms.",
     "is_auto": true,
@@ -75,7 +75,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish word 'Mallista' is a verb meaning 'to mold' or 'to shape'. The English 'From template' is a prepositional phrase indicating the source of creation. The correct translation should use a noun phrase.",
+          "suggestion": "Mallipohjasta"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -135,13 +141,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'De template' is not an accurate translation of 'From template'. While 'De' means 'From' in Portuguese, using 'template' directly is not idiomatic.  'Template' is an English loanword and often best handled with a more descriptive term in Portuguese depending on the context. A more accurate translation would depend on what 'template' refers to.",
-          "suggestion": "Consider alternatives like 'Criado a partir de modelo' (created from a model), 'Baseado em modelo' (based on a model), or a more specific term depending on the context of the template."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -156,7 +156,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Șablon de formular' is a possible translation, it's quite literal and specific to forms. 'From template' is more general and could refer to templates in various contexts. A more appropriate general translation would be 'Din șablon'.",
+          "description": "The Romanian translation 'Șablon de formular' means 'Form template', which adds the word 'formular' (form) that is not present in the English source 'From template'. In the context of creating a room, 'From template' refers to the source/method of creation, not a specific type of template.",
           "suggestion": "Din șablon"
         }
       ],
@@ -186,7 +186,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Predloga obrazca\" translates literally to \"Template form,\" the English phrase \"From template\" typically implies the *source* of something. A more accurate translation might be \"Iz predloge\" or \"Na podlagi predloge\". \"Predloga obrazca\" suggests the form *is* a template.",
+          "description": "The Slovenian translation 'Predloga obrazca' means 'Template of a form' or 'Form template', which changes the meaning from 'From template' (indicating the source/method of creation).",
           "suggestion": "Iz predloge"
         }
       ],
@@ -216,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Шаблон форми\" (Template Form) doesn't accurately convey the meaning of \"From template\". While \"Шаблон\" is correct for \"template\", \"форми\" (form) adds an unnecessary element. \"From template\" implies something was generated or derived *using* a template, not that it *is* a form.",
-          "suggestion": "З шаблону (Z shablonu)"
+          "description": "The Ukrainian translation 'Шаблон форми' means 'Form template', whereas the English source 'From template' indicates the source/method of creation (prepositional phrase).",
+          "suggestion": "З шаблону"
         }
       ],
       "approved_at": null
@@ -229,6 +229,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

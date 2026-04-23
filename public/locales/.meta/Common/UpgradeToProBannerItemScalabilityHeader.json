@@ -3,7 +3,7 @@
   "content": "Scalability and clustering.",
   "content_en_sha1_hash": "6cc8e719d41e0d79ee36d84a4938186906c5e5a8",
   "created_at": "2025-05-26T07:15:49.299Z",
-  "updated_at": "2026-03-20T09:07:45.754Z",
+  "updated_at": "2026-04-07T20:46:06.790Z",
   "comment": {
     "text": "This translation key is used to display a header that explains the benefits of scalability and clustering. It appears in a UI component likely used to promote or describe the upgrade to Pro features. Translators should focus on conveying the concept of improving system performance and adaptability.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \"ə\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -75,7 +81,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \"s\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -132,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'agregação' doesn't accurately convey the meaning of 'clustering' in this context. 'Clustering' refers to distributing resources across multiple instances or servers to improve performance and availability, while 'agregação' typically means aggregation or summation.",
-          "suggestion": "Escalabilidade e agrupamento."
+          "description": "The term 'clustering' in a technical context (computing/servers) refers to 'clustering' (agrupamento/cluster), whereas 'agregação' (aggregation) refers to a different technical concept.",
+          "suggestion": "Escalabilidade e clustering."
         }
       ],
       "approved_at": null
@@ -147,7 +159,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'clustering' in a technical/IT context refers to 'clustering' (grouping of servers/nodes), but 'grupare' is too generic and often refers to simple grouping. In Romanian IT terminology, 'clustering' is the standard term used to describe this specific architecture.",
+          "suggestion": "Scalabilitate și clustering."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -159,13 +177,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'පරිමාණය' (parimāḍaya) is a reasonable translation for 'Scalability', 'පොකුරු කිරීම' (pokuru kirima) is a more literal translation of 'clustering' and may not fully capture the intended meaning in this context. A more natural translation for 'clustering' might be something like 'සමූහගත කිරීම' (samūhagat kirima) or 'කුඹුරු කිරීම' (kumburu kirima) depending on the desired nuance.",
-          "suggestion": "Consider using 'සමූහගත කිරීම' (samūhagat kirima) or 'කුඹුරු කිරීම' (kumburu kirima) for 'clustering'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -186,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Скалабилност' is a correct translation for 'Scalability,' 'груписање' is a more literal translation of 'clustering' than a functionally equivalent term. A more natural translation for 'clustering' in this context might be 'кластерисање' or a phrase conveying the concept of grouping for scalability.",
-          "suggestion": "Consider using 'кластерисање' or a phrase like 'заједничко окружење' (shared environment) to better convey the meaning of 'clustering' in the context of scalability."
+          "description": "The word 'clustering' is translated as 'груписање' (grouping), which is a generic term. In a technical context regarding system architecture and scalability, 'clustering' should be translated as 'klasterizacija' (кластеризација).",
+          "suggestion": "Скалабилност и кластеризација."
         }
       ],
       "approved_at": null

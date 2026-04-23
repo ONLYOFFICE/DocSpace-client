@@ -3,7 +3,7 @@
   "content": "Select .PDF file",
   "content_en_sha1_hash": "82630c35ad39df40c3e767ac55912619244898d8",
   "created_at": "2025-05-19T21:30:48.505Z",
-  "updated_at": "2026-02-19T13:36:32.255Z",
+  "updated_at": "2026-04-07T23:37:18.404Z",
   "comment": {
     "text": "This translation key is used to display the text \"Select .PDF file\" in a file selection dialog. It appears on a specific button when selecting a PDF file, and it's intended for users who need assistance understanding the purpose of the action.",
     "is_auto": true,
@@ -87,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ընտրել .PDF ֆայլ' is a literal translation of 'Select .PDF file'. A more natural and user-friendly translation would be something like 'Choose .PDF file' or 'Select a .PDF file'.",
-          "suggestion": "Ընտրել .PDF ֆայլ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -117,19 +111,19 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"ເລືອກ​ເອກະສານ .PDF\" is a literal translation of 'Select .PDF file' and while understandable, it's not the most natural phrasing in Lao. A more idiomatic translation would be something like 'ເລືອກ​ເອກະສານ PDF' or 'ເລືອກ​ຟາຍ PDF'.",
-          "suggestion": "ເລືອກ​ຟາຍ PDF"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation 'Atlasīt .PDF fails' uses the nominative case for 'fails' (file), which is grammatically incorrect in this context. It should be in the accusative case to function as the object of the verb 'Atlasīt'.",
+          "suggestion": "Atlasīt .PDF failu"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -159,18 +153,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Selectare fișier .PDF\" is not the most natural or accurate translation of \"Select .PDF file\". \"Selectare\" implies a process or action of selecting, while \"Select\" is more direct and commonly used in UI contexts.",
-          "suggestion": "Selectați fișier .PDF"
-        },
-        {
-          "type": "formatting",
-          "description": "While technically correct, using a full stop after 'fișier' is unusual in Romanian UI text. It's more common to omit it.",
-          "suggestion": "Selectați fișier .PDF"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -185,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'PDF ගොනුව තෝදන්න' while understandable, isn't the most natural or precise way to say 'Select .PDF file' in Sinhala. A more accurate and natural translation would be something like 'PDF ගොනුව තෝරා ගන්න'.",
-          "suggestion": "PDF ගොනුව තෝරා ගන්න"
+          "description": "The Sinhala word 'තෝදන්න' (thodanna) is a misspelling of 'තෝරන්න' (thoranna). 'තෝදන්න' is not a valid word in this context.",
+          "suggestion": "PDF ගොනුව තෝරන්න"
         }
       ],
       "approved_at": null
@@ -194,13 +177,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation includes a space before the period in '.pdf'. It's more common and stylistically preferred to omit this space.",
-          "suggestion": "Vyberte súbor vo formáte .pdf"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -212,25 +189,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The period after 'Select' is missing in the Serbian translation.",
-          "suggestion": "Изаберите .PDF датотеку"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Serbian translation uses 'datoteku' which is a feminine noun. It would be more natural to use the masculine form 'datoteke' to agree with the implied plural 'files'. While technically correct, it reads slightly less naturally.",
-          "suggestion": "Izaberite .PDF datoteke"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -252,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

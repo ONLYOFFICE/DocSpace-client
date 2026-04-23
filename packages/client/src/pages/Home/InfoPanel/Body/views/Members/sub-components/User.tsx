@@ -126,7 +126,7 @@ const User = ({
     return api.rooms
       .updateRoomMemberRole(room.id, {
         invitations: [{ id: user.id, access: option.access }],
-        notify: false,
+        notify: true,
         sharingMessage: "",
         force,
       })

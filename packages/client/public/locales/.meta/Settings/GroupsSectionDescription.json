@@ -3,7 +3,7 @@
   "content": "Users which you selected in the previous step will be imported into groups created in {{serviceName}}. Groups will appear in the <1>{{sectionName}}</1> section.",
   "content_en_sha1_hash": "6b07dee98d11dae154865dfdf31ae97fcbf67614",
   "created_at": "2025-10-03T10:06:58.882Z",
-  "updated_at": "2025-11-13T07:58:08.215Z",
+  "updated_at": "2026-04-10T08:58:38.062Z",
   "comment": {
     "text": "This text explains where imported users will be located within the {{serviceName}} interface. It appears as a description in the data import step, specifically indicating they're added to groups found in the \"{{sectionName}}\" section. Translators should ensure \"sectionName\" is localized appropriately, as it refers to the \"Contacts\" section.",
     "is_auto": true,
@@ -99,7 +99,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation uses '가져오게 됩니다' (will bring/will be bringing), which implies the users are performing the action of bringing something. The English text 'will be imported' is passive, meaning the users themselves are being moved into groups. The translation should use a passive form like '가져오기 됩니다' or '가져오게 됩니다' is grammatically awkward here; '가져오기 됩니다' or '가져오게 됩니다' implies the users are the subject doing the importing.",
+          "suggestion": "이전 단계에서 선택한 사용자는 {{serviceName}}에서 생성된 그룹으로 가져오기 됩니다. 그룹은 <1>{{sectionName}}</1> 섹션에 나타납니다."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -135,7 +141,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \"o\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "ro": {

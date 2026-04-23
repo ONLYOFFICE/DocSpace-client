@@ -3,7 +3,7 @@
   "content": "Add",
   "content_en_sha1_hash": "61cc55aa0453184734c3fa0b621eda6fa874bd83",
   "created_at": "2025-05-19T21:30:42.915Z",
-  "updated_at": "2026-03-31T15:18:46.199Z",
+  "updated_at": "2026-04-08T17:55:37.941Z",
   "comment": {
     "text": "This translation key is used to display the text \"Add\" as a button label in various UI elements, such as buttons, input fields, and dialogs. It appears in contexts where users need to add new items or content, including form submissions, editing comments, and OAuth client settings. Translators should provide a clear and concise alternative for this key to ensure consistent and accurate display across the application.",
     "is_auto": true,
@@ -57,13 +57,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Əlavə edin' is a command form (imperative) of 'add'. The context 'Common:AddButton' implies a label or a button text, which should be a noun or a short phrase. It should be more like 'Əlavə et' (Add) or 'Yeni' (New).",
-          "suggestion": "Əlavə et"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -120,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Italian translation 'Salva' means 'Save', not 'Add'. It's a semantically incorrect translation of 'Add'.",
-          "suggestion": "A more accurate translation of 'Add' in this context would be 'Aggiungi'."
+          "description": "The Italian translation 'Salva' means 'Save', which is a different action than 'Add'.",
+          "suggestion": "Aggiungi"
         }
       ],
       "approved_at": null
@@ -144,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ບັນທຶກ\" typically means \"save\" or \"record,\" not \"add.\" This doesn't accurately convey the meaning of the English word \"Add.\" A more appropriate translation would depend on the specific context of the button, but common alternatives might include \"ເພີ່ມ\" (perm) or \"ໃສ່\" (sai).",
-          "suggestion": "Consider alternatives like \"ເພີ່ມ\" (perm) or \"ໃສ່\" (sai), depending on context."
+          "description": "The Lao translation 'ບັນທຶກ' means 'Save' or 'Record', which is a different action from 'Add'.",
+          "suggestion": "ເພີ່ມ"
         }
       ],
       "approved_at": null
@@ -180,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Salvar' translates to 'Save' in English, not 'Add'. This is a significant semantic mismatch.",
-          "suggestion": "Consider 'Adicionar' for a more accurate translation of 'Add'."
+          "description": "The English word 'Add' means to create or include something new, whereas the Portuguese translation 'Salvar' means 'Save'. This changes the user's intent from adding an item to saving existing data.",
+          "suggestion": "Adicionar"
         }
       ],
       "approved_at": null
@@ -192,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Salvează' means 'Save', not 'Add'. This is an inaccurate translation of the English content 'Add'.",
-          "suggestion": "The correct Romanian translation for 'Add' would be 'Adaugă'."
+          "description": "The English word 'Add' means to create or include something new, whereas the Romanian 'Salvează' means 'Save'.",
+          "suggestion": "Adaugă"
         }
       ],
       "approved_at": null
@@ -210,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'එකතු' generally translates to 'together' or 'combine', not 'add'. While it can sometimes be used in a context implying addition, it's not the most accurate translation for a button labeled 'Add'.",
-          "suggestion": "Consider using 'වැඩ එක් කරන්න' (Waeda ek kāranna) or 'එක් කරන්න' (Ek kāranna) which more closely aligns with the English 'Add'."
+          "description": "The translation 'එකතු' (Ekathu) is an adjective/adverb meaning 'added' or 'together'. For a UI button label meaning the action 'Add', the verb form 'එකතු කරන්න' (Ekathu karanna) is required.",
+          "suggestion": "එකතු කරන්න"
         }
       ],
       "approved_at": null
@@ -252,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Активний' translates to 'Active' in English, not 'Add'.",
-          "suggestion": "The correct Ukrainian translation for 'Add' is 'Додати'."
+          "description": "The Ukrainian translation 'Активний' means 'Active', which is a completely different meaning from the English 'Add' (an action verb).",
+          "suggestion": "Додати"
         }
       ],
       "approved_at": null
@@ -261,16 +255,16 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Thêm vào' is a valid translation for 'Add', it's often more context-dependent. 'Thêm' might be a more concise and universally applicable translation for a button label like 'Add'. 'Thêm vào' implies adding *into* something, which might not be the intended meaning.",
-          "suggestion": "Thêm"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

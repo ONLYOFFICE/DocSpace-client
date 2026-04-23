@@ -3,7 +3,7 @@
   "content": "Ascending",
   "content_en_sha1_hash": "2b226c7948b48ad8f6ece8d91270c6915aba6b73",
   "created_at": "2025-05-19T21:30:54.367Z",
-  "updated_at": "2026-03-20T09:07:45.593Z",
+  "updated_at": "2026-04-07T19:35:05.126Z",
   "comment": {
     "text": "This translation key is used for the label of a sorting option in a data table or list, indicating that the items are sorted in ascending order. It appears in the UI for selecting a sort direction and is part of a set of predefined options. The goal is to translate this label to be displayed in different languages.",
     "is_auto": true,
@@ -45,13 +45,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech translation 'Vzestupně' doesn't accurately convey the English meaning of 'Ascending'. 'Vzestupně' translates to 'ascendingly' or 'rise', which is more of a process than a state or adjective. A more accurate translation for 'Ascending' as an adjective describing an ordered list or similar would be 'rostoucí'.",
-          "suggestion": "rostoucí"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -81,13 +75,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The French translation 'Croissant' means 'croissant' (a pastry). It is not the correct translation for 'Ascending'.",
-          "suggestion": "A suitable translation could be 'ascendant', 'montant', or 'croissant' (in the sense of 'growing'). The best option depends on the specific context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -105,37 +93,19 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word \"Ascending\" refers to an increasing order. \"昇順\" (shōjun) is the correct Japanese translation for ascending or increasing order. While not strictly *wrong*, it might be more appropriate to consider other translations depending on the context. For example, if referring to a list, '増加順' (zōka jun) could also be suitable.",
-          "suggestion": "Consider '増加順' (zōka jun) or ensure context supports \"昇順\" (shōjun)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While '오름차순' literally translates to 'ascending order', it's a more technical term. For a key named 'JavascriptSdk:Ascending', a simpler and more common translation like '상승' or '오름' might be more appropriate, depending on the exact context within the Javascript SDK.",
-          "suggestion": "Consider '상승' or '오름' for a more general and understandable translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"ຕັ້ງຊັນຂຶ້ນ\" (dtang san khuen) is a literal translation of 'ascending,' it's not the most natural or commonly used term in Lao for this technical context. It's overly literal and might sound awkward.",
-          "suggestion": "Consider using a term like 'ເພີ່ມຂຶ້ນ' (pherm khuen) which means 'increasing' or 'rising,' or 'ຂຶ້ນ' (khuen) alone, as it's often used in technical contexts to denote 'ascending' or 'increasing'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -183,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation \"ආරෝහණ\" while technically meaning \"ascent\" or \"climb\", doesn't accurately convey the English meaning of \"Ascending\" in a technical context related to a Javascript SDK. \"Ascending\" in this context likely refers to a sequence or order moving upwards. A more accurate translation would depend on the specific usage, but a better option would be something that conveys the idea of 'increasing' or 'upward trending'.",
-          "suggestion": "Consider alternatives like \"වැඩිවන\" (waddiwan - increasing) or a more descriptive phrase dependent on the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -207,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Растући' (Rastujući) can mean 'growing' or 'ascending' in a general sense, it doesn't perfectly capture the technical meaning of 'Ascending' in a software development context, which often implies a sorted order or increasing sequence. A more precise translation might depend on the specific context within the Javascript SDK.",
-          "suggestion": "Consider 'Растућа' (Rastuća) or 'Постепена' (Postepena) depending on the precise meaning in the Javascript SDK."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -231,13 +189,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"За зростанням\" while technically accurate, doesn't quite capture the nuance of 'Ascending' in a technical context like Javascript SDK. It translates more literally to 'by growth' or 'according to growth', which might be confusing.  'Ascending' in this context likely refers to an order or sequence.",
-          "suggestion": "Consider alternatives like \"У порядку зростання\" (in ascending order) or \"Зростаюче\" (ascending/growing) depending on the specific usage within the Javascript SDK."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

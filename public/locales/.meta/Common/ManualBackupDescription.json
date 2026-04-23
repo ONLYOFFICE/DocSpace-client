@@ -3,7 +3,7 @@
   "content": "Use this option if you want to get all data contained in the space as a file.",
   "content_en_sha1_hash": "72b06ec623764ca1cdcbbdbe125f16fc48240dee",
   "created_at": "2025-05-26T07:15:44.992Z",
-  "updated_at": "2026-03-20T09:07:45.757Z",
+  "updated_at": "2026-04-08T05:02:20.941Z",
   "comment": {
     "text": "Use this option to download all data contained within a space as a file. This setting is typically found on backup and restore options in a space management interface.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'space' (referring to the ONLYOFFICE DocSpace) was translated as 'الاستضافة' (hosting), which changes the technical meaning of the feature context.",
+          "suggestion": "استخدم هذا الخيار إذا كنت تريد الحصول على جميع البيانات الموجودة في المساحة كملف."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -39,7 +45,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation uses 'на портала' (on the portal) instead of 'в пространството' (in the space). This changes the technical context from a specific 'space' to the entire 'portal'.",
+          "suggestion": "Използвайте тази опция, ако искате да получите всички данни, съдържащи се в пространството, като файл."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -69,7 +81,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation uses 'sivuston' (website) instead of 'tilan' (space), which changes the technical context from a 'space' to a 'website'.",
+          "suggestion": "Käytä tätä vaihtoehtoa, jos haluat ladata kaiken tilassa olevan tiedon tiedostona."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +99,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation uses 'կայքէջում' (on the website/webpage) instead of 'space' (the technical entity in ONLYOFFICE DocSpace). This changes the context from a workspace/space to a website.",
+          "suggestion": "Օգտագործեք այս տարբերակը, եթե ցանկանում եք ստանալ տարածքում պարունակվող բոլոր տվյալները որպես ֆայլ:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,13 +129,25 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'space' (referring to a digital workspace/container) is translated as 'ປະຕູ' (door), which is contextually incorrect and changes the meaning.",
+          "suggestion": "ໃຊ້ທາງເລືອກນີ້ຖ້າທ່ານຕ້ອງການເອົາຂໍ້ມູນທັງຫມົດທີ່ມີຢູ່ໃນສະເປດເປັນໄຟລ໌."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation uses 'ka' (that) instead of 'ja' (if), which changes the logical structure of the sentence from a conditional statement to a broken clause. Additionally, it translates 'space' as 'portāla' (portal), which is inaccurate given the context of 'space' in DocSpace.",
+          "suggestion": "Izmantojiet šo iespēju, ja vēlaties iegūt visus telpā saturētos datus faila veidā."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -123,7 +159,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Polish translation uses 'na portalu' (on the portal) instead of 'w przestrzeni' (in the space), which changes the technical context of the feature.",
+          "suggestion": "Użyj tej opcji, jeśli chcesz pobrać wszystkie dane zawarte w przestrzeni jako plik."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -147,7 +189,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation uses 'портале' (portal) instead of 'space' (пространство), which changes the technical context of the feature.",
+          "suggestion": "Используйте эту опцию, если Вы хотите получить все данные, содержащиеся в пространстве, в виде файла."
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -159,7 +207,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation says 'a file with all data' (súbor všetkými údajmi) instead of 'all data as a file' (všetky údaje ako súbor). The current phrasing is grammatically awkward and implies the file is composed of data in a way that doesn't match the English intent of downloading the data content into a file format.",
+          "suggestion": "Túto možnosť použite, ak chcete získať všetky údaje obsiahnuté v priestore ako súbor."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -189,7 +243,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation uses 'порталі' (portal) instead of 'space' (просторі), which changes the technical context of the feature.",
+          "suggestion": "Використовуйте цю опцію, якщо ви хочете отримати всі дані, що містяться у просторі, як файл."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -199,6 +259,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

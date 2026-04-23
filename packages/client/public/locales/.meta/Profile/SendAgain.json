@@ -3,7 +3,7 @@
   "content": "Send again",
   "content_en_sha1_hash": "9fafcfcc8089c0d4519f16a47cf411b0b51890a7",
   "created_at": "2025-05-19T21:30:53.377Z",
-  "updated_at": "2026-02-19T13:36:32.974Z",
+  "updated_at": "2026-04-09T07:01:21.683Z",
   "comment": {
     "text": "The \"SendAgain\" translation key is used to display the phrase \"Send again\" in a button or similar UI element. It appears as an action option on a profile page, likely within a file upload or message sending section. This text invites users to retry a previous action.",
     "is_auto": true,
@@ -33,18 +33,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"أعد الإرسال مرة أخرى\" is overly verbose and not the most natural way to say \"Send again\" in Arabic (Saudi Arabia). While technically correct, it's redundant.",
-          "suggestion": "أعد الإرسال / أرسل مرة أخرى"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the phrasing \"أعد الإرسال مرة أخرى\" includes two 'again' concepts, potentially making it clunky. Consider a more concise alternative.",
-          "suggestion": "أعد الإرسال"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -131,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation \"Izveidot jaunu identitāti\" (Create a new identity) does not accurately convey the meaning of \"Send again\". It suggests a completely different action.",
-          "suggestion": "A more accurate translation for \"Send again\" would be something like \"Nosūtīt atkal\" or \"Sūtīt vēlreiz\"."
+          "description": "The Latvian translation 'Izveidot jaunu identitāti' means 'Create a new identity', which is completely different from the English 'Send again'.",
+          "suggestion": "Nosūtīt vēlreiz"
         }
       ],
       "approved_at": null
@@ -222,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

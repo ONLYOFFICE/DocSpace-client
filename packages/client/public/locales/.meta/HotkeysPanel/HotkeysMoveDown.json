@@ -3,7 +3,7 @@
   "content": "Move down without changing selection",
   "content_en_sha1_hash": "eb7330108f5f4a9d439335e9a783a5e7d608cf06",
   "created_at": "2025-05-19T21:30:55.060Z",
-  "updated_at": "2026-02-19T13:36:32.511Z",
+  "updated_at": "2026-04-07T19:35:05.107Z",
   "comment": {
     "text": "\"Used in a hotkeys panel to display the 'Move down' action without changing selection, appearing alongside the keyboard shortcut Ctrl + ↓.\"",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Seçimi dəyişmədən aşağı hərəkət edin' is a literal translation and doesn't fully capture the intended meaning of 'Move down without changing selection'. It sounds somewhat awkward in Azerbaijani. A more natural phrasing would be needed.",
-          "suggestion": "Consider 'Seçimi saxlayaraq aşağıya keç' or 'Seçimi qoruyaraq aşağı hərəkət edin'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -81,25 +75,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Déplacer vers le bas sans sélection' doesn't accurately convey the meaning of 'Move down without changing selection'. It misses the crucial element of 'selection'. The English phrase implies moving something down while keeping the current selection intact. The French phrase simply means 'move down without selection', which isn't the same.",
-          "suggestion": "Déplacer vers le bas sans modifier la sélection"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Տեղափոխել վար՝ առանց ընտրությունը փոխելու' is a literal translation and doesn't quite capture the idiomatic meaning of 'Move down without changing selection'.  It sounds slightly awkward in Armenian. A more natural phrasing would be more direct and focused on the action.",
-          "suggestion": "Consider a translation like 'Բարձրացնել առանց ընտրությունը փոխելու' (Bardsrtsanel arants ընտրությունը փոխելու) or 'Ներքևը տեղափոխել առանց ընտրության փոփոխության' (Nerqevy teghaphoxel arants entrutyun phoopokhutyun)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -111,18 +93,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '選択を変えずに移動（下）' while conveying the general idea, is a bit literal and could be improved for naturalness in Japanese. 'Move down' can be more elegantly expressed.",
-          "suggestion": "候補を下へ移動"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of '（下）' in the translation is somewhat clunky. While understandable, a more integrated solution would be better.",
-          "suggestion": "Consider removing or integrating '（下）' into a more natural phrase."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -176,25 +147,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Перейти вниз без изменения области выделения' is a bit literal and doesn't quite capture the nuance of 'Move down without changing selection'.  'Область выделения' refers to the selection area, but the English emphasizes moving the focused item down, not just the selection area.",
-          "suggestion": "Переместить вниз, не изменяя выделение"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'තේරීම වෙනස් නොකර පහළට යන්න' while literally meaning 'Move down without changing selection', might not be the most natural or user-friendly phrasing in Sinhala for a software interface. A more common and clear phrasing might be 'තේරීම නොවෙනස්කොට පහළට ගමු'.",
-          "suggestion": "තේරීම නොවෙනස්කොට පහළට ගමු"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -212,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Померај доле без мењања селекције' is a literal translation and doesn't quite convey the intended meaning of 'Move down without changing selection' in a user interface context. It sounds a bit clunky.",
-          "suggestion": "Премести надоле без избора"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -230,25 +183,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Seçimi değiştirmeden aşağı git' while generally understandable, doesn't perfectly capture the nuance of 'Move down without changing selection'. 'Move down' implies a movement action and 'without changing selection' clarifies that the current selection remains unchanged. The Turkish translation feels more like a general statement than an instruction related to a 'move' action.",
-          "suggestion": "Consider 'Seçimi koruyarak aşağı hareket et' or 'Seçimi değiştirmeden aşağıya taşı' to more accurately reflect the original meaning. Another option, more literal, would be 'Seçimi değiştirmeden aşağıya indirin'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Перейти вниз, не змінюючи вибір' doesn't perfectly capture the nuance of 'Move down without changing selection'. 'Перейти вниз' implies a navigation action, while 'Move down' can refer to repositioning an element. A more accurate translation would emphasize the repositioning aspect.",
-          "suggestion": "Перемістити вниз, не змінюючи вибір"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -260,13 +201,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '向下移动而不改变选定' does not fully capture the meaning of 'Move down without changing selection'. The phrase '选定' implies a single selection, whereas the English implies movement without changing the *current* selection.",
-          "suggestion": "向下移动，不改变当前选区"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

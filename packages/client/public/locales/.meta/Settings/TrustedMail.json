@@ -3,7 +3,7 @@
   "content": "Trusted mail domain settings",
   "content_en_sha1_hash": "cad01243d98a7420bb73d72774f75a5a0388682f",
   "created_at": "2025-05-19T21:30:52.982Z",
-  "updated_at": "2026-03-26T08:26:58.257Z",
+  "updated_at": "2026-04-09T00:19:46.230Z",
   "comment": {
     "text": "\"TrustedMail domain settings are displayed on a portal's security page to allow users to configure their trusted mail domain.\"",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 196,
+      "line_number": 213,
       "context": "{\n id: \"portal-settings_catalog-trusted-mail\",\n key: \"1-0-2\",\n icon: \"\",\n link: \"trusted-mail\",\n tKey: \"TrustedMail\",\n },\n {\n id: \"portal-settings_catalog-access-dev-tools\",\n key: \"1-0-3\",\n icon: \"\",",
       "module": "/packages/client"
     }
@@ -54,7 +54,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Настройки на доверени поща' is not a precise translation of 'Trusted mail domain settings'. 'Доверени поща' literally translates to 'Trusted mail' and misses the 'domain settings' portion.  A more accurate translation would include the concept of 'domain'.",
+          "description": "The Bulgarian translation 'Настройки на доверени поща' is grammatically incorrect and changes the meaning to 'Settings of trusted mail' (implying the mail itself is trusted), whereas the English refers to 'Trusted mail domain settings' (settings for specific domains).",
           "suggestion": "Настройки на доверени имейл домейни"
         }
       ],
@@ -63,13 +63,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Mailových' is likely a typo and should be 'e-mailových' to accurately reflect the English term 'mail'.",
-          "suggestion": "Nastavení důvěryhodných e-mailových domén"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -99,25 +93,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Paramètres de domaines de messagerie autorisés' is technically correct but could be more natural-sounding. 'Autorisés' implies a permission granted, which isn't the core meaning of 'Trusted'.",
-          "suggestion": "Paramètres des domaines de messagerie de confiance"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Վստահելի փոստի տիրույթի կարգավորումներ\" while technically correct, is a bit literal. A more natural and user-friendly phrasing might improve comprehension. 'Trusted mail domain settings' suggests a place to manage trusted domains, not just a definition of them.",
-          "suggestion": "Consider a phrasing like \"Վստահելի փոստային դոմեյնների կարգավորումներ\" (Trusted mail domains settings) or \"Վստահելի դոմեյնների փոստային կարգավորումներ\" (Trusted domains mail settings) which implies a configuration section."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -125,9 +107,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation \"Dominio affidabile\" is a literal translation of 'trusted domain,' but it doesn't fully capture the meaning of 'Trusted mail domain settings.' It lacks the 'settings' portion of the original phrase.  A more accurate translation would incorporate the concept of settings or configuration.",
-          "suggestion": "Impostazioni del dominio di posta affidabile"
+          "type": "missing_content",
+          "description": "The translation 'Dominio affidabile' (Trusted domain) is missing the plural 'settings' (impostazioni) and the reference to 'mail' (e-mail), which changes the scope from a configuration section to a single entity.",
+          "suggestion": "Impostazioni del dominio e-mail affidabile"
         }
       ],
       "approved_at": null
@@ -141,13 +123,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation \"신뢰할 수있는 메일 도메인 설정\" is not the most natural or accurate translation of \"Trusted mail domain settings.\" The phrase \"신뢰할 수있는\" (shin-rae-hal su-in-neun) sounds a bit awkward and overly literal. A more natural translation would incorporate a more concise way to express 'trusted'.",
-          "suggestion": "Consider \"신뢰 메일 도메인 설정\" (Shin-rae mail domain seol-jeong) or \"신뢰 도메인 메일 설정\" (Shin-rae domain mail seol-jeong)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -156,13 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ເຊື່ອຖືໄດ້ ເມລ ໂດເມນ ການ ​ຕັ້ງ​ຄ່າ' is a literal translation but doesn't flow naturally. 'ເມລ' is colloquial for 'email'. While understandable, 'ອີເມລ' would be more standard. 'ການຕັ້ງຄ່າ' is accurate for 'settings'.",
-          "suggestion": "ເຊື່ອຖືໄດ້ ໂດເມນອີເມລ ການຕັ້ງຄ່າ"
-        },
-        {
-          "type": "formatting",
-          "description": "The space before 'ໂດເມນ' is a bit awkward. It could be removed for better readability.",
-          "suggestion": "ເຊື່ອຖືໄດ້ໂດເມນອີເມລ ການຕັ້ງຄ່າ"
+          "description": "The word order in Lao is unnatural and follows English syntax too closely, making it sound like a list of disconnected words rather than a coherent phrase. In Lao, the noun being described should come before the modifiers.",
+          "suggestion": "ການຕັ້ງຄ່າໂດເມນອີເມວທີ່ເຊື່ອຖືໄດ້"
         }
       ],
       "approved_at": null
@@ -212,13 +183,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'වසම' (vasama) should be 'වසම' (vasama). The former means 'basin' or 'depression', while the latter means 'domain'.",
-          "suggestion": "විශ්වසනීය තැපැල් වසම"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -230,31 +195,25 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'zaupanja vredne' is grammatically incorrect and awkward in Slovenian. It attempts to translate 'Trusted' literally as 'worthy of trust' in a way that doesn't function as a technical adjective for 'mail domain'. In a technical context, 'zaupanja vredne' sounds like a description of a person's character rather than a configuration setting.",
+          "suggestion": "Nastavitve zaupanja vrednih poštovnih domen"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Подешавања поузданих поштанских домена' is understandable, a more natural and common translation for 'Trusted mail domain settings' would be 'Подешавања поузданих домена е-поште'. The Serbian term for 'mail' can be translated as 'пошта' or 'е-пошта', and 'е-пошта' is more commonly used in a digital context.",
-          "suggestion": "Подешавања поузданих домена е-поште"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'pouzdanih' is misspelled. The correct spelling is 'pouzdanih'.",
-          "suggestion": "pouzdanih"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -272,21 +231,16 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Cài đặt Tên miền Mail được tin cậy' is a literal translation and not the most natural phrasing in Vietnamese. 'Trusted' implies a level of approval or verification which isn't directly conveyed. A more suitable translation would convey the idea of approved or verified email domains.",
-          "suggestion": "Cài đặt miền email được phép"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the phrasing 'Tên miền Mail' is slightly awkward. 'Miền email' is more common.",
-          "suggestion": "Miền email"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

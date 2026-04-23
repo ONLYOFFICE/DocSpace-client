@@ -2,6 +2,7 @@
   "AddedRoomTags": "Οι ετικέτες προστέθηκαν.",
   "Administration": "Διαχείριση",
   "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> μετονομάστηκε σε <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Δείτε τις λεπτομέρειες των {{aiAgents}} εδώ",
   "AndMoreLabel": "και <1>{{count}} περισσότερα</1>",
   "CreationDate": "Ημερομηνία δημιουργίας",
   "Data": "Δεδομένα",
@@ -60,11 +61,14 @@
   "IndexChanged": "Έγινε αλλαγή ευρετηρίου",
   "ItemsSelected": "Επιλεγμένα στοιχεία",
   "LastModifiedBy": "Τελευταία Τροποποίηση Από",
+  "LastUpdateInfo": "Τελευταία ενημέρωση",
   "LifetimeEnds": "Η διάρκεια ζωής τελειώνει",
   "MembersEmptyScreenText": "Δείτε λεπτομέρειες για τα μέλη εδώ",
+  "NoAgent": "Κανένας {{aiAgent}}",
   "NoRecordsFound": "Δεν βρέθηκαν εγγραφές",
   "Properties": "Ιδιότητες",
   "Resolution": "Ανάλυση",
+  "RoomChangeOwner": "Ο ιδιοκτήτης του δωματίου άλλαξε.",
   "RoomCreateUserCount": "Προσθήκη χρηστών ({{count}}).",
   "RoomDenyDownloadDisabled": "Λήψη και αντιγραφή χωρίς περιορισμούς",
   "RoomDenyDownloadEnabled": "Λήψη και αντιγραφή περιορισμένη",
@@ -98,6 +102,5 @@
   "SubmenuHistory": "Ιστορικό",
   "UserFileUpdated": "Το αρχείο ενημερώθηκε.",
   "Users": "Χρήστες",
-  "Versions": "Εκδόσεις",
-  "LastUpdateInfo": "Τελευταία ενημέρωση"
+  "Versions": "Εκδόσεις"
 }

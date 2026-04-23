@@ -1,0 +1,268 @@
+{
+  "key_path": "UploadFolder",
+  "content": "Upload folder",
+  "content_en_sha1_hash": "e77a1496f8e8093547d02f31abdfb67b6e95e806",
+  "created_at": "2026-04-03T21:51:34.737Z",
+  "updated_at": "2026-04-10T08:21:04.284Z",
+  "comment": {
+    "text": "Used as a label for the folder upload action in a dropdown menu and as a descriptive text for the 'Shift + i' keyboard shortcut in the hotkeys panel. It refers to the action of uploading an entire directory.",
+    "is_auto": true,
+    "updated_at": "2026-04-03T21:52:04.493Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/Article/MainButton/index.js",
+      "line_number": 501,
+      "context": "if (!(isMobile || isTablet)) {\n newUploadActions.push({\n id: \"actions_upload-folders\",\n className: \"main-button_drop-down\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"Common:UploadFolder\"),\n disabled: isPrivacy,\n onClick: onUploadFolderClick,\n key: \"upload-folder\",\n });\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/panels/HotkeysPanel/UploadBlock.js",
+      "line_number": 42,
+      "context": "<Text {...keyTextStyles}>Shift + u</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>\n <Text {...textStyles}>{t(\"Common:UploadFolder\")}</Text>\n <Text {...keyTextStyles}>Shift + i</Text>\n </>\n </Row>\n </>\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 3567,
+      "context": "icon: ActionsUploadReactSvgUrl,\n };\n \n const uploadFolder = {\n key: \"upload-folder\",\n label: t(\"Common:UploadFolder\"),\n onClick: () => this.onUploadAction(\"folder\"),\n icon: ActionsUploadReactSvgUrl,\n };\n \n const templateGallery = templateGalleryAvailable",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Qolvuğu' is a misspelling or incorrect form of 'Qovluq' (folder). 'Qolvuğu' does not exist in Azerbaijani and appears to be a typo.",
+          "suggestion": "Qovluğu yüklə"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation uses the nominative case 'φάκελο' (folder) instead of the accusative case 'φακέλου' (folder) required by the verb 'Μεταφόρτωση' (Upload). In Greek, 'Μεταφόρτωση φάκελο' is grammatically incorrect and sounds like two disconnected words rather than a single action.",
+          "suggestion": "Μεταφόρτωση φακέλου"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish word 'Lataa' is ambiguous; it can mean both 'Upload' and 'Download'. In a UI context for uploading files/folders, 'Lataa' is often interpreted as 'Download'. To avoid user confusion, 'Lataa ylös' or 'Lähetä kansio' is more precise for uploading.",
+          "suggestion": "Lataa kansio ylös"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The French translation 'Télécharger' means 'to download'. In the context of uploading a folder to a cloud service, the correct term is 'Téléverser' or 'Charger'.",
+          "suggestion": "Téléverser le dossier"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'dosar' in Romanian typically refers to a physical file folder or a legal case file. In a digital/computing context for uploading a directory, 'folder' should be translated as 'director' or 'folder'.",
+          "suggestion": "Încarcă folderul"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'බහාලුමක් දමන්න' means 'Insert a container' or 'Put a container', which refers to a physical box/container. In a digital context, 'folder' should be translated as 'ෆෝල්ඩරය' (Folder) or 'ගොනු ෆෝල්ඩරය' (File folder).",
+          "suggestion": "ෆෝල්ඩරයක් උඩුගත කරන්න"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The verb 'Передати' means 'to transfer' or 'to hand over' (often used for physical objects or data transfer between parties), whereas 'Upload' in a web/cloud context specifically means 'Завантажити' (to upload to a server).",
+          "suggestion": "Завантажити папку"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

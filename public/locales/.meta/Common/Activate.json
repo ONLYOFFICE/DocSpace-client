@@ -3,7 +3,7 @@
   "content": "Activate",
   "content_en_sha1_hash": "92ef08325a4813563a3110359906076374683282",
   "created_at": "2025-05-19T21:30:42.888Z",
-  "updated_at": "2025-08-11T18:11:59.378Z",
+  "updated_at": "2026-04-08T18:10:27.748Z",
   "comment": {
     "text": "This translation key is used to display the label \"Activate\" on a button that triggers license upload. It appears in the UI as a primary action button and is typically displayed when an upload process starts.",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation \"Активирате\" is the second-person plural form of \"activate\". The English word \"Activate\" likely requires the third-person singular form \"Активира\" or the infinitive \"Активира\" depending on the context.",
-          "suggestion": "Consider using \"Активира\" (third-person singular) or \"Активира\" (infinitive) instead of \"Активирате\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -99,7 +93,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '活性化する' (kasseika suru) means 'to energize' or 'to revitalize' (like a biological process or a chemical reaction). In the context of software licensing, 'Activate' should be translated as '有効化' (yūkōka).",
+          "suggestion": "有効化"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -147,13 +147,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'Activați' is the formal/plural imperative form of 'activate'. The English 'Activate' could also be 'Activează' (singular imperative) or 'Activare' (noun). The best choice depends on the context. Without further context, 'Activați' may not be the most appropriate translation.",
-          "suggestion": "Consider 'Activează' (singular imperative) or 'Activare' (noun) depending on the context.  Further context is needed to confirm the appropriate form."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -211,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

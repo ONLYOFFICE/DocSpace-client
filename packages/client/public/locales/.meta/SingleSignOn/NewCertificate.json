@@ -3,7 +3,7 @@
   "content": "New Certificate",
   "content_en_sha1_hash": "f90a564cc3dc5f0e1b0e2896c28acb669529af25",
   "created_at": "2025-05-19T21:30:50.114Z",
-  "updated_at": "2025-08-12T19:46:26.210Z",
+  "updated_at": "2026-04-08T23:11:55.507Z",
   "comment": {
     "text": "The translation key \"NewCertificate\" is used to display the label \"New Certificate\" in a modal dialog, indicating that the user can create or generate a new certificate. This text appears as the header of two separate modals: AddIdpCertificateModal and AddSpCertificateModal, both related to Single Sign On integration settings.",
     "is_auto": true,
@@ -111,13 +111,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Lao word 'ໃບ' (bai) is used for 'certificate' but the translation could be more accurately reflected by using 'ໃບປະກາດ' (bai prakat) to emphasize the formal nature of the certificate. While 'ໃບ' isn't incorrect, it's more general.",
-          "suggestion": "ໃບປະກາດໃໝ່"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -165,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'නව සහතිකය' means 'The New Certificate' (definite article), whereas the English 'New Certificate' is a label/action header. In a UI context for creating something new, 'නව සහතිකයක්' (A New Certificate) or 'නව සහතිකය එක් කරන්න' (Add New Certificate) is more appropriate, but specifically, 'නව සහතිකය' implies a specific existing certificate rather than the action of creating one.",
+          "suggestion": "නව සහතිකයක්"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -211,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

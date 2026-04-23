@@ -3,7 +3,7 @@
   "content": "Logo for the About page",
   "content_en_sha1_hash": "9eedc846ebbca15548685b786487a57f168857ec",
   "created_at": "2025-05-26T07:15:44.866Z",
-  "updated_at": "2026-02-19T13:36:33.169Z",
+  "updated_at": "2026-04-08T05:15:43.928Z",
   "comment": {
     "text": "The translation key \"LogoAbout\" is used to display the title of the About page logo. It appears in a descriptive text on a settings page and provides context for the logged-in user about the logo being displayed.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Arabic translation is missing a closing quotation mark for the phrase 'من نحن', which makes the sentence syntactically incomplete in Arabic.",
+          "suggestion": "شعار لصفحة \"من نحن\""
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -69,7 +75,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation uses 'Sisällöstä-osioon' (To the About section), which implies a direction or movement, whereas the English 'Logo for the About page' is a descriptive label for an object.",
+          "suggestion": "Tietoja-sivun logo"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -177,7 +189,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word order is incorrect and ungrammatical in Serbian. 'U vezi stranicu' is a literal, incorrect translation of 'About page'.",
+          "suggestion": "Logotip za stranicu 'O nama'"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -199,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

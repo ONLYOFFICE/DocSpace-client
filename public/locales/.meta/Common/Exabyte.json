@@ -3,7 +3,7 @@
   "content": "EB",
   "content_en_sha1_hash": "6f1133307673bd2fca81f068c0a87d849203cc59",
   "created_at": "2025-05-19T21:30:45.205Z",
-  "updated_at": "2026-03-26T08:26:58.379Z",
+  "updated_at": "2026-04-08T10:03:27.311Z",
   "comment": {
     "text": "This translation key is used for formatting units of digital storage in a user interface, displaying \"EB\" for Exabyte. It appears as part of a list of file size units in the UI.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation \"البايت\" (Al-Byte) translates to 'Byte' in English, not 'Exabyte'. The correct translation should reflect 'Exabyte'.",
-          "suggestion": "The translation should be something that accurately represents 'Exabyte'. Possible suggestions include: إكسا بايت (Eksah Byte) or جيجابايت (Gigabyte - if representing a similar scale)"
+          "description": "The translation 'البايت' means 'Byte', whereas the English source 'EB' stands for 'Exabyte'.",
+          "suggestion": "إكسابايت"
         }
       ],
       "approved_at": null
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The French translation 'Eo' is not a standard or recognized abbreviation for Exabyte. The correct abbreviation is 'Ei'.",
-          "suggestion": "Ei"
+          "description": "The translation 'Eo' is incorrect for the unit 'EB' (Exabyte). In French, the standard abbreviation for Exabyte is 'Eo' only in very specific contexts, but 'EB' is the internationally recognized SI/IEC symbol used in technical interfaces. However, 'Eo' is not a standard abbreviation for Exabyte in French; 'ÉB' or 'EB' is used. More importantly, 'Eo' looks like a typo or a different unit entirely.",
+          "suggestion": "EB"
         }
       ],
       "approved_at": null
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"EO\" does not accurately represent the English abbreviation \"EB\" for Exabyte. \"EB\" is the internationally recognized standard abbreviation.",
-          "suggestion": "The correct Romanian translation should be \"EB\"."
+          "description": "The translation 'EO' is incorrect. The standard abbreviation for Exabyte in Romanian (and internationally) is 'EB'. 'EO' does not represent a digital storage unit.",
+          "suggestion": "EB"
         }
       ],
       "approved_at": null
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The standard abbreviation for Exabyte in Russian is 'ЕБ'. The provided translation 'Эб' uses the Cyrillic letter 'Э' instead of 'Е'.",
-          "suggestion": "Change 'Эб' to 'ЕБ'."
+          "description": "The translation 'Эб' is a phonetic transliteration that does not represent the standard technical abbreviation for Exabyte in Russian. In technical contexts, international SI/IEC unit abbreviations (EB, PB, TB, etc.) are typically preserved in Latin script to maintain consistency with global standards.",
+          "suggestion": "EB"
         }
       ],
       "approved_at": null
@@ -177,13 +177,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The abbreviation \"EB\" (Exabyte) is commonly understood in Sinhala as well, and directly translating it as \"එ.බ.\" is not ideal. While technically accurate as an initialism, it lacks the familiarity and widespread recognition the English abbreviation has.  A more appropriate approach would be to use \"EB\" directly or provide a brief explanation alongside it the first time it's used.",
-          "suggestion": "Consider using \"EB\" directly or providing a short explanation like 'එක්සබයිට් (EB)'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -229,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

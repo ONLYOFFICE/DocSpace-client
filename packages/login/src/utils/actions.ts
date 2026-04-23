@@ -334,6 +334,13 @@ export async function getUserByEncEmail(
 
     const res = await fetch(getUserByEmai);
 
+    if (res.status === 403) {
+      logger.error(
+        `GET /people/email?encemail=${userEncEmail} failed: access-restricted`,
+      );
+      return "access-restricted";
+    }
+
     if (!res.ok) {
       logger.error(
         `GET /people/email?encemail=${userEncEmail} failed: ${res.status}`,
@@ -517,6 +524,11 @@ export async function getPortalPasswordSettings(
     );
     const res = await fetch(getPortalPasswordSettingsRes);
 
+    if (res.status === 403) {
+      logger.error(`GET /settings/security/password failed: access-restricted`);
+      return "access-restricted";
+    }
+
     if (!res.ok) {
       logger.error(`GET /settings/security/password failed: ${res.statusText}`);
       return;
@@ -544,6 +556,11 @@ export async function getUserFromConfirm(
     );
 
     const res = await fetch(getUserFromConfirmRes);
+
+    if (res.status === 403) {
+      logger.error(`GET /people/${userId} failed: access-restricted`);
+      return "access-restricted";
+    }
 
     if (!res.ok) {
       logger.error(`GET /people/${userId} failed: ${res.status}`);
@@ -785,6 +802,11 @@ export async function getInvitationSettings() {
     );
 
     const res = await fetch(getInvitationSettingsRes);
+
+    if (res.status === 403) {
+      logger.error(`GET /settings/invitationsettings failed: access-restricted`);
+      return "access-restricted";
+    }
 
     if (!res.ok) {
       logger.error(`GET /settings/invitationsettings failed: ${res.status}`);

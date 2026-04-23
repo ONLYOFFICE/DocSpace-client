@@ -3,7 +3,7 @@
   "content": "Enter time",
   "content_en_sha1_hash": "1e957f72bff227aeb488649dc0014df9ee9b2f44",
   "created_at": "2025-05-19T21:30:51.524Z",
-  "updated_at": "2025-09-26T15:21:06.427Z",
+  "updated_at": "2026-04-09T03:03:05.629Z",
   "comment": {
     "text": "\"Enter time\" is used as a placeholder text for an input field to prompt users to enter a specific duration in a security setting, typically on a brute force protection page. It appears as a label within a form element and helps users understand what value is expected from them.",
     "is_auto": true,
@@ -69,13 +69,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Enter time' can have different meanings depending on context. 'Introduzca la hora' specifically means 'Enter the hour' or 'Input the hour'. A more general translation, if the intent is for the user to enter a date and time, would be something like 'Introduzca la fecha y hora' or 'Ingrese la fecha y hora'.",
-          "suggestion": "Consider 'Introduzca la fecha y hora' or 'Ingrese la fecha y hora' if the context requires date and time input."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -156,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Introducere timp\" is a literal translation of \"Enter time\" but doesn't convey the intended meaning. \"Enter time\" in this context likely refers to setting or inputting a time.",
-          "suggestion": "A more appropriate translation would be something like \"Setare timp\" or \"Introducere oră\" depending on the specific context. \"Setare timp\" is likely better as it implies configuration."
+          "description": "The Romanian translation 'Introducere timp' is a noun phrase meaning 'Time entry' or 'Introduction of time'. For a placeholder/command in an input field, it should be an imperative verb phrase.",
+          "suggestion": "Introduceți timpul"
         }
       ],
       "approved_at": null
@@ -171,13 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'කාලය යොදන්න' while literally meaning 'Enter time', doesn't fully capture the nuance of a settings label. A more natural translation for a settings field that requires the user to input a time would be 'වෙලාව ඇතුළත් කරන්න' (Welaawa athulath karanna).",
-          "suggestion": "වෙලාව ඇතුළත් කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -192,7 +180,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vnesi uro' literally translates to 'Enter hour'. The English 'Enter time' refers to a general time entry, not specifically an hour. A more accurate translation would be something like 'Vnesite čas' or 'Določite čas'.",
+          "description": "The Slovenian translation 'Vnesi uro' means 'Enter the hour' (referring to a specific point in time on a clock), whereas the context specifies a 'duration' (a length of time).",
           "suggestion": "Vnesite čas"
         }
       ],
@@ -207,25 +195,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Enter time\" typically refers to setting or inputting a specific time value. \"Unesi vreme\" literally translates to \"Enter time,\" but in this context, it might be more accurate to convey the meaning of \"Set time\" or \"Specify time.\"  Without more context, \"Unesi vreme\" might be misinterpreted as simply entering any arbitrary time.",
-          "suggestion": "Consider 'Postavi vreme' or 'Odredi vreme' to better reflect the intended meaning of setting or specifying a time."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Saati gir' is a literal translation but doesn't fully capture the meaning of 'Enter time' within a settings context. It could be misinterpreted as 'Enter the hour' rather than 'Set the time'.",
-          "suggestion": "Consider a more contextually appropriate translation like 'Zamanı ayarla' (Set the time) or 'Zamanı belirle' (Specify the time)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -241,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

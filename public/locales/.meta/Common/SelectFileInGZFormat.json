@@ -3,7 +3,7 @@
   "content": "Select the file in .GZ format",
   "content_en_sha1_hash": "3c29799b46e580ac62419900c034be5a8c9724b6",
   "created_at": "2025-05-26T07:15:47.576Z",
-  "updated_at": "2026-02-19T13:36:33.211Z",
+  "updated_at": "2026-04-07T23:48:46.524Z",
   "comment": {
     "text": "SelectFileInGZFormat is used to label a file input field that restricts users to select files in .GZ format. It appears as a descriptive text next to a file selection component, providing context for users in two UI components: RoomsModule and ThirdPartyResourcesModule.",
     "is_auto": true,
@@ -33,13 +33,25 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The translation specifies 'compressed file format' (ملف مضغوط) generally, but fails to mention the specific '.GZ' format required by the English source.",
+          "suggestion": "حدد الملف بتنسيق .GZ"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation uses the word 'qovluq' (folder) instead of 'fayl' (file), which changes the meaning of the instruction.",
+          "suggestion": ".GZ formatında fayl seçin"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -147,7 +159,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The translation 'Alegeți format de fișier .GZ' means 'Select .GZ file format', whereas the English 'Select the file in .GZ format' instructs the user to select a specific file. The Romanian version lacks the object (the file) being selected.",
+          "suggestion": "Alegeți fișierul în format .GZ"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -195,7 +213,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation contains a typo: '.GZ' is written as '.GZ' with a dot attached to the word 'форматі' (formatі.GZ), which makes it look like a file extension for the word 'format' rather than a separate file format specification. In Ukrainian, there should be a space between the word and the extension.",
+          "suggestion": "Виберіть файл у форматі .GZ"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -205,6 +229,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

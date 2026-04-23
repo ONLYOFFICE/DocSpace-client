@@ -40,3 +40,23 @@ export enum SettingsSubSection {
 }
 
 export const DEFAULT_SETTINGS_SUBSECTION = SettingsSubSection.Billing;
+
+export type CustomContextMenuAction = {
+  key: string;
+  label: string;
+  icon?: string;
+  section?: FormsSection[];
+};
+
+export type CustomActionsConfig = {
+  contextMenu?: {
+    file?: CustomContextMenuAction[];
+    folder?: CustomContextMenuAction[];
+  };
+};
+
+export type CustomActionEventData = {
+  action: string;
+  type: "file" | "folder";
+  item: object;
+};

@@ -28,6 +28,7 @@
 
 const path = require("path");
 const fs = require("fs");
+const os = require("os");
 
 // Use fs.readFileSync instead of require to avoid module system issues
 const packagePath = path.resolve(__dirname, "package.json");
@@ -42,16 +43,16 @@ const { createRequire } = require("module");
 const requireESM = createRequire(__filename);
 
 const buildModule = requireESM("@docspace/shared/utils/build");
-const { getBanner } = buildModule.default;
+const { getBanner, getAllLocalIps } = buildModule.default;
+
+const productionMode = "production";
 
 const version = pkg.version;
 const banner = getBanner(version);
+const isDev = process.env.NODE_ENV !== productionMode;
 
 const nextConfig = {
   basePath: "/sdk",
-  typescript: {
-    ignoreBuildErrors: true,
-  },
   serverExternalPackages: [
     "nconf",
     "date-and-time",
@@ -94,7 +95,37 @@ const nextConfig = {
 
     if (isProduction) {
       config.optimization = {
-        splitChunks: { chunks: "all" },
+        splitChunks: {
+          chunks: "all",
+          cacheGroups: {
+            defaultVendors: {
+              test: /[\\/]node_modules[\\/]/,
+              priority: -10,
+              reuseExistingChunk: true,
+            },
+            default: {
+              minChunks: 2,
+              priority: -20,
+              reuseExistingChunk: true,
+            },
+            aiChat: {
+              test: /[\\/](?:ai-agent[\\/]chat|react-markdown|react-syntax-highlighter|refractor|katex|rehype-[^\\/]+|remark-[^\\/]+|hast-util-[^\\/]+|mdast-util-[^\\/]+|unified|parse5|linkify-react|linkifyjs|property-information)[\\/]/,
+              name: "ai-chat-vendor",
+              chunks: "async",
+              priority: 30,
+              reuseExistingChunk: true,
+              enforce: true,
+            },
+            firebase: {
+              test: /[\\/](?:@firebase|firebase[\\/]compat)[\\/]/,
+              name: "firebase-vendor",
+              chunks: "async",
+              priority: 30,
+              reuseExistingChunk: true,
+              enforce: true,
+            },
+          },
+        },
         minimize: true,
         minimizer: [
           new CssMinimizerPlugin({
@@ -220,6 +251,11 @@ const nextConfig = {
 
 if (process.env.DEPLOY) {
   nextConfig.output = "standalone";
+}
+
+if (isDev) {
+  const localIps = getAllLocalIps(os);
+  nextConfig.allowedDevOrigins = localIps;
 }
 
 const withBundleAnalyzer = require("@next/bundle-analyzer")({

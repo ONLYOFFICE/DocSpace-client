@@ -3,7 +3,7 @@
   "content": "MCP server",
   "content_en_sha1_hash": "94cbffb24efcf41d6f46da3b0290c1a446e05376",
   "created_at": "2025-11-21T08:21:51.253Z",
-  "updated_at": "2026-03-20T09:07:45.441Z",
+  "updated_at": "2026-04-10T08:21:04.289Z",
   "comment": {
     "text": "This key displays the label \"MCP server\" within a dialog header, likely referring to a Minecraft server being configured or managed. It appears in the \"Add\" and \"Edit\" dialogs for AI settings related to servers. Translators should understand this refers to a Minecraft server context.",
     "is_auto": true,
@@ -63,12 +63,6 @@
       "line_number": 96,
       "context": "const description =\n item.serverType === ServerType.Portal\n ? t(\"AISettings:MCPProductDescription\", {\n organizationName: t(\"Common:OrganizationName\"),\n productName: t(\"Common:ProductName\"),\n mcpServer: t(\"Common:MCPServer\"),\n })\n : item.description;\n \n return (\n <AiTile",
       "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/panels/ai-service/GetStartedBody.tsx",
-      "line_number": 54,
-      "context": "const serviceOptions: ServiceOption[] = [\n {\n id: \"ai-tools\",\n title: t(\"Common:AIAgents\"),\n description: t(\"AIAgentsDescription\", {\n mcpServer: t(\"Common:MCPServer\"),\n }),\n icon: <AIAgentsIcon />,\n },\n {\n id: \"chatbot\",",
-      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -81,7 +75,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word order is incorrect for Arabic. In Arabic, the noun (server/خادم) should come before the modifier (MCP). The current translation 'MCP خادم' reads as 'MCP [is a] server' or is grammatically inverted, which is unnatural for a technical label.",
+          "suggestion": "خادم MCP"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -117,7 +117,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word order is incorrect in Spanish. In Spanish, the noun 'servidor' should precede the modifier 'MCP' to be grammatically correct and natural.",
+          "suggestion": "Servidor MCP"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -129,7 +135,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word order is incorrect in French. In French, the noun 'serveur' should precede the modifier/acronym 'MCP' to be grammatically correct (e.g., 'Serveur MCP'). 'MCP serveur' is a literal word-for-word transposition that sounds unnatural and incorrect in French.",
+          "suggestion": "Serveur MCP"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -177,19 +189,37 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word order is incorrect in Polish. In Polish, the noun should typically precede the modifier/type in this technical context, or the phrase should be structured as 'Serwer MCP' to sound natural and correct.",
+          "suggestion": "Serwer MCP"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word order is incorrect in Portuguese. In this context, 'servidor' (noun) should come before 'MCP' (modifier/adjective), or 'MCP' should be treated as a proper noun/acronym preceding the noun. 'MCP servidor' sounds like a literal word-for-word translation that violates Portuguese syntax.",
+          "suggestion": "Servidor MCP"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word order is incorrect in Portuguese. In this context, 'servidor' (noun) should come before 'MCP' (modifier/adjective), or 'MCP' should be treated as a proper noun/acronym prefixing the noun. 'MCP servidor' sounds like a literal word-for-word translation that breaks natural syntax.",
+          "suggestion": "Servidor MCP"
+        }
+      ],
       "approved_at": null
     },
     "ro": {

@@ -3,7 +3,7 @@
   "content": "No users found",
   "content_en_sha1_hash": "612eb3c64c413c645d13566a1cfa74199923df23",
   "created_at": "2025-05-19T21:30:46.927Z",
-  "updated_at": "2026-02-19T13:36:32.530Z",
+  "updated_at": "2026-04-08T03:54:48.399Z",
   "comment": {
     "text": "This translation key is used to display a message when users are not found or not imported. It appears in an empty screen component and serves as the header text of an empty table view, indicating that there are no users to select or import.",
     "is_auto": true,
@@ -227,14 +227,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'පරිශ්‍රීලකයින්' is a less common and potentially incorrect spelling of 'පරිශ්‍රමකරුවන්'. While understandable, it's not the standard term for 'users'.",
-          "suggestion": "පරිශ්‍රමකරුවන්"
-        },
-        {
           "type": "incorrect_translation",
-          "description": "While 'හමු නොවිණි' is grammatically correct and translates to 'not found', a more natural and common phrasing for 'No users found' in Sinhala would be 'නොමැත'.",
-          "suggestion": "නොමැත"
+          "description": "The Sinhala word 'පරිශ්‍රීලකයින්' (parishrilakayin) is a misspelling/incorrect term for 'users'. The correct term for users in this context is 'පරිශීලකයින්' (parishilakayin).",
+          "suggestion": "පරිශීලකයින් හමු නොවුණි"
         }
       ],
       "approved_at": null
@@ -242,13 +237,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation 'Používatelia sa nenašli' is a literal translation but sounds awkward and unnatural. A more idiomatic translation would be 'Neboli nájdení žiadni používatelia' or 'Nenájdení používatelia'.",
-          "suggestion": "Neboli nájdení žiadni používatelia"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -260,25 +249,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ниједан корисник пронађен' while technically grammatically correct, sounds awkward and unnatural in Serbian. A more idiomatic translation for 'No users found' would be 'Није пронађено корисника'.",
-          "suggestion": "Није пронађено корисника"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Nijedan korisnik pronađen' is a literal translation and sounds slightly unnatural in Serbian. A more natural phrasing would be 'Nisu pronađeni korisnici'.",
-          "suggestion": "Nisu pronađeni korisnici"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -300,6 +277,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

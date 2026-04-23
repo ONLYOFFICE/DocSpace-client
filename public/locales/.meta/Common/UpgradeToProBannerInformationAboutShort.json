@@ -3,7 +3,7 @@
   "content": "Learn more about {{license}} Edition on the <1>official website</1>",
   "content_en_sha1_hash": "62cad8c148a203ce2ed7a69d5c5c57a129dd8912",
   "created_at": "2025-05-26T07:15:49.119Z",
-  "updated_at": "2026-03-20T09:07:45.755Z",
+  "updated_at": "2026-04-10T08:58:38.048Z",
   "comment": {
     "text": "This translation key is used to display a message about learning more about the Enterprise License on the official website. It appears in a banner or notification component and provides a link to access further information about the license edition.",
     "is_auto": true,
@@ -33,31 +33,25 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tag <1> is present in both the English and Azerbaijani content. While it likely indicates some kind of emphasis or link, it's important to confirm the intended behavior and whether the tag should be preserved exactly as is. Confirm the original purpose of the tag.",
-          "suggestion": "Verify the original purpose of the <1> tag. If it's a hyperlink, ensure it's implemented correctly in the Azerbaijani version. If it's for styling, ensure the styling applies correctly."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Edition' was not translated, leaving it in English. In Bulgarian, it should be 'редакция' or 'версия' to maintain natural flow and complete meaning.",
+          "suggestion": "Научете повече за {{license}} редакция на <1>официалния уебсайт</1>"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tags <1> and </1> are preserved in the Czech translation. This is likely undesirable and should be removed or replaced with the appropriate formatting for the target platform.",
-          "suggestion": "Remove the HTML tags.  Consider using Markdown or other suitable formatting based on the platform where the translation will be displayed.  For example: 'Více informací o edici {{license}} na oficiálních stránkách'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -75,13 +69,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tags `<1>` and `</1>` are inconsistent.  The opening tag uses `<1>` while the closing tag uses `</1>`. This should be consistent.",
-          "suggestion": "Change `</1>` to `</1>`"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -90,13 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'official website' is not correctly translated. It should be translated to 'virallinen verkkosivusto'.",
-          "suggestion": "Lue lisää {{license}} -versiosta <1>virallinen verkkosivusto</1>"
-        },
-        {
-          "type": "formatting",
-          "description": "The tag <1> is likely intended to indicate a link. The Finnish translation should also apply this formatting.",
-          "suggestion": "Lue lisää {{license}} -versiosta <a href=\"[link to official website]\">virallinen verkkosivusto</a>"
+          "description": "The phrase 'official website' inside the <1> tag was not translated into Finnish, leaving English text in the middle of the sentence.",
+          "suggestion": "Lue lisää {{license}} -versiosta <1>virallisella verkkosivustolla</1>"
         }
       ],
       "approved_at": null
@@ -110,49 +93,25 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tags `<1>` are present in both the English and Armenian content. While they likely indicate a specific design element, it's crucial to ensure this formatting is correctly applied in the target system and not just blindly copied over. The tags might need adjustment based on Armenian typography or HTML rendering.",
-          "suggestion": "Verify proper rendering of the `<1>` tags in the Armenian version. Consider if the tags need modification based on the specific display context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'official website' is not directly translated. 'Web ufficiale' is a more literal translation of 'official web', but 'official website' is more natural in Italian. A more accurate translation would be 'sito web ufficiale'.",
-          "suggestion": "sito web ufficiale"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tags `<1>` are present in both the English and Japanese text. It's unclear what these tags signify, but maintaining them might be inconsistent or unnecessary. They should be reviewed based on their intended purpose.",
-          "suggestion": "Review the purpose of the `<1>` tags and determine if they should be removed or replaced with a more appropriate formatting method."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tags <1> and </1> are present in both the English and Korean text, indicating they likely represent a specific styling or formatting element. It's important to verify that the styling applied by these tags is consistent across both languages and intended.",
-          "suggestion": "Verify the styling applied by <1> and </1> is consistent across both the English and Korean versions. If the styling is language-specific, adjustments may be needed."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -164,13 +123,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The angle brackets `<1>` and `</1>` are present in both the English and Latvian translations, indicating a formatting tag. This is likely intended to be preserved as HTML or similar. However, they might not be necessary or desirable in all contexts. Consider whether these tags should be removed or adjusted based on the intended use of the translation.",
-          "suggestion": "Review the intended use of the angle brackets. If they represent HTML tags or similar formatting instructions, ensure they are correctly interpreted and rendered in the target environment. If they are unnecessary, remove them."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -182,25 +135,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tags <1> and </1> are inconsistent with the English version. They should be consistent across both languages.",
-          "suggestion": "Change `<1>` to `<2>` and `</1>` to `</2>` in the Polish translation to match the English version."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tag `<1>` is inconsistent. In the English content, it is used for the term \"official website\", and in the Portuguese translation it's used for \"site oficial\". While both terms are correct, keeping consistent HTML tags would improve clarity.",
-          "suggestion": "Consider using the same HTML tag or a more descriptive tag for both the English and Portuguese versions to indicate what is being emphasized."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -212,31 +153,25 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tags <1> are preserved in the translation. They should be removed.",
-          "suggestion": "Aflați mai multe despre Ediția {{license}} pe pagina oficială"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Edition' was not translated, leaving an English word in the middle of the Russian sentence, which breaks the flow and linguistic consistency.",
+          "suggestion": "Узнайте больше об издании {{license}} на <1>официальном сайте</1>"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tags <1> and </1> are inconsistent. The English original uses <1>...</1> while the Sinhala translation uses <1> and </1>. This may cause rendering issues.",
-          "suggestion": "Ensure consistent HTML tag usage. Either use <1>...</1> or <1> and </1> consistently."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -254,42 +189,19 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tags `<1>` and `</1>` are inconsistent with the English content. The English uses `<1>` and `</1>`, while the Serbian translation uses `<1>` and `</1>`. This may cause rendering issues.",
-          "suggestion": "Ensure the HTML tags are consistent with the English content: `<1>` and `</1>`."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tags <1> and </1> are preserved in the translation. These should be removed.",
-          "suggestion": "Saznajte više o {{license}} izdanju na zvaničnom veb-sajtu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tags `<1>` are inconsistent between the English and Turkish versions. The English uses `<1>official website</1>` while the Turkish uses `<1>Resmî web</1>`. The tags should be consistent.",
-          "suggestion": "Change `<1>Resmî web</1>` to `<1>Resmî web sitesi</1> to match the English tag structure."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Resmî web\" translates to 'official web', it's incomplete and sounds awkward in Turkish. It should be \"Resmî web sitesi\" for a more natural and complete translation of 'official website'.",
-          "suggestion": "Change \"Resmî web\" to \"Resmî web sitesi\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -301,37 +213,19 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tags <1> and </1> appear to be used for styling or emphasis. They should be reviewed and either removed if unnecessary or replaced with appropriate HTML tags for the intended effect (e.g., <b>, <i>, <strong>).",
-          "suggestion": "Review and adjust HTML tags as needed. Consider removing if no styling is intended, or replace with appropriate tags."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The angle brackets <1> and </1> are present in both the English and Chinese translations, indicating a formatting tag. This might not be the intended behavior and should be reviewed for the final output.",
-          "suggestion": "Confirm if these are necessary and remove if not."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tags <1> and </1> are inconsistent with the English content's use of `<1>` and `</1>`. While the content itself is accurate, the tags used should match the original.",
-          "suggestion": "Change the tags from <1> and </1> to `<1>` and `</1>` to match the English formatting."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

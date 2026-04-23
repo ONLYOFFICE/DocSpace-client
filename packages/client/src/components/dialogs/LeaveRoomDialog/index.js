@@ -30,6 +30,7 @@ import { Button } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import { ShareAccessRights } from "@docspace/shared/enums";
 
 const LeaveRoomDialog = (props) => {
   const {
@@ -40,6 +41,7 @@ const LeaveRoomDialog = (props) => {
     setChangeRoomOwnerIsVisible,
     isRoomOwner,
     isAIAgent,
+    isFormFiller,
     onLeaveRoomAction,
   } = props;
 
@@ -53,8 +55,7 @@ const LeaveRoomDialog = (props) => {
       onClose();
     } else {
       setIsLoading(true);
-      await onLeaveRoomAction(t, isRoomOwner);
-
+      await onLeaveRoomAction(t, isRoomOwner, isFormFiller);
       setIsLoading(false);
       onClose();
     }
@@ -87,18 +88,35 @@ const LeaveRoomDialog = (props) => {
 
   const descriptionText = isAIAgent ? agentDescription : roomDescription;
 
+  const showFormFillingWarning = isFormFiller && !isAIAgent && !isRoomOwner;
+
+  const okButtonLabel = isRoomOwner
+    ? t("Files:AssignOwner")
+    : showFormFillingWarning
+      ? t("Files:LeaveButton")
+      : t("Common:OKButton");
+
   return (
     <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
       <ModalDialog.Header>{titleText}</ModalDialog.Header>
       <ModalDialog.Body>
         <div className="modal-dialog-content-body">
-          <Text>{descriptionText}</Text>
+          {showFormFillingWarning ? (
+            <>
+              <Text>{t("Files:LeaveRoomFormFillingWarning")}</Text>
+              <Text style={{ marginTop: "12px" }}>
+                {t("Files:AreYouSureWantLeaveRoom")}
+              </Text>
+            </>
+          ) : (
+            <Text>{descriptionText}</Text>
+          )}
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
           key="OKButton"
-          label={isRoomOwner ? t("Files:AssignOwner") : t("Common:OKButton")}
+          label={okButtonLabel}
           size="normal"
           primary
           scale
@@ -141,6 +159,8 @@ export default inject(
 
     const isRoomOwner = folderItem?.createdBy?.id === user.id;
     const isAIAgent = folderItem?.isAIAgent;
+    const isFormFiller =
+      folderItem?.access === ShareAccessRights.FormFilling;
 
     return {
       visible,
@@ -148,6 +168,7 @@ export default inject(
       setChangeRoomOwnerIsVisible,
       isRoomOwner,
       isAIAgent,
+      isFormFiller,
       onLeaveRoomAction: filesActionsStore.onLeaveRoom,
     };
   },

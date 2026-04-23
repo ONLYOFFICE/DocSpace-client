@@ -3,7 +3,7 @@
   "content": "Create, edit, or upload PDF forms in the room. Invite members and guests to fill out forms. Review completed copies, and analyze data automatically collected in a spreadsheet.",
   "content_en_sha1_hash": "3f433931a99e6abfe2cb30be0b3a3d6c9a3f30a0",
   "created_at": "2026-03-31T15:18:12.985Z",
-  "updated_at": "2026-03-31T15:19:05.634Z",
+  "updated_at": "2026-04-08T08:54:03.579Z",
   "comment": {
     "text": "This text describes a room type dedicated to form management. It's used to display a brief explanation of the \"Form Room\" type, outlining features like form creation, member invites, and automated data analysis. This description appears in the UI to help users understand the purpose of different room types.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Tamadlanmış' is a misspelling of 'Tamamlanmış' (completed). 'Tamadlanmış' is not a valid word in Azerbaijani and changes the professional quality of the UI.",
+          "suggestion": "Otaqda PDF formları yaradın, redaktə edin və ya yükləyin. Üzvləri və qonaqları formları doldurmaq üçün dəvət edin. Tamamlanmış nüsxələri nəzərdən keçirin və cədvəldə avtomatik toplanmış məlumatları təhlil edin."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -51,7 +57,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The first sentence in German is grammatically broken and changes the meaning. 'Erstellen, bearbeiten oder PDF-Formulare im Raum hochladen' translates to 'Create, edit or upload PDF forms in the room', but the word 'oder' (or) is placed such that it implies you can only do one of the three, and the verb structure is incomplete/incorrect for a list of actions.",
+          "suggestion": "PDF-Formulare im Raum erstellen, bearbeiten oder hochladen. Mitglieder und Gäste einladen, Formulare auszufüllen. Überprüfen Sie fertiggestellte Kopien und analysieren Sie automatisch in einer Tabelle gesammelte Daten."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -111,7 +123,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Ielikt' (to place/insert) is used instead of 'Ielūdziet' (to invite). Also, 'izrakstītājs' (scribe/writer) is used instead of 'rīkotnē' (spreadsheet), which completely changes the meaning of the last sentence.",
+          "suggestion": "Izveidojiet, rediģējiet vai augšupielādējiet PDF formas telpā. Ielūdziet dalībniekus un viesus, lai viņi aizpildītu formas. Pārskatiet pabeigtās kopijas un analizējiet automātiski savāktos datus rīkotnē."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -153,19 +171,42 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The first sentence in Sinhala is grammatically incomplete and functions as a fragment ('To create, edit, or upload...') rather than a complete instruction/description ('Create, edit, or upload...'). This changes the tone from a feature description to an infinitive phrase.",
+          "suggestion": "කාමරය තුළ PDF පෝරම නිර්මාණය කරන්න, සංස්කරණය කරන්න හෝ උඩුගත කරන්න. සාමාජිකයින් සහ අමුත්තන් පෝරම පුරවන්නට ආරාධනා කරන්න. සම්පූර්ණ කරන ලද පිටපත් සමාලෝචනය කර, ස්ප්‍රෙඩ්ෂීට් එකක ස්වයංක්‍රීයව එකතු කරන ලද දත්ත විශ්ලේෂණය කරන්න."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'naháňte' is a mistranslation of 'upload'. In Slovak, 'naháňat' means 'to chase' or 'to hunt', whereas 'upload' should be 'nahrať'.",
+          "suggestion": "Vytvárajte, upravujte alebo nahrávajte PDF formuláre v priestore. Pozvajte členov a návštevníkov, aby vyplnili formuláre. Prehliadajte dokončené kópie a analyzujte údaje automaticky zhromaždené v tabuľke."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Zapíšte' is a mistranslation of 'Invite'. 'Zapíšte' means 'to write down' or 'to register', whereas 'Invite' should be 'Pozvajte'.",
+          "suggestion": "Vytvárajte, upravujte alebo nahrávajte PDF formuláre v priestore. Pozvajte členov a návštevníkov, aby vyplnili formuláre. Prehliadajte dokončené kópie a analyzujte údaje automaticky zhromaždené v tabuľke."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Invite' was translated as 'Natisnite' (Print), which completely changes the meaning of the sentence.",
+          "suggestion": "Ustvarjajte, uredite ali nalagajte PDF obrazce v sobi. Vabite člane in goste, da izpolnjujejo obrazce. Preverite dokončane kopije in analizirajte podatke, ki so avtomatsko zbrani v tabeli."
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {

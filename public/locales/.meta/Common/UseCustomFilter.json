@@ -3,7 +3,7 @@
   "content": "use custom filter",
   "content_en_sha1_hash": "b37de48bcfb125d7817951f1376561bed347cc4c",
   "created_at": "2025-08-26T11:14:54.775Z",
-  "updated_at": "2026-02-19T13:36:33.114Z",
+  "updated_at": "2026-04-07T20:41:26.986Z",
   "comment": {
     "text": "This text appears on a button or control related to sharing functionality. It indicates the option to apply a custom filter when sharing content. Translators should ensure the meaning conveys the ability to use a personalized filter setting.",
     "is_auto": true,
@@ -81,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"օգտագործել հատուկ ֆիլտր\" is understandable, a more accurate and natural translation of \"use custom filter\" in Armenian would be something like \"գործի դնել հատուկ ֆիլտր\" or \"կիրառել հատուկ ֆիլտր\". \"Օգտագործել\" can imply a more general use, whereas \"գործի դնել\" or \"կիրառել\" more closely represents the act of utilizing a specific filter.",
-          "suggestion": "գործի դնել հատուկ ֆիլտր"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -147,18 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"folosire\" is technically correct, \"utilizare\" is more commonly used and preferred for \"use\" in this context. \"folosire\" can sound a bit archaic or less natural.",
-          "suggestion": "utilizare filtru particularizat"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While \"particularizat\" isn't incorrect, \"personalizat\" more closely aligns with the nuance of \"custom\" in this context, referring to user-defined rather than uniquely detailed.",
-          "suggestion": "utilizare filtru personalizat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -194,13 +177,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'филтер' is a transliteration and not the standard Serbian word for 'filter'.",
-          "suggestion": "користи прилагођени филтер (corrects transliteration)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

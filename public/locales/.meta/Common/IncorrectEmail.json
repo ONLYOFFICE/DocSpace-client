@@ -3,7 +3,7 @@
   "content": "Incorrect email",
   "content_en_sha1_hash": "86ff68d5318bfa2b6198c429d79f7c00583764a9",
   "created_at": "2025-05-19T21:30:45.855Z",
-  "updated_at": "2026-02-19T13:36:32.320Z",
+  "updated_at": "2026-04-10T08:21:04.299Z",
   "comment": {
     "text": "This translation key is used to display an error message when a user attempts to submit an email address that is empty or invalid. It appears as an error message in dialog boxes and forms where users enter their email addresses, such as in the \"Change Email\" dialog. The translator should provide a generic error message for incorrect or missing email input.",
     "is_auto": true,
@@ -20,12 +20,6 @@
       "file_path": "/packages/client/src/components/dialogs/ChangeEmailDialog/index.js",
       "line_number": 110,
       "context": "const { isEmailValid, email, emailErrors } = this.state;\n const { t, user } = this.props;\n \n if (email.trim() === \"\") {\n return this.setState({\n errorMessage: t(\"Common:IncorrectEmail\"),\n hasError: true,\n });\n }\n \n if (isEmailValid) {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/SalesDepartmentRequestDialog/index.js",
-      "line_number": 133,
-      "context": "case ErrorKeys.SpacesInLocalPart:\n return t(\"Common:SpacesInLocalPart\");\n case ErrorKeys.MaxLengthExceeded:\n return t(\"Common:MaxLengthExceeded\");\n case ErrorKeys.IncorrectEmail:\n return t(\"Common:IncorrectEmail\");\n case ErrorKeys.ManyEmails:\n return t(\"Common:ManyEmails\");\n case ErrorKeys.EmptyEmail:\n return t(\"Common:EmptyEmail\");\n default:",
       "module": "/packages/client"
     },
     {
@@ -60,7 +54,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Etibarsız elektron poçt' doesn't accurately convey the meaning of 'Incorrect email'. 'Etibarsız' means 'unreliable' or 'untrustworthy', which isn't the intended meaning. 'Incorrect' implies an error in the email address itself.",
+          "description": "The word 'Etibarsız' means 'unreliable' or 'untrustworthy' (as in a source or a person), whereas 'Incorrect' in the context of an email address should mean 'invalid' or 'wrong'.",
           "suggestion": "Yanlış elektron poçt"
         }
       ],
@@ -75,25 +69,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Nesprávná emailová adresa\" is a more verbose translation than the English \"Incorrect email\". A more concise and natural Czech translation would be \"Neplatná emailová adresa\" or simply \"Neplatná email\".",
-          "suggestion": "Neplatná emailová adresa"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Ungültige E-Mail-Adresse\" is technically correct, \"Incorrect email\" generally translates better to \"Falsche E-Mail-Adresse\". \"Ungültige\" implies the email address is not valid in some format, while \"falsche\" conveys the intended meaning of a user entering the wrong email.",
-          "suggestion": "Falsche E-Mail-Adresse"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -101,9 +83,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The Greek word 'Άκυρα' is technically correct but may be more appropriately translated to 'Λάθος' (Lathos) for a more natural feel in this context. 'Άκυρα' is often used for formally invalid or void documents.",
-          "suggestion": "Λάθος email"
+          "type": "incorrect_translation",
+          "description": "The word 'Άκυρα' is grammatically incorrect in this context. 'Email' is typically treated as a neuter noun in Greek, so the adjective should be 'Άκυρο'. Additionally, 'Άκυρα' sounds like a plural form or a misspelling, which fails to convey the standard error message meaning.",
+          "suggestion": "Λανθασμένο email"
         }
       ],
       "approved_at": null
@@ -111,13 +93,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Dirección de email incorrecta' is understandable, a more natural and common translation of 'Incorrect email' in Spanish would be 'Correo electrónico incorrecto'. 'Dirección de email' is technically correct but sounds slightly formal or technical in this context.",
-          "suggestion": "Correo electrónico incorrecto"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -135,13 +111,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Սխալ էլ․ հասցե' is a literal translation but not the most natural phrasing. A more idiomatic translation for 'Incorrect email' would be something like 'Միջնորդում էլ․ փոստարկուղի' or 'Սխալ էլեկտրոնային փոստարկուղի'.",
-          "suggestion": "Consider 'Միջնորդում էլ․ փոստարկուղի' or 'Սխալ էլեկտրոնային փոստարկուղի'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -153,25 +123,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"メールが正しくない\" (meeru ga seishiku nai) literally translates to \"The email is not correct.\" While understandable, a more natural and accurate translation for \"Incorrect email\" would be something like \"メールアドレスが間違っています\" (meeru adoresu ga machigatte imasu) - 'The email address is wrong' or \"メールアドレスの入力が間違っています\" (meeru adoresu no nyuuryoku ga machigatte imasu) - 'The email address input is wrong'.",
-          "suggestion": "メールアドレスが間違っています (meeru adoresu ga machigatte imasu)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation '유효하지 않은 이메일입니다' is a literal translation of 'Invalid email' rather than 'Incorrect email'. While conveying a similar meaning, it lacks the direct correspondence with the original English phrase.",
-          "suggestion": "Consider alternative translations that more closely reflect 'Incorrect email', such as '잘못된 이메일입니다' (jalmotdoen imeilimnida) or '오류 있는 이메일입니다' (oreuyo inneun imeilimnida)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -183,13 +141,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Nepareiza e-pasta adrese\" is technically correct, a more natural and common translation of \"Incorrect email\" in Latvian would be \"Nepareizs e-pasts\". \"E-pasta adrese\" is more specific (email address) than the original English, which is a more general 'incorrect email'.",
-          "suggestion": "Nepareizs e-pasts"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -219,13 +171,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Adresa de e-mail nu este valabilă' is a more verbose translation of 'Incorrect email'. While grammatically correct, it doesn't directly convey the brevity of the original English phrase. A more direct translation could be 'Email incorectă'.",
-          "suggestion": "Email incorectă"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -240,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'වැරදි වි-තැපෑලකි' while understandable, isn't the most natural or common way to say 'Incorrect email' in Sinhala. A more accurate and common translation would be 'මි-සමාන වි-තැපෑලකි' (misaamana vithaepaaḷakiyi).",
-          "suggestion": "මි-සමාන වි-තැපෑලකි (misaamana vithaepaaḷakiyi)"
+          "description": "The Sinhala translation 'වැරදි වි-තැපෑලකි' translates to 'is a wrong email' (a complete sentence), which sounds unnatural for a UI error message. In UI contexts, 'Incorrect email' should be a noun phrase like 'වැරදි විද්‍යුත් තැපෑල' or 'වැරදි ඊමේල් ලිපිනය'.",
+          "suggestion": "වැරදි විද්‍යුත් තැපෑල"
         }
       ],
       "approved_at": null
@@ -261,13 +207,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Нетачан емаил' is a literal transliteration of 'Incorrect email'. While understandable, it's not the most natural way to express this in Serbian. A more idiomatic translation would be 'Неисправан емаил' or 'Невалидан емаил'.",
-          "suggestion": "Неисправан емаил"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -295,6 +235,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

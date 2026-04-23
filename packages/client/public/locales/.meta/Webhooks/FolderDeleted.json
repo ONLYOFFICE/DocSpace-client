@@ -3,7 +3,7 @@
   "content": "Folder deleted",
   "content_en_sha1_hash": "80fa7315b0ebe24ae6902123622edb0e1f4c01f3",
   "created_at": "2025-05-19T21:30:49.752Z",
-  "updated_at": "2025-05-24T02:24:05.363Z",
+  "updated_at": "2026-04-08T20:00:35.490Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -146,33 +146,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ෆෝල්ඩරය' (folder) is spelled correctly.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'මකන' (deleted) is spelled correctly.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'ලදි' (past tense marker) is spelled correctly.",
-          "suggestion": null
-        },
-        {
-          "type": "grammar",
-          "description": "While grammatically correct, the phrasing 'ෆෝල්ඩරය මකන ලදි' can sound slightly awkward. A more natural phrasing might be 'ෆෝල්ඩරය මකවූ' or 'ෆෝල්ඩරය මකාලා'.",
-          "suggestion": "ෆෝල්ඩරය මකවූ"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English 'Folder deleted' is a simple statement of fact. The Sinhala translation 'ෆෝල්ඩරය මකන ලදි' (Folder was deleted) implies an ongoing or incomplete action, which is not the intended meaning. A more accurate translation would be a simple declarative statement.",
-          "suggestion": "ෆෝල්ඩරය මකලා"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -193,8 +167,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Фасцикла обрисана' is not the most natural or accurate translation of 'Folder deleted'. 'Фасцикла' is an archaic or formal term for folder, and 'обирисана' while technically correct, sounds stiff. A more common and natural translation would use 'mapa' for folder.",
-          "suggestion": "Мапа обрисана"
+          "description": "The word 'Фасцикла' is not a standard Serbian word for 'Folder'. The correct term is 'Овртик' or 'Фолдер'.",
+          "suggestion": "Фолдер је обрисан"
         }
       ],
       "approved_at": null
@@ -202,13 +176,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Fascikla' is misspelled. The correct spelling is 'Fasikla'.",
-          "suggestion": "Fasikla"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -230,6 +198,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

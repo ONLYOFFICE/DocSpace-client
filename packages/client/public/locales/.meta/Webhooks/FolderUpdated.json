@@ -3,7 +3,7 @@
   "content": "Folder updated",
   "content_en_sha1_hash": "35d20622dba94a642c7f8160c54fa9fa47f19ac1",
   "created_at": "2025-05-19T21:30:49.761Z",
-  "updated_at": "2025-05-24T02:22:23.848Z",
+  "updated_at": "2026-04-08T19:57:52.752Z",
   "comment": {
     "text": "The translation key \"FolderUpdated\" is used to display the phrase \"Folder updated\" when a folder's contents have changed. This message appears in UI elements related to file management and webhooks, likely in buttons or dialog windows that notify users of updates.",
     "is_auto": true,
@@ -153,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ෆෝල්ඩරය යාවත්කාලීන කරන ලදී.' is a literal translation of 'Folder updated'. While understandable, a more natural Sinhala phrasing would be preferable. The use of 'කරනු ලැබි' (karanu lebi) is somewhat formal and less common in this context.",
-          "suggestion": "ෆෝල්ඩරය යාවත්කාලීන විය."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -180,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Фасцикла ажурирана\" while technically understandable, is not the most natural or common translation for 'Folder updated'. 'Фасцикла' is a more formal or specialized term for 'folder'.",
-          "suggestion": "Измењен фолдер"
+          "description": "The word 'Фасцикла' is an incorrect/non-standard term for 'Folder' in Serbian. The standard term is 'Овртиљак' or 'Фолдер'.",
+          "suggestion": "Фолдер је ажуриран"
         }
       ],
       "approved_at": null
@@ -189,13 +183,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Fascikla' is likely a misspelling of 'Fasikla'.",
-          "suggestion": "Fasikla"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -217,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

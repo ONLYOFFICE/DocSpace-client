@@ -3,7 +3,7 @@
   "content": "Azərbaycan (Latın, Azərbaycan)",
   "content_en_sha1_hash": "fbfacc2c2fabab90a93ad2c5cffb14ce1081b224",
   "created_at": "2025-05-19T21:30:43.950Z",
-  "updated_at": "2025-05-24T01:18:45.164Z",
+  "updated_at": "2026-04-08T13:43:56.183Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -50,7 +50,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The Greek translation is identical to the English text and contains no Greek characters; it appears to be a copy-paste error of the source text.",
+          "suggestion": "Αζερμπαϊτζάν (Λατινικά, Αζερμπαϊτζάν)"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -146,7 +152,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is not in Sinhala; it is a direct copy of the Azerbaijani English source text.",
+          "suggestion": "අසර්බයිජානය (ලතින්, අසර්බයිජානය)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -192,6 +204,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

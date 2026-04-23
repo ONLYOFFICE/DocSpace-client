@@ -3,7 +3,7 @@
   "content": "Submit to Gallery",
   "content_en_sha1_hash": "bdafae9667e0dfca9267553c450423232243e0d4",
   "created_at": "2025-05-19T21:30:49.155Z",
-  "updated_at": "2025-10-14T03:04:33.650Z",
+  "updated_at": "2026-04-07T22:17:26.657Z",
   "comment": {
     "text": "The translation key \"SubmitToGallery\" is used to display the button label in a gallery submission context. When clicked, this action submits files to a gallery. It appears as a prominent button within a submit form gallery dialog.",
     "is_auto": true,
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ສະເບີມເຂົ້າຮຽນງານສະແດງ' is a literal translation but doesn't quite capture the nuance of 'Submit to Gallery'. It literally translates to something like 'Send to show work'. A more natural and accurate translation would better convey the action of submitting something for public display.",
-          "suggestion": "Consider alternatives like 'ສົ່ງສະແດງງານ' (song sadaeng ngan - submit work for display) or 'ສະເບີມເຂົ້າງານສະແດງ' (seum khao ngan sadaeng - submit to the exhibition)."
+          "description": "The Lao translation 'ສະເບີມເຂົ້າຮຽນງານສະແດງ' translates to 'Submit to attending an exhibition/show', which implies participating in an event rather than uploading/submitting files to a digital gallery. In a software context, 'Gallery' should refer to the collection of files.",
+          "suggestion": "ສົ່ງໄປທີ່ແກລເລີຣີ"
         }
       ],
       "approved_at": null
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'එකතුවට යොමන්න' while understandable, doesn't directly convey the meaning of 'Submit to Gallery'. 'එකතුවට යොමන්න' translates to 'Proceed to Collection' or 'Join the Collection'.  It lacks the nuance of 'submitting' something.",
-          "suggestion": "A more accurate translation might be something like 'ආරක්ෂකගාරයට ඉදිරිපත් කරන්න' (Aarakshagaarayaath idiripath karanna) which translates to 'Present to the Archive/Gallery', or 'පිළිගැනීමට ගැලරි වෙත යවන්න' (Piligennae imaa galeri wena) which means 'Send to Gallery for acceptance'."
+          "description": "The Sinhala translation 'එකතුවට යොමන්න' means 'Add to collection' or 'Submit to collection', but 'Gallery' in a software UI context is specifically a 'ගැලරිය' (Gallery). 'එකතුව' is too generic and can be misinterpreted as a general collection/set rather than the specific Gallery feature.",
+          "suggestion": "ගැලරියට යොමන්න"
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Поднеси у Галерију\" (Podnesi u Galeriju) literally translates to \"Present to Gallery\" or \"Submit to Gallery\" but has a slightly awkward phrasing in Serbian. While technically understandable, a more natural and common translation would be better.",
-          "suggestion": "Пошаљи у Галерију (Posalji u Galeriju) - This translates to \"Send to Gallery\" and is a more common and natural phrasing in Serbian."
+          "description": "The verb 'Поднеси' (Podnesi) is a literal translation of 'Submit' often used for documents or applications (like 'submitting a request'), but in the context of a UI button for uploading/sending files to a gallery, it sounds unnatural and incorrect. A more appropriate term for 'Submit' in a file/gallery context is 'Пошаљи' (Send) or 'Достави' (Deliver/Submit).",
+          "suggestion": "Пошаљи у Галерију"
         }
       ],
       "approved_at": null
@@ -195,13 +195,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Podnesi u Galeriju\" doesn't quite capture the meaning of \"Submit to Gallery\". \"Podnesi\" implies bringing something physically, while \"Submit\" implies a digital action. A better translation would convey the act of uploading or sending something.",
-          "suggestion": "Predaj u Galeriju"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -219,13 +213,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Gửi đến Bộ Sưu Tập\" is understandable, a more natural and commonly used translation for \"Submit to Gallery\" would be \"Đăng lên Bộ Sưu Tập\" or \"Tải lên Bộ Sưu Tập\". \"Gửi\" implies sending something, which isn't the primary action in this context.",
-          "suggestion": "Đăng lên Bộ Sưu Tập"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
@@ -234,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"提交至表单库\" (Tíjiāo zhì biǎodān kù) doesn't accurately convey the meaning of \"Submit to Gallery\". '表单库' typically refers to a form library or repository, not a gallery.  A gallery implies a collection of visual content.",
-          "suggestion": "Consider alternatives like \"提交到画廊\" (Tíjiāo dào huàláng) which directly translates to 'Submit to Gallery', or “发布至画廊” (Fābù zhì huàláng) which means 'Publish to Gallery', depending on the intended functionality."
+          "description": "The word 'Gallery' is translated as '表单库' (Form Library), which is incorrect. In the context of ONLYOFFICE DocSpace, 'Gallery' refers to a media/file gallery, not a collection of forms.",
+          "suggestion": "提交至图库"
         }
       ],
       "approved_at": null

@@ -756,22 +756,20 @@ const InviteInput = ({
           </DropDown>
         )}
 
-        <AccessSelector
-          className="add-manually-access"
-          t={t}
-          roomType={roomType}
-          defaultAccess={selectedAccess}
-          onSelectAccess={onSelectAccess}
-          containerRef={inputsRef}
-          isOwner={isOwner}
-          isAdmin={isAdmin}
-          isMobileView={isMobileView}
-          dataTestId="invite_panel_access_selector"
-          {...(roomId === -1 && {
-            isSelectionDisabled: isUserTariffLimit,
-            selectionErrorText: <PaidQuotaLimitError />,
-          })}
-        />
+        {roomId !== -1 ? (
+          <AccessSelector
+            className="add-manually-access"
+            t={t}
+            roomType={roomType}
+            defaultAccess={selectedAccess}
+            onSelectAccess={onSelectAccess}
+            containerRef={inputsRef}
+            isOwner={isOwner}
+            isAdmin={isAdmin}
+            isMobileView={isMobileView}
+            dataTestId="invite_panel_access_selector"
+          />
+        ) : null}
       </div>
     </>
   );

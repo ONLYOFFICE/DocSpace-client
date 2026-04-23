@@ -3,7 +3,7 @@
   "content": "The webhook will be deleted permanently.\nYou will not be able to undo this action.",
   "content_en_sha1_hash": "d2e29d4502234f1509e66bd661e2e021ba35e634",
   "created_at": "2025-05-19T21:30:49.681Z",
-  "updated_at": "2025-05-24T02:31:39.332Z",
+  "updated_at": "2026-04-08T20:33:39.232Z",
   "comment": {
     "text": "This translation key is used for a warning message that appears when a user attempts to delete a webhook. The message informs them of the permanent nature of the deletion and prevents them from undoing the action. It is displayed in a modal dialog when the \"Delete\" button is clicked in the Delete Webhook Dialog component.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"geri qaytara bilməzsiniz\" is a literal translation of \"cannot undo\" but sounds slightly unnatural in Azerbaijani for this context. A more natural phrasing would be \"Bu hərəkəti arxa keçirməyəcəksiniz\" or \"Bu hərəkəti ləğv etməyəcəksiniz\".",
-          "suggestion": "Webhook həmişəlik silinəcək. Bu hərəkəti arxa keçirməyəcəksiniz."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -87,18 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'webhook' is transliterated as 'Webhook-ը'. While technically acceptable, it's more common to simply use 'վեբհուքը' for consistency and readability.",
-          "suggestion": "վեբհուքը"
-        },
-        {
-          "type": "grammar",
-          "description": "The Armenian sentence structure 'Դուք չեք կարողանա հետարկել այս գործողությունը:' is grammatically correct, but slightly formal. A more conversational and natural phrasing could improve user experience.",
-          "suggestion": "Դուք չեք կարող հետ դառնալ այս գործողությունը:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -128,18 +111,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term \"Tīmekļa aizķere\" is not the correct translation of 'webhook'. The accurate term would be 'webhook' or a descriptive phrase like 'vietnes atbalstības saņēmējs'.",
-          "suggestion": "Replace \"Tīmekļa aizķere\" with \"webhook\" or \"vietnes atbalstības saņēmējs\"."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While the rest of the translation is understandable, 'neatgriezeniski izdzēsta' is a bit clunky. A more natural phrasing could improve readability.",
-          "suggestion": "Consider \"tiks neatgriezeniski izdzēsts\" or \"tiks izdzēsts bez atgriešanas iespējas\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -169,18 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'șters' (deleted) is a bit abrupt. 'Eliminat' (removed) or 'înlăturat' (removed) might be more appropriate for a user-facing message in a professional context.",
-          "suggestion": "Webhook-ul va fi eliminat definitiv."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Această acțiune nu poate fi anulată' is technically correct, a more user-friendly phrasing would emphasize the permanence and loss of data.",
-          "suggestion": "Nu puteți anula această acțiune."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -240,13 +201,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation uses a full stop/period at the end of each sentence. While acceptable, it might be more consistent with typical UI text to use an ellipsis (...) instead, especially in a warning message. This is stylistic but improves readability in some contexts.",
-          "suggestion": "此 webhook 将被永久删除。... 您无法撤消此操作..."
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

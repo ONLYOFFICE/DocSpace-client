@@ -3,7 +3,7 @@
   "content": "Profile",
   "content_en_sha1_hash": "ff4fc0276e960c348647b647235f68200887c9d2",
   "created_at": "2025-05-19T21:30:47.037Z",
-  "updated_at": "2026-02-19T13:36:32.750Z",
+  "updated_at": "2026-04-08T03:43:30.626Z",
   "comment": {
     "text": "This translation key is used for the label of a permission group that corresponds to the OAuth profile. It appears in a UI element related to portal settings and is intended to be displayed as \"Profile\" for users. Translators should provide a localized version of this phrase for their respective languages.",
     "is_auto": true,
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຂໍ້ມູນທັງໝົດຂອງເຈົ້າ\" translates to \"all your data\" or \"all of your information\", which is not an accurate translation of \"Profile\". A profile typically refers to a summary of a user's information, not the data itself.",
-          "suggestion": "A more accurate translation would depend on the specific context. Possible suggestions include: \"ຂໍ້ມູນສ່ວນຕົວ\", \"ຂໍ້ມູນສະມາຊິກ\", \"ລາຍການຂໍ້ມູນ\", or a more contextualized equivalent depending on the platform's terminology."
+          "description": "The Lao translation 'ຂໍ້ມູນທັງໝົດຂອງເຈົ້າ' means 'All of your information', which is a descriptive sentence rather than the concise noun 'Profile' required for a UI label/permission group name.",
+          "suggestion": "ໂປຣໄຟລ໌"
         }
       ],
       "approved_at": null
@@ -213,13 +213,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'个人资料' is a general term for 'profile' and is often used. However, depending on the context, a more precise translation might be warranted. For example, if it's specifically referring to an OAuth profile, a term like 'OAuth 个人资料' or a more technical equivalent might be preferable for clarity.",
-          "suggestion": "Consider 'OAuth 个人资料' or a more contextually accurate term if the context is specifically OAuth profiles."
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "Every day",
   "content_en_sha1_hash": "3b2eb5131055ad07ac1d08de2f11f900286a51b5",
   "created_at": "2025-05-19T21:30:45.130Z",
-  "updated_at": "2025-09-07T07:53:15.440Z",
+  "updated_at": "2026-04-08T10:09:08.394Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Every day\" in various contexts within the application, likely as a frequency option for automated backup schedules. It appears on a category page where users can set up data management backups.",
     "is_auto": true,
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"În ficare zi\" is not the most natural or common translation of \"Every day.\" While technically correct, it sounds a bit formal and less idiomatic. A more common and natural translation would be \"Zilnic\".",
-          "suggestion": "Zilnic"
+          "description": "The Romanian translation contains a typo: 'ficare' instead of 'fiecare'. 'În ficare zi' is nonsensical; it should be 'În fiecare zi'.",
+          "suggestion": "În fiecare zi"
         }
       ],
       "approved_at": null
@@ -235,6 +235,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

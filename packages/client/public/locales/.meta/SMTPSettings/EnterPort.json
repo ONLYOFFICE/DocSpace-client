@@ -3,7 +3,7 @@
   "content": "Enter port",
   "content_en_sha1_hash": "2a63f0e8e10f2911346eb8d0e210209dec06d29b",
   "created_at": "2025-05-19T21:30:53.300Z",
-  "updated_at": "2026-02-19T13:36:32.864Z",
+  "updated_at": "2026-04-08T21:58:08.821Z",
   "comment": {
     "text": "\"Used as a placeholder text in a text input field within a custom settings component for an SMTP settings page.\"",
     "is_auto": true,
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເຂົ້າຜອດ\" literally translates to 'enter hole' or 'enter tunnel'. It doesn't accurately convey the meaning of 'Enter port' in the context of SMTP settings, which refers to a network port number. A more appropriate translation would focus on the concept of providing or inputting a port number.",
-          "suggestion": "ປ້ອນຈຸດຂ່າວ (pòn jut khāo) - meaning 'enter port number' or ສະຖາປົກອນຈຸດຂ່າວ (satapakon jut khāo) - meaning 'specify/set port number'."
+          "description": "The Lao translation 'ເຂົ້າຜອດ' is a phonetic transliteration of 'Enter port' that sounds like 'Enter a hole/gap' or is nonsensical in this context. In technical terms, 'Port' (network port) should be referred to as 'ພອດ' (transliterated) or 'ຊ່ອງທາງການເຊື່ອມຕໍ່', and 'Enter' (as in inputting data) should be 'ປ້ອນ'.",
+          "suggestion": "ປ້ອນພອດ"
         }
       ],
       "approved_at": null
@@ -135,13 +135,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Introduzir porta\" is a literal translation and not the typical phrasing for a field label requesting a port number. It sounds awkward in Portuguese.",
-          "suggestion": "Digite a porta"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -153,13 +147,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Introduceți numărul de port' is a bit formal for a user interface prompt. A more natural and user-friendly translation would be preferred.",
-          "suggestion": "Introduce portul"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -174,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'තොට ඇතුල් කරන්න' is a literal translation of 'port' as 'gate' and 'enter'. The intended meaning of 'Enter port' refers to providing a numerical port number. A more accurate translation would reflect that.",
-          "suggestion": "ඇතුල් කරන්නාවූ ටෝකට්getNumber"
+          "description": "The Sinhala translation uses 'තොට' (thota), which means 'port' in the sense of a harbor/maritime port. In a technical/networking context (SMTP settings), 'port' refers to a communication endpoint, which should be transliterated or translated differently to avoid confusion with a physical harbor.",
+          "suggestion": "පෝට් එක ඇතුළත් කරන්න"
         }
       ],
       "approved_at": null
@@ -189,7 +177,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Vnesi vrata' means 'Enter doors' (physical doors), whereas the context requires 'port' in a networking/technical sense.",
+          "suggestion": "Vnesite port"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -201,25 +195,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation \"Unesi port\" is not the most natural or accurate translation of \"Enter port\". \"Unesi\" means \"enter\" in the sense of inputting, but in the context of a port number, a more natural phrasing would be 'Upiši port' or 'Odredi port'.",
-          "suggestion": "Upiši port"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Bağlantı noktasını girin\" is understandable, a more natural and common translation of 'Enter port' in this context (SMTPSettings) would be 'Portu girin'. 'Bağlantı noktasını' implies a more general connection point, whereas 'Portu' directly refers to the port number.",
-          "suggestion": "Portu girin"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -235,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

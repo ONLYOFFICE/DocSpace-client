@@ -3,7 +3,7 @@
   "content": "Document management",
   "content_en_sha1_hash": "24950bb532a5d93538689a3039a5e3b8266d0a27",
   "created_at": "2025-05-26T07:15:42.596Z",
-  "updated_at": "2025-08-04T07:30:01.655Z",
+  "updated_at": "2026-04-08T11:51:59.944Z",
   "comment": {
     "text": "The \"DocumentManagement\" translation key is used to display the content of a document management system. It appears in an About dialog as part of a component's title and is likely used to provide a brief description or name for the document management feature.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Bulgarian translation 'Управление на документа' means 'Management of the document' (singular), whereas the English 'Document management' refers to the general process or system of managing documents (plural/abstract).",
+          "suggestion": "Управление на документи"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -171,13 +177,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation uses the singular 'document' (документом) instead of the plural 'documents' (документима), which changes the meaning from a general system feature to managing a single specific document.",
+          "suggestion": "Управљање документима"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation uses the singular 'dokumentom' (with a document), whereas the English 'Document management' refers to the general concept of managing documents (plural/uncountable).",
+          "suggestion": "Upravljanje dokumentima"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -202,6 +220,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Albanian translation uses the singular 'dokumentit' (of the document), whereas the English source uses the plural 'Document management' (management of documents). In a UI context for a system, it should be plural.",
+          "suggestion": "Menaxhimi i dokumenteve"
+        }
+      ],
       "approved_at": null
     }
   }

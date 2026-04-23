@@ -3,7 +3,7 @@
   "content": "Archives",
   "content_en_sha1_hash": "a50710e773e144dc2bef188e769e70476bfa5af3",
   "created_at": "2025-05-19T21:30:43.070Z",
-  "updated_at": "2026-03-31T15:18:46.329Z",
+  "updated_at": "2026-04-08T16:48:01.532Z",
   "comment": {
     "text": "This translation key is used for the label \"Archives\" in a filter dropdown menu, likely found on a page or button related to document or file management. It appears in the UI when filtering by type and selecting \"ArchiveOnly\". The translator should consider how this term will be displayed to users.",
     "is_auto": true,
@@ -75,25 +75,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The singular form 'Archive' is used for the English plural 'Archives'. The appropriate German translation would depend on the intended meaning (e.g., 'Archive' for a single archive, 'Archive' for a collection of archives, or 'Archiv' for a more formal/official context).",
-          "suggestion": "Consider 'Archiv', 'Archive' (for a collection) or 'Archiv' (formal) depending on the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Αρχειοθετήσεις' is a valid Greek word, it doesn't directly translate to 'Archives'. It more accurately means 'archivings' or 'recordings for archiving'. 'Archives' implies a collection or repository of historical records, which could be better represented by terms like 'Αρχεία' (Archeia) or 'Αρχειακό υλικό' (Archeiako yliko).",
-          "suggestion": "Consider 'Αρχεία' (Archeia) for a more direct translation of 'Archives', or 'Αρχειακό υλικό' (Archeiako yliko) for 'archival material'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -144,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຮວບຮວມ\" (ruap ruam) means 'collect' or 'assemble', not 'archives'. 'Archives' implies a collection of historical records, which requires a different nuance.",
-          "suggestion": "Consider translations like \"ເອກະສານບັນທຶກ\" (ekasan bantuek - record documents) or \"ຫ້ອງເອກະສານ\" (hong ekasan - document room), depending on the specific context."
+          "description": "The Lao word 'ຮວບຮວມ' means 'to collect' or 'to gather' (a verb). In the context of a UI filter for 'Archives' (a noun referring to stored files/records), the translation is grammatically incorrect and changes the meaning from a category of files to an action.",
+          "suggestion": "ສາງເອກະສານ"
         }
       ],
       "approved_at": null
@@ -177,7 +165,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "In the context of a filter for 'ArchiveOnly', 'Archives' refers to archived items/records. In Portuguese, 'Arquivos' usually means 'Files'. The correct term for 'Archives' (as in stored/archived data) is 'Arquivos' in some contexts, but when distinguishing from 'Files' (which are also 'Arquivos'), 'Arquivados' or 'Arquivos (Arquivados)' is clearer. However, more critically, 'Arquivos' is the standard translation for 'Files'. If the filter is meant to show 'Archived' items, 'Arquivados' is the correct term to avoid confusion with 'Files'.",
+          "suggestion": "Arquivados"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -198,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"සංරක්‍ෂිත\" (Sanrakshita) translates to 'protected' or 'preserved,' not 'archives.' 'Archives' implies a collection of historical records, which requires a more specific term.",
-          "suggestion": "Consider using \"ලේඛන ගබඩාව\" (Lekana Gabadawa) which means 'records archive' or a similar term that conveys the meaning of 'archives.'"
+          "description": "The Sinhala word 'සංරක්‍ෂිත' means 'Protected' or 'Preserved'. In the context of a file management filter (Archives), it should refer to a collection of stored records/files.",
+          "suggestion": "ලේඛනාගාර"
         }
       ],
       "approved_at": null
@@ -219,25 +213,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Архиве\" is in the genitive singular case. \"Archives\" as a plural noun, likely requires the nominative plural form.",
-          "suggestion": "Архиве should be changed to Архиви."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Latin) translation 'Arhive' is a misspelling of 'Arhiva'. While it's recognizable, it's not the correct spelling.",
-          "suggestion": "Arhiva"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -259,6 +241,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

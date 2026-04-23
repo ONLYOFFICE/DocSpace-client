@@ -2,7 +2,6 @@
   "AuthViaNTLM": "Аутентификация с помощью NTLM",
   "EnableSSL": "Использовать SSL",
   "EnterDomain": "Введите домен",
-  "EnterEmail": "Введите email",
   "EnterLogin": "Введите логин",
   "EnterPort": "Введите порт",
   "Host": "Хост",

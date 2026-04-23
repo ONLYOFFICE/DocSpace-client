@@ -3,7 +3,7 @@
   "content": "POST response header",
   "content_en_sha1_hash": "7f2adfe37c167c810ce7ffd4e55249c87d28d23e",
   "created_at": "2025-05-19T21:30:49.812Z",
-  "updated_at": "2026-02-19T13:36:32.821Z",
+  "updated_at": "2026-04-08T19:25:24.904Z",
   "comment": {
     "text": "This translation key is used to display the label \"Response Post Header\" in a UI component, specifically in the details section of webhook event details. It appears as an h3 header element and helps to identify the response headers of a POST request.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ترويسة طلب POST' while containing relevant terms, doesn't accurately convey the meaning of 'POST response header'. 'ترويسة' generally means 'header' but 'طلب POST' is not the most natural way to describe a 'POST request'. A more accurate translation would focus on the response aspect.",
-          "suggestion": "رأس استجابة POST (ra's istijabat POST)"
+          "description": "The Arabic translation says 'POST request header' (ترويسة طلب POST) instead of 'POST response header' (ترويسة استجابة POST). It incorrectly identifies the header as part of the request rather than the response.",
+          "suggestion": "ترويسة استجابة POST"
         }
       ],
       "approved_at": null
@@ -45,13 +45,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Заглавие на POST отговор' is a literal translation but lacks the nuance of 'response header'. It could be improved to better reflect the technical meaning.",
-          "suggestion": "Consider 'POST отговор - заглавие' or 'Заглавен ред на POST отговор' for a more natural and accurate translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -120,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"ໂພສສ່ວນຫົວການຕອບສະໜອງ\" is a very literal and somewhat awkward translation of \"POST response header.\" A more natural Lao phrasing would be better.",
-          "suggestion": "Consider alternatives like \"ຫົວຂໍ້ການຕອບສະໜອງ POST\" or \"ສ່ວນຫົວຂອງການຕອບສະໜອງ POST\"."
+          "description": "The Lao translation 'ໂພສສ່ວນຫົວການຕອບສະໜອງ' is grammatically awkward and incorrectly structures the technical term. It translates more like 'Post head of response' rather than 'POST response header'. In a technical context, 'Header' should be treated as a specific term.",
+          "suggestion": "ສ່ວນຫົວການຕອບສະໜອງຂອງ POST"
         }
       ],
       "approved_at": null
@@ -171,13 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ශ්‍රීර්ෂකය' (shreershakaya) is a technically correct translation of 'header' but could be perceived as overly formal or complex for a technical context related to webhooks. A more accessible term might be preferred.",
-          "suggestion": "Consider using 'මුඛය' (mukha) which translates to 'mouth' or 'opening' and can be used to describe the header of a response, or a simpler term familiar to the target audience."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -189,42 +177,19 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"glava odgovora\" is technically correct, it's not the most natural or idiomatic translation of 'response header' in Slovenian technical contexts. It sounds a little literal.",
-          "suggestion": "Consider 'HTTP glava odgovora' or 'glava odgovora' (if context makes it clear it's an HTTP header)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Заглавље одговора POST захтева\" is overly literal and verbose. A more natural and concise translation would be better.",
-          "suggestion": "Заглавље POST одговора"
-        },
-        {
-          "type": "formatting",
-          "description": "The phrasing 'POST захтева' feels slightly awkward. Reordering or simplifying the words would improve readability.",
-          "suggestion": "POST одговора"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Zaglavlje odgovora POST zahteva' is overly literal and not the most natural way to express 'POST response header' in Serbian. It includes 'zahteva' which isn't essential.",
-          "suggestion": "Zaglavlje POST odgovora"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -239,7 +204,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Заголовок запиту POST' translates to 'Header of POST request', which is not the intended meaning of 'POST response header'. It incorrectly refers to a request header instead of a response header.",
+          "description": "The Ukrainian translation says 'POST request header' (Заголовок запиту POST) instead of 'POST response header' (Заголовок відповіді POST). In webhooks, the response header is the header sent back by the server, which is different from the request header.",
           "suggestion": "Заголовок відповіді POST"
         }
       ],
@@ -255,6 +220,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Titulli' means 'Title'. In a technical context regarding HTTP/Webhooks, 'Header' should be translated as 'Koka' or 'Header' (technical term), not 'Titulli'. 'Titulli i përgjigjes' means 'Response Title'.",
+          "suggestion": "Headeri i përgjigjes POST"
+        }
+      ],
       "approved_at": null
     }
   }

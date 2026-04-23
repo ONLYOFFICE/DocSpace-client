@@ -3,7 +3,7 @@
   "content": "Please try again later",
   "content_en_sha1_hash": "390ef05b923177694865bed8c67a2651f7f261aa",
   "created_at": "2025-05-19T21:30:55.114Z",
-  "updated_at": "2026-02-19T13:36:32.309Z",
+  "updated_at": "2026-04-07T19:35:05.103Z",
   "comment": {
     "text": "This translation key is used for an error message that appears on a form gallery screen, prompting users to try again later. The text \"Please try again later\" is displayed in a specific error view component and is translated using this key.",
     "is_auto": true,
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'المحاولة مرة أخرى لاحقاً' is a literal translation of 'Try again later'. While understandable, a more natural and common phrasing in Arabic (Saudi Arabia) would be 'حاول مرة أخرى لاحقاً' or 'يرجى المحاولة مرة أخرى لاحقاً'.",
-          "suggestion": "يرجى المحاولة مرة أخرى لاحقاً"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {

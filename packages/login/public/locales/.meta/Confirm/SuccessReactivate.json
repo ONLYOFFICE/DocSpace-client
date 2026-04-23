@@ -3,7 +3,7 @@
   "content": "Your account has been successfully reactivated. In 10 seconds you will be redirected to the <1>portal</1>.",
   "content_en_sha1_hash": "195e32502a9fca30b006e6c21cb6247dacd2348c",
   "created_at": "2025-05-19T21:30:57.398Z",
-  "updated_at": "2025-08-21T11:22:39.930Z",
+  "updated_at": "2026-04-07T19:35:05.246Z",
   "comment": {
     "text": "This translation key is used for a confirmation message that appears after account reactivation, guiding the user to the portal. It's displayed in the UI as part of a page continue dialog. The goal is to inform the user of their successful reactivation and redirect them to the portal within 10 seconds.",
     "is_auto": true,
@@ -45,13 +45,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'portal' is translated as 'prostor'. While 'prostor' can mean space or area, 'portal' in this context (referring to a website or application interface) is better translated as 'brána' or potentially 'platforma'. 'Prostor' doesn't convey the intended meaning of a digital entry point.",
-          "suggestion": "Consider translating 'portal' as 'brána' or 'platforma'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -105,30 +99,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"portal\" has been translated as \"{{productName}}\". This may not be the intended meaning. 'Portal' implies a gateway or access point.  While {{productName}} *could* represent that, it's too generic without more context. A more accurate translation would depend on what the 'portal' refers to (e.g., website, application, etc.).",
-          "suggestion": "Consider what the 'portal' refers to in the English content and translate accordingly. For example, if it's a website, you might use '웹사이트' (website). If it's an application, consider '애플리케이션'.  If it *is* the product name, ensure this is contextually appropriate."
-        },
-        {
-          "type": "formatting",
-          "description": "The `<1>` tags are present in both the English and Korean, but the content within the tags is different.  The English uses 'portal' while the Korean uses '{{productName}}'. While this could be intentional, it needs to be carefully reviewed to ensure consistency and accuracy.",
-          "suggestion": "Ensure the content within the formatting tags aligns with the English content's meaning and context. If '{{productName}}' is intended, clarify the purpose of using a variable."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word \"portal\" is translated as \"ປະຕູ\" which means \"door\". \"Portal\" implies a gateway or access point, which is a more accurate representation of the intended meaning.",
-          "suggestion": "ບັນຊີຂອງທ່ານໄດ້ຖືກເປີດໃຊ້ຄືນໃໝ່ສຳເລັດແລ້ວ. ໃນ 10 ວິນາທີທ່ານຈະຖືກໂອນໄປຫາ <1>ລະບົບປະຕູ</1>."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -140,25 +117,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'portal' has been translated to 'ruimte'. While 'ruimte' can mean 'space', in this context 'portal' likely refers to a website or platform, and a more accurate translation would be something like 'website', 'platform', or 'omgeving'.",
-          "suggestion": "Consider translating 'portal' to 'website', 'platform', or 'omgeving'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'portal' in the English content is not correctly translated. 'Portal' should be translated to 'bramy' or 'platformy' depending on the context.",
-          "suggestion": "Twoje konto zostało reaktywowane. Za 10 sekund nastąpi przekierowanie do <1>bramy</1>."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -188,30 +153,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Sinhala character '𑇪' (ra syllable) is used instead of a number '10'.",
-          "suggestion": "Replace '𑇪' with '10'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'portal' is translated as 'priestoru'. While 'priestor' can mean space or area, 'portal' in this context refers to an online platform or system. 'priestoru' is in the genitive case which is grammatically incorrect in this sentence.",
-          "suggestion": "Váš účet bol úspešne znovu aktivovaný. Po 10 sekundách budete presmerovaní do <1>portálu</1>."
-        },
-        {
-          "type": "formatting",
-          "description": "The tags <1> and </1> are maintained, which is correct. However, the term 'portál' should be capitalized as it is a proper noun.",
-          "suggestion": "Váš účet bol úspešne znovu aktivovaný. Po 10 sekundách budete presmerovaní do <1>Portálu</1>."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -223,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tags <1> and </1> are consistent between the English and Serbian translations.",
-          "suggestion": "No change needed."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -247,25 +189,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The verb 'будете' (budete) is incorrect in this context. It implies a future tense, but the redirection is happening immediately.",
-          "suggestion": "Вас переспрямують на <1>портал</1>."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'portal' has been translated as 'không gian'. While 'không gian' can mean 'space', in this context 'portal' refers to a specific online platform or system. A more accurate translation would consider terms like 'cổng' (gate/portal), 'nền tảng' (platform), or 'hệ thống'.",
-          "suggestion": "Consider alternatives like 'cổng' or 'nền tảng' depending on the specific context of the portal."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

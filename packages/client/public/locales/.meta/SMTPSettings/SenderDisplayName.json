@@ -3,7 +3,7 @@
   "content": "Sender Display Name",
   "content_en_sha1_hash": "2eea8d166574d677a663c6e1b76fc92de06fd18d",
   "created_at": "2025-05-19T21:30:53.308Z",
-  "updated_at": "2026-02-19T13:36:32.864Z",
+  "updated_at": "2026-04-08T21:46:29.451Z",
   "comment": {
     "text": "The \"SenderDisplayName\" translation key is used to display the sender's name or identifier. It appears in a custom settings component for SMTP integration and provides context for users to enter their name, typically displayed on outgoing emails.",
     "is_auto": true,
@@ -39,19 +39,19 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Екранно име на подателя' is a functional, but not the most natural or precise translation of 'Sender Display Name'. While 'Екранно име' (Screen Name) is understandable, it might not perfectly convey the concept of the name that appears in emails.",
-          "suggestion": "Показвано име на подателя"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation 'Zobrazit Jméno Odesílatele' translates to 'Show Sender Name' (an imperative verb phrase), whereas the English 'Sender Display Name' is a noun phrase representing a field label.",
+          "suggestion": "Displejové jméno odesílatele"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -63,25 +63,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Όνομα απεικόνισης αποστολέα' is a literal translation of 'Sender Display Name' but doesn't flow naturally in Greek. It sounds overly technical and literal.",
-          "suggestion": "A more natural and understandable translation would be 'Εμφανιζόμενο όνομα αποστολέα' or 'Όνομα εμφάνισης αποστολέα'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Nombre de remitente' is understandable, 'Sender Display Name' refers to the name that recipients see. A more accurate translation would convey that aspect. 'Nombre mostrado del remitente' or 'Nombre de visualización del remitente' are more precise.",
-          "suggestion": "Nombre mostrado del remitente"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -102,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Ուղարկողի էլփոստի հասցեն\" translates to \"Sender's email address\" instead of \"Sender Display Name\".",
-          "suggestion": "Ուղարկողի ցուցանակային անուն"
+          "description": "The Armenian translation means 'Sender's email address', whereas the English text is 'Sender Display Name'.",
+          "suggestion": "Ուղարկողի ցուցադրվող անունը"
         }
       ],
       "approved_at": null
@@ -131,9 +119,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ຊື່ຜູ້ສົ່ງ' literally translates to 'Sender Name' rather than 'Sender Display Name'. While close, it doesn't fully capture the meaning of 'Display Name', which implies the name shown to recipients.",
-          "suggestion": "Consider 'ຊື່ທີ່ຜູ້ສົ່ງສະແດງ' (Sue ti phu song sa daeng) which translates to 'Name that the sender displays' or a more context-dependent equivalent that conveys the purpose of a display name."
+          "type": "missing_content",
+          "description": "The translation 'ຊື່ຜູ້ສົ່ງ' means 'Sender Name', missing the 'Display' aspect of 'Sender Display Name'.",
+          "suggestion": "ຊື່ສະແດງຂອງຜູ້ສົ່ງ"
         }
       ],
       "approved_at": null
@@ -147,13 +135,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Zender Weergave Naam\" is a literal translation and doesn't quite capture the intended meaning of 'Sender Display Name'. It sounds somewhat awkward in Dutch. A more natural translation would focus on conveying the purpose of the name.",
-          "suggestion": "Opties voor verbetering: 'Naam die de verzender toont', 'Verzendernaam' or 'Verzender Naam'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -165,13 +147,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Nome do remetente a mostrar\" is not the most natural or common way to say \"Sender Display Name\" in Portuguese. While technically correct, it's a bit literal and clunky.",
-          "suggestion": "Consider \"Nome do Expedidor\" or \"Nome do Envio\" as more idiomatic alternatives. \"Nome do Remetente\" is also acceptable, but \"a mostrar\" is unnecessary and makes it less clear."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -183,13 +159,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Nume afișat expeditor\" is understandable, a more natural and accurate translation of \"Sender Display Name\" would be \"Numele expeditorului afișat\" or \"Nume expeditor afișat\".  The current translation feels slightly awkward in Romanian.",
-          "suggestion": "Numele expeditorului afișat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -201,19 +171,19 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"යවන්නාගේ ප්‍රදර්ශන නාමය\" is a literal translation and doesn't flow naturally in Sinhala. While technically correct, it's not the most common or idiomatic way to express 'Sender Display Name'.",
-          "suggestion": "Consider a more natural translation like \"මුද්‍රිත නාමය\" (Mudrita Namaya) or \"යවන අයගේ නාමය\" (Yavana Ayage Namaya)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'Zobraziť Meno odosielateľa' means 'Show Sender Name' (an action/verb), whereas the English 'Sender Display Name' is a noun phrase representing a field label.",
+          "suggestion": "Meno odosielateľa pre zobrazenie"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -228,13 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Дисплаy име посиљаоца\" is a transliteration and inaccurate. \"Display\" should be translated to something like \"Приказ\" or \"Показ\" depending on the desired nuance.",
-          "suggestion": "Приказ име посиљаоца"
-        },
-        {
-          "type": "spelling",
-          "description": "The word \"Дисплаy\" is a misspelling of \"Display\".",
-          "suggestion": "Приказ"
+          "description": "The translation uses 'посиљаоца' (amplifier/booster) instead of 'пошиљаоца' (sender), and contains a Latin character 'y' in the middle of a Cyrillic word.",
+          "suggestion": "Име пошиљаоца које се приказује"
         }
       ],
       "approved_at": null
@@ -242,25 +207,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Display ime posiljaoca\" is not the most natural or accurate rendering of \"Sender Display Name.\" \"Ime\" translates to 'name', but it feels somewhat literal and less idiomatic. A better translation would convey the purpose of the display name.",
-          "suggestion": "Display ime i prezime posiljaoca"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Gönderici Ekran İsmi\" is not the most natural or accurate translation of \"Sender Display Name\". While technically correct, it sounds somewhat awkward in Turkish. A more natural rendering would be \"Görünen Ad\" or \"Gönderici Adı\".",
-          "suggestion": "Görünen Ad"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -269,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Коротке ім'я відправника\" is not the most accurate representation of \"Sender Display Name\". While it translates to 'Short name of the sender,' the English term often refers to the name that recipients see when an email is sent. A more accurate translation would be something like 'Відображуване ім'я відправника' or 'Ім'я відправника для відображення'.",
-          "suggestion": "Відображуване ім'я відправника"
+          "description": "The translation 'Коротке ім'я' means 'Short name', which changes the meaning from 'Display Name' (the name shown to recipients) to a name with a length constraint.",
+          "suggestion": "Ім'я відправника, яке відображається"
         }
       ],
       "approved_at": null
@@ -282,6 +235,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

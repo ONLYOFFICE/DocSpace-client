@@ -36,6 +36,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 
 type InjectedProps = {
   isPayer?: boolean;
+  isPayerInfoLoaded?: boolean;
   walletCustomerEmail?: string;
   cardLinkedOnNonProfit?: boolean;
   cardLinkedOnFreeTariff?: boolean;
@@ -49,6 +50,7 @@ type InjectedProps = {
 
 const Warning = ({
   isPayer,
+  isPayerInfoLoaded,
   walletCustomerEmail,
   cardLinkedOnNonProfit,
   cardLinkedOnFreeTariff,
@@ -90,6 +92,14 @@ const Warning = ({
     typeof pathname === "string" &&
     pathname.includes("portal-settings/payments/services/");
 
+  const isPortalPaymentsRoute =
+    typeof pathname === "string" &&
+    pathname.includes("portal-settings/payments/portal-payments");
+
+  const isWalletRoute =
+    typeof pathname === "string" &&
+    pathname.includes("portal-settings/payments/wallet");
+
   React.useEffect(() => {
     if (!isBackupPaid || isNotPaidPeriod) return;
     if (!isBackupRoute || !isInited) return;
@@ -100,7 +110,7 @@ const Warning = ({
         <Trans
           t={t}
           i18nKey="ConnectService"
-          ns="Services"
+          ns="Common"
           components={{
             1: (
               <Link
@@ -136,7 +146,7 @@ const Warning = ({
 
       if (maxFreeBackups > 0) {
         try {
-          const backupText = t("Services:FreeBackupsPerMonth", {
+          const backupText = t("Common:FreeBackupsPerMonth", {
             value:
               backupsCount >= maxFreeBackups ? maxFreeBackups : backupsCount,
             maxValue: maxFreeBackups,
@@ -196,14 +206,19 @@ const Warning = ({
     if (warningText) setWarningText("");
   }, [isBackupRoute]);
 
-  if (isPaymentsServiceRoute && !isPayer) {
+  if (
+    (isPortalPaymentsRoute || isWalletRoute || isPaymentsServiceRoute) &&
+    !isPayer
+  ) {
+    if (!isPayerInfoLoaded) return null;
+
     return (
       <WarningComponent
         title={
           <Trans
             t={t}
-            i18nKey="OnlyPayerCanManageServices"
-            ns="Payments"
+            i18nKey="OnlyPayerCanManageSection"
+            ns="Common"
             components={{
               1: (
                 <Link
@@ -238,12 +253,13 @@ export default inject(
       cardLinkedOnFreeTariff,
       isBackupServiceOn,
     } = paymentStore;
-    const { walletCustomerEmail, isNotPaidPeriod } = currentTariffStatusStore;
+    const { walletCustomerEmail, isNotPaidPeriod, isPayerInfoLoaded } =
+      currentTariffStatusStore;
     const { isBackupPaid, maxFreeBackups } = currentQuotaStore;
     const { backupsCount, isInited } = backup;
-
     return {
       isPayer,
+      isPayerInfoLoaded,
       walletCustomerEmail,
       cardLinkedOnNonProfit,
       cardLinkedOnFreeTariff,

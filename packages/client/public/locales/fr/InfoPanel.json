@@ -2,6 +2,7 @@
   "AddedRoomTags": "Tags ajoutés.",
   "Administration": "Administration",
   "AgentRenamed": "Agent <1>«{{oldRoomTitle}}»</1> renommé en <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Voir les détails de {{aiAgents}} ici",
   "AndMoreLabel": "et <1>{{count}} plus</1>",
   "CreationDate": "Date de création",
   "Data": "Données",
@@ -44,7 +45,6 @@
   "FolderMovedCount": "Dossiers déplacés ({{count}}).",
   "FolderRenamed": "Dossier renommé.",
   "FoldersTrashMoveCompleted": "Dossiers déplacés vers {{sectionName}}.",
-  "FoldersTrashMoveCompletedCount": "Dossiers déplacés vers {{sectionName}} ({{count}}.",
   "FormCompletelyFilled": "Formulaire entièrement complété.",
   "FormPartiallyFilled": "Partie du formulaire remplie.",
   "FormStartedToFill": "Remplissage commencé.",
@@ -60,11 +60,14 @@
   "IndexChanged": "Index modifié",
   "ItemsSelected": "Éléments sélectionnés",
   "LastModifiedBy": "Dernière modification par",
+  "LastUpdateInfo": "Dernière mise à jour",
   "LifetimeEnds": "Fin de la durée de vie",
   "MembersEmptyScreenText": "Voir les détails des membres ici",
+  "NoAgent": "Aucun {{aiAgent}}",
   "NoRecordsFound": "Aucun enregistrement trouvé",
   "Properties": "Propriétés",
   "Resolution": "Résolution",
+  "RoomChangeOwner": "Le propriétaire de la salle a été modifié.",
   "RoomCreateUserCount": "Utilisateurs ajoutés ({{count}}).",
   "RoomDenyDownloadDisabled": "Téléchargement et copie sans restriction",
   "RoomDenyDownloadEnabled": "Téléchargement et copie restreints",
@@ -99,5 +102,5 @@
   "UserFileUpdated": "Fichier mis à jour.",
   "Users": "Utilisateurs",
   "Versions": "Versions",
-  "LastUpdateInfo": "Dernière mise à jour"
+  "FoldersTrashMoveCompletedCount": "Dossiers déplacés vers {{sectionName}} ({{count}})."
 }

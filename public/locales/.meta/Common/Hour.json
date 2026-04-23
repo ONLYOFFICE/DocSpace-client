@@ -3,7 +3,7 @@
   "content": "hour",
   "content_en_sha1_hash": "52ab86a87214a453d9f82538264f190854915247",
   "created_at": "2025-05-19T21:30:45.818Z",
-  "updated_at": "2025-06-30T12:20:31.697Z",
+  "updated_at": "2026-04-08T06:59:57.373Z",
   "comment": {
     "text": "This translation key represents the English word \"hour\" to be used in a specific component displaying cron job schedules, typically found in a scheduling or configuration interface.",
     "is_auto": true,
@@ -105,13 +105,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Lao translation 'ຊົ່ວໂມງ' appears to be the correct spelling for 'hour' in Lao.",
-          "suggestion": null
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -177,25 +171,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'сат' does not accurately represent the English word 'hour'. 'Сат' translates to 'hour' in the sense of 'o'clock' or 'watch', but not as a unit of time. The correct translation for 'hour' as a unit of time would be 'час'.",
-          "suggestion": "час"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Latin) translation 'sat' does not accurately translate the English word 'hour'. 'Sat' means 'hour' in the sense of a clock hand or time of day (e.g., 'it's 3 o'clock'). 'Hour' refers to a unit of time (60 minutes).",
-          "suggestion": "The correct translation of 'hour' in Serbian (Latin) depends on the specific context. Possible corrections include: 'čas' (general hour), 'sati' (hours - plural, often used in measurements), or 'sat vremena' (an hour)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -217,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

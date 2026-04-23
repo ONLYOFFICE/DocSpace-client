@@ -3,7 +3,7 @@
   "content": "AI Forms helps you create, distribute, and collect form submissions — all in one place.",
   "content_en_sha1_hash": "b0d83a6084744f5bd3111d12186c39f82deb9db6",
   "created_at": "2026-03-31T15:18:26.870Z",
-  "updated_at": "2026-03-31T15:18:26.870Z",
+  "updated_at": "2026-04-07T20:05:19.056Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -62,7 +62,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'lähetykseten' is a grammatical error (incorrect declension); it should be 'lähetysten'.",
+          "suggestion": "AI Forms mahdollistaa lomakkeiden luomisen, jakelun ja lähetysten keräämisen — kaiken yhdessä paikassa."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -104,7 +110,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'veidolu iesniegumus' is grammatically incorrect and nonsensical in Latvian. It appears to be a literal word-for-word translation of 'form submissions' that fails to form a proper noun phrase. It should be 'veidlapu iesniegumus'.",
+          "suggestion": "AI Forms palīko jums izveidot, izplatīt un savākt veidlapu iesniegumus — viss vienā vietā."
+        }
+      ],
       "approved_at": null
     },
     "nl": {

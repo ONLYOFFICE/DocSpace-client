@@ -8,13 +8,13 @@
   "NeedSettings": "È necessario inserire le impostazioni",
   "NoPlugins": "Nessun plugin aggiunto",
   "NotNeedSettings": "Non è necessario inserire le impostazioni",
+  "PluginCacheWarningDescription": "I plugin vengono memorizzati nella cache in base al loro numero di versione. Per garantire che le modifiche vengano applicate, si prega di incrementare il numero di versione nel file <1>package.json</1> prima del caricamento. Il sistema non aggiornerà un plugin se la versione rimane la stessa.",
+  "PluginDeletedSuccessfully": "Plugin eliminato con successo",
   "PluginIsNotCompatible": "La versione dell’SDK del plugin non corrisponde alla versione di {{productName}}. Aggiorna a una versione compatibile.",
   "PluginLoadedSuccessfully": "Plugin caricato con successo",
   "PluginSamples": "Esempi di plugin",
   "PluginSDK": "SDK di Plugin",
   "PluginSDKDescription": "Utilizzando Plugin SDK puoi estendere le funzionalità di {{productName}}, connettere servizi di terze parti o migliorare l'esperienza utente esistente. Qui puoi trovare gli esempi di plugin con il codice sorgente disponibile su GitHub.",
   "PluginSDKInstruction": "Fai clic sul pulsante per istruzioni dettagliate su come creare i tuoi plugin.",
-  "UploadDescription": "Puoi aggiungere plugin per estendere le funzionalità di {{productName}} con funzionalità extra. Fai clic su Carica plugin o rilascia il file nell'archivio ZIP.",
-  "PluginCacheWarningDescription": "I plugin vengono memorizzati nella cache in base al loro numero di versione. Per garantire che le modifiche vengano applicate, si prega di incrementare il numero di versione nel file <1>package.json</1> prima del caricamento. Il sistema non aggiornerà un plugin se la versione rimane la stessa.",
-  "PluginDeletedSuccessfully": "Plugin eliminato con successo"
+  "UploadDescription": "Puoi aggiungere plugin per estendere le funzionalità di {{productName}} con funzionalità extra. Fai clic su Carica plugin o rilascia il file nell'archivio ZIP."
 }

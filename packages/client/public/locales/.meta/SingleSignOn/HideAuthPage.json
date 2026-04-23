@@ -3,7 +3,7 @@
   "content": "Hide auth page",
   "content_en_sha1_hash": "5316ca6866fa2cf3366a0647deae3c189d460422",
   "created_at": "2025-05-19T21:30:50.088Z",
-  "updated_at": "2025-08-11T18:11:59.254Z",
+  "updated_at": "2026-04-08T23:27:51.460Z",
   "comment": {
     "text": "The translation key \"HideAuthPage\" is used to display a label for a checkbox that allows users to hide the authentication page in the Portal Settings. This value appears as a label on a Checkbox component and can be translated to provide clarity for users in different languages.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Doğrulama səhifəsini gizlədin' literally translates to 'Hide the authentication page'. While understandable, it's a command and doesn't reflect the meaning of a configuration setting which is 'Hide auth page'. A more accurate translation should convey the setting's purpose, implying it will be hidden.",
-          "suggestion": "Consider 'Doğrulama səhifəsini qapadın' (Disable the authentication page) or 'Doğrulama səhifəsi gizli' (Authentication page hidden)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -54,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Skrýt stránky pro ověření\" is not the most accurate or natural translation of \"Hide auth page.\" While technically correct, it's a bit literal and doesn't convey the intended meaning as clearly. \"Auth page\" typically refers to the authentication or login page.",
-          "suggestion": "Consider \"Skrýt přihlašovací stránku\" or \"Skrýt stránku pro přihlášení\" for a more idiomatic and clearer translation."
+          "description": "The Czech translation uses the plural 'stránky' (pages), whereas the English source refers to a single 'page'.",
+          "suggestion": "Skrýt stránku pro ověření"
         }
       ],
       "approved_at": null
@@ -96,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Թաքցնել իսկորոշման էջը\" is a literal translation of \"Hide auth page\". While technically correct, it's a bit formal and doesn't flow naturally. A more user-friendly translation might be more appropriate depending on the context.",
-          "suggestion": "Consider a more natural phrasing like \"Անցկացնել հաստատման էջը\" or \"Անցկացնել մուտքի էջը\"."
+          "description": "The word 'իսկորոշման' (iskoroshmann) is a misspelling or incorrect term for 'authentication'. The correct term for authentication in Armenian is 'աուտենտիֆիկացման' or 'մուտքագրման'.",
+          "suggestion": "Թաքցնել մուտքագրման էջը"
         }
       ],
       "approved_at": null
@@ -126,7 +120,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເຊື່ອງ ໜ້າການ ກວດສອບ\" while technically conveying 'hide authentication page' might not be the most natural or idiomatic translation for 'Hide auth page' in a technical context. 'ກວດສອບ' (kuatสอบ) literally means 'inspect' or 'verify'. A more natural translation emphasizing 'authentication' might be better.",
+          "description": "The Lao translation 'ເຊື່ອງ ໜ້າການ ກວດສອບ' translates to 'Hide the verification page' or 'Hide the inspection page'. In the context of 'auth page' (authentication), 'ການກວດສອບສິດ' or 'ໜ້າເຂົ້າສູ່ລະບົບ' would be more accurate to convey authentication/login.",
           "suggestion": "ເຊື່ອງໜ້າເຂົ້າສູ່ລະບົບ"
         }
       ],
@@ -180,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ද්වි සාධක පිටුව සඟවන්න' while literally meaning 'Hide dual factor page', doesn't accurately convey the intended meaning of 'Hide auth page'. 'Auth' is a broader term encompassing authentication, not just dual factor authentication. A more accurate translation would address the general authentication page.",
-          "suggestion": "Consider a more general translation like 'ප්‍රමauthentification පිටුව සඟවන්න' (Pramanyikathiya pituw sagawanna) or 'අauthentification පිටුව සඟවන්න' (Autentikethiya pituw sagawanna)."
+          "description": "The Sinhala translation means 'Hide two-factor page' instead of 'Hide auth page'. 'Auth' (Authentication) is not the same as 'Two-factor' (2FA).",
+          "suggestion": "අභිජාන පිටුව සඟවන්න"
         }
       ],
       "approved_at": null
@@ -195,52 +189,19 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The term 'avtentikacijsko' is a misspelling of 'avtentikacijsko'.",
-          "suggestion": "avtentikacijsko"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Сакриј' is the correct spelling for 'Hide'.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'страницу' is the correct spelling for 'page'.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'аутентификацију' is the correct spelling for 'authentication'.",
-          "suggestion": null
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Сакриј страницу за аутентификацију' is a literal translation, a more natural and idiomatic Serbian translation might be 'Sakrij stranicu za prijavu' or 'Sakrij ekran za prijavu'. 'Autentifikacija' sounds very formal in this context.",
-          "suggestion": "Sakrij stranicu za prijavu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Sakrij stranicu za autentifikaciju' sounds a bit formal and clunky for a configuration setting. A more natural phrasing might be preferable, especially considering the context of a single sign-on feature.",
-          "suggestion": "Sakrij prijavnu stranicu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -262,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

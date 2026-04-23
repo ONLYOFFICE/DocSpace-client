@@ -48,6 +48,8 @@ type TSearchParams = {
   fromTemplate?: string;
   action?: string;
   toForm?: string;
+  editorGoBack?: string;
+  withoutGoBackText?: string;
 };
 
 async function Page(props: { searchParams: Promise<TSearchParams> }) {
@@ -74,6 +76,8 @@ async function Page(props: { searchParams: Promise<TSearchParams> }) {
     action,
     toForm,
     share,
+    editorGoBack,
+    withoutGoBackText,
   } = searchParams;
 
   if (!parentId || !fileTitle) redirect(baseURL);
@@ -173,6 +177,14 @@ async function Page(props: { searchParams: Promise<TSearchParams> }) {
 
     if (share) {
       newSearchParams.append("share", share);
+    }
+
+    if (editorGoBack) {
+      newSearchParams.append("editorGoBack", editorGoBack);
+    }
+
+    if (withoutGoBackText) {
+      newSearchParams.append("withoutGoBackText", withoutGoBackText);
     }
 
     logger.debug(

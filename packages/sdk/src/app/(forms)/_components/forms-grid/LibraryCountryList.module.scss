@@ -1,3 +1,5 @@
+@use "@docspace/ui-kit/styles/mixins";
+
 .root {
   display: flex;
   flex-direction: column;
@@ -76,13 +78,13 @@
   text-overflow: ellipsis;
 }
 
-@media (max-width: 1023.9px) {
+@include mixins.tablet-and-below {
   .grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media (max-width: 767.9px) {
+@include mixins.mobile {
   .grid {
     grid-template-columns: repeat(2, 1fr);
   }

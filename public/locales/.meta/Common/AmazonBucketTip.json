@@ -3,7 +3,7 @@
   "content": "Enter the unique name of the Amazon S3 bucket where you want to store your backups.",
   "content_en_sha1_hash": "984ca1a8ea33fadebedbf5d6ea2b3e68e52ecefe",
   "created_at": "2025-05-26T07:15:40.342Z",
-  "updated_at": "2026-02-19T13:36:33.073Z",
+  "updated_at": "2026-04-08T17:07:38.551Z",
   "comment": {
     "text": "This translation key is used for a tooltip that provides guidance on entering the name of an Amazon S3 bucket for backup storage. It appears in the UI when users interact with the settings component related to Amazon bucket selection.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The technical term 'S3' was incorrectly translated/transliterated as '3S', which changes the meaning of the service name.",
+          "suggestion": "أدخل الاسم الفريد لحاوية Amazon S3 حيث تريد تخزين النسخ الاحتياطية الخاصة بك."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -81,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'bucket' is translated as 'պարունակ' (content), which is incorrect in a technical context. In Amazon S3, a 'bucket' is a specific storage container, and translating it as 'content' changes the technical meaning of the instruction.",
+          "suggestion": "Մուտքագրեք Amazon S3 bucket-ի եզակի անունը, որտեղ ցանկանում եք պահել ձեր կրկնօրինակները:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,7 +105,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term '固有名' (proper noun) is used incorrectly in this context. In technical UI, 'unique name' should be translated as '一意の名前' (unique name) or '一意の名称'. '固有名' sounds unnatural and implies a linguistic category rather than a technical requirement for uniqueness.",
+          "suggestion": "バックアップを保存するAmazon S3バケットの一意の名前を入力してください。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -111,7 +129,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \"s\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -141,7 +165,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'găleată' is a literal translation of 'bucket' which is incorrect in a technical context. In IT/Cloud computing, 'bucket' is a specific term that should either be left as 'bucket' or translated as 'container/storage unit', but 'găleată' refers to a physical cleaning bucket.",
+          "suggestion": "Introduceţi numele unic al bucket-ului Amazon S3 unde doriţi să stocaţi copiile de rezervă."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -183,25 +213,55 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'bucket' is translated as 'klasör' (folder), which is technically incorrect in the context of Amazon S3. In cloud storage terminology, a 'bucket' is a specific container type distinct from a 'folder'.",
+          "suggestion": "Yedeklerinizi depolamak istediğiniz Amazon S3 bucket'ının benzersiz adını girin."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'bucket' (in the context of Amazon S3) is translated as 'кошик' (shopping basket/trash bin), which is technically incorrect for cloud storage terminology. In Ukrainian IT terminology, 'bucket' is typically transliterated as 'бакет'.",
+          "suggestion": "Введіть унікальне ім’я бакета Amazon S3, в якому ви хочете зберігати свої резервні копії."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Amazon bucket S3' is an incorrect word order for the technical term 'Amazon S3 bucket'. In Vietnamese, the noun phrase should be 'bucket Amazon S3' or 'thùng chứa Amazon S3' to maintain technical accuracy.",
+          "suggestion": "Nhập tên duy nhất của bucket Amazon S3 nơi bạn muốn lưu trữ các bản sao lưu của mình."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'kovës' is a literal translation of 'bucket' as a physical container (like a pail), which is incorrect in a technical cloud storage context. In Albanian IT terminology, 'bucket' should remain 'bucket' or be referred to as a storage container.",
+          "suggestion": "Futni emrin unik të bucket-it Amazon S3 ku dëshironi të ruani kopjet rezervë."
+        }
+      ],
       "approved_at": null
     }
   }

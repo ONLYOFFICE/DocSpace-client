@@ -11,7 +11,9 @@ import React, {
 import {
   frameCallbackData,
   frameCallCommand,
+  frameHandlePing,
 } from "@docspace/shared/utils/common";
+import { applyCustomStyles } from "@docspace/shared/utils/customStyles";
 import { TFrameConfig } from "@docspace/shared/types/Frame";
 
 const SDKConfigContext = createContext<TFrameConfig | null>(null);
@@ -22,6 +24,8 @@ export const SDKConfigProvider: React.FC<{ children: React.ReactNode }> = ({
   const [sdkConfig, setSdkConfig] = useState<TFrameConfig | null>(null);
 
   const handleMessage = useCallback((e: MessageEvent) => {
+    if (window.self === window.parent || e.source !== window.parent) return;
+
     let eventData;
     try {
       eventData = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
@@ -29,8 +33,10 @@ export const SDKConfigProvider: React.FC<{ children: React.ReactNode }> = ({
       return;
     }
 
+    if (frameHandlePing(eventData)) return;
+
     if (eventData?.data) {
-      const { data, methodName } = eventData.data;
+      const { data, methodName, callId } = eventData.data;
 
       if (!methodName) return;
 
@@ -40,8 +46,12 @@ export const SDKConfigProvider: React.FC<{ children: React.ReactNode }> = ({
         switch (methodName) {
           case "setConfig":
             setSdkConfig(data);
+            applyCustomStyles(data?.stylesUrl);
             res = data;
             break;
+          case "navigateSection":
+          case "setCustomActions":
+            return;
           default:
             res = "Wrong method for this mode";
         }
@@ -49,7 +59,7 @@ export const SDKConfigProvider: React.FC<{ children: React.ReactNode }> = ({
         res = err;
       }
 
-      frameCallbackData(res);
+      frameCallbackData(res, callId);
     }
   }, []);
 

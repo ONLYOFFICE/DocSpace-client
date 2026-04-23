@@ -3,7 +3,7 @@
   "content": "Copy link",
   "content_en_sha1_hash": "2f84eea5d45da4f1ce1760b85db18a854f4e1b39",
   "created_at": "2025-05-19T21:30:43.782Z",
-  "updated_at": "2026-03-31T15:18:46.638Z",
+  "updated_at": "2026-04-10T08:21:04.373Z",
   "comment": {
     "text": "This translation key \"CopyLink\" is used to display a label that triggers the copy link functionality, appearing as a button in the Completed VDR Form component, prompting users to share or export a link. It appears on-screen when the user enables the \"Copy Link\" option, allowing them to share their file with others.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2166,
+      "line_number": 2165,
       "context": "disabled: false,\n },\n {\n id: \"option_link-for-room-members\",\n key: \"link-for-room-members\",\n label: t(\"Common:CopyLink\"),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onCopyLink(item, t),\n disabled: item.isTemplate\n ? false\n : (!item.isRoom && item.canShare) ||",
       "module": "/packages/client"
     },
@@ -105,13 +105,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Italian translation has a leading space.",
-          "suggestion": "Copia il link"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -147,13 +141,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Kopiuj link' is technically correct but could be improved for naturalness and common usage in Polish. 'Link' is often used as is, or the full term 'odnośnik' might be preferred.",
-          "suggestion": "Kopiuj odnośnik or Kopiuj link"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -162,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Link de cópia\" is not the most natural or accurate translation of \"Copy link.\" While understandable, it's a literal translation and doesn't quite capture the intended meaning.",
-          "suggestion": "A more natural and accurate translation would be \"Copiar link\" or \"Link para copiar\"."
+          "description": "The translation 'Link de cópia' means 'Copy of the link' or 'Link for copying', whereas the English 'Copy link' is an imperative command (an action to perform).",
+          "suggestion": "Copiar link"
         }
       ],
       "approved_at": null
@@ -189,13 +177,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While the translation is understandable, a more natural and idiomatic Sinhala translation for 'Copy link' would be 'සබැඳිය පිටපත් කරන්න' (sabandiya pitapata karanna). 'ලින්ක් එක පිටපත් කරන්න' is a direct transliteration and sounds less fluent.",
-          "suggestion": "සබැඳිය පිටපත් කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -213,13 +195,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Копирај линк\" is understandable, a more natural and accurate Serbian (Cyrillic) translation for \"Copy link\" would be \"Прекопирај линк\" or \"Копи линк\". \"Копирај\" implies a more complex process than simply copying.",
-          "suggestion": "Прекопирај линк"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -247,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

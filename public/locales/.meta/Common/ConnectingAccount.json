@@ -3,7 +3,7 @@
   "content": "Connecting account",
   "content_en_sha1_hash": "30247ea2913e8fb4e0715cc844d2610b4a06c1ea",
   "created_at": "2025-05-26T07:15:41.509Z",
-  "updated_at": "2026-02-19T13:36:33.140Z",
+  "updated_at": "2026-04-08T14:42:38.541Z",
   "comment": {
     "text": "\"Connecting account\" is used as a title in a reconnect storage or connecting account dialogue. It appears on the header of a ConnectDialog component when reconnecting to an account.",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation 'Připojovací účet' means 'Connecting account' in the sense of an account that performs a connection (adjective + noun), whereas the English context implies the action/process of 'Connecting an account' or the state of 'Connecting [to an] account'. In a UI header context, 'Připojování účtu' is the correct way to express the process/action.",
+          "suggestion": "Připojování účtu"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -93,7 +99,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation '接続アカウント' means 'Connected account' or 'Connection account' (a noun phrase), whereas the English 'Connecting account' in this context refers to the action/process of connecting an account (a gerund/present participle).",
+          "suggestion": "アカウントを接続しています"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -129,7 +141,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'A ligar conta' uses a continuous aspect (gerund-like) that sounds like an ongoing action/status rather than a title for a dialog. In the context of a UI header/title, it is grammatically unnatural in Portuguese.",
+          "suggestion": "Conectando conta"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -199,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

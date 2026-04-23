@@ -3,7 +3,7 @@
   "content": "To continue getting support and updates, buy a renewal.",
   "content_en_sha1_hash": "ec58935d8687f19ed9ad71853d7932c9a2c5e29f",
   "created_at": "2025-05-26T07:15:40.078Z",
-  "updated_at": "2026-02-19T13:36:33.178Z",
+  "updated_at": "2026-04-08T18:06:42.428Z",
   "comment": {
     "text": "This translation key is used to display a message encouraging users to renew their license to continue receiving support and updates. It appears in a subscription-related UI element on an enterprise payment page.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \"n\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -153,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Sinhala translation 'අළුත් කරන්න' (Renew) misses the object 'a renewal' (renewing the subscription/license), making the sentence feel incomplete compared to the English 'buy a renewal'.",
+          "suggestion": "දිගටම සහාය සහ යාවත්කාලීන කිරීම් ලබා ගැනීමට, අලුත් කිරීමක් මිලදී ගන්න."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -199,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "Custom domain name",
   "content_en_sha1_hash": "206b756397ab3dc81264df6cc5ef34724be21bde",
   "created_at": "2025-05-19T21:30:50.988Z",
-  "updated_at": "2025-10-03T13:19:30.533Z",
+  "updated_at": "2026-04-09T03:50:59.619Z",
   "comment": {
     "text": "Custom domain name label for a toggle button in DNS settings.",
     "is_auto": true,
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Finnish translation 'Muokattu verkkotunnuksen nimi' is not the most natural or accurate translation of 'Custom domain name'. 'Muokattu' implies modified, which isn't the primary meaning of 'custom'.",
-          "suggestion": "Oma verkkotunnus (Own domain name) or Asiakasverkkotunnus (Customer domain name)"
+          "description": "The Finnish translation 'Muokattu verkkotunnuksen nimi' means 'Modified domain name' instead of 'Custom domain name'. In a technical context, 'Custom' refers to a user-defined or personalized setting, whereas 'Muokattu' implies something that has already been edited/changed.",
+          "suggestion": "Oma verkkotunnus"
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Պատվերով տիրույթի անուն' is a literal translation that doesn't quite capture the meaning of 'Custom domain name'. It translates to 'Ordered domain name,' which isn't the intended meaning. 'Custom domain name' refers to a domain name chosen and controlled by the user.",
-          "suggestion": "Մուտքագրված դոմեյնի անուն (Mut'iagrad domeni anun) or Ցանկացած դոմեյնի անուն (Ts'ank'ats domeni anun)"
+          "description": "The Armenian translation 'Պատվերով տիրույթի անուն' means 'Domain name by order' or 'Ordered domain name', which implies a domain that has been purchased or requested. In a technical DNS context, 'Custom domain name' refers to a user-defined or non-default domain (e.g., 'domain.com' instead of 'workspace.onlyoffice.com').",
+          "suggestion": "Ընտրված տիրույթի անուն"
         }
       ],
       "approved_at": null
@@ -165,13 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'අභිරුචි වසම් නාමය' is a literal translation of 'Custom domain name' and doesn't quite capture the intended meaning in a natural Sinhala way. 'අභිරුචි' (abiruchi) means 'custom' or 'taste,' but it's not commonly used in this context. 'වසම්' (vasam) is less common than more appropriate words for 'domain.'",
-          "suggestion": "Consider alternatives such as 'පිටු නාමය' (pitu naamaya - page name) or 'අ sendiri පාලනය කළ නාමය' (a sandaru pallaaniya kela naamaya - a self-managed name)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -210,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ім’я настроюваного домену' is not the most natural or accurate translation of 'Custom domain name'. While technically correct, it sounds a bit formal and cumbersome. 'Настроюване доменне ім’я' or 'Власне доменне ім’я' would be more common and understandable.",
-          "suggestion": "Consider using 'Настроюване доменне ім’я' or 'Власне доменне ім’я'."
+          "description": "The translation 'Ім’я настроюваного домену' means 'Name of the configurable domain', which is a literal and incorrect translation of 'Custom domain name'. In a technical context, 'Custom domain' should be translated as 'Власний домен'.",
+          "suggestion": "Власне доменне ім'я"
         }
       ],
       "approved_at": null
@@ -223,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

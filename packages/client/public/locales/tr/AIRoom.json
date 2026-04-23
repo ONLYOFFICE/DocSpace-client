@@ -14,5 +14,18 @@
   "ResponseQualityNode": "<1>Not:</1> Yanıt kalitesi modele göre değişiklik gösterebilir; en iyi sonuçlar için daha yeni modeller önerilir.",
   "ResultStorage": "Sonuç depolama",
   "UploadFilesDevice": "Kişisel cihazınızdan dosyalar yükleyin",
-  "UploadFilesPortal": "{{sectionNameFirst}} veya {{sectionNameSecond}}'den dosyalar yükleyin"
+  "UploadFilesPortal": "{{sectionNameFirst}} veya {{sectionNameSecond}}'den dosyalar yükleyin",
+  "CreateChatDescription": "Başlamak için {{aiChat}} sekmesine gidin.",
+  "EmptyKnowledgeDescription": "Buraya yüklenen dosyalar dizine eklenecek ve {{aiChat}} sekmesinde bağlam olarak kullanılacaktır. Yapay zeka soruları sormak, içerik oluşturmak veya bilgiler üzerinde işbirliği yapmak için dosya ekleyin (her biri 10 MB'a kadar).",
+  "EmptyResultsDescription": "{{aiChat}}'te oluşturulan dosyalar otomatik olarak burada görünecektir. İçerik oluşturduğunuzda, bir sohbet başlattığınızda veya çıktı içeren bir mesaj gönderdiğinizde, sonuç bu bölümde kaydedilecektir.",
+  "EmptyResultsViewerDescription": "Diğer kullanıcıların {{aiChat}} etkinliğinin sonuçları burada, kullanıma sunulduklarında görünecektir.",
+  "InstructionsDescriptionAgent": "{{aiAgent}}'ın nasıl davranması ve yanıt vermesi gerektiğini açıklayın. Rolünü, tonunu ve ana görevlerini tanımlayın.",
+  "Knowledge": "Bilgi tabanı",
+  "KnowledgeUnavailableDescription": "Bilgi tabanı şu anda devre dışı. {{aiAgents}} için anlamsal aramayı ve belge işlemeyi etkinleştirmek için lütfen {{productName}} ayarlarında gömme sağlayıcısını yapılandırın.",
+  "KnowledgeUnavailableDescriptionUser": "Bilgi tabanı şu anda devre dışı. {{aiAgents}} için anlamsal aramayı ve belge işlemeyi etkinleştirmek için lütfen {{productName}} yöneticinizle iletişime geçerek gömme sağlayıcısını yapılandırın.",
+  "MCPDescriptionServers": "Yönetici tarafından bağlanan {{mcpServers}} ile yapay zeka desteğiyle sohbet deneyiminizi geliştirin. {{mcpServers}} veri çıkarma, özetler, akıllı öneriler vb. konularında yardımcı olabilir.",
+  "Model": "{{aiProvider}} ve model",
+  "ModelDescription": "Bu odadaki sohbetlerde kullanılacak {{aiProvider}} ve modeli seçin. Bu ayar zorunludur ve tüm katılımcılar için geçerlidir.",
+  "NoAccessAIAgentTitle": "Üzgünüz, bu {{aiAgent}}'a erişiminiz yok.",
+  "AgentInViewModeWarning": "Bu {{aiAgent}} için <strong>yalnızca görüntüleme</strong> modundasınız. Diğer kullanıcıların {{aiChat}} etkinlik sonuçlarını görebilirsiniz."
 }

@@ -3,7 +3,7 @@
   "content": "You can add plugins to extend the functionality of {{productName}} with extra features. Click Upload plugin or drop file in the ZIP archive.",
   "content_en_sha1_hash": "dacf9512f3550b50c54e9898f5427ca019da6e73",
   "created_at": "2025-05-19T21:30:49.925Z",
-  "updated_at": "2026-03-20T09:07:45.630Z",
+  "updated_at": "2026-04-08T18:29:56.262Z",
   "comment": {
     "text": "This translation key is used to display a message encouraging users to upload plugins to extend the functionality of {{productName}}. It appears as a text in a dropzone component where users can upload files, and also on an empty screen when no plugins are available.",
     "is_auto": true,
@@ -27,18 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of 'plugins' is 'مكونات إضافية' which is more accurately 'additional components' rather than 'plugins'. While understandable, it loses the specific meaning.",
-          "suggestion": "Consider using a more direct translation for 'plugins' if possible, or a more descriptive term that conveys the same meaning for a technical audience.  Options include 'إضافات' or 'ملحقات'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'قم بإسقاط الملف' (drop the file) is a bit literal and awkward in Arabic. It might be better to rephrase it for better flow.",
-          "suggestion": "Replace 'قم بإسقاط الملف' with 'أو قم بسحب الملف' (or drag the file)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -47,13 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Click Upload plugin' is not accurately translated. 'Quraşdırın' implies 'install,' but the English indicates uploading a plugin.",
-          "suggestion": "Consider a translation like 'Plagini yükləyin' (Upload the plugin) or 'Plagini yükləmək üçün vurun' (Click to upload the plugin)."
-        },
-        {
-          "type": "formatting",
-          "description": "The English uses a bold term 'Upload plugin'.  The Azerbaijani translation does not have an equivalent emphasis.",
-          "suggestion": "Consider bolding or otherwise emphasizing 'Plagini yükləyin' to match the original."
+          "description": "The translation of 'Click Upload plugin or drop file in the ZIP archive' is inaccurate. The Azerbaijani text says 'Install the plugin or place the file in the ZIP archive', which changes the user action from 'Clicking/Uploading' to 'Installing'.",
+          "suggestion": "{{productName}}-in funksionallığını əlavə funksiyalarla genişləndirmək üçün plaginlər əlavə edə bilərsiniz. Plagini yükləyin və ya faylı ZIP arxivinə sürükləyin."
         }
       ],
       "approved_at": null
@@ -61,42 +45,19 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Bulgarian translation maintains the use of {{productName}}, which is consistent with the English. This is good, but confirm it's the desired behavior for the platform.",
-          "suggestion": null
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Click Upload plugin' is translated as 'Klepněte na tlačítko Nahrát zásuvný modul'. While technically correct, it's a bit verbose and awkward. A more natural translation would be 'Klikněte na Nahrát zásuvný modul'.",
-          "suggestion": "Klikněte na Nahrát zásuvný modul"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'or drop file in the ZIP archive' is translated as 'nebo vhoďte soubor do archivu ZIP'. 'Vhoďte' implies throwing something, which is not the intended meaning. 'Umístěte soubor' or 'přetáhněte soubor' would be more suitable.",
-          "suggestion": "nebo přetáhněte soubor"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"legen Sie die Datei im ZIP-Archiv ab\" is a bit awkward and overly literal. A more natural German phrasing would be something like \"ziehen Sie die Datei in ein ZIP-Archiv\" or \"laden Sie die Datei in ein ZIP-Archiv\".",
-          "suggestion": "ziehen Sie die Datei in ein ZIP-Archiv"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -105,13 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word \"πρόσθετο\" (prostheto) is used for both 'plugin' and 'Upload plugin'.  'Plugin' typically translates to 'εφαρμογή' (efarmogi) or 'εξέλιξη' (exelixi) in a technical context.  'Upload plugin' should have a more accurate translation.",
-          "suggestion": "Μπορείτε να προσθέσετε εφαρμογές για να επεκτείνετε τη λειτουργικότητα του {{productName}} με επιπλέον δυνατότητες. Κάντε κλικ στην εφαρμογή Μεταφόρτωση ή αποθέστε το αρχείο στο ZIP."
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase 'πρόσθετο Μεταφόρτωση' is a bit awkward. It's directly translating 'Upload plugin' instead of conveying the action of uploading a plugin.",
-          "suggestion": "Μπορείτε να προσθέσετε εφαρμογές για να επεκτείνετε τη λειτουργικότητα του {{productName}} με επιπλέον δυνατότητες. Κάντε κλικ στο Μεταφόρτωση πρόσθετου ή αποθέστε το αρχείο στο ZIP."
+          "description": "The phrase 'Click Upload plugin' is translated as 'Κάντε κλικ στο πρόσθετο Μεταφόρτωση', which literally means 'Click on the plugin Upload'. This changes the meaning from clicking a specific button/action to clicking on a plugin itself. It should be 'Κάντε κλικ στο Μεταφόρτωση πρόσθετου'.",
+          "suggestion": "Μπορείτε να προσθέσετε πρόσθετα για να επεκτείνετε τη λειτουργικότητα του {{productName}} με επιπλέον δυνατότητες. Κάντε κλικ στο Μεταφόρτωση πρόσθετου ή αποθέστε το αρχείο σε μορφή ZIP."
         }
       ],
       "approved_at": null
@@ -119,13 +75,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translated text includes a full stop after 'formato ZIP' which doesn't match the original English content which doesn't include a full stop at the end of the sentence.",
-          "suggestion": "Eliminar el punto después de 'formato ZIP'.  'Haga clic en Cargar plugin o coloque un archivo en formato ZIP'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -134,18 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"lataa lisäosa\" translates literally to \"download plugin\" but the English says \"upload plugin.\" This is a critical difference in functionality.",
-          "suggestion": "Klikkaa lataa ja asenna lisäosa or Klikkaa lisää lisäosa."
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'tiedosta' is a grammatical error and should likely be 'tiedosto'.",
-          "suggestion": "tiedosto"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'pudota tiedosto ZIP-arkistoon' is understandable, a more natural translation might be 'raahaa tiedosto ZIP-arkistoon'. 'Pudota' feels too literal from English's 'drop'.",
-          "suggestion": "raahaa tiedosto ZIP-arkistoon"
+          "description": "The phrase 'pudota tiedosto ZIP-arkistoon' (drop file into ZIP archive) is the opposite of the English meaning 'drop file in the ZIP archive' (which implies the file being dropped should be a ZIP archive). The Finnish version suggests dropping a file into an existing archive, which is technically incorrect for an upload action.",
+          "suggestion": "Voit lisätä lisäosia laajentaaksesi {{productName}}-n toiminnallisuutta lisätoiminnoilla. Klikkaa Lataa lisäosa tai pudota ZIP-arkisto."
         }
       ],
       "approved_at": null
@@ -153,76 +93,31 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "“Télécharger le plugin” translates to “Download the plugin” which isn't as natural as 'Ajouter un plugin' or 'Importer un plugin' in this context. It implies downloading from an external source.",
-          "suggestion": "Cliquez sur Ajouter le plugin ou déposez le fichier dans l’archive ZIP."
-        },
-        {
-          "type": "formatting",
-          "description": "The French translation does not consistently use the same style as the English, the word 'fonctionnalité' should be replaced with 'fonction' as it flows better with the rest of the sentence structure.",
-          "suggestion": "Vous pouvez ajouter des plugins pour étendre la fonction de {{productName}} avec des fonctions supplémentaires."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"հավելյալ հավելումներ\" (havel'yal havel'umner) is redundant.  Both words mean 'additions' or 'plugins'.",
-          "suggestion": "Use a single word for 'plugins', such as 'չափումներ' (chaphumner) or simply remove the redundant word and keep 'հավելումներ'."
-        },
-        {
-          "type": "formatting",
-          "description": "The Armenian translation includes a colon after 'ZIP արխիվում' which is inconsistent with the English original.",
-          "suggestion": "Remove the colon after 'ZIP արխիվում'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'extra features' is translated as 'funzionalità extra'. While understandable, 'caratteristiche aggiuntive' or 'funzionalità aggiuntive' would be more natural and idiomatic Italian.",
-          "suggestion": "Puoi aggiungere plugin per estendere le funzionalità di {{productName}} con caratteristiche aggiuntive. Fai clic su Carica plugin o rilascia il file nell'archivio ZIP."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Japanese translation lacks the proper markdown formatting for the variable {{productName}}. While it's present in the English, it should ideally be preserved in the Japanese translation as well to ensure proper rendering in the application's context.",
-          "suggestion": "Consider preserving the {{productName}} variable as is, or potentially translating it as a placeholder and implementing a replacement mechanism within the application."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Click Upload plugin' is a bit awkward. A more natural Korean translation for 'Click Upload plugin' would be '플러그인 업로드 버튼을 클릭하거나'.",
-          "suggestion": "플러그인 업로드 버튼을 클릭하거나"
-        },
-        {
-          "type": "formatting",
-          "description": "The Korean translation includes a conjunction ('or') between two options, which might benefit from a slight rephrasing for better flow. Consider using a more sophisticated connector.",
-          "suggestion": "플러그인 업로드를 클릭하거나 ZIP 아카이브에 파일을 드롭하세요."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -231,13 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'plugin' is repeated unnecessarily. The Lao translation uses 'plugin' twice when it's clear from context it refers to the same thing.",
-          "suggestion": "ທ່ານສາມາດເພີ່ມປລັກອິນເພື່ອຂະຫຍາຍການເຮັດວຽກຂອງ {{productName}} ດ້ວຍຄຸນສົມບັດພິເສດ. ຄລິກອັບໂຫລດປລັກອິນ ຫຼື ໂຫຼດໄຟລ໌ໃນແຟ້ມ ZIP."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ເລືອກໄຟລ໌ plugin' is awkward and doesn't flow naturally. 'ເລືອກໄຟລ໌' implies selecting a file, but the additional 'plugin' is redundant.",
-          "suggestion": "ໂຫຼດໄຟລ໌ໃນແຟ້ມ ZIP"
+          "description": "The translation changes the instruction from 'drop file in the ZIP archive' to 'select plugin file in the ZIP folder', which alters the user action required for the dropzone component.",
+          "suggestion": "ທ່ານສາມາດເພີ່ມປລັກອິນເພື່ອຂະຫຍາຍການເຮັດວຽກຂອງ {{productName}} ດ້ວຍຄຸນສົມບັດພິເສດ. ຄລິກ ອັບໂຫລດ plugin ຫຼື ລາກໄຟລ໌ ZIP ມາໃສ່."
         }
       ],
       "approved_at": null
@@ -247,9 +137,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Latvian translation uses 'Augšupielādēt spraudni' which is a single phrase. In the English, it's 'Upload plugin'.  This suggests a potential issue with consistency in casing/grammar and the original English likely intended two separate words.",
-          "suggestion": "Consider translating as 'Augšupielādēt spraudņa' (Upload plugin) or rewording for better flow if 'Augšupielādēt spraudni' is intentionally a combined phrase."
+          "type": "incorrect_translation",
+          "description": "The Latvian translation incorrectly states 'Click Upload plugin in the ZIP archive' (ZIP arhīvā noklikšķiniet uz Augšupielādēt spraudni), whereas the English original says 'Click Upload plugin OR drop file in the ZIP archive'. The Latvian version implies the action happens inside the archive, which is logically impossible and changes the instruction.",
+          "suggestion": "Varat pievienot spraudņus, lai paplašinātu {{productName}} funkcionalitāti ar papildu funkcijām. Noklikšķiniet uz Augšupielādēt spraudni vai nometiet failu ZIP arhīvā."
         }
       ],
       "approved_at": null
@@ -257,13 +147,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Dutch translation uses 'Plug-in uploaden' which is a direct translation of 'Upload plugin' and lacks the capitalization consistent with the English source and common Dutch naming conventions. It should be 'Plugin uploaden' or 'Upload plugin'.",
-          "suggestion": "Plugin uploaden"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -275,47 +159,19 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The phrase 'solte o arquivo no arquivo ZIP' is slightly awkward. While technically correct, a more natural phrasing would be preferred.",
-          "suggestion": "Você pode adicionar plug-ins para estender a funcionalidade do {{productName}} com recursos extras. Clique em Carregar plugin ou arraste o arquivo para o arquivo ZIP."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'plugin' is repeated unnecessarily. The second instance should be consistent with the first.",
-          "suggestion": "Você pode adicionar plug-ins para estender a funcionalidade do {{productName}} com recursos extras. Clique em Carregar plug-in ou solte o arquivo em um arquivo ZIP."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'no arquivo ZIP' could be better translated as 'em um arquivo ZIP' for better flow and grammatical correctness.",
-          "suggestion": "Você pode adicionar plug-ins para estender a funcionalidade do {{productName}} com recursos extras. Clique em Carregar plug-in ou solte o arquivo em um arquivo ZIP."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The phrase \"glisați și fixați\" is somewhat awkward in Romanian. It mixes two actions.",
-          "suggestion": "Consider using \"glisați fișierul\" or \"trageți și plasați fișierul\" instead."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'arhiva Zip' is understandable, it's more common and natural to use 'fișier ZIP'.",
-          "suggestion": "Change 'arhiva Zip' to 'fișier ZIP'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -330,18 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"Click Upload plugin\" is awkward. 'එබීමෙන් අනතුරුව' implies action *after* clicking, rather than the action of clicking itself.",
-          "suggestion": "පේනු උඩුගත බොත්තම ක්ලික් කරන්න"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ZIP හැකිළුමේ අඩංගු පේනුවේ ගොනුව තෝරන්න\" is overly literal and complex. It translates to 'select the plugin file contained in the ZIP archive'.",
-          "suggestion": "ZIP ගොනුවට ඇතුළත් පේනු තෝරන්න"
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure is a bit convoluted.  It could be more fluent.",
-          "suggestion": "අමතර විශේෂාංග සමඟ {{productName}} ක්‍රියාකාරීත්‍වය වැඩිදියුණු කිරීමට පේනු එක් කරන්න. පේනු උඩුගත බොත්තම ක්ලික් කරන්න, නැතිනම් ZIP ගොනුවට ඇතුළත් පේනු තෝරන්න."
+          "description": "The Sinhala translation uses the word 'පේනු' (penu), which means 'pens'. The correct technical term for 'plugin' in this context should be 'ප්ලගිනය' (plugin) or a descriptive term for an add-on. Using 'pen' makes the sentence nonsensical.",
+          "suggestion": "අමතර විශේෂාංග සමඟ {{productName}} හි ක්‍රියාකාරීත්වය පුළුල් කිරීම සඳහා ඔබට ප්ලගිනයන් එක් කළ හැකිය. 'Upload plugin' ක්ලික් කරන්න හෝ ZIP ආකෘතියේ ඇති ගොනුව මෙතැනට ඇද දමන්න."
         }
       ],
       "approved_at": null
@@ -349,25 +195,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Slovak translation uses a space before \"{{productName}}\", while the English version does not. This inconsistency might affect the visual appearance of the translated text.",
-          "suggestion": "Remove the space before '{{productName}}' in the Slovak translation to match the English version: '...funkčnosť priestoru {{productName}}...'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The placement of '{{productName}}' appears consistent with the English source. However, ensure the translation system handles this placeholder correctly during implementation to avoid issues with variable substitution.",
-          "suggestion": "Verify correct rendering of the placeholder during implementation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -375,14 +209,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Постави додатак\" (Postavi dodatak) is not a direct or natural translation of 'Upload plugin'. A better translation would be something like 'Уплоад додатка' (Upload dodatka) or 'Отпреми додатак' (Otpremi dodatak).",
-          "suggestion": "Уплоад додатка"
-        },
-        {
-          "type": "formatting",
-          "description": "The original English uses bolding for a button label. It's important to consider if the Serbian translation should also reflect this, depending on the UI design.",
-          "suggestion": "Consider bolding 'Уплоад додатка' or 'Отпреми додатак' to match the English version."
+          "type": "missing_content",
+          "description": "The translation omits the 'drop file' instruction, only mentioning selecting a file. The English text explicitly allows dragging and dropping files into the zone.",
+          "suggestion": "Можете додати додатке да бисте проширили функционалност {{productName}} са додатним могућностима. Кликните на „Постави додатак“ или превуците датотеку у ZIP архиви."
         }
       ],
       "approved_at": null
@@ -392,19 +221,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Click Upload plugin\" is translated as \"Kliknite na \"Postavi dodatak\"\". \"Upload plugin\" implies adding a plugin, while \"Postavi dodatak\" translates more to 'Install Add-on' or 'Set Add-on'. It doesn't directly convey the act of uploading.",
-          "suggestion": "Kliknite na \"Učitaj dodatak\""
-        },
-        {
-          "type": "formatting",
-          "description": "The original English content uses double quotes for the button label. The Serbian translation uses single quotes. This creates an inconsistency.",
-          "suggestion": "Kliknite na \"Učitaj dodatak\""
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase \"izaberite datoteku dodatka u ZIP arhivi\" is a bit awkward.  A more natural phrasing would clarify that it's *selecting* a plugin file within a ZIP archive.",
-          "suggestion": "izaberite ZIP datoteku koja sadrži dodatak"
+          "type": "missing_content",
+          "description": "The translation omits the 'drop file' instruction, which is a key part of the UI interaction (drag-and-drop functionality).",
+          "suggestion": "Možete dodati dodatke da biste proširili funkcionalnost {{productName}}-a sa dodatnim mogućnostima. Kliknite na \"Postavi dodatak\" ili prevucite datoteku u ZIP arhivi."
         }
       ],
       "approved_at": null
@@ -412,13 +231,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The phrase 'ZIP archive' is slightly awkward in Turkish. While technically correct, it could be phrased more naturally.",
-          "suggestion": "'ZIP dosyası' or 'ZIP formatında arşiv' would be more natural alternatives."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -427,13 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Вивантажити плагіни\" is an awkward translation of \"Upload plugin.\"  It literally means 'Unload plugins'.",
-          "suggestion": "Завантажити плагіни"
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase \"ZIP-архіві\" is in the locative case, which is technically correct, but might sound unnatural in this context.  It's more common to use the prepositional case.",
-          "suggestion": "у ZIP-архіві"
+          "description": "The translation uses 'Вивантажити плагіни' (Upload plugins - plural) instead of 'Upload plugin' (singular) as specified in the English source. This creates a mismatch between the UI button text and the instruction.",
+          "suggestion": "Ви можете додати плагіни, щоб розширити функціональність простору {{productName}} додатковими функціями. Натисніть «Вивантажити плагін» або перетягніть файл у ZIP-архіві."
         }
       ],
       "approved_at": null
@@ -441,30 +249,19 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'drop file in the ZIP archive' is not accurately translated. 'Drop file' implies a direct drop action, while 'kéo thả tập tin' refers to dragging and dropping. The context suggests a drag-and-drop action is intended.",
-          "suggestion": "Bạn có thể thêm các plugin để mở rộng chức năng của {{productName}} với các tính năng bổ sung. Hãy nhấp vào Tải plugin lên hoặc kéo thả tệp ZIP vào đây."
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase 'tệp ZIP' should be 'tệp ZIP' to match the capitalization of 'tải plugin lên'.",
-          "suggestion": "Bạn có thể thêm các plugin để mở rộng chức năng của {{productName}} với các tính năng bổ sung. Hãy nhấp vào Tải plugin lên hoặc kéo thả tệp ZIP vào đây."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"使用额外功能扩展{{productName}}的功能\" is a bit redundant. It literally translates to \"use extra functions to expand the function of {{productName}}\".",
-          "suggestion": "您可以添加插件以扩展{{productName}}的功能，添加更多特性。"
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

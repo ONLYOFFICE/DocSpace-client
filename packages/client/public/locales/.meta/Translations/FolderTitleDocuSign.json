@@ -3,7 +3,7 @@
   "content": "DocuSign account",
   "content_en_sha1_hash": "8923f31959d637d1c5bc0737b7c1292454bd7802",
   "created_at": "2025-05-19T21:30:49.972Z",
-  "updated_at": "2025-10-27T16:14:33.351Z",
+  "updated_at": "2026-04-08T21:18:48.681Z",
   "comment": {
     "text": "This translation key is used to display the title \"DocuSign account\" in various UI elements. It is typically displayed on a folder or file list view, and may appear as a button label or dialog heading. The translator should focus on conveying this information in a clear and concise manner.",
     "is_auto": true,
@@ -87,13 +87,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Italian translation 'Account DocuSign' is a literal translation and does not read naturally. The term 'DocuSign account' is typically translated as 'Account DocuSign' or 'Conto DocuSign' in Italian.",
-          "suggestion": "Conto DocuSign"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -177,25 +171,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'DocuSign налог' translates to 'DocuSign account' but 'налог' means 'account'. The original translation 'DocuSign налог' incorrectly translates to something like 'DocuSign tax'.",
-          "suggestion": "DocuSign налог"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Latin) translation 'DocuSign nalog' is a literal translation of 'account' as 'nalog' which, while understandable, doesn't fully convey the meaning of a 'DocuSign account'. It might be interpreted as a login account rather than a DocuSign account.",
-          "suggestion": "Consider 'DocuSign račun' as 'račun' is a more common and accurate translation for 'account' in this context, or 'DocuSign korisnički nalog' to specify user account."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -217,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

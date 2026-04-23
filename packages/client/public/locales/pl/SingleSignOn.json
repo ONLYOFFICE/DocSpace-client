@@ -3,7 +3,6 @@
   "AdvancedSettings": "Ustawienia zaawansowane",
   "AdvancedSettingsTooltip": "Ukryj domyślną stronę uwierzytelniania i automatycznie kieruj do usługi pojedynczego logowania.",
   "AttributeMatching": "Mapowanie atrybutów",
-  "AttributeMatchingTooltip": "Zgodność atrybutów pojedynczego logowania z wpisami sekcji „Konta”.",
   "Binding": "Powiązanie:",
   "CertificateExist": "Certyfikat o tym samym rodzaju działania już istnieje",
   "CustomEntryButton": "Niestandardowy podpis przycisku logowania",
@@ -59,5 +58,6 @@
   "TurnOnSSOCaption": "Włącz tę opcję, jeśli chcesz automatycznie dodawać użytkowników z usługi pojedynczego logowania do swojego obszaru roboczego.",
   "UploadXML": "Wczytaj metadane z XML, aby automatycznie wypełnić wymagane pola.",
   "UploadXMLPlaceholder": "Adres URL do XML z metadanymi IdP",
-  "UsedFor": "Użyj do"
+  "UsedFor": "Użyj do",
+  "AttributeMatchingTooltip": "Zgodność atrybutów pojedynczego logowania (Single Sign-On) z wpisami w sekcji „Konta”."
 }

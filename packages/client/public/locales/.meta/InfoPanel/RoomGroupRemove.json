@@ -3,7 +3,7 @@
   "content": "Group removed",
   "content_en_sha1_hash": "587c704467c3ef25e9a2b18a68181777f6352ac6",
   "created_at": "2025-05-19T21:30:54.925Z",
-  "updated_at": "2025-11-03T12:10:35.117Z",
+  "updated_at": "2026-04-07T19:35:05.119Z",
   "comment": {
     "text": "The translation key \"RoomGroupRemove\" is used to display the message \"Group removed\". It is likely displayed when a group of rooms has been successfully deleted or removed from a specific setting.",
     "is_auto": true,
@@ -45,13 +45,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Премахнати групи\" (Removed groups) is too literal and doesn't accurately reflect the meaning of \"Group removed\". It implies multiple groups were removed, while the English indicates a single group.",
-          "suggestion": "Премахната група"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -81,13 +75,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Group removed\" implies a single group was removed. \"Ryhmät poistettu\" translates to \"Groups removed\", which is a plural. This might be inaccurate depending on the context.",
-          "suggestion": "Consider 'Ryhmä poistettu' if a single group was removed."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -99,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Group removed' implies a single group was removed. The Armenian translation 'Խմբերը հեռացվել են։' translates to 'Groups were removed' which implies multiple groups were removed. This changes the meaning.",
-          "suggestion": "Consider translating to 'Խումբը հեռացվել է։' which translates to 'Group was removed'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -129,13 +111,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ກຸ່ມຖືກລົບອອກ' literally translates to 'Group was removed out'. While understandable, it's not the most natural phrasing in Lao. A more natural translation would convey the action of removing the group, rather than emphasizing its state after removal.",
-          "suggestion": "ກຸ່ມຖືກລຶບ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -183,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'කුழு ඉවත් කරනු ලැබුවා' while understandable, is a passive voice construction. A more direct and natural translation would be preferable. 'කුழு ඉවත් කරන ලදී' or 'කුழு ඉවත් විය' would be better alternatives.",
-          "suggestion": "කුழு ඉවත් කරන ලදී"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -207,13 +177,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Група уклоњена' is technically correct, it sounds a bit formal and impersonal for a UI element like this. A more natural and user-friendly translation would be 'Уклоњена група'.",
-          "suggestion": "Уклоњена група"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

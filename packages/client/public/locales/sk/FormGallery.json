@@ -3,10 +3,12 @@
   "EmptyFormGalleryScreenDescription": "Neboli nájdené žiadne výsledky zodpovedajúce vašej požiadavke",
   "ErrorViewDescription": "Prosím, skúste to znova neskôr",
   "ErrorViewDescriptionNetworkError": "Zdá sa, že nie je k dispozícii pripojenie na internet.",
-  "SuggestChanges": "Navrhnúť zmeny",
-  "TemplateInfo": "Informácie o šablóne",
-  "ViewAllTemplates": "Zobraziť všetky šablóny",
   "ErrorViewHeader": "Galéria je dočasne nedostupná.",
   "SelectTemplate": "Vyberte šablónu",
-  "UploadGallery": "Nahrať do Galérie"
+  "SuggestChanges": "Navrhnúť zmeny",
+  "TemplateInfo": "Informácie o šablóne",
+  "UploadGallery": "Nahrať do Galérie",
+  "ViewAllTemplates": "Zobraziť všetky šablóny",
+  "GalleryTitle": "Galéria šablón {{organizationName}}",
+  "SubmitToGalleryDialogMainInfo": "Odosleďte svoju šablónu do verejnej galérie, aby ju mohli používať aj ostatní pri práci. Po schválení šablóny moderátorom budete upozornení a odohodnocení za váš príspevok."
 }

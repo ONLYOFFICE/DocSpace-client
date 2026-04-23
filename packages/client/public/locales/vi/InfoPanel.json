@@ -2,6 +2,7 @@
   "AddedRoomTags": "Đã thêm thẻ.",
   "Administration": "Quản lý ",
   "AgentRenamed": "Tác nhân <1>«{{oldRoomTitle}}»</1> được đổi tên thành <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Xem chi tiết về {{aiAgents}} tại đây",
   "AndMoreLabel": "và  <1>{{count}} hơn thế nữa</1>",
   "CreationDate": "Ngày tạo",
   "Data": "Dữ liệu",
@@ -60,11 +61,14 @@
   "IndexChanged": "Đã thay đổi chỉ mục",
   "ItemsSelected": "Các mục đã chọn",
   "LastModifiedBy": "Sửa lần cuối bởi",
+  "LastUpdateInfo": "Cập nhật lần cuối",
   "LifetimeEnds": "Thời gian tồn tại kết thúc",
   "MembersEmptyScreenText": "Xem chi tiết thành viên tại đây",
+  "NoAgent": "Không có {{aiAgent}}",
   "NoRecordsFound": "Không tìm thấy bản ghi nào",
   "Properties": "Thuộc tính",
   "Resolution": "Nghị quyết",
+  "RoomChangeOwner": "Chủ phòng đã thay đổi.",
   "RoomCreateUserCount": "Đã thêm người dùng ({{count}}).",
   "RoomDenyDownloadDisabled": "Không hạn chế tải xuống và sao chép",
   "RoomDenyDownloadEnabled": "Hạn chế tải xuống và sao chép",
@@ -98,6 +102,5 @@
   "SubmenuHistory": "Lịch sử",
   "UserFileUpdated": "Tập tin đã được cập nhật. vai trò",
   "Users": "Người dùng",
-  "Versions": "Phiên Bản",
-  "LastUpdateInfo": "Cập nhật lần cuối"
+  "Versions": "Phiên Bản"
 }

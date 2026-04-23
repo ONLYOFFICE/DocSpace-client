@@ -3,7 +3,7 @@
   "content": "Sign up with Zoom",
   "content_en_sha1_hash": "2596473d7776e251c5ee2d75c7cf026af02ce2c9",
   "created_at": "2025-05-19T21:30:48.880Z",
-  "updated_at": "2026-03-26T08:26:58.377Z",
+  "updated_at": "2026-04-10T08:21:04.402Z",
   "comment": {
     "text": "The \"SignUpWithZoom\" translation key is used to display the label for a button that allows users to sign up using Zoom. This text is typically displayed on a sign-up or registration form and may appear in a dialog or modal window. Its purpose is to provide clarity to users about how they can complete the sign-up process with their Zoom account.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 483,
+      "line_number": 485,
       "context": "? t(\"Common:SignUpWithMicrosoft\")\n : t(\"Common:SignInWithMicrosoft\");\n case \"sso\":\n return signUp ? t(\"Common:SignUpWithSso\") : t(\"Common:SignInWithSso\");\n case \"zoom\":\n return signUp ? t(\"Common:SignUpWithZoom\") : t(\"Common:SignInWithZoom\");\n case \"weixin\":\n return signUp\n ? t(\"Common:SignUpWithWechat\")\n : t(\"Common:SignInWithWechat\");\n default:",
       "module": "/packages/shared"
     }
@@ -42,7 +42,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Влезте чрез Zoom\" translates to 'Log in with Zoom' rather than 'Sign up with Zoom'. While similar, 'Sign up' has a specific meaning in this context referring to creating an account.",
+          "description": "The Bulgarian translation 'Влезте чрез Zoom' means 'Sign in with Zoom' (Login), whereas the English source is 'Sign up with Zoom' (Registration).",
           "suggestion": "Регистрирайте се чрез Zoom"
         }
       ],
@@ -57,7 +57,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The German translation 'Mit Zoom anmelden' means 'Sign in with Zoom' (Login), whereas the English source is 'Sign up with Zoom' (Registration).",
+          "suggestion": "Mit Zoom registrieren"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -114,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ເຂົ້າສູ່ລະບົບດ້ວຍ Zoom' translates to 'Log in with Zoom', not 'Sign up with Zoom'. 'Sign up' implies creating a new account, while 'Log in' implies accessing an existing one.",
-          "suggestion": "ສ້າງບັນຊີດ້ວຍ Zoom (Sangs banchi duay Zoom)"
+          "description": "The Lao translation means 'Sign in with Zoom' (Login) instead of 'Sign up with Zoom' (Register/Create account).",
+          "suggestion": "ລົງທະບຽນດ້ວຍ Zoom"
         }
       ],
       "approved_at": null
@@ -156,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Conectare prin Zoom' is understandable, 'Sign up with Zoom' implies creating an account or registering, not just connecting. 'Înregistrare cu Zoom' or 'Creează cont cu Zoom' would be more accurate translations.",
-          "suggestion": "Înregistrare cu Zoom"
+          "description": "The translation 'Conectare prin Zoom' means 'Connect via Zoom' or 'Log in via Zoom', which corresponds to 'Sign in'. The English source is 'Sign up', which refers to the registration process.",
+          "suggestion": "Înregistrare prin Zoom"
         }
       ],
       "approved_at": null
@@ -165,13 +171,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Зарегистрируйтесь с помощью Zoom\" is a very literal translation and can sound clunky in Russian. A more natural and idiomatic translation would be something like \"Войти через Zoom\" or \"Присоединиться через Zoom\".",
-          "suggestion": "Войти через Zoom"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -189,37 +189,19 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Vpiši se z Zoom' doesn't perfectly convey the meaning of 'Sign up with Zoom'. 'Vpiši se' implies entering or typing something, while 'Sign up' implies creating an account or registering. A more accurate translation would convey the action of registration.",
-          "suggestion": "Prijava z Zoom"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Региструј се путем Zoom-а\" is not the most natural or accurate translation of \"Sign up with Zoom.\" While technically correct, it sounds a bit clunky in Serbian. A more natural phrasing would be \"Пријави се путем Zoom-а\" or \"Региструј се преко Zoom-а\".",
-          "suggestion": "Пријави се путем Zoom-а"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While understandable, \"Registruj se putem Zoom-a\" isn't the most natural or idiomatic translation of \"Sign up with Zoom\". A more common and accurate phrasing would be \"Prijavi se preko Zooma\" or \"Kreiraj nalog preko Zooma\". \"Putem\" implies a route or method *through* Zoom, whereas \"preko\" conveys the action of signing up *using* Zoom.",
-          "suggestion": "Prijavi se preko Zooma"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -243,13 +225,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '用 Zoom 帐号注册' is a literal translation but could be improved for naturalness and clarity in Chinese. While technically correct, it might sound slightly formal or stilted.",
-          "suggestion": "考虑使用更自然的说法，例如 '使用 Zoom 注册' 或 '通过 Zoom 注册'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

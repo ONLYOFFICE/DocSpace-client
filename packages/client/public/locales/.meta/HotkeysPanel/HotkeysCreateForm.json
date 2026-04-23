@@ -3,7 +3,7 @@
   "content": "Create blank form template",
   "content_en_sha1_hash": "02874ddd5e01e99c422ca4ea2510d696e82ff091",
   "created_at": "2025-05-19T21:30:55.038Z",
-  "updated_at": "2026-02-19T13:36:32.509Z",
+  "updated_at": "2026-04-07T19:35:05.105Z",
   "comment": {
     "text": "\"This translation key is used to display the text 'Create blank form template' in the application. It appears on a hotkeys panel within the UI, likely as an explanation or tooltip for the keyboard shortcut 'Shift + p'.\"",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Boş forma şablonu yaradın\" literally translates to \"You created a blank form template.\" While technically correct, it's less natural and doesn't convey the intended meaning of 'Create blank form template' which implies the action of creating the template itself, not that the user already did it. It needs to be changed to reflect the action of creation.",
-          "suggestion": "Yeni boş forma şablonu yaradın"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -123,18 +117,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Leeg blanco formuliersjabloon maken' is redundant. 'Leeg' and 'blanco' both mean 'blank' in Dutch.",
-          "suggestion": "Maak een blanco formuliersjabloon"
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'formuliersjabloon' contains a spelling error. The correct word is 'formulier sjabloon' or 'formulier(s) sjabloon(nen)' depending on the intended pluralization.",
-          "suggestion": "formulier sjabloon"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -152,25 +135,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Criar modelo de formulário branco\" is not the most natural or accurate rendering of \"Create blank form template\". \"Blank\" can be interpreted as \"em branco\" or \"vazio\" in Portuguese. \"Form template\" is also sometimes translated as \"template de formulário\" or just \"modelo\".",
-          "suggestion": "Criar modelo de formulário em branco"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Creează un document necompletat dintr-un șablon\" is not an accurate translation of \"Create blank form template.\" 'Document' is not the same as a form. 'Necompletat' (incomplete) doesn't quite capture the meaning of 'blank'.",
-          "suggestion": "Creează un șablon de formular gol"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -182,25 +153,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"හිස් ආකෘතිපත්‍ර අච්චුවක් සාදන්න\" while literally translatable, doesn't accurately convey the meaning of \"Create blank form template\". 'අච්චුවක්' (acchuwak) which means 'mold' or 'die' is not appropriate for a template. It implies a physical object rather than a digital form.",
-          "suggestion": "Consider a translation that uses words like 'නව ආකෘතියක් සාදා ගන්න' (nawa aakruthiyak saada ganne) which means 'create a new form' or 'ආකෘතිපත්‍රයක් සාදා ගන්න' (aakruthipathrayak saada ganne) which means 'create a form template'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'prázdneho' is missing a hyphen. It should be 'prázdneho'.",
-          "suggestion": "Vytvoriť šablónu prázdneho formulára"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -218,18 +177,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Kreiraj prazan šablon obrazac\" is not the most natural or accurate translation of \"Create blank form template.\" While understandable, it's a bit clunky. \"Kreiraj prazan formular\" would be a better option.",
-          "suggestion": "Kreiraj prazan formular"
-        },
-        {
-          "type": "formatting",
-          "description": "The Serbian translation doesn't fully reflect the original English phrase's emphasis on a 'template'. While 'formular' is acceptable, 'template' implies a reusable structure.",
-          "suggestion": "Kreiraj prazan šablon formular"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -241,13 +189,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Створити пустий із шаблону\" doesn't accurately convey the meaning of \"Create blank form template.\" \"Із шаблону\" implies creating something *from* a template, whereas the English implies creating a completely blank template.",
-          "suggestion": "Створити порожній шаблон"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

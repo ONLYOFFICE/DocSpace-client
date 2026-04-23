@@ -28,7 +28,6 @@ import { UserStore } from "./UserStore";
 import { TfaStore } from "./TfaStore";
 import { CurrentTariffStatusStore } from "./CurrentTariffStatusStore";
 import { CurrentQuotasStore } from "./CurrentQuotaStore";
-import { PaymentQuotasStore } from "./PaymentQuotasStore";
 import { AuthStore } from "./AuthStore";
 import { SettingsStore } from "./SettingsStore";
 
@@ -44,10 +43,6 @@ export const currentQuotaStore = new CurrentQuotasStore(
   currentTariffStatusStore,
   settingsStore,
 );
-export const paymentQuotasStore = new PaymentQuotasStore(
-  currentQuotaStore,
-  settingsStore,
-);
 export const authStore = new AuthStore(
   userStore,
   currentTariffStatusStore,
@@ -55,3 +50,4 @@ export const authStore = new AuthStore(
   settingsStore,
 );
 export const tfaStore = new TfaStore(settingsStore);
+

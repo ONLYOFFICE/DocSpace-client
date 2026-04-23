@@ -6,6 +6,7 @@
   "AutomaticIndexing": "Indicizzazione automatica",
   "AutomaticIndexingDescription": "Attiva l'indicizzazione automatica per indicizzare i file e le cartelle in base al numero di serie. L'ordinamento per numero sarà impostato come predefinito per tutti gli utenti.",
   "ChooseRoomType": "Scegli il tipo di stanza",
+  "ConfigureDatabaseConnection": "Configura la connessione al database in Integrazione → Servizi di terze parti",
   "CreateRoomConfirmation": "Continuare senza connettere l’archiviazione?\nHai selezionato un'opzione di archiviazione di terze parti che non è ancora connessa. Se procedi senza connettere il servizio, questa opzione non verrà aggiunta.",
   "CreateRoomWatermarksConfirmation": "Non è stata impostata una filigrana da applicare ai documenti in questa stanza. È sempre possibile aggiungere una filigrana nelle impostazioni di modifica della stanza. Continuare senza filigrana?",
   "CreateTagOption": "Crea un tag",
@@ -39,5 +40,9 @@
   "UserName": "Nome utente",
   "ViewerInfo": "Informzioni sul visualizzatore",
   "WatermarkPreview": "Anteprima della filigrana",
-  "WatermarkPreviewHelp": "Questa anteprima dell'immagine mostra approssimativamente come verrà visualizzata la filigrana nei tuo i file."
+  "WatermarkPreviewHelp": "Questa anteprima dell'immagine mostra approssimativamente come verrà visualizzata la filigrana nei tuo i file.",
+  "GoToIntegrations": "Vai a Integrazioni",
+  "NeedMoreIntegrations": "Hai bisogno di più integrazioni?",
+  "NeedMoreIntegrationsDescription": "Utilizza gli webhook per inviare dati al tuo sistema o collega i moduli a migliaia di servizi tramite Zapier.",
+  "NoDatabaseConnections": "Nessuna connessione al database configurata"
 }

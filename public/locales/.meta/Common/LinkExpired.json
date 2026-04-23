@@ -3,7 +3,7 @@
   "content": "The link has expired.",
   "content_en_sha1_hash": "ef3fc8d140fe94ebbb33acc6c724acb2c51a4cb9",
   "created_at": "2025-05-19T21:30:46.180Z",
-  "updated_at": "2026-03-20T09:07:45.522Z",
+  "updated_at": "2026-04-08T05:38:23.192Z",
   "comment": {
     "text": "The \"LinkExpired\" translation key is used to display an error message when a link has expired, likely in a login or confirmation process. It appears as a label on a button or dialog, providing users with a clear explanation of the issue. Translators should provide a corresponding error message in the local language that conveys a similar sense of urgency and clarity.",
     "is_auto": true,
@@ -42,7 +42,7 @@
     },
     {
       "file_path": "/packages/shared/components/share/sub-components/LinkRow.tsx",
-      "line_number": 147,
+      "line_number": 148,
       "context": "shareLink={shareLink}\n isExpiredLink={isExpiredLink}\n disabledCopy={isArchiveFolder}\n onCopyLink={() =>\n isExpiredLink\n ? toastr.error(t(\"Common:LinkExpired\"))\n : onCopyLink(link)\n }\n />\n <LinkExpiration\n t={t}",
       "module": "/packages/shared"
     }
@@ -63,13 +63,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Linkin' is misspelled. It should be 'Linkin'",
-          "suggestion": "Linkin"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -159,7 +153,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \"ł\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -235,6 +235,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

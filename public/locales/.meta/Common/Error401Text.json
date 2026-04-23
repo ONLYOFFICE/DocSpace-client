@@ -3,7 +3,7 @@
   "content": "Sorry, the resource is not currently accessible.",
   "content_en_sha1_hash": "065f25ed2401162e3d223ed9109f147adad74795",
   "created_at": "2025-05-19T21:30:45.036Z",
-  "updated_at": "2026-02-19T13:36:33.095Z",
+  "updated_at": "2026-04-08T10:20:37.893Z",
   "comment": {
     "text": "This translation key is used to display an error message when a user lacks access to a resource. It appears in the ErrorContainer component as the header text. Translators should focus on conveying a sense of permission denial or restricted access in their translated version.",
     "is_auto": true,
@@ -51,7 +51,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The German translation is grammatically incorrect and uses a passive construction that doesn't work with the verb 'zugreifen'. In German, one 'greift auf etwas zu' (access something), so the resource cannot be 'accessed' (auf die Ressource kann nicht zugegriffen werden) or 'the resource cannot be accessed' (Die Ressource ist nicht zugänglich). The current version 'Die Ressource kann... nicht zugegriffen werden' is a literal but broken translation.",
+          "suggestion": "Die Ressource ist zurzeit nicht zugänglich."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -150,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Извините, страница недоступна' while understandable, is not the most accurate rendering of 'Sorry, the resource is not currently accessible.' 'Страница' specifically refers to a page, whereas the English refers to a general resource. A better translation would reflect this broader meaning.",
-          "suggestion": "Извините, ресурс временно недоступен."
+          "description": "The English text refers to a 'resource' (which could be a file, folder, or object), while the Russian translation specifically says 'page' (страница). This changes the scope of the error message.",
+          "suggestion": "Извините, ресурс в данный момент недоступен."
         }
       ],
       "approved_at": null
@@ -189,13 +195,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Üzgünüz, kaynak şu anda ulaşılabilir değil.' is not the most natural or accurate rendering of 'Sorry, the resource is not currently accessible.' While technically correct, it sounds awkward in Turkish. A more natural translation would emphasize unavailability rather than a state of 'not accessible'.",
-          "suggestion": "Üzgünüz, kaynak şu anda kullanılamıyor."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -211,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

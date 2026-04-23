@@ -3,7 +3,7 @@
   "content": "AI Agent Created",
   "content_en_sha1_hash": "492946ca8bbd5072556015fdec837b3b8b076c35",
   "created_at": "2026-03-31T15:18:27.255Z",
-  "updated_at": "2026-03-31T15:19:42.300Z",
+  "updated_at": "2026-04-08T20:38:35.448Z",
   "comment": {
     "text": "This key displays a message indicating that an AI agent has been successfully created. It appears within a list of webhook trigger events, likely in a settings or configuration panel related to webhooks. Translators should ensure the wording accurately reflects the creation event.",
     "is_auto": true,
@@ -201,7 +201,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Vietnamese translation 'Tạo tác nhân AI' is an imperative command ('Create AI agent') rather than a past-tense notification of a completed event ('AI Agent Created').",
+          "suggestion": "Đã tạo tác nhân AI"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

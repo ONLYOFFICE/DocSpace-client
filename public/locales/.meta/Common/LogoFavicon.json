@@ -3,7 +3,7 @@
   "content": "Favicon",
   "content_en_sha1_hash": "b0f47aaf773c75735c1c4c32a2e40c0f4e7feecf",
   "created_at": "2025-05-26T07:15:44.913Z",
-  "updated_at": "2026-02-19T13:36:33.169Z",
+  "updated_at": "2026-04-08T05:13:17.991Z",
   "comment": {
     "text": "This translation key is used to display a favicon size description in a user interface, typically appearing on a settings page or branding configuration screen. The exact wording and formatting will vary based on the logo image being referenced, but its purpose is consistent: to inform users about the dimensions of their selected favicon image.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Bulgarian translation 'Фавикона' is in the definite article form (the favicon), whereas the English source is a standalone noun 'Favicon'. In UI labels, the indefinite form or the noun itself is preferred.",
+          "suggestion": "Favicon"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -63,7 +69,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Spanish word 'Favicono' is a misspelling. The correct term in Spanish is 'Favicon' (it is an anglicism used as-is) or 'Icono de sitio'.",
+          "suggestion": "Favicon"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -171,7 +183,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Фавикона' is in the genitive case (meaning 'of favicon'), whereas the English source 'Favicon' is a noun in the nominative case used as a label. In UI design, labels should be in the nominative.",
+          "suggestion": "Фавикон"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -199,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

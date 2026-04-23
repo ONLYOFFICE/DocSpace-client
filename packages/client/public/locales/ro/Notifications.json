@@ -12,5 +12,8 @@
   "SuccessConnected": "{{serviceName}} a fost conectat cu succes ca modul de notificare. Veți primi acum actualizări în acest mod.",
   "SuccessDisconnected": "{{serviceName}} a fost deconectat cu succes ca modul de notificare. Notificările nu vor mai fi trimise în acest mod.",
   "UsefulTips": "Sfaturi utile {{productName}}",
-  "UsefulTipsDescription": "Obţineţi instrucţiuni utile privind {{productName}}"
+  "UsefulTipsDescription": "Obţineţi instrucţiuni utile privind {{productName}}",
+  "ActionsWithFilesDescription": "Etichetele vor evidenția activitatea fișierelor — încărcări, modificări sau distribuiri — în secțiunile {{rooms}}, {{shared}}, {{documents}} și {{aiAgents}}.",
+  "RoomsActivityDescription": "Primiți notificări instantanee prin e-mail despre fișierele/folderelor noi partajate și activitatea din {{rooms}} și {{aiAgents}} ale dumneavoastră.",
+  "RoomUpdateNotify": "Conținut partajat, activitatea în {{rooms}} și {{aiAgents}}"
 }

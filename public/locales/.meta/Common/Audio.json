@@ -3,7 +3,7 @@
   "content": "Audio",
   "content_en_sha1_hash": "acdac205f5e24cb75113c4b281a2c13f08b75159",
   "created_at": "2025-05-19T21:30:43.139Z",
-  "updated_at": "2025-08-04T07:30:01.265Z",
+  "updated_at": "2026-04-08T16:37:21.389Z",
   "comment": {
     "text": "This translation key is used for the audio file type, displaying \"Audio\" as its translated label. It appears in UI elements that display file types, such as in a table view of files on the home page.",
     "is_auto": true,
@@ -90,7 +90,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Ձայնային\" (Dzaaynayin) translates to 'audio' or 'sound' but is more accurately 'sound-related' or 'sound-like'. While not strictly incorrect, it's not the most direct or natural translation for the English word 'Audio'. A more common and direct translation would be \"Աուդիո\" (Audio) using a transliteration.",
+          "description": "The Armenian translation 'Ձայնային' is an adjective meaning 'audio' (as in 'audio signal' or 'audio track'), whereas the English source 'Audio' in this context is a noun representing the file category. The noun form 'Աուդիո' or 'Ձայն' is more appropriate for a file type label.",
           "suggestion": "Աուդիո"
         }
       ],
@@ -195,7 +195,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is in English instead of Turkish. The Turkish word for 'Audio' in this context is 'Ses'.",
+          "suggestion": "Ses"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -211,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

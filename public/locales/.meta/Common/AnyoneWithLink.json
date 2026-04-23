@@ -3,7 +3,7 @@
   "content": "Anyone with the link",
   "content_en_sha1_hash": "8a78b4998feeb4f409891d0eb1716fe3eb7a2c9a",
   "created_at": "2025-05-19T21:30:43.022Z",
-  "updated_at": "2026-02-19T13:36:33.107Z",
+  "updated_at": "2026-04-08T16:52:36.029Z",
   "comment": {
     "text": "This translation key is used to display a descriptive label for a user interface component that allows access to content via a shared link. The translated text will appear on a UI element prompting users to share or invite others.",
     "is_auto": true,
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Kuka tahansa linkin kanssa' doesn't accurately convey the meaning of 'Anyone with the link'. It literally translates to 'Anyone with the link (instrumental case)'. It sounds awkward and doesn't capture the intended meaning.",
-          "suggestion": "A more accurate translation would be 'Kuka tahansa, jolla on linkki' or 'Jokainen, jolla on linkki'."
+          "description": "The Finnish translation 'Kuka tahansa linkin kanssa' literally means 'Anyone with the link' in a way that implies the person is physically carrying or possessing a link, rather than 'Anyone who has the link' or 'Anyone with access via the link'. In a UI context for permissions, it sounds unnatural and grammatically incomplete.",
+          "suggestion": "Kuka tahansa, jolla on linkki"
         }
       ],
       "approved_at": null
@@ -93,13 +93,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Ցանկացած ոք, ով ունի հղումը\" is a literal translation and not the most natural way to express \"Anyone with the link\" in Armenian. It sounds formal and somewhat awkward.",
-          "suggestion": "A more natural translation would be something like \"Ամեն ով ունի այս հղումը\" or \"Ամեն ով ունի կապը\" (depending on the context and desired level of formality).  \"Ամեն ով ունի հղումը\" is better than the original, but still not ideal."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -111,13 +105,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"リンクを持っている人\" is a literal translation of \"Anyone with the link.\" While understandable, it's not the most natural or idiomatic way to express this in Japanese. It emphasizes possession rather than access or permission.",
-          "suggestion": "Consider alternatives like \"リンクを知っている人\" (link o shitteiru hito - people who know the link) or \"リンクが使える人\" (rinku ga tsukaeru hito - people who can use the link) depending on the intended meaning."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -147,13 +135,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, the translation \"Każdy, kto ma link\" is a bit clunky and not the most natural way to express \"Anyone with the link\" in Polish. A more idiomatic translation would be \"Wszyscy, którzy mają link\" or \"Każdy z linkiem\".",
-          "suggestion": "Consider \"Wszyscy, którzy mają link\" or \"Każdy z linkiem\" for a more natural-sounding translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -174,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Tuturor la link-ul\" is not the most natural or accurate translation of \"Anyone with the link.\"  'Tuturor' means 'to everyone' and 'la' is a preposition that doesn't quite convey the intended meaning here.",
-          "suggestion": "A better translation would be something like \"Oricine are link-ul\" or \"Cine are link-ul\"."
+          "description": "The Romanian translation 'Tuturor la link-ul' is grammatically incorrect and conveys a fragmented meaning (literally 'To everyone at the link'). It fails to express the concept of 'Anyone with the link' (meaning anyone who possesses the link).",
+          "suggestion": "Oricine are link-ul"
         }
       ],
       "approved_at": null
@@ -207,7 +189,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Свако са линком' literally means 'Everyone with a link' (implying people who already possess a link), whereas the English 'Anyone with the link' refers to the permission level (anyone who has access via the link).",
+          "suggestion": "Свако ко има линк"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -238,6 +226,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'lidhje' in Albanian refers to a connection, relationship, or bond, rather than a digital hyperlink/URL. In a UI context for sharing content, 'link' should be translated as 'link' or 'lidhje elektronike', but 'lidhje' alone is semantically incorrect for a web link.",
+          "suggestion": "Kushdo që ka linkun"
+        }
+      ],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "Port",
   "content_en_sha1_hash": "fe035157cda20b361ce30613e29b5d6f1a46b5fc",
   "created_at": "2025-05-19T21:30:53.306Z",
-  "updated_at": "2025-12-09T12:12:27.331Z",
+  "updated_at": "2026-04-08T21:52:09.448Z",
   "comment": {
     "text": "This translation key is used to display \"Port\" in a user interface, typically appearing as part of a settings or configuration section. It likely corresponds to an SMTP port number setting, guiding the user to input a valid port value (0-65535).",
     "is_auto": true,
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຜອດຶ\" is not the correct translation for \"Port\" in the context of SMTPSettings. It appears to be a misspelling or an unrelated word. The correct translation would likely be \"ປະຕູ\" (pratu) which means 'door' or 'gateway', often used in a technical context.",
-          "suggestion": "ປ່ຽນເປັນ \"ປະຕູ\""
+          "description": "The Lao translation 'ຜອດຶ' is nonsensical/gibberish and does not mean 'Port' in a technical/networking context.",
+          "suggestion": "ພອດ"
         }
       ],
       "approved_at": null
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"තොට\" does not accurately translate \"Port\" in the context of SMTPSettings. \"තොට\" generally refers to a harbor or a small pond. The correct translation should be something related to a network port number.",
-          "suggestion": "Consider using a more accurate translation like \"අන්තර්ජාල බොරුව\" (antharjala boruwa - internet port) or \"වියුඅන්තර් මුඛය\" (viyu antharamukha - network interface) or consult a technical translator for the best equivalent."
+          "description": "The Sinhala word 'තොට' (Thota) refers to a physical harbor or a landing place for boats. In a technical/computing context (SMTP port number), the correct term should refer to a communication port.",
+          "suggestion": "පෝට්"
         }
       ],
       "approved_at": null
@@ -211,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

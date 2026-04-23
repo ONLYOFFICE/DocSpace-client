@@ -3,7 +3,7 @@
   "content": "Every day of the week",
   "content_en_sha1_hash": "baad1d5872ad00d1bfedbdaac73374c84f5a7571",
   "created_at": "2025-05-19T21:30:45.148Z",
-  "updated_at": "2025-08-11T18:11:59.363Z",
+  "updated_at": "2026-04-08T10:08:13.266Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Every day of the week\" when a specific condition is met in a weekly selection component. It appears as the default option in a dropdown select element, likely on a calendar or scheduling interface.",
     "is_auto": true,
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Spanish translation 'Cada día del mes' translates to 'Every day of the month', not 'Every day of the week'.",
-          "suggestion": "The correct translation should be 'Cada día de la semana'."
+          "description": "The Spanish translation says 'Every day of the month' (mes) instead of 'Every day of the week' (semana).",
+          "suggestion": "Cada día de la semana"
         }
       ],
       "approved_at": null
@@ -99,13 +99,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation \"毎週毎日\" is a literal combination of \"every week\" (毎週 - maishū) and \"every day\" (毎日 - mainichi). While understandable, it's redundant and not the most natural way to express \"every day of the week\" in Japanese. A more accurate and natural translation would be something like \"毎週毎日\" (maishū mainichi) or simply \"毎日\" (mainichi).",
-          "suggestion": "毎日 (mainichi) or 毎週毎日 (maishū mainichi)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -114,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '매일의 요일' while technically correct, doesn't quite capture the natural flow and common usage of 'Every day of the week.' It's a bit too literal.",
-          "suggestion": "Consider '매주' (maeju) which translates to 'every week'. Or, for more emphasis, '일주일에 매일' (iljuwione maeil) which means 'every day of the week'."
+          "description": "The translation '매일의 요일' literally means 'Every day's day of the week', which is redundant and unnatural in Korean. In the context of a dropdown selection for a weekly component, it should mean 'All days of the week' or 'Every day'.",
+          "suggestion": "모든 요일"
         }
       ],
       "approved_at": null
@@ -217,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

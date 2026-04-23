@@ -3,7 +3,7 @@
   "content": "Virtual Data Room",
   "content_en_sha1_hash": "29f2e3affa77388673134388754b5295d908047b",
   "created_at": "2025-05-19T21:30:49.548Z",
-  "updated_at": "2026-03-31T15:18:46.231Z",
+  "updated_at": "2026-04-07T20:19:51.348Z",
   "comment": {
     "text": "The translation key \"VirtualDataRoom\" refers to a virtual data room in a collaborative workspace, used to display a specific type of room on the UI. It appears as a filter option and a room title, guiding users to a secure space for sharing sensitive information. Its context is within the client-side application's file management system.",
     "is_auto": true,
@@ -183,13 +183,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"අතථ්‍ය දත්ත කාමරය\" is a literal translation, it's not the most natural or commonly used term in Sinhala for 'Virtual Data Room.' The term 'online දත්ත ගබඩාව' (online data repository) or 'විද්යුත් දත්ත ගබඩාව' (electronic data repository) might be more appropriate depending on the context.",
-          "suggestion": "Consider 'online දත්ත ගබඩාව' or 'විද්යුත් දත්ත ගබඩාව' as alternative translations."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -207,25 +201,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Serbian (Cyrillic) translation uses the English word 'Виртуелна' (Virtuelna) instead of a fully Cyrillic equivalent.",
-          "suggestion": "Consider using a fully Cyrillic alternative such as 'Виртуелна просторија за податке' or 'Електронска просторија за податке' depending on the desired level of formality and accuracy."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Serbian (Latin) translation contains a spelling error. 'Virtuelna' should be 'Virtuelna'.",
-          "suggestion": "Virtuelna soba za podatke"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -249,7 +231,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term '虚拟数据房间' (Virtual Data Room) is a literal translation that sounds unnatural in a professional software context. In business and legal technology, 'Virtual Data Room' is standardly translated as '虚拟数据室'.",
+          "suggestion": "虚拟数据室"
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {

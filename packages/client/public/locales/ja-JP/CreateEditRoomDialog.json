@@ -6,6 +6,7 @@
   "AutomaticIndexing": "自動インデックス作成",
   "AutomaticIndexingDescription": "シリアル番号によるファイルとフォルダの自動インデックス作成を有効にします。番号によるソートがすべてのユーザーのデフォルトとして設定されます。",
   "ChooseRoomType": "タイプから選択する",
+  "ConfigureDatabaseConnection": "統合 → サードパーティサービスでデータベース接続を設定してください。",
   "CreateRoomConfirmation": "ストレージを接続せずに続けますか？\nまだ接続されていないサードパーティストレージオプションを選択されました。サービスを接続せずに進めると、このオプションは追加されません。",
   "CreateRoomWatermarksConfirmation": "このルームのドキュメントに適用する透かしを設定していません。ルーム編集設定でいつでも透かしを追加できます。透かしなしで続行しますか？",
   "CreateTagOption": "タグを作成する",
@@ -39,5 +40,9 @@
   "UserName": "ユーザー名",
   "ViewerInfo": "閲覧者情報",
   "WatermarkPreview": "透かしのプレビュー",
-  "WatermarkPreviewHelp": "この画像プレビューは、ファイルに透かしがどのように表示されるかを大まかに示しています。"
+  "WatermarkPreviewHelp": "この画像プレビューは、ファイルに透かしがどのように表示されるかを大まかに示しています。",
+  "GoToIntegrations": "インテグレーションへ移動",
+  "NeedMoreIntegrations": "その他の統合が必要ですか？",
+  "NeedMoreIntegrationsDescription": "Webhookを使用してデータを独自のシステムに送信するか、Zapier経由で数千のサービスにフォームを接続します。",
+  "NoDatabaseConnections": "データベース接続が設定されていません"
 }

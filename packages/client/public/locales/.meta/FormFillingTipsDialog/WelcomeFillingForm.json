@@ -3,7 +3,7 @@
   "content": "Welcome to the Form Filling Room!",
   "content_en_sha1_hash": "0df6f06ac784f688e2513f68c38cbed7fdc580f5",
   "created_at": "2025-05-19T21:30:55.153Z",
-  "updated_at": "2026-02-19T13:36:32.429Z",
+  "updated_at": "2026-04-07T19:35:05.102Z",
   "comment": {
     "text": "This translation key is used for a header text in a dialog box that welcomes users to a form filling interface. The text appears as a modal dialog's header. Translators should provide a warm and inclusive greeting for this context.",
     "is_auto": true,
@@ -81,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Ձևաթղթերի' (Devathghtereri) seems to be a genitive plural form. While technically correct, it might sound slightly formal and stiff in this context. A more conversational option might be preferred.",
-          "suggestion": "Consider using a more direct possessive form, such as 'Ձևաթղթի' (Devathghti) - 'Form's' or a phrase like 'Ձևաթղթի համար' (Devathghti hamar) - 'For forms'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -123,18 +117,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Welkom in de kamer voor het Invullen van Formulieren' is a bit verbose and less natural than a more concise option. 'Kamer voor het invullen van formulieren' could be shortened.",
-          "suggestion": "Welkom in de formulierenkamer"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'het Invullen' is slightly less common and more formal than 'invullen'.",
-          "suggestion": "Welkom in de kamer om formulieren in te vullen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {

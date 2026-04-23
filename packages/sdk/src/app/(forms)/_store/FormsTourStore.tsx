@@ -33,13 +33,22 @@ const TOUR_COMPLETED_KEY = "forms_tour_completed";
 
 class FormsTourStore {
   isRunning = false;
-  stepIndex = 0;
   tourCompleted = false;
-  showMockItems = false;
-  forceShowAiChat = false;
 
   constructor() {
     makeAutoObservable(this);
+  }
+
+  get isDemo() {
+    return this.isRunning;
+  }
+
+  get showMockItems() {
+    return this.isRunning;
+  }
+
+  get forceShowAiChat() {
+    return this.isRunning;
   }
 
   hydrate = () => {
@@ -48,25 +57,10 @@ class FormsTourStore {
 
   startTour = () => {
     this.isRunning = true;
-    this.stepIndex = 0;
-    this.showMockItems = true;
-    this.forceShowAiChat = true;
-  };
-
-  stopTour = () => {
-    this.isRunning = false;
-    this.showMockItems = false;
-    this.forceShowAiChat = false;
-  };
-
-  setStepIndex = (index: number) => {
-    this.stepIndex = index;
   };
 
   completeTour = () => {
     this.isRunning = false;
-    this.showMockItems = false;
-    this.forceShowAiChat = false;
     this.tourCompleted = true;
     localStorage.setItem(TOUR_COMPLETED_KEY, "true");
   };

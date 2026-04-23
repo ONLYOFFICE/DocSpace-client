@@ -2,6 +2,7 @@
   "AddedRoomTags": "Tag aggiunti.",
   "Administration": "Amministrazione",
   "AgentRenamed": "Agente <1>«{{oldRoomTitle}}»</1> rinominato in <2>«{{roomTitle}}»</2>",
+  "AIAgentsEmptyScreenTent": "Visualizza i dettagli di {{aiAgents}} qui",
   "AndMoreLabel": "e <1>{{count}} in più</1>",
   "CreationDate": "Data di creazione",
   "Data": "Dati",
@@ -60,11 +61,14 @@
   "IndexChanged": "Indice cambiato",
   "ItemsSelected": "Elementi selezionati",
   "LastModifiedBy": "Ultima modifica di",
+  "LastUpdateInfo": "Ultimo aggiornamento",
   "LifetimeEnds": "La durata sta finendo",
   "MembersEmptyScreenText": "Vedi i dettagli dei membri qui",
+  "NoAgent": "Nessun {{aiAgent}}",
   "NoRecordsFound": "Nessun record trovato",
   "Properties": "Proprietà",
   "Resolution": "Risoluzione",
+  "RoomChangeOwner": "Il proprietario della stanza è stato modificato.",
   "RoomCreateUserCount": "Utenti aggiunti ({{count}}).",
   "RoomDenyDownloadDisabled": "Download e copia senza limitazioni",
   "RoomDenyDownloadEnabled": "Download e copia limitati",
@@ -98,6 +102,5 @@
   "SubmenuHistory": "Cronologia",
   "UserFileUpdated": "File aggiornato.",
   "Users": "Utenti",
-  "Versions": "Versioni",
-  "LastUpdateInfo": "Ultimo aggiornamento"
+  "Versions": "Versioni"
 }

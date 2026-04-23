@@ -3,7 +3,7 @@
   "content": "Recent responses",
   "content_en_sha1_hash": "72a5b3a0386440cb76897872895740beefeb21f7",
   "created_at": "2026-03-31T15:18:19.836Z",
-  "updated_at": "2026-03-31T15:18:19.836Z",
+  "updated_at": "2026-04-08T01:50:17.983Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -104,7 +104,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation 'Senākie atbildes' means 'Old responses' or 'Former responses', whereas the English 'Recent responses' refers to 'latest' or 'newest' responses.",
+          "suggestion": "Nesenākās atbildes"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -152,7 +158,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'Napriek odpovediam' means 'Despite responses', which is a completely different meaning from 'Recent responses'.",
+          "suggestion": "Nedávne odpovede"
+        }
+      ],
       "approved_at": null
     },
     "sl": {

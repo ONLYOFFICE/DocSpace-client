@@ -156,9 +156,9 @@ const SectionHeaderContent = (props) => {
     const arrayOfParams = getArrayOfParams();
 
     const serviceSubPageHeaders = {
-      "ai-services": "Services:OrganizationAI",
       "backup": "Common:Backup",
-      "disk-storage": "Payments:AdditionalDiskStorage",
+      "ai-services": "Common:OrganizationAI",
+      "disk-storage": "Common:AdditionalDiskStorage",
     };
 
     let number = 1;
@@ -305,7 +305,7 @@ const SectionHeaderContent = (props) => {
               })
             : t("DataImport")
       : !standalone && isPaymentPage
-        ? t("Billing")
+        ? t("Common:Billing")
         : t(header, {
             organizationName: logoText,
             license: t("Common:EnterpriseLicense"),

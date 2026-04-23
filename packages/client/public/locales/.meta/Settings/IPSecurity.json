@@ -3,7 +3,7 @@
   "content": "IP Security",
   "content_en_sha1_hash": "6384288df2a9807354de1df765c871288d7c2492",
   "created_at": "2025-05-19T21:30:51.718Z",
-  "updated_at": "2026-03-26T08:26:58.259Z",
+  "updated_at": "2026-04-09T02:43:56.229Z",
   "comment": {
     "text": "The \"IPSecurity\" translation key is used to display the title and subtitle of the security category in the portal settings. It appears as a heading on mobile views and as part of the desktop layout, indicating access to IP-related security features.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 210,
+      "line_number": 227,
       "context": "{\n id: \"portal-settings_catalog-ip-security\",\n key: \"1-0-4\",\n icon: \"\",\n link: \"ip\",\n tKey: \"IPSecurity\",\n },\n {\n id: \"portal-settings_catalog-invitation-settings\",\n key: \"1-0-5\",\n icon: \"\",",
       "module": "/packages/client"
     }
@@ -39,13 +39,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"أمان بروتوكول الانترنت\" translates to \"Internet Protocol Security\" which is not a direct equivalent to \"IP Security\". While \"أمان\" (security) and \"بروتوكول الانترنت\" (internet protocol) are present, the direct and common understanding of 'IP Security' is missing.",
-          "suggestion": "Consider a more literal translation like \"أمان IP\" or \"حماية IP\" (Hماية IP). Using the acronym \"IP\" is generally understood in technical contexts and keeps the meaning closer to the original."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -174,13 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"අ.ජා.කෙ. ආරක්‍ෂණය\" is an abbreviation and doesn't directly translate to \"IP Security\". It likely represents \"IP Address Configuration Security\", but the direct translation is missing.",
-          "suggestion": "Consider a more direct translation like \"IP ආරක්ෂණය\" (IP Arakshaya) or \"IP ලිපිනය ආරක්ෂණය\" (IP Lipinaya Arakshaya) to better reflect the meaning of \"IP Security\"."
-        },
-        {
-          "type": "formatting",
-          "description": "The abbreviation \"අ.ජා.කෙ.\" is not standard and could be confusing for users.  It should be clarified or expanded.",
-          "suggestion": "If abbreviations are necessary, ensure they are widely understood within the target audience. Consider expanding to the full term or avoiding abbreviations altogether."
+          "description": "The Sinhala translation 'අ.ජා.කෙ. ආරක්‍ෂණය' is an incorrect abbreviation. 'අ.ජා.කෙ.' does not correspond to 'IP' (Internet Protocol) in a technical context; it appears to be a nonsensical or incorrect abbreviation that does not convey 'IP Security'.",
+          "suggestion": "IP ආරක්ෂණය"
         }
       ],
       "approved_at": null
@@ -200,13 +189,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"IP безбедност\" is a valid translation of 'IP Security', but 'bezbednost' typically refers to overall safety or security, not specifically IP security. A more precise translation might be \"IP сигурност\" or \"Заштита IP адресе\".",
-          "suggestion": "Consider using \"IP сигурност\" or \"Заштита IP адресе\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -234,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

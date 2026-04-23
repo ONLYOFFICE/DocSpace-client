@@ -3,7 +3,7 @@
   "content": "Privacy policy URL",
   "content_en_sha1_hash": "52c701499a67f70c0e4d1871ad9613018818b5a8",
   "created_at": "2025-05-19T21:30:53.972Z",
-  "updated_at": "2026-03-26T08:26:58.172Z",
+  "updated_at": "2026-04-07T19:35:05.165Z",
   "comment": {
     "text": "This translation key is used to display the URL of a privacy policy. It is displayed as a label in an input field on a form, prompting users to enter their organization's privacy policy URL.",
     "is_auto": true,
@@ -45,13 +45,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Czech translation uses a lowercase 'z' in 'zásad'. It should be capitalized as it's the beginning of a sentence fragment.",
-          "suggestion": "URL adresa Zásad ochrany osobních údajů"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -75,13 +69,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Tietosuojakäytäntö URL' is a literal translation and somewhat awkward in Finnish. 'Privacy policy' is often shortened to 'tietosuojakäytäntö'. The addition of 'URL' feels redundant as it's implied.",
-          "suggestion": "Tietosuojakäytäntö"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -123,13 +111,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Konfidencialitātes politikas vietrādis URL' is overly literal and not the most natural phrasing in Latvian. 'Vietrādis' specifically means 'location' or 'address' and while technically correct, it's not commonly used in this context.",
-          "suggestion": "Konfidencialitātes politikas URL"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -165,37 +147,19 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"URL-адреса Политики конфиденциальности\" is overly literal and slightly awkward. A more natural translation would be \"Адрес Политики конфиденциальности\" or \"URL Политики конфиденциальности\". The use of the plural 'адреса' (addresses) is not ideal for a single URL.",
-          "suggestion": "Адрес Политики конфиденциальности"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'නිශ්චිතතා ප්‍රතිපත්ති URL' is a literal transliteration of 'Privacy Policy URL' and doesn't accurately convey the meaning in Sinhala. It sounds awkward and unnatural. A more accurate and natural translation would be something like 'දේශපාලන රහස්යතාව URL' or 'රහස්යතා ප්‍රතිපත්ති ලිංකනය'.",
-          "suggestion": "දේශපාලන රහස්යතාව URL or රහස්යතා ප්‍රතිපත්ති ලිංකනය"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation includes an unnecessary space before 'Zásady'.",
-          "suggestion": "URL adresa pre Zásady ochrany osobných údajov"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {

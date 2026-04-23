@@ -3,7 +3,7 @@
   "content": "New presentation",
   "content_en_sha1_hash": "2f9d6210592804df00fdbb934945bcb6ee2accb8",
   "created_at": "2025-05-19T21:30:46.772Z",
-  "updated_at": "2026-03-31T15:18:46.233Z",
+  "updated_at": "2026-04-10T08:21:04.325Z",
   "comment": {
     "text": "The translation key \"NewPresentation\" is used to display the label for a button or action that creates a new presentation. In the UI, this text appears on a button that triggers the creation of a new presentation file in Microsoft PowerPoint format (pptx).",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3520,
+      "line_number": 3519,
       "context": "};\n \n const createNewPresentation = {\n id: \"personal_new-presentation\",\n key: \"new-presentation\",\n label: t(\"Common:NewPresentation\"),\n onClick: () => this.onCreate(\"pptx\"),\n icon: ActionsPresentationReactSvgUrl,\n };\n \n const createTemplateForm = {",
       "module": "/packages/client"
     },
@@ -165,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala word 'සමර්පණයක්' (samarpanayak) means 'a dedication' or 'a presentation' in the sense of giving/offering something. In the context of software/IT (PowerPoint/pptx), 'presentation' should be translated as 'ප්‍රසන්ටේෂන් එකක්' or 'ඉදිරිපත් කිරීමක්'. The current translation sounds like a religious or formal dedication.",
+          "suggestion": "නව ඉදිරිපත් කිරීමක්"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -201,7 +207,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The word 'New' is missing from the translation. The English text specifies the creation of a *new* presentation, but the Ukrainian translation only says 'Presentation'.",
+          "suggestion": "Нова презентація"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -211,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

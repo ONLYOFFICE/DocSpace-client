@@ -3,7 +3,7 @@
   "content": "Icon changed",
   "content_en_sha1_hash": "46fa2dcaabe5f818483c85df00108c0fabde27f4",
   "created_at": "2025-05-19T21:30:54.941Z",
-  "updated_at": "2025-11-03T12:10:35.113Z",
+  "updated_at": "2026-04-07T19:35:05.120Z",
   "comment": {
     "text": "The \"RoomLogoChanged\" translation key is used to display a message when the room logo changes. This text will appear in the UI where updates are logged or notifications are shown, such as a history panel or activity feed, and provides context for the user when their room's icon has been updated.",
     "is_auto": true,
@@ -51,13 +51,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"İşarə dəyişdi\" doesn't accurately convey the meaning of \"Icon changed.\" \"İşarə\" means \"sign\" or \"signal,\" while \"icon\" refers to a visual representation. A more accurate translation would relate to a visual element or image change.",
-          "suggestion": "Simge dəyişdi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -183,13 +177,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Slovak word 'Ikonka' is a diminutive form, which might not always be the most appropriate translation depending on the context. While not strictly incorrect, 'Ikona zmenená' might be a more neutral and possibly more accurate translation.",
-          "suggestion": "Ikona zmenená"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {

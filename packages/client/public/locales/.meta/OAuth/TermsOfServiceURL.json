@@ -3,7 +3,7 @@
   "content": "Terms of Service URL",
   "content_en_sha1_hash": "1d0ab1807370d36d35f88a288b43b90708325459",
   "created_at": "2025-05-19T21:30:54.053Z",
-  "updated_at": "2026-03-26T08:26:58.173Z",
+  "updated_at": "2026-04-07T19:35:05.168Z",
   "comment": {
     "text": "The \"Terms of Service URL\" translation key is used to display a label for a field that requires users to enter a URL related to terms of service. It appears in an input group component within a form. Translators should provide a string that explains or references the purpose of this field, such as \"URL of Terms of Service Agreement\".",
     "is_auto": true,
@@ -81,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Ծառայության պայմանների URL\" is a literal translation but not the most natural or idiomatic way to express \"Terms of Service URL\" in Armenian. It's technically correct, but could be improved.",
-          "suggestion": "Consider a more fluent alternative like \"Պայմանների URL\" or \"Ծառայության պայմանների հասցե\" (Service Terms Address)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -111,35 +105,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ເອກະສານກົດລະບຽບການໃຊ້ບໍລິການ URL' is a bit too literal and verbose. While technically correct, it doesn't flow naturally. 'ເອກະສານກົດລະບຽບການໃຊ້ບໍລິການ' translates to 'Terms and Conditions' or 'Service Agreement' rather than just 'Terms of Service'.",
-          "suggestion": "ເອກະສານການໃຊ້ບໍລິການ URL"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, it's generally more concise to omit the redundant 'URL' at the end since 'ເອກະສານການໃຊ້ບໍລິການ' already implies a URL.",
-          "suggestion": "ເອກະສານການໃຊ້ບໍລິການ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Pakalpojumu sniegšanas noteikumu vietrādis URL\" is overly literal and doesn't read naturally in Latvian. 'Terms of Service' is better translated to 'Lietošanas noteikumi'. 'Vietrādis' is generally used for web addresses, but 'URL' is also acceptable.",
-          "suggestion": "Lietošanas noteikumu URL"
-        },
-        {
-          "type": "formatting",
-          "description": "While 'URL' is acceptable, consider if the context requires the full 'Adresāta vienoto resursu lokators' for increased formality.  This depends entirely on the target audience and platform's typical style.",
-          "suggestion": "If increased formality is needed, use 'Adresāta vienoto resursu lokators'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -151,13 +123,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"URL regulaminu\" is understandable, a more accurate and natural translation of \"Terms of Service URL\" in Polish would be \"Adres URL regulaminu\" or \"URL regulaminu serwisu\". \"URL regulaminu\" is a bit too literal and sounds less idiomatic.",
-          "suggestion": "Adres URL regulaminu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -175,18 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation \"Condiții de furnizare a adresei URL\" is not an accurate translation of \"Terms of Service URL.\" \"Furnizare\" implies providing or delivery, which isn't the intended meaning. A more accurate translation would focus on 'Terms' and 'URL'.",
-          "suggestion": "Condiții de utilizare URL"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The use of 'adresei URL' is technically correct but sounds awkward and overly formal. It's better to use a more natural phrasing.",
-          "suggestion": "URL-ul Termenilor și Condițiilor"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -198,25 +153,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'සේවා' (sewa) means 'service', 'නියම' (niyama) translates to 'rules' or 'regulation', not 'terms'. 'URL' is correctly translated.",
-          "suggestion": "Consider 'සේවා කොන්දේසි URL' (sewa kondēsi URL) which translates to 'Service Conditions URL' or 'Terms and Conditions URL'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'URL adresa pre Podmienky používania' is not the most natural or common way to say 'Terms of Service URL' in Slovak. While technically correct, it's a bit clunky.",
-          "suggestion": "A better translation would be 'URL Podmienok používania' or 'Adresa URL pre Podmienky používania'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -246,30 +189,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"URL-адреса Умов\" is not the most natural or precise translation of \"Terms of Service URL\". \"Terms of Service\" is often translated as \"Умови обслуговування\" in Ukrainian. A more accurate translation would incorporate this.",
-          "suggestion": "URL-адреса Умов обслуговування"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the hyphen in \"URL-адреса\" feels slightly awkward.  Ukrainian often omits hyphens in similar constructions.",
-          "suggestion": "URL адреса Умов обслуговування"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'URL Điều Khoản Dịch Vụ' is technically correct but could be improved for naturalness and common usage in Vietnamese. 'Điều Khoản Dịch Vụ' is a bit formal and literal.",
-          "suggestion": "URL Điều khoản dịch vụ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

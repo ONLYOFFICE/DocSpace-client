@@ -3,7 +3,7 @@
   "content": "Before",
   "content_en_sha1_hash": "74f39697ac328c6325ce068b6aaca626abc0bf63",
   "created_at": "2025-05-19T21:30:49.670Z",
-  "updated_at": "2026-02-19T13:36:32.826Z",
+  "updated_at": "2026-04-08T20:35:39.370Z",
   "comment": {
     "text": "This translation key is used to display the text \"Before\" in a filter dialog component. It likely appears on a date picker input field within the FilterDialog, allowing users to select a time frame that occurred before a specified delivery date.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Əvvəlki' means 'Previous' (adjective). In the context of a date picker filter (e.g., 'Before [Date]'), the correct prepositional meaning is 'daha əvvəl' or simply 'əvvəl'.",
+          "suggestion": "Əvvəl"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -102,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'마감' translates to 'deadline' or 'closing date' in English, not 'before'. It doesn't accurately reflect the meaning of 'Before' in this context.",
-          "suggestion": "Consider alternatives such as '이전' (before, prior) or '사전' (pre-)."
+          "description": "The Korean translation '마감' means 'Deadline' or 'Closing', which is a noun. The English 'Before' in this context is a preposition/conjunction used to define a time range (e.g., 'Before [Date]').",
+          "suggestion": "이전"
         }
       ],
       "approved_at": null
@@ -171,7 +177,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Prej' means 'previously' or 'earlier' in an adverbial sense. In the context of a date picker filter (Before [Date]), the correct prepositional meaning is required.",
+          "suggestion": "Pred"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -205,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

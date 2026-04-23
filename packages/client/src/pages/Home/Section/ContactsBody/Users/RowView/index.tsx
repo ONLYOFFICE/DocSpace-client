@@ -26,7 +26,7 @@
 
 import { inject, observer } from "mobx-react";
 
-import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
+import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
 import { TContactsViewAs } from "SRC_DIR/helpers/contacts";
 
 import EmptyScreen from "../../EmptyScreen";

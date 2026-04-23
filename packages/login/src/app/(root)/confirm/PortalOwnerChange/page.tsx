@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { redirect } from "next/navigation";
 import { FormWrapper } from "@docspace/ui-kit/components/form-wrapper";
 
 import { GreetingContainer } from "@/components/GreetingContainer";
@@ -49,6 +50,8 @@ async function Page(props: PortalOwnerChangeProps) {
     getSettings(),
     getUserFromConfirm(uid, confirmKey),
   ]);
+
+  if (user === "access-restricted") redirect("/access-restricted");
 
   return settings && typeof settings !== "string" ? (
     <>

@@ -3,7 +3,7 @@
   "content": "Operation has been successfully completed.",
   "content_en_sha1_hash": "849e11257114c8c8bbc65cf054d9b6da983bcb6d",
   "created_at": "2025-05-19T21:30:49.214Z",
-  "updated_at": "2026-03-31T15:18:46.522Z",
+  "updated_at": "2026-04-07T22:13:08.144Z",
   "comment": {
     "text": "This translation key is used to display a success message when an operation is completed successfully. It appears as a toast notification after an operation is finished, typically in response to user actions such as saving settings or completing a process.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 3481,
+      "line_number": 3486,
       "context": "const { setIsIndexEditingMode } = this.indexingStore;\n \n try {\n const operationId = uniqueid(\"operation_\");\n await reorderIndex(id);\n toastr.success(t(\"Common:SuccessfullyCompletedOperation\"));\n setIsIndexEditingMode(false);\n this.updateCurrentFolder(true, operationId);\n } catch (e) {\n console.error(e);\n toastr.error(t(\"Files:ErrorChangeIndex\"));",
       "module": "/packages/client"
     },
@@ -71,9 +71,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The German translation 'Operation erfolgreich abgeschlossen wurde.' uses the passive voice incorrectly and sounds unnatural. The correct sentence structure would use a more active voice.",
-          "suggestion": "Operation wurde erfolgreich abgeschlossen."
+          "type": "incorrect_translation",
+          "description": "The German translation uses incorrect word order (verb at the end), making it a subordinate clause fragment rather than a complete, grammatically correct sentence for a success message.",
+          "suggestion": "Operation erfolgreich abgeschlossen."
         }
       ],
       "approved_at": null
@@ -95,8 +95,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "While 'Toiminto on valmis' can be interpreted as 'Operation is ready', it doesn't accurately convey the meaning of 'Operation has been successfully completed'. It lacks the emphasis on success.",
+          "type": "missing_content",
+          "description": "The translation 'Toiminto on valmis' means 'Operation is ready' or 'Operation is finished', which fails to convey the 'successfully' aspect of the English source. In a UI context, 'valmis' can imply a state of readiness rather than a successful completion of a process.",
           "suggestion": "Toiminto on suoritettu onnistuneesti."
         }
       ],
@@ -159,7 +159,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \"o\"",
+          "suggestion": ""
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -173,9 +179,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "While 'Operațiune terminată cu succes' is understandable, a more natural and precise translation of 'Operation has been successfully completed' in Romanian would be 'Operațiunea a fost finalizată cu succes'.  'Terminată' implies an ending, whereas 'finalizată' is more aligned with completion.",
-          "suggestion": "Operațiunea a fost finalizată cu succes"
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \"s\"",
+          "suggestion": ""
         }
       ],
       "approved_at": null

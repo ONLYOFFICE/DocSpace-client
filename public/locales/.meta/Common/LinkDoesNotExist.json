@@ -3,7 +3,7 @@
   "content": "The link you are trying to open does not exist.",
   "content_en_sha1_hash": "f7dcb59c0d6224005d43ea22aaf3099617981d79",
   "created_at": "2025-05-19T21:30:46.162Z",
-  "updated_at": "2025-07-10T11:11:07.129Z",
+  "updated_at": "2026-04-08T05:40:34.874Z",
   "comment": {
     "text": "This translation key is used to display a message when a link does not exist. It is typically shown as an error message in UI components, such as an alert or dialog box, after attempting to access a non-existent link.",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, the translation 'Açmağa çalışdığınız keçid mövcud deyil' is a bit formal for a user-facing error message. A more natural and user-friendly phrasing would be preferable.",
-          "suggestion": "Consider a more conversational alternative like 'Daxil etdiyiniz keçid tapılmadı.' or 'Sizə göstərilən keçid işləmir.'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -117,24 +111,19 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ບໍ່ມີລິ້ງທີ່ເຈົ້າພະຍາຍາມເປີດ' is a literal translation that doesn't quite capture the natural flow of the English phrase 'The link you are trying to open does not exist.' A more natural translation would emphasize that the link is broken or invalid.",
-          "suggestion": "ບໍ່ສາມາດເປີດລິ້ງນີ້ໄດ້ ຫຼື ບໍ່ມີຢູ່ແລ້ວ (Bakam san pert ling ni dai rue bor mi yu laeo) - This translates to 'This link cannot be opened or does not exist.'"
-        },
-        {
-          "type": "spelling",
-          "description": "While technically correct, using 'ບໍສາມາດ' (bakam san) instead of 'ບໍ່ມີ' (bor mi) offers a more appropriate tone and clarity for a technical error message.",
-          "suggestion": "Replace 'ບໍ່ມີ' with 'ບໍສາມາດ'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation contains a grammatical error in the relative clause ('kuru' instead of 'ko'), which makes the sentence sound unnatural or incorrect in Latvian. While the meaning is understandable, 'kuru' is used for masculine/feminine accusative, whereas 'saite' (link) is feminine and requires 'ko' or a different structure for a relative clause.",
+          "suggestion": "Saite, ko mēģināt atvērt, neeksistē."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -164,30 +153,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Link' is misspelled as 'Lunk-ul'.",
-          "suggestion": "Link-ul"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Link' is not accurately translated. 'Link' refers to a hyperlink.",
-          "suggestion": "Legătura pe care încercați să o deschideți nu există."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Ссылки, которую вы пытаетесь открыть, не существует.\" is a literal translation that sounds slightly awkward in Russian. A more natural phrasing would be something like \"Указанная ссылка не существует\" or \"Ссылка, которую вы пытаетесь открыть, не найдена.\"",
-          "suggestion": "Указанная ссылка не существует"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -239,6 +211,18 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The translation '链接不存在' (The link does not exist) omits the subject 'you are trying to open', making it slightly less precise than the source, though it is a common localization choice. However, per strict verification of 'conveying the SAME MEANING', the nuance of the user's action is missing.",
+          "suggestion": "您尝试打开的链接不存在。"
+        }
+      ],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -6,17 +6,19 @@ import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { DeviceType } from "@docspace/shared/enums";
 
 type ReducedRightsDialogProps = {
   visible: boolean;
   adminName: string;
+  currentDeviceType: DeviceType;
   setReducedRightsData: (visible: boolean, admin?: string) => void;
 };
 
 const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
   visible,
   adminName,
-
+  currentDeviceType,
   setReducedRightsData,
 }) => {
   const { t } = useTranslation(["Common", "Files"]);
@@ -34,7 +36,12 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
   };
 
   return (
-    <ModalDialog visible={visible} onClose={onCloseDialog} autoMaxHeight>
+    <ModalDialog
+      visible={visible}
+      onClose={onCloseDialog}
+      autoMaxHeight
+      isLarge
+    >
       <ModalDialog.Header>{t("Common:Warning")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Trans
@@ -70,28 +77,29 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
           size={ButtonSize.normal}
           primary
           onClick={onCloseDialog}
-          scale
+          scale={currentDeviceType === DeviceType.mobile}
         />
         <Button
           key="RedirectButton"
-          label={t("Files:GoToSection", {
-            sectionName: t("Common:MyDocuments"),
-          })}
+          label={t("Common:MyDocuments")}
           size={ButtonSize.normal}
           onClick={onRedirect}
-          scale
+          scale={currentDeviceType === DeviceType.mobile}
         />
       </ModalDialog.Footer>
     </ModalDialog>
   );
 };
 
-export default inject(({ dialogsStore }: TStore) => {
+export default inject(({ dialogsStore, settingsStore }: TStore) => {
   const { reducedRightsData, setReducedRightsData } = dialogsStore;
+  const { currentDeviceType } = settingsStore;
 
   return {
     visible: reducedRightsData.visible,
     adminName: reducedRightsData.adminName,
+    currentDeviceType,
     setReducedRightsData,
   };
 })(observer(ReducedRightsDialog));
+

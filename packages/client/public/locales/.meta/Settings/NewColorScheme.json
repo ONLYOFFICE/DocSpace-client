@@ -3,7 +3,7 @@
   "content": "New color scheme",
   "content_en_sha1_hash": "3c17e031c8936402d74774e9b5de79de0c318835",
   "created_at": "2025-05-19T21:30:51.962Z",
-  "updated_at": "2026-03-26T08:26:58.123Z",
+  "updated_at": "2026-04-09T02:24:24.982Z",
   "comment": {
     "text": "This translation key is used to display the text \"New color scheme\" as a header in settings pages, specifically in the PortalSettings categories. It appears on a button labeled \"Add Theme\".",
     "is_auto": true,
@@ -87,13 +87,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Nuova combinazione di colori' is a literal translation, it doesn't fully capture the meaning of 'New color scheme'. 'Color scheme' implies a coordinated set of colors used together, and 'combinazione' focuses more on a combination rather than a designed system. A better translation would reflect this.",
-          "suggestion": "Nuovo schema colori"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -165,13 +159,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation \"Nová farebná schéma\" is a literal translation and doesn't quite flow naturally in Slovak. It translates to 'New color scheme' but a more common and natural phrasing would be 'Nová farebná téma'.",
-          "suggestion": "Nová farebná téma"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -183,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Serbian (Cyrillic) translation 'Нова шема боја' has a spelling error. The word 'шема' should be spelled 'схема'.",
-          "suggestion": "Нова схема боја"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -217,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

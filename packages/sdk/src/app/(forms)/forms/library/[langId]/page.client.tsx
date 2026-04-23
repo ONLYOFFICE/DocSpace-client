@@ -40,6 +40,7 @@ import { libraryUrl } from "../../../_utils/libraryUrl";
 import { useFormsSettingsStore } from "../../../_store/FormsSettingsStore";
 import { useLibraryBreadcrumb } from "../../../_components/library-breadcrumb/LibraryBreadcrumbContext";
 import LibraryLandingPage from "../../../_components/library-landing";
+import FormsEmpty from "../../../_components/forms-empty";
 
 const LibraryLandingRoute = () => {
   const router = useRouter();
@@ -171,7 +172,7 @@ const LibraryLandingRoute = () => {
     [langId, roomId, libraryId, router],
   );
 
-  if (isLoading || folders.length === 0) {
+  if (isLoading) {
     return (
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%", maxWidth: 800, margin: "0 auto", paddingTop: 24, paddingInline: 24, gap: 48, boxSizing: "border-box" }}>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8, width: "100%", maxWidth: 600 }}>
@@ -191,6 +192,10 @@ const LibraryLandingRoute = () => {
         </div>
       </div>
     );
+  }
+
+  if (folders.length === 0) {
+    return <FormsEmpty />;
   }
 
   return (

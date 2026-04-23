@@ -3,7 +3,7 @@
   "content": "Load metadata from XML to fill the required fields automatically.",
   "content_en_sha1_hash": "5dc7828aee10be08ff27972ea80701e595ddd1d2",
   "created_at": "2025-05-19T21:30:50.195Z",
-  "updated_at": "2025-05-24T02:52:34.512Z",
+  "updated_at": "2026-04-08T22:09:25.047Z",
   "comment": {
     "text": "\"Load metadata from XML to fill required fields automatically\" is used as a tooltip or description for an icon button that enables Single Sign On. This translation key appears in the PortalSettings page and helps users understand its purpose.",
     "is_auto": true,
@@ -30,13 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"metadata\" as \"لغة التوصيف الموسعة\" (language of extended description) is not accurate. Metadata refers to data about data, not a language. A more suitable translation would focus on the concept of data or configuration.",
-          "suggestion": "بيانات التعريف (Bayanat al-ta'reef) or إعدادات (I'dadat) - depending on context. Both convey the concept of metadata more accurately."
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure is a bit awkward. The phrase \"لملىء الحقول المطلوبة تلقائيًا\" (to fill the required fields automatically) is grammatically correct but sounds less natural. The verb tense and word order could be improved.",
-          "suggestion": "يمكن ملء الحقول المطلوبة تلقائيًا عن طريق تحميل البيانات من ملف XML. (Can the required fields be filled automatically by loading data from an XML file.)"
+          "description": "The translation omits the word 'metadata' (البيانات الوصفية), translating it simply as 'data' (البيانات), which changes the technical meaning.",
+          "suggestion": "تحميل البيانات الوصفية من ملف XML لملء الحقول المطلوبة تلقائيًا."
         }
       ],
       "approved_at": null
@@ -116,13 +111,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The term 'metadata' is transliterated. While acceptable, consider if a more common or localized term might improve clarity for the target audience.  The current transliteration is consistent but may not be immediately understandable.",
-          "suggestion": "Consider if a localized equivalent for 'metadata' would be more understandable to Lao speakers.  This would depend on the target audience's technical expertise."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -146,13 +135,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Carregue os metadados através de um XML para preencher os campos obrigatórios automaticamente' is slightly verbose and less natural than a more direct translation.",
-          "suggestion": "Carregue metadados de um XML para preencher automaticamente os campos obrigatórios."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -170,35 +153,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The phrase 'XML-файла' could be more consistently formatted. While technically correct, 'XML file' in the English often appears as 'XML file' or simply 'XML'. Using a hyphen like this might be considered a stylistic choice that doesn't quite match the typical tone of technical documentation.",
-          "suggestion": "Для автоматического заполнения необходимых полей загрузите метаданные из XML."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"වුවමනා ක්‍ෂේත්‍ර ස්වයංක්‍රීයව පිරවීමට XML වෙතින් පාරදත්ත පූරණය කරන්න\" is a bit literal and could be more natural. 'Metadata' isn't always directly translated. A more natural phrasing would convey the meaning of loading XML data to populate fields.",
-          "suggestion": "වුවමනා ක්ෂේත්‍රයන් ස්වයංක්‍රීයව පුරවා ගැනීමට XML ඩිජිටල් ඩෝකියුමන්ට් භාවිත කරන්න."
-        },
-        {
-          "type": "spelling",
-          "description": "While technically correct, 'පාරදත්ත' is less commonly used than a more general term for 'data'.",
-          "suggestion": "Consider using a broader term for 'data' that is more readily understood by a wider audience."
-        },
-        {
-          "type": "formatting",
-          "description": "The use of 'XML' in Romanized format within a Sinhala sentence is unusual. Consider translating the abbreviation, especially for broader accessibility.",
-          "suggestion": "Use the full translated form of XML (if a standard exists) or leave it in Romanized format but ensure it's consistent with overall style."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -216,13 +177,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'аутоматски' (automatically) is spelled correctly, but 'попунили' should be 'напунити'. While 'попунити' is understandable, 'напунити' is a more accurate translation of 'fill' in this context.",
-          "suggestion": "напунити"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -234,13 +189,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation is a literal rendering and slightly awkward. 'Yükleyin' (upload) implies a one-time action, while the English 'Load' suggests a process that might be repeated or is more general. A more natural Turkish phrasing would be more suitable.",
-          "suggestion": "Meta verileri XML'den alarak gerekli alanları otomatik olarak doldurun."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -256,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "Ver.",
   "content_en_sha1_hash": "ad13edd94b15126ad9e0d50572bd122fefa36cb1",
   "created_at": "2025-05-19T21:30:49.939Z",
-  "updated_at": "2026-02-19T13:36:32.812Z",
+  "updated_at": "2026-04-08T20:39:37.971Z",
   "comment": {
     "text": "This translation key is used for the string \"Ver.\" which will be displayed as the value of a version number in a plugin info container on the PortalSettings page. It appears as part of a larger description of a plugin's version history.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation \"الإصدار\" (al-isdaar) translates to 'edition' or 'release' rather than the abbreviation 'Ver.' which is typically used to denote 'Version'. While 'release' can sometimes be appropriate, it's a more verbose and less common translation for this specific key.",
-          "suggestion": "Consider a more concise translation like \"نسخة\" (nuskha) which means 'version' or 'copy', or potentially an abbreviation like \"إص\" (is) if space is limited and brevity is preferred, but this may require further context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -108,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Japanese translation \"に変更\" doesn't accurately convey the meaning of \"Ver.\", which is short for \"Version\". \"に変更\" translates to \"to change to\" or \"to modify to,\" implying a change from a previous state, which isn't what 'Ver.' represents.",
-          "suggestion": "Consider alternatives like \"Ver.\", \"バージョン\", or \"版\" depending on the context and desired level of formality. \"バージョン\" is a direct transliteration and commonly used for version numbers."
+          "description": "The Japanese translation 'に変更' means 'change to' or 'changed to', which is completely different from the English 'Ver.' (abbreviation for Version).",
+          "suggestion": "Ver."
         }
       ],
       "approved_at": null
@@ -117,13 +111,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English content \"Ver.\" is an abbreviation for \"Version\". The Korean translation \"버전\" is a correct translation of \"Version\", but it doesn't reflect the abbreviation nature of the original English content. While technically correct, it loses the brevity intended by \"Ver.\"",
-          "suggestion": "Consider alternatives like \"Ver.\" (keeping the abbreviation) or a more concise Korean equivalent of 'Version' depending on context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -147,13 +135,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation 'Wer.' is not an accurate translation of 'Ver.'. The correct Polish equivalent for 'Ver.' (as a shortened version of 'Version') would be 'Wersja'. 'Wer.' is a misspelling and doesn't convey the intended meaning.",
-          "suggestion": "Wersja"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -183,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala abbreviation 'අනු.' (Anu.) is typically used for 'Anuwarana' (Annex/Appendix) or 'Anupada' (Sub-), which does not mean 'Version'.",
+          "suggestion": "වර්."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -225,19 +213,25 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Bản' is incomplete. In the context of 'Ver.' (Version), 'Bản' usually means 'copy' or 'edition'. To represent 'Version' as an abbreviation in Vietnamese, 'Phiên bản' or the abbreviation ' ever.' is more appropriate, but 'Bản' alone is semantically insufficient and potentially confusing.",
+          "suggestion": "Phiên bản"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"版本\" (bǎnběn) means 'version' in general, but given the key name 'VersionHistory:Version' and the English 'Ver.', a more appropriate and concise translation would be '版'. '版本' is too verbose for what appears to be an abbreviation.",
-          "suggestion": "版"
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "Number of attempts",
   "content_en_sha1_hash": "1fdff331916efb2b880604cb7c80296a41565cd7",
   "created_at": "2025-05-19T21:30:52.094Z",
-  "updated_at": "2025-09-26T15:21:06.425Z",
+  "updated_at": "2026-04-09T02:17:40.379Z",
   "comment": {
     "text": "The \"NumberOfAttempts\" translation key is used to display the label for a field that shows the number of attempts allowed or made by a user. It appears in an input container on a security settings page and should be translated as the text \"Number of attempts\".",
     "is_auto": true,
@@ -36,7 +36,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation \"Təşəbbüslərin sayı\" translates to \"Number of initiatives\" or \"Number of attempts (in a broader sense)\", which is not an accurate translation of \"Number of attempts\" in the context of settings, which usually refers to tries or attempts at a task.",
+          "description": "The word 'Təşəbbüslərin' means 'initiatives'. In the context of security settings and brute force protection, 'attempts' should be translated as 'cəhd' (attempt).",
           "suggestion": "Cəhd sayı"
         }
       ],
@@ -75,13 +75,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "“Yritysten määrä” translates to 'Number of attempts' as 'Number of companies'. The correct translation should reflect the number of tries or attempts allowed.",
-          "suggestion": "Kokeilukertojen määrä"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -105,13 +99,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '試行回数' (shikō kaisū) is technically correct as 'number of attempts', but it often implies attempts in a scientific or technical context (e.g., experiments, simulations). For a general settings menu, a more natural and user-friendly translation might be '試行回数' (shikō kaisū) or 'やり直し回数' (yarinaoshi kaisū - number of retries).",
-          "suggestion": "Consider 'やり直し回数' (yarinaoshi kaisū) or a more context-specific alternative for greater clarity and user-friendliness."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -171,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'උත්සාහ ගණන' is understandable, a more natural and precise translation of 'Number of attempts' would be 'පrobeකි න්වන්බේරුම'. 'උත්සාහ' primarily means 'effort,' while 'attempts' refers to the number of tries.",
-          "suggestion": "පrobeකි න්වන්බේරුම"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -223,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

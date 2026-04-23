@@ -3,7 +3,7 @@
   "content": "Unknown error",
   "content_en_sha1_hash": "e5fd9aa24c9417e7332e6f25936ae2a6ec8f1524",
   "created_at": "2025-05-19T21:30:49.406Z",
-  "updated_at": "2026-03-20T09:07:45.606Z",
+  "updated_at": "2026-04-07T20:56:53.655Z",
   "comment": {
     "text": "This translation key is used to display a generic error message when an unknown error occurs, often in situations where user input or system actions result in unexpected outcomes. It appears as part of error messages and dialogues throughout the application, providing a standardized response for users when unknown errors occur.",
     "is_auto": true,
@@ -119,9 +119,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The Lao phrase 'ບໍ່ຊາບຂໍ້ຜິດພາດ' is a common translation for 'Unknown error', but the spacing after 'ບໍ່ຊາບ' should be removed.",
-          "suggestion": "ບໍ່ຊາບຂໍ້ຜິດພາດ"
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ບໍ່ຊາບຂໍ້ຜິດພາດ' literally translates to 'Don't know error' or 'Unknown error' in a way that sounds like a verb phrase rather than a noun phrase error message. In Lao UI context, 'Unknown error' is better expressed as 'ຂໍ້ຜິດພາດທີ່ບໍ່ຮູ້ຈັກ'.",
+          "suggestion": "ຂໍ້ຜິດພາດທີ່ບໍ່ຮູ້ຈັກ"
         }
       ],
       "approved_at": null
@@ -171,13 +171,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'නොදන්නා දෝෂයකි' (nodannaa dosayakii) is a literal translation and while understandable, it's not the most natural or idiomatic way to express 'Unknown error' in Sinhala. It sounds somewhat formal and technical.",
-          "suggestion": "Consider 'මුරණ්ඩු දෝෂයකි' (murandaa dosayakii) or 'හැඳුනනොගත් දෝෂයකි' (hadunnangata dosayakii).  'මුරණ්ඩු' (murandaa) is often used in technical contexts to mean 'unknown' or 'unidentified', making it a more appropriate choice. 'හැඳුනනොගත්' (hadunnangata) means 'unrecognized' or 'unidentified'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

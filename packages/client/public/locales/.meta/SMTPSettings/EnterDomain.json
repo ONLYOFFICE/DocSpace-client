@@ -3,7 +3,7 @@
   "content": "Enter domain",
   "content_en_sha1_hash": "9eff7ed921a9f0545c57d5b06e9e53be925a95f4",
   "created_at": "2025-05-19T21:30:53.295Z",
-  "updated_at": "2026-02-19T13:36:32.863Z",
+  "updated_at": "2026-04-08T22:01:36.369Z",
   "comment": {
     "text": "This translation key is used to display a placeholder text in a form field when entering a domain. It appears as a prompt within an input field, guiding users to enter their domain information.",
     "is_auto": true,
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"වසම යොදන්න\" translates to something closer to \"Add Wasama\" or \"Enter Wasama.\" \"Wasama\" is not a standard term related to domains. The correct translation should convey 'domain' and not an unrelated term.",
-          "suggestion": "Enter the domain (උපසංදේශය ඇතුළත් කරන්න) or Domain ඇතුළත් කරන්න"
+          "description": "The Sinhala word 'වසම' (vasama) means 'the same' or 'identical', which is a phonetic misspelling/mistranslation of 'domain' (ඩොමේන්). The current translation reads 'Enter the same' instead of 'Enter domain'.",
+          "suggestion": "ඩොමේන් එක ඇතුළත් කරන්න"
         }
       ],
       "approved_at": null
@@ -207,13 +207,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"输入域\" (Shuru Yu) is technically correct, a more natural and user-friendly translation for \"Enter domain\" in a software context would be something like \"域名\" (Mingyu - Domain Name) or \"输入域名\" (Shuru Mingyu - Enter Domain Name). \"域\" (Yu) is a more general term for a domain and might not be immediately clear to all users.",
-          "suggestion": "输入域名"
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

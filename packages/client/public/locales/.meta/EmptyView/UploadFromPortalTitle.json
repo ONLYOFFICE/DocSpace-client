@@ -3,7 +3,7 @@
   "content": "Upload from {{productName}}",
   "content_en_sha1_hash": "252a750aa281d129a14c2dd82d20fb5352f42391",
   "created_at": "2025-05-19T21:30:56.552Z",
-  "updated_at": "2026-03-31T15:18:45.843Z",
+  "updated_at": "2026-04-10T08:21:04.283Z",
   "comment": {
     "text": "This translation key is used to display a title when uploading a file from a portal or document space. The placeholder {productName} will be replaced with the actual product name. This text appears as part of an upload option in the UI.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 410,
+      "line_number": 403,
       "context": "newUploadActions[0].label = t(\"EmptyView:UploadDeviceOptionTitle\");\n const uploadFromDocspace = {\n id: \"actions_upload-files-product\",\n className: \"main-button_drop-down\",\n icon: MoveReactSvgUrl,\n label: t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n onClick: onShowAiKnowledgeSelectFileDialog,\n key: \"upload-files-product\",\n };",
       "module": "/packages/client"
     },
@@ -42,7 +42,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3609,
+      "line_number": 3608,
       "context": "return [\n {\n id: \"actions_upload-files-product\",\n className: \"main-button_drop-down\",\n icon: MoveReactSvgUrl,\n label: t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n onClick: this.onShowAiKnowledgeSelectFileDialog,\n key: \"upload-files-product\",\n },",
       "module": "/packages/client"
     }
@@ -99,13 +99,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Lataa {{productName}}:sta' literally translates to \"Download from {{productName}}\". While understandable, it's not the most natural phrasing in Finnish. A more natural and idiomatic translation would be 'Lataa {{productName}} -sta' or 'Lataa {{productName}}' depending on the context.",
-          "suggestion": "Lataa {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -117,13 +111,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Վերբեռնում {{productName}}-ից\" literally translates to \"Upload from {{productName}}\". While technically correct, it's not the most natural way to say \"Upload from [product name]\" in Armenian. A more idiomatic translation would imply a source or origin.",
-          "suggestion": "Վերբեռնում {{productName}}-ի (Verbternum {{productName}}-i) which translates to 'Upload from {{productName}}' and implies uploading 'of' or 'from' a source."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -195,13 +183,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"{{productName}} වෙතින් උඩුගත කරන්න\" is a literal translation and might sound unnatural in Sinhala. A more natural phrasing would be something like \"{{productName}} ඔස්සේ උඩුගත කරන්න\" or \"{{productName}} හරහා උඩුගත කරන්න\".  The word 'vevin' is more often used to indicate 'from' in a source or origin sense, while 'ossee' or 'harahaa' are more suitable for indicating a medium or channel.",
-          "suggestion": "{{productName}} ඔස්සේ උඩුගත කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -219,25 +201,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation \"Отпреми из {{productName}}\" does not accurately convey the meaning of \"Upload from {{productName}}\". \"Отпреми\" means \"ship\" or \"dispatch\", not \"upload\".",
-          "suggestion": "Учитај из {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Otpremi' is a valid verb, 'Upload' in this context implies a more direct transfer of files. 'Otpremi' has a connotation of shipping or sending something externally, not necessarily uploading to a system.",
-          "suggestion": "Uploaduj iz {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -249,13 +219,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Передати з {{productName}}' is not the most natural or accurate translation of 'Upload from {{productName}}'. 'Передати' implies handing over or transferring, which doesn't directly convey the action of uploading. A more appropriate translation would convey the idea of uploading data or files.",
-          "suggestion": "Завантажити з {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

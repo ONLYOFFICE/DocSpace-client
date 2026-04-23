@@ -12,5 +12,8 @@
   "SuccessConnected": "{{serviceName}} is succesvol verbonden als notificatiekanaal. U ontvangt nu updates daar.",
   "SuccessDisconnected": "{{serviceName}} is succesvol losgekoppeld als notificatiekanaal. Er worden geen notificaties meer naar toe gestuurd.",
   "UsefulTips": "Handige {{productName}} tips",
-  "UsefulTipsDescription": "Ontvang handige gidsen over {{productName}}"
+  "UsefulTipsDescription": "Ontvang handige gidsen over {{productName}}",
+  "ActionsWithFilesDescription": "Badges markeren de activiteit van bestanden — uploads, bewerkingen of deelacties — in de secties {{rooms}}, {{shared}}, {{documents}} en {{aiAgents}}.",
+  "RoomsActivityDescription": "Ontvang onmiddellijke e-mailmeldingen over nieuwe gedeelde bestanden/mappen en activiteiten binnen uw {{rooms}} en {{aiAgents}}.",
+  "RoomUpdateNotify": "Gedeelde inhoud, {{rooms}} en {{aiAgents}} activiteit"
 }

@@ -3,7 +3,7 @@
   "content": "Commentator",
   "content_en_sha1_hash": "9f6fd4869ea0279d99dd0d5720e1bd5b70d03dec",
   "created_at": "2025-05-19T21:30:43.550Z",
-  "updated_at": "2026-02-19T13:36:33.112Z",
+  "updated_at": "2026-04-08T15:11:25.531Z",
   "comment": {
     "text": "This translation key is used as a label and icon for a \"Commentator\" access right in a share component, typically displayed on a permissions panel or settings dialog. It describes the role of someone who can comment on shared content but cannot make changes.",
     "is_auto": true,
@@ -63,13 +63,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Spanish translation \"Comentador\" is not the standard or most accurate translation of \"Commentator\". The correct translation is likely \"Comentarista\".",
-          "suggestion": "Comentarista"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -105,13 +99,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation \"주석 추가자\" (ju-seok chu-ga-ja) literally translates to \"comment adder\" or \"annotation adder.\" While it conveys a related meaning, \"Commentator\" implies a person who provides commentary or analysis, not just adds notes. It's a broader role.",
-          "suggestion": "Consider translations like \"해설자\" (hae-seol-ja) which means 'commentator' or 'narrator', or \"논평가\" (non-pyeong-ga) which means 'editorialist/commentator'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -132,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Reageerder' can sometimes be used to describe a commentator, it primarily means 'responder' or 'reactor'. 'Commentator' implies someone who provides commentary or analysis, a more specific role than simply responding. A more accurate translation would depend on the specific context.",
-          "suggestion": "Consider 'Analist' or 'Verslaggever' (reporter) if the context requires someone providing analysis or reporting. Otherwise, further context is needed to provide a more precise translation."
+          "description": "The translation 'Reageerder' (one who reacts) is too generic and does not specifically denote the role of a 'Commentator' in a software permissions context. In Dutch UI terminology for access rights, 'Commentator' is the standard term.",
+          "suggestion": "Commentator"
         }
       ],
       "approved_at": null
@@ -147,13 +135,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Portuguese translation 'Comentador' is not the standard or most accurate translation of 'Commentator'. The correct translation is 'Comentário' (as a noun) or 'Comentador' (as a person). Since 'Commentator' refers to a person, 'Comentador' is technically correct, but 'Comentário' might be more frequently used depending on the context.",
-          "suggestion": "Consider 'Comentário' or double-check the intended meaning of 'Commentator' in the source context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -219,13 +201,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Người nhận xét' is a valid Vietnamese phrase, it doesn't perfectly capture the nuance of 'Commentator' in the context of, for example, a sports commentator or a commentator on a piece of writing. 'Người bình luận' or 'Người bình luận viên' would be more accurate, especially depending on the specific context.",
-          "suggestion": "Consider 'Người bình luận' or 'Người bình luận viên' as alternatives depending on the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
@@ -234,10 +210,16 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"可评论\" (ke ping lun) does not accurately convey the meaning of \"Commentator\". It translates to \"can be commented\" or \"commentable\", not a person who comments.",
-          "suggestion": "A more accurate translation would be something like \"评论员\" (ping lun yuan) which directly translates to \"commentator\"."
+          "description": "The translation '可批注' means 'Can annotate' (an action/capability), whereas the English 'Commentator' refers to a person/role. In a permissions panel, the label should represent the role name.",
+          "suggestion": "评论员"
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

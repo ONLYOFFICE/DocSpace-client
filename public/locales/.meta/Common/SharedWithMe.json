@@ -3,7 +3,7 @@
   "content": "Shared with me",
   "content_en_sha1_hash": "f40ca84f04474455cba711b1643a006b59aa1210",
   "created_at": "2025-05-19T21:30:48.661Z",
-  "updated_at": "2026-03-20T09:07:45.576Z",
+  "updated_at": "2026-04-07T23:14:20.569Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Shared with me\" in various contexts within a workspace settings page. It likely appears as a label on buttons or sections related to shared files and folders, guiding users through the export process.",
     "is_auto": true,
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation \"Mənimlə paylaşın\" literally translates to \"Share with me.\" The English \"Shared with me\" implies content that *has already* been shared. \"Mənimlə paylaşın\" suggests an active request for sharing. A more accurate translation would convey the passive sense of content already accessible.",
-          "suggestion": "A more appropriate translation might be something like \"Paylaşılmış mənimlə\" (Shared with me) or \"Mənimlə paylaşılıb\" (Was shared with me)."
+          "description": "The Azerbaijani translation 'Mənimlə paylaşın' means 'Share with me' (an imperative command), whereas the English source 'Shared with me' is a passive description of items already shared by others.",
+          "suggestion": "Mənimlə paylaşılanlar"
         }
       ],
       "approved_at": null
@@ -84,7 +84,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Sdílel se mnou\" is grammatically correct but doesn't fully capture the meaning of \"Shared with me\". It implies someone *shared* something *with* me. \"Shared with me\" often refers to files or documents accessible to me within a platform (like Google Drive). A more accurate translation would be something along the lines of \"Sdílené se mnou\" or \"Sdílené s mým účtem\".",
+          "description": "The Czech translation 'Sdílel se mnou' uses a masculine singular verb form meaning 'He shared with me', whereas the English 'Shared with me' is a passive participle/adjective phrase describing items. The correct translation should be a passive construction.",
           "suggestion": "Sdílené se mnou"
         }
       ],
@@ -93,25 +93,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation 'Für mich freigegeben' is technically correct but doesn't fully capture the nuance of 'Shared with me'. It implies something was released for my use, rather than simply being shared.",
-          "suggestion": "A more accurate translation might be 'Mit mir geteilt' or 'Freigegeben für mich'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Κοινή χρήση με μένα' (Koiní xrísi me ména) literally translates to 'Shared use with me'. While conveying a similar meaning, 'Shared with me' is better translated as 'Μοιρασμένο με εμένα' (Moirasmeno me emena) or 'Κοινή χρήση μαζί μου' (Koiní xrísi mazí mou).",
-          "suggestion": "Μοιρασμένο με εμένα (Moirasmeno me emena) or Κοινή χρήση μαζί μου (Koiní xrísi mazí mou)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -138,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Ինձ հետ համօգտագործվում է\" (Indz het hamogtorstvom e) literally translates to 'Used with me'. While it conveys a sense of sharing, it's not the most natural or accurate translation of 'Shared with me'. A more accurate translation would be closer to 'Կիսվել է ինձ հետ' (Kisvel e indz het) or 'Բաժանվել է ինձ հետ' (Bajanvel e indz het).",
-          "suggestion": "Կիսվել է ինձ հետ (Kisvel e indz het) or Բաժանվել է ինձ հետ (Bajanvel e indz het)"
+          "description": "The Armenian translation 'Ինձ հետ համօգտագործվում է' is a passive voice construction meaning 'It is being shared with me'. In a UI context for a section label or folder name, this is grammatically unnatural and overly wordy. The standard UI translation for 'Shared with me' should be 'Ինձ կիսվածը' or 'Ինձ հետ կիսվածը'.",
+          "suggestion": "Ինձ հետ կիսվածը"
         }
       ],
       "approved_at": null
@@ -153,25 +141,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"私と共有された\" (Watashi to kyōyū sareta) literally translates to \"Shared with me.\" However, it sounds slightly unnatural in Japanese for this context. A more natural and commonly used translation for \"Shared with me\" in a sharing context (like in Google Drive or similar services) would be \"共有されました\" (Kyōyū saremashita).",
-          "suggestion": "共有されました"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation '나와 공유됨' (nawa gongyudwem) literally translates to 'Shared with me'. While not strictly incorrect, it's a very literal translation and can sound slightly unnatural in Korean. A more natural phrasing would be something like '나에게 공유됨' (naege gongyudwem) or '공유되었습니다' (gongyujeotseumnida).",
-          "suggestion": "Consider using '나에게 공유됨' (naege gongyudwem) or '공유되었습니다' (gongyujeotseumnida) for a more natural Korean phrasing."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -180,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ບິ່ງແລ້ວແດ່\" (bing laew dae) translates to \"already seen\" or \"viewed already.\" This doesn't accurately convey the meaning of \"Shared with me,\" which implies content that has been made accessible to the user.",
-          "suggestion": "A more accurate translation might be something like \"ຖືກແບ່ງປັນໃຫ້ຂ້ອຍ\" (thuk baeng pan hai khoi) which means \"shared with me\" or \"distributed to me\"."
+          "description": "The Lao translation 'ບິ່ງແລ້ວແດ່' means 'Please look at this' or 'Have a look', which is completely different from the English meaning 'Shared with me' (referring to files/folders shared by others).",
+          "suggestion": "ແບ່ງປັນກັບຂ້ອຍ"
         }
       ],
       "approved_at": null
@@ -201,13 +177,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Udostępnione mi\" while grammatically correct, doesn't fully capture the nuance of \"Shared with me.\"  It literally translates to \"Shared to me\" which implies a passive reception. \"Shared with me\" implies content specifically made available for the user. A better translation would convey a sense of access or visibility.",
-          "suggestion": "Consider alternatives like \"Dostępne dla mnie\" (Available to me), \"Udostępnione dla mnie\" (Shared for me), or \"Moje udostępnione\" (My Shared) depending on the context. Without further context it's hard to provide the absolutely best option."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -216,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Portuguese translation \"Compartilhou comigo\" literally translates to \"Shared with me\" but in the context of shared documents or files, the more common and idiomatic translation is \"Compartilhado comigo\" or \"Disponibilizado para mim\". \"Compartilhou comigo\" implies the action of sharing was performed by someone, which isn't always the intended meaning. It's better to use a passive construction to convey the meaning of something being accessible to the user.",
-          "suggestion": "Consider using \"Compartilhado comigo\" or \"Disponibilizado para mim\"."
+          "description": "The Portuguese translation 'Compartilhou comigo' is in the past tense (He/She/It shared with me), whereas the English 'Shared with me' is a noun phrase/label used to describe a category of items. The correct translation for a UI label should be 'Compartilhados comigo'.",
+          "suggestion": "Compartilhados comigo"
         }
       ],
       "approved_at": null
@@ -228,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Portuguese translation \"Compartilhou comigo\" translates to \"Shared with me\" but in the context of shared files or documents, a more appropriate translation would be \"Compartilhado comigo\" or \"Disponibilizado para mim\". \"Compartilhou comigo\" implies someone specifically shared something *with* you, as opposed to it being accessible to you.",
-          "suggestion": "Compartilhado comigo"
+          "description": "The Portuguese translation 'Compartilhou comigo' is in the past tense (He/She/It shared with me), whereas the English 'Shared with me' is a noun phrase/label used to describe a category of items. In a UI context for a section or label, it should be 'Compartilhados comigo'.",
+          "suggestion": "Compartilhados comigo"
         }
       ],
       "approved_at": null
@@ -237,31 +207,25 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Partajate cu mine' is not the most natural or common translation of 'Shared with me' in Romanian. While technically correct, it's a bit awkward.",
-          "suggestion": "A better translation would be 'Împărtășit cu mine' or 'Distribuite cu mine'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Доступно для меня' means 'Available to me', which implies permission or accessibility. The standard UI translation for 'Shared with me' (referring to items shared by others) is 'Доступные мне' or 'Поделились со мной'.",
+          "suggestion": "Доступные мне"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'මා සමඟ බෙදාගත්' is a possible translation for 'Shared with me', it's a rather literal and potentially awkward phrasing. A more natural and common translation would emphasize the action *being* shared rather than the act of sharing *with* someone.  'මා බෙදාගත්' would be a more natural translation as it focuses on what was shared *to* me.",
-          "suggestion": "මා බෙදාගත්"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -285,13 +249,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation \"Deljeno sa mnom\" while understandable, isn't the most natural or idiomatic translation for \"Shared with me.\" A more common and natural phrasing would be \"Podeljeno sa mnom\".",
-          "suggestion": "Podeljeno sa mnom"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -303,13 +261,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Надані мені' while technically correct, doesn't fully capture the nuance of 'Shared with me'. It's more literal and formal. 'Shared with me' implies access granted, which 'Надані мені' doesn't strongly convey.",
-          "suggestion": "Розміщено зі мною"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -319,6 +271,18 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The translation '共享' means 'Shared' or 'Sharing', which misses the 'with me' component of the English phrase 'Shared with me'.",
+          "suggestion": "与我共享"
+        }
+      ],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "IP Security is used to restrict login to the portal from all IP addresses except certain addresses.",
   "content_en_sha1_hash": "44b0d01c88431b091b71e7fdb311f966b939f203",
   "created_at": "2025-05-19T21:30:51.725Z",
-  "updated_at": "2026-02-19T13:36:32.918Z",
+  "updated_at": "2026-04-09T02:43:35.066Z",
   "comment": {
     "text": "\"Restricted access IP addresses are used to limit portal login from specific IP addresses.\"",
     "is_auto": true,
@@ -27,25 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'حماية IP تستخدم لتقيد تسجيل الدخول للبوابة من جميع عناوين IP باستثناء عناوين معينة.' does not accurately reflect the original meaning. 'IP Security' is better translated as 'أمان IP' instead of 'حماية IP'. While 'حماية' isn't incorrect, 'أمان' aligns more closely with the established terminology for 'Security'.",
-          "suggestion": "أمان IP تستخدم لتقيد تسجيل الدخول للبوابة من جميع عناوين IP باستثناء عناوين معينة."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term \"IP Security\" is translated as \"IP Təhlükəsizliyi\". While technically correct, a more common and natural phrasing in Azerbaijani might be \"IP Keçidliyi\" or \"IP Güvenliyi\". \"Təhlükəsizlik\" often implies a broader security context beyond just IP restrictions.",
-          "suggestion": "Consider using \"IP Keçidliyi\" or \"IP Güvenliyi\" for a more natural translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -93,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'restrict' is better translated as something stronger than 'սահմանափակելու համար' (to restrict). A more precise translation could imply blocking or limiting access.",
-          "suggestion": "IP անվտանգությունը օգտագործվում է պորտալ մուտքը արգելափակելու համար բոլոր IP հասցեներից, բացառությամբ որոշակի հասցեների:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -111,25 +93,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation is technically correct but a bit verbose and less natural for Japanese. The phrasing '使用します' (shiyou shimasu) feels overly formal and doesn't flow as well. A more natural phrasing would better convey the purpose.",
-          "suggestion": "IPセキュリティは、特定のアドレスを除くすべてのIPアドレスからのポータルへのログインを制限します。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"로그인을 제한하는 데 사용됩니다\" (used to restrict logins) is slightly awkward. A more natural phrasing would be \"로그인을 제한합니다\" (restricts logins).",
-          "suggestion": "IP 보안은 특정 주소를 제외한 모든 IP 주소에서 포털 로그인을 제한합니다."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -137,9 +107,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The term \"ທີ່ຢູ່\" is repeated unnecessarily. While technically correct, it can be streamlined for better readability in Lao.",
-          "suggestion": "ຄວາມປອດໄພ IP ຖືກນໍາໃຊ້ເພື່ອຈໍາກັດການເຂົ້າສູ່ລະບົບປະຕູຈາກທຸກທີ່ຢູ່ IP ຍົກເວັ້ນທີ່ຢູ່ທີ່ກໍານົດໄວ້."
+          "type": "incorrect_translation",
+          "description": "The word 'portal' is translated as 'ປະຕູ' (door/gate), which is a literal translation. In a technical software context, 'portal' should be transliterated or referred to as a web portal to avoid confusion with a physical door.",
+          "suggestion": "ຄວາມປອດໄພ IP ຖືກນໍາໃຊ້ເພື່ອຈໍາກັດການເຂົ້າສູ່ລະບົບພໍຕອນ (portal) ຈາກທຸກທີ່ຢູ່ IP ຍົກເວັ້ນທີ່ຢູ່ທີ່ແນ່ນອນ."
         }
       ],
       "approved_at": null
@@ -147,7 +117,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'pieteikšanos' (applications/submissions) is used instead of 'pieteikšanās ar' or 'pieslēgšanos' (logins/accessing). In this context, 'login' refers to the act of logging into the portal, not submitting an application.",
+          "suggestion": "IP drošība tiek izmantota, lai ierobežotu portālā pieslēgšanos no visām IP adresēm, izņemot noteiktas adreses."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -189,23 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of \"IP Security\" as \"අ.ජා.කෙ. ආරක්‍ෂණය\" is not the standard or most understandable term in Sinhala. While technically correct, it's overly literal and less clear than a more common phrasing.",
-          "suggestion": "Consider using a more common phrase like \"IP ලිපිනය ආරක්ෂණය\" or \"IP ආරක්ෂණ ක්‍රමයක්\" to convey the same meaning more naturally."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The use of 'අවකාශයට පිවිසීම' (avakaayaath pivisima) is a bit formal and could be simplified. It's a somewhat literal translation of 'access'.",
-          "suggestion": "Consider using a simpler phrase like 'පිවිසීම' (pivisima) or 'ආවර්තනය' (aavarthanaya) for 'access'."
-        },
-        {
-          "type": "spelling",
-          "description": "While the term අ.ජා.කෙ. (A.J.K) is used, it's more common to see the full word IP or 'IP ලිපිනය' when discussing IP addresses.",
-          "suggestion": "Consider replacing \"අ.ජා.කෙ.\" with \"IP\" or \"IP ලිපිනය\" for better clarity and recognizability."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -217,30 +177,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'IP Security' is translated as 'Varnost IP'. While technically correct, it's more natural to use 'IP-jeva varnost' or 'IP varnost' in Slovenian to reflect the concept of 'IP security'. The current translation feels slightly awkward.",
-          "suggestion": "Consider 'IP-jeva varnost' or 'IP varnost' for a more natural flow."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'IP Security' is translated as 'IP безбедност'. While technically correct, 'IP сигурност' would be a more common and natural translation in Serbian.",
-          "suggestion": "IP сигурност"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'restrict login' is translated as 'ограничио приступ'. While accurate, 'ограничити приступ' would be a more natural and idiomatic phrasing.",
-          "suggestion": "ограничити приступ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -270,18 +213,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'restrict login to the portal from all IP addresses except certain addresses' is not entirely accurately conveyed. While the translation generally captures the meaning, it lacks the nuance of 'restrict login'. A more precise rendering of 'restrict' would improve clarity.",
-          "suggestion": "可使用 IP 安全性限制门户仅允许特定地址登录。"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation uses a passive voice construction ('可使用 IP 安全性...'). While grammatically correct, a more active voice might be preferable for user interface descriptions, increasing clarity and conciseness.",
-          "suggestion": "IP 安全性可用于限制门户登录，仅允许特定地址。"
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

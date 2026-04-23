@@ -3,7 +3,7 @@
   "content": "Developer token successfully copied to clipboard",
   "content_en_sha1_hash": "3e92f66249d0b019c9917f67d6376effe089d811",
   "created_at": "2025-05-19T21:30:53.858Z",
-  "updated_at": "2026-02-19T13:36:32.794Z",
+  "updated_at": "2026-04-07T19:35:05.162Z",
   "comment": {
     "text": "The \"DeveloperTokenCopied\" translation key is used to display a success message when a developer token is successfully copied to the clipboard in a Generate Developer Token dialog. This message appears after clicking the copy button and indicates that the token has been successfully duplicated for the user's reference.",
     "is_auto": true,
@@ -39,25 +39,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'buferə' is a less common and potentially incorrect transliteration of 'clipboard'. A more standard term would be 'keçid xətti'.",
-          "suggestion": "keçid xətti"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Означението на програмиста е успешно копирано в клипборда' is not an accurate translation of 'Developer token successfully copied to clipboard'. 'Означението на програмиста' translates to 'Developer identification/designation' which isn't quite right. 'Developer token' is a specific term and requires a closer translation.",
-          "suggestion": "A more accurate translation might be something like 'Токенът на програмиста е успешно копиран в клипборда' (Token-a na programistata e uspeshno kopiran v klipbordata)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -93,25 +81,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The French translation contains extra spaces before and after the double quotes.",
-          "suggestion": "Remove the extra spaces: \"Le jeton du développeur a été copié avec succès dans le presse-papiers\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The hyphen in 'token' is unnecessary in Armenian. It should be written as one word.",
-          "suggestion": "Մշակողի token-ը should be Մշակողի տոքենը"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -147,13 +123,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'succesvol' should be 'succesvol'.",
-          "suggestion": "succesvol"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -189,18 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'පසුරු' (pasuru) is an archaic or less common term for 'clipboard'. A more standard and understandable term would be 'clipboard'.",
-          "suggestion": "Replace 'පසුරු' with 'clipboard'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, the translation 'සංවර්ධක ටෝකනය සාර්ථකව පසුරු පුවරුවට පිටපත් කරන ලදී' sounds quite formal and somewhat unnatural in modern Sinhala usage. A more natural phrasing would prioritize clarity and ease of understanding.",
-          "suggestion": "Consider a simpler phrasing like 'සංවර්ධක ටෝකනය clipboard වෙත පිටපත් කරන ලදී' or 'developer token clipboard වෙත පිටපත් විය'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -218,30 +177,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Developer token' is best translated as 'Token za programera' instead of 'Токен програмера'. While understandable, the latter sounds slightly less natural.",
-          "suggestion": "Токен за програмера успешно копиран у међумеморију"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Token programera' is slightly awkward. 'Token za programera' would be more natural and idiomatic Serbian (Latin).",
-          "suggestion": "Token za programera uspešno kopiran u međumemoriju"
-        },
-        {
-          "type": "formatting",
-          "description": "While technically correct, using the more common 'u isečnu tablu' instead of 'u međumemoriju' aligns better with everyday language. 'Međumemorija' is more general.",
-          "suggestion": "Token za programera uspešno kopiran u isečnu tablu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -259,18 +201,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Đã sao chép thành công mã token của nhà phát triển vào bộ nhớ tạm' is a bit literal and could be improved for naturalness. While technically correct, it doesn't flow as well as it could.",
-          "suggestion": "Đã sao chép thành công mã token nhà phát triển vào bảng nhớ tạm."
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase 'mã token của nhà phát triển' is a bit clunky. It could be more concise.",
-          "suggestion": "mã token nhà phát triển"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

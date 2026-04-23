@@ -3,7 +3,7 @@
   "content": "List accounts",
   "content_en_sha1_hash": "ad8a605e89106c653271b7cbe9d3de44eb64b9ff",
   "created_at": "2025-05-19T21:30:46.226Z",
-  "updated_at": "2026-03-20T09:07:45.748Z",
+  "updated_at": "2026-04-08T05:29:10.866Z",
   "comment": {
     "text": "This translation key is used for \"List accounts\", which appears as the header label for a list of user accounts in a UI component. It is typically displayed on a dialog or panel that allows users to manage or view account information, such as those found in an invite panel or settings menu.",
     "is_auto": true,
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Изброй профили\" is not the most natural or accurate translation of \"List accounts\". While 'изброй' (izbroi) means 'list' or 'enumerate,' 'профили' (profili) translates to 'profiles,' which isn't always the right equivalent for 'accounts.' 'Accounts' can refer to bank accounts, user accounts, or other types of accounts.",
-          "suggestion": "Consider alternatives like \"Списък с акаунти\" (Spisak s akounti - List of accounts) or \"Покажи акаунти\" (Pokaji akounti - Show accounts)."
+          "description": "The Bulgarian word 'Изброй' is an imperative verb meaning 'to enumerate' or 'to count'. In a UI context for a header label, 'List' should be a noun or a descriptive heading. 'Профили' (Profiles) is also a different concept than 'Accounts' (Акаунти/Сметки) in most software contexts.",
+          "suggestion": "Списък с акаунти"
         }
       ],
       "approved_at": null
@@ -87,25 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Հաշիվների ցանկ\" is a literal translation of \"List accounts\", it's not the most natural or idiomatic way to express this in Armenian. It sounds a bit clunky.",
-          "suggestion": "Consider a more natural phrasing like \"Ինձ համար հաշվեկանոնների ցանկը\" or \"Հաշվեկանոնների ցուցակ\" or \"Իմ հաշվեկանոնների ցանկը\" depending on the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Italian translation 'Elenco account' is a literal translation and doesn't convey the meaning of 'List accounts' naturally in Italian. While technically understandable, it's not idiomatic.",
-          "suggestion": "Consider 'Elenco dei conti' or 'Visualizza i conti'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -117,13 +105,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While '계정 목록' is a literal translation of 'List accounts,' it lacks the implied action. 'List' implies a display or retrieval action. '계정 목록' simply means 'account list'.",
-          "suggestion": "Consider a more active phrasing like '계정 목록 보기' (View account list) or '계정 목록 표시' (Display account list)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -132,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ບັນຊີລາຍການ\" while technically meaning 'account list', doesn't convey the meaning of 'List accounts' as an action or command. It's more descriptive than action-oriented.",
-          "suggestion": "Consider \"ລາຍການບັນຊີ\" (Lai Kan Banchi) which implies a listing or enumeration of accounts, or a more dynamic phrasing if the context demands it, like \"ເບິ່ງບັນຊີ\" (Bèng Banchi) - 'View accounts'."
+          "description": "The Lao translation 'ບັນຊີລາຍການ' means 'List of accounts' or 'Account list' (noun phrase), but in the context of a UI header/action, it translates more accurately to 'ລາຍຊື່ບັນຊີ' (List of accounts/users) or 'ສະແດງບັນຊີທັງໝົດ'. However, the current translation 'ບັນຊີລາຍການ' is often interpreted as 'Itemized accounts' or 'Account list' which is slightly ambiguous in Lao UI context compared to the English intent of 'List [the] accounts'.",
+          "suggestion": "ລາຍຊື່ບັນຊີ"
         }
       ],
       "approved_at": null
@@ -141,7 +123,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian verb 'Uzskaitīt' means 'to count' (as in mathematical enumeration), whereas the English 'List' in this UI context means 'to display as a list' or 'account list'.",
+          "suggestion": "Kontu saraksts"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -201,25 +189,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Листа налога' is not an accurate rendering of 'List accounts'. While 'налога' refers to accounts/taxes, 'Листа' isn't the correct verb. A more accurate translation would focus on the action of listing.",
-          "suggestion": "Излистајте налоге"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Latin) translation \"Lista naloga\" is an incorrect translation of \"List accounts\". \"Naloga\" is not the correct word for accounts in this context. It appears to be a combination of \"lista\" (list) and a misunderstanding of the word \"accounts\".",
-          "suggestion": "The correct translation should be \"Lista računa\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -246,10 +222,16 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"列表账户\" is a literal translation that doesn't quite convey the intended meaning of \"List accounts.\" It implies a list *of* accounts, but not necessarily the action of listing them. A better translation would convey the *action* of listing.",
+          "description": "The translation '列表账户' (List accounts) uses '列表' as a verb meaning 'to list/make a list', but in a UI header context, it sounds like a command or a literal action. In Chinese UI design, a header for a list of items is typically expressed as '账户列表' (Account List).",
           "suggestion": "账户列表"
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

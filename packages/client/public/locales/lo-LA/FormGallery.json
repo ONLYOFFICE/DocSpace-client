@@ -3,10 +3,12 @@
   "EmptyFormGalleryScreenDescription": "ບໍ່ພົບຜົນການຊອກຫາທີ່ກົງກັບຄຳຊອກຫາຂອງເຈົ້າ",
   "ErrorViewDescription": "ກະລຸນາລອງໃໝ່ໃນພາຍຫຼັງ",
   "ErrorViewDescriptionNetworkError": "ເບິ່ງຄືວ່າບໍ່ມີການເຊື່ອມຕໍ່ອິນເຕີເນັດ",
-  "SuggestChanges": "ແນະນຳການປ່ຽນແປງ",
-  "TemplateInfo": "ຂໍ້ມູນແມ່ແບບ",
-  "ViewAllTemplates": "ເບິ່ງແມ່ແບບທັງໝົດ",
   "ErrorViewHeader": "ຄັງຮູບພາບບໍ່ສາມາດໃຊ້ໄດ້ຊົ່ວຄາວ",
   "SelectTemplate": "ເລືອກແມ່ແບບ",
-  "UploadGallery": "ອັບໂຫຼດໃນຄັງຮູບພາບ"
+  "SuggestChanges": "ແນະນຳການປ່ຽນແປງ",
+  "TemplateInfo": "ຂໍ້ມູນແມ່ແບບ",
+  "UploadGallery": "ອັບໂຫຼດໃນຄັງຮູບພາບ",
+  "ViewAllTemplates": "ເບິ່ງແມ່ແບບທັງໝົດ",
+  "SubmitToGalleryDialogMainInfo": "ສົ່ງທຳແຫຼງຂອງທ່ານໄປທີ່ຫໍສະແດງສາທາລະນະເພື່ອໃຫ້ຄົນອື່ນນຳໃຊ້ໃນວຽກຂອງເຂົາເຈົ້າ. ເມື່ອທຳແຫຼງຜ່ານການກວດສອບ, ທ່ານຈະໄດ້ຮັບການແຈ້ງເຕືອນ ແລະ ລາງວັນສຳລັບການປະກອບສ່ວນຂອງທ່ານ.",
+  "GalleryTitle": "{{organizationName}} ຫໍສະແດງແມ່ແບບ"
 }

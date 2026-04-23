@@ -3,7 +3,7 @@
   "content": "Finish",
   "content_en_sha1_hash": "b74bdee9c34f37b6b9b0d20a8ca8a9bf6797f6e1",
   "created_at": "2025-05-19T21:30:45.397Z",
-  "updated_at": "2025-08-11T09:02:43.945Z",
+  "updated_at": "2026-04-08T09:20:53.396Z",
   "comment": {
     "text": "This translation key is used for the label on a save button, indicating completion or finalization of an action. It appears in a UI component, specifically a \"Save/Cancel\" buttons section, where it prompts the user to finish and confirm their changes.",
     "is_auto": true,
@@ -39,19 +39,19 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Bulgarian word 'Край' means 'End' or 'The end' (as in a boundary or conclusion of a story), which is inappropriate for a UI button. For a 'Finish' action in a software interface, 'Завърши' is the correct functional term.",
+          "suggestion": "Завърши"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Dokončení\" is a valid Czech word, it translates more accurately to \"Completion\" rather than \"Finish.\" \"Finish\" can also be translated as \"Ukončení\" or \"Zakončení,\" depending on the specific context. \"Dokončení\" implies something is already complete.",
-          "suggestion": "Consider \"Ukončení\" or \"Zakončení\" as alternatives, depending on the specific context of 'Finish'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -63,13 +63,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Ολοκλήρωση' (Oloklírōsi) is a valid Greek word and can mean 'completion' or 'finish', it's a more formal term. A more common and direct translation of 'Finish' (as in, to complete an action) would be 'τελείωσα' (teleiōsa) or a similar verb form depending on the context (e.g., 'τελειώνω' - teleiōnō). 'Ολοκλήρωση' describes the *state* of being finished, not the action of finishing.",
-          "suggestion": "Consider 'τελείωσα' (teleiōsa) or 'τελειώνω' (teleiōnō) depending on the grammatical context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -84,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Lopeta\" can mean \"stop,\" it doesn't directly convey the meaning of \"Finish\" in the context of completing something. \"Finish\" implies completion, while \"Lopeta\" implies halting an action. Depending on the context, a more accurate translation might be 'Valmis' or 'Viimeistele'.",
-          "suggestion": "Consider 'Valmis' or 'Viimeistele' for a more accurate translation depending on the specific context."
+          "description": "The translation 'Lopeta' means 'Stop' or 'Abort', which is the opposite of the intended meaning 'Finish/Complete' in the context of a Save button.",
+          "suggestion": "Valmis"
         }
       ],
       "approved_at": null
@@ -105,13 +99,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Italian translation 'Finisci' is the imperative form ('you finish'). The English word 'Finish' is a noun or a verb in the infinitive form. It needs to be translated more contextually depending on the intended meaning (e.g., 'fine', 'conclusione', 'finire'). Without more context, 'Finisci' is not an appropriate translation.",
-          "suggestion": "Requires context to determine correct translation. Possible suggestions: 'fine' (noun), 'conclusione' (noun), 'finire' (verb - infinitive)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -123,7 +111,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '종료' means 'Exit', 'End', or 'Terminate' (as in closing a program or session). In the context of a 'Save' button used to finalize/confirm changes, '완료' (Complete/Finish) is the correct term.",
+          "suggestion": "완료"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -132,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'ຮັດຄອງ' translates to 'control' or 'manage', not 'finish'. It doesn't accurately convey the meaning of 'finish'.",
-          "suggestion": "Consider using a more appropriate Lao translation for 'finish,' such as 'ຮັດ' (hat), 'ສິ້ນສຸດ' (sin sut), or 'ຈົບ' (job), depending on the context."
+          "description": "The Lao word 'ຮັດຄອງ' means 'to hold tightly' or 'to grasp', which is incorrect for a UI button meaning 'Finish' or 'Complete'.",
+          "suggestion": "ສຳເລັດ"
         }
       ],
       "approved_at": null
@@ -229,6 +223,18 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '结束' (to end/terminate) is inappropriate for a 'Save' button context. In a UI context where 'Finish' implies completing a process or saving changes, '完成' is the standard and correct term.",
+          "suggestion": "完成"
+        }
+      ],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

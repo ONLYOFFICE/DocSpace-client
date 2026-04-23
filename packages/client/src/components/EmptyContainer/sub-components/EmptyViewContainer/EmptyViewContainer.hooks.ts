@@ -270,7 +270,10 @@ export const useOptions = (
   }, [isWarningRoomsDialog, setQuotaWarningDialogVisible]);
 
   const onCreateAIAgent = useCallback(() => {
-    // TODO: AI: Add quota if it needed
+    if (isWarningRoomsDialog) {
+      setQuotaWarningDialogVisible(true);
+      return;
+    }
 
     const event = new Event(Events.AGENT_CREATE);
     window.dispatchEvent(event);
@@ -421,3 +424,4 @@ export const useOptions = (
 
   return options;
 };
+

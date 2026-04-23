@@ -3,7 +3,7 @@
   "content": "See file and folder details here",
   "content_en_sha1_hash": "957a447d0e759d8ee240c00e22da369edeea22c0",
   "created_at": "2025-05-19T21:30:54.825Z",
-  "updated_at": "2025-08-04T07:30:01.204Z",
+  "updated_at": "2026-04-07T19:35:05.114Z",
   "comment": {
     "text": "This translation key is used for a generic text that displays when no file or folder information is available in a UI component. The text is displayed below an image and provides a brief instruction to view file details. It appears in the \"NoItem\" component on the Home page of the client application.",
     "is_auto": true,
@@ -141,25 +141,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Vizualizarea detaliilor despre fișiere și foldere' is a literal translation and doesn't quite capture the natural flow of the English phrase \"See file and folder details here.\" It sounds a bit formal and technical.",
-          "suggestion": "A more natural translation would be something like \"Vezi detaliile fișierelor și folderelor aici\" or \"Afișează detaliile fișierelor și folderelor\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Здесь будут представлены свойства файлов и папок' is too literal and doesn't convey the same meaning as 'See file and folder details here'. It sounds formal and doesn't fit the user experience of a simple informational panel.",
-          "suggestion": "Consider a more natural translation like 'Здесь отображаются сведения о файлах и папках' or 'Здесь показаны файлы и папки'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -189,13 +177,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Vidi detalje datoteke i foldera ovde' is a literal translation of 'See file and folder details here' but doesn't sound natural in Serbian. 'Vidi' is an imperative (command) form which isn't the best fit.  A more natural phrasing would be a statement about where to find the details.",
-          "suggestion": "Pogledajte detalje datoteka i foldera ovde"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

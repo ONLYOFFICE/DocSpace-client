@@ -3,7 +3,7 @@
   "content": "DocSpace",
   "content_en_sha1_hash": "ce0b96eab5006b875f6c4a6c31ad73c3c86edcf5",
   "created_at": "2025-05-19T21:30:47.504Z",
-  "updated_at": "2026-03-31T15:18:45.839Z",
+  "updated_at": "2026-04-10T13:53:52.391Z",
   "comment": {
     "text": "This translation key is used for the \"From Portal\" button label, which indicates that a document can be uploaded from DocSpace. It appears in a dropdown menu on a main button in a shell interface. Translators should provide a translated version of \"From Portal\" with the product name inserted.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 317,
+      "line_number": 310,
       "context": "const uploadFromDocSpace = {\n id: \"actions_upload-from-docspace\",\n className: \"main-button_drop-down\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"Common:FromPortal\", { productName: t(\"Common:ProductName\") }),\n key: \"actions_upload-from-docspace\",\n disabled: false,\n onClick: () => onShowFormRoomSelectFileDialog(FilterType.PDFForm),\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 317,
+      "line_number": 310,
       "context": "const uploadFromDocSpace = {\n id: \"actions_upload-from-docspace\",\n className: \"main-button_drop-down\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"Common:FromPortal\", { productName: t(\"Common:ProductName\") }),\n key: \"actions_upload-from-docspace\",\n disabled: false,\n onClick: () => onShowFormRoomSelectFileDialog(FilterType.PDFForm),\n };",
       "module": "/packages/client"
     },
@@ -80,12 +80,6 @@
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
       "line_number": 109,
       "context": "const ownerRights = [\n t(\"DoTheSame\"),\n t(\"AppointAdmin\"),\n t(\"SetAccessRights\"),\n t(\"ManagePortal\", { productName: t(\"Common:ProductName\") }),\n t(\"ManageUser\"),\n t(\"ChangePortalOwner:ChangeOwner\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"BackupPortal\", { productName: t(\"Common:ProductName\") }),",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/ChangePricingPlanDialog/index.js",
-      "line_number": 62,
-      "context": "<Text as=\"span\" fontSize=\"13px\">\n <Trans t={t} i18nKey=\"PlanUsersLimit\" ns=\"DowngradePlanDialog\">\n You wish to downgrade the team to\n <strong>{{ usersCount: managersCount }}</strong>\n admins, and current number of such users in your\n {{ productName: t(\"Common:ProductName\") }} is\n <strong>{{ currentUsersCount: addedManagersCount }}</strong>\n </Trans>\n </Text>\n );",
       "module": "/packages/client"
     },
     {
@@ -294,13 +288,13 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ReducedRightsDialog/index.tsx",
-      "line_number": 46,
+      "line_number": 53,
       "context": "t={t}\n ns=\"Files\"\n i18nKey=\"YourUserTypeHasChanged\"\n values={{\n userType: t(\"Common:Guest\"),\n productName: t(\"Common:ProductName\"),\n adminName,\n }}\n components={{ 1: <span style={{ fontWeight: 600 }} /> }}\n />\n <Text style={{ marginTop: \"16px\" }}>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ReducedRightsDialog/index.tsx",
-      "line_number": 46,
+      "line_number": 53,
       "context": "t={t}\n ns=\"Files\"\n i18nKey=\"YourUserTypeHasChanged\"\n values={{\n userType: t(\"Common:Guest\"),\n productName: t(\"Common:ProductName\"),\n adminName,\n }}\n components={{ 1: <span style={{ fontWeight: 600 }} /> }}\n />\n <Text style={{ marginTop: \"16px\" }}>",
       "module": "/packages/client"
     },
@@ -708,7 +702,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ai-services-management.tsx",
-      "line_number": 228,
+      "line_number": 229,
       "context": "})}\n </Text>\n ) : null}\n <Text className=\"category-item-description\" fontSize=\"13px\">\n {t(\"AiServicesManagementDescription\", {\n productName: t(\"Common:ProductName\"),\n aiAgents: t(\"Common:AIAgents\"),\n aiSettings: t(\"AISettings\"),\n aiServices: t(\"Common:AIServices\"),\n organizationName: t(\"Common:OrganizationName\"),\n })}",
       "module": "/packages/client"
     },
@@ -965,44 +959,38 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Api/index.js",
-      "line_number": 98,
-      "context": "onClick={() => window.open(apiBasicLink, \"_blank\")}\n scale={currentDeviceType === DeviceType.mobile}\n />\n }\n descriptionText={t(\"ApiPageDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n })}\n headerText={t(\"ApiPageHeader\")}\n imageAlt={t(\"ApiPageHeader\")}\n imageSrc={imgSrc}",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/index.tsx",
-      "line_number": 157,
+      "line_number": 160,
       "context": "withEmptyScreen: !!error,\n })}\n >\n <Text lineHeight=\"20px\" className={styles.apiKeysText}>\n {t(\"Settings:ApiKeysDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Text\n className={classNames(\n styles.apiKeysText,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 92,
+      "line_number": 84,
       "context": "const navigateToViewer = () => navigate(\"viewer\");\n const navigateToUploader = () => navigate(\"uploader\");\n \n const presetsData = [\n {\n title: t(\"Common:ProductName\"),\n description: t(\"PortalDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n image: theme.isBase ? PortalImg : PortalImgDark,\n handleOnClick: navigateToPortal,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 92,
+      "line_number": 84,
       "context": "const navigateToViewer = () => navigate(\"viewer\");\n const navigateToUploader = () => navigate(\"uploader\");\n \n const presetsData = [\n {\n title: t(\"Common:ProductName\"),\n description: t(\"PortalDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n image: theme.isBase ? PortalImg : PortalImgDark,\n handleOnClick: navigateToPortal,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 92,
+      "line_number": 84,
       "context": "const navigateToViewer = () => navigate(\"viewer\");\n const navigateToUploader = () => navigate(\"uploader\");\n \n const presetsData = [\n {\n title: t(\"Common:ProductName\"),\n description: t(\"PortalDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n image: theme.isBase ? PortalImg : PortalImgDark,\n handleOnClick: navigateToPortal,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 92,
+      "line_number": 84,
       "context": "const navigateToViewer = () => navigate(\"viewer\");\n const navigateToUploader = () => navigate(\"uploader\");\n \n const presetsData = [\n {\n title: t(\"Common:ProductName\"),\n description: t(\"PortalDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n image: theme.isBase ? PortalImg : PortalImgDark,\n handleOnClick: navigateToPortal,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 92,
+      "line_number": 84,
       "context": "const navigateToViewer = () => navigate(\"viewer\");\n const navigateToUploader = () => navigate(\"uploader\");\n \n const presetsData = [\n {\n title: t(\"Common:ProductName\"),\n description: t(\"PortalDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n image: theme.isBase ? PortalImg : PortalImgDark,\n handleOnClick: navigateToPortal,",
       "module": "/packages/client"
     },
@@ -1082,6 +1070,48 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/MainElementParameter.js",
       "line_number": 138,
       "context": "<Label className=\"label\" text={t(\"ButtonText\")} />\n <TextInput\n scale\n onChange={setButtonText}\n placeholder={t(\"SelectToPortal\", {\n productName: t(\"Common:ProductName\"),\n })}\n value={buttonValue}\n tabIndex={3}\n testId=\"button_mode_text_input\"\n />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
+      "line_number": 73,
+      "context": "return (\n <ConfirmWrapper height=\"100%\">\n <div className={styles.main}>\n <div className={styles.header}>\n <Text fontSize=\"23px\" fontWeight={700} lineHeight=\"28px\">{t(\"Common:DeveloperTools\")}</Text>\n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\">{t(\"Settings:DeveloperToolsDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}</Text>\n </div>\n <div className={styles.grid}>\n <Card\n icon={<DevToolsSvg />}\n title={t(\"Settings:RestAPI\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
+      "line_number": 73,
+      "context": "return (\n <ConfirmWrapper height=\"100%\">\n <div className={styles.main}>\n <div className={styles.header}>\n <Text fontSize=\"23px\" fontWeight={700} lineHeight=\"28px\">{t(\"Common:DeveloperTools\")}</Text>\n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\">{t(\"Settings:DeveloperToolsDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}</Text>\n </div>\n <div className={styles.grid}>\n <Card\n icon={<DevToolsSvg />}\n title={t(\"Settings:RestAPI\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
+      "line_number": 73,
+      "context": "return (\n <ConfirmWrapper height=\"100%\">\n <div className={styles.main}>\n <div className={styles.header}>\n <Text fontSize=\"23px\" fontWeight={700} lineHeight=\"28px\">{t(\"Common:DeveloperTools\")}</Text>\n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\">{t(\"Settings:DeveloperToolsDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}</Text>\n </div>\n <div className={styles.grid}>\n <Card\n icon={<DevToolsSvg />}\n title={t(\"Settings:RestAPI\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
+      "line_number": 73,
+      "context": "return (\n <ConfirmWrapper height=\"100%\">\n <div className={styles.main}>\n <div className={styles.header}>\n <Text fontSize=\"23px\" fontWeight={700} lineHeight=\"28px\">{t(\"Common:DeveloperTools\")}</Text>\n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\">{t(\"Settings:DeveloperToolsDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}</Text>\n </div>\n <div className={styles.grid}>\n <Card\n icon={<DevToolsSvg />}\n title={t(\"Settings:RestAPI\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
+      "line_number": 73,
+      "context": "return (\n <ConfirmWrapper height=\"100%\">\n <div className={styles.main}>\n <div className={styles.header}>\n <Text fontSize=\"23px\" fontWeight={700} lineHeight=\"28px\">{t(\"Common:DeveloperTools\")}</Text>\n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\">{t(\"Settings:DeveloperToolsDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}</Text>\n </div>\n <div className={styles.grid}>\n <Card\n icon={<DevToolsSvg />}\n title={t(\"Settings:RestAPI\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
+      "line_number": 73,
+      "context": "return (\n <ConfirmWrapper height=\"100%\">\n <div className={styles.main}>\n <div className={styles.header}>\n <Text fontSize=\"23px\" fontWeight={700} lineHeight=\"28px\">{t(\"Common:DeveloperTools\")}</Text>\n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\">{t(\"Settings:DeveloperToolsDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}</Text>\n </div>\n <div className={styles.grid}>\n <Card\n icon={<DevToolsSvg />}\n title={t(\"Settings:RestAPI\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
+      "line_number": 73,
+      "context": "return (\n <ConfirmWrapper height=\"100%\">\n <div className={styles.main}>\n <div className={styles.header}>\n <Text fontSize=\"23px\" fontWeight={700} lineHeight=\"28px\">{t(\"Common:DeveloperTools\")}</Text>\n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\">{t(\"Settings:DeveloperToolsDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}</Text>\n </div>\n <div className={styles.grid}>\n <Card\n icon={<DevToolsSvg />}\n title={t(\"Settings:RestAPI\")}",
       "module": "/packages/client"
     },
     {
@@ -1200,146 +1230,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/index.js",
-      "line_number": 76,
-      "context": "} = usePayments(defaultProps.payment);\n \n const data = [\n {\n id: \"portal-payments\",\n name: t(\"PortalTariffPlan\", { productName: t(\"Common:ProductName\") }),\n content: <PaymentsSaaS />,\n onClick: async () => {\n clearAbortControllerArr();\n await getPortalPaymentsData();\n },",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/main-tariff/PaymentContainer.js",
-      "line_number": 142,
-      "context": "<>\n <Text isBold>{t(\"ManagerTypesDescription\")}</Text>\n <br />\n <Text isBold>\n {t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Text>\n {t(\"AdministratorDescription\", {\n productName: t(\"Common:ProductName\"),",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/main-tariff/PaymentContainer.js",
-      "line_number": 142,
-      "context": "<>\n <Text isBold>{t(\"ManagerTypesDescription\")}</Text>\n <br />\n <Text isBold>\n {t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Text>\n {t(\"AdministratorDescription\", {\n productName: t(\"Common:ProductName\"),",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/main-tariff/PaymentContainer.js",
-      "line_number": 142,
-      "context": "<>\n <Text isBold>{t(\"ManagerTypesDescription\")}</Text>\n <br />\n <Text isBold>\n {t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Text>\n {t(\"AdministratorDescription\", {\n productName: t(\"Common:ProductName\"),",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/payment-method/index.tsx",
-      "line_number": 93,
-      "context": "style={{ height: \"15px\", margin: \"0\" }}\n tooltipContent={\n <>\n <Text isBold>{t(\"Payer\")}</Text>\n <Text>\n {t(\"PayerDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n </>\n }\n dataTestId=\"payer_info_help_button\"\n />",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/payment-method/index.tsx",
-      "line_number": 93,
-      "context": "style={{ height: \"15px\", margin: \"0\" }}\n tooltipContent={\n <>\n <Text isBold>{t(\"Payer\")}</Text>\n <Text>\n {t(\"PayerDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n </>\n }\n dataTestId=\"payer_info_help_button\"\n />",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/index.tsx",
-      "line_number": 149,
-      "context": "const confirmationDialogContent = {\n [BACKUP_SERVICE]: {\n title: t(\"Common:Confirmation\"),\n body: !isCurrentConfirmState\n ? t(\"Services:EnableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n })\n : isFreeTariff\n ? t(\"Services:DisableBackupConfirmWithoutQuota\", {\n productName: t(\"Common:ProductName\"),\n })",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/index.tsx",
-      "line_number": 149,
-      "context": "const confirmationDialogContent = {\n [BACKUP_SERVICE]: {\n title: t(\"Common:Confirmation\"),\n body: !isCurrentConfirmState\n ? t(\"Services:EnableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n })\n : isFreeTariff\n ? t(\"Services:DisableBackupConfirmWithoutQuota\", {\n productName: t(\"Common:ProductName\"),\n })",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/index.tsx",
-      "line_number": 149,
-      "context": "const confirmationDialogContent = {\n [BACKUP_SERVICE]: {\n title: t(\"Common:Confirmation\"),\n body: !isCurrentConfirmState\n ? t(\"Services:EnableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n })\n : isFreeTariff\n ? t(\"Services:DisableBackupConfirmWithoutQuota\", {\n productName: t(\"Common:ProductName\"),\n })",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/index.tsx",
-      "line_number": 149,
-      "context": "const confirmationDialogContent = {\n [BACKUP_SERVICE]: {\n title: t(\"Common:Confirmation\"),\n body: !isCurrentConfirmState\n ? t(\"Services:EnableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n })\n : isFreeTariff\n ? t(\"Services:DisableBackupConfirmWithoutQuota\", {\n productName: t(\"Common:ProductName\"),\n })",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/pages/ai-tools/AiPage.tsx",
-      "line_number": 230,
-      "context": "}\n : {\n title: t(\"Common:Confirmation\"),\n body: [\n t(\"Services:AIToolsDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n t(\"Common:WantToContinue\"),\n ],\n };",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/pages/backup/BackupPage.tsx",
-      "line_number": 113,
-      "context": "const confirmationDialogContent = {\n title: t(\"Common:Confirmation\"),\n \n body: !isBackupServiceOn\n ? t(\"Services:EnableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n })\n : isFreeTariff\n ? t(\"Services:DisableBackupConfirmWithoutQuota\", {\n productName: t(\"Common:ProductName\"),\n })",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/pages/backup/BackupPage.tsx",
-      "line_number": 113,
-      "context": "const confirmationDialogContent = {\n title: t(\"Common:Confirmation\"),\n \n body: !isBackupServiceOn\n ? t(\"Services:EnableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n })\n : isFreeTariff\n ? t(\"Services:DisableBackupConfirmWithoutQuota\", {\n productName: t(\"Common:ProductName\"),\n })",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/pages/backup/BackupPage.tsx",
-      "line_number": 113,
-      "context": "const confirmationDialogContent = {\n title: t(\"Common:Confirmation\"),\n \n body: !isBackupServiceOn\n ? t(\"Services:EnableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n })\n : isFreeTariff\n ? t(\"Services:DisableBackupConfirmWithoutQuota\", {\n productName: t(\"Common:ProductName\"),\n })",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/panels/additional-storage/GracePeriodModal.tsx",
-      "line_number": 96,
-      "context": "}}\n />\n </Text>{\" \"}\n <Text as=\"span\">\n {t(\"GracePeriodActivatedDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/panels/ai-service/GetStartedBody.tsx",
-      "line_number": 129,
-      "context": "fontSize=\"12px\"\n lineHeight=\"16px\"\n className={styles.stepDescription}\n >\n {t(\"AIGetStartedStep1Description\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n })}\n </Text>\n </div>\n </div>",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/shared/payer-information/index.js",
-      "line_number": 154,
-      "context": "const unknownPayerDescription = () => {\n const userNotFound = `${t(\"UserNotFoundMatchingEmail\")} `;\n \n let invalidEmailDescription = user.isOwner\n ? t(\"UnknownPayerForOwner\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"UnknownPayerForAdmin\", {\n productName: t(\"Common:ProductName\"),\n });",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/shared/payer-information/index.js",
-      "line_number": 154,
-      "context": "const unknownPayerDescription = () => {\n const userNotFound = `${t(\"UserNotFoundMatchingEmail\")} `;\n \n let invalidEmailDescription = user.isOwner\n ? t(\"UnknownPayerForOwner\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"UnknownPayerForAdmin\", {\n productName: t(\"Common:ProductName\"),\n });",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/shared/payer-information/index.js",
-      "line_number": 154,
-      "context": "const unknownPayerDescription = () => {\n const userNotFound = `${t(\"UserNotFoundMatchingEmail\")} `;\n \n let invalidEmailDescription = user.isOwner\n ? t(\"UnknownPayerForOwner\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"UnknownPayerForAdmin\", {\n productName: t(\"Common:ProductName\"),\n });",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/shared/payer-information/index.js",
-      "line_number": 154,
-      "context": "const unknownPayerDescription = () => {\n const userNotFound = `${t(\"UserNotFoundMatchingEmail\")} `;\n \n let invalidEmailDescription = user.isOwner\n ? t(\"UnknownPayerForOwner\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"UnknownPayerForAdmin\", {\n productName: t(\"Common:ProductName\"),\n });",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/shared/top-up-balance/sub-components/WalletInfo.tsx",
-      "line_number": 82,
-      "context": "className={styles.walletInfoTitle}\n fontWeight=\"600\"\n fontSize=\"14px\"\n >\n {title ??\n t(\"ProductNameWallet\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <div\n className={classNames(styles.walletInfoBalance, {\n [styles.warningColor]: isBalanceInsufficient,\n })}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/shared/transaction-history/index.tsx",
-      "line_number": 682,
-      "context": "headerLabel: t(\"ListContacts\"),\n }}\n filter={filter}\n withInfo\n infoText={t(\"OnlyPortalAdminsShown\", {\n productName: t(\"Common:ProductName\"),\n })}\n emptyScreenHeader={t(\"Common:NotFoundMembers\")}\n emptyScreenDescription={t(\"CreateEditRoomDialog:PeopleSelectorInfo\", {\n productName: t(\"Common:ProductName\"),\n })}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/shared/transaction-history/index.tsx",
-      "line_number": 682,
-      "context": "headerLabel: t(\"ListContacts\"),\n }}\n filter={filter}\n withInfo\n infoText={t(\"OnlyPortalAdminsShown\", {\n productName: t(\"Common:ProductName\"),\n })}\n emptyScreenHeader={t(\"Common:NotFoundMembers\")}\n emptyScreenDescription={t(\"CreateEditRoomDialog:PeopleSelectorInfo\", {\n productName: t(\"Common:ProductName\"),\n })}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/wallet/WalletContainer.tsx",
-      "line_number": 140,
-      "context": "};\n \n return (\n <div className={styles.walletContainer}>\n <Text className={styles.walletDescription}>\n {t(\"WalletDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n \n {walletHelpUrl ? (\n <Link\n textDecoration=\"underline\"",
+      "line_number": 81,
+      "context": "const data = [\n {\n id: \"portal-payments\",\n name: t(\"Common:PortalTariffPlan\", {\n productName: t(\"Common:ProductName\"),\n }),\n content: <MainTariff />,\n onClick: () => {\n clearAbortControllerArr();\n },",
       "module": "/packages/client"
     },
     {
@@ -1494,20 +1386,20 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 207,
+      "line_number": 203,
       "context": "case \"CustomTitlesWelcome\":\n return t(\"CustomTitlesWelcome\");\n case \"ManagementCategorySecurity\":\n return t(\"ManagementCategorySecurity\");\n case \"PortalAccess\":\n return t(\"PortalAccess\", { productName: t(\"Common:ProductName\") });\n case \"TwoFactorAuth\":\n return t(\"TwoFactorAuth\");\n case \"ManagementCategoryIntegration\":\n return t(\"ManagementCategoryIntegration\");\n case \"ThirdPartyAuthorization\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 207,
+      "line_number": 203,
       "context": "case \"CustomTitlesWelcome\":\n return t(\"CustomTitlesWelcome\");\n case \"ManagementCategorySecurity\":\n return t(\"ManagementCategorySecurity\");\n case \"PortalAccess\":\n return t(\"PortalAccess\", { productName: t(\"Common:ProductName\") });\n case \"TwoFactorAuth\":\n return t(\"TwoFactorAuth\");\n case \"ManagementCategoryIntegration\":\n return t(\"ManagementCategoryIntegration\");\n case \"ThirdPartyAuthorization\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
       "line_number": 379,
-      "context": ": !standalone && isPaymentPage\n ? t(\"Billing\")\n : t(header, {\n organizationName: logoText,\n license: t(\"Common:EnterpriseLicense\"),\n productName: t(\"Common:ProductName\"),\n aiServices: t(\"Common:AIServices\"),\n });\n \n // console.log(translatedHeader, header);",
+      "context": ": !standalone && isPaymentPage\n ? t(\"Common:Billing\")\n : t(header, {\n organizationName: logoText,\n license: t(\"Common:EnterpriseLicense\"),\n productName: t(\"Common:ProductName\"),\n aiServices: t(\"Common:AIServices\"),\n });\n \n // console.log(translatedHeader, header);",
       "module": "/packages/client"
     },
     {
@@ -1568,12 +1460,6 @@
       "file_path": "/packages/client/src/pages/PortalSettings/utils/getStepDescription.js",
       "line_number": 40,
       "context": "switch (stepIndex) {\n case 1:\n return t(\"Settings:SelectFileDescriptionGoogle\");\n case 2:\n return t(\"Settings:SelectUsersDescriptionGoogle\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n });\n case 3:\n return isTypeSelectEmpty ? (\n <>",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 576,
-      "context": "{\n id: \"portal-settings_catalog-javascript-sdk_portal\",\n key: \"8-1-6\",\n icon: \"\",\n link: \"docspace\",\n tKey: \"Common:ProductName\",\n },\n {\n id: \"portal-settings_catalog-javascript-sdk_uploader\",\n key: \"8-1-7\",\n icon: \"\",",
       "module": "/packages/client"
     },
     {
@@ -1656,7 +1542,7 @@
     },
     {
       "file_path": "/packages/client/src/Shell.jsx",
-      "line_number": 330,
+      "line_number": 348,
       "context": "const barConfig = {\n parentElementId: \"main-bar\",\n headerText: t(\"Attention\"),\n text: `${t(\"BarMaintenanceDescription\", {\n targetDate,\n productName: `${logoText} ${t(\"Common:ProductName\")}`,\n })} ${t(\"BarMaintenanceDisclaimer\")}`,\n isMaintenance: true,\n onAction: () => {\n setMaintenanceExist(false);\n setSnackbarExist(false);",
       "module": "/packages/client"
     },
@@ -1668,19 +1554,19 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2406,
+      "line_number": 2405,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2406,
+      "line_number": 2405,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2406,
+      "line_number": 2405,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
@@ -2287,6 +2173,18 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '协作空间' (Collaboration Space) is a descriptive translation of the product concept, but it fails to preserve the specific brand name 'DocSpace' as required by the context of a product name variable.",
+          "suggestion": "DocSpace"
+        }
+      ],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

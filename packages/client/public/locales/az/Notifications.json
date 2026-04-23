@@ -1,4 +1,5 @@
 {
+  "ActionsWithFilesDescription": "Nişanlar fayl fəaliyyətini — yükləmələr, redaktələr və ya paylaşmalar — {{rooms}}, {{shared}}, {{documents}}, və {{aiAgents}} bölmələri boyunca vurğulayacaq.",
   "AdminSetupRequired": "İdarəçi təyinatı tələb olunur",
   "Badges": "Beyclər",
   "DailyFeed": "Gündəlik {{productName}} axını",
@@ -8,6 +9,8 @@
   "LdapEmailTooltip": "Bu istifadəçi hesabının məlumatları LDAP-dən yüklənib. İstifadəçinin e-poçt ünvanı göstərilməyib və hazırkı e-poçt ünvanı avtomatik yaradılıb, bildiriş göndərmək üçün istifadə edilə bilməz.",
   "NotConfigured": "Kəsilmədən hazırlanmayıb",
   "Notifications": "Bildirişlər",
+  "RoomsActivityDescription": "Sizin {{rooms}} və {{aiAgents}} daxilindəki yeni paylaşılmış fayllar/qovluqlar və fəaliyyət haqqında anında e-poçt bildirişləri alın.",
+  "RoomUpdateNotify": "Paylaşılan məzmun, {{rooms}} və {{aiAgents}} fəaliyyəti",
   "SettingUpNotifications": "Bildirişləri təyin etmək",
   "SuccessConnected": "{{serviceName}} bildiriş kanalı kimi uğurla qoşulub. İndidən buraya yeniliklər gələcək.",
   "SuccessDisconnected": "{{serviceName}} bildiriş kanalı kimi uğurla əlaqədən kəsilmişdir. Bildirişlər oraya göndərilməyəcəkdir.",

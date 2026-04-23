@@ -3,7 +3,7 @@
   "content": "Your wallet has insufficient funds. Please reach out to the payer (<1>{{email}}</1>) to top it up and try the purchase again.",
   "content_en_sha1_hash": "1f785d03d45e0508ea978a95009741c8647a53a0",
   "created_at": "2026-03-20T09:07:31.780Z",
-  "updated_at": "2026-03-20T09:19:12.827Z",
+  "updated_at": "2026-04-08T06:41:15.284Z",
   "comment": {
     "text": "This key displays an error message when a wallet has insufficient funds for a purchase. It includes the payer's email address so the user can contact them for a top-up, and appears during a manual backup process. Translators should ensure the message is clear and actionable for the user.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Bulgarian translation uses 'да го попълни' (to fill it/him), which refers to the payer or the wallet incorrectly in this context. To 'top up' a wallet in Bulgarian, 'да го попълни' is awkward; 'да го зареди' is the correct term for topping up funds.",
+          "suggestion": "Портфейлът ви няма достатъчно средства. Моля, свържете се с плащащия (<1>{{email}}</1>), за да го зареди и опитайте отново покупката."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -69,7 +75,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'tilin lisäämiseksi' means 'to add the account', whereas the English text 'to top it up' refers to adding funds to the wallet. This changes the meaning of the action required.",
+          "suggestion": "Lompakossasi ei ole riittävästi varoja. Ole hyvä ja ota yhteyttä maksajaan (<1>{{email}}</1>) varojen lisäämiseksi ja yritä ostosta uudelleen."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -111,7 +123,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'maksā' is used incorrectly; it is a verb meaning 'to pay', whereas the English text refers to a noun 'wallet' (maksājvpuse or simply 'līdzekļi jūsu e-talcī'). The current sentence 'Jūsu maksā nepietiekami līdzekļi' is grammatically nonsensical in Latvian.",
+          "suggestion": "Jūsu e-talcī nav pietiekami līdzekļu. Lūdzu, sazinieties ar maksātāju (<1>{{email}}</1>), lai papildinātu to un mēģiniet vēlreiz veikt pirkumu."
+        }
+      ],
       "approved_at": null
     },
     "nl": {

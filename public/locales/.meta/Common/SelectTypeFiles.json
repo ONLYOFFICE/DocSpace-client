@@ -3,7 +3,7 @@
   "content": "Select {{type}}",
   "content_en_sha1_hash": "362dad28aa0bb6ca287f03d3b542c0aea7263bf8",
   "created_at": "2025-05-19T21:30:48.523Z",
-  "updated_at": "2025-05-26T07:57:32.994Z",
+  "updated_at": "2026-04-07T23:35:04.297Z",
   "comment": {
     "text": "The translation key \"Select {{type}}\" is used to display a prompt in user interfaces that asks users to select a file type. This text appears as a button label or dialog title, guiding users through the process of choosing a specific type of file. Translators should consider the context and conventions of their language when translating this text.",
     "is_auto": true,
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech translation includes the English word 'Select' which is unnecessary and confusing. It should be translated to a Czech equivalent.",
-          "suggestion": "Vyberte soubory {{type}}"
+          "description": "The translation contains a redundant repetition of the English word 'Select' within the Czech sentence, making it nonsensical.",
+          "suggestion": "Vyberte {{type}}"
         }
       ],
       "approved_at": null
@@ -117,13 +117,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Atlasīt {{type}} ' translates to 'Select {{type}}' literally, but a more natural phrasing for a selection action would be 'Izvēlēties {{type}}'.  'Atlasīt' implies to pick out/choose from something already visible, whereas 'Izvēlēties' is a more general 'to select'.",
-          "suggestion": "Izvēlēties {{type}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -156,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Selectare {{type}}\" is technically correct but a more natural and idiomatic translation would be \"Alege {{type}}\" or \"Selectați {{type}}\" (if addressing multiple users). \"Selectare\" sounds a bit formal and less common in this context.",
-          "suggestion": "Alege {{type}}"
+          "description": "The Romanian translation 'Selectare' is a noun (Selection), whereas the English 'Select' is an imperative verb (command). In UI contexts for buttons or prompts, the imperative form 'Selectați' or 'Selectează' is required to match the meaning.",
+          "suggestion": "Selectați {{type}}"
         }
       ],
       "approved_at": null
@@ -171,13 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '{{type}} තෝරන්න' is a literal translation of 'Select {{type}}'. A more natural Sinhala phrasing would be '{{type}} ප choisissez කරන්න' ({{type}} chọn) or '{{type}} තෝරා ගන්න' ({{type}} thora gana).",
-          "suggestion": "{{type}} තෝරා ගන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -223,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

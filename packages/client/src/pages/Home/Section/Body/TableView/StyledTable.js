@@ -67,6 +67,10 @@ const StyledTableRow = ({
       },
       className,
     )}
+    checked={checked}
+    isActive={isActive}
+    dragging={dragging}
+    isIndexEditingMode={isIndexEditingMode}
     {...props}
   />
 );

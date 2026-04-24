@@ -533,6 +533,7 @@ const Shell = ({ page = "home", ...rest }) => {
       <AiAgentProviders
         locale={language}
         theme={isBase ? "theme-portal-base" : "theme-portal-dark"}
+        isStandalone={standalone}
       >
         <Layout>
           {toast}

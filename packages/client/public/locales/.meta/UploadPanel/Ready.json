@@ -3,11 +3,12 @@
   "content": "Done",
   "content_en_sha1_hash": "e9b450d14bc2363d292c84f17cfad5cfbd58a458",
   "created_at": "2025-05-19T21:30:49.950Z",
-  "updated_at": "2026-04-08T20:49:45.018Z",
+  "updated_at": "2026-04-11T21:27:40.649Z",
   "comment": {
-    "text": "This translation key is used as the label for a \"Done\" button, appearing on conversion and upload buttons in the UI, indicating completion or readiness. The translation key will be rendered when the value of \"Ready\" matches the content of this key, which should display as \"Done\".",
+    "text": "This is a button label. It appears on a conversion or upload panel, indicating that the file is ready for processing.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:37.587Z"
+    "updated_at": "2026-04-11T21:27:40.649Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -45,13 +46,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation 'Завършен' is a masculine adjective (meaning 'Finished' or 'Completed' describing a masculine noun). For a UI button label, a neutral or adverbial form is required to match the English 'Done'.",
-          "suggestion": "Готово"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -69,13 +64,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek word 'Τέλος' means 'End' or 'The end' (as in the conclusion of a movie or a story). For a UI button indicating a completed action or readiness, 'Ολοκληρώθηκε' or 'Έτοιμο' is more appropriate.",
-          "suggestion": "Ολοκληρώθηκε"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -123,25 +112,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ແລ້ວໆ' is highly informal/colloquial (meaning 'done done' or 'already already') and is inappropriate for a professional UI button label. A standard, formal translation for 'Done' in a software context is required.",
-          "suggestion": "ສຳເລັດ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Gatavs' means 'Ready' (masculine), whereas the English text is 'Done' (indicating completion). While the metadata suggests the key is used for 'Ready', the English source provided for verification is 'Done'. In Latvian, 'Done' (as in a completed task) should be 'Gatavs' only if referring to a state of readiness, but 'Done' as a button action/status is typically 'Gatavs' (Ready) or 'Pabeigts' (Finished). However, 'Gatavs' is specifically the translation for 'Ready', making it a mismatch for the English word 'Done'.",
-          "suggestion": "Pabeigts"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {

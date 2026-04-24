@@ -3,13 +3,20 @@
   "content": "Show Folder Actions",
   "content_en_sha1_hash": "bef5318e8ccef5256166f49092d119670d1acc28",
   "created_at": "2026-02-18T14:56:21.880Z",
-  "updated_at": "2026-04-07T21:39:57.719Z",
+  "updated_at": "2026-04-12T15:31:17.424Z",
   "comment": {
-    "text": "This text appears on a button or menu item to display actions related to a folder. It indicates the user can view or manage the folder's actions within the application, appearing in the Home page's Context Menu and Table View. Translators should ensure the wording accurately conveys folder action functionality.",
+    "text": "This is a tooltip for a button that, when clicked, opens a context menu with actions applicable to a folder.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:09:26.633Z"
+    "updated_at": "2026-04-11T20:41:01.502Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/components/tiles/base-tile/index.tsx",
+      "line_number": 213,
+      "context": "displayType={ContextMenuButtonDisplayType.toggle}\n onClick={(e) => {\n e.stopPropagation();\n onContextMenu(e);\n }}\n title={t(\"TitleShowFolderActions\")}\n />\n ) : (\n <div className=\"expandButton\" />\n )}\n <ContextMenu",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/ContextButton.tsx",
       "line_number": 137,
@@ -45,13 +52,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'əyləmlərini' is a misspelling or incorrect form of 'əməliyyatlarını' (actions/operations). 'Əyləm' is not a standard term for 'action' in this context; it likely stems from a confusion with 'əməliyyat'.",
-          "suggestion": "Qovluq əməliyyatlarını göstər"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -87,13 +88,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The verb 'Show' is missing from the translation. 'Kansion toiminnot' means 'Folder actions', whereas the English 'Show Folder Actions' implies an action/command to display a menu.",
-          "suggestion": "Näytä kansion toiminnot"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -129,13 +124,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ສະແດງ ໂຟນເດີ ການ​ປະ​ຕິ​ບັດ' literally translates to 'Show Folder Execution/Practice', which sounds unnatural in a software UI context. In Lao UI localization, 'Actions' (as in menu commands) is better translated as 'ຄໍາສັ່ງ' (commands) or 'ການຈັດການ' (management/actions).",
-          "suggestion": "ສະແດງຄໍາສັ່ງຂອງໂຟນເດີ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -153,13 +142,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The verb 'Show' is missing from the translation. The current Polish text 'Działania na folderach' means 'Folder actions', whereas the English text 'Show Folder Actions' implies an action to display a menu or list.",
-          "suggestion": "Pokaż działania na folderach"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -213,25 +196,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'акцијеје' is a misspelling/incorrect transliteration of 'акције' (actions). Additionally, 'акције' in Serbian often refers to 'stocks/shares' in a financial context; 'акције фолдера' sounds unnatural for software UI. A better term for 'actions' in this context is 'операције' (operations) or 'команде' (commands).",
-          "suggestion": "Прикажи операције фолдера"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'akciije' is a typo; the correct spelling in Serbian is 'akcije'.",
-          "suggestion": "Prikaži akcije foldera"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

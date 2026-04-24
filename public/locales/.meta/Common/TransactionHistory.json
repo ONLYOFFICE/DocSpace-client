@@ -3,13 +3,21 @@
   "content": "Transaction history",
   "content_en_sha1_hash": "aa7d3d7dd9d1706c1bda7bd97c31b7c47a7d310f",
   "created_at": "2026-04-10T13:53:43.722Z",
-  "updated_at": "2026-04-10T13:53:43.722Z",
+  "updated_at": "2026-04-23T17:24:02.187Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is the title for a section or page displaying a user's past transactions.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:40:28.675Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
+      "line_number": 543,
+      "context": "<Text\n isBold\n fontSize=\"16px\"\n className={styles.transactionHistoryTitle}\n >\n {headerTitle ?? t(\"TransactionHistory\")}\n </Text>\n )}\n {isMobile ? mobileFilter : null}\n </div>\n {!isMobile ? filterCombobox : null}",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

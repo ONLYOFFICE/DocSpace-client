@@ -3,13 +3,21 @@
   "content": "Automatic payments",
   "content_en_sha1_hash": "0d1f62072cabc5b7f051e3f49621066de8ced2c3",
   "created_at": "2026-04-10T13:53:41.891Z",
-  "updated_at": "2026-04-10T13:53:41.891Z",
+  "updated_at": "2026-04-13T14:59:06.026Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label for a checkbox or toggle switch that enables or disables automatic payments for a user's account.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:58:52.510Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/AutoPayments.tsx",
+      "line_number": 332,
+      "context": "[styles.noMargin]: noMargin,\n })}\n >\n <div className={styles.autoPaymentHeader}>\n <Text isBold fontSize=\"16px\">\n {t(\"AutomaticPayments\")}\n </Text>\n <ToggleButton\n isChecked={isAutomaticPaymentsEnabled}\n onChange={onToggleClick}\n className={styles.toggleButton}",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

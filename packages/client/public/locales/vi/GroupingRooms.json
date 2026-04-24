@@ -8,7 +8,7 @@
   "DisablingRoomGroups": "Tắt nhóm phòng",
   "DisablingRoomGroupsDescription": "Các nhóm sẽ được lưu nhưng bị ẩn. Vui lòng bật lại trong Hồ sơ, Quản lý tệp.",
   "EditRoomGroups": "Chỉnh sửa nhóm phòng",
-  "EmptyGroupDescription": "Không có phòng nào ở đây. Hãy thử thêm một phòng hoặc xóa nhóm này.",
+  "EmptyGroupRoomsDescription": "Không có phòng nào ở đây. Hãy thử thêm một phòng hoặc xóa nhóm này.",
   "GroupHasBeenDeleted": "Nhóm đã bị xóa",
   "GroupIcon": "Biểu tượng nhóm",
   "GroupIsEmpty": "Nhóm trống",

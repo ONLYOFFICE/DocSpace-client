@@ -3,13 +3,27 @@
   "content": "For full billing and subscription management, please visit the portal.",
   "content_en_sha1_hash": "549b95098cca7344b01294c5de8853cbd78bed2c",
   "created_at": "2026-04-10T08:20:53.260Z",
-  "updated_at": "2026-04-10T08:20:53.260Z",
+  "updated_at": "2026-04-23T17:24:02.140Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a notice displayed within the billing settings, informing users to visit an external portal for complete billing and subscription management.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:58:16.616Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/BillingForm.tsx",
+      "line_number": 130,
+      "context": "}));\n \n return (\n <div className={styles.billingWrapper}>\n <Text fontSize=\"12px\" lineHeight=\"16px\" className={styles.billingNotice}>\n {t(\"BillingPortalNotice\")}{\" \"}\n <Link\n type={LinkType.action}\n fontSize=\"12px\"\n isTextOverflow={false}\n className={styles.billingPortalLink}",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/settings/category/BillingForm.tsx",
+      "line_number": 127,
+      "context": "}));\n \n return (\n <div className={styles.billingWrapper}>\n <Text fontSize=\"12px\" lineHeight=\"16px\" className={styles.billingNotice}>\n {t(\"BillingPortalNotice\")}{\" \"}\n <Link\n type={LinkType.action}\n fontSize=\"12px\"\n isTextOverflow={false}\n className={styles.billingPortalLink}",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

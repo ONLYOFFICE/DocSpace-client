@@ -3,11 +3,12 @@
   "content": "Custom domains",
   "content_en_sha1_hash": "b18c921ec5318c9e2ce5dfcd1e4ec6b536183c22",
   "created_at": "2025-05-19T21:30:50.996Z",
-  "updated_at": "2026-04-09T03:50:28.641Z",
+  "updated_at": "2026-04-11T21:25:08.402Z",
   "comment": {
-    "text": "This translation key controls the label and value displayed for custom domain options on a portal settings page. It appears as a dropdown or select field in the UI where users can choose between \"All Domains\" or \"Custom Domains\".",
+    "text": "This is a radio button label. It allows the user to specify that only custom domains are trusted for email.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:29.161Z"
+    "updated_at": "2026-04-11T21:25:08.402Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -69,37 +70,19 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation 'Käytössä' means 'In use' or 'Enabled', which is a completely different meaning from 'Custom domains'.",
-          "suggestion": "Omat verkkotunnukset"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The French translation 'Domaines autorisés' means 'Authorized domains' or 'Allowed domains', which changes the meaning from 'Custom domains' (user-defined domains).",
-          "suggestion": "Domaines personnalisés"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Հարմարեցնել տիրույթները' means 'Customize domains' (verb phrase), whereas the English 'Custom domains' is a noun phrase used as a label for a category/option.",
-          "suggestion": "Custom տիրույթներ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -123,25 +106,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order is reversed and the phrasing is unnatural. 'ກຳນົດເອງ ໂດເມນ' translates literally to 'Self-defined Domain' in a way that sounds like a broken machine translation. In Lao UI context, 'Custom Domains' should be translated as 'ໂດເມນທີ່ກຳນົດເອງ'.",
-          "suggestion": "ໂດເມນທີ່ກຳນົດເອງ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation uses the singular form 'domēnu' (of the domain) instead of the plural 'domēni' (domains), which changes the grammatical meaning and fails to match the English plural 'Custom domains'.",
-          "suggestion": "Pielāgota domēni"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -171,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation uses the singular form 'Domeniu particularizat', whereas the English source is plural 'Custom domains'. In a UI selection context (All Domains vs Custom Domains), the number must match.",
-          "suggestion": "Domenii particularizate"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -225,13 +190,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Дозволити вхід з довірених доменів' (Allow login from trusted domains) describes a specific action/setting, whereas the English 'Custom domains' is a noun phrase used as a label for a selection option.",
-          "suggestion": "Власні домени"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

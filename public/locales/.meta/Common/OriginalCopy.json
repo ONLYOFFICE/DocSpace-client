@@ -3,11 +3,12 @@
   "content": "Save the file copy in the original format as well",
   "content_en_sha1_hash": "590aa54a4acb697b9b402769bb231a09e8ad806a",
   "created_at": "2026-04-03T21:51:34.700Z",
-  "updated_at": "2026-04-08T03:29:30.568Z",
+  "updated_at": "2026-04-13T14:59:05.905Z",
   "comment": {
-    "text": "This text serves as a label for a toggle button in the file management section, indicating whether a copy of the file should also be saved in its original format.",
+    "text": "This is the label for a toggle button in the user's profile settings. It allows users to choose whether to save a copy of edited files in their original format.",
     "is_auto": true,
-    "updated_at": "2026-04-03T21:53:43.820Z"
+    "updated_at": "2026-04-11T20:47:09.492Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -15,6 +16,12 @@
       "line_number": 141,
       "context": "className={classNames(\"save-copy-original \", styles.toggleBtn)}\n onChange={onChangeOriginalCopy}\n isChecked={storeOriginalFiles}\n dataTestId=\"save_copy_original_toggle_button\"\n />\n <Text>{t(\"Common:OriginalCopy\")}</Text>\n </div>\n \n <div className={styles.toggleBtnWrapper}>\n <ToggleButton\n className={classNames(\"display-notification\", styles.toggleBtn)}",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/settings/category/FileManagement.tsx",
+      "line_number": 132,
+      "context": "<ToggleButton\n className={styles.toggleBtn}\n onChange={onChangeOriginalCopy}\n isChecked={settings.storeOriginalFiles}\n />\n <Text>{t(\"OriginalCopy\")}</Text>\n </div>\n \n <div className={styles.toggleBtnWrapper}>\n <ToggleButton\n className={styles.toggleBtn}",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -207,13 +214,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation misses the 'as well' (also) nuance, which is important for a toggle indicating an additional action.",
-          "suggestion": "同时也以原始格式保存文件副本"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

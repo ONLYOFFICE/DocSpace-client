@@ -3,11 +3,12 @@
   "content": "Share this folder",
   "content_en_sha1_hash": "d3f176d5d32755268adb0267e9ada02f92c15cf2",
   "created_at": "2025-08-26T11:15:01.359Z",
-  "updated_at": "2026-04-07T23:13:28.572Z",
+  "updated_at": "2026-04-12T20:48:29.808Z",
   "comment": {
-    "text": "This key displays the text for a button or link that allows users to share a folder. It appears in the sharing interface, likely as part of a dialog or panel, and should be translated to accurately reflect the action of sharing a folder.",
+    "text": "This is the title of a dialog box that appears when a user initiates sharing for a folder.",
     "is_auto": true,
-    "updated_at": "2025-08-26T11:17:06.609Z"
+    "updated_at": "2026-04-11T20:43:01.596Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -165,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Delite to mapo' means 'Share this map' instead of 'Share this folder'. 'Mapo' is the accusative case for 'mapa' (map), whereas 'mapa' is not the word for 'folder' (mapka).",
-          "suggestion": "Delite to mapko"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

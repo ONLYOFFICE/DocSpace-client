@@ -3,23 +3,24 @@
   "content": "{{aiServices}} Management",
   "content_en_sha1_hash": "f4923bbe665d8a6f338bef657a66364c9b39476a",
   "created_at": "2026-03-26T08:26:46.810Z",
-  "updated_at": "2026-04-10T08:21:04.339Z",
+  "updated_at": "2026-04-13T14:59:05.832Z",
   "comment": {
-    "text": "This key is used for the title of the \"Ai Services Management\" category or section within the Portal Settings, likely displayed in a navigation menu or sidebar. It refers to the management of AI services and may appear alongside a description providing more detail about these services. Translators should consider the context of AI service management within the product.",
+    "text": "This is a category title in the portal settings navigation. It refers to the section where users can manage AI services. The `{{aiServices}}` variable will be replaced with the localized term for \"AI Services\".",
     "is_auto": true,
-    "updated_at": "2026-03-26T08:29:40.173Z"
+    "updated_at": "2026-04-11T21:25:51.624Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
-      "line_number": 116,
-      "context": "url=\"/portal-settings/customization/general/ad-management\"\n onClickLink={onClickLink}\n />\n ) : null}\n <CategoryItem\n title={t(\"AiServicesManagement\", {\n aiServices: t(\"Common:AIServices\"),\n })}\n subtitle={t(\"AiServicesManagementDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: t(\"Common:OrganizationName\"),",
+      "line_number": 117,
+      "context": "url=\"/portal-settings/customization/general/ad-management\"\n onClickLink={onClickLink}\n />\n ) : null}\n <CategoryItem\n title={t(\"AiServicesManagement\", {\n aiServices: t(\"Common:AIServices\"),\n })}\n subtitle={t(\"AiServicesManagementDescription\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: getBrandName(\"OrganizationName\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ai-services-management.tsx",
-      "line_number": 52,
-      "context": "import { createDefaultHookSettingsProps } from \"../../../utils/createDefaultHookSettingsProps\";\n import useCommon from \"../useCommon\";\n import DisableAiServicesDialog from \"SRC_DIR/components/dialogs/DisableAiServicesDialog\";\n import { AI_ENUM } from \"@docspace/ui-kit/billing/constants\";\n \n interface AiServicesManagementProps {\n isMobileView: boolean;\n aiServicesEnabled: boolean;\n setAiServicesEnabled: (value: boolean) => void;\n isLoaded: boolean;\n loadBaseInfo: (page: string) => Promise<void>;",
+      "line_number": 223,
+      "context": "return (\n <div className={styles.wrapper}>\n {!isMobileView ? (\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"AiServicesManagement\", {\n aiServices: t(\"Common:AIServices\"),\n })}\n </Text>\n ) : null}\n <Text className=\"category-item-description\" fontSize=\"13px\">",
       "module": "/packages/client"
     },
     {
@@ -39,13 +40,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order is reversed in Arabic, which changes the meaning from 'Management of {{aiServices}}' to '{{aiServices}} is management'. In Arabic, the noun being managed (the object) should come before the action (management).",
-          "suggestion": "{{aiServices}} الإدارة"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -75,13 +70,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order in Greek is reversed compared to the English meaning. '{{aiServices}} Διαχείριση' translates to '{{aiServices}} Management' in a way that sounds like 'Management of {{aiServices}}' but the syntax is awkward for a UI title. In Greek, the noun being managed should typically come first, or the structure should be 'Διαχείριση {{aiServices}}'.",
-          "suggestion": "Διαχείριση {{aiServices}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {

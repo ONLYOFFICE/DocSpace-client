@@ -3,16 +3,17 @@
   "content": "Backup: {{progress}}%",
   "content_en_sha1_hash": "67556deadd1d0bbd475e81e5accc92229e607451",
   "created_at": "2025-05-26T07:15:40.772Z",
-  "updated_at": "2026-04-08T16:24:12.328Z",
+  "updated_at": "2026-04-13T14:59:05.976Z",
   "comment": {
-    "text": "This translation key displays the progress percentage and corresponding label (\"Backup\", \"Preparing Backup\" or a dynamic progress value) during an automated backup process. It appears in various UI elements, such as buttons and dialogues, to inform users about the status of the backup operation.",
+    "text": "This is a progress indicator that appears during a backup operation. It shows the current percentage of completion, where `{{progress}}` is a number from 0 to 100.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:07:11.337Z"
+    "updated_at": "2026-04-11T20:58:38.464Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 686,
+      "line_number": 687,
       "context": "{\n label: operationsCompleted\n ? t(\"Common:Backup\")\n : downloadingProgress === 0\n ? t(\"Common:PreparingBackup\")\n : t(\"Common:BackupProgress\", {\n progress: downloadingProgress,\n }),\n percent: downloadingProgress,\n operation: OPERATIONS_NAME.backup,\n alert: false,",
       "module": "/packages/shared"
     },
@@ -24,8 +25,8 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/button-component/ButtonComponent.tsx",
-      "line_number": 62,
-      "context": "buttonSize,\n setTenantStatus,\n isFormReady,\n getStorageParams,\n uploadLocalFile,\n isBackupProgressVisible,\n setErrorInformation,\n setIsBackupProgressVisible,\n operationsAlert,\n } = props;",
+      "line_number": 210,
+      "context": "label:\n downloadingProgress === 100\n ? t(\"Backup\")\n : downloadingProgress === 0\n ? t(\"PreparingBackup\")\n : t(\"BackupProgress\", { progress: downloadingProgress }),\n percent: downloadingProgress,\n operation: OPERATIONS_NAME.backup,\n alert: false,\n completed: false,\n },",
       "module": "/packages/shared"
     }
   ],
@@ -135,13 +136,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Portuguese translation 'Faça cópias de segurança' is an imperative command ('Make backups'), whereas the English 'Backup' in this context is a noun/label describing the current process status.",
-          "suggestion": "Backup: {{progress}}%"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {

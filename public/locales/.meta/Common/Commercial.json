@@ -3,16 +3,17 @@
   "content": "Commercial",
   "content_en_sha1_hash": "b48513e4d112b083333d204170e504fdb1a362c0",
   "created_at": "2025-05-19T21:30:43.578Z",
-  "updated_at": "2026-04-08T15:06:44.206Z",
+  "updated_at": "2026-04-11T20:56:56.722Z",
   "comment": {
-    "text": "This translation key is used for the text \"Commercial\" in a branding and licensing context, typically found on a license agreement or permissions page where users can select a commercial usage option.",
+    "text": "This is a label indicating the license type of the software. It appears in the \"About\" dialog to specify that the current DocSpace instance is a commercial version.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:03.010Z"
+    "updated_at": "2026-04-11T20:56:56.722Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/components/about-dialog/About.content.tsx",
-      "line_number": 53,
+      "line_number": 54,
       "context": "logoText,\n }: IContentProps) => {\n const { t } = useTranslation(\"Common\");\n const { isBase } = useTheme();\n const isCommercial = !standalone || isEnterprise;\n const license = isCommercial ? t(\"Common:Commercial\") : \"AGPL-3.0\";\n const linkRepo = \"https://github.com/ONLYOFFICE/DocSpace\";\n const linkDocs = \"https://github.com/ONLYOFFICE/DocumentServer\";\n \n const companyName = previewData\n ? previewData.companyName",
       "module": "/packages/shared"
     }
@@ -129,13 +130,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word 'Commercial' is singular, but the Portuguese translation 'Comerciais' is plural. In the context of a license type or a single selection option, it should be singular.",
-          "suggestion": "Comercial"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -147,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Comerț' refers to 'Trade' or 'Commerce' as a general concept/industry, whereas in a licensing context (Commercial vs AGPL), it should be the adjective 'Comercial'.",
-          "suggestion": "Comercial"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -207,25 +196,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "wrong_language",
-          "description": "The translation is in English instead of Vietnamese.",
-          "suggestion": "Thương mại"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The English source is 'Commercial', but the Chinese translation '商业许可' means 'Commercial License'. The word 'License' (许可) is added, which changes the scope of the string from a simple adjective/category to a specific noun phrase.",
-          "suggestion": "商业"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

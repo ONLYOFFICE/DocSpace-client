@@ -4,11 +4,11 @@
   "ErrorViewDescription": "Spróbuj ponownie później",
   "ErrorViewDescriptionNetworkError": "Wygląda na to, że nie ma połączenia z Internetem.",
   "ErrorViewHeader": "Galeria jest tymczasowo niedostępna",
+  "GalleryTitle": "Galeria szablonów {{organizationName}}",
   "SelectTemplate": "Wybierz szablon",
+  "SubmitToGalleryDialogMainInfo": "Wyślij swój szablon do publicznej galerii, aby inni mogli z niego korzystać w swojej pracy. Po przejściu moderacji zostaniesz o tym poinformowany i nagrodzony za swój wkład.",
   "SuggestChanges": "Zasugeruj zmiany",
   "TemplateInfo": "Dane szablonu",
   "UploadGallery": "Wyślij do Galerii",
-  "ViewAllTemplates": "Zobacz wszystkie szablony",
-  "GalleryTitle": "Galeria szablonów {{organizationName}}",
-  "SubmitToGalleryDialogMainInfo": "Wyślij swój szablon do publicznej galerii, aby inni mogli z niego korzystać w swojej pracy. Po przejściu moderacji zostaniesz o tym poinformowany i nagrodzony za swój wkład."
+  "ViewAllTemplates": "Zobacz wszystkie szablony"
 }

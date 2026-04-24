@@ -3,29 +3,30 @@
   "content": "Third-party Authorization",
   "content_en_sha1_hash": "3861395ee9ebb8b36b5c86c31bb334a7938d4491",
   "created_at": "2025-05-19T21:30:52.873Z",
-  "updated_at": "2026-04-09T00:41:17.898Z",
+  "updated_at": "2026-04-11T21:21:52.590Z",
   "comment": {
-    "text": "This translation key is used to display the label \"Third-party Authorization\" in various UI contexts, such as buttons and dialog titles, primarily within integration settings and portal settings. It appears on a page that allows users to manage third-party services integrations.",
+    "text": "This is a page title and a menu item label. It refers to the section in Portal Settings where users can manage integrations with third-party services.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:20.038Z"
+    "updated_at": "2026-04-11T21:21:52.590Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/index.js",
-      "line_number": 127,
+      "line_number": 128,
       "context": "class ThirdPartyServices extends React.Component {\n constructor(props) {\n super(props);\n const { t, tReady } = props;\n \n if (tReady) setDocumentTitle(`${t(\"ThirdPartyAuthorization\")}`);\n \n this.state = {\n dialogVisible: false,\n isLoading: false,\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/index.js",
-      "line_number": 127,
+      "line_number": 128,
       "context": "class ThirdPartyServices extends React.Component {\n constructor(props) {\n super(props);\n const { t, tReady } = props;\n \n if (tReady) setDocumentTitle(`${t(\"ThirdPartyAuthorization\")}`);\n \n this.state = {\n dialogVisible: false,\n isLoading: false,\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 208,
-      "context": "return t(\"PortalAccess\", { productName: t(\"Common:ProductName\") });\n case \"TwoFactorAuth\":\n return t(\"TwoFactorAuth\");\n case \"ManagementCategoryIntegration\":\n return t(\"ManagementCategoryIntegration\");\n case \"ThirdPartyAuthorization\":\n return t(\"ThirdPartyAuthorization\");\n case \"Migration\":\n return t(\"Migration\");\n case \"Backup\":\n return t(\"Common:Backup\");",
+      "line_number": 209,
+      "context": "return t(\"PortalAccess\", { productName: getBrandName(\"ProductName\") });\n case \"TwoFactorAuth\":\n return t(\"TwoFactorAuth\");\n case \"ManagementCategoryIntegration\":\n return t(\"ManagementCategoryIntegration\");\n case \"ThirdPartyAuthorization\":\n return t(\"ThirdPartyAuthorization\");\n case \"Migration\":\n return t(\"Migration\");\n case \"Backup\":\n return t(\"Common:Backup\");",
       "module": "/packages/client"
     },
     {
@@ -57,13 +58,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation uses 'Удостоверяване' (Authentication/Identification), which refers to verifying who a user is. The English term 'Authorization' refers to granting permissions or access rights. In the context of third-party integrations, 'Оторизация' or 'Разрешаване на достъп' is the correct technical term.",
-          "suggestion": "Оторизация от трета страна"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -75,13 +70,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English term 'Authorization' (permission/granting access) is translated as 'Dienste' (Services). The translation currently means 'Third-party services' instead of 'Third-party authorization'.",
-          "suggestion": "Autorisierung durch Drittanbieter"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -105,13 +94,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The French translation 'Tiers autorisé' means 'Authorized third party' (referring to a person/entity), whereas the English 'Third-party Authorization' refers to the process or permission itself.",
-          "suggestion": "Autorisation de tiers"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -129,13 +112,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation '第三者機関による認証' means 'Authentication by a third-party organization/institution'. In the context of software integrations and portal settings, 'Authorization' refers to granting permissions or access rights, not identity authentication. 'Authorization' should be translated as '認可' or '権限付与'.",
-          "suggestion": "サードパーティによる認可"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -183,37 +160,19 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian word 'Autentificare' means 'Authentication', which is the process of verifying identity. The English word 'Authorization' means 'Autorizare', which is the process of granting permissions. In the context of third-party integrations, these are distinct technical concepts.",
-          "suggestion": "Autorizare de terță parte"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Third-party Authorization' refers to the process of granting permission/access, whereas the Russian translation 'Сторонние сервисы' means 'Third-party services'. This is a semantic mismatch.",
-          "suggestion": "Авторизация сторонних сервисов"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'බලයදීම' (balayadeema) translates to 'granting power' or 'empowering', which is grammatically awkward in this context. In UI/Technical terms for 'Authorization', 'අනුමත කිරීම' (approval/authorization) or 'අධිකාරිය' (authority/authorization) is more accurate.",
-          "suggestion": "තෙවන පාර්ශ්ව අනුමත කිරීම"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

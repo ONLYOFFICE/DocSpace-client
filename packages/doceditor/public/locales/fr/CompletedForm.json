@@ -1,7 +1,8 @@
 {
   "BackToRoom": "Retour à la salle",
   "CheckReadyForms": "Vérifier les formulaires prêts",
-  "Description": "Votre formulaire rempli et enregistré",
+  "CompletedFormDescription": "Votre formulaire rempli et enregistré",
+  "CompletedFormTitle": "Le formulaire est rempli",
   "DescriptionForAnonymous": "Au formulaire PDF soumis un numéro unique a été attribué. Pour vérifier l'état du formulaire, contactez le propriétaire du formulaire.",
   "DescriptionForRegisteredUser": "Le formulaire PDF soumis est mis à votre disposition dans le dossier Complet.",
   "FillItOutAgain": "Remplir à nouveau",
@@ -18,6 +19,5 @@
   "FormVDRYouFirstRecepientDescription": "Vous êtes chargé de remplir le formulaire en tant que premier destinataire. Une notification a été envoyée à votre adresse e-mail. Vous pouvez commencer à le remplir maintenant ou copier le lien de remplissage et y revenir plus tard.",
   "LinkToFillOutForm": "Lien pour remplir le formulaire :",
   "LinkToForm": "Lien vers le formulaire :",
-  "LinkToViewOnlyForm": "Lien vers le formulaire en lecture seule :",
-  "Title": "Le formulaire est rempli"
+  "LinkToViewOnlyForm": "Lien vers le formulaire en lecture seule :"
 }

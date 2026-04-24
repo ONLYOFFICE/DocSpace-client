@@ -3,11 +3,12 @@
   "content": "Internal server error. Try again later.",
   "content_en_sha1_hash": "50b64918b994b2985e494b4a494e20d58180ff95",
   "created_at": "2025-05-19T21:30:45.082Z",
-  "updated_at": "2026-04-08T10:16:58.705Z",
+  "updated_at": "2026-04-11T20:53:19.825Z",
   "comment": {
-    "text": "This translation key displays an internal server error message, typically used when a server-side operation fails, and is usually shown in error dialogs or notifications. The exact location of this text may vary depending on the specific use case, but it often appears as a toast notification or within a dialog box. It aims to inform users that something went wrong and encourage them to try again later.",
+    "text": "Error text displayed when an unexpected server-side issue occurs, prompting the user to try again later.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:21.007Z"
+    "updated_at": "2026-04-11T20:53:19.825Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -30,7 +31,7 @@
     },
     {
       "file_path": "/packages/shared/pages/PreparationPortal/index.tsx",
-      "line_number": 48,
+      "line_number": 49,
       "context": "export const PreparationPortal = (props: IPreparationPortal) => {\n const { withoutHeader, isDialog, style } = props;\n \n const { t, ready } = useTranslation([\"Common\"]);\n \n const errorInternalServer = t(\"Common:ErrorInternalServer\");\n \n const [percent, setPercent] = useState(0);\n const [errorMessage, setErrorMessage] = useState(\"\");\n \n const getRecoveryProgress = useCallback(async () => {",
       "module": "/packages/shared"
     }
@@ -117,13 +118,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses '인터넷 서버' (Internet server) instead of '내부 서버' (Internal server). This changes the technical meaning of the error.",
-          "suggestion": "내부 서버 오류입니다. 나중에 다시 시도하세요."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -177,13 +172,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation omits the instruction 'Try again later', which is a key part of the original message's intent.",
-          "suggestion": "සේවාදායකයේ අභ්‍යන්තර දෝෂයකි. පසුව නැවත උත්සාහ කරන්න."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -201,13 +190,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Интерна' is an incorrect adjective form in Serbian; the correct term for 'Internal' in this context is 'Унутрашња'.",
-          "suggestion": "Унутрашња грешка сервера. Покушајте поново касније."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

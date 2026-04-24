@@ -3,17 +3,18 @@
   "content": "Edit comment",
   "content_en_sha1_hash": "3b168257183896cf72ca48607075940bcabeb683",
   "created_at": "2025-05-19T21:30:49.937Z",
-  "updated_at": "2026-04-08T20:40:32.931Z",
+  "updated_at": "2026-04-13T14:59:05.910Z",
   "comment": {
-    "text": "EditComment is used in a version history page to display the text \"Edit comment\" in a button or edit panel, prompting users to modify the comment associated with a specific version.",
+    "text": "This is the label for a button that allows users to modify an existing comment.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:38.784Z"
+    "updated_at": "2026-04-11T21:27:43.142Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/VersionHistory/Section/Body/VersionRow.js",
-      "line_number": 111,
-      "context": ": `${Encoder.htmlDecode(info.updatedBy?.displayName)}`;\n \n const onDownloadAction = () =>\n openUrl(`${info.viewUrl}&version=${info.version}`, UrlActionType.Download);\n \n const onEditComment = () => !isEditing && setShowEditPanel(!showEditPanel);\n \n const onChange = (e) => {\n const value = e.target.value;\n \n if (value.length > MAX_FILE_COMMENT_LENGTH) {",
+      "line_number": 211,
+      "context": "onClick: onOpenFile,\n },\n canChangeVersionFileHistory && {\n key: \"edit\",\n icon: AccessCommentReactSvgUrl,\n label: t(\"EditComment\"),\n onClick: onEditComment,\n },\n index !== 0 &&\n canChangeVersionFileHistory && {\n key: \"restore\",",
       "module": "/packages/client"
     }
   ],

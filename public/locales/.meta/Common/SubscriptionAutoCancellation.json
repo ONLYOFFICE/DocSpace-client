@@ -3,13 +3,27 @@
   "content": "Subscription will be automatically canceled on {{finalDate}}",
   "content_en_sha1_hash": "052b6c0869cca2a025f2225ae034b9d30f6d3f9b",
   "created_at": "2026-04-10T13:53:43.451Z",
-  "updated_at": "2026-04-10T13:53:43.451Z",
+  "updated_at": "2026-04-23T17:24:02.174Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a text label indicating that a subscription will be automatically canceled on a specific date. The `{{finalDate}}` variable will be replaced with the cancellation date.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:41:47.112Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "line_number": 207,
+      "context": "onClick: openCancelDialog,\n },\n ];\n \n const keyProp = isScheduled\n ? { tKey: \"SubscriptionAutoCancellation\" }\n : { tKey: \"SubscriptionWillBeAutomaticallyRenewed\" };\n \n if (shouldShowLoader) return <AdditionalStoragePageLoader />;\n \n return (",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "line_number": 144,
+      "context": "toSize: `${nextStoragePlanSize} ${t(\"Gigabyte\")}`,\n })}\n </Text>\n <Text fontSize=\"12px\">\n {nextStoragePlanSize === 0\n ? t(\"SubscriptionAutoCancellation\", {\n finalDate: storageExpiryDate,\n })\n : t(\"SubscriptionAutoRenewed\", {\n finalDate: storageExpiryDate,\n })}",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

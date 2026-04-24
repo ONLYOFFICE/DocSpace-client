@@ -3,13 +3,21 @@
   "content": "Cancel subscription",
   "content_en_sha1_hash": "6d7f058cd1f99c995a4abcfe95675dbae4a10815",
   "created_at": "2026-04-10T13:53:44.878Z",
-  "updated_at": "2026-04-10T13:53:44.878Z",
+  "updated_at": "2026-04-23T17:24:02.178Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Button label. This text appears on a button that, when clicked, initiates the process of canceling a user's subscription.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:57:37.261Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "line_number": 200,
+      "context": "icon: PencilIcon,\n onClick: openUpgradeDialog,\n },\n {\n key: \"cancel\",\n label: t(\"CancelSubscription\"),\n icon: RemoveSessionIcon,\n onClick: openCancelDialog,\n },\n ];",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

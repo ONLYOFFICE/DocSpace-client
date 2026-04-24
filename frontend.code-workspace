@@ -494,6 +494,16 @@
         "label": "Tools",
         "tasks": [
           {
+            "label": "Translation Stats",
+            "task": "Translation App | translation stats",
+            "tooltip": "📊 Show translation statistics (keys, coverage, size per language)"
+          },
+          {
+            "label": "Translation Stats (Markdown)",
+            "task": "Translation App | translation stats (Markdown)",
+            "tooltip": "📄 Generate translation-stats.md report"
+          },
+          {
             "label": "Translation App : Start (with metadata)",
             "task": "Translation App | start",
             "tooltip": "🌐 Start translation app (backend + frontend + generate metadata)"
@@ -504,11 +514,6 @@
             "tooltip": "⚡ Start translation app quickly — skip metadata generation"
           },
           {
-            "label": "Translation Stats",
-            "task": "Translation App | translation stats",
-            "tooltip": "📊 Show translation statistics (keys, coverage, size per language)"
-          },
-          {
             "label": "Verify Translations (fast, no LLM)",
             "task": "Translation App | verify translations (no LLM)",
             "tooltip": "🔍 Run deterministic checks: variables, tags, scripts, brackets — instant"
@@ -517,6 +522,11 @@
             "label": "Verify Translations (LLM)",
             "task": "Translation App | verify translations (LLM)",
             "tooltip": "🤖 Run full LLM-based spell-check verification (slow)"
+          },
+          {
+            "label": "Verify Translations (LLM + recheck)",
+            "task": "Translation App | verify translations (LLM + recheck)",
+            "tooltip": "🔄 Re-verify only keys with existing issues in .meta (fast, targeted)"
           },
           {
             "label": "Update Metadata",

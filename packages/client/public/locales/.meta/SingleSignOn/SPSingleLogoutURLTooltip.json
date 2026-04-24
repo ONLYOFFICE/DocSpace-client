@@ -3,11 +3,12 @@
   "content": "The URL used for the single logout on the Identity provider side",
   "content_en_sha1_hash": "34319189f5b364b3990e748fe5bae631c61cf460",
   "created_at": "2025-05-19T21:30:50.182Z",
-  "updated_at": "2026-04-08T22:16:33.273Z",
+  "updated_at": "2026-04-11T21:26:17.328Z",
   "comment": {
-    "text": "The \"SPSingleLogoutURLTooltip\" translation key provides a tooltip message explaining the purpose of the \"SPSingleLogoutURL\" field in the Portal Settings UI. It is used to inform users about the URL associated with single logout on the Identity provider side when setting up Single Sign-On (SSO) options, typically displayed in a button or dialog context.",
+    "text": "This is a tooltip that explains the purpose of the \"SP Single Logout URL\" field. It clarifies that this URL is for single logout on the Identity Provider's side.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:02.944Z"
+    "updated_at": "2026-04-11T21:26:17.328Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation adds 'المستخدم' (the user), which changes the meaning from 'The URL' to 'The user's URL'.",
-          "suggestion": "رابط URL المستخدم لتسجيل الخروج الفردي من جانب مزود الهوية"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -117,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Vietrādis' is a mistranslation. It appears to be a hallucination or a misspelling of 'Vienotais' or 'Vienotā' (Single). 'Vietrādis' is not a standard Latvian word in this context and changes the meaning of 'Single logout'.",
-          "suggestion": "URL, kas tiek izmantots vienotajai iziet no sistēmas (logout) procedūrai identitātes nodrošinātāja pusē"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -165,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'ඒ.ස.නි.' (A.S.N.), which is a phonetic transliteration of 'URL' that is not standard or recognizable in Sinhala technical contexts, and the sentence structure is awkward, making it sound like 'This URL is used for...' rather than defining what the URL is.",
-          "suggestion": "අනන්‍යතා සැපයුම්කරු (Identity provider) පාර්ශවයේ තනි නික්මයාම (single logout) සඳහා භාවිතා කරන URL එක"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

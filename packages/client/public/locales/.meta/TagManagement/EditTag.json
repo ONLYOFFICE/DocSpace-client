@@ -3,11 +3,12 @@
   "content": "Edit tag",
   "content_en_sha1_hash": "b50cf28f688294adb0cf472b645f9208a6dbb0b4",
   "created_at": "2026-02-19T13:36:19.058Z",
-  "updated_at": "2026-04-08T21:26:41.219Z",
+  "updated_at": "2026-04-11T21:27:14.485Z",
   "comment": {
-    "text": "This translation key provides the title for a modal dialog used to edit an existing tag. It appears as the header of the \"Edit Tag\" modal, indicating the purpose of the dialog to the user. Translators should ensure the translation accurately reflects the action of modifying a tag.",
+    "text": "This is the title of a dialog window that allows users to modify an existing tag.",
     "is_auto": true,
-    "updated_at": "2026-03-20T10:29:38.082Z"
+    "updated_at": "2026-04-11T21:27:14.485Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'tag' is missing from the translation. 'Redaktə et' means 'Edit', whereas the English source is 'Edit tag'.",
-          "suggestion": "Teqi redaktə et"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -75,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'tunnus' in Finnish typically refers to an ID, a credential, or a username. In the context of 'tags' (labels used for categorization), the correct Finnish term is 'tunniste'.",
-          "suggestion": "Muokkaa tunniste"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {

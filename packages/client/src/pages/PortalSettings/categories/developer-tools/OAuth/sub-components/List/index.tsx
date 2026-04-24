@@ -42,6 +42,7 @@ import RowView from "./RowView";
 
 import styles from "./List.styled.module.scss";
 import OAuthLoader from "./Loader";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 interface ListProps {
   clients: IClientProps[];
@@ -70,7 +71,7 @@ const List = ({
       t={t}
       i18nKey="OAuthAppDescription"
       values={{
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
         organizationName: logoText,
       }}
     />

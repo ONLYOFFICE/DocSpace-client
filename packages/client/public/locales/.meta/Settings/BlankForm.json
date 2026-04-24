@@ -3,11 +3,12 @@
   "content": "Blank Form",
   "content_en_sha1_hash": "c551115ab98cf444504f10fc19490ff882e16986",
   "created_at": "2026-02-18T14:56:25.390Z",
-  "updated_at": "2026-04-09T04:05:30.543Z",
+  "updated_at": "2026-04-11T21:25:30.121Z",
   "comment": {
-    "text": "This key represents the text for a blank form template. It's used to label a default form template option, likely within settings or a template selection dialog. Translators should consider this as a descriptive label for creating a new, empty form.",
+    "text": "This is a label for a default template option. It appears in a list of template types, specifically for creating a new blank PDF form.",
     "is_auto": true,
-    "updated_at": "2026-03-20T10:28:56.969Z"
+    "updated_at": "2026-04-11T21:25:30.121Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -111,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Blanka' is a direct transliteration/loanword from English and is not a standard Latvian word for 'blank' or 'empty'. In Latvian, 'blank' (as in an empty form) should be translated as 'Būta' (rarely used in this context) or more accurately 'Tukša' (empty).",
-          "suggestion": "Tukša forma"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -171,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Prastaven' is a misspelling or incorrect form. The correct adjective for 'blank' in this context is 'Prazn'. 'Prastaven' is not a standard Slovenian word.",
-          "suggestion": "Prazn obrazec"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

@@ -3,17 +3,18 @@
   "content": "Safeguard your data and protect yourself and your team from potential hacking threats.",
   "content_en_sha1_hash": "77bcb1a67be1509eac99a9664f722db921ef85b2",
   "created_at": "2025-08-04T07:29:46.212Z",
-  "updated_at": "2026-04-09T02:29:23.256Z",
+  "updated_at": "2026-04-11T21:23:28.176Z",
   "comment": {
-    "text": "This text provides a security message encouraging users to protect their data and prevent hacking threats. It appears within the Login History section of the Portal Settings, specifically in the security category, to promote awareness and potentially drive users to enable two-factor authentication.",
+    "text": "This is a sentence in a banner promoting two-factor authentication. It explains the benefit of enabling 2FA for data security and protection against hacking.",
     "is_auto": true,
-    "updated_at": "2025-08-04T08:12:02.042Z"
+    "updated_at": "2026-04-11T21:23:28.176Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/hooks/useTwoFactorCampaignBanner.ts",
-      "line_number": 59,
-      "context": "() => ({\n Header: t(\"LoginHistoryCampaignHeader\", {\n productName: t(\"Common:ProductName\"),\n }),\n SubHeader: t(\"LoginHistoryCampaignTitle\"),\n Text: t(\"LoginHistoryCampaignText\"),\n Link: isMobile\n ? \"/portal-settings/security/access-portal/tfa\"\n : \"/portal-settings/security/access-portal\",\n }),\n [t, isMobile],",
+      "line_number": 60,
+      "context": "() => ({\n Header: t(\"LoginHistoryCampaignHeader\", {\n productName: getBrandName(\"ProductName\"),\n }),\n SubHeader: t(\"LoginHistoryCampaignTitle\"),\n Text: t(\"LoginHistoryCampaignText\"),\n Link: isMobile\n ? \"/portal-settings/security/access-portal/tfa\"\n : \"/portal-settings/security/access-portal\",\n }),\n [t, isMobile],",
       "module": "/packages/shared"
     }
   ],
@@ -165,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical error in the subject-verb agreement: 'vaša ekipa' (feminine) is used incorrectly as 'vaš ekipa' (masculine), which affects the naturalness and correctness of the sentence.",
-          "suggestion": "Zaščitite svoje podatke in se sami ter svojo ekipo zaščitite pred morebitnimi grožnjami vdora."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

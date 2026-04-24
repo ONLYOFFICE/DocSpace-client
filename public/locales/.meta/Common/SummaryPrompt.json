@@ -3,13 +3,21 @@
   "content": "Give me a brief summary of all collected data from \"{{formName}}\"",
   "content_en_sha1_hash": "96482520f78e714238c33b115b1d3b0a79b68c95",
   "created_at": "2026-03-31T15:18:23.908Z",
-  "updated_at": "2026-04-07T22:10:46.736Z",
+  "updated_at": "2026-04-23T17:24:02.135Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a prompt for an AI chat panel, asking for a summary of data collected from a form. `{{formName}}` will be replaced by the title of the form.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:41:28.259Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/ai-chat-panel/index.tsx",
+      "line_number": 142,
+      "context": "formName: pendingAttachmentFile.title,\n }),\n },\n {\n title: t(\"Common:Summary\"),\n prompt: t(\"Common:SummaryPrompt\", {\n formName: pendingAttachmentFile.title,\n }),\n },\n ]\n : undefined,",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -158,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation adds 'Natisnite gumb, da vam dam' (Press the button so I can give you), which changes the imperative command 'Give me' into a conditional instruction about a button that does not exist in the source text.",
-          "suggestion": "Podaj mi kratek povzetek vseh zbranih podatkov iz \"{{formName}}\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

@@ -1,4 +1,5 @@
 {
+  "ActionsWithFilesDescription": "Badge će istaknuti aktivnosti fajlova — otpremanje, uređivanje ili deljenje — u sekcijama {{rooms}}, {{shared}}, {{documents}} i {{aiAgents}}.",
   "AdminSetupRequired": "Potrebno podešavanje od strane administratora",
   "Badges": "Značke",
   "DailyFeed": "Dnevni sadržaj {{productName}}-a",
@@ -8,12 +9,11 @@
   "LdapEmailTooltip": "Ovaj korisnički nalog je učitan sa LDAP-a. Email adresa korisnika nije navedena i trenutna je generisana automatski i ne može se koristiti za slanje obaveštenja.",
   "NotConfigured": "Nije konfigurisano",
   "Notifications": "Obaveštenja",
+  "RoomsActivityDescription": "Pristupite trenutnim e-mail obaveštenjima o novim podeljenim fajlovima/foldereima i aktivnosti unutar vaših {{rooms}} i {{aiAgents}}.",
+  "RoomUpdateNotify": "Podeljeni sadržaj, aktivnost {{rooms}} i {{aiAgents}}",
   "SettingUpNotifications": "Podešavanje obaveštenja",
   "SuccessConnected": "{{serviceName}} je uspešno povezan kao kanal za obaveštenja. Sada ćeš tamo primati ažuriranja.",
   "SuccessDisconnected": "{{serviceName}} je uspešno isključen kao kanal za obaveštenja. Obaveštenja više neće biti slana tamo.",
   "UsefulTips": "Korisni {{productName}} saveti",
-  "UsefulTipsDescription": "Dobij korisne vodiče o {{productName}}-u",
-  "ActionsWithFilesDescription": "Badge će istaknuti aktivnosti fajlova — otpremanje, uređivanje ili deljenje — u sekcijama {{rooms}}, {{shared}}, {{documents}} i {{aiAgents}}.",
-  "RoomsActivityDescription": "Pristupite trenutnim e-mail obaveštenjima o novim podeljenim fajlovima/foldereima i aktivnosti unutar vaših {{rooms}} i {{aiAgents}}.",
-  "RoomUpdateNotify": "Podeljeni sadržaj, aktivnost {{rooms}} i {{aiAgents}}"
+  "UsefulTipsDescription": "Dobij korisne vodiče o {{productName}}-u"
 }

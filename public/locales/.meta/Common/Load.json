@@ -3,11 +3,12 @@
   "content": "Load",
   "content_en_sha1_hash": "ddcb77ff769ea54ca622848f6bedd4004fa4f4fa",
   "created_at": "2025-05-19T21:30:46.262Z",
-  "updated_at": "2026-04-08T05:24:18.513Z",
+  "updated_at": "2026-04-11T20:49:23.015Z",
   "comment": {
-    "text": "This translation key is used to display the label for a loading action button in a snackbar component. It appears on a button that triggers an action when clicked. The phrase \"Load\" should be translated into the target language to reflect this UI element's purpose.",
+    "text": "This is the label for a button within a toast notification. It prompts the user to load a new version of the application.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:37.304Z"
+    "updated_at": "2026-04-11T20:49:23.015Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -87,13 +88,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Carico' is a noun meaning 'load' (as in weight or cargo) or 'I load'. For a button triggering an action (imperative verb), 'Carica' is the correct form.",
-          "suggestion": "Carica"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -159,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'පූරණය' (Pūraṇaya) means 'to fill' or 'to replenish' (like filling a container). In the context of a UI button to 'Load' a new version or data, 'පූරණය' is semantically incorrect. A more appropriate term for a software action like 'Load' is 'ලෝඩ් කරන්න' (transliterated) or 'පූරණය කරන්න' (if referring to loading data into a field), but for a button action in a snackbar, 'ලෝඩ් කරන්න' or 'පූරණය කිරීම' is often used. However, 'පූරණය' specifically implies filling up a volume, which is a mismatch for a software 'Load' command.",
-          "suggestion": "ලෝඩ් කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -183,25 +172,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Оптерећење' means 'Load' in the sense of 'Workload' or 'Stress' (e.g., CPU load). For a button triggering an action to load something (like a new version), the verb 'Učitaj' should be used.",
-          "suggestion": "Учитај"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Opterećenje' means 'Load' as in 'burden' or 'weight' (noun). For a button triggering an action (verb), it should be 'Učitaj'.",
-          "suggestion": "Učitaj"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

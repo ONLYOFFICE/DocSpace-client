@@ -3,11 +3,12 @@
   "content": "Got any problems? Contact our <2>Support Team.</2>",
   "content_en_sha1_hash": "b32f368f23a2f7b36d83a5c446ed8e499d7ca8cf",
   "created_at": "2025-05-19T21:30:52.888Z",
-  "updated_at": "2026-04-10T08:58:38.060Z",
+  "updated_at": "2026-04-11T21:21:50.842Z",
   "comment": {
-    "text": "This translation key is used for a support contact message that appears on a consumer modal dialog. It provides an invitation to users who still have questions about connecting a third-party service or need technical assistance.",
+    "text": "This is a descriptive sentence that appears at the bottom of a third-party service integration dialog. It provides a link to the support team for users who need assistance. The `<2>` tag wraps the \"Support Team\" text, making it a clickable link.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:19.385Z"
+    "updated_at": "2026-04-11T21:21:50.842Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -75,13 +76,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation omits 'Team' (Équipe), translating only 'Support' instead of 'Support Team'.",
-          "suggestion": "Besoin d'aide ? Contactez notre <2>équipe de support.</2>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {

@@ -3,13 +3,21 @@
   "content": "How does it work?",
   "content_en_sha1_hash": "e21860bf37328b97ebb0ddd904694c78e4a7b382",
   "created_at": "2026-04-10T13:53:45.241Z",
-  "updated_at": "2026-04-10T13:53:45.241Z",
+  "updated_at": "2026-04-11T20:51:11.666Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a clickable link label that, when clicked, likely opens a modal or navigates to a page explaining the functionality of the AI feature.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:51:11.666Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/TopUpAiModal.tsx",
+      "line_number": 96,
+      "context": "onClick={onGetStartedClick}\n textDecoration=\"underline dotted\"\n color=\"accent\"\n fontWeight={600}\n >\n {t(\"HowDoesItWork\")}\n </Link>\n \n <FromWalletToAi\n onTopUpBalance={onTopUpBalance}\n onAmountDifferenceChange={onAmountDifferenceChange}",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

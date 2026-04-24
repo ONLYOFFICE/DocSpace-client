@@ -1,0 +1,29 @@
+{
+  "key_path": "BillingAdditionalStorageCardDesc",
+  "content": "Extra disk space, subscription, and pricing",
+  "content_en_sha1_hash": "44ccfc854c6b10f82a775b50bc7fb3a7441a9ca0",
+  "created_at": "2026-04-23T17:23:41.065Z",
+  "updated_at": "2026-04-23T17:37:51.793Z",
+  "comment": {
+    "text": "Description for a card in the billing settings menu, summarizing the topics related to additional storage.",
+    "is_auto": true,
+    "updated_at": "2026-04-23T17:37:51.793Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/settings/category/BillingForm.tsx",
+      "line_number": 72,
+      "context": "icon: <WalletIcon />,\n },\n {\n id: \"storage\",\n titleKey: \"AdditionalDiskStorage\",\n tKey: \"BillingAdditionalStorageCardDesc\",\n iconClass: cardStyles.billingIconStorage,\n icon: <StorageIcon />,\n },\n {\n id: \"payment-method\",",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,17 +3,18 @@
   "content": "For the files in the Common section, a separate room will be created (Common room). Only {{productName}} admins will have access to this room. By default, the owner of the room will be the user initiating the import: {{user}} (You).",
   "content_en_sha1_hash": "2f805a4d5fa533ff5afc2a707bd72f18ea11b2f1",
   "created_at": "2025-05-19T21:30:50.927Z",
-  "updated_at": "2026-04-09T03:56:15.858Z",
+  "updated_at": "2026-04-11T21:25:18.016Z",
   "comment": {
-    "text": "\"For CommonFilesDescription, translate the text describing the behavior of importing common files into a separate room, accessible only to admins and containing information about the owner's identity.\"",
+    "text": "This is a description displayed below a checkbox in the import settings. It explains what happens when common files are imported, specifically that a \"Common room\" will be created. It includes `{{productName}}` for the application's name and `{{user}}` for the current user's display name.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:31.822Z"
+    "updated_at": "2026-04-11T21:25:18.016Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 257,
-      "context": "{hasCommonFiles ? (\n <ImportSection\n isChecked={importOptions.importCommonFiles}\n onChange={(e) => onChange(e, \"importCommonFiles\")}\n sectionName={t(\"Common:CommonFiles\")}\n description={t(\"Settings:CommonFilesDescription\", {\n user: user?.displayName,\n productName: t(\"Common:ProductName\"),\n })}\n exportSection={{\n sectionName: t(\"Common:Common\"),",
+      "line_number": 258,
+      "context": "{hasCommonFiles ? (\n <ImportSection\n isChecked={importOptions.importCommonFiles}\n onChange={(e) => onChange(e, \"importCommonFiles\")}\n sectionName={t(\"Common:CommonFiles\")}\n description={t(\"Settings:CommonFilesDescription\", {\n user: user?.displayName,\n productName: getBrandName(\"ProductName\"),\n })}\n exportSection={{\n sectionName: t(\"Common:Common\"),",
       "module": "/packages/client"
     }
   ],
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word '(You)' was left in English instead of being translated into Arabic, which breaks the localization consistency.",
-          "suggestion": "بالنسبة للملفات الموجودة في القسم العام، سيتم إنشاء غرفة منفصلة (غرفة مشتركة). سيتمكن مسؤولو {{productName}} فقط من الوصول إلى هذه الغرفة. بشكل افتراضي، سيكون مالك الغرفة هو المستخدم الذي يبدأ الاستيراد: {{user}} (أنت)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -129,13 +124,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Missing punctuation (period) between 'pokoju' and 'Domyślnie', which creates a run-on sentence and affects readability/meaning.",
-          "suggestion": "Dla plików w sekcji Wspólne zostanie utworzony osobny pokój (pokój Wspólny). Tylko administratorzy {{productName}} będą mieli dostęp do tego pokoju. Domyślnie, właścicielem pokoju będzie użytkownik inicjujący import: {{user}} (Ty)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -165,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'user' was misspelled as 'පරිශ්‍රීලකයා' (parishreelekaya) instead of the correct 'පරිශීලකයා' (parishilakaya).",
-          "suggestion": "පොදු කොටසේ ගොනු සඳහා වෙනම කාමරයක් (පොදු කාමරය) සාදනු ලැබේ. {{productName}} පරිපාලකයින්ට පමණක් මෙම කාමරයට ප්‍රවේශය ඇත. පෙරනිමි පරිදි කාමරයේ හිමිකරු ආයාත කිරීම අරඹන පරිශීලකයා වනු ඇත: {{user}} (ඔබ)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

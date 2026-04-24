@@ -3,11 +3,12 @@
   "content": "Data backup",
   "content_en_sha1_hash": "557da1f0ef4a81b758b4c447e2a745dbf3a4b0fe",
   "created_at": "2025-05-26T07:15:42.350Z",
-  "updated_at": "2026-04-08T12:34:25.403Z",
+  "updated_at": "2026-04-11T20:55:40.069Z",
   "comment": {
-    "text": "The translation key \"DataBackup\" is used to display the label for a data backup feature in the application. It appears in various contexts, including automatic and manual backup buttons or dialog titles, where it indicates that the user is backing up their data. This translation is crucial for providing clear instructions to users on how to back up their information securely.",
+    "text": "This is a page title and a navigation item label within the \"Data Management\" section of the portal settings. It refers to the functionality for backing up data.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:05:59.524Z"
+    "updated_at": "2026-04-11T20:55:40.069Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

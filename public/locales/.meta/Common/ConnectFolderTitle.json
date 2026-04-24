@@ -3,11 +3,12 @@
   "content": "Folder title",
   "content_en_sha1_hash": "9f8110bce9fe1d68b214a24bafd35be39ec1dc73",
   "created_at": "2025-05-26T07:15:41.497Z",
-  "updated_at": "2026-04-08T14:45:01.348Z",
+  "updated_at": "2026-04-11T20:56:39.851Z",
   "comment": {
-    "text": "This translation key is used to display a title label for a folder connection field in a file manager or connection dialog. It appears as a text that says \"Folder title\". Translators should provide a suitable phrase for this label to make it clear and user-friendly across different languages.",
+    "text": "This is the label for a required input field where users enter a title for a connected folder.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:06:22.946Z"
+    "updated_at": "2026-04-11T20:56:39.851Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -153,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'බහාලුමේ' (of the container/box) is used instead of 'ෆෝල්ඩරයේ' (of the folder). In a software UI context, 'Folder' should be transliterated or translated specifically as 'ෆෝල්ඩරය' to avoid confusion with physical containers.",
-          "suggestion": "ෆෝල්ඩරයේ මාතෘකාව"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

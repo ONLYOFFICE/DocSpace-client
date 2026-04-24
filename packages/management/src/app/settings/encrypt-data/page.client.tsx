@@ -41,6 +41,7 @@ import type { TPortals } from "@docspace/shared/api/management/types";
 
 import { EncryptWarningDialog } from "./EncryptWarningDialog";
 import styles from "./encrypt-data.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type EncryptDataPageProps = {
   portals: TPortals[];
@@ -93,7 +94,7 @@ const EncryptDataPage = ({
         </div>
         <Text>
           {t("EncryptDataDescription", {
-            organizationName: t("Common:OrganizationName"),
+            organizationName: getBrandName("OrganizationName"),
           })}
         </Text>
         <div className={styles.wrapperBlock}>

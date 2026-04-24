@@ -3,11 +3,12 @@
   "content": "Privacy policy",
   "content_en_sha1_hash": "7ceacdcaab4c898f58352ac7759cc808a85290da",
   "created_at": "2025-05-19T21:30:53.969Z",
-  "updated_at": "2026-04-07T19:35:05.165Z",
+  "updated_at": "2026-04-11T21:18:38.301Z",
   "comment": {
-    "text": "This translation key is used to display a link to the user's privacy policy within an info dialog. The text appears as \"Privacy policy\" in English and is part of a button element that navigates to the policy URL when clicked.",
+    "text": "This is a link label that directs users to the privacy policy of an OAuth client. It appears within an information dialog.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:42.617Z"
+    "updated_at": "2026-04-11T21:18:38.301Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

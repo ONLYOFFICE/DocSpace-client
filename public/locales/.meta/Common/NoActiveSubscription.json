@@ -3,13 +3,21 @@
   "content": "No active subscription",
   "content_en_sha1_hash": "92f5c89780c2378215c1ba88130e3ae77462289c",
   "created_at": "2026-04-10T13:53:45.478Z",
-  "updated_at": "2026-04-10T13:53:45.478Z",
+  "updated_at": "2026-04-23T17:24:02.179Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label indicating the absence of an active subscription. It appears within a subscription card component, specifically when there is no previous storage plan size.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:48:03.465Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "line_number": 243,
+      "context": "<div className={styles.subscriptionCard}>\n <div className={styles.subscriptionHeader}>\n <Text fontWeight={700} fontSize=\"14px\">\n {previousStoragePlanSize\n ? t(\"NoActiveSubscription\")\n : t(\"CurrentSubscription\")}\n </Text>\n {isDisabled || isScheduled || previousStoragePlanSize ? null : (\n <>\n <div",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

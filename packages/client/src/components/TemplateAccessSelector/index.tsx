@@ -34,6 +34,7 @@ import type {
 	PeopleSelectorProps,
 	PeopleFilter,
 } from "@docspace/ui-kit/selectors/People/PeopleSelector.types";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const PEOPLE_TAB_ID = "0";
 
@@ -68,7 +69,7 @@ const TemplateAccessSelector = ({
 				t={t}
 				ns="Files"
 				i18nKey="AddUsersOrGroupsInfo"
-				values={{ productName: t("Common:ProductName") }}
+				values={{ productName: getBrandName("ProductName") }}
 				components={{ 1: <strong /> }}
 			/>
 		) : (
@@ -76,7 +77,7 @@ const TemplateAccessSelector = ({
 				t={t}
 				ns="Files"
 				i18nKey="AddUsersOrGroupsInfoGroups"
-				values={{ productName: t("Common:ProductName") }}
+				values={{ productName: getBrandName("ProductName") }}
 				components={{ 1: <strong /> }}
 			/>
 		);

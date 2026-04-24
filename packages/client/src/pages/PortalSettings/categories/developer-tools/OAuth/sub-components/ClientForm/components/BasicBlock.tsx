@@ -197,7 +197,7 @@ const BasicBlock = ({
         </FieldContainer>
 
         <TextAreaGroup
-          label={t("Common:Description")}
+          label={t("Common:DescriptionLabel")}
           name="description"
           placeholder={t("EnterDescription")}
           value={descriptionValue}

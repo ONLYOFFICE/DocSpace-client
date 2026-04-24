@@ -3,13 +3,21 @@
   "content": "Go to tariff plan",
   "content_en_sha1_hash": "f96dccb9c3f00d6cc87c88cf38f06ad543734d27",
   "created_at": "2026-04-10T13:53:42.581Z",
-  "updated_at": "2026-04-10T13:53:42.581Z",
+  "updated_at": "2026-04-11T20:51:31.841Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a button label that directs the user to their tariff plan page. It appears in a modal dialog related to additional storage grace periods.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:51:31.841Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/GracePeriodModal.tsx",
+      "line_number": 101,
+      "context": "</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"OkButton\"\n label={t(\"GoToTariffPlan\")}\n size={ButtonSize.normal}\n primary\n onClick={onClick}\n testId=\"grace_period_ok_button\"\n />",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

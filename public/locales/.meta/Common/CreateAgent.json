@@ -3,11 +3,12 @@
   "content": "Create agent",
   "content_en_sha1_hash": "17cf5f17ee7582a32c8aafee5e97afab41b7280c",
   "created_at": "2025-11-17T07:51:13.979Z",
-  "updated_at": "2026-04-08T14:00:29.362Z",
+  "updated_at": "2026-04-11T20:56:10.252Z",
   "comment": {
-    "text": "This key displays the text \"Create agent\" as the header of a dialog used to create a new agent. Translators should ensure this phrase accurately reflects the action of initiating agent creation within the user interface.",
+    "text": "This is the title of a dialog window that appears when a user initiates the process of creating a new agent.",
     "is_auto": true,
-    "updated_at": "2025-11-17T07:52:58.994Z"
+    "updated_at": "2026-04-11T20:56:10.252Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -189,13 +190,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Turkish translation 'Ara madde oluştur' means 'Create intermediate/substance', which is completely unrelated to 'Create agent'.",
-          "suggestion": "Ajan oluştur"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

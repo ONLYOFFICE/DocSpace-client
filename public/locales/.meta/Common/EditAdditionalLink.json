@@ -3,11 +3,12 @@
   "content": "Edit additional link",
   "content_en_sha1_hash": "b24e5fc30e6ff61b639c8b15b99d9f17a3f3af0a",
   "created_at": "2025-08-26T11:15:03.527Z",
-  "updated_at": "2026-04-08T11:30:42.083Z",
+  "updated_at": "2026-04-11T20:54:31.664Z",
   "comment": {
-    "text": "This key displays the text \"Edit additional link\" within the header of a modal dialog. It's used when editing a link that isn't the primary link being modified, typically within a link management interface. Translators should ensure the meaning accurately reflects the action of modifying a secondary link.",
+    "text": "This is the title of a dialog box for editing a link that is not the primary shared link, such as a public link or a link within a form room.",
     "is_auto": true,
-    "updated_at": "2025-08-26T11:29:41.327Z"
+    "updated_at": "2026-04-11T20:54:31.664Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

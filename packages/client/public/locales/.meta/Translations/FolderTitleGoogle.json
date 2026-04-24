@@ -3,16 +3,17 @@
   "content": "Google directory",
   "content_en_sha1_hash": "59a0c0b37463b360cc851a7f2f339d4d973c22fc",
   "created_at": "2025-05-19T21:30:49.976Z",
-  "updated_at": "2026-04-08T21:15:57.057Z",
+  "updated_at": "2026-04-11T21:27:31.547Z",
   "comment": {
-    "text": "This translation key is used to display the title of a Google directory in the UI. It will appear as the folder title when viewing a list of folders related to \"Google\" or \"GoogleDrive\". Translators should provide a localized version of the English content \"Google directory\" for this key.",
+    "text": "This is a folder title that appears in the file list when a Google Drive directory is connected and displayed.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:33.573Z"
+    "updated_at": "2026-04-11T21:27:31.547Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 110,
+      "line_number": 111,
       "context": "case \"DocuSign\":\n return t(\"Translations:FolderTitleDocuSign\");\n \n case \"Google\":\n case \"GoogleDrive\":\n return t(\"Translations:FolderTitleGoogle\");\n \n case \"OneDrive\":\n case \"SkyDrive\":\n return t(\"Translations:FolderTitleSkyDrive\");",
       "module": "/packages/client"
     }
@@ -105,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao word 'ບັນຊີ' means 'Account'. The English text 'directory' refers to a folder or a list of files/folders. Translating 'Google directory' as 'Google Account' changes the technical meaning of the UI element.",
-          "suggestion": "ໂຟນເດີ Google"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -147,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Director' in Romanian refers to a person (a manager or director), whereas 'directory' in this technical context refers to a folder or a list of items. The correct term should be 'director Google' (lowercase) or 'dosar Google', but 'Director' as a title implies a human role.",
-          "suggestion": "Director Google"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -189,13 +178,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Google direktorijum' is in the accusative case (direct object), whereas the English source 'Google directory' is a nominative noun phrase used as a title. In UI titles, the nominative case should be used.",
-          "suggestion": "Google direktorijum"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -225,13 +208,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Drejtoria' in Albanian means 'The Directorate' or 'The Management/Headquarters'. In the context of computing and file systems, 'directory' should be translated as 'dosja' (folder) or 'direktoria' (technical term for directory). However, 'Drejtoria e Google' implies 'Google's Management/Headquarters', which is a semantic error for a UI folder title.",
-          "suggestion": "Direktoria e Google"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

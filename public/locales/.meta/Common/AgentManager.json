@@ -3,23 +3,24 @@
   "content": "Agent manager",
   "content_en_sha1_hash": "9eb4782eb2942928e3b10def6aee29e8e6780164",
   "created_at": "2025-11-03T12:10:13.383Z",
-  "updated_at": "2026-04-08T17:41:27.863Z",
+  "updated_at": "2026-04-11T21:00:48.880Z",
   "comment": {
-    "text": "This key refers to the text \"Agent manager,\" likely used as a label or title for a role or permission related to managing agents within a room or organization. It appears in UI elements like buttons or dialogs, granting access to agent management functions. Translators should ensure the description accurately reflects the agent management capabilities.",
+    "text": "This is a label for a user role, \"Agent manager\". It appears in user role selection menus and describes a user with specific management permissions.",
     "is_auto": true,
-    "updated_at": "2025-11-03T12:14:48.417Z"
+    "updated_at": "2026-04-11T21:00:48.880Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
-      "line_number": 56,
-      "context": "access: ShareAccessRights.RoomManager,\n type: \"manager\",\n },\n agentAdmin: {\n key: \"agentAdmin\",\n label: this.t(\"Common:AgentManager\"),\n tooltip: this.t(\"InviteDialog:UserAgentMaxAvailableRoleWarning\", {\n productName: this.t(\"Common:ProductName\"),\n }),\n access: ShareAccessRights.RoomManager,\n type: \"manager\",",
+      "line_number": 57,
+      "context": "access: ShareAccessRights.RoomManager,\n type: \"manager\",\n },\n agentAdmin: {\n key: \"agentAdmin\",\n label: this.t(\"Common:AgentManager\"),\n tooltip: this.t(\"InviteDialog:UserAgentMaxAvailableRoleWarning\", {\n productName: getBrandName(\"ProductName\"),\n }),\n access: ShareAccessRights.RoomManager,\n type: \"manager\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 174,
-      "context": "access: isNone ? EmployeeType.RoomAdmin : ShareAccessRights.RoomManager,\n type: EmployeeType.RoomAdmin,\n },\n agentManager: {\n key: \"agentManager\",\n label: t(\"Common:AgentManager\"),\n description: getRoomAdminDescription(roomType, t),\n tooltip: t(\"UserAgentMaxAvailableRoleWarning\", {\n productName: t(\"Common:ProductName\"),\n }),\n ...(!standalone && isNone && { quota: t(\"Common:Paid\") }),",
+      "line_number": 175,
+      "context": "access: isNone ? EmployeeType.RoomAdmin : ShareAccessRights.RoomManager,\n type: EmployeeType.RoomAdmin,\n },\n agentManager: {\n key: \"agentManager\",\n label: t(\"Common:AgentManager\"),\n description: getRoomAdminDescription(roomType, t),\n tooltip: t(\"UserAgentMaxAvailableRoleWarning\", {\n productName: getBrandName(\"ProductName\"),\n }),\n ...(!standalone && isNone && { quota: t(\"Common:Paid\") }),",
       "module": "/packages/shared"
     }
   ],
@@ -33,13 +34,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation 'مدير العملاء' means 'Customer Manager' or 'Client Manager', whereas the English 'Agent manager' in this technical context refers to managing 'Agents' (likely automated bots or specific system agents), not human customers/clients.",
-          "suggestion": "مدير الوكلاء"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -75,13 +70,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Gerente del agente' implies a person who manages a single agent (a person/entity). In the context of software permissions and UI labels, 'Agent manager' refers to a role or a tool used to manage agents (plural/functional). 'Gestor de agentes' is the correct technical term for a management role or module.",
-          "suggestion": "Gestor de agentes"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -183,13 +172,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Vodja agenta' means 'Agent leader' or 'Agent supervisor' (a person), whereas the English 'Agent manager' in this technical context refers to a functional role or a system component responsible for managing agents (the management of agents).",
-          "suggestion": "Upravljanje agentov"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
@@ -201,13 +184,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Дељени фајлови и фолдери ...' means 'Shared files and folders ...', which is completely unrelated to the English source 'Agent manager'.",
-          "suggestion": "Менаџер агента"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

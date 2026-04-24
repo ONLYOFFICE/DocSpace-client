@@ -35,6 +35,7 @@ import { DeviceType, FolderType } from "@docspace/shared/enums";
 
 import { SelectFolderDialogProps } from "@/types";
 import { TSelectorCancelButton } from "@docspace/ui-kit/components/selector";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const SelectFolderDialog = ({
 	onSubmit,
@@ -64,7 +65,7 @@ const SelectFolderDialog = ({
 	const formProps = useMemo(() => {
 		return {
 			message: t("Common:WarningCopyToFormRoom", {
-				organizationName: t("Common:OrganizationName"),
+				organizationName: getBrandName("OrganizationName"),
 			}),
 			isRoomFormAccessible:
 				Boolean(fileInfo.isForm) && fileSaveAsExtension === "pdf",

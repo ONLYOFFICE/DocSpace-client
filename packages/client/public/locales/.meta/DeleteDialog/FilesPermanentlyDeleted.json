@@ -3,11 +3,12 @@
   "content": "The files will be permanently removed from the {{trashSection}}.",
   "content_en_sha1_hash": "9754d3c7756464ae37faa758bbd7b093ec47ff89",
   "created_at": "2025-10-01T15:20:12.295Z",
-  "updated_at": "2026-03-20T09:07:45.492Z",
+  "updated_at": "2026-04-11T21:05:24.945Z",
   "comment": {
-    "text": "This text confirms that deleted files will be permanently removed from the trash section. It appears within a delete confirmation dialog, informing the user about the finality of the file deletion. The `{{trashSection}}` placeholder should be replaced with the localized term for the trash/recycle bin.",
+    "text": "This is a sentence fragment in a confirmation dialog. It informs the user that files will be permanently deleted from the trash. `{{trashSection}}` is a variable representing the name of the trash section (e.g., \"Trash\").",
     "is_auto": true,
-    "updated_at": "2025-10-01T15:20:20.932Z"
+    "updated_at": "2026-04-11T21:05:24.945Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

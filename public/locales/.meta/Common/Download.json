@@ -3,16 +3,17 @@
   "content": "Download",
   "content_en_sha1_hash": "a479c9c34e878d07b4d67a73a48f432ad7dc53c8",
   "created_at": "2025-05-19T21:30:44.645Z",
-  "updated_at": "2026-04-10T08:21:04.340Z",
+  "updated_at": "2026-04-23T17:24:01.926Z",
   "comment": {
-    "text": "This translation key is used for the label and icon of a \"Download\" button, typically found on a version history page or in a file listing. The label displays the content's download size when available, and the button triggers an action to download the file. It appears as a clickable element, allowing users to initiate the download process.",
+    "text": "This is a button label that allows users to download a file or a document version.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:37.216Z"
+    "updated_at": "2026-04-11T20:54:45.797Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/DefaultTemplates/TemplatesRow.tsx",
-      "line_number": 127,
+      "line_number": 128,
       "context": "disabled: false,\n icon: EyeIcon,\n },\n {\n key: \"download\",\n label: t(\"Common:Download\"),\n onClick: () => openUrl?.(item.viewUrl, UrlActionType.Download),\n disabled: false,\n icon: DownloadIcon,\n },\n {",
       "module": "/packages/client"
     },
@@ -24,19 +25,19 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1693,
+      "line_number": 1744,
       "context": "isSeparator: true,\n disabled: !item.security?.Download || this.settingsStore.isFrame,\n },\n {\n key: \"public-room_edit\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => {\n this.onClickDownload(item, t);\n },\n disabled: !item.security?.Download,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1693,
+      "line_number": 1744,
       "context": "isSeparator: true,\n disabled: !item.security?.Download || this.settingsStore.isFrame,\n },\n {\n key: \"public-room_edit\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => {\n this.onClickDownload(item, t);\n },\n disabled: !item.security?.Download,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1693,
+      "line_number": 1744,
       "context": "isSeparator: true,\n disabled: !item.security?.Download || this.settingsStore.isFrame,\n },\n {\n key: \"public-room_edit\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => {\n this.onClickDownload(item, t);\n },\n disabled: !item.security?.Download,",
       "module": "/packages/client"
     },
@@ -51,6 +52,36 @@
       "line_number": 227,
       "context": "scale\n primary\n size={ButtonSize.medium}\n label={\n isAnonym\n ? t(\"Common:Download\")\n : t(\"CompletedForm:CheckReadyForms\")\n }\n onClick={isAnonym ? handleDownload : gotoCompleteFolder}\n testId={\n isAnonym",
       "module": "/packages/doceditor"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
+      "line_number": 154,
+      "context": ": filesSelectionStore.selection.some((k) => !k.security.Download);\n \n return {\n id: \"option_download\",\n key: \"download\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => downloadAction(i),\n disabled: isDisabled,\n };\n },",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsContextMenu.ts",
+      "line_number": 215,
+      "context": "if (canDownload) {\n model.push({\n id: \"option_download\",\n key: \"download\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => downloadFile(file.id),\n disabled: false,\n });\n }",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsContextMenu.ts",
+      "line_number": 215,
+      "context": "if (canDownload) {\n model.push({\n id: \"option_download\",\n key: \"download\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => downloadFile(file.id),\n disabled: false,\n });\n }",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsContextMenu.ts",
+      "line_number": 215,
+      "context": "if (canDownload) {\n model.push({\n id: \"option_download\",\n key: \"download\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => downloadFile(file.id),\n disabled: false,\n });\n }",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsContextMenu.ts",
+      "line_number": 215,
+      "context": "if (canDownload) {\n model.push({\n id: \"option_download\",\n key: \"download\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => downloadFile(file.id),\n disabled: false,\n });\n }",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/media-viewer/MediaViewer.helpers.tsx",
@@ -78,8 +109,8 @@
     },
     {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
-      "line_number": 570,
-      "context": "autoMaxWidth\n isLarge\n withBodyScroll\n withoutPadding\n >\n <ModalDialog.Header>{t(\"Common:DownloadAs\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.modalBody}>\n {needPassword ? (\n <PasswordContent",
+      "line_number": 592,
+      "context": "<ModalDialog.Footer>\n <Button\n key=\"DownloadButton\"\n label={\n needPassword ? t(\"Common:ContinueButton\") : t(\"Common:Download\")\n }\n size={ButtonSize.normal}\n primary\n onClick={needPassword ? onReDownload : onDownload}\n isDisabled={",
       "module": "/packages/shared"
     }
   ],
@@ -219,13 +250,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'බාගන්න' (Bāganna) means 'to participate' or 'to take part in'. It does not mean 'to download' a file.",
-          "suggestion": "බාගත කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

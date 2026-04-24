@@ -3,13 +3,38 @@
   "content": "MCP servers",
   "content_en_sha1_hash": "8d9a304fd985232ade488e1913e41a3d9a502b09",
   "created_at": "2025-11-21T08:21:51.274Z",
-  "updated_at": "2026-04-08T04:56:05.210Z",
+  "updated_at": "2026-04-23T17:24:01.731Z",
   "comment": {
-    "text": "This key displays the name \"MCP servers\" in the UI, often used to refer to the connection to Microsoft Content Platform servers. It appears in dialogs like the CreateEditAgentDialog and on settings pages, likely to provide context or labels related to MCP server configurations. Translators should ensure the translation accurately reflects this connection to MCP servers.",
+    "text": "This is a noun phrase used as a label for a setting or a section related to managing \"MCP servers.\" It appears in tooltips and as part of longer sentences in empty state messages.",
     "is_auto": true,
-    "updated_at": "2025-12-23T10:31:51.024Z"
+    "updated_at": "2026-04-11T20:48:52.747Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-input/tools-settings/index.tsx",
+      "line_number": 455,
+      "context": "iconNode: <ManageConnectionsReactSvg />,\n disabled: !showManageConnectionItem,\n getTooltipContent: () => (\n <Text>\n {t(\"ConnectMCPServers\", {\n mcpServers: t(\"MCPSettingTitle\"),\n })}\n </Text>\n ),\n },\n ]",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/selectors/MCPServers/index.tsx",
+      "line_number": 229,
+      "context": ") : (\n <EmptyScreenRoomSelectorDark />\n )\n }\n emptyScreenHeader={t(\"NoMCPServers\", {\n mcpServers: t(\"MCPSettingTitle\"),\n })}\n emptyScreenDescription={t(\"NoMCPServersDescription\", {\n mcpServers: t(\"MCPSettingTitle\"),\n productName: getBrandName(\"ProductName\"),\n aiAgent: t(\"AIAgent\"),",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/selectors/MCPServers/index.tsx",
+      "line_number": 229,
+      "context": ") : (\n <EmptyScreenRoomSelectorDark />\n )\n }\n emptyScreenHeader={t(\"NoMCPServers\", {\n mcpServers: t(\"MCPSettingTitle\"),\n })}\n emptyScreenDescription={t(\"NoMCPServersDescription\", {\n mcpServers: t(\"MCPSettingTitle\"),\n productName: getBrandName(\"ProductName\"),\n aiAgent: t(\"AIAgent\"),",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/selectors/MCPServers/index.tsx",
+      "line_number": 229,
+      "context": ") : (\n <EmptyScreenRoomSelectorDark />\n )\n }\n emptyScreenHeader={t(\"NoMCPServers\", {\n mcpServers: t(\"MCPSettingTitle\"),\n })}\n emptyScreenDescription={t(\"NoMCPServersDescription\", {\n mcpServers: t(\"MCPSettingTitle\"),\n productName: getBrandName(\"ProductName\"),\n aiAgent: t(\"AIAgent\"),",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/MCP.tsx",
       "line_number": 76,
@@ -19,7 +44,13 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
       "line_number": 136,
-      "context": "? \"Common:AIProvider\"\n : currentTabId === \"search\"\n ? \"Common:WebSearchAI\"\n : currentTabId === \"knowledge\"\n ? \"AIRoom:Knowledge\"\n : \"Common:MCPSettingTitle\";\n setDocumentTitle(t(titleKey));\n }, [t, currentTabId]);\n \n const serversData = [\n {",
+      "context": "? t(\"Common:AIProvider\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"AIRoom:Knowledge\")\n : t(\"Common:MCPSettingTitle\");\n setDocumentTitle(title);\n }, [t, currentTabId]);\n \n const serversData = [\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
+      "line_number": 136,
+      "context": "? t(\"Common:AIProvider\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"AIRoom:Knowledge\")\n : t(\"Common:MCPSettingTitle\");\n setDocumentTitle(title);\n }, [t, currentTabId]);\n \n const serversData = [\n {",
       "module": "/packages/client"
     },
     {
@@ -75,13 +106,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order is incorrect in Spanish. In Spanish, the noun 'servidores' should precede the modifier 'MCP'. 'MCP servidores' sounds like a direct, ungrammatical word-for-word translation.",
-          "suggestion": "Servidores MCP"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -147,13 +172,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order is incorrect in Portuguese. In this context, 'servidores' (the noun) should come before 'MCP' (the modifier/adjective), or 'MCP' should be treated as a proper noun prefix. 'MCP servidores' sounds like a literal word-for-word translation that violates Portuguese syntax.",
-          "suggestion": "Servidores MCP"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -195,13 +214,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "extra_variable",
-          "description": "Extra variable(s) not in English: {{variable}}",
-          "suggestion": ""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

@@ -4,7 +4,6 @@
   "ChangeInstruction": "Ole hyvä ja valitse omistajan nimi alta vaihtaaksesi {{productName}}-n omistajan.",
   "ChangeOwner": "Vaihda {{productName}}-omistaja",
   "ChangeUser": "Vaihda käyttäjä",
-  "DeactivateOrDeletePortal": "Poista {{productName}} käytöstä tai poista se kokonaan",
   "DoTheSame": "Tee sama kuin järjestelmänvalvojat",
   "ManagePortal": "Hallitse {{productName}}-n asetuksia",
   "ManageUser": " Hallitse käyttäjätilejä",

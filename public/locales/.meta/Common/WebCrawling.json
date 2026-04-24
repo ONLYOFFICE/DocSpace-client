@@ -3,24 +3,25 @@
   "content": "Web crawling",
   "content_en_sha1_hash": "358b1643a23f6468c430bdf829af3459c4b5ac48",
   "created_at": "2025-10-27T16:14:24.665Z",
-  "updated_at": "2026-04-07T20:08:13.044Z",
+  "updated_at": "2026-04-13T14:59:06.006Z",
   "comment": {
-    "text": "This key translates to \"Web crawling\" and is used as a label describing the type of tool call within a chat message body. It appears as part of a header that indicates a search tool was used to generate a response, alongside the tool's specific name. Translators should consider a brief and descriptive term for web search functionality.",
+    "text": "This is a label indicating that a web crawling operation is in progress. It appears in the header of a tool call message within the AI agent chat.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:24:03.469Z"
+    "updated_at": "2026-04-11T20:39:09.996Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/message/ToolCallMessage/ToolCallHeader/SearchToolContent.tsx",
-      "line_number": 58,
-      "context": "return hasError ? (\n <>\n <ReactSVG className={styles.searchToolIcon} src={UniverseIcon} />\n <Text fontSize=\"13px\" lineHeight=\"20px\" fontWeight={600} truncate>\n {t(\"Common:WebCrawling\")} | <span title={toolInfo}>{toolInfo}</span>\n </Text>\n </>\n ) : (\n <Link\n style={{ display: \"contents\" }}",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/ToolCallMessage/ToolCallHeader/search-tool-content/index.tsx",
+      "line_number": 72,
+      "context": "<UniverseIcon\n className={styles.searchToolIcon}\n data-testid=\"universe-icon\"\n />\n <Text fontSize=\"13px\" lineHeight=\"20px\" fontWeight={600} truncate>\n {t(\"WebCrawling\")} |{\" \"}\n <span title={toolInfo}>{toolInfo}</span>\n </Text>\n </>\n ) : (\n <Link",
+      "module": "/libs/ui-kit"
     },
     {
-      "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/message/ToolCallMessage/ToolCallHeader/SearchToolContent.tsx",
-      "line_number": 58,
-      "context": "return hasError ? (\n <>\n <ReactSVG className={styles.searchToolIcon} src={UniverseIcon} />\n <Text fontSize=\"13px\" lineHeight=\"20px\" fontWeight={600} truncate>\n {t(\"Common:WebCrawling\")} | <span title={toolInfo}>{toolInfo}</span>\n </Text>\n </>\n ) : (\n <Link\n style={{ display: \"contents\" }}",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/ToolCallMessage/ToolCallHeader/search-tool-content/index.tsx",
+      "line_number": 72,
+      "context": "<UniverseIcon\n className={styles.searchToolIcon}\n data-testid=\"universe-icon\"\n />\n <Text fontSize=\"13px\" lineHeight=\"20px\" fontWeight={600} truncate>\n {t(\"WebCrawling\")} |{\" \"}\n <span title={toolInfo}>{toolInfo}</span>\n </Text>\n </>\n ) : (\n <Link",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -39,13 +40,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'sürüşü' means 'sliding' or 'skidding' in Azerbaijani. In a technical context for web crawling/searching, 'skan edilməsi' or 'indekslənməsi' is required.",
-          "suggestion": "Veb skan edilməsi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -69,13 +64,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Διασάρωση Ιστού' is a literal/incorrect translation. 'Διασάρωση' typically refers to 'percolation' or 'diffusion' in scientific contexts. For 'Web crawling' in a technical/search context, 'Ανίχνευση Ιστού' or 'Web crawling' (as a technical term) is more appropriate.",
-          "suggestion": "Ανίχνευση Ιστού"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -87,13 +76,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation 'Verkkosivujen indeksointi' means 'Web indexing', which is a different technical process than 'Web crawling'. Crawling is the process of browsing/fetching, while indexing is the process of organizing the data found.",
-          "suggestion": "Verkkosivujen haku"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -147,13 +130,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation 'Zarabianie w sieci' means 'Earning money on the web', which is completely different from the technical term 'Web crawling' (the process of automated web data extraction/searching).",
-          "suggestion": "Przeszukiwanie sieci"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -171,13 +148,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Răsfoire' means 'browsing' or 'perusing' (like looking through a magazine), whereas 'Web crawling' in a technical context refers to automated web indexing or searching. 'Crawl' in Romanian technical terminology is better represented by 'Indexare' or 'Navigare automată'.",
-          "suggestion": "Indexare web"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -189,13 +160,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'වෙබ් බඩගා යාම' is a literal, word-for-word translation of 'Web crawling' that makes no sense in a technical context. In Sinhala, 'බඩගා යාම' refers to the physical act of a person or animal crawling on the ground, which is incorrect for web indexing/searching.",
-          "suggestion": "වෙබ් සෙවීම"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

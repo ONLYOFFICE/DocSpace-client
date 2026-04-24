@@ -3,13 +3,21 @@
   "content": "List all people who have filled out the form \"{{formName}}\"",
   "content_en_sha1_hash": "0029dfe278d7fe7afd154f2eb51145608dfd299a",
   "created_at": "2026-03-31T15:18:26.289Z",
-  "updated_at": "2026-04-07T19:57:59.535Z",
+  "updated_at": "2026-04-23T17:24:02.134Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a prompt for an AI assistant, asking it to list users who completed a specific form. The `{{formName}}` variable will be replaced by the title of the form.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:38:51.593Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/ai-chat-panel/index.tsx",
+      "line_number": 136,
+      "context": "formName: pendingAttachmentFile.title,\n }),\n },\n {\n title: t(\"Common:WhoFilledItOut\"),\n prompt: t(\"Common:WhoFilledItOutPrompt\", {\n formName: pendingAttachmentFile.title,\n }),\n },\n {\n title: t(\"Common:Summary\"),",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -104,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical error in Latvian: 'kas ir aizpildījis' (singular) refers to one person, but the sentence refers to 'visus cilvēkus' (all people, plural). It should be 'kas ir aizpildījuši'.",
-          "suggestion": "Parādīt visus cilvēkus, kas ir aizpildījuši formu \"{{formName}}\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {

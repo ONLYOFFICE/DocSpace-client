@@ -88,6 +88,7 @@ import {
   isAdmin,
   isUser,
 } from "./EmptyViewContainer.utils";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const getDescription = (
   type: RoomsType,
@@ -282,17 +283,17 @@ export const getOptions = (
 
   const uploadPDFFromDocSpace = createUploadFromDocSpace(
     t("EmptyView:UploadFromPortalTitle", {
-      productName: t("Common:ProductName"),
+      productName: getBrandName("ProductName"),
     }),
     t("EmptyView:UploadPDFFormOptionDescription", {
-      productName: t("Common:ProductName"),
+      productName: getBrandName("ProductName"),
     }),
     FilterType.PDFForm,
   );
 
   const uploadAllFromDocSpace = createUploadFromDocSpace(
     t("EmptyView:UploadFromPortalTitle", {
-      productName: t("Common:ProductName"),
+      productName: getBrandName("ProductName"),
     }),
     t("EmptyView:SectionsUploadDescription", {
       sectionNameFirst: t("Common:MyDocuments"),
@@ -311,7 +312,7 @@ export const getOptions = (
   const inviteUserOption = createInviteOption(
     t("Common:InviteContacts"),
     t("EmptyView:InviteUsersOptionDescription", {
-      productName: t("Common:ProductName"),
+      productName: getBrandName("ProductName"),
     }),
   );
 
@@ -379,7 +380,7 @@ export const getOptions = (
   };
 
   const createAIAgent = {
-    title: t("EmptyView:CreateAIAgent"),
+    title: t("EmptyView:CreateNewAIAgent"),
     description: t("EmptyView:CreateAIAgentDescription", {
       aiAgent: t("Common:AIAgent"),
     }),
@@ -392,7 +393,7 @@ export const getOptions = (
   const inviteRootRoom = {
     title: t("EmptyView:InviteNewUsers"),
     description: t("EmptyView:InviteRootRoomDescription", {
-      productName: t("Common:ProductName"),
+      productName: getBrandName("ProductName"),
     }),
     icon: <InviteUserFormIcon />,
     key: "invite-root-room",
@@ -445,7 +446,7 @@ export const getOptions = (
   const migrationData = {
     title: t("EmptyView:MigrationDataTitle"),
     description: t("EmptyView:MigrationDataDescription", {
-      productName: t("Common:ProductName"),
+      productName: getBrandName("ProductName"),
       organizationName: logoText,
     }),
     icon: <InviteUserFormIcon />,
@@ -545,7 +546,7 @@ export const getOptions = (
     if (isKnowledgeTab) {
       const uploadFilesFromDocSpace = createUploadFromDocSpace(
         t("EmptyView:UploadFromPortalTitle", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
         }),
         t("AIRoom:UploadFilesPortal", {
           sectionNameFirst: t("Common:MyDocuments"),

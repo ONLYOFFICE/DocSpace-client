@@ -3,18 +3,19 @@
   "content": "No tags",
   "content_en_sha1_hash": "ea3d32deac740b8c0ec2a88044355a1ef5eaba37",
   "created_at": "2025-11-03T12:10:21.069Z",
-  "updated_at": "2026-04-08T04:03:01.349Z",
+  "updated_at": "2026-04-11T20:47:50.429Z",
   "comment": {
-    "text": "This text is used as a label to indicate that a room has no tags assigned. It appears as a default tag on room tiles when no other tags are present. Translators should ensure the translation accurately conveys the absence of tags.",
+    "text": "This is a label displayed for rooms that do not have any user-defined tags. It indicates the absence of tags for a specific room.",
     "is_auto": true,
-    "updated_at": "2025-11-03T12:12:41.191Z"
+    "updated_at": "2026-04-11T20:47:50.429Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/tiles/room-tile/RoomTile.tsx",
-      "line_number": 114,
-      "context": "if (item.tags && item.tags.length > 0) {\n tempTags.push(...item.tags);\n } else if (item.isAIAgent) {\n tempTags.push({\n isDefault: true,\n label: t(\"Common:NoTags\"),\n });\n } else {\n tempTags.push({\n isDefault: true,\n label: getRoomTypeName(item.roomType, t),",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/components/tiles/room-tile/index.tsx",
+      "line_number": 116,
+      "context": "if (item.tags && item.tags.length > 0) {\n tempTags.push(...item.tags);\n } else if (item.isAIAgent) {\n tempTags.push({\n isDefault: true,\n label: t(\"NoTags\") ?? \"\",\n });\n } else {\n tempTags.push({\n isDefault: true,\n label: getRoomTypeName(item.roomType, t),",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -69,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation 'Ei tunneta' means 'Not known' or 'Not recognized', which is semantically incorrect for the context of 'No tags' (absence of labels).",
-          "suggestion": "Ei tageja"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {

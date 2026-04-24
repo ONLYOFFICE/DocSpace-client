@@ -3,35 +3,36 @@
   "content": "Retry",
   "content_en_sha1_hash": "9f5cd8a2e8807d73efa02c844bfbca9fe552b283",
   "created_at": "2025-05-19T21:30:49.814Z",
-  "updated_at": "2026-04-08T19:24:29.544Z",
+  "updated_at": "2026-04-13T14:59:05.742Z",
   "comment": {
-    "text": "The translation key \"Retry\" is used to display a button or action that allows users to re-attempt a failed operation. This text appears in the UI of the Webhook History Table and is linked to the \"retryWebhook\" API function. It is likely displayed on a button or similar UI element.",
+    "text": "This is a button label that allows the user to reattempt an action, such as reloading a file or retrying a webhook.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:54.592Z"
+    "updated_at": "2026-04-11T21:28:31.096Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/PanelComponents/ErrorFile.js",
-      "line_number": 39,
-      "context": "const ErrorFile = ({\n t,\n item,\n onTextClick,\n showPasswordInput,\n onRetryClick,\n }) => {\n const { isRTL } = useInterfaceDirection();\n const placeTooltip = isRTL ? \"right\" : \"left\";\n \n return (",
+      "line_number": 58,
+      "context": "<Text\n className=\"enter-password\"\n fontWeight=\"600\"\n onClick={onRetryClick}\n >\n {t(\"Retry\")}\n </Text>\n ) : null}\n {item.needPassword ? (\n <Text className=\"enter-password\" fontWeight=\"600\" onClick={onTextClick}>\n {showPasswordInput ? t(\"HideInput\") : t(\"Common:EnterPassword\")}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/HistoryHeader.js",
-      "line_number": 34,
-      "context": "import styled from \"styled-components\";\n import { useNavigate, useParams, useLocation } from \"react-router\";\n import { inject, observer } from \"mobx-react\";\n \n import ArrowPathReactSvgUrl from \"PUBLIC_DIR/images/arrow.path.react.svg?url\";\n import RetryIcon from \"PUBLIC_DIR/images/icons/16/refresh.react.svg?url\";\n \n import { Heading } from \"@docspace/ui-kit/components/heading\";\n import { IconButton } from \"@docspace/ui-kit/components/icon-button\";\n // import { Hint } from \"../../styled-components\";",
+      "line_number": 239,
+      "context": "};\n \n const headerMenu = [\n {\n id: \"retry-event-option\",\n label: t(\"Retry\"),\n onClick: handleRetryAll,\n iconUrl: RetryIcon,\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/WebhookHistoryTable/HistoryRowView/HistoryRow.js",
-      "line_number": 35,
-      "context": "import { useNavigate, useParams } from \"react-router\";\n \n import { Row } from \"@docspace/ui-kit/components/rows\";\n import { retryWebhook } from \"@docspace/shared/api/settings\";\n \n import RetryIcon from \"PUBLIC_DIR/images/icons/16/refresh.react.svg?url\";\n import InfoIcon from \"PUBLIC_DIR/images/info.outline.react.svg?url\";\n \n import { toastr } from \"@docspace/ui-kit/components/toast\";\n \n import { useTranslation } from \"react-i18next\";",
+      "line_number": 94,
+      "context": "onClick: redirectToDetails,\n },\n {\n id: \"retry\",\n key: \"Retry dropdownItem\",\n label: t(\"Retry\"),\n icon: RetryIcon,\n onClick: handleRetryEvent,\n disabled: isRetryPending,\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/WebhookHistoryTable/HistoryTableView/HistoryTableRow.js",
-      "line_number": 27,
-      "context": "//\n // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing\n // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0\n // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode\n \n import RetryIcon from \"PUBLIC_DIR/images/icons/16/refresh.react.svg?url\";\n import InfoIcon from \"PUBLIC_DIR/images/info.outline.react.svg?url\";\n \n import React from \"react\";\n import styled, { css } from \"styled-components\";\n import { inject, observer } from \"mobx-react\";",
+      "line_number": 121,
+      "context": "onClick: redirectToDetails,\n },\n {\n id: \"retry\",\n key: \"Retry dropdownItem\",\n label: t(\"Retry\"),\n icon: RetryIcon,\n onClick: handleRetryEvent,\n disabled: isRetryPending,\n },\n ];",
       "module": "/packages/client"
     }
   ],
@@ -171,13 +172,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'නැවත' (Nævatha) means 'Again' or 'Back'. While it is related, for a UI button action meaning 'Retry' (to attempt an action again), 'නැවත උත්සාහ කරන්න' (Nævatha uthsāha karanna) is the correct functional translation.",
-          "suggestion": "නැවත උත්සාහ කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

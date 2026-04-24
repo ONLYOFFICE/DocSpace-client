@@ -3,11 +3,12 @@
   "content": "Size",
   "content_en_sha1_hash": "b7152342a267362add3c0d7f69f720f7a9c76c9e",
   "created_at": "2025-05-19T21:30:48.889Z",
-  "updated_at": "2026-04-07T22:51:09.161Z",
+  "updated_at": "2026-04-23T17:24:01.896Z",
   "comment": {
-    "text": "This translation key is used to display the label \"Size\" in various UI elements, such as file extensions and table column headers, providing a clear and concise way to indicate size-related information.",
+    "text": "This is a label for the size of a file or item, displayed in various information panels and table headers.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:39:38.609Z"
+    "updated_at": "2026-04-11T20:42:27.248Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -24,37 +25,37 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 307,
+      "line_number": 299,
       "context": "onChange: this.onColumnChange,\n },\n { ...erasureBlock },\n {\n key: \"Size\",\n title: t(\"Common:Size\"),\n enable: sizeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Size,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 307,
+      "line_number": 299,
       "context": "onChange: this.onColumnChange,\n },\n { ...erasureBlock },\n {\n key: \"Size\",\n title: t(\"Common:Size\"),\n enable: sizeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Size,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 307,
+      "line_number": 299,
       "context": "onChange: this.onColumnChange,\n },\n { ...erasureBlock },\n {\n key: \"Size\",\n title: t(\"Common:Size\"),\n enable: sizeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Size,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 307,
+      "line_number": 299,
       "context": "onChange: this.onColumnChange,\n },\n { ...erasureBlock },\n {\n key: \"Size\",\n title: t(\"Common:Size\"),\n enable: sizeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Size,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 307,
+      "line_number": 299,
       "context": "onChange: this.onColumnChange,\n },\n { ...erasureBlock },\n {\n key: \"Size\",\n title: t(\"Common:Size\"),\n enable: sizeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Size,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 307,
+      "line_number": 299,
       "context": "onChange: this.onColumnChange,\n },\n { ...erasureBlock },\n {\n key: \"Size\",\n title: t(\"Common:Size\"),\n enable: sizeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Size,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
@@ -66,15 +67,27 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 123,
+      "line_number": 124,
       "context": "const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"DateAndTimeCreation\", label: t(\"Files:ByCreation\") },\n { key: \"Author\", label: t(\"Files:ByAuthor\") },\n ];\n \n const dataSortOrder = [",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 123,
+      "line_number": 124,
       "context": "const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"DateAndTimeCreation\", label: t(\"Files:ByCreation\") },\n { key: \"Author\", label: t(\"Files:ByAuthor\") },\n ];\n \n const dataSortOrder = [",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/useFilesFilter.tsx",
+      "line_number": 122,
+      "context": "};\n \n const size = {\n id: \"sort-by_size\",\n key: SortByFieldName.Size,\n label: t(\"Common:Size\"),\n default: true,\n };\n \n return [name, modifiedDate, size];\n }, [t]);",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/table-view/index.tsx",
+      "line_number": 129,
+      "context": "onClick: onColumnSort,\n onChange: onColumnChange,\n },\n {\n key: \"Size\",\n title: t(\"Common:Size\"),\n sortBy: SortByFieldName.Size,\n enable: columnState.Size !== false,\n resizable: true,\n onClick: onColumnSort,\n onChange: onColumnChange,",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -177,13 +190,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "In the context of file properties and table columns (as indicated by the metadata), 'Size' refers to data volume (e.g., KB, MB). 'Formaat' in Dutch typically refers to 'Format' or 'Dimensions' (e.g., paper size or image dimensions). The correct term for data size is 'Grootte'.",
-          "suggestion": "Grootte"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {

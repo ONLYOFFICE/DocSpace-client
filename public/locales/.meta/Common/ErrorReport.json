@@ -3,11 +3,12 @@
   "content": "Error report",
   "content_en_sha1_hash": "4e31c347b987a17f7cb3d98f8aa8b10ea251a784",
   "created_at": "2025-05-19T21:30:45.100Z",
-  "updated_at": "2026-04-08T10:12:50.073Z",
+  "updated_at": "2026-04-11T20:53:16.702Z",
   "comment": {
-    "text": "This translation key is used for the \"Error report\" label in a report dialog component, typically found in an error reporting feature. It describes the content of the label displayed to users when viewing or submitting error reports.",
+    "text": "This is part of a file title for a crash report, appearing as \"Error report [current date]\".",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:20.286Z"
+    "updated_at": "2026-04-11T20:53:16.702Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -177,25 +178,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Извештај грешке' literally means 'Report of an error' or 'Error's report', which sounds unnatural in Serbian for a UI label. In Serbian, the standard term for an error report is 'Извештај о грешкама' or simply 'Извештај о грешци'.",
-          "suggestion": "Извештај о грешци"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Izveštaj greške' literally means 'Report of an error' (singular/specific), whereas in the context of a UI label for a feature or a file title, 'Izveštaj o grešci' or 'Izveštaj o greškama' is the standard way to express 'Error report'. 'Izveštaj greške' sounds unnatural in Serbian.",
-          "suggestion": "Izveštaj o grešci"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

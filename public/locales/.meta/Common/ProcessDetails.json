@@ -3,11 +3,12 @@
   "content": "Process details",
   "content_en_sha1_hash": "4953bc29de892cdbb1d582430dd71fda1ac51f15",
   "created_at": "2025-05-19T21:30:47.485Z",
-  "updated_at": "2026-04-08T02:16:18.728Z",
+  "updated_at": "2026-04-12T03:50:37.899Z",
   "comment": {
-    "text": "This translation key is used for displaying process details in a UI. It's displayed as a heading in a filling status panel and related to file information.",
+    "text": "This is a heading for a section that displays information about a document's processing status, such as who is involved and what actions have been taken.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:34:57.384Z"
+    "updated_at": "2026-04-11T20:45:55.686Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -39,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation 'Обработи данни' means 'Process data' (imperative verb phrase), whereas the English 'Process details' is a noun phrase referring to information about a process.",
-          "suggestion": "Детайли за процеса"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -87,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian word 'ամնրամասներ' is a misspelling or a non-existent word. The correct term for 'details' in this context should be 'մանրամասներ'.",
-          "suggestion": "Գործընթացի մանրամասներ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -213,13 +202,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "In the context of a 'filling status panel' and 'file information', 'Process' refers to a workflow or a procedure (e.g., a document approval or filling process), not a computer system 'process' (running program). '进程' (jìnchéng) specifically refers to OS-level processes. '流程' (liúchéng) is the correct term for a business or document workflow.",
-          "suggestion": "流程详情"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

@@ -17,8 +17,12 @@
   "FileLifetimeDescription": "Defina o tempo de vida do arquivo para excluir automaticamente os arquivos nesta sala após um período definido. O tempo de vida começa na data de upload/criação do arquivo.",
   "FilesOlderThan": "Ficheiros mais antigos que:",
   "FormRoomBarDescription": "Esta sala está disponível para qualquer pessoa com o link. Os usuários externos terão permissão de preenchimento de formulário para todos os arquivos.",
+  "GoToIntegrations": "Ir para Integrações",
   "Horizontal": "Horizontais",
   "Icon": "Ícone",
+  "NeedMoreIntegrations": "Precisa de mais integrações?",
+  "NeedMoreIntegrationsDescription": "Use webhooks para enviar dados para o seu próprio sistema ou conecte formulários a milhares de serviços via Zapier.",
+  "NoDatabaseConnections": "Nenhuma conexão de banco de dados configurada",
   "PeopleSelectorInfo": "Somente um administrador da sala ou administrador do {{productName}} pode se tornar o proprietário da sala",
   "Position": "Posição",
   "PublicRoomBarDescription": "Este quarto está disponível para qualquer pessoa com o link. O acesso para usuários externos é fornecido dependendo do tipo selecionado de direitos de acesso.",
@@ -41,8 +45,5 @@
   "ViewerInfo": "Informações do visualizador",
   "WatermarkPreview": "Pré-visualização da marca d'água",
   "WatermarkPreviewHelp": "Esta visualização de imagem mostra aproximadamente como a marca d'água será exibida em seus arquivos.",
-  "GoToIntegrations": "Ir para Integrações",
-  "NeedMoreIntegrations": "Precisa de mais integrações?",
-  "NeedMoreIntegrationsDescription": "Use webhooks para enviar dados para o seu próprio sistema ou conecte formulários a milhares de serviços via Zapier.",
-  "NoDatabaseConnections": "Nenhuma conexão de banco de dados configurada"
+  "NoDatabaseConnectionsRoomAdmin": "As conexões de banco de dados são configuradas por um administrador. Assim que um banco de dados for configurado, você poderá ativar a exportação aqui."
 }

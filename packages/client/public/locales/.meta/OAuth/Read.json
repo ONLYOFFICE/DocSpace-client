@@ -3,11 +3,12 @@
   "content": "Read",
   "content_en_sha1_hash": "852b438f91ad9eb2cdd84419a675a216d543c687",
   "created_at": "2025-05-19T21:30:53.981Z",
-  "updated_at": "2026-04-07T19:35:05.165Z",
+  "updated_at": "2026-04-23T17:24:01.932Z",
   "comment": {
-    "text": "This translation key is used to display the text \"Read\" in the context of API key permissions. It appears in a dialog where users can select scopes for their API keys, indicating that the selected scope allows for read-only access.",
+    "text": "This is a label indicating a \"read\" permission or scope, used in API key and OAuth client settings.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:41.329Z"
+    "updated_at": "2026-04-11T21:18:34.351Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -18,8 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/ScopesBlock.tsx",
-      "line_number": 109,
-      "context": "return { ...val };\n });\n } else {\n setFilteredScopes((val) => {\n const isReadChecked = checkedScopes.includes(\n val[group].read?.name || \"\",\n );\n \n val[group].isChecked = isReadChecked;\n val[group].checkedType = isReadChecked ? ScopeType.read : undefined;",
+      "line_number": 252,
+      "context": "className=\"header\"\n fontSize=\"14px\"\n fontWeight={600}\n lineHeight=\"22px\"\n >\n {t(\"Read\")}\n </Text>\n \n <Text\n className=\"header header-last\"\n fontSize=\"14px\"",
       "module": "/packages/client"
     }
   ],

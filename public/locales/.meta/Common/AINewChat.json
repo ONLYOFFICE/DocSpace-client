@@ -3,18 +3,19 @@
   "content": "New chat",
   "content_en_sha1_hash": "009bf6b90cde5e60d74d76edc1421b8284d7d93f",
   "created_at": "2025-10-27T16:14:10.286Z",
-  "updated_at": "2026-04-08T17:24:46.625Z",
+  "updated_at": "2026-04-11T21:00:04.711Z",
   "comment": {
-    "text": "This translation key displays the text \"New chat\" on a button that initiates the creation of a new chat. It appears within the chat header component, likely as a call to action for users to start a new conversation.",
+    "text": "This is the label for a button that creates a new AI chat conversation.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:55:23.821Z"
+    "updated_at": "2026-04-11T21:00:04.711Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/chat/components/chat-header/sub-components/CreateChat.tsx",
-      "line_number": 84,
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-header/sub-components/create-chat/index.tsx",
+      "line_number": 88,
       "context": "data-testid=\"create-chat\"\n aria-disabled={isDisabled}\n >\n <PlusReactSvgUrl />\n <Text fontSize=\"13px\" lineHeight=\"15px\" fontWeight={600}>\n {t(\"AINewChat\")}\n </Text>\n </div>\n );\n };",
-      "module": "/packages/shared"
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -111,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Jauna čata' is in the genitive case (meaning 'of a new chat'), whereas a button label should be in the nominative case ('Jauns čats') to function as a call to action.",
-          "suggestion": "Jauns čats"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -165,13 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Nová správa' means 'New message' instead of 'New chat'. While related, in a UI context, a 'chat' refers to the conversation thread/session, whereas a 'message' refers to a single unit of communication.",
-          "suggestion": "Nový chat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {

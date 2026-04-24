@@ -3,17 +3,18 @@
   "content": "Your subscription to support and updates has expired",
   "content_en_sha1_hash": "f5833d1780ea3b9e1d44aca439e0e66682bdf6a6",
   "created_at": "2025-05-19T21:30:49.184Z",
-  "updated_at": "2026-04-07T22:15:31.481Z",
+  "updated_at": "2026-04-13T14:59:05.973Z",
   "comment": {
-    "text": "This translation key is used to display a message indicating that a subscription has expired. It appears as a title in a UI component displaying payment settings, prompting users to renew their subscriptions or update their licenses.",
+    "text": "This is an alert message displayed when a user's support and update subscription has expired, particularly in the context of a trial license.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:38:08.792Z"
+    "updated_at": "2026-04-11T20:41:40.937Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/TariffTitleContainer.tsx",
-      "line_number": 70,
-      "context": "const alertComponent = () => {\n if (isTrial) {\n return isLicenseDateExpired ? (\n <Text\n className={classNames(styles.paymentsSubscriptionExpired, {\n [styles.isTrial]: isTrial,\n [styles.isLicenseDateExpired]: isLicenseDateExpired,\n })}\n fontWeight={600}\n fontSize=\"14px\"",
+      "line_number": 134,
+      "context": "<Text\n className={styles.paymentsSubscriptionExpired}\n isBold\n fontSize=\"14px\"\n >\n {t(\"SubscriptionExpired\")}\n </Text>\n )\n );\n };",
       "module": "/packages/shared"
     }
   ],

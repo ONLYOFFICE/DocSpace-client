@@ -1,7 +1,8 @@
 {
   "BackToRoom": "Nazaj na sobo",
   "CheckReadyForms": "Preveri pripravljene obrazce",
-  "Description": "Vaš obrazec je izpolnjen in shranjen",
+  "CompletedFormDescription": "Vaš obrazec je izpolnjen in shranjen",
+  "CompletedFormTitle": "Obrazec je izpolnjen",
   "DescriptionForAnonymous": "Oddali ste izpolnjen obrazec PDF, ki mu je bila dodeljena enoumna številka. Če želite preveriti stanje, se obrnite na lastnika obrazca.",
   "DescriptionForRegisteredUser": "Izpolnjen PDF obrazec je na voljo v mapi Dokončano.",
   "FillItOutAgain": "Izpolni ga ponovno",
@@ -18,6 +19,5 @@
   "FormVDRYouFirstRecepientDescription": "Vi ste dodeljeni za izpolnjevanje obrazca kot prvi prejemnik. Obvestilo je bilo poslano na vaš e-poštni naslov. Lahko ga začnete izpolnjevati zdaj ali pa kopirate povezavo za izpolnjevanje in se vrnete kasneje.",
   "LinkToFillOutForm": "Povezava do izpolnjevanja obrazca:",
   "LinkToForm": "Povezava do obrazca:",
-  "LinkToViewOnlyForm": "Povezava do obrazca samo za ogled:",
-  "Title": "Obrazec je izpolnjen"
+  "LinkToViewOnlyForm": "Povezava do obrazca samo za ogled:"
 }

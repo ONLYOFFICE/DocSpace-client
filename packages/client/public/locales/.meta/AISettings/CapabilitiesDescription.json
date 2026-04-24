@@ -1,0 +1,51 @@
+{
+  "key_path": "CapabilitiesDescription",
+  "content": "These settings control which features are shown and available for this model in {{productName}} chat.",
+  "content_en_sha1_hash": "caa7947b800e5a3405bcc46512e22f4660e87963",
+  "created_at": "2026-04-23T17:24:00.292Z",
+  "updated_at": "2026-04-24T07:02:56.053Z",
+  "comment": {
+    "text": "Helper text in the AI model settings panel explaining that the settings determine feature availability within the {{productName}} chat.",
+    "is_auto": true,
+    "updated_at": "2026-04-23T17:42:30.825Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/ModelSettingsPanel.tsx",
+      "line_number": 131,
+      "context": "isVertical\n removeMargin\n className={styles.capabilitiesField}\n >\n <Text className={styles.capabilitiesDescription}>\n {t(\"AISettings:CapabilitiesDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <div className={styles.checkboxList}>\n <Checkbox",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": true,
+      "ai_model": "minimax/minimax-m2.5:free",
+      "ai_spell_check_issues": [
+        {
+          "type": "variable_mismatch",
+          "description": "Expected variables {{productName}} but got "
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": true,
+      "ai_model": "inclusionai/ling-2.6-1t:free",
+      "ai_spell_check_issues": [
+        {
+          "type": "variable_mismatch",
+          "description": "Expected variables {{productName}} but got "
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

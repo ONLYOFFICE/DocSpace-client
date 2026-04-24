@@ -1,6 +1,6 @@
 {
   "ActiveSessions": "Sesiuni active",
-  "AutoDeleteTitle": "Toate sesiunile vor fi șterse automat în termen de 60 de zile.",
+  "AutoDeleteTitle": "Toate sesiunile mai vechi de 60 de zile vor fi șterse automat.",
   "ChangePasswordAfterLoggingOut": "Modificare parolă după deconectare",
   "ConnectSocialNetworks": "Conectați-vă reţelele sociale",
   "DescriptionForSecurity": "Schimbaţi-vă parola pentru mai multă siguranţă.",
@@ -23,9 +23,9 @@
   "ShowBackupCodes": "Afișare coduri de rezervă",
   "SuccessLogout": "Conexiunea activă a fost deconectată: {{platform}}, {{browser}}",
   "TelegramAccount": "Cont Telegram",
+  "TelegramAccountDescription": "Pentru a conecta TelegramBot la contul dumneavoastră, urmați linkul secret și faceți clic pe butonul „Connect Telegram”.",
   "TelegramAccountDisconnect": "Deconectare Telegram",
-  "TelegramAccountDisconnectDescription": "Contul dvs. @{{username}} este conectat pentru a primi notificările prin Telegram. Vă puteți deconecta acest cont. În acest caz, nu veți primi notificări.",
+  "TelegramAccountDisconnectDescription": "Contul dvs. @{{username}} este conectat pentru a primi notificările prin Telegram. Vă puteți deconecta de acest cont. În acest caz, nu veți primi notificări.",
   "TerminateAllSessions": "Încheiați toate sesiunile, cu excepția celei curente",
-  "TwoFactorDescription": "Autentificarea cu doi factori prin aplicația de generare coduri a fost activată pentru toți utilizatorii de către administratorul.",
-  "TelegramAccountDescription": "Pentru a conecta TelegramBot la contul dumneavoastră, urmați linkul secret și faceți clic pe butonul „Connect Telegram”."
+  "TwoFactorDescription": "Autentificarea cu doi factori prin aplicația de generare coduri a fost activată pentru toți utilizatorii de către administratorul."
 }

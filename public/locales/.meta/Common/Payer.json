@@ -3,13 +3,27 @@
   "content": "Payer",
   "content_en_sha1_hash": "9b33e083f7a40171b773d68eec2c2293739d7774",
   "created_at": "2026-04-10T13:53:42.906Z",
-  "updated_at": "2026-04-10T13:53:42.906Z",
+  "updated_at": "2026-04-23T17:24:02.173Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label for a section or field related to the person or entity making a payment. It appears in the billing payment method interface.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:46:36.268Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
+      "line_number": 131,
+      "context": "className=\"payer-tooltip\"\n iconName={HelpReactSvgUrl}\n style={{ height: \"15px\", margin: \"0\" }}\n tooltipContent={\n <>\n <Text isBold>{t(\"Payer\")}</Text>\n <Text>\n {t(\"PayerDescription\", { productName: getBrandName(\"ProductName\") })}\n </Text>\n </>\n }",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
+      "line_number": 131,
+      "context": "className=\"payer-tooltip\"\n iconName={HelpReactSvgUrl}\n style={{ height: \"15px\", margin: \"0\" }}\n tooltipContent={\n <>\n <Text isBold>{t(\"Payer\")}</Text>\n <Text>\n {t(\"PayerDescription\", { productName: getBrandName(\"ProductName\") })}\n </Text>\n </>\n }",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

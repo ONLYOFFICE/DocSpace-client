@@ -36,6 +36,8 @@
   "StorageDescriptionAgent": "Limit úložného prostoru nastaven pro každého agenta. Můžete změnit tuto hodnotu nebo vypnout limit úložného prostoru.",
   "TagsPlaceholder": "Přidat značku",
   "ThirdPartyStorageComboBoxPlaceholder": "Vyberte úložiště",
+  "ThirdPartyStorageNoStorageAlert": "Nejdříve musíte v sekci „Integrace“ připojit příslušnou službu. V opačném případě nebude připojení možné.",
+  "ThirdPartyStoragePermanentSettingDescription": "Soubory jsou uloženy ve vnějším úložišti {{thirdpartyTitle}} ve složce „{{thirdpartyFolderName}}“.\n<strong>{{thirdpartyPath}}</strong>",
   "ThirdPartyStorageRoomAdminNoStorageAlert": "Chcete-li připojit úložiště třetí strany, musíte přidat příslušnou službu v části Integrace v nastavení služby {{productName}}. Pro povolení integrace se obraťte na vlastníka nebo správce služby {{productName}}.",
   "UserEmail": "E-mail uživatele",
   "UserIPAddress": "IP adresa uživatele",
@@ -43,6 +45,5 @@
   "ViewerInfo": "Informace o prohlížeči",
   "WatermarkPreview": "Náhled vodoznaku",
   "WatermarkPreviewHelp": "Tento náhled obrázku zhruba ukazuje, jak se vodoznak zobrazí ve vašich souborech.",
-  "ThirdPartyStorageNoStorageAlert": "Nejdříve musíte v sekci „Integrace“ připojit příslušnou službu. V opačném případě nebude připojení možné.",
-  "ThirdPartyStoragePermanentSettingDescription": "Soubory jsou uloženy ve vnějším úložišti {{thirdpartyTitle}} ve složce „{{thirdpartyFolderName}}“.\n<strong>{{thirdpartyPath}}</strong>"
+  "NoDatabaseConnectionsRoomAdmin": "Připojení k databázím konfiguruje administrátor. Jakmile bude databáze nastavena, budete zde moci povolit export."
 }

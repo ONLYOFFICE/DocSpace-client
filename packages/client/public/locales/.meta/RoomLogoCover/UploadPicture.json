@@ -3,11 +3,12 @@
   "content": "Upload picture",
   "content_en_sha1_hash": "0a024e54cb81f9e05f0faa90496774cb8e76dcae",
   "created_at": "2025-05-19T21:30:53.320Z",
-  "updated_at": "2026-04-09T06:49:18.739Z",
+  "updated_at": "2026-04-11T21:20:59.215Z",
   "comment": {
-    "text": "Upload picture is a button label used to trigger uploading an image. It appears as a label on a UI element that allows users to select or upload images.",
+    "text": "This is the label for a button that allows users to upload an image, either for a profile avatar or a room logo/cover.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:57.970Z"
+    "updated_at": "2026-04-11T21:20:59.215Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -81,13 +82,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The French word 'Télécharger' means 'to download'. For 'upload', the correct term is 'Téléverser' or 'Charger'.",
-          "suggestion": "Téléverser l'image"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -201,13 +196,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Передати' means 'to transfer' or 'to hand over' (e.g., passing a physical object or transferring data), whereas 'Upload' in a UI context for files should be 'Завантажити'.",
-          "suggestion": "Завантажити зображення"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -225,13 +214,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Albanian translation 'Ngarkoni pikturën' means 'Upload THE picture' (definite article), whereas the English source 'Upload picture' is a general action command. In UI button labels, the definite article makes it sound like a specific, previously mentioned picture rather than a general action.",
-          "suggestion": "Ngarkoni foto"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

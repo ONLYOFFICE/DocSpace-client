@@ -3,24 +3,31 @@
   "content": "Upload PDF form",
   "content_en_sha1_hash": "b5afa97be11c4d1636475bc3623a9f975f26ebd9",
   "created_at": "2025-05-19T21:30:49.443Z",
-  "updated_at": "2026-04-10T08:21:04.283Z",
+  "updated_at": "2026-04-23T17:24:01.617Z",
   "comment": {
-    "text": "UploadPDFForm is used as a label for a main button that allows users to upload a PDF form. It appears in a button component in the article section of a client-side application. The translation key is used to display this text in different languages.",
+    "text": "This is a button label that allows users to upload a PDF form.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:35:43.262Z"
+    "updated_at": "2026-04-11T20:39:41.616Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 330,
+      "line_number": 331,
       "context": "const uploadPDFFrom = {\n id: \"actions_upload-ready-Pdf-from\",\n className: \"main-button_drop-down_sub\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"Common:UploadPDFForm\"),\n key: \"actions_upload-ready-Pdf-from\",\n items: [uploadFromDocSpace, uploadFormDevice],\n };\n \n const uploadPDFFromSeparator = {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3432,
+      "line_number": 3508,
       "context": ") => {\n const uploadReadyPDFFrom = {\n id: \"personal_upload-ready-Pdf-from\",\n className: \"main-button_drop-down_sub\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"Common:UploadPDFForm\"),\n key: \"personal_upload-ready-Pdf-from\",\n items: [\n {\n id: \"personal_upload-from-docspace\",\n className: \"main-button_drop-down\",",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/forms-header/index.tsx",
+      "line_number": 278,
+      "context": "return [\n {\n id: \"upload-forms\",\n key: \"upload-forms\",\n label: t(\"Common:UploadPDFForm\"),\n icon: ActionsUploadReactSvgUrl,\n onClick: onUploadFiles,\n },\n {\n id: \"create-blank-form\",",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -63,13 +70,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation 'Φόρμα μεταφόρτωσης PDF' means 'PDF upload form' (a noun phrase describing an object), whereas the English 'Upload PDF form' is an imperative action (a command to perform an upload).",
-          "suggestion": "Ανεβάστε φόρμα PDF"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -87,13 +88,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The French word 'Télécharger' means 'to download'. The English word 'Upload' means 'téléverser' or 'charger'. In a UI context, using 'Télécharger' for an upload button is a critical functional error.",
-          "suggestion": "Téléverser le formulaire PDF"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -207,13 +202,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Передати' means 'to transfer' or 'to hand over' (e.g., passing a document to a person), whereas 'Upload' in a software context (uploading a file to a server) should be translated as 'Завантажити'.",
-          "suggestion": "Завантажити PDF-форму"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

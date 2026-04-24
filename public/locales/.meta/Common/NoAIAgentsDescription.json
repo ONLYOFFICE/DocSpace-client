@@ -3,18 +3,19 @@
   "content": "It looks like there are no agents ready to continue this chat. Create a new agent to pick up the conversation right where it left off.",
   "content_en_sha1_hash": "b8f3801ce205d8ab2b39d02905f634cb46d49e34",
   "created_at": "2025-10-27T16:14:24.547Z",
-  "updated_at": "2026-04-08T04:08:25.364Z",
+  "updated_at": "2026-04-11T20:48:01.883Z",
   "comment": {
-    "text": "This text explains to the user that no AI agents are currently available to continue the conversation. It appears as a description on an empty screen, prompting them to create a new agent to resume the chat. Translators should focus on conveying the message that a new agent is needed to proceed.",
+    "text": "This is an empty state message displayed when no AI agents are available to continue a chat. It prompts the user to create a new agent.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:33:50.699Z"
+    "updated_at": "2026-04-11T20:48:01.883Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/selectors/AIAgent/index.tsx",
-      "line_number": 255,
-      "context": ": EmptyScreenAIAgentsSelectorSvgUrlDark\n }\n emptyScreenHeader={t(\"Common:NoAIAgents\", {\n aiAgents: t(\"Common:AIAgents\"),\n })}\n emptyScreenDescription={t(\"Common:NoAIAgentsDescription\")}\n searchEmptyScreenImage={\n isBase\n ? EmptyScreenAIAgentsSelectorSvgUrl\n : EmptyScreenAIAgentsSelectorSvgUrlDark\n }",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/selectors/AIAgent/index.tsx",
+      "line_number": 257,
+      "context": ")\n }\n emptyScreenHeader={t(\"NoAIAgents\", {\n aiAgents: t(\"AIAgents\"),\n })}\n emptyScreenDescription={t(\"NoAIAgentsDescription\")}\n searchEmptyScreenImage={\n isBase ? (\n <EmptyScreenAIAgentsSelectorLight />\n ) : (\n <EmptyScreenAIAgentsSelectorDark />",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation uses 'عملاء' (customers/clients) instead of 'وكلاء' (agents). In the context of AI, 'agent' should be translated as 'وكيل' to avoid confusion with human customers.",
-          "suggestion": "يبدو أنه لا يوجد وكلاء جاهزون لمتابعة هذه الدردشة. قم بإنشاء وكيل جديد لمتابعة المحادثة من حيث توقفت."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -165,13 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical error in the word 'konverzácií' (plural/genitive) instead of 'konverzácii' (singular/dative), which changes the grammatical correctness of the sentence.",
-          "suggestion": "Vyzerá to, že nie sú k dispozícii žiadni agenti, ktorí by mohli pokračovať v tejto konverzácii. Vytvorte nového agenta, ktorý prevzme konverzáciu presne tam, kde skončila."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -213,13 +202,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'agent' in the context of AI is translated as 'nhân viên' (human employee/staff), which is semantically incorrect for an AI agent feature. It should be 'tác nhân' or 'agent' to reflect the AI context.",
-          "suggestion": "Có vẻ như hiện tại không có tác nhân AI nào sẵn sàng tiếp tục cuộc trò chuyện này. Tạo một tác nhân mới để tiếp nhận cuộc trò chuyện ngay từ điểm dừng lại."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

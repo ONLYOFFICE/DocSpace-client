@@ -3,16 +3,17 @@
   "content": "Now you can create a new password.",
   "content_en_sha1_hash": "f9c8b3b6fa375c17d32d673a51e5ccfc8b276b9b",
   "created_at": "2025-05-19T21:30:57.374Z",
-  "updated_at": "2026-04-07T19:35:05.245Z",
+  "updated_at": "2026-04-23T17:24:02.090Z",
   "comment": {
-    "text": "This translation key is used for the title of a password reset confirmation page, appearing as \"Now you can create a new password.\" in the UI. It provides context to users after they have successfully changed their password.",
+    "text": "This is a subtitle displayed on the password reset page, informing the user that they can now set a new password.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:47:26.476Z"
+    "updated_at": "2026-04-11T21:30:11.803Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PasswordChange/page.client.tsx",
-      "line_number": 140,
+      "line_number": 141,
       "context": "return (\n <>\n <div className=\"password-form\">\n <Text fontSize=\"16px\" fontWeight=\"600\" className=\"subtitle\">\n {t(\"PassworResetTitle\")}\n </Text>\n <FieldContainer\n isVertical\n labelVisible={false}\n hasError={isPasswordErrorShow ? !passwordValid : undefined}",
       "module": "/packages/login"
     }

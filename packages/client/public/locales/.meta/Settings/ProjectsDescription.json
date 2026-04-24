@@ -3,16 +3,17 @@
   "content": "Each project is imported as a room, which will contain all the documents and users of this project. The project manager will become the owner of the room",
   "content_en_sha1_hash": "0629e4fc913621c403fea57e62a92efedb650e96",
   "created_at": "2025-05-19T21:30:52.323Z",
-  "updated_at": "2026-04-09T01:55:10.893Z",
+  "updated_at": "2026-04-11T21:22:49.458Z",
   "comment": {
-    "text": "Each project is imported as a room, containing all project documents and users. The project manager becomes the room's owner. This text describes the data import process in the portal settings.",
+    "text": "This is a description for a checkbox option in the data import settings. It explains how projects are imported as rooms, including their documents, users, and ownership.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:42.147Z"
+    "updated_at": "2026-04-11T21:22:49.458Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 281,
+      "line_number": 282,
       "context": "{hasProjectFiles ? (\n <ImportSection\n isChecked={importOptions.importProjectFiles}\n onChange={(e) => onChange(e, \"importProjectFiles\")}\n sectionName={t(\"Common:Projects\")}\n description={t(\"Settings:ProjectsDescription\")}\n exportSection={{\n sectionName: t(\"Common:Projects\"),\n workspace: serviceName,\n sectionIcon: ProjectsIcon,\n }}",
       "module": "/packages/client"
     }
@@ -99,13 +100,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase '가져오기되었습니다' is grammatically incorrect and awkward in Korean (a combination of a noun and a passive verb form that doesn't function correctly). It should be '가져오기됩니다' or '가져오기됩니다.'",
-          "suggestion": "각 프로젝트는 이 프로젝트의 모든 문서와 사용자를 포함하는 방으로 가져오기됩니다. 프로젝트 관리자가 방의 소유자가 됩니다."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -147,37 +142,19 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation omits the word 'will' (future tense) in the second sentence, making it 'Project manager becomes' instead of 'Project manager will become', which slightly alters the instructional tone, though the primary issue is the missing article 'The' (Managerul de proiect) which makes the sentence grammatically incomplete in Romanian.",
-          "suggestion": "Fiecare proiect este importat ca o sală, care va conține toate documentele și utilizatorii acestui proiect. Managerul de proiect va deveni proprietarul sălii."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'room' is translated inconsistently. In the first sentence, it is 'комната', but in the second sentence, it is 'помещения' (which usually refers to a physical building/premises). In the context of DocSpace, 'room' should be translated consistently as 'комната'.",
-          "suggestion": "Каждый проект импортируется как комната, в которой будут храниться все документы и пользователи этого проекта. Менеджер проекта станет владельцем комнаты"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'පරිශ්‍රීලකයින්' (parishrilakayin) is a misspelling/incorrect word for 'users'. The correct term should be 'පරිශීලකයින්' (parishilakayin).",
-          "suggestion": "එක් එක් ව්‍යාපෘතියක් කාමරයක් ලෙස ආයාත වන අතර, එමඟින් මෙම ව්‍යාපෘතියේ සියලුම ලේඛන සහ පරිශීලකයින් අඩංගු වනු ඇත. ව්‍යාපෘති කළමනාකරු කාමරයේ හිමිකරු බවට පත්වනු ඇත"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

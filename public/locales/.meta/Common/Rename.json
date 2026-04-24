@@ -3,13 +3,26 @@
   "content": "Rename",
   "content_en_sha1_hash": "d3f4cb898fbe0c7a7ac4f721438c4c26ad1a2513",
   "created_at": "2025-05-19T21:30:47.845Z",
-  "updated_at": "2026-04-10T08:21:04.292Z",
+  "updated_at": "2026-04-23T17:24:01.669Z",
   "comment": {
-    "text": "The translation key \"Rename\" is used to display the label for renaming options on various UI elements, such as buttons and dialogs. It typically appears in contexts where user interaction with files or media items requires renaming, often alongside an icon representing a pencil or text editing action. This text helps to clearly communicate the purpose of the feature in different parts of the application.",
+    "text": "This is a button label and a dialog title. It allows users to change the name of a chat or other item.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:34:43.987Z"
+    "updated_at": "2026-04-11T20:45:09.060Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-header/sub-components/rename-chat/index.tsx",
+      "line_number": 105,
+      "context": "<ModalDialog\n visible\n onClose={onRenameClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"Rename\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <TextInput\n value={newName}\n onChange={handleRename}\n size={InputSize.base}",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-header/sub-components/select-chat/index.tsx",
+      "line_number": 220,
+      "context": "const contextModel = React.useMemo(() => {\n return [\n {\n key: \"rename\",\n label: t(\"Rename\"),\n iconNode: <RenameReactSvg />,\n onClick: onRenameToggle,\n },\n {\n key: \"save_to_file\",",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/GlobalEvents/RenameEvent.js",
       "line_number": 151,
@@ -18,9 +31,21 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2532,
+      "line_number": 2594,
       "context": "},\n indexOptions,\n {\n id: \"option_rename\",\n key: \"rename\",\n label: t(\"Common:Rename\"),\n icon: RenameReactSvgUrl,\n onClick: () => this.onClickRename(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
+      "line_number": 327,
+      "context": "const getRenameItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_rename\",\n key: \"rename\",\n label: t(\"Common:Rename\"),\n icon: RenameReactSvgUrl,\n onClick: () => onRenameClick?.(i),\n disabled: !onRenameClick,\n };\n },",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/rename-dialog/index.tsx",
+      "line_number": 103,
+      "context": "[onSubmit],\n );\n \n return (\n <ModalDialog visible={visible} onClose={onClose} autoMaxHeight withForm>\n <ModalDialog.Header>{t(\"Common:Rename\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <TextInput\n forwardedRef={inputRef}\n type={InputType.text}\n scale",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/media-viewer/MediaViewer.helpers.tsx",
@@ -135,13 +160,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian word 'Pārdēvēt' means 'to resell' or 'to re-sell', which is completely different from the English 'Rename' (to change a name).",
-          "suggestion": "Pārnamedot"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -183,13 +202,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'නම් කරන්න' (Nam karanna) means 'to name' or 'to call something by a name', which is grammatically a verb phrase. In a UI context for a button or menu item, 'Rename' should be translated as 'නම වෙනස් කරන්න' (Nama venas karanna) to accurately convey the action of changing an existing name.",
-          "suggestion": "නම වෙනස් කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

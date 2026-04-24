@@ -3,6 +3,6 @@
   "DeleteTag": "Poista tunniste",
   "DeleteTagCannotBeUndone": "Tätä toimintoa ei voi peruuttaa.",
   "DeleteTagConfirmation": "Poistamalla tämän tunnisteen se poistetaan kaikista huoneista, joissa sitä käytetään.",
-  "EditTag": "Muokkaa tunnusta",
+  "EditTag": "Muokkaa tunniste",
   "RemoveTag": "<1>{{tag}}</1> tunniste poistettu."
 }

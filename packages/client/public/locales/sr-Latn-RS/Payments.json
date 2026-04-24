@@ -1,18 +1,17 @@
 {
-  "AccessingProblem": "Ako ste postojeći korisnik i imate problema sa pristupom ovom prostoru, kontaktirajte administratora.",
   "CannotCreateNewRoom": "Prostorija ne može biti kreirana",
   "CannotCreatePaidUsers": "Plaćeni korisnici ne mogu biti dodati",
   "CannotRestoreRoom": "Prostorija ne može biti obnovljena",
   "ChooseNewPlan": "Da li biste želeli da izaberete novi cenovni plan?",
+  "GracePeriodActive": "Period gracioznosti je aktivan <1>od {{fromDate}} do {{byDate}}</1> (preostalo dana: {{delayDaysCount}}).",
+  "LicenseExpiredRestriction": "Nije moguće dodati nove korisnike i kreirati nove sobe. Licenca je istekao.",
+  "LicenseGracePeriodInfo": "Tokom ovog perioda, administratorima nije omogućeno kreiranje novih soba ili dodavanje novih korisnika. Kada prođe period gracioznosti, {{productName}} neće biti dostupan dok se ne aktivira nova licence.",
   "NewRoomWillExceedLimit": "Kreiranje ove prostorije nije moguće jer je dostignut limit za broj prostorija uključenih u vaš trenutni plan.",
   "NewUsersWillExceedMembersLimit": "Dodavanje novih plaćenih korisnika nije moguće jer je dostignut limit za broj admina uključenih u vaš trenutni plan.",
   "NotPossibleRoomRestoring": "Obnavljanje ove prostorije nije moguće jer je dostignut limit za broj prostorija uključenih u vaš trenutni plan.",
   "NumberOfRoomsAccordingToTariff": "Broj prostorija prema vašem tarifnom planu: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Broj admina prema vašem tarifnom planu: {{currentValue}}/{{maxValue}}",
+  "PlanPaymentOverdue": "Nije moguće dodati nove korisnike, kreirati nove sobe ili AI agente. Plaćanje za plan {{planName}} je u kašnjenju.",
   "RoomsQuotaAlmostExhausted": "Kvota prostorija je skoro iscrpljena.",
-  "UsersQuotaAlmostExhausted": "Kvota plaćenih korisnika je skoro iscrpljena.",
-  "GracePeriodActive": "Period gracioznosti je aktivan <1>od {{fromDate}} do {{byDate}}</1> (preostalo dana: {{delayDaysCount}}).",
-  "LicenseExpired": "Nije moguće dodati nove korisnike i kreirati nove sobe. Licenca je istekao.",
-  "LicenseGracePeriodInfo": "Tokom ovog perioda, administratorima nije omogućeno kreiranje novih soba ili dodavanje novih korisnika. Kada prođe period gracioznosti, {{productName}} neće biti dostupan dok se ne aktivira nova licence.",
-  "PlanPaymentOverdue": "Nije moguće dodati nove korisnike, kreirati nove sobe ili AI agente. Plaćanje za plan {{planName}} je u kašnjenju."
+  "UsersQuotaAlmostExhausted": "Kvota plaćenih korisnika je skoro iscrpljena."
 }

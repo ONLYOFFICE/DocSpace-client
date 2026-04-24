@@ -3,23 +3,24 @@
   "content": "Files moved to {{sectionName}}.",
   "content_en_sha1_hash": "1a4e20715b0d1234e1d3b9bd7c2718b767d813cc",
   "created_at": "2025-06-02T10:19:22.107Z",
-  "updated_at": "2025-08-04T07:30:01.221Z",
+  "updated_at": "2026-04-13T14:59:05.794Z",
   "comment": {
-    "text": "This translation key is used to display a message indicating that files have been moved to the trash section. It typically appears in UI elements where file history or moves are being displayed.",
+    "text": "This is a toast message that appears after a user moves files to the trash. `{{sectionName}}` will be replaced with \"Trash\".",
     "is_auto": true,
-    "updated_at": "2025-06-02T10:22:04.692Z"
+    "updated_at": "2026-04-11T21:13:29.464Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 77,
-      "context": "count,\n });\n return t(\"InfoPanel:FileMoved\");\n case FeedActionKeys.FileMovedToTrash:\n if (hasRelatedItems)\n return t(\"InfoPanel:FilesTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),\n });\n return t(\"InfoPanel:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),",
+      "line_number": 81,
+      "context": "if (hasRelatedItems)\n return t(\"InfoPanel:FilesTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),\n });\n return t(\"InfoPanel:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:\n if (\"fromParentTitle\" in feed.data && feed.data.fromParentTitle) {\n return t(\"InfoPanel:FileCopiedTo\", {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 71,
-      "context": "count,\n });\n return t(\"InfoPanel:FileMoved\");\n case FeedActionKeys.FileMovedToTrash:\n if (hasRelatedItems)\n return t(\"InfoPanel:FilesTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),\n });\n return t(\"InfoPanel:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),",
+      "line_number": 75,
+      "context": "if (hasRelatedItems)\n return t(\"InfoPanel:FilesTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),\n });\n return t(\"InfoPanel:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:\n if (feed.data.fromParentTitle) {\n return t(\"InfoPanel:FileCopiedTo\", {",
       "module": "/packages/client"
     }
   ],

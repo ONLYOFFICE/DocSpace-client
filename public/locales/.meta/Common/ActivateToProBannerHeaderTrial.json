@@ -3,11 +3,12 @@
   "content": "Buy the full {{license}} version to get:",
   "content_en_sha1_hash": "032d04911b6d8cb5c501683efec920d6481587e1",
   "created_at": "2025-05-26T07:15:40.160Z",
-  "updated_at": "2026-04-08T17:59:06.455Z",
+  "updated_at": "2026-04-12T07:14:23.218Z",
   "comment": {
-    "text": "This translation key is used to provide a detailed message that appears when a user has activated their pro banner header trial and needs to buy the full version of their license. The message outlines the benefits of purchasing the full version, including the type of license they have (Developer or Enterprise).",
+    "text": "This is a banner header displayed when a user is on a trial version. It prompts them to purchase the full version and lists benefits. The `{{license}}` variable will be replaced with either \"Developer License\" or \"Enterprise License\".",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:08:28.714Z"
+    "updated_at": "2026-04-11T21:01:11.522Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -85,7 +86,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \":\" but translation ends with \"՝\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-11T21:48:21.061Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null
@@ -103,7 +106,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \":\" but translation ends with \"。\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-11T21:48:23.528Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null
@@ -117,13 +122,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'ບູລິມະນູກຳ' (bulimanukam) is not a standard Lao word for 'version'. It appears to be a phonetic misspelling or a non-existent term. The correct term for 'version' in this context is 'ເວີຊັນ' or 'ລຸ້ນ'.",
-          "suggestion": "ຊື້ເວີຊັນ {{license}} ແບບເຕັມ ເພື່ອຮັບ:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {

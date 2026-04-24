@@ -37,6 +37,7 @@ import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "@docspace/shared/constants";
 import { setCookie } from "@docspace/ui-kit/utils/cookie";
 import { useNavigate } from "react-router";
 import { isMobileDevice, isBetaLanguage } from "@docspace/shared/utils";
+import { getCultureLabel } from "@docspace/shared/constants/cultures";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link } from "@docspace/ui-kit/components/link";
@@ -49,6 +50,7 @@ import useCommon from "../useCommon";
 import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 
 import BetaBadge from "../../../../../components/BetaBadgeWrapper";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const mapTimezonesToArray = (timezones) => {
   return timezones.map((timezone) => {
@@ -56,12 +58,11 @@ const mapTimezonesToArray = (timezones) => {
   });
 };
 
-const mapCulturesToArray = (cultures, i18n) => {
-  const t = i18n.getFixedT(null, "Common");
+const mapCulturesToArray = (cultures) => {
   return cultures.map((culture) => {
     return {
       key: culture,
-      label: t(`Culture_${culture}`),
+      label: getCultureLabel(culture),
       isBeta: isBetaLanguage(culture),
     };
   });
@@ -301,7 +302,7 @@ const LanguageAndTimeZoneComponent = (props) => {
     }
 
     if (cultures.length > 0 && isLoaded && tReady && state.language === "") {
-      const newCultureNames = mapCulturesToArray(cultures, i18n);
+      const newCultureNames = mapCulturesToArray(cultures);
       const selectedLanguage =
         languageFromSessionStorage ||
         findSelectedItemByKey(newCultureNames, portalLanguage) ||
@@ -452,7 +453,7 @@ const LanguageAndTimeZoneComponent = (props) => {
   } = state;
 
   const timezones = mapTimezonesToArray(rawTimezones);
-  const cultureNamesNew = mapCulturesToArray(cultures, i18n);
+  const cultureNamesNew = mapCulturesToArray(cultures);
 
   const isBetaLang = state?.language?.isBeta;
 
@@ -528,7 +529,7 @@ const LanguageAndTimeZoneComponent = (props) => {
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight={400}>
           {t("TimeLanguageSettingsDescription", {
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
           })}
         </Text>
         <Text>

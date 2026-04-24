@@ -3,13 +3,21 @@
   "content": "Wallet refilled",
   "content_en_sha1_hash": "3e6914b46ab17dae7b1ef9f7e4b0941ca7645e71",
   "created_at": "2026-04-10T13:53:43.895Z",
-  "updated_at": "2026-04-10T13:53:43.895Z",
+  "updated_at": "2026-04-13T14:59:06.031Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is the title of a modal dialog box that appears after a user successfully adds funds to their wallet.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:39:17.236Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/wallet/WalletRefilledModal.tsx",
+      "line_number": 100,
+      "context": "visible={visible}\n onClose={onCloseDialog}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n >\n <ModalDialog.Header>{t(\"WalletRefilled\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.modalContent}>\n <div>\n <Text as=\"span\">{t(\"ToppedUpWallet\")}</Text>\n <br />",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

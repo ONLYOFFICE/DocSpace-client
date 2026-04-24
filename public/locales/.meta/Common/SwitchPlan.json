@@ -3,13 +3,21 @@
   "content": "You’re about to switch to the <1>{{planName}} plan</1>.",
   "content_en_sha1_hash": "cac24e2d67b2665d6b9ef0a89c5a9ab07b8ec1a1",
   "created_at": "2026-04-10T13:53:43.543Z",
-  "updated_at": "2026-04-10T13:53:43.543Z",
+  "updated_at": "2026-04-12T16:18:46.493Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a dialog message informing the user they are about to change their subscription plan. `{{planName}}` will be replaced with the name of the new plan.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:41:26.462Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/UpdatePlanButtonContainer.tsx",
+      "line_number": 365,
+      "context": "<ModalDialog.Header>{t(\"PlanUpgrade\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <StyledModalBody>\n <Text>\n <CommonTrans\n i18nKey=\"SwitchPlan\"\n \n values={{ planName: tariffPlanTitle }}\n components={{\n 1: <span style={{ fontWeight: 600 }} />,\n }}",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -26,7 +34,15 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "In English, the word 'plan' is inside the <1></1> styled span: '<1>{{planName}} plan</1>'. In the Azerbaijani translation, 'planına' (the Azerbaijani form of 'plan') is placed outside the closing tag: '<1>{{planName}}</1> planına', so it will not receive the bold styling intended by the markup.",
+          "suggestion": "Siz indi <1>{{planName}} planına</1> keçəcəksiniz.",
+          "checked_at": "2026-04-12T16:15:57.725Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -92,13 +108,29 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "The closing tag </1> in Korean wraps the entire sentence ('{{planName}} 요금제로 전환됩니다.') instead of only the plan name portion as in English ('<1>{{planName}} plan</1>'). This causes more text to receive the bold styling than intended.",
+          "suggestion": "이제 <1>{{planName}} 요금제</1>로 전환됩니다.",
+          "checked_at": "2026-04-12T16:17:13.814Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "In English, both '{{planName}}' and 'plan' are inside the <1></1> tags: '<1>{{planName}} plan</1>'. In the Lao translation, 'ແຜນ' (plan) is placed BEFORE the opening <1> tag, so only '{{planName}}' is wrapped: 'ແຜນ<1>{{planName}}</1>'. This breaks the bold styling applied by the tag.",
+          "suggestion": "ທ່ານກຳລັງຈະປ່ຽນໄປສູ່<1>{{planName}} ແຜນ</1>.",
+          "checked_at": "2026-04-12T16:17:29.003Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -146,7 +178,15 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "In English, the word 'plan' is inside the bold tag: <1>{{planName}} plan</1>. In the Sinhala translation, the closing tag </1> appears immediately after {{planName}}, leaving the Sinhala word for 'plan' (සැලසුම) outside the tag: <1>{{planName}}</1> සැලසුමට.",
+          "suggestion": "ඔබ දැන් <1>{{planName}} සැලසුමට</1> මාරුවෙමින් සිටිති.",
+          "checked_at": "2026-04-12T16:18:04.651Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -170,13 +210,29 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "In the English, both '{{planName}}' and 'plan' are inside the <1>...</1> tag. In the Serbian translation, 'пакет' (plan) is placed outside the closing </1> tag, so only {{planName}} is bold-formatted instead of the full '{{planName}} пакет'.",
+          "suggestion": "Управо прелазите на <1>{{planName}} пакет</1>.",
+          "checked_at": "2026-04-12T16:18:23.640Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "In English, 'plan' is inside the <1></1> tags: '<1>{{planName}} plan</1>'. In Serbian, 'paket' is placed outside the closing tag: '<1>{{planName}}</1> paket', so the bold formatting (fontWeight: 600) does not apply to the word 'paket' as intended.",
+          "suggestion": "Upravo prelazite na <1>{{planName}} paket</1>.",
+          "checked_at": "2026-04-12T16:18:32.868Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

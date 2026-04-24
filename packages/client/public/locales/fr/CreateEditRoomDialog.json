@@ -44,5 +44,6 @@
   "UserName": "Nom de l'utilisateur",
   "ViewerInfo": "Informations sur le lecteur",
   "WatermarkPreview": "Aperçu du filigrane",
-  "WatermarkPreviewHelp": "Cet image avec l'aperçu montre approximativement comment le filigrane s'affichera dans vos fichiers."
+  "WatermarkPreviewHelp": "Cet image avec l'aperçu montre approximativement comment le filigrane s'affichera dans vos fichiers.",
+  "NoDatabaseConnectionsRoomAdmin": "Les connexions à la base de données sont configurées par un administrateur. Une fois qu'une base de données sera configurée, vous pourrez activer l'exportation ici."
 }

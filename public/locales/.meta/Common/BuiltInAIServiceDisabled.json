@@ -3,11 +3,12 @@
   "content": "Built-in AI service, enabled on the <1>Services</1> page",
   "content_en_sha1_hash": "6360bf2a3ac5810fd065a8e703dd6b3d454975c9",
   "created_at": "2026-03-20T09:07:38.718Z",
-  "updated_at": "2026-04-08T15:55:46.866Z",
+  "updated_at": "2026-04-11T20:58:02.999Z",
   "comment": {
-    "text": "This key displays a message indicating the built-in AI service is disabled, appearing as part of a UI element (likely a link or button) on the Services page. Translators should understand this refers to a feature accessible through the application's settings. The message informs the user that the AI service is not active.",
+    "text": "This is a descriptive text indicating that the built-in AI service is currently disabled. It appears as part of a sentence, with `<1>` and `</1>` tags wrapping a clickable link to the \"Services\" page where the AI service can be enabled.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:24:40.021Z"
+    "updated_at": "2026-04-11T20:58:02.999Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -39,25 +40,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Gender disagreement: 'услуга' (service) is feminine in Bulgarian, but the participle 'активиран' is masculine. It should be 'активирана'.",
-          "suggestion": "Вградена AI услуга, активирана на страницата <1>Services</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "wrong_language",
-          "description": "The translation is in Russian ('Встроенная AI služba'), not Czech.",
-          "suggestion": "Vestavná AI služba, povolená na stránce <1>Services</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -75,13 +64,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translator left the word 'Services' in English inside the tag, whereas in a localized UI, the content within the tag should also be translated to match the target language's interface.",
-          "suggestion": "Servicio de IA integrado, habilitado en la página <1>Servicios</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -129,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Ieglabots' means 'Saved' or 'Stored', whereas the English 'Built-in' refers to an integrated/native feature. Additionally, 'ienstitvēts' is a mistranslation of 'enabled' (it means 'instituted' or 'established' in a formal/legal sense, rather than 'activated' in a software context).",
-          "suggestion": "Iebūvēts AI dienests, kas ir aktivizēts <1>Services</1> lapā"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -183,13 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Vstroyený' is a misspelling/incorrect form of 'Vstavaný' or 'Integrovaný'. 'Vstroyený' is not a valid Slovak word.",
-          "suggestion": "Vstavaný AI servis, zapnutý na stránke <1>Services</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -207,13 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text describes a feature ('Built-in AI service...'), whereas the Serbian translation uses the accusative case ('Уграђену AI услугу...'), which implies it is an object of a verb that is missing. This makes the sentence grammatically incomplete and changes the meaning from a descriptive label to a fragment of an action.",
-          "suggestion": "Уграђена AI услуга, укључена на страници <1>Услуге</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -225,13 +190,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text describes a feature ('Built-in AI service, enabled on the Services page'), whereas the context and code indicate this string is used when the service is DISABLED ('Common:BuiltInAIServiceDisabled'). The Turkish translation 'etkinleştirildi' means 'was enabled/activated', which conveys the opposite of the intended 'is disabled' status described in the metadata.",
-          "suggestion": "Yerleşik yapay zeka hizmeti, <1>Hizmetler</1> sayfasından etkinleştirilebilir"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

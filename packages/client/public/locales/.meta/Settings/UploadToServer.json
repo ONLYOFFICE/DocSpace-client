@@ -3,11 +3,12 @@
   "content": "Upload to server",
   "content_en_sha1_hash": "64e8bb3b5f86ea7da45c956345a760d2533c5442",
   "created_at": "2025-05-19T21:30:53.077Z",
-  "updated_at": "2026-04-09T00:06:07.248Z",
+  "updated_at": "2026-04-11T21:21:31.468Z",
   "comment": {
-    "text": "Upload to server is used as a button label on a save cancel buttons component in the data import process. It is displayed when saving file data and appears in a dialog or modal context.",
+    "text": "This is a button label. It appears on a button that, when clicked, initiates the process of uploading a file to the server.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:11.828Z"
+    "updated_at": "2026-04-11T21:21:31.468Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -39,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation 'Качи в сървър' uses the preposition 'в' (in), which implies uploading 'into' a server, whereas 'to' (на/към) is the correct direction for an upload action. More importantly, 'Качи в сървър' sounds like a literal, broken translation. A more natural and correct way to say 'Upload to server' in a UI context is 'Качване към сървъра'.",
-          "suggestion": "Качване към сървъра"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -87,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Վերբեռնել սերվերը' means 'Upload the server' (as if the server itself is being uploaded), whereas the English 'Upload to server' means uploading data/files to the server destination.",
-          "suggestion": "Վերբեռնել սերվերին"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -201,13 +190,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Ukrainian word 'Вивантажити' means 'to download' or 'to extract/unload', which is the opposite of 'Upload'.",
-          "suggestion": "Завантажити на сервер"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

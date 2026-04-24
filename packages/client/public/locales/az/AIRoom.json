@@ -1,7 +1,9 @@
 {
+  "AgentInViewModeWarning": "Siz bu {{aiAgent}} üçün <strong>yalnız baxış</strong> rejimindəsiniz. Digər istifadəçilərin {{aiChat}} fəaliyyətinin nəticələrini görə bilərsiniz.",
   "AIAgentAccessRedirectNote": "5 saniyədən sonra siz {{sectionName}} bölməsinə avtomatik olaraq yönləndiriləcəksiniz.",
   "AIChat": "Süni İntellekt-Çat",
   "AIInstructions": "Süni İntellekt Təlimatları",
+  "AIProviderAndModel": "{{aiProvider}} və model",
   "CreateChat": "Söhbət yarat",
   "CreateChatDescription": "Başlamaq üçün {{aiChat}} tabına keçin.",
   "EmptyKnowledgeDescription": "Buraya yüklənən fayllar indekslənəcək və {{aiChat}} tabında kontekst kimi istifadə ediləcək. AI sualları vermək, məzmun yaratmaq və ya məlumat üzərində əməkdaşlıq etmək üçün fayllar əlavə edin (hər biri 10 MB-a qədər).",
@@ -20,12 +22,10 @@
   "KnowledgeUnavailableDescriptionUser": "Bilik bazası hazırda deaktivləşdirilib. {{aiAgents}} üçün semantik axtarışı və sənəd emalını aktivləşdirmək üçün, gömülü təminatçını konfiqurasiya etmək məqsədilə {{productName}} administratorunuzla əlaqə qurun.",
   "MCP": "Bu otaq üçün MCP alətləri",
   "MCPDescriptionServers": "Administrator tərəfindən qoşulmuş {{mcpServers}} istifadə edərək AI ilə çat təcrübəsini yaxşılaşdırın. {{mcpServers}} məlumat çıxarılması, xülasələr, aqıllı təkliflər və s. ilə kömək edə bilər.",
-  "Model": "{{aiProvider}} və model",
   "ModelDescription": "Bu otağın söhbətlərində istifadə ediləcək {{aiProvider}} və modeli seçin. Bu ayar məcburi və bütün iştirakçılar üçün tətbiq edilir.",
   "NoAccessAIAgentTitle": "Üzgünüz, bu {{aiAgent}}-a daxil olmaq hüququnuz yoxdur",
   "ResponseQualityNode": "<1>Qeyd:</1> Müxbirə görə cavabın keyfiyyəti dəyişə bilər; daha yaxşı nəticələr üçün daha yeni modellər tövsiyə edilir.",
   "ResultStorage": "Nəticə saxlanması",
   "UploadFilesDevice": "Şəxsi cihazınızdan faylları yükləyin",
-  "UploadFilesPortal": "{{sectionNameFirst}} və ya {{sectionNameSecond}} bölmələrindən faylları yükləyin",
-  "AgentInViewModeWarning": "Siz bu {{aiAgent}} üçün <strong>yalnız baxış</strong> rejimindəsiniz. Digər istifadəçilərin {{aiChat}} fəaliyyətinin nəticələrini görə bilərsiniz."
+  "UploadFilesPortal": "{{sectionNameFirst}} və ya {{sectionNameSecond}} bölmələrindən faylları yükləyin"
 }

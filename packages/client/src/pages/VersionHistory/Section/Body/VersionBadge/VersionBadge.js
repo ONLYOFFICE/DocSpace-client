@@ -68,7 +68,7 @@ const VersionBadge = ({
       >
         {isVersion ? (
           <>
-            <span>{t("Version")}</span>
+            <span>{t("VersionShort")}</span>
             <span>{versionGroup}</span>
           </>
         ) : null}

@@ -3,13 +3,32 @@
   "content": "Are you sure you want to continue?",
   "content_en_sha1_hash": "8de6e73ba7b7e7a2c5f18e2bc38d0a44a17be1d3",
   "created_at": "2025-05-19T21:30:49.566Z",
-  "updated_at": "2026-04-10T08:21:04.297Z",
+  "updated_at": "2026-04-12T09:21:20.219Z",
   "comment": {
-    "text": "This translation key is used to display a confirmation message when the user wants to delete or archive rooms. It asks the user to confirm their intention and appears in dialog boxes (e.g., ArchiveDialog and DeleteDialog) where room deletion or archiving decisions are made.",
+    "text": "This is a confirmation message displayed in a modal dialog, asking the user if they wish to proceed with an action. It appears in various contexts, such as before deleting a chat or when confirming an action related to AI tools or billing.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:35:08.534Z"
+    "updated_at": "2026-04-11T20:39:13.168Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-header/sub-components/delete-chat/index.tsx",
+      "line_number": 123,
+      "context": "values={{ chatName: chatTitle }}\n components={{\n 1: <Text key=\"chat-title\" fontWeight={400} as=\"span\" />,\n }}\n />{\" \"}\n {t(\"WantToContinue\")}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n size={ButtonSize.normal}\n label={t(\"DeleteForeverButton\")}",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/index.tsx",
+      "line_number": 216,
+      "context": "values={{ balance: formatAiServiceCurrency() }}\n components={{\n 1: <span style={{ fontWeight: 600 }} />,\n }}\n />,\n t(\"WantToContinue\"),\n ],\n },\n };\n \n const getDialogContent = (actionType: string | null) => {",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
+      "line_number": 213,
+      "context": "body: [\n t(\"AIToolsDescription\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n }),\n t(\"WantToContinue\"),\n ],\n };\n \n const onOpenPricingBilling = () => {\n setIsPricingBillingVisible(true);",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/dialogs/ArchiveDialog/index.js",
       "line_number": 81,
@@ -267,13 +286,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Vietnamese translation 'Bạn có muốn tiếp tục?' means 'Do you want to continue?', missing the 'Are you sure' (confirmation) nuance required by the English source 'Are you sure you want to continue?'.",
-          "suggestion": "Bạn có chắc chắn muốn tiếp tục không?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

@@ -3,11 +3,12 @@
   "content": "Top 5 {{aiAgents}} by storage usage:",
   "content_en_sha1_hash": "f894125e6f7ba1b77b3fd973e99246a656bfa020",
   "created_at": "2025-12-19T13:03:38.088Z",
-  "updated_at": "2026-04-10T08:58:38.060Z",
+  "updated_at": "2026-04-11T21:48:41.506Z",
   "comment": {
-    "text": "Displays a header indicating the top 5 AI agents sorted by storage usage. This text appears within a statistics section in the Portal Settings, specifically within the storage management area. Translators should ensure the pluralization and formatting align with the target language.",
+    "text": "This is a text label displaying the top 5 AI agents based on their storage usage. The `{{aiAgents}}` variable will be replaced with the localized term for \"AI Agents\".",
     "is_auto": true,
-    "updated_at": "2025-12-22T10:09:13.106Z"
+    "updated_at": "2026-04-11T21:21:46.097Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -85,7 +86,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \":\" but translation ends with \"։\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-11T21:48:41.473Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null
@@ -171,13 +174,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'storitve' means 'services', whereas the English text refers to 'storage usage'. The translation incorrectly translates 'storage' as 'service'.",
-          "suggestion": "Top 5 {{aiAgents}} glede uporabe prostora:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

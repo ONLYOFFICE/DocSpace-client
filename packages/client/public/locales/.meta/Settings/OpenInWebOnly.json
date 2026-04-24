@@ -3,11 +3,12 @@
   "content": "Open in web only",
   "content_en_sha1_hash": "caf9fca0de7a5b1f6294fbe7075e3be24b469aa3",
   "created_at": "2025-05-19T21:30:52.127Z",
-  "updated_at": "2026-04-09T02:16:34.532Z",
+  "updated_at": "2026-04-11T21:23:09.104Z",
   "comment": {
-    "text": "This translation key is used to display a label on a settings page that determines whether an app link opens in the web browser or within the app. It appears as a radio button option in the Portal Settings configuration dialog.",
+    "text": "This is a radio button label in the deep link configuration settings. It indicates that a document link will always open in the web browser, not in a desktop application.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:50.497Z"
+    "updated_at": "2026-04-11T21:23:09.104Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -159,13 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation contains a trailing digit '6' which is not present in the source text and likely a typo.",
-          "suggestion": "Otvárať len vo webovom prehliadači"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -183,13 +178,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Otvori samo u pregledaču' means 'Open only in browser', which is a different nuance than 'Open in web only'. While similar, 'web' in this technical context refers to the web version/platform, and the current translation shifts the focus to the tool (browser) rather than the environment (web).",
-          "suggestion": "Otvori samo putem veba"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

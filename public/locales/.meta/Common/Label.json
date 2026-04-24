@@ -3,11 +3,12 @@
   "content": "Name",
   "content_en_sha1_hash": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
   "created_at": "2025-05-19T21:30:46.029Z",
-  "updated_at": "2026-04-08T06:21:17.406Z",
+  "updated_at": "2026-04-23T17:24:01.683Z",
   "comment": {
-    "text": "The \"Label\" translation key is used to display a descriptive title for input fields, such as group names or room tags. It appears in a dialog box, specifically within the CreateEditGroupDialog and CreateEditRoomDialog components, where it provides context for users to enter a name. Translators should replace the English content with a translated version of \"Name\" while maintaining this descriptive purpose.",
+    "text": "This is a label for an input field. It prompts the user to enter a name for a group or a room.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:46.446Z"
+    "updated_at": "2026-04-11T20:50:26.523Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -24,8 +25,8 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/SetRoomParams.js",
-      "line_number": 477,
-      "context": "const tagsTitle = isTemplateSelected || isTemplate ? t(\"Files:RoomTags\") : \"\";\n \n const inputTitle =\n isTemplateSelected || isTemplate\n ? `${t(\"Files:TemplateName\")}:`\n : `${t(\"Common:Label\")}:`;\n \n return (\n <StyledSetRoomParams disableImageRescaling={disableImageRescaling}>\n {isEdit || disabledChangeRoomType || isTemplateSelected || isTemplate ? (\n <RoomType",
+      "line_number": 476,
+      "context": "const tagsTitle = isTemplateSelected || isTemplate ? t(\"Files:RoomTagsLabel\") : \"\";\n \n const inputTitle =\n isTemplateSelected || isTemplate\n ? `${t(\"Files:TemplateName\")}:`\n : `${t(\"Common:Label\")}:`;\n \n return (\n <StyledSetRoomParams disableImageRescaling={disableImageRescaling}>\n {isEdit || disabledChangeRoomType || isTemplateSelected || isTemplate ? (\n <RoomType",
       "module": "/packages/client"
     },
     {
@@ -36,55 +37,55 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 277,
+      "line_number": 269,
       "context": ": {};\n \n const columns = [\n {\n key: \"Name\",\n title: t(\"Common:Label\"),\n resizable: true,\n enable: nameColumnIsEnabled,\n default: true,\n sortBy: SortByFieldName.Name,\n minWidth: 210,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 277,
+      "line_number": 269,
       "context": ": {};\n \n const columns = [\n {\n key: \"Name\",\n title: t(\"Common:Label\"),\n resizable: true,\n enable: nameColumnIsEnabled,\n default: true,\n sortBy: SortByFieldName.Name,\n minWidth: 210,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 277,
+      "line_number": 269,
       "context": ": {};\n \n const columns = [\n {\n key: \"Name\",\n title: t(\"Common:Label\"),\n resizable: true,\n enable: nameColumnIsEnabled,\n default: true,\n sortBy: SortByFieldName.Name,\n minWidth: 210,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 277,
+      "line_number": 269,
       "context": ": {};\n \n const columns = [\n {\n key: \"Name\",\n title: t(\"Common:Label\"),\n resizable: true,\n enable: nameColumnIsEnabled,\n default: true,\n sortBy: SortByFieldName.Name,\n minWidth: 210,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 277,
+      "line_number": 269,
       "context": ": {};\n \n const columns = [\n {\n key: \"Name\",\n title: t(\"Common:Label\"),\n resizable: true,\n enable: nameColumnIsEnabled,\n default: true,\n sortBy: SortByFieldName.Name,\n minWidth: 210,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 277,
+      "line_number": 269,
       "context": ": {};\n \n const columns = [\n {\n key: \"Name\",\n title: t(\"Common:Label\"),\n resizable: true,\n enable: nameColumnIsEnabled,\n default: true,\n sortBy: SortByFieldName.Name,\n minWidth: 210,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 277,
+      "line_number": 269,
       "context": ": {};\n \n const columns = [\n {\n key: \"Name\",\n title: t(\"Common:Label\"),\n resizable: true,\n enable: nameColumnIsEnabled,\n default: true,\n sortBy: SortByFieldName.Name,\n minWidth: 210,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 277,
+      "line_number": 269,
       "context": ": {};\n \n const columns = [\n {\n key: \"Name\",\n title: t(\"Common:Label\"),\n resizable: true,\n enable: nameColumnIsEnabled,\n default: true,\n sortBy: SortByFieldName.Name,\n minWidth: 210,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 277,
+      "line_number": 269,
       "context": ": {};\n \n const columns = [\n {\n key: \"Name\",\n title: t(\"Common:Label\"),\n resizable: true,\n enable: nameColumnIsEnabled,\n default: true,\n sortBy: SortByFieldName.Name,\n minWidth: 210,",
       "module": "/packages/client"
     },
@@ -96,7 +97,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
-      "line_number": 320,
+      "line_number": 473,
       "context": "isDisabled={variant === \"update\" || isRequestRunning}\n dataTestId=\"provider-type-combobox\"\n />\n </FieldContainer>\n <FieldContainer\n labelText={t(\"Common:Label\")}\n labelVisible\n isVertical\n removeMargin\n isRequired\n >",
       "module": "/packages/client"
     },
@@ -114,7 +115,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 159,
+      "line_number": 160,
       "context": "const [columnDisplay, setColumnDisplay] = useState(\n columnDisplayOptions[0].value,\n );\n const [selectedColumns, setSelectedColumns] = useState([\n { key: \"Index\", label: t(\"Files:Index\") },\n { key: \"Name\", label: t(\"Common:Label\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Tags\", label: t(\"Common:Tags\") },\n ]);",
       "module": "/packages/client"
     },
@@ -129,6 +130,18 @@
       "line_number": 94,
       "context": ": {};\n \n const defaultColumns = [\n {\n key: \"Name\",\n title: t(\"Common:Label\"),\n resizable: true,\n enable: true,\n default: true,\n active: true,\n minWidth: 210,",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/useFilesFilter.tsx",
+      "line_number": 109,
+      "context": "const getSortData = React.useCallback(() => {\n const name = {\n id: \"sort-by_name\",\n key: SortByFieldName.Name,\n label: t(\"Common:Label\"),\n default: true,\n };\n const modifiedDate = {\n id: \"sort-by_modified\",\n key: SortByFieldName.ModifiedDate,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/table-view/index.tsx",
+      "line_number": 110,
+      "context": "const columns: TTableColumn[] = React.useMemo(\n () => [\n {\n key: \"Name\",\n title: t(\"Common:Label\"),\n sortBy: SortByFieldName.Name,\n enable: true,\n resizable: true,\n default: true,\n minWidth: 210,",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -255,13 +268,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English source is 'Name', but the Romanian translation 'Etichetă' means 'Label'. While the metadata mentions the key is 'Label', the task is to verify the translation of the provided English text 'Name'.",
-          "suggestion": "Nume"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -291,25 +298,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian word 'Ознака' means 'Mark', 'Label', or 'Sign', whereas the English source 'Name' refers to the identity of the object (e.g., Group Name). In the context of input fields for names, 'Име' is the correct translation.",
-          "suggestion": "Име"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Oznaka' means 'Label', 'Mark', or 'Tag', whereas the English source 'Name' refers to the identity of the object (Group or Room). In the context of a 'Name' input field, 'Ime' or 'Naziv' is the correct translation.",
-          "suggestion": "Naziv"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

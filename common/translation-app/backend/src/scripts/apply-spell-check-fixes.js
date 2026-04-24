@@ -278,6 +278,50 @@ async function main() {
           continue;
         }
 
+        // For wrong_language: skip keys that should stay in their native/English form
+        const hasWrongLang = matchingIssues.some(
+          (i) => i.type === "wrong_language",
+        );
+
+        if (hasWrongLang) {
+          // Skip Culture_* keys — language display names must stay in native language
+          if (key.startsWith("Culture_")) {
+            stats.fixesSkippedValidationFailed++;
+            continue;
+          }
+
+          // Lazy-load English translations to compare
+          if (enTranslations === null) {
+            try {
+              enTranslations = await fs.readJson(enTranslationFile);
+            } catch {
+              enTranslations = {};
+            }
+          }
+
+          // Read current translation to check if it's identical to English
+          const translationFile = path.join(
+            projectPath,
+            lang,
+            `${namespace}.json`,
+          );
+          let currentTranslations;
+          try {
+            currentTranslations = await fs.readJson(translationFile);
+          } catch {
+            currentTranslations = {};
+          }
+
+          const englishVal = enTranslations[key];
+          const currentVal = currentTranslations[key];
+
+          // Skip if current value equals English — intentionally untranslated
+          if (englishVal && currentVal && englishVal === currentVal) {
+            stats.fixesSkippedValidationFailed++;
+            continue;
+          }
+        }
+
         // Determine the suggestion to apply
         let suggestion = matchingIssues[0].suggestion;
 

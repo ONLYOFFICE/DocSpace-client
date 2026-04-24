@@ -3,18 +3,25 @@
   "content": "Set up automatic submission of completed forms from this room to an external database. A table will be created in the database for each standard form immediately after a copy is filled out or on a schedule.",
   "content_en_sha1_hash": "19096e3023516e6bfaeeb31b97104940c5730a73",
   "created_at": "2026-03-20T09:07:28.257Z",
-  "updated_at": "2026-04-10T08:21:04.307Z",
+  "updated_at": "2026-04-23T17:24:01.745Z",
   "comment": {
-    "text": "Automatically export completed forms from this room to an external database. A new table will be created in the database for each form after it's filled out or on a schedule. This description appears in a dialog when configuring room settings.",
+    "text": "Description for a toggle switch. It explains that enabling this option will automatically send completed forms from the current room to an external database, either immediately or on a schedule.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:20:27.271Z"
+    "updated_at": "2026-04-11T20:53:00.087Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/FormRoomBlock/FormRoomBlock.tsx",
-      "line_number": 82,
-      "context": "/>\n \n <ToggleParam\n id=\"send-form-to-external-db\"\n title={t(\"Common:ExportResultsToDatabase\")}\n description={t(\"Common:ExportResultsToDatabaseDescription\")}\n isChecked={roomParams.sendFormToExternalDB || false}\n onCheckedChange={onSendFormToExternalDBChange}\n isDisabled={isDisabled || !hasDatabaseConnection}\n />",
+      "line_number": 83,
+      "context": "isDisabled={isDisabled}\n />\n <ToggleParam\n id=\"send-form-to-external-db\"\n title={t(\"Common:ExportResultsToDatabase\")}\n description={t(\"Common:ExportResultsToDatabaseDescription\")}\n isChecked={roomParams.sendFormToExternalDB || false}\n onCheckedChange={onSendFormToExternalDBChange}\n isDisabled={isDisabled || !hasDatabaseConnection}\n />\n <IntegrationBar",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/ConnectDatabaseForm.tsx",
+      "line_number": 184,
+      "context": "isDisabled={tourStore.showMockItems}\n onChange={onToggleSendToDb}\n />\n </div>\n <Text fontSize=\"12px\" fontWeight={400}>\n {t(\"Common:ExportResultsToDatabaseDescription\")}\n </Text>\n </div>\n \n {sendToDb ? (\n <div className={styles.formBlock}>",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -111,13 +118,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'no šajā telpā' is grammatically incorrect in Latvian; it should be 'no šīs telpas' to match the meaning 'from this room'.",
-          "suggestion": "Iestatiet automātisko iesniegšanu pabeigtajām formām no šīs telpas uz externālu datubāzi. Datubāzē tiks izveidota tabula katrai standarta formai tūlīt pēc kopijas aizpildīšanas vai pēc grafika."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -213,13 +214,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of the second sentence is logically flawed. It states 'the table will be created immediately after a copy is filled out or on a schedule', implying the table creation itself is scheduled. The English meaning is that the *submission/export* happens on a schedule, and the table is created for each form. More importantly, '该表将在副本填写后立即或按计划创建' (the table will be created immediately or on a schedule) is a mistranslation of the process flow.",
-          "suggestion": "设置从此房间完成的表单自动提交到外部数据库。在填写完副本后或按计划执行时，数据库将为每个标准表单创建一个表。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -3,13 +3,21 @@
   "content": "{{currency}} per {{amount}}/month <1>(min {{minValue}}{{storageUnit}})</1>",
   "content_en_sha1_hash": "7d6e997bf41f6d9e4fc04c7db3d80f1f97e482d2",
   "created_at": "2026-04-10T13:53:43.015Z",
-  "updated_at": "2026-04-10T13:53:43.015Z",
+  "updated_at": "2026-04-23T17:24:02.182Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a text label indicating the price per unit of additional storage, appearing when a minimum storage amount is required. It includes variables for currency, amount, minimum value, and storage unit.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:46:26.468Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
+      "line_number": 440,
+      "context": "/>\n </FieldContainer>\n {!hasMinError ? (\n <Text className={styles.perStorageInfo} fontSize=\"12px\">\n <CommonTrans\n i18nKey=\"PerStorageWitnMinValue\"\n values={{\n currency: formatWalletCurrency(storagePriceIncrement, 2),\n amount: `1 ${t(\"Gigabyte\")}`,\n minValue: MIN_VALUE,\n storageUnit: t(\"Gigabyte\"),",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

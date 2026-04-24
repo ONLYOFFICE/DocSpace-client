@@ -2,6 +2,7 @@
   "ChangeContactType": "Промени тип контакта",
   "ChangeGuestsTypeMessage": "Гост <strong>{{userName}}</strong> ће бити премештен у одељак {{membersSection}} и добиће тип Корисника. Корисници имају сопствени одељак за {{documentsSection}}, могу креирати и уређивати фајлове, али не могу креирати собе.",
   "ChangeGuestsTypeMessageMulti": "Изабрани гости ће бити премештени у одељак {{membersSection}} и добиће тип Корисника. Корисници имају сопствени одељак за {{documentsSection}}, могу креирати и уређивати фајлове, али не могу креирати собе.",
+  "ChangeGuestsTypeToAdmin": "Гост <strong>{{userName}}</strong> ће бити пребачен у одељак {{membersSection}} и добиће тип <strong>'{{ secondType }}'</strong>. Администратори {{productName}} могу приступити подешавањима {{productName}}, управљати собама и архивирати их, позивати нове кориснике и додељивати улоге испод свог нивоа. Администратори {{productName}} имају приступ одељку {{documentsSection}}.",
   "ChangeGuestsTypeToAdminMulti": "Изабрани гости биће премештени у {{membersSection}} секцију и додељени <strong>'{{ secondType }}'</strong> тип. {{productName}} администратори могу приступити {{productName}} подешавањима, управљати и архивирати собе, позивати нове кориснике и додељивати улоге испод њиховог нивоа. {{productName}} администратори имају приступ {{documentsSection}} секцији.",
   "ChangeGuestsTypeToManager": "Гост <strong>{{userName}}</strong> биће преместен у {{membersSection}} секцију и додељен <strong>'{{ secondType }}'</strong> тип. Администратори собе могу креирати и управљати додељеним собама, позивати нове кориснике и додељивати улоге администратора собе и ниже. Администратори собе имају приступ {{documentsSection}} секцији.",
   "ChangeGuestsTypeToManagerMulti": "Изабрани гости биће премештени у {{membersSection}} секцију и додељени <strong>'{{ secondType }}'</strong> тип. Администратори собе могу креирати и управљати додељеним собама, позивати нове кориснике и додељивати улоге администратора собе и ниже. Администратори собе имају приступ {{documentsSection}} секцији.",
@@ -12,6 +13,5 @@
   "DataReassignmentWithFilesDeletion": "Сви дељени фајлови које је креирао овај контакт биће <1> аутоматски додељени вама за 30 дана </1>. Да бисте доделили собе/дељене фајлове другој особи, кликните на одговарајући линк испод.",
   "PersonalDataDeletion": "Сви фајлови и фолдери у одељку {{sectionName}} овог контакта биће <1> трајно избрисани за 30 дана </1>.",
   "SuccessChangeGuestType": "Тип госта је успешно промењен.",
-  "SuccessChangeUserType": "Кориснички тип је успешно промењен",
-  "ChangeGuestsTypeToAdmin": "Гост <strong>{{userName}}</strong> ће бити пребачен у одељак {{membersSection}} и добиће тип <strong>'{{ secondType }}'</strong>. Администратори {{productName}} могу приступити подешавањима {{productName}}, управљати собама и архивирати их, позивати нове кориснике и додељивати улоге испод свог нивоа. Администратори {{productName}} имају приступ одељку {{documentsSection}}."
+  "SuccessChangeUserType": "Кориснички тип је успешно промењен"
 }

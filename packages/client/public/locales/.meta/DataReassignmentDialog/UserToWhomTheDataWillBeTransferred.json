@@ -3,11 +3,12 @@
   "content": "User to whom the data will be transferred",
   "content_en_sha1_hash": "fe4396241789d8911d893243f547d3759bb39988",
   "created_at": "2025-05-19T21:30:56.762Z",
-  "updated_at": "2026-04-07T19:35:05.062Z",
+  "updated_at": "2026-04-11T21:05:02.045Z",
   "comment": {
-    "text": "\"This translation key is used to display a label explaining who the data will be transferred to. It appears in a dialog component, specifically in the 'New Owner' section, and is intended to inform users about the data transfer process.\"",
+    "text": "This is a descriptive label appearing in a data reassignment dialog. It clarifies that the user selected in the dialog will be the new owner of the data being transferred.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:13.740Z"
+    "updated_at": "2026-04-11T21:05:02.045Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

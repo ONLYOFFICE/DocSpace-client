@@ -3,16 +3,17 @@
   "content": "OneDrive directory",
   "content_en_sha1_hash": "c8e40ba514d8b937d8933bdd306cb4c0cf6ceba0",
   "created_at": "2025-05-19T21:30:49.981Z",
-  "updated_at": "2026-04-08T21:11:58.460Z",
+  "updated_at": "2026-04-11T21:27:28.908Z",
   "comment": {
-    "text": "This translation key is used to display the title of a cloud storage directory in various UI contexts, such as file managers or dialogs. It should be translated to match the expected name of the corresponding cloud storage service (e.g., \"OneDrive\" for OneDrive). This string appears in code and may be displayed on-screen in user interfaces managing files from these services.",
+    "text": "This is a folder title that appears in the file browser to identify a connected OneDrive cloud storage.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:32.537Z"
+    "updated_at": "2026-04-11T21:27:28.908Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 114,
+      "line_number": 115,
       "context": "case \"GoogleDrive\":\n return t(\"Translations:FolderTitleGoogle\");\n \n case \"OneDrive\":\n case \"SkyDrive\":\n return t(\"Translations:FolderTitleSkyDrive\");\n \n case \"SharePoint\":\n return t(\"Translations:FolderTitleSharePoint\");\n case \"WebDav\":\n return t(\"Translations:FolderTitleWebDav\");",
       "module": "/packages/client"
     }
@@ -81,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'գրացուցակ' (list/directory) in Armenian refers to a list of items (like a contact list or index), whereas in the context of cloud storage and file management, 'directory' refers to a folder or a storage location. The correct term should be 'թղթապանակ' (folder) or 'դիրեկտորիա' (directory).",
-          "suggestion": "OneDrive թղթապանակ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -183,13 +178,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation is in the instrumental case ('direktorijum'), whereas the English source is a noun phrase in the nominative case. In a UI title context, it should be 'OneDrive direktorijum'.",
-          "suggestion": "OneDrive direktorijum"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

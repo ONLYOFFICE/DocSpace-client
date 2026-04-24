@@ -3,16 +3,23 @@
   "content": "Enter name",
   "content_en_sha1_hash": "5df85959e93e078f85961a413efbd7ba4ef678d2",
   "created_at": "2025-05-19T21:30:44.990Z",
-  "updated_at": "2026-04-08T10:25:10.495Z",
+  "updated_at": "2026-04-23T17:24:01.734Z",
   "comment": {
-    "text": "\"Enter name\" is used as a placeholder text in various input fields within the application, prompting users to provide a name. It appears in dialogue boxes, room setting pages, and other forms where user-inputted names are required.",
+    "text": "This is a placeholder text for an input field, prompting the user to type a name for a new room, agent, or group.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:24.775Z"
+    "updated_at": "2026-04-11T20:53:29.434Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
+      "file_path": "/libs/ui-kit/selectors/utils/hooks/useRoomsHelper.tsx",
+      "line_number": 102,
+      "context": "}, [isInit]);\n \n const createDropDownItems = React.useMemo(() => {\n return RoomsTypeValues.map((value) => {\n const onClick = () => {\n addInputItem(\"\", \"\", value as RoomTypeEnum, t(\"EnterName\"));\n };\n \n return (\n <RoomType\n key={value}",
+      "module": "/libs/ui-kit"
+    },
+    {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/SetAgentParams.tsx",
-      "line_number": 495,
+      "line_number": 493,
       "context": "<div className=\"logo-name-container\">\n {element}\n <InputParam\n id=\"shared_agent-name\"\n title={inputTitle}\n placeholder={t(\"Common:EnterName\")}\n value={agentParams.title}\n onChange={onChangeName}\n isDisabled={isDisabled}\n isValidTitle={isValidTitle}\n isWrongTitle={isWrongTitle}",
       "module": "/packages/client"
     },
@@ -24,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/SetRoomParams.js",
-      "line_number": 514,
+      "line_number": 513,
       "context": "<div className=\"logo-name-container\">\n {element}\n <InputParam\n id=\"shared_room-name\"\n title={inputTitle}\n placeholder={t(\"Common:EnterName\")}\n value={roomParams.title}\n onChange={onChangeName}\n isDisabled={isDisabled}\n isValidTitle={isValidTitle}\n isWrongTitle={isWrongTitle}",
       "module": "/packages/client"
     },
@@ -42,7 +49,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 313,
+      "line_number": 314,
       "context": "onChange={onChangePortalName}\n isDisabled={\n (!isSettingPaid && !standalone) || isLoadingPortalNameSave\n }\n hasError={hasError}\n placeholder={`${t(\"Common:EnterName\")}`}\n />\n <div className=\"errorText\">{errorValue}</div>\n </FieldContainer>\n </div>\n );",
       "module": "/packages/client"
     },
@@ -117,13 +124,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English 'name' is generic (can be a person's name, a room name, or a group name), but the French 'prénom' specifically means 'first name'. This is a semantic error in the context of room and group names.",
-          "suggestion": "Saisir un nom"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -153,13 +154,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ເຂົ້າ ຊື່' literally means 'Enter name' in a way that sounds like 'Entering a name' or 'To enter a name' (verb phrase), but in the context of a UI placeholder, it is grammatically awkward and lacks the imperative sense of 'Please enter a name' or 'Type a name'. More importantly, 'ເຂົ້າ' (Khao) can mean 'to enter' (a room/place) or 'rice', making it ambiguous. A more accurate UI placeholder for 'Enter [something]' in Lao is 'ປ້ອນຊື່'.",
-          "suggestion": "ປ້ອນຊື່"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {

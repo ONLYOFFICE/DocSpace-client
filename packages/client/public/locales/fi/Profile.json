@@ -11,9 +11,9 @@
   "EmailNotVerified": "Sähköpostia ei ole vahvistettu",
   "ErrorAccountAlreadyUse": "Linkitetty tili on jo toisen käyttäjän käytössä",
   "LogoutActiveConnection": "Kirjaudu ulos aktiivisesta yhteydestä",
-  "LogoutAllActiveSessionsDescription": "Kaikki aktiiviset yhteydet paitsi tämä yhteys kirjataan ulos, koska se on tällä hetkellä käytössä oleva.",
+  "LogoutAllActiveSessionsDescription": "Kaikki muut aktiiviset yhteydet paitsi tämä yhteys kirjataan ulos, koska tämä yhteys on parhaillaan käytössä.",
   "LogoutBtn": "Kirjaudu ulos",
-  "LogoutDescription": "Huom. Kaikki aktiiviset yhteydet paitsi tämä yhteys kirjataan ulos, koska se on tällä hetkellä käytössä oleva.",
+  "LogoutDescription": "Huom. Kaikki muut aktiiviset yhteydet paitsi tämä yhteys katkaistaan, koska tätä yhteyttä käytetään parhaillaan.",
   "LogoutFrom": "Kirjaudu ulos {{platform}} {{browser}}?",
   "MyProfile": "Profiilini",
   "NotificationsChannels": "Ilmoituskanavat",
@@ -26,6 +26,6 @@
   "TelegramAccountDescription": "Yhdistääksesi TelegramBot-tilisi, seuraa salattua linkkiä ja klikkaa \"Yhdistä Telegram\" -painiketta.",
   "TelegramAccountDisconnect": "Katkaise Telegram",
   "TelegramAccountDisconnectDescription": "Sinun @{{username}}-tilisi on yhdistetty Telegram-ilmoituksia varten. Voit irrottaa tilin. Tässä tapauksessa et saa ilmoituksia.",
-  "TerminateAllSessions": "Päätä kaikki paitsi nykyinen istunto",
+  "TerminateAllSessions": "Lopeta kaikki istunnot paitsi nykyinen",
   "TwoFactorDescription": "Järjestelmänvalvoja otti käyttöön kaksivaiheisen todennuksen koodia luovan sovelluksen kautta kaikille käyttäjille."
 }

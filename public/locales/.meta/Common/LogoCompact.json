@@ -3,16 +3,17 @@
   "content": "Logo for the compact left menu",
   "content_en_sha1_hash": "0c84bff9bcfebf43a2ccdc19f15c0f81129001a7",
   "created_at": "2025-08-04T07:29:14.844Z",
-  "updated_at": "2026-04-08T05:14:59.901Z",
+  "updated_at": "2026-04-11T20:49:14.318Z",
   "comment": {
-    "text": "Text displayed next to a compact logo in the left menu, indicating its dimensions. It appears within the WhiteLabel settings section to inform users about the size of the compact logo being used. Translators should maintain the \"(width x height)\" format.",
+    "text": "This is a label for a logo preview. It indicates the logo used when the left-hand navigation menu is in its compact, collapsed state.",
     "is_auto": true,
-    "updated_at": "2025-08-04T08:11:07.841Z"
+    "updated_at": "2026-04-11T20:49:14.318Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 251,
+      "line_number": 252,
       "context": "</div>\n </div>\n \n <div className={styles.logoWrapper}>\n <Text fontSize=\"15px\" fontWeight=\"600\">\n {t(\"LogoCompact\")} ({logoUrls[5].size.width}x\n {logoUrls[5].size.height})\n </Text>\n <div className={styles.logosWrapper}>\n <Logo\n name={logoUrls[5].name}",
       "module": "/packages/shared"
     }
@@ -141,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation omits the word 'Logo', which is the subject of the sentence. The current Romanian text translates to 'The compact menu from the left side' instead of 'Logo for the compact left menu'.",
-          "suggestion": "Logo pentru meniul compact din partea stângă"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -159,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'වට්ටෝරුව' (wattōruva) means 'clock' or 'recipe' in Sinhala, which is completely incorrect for the context of a UI 'menu'.",
-          "suggestion": "සංයුක්ත වම් මෙනුව සඳහා ලාංඡනය"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

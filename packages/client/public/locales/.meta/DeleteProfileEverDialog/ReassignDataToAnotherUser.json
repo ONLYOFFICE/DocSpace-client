@@ -3,22 +3,23 @@
   "content": "Reassign data to another user",
   "content_en_sha1_hash": "2bf522106a72613d54369c00781f888c09915907",
   "created_at": "2025-05-19T21:30:56.676Z",
-  "updated_at": "2026-04-07T19:35:05.066Z",
+  "updated_at": "2026-04-11T21:05:57.736Z",
   "comment": {
-    "text": "Reassign data to another user is a button label used in change user type dialogs. The translated version of this key will be displayed as the text on the \"Reassign Data\" button, which allows users to transfer their data to another account or user.",
+    "text": "This is a link label within a dialog. It allows an administrator to reassign a user's data to another user before deleting the original user's profile.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:26.445Z"
+    "updated_at": "2026-04-11T21:05:57.736Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserTypeDialog/index.tsx",
-      "line_number": 180,
+      "line_number": 181,
       "context": "fontSize=\"13px\"\n fontWeight={600}\n isHovered\n onClick={() => onClickReassignData()}\n >\n {t(\"DeleteProfileEverDialog:ReassignDataToAnotherUser\")}\n </Link>\n ) : null}\n </>\n );\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 176,
+      "line_number": 177,
       "context": "fontWeight={600}\n isHovered\n onClick={onClickReassignData}\n dataTestId=\"dialog_reassign_data_link\"\n >\n {t(\"DeleteProfileEverDialog:ReassignDataToAnotherUser\")}\n </Link>\n ) : null}\n </>\n );\n };",
       "module": "/packages/client"
     }

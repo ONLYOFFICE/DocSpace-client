@@ -124,7 +124,7 @@ const FormFillingTipsDialog = (props: FormFillingTipsDialogProps) => {
             fontSize="12px"
             lineHeight="16px"
           >
-            {t("WelcomeDescription")}
+            {t("WelcomeTipsDescription")}
           </Text>
           <div className="welcome-tips-image-container">
             {!isLoaded ? (

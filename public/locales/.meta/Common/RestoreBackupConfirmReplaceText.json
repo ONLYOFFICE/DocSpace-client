@@ -3,17 +3,18 @@
   "content": "This process will completely replace all current data, including the owner, users, and settings.",
   "content_en_sha1_hash": "c6263da24285c043bb8eb202193dd683bb5453ef",
   "created_at": "2026-03-20T09:07:35.044Z",
-  "updated_at": "2026-04-08T01:18:24.831Z",
+  "updated_at": "2026-04-13T09:23:15.846Z",
   "comment": {
-    "text": "This text appears within a restore backup confirmation dialog. It explains that restoring a backup will overwrite all existing data, including user accounts, settings, and the product owner. Translators should ensure the tone conveys the seriousness of this action.",
+    "text": "This is a line of text in a confirmation dialog that appears when a user initiates a backup restoration. It warns the user that restoring a backup will overwrite existing data.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:12:27.280Z"
+    "updated_at": "2026-04-11T20:44:56.163Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/restore-confirm-modal/index.tsx",
-      "line_number": 87,
-      "context": "{t(\"Common:RestoreBackupConfirmBoldText\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Text as=\"p\" className={styles.restoreBackupConfirmText}>\n {t(\"Common:RestoreBackupConfirmReplaceText\")}\n </Text>\n <Text as=\"p\" className={styles.restoreBackupConfirmText}>\n {t(\"Common:RestoreBackupConfirmAccessText\")}\n </Text>",
+      "line_number": 88,
+      "context": "{t(\"Common:RestoreBackupConfirmBoldText\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <Text as=\"p\" className={styles.restoreBackupConfirmText}>\n {t(\"Common:RestoreBackupConfirmReplaceText\")}\n </Text>\n <Text as=\"p\" className={styles.restoreBackupConfirmText}>\n {t(\"Common:RestoreBackupConfirmAccessText\")}\n </Text>",
       "module": "/packages/shared"
     }
   ],
@@ -81,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical case error in Armenian: 'բոլոր ընթացիկ տվյալները' (accusative) is used, but the following list 'սեփականատերը, օգտատերերը և կարգավորումները' is in the nominative case. To maintain grammatical agreement with 'including', the list should be in the same case as the object being replaced, or the structure should be adjusted to ensure the 'including' part refers correctly to the data. More importantly, 'սեփականատերը' (the owner) is singular, while the context implies the owner entity/data.",
-          "suggestion": "Այս գործընթացը ամբողջությամբ կփոխարինի բոլոր ընթացիկ տվյալները՝ ներառյալ սեփականատիրոջը, օգտատերերը և կարգավորումները։"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -183,13 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "wrong_language",
-          "description": "The word 'korisnike' is written in Latin script instead of Cyrillic, which violates the requirement for Serbian (Cyrillic).",
-          "suggestion": "Овај процес ће у потпуности заменити све тренутне податке, укључујући власника, кориснике и подешавања."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

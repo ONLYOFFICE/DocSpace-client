@@ -38,6 +38,7 @@ import { suspendPortal } from "@docspace/shared/api/portal";
 import { TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import styles from "../confirm.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type DeactivatePortalProps = {
   siteUrl?: string;
@@ -97,7 +98,7 @@ const DeactivatePortalForm = ({
     <>
       <Text className="subtitle">
         {t("PortalDeactivateTitle", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
         })}
       </Text>
       <div className={styles.buttonsWrapper}>

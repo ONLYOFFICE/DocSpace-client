@@ -1,18 +1,17 @@
 {
-  "AccessingProblem": "Ja esat esošs lietotājs un jums ir problēmas piekļūt šai telpai, lūdzu, sazinieties ar administratoru.",
   "CannotCreateNewRoom": "Telpu nevar izveidot",
   "CannotCreatePaidUsers": "Maksas lietotājus nevar pievienot",
   "CannotRestoreRoom": "Telpu nevar atjaunot",
   "ChooseNewPlan": "Vai vēlaties izvēlēties jaunu cenu plānu?",
+  "GracePeriodActive": "Grācijai periods ir aktīvs <1>no {{fromDate}} līdz {{byDate}}</1> (palicušie dienas: {{delayDaysCount}}).",
+  "LicenseExpiredRestriction": "Nav iespējams pievienot jaunos lietotājus un izveidot jaunas istabas. Licence ir expirējušusi.",
+  "LicenseGracePeriodInfo": "Šīs laikā administratoriem nav iespējams izveidot jaunas telpas vai pievienot jaunu lietotāju. Pēc grāciperioda beigām {{productName}} būs nepieciešams, līdz tiklīdz tiks aktivizēta jauna licencē.",
   "NewRoomWillExceedLimit": "Šīs telpas izveide nav iespējama, jo ir sasniegts jūsu pašreizējā plānā iekļauto telpu skaita ierobežojums.",
   "NewUsersWillExceedMembersLimit": "Nav iespējams pievienot jaunus maksas lietotājus, jo ir sasniegts jūsu pašreizējā plānā iekļauto administratoru skaita ierobežojums.",
   "NotPossibleRoomRestoring": "Nav iespējams atjaunot šo telpu, jo ir sasniegts jūsu pašreizējā plānā iekļauto telpu skaita ierobežojums.",
   "NumberOfRoomsAccordingToTariff": "Telpu skaits saskaņā ar jūsu tarifu plānu: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Administratoru skaits saskaņā ar jūsu tarifu plānu: {{currentValue}}/{{maxValue}}",
+  "PlanPaymentOverdue": "Nav iespējams pievienot jaunu lietotāju, izveidot jaunas telpas vai AI agentus. {{planName}} plāna maksājums ir palikt.",
   "RoomsQuotaAlmostExhausted": "Telpu kvota ir gandrīz izsmelta.",
-  "UsersQuotaAlmostExhausted": "Maksas lietotāju kvota ir gandrīz izsmelta.",
-  "GracePeriodActive": "Grācijai periods ir aktīvs <1>no {{fromDate}} līdz {{byDate}}</1> (palicušie dienas: {{delayDaysCount}}).",
-  "LicenseExpired": "Nav iespējams pievienot jaunos lietotājus un izveidot jaunas istabas. Licence ir expirējušusi.",
-  "LicenseGracePeriodInfo": "Šīs laikā administratoriem nav iespējams izveidot jaunas telpas vai pievienot jaunu lietotāju. Pēc grāciperioda beigām {{productName}} būs nepieciešams, līdz tiklīdz tiks aktivizēta jauna licencē.",
-  "PlanPaymentOverdue": "Nav iespējams pievienot jaunu lietotāju, izveidot jaunas telpas vai AI agentus. {{planName}} plāna maksājums ir palikt."
+  "UsersQuotaAlmostExhausted": "Maksas lietotāju kvota ir gandrīz izsmelta."
 }

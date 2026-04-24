@@ -3,11 +3,12 @@
   "content": "Select folder",
   "content_en_sha1_hash": "20e97c9844509f09cc9df74473a387bfe234b56e",
   "created_at": "2025-05-19T21:30:48.430Z",
-  "updated_at": "2026-04-07T23:47:15.081Z",
+  "updated_at": "2026-04-12T22:00:36.677Z",
   "comment": {
-    "text": "This translation key is used to display a button that allows users to select a folder, typically appearing as an icon in a dialog. The text \"Select folder\" provides a clear and concise message when the user clicks on the folder icon.",
+    "text": "This is a button label or tooltip text that prompts the user to choose a folder. It appears when selecting a destination for files or when configuring a folder input.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:52:11.286Z"
+    "updated_at": "2026-04-11T20:43:37.226Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -18,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 50,
+      "line_number": 51,
       "context": "isFormRoom?: boolean,\n isThirdParty?: boolean,\n isSelectFolder?: boolean,\n ) => {\n if (isRestore) return t(\"Common:RestoreTo\");\n if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isMove) return t(\"Common:MoveTo\");\n if (isCopy && !isEditorDialog) return t(\"Common:Copy\");\n if (isRestoreAll) return t(\"Common:Restore\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");",
       "module": "/packages/client"
     },
@@ -171,13 +172,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'තෝදන්න' (thodanna) is a misspelling of 'තෝරන්න' (thoranna). 'තෝදන්න' is not a standard word for 'select'.",
-          "suggestion": "ෆෝල්ඩරය තෝරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

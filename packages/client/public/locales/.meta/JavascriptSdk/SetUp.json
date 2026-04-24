@@ -3,11 +3,12 @@
   "content": "Start setting up",
   "content_en_sha1_hash": "68e48268020a3f2798df84f3bd36e4a12273da4c",
   "created_at": "2025-05-19T21:30:54.689Z",
-  "updated_at": "2026-04-07T19:35:05.140Z",
+  "updated_at": "2026-04-11T21:14:32.028Z",
   "comment": {
-    "text": "This translation key is used to display a button label that triggers setting up a development environment. It appears in a small navigation button on a Portal Settings page, prompting users to start the setup process.",
+    "text": "This is a button label. It appears on a tile to initiate the setup process for a JavaScript SDK preset.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:19.525Z"
+    "updated_at": "2026-04-11T21:14:32.028Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

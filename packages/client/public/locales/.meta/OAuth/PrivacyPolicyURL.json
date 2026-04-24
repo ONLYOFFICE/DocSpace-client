@@ -3,11 +3,12 @@
   "content": "Privacy policy URL",
   "content_en_sha1_hash": "52c701499a67f70c0e4d1871ad9613018818b5a8",
   "created_at": "2025-05-19T21:30:53.972Z",
-  "updated_at": "2026-04-07T19:35:05.165Z",
+  "updated_at": "2026-04-11T21:18:37.519Z",
   "comment": {
-    "text": "This translation key is used to display the URL of a privacy policy. It is displayed as a label in an input field on a form, prompting users to enter their organization's privacy policy URL.",
+    "text": "This is a label for an input field where the user enters the URL for their privacy policy. It appears within the OAuth client form in the portal settings.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:42.323Z"
+    "updated_at": "2026-04-11T21:18:37.519Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

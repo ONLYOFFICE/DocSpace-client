@@ -3,11 +3,12 @@
   "content": "Generate token",
   "content_en_sha1_hash": "20edbffdb526a9bd74f7c85608a305a7ff7444fb",
   "created_at": "2025-05-19T21:30:53.892Z",
-  "updated_at": "2026-04-07T19:35:05.163Z",
+  "updated_at": "2026-04-11T21:18:52.110Z",
   "comment": {
-    "text": "This translation key is used for the label of a button or option that generates an OAuth developer token, appearing in a modal dialog for portal settings.",
+    "text": "This is a button label and a dialog title. It prompts the user to create a new token for developer tools.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:47.388Z"
+    "updated_at": "2026-04-11T21:18:52.110Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

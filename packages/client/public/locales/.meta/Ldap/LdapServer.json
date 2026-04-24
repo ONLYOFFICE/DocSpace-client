@@ -3,11 +3,12 @@
   "content": "Server",
   "content_en_sha1_hash": "cb0cb170d106f8e8d5af1e05bbdbd3a96a7de197",
   "created_at": "2025-05-19T21:30:54.268Z",
-  "updated_at": "2026-04-07T19:35:05.148Z",
+  "updated_at": "2026-04-11T21:16:49.961Z",
   "comment": {
-    "text": "The \"LdapServer\" translation key is used to display the label for a field related to LDAP server settings in a connection settings component. It appears as a required input field and provides a tooltip for users when hovering over the field. The translation will be displayed in PortalSettings categories, specifically in the integration section of the Connection Settings page.",
+    "text": "This is a label for an input field where the user enters the LDAP server address. It appears as a short label next to the input field in the LDAP connection settings.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:03.854Z"
+    "updated_at": "2026-04-11T21:16:49.961Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -1,7 +1,8 @@
 {
   "BackToRoom": "Voltar para a sala",
   "CheckReadyForms": "Verificar formulários prontos",
-  "Description": "Seu formulário foi concluído e salvo",
+  "CompletedFormDescription": "Seu formulário foi concluído e salvo",
+  "CompletedFormTitle": "O formulário está preenchido",
   "DescriptionForAnonymous": "Você enviou o formulário PDF preenchido ao qual foi atribuído um número exclusivo. Para verificar o status, entre em contato com o proprietário do formulário.",
   "DescriptionForRegisteredUser": "O formulário PDF preenchido está disponível para você na pasta Concluído.",
   "FillItOutAgain": "Preencha novamente",
@@ -18,6 +19,5 @@
   "FormVDRYouFirstRecepientDescription": "Você está designado para preencher o formulário como o primeiro destinatário. Uma notificação foi enviada para o seu e-mail. Você pode começar a preenchê-lo agora ou copiar o link de preenchimento e retornar mais tarde.",
   "LinkToFillOutForm": "Link para preencher o formulário:",
   "LinkToForm": "Link para o formulário:",
-  "LinkToViewOnlyForm": "Link para o formulário só para visualização:",
-  "Title": "O formulário está preenchido"
+  "LinkToViewOnlyForm": "Link para o formulário só para visualização:"
 }

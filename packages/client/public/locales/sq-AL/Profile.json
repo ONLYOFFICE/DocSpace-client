@@ -8,7 +8,7 @@
   "DesktopThemeDescription": "Kaloni automatikisht midis temave të lehta dhe të errëta në varësi të temës aktuale të Redaktuesve të Desktopit.",
   "EditPhoto": "Editoni foton",
   "EmailChangeSuccess": "Email-i juaj është ndryshuar me sukses",
-  "EmailNotVerified": "Email-i nuk verifikohet",
+  "EmailNotVerified": "Email-i nuk është i verifikuar",
   "ErrorAccountAlreadyUse": "Llogaria e lidhur tashmë është në përdorim nga një përdorues tjetër",
   "LogoutActiveConnection": "Dilni nga lidhja aktive",
   "LogoutAllActiveSessionsDescription": "Të gjitha lidhjet aktive përveç kësaj lidhjeje do të dalin jashtë, pasi ajo është aktualisht në përdorim.",
@@ -25,7 +25,7 @@
   "TelegramAccount": "Llogari Telegrami",
   "TelegramAccountDescription": "Për të lidhur TelegramBot me llogarinë tuaj, ndiqni lidhjen sekrete dhe klikoni butonin “Lidhu me Telegram”.",
   "TelegramAccountDisconnect": "Shkëput Telegram",
-  "TelegramAccountDisconnectDescription": "Llogaria juaj @{{username}} është lidhur për njoftime në Telegram. Mund të shkëputeni. Në atë rast, nuk do të merrni më njoftime.",
+  "TelegramAccountDisconnectDescription": "Llogaria juaj @{{username}} është lidhur për njoftime në Telegram. Mund të shkëputeni nga kjo llogari. Në atë rast, nuk do të merrni më njoftime.",
   "TerminateAllSessions": "Përfundoni të gjitha sesionet përveç asaj aktuale",
   "TwoFactorDescription": "Autentifikimi me dy faktorë nëpërmjet një aplikacioni që gjeneron kode u aktivizua për të gjithë përdoruesit nga administratori."
 }

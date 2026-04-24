@@ -3,13 +3,21 @@
   "content": "{{productName}} Wallet",
   "content_en_sha1_hash": "5ebd821f757e36c36f69708e6de222c730d03a6c",
   "created_at": "2026-04-10T13:53:43.096Z",
-  "updated_at": "2026-04-10T13:53:43.096Z",
+  "updated_at": "2026-04-12T03:48:25.850Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a title for the user's wallet information section, displaying the brand name (e.g., \"ONLYOFFICE Wallet\"). The `{{productName}}` variable will be replaced with the actual product name.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:45:54.177Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/WalletInfo.tsx",
+      "line_number": 83,
+      "context": "className={styles.walletInfoTitle}\n fontWeight=\"600\"\n fontSize=\"14px\"\n >\n {title ??\n t(\"ProductNameWallet\", { productName: getBrandName(\"ProductName\") })}\n </Text>\n <div\n className={classNames(styles.walletInfoBalance, {\n [styles.warningColor]: isBalanceInsufficient,\n })}",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

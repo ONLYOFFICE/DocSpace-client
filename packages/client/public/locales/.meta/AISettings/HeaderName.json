@@ -3,11 +3,12 @@
   "content": "Header name",
   "content_en_sha1_hash": "b46f85a9b7d61d832e708d435d51c596f9144100",
   "created_at": "2025-10-27T16:14:31.645Z",
-  "updated_at": "2026-02-19T13:36:32.697Z",
+  "updated_at": "2026-04-11T21:02:50.554Z",
   "comment": {
-    "text": "This key displays the label for a field that specifies the name of a header setting within the AI Settings section of the Portal Settings. It appears as a label on a text input field, likely allowing users to customize header names. Translators should ensure this name accurately reflects the setting it describes.",
+    "text": "This is a text input label for a header name within the AI settings. It appears when configuring advanced settings for AI servers.",
     "is_auto": true,
-    "updated_at": "2025-10-27T17:29:41.400Z"
+    "updated_at": "2026-04-11T21:02:50.554Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

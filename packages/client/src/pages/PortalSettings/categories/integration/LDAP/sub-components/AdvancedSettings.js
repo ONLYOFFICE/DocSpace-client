@@ -30,6 +30,8 @@ import { useTranslation } from "react-i18next";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Text } from "@docspace/ui-kit/components/text";
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { getBrandName } from "@docspace/shared/constants/brands";
+import { getConstName } from "@docspace/shared/constants/consts";
 
 const AdvancedSettings = ({
 	isLdapEnabled,
@@ -78,8 +80,8 @@ const AdvancedSettings = ({
 				/>
 				<HelpButton
 					tooltipContent={t("Settings:DisableEmailDescription", {
-						sectionName: t("Common:LDAP"),
-						productName: t("Common:ProductName"),
+						sectionName: getConstName("LDAP"),
+						productName: getBrandName("ProductName"),
 					})}
 				/>
 			</div>

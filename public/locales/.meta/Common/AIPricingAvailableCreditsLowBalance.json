@@ -3,13 +3,21 @@
   "content": "Available credits: {{price}}. Low balance",
   "content_en_sha1_hash": "03a53eb831604086430fd7492af07cccb433e72a",
   "created_at": "2026-04-10T13:53:44.450Z",
-  "updated_at": "2026-04-10T13:53:44.450Z",
+  "updated_at": "2026-04-23T17:24:02.176Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a status message displayed for AI services. It informs the user about their remaining credits ({{price}}) and indicates that the balance is low.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:59:58.789Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "line_number": 204,
+      "context": "currency: formatWalletCurrency(priceValue!, 2),\n });\n \n case AI_ENUM:\n if (isAiServiceLowBalance) {\n return t(\"AIPricingAvailableCreditsLowBalance\", {\n price: formatAiServiceCurrency(),\n });\n }\n \n if (aiServiceBalance && aiServiceBalance > 0) {",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

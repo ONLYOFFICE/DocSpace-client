@@ -3,13 +3,21 @@
   "content": "<1>Output tokens</1> — AI-generated responses and content.",
   "content_en_sha1_hash": "39e8b7a5b2c2608ca1381c9cd63fc789b576c7b8",
   "created_at": "2026-04-10T13:53:44.655Z",
-  "updated_at": "2026-04-10T13:53:44.655Z",
+  "updated_at": "2026-04-11T20:59:47.068Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a tooltip that explains what \"output tokens\" are in the context of AI pricing. It appears when the user hovers over the \"Output tokens\" label. The `<1>` tag highlights \"Output tokens\" in bold.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:59:47.068Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/PricingBillingBody.tsx",
+      "line_number": 94,
+      "context": "}}\n />\n <br />\n <CommonTrans\n \n i18nKey=\"AIPricingTokensTooltipOutput\"\n components={{\n 1: <strong />,\n }}\n />\n </>",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

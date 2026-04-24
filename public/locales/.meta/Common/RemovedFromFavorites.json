@@ -3,11 +3,12 @@
   "content": "Removed from favorites",
   "content_en_sha1_hash": "c259d9197c21c066bff3db7e0f183ec9c293053c",
   "created_at": "2026-04-03T21:51:34.662Z",
-  "updated_at": "2026-04-08T01:34:22.019Z",
+  "updated_at": "2026-04-23T17:24:01.614Z",
   "comment": {
-    "text": "A success message displayed in a toast notification when an item is successfully removed from the user's favorites. It appears after performing a removal action via buttons or hotkeys.",
+    "text": "This is a toast message confirming that an item (document, folder, etc.) has been successfully removed from the user's favorites list.",
     "is_auto": true,
-    "updated_at": "2026-04-03T21:53:16.569Z"
+    "updated_at": "2026-04-11T20:45:12.435Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -30,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 470,
+      "line_number": 475,
       "context": "this.filesActionsStore\n .setFavoriteAction(action, items)\n .then(() =>\n action === \"mark\"\n ? toastr.success(t(\"Common:MarkedAsFavorite\"))\n : toastr.success(t(\"Common:RemovedFromFavorites\")),\n )\n .catch((err) => toastr.error(err));\n };\n \n lockFile = (item, t) => {",
       "module": "/packages/client"
     },
@@ -39,6 +40,12 @@
       "line_number": 2530,
       "context": "label: t(\"RemoveFromFavorites\"),\n alt: t(\"RemoveFromFavorites\"),\n iconUrl: FavoritesFillReactSvgUrl,\n onClick: () => {\n this.setFavoriteAction(\"remove\", selection)\n .then(() => toastr.success(t(\"RemovedFromFavorites\")))\n .catch((err) => toastr.error(err));\n },\n }) */\n .set(\"showInfo\", showInfo);",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useFavoritesActions.ts",
+      "line_number": 63,
+      "context": "try {\n const fileIds = item.isFolder ? [] : [item.id as number];\n const folderIds = item.isFolder ? [item.id as number] : [];\n await api.files.removeFromFavorite(fileIds, folderIds);\n filesListStore.updateItemFavorite(item.id, false);\n toastr.success(t(\"Common:RemovedFromFavorites\"));\n } catch {\n toastr.error(t(\"Common:UnexpectedError\"));\n }\n },\n [t, filesListStore],",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -57,13 +64,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text is a past participle/passive state ('Removed from favorites') used as a success notification, whereas the Azerbaijani translation is an imperative command ('Remove from favorites').",
-          "suggestion": "Favoritlərdən silindi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {

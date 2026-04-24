@@ -45,6 +45,7 @@
   "GenerateToken": "ප්‍රතෝකනය ජනනය කරන්න",
   "GenerateTokenDescription": "සංවර්ධක ප්‍රවේශ ටෝකනයක් ජනනය කිරීමෙන්, ඔබට අවසරයකින් තොරව ඔබගේ ගිණුම සඳහා API ඇමතුම් ලබා ගැනීමට හැකි වනු ඇත. අනෙකුත් පරිශීලකයින් සඳහා ප්‍රවේශ ටෝකන ලබා ගැනීමට, සම්මත OAuth ප්‍රවාහය යොදන්න.",
   "GenerateTokenNote": "<strong>සටහන:</strong> ඔබ නව ටොකන් එකක් සාදා ගත්තොත්, පෙර ටොකන් එක වලංගු නොවනු ඇත.",
+  "GenerateTokenScope": "පරාසගත ඇප්ස් (scoped apps) සඳහා, ටෝකනයට ඇප් එකට සමාන පරාසයක් (scope) පවතිනු ඇත.",
   "GenerateTokenWarning": "මෙම ටෝකනය ඔබට API ඇමතුම් හරහා ඔබේ ගිණුමට (<1>{{supportEmail}}</1>) පිවිසිය හැක. මෙය කිසිවෙකු සමඟ බෙදා නොගන්න. ඔබට මෙය නැවත දැකීමට නොහැකි නිසා, මෙම ටෝකනය දැන් පිටපත් කර ගන්න.",
   "IconDescription": "JPG, PNG හෝ SVG, 32x32",
   "ID": "අංකය",
@@ -72,10 +73,12 @@
   "RevokeConsentDescription": "ඔබ {{organizationName}} {{productName}} හි බලපත්‍රය {{name}} සේවාවේ භාවිතය සඳහා අව revoke කළ පසු, {{organizationName}} {{productName}} විසින් {{name}} වෙතට ඇතුළු වීම ස්වයංක්‍රීයව නවත්වනු ලැබේ. {{name}} හි ඔබේ ගණකය මකා නොදමනු ලැබේ.",
   "RevokeConsentDescriptionGroup": "සේවා වල {{organizationName}} {{productName}} බලපත්‍ර දත්ත භාවිත කිරීමට ඔබ කැමැත්ත අව revoke කළ පසු, {{organizationName}} {{productName}} විසින් ලොග් කිරීම ස්වයංක්‍රීයව නතර කරනු ලැබේ. ඔබේ ගිණුම් මකා නොදමනු ලැබේ.",
   "RevokeConsentLogin": "ඔබ {{name}} වෙතට ස්වයංක්‍රීයව පිවිසිය යුතු නම්, {{organizationName}} {{productName}} භාවිතයෙන්, ඔබේ {{productName}} ගිණුම් දත්ත වෙත ප්‍රවේශය ලබා දීමට ඔබට ඉල්ලීමක් කෙරේ.",
+  "RevokeConsentLoginGroup": "ඔබට {{organizationName}} {{productName}} භාවිතයෙන් ස්වයංක්‍රීයව ඇතුළු වීම අලුත් කිරීමට අවශ්‍ය නම්, ඔබේ {{productName}} ගිණුම් දත්ත සඳහා ප්‍රවේශය ලබා දෙන ලෙස ඔබෙන් ඉල්ලාිනු ඇත.",
   "RevokeDialogDescription": "මෙම ටෝකනය භාවිත කරන සියලු ඒකායනතාවන් API වෙත ප්‍රවේශ කිරීමට නොහැකි වනු ඇත. ඔබට මෙම ක්‍රියාව අහෝසි කළ නොහැකි වනු ඇත.",
   "RevokeDialogEnterToken": "පරි revoke කිරීම තහවුරු කිරීමට ටෝකනය ඇතුළත් කරන්න:",
   "RevokeDialogHeader": "ප්‍රතෝකනය අහෝසි කරන්න",
   "Scopes": "පරාසයන්",
+  "ScopesHeader": "ප්‍රවේශ පරාසයන්",
   "ScopesHelp": "අපේක්ෂාවන් යෙදුමක පරිශීලකයන්ගේ සියලු දත්ත වෙත ප්‍රවේශය සීමා කිරීමට භාවිතා කරනු ලැබේ, සහ ඔබට අවශ්‍ය ප්‍රවේශයේ වර්ගය හරියටම සඳහාවි.",
   "Secret": "රහස",
   "SecretCopy": "සේවාදායක රහස සාර්ථකව ක්ලිප්බෝඩ් එකට පිටපත් කරන ලදී",
@@ -89,8 +92,5 @@
   "Token": "ප්‍රතීකාව",
   "TokenRevokedSuccessfully": "සාක්ෂිපත්‍රය සාර්ථකව අහෝසි කරන ලදී.",
   "WebsiteUrl": "වෙබ් අඩවිය URL",
-  "Write": "යතුරුහරපය",
-  "GenerateTokenScope": "පරාසගත ඇප්ස් (scoped apps) සඳහා, ටෝකනයට ඇප් එකට සමාන පරාසයක් (scope) පවතිනු ඇත.",
-  "RevokeConsentLoginGroup": "ඔබට {{organizationName}} {{productName}} භාවිතයෙන් ස්වයංක්‍රීයව ඇතුළු වීම අලුත් කිරීමට අවශ්‍ය නම්, ඔබේ {{productName}} ගිණුම් දත්ත සඳහා ප්‍රවේශය ලබා දෙන ලෙස ඔබෙන් ඉල්ලාිනු ඇත.",
-  "ScopesHeader": "ප්‍රවේශ පරාසයන්"
+  "Write": "යතුරුහරපය"
 }

@@ -3,11 +3,12 @@
   "content": "The Service provider URL address where it receives and processes assertions from the Identity provider",
   "content_en_sha1_hash": "072ba9de955680a2e39b73145841fa918389b237",
   "created_at": "2025-05-19T21:30:50.151Z",
-  "updated_at": "2026-04-08T22:51:31.423Z",
+  "updated_at": "2026-04-11T21:26:28.936Z",
   "comment": {
-    "text": "The translation key \"SPAssertionConsumerURLTooltip\" is used to describe the Service provider URL address field in a Single Sign-On setup. It provides a tooltip explanation for users when hovering over the field, indicating where assertions from an Identity provider are received and processed.",
+    "text": "This is a tooltip that appears when hovering over the \"SP Assertion Consumer URL\" field. It explains the purpose of this URL in the context of Single Sign-On (SSO) integration.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:07.420Z"
+    "updated_at": "2026-04-11T21:26:28.936Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -39,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'assertions' is translated as 'твърдения', which in a technical SSO/SAML context refers to 'security assertions' (SAML assertions). In Bulgarian technical terminology, 'assertions' should be translated as 'асерции' or 'утверждения' to avoid the meaning of 'claims/statements'. However, more critically, the pronoun 'те' (they) is used, which is grammatically ambiguous in Bulgarian; it's better to use a structure that clearly refers to the URL/Service Provider.",
-          "suggestion": "URL адресът на доставчика на услуги, на който се получават и обработват асерциите от доставчика на самоличност"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -75,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation incorrectly uses 'palveluntarjoajan' (Service provider) twice, whereas the English text specifies 'Identity provider' for the second entity. This changes the technical meaning of the SSO flow.",
-          "suggestion": "Palveluntarjoajan URL-osoite, jossa se vastaanottaa ja käsittelee tunnistetarjoajan väitteitä"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -123,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'apgalvojumus' is a literal translation of 'assertions' in a general sense, but in the context of SAML/SSO, 'assertions' refers to security tokens/claims. In Latvian technical terminology for SSO, 'apliecinājumi' or 'apliecinājumu' is the correct term. 'Apgalvojumi' sounds like 'claims/arguments' in a legal or conversational sense, which is misleading in a technical SSO context.",
-          "suggestion": "Pakalpojumu sniedzēja URL adrese, kur tas saņem un apstrādā apliecinājumus no identitātes nodrošinātāja"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -171,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'ඒ.ස.නි.' (E.S.N.) is used for 'URL', which is an incorrect and non-standard abbreviation in Sinhala. It appears to be a literal or phonetic error. The standard term is 'URL' or 'වෙබ් ලිපිනය'.",
-          "suggestion": "අනන්‍යතා ප්‍රතිපාදකගෙන් ප්‍රකාශන (assertions) ලබාගන්නා සහ සකසන සේවා සපයන්නාගේ URL ලිපිනය"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -195,25 +172,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'тврдње' (assertions) is a literal translation of the English word 'assertions' but in the context of SAML/SSO, it is a technical term that should be translated as 'потврде' (assertions/confirmations). Using 'тврдње' sounds unnatural and incorrect in a technical IT context.",
-          "suggestion": "Адреса URL пружаоца услуга где се примају и обрађују потврде од идентитетског пружаоца."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'assertions' is translated as 'tvrdnje', which in a technical SSO/SAML context refers to 'security assertions'. In Serbian technical terminology, 'tvrdnje' sounds like 'claims' or 'statements' in a general sense, but in the context of SAML/SSO, it is a literal translation that can be confusing. However, the more critical issue is that 'pružaoca usluga' is grammatically awkward here; it should be 'pružaoca usluge'.",
-          "suggestion": "Adresa URL pružaoca usluge na kojoj se primaju i obrađuju asercije od pružaoca identiteta"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

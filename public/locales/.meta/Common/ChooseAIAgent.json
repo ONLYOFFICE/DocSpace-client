@@ -3,18 +3,19 @@
   "content": "Choose an {{aiAgent}}",
   "content_en_sha1_hash": "13c16f38542b31392b1e38f68dd875f7e7bff25a",
   "created_at": "2025-12-19T10:16:20.006Z",
-  "updated_at": "2026-04-08T15:36:42.131Z",
+  "updated_at": "2026-04-11T20:57:21.050Z",
   "comment": {
-    "text": "This key displays the text \"Choose an {{aiAgent}}\" within a UI element, likely a dialog or selection component, prompting the user to select an AI agent. The `aiAgent` placeholder will be replaced with the name of the specific AI agent being offered. It appears within an aside section used for selecting AI agents.",
+    "text": "This is the title for a dialog or selector, prompting the user to pick an AI agent. The `{{aiAgent}}` variable will be replaced with the localized term for \"AI Agent\".",
     "is_auto": true,
-    "updated_at": "2025-12-22T09:45:48.290Z"
+    "updated_at": "2026-04-11T20:57:21.050Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/selectors/AIAgent/index.tsx",
-      "line_number": 285,
-      "context": "dataTestId=\"ai_agent_selector\"\n useAside\n onClose={onClose}\n withInfoBar={withInfo}\n infoBarData={{\n title: t(\"Common:ChooseAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n }),\n icon: InfoIconSvgUrl,\n onClose: () => setWithInfo(!withInfo),\n description: t(\"Common:ChooseAIAgentDescription\"),",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/selectors/AIAgent/index.tsx",
+      "line_number": 289,
+      "context": "dataTestId=\"ai_agent_selector\"\n useAside\n onClose={onClose}\n withInfoBar={withInfo}\n infoBarData={{\n title: t(\"ChooseAIAgent\", {\n aiAgent: t(\"AIAgent\"),\n }),\n icon: <InfoIconSvgUrl />,\n onClose: () => setWithInfo(!withInfo),\n description: t(\"ChooseAIAgentDescription\"),",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {

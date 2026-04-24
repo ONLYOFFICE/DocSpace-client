@@ -3,11 +3,12 @@
   "content": "Move to",
   "content_en_sha1_hash": "349f807a5e5497d0e5f0e5eb83dd8a59d2dd2c7d",
   "created_at": "2025-05-19T21:30:46.631Z",
-  "updated_at": "2026-04-10T08:21:04.290Z",
+  "updated_at": "2026-04-23T17:24:01.666Z",
   "comment": {
-    "text": "The translation key \"MoveTo\" is used to display the label for a button that allows users to move files or items to a new location. It appears in various UI elements, such as file management dialogs and context menus, providing an intuitive way for users to select a destination. This text should be translated to provide a clear and consistent experience across different languages.",
+    "text": "This is a button label or menu item that initiates the action of moving a selected file or folder to a different location.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:27.277Z"
+    "updated_at": "2026-04-11T20:48:28.575Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -18,19 +19,19 @@
     },
     {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 51,
+      "line_number": 52,
       "context": "isThirdParty?: boolean,\n isSelectFolder?: boolean,\n ) => {\n if (isRestore) return t(\"Common:RestoreTo\");\n if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isMove) return t(\"Common:MoveTo\");\n if (isCopy && !isEditorDialog) return t(\"Common:Copy\");\n if (isRestoreAll) return t(\"Common:Restore\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1933,
+      "line_number": 1984,
       "context": "icon: CopyReactSvgUrl,\n items: [\n {\n id: \"option_move-to\",\n key: \"move-to\",\n label: t(\"Common:MoveTo\"),\n icon: MoveReactSvgUrl,\n onClick: isEditing\n ? () => this.onShowEditingToast(t)\n : () => this.onMoveAction(item),\n disabled: false,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1933,
+      "line_number": 1984,
       "context": "icon: CopyReactSvgUrl,\n items: [\n {\n id: \"option_move-to\",\n key: \"move-to\",\n label: t(\"Common:MoveTo\"),\n icon: MoveReactSvgUrl,\n onClick: isEditing\n ? () => this.onShowEditingToast(t)\n : () => this.onMoveAction(item),\n disabled: false,",
       "module": "/packages/client"
     },
@@ -39,6 +40,18 @@
       "line_number": 292,
       "context": "case \"moveTo\":\n if (!this.isAvailableOption(\"moveTo\")) return null;\n return {\n id: \"menu-move-to\",\n label: t(\"Common:MoveTo\"),\n onClick: this.moveToHandle,\n iconUrl: MoveReactSvgUrl,\n };\n case \"pin\":\n return {",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
+      "line_number": 313,
+      "context": "const getMoveToItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_move-to\",\n key: \"move-to\",\n label: t(\"Common:MoveTo\"),\n icon: MoveReactSvgUrl,\n onClick: () => onMoveClick?.(i),\n disabled: !onMoveClick,\n };\n },",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
+      "line_number": 313,
+      "context": "const getMoveToItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_move-to\",\n key: \"move-to\",\n label: t(\"Common:MoveTo\"),\n icon: MoveReactSvgUrl,\n onClick: () => onMoveClick?.(i),\n disabled: !onMoveClick,\n };\n },",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/media-viewer/MediaViewer.helpers.tsx",
@@ -63,13 +76,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Yerini dəyiş' means 'Change position' or 'Move (yourself/something) to a different spot', which is an imperative command. In a UI context for moving files to a destination, 'Hərəkət etdir' or 'Köçür' is more appropriate for the action 'Move to'. However, specifically for 'Move to [Destination]', 'Köçür' or 'Yerini dəyişdir' is better, but 'Yerini dəyiş' sounds like a command to a person to move their seat.",
-          "suggestion": "Köçür"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -135,13 +142,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation '이동 위치' means 'Move location' (a noun phrase), whereas the English 'Move to' is a verb phrase/action command used for a button or menu item. In a UI context for a button, it should be an imperative command.",
-          "suggestion": "~로 이동"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -213,13 +214,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Помери у' is grammatically incorrect for a UI button label. In Serbian, 'Move to' (as a command/action) should be 'Пребаци у' or 'Премести у'. 'Помери' is more commonly used for physical movement (like moving a chair) rather than digital file management.",
-          "suggestion": "Премести у"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

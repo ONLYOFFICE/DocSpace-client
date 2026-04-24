@@ -3,13 +3,50 @@
   "content": "Select",
   "content_en_sha1_hash": "8598222918d3c6e513d63060cf55e2971ded729a",
   "created_at": "2025-05-19T21:30:48.355Z",
-  "updated_at": "2026-04-10T08:21:04.291Z",
+  "updated_at": "2026-04-23T17:24:01.667Z",
   "comment": {
-    "text": "This translation key is used to display a label for selecting an action, such as choosing a file or folder, in various UI elements. It appears in a placeholder position within a dialog and on a component that handles file selection. Translators should provide a descriptive text that indicates the user's ability to make a choice.",
+    "text": "This is a button label. It appears on various selectors (people, AI agents, files) to confirm the user's selection.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:34:25.327Z"
+    "updated_at": "2026-04-11T20:43:47.128Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
+      "line_number": 516,
+      "context": "<PeopleSelector\n withCancelButton\n onCancel={onCloseContactSelector}\n cancelButtonLabel=\"\"\n disableSubmitButton={false}\n submitButtonLabel={t(\"SelectAction\")}\n onSubmit={onSubmitContactSelector}\n withHeader\n headerProps={{\n onCloseClick: onCloseContactSelector,\n isCloseable: true,",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/selectors/AIAgent/index.tsx",
+      "line_number": 244,
+      "context": "{...cancelButtonSelectorProps}\n {...searchSelectorProps}\n withPadding={withPadding}\n onSelect={onSelect}\n items={items}\n submitButtonLabel={t(\"SelectAction\")}\n onSubmit={onSubmit}\n isMultiSelect={false}\n emptyScreenImage={\n isBase ? (\n <EmptyScreenAIAgentsSelectorLight />",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/selectors/Files/hooks/useSelectorBody.tsx",
+      "line_number": 158,
+      "context": "const headerSelectorProps: TSelectorHeader = withHeader\n ? {\n withHeader,\n headerProps: {\n ...headerProps,\n headerLabel: headerProps?.headerLabel || t(\"SelectAction\"),\n onCloseClick: onCancel,\n },\n }\n : {};",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/selectors/Groups/index.tsx",
+      "line_number": 190,
+      "context": "onClearSearch={onClearSearch}\n isSearchLoading={false}\n disableSubmitButton={!selectedItem}\n isMultiSelect={false}\n items={itemsList}\n submitButtonLabel={t(\"SelectAction\")}\n onSubmit={onSubmitAction}\n emptyScreenImage={emptyScreenImg}\n emptyScreenHeader={t(\"NotFoundGroups\")}\n emptyScreenDescription={t(\"GroupsNotFoundDescription\")}\n searchEmptyScreenImage={emptyScreenImg}",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/selectors/People/index.tsx",
+      "line_number": 760,
+      "context": "renderCustomItem={renderCustomItem}\n aria-label={ariaLabel || \"People Selector\"}\n data-selector-type={dataSelectorType || \"people\"}\n dataTestId={dataTestId || \"people-selector\"}\n items={itemsList}\n submitButtonLabel={submitButtonLabel || t(\"SelectAction\")}\n onSubmit={onSubmit}\n disableSubmitButton={disableSubmitButton || !selectedItems.length}\n selectedItem={isMultiSelect ? null : selectedItems[0]}\n submitButtonId={submitButtonId}\n emptyScreenImage={emptyScreenImage}",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/selectors/Room/index.tsx",
+      "line_number": 329,
+      "context": "{...withAside}\n withPadding={withPadding}\n onSelect={onSelect}\n items={sortedItems}\n selectedItems={selectedItems}\n submitButtonLabel={submitButtonLabel || t(\"SelectAction\")}\n onSubmit={onSubmit}\n isMultiSelect={isMultiSelect}\n emptyScreenImage={\n isBase ? <EmptyScreenRoomsLight /> : <EmptyScreenRoomsDark />\n }",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditGroupDialog/sub-components/HeadOfGroupParam/index.tsx",
       "line_number": 57,
@@ -18,19 +55,19 @@
     },
     {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 55,
-      "context": "if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isMove) return t(\"Common:MoveTo\");\n if (isCopy && !isEditorDialog) return t(\"Common:Copy\");\n if (isRestoreAll) return t(\"Common:Restore\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (isFormRoom) {\n return t(\"Common:SelectFromPortal\", {\n productName: t(\"Common:ProductName\"),",
+      "line_number": 56,
+      "context": "if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isMove) return t(\"Common:MoveTo\");\n if (isCopy && !isEditorDialog) return t(\"Common:Copy\");\n if (isRestoreAll) return t(\"Common:Restore\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (isFormRoom) {\n return t(\"Common:SelectFromPortal\", {\n productName: getBrandName(\"ProductName\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 55,
-      "context": "if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isMove) return t(\"Common:MoveTo\");\n if (isCopy && !isEditorDialog) return t(\"Common:Copy\");\n if (isRestoreAll) return t(\"Common:Restore\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (isFormRoom) {\n return t(\"Common:SelectFromPortal\", {\n productName: t(\"Common:ProductName\"),",
+      "line_number": 56,
+      "context": "if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isMove) return t(\"Common:MoveTo\");\n if (isCopy && !isEditorDialog) return t(\"Common:Copy\");\n if (isRestoreAll) return t(\"Common:Restore\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (isFormRoom) {\n return t(\"Common:SelectFromPortal\", {\n productName: getBrandName(\"ProductName\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/RoomsSelectorInput/index.js",
-      "line_number": 126,
+      "line_number": 127,
       "context": "isLoading={isLoading}\n isDisabled={isDisabled || isLoading}\n hasError={isError}\n scale\n isDocumentIcon={isDocumentIcon}\n placeholder={t(\"SelectAction\")}\n />\n \n <Backdrop\n visible={isPanelVisible}\n isAside",
       "module": "/packages/client"
     },
@@ -54,13 +91,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
-      "line_number": 245,
+      "line_number": 246,
       "context": "<ComboBox\n options={items}\n showDisabledItems\n scaledOptions={hasSystemProvider}\n selectedOption={\n selectedItem ?? ({ label: t(\"Common:SelectAction\") } as TOption)\n }\n scaled\n displayArrow\n onSelect={(option) =>\n setSelectedOption(option.key as WebSearchType)",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/DefaultTemplates/TemplatesRow.tsx",
-      "line_number": 229,
+      "line_number": 230,
       "context": "key=\"select-default-template-dialog\"\n filterParam={filterParam}\n isPanelVisible={isSelectorVisible}\n onSelectFile={(file) => onSelectFile(file as TFile)}\n onClose={() => setIsSelectorVisible(false)}\n acceptButtonLabel={t(\"Common:SelectAction\")}\n isMultiSelect={false}\n withRecentTreeFolder\n withFavoritesTreeFolder\n withAIAgentsTreeFolder\n openRoot",
       "module": "/packages/client"
     },
@@ -78,13 +115,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 736,
+      "line_number": 737,
       "context": "<ComboBox\n onSelect={onColumnSelect}\n options={\n columnsOptions || {\n key: \"Select\",\n label: t(\"Common:SelectAction\"),\n }\n }\n scaled\n directionY=\"top\"\n selectedOption={{",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 736,
+      "line_number": 737,
       "context": "<ComboBox\n onSelect={onColumnSelect}\n options={\n columnsOptions || {\n key: \"Select\",\n label: t(\"Common:SelectAction\"),\n }\n }\n scaled\n directionY=\"top\"\n selectedOption={{",
       "module": "/packages/client"
     },
@@ -114,7 +151,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2017,
+      "line_number": 2068,
       "context": "const optionsModel = [\n {\n id: \"option_select\",\n key: \"select\",\n label: t(\"Common:SelectAction\"),\n icon: CheckBoxReactSvgUrl,\n onClick: () => this.onSelect(item),\n disabled: false,\n },\n withOpen && {",
       "module": "/packages/client"
     },
@@ -129,6 +166,24 @@
       "line_number": 54,
       "context": "// const sessionPath = sessionStorage.getItem(\"filesSelectorPath\");\n \n const headerLabel = fileTypeDetection.filterParam\n ? (t?.(\"Common:SelectFile\") ?? \"\")\n : (t?.(\"Common:SelectAction\") ?? \"\");\n \n const getFileTypeTranslation = React.useCallback(() => {\n switch (fileTypeDetection.filterParam) {\n case FilesSelectorFilterTypes.XLSX:\n return t?.(\"Editor:MailMergeFileType\") ?? \"\";",
       "module": "/packages/doceditor"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
+      "line_number": 78,
+      "context": "const getSelectItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_select\",\n key: \"select\",\n label: t(\"Common:SelectAction\"),\n icon: CheckBoxReactSvgUrl,\n onClick: () => filesSelectionStore.addSelection(i),\n disabled: false,\n };\n },",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(selectors)/file-selector/page.client.tsx",
+      "line_number": 253,
+      "context": "const headerProps = baseConfig?.header\n ? {\n withHeader: true as const,\n headerProps: {\n headerLabel: t(\"SelectAction\"),\n isCloseable: false,\n onCloseClick: onCancel,\n },\n }\n : {};",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(selectors)/file-selector/page.client.tsx",
+      "line_number": 253,
+      "context": "const headerProps = baseConfig?.header\n ? {\n withHeader: true as const,\n headerProps: {\n headerLabel: t(\"SelectAction\"),\n isCloseable: false,\n onCloseClick: onCancel,\n },\n }\n : {};",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/files-selector-input/FilesSelector.helpers.ts",
@@ -162,7 +217,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/index.tsx",
-      "line_number": 261,
+      "line_number": 262,
       "context": "<FileInput\n scale\n size={InputSize.base}\n onInput={onLocalFileInputClick}\n accept={[\".tar\", \".gz\"]}\n placeholder={t(\"Common:SelectAction\")}\n className={classNames(\n styles.restoreBackupInput,\n \"restore-backup_input\",\n )}\n isDisabled={!isEnableRestore}",
       "module": "/packages/shared"
     }
@@ -183,13 +238,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Seçmək' is an infinitive verb ('To select'), whereas the English 'Select' in this UI context (button label/action) should be an imperative verb ('Select').",
-          "suggestion": "Seç"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {

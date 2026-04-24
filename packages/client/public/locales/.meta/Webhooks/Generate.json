@@ -3,11 +3,12 @@
   "content": "Generate",
   "content_en_sha1_hash": "fc45f9b7a9a6e8b48f0e28821ec1981804dd1eb6",
   "created_at": "2025-05-19T21:30:49.766Z",
-  "updated_at": "2026-04-08T19:54:20.790Z",
+  "updated_at": "2026-04-13T14:59:05.851Z",
   "comment": {
-    "text": "The translation key \"Generate\" is used to display a button label that enables users to create a new API key or generate a developer token. It appears in various UI components, such as buttons and dialogues, where it prompts users to perform these actions. The exact context can vary between \"EditButton\" (a standard edit action) and \"Generate\" (a specific button for creating an API key).",
+    "text": "Button label. It generates a new API key, developer token, or secret key.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:47:01.460Z"
+    "updated_at": "2026-04-11T21:28:48.475Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -24,8 +25,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/SecretKeyInput.js",
-      "line_number": 100,
-      "context": "setIsPasswordValid(isValid);\n };\n \n const generatePassword = () => {\n if (isDisabled) return;\n secretKeyInputRef.current.onGeneratePassword();\n };\n \n const handleOnChange = (e) => {\n onChange({ target: { name, value: e.target.value } });\n };",
+      "line_number": 193,
+      "context": "isHovered\n onClick={generatePassword}\n className=\"link dotted\"\n dataTestId=\"generate_link\"\n >\n {t(\"Generate\")}\n </Link>\n </div>\n </SecretKeyWrapper>\n );\n };",
       "module": "/packages/client"
     }
   ],
@@ -159,13 +160,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word 'Generate' is an imperative verb used for a button action, whereas the Russian 'Генерация' is a noun (Generation). For a UI button, the imperative verb 'Сгенерировать' is required to match the functional intent.",
-          "suggestion": "Сгенерировать"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {

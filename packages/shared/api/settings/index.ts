@@ -1168,6 +1168,13 @@ export function retryWebhooks(webhooksIds) {
   });
 }
 
+export function getWebhookTriggers() {
+  return request({
+    method: "get",
+    url: `/settings/webhook/triggers`,
+  });
+}
+
 export function muteRoomNotification(id, isMute) {
   const options = {
     method: "post",

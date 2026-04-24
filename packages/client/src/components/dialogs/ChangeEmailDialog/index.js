@@ -190,7 +190,7 @@ class ChangeEmailDialogComponent extends React.Component {
             <FieldContainer
               isVertical
               style={{ margin: "0" }}
-              // labelText={t("EnterEmail")}
+              // labelText={t("EnterNewEmail")}
               errorMessage={errorMessage}
               hasError={hasError}
               labelVisible={false}

@@ -3,11 +3,12 @@
   "content": "<bold>{{roomName}}</bold> room tags",
   "content_en_sha1_hash": "15f8c4482aed922ca46775cdbea247d4cbc50f77",
   "created_at": "2026-03-26T08:26:45.756Z",
-  "updated_at": "2026-04-08T00:07:05.285Z",
+  "updated_at": "2026-04-13T07:48:45.240Z",
   "comment": {
-    "text": "This key displays a label indicating room tags, highlighting the room name. It appears within the tag management interface to provide context for the associated tags. Translators should ensure the translation maintains the emphasis on the room name.",
+    "text": "This is a label indicating the tags associated with a specific room. It appears in a filter or management interface, with `{{roomName}}` being the name of the room.",
     "is_auto": true,
-    "updated_at": "2026-03-26T08:27:07.351Z"
+    "updated_at": "2026-04-11T20:43:59.874Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -63,13 +64,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'room' (sala/cuarto) is missing from the Spanish translation, which changes the meaning from 'room tags' to just 'tags'.",
-          "suggestion": "<bold>{{roomName}}</bold> etiquetas de la sala"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -165,13 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'room' (izba/miestnosť) is missing from the Slovak translation, which changes the context from 'room tags' to just 'tags'.",
-          "suggestion": "<bold>{{roomName}}</bold> tagy miestnosti"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -183,13 +172,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Albanian translation uses the singular 'etiketë dhomë' (room tag), whereas the English source is plural 'room tags'.",
-          "suggestion": "<bold>{{roomName}}</bold> etiketat e dhomës"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

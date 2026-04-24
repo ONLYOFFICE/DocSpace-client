@@ -3,13 +3,21 @@
   "content": "{{count}} files were rejected due to unsupported format.",
   "content_en_sha1_hash": "84fc4b019fc8b61e63e013fcba8d385fd2489b53",
   "created_at": "2026-03-20T09:07:38.643Z",
-  "updated_at": "2026-04-08T09:30:44.186Z",
+  "updated_at": "2026-04-23T17:24:02.192Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a toast message displayed when multiple files are uploaded, but some are rejected because their format is not supported. `{{count}}` is the number of rejected files.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:52:37.282Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/uploader/index.tsx",
+      "line_number": 373,
+      "context": "const isMultiple = isMultipleUpload ?? true;\n \n if (isMultiple) {\n toastr.error(\n getCommonTranslation(\"FilesRejectedDueToFormat\", {\n count: fileRejections.length,\n }),\n );\n } else {\n toastr.error(getCommonTranslation(\"FileFormatNotAllowed\"));",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -98,25 +106,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order in Lao makes it sound like 'File {{count}}' (as if 'count' is the name/ID of the file) rather than '{{count}} files' (the quantity of files).",
-          "suggestion": "{{count}} ໄຟລ໌ ຖືກປະຕິເສດເນື່ອງຈາກຮູບແບບທີ່ບໍ່ຮອງຮັບ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation says files were 'submitted' (pasniegti) instead of 'rejected' (nodakterēti/atteikti).",
-          "suggestion": "{{count}} faili tika atteikti, jo formāts nav atbalstīts."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {

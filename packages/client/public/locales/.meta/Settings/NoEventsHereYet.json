@@ -3,17 +3,18 @@
   "content": "No events here yet",
   "content_en_sha1_hash": "d5dabb69303d00324a084b615296dcb2481cba3d",
   "created_at": "2025-05-19T21:30:52.033Z",
-  "updated_at": "2026-04-09T02:20:50.671Z",
+  "updated_at": "2026-04-11T21:23:16.118Z",
   "comment": {
-    "text": "This translation key is used to display a message when there are currently no events logged or tracked in an audit trail. It appears as a header text on a screen where user activity is expected to be logged. Translators should provide a localized version of this phrase to indicate that no data is available.",
+    "text": "This is the header text for an empty state screen, indicating that no audit trail events have occurred yet. It appears when the audit trail log is empty.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:52.675Z"
+    "updated_at": "2026-04-11T21:23:16.118Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/index.js",
-      "line_number": 94,
-      "context": "productName: t(\"Common:ProductName\"),\n })}\n imageSrc={\n theme.isBase ? EmptyScreenRecentUrl : EmptyScreenRecentDarkUrl\n }\n headerText={t(\"NoEventsHereYet\")}\n />\n );\n }\n \n return (",
+      "line_number": 95,
+      "context": "productName: getBrandName(\"ProductName\"),\n })}\n imageSrc={\n theme.isBase ? EmptyScreenRecentUrl : EmptyScreenRecentDarkUrl\n }\n headerText={t(\"NoEventsHereYet\")}\n />\n );\n }\n \n return (",
       "module": "/packages/client"
     }
   ],

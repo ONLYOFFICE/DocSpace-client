@@ -3,13 +3,21 @@
   "content": "We couldn’t find a contact matching the Stripe email. Your billing and services will continue to work, but we recommend assigning a new Payer to manage billing settings in {{productName}}.",
   "content_en_sha1_hash": "9a8eb302320baca24b98d7e4acfe3462896bff2b",
   "created_at": "2026-04-10T13:53:43.798Z",
-  "updated_at": "2026-04-10T13:53:43.798Z",
+  "updated_at": "2026-04-12T13:53:58.263Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is an error message displayed to the owner of a DocSpace portal when the system cannot find a matching Stripe contact for billing. It informs the owner that services will continue but advises assigning a new Payer. `{{productName}}` is a placeholder for the product's brand name.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:40:12.310Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/payer-information/index.tsx",
+      "line_number": 98,
+      "context": "const unknownPayerDescription = () => {\n const userNotFound = `${t(\"UserNotFoundMatchingEmail\")} `;\n \n let invalidEmailDescription = isOwner\n ? t(\"UnknownPayerForOwner\", {\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"UnknownPayerForAdmin\", {\n productName: getBrandName(\"ProductName\"),\n });",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -170,7 +178,15 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "\"Payer\" is mistranslated as \"Плаћања\" (genitive of \"Плаћање\" = \"payment/billing\"), which does not mean \"Payer\". The correct Serbian term would be \"Платиоца\" (genitive of \"Платилац\" = \"Payer\"). The parenthetical \"(Payer)\" partially compensates but the actual Serbian word used carries the wrong meaning.",
+          "suggestion": "Нисмо нашли контакт који одговара Stripe е-пошти. Ваша наплата и услуге ће наставити да раде, али препоручујемо да доделите новог Платиоца за управљање подешавањима наплате у {{productName}}.",
+          "checked_at": "2026-04-12T13:53:42.268Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

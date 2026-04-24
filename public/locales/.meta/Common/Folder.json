@@ -3,28 +3,29 @@
   "content": "Folder",
   "content_en_sha1_hash": "30baa24967e08965d1594408031f0324ae11ccac",
   "created_at": "2025-05-19T21:30:45.416Z",
-  "updated_at": "2026-04-08T09:16:24.915Z",
+  "updated_at": "2026-04-23T17:24:01.620Z",
   "comment": {
-    "text": "This translation key is used to display the label \"Folder\" in various UI components, such as buttons and icons. It is part of a folder-related functionality used in the application, where it appears in dropdown menus and action buttons for creating and uploading folders.",
+    "text": "This is a button label for creating a new folder or uploading an existing folder. It appears in menus related to adding new content.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:09.150Z"
+    "updated_at": "2026-04-11T20:52:24.561Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 472,
+      "line_number": 473,
       "context": "const createNewFolder = {\n id: \"actions_new-folder\",\n className: \"main-button_drop-down\",\n icon: CatalogFolderReactSvgUrl,\n label: t(\"Common:Folder\"),\n onClick: onCreate,\n key: \"new-folder\",\n };\n \n const formGallery = {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 438,
+      "line_number": 439,
       "context": "icon: FormBlankIcon,\n onClick: () => actions.onUploadAction(\"file\"),\n },\n {\n key: \"upload-folder\",\n label: t(\"Common:Folder\"),\n icon: FolderReactSvgUrl,\n onClick: () => actions.onUploadAction(\"folder\"),\n },\n ],\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 438,
+      "line_number": 439,
       "context": "icon: FormBlankIcon,\n onClick: () => actions.onUploadAction(\"file\"),\n },\n {\n key: \"upload-folder\",\n label: t(\"Common:Folder\"),\n icon: FolderReactSvgUrl,\n onClick: () => actions.onUploadAction(\"folder\"),\n },\n ],\n };",
       "module": "/packages/client"
     },
@@ -33,6 +34,30 @@
       "line_number": 62,
       "context": "case FileType.OFormTemplate:\n case FileType.PDF: {\n return getSinglePDFTitle(t, isPDFForm);\n }\n default:\n return t(\"Common:Folder\");\n }\n };\n \n const type = item.isRoom ? getRoomTypeName(roomType, t) : getItemType();\n const Exst = fileExst ? fileExst.slice(1).toUpperCase() : \"\";",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/table-view/sub-components/TableViewRow.tsx",
+      "line_number": 102,
+      "context": "timezone ?? \"UTC\",\n );\n \n const fileSize = \"contentLength\" in item ? item.contentLength : \"\";\n const fileType =\n \"fileType\" in item ? getFileTypeName(item.fileType, t) : t(\"Common:Folder\");\n \n const onCheckboxChange = React.useCallback(\n (e: React.ChangeEvent<HTMLInputElement>) => {\n e.stopPropagation();\n filesSelectionStore.addSelection(item);",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/create-file-dialog/index.tsx",
+      "line_number": 64,
+      "context": "case \"pptx\":\n return t(\"Common:Presentation\");\n case \"pdf\":\n return t(\"Common:NewPDFForm\");\n case \"folder\":\n return t(\"Common:Folder\");\n }\n };\n \n const DEFAULT_NAMES: Record<CreateFileDialogType, string> = {\n docx: \"New document\",",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/main-button/index.tsx",
+      "line_number": 115,
+      "context": "onClick: () => openCreateDialog(\"pdf\"),\n },\n {\n id: \"actions_new-folder\",\n key: \"new-folder\",\n label: t(\"Common:Folder\"),\n icon: CatalogFolderReactSvgUrl,\n onClick: () => openCreateDialog(\"folder\"),\n },\n {\n key: \"separator-1\",",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/main-button/index.tsx",
+      "line_number": 115,
+      "context": "onClick: () => openCreateDialog(\"pdf\"),\n },\n {\n id: \"actions_new-folder\",\n key: \"new-folder\",\n label: t(\"Common:Folder\"),\n icon: CatalogFolderReactSvgUrl,\n onClick: () => openCreateDialog(\"folder\"),\n },\n {\n key: \"separator-1\",",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/utils/getFileType.ts",
@@ -165,13 +190,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Dosar' in Romanian typically refers to a legal case file, a physical dossier, or a folder in a bureaucratic sense. In a digital file management/cloud storage context (like ONLYOFFICE DocSpace), the correct term for a directory/folder is 'Folder'.",
-          "suggestion": "Folder"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -183,13 +202,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'බහාලුම' (Bahālu-ma) means 'Container' or 'Box'. In a file management/UI context, 'Folder' should be translated as 'ෆෝල්ඩරය' (transliteration) or 'නැැඹිල්ල/ගොනුව' (though 'ෆෝල්ඩරය' is the standard UI term). 'බහාලුම' is too literal and refers to a physical shipping container or a large storage vessel.",
-          "suggestion": "ෆෝල්ඩරය"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -243,13 +256,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Albanian translation is identical to the English word, which is not the correct Albanian term for 'Folder'.",
-          "suggestion": "Dosje"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

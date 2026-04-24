@@ -3,13 +3,39 @@
   "content": "Library",
   "content_en_sha1_hash": "b8100f5ba8bd048a7cf11d116fbbd73130c3c6f5",
   "created_at": "2026-03-26T08:26:36.907Z",
-  "updated_at": "2026-04-08T06:12:41.888Z",
+  "updated_at": "2026-04-23T17:24:02.136Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label for a section in the Forms module, referring to a collection of form templates. It appears as a navigation item in the sidebar and as a header title when the \"Library\" section is active.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:50:15.908Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/forms-header/index.tsx",
+      "line_number": 145,
+      "context": "const getSectionTitle = React.useCallback(() => {\n switch (activeSection) {\n case FormsSection.MyForms:\n return t(\"Common:MyForms\");\n case FormsSection.Library:\n return t(\"Common:Library\");\n case FormsSection.InProgress:\n return t(\"Common:InProgress\");\n case FormsSection.CompletedForms:\n return t(\"Common:CompletedForms\");\n case FormsSection.Settings:",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/forms-header/index.tsx",
+      "line_number": 145,
+      "context": "const getSectionTitle = React.useCallback(() => {\n switch (activeSection) {\n case FormsSection.MyForms:\n return t(\"Common:MyForms\");\n case FormsSection.Library:\n return t(\"Common:Library\");\n case FormsSection.InProgress:\n return t(\"Common:InProgress\");\n case FormsSection.CompletedForms:\n return t(\"Common:CompletedForms\");\n case FormsSection.Settings:",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/sidebar/index.tsx",
+      "line_number": 203,
+      "context": "{showLibrary && (\n <>\n <div style={{ height: \"12px\", flexShrink: 0 }} />\n <SidebarNavItem\n id=\"forms-nav-library\"\n label={t(\"Common:Library\")}\n icon={TemplateGalleryReactSvgUrl}\n isActive={activeSection === FormsSection.Library}\n onClick={() => {\n if (activeSection === FormsSection.Library) {\n // Navigate to library root (country list)",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_utils/tourSteps.ts",
+      "line_number": 302,
+      "context": "},\n },\n showLibrary &&\n navSectionStep(\n \"library\",\n t(\"Common:Library\"),\n t(\n \"Common:TourLibrary\",\n \"Browse ready-made form templates. Pick a template to quickly create a new form without starting from scratch.\",\n ),\n showMenu,",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

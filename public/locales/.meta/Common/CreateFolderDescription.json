@@ -3,16 +3,17 @@
   "content": "There will be two different folders in the destination",
   "content_en_sha1_hash": "9a65fed564ea437210a6034adccdbc92a281eede",
   "created_at": "2025-05-19T21:30:43.884Z",
-  "updated_at": "2026-04-08T13:53:27.498Z",
+  "updated_at": "2026-04-23T17:24:01.714Z",
   "comment": {
-    "text": "\"There will be two different folders in the destination\" is a description used to inform users about the expected structure of the target location during folder creation.",
+    "text": "This is a message in a conflict resolution dialog. It informs the user that creating a folder with the same name as an existing one will result in two distinct folders.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:51.752Z"
+    "updated_at": "2026-04-11T20:56:04.085Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
-      "line_number": 295,
+      "line_number": 305,
       "context": "};\n const getDuplicateDescription = () => {\n return isFileDialog\n ? t(\"Common:CreateDescription\")\n : isFolderDialog\n ? t(\"Common:CreateFolderDescription\")\n : t(\"Common:FoldersAndFilesWillBeCopied\");\n };\n const getSkipDescription = () => {\n return isFileDialog\n ? t(\"Common:SkipDescription\")",
       "module": "/packages/client"
     }
@@ -99,13 +100,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation '목표에 두 개의 다른 폴더가 있습니다' means 'There are two different folders in the destination' (present tense), whereas the English text 'There will be two different folders in the destination' indicates a future state/consequence (future tense).",
-          "suggestion": "대상 위치에 두 개의 서로 다른 폴더가 생성됩니다"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -159,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'ගමනාන්තයේ වෙනස් ෆෝල්ඩර දෙකක් ඇත' means 'There are two different folders in the destination', which changes the future tense 'There will be' to the present tense 'There are'.",
-          "suggestion": "ගමනාන්තයේ වෙනස් ෆෝල්ඩර දෙකක් වනු ඇත"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

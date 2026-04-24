@@ -3,13 +3,45 @@
   "content": "Completed forms",
   "content_en_sha1_hash": "5c613af38872d2e09e00947bb402139ed34eea9e",
   "created_at": "2026-03-20T09:07:38.665Z",
-  "updated_at": "2026-04-08T14:54:00.111Z",
+  "updated_at": "2026-04-23T17:24:02.136Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a section title in the forms header, indicating a list of forms that have been fully completed.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:56:47.239Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/forms-header/index.tsx",
+      "line_number": 149,
+      "context": "case FormsSection.Library:\n return t(\"Common:Library\");\n case FormsSection.InProgress:\n return t(\"Common:InProgress\");\n case FormsSection.CompletedForms:\n return t(\"Common:CompletedForms\");\n case FormsSection.Settings:\n return t(\"Common:Settings\");\n default:\n return \"\";\n }",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/forms-header/index.tsx",
+      "line_number": 149,
+      "context": "case FormsSection.Library:\n return t(\"Common:Library\");\n case FormsSection.InProgress:\n return t(\"Common:InProgress\");\n case FormsSection.CompletedForms:\n return t(\"Common:CompletedForms\");\n case FormsSection.Settings:\n return t(\"Common:Settings\");\n default:\n return \"\";\n }",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/forms-header/index.tsx",
+      "line_number": 149,
+      "context": "case FormsSection.Library:\n return t(\"Common:Library\");\n case FormsSection.InProgress:\n return t(\"Common:InProgress\");\n case FormsSection.CompletedForms:\n return t(\"Common:CompletedForms\");\n case FormsSection.Settings:\n return t(\"Common:Settings\");\n default:\n return \"\";\n }",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/sidebar/index.tsx",
+      "line_number": 122,
+      "context": "label: t(\"Common:InProgress\"),\n icon: FormFillRectSvgUrl,\n },\n {\n key: FormsSection.CompletedForms,\n label: t(\"Common:CompletedForms\"),\n icon: FormGalleryReactSvgUrl,\n },\n ];\n \n const onSettingsClick = React.useCallback(() => {",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_utils/tourSteps.ts",
+      "line_number": 271,
+      "context": "showMenu,\n callbacks,\n ),\n navSectionStep(\n \"completed-forms\",\n t(\"Common:CompletedForms\"),\n t(\n \"Common:TourCompletedForms\",\n \"Each folder contains all submitted copies of a specific form, organized by submission.\",\n ),\n showMenu,",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -26,13 +58,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Bağlanan' means 'closing' or 'being closed' (process), whereas 'Completed' in this context refers to forms that have been 'finished' or 'filled out'.",
-          "suggestion": "Tamamlanmış formalar"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {

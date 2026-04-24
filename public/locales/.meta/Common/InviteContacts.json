@@ -3,28 +3,29 @@
   "content": "Invite contacts",
   "content_en_sha1_hash": "43f0bde391682834922b0b6b0e4c82714e94586e",
   "created_at": "2025-05-19T21:30:45.983Z",
-  "updated_at": "2026-04-10T08:21:04.287Z",
+  "updated_at": "2026-04-23T17:24:01.643Z",
   "comment": {
-    "text": "The translation key \"InviteContacts\" is used to display the phrase \"Invite contacts\". It appears as a button label on a UI element, allowing users to add new contact information.",
+    "text": "This is a button label or menu item for inviting users to a room or sharing content. It appears in various contexts, such as an empty view or an info panel.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:48.011Z"
+    "updated_at": "2026-04-11T20:50:33.401Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 312,
-      "context": "t(\"EmptyView:UploadDevicePDFFormOptionDescription\"),\n \"pdf\",\n );\n \n const inviteUserOption = createInviteOption(\n t(\"Common:InviteContacts\"),\n t(\"EmptyView:InviteUsersOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n );",
+      "line_number": 313,
+      "context": "t(\"EmptyView:UploadDevicePDFFormOptionDescription\"),\n \"pdf\",\n );\n \n const inviteUserOption = createInviteOption(\n t(\"Common:InviteContacts\"),\n t(\"EmptyView:InviteUsersOptionDescription\", {\n productName: getBrandName(\"ProductName\"),\n }),\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/RoomsItemTitle.tsx",
       "line_number": 183,
-      "context": "onClickInviteUsers();\n };\n \n const addUserTitle = isTemplate\n ? t(\"Files:AccessSettings\")\n : t(\"Common:InviteContacts\");\n \n const onSearchClick = () => setShowSearchBlock?.(true);\n \n const isRoom = \"isRoom\" in selection && (selection.isRoom as boolean);",
+      "context": "onClickInviteUsers();\n };\n \n const addUserTitle = isTemplate\n ? t(\"Files:AccessSettingsTitle\")\n : t(\"Common:InviteContacts\");\n \n const onSearchClick = () => setShowSearchBlock?.(true);\n \n const isRoom = \"isRoom\" in selection && (selection.isRoom as boolean);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2157,
+      "line_number": 2216,
       "context": "disabled: false,\n },\n {\n id: \"option_invite-users-to-room\",\n key: \"invite-users-to-room\",\n label: t(\"Common:InviteContacts\"),\n icon: PersonReactSvgUrl,\n onClick: () => this.onClickInviteUsers(item.id, item.roomType),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     }
@@ -93,13 +94,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation uses the genitive case ('կոնտակտների'), which translates to 'Invite of contacts' or 'Invite contacts's', making it grammatically incorrect for a button label. It should use the accusative case to denote the object of the action.",
-          "suggestion": "Հրավիրել կոնտակտներ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {

@@ -3,13 +3,21 @@
   "content": "How to use this template",
   "content_en_sha1_hash": "51cdb343cafa69b47fba2b4f2e65ae3c5975f0dd",
   "created_at": "2026-03-31T15:18:15.175Z",
-  "updated_at": "2026-04-08T05:56:28.523Z",
+  "updated_at": "2026-04-23T17:24:02.167Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a heading for a section that explains how to use a document template within the library.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:49:58.953Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/forms/library/[langId]/[categoryId]/template/[templateId]/page.client.tsx",
+      "line_number": 351,
+      "context": "</p>\n </div>\n \n <div className={styles.description}>\n <h3 className={styles.sectionTitle}>\n {t(\"Common:LibraryTemplateHowTo\")}\n </h3>\n <p className={styles.descriptionText}>\n {t(\"Common:LibraryTemplateHowToText\")}\n </p>\n </div>",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -116,13 +124,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical gender error: 'szablon' is masculine, but 'tej' is feminine. The correct form should be 'tego szablonu'.",
-          "suggestion": "Jak używać tego szablonu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {

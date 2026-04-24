@@ -468,7 +468,7 @@ const SetRoomParams = ({
       />
     );
 
-  const tagsTitle = isTemplateSelected || isTemplate ? t("Files:RoomTags") : "";
+  const tagsTitle = isTemplateSelected || isTemplate ? t("Files:RoomTagsLabel") : "";
 
   const inputTitle =
     isTemplateSelected || isTemplate

@@ -3,13 +3,20 @@
   "content": "Recent",
   "content_en_sha1_hash": "76eec760c9b6e63eda7e9834fa40bc26d6f58eef",
   "created_at": "2025-08-27T10:14:14.891Z",
-  "updated_at": "2026-04-08T01:50:52.507Z",
+  "updated_at": "2026-04-23T17:24:02.047Z",
   "comment": {
-    "text": "This key displays the label for the \"Recent\" folder in the file explorer. It's used to name a folder that contains recently accessed files, providing users with quick access to their recent work. Translators should ensure the translation accurately conveys the meaning of \"recently accessed.\"",
+    "text": "This is a label for a folder or category in the file management system. It refers to recently accessed files or documents.",
     "is_auto": true,
-    "updated_at": "2025-08-27T10:15:16.121Z"
+    "updated_at": "2026-04-11T20:45:34.308Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/selectors/Files/hooks/useRootHelper.tsx",
+      "line_number": 140,
+      "context": "break;\n case FolderType.Favorites:\n title = t(\"Favorites\");\n break;\n case FolderType.Recent:\n title = t(\"Recent\");\n break;\n case FolderType.AiAgents:\n title = t(\"AIAgents\");\n break;\n default:",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/sub-components/DefaultPageSetting.tsx",
       "line_number": 87,
@@ -21,6 +28,12 @@
       "line_number": 88,
       "context": "break;\n case FolderType.Favorites:\n folder.title = i18n.t(\"Common:Favorites\");\n break;\n case FolderType.Recent:\n folder.title = i18n.t(\"Common:Recent\");\n break;\n default:\n break;\n }\n });",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/sidebar/index.tsx",
+      "line_number": 131,
+      "context": "label: t(\"Common:Favorites\"),\n icon: CatalogFavoritesReactSvgUrl,\n },\n {\n key: DocsSection.Recent,\n label: t(\"Common:Recent\"),\n icon: CatalogSettingsRestoreReactSvgUrl,\n },\n {\n key: DocsSection.Trash,\n label: t(\"Common:TrashSection\"),",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -39,13 +52,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Yeni' means 'New', which refers to the age or creation status of an object. The English 'Recent' in the context of a file explorer folder refers to 'recently accessed' files. The correct term should reflect recency of use.",
-          "suggestion": "Sonuncu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -81,13 +88,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Viimeaikainen' means 'recent' in the sense of 'lately' or 'of late' (e.g., recent events), but it is grammatically incorrect for a folder label. In a file explorer context, 'Viimeisimmät' (meaning 'The most recent [files]') is the standard and correct term.",
-          "suggestion": "Viimeisimmät"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -99,13 +100,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Վերջերս' is an adverb meaning 'recently' (as in 'I saw him recently'). For a folder label in a file explorer, an adjective or a noun phrase like 'Վերջիններս' or 'Վերջին ֆայլերը' is required to denote 'Recent [files]'.",
-          "suggestion": "Վերջիններս"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -129,13 +124,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ຫຼ້າສຸດ' means 'Latest' or 'Most recent' (as in the most recent single item), whereas in the context of a file explorer folder, 'Recent' refers to 'Recently accessed' or 'Recent files'. While close, 'ຫຼ້າສຸດ' is often used for 'Last' or 'Final'. A more accurate term for a folder of recent items is 'ທີ່ໃຊ້ຫຼ້າສຸດ'.",
-          "suggestion": "ທີ່ໃຊ້ຫຼ້າສຸດ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -153,13 +142,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish word 'Ostatni' means 'Last' (as in the final item in a sequence). For a folder containing 'recently accessed' files, 'Ostatnie' (plural/neuter) or 'Ostatnio używane' is the correct term to convey 'Recent'.",
-          "suggestion": "Ostatnie"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -231,13 +214,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Ukrainian word 'Останній' means 'Last' (as in the final item in a sequence), whereas the English 'Recent' in the context of a folder refers to 'Recently accessed' items. The correct term for a 'Recent' folder is 'Нещодавні'.",
-          "suggestion": "Нещодавні"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

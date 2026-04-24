@@ -48,6 +48,8 @@ import { sectionFromPathname } from "../_utils/sectionFromPathname";
 
 const FORMS_PAGE_COUNT = 25;
 const MAX_FETCH_MORE_ITERATIONS = 5;
+const THUMBNAIL_RETRY_COOLDOWN_MS = 5000;
+const THUMBNAIL_REFRESH_DELAYS_MS = [3000, 7000, 15000];
 
 const filterByFolder = (
   files: TFile[],
@@ -93,9 +95,18 @@ export default function useFormsData() {
       if (!ids.length) return;
 
       for (const id of ids) requestedThumbnailIds.current.add(id);
-      createThumbnails(ids).catch(() => {
+
+      const releaseIds = () => {
         for (const id of ids) requestedThumbnailIds.current.delete(id);
-      });
+      };
+
+      createThumbnails(ids)
+        .then(() => {
+          setTimeout(releaseIds, THUMBNAIL_RETRY_COOLDOWN_MS);
+        })
+        .catch(() => {
+          releaseIds();
+        });
     },
     [],
   );
@@ -405,5 +416,41 @@ export default function useFormsData() {
     }
   }, [getFolderId, formsListStore, isCompletedWithXlsx, requestThumbnails]);
 
-  return { fetchSection, fetchMore, fetchSubfolder };
+  const refreshTimersRef = useRef<Set<ReturnType<typeof setTimeout>>>(new Set());
+
+  useEffect(() => {
+    const timers = refreshTimersRef.current;
+    return () => {
+      for (const t of timers) clearTimeout(t);
+      timers.clear();
+    };
+  }, []);
+
+  const refreshAfterMutation = useCallback(
+    async (section?: FormsSection) => {
+      await fetchSection(section);
+
+      for (const t of refreshTimersRef.current) clearTimeout(t);
+      refreshTimersRef.current.clear();
+
+      for (const delay of THUMBNAIL_REFRESH_DELAYS_MS) {
+        const handle = setTimeout(async () => {
+          refreshTimersRef.current.delete(handle);
+          const hasWaiting = formsListStore.items.some(
+            (f) => f.thumbnailStatus === thumbnailStatuses.WAITING,
+          );
+          if (!hasWaiting) {
+            for (const t of refreshTimersRef.current) clearTimeout(t);
+            refreshTimersRef.current.clear();
+            return;
+          }
+          await fetchSection(section);
+        }, delay);
+        refreshTimersRef.current.add(handle);
+      }
+    },
+    [fetchSection, formsListStore],
+  );
+
+  return { fetchSection, fetchMore, fetchSubfolder, refreshAfterMutation };
 }

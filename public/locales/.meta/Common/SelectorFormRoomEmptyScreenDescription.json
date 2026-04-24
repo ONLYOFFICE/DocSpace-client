@@ -3,18 +3,19 @@
   "content": "To share your form and collect responses, please create the Form filling room.",
   "content_en_sha1_hash": "82979fcf50788d5adca337649ceba62db8b45855",
   "created_at": "2025-05-19T21:30:48.459Z",
-  "updated_at": "2026-04-07T23:41:10.412Z",
+  "updated_at": "2026-04-12T21:41:24.927Z",
   "comment": {
-    "text": "\"This translation key is used for the description of an empty form room screen. It will be displayed when creating a new form and should instruct the user on how to proceed. Typically, this appears in a dialog or tooltip.\"",
+    "text": "This is a descriptive text displayed on an empty screen when no form filling rooms exist. It instructs the user to create a room to share forms and collect responses.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:51:40.139Z"
+    "updated_at": "2026-04-11T20:43:31.736Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/selector/sub-components/EmptySreen/EmptyScreenFormRoom.tsx",
-      "line_number": 57,
-      "context": "? FormRoomEmptyLightImageUrl\n : FormRoomEmptyDarkImageUrl;\n \n const description =\n createDefineRoomType === RoomsType.FormRoom\n ? t(\"Common:SelectorFormRoomEmptyScreenDescription\")\n : t(\"Common:SelectorVDREmptyScreenDescription\");\n \n const buttonLabel =\n createDefineRoomType === RoomsType.FormRoom\n ? t(\"Common:CreateFormFillingRoom\")",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/components/selector/sub-components/EmptySreen/EmptyScreenFormRoom.tsx",
+      "line_number": 56,
+      "context": "? FormRoomEmptyLightImage\n : FormRoomEmptyDarkImage;\n \n const description =\n createDefineRoomType === RoomType.FillingFormsRoom\n ? t(\"SelectorFormRoomEmptyScreenDescription\") || \"\"\n : t(\"SelectorVDREmptyScreenDescription\") || \"\";\n \n const buttonLabel =\n createDefineRoomType === RoomType.FillingFormsRoom\n ? t(\"CreateFormFillingRoom\") || \"\"",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -115,7 +116,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \"u\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-12T21:40:38.848Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null
@@ -123,18 +126,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "punctuation_mismatch",
-          "description": "English ends with \".\" but translation ends with \"n\"",
-          "suggestion": ""
-        },
-        {
-          "type": "missing_content",
-          "description": "The Dutch translation is an incomplete sentence; it lacks the final punctuation and the imperative/instructional sense of the English original (it ends abruptly after the object).",
-          "suggestion": "Om uw formulier te delen en reacties te verzamelen, maakt u de Kamer voor het invullen van formulieren aan."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -170,13 +162,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'ෆෝම් පුරවන ලද කාමරයක්' means 'a room that has been filled with forms' (past tense/completed action), whereas the English 'Form filling room' refers to the purpose of the room (a room for filling forms).",
-          "suggestion": "ඔබේ ෆෝම් බෙදා ගැනීමට සහ ප්‍රතිචාර රැස් කිරීමට, කරුණාකර ෆෝම් පිරවීමේ කාමරයක් සාදන්න."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

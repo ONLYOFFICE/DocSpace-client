@@ -3,17 +3,18 @@
   "content": "Custom",
   "content_en_sha1_hash": "081ae3fdc403609cf6e760849ebb14117b7a50cb",
   "created_at": "2025-05-19T21:30:44.377Z",
-  "updated_at": "2026-04-08T12:36:34.459Z",
+  "updated_at": "2026-04-11T20:55:42.648Z",
   "comment": {
-    "text": "This translation key is used to display the text \"Custom\" in various contexts throughout the application, typically appearing on filters or buttons related to custom rooms. The text is rendered using the \"Common:CustomRooms\" translation from the i18n module, which provides a consistent and localized experience for users.",
+    "text": "This is a label for a custom room type, used in filters and room type displays. It appears as a short, standalone word.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:47.685Z"
+    "updated_at": "2026-04-11T20:55:42.648Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 45,
-      "context": "import i18n from \"../i18n\";\n \n export const getRoomTypeName = (room, t) => {\n switch (room) {\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRooms\");\n \n case RoomsType.AIRoom:\n return t(\"Common:AIRoomTitle\");\n \n case RoomsType.FillingFormsRoom:",
+      "line_number": 46,
+      "context": "import { getBrandName } from \"@docspace/shared/constants/brands\";\n \n export const getRoomTypeName = (room, t) => {\n switch (room) {\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRooms\");\n \n case RoomsType.AIRoom:\n return t(\"Common:AIRoomTitle\");\n \n case RoomsType.FillingFormsRoom:",
       "module": "/packages/client"
     },
     {
@@ -93,13 +94,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Հարմարեցնել' means 'To adjust' or 'To customize' (verb), whereas the English 'Custom' in this context is an adjective describing a type of room (e.g., 'Custom Room'). The translation should be an adjective/noun form.",
-          "suggestion": "Անհատական"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -183,13 +178,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Po meri' means 'Tailor-made' or 'According to my measure' (adverbial phrase), whereas the context requires an adjective/noun 'Custom' to label a type of room or filter. In a UI context for room types, 'Prilagojeno' is the correct term.",
-          "suggestion": "Prilagojeno"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -225,13 +214,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English source is 'Custom', but the Chinese translation '自定义房间' means 'Custom Room'. This adds extra information ('Room') not present in the source string, which may cause UI overflow or inconsistency if the key is used in contexts other than room types.",
-          "suggestion": "自定义"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

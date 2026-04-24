@@ -3,13 +3,21 @@
   "content": "The {{productName}} Wallet allows you to easily purchase services such as storage, AI tools, and backups. Add funds and select the services you need to get started.",
   "content_en_sha1_hash": "1512af4bdecc76d22ea3fbb5de9c045a7ba5ba43",
   "created_at": "2026-04-10T13:53:43.909Z",
-  "updated_at": "2026-04-10T13:53:43.909Z",
+  "updated_at": "2026-04-13T14:59:06.030Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a descriptive text displayed in the Wallet section. It explains the purpose of the Wallet feature, which is to purchase services like storage, AI tools, and backups. The `{{productName}}` variable will be replaced with the product's brand name.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:39:16.424Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
+      "line_number": 159,
+      "context": "};\n \n return (\n <div className={styles.walletContainer}>\n <Text className={styles.walletDescription}>\n {t(\"WalletSectionDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n \n {walletHelpUrl ? (",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -104,7 +112,15 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Wallet' is translated as 'Celsme', which is not a Latvian word for wallet. 'Celsme' does not carry the meaning of a financial wallet/purse. The correct Latvian term for wallet is 'Maks' or 'Maciņš'.",
+          "suggestion": "{{productName}} Maks ļauj jums vienkārši iegādāties pakalpojumus, piemēram, uzglabāšanu, AI rīkus un dublējumkopijas. Pievienojiet līdzekļus un izvēlieties pakalpojumus, kas jums ir nepieciešami, lai sāktu.",
+          "checked_at": "2026-04-12T09:42:44.813Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "nl": {

@@ -3,13 +3,21 @@
   "content": "Vectorization <1>(Knowledge base)</1>",
   "content_en_sha1_hash": "f2c9ce913d64812e0c1415e5fa606dbb26068e94",
   "created_at": "2026-04-10T13:53:44.743Z",
-  "updated_at": "2026-04-10T13:53:44.743Z",
+  "updated_at": "2026-04-11T20:59:36.293Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label for an AI service feature. It describes the \"Vectorization\" service and includes a link to a knowledge base for more information.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:59:36.293Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/GetStartedBody.tsx",
+      "line_number": 258,
+      "context": "<AiVectorizationIcon />\n </div>\n <Text fontSize=\"12px\" fontWeight={600} as=\"span\">\n <CommonTrans\n \n i18nKey=\"AIWhatYouPayForVectorization\"\n components={{\n 1: (\n <Text\n fontSize=\"12px\"\n as=\"span\"",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

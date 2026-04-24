@@ -56,6 +56,7 @@ import { FormWrapper } from "@docspace/ui-kit/components/form-wrapper";
 import { getRedirectURL } from "@/utils";
 import OAuthClientInfo from "../../../components/ConsentInfo";
 import styles from "./consent.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 interface IConsentProps {
   client: IClientProps;
   scopes: TScope[];
@@ -264,7 +265,7 @@ const Consent = ({
               terms of service
             </Link>
             . You can revoke this consent at any time in your{" "}
-            {{ productName: t("Common:ProductName") }} account settings.
+            {{ productName: getBrandName("ProductName") }} account settings.
           </Trans>
         </Text>
       </div>

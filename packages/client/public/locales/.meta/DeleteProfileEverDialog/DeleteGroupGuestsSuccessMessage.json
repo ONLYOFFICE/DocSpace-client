@@ -3,11 +3,12 @@
   "content": "Guests have been successfully deleted.",
   "content_en_sha1_hash": "dcb6b74488ac068257038d834da093877562be1d",
   "created_at": "2025-05-19T21:30:56.654Z",
-  "updated_at": "2026-04-07T19:35:05.064Z",
+  "updated_at": "2026-04-11T21:06:08.745Z",
   "comment": {
-    "text": "This translation key is used to display a success message when deleting group guests. It appears as a toast notification after clicking the \"Delete\" button in a delete profile ever dialog. Translators should provide a confirmation of successful deletion for group guest removal.",
+    "text": "This is a toast message confirming that selected guest users have been successfully removed from a group.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:30.274Z"
+    "updated_at": "2026-04-11T21:06:08.745Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

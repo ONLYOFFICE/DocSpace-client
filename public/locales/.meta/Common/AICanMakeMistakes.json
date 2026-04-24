@@ -3,18 +3,19 @@
   "content": "AI can make mistakes. Please double-check responses.",
   "content_en_sha1_hash": "b55d36ccb29f649d216d835fd6fa2dbdad309c53",
   "created_at": "2025-11-13T07:57:41.751Z",
-  "updated_at": "2026-04-08T17:32:56.513Z",
+  "updated_at": "2026-04-11T21:00:33.776Z",
   "comment": {
-    "text": "This key displays a disclaimer reminding users that the AI may produce errors and requires verification of its responses. It appears as small text near the chat input field, likely providing a subtle cautionary message. Translators should maintain the disclaimer's tone and ensure it accurately conveys the AI's limitations.",
+    "text": "This is a small informational text displayed below the AI chat input field. It warns users that AI-generated responses may be inaccurate and should be verified.",
     "is_auto": true,
-    "updated_at": "2025-11-13T08:04:57.026Z"
+    "updated_at": "2026-04-11T21:00:33.776Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/chat/components/chat-input/index.tsx",
-      "line_number": 324,
-      "context": "fontSize=\"10px\"\n fontWeight={400}\n className={styles.chatInputText}\n noSelect\n >\n {t(\"Common:AICanMakeMistakes\")}\n </Text>\n ) : null}\n </>\n );\n };",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-input/index.tsx",
+      "line_number": 364,
+      "context": "fontSize=\"10px\"\n fontWeight={400}\n className={styles.chatInputText}\n noSelect\n >\n {t(\"AICanMakeMistakes\")}\n </Text>\n ) : null}\n </>\n );\n };",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -177,13 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'додатно' (dodatno) is used incorrectly in this context. While it can mean 'additionally', in Serbian, the standard way to say 'double-check' or 'verify again' is 'поново проверите' or 'проверите још једном'. 'Додатно проверите' sounds unnatural and is a literal/incorrect translation of the intent.",
-          "suggestion": "AI може да греши. Молимо вас да поново проверите одговоре."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

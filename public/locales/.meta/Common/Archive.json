@@ -3,11 +3,12 @@
   "content": "Archive",
   "content_en_sha1_hash": "2621c6fd51a58e1d1d5c491aac71488647b20224",
   "created_at": "2025-05-19T21:30:43.051Z",
-  "updated_at": "2026-04-08T16:50:34.118Z",
+  "updated_at": "2026-04-11T20:59:08.000Z",
   "comment": {
-    "text": "This translation key is used to display the text \"Archive\" as a label when indicating that a file has been archived. It appears in a table view cell on the Home page, displaying information about different types of files.",
+    "text": "This is a noun referring to the archive section. It appears in dialog titles, confirmation messages, and activity feed descriptions when moving items to or from the archive.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:21.712Z"
+    "updated_at": "2026-04-11T20:59:08.000Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -129,13 +130,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian word 'Պահոց' (Pahots) typically means 'storage', 'depot', or 'reservoir'. In the context of file management (archiving files), the correct term should be 'Արխիվ' (Arkhiv).",
-          "suggestion": "Արխիվ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -159,13 +154,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao word 'ເກັບກຳ' (Kep Kam) means 'to collect', 'to gather', or 'to accumulate' (e.g., collecting data or resources). In the context of file management (Archive), it should mean to store or move files to an archive for long-term storage.",
-          "suggestion": "ບັງຄັບເກັບ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -213,13 +202,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'සංරක්‍ෂණය' means 'Protection' or 'Preservation'. In the context of file management (Archive/Unarchive), the correct term should refer to 'Archiving' (storing/moving to an archive).",
-          "suggestion": "බාගන්නා"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

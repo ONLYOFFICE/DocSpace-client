@@ -62,5 +62,19 @@
   "WebSearchDisabledSuccess": "تم تعطيل {{webSearch}} بنجاح",
   "WebSearchEnabledSuccess": "تم تفعيل {{webSearch}} بنجاح",
   "WebSearchKeyDescription": "يرجى إدخال مفتاح API الذي تم الحصول عليه من مزود {{webSearch}}",
-  "WebSearchKeyHiddenDescription": "يتم عرض مفتاح API مرة واحدة فقط عند الحفظ ثم يتم إخفاؤه لأغراض أمنية."
+  "WebSearchKeyHiddenDescription": "يتم عرض مفتاح API مرة واحدة فقط عند الحفظ ثم يتم إخفاؤه لأغراض أمنية.",
+  "Capabilities": "القدرات",
+  "CapabilitiesDescription": "تتحكم هذه الإعدادات في الميزات التي يتم عرضها وتكون متاحة لهذا النموذج في دردشة {{productName}}.",
+  "CapabilityExtendedThinking": "التفكير الممتد",
+  "CapabilityToolCalling": "استدعاء الأدوات",
+  "CapabilityVision": "الرؤية",
+  "ListModels": "قائمة النماذج",
+  "ModelName": "اسم النموذج",
+  "ModelNameHint": "استخدم اسماً يساعدك على تمييز هذا النموذج.",
+  "OtherModels": "نماذج أخرى",
+  "OtherModelsTooltip": "قد لا تدعم بعض النماذج إجراءات أو ميزات معينة",
+  "RecommendedModels": "النماذج المُوصى بها",
+  "RecommendedModelsTooltip": "النماذج ذات الدعم المؤكد لميزات وإجراءات {{productName}}",
+  "SelectAtLeastOneModel": "يرجى اختيار نموذج واحد على الأقل",
+  "SelectModels": "اختيار النماذج"
 }

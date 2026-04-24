@@ -48,6 +48,7 @@ import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHook
 import useCommon from "../useCommon";
 import DisableAiServicesDialog from "SRC_DIR/components/dialogs/DisableAiServicesDialog";
 import { AI_ENUM } from "@docspace/ui-kit/billing/constants";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 interface AiServicesManagementProps {
   isMobileView: boolean;
@@ -226,11 +227,11 @@ const AiServicesManagementComponent = ({
       ) : null}
       <Text className="category-item-description" fontSize="13px">
         {t("AiServicesManagementDescription", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
           aiAgents: t("Common:AIAgents"),
           aiSettings: t("AISettings"),
           aiServices: t("Common:AIServices"),
-          organizationName: t("Common:OrganizationName"),
+          organizationName: getBrandName("OrganizationName"),
         })}
       </Text>
       {aiServicesManagementUrl ? (

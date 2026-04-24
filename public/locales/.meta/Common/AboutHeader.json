@@ -3,17 +3,18 @@
   "content": "About this program",
   "content_en_sha1_hash": "56fb7336f231f3007d1a564b2c67ede83691a9e3",
   "created_at": "2025-05-26T07:15:39.902Z",
-  "updated_at": "2026-04-08T18:24:02.416Z",
+  "updated_at": "2026-04-13T14:59:05.788Z",
   "comment": {
-    "text": "This translation key is used to translate the text \"About this program\" and appears as a header title in various UI components, including a modal dialog. It provides context for users about the purpose of the program or application, likely guiding them through features or settings related to the product's functionality.",
+    "text": "This is the title of the \"About\" dialog, which displays information about the program.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:09:16.613Z"
+    "updated_at": "2026-04-11T21:01:39.643Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/About/AboutHeader.js",
-      "line_number": 57,
-      "context": "theme.interfaceDirection === \"rtl\" && \"transform: scaleX(-1);\"}\n }\n }\n `;\n \n const AboutHeader = () => {\n const { t, ready } = useTranslation(\"Common\");\n \n const navigate = useNavigate();\n \n const onBack = () => {",
+      "line_number": 76,
+      "context": "isFill\n onClick={onBack}\n className=\"arrow-button\"\n />\n <Heading type=\"content\" truncate>\n {!ready ? \"\" : t(\"AboutHeader\")}\n </Heading>\n </HeaderContainer>\n );\n };",
       "module": "/packages/client"
     },
     {
@@ -93,13 +94,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'In riguardo a questo programma' is grammatically incorrect and sounds unnatural in Italian for a UI header. 'In riguardo a' is a literal/calque translation of 'About' that does not exist in standard Italian. The correct prepositional phrase for a title is 'Informazioni su' or 'Informazioni riguardo a'.",
-          "suggestion": "Informazioni su questo programma"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -213,13 +208,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word '方案' (fāng'àn) means 'solution', 'scheme', or 'plan', which is incorrect in the context of a software application. The English 'program' refers to the software itself.",
-          "suggestion": "关于本程序"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

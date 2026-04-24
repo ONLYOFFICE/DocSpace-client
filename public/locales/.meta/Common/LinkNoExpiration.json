@@ -3,22 +3,23 @@
   "content": "The link has <1>no expiration date</1>",
   "content_en_sha1_hash": "5925eee629daf76422ddce857b4bc1fd819d271e",
   "created_at": "2025-08-26T11:14:57.491Z",
-  "updated_at": "2026-04-08T05:34:47.019Z",
+  "updated_at": "2026-04-23T17:24:01.884Z",
   "comment": {
-    "text": "This key displays a message indicating that a link does not expire. It's used within a UI element, likely a share component, to inform the user about the link's validity. Translators should ensure the phrasing accurately conveys the concept of a permanent or indefinite link.",
+    "text": "This is a text string indicating that a shared link does not expire. It appears within a toast message or a share dialog, with the \"no expiration date\" part emphasized.",
     "is_auto": true,
-    "updated_at": "2025-08-26T11:23:14.370Z"
+    "updated_at": "2026-04-11T20:49:33.708Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 517,
+      "line_number": 518,
       "context": "/>\n ) : (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"LinkNoExpiration\"\n components={{ 1: <strong key=\"strong-link-valid\" /> }}\n />\n );\n \n toastr.success(toastTranslation, t(\"Common:LinkCopiedToClipboard\"));",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 388,
+      "line_number": 389,
       "context": "return (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"LinkNoExpiration\"\n components={{ 1: <strong key=\"strong-link-valid\" /> }}\n />\n );\n };",
       "module": "/packages/shared"
     }
@@ -63,13 +64,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation is grammatically incorrect and nonsensical. 'έχει χωρίς' (has without) is a direct, incorrect translation of 'has no'. It should be phrased as 'does not have an expiration date' or 'has no expiration date' using proper Greek syntax.",
-          "suggestion": "Ο σύνδεσμος <1>δεν έχει ημερομηνία λήξης</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -141,13 +136,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Portuguese translation is grammatically incorrect and fails to convey the meaning. 'O link tem sem data de expiração' translates literally to 'The link has without expiration date', which is nonsensical in Portuguese.",
-          "suggestion": "O link <1>não tem data de expiração</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -213,13 +202,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Ukrainian translation 'Посилання не має терміну дії' literally means 'The link has no term of action/validity', which is grammatically awkward and slightly changes the meaning from 'no expiration date'. It implies the link lacks a validity period entirely, rather than stating it doesn't expire.",
-          "suggestion": "Посилання <1>не має терміну дії</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

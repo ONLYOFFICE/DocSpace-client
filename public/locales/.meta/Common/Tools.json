@@ -3,18 +3,19 @@
   "content": "Tools",
   "content_en_sha1_hash": "4fa8cc860c52b268dc6a3adcde7305e9415db5bb",
   "created_at": "2025-10-27T16:14:24.060Z",
-  "updated_at": "2026-04-07T21:31:18.194Z",
+  "updated_at": "2026-04-23T17:24:02.170Z",
   "comment": {
-    "text": "This key refers to a label for a section or settings related to available tools within the chat interface. It likely appears in a settings panel or options menu, indicating a grouping of functions or features accessible to the user. Translators should consider a term for \"tools\" or \"utilities\" in this context.",
+    "text": "This is a button label that opens a menu or dialog for managing tools within the AI chat feature.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:25:43.407Z"
+    "updated_at": "2026-04-11T20:40:54.988Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/chat/components/chat-input/ToolsSettings.tsx",
-      "line_number": 41,
-      "context": "import WebSearchIconUrl from \"PUBLIC_DIR/images/web.search.svg?url\";\n import ManageConnectionsReactSvgUrl from \"PUBLIC_DIR/images/manage.connection.react.svg?url\";\n \n import { openConnectWindow } from \"../../../../api/files\";\n import {\n changeMCPToolsForRoom,\n connectServer,\n disconnectServer,\n getMCPToolsForRoom,\n updateWebSearchInRoom,\n } from \"../../../../api/ai\";",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-input/tools-settings/index.tsx",
+      "line_number": 500,
+      "context": "data-testid=\"chat-input-tools-button\"\n aria-disabled={!aiReady}\n >\n <IconButton iconNode={<McpToolReactSvg />} size={16} isFill={false} />\n <Text lineHeight=\"16px\" fontSize=\"13px\" fontWeight={600} noSelect>\n {t(\"Tools\")}\n </Text>\n <ContextMenu\n ref={contextMenuRef}\n model={model}\n onHide={hideMcpTools}",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {

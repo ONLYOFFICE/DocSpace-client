@@ -3,16 +3,17 @@
   "content": "Adjust Session Lifetime to define the time period before automatic logoff. After saving, logoff will be performed for all users.",
   "content_en_sha1_hash": "0c6dc2e12543d442f19d41fc7480959c780e4b71",
   "created_at": "2025-05-19T21:30:52.652Z",
-  "updated_at": "2026-04-09T01:07:22.362Z",
+  "updated_at": "2026-04-23T17:24:02.040Z",
   "comment": {
-    "text": "Adjust Session Lifetime defines the time period before automatic logoff. This setting will be applied to all users after saving, prompting them to log off. It appears in a portal settings category.",
+    "text": "This is a descriptive text explaining the \"Session Lifetime\" setting. It appears below the setting title and informs users that adjusting this setting defines the automatic logoff period and that changes affect all users.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:29.358Z"
+    "updated_at": "2026-04-11T21:22:13.930Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 349,
+      "line_number": 353,
       "context": "{t(\"SessionLifetime\")}\n </Text>\n \n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"SessionLifetimeSettingDescription\")}\n </Text>\n \n {lifetimeSettingsUrl ? (\n <Link\n className=\"link-learn-more\"",
       "module": "/packages/client"
     },
@@ -111,13 +112,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation says 'before automatic login' (ກ່ອນທີ່ຈະເຂົ້າສູ່ລະບົບອັດຕະໂນມັດ) instead of 'before automatic logoff' (ກ່ອນທີ່ຈະອອກຈາກລະບົບອັດຕະໂນມັດ). This is a critical reversal of the intended function.",
-          "suggestion": "ປັບ Session Lifetime ເພື່ອກໍານົດໄລຍະເວລາກ່ອນທີ່ຈະອອກຈາກລະບົບອັດຕະໂນມັດ. ຫຼັງ​ຈາກ​ການ​ບັນ​ທຶກ​, ການ​ອອກ​ຈາກ​ລະ​ບົບ​ຈະ​ໄດ້​ຮັບ​ການ​ປະ​ຕິ​ບັດ​ສໍາ​ລັບ​ຜູ້​ໃຊ້​ທັງ​ຫມົດ​."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -135,13 +130,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'wylogowania' is a noun (logoff) used where a verb (will be logged off) is required, making the sentence grammatically incorrect and semantically broken in Polish.",
-          "suggestion": "Dostosuj czas trwania sesji, aby zdefiniować czas przed automatycznym wylogowaniem. Po zapisaniu wszyscy użytkownicy zostaną wylogowani z obszaru."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -171,13 +160,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'එය සියලුම පරිශ්‍රීලකයින් සඳහා බලපායි' means 'it affects all users', which is a significant deviation from the English 'logoff will be performed for all users'. The English text specifies a specific action (logoff) that will occur, whereas the Sinhala text only states it 'affects' them.",
-          "suggestion": "ස්වයංක්‍රීයව ලොග් අවුට් වීම (logoff) සිදුවීමට පෙර කාල සීමාව නිර්වචනය කිරීමට සැෂන් ආයු කාලය (Session Lifetime) සකසන්න. සුරැකීමෙන් පසු, සියලුම පරිශීලකයින් සඳහා ස්වයංක්‍රීයව ලොග් අවුට් වීම සිදු වනු ඇත."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

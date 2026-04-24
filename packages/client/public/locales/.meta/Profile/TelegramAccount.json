@@ -3,11 +3,12 @@
   "content": "Telegram account",
   "content_en_sha1_hash": "9b8ac26e7b4a631327a1834706b62a06d842b15c",
   "created_at": "2025-09-10T09:59:16.166Z",
-  "updated_at": "2026-04-09T07:00:18.914Z",
+  "updated_at": "2026-04-11T21:20:34.896Z",
   "comment": {
-    "text": "This key displays the label \"Telegram account\" within a modal dialog, specifically in the header. It's used to identify the purpose of the dialog, which is likely related to connecting or managing a Telegram account. Translators should ensure the translation accurately reflects this connection context.",
+    "text": "Dialog title for connecting a Telegram account.",
     "is_auto": true,
-    "updated_at": "2025-09-10T10:02:56.336Z"
+    "updated_at": "2026-04-11T21:20:34.896Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -153,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'විදුලි පණිවුඩ ගිණුම' means 'Electronic message account' or 'Email account' in Sinhala, failing to specify 'Telegram'.",
-          "suggestion": "ටෙලිග්‍රෑම් ගිණුම"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

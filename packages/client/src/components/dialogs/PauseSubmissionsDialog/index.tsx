@@ -79,7 +79,7 @@ const PauseSubmissionsDialog = ({
       displayType={ModalDialogType.modal}
     >
       <ModalDialog.Header>
-        {t("PauseSubmissionsDialog:Title")}
+        {t("PauseSubmissionsDialog:PauseSubmissionsTitle")}
       </ModalDialog.Header>
       <ModalDialog.Body>
         <Text fontSize="13px" fontWeight={400}>

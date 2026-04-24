@@ -3,11 +3,12 @@
   "content": "A new version of the website available",
   "content_en_sha1_hash": "fca1ca011a56ace46b5510f663187f90e7020358",
   "created_at": "2025-05-19T21:30:46.800Z",
-  "updated_at": "2026-04-08T04:11:15.396Z",
+  "updated_at": "2026-04-11T20:48:06.714Z",
   "comment": {
-    "text": "This translation key is used for displaying a notification about a new version of the website being available. It will be shown in a snackbar component when an \"Update\" button is clicked, prompting the user to load the updated version.",
+    "text": "This is a toast message informing the user that a new version of the website is available and prompting them to refresh.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:21.191Z"
+    "updated_at": "2026-04-11T20:48:06.714Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -105,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ເປັນເວັບໄຊທ໌ລ້າສຸດ' means 'Is the latest website', which changes the meaning from a notification that a new version is available to a descriptive statement about the website itself.",
-          "suggestion": "ມີເວັບໄຊທ໌ເວີຊັນໃໝ່ພ້ອມໃຊ້ງານແລ້ວ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {

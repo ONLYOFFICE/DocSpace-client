@@ -3,17 +3,18 @@
   "content": "Invite new members to {{productName}} personally via email",
   "content_en_sha1_hash": "ef1f3846a0dd7e2a42b3803beac9dd6d39eb70c9",
   "created_at": "2025-05-19T21:30:54.724Z",
-  "updated_at": "2026-04-07T19:35:05.124Z",
+  "updated_at": "2026-04-11T21:14:09.899Z",
   "comment": {
-    "text": "This translation key is used to display a message inviting users to manually invite new members to the product via email. It appears in the UI as part of an input field, likely on a panel or dialog where users can manually enter room IDs.",
+    "text": "This is a descriptive text displayed below an input field on the invitation panel. It explains that users can invite new members to the product via email. `{{productName}}` is a variable representing the product's brand name.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:15.955Z"
+    "updated_at": "2026-04-11T21:14:09.899Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
-      "line_number": 654,
-      "context": "[styles.noAllowInvitingGuests]:\n roomId !== -1 ? !allowInvitingGuests : null,\n })}\n >\n {roomId === -1\n ? t(\"InviteMembersManuallyDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : !allowInvitingGuests\n ? t(\"InviteToRoomManuallyInfoMembers\", {\n productName: t(\"Common:ProductName\"),",
+      "line_number": 655,
+      "context": "[styles.noAllowInvitingGuests]:\n roomId !== -1 ? !allowInvitingGuests : null,\n })}\n >\n {roomId === -1\n ? t(\"InviteMembersManuallyDescription\", {\n productName: getBrandName(\"ProductName\"),\n })\n : !allowInvitingGuests\n ? t(\"InviteToRoomManuallyInfoMembers\", {\n productName: getBrandName(\"ProductName\"),",
       "module": "/packages/client"
     }
   ],

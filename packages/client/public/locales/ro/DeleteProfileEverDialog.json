@@ -1,6 +1,6 @@
 {
-  "ActionCannotBeUndone": "Utilizatorii dezactivați pe care i-ați selectat vor fi șterși din {{productName}}. Această acțiune nu poate fi anulată.",
   "ActionCannotBeUndoneGuests": "Utilizatorii dezactivați pe care le-ați selectat vor fi șterși din {{productName}}. Această acțiune nu poate fi anulată.",
+  "ActionCannotBeUndoneUsers": "Utilizatorii dezactivați pe care i-ați selectat vor fi șterși din {{productName}}. Această acțiune nu poate fi anulată.",
   "CannotReassignFiles": "Dacă ștergeți mai mulți utilizatori deodată, nu puteți reafecta fișierele lor altor utilizatori.",
   "DeleteGroupGuestsSuccessMessage": "Invitații au fost șterse cu succes.",
   "DeleteGroupUsersSuccessMessage": "Utilizatorii au fost șterse cu succes.",

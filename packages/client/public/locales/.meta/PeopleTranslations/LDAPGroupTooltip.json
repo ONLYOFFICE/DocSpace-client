@@ -3,17 +3,18 @@
   "content": "This group is loaded from LDAP. If you need to rename it, add or remove users, refer to the LDAP directory.",
   "content_en_sha1_hash": "3b6c0923db13975d55ef58409dfb21985e8ea826",
   "created_at": "2025-05-19T21:30:53.480Z",
-  "updated_at": "2026-04-07T19:35:05.177Z",
+  "updated_at": "2026-04-11T21:20:13.538Z",
   "comment": {
-    "text": "This translation key is used for a tooltip that provides information about groups loaded from LDAP directories. It appears in a UI component to inform users about the group's origin and provide instructions on how to manage it if necessary.",
+    "text": "This is a tooltip that appears when hovering over an LDAP group name, explaining that the group is managed externally and changes must be made in the LDAP directory.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:40.246Z"
+    "updated_at": "2026-04-11T21:20:13.538Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Groups/ItemTitle.tsx",
-      "line_number": 119,
-      "context": ") : null}\n \n {groupSelection?.isLDAP ? (\n <div\n data-tooltip-id=\"system-tooltip\"\n data-tooltip-content={t(\"PeopleTranslations:LDAPGroupTooltip\")}\n data-tooltip-place=\"bottom\"\n >\n <Badge\n className=\"ldap-badge\"\n label={t(\"Common:LDAP\")}",
+      "line_number": 120,
+      "context": ") : null}\n \n {groupSelection?.isLDAP ? (\n <div\n data-tooltip-id=\"system-tooltip\"\n data-tooltip-content={t(\"PeopleTranslations:LDAPGroupTooltip\")}\n data-tooltip-place=\"bottom\"\n >\n <Badge\n className=\"ldap-badge\"\n label={getConstName(\"LDAP\")}",
       "module": "/packages/client"
     }
   ],

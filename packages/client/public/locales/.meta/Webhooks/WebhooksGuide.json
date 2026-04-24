@@ -3,16 +3,17 @@
   "content": "Webhooks Guide",
   "content_en_sha1_hash": "426d1aa73a91fb4aa937d1af4f1bdc8b411b5146",
   "created_at": "2025-05-19T21:30:49.890Z",
-  "updated_at": "2026-04-08T18:52:03.544Z",
+  "updated_at": "2026-04-11T21:28:03.173Z",
   "comment": {
-    "text": "The \"WebhooksGuide\" translation key is used to display a title for a webpage or section related to webhooks, which appears as a clickable link on a portal settings page.",
+    "text": "This is a link label that, when clicked, opens a guide about webhooks.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:44.167Z"
+    "updated_at": "2026-04-11T21:28:03.173Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhookInfo.js",
-      "line_number": 70,
+      "line_number": 71,
       "context": "type={LinkType.page}\n isHovered\n color=\"accent\"\n dataTestId=\"webhooks_info_link\"\n >\n {t(\"WebhooksGuide\")}\n </Link>\n ) : null}\n </div>\n );\n };",
       "module": "/packages/client"
     }
@@ -39,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'уеб кука' is a literal and incorrect translation of 'webhooks'. In Bulgarian technical terminology, 'webhooks' is typically transliterated as 'уебхукове' or left as 'webhooks'. 'Уеб кука' translates to 'web hook' (as in a physical fishing hook).",
-          "suggestion": "Ръководство за уебхукове"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -177,13 +172,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'водич' is a transliteration of the English word 'guide' rather than a proper Serbian translation. In Serbian, 'Guide' (as in a manual or documentation) should be translated as 'Vodič'.",
-          "suggestion": "Vodič za vebhukove"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

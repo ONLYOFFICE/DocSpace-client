@@ -30,6 +30,7 @@ import { Button } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { Link } from "@docspace/ui-kit/components/link";
 import { sendDeletePortalEmail } from "@docspace/shared/api/portal";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const DeletePortalDialog = (props) => {
 	const { t, ready } = useTranslation("Settings", "Common");
@@ -55,7 +56,7 @@ const DeletePortalDialog = (props) => {
 			displayType="modal"
 		>
 			<ModalDialog.Header>
-				{t("Common:DeletePortal", { productName: t("Common:ProductName") })}
+				{t("Common:DeletePortal", { productName: getBrandName("ProductName") })}
 			</ModalDialog.Header>
 			<ModalDialog.Body>
 				<Trans t={t} i18nKey="DeletePortalInfo" ns="Settings">

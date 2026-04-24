@@ -3,11 +3,12 @@
   "content": "You can open the document only in the mobile application",
   "content_en_sha1_hash": "28b4547a00825cbbc444e4aa0722821207801a37",
   "created_at": "2025-06-30T12:20:13.385Z",
-  "updated_at": "2026-04-03T21:51:41.162Z",
+  "updated_at": "2026-04-11T21:29:50.286Z",
   "comment": {
-    "text": "This translation key is used to display a message indicating that a document can only be opened through the mobile application. It appears in a styled file tile component and is conditionally rendered based on whether the document should be opened exclusively in the app.",
+    "text": "This is a message displayed when a user attempts to open a document via a deep link that can only be opened within the mobile application. It informs the user that the document is exclusively accessible through the app.",
     "is_auto": true,
-    "updated_at": "2025-06-30T12:20:55.388Z"
+    "updated_at": "2026-04-11T21:29:50.286Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

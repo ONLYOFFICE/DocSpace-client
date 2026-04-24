@@ -3,22 +3,29 @@
   "content": "Authorization",
   "content_en_sha1_hash": "5e25ce007aa95ea2ea8b158aee9c630a32ea5616",
   "created_at": "2025-05-19T21:30:43.158Z",
-  "updated_at": "2026-04-08T16:35:17.503Z",
+  "updated_at": "2026-04-23T17:24:01.761Z",
   "comment": {
-    "text": "This translation key is used as the title of an authorization dialog box that opens to prompt users to grant access or authenticate. It appears in various places, such as when reconnecting to a provider or connecting to a third-party storage, and its purpose is to inform the user about the authentication request.",
+    "text": "This is the title of a new browser window that opens to handle an authorization process, typically for connecting to third-party services or AI agents.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:18.027Z"
+    "updated_at": "2026-04-11T20:58:55.860Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-input/tools-settings/index.tsx",
+      "line_number": 203,
+      "context": "type as unknown as LoginProvider,\n );\n \n const newWindow = window.open(\n \"\",\n t(\"Authorization\"),\n \"height=600, width=1020\",\n );\n \n if (newWindow && typeof url === \"string\") {\n newWindow.location = url;",
+      "module": "/libs/ui-kit"
+    },
+    {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/ThirdPartyComboBox.tsx",
-      "line_number": 212,
+      "line_number": 213,
       "context": "if (storageLocation.provider?.isOauth) {\n setIsOauthWindowOpen(true);\n const authModal = window.open(\n \"\",\n t(\"Common:Authorization\"),\n \"height=600, width=1020\",\n );\n openConnectWindow(provider!.providerKey!, authModal).then((modal) =>\n getOAuthToken(modal)\n .then((token) =>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 340,
+      "line_number": 345,
       "context": "};\n \n if (provider.isOauth) {\n const authModal = window.open(\n \"\",\n t(\"Common:Authorization\"),\n \"height=600, width=1020\",\n );\n await openConnectWindow(provider.providerName, authModal)\n .then(getOAuthToken)\n .then((token) => {",
       "module": "/packages/client"
     },
@@ -135,25 +142,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '許可' (Permission/Permit) is incorrect for the context of OAuth and authentication. In technical UI, 'Authorization' refers to the process of granting access via credentials, which should be translated as '認証' (Authentication/Authorization) or '認可' (Authorization). '許可' sounds like a simple 'allow/deny' permission setting rather than a formal authentication/authorization process.",
-          "suggestion": "認証"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation '승인' means 'Approval' or 'Authorization' in the sense of granting permission/consent. However, in the context of OAuth and authentication (as seen in the code: `isOauth`, `getOAuthToken`), 'Authorization' refers to the process of identity verification/authentication. In Korean UI/UX for OAuth flows, '인증' (Authentication) or '권한 부여' (Authorization/Granting authority) is more accurate. '승인' sounds like a manager approving a request rather than a technical authentication process.",
-          "suggestion": "권한 부여"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -207,13 +202,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'බලය දීම' means 'granting power' or 'empowerment'. In the context of OAuth and authentication dialogs, 'Authorization' refers to the process of verifying identity or granting permission to access data. A more accurate technical term for authentication/authorization in this context is 'අනුමත කිරීම' (Approval/Authorization) or 'අධිකාරිය ලබාදීම'.",
-          "suggestion": "අනුමත කිරීම"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -243,13 +232,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Yetki' means 'Permission' or 'Authority'. In the context of OAuth and authentication dialogs (as seen in the code), 'Authorization' refers to the process of granting access or authenticating, which is more accurately translated as 'Yetkilendirme'.",
-          "suggestion": "Yetkilendirme"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

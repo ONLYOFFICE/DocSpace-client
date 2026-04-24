@@ -1,18 +1,17 @@
 {
-  "AccessingProblem": "Če ste obstoječi uporabnik in imate težave z dostopom do tega prostora, se obrnite na skrbnika.",
   "CannotCreateNewRoom": "Sobe ni mogoče ustvariti",
   "CannotCreatePaidUsers": "Plačljivih uporabnikov ni mogoče dodati",
   "CannotRestoreRoom": "Sobe ni mogoče obnoviti",
   "ChooseNewPlan": "Ali želite izbrati nov cenovni paket?",
+  "GracePeriodActive": "Okres odločljivosti je aktiven <1>od {{fromDate}} do {{byDate}}</1> (preostalo dni: {{delayDaysCount}}).",
+  "LicenseExpiredRestriction": "Nisem mogoče dodajati novih uporabnikov in ustvarjati novih sob. Licenca je potekla.",
+  "LicenseGracePeriodInfo": "Pod tekom časa administratorji niso v stanie ustvarjati novih sob ali dodajati novih uporabnikov. Ko potekne obdobje milosti, bo {{productName}} nedostopno, dokler ni aktivna nova licenca.",
   "NewRoomWillExceedLimit": "Ustvarjanje te sobe ni mogoče, ker je dosežena omejitev števila sob, ki je določena za vaš trenutni tarifni načrt.",
   "NewUsersWillExceedMembersLimit": "Dodajanje novih plačljivih uporabnikov ni mogoče, ker je dosežena omejitev števila skrbnikov, ki je določena za vaš trenutni tarifni načrt.",
   "NotPossibleRoomRestoring": "Obnovitev te sobe ni mogoča, ker je dosežena omejitev števila sob, ki je določena za vaš trenutni tarifni načrt.",
   "NumberOfRoomsAccordingToTariff": "Število sob, določeno z vašim tarifnim načrtom: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Število skrbnikov, ki je določeno z vašim trenutnim tarifnim načrtom: {{currentValue}}/{{maxValue}}",
+  "PlanPaymentOverdue": "Nisem lahko dodal novih uporabnikov, ustvarjal novih sob ali agentov AI. Plačilo za plan {{planName}} je overdue.",
   "RoomsQuotaAlmostExhausted": "Kvota sob je skoraj dosežena.",
-  "UsersQuotaAlmostExhausted": "Kvota plačljivih uporabnikov je skoraj dosežena.",
-  "GracePeriodActive": "Okres odločljivosti je aktiven <1>od {{fromDate}} do {{byDate}}</1> (preostalo dni: {{delayDaysCount}}).",
-  "LicenseExpired": "Nisem mogoče dodajati novih uporabnikov in ustvarjati novih sob. Licenca je potekla.",
-  "LicenseGracePeriodInfo": "Pod tekom časa administratorji niso v stanie ustvarjati novih sob ali dodajati novih uporabnikov. Ko potekne obdobje milosti, bo {{productName}} nedostopno, dokler ni aktivna nova licenca.",
-  "PlanPaymentOverdue": "Nisem lahko dodal novih uporabnikov, ustvarjal novih sob ali agentov AI. Plačilo za plan {{planName}} je overdue."
+  "UsersQuotaAlmostExhausted": "Kvota plačljivih uporabnikov je skoraj dosežena."
 }

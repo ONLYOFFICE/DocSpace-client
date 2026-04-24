@@ -3,11 +3,12 @@
   "content": "Disable quota for this agent",
   "content_en_sha1_hash": "fd5154101e66376cb087fa58af6438c76bdde902",
   "created_at": "2025-11-03T12:10:33.180Z",
-  "updated_at": "2025-11-13T07:58:07.739Z",
+  "updated_at": "2026-04-11T21:04:48.325Z",
   "comment": {
-    "text": "This text is used as a checkbox label to allow disabling the storage quota specifically for an agent. It appears within the Room Quota settings, likely in a settings panel or dialog where users can manage storage limits. Translators should ensure the meaning accurately conveys the action of removing quota restrictions for an agent.",
+    "text": "Checkbox label. Disables the storage quota for a specific agent (user or group) within a room.",
     "is_auto": true,
-    "updated_at": "2025-11-03T12:18:13.683Z"
+    "updated_at": "2026-04-11T21:04:48.325Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

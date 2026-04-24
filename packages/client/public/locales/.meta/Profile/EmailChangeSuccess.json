@@ -3,11 +3,12 @@
   "content": "Your email has been successfully changed.",
   "content_en_sha1_hash": "7598dc6b7e35f5e1b7604f60c13c3fabf7a0f23f",
   "created_at": "2025-08-21T11:22:35.110Z",
-  "updated_at": "2026-04-09T07:08:45.650Z",
+  "updated_at": "2026-04-11T21:49:20.016Z",
   "comment": {
-    "text": "This key displays a success message to the user after they have successfully changed their email address. It appears as a toast notification within the user's profile section. Translators should ensure the message clearly conveys a successful email update.",
+    "text": "Toast message confirming a user's email address has been successfully updated in their profile settings.",
     "is_auto": true,
-    "updated_at": "2025-08-21T11:22:56.105Z"
+    "updated_at": "2026-04-11T21:20:48.016Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -165,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Vaše e-poštno sporočilo' means 'Your email message'. In the context of changing an account setting, it should refer to the 'email address' (e-poštni naslov).",
-          "suggestion": "Vaš e-poštni naslov je bil uspešno spremenjen."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
@@ -181,7 +176,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \"s\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-11T21:49:20.010Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null

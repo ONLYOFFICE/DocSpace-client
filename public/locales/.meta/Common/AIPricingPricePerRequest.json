@@ -3,13 +3,21 @@
   "content": "{{price}}*, <1>per request</1>",
   "content_en_sha1_hash": "1585905f91e3c0af540f70412c74c5f86a9f9a2a",
   "created_at": "2026-04-10T13:53:44.591Z",
-  "updated_at": "2026-04-10T13:53:44.591Z",
+  "updated_at": "2026-04-11T20:59:50.718Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a pricing label indicating the cost of an AI service. It appears on the billing page and shows the price per request, where `{{price}}` is a numerical value and `<1>per request</1>` is a phrase.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:59:50.718Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/PricingBillingBody.tsx",
+      "line_number": 284,
+      "context": ") : null}\n </div>\n <Text fontSize=\"12px\" fontWeight=\"600\">\n <CommonTrans\n \n i18nKey=\"AIPricingPricePerRequest\"\n components={{\n 1: (\n <Text\n fontSize=\"12px\"\n as=\"span\"",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

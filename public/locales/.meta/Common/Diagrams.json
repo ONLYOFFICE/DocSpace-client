@@ -3,11 +3,12 @@
   "content": "Diagrams",
   "content_en_sha1_hash": "ecf4d503679532de632c70286cab2a70bfaa2235",
   "created_at": "2025-07-01T15:57:10.991Z",
-  "updated_at": "2026-04-08T12:03:43.019Z",
+  "updated_at": "2026-04-23T17:24:01.910Z",
   "comment": {
-    "text": "This translation key is used to display a label that refers to diagrams. It is used in the filter options section of a UI component, likely on a file selector or portal settings page. Translators should update this text to reflect different language versions of \"diagrams\".",
+    "text": "This is a filter option label. It appears in file filtering menus to represent diagrams.",
     "is_auto": true,
-    "updated_at": "2025-07-01T15:57:48.338Z"
+    "updated_at": "2026-04-11T20:55:09.428Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -25,7 +26,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
       "line_number": 149,
-      "context": "key: FilterType.Pdf,\n label: getManyPDFTitle(t, false),\n },\n {\n key: FilterType.DiagramsOnly,\n label: t(`Common:Diagrams`),\n },\n {\n key: FilterType.ArchiveOnly,\n label: t(`Common:Archives`),\n },",
+      "context": "key: FilterType.Pdf,\n label: getManyPDFTitle(t, false),\n },\n {\n key: FilterType.DiagramsOnly,\n label: t(\"Common:Diagrams\"),\n },\n {\n key: FilterType.ArchiveOnly,\n label: t(\"Common:Archives\"),\n },",
       "module": "/packages/client"
     },
     {
@@ -33,6 +34,18 @@
       "line_number": 178,
       "context": "label: getManyPDFTitle(t, true),\n typeKey: FilterType.PDFForm,\n },\n {\n key: \"filter-type-diagrams\",\n label: t(\"Common:Diagrams\"),\n typeKey: FilterType.DiagramsOnly,\n },\n {\n key: \"filter-type-archives\",\n label: t(\"Common:Archives\"),",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/useFilesFilter.tsx",
+      "line_number": 209,
+      "context": "},\n {\n id: \"filter_type-diagrams\",\n key: FilterType.DiagramsOnly.toString(),\n group: FilterGroups.filterType,\n label: t(\"Common:Diagrams\"),\n },\n {\n id: \"filter_type-archive\",\n key: FilterType.ArchiveOnly.toString(),\n group: FilterGroups.filterType,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/useFilesFilter.tsx",
+      "line_number": 209,
+      "context": "},\n {\n id: \"filter_type-diagrams\",\n key: FilterType.DiagramsOnly.toString(),\n group: FilterGroups.filterType,\n label: t(\"Common:Diagrams\"),\n },\n {\n id: \"filter_type-archive\",\n key: FilterType.ArchiveOnly.toString(),\n group: FilterGroups.filterType,",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
@@ -105,13 +118,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The French translation 'Diagramas' is incorrect; it appears to be a misspelling or a confusion with Spanish/Portuguese. The correct French word for 'Diagrams' is 'Diagrammes'.",
-          "suggestion": "Diagrammes"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {

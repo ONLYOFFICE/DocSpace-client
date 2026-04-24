@@ -3,11 +3,12 @@
   "content": "Activate license",
   "content_en_sha1_hash": "134b893d609caa5ae89b4f2d289e6cc74f78c703",
   "created_at": "2025-05-26T07:15:40.018Z",
-  "updated_at": "2026-04-08T18:09:52.159Z",
+  "updated_at": "2026-04-11T21:01:26.813Z",
   "comment": {
-    "text": "This translation key is used to display the text \"Activate license\" in a user interface. It is likely used as a button or title label, appearing on a form related to licensing payments. Translators should provide an equivalent phrase that conveys this action in their native language.",
+    "text": "This is the label for a button that initiates the license activation process.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:09:08.618Z"
+    "updated_at": "2026-04-11T21:01:26.813Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -165,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Activate license' is an imperative verb phrase (an action), whereas the Slovenian translation 'Aktivacija licence' is a noun phrase (the process/act of activation). For a button or UI action, the verb form is required.",
-          "suggestion": "Aktiviraj licenco"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

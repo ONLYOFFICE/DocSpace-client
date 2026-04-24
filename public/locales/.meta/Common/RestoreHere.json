@@ -3,24 +3,31 @@
   "content": "Restore here",
   "content_en_sha1_hash": "71ccf96c4fbf9923c575cab181655fa2cc1d83d0",
   "created_at": "2025-05-19T21:30:47.910Z",
-  "updated_at": "2026-04-08T01:08:45.707Z",
+  "updated_at": "2026-04-23T17:24:01.668Z",
   "comment": {
-    "text": "This translation key is used to display a message when restoring a file. It appears as a button or label in the UI and indicates that an action will be performed on the selected file. The exact wording may vary depending on the context, but its purpose remains consistent: to provide clear instructions for users.",
+    "text": "This is a button label that appears in the file selector when restoring files or folders, indicating the action to restore items to the currently selected location.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:34:41.733Z"
+    "updated_at": "2026-04-11T20:44:50.960Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 83,
+      "line_number": 84,
       "context": "filterParam?: string,\n isRestore?: boolean,\n isFormRoom?: boolean,\n isSelectFolder?: boolean,\n ) => {\n if (isRestore) return t(\"Common:RestoreHere\");\n if (isMove) return t(\"Common:MoveHere\");\n if (isCopy && !isEditorDialog) return t(\"Common:CopyHere\");\n if (isRestoreAll) return t(\"Common:RestoreHere\");\n if (isSelect || isFormRoom || isSelectFolder) return t(\"Common:SelectAction\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 83,
+      "line_number": 84,
       "context": "filterParam?: string,\n isRestore?: boolean,\n isFormRoom?: boolean,\n isSelectFolder?: boolean,\n ) => {\n if (isRestore) return t(\"Common:RestoreHere\");\n if (isMove) return t(\"Common:MoveHere\");\n if (isCopy && !isEditorDialog) return t(\"Common:CopyHere\");\n if (isRestoreAll) return t(\"Common:RestoreHere\");\n if (isSelect || isFormRoom || isSelectFolder) return t(\"Common:SelectAction\");",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/docs-layout/index.tsx",
+      "line_number": 102,
+      "context": "};\n \n const getSubmitLabel = (mode: SelectorMode, t: (key: string) => string) => {\n if (mode === \"copy\") return t(\"Common:CopyHere\");\n if (mode === \"move\") return t(\"Common:MoveHere\");\n return t(\"Common:RestoreHere\");\n };\n \n const DocsLayoutInner = observer(({\n folders,\n files,",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -33,7 +40,15 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic word 'استعد' (istiad) means 'prepare' or 'get ready', but the intended meaning is 'restore' (recover/bring back files). Given the context of file restoration in a file selector, this translation conveys the wrong action entirely.",
+          "suggestion": "استعيد هنا",
+          "checked_at": "2026-04-13T09:13:56.243Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -159,13 +174,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'ප්‍රත්‍යර්පණය' (Prathyarpanaya) is a highly formal/technical noun meaning 'restoration' or 'restitution'. In a UI button context for 'Restore here', it sounds unnatural and grammatically incomplete. It lacks the imperative sense of the action 'Restore'.",
-          "suggestion": "මෙතැනට යථා තත්ත්වයට පත් කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -195,13 +204,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses the English word 'restore' instead of its Turkish equivalent, resulting in a hybrid/broken language string.",
-          "suggestion": "Buraya geri yükle"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

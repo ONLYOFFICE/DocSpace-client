@@ -17,8 +17,12 @@
   "FileLifetimeDescription": "Ustaw okres ważności plików, aby automatycznie usuwać pliki w tym pokoju po upływie określonego czasu. Okres ważności rozpoczyna się w dniu dodania/utworzenia pliku.",
   "FilesOlderThan": "Pliki starsze niż:",
   "FormRoomBarDescription": "Ten pokój jest dostępny dla każdego, kto ma link. Użytkownicy zewnętrzni będą mieli uprawnienie umożliwiające wypełnienie formularza dla wszystkich plików.",
+  "GoToIntegrations": "Przejdź do integracji",
   "Horizontal": "Poziomo",
   "Icon": "Ikona",
+  "NeedMoreIntegrations": "Potrzebujesz więcej integracji?",
+  "NeedMoreIntegrationsDescription": "Wykorzystaj webhooki do wysyłania danych do własnego systemu lub podłącz formularze do tysięcy usług za pośrednictwem Zapier.",
+  "NoDatabaseConnections": "Nie skonfigurowano połączeń z bazą danych",
   "PeopleSelectorInfo": "Tylko administrator pokoju lub administrator {{productName}} może zostać właścicielem pokoju",
   "Position": "Pozycja",
   "PublicRoomBarDescription": "Ten pokój jest dostępny dla każdego, kto ma link. Dostęp dla użytkowników zewnętrznych jest przyznawany w zależności od wybranego typu praw dostępu.",
@@ -32,6 +36,7 @@
   "StorageDescriptionAgent": "Przydział limitu przestrzeni dyskowej ustalany dla każdego agenta. Możesz zmienić tę wartość lub wyłączyć limit przestrzeni dyskowej.",
   "TagsPlaceholder": "Dodaj znacznik",
   "ThirdPartyStorageComboBoxPlaceholder": "Wybierz pamięć",
+  "ThirdPartyStorageNoStorageAlert": "Najpierw należy połączyć odpowiednią usługę w sekcji „Integracje”. W przeciwnym razie połączenie nie będzie możliwe.",
   "ThirdPartyStoragePermanentSettingDescription": "Pliki są przechowywane w pamięci zewnętrznej {{thirdpartyTitle}}, w katalogu \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
   "ThirdPartyStorageRoomAdminNoStorageAlert": "Aby podłączyć pamięć podmiotu trzeciego, musisz dodać odpowiednią usługę w sekcji Integracja, w ustawieniach {{productName}}. Skontaktuj się z właścicielem {{productName}} lub administratorem, aby włączyć integrację.",
   "UserEmail": "Adres e-mail użytkownika",
@@ -40,9 +45,5 @@
   "ViewerInfo": "Dane osoby przeglądającej",
   "WatermarkPreview": "Podgląd znaku wodnego",
   "WatermarkPreviewHelp": "Niniejszy podgląd obrazu pokazuje mniej więcej, jak znak wodny będzie wyświetlany w Twoich plikach.",
-  "GoToIntegrations": "Przejdź do integracji",
-  "NeedMoreIntegrations": "Potrzebujesz więcej integracji?",
-  "NeedMoreIntegrationsDescription": "Wykorzystaj webhooki do wysyłania danych do własnego systemu lub podłącz formularze do tysięcy usług za pośrednictwem Zapier.",
-  "NoDatabaseConnections": "Nie skonfigurowano połączeń z bazą danych",
-  "ThirdPartyStorageNoStorageAlert": "Najpierw należy połączyć odpowiednią usługę w sekcji „Integracje”. W przeciwnym razie połączenie nie będzie możliwe."
+  "NoDatabaseConnectionsRoomAdmin": "Połączenia z bazami danych są konfigurowane przez administratora. Po skonfigurowaniu bazy danych będziesz mógł włączyć eksport tutaj."
 }

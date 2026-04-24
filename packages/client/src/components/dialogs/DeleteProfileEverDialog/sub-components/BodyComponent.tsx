@@ -35,6 +35,7 @@ import { TUser } from "@docspace/shared/api/people/types";
 
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import { TFunction } from "i18next";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type BodyComponentProps = {
   needReassignData: boolean;
@@ -110,16 +111,16 @@ const BodyComponent = ({
         <Text className="user-delete">
           {onlyGuests
             ? t("ActionCannotBeUndoneGuests", {
-                productName: t("Common:ProductName"),
+                productName: getBrandName("ProductName"),
               })
-            : t("ActionCannotBeUndone", {
-                productName: t("Common:ProductName"),
+            : t("ActionCannotBeUndoneUsers", {
+                productName: getBrandName("ProductName"),
               })}
         </Text>
         <Text className="text-warning">{t("PleaseNote")}</Text>
         <Text className="text-delete-description">
           {t("PersonalDataDeletionInfo", {
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
             sectionNameFirst: t("Common:MyDocuments"),
             sectionNameSecond: t("Common:TrashSection"),
           })}
@@ -143,10 +144,10 @@ const BodyComponent = ({
         <Text className="user-delete">
           {onlyGuests
             ? t("ActionCannotBeUndoneGuests", {
-                productName: t("Common:ProductName"),
+                productName: getBrandName("ProductName"),
               })
-            : t("ActionCannotBeUndone", {
-                productName: t("Common:ProductName"),
+            : t("ActionCannotBeUndoneUsers", {
+                productName: getBrandName("ProductName"),
               })}
         </Text>
 

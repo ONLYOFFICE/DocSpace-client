@@ -3,16 +3,17 @@
   "content": "No folder will be copied",
   "content_en_sha1_hash": "140e409b50247a5f7ff22b7ce99dfef6e6751f2c",
   "created_at": "2025-05-19T21:30:48.916Z",
-  "updated_at": "2026-04-07T22:48:23.302Z",
+  "updated_at": "2026-04-23T17:24:01.722Z",
   "comment": {
-    "text": "This translation key is used to display a message when a user chooses to skip copying a folder. The description will appear in a conflict resolution dialog that prompts users to decide whether to keep or delete conflicting files and folders. Translators should provide a clear and concise message that indicates no folder will be copied as the result of this action.",
+    "text": "This is a message displayed in a dialog box when a user chooses to skip copying a folder during a file operation. It informs the user that the folder will not be copied.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:39:27.818Z"
+    "updated_at": "2026-04-11T20:42:22.843Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
-      "line_number": 302,
+      "line_number": 312,
       "context": "};\n const getSkipDescription = () => {\n return isFileDialog\n ? t(\"Common:SkipDescription\")\n : isFolderDialog\n ? t(\"Common:SkipFolderDescription\")\n : t(\"Common:FilesAndFolderWillNotBeCopied\");\n };\n \n const onCloseConflictDialog = () => {\n if (isUploadConflict) {",
       "module": "/packages/client"
     }

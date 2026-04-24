@@ -1,7 +1,8 @@
 {
   "BackToRoom": "Zpět do místnosti",
   "CheckReadyForms": "Zkontrolujte připravené formuláře",
-  "Description": "Váš formulář je vyplněn a uložen",
+  "CompletedFormDescription": "Váš formulář je vyplněn a uložen",
+  "CompletedFormTitle": "Formulář je vyplněn",
   "DescriptionForAnonymous": "Odeslali jste vyplněný formulář PDF, kterému bylo přiděleno jedinečné číslo. Chcete-li zkontrolovat stav, kontaktujte vlastníka formuláře.",
   "DescriptionForRegisteredUser": "Vyplněný formulář PDF je vám k dispozici ve složce Kompletní.",
   "FillItOutAgain": "Vyplňte jej znovu",
@@ -18,6 +19,5 @@
   "FormVDRYouFirstRecepientDescription": "Jste pověřeni vyplnit formulář jako první příjemce. Na vaši e-mailovou adresu byla odeslána notifikace. Můžete začít formulář vyplňovat nyní nebo zkopírovat odkaz pro vyplňování a vrátit se k němu později.",
   "LinkToFillOutForm": "Odkaz na vyplnění formuláře:",
   "LinkToForm": "Odkaz na formulář:",
-  "LinkToViewOnlyForm": "Odkaz na formulář určený pouze k prohlížení:",
-  "Title": "Formulář je vyplněn"
+  "LinkToViewOnlyForm": "Odkaz na formulář určený pouze k prohlížení:"
 }

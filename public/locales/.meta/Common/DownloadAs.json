@@ -3,23 +3,24 @@
   "content": "Download as",
   "content_en_sha1_hash": "e10ee8f09efe43f28dc9a950ae25d485fde3ca5e",
   "created_at": "2025-05-19T21:30:44.663Z",
-  "updated_at": "2026-04-10T08:21:04.376Z",
+  "updated_at": "2026-04-23T17:24:02.079Z",
   "comment": {
-    "text": "The translation key \"DownloadAs\" is used to display the text \"Download as\", which appears on a download button in the UI. This text allows users to select a file format or destination when downloading a file from an application. It may appear in dialog boxes or buttons related to file management and downloads.",
+    "text": "This is a button label that appears in context menus and file headers, allowing users to download a selected file in a different format.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:36.446Z"
+    "updated_at": "2026-04-11T20:54:43.677Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2514,
-      "context": "disabled: this.userStore?.user?.isAdmin || this.userStore?.user?.isOwner || !item.external,\n },\n {\n id: \"option_download-as\",\n key: \"download-as\",\n label: t(\"Common:DownloadAs\"),\n icon: DownloadAsReactSvgUrl,\n onClick: this.onClickDownloadAs,\n disabled: !item.security?.Download,\n },\n ...moveActions,",
+      "line_number": 2576,
+      "context": "!item.external,\n },\n {\n id: \"option_download-as\",\n key: \"download-as\",\n label: t(\"Common:DownloadAs\"),\n icon: DownloadAsReactSvgUrl,\n onClick: this.onClickDownloadAs,\n disabled: !item.security?.Download,\n },\n ...moveActions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2514,
-      "context": "disabled: this.userStore?.user?.isAdmin || this.userStore?.user?.isOwner || !item.external,\n },\n {\n id: \"option_download-as\",\n key: \"download-as\",\n label: t(\"Common:DownloadAs\"),\n icon: DownloadAsReactSvgUrl,\n onClick: this.onClickDownloadAs,\n disabled: !item.security?.Download,\n },\n ...moveActions,",
+      "line_number": 2576,
+      "context": "!item.external,\n },\n {\n id: \"option_download-as\",\n key: \"download-as\",\n label: t(\"Common:DownloadAs\"),\n icon: DownloadAsReactSvgUrl,\n onClick: this.onClickDownloadAs,\n disabled: !item.security?.Download,\n },\n ...moveActions,",
       "module": "/packages/client"
     },
     {
@@ -27,6 +28,12 @@
       "line_number": 283,
       "context": "case \"downloadAs\":\n if (!this.isAvailableOption(\"downloadAs\")) return null;\n return {\n id: \"menu-download-as\",\n label: t(\"Common:DownloadAs\"),\n onClick: this.downloadAsHandle,\n iconUrl: DownloadAsReactSvgUrl,\n };\n \n case \"moveTo\":",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
+      "line_number": 166,
+      "context": ");\n \n const getDownloadAsItem = useCallback(() => {\n return {\n key: \"download-as\",\n label: t(\"Common:DownloadAs\"),\n icon: DownloadAsReactSvgUrl,\n onClick: downloadAsAction,\n disabled: false,\n };\n }, [downloadAsAction, t]);",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/media-viewer/MediaViewer.helpers.tsx",
@@ -105,13 +112,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Télécharger comme' is a literal word-for-word translation that is grammatically incorrect in French for this context. In UI design, 'Download as' (referring to file formats) should be translated as 'Télécharger au format' or 'Enregistrer sous'.",
-          "suggestion": "Télécharger au format"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -141,13 +142,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ດາວໂຫລດທີ່' translates to 'Download at' or 'Download in', which is grammatically incorrect for the context of 'Download as' (selecting a file format).",
-          "suggestion": "ດາວໂຫລດເປັນ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -183,13 +178,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Descărcare ca' is a literal word-for-word translation that is grammatically incorrect in Romanian for this context. In Romanian UI, 'Download as' (implying 'Download in the format of') should be translated using a prepositional phrase or a different structure to sound natural.",
-          "suggestion": "Descărcare în formatul"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -201,13 +190,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'මෙලෙස බාගන්න' means 'Download like this' or 'Download this way', which implies a method of downloading rather than selecting a format/type. The correct meaning for 'Download as' in a UI context (selecting a format) should be '... ලෙස බාගත කරන්න'.",
-          "suggestion": "... ලෙස බාගත කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

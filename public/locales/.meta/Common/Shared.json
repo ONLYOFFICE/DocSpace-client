@@ -3,11 +3,12 @@
   "content": "Shared",
   "content_en_sha1_hash": "50d0d8dd11a959484cb838e05c14b2e51b64c68d",
   "created_at": "2025-09-23T07:24:16.921Z",
-  "updated_at": "2026-04-07T23:18:21.793Z",
+  "updated_at": "2026-04-12T19:49:07.970Z",
   "comment": {
-    "text": "This key translates the text displayed as \"Shared\" on a button or element related to sharing content or inviting people. It appears within the share selector component, likely indicating a shared status or action. Translators should consider the context of sharing and collaboration when choosing an appropriate translation.",
+    "text": "This is a label indicating that an item has already been shared. It appears next to a disabled button or field to inform the user that the action cannot be performed because the item is already shared.",
     "is_auto": true,
-    "updated_at": "2025-09-23T07:24:53.974Z"
+    "updated_at": "2026-04-11T20:43:06.039Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -147,13 +148,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Russian translation 'Общие' means 'Common' or 'General'. In the context of sharing content or people (as indicated by 'share_to_people_selector' and 'disabledInvitedText'), the correct term for 'Shared' (status of being shared) is 'Общий' or 'Поделились', but most accurately 'Доступные' or 'Общие' in a different sense. However, 'Общие' specifically translates to 'Common'. For a status indicating something has been shared, 'Общий' (adj) or 'Поделиться' (verb) is often used, but 'Общие' is the plural form of 'Common'. In the context of 'Shared' (as in 'Shared with me' or 'Shared status'), 'Общие' is a mistranslation of the state of being shared.",
-          "suggestion": "Общий"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {

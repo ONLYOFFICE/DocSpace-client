@@ -62,5 +62,19 @@
   "WebSearchDisabledSuccess": "{{webSearch}} onnistuneesti poistettu käytöstä",
   "WebSearchEnabledSuccess": "{{webSearch}} onnistuneesti aktivoitu",
   "WebSearchKeyDescription": "Syötä API-avain, jonka saat {{webSearch}}-palveluntarjoajaltasi",
-  "WebSearchKeyHiddenDescription": "API-avain näkyy vain kerran tallennuksen yhteydessä ja sen jälkeen se piilotetaan tietoturvasyistä."
+  "WebSearchKeyHiddenDescription": "API-avain näkyy vain kerran tallennuksen yhteydessä ja sen jälkeen se piilotetaan tietoturvasyistä.",
+  "Capabilities": "Ominaisuudet",
+  "CapabilitiesDescription": "Nämä asetukset määrittävät, mitkä ominaisuudet näytetään ja ovat käytettävissä tälle mallille {{productName}}-keskustelussa.",
+  "CapabilityExtendedThinking": "Laajennettu ajattelu",
+  "CapabilityToolCalling": "Työkalujen kutsuminen",
+  "CapabilityVision": "Kuvantunnistus",
+  "ListModels": "Mallien lista",
+  "ModelName": "Mallin nimi",
+  "ModelNameHint": "Käytä nimeä, joka auttaa sinua tunnistamaan tämän mallin.",
+  "OtherModels": "Muut mallit",
+  "OtherModelsTooltip": "Jotkut mallit eivät välttämättä tue tiettyjä toimintoja tai ominaisuuksia",
+  "RecommendedModels": "Suositellut mallit",
+  "RecommendedModelsTooltip": "Mallit, joilla on vahvistettu tuki {{productName}}-ominaisuuksille ja -toiminnoille",
+  "SelectAtLeastOneModel": "Valitse vähintään yksi malli",
+  "SelectModels": "Valitse mallit"
 }

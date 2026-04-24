@@ -3,13 +3,21 @@
   "content": "Ask anything about \"{{name}}\" using the submitted data",
   "content_en_sha1_hash": "93a366aa396eb00746fa3e6366d112f601c004b3",
   "created_at": "2026-03-31T15:18:05.384Z",
-  "updated_at": "2026-04-08T16:45:46.799Z",
+  "updated_at": "2026-04-23T17:24:02.134Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a placeholder text displayed in an AI chat panel when a file has been attached. It prompts the user to ask questions about the attached file, with `{{name}}` being the file's title without its extension.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:59:04.731Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/ai-chat-panel/index.tsx",
+      "line_number": 115,
+      "context": "const isAskFromDB = !!pendingAttachmentFile;\n \n const emptyScreenText = React.useMemo(() => {\n if (!pendingAttachmentFile?.title) return undefined;\n const name = pendingAttachmentFile.title.replace(/\\.[^.]+$/, \"\");\n return t(\"Common:AskAboutFormData\", { name });\n }, [pendingAttachmentFile?.title, t]);\n \n const askFromDBSamples = React.useMemo(\n () =>\n pendingAttachmentFile?.title",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -152,13 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'nasadeneckych' is a misspelling/incorrect derivation of 'nasadených' (deployed) or 'odovzdaných' (submitted). In this context, 'submitted data' should be translated as 'odovzdaných údajov'.",
-          "suggestion": "Otázajte sa čokoľvek o \"{{name}}\" pomocou odovzdaných údajov"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {

@@ -23,9 +23,9 @@
   "ShowBackupCodes": "Zobraziť záložné kódy",
   "SuccessLogout": "Aktívne pripojenie bolo odhlásené: {{platform}}, {{browser}}",
   "TelegramAccount": "Telegram účet",
+  "TelegramAccountDescription": "Ak chcete pripojiť TelegramBot k svojmu účtu, postupujte podľa tajného odkazu a kliknite na tlačidlo „Connect Telegram“.",
   "TelegramAccountDisconnect": "Odpojiť Telegram",
   "TelegramAccountDisconnectDescription": "Váš účet @{{username}} je prepojený na telegramové notifikácie. Môžete sa odpojiť od tohto účtu. V tomto prípade nebudete dostávať notifikácie.",
   "TerminateAllSessions": "Ukončenie všetkých relácií okrem aktuálnej",
-  "TwoFactorDescription": "Správca povolil všetkým používateľom dvojfaktorovú autentifikáciu prostredníctvom aplikácie generujúcej kód.",
-  "TelegramAccountDescription": "Ak chcete pripojiť TelegramBot k svojmu účtu, postupujte podľa tajného odkazu a kliknite na tlačidlo „Connect Telegram“."
+  "TwoFactorDescription": "Správca povolil všetkým používateľom dvojfaktorovú autentifikáciu prostredníctvom aplikácie generujúcej kód."
 }

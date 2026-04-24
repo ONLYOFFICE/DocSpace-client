@@ -3,13 +3,21 @@
   "content": "No templates available in this library.",
   "content_en_sha1_hash": "c21124d568307c62d087c6283dfc4de27e000b8f",
   "created_at": "2026-03-26T08:26:33.939Z",
-  "updated_at": "2026-04-08T10:51:01.663Z",
+  "updated_at": "2026-04-11T20:53:54.133Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a message displayed when a user navigates to the \"Library\" section of the forms module and there are no form templates available to view. It informs the user that the library is empty.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:53:54.133Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/forms-empty/index.tsx",
+      "line_number": 65,
+      "context": "case FormsSection.MyForms:\n return canCreate\n ? t(\"Common:EmptyMyForms\")\n : t(\"Common:EmptyMyFormsNoAccess\");\n case FormsSection.Library:\n return t(\"Common:EmptyLibrary\");\n case FormsSection.InProgress:\n return t(\"Common:EmptyInProgressForms\");\n case FormsSection.CompletedForms:\n return t(\"Common:EmptyCompletedForms\");\n default:",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -152,13 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation uses the plural 'bibliotékách' (in these libraries) instead of the singular 'bibliotéke' (in this library), which changes the meaning.",
-          "suggestion": "Žiadne šablóny nie sú v tejto knižnici."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -170,25 +172,13 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Albanian translation uses 'skedarë të modelit' (model files) instead of 'template' (model/shabllon). In a software context, 'templates' should be translated as 'shabllonë'.",
-          "suggestion": "Nuk ka shabllonë të disponueshëm në këtë bibliotekë."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'библиотекарству' (library-ship/librarianship) is used instead of 'библиотеци' (library). 'Библиотекарство' refers to the profession or the field of library science, not a collection of files/templates.",
-          "suggestion": "Нема доступних шаблона у овој библиотеци."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

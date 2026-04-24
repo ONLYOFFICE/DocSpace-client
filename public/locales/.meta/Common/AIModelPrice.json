@@ -3,16 +3,29 @@
   "content": "{{inputPrice}}/M input tokens | {{outputPrice}}/M output tokens",
   "content_en_sha1_hash": "59fd5325bfe26e9733559605cfce51d27cfe98de",
   "created_at": "2026-04-10T13:53:44.328Z",
-  "updated_at": "2026-04-10T13:56:05.471Z",
+  "updated_at": "2026-04-23T17:24:01.916Z",
   "comment": {
-    "text": "Displays the pricing structure for a selected AI model, showing the cost per million input and output tokens. This label appears in the AI settings provider configuration within the Portal settings.",
+    "text": "This text displays the pricing for AI model usage, showing the cost per million input tokens and output tokens. `{{inputPrice}}` and `{{outputPrice}}` are numerical values representing these costs.",
     "is_auto": true,
-    "updated_at": "2026-04-10T13:56:05.471Z"
+    "updated_at": "2026-04-11T21:00:06.866Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/sub-components/ModelSettingsTable/RowView/index.tsx",
+      "line_number": 117,
+      "context": "<Text\n fontSize=\"12px\"\n fontWeight={600}\n className={styles.prices}\n >\n {t(\"AIModelPrice\", {\n inputPrice,\n outputPrice,\n })}\n </Text>\n </div>",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/PricingBillingBody.tsx",
+      "line_number": 361,
+      "context": "({model.provider})\n </Text>\n ) : null}\n </div>\n <Text className={styles.payForItemTextMuted}>\n {t(\"AIModelPrice\", {\n inputPrice: safeFormatAiModelsCurrency(\n model?.price?.prompt ?? 0,\n ),\n outputPrice: safeFormatAiModelsCurrency(\n model?.price?.completion ?? 0,",
+      "module": "/libs/ui-kit"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/DefaultProvider.tsx",
-      "line_number": 217,
+      "line_number": 218,
       "context": "const isSelected = m.modelId === selectedModelId;\n const safeFormat = (v: number) =>\n formatAiModelsCurrency ? formatAiModelsCurrency(v) : String(v);\n const priceLabel =\n m.price != null\n ? t(\"Common:AIModelPrice\", {\n inputPrice: safeFormat(m.price.prompt),\n outputPrice: safeFormat(m.price.completion),\n })\n : null;",
       "module": "/packages/client"
     }

@@ -3,16 +3,17 @@
   "content": "Not modified",
   "content_en_sha1_hash": "27c5bb55284b632b578c9271b03c51e9f2345d2b",
   "created_at": "2026-02-18T14:56:28.605Z",
-  "updated_at": "2026-04-09T02:19:01.594Z",
+  "updated_at": "2026-04-11T21:23:15.125Z",
   "comment": {
-    "text": "This key displays a message indicating that a file has not been modified. It appears within a table row displaying file information (likely in a settings or portal section) when the last modified date is unavailable. Translators should ensure this phrase conveys a similar meaning of \"no change\" or \"not updated.\"",
+    "text": "This is a label indicating that a file's modification date is unavailable. It appears in a list of default templates within the portal settings.",
     "is_auto": true,
-    "updated_at": "2026-03-20T10:26:44.866Z"
+    "updated_at": "2026-04-11T21:23:15.125Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/DefaultTemplates/TemplatesRow.tsx",
-      "line_number": 164,
+      "line_number": 165,
       "context": "const filterParam = getFilterParam?.(item.fileExst);\n \n const locale = getCookie(LANGUAGE) ?? culture ?? \"en\";\n const lastModified = item.lastModified\n ? getCorrectDate(locale, item.lastModified)\n : t(\"Settings:NotModified\");\n \n return (\n <div\n className={styles.templateRow}\n data-testid={`default-template-row-${index}`}",
       "module": "/packages/client"
     }
@@ -159,25 +160,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak word 'Neprepracované' means 'unprocessed' or 'not reworked', which implies a task or document that hasn't been worked on yet. In the context of a file's last modified date, it should mean 'not changed' or 'not updated'.",
-          "suggestion": "Nezmenené"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Nemaknjeno' is not a valid Slovenian word. It appears to be a non-existent term or a misspelling. The correct term for 'Not modified' in this context should be 'Ni spremenjeno'.",
-          "suggestion": "Ni spremenjeno"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
@@ -195,13 +184,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Nemeno' in Serbian means 'unintentionally' or 'carelessly'. The correct term for 'not' in this context is 'Nije'.",
-          "suggestion": "Nije modifikovano"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

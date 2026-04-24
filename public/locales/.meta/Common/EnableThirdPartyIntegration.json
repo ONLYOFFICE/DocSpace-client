@@ -3,17 +3,18 @@
   "content": "Please ask a {{productName}} owner or administrator to enable the corresponding service in the Integration section of the {{productName}} Settings.",
   "content_en_sha1_hash": "35e9604b801c1ceaa5a2a8906693118c1ffb1762",
   "created_at": "2025-05-19T21:30:44.932Z",
-  "updated_at": "2026-04-08T10:36:19.545Z",
+  "updated_at": "2026-04-11T20:53:37.258Z",
   "comment": {
-    "text": "This translation key is used to provide a tooltip or hint for users when they need to enable third-party integration in the {{productName}} settings. The text appears as a tooltip next to a button that triggers this action in the Create/Edit Room Dialog component, indicating the step required to proceed further.",
+    "text": "This is a tooltip message that appears when a user tries to access a third-party integration that is not enabled. It instructs the user to contact an administrator to enable the service. `{{productName}}` will be replaced with the product's brand name.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:26.758Z"
+    "updated_at": "2026-04-11T20:53:37.258Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/ThirdPartyComboBox.tsx",
-      "line_number": 281,
-      "context": "};\n \n const getTextTooltip = () => {\n return (\n <Text fontSize=\"12px\" noSelect>\n {t(\"Common:EnableThirdPartyIntegration\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n );\n };",
+      "line_number": 282,
+      "context": "};\n \n const getTextTooltip = () => {\n return (\n <Text fontSize=\"12px\" noSelect>\n {t(\"Common:EnableThirdPartyIntegration\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n );\n };",
       "module": "/packages/client"
     }
   ],
@@ -45,13 +46,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech translation incorrectly places a period between '{{productName}}' and 'Nastavení', which changes the meaning from '{{productName}} Settings' to '{{productName}}. Settings.'",
-          "suggestion": "Požádejte prosím vlastníka nebo správce {{productName}} o povolení příslušné služby v sekci Integrace v nastavení {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -87,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation incorrectly implies that the owner/administrator should enable the service themselves, whereas the English text asks the user to 'ask' the owner/administrator to do it.",
-          "suggestion": "Խնդրում ենք {{productName}}-ի սեփականատիրոջից կամ ադմինիստրատորից միացնել համապատասխան ծառայությունը {{productName}} Կարգավորումների Ինտեգրման բաժնում:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {

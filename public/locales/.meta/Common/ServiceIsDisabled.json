@@ -3,13 +3,21 @@
   "content": "Service is disabled",
   "content_en_sha1_hash": "3627893b61fe44e62e3c25f49ed440a9978b0d4a",
   "created_at": "2026-04-10T13:53:45.663Z",
-  "updated_at": "2026-04-10T13:53:45.663Z",
+  "updated_at": "2026-04-23T17:24:02.180Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a dialog title indicating that a service is currently inactive. It appears when a user attempts to use a disabled service.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:43:16.984Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
+      "line_number": 404,
+      "context": "{isTopUpConfirmVisible ? (\n <ConfirmationDialog\n visible={isTopUpConfirmVisible}\n onClose={onCloseTopUpConfirm}\n onConfirm={onConfirmTopUp}\n title={t(\"ServiceIsDisabled\")}\n bodyText={t(\"AddCreditsToEnableAI\", { organizationName: logoText })}\n />\n ) : null}\n </div>\n );",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

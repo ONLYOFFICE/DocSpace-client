@@ -3,23 +3,24 @@
   "content": "Quota per user",
   "content_en_sha1_hash": "34fbae11ee29d4cda07c3fec52be82daaf84c7c0",
   "created_at": "2025-05-19T21:30:52.346Z",
-  "updated_at": "2026-04-09T01:50:19.332Z",
+  "updated_at": "2026-04-13T14:59:05.902Z",
   "comment": {
-    "text": "The QuotaPerUser translation key is used to display the label \"Quota per user\" in the PortalSettings category. It appears on a mobile component that manages storage quotas and allows users to set their individual quota limits.",
+    "text": "This is a label for a setting that allows administrators to define the storage limit for each user. It appears as a title in the settings menu and as a heading on the \"Quota per user\" configuration page.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:41.233Z"
+    "updated_at": "2026-04-11T21:22:45.600Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/MobileQuotas.js",
-      "line_number": 56,
-      "context": "productName: t(\"Common:ProductName\"),\n })}\n isDisabled={isDisabled}\n />\n <CategoryItem\n title={t(\"QuotaPerUser\")}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-user\"\n subtitle={t(\"UserDefaultQuotaDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),",
+      "line_number": 57,
+      "context": "productName: getBrandName(\"ProductName\"),\n })}\n isDisabled={isDisabled}\n />\n <CategoryItem\n title={t(\"QuotaPerUser\")}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-user\"\n subtitle={t(\"UserDefaultQuotaDescription\", {\n productName: getBrandName(\"ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerUser.js",
-      "line_number": 32,
-      "context": "import { useTranslation } from \"react-i18next\";\n import { inject, observer } from \"mobx-react\";\n \n import QuotaPerItemComponent from \"./QuotaPerItem\";\n \n const QuotaPerUserComponent = (props) => {\n const { setUserQuota, isDefaultUsersQuotaSet, defaultUsersQuota } = props;\n \n const { t } = useTranslation(\"Settings\");\n \n const initialSizeProp = isDefaultUsersQuotaSet",
+      "line_number": 45,
+      "context": ": {};\n \n return (\n <QuotaPerItemComponent\n type=\"user\"\n formLabel={t(\"QuotaPerUser\")}\n toggleLabel={t(\"DefineQuotaPerUser\")}\n disableQuota={() => setUserQuota(-1, t)}\n saveQuota={(size) => setUserQuota(size, t)}\n {...initialSizeProp}\n isQuotaSet={isDefaultUsersQuotaSet}",
       "module": "/packages/client"
     },
     {
@@ -63,25 +64,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German word 'Quote' means 'quotation' (as in a price quote or a literary quote). In the context of storage limits, the correct term is 'Kontingent' or 'Limit'.",
-          "suggestion": "Kontingent pro Benutzer"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek word 'Ποσόστωση' (Posostosi) refers to 'proportionality' or 'proportioning', which is incorrect in the context of storage limits. The correct term for 'Quota' in a technical/storage context is 'Όριο' (Limit) or 'Ποσοστό' (Percentage/Quota) depending on context, but specifically 'Quota' as a fixed amount is best translated as 'Όριο' or 'Ποσό' (Amount). However, 'Ποσόστωση' is a semantic error.",
-          "suggestion": "Όριο ανά χρήστη"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -99,13 +88,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The French translation 'Quota pour l'utilisateur' implies a quota for a specific, single user (singular), whereas the English 'Quota per user' refers to a setting applied to all users (plural/distributive).",
-          "suggestion": "Quota par utilisateur"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -183,13 +166,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'පරිශ්‍රීලකයෙක්ට සලාකය' is nonsensical. 'පරිශ්‍රීලකයෙක්ට' is a misspelling/incorrect word for 'user', and 'සලාකය' is not the correct term for 'quota'.",
-          "suggestion": "පරිශීලකයෙකු සඳහා කෝටාව"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

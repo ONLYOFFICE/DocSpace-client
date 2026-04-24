@@ -3,13 +3,20 @@
   "content": "Members",
   "content_en_sha1_hash": "1cb449c1126609b4b41e1d87f65f0d7cd19b49b9",
   "created_at": "2025-05-19T21:30:46.449Z",
-  "updated_at": "2026-04-08T04:50:03.357Z",
+  "updated_at": "2026-04-13T14:59:05.727Z",
   "comment": {
-    "text": "This translation key is used to display the label \"Members\" in various UI contexts, such as headers and buttons, within dialogs and other interactive components. It appears on screens related to user management, group creation, and contact filtering, providing context for users navigating these sections.",
+    "text": "This is a label for a section or item, referring to the users associated with a particular account or room.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:31.314Z"
+    "updated_at": "2026-04-11T20:48:47.413Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/selectors/People/index.tsx",
+      "line_number": 697,
+      "context": "? {\n withTabs: true,\n tabsData: [\n {\n id: PEOPLE_TAB_ID,\n name: t(\"Members\"),\n onClick: () => changeActiveTab(PEOPLE_TAB_ID),\n content: null,\n },\n ...[\n withGroups && {",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/Article/Body/AccountsItems.tsx",
       "line_number": 63,
@@ -24,8 +31,8 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserTypeDialog/index.tsx",
-      "line_number": 90,
-      "context": "const { t } = useTranslation([\"ChangeUserTypeDialog\", \"People\", \"Common\"]);\n \n const isSingleUser = userNames.length === 1;\n const translationValues = {\n userName: isSingleUser ? userNames[0] : undefined,\n membersSection: t(\"Common:Members\"),\n documentsSection: t(\"Common:MyDocuments\"),\n productName: t(\"Common:ProductName\"),\n secondType,\n };\n const translationKey = getChangeTypeKey(",
+      "line_number": 91,
+      "context": "const { t } = useTranslation([\"ChangeUserTypeDialog\", \"People\", \"Common\"]);\n \n const isSingleUser = userNames.length === 1;\n const translationValues = {\n userName: isSingleUser ? userNames[0] : undefined,\n membersSection: t(\"Common:Members\"),\n documentsSection: t(\"Common:MyDocuments\"),\n productName: getBrandName(\"ProductName\"),\n secondType,\n };\n const translationKey = getChangeTypeKey(",
       "module": "/packages/client"
     },
     {
@@ -36,7 +43,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 830,
+      "line_number": 831,
       "context": "};\n \n const people = {\n id: \"sort-by_people\",\n key: \"membersCount\",\n label: t(\"Common:Members\"),\n default: true,\n };\n \n const manager = {\n id: \"sort-by_manager\",",
       "module": "/packages/client"
     },
@@ -54,8 +61,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 134,
-      "context": "sectionName: usersExportDetails.name,\n workspace: serviceName,\n sectionIcon: usersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Members\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: MembersIcon,\n }}\n isDisabled\n dataTestId=\"import_users_section\"",
+      "line_number": 135,
+      "context": "sectionName: usersExportDetails.name,\n workspace: serviceName,\n sectionIcon: usersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Members\"),\n workspace: getBrandName(\"ProductName\"),\n sectionIcon: MembersIcon,\n }}\n isDisabled\n dataTestId=\"import_users_section\"",
       "module": "/packages/client"
     }
   ],

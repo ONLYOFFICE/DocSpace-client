@@ -3,13 +3,33 @@
   "content": "Top up",
   "content_en_sha1_hash": "91d42a8b742abdae628f62177ef45374076d645e",
   "created_at": "2026-04-10T13:53:43.578Z",
-  "updated_at": "2026-04-10T13:53:43.578Z",
+  "updated_at": "2026-04-13T14:59:06.025Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a button label that allows users to add funds to their account or balance.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:40:53.421Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/PricingBillingBody.tsx",
+      "line_number": 383,
+      "context": "{withoutFooter ? null : (\n <ModalDialog.Footer>\n <div className={styles.closeFooter}>\n <Button\n key=\"OkButton\"\n label={t(\"TopUp\")}\n size={ButtonSize.normal}\n primary\n scale\n isDisabled={false}\n onClick={onTopUpClick}",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/TopUpButtons.tsx",
+      "line_number": 127,
+      "context": "<div className={styles.buttonContainerWrapper}>\n {isLoading ? <Text>{t(\"TopUpTakeSomeTimeToComplete\")}</Text> : null}\n <div className={styles.buttonContainer}>\n <Button\n key=\"OkButton\"\n label={t(\"TopUp\")}\n size={ButtonSize.normal}\n primary\n scale\n isDisabled={isButtonDisabled}\n onClick={onTopUp}",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/WalletInfo.tsx",
+      "line_number": 119,
+      "context": "onClick={onTopUp}\n textDecoration=\"underline\"\n dataTestId=\"top_up_wallet_link\"\n color=\"accent\"\n >\n {t(\"TopUp\")}\n </Link>\n ) : null}\n </div>\n );\n };",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

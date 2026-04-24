@@ -3,17 +3,18 @@
   "content": "Reactivate",
   "content_en_sha1_hash": "cd28a172590d6deb9c3e1d656864b9d7abbc7ba5",
   "created_at": "2025-05-19T21:30:57.384Z",
-  "updated_at": "2026-04-07T19:35:05.245Z",
+  "updated_at": "2026-04-13T14:59:05.924Z",
   "comment": {
-    "text": "This translation key \"Reactivate\" is used to display a button or action label that allows users to restore or re-activate a feature or functionality. It appears in a confirmation dialog or form (e.g., /packages/login/src/app/(root)/confirm/PortalContinue/page.client.tsx) where the user has the option to reactivate something, typically after a period of inactivity or deletion.",
+    "text": "This is a button label that appears after a user has successfully reactivated their portal. Clicking it allows the user to continue to their reactivated portal.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:47:24.950Z"
+    "updated_at": "2026-04-11T21:30:06.959Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PortalContinue/page.client.tsx",
-      "line_number": 46,
-      "context": "const ContinuePortalForm = () => {\n const { t } = useTranslation([\"Confirm\", \"Common\"]);\n const { linkData } = useContext(ConfirmRouteContext);\n \n const [isReactivate, setIsReactivate] = useState(false);\n \n const onRestoreClick = async () => {\n try {\n await continuePortal(linkData.confirmHeader);\n setIsReactivate(true);",
+      "line_number": 99,
+      "context": "<div className={styles.buttonsWrapper}>\n <Button\n primary\n scale\n size={ButtonSize.medium}\n label={t(\"Reactivate\")}\n tabIndex={1}\n onClick={onRestoreClick}\n testId=\"continue_reactivate_button\"\n />\n <Button",
       "module": "/packages/login"
     }
   ],

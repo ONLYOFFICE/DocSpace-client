@@ -3,16 +3,17 @@
   "content": "Template gallery",
   "content_en_sha1_hash": "6dfaa7588cf9181537129654e857881bc2647de2",
   "created_at": "2025-12-22T09:40:11.793Z",
-  "updated_at": "2026-04-10T08:21:04.284Z",
+  "updated_at": "2026-04-23T17:24:01.621Z",
   "comment": {
-    "text": "This text appears as the label for a button or menu item that opens a gallery of templates. It’s used to indicate the availability of pre-built templates, likely for forms or documents. Translators should ensure the description accurately reflects the function of opening this template gallery.",
+    "text": "This is the title for the template gallery, a collection of pre-designed document templates. It appears as a button label to open the gallery and as the header text within the gallery itself.",
     "is_auto": true,
-    "updated_at": "2025-12-22T09:40:58.207Z"
+    "updated_at": "2026-04-11T20:41:19.935Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 481,
+      "line_number": 482,
       "context": "const formGallery = {\n id: \"actions_open-template-gallery\",\n className: \"main-button_drop-down\",\n icon: TemplateGalleryReactSvgUrl,\n label: t(\"Common:TemplateGallery\"),\n onClick: onShowTemplateGallery,\n key: \"template-gallery\",\n };\n \n const createNewPresentationPptx = {",
       "module": "/packages/client"
     },
@@ -30,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3577,
+      "line_number": 3653,
       "context": "const templateGallery = templateGalleryAvailable\n ? [\n { key: \"separator\", isSeparator: true },\n {\n key: \"template-gallery\",\n label: t(\"Common:TemplateGallery\"),\n onClick: () => this.onShowTemplateGallery(),\n icon: TemplateGalleryReactSvgUrl,\n },\n ]\n : [];",
       "module": "/packages/client"
     }
@@ -171,13 +172,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'නිර්මාණ ගැලරිය' means 'Creation Gallery' or 'Design Gallery'. While related, it fails to specifically translate 'Template' (සැකිලි), which is the core functional term in the context of pre-built document structures.",
-          "suggestion": "සැකිලි ගැලරිය"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

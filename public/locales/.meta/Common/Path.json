@@ -3,11 +3,12 @@
   "content": "Path",
   "content_en_sha1_hash": "519e39132bb98418cc0483cc446ccf5f3c8dcffe",
   "created_at": "2025-05-26T07:15:46.094Z",
-  "updated_at": "2026-04-08T02:52:47.423Z",
+  "updated_at": "2026-04-12T04:46:20.185Z",
   "comment": {
-    "text": "This translation key is used to display the label \"Path\" in a text input field within various settings components, typically appearing as a placeholder text or a description of the field's purpose.",
+    "text": "This is a placeholder text for an input field where users enter a file path for backup settings in cloud storage integrations (Amazon S3, Google Cloud, Rackspace).",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:04:24.478Z"
+    "updated_at": "2026-04-11T20:46:38.346Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -51,13 +52,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani word 'Cığır' means 'track', 'groove', or 'trail' (often used in a physical or metaphorical sense). In the context of computing and file systems (file path), the correct term is 'Yol'.",
-          "suggestion": "Yol"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -69,13 +64,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "wrong_language",
-          "description": "The translation is in Russian ('Cesta'), not Czech.",
-          "suggestion": "Cesta"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -87,13 +76,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation 'Μονοπάτι' means 'trail' or 'footpath' (physical path in nature). In the context of file systems and input fields (e.g., 'amazon-file-path-input'), the correct technical term for a file or directory path is 'Διαδρομή'.",
-          "suggestion": "Διαδρομή"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -117,13 +100,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian word 'Ուղի' (Ughi) means 'road' or 'way' in a physical/travel sense. In the context of a file system or computer settings (as indicated by 'file-path-input'), the correct term for a file path is 'Ճանապարհ' (Chanaparh).",
-          "suggestion": "Ճանապարհ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -147,13 +124,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ເສັ້ນທາງ' means 'road' or 'route' (physical path), whereas in the context of a file input field (file path), the correct technical term should refer to a directory or file location.",
-          "suggestion": "ເສັ້ນທາງເຂົ້າຫາໄຟລ໌"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -177,13 +148,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Destino' means 'Destination'. In the context of a file path input (as seen in the code usage 'amazon-file-path-input'), the correct term for 'Path' is 'Caminho'.",
-          "suggestion": "Caminho"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {

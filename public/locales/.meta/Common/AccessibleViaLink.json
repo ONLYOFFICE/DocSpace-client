@@ -3,11 +3,12 @@
   "content": "Accessible via link",
   "content_en_sha1_hash": "a56b59fe26dc25030ea1ff13de5047b104421205",
   "created_at": "2025-08-27T10:14:07.280Z",
-  "updated_at": "2026-04-08T18:20:30.152Z",
+  "updated_at": "2026-04-11T21:01:37.250Z",
   "comment": {
-    "text": "This text appears as a label for a filter option, specifically indicating content accessible via a link. It's used to describe the type of content being filtered, helping users understand the source of the information. Translators should ensure the meaning accurately conveys content accessible through a URL.",
+    "text": "This is a filter option label in the Home section. It indicates that the displayed items are accessible through a shared link.",
     "is_auto": true,
-    "updated_at": "2025-08-27T10:15:27.163Z"
+    "updated_at": "2026-04-11T21:01:37.250Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -39,13 +40,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Link vasitəsilə əldə etməyə imkan verir' means 'Allows obtaining via link' (a verb phrase/sentence), whereas the English 'Accessible via link' is a descriptive label/adjective phrase. In a UI filter context, the translation is grammatically incorrect and overly wordy.",
-          "suggestion": "Link vasitəsilə əlçatandır"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {

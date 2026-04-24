@@ -1,6 +1,6 @@
 {
   "AuthViaNTLM": "Autentifikacija putem NTLM-a",
-  "EnableSSL": "Omogući SSL",
+  "EnableSMTPSSL": "Omogući SSL",
   "EnterDomain": "Unesi domen",
   "EnterLogin": "Unesi login",
   "EnterPort": "Unesi port",

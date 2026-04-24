@@ -3,11 +3,12 @@
   "content": "Select .DOCXF file",
   "content_en_sha1_hash": "c87578509cc70195115bab940d290a60e663f6d1",
   "created_at": "2025-05-19T21:30:48.383Z",
-  "updated_at": "2026-04-07T23:51:49.407Z",
+  "updated_at": "2026-04-13T02:25:41.294Z",
   "comment": {
-    "text": "The translation key \"SelectDOCXFFormat\" is used to display a label for selecting .DOCXF file formats in a UI component. It appears on a dialog related to file filtering and should be translated to indicate the specific format being selected.",
+    "text": "This is a label for a file type selection option, indicating the user can choose a .DOCXF file. It appears within a file selection dialog.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:52:27.499Z"
+    "updated_at": "2026-04-11T20:43:43.032Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -105,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'file' is missing from the translation. The Lao translation 'ເລືອກ​ເອກະສານ .DOCXF' translates to 'Select .DOCXF document', which is acceptable, but it lacks the specific 'file' nuance if 'file' is considered a distinct requirement. However, more critically, the translation is missing the specific file extension context if it were to be treated as a variable, but since it is hardcoded, the main issue is the omission of the word 'file' (ໄຟລ໌) which makes it slightly less precise than the English source.",
-          "suggestion": "ເລືອກໄຟລ໌ .DOCXF"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -201,13 +196,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation omitted the file extension '.DOCXF', which is critical for the user to identify the specific format being selected.",
-          "suggestion": "Chọn tập tin .DOCXF"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

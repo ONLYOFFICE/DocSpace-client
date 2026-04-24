@@ -3,24 +3,31 @@
   "content": "Files and folders uploaded by admins will appeared here.",
   "content_en_sha1_hash": "eccdca0f20c32ad17dffa7f5520072fef3017029",
   "created_at": "2025-05-19T21:30:49.465Z",
-  "updated_at": "2026-04-07T20:39:31.667Z",
+  "updated_at": "2026-04-12T12:44:14.305Z",
   "comment": {
-    "text": "Files and folders uploaded by admins will appear here. This translation key is used to display a message in an admin interface, indicating the location where files and folders from administrators are displayed.",
+    "text": "This text appears in an empty folder view for a regular user, indicating that files and folders uploaded by administrators will be displayed there.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:35:35.164Z"
+    "updated_at": "2026-04-11T20:39:36.455Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 166,
+      "line_number": 167,
       "context": ")\n .with([P._, DefaultFolderType, P.when(isAdmin)], () =>\n t(\"EmptyView:DefaultFolderDescription\"),\n )\n .with([P._, DefaultFolderType, P.when(isUser)], () =>\n t(\"Common:UserEmptyDescription\"),\n )\n .otherwise(() => \"\");\n };\n \n export const getRoomDescription = (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 166,
+      "line_number": 167,
       "context": ")\n .with([P._, DefaultFolderType, P.when(isAdmin)], () =>\n t(\"EmptyView:DefaultFolderDescription\"),\n )\n .with([P._, DefaultFolderType, P.when(isUser)], () =>\n t(\"Common:UserEmptyDescription\"),\n )\n .otherwise(() => \"\");\n };\n \n export const getRoomDescription = (",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/empty-view/EmptyView.helpers.tsx",
+      "line_number": 52,
+      "context": "</>\n );\n };\n \n export const getDescription = (t: TTranslation) => {\n return t(\"Common:UserEmptyDescription\");\n };",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -75,7 +82,15 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The word 'appeared' was left untranslated in the Finnish text. It remains in English instead of being translated to Finnish.",
+          "suggestion": "Pääkäyttäjien lataamat tiedostot ja kansiot näkyvät tänne.",
+          "checked_at": "2026-04-12T12:42:25.140Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -87,7 +102,15 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English uses future tense ('will appeared') indicating files are not yet present but will appear later. The Armenian 'հայտնվել են' means 'have appeared' (past tense), implying they already arrived — the opposite meaning for an empty folder state.",
+          "suggestion": "Ադմինիստրատորների կողմից վերբեռնված ֆայլերը և թղթապանակները կհայտնվեն այստեղ:",
+          "checked_at": "2026-04-12T12:42:40.361Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -135,19 +158,43 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English uses future tense ('will appear') but the Portuguese 'apareceram' is simple past tense ('appeared'). The translation changes the meaning from a future expectation to a past event.",
+          "suggestion": "Arquivos e pastas enviados por administradores aparecerão aqui.",
+          "checked_at": "2026-04-12T12:43:19.206Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Portuguese uses past tense 'apareceram' (appeared/have appeared) instead of future tense. The English says files 'will appear' here (future), but the translation states they already appeared (past), which is the opposite meaning in context.",
+          "suggestion": "Arquivos e pastas enviados por administradores aparecerão aqui.",
+          "checked_at": "2026-04-12T12:43:27.624Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'appeared' is left in English inside the Romanian sentence. The verb was not translated, making the sentence grammatically broken and the meaning unclear to a Romanian reader.",
+          "suggestion": "Fişierele şi folderele încărcate de administratori vor apărea aici.",
+          "checked_at": "2026-04-12T12:43:36.615Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -177,7 +224,15 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The word 'appeared' was left untranslated in English within the Serbian Cyrillic text.",
+          "suggestion": "Датотеке и фолдери отпремљени од стране администратора ће се појавити овде.",
+          "checked_at": "2026-04-12T12:43:56.871Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

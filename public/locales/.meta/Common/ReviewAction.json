@@ -3,18 +3,25 @@
   "content": "Review each action carefully before approving.",
   "content_en_sha1_hash": "6a601656d4b98cade5ea8f27d593a1cf998244d3",
   "created_at": "2025-10-27T16:14:24.277Z",
-  "updated_at": "2026-04-08T01:02:46.064Z",
+  "updated_at": "2026-04-13T09:06:25.531Z",
   "comment": {
-    "text": "This key provides the text \"Review each action carefully before approving.\" It appears within a confirmation dialog, prompting the user to carefully examine an action before confirming it. Translators should ensure the meaning of careful review and approval is accurately conveyed.",
+    "text": "This text appears in a confirmation dialog, advising users to carefully review an action before approving it.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:28:04.442Z"
+    "updated_at": "2026-04-11T20:44:46.686Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/message/ToolCallMessage/ToolCallConfirmDialog.tsx",
-      "line_number": 111,
-      "context": "content={content}\n status={ToolCallStatus.Confirmation}\n placement={ToolCallPlacement.ConfirmDialog}\n />\n <div>\n <Text>{t(\"Common:ReviewAction\")}</Text>\n <Text>{t(\"Common:CannotGuaranteeSecurity\")}</Text>\n </div>\n </div>\n </ModalDialog.Body>",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/ToolCallMessage/open-file-confirm-dialog/index.tsx",
+      "line_number": 98,
+      "context": "content={content}\n status={ToolCallStatus.Finished}\n placement={ToolCallPlacement.Message}\n />\n <div>\n <Text>{t(\"ReviewAction\")}</Text>\n <Text>{t(\"CannotGuaranteeSecurity\")}</Text>\n </div>\n </div>\n </ModalDialog.Body>",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/ToolCallMessage/tool-call-confirm-dialog/index.tsx",
+      "line_number": 118,
+      "context": "content={content}\n status={ToolCallStatus.Confirmation}\n placement={ToolCallPlacement.ConfirmDialog}\n />\n <div>\n <Text>{t(\"ReviewAction\")}</Text>\n <Text>{t(\"CannotGuaranteeSecurity\")}</Text>\n </div>\n </div>\n </ModalDialog.Body>",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -99,7 +106,15 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text specifies \"each action\" but the Korean translation uses \"각 단계를\" which means \"each step/stage\". These are different concepts - \"action\" (행동/작업) and \"step/stage\" (단계) convey different meanings. An action is a specific deed or task, while a step is a phase in a process.",
+          "suggestion": "승인 전에 각 작업을 주의 깊게 검토하십시오. (or 각 행동을 for \"each action\")",
+          "checked_at": "2026-04-13T09:05:29.668Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {

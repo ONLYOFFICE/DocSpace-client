@@ -3,16 +3,17 @@
   "content": "Start the portal by creating a room",
   "content_en_sha1_hash": "99cae1f0427752b2aa0b67fb8e7bee1a68325ee2",
   "created_at": "2025-05-19T21:30:56.461Z",
-  "updated_at": "2026-04-07T19:35:05.070Z",
+  "updated_at": "2026-04-11T21:07:17.900Z",
   "comment": {
-    "text": "This translation key is used for a button label that prompts users to create a room. It appears on a UI element in an application where users can initiate room creation. The text will be translated by the translator to support different languages and cultures.",
+    "text": "This is a description for an option on an empty state screen. It explains that creating a room is the first step to using the portal.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:51.229Z"
+    "updated_at": "2026-04-11T21:07:17.900Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 374,
+      "line_number": 375,
       "context": "disabled: !security?.Create,\n };\n \n const createRoom = {\n title: t(\"EmptyView:CreateRoomTitleOption\"),\n description: t(\"EmptyView:CreateRoomDescriotionOption\"),\n icon: <CreateRoom />,\n key: \"create-room\",\n onClick: actions.onCreateRoom,\n disabled: false,\n };",
       "module": "/packages/client"
     }

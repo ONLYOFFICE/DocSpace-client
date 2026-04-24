@@ -3,13 +3,26 @@
   "content": "Groups",
   "content_en_sha1_hash": "ae9629f4ebb82c6331c0809fa9a0e54b00e578e6",
   "created_at": "2025-05-19T21:30:45.668Z",
-  "updated_at": "2026-04-08T08:03:57.010Z",
+  "updated_at": "2026-04-13T14:59:05.727Z",
   "comment": {
-    "text": "The translation key \"Groups\" refers to the label used on a data import component to indicate that groups are being imported. It is used in a settings page and appears as a section name in a dialog box, allowing users to toggle the inclusion of group data in their imports.",
+    "text": "This is a label for a section or category within the application, referring to collections of users. It appears in selectors for filtering or organizing users, and as a title for a dedicated \"Groups\" page.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:00.049Z"
+    "updated_at": "2026-04-11T20:51:28.014Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/selectors/Groups/index.tsx",
+      "line_number": 178,
+      "context": "withHeader\n {...withAside}\n headerProps={{\n ...headerProps,\n onCloseClick: headerProps?.onCloseClick ?? onClose ?? (() => {}),\n headerLabel: headerProps?.headerLabel || t(\"Groups\"),\n }}\n alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}\n withSearch\n searchPlaceholder={t(\"Search\")}\n onSearch={onSearch}",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/selectors/People/index.tsx",
+      "line_number": 704,
+      "context": "content: null,\n },\n ...[\n withGroups && {\n id: GROUP_TAB_ID,\n name: t(\"Groups\"),\n onClick: () => changeActiveTab(GROUP_TAB_ID),\n content: null,\n },\n ],\n ...[",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/Article/Body/AccountsItems.tsx",
       "line_number": 76,
@@ -36,25 +49,25 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 145,
+      "line_number": 146,
       "context": "/>\n \n <ImportSection\n isChecked={importOptions.importGroups}\n onChange={(e) => onChange(e, \"importGroups\")}\n sectionName={t(\"Common:Groups\")}\n description={\n <Trans\n t={t}\n i18nKey=\"GroupsSectionDescription\"\n ns=\"Settings\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 145,
+      "line_number": 146,
       "context": "/>\n \n <ImportSection\n isChecked={importOptions.importGroups}\n onChange={(e) => onChange(e, \"importGroups\")}\n sectionName={t(\"Common:Groups\")}\n description={\n <Trans\n t={t}\n i18nKey=\"GroupsSectionDescription\"\n ns=\"Settings\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 145,
+      "line_number": 146,
       "context": "/>\n \n <ImportSection\n isChecked={importOptions.importGroups}\n onChange={(e) => onChange(e, \"importGroups\")}\n sectionName={t(\"Common:Groups\")}\n description={\n <Trans\n t={t}\n i18nKey=\"GroupsSectionDescription\"\n ns=\"Settings\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 576,
+      "line_number": 577,
       "context": "subjectType === MembersSubjectType.Group\n ) {\n if (groups.length === 0) {\n groups.push({\n id: \"groups\",\n displayName: t(\"Common:Groups\"),\n isTitle: true,\n } satisfies TTitleShare);\n }\n \n groups.push({ ...member, isGroup: true });",
       "module": "/packages/shared"
     }
@@ -147,13 +160,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ກຸ່ມໆ' uses the reduplication marker 'ໆ', which implies 'various groups' or 'groups and groups'. In a UI context for a label or section name, this is grammatically redundant and non-standard. The correct term for the noun 'Groups' is 'ກຸ່ມ'.",
-          "suggestion": "ກຸ່ມ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {

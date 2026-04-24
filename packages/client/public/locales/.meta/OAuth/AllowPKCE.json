@@ -3,17 +3,18 @@
   "content": "Allow public client (PKCE)",
   "content_en_sha1_hash": "1d8744c94f9db618bd1791df5c0f1839c47e717d",
   "created_at": "2025-05-19T21:30:53.787Z",
-  "updated_at": "2026-04-07T19:35:05.159Z",
+  "updated_at": "2026-04-13T14:59:05.869Z",
   "comment": {
-    "text": "The \"AllowPKCE\" translation key is used to describe a toggle switch that enables public client (PKCE) authentication in an OAuth configuration. This text appears as a help button next to the toggle, providing context for users who need assistance understanding PKCE authentication. Translators should ensure this description accurately reflects the intended functionality and technical term \"PKCE\" to maintain consistency across languages.",
+    "text": "This is a checkbox label in the OAuth client settings. It allows enabling or disabling the Proof Key for Code Exchange (PKCE) for public clients.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:00.339Z"
+    "updated_at": "2026-04-11T21:19:24.509Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
-      "line_number": 129,
-      "context": "img.src = URL.createObjectURL(file);\n }\n };\n \n const pkceHelpButtonText = (\n <Trans t={t as TFunction} i18nKey=\"AllowPKCEHelpButton\" ns=\"OAuth\" />\n );\n \n const isNameRequiredError = requiredErrorFields.includes(\"name\");\n const isWebsiteRequiredError = requiredErrorFields.includes(\"website_url\");\n const isNameError = errorFields.includes(\"name\");",
+      "line_number": 219,
+      "context": "onChange={() => {}}\n dataTestId=\"auth_method_input_group\"\n >\n <div className=\"pkce\">\n <Checkbox\n label={t(\"AllowPKCE\")}\n isChecked={allowPkce}\n onChange={() => {\n changeValue(\"allow_pkce\", !allowPkce);\n }}\n dataTestId=\"allow_pkce_checkbox\"",
       "module": "/packages/client"
     }
   ],

@@ -3,16 +3,29 @@
   "content": "No members found",
   "content_en_sha1_hash": "2f9524453596c315ea26d2daec2af8d6792b16f1",
   "created_at": "2025-05-19T21:30:46.909Z",
-  "updated_at": "2026-04-10T08:21:04.320Z",
+  "updated_at": "2026-04-23T17:24:01.869Z",
   "comment": {
-    "text": "This translation key is used for the text \"No members found\", which appears on an empty screen in various components when a group of members does not exist. It is typically displayed above or below an image, and its purpose is to inform users that they are looking at an empty list or container.",
+    "text": "This is an empty state header text displayed when no members are found after applying a filter or search in a people selector.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:17.165Z"
+    "updated_at": "2026-04-11T20:47:43.185Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
+      "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
+      "line_number": 526,
+      "context": "isCloseable: true,\n headerLabel: t(\"ListContacts\"),\n }}\n filter={() => filter(withoutRoleFilter)}\n {...infoProps}\n emptyScreenHeader={t(\"NotFoundMembers\")}\n emptyScreenDescription={t(\"PeopleSelectorInfo\", {\n productName: getBrandName(\"ProductName\"),\n })}\n />\n ) : null;",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/selectors/People/index.tsx",
+      "line_number": 791,
+      "context": "searchEmptyScreenImage={emptyScreenImage}\n searchEmptyScreenHeader={\n activeTabId === GUESTS_TAB_ID\n ? t(\"NotFoundGuestsFilter\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"NotFoundMembers\")\n : t(\"NotFoundGroups\")\n }\n searchEmptyScreenDescription={\n activeTabId === GUESTS_TAB_ID\n ? t(\"NotFoundFilterGuestsDescription\")",
+      "module": "/libs/ui-kit"
+    },
+    {
       "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
-      "line_number": 131,
+      "line_number": 132,
       "context": "filterUserId={roomOwnerId}\n currentUserId={userId}\n disableDisabledUsers\n withInfo\n infoText={infoText}\n emptyScreenHeader={t(\"Common:NotFoundMembers\")}\n emptyScreenDescription={infoText}\n className={styles.changeOwnerPeopleSelector}\n data-test-id=\"change_owner_people_selector\"\n />\n );",
       "module": "/packages/client"
     },

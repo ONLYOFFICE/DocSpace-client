@@ -3,13 +3,26 @@
   "content": "Back",
   "content_en_sha1_hash": "b52b36b7269fbfc58ec24bb724691951a3decbe8",
   "created_at": "2025-05-19T21:30:43.167Z",
-  "updated_at": "2026-04-08T16:29:55.746Z",
+  "updated_at": "2026-04-23T17:24:01.928Z",
   "comment": {
-    "text": "The translation key \"Back\" is used to display a label that navigates users back to a previous step or screen in a data import process. It appears as the label of a cancel button on forms such as the \"Add Emails Step\", allowing users to exit and return to their previous step.",
+    "text": "Button label. Navigates the user to the previous screen or step in a process.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:17.641Z"
+    "updated_at": "2026-04-11T20:58:44.410Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/components/article/sub-components/BackButton/index.tsx",
+      "line_number": 95,
+      "context": "data-show-article={showText ? \"true\" : \"false\"}\n data-arrow-type={isDesktop ? \"desktop\" : \"tablet\"}\n onClick={onClickBack}\n >\n <IconButton className={styles.arrowIcon} iconNode={icon} isClickable />\n {showText ? <Text truncate>{t(\"Back\")}</Text> : null}\n </div>\n );\n };\n \n export default BackButton;",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/components/selector/sub-components/EmptyScreen.tsx",
+      "line_number": 197,
+      "context": "}\n isFill\n />\n \n <Link {...linkStyles}>\n {withSearch ? t(\"ClearFilter\") || \"\" : t(\"Back\") || \"\"}\n </Link>\n </div>\n ) : null}\n </div>\n </div>",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/index.tsx",
       "line_number": 114,
@@ -18,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 302,
+      "line_number": 303,
       "context": "<MigrationButtons\n className=\"save-cancel-buttons\"\n onSaveClick={incrementStep}\n onCancelClick={decrementStep}\n saveButtonLabel={t(\"Settings:NextStep\")}\n cancelButtonLabel={t(\"Common:Back\")}\n displaySettings\n showReminder\n migrationCancelLabel={t(\"Settings:CancelImport\")}\n onMigrationCancelClick={showCancelDialog}\n />",
       "module": "/packages/client"
     },
@@ -48,15 +61,21 @@
     },
     {
       "file_path": "/packages/login/src/components/GreetingContainer/GreetingUserContainer.tsx",
-      "line_number": 71,
+      "line_number": 72,
       "context": "<Text\n fontWeight={600}\n onClick={onClickBack}\n dataTestId=\"greeting_back_text\"\n >\n {t(\"Common:Back\")}\n </Text>\n </div>\n ) : null}\n \n <Text fontWeight={600} fontSize=\"16px\">",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/sub-components/EmailContainer.tsx",
-      "line_number": 97,
+      "line_number": 98,
       "context": "<Text\n fontWeight={600}\n onClick={onClickBack}\n dataTestId=\"email_invitation_back_text\"\n >\n {t(\"Common:Back\")}\n </Text>\n </div>\n <Text fontWeight={600} fontSize=\"16px\">\n {t(\"Common:LoginButton\")}\n </Text>",
       "module": "/packages/login"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsTour.ts",
+      "line_number": 136,
+      "context": "zIndex: 10000,\n beforeTimeout: 15000,\n targetWaitTimeout: 15000,\n },\n locale: {\n back: t(\"Common:Back\"),\n close: t(\"Common:CloseButton\"),\n last: t(\"Common:Done\"),\n next: t(\"Common:Next\"),\n skip: t(\"Common:Skip\"),\n },",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/guidance/sub-components/Guid.tsx",
@@ -75,13 +94,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'خلف' means 'behind' (spatial position) rather than 'Back' (navigation/returning to a previous step). In a UI context for navigation, 'رجوع' or 'العودة' should be used.",
-          "suggestion": "رجوع"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -147,13 +160,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '前に' means 'before' or 'in front of' (prepositional/adverbial), which is incorrect for a UI navigation button. For a 'Back' button used to return to a previous step, '戻る' is the standard and correct term.",
-          "suggestion": "戻る"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {

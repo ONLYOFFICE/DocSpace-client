@@ -3,17 +3,18 @@
   "content": "Sort order",
   "content_en_sha1_hash": "5601af90fba7fe38466b58c08c018711849b8855",
   "created_at": "2025-05-19T21:30:54.692Z",
-  "updated_at": "2026-04-07T19:35:05.141Z",
+  "updated_at": "2026-04-13T14:59:05.858Z",
   "comment": {
-    "text": "This translation key is used to display the sort order options in a dropdown or list, allowing users to choose whether to sort by descending or ascending order. It appears on the page where sorting options are configured, typically in a dialog or settings panel for managing data or files. Translators should provide a clear and intuitive description that reflects the intended behavior of this feature.",
+    "text": "This is a label for a dropdown menu or radio button group that allows users to select the order in which items are sorted (e.g., ascending or descending).",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:19.264Z"
+    "updated_at": "2026-04-11T21:14:27.907Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 128,
-      "context": "{ key: \"Size\", label: t(\"Common:Size\") },\n { key: \"DateAndTimeCreation\", label: t(\"Files:ByCreation\") },\n { key: \"Author\", label: t(\"Files:ByAuthor\") },\n ];\n \n const dataSortOrder = [\n { key: \"descending\", label: t(\"Descending\"), default: true },\n { key: \"ascending\", label: t(\"Ascending\") },\n ];\n \n const columnDisplayOptions = [",
+      "line_number": 702,
+      "context": "dataTestId=\"sort_by_combobox\"\n dropDownTestId=\"sort_by_dropdown\"\n />\n </ControlsGroup>\n <ControlsGroup>\n <Label className=\"label\" text={t(\"SortOrder\")} />\n <ComboBox\n onSelect={onChangeSortOrder}\n options={dataSortOrder}\n scaled\n selectedOption={sortOrder}",
       "module": "/packages/client"
     }
   ],

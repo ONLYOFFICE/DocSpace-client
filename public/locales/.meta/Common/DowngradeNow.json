@@ -3,13 +3,21 @@
   "content": "Downgrade now",
   "content_en_sha1_hash": "55c12a0fa5a68eadb39f9fd457b2c4c867f35765",
   "created_at": "2026-04-10T13:53:42.425Z",
-  "updated_at": "2026-04-10T13:53:42.425Z",
+  "updated_at": "2026-04-11T20:54:47.460Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a button label. It appears when a user is on a higher-tier plan and wants to switch to a lower-tier plan.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:54:47.460Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/UpdatePlanButtonContainer.tsx",
+      "line_number": 323,
+      "context": "return isDowngradePlan ? (\n <DowngradePlanButtonContainer\n onDowngradeTariff={onDowngradeTariff}\n isDisabled={isDisabled}\n buttonLabel={t(\"DowngradeNow\")}\n />\n ) : (\n <Button\n className=\"upgrade-now-button\"\n label={t(\"UpgradeNow\")}",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

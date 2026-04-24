@@ -32,6 +32,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 
 import styles from "./ConsentInfo.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 interface IOAuthClientInfo {
   name: string;
@@ -80,7 +81,7 @@ const OAuthClientInfo = ({
             t={t}
             i18nKey="ConsentSubHeader"
             ns="Consent"
-            values={{ nameApp: name, productName: t("Common:ProductName") }}
+            values={{ nameApp: name, productName: getBrandName("ProductName") }}
             components={{
               1: (
                 <Link

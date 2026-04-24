@@ -3,11 +3,12 @@
   "content": "This IP address has already been added",
   "content_en_sha1_hash": "57357e309ce932380014ab712053d6685d4163ab",
   "created_at": "2025-12-15T14:02:39.305Z",
-  "updated_at": "2026-04-08T06:26:43.896Z",
+  "updated_at": "2026-04-11T20:50:30.778Z",
   "comment": {
-    "text": "This key displays an error message indicating that an IP address has already been entered in the IP security settings. It appears within a form or dialog when a user attempts to add a duplicate IP address. Translators should ensure the message clearly conveys the duplication issue.",
+    "text": "Error text. This message appears when a user attempts to add an IP address that is already present in the list of allowed or blocked IP addresses.",
     "is_auto": true,
-    "updated_at": "2025-12-17T07:51:04.210Z"
+    "updated_at": "2026-04-11T20:50:30.778Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -171,13 +172,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The grammatical gender of the demonstrative pronoun 'Ky' (masculine) does not match the noun 'adresë' (feminine). In Albanian, it should be 'Kjo'.",
-          "suggestion": "Kjo adresë IP është shtuar tashmë"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

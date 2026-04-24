@@ -28,7 +28,7 @@
   "StandardLogin": "Standardna prijava",
   "SuccessChangeGuestStatus": "Status gosta je uspešno promenjen",
   "SuccessChangeUserStatus": "Korisnički status je uspešno promenjen",
-  "SuccessCopyContantLink": "Link za kontakt je uspešno kopiran. Link je <strong>važeći 7 dana.</strong>",
+  "SuccessCopyContantLink": "Link za kontakt je uspešno kopiran. Link <strong>važi 7 dana.</strong>",
   "SuccessDeleteGroup": "Grupa je uspešno obrisana",
   "SuccessDeleteGroups": "Grupe su uspešno obrisane",
   "SuccessDeletePersonalData": "Lični podaci su uspešno obrisani",

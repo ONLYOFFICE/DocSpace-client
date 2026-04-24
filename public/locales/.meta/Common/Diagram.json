@@ -3,11 +3,12 @@
   "content": "Diagram",
   "content_en_sha1_hash": "df5415960cfe95d2038cf9f52aaf8f174457596d",
   "created_at": "2025-07-01T15:57:10.981Z",
-  "updated_at": "2026-04-08T12:05:09.373Z",
+  "updated_at": "2026-04-11T20:55:10.150Z",
   "comment": {
-    "text": "The translation key \"Diagram\" is used to display the label for a table cell indicating that the file type is a diagram. It appears in theTableView component and is part of the FileType enum context.",
+    "text": "This is a noun, used as a file type label. It identifies a diagram file in lists or displays.",
     "is_auto": true,
-    "updated_at": "2025-07-01T15:57:50.641Z"
+    "updated_at": "2026-04-11T20:55:10.150Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

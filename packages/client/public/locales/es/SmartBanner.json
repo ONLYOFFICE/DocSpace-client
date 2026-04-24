@@ -1,5 +1,5 @@
 {
-  "AppName": "Documentos {{organizationName}}",
   "AppStore": "En el App Store",
-  "GooglePlay": "En Google Play"
+  "GooglePlay": "En Google Play",
+  "SmartBannerAppName": "Documentos {{organizationName}}"
 }

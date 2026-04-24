@@ -3,16 +3,17 @@
   "content": "Stop filling",
   "content_en_sha1_hash": "81403b204666d43c8e360eaa868736a22790325d",
   "created_at": "2025-05-19T21:30:49.055Z",
-  "updated_at": "2026-04-10T08:21:04.376Z",
+  "updated_at": "2026-04-23T17:24:02.079Z",
   "comment": {
-    "text": "This translation key \"StopFilling\" is used to display the text \"Stop filling\" in the UI. It is typically found on buttons or in dialog content that indicate a stop action for filling operations, such as stopping file uploads or editing processes.",
+    "text": "This is a button label that allows users to stop the filling process for a document.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:38:46.230Z"
+    "updated_at": "2026-04-11T20:42:06.169Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2662,
+      "line_number": 2724,
       "context": "isSeparator: true,\n },\n {\n id: \"option_stop-filling\",\n key: \"stop-filling\",\n label: t(\"Common:StopFilling\"),\n icon: AccessNoneReactSvgUrl,\n onClick: () =>\n this.dialogsStore.setStopFillingDialogVisible(true, item.id),\n disabled: false,\n },",
       "module": "/packages/client"
     },
@@ -30,14 +31,14 @@
     },
     {
       "file_path": "/packages/shared/dialogs/stop-filling/StopFillingDialog.tsx",
-      "line_number": 71,
-      "context": "visible={visible}\n displayType={ModalDialogType.modal}\n onClose={onClose}\n data-testid=\"stop-filling-dialog\"\n >\n <ModalDialog.Header>{t(\"Common:StopFillingTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>{t(\"Common:StopFillingBody\")}</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"stop-filling-dialog_submit\"\n key=\"OKButton\"",
+      "line_number": 77,
+      "context": "<ModalDialog.Body>{t(\"Common:StopFillingBody\")}</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"stop-filling-dialog_submit\"\n key=\"OKButton\"\n label={t(\"Common:StopFilling\")}\n size={ButtonSize.normal}\n primary\n scale\n type=\"submit\"\n onClick={handleSubmit}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/stop-filling/StopFillingDialog.tsx",
-      "line_number": 71,
-      "context": "visible={visible}\n displayType={ModalDialogType.modal}\n onClose={onClose}\n data-testid=\"stop-filling-dialog\"\n >\n <ModalDialog.Header>{t(\"Common:StopFillingTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>{t(\"Common:StopFillingBody\")}</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"stop-filling-dialog_submit\"\n key=\"OKButton\"",
+      "line_number": 77,
+      "context": "<ModalDialog.Body>{t(\"Common:StopFillingBody\")}</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"stop-filling-dialog_submit\"\n key=\"OKButton\"\n label={t(\"Common:StopFilling\")}\n size={ButtonSize.normal}\n primary\n scale\n type=\"submit\"\n onClick={handleSubmit}",
       "module": "/packages/shared"
     }
   ],

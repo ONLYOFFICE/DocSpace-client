@@ -3,11 +3,12 @@
   "content": "Who has access",
   "content_en_sha1_hash": "b82540c6a77efe28089091e2a93027edf47bac9e",
   "created_at": "2025-08-26T11:15:03.431Z",
-  "updated_at": "2026-04-07T19:57:33.966Z",
+  "updated_at": "2026-04-12T08:30:17.715Z",
   "comment": {
-    "text": "This key displays the text \"Who has access\" as a label within an access selector block, likely in a dialog or panel where users manage link permissions. It's used to clearly indicate what the following options pertain to – the individuals or groups who currently have access.",
+    "text": "This is a section title in sharing dialogs, indicating the area where users can view or manage who has access to a shared item.",
     "is_auto": true,
-    "updated_at": "2025-08-26T11:15:45.438Z"
+    "updated_at": "2026-04-11T20:38:50.723Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

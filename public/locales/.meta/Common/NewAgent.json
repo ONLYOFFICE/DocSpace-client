@@ -3,28 +3,35 @@
   "content": "New agent",
   "content_en_sha1_hash": "d200d92a331aabd52dfb0d7911c95be2fdd35eab",
   "created_at": "2025-10-27T16:14:17.785Z",
-  "updated_at": "2026-04-10T08:21:04.285Z",
+  "updated_at": "2026-04-23T17:24:01.634Z",
   "comment": {
-    "text": "This key is used for the label of a button that creates a new agent. It appears on a button, likely within an agent creation interface or folder view, and translators should understand it refers to the action of creating a new agent.",
+    "text": "This is a button label or an item in a dropdown list. It allows users to create a new AI agent.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:34:50.763Z"
+    "updated_at": "2026-04-11T20:48:14.560Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
+      "file_path": "/libs/ui-kit/selectors/utils/hooks/useAgentsHelper.tsx",
+      "line_number": 184,
+      "context": "// if (withCreate && security.Create) {\n //   setTotal(total + 1);\n //   const createItem: TSelectorItem = {\n //     isCreateNewItem: true,\n //     label: createDefineLabel ?? t(\"NewAgent\"),\n //     id: \"create-room-item\",\n //     key: \"create-room-item\",\n //     hotkey: \"r\",\n //     // isRoomsOnly,",
+      "module": "/libs/ui-kit"
+    },
+    {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 732,
+      "line_number": 733,
       "context": "/>\n ) : isAIAgentsFolder ? (\n <Button\n className={classNames(styles.mainButton, \"create-agent-button\")}\n id=\"rooms-shared_create-agent-button\"\n label={t(\"Common:NewAgent\")}\n onClick={onCreateAgent}\n $currentColorScheme={currentColorScheme}\n isDisabled={isDisabled || aiConfig.aiReadyNeedReset}\n size=\"small\"\n primary",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 732,
+      "line_number": 733,
       "context": "/>\n ) : isAIAgentsFolder ? (\n <Button\n className={classNames(styles.mainButton, \"create-agent-button\")}\n id=\"rooms-shared_create-agent-button\"\n label={t(\"Common:NewAgent\")}\n onClick={onCreateAgent}\n $currentColorScheme={currentColorScheme}\n isDisabled={isDisabled || aiConfig.aiReadyNeedReset}\n size=\"small\"\n primary",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3631,
+      "line_number": 3707,
       "context": "const options = isAIAgentsFolder\n ? [\n {\n key: \"new-agent\",\n label: t(\"Common:NewAgent\"),\n onClick: this.onCreateAgent,\n icon: CatalogAIAgentsReactSvgUrl,\n },\n ]\n : isRoomsFolder",
       "module": "/packages/client"
     },

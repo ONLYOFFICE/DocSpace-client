@@ -3,29 +3,30 @@
   "content": "More",
   "content_en_sha1_hash": "4bab2d8fe13fa6ab57f80098b414f0f734c5dd25",
   "created_at": "2025-05-19T21:30:46.613Z",
-  "updated_at": "2026-04-10T08:21:04.285Z",
+  "updated_at": "2026-04-23T17:24:01.628Z",
   "comment": {
-    "text": "This translation key is used for the label of a button that displays the word \"More\". It appears in a dropdown menu next to a main action button on an article page, allowing users to access additional options.",
+    "text": "This is a button label that indicates there are more options or items available, often leading to a dropdown menu or expanded view.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:27.879Z"
+    "updated_at": "2026-04-11T20:48:32.662Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 551,
+      "line_number": 552,
       "context": "if (pluginItems.length > 0) {\n // menuModel.push({\n //   id: \"actions_more-plugins\",\n //   className: \"main-button_drop-down\",\n //   icon: PluginMoreReactSvgUrl,\n //   label: t(\"Common:More\"),\n //   disabled: false,\n //   key: \"more-plugins\",\n //   items: pluginItems,\n // });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 551,
+      "line_number": 552,
       "context": "if (pluginItems.length > 0) {\n // menuModel.push({\n //   id: \"actions_more-plugins\",\n //   className: \"main-button_drop-down\",\n //   icon: PluginMoreReactSvgUrl,\n //   label: t(\"Common:More\"),\n //   disabled: false,\n //   key: \"more-plugins\",\n //   items: pluginItems,\n // });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2737,
-      "context": "];\n \n const menuGroupsConfig = [\n {\n groupKey: \"more-options\",\n groupLabel: t(\"Common:MoreOptions\"),\n groupIcon: DotsHorizontalUrl,\n itemKeys: moreOptionsItemKeys,\n needsGrouping: true,\n minItemsCount,\n },",
+      "line_number": 3753,
+      "context": "options.splice(5, 0, {\n id: \"actions_more-plugins\",\n className: \"main-button_drop-down\",\n icon: PluginMoreReactSvgUrl,\n label: t(\"Common:More\"),\n disabled: false,\n key: \"more-plugins\",\n items: pluginItems,\n });\n }",
       "module": "/packages/client"
     }
   ],
@@ -57,13 +58,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech translation 'Více na' means 'More on' or 'More at', which is grammatically incomplete and changes the meaning from a standalone button label 'More' to a prepositional phrase.",
-          "suggestion": "Více"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -87,13 +82,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation contains a typo: 'Enemmmän' has an extra 'm'. The correct spelling is 'Lisää' for a button label meaning 'More' (additional options), or 'Enemmän' if referring to quantity.",
-          "suggestion": "Lisää"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -117,13 +106,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'もっと' (motto) means 'more' in an adverbial sense (e.g., 'more intensely' or 'more quantity'). In a UI context for a dropdown menu button, it is incorrect. The correct term for 'More' (as in 'additional options') is 'その他' or '詳細'.",
-          "suggestion": "その他"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -135,13 +118,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ຫຼາຍ​ຂຶ້ນ' means 'more' in a comparative sense (e.g., 'to increase' or 'more than before'). For a UI button representing 'More options' or 'Additional actions', the correct term should be 'ເພີ່ມເຕີມ'.",
-          "suggestion": "ເພີ່ມເຕີມ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -219,13 +196,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Daha' means 'more' in a comparative sense (e.g., 'more beautiful'). In the context of a UI button for a dropdown menu, 'Daha' is grammatically incorrect and unnatural. The correct term for 'More' (as in 'additional options') is 'Daha Fazla'.",
-          "suggestion": "Daha Fazla"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -237,13 +208,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Khác' means 'Other' or 'Different'. In the context of a UI button for a dropdown menu (More options), the correct term should be 'Thêm' (More/Additional).",
-          "suggestion": "Thêm"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

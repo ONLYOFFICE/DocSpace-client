@@ -3,13 +3,26 @@
   "content": "Add",
   "content_en_sha1_hash": "61cc55aa0453184734c3fa0b621eda6fa874bd83",
   "created_at": "2025-05-19T21:30:42.915Z",
-  "updated_at": "2026-04-08T17:55:37.941Z",
+  "updated_at": "2026-04-11T21:01:07.650Z",
   "comment": {
-    "text": "This translation key is used to display the text \"Add\" as a button label in various UI elements, such as buttons, input fields, and dialogs. It appears in contexts where users need to add new items or content, including form submissions, editing comments, and OAuth client settings. Translators should provide a clear and concise alternative for this key to ensure consistent and accurate display across the application.",
+    "text": "This is a button label that initiates an \"add\" action, such as adding a file, a server, or an item to a selection.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:26.534Z"
+    "updated_at": "2026-04-11T21:01:07.650Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-input/attachment/index.tsx",
+      "line_number": 140,
+      "context": "withCancelButton\n withCreate={false}\n withFooterCheckbox={false}\n withFooterInput={false}\n cancelButtonLabel={t(\"CancelButton\")}\n submitButtonLabel={t(\"AddButton\")}\n disabledItems={[]}\n isRoomsOnly={false}\n isThirdParty={false}\n currentFolderId=\"\"\n rootFolderType={FolderType.Rooms}",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/selectors/MCPServers/index.tsx",
+      "line_number": 245,
+      "context": "<EmptyScreenRoomSelectorDark />\n )\n }\n searchEmptyScreenHeader={t(\"NotFoundTitle\")}\n searchEmptyScreenDescription={t(\"SearchEmptyRoomsDescription\")}\n submitButtonLabel={t(\"AddButton\")}\n disableSubmitButton={false}\n onSubmit={onSubmitAction}\n rowLoader={<RowLoader />}\n hasNextPage={servers.length < totalServers}\n isNextPageLoading={false}",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/PluginSelector/PluginFilesSelector/PluginFilesSelector.tsx",
       "line_number": 212,
@@ -18,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/components/TemplateAccessSelector/index.tsx",
-      "line_number": 95,
+      "line_number": 96,
       "context": "return (\n <PeopleSelector\n useAside\n onClose={onClose!}\n onSubmit={onSubmit}\n submitButtonLabel={t(\"Common:AddButton\")}\n disableSubmitButton={false}\n isMultiSelect\n disableDisabledUsers\n withGroups\n withInfo",
       "module": "/packages/client"
     },
@@ -39,6 +52,24 @@
       "line_number": 308,
       "context": "/>\n </TimePickerCell>\n ) : (\n <TimePickerCell>\n <AddButton\n title={t(\"Common:AddButton\")}\n onClick={showTimePicker}\n className=\"mr-8 add-delivery-time-button\"\n label={t(\"SelectDeliveryTime\")}\n />\n </TimePickerCell>",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/ContactsForm.tsx",
+      "line_number": 204,
+      "context": "<Text fontSize=\"12px\" fontWeight={400}>\n {t(\"Common:FormAdminsDescription\")}\n </Text>\n <div className={styles.buttonWrapper}>\n <Button\n label={t(\"Common:AddButton\")}\n size={ButtonSize.small}\n primary\n onClick={onAddAdmin}\n />\n </div>",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/ContactsForm.tsx",
+      "line_number": 204,
+      "context": "<Text fontSize=\"12px\" fontWeight={400}>\n {t(\"Common:FormAdminsDescription\")}\n </Text>\n <div className={styles.buttonWrapper}>\n <Button\n label={t(\"Common:AddButton\")}\n size={ButtonSize.small}\n primary\n onClick={onAddAdmin}\n />\n </div>",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/ContactsForm.tsx",
+      "line_number": 204,
+      "context": "<Text fontSize=\"12px\" fontWeight={400}>\n {t(\"Common:FormAdminsDescription\")}\n </Text>\n <div className={styles.buttonWrapper}>\n <Button\n label={t(\"Common:AddButton\")}\n size={ButtonSize.small}\n primary\n onClick={onAddAdmin}\n />\n </div>",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -111,13 +142,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Italian translation 'Salva' means 'Save', which is a different action than 'Add'.",
-          "suggestion": "Aggiungi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -135,13 +160,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ບັນທຶກ' means 'Save' or 'Record', which is a different action from 'Add'.",
-          "suggestion": "ເພີ່ມ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -171,25 +190,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word 'Add' means to create or include something new, whereas the Portuguese translation 'Salvar' means 'Save'. This changes the user's intent from adding an item to saving existing data.",
-          "suggestion": "Adicionar"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word 'Add' means to create or include something new, whereas the Romanian 'Salvează' means 'Save'.",
-          "suggestion": "Adaugă"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -201,13 +208,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'එකතු' (Ekathu) is an adjective/adverb meaning 'added' or 'together'. For a UI button label meaning the action 'Add', the verb form 'එකතු කරන්න' (Ekathu karanna) is required.",
-          "suggestion": "එකතු කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -243,13 +244,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Ukrainian translation 'Активний' means 'Active', which is a completely different meaning from the English 'Add' (an action verb).",
-          "suggestion": "Додати"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

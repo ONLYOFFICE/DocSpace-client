@@ -3,11 +3,12 @@
   "content": "URL not valid, example",
   "content_en_sha1_hash": "350049133db4d2b9f084821bdef5f6282c6d77ec",
   "created_at": "2025-05-19T21:30:53.887Z",
-  "updated_at": "2026-04-07T19:35:05.163Z",
+  "updated_at": "2026-04-11T21:18:53.895Z",
   "comment": {
-    "text": "The \"ErrorWrongURL\" translation key is used to display a generic error message when an invalid URL is entered. It appears in various UI elements, including input fields and support blocks, providing a clear indication that the URL is not valid. Translators should provide a descriptive message that conveys this information while maintaining consistency across different contexts.",
+    "text": "This is an error message displayed when a user enters an invalid URL in an input field, indicating that the provided URL format is incorrect. It is followed by an example URL, which is the current origin of the application.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:48.142Z"
+    "updated_at": "2026-04-11T21:18:53.895Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

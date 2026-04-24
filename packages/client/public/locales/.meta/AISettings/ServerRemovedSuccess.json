@@ -3,11 +3,12 @@
   "content": "Server removed successfully",
   "content_en_sha1_hash": "2534ef8dc4cd80a0cf9f6d58cf579643bfdfd510",
   "created_at": "2025-10-27T16:14:31.650Z",
-  "updated_at": "2025-10-27T17:15:24.414Z",
+  "updated_at": "2026-04-11T21:02:19.537Z",
   "comment": {
-    "text": "Confirmation message displayed in a toast notification after a server is successfully deleted within the AI settings section of the portal. It confirms the deletion action to the user. Translators should ensure the tone aligns with a success message.",
+    "text": "This is a toast message confirming that a server has been successfully removed from the AI settings. It appears briefly after the user initiates the deletion of a server.",
     "is_auto": true,
-    "updated_at": "2025-10-27T17:15:24.414Z"
+    "updated_at": "2026-04-11T21:02:19.537Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

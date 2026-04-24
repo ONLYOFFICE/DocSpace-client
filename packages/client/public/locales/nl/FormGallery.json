@@ -4,11 +4,11 @@
   "ErrorViewDescription": "Probeer het later opnieuw",
   "ErrorViewDescriptionNetworkError": "Het lijkt erop dat er geen internetverbinding is.",
   "ErrorViewHeader": "Galerij is tijdelijk niet beschikbaar",
+  "GalleryTitle": "{{organizationName}} Sjabloon Galerij",
   "SelectTemplate": "Selecteer sjabloon",
+  "SubmitToGalleryDialogMainInfo": "Dien uw sjabloon in bij de openbare galerij zodat anderen het in hun werk kunnen gebruiken. Nadat het sjabloon de moderatie heeft doorlopen, worden wij u op de hoogte gebracht en beloond voor uw bijdrage.",
   "SuggestChanges": "Wijzigingen voorstellen",
   "TemplateInfo": "Sjabloon info",
   "UploadGallery": "Uploaden in de Galerij",
-  "ViewAllTemplates": "Bekijk alle sjablonen",
-  "GalleryTitle": "{{organizationName}} Sjabloon Galerij",
-  "SubmitToGalleryDialogMainInfo": "Dien uw sjabloon in bij de openbare galerij zodat anderen het in hun werk kunnen gebruiken. Nadat het sjabloon de moderatie heeft doorlopen, worden wij u op de hoogte gebracht en beloond voor uw bijdrage."
+  "ViewAllTemplates": "Bekijk alle sjablonen"
 }

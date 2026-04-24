@@ -3,11 +3,12 @@
   "content": "Create room",
   "content_en_sha1_hash": "bc487b9d588a5f906e3f1cf66e5d6096e1b21ed5",
   "created_at": "2025-05-19T21:30:43.921Z",
-  "updated_at": "2026-04-10T08:21:04.306Z",
+  "updated_at": "2026-04-23T17:24:01.736Z",
   "comment": {
-    "text": "This translation key is used for the \"Create room\" button label in various UI components, such as buttons and dialog headers. It appears when a user clicks on the \"Create room\" link or button to initiate the creation of a new room.",
+    "text": "This is a button label or dialog title. It appears on buttons that create a new room, or as the title of a dialog for creating a room.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:50.480Z"
+    "updated_at": "2026-04-11T20:55:59.307Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -42,19 +43,19 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2227,
+      "line_number": 2286,
       "context": "disabled: !item.security?.Reconnect || !item.security?.EditRoom,\n },\n {\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => this.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2227,
+      "line_number": 2286,
       "context": "disabled: !item.security?.Reconnect || !item.security?.EditRoom,\n },\n {\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => this.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2227,
+      "line_number": 2286,
       "context": "disabled: !item.security?.Reconnect || !item.security?.EditRoom,\n },\n {\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => this.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
@@ -207,13 +208,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Create room' is an imperative verb (an action/command for a button), whereas the Russian translation 'Создание комнаты' is a noun phrase (the process of creating a room). For a button label, the imperative 'Создать комнату' is required to match the functional meaning.",
-          "suggestion": "Создать комнату"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {

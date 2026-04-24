@@ -3,29 +3,30 @@
   "content": "Share",
   "content_en_sha1_hash": "09ca55ca52d207f2cc1d9339e0226a88e9e96e2f",
   "created_at": "2025-05-19T21:30:48.615Z",
-  "updated_at": "2026-04-10T08:21:04.295Z",
+  "updated_at": "2026-04-23T17:24:01.676Z",
   "comment": {
-    "text": "The translation key \"Share\" is used to display a button label in the user interface. It appears on a shared form panel and is linked to an icon representing sharing. The purpose of this text is to enable users to share content.",
+    "text": "This is a button label that initiates the sharing process for a file or document.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:41:23.957Z"
+    "updated_at": "2026-04-11T20:43:09.256Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/ShareFormPanel/index.js",
-      "line_number": 88,
-      "context": "const cards = useMemo(\n () => [\n {\n id: \"quick-sharing\",\n title: t(\"Common:QuickSharing\"),\n description: t(\"Common:ShareTheOriginalFormForFillingOut\"),\n buttonLabel: t(\"Common:Share\"),\n onClick: onClickShareFile,\n icon: <ShareSvg />,\n },\n {",
+      "line_number": 89,
+      "context": "() => [\n {\n id: \"quick-sharing\",\n title: t(\"Common:QuickSharing\"),\n description: t(\"Common:ShareTheOriginalFormForFillingOut\"),\n buttonLabel: t(\"Common:Share\"),\n onClick: onClickShareFile,\n icon: <ShareSvg />,\n },\n {\n id: \"form-data-collection\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/SharedButton.js",
-      "line_number": 24,
-      "context": "// Pursuant to Section 7(b) of the License you must retain the original Product logo when\n // distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under\n // trademark law for use of our trademarks.\n //\n // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing\n // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0\n // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode\n \n import CatalogShareSmallReactSvgUrl from \"PUBLIC_DIR/images/icons/16/catalog.share.small.react.svg?url\";\n import CatalogSharedReactSvgUrl from \"PUBLIC_DIR/images/icons/16/catalog.shared.react.svg?url\";\n import React from \"react\";",
+      "line_number": 62,
+      "context": "return (\n <Text\n className=\"share-button\"\n as=\"span\"\n title={t(\"Share\")}\n fontSize=\"12px\"\n fontWeight={600}\n color={color}\n display=\"inline-flex\"\n onClick={onClickShare}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/SharedButton.js",
-      "line_number": 24,
-      "context": "// Pursuant to Section 7(b) of the License you must retain the original Product logo when\n // distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under\n // trademark law for use of our trademarks.\n //\n // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing\n // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0\n // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode\n \n import CatalogShareSmallReactSvgUrl from \"PUBLIC_DIR/images/icons/16/catalog.share.small.react.svg?url\";\n import CatalogSharedReactSvgUrl from \"PUBLIC_DIR/images/icons/16/catalog.shared.react.svg?url\";\n import React from \"react\";",
+      "line_number": 62,
+      "context": "return (\n <Text\n className=\"share-button\"\n as=\"span\"\n title={t(\"Share\")}\n fontSize=\"12px\"\n fontWeight={600}\n color={color}\n display=\"inline-flex\"\n onClick={onClickShare}",
       "module": "/packages/client"
     },
     {
@@ -36,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2748,
+      "line_number": 2810,
       "context": "];\n \n if (!item.isRoom) {\n menuGroupsConfig.push({\n groupKey: \"share\",\n groupLabel: t(\"Common:Share\"),\n groupIcon: ShareReactSvgUrl,\n itemKeys: [\n [\n { key: \"link-for-room-members\" },\n { key: \"copy-shared-link\" },",
       "module": "/packages/client"
     },
@@ -48,15 +49,27 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
-      "line_number": 172,
-      "context": "const cards = [\n {\n id: \"quick-sharing\",\n title: t(\"Common:QuickSharing\"),\n description: t(\"Common:ShareTheOriginalFormForFillingOut\"),\n buttonLabel: t(\"Common:Share\"),\n onClick: onClickShareFile,\n icon: <ShareSvg />,\n disabled: !file.canShare,\n },",
+      "line_number": 174,
+      "context": "const cards = [\n {\n id: \"quick-sharing\",\n title: t(\"Common:QuickSharing\"),\n description: t(\"Common:ShareTheOriginalFormForFillingOut\"),\n buttonLabel: t(\"Common:Share\"),\n onClick: onClickShareFile,\n icon: <ShareSvg />,\n disabled: !file.canShare,\n },\n {",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
-      "line_number": 172,
-      "context": "const cards = [\n {\n id: \"quick-sharing\",\n title: t(\"Common:QuickSharing\"),\n description: t(\"Common:ShareTheOriginalFormForFillingOut\"),\n buttonLabel: t(\"Common:Share\"),\n onClick: onClickShareFile,\n icon: <ShareSvg />,\n disabled: !file.canShare,\n },",
+      "line_number": 174,
+      "context": "const cards = [\n {\n id: \"quick-sharing\",\n title: t(\"Common:QuickSharing\"),\n description: t(\"Common:ShareTheOriginalFormForFillingOut\"),\n buttonLabel: t(\"Common:Share\"),\n onClick: onClickShareFile,\n icon: <ShareSvg />,\n disabled: !file.canShare,\n },\n {",
       "module": "/packages/doceditor"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
+      "line_number": 271,
+      "context": "const getShareItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_share\",\n key: \"share\",\n label: t(\"Common:Share\"),\n icon: ShareSvgUrl,\n onClick: () => onShareClick?.(i),\n disabled: !onShareClick,\n };\n },",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/info-panel/index.tsx",
+      "line_number": 130,
+      "context": "onClose={onClose}\n />\n ) : null}\n </ModalDialog.Container>\n \n <ModalDialog.Header>{t(\"Common:Share\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {selection ? (\n <Share\n infoPanelSelection={selection}\n fileLinkProps={filesLink}",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -123,13 +136,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian word 'Համօգտագործել' means 'to use' or 'to utilize', which is incorrect for the context of 'Share' (distributing/sharing content).",
-          "suggestion": "Կիսվել"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -195,13 +202,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word 'Share' (verb/action) is translated as 'Доступ' (noun meaning 'Access'), which changes the functional meaning of the button from an action to a state/permission.",
-          "suggestion": "Поделиться"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {

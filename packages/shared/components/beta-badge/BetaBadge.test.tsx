@@ -37,10 +37,8 @@ vi.mock("react-i18next", () => ({
   useTranslation: () => ({
     t: (key: string) => {
       const translations: Record<string, string> = {
-        "Common:BetaLabel": "BETA",
         "Common:BetaBadgeTitle": "Beta Feature",
         "Common:BetaBadgeDescription": "This is a beta feature",
-        "Common:ProductName": "DocSpace",
       };
       return translations[key] || key;
     },

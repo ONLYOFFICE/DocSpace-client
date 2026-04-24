@@ -1,18 +1,17 @@
 {
-  "AccessingProblem": "Jeśli jesteś istniejącym użytkownikiem i masz problemy z dostępem do danego obszaru, skontaktuj się z administratorem.",
   "CannotCreateNewRoom": "Nie można utworzyć pokoju",
   "CannotCreatePaidUsers": "Nie można dodać płatnych użytkowników",
   "CannotRestoreRoom": "Nie można przywrócić pokoju",
   "ChooseNewPlan": "Czy chcesz wybrać nowy plan cenowy?",
+  "GracePeriodActive": "Okres łaski obowiązuje <1>od {{fromDate}} do {{byDate}}</1> (pozostało dni: {{delayDaysCount}}).",
+  "LicenseExpiredRestriction": "Nie można dodawać nowych użytkowników ani tworzyć nowych pomieszczeń. Licencja wygasła.",
+  "LicenseGracePeriodInfo": "W tym czasie administratorzy nie mogą tworzyć nowych pomieszczeń ani dodawać nowych użytkowników. Po zakończeniu okresu łaski, {{productName}} będzie niedostępny do czasu aktywacji nowej licencji.",
   "NewRoomWillExceedLimit": "Utworzenie tego pokoju jest niemożliwe, ponieważ osiągnięto limit liczby pokoi w bieżącym planie.",
   "NewUsersWillExceedMembersLimit": "Dodanie nowych płatnych użytkowników jest niemożliwe, ponieważ osiągnięto limit liczby administratorów w bieżącym planie.",
   "NotPossibleRoomRestoring": "Przywrócenie tego pokoju jest niemożliwe, ponieważ osiągnięto limit liczby pokoi w bieżącym planie.",
   "NumberOfRoomsAccordingToTariff": "Liczba pokoi w Twoim planie cenowym: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Liczba administratorów w Twoim planie cenowym: {{currentValue}}/{{maxValue}}",
+  "PlanPaymentOverdue": "Nie można dodawać nowych użytkowników, tworzyć nowych pomieszczeń ani agentów AI. Opłata za plan {{planName}} jest zaległa.",
   "RoomsQuotaAlmostExhausted": "Limit pokoi jest prawie wyczerpany.",
-  "UsersQuotaAlmostExhausted": "Limit płatnych użytkowników jest prawie wyczerpany.",
-  "GracePeriodActive": "Okres łaski obowiązuje <1>od {{fromDate}} do {{byDate}}</1> (pozostało dni: {{delayDaysCount}}).",
-  "LicenseExpired": "Nie można dodawać nowych użytkowników ani tworzyć nowych pomieszczeń. Licencja wygasła.",
-  "LicenseGracePeriodInfo": "W tym czasie administratorzy nie mogą tworzyć nowych pomieszczeń ani dodawać nowych użytkowników. Po zakończeniu okresu łaski, {{productName}} będzie niedostępny do czasu aktywacji nowej licencji.",
-  "PlanPaymentOverdue": "Nie można dodawać nowych użytkowników, tworzyć nowych pomieszczeń ani agentów AI. Opłata za plan {{planName}} jest zaległa."
+  "UsersQuotaAlmostExhausted": "Limit płatnych użytkowników jest prawie wyczerpany."
 }

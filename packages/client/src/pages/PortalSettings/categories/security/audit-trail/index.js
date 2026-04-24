@@ -37,6 +37,7 @@ import EmptyScreenRecentDarkUrl from "PUBLIC_DIR/images/emptyview/empty.history.
 import { Table } from "./TableView/TableView";
 import AuditRowContainer from "./RowView/AuditRowContainer";
 import HistoryMainContent from "../sub-components/HistoryMainContent";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const AuditTrail = (props) => {
   const {
@@ -86,7 +87,7 @@ const AuditTrail = (props) => {
     return (
       <EmptyScreenContainer
         descriptionText={t("AuditSubheader", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
         })}
         imageSrc={
           theme.isBase ? EmptyScreenRecentUrl : EmptyScreenRecentDarkUrl
@@ -102,7 +103,7 @@ const AuditTrail = (props) => {
       <HistoryMainContent
         t={t}
         subHeader={t("AuditSubheader", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
         })}
         latestText={t("LoginLatestText")}
         storagePeriod={t("StoragePeriod")}

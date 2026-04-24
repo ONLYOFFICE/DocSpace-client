@@ -3,11 +3,12 @@
   "content": "Select next item up",
   "content_en_sha1_hash": "5f64a2463187ada6fc34e1aee18d04b790dc954c",
   "created_at": "2025-05-19T21:30:55.095Z",
-  "updated_at": "2026-04-07T19:35:05.109Z",
+  "updated_at": "2026-04-11T21:11:50.439Z",
   "comment": {
-    "text": "This translation key is used to display the label for a \"Select next item up\" hotkey action in the UI. It appears as a button label and is part of the selection block component in the HotkeysPanel.",
+    "text": "This is a hotkey description that explains the action of selecting the previous item in a list or menu.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:40:27.767Z"
+    "updated_at": "2026-04-11T21:11:50.439Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

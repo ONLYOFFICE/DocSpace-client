@@ -1,4 +1,7 @@
 {
+  "AgentCreated": "Yapay Zeka Ajanı Oluşturuldu",
+  "AgentDeleted": "Yapay Zeka Ajanı Silindi",
+  "AgentUpdated": "Yapay Zeka Aracısı Güncellendi",
   "Before": "Önce",
   "CreateWebhook": "Webhook oluştur",
   "DeleteHint": "Webhook kalıcı olarak silinecek.\nBu işlemi geri alamazsınız.",
@@ -33,6 +36,9 @@
   "FolderRestored": "Klasör geri yüklendi",
   "FolderTrashed": "Klasör çöp kutusuna taşındı",
   "FolderUpdated": "Klasör güncellendi",
+  "FormFilledOut": "Form Dolduruldu",
+  "FormStopped": "Form Durduruldu",
+  "FormSubmit": "Form Gönderildi",
   "From": "İtibaren",
   "Generate": "Oluştur",
   "GroupCreated": "Grup oluşturuldu",
@@ -63,7 +69,7 @@
   "RoomUpdated": "Oda güncellendi",
   "SecretKey": "Gizli anahtar",
   "SecretKeyHint": "Webhook sırrı ayarlamak, payload URL'sine gönderilen istekleri doğrulamanıza olanak tanır.",
-  "SecretKeyWarning": "Gizli anahtarınızı kaydettikten sonra tekrar geri alamazsınız. Bu gizli anahtarı kaybettiyseniz veya unuttuysanız sıfırlayabilirsiniz ancak bu sırrı kullanan tüm entegrasyonların güncellenmesi gerekecektir.",
+  "SecretKeyWarning": "Gizli anahtarınızı kaydettikten sonra tekrar geri alamazsınız. Bu gizli anahtarı kaybettiyseniz veya unuttuysanız sıfırlayabilirsiniz ancak bu anahtarı kullanan tüm entegrasyonların güncellenmesi gerekecektir.",
   "SelectDeliveryTime": "Teslimat zamanını seç",
   "SendEverything": "Her şeyi gönder",
   "SettingsWebhook": "Webhook ayarları",
@@ -89,11 +95,5 @@
   "WebhookRemoved": "Webhook kaldırıldı",
   "Webhooks": "Webhook’lar",
   "WebhooksGuide": "Webhook Kılavuzu",
-  "WebhooksInfo": "{{organizationName}} {{productName}}'deki çeşitli olaylara dayalı olarak kullandığınız herhangi bir uygulama veya web sitesinin yanında özel eylemler gerçekleştirmek için webhook kullanın. Burada, tüm webhook’larını oluşturup yönetebilir, yapılandırabilir ve performanslarını denetlemek için her bir webhook’un geçmişine göz atabilirsiniz.",
-  "AgentCreated": "Yapay Zeka Ajanı Oluşturuldu",
-  "AgentDeleted": "Yapay Zeka Ajanı Silindi",
-  "AgentUpdated": "Yapay Zeka Aracısı Güncellendi",
-  "FormFilledOut": "Form Dolduruldu",
-  "FormStopped": "Form Durduruldu",
-  "FormSubmit": "Form Gönderildi"
+  "WebhooksInfo": "{{organizationName}} {{productName}}'deki çeşitli olaylara dayalı olarak kullandığınız herhangi bir uygulama veya web sitesinin yanında özel eylemler gerçekleştirmek için webhook kullanın. Burada, tüm webhook’larını oluşturup yönetebilir, yapılandırabilir ve performanslarını denetlemek için her bir webhook’un geçmişine göz atabilirsiniz."
 }

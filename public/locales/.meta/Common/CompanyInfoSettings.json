@@ -3,11 +3,12 @@
   "content": "Company info settings",
   "content_en_sha1_hash": "192f2a8a9bec6d013a113f97fc1ce9b3cdd0c794",
   "created_at": "2025-05-26T07:15:41.404Z",
-  "updated_at": "2026-04-08T15:02:39.269Z",
+  "updated_at": "2026-04-11T20:56:54.284Z",
   "comment": {
-    "text": "This translation key is used for the label \"Company info settings\" that appears on a page, likely in a portal or branding section, and is displayed as a header or button. It provides a brief description of the content users will access when clicking the link or navigating to this setting. The text is typically shown in a dialog or modal context.",
+    "text": "This is a page title and a navigation link label for the section where users can configure their company's information within the ONLYOFFICE DocSpace settings.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:06:30.719Z"
+    "updated_at": "2026-04-11T20:56:54.284Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -24,14 +25,14 @@
     },
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 149,
-      "context": "{t(\"BrandingSectionDescription\", {\n productName: t(\"ProductName\"),\n })}\n </div>\n <div className={classNames(styles.header, \"header\")}>\n {t(\"CompanyInfoSettings\")}\n </div>\n <div className={classNames(styles.description, \"description\")}>\n {isSettingPaid ? (\n <Trans\n t={t}",
+      "line_number": 150,
+      "context": "{t(\"BrandingSectionDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </div>\n <div className={classNames(styles.header, \"header\")}>\n {t(\"CompanyInfoSettings\")}\n </div>\n <div className={classNames(styles.description, \"description\")}>\n {isSettingPaid ? (\n <Trans\n t={t}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/MobileView/index.tsx",
-      "line_number": 69,
-      "context": "badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}\n />\n {displayAbout ? (\n <CategoryItem\n title={t(\"CompanyInfoSettings\")}\n subtitle={t(\"BrandingSectionDescription\", {\n productName: t(\"ProductName\"),\n })}\n url={`${baseUrl}/branding/company-info`}\n withPaidBadge={!isSettingPaid}",
+      "line_number": 70,
+      "context": "badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}\n />\n {displayAbout ? (\n <CategoryItem\n title={t(\"CompanyInfoSettings\")}\n subtitle={t(\"BrandingSectionDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n url={`${baseUrl}/branding/company-info`}\n withPaidBadge={!isSettingPaid}",
       "module": "/packages/shared"
     }
   ],
@@ -189,25 +190,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation is a word-for-word concatenation of 'Company info' and 'settings' without proper grammatical connection, resulting in a nonsensical phrase in Serbian. It lacks the preposition 'za' (for) or a possessive structure required to link 'info' and 'settings'.",
-          "suggestion": "Подешавања информација о компанији"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation is a word-for-word concatenation that lacks proper grammatical structure in Serbian. It reads like 'Company info settings' without a preposition or case inflection, making it sound unnatural and technically incorrect for a UI header.",
-          "suggestion": "Podešavanja informacija o kompaniji"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

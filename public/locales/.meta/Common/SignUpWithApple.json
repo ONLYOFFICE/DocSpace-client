@@ -3,16 +3,17 @@
   "content": "Sign up with Apple",
   "content_en_sha1_hash": "73ca824af2283271f333afbfd3ba3a3054f212ed",
   "created_at": "2025-05-19T21:30:48.817Z",
-  "updated_at": "2026-04-10T08:21:04.401Z",
+  "updated_at": "2026-04-23T17:24:02.127Z",
   "comment": {
-    "text": "This translation key is used to display a message that invites users to sign up with their Apple account. It appears in UI elements related to provider authentication, such as buttons or dialogs. Translators should provide a clear and concise version of this phrase for users in different languages.",
+    "text": "This is the label for a button that allows users to create a new account using their Apple ID.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:40:03.666Z"
+    "updated_at": "2026-04-11T20:42:36.309Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 461,
+      "line_number": 457,
       "context": "return `${t(\"Common:Disconnect\")} ${providerLabel}`;\n }\n \n switch (provider) {\n case \"apple\":\n return signUp ? t(\"Common:SignUpWithApple\") : t(\"Common:SignInWithApple\");\n case \"google\":\n return signUp\n ? t(\"Common:SignUpWithGoogle\")\n : t(\"Common:SignInWithGoogle\");\n case \"facebook\":",
       "module": "/packages/shared"
     }
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation means 'Sign in with Apple' instead of 'Sign up with Apple'. 'تسجيل دخول' refers to logging in/signing in, whereas 'Sign up' requires 'إنشاء حساب' or 'التسجيل'.",
-          "suggestion": "إنشاء حساب بواسطة Apple"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -45,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation means 'Sign in with Apple' (Log in) instead of 'Sign up with Apple' (Register/Create account).",
-          "suggestion": "Регистрирайте се с Apple"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -63,13 +52,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation 'Anmeldung bei Apple' translates to 'Sign in with Apple' or 'Login with Apple', whereas the English source is 'Sign up with Apple' (registration).",
-          "suggestion": "Mit Apple registrieren"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -123,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation means 'Sign in with Apple' instead of 'Sign up with Apple'. 'ເຂົ້າສູ່ລະບົບ' means 'Sign in/Log in', whereas 'Sign up' should be 'ລົງທະບຽນ'.",
-          "suggestion": "ລົງທະບຽນດ້ວຍ Apple"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -141,37 +118,19 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Dutch translation 'Aanmelden' typically means 'Sign in' or 'Log in'. For 'Sign up' (creating a new account), 'Registreren' or 'Aanmelden bij' is more accurate to distinguish from 'Sign in'.",
-          "suggestion": "Registreren via Apple"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation contains a typo: 'ssię' instead of 'się'.",
-          "suggestion": "Zarejestruj się przez Apple"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Inscreva-se na Apple' implies signing up *inside* or *at* Apple, rather than using an Apple account as an authentication method. In the context of OAuth/Social Login, 'com a Apple' or 'usando a Apple' is the correct way to express 'with Apple'.",
-          "suggestion": "Inscreva-se com a Apple"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -183,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'Conectare prin Apple' means 'Sign in with Apple' or 'Connect via Apple', whereas the English source is 'Sign up with Apple' (creating a new account).",
-          "suggestion": "Înregistrare cu Apple"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

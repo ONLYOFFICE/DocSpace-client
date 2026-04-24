@@ -166,6 +166,7 @@ import {
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 import { XlsxUpdateService } from "@docspace/shared/services/xlsx-update.service";
 import { showCreatedPDFFormDialog } from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -1640,7 +1641,7 @@ class ContextOptionsStore {
     }
   };
 
-  createMenuGroup = (options, groupConfig, t) => {
+  createMenuGroup = (options, groupConfig) => {
     const {
       groupKey,
       groupLabel,
@@ -1696,7 +1697,7 @@ class ContextOptionsStore {
         ? {
             id: `option_${groupKey}`,
             key: groupKey,
-            label: t(groupLabel),
+            label: groupLabel,
             icon: groupIcon,
             items: groupItems,
           }
@@ -2460,7 +2461,7 @@ class ContextOptionsStore {
         id: "option_link-for-portal-users",
         key: "link-for-portal-users",
         label: t("LinkForPortalUsers", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
         }),
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onClickLinkForPortal(item, t),
@@ -2681,7 +2682,7 @@ class ContextOptionsStore {
           : isAIAgent
             ? t("DeleteAgent")
             : item.isTemplate
-              ? t("Files:DeleteTemplate")
+              ? t("Files:DeleteTemplateAction")
               : item.isRoom
                 ? t("Common:DeleteRoom")
                 : t("Common:Delete"),
@@ -2874,7 +2875,6 @@ class ContextOptionsStore {
       const { group, keysToRemove: groupKeysToRemove } = this.createMenuGroup(
         newOptions,
         configItem,
-        t,
       );
       if (group) {
         menuGroups.push(group);
@@ -3513,7 +3513,7 @@ class ContextOptionsStore {
           className: "main-button_drop-down",
           icon: ActionsUploadReactSvgUrl,
           label: t("Common:FromPortal", {
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
           }),
           key: "personal_upload-from-docspace",
           onClick: () =>
@@ -3682,7 +3682,7 @@ class ContextOptionsStore {
           className: "main-button_drop-down",
           icon: MoveReactSvgUrl,
           label: t("EmptyView:UploadFromPortalTitle", {
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
           }),
           onClick: this.onShowAiKnowledgeSelectFileDialog,
           key: "upload-files-product",

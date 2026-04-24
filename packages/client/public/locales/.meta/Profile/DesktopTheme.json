@@ -3,11 +3,12 @@
   "content": "Sync with Desktop Editor settings",
   "content_en_sha1_hash": "a8a7da11fabd075e939eef96ebf7c7edd247b5f8",
   "created_at": "2025-05-19T21:30:53.348Z",
-  "updated_at": "2026-04-09T07:10:32.581Z",
+  "updated_at": "2026-04-11T21:20:51.110Z",
   "comment": {
-    "text": "This translation key is used to display a label that indicates whether the interface theme is set to \"Desktop Theme\" or \"System Theme\", depending on the application's desktop client setting. It appears in settings or configuration areas of the application, providing context for users managing their interface appearance.",
+    "text": "This is a label for a radio button or checkbox in the user's profile settings. It allows the user to choose to synchronize the application's theme (light/dark mode) with the operating system's theme settings on a desktop client.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:54.976Z"
+    "updated_at": "2026-04-11T21:20:51.110Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -39,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Редакторските настройки на работния плот' incorrectly translates 'Desktop Editor' as 'Editor settings of the desktop'. In this context, 'Desktop Editor' refers to the specific ONLYOFFICE Desktop application, not the settings of a desktop environment. The Bulgarian phrasing is awkward and changes the technical meaning.",
-          "suggestion": "Синхронизирай с настройките на Desktop Editor"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -63,13 +58,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation 'σταθερούς υπολογιστές' means 'stationary/desktop computers' (hardware), whereas the English 'Desktop Editor' refers to the desktop application/software client. This changes the meaning from syncing settings with an application to syncing with hardware.",
-          "suggestion": "Συγχρονισμός με τις ρυθμίσεις του εφαρμογής επιτραπέζιου επεξεργαστή"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {

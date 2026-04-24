@@ -8,10 +8,12 @@
   "DisablingRoomGroups": "කාමර කණ්ඩායම් අක්‍රිය කිරීම",
   "DisablingRoomGroupsDescription": "කණ්ඩායම් සුරැකෙනු ඇත, නමුත් ඒවා සඟවා ඇත. Profile, File management වෙත ගොස් නැවත සක්‍රීය කරන්න.",
   "EditRoomGroups": "කාමර කණ්ඩායම් සංස්කරණය කරන්න",
-  "EmptyGroupDescription": "මෙතැන කාමර නැත. කාමරයක් එකතු කිරීමට උත්සාහ කරන්න හෝ මෙම කණ්ඩායම ඉවත් කරන්න.",
+  "EmptyGroupRoomsDescription": "මෙතැන කාමර නැත. කාමරයක් එකතු කිරීමට උත්සාහ කරන්න හෝ මෙම කණ්ඩායම ඉවත් කරන්න.",
   "GroupHasBeenDeleted": "කණ්ඩායම මකා දමා ඇත",
   "GroupIcon": "කණ්ඩායම් අයිකනය",
   "GroupIsEmpty": "කණ්ඩායම හිස්ය",
+  "GroupName": "කණ්ඩායම් නාමය",
+  "ManageGroups": "කණ්ඩායම් කළමනාකරණය කරන්න",
   "RemoveFromGroup": "කණ්ඩායමෙන් ඉවත් කරන්න",
   "RemoveGroup": "කණ්ඩායම ඉවත් කරන්න",
   "RemoveGroupConfirmation": "ඔබ කාමර සමූහයක් මකා දැමීමට අදහස් කරයි. ඔබට ඉදචනය කිරීමට විශ්වාසද?",
@@ -23,7 +25,5 @@
   "RoomGroupingSettingDescription": "ඔබට කාමර ෆෝල්ඩර් වලට කණ්ඩායම් කර ඒවා අතර පහසුවෙන් මාරු විය හැකිය.",
   "RoomRemovedFromGroup": "තෝරාගත් කාමරය <1>{{groupName}}</1> වෙතින් ඉවත් කර ඇත.",
   "RoomsAddedToGroup": "තෝරාගත් කාමර <1>{{groupName}}</1> වෙත එකතු කර ඇත.",
-  "RoomsRemovedFromGroup": "තෝරාගත් කාමර <1>{{groupName}}</1> වෙතින් ඉවත් කර ඇත.",
-  "GroupName": "කණ්ඩායම් නාමය",
-  "ManageGroups": "කණ්ඩායම් කළමනාකරණය කරන්න"
+  "RoomsRemovedFromGroup": "තෝරාගත් කාමර <1>{{groupName}}</1> වෙතින් ඉවත් කර ඇත."
 }

@@ -3,16 +3,17 @@
   "content": "Admin limit exceeded. To continue, please either adjust the number of admins or increase the admin limit.",
   "content_en_sha1_hash": "ff2ffc7d2f57c649e3c547236602e231eea5b81f",
   "created_at": "2025-10-27T16:14:25.843Z",
-  "updated_at": "2026-04-09T03:42:49.118Z",
+  "updated_at": "2026-04-11T21:25:02.340Z",
   "comment": {
-    "text": "This text appears in an info block within the Data Import settings, specifically when the maximum number of administrators has been reached. It informs the user that they need to adjust the number of admins or increase the admin limit to proceed. Translators should ensure the wording accurately conveys this limitation and the available solutions.",
+    "text": "This is an error message displayed when the number of administrators for data import exceeds the allowed limit. It suggests adjusting the admin count or increasing the limit.",
     "is_auto": true,
-    "updated_at": "2025-10-27T18:00:35.024Z"
+    "updated_at": "2026-04-11T21:25:02.340Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/sub-components/AdminsInfoBlock.tsx",
-      "line_number": 46,
+      "line_number": 47,
       "context": "return (\n <StyledInfoBlock isAdmins isLimitReached={isLimitReached}>\n {isLimitReached ? (\n <Text className=\"info-error-text\" fontSize=\"12px\" fontWeight={600}>\n {t(\"DataImportAdminLimitExceeded\")}\n </Text>\n ) : null}\n <div className=\"info-block-wrapper\">\n <Text\n as=\"div\"",
       "module": "/packages/client"
     }
@@ -69,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'limit' was translated as 'aikaraja' (time limit) instead of 'raja' (limit/cap), which changes the meaning from a quantity limit to a time-based limit.",
-          "suggestion": "Ylläpitäjien määrä ylittynyt. Jatkaaksesi, säädä joko ylläpitäjien lukumäärää tai kasvata ylläpitäjien rajaa."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -117,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'administrēšanas skaitu' (number of administration) instead of 'administrēšanas skaitu' (number of admins/administrators), which is a semantic mismatch in the context of user roles.",
-          "suggestion": "Pārvaldnieku limits pārsniegts. Lai turpinātu, lūdzu, vai nu pielāgojiet administrētāju skaitu, vai palieliniet administrētāju limitu."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -153,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The second sentence of the translation is in English instead of Romanian.",
-          "suggestion": "Limita de administratori a fost depășită. Pentru a continua, vă rugăm fie să ajustați numărul de administratori, fie să măriți limita de administratori."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

@@ -3,18 +3,19 @@
   "content": "Chat history",
   "content_en_sha1_hash": "3baf78008193775e12919cdbc823e5fe05e312d3",
   "created_at": "2025-11-17T07:51:08.989Z",
-  "updated_at": "2026-04-08T15:39:08.939Z",
+  "updated_at": "2026-04-11T20:57:23.966Z",
   "comment": {
-    "text": "This translation key displays the text \"Chat history\" as the title attribute of a button or element. It's used to indicate that clicking the element will likely open a view or panel showing the user's past chat sessions. Translators should ensure the translation accurately conveys the meaning of previously saved conversations.",
+    "text": "This is a tooltip that appears when hovering over an icon, indicating that clicking it will display the chat history.",
     "is_auto": true,
-    "updated_at": "2025-11-17T07:53:16.276Z"
+    "updated_at": "2026-04-11T20:57:23.966Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/chat/components/chat-header/sub-components/SelectChat.tsx",
-      "line_number": 302,
-      "context": "return (\n <>\n <TooltipContainer\n as=\"div\"\n title={t(\"Common:ChatHistory\")}\n className={classNames(styles.selectChat, { [styles.open]: isOpen })}\n onClick={toggleOpen}\n ref={parentRef}\n data-testid=\"select-chat\"\n >",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-header/sub-components/select-chat/index.tsx",
+      "line_number": 282,
+      "context": "return (\n <>\n <TooltipContainer\n as=\"div\"\n title={t(\"ChatHistory\")}\n className={classNames(styles.selectChat, { [styles.open]: isOpen })}\n onClick={toggleOpen}\n ref={parentRef}\n data-testid=\"select-chat\"\n >",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation 'Söhbət tarixində' means 'In chat history' (locative case), whereas the English 'Chat history' is a noun phrase acting as a title. For a UI title/label, the nominative case should be used.",
-          "suggestion": "Söhbət tarixçəsi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -87,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Հաղորդակների' (Haghordakneri) refers to 'communicators' or 'communication devices' rather than 'chats' or 'conversations'. In the context of a UI for chat history, 'Հաղորդագրությունների' (Haghordagrutyunneri) should be used for 'messages' or 'chats'.",
-          "suggestion": "Հաղորդագրությունների պատմություն"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -189,13 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'ћата' is a phonetic misspelling/transliteration of the English word 'chat' and is not a valid Serbian word. The correct term for 'chat' in Serbian is 'чат'.",
-          "suggestion": "Историја чата"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

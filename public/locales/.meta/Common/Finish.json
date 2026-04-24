@@ -3,11 +3,12 @@
   "content": "Finish",
   "content_en_sha1_hash": "b74bdee9c34f37b6b9b0d20a8ca8a9bf6797f6e1",
   "created_at": "2025-05-19T21:30:45.397Z",
-  "updated_at": "2026-04-08T09:20:53.396Z",
+  "updated_at": "2026-04-11T20:52:27.506Z",
   "comment": {
-    "text": "This translation key is used for the label on a save button, indicating completion or finalization of an action. It appears in a UI component, specifically a \"Save/Cancel\" buttons section, where it prompts the user to finish and confirm their changes.",
+    "text": "This is a button label that confirms the completion of an import process, such as importing user data.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:09.797Z"
+    "updated_at": "2026-04-11T20:52:27.506Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -39,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian word 'Край' means 'End' or 'The end' (as in a boundary or conclusion of a story), which is inappropriate for a UI button. For a 'Finish' action in a software interface, 'Завърши' is the correct functional term.",
-          "suggestion": "Завърши"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -75,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Lopeta' means 'Stop' or 'Abort', which is the opposite of the intended meaning 'Finish/Complete' in the context of a Save button.",
-          "suggestion": "Valmis"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -111,25 +100,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '종료' means 'Exit', 'End', or 'Terminate' (as in closing a program or session). In the context of a 'Save' button used to finalize/confirm changes, '완료' (Complete/Finish) is the correct term.",
-          "suggestion": "완료"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao word 'ຮັດຄອງ' means 'to hold tightly' or 'to grasp', which is incorrect for a UI button meaning 'Finish' or 'Complete'.",
-          "suggestion": "ສຳເລັດ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -225,13 +202,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '结束' (to end/terminate) is inappropriate for a 'Save' button context. In a UI context where 'Finish' implies completing a process or saving changes, '完成' is the standard and correct term.",
-          "suggestion": "完成"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

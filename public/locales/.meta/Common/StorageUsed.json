@@ -3,13 +3,27 @@
   "content": "<1>Storage used:</1> {{amount}}",
   "content_en_sha1_hash": "6ac65ec4729587229cea4b251a5ff3412be7422a",
   "created_at": "2026-04-10T13:53:43.432Z",
-  "updated_at": "2026-04-10T13:53:43.432Z",
+  "updated_at": "2026-04-12T17:11:10.166Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This text appears in dialogs related to storage, indicating the amount of storage currently in use. `{{amount}}` is a variable representing the specific storage size (e.g., \"10 GB\").",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:41:52.048Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/dialogs/StorageTariffDeactivated.tsx",
+      "line_number": 125,
+      "context": "}}\n />\n </Text>\n <Text>\n <CommonTrans\n i18nKey=\"StorageUsed\"\n \n values={{\n amount: getConvertedSize(t, usedTotalStorageSizeCount!),\n }}\n components={{",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanCancel.tsx",
+      "line_number": 146,
+      "context": "}}\n />\n </Text>\n <Text>\n <CommonTrans\n i18nKey=\"StorageUsed\"\n \n values={{\n amount: getConvertedSize(t, usedTotalStorageSizeCount),\n }}\n components={{",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

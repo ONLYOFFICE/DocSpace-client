@@ -3,11 +3,12 @@
   "content": "{{page}} of {{totalPage}}",
   "content_en_sha1_hash": "f8ec268e271534118f3f085bb25e67c3a21ba057",
   "created_at": "2025-05-19T21:30:47.214Z",
-  "updated_at": "2026-04-08T03:18:25.662Z",
+  "updated_at": "2026-04-12T05:13:19.653Z",
   "comment": {
-    "text": "This translation key is used to display a pagination label indicating the current page number out of total pages. It appears on a data import component in the Portal Settings categories page. Translators should provide a phrase that accurately reflects this relationship, such as \"Page X of Y\".",
+    "text": "This string indicates the current page number and the total number of pages in a pagination control. It appears as a short label, where `{{page}}` is the current page number and `{{totalPage}}` is the total number of pages.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:07.584Z"
+    "updated_at": "2026-04-11T20:47:00.631Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The preposition 'üzrə' means 'according to' or 'on behalf of', which incorrectly changes the meaning from 'X of Y' to 'According to X of Y'.",
-          "suggestion": "{{page}}-ci {{totalPage}} səhifədən"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -75,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The use of a hyphen '-' instead of a preposition or indicator of 'of' makes the relationship between the numbers ambiguous in Finnish, failing to convey 'Page X of Y'.",
-          "suggestion": "{{page}} / {{totalPage}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {

@@ -3,13 +3,21 @@
   "content": "To link a new card, please reach out to the payer",
   "content_en_sha1_hash": "4135f6cd574d8ef386e537c29b844ad49cfc5254",
   "created_at": "2026-04-10T13:53:43.114Z",
-  "updated_at": "2026-04-10T13:53:43.114Z",
+  "updated_at": "2026-04-23T17:24:02.174Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is an error message displayed when a user tries to link a new payment card but their account status prevents it, instructing them to contact the payer.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:45:38.587Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
+      "line_number": 196,
+      "context": "}\n testId=\"go_to_stripe_button\"\n />\n </div>\n ) : walletCustomerStatusNotActive ? (\n <Text className={styles.reachOutPayer}>{t(\"ReachOutPayer\")}</Text>\n ) : null}\n </>\n );\n \n const noPaymnetMethod = (",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

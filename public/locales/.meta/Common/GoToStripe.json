@@ -3,13 +3,27 @@
   "content": "Go to the Stripe",
   "content_en_sha1_hash": "841ba13a25e1b8452c1dd6a17e7ab3bec47e74a9",
   "created_at": "2026-04-10T13:53:42.565Z",
-  "updated_at": "2026-04-10T13:53:42.565Z",
+  "updated_at": "2026-04-23T17:24:02.174Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a button label that appears on the billing page. It directs the user to the Stripe portal to manage their payment methods.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:51:32.648Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
+      "line_number": 185,
+      "context": "<div className={styles.buttonWrapper}>\n <Button\n label={\n walletCustomerStatusNotActive\n ? t(\"AddPaymentMethod\")\n : t(\"GoToStripe\")\n }\n size={ButtonSize.small}\n primary\n onClick={\n walletCustomerStatusNotActive ? goLinkCard : goToStripePortal",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/PaymentMethod.tsx",
+      "line_number": 136,
+      "context": "[styles.disabledLink]: isDisabled || isLoading,\n })}\n >\n {walletCustomerStatusNotActive\n ? t(\"AddPaymentMethod\")\n : t(\"GoToStripe\")}\n </Link>\n ) : null}\n </div>\n \n {!walletCustomerEmail ? (",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

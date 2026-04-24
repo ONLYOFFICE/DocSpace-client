@@ -3,16 +3,17 @@
   "content": "Several folders will be merged into one, files will be overwritten with the version update",
   "content_en_sha1_hash": "88e528b007845f10a4a7ac9ea9e1b555e5f98ca1",
   "created_at": "2025-05-19T21:30:46.677Z",
-  "updated_at": "2026-04-08T04:25:54.646Z",
+  "updated_at": "2026-04-23T17:24:01.708Z",
   "comment": {
-    "text": "This translation key is used for a dialog that informs users about merging folders and overwriting files due to an update. It will be displayed in a conflict resolution dialog.",
+    "text": "This is a description displayed in a dialog when multiple folders are being merged, indicating that existing files will be updated with newer versions.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:25.405Z"
+    "updated_at": "2026-04-11T20:48:21.996Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
-      "line_number": 281,
+      "line_number": 291,
       "context": "const getOverwriteDescription = () => {\n return isFileDialog\n ? t(\"Common:OverwriteDescription\")\n : isFolderDialog\n ? t(\"Common:MergeFoldersDescription\")\n : t(\"Common:MultiplyOverwrite\");\n };\n \n const getDuplicateTitle = () => {\n return isFileDialog\n ? t(\"Common:CreateFileCopy\")",
       "module": "/packages/client"
     }
@@ -105,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'ບູຊິ່ນ' (version) is a phonetic transliteration that is misspelled/incorrectly rendered in Lao script for technical context; it should be 'ເວີຊັນ' or a proper Lao term to ensure clarity in a UI context.",
-          "suggestion": "ບາງໂຟນເດີຈະຖືກລວບລວມເຂົ້າກັນ, ໄຟລ໌ຈະຖືກຂຽນທັບດ້ວຍເວີຊັນທີ່ປັບປຸງ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {

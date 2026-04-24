@@ -3,23 +3,24 @@
   "content": "The subsection allows you to browse through the list of the latest changes (creation, modification, deletion etc.) made by users to the entities (rooms, opportunities, files etc.) within your {{productName}}.",
   "content_en_sha1_hash": "14dcf30f13f317e2c76ba01c199429d2e0ccc37a",
   "created_at": "2025-05-19T21:30:50.592Z",
-  "updated_at": "2026-04-09T04:09:37.183Z",
+  "updated_at": "2026-04-11T21:25:37.059Z",
   "comment": {
-    "text": "This translation key is used as a subheader on an empty screen that displays when there are no audit trail users. It informs the user about the purpose of the section and how it relates to their {{productName}}.",
+    "text": "This is the descriptive text displayed in an empty state for the Audit Trail section of the portal settings. It explains what the audit trail feature does, with `{{productName}}` being replaced by the product's brand name.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:45.249Z"
+    "updated_at": "2026-04-11T21:25:37.059Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/index.js",
-      "line_number": 88,
-      "context": "};\n \n if (auditTrailUsers.length === 0) {\n return (\n <EmptyScreenContainer\n descriptionText={t(\"AuditSubheader\", {\n productName: t(\"Common:ProductName\"),\n })}\n imageSrc={\n theme.isBase ? EmptyScreenRecentUrl : EmptyScreenRecentDarkUrl\n }",
+      "line_number": 89,
+      "context": "};\n \n if (auditTrailUsers.length === 0) {\n return (\n <EmptyScreenContainer\n descriptionText={t(\"AuditSubheader\", {\n productName: getBrandName(\"ProductName\"),\n })}\n imageSrc={\n theme.isBase ? EmptyScreenRecentUrl : EmptyScreenRecentDarkUrl\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/index.js",
-      "line_number": 88,
-      "context": "};\n \n if (auditTrailUsers.length === 0) {\n return (\n <EmptyScreenContainer\n descriptionText={t(\"AuditSubheader\", {\n productName: t(\"Common:ProductName\"),\n })}\n imageSrc={\n theme.isBase ? EmptyScreenRecentUrl : EmptyScreenRecentDarkUrl\n }",
+      "line_number": 89,
+      "context": "};\n \n if (auditTrailUsers.length === 0) {\n return (\n <EmptyScreenContainer\n descriptionText={t(\"AuditSubheader\", {\n productName: getBrandName(\"ProductName\"),\n })}\n imageSrc={\n theme.isBase ? EmptyScreenRecentUrl : EmptyScreenRecentDarkUrl\n }",
       "module": "/packages/client"
     }
   ],
@@ -57,13 +58,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "wrong_language",
-          "description": "The provided translation is in Romanian, not German.",
-          "suggestion": "Der Unterabschnitt ermöglicht es Ihnen, die Liste der neuesten Änderungen (Erstellung, Änderung, Löschung usw.) zu durchsuchen, die von Benutzern an den Entitäten (Räume, Gelegenheiten, Dateien usw.) innerhalb Ihres {{productName}} vorgenommen wurden."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -81,13 +76,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The sentence structure in Finnish is grammatically broken and logically scrambled. The phrase 'katsella... kautta {{productName}}' (to browse... through {{productName}}) incorrectly implies browsing through the product itself rather than browsing the list within the product. The placement of '{{productName}}' at the end makes the sentence nonsensical.",
-          "suggestion": "Alaosio mahdollistaa käyttäjien {{productName}}-kokonaisuuksiin (huoneet, mahdollisuudet, tiedostot jne.) tekemien viimeisimpien muutosten (luonti, muokkaus, poisto jne.) selaamisen listan kautta."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -129,13 +118,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'modificēšana' is a loanword/calque from English and is not standard Latvian for 'modification' in this context. The correct term is 'mainīšana'.",
-          "suggestion": "Apakšsadaļa ļauj pārlūkot jaunāko izmaiņu sarakstu (izveide, mainīšana, dzēšana utt.), ko lietotāji veikuši jūsu {{productName}} esošajās entītijās (telpas, iespējas, faili utt.)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -171,25 +154,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'opportunities' in the context of CRM/entities is translated as 'возможности' (capabilities/possibilities), which is a literal translation error. In a business/CRM context, 'opportunities' refers to 'сделки' or 'возможности продаж'. More importantly, the translation 'сущности(возможности...' lacks a space after the opening parenthesis, and the translation of 'opportunities' as 'возможности' in this specific list is semantically weak for a software entity.",
-          "suggestion": "Раздел позволяет просматривать список последних изменений (создание, модификация, удаление и т. д.), внесенных пользователями в сущности (сделки, файлы и т. д.) в вашем {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'පරිශ්‍රීලකයින්' (parishrilakayin) is a misspelling/incorrect word for 'users' (පරිශීලකයින් - parishilakayin).",
-          "suggestion": "ඔබගේ {{productName}} තුළ අඩංගු ඒකකවල (කාමර, අවකාශ, ගොනු ආදිය) පරිශීලකයින් සිදු කරන ලද නවතම වෙනස්කම් (සෑදීම්, සංශෝධන, මකාදැමීම් ආදිය) ලැයිස්තුව හරහා පිරික්සීමට අනුකොටස ඔබට ඉඩ සලසයි."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

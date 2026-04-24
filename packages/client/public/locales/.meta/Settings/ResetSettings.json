@@ -3,11 +3,12 @@
   "content": "Reset settings",
   "content_en_sha1_hash": "9ba8d6e6aaec0b4ced7d02008b670d094f276531",
   "created_at": "2025-10-27T16:14:26.774Z",
-  "updated_at": "2026-04-09T01:44:30.470Z",
+  "updated_at": "2026-04-11T21:22:40.671Z",
   "comment": {
-    "text": "This key is used for the label on a button that restores settings to their default values. It appears on a button within the AI settings section of the portal, likely used to reset user preferences. Translators should ensure the translation clearly conveys the action of reverting to original settings.",
+    "text": "This is the title of a dialog box and the label of a button. It appears when a user wants to revert AI settings (knowledge base or web search) to their default values.",
     "is_auto": true,
-    "updated_at": "2025-10-27T18:00:21.540Z"
+    "updated_at": "2026-04-11T21:22:40.671Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -30,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
-      "line_number": 314,
+      "line_number": 315,
       "context": "isDisabled={isSaveDisabled}\n testId=\"web-search-save-button\"\n />\n <Button\n size={ButtonSize.small}\n label={t(\"Settings:ResetSettings\")}\n scale={false}\n onClick={onRestoreToDefault}\n isDisabled={\n !webSearchConfig ||\n webSearchConfig?.type === WebSearchType.None ||",
       "module": "/packages/client"
     }
@@ -99,13 +100,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Վերագործարկեք կարգավորումները' means 'Restart settings' instead of 'Reset settings'. In a software context, 'Reset' (reverting to defaults) should be translated as 'Վերականգնել' or 'Նախնական կարգավիճակին բերել'.",
-          "suggestion": "Վերականգնել կարգավորումները"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -165,13 +160,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation 'Resetare' (Reset) is too generic and omits the object 'settings'. While it conveys the action, it fails to fully capture the specific meaning of 'Reset settings' as requested by the context.",
-          "suggestion": "Resetare setări"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -201,13 +190,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Albanian word 'Rivendos' means 'to claim' or 'to reclaim' (e.g., reclaiming territory or rights), which is the opposite of 'resetting' or 'reverting' settings to default. The correct verb for resetting/restoring settings is 'Rifilloni' or 'Rivendosni' (though 'Rivendosni' is still closer to 'reclaim'). For a technical 'Reset' action, 'Rivendos' is semantically incorrect.",
-          "suggestion": "Rivendosni cilësimet në fillim"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

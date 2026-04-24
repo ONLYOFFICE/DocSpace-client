@@ -3,11 +3,12 @@
   "content": "Access rights changed",
   "content_en_sha1_hash": "cdefb979afa2c5e08443d77985f7b5d925f6b122",
   "created_at": "2025-10-03T13:19:11.191Z",
-  "updated_at": "2026-04-10T08:21:04.331Z",
+  "updated_at": "2026-04-11T21:01:34.458Z",
   "comment": {
-    "text": "This message confirms that a user's access rights have been modified. It appears as a success notification (using `toastr`) within the Members view, likely after updating a user’s sharing permissions or role. Translators should ensure the message clearly indicates a change in user access.",
+    "text": "This is a toast message confirming that a user's access permissions to a document or room have been successfully updated.",
     "is_auto": true,
-    "updated_at": "2025-10-03T13:20:43.570Z"
+    "updated_at": "2026-04-11T21:01:34.458Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

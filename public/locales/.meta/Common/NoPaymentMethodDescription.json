@@ -3,13 +3,21 @@
   "content": "To access paid services, please link a payment card. The person who connects the card will automatically be assigned as the Payer for this account.",
   "content_en_sha1_hash": "a57a45e94ed53261ecc611afff0f4cc604ea39e9",
   "created_at": "2026-04-10T13:53:42.763Z",
-  "updated_at": "2026-04-10T13:53:42.763Z",
+  "updated_at": "2026-04-23T17:24:02.174Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This text appears as a description below the \"No Payment Method\" heading on the billing page. It explains why a payment method is needed and clarifies the role of the person who adds it.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:47:52.189Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
+      "line_number": 207,
+      "context": "<div>\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"NoPaymentMethod\")}\n </Text>\n <Text className={styles.noPaymentDescription}>\n {t(\"NoPaymentMethodDescription\")}\n </Text>\n <div className={styles.buttonWrapper}>\n <Button\n label={t(\"AddPaymentMethod\")}\n size={ButtonSize.small}",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

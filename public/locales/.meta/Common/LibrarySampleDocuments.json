@@ -3,13 +3,21 @@
   "content": "Choose a template to fill in",
   "content_en_sha1_hash": "e588726e89d2172e61388d0a1f0845c3d70ae964",
   "created_at": "2026-03-31T15:18:14.978Z",
-  "updated_at": "2026-04-08T06:09:30.797Z",
+  "updated_at": "2026-04-11T20:50:12.516Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a section title on the Library page, displayed above a list of document categories. It prompts the user to select a template.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:50:12.516Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/library-landing/CategoryList.tsx",
+      "line_number": 54,
+      "context": "if (categories.length === 0) return null;\n \n return (\n <section className={styles.categories}>\n <h2 className={styles.categoriesTitle}>\n {t(\"Common:LibrarySampleDocuments\")}\n </h2>\n \n <div className={styles.categoriesGrid}>\n {categories.map((cat) => (\n <CategoryColumn",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -158,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Izberite predlago za poplnilno uporabo' translates roughly to 'Choose a template for full use', which does not convey the meaning of 'to fill in' (completing/filling out a form/template).",
-          "suggestion": "Izberite predlogo za izpolnjevanje"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

@@ -3,17 +3,18 @@
   "content": "Easy form uploading",
   "content_en_sha1_hash": "53b5cd8f127b338e857ffd707341bec35ab11adc",
   "created_at": "2025-05-19T21:30:55.142Z",
-  "updated_at": "2026-04-07T19:35:05.102Z",
+  "updated_at": "2026-04-11T21:11:07.356Z",
   "comment": {
-    "text": "This translation key is used for the header text in a guidance component that explains easy form uploading. It appears in a guidance dialog and displays the product name and section name related to file uploads.",
+    "text": "This is a dialog header for a tip about uploading forms. It appears in a \"Tips for Form Filling\" dialog.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:40:20.888Z"
+    "updated_at": "2026-04-11T21:11:07.356Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/components/guidance/configs/form-filling.ts",
-      "line_number": 87,
-      "context": "},\n ],\n },\n {\n id: 5,\n header: t(\"FormFillingTipsDialog:HeaderUploading\"),\n description: t(\"FormFillingTipsDialog:DescriptionUploading\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),\n }),\n key: \"form-filling-uploading\",",
+      "line_number": 88,
+      "context": "},\n ],\n },\n {\n id: 5,\n header: t(\"FormFillingTipsDialog:HeaderUploading\"),\n description: t(\"FormFillingTipsDialog:DescriptionUploading\", {\n productName: getBrandName(\"ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),\n }),\n key: \"form-filling-uploading\",",
       "module": "/packages/shared"
     }
   ],

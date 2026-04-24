@@ -3,16 +3,17 @@
   "content": "To be able to reassign data, delete one user at a time.",
   "content_en_sha1_hash": "187c81fe10bedd3691c04237beb305a247a8f84f",
   "created_at": "2025-05-19T21:30:56.682Z",
-  "updated_at": "2026-04-07T19:35:05.066Z",
+  "updated_at": "2026-04-11T21:05:54.800Z",
   "comment": {
-    "text": "This translation key is used for the \"ToBeAbleToReassignData\" message, which is displayed in a delete profile dialog to inform users about the process of reassigning data when deleting their account. The text encourages users to delete one user at a time for reassignment purposes. It appears on the body component in the /packages/client/src/components/dialogs/DeleteProfileEverDialog component.",
+    "text": "This is a line of text within a dialog box that appears when a user attempts to delete a profile. It instructs the user to delete one user at a time to enable data reassignment.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:25.439Z"
+    "updated_at": "2026-04-11T21:05:54.800Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 131,
+      "line_number": 132,
       "context": "</Text>\n <Text className=\"text-delete-description\">\n {t(\"CannotReassignFiles\")}\n </Text>\n <Text className=\"text-delete-description\">\n {t(\"ToBeAbleToReassignData\")}\n </Text>\n <Text className=\"text-delete-description\">\n {t(\"DeletePersonalDataApplicable\")}\n </Text>\n </>",
       "module": "/packages/client"
     }

@@ -3,17 +3,18 @@
   "content": "By disabling {{organizationName}} AI, the following changes will take effect:",
   "content_en_sha1_hash": "24635b4d0cae6095d5694c9227cd5d9ee63d01a5",
   "created_at": "2026-03-26T08:26:46.840Z",
-  "updated_at": "2026-04-09T03:21:35.852Z",
+  "updated_at": "2026-04-11T21:49:07.404Z",
   "comment": {
-    "text": "This key provides a description displayed within a dialog when a user disables AI services for their organization. It explains the consequences of disabling AI, referencing the organization's name. Translators should ensure accuracy and clarity regarding the effects of disabling AI.",
+    "text": "This is a descriptive text within a dialog, explaining the consequences of disabling AI services for the organization. It appears when a user chooses to disable AI services and includes the variable `{{organizationName}}` for the organization's name.",
     "is_auto": true,
-    "updated_at": "2026-03-26T08:28:29.454Z"
+    "updated_at": "2026-04-11T21:24:36.659Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DisableAiServicesDialog/index.js",
-      "line_number": 83,
-      "context": "fontSize=\"13px\"\n fontWeight={400}\n className={styles.description}\n lineHeight=\"20px\"\n >\n {t(\"DisableAiServicesDescription\", {\n organizationName: t(\"Common:OrganizationName\"),\n })}\n </Text>\n <Text fontSize=\"13px\" fontWeight={400} as=\"div\">\n <ul className={styles.effectsList}>",
+      "line_number": 84,
+      "context": "fontSize=\"13px\"\n fontWeight={400}\n className={styles.description}\n lineHeight=\"20px\"\n >\n {t(\"DisableAiServicesDescription\", {\n organizationName: getBrandName(\"OrganizationName\"),\n })}\n </Text>\n <Text fontSize=\"13px\" fontWeight={400} as=\"div\">\n <ul className={styles.effectsList}>",
       "module": "/packages/client"
     }
   ],
@@ -85,7 +86,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \":\" but translation ends with \"։\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-11T21:49:05.124Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null
@@ -103,7 +106,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \":\" but translation ends with \"。\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-11T21:49:07.391Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null
@@ -123,13 +128,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'tiks efektīvi' is grammatically incorrect and semantically wrong. It literally translates to 'will be effective', whereas the English 'will take effect' means 'will come into force' or 'will be applied'.",
-          "suggestion": "Izslēdzot {{organizationName}} AI, tiks veikti šādi grozījumi:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -153,13 +152,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The gender of the article for 'IA' (Inteligência Artificial) is incorrect. In Portuguese, 'IA' is a feminine noun, so it should be 'a IA' instead of 'o IA'.",
-          "suggestion": "Ao desativar a IA da {{organizationName}}, as seguintes alterações entrarão em vigor:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -189,13 +182,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'Z onemogočenjem' (By enabling/With enabling) which is a contradiction, and 'v členu' (in the article/member) which makes no sense in this context. The phrase 'bodo v členu naslednje spremembe' is grammatically incorrect and conveys a different meaning than 'the following changes will take effect'.",
-          "suggestion": "Z onemogočenjem AI za {{organizationName}} bodo v veljavi naslednje spremembe:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

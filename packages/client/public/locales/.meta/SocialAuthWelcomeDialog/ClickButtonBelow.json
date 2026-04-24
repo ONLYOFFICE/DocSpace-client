@@ -3,22 +3,23 @@
   "content": "If you'd like to log in using your email, please set your own password. <br /> Once ready, please click the button below.",
   "content_en_sha1_hash": "39efdaa8209b2d54904408defbd2496f9aae28d0",
   "created_at": "2025-05-19T21:30:50.039Z",
-  "updated_at": "2026-04-10T08:58:38.059Z",
+  "updated_at": "2026-04-11T21:27:12.086Z",
   "comment": {
-    "text": "This translation key is used to display a message asking users to set their own password after selecting an email login option in a social authentication welcome dialog. The text appears below a button prompt, guiding users through the next step. It should be translated for all mobile devices.",
+    "text": "This is a paragraph of text within a dialog, instructing the user to set a password and then click a button to log in via email. It appears when a user is logging in via social authentication on a mobile device.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:22.991Z"
+    "updated_at": "2026-04-11T21:27:12.086Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/SocialAuthWelcomeDialog/index.tsx",
-      "line_number": 198,
+      "line_number": 199,
       "context": "<Text textAlign=\"center\" lineHeight=\"20px\" className=\"welcome-text\">\n {currentDeviceType === DeviceType.mobile ? (\n <Trans\n t={t}\n i18nKey=\"SocialAuthWelcomeDialog:ClickButtonBelow\"\n ns=\"SocialAuthWelcomeDialog\"\n components={{\n br: <span style={{ display: \"none\" }} />,\n }}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/SocialAuthWelcomeDialog/index.tsx",
-      "line_number": 198,
+      "line_number": 199,
       "context": "<Text textAlign=\"center\" lineHeight=\"20px\" className=\"welcome-text\">\n {currentDeviceType === DeviceType.mobile ? (\n <Trans\n t={t}\n i18nKey=\"SocialAuthWelcomeDialog:ClickButtonBelow\"\n ns=\"SocialAuthWelcomeDialog\"\n components={{\n br: <span style={{ display: \"none\" }} />,\n }}\n />",
       "module": "/packages/client"
     }
@@ -33,13 +34,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Russian sentence structure is broken and grammatically incorrect, making the first part nonsensical ('Если вы хотите войти, адрес электронной почты...'). It fails to convey the conditional relationship between logging in via email and setting a password.",
-          "suggestion": "Если вы хотите войти с помощью адреса электронной почты, пожалуйста, установите свой собственный пароль. <br /> Когда будете готовы, нажмите кнопку ниже."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ar-SA": {
@@ -159,13 +154,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Dacă doriți vă autentificați' is grammatically broken and conveys an incorrect meaning (it translates roughly to 'If you want you authenticate'). It should be 'Dacă doriți să vă autentificați'. Additionally, 'vă rug' is an incomplete/incorrect form of 'vă rugăm'.",
-          "suggestion": "Dacă doriți să vă autentificați folosind adresa de e-mail, vă rugăm să vă setați propria parolă. <br /> După ce ați terminat, vă rugăm să faceți clic pe butonul de mai jos."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {

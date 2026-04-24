@@ -3,11 +3,12 @@
   "content": "Years",
   "content_en_sha1_hash": "96f997bcecb36502ed4b296a795f72aff9d6bfe7",
   "created_at": "2025-05-19T21:30:49.621Z",
-  "updated_at": "2026-04-10T08:21:04.307Z",
+  "updated_at": "2026-04-23T17:24:01.742Z",
   "comment": {
-    "text": "This translation key is used for labeling options in a \"Years\" dropdown menu within the File Lifetime dialog. It will appear as the label on a button or select element in this specific component, and its purpose is to display the translated phrase \"Years\".",
+    "text": "This is a label for a time period in a dropdown menu, indicating a duration of years for file lifetime settings. It also appears as a lowercase string in other contexts.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:26:35.640Z"
+    "updated_at": "2026-04-11T20:38:46.606Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -159,13 +160,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'වර්ශ' is a misspelling of 'වර්ෂ' (Years). The current spelling is incorrect.",
-          "suggestion": "වර්ෂ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

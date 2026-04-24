@@ -3,13 +3,21 @@
   "content": "Pay",
   "content_en_sha1_hash": "80c37573afed72cb3ec54133cd32508d33bcb52d",
   "created_at": "2026-04-10T13:53:42.887Z",
-  "updated_at": "2026-04-10T13:53:42.887Z",
+  "updated_at": "2026-04-13T14:59:06.013Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a button label that initiates a payment process, such as purchasing a subscription or adding funds.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:46:37.060Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/ButtonContainer.tsx",
+      "line_number": 59,
+      "context": "return (\n <StyledBody>\n {isNotPaidPeriod || isGracePeriod ? (\n <Button\n className=\"pay-button\"\n label={t(\"Pay\")}\n size={ButtonSize.medium}\n primary\n isDisabled={isLoading || isDisabled}\n onClick={goToStripePortal}\n isLoading={isLoading}",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,11 +3,12 @@
   "content": "Add certificate",
   "content_en_sha1_hash": "631b330b27d1a4930628f96ea352593dfee627ba",
   "created_at": "2025-05-19T21:30:50.051Z",
-  "updated_at": "2026-04-08T23:40:57.895Z",
+  "updated_at": "2026-04-11T21:27:03.737Z",
   "comment": {
-    "text": "This translation key is used to display the label for a button that adds a certificate, found on the Single Sign-On page in the Portal Settings. The button is disabled when SSO is not enabled or an XML file is being loaded.",
+    "text": "This is the label for a button that allows users to add a new certificate for Single Sign-On (SSO) identity provider (IdP) settings.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:20.419Z"
+    "updated_at": "2026-04-11T21:27:03.737Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

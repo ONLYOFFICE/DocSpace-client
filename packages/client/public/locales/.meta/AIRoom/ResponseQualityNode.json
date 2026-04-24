@@ -3,16 +3,17 @@
   "content": "<1>Note:</1> Response quality may vary by model; newer models are recommended for best results.",
   "content_en_sha1_hash": "f842ba3af5d7ebbfda785d85ee0f7a671f7a8c2b",
   "created_at": "2025-11-13T07:58:04.784Z",
-  "updated_at": "2026-03-31T15:18:45.968Z",
+  "updated_at": "2026-04-23T17:24:01.732Z",
   "comment": {
-    "text": "This key provides a note explaining that response quality can differ between AI models, recommending newer models for optimal results. It appears as a description within the AI Room creation/editing dialog, specifically when selecting a model. Translators should maintain the cautionary and advisory tone.",
+    "text": "This is a descriptive text displayed within a dialog for creating or editing an AI agent. It informs the user about potential variations in response quality depending on the AI model used, with newer models generally providing better results. The `<1>` tag highlights the word \"Note:\".",
     "is_auto": true,
-    "updated_at": "2025-11-13T08:05:07.766Z"
+    "updated_at": "2026-04-11T21:01:46.543Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/Model.tsx",
-      "line_number": 369,
+      "line_number": 379,
       "context": "className=\"set_room_params-info-description\"\n noSelect\n >\n <Trans\n t={t}\n i18nKey=\"ResponseQualityNode\"\n ns=\"AIRoom\"\n components={{\n 1: <span style={{ fontWeight: 600 }} />,\n }}\n />",
       "module": "/packages/client"
     }

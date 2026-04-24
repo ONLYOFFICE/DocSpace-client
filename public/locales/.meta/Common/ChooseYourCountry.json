@@ -3,13 +3,21 @@
   "content": "Choose your country",
   "content_en_sha1_hash": "24699e18980c4567ef5078b77df8dfcfe77d3f2b",
   "created_at": "2026-03-31T15:18:06.592Z",
-  "updated_at": "2026-04-08T15:28:34.014Z",
+  "updated_at": "2026-04-11T20:57:15.693Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a heading for a section where users select their country from a list or map.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:57:15.693Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/forms-grid/LibraryCountryList.tsx",
+      "line_number": 82,
+      "context": "className={styles.mapImage}\n src={WorldMapUrl}\n alt=\"\"\n draggable={false}\n />\n <h2 className={styles.title}>{t(\"Common:ChooseYourCountry\")}</h2>\n <p className={styles.description}>\n {t(\"Common:ChooseYourCountryDescription\")}\n </p>\n <div className={styles.grid}>\n {sortedFolders.map((folder) => {",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

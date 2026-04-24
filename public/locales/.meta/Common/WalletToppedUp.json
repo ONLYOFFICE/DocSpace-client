@@ -3,13 +3,21 @@
   "content": "Wallet has been successfully topped up",
   "content_en_sha1_hash": "17e7ecec92293818e1ecd5eb2fcd5a4974f0a674",
   "created_at": "2026-04-10T13:53:43.927Z",
-  "updated_at": "2026-04-10T13:53:43.927Z",
+  "updated_at": "2026-04-13T14:59:06.027Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Toast message confirming a user's wallet balance has been successfully increased.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:39:15.531Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/TopUpButtons.tsx",
+      "line_number": 110,
+      "context": "await Promise.allSettled(requests);\n \n const toastMessage =\n serviceName === AI_TOOLS\n ? t(\"AIServiceToppedUp\", { organizationName: logoText })\n : t(\"WalletToppedUp\");\n \n toastr.success(toastMessage);\n afterTopUp ? afterTopUp() : onClose(true);\n } catch (e) {\n toastr.error(e as unknown as string);",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

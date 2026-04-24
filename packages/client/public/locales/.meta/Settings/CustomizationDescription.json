@@ -3,11 +3,12 @@
   "content": "This subsection allows you to change the look and feel of your space. You can use your own company logo, name and text to match your organization brand.",
   "content_en_sha1_hash": "3ed304aa4cbda2d1fbc3a0c1d04d2decae6a4ba6",
   "created_at": "2025-05-19T21:30:51.011Z",
-  "updated_at": "2026-04-09T03:47:02.830Z",
+  "updated_at": "2026-04-11T21:25:06.778Z",
   "comment": {
-    "text": "This translation key is used to display a description of customization options in the Portal Settings page. It provides context about changing the look and feel of your space to match an organization's brand. The translated content will appear as a label for this section.",
+    "text": "This is a descriptive text displayed on the Customization settings page, explaining that users can personalize their DocSpace with company branding elements.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:28.580Z"
+    "updated_at": "2026-04-11T21:25:06.778Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -51,25 +52,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation changes 'organization brand' to 'Design Ihres Produkts' (design of your product), which alters the meaning from branding an organization to designing a product.",
-          "suggestion": "Dieser Unterabschnitt ermöglicht es Ihnen, das Aussehen Ihres Bereichs zu ändern. Sie können Ihr eigenes Unternehmenslogo, Ihren Namen und Text verwenden, um ihn an Ihre Markenidentität anzupassen."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation starts with 'υτή' (ytí), which is a spelling error. The correct word is 'Αυτή' (Aftí) to start a sentence and correctly form the word 'This'.",
-          "suggestion": "Αυτή η υποενότητα σας επιτρέπει να αλλάξετε την εμφάνιση και την αίσθηση του χώρου σας. Μπορείτε να χρησιμοποιήσετε το δικό σας λογότυπο, όνομα και κείμενο εταιρείας για να ταιριάζει με το εμπορικό σήμα του οργανισμού σας."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -93,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation uses 'կայքէջի' (website) instead of 'space' (կայք/տարածք/space), which changes the context from a DocSpace 'space' to a general 'website'.",
-          "suggestion": "Այս ենթաբաժինը թույլ է տալիս փոխել Ձեր տարածքի (space) տեսքը և զգացողությունները: Դուք կարող եք օգտագործել Ձեր սեփական ընկերության լոգոն, անվանումը և տեքստը՝ Ձեր կազմակերպության ապրանքանիշին համապատասխանելու համար:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -123,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'space' (referring to the digital workspace/environment) is translated as 'ປະຕູ' (door/gate), which is semantically incorrect in this context.",
-          "suggestion": "ສ່ວນຍ່ອຍນີ້ຊ່ວຍໃຫ້ທ່ານສາມາດປ່ຽນລັກສະນະແລະຄວາມຮູ້ສຶກຂອງສະເປສ໌ຂອງທ່ານ. ທ່ານສາມາດນໍາໃຊ້ໂລໂກ້ບໍລິສັດຂອງທ່ານເອງ, ຊື່ແລະຂໍ້ຄວາມເພື່ອໃຫ້ກົງກັບຍີ່ຫໍ້ອົງການຂອງທ່ານ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -165,25 +142,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation contains a typo/repetition at the beginning: 'AceAceastă' instead of 'Această'.",
-          "suggestion": "Această subsecțiune vă permite să modificați aspectul și stilul spațiului dvs. Puteți utiliza sigla companiei dvs, denumirea și textul care se potrivesc cu imaginea de marcă a companiei dvs."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The English text mentions 'text' as one of the customizable elements, but the Russian translation replaces it with 'слоган' (slogan). While similar, 'text' is more general and 'слоган' is a specific type of text.",
-          "suggestion": "Этот раздел позволяет изменить оформление портала. Вы можете использовать логотип, название и текст своей компании, чтобы портал соответствовал корпоративному стилю."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -225,13 +190,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation omits the part of the sentence 'to match your organization brand', which is important context for the purpose of customization.",
-          "suggestion": "У цьому підрозділі можна змінити зовнішній вигляд вашого простору. Ви можете використати логотип, назву та текст своєї компанії, щоб вони відповідали бренду вашої організації."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -243,13 +202,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation omits the first sentence's subject and scope ('This subsection allows you to change the look and feel of your space'), reducing it to a generic 'Change website appearance'. It also omits the specific instruction about matching the organization's brand.",
-          "suggestion": "此子部分允许您更改空间的外观和感觉。您可以使用您自己的公司徽标、名称和文本来匹配您的组织品牌。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

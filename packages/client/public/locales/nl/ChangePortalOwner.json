@@ -4,7 +4,6 @@
   "ChangeInstruction": "Om de {{productName}} eigenaar te wijzigen, kiest u hieronder de naam van de nieuwe eigenaar.",
   "ChangeOwner": "{{productName}} eigenaar wijzigen",
   "ChangeUser": "Gebruiker wijzigen",
-  "DeactivateOrDeletePortal": "{{productName}} deactiveren of verwijderen",
   "DoTheSame": "Doe hetzelfde als beheerders",
   "ManagePortal": "Beheer {{productName}} configuratie",
   "ManageUser": "Gebruikersaccounts beheren",

@@ -3,13 +3,21 @@
   "content": "Ask any question or describe what you need",
   "content_en_sha1_hash": "cb371f58ba7bd9cee288e201235823685af0420e",
   "created_at": "2026-03-31T15:18:04.590Z",
-  "updated_at": "2026-04-08T16:44:46.513Z",
+  "updated_at": "2026-04-11T20:59:03.005Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a placeholder text for a chat input field, prompting users to type their queries or requests for the AI assistant.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:59:03.005Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-input/index.tsx",
+      "line_number": 315,
+      "context": "wrapperClassName={classNames({\n [styles.chatInputTextAreaWrapper]: true,\n [styles.chatInputTextAreaWrapperFiles]:\n selectedFiles.length > 0 && !hideAttachments,\n })}\n placeholder={t(\"AskAnyQuestion\")}\n isChatMode\n fontSize={15}\n isDisabled={!aiReady}\n onKeyDown={onKeyEnter}\n dataTestId=\"chat-input-textarea\"",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -74,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation uses 'դրսևորել հարց', which means 'to manifest/demonstrate a question', which is semantically incorrect. The English 'Ask a question' should be translated as 'տալ հարց' or 'հարցնել'.",
-          "suggestion": "Տվեք ցանկացած հարց կամ նկարագրեք, թե ինչ է ձեզ անհրաժեշտ:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {

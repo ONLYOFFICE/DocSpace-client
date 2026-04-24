@@ -3,13 +3,56 @@
   "content": "Confirmation",
   "content_en_sha1_hash": "3424edc2354c7c55f6eb740b673d349b02d27c8d",
   "created_at": "2025-05-19T21:30:43.625Z",
-  "updated_at": "2026-04-10T08:21:04.298Z",
+  "updated_at": "2026-04-23T17:24:01.689Z",
   "comment": {
-    "text": "This translation key is used to display a confirmation message in a user interface. It appears as the title of a dialog header, indicating that the application is seeking user confirmation before proceeding with an action such as canceling an operation or deleting a file or room.",
+    "text": "This is the title of a confirmation dialog. It appears when the AI assistant wants to open a file or use a tool, prompting the user to confirm the action.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:01.479Z"
+    "updated_at": "2026-04-11T20:56:46.409Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/ToolCallMessage/open-file-confirm-dialog/index.tsx",
+      "line_number": 86,
+      "context": "autoMaxHeight\n closeOnBackdropClick={false}\n data-testid=\"open-file-confirm-dialog\"\n >\n <ModalDialog.Header>\n {t(\"Confirmation\")}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.toolCallManage}>\n <Text>{t(\"AIWouldLikeToOpenFile\")}</Text>",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/ToolCallMessage/tool-call-confirm-dialog/index.tsx",
+      "line_number": 106,
+      "context": "autoMaxHeight\n closeOnBackdropClick={false}\n data-testid=\"tool-call-confirm-dialog\"\n >\n <ModalDialog.Header>\n {t(\"Confirmation\")}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.toolCallManage}>\n <Text>{t(\"AIWouldLikeToUseThisTool\")}</Text>",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/index.tsx",
+      "line_number": 171,
+      "context": "const confirmationDialogContent: Record<\n string,\n { title: string; body: string | React.ReactNode[] }\n > = {\n [BACKUP_SERVICE]: {\n title: t(\"Confirmation\"),\n body: !isCurrentConfirmState\n ? t(\"EnableBackupConfirm\", {\n productName: getBrandName(\"ProductName\"),\n })\n : isFreeTariff",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/index.tsx",
+      "line_number": 171,
+      "context": "const confirmationDialogContent: Record<\n string,\n { title: string; body: string | React.ReactNode[] }\n > = {\n [BACKUP_SERVICE]: {\n title: t(\"Confirmation\"),\n body: !isCurrentConfirmState\n ? t(\"EnableBackupConfirm\", {\n productName: getBrandName(\"ProductName\"),\n })\n : isFreeTariff",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
+      "line_number": 183,
+      "context": "}\n };\n \n const confirmationDialogContent = isAiToolsServiceOn\n ? {\n title: t(\"Confirmation\"),\n body: [\n t(\"DisableAIToolsConfirm\", {\n organizationName: logoText,\n }),\n <CommonTrans",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
+      "line_number": 183,
+      "context": "}\n };\n \n const confirmationDialogContent = isAiToolsServiceOn\n ? {\n title: t(\"Confirmation\"),\n body: [\n t(\"DisableAIToolsConfirm\", {\n organizationName: logoText,\n }),\n <CommonTrans",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/backup/BackupPage.tsx",
+      "line_number": 115,
+      "context": "setIsLoading(false);\n }\n };\n \n const confirmationDialogContent = {\n title: t(\"Confirmation\"),\n \n body: !isBackupServiceOn\n ? t(\"EnableBackupConfirm\", {\n productName: getBrandName(\"ProductName\"),\n })",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/dialogs/CancelOperationDialog/index.tsx",
       "line_number": 90,
@@ -117,13 +160,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation '確認事項' means 'Items for confirmation' or 'Points to check', which is more specific than the general English 'Confirmation'. In a UI dialog header context, '確認' or '確認ダイアログ' is more appropriate for a general confirmation prompt.",
-          "suggestion": "確認"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -135,13 +172,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ການຢັ້ງຢືນຕົວຕົນ' means 'Identity Verification' or 'Identity Confirmation', which is too specific. The English 'Confirmation' is a general UI term for a dialog header used to confirm actions (like deleting or canceling).",
-          "suggestion": "ການຢືນຢັນ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -207,13 +238,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Конфирмација' is a transliteration of the English word rather than a proper Serbian translation. In a UI context for a dialog header, 'Потврда' is the correct and standard term.",
-          "suggestion": "Потврда"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

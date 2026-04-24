@@ -3,16 +3,17 @@
   "content": "This section is required",
   "content_en_sha1_hash": "966ddeb8d027a6ea2fc2fa4163eeb661d2fe085a",
   "created_at": "2025-05-19T21:30:48.346Z",
-  "updated_at": "2026-04-07T23:55:24.632Z",
+  "updated_at": "2026-04-23T17:24:02.003Z",
   "comment": {
-    "text": "This translation key is used to display a message indicating that a section is required on a form, specifically in the OAuth scopes setup process. The text appears as an error label on a dark or light background depending on the system theme, providing context for translators.",
+    "text": "This is an error message displayed when a required section of a form has not been filled out.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:34:25.655Z"
+    "updated_at": "2026-04-11T20:43:47.864Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/ScopesBlock.tsx",
-      "line_number": 273,
+      "line_number": 276,
       "context": "theme.isBase\n ? globalColors.lightErrorStatus\n : globalColors.darkErrorStatus\n }\n >\n {t(\"Common:SectionRequired\")}\n </Text>\n <span />\n <span />\n </>\n ) : null}",
       "module": "/packages/client"
     }
@@ -105,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ສ່ວນນີ້ແມ່ນຕ້ອງການແດ່' translates roughly to 'This part is needed somewhat' or 'This part is needed a bit', which is grammatically awkward and does not convey the mandatory/required nature of a form field in a professional UI context.",
-          "suggestion": "ສ່ວນນີ້ແມ່ນຈຳເປັນ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -147,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The demonstrative pronoun 'Acestă' is grammatically incorrect for the feminine noun 'secțiune'. It should be 'Această'.",
-          "suggestion": "Această secțiune este obligatorie"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

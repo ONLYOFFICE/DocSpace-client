@@ -3,11 +3,12 @@
   "content": "Select types",
   "content_en_sha1_hash": "164b0535dd6dc494de23f43e7fdd2d8e60f1b350",
   "created_at": "2025-05-19T21:30:54.678Z",
-  "updated_at": "2026-04-07T19:35:05.140Z",
+  "updated_at": "2026-04-11T21:14:35.133Z",
   "comment": {
-    "text": "This translation key is used as a button label for a file selector dialog. It is displayed to the user as \"Select types\" and is part of the JavaScriptSDK preset in the PortalSettings page.",
+    "text": "This is a radio button label. It allows the user to choose between different types of selectors.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:20.573Z"
+    "updated_at": "2026-04-11T21:14:35.133Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

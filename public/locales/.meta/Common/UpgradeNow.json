@@ -3,13 +3,39 @@
   "content": "Upgrade now",
   "content_en_sha1_hash": "09a80c7a63cdefe5e5c7bccdc6bf4b894b15c07c",
   "created_at": "2026-04-10T13:53:43.815Z",
-  "updated_at": "2026-04-10T13:53:43.815Z",
+  "updated_at": "2026-04-12T13:43:39.147Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is the label for a button that allows users to upgrade their current plan.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:40:07.339Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/UpdatePlanButtonContainer.tsx",
+      "line_number": 283,
+      "context": "const payTariffButton = () => {\n return canPayTariff ? (\n <Button\n className=\"upgrade-now-button\"\n label={t(\"UpgradeNow\")}\n size={ButtonSize.medium}\n primary\n isDisabled={isLessCountThanAcceptable || isLoading || isDisabled}\n onClick={goToStripePortal}\n isLoading={isLoading}",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/UpdatePlanButtonContainer.tsx",
+      "line_number": 283,
+      "context": "const payTariffButton = () => {\n return canPayTariff ? (\n <Button\n className=\"upgrade-now-button\"\n label={t(\"UpgradeNow\")}\n size={ButtonSize.medium}\n primary\n isDisabled={isLessCountThanAcceptable || isLoading || isDisabled}\n onClick={goToStripePortal}\n isLoading={isLoading}",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/UpdatePlanButtonContainer.tsx",
+      "line_number": 283,
+      "context": "const payTariffButton = () => {\n return canPayTariff ? (\n <Button\n className=\"upgrade-now-button\"\n label={t(\"UpgradeNow\")}\n size={ButtonSize.medium}\n primary\n isDisabled={isLessCountThanAcceptable || isLoading || isDisabled}\n onClick={goToStripePortal}\n isLoading={isLoading}",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/UpdatePlanButtonContainer.tsx",
+      "line_number": 283,
+      "context": "const payTariffButton = () => {\n return canPayTariff ? (\n <Button\n className=\"upgrade-now-button\"\n label={t(\"UpgradeNow\")}\n size={ButtonSize.medium}\n primary\n isDisabled={isLessCountThanAcceptable || isLoading || isDisabled}\n onClick={goToStripePortal}\n isLoading={isLoading}",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

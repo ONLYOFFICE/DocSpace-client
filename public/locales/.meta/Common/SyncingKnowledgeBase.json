@@ -3,13 +3,21 @@
   "content": "Syncing form data to knowledge base...",
   "content_en_sha1_hash": "1cd0f68a7543087af9bdc3447f7cdd3edb7e9f33",
   "created_at": "2026-03-20T09:07:36.950Z",
-  "updated_at": "2026-04-07T22:08:45.739Z",
+  "updated_at": "2026-04-23T17:24:02.135Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a tooltip that appears when form data is being synchronized with the knowledge base.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:41:23.845Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/ai-chat-panel/index.tsx",
+      "line_number": 194,
+      "context": "<Text fontSize=\"16px\" fontWeight={700}>\n {t(\"Common:AIAgent\")}\n </Text>\n {isSyncing && (\n <span\n title={t(\"Common:SyncingKnowledgeBase\")}\n style={{ display: \"flex\", alignItems: \"center\" }}\n >\n <Loader type={LoaderTypes.track} size=\"16px\" />\n </span>\n )}",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -77,8 +85,10 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation uses an incorrect grammatical form for 'syncing' and an incorrect case for 'knowledge base'. 'Համաժուժում' is a noun (synchronization), whereas the English uses a continuous verb. 'Գիտելիքների բազային' implies 'to the knowledge base' in a way that sounds unnatural/incorrect in this context.",
-          "suggestion": "Ձևի տվյալները համաժուժվում են գիտելիքների բազայի հետ..."
+          "description": "The word 'համաժուժvum' does not appear to be a valid or standard Armenian term for 'synchronizing'. The correct Armenian word for 'synchronize/syncing' is 'համաժամացվում' (from 'համաժամ' meaning simultaneous/in-sync). 'Ժուժ' is not a recognized root for synchronization in Armenian.",
+          "suggestion": "Ձևի տվյալները համաժամացվում են գիտելիքների բազայի հետ...",
+          "checked_at": "2026-04-12T16:11:05.800Z",
+          "checked_by": "claude-code/sonnet"
         }
       ],
       "approved_at": null
@@ -104,25 +114,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao word 'ການສຳຜັດ' means 'touching' or 'contacting', whereas the English word 'Syncing' refers to data synchronization. The correct term should relate to synchronization (ການຊິງຄ໌ or ການເຮັດໃຫ້ຂໍ້ມູນກົງກັນ).",
-          "suggestion": "ກຳລັງຊິງຄ໌ຂໍ້ມູນຈາກແບບຟອມເຂົ້າສູ່ຖານຄວາມຮູ້..."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order and grammatical structure in Latvian are incorrect, making the sentence nonsensical ('Syncing form data' is translated as 'Syncing form data' but with incorrect case endings and word order).",
-          "suggestion": "Sinkronizē formas datus ar zināšanu bāzi..."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -170,25 +168,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation is grammatically incorrect and nonsensical. 'Synchromačných' is not a valid word in this context; it appears to be a failed attempt to conjugate 'syncing' or a confusion with 'synchronization'.",
-          "suggestion": "Synchronizácia údajov formulára do znalostnej bázy..."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation is grammatically incorrect and lacks a verb. 'Sinhrona' is an adjective (Synchronous), whereas the English uses a verb (Syncing). The sentence structure is broken.",
-          "suggestion": "Sinhronizacija podatkov obrazca v zbirko znanja..."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

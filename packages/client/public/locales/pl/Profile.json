@@ -23,9 +23,9 @@
   "ShowBackupCodes": "Pokaż kody zapasowe",
   "SuccessLogout": "Aktywne połączenie zostało wylogowane: {{platform}}, {{browser}}",
   "TelegramAccount": "Konto Telegram",
+  "TelegramAccountDescription": "Aby połączyć TelegramBot ze swoim kontem, przejdź do tajnego linku i kliknij przycisk „Connect Telegram”.",
   "TelegramAccountDisconnect": "Odłącz Telegram",
   "TelegramAccountDisconnectDescription": "Twoje konto @{{username}} jest połączone w celu otrzymywania powiadomień z Telegrama. Możesz rozłączyć to konto. W takim przypadku nie będziesz otrzymywać powiadomień.",
   "TerminateAllSessions": "Zakończ wszystkie sesje z wyjątkiem bieżącej",
-  "TwoFactorDescription": "Weryfikacja dwuetapowa za pośrednictwem aplikacji generującej kody została włączona przez administratora dla wszystkich użytkowników.",
-  "TelegramAccountDescription": "Aby połączyć TelegramBot ze swoim kontem, przejdź do tajnego linku i kliknij przycisk „Connect Telegram”."
+  "TwoFactorDescription": "Weryfikacja dwuetapowa za pośrednictwem aplikacji generującej kody została włączona przez administratora dla wszystkich użytkowników."
 }

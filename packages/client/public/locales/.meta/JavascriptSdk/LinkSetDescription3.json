@@ -3,11 +3,12 @@
   "content": "A {{parameter1}}, {{parameter2}}, and {{parameter3}} is set for this link. To configure it,",
   "content_en_sha1_hash": "d319343bf11cc66db4d4e3ba94a00d86a4fdb02b",
   "created_at": "2025-05-19T21:30:54.559Z",
-  "updated_at": "2026-04-07T19:35:05.135Z",
+  "updated_at": "2026-04-11T21:15:20.727Z",
   "comment": {
-    "text": "This translation key is used to display a hint or description for configuring link settings, specifically when three parameters are set. It typically appears in a UI component, such as a button or dialog, and provides context for users to understand how to configure the link further.",
+    "text": "This is a tooltip that appears when a user hovers over a shared link. It describes the three security settings applied to the link, with `{{parameter1}}`, `{{parameter2}}`, and `{{parameter3}}` representing these settings (e.g., \"password protection\", \"expiration date\", \"download restriction\").",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:32.663Z"
+    "updated_at": "2026-04-11T21:15:20.727Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

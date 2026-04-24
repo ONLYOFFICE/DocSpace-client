@@ -60,6 +60,7 @@
   "LdapSettingsValidUntil": "Validno do",
   "LdapSyncButton": "Sinhronizuj korisnike",
   "LdapSyncCronTitle": "Ovde možete da podesite koliko često želite da automatski sinhronizujete LDAP korisnike",
+  "LdapSyncDescription": "Sinhronizacija LDAP podataka je način za sinhronizaciju promena podataka između vašeg portala i LDAP servera. Omogućite opciju „Auto Sync“ i postavite vremenski period za automatsko ažur informacija.",
   "LdapSyncTitle": "Sinhronizuj LDAP podatke",
   "LdapToggle": "LDAP Autentifikacija",
   "LdapToggleDescription": "Omogućite ovu opciju ako želite da automatski dodate korisnike sa LDAP servera u ​​{{productName}}. Dodati korisnici će moći da se autorizuju koristeći svoje LDAP server akreditive. {{productName}} ne čuva korisničke lozinke lokalno i proveravaće autentičnost korisnika slanjem njihove prijave i lozinke na LDAP server.",
@@ -70,6 +71,5 @@
   "LdapUserFilterTooltip": "Koristite LDAP filter za pretragu da biste izabrali korisnike koji moraju biti uvezeni.",
   "LdapUserQuotaTooltip": "Da biste postavili skladišnu kvotu za korisnika, dodajte atribut u LDAP direktorijum (na primer, UsersQuotaLimit) i unesite celobrojnu vrednost za ovaj atribut. Kvota će se prikazivati u bajtovima. Ovde navedite samo naziv atributa. Ovaj atribut će biti primenjen samo tokom prvog podešavanja i kasnije se može promeniti ručno u odeljku {{contactsName}}.",
   "LdapUsersType": "Tip korisnika",
-  "LdapUserTypeTooltip": "Svi korisnici će biti dodati na {{productName}} sa odabranim tipom.",
-  "LdapSyncDescription": "Sinhronizacija LDAP podataka je način za sinhronizaciju promena podataka između vašeg portala i LDAP servera. Omogućite opciju „Auto Sync“ i postavite vremenski period za automatsko ažur informacija."
+  "LdapUserTypeTooltip": "Svi korisnici će biti dodati na {{productName}} sa odabranim tipom."
 }

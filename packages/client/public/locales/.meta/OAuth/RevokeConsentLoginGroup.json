@@ -3,17 +3,18 @@
   "content": "If you want to renew an automatic login using {{organizationName}} {{productName}}, you will be asked to grant access to your {{productName}} account data.",
   "content_en_sha1_hash": "b0fb1bbcb26b1b6c7baba54b4b588b51994f0991",
   "created_at": "2025-05-19T21:30:54.018Z",
-  "updated_at": "2026-04-07T19:35:05.166Z",
+  "updated_at": "2026-04-11T21:18:24.664Z",
   "comment": {
-    "text": "This translation key is used to describe the action of revoking consent for automatic login access to account data in a product. When used in a RevokeDialog, it appears as a message explaining why user consent needs to be granted again for renewal, prompting users to authorize data access for their account.",
+    "text": "This is a descriptive sentence within a dialog box, explaining the consequence of revoking consent for an automatic login. It appears when a user chooses to revoke access for an authorized application. `{{organizationName}}` refers to the organization's name, and `{{productName}}` refers to the product's name.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:37.141Z"
+    "updated_at": "2026-04-11T21:18:24.664Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/authorized-apps/sub-components/RevokeDialog.tsx",
-      "line_number": 55,
-      "context": "/>\n );\n const secondDesc = isGroup ? (\n <Trans\n t={t}\n i18nKey=\"RevokeConsentLoginGroup\"\n ns=\"OAuth\"\n values={{\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }}",
+      "line_number": 56,
+      "context": "/>\n );\n const secondDesc = isGroup ? (\n <Trans\n t={t}\n i18nKey=\"RevokeConsentLoginGroup\"\n ns=\"OAuth\"\n values={{\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n }}",
       "module": "/packages/client"
     }
   ],

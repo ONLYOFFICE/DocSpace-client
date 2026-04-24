@@ -3,11 +3,12 @@
   "content": "Groups were deleted successfully",
   "content_en_sha1_hash": "583bba7040608f8de20a30e546a10a26271233d7",
   "created_at": "2025-05-19T21:30:53.526Z",
-  "updated_at": "2026-04-09T07:21:13.944Z",
+  "updated_at": "2026-04-11T21:19:55.793Z",
   "comment": {
-    "text": "The \"Groups were deleted successfully\" translation key is used to display a success message after deleting groups. It will appear when the user deletes a group and is associated with a confirmation dialog or button action in the GroupsStore.",
+    "text": "Toast message confirming that selected groups have been successfully removed from the system.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:32.982Z"
+    "updated_at": "2026-04-11T21:19:55.793Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -141,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'eliminate' in Romanian (eliminate) often carries a connotation of 'eliminating a threat' or 'removing an obstacle'. In the context of software/data management, 'șterse' is the standard and correct term for 'deleted'.",
-          "suggestion": "Grupurile au fost șterse cu succes"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

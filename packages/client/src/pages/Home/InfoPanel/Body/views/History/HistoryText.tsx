@@ -24,21 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-
 import { Text } from "@docspace/ui-kit/components/text";
 import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
-const StyledHistoryText = styled(TooltipContainer)`
-  overflow: hidden;
-
-  .history-text {
-    min-width: fit-content;
-  }
-`;
+import styles from "./HistoryText.module.scss";
 
 const HistoryText = ({ title }: { title: string }) => (
-  <StyledHistoryText as="span" title={title} className="history-text_wrapper">
+  <TooltipContainer
+    as="span"
+    title={title}
+    className={styles.historyTextWrapper}
+  >
     <Text fontWeight={600} as="span" fontSize="14px" className="history-text">
       "
     </Text>
@@ -46,14 +42,14 @@ const HistoryText = ({ title }: { title: string }) => (
       fontWeight={600}
       as="span"
       fontSize="14px"
-      style={{ textWrap: "wrap" }}
+      className={styles.historyTitle}
     >
       {title}
     </Text>
     <Text fontWeight={600} as="span" fontSize="14px" className="history-text">
       "
     </Text>
-  </StyledHistoryText>
+  </TooltipContainer>
 );
 
 export { HistoryText };

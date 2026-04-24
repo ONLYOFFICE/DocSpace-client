@@ -26,7 +26,7 @@
 
 import { useRef, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { decode } from "he";
 
 import { Text } from "@docspace/ui-kit/components/text";

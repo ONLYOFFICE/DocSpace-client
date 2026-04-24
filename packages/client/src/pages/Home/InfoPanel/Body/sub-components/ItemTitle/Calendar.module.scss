@@ -23,30 +23,31 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
-import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
+.calendarComponent {
+  position: relative;
 
-import EmptyCanceledLight from "PUBLIC_DIR/images/emptyview/empty.records.light.svg?url";
-import EmptyCanceledDark from "PUBLIC_DIR/images/emptyview/empty.records.dark.svg?url";
+  :global(.icon-calendar) {
+    height: 16px;
+    padding-right: 2px;
+  }
+}
 
-import styles from "./ThirdParty.module.scss";
+.calendar {
+  position: absolute;
+  top: 20px;
+  right: -30px;
 
-const ThirdPartyComponent = () => {
-  const { t } = useTranslation("InfoPanel");
-  const theme = useTheme();
+  :global(.track-vertical) {
+    height: 100% !important;
+  }
 
-  return (
-    <EmptyScreenContainer
-      className={styles.emptyScreenContainer}
-      imageSrc={theme.isBase ? EmptyCanceledLight : EmptyCanceledDark}
-      headerText={t("NoRecordsFound")}
-      descriptionText={t("HistoryThirdParty")}
-      imageAlt={t("NoRecordsFound")}
-    />
-  );
-};
-
-export default ThirdPartyComponent;
+  &.mobile {
+    position: fixed;
+    bottom: 0;
+    top: auto;
+    right: auto;
+    left: 0;
+    height: 420px;
+  }
+}

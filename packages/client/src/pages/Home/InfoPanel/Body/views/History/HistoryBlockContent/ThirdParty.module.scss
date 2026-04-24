@@ -23,30 +23,11 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
-import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
+.emptyScreenContainer {
+  width: fit-content;
 
-import EmptyCanceledLight from "PUBLIC_DIR/images/emptyview/empty.records.light.svg?url";
-import EmptyCanceledDark from "PUBLIC_DIR/images/emptyview/empty.records.dark.svg?url";
-
-import styles from "./ThirdParty.module.scss";
-
-const ThirdPartyComponent = () => {
-  const { t } = useTranslation("InfoPanel");
-  const theme = useTheme();
-
-  return (
-    <EmptyScreenContainer
-      className={styles.emptyScreenContainer}
-      imageSrc={theme.isBase ? EmptyCanceledLight : EmptyCanceledDark}
-      headerText={t("NoRecordsFound")}
-      descriptionText={t("HistoryThirdParty")}
-      imageAlt={t("NoRecordsFound")}
-    />
-  );
-};
-
-export default ThirdPartyComponent;
+  :global(.ec-image) {
+    width: 150px;
+  }
+}

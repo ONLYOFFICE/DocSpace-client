@@ -3,13 +3,21 @@
   "content": "Available backups",
   "content_en_sha1_hash": "5c9223bba6d463bb9dd117c8f3a534fa5dbb4a24",
   "created_at": "2026-04-10T13:53:41.932Z",
-  "updated_at": "2026-04-10T13:53:41.932Z",
+  "updated_at": "2026-04-23T17:24:02.181Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label indicating the number of backups available to the user. It appears as a short label in a card on the backup page.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:58:48.108Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/backup/BackupPage.tsx",
+      "line_number": 182,
+      "context": "<div className={styles.backupsCard}>\n <div className={styles.backupsHeader}>\n <Text fontWeight=\"700\" fontSize=\"14px\">\n {isFreeTariff && !isBackupServiceOn\n ? t(\"PaidBackupDisabled\")\n : t(\"AvailableBackups\")}\n </Text>\n </div>\n \n {!isFreeTariff ? (\n <div className={styles.freeBackupsAmountContainer}>",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

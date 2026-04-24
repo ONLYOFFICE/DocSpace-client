@@ -1,0 +1,29 @@
+{
+  "key_path": "AreYouSureWantLeaveRoom",
+  "content": "Are you sure you want to leave this room?",
+  "content_en_sha1_hash": "cd3dcdef6a29e05849ab9dcffe460f2aeb0b1c8e",
+  "created_at": "2026-04-23T17:23:59.013Z",
+  "updated_at": "2026-04-23T17:44:15.837Z",
+  "comment": {
+    "text": "Confirmation question in a modal dialog body that appears when a user attempts to exit a room.",
+    "is_auto": true,
+    "updated_at": "2026-04-23T17:44:15.837Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
+      "line_number": 108,
+      "context": "<div className=\"modal-dialog-content-body\">\n {showFormFillingWarning ? (\n <>\n <Text>{t(\"Files:LeaveRoomFormFillingWarning\")}</Text>\n <Text style={{ marginTop: \"12px\" }}>\n {t(\"Files:AreYouSureWantLeaveRoom\")}\n </Text>\n </>\n ) : (\n <Text>{descriptionText}</Text>\n )}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

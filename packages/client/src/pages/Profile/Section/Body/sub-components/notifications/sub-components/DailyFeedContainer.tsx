@@ -33,6 +33,7 @@ import { NotificationsType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import TargetUserStore from "SRC_DIR/store/contacts/TargetUserStore";
 import styles from "../Notifications.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type DailyFeedContainerProps = {
   t: TFunction;
@@ -64,7 +65,7 @@ const DailyFeedContainer = ({
     <div className={styles.notificationContainer}>
       <div className={styles.row}>
         <Text {...textProps} className="subscription-title">
-          {t("DailyFeed", { productName: t("Common:ProductName") })}
+          {t("DailyFeed", { productName: getBrandName("ProductName") })}
         </Text>
         <ToggleButton
           className="daily-feed"
@@ -74,7 +75,7 @@ const DailyFeedContainer = ({
         />
       </div>
       <Text {...textDescriptionsProps}>
-        {t("DailyFeedDescription", { productName: t("Common:ProductName") })}
+        {t("DailyFeedDescription", { productName: getBrandName("ProductName") })}
       </Text>
     </div>
   );

@@ -11,8 +11,8 @@
   "ProcessComplete": "Môžete túto stránku zatvoriť. Po dokončení procesu bude zodpovedný administrátor informovaný e-mailom.",
   "Reassign": "Opätovné priradenie",
   "ReassignData": "Opätovné priradenie údajov",
-  "ReassigningDataToAnother": "Začal sa proces opätovného priradenia údajov od používateľa <0>{{{fromUser}}</0> k používateľovi <1>{{{toUser}}</1>. Upozorňujeme, že to môže trvať dlhšie.",
-  "ReassigningDataToItself": "Začal sa proces opätovného priradenia údajov od používateľa <0>{{{fromUser}}</0> k používateľovi <1>{{{toUser}}</1> <2>{{{you}}</2>. Upozorňujeme, že to môže trvať dlhšie.",
+  "ReassigningDataToAnother": "Začal sa proces opätovného priradenia údajov od používateľa <0>{{fromUser}}</0> k používateľovi <1>{{toUser}}</1>. Upozorňujeme, že to môže trvať dlhšie.",
+  "ReassigningDataToItself": "Začal sa proces opätovného priradenia údajov od používateľa <0>{{fromUser}}</0> k používateľovi <1>{{toUser}}</1> <2>{{you}}</2>. Upozorňujeme, že to môže trvať dlhšie.",
   "RoomsOnlyReassignment": "Presunieme miestnosti vytvorené kontaktom.",
   "StartTransferAgain": "Znovu začať prenos",
   "UserToWhomTheDataWillBeTransferred": "Používateľ, ktorému sa údaje prenesú"

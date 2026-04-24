@@ -3,13 +3,20 @@
   "content": "Favorites",
   "content_en_sha1_hash": "07b3e447db02b7cc20a78a57c316febae22ed72b",
   "created_at": "2025-08-29T14:33:19.030Z",
-  "updated_at": "2026-04-08T09:53:55.640Z",
+  "updated_at": "2026-04-23T17:24:02.047Z",
   "comment": {
-    "text": "This key displays the label for a user's saved or preferred items. It appears as the title for a folder in the tree view and as the tooltip for a button that toggles the \"favorite\" status of an item. Translators should ensure the translation conveys the meaning of \"saved items\" or \"preferred selections.\"",
+    "text": "This is a label for a folder or section in the file management interface, indicating items that have been marked as favorites. It appears in navigation menus and settings for default page display.",
     "is_auto": true,
-    "updated_at": "2025-08-29T14:34:32.665Z"
+    "updated_at": "2026-04-11T20:52:55.816Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/selectors/Files/hooks/useRootHelper.tsx",
+      "line_number": 137,
+      "context": "break;\n case FolderType.VirtualRooms:\n title = t(\"Rooms\");\n break;\n case FolderType.Favorites:\n title = t(\"Favorites\");\n break;\n case FolderType.Recent:\n title = t(\"Recent\");\n break;\n case FolderType.AiAgents:",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/sub-components/DefaultPageSetting.tsx",
       "line_number": 83,
@@ -21,6 +28,12 @@
       "line_number": 85,
       "context": "break;\n case FolderType.TRASH:\n folder.title = i18n.t(\"Common:TrashSection\");\n break;\n case FolderType.Favorites:\n folder.title = i18n.t(\"Common:Favorites\");\n break;\n case FolderType.Recent:\n folder.title = i18n.t(\"Common:Recent\");\n break;\n default:",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/sidebar/index.tsx",
+      "line_number": 126,
+      "context": "label: t(\"Common:Documents\"),\n icon: CatalogDocumentsReactSvgUrl,\n },\n {\n key: DocsSection.Favorites,\n label: t(\"Common:Favorites\"),\n icon: CatalogFavoritesReactSvgUrl,\n },\n {\n key: DocsSection.Recent,\n label: t(\"Common:Recent\"),",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
@@ -117,13 +130,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '좋아요' (Like/Likes) is commonly used for social media reactions (e.g., Facebook 'Like'). In the context of a file management system/folder title for 'saved or preferred items,' '즐겨찾기' is the standard and accurate term.",
-          "suggestion": "즐겨찾기"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -189,13 +196,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Najljubši' means 'favorites' in the sense of 'beloved people' or 'dearest ones'. In a software UI context for saved items/folders, 'Priljubljeno' is the standard term.",
-          "suggestion": "Priljubljeno"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

@@ -46,7 +46,6 @@ import { FormsSection } from "@/types/forms";
 
 import useFormsActions from "../../_hooks/useFormsActions";
 import useFormsContextMenu from "../../_hooks/useFormsContextMenu";
-import useFormThumbnail from "../../_hooks/useFormThumbnail";
 import { sectionFromPathname } from "../../_utils/sectionFromPathname";
 import { stripHost } from "../../_utils/thumbnailUrl";
 import FormStatusBadge from "./FormStatusBadge";
@@ -67,8 +66,10 @@ const FormsTile = ({ item, originalFile, getIcon }: FormsTileProps) => {
   const pathname = usePathname();
   const activeSection = sectionFromPathname(pathname);
 
-  const thumbUrl = stripHost(item.thumbnailUrl);
-  const blobThumbnail = useFormThumbnail(thumbUrl, !item.providerItem);
+  const thumbUrl =
+    !item.providerItem && item.thumbnailUrl
+      ? stripHost(item.thumbnailUrl)
+      : "";
 
   const displayFileExtension = Boolean(filesSettings?.displayFileExtension);
 
@@ -155,7 +156,7 @@ const FormsTile = ({ item, originalFile, getIcon }: FormsTileProps) => {
           }
           thumbnailClick={openItem}
           temporaryIcon={temporaryIcon}
-          thumbnail={blobThumbnail}
+          thumbnail={thumbUrl}
           contentElement={undefined}
           forwardRef={tileRef}
         >

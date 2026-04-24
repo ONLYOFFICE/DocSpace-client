@@ -3,11 +3,12 @@
   "content": "Agents removed",
   "content_en_sha1_hash": "6ab4676e4d68903c1758c17abb1557370c9205fb",
   "created_at": "2025-10-27T16:14:29.966Z",
-  "updated_at": "2026-03-20T09:07:45.493Z",
+  "updated_at": "2026-04-11T21:10:40.486Z",
   "comment": {
-    "text": "Confirmation message displayed in a dialog when multiple agents are successfully removed. This message confirms the removal of agents and appears when the `isAIAgent` flag is true. Translators should consider the context of a successful deletion operation.",
+    "text": "Toast message indicating that multiple AI agents have been successfully removed.",
     "is_auto": true,
-    "updated_at": "2025-10-27T17:59:46.873Z"
+    "updated_at": "2026-04-11T21:10:40.486Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

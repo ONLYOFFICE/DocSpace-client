@@ -1,0 +1,29 @@
+{
+  "key_path": "SpreadsheetGenerated",
+  "content": "The spreadsheet for {{formName}} is generated based on all completed copies",
+  "content_en_sha1_hash": "2f52cf325bccb922d0b3ae2e77af3ff7eda82ddf",
+  "created_at": "2026-04-23T17:23:52.769Z",
+  "updated_at": "2026-04-23T17:36:54.324Z",
+  "comment": {
+    "text": "Success toast message notifying the user that a spreadsheet has been created from all completed copies of a specific form; {{formName}} represents the form's title.",
+    "is_auto": true,
+    "updated_at": "2026-04-23T17:36:54.324Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 1635,
+      "context": "const messageVar = { formName: form.title };\n \n toastr.success(\n isNewFile\n ? t(\"Common:SpreadsheetGenerated\", messageVar)\n : t(\"Common:SpreadsheetUpdated\", messageVar),\n );\n } catch (error) {\n toastr.error(error);\n console.error(error);",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

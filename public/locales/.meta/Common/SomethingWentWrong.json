@@ -3,11 +3,12 @@
   "content": "Something went wrong.",
   "content_en_sha1_hash": "bee54c9cc30c539ab2ed15c0c936e055cf8ef67e",
   "created_at": "2025-05-19T21:30:48.934Z",
-  "updated_at": "2026-04-07T22:43:21.043Z",
+  "updated_at": "2026-04-23T17:24:01.637Z",
   "comment": {
-    "text": "This translation key is used to display an error message when a specific action fails, such as clicking a button or importing data. It appears in the UI as a generic error notification and can be found in a catch block of code that handles errors thrown during certain user interactions. Translators should provide a clear and concise alternative text for this key to help users understand what went wrong.",
+    "text": "This is an error message displayed in a toast notification or as a title in an empty state view. It appears when an unexpected error occurs during an operation, such as submitting to a form gallery, server communication, or data import.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:39:21.496Z"
+    "updated_at": "2026-04-11T20:42:20.142Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -72,14 +73,14 @@
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/page.client.tsx",
-      "line_number": 179,
+      "line_number": 180,
       "context": "try {\n const user = await signupOAuth(signupAccount, confirmKey);\n \n if (!user) {\n toastr.error(t(\"Common:SomethingWentWrong\"));\n return;\n }\n \n const response = (await thirdPartyLogin(\n profile,",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PasswordChange/page.client.tsx",
       "line_number": 122,
-      "context": "errorMessage = knownError;\n }\n console.error(errorMessage);\n \n if (errorMessage === \"Invalid params\") {\n toastr.error(t(\"Common:SomethingWentWrong\"));\n } else {\n toastr.error(t(`${errorMessage}`));\n }\n setIsLoading(false);\n }",
+      "context": "errorMessage = knownError;\n }\n console.error(errorMessage);\n \n if (errorMessage === \"Invalid params\") {\n toastr.error(t(\"Common:SomethingWentWrong\"));\n } else {\n // biome-ignore lint/plugin/no-dynamic-i18n-key: errorMessage is a server-provided i18n key; value is not known at compile time\n toastr.error(t(errorMessage));\n }\n setIsLoading(false);",
       "module": "/packages/login"
     },
     {
@@ -87,6 +88,54 @@
       "line_number": 122,
       "context": "messageKey?: OAuth2ErrorKey,\n ) => {\n if (!messageKey) return;\n switch (messageKey) {\n case OAuth2ErrorKey.asc_retrieval_error:\n return t(\"Common:SomethingWentWrong\");\n case OAuth2ErrorKey.client_disabled_error:\n return t(\"Errors:OAuthApplicationDisabled\");\n case OAuth2ErrorKey.client_not_found_error:\n return t(\"Errors:OAuthApplicationEmpty\");\n case OAuth2ErrorKey.client_permission_denied_error:",
       "module": "/packages/login"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(chat)/error.tsx",
+      "line_number": 71,
+      "context": "}, [error]);\n \n return (\n <div style={containerStyle}>\n <p style={{ margin: 0, fontSize: \"14px\" }}>\n {t(\"Common:SomethingWentWrong\")}\n </p>\n <button type=\"button\" style={buttonStyle} onClick={reset}>\n {t(\"Common:TryAgain\")}\n </button>\n </div>",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/ConnectDatabaseForm.tsx",
+      "line_number": 120,
+      "context": "const newValue = !store.collectXlsx;\n store.setCollectXlsx(newValue);\n try {\n await setRoomFormSettings(roomId, { saveFormAsXLSX: newValue });\n } catch {\n toastr.error(t(\"Common:SomethingWentWrong\"));\n store.setCollectXlsx(!newValue);\n }\n }, [store, roomId, t]);\n \n const onToggleSendToDb = React.useCallback(async () => {",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/ConnectDatabaseForm.tsx",
+      "line_number": 120,
+      "context": "const newValue = !store.collectXlsx;\n store.setCollectXlsx(newValue);\n try {\n await setRoomFormSettings(roomId, { saveFormAsXLSX: newValue });\n } catch {\n toastr.error(t(\"Common:SomethingWentWrong\"));\n store.setCollectXlsx(!newValue);\n }\n }, [store, roomId, t]);\n \n const onToggleSendToDb = React.useCallback(async () => {",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/ConnectDatabaseForm.tsx",
+      "line_number": 120,
+      "context": "const newValue = !store.collectXlsx;\n store.setCollectXlsx(newValue);\n try {\n await setRoomFormSettings(roomId, { saveFormAsXLSX: newValue });\n } catch {\n toastr.error(t(\"Common:SomethingWentWrong\"));\n store.setCollectXlsx(!newValue);\n }\n }, [store, roomId, t]);\n \n const onToggleSendToDb = React.useCallback(async () => {",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_store/FormsAiAgentStore.tsx",
+      "line_number": 510,
+      "context": "if (kbFiles.length > 0) {\n return vectorizeFiles(kbFiles.map((f) => f.id));\n }\n })\n .catch(() => {\n toastr.error(i18n.t(\"Common:SomethingWentWrong\"));\n }),\n );\n }\n \n await Promise.allSettled(tasks);",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_store/FormsAiAgentStore.tsx",
+      "line_number": 510,
+      "context": "if (kbFiles.length > 0) {\n return vectorizeFiles(kbFiles.map((f) => f.id));\n }\n })\n .catch(() => {\n toastr.error(i18n.t(\"Common:SomethingWentWrong\"));\n }),\n );\n }\n \n await Promise.allSettled(tasks);",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_store/FormsAiAgentStore.tsx",
+      "line_number": 510,
+      "context": "if (kbFiles.length > 0) {\n return vectorizeFiles(kbFiles.map((f) => f.id));\n }\n })\n .catch(() => {\n toastr.error(i18n.t(\"Common:SomethingWentWrong\"));\n }),\n );\n }\n \n await Promise.allSettled(tasks);",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/error.tsx",
+      "line_number": 71,
+      "context": "}, [error]);\n \n return (\n <div style={containerStyle}>\n <p style={{ margin: 0, fontSize: \"14px\" }}>\n {t(\"Common:SomethingWentWrong\")}\n </p>\n <button type=\"button\" style={buttonStyle} onClick={reset}>\n {t(\"Common:TryAgain\")}\n </button>\n </div>",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/errors/Error520.tsx",
@@ -177,13 +226,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation '何かが間違っていた' (Something was wrong/mistaken) uses the past tense, which sounds like a report of a past event rather than a current error notification. In a UI context for an error message, the present tense or a more standard error expression is required.",
-          "suggestion": "問題が発生しました。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {

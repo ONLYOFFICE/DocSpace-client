@@ -3,16 +3,17 @@
   "content": "Send invitation",
   "content_en_sha1_hash": "abb6cb2d460af2a3a0a5b3ef9a16f1af50bf3bd9",
   "created_at": "2025-05-19T21:30:54.737Z",
-  "updated_at": "2026-04-07T19:35:05.125Z",
+  "updated_at": "2026-04-23T17:24:01.885Z",
   "comment": {
-    "text": "This translation key is used to display the text \"Send invitation\" on a button that sends an invitation when clicked. It typically appears in a panel or modal, likely triggered by a user action to invite others.",
+    "text": "This is the label for a button that, when clicked, sends invitations to users.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:13.886Z"
+    "updated_at": "2026-04-11T21:13:59.810Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 975,
+      "line_number": 982,
       "context": "scale\n size=\"normal\"\n isDisabled={hasErrors || !hasInvitedUsers}\n primary\n onClick={onClickSend}\n label={t(\"SendInvitation\")}\n isLoading={isLoading}\n testId=\"invite_panel_send_button\"\n />\n <Button\n className=\"cancel-button\"",
       "module": "/packages/client"
     }

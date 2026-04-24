@@ -3,17 +3,18 @@
   "content": "You are using {{organizationName}} {{productName}} {{license}}.",
   "content_en_sha1_hash": "b4abdf15a611d8d64134d0f192a4d7f887e9e399",
   "created_at": "2025-09-19T15:39:04.582Z",
-  "updated_at": "2026-04-10T08:58:38.058Z",
+  "updated_at": "2026-04-11T21:01:15.930Z",
   "comment": {
-    "text": "This key displays a description of the user's current tariff or subscription details, including the organization, product, and license type. It appears within a tariff title container, likely on a payments or subscription management page, to inform the user about their active plan. Translators should ensure the wording accurately reflects the user's entitlement.",
+    "text": "This is a descriptive text displayed on the tariff activation page. It informs the user about their current license type, including the organization name ({{organizationName}}), product name ({{productName}}), and whether it's a Developer or Enterprise license ({{license}}).",
     "is_auto": true,
-    "updated_at": "2025-09-19T15:52:58.963Z"
+    "updated_at": "2026-04-11T21:01:15.930Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/TariffTitleContainer.tsx",
-      "line_number": 184,
-      "context": "/>\n ),\n }}\n />\n ) : (\n t(\"ActivateTariffDescrConnections\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")\n : t(\"Common:EnterpriseLicense\"),",
+      "line_number": 185,
+      "context": "/>\n ),\n }}\n />\n ) : (\n t(\"ActivateTariffDescrConnections\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")\n : t(\"Common:EnterpriseLicense\"),",
       "module": "/packages/shared"
     }
   ],

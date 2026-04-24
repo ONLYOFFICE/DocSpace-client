@@ -3,13 +3,21 @@
   "content": "AI credits, model settings, and usage",
   "content_en_sha1_hash": "57c16903d5b8334eda721aba86dbe5771ea21e53",
   "created_at": "2026-04-10T08:20:53.289Z",
-  "updated_at": "2026-04-10T08:20:53.289Z",
+  "updated_at": "2026-04-23T17:24:02.140Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a short description displayed on a billing settings card. It summarizes the content of the \"AI\" tab, which includes information about AI credits, model configurations, and usage statistics.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:58:18.382Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/BillingForm.tsx",
+      "line_number": 74,
+      "context": "icon: <WalletIcon />,\n },\n {\n id: \"ai\",\n titleKey: \"OrganizationAI\",\n tKey: \"BillingAICardDesc\",\n iconClass: cardStyles.billingIconAi,\n icon: <AiIcon />,\n },\n {\n id: \"payment-method\",",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

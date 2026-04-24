@@ -3,17 +3,18 @@
   "content": "Load metadata from XML to fill the required fields automatically.",
   "content_en_sha1_hash": "5dc7828aee10be08ff27972ea80701e595ddd1d2",
   "created_at": "2025-05-19T21:30:50.195Z",
-  "updated_at": "2026-04-08T22:09:25.047Z",
+  "updated_at": "2026-04-13T14:59:05.894Z",
   "comment": {
-    "text": "\"Load metadata from XML to fill required fields automatically\" is used as a tooltip or description for an icon button that enables Single Sign On. This translation key appears in the PortalSettings page and helps users understand its purpose.",
+    "text": "This is a tooltip that appears when hovering over an icon button, explaining that clicking it will load metadata from an XML file to automatically populate required fields.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:00.865Z"
+    "updated_at": "2026-04-11T21:26:12.589Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/UploadXML.js",
-      "line_number": 103,
-      "context": "? props.theme.client.settings.integration.sso.iconButtonDisabled\n : props.theme.client.settings.integration.sso.iconButton} !important;\n }\n `;\n \n const UploadXML = (props) => {\n const { t } = useTranslation([\"SingleSignOn\", \"Common\"]);\n const { enableSso, uploadXmlUrl, isLoadingXml, uploadByUrl, uploadXml } =\n props;\n const [isValidXmlUrl, setIsValidXmlUrl] = useState(true);",
+      "line_number": 144,
+      "context": "return (\n <FieldContainer\n className=\"xml-input\"\n errorMessage=\"Error text. Lorem ipsum dolor sit amet, consectetuer adipiscing elit\"\n isVertical\n labelText={t(\"UploadXML\")}\n >\n <StyledWrapper>\n <div className=\"upload-input\">\n <SsoTextInput\n className=\"upload-xml-input\"",
       "module": "/packages/client"
     }
   ],
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation omits the word 'metadata' (البيانات الوصفية), translating it simply as 'data' (البيانات), which changes the technical meaning.",
-          "suggestion": "تحميل البيانات الوصفية من ملف XML لملء الحقول المطلوبة تلقائيًا."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {

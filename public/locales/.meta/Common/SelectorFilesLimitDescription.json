@@ -3,18 +3,19 @@
   "content": "When uploading a large amount of data, the context may be partially truncated, which can reduce the accuracy of responses. It’s recommended to limit the number of files and their total size.",
   "content_en_sha1_hash": "dce1181ee7a007698739a58027258d8d7383988c",
   "created_at": "2025-11-13T07:57:55.565Z",
-  "updated_at": "2026-04-07T23:42:01.918Z",
+  "updated_at": "2026-04-12T21:44:02.745Z",
   "comment": {
-    "text": "This text explains a limit on the number of files that can be selected for upload. It appears in the file selection interface to inform users that uploading too many files might reduce the quality of responses. Translators should focus on conveying the impact of file limits on response accuracy.",
+    "text": "This is a tooltip description that appears when a user attempts to attach a large number of files to an AI chat, warning about potential truncation and reduced response accuracy.",
     "is_auto": true,
-    "updated_at": "2025-11-13T08:04:06.201Z"
+    "updated_at": "2026-04-11T20:43:32.635Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/chat/components/chat-input/Attachment.tsx",
-      "line_number": 156,
-      "context": "maxSelectedItems={CHAT_MAX_FILE_COUNT}\n infoBarData={{\n title: t(\"Common:SelectorFilesLimit\", { count: CHAT_MAX_FILE_COUNT }),\n icon: AttachmentReactSvgUrl,\n onClose: () => setWithInfo(!withInfo),\n description: t(\"Common:SelectorFilesLimitDescription\"),\n }}\n renderInPortal\n />\n );\n };",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-input/attachment/index.tsx",
+      "line_number": 172,
+      "context": "title: t(\"SelectorFilesLimit\", {\n count: CHAT_MAX_FILE_COUNT,\n }),\n icon: <AttachmentReactSvg />,\n onClose: () => setWithInfo(!withInfo),\n description: t(\"SelectorFilesLimitDescription\"),\n }}\n renderInPortal\n />\n );\n };",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -81,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'բեռնվածելու' is a typo/non-existent word. It should be 'բեռնելիս' or 'բեռնելու'.",
-          "suggestion": "Մեծ քանակությամբ տվյալներ բեռնելիս, համատեքստը կարող է մասամբ կտրվել, ինչը կարող է նվազեցնել արձագանքների ճշտությունը։ Խորհուրդ է տրվում սահմանափակել ֆայլերի քանակը և նրանց ընդհանուր չափը։"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -117,7 +112,15 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Augsneldējot' is not a valid Latvian word. It appears to be a corrupted form of 'Augšupielādējot' (when uploading), making the sentence incomprehensible at the start.",
+          "suggestion": "Augšupielādējot lielu datu apjomu, konteksts var tikt daļēji saīsināts, kas var samazināt atbilžu precizitāti. Ieteicams ierobežot failu skaitu un to kopējo apjomu.",
+          "checked_at": "2026-04-12T21:42:59.140Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "nl": {

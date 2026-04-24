@@ -3,18 +3,19 @@
   "content": "AI would like to use this tool",
   "content_en_sha1_hash": "f77101356e17e7d9ee481ef4ca7e9e8030683af8",
   "created_at": "2025-10-27T16:14:24.307Z",
-  "updated_at": "2026-04-08T17:17:06.862Z",
+  "updated_at": "2026-04-11T20:59:33.755Z",
   "comment": {
-    "text": "This text appears in a confirmation dialog, informing the user that the AI intends to utilize a specific tool. It's a brief explanation of the action being requested before the user confirms or declines the tool usage. Translators should maintain the straightforward, explanatory tone.",
+    "text": "This text appears in a confirmation dialog when the AI assistant requests to use a tool.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:53:20.692Z"
+    "updated_at": "2026-04-11T20:59:33.755Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/message/ToolCallMessage/ToolCallConfirmDialog.tsx",
-      "line_number": 104,
-      "context": ">\n <ModalDialog.Header>{t(\"Common:Confirmation\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.toolCallManage}>\n <Text>{t(\"Common:AIWouldLikeToUseThisTool\")}</Text>\n <ToolCall\n content={content}\n status={ToolCallStatus.Confirmation}\n placement={ToolCallPlacement.ConfirmDialog}\n />",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/ToolCallMessage/tool-call-confirm-dialog/index.tsx",
+      "line_number": 111,
+      "context": "{t(\"Confirmation\")}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.toolCallManage}>\n <Text>{t(\"AIWouldLikeToUseThisTool\")}</Text>\n <ToolCall\n content={content}\n status={ToolCallStatus.Confirmation}\n placement={ToolCallPlacement.ConfirmDialog}\n />",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -159,13 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation contains a grammatical error in verb conjugation ('by sa rada použi' is incorrect; it should be 'by chcela použiť' or 'by sa chcela použiť'). The current form 'použi' is an imperative or incorrect conjugation that breaks the meaning of 'would like to use'.",
-          "suggestion": "AI by chcela použiť tento nástroj"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {

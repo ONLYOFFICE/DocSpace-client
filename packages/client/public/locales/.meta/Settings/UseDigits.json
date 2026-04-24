@@ -3,17 +3,18 @@
   "content": "Use digits",
   "content_en_sha1_hash": "6477de469e3182a8015fec35ea60e36684b88d3e",
   "created_at": "2025-05-19T21:30:53.085Z",
-  "updated_at": "2026-04-09T00:05:18.034Z",
+  "updated_at": "2026-04-13T14:59:05.899Z",
   "comment": {
-    "text": "\"Password strength setting: This text informs users about the requirement to use digits in their password. It is likely displayed on a form or settings page where users can adjust their password requirements.\"",
+    "text": "This is a checkbox label in the password strength settings, allowing users to require digits in their passwords.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:11.573Z"
+    "updated_at": "2026-04-11T21:21:30.449Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/passwordStrength.js",
-      "line_number": 70,
-      "context": "const navigate = useNavigate();\n const location = useLocation();\n \n const [passwordLen, setPasswordLen] = useState(8);\n const [useUpperCase, setUseUpperCase] = useState(false);\n const [useDigits, setUseDigits] = useState(false);\n const [useSpecialSymbols, setUseSpecialSymbols] = useState(false);\n \n const [showReminder, setShowReminder] = useState(false);\n const [isLoaded, setIsLoaded] = useState(false);\n const [isSaving, setIsSaving] = useState(false);",
+      "line_number": 298,
+      "context": "dataTestId=\"password_strength_upper_case\"\n />\n <Checkbox\n className={`use-digits ${styles.secondCheckbox}`}\n onChange={onClickCheckbox}\n label={t(\"UseDigits\")}\n isChecked={useDigits}\n value=\"digits\"\n dataTestId=\"password_strength_digits\"\n />\n <Checkbox",
       "module": "/packages/client"
     }
   ],
@@ -93,13 +94,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation '桁を使用' means 'Use digits/places' in a sense of numerical positions or decimal places, which is unnatural for a password requirement. In the context of password settings, 'digits' refers to numbers (0-9).",
-          "suggestion": "数字を使用"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {

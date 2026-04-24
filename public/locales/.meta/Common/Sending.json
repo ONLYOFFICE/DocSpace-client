@@ -3,13 +3,20 @@
   "content": "Sending...",
   "content_en_sha1_hash": "c338c191ab1e9319ba354d56467b938e0ba4e119",
   "created_at": "2025-05-19T21:30:48.541Z",
-  "updated_at": "2026-04-10T08:21:04.364Z",
+  "updated_at": "2026-04-23T17:24:02.037Z",
   "comment": {
-    "text": "\"This translation key is used to display a progress indicator when sending a request or data. It appears as a label on buttons in various UI elements, such as a modal dialog footer and a sales department request dialog. Translators should ensure that this phrase conveys the same sense of progress and anticipation in different languages.\"",
+    "text": "This is the label for a button that appears while an action, such as sending a request or enabling a service, is in progress.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:41:52.139Z"
+    "updated_at": "2026-04-11T20:43:22.225Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
+      "line_number": 250,
+      "context": "</FieldContainer>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"send-button\"\n label={isLoading ? t(\"Sending\") : t(\"SendButton\")}\n size={ButtonSize.normal}\n primary\n onClick={onSendRequest}\n isLoading={isLoading}\n isDisabled={isLoading}",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/sub-components/consumerModalDialog.js",
       "line_number": 319,
@@ -18,7 +25,7 @@
     },
     {
       "file_path": "/packages/login/src/components/Register/sub-components/RegisterModalDialog.tsx",
-      "line_number": 141,
+      "line_number": 144,
       "context": "<ModalDialog.Footer>\n <Button\n id=\"registration-modal_send\"\n className=\"modal-dialog-button\"\n key=\"RegisterSendBtn\"\n label={loading ? t(\"Common:Sending\") : t(\"Common:SendRequest\")}\n size={ButtonSize.normal}\n scale={false}\n primary\n onClick={onSendRegisterRequest}\n isLoading={loading}",
       "module": "/packages/login"
     },
@@ -123,13 +130,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian word 'Sūta' is a form of the verb 'sūtīt' (to send), but in this context (a progress indicator), it is grammatically incorrect. It should be a present participle or a continuous form to convey 'Sending...'. 'Sūta' is more akin to 'sent' or a specific conjugation that doesn't function as a status label.",
-          "suggestion": "Sūtpšana..."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {

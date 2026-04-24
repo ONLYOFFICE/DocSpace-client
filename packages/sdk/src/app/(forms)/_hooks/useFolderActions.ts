@@ -57,12 +57,14 @@ export type UploadProgress = {
 
 export default function useFolderActions(
   externalFetchSection?: FormsDataApi["fetchSection"],
+  externalRefreshAfterMutation?: FormsDataApi["refreshAfterMutation"],
 ) {
   const { t } = useTranslation(["Common"]);
   const formsSettingsStore = useFormsSettingsStore();
   const pathname = usePathname();
   const activeSection = sectionFromPathname(pathname);
   const fetchSection = externalFetchSection!;
+  const refreshAfterMutation = externalRefreshAfterMutation ?? fetchSection;
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [uploadProgress, setUploadProgress] = useState<UploadProgress | null>(
     null,
@@ -161,7 +163,7 @@ export default function useFolderActions(
           setUploadProgress(null);
         }, COMPLETED_HIDE_DELAY);
 
-        await fetchSection(activeSection);
+        await refreshAfterMutation(activeSection);
       } catch (error) {
         setUploadProgress({ percent: 100, completed: false, alert: true });
         hideTimerRef.current = setTimeout(() => {
@@ -172,7 +174,7 @@ export default function useFolderActions(
         throw error;
       }
     },
-    [getFolderId, formsSettingsStore, fetchSection, activeSection, t],
+    [getFolderId, formsSettingsStore, refreshAfterMutation, activeSection, t],
   );
 
   const onUploadFiles = useCallback(() => {
@@ -219,14 +221,14 @@ export default function useFolderActions(
       try {
         await createFile(+folderId, `${name}.pdf`);
         setIsCreateFormDialogVisible(false);
-        await fetchSection(activeSection);
+        await refreshAfterMutation(activeSection);
       } catch (error) {
         toastr.error(error as string);
       } finally {
         setIsCreatingForm(false);
       }
     },
-    [getFolderId, fetchSection, activeSection, t],
+    [getFolderId, refreshAfterMutation, activeSection, t],
   );
 
   return {

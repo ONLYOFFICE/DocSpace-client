@@ -1,7 +1,7 @@
 {
   "ChangesToTag": "Zmiany w tym tagu wpłyną na wszystkie pomieszczenia, w których jest używany.",
   "DeleteTag": "Usuń tag",
-  "DeleteTagCannotBeUndone": "To akcję nie można cofnąć.",
+  "DeleteTagCannotBeUndone": "Tę akcję można nie cofnąć. (Wait, no) -> Tej akcji nie można cofnąć.",
   "DeleteTagConfirmation": "Usunięcie tego tagu usunie go ze wszystkich pomieszczeń, w których jest używany.",
   "EditTag": "Edytuj tag",
   "RemoveTag": "<1>{{tag}}</1> tag usunięty."

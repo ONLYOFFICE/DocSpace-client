@@ -3,16 +3,17 @@
   "content": "Select the Nextcloud backup file to start the data import. Only one file can be selected. Once the data upload and analysis are complete, the next step will be initiated automatically.",
   "content_en_sha1_hash": "fc06e392d6c5103ceb16fdfcca11cd91b7a9faac",
   "created_at": "2025-05-19T21:30:52.528Z",
-  "updated_at": "2026-04-09T01:33:33.626Z",
+  "updated_at": "2026-04-11T21:22:26.342Z",
   "comment": {
-    "text": "\"This text is used to describe the selection process for Nextcloud backup files during data import in a step-by-step interface.\"",
+    "text": "This is the description text for the \"Select File\" step in the Nextcloud data import wizard. It instructs the user to choose a single Nextcloud backup file for import and explains that the next step will proceed automatically after upload and analysis.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:33.984Z"
+    "updated_at": "2026-04-11T21:22:26.342Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 49,
+      "line_number": 50,
       "context": "logoText: string,\n ) => {\n return [\n {\n title: t(\"Common:SelectFile\"),\n description: t(\"Settings:SelectFileDescriptionNextcloud\"),\n component: (\n <SelectFileStep\n t={t}\n isMultipleUpload={false}\n migratorName=\"Nextcloud\"",
       "module": "/packages/client"
     }
@@ -69,25 +70,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The sentence 'Only one file can be selected.' is completely missing from the Finnish translation.",
-          "suggestion": "Valitse Nextcloud-varmuuskopiotiedosto aloittaaksesi tietojen tuonnin. Vain yksi tiedosto voidaan valita. Seuraava vaihe aloitetaan automaattisesti, kun tietojen lataus ja analysointi on tehty."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The French translation uses the plural 'les fichier' (which is also grammatically incorrect as 'fichier' is singular) whereas the English text specifies 'the Nextcloud backup file' (singular). While the second sentence clarifies only one file can be selected, the first sentence should ideally reflect the singular intent to match the English 'file'. More critically, 'l'étape suivante est lancé' contains a gender agreement error (étape is feminine, should be 'lancée'), but per instructions, I am focusing on the meaning/logic error regarding the file selection instruction.",
-          "suggestion": "Sélectionnez le fichier de sauvegarde Nextcloud pour lancer l'importation. Il est possible de sélectionner un seul fichier. Une fois le téléchargement et l'analyse de données terminés, l'étape suivante sera lancée automatiquement."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -153,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text specifies 'Select the Nextcloud backup file' (singular), but the Romanian translation uses 'Selectați fișierele de rezervă' (plural), which contradicts the subsequent sentence 'Only one file can be selected'.",
-          "suggestion": "Selectați fișierul de rezervă Nextcloud pentru a demara importul de date. Puteți selecta doar un fișier. Odată ce încărcarea și analiza datelor sunt finalizate, următoarea etapă va fi inițiată automat."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -207,13 +190,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation states that multiple files can be selected ('Можна вибрати декілька файлів'), which directly contradicts the English source ('Only one file can be selected') and the technical context (isMultipleUpload={false}).",
-          "suggestion": "Виберіть файл резервної копії Nextcloud, щоб почати імпорт даних. Можна вибрати лише один файл. Після завершення вивантаження й аналізу даних наступний крок буде розпочато автоматично."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

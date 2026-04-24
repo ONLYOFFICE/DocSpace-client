@@ -1,4 +1,5 @@
 {
+  "ActionsWithFilesDescription": "ປ້າຍຈະເນັ້ນກິດຈະກໍາຂອງໄຟລ໌ — ການອັບໂຫຼດ, ການແກ້ໄຂ, ຫຼື ການແບ່ງປັນ — ໃນພາກສ່ວນ {{rooms}}, {{shared}}, {{documents}}, ແລະ {{aiAgents}}.",
   "AdminSetupRequired": "ຕ້ອງຕັ້ງຄ່າຜູ້ເບິ່ງແຍງລະບົບ",
   "Badges": "ປ້າຍ",
   "DailyFeed": "ຟີດ {{productName}} ປະຈໍາວັນ",
@@ -8,12 +9,11 @@
   "LdapEmailTooltip": "ບັນຊີຜູ້ໃຊ້ນີ້ຖືກໂຫລດມາຈາກ LDAP. ທີ່ຢູ່ອີເມວຂອງຜູ້ໃຊ້ບໍ່ໄດ້ລະບຸ, ແລະອັນປັດຈຸບັນແມ່ນຖືກສ້າງຂຶ້ນໂດຍອັດຕະໂນມັດ ແລະບໍ່ສາມາດໃຊ້ເພື່ອສົ່ງການແຈ້ງເຕືອນໄດ້.",
   "NotConfigured": "ບໍ່ໄດ້ຕັ້ງຄ່າ",
   "Notifications": "ການແຈ້ງເຕືອນ",
+  "RoomsActivityDescription": "ຮັບການແຈ້ງເຕືອນທາງອີເມວທັນທີກ່ຽວກັບໄຟລ໌/ໂຟນເດີທີ່ແບ່ງປັນໃໝ່ ແລະກິດຈະກໍາພາຍໃນ {{rooms}} ແລະ {{aiAgents}} ຂອງທ່ານ.",
+  "RoomUpdateNotify": "ເນື້ອຫາທີ່ແບ່ງປັນ, ກິດຈະກໍາຂອງ {{rooms}} ແລະ {{aiAgents}}",
   "SettingUpNotifications": "ການ​ຕັ້ງ​ຄ່າ​ການ​ແຈ້ງ​ເຕືອນ",
   "SuccessConnected": "{{serviceName}} ໄດ້ຖືກເຊື່ອມຕໍ່ສຳເລັດເປັນຊ່ອງການແຈ້ງເຕືອນແລ້ວ. ໃນປັດຈຸບັນທ່ານຈະໄດ້ຮັບການປັບປຸງຢູ່ທີ່ນັ້ນ.",
   "SuccessDisconnected": "{{serviceName}} ຖືກຕັດການເຊື່ອມຕໍ່ເປັນຊ່ອງທາງການແຈ້ງເຕືອນສຳເລັດແລ້ວ. ການແຈ້ງເຕືອນຈະບໍ່ຖືກສົ່ງໄປບ່ອນນັ້ນອີກຕໍ່ໄປ.",
   "UsefulTips": "ຄໍາແນະນໍາ {{productName}} ທີ່ເປັນປະໂຫຍດ",
-  "UsefulTipsDescription": "ຂໍຄຳແນະນຳທີ່ເປັນປະໂຫຍດກ່ຽວກັບ {{productName}}",
-  "ActionsWithFilesDescription": "ປ້າຍຈະເນັ້ນກິດຈະກໍາຂອງໄຟລ໌ — ການອັບໂຫຼດ, ການແກ້ໄຂ, ຫຼື ການແບ່ງປັນ — ໃນພາກສ່ວນ {{rooms}}, {{shared}}, {{documents}}, ແລະ {{aiAgents}}.",
-  "RoomsActivityDescription": "ຮັບການແຈ້ງເຕືອນທາງອີເມວທັນທີກ່ຽວກັບໄຟລ໌/ໂຟນເດີທີ່ແບ່ງປັນໃໝ່ ແລະກິດຈະກໍາພາຍໃນ {{rooms}} ແລະ {{aiAgents}} ຂອງທ່ານ.",
-  "RoomUpdateNotify": "ເນື້ອຫາທີ່ແບ່ງປັນ, ກິດຈະກໍາຂອງ {{rooms}} ແລະ {{aiAgents}}"
+  "UsefulTipsDescription": "ຂໍຄຳແນະນຳທີ່ເປັນປະໂຫຍດກ່ຽວກັບ {{productName}}"
 }

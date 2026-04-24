@@ -3,18 +3,19 @@
   "content": "Select the agent where you want to chat with AI about the selected file. You can pick an existing agent.",
   "content_en_sha1_hash": "d501d9f264fdff39ef143d4e36f2c7ad9a8d514c",
   "created_at": "2025-11-17T11:52:13.064Z",
-  "updated_at": "2026-04-08T15:35:52.613Z",
+  "updated_at": "2026-04-11T20:57:20.053Z",
   "comment": {
-    "text": "This text appears in an info bar within the UI, prompting the user to choose an AI agent to interact with a selected file. It explains that users can select an existing agent for conversation. The purpose is to guide the user in selecting the appropriate agent for AI-powered file interaction.",
+    "text": "This is a description for a tooltip or information icon. It explains how to select an AI agent for chatting about a file, and that existing agents can be chosen.",
     "is_auto": true,
-    "updated_at": "2025-11-17T11:53:32.736Z"
+    "updated_at": "2026-04-11T20:57:20.053Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/selectors/AIAgent/index.tsx",
-      "line_number": 290,
-      "context": "title: t(\"Common:ChooseAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n }),\n icon: InfoIconSvgUrl,\n onClose: () => setWithInfo(!withInfo),\n description: t(\"Common:ChooseAIAgentDescription\"),\n }}\n hideBackButton\n />\n );\n };",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/selectors/AIAgent/index.tsx",
+      "line_number": 294,
+      "context": "title: t(\"ChooseAIAgent\", {\n aiAgent: t(\"AIAgent\"),\n }),\n icon: <InfoIconSvgUrl />,\n onClose: () => setWithInfo(!withInfo),\n description: t(\"ChooseAIAgentDescription\"),\n }}\n hideBackButton\n />\n );\n };",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -27,37 +28,19 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Spanish translation adds information ('o crear uno nuevo') that is not present in the English source text.",
-          "suggestion": "Seleccione el agente con el que desea chatear con la IA sobre el archivo seleccionado. Puede elegir un agente existente."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Armenian translation adds information not present in the English source ('կամ ստեղծել նորը' / 'or create a new one'). While helpful, it deviates from the source text provided.",
-          "suggestion": "Ընտրեք այն գործակալին, որի հետ ցանկանում եք զրուցել ԱԲ-ի հետ ընտրված ֆայլի վերաբերյալ: Կարող եք ընտրել առկա գործակալը:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Japanese translation adds information not present in the English source ('or create a new agent'), which may lead to UI inconsistency if the 'create' functionality is not actually available in this specific context.",
-          "suggestion": "選択したファイルについてAIとチャットしたいエージェントを選択してください。既存のエージェントを選択できます。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ar-SA": {
@@ -111,13 +94,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Italian translation adds information ('o crearne uno nuovo' / 'or create a new one') that is not present in the source English text.",
-          "suggestion": "Seleziona l'agente con cui desideri chattare con l'AI riguardo al file selezionato. Puoi scegliere un agente esistente."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -189,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical error in gender agreement: 'izbranem datoteko' is incorrect. 'Datoteka' is a feminine noun, so it should be 'izbrano datoteko'.",
-          "suggestion": "Izberite agenta, kjer želite klepetati z umetno inteligenco o izbrani datoteki. Lahko izberete obstoječega agenta."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

@@ -3,11 +3,12 @@
   "content": "Display notification when moving items to {{sectionName}}",
   "content_en_sha1_hash": "b42767b732c4005a1996d81998ef7f3c1c631f8c",
   "created_at": "2026-04-03T21:51:34.707Z",
-  "updated_at": "2026-04-07T21:09:31.240Z",
+  "updated_at": "2026-04-12T14:18:36.921Z",
   "comment": {
-    "text": "This text serves as a label for a toggle switch in the file management settings. It indicates whether a notification will be displayed when items are moved to the Trash section ({{sectionName}}).",
+    "text": "This is a label for a toggle switch in user settings. It controls whether a notification appears when files are moved to the trash. `{{sectionName}}` will always be \"Trash\".",
     "is_auto": true,
-    "updated_at": "2026-04-03T21:52:35.909Z"
+    "updated_at": "2026-04-11T20:40:26.127Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -15,6 +16,12 @@
       "line_number": 152,
       "context": "onChange={onChangeDeleteConfirm}\n isChecked={confirmDelete}\n dataTestId=\"display_notification_toggle_button\"\n />\n <Text>\n {t(\"Common:TrashMoveConfirmation\", {\n sectionName: t(\"Common:TrashSection\"),\n })}\n </Text>\n </div>",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/settings/category/FileManagement.tsx",
+      "line_number": 142,
+      "context": "className={styles.toggleBtn}\n onChange={onChangeDeleteConfirm}\n isChecked={settings.confirmDelete}\n />\n <Text>\n {t(\"TrashMoveConfirmation\", {\n sectionName: t(\"Common:TrashSection\"),\n })}\n </Text>\n </div>",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

@@ -35,6 +35,7 @@ import PortalDeletionSection from "./portalDeletion";
 import DeleteDataLoader from "./DeleteDataLoader";
 import config from "../../../../../package.json";
 import useDeleteData from "./useDeleteData";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const DeleteData = (props) => {
   const {
@@ -59,7 +60,7 @@ const DeleteData = (props) => {
   const data = [
     {
       id: "deletion",
-      name: t("Common:DeletePortal", { productName: t("Common:ProductName") }),
+      name: t("Common:DeletePortal", { productName: getBrandName("ProductName") }),
       content: <PortalDeletionSection stripeUrl={stripeUrl} />,
       onClick: async () => {
         clearAbortControllerArr();
@@ -68,7 +69,7 @@ const DeleteData = (props) => {
     },
     {
       id: "deactivation",
-      name: t("PortalDeactivation", { productName: t("Common:ProductName") }),
+      name: t("PortalDeactivation", { productName: getBrandName("ProductName") }),
       content: <PortalDeactivationSection />,
       onClick: async () => {
         clearAbortControllerArr();

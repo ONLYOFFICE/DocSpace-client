@@ -3,16 +3,17 @@
   "content": "By clicking \"Disable my account\" you agree with our <1>Privacy policy.</1>",
   "content_en_sha1_hash": "9a8408d029b9d65fcd00960edd1f41137c81c3ef",
   "created_at": "2025-05-19T21:30:57.348Z",
-  "updated_at": "2026-04-07T19:35:05.243Z",
+  "updated_at": "2026-04-11T21:30:26.776Z",
   "comment": {
-    "text": "This translation key is used to display a message related to the user's agreement with privacy policy when disabling their account. It appears in a UI element where users are confirming the deletion of their profile.",
+    "text": "This is a confirmation message displayed when a user is about to disable their account. It informs them that by proceeding, they agree to the linked Privacy Policy.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:47:30.211Z"
+    "updated_at": "2026-04-11T21:30:26.776Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/ProfileRemove/page.client.tsx",
-      "line_number": 170,
+      "line_number": 171,
       "context": "</Text>\n </div>\n </div>\n \n <Text>\n <Trans i18nKey=\"DeleteProfileConfirmationInfo\" ns=\"Confirm\" t={t}>\n By clicking &quot;Disable my account&quot; you agree with our\n Privacy policy\n <Link\n type={LinkType.page}\n href={legalTerms}",
       "module": "/packages/login"
     }

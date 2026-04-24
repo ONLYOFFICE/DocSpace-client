@@ -3,16 +3,17 @@
   "content": "Height",
   "content_en_sha1_hash": "3f608b4935ead643d43b2642dc4ec863d170aa1d",
   "created_at": "2025-05-19T21:30:56.586Z",
-  "updated_at": "2026-04-07T19:35:05.068Z",
+  "updated_at": "2026-04-11T21:06:22.850Z",
   "comment": {
-    "text": "This translation key is used to display the label \"Height\" on a UI element in the Portal Settings categories. It is typically displayed as part of a form or settings panel where users can input or select height values. The exact appearance and context may vary depending on its usage location, such as within a dropdown menu or text field.",
+    "text": "This is a label for an input field where users can specify the height of an embedded object or a UI element.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:36.272Z"
+    "updated_at": "2026-04-11T21:06:22.850Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 498,
+      "line_number": 499,
       "context": "onInputChange={onChangeWidth}\n selectedOption={widthDimension}\n onSelectDimension={onChangeWidthDimension}\n />\n <DisplayBlock\n label={t(\"EmbeddingPanel:Height\")}\n inputValue={heightValue}\n onInputChange={onChangeHeight}\n selectedOption={heightDimension}\n onSelectDimension={onChangeHeightDimension}\n />",
       "module": "/packages/client"
     },

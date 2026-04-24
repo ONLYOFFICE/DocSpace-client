@@ -32,6 +32,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 import {
   createWebhook,
   getAllWebhooks,
+  getWebhookTriggers,
   getWebhooksJournal,
   removeWebhook,
   toggleEnabledWebhook,
@@ -42,6 +43,8 @@ class WebhooksStore {
   settingsStore;
 
   webhooks = [];
+
+  webhookTriggers = [];
 
   checkedEventIds = [];
 
@@ -81,6 +84,13 @@ class WebhooksStore {
 
   setCurrentWebhook = (webhook) => {
     this.currentWebhook = webhook;
+  };
+
+  loadWebhookTriggers = async () => {
+    const triggers = await getWebhookTriggers();
+    runInAction(() => {
+      this.webhookTriggers = triggers;
+    });
   };
 
   loadWebhooks = async () => {

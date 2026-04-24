@@ -3,17 +3,18 @@
   "content": "Only the latest activity is shown on this page. The data itself is stored during the period specified in the field below (max 180 days).",
   "content_en_sha1_hash": "22d2d2fe430d24da6673ccd96d307465d5dd1671",
   "created_at": "2025-05-19T21:30:51.835Z",
-  "updated_at": "2026-04-09T02:28:20.324Z",
+  "updated_at": "2026-04-12T07:14:23.218Z",
   "comment": {
-    "text": "This translation key is used for a text that describes the functionality and limitations of an audit trail or login history feature in a portal settings page. It explains what data is displayed (latest activity) and how it is stored (for up to 180 days).",
+    "text": "This is a descriptive text displayed on the Audit Trail and Login History settings pages. It informs the user that only recent activity is shown, and the full data retention period is configurable.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:58.777Z"
+    "updated_at": "2026-04-11T21:23:25.011Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/index.js",
-      "line_number": 107,
-      "context": "<HistoryMainContent\n t={t}\n subHeader={t(\"AuditSubheader\", {\n productName: t(\"Common:ProductName\"),\n })}\n latestText={t(\"LoginLatestText\")}\n storagePeriod={t(\"StoragePeriod\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n securityLifetime={securityLifetime}\n lifetime={securityLifetime.auditTrailLifeTime}",
+      "line_number": 108,
+      "context": "<HistoryMainContent\n t={t}\n subHeader={t(\"AuditSubheader\", {\n productName: getBrandName(\"ProductName\"),\n })}\n latestText={t(\"LoginLatestText\")}\n storagePeriod={t(\"StoragePeriod\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n securityLifetime={securityLifetime}\n lifetime={securityLifetime.auditTrailLifeTime}",
       "module": "/packages/client"
     },
     {
@@ -57,18 +58,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "punctuation_mismatch",
-          "description": "English ends with \".\" but translation ends with \":\"",
-          "suggestion": ""
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation changes the meaning of the second sentence. The English says data is stored for a period specified in the field, whereas the German says the period is 'what can be entered in the following field', which implies a user input action rather than a description of the storage duration logic.",
-          "suggestion": "Nur die letzte Aktivität wird auf dieser Seite angezeigt. Die Daten selbst werden für den im folgenden Feld angegebenen Zeitraum gespeichert (maximal 180 Tage)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -80,13 +70,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'indicarado' is a typo/incorrect form of 'indicado'. Additionally, 'se demuestra' is a poor choice for 'is shown' in this technical context (it implies 'is demonstrated' rather than 'is displayed').",
-          "suggestion": "En esta página solo se muestra la actividad más reciente. Los propios datos se almacenan durante el periodo indicado en el campo de abajo (180 días como máximo)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -102,7 +86,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \")\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-11T21:48:46.916Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null
@@ -120,7 +106,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \":\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-11T21:48:49.572Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null
@@ -128,13 +116,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation incorrectly states that data is stored 'during the period entered in the field below' (入力される期間中), whereas the English text states data is stored 'during the period specified in the field below' (specified/set, not entered by the user). Additionally, the Japanese phrasing implies the user inputs the period, which contradicts the context of a system-defined storage limit.",
-          "suggestion": "このページには最新のアクティビティのみが表示されます。データ自体は、以下のフィールドで指定された期間（最大180日間）保存されます。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -188,13 +170,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Typo in the word 'отображаюся' (should be 'отображаются'), which is a grammatical error in the verb conjugation.",
-          "suggestion": "На этой странице отображаются только последние действия. Сами данные хранятся в течение периода, указанного в поле ниже (максимум 180 дней)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -248,13 +224,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation incorrectly implies that the user 'can input' the field, whereas the English text states that the data is stored 'during the period specified in the field below'. The Chinese version changes the meaning from a description of data retention to an instruction on how to use the input field.",
-          "suggestion": "此页仅显示最新活动。数据本身将根据下方字段指定的期限进行存储（最多 180 天）。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

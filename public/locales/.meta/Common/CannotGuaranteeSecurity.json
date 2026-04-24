@@ -3,18 +3,25 @@
   "content": "We cannot guarantee the security or privacy practices of third-party integrations.",
   "content_en_sha1_hash": "d3c2f84b2b8fe198f9c7f4504bc2214216a1bbe6",
   "created_at": "2025-10-27T16:14:24.293Z",
-  "updated_at": "2026-04-08T15:46:05.758Z",
+  "updated_at": "2026-04-11T20:57:34.572Z",
   "comment": {
-    "text": "This text appears in a confirmation dialog for tool calls. It informs the user that the platform cannot guarantee the security practices of the integrated third-party tool, providing a disclaimer related to data shared with that tool. It's crucial for translators to convey this limitation of responsibility.",
+    "text": "This is a warning message displayed in a confirmation dialog when a user is about to interact with a third-party integration, informing them that ONLYOFFICE cannot assure the security or privacy of that external service.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:48:26.451Z"
+    "updated_at": "2026-04-11T20:57:34.572Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/message/ToolCallMessage/ToolCallConfirmDialog.tsx",
-      "line_number": 112,
-      "context": "status={ToolCallStatus.Confirmation}\n placement={ToolCallPlacement.ConfirmDialog}\n />\n <div>\n <Text>{t(\"Common:ReviewAction\")}</Text>\n <Text>{t(\"Common:CannotGuaranteeSecurity\")}</Text>\n </div>\n </div>\n </ModalDialog.Body>\n \n <ModalDialog.Footer>",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/ToolCallMessage/open-file-confirm-dialog/index.tsx",
+      "line_number": 99,
+      "context": "status={ToolCallStatus.Finished}\n placement={ToolCallPlacement.Message}\n />\n <div>\n <Text>{t(\"ReviewAction\")}</Text>\n <Text>{t(\"CannotGuaranteeSecurity\")}</Text>\n </div>\n </div>\n </ModalDialog.Body>\n \n <ModalDialog.Footer>",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/ToolCallMessage/tool-call-confirm-dialog/index.tsx",
+      "line_number": 119,
+      "context": "status={ToolCallStatus.Confirmation}\n placement={ToolCallPlacement.ConfirmDialog}\n />\n <div>\n <Text>{t(\"ReviewAction\")}</Text>\n <Text>{t(\"CannotGuaranteeSecurity\")}</Text>\n </div>\n </div>\n </ModalDialog.Body>\n \n <ModalDialog.Footer>",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -33,13 +40,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation uses 'naminə' (for the sake of/on behalf of), which changes the meaning to 'We cannot guarantee security... for the sake of third-party integrations'. The original English is a disclaimer stating that the platform cannot guarantee the practices themselves.",
-          "suggestion": "Üçüncü tərəf inteqrasiyalarının təhlükəsizliyinə və ya məxfilik təcrübələrinə zəmanət verə bilmərik."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -105,13 +106,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'third-party integrations' was translated as '셋방 통합'. '셋방' means 'a rented room' in Korean, which is a complete mistranslation of 'third-party'. The correct term should be '제3자' or '외부'.",
-          "suggestion": "제3자 통합의 보안 또는 개인 정보 보호 정책을 보장할 수 없습니다."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -153,13 +148,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'integrălilor' is a mathematical term (integrals) and is used incorrectly here. The correct term for 'integrations' in this context is 'integrări'. Additionally, 'conformitatea politicii' (policy compliance) changes the meaning from 'security or privacy practices' (practicile de securitate sau confidențialitate).",
-          "suggestion": "Nu putem garanta practicile de securitate sau de confidențialitate ale integrărilor terțe."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -201,13 +190,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'praksu privatnosti' is grammatically incorrect and semantically awkward in Serbian. It translates literally to 'the practice of privacy' instead of 'privacy practices' (praksama privatnosti).",
-          "suggestion": "Ne možemo garantovati bezbednost ili prakse privatnosti integracija trećih strana."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

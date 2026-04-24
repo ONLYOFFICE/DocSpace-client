@@ -3,13 +3,21 @@
   "content": "This item will be permanently deleted. Are you sure?",
   "content_en_sha1_hash": "bc9b11f940706f51e5a6fa996be78b0f399ba112",
   "created_at": "2026-04-03T21:51:27.561Z",
-  "updated_at": "2026-04-08T12:20:04.764Z",
+  "updated_at": "2026-04-11T20:55:21.110Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a confirmation message displayed in a dialog when a user attempts to permanently delete a single item from the trash.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:55:21.110Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/delete-dialog/index.tsx",
+      "line_number": 57,
+      "context": "}: DeleteDialogProps) => {\n const { t } = useTranslation([\"Common\"]);\n \n const message = isTrash\n ? itemCount === 1\n ? t(\"Common:DeleteItemForever\")\n : t(\"Common:DeleteItemsForever\", { itemCount })\n : itemCount === 1\n ? t(\"Common:MoveToTrashItem\")\n : t(\"Common:MoveToTrashItems\", { itemCount });",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -38,13 +46,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical gender mismatch: 'Tento položka' is incorrect; 'položka' is feminine, so it should be 'Tato položka'. Additionally, 'smazán' is masculine, but must be 'smazána' to match the feminine noun.",
-          "suggestion": "Tato položka bude trvale smazána. Jste si jisti?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -158,13 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical gender mismatch: 'položka' is feminine, but the adjectives 'tento' (masculine) and 'odstránený' (masculine) are used. This changes the grammatical correctness significantly in Slovak.",
-          "suggestion": "Táto položka bude trvalo odstránená. Ste si istí?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -182,13 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ећи ће бити' is grammatically nonsensical and contains a typo/extra word, making the sentence incorrect.",
-          "suggestion": "Овај став ће бити трајно обрисан. Да ли сте сигурни?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

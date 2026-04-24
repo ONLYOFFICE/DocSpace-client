@@ -3,13 +3,21 @@
   "content": "Price per GB",
   "content_en_sha1_hash": "f4dec55c03402f56571dd35aa4ebca31e6bf33d8",
   "created_at": "2026-04-10T13:53:45.601Z",
-  "updated_at": "2026-04-10T13:53:45.601Z",
+  "updated_at": "2026-04-12T03:51:43.525Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label in the order summary for additional storage. It indicates the cost for each gigabyte of storage.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:45:56.332Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
+      "line_number": 218,
+      "context": "</Text>\n </div>\n ) : null}\n <div className={styles.summaryRow}>\n <Text fontSize=\"14px\" className={styles.rowLabel}>\n {t(\"PricePerGB\")}\n </Text>\n <Text fontWeight=\"600\" fontSize=\"14px\" className={styles.rowValue}>\n {formatWalletCurrency(storagePriceIncrement, 2)}\n </Text>\n </div>",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,29 +3,30 @@
   "content": "Services",
   "content_en_sha1_hash": "5cbd584046863bc7b753e57e8681a98a87f36f0f",
   "created_at": "2025-06-03T20:59:25.520Z",
-  "updated_at": "2026-04-10T13:53:52.463Z",
+  "updated_at": "2026-04-23T17:24:01.913Z",
   "comment": {
-    "text": "The translation key \"Services\" is used to display the label for a section or category related to services in a UI setting. It appears as part of a settings tree structure and is likely used on a page that allows users to manage or configure their services. The exact location may vary, but it is commonly found on pages related to portal settings or configurations.",
+    "text": "This is a tab label in the portal settings, referring to various services available within the application.",
     "is_auto": true,
-    "updated_at": "2025-06-03T21:01:07.200Z"
+    "updated_at": "2026-04-11T21:22:16.657Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/index.js",
-      "line_number": 106,
-      "context": "clearAbortControllerArr();\n },\n },\n {\n id: \"services\",\n name: t(\"Settings:Services\"),\n content: <ServicesList getAIConfig={getAIConfig} />,\n onClick: () => {\n clearAbortControllerArr();\n },\n },",
+      "line_number": 110,
+      "context": "clearAbortControllerArr();\n },\n },\n !isNotPaidPeriod && {\n id: \"services\",\n name: t(\"Settings:Services\"),\n content: <ServicesList getAIConfig={getAIConfig} />,\n onClick: () => {\n clearAbortControllerArr();\n },\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 63,
-      "context": "isCommunity,\n currentDeviceType,\n isProfileLoading,\n currentColorScheme,\n baseDomain,\n aiServicesEnabled,\n } = props;\n \n const [selectedKeys, setSelectedKeys] = React.useState([]);\n \n const prevLocation = React.useRef(null);",
+      "line_number": 235,
+      "context": "return \"Common:FreeAccessToLicensedVersion\";\n case \"DataImport\":\n return t(\"DataImport\");\n case \"StorageManagement\":\n return t(\"StorageManagement\");\n case \"Services\":\n return t(\"Services\");\n case \"AISettings\":\n return t(\"Settings:AISettings\");\n default:\n throw new Error(\"Unexpected translation key\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 100,
-      "context": "{\n id: \"portal-settings_catalog-ai-services-management\",\n key: \"0-0-6\",\n icon: \"\",\n link: \"ai-services-management\",\n tKey: \"AiServicesManagement\",\n },\n ],\n },\n {\n id: \"portal-settings_catalog-branding\",",
+      "line_number": 583,
+      "context": "{\n id: \"portal-settings_catalog-services\",\n key: \"10-3\",\n icon: \"\",\n link: \"services\",\n tKey: \"Services\",\n isCategory: true,\n },\n ],\n },\n {",
       "module": "/packages/client"
     }
   ],
@@ -117,13 +118,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation contains a character error. The word 'ບໍໍລິການ' uses an incorrect combination of characters (possibly a typo or encoding issue with the vowel/tone mark), making it look unnatural or incorrect. The correct spelling for 'Services' is 'ບໍລິການ'.",
-          "suggestion": "ບໍລິການ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -171,13 +166,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'සේවාලාංකෘති' (sevalankruthi) is a technical/neologism term that doesn't accurately represent 'Services' in a standard UI context. It translates more towards 'service-modifications' or 'service-transformations'. The standard, correct term for 'Services' in Sinhala is 'සේවා'.",
-          "suggestion": "සේවා"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

@@ -3,11 +3,12 @@
   "content": "To buy license, click the button below.",
   "content_en_sha1_hash": "6ff3e5f18d12e6aba3cc51048b79a77014459828",
   "created_at": "2025-05-26T07:15:40.054Z",
-  "updated_at": "2026-04-08T18:08:09.219Z",
+  "updated_at": "2026-04-11T21:01:24.026Z",
   "comment": {
-    "text": "This translation key is used for the \"To buy license, click the button below\" text that appears on a purchase page, guiding users to activate their license. It may appear as a button or within a dialog in the UI, prompting users to initiate the licensing process.",
+    "text": "This is a sentence displayed on the payment page, instructing the user to click a button to purchase a license. It appears when a license has expired or when a trial period is active.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:08:58.916Z"
+    "updated_at": "2026-04-11T21:01:24.026Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -2858,7 +2858,7 @@
 								</translations>
 							</concept_node>
 							<concept_node>
-								<name>EnterDomain</name>
+								<name>EnterDomainName</name>
 								<description/>
 								<comment/>
 								<translations>
@@ -2993,7 +2993,7 @@
 								</translations>
 							</concept_node>
 							<concept_node>
-								<name>EnterName</name>
+								<name>EnterSpaceName</name>
 								<description/>
 								<comment/>
 								<translations>

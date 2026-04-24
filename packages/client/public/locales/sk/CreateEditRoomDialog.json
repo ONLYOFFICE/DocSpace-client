@@ -17,8 +17,12 @@
   "FileLifetimeDescription": "Nastavte dobu používania súborov na automatické vymazanie súborov v tejto miestnosti po uplynutí definovaného obdobia. Doba používania sa začína dátumom odoslania/vytvorenia súboru.",
   "FilesOlderThan": "Súbory staršie ako:",
   "FormRoomBarDescription": "Táto miestnosť je dostupná každému, kto má k dispozícii odkaz. Externí používatelia budú mať oprávnenie na vyplnenie pre všetky súbory.",
+  "GoToIntegrations": "Prejsť na integrácie",
   "Horizontal": "Horizontála",
   "Icon": "Ikona",
+  "NeedMoreIntegrations": "Potrebujete viac integrácií?",
+  "NeedMoreIntegrationsDescription": "Použite webhooks na odoslanie údajov do vlastného systému alebo pripojte formuláre k tisícom službami cez Zapier.",
+  "NoDatabaseConnections": "Nie je nakonfigurované žiadne pripojenie k databáze",
   "PeopleSelectorInfo": "Vlastníkom miestnosti sa môže stať iba administrátor miestnosti alebo administrátor priestoru {{productName}}.",
   "Position": "Pozícia",
   "PublicRoomBarDescription": "Táto miestnosť je dostupná každému, kto má odkaz. Prístup pre externých používateľov sa udeľuje v závislosti od zvoleného typu prístupových práv.",
@@ -32,6 +36,8 @@
   "StorageDescriptionAgent": "Prístrojové kvóty úložiska sú nastavené na agenta. Môžete zmeniť túto hodnotu alebo vypnúť limit úložiska.",
   "TagsPlaceholder": "Pridať tag",
   "ThirdPartyStorageComboBoxPlaceholder": "Vybrať úložisko",
+  "ThirdPartyStorageNoStorageAlert": "Najprv musíte pripojiť príslušnú službu v sekcii „Integrácia“. V opačnom prípade pripojenie nebude možné.",
+  "ThirdPartyStoragePermanentSettingDescription": "Súbory sú uložené v externom úložisku {{thirdpartyTitle}} v priečinku \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
   "ThirdPartyStorageRoomAdminNoStorageAlert": "Ak chcete pripojiť úložisko od tretej strany, musíte pridať zodpovedajúcu službu v sekcii Integrácia v nastaveniach {{productName}}. Ak chcete integráciu povoliť, kontaktujte vlastníka alebo administrátora {{productName}}.",
   "UserEmail": "E-mail používateľa",
   "UserIPAddress": "IP adresa používateľa",
@@ -39,10 +45,5 @@
   "ViewerInfo": "Informácie o prehliadači",
   "WatermarkPreview": "Náhľad vodoznaku",
   "WatermarkPreviewHelp": "Tento náhľad obrázku približne zobrazuje, ako sa vodoznak zobrazí vo vašich súboroch.",
-  "GoToIntegrations": "Prejsť na integrácie",
-  "NeedMoreIntegrations": "Potrebujete viac integrácií?",
-  "NeedMoreIntegrationsDescription": "Použite webhooks na odoslanie údajov do vlastného systému alebo pripojte formuláre k tisícom službami cez Zapier.",
-  "NoDatabaseConnections": "Nie je nakonfigurované žiadne pripojenie k databáze",
-  "ThirdPartyStorageNoStorageAlert": "Najprv musíte pripojiť príslušnú službu v sekcii „Integrácia“. V opačnom prípade pripojenie nebude možné.",
-  "ThirdPartyStoragePermanentSettingDescription": "Súbory sú uložené v externom úložisku {{thirdpartyTitle}} v priečinku \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>"
+  "NoDatabaseConnectionsRoomAdmin": "Pripojenia k databáze konfiguruje administrátor. Po nastavení databázy si tu budete môcť povoliť export."
 }

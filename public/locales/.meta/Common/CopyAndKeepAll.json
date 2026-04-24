@@ -3,16 +3,17 @@
   "content": "Copy and keep all",
   "content_en_sha1_hash": "971cae02621d8baa4bdf72eccc28d0438d12ba3d",
   "created_at": "2025-05-19T21:30:43.738Z",
-  "updated_at": "2026-04-08T14:18:26.635Z",
+  "updated_at": "2026-04-23T17:24:01.710Z",
   "comment": {
-    "text": "This translation key is used as a default message for a button that allows users to copy and keep all files in a conflict resolution dialog. The exact wording may vary depending on the specific context where it appears, but its purpose remains consistent: to provide an alternative action when multiple files are involved.",
+    "text": "This is a button label in a conflict resolution dialog. It allows the user to copy the current item and keep all existing versions or duplicates.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:57.354Z"
+    "updated_at": "2026-04-11T20:56:22.532Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
-      "line_number": 289,
+      "line_number": 299,
       "context": "const getDuplicateTitle = () => {\n return isFileDialog\n ? t(\"Common:CreateFileCopy\")\n : isFolderDialog\n ? t(\"Common:CopyAndKeepBothFolders\")\n : t(\"Common:CopyAndKeepAll\");\n };\n const getDuplicateDescription = () => {\n return isFileDialog\n ? t(\"Common:CreateDescription\")\n : isFolderDialog",
       "module": "/packages/client"
     }
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation 'انسخ واحتفظ بالجميع' translates to 'Copy and keep everyone/all people', which is incorrect in the context of files. In Arabic, 'الجميع' (al-jami') refers to people/persons, whereas 'الكل' (al-kull) or 'جميع الملفات' (all files) should be used for objects/files.",
-          "suggestion": "نسخ والاحتفاظ بالكل"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -81,13 +76,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The French translation 'garder tous' is grammatically incomplete and incorrect in this context. 'Tous' (all) requires a noun or a pronoun to function correctly in French. Since the context refers to files, it should be 'tout' (everything) or 'tous les fichiers' (all files). In a UI button context, 'Tout copier et conserver' or 'Copier et conserver tout' is the correct way to convey 'Copy and keep all'.",
-          "suggestion": "Copier et tout conserver"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -219,13 +208,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Albanian translation 'të gjithë/a' refers to people (all of them/everyone) rather than objects/files. In the context of files, 'të gjitha' (feminine plural for 'files/skedarët') or 'të gjithë' (masculine plural) should be used, but 'të gjithë/a' is grammatically awkward for a UI button and implies people.",
-          "suggestion": "Kopjoni dhe ruani të gjitha"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -3,11 +3,12 @@
   "content": "Shared by",
   "content_en_sha1_hash": "a5fe3b3e382690e112e5d06a9d9588409cdd93a3",
   "created_at": "2025-11-13T07:58:01.497Z",
-  "updated_at": "2026-03-31T15:18:46.274Z",
+  "updated_at": "2026-04-23T17:24:01.897Z",
   "comment": {
-    "text": "Indicates who shared a file or document. This text appears as a column header in tables and as a filter label, signifying the sharer of a file. Translators should ensure the meaning conveys the concept of file sharing and attribution.",
+    "text": "This is a label indicating who shared a file or folder. It appears in file details, table headers, and filter options.",
     "is_auto": true,
-    "updated_at": "2025-11-13T08:13:22.746Z"
+    "updated_at": "2026-04-11T21:08:09.821Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -18,8 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 432,
-      "context": "} = this.props;\n \n const sharedByBlock =\n !isPublicRoom && !isInSharedFolder\n ? {\n key: \"SharedByShareWithMe\",\n title: t(\"SharedBy\"),\n enable: sharedByShareWithMeColumnIsEnabled,\n resizable: true,\n onChange: this.onColumnChange,\n }",
+      "line_number": 425,
+      "context": "const sharedByBlock =\n !isPublicRoom && !isInSharedFolder\n ? {\n key: \"SharedByShareWithMe\",\n title: t(\"SharedBy\"),\n enable: sharedByShareWithMeColumnIsEnabled,\n resizable: true,\n onChange: this.onColumnChange,\n }\n : {",
       "module": "/packages/client"
     },
     {

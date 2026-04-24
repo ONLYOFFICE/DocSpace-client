@@ -3,11 +3,12 @@
   "content": "Additional resources",
   "content_en_sha1_hash": "a15fa56393dfeea6e8ddbb0e0c2a6f3cc24b93de",
   "created_at": "2025-05-26T07:15:40.217Z",
-  "updated_at": "2026-04-08T17:53:29.583Z",
+  "updated_at": "2026-04-11T21:01:02.644Z",
   "comment": {
-    "text": "This translation key is used to display the label \"Additional resources\" in various parts of the user interface, such as in settings pages and category lists. Its purpose is to provide a clear and concise title for users to access supplementary content related to portal settings.",
+    "text": "This is a section title in the portal settings, referring to extra links or information provided to users.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:08:17.974Z"
+    "updated_at": "2026-04-11T21:01:02.644Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -24,13 +25,13 @@
     },
     {
       "file_path": "/packages/shared/pages/Branding/AdditionalResources/index.tsx",
-      "line_number": 87,
-      "context": "[\"settings_unavailable\"]: !isSettingPaid,\n })}\n >\n <div className={classNames(styles.header, \"header\")}>\n <div className={styles.additionalHeader}>\n {t(\"Common:AdditionalResources\")}\n </div>\n </div>\n <div className={styles.additionalDescription}>\n {t(\"Common:AdditionalResourcesDescription\", {\n productName: t(\"Common:ProductName\"),",
+      "line_number": 88,
+      "context": "[\"settings_unavailable\"]: !isSettingPaid,\n })}\n >\n <div className={classNames(styles.header, \"header\")}>\n <div className={styles.additionalHeader}>\n {t(\"Common:AdditionalResources\")}\n </div>\n </div>\n <div className={styles.additionalDescription}>\n {t(\"Common:AdditionalResourcesDescription\", {\n productName: getBrandName(\"ProductName\"),",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/MobileView/index.tsx",
-      "line_number": 81,
+      "line_number": 82,
       "context": "onClickLink={onClickLink}\n />\n ) : null}\n {displayAdditional ? (\n <CategoryItem\n title={t(\"AdditionalResources\")}\n subtitle={t(\"AdditionalResourcesSubtitle\")}\n url={`${baseUrl}/branding/additional-resources`}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}",
       "module": "/packages/shared"
     }
@@ -99,13 +100,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian word 'միջոցներ' (means/measures/tools) is a mistranslation for 'resources' in this context. In a UI setting for supplementary content/links, 'ռեսուրսներ' is the correct term.",
-          "suggestion": "Հավելյալ ռեսուրսներ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -153,13 +148,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Portuguese translation 'Funcionalidades Adicionais' means 'Additional Features', which is a different concept from 'Additional resources'.",
-          "suggestion": "Recursos adicionais"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {

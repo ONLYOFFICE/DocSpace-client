@@ -3,13 +3,27 @@
   "content": "Enabling the Backup service will allow all {{productName}} administrators to create backups anytime, as long as the wallet balance is sufficient. Are you sure you want to continue?",
   "content_en_sha1_hash": "30f47a8085a7a1bf1f7bbd806bf81f5a52c764c0",
   "created_at": "2026-04-10T13:53:45.114Z",
-  "updated_at": "2026-04-10T13:53:45.114Z",
+  "updated_at": "2026-04-23T17:24:02.177Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is the body text of a confirmation dialog that appears when a user attempts to enable the Backup service. It informs the user about the implications of enabling the service and asks for confirmation. `{{productName}}` will be replaced with the product's brand name.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:53:39.889Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/index.tsx",
+      "line_number": 173,
+      "context": "{ title: string; body: string | React.ReactNode[] }\n > = {\n [BACKUP_SERVICE]: {\n title: t(\"Confirmation\"),\n body: !isCurrentConfirmState\n ? t(\"EnableBackupConfirm\", {\n productName: getBrandName(\"ProductName\"),\n })\n : isFreeTariff\n ? t(\"DisableBackupConfirmWithoutQuota\", {\n productName: getBrandName(\"ProductName\"),",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/backup/BackupPage.tsx",
+      "line_number": 118,
+      "context": "const confirmationDialogContent = {\n title: t(\"Confirmation\"),\n \n body: !isBackupServiceOn\n ? t(\"EnableBackupConfirm\", {\n productName: getBrandName(\"ProductName\"),\n })\n : isFreeTariff\n ? t(\"DisableBackupConfirmWithoutQuota\", {\n productName: getBrandName(\"ProductName\"),",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

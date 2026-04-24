@@ -3,13 +3,21 @@
   "content": "Top up credits",
   "content_en_sha1_hash": "d1af034cd110e9c741c358564c4c9e120bca1364",
   "created_at": "2026-04-10T13:53:45.807Z",
-  "updated_at": "2026-04-10T13:53:45.807Z",
+  "updated_at": "2026-04-23T17:24:02.180Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a button label. It allows users to add more credits to their account for AI tools.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:40:51.700Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
+      "line_number": 318,
+      "context": "/>\n \n <Button\n size={ButtonSize.small}\n primary\n label={t(\"TopUpCredits\")}\n onClick={onOpenTopUp}\n scale\n testId=\"top_up_credits_button\"\n isDisabled={isDisabled}\n />",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,13 +3,21 @@
   "content": "AI Processing",
   "content_en_sha1_hash": "56cdb0eb53c5f0eba01491c2be88894ec37f3e2c",
   "created_at": "2026-03-31T15:18:26.977Z",
-  "updated_at": "2026-04-07T20:02:12.165Z",
+  "updated_at": "2026-04-23T17:24:02.158Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is the title for the third feature card in the welcome tour dialog, highlighting a key capability of the application.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:39:02.092Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/welcome-tour-dialog/index.tsx",
+      "line_number": 128,
+      "context": "<div className={styles.featureCard}>\n <div className={styles.featureIcon}>\n <ReactSVG src={featureIcons[2]} />\n </div>\n <div className={styles.featureText}>\n <Text fontWeight={600} fontSize=\"13px\">{t(\"Common:WelcomeFeature3Title\", \"AI Processing\")}</Text>\n <Text fontSize=\"12px\" className={styles.featureDesc}>{t(\"Common:WelcomeFeature3\", \"Automatically analyze and process responses\")}</Text>\n </div>\n </div>\n <div className={styles.featureCard}>\n <div className={styles.featureIcon}>",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -26,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Emeliyyat emalı' translates to 'Operation processing' or 'Processing of operations', which is redundant and does not accurately convey 'AI Processing'.",
-          "suggestion": "Süni İntellekt emalı"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -176,13 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Обрадама процесирања' is grammatically incorrect and nonsensical; it translates roughly to 'Processing to processings' or 'Processings of processing'.",
-          "suggestion": "AI обрада"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

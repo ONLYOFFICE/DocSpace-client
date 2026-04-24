@@ -3,11 +3,12 @@
   "content": "Service icon",
   "content_en_sha1_hash": "526f71c83fa3a61bc0402835ab6cfcbb7f83a24f",
   "created_at": "2025-10-27T16:14:31.643Z",
-  "updated_at": "2026-02-19T13:36:32.699Z",
+  "updated_at": "2026-04-11T21:02:17.774Z",
   "comment": {
-    "text": "This key provides the label for a field displaying an icon associated with a service. It appears within a container (likely a settings panel) allowing users to manage and potentially remove the service icon. Translators should consider the context of service settings when localizing this text.",
+    "text": "Label for an input field where the user can upload or change an icon associated with a service.",
     "is_auto": true,
-    "updated_at": "2025-10-27T17:14:30.358Z"
+    "updated_at": "2026-04-11T21:02:17.774Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

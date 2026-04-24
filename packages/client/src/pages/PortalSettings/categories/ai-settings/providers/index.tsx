@@ -55,6 +55,7 @@ import { DeleteAIProviderDialog } from "./dialogs/delete";
 import { AiProviderTile } from "./Tile";
 import { ProvidersLoader } from "./ProvidersLoader";
 import { DefaultProvider } from "./DefaultProvider";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type TDeleteDialogData =
   | {
@@ -176,7 +177,7 @@ const AIProviderComponent = ({
         dataTestId="provider-section-description"
       >
         {t("AISettings:AIProviderSettingDescription", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
           aiChats: t("Common:AIChats"),
         })}
       </Text>

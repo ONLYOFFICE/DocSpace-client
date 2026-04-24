@@ -2,5 +2,5 @@
   "DeleteVersion": "Version löschen",
   "DeleteVersionDescription": "Sie sind dabei, eine Dateiversion zu löschen. Sie kann dann nicht mehr angezeigt oder wiederhergestellt werden. Möchten Sie wirklich fortfahren?",
   "EditComment": "Kommentar bearbeiten",
-  "Version": "Ver."
+  "VersionShort": "Ver."
 }

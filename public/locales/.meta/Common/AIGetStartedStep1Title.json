@@ -3,13 +3,21 @@
   "content": "Add funds to your AI balance",
   "content_en_sha1_hash": "638ffb4e2cae310af4440dc6003188cb2618a8db",
   "created_at": "2026-04-10T13:53:44.222Z",
-  "updated_at": "2026-04-10T13:53:44.222Z",
+  "updated_at": "2026-04-11T21:00:12.937Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is the title for the first step in a \"Get Started\" guide for AI services. It instructs the user to add money to their AI balance.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:00:12.937Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/GetStartedBody.tsx",
+      "line_number": 127,
+      "context": "<div className={styles.getStartedSteps}>\n <div className={styles.stepMainRow}>\n <div className={styles.stepNumber}>1</div>\n <div className={styles.stepText}>\n <Text className={styles.stepTitleText}>\n {t(\"AIGetStartedStep1Title\")}\n </Text>\n <Text\n fontSize=\"12px\"\n lineHeight=\"16px\"\n className={styles.stepDescription}",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

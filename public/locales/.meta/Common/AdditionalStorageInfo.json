@@ -3,13 +3,21 @@
   "content": "Additional storage",
   "content_en_sha1_hash": "c7e67ca3c948a879eb2ca52406b825f02a356705",
   "created_at": "2026-04-10T13:53:44.159Z",
-  "updated_at": "2026-04-10T13:53:44.159Z",
+  "updated_at": "2026-04-11T21:00:59.362Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label in the order summary for a billing plan, indicating the cost of extra storage. It appears when a user is upgrading their storage plan.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:00:59.362Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
+      "line_number": 203,
+      "context": "{!isExceedingStorageLimit ? (\n <div className={styles.summaryRow}>\n <Text fontSize=\"14px\" className={styles.rowLabel}>\n {isDowngradeStoragePlan\n ? t(\"ReducedStorage\")\n : t(\"AdditionalStorageInfo\")}\n </Text>\n <Text\n fontWeight=\"600\"\n fontSize=\"14px\"\n className={styles.rowValue}",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

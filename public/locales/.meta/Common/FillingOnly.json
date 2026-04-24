@@ -3,22 +3,23 @@
   "content": "For filling only",
   "content_en_sha1_hash": "6fdf3e40156db151b4148359fef0400a9bb7e20b",
   "created_at": "2025-08-26T11:14:56.366Z",
-  "updated_at": "2026-04-08T09:22:40.357Z",
+  "updated_at": "2026-04-11T20:52:30.247Z",
   "comment": {
-    "text": "This text appears as a label or title, likely on a button or option, indicating that the feature or action is intended for form filling purposes only. It clarifies the scope of the functionality being presented. Translators should ensure the meaning of \"for filling only\" is accurately conveyed in the target language.",
+    "text": "This is a label indicating a user's access rights to a document, specifically that they can only fill out forms within it. It appears in dropdown menus and as a title for this access level.",
     "is_auto": true,
-    "updated_at": "2025-08-26T11:27:07.273Z"
+    "updated_at": "2026-04-11T20:52:30.247Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PublicRoom/PublicRoomPage.js",
-      "line_number": 99,
+      "line_number": 100,
       "context": "case ShareAccessRights.Review:\n return t(\"Common:Reviewing\");\n case ShareAccessRights.Editing:\n return t(\"Common:Editor\");\n case ShareAccessRights.FormFilling:\n return t(\"Common:FillingOnly\");\n default:\n return t(\"Common:ViewOnly\");\n }\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 207,
+      "line_number": 208,
       "context": "access: ShareAccessRights.FormFilling,\n description: \"\",\n key: \"filling\",\n label: t(\"Common:Filling\"),\n icon: FillFormsReactSvgUrl,\n title: t(\"Common:FillingOnly\"),\n },\n };\n \n return roomAccess\n .map((access) => accessOptions[access])",
       "module": "/packages/shared"
     }
@@ -201,13 +202,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order in Ukrainian is unnatural and sounds like a literal word-for-word translation. 'Для заповнення лише' sounds incomplete or grammatically awkward for a UI label. In Ukrainian, 'лише' (only) should typically precede the noun or the phrase should be structured as 'Тільки для заповнення'.",
-          "suggestion": "Тільки для заповнення"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

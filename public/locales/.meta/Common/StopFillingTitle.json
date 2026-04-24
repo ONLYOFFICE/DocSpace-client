@@ -3,11 +3,12 @@
   "content": "Stop filling?",
   "content_en_sha1_hash": "b3fff789a91323a06fd3adcd922650270391f583",
   "created_at": "2025-05-19T21:30:49.074Z",
-  "updated_at": "2026-04-07T22:21:39.041Z",
+  "updated_at": "2026-04-12T17:34:04.648Z",
   "comment": {
-    "text": "This translation key is used for the title of a modal dialog that prompts the user to stop filling a form field. It appears on the header of the dialog and is displayed when the \"Stop Filling\" button is clicked or visible in certain contexts.",
+    "text": "This is the title of a confirmation dialog. It appears when a user attempts to stop filling out a form or document.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:38:40.901Z"
+    "updated_at": "2026-04-11T20:42:03.954Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -153,7 +154,15 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala word 'නොපිරීම' contains the negation prefix 'නො' (no/not), making it mean 'not filling' instead of 'filling'. The translation reads 'Stop not filling?' which is the opposite of the intended meaning 'Stop filling?'",
+          "suggestion": "පිරීම නවත්තන්නද?",
+          "checked_at": "2026-04-12T17:33:30.452Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

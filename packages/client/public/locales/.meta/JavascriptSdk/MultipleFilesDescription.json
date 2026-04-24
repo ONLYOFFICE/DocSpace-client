@@ -3,11 +3,12 @@
   "content": "Users can upload several files in one action.",
   "content_en_sha1_hash": "b15cac4194e117f2084e5a53e467ddf2cfd4ca32",
   "created_at": "2026-03-20T09:07:42.380Z",
-  "updated_at": "2026-03-20T09:46:40.535Z",
+  "updated_at": "2026-04-11T21:15:05.048Z",
   "comment": {
-    "text": "This text explains that users can upload multiple files at once. It appears as a tooltip on a UI element (likely a button or label) within the Uploader component, providing helpful information about the file upload functionality. Translators should maintain the meaning of multiple file uploads in a single action.",
+    "text": "This is a tooltip that explains that users can upload multiple files simultaneously.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:46:40.535Z"
+    "updated_at": "2026-04-11T21:15:05.048Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

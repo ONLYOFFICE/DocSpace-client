@@ -6,6 +6,7 @@ import DefaultFolderUserDark from "PUBLIC_DIR/images/emptyview/empty.default.fol
 import DefaultFolderUserLight from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.light.svg";
 import EmptyFilterFilesLightIcon from "PUBLIC_DIR/images/emptyFilter/empty.filter.files.light.svg";
 import EmptyFilterFilesDarkIcon from "PUBLIC_DIR/images/emptyFilter/empty.filter.files.dark.svg";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const getTitle = (t: TTranslation) => {
   return t("Common:EmptyScreenFolder");
@@ -13,7 +14,7 @@ export const getTitle = (t: TTranslation) => {
 
 export const getRootTitle = (t: TTranslation) => {
   return t("Common:EmptyRootRoomHeader", {
-    productName: t("Common:ProductName"),
+    productName: getBrandName("ProductName"),
   });
 };
 

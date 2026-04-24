@@ -3,11 +3,12 @@
   "content": "Disable server",
   "content_en_sha1_hash": "265e807fc34e11374d7051b3a1cd0ac6d8901ad9",
   "created_at": "2025-10-27T16:14:31.648Z",
-  "updated_at": "2025-10-27T17:32:55.889Z",
+  "updated_at": "2026-04-11T21:02:54.538Z",
   "comment": {
-    "text": "This text appears as the header of a dialog used to disable a Minecraft server. It informs the user they are about to disable the server and is part of the AI settings. Translators should maintain the imperative tone, indicating an action to be taken.",
+    "text": "This is the title of a confirmation dialog that appears when a user attempts to disable an AI server.",
     "is_auto": true,
-    "updated_at": "2025-10-27T17:32:55.889Z"
+    "updated_at": "2026-04-11T21:02:54.538Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

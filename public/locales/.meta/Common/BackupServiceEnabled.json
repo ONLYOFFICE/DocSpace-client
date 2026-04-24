@@ -3,13 +3,21 @@
   "content": "Backup service successfully enabled.",
   "content_en_sha1_hash": "8433fcfa744945fc664e221df15d13d454b4ab39",
   "created_at": "2026-04-10T13:53:44.819Z",
-  "updated_at": "2026-04-10T13:53:44.819Z",
+  "updated_at": "2026-04-11T20:58:36.675Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Toast message. Appears after the user successfully enables the backup service.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:58:36.675Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/index.tsx",
+      "line_number": 363,
+      "context": "changeServiceState(confirmActionType);\n \n const getSuccessMessage = () => {\n if (confirmActionType === BACKUP_SERVICE) {\n return t(\"BackupServiceEnabled\");\n }\n if (confirmActionType === AI_ENUM) {\n return t(\"AIToolsEnabled\");\n }\n };",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

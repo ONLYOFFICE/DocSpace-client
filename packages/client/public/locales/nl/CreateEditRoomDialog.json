@@ -17,8 +17,12 @@
   "FileLifetimeDescription": "Stel bestands levensduur in om de bestanden in deze ruimte automatisch na een bepaalde periode te verwijderen. De levensduur begint op de datum van het uploaden/aanmaken van het bestand.",
   "FilesOlderThan": "Bestanden ouder dan:",
   "FormRoomBarDescription": "Deze kamer is voor iedereen met de link beschikbaar. Externe gebruikers hebben rechten voor het invullen van formulieren voor alle bestanden.",
+  "GoToIntegrations": "Ga naar Integraties",
   "Horizontal": "Horizontaal",
   "Icon": "Icoon",
+  "NeedMoreIntegrations": "Wilt u meer integraties?",
+  "NeedMoreIntegrationsDescription": "Gebruik webhooks om gegevens naar uw eigen systeem te sturen, of verbind formulieren met duizenden diensten via Zapier.",
+  "NoDatabaseConnections": "Geen databaseverbindingen geconfigureerd",
   "PeopleSelectorInfo": "Alleen een kamer beheerder of een {{productName}} beheerder kan de eigenaar van de kamer worden.",
   "Position": "Positie",
   "PublicRoomBarDescription": "Deze kamer is voor iedereen met de link beschikbaar. Toegang voor externe gebruikers is afhankelijk van het geselecteerde type toegangsrechten.",
@@ -41,8 +45,5 @@
   "ViewerInfo": "Kijker info",
   "WatermarkPreview": "Voorbeeld Watermerk",
   "WatermarkPreviewHelp": "Dit voorbeeld van de afbeelding laat ongeveer zien hoe het watermerk in uw bestanden zal worden weergegeven.",
-  "GoToIntegrations": "Ga naar Integraties",
-  "NeedMoreIntegrations": "Wilt u meer integraties?",
-  "NeedMoreIntegrationsDescription": "Gebruik webhooks om gegevens naar uw eigen systeem te sturen, of verbind formulieren met duizenden diensten via Zapier.",
-  "NoDatabaseConnections": "Geen databaseverbindingen geconfigureerd"
+  "NoDatabaseConnectionsRoomAdmin": "Databaseverbindingen worden door een beheerder geconfigureerd. Zodra een database is ingesteld, kunt u de export hier inschakelen."
 }

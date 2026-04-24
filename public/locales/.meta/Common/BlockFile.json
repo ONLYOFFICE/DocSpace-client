@@ -3,16 +3,17 @@
   "content": "Block",
   "content_en_sha1_hash": "82dd2cdf36f9436d89f404454654ad3e53fd428d",
   "created_at": "2025-05-19T21:30:43.300Z",
-  "updated_at": "2026-04-10T08:21:04.375Z",
+  "updated_at": "2026-04-23T17:24:02.078Z",
   "comment": {
-    "text": "This translation key is used to display a file as \"blocked\" or \"unlocked\", depending on its locked status. It appears in UI elements such as quick buttons and color themes, providing a visual indication of file access permissions.",
+    "text": "This is a button label that appears in a context menu. It allows the user to block a file, preventing further edits.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:12.815Z"
+    "updated_at": "2026-04-11T20:58:14.658Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2462,
+      "line_number": 2521,
       "context": "),\n },\n {\n id: \"option_block-unblock-version\",\n key: \"block-unblock-version\",\n label: item.locked ? t(\"Common:UnblockFile\") : t(\"Common:BlockFile\"),\n icon: LockedReactSvgUrl,\n onClick: () => this.lockFile(item, t),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     }
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'كتلة' means 'a mass' or 'a block of matter'. In the context of file permissions (locking/unlocking a file), the correct term should be 'حظر' (to block/restrict access) or 'قفل' (to lock).",
-          "suggestion": "حظر"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -75,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Lohko' means 'Block' as a noun (a segment or chunk), whereas the context requires 'Block' as a verb (to lock/restrict access).",
-          "suggestion": "Lukitse"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -117,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ບລອກ' is a transliteration of the English word 'Blog' (as in a weblog), rather than the verb/action 'Block' (to restrict access). In the context of locking/unlocking a file, this is incorrect.",
-          "suggestion": "ລັອກ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -135,13 +118,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Blok' refers to a physical object (a block). In the context of file permissions (locking/unlocking), the correct verb is 'Blokkeren'.",
-          "suggestion": "Blokkeren"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -177,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'ලිහිණිය' (lihiṇiya) means 'swallow' (the bird). The correct term for 'Block' in the context of locking/restricting access should be 'අගුළු දමන්න' or 'සීමා කරන්න'.",
-          "suggestion": "අගුළු දමන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -195,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word 'Block' is used as a noun/state (referring to the status of a file), whereas the Slovenian 'Blokiraj' is an imperative verb (command to 'Block!'). In the context of a UI label for a status or a toggle, the noun/adjective form is required.",
-          "suggestion": "Blokiranje"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
@@ -219,13 +184,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word 'Block' is used as a noun/state (referring to the status of a file), whereas 'Blokiraj' is an imperative verb (command to 'Block!'). Given the context of a toggle/status label, the noun or adjective form is required.",
-          "suggestion": "Blokiran"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

@@ -3,11 +3,12 @@
   "content": "View all contacts",
   "content_en_sha1_hash": "859eb1e255d69ca6c23a42997bfd6dd2ede94b6a",
   "created_at": "2025-05-19T21:30:46.973Z",
-  "updated_at": "2026-04-08T03:50:01.160Z",
+  "updated_at": "2026-04-11T20:47:33.094Z",
   "comment": {
-    "text": "This translation key is used to display a brief description of the \"View all contacts\" feature. It will appear in UI elements related to OAuth account scopes and permissions, such as buttons or dialogs, where users can choose to access their contact information.",
+    "text": "This is a permission description displayed to the user when an OAuth application requests read access to their contacts. It informs the user that the application will be able to view all their contacts.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:14.757Z"
+    "updated_at": "2026-04-11T20:47:33.094Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -27,49 +28,25 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation uses 'الحسابات' (Accounts) instead of 'جهات الاتصال' (Contacts), which changes the meaning of the feature description.",
-          "suggestion": "عرض جميع جهات الاتصال"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation 'Bütün hesablara baxın' means 'View all accounts', whereas the English text is 'View all contacts'. In the context of OAuth scopes, 'accounts' and 'contacts' are distinct entities.",
-          "suggestion": "Bütün kontaktlara baxın"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation uses 'профили' (profiles) instead of 'контакти' (contacts), which changes the meaning of the string.",
-          "suggestion": "Прегледайте всички контакти"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech translation uses 'účty' (accounts) instead of 'kontakty' (contacts), which changes the meaning of the string.",
-          "suggestion": "Zobrazit všechny kontakty"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -81,13 +58,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation means 'View all accounts' instead of 'View all contacts'.",
-          "suggestion": "Προβολή όλων των επαφών"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -99,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation uses 'tilit' (accounts) instead of 'yhteystiedot' (contacts), which changes the meaning of the string.",
-          "suggestion": "Näytä kaikki yhteystiedot"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -135,13 +100,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation '모든 계정 보기' means 'View all accounts', whereas the English text is 'View all contacts'.",
-          "suggestion": "모든 연락처 보기"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -153,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'kontus' is an incorrect/non-existent form in Latvian for 'contacts'. The correct term for people/contacts is 'kontaktus'.",
-          "suggestion": "Skatīt visus kontaktus"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -213,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The verb 'Poglej' is an imperative command (Look/Watch) which is unnatural for a UI action description. In Slovenian UI context, 'View' (as in 'to see/display') should be translated using 'Prikaži' (Show) or 'Oglej' (View/Review). 'Poglej' sounds like a direct command to physically look at something.",
-          "suggestion": "Oglej vse kontakte"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

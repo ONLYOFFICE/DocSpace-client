@@ -3,16 +3,17 @@
   "content": "Agent info",
   "content_en_sha1_hash": "68edc91c6578cfa4e1873d6ef5ebb00bda62e5cc",
   "created_at": "2025-12-15T14:02:08.665Z",
-  "updated_at": "2026-04-10T08:21:04.374Z",
+  "updated_at": "2026-04-23T17:24:02.076Z",
   "comment": {
-    "text": "This key displays a label, likely on a button or panel, indicating information related to an agent. It appears within a list of options, and the label will show \"Agent info\" if the item is an AI agent; otherwise, it displays \"Room info.\" Translators should consider this key as part of a UI element presenting information about either an agent or a room.",
+    "text": "This is a button label that appears in the context menu for an AI agent. Clicking it opens a panel with information about the agent.",
     "is_auto": true,
-    "updated_at": "2025-12-17T07:51:54.769Z"
+    "updated_at": "2026-04-11T21:00:49.770Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2324,
+      "line_number": 2383,
       "context": "Boolean(item.external && item.isLinkExpired),\n },\n {\n id: \"option_room-info\",\n key: \"room-info\",\n label: item.isAIAgent ? t(\"Common:AgentInfo\") : t(\"Common:RoomInfo\"),\n icon: InfoOutlineReactSvgUrl,\n onClick: () => this.onShowInfoPanel(item),\n disabled: isPublicRoom || Boolean(item.external && item.isLinkExpired),\n },\n {",
       "module": "/packages/client"
     }
@@ -153,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'ක්රියාකාරී තොරතුරු' means 'Operational information' or 'Active information', whereas the English 'Agent info' refers to information about an 'Agent' (a person or an AI entity).",
-          "suggestion": "නියෝජිත තොරතුරු"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

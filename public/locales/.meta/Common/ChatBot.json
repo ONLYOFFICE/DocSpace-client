@@ -3,13 +3,21 @@
   "content": "ChatBot",
   "content_en_sha1_hash": "ca67c98b89c14b65fb3e1625531dc54029f21d26",
   "created_at": "2026-04-10T13:53:44.898Z",
-  "updated_at": "2026-04-10T13:53:44.898Z",
+  "updated_at": "2026-04-11T20:57:26.770Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label for a feature in a list of AI services. It identifies the chatbot functionality.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:57:26.770Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/GetStartedBody.tsx",
+      "line_number": 66,
+      "context": "}),\n icon: <AIAgentsIcon />,\n },\n {\n id: \"chatbot\",\n title: t(\"ChatBot\"),\n description: t(\"ChatBotDescription\"),\n icon: <ChatIcon />,\n },\n {\n id: \"summarization\",",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

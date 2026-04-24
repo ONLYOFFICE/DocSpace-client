@@ -3,13 +3,21 @@
   "content": "Benefits",
   "content_en_sha1_hash": "927f40673764a27aad14fdedb385b31e3b85f976",
   "created_at": "2026-04-10T13:53:42.036Z",
-  "updated_at": "2026-04-10T13:53:42.036Z",
+  "updated_at": "2026-04-13T14:59:06.011Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a section title in the billing interface, labeling a list of features or advantages included in a tariff plan.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:58:22.968Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/BenefitsContainer.tsx",
+      "line_number": 81,
+      "context": "};\n \n return (\n <div className={styles.benefitsBody}>\n <Text fontSize=\"16px\" fontWeight=\"600\" className={styles.benefitsText}>\n {t(\"Benefits\")}\n </Text>\n {features &&\n Array.from(features.values()).map((item: TenantQuotaFeatureDto) => {\n if (!item.title || !item.image) return;\n return (",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,17 +3,18 @@
   "content": "Using Plugin SDK you can extend your {{productName}} functionality, connect the third-party services or enhance the existing user experience. Here you can find the plugin samples with code source available on GitHub.",
   "content_en_sha1_hash": "a9a940596b57d8d9f4be6ec87ad72687245e94ad",
   "created_at": "2025-05-19T21:30:49.921Z",
-  "updated_at": "2026-04-08T18:32:46.915Z",
+  "updated_at": "2026-04-11T21:27:48.351Z",
   "comment": {
-    "text": "This translation key describes the text that explains how to use the Plugin SDK, which is used to extend the functionality of {{productName}} and enhance user experience. It appears in a descriptive text element on the Portal Settings page, providing context for developers.",
+    "text": "This is a descriptive text explaining the purpose and benefits of the Plugin SDK. It appears on a settings page and includes a variable `{{productName}}` which will be replaced by the product's brand name.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:40.396Z"
+    "updated_at": "2026-04-11T21:27:48.351Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/PluginSDK/index.js",
-      "line_number": 132,
-      "context": "className=\"description\"\n fontSize=\"13px\"\n fontWeight={400}\n lineHeight=\"20px\"\n >\n {t(\"PluginSDKDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <Text\n className=\"description\"\n fontSize=\"13px\"\n fontWeight={400}",
+      "line_number": 133,
+      "context": "className=\"description\"\n fontSize=\"13px\"\n fontWeight={400}\n lineHeight=\"20px\"\n >\n {t(\"PluginSDKDescription\", { productName: getBrandName(\"ProductName\") })}\n </Text>\n <Text\n className=\"description\"\n fontSize=\"13px\"\n fontWeight={400}",
       "module": "/packages/client"
     }
   ],
@@ -57,13 +58,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'δείγματα πρόσθετων πρόσθετων' is a repetitive error (tautology), translating to 'samples of plugins plugins'.",
-          "suggestion": "Χρησιμοποιώντας το Plugin SDK μπορείτε να επεκτείνετε τη λειτουργικότητα του {{productName}}, να συνδέσετε υπηρεσίες τρίτων ή να βελτιώσετε την υπάρχουσα εμπειρία χρήστη. Εδώ μπορείτε να βρείτε δείγματα πρόσθετων με τον πηγαίο κώδικα που είναι διαθέσιμα στο GitHub."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -75,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The phrase 'with code source available' is missing in the Finnish translation, which changes the meaning regarding what is actually available on GitHub.",
-          "suggestion": "Käyttämällä SDK-laajennusta voit laajentaa {{productName}}-n toiminnallisuutta, yhdistää kolmansien osapuolien palveluihin tai parantaa olemassaolevaa käyttäjäkokemusta. Täältä löydät GitHubissa saatavilla olevat laajennusmallit lähdekoodin kera."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -165,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Plugin' has been incorrectly translated as 'පේනු' (Penu), which means 'Pen' in Sinhala. This is a critical error in a technical context.",
-          "suggestion": "ප්ලගින් SDK භාවිතයෙන් ඔබගේ {{productName}} ක්‍රියාකාරීත්වය විස්තීරණය කිරීමට, තෙවන පාර්ශ්ව සේවා සම්බන්ධ කිරීමට හෝ පවතින පරිශීලක අත්දැකීම ඉහළ නැංවීමට හැකිය. කේත මූලාශ්‍ර සහිත ප්ලගින් ආදර්ශ ඔබට GitHub හි සොයාගත හැකිය."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

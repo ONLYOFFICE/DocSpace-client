@@ -3,17 +3,18 @@
   "content": "Only the Payer can manage this section. <1>Learn more</1>",
   "content_en_sha1_hash": "fe612dca58b58fa5e0be1b13f61df9586158f854",
   "created_at": "2026-04-10T13:53:44.051Z",
-  "updated_at": "2026-04-10T13:55:50.306Z",
+  "updated_at": "2026-04-23T17:24:01.915Z",
   "comment": {
-    "text": "Displays a warning message in the Portal Settings layout informing the user that only the Payer has permission to the current section. It includes a \"Learn more\" link for additional information.",
+    "text": "This is a warning message displayed in the portal settings. It informs users that only the account payer has permissions to manage a specific section, with a link to learn more.",
     "is_auto": true,
-    "updated_at": "2026-04-10T13:55:50.306Z"
+    "updated_at": "2026-04-11T20:47:17.976Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/WarningComponent/index.tsx",
       "line_number": 220,
-      "context": "return (\n <WarningComponent\n title={\n <Trans\n t={t}\n i18nKey=\"OnlyPayerCanManageSection\"\n ns=\"Payments\"\n components={{\n 1: (\n <Link\n key=\"learn-more-link\"",
+      "context": "return (\n <WarningComponent\n title={\n <Trans\n t={t}\n i18nKey=\"OnlyPayerCanManageSection\"\n ns=\"Common\"\n components={{\n 1: (\n <Link\n key=\"learn-more-link\"",
       "module": "/packages/client"
     }
   ],

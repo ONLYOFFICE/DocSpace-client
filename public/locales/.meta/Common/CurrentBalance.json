@@ -3,13 +3,27 @@
   "content": "Current balance: <1>{{balance}}</1>",
   "content_en_sha1_hash": "612d0b372e9a00cb71ed89195d7313b3674e1db7",
   "created_at": "2026-04-10T13:53:42.357Z",
-  "updated_at": "2026-04-10T13:53:42.357Z",
+  "updated_at": "2026-04-11T20:55:52.477Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This text displays a user's current account balance. It appears in billing-related modals and sections, with `{{balance}}` representing the monetary value.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:55:52.477Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/index.tsx",
+      "line_number": 208,
+      "context": "t(\"AIToolsDescription\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n }),\n <CommonTrans\n key=\"CurrentBalance\"\n \n i18nKey=\"CurrentBalance\"\n values={{ balance: formatAiServiceCurrency() }}\n components={{\n 1: <span style={{ fontWeight: 600 }} />,",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/wallet/WalletRefilledModal.tsx",
+      "line_number": 109,
+      "context": "<Text as=\"span\">{t(\"ToppedUpWallet\")}</Text>\n <br />\n <Text as=\"span\">\n <CommonTrans\n \n i18nKey=\"CurrentBalance\"\n values={{ balance: formattedBalance }}\n components={{\n 1: <span style={{ fontWeight: 600 }} />,\n }}\n />",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,13 +3,21 @@
   "content": "Summarization",
   "content_en_sha1_hash": "8dfe4e2db2cdcb1c1afcbbc48ed26c367561e09d",
   "created_at": "2026-04-10T13:53:45.712Z",
-  "updated_at": "2026-04-10T13:53:45.712Z",
+  "updated_at": "2026-04-13T14:59:06.024Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label for a feature or service. It refers to the act of creating a concise overview of a longer text.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:41:30.820Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/GetStartedBody.tsx",
+      "line_number": 72,
+      "context": "description: t(\"ChatBotDescription\"),\n icon: <ChatIcon />,\n },\n {\n id: \"summarization\",\n title: t(\"Summarization\"),\n description: t(\"SummarizationDescription\"),\n icon: <SummarizationIcon />,\n },\n {\n id: \"text-translation\",",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

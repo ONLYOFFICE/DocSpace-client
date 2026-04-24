@@ -3,13 +3,21 @@
   "content": "* + 20% service fee applies at usage",
   "content_en_sha1_hash": "25be019bcd557a249ea7de1028a20c310d771ee3",
   "created_at": "2026-04-10T13:53:44.492Z",
-  "updated_at": "2026-04-10T13:53:44.492Z",
+  "updated_at": "2026-04-11T20:59:56.449Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a small note displayed below the AI service pricing information, indicating that a service fee will be added to the usage cost.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:59:56.449Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/PricingBillingBody.tsx",
+      "line_number": 304,
+      "context": "</div>\n ) : null,\n )}\n </div>\n <Text className={styles.payForItemTextMuted}>\n {t(\"AIPricingFeeNoteWithoutLink\")}\n </Text>\n </div>\n \n <div className={styles.modelListSection}>\n <Text className={styles.modelListTitle}>",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

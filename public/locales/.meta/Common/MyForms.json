@@ -3,13 +3,33 @@
   "content": "My forms",
   "content_en_sha1_hash": "53f1631a0c9abb3889e4bab8d1b0aeb5b12d01dd",
   "created_at": "2026-03-20T09:07:38.653Z",
-  "updated_at": "2026-04-08T04:23:13.146Z",
+  "updated_at": "2026-04-23T17:24:02.136Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label for a section in the forms module, representing the user's personal collection of forms. It appears in the header and sidebar navigation.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:48:20.183Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/forms-header/index.tsx",
+      "line_number": 143,
+      "context": "const activeSubfolder = completedFolder ?? inProgressFolder;\n \n const getSectionTitle = React.useCallback(() => {\n switch (activeSection) {\n case FormsSection.MyForms:\n return t(\"Common:MyForms\");\n case FormsSection.Library:\n return t(\"Common:Library\");\n case FormsSection.InProgress:\n return t(\"Common:InProgress\");\n case FormsSection.CompletedForms:",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/sidebar/index.tsx",
+      "line_number": 112,
+      "context": "}, []);\n \n const sections = [\n {\n key: FormsSection.MyForms,\n label: t(\"Common:MyForms\"),\n icon: FormFileReactSvgUrl,\n },\n {\n key: FormsSection.InProgress,\n label: t(\"Common:InProgress\"),",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_utils/tourSteps.ts",
+      "line_number": 229,
+      "context": "} = flags ?? {};\n \n return [\n navSectionStep(\n \"my-forms\",\n t(\"Common:MyForms\"),\n t(\n \"Common:TourMyForms\",\n \"This is your main workspace. All your PDF forms are stored here. Upload new forms or create them from scratch.\",\n ),\n showMenu,",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -38,13 +58,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech translation uses 'Mí', which is a possessive pronoun used in specific poetic or archaic contexts, but it is grammatically incorrect for a standard UI possessive. The correct possessive pronoun for 'My' in this context is 'Moje'.",
-          "suggestion": "Moje formy"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -92,13 +106,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The possessive 'My' is missing from the translation. 'フォーム' means 'Forms', whereas 'My forms' should be 'マイ フォーム' or '自分のフォーム'.",
-          "suggestion": "マイ フォーム"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -116,13 +124,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Latvian translation includes extra text 'Manas ekrāns' (My screen) which is not present in the English source.",
-          "suggestion": "Manas formas"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {

@@ -62,5 +62,19 @@
   "WebSearchDisabledSuccess": "{{webSearch}} uğurla deaktiv edildi",
   "WebSearchEnabledSuccess": "{{webSearch}} uğurla aktiv edildi",
   "WebSearchKeyDescription": "Sizin {{webSearch}} təminatçınızdan əldə etdiyiniz API açarını daxil edin",
-  "WebSearchKeyHiddenDescription": "API açarı, yalnız bir dəfə, qeyd edərkən göstərilir və sonra təhlükəsizlik məqsədləri üçün gizlədir."
+  "WebSearchKeyHiddenDescription": "API açarı, yalnız bir dəfə, qeyd edərkən göstərilir və sonra təhlükəsizlik məqsədləri üçün gizlədir.",
+  "Capabilities": "İmkanlar",
+  "CapabilitiesDescription": "Bu tənzimləmələr {{productName}} çatında bu model üçün hansı funksiyaların göstəriləcəyini və əlçatan olacağını idarə edir.",
+  "CapabilityExtendedThinking": "Genişləndirilmiş düşünmə",
+  "CapabilityToolCalling": "Alət çağırma",
+  "ListModels": "Modellərin siyahısı",
+  "ModelName": "Model adı",
+  "ModelNameHint": "Bu modeli tanımanıza kömək edən bir ad istifadə edin.",
+  "OtherModels": "Digər modellər",
+  "OtherModelsTooltip": "Bəzi modellər müəyyən əməliyyatları və ya funksiyaları dəstəkləməyə bilər",
+  "RecommendedModels": "Tövsiyə olunan modellər",
+  "RecommendedModelsTooltip": "{{productName}} funksiyaları və əməliyyatları üçün dəstəyi təsdiqlənmiş modellər",
+  "SelectAtLeastOneModel": "Ən azı bir model seçin",
+  "SelectModels": "Modelləri seçin",
+  "CapabilityVision": "Görmə"
 }

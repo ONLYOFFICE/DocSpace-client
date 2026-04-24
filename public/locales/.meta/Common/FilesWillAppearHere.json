@@ -3,18 +3,25 @@
   "content": "Files and folders added to the room will appear here.",
   "content_en_sha1_hash": "52cd903bd75b3f0b726ed3310678ed5925968532",
   "created_at": "2025-05-19T21:30:45.315Z",
-  "updated_at": "2026-04-08T09:28:12.877Z",
+  "updated_at": "2026-04-11T20:52:35.452Z",
   "comment": {
-    "text": "Files and folders added to a room will appear here. This translation key is used as a placeholder text in an empty folder container, displayed when there are no files or folders in the room. It appears below the message \"Room is empty at the moment\".",
+    "text": "This is a line of text displayed in an empty room or folder, informing the user that files and folders will be listed here once added. It appears below \"Room empty at the moment.\"",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:12.847Z"
+    "updated_at": "2026-04-11T20:52:35.452Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 283,
+      "line_number": 284,
       "context": ")\n .with([FolderType.Rooms, P.when(() => isPublicRoom)], () => (\n <>\n <span>{t(\"Common:RoomEmptyAtTheMoment\")}</span>\n <br />\n <span>{t(\"Common:FilesWillAppearHere\")}</span>\n </>\n ))\n .with([FolderType.USER, P.when(() => security?.Create)], () =>\n t(\"EmptyView:DefaultFolderDescription\"),\n )",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/empty-view/EmptyView.helpers.tsx",
+      "line_number": 46,
+      "context": "export const getRootDescription = (t: TTranslation) => {\n return (\n <>\n <span>{t(\"Common:RoomEmptyAtTheMoment\")}</span>\n <br />\n <span>{t(\"Common:FilesWillAppearHere\")}</span>\n </>\n );\n };\n \n export const getDescription = (t: TTranslation) => {",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

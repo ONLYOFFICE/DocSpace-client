@@ -3,16 +3,17 @@
   "content": "*Applicable for the selected users who have such files and folders.",
   "content_en_sha1_hash": "403df26462c3d49c575e13fb9fc62472743436c6",
   "created_at": "2025-05-19T21:30:56.661Z",
-  "updated_at": "2026-04-07T19:35:05.065Z",
+  "updated_at": "2026-04-11T21:06:05.461Z",
   "comment": {
-    "text": "This translation key is used to describe a condition under which certain personal data can be deleted. It informs users that they are eligible to delete specific files and folders related to their profile.",
+    "text": "This is a descriptive sentence appearing in a dialog box, clarifying that the action of deleting personal data applies only to selected users who possess relevant files and folders.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:29.141Z"
+    "updated_at": "2026-04-11T21:06:05.461Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 134,
+      "line_number": 135,
       "context": "</Text>\n <Text className=\"text-delete-description\">\n {t(\"ToBeAbleToReassignData\")}\n </Text>\n <Text className=\"text-delete-description\">\n {t(\"DeletePersonalDataApplicable\")}\n </Text>\n </>\n );\n }",
       "module": "/packages/client"
     }

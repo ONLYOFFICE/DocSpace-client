@@ -3,13 +3,51 @@
   "content": "Failed to update tariff plan. Try again later or contact the sales department.",
   "content_en_sha1_hash": "bc9b4b305a68ff27847f763ef309786faf03e5d0",
   "created_at": "2026-04-10T13:53:42.490Z",
-  "updated_at": "2026-04-10T13:53:42.490Z",
+  "updated_at": "2026-04-23T17:24:02.172Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is an error toast message that appears when the system fails to update the user's tariff plan or open the payment portal.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:53:18.966Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/ButtonContainer.tsx",
+      "line_number": 51,
+      "context": "const { isNotPaidPeriod, isGracePeriod } = store.tariff;\n \n const goToStripePortal = () => {\n paymentLink\n ? window.open(paymentLink, \"_blank\")\n : toastr.error(t(\"ErrorNotification\"));\n };\n \n return (\n <StyledBody>\n {isNotPaidPeriod || isGracePeriod ? (",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/UpdatePlanButtonContainer.tsx",
+      "line_number": 123,
+      "context": "intervalId = setInterval(async () => {\n try {\n if (requestsCount === 30) {\n setIsLoading(false);\n \n intervalId && toastr.error(t(\"ErrorNotification\"));\n clearInterval(intervalId);\n intervalId = undefined;\n \n return;\n }",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/UpdatePlanButtonContainer.tsx",
+      "line_number": 123,
+      "context": "intervalId = setInterval(async () => {\n try {\n if (requestsCount === 30) {\n setIsLoading(false);\n \n intervalId && toastr.error(t(\"ErrorNotification\"));\n clearInterval(intervalId);\n intervalId = undefined;\n \n return;\n }",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/UpdatePlanButtonContainer.tsx",
+      "line_number": 123,
+      "context": "intervalId = setInterval(async () => {\n try {\n if (requestsCount === 30) {\n setIsLoading(false);\n \n intervalId && toastr.error(t(\"ErrorNotification\"));\n clearInterval(intervalId);\n intervalId = undefined;\n \n return;\n }",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/UpdatePlanButtonContainer.tsx",
+      "line_number": 123,
+      "context": "intervalId = setInterval(async () => {\n try {\n if (requestsCount === 30) {\n setIsLoading(false);\n \n intervalId && toastr.error(t(\"ErrorNotification\"));\n clearInterval(intervalId);\n intervalId = undefined;\n \n return;\n }",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
+      "line_number": 241,
+      "context": "intervalRef.current = setInterval(async () => {\n try {\n if (requestsCount === MAX_ATTEMPTS) {\n setIsLoading(false);\n toastr.error(t(\"ErrorNotification\"));\n clearInterval(intervalRef.current!);\n intervalRef.current = null;\n return;\n }",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

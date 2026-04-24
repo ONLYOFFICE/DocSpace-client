@@ -1,0 +1,29 @@
+{
+  "key_path": "ModelName",
+  "content": "Model name",
+  "content_en_sha1_hash": "5ebb9765420dc795e6140e1d1092cfa32d1efdbc",
+  "created_at": "2026-04-23T17:24:00.372Z",
+  "updated_at": "2026-04-23T17:40:40.726Z",
+  "comment": {
+    "text": "Label for a text input field in the AI settings panel, used to identify the field where the user enters the name of an AI model.",
+    "is_auto": true,
+    "updated_at": "2026-04-23T17:40:40.726Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/ModelSettingsPanel.tsx",
+      "line_number": 107,
+      "context": "<ModalDialog.Header>{t(\"Common:ModelSettings\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.body}>\n <FieldContainer\n labelText={t(\"AISettings:ModelName\")}\n labelVisible\n isVertical\n removeMargin\n >\n <TextInput",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

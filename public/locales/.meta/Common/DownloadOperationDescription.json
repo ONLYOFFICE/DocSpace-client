@@ -3,11 +3,12 @@
   "content": "Once ready, you can find the files in your browser's download folder and close this tab.",
   "content_en_sha1_hash": "fb51684432ddc37df0f5a627e4af0bafc54fe1d4",
   "created_at": "2025-05-19T21:30:44.672Z",
-  "updated_at": "2026-04-08T11:39:27.633Z",
+  "updated_at": "2026-04-11T20:54:41.965Z",
   "comment": {
-    "text": "This translation key is used to display a message informing users that files are ready to be downloaded and can be found in their browser's download folder. It appears on a UI element related to file downloads, likely as a confirmation or completion message. The translator should consider the tone of the English content, aiming for clarity and reassurance.",
+    "text": "This is a description displayed within an operation container, informing the user where to find downloaded files and that they can close the current tab.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:36.051Z"
+    "updated_at": "2026-04-11T20:54:41.965Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -33,25 +34,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'tab' (browser tab) is translated as 'nişan' (which means 'mark', 'sign', or 'icon'), which is incorrect in the context of a web browser.",
-          "suggestion": "Hazır olduqda, faylları brauzerinizin endirmə qovluğunda tapa və bu tabı bağlaya bilərsiniz."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'tab' (browser tab) is translated as 'раздел' (section), which changes the technical meaning of the instruction.",
-          "suggestion": "След като сте готови, можете да откриете файловете в папката за изтегляне на браузъра си и да затворите тази таб."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -153,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation contains several linguistic errors that make it sound unnatural and technically incorrect: 'fișeirele' is not a word (should be 'fișierele'), 'în dosarul de descărcări din browser-ul' is grammatically broken (should be 'în folderul de descărcări al browserului'), and 'puteți închide acestă filă' uses the wrong gender for the demonstrative adjective (should be 'această filă').",
-          "suggestion": "Odată ce sunt gata, puteți găsi fișierele în folderul de descărcări al browserului și puteți închide această filă."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -189,25 +172,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation has a completely different meaning. The English text is about file downloads, while the Serbian text is about changing user permissions or upgrading a subscription plan.",
-          "suggestion": "Када буде спремно, фајлове можете пронаћи у мапе за преузимање вашег претраживача и затворити ову картицу."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation is completely unrelated to the English source. The English text is about file downloads, while the Serbian text is about changing user permissions or upgrading a tariff plan.",
-          "suggestion": "Kada budu spremni, datoteke možete pronaći u fascikli za preuzimanje vašeg veb-pretraživača i zatvoriti ovu karticu."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -237,13 +208,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of 'tab' is incorrect. 'Skedë' means 'file', whereas the English text refers to a browser 'tab'.",
-          "suggestion": "Pasi të jeni gati, mund t'i gjeni skedarët në dosjen e shkarkimit të shfletuesit tuaj dhe të mbyllni këtë tab."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

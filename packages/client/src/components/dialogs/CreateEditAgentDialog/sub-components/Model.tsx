@@ -352,7 +352,7 @@ const ModelSettings = ({
       <div className=" set_room_params-info">
         <div>
           <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
-            {t("Model", {
+            {t("AIProviderAndModel", {
               aiProvider: t("Common:AIProvider"),
             })}
           </Text>

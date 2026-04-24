@@ -3,11 +3,12 @@
   "content": "Room grouping",
   "content_en_sha1_hash": "e82625e8fe8d243e9111a0521eeb813b868cb67b",
   "created_at": "2026-02-19T13:36:24.882Z",
-  "updated_at": "2026-03-20T09:35:47.629Z",
+  "updated_at": "2026-04-11T21:11:26.301Z",
   "comment": {
-    "text": "This text labels a section within an \"Edit Room Groups\" dialog, specifically the title of the area displaying room grouping options. It's used to identify the functionality related to organizing rooms into groups. Translators should ensure the term accurately conveys the concept of room organization.",
+    "text": "This is a section title within a dialog, indicating the settings related to organizing rooms into groups.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:35:47.629Z"
+    "updated_at": "2026-04-11T21:11:26.301Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

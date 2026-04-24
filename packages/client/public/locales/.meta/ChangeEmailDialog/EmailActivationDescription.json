@@ -3,17 +3,18 @@
   "content": "The activation instructions will be sent to the specified email address.",
   "content_en_sha1_hash": "1bef7b688f726b26cbcf758d60de8e07d56b4ea1",
   "created_at": "2025-05-19T21:30:57.019Z",
-  "updated_at": "2026-04-07T19:35:05.044Z",
+  "updated_at": "2026-04-11T21:03:21.805Z",
   "comment": {
-    "text": "The \"EmailActivationDescription\" translation key is used to display instructions about activation via email. It appears in a modal dialog when prompting users to change their email address, and its purpose is to inform them that activation details will be sent to their specified email address.",
+    "text": "This is a descriptive sentence within a dialog box, informing the user that email activation instructions will be sent to the provided address. It appears when a user changes their email.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:37.533Z"
+    "updated_at": "2026-04-11T21:03:21.805Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeEmailDialog/index.js",
       "line_number": 188,
-      "context": ">\n <ModalDialog.Header>{t(\"EmailChangeTitle\")}</ModalDialog.Header>\n <ModalDialog.Body className=\"email-dialog-body\">\n <div>\n <Text style={{ marginBottom: \"16px\" }}>\n {t(\"EmailActivationDescription\")}\n </Text>\n <FieldContainer\n isVertical\n style={{ margin: \"0\" }}\n // labelText={t(\"EnterEmail\")}",
+      "context": ">\n <ModalDialog.Header>{t(\"EmailChangeTitle\")}</ModalDialog.Header>\n <ModalDialog.Body className=\"email-dialog-body\">\n <div>\n <Text style={{ marginBottom: \"16px\" }}>\n {t(\"EmailActivationDescription\")}\n </Text>\n <FieldContainer\n isVertical\n style={{ margin: \"0\" }}\n // labelText={t(\"EnterNewEmail\")}",
       "module": "/packages/client"
     }
   ],

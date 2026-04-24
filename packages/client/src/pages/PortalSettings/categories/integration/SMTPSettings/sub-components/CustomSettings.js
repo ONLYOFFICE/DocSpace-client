@@ -254,7 +254,7 @@ const CustomSettings = (props) => {
         className="smtp_settings_checkbox"
         isDisabled={isLoading}
         name={ENABLE_SSL}
-        label={t("EnableSSL")}
+        label={t("EnableSMTPSSL")}
         isChecked={settings[ENABLE_SSL]}
         onChange={onChangeCheckbox}
         dataTestId="enable_ssl_checkbox"

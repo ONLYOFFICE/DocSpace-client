@@ -1,0 +1,29 @@
+{
+  "key_path": "OtherModelsTooltip",
+  "content": "Some models may not support certain actions or features",
+  "content_en_sha1_hash": "329f926936043761b551c8d21d26ee12630306e9",
+  "created_at": "2026-04-23T17:24:00.391Z",
+  "updated_at": "2026-04-23T17:39:30.728Z",
+  "comment": {
+    "text": "Tooltip for a help button in the AI model selection dialog, providing information about potential feature limitations in specific models.",
+    "is_auto": true,
+    "updated_at": "2026-04-23T17:39:30.728Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/ModelSelectorPopup.tsx",
+      "line_number": 268,
+      "context": ">\n <Text className={styles.sectionTitle}>\n {t(\"AISettings:OtherModels\")}\n </Text>\n <HelpButton\n tooltipContent={t(\"AISettings:OtherModelsTooltip\")}\n place=\"bottom\"\n size={12}\n />\n </div>\n {other.map((model) => (",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -4,7 +4,6 @@
   "ChangeInstruction": "{{productName}}の所有者を変更する場合は、新しい所有者の名前を以下で選択してください。",
   "ChangeOwner": "{{productName}}の所有者を変更する",
   "ChangeUser": "ユーザーを変更する",
-  "DeactivateOrDeletePortal": "{{productName}}を停止する、または解除する",
   "DoTheSame": "管理者と同じように行う",
   "ManagePortal": "{{productName}}構成を管理する",
   "ManageUser": "ユーザーアカウントを管理する",

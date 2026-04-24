@@ -3,13 +3,21 @@
   "content": "Available credits",
   "content_en_sha1_hash": "18001da8d15dc257d0536ba486f2b5d8401f3591",
   "created_at": "2026-04-10T13:53:44.792Z",
-  "updated_at": "2026-04-10T13:53:44.792Z",
+  "updated_at": "2026-04-23T17:24:02.179Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label for a numerical value, indicating the remaining balance of AI service credits. It appears within a balance card on the AI tools page.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:58:47.261Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
+      "line_number": 310,
+      "context": "<div className={styles.balanceSection}>\n <div className={styles.balanceCard}>\n <BalanceAmount\n amount={aiServiceBalance}\n currency={aiServiceCodeCurrency}\n title={t(\"AvailableCredits\")}\n onRefresh={onRefresh}\n isRefreshing={isRefreshing}\n />\n \n <Button",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

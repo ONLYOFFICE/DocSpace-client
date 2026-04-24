@@ -3,18 +3,19 @@
   "content": "Tool call arguments successfully copied to clipboard",
   "content_en_sha1_hash": "c996f9eb60ffb9439e6cc614f771b12df0f12c2f",
   "created_at": "2025-11-25T11:52:53.747Z",
-  "updated_at": "2026-04-07T21:35:30.282Z",
+  "updated_at": "2026-04-12T15:26:23.320Z",
   "comment": {
-    "text": "This key displays a success message confirming that tool call arguments have been copied to the user's clipboard. It appears as a confirmation message within a tool call code view, likely triggered by a copy action. Translators should ensure the message conveys a positive outcome of the copy operation.",
+    "text": "This is a toast message that appears briefly to confirm that the arguments of a tool call have been successfully copied to the user's clipboard.",
     "is_auto": true,
-    "updated_at": "2025-11-25T11:54:00.766Z"
+    "updated_at": "2026-04-11T20:40:58.627Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/message/ToolCallMessage/ToolCallBody/CodeView.tsx",
-      "line_number": 90,
-      "context": "<Text fontSize=\"15px\" lineHeight=\"16px\" fontWeight={600}>\n {t(\"Common:ToolCallArg\")}\n </Text>\n <MarkdownField\n chatMessage={formatJsonWithMarkdown(content.arguments)}\n successCopyMessage={t(\"Common:ToolCallArgCopied\")}\n />\n </div>\n {showResult ? (\n <div className={styles.toolCallCodeViewItem}>\n <Text fontSize=\"15px\" lineHeight=\"16px\" fontWeight={600}>",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/ToolCallMessage/ToolCallBody/code-view/index.tsx",
+      "line_number": 92,
+      "context": "<Text fontSize=\"15px\" lineHeight=\"16px\" fontWeight={600}>\n {t(\"ToolCallArg\")}\n </Text>\n <MarkdownField\n chatMessage={formatJsonWithMarkdown(content.arguments)}\n successCopyMessage={t(\"ToolCallArgCopied\")}\n />\n </div>\n {showResult ? (\n <div\n className={styles.toolCallCodeViewItem}",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {

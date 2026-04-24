@@ -3,17 +3,30 @@
   "content": "Payment method",
   "content_en_sha1_hash": "0e55fb3b04e225d83af1a64ec1cedc121fb61c32",
   "created_at": "2026-04-10T13:53:42.955Z",
-  "updated_at": "2026-04-10T13:55:48.547Z",
+  "updated_at": "2026-04-23T17:24:02.038Z",
   "comment": {
-    "text": "Used as a label for the \"Payment method\" category within the Portal Settings menu. It appears as a navigation item in the settings tree to direct users to the payment method configuration page.",
+    "text": "This is a label for a section or option related to how payments are made. It appears in billing interfaces, such as when managing payment settings or topping up a balance.",
     "is_auto": true,
-    "updated_at": "2026-04-10T13:55:48.547Z"
+    "updated_at": "2026-04-11T20:46:33.719Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
+      "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
+      "line_number": 157,
+      "context": "<PayerInformation />\n \n <div className={styles.header}>\n <Text fontSize=\"16px\" fontWeight={700} lineHeight=\"22px\">\n {t(\"PaymentMethod\")}\n </Text>\n <RefreshIconButton\n onRefresh={onRefreshPaymentMethod}\n isRefreshing={isRefreshing}\n />",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/PaymentMethod.tsx",
+      "line_number": 116,
+      "context": "return (\n <div className={styles.addPaymentMethod}>\n <div className={styles.paymentMethodDescription}>\n <div className={styles.paymentMethodTitle}>\n <Text isBold fontSize=\"16px\">\n {t(\"PaymentMethod\")}\n </Text>\n {walletCustomerEmail ? (\n <Link\n fontWeight={600}\n onClick={",
+      "module": "/libs/ui-kit"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/index.js",
-      "line_number": 90,
-      "context": "clearAbortControllerArr();\n },\n },\n {\n id: \"payment-method\",\n name: t(\"Common:PaymentMethod\"),\n content: <PaymentMethod />,\n onClick: () => {\n clearAbortControllerArr();\n },\n },",
+      "line_number": 94,
+      "context": "clearAbortControllerArr();\n },\n },\n !isNotPaidPeriod && {\n id: \"payment-method\",\n name: t(\"Common:PaymentMethod\"),\n content: <PaymentMethod />,\n onClick: () => {\n clearAbortControllerArr();\n },\n },",
       "module": "/packages/client"
     },
     {

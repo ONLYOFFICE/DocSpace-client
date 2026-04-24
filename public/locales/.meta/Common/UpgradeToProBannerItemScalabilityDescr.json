@@ -3,11 +3,12 @@
   "content": "Comfortably edit and collaborate on docs no matter what size your team is.",
   "content_en_sha1_hash": "e1913bff71c5bcb9a57aeaa6c2b538f7ac43e9b9",
   "created_at": "2025-05-26T07:15:49.288Z",
-  "updated_at": "2026-04-07T20:46:48.913Z",
+  "updated_at": "2026-04-12T13:14:22.683Z",
   "comment": {
-    "text": "The translation key \"UpgradeToProBannerItemScalabilityDescr\" is used to describe the feature of allowing comfortable collaboration on documents regardless of team size. This description appears in a banner item within an enterprise benefits container, providing context for users upgrading to a professional plan.",
+    "text": "This is a description for a feature benefit listed on an upgrade banner or payment page. It highlights the scalability aspect of the Pro version, emphasizing its suitability for teams of any size.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:02:08.989Z"
+    "updated_at": "2026-04-11T20:39:50.385Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -91,7 +92,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \"‎\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-12T13:13:09.165Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null

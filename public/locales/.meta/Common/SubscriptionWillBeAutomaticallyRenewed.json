@@ -3,13 +3,21 @@
   "content": "Subscription will be automatically renewed <1>on {{finalDate}}</1>",
   "content_en_sha1_hash": "6e554c22966d656fbeaa981cbe82bd31254def6d",
   "created_at": "2026-04-10T13:53:43.527Z",
-  "updated_at": "2026-04-10T13:53:43.527Z",
+  "updated_at": "2026-04-23T17:24:02.178Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a sentence displayed on the billing page, informing the user that their subscription will automatically renew. The `<1>on {{finalDate}}</1>` part indicates the specific date of renewal.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:41:38.114Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "line_number": 208,
+      "context": "},\n ];\n \n const keyProp = isScheduled\n ? { tKey: \"SubscriptionAutoCancellation\" }\n : { tKey: \"SubscriptionWillBeAutomaticallyRenewed\" };\n \n if (shouldShowLoader) return <AdditionalStoragePageLoader />;\n \n return (\n <div className={styles.container}>",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -62,7 +70,15 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "\"Tila\" means \"state/status/space\" in Finnish, not \"subscription\". The correct Finnish word for subscription is \"tilaus\". This changes the meaning of the sentence.",
+          "suggestion": "Tilaus uusitaan automaattisesti <1>{{finalDate}}</1>",
+          "checked_at": "2026-04-12T16:43:48.298Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -146,7 +162,15 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "In English, the word 'on' is inside the <1></1> tags: '<1>on {{finalDate}}</1>'. In the Sinhala translation, the equivalent word 'දිනදීය' (meaning 'on [that] day') is placed outside the closing </1> tag: '<1>{{finalDate}}</1> දිනදීය'. This means the tag does not wrap the full equivalent content.",
+          "suggestion": "දායකත්වය ස්වයංක්‍රීයව අලුත් කරනු ලබන්නේ <1>{{finalDate}} දිනදීය</1>",
+          "checked_at": "2026-04-12T16:45:09.191Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -170,7 +194,15 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The word 'on' inside the <1> tag is missing. English has '<1>on {{finalDate}}</1>' but Serbian only has '<1>{{finalDate}}</1>', dropping the preposition.",
+          "suggestion": "Абонплата ће се аутоматски обновити <1>{{finalDate}}</1> — the preposition 'on' should be translated and included inside the tag, e.g. '<1>дана {{finalDate}}</1>'",
+          "checked_at": "2026-04-12T16:45:26.991Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -188,7 +220,15 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The word \"on\" (preposition before the date) is present inside the <1> tag in English (\"<1>on {{finalDate}}</1>\") but is completely absent in the Ukrainian translation (\"<1>{{finalDate}}</1>\"). The Ukrainian equivalent (e.g., \"о\" or a suitable preposition) should appear inside the tag.",
+          "suggestion": "Підписка буде автоматично поновлена <1>{{finalDate}}</1> — if Ukrainian grammar handles this via date formatting, acceptable; otherwise use: Підписка буде автоматично поновлена <1>о {{finalDate}}</1>",
+          "checked_at": "2026-04-12T16:45:50.209Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

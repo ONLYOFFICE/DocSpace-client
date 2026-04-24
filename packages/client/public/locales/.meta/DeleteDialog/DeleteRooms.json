@@ -3,11 +3,12 @@
   "content": "The selected <strong>rooms ({{count}})</strong> will be permanently deleted. All data and user access will be lost.",
   "content_en_sha1_hash": "38a5fd65a97e8bf2123aff84be837e41f2905615",
   "created_at": "2026-04-03T21:51:39.679Z",
-  "updated_at": "2026-04-03T21:55:42.766Z",
+  "updated_at": "2026-04-11T21:05:34.753Z",
   "comment": {
-    "text": "Displays a warning message within a deletion confirmation dialog, informing the user that the selected rooms (including a dynamic count) will be permanently deleted along with all associated data and access.",
+    "text": "This is a confirmation message displayed in a dialog when a user attempts to delete multiple rooms. It informs the user that the selected rooms will be permanently deleted, along with all associated data and user access. The `{{count}}` variable represents the number of rooms selected for deletion.",
     "is_auto": true,
-    "updated_at": "2026-04-03T21:55:42.766Z"
+    "updated_at": "2026-04-11T21:05:34.753Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

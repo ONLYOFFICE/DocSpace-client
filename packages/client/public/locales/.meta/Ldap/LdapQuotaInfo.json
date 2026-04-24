@@ -3,16 +3,17 @@
   "content": "To be able to use this attribute, enable user quota in the <0>Storage management settings</0>",
   "content_en_sha1_hash": "b74fa70749a0470fd1d26e0810e4ffe636260943",
   "created_at": "2025-05-19T21:30:54.258Z",
-  "updated_at": "2026-04-07T19:35:05.147Z",
+  "updated_at": "2026-04-11T21:16:53.120Z",
   "comment": {
-    "text": "This translation key is used to display a message when enabling user quota in storage management settings. It will be displayed as part of a UI element, likely in a category or settings page, to inform users about the attribute's purpose.",
+    "text": "This is an informational text displayed when the LDAP user quota attribute is selected but not enabled. It instructs the user to enable user quota in the \"Storage management settings\" (a clickable link).",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:05.178Z"
+    "updated_at": "2026-04-11T21:16:53.120Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
-      "line_number": 245,
+      "line_number": 246,
       "context": "/>\n {!isDefaultUsersQuotaSet ? (\n <Text as=\"span\" fontWeight={400} fontSize=\"12px\" lineHeight=\"16px\">\n <Trans\n t={t}\n i18nKey=\"LdapQuotaInfo\"\n ns=\"Ldap\"\n components={[\n <Link\n key=\"link\"\n type=\"action\"",
       "module": "/packages/client"
     }

@@ -3,17 +3,24 @@
   "content": "Connect your own AI service to unlock advanced features in {{productName}}. Once added, it will be accessible to all users in {{aiChats}}.",
   "content_en_sha1_hash": "a65fbd5865591bc45637f4aadcb15bfb36b35fad",
   "created_at": "2025-12-22T14:24:24.511Z",
-  "updated_at": "2026-04-08T11:09:08.152Z",
+  "updated_at": "2026-04-11T20:54:09.832Z",
   "comment": {
-    "text": "This text explains how to connect a custom AI service to unlock advanced features within the product, making those features available to all users. It appears in empty state views, likely within a standalone admin interface or on a chat access screen, to inform users about AI feature availability. Translators should ensure clarity regarding the product and AI chat names.",
+    "text": "Description text displayed to a standalone portal administrator when no AI agents are configured. It explains how to enable AI features by connecting an AI service, which will then be available to all users in the AI Chats section. `{{productName}}` is the product's brand name (e.g., \"DocSpace\"), and `{{aiChats}}` refers to the \"AI Chats\" feature.",
     "is_auto": true,
-    "updated_at": "2025-12-23T10:32:57.880Z"
+    "updated_at": "2026-04-11T20:54:09.832Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-no-access-screen/index.tsx",
+      "line_number": 71,
+      "context": "const description = match([standalone, isPortalAdmin])\n // standalone admin\n .with([true, true], () =>\n t(\n \"EmptyAIAgentsAIDisabledStandaloneAdminDescription\",\n {\n productName: getBrandName(\"ProductName\"),\n aiChats: t(\"AIChats\"),\n },\n ),",
+      "module": "/libs/ui-kit"
+    },
+    {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 220,
-      "context": "standalone: boolean,\n isPortalAdmin: boolean,\n ) => {\n return match([standalone, isPortalAdmin])\n .with([true, true], () =>\n t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n aiChats: t(\"Common:AIChats\"),\n }),\n )\n .with([false, true], () =>",
+      "line_number": 221,
+      "context": "standalone: boolean,\n isPortalAdmin: boolean,\n ) => {\n return match([standalone, isPortalAdmin])\n .with([true, true], () =>\n t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription\", {\n productName: getBrandName(\"ProductName\"),\n aiChats: t(\"Common:AIChats\"),\n }),\n )\n .with([false, true], () =>",
       "module": "/packages/client"
     }
   ],
@@ -111,13 +118,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Pārijūreti' is a misspelling or incorrect word choice for 'Connect'. In Latvian, 'Pārijūreti' does not mean 'to connect' (which should be 'Pievienojiet' or 'Savienojiet'). 'Pārijūreti' is not a standard Latvian word in this context.",
-          "suggestion": "Pievienojiet savu AI pakalpojumu, lai atbloķētu papildu funkcijas {{productName}}ā. Pēc pievienošanas tas būs pieejams visiem lietotājiem {{aiChats}}ā."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -129,13 +130,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation uses a neuter gender form ('będzie dostępne') which refers to 'it' (the service/usługa), but in Polish, 'usługa' is feminine. To correctly refer to the 'advanced features' (zaawansowane funkcje) being accessible, the plural form 'będą dostępne' should be used, or the sentence structure should be adjusted to ensure grammatical agreement with the subject.",
-          "suggestion": "Podłącz własną usługę AI, aby odblokować zaawansowane funkcje w {{productName}}. Po dodaniu, będą one dostępne dla wszystkich użytkowników w {{aiChats}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -171,13 +166,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'odunlockovali' is a non-existent hybrid of Slovak and English (Spanglish/Slovaklish). It should be a proper Slovak word like 'odblokovali'.",
-          "suggestion": "Pripojte svoju vlastnú AI službu, aby ste odblokovali pokročilé funkcie v {{productName}}. Po pridaní bude pre všetkých používateľov v {{aiChats}} dostupné."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -213,13 +202,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The pronoun 'він' (he/it) in Ukrainian refers to 'AI-службу' (feminine noun), which is grammatically incorrect. It should be 'вона' to match the gender of the service, or the sentence should be restructured to refer to the features/functionality.",
-          "suggestion": "Підключіть власну AI-службу, щоб розблокувати розширені функції у {{productName}}. Після додавання, вона буде доступна всім користувачам у {{aiChats}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

@@ -3,17 +3,18 @@
   "content": "Encrypt data at rest",
   "content_en_sha1_hash": "55866187e3f73d7f89a5bbe25fe1344c85a640cd",
   "created_at": "2025-05-19T21:30:57.442Z",
-  "updated_at": "2026-04-07T19:35:05.255Z",
+  "updated_at": "2026-04-13T14:59:05.983Z",
   "comment": {
-    "text": "This translation key is used for the phrase \"Encrypt data at rest\" which appears on a button or similar action element in the encrypt data management page. It informs users about the encryption process's purpose and impact on stored files.",
+    "text": "This is a checkbox label in the settings page. It enables or disables the encryption of data stored on the server.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:47:57.884Z"
+    "updated_at": "2026-04-11T21:31:48.679Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/management/src/app/settings/encrypt-data/page.client.tsx",
-      "line_number": 45,
-      "context": "import type { TPortals } from \"@docspace/shared/api/management/types\";\n \n import { EncryptWarningDialog } from \"./EncryptWarningDialog\";\n import styles from \"./encrypt-data.module.scss\";\n \n type EncryptDataPageProps = {\n portals: TPortals[];\n encryptionBlockHelpUrl: string;\n isNotify: boolean;\n status: number;\n };",
+      "line_number": 85,
+      "context": "})}\n data-testid=\"encrypt-data-page\"\n >\n <div className={styles.header}>\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"EncryptData\")}\n </Text>\n {status === EncryptionStatus.Encrypted ? (\n <div className={styles.badge}>\n <Text fontSize=\"14px\" fontWeight={600}>\n {t(\"StorageEncrypted\")}",
       "module": "/packages/management"
     }
   ],

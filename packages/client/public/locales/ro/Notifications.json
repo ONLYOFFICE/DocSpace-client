@@ -1,4 +1,5 @@
 {
+  "ActionsWithFilesDescription": "Etichetele vor evidenția activitatea fișierelor — încărcări, modificări sau distribuiri — în secțiunile {{rooms}}, {{shared}}, {{documents}} și {{aiAgents}}.",
   "AdminSetupRequired": "Este necesară configurarea de către administrator",
   "Badges": "Ecusoane",
   "DailyFeed": "Fluxul zilnic {{productName}}",
@@ -8,12 +9,11 @@
   "LdapEmailTooltip": "Contul acestui utilizator este încărcat din LDAP. Adresa de email a utilizatorului nu a fost indicată, iar cea curentă a fost generată automat și nu poate fi folosită pentru a trimite notificări.",
   "NotConfigured": "Nu este configurat",
   "Notifications": "Notificări",
+  "RoomsActivityDescription": "Primiți notificări instantanee prin e-mail despre fișierele/folderelor noi partajate și activitatea din {{rooms}} și {{aiAgents}} ale dumneavoastră.",
+  "RoomUpdateNotify": "Conținut partajat, activitatea în {{rooms}} și {{aiAgents}}",
   "SettingUpNotifications": "Setare Notificări",
   "SuccessConnected": "{{serviceName}} a fost conectat cu succes ca modul de notificare. Veți primi acum actualizări în acest mod.",
   "SuccessDisconnected": "{{serviceName}} a fost deconectat cu succes ca modul de notificare. Notificările nu vor mai fi trimise în acest mod.",
   "UsefulTips": "Sfaturi utile {{productName}}",
-  "UsefulTipsDescription": "Obţineţi instrucţiuni utile privind {{productName}}",
-  "ActionsWithFilesDescription": "Etichetele vor evidenția activitatea fișierelor — încărcări, modificări sau distribuiri — în secțiunile {{rooms}}, {{shared}}, {{documents}} și {{aiAgents}}.",
-  "RoomsActivityDescription": "Primiți notificări instantanee prin e-mail despre fișierele/folderelor noi partajate și activitatea din {{rooms}} și {{aiAgents}} ale dumneavoastră.",
-  "RoomUpdateNotify": "Conținut partajat, activitatea în {{rooms}} și {{aiAgents}}"
+  "UsefulTipsDescription": "Obţineţi instrucţiuni utile privind {{productName}}"
 }

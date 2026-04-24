@@ -3,22 +3,23 @@
   "content": "Users can only access the rooms they are invited to by admins. They can't create own rooms, folders or files.<br/><1>In {{agentSection}}</1>: can view the {{aiAgent}} results and shared chats if they were invited, but cannot create chats or modify the knowledge base.",
   "content_en_sha1_hash": "ef129e1554a846afbdb03bc4bbcb2555fbc97db8",
   "created_at": "2025-12-19T10:16:38.171Z",
-  "updated_at": "2026-04-10T08:58:38.050Z",
+  "updated_at": "2026-04-13T08:38:39.895Z",
   "comment": {
-    "text": "This key provides a description of the limitations for new users, explaining they can only access invited rooms and cannot create content. It appears within user access option descriptions and user type descriptions, likely in a UI element explaining user roles or permissions. Translators should ensure the description clearly conveys the restricted functionality for new users.",
+    "text": "This is a description of the \"New User\" role, explaining their limited permissions within DocSpace and AI Agent features. It appears in user role selection interfaces. The `{{agentSection}}` variable is the localized name for the AI Agents section, and `{{aiAgent}}` is the localized name for the AI Agent feature. The `<1>` tag bolds the text within it.",
     "is_auto": true,
-    "updated_at": "2025-12-22T09:41:19.134Z"
+    "updated_at": "2026-04-11T20:44:31.179Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 91,
+      "line_number": 92,
       "context": "case None:\n return (\n <Trans\n t={t as TFunction}\n ns=\"Common\"\n i18nKey=\"RoleNewUserDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n agentSection: t(\"Common:AIAgents\"),",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getUserTypeDescription.tsx",
-      "line_number": 78,
+      "line_number": 79,
       "context": "if (isCollaborator)\n return (\n <Trans\n t={t as TFunction}\n ns=\"Common\"\n i18nKey=\"RoleNewUserDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n agentSection: t(\"Common:AIAgents\"),",
       "module": "/packages/shared"
     }
@@ -39,7 +40,15 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English text contains 'In {{agentSection}}' within the bold tag <1>In {{agentSection}}</1>, but the Azerbaijani translation only has '{{agentSection}}' within <1>{{agentSection}}</1>. The word 'In' (or its Azerbaijani equivalent) is missing, which is important for establishing the context/location.",
+          "suggestion": "<1>{{agentSection}}-də</1>: dəvət olundularsa, {{aiAgent}} nəticələrini və paylaşılmış söhbətləri görə bilərlər, lakin söhbət yarada və ya bilik bazasını dəyişdirə bilməzlər.",
+          "checked_at": "2026-04-13T08:36:05.315Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -51,13 +60,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech translation 'na které je administrátory pozvali' is grammatically incorrect and changes the meaning. It translates to 'which they invited by admins' (passive/active confusion). It should be 'na které byli pozváni administrátory' (which they were invited to by admins).",
-          "suggestion": "Uživatelé mohou přistupovat pouze do místností, na které byli pozváni administrátory. Nemohou vytvářet vlastní místnosti, složky ani soubory.<br/><1>V {{agentSection}}</1>: mohou prohlížet výsledky {{aiAgent}} a sdílené chaty, pokud byli pozváni, ale nemohou vytvářet chaty ani upravovat znalostní bázi."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -69,13 +72,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "wrong_language",
-          "description": "The Greek translation contains a fragment of Latin/English text 'xemάνε' instead of a pure Greek word.",
-          "suggestion": "Οι χρήστες μπορούν να έχουν πρόσβαση μόνο στις αίθουσες στις οποίες τους έχουν προσκαλέσει οι διαχειριστές. Δεν μπορούν να δημιουργήσουν δικές τους αίθουσες, φακέλους ή αρχεία.<br/><1>Στο {{agentSection}}</1>: μπορούν να δουν τα αποτελέσματα {{aiAgent}} και τις κοινοποιημένες συνομιλίες εάν τους έχουν προσκαλέσει, αλλά δεν μπορούν να δημιουργήσουν συνομιλίες ή να τροποποιήσουν τη βάση γνώσης."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -87,13 +84,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation says 'huonekantoja' (room databases/collections) instead of 'huoneita' (rooms), which changes the meaning of the restriction.",
-          "suggestion": "Käyttäjät voivat käyttää vain huoneita, joihin heidät ylläpitäjät ovat kutsuneet. He eivät voi luoda omia huoneita, kansioita tai tiedostoja.<br/><1>Kohdassa {{agentSection}}</1>: he voivat tarkastella {{aiAgent}}-tuloksia ja jaettuja keskusteluja, jos heidät on kutsuttu, mutta eivät voi luoda keskusteluja tai muokata tietopankkia."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -105,13 +96,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'admins' was translated as 'վարորդների' (drivers) instead of 'ադմինիստրատորների' (administrators).",
-          "suggestion": "Օգտատերերը կարող են մուտք գործել միայն այն սենյակներին, որոնց հրավիրվել են ադմինիստրատորների կողմից։ Նրանք չեն կարող ստեղծել սեփական սենյակներ, թղթապանակներ կամ ֆայլեր։<br/><1>{{agentSection}}</1>-ում՝ կարող են տեսնել {{aiAgent}} արդյունքները և կիսված զրույցները, եթե հրավիրվել են, բայց չեն կարող ստեղծել զրույցներ կամ փոփոխել գիտելիքների բազան։"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -123,13 +108,29 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "English text 'In' appears untranslated within the Japanese translation. The phrase '<1>In {{agentSection}}</1>' mixes English into the Japanese text, which should be fully translated to Japanese.",
+          "suggestion": "Change '<1>In {{agentSection}}</1>' to '<1>{{agentSection}}では</1>' or '<1>{{agentSection}}内では</1>' to properly translate the English preposition into Japanese. Full corrected text: 'ユーザーは、管理者から招待されたルームのみにアクセスできます。自身でルーム、フォルダ、またはファイルを作成することはできません。<br/><1>{{agentSection}}では</1>: 招待された場合、{{aiAgent}}の結果と共有チャットを閲覧できますが、チャットの作成やナレッジベースの変更はできません。'",
+          "checked_at": "2026-04-13T08:37:01.537Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The word 'In' appears before {{agentSection}} in the English text (within the <1> bold tags) but is missing from the Korean translation. English has '<1>In {{agentSection}}</1>' while Korean has '<1>{{agentSection}}</1>'.",
+          "suggestion": "사용자는 관리자가 초대하는 방에만 접근할 수 있습니다. 자체적으로 방, 폴더 또는 파일을 생성할 수 없습니다.<br/><1>{{agentSection}}에</1>: 초대된 경우 {{aiAgent}} 결과 및 공유 채팅을 볼 수 있지만, 채팅을 생성하거나 지식 기반을 수정할 수는 없습니다.",
+          "checked_at": "2026-04-13T08:36:58.505Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -141,13 +142,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'folders' was translated as 'karaktēras' (characters), which is incorrect in this context. It should be 'mappes'.",
-          "suggestion": "Lietotāji var piekļūt tikai tiem istabām, kurās viņiem ir iesaistīti no administratoriem. Viņi nevar izveidot savas istabas, mappes vai failus.<br/><1>Katrā {{agentSection}}</1>: var redzēt {{aiAgent}} rezultātus un dalītos sarunas, ja viņiem ir iesaistīti, bet nevar izveidot sarunas vai rediģēt zināšanas bāzi."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -189,19 +184,21 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The word 'In' (or its Sinhala equivalent) is missing from inside the <1> tag. English has '<1>In {{agentSection}}</1>' but Sinhala only has '<1>{{agentSection}}</1>'. This changes the meaning by removing the locative context indicator.",
+          "suggestion": "<1>{{agentSection}} හි</1>: ඔවුන්ට ආරාධනා කර ඇත්නම්, {{aiAgent}} ප්‍රතිඵල සහ බෙදාගත් chats නැරඹිය හැකි නමුත්, chats නිර්මාණය කිරීමට හෝ දැනුම පදනම සංශෝධනය කිරීමට නොහැකිය.",
+          "checked_at": "2026-04-13T08:38:04.819Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ak im boli pozvaní' is grammatically incorrect in Slovak and changes the meaning slightly; it should be 'ak boli pozvaní' (if they were invited) or 'ak boli pozvaní do nich' to match the English 'if they were invited'.",
-          "suggestion": "Používatelia môžu pristupovať iba miestnostiam, na ktoré ich administrátori pozvali. Nemôžu vytvárať vlastné miestnosti, adresáre alebo súbory.<br/><1>V {{agentSection}}</1>: môžu prehliadať výsledky {{aiAgent}} a zdieľané chaty, ak boli pozvaní, ale nemôžu vytvárať chaty ani upravovať znalostnú bázu."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -231,7 +228,15 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The word 'In' is left in English within the Turkish translation. This breaks the Turkish localization and should be translated to Turkish, such as using the locative case suffix.",
+          "suggestion": "Kullanıcılar yalnızca yöneticiler tarafından davet edildikleri odalara erişebilirler. Kendi odalarını, klasörlerini veya dosyalarını oluşturamazlar.<br/><1>{{agentSection}}'de</1>: davet edildilerse {{aiAgent}} sonuçlarını ve paylaşılan sohbetleri görüntüleyebilir, ancak sohbet oluşturamaz veya bilgi tabanını düzenleyemez.",
+          "checked_at": "2026-04-13T08:38:28.560Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

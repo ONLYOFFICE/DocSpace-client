@@ -3,13 +3,21 @@
   "content": "These {{itemCount}} items will be permanently deleted. Are you sure?",
   "content_en_sha1_hash": "d7d4e0a69435ccf62fe4bedee43b8a740d981d18",
   "created_at": "2026-04-03T21:51:27.569Z",
-  "updated_at": "2026-04-08T12:18:58.245Z",
+  "updated_at": "2026-04-11T20:55:20.369Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a confirmation message in a dialog box, displayed when a user attempts to permanently delete multiple items from the trash. The `{{itemCount}}` variable represents the number of items being deleted.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:55:20.369Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/delete-dialog/index.tsx",
+      "line_number": 58,
+      "context": "const { t } = useTranslation([\"Common\"]);\n \n const message = isTrash\n ? itemCount === 1\n ? t(\"Common:DeleteItemForever\")\n : t(\"Common:DeleteItemsForever\", { itemCount })\n : itemCount === 1\n ? t(\"Common:MoveToTrashItem\")\n : t(\"Common:MoveToTrashItems\", { itemCount });\n \n return (",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -140,13 +148,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical error in noun declension: 'элемента' (singular genitive) is used instead of 'элементов' (plural genitive) which is required for the context of multiple items.",
-          "suggestion": "Эти {{itemCount}} элементов будут удалены навсегда. Вы уверены?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -164,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'preprimeni' is not a valid Slovenian word in this context. The correct word for 'sure' is 'prepasti' or more commonly 'prepričani'.",
-          "suggestion": "Ti {{itemCount}} elementi bodo trajno izbrisani. Ali ste prepričani?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
@@ -182,13 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation contains nonsensical word fragments ('ставкеће предмета') that do not form a coherent sentence and fail to convey the original meaning.",
-          "suggestion": "Ових {{itemCount}} ставки ће бити трајно обрисане. Да ли сте сигурни?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

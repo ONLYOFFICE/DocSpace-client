@@ -1,7 +1,9 @@
 {
+  "AgentInViewModeWarning": "Jste v režimu <strong>pouze pro čtení</strong> pro tento {{aiAgent}}. Můžete vidět výsledky aktivity {{aiChat}} ostatních uživatelů.",
   "AIAgentAccessRedirectNote": "Budete automaticky přesměrováni do sekce {{sectionName}} za 5 sekund.",
   "AIChat": "AI-Chat",
   "AIInstructions": "Pokyny pro AI",
+  "AIProviderAndModel": "{{aiProvider}} a model",
   "CreateChat": "Vytvořit chat",
   "CreateChatDescription": "Přejděte na záložku {{aiChat}}, abyste zahájili.",
   "EmptyKnowledgeDescription": "Soubory nahrané sem budou indexovány a použity jako kontext ve záložce {{aiChat}}. Přidejte soubory (do 10 MB každý) k zadání otázek AI, generování obsahu nebo k spolupráci na informacích.",
@@ -11,6 +13,7 @@
   "EmptyResultsTitle": "Ještě žádné výsledky.",
   "EmptyResultsViewerDescription": "Zde uvidíte výsledky aktivity {{aiChat}} od jiných uživatelů, jakmile budou dostupné.",
   "InstructionsDescriptionAgent": "Popište, jak se {{aiAgent}} má chovat a reagovat. Definujte jeho roli, tón a hlavní úkoly.",
+  "InstructionsDescriptionAgentExample": "Příklad: „Jste AI asistent pro PR, který pomáhá s psaním a úpravou tiskových zpráv. Udržujte profesionální, sebevědomý a pro média přívětivý tón. Jasně vyzdvihujte klíčová sdělení, vyhýbejte se žargonu a udržujte text stručný a poutavý.“",
   "Knowledge": "Základ зна}*/",
   "KnowledgeDescription": "Nahrajte soubory z vašeho počítače nebo z {{productName}}, abyste poskytli lepší kontext pro chat. Upozornění: během konverzace mohou být některé nebo všechny nahrané soubory zobrazeny.",
   "KnowledgeSelectIn": "Vybrat v {{productName}}",
@@ -19,13 +22,10 @@
   "KnowledgeUnavailableDescriptionUser": "Knihovna znalostí je momentálně deaktivována. Pro aktivaci semantického vyhledávání a zpracování dokumentů pro {{aiAgents}}, prosím, kontaktujte vašeho administrátora {{productName}} k konfiguraci poskytovatele embeddingů.",
   "MCP": "MCP nástroje pro tuto místnost",
   "MCPDescriptionServers": "Použijte {{mcpServers}}, které nastavil administrátor, k vylepšení chatového zážitku s AI. {{mcpServers}} může pomoci s extrakcí dat, shrnutími, chytrými návrhy a dalšími funkcemi.",
-  "Model": "{{aiProvider}} a model",
   "ModelDescription": "Vyberte {{aiProvider}} a model, který se bude používat v chatech této místnosti. Toto nastavení je povinné a platí pro všechny účastníky.",
   "NoAccessAIAgentTitle": "Omlouvám se, nemáte přístup k tomuto {{aiAgent}}",
   "ResponseQualityNode": "<1>Poznámka:</1> Kvalita odpovědí se může lišit v závislosti na modelu; pro nejlepší výsledky se doporučují novější modely.",
   "ResultStorage": "Úložiště výsledků",
   "UploadFilesDevice": "Nahrajte soubory z vašeho osobního zařízení.",
-  "UploadFilesPortal": "Nahrajte soubory z {{sectionNameFirst}} nebo {{sectionNameSecond}}",
-  "AgentInViewModeWarning": "Jste v režimu <strong>pouze pro čtení</strong> pro tento {{aiAgent}}. Můžete vidět výsledky aktivity {{aiChat}} ostatních uživatelů.",
-  "InstructionsDescriptionAgentExample": "Příklad: „Jste AI asistent pro PR, který pomáhá s psaním a úpravou tiskových zpráv. Udržujte profesionální, sebevědomý a pro média přívětivý tón. Jasně vyzdvihujte klíčová sdělení, vyhýbejte se žargonu a udržujte text stručný a poutavý.“"
+  "UploadFilesPortal": "Nahrajte soubory z {{sectionNameFirst}} nebo {{sectionNameSecond}}"
 }

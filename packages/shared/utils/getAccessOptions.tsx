@@ -29,6 +29,7 @@ import type { TTranslation } from "../types";
 import { getUserTypeTranslation } from "./common";
 import { EmployeeType, RoomsType, ShareAccessRights } from "../enums";
 import { TFunction } from "i18next";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 export type AccessOptionType = {
 	key: string | EmployeeType;
@@ -137,7 +138,7 @@ export const getAccessOptions = (
 						1: <strong></strong>,
 					}}
 					values={{
-						productName: t("Common:ProductName"),
+						productName: getBrandName("ProductName"),
 						sectionName: t("Common:Documents"),
 						agentSection: t("Common:AIAgents"),
 					}}
@@ -162,7 +163,7 @@ export const getAccessOptions = (
 			label: t("Common:RoomManager"),
 			description: getRoomAdminDescription(roomType, t),
 			tooltip: t("UserMaxAvailableRoleWarning", {
-				productName: t("Common:ProductName"),
+				productName: getBrandName("ProductName"),
 			}),
 			...(!standalone && isNone && { quota: t("Common:Paid") }),
 			color: globalColors.favoritesStatus,
@@ -174,7 +175,7 @@ export const getAccessOptions = (
 			label: t("Common:AgentManager"),
 			description: getRoomAdminDescription(roomType, t),
 			tooltip: t("UserAgentMaxAvailableRoleWarning", {
-				productName: t("Common:ProductName"),
+				productName: getBrandName("ProductName"),
 			}),
 			...(!standalone && isNone && { quota: t("Common:Paid") }),
 			color: globalColors.favoritesStatus,
@@ -195,7 +196,7 @@ export const getAccessOptions = (
 			tooltip:
 				roomType === RoomsType.AIRoom
 					? t("GuestAgentMaxAvailableRoleWarning", {
-							productName: t("Common:ProductName"),
+							productName: getBrandName("ProductName"),
 						})
 					: undefined,
 			access: isNone ? EmployeeType.User : ShareAccessRights.Collaborator,

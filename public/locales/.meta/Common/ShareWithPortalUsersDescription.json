@@ -3,17 +3,18 @@
   "content": "Select specific users from {{productName}} and invite them to fill out the original form.",
   "content_en_sha1_hash": "3be65286af53e08e26a1e63c3c611aff14f48e44",
   "created_at": "2025-09-23T07:24:16.886Z",
-  "updated_at": "2026-04-07T23:03:37.595Z",
+  "updated_at": "2026-04-12T19:53:42.672Z",
   "comment": {
-    "text": "This text describes a button or option within a dialog that allows users to invite specific individuals from the product to complete a form. It's used to share a form with selected users. The product name will be dynamically inserted into the description.",
+    "text": "This is the description text for the \"Share with users\" option within a sharing dialog. It explains that users can be selected from the portal to share the document with. `{{productName}}` will be replaced with the product's brand name.",
     "is_auto": true,
-    "updated_at": "2025-09-23T07:25:03.427Z"
+    "updated_at": "2026-04-11T20:42:52.053Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
-      "line_number": 183,
-      "context": "{\n id: \"share-with-users\",\n title: t(\"Common:ShareWithPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n description: t(\"Common:ShareWithPortalUsersDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n buttonLabel: t(\"Common:Share\"),\n onClick: shareFileToUsers,\n icon: <ShareFileToUsersIcon />,",
+      "line_number": 184,
+      "context": "{\n id: \"share-with-users\",\n title: t(\"Common:ShareWithPortalUsers\", {\n productName: getBrandName(\"ProductName\"),\n }),\n description: t(\"Common:ShareWithPortalUsersDescription\", {\n productName: getBrandName(\"ProductName\"),\n }),\n buttonLabel: t(\"Common:Share\"),\n onClick: shareFileToUsers,\n icon: <ShareFileToUsersIcon />,",
       "module": "/packages/doceditor"
     }
   ],
@@ -99,13 +100,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation '원본 양식 작성을 초대합니다' (invites the writing of the original form) is grammatically awkward and implies inviting the 'act of writing' rather than inviting 'users to fill out' the form. It should be '사용자를 초대하여 양식을 작성하도록 합니다'.",
-          "suggestion": "{{productName}}에서 특정 사용자를 선택하여 원본 양식을 작성하도록 초대합니다."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -141,18 +136,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_variable",
-          "description": "Missing variable(s): {{productName}}",
-          "suggestion": ""
-        },
-        {
-          "type": "extra_variable",
-          "description": "Extra variable(s) not in English: {{ productName }}",
-          "suggestion": ""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {

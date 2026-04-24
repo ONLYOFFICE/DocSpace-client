@@ -67,7 +67,7 @@ const EmptyRoomGroupContainer = ({
     <EmptyView
       icon={icon}
       title={t("GroupingRooms:GroupIsEmpty")}
-      description={t("GroupingRooms:EmptyGroupDescription")}
+      description={t("GroupingRooms:EmptyGroupRoomsDescription")}
       options={options}
       className={styles.wrapper}
       bodyClassName={styles.body}

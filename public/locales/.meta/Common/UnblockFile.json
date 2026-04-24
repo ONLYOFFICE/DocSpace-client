@@ -3,16 +3,17 @@
   "content": "Unblock",
   "content_en_sha1_hash": "12aabd251c4213f1cebfe4cb83e6547df55552c3",
   "created_at": "2025-05-19T21:30:49.379Z",
-  "updated_at": "2026-04-10T08:21:04.375Z",
+  "updated_at": "2026-04-23T17:24:02.078Z",
   "comment": {
-    "text": "This translation key is used to display the text \"Unblock\" in a file context, indicating that the file has been unlocked. It appears on a quick button or dialog and is used when unlocking a previously blocked file.",
+    "text": "This is the label for a button or a tooltip that appears when a file is locked. It allows the user to unlock the file.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:37:10.649Z"
+    "updated_at": "2026-04-11T20:40:19.144Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2462,
+      "line_number": 2521,
       "context": "),\n },\n {\n id: \"option_block-unblock-version\",\n key: \"block-unblock-version\",\n label: item.locked ? t(\"Common:UnblockFile\") : t(\"Common:BlockFile\"),\n icon: LockedReactSvgUrl,\n onClick: () => this.lockFile(item, t),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
@@ -39,13 +40,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation 'فَكَّ الحِجَار' literally means 'breaking the stones' or 'removing the rocks', which is a nonsensical translation for 'Unblock' in a digital file context. It does not convey the meaning of unlocking a file.",
-          "suggestion": "إلغاء القفل"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -75,13 +70,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation 'Ξεμπλόκαρε' is in the past tense (meaning 'unblocked'), whereas the English 'Unblock' is an imperative/action command. In a UI context for a button, the infinitive/imperative form is required.",
-          "suggestion": "Ξεκλείδωμα"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -93,13 +82,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Avaa tukos' means 'Open a blockage/clog' (like a physical pipe), whereas in the context of file locking/unlocking, it should refer to releasing a lock on a file.",
-          "suggestion": "Poista lukitus"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -183,37 +166,19 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'අනවහිර කරන්න' means 'Unblock' in the sense of 'un-restricting' or 'removing a block' (like unblocking a user), but in the context of file locking/unlocking, it translates to 'removing a restriction' rather than 'releasing a lock'. More importantly, 'අනවහිර කරන්න' is often used for 'Unblock' (as in unblocking a website/user), whereas for a file that is 'locked', the correct action is 'අගුළු හරින්න' (Unlock).",
-          "suggestion": "අගුළු හරින්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation 'Odomknúť' means 'To unlock' (as in a lock/key), whereas the English 'Unblock' in the context of a blocked file/user usually refers to 'Odboriť' or 'Odblokovať'. However, more critically, 'Odomknúť' is the opposite of 'Zablokovať' (Block), but in software UI, 'Unblock' is specifically 'Odblokovať'.",
-          "suggestion": "Odblokovať"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Odpri' means 'Open'. In the context of file locking/blocking, 'Unblock' should be translated as 'Odblokiraj'.",
-          "suggestion": "Odblokiraj"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
@@ -249,13 +214,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Vietnamese translation 'Khôi phục' means 'Restore' or 'Recover', which is used for recovering deleted files or previous versions. For unlocking a file (reversing a lock/block state), the correct term is 'Bỏ chặn' or 'Mở khóa'.",
-          "suggestion": "Bỏ chặn"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

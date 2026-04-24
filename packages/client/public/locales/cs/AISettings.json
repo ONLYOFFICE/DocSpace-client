@@ -62,5 +62,19 @@
   "WebSearchDisabledSuccess": "{{webSearch}} úspěšně deaktivováno",
   "WebSearchEnabledSuccess": "{{webSearch}} úspěšně povoleno",
   "WebSearchKeyDescription": "Zadejte API klíč získaný od vašeho poskytovatele {{webSearch}}",
-  "WebSearchKeyHiddenDescription": "Klíč rozhraní API se zobrazí pouze jednou při ukládání a následně je skryt z bezpečnostních důvodů."
+  "WebSearchKeyHiddenDescription": "Klíč rozhraní API se zobrazí pouze jednou při ukládání a následně je skryt z bezpečnostních důvodů.",
+  "Capabilities": "Schopnosti",
+  "CapabilityExtendedThinking": "Rozšílené myšlení",
+  "CapabilityToolCalling": "Volání nástrojů",
+  "CapabilityVision": "Vnímání",
+  "ListModels": "Seznam modelů",
+  "ModelName": "Název modelu",
+  "ModelNameHint": "Použijte název, který vám pomůže tento model identifikovat.",
+  "OtherModels": "Ostatní modely",
+  "OtherModelsTooltip": "Některé modely nemusí podporovat určité akce nebo funkce",
+  "RecommendedModels": "Doporučené modely",
+  "RecommendedModelsTooltip": "Modely s potvrzenou podporou funkcí a akcí {{productName}}",
+  "SelectAtLeastOneModel": "Vyberte alespoň jeden model",
+  "SelectModels": "Vyberte modely",
+  "CapabilitiesDescription": "Tato nastavení určují, které funkce jsou zobrazeny a dostupné pro tento model v chatu {{productName}}."
 }

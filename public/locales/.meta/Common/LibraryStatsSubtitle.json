@@ -3,13 +3,21 @@
   "content": "Professional templates with AI-powered data collection",
   "content_en_sha1_hash": "7e1c98dde39455c416d028c168723a05b7ef5d8c",
   "created_at": "2026-03-31T15:18:15.013Z",
-  "updated_at": "2026-04-08T06:08:03.921Z",
+  "updated_at": "2026-04-11T20:50:10.937Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a subtitle displayed on the library landing page, describing the benefits of using professional templates.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:50:10.937Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/library-landing/StatsBar.tsx",
+      "line_number": 51,
+      "context": "return (\n <section className={styles.stats}>\n <h2 className={styles.statsTitle}>{t(\"Common:LibraryStatsTitle\")}</h2>\n <p className={styles.statsSubtitle}>\n {t(\"Common:LibraryStatsSubtitle\")}\n </p>\n \n <div className={styles.statsCards}>\n <div className={styles.statsCard}>\n <span className={styles.statsNumber}>{templatesCount}</span>",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -158,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'predloški zbirniki' is a nonsensical combination in Slovenian. 'Predloški' means templates, and 'zbirniki' means collections/repositories. The English text refers to 'Professional templates' (Profesionalni predloški), but the translation adds an extra word 'zbirniki' which changes the meaning to 'Professional template collections'.",
-          "suggestion": "Profesionalni predloški z zbiranjem podatkov z uporabo umetne inteligence"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
@@ -176,25 +178,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "extra_tag",
-          "description": "Extra tag(s) not in English: </strong>, <strong style=\"font-size: 1.2em;\">",
-          "suggestion": ""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation uses 'pokrenim' (I start/I trigger), which is a first-person singular verb, instead of 'pokrenutim' (powered/driven), which is the correct adjective/participle form.",
-          "suggestion": "Profesionalni šabloni sa prikupljanjem podataka pokrenutim AI-om"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

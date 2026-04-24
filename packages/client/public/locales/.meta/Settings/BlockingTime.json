@@ -3,17 +3,18 @@
   "content": "Blocking time (sec)",
   "content_en_sha1_hash": "490a942a08ee42cd63c3e4b0cf291fa362e24a10",
   "created_at": "2025-05-19T21:30:50.711Z",
-  "updated_at": "2026-04-09T04:03:09.776Z",
+  "updated_at": "2026-04-13T14:59:05.896Z",
   "comment": {
-    "text": "This translation key is used for the label that displays a blocking time value in seconds on the brute force protection settings page. It appears in a dropdown menu or similar control within the security category of portal settings, allowing users to configure the duration for blocking IP addresses after a certain number of failed login attempts.",
+    "text": "This is a label for an input field in the portal security settings. It specifies the duration, in seconds, for which a user will be blocked after too many failed login attempts.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:40.446Z"
+    "updated_at": "2026-04-11T21:25:27.453Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/bruteForceProtection.js",
-      "line_number": 71,
-      "context": "tfaStore,\n setup,\n } = props;\n \n const defaultNumberAttempt = numberAttempt?.toString();\n const defaultBlockingTime = blockingTime?.toString();\n const defaultCheckPeriod = checkPeriod?.toString();\n \n const [currentNumberAttempt, setCurrentNumberAttempt] =\n useState(defaultNumberAttempt);\n const [currentBlockingTime, setCurrentBlockingTime] =",
+      "line_number": 325,
+      "context": "</FieldContainer>\n \n <FieldContainer\n className=\"input-container\"\n labelVisible\n labelText={t(\"BlockingTime\")}\n isVertical\n place=\"top\"\n hasError={hasErrorBlockingTime}\n errorMessage={t(\"ErrorMessageBruteForceProtection\")}\n >",
       "module": "/packages/client"
     }
   ],

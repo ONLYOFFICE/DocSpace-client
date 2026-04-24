@@ -3,13 +3,21 @@
   "content": "All transactions",
   "content_en_sha1_hash": "b85f97d34402fd7697084e8ea17725ff7419295c",
   "created_at": "2026-04-10T13:53:41.834Z",
-  "updated_at": "2026-04-10T13:53:41.834Z",
+  "updated_at": "2026-04-23T17:24:02.187Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label for an option in a dropdown menu, allowing users to filter a list to display all transaction types.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:59:28.958Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
+      "line_number": 125,
+      "context": "const t = useCommonTranslation();\n \n const typeOfHistoty: TOption[] = [\n {\n key: \"allTransactions\",\n label: t(\"AllTransactions\"),\n dataTestId: \"all_transactions_option\",\n },\n {\n key: \"credit\",\n label: t(\"Credit\"),",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

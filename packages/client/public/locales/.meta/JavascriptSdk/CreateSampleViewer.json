@@ -3,11 +3,12 @@
   "content": "Create sample Viewer embed",
   "content_en_sha1_hash": "77e46f467ad0af7310c64afe014ff7ce67b032fe",
   "created_at": "2025-05-19T21:30:54.408Z",
-  "updated_at": "2026-04-07T19:35:05.129Z",
+  "updated_at": "2026-04-11T21:16:03.630Z",
   "comment": {
-    "text": "This translation key is used for the \"Create Sample Viewer\" button header in the Developer Tools category of Portal Settings. It provides a title for a preset that allows users to embed sample viewers.",
+    "text": "This is a header for a section that allows users to create a sample embed for the Viewer.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:47.560Z"
+    "updated_at": "2026-04-11T21:16:03.630Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -1,4 +1,5 @@
 {
+  "ActionsWithFilesDescription": "Rozetler, {{rooms}}, {{shared}}, {{documents}} ve {{aiAgents}} bölümlerindeki dosya etkinliklerini — yüklemeler, düzenlemeler veya paylaşmalar — vurgulayacaktır.",
   "AdminSetupRequired": "Yönetici kurulumu gerekiyor",
   "Badges": "Rozetler",
   "DailyFeed": "Günlük {{productName}} akışı",
@@ -8,12 +9,11 @@
   "LdapEmailTooltip": "Bu kullanıcı hesabı LDAP'den yüklenmiştir. Kullanıcının e-posta adresi belirtilmedi ve mevcut olan otomatik olarak oluşturuldu, bildirim göndermek için kullanılamaz.",
   "NotConfigured": "Yapılandırılmadı",
   "Notifications": "Bildirimler",
+  "RoomsActivityDescription": "{{rooms}} ve {{aiAgents}} içindeki yeni paylaşılan dosya/klasörler ve etkinlikler hakkında anında e-posta bildirimleri alın.",
+  "RoomUpdateNotify": "Paylaşılan içerik, {{rooms}} ve {{aiAgents}} etkinliği",
   "SettingUpNotifications": "Bildirimleri ayarlama",
   "SuccessConnected": "{{serviceName}} başarıyla bir bildirim kanalı olarak bağlandı. Artık oradan güncellemeler alacaksınız.",
   "SuccessDisconnected": "{{serviceName}} bildirim kanalı olarak başarıyla bağlantısı kesildi. Orada bildirimler artık gönderilmeyecektir.",
   "UsefulTips": "Faydalı {{productName}} ipuçları",
-  "UsefulTipsDescription": "{{productName}} hakkında faydalı kılavuzlar edinin",
-  "ActionsWithFilesDescription": "Rozetler, {{rooms}}, {{shared}}, {{documents}} ve {{aiAgents}} bölümlerindeki dosya etkinliklerini — yüklemeler, düzenlemeler veya paylaşmalar — vurgulayacaktır.",
-  "RoomsActivityDescription": "{{rooms}} ve {{aiAgents}} içindeki yeni paylaşılan dosya/klasörler ve etkinlikler hakkında anında e-posta bildirimleri alın.",
-  "RoomUpdateNotify": "Paylaşılan içerik, {{rooms}} ve {{aiAgents}} etkinliği"
+  "UsefulTipsDescription": "{{productName}} hakkında faydalı kılavuzlar edinin"
 }

@@ -3,11 +3,12 @@
   "content": "Stopped",
   "content_en_sha1_hash": "51e9111b87116e60566740d13ba1c1eddb042333",
   "created_at": "2025-05-19T21:30:49.083Z",
-  "updated_at": "2026-04-07T22:20:48.460Z",
+  "updated_at": "2026-04-12T17:32:13.968Z",
   "comment": {
-    "text": "This translation key displays a message indicating that a file is stopped in a filling process. It appears as part of a status indicator component, used to display the current status of a filing form. The translated content should reflect whether the file is being processed (YourTurn), has started but not completed (InProgress), or has been completely stopped.",
+    "text": "This is a status label indicating that a file filling process has been halted. It appears as a short, single word.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:38:38.608Z"
+    "updated_at": "2026-04-11T20:42:03.178Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -147,13 +148,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'Încetare' is a noun meaning 'Cessation' or 'Stopping'. In the context of a status indicator (Stopped, InProgress, Completed), the translation should be a past participle/adjective to match the state of the file.",
-          "suggestion": "Oprit"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -165,25 +160,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'නැවැතී.' (meaning 'having stopped' or 'stayed') is a participle/adverbial form. For a status indicator, a noun or a direct state adjective is required to match the English 'Stopped'.",
-          "suggestion": "නැවතීම"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation 'Ukončené' means 'Completed' or 'Finished', which is the same as the 'Complete' status. For a 'Stopped' status (indicating an interruption or cessation), 'Zastavené' is the correct term to distinguish it from 'Completed'.",
-          "suggestion": "Zastavené"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {

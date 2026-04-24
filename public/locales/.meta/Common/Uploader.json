@@ -3,22 +3,29 @@
   "content": "Uploader",
   "content_en_sha1_hash": "d1c7310f3bc833ce522db3329fe0f4f539e9c27d",
   "created_at": "2025-05-19T21:30:49.434Z",
-  "updated_at": "2026-04-10T08:21:04.319Z",
+  "updated_at": "2026-04-23T17:24:01.848Z",
   "comment": {
-    "text": "This translation key is used to display the \"Uploader\" label in a settings plugin dialog. It appears as part of a UI component that displays information about file uploads, likely on a button or similar interactive element.",
+    "text": "This is a label for a section or feature related to uploading files. It appears in the plugin settings and as a title for a developer tool.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:35:40.622Z"
+    "updated_at": "2026-04-11T20:39:44.842Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Info.tsx",
-      "line_number": 104,
+      "line_number": 105,
       "context": ") : null}\n \n {!plugin.system ? (\n <>\n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\" truncate>\n {t(\"Common:Uploader\")}\n </Text>\n <Text\n dataTestId=\"plugin_create_by\"\n fontSize=\"13px\"\n fontWeight={600}",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DeveloperToolsHeader.tsx",
+      "line_number": 72,
+      "context": "case \"file-selector\":\n return t(\"Common:FileSelector\");\n case \"custom\":\n return t(\"Common:Custom\");\n case \"uploader\":\n return t(\"Common:Uploader\");\n default:\n return null;\n }\n };",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 130,
+      "line_number": 131,
       "context": "}),\n image: theme.isBase ? CustomImg : CustomImgDark,\n handleOnClick: navigateToCustom,\n },\n {\n title: t(\"Common:Uploader\"),\n description: t(\"UploaderDescription\"),\n image: theme.isBase ? UploaderImg : UploaderImgDark,\n handleOnClick: navigateToUploader,\n },\n ];",
       "module": "/packages/client"
     }
@@ -33,13 +40,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word 'Uploader' is a noun referring to the entity/person who uploads. The Arabic translation 'تم التحميل بواسطة' is a phrase meaning 'Uploaded by', which changes the grammatical function from a label/noun to a passive sentence fragment.",
-          "suggestion": "المُحمِّل"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -51,25 +52,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation 'Качващо устройство' means 'Uploading device' (hardware), whereas the English 'Uploader' in this context refers to the person or entity performing the upload (the user/actor).",
-          "suggestion": "Качващ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English 'Uploader' is a noun referring to the person or entity that uploaded the file. The Czech 'Nahrál/a' is a verb (past tense, masculine/feminine) meaning 'Uploaded'.",
-          "suggestion": "Nahrávač"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -87,13 +76,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "In a software/UI context, 'Uploader' refers to the person or entity that uploaded a file. 'Cargador' in Spanish typically refers to a physical charger (like for a battery) or a loader (mechanical). The correct term for a person/entity performing an upload is 'Subidor' or, more commonly in UI, 'Usuario que subió' or 'Autor de la carga'. However, in the context of a label for a component, 'Subidor' or 'Persona que carga' is preferred, but 'Cargador' is a semantic error as it implies a hardware device.",
-          "suggestion": "Subidor"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -105,13 +88,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Chargeur' in French refers to a hardware charger (like a phone charger) or a loader/magazine. In the context of a file upload UI component, 'Uploader' refers to the person or system performing the upload, or the action/component itself. 'Chargeur' is a mistranslation for a software uploader.",
-          "suggestion": "Téléchargeur"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -126,8 +103,10 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Caricatore' in Italian refers to a physical device (like a charger or a magazine for a firearm). In a software UI context for file uploads, 'Uploader' refers to the person or process performing the upload. 'Caricatore' is a literal, incorrect translation for this context.",
-          "suggestion": "Chi carica"
+          "description": "\"Chi carica\" means \"the one who uploads\" (a person), while \"Uploader\" refers to a tool/feature for uploading files. The translation conveys a human agent rather than a software feature.",
+          "suggestion": "Uploader",
+          "checked_at": "2026-04-12T12:56:30.347Z",
+          "checked_by": "claude-code/sonnet"
         }
       ],
       "approved_at": null
@@ -147,13 +126,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ຕົວໂຫລດອັບ' (Tua loat up) literally translates to 'Upload tool' or 'Upload body/object', which is awkward and doesn't clearly represent the person or entity performing the upload (the Uploader) in a UI context. A more accurate term for a person/entity who uploads is 'ຜູ້ໂຫລດ' (Phu loat).",
-          "suggestion": "ຜູ້ໂຫລດ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -177,25 +150,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "In a software/UI context, 'Uploader' refers to the person or system that uploads files. 'Carregador' in Portuguese typically refers to a physical charger (like for a phone) or a loader/carrier. For a user/entity that performs an upload, 'Uploaders' or 'Quem enviou' is more appropriate, but in UI labels for a person/role, 'Remetente' or 'Usuário que enviou' is used. However, specifically for the action/entity of uploading, 'Upload' is often used as a loanword or 'Enviador' is used. 'Carregador' is a semantic error in this technical context.",
-          "suggestion": "Upload"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English 'Uploader' refers to the person or entity that uploads (the actor), whereas 'Carregado' is the past participle meaning 'Uploaded' (the state of the file).",
-          "suggestion": "Uploadador"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -213,13 +174,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'පුද්ගලයා' means 'The Person', which is a generic noun. In the context of a file upload UI, 'Uploader' refers to the entity or tool performing the upload. A more accurate term would refer to the person who uploaded or the uploading process/tool.",
-          "suggestion": "උඩුගත කරන්නා"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -237,7 +192,15 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "\"Особа која је отпремила\" means \"A person (female) who has uploaded\" — a gender-specific, past-tense description of a person. The English \"Uploader\" is used as a tool/feature name (developer tool section title) and as a general role label. The translation fails the tool-name usage and incorrectly implies a specific completed action by a female person rather than a neutral noun.",
+          "suggestion": "Отпремач",
+          "checked_at": "2026-04-12T12:57:34.418Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -255,13 +218,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Хто вивантажив' (Who uploaded) is a full sentence/clause, whereas the English 'Uploader' is a noun/label. In a UI context for a settings plugin or a label, a noun is required.",
-          "suggestion": "Завантажувач"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

@@ -3,17 +3,18 @@
   "content": "Create your own productivity platform based on {{organizationName}} {{productName}} and collaborate on documents with teams, clients, and partners.",
   "content_en_sha1_hash": "2fec16a0e87329b3160f8c9bb2a7319e6a6493ae",
   "created_at": "2026-04-03T21:51:36.581Z",
-  "updated_at": "2026-04-09T01:42:07.735Z",
+  "updated_at": "2026-04-11T21:22:37.276Z",
   "comment": {
-    "text": "This key provides the descriptive text for the REST API card within the Developer Tools section of the Portal Settings. It explains how users can build custom platforms and collaborate, using dynamic placeholders for the organization and product names.",
+    "text": "This is a description for a card in the Developer Tools settings. It explains the purpose of the REST API feature, using `{{organizationName}}` for the company name and `{{productName}}` for the product name.",
     "is_auto": true,
-    "updated_at": "2026-04-03T21:58:01.853Z"
+    "updated_at": "2026-04-11T21:22:37.276Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 79,
-      "context": "</div>\n <div className={styles.grid}>\n <Card\n icon={<DevToolsSvg />}\n title={t(\"Settings:RestAPI\")}\n description={t(\"Settings:RestAPIDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}\n url={apiBasicLink}\n color={globalColors.lightBlueMain}\n linkTitle={t(\"Common:LearnMore\")}\n isBlank\n />",
+      "line_number": 80,
+      "context": "</div>\n <div className={styles.grid}>\n <Card\n icon={<DevToolsSvg />}\n title={t(\"Settings:RestAPI\")}\n description={t(\"Settings:RestAPIDescription\", { organizationName: getBrandName(\"OrganizationName\"), productName: getBrandName(\"ProductName\") })}\n url={apiBasicLink}\n color={globalColors.lightBlueMain}\n linkTitle={t(\"Common:LearnMore\")}\n isBlank\n />",
       "module": "/packages/client"
     }
   ],
@@ -39,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'собствена продуктивност платформа' is a literal, ungrammatical word-for-word translation. In Bulgarian, 'productivity platform' should be 'платформа за продуктивност'.",
-          "suggestion": "Създайте собствена платформа за продуктивност, базирана на {{organizationName}} {{productName}}, и работете с документи заедно с екипи, клиенти и партньори."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -75,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'yhteistyöskarre' is a typo/incorrect form of the verb 'yhteistyöskentele'.",
-          "suggestion": "Luo oma tuottavuusplatformisi {{organizationName}} {{productName}}:n pohjalta ja yhteistyöskentele asiakirjoilla tiimien, asiakkaiden ja kumppaneiden kanssa."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -123,25 +112,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'komādēm' in Latvian means 'groups' or 'batches' (as in sets of items), whereas the English 'teams' in a collaborative context refers to groups of people. The correct term for professional/work teams is 'komandām'.",
-          "suggestion": "Izveido savu produktivitātes platformu, balstītu uz {{organizationName}} {{productName}}, un kolaborējiet ar dokumentiem ar komandām, klientiem un partneriem."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The verb 'samenwerk' is grammatically incorrect in this context. It should be 'werk samen' (verb phrase) or 'werk samen aan' to match the English 'collaborate on'. 'Samenwerk' is a noun or an imperative form that doesn't fit the sentence structure.",
-          "suggestion": "Creëer uw eigen productiviteitsplatform op basis van {{organizationName}} {{productName}} en werk samen aan documenten met teams, klanten en partners."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -183,13 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 's tímmi, ktorí sú v tíme' is a redundant and unnatural translation of 'with teams'. It literally translates to 'with teams who are in the team', which changes the intended meaning of collaborating with external/internal groups.",
-          "suggestion": "Vytvorte si vlastnú produktívnu platformu na základe {{organizationName}} {{productName}} a spolupracujte na dokumentoch s tímami, klientmi a partnermi."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {

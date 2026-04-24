@@ -3,17 +3,18 @@
   "content": "Your user type has been changed to <1>“{{userType}}”</1> by the {{productName}} admin <1>{{adminName}}</1>.",
   "content_en_sha1_hash": "febfdedb85e18cb49938f3ce47eb46b6a5bf2a45",
   "created_at": "2025-05-19T21:30:56.364Z",
-  "updated_at": "2026-04-07T19:35:05.100Z",
+  "updated_at": "2026-04-11T21:07:31.779Z",
   "comment": {
-    "text": "This translation key displays a message when a user's type changes, indicating the new user type and who made the change. It is used in a modal dialog to notify users of an administrative action taken by the admin.",
+    "text": "This is a warning message displayed in a dialog. It informs the user that their user type has been changed by an administrator. `{{userType}}` will be replaced with the new user type (e.g., \"Guest\"), `{{productName}}` with the product's brand name, and `{{adminName}}` with the name of the administrator who made the change.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:55.020Z"
+    "updated_at": "2026-04-11T21:07:31.779Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ReducedRightsDialog/index.tsx",
-      "line_number": 50,
-      "context": "<ModalDialog.Header>{t(\"Common:Warning\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Trans\n t={t}\n ns=\"Files\"\n i18nKey=\"YourUserTypeHasChanged\"\n values={{\n userType: t(\"Common:Guest\"),\n productName: t(\"Common:ProductName\"),\n adminName,\n }}",
+      "line_number": 51,
+      "context": "<ModalDialog.Header>{t(\"Common:Warning\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Trans\n t={t}\n ns=\"Files\"\n i18nKey=\"YourUserTypeHasChanged\"\n values={{\n userType: t(\"Common:Guest\"),\n productName: getBrandName(\"ProductName\"),\n adminName,\n }}",
       "module": "/packages/client"
     }
   ],

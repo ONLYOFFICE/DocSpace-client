@@ -3,11 +3,12 @@
   "content": "Ask purchase questions at <1>{{email}}</1>",
   "content_en_sha1_hash": "6b8817e13f560fda3a03a1762a7240069b4575df",
   "created_at": "2025-05-26T07:15:49.141Z",
-  "updated_at": "2026-04-07T20:54:09.848Z",
+  "updated_at": "2026-04-12T13:35:08.988Z",
   "comment": {
-    "text": "This translation key is used for a text that prompts users to ask purchase-related questions when making an upgrade to a Pro plan. It appears in a contact component on a payment page, likely as part of a help or support section.",
+    "text": "This is a line of text within a contact information section, providing an email address for purchase inquiries. The `{{email}}` variable will be replaced with the actual sales email address.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:02:38.040Z"
+    "updated_at": "2026-04-11T20:40:03.000Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -141,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation is grammatically incorrect and changes the meaning. It currently reads 'Address the question related to the buying <email>', which lacks the preposition 'at' or 'to' and makes the email the object of the question rather than the destination for the inquiry.",
-          "suggestion": "Adresați întrebările privind achiziția la <1>{{email}}</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -207,13 +202,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Chinese translation says 'get consultation from the sales team' (获得销售团队的咨询), whereas the English says 'Ask purchase questions' (询问购买问题). While similar in intent, the Chinese version adds 'sales team' which isn't in the source, and more importantly, the phrasing '获得...咨询' (get consultation) is slightly different from the active 'Ask questions' (询问/提问). However, the most critical issue is the semantic shift from 'Ask questions' to 'Get consultation'.",
-          "suggestion": "如有购买相关问题，请发送邮件至 <1>{{email}}</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

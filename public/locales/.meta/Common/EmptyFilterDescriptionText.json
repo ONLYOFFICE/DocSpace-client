@@ -3,18 +3,19 @@
   "content": "No files or folders match this filter. Try a different one or clear filter to view all files.",
   "content_en_sha1_hash": "42721305ae7c575eab45e8f5de5335ef93280072",
   "created_at": "2025-05-19T21:30:44.822Z",
-  "updated_at": "2026-04-08T10:58:08.742Z",
+  "updated_at": "2026-04-11T20:54:00.940Z",
   "comment": {
-    "text": "This translation key is used for a message displayed when no files or folders match a filter. It appears as a description text in an empty screen, suggesting alternative actions to try or clear the filter to view all files.",
+    "text": "This is an empty state message displayed when no files or folders match the current filter criteria in the file selector. It prompts the user to adjust their filter or clear it.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:30.716Z"
+    "updated_at": "2026-04-11T20:54:00.940Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/selectors/Files/hooks/useSelectorBody.tsx",
-      "line_number": 265,
-      "context": "emptyScreenDescription={emptyScreenDescription}\n searchEmptyScreenImage={\n isBase ? EmptyScreenFilterAltSvgUrl : EmptyScreenFilterAltDarkSvgUrl\n }\n searchEmptyScreenHeader={t(\"Common:NotFoundTitle\")}\n searchEmptyScreenDescription={t(\"Common:EmptyFilterDescriptionText\")}\n isLoading={showLoader}\n rowLoader={\n <RowLoader\n isMultiSelect={false}\n isUser={isRoot}",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/selectors/Files/hooks/useSelectorBody.tsx",
+      "line_number": 271,
+      "context": ") : (\n <EmptyScreenFilterFilesDark />\n )\n }\n searchEmptyScreenHeader={t(\"NotFoundTitle\")}\n searchEmptyScreenDescription={t(\"EmptyFilterDescriptionText\")}\n isLoading={showLoader}\n rowLoader={\n <RowLoader\n isMultiSelect={false}\n isUser={isRoot}",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'clear filter' was translated as 'فلتراً واضحًا' (a clear filter), which changes the meaning from an action (to clear/remove the filter) to a description of a filter's state. This makes the instruction nonsensical in Arabic.",
-          "suggestion": "لا توجد ملفات أو مجلدات تطابق هذا الفلتر. جرب فلتراً مختلفاً أو امسح الفلتر لعرض جميع الملفات."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -87,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'մաքուր զտիչ' (makur ztich) literally means 'clean filter', which is a mistranslation of 'clear filter' (meaning to remove/reset the filter). In Armenian, 'մաքուր' refers to cleanliness/purity, whereas the action of clearing a filter should be expressed as 'ջնջել' (delete/clear) or 'հեռացնել' (remove).",
-          "suggestion": "Ոչ մի ֆայլ կամ պանակ չի համապատասխանում այս զտիչին: Փորձեք մեկ այլը կամ ջնջեք զտիչը՝ բոլոր ֆայլերը դիտելու համար:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -117,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ລຶບລ້າງຂໍ້ມູນ' (clear data) is used instead of 'ລຶບລ້າງຕົວກັ່ນຕອງ' (clear filter). This changes the meaning from clearing the filter to clearing all data/information.",
-          "suggestion": "ບໍ່ມີໄຟລ໌ ຫຼື ແຟ້ມໃດທີ່ກົງກັບຕົວກັ່ນຕອງນີ້. ລອງໃຊ້ຕົວກັ່ນຕອງອື່ນ ຫຼື ລຶບລ້າງຕົວກັ່ນຕອງເພື່ອເບິ່ງໄຟລ໌ທັງໝົດ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -153,13 +136,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'transparente' (transparent) was used instead of 'limpar' (clear/remove) for the filter action, which changes the meaning of the instruction.",
-          "suggestion": "Nenhum arquivo ou pasta corresponde a este filtro. Tente um filtro diferente ou limpe o filtro para visualizar todos os arquivos."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -231,13 +208,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ose të pastër' is grammatically incorrect in this context. It translates literally to 'or to clean', whereas it should be 'or clear the filter' (ose pastroni filtrin).",
-          "suggestion": "Asnjë skedar apo dosje nuk përputhet me këtë filtër. Provoni një filtër të ndryshëm ose pastroni filtrin për të parë të gjithë skedarët."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

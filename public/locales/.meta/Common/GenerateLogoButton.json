@@ -3,11 +3,12 @@
   "content": "Generate",
   "content_en_sha1_hash": "fc45f9b7a9a6e8b48f0e28821ec1981804dd1eb6",
   "created_at": "2025-05-26T07:15:43.935Z",
-  "updated_at": "2026-04-08T08:20:08.038Z",
+  "updated_at": "2026-04-11T20:51:40.200Z",
   "comment": {
-    "text": "The translation key \"GenerateLogoButton\" is used to display the text \"Generate\" on a button in branding settings, allowing users to create or edit logo functionality.",
+    "text": "This is a button label. Clicking it generates a logo based on the provided text input.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:05:19.063Z"
+    "updated_at": "2026-04-11T20:51:40.200Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

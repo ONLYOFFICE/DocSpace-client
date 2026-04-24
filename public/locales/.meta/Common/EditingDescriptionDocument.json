@@ -3,16 +3,17 @@
   "content": "Viewing, editing, reviewing, commenting.",
   "content_en_sha1_hash": "0403ed1034730c5c3b8d23943326b4649539aa1b",
   "created_at": "2025-09-29T18:22:03.291Z",
-  "updated_at": "2026-04-08T11:23:50.086Z",
+  "updated_at": "2026-04-11T20:54:25.732Z",
   "comment": {
-    "text": "This text describes the permissions granted for a document, specifically indicating the user can view, edit, and comment. It appears in the UI to explain the level of access a user has to a document. Translators should ensure the description accurately reflects the granted permissions.",
+    "text": "This is a short label describing the \"Editing\" access level for a document. It appears in a dropdown menu or similar UI element when setting sharing permissions.",
     "is_auto": true,
-    "updated_at": "2025-09-29T18:26:51.749Z"
+    "updated_at": "2026-04-11T20:54:25.732Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 630,
+      "line_number": 631,
       "context": "{ fileType: FileType.Document, access: ShareAccessRights.FullAccess },\n () => t(\"Common:FullAccessDescriptionDocument\"),\n )\n .with(\n { fileType: FileType.Document, access: ShareAccessRights.Editing },\n () => t(\"Common:EditingDescriptionDocument\"),\n )\n .with(\n { fileType: FileType.Document, access: ShareAccessRights.Review },\n () => t(\"Common:ReviewDescriptionDocument\"),\n )",
       "module": "/packages/shared"
     }
@@ -33,25 +34,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Bakı' means the city of Baku. The correct term for 'Viewing' in this context is 'Baxış' or 'Görünüş'.",
-          "suggestion": "Baxış, redaktə, nəzərdən keçirmə, şərh."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'reviewing' is translated as 'преглед', which is a duplicate of the first word 'Viewing' (also 'Преглед'). This makes the list redundant and fails to distinguish between 'viewing' and 'reviewing'.",
-          "suggestion": "Преглед, редактиране, преразглеждане, коментиране."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {

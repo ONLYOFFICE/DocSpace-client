@@ -47,6 +47,7 @@ import AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 import ServicesStore from "SRC_DIR/store/ServicesStore";
 import classNames from "classnames";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type DefaultProviderProps = {
   aiProviders?: AISettingsStore["aiProviders"];
@@ -112,7 +113,7 @@ const DefaultProviderComponent = ({
   const getTooltipContent = () => (
     <Text fontSize="12px" lineHeight="16px">
       {t("AISettings:PortalAiDisabledTooltip", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
       })}
     </Text>
   );
@@ -355,7 +356,7 @@ const DefaultProviderComponent = ({
           {t("AISettings:DefaultProviderDescription", {
             aiProvider: t("Common:AIProvider"),
             aiAgents: t("Common:AIAgents"),
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
           })}
         </Text>
 

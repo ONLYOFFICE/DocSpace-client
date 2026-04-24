@@ -3,11 +3,12 @@
   "content": "File is currently edited by:",
   "content_en_sha1_hash": "92b2cc7ef909ac1b88cb53e3754ac541b1861a48",
   "created_at": "2026-02-18T14:55:55.967Z",
-  "updated_at": "2026-04-08T09:44:16.057Z",
+  "updated_at": "2026-04-11T21:47:56.781Z",
   "comment": {
-    "text": "This text labels a list of users currently editing a file, displayed in a tooltip. It appears as a header within the tooltip, which is used to show who is actively working on the selected file. Translators should ensure the text accurately conveys the meaning of \"who is editing this file.\"",
+    "text": "This is the header text for a tooltip or mobile panel that lists users currently editing a file. It appears when multiple users are collaborating on a document.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:19:49.572Z"
+    "updated_at": "2026-04-11T20:52:50.401Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -91,7 +92,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \":\" but translation ends with \"՝\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-11T21:47:56.774Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null
@@ -123,13 +126,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'redi' is a truncated or incorrect form. It likely intended to use 'rediģē' (editing) or 'rediģē šobrīd' (is currently editing), but 'redi' is not a valid word in this context and fails to convey the meaning of 'is being edited by'.",
-          "suggestion": "Failu pašlaik rediģē:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -201,13 +198,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation uses the past participle 'uređena' (edited), which implies the action is finished. The English text uses the present continuous 'is currently edited' (meaning 'is currently being edited'), which implies an ongoing action. In Serbian, 'uređuje' or 'u procesu uređivanja' should be used to denote an active process.",
-          "suggestion": "Datoteka trenutno uređuje:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

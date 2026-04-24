@@ -1,6 +1,6 @@
 {
-  "ActionCannotBeUndone": "Vybraní deaktivovaní používatelia budú z {{productName}} odstránení. Tento úkon sa nedá vrátiť späť.",
   "ActionCannotBeUndoneGuests": "Vybraní deaktivovaní hostia budú odstránení z {{productName}}. Tento krok sa nedá vrátiť späť.",
+  "ActionCannotBeUndoneUsers": "Vybraní deaktivovaní používatelia budú z {{productName}} odstránení. Tento úkon sa nedá vrátiť späť.",
   "CannotReassignFiles": "Ak vymažete viacerých používateľov naraz, ich súbory nemôžete opätovne priradiť iným používateľom.",
   "DeleteGroupGuestsSuccessMessage": "Hostia boli úspešne odstránení.",
   "DeleteGroupUsersSuccessMessage": "Používatelia boli úspešne odstránení.",

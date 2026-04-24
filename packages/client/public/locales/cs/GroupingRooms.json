@@ -8,7 +8,7 @@
   "DisablingRoomGroups": "Zrušení skupin místností",
   "DisablingRoomGroupsDescription": "Skupiny budou uloženy, ale skryté. Opětovně povolte v Profilu, Správa souborů.",
   "EditRoomGroups": "Upravit skupiny místností",
-  "EmptyGroupDescription": "Není zde žádné místnosti. Zkuste přidat místnost nebo удалить tuto skupinu.",
+  "EmptyGroupRoomsDescription": "Není zde žádné místnosti. Zkuste přidat místnost nebo удалить tuto skupinu.",
   "GroupHasBeenDeleted": "Skupina byla smazána",
   "GroupIcon": "Ikona skupiny",
   "GroupIsEmpty": "Skupina je prázdná",

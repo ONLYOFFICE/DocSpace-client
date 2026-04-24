@@ -3,11 +3,12 @@
   "content": "Default template has been restored.",
   "content_en_sha1_hash": "d887a216e14f93de098f3b3800ac56bc1a139b88",
   "created_at": "2026-02-18T14:56:26.397Z",
-  "updated_at": "2026-04-09T03:35:18.909Z",
+  "updated_at": "2026-04-11T21:24:56.220Z",
   "comment": {
-    "text": "This key displays a success message in the UI, confirming that the default template has been successfully restored. It appears as a toastr notification after resetting a default template, indicating the action was completed successfully. Translators should ensure the message conveys a positive outcome for the user.",
+    "text": "This is a toast message confirming that the default template has been successfully restored to its original settings.",
     "is_auto": true,
-    "updated_at": "2026-03-20T10:28:01.739Z"
+    "updated_at": "2026-04-11T21:24:56.220Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -111,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Nodefulta' is a non-existent, transliterated loanword that is grammatically incorrect in Latvian. The correct adjective for 'Default' in this context is 'Standarta'.",
-          "suggestion": "Standarta šablons ir atjaunots."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -165,25 +160,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Domyšlý' is a mistranslation. In Slovak, 'domyšlý' means 'imaginary' or 'fictional'. The correct term for 'default' in a technical context is 'predvolená'. Additionally, 'šablóna' is feminine, so the adjective must agree.",
-          "suggestion": "Predvolená šablóna bola obnovená."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Prednala' is grammatically incorrect and does not mean 'Default'. It appears to be a mistranslation or a non-existent word in this context. The correct term for 'Default' in Slovenian is 'Privzeto'.",
-          "suggestion": "Privzeto predlogo je bilo obnovljeno."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
@@ -195,13 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation contains nonsensical words ('по енета') that do not exist in Serbian and fail to convey the meaning of 'Default template'.",
-          "suggestion": "Подразумевани шаблон је враћен."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

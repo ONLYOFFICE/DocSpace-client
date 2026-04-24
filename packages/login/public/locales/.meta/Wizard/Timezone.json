@@ -3,17 +3,18 @@
   "content": "Timezone",
   "content_en_sha1_hash": "d1f7dc891b5e5d1797163b556e805123c9369e4f",
   "created_at": "2025-05-19T21:30:57.222Z",
-  "updated_at": "2026-04-07T19:35:05.253Z",
+  "updated_at": "2026-04-13T14:59:05.926Z",
   "comment": {
-    "text": "This translation key is used to display the label for timezone options, typically found on a settings or configuration page. It is used to provide a clear and concise way for users to select their preferred timezone.",
+    "text": "This is a label for a dropdown menu or input field where users select their time zone during the initial setup wizard.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:47:49.058Z"
+    "updated_at": "2026-04-11T21:31:22.537Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/wizard/page.client.tsx",
-      "line_number": 37,
-      "context": "import {\n createPasswordHash,\n getSelectZone,\n mapCulturesToArray,\n mapTimezonesToArray,\n setLanguageForUnauthorized,\n setTimezoneForUnauthorized,\n } from \"@docspace/shared/utils/common\";\n import { Text } from \"@docspace/ui-kit/components/text\";\n import { FieldContainer } from \"@docspace/ui-kit/components/field-container\";",
+      "line_number": 499,
+      "context": "</div>\n </div>\n \n <div className={styles.infoWrapper}>\n <Text className={styles.text} fontWeight={400}>\n {t(\"Timezone\")}\n </Text>\n <ComboBox\n textOverflow\n withoutPadding\n directionY=\"both\"",
       "module": "/packages/login"
     }
   ],

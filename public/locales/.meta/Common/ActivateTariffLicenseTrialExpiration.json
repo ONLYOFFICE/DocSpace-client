@@ -3,16 +3,17 @@
   "content": "Your trial expires on {{date}}.",
   "content_en_sha1_hash": "f29657c8fa2cf900e87405ad4828a95439d18d99",
   "created_at": "2025-05-26T07:15:40.148Z",
-  "updated_at": "2026-04-08T18:00:02.663Z",
+  "updated_at": "2026-04-11T21:01:12.506Z",
   "comment": {
-    "text": "This translation key is used to display a notification indicating when a trial period for a tariff license will expire. It appears on a page where users view their tariff details and is displayed in a specific format with a date component. The translated text should describe the expiration of the trial period, allowing users to plan accordingly.",
+    "text": "This is a message displayed in the tariff title container, informing the user about the expiration date of their trial period. The `{{date}}` variable will be replaced with the specific expiration date.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:08:32.501Z"
+    "updated_at": "2026-04-11T21:01:12.506Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/TariffTitleContainer.tsx",
-      "line_number": 142,
+      "line_number": 143,
       "context": "};\n \n const expiresDate = () => {\n if (isTrial) {\n return getTwoDotsReplacing(\n t(\"ActivateTariffLicenseTrialExpiration\", {\n date: paymentDate,\n }),\n );\n }",
       "module": "/packages/shared"
     }
@@ -51,13 +52,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation changes the meaning from a specific expiration date to a duration of days ('...ist noch {{date}} Tage gültig').",
-          "suggestion": "Ihre Testversion läuft am {{date}} ab."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -159,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'නැහැසුම' (nähäsumä) is not a standard or correct Sinhala word for 'trial'. It appears to be a mistranslation or a non-existent term in this context. The correct term for 'trial' in this context is 'අත්හදා බැලීමේ කාලසීමාව' or 'නොමිලේ ලබාදෙන කාලසීමාව'.",
-          "suggestion": "ඔබගේ අත්හදා බැලීමේ කාලසීමාව {{date}} දිනදී කල් ඉකුත් වේ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

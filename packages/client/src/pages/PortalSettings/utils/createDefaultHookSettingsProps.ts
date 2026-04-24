@@ -169,6 +169,7 @@ export const createDefaultHookSettingsProps = ({
   developerTools: {
     getCSPSettings: settingsStore?.getCSPSettings,
     loadWebhooks: webhooksStore?.loadWebhooks,
+    loadWebhookTriggers: webhooksStore?.loadWebhookTriggers,
     fetchClients: oauthStore?.fetchClients,
     fetchScopes: oauthStore?.fetchScopes,
     isInit: oauthStore?.isInit,

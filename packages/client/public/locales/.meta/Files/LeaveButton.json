@@ -1,0 +1,29 @@
+{
+  "key_path": "LeaveButton",
+  "content": "Leave",
+  "content_en_sha1_hash": "7e3520a9733111c30f7ea9191099a8c7d144a4d8",
+  "created_at": "2026-04-23T17:23:59.272Z",
+  "updated_at": "2026-04-23T17:43:57.248Z",
+  "comment": {
+    "text": "Button label in the Leave Room dialog, appearing when a user is leaving a room and a warning about unsaved form data is present.",
+    "is_auto": true,
+    "updated_at": "2026-04-23T17:43:57.248Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
+      "line_number": 96,
+      "context": "const showFormFillingWarning = isFormFiller && !isAIAgent && !isRoomOwner;\n \n const okButtonLabel = isRoomOwner\n ? t(\"Files:AssignOwner\")\n : showFormFillingWarning\n ? t(\"Files:LeaveButton\")\n : t(\"Common:OKButton\");\n \n return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{titleText}</ModalDialog.Header>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

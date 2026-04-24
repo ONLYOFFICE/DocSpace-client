@@ -3,16 +3,17 @@
   "content": "Error duplicating <2>{{title}}</2>",
   "content_en_sha1_hash": "5de17ae7d7ba73e91d2801acc193fb7840a84318",
   "created_at": "2025-05-19T21:30:55.618Z",
-  "updated_at": "2026-04-07T19:35:05.083Z",
+  "updated_at": "2026-04-23T17:24:02.082Z",
   "comment": {
-    "text": "This translation key is used to display an error message when a duplicate item is attempted to be duplicated. The error message indicates that a duplicate item has already been found, likely in a file management or data storage context. It appears as part of an alert or notification component.",
+    "text": "This is an error toast message that appears when an item fails to duplicate. The variable `{{title}}` represents the name of the item that could not be duplicated.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:39:48.241Z"
+    "updated_at": "2026-04-11T21:09:42.607Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/store/SecondaryProgressDataStore.js",
-      "line_number": 205,
+      "line_number": 207,
       "context": "/>\n )\n ) : (\n <Trans\n t={t}\n i18nKey=\"ErrorDuplicateItem\"\n components={commonComponents}\n values={commonProps}\n />\n );\n }",
       "module": "/packages/client"
     }

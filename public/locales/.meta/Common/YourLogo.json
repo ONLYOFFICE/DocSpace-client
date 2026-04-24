@@ -3,11 +3,12 @@
   "content": "Your logo",
   "content_en_sha1_hash": "bcf2253991976c9d41f18ecca9f3eed026899b53",
   "created_at": "2025-05-26T07:15:49.731Z",
-  "updated_at": "2026-04-07T19:51:15.703Z",
+  "updated_at": "2026-04-24T09:12:20.361Z",
   "comment": {
-    "text": "This translation key is used to display a placeholder text for a logo input field. It appears as the initial value of the \"YourLogo\" text when the component is loaded or disabled.",
+    "text": "Placeholder text for an input field where the user can enter text to be displayed as a logo.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:01:39.327Z"
+    "updated_at": "2026-04-11T20:38:37.859Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -28,198 +29,284 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:10:48.226Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "b8413a0e390f8815"
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:10:48.226Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "c4e261ff77953c61"
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:10:48.226Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "ca93060414e0ff3e"
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:10:55.366Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "ffa6d39678da626c"
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:10:55.366Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "14f2a09f7f6aa04b"
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:10:55.366Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "b4c8766e1f3afdec"
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:11:02.766Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "f8765eefef838781"
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:11:02.766Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "da0bbe2e1c819c16"
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:11:02.766Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "499be969c91e6889"
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:11:09.090Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "cdf9355642a391b4"
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:11:09.090Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "900c326105d13ac1"
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:11:09.090Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "2befc7aa111043cb"
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'Your' is missing from the translation. The English text specifies ownership ('Your logo'), whereas the Korean translation only says 'Logo'.",
-          "suggestion": "사용자 로고"
-        }
-      ],
-      "approved_at": null
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:11:16.090Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "cb974dbb063e7c5c"
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:11:16.090Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "fda5b200334d1cfb"
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:11:21.940Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "a638ffdd1995ba56"
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:11:21.940Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "fe433ba773b8b0e9"
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:11:21.940Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "ce64ca933004986b"
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:11:29.060Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "59dd6f6ac66031cf"
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:11:29.060Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "3ad66e25012b3c04"
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:11:29.060Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "093a80d0aeeeed5d"
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:11:33.160Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "ffa6d39678da626c"
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:11:33.160Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "24287bb6a3dfbaa1"
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'лого' (logo) is a neuter noun in Serbian, but 'Ваш' is the masculine form of the possessive pronoun. It should be 'Ваш логотип' or 'Ваше лого'.",
-          "suggestion": "Ваше лого"
-        }
-      ],
-      "approved_at": null
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:11:58.621Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "b565e3913d5c481a"
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:11:58.621Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "289c8d6f21f7314f"
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:12:05.643Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "3dc53d98218eb4b0"
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:12:05.643Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "093a80d0aeeeed5d"
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:12:05.643Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "ec4e0f082fe606cc"
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:12:20.360Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "6f2586fc4e40b70b"
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:11:16.090Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "bbefeb2d09660472"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:11:33.160Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "fc68799385f1638b"
     },
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Albanian translation uses the plural form 'Logos' instead of the singular 'Logo', which does not match the singular English text 'Your logo' referring to a single logo as per the context.",
+          "suggestion": "Logo juaj",
+          "checked_at": "2026-04-24T09:11:58.620Z",
+          "checked_by": "openrouter/tencent/hy3-preview:free"
+        }
+      ],
       "approved_at": null
     }
   }

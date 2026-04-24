@@ -3,13 +3,20 @@
   "content": "Uploaded elements: {{count}}",
   "content_en_sha1_hash": "3fbe647575ee9d3b5b58c83eb362282b29b9a3a2",
   "created_at": "2025-05-19T21:30:46.011Z",
-  "updated_at": "2026-04-08T06:25:45.398Z",
+  "updated_at": "2026-04-23T17:24:02.084Z",
   "comment": {
-    "text": "This translation key is used to display a success message after uploading files successfully. It shows the number of uploaded elements and will be displayed in a toast notification, indicating the completion of an upload action.",
+    "text": "This is a toast message indicating successful file uploads. It appears after files have been uploaded, displaying the number of successfully uploaded items. The `{{count}}` variable represents this number.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:47.029Z"
+    "updated_at": "2026-04-11T20:50:29.969Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/uploader/index.tsx",
+      "line_number": 316,
+      "context": "const uploadedFiles = await uploadFiles(filesToUpload);\n const folderUrl = getFolderUrl?.(folderTargetId);\n \n toastr.success(\n <>\n {getCommonTranslation(\"ItemsSuccessfullyUploaded\", {\n count: filesToUpload.length,\n })}\n {folderUrl && (\n <>\n <br />",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/store/UploadDataStore.js",
       "line_number": 1881,
@@ -33,13 +40,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation uses 'Yüklənən' (which means 'Uploading' or 'Being uploaded'), whereas the English text 'Uploaded' indicates a completed action (past tense).",
-          "suggestion": "Yüklənmiş elementlər: {{count}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -111,13 +112,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation uses 'ເອກະສານ' (Documents) instead of 'elements' (which could include folders, images, etc.). While often used interchangeably in file managers, 'elements' is more generic.",
-          "suggestion": "ອົງປະກອບທີ່ອັບໂຫຼດ: {{count}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -165,13 +160,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'බාඩු' (baadu) is a misspelling or incorrect term. The intended word for 'uploaded' should be 'උඩුගත කළ' (udugatha kala). The current translation is nonsensical in this context.",
-          "suggestion": "උඩුගත කළ අංග: {{count}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

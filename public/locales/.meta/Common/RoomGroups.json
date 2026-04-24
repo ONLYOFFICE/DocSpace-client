@@ -3,13 +3,21 @@
   "content": "Room groups",
   "content_en_sha1_hash": "23e8b8d6adb6d989089f0fd3181a1a44f1c6ccb8",
   "created_at": "2026-02-19T13:36:15.152Z",
-  "updated_at": "2026-04-08T00:30:56.458Z",
+  "updated_at": "2026-04-13T14:59:06.032Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label for a filter or section heading, referring to collections of rooms. It appears when managing or filtering rooms within DocSpace.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:44:16.741Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/components/filter/index.tsx",
+      "line_number": 576,
+      "context": "[overflowGroups, handleFilterByGroup],\n );\n \n const overflowContextMenuHeader = React.useMemo(\n () => ({\n title: t(\"RoomGroups\"),\n icon: \"\",\n }),\n [t],\n );",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -32,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation 'Групи стаи' is grammatically incorrect and implies 'Groups rooms' instead of 'Groups of rooms'. In Bulgarian, the noun modifying another noun must be in the correct case or use a preposition.",
-          "suggestion": "Групи от стаи"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -80,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Զանգախցիկ' (Zangakhtsik) means 'cell' or 'compartment' (often used in biological or prison contexts), whereas 'Room' in a software/collaboration context should be translated as 'Սենյակ' (Senyak).",
-          "suggestion": "Սենյակների խմբեր"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -116,25 +112,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Grupu telpas' means 'Group rooms' (rooms belonging to groups), whereas the English 'Room groups' refers to groups of rooms.",
-          "suggestion": "Telpu grupas"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Dutch translation 'Groepkamers' means 'Group rooms' (rooms that belong to a group), whereas the English 'Room groups' refers to 'Groups of rooms' (collections/categories of rooms).",
-          "suggestion": "Kamergroepen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -182,7 +166,15 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "\"Skupne sob\" appears to mean \"shared/common rooms\" rather than \"room groups/groups of rooms\". The word \"skupne\" is the plural feminine form of the adjective \"skupen\" (shared/common), not a noun for groups. This changes the meaning from a collection/categorization of rooms to rooms that are shared.",
+          "suggestion": "Skupine sob",
+          "checked_at": "2026-04-13T08:10:32.306Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {
@@ -197,8 +189,10 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'собе' is an incorrect/incomplete form. In Serbian, 'room' (as in a digital space/room) should be 'соба' (singular) or 'собе' (plural), but 'Групе собе' translates to 'Groups of the room' rather than 'Room groups'. The correct term for 'Room groups' is 'Групе просторија' or 'Групе соби'.",
-          "suggestion": "Групе соби"
+          "description": "Serbian translation uses wrong grammatical case. 'Групе соби' uses dative/locative singular, but the correct form should use genitive plural to properly convey 'groups of rooms'. The English 'Room groups' should translate to 'Групе соба' (genitive case).",
+          "suggestion": "Групе соба",
+          "checked_at": "2026-04-13T08:10:42.906Z",
+          "checked_by": "claude-code/haiku"
         }
       ],
       "approved_at": null

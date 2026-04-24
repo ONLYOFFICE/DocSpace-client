@@ -3,24 +3,31 @@
   "content": "No models found",
   "content_en_sha1_hash": "3d02178b7a78aaa935e174c3b52e143f4d548b07",
   "created_at": "2026-02-18T14:56:04.517Z",
-  "updated_at": "2026-04-08T04:04:07.778Z",
+  "updated_at": "2026-04-23T17:24:01.731Z",
   "comment": {
-    "text": "This key displays a message when no models are available to be selected. It appears as a label in a dropdown/selection component, likely within a dialog or settings panel, to inform the user that no models are present. Translators should ensure the message clearly conveys the absence of models.",
+    "text": "This text appears in a dropdown list or as a label when no AI models are available for selection.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:16:28.823Z"
+    "updated_at": "2026-04-11T20:47:53.753Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/Model.tsx",
-      "line_number": 300,
-      "context": "value: selectedModel.modelId,\n label: modelAliases?.[selectedModel.modelId] ?? selectedModel.modelId,\n }\n : {\n key: \"empty-selected-option\",\n label: t(\"Common:NoModelsFound\"),\n };\n }, [selectedModel, modelAliases, t]);\n \n const onSelectModel = React.useCallback(\n (option: TOption) => {",
+      "line_number": 306,
+      "context": "value: selectedModel.modelId,\n label: selectedModel.alias ?? selectedModel.modelId,\n }\n : {\n key: \"empty-selected-option\",\n label: isModelsLoading ? \"\" : t(\"Common:NoModelsFound\"),\n };\n }, [selectedModel, isModelsLoading, t]);\n \n const onSelectModel = React.useCallback(\n (option: TOption) => {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/DefaultProvider.tsx",
-      "line_number": 94,
+      "line_number": 95,
       "context": "t: TTranslation,\n models?: TModel[] | null,\n selectedModelId?: string | null,\n ): TOption => {\n if (!models || !selectedModelId)\n return { key: \"-2\", label: t(\"Common:NoModelsFound\") };\n \n const model =\n models.find((m) => m.modelId === selectedModelId) || models[0];\n \n return {",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/AIAgentForm.tsx",
+      "line_number": 160,
+      "context": "const selectedModelOption: TOption = models.length\n ? (modelOptions.find((o) => o.key === selectedModelId) ?? modelOptions[0])\n : {\n key: defaultProvider?.defaultModel ?? \"-1\",\n label: defaultProvider?.defaultModel ?? t(\"Common:NoModelsFound\"),\n };\n \n const onSelectProvider = async (option: TOption) => {\n if (option.key === selectedProviderId) return;",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -117,13 +124,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Modeles atrastas' means 'Models found', which is the exact opposite of the English 'No models found'.",
-          "suggestion": "Modeļu nav atrasts"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -177,13 +178,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation uses an incorrect word order and a grammatically incorrect form of the participle. 'Pronajeno' is a neuter singular form, whereas 'modeljev' is genitive plural. The correct way to express 'found' in this context is 'najdenih'.",
-          "suggestion": "Ni najdenih modelov"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

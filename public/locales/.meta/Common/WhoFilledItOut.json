@@ -3,13 +3,21 @@
   "content": "Who filled it out",
   "content_en_sha1_hash": "c51f4dbf88247627ead979617e981ea807c6a6eb",
   "created_at": "2026-03-31T15:18:26.270Z",
-  "updated_at": "2026-04-07T19:58:16.394Z",
+  "updated_at": "2026-04-23T17:24:02.134Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a button label within an AI chat panel. It suggests a prompt to the AI about who completed a specific form.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:38:52.422Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/ai-chat-panel/index.tsx",
+      "line_number": 135,
+      "context": "prompt: t(\"Common:RecentResponsesPrompt\", {\n formName: pendingAttachmentFile.title,\n }),\n },\n {\n title: t(\"Common:WhoFilledItOut\"),\n prompt: t(\"Common:WhoFilledItOutPrompt\", {\n formName: pendingAttachmentFile.title,\n }),\n },\n {",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

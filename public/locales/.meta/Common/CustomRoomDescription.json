@@ -3,13 +3,20 @@
   "content": "Apply your own settings to use this room for any custom purpose.",
   "content_en_sha1_hash": "2e2225d6e3f84acd6c2f9e2cd4deb6c09ea5f37e",
   "created_at": "2025-05-19T21:30:44.367Z",
-  "updated_at": "2026-04-08T12:37:10.332Z",
+  "updated_at": "2026-04-11T21:48:01.018Z",
   "comment": {
-    "text": "This translation key is used to display a custom room description that can be tailored to suit specific purposes. It appears on a button or similar UI element where users can customize their room settings.",
+    "text": "This is a description of a custom room type. It appears when a user is selecting or viewing information about different room types, explaining that this room can be configured for any specific need.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:47.937Z"
+    "updated_at": "2026-04-11T20:55:43.489Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/components/room-type/RoomType.utils.ts",
+      "line_number": 42,
+      "context": "case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRoomDescription\");\n case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoomDescription\");\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRoomDescription\");\n case RoomsType.AIRoom:\n return t(\"Common:AIRoomDescription\");\n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoomInfo\");\n case RoomsType.FormRoom:",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
       "line_number": 42,
@@ -73,12 +80,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \"n\"",
-          "suggestion": ""
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'asetuksesti' is a grammatical error (it is not a valid Finnish word in this context); it should be 'asetukset' (settings).",
-          "suggestion": "Aseta omat asetuksesi käyttääksesi tätä huonetta mihin tahansa mukautettuun tarkoitukseen"
+          "suggestion": "",
+          "checked_at": "2026-04-11T21:48:01.008Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null
@@ -170,25 +174,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The verb 'Zadajte' means 'Enter' or 'Input' (as in typing data), whereas the English 'Apply' in this context means to implement or use specific settings. Additionally, the phrasing 'na použitie... na akýkoľvek... účel' is unidiomatic and sounds like a literal word-for-word translation that fails to convey the intended meaning of configuring the room for custom use.",
-          "suggestion": "Použite vlastné nastavenia na využitie tejto miestnosti na akýkoľvek vlastný účel."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'po vaši meri' (at your discretion/according to your measure) is an addition that changes the nuance of the original sentence and makes it sound unnatural in this technical context. The core meaning is slightly distorted by adding unnecessary filler.",
-          "suggestion": "Uporabite svoje lastne nastavitve za uporabo te sobe za kateri koli prilagojen namen."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

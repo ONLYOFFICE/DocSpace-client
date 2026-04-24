@@ -3,11 +3,12 @@
   "content": "Download log",
   "content_en_sha1_hash": "97b1248a2147299746e5cc6dae4da0ceebc6b304",
   "created_at": "2025-05-19T21:30:51.443Z",
-  "updated_at": "2026-04-09T03:07:20.127Z",
+  "updated_at": "2026-04-11T21:24:15.339Z",
   "comment": {
-    "text": "This translation key is used to describe the \"Download Log\" button in a file import completion step, prompting users to download log data. It appears on a cancel button and is meant to provide visual clarity for translators to ensure accurate rendering of this specific label.",
+    "text": "Button label. Appears on a confirmation screen after a data import is complete, allowing the user to download a log file of the import process.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:14.585Z"
+    "updated_at": "2026-04-11T21:24:15.339Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -39,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation 'Дневник на изтеглянията' means 'Download history' or 'Log of downloads' (referring to a list of files that were downloaded). The English 'Download log' in this context refers to downloading a log file (a report/record of the import process).",
-          "suggestion": "Изтегляне на дневника"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -111,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ບັນທຶກການດາວໂຫຼດ' means 'Download record' or 'Download history', whereas the English 'Download log' in this context refers to the action of downloading a log file (a file containing event data). The current translation sounds like a noun phrase describing a history of downloads rather than a command to download a log file.",
-          "suggestion": "ດາວໂຫຼດ Log"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -135,13 +124,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation 'Rejestr pobranych plików' means 'Registry of downloaded files', whereas the English 'Download log' is a command/action to download a log file (a record of events).",
-          "suggestion": "Pobierz log"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -171,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'සටහන' (Satahana) means 'Note' or 'Record' in a general sense, but in a technical context for software logs, 'ලොග්' (Log) or 'ක්‍රියාකාරී වාර්තාව' (Activity report) is more accurate. More importantly, 'බාගන්න' (Baganna) is a misspelling/incorrect form of 'බාගත කරන්න' (Bagatha karanna) which is the standard term for 'Download'.",
-          "suggestion": "ලොග් බාගත කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -231,13 +208,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Albanian translation 'Regjistri i shkarkimit' means 'Download registry' or 'Download register', whereas the English 'Download log' in this context refers to downloading a log file (a record of events). In Albanian, 'log' in a technical sense is better translated as 'log' or 'regjistri i aktiviteteve'. However, 'Regjistri i shkarkimit' specifically implies a registry of things that were downloaded, rather than the action of downloading the log file itself.",
-          "suggestion": "Shkarko logun"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

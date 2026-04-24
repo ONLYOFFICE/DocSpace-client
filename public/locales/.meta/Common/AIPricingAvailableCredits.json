@@ -3,13 +3,21 @@
   "content": "Available credits: {{price}}",
   "content_en_sha1_hash": "35efcce25815a4b04cb99c4502dfc6bf65ea15f2",
   "created_at": "2026-04-10T13:53:44.436Z",
-  "updated_at": "2026-04-10T13:53:44.436Z",
+  "updated_at": "2026-04-23T17:24:02.176Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label indicating the remaining AI service credits. It appears when the user has a positive balance of AI credits, with `{{price}}` representing the formatted credit amount.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:59:59.607Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "line_number": 210,
+      "context": "price: formatAiServiceCurrency(),\n });\n }\n \n if (aiServiceBalance && aiServiceBalance > 0) {\n return t(\"AIPricingAvailableCredits\", {\n price: formatAiServiceCurrency(),\n });\n }\n \n return t(\"AIPricingBilledPerUsage\");",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

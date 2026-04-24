@@ -3,13 +3,20 @@
   "content": "New guests will be added here once you invite them to the room.",
   "content_en_sha1_hash": "67fb4d9324338a8ac05bfb73179d010e43aecfd7",
   "created_at": "2025-05-19T21:30:46.881Z",
-  "updated_at": "2026-04-08T03:59:56.192Z",
+  "updated_at": "2026-04-13T14:59:05.804Z",
   "comment": {
-    "text": "This translation key describes a message that appears on an empty screen when there are no invited guests to display. It is used in the \"Contacts\" section of the Home page and is displayed as a default message when no guests have been added yet.",
+    "text": "This is an empty state message displayed when no guests have been invited to a room yet. It appears in the guest list area.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:18.208Z"
+    "updated_at": "2026-04-11T20:47:46.468Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/selectors/People/index.tsx",
+      "line_number": 779,
+      "context": "emptyScreenDescription={\n emptyScreenDescription ??\n (activeTabId === GUESTS_TAB_ID\n ? isAgent\n ? t(\"NotFoundGuestsDescriptionAgent\")\n : t(\"NotFoundGuestsDescription\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"EmptyDescription\", {\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"GroupsNotFoundDescription\"))",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/EmptyScreen.tsx",
       "line_number": 93,
@@ -81,13 +88,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation incorrectly states 'invite them to the room' (նրանց սենյակ հրավիրեք) instead of 'invite them to the room' (նրանց սենյակ հրավիրեք - the word order/syntax makes it sound like 'invite them room'). More importantly, the Armenian phrasing 'նրանց սենյակ հրավիրեք' is grammatically awkward/incorrect for 'invite them to the room'. It should be 'նրանց սենյակ հրավիրելիս' or 'սենյակ հրավիրելիս նրանք կավելացվեն այստեղ'. However, the most critical error is the word order which makes the sentence sound like 'invite them room'.",
-          "suggestion": "Նոր հյուրեր կավելացվեն այստեղ, երբ նրանց հրավիրեք սենյակ:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -97,7 +98,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \"a\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-11T21:47:35.926Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null
@@ -123,13 +126,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation contains significant extra information not present in the English source text, describing sending guests and adding guests invited by others. This deviates from the single-sentence source.",
-          "suggestion": "Jauni viesi tiks pievienoti šeit, tiklīdz uzaicināsiet viņus uz telpu."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -159,13 +156,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'invitați' (invited/guests) as a noun, but the grammatical agreement 'le invitați' (you invite them) refers to a masculine/mixed plural, whereas 'Noii invitați' is a slightly awkward phrasing for 'New guests'. More importantly, 'la sală' (to the hall/room) is a literal translation of 'room' that doesn't fit the digital context of a software 'room' (which should be 'camera' or 'spațiu'). However, the most critical error is the gender/number agreement: 'Noii invitați' (masculine) with 'le' is acceptable, but 'invitați' is often used as a verb; the term for guests should be 'oaspeți' or 'membri'.",
-          "suggestion": "Noii oaspeți vor fi adăugați aici imediat ce îi invitați în cameră."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -177,13 +168,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation uses 'පහසුරම් දුන් පසු' (after giving facilities/amenities), which is a mistranslation of 'invite them'. The correct term for 'invite' in this context should be 'ආරාධනා කළ පසු'.",
-          "suggestion": "ඔබ ඔවුන්ව කාමරයට ආරාධනා කළ පසු නව ආගන්තුකයින් මෙහි එකතු කරනු ඇත."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

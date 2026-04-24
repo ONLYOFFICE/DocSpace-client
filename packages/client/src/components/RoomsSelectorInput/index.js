@@ -34,6 +34,7 @@ import RoomSelector from "@docspace/ui-kit/selectors/Room";
 
 import { Aside } from "@docspace/ui-kit/components/aside";
 import { Backdrop } from "@docspace/ui-kit/components/backdrop";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const RoomsSelectorInput = (props) => {
   const {
@@ -69,7 +70,7 @@ const RoomsSelectorInput = (props) => {
   } = props;
 
   const [isPanelVisible, setIsPanelVisible] = useState(false);
-  const BasePath = `${t("Common:ProductName")} / ${t("Common:Rooms")} `;
+  const BasePath = `${getBrandName("ProductName")} / ${t("Common:Rooms")} `;
   const [path, setPath] = useState("");
 
   const handleOnSubmit = (rooms) => {

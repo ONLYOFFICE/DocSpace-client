@@ -1,8 +1,8 @@
 {
   "ChangeData": "Verileri ve parolayı değiştir",
+  "ClickButtonBelow": "E-postanızı kullanarak giriş yapmak istiyorsanız, lütfen kendi şifrenizi belirleyin. <br/> Hazır olduğunuzda lütfen aşağıdaki düğmeye tıklayın.",
   "ContinueToProduct": "{{productName}} ile devam edin",
   "GeneratedPassword": "Oluşturulan şifre",
   "ProductNameDetail": "{{productName}} adı",
-  "ReviewAccountDetails": "Lütfen hesabınızla ilgili bilgilerinizi incelemek için bir an ayırın:",
-  "ClickButtonBelow": "E-postanızı kullanarak giriş yapmak istiyorsanız, lütfen kendi şifrenizi belirleyin. <br/> Hazır olduğunuzda lütfen aşağıdaki düğmeye tıklayın."
+  "ReviewAccountDetails": "Lütfen hesabınızla ilgili bilgilerinizi incelemek için bir an ayırın:"
 }

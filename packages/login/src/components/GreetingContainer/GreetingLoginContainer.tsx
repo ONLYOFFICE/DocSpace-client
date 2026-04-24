@@ -34,6 +34,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { DEFAULT_PORTAL_TEXT, DEFAULT_ROOM_TEXT } from "@/utils/constants";
 import { getInvitationLinkData } from "@/utils";
 import { Logo } from "../Logo";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const GreetingLoginContainer = ({
   greetingSettings,
@@ -96,7 +97,7 @@ export const GreetingLoginContainer = ({
             i18nKey="ConfirmEmailChangeText"
             ns="Login"
             values={{
-              productName: t("Common:ProductName"),
+              productName: getBrandName("ProductName"),
             }}
           />
         </Text>
@@ -134,7 +135,7 @@ export const GreetingLoginContainer = ({
             defaults={roomName ? DEFAULT_ROOM_TEXT : DEFAULT_PORTAL_TEXT}
             values={{
               displayName,
-              productName: t("Common:ProductName"),
+              productName: getBrandName("ProductName"),
               ...(roomName ? { roomName } : { spaceAddress }),
             }}
             components={{

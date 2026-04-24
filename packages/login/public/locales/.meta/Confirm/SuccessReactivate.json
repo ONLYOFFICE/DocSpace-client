@@ -3,16 +3,17 @@
   "content": "Your account has been successfully reactivated. In 10 seconds you will be redirected to the <1>portal</1>.",
   "content_en_sha1_hash": "195e32502a9fca30b006e6c21cb6247dacd2348c",
   "created_at": "2025-05-19T21:30:57.398Z",
-  "updated_at": "2026-04-07T19:35:05.246Z",
+  "updated_at": "2026-04-11T21:30:03.194Z",
   "comment": {
-    "text": "This translation key is used for a confirmation message that appears after account reactivation, guiding the user to the portal. It's displayed in the UI as part of a page continue dialog. The goal is to inform the user of their successful reactivation and redirect them to the portal within 10 seconds.",
+    "text": "This is a success message displayed after a user's account has been reactivated. It informs the user that they will be redirected to the portal, with `<1>portal</1>` being a clickable link.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:47:22.731Z"
+    "updated_at": "2026-04-11T21:30:03.194Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PortalContinue/page.client.tsx",
-      "line_number": 78,
+      "line_number": 79,
       "context": "window.location.href = \"/\";\n };\n \n return isReactivate ? (\n <Text>\n <Trans t={t} i18nKey=\"SuccessReactivate\" ns=\"Confirm\">\n Your account has been successfully reactivated. In 10 seconds you will\n be redirected to the\n <Link isHovered href=\"/\" dataTestId=\"redirect_portal_link\">\n portal\n </Link>",
       "module": "/packages/login"
     }

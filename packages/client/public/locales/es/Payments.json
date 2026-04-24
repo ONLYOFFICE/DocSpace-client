@@ -1,11 +1,10 @@
 {
-  "AccessingProblem": "Si es un usuario existente y tiene problemas al acceder a este espacio, por favor, póngase en contacto con el administrador.",
   "CannotCreateNewRoom": "No se puede crear la sala",
   "CannotCreatePaidUsers": "No se pueden añadir usuarios de pago",
   "CannotRestoreRoom": "No se puede restaurar la sala",
   "ChooseNewPlan": "¿Desea elegir un nuevo plan de precios?",
   "GracePeriodActive": "El período de gracia está activo <1>desde {{fromDate}} hasta {{byDate}}</1> (días restantes: {{delayDaysCount}}).",
-  "LicenseExpired": "No se pueden añadir nuevos usuarios ni crear nuevas salas. La licencia ha caducado.",
+  "LicenseExpiredRestriction": "No se pueden añadir nuevos usuarios ni crear nuevas salas. La licencia ha caducado.",
   "LicenseGracePeriodInfo": "Durante este tiempo, los administradores no pueden crear nuevas salas ni añadir nuevos usuarios. Una vez que el período de gracia finalice, {{productName}} no estará disponible hasta que se active una nueva licencia.",
   "NewRoomWillExceedLimit": "No es posible crear esta sala ya que se ha alcanzado el límite del número de salas que permite su plan actual.",
   "NewUsersWillExceedMembersLimit": "No es posible añadir nuevos usuarios de pago ya que se ha alcanzado el límite del número de administradores que permite su plan actual.",

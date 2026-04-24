@@ -213,7 +213,7 @@ const Editor = (props) => {
 
   return (
     <PresetWrapper
-      description={t("EditorDescription")}
+      description={t("EditorPresetDescription")}
       header={t("CreateSampleEditor")}
     >
       <Container>
@@ -291,7 +291,7 @@ const Editor = (props) => {
               <Text color="gray">({t("InLeftPanel")})</Text>
             </RowContainer>
             <RowContainer>
-              <Checkbox label={t("FeedbackAndSupport")} onChange={() => {}} isChecked />
+              <Checkbox label={t("FeedbackAndSupportLink")} onChange={() => {}} isChecked />
               <Text color="gray">({t("InLeftPanel")})</Text>
             </RowContainer>
           </InterfaceElements>

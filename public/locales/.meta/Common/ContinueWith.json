@@ -3,11 +3,12 @@
   "content": "Continue with",
   "content_en_sha1_hash": "6433fa548ad1a2cc4485d28f06039cc50f7d86ce",
   "created_at": "2025-05-19T21:30:43.701Z",
-  "updated_at": "2026-04-08T14:24:49.543Z",
+  "updated_at": "2026-04-11T20:56:27.117Z",
   "comment": {
-    "text": "This translation key is used for a button or label that invites users to continue with a process. It appears in a modal dialog and provides the prompt \"Continue with\" when visible, prompting the user to proceed.",
+    "text": "This is a dialog title for a modal window that allows users to choose a login method. It introduces a list of options for continuing the login process.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:58.702Z"
+    "updated_at": "2026-04-11T20:56:27.117Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -69,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Finnish translation 'Jatka' means 'Continue', but it misses the prepositional meaning of 'with' (e.g., 'Jatka käyttäen'), which is necessary for the context of SSO providers (e.g., 'Continue with Google').",
-          "suggestion": "Jatka käyttäen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -87,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The English phrase 'Continue with' implies a following object (e.g., 'Continue with Google'), whereas the Armenian translation 'Շարունակել' means only 'To continue' or 'Continue'. It lacks the prepositional sense required for the context of SSO providers.",
-          "suggestion": "Շարունակել {{variable}} տարբերակով"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -111,13 +100,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation '또는 다음을 이용:' means 'Or use the following:', which changes the meaning from a direct prompt 'Continue with' to a conditional choice. While common in UI, it is semantically different from the source.",
-          "suggestion": "다음으로 계속:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {

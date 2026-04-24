@@ -3,11 +3,12 @@
   "content": "Download the app",
   "content_en_sha1_hash": "5d62003d7e8ce27975fba2b1966dbea4606860a5",
   "created_at": "2025-07-01T15:57:23.967Z",
-  "updated_at": "2026-04-03T21:51:41.163Z",
+  "updated_at": "2026-04-11T21:29:48.608Z",
   "comment": {
-    "text": "This translation key is used to display the text \"Download the app\" on a download button within an application, encouraging users to initiate app installation. It appears in the UI as part of a styled link component, likely within a mobile app's deep linking functionality.",
+    "text": "This is a button label. It prompts the user to download the ONLYOFFICE desktop application.",
     "is_auto": true,
-    "updated_at": "2025-07-01T15:57:53.375Z"
+    "updated_at": "2026-04-11T21:29:48.608Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

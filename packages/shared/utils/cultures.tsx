@@ -24,24 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { I18nextProviderProps } from "react-i18next";
-
 import { flagsIcons } from "./image-flags";
 import { isBetaLanguage } from "./common";
-
-type I18n = I18nextProviderProps["i18n"];
+import { getCultureLabel } from "../constants/cultures";
 
 export const mapCulturesToArray = (
   culturesArg: string[],
   isBetaBadge: boolean = true,
-  i18nArg?: I18n,
 ) => {
-  let t = null;
-
-  if (i18nArg) {
-    t = i18nArg.getFixedT(null, "Common");
-  }
-
   return culturesArg.map((culture, index) => {
     let iconName = culture;
 
@@ -56,20 +46,15 @@ export const mapCulturesToArray = (
 
     const icon = flagsIcons?.get(`${iconName}.react.svg`);
 
-    const cultureObj = t
-      ? {
-          key: culture,
-          label: t(`Culture_${culture}`),
-          icon,
-          ...(isBetaBadge && { isBeta: isBetaLanguage(culture) }),
-          index,
-        }
-      : {
-          key: culture,
-          icon,
-          index,
-        };
+    const cultureObj = {
+      key: culture,
+      label: getCultureLabel(culture),
+      icon,
+      ...(isBetaBadge && { isBeta: isBetaLanguage(culture) }),
+      index,
+    };
 
     return cultureObj;
   });
 };
+

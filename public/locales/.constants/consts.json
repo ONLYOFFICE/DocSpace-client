@@ -1,0 +1,22 @@
+{
+  "BetaLabel": "BETA",
+  "BetaLabel-si": "බීටා",
+
+  "LDAP": "LDAP",
+
+  "OCR": "OCR",
+  "OCR-ar-SA": "التعرف الضوئي على الحروف (OCR)",
+  "OCR-ru": "Распознавание текста",
+  "OCR-zh-CN": "OCR 文字识别",
+
+  "PDF": "PDF",
+  "PDF-ar-SA": "ملف PDF",
+
+  "PM": "PM",
+
+  "SSO": "SSO",
+  "SSO-zh-CN": "单点登录（SSO）",
+
+  "UTC": "UTC",
+  "UTC-ja-JP": "協定世界時"
+}

@@ -3,13 +3,21 @@
   "content": "Welcome to AI Forms",
   "content_en_sha1_hash": "95eb3b6747dc6041c4fd79f6249bcb37c4e79d19",
   "created_at": "2026-03-31T15:18:27.070Z",
-  "updated_at": "2026-04-07T19:59:53.589Z",
+  "updated_at": "2026-04-23T17:24:02.158Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is the title of a modal dialog that welcomes users to the AI Forms feature.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:38:56.726Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/welcome-tour-dialog/index.tsx",
+      "line_number": 83,
+      "context": "}, []);\n \n return (\n <ModalDialog visible={visible} onClose={onSkip} autoMaxHeight autoMaxWidth isLarge isHuge>\n <ModalDialog.Header>\n {t(\"Common:WelcomeToAIForms\", \"Welcome to AI Forms\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.body}>\n <div className={styles.content}>\n <div className={styles.videoContainer}>",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -32,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation 'Добро до' is an incorrect literal translation of 'Welcome to'. In Bulgarian, 'Добро до' is not used for greetings; 'Добре дошли в' is the correct way to say 'Welcome to'.",
-          "suggestion": "Добре дошли в AI Forms"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -113,8 +115,10 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation 'Saskaņojiet ar AI Formām' means 'Coordinate with AI Forms' or 'Agree with AI Forms', which is a completely different meaning from 'Welcome to AI Forms'.",
-          "suggestion": "Laipni šeit AI Formās"
+          "description": "\"Laipni šeit\" does not mean \"Welcome\" in Latvian. The proper Latvian greeting is \"Laipni lūgti\" (literally \"kindly invited\"). \"Laipni šeit\" means approximately \"Kindly here\", which is not a recognized welcome expression and does not convey the intended meaning.",
+          "suggestion": "Laipni lūgti AI Formās",
+          "checked_at": "2026-04-12T08:47:43.522Z",
+          "checked_by": "claude-code/sonnet"
         }
       ],
       "approved_at": null

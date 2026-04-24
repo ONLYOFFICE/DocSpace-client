@@ -3,11 +3,12 @@
   "content": "Root folder",
   "content_en_sha1_hash": "aa608b6955d74fbf2015416119d097d0da2bf762",
   "created_at": "2025-05-19T21:30:56.834Z",
-  "updated_at": "2026-04-07T19:35:05.058Z",
+  "updated_at": "2026-04-11T21:04:31.748Z",
   "comment": {
-    "text": "The translation key \"RootFolderLabel\" is used as a fallback or default label when creating a new folder in a third-party storage system. It appears in the FolderInput component of a CreateEditRoomDialog and serves as the root folder title if no specific room title is provided. Translators should provide an alternative text that makes sense in their language and region, such as \"Folder\" or \"Root\".",
+    "text": "This is a label for a folder selection input field. It appears when no specific folder path is selected, indicating the top-level directory.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:03.901Z"
+    "updated_at": "2026-04-11T21:04:31.748Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

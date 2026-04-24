@@ -3,16 +3,17 @@
   "content": "License has expired. Grace period started on <1>{{date}}</1>",
   "content_en_sha1_hash": "13ace882eaeb3841946d42dbdf9f98874d6f9a49",
   "created_at": "2026-03-20T09:07:32.083Z",
-  "updated_at": "2026-04-08T05:49:08.021Z",
+  "updated_at": "2026-04-11T20:49:52.831Z",
   "comment": {
-    "text": "This translation key displays a message indicating that a license has expired and a grace period has begun. It appears within a subscription expiry notification, likely in a payments section, and includes a date representing the start of the grace period. Translators should ensure the date format aligns with the locale.",
+    "text": "This is an informational message displayed when a license has expired, indicating the start date of the grace period. The `{{date}}` variable will be replaced with the specific date the grace period began.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:17:58.984Z"
+    "updated_at": "2026-04-11T20:49:52.831Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/TariffTitleContainer.tsx",
-      "line_number": 100,
+      "line_number": 101,
       "context": "className={styles.paymentsSubscriptionExpired}\n isBold\n fontSize=\"16px\"\n >\n <Trans\n i18nKey=\"LicenseHasExpiredGracePeriodStartedOn\"\n ns=\"Common\"\n t={t}\n values={{ date: paymentDate }}\n components={{\n 1: <span data-testid=\"grace-period-start-date\" />,",
       "module": "/packages/shared"
     }
@@ -33,37 +34,19 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation changes the meaning from 'Grace period started on [date]' to 'Please use it starting from [date]'. It adds an instruction to 'use' the license which is not in the source text.",
-          "suggestion": "Lisenziya müddəti bitib. <1>{{date}}</1> tarixindən etibarən güzəşt dövrü başladı."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Благоприятният период' is a literal translation of 'Grace period' that means 'favorable period' or 'prosperous period' in Bulgarian. In a legal or subscription context, the correct term is 'Лек период'.",
-          "suggestion": "Лицензът е изтекъл. Лек период започна на <1>{{date}}</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Okresné období' is an incorrect translation for 'Grace period'. In this context, 'Okresné období' refers to a periodic/interval period, whereas 'Grace period' in a subscription context should be 'Grace period' (often used as is in Czech tech contexts) or 'Dodatečná lhůta'.",
-          "suggestion": "Licence vypršela. Dodatečná lhůta začala <1>{{date}}</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -129,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Līgums' means 'Contract/Agreement', whereas the English text refers to a 'License'. In software contexts, 'Licence' should be translated as 'Licence'.",
-          "suggestion": "Licence ir expirējusi. Grācias periods sāka <1>{{date}}</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -165,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The preposition 'în' (in) is used incorrectly with a specific date in Romanian. For a specific date, 'la' or 'pe' should be used, or the sentence should be restructured to avoid the prepositional error.",
-          "suggestion": "Licența a expirat. Perioada de grație a început la <1>{{date}}</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -189,25 +160,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Okamžitá doba' is a mistranslation of 'Grace period'. 'Okamžitá doba' means 'immediate period', whereas 'Grace period' in Slovak is 'Dodatočná lehota'.",
-          "suggestion": "Licencia vypršala. Dodatočná lehota začala <1>{{date}}</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'začenšen' is a misspelling or incorrect form of 'začen**i**l' or 'začen**et**'. In this context, 'začenšen' is not a valid Slovenian word for 'started'.",
-          "suggestion": "Licenca je potekla. Period milosti se je začel <1>{{date}}</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
@@ -219,25 +178,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Период грациозности' is a literal translation of 'Grace period' that sounds unnatural in Serbian. In a legal/subscription context, 'Grace period' should be translated as 'Грасционо време' or 'Дозвољени период'. Additionally, the preposition 'на' (on) is used incorrectly with the date in this context; it should be 'да' or omitted depending on the phrasing.",
-          "suggestion": "Лиценца је истекла. Грасционо време је започело <1>{{date}}</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The gender of the noun 'Licenca' (feminine) does not match the verb 'istekao' (masculine). It should be 'istekla'.",
-          "suggestion": "Licenca je istekla. Period gracioznosti je počeo <1>{{date}}</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

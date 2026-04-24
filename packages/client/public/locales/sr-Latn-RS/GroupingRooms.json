@@ -8,7 +8,7 @@
   "DisablingRoomGroups": "Deaktiviranje grupa soba",
   "DisablingRoomGroupsDescription": "Grupe će biti sačuvane, ali skrivene. Ponovo omogućite u Profilu, upravljanju fajlovima.",
   "EditRoomGroups": "Urediti grupe soba",
-  "EmptyGroupDescription": "Nema soba ovde. Pokušajte dodati sobu ili ukloniti ovu grupu.",
+  "EmptyGroupRoomsDescription": "Nema soba ovde. Pokušajte dodati sobu ili ukloniti ovu grupu.",
   "GroupHasBeenDeleted": "Grupa je obrisana",
   "GroupIcon": "Ikona grupe",
   "GroupIsEmpty": "Grupa je prazna",

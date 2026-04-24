@@ -1,5 +1,5 @@
-require("dotenv").config();
 const path = require("path");
+require("dotenv").config({ path: path.resolve(__dirname, "../../.env") });
 
 // Root path from environment variable
 const appRootPath =
@@ -50,7 +50,10 @@ const ollamaConfig = {
 const openRouterConfig = {
   apiKey: process.env.OPENROUTER_API_KEY || "",
   apiUrl: process.env.OPENROUTER_API_URL || "https://openrouter.ai/api/v1",
-  model: process.env.OPENROUTER_MODEL || "google/gemma-4-26b-a4b-it",
+  model: process.env.OPENROUTER_MODEL || "google/gemini-2.5-flash",
+  // Per-task model overrides (fall back to generic model above)
+  spellCheckModel: process.env.OPENROUTER_SPELLCHECK_MODEL || "",
+  commentModel: process.env.OPENROUTER_COMMENT_MODEL || "",
   // Timeouts reuse Ollama values for consistency
   firstTokenTimeout: parseInt(
     process.env.OPENROUTER_FIRST_TOKEN_TIMEOUT_MS || "120000",
@@ -60,6 +63,11 @@ const openRouterConfig = {
     process.env.OPENROUTER_INACTIVITY_TIMEOUT_MS || "30000",
     10,
   ),
+};
+
+// Concurrency for LLM calls (spell-check, auto-comments)
+const concurrencyConfig = {
+  spellCheck: parseInt(process.env.SPELLCHECK_CONCURRENCY || "1", 10),
 };
 
 // Translation configuration
@@ -75,5 +83,6 @@ module.exports = {
   openRouterConfig,
   translationConfig,
   metadataConfig,
+  concurrencyConfig,
 };
 

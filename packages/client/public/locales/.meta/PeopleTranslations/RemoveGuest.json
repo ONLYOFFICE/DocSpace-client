@@ -3,17 +3,18 @@
   "content": "Remove guest",
   "content_en_sha1_hash": "f4c08fab02f6f28372817ad4c2797960ec7e89d6",
   "created_at": "2025-05-19T21:30:53.496Z",
-  "updated_at": "2026-04-07T19:35:05.178Z",
+  "updated_at": "2026-04-13T14:59:05.774Z",
   "comment": {
-    "text": "The translation key \"RemoveGuest\" is used to display the text that will be shown when removing a selected guest from a contact. This text appears in a remove dialog and should convey the action being performed.",
+    "text": "This is the label for a button that, when clicked, initiates the removal of a guest user from the DocSpace.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:37.647Z"
+    "updated_at": "2026-04-11T21:20:06.746Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/RemoveGuest/index.tsx",
-      "line_number": 42,
-      "context": "import { ButtonKeys } from \"@docspace/shared/enums\";\n import { toastr } from \"@docspace/ui-kit/components/toast\";\n \n import UsersStore from \"SRC_DIR/store/contacts/UsersStore\";\n \n type RemoveGuestDialogProps = {\n visible: boolean;\n onClose: VoidFunction;\n \n guests: UsersStore[\"selection\"];\n removeGuests: UsersStore[\"removeGuests\"];",
+      "line_number": 116,
+      "context": "onClose={onClose}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n >\n <ModalDialog.Header>\n {isMulti ? t(\"RemoveGuests\") : t(\"RemoveGuest\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n {!isMulti ? (\n <Trans",
       "module": "/packages/client"
     }
   ],

@@ -3,13 +3,21 @@
   "content": "Confirm Payment",
   "content_en_sha1_hash": "5260b42deb791fd380f69fcb682b26956d8d22b3",
   "created_at": "2026-04-10T13:53:42.263Z",
-  "updated_at": "2026-04-10T13:53:42.263Z",
+  "updated_at": "2026-04-11T20:56:44.500Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is the label for a button that confirms a payment action, typically found within a billing or subscription update flow.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:56:44.500Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/UpdatePlanButtonContainer.tsx",
+      "line_number": 397,
+      "context": "</StyledModalBody>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"OkButton\"\n label={t(\"ConfirmPayment\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={onUpdateTariff}\n testId=\"confirm_payment_button\"",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

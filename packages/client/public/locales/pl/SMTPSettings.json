@@ -1,11 +1,11 @@
 {
   "AuthViaNTLM": "Uwierzytelnianie przez NTLM",
-  "EnableSSL": "Włącz protokół SSL",
+  "EnableSMTPSSL": "Włącz protokół SSL",
   "EnterDomain": "Wpisz domenę",
   "EnterLogin": "Wpisz login",
   "EnterPort": "Wpisz port",
   "Host": "Host",
-  "HostLogin": "Zaloguj się z hostem",
+  "HostLogin": "Logowanie hosta",
   "HostPassword": "Hasło hosta",
   "Port": "Port",
   "SenderDisplayName": "Nazwa wyświetlana nadawcy",

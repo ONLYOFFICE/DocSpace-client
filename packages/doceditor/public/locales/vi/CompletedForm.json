@@ -1,7 +1,8 @@
 {
   "BackToRoom": "Quay lại Phòng",
   "CheckReadyForms": "Kiểm tra các biểu mẫu đã sẵn sàng",
-  "Description": "Biểu mẫu của bạn đã được hoàn thành và lưu",
+  "CompletedFormDescription": "Biểu mẫu của bạn đã được hoàn thành và lưu",
+  "CompletedFormTitle": "Biểu mẫu đã được hoàn thành ",
   "DescriptionForAnonymous": "Bạn đã gửi biểu mẫu PDF đã điền và được gán một số riêng biệt. Để kiểm tra trạng thái, hãy liên hệ với chủ sở hữu biểu mẫu cung cấp số được gán.",
   "DescriptionForRegisteredUser": "Biểu mẫu PDF đã điền được lưu và có sẵn cho bạn trong thư mục Hoàn thành.",
   "FillItOutAgain": "Điền lại thông tin",
@@ -18,6 +19,5 @@
   "FormVDRYouFirstRecepientDescription": "Bạn được chỉ định điền vào biểu mẫu với vai trò là người nhận đầu tiên. Một thông báo đã được gửi đến email của bạn. Bạn có thể bắt đầu điền vào nó ngay bây giờ hoặc sao chép liên kết điền và quay lại sau.",
   "LinkToFillOutForm": "Liên kết để điền biểu mẫu:",
   "LinkToForm": "Liên kết đến biểu mẫu:",
-  "LinkToViewOnlyForm": "Liên kết đến biểu mẫu chỉ xem:",
-  "Title": "Biểu mẫu đã được hoàn thành "
+  "LinkToViewOnlyForm": "Liên kết đến biểu mẫu chỉ xem:"
 }

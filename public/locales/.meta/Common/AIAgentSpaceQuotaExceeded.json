@@ -3,11 +3,12 @@
   "content": "{{aiAgent}} space quota exceeded ({{size}}).",
   "content_en_sha1_hash": "b2c3e259f54b8152df2defd05f1a570008f37470",
   "created_at": "2025-12-19T10:16:17.423Z",
-  "updated_at": "2026-04-08T17:33:55.138Z",
+  "updated_at": "2026-04-11T21:00:35.678Z",
   "comment": {
-    "text": "This key displays an error message when an AI agent has exceeded its storage quota. It appears in the UI, likely as an alert or notification, indicating the user has reached the limit for AI agent files. The message includes the AI agent type and the size of the quota.",
+    "text": "This is an error message displayed as a toast notification. It informs the user that the storage quota for the AI Agent space has been exceeded, with `{{aiAgent}}` representing \"AI Agent\" and `{{size}}` indicating the quota limit.",
     "is_auto": true,
-    "updated_at": "2025-12-22T09:46:46.028Z"
+    "updated_at": "2026-04-11T21:00:35.678Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -75,13 +76,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Gender error: 'Quota' is a masculine noun in French, so it should be 'Le quota' instead of 'La quota'.",
-          "suggestion": "Le quota d'espace {{aiAgent}} a été dépassé ({{size}})."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -147,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation is a noun phrase ('Exceeding the quota...') instead of a complete sentence/statement ('{{aiAgent}} space quota exceeded'). This changes the tone from a status notification to a heading or a title, which may not fit the UI context of an error message.",
-          "suggestion": "{{aiAgent}} cota de spațiu a fost depășită ({{size}})."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

@@ -3,22 +3,23 @@
   "content": "fill out",
   "content_en_sha1_hash": "d5e7896fc743c83c03105f8fb0a82f58eeeb222f",
   "created_at": "2025-08-26T11:14:56.354Z",
-  "updated_at": "2026-04-08T09:21:51.946Z",
+  "updated_at": "2026-04-11T20:52:28.359Z",
   "comment": {
-    "text": "This key represents the permission level allowing users to \"fill out\" a form. It's used to describe a specific access right within the sharing options, likely displayed as a permission type or option in a UI element. Translators should consider the equivalent phrasing for allowing users to complete a form.",
+    "text": "This is a label for a sharing permission option, indicating that the user can fill out forms.",
     "is_auto": true,
-    "updated_at": "2025-08-26T11:27:44.633Z"
+    "updated_at": "2026-04-11T20:52:28.359Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 340,
+      "line_number": 341,
       "context": "case ShareAccessRights.Comment:\n return t(\"Common:Comment\");\n case ShareAccessRights.ReadOnly:\n return t(\"Common:ReadOnly\");\n case ShareAccessRights.FormFilling:\n return t(\"Common:FillOut\");\n default:\n return \"\";\n }\n };",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 340,
+      "line_number": 341,
       "context": "case ShareAccessRights.Comment:\n return t(\"Common:Comment\");\n case ShareAccessRights.ReadOnly:\n return t(\"Common:ReadOnly\");\n case ShareAccessRights.FormFilling:\n return t(\"Common:FillOut\");\n default:\n return \"\";\n }\n };",
       "module": "/packages/shared"
     }
@@ -105,13 +106,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation '작성해주세요' is an imperative command ('Please fill out'), whereas the English source 'fill out' in this context refers to a permission level/access right (a noun phrase or infinitive). In a UI list of permissions, it should be a noun or a concise action name.",
-          "suggestion": "양식 작성"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {

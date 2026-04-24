@@ -3,11 +3,12 @@
   "content": "{{organizationName}} Template Gallery",
   "content_en_sha1_hash": "b86e8e51bcad11193e478b90db1856a65b069719",
   "created_at": "2025-12-22T09:40:18.217Z",
-  "updated_at": "2025-12-22T10:06:47.951Z",
+  "updated_at": "2026-04-11T21:11:16.844Z",
   "comment": {
-    "text": "This translation key provides the title for a template gallery, displaying the organization's name. It appears as the title within a gallery tile, specifically in the \"Submit to Gallery\" section of the UI. Translators should replace \"{{organizationName}}\" with the relevant organization name for the displayed gallery.",
+    "text": "This is the title of the template gallery, displayed at the top of the gallery page. `{{organizationName}}` will be replaced with the name of the user's organization.",
     "is_auto": true,
-    "updated_at": "2025-12-22T10:06:47.951Z"
+    "updated_at": "2026-04-11T21:11:16.844Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

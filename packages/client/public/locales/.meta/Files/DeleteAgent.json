@@ -3,17 +3,18 @@
   "content": "Delete agent",
   "content_en_sha1_hash": "7a10a4a6f851226bb23c4854cba9f735001c9f1b",
   "created_at": "2025-10-27T16:14:30.107Z",
-  "updated_at": "2026-04-10T08:21:04.376Z",
+  "updated_at": "2026-04-23T17:24:02.079Z",
   "comment": {
-    "text": "This key displays the text for a \"Delete\" button or action, specifically used when deleting an agent. It appears within a context menu or similar UI element when managing agents within the application. Translators should ensure this conveys a clear and actionable deletion process.",
+    "text": "This is a button label that appears in a context menu for an AI agent, allowing the user to remove it.",
     "is_auto": true,
-    "updated_at": "2025-10-27T17:59:14.307Z"
+    "updated_at": "2026-04-11T21:10:06.772Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2621,
-      "context": "id: \"option_delete\",\n key: \"delete\",\n label: isRootThirdPartyFolder\n ? t(\"Common:Disconnect\")\n : isAIAgent\n ? t(\"DeleteAgent\")\n : item.isTemplate\n ? t(\"Files:DeleteTemplate\")\n : item.isRoom\n ? t(\"Common:DeleteRoom\")\n : t(\"Common:Delete\"),",
+      "line_number": 2683,
+      "context": "id: \"option_delete\",\n key: \"delete\",\n label: isRootThirdPartyFolder\n ? t(\"Common:Disconnect\")\n : isAIAgent\n ? t(\"DeleteAgent\")\n : item.isTemplate\n ? t(\"Files:DeleteTemplateAction\")\n : item.isRoom\n ? t(\"Common:DeleteRoom\")\n : t(\"Common:Delete\"),",
       "module": "/packages/client"
     }
   ],

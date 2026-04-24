@@ -39,6 +39,7 @@ import ArrowIcon from "PUBLIC_DIR/images/arrow.integration.react.svg?url";
 import { isMobile } from "@docspace/ui-kit/utils/device";
 import classNames from "classnames";
 import styles from "./StyledPortalIntegration.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const zoomTitle = "Zoom";
 const wordPressTitle = "WordPress";
@@ -72,7 +73,7 @@ const Integration: React.FC<{
         {t("IntegrationExamples")}
       </div>
       <Text lineHeight="20px" color={theme.sdkPresets.secondaryColor}>
-        {t("IntegrationDescription", { productName: t("Common:ProductName") })}
+        {t("IntegrationDescription", { productName: getBrandName("ProductName") })}
       </Text>
       <div className="icons">
         <TooltipContainer

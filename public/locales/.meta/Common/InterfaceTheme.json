@@ -3,11 +3,12 @@
   "content": "Interface theme",
   "content_en_sha1_hash": "f47f8ed32464b7b3aa479c8638758420470a60e9",
   "created_at": "2026-04-03T21:51:34.678Z",
-  "updated_at": "2026-04-08T06:39:00.448Z",
+  "updated_at": "2026-04-23T17:24:02.046Z",
   "comment": {
-    "text": "This key serves as the label for the interface theme setting option. It appears as a name within a list of configuration items in the user's profile section.",
+    "text": "This is a label for a setting that allows users to change the visual theme of the interface.",
     "is_auto": true,
-    "updated_at": "2026-04-03T21:54:30.053Z"
+    "updated_at": "2026-04-11T20:50:43.218Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -15,6 +16,12 @@
       "line_number": 184,
       "context": "await getFileManagementData();\n },\n },\n {\n id: \"interface-theme\",\n name: t?.(\"Common:InterfaceTheme\"),\n content: <InterfaceTheme />,\n onClick: () => {},\n },\n ];",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/settings/index.tsx",
+      "line_number": 89,
+      "context": "name: t(\"Common:FileManagement\"),\n content: wrapContent(<FileManagement />),\n },\n {\n id: \"interface-theme\",\n name: t(\"Common:InterfaceTheme\"),\n content: wrapContent(<InterfaceTheme />),\n },\n ],\n [t, isPending, canSeeBilling],\n );",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -27,13 +34,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation 'واجهة المستخدم' means 'User Interface', whereas the English source 'Interface theme' refers to the visual appearance/skin of the interface.",
-          "suggestion": "سمة الواجهة"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -111,13 +112,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ການໂຕ້ຕອບ ຫົວ​ຂໍ້' means 'Interaction Topic' or 'Response Subject', which is completely different from 'Interface theme' (visual appearance/skin of the UI).",
-          "suggestion": "ຮູບແບບຂອງອິນເຕີເຟດ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {

@@ -3,16 +3,23 @@
   "content": "The report will be saved to {{sectionName}}",
   "content_en_sha1_hash": "55671fe19ba077a1c4e0ef79f837de41f87ae103",
   "created_at": "2026-04-10T13:53:45.955Z",
-  "updated_at": "2026-04-10T13:55:43.930Z",
+  "updated_at": "2026-04-23T17:24:02.042Z",
   "comment": {
-    "text": "This key provides a descriptive message informing the user where their downloaded report will be stored. It is used as a tooltip or description for the report download action within the Audit Trail and Login History security settings.",
+    "text": "This is a descriptive text indicating where a downloaded report will be saved. It appears below a \"Download Report\" button and includes a `{{sectionName}}` variable, which will be replaced by the name of the location where the report is saved (e.g., \"My Documents\").",
     "is_auto": true,
-    "updated_at": "2026-04-10T13:55:43.930Z"
+    "updated_at": "2026-04-11T20:45:05.748Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
+      "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
+      "line_number": 584,
+      "context": "isDisabled={isNotPaidPeriod}\n scale={isMobile}\n testId=\"download_report_button\"\n />\n <Text as=\"span\" className={styles.downloadReportDescription}>\n {t(\"ReportSaveLocation\", {\n sectionName: t(\"MyDocuments\"),\n })}\n </Text>\n </div>\n </>",
+      "module": "/libs/ui-kit"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/index.js",
-      "line_number": 116,
+      "line_number": 117,
       "context": "securityLifetime={securityLifetime}\n lifetime={securityLifetime.auditTrailLifeTime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"Common:DownloadReportBtnText\")}\n downloadReportDescription={t(\"Common:ReportSaveLocation\", {\n sectionName: t(\"Common:MyDocuments\"),\n })}\n getReport={getAuditTrailReport}\n isSettingNotPaid={!isAuditAvailable}\n isLoadingDownloadReport={isLoadingDownloadReport}",
       "module": "/packages/client"
     },

@@ -3,11 +3,12 @@
   "content": "Selected elements were successfully deleted from {{sectionName}}",
   "content_en_sha1_hash": "34001013ab8ad0b2c793c6ef5b07cc520c8c155d",
   "created_at": "2025-06-02T10:19:18.540Z",
-  "updated_at": "2026-04-08T20:52:38.625Z",
+  "updated_at": "2026-04-23T17:24:01.614Z",
   "comment": {
-    "text": "Selected elements were successfully deleted from the Trash Section. This translation key is used to display a confirmation message when deleting items from the trash. It appears in a delete dialog and should be translated to indicate success in the user's preferred language.",
+    "text": "This is a toast message confirming that selected items have been successfully deleted. The `{{sectionName}}` variable will be replaced with the name of the section from which the items were deleted (e.g., \"Trash\").",
     "is_auto": true,
-    "updated_at": "2025-06-02T10:22:20.940Z"
+    "updated_at": "2026-04-11T21:27:18.877Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -30,13 +31,13 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 870,
+      "line_number": 875,
       "context": "deleteRoomsAction([selectedFolderId], translations).catch((err) =>\n toastr.error(err),\n );\n } else {\n translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n \n deleteAction(translations, [selectedFolder], true).catch((err) =>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 870,
+      "line_number": 875,
       "context": "deleteRoomsAction([selectedFolderId], translations).catch((err) =>\n toastr.error(err),\n );\n } else {\n translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n \n deleteAction(translations, [selectedFolder], true).catch((err) =>",
       "module": "/packages/client"
     },

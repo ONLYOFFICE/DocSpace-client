@@ -44,5 +44,6 @@
   "UserName": "İstifadəçi Adı",
   "ViewerInfo": "İzləyici məlumatı",
   "WatermarkPreview": "Su nişanı önizləməsi",
-  "WatermarkPreviewHelp": "Bu şəkil önizləməsi su nişanının fayllarınızda necə görünəcəyini təxmini göstərir."
+  "WatermarkPreviewHelp": "Bu şəkil önizləməsi su nişanının fayllarınızda necə görünəcəyini təxmini göstərir.",
+  "NoDatabaseConnectionsRoomAdmin": "Verilənlər bazası bağlantıları administrator tərəfindən tənzimlənir. Verilənlər bazası qurulduqdan sonra, burada ixracı aktivləşdirmək mümkün olacaq."
 }

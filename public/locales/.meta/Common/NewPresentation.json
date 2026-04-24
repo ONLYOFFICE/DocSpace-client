@@ -3,30 +3,37 @@
   "content": "New presentation",
   "content_en_sha1_hash": "2f9d6210592804df00fdbb934945bcb6ee2accb8",
   "created_at": "2025-05-19T21:30:46.772Z",
-  "updated_at": "2026-04-10T08:21:04.325Z",
+  "updated_at": "2026-04-23T17:24:01.890Z",
   "comment": {
-    "text": "The translation key \"NewPresentation\" is used to display the label for a button or action that creates a new presentation. In the UI, this text appears on a button that triggers the creation of a new presentation file in Microsoft PowerPoint format (pptx).",
+    "text": "This is a label for creating a new presentation file. It appears in menus and as a default file name.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:22.236Z"
+    "updated_at": "2026-04-11T20:48:10.162Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 82,
+      "line_number": 83,
       "context": "case \"docx\":\n return i18n.t(\"Common:NewDocument\");\n case \"xlsx\":\n return i18n.t(\"Common:NewSpreadsheet\");\n case \"pptx\":\n return i18n.t(\"Common:NewPresentation\");\n case \"pdf\":\n return i18n.t(\"Common:NewPDFForm\");\n default:\n return i18n.t(\"Common:NewFolder\");\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3519,
+      "line_number": 3595,
       "context": "};\n \n const createNewPresentation = {\n id: \"personal_new-presentation\",\n key: \"new-presentation\",\n label: t(\"Common:NewPresentation\"),\n onClick: () => this.onCreate(\"pptx\"),\n icon: ActionsPresentationReactSvgUrl,\n };\n \n const createTemplateForm = {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/hooks/useEditorEvents.ts",
-      "line_number": 423,
+      "line_number": 424,
       "context": "switch (fileExt) {\n case \"xlsx\":\n fileName = t(\"Common:NewSpreadsheet\");\n break;\n case \"pptx\":\n fileName = t(\"Common:NewPresentation\");\n break;\n case \"pdf\":\n fileName = t(\"Common:NewPDFForm\");\n break;\n default:",
       "module": "/packages/doceditor"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_hooks/useDocsActions.ts",
+      "line_number": 58,
+      "context": "case \"docx\":\n return t(\"Common:NewDocument\");\n case \"xlsx\":\n return t(\"Common:NewSpreadsheet\");\n case \"pptx\":\n return t(\"Common:NewPresentation\");\n case \"pdf\":\n return t(\"Common:NewPDFForm\");\n case \"folder\":\n return t(\"Common:NewFolder\");\n }",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -165,13 +172,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'සමර්පණයක්' (samarpanayak) means 'a dedication' or 'a presentation' in the sense of giving/offering something. In the context of software/IT (PowerPoint/pptx), 'presentation' should be translated as 'ප්‍රසන්ටේෂන් එකක්' or 'ඉදිරිපත් කිරීමක්'. The current translation sounds like a religious or formal dedication.",
-          "suggestion": "නව ඉදිරිපත් කිරීමක්"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -207,13 +208,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'New' is missing from the translation. The English text specifies the creation of a *new* presentation, but the Ukrainian translation only says 'Presentation'.",
-          "suggestion": "Нова презентація"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

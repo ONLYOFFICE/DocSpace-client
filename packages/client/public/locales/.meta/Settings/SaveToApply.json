@@ -3,34 +3,35 @@
   "content": "Click the <strong>Save</strong> button at the bottom to apply.",
   "content_en_sha1_hash": "7174b893d5a162ea27c6dae6791a9ca97ef72408",
   "created_at": "2025-05-19T21:30:52.481Z",
-  "updated_at": "2026-04-09T01:39:30.287Z",
+  "updated_at": "2026-04-11T21:48:44.474Z",
   "comment": {
-    "text": "This translation key is used to display a message encouraging users to click the \"Save\" button at the bottom of a form or section. It appears in a smaller font size below a larger title, and its purpose is to provide a clear call-to-action for users to complete their settings changes.",
+    "text": "This is a short instruction text that appears below various settings, reminding the user to click the \"Save\" button to apply their changes.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:35.886Z"
+    "updated_at": "2026-04-11T21:22:31.632Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/adminMessage.js",
-      "line_number": 161,
-      "context": "{t(\"AdminsMessageSettingDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Text fontSize=\"13px\" fontWeight=\"400\" className=\"learn-subtitle\">\n <Trans t={t} i18nKey=\"SaveToApply\" />\n </Text>\n \n {administratorMessageSettingsUrl ? (\n <Link\n className=\"link-learn-more\"",
+      "line_number": 162,
+      "context": "{t(\"AdminsMessageSettingDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <Text fontSize=\"13px\" fontWeight=\"400\" className=\"learn-subtitle\">\n <Trans t={t} i18nKey=\"SaveToApply\" />\n </Text>\n \n {administratorMessageSettingsUrl ? (\n <Link\n className=\"link-learn-more\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 151,
+      "line_number": 152,
       "context": "<div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"SettingPasswordDescription\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight=\"400\">\n <Trans t={t} i18nKey=\"SaveToApply\" />\n </Text>\n {passwordStrengthSettingsUrl ? (\n <Link\n className=\"link-learn-more\"\n dataTestId=\"password_strength_learn_more\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 151,
+      "line_number": 152,
       "context": "<div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"SettingPasswordDescription\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight=\"400\">\n <Trans t={t} i18nKey=\"SaveToApply\" />\n </Text>\n {passwordStrengthSettingsUrl ? (\n <Link\n className=\"link-learn-more\"\n dataTestId=\"password_strength_learn_more\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 151,
+      "line_number": 152,
       "context": "<div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"SettingPasswordDescription\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight=\"400\">\n <Trans t={t} i18nKey=\"SaveToApply\" />\n </Text>\n {passwordStrengthSettingsUrl ? (\n <Link\n className=\"link-learn-more\"\n dataTestId=\"password_strength_learn_more\"",
       "module": "/packages/client"
     },
@@ -57,13 +58,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'button' is missing from the Arabic translation, which makes the sentence 'Click on Save at the bottom to apply' instead of 'Click the Save button...'",
-          "suggestion": "انقر على زر <strong>حفظ</strong> في الأسفل للتطبيق."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -93,13 +88,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation ends with 'για να εφαρμογή', which is grammatically incorrect and incomplete. It translates to 'to the apply' instead of 'to apply' (the verb is missing its proper conjugation or the noun is used incorrectly).",
-          "suggestion": "Κάντε κλικ στο κουμπί <strong>Αποθήκευση</strong> στο κάτω μέρος για να εφαρμόσετε τις αλλαγές."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -111,13 +100,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation 'asettaaksesi' (to set/to place) is grammatically incomplete and semantically incorrect in this context. It lacks an object (e.g., 'asettaaksesi muutokset' - to apply changes) and sounds like a broken sentence.",
-          "suggestion": "Klikkaa alaosan <strong>Tallenna</strong>-painiketta tallentaaksesi muutokset."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -139,7 +122,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \"e\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-11T21:48:44.456Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null
@@ -219,13 +204,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'prijavo' means 'login' or 'registration', whereas the English text 'apply' in this context means 'to apply changes' (uveljaviti/potrditi).",
-          "suggestion": "Klikni gumb <strong>Shrani</strong> na dnu, da uveljaviš spremembe."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -267,13 +246,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Ruani' is the imperative verb form (Save!), whereas in the context of a button label, it should be the noun/infinitive form 'Ruaj' or 'Ruajeni'. Using 'Ruani' inside the strong tag makes the sentence read 'Click the Save! button', which is grammatically awkward for a UI label.",
-          "suggestion": "Klikoni butonin <strong>Ruaj</strong> në fund për të aplikuar."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

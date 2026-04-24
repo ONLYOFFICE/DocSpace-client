@@ -32,7 +32,6 @@ import DefaultTemplatesStore from "SRC_DIR/store/portal-settings/DefaultTemplate
 
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { mapCulturesToArray } from "@docspace/shared/utils/cultures";
-import i18n from "SRC_DIR/i18n";
 
 export type UseCommonProps = {
   loadBaseInfo?: (page: string) => Promise<void>;
@@ -105,7 +104,7 @@ const useCommon = ({
   }, [getDefaultTemplates]);
 
   const cultureNames = useMemo(
-    () => (cultures ? mapCulturesToArray(cultures, true, i18n) : []),
+    () => (cultures ? mapCulturesToArray(cultures, true) : []),
     [cultures],
   );
 
@@ -163,3 +162,4 @@ const useCommon = ({
 };
 
 export default useCommon;
+

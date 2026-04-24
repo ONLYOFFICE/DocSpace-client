@@ -3,13 +3,21 @@
   "content": "Input ({{currency}}/1M)",
   "content_en_sha1_hash": "bbc5e357a0c56d0a4af679416681361e811be123",
   "created_at": "2026-04-10T13:53:45.287Z",
-  "updated_at": "2026-04-10T13:53:45.287Z",
+  "updated_at": "2026-04-11T20:50:47.949Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a table header label indicating the cost of input for an AI model. The `{{currency}}` variable will be replaced with the currency symbol (e.g., $, €).",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:50:47.949Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/sub-components/ModelSettingsTable/TableView/TableHeader.tsx",
+      "line_number": 35,
+      "context": "active: true,\n minWidth: 240,\n },\n {\n key: \"Input\",\n title: t(\"InputCurrency\", { currency: aiModelsCurrencySymbol }),\n enable: true,\n resizable: true,\n minWidth: 120,\n },\n {",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

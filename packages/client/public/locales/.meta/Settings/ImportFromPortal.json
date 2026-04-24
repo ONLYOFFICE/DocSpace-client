@@ -3,16 +3,17 @@
   "content": "Import from {{organizationName}} Workspace",
   "content_en_sha1_hash": "e724af9a3984c03739c4b609de92912ffbbdbb33",
   "created_at": "2025-05-19T21:30:51.672Z",
-  "updated_at": "2026-04-09T02:52:14.840Z",
+  "updated_at": "2026-04-11T21:23:53.750Z",
   "comment": {
-    "text": "This translation key is used for the \"Import from {{organizationName}} Workspace\" text, which appears on a button or similar element in the Portal Settings page, allowing users to import data from a specified organization workspace.",
+    "text": "This is a button label for importing data. It appears when the user is importing from a generic \"Workspace\" and includes the `organizationName` variable, which will be replaced by the name of the organization.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:05.288Z"
+    "updated_at": "2026-04-11T21:23:53.750Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
-      "line_number": 370,
+      "line_number": 371,
       "context": "? workspace === \"GoogleWorkspace\"\n ? t(\"ImportFromGoogle\")\n : workspace === \"Nextcloud\"\n ? t(\"ImportFromNextcloud\")\n : workspace === \"Workspace\"\n ? t(\"ImportFromPortal\", {\n organizationName: logoText,\n })\n : t(\"DataImport\")\n : !standalone && isPaymentPage\n ? t(\"Common:Billing\")",
       "module": "/packages/client"
     }
@@ -39,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The verb 'Входирай' means 'Log in' or 'Sign in', which is incorrect for the context of 'Import'. The correct term for importing data is 'Импортирай'.",
-          "suggestion": "Импортирай от {{organizationName}} Workspace"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -159,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'වැඩබිම්' (Wadabim) translates to 'workplaces' or 'construction sites' in a physical sense. In the context of software/IT (Workspace), 'වැඩබිම' is an incorrect literal translation. It should use a term more appropriate for a digital workspace/environment.",
-          "suggestion": "{{organizationName}} වැඩබිමෙන් ආනයනය කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

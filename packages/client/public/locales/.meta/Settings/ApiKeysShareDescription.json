@@ -3,16 +3,17 @@
   "content": "Do not share your API key with others or expose it in the browser or other client-side code.",
   "content_en_sha1_hash": "0f6d896cc685ae0a76c5eb9007fc9fc99f03c8da",
   "created_at": "2025-05-19T21:30:50.552Z",
-  "updated_at": "2026-04-09T04:11:30.873Z",
+  "updated_at": "2026-04-11T21:25:39.560Z",
   "comment": {
-    "text": "This translation key is used to display a warning message reminding users not to share their API keys. It appears in the PortalSettings page, specifically on an API Keys-related setting or button.",
+    "text": "This is a descriptive text displayed on the API Keys settings page, warning users about the security implications of sharing their API keys.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:46.800Z"
+    "updated_at": "2026-04-11T21:25:39.560Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/index.tsx",
-      "line_number": 169,
+      "line_number": 170,
       "context": "className={classNames(\n styles.apiKeysText,\n styles.apiKeysDescriptionText,\n )}\n >\n {t(\"Settings:ApiKeysShareDescription\")}\n </Text>\n \n <Text\n className={classNames(styles.apiKeysText, styles.apiKeysUsageText)}\n >",
       "module": "/packages/client"
     }
@@ -153,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'client-side code' was translated as 'සේවාදායක පාර්ශ්ව කේතය' (server-side code), which is the exact opposite of the intended meaning.",
-          "suggestion": "ඔබගේ API යතුර අන් අය සමඟ බෙදා නොගන්න හෝ බ්‍රවුසරයේ හෝ වෙනත් සේවාදායක පාර්ශ්ව නොවන (client-side) කේතයක එය නිරාවරණය නොකරන්න."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

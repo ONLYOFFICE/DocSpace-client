@@ -3,22 +3,23 @@
   "content": "Send again",
   "content_en_sha1_hash": "9fafcfcc8089c0d4519f16a47cf411b0b51890a7",
   "created_at": "2025-05-19T21:30:53.377Z",
-  "updated_at": "2026-04-09T07:01:21.683Z",
+  "updated_at": "2026-04-11T21:20:37.394Z",
   "comment": {
-    "text": "The \"SendAgain\" translation key is used to display the phrase \"Send again\" in a button or similar UI element. It appears as an action option on a profile page, likely within a file upload or message sending section. This text invites users to retry a previous action.",
+    "text": "This is the label for a button that allows a user to resend a verification email or similar communication.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:49.877Z"
+    "updated_at": "2026-04-11T21:20:37.394Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 530,
+      "line_number": 531,
       "context": "<ReactSVG\n className={styles.sendAgainIcon}\n src={SendClockReactSvgUrl}\n />\n <Text className={styles.sendAgainText} fontWeight={600}>\n {t(\"SendAgain\")}\n </Text>\n </div>\n ) : null}\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 530,
+      "line_number": 531,
       "context": "<ReactSVG\n className={styles.sendAgainIcon}\n src={SendClockReactSvgUrl}\n />\n <Text className={styles.sendAgainText} fontWeight={600}>\n {t(\"SendAgain\")}\n </Text>\n </div>\n ) : null}\n </div>",
       "module": "/packages/client"
     }
@@ -117,13 +118,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Izveidot jaunu identitāti' means 'Create a new identity', which is completely different from the English 'Send again'.",
-          "suggestion": "Nosūtīt vēlreiz"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {

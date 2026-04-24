@@ -1,14 +1,14 @@
 {
   "AuthViaNTLM": "Հաստատում NTLM-ի միջոցով",
-  "EnableSSL": "Միացնել SSL-ը",
+  "EnableSMTPSSL": "Միացնել SSL-ը",
   "EnterDomain": "Մուտքագրեք տիրույթը",
-  "EnterLogin": "Մուտքագրեք մուտք",
+  "EnterLogin": "Մուտքագրեք մուտքանունը",
   "EnterPort": "Մուտքագրեք պորտը",
-  "Host": "Հյուրընկալող",
+  "Host": "Հոսթ",
   "HostLogin": "Հոսթի մուտք",
   "HostPassword": "Հոսթի գաղտնաբառ",
   "Port": "Պորտ",
-  "SenderDisplayName": "Ուղարկողի էլփոստի հասցեն",
+  "SenderDisplayName": "Ուղարկողի ցուցադրվող անունը",
   "SenderEmailAddress": "Ուղարկողի էլփոստի հասցեն",
   "SendTestMail": "Ուղարկել փորձնական նամակ"
 }

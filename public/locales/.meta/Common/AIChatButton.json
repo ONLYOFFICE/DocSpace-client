@@ -3,13 +3,21 @@
   "content": "AI Chat",
   "content_en_sha1_hash": "81cefbaa610fdd5ac7a58a071fcea75d7e9af3d6",
   "created_at": "2026-03-20T09:07:26.752Z",
-  "updated_at": "2026-04-08T17:32:00.568Z",
+  "updated_at": "2026-04-23T17:24:02.134Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is the label for a button that opens the AI Chat panel. It appears as a short label on a floating button.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:00:32.748Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/ai-chat-button/index.tsx",
+      "line_number": 83,
+      "context": "data-position={panelPosition}\n data-shift-up={shiftUp ? \"true\" : \"false\"}\n onClick={togglePanel}\n data-tour=\"ai-chat-button\"\n data-tooltip-id=\"ai-chat-fab-tooltip\"\n data-tooltip-content={t(\"Common:AIChatButton\")}\n >\n <ReactSVG src={AiAgentsReactSvgUrl} className={styles.icon} />\n </button>\n <Tooltip id=\"ai-chat-fab-tooltip\" place=\"top\" float />\n </>",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -74,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'ԱԲ' (AB), which is a phonetic transliteration of the letters 'A' and 'B', instead of the correct term for 'AI' (Artificial Intelligence) in Armenian, which is 'ԱԻ' (AI).",
-          "suggestion": "ԱԻ Չաթ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -164,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation means 'Introduction to artificial intelligence', which is a different concept from the English 'AI Chat'.",
-          "suggestion": "AI klepet"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

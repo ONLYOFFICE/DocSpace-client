@@ -3,17 +3,18 @@
   "content": "{{productName}} address for internal requests from the Document Service",
   "content_en_sha1_hash": "d3815a656c220dde785b033d7fcf88dd267536a4",
   "created_at": "2025-05-19T21:30:51.400Z",
-  "updated_at": "2026-04-09T03:08:57.657Z",
+  "updated_at": "2026-04-11T21:24:18.568Z",
   "comment": {
-    "text": "This translation key is used to display the address of the Document Service for internal requests. It appears as a label in an input field on the Portal Settings page. The value should match the product name to provide a specific location URL for internal requests.",
+    "text": "This is a label for an input field in the Document Service integration settings. It prompts the user to enter the URL for internal requests, with `{{productName}}` replaced by the brand name (e.g., ONLYOFFICE DocSpace).",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:16.255Z"
+    "updated_at": "2026-04-11T21:24:18.568Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 390,
-      "context": "</Text>\n </div>\n <div className=\"input-wrapper\">\n <Label\n htmlFor=\"portalAdress\"\n text={t(\"Settings:DocumentServiceLocationUrlPortal\", {\n productName: t(\"Common:ProductName\"),\n })}\n />\n <InputBlock\n id=\"portalAdress\"",
+      "line_number": 391,
+      "context": "</Text>\n </div>\n <div className=\"input-wrapper\">\n <Label\n htmlFor=\"portalAdress\"\n text={t(\"Settings:DocumentServiceLocationUrlPortal\", {\n productName: getBrandName(\"ProductName\"),\n })}\n />\n <InputBlock\n id=\"portalAdress\"",
       "module": "/packages/client"
     }
   ],
@@ -27,25 +28,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation omits the word 'internal' (داخلي), which is a key qualifier for the type of requests being described.",
-          "suggestion": "عنوان {{productName}} للطلبات الداخلية من خدمة المستندات"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation omits the concept of 'address' (ünvan), which is the core subject of the label. The current translation reads as '{{productName}} for requests from the Document Service', whereas the English specifies it is the 'address' for those requests.",
-          "suggestion": "Sənəd Xidmətindən daxili sorğular üçün {{productName}} ünvanı"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -63,25 +52,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation reverses the relationship between the components. The English says the address is FOR the Document Service, but the German says the address is OF the Document Service FOR the product name.",
-          "suggestion": "{{productName}}-Adresse für interne Anfragen des Dokumenten-Services"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The phrase 'for internal requests' (για εσωτερικά αιτήματα) is missing from the Greek translation, which changes the specific scope of the address.",
-          "suggestion": "Διεύθυνση {{productName}} για εσωτερικά αιτήματα από την υπηρεσία εγγράφων"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -117,13 +94,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation omits the phrase 'for internal requests', which is a key part of the English meaning.",
-          "suggestion": "{{productName}}のドキュメントサービスからの内部リクエスト用のアドレス"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {

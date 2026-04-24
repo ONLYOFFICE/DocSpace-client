@@ -3,13 +3,20 @@
   "content": "MB",
   "content_en_sha1_hash": "6e979f426b676955f4896002085eb834b93326b1",
   "created_at": "2025-05-19T21:30:46.418Z",
-  "updated_at": "2026-04-10T08:21:04.350Z",
+  "updated_at": "2026-04-13T14:59:05.858Z",
   "comment": {
-    "text": "The translation key \"MB\" represents the unit of measurement \"Megabyte\". It is used as a label in a dropdown menu within a quota form component to select file size units.",
+    "text": "This is a short label for the unit of digital information, \"Megabyte\", used in various contexts such as file size displays, quota settings, and upload limits.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:32.255Z"
+    "updated_at": "2026-04-11T20:48:50.341Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/utils/common.ts",
+      "line_number": 52,
+      "context": "let resultSize = bytes;\n \n const sizeNames = [\n t(\"Common:Bytes\"),\n t(\"Common:Kilobyte\"),\n t(\"Common:Megabyte\"),\n t(\"Common:Gigabyte\"),\n t(\"Common:Terabyte\"),\n t(\"Common:Petabyte\"),\n t(\"Common:Exabyte\"),\n ];",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
       "line_number": 103,
@@ -147,13 +154,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'MO' is incorrect for the unit 'Megabyte'. In Romanian, the standard abbreviation for Megabyte is 'MB'. 'MO' does not represent this unit.",
-          "suggestion": "MB"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

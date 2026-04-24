@@ -3,23 +3,24 @@
   "content": "Action required",
   "content_en_sha1_hash": "a5f995a22060510a354c12efb27296065c533247",
   "created_at": "2025-05-19T21:30:42.869Z",
-  "updated_at": "2026-04-08T18:11:49.416Z",
+  "updated_at": "2026-04-23T17:24:01.722Z",
   "comment": {
-    "text": "The \"ActionRequired\" translation key is used to display a message indicating that an action needs to be taken in conflict resolution dialogues, such as a file conflict. This text typically appears on a button or header label, prompting users to take further action. Its purpose is to guide the user through resolving conflicts in a clear and concise manner.",
+    "text": "This is a dialog title. It appears in a conflict resolution dialog, indicating that the user needs to make a decision to proceed.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:27.925Z"
+    "updated_at": "2026-04-11T21:01:29.897Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
-      "line_number": 323,
+      "line_number": 333,
       "context": "const skipDescription = getSkipDescription();\n \n return (\n <ConflictResolve\n visible={visible}\n headerLabel={t(\"Common:ActionRequired\")}\n isLoading={!ready}\n onSubmit={isUploadConflict ? onAcceptUploadType : onAcceptType}\n onClose={onCloseConflictDialog}\n cancelButtonLabel={t(\"CancelButton\")}\n submitButtonLabel={t(\"OKButton\")}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/components/ConflictResolveDialog/ConflictResolveDialog.tsx",
-      "line_number": 56,
-      "context": "submitButtonLabel={t(\"Common:OKButton\")}\n messageText={\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"FileActionRequired\"\n values={{ fileName }}\n components={{ 1: <strong key=\"component_key\" className=\"bold\" /> }}\n />\n }\n selectActionText={t(\"ConflictResolveSelectAction\")}",
+      "line_number": 68,
+      "context": "overwriteDescription={t(\"OverwriteDescription\")}\n duplicateTitle={t(\"Common:CreateFileCopy\")}\n duplicateDescription={t(\"CreateDescription\")}\n skipTitle={t(\"SkipTitle\")}\n skipDescription={t(\"SkipDescription\")}\n headerLabel={t(\"ActionRequired\")}\n />\n );\n }\n \n export default ConflictResolveDialog;",
       "module": "/packages/doceditor"
     }
   ],
@@ -111,25 +112,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ຕ້ອງດໍາລົງການ' means 'must maintain/sustain/carry on' (often used in the context of holding a position or status), which does not convey the meaning of 'Action required' (needing to perform a task or take a step to resolve a conflict).",
-          "suggestion": "ຕ້ອງມີການດໍາເນີນການ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Veicamās darbības' means 'Actions to be performed' or 'To-do list', whereas the English 'Action required' implies a necessity or a requirement (an imperative state).",
-          "suggestion": "Nepieciešama darbība"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -201,13 +190,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Turkish translation 'Form sahibi' means 'Form owner', which is completely different from the English 'Action required'.",
-          "suggestion": "İşlem gerekiyor"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

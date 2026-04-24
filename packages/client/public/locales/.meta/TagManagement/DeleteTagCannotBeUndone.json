@@ -3,11 +3,12 @@
   "content": "This action cannot be undone.",
   "content_en_sha1_hash": "951f495b348745aab3e044e6401d8e5c4afb59b6",
   "created_at": "2026-02-19T13:36:19.064Z",
-  "updated_at": "2026-04-08T21:29:18.957Z",
+  "updated_at": "2026-04-11T21:27:16.471Z",
   "comment": {
-    "text": "This key displays a message in a delete tag confirmation dialog, informing the user that the deletion action is irreversible. It serves as a warning to prevent accidental data loss during tag removal. The text appears within the body of the dialog.",
+    "text": "This is a warning message displayed in a modal dialog when a user attempts to delete a tag, informing them that the action is irreversible.",
     "is_auto": true,
-    "updated_at": "2026-03-20T10:30:03.779Z"
+    "updated_at": "2026-04-11T21:27:16.471Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -111,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation is grammatically incorrect and changes the meaning. 'Šis rīcība nevar atgriezt' literally means 'This action cannot return (something else)'. To convey that the action itself is irreversible, the passive voice or a different construction is required.",
-          "suggestion": "Šo darbību nevar atcelt."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -129,13 +124,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation is grammatically incorrect and uses the wrong case for the noun, making it sound unnatural/broken. 'To akcję' is incorrect; it should be 'Tę akcję' or 'Akcji nie można cofnąć'.",
-          "suggestion": "Tę akcję można nie cofnąć. (Wait, no) -> Tej akcji nie można cofnąć."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -171,25 +160,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation 'Táto akcia sa neodstráni' means 'This action will not be removed', which is logically incorrect. The English 'This action cannot be undone' means the process is irreversible.",
-          "suggestion": "Túto akciu nemožno vrátiť späť."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation means 'This action is not prohibited/forbidden', which is the opposite of the intended warning that the action is irreversible.",
-          "suggestion": "To dejanja ni mogoče razveljavati."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

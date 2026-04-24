@@ -3,13 +3,20 @@
   "content": "Access denied",
   "content_en_sha1_hash": "64343a83ad8c0b8e2789c32ca5ab1eb6abb614e0",
   "created_at": "2025-05-19T21:30:42.816Z",
-  "updated_at": "2026-04-08T18:23:06.285Z",
+  "updated_at": "2026-04-11T21:01:38.907Z",
   "comment": {
-    "text": "This translation key displays a message indicating that access has been denied, used when the user lacks permissions to perform an action. It is displayed in an error container within the login component and can also be triggered by OAuth errors, such as client permission denial.",
+    "text": "This is an error message indicating that a user does not have the necessary permissions to access a specific resource or perform an action. It appears in various contexts, including restricted access pages, route confirmation, and OAuth2 authentication errors.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:29.396Z"
+    "updated_at": "2026-04-11T21:01:38.907Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/errors/AccessRestricted.tsx",
+      "line_number": 45,
+      "context": "return (\n ready && (\n <div className={styles.accessRestrictedWrapper}>\n <ErrorContainer\n headerText={t(\"AccessDenied\")}\n bodyText={t(\"PortalRestriction\", {\n productName: getBrandName(\"ProductName\") ?? \"\",\n })}\n />\n </div>",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/login/src/components/ConfirmRoute.tsx",
       "line_number": 68,
@@ -24,8 +31,8 @@
     },
     {
       "file_path": "/packages/shared/components/errors/AccessRestricted.tsx",
-      "line_number": 44,
-      "context": "return (\n ready && (\n <div className={styles.accessRestrictedWrapper}>\n <ErrorContainer\n headerText={t(\"AccessDenied\")}\n bodyText={t(\"PortalRestriction\", {\n productName: t(\"Common:ProductName\"),\n })}\n />\n </div>",
+      "line_number": 45,
+      "context": "return (\n ready && (\n <div className={styles.accessRestrictedWrapper}>\n <ErrorContainer\n headerText={t(\"AccessDenied\")}\n bodyText={t(\"PortalRestriction\", {\n productName: getBrandName(\"ProductName\"),\n })}\n />\n </div>",
       "module": "/packages/shared"
     }
   ],
@@ -39,13 +46,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation 'المحاولة مرفوضة' means 'The attempt was rejected/refused', which is slightly different from the standard technical term for 'Access denied' (denial of permission/entry).",
-          "suggestion": "تم رفض الوصول"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {

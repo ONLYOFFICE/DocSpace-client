@@ -3,11 +3,12 @@
   "content": "How recipient assignment works",
   "content_en_sha1_hash": "43b88913fea3bc03a189be6a9adf9a673b5f79ca",
   "created_at": "2025-10-13T13:22:14.709Z",
-  "updated_at": "2026-04-07T22:22:58.281Z",
+  "updated_at": "2026-04-12T17:42:03.501Z",
   "comment": {
-    "text": "This text appears as the header for an informational bar within a modal dialog. It explains how recipient assignment functions, likely within a filling status or start-filling process. Translators should ensure the description accurately reflects the underlying functionality.",
+    "text": "This is the header text for an informational bar that explains how recipient assignment works in a document filling process.",
     "is_auto": true,
-    "updated_at": "2025-10-13T14:22:00.667Z"
+    "updated_at": "2026-04-11T20:42:08.719Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -39,13 +40,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Qəyyum' is not a standard Azerbaijani term for 'recipient'. It appears to be a misspelling or a non-existent word in this context. The correct term for recipient is 'alıcı'. Additionally, 'təcəssüb' is not the correct term for 'assignment' in this context; 'təyinat' or 'assign olunma' would be more appropriate.",
-          "suggestion": "Alıcı təyinatının necə işləməsi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {

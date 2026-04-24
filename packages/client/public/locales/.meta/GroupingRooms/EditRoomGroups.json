@@ -3,11 +3,12 @@
   "content": "Edit room groups",
   "content_en_sha1_hash": "c26b9bcc520a61b56eb5c44b7c3f4ed012e0c91b",
   "created_at": "2026-02-19T13:36:24.873Z",
-  "updated_at": "2026-03-20T09:39:12.333Z",
+  "updated_at": "2026-04-11T21:11:35.943Z",
   "comment": {
-    "text": "This key provides the title for the \"Edit Room Groups\" dialog. It's used to label the dialog header, allowing users to understand the purpose of the dialog which is to edit room groupings. Translators should ensure the translation accurately reflects the action of modifying room group settings.",
+    "text": "This is the title of a dialog window that allows users to manage and modify groups of rooms.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:39:12.333Z"
+    "updated_at": "2026-04-11T21:11:35.943Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

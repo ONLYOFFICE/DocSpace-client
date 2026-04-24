@@ -3,16 +3,17 @@
   "content": "Files and folders shared by other users will be imported into <1>{{sectionName}}</1>.<br><1>Please note:</1> some access rights may get lost during import.",
   "content_en_sha1_hash": "e22c23d457bed53fabab5837d1f1d5d30dd96fc4",
   "created_at": "2025-10-03T10:07:00.021Z",
-  "updated_at": "2026-04-09T00:58:33.364Z",
+  "updated_at": "2026-04-11T21:48:43.324Z",
   "comment": {
-    "text": "This text explains that files and folders shared by other users will be imported into a specific settings section. It also warns that some access rights might be lost during the import process. It appears as a description related to importing shared files and folders within the Portal Settings.",
+    "text": "This is a description displayed during the data import process. It informs the user that shared files and folders will be imported into a specific section, indicated by the `{{sectionName}}` variable, and warns about potential loss of access rights.",
     "is_auto": true,
-    "updated_at": "2025-10-17T14:44:37.836Z"
+    "updated_at": "2026-04-11T21:22:07.591Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 212,
+      "line_number": 213,
       "context": "onChange={(e) => onChange(e, \"importSharedFilesAndFolders\")}\n sectionName={t(\"Settings:SharedFilesAndFolders\")}\n description={\n <Trans\n t={t}\n i18nKey=\"SharedFilesAndFoldersDescription\"\n ns=\"Settings\"\n values={{\n sectionName: t(\"Common:SharedWithMe\"),\n }}\n components={{",
       "module": "/packages/client"
     }
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Please note:' is translated as 'Zəhmət çəkin:', which means 'Please bother' or 'Please take the trouble'. In this context, it should be a phrase indicating attention, such as 'Nəzərə alın ki:'.",
-          "suggestion": "Digər istifadəçilər tərəfindən paylaşılmış fayllar və qovluqlar <1>{{sectionName}}</1> bölməsinə idxal ediləcək.<br><1>Nəzərə alın ki:</1> idxal zamanı bəzi giriş hüquqları itirilə bilər."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -105,13 +100,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase '가져오기 됩니다' is grammatically incorrect and awkward in Korean. It should be '가져오기 됩니다' (passive/state) or more naturally '가져오게 됩니다' or '가져오기 됩니다' is often used incorrectly for 'will be imported'. Specifically, '가져오기 됩니다' is a non-standard construction. A more accurate translation for 'will be imported' is '가져오게 됩니다' or '가져오기 됩니다' (though the latter is still slightly awkward). However, the most critical error is the phrasing '가져오기 됩니다' which sounds like 'importing becomes'.",
-          "suggestion": "다른 사용자와 공유된 파일 및 폴더는 <1>{{sectionName}}</1>으로 가져오게 됩니다.<br><1>참고:</1> 가져오는 동안 일부 접근 권한이 손실될 수 있습니다."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -151,7 +140,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \"o\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-11T21:48:43.307Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null

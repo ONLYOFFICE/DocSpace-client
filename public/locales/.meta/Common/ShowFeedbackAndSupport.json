@@ -3,16 +3,17 @@
   "content": "Show Feedback & Support link",
   "content_en_sha1_hash": "9746ad3e037af1dafd58bdcfd2f18f37672ab9d1",
   "created_at": "2025-05-26T07:15:47.993Z",
-  "updated_at": "2026-04-07T23:01:39.195Z",
+  "updated_at": "2026-04-12T19:17:14.348Z",
   "comment": {
-    "text": "This translation key is used for a label that indicates whether to show feedback and support features. It will be displayed as a checkbox label in a UI component, likely on a settings page or similar interface where user preferences are managed.",
+    "text": "This is a checkbox label. It controls the visibility of a \"Feedback & Support\" link within the application's interface.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:03:39.370Z"
+    "updated_at": "2026-04-11T20:42:48.219Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/AdditionalResources/index.tsx",
-      "line_number": 103,
+      "line_number": 104,
       "context": "className={classNames(\n styles.checkbox,\n \"show-feedback-support checkbox\",\n )}\n isDisabled={!isSettingPaid}\n label={t(\"ShowFeedbackAndSupport\")}\n isChecked={feedbackEnabled}\n onChange={() => setFeedbackEnabled(!feedbackEnabled)}\n />\n \n <Checkbox",
       "module": "/packages/shared"
     }
@@ -171,13 +172,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses incorrect grammatical cases for the noun phrase. 'Повратне информације и подршка' (Feedback and support) should be in the genitive case to follow 'линк' (link), or the structure should be adjusted to sound natural in Serbian.",
-          "suggestion": "Прикажи линк за повратне информације и подршку"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

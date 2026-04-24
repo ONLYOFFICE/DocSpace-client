@@ -3,34 +3,35 @@
   "content": "No access to view, edit, or manage this file.",
   "content_en_sha1_hash": "2bbb3b1dd4046757ecb58e06ae30600777023a16",
   "created_at": "2025-09-29T18:22:02.819Z",
-  "updated_at": "2026-04-08T12:10:32.430Z",
+  "updated_at": "2026-04-11T20:55:14.010Z",
   "comment": {
-    "text": "This text is used to inform users that they do not have permission to view, edit, or manage a document. It appears in the UI to explain restricted access, likely within a sharing interface or access control panel. Translators should ensure the meaning accurately conveys denial of all access rights.",
+    "text": "This is a description of access rights for a document. It appears when a user has been denied all access to a specific document.",
     "is_auto": true,
-    "updated_at": "2025-09-29T18:27:46.307Z"
+    "updated_at": "2026-04-11T20:55:14.010Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 646,
+      "line_number": 647,
       "context": "{ fileType: FileType.Document, access: ShareAccessRights.ReadOnly },\n () => t(\"Common:RoleViewerDescription\"),\n )\n .with(\n { fileType: FileType.Document, access: ShareAccessRights.DenyAccess },\n () => t(\"Common:DenyAccessDescriptionDocument\"),\n )\n // Spreadsheet | Presentation | PDF Document\n .with(\n {\n fileType: P.union(",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 646,
+      "line_number": 647,
       "context": "{ fileType: FileType.Document, access: ShareAccessRights.ReadOnly },\n () => t(\"Common:RoleViewerDescription\"),\n )\n .with(\n { fileType: FileType.Document, access: ShareAccessRights.DenyAccess },\n () => t(\"Common:DenyAccessDescriptionDocument\"),\n )\n // Spreadsheet | Presentation | PDF Document\n .with(\n {\n fileType: P.union(",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 646,
+      "line_number": 647,
       "context": "{ fileType: FileType.Document, access: ShareAccessRights.ReadOnly },\n () => t(\"Common:RoleViewerDescription\"),\n )\n .with(\n { fileType: FileType.Document, access: ShareAccessRights.DenyAccess },\n () => t(\"Common:DenyAccessDescriptionDocument\"),\n )\n // Spreadsheet | Presentation | PDF Document\n .with(\n {\n fileType: P.union(",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 646,
+      "line_number": 647,
       "context": "{ fileType: FileType.Document, access: ShareAccessRights.ReadOnly },\n () => t(\"Common:RoleViewerDescription\"),\n )\n .with(\n { fileType: FileType.Document, access: ShareAccessRights.DenyAccess },\n () => t(\"Common:DenyAccessDescriptionDocument\"),\n )\n // Spreadsheet | Presentation | PDF Document\n .with(\n {\n fileType: P.union(",
       "module": "/packages/shared"
     }
@@ -51,13 +52,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text refers to 'this file', but the Azerbaijani translation uses 'Bu məzmunu' (this content). While similar, 'file' should be translated as 'fayl' to maintain technical accuracy in a file management interface.",
-          "suggestion": "Bu faylı görmək, redaktə etmək və ya idarə etmək üçün icazəniz yoxdur."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {

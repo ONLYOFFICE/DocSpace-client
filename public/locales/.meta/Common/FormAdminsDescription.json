@@ -3,13 +3,21 @@
   "content": "Users who have full access to manage this form and its settings.",
   "content_en_sha1_hash": "576e27a7b4299a524fc1bffd3a1289de4f7a071c",
   "created_at": "2026-03-20T09:07:28.341Z",
-  "updated_at": "2026-04-08T08:57:52.239Z",
+  "updated_at": "2026-04-11T20:52:09.916Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a description for the \"Form Admins\" section in the form settings. It explains the role of users designated as form administrators.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:52:09.916Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/ContactsForm.tsx",
+      "line_number": 200,
+      "context": "<Text fontSize=\"16px\" fontWeight={700}>\n {t(\"Common:FormAdmins\")}\n </Text>\n </div>\n <Text fontSize=\"12px\" fontWeight={400}>\n {t(\"Common:FormAdminsDescription\")}\n </Text>\n <div className={styles.buttonWrapper}>\n <Button\n label={t(\"Common:AddButton\")}\n size={ButtonSize.small}",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -50,13 +58,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'φόρμα' (form) is used with the wrong gender in Greek. In Greek, 'φόρμα' is feminine, so it should be 'αυτή τη φόρμα' instead of 'αυτό το φόρμα' and 'τις ρυθμίσεις της' instead of 'τις ρυθμίσεις του'.",
-          "suggestion": "Χρήστες που έχουν πλήρη πρόσβαση για να διαχειριστούν αυτή τη φόρμα και τις ρυθμίσεις της."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {

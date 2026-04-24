@@ -3,13 +3,21 @@
   "content": "Real-time Tracking",
   "content_en_sha1_hash": "426c7f19fa1e289b594c7485e18d51efe61a187a",
   "created_at": "2026-03-31T15:18:26.941Z",
-  "updated_at": "2026-04-07T20:03:06.583Z",
+  "updated_at": "2026-04-23T17:24:02.158Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a title for a feature card in the welcome tour dialog. It describes a key capability of the software.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:39:03.995Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/welcome-tour-dialog/index.tsx",
+      "line_number": 119,
+      "context": "<div className={styles.featureCard}>\n <div className={styles.featureIcon}>\n <ReactSVG src={featureIcons[1]} />\n </div>\n <div className={styles.featureText}>\n <Text fontWeight={600} fontSize=\"13px\">{t(\"Common:WelcomeFeature2Title\", \"Real-time Tracking\")}</Text>\n <Text fontSize=\"12px\" className={styles.featureDesc}>{t(\"Common:WelcomeFeature2\", \"Monitor progress and submissions instantly\")}</Text>\n </div>\n </div>\n <div className={styles.featureCard}>\n <div className={styles.featureIcon}>",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

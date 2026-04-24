@@ -3,17 +3,18 @@
   "content": "This link is protected with a {{parameter}}. To configure the link,",
   "content_en_sha1_hash": "6ef158eba8e1e4e0ad362ef6746097143b6229f0",
   "created_at": "2025-05-19T21:30:54.553Z",
-  "updated_at": "2026-04-07T19:35:05.134Z",
+  "updated_at": "2026-04-13T14:59:05.865Z",
   "comment": {
-    "text": "This translation key is used to describe a link protection parameter and its impact on configuration. It appears as a tooltip or hint in UI elements where users configure links with protected parameters.",
+    "text": "This is a sentence fragment that appears in a tooltip. It describes a shared link's protection settings, indicating that the link is protected by a specific method (e.g., password, expiration date). The `{{parameter}}` variable will be replaced by the name of the protection method.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:33.187Z"
+    "updated_at": "2026-04-11T21:15:22.718Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/SharedLinkHint.js",
-      "line_number": 47,
-      "context": "return (\n linkSettings.length > 0 && (\n <div>\n <Text className=\"linkHelp\" fontSize=\"12px\" lineHeight=\"16px\">\n {linkSettings.length === 2\n ? t(\"LinkSetDescription2\", {\n parameter1: settingsTranslations[linkSettings[0]],\n parameter2: settingsTranslations[linkSettings[1]],\n })\n : linkSettings.length === 3\n ? t(\"LinkSetDescription3\", {",
+      "line_number": 57,
+      "context": "? t(\"LinkSetDescription3\", {\n parameter1: settingsTranslations[linkSettings[0]],\n parameter2: settingsTranslations[linkSettings[1]],\n parameter3: settingsTranslations[linkSettings[2]],\n })\n : t(\"LinkSetDescription\", {\n parameter: settingsTranslations[linkSettings[0]],\n })}\n </Text>\n <Link\n color={currentColorScheme?.main?.accent}",
       "module": "/packages/client"
     }
   ],

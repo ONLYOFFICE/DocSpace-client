@@ -1,8 +1,8 @@
 {
   "ChangeData": "Wijzig data en wachtwoord",
+  "ClickButtonBelow": "Als u wilt inloggen met uw e-mailadres, stel dan uw eigen wachtwoord in. <br/> Klik op de knop hieronder zodra u klaar bent.",
   "ContinueToProduct": "Ga verder met {{productName}}",
   "GeneratedPassword": "Gegenereerd wachtwoord",
   "ProductNameDetail": "{{productName}} naam",
-  "ReviewAccountDetails": "Neem even de tijd om uw accountgegevens te bekijken:",
-  "ClickButtonBelow": "Als u wilt inloggen met uw e-mailadres, stel dan uw eigen wachtwoord in. <br/> Klik op de knop hieronder zodra u klaar bent."
+  "ReviewAccountDetails": "Neem even de tijd om uw accountgegevens te bekijken:"
 }

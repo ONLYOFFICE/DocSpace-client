@@ -3,13 +3,21 @@
   "content": "How many times has the form \"{{formName}}\" been submitted?",
   "content_en_sha1_hash": "e0f429db1b42b106eec7f0e62a00cf8810eab3d9",
   "created_at": "2026-03-31T15:18:24.717Z",
-  "updated_at": "2026-04-07T21:29:23.688Z",
+  "updated_at": "2026-04-23T17:24:02.134Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a prompt for an AI chat panel, asking about the submission count for a specific form. The `{{formName}}` variable will be replaced with the title of the form.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:40:42.018Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/ai-chat-panel/index.tsx",
+      "line_number": 124,
+      "context": "() =>\n pendingAttachmentFile?.title\n ? [\n {\n title: t(\"Common:TotalSubmissions\"),\n prompt: t(\"Common:TotalSubmissionsPrompt\", {\n formName: pendingAttachmentFile.title,\n }),\n },\n {\n title: t(\"Common:RecentResponses\"),",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -107,8 +115,10 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation implies that the form itself performed the action of submitting ('the form has submitted'), whereas the English text asks how many times the form has been submitted (passive voice).",
-          "suggestion": "Cik reizes ir iesniegta formula \"{{formName}}\"?"
+          "description": "The Latvian word \"formula\" means a mathematical formula, not a form/document. The correct Latvian word for \"form\" is \"veidlapa\" or \"forma\".",
+          "suggestion": "Cik reizes ir iesniegta veidlapa \"{{formName}}\"?",
+          "checked_at": "2026-04-12T14:49:26.118Z",
+          "checked_by": "claude-code/sonnet"
         }
       ],
       "approved_at": null
@@ -140,13 +150,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'trimars' is misspelled; it should be 'trimis'.",
-          "suggestion": "Câte ori a fost trimis formularul \"{{formName}}\" ?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -164,13 +168,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical gender mismatch: 'formulár' is masculine in Slovak, but the past participle 'odooslané' is neuter. It should be 'odooslaný'.",
-          "suggestion": "Koľko krát bol formulár \"{{formName}}\" odooslaný?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -182,25 +180,13 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Albanian translation uses the plural form 'formularët' (the forms) instead of the singular 'formularin' (the form), which contradicts the English singular 'the form'.",
-          "suggestion": "Sa shpeshtë është dërguar formulari \"{{formName}}\"?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The noun 'обрасци' is in plural form, but the verb 'поднет' is in singular form, and the context implies a single form name. It should be singular 'образац'.",
-          "suggestion": "Колико пута је образац \"{{formName}}\" поднет?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

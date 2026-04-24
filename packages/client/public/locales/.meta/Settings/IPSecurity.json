@@ -3,22 +3,23 @@
   "content": "IP Security",
   "content_en_sha1_hash": "6384288df2a9807354de1df765c871288d7c2492",
   "created_at": "2025-05-19T21:30:51.718Z",
-  "updated_at": "2026-04-09T02:43:56.229Z",
+  "updated_at": "2026-04-23T17:24:02.039Z",
   "comment": {
-    "text": "The \"IPSecurity\" translation key is used to display the title and subtitle of the security category in the portal settings. It appears as a heading on mobile views and as part of the desktop layout, indicating access to IP-related security features.",
+    "text": "This is a section title and menu item label for the IP Security settings. It refers to the feature that allows administrators to restrict access to the portal based on IP addresses.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:03.420Z"
+    "updated_at": "2026-04-11T21:23:40.513Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 280,
+      "line_number": 284,
       "context": "<InvitationSettingsSection />\n \n <StyledSettingsSeparator />\n \n <Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"IPSecurity\")}\n </Text>\n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"IPSecuritySettingDescription\")}\n </Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 109,
+      "line_number": 110,
       "context": "}\n url=\"/portal-settings/security/access-portal/invitation-settings\"\n onClickLink={onClickLink}\n />\n <CategoryItem\n title={t(\"IPSecurity\")}\n subtitle={\n <Trans i18nKey=\"IPSecurityMobileDescription\" ns=\"Settings\" t={t} />\n }\n url=\"/portal-settings/security/access-portal/ip\"\n onClickLink={onClickLink}",
       "module": "/packages/client"
     },
@@ -165,13 +166,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'අ.ජා.කෙ. ආරක්‍ෂණය' is an incorrect abbreviation. 'අ.ජා.කෙ.' does not correspond to 'IP' (Internet Protocol) in a technical context; it appears to be a nonsensical or incorrect abbreviation that does not convey 'IP Security'.",
-          "suggestion": "IP ආරක්ෂණය"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

@@ -3,11 +3,12 @@
   "content": "Add trusted domain",
   "content_en_sha1_hash": "4d8d1f52d9615d9c81391e0cd5314c57146e0a06",
   "created_at": "2025-05-19T21:30:50.373Z",
-  "updated_at": "2026-04-09T04:28:24.493Z",
+  "updated_at": "2026-04-11T21:25:59.324Z",
   "comment": {
-    "text": "The translation key \"AddTrustedDomain\" is used to display the label \"Add trusted domain\" in a UI element, likely a button or input field, where users can add a trusted mail domain to access secure content. It appears in a category dialog related to security settings for an access portal.",
+    "text": "This is a button domains.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:54.188Z"
+    "updated_at": "2026-04-11T21:25:59.324Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -45,13 +46,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text is singular ('domain'), but the Czech translation is plural ('domény').",
-          "suggestion": "Přidat důvěryhodnou doménu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -111,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation is a literal word-for-word substitution that results in nonsensical grammar. 'ຕື່ມ' (to add/fill) is used incorrectly in this context, and 'ເຊື່ອຖືໄດ້ ໂດ​ເມນ' is a broken phrase that does not function as 'trusted domain'.",
-          "suggestion": "ເພີ່ມໂດເມນທີ່ເຊື່ອຖືໄດ້"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {

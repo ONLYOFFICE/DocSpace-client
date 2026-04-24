@@ -1,0 +1,23 @@
+// Flags dynamic first arguments passed to i18next's `t()` function.
+//
+// The translation-usage scanner in common/tests/test/locales.test.js
+// only recognises keys written as string literals. Dynamic arguments
+// like `t(d.titleKey)` are invisible to it, so keys referenced only
+// this way get reported as "unused" by UselessTranslationKeysTest.
+//
+// Suppress with `// biome-ignore lint/plugin/no-dynamic-i18n-key`
+// when the indirection is intentional and the scanner can still find
+// the key via a sibling pattern (e.g. `titleKey: "SomeKey"`).
+
+`t($arg, $...)` where {
+    $arg <: not or {
+        `"$_"`,
+        `'$_'`,
+        `\`$_\``,
+    },
+    register_diagnostic(
+        span = $arg,
+        message = "i18n `t()` first argument must be a string literal — dynamic keys are invisible to the translation-usage scanner.",
+        severity = "error"
+    )
+}

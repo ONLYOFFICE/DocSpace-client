@@ -3,13 +3,27 @@
   "content": "Balance, top-up, and transaction history",
   "content_en_sha1_hash": "0385c223663da1db3ba03a3f7ec4c51dfa611861",
   "created_at": "2026-04-10T08:20:53.280Z",
-  "updated_at": "2026-04-10T08:20:53.280Z",
+  "updated_at": "2026-04-23T17:24:02.139Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a short description displayed on a card in the billing settings. It summarizes the features available within the \"Wallet\" section.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:58:15.737Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/BillingForm.tsx",
+      "line_number": 67,
+      "context": "nativeIcon?: boolean;\n }[] = [\n {\n id: \"wallet\",\n titleKey: \"Wallet\",\n tKey: \"BillingWalletCardDesc\",\n iconClass: cardStyles.billingIconWallet,\n icon: <WalletIcon />,\n },\n {\n id: \"ai\",",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/settings/category/BillingForm.tsx",
+      "line_number": 65,
+      "context": "nativeIcon?: boolean;\n }[] = [\n {\n id: \"wallet\",\n titleKey: \"Wallet\",\n tKey: \"BillingWalletCardDesc\",\n iconClass: cardStyles.billingIconWallet,\n icon: <WalletIcon />,\n },\n {\n id: \"storage\",",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

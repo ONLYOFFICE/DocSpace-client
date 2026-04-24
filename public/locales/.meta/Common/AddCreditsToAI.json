@@ -3,13 +3,27 @@
   "content": "Add credits to {{organizationName}} AI",
   "content_en_sha1_hash": "1252d19c6c5eced2eb764eddd36e7d821419bdbf",
   "created_at": "2026-04-10T13:53:41.737Z",
-  "updated_at": "2026-04-10T13:53:41.737Z",
+  "updated_at": "2026-04-11T21:01:06.806Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is the title of a modal dialog. It appears when a user needs to add credits to the AI service, with `{{organizationName}}` being replaced by the name of the organization.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:01:06.806Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/AIServiceDialog.tsx",
+      "line_number": 180,
+      "context": "withBodyScroll\n containerVisible={view !== \"top-up\"}\n >\n <ModalDialog.Container>{container}</ModalDialog.Container>\n <ModalDialog.Header>\n {t(\"AddCreditsToAI\", { organizationName: logoText })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.dialogBody}>\n <TopUpAiModal\n onPricingBillingClick={onPricingBillingClick}",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/GetStartedBody.tsx",
+      "line_number": 119,
+      "context": "onBackClick={onBack}\n onCloseClick={onClose}\n withBodyScroll\n >\n <ModalDialog.Header>\n {t(\"AddCreditsToAI\", { organizationName: logoText })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.getStartedSteps}>\n <div className={styles.stepMainRow}>\n <div className={styles.stepNumber}>1</div>",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

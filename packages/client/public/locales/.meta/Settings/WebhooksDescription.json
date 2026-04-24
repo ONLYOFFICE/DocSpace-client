@@ -3,17 +3,18 @@
   "content": "Perform custom actions on the side of any application or website you are using based on various events in {{organizationName}} {{productName}}.",
   "content_en_sha1_hash": "76728cdaf8957de1996cd778e3ad0ab53f2019f6",
   "created_at": "2026-04-03T21:51:36.601Z",
-  "updated_at": "2026-04-08T23:52:40.187Z",
+  "updated_at": "2026-04-11T21:21:17.323Z",
   "comment": {
-    "text": "This text serves as the description for the Webhooks feature card within the Developer Tools section of the Portal Settings. It explains how users can trigger custom actions based on specific events occurring within the {{organizationName}} {{productName}}.",
+    "text": "This is a description for a card in the settings, explaining what webhooks are. It appears on the \"Developer Tools\" page and includes `{{organizationName}}` (e.g., \"ONLYOFFICE\") and `{{productName}}` (e.g., \"DocSpace\") as variables.",
     "is_auto": true,
-    "updated_at": "2026-04-03T21:57:18.851Z"
+    "updated_at": "2026-04-11T21:21:17.323Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 104,
-      "context": "linkTitle={t(\"Common:ReadInstructions\")}\n />\n <Card\n icon={<WebhookSvg />}\n title={t(\"Webhooks:Webhooks\")}\n description={t(\"Settings:WebhooksDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}\n url=\"/developer-tools/webhooks?create=true\"\n color={globalColors.mainRed}\n linkTitle={t(\"Webhooks:CreateWebhook\")}\n />\n <Card",
+      "line_number": 105,
+      "context": "linkTitle={t(\"Common:ReadInstructions\")}\n />\n <Card\n icon={<WebhookSvg />}\n title={t(\"Webhooks:Webhooks\")}\n description={t(\"Settings:WebhooksDescription\", { organizationName: getBrandName(\"OrganizationName\"), productName: getBrandName(\"ProductName\") })}\n url=\"/developer-tools/webhooks?create=true\"\n color={globalColors.mainRed}\n linkTitle={t(\"Webhooks:CreateWebhook\")}\n />\n <Card",
       "module": "/packages/client"
     }
   ],
@@ -39,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'отстрани от' is a literal and incorrect translation of 'on the side of'. In this technical context, it implies 'away from' or 'on the exterior of', whereas the English means 'within/integrated into the side panel/interface' or simply 'on any application'. The Bulgarian phrasing is awkward and conveys a spatial separation that contradicts the functional integration of webhooks.",
-          "suggestion": "Изпълнявайте персонализирани действия във всяко приложение или уебсайт, което използвате, въз основа на различни събития в {{organizationName}} {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -87,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ցանկացած կիրառության կամ կայքի կողմից' translates to 'by any application or website', which changes the meaning from 'on the side of any application or website' (meaning alongside/external to the app). The current Armenian version implies the application/website is the one performing the action, rather than the action being performed on/alongside it.",
-          "suggestion": "Կատարեք հարմարեցված գործողություններ ցանկացած օգտագործվող կիրառության կամ կայքի կողքին՝ հիմնվելով {{organizationName}} {{productName}}-ում տեղի ունեցող տարբեր իրադարձությունների վրա։"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -123,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Veiciet personalizētus darbības pie' is grammatically incorrect and nonsensical in Latvian. 'Darbības' (actions) is plural, but 'personalizētus' is masculine plural accusative, and the preposition 'pie' (at/near) is used incorrectly here. It should likely be 'Veiciet pielāgotas darbības jebkurā...' to mean 'Perform custom actions in any...'",
-          "suggestion": "Veiciet pielāgotas darbības jebkurā lietotājprogrammā vai vietnē, ko jūs izmantojat, pamatojoties uz dažādiem notikumiem {{organizationName}} {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -219,13 +202,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ở bên của' is a literal, unnatural translation of 'on the side of'. In this technical context (webhooks/integrations), it implies a physical location rather than the functional concept of 'alongside' or 'integrated with' an application.",
-          "suggestion": "Thực hiện các hành động tùy chỉnh cùng với bất kỳ ứng dụng hoặc trang web nào bạn đang sử dụng dựa trên các sự kiện khác nhau trong {{organizationName}} {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

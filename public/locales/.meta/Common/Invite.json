@@ -3,28 +3,29 @@
   "content": "Invite",
   "content_en_sha1_hash": "b136609f068403340f94e46a0174da273bfbce30",
   "created_at": "2025-05-19T21:30:45.964Z",
-  "updated_at": "2026-04-08T06:33:22.114Z",
+  "updated_at": "2026-04-23T17:24:01.628Z",
   "comment": {
-    "text": "This translation key is used for the label \"Invite\" in UI elements such as buttons and dialogs. It appears on a main button where user actions are displayed, as well as a modal dialog inviting users to join a room. Translators should focus on providing a consistent invite-related message across various contexts.",
+    "text": "This is a button label or dialog title. It initiates the process of inviting users or creating a group.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:48.762Z"
+    "updated_at": "2026-04-11T20:50:35.094Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 674,
+      "line_number": 675,
       "context": "if (!isAccountsPage) return onCreateRoom();\n if (isContactsGroupsPage) return createGroup();\n };\n \n const mainButtonText =\n isRoomAdmin && isAccountsPage ? t(\"Common:Invite\") : t(\"Common:Actions\");\n \n let isDisabled = false;\n \n if (isSettingsPage) {\n isDisabled = isSettingsPage;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 926,
+      "line_number": 933,
       "context": "</ModalDialog.Container>\n ) : null}\n \n <ModalDialog.Header>\n <div className={styles.invitePanelHeader}>\n {t(\"Common:Invite\")} {roomId === -1 ? currentAccess?.label : \"\"}\n {roomId === -1 ? (\n <HelpButton\n tooltipMaxWidth=\"448px\"\n place=\"bottom-start\"\n tooltipStyle={{",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 727,
+      "line_number": 728,
       "context": "const accountsSectionActions = [\n {\n id: \"invite-accounts\",\n icon: PersonInviteReactSvgUrl,\n label: t(\"Common:Invite\"),\n key: \"invite-accounts\",\n items: accountsUserOptions,\n },\n ];",
       "module": "/packages/client"
     },
@@ -57,13 +58,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian word 'Каня' is a verb (1st person singular: 'I invite'), whereas the English 'Invite' in this UI context is a noun or an imperative command used for buttons and headers. The correct term for a UI button/action should be 'Покани'.",
-          "suggestion": "Покани"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -165,13 +160,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'Invitaţie' is a noun meaning 'Invitation'. In the context of a button or action (as indicated by the code usage), the verb 'Invite' should be used.",
-          "suggestion": "Invită"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

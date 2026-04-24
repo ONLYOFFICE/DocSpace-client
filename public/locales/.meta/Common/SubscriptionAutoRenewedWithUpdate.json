@@ -3,13 +3,21 @@
   "content": "Subscription will be automatically renewed <1>on {{finalDate}}</1> with updated pricing and specifications — <1>{{price}}/month ({{amount}})</1>",
   "content_en_sha1_hash": "970e60c3a629d39134d3e840abb8947cdfd43b05",
   "created_at": "2026-04-10T13:53:43.498Z",
-  "updated_at": "2026-04-10T13:53:43.498Z",
+  "updated_at": "2026-04-23T17:24:02.179Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a text string displayed to the user, informing them about the automatic renewal of their subscription. It appears when a user's storage plan is downgraded, indicating the new renewal date ({{finalDate}}), the updated monthly price ({{price}}), and the new storage amount ({{amount}}).",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:41:43.601Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "line_number": 308,
+      "context": "{currentStoragePlanSize ? (\n <Text className={styles.renewalText}>\n {isDowngrade ? (\n <CommonTrans\n i18nKey=\"SubscriptionAutoRenewedWithUpdate\"\n values={{\n finalDate: storageExpiryDate,\n price: formatWalletCurrency(monthlyPrice, 2),\n amount: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n }}",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -176,7 +184,15 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The word 'on' before {{finalDate}} is present inside the <1> tag in English ('on {{finalDate}}') but is completely absent in the Serbian translation ('<1>{{finalDate}}</1>'), omitting the preposition that contextualizes the renewal date.",
+          "suggestion": "A pretplata će biti automatski obnovljena <1>dana {{finalDate}}</1> sa ažuriranim cenama i specifikacijama — <1>{{price}}/mesečno ({{amount}})</1>",
+          "checked_at": "2026-04-12T16:57:21.863Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

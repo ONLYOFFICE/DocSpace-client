@@ -3,16 +3,17 @@
   "content": "Upload folder",
   "content_en_sha1_hash": "e77a1496f8e8093547d02f31abdfb67b6e95e806",
   "created_at": "2026-04-03T21:51:34.737Z",
-  "updated_at": "2026-04-10T08:21:04.284Z",
+  "updated_at": "2026-04-23T17:24:01.626Z",
   "comment": {
-    "text": "Used as a label for the folder upload action in a dropdown menu and as a descriptive text for the 'Shift + i' keyboard shortcut in the hotkeys panel. It refers to the action of uploading an entire directory.",
+    "text": "This is the label for a button that allows users to upload an entire folder of files. It also appears in the hotkeys panel to describe the shortcut for this action.",
     "is_auto": true,
-    "updated_at": "2026-04-03T21:52:04.493Z"
+    "updated_at": "2026-04-11T20:39:43.240Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 501,
+      "line_number": 502,
       "context": "if (!(isMobile || isTablet)) {\n newUploadActions.push({\n id: \"actions_upload-folders\",\n className: \"main-button_drop-down\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"Common:UploadFolder\"),\n disabled: isPrivacy,\n onClick: onUploadFolderClick,\n key: \"upload-folder\",\n });\n }",
       "module": "/packages/client"
     },
@@ -24,9 +25,15 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3567,
+      "line_number": 3643,
       "context": "icon: ActionsUploadReactSvgUrl,\n };\n \n const uploadFolder = {\n key: \"upload-folder\",\n label: t(\"Common:UploadFolder\"),\n onClick: () => this.onUploadAction(\"folder\"),\n icon: ActionsUploadReactSvgUrl,\n };\n \n const templateGallery = templateGalleryAvailable",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/main-button/index.tsx",
+      "line_number": 133,
+      "context": "onClick: onUploadFiles,\n },\n {\n id: \"actions_upload-folder\",\n key: \"upload-folder\",\n label: t(\"Common:UploadFolder\"),\n icon: ActionsUploadReactSvgUrl,\n onClick: onUploadFolder,\n },\n ],\n [t, openCreateDialog, onUploadFiles, onUploadFolder],",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -45,13 +52,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Qolvuğu' is a misspelling or incorrect form of 'Qovluq' (folder). 'Qolvuğu' does not exist in Azerbaijani and appears to be a typo.",
-          "suggestion": "Qovluğu yüklə"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -75,13 +76,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation uses the nominative case 'φάκελο' (folder) instead of the accusative case 'φακέλου' (folder) required by the verb 'Μεταφόρτωση' (Upload). In Greek, 'Μεταφόρτωση φάκελο' is grammatically incorrect and sounds like two disconnected words rather than a single action.",
-          "suggestion": "Μεταφόρτωση φακέλου"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -93,25 +88,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish word 'Lataa' is ambiguous; it can mean both 'Upload' and 'Download'. In a UI context for uploading files/folders, 'Lataa' is often interpreted as 'Download'. To avoid user confusion, 'Lataa ylös' or 'Lähetä kansio' is more precise for uploading.",
-          "suggestion": "Lataa kansio ylös"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The French translation 'Télécharger' means 'to download'. In the context of uploading a folder to a cloud service, the correct term is 'Téléverser' or 'Charger'.",
-          "suggestion": "Téléverser le dossier"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -177,13 +160,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'dosar' in Romanian typically refers to a physical file folder or a legal case file. In a digital/computing context for uploading a directory, 'folder' should be translated as 'director' or 'folder'.",
-          "suggestion": "Încarcă folderul"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -195,13 +172,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'බහාලුමක් දමන්න' means 'Insert a container' or 'Put a container', which refers to a physical box/container. In a digital context, 'folder' should be translated as 'ෆෝල්ඩරය' (Folder) or 'ගොනු ෆෝල්ඩරය' (File folder).",
-          "suggestion": "ෆෝල්ඩරයක් උඩුගත කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -243,13 +214,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The verb 'Передати' means 'to transfer' or 'to hand over' (often used for physical objects or data transfer between parties), whereas 'Upload' in a web/cloud context specifically means 'Завантажити' (to upload to a server).",
-          "suggestion": "Завантажити папку"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

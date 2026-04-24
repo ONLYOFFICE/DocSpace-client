@@ -9,7 +9,7 @@
   "NoPlugins": "Asnjë shtojcë e shtuar",
   "NotNeedSettings": "Not need enter settings",
   "PluginCacheWarningDescription": "Pluginët ruhen në memorje bazuar në numrin e versionit të tyre. Për të siguruar që ndryshimet tuaja të aplikohen, ju lutemi rrisni numrin e versionit në file-in tuaj <1>package.json</1> para ngarkimit. Sistemi nuk do të përditësojë një plugin nëse versioni mbetet i njëjtë.",
-  "PluginDeletedSuccessfully": "Wtyczka została pomyślnie usunięta",
+  "PluginDeletedSuccessfully": "Plugin u fshi me sukses",
   "PluginIsNotCompatible": "Versioni i SDK-së së shtojcës nuk përputhet me versionin e {{productName}}. Ju lutemi, përditësoni në një version të përputhshëm.",
   "PluginLoadedSuccessfully": "Shtojca u ngarkua me sukses",
   "PluginSamples": "Mostrat e shtojcave",

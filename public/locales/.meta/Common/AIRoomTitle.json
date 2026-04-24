@@ -3,16 +3,23 @@
   "content": "AI Room",
   "content_en_sha1_hash": "15189d5504dae70713278091f6294af7e43dcc58",
   "created_at": "2025-10-27T16:14:10.316Z",
-  "updated_at": "2026-04-08T17:21:23.013Z",
+  "updated_at": "2026-04-11T20:59:43.363Z",
   "comment": {
-    "text": "This key displays the title for the \"AI Room\" type of room. It appears as a label in UI elements like room filters and selection lists, indicating a room powered by AI functionality. Translators should ensure the term \"AI\" is appropriate for the target locale.",
+    "text": "This is a short label identifying a specific type of room within the application, likely appearing in menus, filters, or room listings.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:53:56.494Z"
+    "updated_at": "2026-04-11T20:59:43.363Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
+      "file_path": "/libs/ui-kit/components/room-type/RoomType.utils.ts",
+      "line_number": 19,
+      "context": "case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoom\");\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRoomTitle\");\n case RoomsType.AIRoom:\n return t(\"Common:AIRoomTitle\");\n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoom\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomTitle\");\n default:",
+      "module": "/libs/ui-kit"
+    },
+    {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 48,
+      "line_number": 49,
       "context": "switch (room) {\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRooms\");\n \n case RoomsType.AIRoom:\n return t(\"Common:AIRoomTitle\");\n \n case RoomsType.FillingFormsRoom:\n return t(\"Common:FillingFormRooms\");\n \n case RoomsType.EditingRoom:",
       "module": "/packages/client"
     },
@@ -93,13 +100,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'ԱԲ' (AB), which is a phonetic transliteration of the letters 'A' and 'B', instead of the standard abbreviation for Artificial Intelligence (Արհեստական բանականություն) or the widely accepted 'AI' in Armenian technical contexts. In Armenian, 'ԱԲ' does not mean 'AI'.",
-          "suggestion": "AI Սենյակ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -195,13 +196,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ВИ соба' is nonsensical. 'ВИ' is not the standard abbreviation for AI (Veštačka inteligencija) in Serbian, and 'соба' means 'dog' in several Slavic languages, which is completely unrelated to 'Room'.",
-          "suggestion": "AI соба"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -219,13 +214,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Штучний інтелект: кімната' (Artificial Intelligence: room) changes the noun phrase 'AI Room' into a descriptive label with a colon, which is unnatural for a UI title/label and changes the semantic structure from a specific room type to a category description.",
-          "suggestion": "AI-кімната"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

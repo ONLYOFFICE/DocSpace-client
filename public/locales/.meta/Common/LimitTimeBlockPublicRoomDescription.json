@@ -3,11 +3,12 @@
   "content": "In a Public room, the main link is valid for an unlimited time period. You can create additional links with time limit.",
   "content_en_sha1_hash": "79a4f8b269e2f9e04d5e7e9a2156982f8b68c54c",
   "created_at": "2025-08-26T11:15:03.480Z",
-  "updated_at": "2026-04-08T05:45:43.938Z",
+  "updated_at": "2026-04-11T20:49:48.721Z",
   "comment": {
-    "text": "This text explains the time limit behavior for links in a Public room. It appears in a dialog (EditLinkPanel) to inform users that the main link is permanent, while additional links can have time limits. Translators should ensure the description accurately conveys this distinction.",
+    "text": "This is a descriptive text displayed in the \"Edit Link\" panel. It informs the user about link validity in a Public Room when they are setting time limits for shared links.",
     "is_auto": true,
-    "updated_at": "2025-08-26T11:24:32.804Z"
+    "updated_at": "2026-04-11T20:49:48.721Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -195,13 +196,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical error in the first sentence: 'діє необмежений період часу' is grammatically incorrect in Ukrainian. It should be 'діє протягом необмеженого періоду часу' or 'діє необмежений час'. As written, it translates to 'acts an unlimited period of time', which is a case error.",
-          "suggestion": "У публічній кімнаті основне посилання діє протягом необмеженого періоду часу. Ви можете створити додаткові посилання з часовим обмеженням."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

@@ -3,13 +3,21 @@
   "content": "Once you start using the wallet, the payment history will be displayed here.",
   "content_en_sha1_hash": "436a1d781ae1fef2473dff39be5215aca66e1d5b",
   "created_at": "2026-04-10T13:53:42.811Z",
-  "updated_at": "2026-04-10T13:53:42.811Z",
+  "updated_at": "2026-04-13T14:59:06.030Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is the description text displayed in the transaction history section when no wallet transactions have occurred yet. It informs the user that their payment history will appear here once they start using the wallet.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:47:34.799Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/TransactionBody.tsx",
+      "line_number": 93,
+      "context": "const title = hasAppliedDateFilter\n ? t(\"NoFindingsFound2\")\n : t(\"NoWalletTransaction\");\n const description = hasAppliedDateFilter\n ? t(\"NoTransactionsFilter\")\n : t(\"NoWalletTransactionDescription\");\n \n const emptyView = (\n <EmptyView\n icon={hasAppliedDateFilter ? filterIcon : emptyIcon}\n title={title}",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

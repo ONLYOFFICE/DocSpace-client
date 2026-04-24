@@ -3,11 +3,12 @@
   "content": "No templates found",
   "content_en_sha1_hash": "f11224d0c5d283fb61cb849c74ff0e760a29e1b4",
   "created_at": "2025-05-19T21:30:44.914Z",
-  "updated_at": "2026-04-08T10:42:03.844Z",
+  "updated_at": "2026-04-11T20:53:44.954Z",
   "comment": {
-    "text": "The \"EmptyTemplatesRoomsHeader\" translation key is used to display a message when no templates are found in a room's template selection. It appears as a header label in a modal dialog that allows users to create or edit rooms.",
+    "text": "This is a header displayed when no templates are available in the \"Create Room from Template\" dialog. It informs the user that there are no templates to choose from.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:27.411Z"
+    "updated_at": "2026-04-11T20:53:44.954Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -63,13 +64,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical error in Spanish: 'No se ha encontrado' is singular, but 'plantillas' is plural. It should be 'No se han encontrado plantillas'.",
-          "suggestion": "No se han encontrado plantillas"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {

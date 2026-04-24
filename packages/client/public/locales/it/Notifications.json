@@ -1,4 +1,5 @@
 {
+  "ActionsWithFilesDescription": "I badge evidenzieranno l'attività sui file — caricamenti, modifiche o condivisioni — nelle sezioni {{rooms}}, {{shared}}, {{documents}} e {{aiAgents}}.",
   "AdminSetupRequired": "È necessaria la configurazione dell’amministratore",
   "Badges": "Badge",
   "DailyFeed": "Feed giornaliero di {{productName}}",
@@ -8,12 +9,11 @@
   "LdapEmailTooltip": "Questo account utente è stato caricato da LDAP. L’indirizzo email non è stato specificato, e quello attuale è stato generato automaticamente e non può essere usato per inviare notifiche.",
   "NotConfigured": "Non configurato",
   "Notifications": "Notifiche",
+  "RoomsActivityDescription": "Ricevi notifiche email istantanee su nuovi file/cartelle condivisi e attività all'interno dei tuoi {{rooms}} e {{aiAgents}}.",
+  "RoomUpdateNotify": "Contenuti condivisi, attività di {{rooms}} e {{aiAgents}}",
   "SettingUpNotifications": "Configurazione notifiche",
   "SuccessConnected": "{{serviceName}} è stato collegato con successo come canale di notifica. Riceverai ora gli aggiornamenti lì.",
   "SuccessDisconnected": "{{serviceName}} è stato scollegato con successo come canale di notifica. Le notifiche non saranno più inviate lì.",
   "UsefulTips": "Suggerimenti utili per {{productName}}",
-  "UsefulTipsDescription": "Ottieni guide utili su {{productName}}",
-  "ActionsWithFilesDescription": "I badge evidenzieranno l'attività sui file — caricamenti, modifiche o condivisioni — nelle sezioni {{rooms}}, {{shared}}, {{documents}} e {{aiAgents}}.",
-  "RoomsActivityDescription": "Ricevi notifiche email istantanee su nuovi file/cartelle condivisi e attività all'interno dei tuoi {{rooms}} e {{aiAgents}}.",
-  "RoomUpdateNotify": "Contenuti condivisi, attività di {{rooms}} e {{aiAgents}}"
+  "UsefulTipsDescription": "Ottieni guide utili su {{productName}}"
 }

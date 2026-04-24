@@ -26,6 +26,7 @@
   "PeopleSelectorInfo": "Nur ein Raumadministrator oder ein {{productName}}-Administrator kann Besitzer des Raums werden",
   "Position": "Position",
   "PublicRoomBarDescription": "Dieser Raum ist für jeden zugänglich, der den Link hat. Der Zugang für externe Nutzer ist abhängig von der gewählten Art der Zugangsrechte.",
+  "PublicRoomSystemFoldersDescription": "Systemordner speichern Kopien von Formularen in verschiedenen Stadien der Fertigstellung. Formulare, die gerade ausgefüllt werden, werden im Ordner „In Bearbeitung“ gespeichert, und ausgefüllte Formulare werden im Ordner „Abgeschlossen“ gespeichert.",
   "PublicRoomSystemFoldersTitle": "Systemordner",
   "RestrictCopyAndDownload": "Kopieren und Herunterladen einschränken",
   "RestrictCopyAndDownloadDescription": "Aktivieren Sie diese Einstellung, um das Herunterladen und Kopieren von Inhalten für Benutzer mit der Rolle \"{{role}}\" zu deaktivieren.",
@@ -44,5 +45,5 @@
   "ViewerInfo": "Betrachter-Info",
   "WatermarkPreview": "Wasserzeichen-Vorschau",
   "WatermarkPreviewHelp": "Diese Bildvorschau zeigt ungefähr, wie das Wasserzeichen in Ihren Dateien angezeigt wird.",
-  "PublicRoomSystemFoldersDescription": "Systemordner speichern Kopien von Formularen in verschiedenen Stadien der Fertigstellung. Formulare, die gerade ausgefüllt werden, werden im Ordner „In Bearbeitung“ gespeichert, und ausgefüllte Formulare werden im Ordner „Abgeschlossen“ gespeichert."
+  "NoDatabaseConnectionsRoomAdmin": "Datenbankverbindungen werden von einem Administrator konfiguriert. Sobald eine Datenbank eingerichtet ist, können Sie den Export hier aktivieren."
 }

@@ -3,16 +3,17 @@
   "content": "No OAuth applications",
   "content_en_sha1_hash": "028f0e7642805c7f7a4b4c084907a60307bacd55",
   "created_at": "2025-05-19T21:30:53.921Z",
-  "updated_at": "2026-04-07T19:35:05.164Z",
+  "updated_at": "2026-04-11T21:18:42.367Z",
   "comment": {
-    "text": "This translation key is used to display the phrase \"No OAuth applications\" in a UI component. It is likely used as a title or heading on an empty screen where no OAuth apps are available, found in developer tools within Portal Settings.",
+    "text": "This is the title for an empty state screen, indicating that no OAuth applications have been configured or found.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:43.956Z"
+    "updated_at": "2026-04-11T21:18:42.367Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/EmptyScreen.tsx",
-      "line_number": 105,
+      "line_number": 106,
       "context": ");\n \n return (\n <EmptyView\n icon={icon}\n title={t(\"NoOAuthAppHeader\")}\n description={description}\n options={[]}\n />\n );\n };",
       "module": "/packages/client"
     }

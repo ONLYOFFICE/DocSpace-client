@@ -3,16 +3,17 @@
   "content": "Invite members by email",
   "content_en_sha1_hash": "25be32bc4914ade0794cba6ad711881458da0fcf",
   "created_at": "2025-05-19T21:30:54.725Z",
-  "updated_at": "2026-04-07T19:35:05.124Z",
+  "updated_at": "2026-04-11T21:14:08.907Z",
   "comment": {
-    "text": "This translation key is used as a placeholder text for an input field that allows users to search and invite members by email in an invitation panel. It appears when creating or editing an invite, indicating its purpose. Translators should provide a corresponding text to make the invitation process accessible across languages.",
+    "text": "This is a placeholder text for an input field. It appears in the \"Invite Members\" panel, prompting the user to enter email addresses to invite new members.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:15.640Z"
+    "updated_at": "2026-04-11T21:14:08.907Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
-      "line_number": 719,
+      "line_number": 720,
       "context": "className=\"invite-input\"\n scale\n onChange={onChange}\n placeholder={\n roomId === -1\n ? t(\"InviteMembersSearchPlaceholder\")\n : !allowInvitingGuests\n ? t(\"InviteToRoomAddPlaceholder\")\n : t(\"InviteToRoomSearchPlaceholder\")\n }\n value={inputValue}",
       "module": "/packages/client"
     }

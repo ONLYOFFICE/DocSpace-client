@@ -2,5 +2,5 @@
   "DeleteVersion": "Eliminar a versão",
   "DeleteVersionDescription": "Está prestes a eliminar uma versão de ficheiro. Deixará de ser possível vê-lo ou restaurá-lo. Tem a certeza de que quer continuar?",
   "EditComment": "Editar comentário",
-  "Version": "Ver."
+  "VersionShort": "Ver."
 }

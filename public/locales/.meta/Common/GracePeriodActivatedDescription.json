@@ -3,17 +3,30 @@
   "content": "During the grace period, admins cannot create new rooms and add new users. After the due date of the grace period, {{productName}} will become unavailable until the payment is made.",
   "content_en_sha1_hash": "b7a0c210f73172985d0560ba94236b522d1ece70",
   "created_at": "2026-04-10T13:53:42.598Z",
-  "updated_at": "2026-04-10T13:55:54.016Z",
+  "updated_at": "2026-04-11T20:51:30.809Z",
   "comment": {
-    "text": "This key provides a warning message within the InviteQuotaWarningDialog explaining the limitations of the license grace period. It informs admins that they cannot create rooms or add users and warns that the product will become unavailable once the grace period expires if payment is not received.",
+    "text": "This is a descriptive text displayed when a grace period for billing is active. It informs users about restrictions during the grace period and the consequences if payment isn't made by the due date. `{{productName}}` will be replaced with the product's brand name.",
     "is_auto": true,
-    "updated_at": "2026-04-10T13:55:54.016Z"
+    "updated_at": "2026-04-11T20:51:30.809Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
+      "file_path": "/libs/ui-kit/billing/main-tariff/PaymentContainer.tsx",
+      "line_number": 188,
+      "context": "1: <Text as=\"span\" />,\n }}\n />\n \n <Text as=\"span\" fontSize=\"14px\" lineHeight=\"16px\">\n {t(\"GracePeriodActivatedDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n </Text>\n );",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/GracePeriodModal.tsx",
+      "line_number": 93,
+      "context": "1: <Text as=\"span\" />,\n }}\n />\n </Text>{\" \"}\n <Text as=\"span\">\n {t(\"GracePeriodActivatedDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
+      "module": "/libs/ui-kit"
+    },
+    {
       "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/index.js",
-      "line_number": 152,
-      "context": "<Text>\n {standalone\n ? t(\"LicenseGracePeriodInfo\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"GracePeriodActivatedDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n </>\n );",
+      "line_number": 153,
+      "context": "<Text>\n {standalone\n ? t(\"LicenseGracePeriodInfo\", {\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"GracePeriodActivatedDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n </>\n );",
       "module": "/packages/client"
     }
   ],

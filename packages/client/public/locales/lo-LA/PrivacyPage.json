@@ -1,10 +1,10 @@
 {
-  "PrivacyButton": "ເປີດແກ້ໄຂ {{organizationName}} Desktop",
-  "PrivacyClick": "ກົດເປີດ <1>{{organizationName}} Desktop</1> ໃນ ກ່ອງ ຂອງ browser ເພື່ອເຮັດວຽກກັບເອກະສານທີ່ຖືກເຂົ້າລະຫັດ.",
-  "PrivacyDescriptionConnect": "ທ່ານສາມາດເປີດໄຟລ໌ນີ້ໄດ້ຈາກໂປຣແກຣມ desktop ເພື່ອເຊື່ອມຕໍ່ກັບ cloud ຂອງທ່ານ ",
-  "PrivacyDescriptionEditors": "ຖ້າວ່າຕິດຕັ້ງ {{organizationName}} Desktop Editors ແລ້ວບໍ່ສາມາດເປີດໄດ້ browser ຂອງທ່ານອາດກຳລັງຖືກ block ຢູ່.",
+  "PrivacyButton": "ເປີດແກ້ໄຂ {{OnlyofficeDesktopEditors}}",
+  "PrivacyClick": "ກົດເປີດ <1>{{OnlyofficeDesktopEditors}}</1> ໃນ ກ່ອງ ຂອງ browser ເພື່ອເຮັດວຽກກັບເອກະສານທີ່ຖືກເຂົ້າລະຫັດ.",
+  "PrivacyDescriptionConnect": "ທ່ານສາມາດເປີດໄຟລ໌ນີ້ໄດ້ຈາກໜ້າຈໍຂອງແອັບ desktop ເມື່ອ cloud ຂອງທ່ານເຊື່ອມຕໍ່ແລ້ວ",
+  "PrivacyDescriptionEditors": "ຖ້າວ່າຕິດຕັ້ງ {{OnlyofficeDesktopEditors}} ແລ້ວບໍ່ສາມາດເປີດໄດ້ browser ຂອງທ່ານອາດກຳລັງຖືກ block ຢູ່.",
   "PrivacyDialog": "ຖ້າຫາກທ່ານບໍ່ເຫັນກ່ອງເປີດ, ໃຫ້ກົດປຸ່ມດ້ານລຸ່ມ",
-  "PrivacyEditors": "ທ່ານຍັງບໍ່ໄດ້ຕິດຕັ້ງ {{organizationName}} Desktop Editors ແມ່ນບໍ່?",
+  "PrivacyEditors": "ທ່ານຍັງບໍ່ໄດ້ຕິດຕັ້ງ {{OnlyofficeDesktopEditors}} ແມ່ນບໍ່?",
   "PrivacyHeader": "ເອກະສານນີ້ຖືກເຂົ້າລະຫັດ",
   "PrivacyInstall": "ຕິດຕັ້ງດຽວນີ້"
 }

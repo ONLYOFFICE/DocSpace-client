@@ -3,13 +3,20 @@
   "content": "Connect",
   "content_en_sha1_hash": "b65463cb6a42a17de514acc4659f7fd331e0876a",
   "created_at": "2025-05-19T21:30:43.652Z",
-  "updated_at": "2026-04-08T14:49:16.011Z",
+  "updated_at": "2026-04-23T17:24:01.725Z",
   "comment": {
-    "text": "This translation key is used for a \"Connect\" button that appears in various UI elements, such as buttons and dialog components. Its purpose is to provide a consistent label for this action across different applications and languages, allowing users to understand what happens when they click on the button.",
+    "text": "This is a button label that initiates a connection to an external service or account, such as a third-party storage provider or an AI agent.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:00.431Z"
+    "updated_at": "2026-04-11T20:56:42.593Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-input/tools-settings/index.tsx",
+      "line_number": 551,
+      "context": "{server.name}\n </Text>\n </div>\n <Button\n label={\n server.connected ? t(\"Disconnect\") : t(\"Connect\")\n }\n size={ButtonSize.small}\n onClick={() => {\n if (server.connected) {\n disconnectServerAction(server.id);",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/dialogs/ConnectAccountDialog/index.tsx",
       "line_number": 106,
@@ -18,19 +25,19 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/ThirdPartyComboBox.tsx",
-      "line_number": 372,
+      "line_number": 373,
       "context": "!!storageLocation?.thirdpartyAccount ||\n isDisabled\n }\n className=\"set_room_params-thirdparty-connect\"\n size={ButtonSize.small}\n label={t(\"Common:Connect\")}\n onClick={onShowService}\n testId=\"create_edit_room_thirdparty_connect\"\n />\n </div>\n </StyledStorageLocation>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/Channel.tsx",
-      "line_number": 150,
+      "line_number": 151,
       "context": "fontWeight={600}\n isHovered\n type={LinkType.action}\n onClick={onConnect}\n >\n {t(\"Common:Connect\")}\n </Link>\n );\n };\n \n const Channel = ({",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/management/src/app/spaces/configuration/body.tsx",
-      "line_number": 178,
+      "line_number": 179,
       "context": "size={\n currentDeviceType === DeviceType.desktop\n ? ButtonSize.small\n : ButtonSize.normal\n }\n label={t(\"Common:Connect\")}\n onClick={onConnectClick}\n primary\n tabIndex={3}\n isLoading={isLoading}\n // scale={false}",
       "module": "/packages/management"
     },
@@ -99,13 +106,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English 'Connect' is a verb (action), whereas the French 'Connexion' is a noun (the state of being connected). For a button label, the imperative verb 'Se connecter' or 'Connecter' should be used to match the action-oriented context.",
-          "suggestion": "Se connecter"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -135,25 +136,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao word 'ຕິດຕໍ່' (tid-tor) means 'to contact' (as in contacting a person or customer support). For a UI button meaning 'Connect' (linking an account or service), 'ເຊື່ອມຕໍ່' (seuam-tor) is the correct technical term.",
-          "suggestion": "ເຊື່ອມຕໍ່"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian word 'Savienot' is a verb in the infinitive form (to connect), but in UI contexts for buttons, the imperative form 'Pievienot' (to add/connect) or 'Savienojoties' is often expected. However, more critically, 'Savienot' is grammatically awkward here; 'Pievienot' is the standard UI term for 'Connect' (as in connecting an account or service).",
-          "suggestion": "Pievienot"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -171,13 +160,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ligar' typically means 'to turn on' (an appliance) or 'to call' (on the phone). In the context of connecting accounts or services (as seen in the code: 'connect_account_dialog_submit', 'thirdparty-connect'), the correct term is 'Conectar'.",
-          "suggestion": "Conectar"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -189,13 +172,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word 'Connect' is a general action verb, whereas the Romanian translation 'Adaugă cont' means 'Add account'. This is too specific and does not match the 'Common' scope of the key, which is used for various UI elements beyond just adding accounts.",
-          "suggestion": "Conectează"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

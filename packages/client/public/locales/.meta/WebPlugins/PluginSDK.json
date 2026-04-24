@@ -3,28 +3,29 @@
   "content": "Plugin SDK",
   "content_en_sha1_hash": "db5137721d3c3c4eeffdfb6c023f6c7d28a1ca04",
   "created_at": "2025-05-19T21:30:49.920Z",
-  "updated_at": "2026-04-08T18:35:00.494Z",
+  "updated_at": "2026-04-23T17:24:01.934Z",
   "comment": {
-    "text": "The translation key \"PluginSDK\" refers to the name of a plugin SDK used in developer tools. It is displayed as a label on a settings page and appears in a category title. Translators should provide a clear and concise translation for this text to be used consistently across different languages and regions.",
+    "text": "This is a title for a section within the developer tools settings, referring to the Plugin Software Development Kit. It appears as a heading on the page and as a card title in the main developer tools overview.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:40.789Z"
+    "updated_at": "2026-04-11T21:27:49.270Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DeveloperToolsHeader.tsx",
-      "line_number": 74,
-      "context": "if (key) return t(key);\n }\n if (pathname.includes(\"/developer-tools/javascript-sdk\"))\n return t(\"Settings:EmbedSDK\");\n if (pathname.includes(\"/developer-tools/plugin-sdk\"))\n return t(\"WebPlugins:PluginSDK\");\n if (pathname.includes(\"/developer-tools/webhooks\")) return t(\"Webhooks:Webhooks\");\n if (pathname.includes(\"/developer-tools/oauth\")) return t(\"OAuth:OAuth\");\n return t(\"Common:DeveloperTools\");\n };",
+      "line_number": 89,
+      "context": "if (title) return title;\n }\n if (pathname.includes(\"/developer-tools/javascript-sdk\"))\n return t(\"Settings:EmbedSDK\");\n if (pathname.includes(\"/developer-tools/plugin-sdk\"))\n return t(\"WebPlugins:PluginSDK\");\n if (pathname.includes(\"/developer-tools/webhooks\")) return t(\"Webhooks:Webhooks\");\n if (pathname.includes(\"/developer-tools/oauth\")) return t(\"OAuth:OAuth\");\n return t(\"Common:DeveloperTools\");\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 95,
-      "context": "color={globalColors.mainOrange}\n linkTitle={t(\"Settings:StartEmbedding\")}\n />\n <Card\n icon={<PluginSvg />}\n title={t(\"WebPlugins:PluginSDK\")}\n description={t(\"Settings:PluginDescription\", { productName: t(\"Common:ProductName\") })}\n url=\"/developer-tools/plugin-sdk\"\n color={globalColors.secondGreen}\n linkTitle={t(\"Common:ReadInstructions\")}\n />",
+      "line_number": 96,
+      "context": "color={globalColors.mainOrange}\n linkTitle={t(\"Settings:StartEmbedding\")}\n />\n <Card\n icon={<PluginSvg />}\n title={t(\"WebPlugins:PluginSDK\")}\n description={t(\"Settings:PluginDescription\", { productName: getBrandName(\"ProductName\") })}\n url=\"/developer-tools/plugin-sdk\"\n color={globalColors.secondGreen}\n linkTitle={t(\"Common:ReadInstructions\")}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/PluginSDK/index.js",
-      "line_number": 56,
+      "line_number": 57,
       "context": "\"VersionHistory\",\n \"Common\",\n ]);\n \n React.useEffect(() => {\n if (ready) setDocumentTitle(t(\"WebPlugins:PluginSDK\"));\n }, [ready]);\n \n const isMobile = currentDeviceType === \"mobile\";\n \n const icon = !theme.isBase ? <GithubLight /> : <GithubDark />;",
       "module": "/packages/client"
     }
@@ -39,13 +40,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'اضافات' (Add-ons/Extensions) is a plural noun, whereas 'Plugin SDK' refers to a specific Software Development Kit. In a technical context, 'Plugin' should be translated as 'إضافة' (singular) or kept as 'Plugin' to maintain the technical accuracy of the SDK name.",
-          "suggestion": "SDK الإضافات"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -129,13 +124,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Spraudnis' in Latvian refers to a physical electrical plug. In a software context, 'Plugin' should be transliterated or translated as 'Pievienotājprogramma'.",
-          "suggestion": "Pievienotājprogrammas SDK"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -177,13 +166,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'පේනු' (Penu) means 'Pen'. This is a mistranslation of 'Plugin'. The technical term 'Plugin' should be transliterated or translated to reflect software extensions, not writing instruments.",
-          "suggestion": "ප්ලගින් SDK"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

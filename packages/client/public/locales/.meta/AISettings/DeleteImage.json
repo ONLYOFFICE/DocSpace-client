@@ -3,11 +3,12 @@
   "content": "Delete image",
   "content_en_sha1_hash": "ffc2726494407897059a9193827586abe1ae0b48",
   "created_at": "2025-10-27T16:14:31.662Z",
-  "updated_at": "2026-02-19T13:36:32.699Z",
+  "updated_at": "2026-04-11T21:02:58.526Z",
   "comment": {
-    "text": "This text appears on a link that allows a user to delete an image. It's used as the label for a delete action within the AI settings, likely on a server configuration page. Translators should ensure the wording conveys the action of removing an image.",
+    "text": "This is a link label that, when clicked, deletes the currently selected image for an AI server icon.",
     "is_auto": true,
-    "updated_at": "2025-10-27T17:35:52.629Z"
+    "updated_at": "2026-04-11T21:02:58.526Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

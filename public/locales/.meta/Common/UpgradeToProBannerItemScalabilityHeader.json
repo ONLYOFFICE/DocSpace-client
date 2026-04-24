@@ -3,11 +3,12 @@
   "content": "Scalability and clustering.",
   "content_en_sha1_hash": "6cc8e719d41e0d79ee36d84a4938186906c5e5a8",
   "created_at": "2025-05-26T07:15:49.299Z",
-  "updated_at": "2026-04-07T20:46:06.790Z",
+  "updated_at": "2026-04-12T13:12:30.068Z",
   "comment": {
-    "text": "This translation key is used to display a header that explains the benefits of scalability and clustering. It appears in a UI component likely used to promote or describe the upgrade to Pro features. Translators should focus on conveying the concept of improving system performance and adaptability.",
+    "text": "This is a header for a feature in a \"Upgrade to Pro\" banner, describing the benefits of the Pro version.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:02:06.655Z"
+    "updated_at": "2026-04-11T20:39:49.435Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -37,7 +38,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \"ə\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-12T13:11:03.030Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null
@@ -85,7 +88,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \"s\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-12T13:11:23.611Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null
@@ -141,13 +146,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'clustering' in a technical context (computing/servers) refers to 'clustering' (agrupamento/cluster), whereas 'agregação' (aggregation) refers to a different technical concept.",
-          "suggestion": "Escalabilidade e clustering."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -159,13 +158,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'clustering' in a technical/IT context refers to 'clustering' (grouping of servers/nodes), but 'grupare' is too generic and often refers to simple grouping. In Romanian IT terminology, 'clustering' is the standard term used to describe this specific architecture.",
-          "suggestion": "Scalabilitate și clustering."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -195,13 +188,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'clustering' is translated as 'груписање' (grouping), which is a generic term. In a technical context regarding system architecture and scalability, 'clustering' should be translated as 'klasterizacija' (кластеризација).",
-          "suggestion": "Скалабилност и кластеризација."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

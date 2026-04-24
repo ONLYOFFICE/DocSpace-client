@@ -1,7 +1,8 @@
 {
   "BackToRoom": "ルームに戻る",
   "CheckReadyForms": "完成させたフォームを見る",
-  "Description": "フォームが完成させ、保存された",
+  "CompletedFormDescription": "フォームが完成させ、保存された",
+  "CompletedFormTitle": "フォームが完成しました",
   "DescriptionForAnonymous": "ご提出いただいたPDFフォームには固有のフォーム番号が割り当てられています。状況を確認するには、フォームのオーナーまでご連絡ください。",
   "DescriptionForRegisteredUser": "ご提出いただいたPDFフォームは、「完成」フォルダでご確認いただけます。",
   "FillItOutAgain": "もう一度記入してください",
@@ -18,6 +19,5 @@
   "FormVDRYouFirstRecepientDescription": "あなたは最初の受領者として、このフォームへの記入が割り当てられています。通知はあなたのメールアドレスに送信されています。今すぐ記入を開始するか、記入リンクをコピーして後で戻ることができます。",
   "LinkToFillOutForm": "フォームに記入するリンク：",
   "LinkToForm": "フォームへのリンク：",
-  "LinkToViewOnlyForm": "閲覧専用フォームへのリンク：",
-  "Title": "フォームが完成しました"
+  "LinkToViewOnlyForm": "閲覧専用フォームへのリンク："
 }

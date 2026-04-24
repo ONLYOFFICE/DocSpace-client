@@ -3,23 +3,24 @@
   "content": "Specify your company information, add links to external resources and email addresses displayed within the {{productName}} interface.",
   "content_en_sha1_hash": "d799aef730dd0a79a451093abbc8378f23c3c2f2",
   "created_at": "2025-05-26T07:15:40.974Z",
-  "updated_at": "2026-04-08T16:07:08.910Z",
+  "updated_at": "2026-04-11T20:58:10.768Z",
   "comment": {
-    "text": "This translation key is used to display company information and links to external resources within the {{productName}} interface. It appears in a section description, providing context for users when interacting with branding-related settings.",
+    "text": "This is a section description explaining where to customize company information and external links within the {{productName}} interface.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:06:51.116Z"
+    "updated_at": "2026-04-11T20:58:10.768Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 144,
-      "context": "className={classNames(\n styles.sectionDescription,\n \"section-description\",\n )}\n >\n {t(\"BrandingSectionDescription\", {\n productName: t(\"ProductName\"),\n })}\n </div>\n <div className={classNames(styles.header, \"header\")}>\n {t(\"CompanyInfoSettings\")}",
+      "line_number": 145,
+      "context": "className={classNames(\n styles.sectionDescription,\n \"section-description\",\n )}\n >\n {t(\"BrandingSectionDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </div>\n <div className={classNames(styles.header, \"header\")}>\n {t(\"CompanyInfoSettings\")}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/MobileView/index.tsx",
-      "line_number": 70,
-      "context": "onClickLink={onClickLink}\n />\n {displayAbout ? (\n <CategoryItem\n title={t(\"CompanyInfoSettings\")}\n subtitle={t(\"BrandingSectionDescription\", {\n productName: t(\"ProductName\"),\n })}\n url={`${baseUrl}/branding/company-info`}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}",
+      "line_number": 71,
+      "context": "onClickLink={onClickLink}\n />\n {displayAbout ? (\n <CategoryItem\n title={t(\"CompanyInfoSettings\")}\n subtitle={t(\"BrandingSectionDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n url={`${baseUrl}/branding/company-info`}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}",
       "module": "/packages/shared"
     }
   ],
@@ -99,13 +100,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation incorrectly implies that the user is 'specifying the addition' (追加を指定してください) of information, rather than specifying the information itself. The English structure is 'Specify [A], [B], and [C]'. The Japanese translation makes it sound like the user is specifying the act of adding them.",
-          "suggestion": "{{productName}}のインターフェイス内に表示される企業情報、外部リソースへのリンク、およびメールアドレスを指定してください。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -135,13 +130,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The English verb 'Specify' (which implies entering or defining data) is translated as 'Dodaj' (Add). While similar, 'Specify' is more accurate to the instruction of providing/defining information.",
-          "suggestion": "Określ informacje o firmie, dodaj linki do zasobów zewnętrznych i adresy e-mail widoczne w interfejsie {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -171,13 +160,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'වි-තැපැල්' (vi-thæpæl) is an incorrect and unnatural way to translate 'email'. It appears to be a literal or broken attempt at a compound word. The standard and correct term in Sinhala is 'විද්‍යුත් තැපැල්' (vidyuth thæpæl).",
-          "suggestion": "ඔබගේ සමාගමේ තොරතුරු සඳහන් කරන්න, {{productName}} අතුරුමුහුණතෙහි දිස් වීමට බාහිර සම්පත් සඳහා සබැඳි සහ විද්‍යුත් තැපැල් ලිපින එක් කරන්න."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

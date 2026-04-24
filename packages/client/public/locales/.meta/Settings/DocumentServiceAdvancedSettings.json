@@ -3,16 +3,17 @@
   "content": "Advanced server settings",
   "content_en_sha1_hash": "5ebb3289911c026499372bca9d3ef3bdabd8785e",
   "created_at": "2025-05-19T21:30:51.337Z",
-  "updated_at": "2026-04-09T03:13:23.349Z",
+  "updated_at": "2026-04-11T21:24:25.334Z",
   "comment": {
-    "text": "The \"Advanced server settings\" translation key is used to display a label for advanced server settings in the UI. It appears as part of a larger section in a portal settings page, possibly as a subheader or title, guiding users to access more detailed configuration options.",
+    "text": "This is a subheader label for a section within the document service settings. It indicates that the following options relate to advanced server configurations.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:18.793Z"
+    "updated_at": "2026-04-11T21:24:25.334Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 323,
+      "line_number": 324,
       "context": "</div>\n </div>\n \n <div className=\"form-inputs\">\n <Styled.LocationSubheader>\n {t(\"Settings:DocumentServiceAdvancedSettings\")}\n <Link\n className=\"advanced-link\"\n type=\"action\"\n isHovered\n onClick={onChangeIsShowAdvancedSettings}",
       "module": "/packages/client"
     }
@@ -105,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation includes the English word 'Advanced' appended to the end of the Lao sentence, and the Lao word 'ກ້ານ' (meaning 'stalk' or 'stem') is used incorrectly in this technical context.",
-          "suggestion": "ການຕັ້ງຄ່າເຄື່ອງແມ່ຂ່າຍຂັ້ນສູງ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -159,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'ඉදිරිපත්' (idhiripath) means 'presented' or 'submitted', which is an incorrect translation for 'Advanced' in a technical context. The correct term for 'Advanced' in this context should be 'උසස්' (usas) or 'වැඩිදුර' (vadhidura).",
-          "suggestion": "උසස් සේවාදායක සැකසුම්"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -183,25 +172,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'подешавања' (settings) is misspelled as 'пподешавања' (double 'п').",
-          "suggestion": "Напредна подешавања сервера"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'podešavanja' contains a typo ('ppodešavanja').",
-          "suggestion": "Napredna podešavanja servera"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

@@ -77,6 +77,7 @@ import CampaignsStore from "SRC_DIR/store/CampaignsStore";
 import PluginStore from "SRC_DIR/store/PluginStore";
 
 import styles from "./Profile.module.scss";
+import { getConstName } from "@docspace/shared/constants/consts";
 
 const getDropdownHoverRules = () => [
 	`.drop-down-item:hover:not(.separator) {
@@ -383,7 +384,7 @@ const MainProfile = (props: MainProfileProps) => {
 						<div className={styles.badgesWrapper}>
 							<Badge
 								className={styles.ssoBadge}
-								label={t("Common:SSO")}
+								label={getConstName("SSO")}
 								color={globalColors.white}
 								backgroundColor={
 									isBase
@@ -400,7 +401,7 @@ const MainProfile = (props: MainProfileProps) => {
 						<div className={styles.badgesWrapper}>
 							<Badge
 								className={styles.ldapBadge}
-								label={t("Common:LDAP")}
+								label={getConstName("LDAP")}
 								color={globalColors.white}
 								backgroundColor={
 									isBase
@@ -428,7 +429,7 @@ const MainProfile = (props: MainProfileProps) => {
 									<Badge
 										id="sso-badge-profile"
 										className={styles.ssoBadge}
-										label={t("Common:SSO")}
+										label={getConstName("SSO")}
 										color={globalColors.white}
 										backgroundColor={
 											isBase
@@ -450,7 +451,7 @@ const MainProfile = (props: MainProfileProps) => {
 									<Badge
 										id="ldap-badge-profile"
 										className={styles.ldapBadge}
-										label={t("Common:LDAP")}
+										label={getConstName("LDAP")}
 										color={globalColors.white}
 										backgroundColor={
 											isBase

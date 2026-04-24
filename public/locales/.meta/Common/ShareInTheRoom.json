@@ -3,11 +3,12 @@
   "content": "Share in the room",
   "content_en_sha1_hash": "0bc4be3bcb493239585642bc4f39bfd12f5c7c05",
   "created_at": "2025-05-19T21:30:48.670Z",
-  "updated_at": "2026-04-07T23:11:32.761Z",
+  "updated_at": "2026-04-12T20:25:48.633Z",
   "comment": {
-    "text": "This translation key is used to display the text \"Share in the room\" as a button label on a form panel, indicating that the action will share the current form data. It appears in the \"/packages/client/src/components/panels/ShareFormPanel/index.js\" file and may also be displayed in dialog boxes related to form management.",
+    "text": "This is a button label that allows users to share a form in a room for data collection.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:41:09.934Z"
+    "updated_at": "2026-04-11T20:42:57.905Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -36,13 +37,13 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
-      "line_number": 196,
+      "line_number": 197,
       "context": "},\n {\n id: \"form-room\",\n title: t(\"Common:FormDataCollection\"),\n description: t(\"Common:FormDataCollectionDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: onClickFormRoom,\n icon: <FormDataCollectionIcon />,\n },\n {\n id: \"virtual-data-room\",",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
-      "line_number": 196,
+      "line_number": 197,
       "context": "},\n {\n id: \"form-room\",\n title: t(\"Common:FormDataCollection\"),\n description: t(\"Common:FormDataCollectionDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: onClickFormRoom,\n icon: <FormDataCollectionIcon />,\n },\n {\n id: \"virtual-data-room\",",
       "module": "/packages/doceditor"
     }
@@ -57,13 +58,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation 'مشاركة في الغرفة' is a noun phrase meaning 'Participation in the room' or 'Sharing in the room'. Since the context specifies this is a button label for an action, it should be an imperative verb (command) to match the English 'Share'.",
-          "suggestion": "شارك في الغرفة"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -81,13 +76,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Share in the room' is an imperative verb phrase (an action/button label), whereas the Czech translation 'Sdílení v místnosti' is a noun phrase meaning 'Sharing in the room'. For a button label, the imperative form is required.",
-          "suggestion": "Sdílet v místnosti"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -183,13 +172,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'Partajare în sala' uses 'sala' (which usually refers to a physical hall, room, or classroom) instead of 'camera' (the standard technical term for a digital 'room' in software contexts). Furthermore, 'Partajare' is a noun (Sharing), whereas the English 'Share' is an imperative verb (command/action).",
-          "suggestion": "Distribuie în cameră"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -225,13 +208,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Podelite u sobi' is in the past tense (meaning 'You shared in the room') or a second-person plural imperative, whereas the English 'Share in the room' is a standard UI command/imperative. In Serbian UI context, the infinitive or a proper imperative is required.",
-          "suggestion": "Podeli u sobi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -249,13 +226,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Chia sẻ phòng' means 'Share room' (as in sharing the room itself), whereas the English 'Share in the room' implies sharing content/data within a specific room context. In the context of a button label for 'form-data-collection', the current translation is ambiguous and grammatically awkward.",
-          "suggestion": "Chia sẻ trong phòng"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
@@ -267,13 +238,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ndani në dhomë' means 'Inside in the room' or 'Within the room', which is a prepositional phrase. It fails to convey the verb 'Share' (the action required for a button label).",
-          "suggestion": "Shpërndaje në dhomë"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

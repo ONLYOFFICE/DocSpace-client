@@ -3,13 +3,26 @@
   "content": "Clear filter",
   "content_en_sha1_hash": "b667d6f9f635decfb59140eb7361aedc90b3b761",
   "created_at": "2025-05-19T21:30:43.475Z",
-  "updated_at": "2026-04-10T08:21:04.286Z",
+  "updated_at": "2026-04-23T17:24:01.636Z",
   "comment": {
-    "text": "The translation key \"ClearFilter\" is used to display a clear filter button or link that resets filters in a search or filtering interface. It appears as a prominent action item on pages like Form Gallery and Contacts Body, where it helps users remove existing filters.",
+    "text": "This is a button label that resets all applied filters to their default state, clearing any search criteria or selections.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:06.689Z"
+    "updated_at": "2026-04-11T20:57:11.683Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
+      "line_number": 483,
+      "context": "onClick={onClearFilter}\n textDecoration=\"underline dotted\"\n dataTestId=\"clear_filter_button\"\n className={styles.clearFilter}\n >\n {t(\"ClearFilter\")}\n </Link>\n ) : null}\n </div>\n );",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/components/selector/sub-components/EmptyScreen.tsx",
+      "line_number": 197,
+      "context": "}\n isFill\n />\n \n <Link {...linkStyles}>\n {withSearch ? t(\"ClearFilter\") || \"\" : t(\"Back\") || \"\"}\n </Link>\n </div>\n ) : null}\n </div>\n </div>",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/EmptyFilterContainer.js",
       "line_number": 143,
@@ -75,6 +88,12 @@
       "line_number": 57,
       "context": "const options = [\n {\n key: \"empty-view-filter\",\n to: \"\",\n description: t(\"Common:ClearFilter\"),\n icon: <ClearEmptyFilterSvg />,\n onClick: clearFilters,\n },\n ];",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/empty-view/index.tsx",
+      "line_number": 64,
+      "context": "const filterOptions = [\n {\n key: \"empty-view-filter\",\n to: \"\",\n description: t(\"Common:ClearFilter\"),\n icon: <ClearEmptyFilterSvg />,\n onClick: onResetFilter,\n isNext: true,\n },\n ];",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -93,13 +112,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Filtri silin' means 'Delete the filter', which implies removing the filter object/rule entirely. In a UI context for resetting a search, 'Clear filter' should mean resetting the selection/criteria. 'Filtri təmizlə' is the standard term for clearing/resetting a filter.",
-          "suggestion": "Filtri təmizlə"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -201,13 +214,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Filtro limpo' means 'Filter cleaned' (past participle/adjective), whereas the English 'Clear filter' is an imperative command/action to reset the filter.",
-          "suggestion": "Limpar filtro"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {

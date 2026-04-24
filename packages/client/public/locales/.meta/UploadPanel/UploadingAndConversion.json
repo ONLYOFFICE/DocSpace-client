@@ -3,17 +3,18 @@
   "content": "Uploading & Conversion",
   "content_en_sha1_hash": "62063df26c306ea5a37b06a791b0446140db5797",
   "created_at": "2025-05-19T21:30:49.952Z",
-  "updated_at": "2026-04-08T20:48:05.094Z",
+  "updated_at": "2026-04-13T14:59:05.784Z",
   "comment": {
-    "text": "This translation key is used to display the text \"Uploading & Conversion\" on a file upload component. It likely appears as a title or label in an upload panel dialog.",
+    "text": "This is a panel title that indicates the current process of uploading files and converting them for use within the application. It appears when files are being uploaded and processed.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:37.229Z"
+    "updated_at": "2026-04-11T21:27:39.921Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/UploadPanel/index.js",
-      "line_number": 117,
-      "context": "return {};\n };\n \n render() {\n const { t, uploadPanelVisible, isUploadingAndConversion, isUploading } =\n this.props;\n \n const visible = uploadPanelVisible;\n \n const title = isUploading",
+      "line_number": 125,
+      "context": "const visible = uploadPanelVisible;\n \n const title = isUploading\n ? t(\"Files:Uploading\")\n : isUploadingAndConversion\n ? t(\"UploadingAndConversion\")\n : t(\"Files:Conversion\");\n \n return (\n <ModalDialog\n visible={visible}",
       "module": "/packages/client"
     }
   ],
@@ -75,13 +76,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The French word 'Téléchargement' typically refers to 'Downloading'. For 'Uploading', the correct term is 'Téléversement'.",
-          "suggestion": "Téléversement et conversion"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -159,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'යොමු කිරීම' (Yomu kirima) means 'referring', 'submitting', or 'directing', which is incorrect for the technical context of 'Uploading' files. The correct term for uploading is 'උඩුගත කිරීම' (Udugatha kirima).",
-          "suggestion": "උඩුගත කිරීම සහ පරිවර්තනය"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -219,13 +208,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text is a noun phrase ('Uploading & Conversion'), whereas the Albanian translation is an imperative command ('Ngarkoni dhe konvertoni skedarët' - 'Upload and convert files'). This changes the grammatical function from a title/label to an instruction.",
-          "suggestion": "Ngarkimi dhe Konvertimi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

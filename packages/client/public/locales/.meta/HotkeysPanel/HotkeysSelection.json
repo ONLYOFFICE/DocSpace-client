@@ -3,11 +3,12 @@
   "content": "Selecting items",
   "content_en_sha1_hash": "ff107295cec9a49c5dc0fa042fb492445682889f",
   "created_at": "2025-05-19T21:30:55.086Z",
-  "updated_at": "2026-04-07T19:35:05.109Z",
+  "updated_at": "2026-04-11T21:11:58.317Z",
   "comment": {
-    "text": "This translation key is used for the \"Selecting items\" text that appears as a header in a panel, likely indicating the selection mode or options. It is displayed on a file located at /packages/client/src/components/panels/HotkeysPanel/index.js, line 122. Translators should provide an equivalent phrase to indicate this action's purpose in their language.",
+    "text": "This is a subheading within the hotkeys panel. It introduces a section detailing hotkeys related to selecting items.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:40:29.266Z"
+    "updated_at": "2026-04-11T21:11:58.317Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

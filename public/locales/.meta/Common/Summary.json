@@ -3,13 +3,21 @@
   "content": "Summary",
   "content_en_sha1_hash": "12b71c3e0fe5f7c0b8d17cc03186e281412da4a8",
   "created_at": "2026-03-31T15:18:23.889Z",
-  "updated_at": "2026-04-07T22:11:18.113Z",
+  "updated_at": "2026-04-23T17:24:02.135Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a button label within the AI chat panel. It appears as a short label for a prompt that generates a summary of the current document.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:41:29.050Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/ai-chat-panel/index.tsx",
+      "line_number": 141,
+      "context": "prompt: t(\"Common:WhoFilledItOutPrompt\", {\n formName: pendingAttachmentFile.title,\n }),\n },\n {\n title: t(\"Common:Summary\"),\n prompt: t(\"Common:SummaryPrompt\", {\n formName: pendingAttachmentFile.title,\n }),\n },\n ]",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

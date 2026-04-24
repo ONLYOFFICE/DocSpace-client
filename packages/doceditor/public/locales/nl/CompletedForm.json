@@ -1,7 +1,8 @@
 {
   "BackToRoom": "Terug naar kamer",
   "CheckReadyForms": "Controleer bereide formulieren",
-  "Description": "Uw formulier ingevuld en opgeslagen",
+  "CompletedFormDescription": "Uw formulier ingevuld en opgeslagen",
+  "CompletedFormTitle": "Het formulier is ingevuld",
   "DescriptionForAnonymous": "U hebt het ingevulde PDF formulier ingediend waaraan een uniek nummer is toegekend. Om de status te controleren, neemt u contact op met de eigenaar van het formulier.",
   "DescriptionForRegisteredUser": "Het ingevulde PDF formulier is beschikbaar in de Voltooid map.",
   "FillItOutAgain": "Vul het opnieuw in",
@@ -18,6 +19,5 @@
   "FormVDRYouFirstRecepientDescription": "U wordt gevraagd om het formulier in te vullen als eerste ontvanger. Er is een melding naar uw e-mailadres gestuurd. U kunt het nu invullen of de link om het formulier in te vullen kopiëren en deze later terugkomen.",
   "LinkToFillOutForm": "Link om formulier in te vullen:",
   "LinkToForm": "Link naar formulier:",
-  "LinkToViewOnlyForm": "Link naar alleen-lezen formulier:",
-  "Title": "Het formulier is ingevuld"
+  "LinkToViewOnlyForm": "Link naar alleen-lezen formulier:"
 }

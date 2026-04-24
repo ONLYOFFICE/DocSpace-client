@@ -1,4 +1,7 @@
 {
+  "AgentCreated": "Agente AI creato",
+  "AgentDeleted": "Agente AI eliminato",
+  "AgentUpdated": "Agente AI Aggiornato",
   "Before": "Prima",
   "CreateWebhook": "Crea webhook",
   "DeleteHint": "Il webhook verrà eliminato definitivamente.\nNon potrai annullare questa azione.",
@@ -33,6 +36,9 @@
   "FolderRestored": "Cartella ripristinata",
   "FolderTrashed": "Cartella nel cestino",
   "FolderUpdated": "Cartella aggiornata",
+  "FormFilledOut": "Modulo compilato",
+  "FormStopped": "Modulo interrotto",
+  "FormSubmit": "Modulo inviato",
   "From": "Da",
   "Generate": "Generare",
   "GroupCreated": "Gruppo creato",
@@ -77,7 +83,7 @@
   "UserDeleted": "Utente eliminato",
   "UserInvited": "Utente invitato",
   "UserUpdated": "Utente aggiornato",
-  "ViewRawPayload": "Visualizza il carico utile iniziale",
+  "ViewRawPayload": "Visualizza payload grezzo",
   "WebhookCreated": "Webhook creato",
   "WebhookDetails": "Dettagli del webhook",
   "WebhookDisabled": " Webhook disabilitato",
@@ -89,11 +95,5 @@
   "WebhookRemoved": "Webhook rimosso",
   "Webhooks": "Webhook",
   "WebhooksGuide": "Guida ai webhook",
-  "WebhooksInfo": "Utilizza i webhook per eseguire azioni personalizzate su qualsiasi applicazione o sito Web che stai utilizzando in base a vari eventi in {{organizationName}} {{productName}}.\nQui puoi creare e gestire tutti i tuoi webhook, configurarli e sfogliare la cronologia di ogni webhook per controllarne le prestazioni.",
-  "AgentCreated": "Agente AI creato",
-  "AgentDeleted": "Agente AI eliminato",
-  "AgentUpdated": "Agente AI Aggiornato",
-  "FormFilledOut": "Modulo compilato",
-  "FormStopped": "Modulo interrotto",
-  "FormSubmit": "Modulo inviato"
+  "WebhooksInfo": "Utilizza i webhook per eseguire azioni personalizzate su qualsiasi applicazione o sito Web che stai utilizzando in base a vari eventi in {{organizationName}} {{productName}}.\nQui puoi creare e gestire tutti i tuoi webhook, configurarli e sfogliare la cronologia di ogni webhook per controllarne le prestazioni."
 }

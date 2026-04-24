@@ -45,6 +45,7 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/ui-kit/components/avatar";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type ProfileRemoveFormProps = {
   legalTerms: string;
@@ -103,13 +104,13 @@ const ProfileRemoveForm = ({
       <>
         <GreetingContainer
           greetingText={t("Confirm:DeleteProfileSuccessMessage", {
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
           })}
         />
         <FormWrapper>
           <Text>
             {t("DeleteProfileSuccessDescription", {
-              productName: t("Common:ProductName"),
+              productName: getBrandName("ProductName"),
             })}
             <br />
             <Trans i18nKey="DeleteProfileSuccessMessageInfo" ns="Confirm" t={t}>

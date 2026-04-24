@@ -3,17 +3,18 @@
   "content": "Sign in with Zoom",
   "content_en_sha1_hash": "4bf90e936ec81803bddf7c8046ea7c8f393f6d8b",
   "created_at": "2025-05-19T21:30:48.808Z",
-  "updated_at": "2026-04-10T08:21:04.402Z",
+  "updated_at": "2026-04-23T17:24:02.129Z",
   "comment": {
-    "text": "This translation key is used for the \"Sign in with Zoom\" button on a login form. It prompts users to sign in with their Zoom account when using two-factor authentication.",
+    "text": "This is a button label that allows users to log in to their account using their Zoom credentials.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:40:06.705Z"
+    "updated_at": "2026-04-11T20:42:37.305Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 485,
-      "context": "? t(\"Common:SignUpWithMicrosoft\")\n : t(\"Common:SignInWithMicrosoft\");\n case \"sso\":\n return signUp ? t(\"Common:SignUpWithSso\") : t(\"Common:SignInWithSso\");\n case \"zoom\":\n return signUp ? t(\"Common:SignUpWithZoom\") : t(\"Common:SignInWithZoom\");\n case \"weixin\":\n return signUp\n ? t(\"Common:SignUpWithWechat\")\n : t(\"Common:SignInWithWechat\");\n default:",
+      "line_number": 481,
+      "context": "? t(\"Common:SignUpWithMicrosoft\")\n : t(\"Common:SignInWithMicrosoft\");\n case \"sso\":\n return signUp ? t(\"Common:SignUpWithSso\") : t(\"Common:SignInWithSso\");\n case \"zoom\":\n return signUp ? t(\"Common:SignUpWithZoom\") : t(\"Common:SignInWithZoom\");\n case \"weixin\":\n return signUp\n ? t(\"Common:SignUpWithWechat\")\n : t(\"Common:SignInWithWechat\");\n case \"nextcloud\":",
       "module": "/packages/shared"
     }
   ],
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The preposition 'with' is missing in the Arabic translation, making the phrase 'Sign Zoom' instead of 'Sign in with Zoom'.",
-          "suggestion": "تسجيل الدخول باستخدام Zoom"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -207,13 +202,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Chinese translation '解绑Zoom登录' means 'Unbind Zoom login', which is the opposite of the intended action 'Sign in with Zoom'.",
-          "suggestion": "使用 Zoom 登录"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

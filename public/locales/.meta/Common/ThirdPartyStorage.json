@@ -3,22 +3,23 @@
   "content": "Third-party storage",
   "content_en_sha1_hash": "f9863ef0415f207037f70275c921c5f88e760b2e",
   "created_at": "2025-05-19T21:30:49.279Z",
-  "updated_at": "2026-04-07T21:50:04.951Z",
+  "updated_at": "2026-04-12T15:41:37.341Z",
   "comment": {
-    "text": "This translation key is used to display a label for \"Third-party storage\" in various UI components, such as radio buttons and toggle parameters, indicating a storage option for files. It appears in dialog windows and page settings for data management and backup features.",
+    "text": "This is a label for a toggle or radio button. It refers to an external storage service, like Google Drive or Dropbox, that can be integrated with ONLYOFFICE DocSpace.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:37:41.925Z"
+    "updated_at": "2026-04-11T20:41:07.257Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/index.tsx",
-      "line_number": 186,
+      "line_number": 187,
       "context": "return (\n <StyledThirdPartyStorage>\n <ToggleParam\n id=\"shared_third-party-storage-toggle\"\n title={t(\"Common:ThirdPartyStorage\")}\n description={t(\"Common:ThirdPartyStorageDescription\")}\n isChecked={storageLocation.isThirdparty ?? false}\n onCheckedChange={onChangeIsThirdparty}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 612,
+      "line_number": 613,
       "context": "</div>\n <div className={styles.modules}>\n <RadioButton\n {...commonRadioButtonProps}\n id=\"third-party-storage\"\n label={t(\"Common:ThirdPartyStorage\")}\n name={`${BackupStorageType.StorageModuleType}`}\n isChecked={isCheckedThirdPartyStorage}\n isDisabled={isLoadingData}\n testId=\"auto_backup_storage_radio_button\"\n />",
       "module": "/packages/shared"
     },
@@ -30,7 +31,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/index.tsx",
-      "line_number": 238,
+      "line_number": 239,
       "context": "label: t(\"Common:ThirdPartyResource\"),\n },\n {\n id: \"third-party-storage\",\n value: STORAGE_SPACE,\n label: t(\"Common:ThirdPartyStorage\"),\n },\n ]}\n onClick={onChangeRadioButton}\n selected={radioButtonState}\n spacing=\"16px\"",
       "module": "/packages/shared"
     }
@@ -51,25 +52,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Üçüncü Tərəf Yaddaşı' literally means 'Third Party Memory'. In a technical UI context regarding file storage/cloud services, 'Yaddaş' (Memory) refers to RAM or hardware memory, whereas 'Saxlama yeri' or 'Yaddaş sahəsi' is used for storage. However, more critically, 'Üçüncü tərəf' is an adjective phrase that should modify the storage, and the current phrasing sounds like a broken noun phrase.",
-          "suggestion": "Üçüncü tərəf saxlama yeri"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation 'Памет за трети страни' means 'Memory for third parties' (referring to RAM/computer memory), whereas the English 'Third-party storage' in this context refers to a storage location/service for files.",
-          "suggestion": "Съхранение от трета страна"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -81,13 +70,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation 'Drittanbieter' means 'Third-party provider'. It omits the word 'storage' (Speicher), which is essential to the meaning of the English string 'Third-party storage'.",
-          "suggestion": "Drittanbieter-Speicher"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -111,13 +94,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Moteur de stockage tiers' means 'Third-party storage engine'. The English source 'Third-party storage' refers to the storage itself (the location/option), not the engine/driver powering it.",
-          "suggestion": "Stockage tiers"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -183,13 +160,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Aplicație de stocare de la terțe' means 'Third-party storage application', which changes the meaning from a storage type/location to a specific software application.",
-          "suggestion": "Stocare de la terți"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -201,13 +172,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'ආචයනය' (āchayana) refers to the act of accumulating or collecting, whereas in a technical/IT context for 'storage', the term 'ගබඩාව' (gabāḍāva) or 'ගබඩා කිරීම' (gabāḍā kirīma) should be used to denote data storage.",
-          "suggestion": "තෙවන පාර්ශ්ව ගබඩාව"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -219,13 +184,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian word 'Shranjevanje' means 'Saving' or 'Storage process', whereas the English 'Third-party storage' refers to the storage location/entity itself. Furthermore, 'pri zunanjem ponudniku' is grammatically awkward in this context; 'Zunanje shranjevanje' or 'Shranjevanje pri tretji osebi' would be more accurate, but specifically, the translation describes the action of saving rather than the storage type.",
-          "suggestion": "Shranjevanje pri tretji osebi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

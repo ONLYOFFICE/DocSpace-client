@@ -17,8 +17,12 @@
   "FileLifetimeDescription": "Caktoni jetëgjatësinë e skedarit për të fshirë automatikisht skedarët në këtë dhomë pas një periudhe të caktuar. Jetëgjatësia fillon në datën e ngarkimit/krijimit të skedarit.",
   "FilesOlderThan": "Skedarët më të vjetër se:",
   "FormRoomBarDescription": "Kjo dhomë është e disponueshme për këdo që ka lidhjen. Përdoruesit e jashtëm do të kenë lejen e Plotësuesit të formave për të gjithë skedarët.",
+  "GoToIntegrations": "Shko te Integrimet",
   "Horizontal": "Horizontale",
   "Icon": "Ikon",
+  "NeedMoreIntegrations": "Dëshironi më shumë integrime?",
+  "NeedMoreIntegrationsDescription": "Përdorni webhook-e për të dërguar të dhëna në sistemin tuaj, ose lidhni formularët me mijëra shërbime përmes Zapier.",
+  "NoDatabaseConnections": "Nuk ka lidhje me bazë të dhënash të konfiguruar",
   "PeopleSelectorInfo": "Vetëm një administrator i dhomës ose një administrator {{productName}} mund të bëhet pronari i dhomës.",
   "Position": "Pozicion",
   "PublicRoomBarDescription": "Kjo dhomë është e disponueshme për këdo me lidhjen. Qasja për përdoruesit e jashtëm ofrohet sipas llojit të të drejtave të aksesit të zgjedhur.",
@@ -41,8 +45,5 @@
   "ViewerInfo": "Informacione për shikuesin",
   "WatermarkPreview": "Parapri Shumëzimë",
   "WatermarkPreviewHelp": "Kjo paraqitje e imazhit tregon përafërsisht se si do të shfaqet marka ujësimi në fajljet tuaja.",
-  "GoToIntegrations": "Shko te Integrimet",
-  "NeedMoreIntegrations": "Dëshironi më shumë integrime?",
-  "NeedMoreIntegrationsDescription": "Përdorni webhook-e për të dërguar të dhëna në sistemin tuaj, ose lidhni formularët me mijëra shërbime përmes Zapier.",
-  "NoDatabaseConnections": "Nuk ka lidhje me bazë të dhënash të konfiguruar"
+  "NoDatabaseConnectionsRoomAdmin": "Lidhjet me bazën e të dhënave konfigurohen nga një administrator. Sapo të konfigurohet një bazë të dhënash, do të mund të aktivizoni eksportin këtu."
 }

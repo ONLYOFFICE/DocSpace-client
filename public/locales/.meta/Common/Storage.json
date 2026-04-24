@@ -3,17 +3,24 @@
   "content": "Storage",
   "content_en_sha1_hash": "9e092dda4f0e27d0c7686ddd00272079e678b6e6",
   "created_at": "2025-05-19T21:30:49.092Z",
-  "updated_at": "2026-04-07T22:20:25.130Z",
+  "updated_at": "2026-04-23T17:24:01.898Z",
   "comment": {
-    "text": "This translation key is used to display the content \"Storage\" in various places throughout the application, such as on a user's profile page or in an info panel. The text appears when displaying storage information and quotas for users. It provides context for translators to ensure consistency in language usage.",
+    "text": "This is a label or title referring to data storage. It appears in various contexts, such as displaying storage information for users or as part of a larger phrase like \"Storage and Quota.\"",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:38:35.575Z"
+    "updated_at": "2026-04-11T20:42:02.528Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
+      "file_path": "/libs/ui-kit/components/tiles/template-tile/index.tsx",
+      "line_number": 82,
+      "context": "truncate\n fontSize=\"13px\"\n fontWeight={400}\n className={styles.text}\n >\n {t(\"Storage\")}\n </Text>\n ) : null}\n </div>\n <div className={styles.field}>\n {item.createdBy ? (",
+      "module": "/libs/ui-kit"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
-      "line_number": 271,
-      "context": "const isDefaultQuotaSet = this.isAIAgentsFolder\n ? this.isDefaultAIAgentsQuotaSet\n : this.isDefaultRoomsQuotaSet;\n \n return isDefaultQuotaSet && this.item.quotaLimit !== undefined\n ? this.t(\"Common:StorageAndQuota\")\n : this.t(\"Common:Storage\");\n }\n \n return null;\n default:",
+      "line_number": 272,
+      "context": "? this.isDefaultAIAgentsQuotaSet\n : this.isDefaultRoomsQuotaSet;\n \n return isDefaultQuotaSet && this.item.quotaLimit !== undefined\n ? this.t(\"Common:StorageAndQuota\")\n : this.t(\"Common:Storage\");\n }\n \n return null;\n default:\n break;",
       "module": "/packages/client"
     },
     {
@@ -30,31 +37,31 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 773,
-      "context": "showStorageInfo &&\n columns.splice(columns.length, 0, {\n key: \"Storage\",\n title:\n isDefaultRoomsQuotaSet && !isArchiveFolder\n ? t(\"Common:StorageAndQuota\")\n : t(\"Common:Storage\"),\n enable: roomQuotaColumnIsEnable,\n sortBy: SortByFieldName.UsedSpace,\n resizable: true,\n onChange: this.onColumnChange,",
+      "line_number": 766,
+      "context": "columns.splice(columns.length, 0, {\n key: \"Storage\",\n title:\n isDefaultRoomsQuotaSet && !isArchiveFolder\n ? t(\"Common:StorageAndQuota\")\n : t(\"Common:Storage\"),\n enable: roomQuotaColumnIsEnable,\n sortBy: SortByFieldName.UsedSpace,\n resizable: true,\n onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 773,
-      "context": "showStorageInfo &&\n columns.splice(columns.length, 0, {\n key: \"Storage\",\n title:\n isDefaultRoomsQuotaSet && !isArchiveFolder\n ? t(\"Common:StorageAndQuota\")\n : t(\"Common:Storage\"),\n enable: roomQuotaColumnIsEnable,\n sortBy: SortByFieldName.UsedSpace,\n resizable: true,\n onChange: this.onColumnChange,",
+      "line_number": 766,
+      "context": "columns.splice(columns.length, 0, {\n key: \"Storage\",\n title:\n isDefaultRoomsQuotaSet && !isArchiveFolder\n ? t(\"Common:StorageAndQuota\")\n : t(\"Common:Storage\"),\n enable: roomQuotaColumnIsEnable,\n sortBy: SortByFieldName.UsedSpace,\n resizable: true,\n onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 773,
-      "context": "showStorageInfo &&\n columns.splice(columns.length, 0, {\n key: \"Storage\",\n title:\n isDefaultRoomsQuotaSet && !isArchiveFolder\n ? t(\"Common:StorageAndQuota\")\n : t(\"Common:Storage\"),\n enable: roomQuotaColumnIsEnable,\n sortBy: SortByFieldName.UsedSpace,\n resizable: true,\n onChange: this.onColumnChange,",
+      "line_number": 766,
+      "context": "columns.splice(columns.length, 0, {\n key: \"Storage\",\n title:\n isDefaultRoomsQuotaSet && !isArchiveFolder\n ? t(\"Common:StorageAndQuota\")\n : t(\"Common:Storage\"),\n enable: roomQuotaColumnIsEnable,\n sortBy: SortByFieldName.UsedSpace,\n resizable: true,\n onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1005,
-      "context": "const getFilterData = React.useCallback(async () => {\n const quotaFilter = [\n {\n key: FilterGroups.filterQuota,\n group: FilterGroups.filterQuota,\n label: t(\"Common:StorageQuota\"),\n isHeader: true,\n withoutSeparator: true,\n withMultiItems: true,\n },\n {",
+      "line_number": 1603,
+      "context": "};\n \n const sortByStorage = {\n id: \"sort-by_storage\",\n key: SortByFieldName.UsedSpace,\n label: t(\"Common:Storage\"),\n default: true,\n };\n \n commonOptions.push(name);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 786,
+      "line_number": 787,
       "context": "};\n \n const storage = {\n id: \"sort-quota\",\n key: SortByFieldName.UsedSpace,\n label: t(\"Common:Storage\"),\n default: true,\n };\n \n const inviter = {\n id: \"inviter\",",
       "module": "/packages/client"
     },
@@ -117,13 +124,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "In the context of cloud storage, quotas, and file hosting, 'Muisti' (Memory/RAM) is incorrect. The correct term for digital storage space is 'Tallennustila'.",
-          "suggestion": "Tallennustila"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -177,37 +178,19 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish word 'Pamięć' typically refers to RAM (Random Access Memory) or human memory. In the context of cloud storage, quotas, and file hosting (as indicated by the metadata), 'Miejsce' or 'Miejsce na dane' is the correct term for disk/cloud storage capacity.",
-          "suggestion": "Miejsce"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word 'Storage' is a noun referring to the space or capacity available. The Portuguese translation 'Armazenar' is a verb meaning 'to store'. In the context of user profiles and quotas, the noun 'Armazenamento' should be used.",
-          "suggestion": "Armazenamento"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word 'Storage' is a noun referring to the space or capacity available. The Portuguese translation 'Armazenar' is a verb meaning 'to store'. In the context of quotas and info panels, the noun 'Armazenamento' should be used.",
-          "suggestion": "Armazenamento"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -237,13 +220,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian word 'Shranjevanje' means 'Saving' (the action of saving a file), whereas the English 'Storage' in this context refers to 'Storage space' or 'Capacity' (the place/amount where data is kept).",
-          "suggestion": "Shkratišče"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -255,13 +232,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "In the context of cloud storage, quotas, and digital space, 'Skladište' (warehouse/physical storage) is incorrect. The correct term for digital storage/capacity is 'Skladištenje' or 'Prostor'.",
-          "suggestion": "Skladištenje"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

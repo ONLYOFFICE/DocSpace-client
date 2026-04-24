@@ -1,18 +1,17 @@
 {
-  "AccessingProblem": "Se sei già un utente e hai problemi ad accedere a questo spazio contatta l’amministratore.",
   "CannotCreateNewRoom": "La stanza non può essere creata",
   "CannotCreatePaidUsers": "Non è possibile aggiungere utenti a pagamento",
   "CannotRestoreRoom": "La stanza non può essere ripristinata",
   "ChooseNewPlan": "Vuoi scegliere un nuovo piano tariffario?",
+  "GracePeriodActive": "Il periodo di grazia è attivo <1>dal {{fromDate}} al {{byDate}}</1> (giorni rimanenti: {{delayDaysCount}}).",
+  "LicenseExpiredRestriction": "Non è possibile aggiungere nuovi utenti e creare nuove stanze. La licenza è scaduta.",
+  "LicenseGracePeriodInfo": "Durante questo periodo, gli amministratori non possono creare nuove stanze o aggiungere nuovi utenti. Una volta terminato il periodo di grazia, {{productName}} non sarà disponibile fino all'attivazione di una nuova licenza.",
   "NewRoomWillExceedLimit": "Non è possibile creare questa stanza perché è stato raggiunto il limite del numero di stanze incluse nel piano attuale.",
   "NewUsersWillExceedMembersLimit": "Non è possibile aggiungere nuovi utenti a pagamento poiché è stato raggiunto il limite del numero di amministratori previsto dal piano attuale.",
   "NotPossibleRoomRestoring": "Non è possibile ripristinare la stanza poiché è stato raggiunto il limite del numero di stanze incluse nel piano attuale.",
   "NumberOfRoomsAccordingToTariff": "Numero di stanze in base al tuo piano tariffario: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Numero di amministratori in base al tuo piano tariffario: {{currentValue}}/{{maxValue}}",
+  "PlanPaymentOverdue": "Non è possibile aggiungere nuovi utenti, creare nuove stanze o agenti AI. Pagamento del piano {{planName}} scaduto.",
   "RoomsQuotaAlmostExhausted": "La quota di stanze è quasi esaurita.",
-  "UsersQuotaAlmostExhausted": "La quota di utenti a pagamento è quasi esaurita.",
-  "GracePeriodActive": "Il periodo di grazia è attivo <1>dal {{fromDate}} al {{byDate}}</1> (giorni rimanenti: {{delayDaysCount}}).",
-  "LicenseExpired": "Non è possibile aggiungere nuovi utenti e creare nuove stanze. La licenza è scaduta.",
-  "LicenseGracePeriodInfo": "Durante questo periodo, gli amministratori non possono creare nuove stanze o aggiungere nuovi utenti. Una volta terminato il periodo di grazia, {{productName}} non sarà disponibile fino all'attivazione di una nuova licenza.",
-  "PlanPaymentOverdue": "Non è possibile aggiungere nuovi utenti, creare nuove stanze o agenti AI. Pagamento del piano {{planName}} scaduto."
+  "UsersQuotaAlmostExhausted": "La quota di utenti a pagamento è quasi esaurita."
 }

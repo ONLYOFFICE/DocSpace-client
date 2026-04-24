@@ -3,17 +3,18 @@
   "content": "Result Storage",
   "content_en_sha1_hash": "0afacd729a0aef1e134d6e0597660e93519d64dd",
   "created_at": "2025-10-27T16:14:31.666Z",
-  "updated_at": "2026-02-19T13:36:32.683Z",
+  "updated_at": "2026-04-13T14:59:05.807Z",
   "comment": {
-    "text": "This key represents the \"Result Storage\" search area, used to filter results within the AI Room tabs. It determines which data source is used for the search, displayed within the UI as a selection option in the tabs. Translators should consider this refers to a storage location for AI agent results.",
+    "text": "This is a tab label or filter option for a search area. It refers to a location where AI-generated results are stored.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:58:30.773Z"
+    "updated_at": "2026-04-11T21:01:45.396Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Tabs/AiRoomTabs/index.tsx",
-      "line_number": 121,
-      "context": "const path = getCategoryUrl(CategoryType.AIAgent, rootRoomId || id);\n \n filesFilter.searchArea =\n tab.id === \"knowledge\"\n ? SearchArea.Knowledge\n : SearchArea.ResultStorage;\n \n setIsSectionBodyLoading?.(true, false);\n \n navigate(`${path}?${filesFilter.toUrlParams()}`);\n }",
+      "line_number": 142,
+      "context": "name: t(\"Knowledge\"),\n content: null,\n },\n {\n id: \"result\",\n name: t(\"ResultStorage\"),\n content: null,\n },\n ];\n \n const isChat = currentClientView === \"chat\";",
       "module": "/packages/client"
     }
   ],

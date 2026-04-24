@@ -1,4 +1,5 @@
 {
+  "ActionsWithFilesDescription": "ලාංඡන මගින් {{rooms}}, {{shared}}, {{documents}}, සහ {{aiAgents}} යන කොටස් පුරා ගොනු ක්‍රියාකාරකම් — උඩුගත කිරීම්, සංස්කරණ හෝ බෙදාගැනීම් — ඉස්මතු කරනු ඇත.",
   "AdminSetupRequired": "පරිපාලක සැකසුම අවශ්‍යයි",
   "Badges": "චිහ්න",
   "DailyFeed": "දෛනික {{productName}} සංග්‍රහය",
@@ -8,12 +9,11 @@
   "LdapEmailTooltip": "මෙම පරිශීලක ගිණුම LDAP වෙතින් පූරණය කර ඇත. පරිශීලකයාගේ විද්‍යුත් තැපැල් ලිපිනය නිශ්චිතව දක්වා නොමැති අතර, වත්මන් එක ස්වයංක්‍රීයව ජනනය කර ඇති අතර දැනුම්දීම් යැවීමට භාවිතා කළ නොහැක.",
   "NotConfigured": "වින්‍යාස කර නැත",
   "Notifications": "දැනුම්දීම්",
+  "RoomsActivityDescription": "ඔබේ {{rooms}} සහ {{aiAgents}} තුළ නවීනව බෙදාගත් ගොනු/ෆෝල්ඩර් සහ ක්‍රියාකාරකම් පිළිබඳ ක්ෂණික ඊමේල් දැනුම්දීම් ලබා ගන්න.",
+  "RoomUpdateNotify": "අන්තර්ගතය, {{rooms}} සහ {{aiAgents}} ක්‍රියාකාරකම්",
   "SettingUpNotifications": "දැනුම්දීම් සැකසීම",
   "SuccessConnected": "{{serviceName}} සාර්ථකව දැනුම්දීම් නාලිකාවක් ලෙස සම්බන්ධ කර ඇත. දැන් ඔබට එහි යාවත්කාලීන ලැබෙනු ඇත.",
   "SuccessDisconnected": "{{serviceName}} දැනුම්දීම් නාලිකාවක් ලෙස සාර්ථකව විසන්ධි කර ඇත. තවදුරටත් එහි දැනුම්දීම් යවනු නොලැබේ.",
   "UsefulTips": "ප්‍රයෝජනවත් {{productName}} ඉඟි",
-  "UsefulTipsDescription": "{{productName}} ගැන ප්‍රයෝජනවත් මාර්ගෝපදේශ ලබා ගන්න",
-  "ActionsWithFilesDescription": "ලාංඡන මගින් {{rooms}}, {{shared}}, {{documents}}, සහ {{aiAgents}} යන කොටස් පුරා ගොනු ක්‍රියාකාරකම් — උඩුගත කිරීම්, සංස්කරණ හෝ බෙදාගැනීම් — ඉස්මතු කරනු ඇත.",
-  "RoomsActivityDescription": "ඔබේ {{rooms}} සහ {{aiAgents}} තුළ නවීනව බෙදාගත් ගොනු/ෆෝල්ඩර් සහ ක්‍රියාකාරකම් පිළිබඳ ක්ෂණික ඊමේල් දැනුම්දීම් ලබා ගන්න.",
-  "RoomUpdateNotify": "අන්තර්ගතය, {{rooms}} සහ {{aiAgents}} ක්‍රියාකාරකම්"
+  "UsefulTipsDescription": "{{productName}} ගැන ප්‍රයෝජනවත් මාර්ගෝපදේශ ලබා ගන්න"
 }

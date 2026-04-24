@@ -3,17 +3,18 @@
   "content": "Sign up with Zoom",
   "content_en_sha1_hash": "2596473d7776e251c5ee2d75c7cf026af02ce2c9",
   "created_at": "2025-05-19T21:30:48.880Z",
-  "updated_at": "2026-04-10T08:21:04.402Z",
+  "updated_at": "2026-04-23T17:24:02.129Z",
   "comment": {
-    "text": "The \"SignUpWithZoom\" translation key is used to display the label for a button that allows users to sign up using Zoom. This text is typically displayed on a sign-up or registration form and may appear in a dialog or modal window. Its purpose is to provide clarity to users about how they can complete the sign-up process with their Zoom account.",
+    "text": "This is a button label that allows users to create a new account using their Zoom credentials.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:39:42.336Z"
+    "updated_at": "2026-04-11T20:42:29.402Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 485,
-      "context": "? t(\"Common:SignUpWithMicrosoft\")\n : t(\"Common:SignInWithMicrosoft\");\n case \"sso\":\n return signUp ? t(\"Common:SignUpWithSso\") : t(\"Common:SignInWithSso\");\n case \"zoom\":\n return signUp ? t(\"Common:SignUpWithZoom\") : t(\"Common:SignInWithZoom\");\n case \"weixin\":\n return signUp\n ? t(\"Common:SignUpWithWechat\")\n : t(\"Common:SignInWithWechat\");\n default:",
+      "line_number": 481,
+      "context": "? t(\"Common:SignUpWithMicrosoft\")\n : t(\"Common:SignInWithMicrosoft\");\n case \"sso\":\n return signUp ? t(\"Common:SignUpWithSso\") : t(\"Common:SignInWithSso\");\n case \"zoom\":\n return signUp ? t(\"Common:SignUpWithZoom\") : t(\"Common:SignInWithZoom\");\n case \"weixin\":\n return signUp\n ? t(\"Common:SignUpWithWechat\")\n : t(\"Common:SignInWithWechat\");\n case \"nextcloud\":",
       "module": "/packages/shared"
     }
   ],
@@ -39,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation 'Влезте чрез Zoom' means 'Sign in with Zoom' (Login), whereas the English source is 'Sign up with Zoom' (Registration).",
-          "suggestion": "Регистрирайте се чрез Zoom"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -57,13 +52,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation 'Mit Zoom anmelden' means 'Sign in with Zoom' (Login), whereas the English source is 'Sign up with Zoom' (Registration).",
-          "suggestion": "Mit Zoom registrieren"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -117,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation means 'Sign in with Zoom' (Login) instead of 'Sign up with Zoom' (Register/Create account).",
-          "suggestion": "ລົງທະບຽນດ້ວຍ Zoom"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -159,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Conectare prin Zoom' means 'Connect via Zoom' or 'Log in via Zoom', which corresponds to 'Sign in'. The English source is 'Sign up', which refers to the registration process.",
-          "suggestion": "Înregistrare prin Zoom"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

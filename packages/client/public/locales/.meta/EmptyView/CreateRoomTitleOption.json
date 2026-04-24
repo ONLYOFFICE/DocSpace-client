@@ -3,16 +3,17 @@
   "content": "Create a new room",
   "content_en_sha1_hash": "7543118f67e8c1eeab8888123f4f7842772502be",
   "created_at": "2025-05-19T21:30:56.463Z",
-  "updated_at": "2026-04-07T19:35:05.070Z",
+  "updated_at": "2026-04-11T21:07:17.095Z",
   "comment": {
-    "text": "This translation key is used to display a button title in an EmptyViewContainer component, inviting users to \"Create a new room\". The text appears on a button that triggers the creation of a new room.",
+    "text": "This is the title for an option to create a new room, displayed as a button label or menu item.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:50.930Z"
+    "updated_at": "2026-04-11T21:07:17.095Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 373,
+      "line_number": 374,
       "context": "onClick: () => actions.onCreate(\"pdf\", undefined, t),\n disabled: !security?.Create,\n };\n \n const createRoom = {\n title: t(\"EmptyView:CreateRoomTitleOption\"),\n description: t(\"EmptyView:CreateRoomDescriotionOption\"),\n icon: <CreateRoom />,\n key: \"create-room\",\n onClick: actions.onCreateRoom,\n disabled: false,",
       "module": "/packages/client"
     }

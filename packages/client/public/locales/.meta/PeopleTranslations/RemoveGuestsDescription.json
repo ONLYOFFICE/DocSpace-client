@@ -3,11 +3,12 @@
   "content": "Selected guests will be removed from all rooms you have invited them to. This action cannot be undone.",
   "content_en_sha1_hash": "072226a1cb04c58c10506357b750c19bbcbbe35b",
   "created_at": "2025-05-19T21:30:53.506Z",
-  "updated_at": "2026-04-09T07:29:55.394Z",
+  "updated_at": "2026-04-11T21:20:04.332Z",
   "comment": {
-    "text": "Selected guests will be removed from all rooms you have invited them to. This action cannot be undone. It is used as a descriptive text in a button within a modal dialog in the \"RemoveGuests\" feature.",
+    "text": "This is the body text of a confirmation dialog. It warns the user that removing selected guests is irreversible and affects all rooms they were invited to.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:36.632Z"
+    "updated_at": "2026-04-11T21:20:04.332Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation contains a grammatical error that changes the sentence structure: 'Seçilmiş qonaqlar onları...' translates to 'Selected guests they will be removed...', which is redundant and grammatically incorrect in Azerbaijani. It should be 'Seçilmiş qonaqlar... silinəcək'.",
-          "suggestion": "Seçilmiş qonaqlar dəvət etdiyiniz bütün otaqlardan silinəcək. Bu əməliyyat geri qaytarıla bilməz."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -105,25 +100,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation says 'rooms you invited them to' (초대한 모든 방), which implies the user invited the guests to the rooms. However, the English 'all rooms you have invited them to' in this context refers to the rooms where the guests are currently members because of the user's invitation. More critically, the Korean phrasing '선택된 게스트가 초대한 모든 방' literally translates to 'The selected guests' rooms that they invited', which reverses the subject-object relationship of the invitation.",
-          "suggestion": "선택한 게스트가 귀하가 초대한 모든 방에서 제거됩니다. 이 작업은 취소할 수 없습니다."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'ບັນແຍກ' (ban yaek) used in the translation means 'to separate' or 'to distinguish', but in this context, it implies 'to select' or 'to highlight' (Selected guests). More importantly, 'ຄົນເດັ່ນ' (khon den) means 'prominent/distinguished people' or 'VIPs', which is a complete mistranslation of 'Selected guests'. The English refers to guests that the user has checked/selected in the UI, not VIP guests.",
-          "suggestion": "ແຂກທີ່ຖືກເລືອກຈະຖືກລຶບອອກຈາກທຸກຫ້ອງທີ່ທ່ານໄດ້ເຊີນພວກເຂົາເຂົ້າໄປ. ການກະທຳນີ້ບໍ່ສາມາດຍົກເລີກໄດ້."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {

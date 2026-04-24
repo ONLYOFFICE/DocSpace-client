@@ -37,6 +37,8 @@ const moduleWorkspaces = [
   "packages/login",
   "packages/shared",
   "packages/management",
+  "packages/sdk",
+  "libs/ui-kit",
 ];
 
 const getWorkSpaces = () => {
@@ -176,9 +178,10 @@ const pattern1 =
 const pattern2 = 'i18nKey="([a-zA-Z0-9_.:-]+)"';
 const pattern3 = 'tKey:\\s"([a-zA-Z0-9_.:-]+)"';
 const pattern4 = 'getTitle\\("([a-zA-Z0-9_.:-]+)"\\)';
+const pattern5 = 'getCommonTranslation\\("([a-zA-Z0-9_.:-]+)"[\\s,)]';
 
 const regexp = new RegExp(
-  `(${pattern1})|(${pattern2})|(${pattern3})|(${pattern4})`,
+  `(${pattern1})|(${pattern2})|(${pattern3})|(${pattern4})|(${pattern5})`,
   "gm"
 );
 
@@ -205,7 +208,7 @@ javascripts.forEach(({ workspace, files }) => {
     const matches = [...jsFileText.matchAll(regexp)];
 
     const translationKeys = matches
-      .map((m) => m[2] || m[4] || m[6] || m[8])
+      .map((m) => m[2] || m[4] || m[6] || m[8] || m[10])
       .filter((m) => m != null);
 
     if (translationKeys.length === 0) return;
@@ -215,10 +218,12 @@ javascripts.forEach(({ workspace, files }) => {
       let lineNumber = 0;
       let codeFragment = "";
 
-      // Find the line number where the key is used
+      // Find the line number where the key is used (match key in quotes to avoid partial matches)
+      const escapedKey = key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const keyInQuotes = new RegExp(`["'\`]${escapedKey}["'\`]`);
       const lines = jsFileText.split("\n");
       for (let i = 0; i < lines.length; i++) {
-        if (lines[i].includes(key)) {
+        if (keyInQuotes.test(lines[i])) {
           lineNumber = i + 1; // Convert to 1-based line numbering
 
           // Extract code fragment with context (5 lines before and after)

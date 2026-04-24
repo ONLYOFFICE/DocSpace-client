@@ -517,7 +517,7 @@ Your comment should be informative and helpful for translators who need to under
 
     // Use Ollama to generate the comment
     const ollamaClient = new Ollama({ host: ollamaConfig.apiUrl });
-    const model = process.env.OLLAMA_DEFAULT_MODEL || "gemma4:latest";
+    const model = process.env.OLLAMA_DEFAULT_MODEL || "gemma4:26b";
 
     console.log(
       `Generating enhanced comment for key: ${key} using model: ${model}`,

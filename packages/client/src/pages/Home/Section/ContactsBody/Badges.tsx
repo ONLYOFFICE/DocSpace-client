@@ -38,6 +38,7 @@ import CatalogSpamIcon from "PUBLIC_DIR/images/icons/16/catalog.spam.react.svg";
 
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
+import { getConstName } from "@docspace/shared/constants/consts";
 
 import styles from "./Badges.module.scss";
 
@@ -100,7 +101,7 @@ const Badges = ({
       {isLDAP ? (
         <Badge
           className="accounts-badge"
-          label={t("Common:LDAP")}
+          label={getConstName("LDAP")}
           color={globalColors.white}
           backgroundColor={
             isBase ? globalColors.secondPurple : globalColors.secondPurpleDark
@@ -113,7 +114,7 @@ const Badges = ({
       {isSSO ? (
         <Badge
           className="accounts-badge"
-          label={t("SSO")}
+          label={getConstName("SSO")}
           color={globalColors.white}
           backgroundColor={
             isBase ? globalColors.secondGreen : globalColors.secondGreenDark

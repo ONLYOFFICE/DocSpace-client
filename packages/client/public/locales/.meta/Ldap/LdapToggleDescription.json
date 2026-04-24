@@ -3,17 +3,18 @@
   "content": "Enable this option if you want to add users from LDAP server to {{productName}} automatically. The added users will be able to authorize using their LDAP server credentials. {{productName}} does not save the user passwords locally and will authenticate users sending their login and password to LDAP server.",
   "content_en_sha1_hash": "da5fb1c0bb22d780f948c5590af28e3858662dfd",
   "created_at": "2025-05-19T21:30:54.320Z",
-  "updated_at": "2026-04-07T19:35:05.151Z",
+  "updated_at": "2026-04-11T21:16:31.891Z",
   "comment": {
-    "text": "Enable this option to automatically add users from an LDAP server to {{productName}}, allowing them to authenticate using their LDAP credentials. This setting is part of PortalSettings and appears in toggle options within the integration settings section.",
+    "text": "This is a descriptive text explaining the functionality of an LDAP integration toggle. It appears below the toggle and describes how automatic user provisioning and authentication from an LDAP server works, including the use of `{{productName}}` as a variable.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:57.029Z"
+    "updated_at": "2026-04-11T21:16:31.891Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ToggleLDAP.js",
-      "line_number": 133,
-      "context": "fontSize=\"12px\"\n fontWeight={400}\n lineHeight=\"16px\"\n className=\"settings_unavailable\"\n >\n {t(\"LdapToggleDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n </div>\n </StyledWrapper>",
+      "line_number": 134,
+      "context": "fontSize=\"12px\"\n fontWeight={400}\n lineHeight=\"16px\"\n className=\"settings_unavailable\"\n >\n {t(\"LdapToggleDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n </div>\n </StyledWrapper>",
       "module": "/packages/client"
     }
   ],

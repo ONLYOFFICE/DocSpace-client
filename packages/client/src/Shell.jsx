@@ -65,6 +65,7 @@ import useCreateFileError from "./Hooks/useCreateFileError";
 import { SectionNavigationProvider } from "./contexts/SectionNavigationContext";
 
 import ReactSmartBanner from "./components/SmartBanner";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const Shell = ({ page = "home", ...rest }) => {
   const {
@@ -109,7 +110,7 @@ const Shell = ({ page = "home", ...rest }) => {
   const { t, ready } = useTranslation(["Common", "SmartBanner"]);
 
   useEffect(() => {
-    if (!logoText) setLogoText(t("Common:OrganizationName"));
+    if (!logoText) setLogoText(getBrandName("OrganizationName"));
   }, [logoText, setLogoText]);
 
   useEffect(() => {
@@ -342,7 +343,7 @@ const Shell = ({ page = "home", ...rest }) => {
       headerText: t("Attention"),
       text: `${t("BarMaintenanceDescription", {
         targetDate,
-        productName: `${logoText} ${t("Common:ProductName")}`,
+        productName: `${logoText} ${getBrandName("ProductName")}`,
       })} ${t("BarMaintenanceDisclaimer")}`,
       isMaintenance: true,
       onAction: () => {

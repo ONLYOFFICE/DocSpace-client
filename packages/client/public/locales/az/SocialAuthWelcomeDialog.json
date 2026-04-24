@@ -1,8 +1,8 @@
 {
   "ChangeData": "Məlumatları və şifrəni dəyiş",
+  "ClickButtonBelow": "E-poçtunuzla daxil olmaq istəyirsinizsə, zəhmət olmasa, öz şifrənizi təyin edin. <br/> Hazır olduqdan sonra, zəhmət olmasa, aşağıdakı düyməni sıxın.",
   "ContinueToProduct": "{{productName}} ilə davam edin",
   "GeneratedPassword": "Yaranmış şifrə",
   "ProductNameDetail": "{{productName}} adı",
-  "ReviewAccountDetails": "Xüsusi hesab məlumatlarınızı nəzərdən keçmək üçün bir dəqiqə vaxt ayırın:",
-  "ClickButtonBelow": "E-poçtunuzla daxil olmaq istəyirsinizsə, zəhmət olmasa, öz şifrənizi təyin edin. <br/> Hazır olduqdan sonra, zəhmət olmasa, aşağıdakı düyməni sıxın."
+  "ReviewAccountDetails": "Xüsusi hesab məlumatlarınızı nəzərdən keçmək üçün bir dəqiqə vaxt ayırın:"
 }

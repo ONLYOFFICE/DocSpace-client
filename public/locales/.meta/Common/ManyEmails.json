@@ -3,13 +3,20 @@
   "content": "Too many email addresses parsed",
   "content_en_sha1_hash": "7531bc36e27ca0a753d1abb3356083e66a1e9e71",
   "created_at": "2025-05-19T21:30:46.366Z",
-  "updated_at": "2026-04-10T08:21:04.301Z",
+  "updated_at": "2026-04-13T14:59:05.750Z",
   "comment": {
-    "text": "This translation key is used to display an error message when too many email addresses are parsed. It appears in a dialog box, specifically when the user attempts to change their email address and exceeds the maximum allowed limit.",
+    "text": "This is an error message displayed when a user attempts to input multiple email addresses into a field designed for a single email address.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:33.778Z"
+    "updated_at": "2026-04-11T20:48:58.394Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
+      "line_number": 141,
+      "context": "case ErrorKeys.MaxLengthExceeded:\n return t(\"MaxLengthExceeded\");\n case ErrorKeys.IncorrectEmail:\n return t(\"IncorrectEmail\");\n case ErrorKeys.ManyEmails:\n return t(\"ManyEmails\");\n case ErrorKeys.EmptyEmail:\n return t(\"EmptyEmail\");\n default:\n throw new Error(\"Unknown translation key\");\n }",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeEmailDialog/index.js",
       "line_number": 145,
@@ -27,25 +34,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation 'تم تحليل العديد من عناوين البريد الالكتروني' means 'Many email addresses were analyzed', which is a neutral statement. The English source 'Too many email addresses parsed' is an error message indicating a limit has been exceeded. The translation fails to convey the 'Too many' (excessive/limit exceeded) aspect of the error.",
-          "suggestion": "تم تحليل عدد كبير جداً من عناوين البريد الإلكتروني"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Xanada xeyli elektron poçt qeyd olunub' is nonsensical in this context. 'Xanada' translates to 'In Xanadu' (a mythical place), which is completely unrelated to the technical error of parsing too many email addresses.",
-          "suggestion": "Çox sayda elektron poçt ünvanı ayrıldı"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -63,49 +58,25 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation 'Mehrere E-Mails im Feld' means 'Multiple emails in the field', which describes a state rather than the error condition 'Too many email addresses parsed'. It fails to convey that a limit has been exceeded.",
-          "suggestion": "Zu viele E-Mail-Adressen erkannt"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation uses 'μηνύματα email' (email messages) instead of 'διευθύνσεις email' (email addresses). This changes the meaning from a limit on the number of addresses to a limit on the number of messages.",
-          "suggestion": "Αναλύθηκαν πάρα πολλές διευθύνσεις email"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Spanish translation 'El campo contiene más de un email' (The field contains more than one email) changes the meaning from 'too many email addresses parsed' (which implies a limit was exceeded during a parsing process) to simply having more than one email in a field. While similar, it fails to capture the 'parsed' aspect and the sense of exceeding a specific threshold/limit implied by 'too many'.",
-          "suggestion": "Se detectaron demasiadas direcciones de correo electrónico"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation 'Liian monta jäsenneltyä sähköpostia' means 'Too many parsed emails' (referring to the messages themselves), whereas the English 'Too many email addresses parsed' refers to the count of individual addresses extracted from a string. The current translation is ambiguous and technically inaccurate in a UI context.",
-          "suggestion": "Liian monta tunnistettua sähköpostiosoitetta"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -129,13 +100,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation '解析されたメール数が多すぎる' means 'The number of parsed emails is too high', which implies a count of email messages. The English 'Too many email addresses parsed' refers to the number of individual email addresses extracted/identified. In a UI context for changing an email, this is a critical distinction.",
-          "suggestion": "解析されたメールアドレスが多すぎます"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -153,37 +118,19 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation translates 'email addresses' as 'e-pasta ziņojumu' (email messages) instead of 'e-pasta adreses' (email addresses). This changes the meaning from a limit on the number of addresses to a limit on the number of messages.",
-          "suggestion": "Pārāk daudz e-pasta adrešu parsēts"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Dutch translation 'Te veel e-mails verwerkt' means 'Too many emails processed', which loses the specific meaning of 'email addresses parsed'. It implies the emails themselves were processed, rather than the extraction/parsing of addresses from a string.",
-          "suggestion": "Te veel e-mailadressen geanalyseerd"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation 'Podano za dużo adresów e-mail' means 'Too many email addresses were provided/entered', whereas the English 'Too many email addresses parsed' refers to the technical process of parsing/extracting addresses from a string. While close, it changes the nuance from a system action (parsing) to a user action (providing).",
-          "suggestion": "Zidentyfikowano zbyt wiele adresów e-mail"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -195,13 +142,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Muitos e-mails analisados' means 'Many emails analyzed', which implies a successful process. The English source 'Too many email addresses parsed' is an error message indicating a limit has been exceeded. The translation fails to convey the error/limit aspect.",
-          "suggestion": "Muitos endereços de e-mail foram processados"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -213,13 +154,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Russian translation says 'The field contains more than one email', whereas the English source says 'Too many email addresses parsed'. The Russian version implies a limit of exactly one, while the English implies a limit has been exceeded during the parsing process (which could be more than one, but not 'too many').",
-          "suggestion": "Слишком много распознанных адресов электронной почты"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {

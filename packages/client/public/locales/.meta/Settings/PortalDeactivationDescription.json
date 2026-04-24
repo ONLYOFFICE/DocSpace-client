@@ -3,17 +3,18 @@
   "content": "Use this option to deactivate your space temporarily.",
   "content_en_sha1_hash": "173ddeb92e310d8df9c3efe67b3c5b32e8a55258",
   "created_at": "2025-05-19T21:30:52.185Z",
-  "updated_at": "2026-04-09T02:05:00.480Z",
+  "updated_at": "2026-04-11T21:23:02.142Z",
   "comment": {
-    "text": "This translation key is used to display a temporary deactivation message for a portal. It appears on a page where an owner can temporarily deactivate their space and is part of the UI when activating or deactivating employee status.",
+    "text": "This is a description displayed below the \"Deactivate space\" button in the portal settings. It explains the purpose of deactivating the space.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:48.243Z"
+    "updated_at": "2026-04-11T21:23:02.142Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/delete-data/portalDeactivation.js",
-      "line_number": 80,
-      "context": "owner?.activationStatus === EmployeeActivationStatus.NotActivated;\n \n return (\n <MainContainer>\n <Text fontSize=\"13px\" className=\"description\">\n {t(\"PortalDeactivationDescription\")}\n </Text>\n <Text className=\"helper\">\n {t(\"PortalDeactivationHelper\", {\n productName: t(\"Common:ProductName\"),\n })}",
+      "line_number": 81,
+      "context": "owner?.activationStatus === EmployeeActivationStatus.NotActivated;\n \n return (\n <MainContainer>\n <Text fontSize=\"13px\" className=\"description\">\n {t(\"PortalDeactivationDescription\")}\n </Text>\n <Text className=\"helper\">\n {t(\"PortalDeactivationHelper\", {\n productName: getBrandName(\"ProductName\"),\n })}",
       "module": "/packages/client"
     }
   ],
@@ -27,25 +28,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'إستضافتك' (your hosting) is used instead of 'مساحتك' (your space). In the context of ONLYOFFICE DocSpace, 'Space' refers to a specific workspace/portal entity, not web hosting services.",
-          "suggestion": "استخدم هذا الخيار لإلغاء تنشيط مساحتك مؤقتًا."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'Domeninizi' (Your domain) instead of 'space' (məkan/sahə), which changes the technical object being deactivated.",
-          "suggestion": "Məkanınızı müvəqqəti olaraq deaktiv etmək üçün bu seçimdən istifadə edin."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -159,13 +148,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text refers to 'your space', but the Russian translation uses 'портала' (portal). In the context of ONLYOFFICE DocSpace, 'space' and 'portal' are distinct entities.",
-          "suggestion": "Используйте эту опцию для временной деактивации вашего пространства."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -183,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation is grammatically nonsensical and does not convey the meaning of the English sentence. 'S to možnostjo začasno deaktivirate svoj prostor' translates roughly to 'With this option you temporarily deactivate your space', but the structure is broken/incorrect in Slovenian.",
-          "suggestion": "To možnost uporabite za začasno deaktivacijo svojega prostora."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

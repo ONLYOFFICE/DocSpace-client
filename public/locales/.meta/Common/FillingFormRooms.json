@@ -3,16 +3,17 @@
   "content": "Filling form",
   "content_en_sha1_hash": "7d83d7eca125edcf45bdc6c74e4efc3a8e517850",
   "created_at": "2025-05-19T21:30:45.351Z",
-  "updated_at": "2026-04-08T09:23:43.725Z",
+  "updated_at": "2026-04-11T20:52:31.090Z",
   "comment": {
-    "text": "The translation key \"FillingFormRooms\" is used to display the label for a filter option in the Home page's room filtering section, specifically when selecting rooms of type \"Filling Forms Room\". This text will appear as the label on a filter dropdown.",
+    "text": "This is a label for a room type, indicating a space dedicated to filling out forms. It appears in filters and as a room title.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:11.304Z"
+    "updated_at": "2026-04-11T20:52:31.090Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 51,
+      "line_number": 52,
       "context": "case RoomsType.AIRoom:\n return t(\"Common:AIRoomTitle\");\n \n case RoomsType.FillingFormsRoom:\n return t(\"Common:FillingFormRooms\");\n \n case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRooms\");\n \n case RoomsType.ReviewRoom:",
       "module": "/packages/client"
     },
@@ -33,13 +34,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Filling form' is a noun phrase acting as a label for a room type ('Filling Forms Room'). The Arabic translation 'قم بتعبئة الاستمارة' is an imperative command ('Fill out the form'), which is grammatically incorrect for a UI filter label/category name.",
-          "suggestion": "غرف تعبئة النماذج"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -51,13 +46,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English 'Filling form' (referring to a room type for filling forms) is translated as 'Form for filling' (a noun phrase describing an object), which changes the meaning from a category/type to a specific document.",
-          "suggestion": "Стая за попълване на формуляри"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -87,37 +76,19 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English 'Filling form' (referring to the action/process or the type of room for filling forms) is translated as 'Täyttölomake', which means 'Filling form' as a noun (the form itself). In the context of a room type label, it should describe the room's purpose or the action. However, more critically, 'Filling form' in English is grammatically awkward for a label; if it refers to 'Filling Forms Room', the Finnish 'Täyttölomake' translates to 'Filling form' (singular), whereas the context implies a category of rooms for filling forms.",
-          "suggestion": "Lomakkeiden täyttöhuoneet"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English source 'Filling form' is a gerund/action phrase, but the French translation 'Salles de remplissages de formulaires' translates to 'Rooms for filling forms'. While the metadata suggests the key refers to a room type, the actual string provided for translation is 'Filling form', making the French translation an over-translation that adds information (Rooms) not present in the source text.",
-          "suggestion": "Remplissage de formulaire"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Լրացման ձև' means 'Form for filling' or 'Filling form' (as a noun phrase), whereas the context indicates this is a label for a room type 'Filling Forms Room'. In Armenian, the current translation sounds like a physical document/form rather than a room dedicated to the activity of filling forms.",
-          "suggestion": "Լրացման ձևերի սենյակ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -147,13 +118,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Aizpildīšanas veidlapa' means 'Filling form' (as in the act of filling a single form) or 'Form for filling', whereas the context indicates this is a label for a room type 'Filling Forms Room'. The current translation is grammatically awkward for a filter label and implies a single form rather than the category of rooms.",
-          "suggestion": "Aizpildīšanai paredzētas telpas"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -225,13 +190,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Turkish translation 'Doldurma formu' means 'Form for filling' or 'Filling form' (as in a noun phrase), whereas the context indicates this is a label for a room type 'Filling Forms Room'. In Turkish, 'Form doldurma odası' or 'Form doldurma' would be more appropriate for a category/type label. 'Doldurma formu' sounds like a specific document rather than a room type/category.",
-          "suggestion": "Form doldurma"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

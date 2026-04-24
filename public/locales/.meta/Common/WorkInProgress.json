@@ -3,17 +3,24 @@
   "content": "Work in progress",
   "content_en_sha1_hash": "e47daa7a6731608211a6729ba435943b8d544c06",
   "created_at": "2025-10-27T16:14:24.228Z",
-  "updated_at": "2026-04-07T19:56:19.407Z",
+  "updated_at": "2026-04-12T08:25:27.748Z",
   "comment": {
-    "text": "This key displays a \"Work in progress\" message, typically shown in a toastr notification when an action is initiated but not yet completed. It appears in various components like dialogs and chat message buttons to inform the user that something is being processed and may take some time. Translators should ensure the translation conveys the meaning of an ongoing, incomplete process.",
+    "text": "This toast message indicates that a feature is not yet fully implemented.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:17:18.665Z"
+    "updated_at": "2026-04-11T20:38:48.047Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/buttons/index.tsx",
+      "line_number": 199,
+      "context": "{/*{isLast ? (*/}\n {/*  <div*/}\n {/*    className={styles.buttonsBlockItem}*/}\n {/*    title={t(\"RefreshMessage\")}*/}\n {/*    onClick={() => {*/}\n {/*      toastr.info(t(\"WorkInProgress\"));*/}\n {/*    }}*/}\n {/*  >*/}\n {/*    <RefreshIcon />*/}\n {/*  </div>*/}\n {/*) : null}*/}",
+      "module": "/libs/ui-kit"
+    },
+    {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/Knowledge.tsx",
-      "line_number": 43,
-      "context": "import { StyledParam } from \"../../../CreateEditDialogParams/StyledParam\";\n \n const KnowledgeSettings = () => {\n const { t } = useTranslation([\"AIRoom\", \"Common\", \"Article\"]);\n \n const onClickAction = () => toastr.info(t(\"Common:WorkInProgress\"));\n \n return (\n <StyledParam increaseGap>\n <div className=\" set_room_params-info\">\n <div>",
+      "line_number": 44,
+      "context": "import { getBrandName } from \"@docspace/shared/constants/brands\";\n \n const KnowledgeSettings = () => {\n const { t } = useTranslation([\"AIRoom\", \"Common\", \"Article\"]);\n \n const onClickAction = () => toastr.info(t(\"Common:WorkInProgress\"));\n \n return (\n <StyledParam increaseGap>\n <div className=\" set_room_params-info\">\n <div>",
       "module": "/packages/client"
     }
   ],
@@ -45,13 +52,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Práce v postupu' is a literal, incorrect translation. In Czech, 'work in progress' (an ongoing process) is idiomatically expressed as 'Práce probíhá' or 'Práce je v průběhu'.",
-          "suggestion": "Práce probíhá"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {

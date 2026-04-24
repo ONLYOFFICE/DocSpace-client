@@ -3,16 +3,17 @@
   "content": "<1>Click here</1> to upgrade your tariff plan.",
   "content_en_sha1_hash": "05e8679da260d74355c1ac6f0c80db766199b304",
   "created_at": "2025-05-19T21:30:54.102Z",
-  "updated_at": "2026-04-07T19:35:05.152Z",
+  "updated_at": "2026-04-11T21:17:51.188Z",
   "comment": {
-    "text": "This translation key is used to display a call-to-action button that encourages users to upgrade their tariff plan. The text will appear as a clickable link within a UI component, likely part of an online quota management system. Translators should provide a clear and actionable message in the user's preferred language.",
+    "text": "This is a link within a sentence, prompting the user to click to upgrade their tariff plan. The `<1>` tag indicates the clickable \"Click here\" portion of the text.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:27.292Z"
+    "updated_at": "2026-04-11T21:17:51.188Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 194,
+      "line_number": 195,
       "context": "});\n \n return (\n <Trans\n t={t}\n i18nKey=\"ClickToUpgradeTariff\"\n components={{\n 1: (\n <Link\n fontSize=\"12px\"\n fontWeight=\"400\"",
       "module": "/packages/client"
     }

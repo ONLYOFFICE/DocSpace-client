@@ -4,6 +4,7 @@ import {
   GuidanceRefKey,
 } from "../sub-components/Guid.types";
 import { GuidanceConfig } from "./configs.types";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const getFormFillingConfig = ({ t }: GuidanceConfig): GuidanceStep[] => [
   {
@@ -28,7 +29,7 @@ export const getFormFillingConfig = ({ t }: GuidanceConfig): GuidanceStep[] => [
     id: 2,
     header: t("FormFillingTipsDialog:HeaderSharing"),
     description: t("FormFillingTipsDialog:TitleSharing", {
-      productName: t("Common:ProductName"),
+      productName: getBrandName("ProductName"),
     }),
     key: "form-filling-sharing",
     placement: "bottom",
@@ -86,7 +87,7 @@ export const getFormFillingConfig = ({ t }: GuidanceConfig): GuidanceStep[] => [
     id: 5,
     header: t("FormFillingTipsDialog:HeaderUploading"),
     description: t("FormFillingTipsDialog:DescriptionUploading", {
-      productName: t("Common:ProductName"),
+      productName: getBrandName("ProductName"),
       sectionName: t("Common:MyDocuments"),
     }),
     key: "form-filling-uploading",

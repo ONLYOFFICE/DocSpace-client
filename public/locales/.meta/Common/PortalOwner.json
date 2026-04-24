@@ -3,17 +3,18 @@
   "content": "{{productName}} owner",
   "content_en_sha1_hash": "e8aa10492ad74ad965ab75de5d6375a78839f508",
   "created_at": "2025-05-19T21:30:47.420Z",
-  "updated_at": "2026-04-08T02:31:57.120Z",
+  "updated_at": "2026-04-12T04:17:21.604Z",
   "comment": {
-    "text": "This translation key is used to display the phrase \"{{productName}} owner\" in various UI contexts. It appears on user profiles and other views related to ownership, indicating whether a user has full access or not.",
+    "text": "This is a tooltip text that identifies the owner of the DocSpace portal. It appears when hovering over a user's avatar or name, indicating that the user has full administrative control. `{{productName}}` will be replaced with \"ONLYOFFICE DocSpace\".",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:34:59.873Z"
+    "updated_at": "2026-04-11T20:46:15.589Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/components/share/sub-components/User.tsx",
-      "line_number": 135,
-      "context": "const uniqueTooltipId = `userTooltip_${id}`;\n \n const tooltipContent = `${\n \"isOwner\" in user && user.isOwner\n ? t(\"Common:PortalOwner\", { productName: t(\"Common:ProductName\") })\n : t(\"Common:PortalAdmin\", { productName: t(\"Common:ProductName\") })\n }. ${t(\"Common:HasFullAccess\")}`;\n \n const itemAvatar = isSystem\n ? EveryoneIconUrl",
+      "line_number": 136,
+      "context": "const uniqueTooltipId = `userTooltip_${id}`;\n \n const tooltipContent = `${\n \"isOwner\" in user && user.isOwner\n ? t(\"Common:PortalOwner\", { productName: getBrandName(\"ProductName\") })\n : t(\"Common:PortalAdmin\", { productName: getBrandName(\"ProductName\") })\n }. ${t(\"Common:HasFullAccess\")}`;\n \n const itemAvatar = isSystem\n ? EveryoneIconUrl",
       "module": "/packages/shared"
     }
   ],
@@ -81,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'տնօրինող' (tnorinoğ) means 'administrator' or 'manager' rather than 'owner'. In the context of software ownership/permissions, 'ባለաճապ' or 'տեր' is more accurate for 'owner'.",
-          "suggestion": "{{productName}}-ի տեր"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {

@@ -3,11 +3,12 @@
   "content": "Decrypt Assertions",
   "content_en_sha1_hash": "eaebd6a20f344646b8d0e78e11449954b24a719a",
   "created_at": "2025-05-19T21:30:50.160Z",
-  "updated_at": "2026-04-08T22:44:40.731Z",
+  "updated_at": "2026-04-11T21:26:25.500Z",
   "comment": {
-    "text": "Decrypt statements are presented as a checkbox label to enable or disable encryption of assertions during single sign-on integration. This key is used in UI components, such as checkboxes, where users can toggle this setting.",
+    "text": "This is a checkbox label in the Single Sign-On settings. It allows users to choose whether to decrypt assertions received from the Identity Provider.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:06.090Z"
+    "updated_at": "2026-04-11T21:26:25.500Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -39,61 +40,31 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English term 'Assertions' in a technical/security context (SSO/SAML) refers to 'утверждения' or 'асерции', but 'твърдения' is a literal translation that sounds like 'claims' or 'statements' in a general sense. More importantly, the English source 'Decrypt Assertions' is likely a typo in the source code key/label provided, as the context and variable names (sp-encrypt-assertions, spEncryptAssertions) suggest the action should be 'Encrypt Assertions'. However, strictly following the provided English text 'Decrypt Assertions', the Bulgarian 'Декриптиране на твърдения' is a semantic mismatch for technical 'Assertions' in SSO, which are typically 'асерции'.",
-          "suggestion": "Декриптиране на асерции"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Decrypt Assertions' is an imperative/action command (or a setting name), whereas the Czech translation 'Dešifrování tvrzení' is a noun phrase meaning 'Decryption of assertions'. In the context of a checkbox label for a setting, it should be an action or a direct label.",
-          "suggestion": "Dešifrovat tvrzení"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Decrypt Assertions' refers to a technical process in SSO (Security Assertion Markup Language), where 'Assertions' are specific security tokens/statements. In German, 'Behauptungen' is a literal translation of 'assertions' in a general/argumentative sense, which is incorrect in a technical IT context. The correct technical term is 'Assertions'.",
-          "suggestion": "Assertions entschlüsseln"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English source 'Decrypt Assertions' (action/command) is translated as 'Αποκρυπτογράφηση ισχυρισμών' (noun phrase). More importantly, the context and code key 'sp-encrypt-assertions' suggest the intended function is 'Encrypt Assertions' (Κρυπτογράφηση), but the English text provided is 'Decrypt'. However, strictly comparing the provided English 'Decrypt Assertions' to the Greek 'Αποκρυπτογράφηση ισχυρισμών', the Greek word 'ισχυρισμών' (statements/claims) is a valid but less technical translation for 'assertions' in a security context; 'αποклиρώσεων' or 'διαπιστώσεων' would be more precise, but the primary issue is the mismatch between the English command and the Greek noun phrase.",
-          "suggestion": "Αποκρυπτογράφηση διαπιστώσεων"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Decrypt Assertions' implies the action of decrypting, but the context and the code key 'sp-encrypt-assertions' indicate this is a setting to enable/disable the encryption of assertions. In Spanish, 'Descifrar aserciones' means 'to decrypt assertions', whereas the functional intent of the checkbox (based on the code key and context) is 'Cifrar aserciones' (Encrypt assertions).",
-          "suggestion": "Cifrar aserciones"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -129,13 +100,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Assertions' is transliterated as '어설션' (eoseol-syeon), which is a phonetic approximation. In a technical context regarding SSO and security, 'Assertion' should be translated as '어설션' or more accurately '어설션(Assertion)' or '단언/주장' depending on the standard, but '해독 어설션' sounds like a direct transliteration of a technical term that may not be intuitive. More importantly, 'Decrypt' (해독) refers to the action, but in the context of a checkbox label for a setting, it often implies the state or the function. However, the primary issue is that 'Assertion' is a specific technical term in SAML/SSO, and while transliteration is common, '해독 어설션' is a very literal and awkward translation.",
-          "suggestion": "어설션 해독"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -165,13 +130,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Decrypt Assertions' refers to the action of decrypting, but the context and the code key 'sp-encrypt-assertions' indicate this is a setting to 'Encrypt Assertions'. Furthermore, 'Descodificar' is a less common term in technical Portuguese for 'Decrypt' compared to 'Decriptar'. Most importantly, there is a semantic mismatch between the English label provided and the functional intent described in the context.",
-          "suggestion": "Criptografar Asserções"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -183,49 +142,25 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Decrypt Assertions' is a command/action (imperative), but the Romanian translation 'Decriptare aserţiuni' uses a noun ('Decriptare' - Decryption) which makes it a label for a process rather than an action to perform. More importantly, the context implies this is a setting to 'Encrypt' or 'Decrypt' assertions, and the Romanian translation lacks the necessary preposition or grammatical structure to function as a proper UI label for this action.",
-          "suggestion": "Decriptați aserțiunile"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English source 'Decrypt Assertions' refers to a technical process involving security assertions (SAML/SSO context), but the Russian translation 'Расшифровывать утверждения' uses an infinitive verb form ('To decrypt') which is grammatically incorrect for a checkbox label. In UI design, checkbox labels should be nouns or adjectives (e.g., 'Decryption of...') or a command/state. Furthermore, 'утверждения' is a literal translation of 'statements/assertions' that sounds unnatural in a technical SSO context; 'ассерции' or 'утверждения' is acceptable, but the verb form is the primary error.",
-          "suggestion": "Расшифровка утверждений"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation uses 'ප්‍රකාශන' (Statements) instead of 'ප්‍රකාශන/අභිමතයන්' (Assertions). While 'Statements' is used in the code key, the English source text provided for verification is 'Decrypt Assertions'. In a technical context regarding SSO and security, 'Assertions' refers to security tokens/claims, and 'ප්‍රකාශන' is a generic term for statements.",
-          "suggestion": "අභිමතයන් විසංකේතනය කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English term 'Assertions' in a technical/security context (SSO/SAML) refers to 'tvrdenia' or 'deklarácie'. 'Vyhlásenia' is a more general term for 'statements' or 'announcements', which might be confusing in a technical SSO integration context.",
-          "suggestion": "Dešifrovať tvrdenia"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -237,37 +172,19 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Decrypt Assertions' refers to the action of decrypting (making readable), but the context and the code key 'sp-encrypt-assertions' suggest this is a setting to 'Encrypt Assertions'. Furthermore, 'тврдњи' (assertions/claims) is a literal translation, but in the context of SSO/SAML, 'assertions' are typically translated as 'потврде'. However, the most critical error is the semantic mismatch between 'Decrypt' and the functional intent of 'Encrypting' assertions.",
-          "suggestion": "Шифровање потврда"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Decrypt Assertions' refers to the action of decrypting security assertions (SAML/SSO context), but the Serbian translation 'Dekripcija tvrdnji' uses 'tvrdnja' which means 'a claim/assertion' in a general/argumentative sense. In technical SSO/SAML contexts, 'assertions' should be translated as 'asercije'.",
-          "suggestion": "Dekriptovanje asercija"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Assertions' is incorrectly translated as 'Bildirimlerde' (In notifications). In a technical/security context like SSO, 'Assertions' refers to security statements/claims, not notifications.",
-          "suggestion": "İddiaların Şifresini Çöz"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -279,13 +196,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Decrypt Assertions' refers to the action of decrypting, but the context and the code key 'sp-encrypt-assertions' indicate this is a setting to 'Encrypt Assertions'. However, strictly comparing the provided English string 'Decrypt Assertions' to the Vietnamese 'Giải mã xác nhận', the word 'Assertions' (technical term in SAML/SSO) is translated as 'xác nhận' (confirmation/verification), which loses the technical meaning of 'assertions' in an identity provider context.",
-          "suggestion": "Giải mã các khẳng định"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

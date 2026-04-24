@@ -72,6 +72,7 @@ import MobileView from "./MobileView";
 import { encryptionUploadDialog } from "../../../helpers/desktop";
 
 import styles from "./main-button.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const ArticleMainButtonContent = (props) => {
   const {
@@ -307,7 +308,7 @@ const ArticleMainButtonContent = (props) => {
         id: "actions_upload-from-docspace",
         className: "main-button_drop-down",
         icon: ActionsUploadReactSvgUrl,
-        label: t("Common:FromPortal", { productName: t("Common:ProductName") }),
+        label: t("Common:FromPortal", { productName: getBrandName("ProductName") }),
         key: "actions_upload-from-docspace",
         disabled: false,
         onClick: () => onShowFormRoomSelectFileDialog(FilterType.PDFForm),
@@ -401,7 +402,7 @@ const ArticleMainButtonContent = (props) => {
         className: "main-button_drop-down",
         icon: MoveReactSvgUrl,
         label: t("EmptyView:UploadFromPortalTitle", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
         }),
         onClick: onShowAiKnowledgeSelectFileDialog,
         key: "upload-files-product",

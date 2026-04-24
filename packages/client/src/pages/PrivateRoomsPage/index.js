@@ -27,100 +27,19 @@
 import DarkGeneralPngUrl from "PUBLIC_DIR/images/dark_general.png";
 import { useState } from "react";
 import { observer, inject } from "mobx-react";
-import styled from "styled-components";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link } from "@docspace/ui-kit/components/link";
 import { Button } from "@docspace/ui-kit/components/button";
 import { Loader } from "@docspace/ui-kit/components/loader";
 import Section from "@docspace/ui-kit/components/section";
 import SectionWrapper from "SRC_DIR/components/Section";
-import { injectDefaultTheme, mobile, tablet } from "@docspace/shared/utils";
 import { Trans, withTranslation } from "react-i18next";
 import { useLocation } from "react-router";
-import { isMobile } from "react-device-detect";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { checkProtocol } from "../../helpers/files-helpers";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
-const StyledPrivacyPage = styled.div.attrs(injectDefaultTheme)`
-  margin-top: ${isMobile ? "80px" : "36px"};
-
-  .privacy-rooms-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 770px;
-    margin: auto;
-    margin-top: 80px;
-  }
-
-  .privacy-rooms-text-header {
-    margin-bottom: 46px;
-  }
-
-  .privacy-rooms-text-dialog {
-    margin-top: 32px;
-    margin-bottom: 42px;
-  }
-
-  .privacy-rooms-text-separator {
-    width: 70%;
-    margin: 28px 0 42px;
-    border-bottom: ${(props) => props.theme.filesPrivateRoom.borderBottom};
-  }
-
-  .privacy-rooms-install-text {
-    text-align: start;
-
-    @media ${mobile} {
-      text-align: center;
-    }
-  }
-
-  .privacy-rooms-install {
-    display: flex;
-    flex-direction: row;
-
-    @media ${mobile} {
-      flex-direction: column;
-    }
-  }
-
-  .privacy-rooms-link {
-    margin-inline-start: 4px;
-    color: ${(props) => props.theme.filesPrivateRoom.linkColor};
-  }
-
-  .privacy-rooms-text-description {
-    margin-top: 28px;
-    color: ${(props) => props.theme.filesPrivateRoom.textColor};
-    p {
-      margin: 0;
-    }
-  }
-
-  .privacy-rooms-avatar {
-    text-align: start;
-    padding-inline-start: 66px;
-
-    @media ${tablet} {
-      padding-inline-start: 74px;
-    }
-
-    @media ${mobile} {
-      padding: 0px;
-      text-align: center;
-    }
-
-    margin: 0px;
-  }
-
-  .privacy-rooms-logo {
-    text-align: center;
-    max-width: 216px;
-    max-height: 35px;
-  }
-`;
+import styles from "./PrivateRoomsPage.module.scss";
 
 const PrivacyPageComponent = ({ t, tReady, logoText, desktopUrl }) => {
   const [isDisabled, setIsDisabled] = useState(false);
@@ -144,11 +63,11 @@ const PrivacyPageComponent = ({ t, tReady, logoText, desktopUrl }) => {
   return !tReady ? (
     <Loader className="pageLoader" type="rombs" size="40px" />
   ) : (
-    <StyledPrivacyPage>
-      <div className="privacy-rooms-avatar">
+    <div className={styles.styledPrivacyPage}>
+      <div className={styles.privacyRoomsAvatar}>
         <Link href="/">
           <img
-            className="privacy-rooms-logo"
+            className={styles.privacyRoomsLogo}
             src={DarkGeneralPngUrl}
             width="320"
             height="181"
@@ -157,10 +76,10 @@ const PrivacyPageComponent = ({ t, tReady, logoText, desktopUrl }) => {
         </Link>
       </div>
 
-      <div className="privacy-rooms-body">
+      <div className={styles.privacyRoomsBody}>
         <Text
           textAlign="center"
-          className="privacy-rooms-text-header"
+          className={styles.privacyRoomsTextHeader}
           fontSize="38px"
         >
           {t("PrivacyHeader")}
@@ -182,7 +101,7 @@ const PrivacyPageComponent = ({ t, tReady, logoText, desktopUrl }) => {
 
         <Text
           textAlign="center"
-          className="privacy-rooms-text-dialog"
+          className={styles.privacyRoomsTextDialog}
           fontSize="20px"
           fontWeight={300}
         >
@@ -198,11 +117,11 @@ const PrivacyPageComponent = ({ t, tReady, logoText, desktopUrl }) => {
           })}
         />
 
-        <label className="privacy-rooms-text-separator" />
+        <label className={styles.privacyRoomsTextSeparator} />
 
-        <div className="privacy-rooms-install">
+        <div className={styles.privacyRoomsInstall}>
           <Text
-            className="privacy-rooms-install-text"
+            className={styles.privacyRoomsInstallText}
             fontSize="16px"
             fontWeight={300}
           >
@@ -211,7 +130,7 @@ const PrivacyPageComponent = ({ t, tReady, logoText, desktopUrl }) => {
             })}
           </Text>
           <Link
-            className="privacy-rooms-link privacy-rooms-install-text"
+            className={`${styles.privacyRoomsLink} ${styles.privacyRoomsInstallText}`}
             fontSize="16px"
             isHovered
             href={desktopUrl}
@@ -224,7 +143,7 @@ const PrivacyPageComponent = ({ t, tReady, logoText, desktopUrl }) => {
           as="div"
           fontSize="12px"
           textAlign="center"
-          className="privacy-rooms-text-description"
+          className={styles.privacyRoomsTextDescription}
         >
           <p>
             {t("PrivacyDescriptionEditors", {
@@ -235,7 +154,7 @@ const PrivacyPageComponent = ({ t, tReady, logoText, desktopUrl }) => {
           <p>{t("PrivacyDescriptionConnect")}.</p>
         </Text>
       </div>
-    </StyledPrivacyPage>
+    </div>
   );
 };
 

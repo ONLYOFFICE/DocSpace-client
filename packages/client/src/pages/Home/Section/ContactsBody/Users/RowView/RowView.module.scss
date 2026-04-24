@@ -24,37 +24,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-import { isMobile } from "react-device-detect";
+@use "@docspace/ui-kit/styles/mixins";
 
-import {
-  RowContainer,
-  Row,
-  RowContent,
-} from "@docspace/ui-kit/components/rows";
-import { mobile, tablet } from "@docspace/ui-kit/utils/device";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-
-const marginStyles = css`
-  margin-inline: -24px;
-  padding-inline: 24px;
-
-  @media ${tablet} {
-    margin-inline: -16px;
-    padding-inline: 16px;
-  }
-`;
-
-export const StyledRowContainer = styled(RowContainer)`
+.styledRowContainer {
   .row-selected + .row-wrapper:not(.row-selected) {
     .user-row {
-      ${marginStyles}
+      margin-inline: -24px;
+      padding-inline: 24px;
+
+      @include mixins.tablet-and-below {
+        margin-inline: -16px;
+        padding-inline: 16px;
+      }
     }
   }
 
   .row-wrapper:not(.row-selected) + .row-selected {
     .user-row {
-      ${marginStyles}
+      margin-inline: -24px;
+      padding-inline: 24px;
+
+      @include mixins.tablet-and-below {
+        margin-inline: -16px;
+        padding-inline: 16px;
+      }
     }
   }
 
@@ -65,8 +58,7 @@ export const StyledRowContainer = styled(RowContainer)`
 
     .row-selected {
       .user-row {
-        border-top-color: ${(props) =>
-          `${props.theme.filesSection.tableView.row.borderColor} !important`};
+        border-top-color: var(--files-section-table-view-row-border-color) !important;
       }
     }
   }
@@ -74,126 +66,112 @@ export const StyledRowContainer = styled(RowContainer)`
   .row-list-item {
     margin-top: -1px;
   }
-`;
+}
 
-const marginStylesRow = css`
-  margin-inline-start: -24px;
-  padding-inline: 24px;
-
-  @media ${tablet} {
-    margin-inline-start: -16px;
-    padding-inline: 16px;
-  }
-`;
-
-const marginStylesUserRowContainer = css`
-  margin-inline-end: -48px !important;
-
-  @media ${tablet} {
-    margin-inline-end: -32px !important;
-  }
-`;
-
-const checkedStyle = css`
-  background: ${(props) => props.theme.filesSection.rowView.checkedBackground};
-  ${marginStylesRow}
-`;
-
-export const StyledWrapper = styled.div<{
-  checked?: boolean;
-  isActive?: boolean;
-  value?: string;
-}>`
+.styledWrapper {
   .user-item {
     border: 1px solid transparent;
     border-inline: none;
     margin-inline-start: 0;
     height: 100%;
     user-select: none;
-
     position: relative;
     outline: none;
     background: none !important;
   }
 
   .user-row-container {
-    ${(props) =>
-      (props.checked || props.isActive) && marginStylesUserRowContainer};
+    &.expanded {
+      margin-inline-end: -48px !important;
 
-    ${
-      !isMobile &&
-      css`
-      :hover {
-        ${marginStylesUserRowContainer}
+      @include mixins.tablet-and-below {
+        margin-inline-end: -32px !important;
       }
-    `
+    }
+
+    @include mixins.can-hover {
+      &:hover {
+        margin-inline-end: -48px !important;
+
+        @include mixins.tablet-and-below {
+          margin-inline-end: -32px !important;
+        }
+      }
     }
   }
-`;
+}
 
-export const StyledSimpleUserRow = styled(Row)<{
-  checked?: boolean;
-  isActive?: boolean;
-}>`
-  ${(props) => (props.checked || props.isActive) && checkedStyle};
+.styledSimpleUserRow {
+  height: 59px;
+
+  border-top: 1px solid var(--files-section-table-view-row-border-color);
+  border-bottom: 1px solid var(--files-section-table-view-row-border-color);
+
+  box-sizing: border-box;
+  margin-top: -1px;
+
+  position: unset;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+  &.checked,
+  &.active {
+    background: var(--files-section-row-view-checked-background);
+    margin-inline-start: -24px;
+    padding-inline: 24px;
+
+    @include mixins.tablet-and-below {
+      margin-inline-start: -16px;
+      padding-inline: 16px;
+    }
+  }
+
+  @include mixins.can-hover {
+    &:hover {
+      background: var(--files-section-row-view-checked-background);
+      margin-inline-start: -24px;
+      padding-inline: 24px;
+
+      @include mixins.tablet-and-below {
+        margin-inline-start: -16px;
+        padding-inline: 16px;
+      }
+    }
+  }
 
   .row_content {
     height: 58px;
   }
 
-  height: 59px;
-
-  border-top: ${(props) =>
-    `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
-  border-bottom: ${(props) =>
-    `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
-
-  box-sizing: border-box;
-  margin-top: -1px;
-
-  ${
-    !isMobile &&
-    css`
-    :hover {
-      ${checkedStyle}
-    }
-  `
-  }
-
-  position: unset;
-  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
   .styled-element {
     height: 32px;
     margin-inline-end: 12px;
   }
-`;
+}
 
-export const StyledRowContent = styled(RowContent)`
+.styledRowContent {
   .row-content_tablet-side-info {
     white-space: nowrap;
   }
 
-  .name-block{
+  .name-block {
     display: flex;
     align-items: center;
   }
-  
+
   .me-label {
     padding-inline-start: 4px;
-    color: ${(props) => props.theme.infoPanel.members.meLabelColor};
+    color: var(--info-panel-me-label-color);
   }
 
-  @media ${tablet} {
+  @include mixins.tablet-and-below {
     .row-main-container-wrapper {
       width: 100%;
       display: flex;
-      // justify-content: space-between;
       max-width: inherit;
     }
 
     .badges {
       flex-direction: row-reverse;
-
       margin-inline-end: 12px;
 
       .paid-badge {
@@ -202,18 +180,18 @@ export const StyledRowContent = styled(RowContent)`
     }
   }
 
-  @media ${mobile} {
+  @include mixins.mobile {
     .row-main-container-wrapper {
       justify-content: flex-start;
     }
 
     .badges {
-      margin-top: 0px;
+      margin-top: 0;
       gap: 8px;
 
       .paid-badge {
-        margin: 0px;
+        margin: 0;
       }
     }
   }
-`;
+}

@@ -28,7 +28,10 @@ import React, { useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useLocation } from "react-router";
 
-import { TableBody } from "@docspace/ui-kit/components/table";
+import {
+  TableBody,
+  TableContainer,
+} from "@docspace/ui-kit/components/table";
 
 import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
 import { TContactsViewAs } from "SRC_DIR/helpers/contacts";
@@ -43,7 +46,7 @@ import {
   TableViewProps,
   TableViewStores,
 } from "./TableView.types";
-import { StyledTableContainer } from "./TableView.styled";
+import styles from "./TableView.module.scss";
 
 const Table = ({
   peopleList,
@@ -132,7 +135,8 @@ const Table = ({
   const enabledColumns = getEnabledColumns();
 
   return !isUsersEmptyView ? (
-    <StyledTableContainer
+    <TableContainer
+      className={styles.styledTableContainer}
       noSelect={!withContentSelection}
       useReactWindow
       forwardedRef={ref as React.RefObject<HTMLDivElement>}
@@ -180,7 +184,7 @@ const Table = ({
           />
         ))}
       </TableBody>
-    </StyledTableContainer>
+    </TableContainer>
   ) : (
     <EmptyScreen />
   );

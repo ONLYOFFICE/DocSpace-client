@@ -25,44 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
-import styled from "styled-components";
 import { Heading } from "@docspace/ui-kit/components/heading";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { desktop, tablet } from "@docspace/shared/utils";
 
-const StyledContainer = styled.div`
-  display: grid;
-  grid-template-columns: auto 1fr auto auto;
-  align-items: center;
-
-  .arrow-button {
-    margin-inline: -8px 15px;
-    min-width: 17px;
-
-    svg {
-      ${({ theme }) =>
-				theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
-    }
-
-    @media ${tablet} {
-      padding-block: 8px;
-      padding-inline: 8px 0;
-      margin-inline-start: -8px;
-    }
-  }
-
-  .headline-header {
-    @media ${desktop} {
-      margin-inline-start: -9px;
-    }
-  }
-`;
+import styles from "./VersionHistoryHeader.module.scss";
 
 const SectionHeaderContent = (props) => {
 	const { title, onClickBack } = props;
 
 	return (
-		<StyledContainer>
+		<div className={styles.styledContainer}>
 			<IconButton
 				iconName={ArrowPathReactSvgUrl}
 				size="17"
@@ -74,7 +46,7 @@ const SectionHeaderContent = (props) => {
 			<Heading className="headline-header" type="content" truncate>
 				{title}
 			</Heading>
-		</StyledContainer>
+		</div>
 	);
 };
 

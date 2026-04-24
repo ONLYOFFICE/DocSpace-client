@@ -1044,10 +1044,40 @@
 
   --files-section-table-view-exst-color: #{$gray};
   --files-section-table-view-row-border-color: #{$gray-light-mid};
+  --files-section-table-view-row-border-color-transition: #{$light-gray-hover};
+  --files-section-table-view-row-background-active: #{$light-gray-hover};
+  --files-section-table-view-row-background-group: #{$gray-light-mid};
+  --files-section-table-view-row-color: #{$black};
+  --files-section-table-view-row-share-hover-color: #{$light-icons};
   --files-section-table-view-row-index-update: #{$light-active};
   --files-section-table-view-row-index-active: #{$light-blue-action};
 
+  --files-section-tiles-view-side-color: #{$black};
+  --files-section-tiles-view-color: #{$black};
+  --files-section-tiles-view-sub-text-color: #{$light-gray-dark};
+
+  --files-section-table-view-row-side-color: #{$gray};
+
+  --people-table-row-name-color: #{$black};
+  --people-table-row-pending-name-color: #{$gray};
+  --people-table-row-side-info-color: #{$gray};
+  --people-table-row-pending-side-info-color: #{$gray-strong};
+
+  --files-editing-wrapper-color: #{$black};
+  --files-editing-wrapper-border: 1px solid #{$gray-strong};
+  --files-editing-wrapper-border-bottom: 1px solid #{$gray-light-mid};
+  --files-editing-wrapper-tile-background: #{$light-gray-hover};
+  --files-editing-wrapper-tile-item-background: #{$white};
+  --files-editing-wrapper-tile-item-border: #{$gray-strong};
+  --files-editing-wrapper-tile-item-active-border: #{$light-second-main};
+  --files-editing-wrapper-row-item-background: #{$white};
+  --files-editing-wrapper-fill: #{$gray};
+  --files-editing-wrapper-hover-fill: #{$light-gray-dark};
+  --files-editing-wrapper-disabled-background: #{$white};
+
   --files-section-row-view-checked-background: #{$light-gray-hover};
+
+  --files-section-animation-color: #{$light-second-main};
 
   --files-badges-bg-color: #{$white};
   --files-badges-link-color: #{$light-gray-dark};
@@ -1059,10 +1089,40 @@
 
   --files-section-table-view-exst-color: #{$gray};
   --files-section-table-view-row-border-color: #{$gray-dark-strong};
+  --files-section-table-view-row-border-color-transition: #{$gray-dark-strong};
+  --files-section-table-view-row-background-active: #{$light-dark-gray-hover};
+  --files-section-table-view-row-background-group: #{$gray-dark-mid};
+  --files-section-table-view-row-color: #{$white};
+  --files-section-table-view-row-share-hover-color: #{$white};
   --files-section-table-view-row-index-update: #{$dark-active};
   --files-section-table-view-row-index-active: #{$dark-grey-action};
 
+  --files-section-tiles-view-side-color: #{$white};
+  --files-section-tiles-view-color: #{$white};
+  --files-section-tiles-view-sub-text-color: #{$gray-dark};
+
+  --files-section-table-view-row-side-color: #{$gray};
+
+  --people-table-row-name-color: #{$white};
+  --people-table-row-pending-name-color: #{$gray-dark};
+  --people-table-row-side-info-color: #{$gray-dark};
+  --people-table-row-pending-side-info-color: #{$gray-dark-strong};
+
+  --files-editing-wrapper-color: #{$white};
+  --files-editing-wrapper-border: 1px solid #{$gray-dark-strong};
+  --files-editing-wrapper-border-bottom: 1px solid #{$gray-dark-strong};
+  --files-editing-wrapper-tile-background: #{$black};
+  --files-editing-wrapper-tile-item-background: #{$gray-dark-mid};
+  --files-editing-wrapper-tile-item-border: #{$gray};
+  --files-editing-wrapper-tile-item-active-border: #{$white};
+  --files-editing-wrapper-row-item-background: #{$black};
+  --files-editing-wrapper-fill: #{$gray-dark};
+  --files-editing-wrapper-hover-fill: #{$white};
+  --files-editing-wrapper-disabled-background: #{$white};
+
   --files-section-row-view-checked-background: #{$light-dark-gray-hover};
+
+  --files-section-animation-color: #{$light-second-main};
 
   --files-badges-bg-color: #{$black};
   --files-badges-link-color: #{$white};
@@ -1854,6 +1914,34 @@
   --settings-appearance-theme-add-bg: #{$gray-dark-strong};
   --settings-appearance-add-theme-bg: #{$gray-dark-strong};
   --settings-appearance-icon-fill: #{$gray-dark};
+}
+
+.light {
+  --nav-item-separator-color: #{$light-second-main-hover};
+  --nav-item-hover-background: #{$light-blue-main-hover};
+  --nav-item-active-color: #{$white};
+  --nav-item-base-color: #{$light-second-main};
+}
+
+.dark {
+  --nav-item-separator-color: #{$gray-dark-strong};
+  --nav-item-hover-background: #{$gray-dark-strong};
+  --nav-item-active-color: #{$white};
+  --nav-item-base-color: #{$dark-gray-dark};
+}
+
+.light {
+  --files-panels-upload-color: #{$gray};
+  --files-panels-upload-icon-color: #{$light-error-status};
+  --files-panels-upload-positive-status-color: #{$light-status-positive};
+  --files-panels-upload-progress-color: #{$light-gray-dark};
+}
+
+.dark {
+  --files-panels-upload-color: #{$white};
+  --files-panels-upload-icon-color: #{$dark-error-status};
+  --files-panels-upload-positive-status-color: #{$dark-status-positive};
+  --files-panels-upload-progress-color: #{$gray-dark};
 }
 
 .light {
@@ -2798,4 +2886,43 @@
 .dark {
   --dev-tools-card-border: 1px solid #{$gray-dark-strong};
   --dev-tools-card-divider: #{$gray-dark-strong};
+}
+
+.light {
+  --dialogs-border-color: #{$gray-light-mid};
+  --dialogs-link-color: #{$light-blue-main};
+  --files-private-room-border-bottom: 1px solid #{$gray-light-mid};
+  --files-private-room-link-color: #{$link};
+  --files-private-room-text-color: #{$gray-text};
+}
+
+.dark {
+  --dialogs-border-color: #{$gray-dark-mid};
+  --dialogs-link-color: #{$light-blue-main};
+  --files-private-room-border-bottom: 1px solid #{$gray-dark-mid};
+  --files-private-room-link-color: #{$dark-link};
+  --files-private-room-text-color: #{$gray-dark-text};
+}
+
+.light {
+  --create-edit-room-dialog-common-param-description-color: #{$gray};
+  --accounts-badges-disabled-color: #{$light-error-status};
+  --files-version-history-list-fill: #{$gray-strong};
+  --files-version-history-list-stroke: #{$gray-strong};
+  --files-version-history-list-color: #{$gray-strong};
+  --files-version-history-disabled-fill: #{$gray-strong};
+  --files-version-history-link-color: #{$gray};
+  --files-version-history-comment-color: #{$gray};
+}
+
+.dark {
+  --create-edit-room-dialog-common-param-description-color: #{$gray};
+  --accounts-badges-disabled-color: #{$dark-error-status};
+  --files-version-history-list-fill: #{$white};
+  --files-version-history-list-stroke: #{$white};
+  --files-version-history-list-color: #{$white};
+  --files-version-history-disabled-fill: #{$gray-dark-strong};
+  --files-version-history-link-color: #{$gray-dark};
+  --files-version-history-comment-color: #{$gray-dark};
+  --files-version-history-badge-delete-text-color: #{$dark-gray-dark};
 }

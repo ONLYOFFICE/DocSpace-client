@@ -24,112 +24,47 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+import React from "react";
 
-import { injectDefaultTheme, mobile } from "@docspace/shared/utils";
+import classNames from "classnames";
 
-const StyledParam = styled.div.attrs(injectDefaultTheme)<{
+import styles from "./StyledParam.module.scss";
+
+type StyledParamProps = {
   storageLocation?: boolean;
   folderName?: string;
   increaseGap?: boolean;
-}>`
-  box-sizing: border-box;
-  display: flex;
-  width: 100%;
+  className?: string;
+  style?: React.CSSProperties;
+  children?: React.ReactNode;
+};
 
-  ${(props) =>
-    props.storageLocation
-      ? css``
-      : props.folderName
-        ? css`
-            flex-direction: column;
-            gap: 4px;
-          `
-        : ""}
+const StyledParam = ({
+  storageLocation,
+  folderName,
+  increaseGap,
+  className,
+  style,
+  children,
+}: StyledParamProps) => {
+  const composedStyle = increaseGap
+    ? ({ "--param-info-gap": "12px", ...style } as React.CSSProperties)
+    : style;
 
-  .set_room_params-info {
-    display: flex;
-    flex-direction: column;
-    gap: ${(props) => (props.increaseGap ? 12 : 4)}px;
-
-    overflow: hidden;
-
-    .set_room_params-info-title {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 6px;
-
-      .set_room_params-info-title-text {
-        font-weight: 600;
-        font-size: 13px;
-        line-height: 20px;
-      }
-    }
-
-    .set_room_params-info-description {
-      font-weight: 400;
-      font-size: 12px;
-      line-height: 16px;
-      color: ${(props) =>
-        props.theme.createEditRoomDialog.commonParam.descriptionColor};
-    }
-  }
-
-  .set_room_params-toggle {
-    width: 28px;
-    height: 16px;
-    margin: 2px 0;
-  }
-
-  .ai-combobox {
-    padding: 0;
-  } 
-    
-  .provider-combobox.has-error .combo-button {
-    border-color: var(--input-error-border);
-  }
-
-  .ai-button-group {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-
-    @media ${mobile} {
-      flex-direction: column;
-    }
-
-    .ai-button-icon {
-      div {
-        height: 16px;
-      }
-    }
-  }
-
-  .ai-mcp-group {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 8px;
-
-    .ai-mcp-item {
-      height: 32px;
-      padding: 0 8px;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      border-radius: 3px;
-
-      background: var(--filled-button-background-color);
-
-      img {
-        width: 16px;
-        height: 16px;
-      }
-    }
-  }
-`;
+  return (
+    <div
+      className={classNames(
+        styles.styledParam,
+        {
+          [styles.withFolderName]: !storageLocation && !!folderName,
+        },
+        className,
+      )}
+      style={composedStyle}
+    >
+      {children}
+    </div>
+  );
+};
 
 export { StyledParam };

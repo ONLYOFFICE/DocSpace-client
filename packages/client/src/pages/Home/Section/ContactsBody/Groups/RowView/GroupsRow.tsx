@@ -26,8 +26,9 @@
 
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { useTheme } from "styled-components";
 
+import classNames from "classnames";
+import { Row, RowContent } from "@docspace/ui-kit/components/rows";
 import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import {
   Avatar,
@@ -40,11 +41,7 @@ import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 
 import Badges from "../../Badges";
 
-import {
-  GroupsRowWrapper,
-  GroupsRow,
-  GroupsRowContent,
-} from "./RowView.styled";
+import styles from "./RowView.module.scss";
 
 type GroupsRowProps = {
   item: TGroup;
@@ -72,7 +69,6 @@ const GroupsRowComponent = ({
   changeGroupContextSelection,
 }: GroupsRowProps) => {
   const { t } = useTranslation(["People", "Common", "PeopleTranslations"]);
-  const theme = useTheme();
 
   const isChecked = selection?.some((el) => el.id === item.id);
   const isActive = bufferSelection?.id === item?.id;
@@ -96,16 +92,17 @@ const GroupsRowComponent = ({
   const value = `group_${item.id}_false_index_${itemIndex}`;
 
   return (
-    <GroupsRowWrapper
-      isChecked={isChecked}
-      isActive={isActive}
-      className={`group-item row-wrapper ${
-        isChecked || isActive ? "row-selected" : ""
-      } ${item.id}`}
-      value={value}
+    <div
+      className={classNames(
+        styles.groupsRowWrapper,
+        "group-item row-wrapper",
+        { [styles.expanded]: isChecked || isActive, "row-selected": isChecked || isActive },
+        String(item.id),
+      )}
+      {...({ value } as unknown as { value?: string })}
     >
       <div className="group-item">
-        <GroupsRow
+        <Row
           key={item.id}
           onContextClick={onRowContextClick}
           onSelect={onSelect}
@@ -119,18 +116,19 @@ const GroupsRowComponent = ({
               source=""
             />
           }
-          checked={isChecked ?? false}
-          isActive={isActive}
           contextOptions={getGroupContextOptions!(t, item)}
           getContextModel={getContextModel}
           mode="modern"
-          className="group-row"
+          className={classNames(styles.groupsRow, "group-row", {
+            [styles.checked]: isChecked,
+            [styles.active]: isActive,
+          })}
           dataTestId={`contacts_groups_row_${itemIndex}`}
         >
-          <GroupsRowContent
-            className="group-row-content"
+          <RowContent
+            className={classNames(styles.groupsRowContent, "group-row-content")}
             sectionWidth={sectionWidth}
-            sideColor={theme.peopleTableRow.sideInfoColor}
+            sideColor="var(--people-table-row-side-info-color)"
           >
             <Link
               key="group-title"
@@ -163,10 +161,10 @@ const GroupsRowComponent = ({
                 count: item.membersCount,
               })}
             </Link>
-          </GroupsRowContent>
-        </GroupsRow>
+          </RowContent>
+        </Row>
       </div>
-    </GroupsRowWrapper>
+    </div>
   );
 };
 

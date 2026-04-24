@@ -27,7 +27,6 @@
 import React, { useEffect } from "react";
 import { now, parseToDateTime, formatDate, formatDateLocalized, isBefore, isAfter } from "@docspace/ui-kit/utils/date";
 import { Outlet, useLocation } from "react-router";
-import { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
@@ -101,8 +100,6 @@ const Shell = ({ page = "home", ...rest }) => {
     setSocialAuthWelcomeDialogVisible,
     getAIConfig,
   } = rest;
-
-  const theme = useTheme();
 
   useCreateFileError({
     setPortalTariff,

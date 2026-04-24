@@ -24,37 +24,96 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router";
-import { Heading } from "@docspace/ui-kit/components/heading";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
+@use "@docspace/ui-kit/styles/mixins";
 
-import styles from "./AboutHeader.module.scss";
+.tileContent {
+  .row-main-container {
+    height: auto;
+    max-width: 100%;
+    display: flex;
+    align-items: flex-end;
+  }
 
-const AboutHeader = () => {
-	const { t, ready } = useTranslation("Common");
+  .main-icons {
+    align-self: flex-end;
+  }
 
-	const navigate = useNavigate();
+  .badge {
+    margin-inline-end: 8px;
+    cursor: pointer;
+    height: 16px;
+    width: 16px;
+  }
 
-	const onBack = () => {
-		navigate(-1);
-	};
+  .new-items {
+    position: absolute;
+    inset-inline-end: 29px;
+    top: 19px;
+  }
 
-	return (
-		<div className={styles.headerContainer}>
-			<IconButton
-				iconName={ArrowPathReactSvgUrl}
-				size="17"
-				isFill
-				onClick={onBack}
-				className="arrow-button"
-			/>
-			<Heading type="content" truncate>
-				{!ready ? "" : t("AboutHeader")}
-			</Heading>
-		</div>
-	);
-};
+  .badges {
+    display: flex;
+    align-items: center;
+  }
 
-export default AboutHeader;
+  .share-icon {
+    margin-top: -4px;
+    padding-inline-end: 8px;
+  }
+
+  .favorite,
+  .can-convert,
+  .edit {
+    svg:not(:root) {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  .item-file-name {
+    max-height: 100%;
+    line-height: var(--tile-content-line-height, 20px);
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    text-align: start;
+
+    font-size: var(--tile-content-font-size, 13px);
+  }
+
+  .item-file-exst {
+    color: var(--files-section-table-view-exst-color);
+  }
+
+  &.isTemplate {
+    overflow: hidden;
+
+    .row-main-container {
+      flex-direction: column;
+      align-items: start;
+    }
+
+    .item-file-name {
+      font-size: 16px;
+    }
+  }
+
+  &.isRooms {
+    .item-file-name {
+      line-height: 22px;
+      font-size: 16px;
+    }
+  }
+
+  @include mixins.tablet-and-below {
+    display: inline-flex;
+    height: auto;
+
+    & > div {
+      margin-top: 0;
+    }
+  }
+}

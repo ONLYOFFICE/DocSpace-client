@@ -33,59 +33,9 @@ import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { Loader } from "@docspace/ui-kit/components/loader";
-import styled from "styled-components";
 import { Link } from "@docspace/ui-kit/components/link";
 
-const StyledBodyContent = styled.div`
-  display: contents;
-  user-select: text;
-  table {
-    border-spacing: 0;
-    border-collapse: collapse;
-    display: block;
-    margin-top: 0;
-    margin-bottom: 16px;
-    width: max-content;
-    max-width: 100%;
-    overflow: auto;
-  }
-
-  --color-border-default: ${(props) => props.theme.dialogs.borderColor};
-  --color-border-muted: hsla(210, 18%, 87%, 1);
-
-  a {
-    color: ${(props) => props.theme.dialogs.linkColor};
-  }
-
-  tr {
-    border-top: 1px solid var(--color-border-muted);
-  }
-
-  td,
-  th {
-    padding: 6px 13px;
-    border: 1px solid var(--color-border-default);
-  }
-
-  th {
-    font-weight: 600;
-  }
-
-  table img {
-    background-color: transparent;
-  }
-`;
-
-const StyledFooterContent = styled.div`
-  display: contents;
-  user-select: text;
-  .markdown-wrapper {
-    box-sizing: border-box;
-    overflow: auto;
-    height: 362px;
-    width: 100%;
-  }
-`;
+import styles from "./DebugInfo.module.scss";
 
 const MarkdownLink = ({ href, children }) => (
 	<Link fontWeight="600" target="_blank" tag="a" href={href} color="accent">
@@ -112,7 +62,7 @@ const DebugInfoDialog = (props) => {
 		>
 			<ModalDialog.Header>Debug Info</ModalDialog.Header>
 			<ModalDialog.Body className="debug-info-body">
-				<StyledBodyContent>
+				<div className={styles.bodyContent}>
 					{/* <Text>{`# Build version: ${BUILD_VERSION}`}</Text> */}
 					<Text>
 						# Version: <span className="version">{VERSION}</span>
@@ -122,11 +72,11 @@ const DebugInfoDialog = (props) => {
 						<Text>{`# Current User: ${user?.displayName} (id:${user?.id})`}</Text>
 					) : null}
 					<Text>{`# User Agent: ${navigator.userAgent}`}</Text>
-				</StyledBodyContent>
+				</div>
 			</ModalDialog.Body>
 			<ModalDialog.Footer className="debug-info-footer">
-				<StyledFooterContent>
-					<div className="markdown-wrapper">
+				<div className={styles.footerContent}>
+					<div className={styles.markdownWrapper}>
 						<Scrollbar>
 							{!debugInfoData ? <Loader size="20px" type="track" /> : null}
 							{debugInfoData ? (
@@ -141,7 +91,7 @@ const DebugInfoDialog = (props) => {
 							) : null}
 						</Scrollbar>
 					</div>
-				</StyledFooterContent>
+				</div>
 			</ModalDialog.Footer>
 		</ModalDialog>
 	);

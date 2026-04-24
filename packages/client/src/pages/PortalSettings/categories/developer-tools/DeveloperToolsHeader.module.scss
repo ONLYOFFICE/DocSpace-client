@@ -24,68 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-import { Text } from "@docspace/ui-kit/components/text";
+@use "@docspace/ui-kit/styles/mixins";
 
-const StyledText = styled(Text)`
-  display: inline-block;
-  margin-inline-end: 12px;
-`;
-
-const StyledIndexCell = styled(Text)`
-  display: inline-block;
-  margin-inline: 0;
-  padding-inline-start: 16px;
-
-  overflow: hidden;
-  direction: rtl;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl" &&
-    css`
-      padding-inline-start: 0;
-      margin-inline-end: 16px;
-    `}
-`;
-
-const StyledTypeCell = styled(StyledText)`
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl" &&
-    css`
-      display: flex;
-      justify-content: flex-start;
-
-      span {
-        text-overflow: ellipsis;
-        overflow: hidden;
-      }
-
-      .type {
-        flex-shrink: 0;
-        flex-grow: 1;
-        flex-basis: 0;
-      }
-
-      .extension {
-        flex-shrink: 1;
-        flex-grow: 0;
-      }
-    `}
-`;
-
-const StyledAuthorCell = styled.div`
+.styledHeader {
   display: flex;
-  width: 100%;
-  overflow: hidden;
+  align-items: center;
+  max-width: calc(100vw - 32px);
 
-  .author-avatar-cell {
-    width: 16px;
-    min-width: 16px;
-    height: 16px;
-    margin-inline-end: 8px;
+  :global(.arrow-button) {
+    flex-shrink: 0;
+    margin-inline-end: 12px;
+
+    svg {
+      @include mixins.flip-in-rtl;
+    }
   }
-`;
-
-export { StyledText, StyledAuthorCell, StyledTypeCell, StyledIndexCell };
+}

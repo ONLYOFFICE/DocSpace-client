@@ -43,12 +43,18 @@ import {
   createAIAgent,
   deleteServersForRoom,
   editAIAgent,
+  getDefaultProvider,
+  getModels,
 } from "@docspace/shared/api/ai";
 import {
   TAgentIconParams,
   TAgentParams,
 } from "@docspace/shared/utils/aiAgents";
-import { TAgent, TAgentLogo } from "@docspace/shared/api/ai/types";
+import {
+  TAgent,
+  TAgentLogo,
+  TChatSettings,
+} from "@docspace/shared/api/ai/types";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
@@ -206,8 +212,6 @@ class CreateEditRoomStore {
       ...((prompt || providerId || modelId) && {
         chatSettings: {
           prompt,
-          providerId,
-          modelId,
         },
       }),
     };
@@ -336,12 +340,8 @@ class CreateEditRoomStore {
 
       logo: undefined as TAgentLogo | undefined,
 
-      ...((prompt || providerId || modelId) && {
-        chatSettings: {
-          prompt,
-          providerId,
-          modelId,
-        },
+      ...((prompt || modelId) && {
+        chatSettings: { prompt, modelId } as TChatSettings,
       }),
 
       ...(typeof attachDefaultTools === "boolean" && {
@@ -352,13 +352,35 @@ class CreateEditRoomStore {
     this.setIsLoading(true);
 
     try {
+      // If providerId is not set (library profile flow), resolve it from the backend.
+      // Also validate modelId against backend's active models — fall back to defaultModel if not found.
+      if (!providerId) {
+        try {
+          const defaultProvider = await getDefaultProvider();
+          if (defaultProvider?.providerId) {
+            const activeModels = await getModels(defaultProvider.providerId);
+            const resolvedModelId = activeModels.some(
+              (m) => m.modelId === modelId,
+            )
+              ? modelId
+              : defaultProvider.defaultModel;
+            createAgentData.chatSettings = {
+              ...createAgentData.chatSettings,
+              providerId: defaultProvider.providerId,
+              modelId: resolvedModelId,
+            };
+          }
+        } catch {
+          // ignore — createAIAgent may still succeed without chatSettings
+        }
+      }
+
       if (icon.uploadedFile && typeof icon.uploadedFile !== "string") {
         const agentLogo = await this.getAgentLogo(icon);
         createAgentData.logo = agentLogo;
       }
 
       const agent = await createAIAgent(createAgentData);
-
       if ((agent as unknown as { errorMsg: string }).errorMsg) {
         return toastr.error(
           (agent as unknown as { errorMsg: string }).errorMsg,
@@ -432,3 +454,4 @@ class CreateEditRoomStore {
 }
 
 export default CreateEditRoomStore;
+

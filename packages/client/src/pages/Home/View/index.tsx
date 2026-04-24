@@ -29,10 +29,6 @@ import { inject, observer } from "mobx-react";
 import { Trans, useTranslation } from "react-i18next";
 import { Navigate, useLocation, useNavigate } from "react-router";
 
-import useToolsSettings from "@docspace/ui-kit/ai-agent/chat/hooks/useToolsSettings";
-import useInitChats from "@docspace/ui-kit/ai-agent/chat/hooks/useInitChats";
-import useInitMessages from "@docspace/ui-kit/ai-agent/chat/hooks/useInitMessages";
-
 import { getCategoryType } from "@docspace/shared/utils/common";
 import { CategoryType } from "@docspace/shared/constants";
 import { Consumer } from "@docspace/ui-kit/utils";
@@ -48,15 +44,12 @@ import { TOAST_FOLDER_PUBLIC_KEY } from "@docspace/shared/constants";
 import type { TFolder } from "@docspace/shared/api/files/types";
 import { getAccessLabel } from "@docspace/shared/components/share/Share.helpers";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
-import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { FolderType, SearchArea } from "@docspace/shared/enums";
+import { SearchArea } from "@docspace/shared/enums";
 
 import type ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import type FilesStore from "SRC_DIR/store/FilesStore";
-import type DialogsStore from "SRC_DIR/store/DialogsStore";
 import type AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
-import type AiRoomStore from "SRC_DIR/store/AiRoomStore";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { AIAgentView } from "SRC_DIR/pages/Home/View/AIAgentView";
 
@@ -89,13 +82,8 @@ type ViewProps = UseContactsProps &
 
     showHeaderLoader: ClientLoadingStore["showHeaderLoader"];
 
-    aiAgentSelectorDialogProps: DialogsStore["aiAgentSelectorDialogProps"];
-    setAiAgentSelectorDialogProps: DialogsStore["setAiAgentSelectorDialogProps"];
-
     canUseChat: AccessRightsStore["canUseChat"];
 
-    aiConfig: SettingsStore["aiConfig"];
-    resultId: AiRoomStore["resultId"];
     setHotkeyCaret: FilesStore["setHotkeyCaret"];
     currentExtensionGallery: OformsStore["currentExtensionGallery"];
   };
@@ -165,12 +153,7 @@ const View = ({
   setNotificationChannels,
   checkTg,
 
-  aiAgentSelectorDialogProps,
-  setAiAgentSelectorDialogProps,
-
   canUseChat,
-  aiConfig,
-  resultId,
 }: ViewProps) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -269,35 +252,8 @@ const View = ({
     checkTg: checkTg!,
   });
 
-  const [roomId, setRoomId] = React.useState(() => {
-    return new URLSearchParams(location.search).get("folder");
-  });
-
-  React.useLayoutEffect(() => {
-    const roomId = new URLSearchParams(location.search).get("folder");
-    setRoomId(roomId);
-  }, [location.search]);
-
-  const toolsSettings = useToolsSettings({
-    agentId: roomId ?? "",
-    aiConfig,
-    chatSettings: selectedFolderStore.chatSettings,
-  });
-
-  const initChats = useInitChats({
-    agentId: roomId ?? "",
-  });
-
-  const { initMessages, ...messagesSettings } = useInitMessages(roomId ?? "");
-
-  const { initTools } = toolsSettings;
-  const { fetchChats } = initChats;
-
   const getFilesRef = React.useRef(getFiles);
   const fetchContactsRef = React.useRef(fetchContacts);
-  const initChatsRef = React.useRef(fetchChats);
-  const initToolsRef = React.useRef(initTools);
-  const initMessagesRef = React.useRef(initMessages);
 
   const animationStartedRef = React.useRef(false);
 
@@ -400,18 +356,6 @@ const View = ({
     }
   }, [isLoading, showHeaderLoader]);
 
-  React.useEffect(() => {
-    initChatsRef.current = fetchChats;
-  }, [fetchChats]);
-
-  React.useEffect(() => {
-    initToolsRef.current = initTools;
-  }, [initTools]);
-
-  React.useEffect(() => {
-    initMessagesRef.current = initMessages;
-  }, [initMessages]);
-
   const showToastAccess = useEventCallback(() => {
     if (
       selectedFolderStore.isFolder &&
@@ -460,12 +404,11 @@ const View = ({
 
           view = "profile";
         } else if (isChatPage) {
-          await Promise.all([
-            getFilesRef.current(),
-            initToolsRef.current(),
-            initChatsRef.current(),
-            initMessagesRef.current(),
-          ]);
+          try {
+            await getFilesRef.current();
+          } catch {
+            // chat renders without file data
+          }
 
           view = "chat";
 
@@ -564,28 +507,6 @@ const View = ({
     t,
   ]);
 
-  const attachmentFile = React.useMemo(
-    () => aiAgentSelectorDialogProps?.file,
-    [aiAgentSelectorDialogProps?.file],
-  );
-
-  const onClearAttachmentFile = React.useCallback(() => {
-    setAiAgentSelectorDialogProps(false, null);
-  }, [setAiAgentSelectorDialogProps]);
-  // console.log("currentView", currentView);
-
-  const getResultStorageId = () => {
-    if (!selectedFolderStore.isAIRoom) return null;
-
-    if (resultId) return resultId;
-
-    return (
-      selectedFolderStore.folders?.find(
-        (folder) => folder.type === FolderType.ResultStorage,
-      )?.id || null
-    );
-  };
-
   const shouldRedirectToResultStorage =
     currentView === "chat" &&
     selectedFolderStore.isAIRoom &&
@@ -614,17 +535,7 @@ const View = ({
               currentView={currentView}
             />
           ) : currentView === "chat" || selectedFolderStore.isAIRoom ? (
-            <AIAgentView
-              currentView={currentView}
-              isViewLoading={isLoading}
-              roomId={roomId}
-              attachmentFile={attachmentFile}
-              onClearAttachmentFile={onClearAttachmentFile}
-              toolsSettings={toolsSettings}
-              initChats={initChats}
-              messagesSettings={messagesSettings}
-              getResultStorageId={getResultStorageId}
-            />
+            <AIAgentView currentView={currentView} />
           ) : currentView === "profile" ? (
             <ProfileSectionBodyContent />
           ) : (
@@ -653,14 +564,8 @@ export const ViewComponent = inject(
     setup,
     authStore,
     telegramStore,
-    dialogsStore,
     accessRightsStore,
-    settingsStore,
-    aiRoomStore,
   }: TStore) => {
-    const { resultId } = aiRoomStore;
-    const { aiConfig } = settingsStore;
-
     const { canUseChat } = accessRightsStore;
 
     const { usersStore, groupsStore } = peopleStore;
@@ -733,9 +638,6 @@ export const ViewComponent = inject(
 
     const { checkTg } = telegramStore;
 
-    const { aiAgentSelectorDialogProps, setAiAgentSelectorDialogProps } =
-      dialogsStore;
-
     return {
       setContactsTab,
       getUsersList,
@@ -798,12 +700,8 @@ export const ViewComponent = inject(
       setNotificationChannels,
       checkTg,
 
-      aiAgentSelectorDialogProps,
-      setAiAgentSelectorDialogProps,
-
       canUseChat,
-      aiConfig,
-      resultId,
     };
   },
 )(observer(View));
+

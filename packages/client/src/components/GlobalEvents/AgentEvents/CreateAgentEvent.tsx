@@ -27,13 +27,14 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { useStores } from "@onlyoffice/ai-chat";
 
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
 
 import TagsStore from "SRC_DIR/store/TagsStore";
-import CreateEditAgentStore from "SRC_DIR/store/CreateEditAgentStore";
-import FilesStore from "SRC_DIR/store/FilesStore";
+import type CreateEditAgentStore from "SRC_DIR/store/CreateEditAgentStore";
+import type FilesStore from "SRC_DIR/store/FilesStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 
 import { CreateAgentDialog } from "../../dialogs";
@@ -79,7 +80,19 @@ const CreateRoomEvent = ({
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
   const [fetchedTags, setFetchedTags] = useState<string[]>([]);
 
+  const { useProfilesStore, useThreadsStore } = useStores();
+  const profiles = useProfilesStore((s) => s.profiles);
+  const insertThread = useThreadsStore((s) => s.insertThread);
+
   const onCreate = (agentParams: TAgentParams) => {
+    const baseProfile = agentParams.profileId
+      ? profiles.find((p) => p.id === agentParams.profileId)
+      : profiles.find((p) => p.modelId === agentParams.modelId);
+
+    insertThread(agentParams.title || t("Common:NewAgent"), {
+      profileId: baseProfile?.id,
+    });
+
     const itemLogo = agentParams.logo
       ? agentParams.logo
       : selectionItems.length
@@ -130,7 +143,6 @@ export default inject(
     tagsStore,
     dialogsStore,
     filesStore,
-    currentQuotaStore,
     settingsStore,
   }: TStore) => {
     const { fetchTags } = tagsStore;
@@ -141,10 +153,6 @@ export default inject(
     const { setAgentParams, onCreateAgent, isLoading, setOnClose } =
       createEditAgentStore;
 
-    const { isDefaultRoomsQuotaSet } = currentQuotaStore;
-
-    const selectionItems = selections;
-
     return {
       fetchTags,
       setAgentParams,
@@ -152,11 +160,8 @@ export default inject(
       isLoading,
       setOnClose,
       setCreateAgentDialogVisible,
-
       setCover,
-      selectionItems,
-      isDefaultRoomsQuotaSet,
-
+      selectionItems: selections,
       aiConfig: settingsStore.aiConfig,
     };
   },

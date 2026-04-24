@@ -527,7 +527,7 @@ const setAgentParams = ({
 
       <ModelSettings
         agentParams={agentParams}
-        systemAiEnabled={systemAiEnabled}
+        //systemAiEnabled={systemAiEnabled}
         setAgentParams={setAgentParams}
       />
       <InstructionsSettings

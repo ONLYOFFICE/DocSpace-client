@@ -3,11 +3,12 @@
   "content": "Form data collection",
   "content_en_sha1_hash": "3d5d135c8ecaa49feb2eb2292d2853c68b62d6ea",
   "created_at": "2025-05-19T21:30:45.482Z",
-  "updated_at": "2026-04-08T08:57:06.492Z",
+  "updated_at": "2026-04-11T20:52:08.675Z",
   "comment": {
-    "text": "This translation key is used to display the title and description of a \"Form data collection\" option, which likely refers to sharing or exporting form data in various UI contexts such as dialogues, panels, and dialogs. The text appears in button labels, titles, and descriptions, typically related to sharing or collaboration features.",
+    "text": "This is a title for a feature that allows users to collect data using forms. It appears in dialogs and panels related to sharing or creating forms.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:06.893Z"
+    "updated_at": "2026-04-11T20:52:08.675Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -24,7 +25,7 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
-      "line_number": 194,
+      "line_number": 195,
       "context": "// HACK: Hide share option for rooms — remove after implementation is ready\n disabled: !file.canShare || file.rootFolderType === FolderType.Rooms,\n },\n {\n id: \"form-room\",\n title: t(\"Common:FormDataCollection\"),\n description: t(\"Common:FormDataCollectionDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: onClickFormRoom,\n icon: <FormDataCollectionIcon />,\n },",
       "module": "/packages/doceditor"
     }
@@ -207,13 +208,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'mẫu' in Vietnamese means 'sample' or 'template'. The English 'Form data' refers to data collected via a form, not 'sample data'. The translation currently reads 'Collection of sample data' instead of 'Collection of form data'.",
-          "suggestion": "Thu thập dữ liệu biểu mẫu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

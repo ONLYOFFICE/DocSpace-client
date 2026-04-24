@@ -3,16 +3,17 @@
   "content": "Use this section to create several spaces and make them accessible for your users",
   "content_en_sha1_hash": "79f5c82d08ab04703fb38185b6e24a16b816534d",
   "created_at": "2025-05-19T21:30:57.479Z",
-  "updated_at": "2026-04-07T19:35:05.257Z",
+  "updated_at": "2026-04-11T21:31:32.597Z",
   "comment": {
-    "text": "This translation key is used to display a descriptive subheader that guides users on how to use the section. It appears in a portal dialog when creating new spaces and provides contextual information about its purpose.",
+    "text": "This subheader text appears on pages related to space management. It instructs the user to create and manage multiple spaces for their users.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:47:52.687Z"
+    "updated_at": "2026-04-11T21:31:32.597Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/management/src/app/spaces/configuration/header.tsx",
-      "line_number": 39,
+      "line_number": 40,
       "context": "const { t } = useTranslation([\"Management\", \"Common\"]);\n \n return (\n <div className={styles.header}>\n <Text fontSize=\"12px\" fontWeight={400}>\n {t(\"Subheader\")}\n </Text>\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"ConfigurationHeader\")}\n </Text>\n <Text fontSize=\"12px\" lineHeight=\"16px\" fontWeight={400}>",
       "module": "/packages/management"
     },

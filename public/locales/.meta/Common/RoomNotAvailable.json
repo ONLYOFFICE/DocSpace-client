@@ -3,11 +3,12 @@
   "content": "Room not available",
   "content_en_sha1_hash": "9133dc18fe95f3b8f20a7849bdab1ce0384389ce",
   "created_at": "2025-05-19T21:30:48.227Z",
-  "updated_at": "2026-04-08T00:23:16.897Z",
+  "updated_at": "2026-04-23T17:24:01.894Z",
   "comment": {
-    "text": "The \"RoomNotAvailable\" translation key is used to display a message indicating that a room is not available, typically appearing in error messages or notifications on expired shared links. This message aims to inform users of the room's unavailability. It is used within error handling contexts, such as in error messages or password entry dialogs.",
+    "text": "This is an error message title displayed in a toast notification or an info panel when a user tries to access a Room that is no longer available, often because its link has expired.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:34:30.117Z"
+    "updated_at": "2026-04-11T20:44:10.893Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -18,13 +19,13 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 279,
+      "line_number": 284,
       "context": "const description = isRoom\n ? t(\"Common:RoomLinkExpired\")\n : t(\"Common:FolderLinkExpired\");\n \n const title = isRoom\n ? t(\"Common:RoomNotAvailable\")\n : t(\"Common:FolderNotAvailable\");\n \n return toastr.error(description, title);\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 279,
+      "line_number": 284,
       "context": "const description = isRoom\n ? t(\"Common:RoomLinkExpired\")\n : t(\"Common:FolderLinkExpired\");\n \n const title = isRoom\n ? t(\"Common:RoomNotAvailable\")\n : t(\"Common:FolderNotAvailable\");\n \n return toastr.error(description, title);\n }",
       "module": "/packages/client"
     },
@@ -191,9 +192,11 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The word 'Соба' (Soba) is a misspelling or incorrect form; in Serbian, 'room' is 'Soba' (Собa), but the translation provided 'Соба' is often interpreted as a typo or lacks the correct grammatical context for a title. More importantly, 'Соба' is not the standard way to refer to a digital 'room' in this context; however, the primary error is that 'Соба' is a misspelling of 'Собa' or simply an incorrect noun usage for a digital space.",
-          "suggestion": "Собa није доступна"
+          "type": "wrong_language",
+          "description": "The word 'Собa' mixes Cyrillic characters (Соб) with Latin 'a'. Should be all Cyrillic 'Соба' to match the script of the rest of the translation.",
+          "suggestion": "Соба није доступна",
+          "checked_at": "2026-04-13T08:00:40.223Z",
+          "checked_by": "claude-code/haiku"
         }
       ],
       "approved_at": null

@@ -3,11 +3,12 @@
   "content": "Or select from available matches",
   "content_en_sha1_hash": "633f60fd49ce09fbe6101a2105a2a42fcd63e968",
   "created_at": "2026-02-19T13:36:18.693Z",
-  "updated_at": "2026-04-08T03:27:22.121Z",
+  "updated_at": "2026-04-12T05:22:20.486Z",
   "comment": {
-    "text": "This key displays a suggestion to choose from existing options or create a new one. It appears within a UI element (likely a button or dropdown) related to tag creation or selection. Translators should ensure the wording accurately conveys the choice between using an existing tag and creating a new one.",
+    "text": "This is a short phrase displayed within a tag management filter. It appears when a user is creating a new tag, suggesting they can choose from existing tags instead.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:15:52.591Z"
+    "updated_at": "2026-04-11T20:47:07.353Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -45,13 +46,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'shody' (matches) in Czech is used incorrectly in this context. In UI terminology for selecting existing items (like tags), 'shody' refers to 'agreements' or 'congruence'. The correct term for 'matches' in the sense of 'matching results' or 'existing items' should be 'shodné položky' or 'odpovídající výsledky', but more naturally in UI: 'existující možnosti' or 'shodné výsledky'.",
-          "suggestion": "Nebo vyberte z dostupných výsledků"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -117,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation uses 'Vai izvēlēties', which turns the phrase into a question ('Or to choose...') or an uncertain action, whereas the English is an imperative/instructional phrase ('Or select...'). In UI context, 'Vai' is incorrect here; it should be a direct instruction.",
-          "suggestion": "Vai izvēlēties no pieejamajām atbilstībām"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -135,13 +124,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation is grammatically incomplete. 'pasujących' is an adjective that requires a noun (e.g., 'wyników' or 'tagów') to make sense in this context, or it should be phrased differently to function as a noun phrase.",
-          "suggestion": "Lub wybierz z dostępnych dopasowań"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -195,13 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'подудрања' (subsets/sub-elements) is used instead of 'подушних података' or 'резултата' (matches). In this context, 'matches' refers to existing tags/options, not mathematical or hierarchical subsets.",
-          "suggestion": "Или изаберите из доступних понуђених опција"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

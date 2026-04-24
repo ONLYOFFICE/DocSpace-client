@@ -3,24 +3,25 @@
   "content": "Manage connection",
   "content_en_sha1_hash": "3ca4794faf5c82e76336e37b70c07375fb9ed946",
   "created_at": "2025-10-27T16:14:24.262Z",
-  "updated_at": "2026-04-08T05:05:19.137Z",
+  "updated_at": "2026-04-23T17:24:02.169Z",
   "comment": {
-    "text": "This text likely refers to a button or link that allows users to manage their connection settings or connected accounts within the chat interface. Translators should ensure the translated text accurately conveys the ability to adjust or oversee connection-related configurations.",
+    "text": "This is a button label that opens a dialog to manage connections for AI tools.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:36:14.080Z"
+    "updated_at": "2026-04-11T20:49:03.726Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/chat/components/chat-input/ToolsSettings.tsx",
-      "line_number": 37,
-      "context": "import { Portal } from \"@docspace/ui-kit/components/portal\";\n \n import McpToolReactSvgUrl from \"PUBLIC_DIR/images/mcp.tool.svg?url\";\n import WebSearchIconUrl from \"PUBLIC_DIR/images/web.search.svg?url\";\n import ManageConnectionsReactSvgUrl from \"PUBLIC_DIR/images/manage.connection.react.svg?url\";\n \n import { openConnectWindow } from \"../../../../api/files\";\n import {\n changeMCPToolsForRoom,\n connectServer,",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-input/tools-settings/index.tsx",
+      "line_number": 446,
+      "context": ": []),\n ...(showManageConnectionItem\n ? [\n {\n key: \"manage-connections\",\n label: t(\"ManageConnection\"),\n onClick: () => {\n setShowManageConnections(true);\n },\n iconNode: <ManageConnectionsReactSvg />,\n disabled: !showManageConnectionItem,",
+      "module": "/libs/ui-kit"
     },
     {
-      "file_path": "/packages/shared/components/chat/components/chat-input/ToolsSettings.tsx",
-      "line_number": 37,
-      "context": "import { Portal } from \"@docspace/ui-kit/components/portal\";\n \n import McpToolReactSvgUrl from \"PUBLIC_DIR/images/mcp.tool.svg?url\";\n import WebSearchIconUrl from \"PUBLIC_DIR/images/web.search.svg?url\";\n import ManageConnectionsReactSvgUrl from \"PUBLIC_DIR/images/manage.connection.react.svg?url\";\n \n import { openConnectWindow } from \"../../../../api/files\";\n import {\n changeMCPToolsForRoom,\n connectServer,",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-input/tools-settings/index.tsx",
+      "line_number": 446,
+      "context": ": []),\n ...(showManageConnectionItem\n ? [\n {\n key: \"manage-connections\",\n label: t(\"ManageConnection\"),\n onClick: () => {\n setShowManageConnections(true);\n },\n iconNode: <ManageConnectionsReactSvg />,\n disabled: !showManageConnectionItem,",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -75,13 +76,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation 'Hallitse yhteys' uses the singular form 'yhteys' (connection), whereas the English 'Manage connection' in this context (referring to settings/accounts) or the code variable 'ManageConnections' implies a plural or general concept. More importantly, in Finnish, 'Hallitse yhteys' sounds like a command to 'Manage the connection' (singular specific), whereas 'Hallitse yhteyksiä' (Manage connections) or 'Yhteyksien hallinta' (Connection management) is the standard UI pattern for managing settings.",
-          "suggestion": "Hallitse yhteyksiä"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {

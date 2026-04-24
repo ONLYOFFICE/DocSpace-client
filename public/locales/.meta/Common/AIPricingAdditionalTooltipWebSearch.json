@@ -3,13 +3,21 @@
   "content": "<1>Web search</1> — AI fetches real-time information from the web when needed for your request.",
   "content_en_sha1_hash": "76d991403ee56fe7521576f64ad52140952b99cc",
   "created_at": "2026-04-10T13:53:44.406Z",
-  "updated_at": "2026-04-10T13:53:44.406Z",
+  "updated_at": "2026-04-11T21:00:01.356Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a tooltip explaining the \"Web search\" feature of the AI assistant. It clarifies that the AI uses web search to retrieve real-time information for user requests. The `<1>` tag highlights \"Web search\" in bold.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:00:01.356Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/PricingBillingBody.tsx",
+      "line_number": 196,
+      "context": "}}\n />\n <br />\n <CommonTrans\n \n i18nKey=\"AIPricingAdditionalTooltipWebSearch\"\n components={{\n 1: <strong />,\n }}\n />\n <br />",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

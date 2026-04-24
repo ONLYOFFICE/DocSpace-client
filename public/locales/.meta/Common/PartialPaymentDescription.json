@@ -3,13 +3,27 @@
   "content": "Moving forward, the full amount will be charged once per billing cycle on your regular billing date.",
   "content_en_sha1_hash": "8272e205979563b0204392645bbba49aa27ed6c4",
   "created_at": "2026-04-10T13:53:42.843Z",
-  "updated_at": "2026-04-10T13:53:42.843Z",
+  "updated_at": "2026-04-12T05:09:58.663Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a descriptive sentence explaining the billing process for additional storage. It appears below the order summary when a user is purchasing or upgrading storage, clarifying that a partial payment is made initially, and the full amount will be charged on the regular billing date.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:46:58.051Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
+      "line_number": 153,
+      "context": "),\n endDate: storageExpiryDate,\n storageUnit: t(\"Gigabyte\"),\n })}\n </Text>{\" \"}\n <Text as=\"span\">{t(\"PartialPaymentDescription\")}</Text>\n </>\n );\n \n const additionalStorage = calculateDifference(\n amount,",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/PlanUpgradePreview.tsx",
+      "line_number": 96,
+      "context": "),\n endDate: storageExpiryDate,\n storageUnit: t(\"Gigabyte\"),\n })}\n </Text>{\" \"}\n <Text as=\"span\">{t(\"PartialPaymentDescription\")}</Text>\n </>\n );\n };\n \n useEffect(() => {",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

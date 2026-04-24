@@ -78,6 +78,7 @@ import {
   makeFreeRole,
   makeViewerRole,
 } from "../utils";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const minSearchValue = 2;
 const filterSeparator = ";";
@@ -652,14 +653,14 @@ const InviteInput = ({
       >
         {roomId === -1
           ? t("InviteMembersManuallyDescription", {
-              productName: t("Common:ProductName"),
+              productName: getBrandName("ProductName"),
             })
           : !allowInvitingGuests
             ? t("InviteToRoomManuallyInfoMembers", {
-                productName: t("Common:ProductName"),
+                productName: getBrandName("ProductName"),
               })
             : t("InviteToRoomManuallyInfoGuest", {
-                productName: t("Common:ProductName"),
+                productName: getBrandName("ProductName"),
               })}
       </Text>
       {roomId === -1 || allowInvitingGuests ? (

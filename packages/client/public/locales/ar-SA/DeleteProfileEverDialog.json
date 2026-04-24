@@ -1,6 +1,6 @@
 {
-  "ActionCannotBeUndone": " سيتم إزالة المستخدمين المُعطلين المحددين من {{productName}}. لا يمكن التراجع عن هذا الإجراء.",
   "ActionCannotBeUndoneGuests": "سيتم إزالة الضيوف المعطلين المحددين من {{productName}}. لا يمكن التراجع عن هذا الإجراء.",
+  "ActionCannotBeUndoneUsers": " سيتم إزالة المستخدمين المُعطلين المحددين من {{productName}}. لا يمكن التراجع عن هذا الإجراء.",
   "CannotReassignFiles": " إذا تم حذف عدة مستخدمين مرة واحدة، لا يمكنك إعادة تعيين ملفاتهم لمستخدمين آخرين.",
   "DeleteGroupGuestsSuccessMessage": "تم حذف الضيوف بنجاح.",
   "DeleteGroupUsersSuccessMessage": "تم حذف المستخدمين بشكل دائم.",

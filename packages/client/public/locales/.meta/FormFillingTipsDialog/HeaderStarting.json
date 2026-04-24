@@ -3,17 +3,18 @@
   "content": "Starting the form filling process",
   "content_en_sha1_hash": "6ee9c62e2fdb707a20025b9ce66b0fa659b90f7a",
   "created_at": "2025-05-19T21:30:55.139Z",
-  "updated_at": "2026-04-07T19:35:05.101Z",
+  "updated_at": "2026-04-11T21:11:08.785Z",
   "comment": {
-    "text": "This translation key is used to display a message starting the form filling process. It appears as the header of a guidance tip dialog in the application, providing a descriptive text for users to understand the next step in the form filling process.",
+    "text": "This is the header for a dialog box that appears when a user begins the process of filling out a form.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:40:21.452Z"
+    "updated_at": "2026-04-11T21:11:08.785Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/components/guidance/configs/form-filling.ts",
-      "line_number": 11,
-      "context": "import { GuidanceConfig } from \"./configs.types\";\n \n export const getFormFillingConfig = ({ t }: GuidanceConfig): GuidanceStep[] => [\n {\n id: 1,\n header: t(\"FormFillingTipsDialog:HeaderStarting\"),\n description: t(\"FormFillingTipsDialog:TitleStarting\"),\n key: \"form-filling-starting\",\n placement: \"dynamic\",\n position: [\n {",
+      "line_number": 12,
+      "context": "import { getBrandName } from \"@docspace/shared/constants/brands\";\n \n export const getFormFillingConfig = ({ t }: GuidanceConfig): GuidanceStep[] => [\n {\n id: 1,\n header: t(\"FormFillingTipsDialog:HeaderStarting\"),\n description: t(\"FormFillingTipsDialog:TitleStarting\"),\n key: \"form-filling-starting\",\n placement: \"dynamic\",\n position: [\n {",
       "module": "/packages/shared"
     }
   ],

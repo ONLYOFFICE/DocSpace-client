@@ -3,11 +3,12 @@
   "content": "Plugin deleted successfully",
   "content_en_sha1_hash": "62d30feb4d89909c211f9e94b25b2c08401b0932",
   "created_at": "2025-12-15T14:02:39.885Z",
-  "updated_at": "2026-04-10T08:21:04.378Z",
+  "updated_at": "2026-04-11T21:27:52.831Z",
   "comment": {
-    "text": "This key displays a success message in a toast notification confirming that a plugin has been successfully deleted. It appears after a plugin is removed from the system, reassuring the user of the action's completion. Translators should maintain a positive and informative tone.",
+    "text": "This is a toast message confirming that a plugin has been successfully removed from the DocSpace. It appears briefly after a user deletes a plugin.",
     "is_auto": true,
-    "updated_at": "2025-12-17T07:54:23.982Z"
+    "updated_at": "2026-04-11T21:27:52.831Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -171,13 +172,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "wrong_language",
-          "description": "The translation is in Polish, not Albanian.",
-          "suggestion": "Plugin u fshi me sukses"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

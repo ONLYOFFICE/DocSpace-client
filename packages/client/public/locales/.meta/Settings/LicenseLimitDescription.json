@@ -3,17 +3,18 @@
   "content": "The license limit counter consists of: already existing accounts in {{productName}} and new users that you want to import. If you import users who already have a {{productName}} account, they will not be counted again in the counter. Your {{productName}} license allows you to have a maximum of {{maxLimit}} users.",
   "content_en_sha1_hash": "48bb127c07477ce132bbeea9ad21b81eedf91b24",
   "created_at": "2025-05-19T21:30:51.797Z",
-  "updated_at": "2026-04-09T02:32:19.224Z",
+  "updated_at": "2026-04-11T21:23:31.746Z",
   "comment": {
-    "text": "This translation key is used to display a descriptive message about the license limit counter in the Portal Settings page. It explains that the limit applies to existing accounts and new users being imported, without counting duplicate users. The text appears as a tooltip when clicking the \"Help\" button on this page.",
+    "text": "This is a tooltip that appears when hovering over an information icon next to the \"License Limit\" field. It explains how the license limit is calculated, including existing and imported users, and states the maximum allowed users. `{{productName}}` is the product name (e.g., ONLYOFFICE DocSpace), and `{{maxLimit}}` is the maximum number of users allowed by the license.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:00.533Z"
+    "updated_at": "2026-04-11T21:23:31.746Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/sub-components/AdminsInfoBlock.tsx",
-      "line_number": 65,
-      "context": "dataTestId=\"license_limit_help_button\"\n place=\"right\"\n offsetRight={0}\n tooltipContent={\n <Text fontSize=\"12px\">\n {t(\"LicenseLimitDescription\", {\n productName: t(\"Common:ProductName\"),\n maxLimit: limitAdmins,\n })}\n </Text>\n }",
+      "line_number": 66,
+      "context": "dataTestId=\"license_limit_help_button\"\n place=\"right\"\n offsetRight={0}\n tooltipContent={\n <Text fontSize=\"12px\">\n {t(\"LicenseLimitDescription\", {\n productName: getBrandName(\"ProductName\"),\n maxLimit: limitAdmins,\n })}\n </Text>\n }",
       "module": "/packages/client"
     }
   ],
@@ -153,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The final sentence 'Your {{productName}} license allows you to have a maximum of {{maxLimit}} users' is translated as 'Your {{productName}} license can receive a maximum of {{maxLimit}} users' (ඔබගේ {{productName}} බලපත්‍රය සඳහා උපරිම පරිශ්‍රීලකයින් {{maxLimit}} ක් ලද හැකිය), which changes the meaning from 'allowing/permitting' to 'receiving/obtaining'.",
-          "suggestion": "බලපත්‍රයේ සීමාව ගණනය වන්නේ {{productName}} හි දැනටමත් පවතින ගිණුම් සහ ඔබට ආයාත කිරීමට වුවමනා නව පරිශ්‍රීලකයින් අනුව වේ. ඔබ දැනටමත් {{productName}} ගිණුම් තිබෙන පරිශ්‍රීලකයින් ආයාත කළහොත් ඔවුන් නැවත ගණනය නොවේ. ඔබගේ {{productName}} බලපත්‍රය මගින් උපරිම පරිශ්‍රීලකයින් {{maxLimit}} දෙනෙකු සිටීමට ඉඩ ලබා දෙයි."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

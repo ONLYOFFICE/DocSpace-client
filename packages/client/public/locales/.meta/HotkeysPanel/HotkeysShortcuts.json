@@ -3,11 +3,12 @@
   "content": "Display keyboard hotkeys list",
   "content_en_sha1_hash": "d746272ad6b80ffced97e2fad978a577b415f8db",
   "created_at": "2025-05-19T21:30:55.096Z",
-  "updated_at": "2026-04-07T19:35:05.109Z",
+  "updated_at": "2026-04-11T21:11:49.660Z",
   "comment": {
-    "text": "This translation key is used to display keyboard hotkeys and shortcuts. It will be displayed in a UI component as part of an \"Applications\" block, likely on a settings or preferences page, allowing users to view the associated hotkey for a specific action.",
+    "text": "This is a label for a keyboard shortcut that opens a list of available hotkeys.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:40:27.484Z"
+    "updated_at": "2026-04-11T21:11:49.660Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

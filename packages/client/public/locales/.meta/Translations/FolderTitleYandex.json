@@ -3,16 +3,17 @@
   "content": "Yandex Directory",
   "content_en_sha1_hash": "2e1c5a40acb7713738807a3c81a7c13849dd96b5",
   "created_at": "2025-05-19T21:30:49.985Z",
-  "updated_at": "2026-04-08T21:09:45.345Z",
+  "updated_at": "2026-04-11T21:27:27.431Z",
   "comment": {
-    "text": "The \"Yandex Directory\" translation key is used to display the title of a Yandex folder. It appears in UI elements that interact with Yandex folders, such as buttons or dialog titles. Translators should ensure this text accurately reflects the meaning of \"Yandex Directory\".",
+    "text": "This is a folder title displayed in the file explorer, identifying a connected Yandex Drive directory.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:31.687Z"
+    "updated_at": "2026-04-11T21:27:27.431Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 123,
+      "line_number": 124,
       "context": "case \"WebDav\":\n return t(\"Translations:FolderTitleWebDav\");\n case \"kDrive\":\n return t(\"Translations:FolderTitlekDrive\");\n case \"Yandex\":\n return t(\"Translations:FolderTitleYandex\");\n \n default:\n return key;\n }\n };",
       "module": "/packages/client"
     }
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'مجلد' means 'Folder', whereas 'Directory' in a technical context (like Yandex Directory) usually refers to a 'دليل'. While 'Folder' is a possible interpretation, 'Directory' is a specific term that should be translated more accurately to avoid confusion with a simple folder.",
-          "suggestion": "دليل Yandex"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -147,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Director' in Romanian refers to a person (a manager or director), whereas 'Directory' in this context refers to a folder or a list of items. The correct term for a folder/directory is 'Directoriu'.",
-          "suggestion": "Directoriu Yandex"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -189,13 +178,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'direktorijum' is in the accusative/instrumental case, whereas the English title is in the nominative case. For a UI title/label, the nominative 'direktorijum' (or 'direktorij') is required.",
-          "suggestion": "Yandex direktorijum"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

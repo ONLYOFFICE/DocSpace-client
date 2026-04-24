@@ -3,16 +3,17 @@
   "content": "Logo for the About page",
   "content_en_sha1_hash": "9eedc846ebbca15548685b786487a57f168857ec",
   "created_at": "2025-05-26T07:15:44.866Z",
-  "updated_at": "2026-04-08T05:15:43.928Z",
+  "updated_at": "2026-04-11T20:49:15.184Z",
   "comment": {
-    "text": "The translation key \"LogoAbout\" is used to display the title of the About page logo. It appears in a descriptive text on a settings page and provides context for the logged-in user about the logo being displayed.",
+    "text": "This is a label for the logo displayed on the \"About\" page of the application. It appears next to the logo image.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:05:00.611Z"
+    "updated_at": "2026-04-11T20:49:15.184Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 334,
+      "line_number": 335,
       "context": "</div>\n \n {showAbout ? (\n <div className={styles.logoWrapper}>\n <Text fontSize=\"15px\" fontWeight=\"600\">\n {t(\"LogoAbout\")} ({logoUrls[6].size.width}x\n {logoUrls[6].size.height})\n </Text>\n <div className={styles.logosWrapper}>\n <Logo\n name={logoUrls[6].name}",
       "module": "/packages/shared"
     }
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Arabic translation is missing a closing quotation mark for the phrase 'من نحن', which makes the sentence syntactically incomplete in Arabic.",
-          "suggestion": "شعار لصفحة \"من نحن\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -75,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation uses 'Sisällöstä-osioon' (To the About section), which implies a direction or movement, whereas the English 'Logo for the About page' is a descriptive label for an object.",
-          "suggestion": "Tietoja-sivun logo"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -189,13 +178,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order is incorrect and ungrammatical in Serbian. 'U vezi stranicu' is a literal, incorrect translation of 'About page'.",
-          "suggestion": "Logotip za stranicu 'O nama'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

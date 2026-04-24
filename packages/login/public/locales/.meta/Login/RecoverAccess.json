@@ -3,17 +3,18 @@
   "content": "Recover access",
   "content_en_sha1_hash": "3f0e9f892fde12d93db01b89396951762c8bb282",
   "created_at": "2025-05-19T21:30:57.252Z",
-  "updated_at": "2026-04-07T19:35:05.251Z",
+  "updated_at": "2026-04-13T14:59:05.928Z",
   "comment": {
-    "text": "The translation key \"RecoverAccess\" is used to display a text message that allows users to recover access to their account. In this case, it appears as a button or link on a modal dialog in the login process, prompting users to regain access if they encounter issues.",
+    "text": "This is the label for a link that, when clicked, opens a dialog to help users regain access to their account.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:47:45.234Z"
+    "updated_at": "2026-04-11T21:31:09.836Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/login/src/components/RecoverAccess.tsx",
-      "line_number": 32,
-      "context": "\"use client\";\n \n import { useTranslation } from \"react-i18next\";\n \n import { Link, LinkType } from \"@docspace/ui-kit/components/link\";\n import RecoverAccessModalDialog from \"@docspace/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog\";\n import { RecaptchaType } from \"@docspace/shared/enums\";\n \n import useRecoverDialog from \"@/hooks/useRecoverDialog\";\n \n type RecoverAccessProps = {",
+      "line_number": 67,
+      "context": "isHovered\n className=\"login-link recover-link\"\n onClick={openRecoverDialog}\n dataTestId=\"recover_access_link\"\n >\n {t(\"RecoverAccess\")}\n </Link>\n {recoverDialogVisible ? (\n <RecoverAccessModalDialog\n visible={recoverDialogVisible}\n onClose={closeRecoverDialog}",
       "module": "/packages/login"
     }
   ],

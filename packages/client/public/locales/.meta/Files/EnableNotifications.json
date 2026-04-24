@@ -3,16 +3,17 @@
   "content": "Enable notifications",
   "content_en_sha1_hash": "da3967d004ec4b3493b04e53997991851767517e",
   "created_at": "2025-05-19T21:30:55.594Z",
-  "updated_at": "2026-04-10T08:21:04.371Z",
+  "updated_at": "2026-04-23T17:24:02.055Z",
   "comment": {
-    "text": "Enable notifications is a notification toggle option. It appears as a label on a button within the Context Options panel in the client application, indicating its function to enable or disable notifications.",
+    "text": "This is a button label that allows users to re-enable notifications for a specific room or conversation.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:39:49.416Z"
+    "updated_at": "2026-04-11T21:09:46.179Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1520,
+      "line_number": 1525,
       "context": "const muteOptions = [\n {\n id: \"option_unmute-room\",\n key: \"unmute-room\",\n label: t(\"EnableNotifications\"),\n icon: UnmuteReactSvgUrl,\n onClick: () => this.onClickMute(\"unmute\", item, t),\n disabled: !canMute,\n },\n {",
       "module": "/packages/client"
     }

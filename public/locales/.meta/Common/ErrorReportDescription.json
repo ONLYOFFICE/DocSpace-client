@@ -3,11 +3,12 @@
   "content": "Open the report below to see what data is included. Error reports do not contain any personal data of the users. To help our team better understand the problem, describe it in the free form using the comment field.",
   "content_en_sha1_hash": "2abb51e98a74ae9cad4d84745a6fedd126698925",
   "created_at": "2025-05-19T21:30:45.110Z",
-  "updated_at": "2026-04-08T10:11:53.308Z",
+  "updated_at": "2026-04-11T20:53:15.991Z",
   "comment": {
-    "text": "This translation key is used for an error report description, guiding users to view a report that contains no personal data and providing an opportunity to describe the issue in free form. It appears on a modal dialog header, prompting users to explore the report further.",
+    "text": "This is a descriptive text within an error report dialog, explaining what information is included in the report and how users can provide additional details.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:19.992Z"
+    "updated_at": "2026-04-11T20:53:15.991Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -63,25 +64,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'free form' was translated as 'formulario gratuito' (free/no-cost form), which changes the meaning from 'unstructured text/free-form input' to 'a form that costs nothing'.",
-          "suggestion": "Abra el siguiente informe para ver qué datos se incluyen. Los informes de errores no contienen datos personales de los usuarios. Para ayudar a nuestro equipo a comprender mejor el problema, descríbalo de forma libre utilizando el campo de comentarios."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The first sentence uses the first-person singular verb 'Avaan' (I open) instead of the imperative 'Avaa' (Open). This changes the meaning from an instruction to a statement of personal action.",
-          "suggestion": "Avaa alla oleva raportti nähdäksesi, mitä tietoja se sisältää. Vikaraportit eivät sisällä käyttäjien henkilökohtaisia tietoja. Auttaaksesi tiimiämme ymmärtämään ongelman paremmin, kuvaile se vapaamuotoisesti kommenttikentässä."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -147,13 +136,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'free form' was translated as 'formulário gratuito' (free/no-cost form), which changes the meaning from 'unstructured/open text' to 'a form that costs nothing'.",
-          "suggestion": "Abra o relatório abaixo para ver quais dados estão incluídos. Os relatórios de erros não contêm nenhum dado pessoal dos usuários. Para ajudar nossa equipe a entender melhor o problema, descreva-o de forma livre usando o campo de comentários."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -171,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'පරිශ්‍රීලකයින්ගේ' (parishrilakayinge) is a misspelling of 'පරිශීලකයින්ගේ' (parishilakayinge - users).",
-          "suggestion": "අඩංගු දත්ත බැලීමට පහත වාර්තාව විවෘත කරන්න. අපගේ දෝෂ වාර්තා වලට පරිශීලකයින්ගේ පෞද්ගලික දත්ත කිසිවක් ඇතුළත් නොකරයි. ඔන්ලිඔෆිස් කණ්ඩායමට ගැටලුව වඩාත් හොඳින් අවබෝධ කර ගැනීම සඳහා අදහස් ක්‍ෂේත්‍රය භාවිතයෙන් එය විස්තර කරන්න."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -231,13 +208,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'në formën falas' is a literal and incorrect translation of 'in the free form'. In Albanian, 'në formën falas' means 'in the free form/shape' (as in free of charge or a physical shape), whereas the context requires 'në mënyrë të lirë' or 'në format të lirë' to describe free-text input.",
-          "suggestion": "Hapni raportin më poshtë për të parë se cilat të dhëna përfshihen. Raportet e gabimeve nuk përmbajnë asnjë të dhënë personale të përdoruesve. Për të ndihmuar ekipin tonë të kuptojë më mirë problemin, përshkruani atë në mënyrë të lirë duke përdorur fushën e komenteve."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

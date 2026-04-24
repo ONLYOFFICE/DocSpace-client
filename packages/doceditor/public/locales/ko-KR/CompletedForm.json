@@ -1,7 +1,8 @@
 {
   "BackToRoom": "룸으로 돌아가기",
   "CheckReadyForms": "준비된 양식 확인",
-  "Description": "양식 작성이 완료되어 저장되었습니다",
+  "CompletedFormDescription": "양식 작성이 완료되어 저장되었습니다",
+  "CompletedFormTitle": "양식 작성이 완료되었습니다",
   "DescriptionForAnonymous": "고유 번호가 할당된, 작성한 PDF 양식을 제출했습니다. 상태를 확인하려면 할당된 번호를 제공하는 양식 소유자에게 문의하세요.",
   "DescriptionForRegisteredUser": "작성된 PDF 양식은 완료 폴더에 저장되어 이용 가능하게 됩니다. ",
   "FillItOutAgain": "다시 작성",
@@ -18,6 +19,5 @@
   "FormVDRYouFirstRecepientDescription": "귀하는 첫 번째 수혜자로써 양식을 작성해야 합니다. 이메일로 알림이 발송되었습니다. 지금 양식 작성을 시작하거나, 작성 링크를 복사하여 나중에 다시 방문할 수 있습니다.",
   "LinkToFillOutForm": "양식 작성 링크:",
   "LinkToForm": "양식 링크:",
-  "LinkToViewOnlyForm": "읽기 전용 양식 링크:",
-  "Title": "양식 작성이 완료되었습니다"
+  "LinkToViewOnlyForm": "읽기 전용 양식 링크:"
 }

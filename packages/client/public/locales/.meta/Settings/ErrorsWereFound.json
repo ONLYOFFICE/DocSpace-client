@@ -3,11 +3,12 @@
   "content": "{{errors}} errors were found",
   "content_en_sha1_hash": "11d153f3db1683b3e3c58c3ddd299e7ff10894bf",
   "created_at": "2025-05-19T21:30:51.557Z",
-  "updated_at": "2026-04-10T08:58:38.062Z",
+  "updated_at": "2026-04-11T21:24:06.017Z",
   "comment": {
-    "text": "This translation key is used to display a message indicating that errors were found during data import, typically when importing failed users. It appears on screen in the case of an import failure, providing context to the user about what went wrong.",
+    "text": "This is an error message displayed when a data import process completes with errors. The `{{errors}}` variable represents the number of errors encountered.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:09.975Z"
+    "updated_at": "2026-04-11T21:24:06.017Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -141,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation contains a redundant preposition 'de', resulting in 'errors of errors' (erori de erori).",
-          "suggestion": "{{errors}} erori au fost găsite"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -213,13 +208,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order in Albanian is unnatural and grammatically incorrect for the intended meaning. 'Gjendur' is a misspelling/incorrect form of 'gjetur' (found), and the sentence structure '{{errors}} janë gjetur gabime' is awkward. A more natural way to say 'X errors were found' is 'U gjetën {{errors}} gabime'.",
-          "suggestion": "{{errors}} gabime u gjetën"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

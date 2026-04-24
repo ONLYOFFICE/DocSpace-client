@@ -1,6 +1,6 @@
 {
-  "ActionCannotBeUndone": "Los usuarios desactivados seleccionados se eliminarán de {{productName}}. Esta acción no se puede deshacer.",
   "ActionCannotBeUndoneGuests": "Los invitados desactivados seleccionados se eliminarán de {{productName}}. Esta acción no se puede deshacer.",
+  "ActionCannotBeUndoneUsers": "Los usuarios desactivados seleccionados se eliminarán de {{productName}}. Esta acción no se puede deshacer.",
   "CannotReassignFiles": "Si elimina varios usuarios a la vez, no podrá reasignar sus archivos a otros usuarios.",
   "DeleteGroupGuestsSuccessMessage": "Los invitados se han eliminado correctamente.",
   "DeleteGroupUsersSuccessMessage": "Los usuarios se han eliminado correctamente.",

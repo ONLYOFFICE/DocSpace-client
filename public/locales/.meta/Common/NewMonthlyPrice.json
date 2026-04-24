@@ -3,13 +3,21 @@
   "content": "New monthly price",
   "content_en_sha1_hash": "c007dd3cca0268a7851dcba7068cfb09a3376a3f",
   "created_at": "2026-04-10T13:53:45.395Z",
-  "updated_at": "2026-04-10T13:53:45.395Z",
+  "updated_at": "2026-04-11T20:48:11.917Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label in an order summary, indicating the updated monthly cost after a change to a storage plan. It appears when a user is downgrading their storage plan and is not exceeding their current storage limit.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:48:11.917Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
+      "line_number": 229,
+      "context": "{isDowngradeStoragePlan &&\n !isExceedingStorageLimit &&\n !isNewSubscription ? (\n <div className={styles.summaryRow}>\n <Text fontSize=\"14px\" className={styles.rowLabel}>\n {t(\"NewMonthlyPrice\")}\n </Text>\n <Text\n fontWeight=\"600\"\n fontSize=\"14px\"\n className={styles.rowValue}",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

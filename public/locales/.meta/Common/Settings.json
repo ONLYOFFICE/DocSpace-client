@@ -3,11 +3,12 @@
   "content": "Settings",
   "content_en_sha1_hash": "c7f73bb54d928922c3838bb789ee9fb8a5b1eb37",
   "created_at": "2025-05-19T21:30:48.587Z",
-  "updated_at": "2026-04-07T23:25:51.855Z",
+  "updated_at": "2026-04-23T17:24:01.847Z",
   "comment": {
-    "text": "This translation key is used as a title for the settings page. It appears on the header of a dialog when accessing settings in the application, and it will be displayed if the user navigates to the settings page. The exact text (\"Common:Settings\") will be translated by the translator based on the defined context.",
+    "text": "This is a label for a button or a title for a dialog, indicating a section or action related to configuration options.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:41:33.359Z"
+    "updated_at": "2026-04-11T20:43:11.723Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -30,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/mcp-tile/index.tsx",
-      "line_number": 73,
+      "line_number": 74,
       "context": "const getContextOptions = () => {\n return [\n {\n key: \"settings\",\n label: t(\"Common:Settings\"),\n icon: SettingsIcon,\n onClick: () => onSettingsClick?.(item),\n },\n {\n key: \"delete\",",
       "module": "/packages/client"
     },
@@ -75,6 +76,30 @@
       "line_number": 57,
       "context": "case \"branding\":\n case \"data-backup\":\n case \"auto-backup\":\n case \"restore\":\n case \"encrypt-data\":\n return { key: t(\"Common:Settings\"), isSubPage: false };\n case \"payments\":\n return { key: t(\"Common:PaymentsTitle\"), isSubPage: false };\n case \"white-label\":\n return { key: t(\"Common:WhiteLabel\"), isSubPage: true };\n case \"company-info\":",
       "module": "/packages/management"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/forms-header/index.tsx",
+      "line_number": 151,
+      "context": "case FormsSection.InProgress:\n return t(\"Common:InProgress\");\n case FormsSection.CompletedForms:\n return t(\"Common:CompletedForms\");\n case FormsSection.Settings:\n return t(\"Common:Settings\");\n default:\n return \"\";\n }\n }, [activeSection, t]);",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/sidebar/index.tsx",
+      "line_number": 233,
+      "context": "</Scrollbar>\n {showSettings && (\n <div className={styles.navBottom}>\n <SidebarNavItem\n id=\"forms-nav-settings\"\n label={t(\"Common:Settings\")}\n icon={SettingsReactSvgUrl}\n isActive={activeSection === FormsSection.Settings}\n onClick={onSettingsClick}\n showText={showText}\n />",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/settings/DocsSettingsLayout.tsx",
+      "line_number": 65,
+      "context": "<RootScrollbar>\n <SectionWrapper\n sectionHeaderContent={\n <div style={{ padding: \"12px 0\" }}>\n <Text fontSize=\"18px\" fontWeight={700}>\n {t(\"Common:Settings\")}\n </Text>\n </div>\n }\n sectionFilterContent={<div />}\n sectionBodyContent={<Settings />}",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/sidebar/index.tsx",
+      "line_number": 172,
+      "context": "))}\n </Scrollbar>\n <div className={styles.navBottom}>\n <SidebarNavItem\n id=\"docs-nav-settings\"\n label={t(\"Common:Settings\")}\n icon={SettingsReactSvgUrl}\n isActive={isSettings}\n onClick={onSettingsClick}\n showText={showText}\n />",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

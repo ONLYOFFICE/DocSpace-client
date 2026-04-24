@@ -3,16 +3,17 @@
   "content": "Your remaining balance (<1>{{balance}}</1>) will stay in your account and will be available for use if you choose to re-enable {{aiServices}} in the future.",
   "content_en_sha1_hash": "975e966dbc29df3ac68074ce77d8e622fb178233",
   "created_at": "2026-03-26T08:26:46.870Z",
-  "updated_at": "2026-04-09T03:23:07.525Z",
+  "updated_at": "2026-04-11T21:24:39.003Z",
   "comment": {
-    "text": "This translation key provides a message displayed within a dialog when a user disables AI services. It explains that their remaining balance will persist and can be used again if they re-enable AI services in the future. The message includes the user's current balance and the name of the AI services being disabled.",
+    "text": "This is a message within a dialog box that appears when a user disables AI services. It informs the user that their remaining balance (represented by `{{balance}}`) will be saved and available if they re-enable `{{aiServices}}` later.",
     "is_auto": true,
-    "updated_at": "2026-03-26T08:28:52.031Z"
+    "updated_at": "2026-04-11T21:24:39.003Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DisableAiServicesDialog/index.js",
-      "line_number": 103,
+      "line_number": 104,
       "context": "</Text>\n {isAiToolsServiceOn && (\n <Text fontSize=\"13px\" fontWeight={400} className={styles.balance}>\n <Trans\n t={t}\n i18nKey=\"DisableAiServicesBalance\"\n values={{\n balance: formatAiServiceCurrency(\n aiServiceBalance,\n 3,\n aiServiceCodeCurrency,",
       "module": "/packages/client"
     }
@@ -39,25 +40,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'сметка' (account) is masculine in Bulgarian, but the prepositional phrase 'на Вашия сметка' uses a masculine possessive adjective with a feminine noun. It should be 'на Вашата сметка'.",
-          "suggestion": "Остатъчният Ви баланс (<1>{{balance}}</1>) ще остане на Вашата сметка и ще бъде на разположение за употреба, ако решите да активирате отново {{aiServices}} в бъдеще."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical error in Czech: 'Vaše zbývající zůstatek' is incorrect. 'Zůstatek' is masculine, so it should be 'Váš zbývající zůstatek'.",
-          "suggestion": "Váš zbývající zůstatek (<1>{{balance}}</1>) zůstane na vašem účtu a bude k dispozici pro použití, pokud se rozhodnete v budoucnu znovu aktivovat {{aiServices}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -135,13 +124,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'saldo' is neuter in Polish, but the adjective 'Pozostały' is masculine. It should be 'Pozostałe saldo'.",
-          "suggestion": "Pozostałe saldo (<1>{{balance}}</1>) pozostanie na Twoim koncie i będzie dostępne do wykorzystania, jeśli zdecydujesz się w przyszłości ponownie włączyć {{aiServices}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -177,13 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'reaktívno zapnúť' is a literal/calque translation of 're-enable' that sounds unnatural in Slovak and implies 'reactively' rather than 'enabling again'.",
-          "suggestion": "Zostávajúce saldo (<1>{{balance}}</1>) zostane na vašom účte a bude k dispozícii na použitie, ak si rozhodnete v budúcnosti opätčne zapnúť {{aiServices}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {

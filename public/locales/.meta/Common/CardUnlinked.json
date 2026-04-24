@@ -3,13 +3,39 @@
   "content": "Card unlinked",
   "content_en_sha1_hash": "e03b19150f5805fbb3aba830ef26e26249fb29e2",
   "created_at": "2026-04-10T13:53:42.208Z",
-  "updated_at": "2026-04-10T13:53:42.208Z",
+  "updated_at": "2026-04-23T17:24:02.172Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is an error message or status text indicating that a credit card is no longer associated with the account. It appears when a card has been unlinked, often prompting the user to link a new one.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:57:32.942Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/PriceCalculation.tsx",
+      "line_number": 176,
+      "context": "<TotalTariffContainer t={t} isDisabled={isDisabled} />\n \n {!isNotPaidPeriod && isPayer && walletCustomerStatusNotActive ? (\n <div className={styles.cardUnlinkedWarning}>\n <Text fontWeight={600} className={styles.warningColor}>\n {t(\"CardUnlinked\")}\n </Text>\n <Text as=\"span\" className={styles.warningColor}>\n {t(\"LinkNewCard\")}\n </Text>\n <div>",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/UpdatePlanButtonContainer.tsx",
+      "line_number": 183,
+      "context": "if (res === false) {\n const errorText =\n cardLinkedOnFreeTariff && walletCustomerStatusNotActive ? (\n <>\n {t(\"CardUnlinked\")} <br />\n {t(\"LinkNewCard\")} {\"  \"}\n <Link\n onClick={goLinkCard}\n fontWeight={600}\n style={{ textDecoration: \"underline\" }}",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/shared/card-information/index.tsx",
+      "line_number": 64,
+      "context": "<CardIconUrl />\n </div>\n \n <div className={styles.cardContent}>\n <Text fontSize=\"14px\" fontWeight={600} lineHeight=\"16px\">\n {walletCustomerStatusNotActive ? t(\"CardUnlinked\") : t(\"CardLinked\")}\n </Text>\n </div>\n \n <div\n className={classNames(styles.tickedWrapper, {",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
+      "line_number": 205,
+      "context": "</div>\n \n {!isNotPaidPeriod && walletCustomerStatusNotActive ? (\n <div className={styles.walletCustomerStatusNotActive}>\n <Text fontWeight={600} className={styles.warningColor}>\n {t(\"CardUnlinked\")}\n </Text>\n <Text as=\"span\" className={styles.warningColor}>\n {isPayer ? (\n t(\"LinkNewCard\")\n ) : (",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

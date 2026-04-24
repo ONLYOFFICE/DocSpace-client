@@ -3,11 +3,12 @@
   "content": "Next",
   "content_en_sha1_hash": "bc981983e7f547dc62e19a1e383acfe00782a6d5",
   "created_at": "2025-05-19T21:30:46.809Z",
-  "updated_at": "2026-04-08T04:10:32.178Z",
+  "updated_at": "2026-04-23T17:24:01.930Z",
   "comment": {
-    "text": "This translation key is used for the \"Next\" button label in a guidance component, typically appearing as a \"Next\" or \"Got It\" button in a dialog or modal. Its purpose is to provide a clear progression indicator and prompt the user to proceed with the next step.",
+    "text": "This is a button label that advances the user to the next step in a multi-step process, such as a wizard, pagination, or a guided tour.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:20.892Z"
+    "updated_at": "2026-04-11T20:48:05.943Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -15,6 +16,12 @@
       "line_number": 125,
       "context": "<StyledPaging\n className=\"accounts-paging\"\n pageItems={pageItems}\n countItems={countItems}\n previousLabel={t(\"Common:Previous\")}\n nextLabel={t(\"Common:Next\")}\n openDirection=\"top\"\n onSelectPage={onSelectPage}\n onSelectCount={onCountChange}\n previousAction={onSelectPagePrevHandler}\n nextAction={onSelectPageNextHandler}",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsTour.ts",
+      "line_number": 139,
+      "context": "},\n locale: {\n back: t(\"Common:Back\"),\n close: t(\"Common:CloseButton\"),\n last: t(\"Common:Done\"),\n next: t(\"Common:Next\"),\n skip: t(\"Common:Skip\"),\n },\n });\n \n useEffect(() => {",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/guidance/sub-components/Guid.tsx",
@@ -165,13 +172,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Nasledujúce' is an adjective (meaning 'following' or 'subsequent') and is grammatically incorrect for a button label. For a 'Next' button in a UI context, the adverbial/directional form 'Ďalej' is required.",
-          "suggestion": "Ďalej"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {

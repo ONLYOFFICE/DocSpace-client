@@ -179,7 +179,7 @@ const RoomsItemHeader = ({
   };
 
   const addUserTitle = isTemplate
-    ? t("Files:AccessSettings")
+    ? t("Files:AccessSettingsTitle")
     : t("Common:InviteContacts");
 
   const onSearchClick = () => setShowSearchBlock?.(true);

@@ -8,7 +8,7 @@
   "DisablingRoomGroups": "تعطيل مجموعات الغرف",
   "DisablingRoomGroupsDescription": "سيتم حفظ المجموعات ولكنها مخفية. أعد التمكين في الملف الشخصي، إدارة الملفات.",
   "EditRoomGroups": "تعديل مجموعات الغرفة",
-  "EmptyGroupDescription": "لا توجد غرف هنا. حاول إضافة غرفة أو قم بإزالة هذه المجموعة.",
+  "EmptyGroupRoomsDescription": "لا توجد غرف هنا. حاول إضافة غرفة أو قم بإزالة هذه المجموعة.",
   "GroupHasBeenDeleted": "تم حذف المجموعة",
   "GroupIcon": "أيقونة المجموعة",
   "GroupIsEmpty": "المجموعة فارغة",

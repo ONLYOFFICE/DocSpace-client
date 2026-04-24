@@ -40,6 +40,7 @@ import {
   aiProvidersDeleteHandler,
   aiProvidersPutHandler,
   aiProvidersDefaultHandler,
+  aiProvidersPreviewHandler,
 } from "@docspace/shared/__mocks__/handlers";
 import { PATH_AI_PROVIDERS_LIST } from "@docspace/shared/__mocks__/handlers/ai/providers";
 
@@ -85,6 +86,7 @@ test.describe("AI Provider", () => {
       aiProvidersPostHandler(TEST_PORT),
       aiProvidersAvailableHandler(TEST_PORT),
       aiProvidersDefaultHandler(TEST_PORT, { isNewProvider: true }),
+      aiProvidersPreviewHandler(TEST_PORT),
       aiModelsHandler(TEST_PORT, {
         isOpenAI: true,
       })

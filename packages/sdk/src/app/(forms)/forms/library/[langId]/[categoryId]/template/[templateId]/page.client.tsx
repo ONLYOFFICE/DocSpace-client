@@ -44,7 +44,6 @@ import { sectionToPath } from "../../../../../../_utils/sectionFromPathname";
 import { useLibraryParams } from "../../../../../../_hooks/useLibraryParams";
 import { libraryUrl } from "../../../../../../_utils/libraryUrl";
 import { useLibraryBreadcrumb } from "../../../../../../_components/library-breadcrumb/LibraryBreadcrumbContext";
-import useFormThumbnail from "../../../../../../_hooks/useFormThumbnail";
 import { stripHost } from "../../../../../../_utils/thumbnailUrl";
 import { useFormsSettingsStore } from "../../../../../../_store/FormsSettingsStore";
 
@@ -135,7 +134,6 @@ const LibraryTemplateRoute = () => {
 
   const templateIsFile = isFileType(template);
   const thumbUrl = templateIsFile ? stripHost(template.thumbnailUrl) : "";
-  const blobThumbnail = useFormThumbnail(thumbUrl);
 
   const handleUseTemplate = useCallback(async () => {
     if (!template) return;
@@ -228,15 +226,16 @@ const LibraryTemplateRoute = () => {
       <div className={styles.content}>
         <div className={styles.leftColumn}>
           <div className={styles.preview}>
-            {blobThumbnail
-              ? // biome-ignore lint/performance/noImgElement: blob URL not supported by next/image
-                (<img
-                  className={styles.thumbnail}
-                  src={blobThumbnail}
-                  alt={title}
-                  draggable={false}
-                />)
-              : (<div className={styles.thumbnailPlaceholder} />
+            {thumbUrl ? (
+              // biome-ignore lint/performance/noImgElement: authenticated same-origin thumbnail with immutable caching; next/image proxy is not applicable
+              <img
+                className={styles.thumbnail}
+                src={thumbUrl}
+                alt={title}
+                draggable={false}
+              />
+            ) : (
+              <div className={styles.thumbnailPlaceholder} />
             )}
           </div>
 

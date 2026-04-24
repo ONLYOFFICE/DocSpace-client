@@ -3,11 +3,12 @@
   "content": "User Name",
   "content_en_sha1_hash": "a951840b9198d73fc05820af063286d958ede53b",
   "created_at": "2025-05-19T21:30:56.855Z",
-  "updated_at": "2026-04-07T19:35:05.059Z",
+  "updated_at": "2026-04-11T21:04:22.523Z",
   "comment": {
-    "text": "This translation key is used for the label of a tab or section in a user interface, specifically in the \"Viewer Info\" component. It displays the text \"User Name\", likely to represent a user's name in a profile or account settings section. Translators should provide a translated version of this text that reflects its intended use in the application.",
+    "text": "This is a label for a tab in the watermark settings dialog, allowing users to configure the display of the user's name as a watermark.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:00.410Z"
+    "updated_at": "2026-04-11T21:04:22.523Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

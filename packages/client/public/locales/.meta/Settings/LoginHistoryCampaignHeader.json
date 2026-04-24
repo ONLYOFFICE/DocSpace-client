@@ -3,17 +3,18 @@
   "content": "Secure your {{productName}}",
   "content_en_sha1_hash": "dd0cf4fa1223874a80abb7d22c5bd183f7f2cc2d",
   "created_at": "2025-08-04T07:29:46.167Z",
-  "updated_at": "2026-04-10T08:58:38.062Z",
+  "updated_at": "2026-04-11T21:23:29.041Z",
   "comment": {
-    "text": "This key displays a header message within the Login History section of the Portal Settings, specifically under the Security category. It's used to reassure users by highlighting the security of their {{productName}}. Translators should ensure the tone remains reassuring and emphasizes security.",
+    "text": "This is the header for a campaign banner promoting security features. It appears at the top of the banner and includes a variable `{{productName}}` which will be replaced by the product's brand name.",
     "is_auto": true,
-    "updated_at": "2025-08-04T08:12:12.821Z"
+    "updated_at": "2026-04-11T21:23:29.041Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/hooks/useTwoFactorCampaignBanner.ts",
-      "line_number": 55,
-      "context": "return () => window.removeEventListener(\"resize\", handleResize);\n }, []);\n \n const loginHistoryTranslates = useMemo(\n () => ({\n Header: t(\"LoginHistoryCampaignHeader\", {\n productName: t(\"Common:ProductName\"),\n }),\n SubHeader: t(\"LoginHistoryCampaignTitle\"),\n Text: t(\"LoginHistoryCampaignText\"),\n Link: isMobile",
+      "line_number": 56,
+      "context": "return () => window.removeEventListener(\"resize\", handleResize);\n }, []);\n \n const loginHistoryTranslates = useMemo(\n () => ({\n Header: t(\"LoginHistoryCampaignHeader\", {\n productName: getBrandName(\"ProductName\"),\n }),\n SubHeader: t(\"LoginHistoryCampaignTitle\"),\n Text: t(\"LoginHistoryCampaignText\"),\n Link: isMobile",
       "module": "/packages/shared"
     }
   ],
@@ -39,13 +40,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation 'təmin edin' means 'to provide' or 'to ensure/supply', whereas the English 'Secure' in a security context means 'to protect' or 'to make safe'.",
-          "suggestion": "{{productName}} məhsulunuzu qoruyun"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -177,13 +172,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Albanian translation uses a grammatical construction ('-in tënd') that incorrectly treats the variable as a noun with a suffix, which will likely break the UI if the productName is a proper noun or a multi-word string. Furthermore, it mixes formal 'Siguroni' (plural/formal) with informal 'tënd' (singular/informal).",
-          "suggestion": "Siguroni {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

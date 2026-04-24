@@ -16,7 +16,7 @@
     "esModuleInterop": true,
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "rootDir": "./",
+    "rootDir": "../../",
     "baseUrl": "./",
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -33,6 +33,9 @@
       ],
       "PUBLIC_DIR/*": [
         "../../public/*"
+      ],
+      "@docspace/shared/*": [
+        "../shared/*"
       ],
       "ASSETS_DIR/*": [
         "./public/*"

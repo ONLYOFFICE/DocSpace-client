@@ -3,13 +3,21 @@
   "content": "Each completed file is named with a number, the submitter's name, and the submission date. Use the AI Chat button to ask questions or get summaries about submissions.",
   "content_en_sha1_hash": "67322cfe2b2165935ee717df44eb105df580ae8b",
   "created_at": "2026-03-31T15:18:26.684Z",
-  "updated_at": "2026-04-07T21:22:34.298Z",
+  "updated_at": "2026-04-23T17:24:02.164Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a tooltip message that appears when a user is guided through the \"Completed submissions\" folder in the forms section. It explains the naming convention for completed files and highlights the AI Chat feature for interacting with submissions.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:40:37.494Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_utils/tourSteps.ts",
+      "line_number": 282,
+      "context": "callbacks,\n ),\n {\n target: '[data-tour=\"forms-grid\"]',\n content: t(\n \"Common:TourCompletedFolder\",\n \"Each completed file is named with a number, the submitter's name, and the submission date. Use the AI Chat button to ask questions or get summaries about submissions.\",\n ),\n title: t(\"Common:TourCompletedFolderTitle\", \"Completed submissions\"),\n data: {\n page: \"/forms/completed-forms\",",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -32,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'документи' (documents) is used in the plural, but the English text refers to 'submissions' (singular/collective context) and the grammar 'подадения документи' is incorrect (should be 'подадените документи' or 'подаването'). More importantly, 'резюмета' (summaries) is plural, but the phrasing 'относно подадения документи' is grammatically broken in Bulgarian.",
-          "suggestion": "Името на всеки завършен файл включва номер, име на подателя и дата на подаване. Използвайте бутона AI Chat, за да задавате въпроси или да получавате резюмета относно подадения материал."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -68,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'lähetystä' at the end of the sentence is in the partitive case, which implies 'about some submission' or 'about the act of submitting', whereas the English 'about submissions' is plural. In Finnish, to convey 'about submissions' (plural), it should be 'lähetyksistä'.",
-          "suggestion": "Jokainen valmis tiedosto on nimetty numerolla, lähetäjän nimellä ja lähetyspäivämäärällä. Käytä AI Chat -painiketta kysyäksesi kysymyksiä tai saadaksesi yhteenvetoja lähetyksistä."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -86,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'հցեր տալու' is a typo or nonsensical; it appears to be a broken attempt at 'հարցեր տալու' (to ask questions).",
-          "suggestion": "Յուրաքանչյուր լրացված ֆայլի անվանումը բաղկացած է համարից, ներկայացնողի անունից և ներկայացման ամսաթվից: Օգտագործեք AI Chat կոճակը հարցեր տալու կամ ներկայացումների ամփոփումներ ստանալու համար:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -122,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'nomainīts' means 'replaced' or 'changed', whereas the English text says 'named' (nosaukts).",
-          "suggestion": "Katrs pabeigts fails tiek nosaukts ar numuru, iesniegēja vārdu un iesniegšanas datumu. Izmantojiet AI Chat pogu, lai uzdotu jautājumus vai saņemtu kopsavādes par iesniegumiem."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -158,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'trimiterelui' is a grammatical error/non-existent word in Romanian; it should be 'numele celui care a trimis' or 'numele expeditorului' to convey 'the submitter's name'.",
-          "suggestion": "Fiecare fișier finalizat este numit cu un număr, numele celui care a trimis și data de trimitere. Folosiți butonul AI Chat pentru a pune întrebări sau a primi rezumate despre trimiteri."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -194,13 +172,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ka emërzuar' (has named) is grammatically incorrect in this context; it should be passive 'emërtohet' (is named) to match the English 'is named'. Additionally, 'emërues' (appointer/nominator) is a poor translation for 'submitter' (dorëzues).",
-          "suggestion": "Çdo skedar i përfunduar emërtohet me një numër, emrin e dorëzuesit dhe datën e dorëzimit. Përdorni butonin AI Chat për të bërë pyetje ose për të marrë përmbledhje mbi dorëzimet."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

@@ -91,7 +91,7 @@ const ReactSmartBanner = (props) => {
   return isMobile && isBannerVisible && ready && isTouchDevice ? (
     <div id="smart-banner" style={{ paddingBottom: "80px" }}>
       <SmartBanner
-        title={t("SmartBanner:AppName", {
+        title={t("SmartBanner:SmartBannerAppName", {
           organizationName: logoText,
         })}
         author="Ascensio System SIA"

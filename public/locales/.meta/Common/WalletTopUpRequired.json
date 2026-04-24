@@ -3,13 +3,21 @@
   "content": "Top up required: {{currency}}",
   "content_en_sha1_hash": "905faeb2e76ac54b11e540892ab0a95807a23187",
   "created_at": "2026-04-10T13:53:45.886Z",
-  "updated_at": "2026-04-10T13:53:45.886Z",
+  "updated_at": "2026-04-12T09:26:11.367Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a warning message displayed when a wallet top-up is needed to complete a purchase. `{{currency}}` shows the amount required for the top-up.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:39:14.791Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
+      "line_number": 339,
+      "context": "className={classNames(styles.balanceInfo, {\n [styles.warningColor]: reccomendedAmount,\n })}\n >\n {reccomendedAmount\n ? t(\"WalletTopUpRequired\", {\n currency: formatWalletCurrency(reccomendedAmount, 2),\n })\n : t(\"RemainingBalanceAfterPurchase\", {\n currency: formatWalletCurrency(remainingBalance, 2),\n })}",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

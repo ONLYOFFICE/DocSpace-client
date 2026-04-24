@@ -3,11 +3,12 @@
   "content": "File version deleted: V.{{version}}.",
   "content_en_sha1_hash": "df6fdcfca6482d8a20e2e76e824c2238ec1c7c32",
   "created_at": "2025-05-19T21:30:54.831Z",
-  "updated_at": "2026-04-07T19:35:05.114Z",
+  "updated_at": "2026-04-11T21:13:27.051Z",
   "comment": {
-    "text": "This translation key is used for a file version removal message that displays when a file's version has been deleted. It informs the user of the reason for the change and provides the previous version number. This key appears in the \"InfoPanel\" component on the Home page.",
+    "text": "This is a toast message that appears in the InfoPanel's history feed when a file version has been deleted. The `{{version}}` variable represents the specific version number of the file that was removed.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:01.878Z"
+    "updated_at": "2026-04-11T21:13:27.051Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

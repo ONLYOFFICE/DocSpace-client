@@ -14,7 +14,7 @@
   "LogoutAllActiveSessionsDescription": "Բոլոր ակտիվ կապերը, բացի այս կապից, դուրս կգրվեն, քանի որ այն ներկայումս օգտագործվում է:",
   "LogoutBtn": "Դուրս գալ",
   "LogoutDescription": "Նշում. Բոլոր ակտիվ կապերը, բացի այս կապից, դուրս կգրվեն, քանի որ այն ներկայումս օգտագործվում է:",
-  "LogoutFrom": "Դուրս գալ {{platform}} {{browser}}-ից:",
+  "LogoutFrom": "Դուրս գալ {{platform}} {{browser}}-ից՞",
   "MyProfile": "Իմ էջը",
   "NotificationsChannels": "Ծանուցումների ալիքներ",
   "ProviderSuccessfullyConnected": "Մատակարարը հաջողությամբ միացավ",
@@ -27,5 +27,5 @@
   "TelegramAccountDisconnect": "Անջատել Telegram-ը",
   "TelegramAccountDisconnectDescription": "Ձեր @{{username}} հաշիվը միացված է Telegram ծանուցումների համար։ Կարող եք անջատել այս հաշվից։ Այդ դեպքում այլևս ծանուցումներ չեք ստանա։",
   "TerminateAllSessions": "Դադարեցնել բոլոր սեանսները, բացի ընթացիկից",
-  "TwoFactorDescription": "Ադմինիստրատորի կողմից բոլոր օգտատերերի համար միացվել է իսկորոշման նույնականացումը կոդ ստեղծող հավելվածի միջոցով:"
+  "TwoFactorDescription": "Ադմինիստրատորի կողմից բոլոր օգտատերերի համար միացվել է երկփուլային նույնականացումը կոդ ստեղծող հավելվածի միջոցով:"
 }

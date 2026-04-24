@@ -3,28 +3,29 @@
   "content": "Leave the agent",
   "content_en_sha1_hash": "448360671ff7052f06a5a0518dca7ae432710746",
   "created_at": "2025-10-27T16:14:30.382Z",
-  "updated_at": "2026-04-10T08:21:04.316Z",
+  "updated_at": "2026-04-23T17:24:01.829Z",
   "comment": {
-    "text": "Text for a button or link allowing a user to leave an agent or room, used in dialogs, panels, and context menus. The wording will change depending on whether the user is interacting with an AI agent or a regular room. Translators should ensure it clearly indicates the action of exiting.",
+    "text": "This is a button label or menu item label. It allows a user to exit an AI agent conversation.",
     "is_auto": true,
-    "updated_at": "2025-10-27T17:58:54.249Z"
+    "updated_at": "2026-04-11T21:09:20.646Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
-      "line_number": 77,
+      "line_number": 78,
       "context": "document.removeEventListener(\"keyup\", onKeyUp, false);\n };\n }, []);\n \n const titleText = isAIAgent\n ? t(\"Files:LeaveTheAgent\")\n : t(\"Files:LeaveTheRoom\");\n \n const roomDescription = isRoomOwner\n ? t(\"Files:LeaveRoomDescription\")\n : t(\"Files:WantLeaveRoom\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
-      "line_number": 103,
-      "context": ": t(\"CreateEditRoomDialog:PeopleSelectorInfo\", {\n productName: t(\"Common:ProductName\"),\n });\n \n const footerCheckboxLabel = isAIAgent\n ? t(\"Files:LeaveTheAgent\")\n : t(\"Files:LeaveTheRoom\");\n \n const selectorComponent = (\n <PeopleSelector\n withCancelButton",
+      "line_number": 104,
+      "context": ": t(\"CreateEditRoomDialog:PeopleSelectorInfo\", {\n productName: getBrandName(\"ProductName\"),\n });\n \n const footerCheckboxLabel = isAIAgent\n ? t(\"Files:LeaveTheAgent\")\n : t(\"Files:LeaveTheRoom\");\n \n const selectorComponent = (\n <PeopleSelector\n withCancelButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2580,
+      "line_number": 2642,
       "context": "disabled: !isAIAgent,\n },\n {\n id: \"option_leave-room\",\n key: \"leave-room\",\n label: isAIAgent ? t(\"LeaveTheAgent\") : t(\"LeaveTheRoom\"),\n icon: LeaveRoomSvgUrl,\n onClick: this.onLeaveRoom,\n disabled: isKnowledgeOrResult\n ? false\n : isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),",
       "module": "/packages/client"
     }

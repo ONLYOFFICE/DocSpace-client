@@ -24,7 +24,7 @@
   "SuccessLogout": "Etkin bağlantının oturumu kapatıldı: {{platform}}, {{browser}}",
   "TelegramAccount": "Telegram hesabı",
   "TelegramAccountDescription": "TelegramBot'u hesabınıza bağlamak için gizli bağlantıya tıklayın ve “Telegram’ı Bağla” butonuna tıklayın.",
-  "TelegramAccountDisconnect": "Telegram'ı bağlantısını kes",
+  "TelegramAccountDisconnect": "Telegram bağlantısını kes",
   "TelegramAccountDisconnectDescription": "@{{username}} hesabınız telegram bildirimleri için bağlıdır. Bu hesaptan bağlantıyı kesebilirsiniz. Bu durumda, bildirimler almayacaksınız.",
   "TerminateAllSessions": "Geçerli oturum dışındaki tüm oturumları sonlandırın",
   "TwoFactorDescription": "Tüm kullanıcılar için kod üreten bir uygulama aracılığıyla iki faktörlü kimlik doğrulama yönetici tarafından etkinleştirildi."

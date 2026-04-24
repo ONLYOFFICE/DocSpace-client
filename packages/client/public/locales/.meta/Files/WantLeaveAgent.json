@@ -3,17 +3,18 @@
   "content": "Do you really want to leave this agent? You will be able to join it again via new invitation by an agent admin.",
   "content_en_sha1_hash": "dfab32a686321c982763bf68219653566661129b",
   "created_at": "2025-10-27T16:14:30.876Z",
-  "updated_at": "2025-10-27T17:58:17.405Z",
+  "updated_at": "2026-04-23T17:24:01.830Z",
   "comment": {
-    "text": "This text appears in a dialog, confirming a user's intent to leave an agent. It explains that leaving is possible and the user can rejoin with a new invitation from an agent admin. This message helps users understand the consequences of leaving.",
+    "text": "This is the confirmation message displayed in a dialog when a user attempts to leave an AI agent. It informs the user that they will need a new invitation from an agent admin to rejoin.",
     "is_auto": true,
-    "updated_at": "2025-10-27T17:58:17.405Z"
+    "updated_at": "2026-04-11T21:07:41.544Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
-      "line_number": 86,
-      "context": "? t(\"Files:LeaveRoomDescription\")\n : t(\"Files:WantLeaveRoom\");\n \n const agentDescription = isRoomOwner\n ? t(\"Files:LeaveAgentDescription\")\n : t(\"Files:WantLeaveAgent\");\n \n const descriptionText = isAIAgent ? agentDescription : roomDescription;\n \n return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>",
+      "line_number": 87,
+      "context": "? t(\"Files:LeaveRoomDescription\")\n : t(\"Files:WantLeaveRoom\");\n \n const agentDescription = isRoomOwner\n ? t(\"Files:LeaveAgentDescription\")\n : t(\"Files:WantLeaveAgent\");\n \n const descriptionText = isAIAgent ? agentDescription : roomDescription;\n \n const showFormFillingWarning = isFormFiller && !isAIAgent && !isRoomOwner;",
       "module": "/packages/client"
     }
   ],

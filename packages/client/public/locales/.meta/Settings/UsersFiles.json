@@ -3,16 +3,17 @@
   "content": "User’s Files",
   "content_en_sha1_hash": "8c601cb8c42483a78013375e2d836fca2adaf2ed",
   "created_at": "2025-05-19T21:30:53.154Z",
-  "updated_at": "2026-04-08T23:58:55.656Z",
+  "updated_at": "2026-04-11T21:21:24.533Z",
   "comment": {
-    "text": "This translation key is used for the label of a setting that determines what files are exported by users. It appears in a settings page and is used to identify which type of file (e.g., user's files) is being exported.",
+    "text": "This is a label for a section in the data export settings, referring to files owned by a specific user.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:08.803Z"
+    "updated_at": "2026-04-11T21:21:24.533Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 145,
+      "line_number": 146,
       "context": "serviceName=\"Nextcloud\"\n usersExportDetails={{\n name: t(\"InfoPanel:Users\"),\n }}\n personalExportDetails={{\n name: t(\"Settings:UsersFiles\"),\n }}\n sharedFilesAndFoldersExportDetails={{\n name: t(\"Settings:SharedFilesAndFoldersDetails\"),\n }}\n />",
       "module": "/packages/client"
     }
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'User’s Files' is singular (referring to a single user's files), whereas the Arabic translation 'ملفات المستخدمين' is plural (referring to 'Users' files).",
-          "suggestion": "ملفات المستخدم"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {

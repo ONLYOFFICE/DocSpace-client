@@ -38,6 +38,7 @@ import { RoomsType } from "@docspace/shared/enums";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 
 import i18n from "../i18n";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const getRoomTypeName = (room, t) => {
   switch (room) {
@@ -131,31 +132,31 @@ export const connectedCloudsTypeTitleTranslation = (key, t) => {
   switch (key) {
     case "Box":
     case "BoxNet":
-      return t("Common:TypeTitleBoxNet");
+      return getBrandName("TypeTitleBoxNet");
 
     case "DropBox":
     case "DropboxV2":
-      return t("Common:TypeTitleDropBox");
+      return getBrandName("TypeTitleDropBox");
 
     case "DocuSign":
-      return t("Common:TypeTitleDocuSign");
+      return getBrandName("TypeTitleDocuSign");
 
     case "Google":
     case "GoogleDrive":
-      return t("Common:TypeTitleGoogle");
+      return getBrandName("TypeTitleGoogle");
 
     case "OneDrive":
     case "SkyDrive":
-      return t("Common:TypeTitleSkyDrive");
+      return getBrandName("TypeTitleSkyDrive");
 
     case "SharePoint":
-      return t("Common:TypeTitleSharePoint");
+      return getBrandName("TypeTitleSharePoint");
     case "WebDav":
-      return t("Common:TypeTitleWebDav");
+      return getBrandName("TypeTitleWebDav");
     case "kDrive":
-      return t("Common:TypeTitlekDrive");
+      return getBrandName("TypeTitlekDrive");
     case "Yandex":
-      return t("Common:TypeTitleYandex");
+      return getBrandName("TypeTitleYandex");
 
     default:
       return key;

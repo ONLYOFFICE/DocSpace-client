@@ -3,16 +3,17 @@
   "content": "Remove the unnecessary files or <1>click here</1> to upgrade your tariff plan.",
   "content_en_sha1_hash": "cdeb38f2a17c458e5fc316eb9262594e8c76ff82",
   "created_at": "2025-05-19T21:30:54.117Z",
-  "updated_at": "2026-04-07T19:35:05.153Z",
+  "updated_at": "2026-04-11T21:17:43.641Z",
   "comment": {
-    "text": "This translation key is used for a button or link that prompts users to remove unnecessary files or upgrade their tariff plan. The text will appear on a screen where user quotas are being managed, encouraging users to take action to manage their files or change their plan.",
+    "text": "This is a message displayed in the QuotasBar component. It informs the user that they need to remove files or upgrade their plan due to storage limits, with `<1>click here</1>` being a link to the upgrade page.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:24.434Z"
+    "updated_at": "2026-04-11T21:17:43.641Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 139,
+      "line_number": 140,
       "context": "});\n \n return (\n <Trans\n t={t}\n i18nKey=\"RemoveFilesOrClickToUpgrade\"\n components={{\n 1: (\n <Link\n fontSize=\"12px\"\n fontWeight=\"400\"",
       "module": "/packages/client"
     }

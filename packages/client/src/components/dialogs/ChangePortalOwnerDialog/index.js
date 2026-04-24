@@ -44,6 +44,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
 import styles from "./ChangePortalOwner.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const ChangePortalOwnerDialog = ({
   t,
@@ -106,13 +107,13 @@ const ChangePortalOwnerDialog = ({
     t("DoTheSame"),
     t("AppointAdmin"),
     t("SetAccessRights"),
-    t("ManagePortal", { productName: t("Common:ProductName") }),
+    t("ManagePortal", { productName: getBrandName("ProductName") }),
     t("ManageUser"),
     t("ChangePortalOwner:ChangeOwner", {
-      productName: t("Common:ProductName"),
+      productName: getBrandName("ProductName"),
     }),
-    t("BackupPortal", { productName: t("Common:ProductName") }),
-    t("DeactivateOrDeletePortal", { productName: t("Common:ProductName") }),
+    t("BackupPortal", { productName: getBrandName("ProductName") }),
+    t("DeactivateOrDeleteSpace", { productName: getBrandName("ProductName") }),
   ];
 
   const filter = React.useMemo(() => {
@@ -173,18 +174,18 @@ const ChangePortalOwnerDialog = ({
           <Text
             className={styles.newOwner}
             title={t("NewPortalOwner", {
-              productName: t("Common:ProductName"),
+              productName: getBrandName("ProductName"),
             })}
           >
-            {t("NewPortalOwner", { productName: t("Common:ProductName") })}
+            {t("NewPortalOwner", { productName: getBrandName("ProductName") })}
           </Text>
           <Text
             className={styles.description}
             title={t("ChangeInstruction", {
-              productName: t("Common:ProductName"),
+              productName: getBrandName("ProductName"),
             })}
           >
-            {t("ChangeInstruction", { productName: t("Common:ProductName") })}
+            {t("ChangeInstruction", { productName: getBrandName("ProductName") })}
           </Text>
         </div>
 
@@ -227,10 +228,10 @@ const ChangePortalOwnerDialog = ({
           <Text
             className={styles.listHeader}
             title={t("PortalOwnerCan", {
-              productName: t("Common:ProductName"),
+              productName: getBrandName("ProductName"),
             })}
           >
-            {t("PortalOwnerCan", { productName: t("Common:ProductName") })}
+            {t("PortalOwnerCan", { productName: getBrandName("ProductName") })}
           </Text>
 
           {ownerRights?.map((item) => (

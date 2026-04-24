@@ -3,16 +3,17 @@
   "content": "Decrypt storage",
   "content_en_sha1_hash": "2ae114849bb95cfb13d5eb2d05d02b8708d00d3e",
   "created_at": "2025-05-19T21:30:57.424Z",
-  "updated_at": "2026-04-07T19:35:05.254Z",
+  "updated_at": "2026-04-11T21:31:56.575Z",
   "comment": {
-    "text": "DecryptStorage button label: Used to toggle between \"Encrypt\" and \"Decrypt\" buttons on the File Management screen.",
+    "text": "This is a button label. It appears when the storage is currently encrypted, allowing the user to decrypt it.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:48:00.679Z"
+    "updated_at": "2026-04-11T21:31:56.575Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/management/src/app/settings/encrypt-data/page.client.tsx",
-      "line_number": 137,
+      "line_number": 138,
       "context": "/>\n <Button\n primary\n label={\n status === EncryptionStatus.Encrypted\n ? t(\"DecryptStorage\")\n : t(\"EncryptStorage\")\n }\n size={ButtonSize.normal}\n onClick={() => setEncryptWarningDialogVisible(true)}\n isDisabled={isDisabled}",
       "module": "/packages/management"
     }

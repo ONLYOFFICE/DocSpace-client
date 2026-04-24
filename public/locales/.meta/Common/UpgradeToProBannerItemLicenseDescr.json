@@ -3,11 +3,12 @@
   "content": "+ 1-year subscription for functionality and security updates.",
   "content_en_sha1_hash": "bf909f01efdd41c4e5073f4e8f004d859d3df47c",
   "created_at": "2025-05-26T07:15:49.243Z",
-  "updated_at": "2026-04-07T20:48:39.685Z",
+  "updated_at": "2026-04-12T13:20:48.428Z",
   "comment": {
-    "text": "This translation key is used for a one-year subscription license description, indicating the duration and benefits of the upgraded plan. It will appear in a banner or similar UI element, likely on a payment page or benefits container. The translation should convey a sense of time-based duration.",
+    "text": "This is a description for a banner item, detailing a benefit of upgrading to a Pro plan. It explains that the upgrade includes a one-year subscription for updates.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:02:17.418Z"
+    "updated_at": "2026-04-11T20:39:53.763Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -45,25 +46,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation omits the specific duration '1-' (one) from '1-year', translating it only as 'Roční' (annual/yearly). While semantically similar, it fails to explicitly include the '1' present in the source.",
-          "suggestion": "+ 1leté předplatné pro aktualizace funkcí a zabezpečení."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation changes the meaning from 'adding a 1-year subscription' to 'updates within a 1-year subscription', losing the core benefit of the subscription itself being the item added.",
-          "suggestion": "+ 1-jähriges Abonnement für Funktions- und Sicherheitsupdates."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -87,13 +76,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The French translation changes the meaning from '1-year subscription for updates' to '1 year of subscription on updates', which is semantically awkward and implies the subscription itself is 'on' the updates rather than providing them.",
-          "suggestion": "+ 1 an d'abonnement pour les mises à jour des fonctionnalités et de la sécurité."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -141,13 +124,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The '+' symbol (indicating an addition or increment) is missing from the translation, which is important for the context of an upgrade.",
-          "suggestion": "+ 1 rok subskrypcji obejmujący aktualizacje funkcji i zabezpieczeń."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -169,7 +146,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \"i\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-12T13:20:15.970Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null

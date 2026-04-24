@@ -3,17 +3,18 @@
   "content": "Domain settings",
   "content_en_sha1_hash": "af4c66f0fd56174dbc835c4ad3c24fa3e2f84c7e",
   "created_at": "2025-05-19T21:30:57.440Z",
-  "updated_at": "2026-04-07T19:35:05.255Z",
+  "updated_at": "2026-04-13T14:59:05.984Z",
   "comment": {
-    "text": "The \"DomainSettings\" translation key is used to display a title and label on a domain settings interface, typically in a modal dialog or sub-component. It appears as \"Domain settings\" in English and is translated accordingly for user interfaces.",
+    "text": "This is the title of a dialog window where users can manage their domain settings.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:47:58.191Z"
+    "updated_at": "2026-04-11T21:31:49.451Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/management/src/app/spaces/multiple/domain-settings.tsx",
-      "line_number": 48,
-      "context": "interface IProps {\n baseDomain: string;\n }\n \n export const DomainSettings = observer(({ baseDomain }: IProps) => {\n const { t } = useTranslation([\"Management\", \"Common\"]);\n const { currentDeviceType } = useDeviceType();\n const { spacesStore } = useStores();\n const { setChangeDomainDialogVisible } = spacesStore;",
+      "line_number": 61,
+      "context": "};\n \n return (\n <div className={styles.domainSettings}>\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"DomainSettings\")}\n </Text>\n <FieldContainer\n className={styles.fieldContainer}\n isVertical\n labelText={t(\"Common:YourCurrentDomain\")}",
       "module": "/packages/management"
     },
     {

@@ -2337,6 +2337,7 @@ class FilesStore {
 
               const isFiltered =
                 subjectId ||
+                filter.subjectOwnerId ||
                 filterValue ||
                 type ||
                 filter.provider ||
@@ -2507,6 +2508,7 @@ class FilesStore {
 
               const isFiltered =
                 subjectId ||
+                filter.subjectOwnerId ||
                 filterValue ||
                 type ||
                 filter.provider ||

@@ -3,13 +3,21 @@
   "content": "Debit",
   "content_en_sha1_hash": "cf558941e04e97365be9cdc222455630c571fa11",
   "created_at": "2026-04-10T13:53:42.398Z",
-  "updated_at": "2026-04-10T13:53:42.398Z",
+  "updated_at": "2026-04-23T17:24:02.187Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label indicating a transaction type, specifically a deduction from an account. It appears in transaction history as a short, standalone word.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:55:30.436Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
+      "line_number": 135,
+      "context": "label: t(\"Credit\"),\n dataTestId: \"credit_transactions_option\",\n },\n {\n key: \"debit\",\n label: t(\"Debit\"),\n dataTestId: \"debit_transactions_option\",\n },\n ];\n \n const selectedType =",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

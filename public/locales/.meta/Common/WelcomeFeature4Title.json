@@ -3,13 +3,21 @@
   "content": "Data Integration",
   "content_en_sha1_hash": "b03aaec668144d8105116c1baab1b172933cbe5c",
   "created_at": "2026-03-31T15:18:27.015Z",
-  "updated_at": "2026-04-07T20:01:30.919Z",
+  "updated_at": "2026-04-23T17:24:02.159Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a title for a feature card in the welcome tour dialog. It describes the \"Data Integration\" feature.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:38:59.369Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/welcome-tour-dialog/index.tsx",
+      "line_number": 137,
+      "context": "<div className={styles.featureCard}>\n <div className={styles.featureIcon}>\n <ReactSVG src={featureIcons[3]} />\n </div>\n <div className={styles.featureText}>\n <Text fontWeight={600} fontSize=\"13px\">{t(\"Common:WelcomeFeature4Title\", \"Data Integration\")}</Text>\n <Text fontSize=\"12px\" className={styles.featureDesc}>{t(\"Common:WelcomeFeature4\", \"Export results directly to your systems\")}</Text>\n </div>\n </div>\n </div>\n </div>",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -139,6 +139,7 @@ async function generateMetadata(projectName) {
     const languages = languageDirs.filter(
       (dir) =>
         dir !== ".meta" &&
+        dir !== ".constants" &&
         fs.statSync(path.join(projectPath, dir)).isDirectory()
     );
 

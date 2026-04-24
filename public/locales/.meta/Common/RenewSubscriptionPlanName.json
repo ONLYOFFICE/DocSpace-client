@@ -3,13 +3,21 @@
   "content": "Renew subscription to {{planName}} plan",
   "content_en_sha1_hash": "ab8a1ed47bbc9bb05d92ff4ae2e9cf0620d14a23",
   "created_at": "2026-04-10T13:53:44.098Z",
-  "updated_at": "2026-04-10T13:53:44.098Z",
+  "updated_at": "2026-04-12T02:49:55.899Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a text label displayed when a subscription is not paid, prompting the user to renew. `{{planName}}` will be replaced with the name of the subscription plan.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:45:08.133Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/PaymentContainer.tsx",
+      "line_number": 149,
+      "context": "}\n \n if (isNotPaidPeriod) {\n return (\n <Text fontSize=\"16px\" isBold className={styles.paymentInfoSuggestion}>\n <CommonTrans i18nKey=\"RenewSubscriptionPlanName\" values={{ planName: tariffPlanTitle }} />\n </Text>\n );\n }\n \n if (isGracePeriod) {",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

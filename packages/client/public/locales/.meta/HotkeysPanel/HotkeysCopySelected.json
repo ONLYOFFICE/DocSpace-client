@@ -3,11 +3,12 @@
   "content": "Copy selected items to the clipboard",
   "content_en_sha1_hash": "f91d242fd5ba33f8f48574cde08a714e19791317",
   "created_at": "2025-05-19T21:30:55.032Z",
-  "updated_at": "2026-04-07T19:35:05.105Z",
+  "updated_at": "2026-04-11T21:12:22.207Z",
   "comment": {
-    "text": "This translation key is used to display the text \"Copy selected items to the clipboard\" in the application's UI. It appears in a hotkeys panel, providing context to users about the function of pressing Ctrl+Shift+c.",
+    "text": "This is a hotkey description displayed in the Hotkeys panel, indicating the action of copying selected items to the clipboard.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:40:38.200Z"
+    "updated_at": "2026-04-11T21:12:22.207Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

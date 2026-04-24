@@ -3,11 +3,12 @@
   "content": "Enter the {{mcpServer}} address provided by your service",
   "content_en_sha1_hash": "f2c66e845534086fd1e992472e443d0354f9ea45",
   "created_at": "2025-11-21T09:16:05.163Z",
-  "updated_at": "2026-02-19T13:36:32.698Z",
+  "updated_at": "2026-04-11T21:02:40.242Z",
   "comment": {
-    "text": "This text is a hint displayed below a URL input field in the AI settings section of the portal. It instructs the user to enter the Minecraft server address provided by their service, referencing the label \"MCPServer\" for clarity. Translators should ensure the instruction is clear and understandable within the context of configuring a Minecraft server connection.",
+    "text": "This is a hint text displayed below an input field. It instructs the user to enter the address of their service's MCP server. The `{{mcpServer}}` variable will be replaced with the localized term for \"MCP Server\".",
     "is_auto": true,
-    "updated_at": "2025-12-22T09:54:46.220Z"
+    "updated_at": "2026-04-11T21:02:40.242Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

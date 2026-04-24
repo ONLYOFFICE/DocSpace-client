@@ -17,8 +17,12 @@
   "FileLifetimeDescription": "Stabiliți durata de viață a fișierului pentru a șterge automat fișierele din sala după o anumită perioadă. Durata de viață începe la data încărcării/creării fișierului.",
   "FilesOlderThan": "Fișierele mai vechi decât:",
   "FormRoomBarDescription": "Această sală este disponibilă tuturor la linkul. Utilizatorii externi vor fi acordaţi permisiunea de Completator de formulare pentru toate fişiere.",
+  "GoToIntegrations": "Accesați Integrații",
   "Horizontal": "Pe orizontală",
   "Icon": "Pictogramă",
+  "NeedMoreIntegrations": "Doriți mai multe integrari?",
+  "NeedMoreIntegrationsDescription": "Folosiți webhook-uri pentru a trimite date către sistemul dvs. sau conectați formularele la mii de servicii prin Zapier.",
+  "NoDatabaseConnections": "Nicio conexiune la bază de date configurată",
   "PeopleSelectorInfo": "Numai administratorul sălii sau administratorul spaţiului {{productName}} poate deveni proprietar al sălii",
   "Position": "Poziția",
   "PublicRoomBarDescription": "Această sală este disponibilă tuturor la link-ul. Accesul utilizatorilor externi se acordă În funcție de nivelul de acces permis.",
@@ -41,8 +45,5 @@
   "ViewerInfo": "Detalii Vizualizator",
   "WatermarkPreview": "Previzualizare incripționare",
   "WatermarkPreviewHelp": "Previzualizarea imaginii arată cum aproximativ  va fi afișată incripționarea în fișierele dvs.",
-  "GoToIntegrations": "Accesați Integrații",
-  "NeedMoreIntegrations": "Doriți mai multe integrari?",
-  "NeedMoreIntegrationsDescription": "Folosiți webhook-uri pentru a trimite date către sistemul dvs. sau conectați formularele la mii de servicii prin Zapier.",
-  "NoDatabaseConnections": "Nicio conexiune la bază de date configurată"
+  "NoDatabaseConnectionsRoomAdmin": "Conexiunile la baza de date sunt configurate de către un administrator. Odată ce o bază de date este configurată, veți putea activa exportul aici."
 }

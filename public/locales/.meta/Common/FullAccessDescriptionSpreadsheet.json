@@ -3,16 +3,17 @@
   "content": "Sharing, editing, commenting and renaming.",
   "content_en_sha1_hash": "3f487e1b3f61bbc134665933d4d4b44e8ae092f7",
   "created_at": "2025-09-29T18:22:04.749Z",
-  "updated_at": "2026-04-08T08:23:18.564Z",
+  "updated_at": "2026-04-11T20:51:41.912Z",
   "comment": {
-    "text": "This text describes the permissions granted with \"Full Access\" for spreadsheet files, including the ability to share, edit, and comment. It appears as a label or tooltip to explain the scope of full access rights. Translators should ensure the description accurately reflects the capabilities of \"Full Access\" for spreadsheet files.",
+    "text": "Tooltip text describing the full access permissions for a spreadsheet file. It appears when hovering over the \"Full Access\" option in sharing settings.",
     "is_auto": true,
-    "updated_at": "2025-09-29T18:23:36.777Z"
+    "updated_at": "2026-04-11T20:51:41.912Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 659,
+      "line_number": 660,
       "context": "FileType.PDF,\n ),\n access: ShareAccessRights.FullAccess,\n isForm: P.not(true),\n },\n () => t(\"Common:FullAccessDescriptionSpreadsheet\"),\n )\n .with(\n {\n fileType: P.union(\n FileType.Spreadsheet,",
       "module": "/packages/shared"
     }

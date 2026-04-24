@@ -3,18 +3,19 @@
   "content": "Chat successfully deleted",
   "content_en_sha1_hash": "20a3ccaa93eb756843a2b5e2576d39b01c45d620",
   "created_at": "2025-11-17T13:24:47.224Z",
-  "updated_at": "2026-04-08T15:37:48.608Z",
+  "updated_at": "2026-04-11T20:57:23.164Z",
   "comment": {
-    "text": "This key displays a success message in a toast notification after a chat is successfully deleted. It appears after the `updateUrlChatId` function is executed and the chat selection modal is closed. Translators should ensure the message clearly conveys the action's completion.",
+    "text": "Toast message confirming that a chat has been successfully removed. It appears after a user deletes a chat.",
     "is_auto": true,
-    "updated_at": "2025-11-17T13:26:38.497Z"
+    "updated_at": "2026-04-11T20:57:23.164Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/chat/components/chat-header/sub-components/SelectChat.tsx",
-      "line_number": 133,
-      "context": "startNewChat();\n updateUrlChatId(\"\");\n }\n setHoveredItem(\"\");\n \n toastr.success(t(\"Common:ChatSuccessDeleted\"));\n } catch (error) {\n console.error(error);\n }\n }, [\n hoveredItem,",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-header/sub-components/delete-chat/index.tsx",
+      "line_number": 72,
+      "context": "if (chatId === currentChat?.id) {\n startNewChat();\n updateUrlChatId(\"\");\n }\n \n toastr.success(t(\"ChatSuccessDeleted\"));\n onDeleteToggle();\n } catch (error) {\n toastr.error(error as string);\n } finally {\n setIsLoading(false);",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -87,13 +88,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation means 'Investigation successfully deleted' instead of 'Chat successfully deleted'. 'Հետաքննություն' (Hetaknnutyun) refers to an investigation or inquiry, whereas 'Chat' should be 'Չաթ' or 'Զրույց'.",
-          "suggestion": "Չաթը հաջողությամբ ջնջվեց:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -177,13 +172,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Albanian translation means 'Chat has been displayed successfully', which is the opposite of the intended 'Chat successfully deleted'.",
-          "suggestion": "Biseda u fshirë me sukses"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

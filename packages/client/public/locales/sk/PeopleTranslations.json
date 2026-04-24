@@ -23,7 +23,7 @@
   "RemoveGuestsDescription": "Vybraní hostia budú odstránení zo všetkých miestností, do ktorých ste ich pozvali. Tento krok sa nedá vrátiť späť.",
   "ResetAuth": "Obnoviť autentifikáciu",
   "SendInviteAgain": "Poslať pozvánku ešte raz",
-  "ShareGuest": "Zdieľať hosťa",
+  "ShareGuest": "Zdieľať údaje o hosťovi",
   "SSOAccountTooltip": "Tento používateľský účet je nahraný zo SSO. Ak potrebujete zmeniť meno používateľa a e-mailovú adresu, obráťte sa na server SSO.",
   "StandardLogin": "Štandardné prihlásenie",
   "SuccessChangeGuestStatus": "Status hosťa bol úspešne zmenený",

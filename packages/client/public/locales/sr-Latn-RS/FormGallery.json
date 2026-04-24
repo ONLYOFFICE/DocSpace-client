@@ -4,11 +4,11 @@
   "ErrorViewDescription": "Molimo vas pokušajte ponovo kasnije",
   "ErrorViewDescriptionNetworkError": "Izgleda da nema internet konekcije",
   "ErrorViewHeader": "Galerija je trenutno nedostupna.",
+  "GalleryTitle": "Galerija predložaka {{organizationName}}",
   "SelectTemplate": "Izaberite šablon",
+  "SubmitToGalleryDialogMainInfo": "Pošaljite svoj predložak u javnu galeriju kako bi ga drugi mogli koristiti u svom radu. Nakon što prođe moderaciju, bićete obavešteni i nagrađeni za vaš doprinos.",
   "SuggestChanges": "Predloži promene",
   "TemplateInfo": "Info za šablon",
   "UploadGallery": "Pošaljite u Galeriju",
-  "ViewAllTemplates": "Pregledaj sve šablone",
-  "GalleryTitle": "Galerija predložaka {{organizationName}}",
-  "SubmitToGalleryDialogMainInfo": "Pošaljite svoj predložak u javnu galeriju kako bi ga drugi mogli koristiti u svom radu. Nakon što prođe moderaciju, bićete obavešteni i nagrađeni za vaš doprinos."
+  "ViewAllTemplates": "Pregledaj sve šablone"
 }

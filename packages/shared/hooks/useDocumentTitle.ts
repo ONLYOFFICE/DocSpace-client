@@ -30,13 +30,14 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import type { TTranslation } from "../types";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const useDocumentTitle = (titleI18nKey: string) => {
   const { t } = useTranslation();
 
   const setDocumentTitle = (t: TTranslation, titleI18nKey: string) => {
     let title;
-    const organizationName = t("Common:OrganizationName");
+    const organizationName = getBrandName("OrganizationName");
 
     if (titleI18nKey) {
       title = `${t(titleI18nKey)} - ${organizationName}`;

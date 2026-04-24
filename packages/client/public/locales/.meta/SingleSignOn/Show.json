@@ -3,23 +3,30 @@
   "content": "Show",
   "content_en_sha1_hash": "d97d1ee339e4eeaba8cac91dca37c8b4ec8f5501",
   "created_at": "2025-05-19T21:30:50.132Z",
-  "updated_at": "2026-04-08T23:01:41.823Z",
+  "updated_at": "2026-04-23T17:24:01.922Z",
   "comment": {
-    "text": "This translation key \"Show\" is used to display a button that toggles the visibility of settings or parameters in a user interface. It is rendered as part of a styled link component and appears in the layout of a portal settings page. Translators should provide an equivalent word for this text that conveys the same action, such as \"Toggle\", \"Activate\", or similar words depending on the intended context.",
+    "text": "This is a button label. It appears when additional settings are hidden and allows the user to reveal them.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:09.860Z"
+    "updated_at": "2026-04-11T21:26:34.702Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/hooks/useAdvancedSettings.tsx",
+      "line_number": 126,
+      "context": "isHovered\n data-testid=\"mcp-headers-block-toggle\"\n >\n {showAdvancedSettings\n ? t(\"SingleSignOn:Hide\")\n : t(\"SingleSignOn:Show\")}\n </Link>\n </div>\n {showAdvancedSettings ? (\n <Text className={baseParamsStyles.fieldHint}>\n {t(\"AISettings:MCPServerAdvancedSettingsHint\")}",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/HideButton.js",
-      "line_number": 35,
-      "context": "import { Link } from \"@docspace/ui-kit/components/link\";\n import { Text } from \"@docspace/ui-kit/components/text\";\n \n const HideButton = (props) => {\n const { t } = useTranslation(\"SingleSignOn\");\n const { text, isAdditionalParameters, value, setIsSettingsShown } = props;\n const marginProp = isAdditionalParameters ? null : \"24px 0 8px 0px\";\n \n const onClick = () => {\n setIsSettingsShown(!value);\n };",
+      "line_number": 75,
+      "context": "? isAdditionalParameters\n ? t(\"HideAdditionalParameters\")\n : t(\"Hide\")\n : isAdditionalParameters\n ? t(\"ShowAdditionalParameters\")\n : t(\"Show\")}\n </Link>\n </div>\n );\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/HideButton.js",
-      "line_number": 87,
-      "context": "{value\n ? isAdditionalParameters\n ? t(\"HideAdditionalParameters\")\n : t(\"Hide\")\n : isAdditionalParameters\n ? t(\"ShowAdditionalParameters\")\n : t(\"Show\")}\n </Link>\n </StyledWrapper>\n );\n };",
+      "line_number": 88,
+      "context": "? isAdditionalParameters\n ? t(\"HideAdditionalParameters\")\n : t(\"Hide\")\n : isAdditionalParameters\n ? t(\"ShowAdditionalParameters\")\n : t(\"Show\")}\n </Link>\n </StyledWrapper>\n );\n };",
       "module": "/packages/client"
     }
   ],

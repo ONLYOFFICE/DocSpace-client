@@ -3,11 +3,12 @@
   "content": "Incorrect IP address",
   "content_en_sha1_hash": "ab2c90c8a731847e84d27c4be0230e40151c2628",
   "created_at": "2025-12-15T14:02:39.329Z",
-  "updated_at": "2026-04-08T06:53:25.027Z",
+  "updated_at": "2026-04-11T20:51:04.126Z",
   "comment": {
-    "text": "This key displays an error message when the user enters an invalid IP address in the IP security settings. It appears within a form or input field validation to inform the user about the incorrect format of their IP address. Translators should ensure the message clearly conveys the need for a properly formatted IP.",
+    "text": "This is an error message displayed when a user enters an invalid IP address format in an input field for IP security settings.",
     "is_auto": true,
-    "updated_at": "2025-12-17T07:51:14.789Z"
+    "updated_at": "2026-04-11T20:51:04.126Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -111,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation contains a redundancy/tautology. 'Adrese' means 'address' and 'numurs' means 'number'. 'IP adrese numurs' translates to 'IP address number', which is unnatural and technically incorrect in Latvian.",
-          "suggestion": "Nepareizais IP adrese"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -171,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'naslovnica' means 'cover' (as in a book cover or magazine cover). The correct term for an IP address is 'naslov'.",
-          "suggestion": "Nepravilna IP naslov"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
@@ -195,13 +184,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The noun 'adres' is grammatically incorrect in Serbian; it should be 'adresa' (nominative) or 'adrese' (genitive) depending on the structure, but 'IP adresa' is the standard term.",
-          "suggestion": "Pogrešna IP adresa"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

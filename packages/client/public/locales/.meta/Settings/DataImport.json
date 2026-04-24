@@ -3,53 +3,54 @@
   "content": "Data import",
   "content_en_sha1_hash": "783af5b205a3e0c3c3b5feadf95d2a786442a1fe",
   "created_at": "2025-05-19T21:30:51.050Z",
-  "updated_at": "2026-04-10T08:21:04.335Z",
+  "updated_at": "2026-04-23T17:24:01.913Z",
   "comment": {
-    "text": "This translation key is used to display the label \"Data Import\" on a UI component. It is part of a data import process in a portal settings page, and its purpose is to provide a clear indication of what action is being performed or which option has been selected.",
+    "text": "This is a section title in the portal settings, referring to the functionality of importing data into DocSpace.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:27.013Z"
+    "updated_at": "2026-04-11T21:25:03.113Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/Providers.tsx",
-      "line_number": 44,
-      "context": "import WorkspaceDarkSvgUrl from \"PUBLIC_DIR/images/dark.workspace.onlyoffice.react.svg?url\";\n \n import { LinkType } from \"@docspace/ui-kit/components/link\";\n import { Link, LinkTarget } from \"@docspace/ui-kit/components/link\";\n import { setDocumentTitle } from \"SRC_DIR/helpers/utils\";\n import { WorkspacesContainer } from \"../StyledDataImport\";\n import DataImportLoader from \"../sub-components/DataImportLoader\";\n import { ProvidersProps, InjectedProvidersProps } from \"../types\";\n \n const Providers = (props: ProvidersProps) => {\n const {",
+      "line_number": 80,
+      "context": "logo: logos[service],\n }));\n }, [theme.isBase, services]);\n \n useEffect(() => {\n if (ready) setDocumentTitle(t(\"DataImport\"));\n }, [ready, t]);\n \n if (showPortalSettingsLoader || !ready) return <DataImportLoader />;\n \n return (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 121,
-      "context": "</>\n ),\n component: <SelectUsersTypeStep t={t} />,\n },\n {\n title: t(\"Settings:DataImport\"),\n description: t(\"Settings:ImportSectionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n component: (\n <ImportStep",
+      "line_number": 122,
+      "context": "</>\n ),\n component: <SelectUsersTypeStep t={t} />,\n },\n {\n title: t(\"Settings:DataImport\"),\n description: t(\"Settings:ImportSectionDescription\", {\n productName: getBrandName(\"ProductName\"),\n }),\n component: (\n <ImportStep",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/index.tsx",
-      "line_number": 33,
-      "context": "import { inject, observer } from \"mobx-react\";\n import { useTranslation } from \"react-i18next\";\n import { setDocumentTitle } from \"SRC_DIR/helpers/utils\";\n import useViewEffect from \"@docspace/ui-kit/hooks/useViewEffect\";\n \n import { DataImportProps, InjectedDataImportProps } from \"./types\";\n \n import { Component as Providers } from \"./components/Providers\";\n import { Component as NextcloudWorkspace } from \"./NextcloudWorkspace\";\n import { Component as GoogleWorkspace } from \"./GoogleWorkspace\";\n import { Component as OnlyofficeWorkspace } from \"./OnlyofficeWorkspace\";",
+      "line_number": 53,
+      "context": "setView: setViewAs,\n currentDeviceType,\n });\n \n useEffect(() => {\n setDocumentTitle(t(\"DataImport\"));\n }, [t]);\n \n return workspace === \"Nextcloud\" ? (\n <NextcloudWorkspace />\n ) : workspace === \"GoogleWorkspace\" ? (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 133,
-      "context": "</>\n ),\n component: <SelectUsersTypeStep t={t} />,\n },\n {\n title: t(\"Settings:DataImport\"),\n description: t(\"Settings:ImportSectionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n component: (\n <ImportStep",
+      "line_number": 134,
+      "context": "</>\n ),\n component: <SelectUsersTypeStep t={t} />,\n },\n {\n title: t(\"Settings:DataImport\"),\n description: t(\"Settings:ImportSectionDescription\", {\n productName: getBrandName(\"ProductName\"),\n }),\n component: (\n <ImportStep",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
-      "line_number": 127,
-      "context": "</>\n ),\n component: <SelectUsersTypeStep t={t} />,\n },\n {\n title: t(\"Settings:DataImport\"),\n description: t(\"Settings:ImportSectionDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: (",
+      "line_number": 128,
+      "context": "</>\n ),\n component: <SelectUsersTypeStep t={t} />,\n },\n {\n title: t(\"Settings:DataImport\"),\n description: t(\"Settings:ImportSectionDescription\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n }),\n component: (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 230,
-      "context": "return t(\"PortalDeletion\", { productName: t(\"Common:ProductName\") });\n case \"Common:Bonus\":\n return t(\"Common:Bonus\");\n case \"Common:FreeAccessToLicensedVersion\":\n return \"Common:FreeAccessToLicensedVersion\";\n case \"DataImport\":\n return t(\"DataImport\");\n case \"StorageManagement\":\n return t(\"StorageManagement\");\n case \"Services\":\n return t(\"Services\");",
+      "line_number": 231,
+      "context": "return t(\"PortalDeletion\", { productName: getBrandName(\"ProductName\") });\n case \"Common:Bonus\":\n return t(\"Common:Bonus\");\n case \"Common:FreeAccessToLicensedVersion\":\n return \"Common:FreeAccessToLicensedVersion\";\n case \"DataImport\":\n return t(\"DataImport\");\n case \"StorageManagement\":\n return t(\"StorageManagement\");\n case \"Services\":\n return t(\"Services\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
-      "line_number": 373,
-      "context": "? t(\"ImportFromNextcloud\")\n : workspace === \"Workspace\"\n ? t(\"ImportFromPortal\", {\n organizationName: logoText,\n })\n : t(\"DataImport\")\n : !standalone && isPaymentPage\n ? t(\"Common:Billing\")\n : t(header, {\n organizationName: logoText,\n license: t(\"Common:EnterpriseLicense\"),",
+      "line_number": 374,
+      "context": "? t(\"ImportFromNextcloud\")\n : workspace === \"Workspace\"\n ? t(\"ImportFromPortal\", {\n organizationName: logoText,\n })\n : t(\"DataImport\")\n : !standalone && isPaymentPage\n ? t(\"Common:Billing\")\n // biome-ignore lint/plugin/no-dynamic-i18n-key: header is passed from route config; underlying keys are declared as literals at callsites\n : t(header, {\n organizationName: logoText,",
       "module": "/packages/client"
     },
     {
@@ -195,25 +196,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Russian translation 'Перенос данных' means 'Data migration' or 'Data transfer', which implies moving data from one place to another. The English 'Data import' specifically refers to the process of bringing data into the system. In a UI context, 'Импорт данных' is the accurate term.",
-          "suggestion": "Импорт данных"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'ආයාතය' (āyātaya) is a noun meaning 'the act of entering' or 'entry', but in a UI context for 'Data Import', the correct term should be 'ආනයනය' (ānyanaya) or 'ආයාත කිරීම' (āyāta kirīma) to denote the process of importing data.",
-          "suggestion": "දත්ත ආනයනය"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

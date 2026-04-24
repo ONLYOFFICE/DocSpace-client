@@ -32,6 +32,7 @@ import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const getHeaderLabel = (
   t: TTranslation,
@@ -57,7 +58,7 @@ export const getHeaderLabel = (
 
   if (isFormRoom) {
     return t("Common:SelectFromPortal", {
-      productName: t("Common:ProductName"),
+      productName: getBrandName("ProductName"),
     });
   }
 

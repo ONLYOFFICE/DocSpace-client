@@ -3,17 +3,18 @@
   "content": "AI Agent Deleted",
   "content_en_sha1_hash": "ac362a1f6d3e03d9bfa7411bac6cad32d1a12f64",
   "created_at": "2026-03-31T15:18:27.261Z",
-  "updated_at": "2026-04-08T20:37:26.042Z",
+  "updated_at": "2026-04-13T14:59:05.881Z",
   "comment": {
-    "text": "This key displays a message confirming that an AI agent has been deleted. It's used within the Webhooks section of Portal Settings, likely triggered when a user deletes an agent and confirms the action. Translators should ensure the phrasing accurately reflects a deletion event.",
+    "text": "This is a toast message indicating that an AI agent has been successfully removed.",
     "is_auto": true,
-    "updated_at": "2026-03-31T15:19:36.935Z"
+    "updated_at": "2026-04-11T21:29:23.412Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
-      "line_number": 98,
-      "context": "return t(\"FormSubmit\");\n case WebhookTriggers.AgentCreated:\n return t(\"AgentCreated\");\n case WebhookTriggers.AgentUpdated:\n return t(\"AgentUpdated\");\n case WebhookTriggers.AgentDeleted:\n return t(\"AgentDeleted\");\n default:\n return \"\";\n }\n };",
+      "line_number": 99,
+      "context": "case WebhookTriggers.AgentCreated:\n return t(\"AgentCreated\");\n case WebhookTriggers.AgentUpdated:\n return t(\"AgentUpdated\");\n case WebhookTriggers.AgentDeleted:\n return t(\"AgentDeleted\");\n default:\n return \"\";\n }\n };",
       "module": "/packages/client"
     }
   ],
@@ -111,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation is identical to the English text and is not in Latvian.",
-          "suggestion": "AI aģents izdzēsts"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -129,13 +124,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation 'Usuwano agenta AI' uses the past continuous/imperfective aspect ('was deleting' or 'was being deleted'), which implies an ongoing or past process. The English 'AI Agent Deleted' is a status message indicating a completed action (perfective).",
-          "suggestion": "Agent AI został usunięty"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -159,13 +148,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Russian word 'Удажен' is a misspelling/incorrect form. The correct past passive participle for 'deleted' is 'Удален'.",
-          "suggestion": "Агент ИИ удален"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -183,25 +166,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation uses the neuter gender ('izbrisano'), whereas 'AI Agent' (AI agent) is masculine in Slovenian. The adjective/participle must agree with the masculine noun.",
-          "suggestion": "AI Agent izbrisan"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Albanian word 'u zhduk' means 'disappeared' or 'vanished', which implies a spontaneous event. For a system action like 'Deleted' (an intentional user action), 'u fshi' or 'u fshiu' should be used.",
-          "suggestion": "Agjenti AI u fshi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

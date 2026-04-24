@@ -3,11 +3,12 @@
   "content": "A notification has already been sent to the user assigned as the first recipient, prompting them to fill out the form. You can navigate to the room or share the filling link with the participants.",
   "content_en_sha1_hash": "2ba6315a30c34466c5e72de1e89dcb7594314f72",
   "created_at": "2025-10-13T13:22:33.412Z",
-  "updated_at": "2026-02-19T13:36:33.053Z",
+  "updated_at": "2026-04-11T21:29:32.950Z",
   "comment": {
-    "text": "This text appears in the UI to inform the user that a form notification has already been sent to the first recipient. It guides the user to either view the room or share the form link with participants. This description helps ensure the user understands the next steps in the form completion process.",
+    "text": "This is a descriptive text displayed in a completed form's header. It informs the user that the form has been sent to the next recipient and provides options to navigate to the room or share the filling link.",
     "is_auto": true,
-    "updated_at": "2025-10-13T14:28:27.923Z"
+    "updated_at": "2026-04-11T21:29:32.950Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

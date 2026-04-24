@@ -44,6 +44,7 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import styles from "../StyledDataImport.module.scss";
 import DataImportLoader from "../sub-components/DataImportLoader";
 import { ProvidersProps, InjectedProvidersProps } from "../types";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const Providers = (props: ProvidersProps) => {
   const {
@@ -85,7 +86,7 @@ const Providers = (props: ProvidersProps) => {
     <div className={styles.workspacesContainer}>
       <Text className="data-import-description">
         {t("DataImportDescription", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
           organizationName: logoText,
         })}
 

@@ -3,13 +3,21 @@
   "content": "Export results directly to your systems",
   "content_en_sha1_hash": "ccfcf22c11b14776638fdcabfe057a097e748b35",
   "created_at": "2026-03-31T15:18:26.996Z",
-  "updated_at": "2026-04-07T20:01:51.084Z",
+  "updated_at": "2026-04-23T17:24:02.159Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a short descriptive text appearing on a welcome tour card. It highlights a feature allowing users to export data to external systems.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:39:01.260Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/welcome-tour-dialog/index.tsx",
+      "line_number": 138,
+      "context": "<div className={styles.featureIcon}>\n <ReactSVG src={featureIcons[3]} />\n </div>\n <div className={styles.featureText}>\n <Text fontWeight={600} fontSize=\"13px\">{t(\"Common:WelcomeFeature4Title\", \"Data Integration\")}</Text>\n <Text fontSize=\"12px\" className={styles.featureDesc}>{t(\"Common:WelcomeFeature4\", \"Export results directly to your systems\")}</Text>\n </div>\n </div>\n </div>\n </div>\n </div>",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -104,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Izeksportēt' is a misspelling/incorrect formation of the verb 'Eksportēt'. 'Izeksportēt' is not a standard Latvian word.",
-          "suggestion": "Eksportēt rezultātus tieši uz jūsu sistēmām"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -176,13 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The grammatical case for 'system' is incorrect. 'У вашег системе' is grammatically wrong in Serbian; it should be 'у ваш систем' (accusative) or 'у ваше системе' (plural). Given the context of 'systems' (plural), it should be 'у ваше системе'.",
-          "suggestion": "Извезите резултате директно у ваше системе"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

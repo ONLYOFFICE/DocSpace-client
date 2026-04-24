@@ -3,17 +3,30 @@
   "content": "Web search",
   "content_en_sha1_hash": "381ceddd75a893f19764c7e4cf9cd12c0f6e88c3",
   "created_at": "2025-11-21T08:21:51.294Z",
-  "updated_at": "2026-04-07T20:06:20.228Z",
+  "updated_at": "2026-04-23T17:24:01.915Z",
   "comment": {
-    "text": "This key refers to the text \"Web search\" and is used to label or describe web search functionality within the AI settings section of the portal. It appears in both the settings overview and a reset dialog related to web search features. Translators should ensure the text accurately conveys the meaning of accessing or disabling web search capabilities.",
+    "text": "This is a noun used in various contexts, such as a tooltip, a page title, and a toast message, referring to the web search functionality within the AI settings.",
     "is_auto": true,
-    "updated_at": "2025-12-22T09:40:47.157Z"
+    "updated_at": "2026-04-11T20:39:08.459Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-input/tools-settings/index.tsx",
+      "line_number": 397,
+      "context": "<Text>{t(\"ExtendedThinkingNotSupported\")}</Text>\n ) : (\n <>\n <Text>\n {t(\"ConnectWebSearch\", {\n webSearch: t(\"WebSearchAI\"),\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n {isAdmin && goToWebSearchSettings ? (\n <Link",
+      "module": "/libs/ui-kit"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
       "line_number": 133,
-      "context": "React.useEffect(() => {\n const titleKey =\n currentTabId === \"providers\"\n ? \"Common:AIProvider\"\n : currentTabId === \"search\"\n ? \"Common:WebSearchAI\"\n : currentTabId === \"knowledge\"\n ? \"AIRoom:Knowledge\"\n : \"Common:MCPSettingTitle\";\n setDocumentTitle(t(titleKey));\n }, [t, currentTabId]);",
+      "context": "React.useEffect(() => {\n const title =\n currentTabId === \"providers\"\n ? t(\"Common:AIProvider\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"AIRoom:Knowledge\")\n : t(\"Common:MCPSettingTitle\");\n setDocumentTitle(title);\n }, [t, currentTabId]);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
+      "line_number": 133,
+      "context": "React.useEffect(() => {\n const title =\n currentTabId === \"providers\"\n ? t(\"Common:AIProvider\")\n : currentTabId === \"search\"\n ? t(\"Common:WebSearchAI\")\n : currentTabId === \"knowledge\"\n ? t(\"AIRoom:Knowledge\")\n : t(\"Common:MCPSettingTitle\");\n setDocumentTitle(title);\n }, [t, currentTabId]);",
       "module": "/packages/client"
     },
     {
@@ -30,31 +43,31 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
-      "line_number": 123,
+      "line_number": 124,
       "context": "try {\n await updateWebSearch?.(true, selectedOption, value);\n \n toastr.success(\n t(\"AISettings:WebSearchEnabledSuccess\", {\n webSearch: t(\"Common:WebSearchAI\"),\n }),\n );\n } catch (e) {\n console.error(e);\n toastr.error(e as string);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
-      "line_number": 123,
+      "line_number": 124,
       "context": "try {\n await updateWebSearch?.(true, selectedOption, value);\n \n toastr.success(\n t(\"AISettings:WebSearchEnabledSuccess\", {\n webSearch: t(\"Common:WebSearchAI\"),\n }),\n );\n } catch (e) {\n console.error(e);\n toastr.error(e as string);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
-      "line_number": 123,
+      "line_number": 124,
       "context": "try {\n await updateWebSearch?.(true, selectedOption, value);\n \n toastr.success(\n t(\"AISettings:WebSearchEnabledSuccess\", {\n webSearch: t(\"Common:WebSearchAI\"),\n }),\n );\n } catch (e) {\n console.error(e);\n toastr.error(e as string);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
-      "line_number": 123,
+      "line_number": 124,
       "context": "try {\n await updateWebSearch?.(true, selectedOption, value);\n \n toastr.success(\n t(\"AISettings:WebSearchEnabledSuccess\", {\n webSearch: t(\"Common:WebSearchAI\"),\n }),\n );\n } catch (e) {\n console.error(e);\n toastr.error(e as string);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
-      "line_number": 123,
+      "line_number": 124,
       "context": "try {\n await updateWebSearch?.(true, selectedOption, value);\n \n toastr.success(\n t(\"AISettings:WebSearchEnabledSuccess\", {\n webSearch: t(\"Common:WebSearchAI\"),\n }),\n );\n } catch (e) {\n console.error(e);\n toastr.error(e as string);",
       "module": "/packages/client"
     }
@@ -75,13 +88,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation 'Axtarış' means only 'Search'. It omits the 'Web' component of 'Web search', which is necessary to distinguish it from local or internal searches within the context of AI settings.",
-          "suggestion": "Veb axtarış"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -159,13 +166,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Meklēšana ar tīmekļa vietnēm' means 'Searching with websites', which is semantically different from 'Web search' (searching the web).",
-          "suggestion": "Tīmekļa meklēšana"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {

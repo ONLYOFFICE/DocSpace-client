@@ -3,11 +3,12 @@
   "content": "Delete Webhook forever?",
   "content_en_sha1_hash": "057bacee5b2c677fca9becbc05530edc658ca25d",
   "created_at": "2025-05-19T21:30:49.685Z",
-  "updated_at": "2026-04-08T20:31:11.410Z",
+  "updated_at": "2026-04-11T21:29:18.614Z",
   "comment": {
-    "text": "The \"DeleteWebhookForeverQuestion\" translation key is used to provide a notification before deleting a webhook permanently. This message appears in a dialog box as a prompt to confirm deletion of the webhook and asks if they wish to delete it forever.",
+    "text": "This is the title of a confirmation dialog. It appears when a user attempts to delete a webhook, asking them to confirm the permanent deletion.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:47:08.242Z"
+    "updated_at": "2026-04-11T21:29:18.614Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -39,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'уеб кука' is a literal and incorrect translation of 'webhook'. In a technical context, 'webhook' should be transliterated as 'уебхук' to maintain professional terminology.",
-          "suggestion": "Изтрий уебхука завинаги?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {

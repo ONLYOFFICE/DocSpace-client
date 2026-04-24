@@ -43,7 +43,7 @@ export const GetCodeBlock = ({ t, codeBlock, isDisabled }) => {
           primary
           size="normal"
           scale
-          label={t("GetCode")}
+          label={t("GetCodeToInsert")}
           onClick={openGetCodeModal}
           isDisabled={isDisabled}
         />

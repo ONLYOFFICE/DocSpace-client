@@ -3,11 +3,12 @@
   "content": "You are about to delete group of rooms. Are you sure you want to proceed?",
   "content_en_sha1_hash": "60a7a487a3c026128ad30e11eb402c509ed6a6dc",
   "created_at": "2026-02-19T13:36:24.881Z",
-  "updated_at": "2026-03-20T09:36:42.026Z",
+  "updated_at": "2026-04-11T21:11:29.087Z",
   "comment": {
-    "text": "This key displays a confirmation message within a dialog asking the user to confirm the deletion of a group of rooms. It appears in the \"Delete Group Dialog\" to ensure the user understands they are about to permanently remove a room group. Translators should ensure the wording clearly conveys the action being taken.",
+    "text": "This is a confirmation message displayed in a dialog box when a user attempts to delete a group of rooms. It asks the user to confirm their action.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:36:42.026Z"
+    "updated_at": "2026-04-11T21:11:29.087Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

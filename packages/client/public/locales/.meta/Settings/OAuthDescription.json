@@ -3,17 +3,18 @@
   "content": "Use the {{organizationName}} {{productName}} API for authorization and actions like file access and more.",
   "content_en_sha1_hash": "74eb0caf53cd3f8add35b45bf9820d0ed697da8b",
   "created_at": "2026-04-03T21:51:36.605Z",
-  "updated_at": "2026-04-09T02:17:19.109Z",
+  "updated_at": "2026-04-11T21:23:11.489Z",
   "comment": {
-    "text": "This key provides the description for the OAuth card within the Developer Tools section of the Portal Settings. It explains the purpose of the API for authorization and actions like file access, utilizing dynamic placeholders for the organization and product names.",
+    "text": "This is the description for the OAuth card on the Developer Tools page. It explains that the OAuth API allows third-party applications to access user data and perform actions within DocSpace. `{{organizationName}}` is the name of the organization, and `{{productName}}` is the name of the product (e.g., ONLYOFFICE DocSpace).",
     "is_auto": true,
-    "updated_at": "2026-04-03T21:59:52.842Z"
+    "updated_at": "2026-04-11T21:23:11.489Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 112,
-      "context": "linkTitle={t(\"Webhooks:CreateWebhook\")}\n />\n <Card\n icon={<OAuthSvg />}\n title={t(\"OAuth:OAuth\")}\n description={t(\"Settings:OAuthDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}\n url=\"/developer-tools/oauth/create\"\n color={globalColors.purple}\n linkTitle={t(\"Settings:RegisterApp\")}\n />\n <Card",
+      "line_number": 113,
+      "context": "linkTitle={t(\"Webhooks:CreateWebhook\")}\n />\n <Card\n icon={<OAuthSvg />}\n title={t(\"OAuth:OAuth\")}\n description={t(\"Settings:OAuthDescription\", { organizationName: getBrandName(\"OrganizationName\"), productName: getBrandName(\"ProductName\") })}\n url=\"/developer-tools/oauth/create\"\n color={globalColors.purple}\n linkTitle={t(\"Settings:RegisterApp\")}\n />\n <Card",
       "module": "/packages/client"
     }
   ],
@@ -93,13 +94,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation incorrectly links 'file access' (ファイルアクセス) to 'authorization' (認証), whereas the English text treats them as separate categories: 'authorization' AND 'actions like file access'. In the Japanese version, it reads as 'authorization such as file access'.",
-          "suggestion": "{{organizationName}} {{productName}} APIを使用して、認証や、ファイルアクセスなどの操作を行ってください。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -123,13 +118,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Dutch translation uses 'bestandsgebeurtenissen' (file events) instead of 'file access' (bestandstoegang), which changes the functional meaning of the API's capability.",
-          "suggestion": "Gebruik de {{organizationName}} {{productName}} API voor authenticatie en acties zoals bestandstoegang en meer."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -183,13 +172,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Albanian translation uses 'aksesit' (dative/genitive case) instead of 'akses' (accusative case), which makes the sentence grammatically incorrect in this context ('si akses në skedarë').",
-          "suggestion": "Përdorni API-n {{organizationName}} {{productName}} për autorizimin dhe veprimet si akses në skedarë dhe më shumë."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

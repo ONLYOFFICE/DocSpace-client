@@ -3,11 +3,12 @@
   "content": "Creating items",
   "content_en_sha1_hash": "49705184c3d9cebcb3af7ae213c55471e517ad0d",
   "created_at": "2025-05-19T21:30:55.045Z",
-  "updated_at": "2026-04-07T19:35:05.106Z",
+  "updated_at": "2026-04-11T21:12:16.168Z",
   "comment": {
-    "text": "\"This translation key is used to display a heading that indicates 'Creating items' in a component panel. It is likely displayed above or within a block that allows users to create items, possibly with a keyboard shortcut (AltKey) associated with it.\"",
+    "text": "This is a section header in the Hotkeys panel, introducing a list of hotkeys related to creating various objects within the application.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:40:35.874Z"
+    "updated_at": "2026-04-11T21:12:16.168Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

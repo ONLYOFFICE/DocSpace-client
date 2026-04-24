@@ -3,13 +3,21 @@
   "content": "Bring credit back up to",
   "content_en_sha1_hash": "e0278adc83cf35f5ec0697e0b62bd121bb84ba1d",
   "created_at": "2026-04-10T13:53:42.049Z",
-  "updated_at": "2026-04-10T13:53:42.049Z",
+  "updated_at": "2026-04-11T20:58:04.648Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label for an input field where the user specifies the maximum balance to which their account should be topped up automatically.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:58:04.648Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/AutoPayments.tsx",
+      "line_number": 257,
+      "context": "{description(5, 1000)}\n </div>\n \n <div className={styles.inputField}>\n <Text fontSize=\"12px\" className={styles.inputLabel} fontWeight={600}>\n {t(\"BringCreditBackUpTo\")}\n </Text>\n <TextInput\n scale\n value={upToBalance!}\n onChange={onMaxUpToBalanceChange}",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,18 +3,19 @@
   "content": "AI tools and integrations",
   "content_en_sha1_hash": "647cfdd2c06961f3756768e640186ab58be2c1f2",
   "created_at": "2025-11-17T07:51:05.550Z",
-  "updated_at": "2026-04-08T17:18:42.503Z",
+  "updated_at": "2026-04-23T17:24:02.170Z",
   "comment": {
-    "text": "This text appears as a tooltip on a button or setting related to AI tools and integrations within the chat interface. It explains the functionality of the tools being offered and provides a brief label for those features. Translators should ensure the meaning accurately reflects AI tool integrations.",
+    "text": "This is a tooltip that appears when hovering over the AI tools button, indicating its functionality.",
     "is_auto": true,
-    "updated_at": "2025-11-17T07:53:51.931Z"
+    "updated_at": "2026-04-11T20:59:38.936Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/chat/components/chat-input/ToolsSettings.tsx",
-      "line_number": 420,
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-input/tools-settings/index.tsx",
+      "line_number": 485,
       "context": "return (\n <>\n <TooltipContainer\n as=\"div\"\n title={t(\"AIToolsHint\")}\n className={classNames(\n styles.chatInputButton,\n styles.chatInputToolsButton,\n {\n [styles.activeChatInputButton]: isMcpToolsVisible,",
-      "module": "/packages/shared"
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'İSİ nəticələri' means 'ISI results', which is a complete mistranslation of 'AI tools'. 'AI' (Artificial Intelligence) should be translated as 'Süni İntellekt' and 'tools' as 'alətləri'.",
-          "suggestion": "Süni İntellekt alətləri və inteqrasiyalar"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {

@@ -18,7 +18,7 @@
   "MyProfile": "Moj profil",
   "NotificationsChannels": "Kanali za obaveštenja",
   "ProviderSuccessfullyConnected": "Provajder uspešno povezan",
-  "ProviderSuccessfullyDisconnected": "Provajder uspešno prekinut",
+  "ProviderSuccessfullyDisconnected": "Povezivanje sa provajderom je uspešno prekinuto",
   "SendAgain": "Pošalji ponovo",
   "ShowBackupCodes": "Prikaži rezervne kodove",
   "SuccessLogout": "Aktivna konekcija je odjavljena: {{platform}}, {{browser}}",

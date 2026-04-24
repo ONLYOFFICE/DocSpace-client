@@ -8,7 +8,7 @@
   "DisablingRoomGroups": "Atmeldotu telpu grupas",
   "DisablingRoomGroupsDescription": "Grupes tiks saglabātas, bet paslēptas. Atjaunot Profili, failu pārvaldībā.",
   "EditRoomGroups": "Rediģēt istabas grupas",
-  "EmptyGroupDescription": "Šeit nav istabām. Mēģiniet pievienot istabu vai dzēst šo grupu.",
+  "EmptyGroupRoomsDescription": "Šeit nav istabām. Mēģiniet pievienot istabu vai dzēst šo grupu.",
   "GroupHasBeenDeleted": "Grupe ir dzēsta",
   "GroupIcon": "Gruppas ikona",
   "GroupIsEmpty": "Grupe ir tukša",

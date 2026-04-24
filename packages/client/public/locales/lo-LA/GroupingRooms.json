@@ -8,7 +8,7 @@
   "DisablingRoomGroups": "ການປິດກຸ່ມຫ້ອງ",
   "DisablingRoomGroupsDescription": "ກຸ່ມຈະຖືກບັນທຶກແຕ່ຖືກເຊື່ອງໄວ້. ກະລຸນາເປີດໃຊ້ງານຄືນໃນ Profile, ການຈັດການໄຟລ໌.",
   "EditRoomGroups": "ແກ້ໄຂກຸ່ມຫ້ອງ",
-  "EmptyGroupDescription": "ບໍ່ມີຫ້ອງຢູ່ທີ່ນີ້. ລອງເພີ່ມຫ້ອງ ຫຼື ຍົກເລີກກຸ່ມນີ້.",
+  "EmptyGroupRoomsDescription": "ບໍ່ມີຫ້ອງຢູ່ທີ່ນີ້. ລອງເພີ່ມຫ້ອງ ຫຼື ຍົກເລີກກຸ່ມນີ້.",
   "GroupHasBeenDeleted": "ກຸ່ມໄດ້ຖືກລຶບແລ້ວ",
   "GroupIcon": "ໄອຄອນກຸ່ມ",
   "GroupIsEmpty": "ກຸ່ມຫວ່າງ",

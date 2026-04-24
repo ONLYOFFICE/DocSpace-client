@@ -3,17 +3,18 @@
   "content": "Delete room",
   "content_en_sha1_hash": "b594b35fc93c52b72306de0bd837a641b78ba52e",
   "created_at": "2025-09-22T13:39:26.761Z",
-  "updated_at": "2026-04-10T08:21:04.376Z",
+  "updated_at": "2026-04-23T17:24:02.079Z",
   "comment": {
-    "text": "This key provides the text for a button or action that deletes a room. It appears within a context menu or similar UI element where users can manage rooms. Translators should ensure the wording accurately conveys the action of removing a room.",
+    "text": "This is a button label that allows users to delete a room.",
     "is_auto": true,
-    "updated_at": "2025-09-22T13:50:19.497Z"
+    "updated_at": "2026-04-11T20:55:17.428Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2625,
-      "context": ": isAIAgent\n ? t(\"DeleteAgent\")\n : item.isTemplate\n ? t(\"Files:DeleteTemplate\")\n : item.isRoom\n ? t(\"Common:DeleteRoom\")\n : t(\"Common:Delete\"),\n icon:\n item.isRoom && !isAIAgent ? RemoveOutlineSvgUrl : TrashReactSvgUrl,\n onClick: () => this.onDelete(item, t),\n disabled: item.isTemplate ? !isTemplateOwner : false,",
+      "line_number": 2687,
+      "context": ": isAIAgent\n ? t(\"DeleteAgent\")\n : item.isTemplate\n ? t(\"Files:DeleteTemplateAction\")\n : item.isRoom\n ? t(\"Common:DeleteRoom\")\n : t(\"Common:Delete\"),\n icon:\n item.isRoom && !isAIAgent ? RemoveOutlineSvgUrl : TrashReactSvgUrl,\n onClick: () => this.onDelete(item, t),\n disabled: item.isTemplate ? !isTemplateOwner : false,",
       "module": "/packages/client"
     }
   ],

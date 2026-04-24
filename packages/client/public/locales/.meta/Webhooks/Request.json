@@ -3,17 +3,18 @@
   "content": "Request",
   "content_en_sha1_hash": "4aed03cac49d5e43da4e855a967286931a4d621a",
   "created_at": "2025-05-19T21:30:49.789Z",
-  "updated_at": "2026-04-08T19:39:07.464Z",
+  "updated_at": "2026-04-13T14:59:05.873Z",
   "comment": {
-    "text": "The \"Request\" translation key is used to display the label for a request-related component, likely in a portal settings page or event details view. It appears as the title of a sub-component within the MessagesDetails, providing context for users interacting with webhooks. The translator should focus on providing a clear and concise description that accurately reflects this UI element's purpose.",
+    "text": "This is a tab label within the webhook event details, indicating the section displaying information about the request sent to the webhook.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:57.972Z"
+    "updated_at": "2026-04-11T21:28:40.490Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/MessagesDetails.js",
-      "line_number": 35,
-      "context": "import { useTranslation } from \"react-i18next\";\n import { isMobile } from \"@docspace/shared/utils\";\n import { inject, observer } from \"mobx-react\";\n import ResponseDetails from \"./ResponseDetails\";\n import RequestDetails from \"./RequestDetails\";\n \n const TabsWrapper = styled.div`\n .sticky {\n z-index: 3;",
+      "line_number": 50,
+      "context": "const MessagesDetails = ({ eventDetails }) => {\n const { t } = useTranslation([\"Webhooks\"]);\n const menuData = [\n {\n id: \"webhookRequest\",\n name: t(\"Request\"),\n content: <RequestDetails />,\n },\n ];\n \n if (eventDetails.status >= 200 && eventDetails.status < 500) {",
       "module": "/packages/client"
     }
   ],
@@ -111,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word 'Request' is used as a noun (a title for a component/tab), but the Latvian translation 'Pieprasīt' is a verb (to request). In a UI context for a component title, the noun form 'Pieteikums' or 'Pieprasījums' should be used.",
-          "suggestion": "Pieprasījums"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -141,13 +136,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word 'Request' is used as a noun (a title for a component/tab), but the Portuguese translation 'Solicitar' is a verb (to request). In the context of 'RequestDetails' and 'ResponseDetails', the noun 'Requisição' or 'Solicitação' should be used.",
-          "suggestion": "Requisição"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -183,13 +172,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Запрос' is Russian, not Serbian. While they share similarities, the correct Serbian Cyrillic term for 'Request' in a technical/UI context is 'Захтев'.",
-          "suggestion": "Захтев"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -213,13 +196,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation is identical to the English text and does not provide a Vietnamese equivalent. In the context of webhooks/messages, 'Request' should be translated to 'Yêu cầu'.",
-          "suggestion": "Yêu cầu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

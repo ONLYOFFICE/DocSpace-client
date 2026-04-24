@@ -3,16 +3,17 @@
   "content": "the folder",
   "content_en_sha1_hash": "ca12b97760213db27444f3b12f55a266efb770fa",
   "created_at": "2025-08-26T11:15:00.744Z",
-  "updated_at": "2026-04-07T23:10:05.926Z",
+  "updated_at": "2026-04-12T20:16:48.945Z",
   "comment": {
-    "text": "This key displays the text \"the folder\" when sharing a file or room. It appears as part of a sharing option, indicating what is being shared (a folder). Translators should ensure the wording accurately reflects the item being shared.",
+    "text": "This is a noun used in a sentence to refer to a folder being shared. It appears as part of a longer phrase, such as \"Share the folder.\"",
     "is_auto": true,
-    "updated_at": "2025-08-26T11:16:31.408Z"
+    "updated_at": "2026-04-11T20:42:56.293Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 453,
+      "line_number": 454,
       "context": "? t(\"Common:ShareForm\")\n : t(\"Common:ShareContents\");\n \n const shareParent = isRoom(item)\n ? t(\"Common:ShareTheRoom\")\n : t(\"Common:ShareTheFolder\");\n \n return (\n <Trans\n t={t}\n ns=\"Common\"",
       "module": "/packages/shared"
     }
@@ -165,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian word 'map' means 'map' (as in a geographical map), whereas the English 'the folder' refers to a directory/folder in a file system. The correct term for a folder in Slovenian is 'mapka'.",
-          "suggestion": "mapko"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

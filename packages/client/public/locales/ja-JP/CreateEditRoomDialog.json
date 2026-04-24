@@ -17,8 +17,12 @@
   "FileLifetimeDescription": "このルーム内のファイルを、定義した期間後に自動的に削除するようにファイルの有効期限を設定します。有効期限は、ファイルのアップロード日または作成日から開始します。",
   "FilesOlderThan": "より古いファイル：",
   "FormRoomBarDescription": "このルームはリンクがあれば誰でも利用できます。外部ユーザーには、すべてのファイルに対するフォーム記入権限が与えられます。",
+  "GoToIntegrations": "インテグレーションへ移動",
   "Horizontal": "横方向",
   "Icon": "アイコン",
+  "NeedMoreIntegrations": "その他の統合が必要ですか？",
+  "NeedMoreIntegrationsDescription": "Webhookを使用してデータを独自のシステムに送信するか、Zapier経由で数千のサービスにフォームを接続します。",
+  "NoDatabaseConnections": "データベース接続が設定されていません",
   "PeopleSelectorInfo": "ルーム管理者または{{productName}}管理者のみがルーム所有者になることができます。",
   "Position": "ポジション",
   "PublicRoomBarDescription": "このルームはリンクがあれば誰でも利用できます。外部ユーザーのアクセスは、選択されたアクセス権の種類に応じて提供されます。",
@@ -41,8 +45,5 @@
   "ViewerInfo": "閲覧者情報",
   "WatermarkPreview": "透かしのプレビュー",
   "WatermarkPreviewHelp": "この画像プレビューは、ファイルに透かしがどのように表示されるかを大まかに示しています。",
-  "GoToIntegrations": "インテグレーションへ移動",
-  "NeedMoreIntegrations": "その他の統合が必要ですか？",
-  "NeedMoreIntegrationsDescription": "Webhookを使用してデータを独自のシステムに送信するか、Zapier経由で数千のサービスにフォームを接続します。",
-  "NoDatabaseConnections": "データベース接続が設定されていません"
+  "NoDatabaseConnectionsRoomAdmin": "データベース接続は管理者によって設定されます。データベースの設定が完了すると、こちらでエクスポートを有効にできるようになります。"
 }

@@ -3,22 +3,23 @@
   "content": "Link copied to clipboard",
   "content_en_sha1_hash": "cf544a801cb0075732ebc8f8196db5c590adc7e6",
   "created_at": "2025-05-19T21:30:46.130Z",
-  "updated_at": "2026-04-08T05:43:37.796Z",
+  "updated_at": "2026-04-23T17:24:01.884Z",
   "comment": {
-    "text": "The translation key \"LinkCopiedToClipboard\" is used to display a message indicating that a link has been successfully copied to the clipboard. This text appears in UI elements where users can share links, such as buttons or dialogs, and helps inform the user of the action's outcome.",
+    "text": "Toast message. Appears briefly to confirm that a link has been successfully copied to the user's clipboard.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:42.222Z"
+    "updated_at": "2026-04-11T20:49:45.513Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 522,
+      "line_number": 523,
       "context": "i18nKey=\"LinkNoExpiration\"\n components={{ 1: <strong key=\"strong-link-valid\" /> }}\n />\n );\n \n toastr.success(toastTranslation, t(\"Common:LinkCopiedToClipboard\"));\n copyShareLink(link.shareLink ?? link.url);\n };\n \n const editLink = async (linkAccess = null, defaultLink) => {\n const type = getDefaultAccessUser(roomType);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 507,
+      "line_number": 508,
       "context": "{t(\"Common:ManageNotifications\")}\n </Link>\n </>\n ) : null}\n </span>,\n t(\"Common:LinkCopiedToClipboard\"),\n );\n };\n \n export const evenPrimaryLink = (fileLinks: TFileLink[]) => {\n return fileLinks.some((link) => link?.sharedTo?.primary);",
       "module": "/packages/shared"
     }
@@ -153,13 +154,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Typo in the word 'Ссылка' (written as 'Сслыка')",
-          "suggestion": "Ссылка скопирована в буфер обмена"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -195,13 +190,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Turkish translation 'Panoya kopyalanan bağlantı' means 'The link that was copied to the clipboard' (a noun phrase), whereas the English 'Link copied to clipboard' is a status message/notification indicating the action has been completed. In a UI toast/notification context, the Turkish version sounds like a label for an object rather than a confirmation of an action.",
-          "suggestion": "Bağlantı panoya kopyalandı"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

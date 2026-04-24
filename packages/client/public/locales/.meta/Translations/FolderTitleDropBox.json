@@ -3,16 +3,17 @@
   "content": "Dropbox directory",
   "content_en_sha1_hash": "1a991dfb32e8cd8808fd95385917355bc689cb86",
   "created_at": "2025-05-19T21:30:49.974Z",
-  "updated_at": "2026-04-08T21:17:13.190Z",
+  "updated_at": "2026-04-11T21:27:33.064Z",
   "comment": {
-    "text": "This translation key is used to display the title of a Dropbox directory. It appears as part of file names or folder labels in the application, and its value will be translated by users based on their language settings.",
+    "text": "This is a folder title displayed in the file explorer when a user connects their Dropbox account.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:33.847Z"
+    "updated_at": "2026-04-11T21:27:33.064Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 103,
+      "line_number": 104,
       "context": "case \"BoxNet\":\n return t(\"Translations:FolderTitleBoxNet\");\n \n case \"DropBox\":\n case \"DropboxV2\":\n return t(\"Translations:FolderTitleDropBox\");\n \n case \"DocuSign\":\n return t(\"Translations:FolderTitleDocuSign\");\n \n case \"Google\":",
       "module": "/packages/client"
     }
@@ -81,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'գրացուցակ' means 'list' or 'directory' in the sense of a contact list or a catalog, whereas in a file system context, 'directory' should be translated as 'տնօրենություն' (folder/directory).",
-          "suggestion": "Dropbox տնօրենություն"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -183,13 +178,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'direktorijum' is in the accusative/instrumental case, whereas the English title requires the nominative case 'direktorijum' (or more commonly 'direktorij'). In Serbian, a title/label should be in the nominative case.",
-          "suggestion": "Dropbox direktorijum"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

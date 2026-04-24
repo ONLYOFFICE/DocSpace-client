@@ -3,11 +3,12 @@
   "content": "You can open the document on the portal or in the mobile application",
   "content_en_sha1_hash": "56d7d86fe4eaefe22b74bf7fe71b0fb2c86ea739",
   "created_at": "2025-05-19T21:30:57.138Z",
-  "updated_at": "2026-04-07T19:35:05.240Z",
+  "updated_at": "2026-04-11T21:29:49.359Z",
   "comment": {
-    "text": "This translation key is used to display a message explaining how to open a document. It appears on a file tile component and informs users about two possible ways to access the document.",
+    "text": "This is a descriptive text displayed below a deep link. It informs the user that a document can be opened either on the portal or in the mobile application.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:47:18.491Z"
+    "updated_at": "2026-04-11T21:29:49.359Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "Save to Public room",
   "content_en_sha1_hash": "b0398b1b707409a986e91a9ea5fb56db1a4d3012",
   "created_at": "2025-05-19T21:30:48.318Z",
-  "updated_at": "2026-04-08T00:02:08.033Z",
+  "updated_at": "2026-04-13T02:31:15.408Z",
   "comment": {
-    "text": "The translation key \"SaveToPublicRoom\" is used to display the text \"Save to Public room\" in a public room backup confirmation dialog. This text is expected to appear on a button or label within the dialog, prompting the user to save changes to a publicly accessible location.",
+    "text": "This is the title of a dialog box that appears when a user is saving a document to a public room.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:34:26.610Z"
+    "updated_at": "2026-04-11T20:43:53.511Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -189,13 +190,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Ukrainian translation uses the prepositional case ('в публічній кімнаті' - 'in a public room'), which implies the action is happening inside a room, whereas the English 'Save to Public room' is an imperative command/action directed towards a destination ('to').",
-          "suggestion": "Зберегти в публічну кімнату"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

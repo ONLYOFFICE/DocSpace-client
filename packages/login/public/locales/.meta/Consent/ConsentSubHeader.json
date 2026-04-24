@@ -3,17 +3,18 @@
   "content": "<1>{{nameApp}}</1> would like the ability to access the following data in <strong>your {{productName}} account</strong>:",
   "content_en_sha1_hash": "c957267e1716ff361bf4fba5521f23172333de4b",
   "created_at": "2025-05-19T21:30:57.325Z",
-  "updated_at": "2026-04-07T19:35:05.246Z",
+  "updated_at": "2026-04-11T21:30:38.707Z",
   "comment": {
-    "text": "This translation key is used for a consent subheader that informs users about the data access requested by an application within their account. It is displayed in a screen where user consent is required, likely as part of an account settings or login process. The key allows translators to localize the text \"would like the ability to access\" and \"your {{productName}} account\".",
+    "text": "This is a subheader on a consent screen. It informs the user that an application ({{nameApp}}) requests access to data in their ONLYOFFICE DocSpace account ({{productName}}).",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:47:33.625Z"
+    "updated_at": "2026-04-11T21:30:38.707Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/login/src/components/ConsentInfo.tsx",
-      "line_number": 81,
-      "context": "lineHeight=\"22px\"\n >\n {isConsentScreen ? (\n <Trans\n t={t}\n i18nKey=\"ConsentSubHeader\"\n ns=\"Consent\"\n values={{ nameApp: name, productName: t(\"Common:ProductName\") }}\n components={{\n 1: (\n <Link",
+      "line_number": 82,
+      "context": "lineHeight=\"22px\"\n >\n {isConsentScreen ? (\n <Trans\n t={t}\n i18nKey=\"ConsentSubHeader\"\n ns=\"Consent\"\n values={{ nameApp: name, productName: getBrandName(\"ProductName\") }}\n components={{\n 1: (\n <Link",
       "module": "/packages/login"
     }
   ],

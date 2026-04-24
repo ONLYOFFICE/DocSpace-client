@@ -3,13 +3,26 @@
   "content": "Required field",
   "content_en_sha1_hash": "04148d61b0b7212b69dd8b267c98c74a3ae36942",
   "created_at": "2025-05-19T21:30:47.872Z",
-  "updated_at": "2026-04-10T08:21:04.301Z",
+  "updated_at": "2026-04-23T17:24:01.696Z",
   "comment": {
-    "text": "This translation key is used to display a message indicating that a field is required when editing a connection. It appears in a vertical text input field within a connect dialog and is used as an error message if the input value is empty.",
+    "text": "Error text. This message appears when a required input field is left empty or invalid, indicating that the user must provide information to proceed.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:34:43.183Z"
+    "updated_at": "2026-04-11T20:45:04.052Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
+      "line_number": 181,
+      "context": "className=\"name_field\"\n key=\"name\"\n isVertical\n hasError={!isValidName}\n labelVisible={false}\n errorMessage={t(\"RequiredField\")}\n dataTestId=\"request_name_field\"\n >\n <TextInput\n id=\"your-name\"\n hasError={!isValidName}",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
+      "line_number": 181,
+      "context": "className=\"name_field\"\n key=\"name\"\n isVertical\n hasError={!isValidName}\n labelVisible={false}\n errorMessage={t(\"RequiredField\")}\n dataTestId=\"request_name_field\"\n >\n <TextInput\n id=\"your-name\"\n hasError={!isValidName}",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeNameDialog/index.js",
       "line_number": 137,
@@ -24,13 +37,13 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/SetAgentParams.tsx",
-      "line_number": 504,
+      "line_number": 502,
       "context": "isValidTitle={isValidTitle}\n isWrongTitle={isWrongTitle}\n errorMessage={\n isWrongTitle\n ? t(\"Common:ContainsSpecCharacter\")\n : t(\"Common:RequiredField\")\n }\n onKeyUp={onKeyUp}\n isAutoFocussed\n dataTestId=\"create_edit_agent_input\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/SetRoomParams.js",
-      "line_number": 525,
+      "line_number": 524,
       "context": "onFocus={() => setForceHideRoomTypeDropdown(true)}\n onBlur={() => setForceHideRoomTypeDropdown(false)}\n errorMessage={\n isWrongTitle\n ? t(\"Common:ContainsSpecCharacter\")\n : t(\"Common:RequiredField\")\n }\n onKeyUp={onKeyUp}\n isAutoFocussed\n dataTestId=\"create_edit_room_input\"\n />",
       "module": "/packages/client"
     },
@@ -48,8 +61,8 @@
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/EmailInputForm.tsx",
-      "line_number": 83,
-      "context": "labelVisible={false}\n hasError={isEmailErrorShow ? !emailValid : undefined}\n errorMessage={\n emailErrorText\n ? t(`Common:${emailErrorText}`)\n : t(\"Common:RequiredField\")\n }\n dataTestId=\"email_field_container\"\n >\n <EmailInput\n id=\"login\"",
+      "line_number": 84,
+      "context": "hasError={isEmailErrorShow ? !emailValid : undefined}\n errorMessage={\n emailErrorText\n // biome-ignore lint/plugin/no-dynamic-i18n-key: errorText is a runtime-provided key fragment composed with \"Common:\" prefix\n ? t(`Common:${emailErrorText}`)\n : t(\"Common:RequiredField\")\n }\n dataTestId=\"email_field_container\"\n >\n <EmailInput\n id=\"login\"",
       "module": "/packages/login"
     },
     {
@@ -96,20 +109,20 @@
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/sub-components/EmailContainer.tsx",
-      "line_number": 139,
-      "context": "labelVisible={false}\n hasError={isEmailErrorShow}\n errorMessage={\n errorText\n ? t(`Common:${errorText}`, errorText)\n : t(\"Common:RequiredField\")\n } // TODO: Add wrong login server error\n dataTestId=\"email_field\"\n >\n {isLdapLogin ? (\n <TextInput",
+      "line_number": 141,
+      "context": "hasError={isEmailErrorShow}\n errorMessage={\n errorText\n // biome-ignore lint/plugin/no-dynamic-i18n-key: errorText is a runtime-provided key fragment composed with \"Common:\" prefix\n ? t(`Common:${errorText}`, errorText)\n : t(\"Common:RequiredField\")\n } // TODO: Add wrong login server error\n dataTestId=\"email_field\"\n >\n {isLdapLogin ? (\n <TextInput",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/sub-components/ForgotPasswordModalDialog.tsx",
-      "line_number": 215,
-      "context": "key=\"e-mail\"\n isVertical\n hasError={isShowError ? emailError : undefined}\n labelVisible={false}\n errorMessage={\n errorText ? t(`Common:${errorText}`) : t(\"Common:RequiredField\")\n }\n dataTestId=\"email_input_field\"\n >\n <EmailInput\n hasError={isShowError ? emailError : undefined}",
+      "line_number": 218,
+      "context": "labelVisible={false}\n errorMessage={\n errorText\n // biome-ignore lint/plugin/no-dynamic-i18n-key: errorText is a runtime-provided key fragment composed with \"Common:\" prefix\n ? t(`Common:${errorText}`)\n : t(\"Common:RequiredField\")\n }\n dataTestId=\"email_input_field\"\n >\n <EmailInput\n hasError={isShowError ? emailError : undefined}",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/Register/sub-components/RegisterModalDialog.tsx",
-      "line_number": 113,
-      "context": "key=\"e-mail\"\n isVertical\n hasError={isShowError ? emailErr : undefined}\n labelVisible={false}\n errorMessage={\n errorText ? t(`Common:${errorText}`) : t(\"Common:RequiredField\")\n }\n dataTestId=\"register_email_field\"\n >\n <EmailInput\n hasError={isShowError ? emailErr : undefined}",
+      "line_number": 116,
+      "context": "labelVisible={false}\n errorMessage={\n errorText\n // biome-ignore lint/plugin/no-dynamic-i18n-key: errorText is a runtime-provided key fragment composed with \"Common:\" prefix\n ? t(`Common:${errorText}`)\n : t(\"Common:RequiredField\")\n }\n dataTestId=\"register_email_field\"\n >\n <EmailInput\n hasError={isShowError ? emailErr : undefined}",
       "module": "/packages/login"
     },
     {
@@ -249,13 +262,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses a transliteration of the English word 'Field' (ຟີວ) instead of the proper Lao term for a data field or input area. This sounds unnatural and unprofessional in a software UI context.",
-          "suggestion": "ຂໍ້ມູນທີ່ຈຳເປັນ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -303,13 +310,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation contains a spelling error in the word 'ක්ෂේත්‍රයකි' (field). The current version 'ක්ෂේත්‍රයකි' uses an incorrect vowel sign placement (the 'e' vowel is detached/misplaced), which makes it orthographically incorrect and unprofessional for a UI.",
-          "suggestion": "අනිවාර්ය ක්ෂේත්‍රයකි"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

@@ -1,18 +1,17 @@
 {
-  "AccessingProblem": "Nếu bạn hiện là người dùng và gặp sự cố khi truy cập không gian này, xin vui lòng liên hệ với quản trị viên.",
   "CannotCreateNewRoom": "Không thể tạo phòng",
   "CannotCreatePaidUsers": "Không thể thêm người dùng trả phí",
   "CannotRestoreRoom": "Không thể khôi phục phòng",
   "ChooseNewPlan": "Bạn có muốn chọn gói dịch vụ có giá mới không?",
+  "GracePeriodActive": "Thời gian ân hạn đang hoạt động <1>từ {{fromDate}} đến {{byDate}}</1> (số ngày còn lại: {{delayDaysCount}}).",
+  "LicenseExpiredRestriction": "Không thể thêm người dùng mới và tạo phòng mới. Giấy phép đã hết hạn.",
+  "LicenseGracePeriodInfo": "Trong thời gian này, quản trị viên không thể tạo phòng mới hoặc thêm người dùng mới. Sau khi thời gian ân hạn kết thúc, {{productName}} sẽ không khả dụng cho đến khi kích hoạt giấy phép mới.",
   "NewRoomWillExceedLimit": "Không thể tạo phòng này vì đã đạt đến giới hạn số lượng phòng trong gói dịch vụ hiện tại của bạn.",
   "NewUsersWillExceedMembersLimit": "Không thể thêm người dùng trả phí mới vì đã đạt đến giới hạn số lượng quản trị viên trong gói dịch vụ hiện tại của bạn.",
   "NotPossibleRoomRestoring": "Không thể khôi phục phòng này vì đã đạt đến giới hạn số lượng phòng trong gói dịch vụ hiện tại của bạn.",
   "NumberOfRoomsAccordingToTariff": "Số lượng phòng theo gói dịch vụ của bạn: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Số lượng quản trị viên theo gói dịch vụ của bạn: {{currentValue}}/{{maxValue}}",
+  "PlanPaymentOverdue": "Không thể thêm người dùng mới, tạo phòng mới hoặc tác nhân AI. Thanh toán gói {{planName}} quá hạn.",
   "RoomsQuotaAlmostExhausted": "Gần như đã dùng hết hạn mức phòng.",
-  "UsersQuotaAlmostExhausted": "Gần như đã dùng hết hạn mức người dùng trả phí.",
-  "GracePeriodActive": "Thời gian ân hạn đang hoạt động <1>từ {{fromDate}} đến {{byDate}}</1> (số ngày còn lại: {{delayDaysCount}}).",
-  "LicenseExpired": "Không thể thêm người dùng mới và tạo phòng mới. Giấy phép đã hết hạn.",
-  "LicenseGracePeriodInfo": "Trong thời gian này, quản trị viên không thể tạo phòng mới hoặc thêm người dùng mới. Sau khi thời gian ân hạn kết thúc, {{productName}} sẽ không khả dụng cho đến khi kích hoạt giấy phép mới.",
-  "PlanPaymentOverdue": "Không thể thêm người dùng mới, tạo phòng mới hoặc tác nhân AI. Thanh toán gói {{planName}} quá hạn."
+  "UsersQuotaAlmostExhausted": "Gần như đã dùng hết hạn mức người dùng trả phí."
 }

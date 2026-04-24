@@ -3,11 +3,12 @@
   "content": "Action",
   "content_en_sha1_hash": "97c89a4d6630adeb18fa12ba9976a31413fe293e",
   "created_at": "2025-05-19T21:30:42.859Z",
-  "updated_at": "2026-04-08T18:12:38.547Z",
+  "updated_at": "2026-04-11T21:01:31.737Z",
   "comment": {
-    "text": "The translation key \"Action\" is used to display the English content \"Action\", which likely serves as a title or header in a UI element, possibly in a table header or a settings page, guiding users to take a specific action.",
+    "text": "Table header. It labels a column displaying the type of action performed in audit trails or login history.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:28.239Z"
+    "updated_at": "2026-04-11T21:01:31.737Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -75,13 +76,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish word 'Tapahtuma' means 'Event'. In the context of a UI table column header (as seen in the code), 'Action' refers to a command or operation (e.g., Edit, Delete), which should be translated as 'Toiminto'.",
-          "suggestion": "Toiminto"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -207,13 +202,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "In the context of a UI table header (as seen in the code snippet), 'Action' refers to a set of commands or operations (like Edit, Delete, View) rather than 'Activity' or 'Activity/Movement'. 'Hoạt động' is a noun meaning 'Activity'. The correct term for a UI column header should be 'Thao tác'.",
-          "suggestion": "Thao tác"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

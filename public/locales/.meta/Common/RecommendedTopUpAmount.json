@@ -3,13 +3,21 @@
   "content": "Recommended top-up amount: {{amount}}",
   "content_en_sha1_hash": "3bc43aa133ab4cdef0136ff2d1be66e019573937",
   "created_at": "2026-04-10T13:53:43.130Z",
-  "updated_at": "2026-04-10T13:53:43.130Z",
+  "updated_at": "2026-04-23T17:24:02.186Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This text appears below an input field for topping up a balance, suggesting a recommended amount. `{{amount}}` is a number representing the recommended top-up value.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:45:27.977Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/Amount.tsx",
+      "line_number": 179,
+      "context": "testId=\"top_up_amount_input\"\n hasError={hasError}\n />\n {reccomendedAmount ? (\n <Text className={styles.reccomendedAmount}>\n {t(\"RecommendedTopUpAmount\", {\n amount: formatWalletCurrency!(+reccomendedAmount, 0),\n })}\n </Text>\n ) : null}\n </FieldContainer>",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

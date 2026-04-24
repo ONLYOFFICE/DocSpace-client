@@ -1,18 +1,17 @@
 {
-  "AccessingProblem": "如果您是现有用户并且在访问此空间时遇到问题，请联系管理员。",
   "CannotCreateNewRoom": "无法创建房间",
   "CannotCreatePaidUsers": "无法添加付费用户",
   "CannotRestoreRoom": "房间无法恢复",
   "ChooseNewPlan": "是否选择新的定价版本？",
+  "GracePeriodActive": "宽限期从 <1>{{fromDate}} 到 {{byDate}}</1> 生效（剩余天数：{{delayDaysCount}}）。",
+  "LicenseExpiredRestriction": "无法添加新用户和创建新房间。许可证已过期。",
+  "LicenseGracePeriodInfo": "在此期间，管理员无法创建新房间或添加新用户。宽限期结束后，{{productName}} 将不可用，直到激活新许可证。",
   "NewRoomWillExceedLimit": "由于当前费用版本的房间数量已达上限，因此无法创建该房间。",
   "NewUsersWillExceedMembersLimit": "由于当前费用版本的管理员数量已达上限，因此无法添加新的付费用户。",
   "NotPossibleRoomRestoring": "由于当前费用版本的房间数量已达上限，因此无法恢复此房间。",
   "NumberOfRoomsAccordingToTariff": "您的费用版本的房间数量为：{{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "您资费计划的管理员数量：{{currentValue}} / {{maxValue}}",
+  "PlanPaymentOverdue": "无法添加新用户、创建新房间或 AI 代理。{{planName}} 套餐付款已逾期。",
   "RoomsQuotaAlmostExhausted": "房间配额已几乎用完。",
-  "UsersQuotaAlmostExhausted": "付费用户配额已几乎用完。",
-  "GracePeriodActive": "宽限期从 <1>{{fromDate}} 到 {{byDate}}</1> 生效（剩余天数：{{delayDaysCount}}）。",
-  "LicenseExpired": "无法添加新用户和创建新房间。许可证已过期。",
-  "LicenseGracePeriodInfo": "在此期间，管理员无法创建新房间或添加新用户。宽限期结束后，{{productName}} 将不可用，直到激活新许可证。",
-  "PlanPaymentOverdue": "无法添加新用户、创建新房间或 AI 代理。{{planName}} 套餐付款已逾期。"
+  "UsersQuotaAlmostExhausted": "付费用户配额已几乎用完。"
 }

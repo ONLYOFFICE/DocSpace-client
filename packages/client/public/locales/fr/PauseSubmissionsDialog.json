@@ -1,5 +1,5 @@
 {
   "Description1": "La modification interrompra les soumissions et masquera le formulaire aux remplisseurs de formularios.",
   "Description2": "Vous pouvez le reprendre plus tard pour continuer à recueillir les réponses.",
-  "Title": "Mettre les soumissions en pause pour les modifier ?"
+  "PauseSubmissionsTitle": "Mettre les soumissions en pause pour les modifier ?"
 }

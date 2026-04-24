@@ -3,16 +3,17 @@
   "content": "SharePoint directory",
   "content_en_sha1_hash": "ba3b2bcebb6c52948e33724869585c561a7dec4f",
   "created_at": "2025-05-19T21:30:49.979Z",
-  "updated_at": "2026-04-08T21:13:42.565Z",
+  "updated_at": "2026-04-11T21:27:29.926Z",
   "comment": {
-    "text": "This translation key is used to display the title of a SharePoint directory. It appears in various contexts, such as file lists or directories, where a user needs to identify the type of storage location. The label will be translated to reflect its specific content.",
+    "text": "This is a folder title displayed in the file list. It identifies a folder that represents a connected SharePoint directory.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:32.860Z"
+    "updated_at": "2026-04-11T21:27:29.926Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 117,
+      "line_number": 118,
       "context": "case \"OneDrive\":\n case \"SkyDrive\":\n return t(\"Translations:FolderTitleSkyDrive\");\n \n case \"SharePoint\":\n return t(\"Translations:FolderTitleSharePoint\");\n case \"WebDav\":\n return t(\"Translations:FolderTitleWebDav\");\n case \"kDrive\":\n return t(\"Translations:FolderTitlekDrive\");\n case \"Yandex\":",
       "module": "/packages/client"
     }
@@ -81,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'գրացուցակ' (list/directory in the sense of a contact list or index) is used instead of 'տնօրենություն' or 'թղթապանակ' (directory in the sense of a file system folder/structure). In the context of SharePoint and file storage, 'գրացուցակ' is semantically incorrect.",
-          "suggestion": "SharePoint թղթապանակ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -147,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Director' in Romanian means 'Director/Manager' (a person), whereas 'Directory' in a technical context refers to a folder or storage location. The correct term is 'Directoriu'.",
-          "suggestion": "Directoriu SharePoint"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -189,13 +178,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation is in the instrumental case ('direktorijum'), whereas the English source is a noun phrase in the nominative case. In a UI title context, it should be 'SharePoint direktorijum'.",
-          "suggestion": "SharePoint direktorijum"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -225,13 +208,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Drejtoria' in Albanian means 'Directorate' or 'Management/Administration'. In the context of computing and file systems, 'directory' should be translated as 'dosja' or 'direktoria' (the latter is a loanword, but 'Drejtoria' specifically refers to a governing body/department).",
-          "suggestion": "Direktoria e SharePoint"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

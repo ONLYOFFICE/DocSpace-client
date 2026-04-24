@@ -3,11 +3,12 @@
   "content": "The rooms are unarchived.",
   "content_en_sha1_hash": "309be23ffc42f49c87cb88b71417b839f9c77761",
   "created_at": "2025-05-19T21:30:56.280Z",
-  "updated_at": "2026-04-07T19:35:05.098Z",
+  "updated_at": "2026-04-11T21:07:50.751Z",
   "comment": {
-    "text": "This translation key is used to display a message indicating that rooms have been unarchived, typically appearing in a notification or success message. The phrase appears when an action updates folder status, specifically in the FilesActionsStore.js file.",
+    "text": "This is a toast message confirming that multiple rooms have been successfully unarchived.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:39:00.942Z"
+    "updated_at": "2026-04-11T21:07:50.751Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,22 +3,23 @@
   "content": "Copy",
   "content_en_sha1_hash": "af74f7c5362aaee985bf8cda3dd75fc80751ce51",
   "created_at": "2025-05-19T21:30:43.729Z",
-  "updated_at": "2026-04-10T08:21:04.290Z",
+  "updated_at": "2026-04-23T17:24:01.667Z",
   "comment": {
-    "text": "This translation key is used to display the text \"Copy\" in various UI elements, such as buttons and labels, to provide a clear indication of the action being performed, typically copying files or data. It appears in buttons within the FilesSelector component, EmbeddingPanel, and GetCodeDialog modal dialog, helping users understand the purpose of each button's functionality.",
+    "text": "This is a button label or a toast message. It appears when copying content, such as a file, folder, or embed link, to the clipboard.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:57.822Z"
+    "updated_at": "2026-04-11T20:56:23.592Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 52,
+      "line_number": 53,
       "context": "isSelectFolder?: boolean,\n ) => {\n if (isRestore) return t(\"Common:RestoreTo\");\n if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isMove) return t(\"Common:MoveTo\");\n if (isCopy && !isEditorDialog) return t(\"Common:Copy\");\n if (isRestoreAll) return t(\"Common:Restore\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 575,
+      "line_number": 576,
       "context": "className=\"send-invitation\"\n scale\n size={ButtonSize.normal}\n primary\n onClick={onCopyAndClose}\n label={t(\"Common:Copy\")}\n isLoading={isLoading}\n testId=\"embedding_panel_copy_button\"\n />\n <Button\n className=\"cancel-button\"",
       "module": "/packages/client"
     },
@@ -42,14 +43,14 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1678,
-      "context": "if (this.publicRoomStore.isPublicRoom) {\n return [\n {\n key: \"public-room_share\",\n label: t(\"Common:CopySharedLink\"),\n icon: TabletLinkReactSvgUrl,\n onClick: () => {\n copy(window.location.href);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n },",
+      "line_number": 1994,
+      "context": "disabled: false,\n },\n {\n id: \"option_copy-to\",\n key: \"copy-to\",\n label: t(\"Common:Copy\"),\n icon: CopyReactSvgUrl,\n onClick: () => this.onCopyAction(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1678,
-      "context": "if (this.publicRoomStore.isPublicRoom) {\n return [\n {\n key: \"public-room_share\",\n label: t(\"Common:CopySharedLink\"),\n icon: TabletLinkReactSvgUrl,\n onClick: () => {\n copy(window.location.href);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n },",
+      "line_number": 1994,
+      "context": "disabled: false,\n },\n {\n id: \"option_copy-to\",\n key: \"copy-to\",\n label: t(\"Common:Copy\"),\n icon: CopyReactSvgUrl,\n onClick: () => this.onCopyAction(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
     {
@@ -59,15 +60,27 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
+      "line_number": 285,
+      "context": "const getCopyItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_copy\",\n key: \"copy\",\n label: t(\"Common:Copy\"),\n icon: CopyReactSvgUrl,\n onClick: () => onCopyClick?.(i),\n disabled: !onCopyClick,\n };\n },",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
+      "line_number": 285,
+      "context": "const getCopyItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_copy\",\n key: \"copy\",\n label: t(\"Common:Copy\"),\n icon: CopyReactSvgUrl,\n onClick: () => onCopyClick?.(i),\n disabled: !onCopyClick,\n };\n },",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/shared/components/media-viewer/MediaViewer.helpers.tsx",
-      "line_number": 83,
-      "context": "disabled: false,\n },\n {\n id: \"option_link-for-room-members\",\n key: \"link-for-room-members\",\n label: t(\"Common:CopyLink\"),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => funcs.onCopyLink?.(item, t),\n disabled: false,\n },\n {",
+      "line_number": 91,
+      "context": "disabled: false,\n },\n {\n id: \"option_copy-to\",\n key: \"copy-to\",\n label: t(\"Common:Copy\"),\n icon: CopyReactSvgUrl,\n onClick: funcs.onCopyAction,\n disabled: !item.security.Copy,\n },\n {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/media-viewer/MediaViewer.helpers.tsx",
-      "line_number": 83,
-      "context": "disabled: false,\n },\n {\n id: \"option_link-for-room-members\",\n key: \"link-for-room-members\",\n label: t(\"Common:CopyLink\"),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => funcs.onCopyLink?.(item, t),\n disabled: false,\n },\n {",
+      "line_number": 91,
+      "context": "disabled: false,\n },\n {\n id: \"option_copy-to\",\n key: \"copy-to\",\n label: t(\"Common:Copy\"),\n icon: CopyReactSvgUrl,\n onClick: funcs.onCopyAction,\n disabled: !item.security.Copy,\n },\n {",
       "module": "/packages/shared"
     }
   ],
@@ -87,13 +100,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Köçür' means 'Move' or 'Migrate' in Azerbaijani. For the action of duplicating data/files (Copy), the correct term is 'Kopyala'.",
-          "suggestion": "Kopyala"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -129,13 +136,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish word 'Kopio' is a noun meaning 'a copy' (the result). For a UI button/action, the verb 'Kopioi' (Copy) should be used to indicate the action.",
-          "suggestion": "Kopioi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -219,13 +220,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'පිටපතක්' means 'a copy' (noun), whereas the English context 'Copy' refers to the action/verb (to copy). In a UI button context, the verb form is required.",
-          "suggestion": "පිටපත් කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

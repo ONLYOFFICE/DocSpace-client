@@ -30,6 +30,7 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { PreparationPortal } from "@docspace/shared/pages/PreparationPortal";
 import styles from "./PreparationPortal.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const PreparationPortalDialog = (props) => {
   const { t, tReady, preparationPortalVisible, setVisible } = props;
@@ -46,7 +47,7 @@ const PreparationPortalDialog = (props) => {
       isLarge
     >
       <ModalDialog.Header>
-        {t("PortalRestoring", { productName: t("Common:ProductName") })}
+        {t("PortalRestoring", { productName: getBrandName("ProductName") })}
       </ModalDialog.Header>
       <ModalDialog.Body>
         <div className={styles.wrapper}>

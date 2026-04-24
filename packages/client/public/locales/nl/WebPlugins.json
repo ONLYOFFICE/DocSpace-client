@@ -5,7 +5,7 @@
   "ExpandFunctionality": "Functionaliteit uitbreiden met Plugin SDK",
   "GoToRepo": "Ga naar repository",
   "Metadata": "Metadata",
-  "NeedSettings": "Instellingen invoeren",
+  "NeedSettings": "Instellingen vereist",
   "NoPlugins": "Geen plug-ins toegevoegd",
   "NotNeedSettings": "Instellingen invoeren is niet nodig",
   "PluginCacheWarningDescription": "Plugins worden gecached op basis van hun versienummer. Om ervoor te zorgen dat uw wijzigingen worden toegepast, verhoogt u het versienummer in uw <1>package.json</1> bestand voordat u het uploadt. Het systeem zal een plugin niet bijwerken als het versienummer hetzelfde blijft.",

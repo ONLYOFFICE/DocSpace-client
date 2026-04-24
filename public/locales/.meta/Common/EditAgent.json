@@ -3,11 +3,12 @@
   "content": "Edit Agent",
   "content_en_sha1_hash": "07c504c5b4e6c55a509698a594e6e99f8b1b3ec9",
   "created_at": "2025-10-27T16:14:13.848Z",
-  "updated_at": "2026-04-10T08:21:04.305Z",
+  "updated_at": "2026-04-23T17:24:01.730Z",
   "comment": {
-    "text": "This translation key is used as the title for a dialog or panel that allows a user to edit agent details. It appears in the UI header and likely refers to an \"Edit Agent\" action or screen. Translators should ensure the meaning conveys the ability to modify agent settings.",
+    "text": "This is the title of a dialog window and a menu item label. It allows users to modify the settings of an existing agent.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:40:47.935Z"
+    "updated_at": "2026-04-11T20:54:30.801Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -18,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2149,
+      "line_number": 2208,
       "context": "disabled: false,\n },\n {\n id: \"option_edit-agent\",\n key: \"edit-agent\",\n label: t(\"Common:EditAgent\"),\n icon: SettingsReactSvgUrl,\n onClick: () => this.onClickEditAgent(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     }
@@ -39,13 +40,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Redaktə Agent' is grammatically incorrect in Azerbaijani. It lacks the necessary possessive/genitive suffix to connect 'Edit' (as an action/modifier) to 'Agent'. It reads like two separate nouns rather than 'Edit Agent'.",
-          "suggestion": "Agenti redaktə et"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -63,13 +58,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation uses the plural form 'Agenten bearbeiten' (Edit Agents), whereas the English source is singular 'Edit Agent'. This changes the meaning from editing a single entity to editing multiple entities.",
-          "suggestion": "Agent bearbeiten"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -87,13 +76,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation 'Muokkaa Agentti' uses the nominative case for 'Agentti', which is grammatically incorrect in this context. In Finnish, the object of the verb 'muokata' (to edit) must be in the accusative/genitive case ('Agentin').",
-          "suggestion": "Muokkaa agenttia"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -123,13 +106,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '편집 에이전트' literally means 'Edit Agent' as a noun phrase (Agent who edits), rather than the action 'Edit Agent' (Modify the agent). In Korean UI, the verb should come last to indicate the action.",
-          "suggestion": "에이전트 편집"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -195,13 +172,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Urejevalnik agenta' means 'Agent Editor' (a noun referring to a tool/person), whereas the English 'Edit Agent' is an action/command (verb phrase). In a UI header or menu item, it should be an imperative or a gerund-based action.",
-          "suggestion": "Uredi agenta"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
@@ -225,13 +196,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order in Turkish is incorrect for a UI action. 'Düzenle Aracısı' sounds like 'The agent who edits' or 'Edit (verb) Agent (noun)' in a way that is grammatically unnatural for a title. In Turkish UI, the object should precede the verb.",
-          "suggestion": "Aracıyı Düzenle"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

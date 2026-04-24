@@ -3,23 +3,24 @@
   "content": "{{productName}} will become unavailable during the restore process. After the restore is complete all the changes made after the date of the selected restore point will be lost.",
   "content_en_sha1_hash": "95f4959d72ad296d2309ba5ebff78078d35592ae",
   "created_at": "2025-05-26T07:15:46.930Z",
-  "updated_at": "2026-04-10T08:58:38.050Z",
+  "updated_at": "2026-04-13T09:16:33.858Z",
   "comment": {
-    "text": "This translation key is used for a warning message that informs users about potential data loss during the restore process of their {productName}. It appears in a UI component that displays settings or options related to file restoration.",
+    "text": "This is a warning message displayed when initiating a backup restore. It informs the user that the product will be unavailable and recent changes will be lost. `{{productName}}` will be replaced with the product's brand name.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:03:56.760Z"
+    "updated_at": "2026-04-11T20:44:51.964Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/index.tsx",
-      "line_number": 369,
-      "context": "styles.restoreBackupWarningDescription,\n styles.settingsUnavailable,\n \"restore-backup_warning-description\",\n )}\n >\n {t(\"Common:RestoreBackupWarningText\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {!standalone ? (\n <Text",
+      "line_number": 370,
+      "context": "styles.restoreBackupWarningDescription,\n styles.settingsUnavailable,\n \"restore-backup_warning-description\",\n )}\n >\n {t(\"Common:RestoreBackupWarningText\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n {!standalone ? (\n <Text",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/backup-list/index.tsx",
-      "line_number": 204,
-      "context": "className={classNames(\n styles.restoreBackupWarningDescription,\n \"restore-backup_warning-description\",\n )}\n >\n {t(\"Common:RestoreBackupWarningText\", {\n productName: t(\"Common:ProductName\"),\n })}{\" \"}\n {!standalone ? (\n <Text\n as=\"span\"",
+      "line_number": 205,
+      "context": "className={classNames(\n styles.restoreBackupWarningDescription,\n \"restore-backup_warning-description\",\n )}\n >\n {t(\"Common:RestoreBackupWarningText\", {\n productName: getBrandName(\"ProductName\"),\n })}{\" \"}\n {!standalone ? (\n <Text\n as=\"span\"",
       "module": "/packages/shared"
     }
   ],
@@ -45,13 +46,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order in the second sentence is grammatically incorrect in Bulgarian, making the sentence structure awkward and potentially confusing ('...точка за възстановяване промени ще бъдат загубени' instead of '...промените, направени след датата на избраната точка за възстановяване, ще бъдат загубени').",
-          "suggestion": "{{productName}} ще бъде недостъпен по време на процеса на възстановяване. След като възстановяването приключи, всички промени, направени след датата на избраната точка за възстановяване, ще бъдат загубени."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -81,13 +76,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation '{{productName}}:n ei ole pääsyä' (literally: 'there is no access to {{productName}}') is grammatically awkward and conveys a slightly different meaning than 'will become unavailable'. In Finnish, a product itself doesn't 'lack access'; rather, it 'becomes unavailable' or 'cannot be used'.",
-          "suggestion": "{{productName}} ei ole käytettävissä palautusprosessin aikana. Palautuksen jälkeen kaikki valitun palautuspisteen jälkeen tehdyt muutokset häviävät."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -159,13 +148,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation changes the meaning of the second sentence. The English says changes made after the 'date of the selected restore point' will be lost, whereas the Romanian says changes made after the 'creation of a restore point' (crearea unui punct de restaurare) will be lost. This is a logical error because it implies any restore point creation triggers data loss, rather than the specific date selected by the user.",
-          "suggestion": "În timpul procesului de restaurare {{productName}} va deveni indisponibil. Odată ce procesul de restaurare este finalizat, toate modificările efectuate după data punctului de restaurare selectat vor fi pierdute."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -219,13 +202,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation changes the logic of the data loss warning. The English text states changes made after the 'date of the selected restore point' will be lost. The Chinese translation says changes made after 'clicking the restore button' will be lost. This is a critical distinction: the user loses data from the time of the backup point, not just from the moment they click the button.",
-          "suggestion": "{{productName}}在恢复过程中将不可用。恢复完成后，自所选恢复点日期以来所做的所有更改都将丢失。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {

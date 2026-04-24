@@ -3,17 +3,18 @@
   "content": "Plugin loaded successfully",
   "content_en_sha1_hash": "074423f8efcfbd9cbe5fe040de2bbef07f85be71",
   "created_at": "2025-09-24T13:10:10.160Z",
-  "updated_at": "2026-04-08T18:37:31.352Z",
+  "updated_at": "2026-04-11T21:27:51.214Z",
   "comment": {
-    "text": "This message confirms a plugin has been successfully loaded. It appears as a success notification (likely a toastr message) to inform the user that the plugin installation or update was completed successfully. Translators should ensure the wording conveys a positive outcome.",
+    "text": "This is a toast message confirming that a plugin has been successfully loaded into the application.",
     "is_auto": true,
-    "updated_at": "2025-09-24T13:16:00.735Z"
+    "updated_at": "2026-04-11T21:27:51.214Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/hooks/usePluginUpload.ts",
-      "line_number": 60,
-      "context": "t(\"PluginIsNotCompatible\", {\n productName: t(\"Common:ProductName\"),\n }),\n );\n } else {\n toastr.success(t(\"PluginLoadedSuccessfully\"));\n }\n },\n [t],\n );",
+      "line_number": 61,
+      "context": "t(\"PluginIsNotCompatible\", {\n productName: getBrandName(\"ProductName\"),\n }),\n );\n } else {\n toastr.success(t(\"PluginLoadedSuccessfully\"));\n }\n },\n [t],\n );",
       "module": "/packages/client"
     }
   ],

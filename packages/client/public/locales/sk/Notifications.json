@@ -1,4 +1,5 @@
 {
+  "ActionsWithFilesDescription": "Nákupné značky zvýraznia aktivitu súborov — nahrávanie, úpravy alebo zdieľanie — v sekciách {{rooms}}, {{shared}}, {{documents}} a {{aiAgents}}.",
   "AdminSetupRequired": "Vyžaduje sa nastavenie administrátora",
   "Badges": "Menovky",
   "DailyFeed": "Denný informačný kanál {{productName}}",
@@ -8,12 +9,11 @@
   "LdapEmailTooltip": "Tento používateľský účet je načítaný z LDAP. Používateľova e-mailová adresa nebola zadaná a aktuálna bola generovaná automaticky a nemožno ju použiť na odosielanie upozornení.",
   "NotConfigured": "Nakonfigurované",
   "Notifications": "Upozornenia",
+  "RoomsActivityDescription": "Získajte okamžité e-mailové upozornenia o nových zdieľaných súboroch/kategóriách a aktivite vo vašich {{rooms}} a {{aiAgents}}.",
+  "RoomUpdateNotify": "Sdílený obsah, aktivita v {{rooms}} a {{aiAgents}}",
   "SettingUpNotifications": "Nastavenie upozornení",
   "SuccessConnected": "{{serviceName}} bol úspešne pripojený ako kanál pre upozornenia. Teraz tam budete dostávať aktualizácie.",
   "SuccessDisconnected": "{{serviceName}} bol úspešne odpojený ako kanál pre upozornenia. Upozornenia tam už nebudú zasielané.",
   "UsefulTips": "Užitočné tipy pre {{productName}}",
-  "UsefulTipsDescription": "Získajte užitočných sprievodcov o {{productName}}",
-  "ActionsWithFilesDescription": "Nákupné značky zvýraznia aktivitu súborov — nahrávanie, úpravy alebo zdieľanie — v sekciách {{rooms}}, {{shared}}, {{documents}} a {{aiAgents}}.",
-  "RoomsActivityDescription": "Získajte okamžité e-mailové upozornenia o nových zdieľaných súboroch/kategóriách a aktivite vo vašich {{rooms}} a {{aiAgents}}.",
-  "RoomUpdateNotify": "Sdílený obsah, aktivita v {{rooms}} a {{aiAgents}}"
+  "UsefulTipsDescription": "Získajte užitočných sprievodcov o {{productName}}"
 }

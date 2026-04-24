@@ -3,11 +3,12 @@
   "content": "Settings have been successfully updated",
   "content_en_sha1_hash": "a3e0f1940499fb1b34253a9a7b050c2136e1f58b",
   "created_at": "2025-05-26T07:15:48.667Z",
-  "updated_at": "2026-04-10T08:21:04.339Z",
+  "updated_at": "2026-04-12T16:34:57.634Z",
   "comment": {
-    "text": "The translation key \"SuccessfullySaveSettingsMessage\" is used to display a success message after saving portal settings. It appears in UI elements such as buttons or dialogs that trigger setting updates, providing feedback to the user that changes have been successfully applied.",
+    "text": "This is a toast message confirming that settings have been successfully saved or updated. It appears briefly after a user makes changes to settings, such as the appearance theme.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:03:26.002Z"
+    "updated_at": "2026-04-11T20:41:34.180Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -78,19 +79,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ad-management.tsx",
-      "line_number": 151,
+      "line_number": 152,
       "context": "await setAdManagement(!type);\n setDisplayBanners(Boolean(type));\n setShowReminder(false);\n saveToSessionStorage(\"defaultDisplayBanners\", type);\n saveToSessionStorage(\"currentDisplayBanners\", type);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (e) {\n toastr.error(e!);\n } finally {\n setIsSaving(false);\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ai-services-management.tsx",
-      "line_number": 176,
+      "line_number": 177,
       "context": "setIsSaving(true);\n await setAiAccessSettings(type);\n setAiServicesEnabled(type);\n await fetchTreeFolders();\n setShowReminder(false);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (e) {\n toastr.error(e as string);\n } finally {\n setIsSaving(false);\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ai-services-management.tsx",
-      "line_number": 176,
+      "line_number": 177,
       "context": "setIsSaving(true);\n await setAiAccessSettings(type);\n setAiServicesEnabled(type);\n await fetchTreeFolders();\n setShowReminder(false);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (e) {\n toastr.error(e as string);\n } finally {\n setIsSaving(false);\n }",
       "module": "/packages/client"
     },
@@ -108,7 +109,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/language-and-time-zone.js",
-      "line_number": 406,
+      "line_number": 407,
       "context": "setCookie(LANGUAGE, state.language.key || \"en\", {\n \"max-age\": COOKIE_EXPIRATION_YEAR,\n });\n window.timezone = state.timezone.key;\n })\n .then(() => toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\")))\n .then(() => {\n if (!user.cultureName && lng !== state.language.key)\n window.location.reload();\n else settingsStore.setCulture(state.language.key);\n })",
       "module": "/packages/client"
     },
@@ -138,7 +139,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/adminMessage.js",
-      "line_number": 136,
+      "line_number": 137,
       "context": "};\n \n const onSaveClick = () => {\n const turnOn = type === \"enable\";\n setMessageSettings(turnOn);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n saveToSessionStorage(\"currentAdminMessageSettings\", type);\n saveToSessionStorage(\"defaultAdminMessageSettings\", type);\n setShowReminder(false);\n };",
       "module": "/packages/client"
     },
@@ -150,13 +151,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/devToolsAccess.tsx",
-      "line_number": 168,
+      "line_number": 169,
       "context": "await setDevToolsAccessSettings(accessEnabled);\n setAccessEnabled(accessEnabled);\n setShowReminder(false);\n saveToSessionStorage(\"defaultDevToolsAccessSettings\", accessEnabled);\n saveToSessionStorage(\"currentDevToolsAccessSettings\", accessEnabled);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (error: unknown) {\n const message = (error as { message: string }).message\n ? ((error as { message: string }).message as TData)\n : (error as string);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 217,
+      "line_number": 218,
       "context": "allowInvitingMembers: isCheckedContacts,\n allowInvitingGuests: isCheckedGuests,\n });\n setShowReminder(false);\n \n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error as TData);\n }\n \n setIsSaving(false);",
       "module": "/packages/client"
     },
@@ -180,7 +181,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 210,
+      "line_number": 211,
       "context": "const res = await setTfaSettings(type);\n setType(type);\n setShowReminder(false);\n saveToSessionStorage(\"defaultTfaSettings\", type);\n saveToSessionStorage(\"currentTfaSettings\", type);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n \n if (res) {\n setIsInit(false);\n window.location.replace(res);\n }",
       "module": "/packages/client"
     },
@@ -240,13 +241,13 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 275,
+      "line_number": 276,
       "context": "const handleDeleteSchedule = () => {\n setIsLoadingData(true, () => {\n deleteBackupSchedule(isManagement)\n ?.then(() => {\n deleteSchedule(weekdaysLabelArray);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n })\n .catch((error) => {\n setErrorInformation(error, t);\n toastr.error(error);\n console.error(error);",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 275,
+      "line_number": 276,
       "context": "const handleDeleteSchedule = () => {\n setIsLoadingData(true, () => {\n deleteBackupSchedule(isManagement)\n ?.then(() => {\n deleteSchedule(weekdaysLabelArray);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n })\n .catch((error) => {\n setErrorInformation(error, t);\n toastr.error(error);\n console.error(error);",
       "module": "/packages/shared"
     }
@@ -297,13 +298,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The definite article 'Los' is missing at the beginning of the sentence, which makes the Spanish translation sound unnatural/incomplete for a UI notification.",
-          "suggestion": "Los ajustes se han actualizado correctamente"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {

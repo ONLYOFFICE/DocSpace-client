@@ -4,11 +4,11 @@
   "ErrorViewDescription": "Молимо вас покушајте поново касније",
   "ErrorViewDescriptionNetworkError": "Изгледа да нема интернет везе",
   "ErrorViewHeader": "Галерија је привремено недоступна",
+  "GalleryTitle": "Галерија шаблона {{organizationName}}",
   "SelectTemplate": "Изаберите шаблон",
+  "SubmitToGalleryDialogMainInfo": "Пошаљите свој шаблон у јавну галеницу да други користе у свом раду. Након што шаблон прође модерацију, биће вам послато обавештење и награђено за ваш допринос.",
   "SuggestChanges": "Предложи промене",
   "TemplateInfo": "Инфо за шаблон",
   "UploadGallery": "Пошаљите у Галерију",
-  "ViewAllTemplates": "Прегледај све шаблоне",
-  "SubmitToGalleryDialogMainInfo": "Пошаљите свој шаблон у јавну галеницу да други користе у свом раду. Након што шаблон прође модерацију, биће вам послато обавештење и награђено за ваш допринос.",
-  "GalleryTitle": "Галерија шаблона {{organizationName}}"
+  "ViewAllTemplates": "Прегледај све шаблоне"
 }

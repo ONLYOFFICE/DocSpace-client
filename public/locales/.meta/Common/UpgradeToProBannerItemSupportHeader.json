@@ -3,11 +3,12 @@
   "content": "Tech support.",
   "content_en_sha1_hash": "042c7e2db48ea2940e8db6a2a1a499975cd5c571",
   "created_at": "2025-05-26T07:15:49.321Z",
-  "updated_at": "2026-04-07T20:45:28.160Z",
+  "updated_at": "2026-04-12T13:09:21.863Z",
   "comment": {
-    "text": "This translation key is used for the \"Tech support\" label that appears as a support icon on a banner in a benefits container. It is displayed when users upgrade to a Pro plan and appears alongside other features of the plan. Translators should provide a localized version of this text for use in the UI.",
+    "text": "This is a short label for a feature listed in a banner promoting an upgrade to a Pro plan. It highlights \"Tech support\" as a benefit of the upgrade.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:02:02.075Z"
+    "updated_at": "2026-04-11T20:39:47.686Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -195,13 +196,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Vietnamese word 'hộ trợ' is a spelling error; the correct spelling is 'hỗ trợ'.",
-          "suggestion": "Nhóm hỗ trợ kỹ thuật."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

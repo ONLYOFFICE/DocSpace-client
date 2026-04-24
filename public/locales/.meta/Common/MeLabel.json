@@ -3,13 +3,20 @@
   "content": "Me",
   "content_en_sha1_hash": "94563ec383e29aa3743abd9b337b2e084fb199fb",
   "created_at": "2025-05-19T21:30:46.429Z",
-  "updated_at": "2026-04-08T04:51:31.375Z",
+  "updated_at": "2026-04-13T14:59:05.726Z",
   "comment": {
-    "text": "This translation key \"MeLabel\" is used to display a user's name when they have ownership rights or are the current room owner in various UI components, such as dialogs and templates. The text appears next to the username in a bold font and indicates that the user has specific permissions or access.",
+    "text": "This label appears next to a user's name to indicate that the user is the current user. It is displayed in parentheses.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:32.004Z"
+    "updated_at": "2026-04-11T20:48:49.275Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/selectors/People/index.tsx",
+      "line_number": 656,
+      "context": ">\n {Encoder.htmlDecode(label ?? \"\")}\n </Text>\n {!isGroup && String(id) === currentUserId ? (\n <Text className={styles.isMeLabel} fontWeight={600} fontSize=\"14px\">\n ({t(\"MeLabel\")})\n </Text>\n ) : null}\n {status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}\n </div>\n {!isGroup ? (",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/ChangeRoomOwner/index.tsx",
       "line_number": 90,
@@ -18,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/TemplateAccess/TemplateAccess.tsx",
-      "line_number": 169,
+      "line_number": 170,
       "context": "<div className={styles.templateAccessDisplayName}>\n <Text fontWeight={600} fontSize=\"13px\">\n {userName}\n </Text>\n <Text className={styles.meLabel}>\n ({t(\"Common:MeLabel\")})\n </Text>\n </div>\n </>\n ) : (\n <>",
       "module": "/packages/client"
     },
@@ -42,7 +49,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/ItemTitle.tsx",
-      "line_number": 157,
+      "line_number": 158,
       "context": "className={styles.isMeLabel}\n fontWeight={700}\n fontSize=\"16px\"\n lineHeight=\"22px\"\n >\n ({t(\"Common:MeLabel\")})\n </Text>\n ) : null}\n {isPending ? (\n <Badges withoutPaid statusType={userSelection.statusType} />\n ) : null}",
       "module": "/packages/client"
     },
@@ -108,25 +115,25 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 454,
+      "line_number": 455,
       "context": "if (user) {\n if (user.id === userId) {\n filterValues.push({\n key: FilterKeys.me,\n group: FilterGroups.filterInviter,\n label: t(\"Common:MeLabel\"),\n });\n } else {\n filterValues.push({\n key: user.id,\n group: FilterGroups.filterInviter,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 454,
+      "line_number": 455,
       "context": "if (user) {\n if (user.id === userId) {\n filterValues.push({\n key: FilterKeys.me,\n group: FilterGroups.filterInviter,\n label: t(\"Common:MeLabel\"),\n });\n } else {\n filterValues.push({\n key: user.id,\n group: FilterGroups.filterInviter,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 454,
+      "line_number": 455,
       "context": "if (user) {\n if (user.id === userId) {\n filterValues.push({\n key: FilterKeys.me,\n group: FilterGroups.filterInviter,\n label: t(\"Common:MeLabel\"),\n });\n } else {\n filterValues.push({\n key: user.id,\n group: FilterGroups.filterInviter,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 454,
+      "line_number": 455,
       "context": "if (user) {\n if (user.id === userId) {\n filterValues.push({\n key: FilterKeys.me,\n group: FilterGroups.filterInviter,\n label: t(\"Common:MeLabel\"),\n });\n } else {\n filterValues.push({\n key: user.id,\n group: FilterGroups.filterInviter,",
       "module": "/packages/client"
     },
@@ -144,7 +151,7 @@
     },
     {
       "file_path": "/packages/shared/components/share/sub-components/User.tsx",
-      "line_number": 217,
+      "line_number": 218,
       "context": ": null}\n </Text>\n )}\n \n {currentUser?.id === user.id ? (\n <div className=\"me-label\">&nbsp;{`(${t(\"Common:MeLabel\")})`}</div>\n ) : null}\n </div>\n {!(\"isGroup\" in user && user.isGroup) ? (\n <div className=\"role-email\" style={{ display: \"flex\" }}>\n <Text",
       "module": "/packages/shared"
     }
@@ -219,13 +226,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Io' (I) is a subject pronoun, whereas in this UI context (indicating 'Me' as the current user in a list), the disjunctive/object pronoun 'Me' is required for natural Italian usage.",
-          "suggestion": "Me"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -237,13 +238,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '나' is too informal for a professional UI context. In a system where this label identifies the current user (e.g., 'John Doe (Me)'), the standard Korean UI convention is '나' (informal) or '본인' (formal/self). However, '나' sounds unnatural in a parenthetical label next to a name in a professional software interface.",
-          "suggestion": "본인"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -273,13 +268,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'A mim' is a prepositional phrase used in specific grammatical contexts (e.g., 'to me'). In a UI context where 'Me' is used as a label to identify the current user (e.g., 'John Doe (Me)'), the correct and standard translation is 'Eu'.",
-          "suggestion": "Eu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {

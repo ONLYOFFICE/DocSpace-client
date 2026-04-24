@@ -3,17 +3,18 @@
   "content": "{{productName}} Deletion",
   "content_en_sha1_hash": "693540a2e226ddffcbfa72d1c31476a39f461691",
   "created_at": "2025-05-19T21:30:52.200Z",
-  "updated_at": "2026-04-09T02:01:37.852Z",
+  "updated_at": "2026-04-11T21:23:00.501Z",
   "comment": {
-    "text": "The translation key \"PortalDeletion\" is used to display a message indicating that an artifact will be deleted. In the UI, it appears in a portal settings page as part of a deletion confirmation dialog. The phrase should refer to the specific product or application being deleted, using the product name provided by the user.",
+    "text": "This is the title for the portal deletion section in the settings, indicating the process of removing the entire portal. `{{productName}}` will be replaced with the product's brand name (e.g., \"ONLYOFFICE DocSpace\").",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:47.622Z"
+    "updated_at": "2026-04-11T21:23:00.501Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 224,
-      "context": "return t(\"Ldap:LdapSettings\");\n case \"LdapSyncTitle\":\n return t(\"Ldap:LdapSyncTitle\");\n case \"Common:RestoreBackup\":\n return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":\n return t(\"PortalDeletion\", { productName: t(\"Common:ProductName\") });\n case \"Common:Bonus\":\n return t(\"Common:Bonus\");\n case \"Common:FreeAccessToLicensedVersion\":\n return \"Common:FreeAccessToLicensedVersion\";",
+      "line_number": 225,
+      "context": "return t(\"Ldap:LdapSettings\");\n case \"LdapSyncTitle\":\n return t(\"Ldap:LdapSyncTitle\");\n case \"Common:RestoreBackup\":\n return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":\n return t(\"PortalDeletion\", { productName: getBrandName(\"ProductName\") });\n case \"Common:Bonus\":\n return t(\"Common:Bonus\");\n case \"Common:FreeAccessToLicensedVersion\":\n return \"Common:FreeAccessToLicensedVersion\";",
       "module": "/packages/client"
     },
     {
@@ -201,13 +202,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Ukrainian translation includes a colon ':' at the end, which is not present in the English source. While often used in UI, according to the strict instruction to convey the SAME MEANING and preserve markup, the extra punctuation changes the string structure.",
-          "suggestion": "Видалення {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -219,13 +214,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text '{{productName}} Deletion' is a noun phrase describing the action/event (The deletion of the product). The Chinese translation '删除{{productName}}' means 'Delete {{productName}}', which is a verb phrase/command. In a header context for a deletion confirmation dialog, the noun phrase is more appropriate.",
-          "suggestion": "{{productName}} 删除"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

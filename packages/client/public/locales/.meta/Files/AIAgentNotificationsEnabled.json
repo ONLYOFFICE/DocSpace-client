@@ -3,11 +3,12 @@
   "content": "{{aiAgent}} notifications enabled",
   "content_en_sha1_hash": "55a05d04314af2a52ec03bd6713f7eceef33e3c9",
   "created_at": "2025-12-19T13:03:47.513Z",
-  "updated_at": "2026-04-03T21:51:41.152Z",
+  "updated_at": "2026-04-11T21:10:38.859Z",
   "comment": {
-    "text": "This key displays a confirmation message that AI Agent notifications are enabled. It's used within the UI to inform the user about the status of AI Agent notifications, likely triggered by an action or setting change. The message includes the term \"AI Agent,\" which should be translated as \"Common:AIAgent.\"",
+    "text": "This is a toast message indicating that notifications for the AI assistant have been enabled. The `{{aiAgent}}` variable will be replaced with the localized name of the AI assistant.",
     "is_auto": true,
-    "updated_at": "2025-12-22T10:03:32.067Z"
+    "updated_at": "2026-04-11T21:10:38.859Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

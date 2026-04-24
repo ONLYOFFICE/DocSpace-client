@@ -3,11 +3,12 @@
   "content": "On the App Store",
   "content_en_sha1_hash": "e31bba1e7988ce96d6a7dc542d32bcfb6bdda2be",
   "created_at": "2025-05-19T21:30:50.047Z",
-  "updated_at": "2026-04-08T22:06:22.209Z",
+  "updated_at": "2026-04-11T21:27:06.224Z",
   "comment": {
-    "text": "This translation key is used for displaying a specific banner on mobile apps when accessing the App Store. The text will appear as a notification or prompt, indicating the app's presence on the App Store. It appears in a banner component on iOS devices.",
+    "text": "This is a short label for a button or link that directs users to the Apple App Store. It appears in a smart banner promoting the ONLYOFFICE DocSpace mobile app on iOS devices.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:21.078Z"
+    "updated_at": "2026-04-11T21:27:06.224Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -75,13 +76,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The definite article 'l'' is missing before 'App Store', which makes the phrase grammatically incomplete in French for this context.",
-          "suggestion": "Sur l'App Store"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -207,13 +202,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation contains a redundancy error: 'App Store 商店' translates to 'App Store Store', which is repetitive and unnatural in Chinese.",
-          "suggestion": "在 App Store"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

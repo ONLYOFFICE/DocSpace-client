@@ -47,6 +47,7 @@ import AiIcon from "@docspace/ui-kit/assets/icons/16/ai-agents.svg";
 import CardIcon from "@docspace/ui-kit/assets/icons/16/card.react.svg";
 
 import styles from "./SettingsPanel.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const PAYMENTS_PATH = "/portal-settings/payments/portal-payments";
 
@@ -111,10 +112,12 @@ const BillingForm = () => {
 
   const tabs: BillingCardTab[] = TAB_DEFS.map((d) => ({
     id: d.id,
+    // biome-ignore lint/plugin/no-dynamic-i18n-key: titleKey/tKey literals defined on TAB_DEFS entries are captured by the locales scanner
     title: t(d.titleKey, {
-      productName: t("ProductName"),
-      organizationName: t("OrganizationName"),
+      productName: getBrandName("ProductName"),
+      organizationName: getBrandName("OrganizationName"),
     }),
+    // biome-ignore lint/plugin/no-dynamic-i18n-key: see above
     description: t(d.tKey),
     iconClass: d.iconClass,
     icon: d.icon,

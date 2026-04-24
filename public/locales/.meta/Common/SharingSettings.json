@@ -3,16 +3,17 @@
   "content": "Sharing settings",
   "content_en_sha1_hash": "2f93c151c6be3a93d71aa260b8535374c3c3019c",
   "created_at": "2025-12-15T14:02:14.024Z",
-  "updated_at": "2026-04-10T08:21:04.373Z",
+  "updated_at": "2026-04-23T17:24:02.076Z",
   "comment": {
-    "text": "This key displays the label for a button that allows users to manage sharing options. It appears within a list of options, likely in a settings or management interface, and indicates the user's ability to share a specific item. Translators should ensure this text accurately reflects the action of configuring sharing permissions.",
+    "text": "This is a button label that opens a dialog for managing sharing permissions and links for a document or folder.",
     "is_auto": true,
-    "updated_at": "2025-12-17T07:49:58.422Z"
+    "updated_at": "2026-04-11T20:42:51.190Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2291,
+      "line_number": 2350,
       "context": "disabled: !item.canShare,\n },\n {\n id: \"option_manage-links\",\n key: \"manage-links\",\n label: t(\"Common:SharingSettings\"),\n icon: SettingsReactSvgUrl,\n onClick: () => this.onClickShare(item),\n disabled: !item.canShare,\n },\n {",
       "module": "/packages/client"
     }
@@ -69,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation 'Jakaminen asetukset' is grammatically incorrect (it uses two nouns in nominative case instead of a compound noun or a genitive construction), which makes it sound like 'Sharing settings' in a broken, non-native way. In Finnish, 'Sharing settings' should be 'Jakamisasetukset'.",
-          "suggestion": "Jakamisasetukset"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -183,13 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses an incorrect grammatical form. 'Подељенска' is an adjective that doesn't correctly modify 'подешавања' in this context. It should be 'Подешавања дељења' (Settings of sharing) or 'Подешавања за дељење'.",
-          "suggestion": "Подешавања дељења"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

@@ -3,11 +3,12 @@
   "content": "No findings",
   "content_en_sha1_hash": "ab5062b935491263fcc3318d6d8d558b82d2b044",
   "created_at": "2025-05-19T21:30:46.827Z",
-  "updated_at": "2026-04-08T04:06:31.496Z",
+  "updated_at": "2026-04-11T20:47:59.101Z",
   "comment": {
-    "text": "This translation key is used to display the text \"No findings\" in a component that represents an empty state, likely appearing as part of a filter or search result. It provides a clear message when there are no relevant results found.",
+    "text": "This is a title displayed in an empty state view when no items are found after applying a filter or search.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:20.203Z"
+    "updated_at": "2026-04-11T20:47:59.101Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -15,6 +16,12 @@
       "line_number": 154,
       "context": "const imageSrc = getIconURL();\n \n return (\n <EmptyView\n icon={imageSrc}\n title={t(\"Common:NoFindingsFound\")}\n options={options}\n description={descriptionText}\n />\n );\n };",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/empty-view/index.tsx",
+      "line_number": 32,
+      "context": "const isRoot = current.parentId === current.rootFolderId;\n const { isBase: isBaseTheme } = useTheme();\n \n const title = isFiltered\n ? t(\"Common:NoFindingsFound\")\n : isRoot\n ? getRootTitle(t)\n : getTitle(t);\n const description = isFiltered\n ? t(\"Common:EmptyFilterFilesDescription\")",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

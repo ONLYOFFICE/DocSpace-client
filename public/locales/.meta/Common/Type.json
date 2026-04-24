@@ -3,13 +3,26 @@
   "content": "Type",
   "content_en_sha1_hash": "3deb7456519697ecf4eefc455516c969a3681bae",
   "created_at": "2025-05-19T21:30:49.370Z",
-  "updated_at": "2026-04-10T08:21:04.327Z",
+  "updated_at": "2026-04-23T17:24:01.896Z",
   "comment": {
-    "text": "This translation key is used to display a label indicating the type of an item or entity. It appears in various UI elements, such as titles, labels, and field headers, where it provides a brief description of the item's classification (e.g., \"Type\" for a data entry field).",
+    "text": "This is a table column header or a filter option label. It refers to the kind or category of an item, such as a transaction or a file.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:37:15.715Z"
+    "updated_at": "2026-04-11T20:40:20.112Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/FilterPanel.tsx",
+      "line_number": 106,
+      "context": "<div className={styles.filterDialogContent}>\n {!hideTypeFilter ? (\n <>\n <div className={styles.filterDialogSection}>\n <Text fontWeight={600} fontSize=\"15px\">\n {t(\"Type\")}\n </Text>\n <ComboBox\n options={typeOfHistoty}\n selectedOption={selectedType}\n onSelect={onSelectType}",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/TableView/TableHeader.tsx",
+      "line_number": 70,
+      "context": "minWidth: 150,\n },\n ]\n : []),\n {\n key: \"Type\",\n title: t(\"Type\"),\n enable: true,\n resizable: true,\n minWidth: 120,\n },",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
       "line_number": 225,
@@ -30,49 +43,49 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 316,
+      "line_number": 308,
       "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 316,
+      "line_number": 308,
       "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 316,
+      "line_number": 308,
       "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 316,
+      "line_number": 308,
       "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 316,
+      "line_number": 308,
       "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 316,
+      "line_number": 308,
       "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 316,
+      "line_number": 308,
       "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 316,
+      "line_number": 308,
       "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
@@ -96,13 +109,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 578,
+      "line_number": 579,
       "context": "const typeItems = [\n {\n key: \"filter-type\",\n group: \"filter-type\",\n label: t(\"Common:Type\"),\n isHeader: true,\n },\n {\n id: \"filter_type-docspace-admin\",\n key: EmployeeType.Admin,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 578,
+      "line_number": 579,
       "context": "const typeItems = [\n {\n key: \"filter-type\",\n group: \"filter-type\",\n label: t(\"Common:Type\"),\n isHeader: true,\n },\n {\n id: \"filter_type-docspace-admin\",\n key: EmployeeType.Admin,",
       "module": "/packages/client"
     },
@@ -114,13 +127,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 122,
+      "line_number": 123,
       "context": "setDocumentTitle(t(\"JavascriptSdk\"));\n \n const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"DateAndTimeCreation\", label: t(\"Files:ByCreation\") },\n { key: \"Author\", label: t(\"Files:ByAuthor\") },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 122,
+      "line_number": 123,
       "context": "setDocumentTitle(t(\"JavascriptSdk\"));\n \n const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"DateAndTimeCreation\", label: t(\"Files:ByCreation\") },\n { key: \"Author\", label: t(\"Files:ByAuthor\") },\n ];",
       "module": "/packages/client"
     },
@@ -138,15 +151,27 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 600,
+      "line_number": 601,
       "context": "/>\n {isBetaLanguage ? <BetaBadge place=\"bottom-end\" /> : null}\n </div>\n \n <Text as=\"div\" className={styles.label}>\n {t(\"Common:Type\")}\n </Text>\n <div className={styles.userTypeContainer}>\n <Text fontWeight={600} truncate title={profile!.displayName}>\n {getUserTypeName(\n isOwner,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 600,
+      "line_number": 601,
       "context": "/>\n {isBetaLanguage ? <BetaBadge place=\"bottom-end\" /> : null}\n </div>\n \n <Text as=\"div\" className={styles.label}>\n {t(\"Common:Type\")}\n </Text>\n <div className={styles.userTypeContainer}>\n <Text fontWeight={600} truncate title={profile!.displayName}>\n {getUserTypeName(\n isOwner,",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/useFilesFilter.tsx",
+      "line_number": 159,
+      "context": "const getFilterData = React.useCallback(async () => {\n const typeOptions = [\n {\n key: FilterGroups.filterType,\n group: FilterGroups.filterType,\n label: t(\"Common:Type\"),\n isHeader: true,\n isLast: true,\n },\n {\n id: \"filter_type-folders\",",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/table-view/index.tsx",
+      "line_number": 138,
+      "context": "onClick: onColumnSort,\n onChange: onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n sortBy: SortByFieldName.Type,\n enable: columnState.Type !== false,\n resizable: true,\n onClick: onColumnSort,\n onChange: onColumnChange,",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -171,13 +196,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation 'Закачи' means 'Attach' or 'Pin', which is a verb. The English source 'Type' is a noun referring to a classification or category. This is a complete change in meaning.",
-          "suggestion": "Тип"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -249,13 +268,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian word 'Tips' means 'Advice' or 'Hint'. For a classification/category label (e.g., 'Storage Type'), the correct term is 'Tips' (as in 'veids' or 'kategorija'). In Latvian, 'Tips' is a false friend in this context.",
-          "suggestion": "Veids"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -309,13 +322,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian word 'Tip' is a false friend in this context. While it can mean 'type' in some contexts, in UI/UX for classification/category, 'Vrsta' is the correct and standard term. 'Tip' often refers to a 'hint' or 'advice' in Slovenian, which would be confusing for a label indicating an entity's classification.",
-          "suggestion": "Vrsta"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

@@ -3,11 +3,12 @@
   "content": "Diagonal",
   "content_en_sha1_hash": "a5ecd286faa5677726aa083151af6be4709cf28e",
   "created_at": "2025-05-19T21:30:56.792Z",
-  "updated_at": "2026-04-07T19:35:05.055Z",
+  "updated_at": "2026-04-11T21:04:50.476Z",
   "comment": {
-    "text": "This translation key is used for the label of a rotation option in an image viewer, typically appearing on a settings or options page. It displays as \"Diagonal\" and appears on a dropdown list or button related to image editing.",
+    "text": "This is a label for a radio button or dropdown option within the watermark settings. It describes a diagonal orientation for the watermark text.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:09.984Z"
+    "updated_at": "2026-04-11T21:04:50.476Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

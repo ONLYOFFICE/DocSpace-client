@@ -3,11 +3,12 @@
   "content": "IdP Single Sign-On Endpoint URL",
   "content_en_sha1_hash": "a1e3d72c09933def1425afc0eedb3892df293ce0",
   "created_at": "2025-05-19T21:30:50.145Z",
-  "updated_at": "2026-04-08T22:56:38.615Z",
+  "updated_at": "2026-04-11T21:48:37.310Z",
   "comment": {
-    "text": "The SignOnEndpointUrl translation key is used to display the URL for Single Sign-On endpoint configuration, typically found in portal settings or integration settings. This value appears as a placeholder text when setting up an Identity Provider (IdP) integration, prompting users to enter their actual SSO endpoint URL.",
+    "text": "This is a label for a text input field where the user enters the URL for the Identity Provider's Single Sign-On endpoint.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:08.432Z"
+    "updated_at": "2026-04-11T21:26:31.436Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -61,7 +62,9 @@
         {
           "type": "wrong_script",
           "description": "Translation for el-GR contains only Latin/ASCII characters — likely untranslated",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-11T21:48:37.301Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null
@@ -111,13 +114,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order in Lao is incorrect, making the phrase 'URL Endpoint' sound like 'URL End Point' in a way that is grammatically unnatural, and 'ຈຸດສິ້ນສຸດ' (end point/termination point) is a literal translation that doesn't fit the technical context of a URL endpoint.",
-          "suggestion": "URL ຈຸດເຊື່ອມຕໍ່ IdP Single Sign-On"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -153,13 +150,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Endpoint' is translated as 'punct final', which in a technical networking/web context means 'final point' or 'end point' in a physical/spatial sense, rather than the technical 'endpoint' (the URL destination for a service).",
-          "suggestion": "URL endpoint pentru Single Sign-On al IdP"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -171,13 +162,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'ඒ.ස.නි.' (A.S.N.), which is an incorrect transliteration/abbreviation for 'URL'. In Sinhala, 'URL' is typically kept as 'URL' or translated as 'වෙබ් ලිපිනය' (Web Address). 'ඒ.ස.නි.' does not convey the meaning of a Uniform Resource Locator.",
-          "suggestion": "IdP තනි පිවිසුම් අන්තයේ URL එක"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

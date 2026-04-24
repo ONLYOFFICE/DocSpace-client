@@ -3,17 +3,18 @@
   "content": "You are going to permanently delete the <1>{{domain}}</1> space with all the data and accounts.  A request to delete <1>{{domain}}</1> will be sent to the {{productName}} owner to the email address <1>{{email}}</1>.",
   "content_en_sha1_hash": "f282835d6f73c55713757f54bfc6d5a08befebc7",
   "created_at": "2025-05-19T21:30:57.432Z",
-  "updated_at": "2026-04-07T19:35:05.255Z",
+  "updated_at": "2026-04-11T21:31:52.730Z",
   "comment": {
-    "text": "This translation key is used to display a warning message before permanently deleting a setup portal. The message informs users that all data and accounts will be deleted and sends a request to the product owner via email. This appears in a dialog component for confirmation of deletion.",
+    "text": "This is the body text of a confirmation dialog that appears when a user attempts to delete their DocSpace portal. It informs the user that the deletion is permanent and that a request will be sent to the owner's email. The variables `{{domain}}`, `{{productName}}`, and `{{email}}` represent the portal's domain, the product name, and the owner's email address, respectively.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:47:59.587Z"
+    "updated_at": "2026-04-11T21:31:52.730Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/management/src/dialogs/delete-portal/index.tsx",
-      "line_number": 120,
-      "context": "<>\n <Text className=\"warning-text\" fontSize=\"16px\" fontWeight={700}>\n {t(\"Common:Warning\")}!\n </Text>\n <Trans\n i18nKey=\"DeleteSetupPortalText\"\n ns=\"Management\"\n values={{\n productName: t(\"Common:ProductName\"),\n domain,\n email,",
+      "line_number": 121,
+      "context": "<>\n <Text className=\"warning-text\" fontSize=\"16px\" fontWeight={700}>\n {t(\"Common:Warning\")}!\n </Text>\n <Trans\n i18nKey=\"DeleteSetupPortalText\"\n ns=\"Management\"\n values={{\n productName: getBrandName(\"ProductName\"),\n domain,\n email,",
       "module": "/packages/management"
     }
   ],

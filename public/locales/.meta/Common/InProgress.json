@@ -3,11 +3,12 @@
   "content": "In progress",
   "content_en_sha1_hash": "b6bd42e4e7302e5e9a15930c8fcdb73fc2c0cf18",
   "created_at": "2025-05-19T21:30:45.918Z",
-  "updated_at": "2026-04-08T06:43:45.399Z",
+  "updated_at": "2026-04-23T17:24:01.782Z",
   "comment": {
-    "text": "This translation key is used to display the phrase \"In progress\" in a file management application. It appears on a status bar in a data reassignment dialog, indicating the current state of the file.",
+    "text": "This label indicates that an operation or process is currently running. It appears in a dialog showing the status of a data reassignment and as a section title in the forms module.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:50.593Z"
+    "updated_at": "2026-04-11T20:50:48.732Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -15,6 +16,36 @@
       "line_number": 142,
       "context": "t,\n }) => {\n const inProgressNode = (\n <div className=\"in-progress\">\n <Loader className=\"in-progress-loader\" size=\"20px\" type=\"track\" />\n <Text className=\"status\">{t(\"Common:InProgress\")}</Text>\n </div>\n );\n \n const pendingNode = (\n <Text className=\"status status-pending\">",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/forms-header/index.tsx",
+      "line_number": 147,
+      "context": "case FormsSection.MyForms:\n return t(\"Common:MyForms\");\n case FormsSection.Library:\n return t(\"Common:Library\");\n case FormsSection.InProgress:\n return t(\"Common:InProgress\");\n case FormsSection.CompletedForms:\n return t(\"Common:CompletedForms\");\n case FormsSection.Settings:\n return t(\"Common:Settings\");\n default:",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/forms-header/index.tsx",
+      "line_number": 147,
+      "context": "case FormsSection.MyForms:\n return t(\"Common:MyForms\");\n case FormsSection.Library:\n return t(\"Common:Library\");\n case FormsSection.InProgress:\n return t(\"Common:InProgress\");\n case FormsSection.CompletedForms:\n return t(\"Common:CompletedForms\");\n case FormsSection.Settings:\n return t(\"Common:Settings\");\n default:",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/forms-header/index.tsx",
+      "line_number": 147,
+      "context": "case FormsSection.MyForms:\n return t(\"Common:MyForms\");\n case FormsSection.Library:\n return t(\"Common:Library\");\n case FormsSection.InProgress:\n return t(\"Common:InProgress\");\n case FormsSection.CompletedForms:\n return t(\"Common:CompletedForms\");\n case FormsSection.Settings:\n return t(\"Common:Settings\");\n default:",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/sidebar/index.tsx",
+      "line_number": 117,
+      "context": "label: t(\"Common:MyForms\"),\n icon: FormFileReactSvgUrl,\n },\n {\n key: FormsSection.InProgress,\n label: t(\"Common:InProgress\"),\n icon: FormFillRectSvgUrl,\n },\n {\n key: FormsSection.CompletedForms,\n label: t(\"Common:CompletedForms\"),",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_utils/tourSteps.ts",
+      "line_number": 261,
+      "context": "\"/forms/my-forms\",\n callbacks,\n ),\n navSectionStep(\n \"in-progress\",\n t(\"Common:InProgress\"),\n t(\n \"Common:TourInProgress\",\n \"Each folder corresponds to a specific form and contains draft files from people who started filling but haven't submitted yet.\",\n ),\n showMenu,",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
@@ -159,13 +190,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'සිදු වෙමින්' (sidhu vemin) is grammatically incomplete and sounds like a fragment of a sentence (e.g., 'is being done'). For a status label in a UI, a more standard term for 'In progress' is required.",
-          "suggestion": "ප්‍රගතියේ පවතී"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

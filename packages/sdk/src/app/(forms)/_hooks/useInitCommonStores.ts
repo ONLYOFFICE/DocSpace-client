@@ -121,7 +121,10 @@ export default function useInitCommonStores(commonData: CommonData): boolean {
         ? commonData.initialFiles.filter((f) => f.folderId === roomId)
         : commonData.initialFiles;
       formsListStore.setSection(FormsSection.MyForms);
-      formsListStore.setItems(files, commonData.initialTotal ?? files.length);
+      const FORMS_PAGE_COUNT = 25;
+      const apiExhausted = commonData.initialFiles.length < FORMS_PAGE_COUNT;
+      const total = apiExhausted ? files.length : files.length + 1;
+      formsListStore.setItems(files, total);
       formsListStore.setFolders([]);
       formsListStore.setIsLoading(false);
     } else if (

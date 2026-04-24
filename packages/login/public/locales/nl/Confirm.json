@@ -20,6 +20,8 @@
   "GetCode": "Code ontvangen",
   "GetSuitableApp": "Krijg een geschikte app",
   "GetSuitableAppDescription": "Gebruik een compatibele app zoals Google Authenticator voor <1>Android</1> en <4>iOS</4>, of Authenticator voor <8>Windows Phone</8>.",
+  "InviteLinkQuotaErrorBody": "Registratie via de link is niet meer beschikbaar, aangezien het maximum is bereikt.",
+  "InviteQuotaErrorCustomizedBody": "U wordt omgeleid naar de <1>Login</1> pagina in 10 seconden.",
   "LoginRegistryButton": "Lid worden van",
   "Newsletter": "Ik wil me abonneren op de {{organizationName}} nieuwsbrief",
   "PassworResetTitle": "Nu kunt u een nieuw wachtwoord aanmaken.",
@@ -37,7 +39,5 @@
   "TfaSubTitle": "Volg eenvoudige stappen om verder te werken in dit {{productName}}:",
   "TfaTitle": "Tweefactorauthenticatie ingeschakeld voor veilige toegang",
   "VerifyConnection": "Verifieer de verbinding",
-  "VerifyConnectionDescription": "Voer de 6-cijferige code die door uw authenticator-app is gegenereerd, in het veld hieronder in om de instelling te voltooien.",
-  "InviteLinkQuotaErrorBody": "Registratie via de link is niet meer beschikbaar, aangezien het maximum is bereikt.",
-  "InviteQuotaErrorCustomizedBody": "U wordt omgeleid naar de <1>Login</1> pagina in 10 seconden."
+  "VerifyConnectionDescription": "Voer de 6-cijferige code die door uw authenticator-app is gegenereerd, in het veld hieronder in om de instelling te voltooien."
 }

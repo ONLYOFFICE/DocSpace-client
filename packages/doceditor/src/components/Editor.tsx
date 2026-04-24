@@ -324,7 +324,14 @@ const Editor = ({
         width: "100%",
       }}
     >
-      <div style={{ height: "auto", overflow: "visible" }}>
+      <div
+        style={{
+          height: "auto",
+          overflow: "visible",
+          position: "relative",
+          zIndex: 1000,
+        }}
+      >
         <Bar quotaExceededScope={config?.quotaExceededScope} />
       </div>
       <DocumentEditor

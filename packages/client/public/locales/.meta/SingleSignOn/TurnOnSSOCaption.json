@@ -3,11 +3,12 @@
   "content": "Enable this option if you want to add users from SSO service to your space automatically.",
   "content_en_sha1_hash": "53b0b644d322e1cc595b46ed2bd913242f06931c",
   "created_at": "2025-05-19T21:30:50.193Z",
-  "updated_at": "2026-04-08T22:10:01.088Z",
+  "updated_at": "2026-04-11T21:26:13.617Z",
   "comment": {
-    "text": "This translation key is used to display a caption that explains the purpose of enabling single sign-on (SSO) integration. It provides context for users deciding whether to enable automatic addition of SSO users to their space. The text appears as a tooltip or label in the UI, likely within a toggle switch component, such as the \"Turn On SSO\" button in Portal Settings.",
+    "text": "This is a descriptive text displayed below a toggle switch. It explains that enabling the SSO option will automatically add users from the SSO service to the user's space.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:01.329Z"
+    "updated_at": "2026-04-11T21:26:13.617Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'domeninizə' (to your domain) instead of 'space-nizə' (to your space), which changes the technical scope of the action.",
-          "suggestion": "SSO xidmətindən istifadəçiləri avtomatik olaraq space-nizə əlavə etmək istəyirsinizsə, bu seçimi aktiv edin."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {

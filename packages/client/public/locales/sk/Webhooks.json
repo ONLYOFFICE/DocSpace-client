@@ -1,4 +1,7 @@
 {
+  "AgentCreated": "AI Agent vytvorený",
+  "AgentDeleted": "AI Agent Odstrnený",
+  "AgentUpdated": "Aktualizovaný AI Agent",
   "Before": "Pred",
   "CreateWebhook": "Vytvoriť webhook",
   "DeleteHint": "Webhook bude natrvalo vymazaný.\nTento úkon nebude možné odvolať.",
@@ -23,7 +26,7 @@
   "FileDeleted": "Súbor odstránený",
   "FileMoved": "Súbor presunutý",
   "FileRestored": "Súbor obnovený",
-  "FileTrashed": "Súbor zničený",
+  "FileTrashed": "Súbor presunutý do koša",
   "FileUpdated": "Súbor aktualizovaný",
   "FileUploaded": "Súbor nahraný",
   "FolderCopied": "Priečinok skopírovaný",
@@ -33,6 +36,9 @@
   "FolderRestored": "Priečinok obnovený",
   "FolderTrashed": "Priečinok zlikvidovaný ",
   "FolderUpdated": "Priečinok aktualizovaný",
+  "FormFilledOut": "Vyplnený formulár",
+  "FormStopped": "Formulár zastavený",
+  "FormSubmit": "Formulár bol odoslaný",
   "From": "Od",
   "Generate": "Vygenerovať",
   "GroupCreated": "Skupina vytvorená",
@@ -71,7 +77,7 @@
   "SSLVerification": "Overenie SSL",
   "State": "Stav",
   "TargetId": "ID cieľa",
-  "UnselectAll": "Zrušiť výber všetko",
+  "UnselectAll": "Zrušiť výber všetkých",
   "URL": "URL",
   "UserCreated": "Používateľ vytvorený",
   "UserDeleted": "Používateľ odstránený",
@@ -89,11 +95,5 @@
   "WebhookRemoved": "Webhook odstránený",
   "Webhooks": "Webhooky",
   "WebhooksGuide": "Sprievodca webhookmi",
-  "WebhooksInfo": "Pomocou webhookov môžete vykonávať vlastné operácie na strane akejkoľvek aplikácie alebo webových stránok, ktoré používate, na základe rôznych udalostí v {{organizationName}} {{productName}}.\nTu môžete vytvárať a spravovať všetky svoje webhooky, konfigurovať ich a prechádzať históriu každého webhooku a kontrolovať ich výkon.",
-  "AgentCreated": "AI Agent vytvorený",
-  "AgentDeleted": "AI Agent Odstrnený",
-  "AgentUpdated": "Aktualizovaný AI Agent",
-  "FormFilledOut": "Vyplnený formulár",
-  "FormStopped": "Formulár zastavený",
-  "FormSubmit": "Odoslanie formulára"
+  "WebhooksInfo": "Pomocou webhookov môžete vykonávať vlastné operácie na strane akejkoľvek aplikácie alebo webových stránok, ktoré používate, na základe rôznych udalostí v {{organizationName}} {{productName}}.\nTu môžete vytvárať a spravovať všetky svoje webhooky, konfigurovať ich a prechádzať históriu každého webhooku a kontrolovať ich výkon."
 }

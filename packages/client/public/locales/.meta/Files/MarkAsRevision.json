@@ -3,11 +3,12 @@
   "content": "Mark as revision",
   "content_en_sha1_hash": "81c16fba6a6aa6f91ca729e449a37cbfbe71b54e",
   "created_at": "2025-05-19T21:30:55.809Z",
-  "updated_at": "2026-04-07T19:35:05.087Z",
+  "updated_at": "2026-04-11T21:09:04.718Z",
   "comment": {
-    "text": "This translation key is used to display the text \"Mark as revision\" in a version history page. It marks a file as an incomplete or updated version, and appears on a button.",
+    "text": "This is a tooltip that appears when hovering over a version in the version history. It indicates that clicking the version will mark it as a revision.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:39:34.920Z"
+    "updated_at": "2026-04-11T21:09:04.718Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

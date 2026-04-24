@@ -3,11 +3,12 @@
   "content": "Save as template",
   "content_en_sha1_hash": "e438319cba9a62ebf3bedfae2f7c1d57a2785c0e",
   "created_at": "2025-05-19T21:30:56.166Z",
-  "updated_at": "2026-04-07T19:35:05.095Z",
+  "updated_at": "2026-04-23T17:24:01.778Z",
   "comment": {
-    "text": "The translation key \"SaveAsTemplate\" is used to display the label for a button that allows users to save a room as a template. This label appears in a dialog header and is intended to provide visual feedback about the action being performed. The translator should focus on creating a clear and concise phrase that describes the purpose of this action.",
+    "text": "This is the title of a dialog window that allows users to save a document or room as a template.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:39:09.307Z"
+    "updated_at": "2026-04-11T21:08:12.927Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -18,8 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 994,
-      "context": "const event = new Event(Events.AGENT_EDIT);\n event.item = item;\n window.dispatchEvent(event);\n };\n \n onSaveAsTemplate = (item) => {\n const event = new Event(Events.SAVE_AS_TEMPLATE);\n event.item = item;\n window.dispatchEvent(event);\n };",
+      "line_number": 2302,
+      "context": "disabled: !isTemplateOwner,\n },\n {\n id: \"option_save-as-template\",\n key: \"save-as-template\",\n label: t(\"SaveAsTemplate\"),\n icon: CreateTemplateSvgUrl,\n onClick: () => this.onSaveAsTemplate(item),\n disabled: !item.security?.Create || item.providerKey,\n },\n {",
       "module": "/packages/client"
     }
   ],

@@ -3,16 +3,17 @@
   "content": "Delete group",
   "content_en_sha1_hash": "b6f15b2f40a093d6920368a98483c94f1ae50aa1",
   "created_at": "2025-05-19T21:30:56.701Z",
-  "updated_at": "2026-04-07T19:35:05.063Z",
+  "updated_at": "2026-04-11T21:05:40.209Z",
   "comment": {
-    "text": "\"This translation key is used to display the text 'Delete group' in a modal dialog and on an empty screen, indicating that the user can delete a group.\"",
+    "text": "This is the title of a dialog box that appears when a user is about to delete a single group. It also serves as the title for a menu option to delete a group.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:23.325Z"
+    "updated_at": "2026-04-11T21:05:40.209Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteGroupDialog/index.js",
-      "line_number": 81,
+      "line_number": 82,
       "context": "return (\n <ModalDialog visible={visible} onClose={onClose} displayType=\"modal\">\n <ModalDialog.Header>\n {hasMoreGroups\n ? t(\"DeleteDialog:DeleteAllGroupsTitle\")\n : t(\"DeleteDialog:DeleteGroupTitle\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n {hasMoreGroups\n ? t(\"DeleteDialog:DeleteAllGroupDescription\", {",
       "module": "/packages/client"
     },

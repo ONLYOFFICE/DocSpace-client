@@ -3,22 +3,23 @@
   "content": "Save here",
   "content_en_sha1_hash": "2f59885d38dc68521d61e5eb75fd8f19891f7b1e",
   "created_at": "2025-05-19T21:30:48.310Z",
-  "updated_at": "2026-04-08T00:03:30.512Z",
+  "updated_at": "2026-04-13T02:32:12.366Z",
   "comment": {
-    "text": "This translation key is used for a button that instructs users to save their selection (\"Save here\") in a file management system, typically appearing as a submit or save button in a dialog or UI element. It's part of a broader set of translations related to file editing and saving, specifically in the context of a select folder dialog.",
+    "text": "This is a button label that appears in file selection dialogs, allowing the user to save a file to the currently displayed folder.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:34:27.039Z"
+    "updated_at": "2026-04-11T20:43:55.566Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 93,
+      "line_number": 94,
       "context": "if (filterParam === FilesSelectorFilterTypes.DOCX) return t(\"Common:Create\");\n // if (filterParam === FilesSelectorFilterTypes.DOCXF) return t(\"Common:SubmitToGallery\");\n if (filterParam) return t(\"Common:SaveButton\");\n \n return t(\"Common:SaveHereButton\");\n };\n \n export const getIsDisabled = (\n isFirstLoad: boolean,\n isSelectedParentFolder: boolean,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/components/SelectFolderDialog.tsx",
-      "line_number": 90,
+      "line_number": 91,
       "context": "withoutBackButton\n withCancelButton\n disabledItems={[]}\n disabledFolderType={FolderType.ResultStorage as SdkFolderType}\n onSubmit={onSubmit}\n submitButtonLabel={t(\"Common:SaveHereButton\")}\n submitButtonId=\"select-file-modal-submit\"\n footerInputHeader={t(\"Common:FileName\")}\n currentFooterInputValue={titleSelectorFolder}\n footerCheckboxLabel={t(\"Common:OpenSavedDocument\")}\n isPanelVisible={isVisible}",
       "module": "/packages/doceditor"
     },
@@ -117,13 +118,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ບັນທຶກ ນີ້' (Save this) is grammatically awkward and sounds like a literal word-for-word translation. In the context of a UI button for 'Save here', it should imply the action of saving to the current location.",
-          "suggestion": "ບັນທຶກຢູ່ທີ່ນີ້"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -165,13 +160,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Сохранить сюда' (Save into here) sounds unnatural for a UI button in a file management system. In Russian UI context, 'Save here' as a button label for selecting a destination is typically translated as 'Сохранить в это место' or simply 'Выбрать' (Select) or 'Сохранить' (Save), but 'сюда' is a colloquial adverb that feels out of place for a formal action button.",
-          "suggestion": "Сохранить здесь"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {

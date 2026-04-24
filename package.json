@@ -29,6 +29,7 @@
     "verify-translations": "node common/translation-app/backend/src/scripts/verify-translations-spell-check.js",
     "licenses-audit": "node scripts/check-licenses.js",
     "licenses-aggregate": "node scripts/aggregate-licenses.js",
+    "biome-plugins:generate": "node scripts/generate-biome-i18n-constants-plugin.js",
     "check-circular": "pnpm madge --circular ./packages",
     "check-circular:graph": "pnpm madge --circular --image graph.svg ./packages",
     "lint": "pnpm nx run-many -t lint -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk @docspace/shared",

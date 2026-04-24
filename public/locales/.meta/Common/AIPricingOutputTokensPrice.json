@@ -3,13 +3,21 @@
   "content": "from {{price}}* , <1>per 1M tokens</1>",
   "content_en_sha1_hash": "b3803ddbf11a921fd905ee0ff610a8da21f507d1",
   "created_at": "2026-04-10T13:53:44.576Z",
-  "updated_at": "2026-04-10T13:53:44.576Z",
+  "updated_at": "2026-04-11T20:59:51.755Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a price display for AI service output tokens, shown as part of a billing summary. It indicates the cost per million tokens, where `{{price}}` is the numerical price and `<1>...</1>` styles the \"per 1M tokens\" part.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:59:51.755Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/PricingBillingBody.tsx",
+      "line_number": 137,
+      "context": "<Text fontSize=\"12px\">{t(\"AIPricingOutputTokens\")}</Text>\n </div>\n <Text fontSize=\"12px\" fontWeight=\"600\">\n <CommonTrans\n \n i18nKey=\"AIPricingOutputTokensPrice\"\n components={{\n 1: (\n <Text\n as=\"span\"\n className={styles.payForItemTextMuted}",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

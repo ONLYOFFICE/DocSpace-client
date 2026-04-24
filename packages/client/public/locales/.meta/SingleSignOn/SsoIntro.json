@@ -3,11 +3,12 @@
   "content": "The Single Sign-On section allows you to enable/disable third-party authentication using SAML, thereby providing a quicker, easier and more secure way to access the space for users.",
   "content_en_sha1_hash": "934dd1dc1e384a2a4a53a740d7eba5216ea9f77b",
   "created_at": "2025-05-19T21:30:50.185Z",
-  "updated_at": "2026-04-08T22:14:08.376Z",
+  "updated_at": "2026-04-11T21:26:16.522Z",
   "comment": {
-    "text": "The Single Sign-On section allows users to enable or disable third-party authentication using SAML, providing a quicker and more secure way to access the space. This translation key is used in the portal settings page, where it appears as a title for a section explaining the functionality of SSO.",
+    "text": "This is an introductory paragraph displayed on the Single Sign-On settings page. It explains the purpose of the section, which is to manage third-party authentication via SAML for easier and more secure user access.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:02.514Z"
+    "updated_at": "2026-04-11T21:26:16.522Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'domenə' (to the domain) is used instead of 'space' (məkan/sahə). In the context of ONLYOFFICE DocSpace, 'space' refers to a specific workspace/environment, not a network domain.",
-          "suggestion": "Birdəfəlik Giriş bölməsi SAML-dən istifadə edərək üçüncü tərəfin doğrulamasını aktivləşdirməyə/deaktiv etməyə imkan verir, beləliklə, istifadəçilər üçün məkana daxil olmaq üçün daha sürətli, asan və daha təhlükəsiz yol təqdim edir."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -75,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The technical acronym 'SAML' was incorrectly translated as 'SML', which refers to a different technology (System Modeling Language) and is a technical error.",
-          "suggestion": "Kertakirjautumisosion avulla voit ottaa käyttöön/poistaa kolmannen osapuolen todennuksen käyttäen SAML:ää, tarjoten käyttäjille nopeamman, helpomman ja turvallisemman pääsyn tilaan."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -153,37 +142,19 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'prin implicarea autentificării de la terțe SAML' is nonsensical in Romanian. It incorrectly attempts to translate 'third-party authentication using SAML' and results in a broken sentence structure ('third SAML authentication involvement').",
-          "suggestion": "Secţiunea Single Sign-On (Autentificare unică) vă permite să activați/să dezactivați autentificarea prin terți folosind SAML, oferind astfel utilizatorilor un mod mai rapid, mai uşor şi mai sigur de accesare a spaţiului."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text refers to accessing 'the space', while the Russian translation uses 'порталу' (the portal). In the context of ONLYOFFICE DocSpace, 'space' and 'portal' are distinct entities.",
-          "suggestion": "Раздел «Единый вход» позволяет включать / отключать стороннюю аутентификацию с использованием SAML, тем самым обеспечивая более быстрый, простой и безопасный способ доступа к пространству для пользователей."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation incorrectly adds 'two-factor' (ද්වි-සාධක) to the text. The English source refers to 'third-party authentication' (තෙවන පාර්ශ්ව), not two-factor authentication.",
-          "suggestion": "SAML භාවිතයෙන් තෙවන පාර්ශ්වීය සත්‍යාපනය සක්‍රිය/අබල කිරීමට තනි පිවිසුම් කොටස ඔබට ඉඩ සලසයි, එමඟින් පරිශීලකයින් සඳහා අවකාශය වෙත ප්‍රවේශ වීමට ඉක්මන්, පහසු සහ වඩාත් ආරක්‍ෂිත ක්‍රමයක් සපයයි."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

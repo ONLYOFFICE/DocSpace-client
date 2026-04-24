@@ -36,6 +36,7 @@ import { IPaymentsProps } from "../Standalone.types";
 import styles from "../Standalone.module.scss";
 import UserStatisticsDialog from "../../../../dialogs/UserStatisticsDialog";
 import { useUserStatisticsDialog } from "./hooks/useUserStatisticsDialog";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const TariffTitleContainer = ({
   isLicenseDateExpired,
@@ -159,7 +160,7 @@ export const TariffTitleContainer = ({
           <Trans
             i18nKey="ActivateTariffDescrUsers"
             values={{
-              productName: t("Common:ProductName"),
+              productName: getBrandName("ProductName"),
               organizationName: logoText,
               license: isDeveloper
                 ? t("Common:DeveloperLicense")
@@ -182,7 +183,7 @@ export const TariffTitleContainer = ({
           />
         ) : (
           t("ActivateTariffDescrConnections", {
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
             organizationName: logoText,
             license: isDeveloper
               ? t("Common:DeveloperLicense")
@@ -205,7 +206,7 @@ export const TariffTitleContainer = ({
               fromDate: paymentDate,
               byDate: gracePeriodEndDate,
               delayDaysCount,
-              productName: t("ProductName"),
+              productName: getBrandName("ProductName"),
             }}
             components={{
               1: <Text as="span" isBold dataTestId="grace-period-date-range" />,

@@ -3,16 +3,29 @@
   "content": "Download report",
   "content_en_sha1_hash": "ca59430707ce8fb813997d7d85dff992c7f66e85",
   "created_at": "2026-04-10T13:53:45.938Z",
-  "updated_at": "2026-04-10T13:55:57.545Z",
+  "updated_at": "2026-04-23T17:24:02.041Z",
   "comment": {
-    "text": "This key is used for the text label of a button that allows users to download reports. It appears in the Audit Trail and Login History sections of the Portal Settings.",
+    "text": "This is a button label that allows users to download a report, such as a transaction history or an audit trail.",
     "is_auto": true,
-    "updated_at": "2026-04-10T13:55:57.545Z"
+    "updated_at": "2026-04-11T20:54:39.466Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
+      "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
+      "line_number": 564,
+      "context": "{isTransactionHistoryExist && !isTransactionLoading ? (\n <>\n <Text className={styles.transactionsLimit}>\n {t(\"TransactionsLimit\", {\n buttonName: t(\"DownloadReportBtnText\"),\n })}\n </Text>\n \n <div\n className={classNames(styles.downloadWrapper, {",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
+      "line_number": 564,
+      "context": "{isTransactionHistoryExist && !isTransactionLoading ? (\n <>\n <Text className={styles.transactionsLimit}>\n {t(\"TransactionsLimit\", {\n buttonName: t(\"DownloadReportBtnText\"),\n })}\n </Text>\n \n <div\n className={classNames(styles.downloadWrapper, {",
+      "module": "/libs/ui-kit"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/index.js",
-      "line_number": 115,
+      "line_number": 116,
       "context": "cancelButtonLabel={t(\"Common:CancelButton\")}\n securityLifetime={securityLifetime}\n lifetime={securityLifetime.auditTrailLifeTime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"Common:DownloadReportBtnText\")}\n downloadReportDescription={t(\"Common:ReportSaveLocation\", {\n sectionName: t(\"Common:MyDocuments\"),\n })}\n getReport={getAuditTrailReport}\n isSettingNotPaid={!isAuditAvailable}",
       "module": "/packages/client"
     },

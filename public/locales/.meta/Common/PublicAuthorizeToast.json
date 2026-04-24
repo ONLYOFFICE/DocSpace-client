@@ -3,17 +3,18 @@
   "content": "This room is opened in the <1>{{roomMode}}</1> mode. If you have an account in this {{productName}}, please authorize.",
   "content_en_sha1_hash": "966e9f6f87aa9004801797a1570d6371db7bf248",
   "created_at": "2025-06-24T16:31:00.928Z",
-  "updated_at": "2026-04-10T08:58:38.051Z",
+  "updated_at": "2026-04-12T03:39:35.994Z",
   "comment": {
-    "text": "This translation key is used to display a toast message prompting users to authorize access to their account when they enter a public room in the application. The message includes placeholders for room mode and product name, which will be replaced by actual values during translation. It appears as a modal or dialog prompt.",
+    "text": "This is a toast message displayed to users accessing a public room. It informs them about the room's mode and prompts them to authorize if they have an account, with `{{roomMode}}` indicating the room's access level and `{{productName}}` being the brand name.",
     "is_auto": true,
-    "updated_at": "2025-06-24T16:31:40.712Z"
+    "updated_at": "2026-04-11T20:45:47.511Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PublicRoom/PublicRoomPage.js",
-      "line_number": 120,
-      "context": "const content = (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"PublicAuthorizeToast\"\n values={{ roomMode, productName: t(\"Common:ProductName\") }}\n components={{\n 1: (\n <Text\n key=\"productName\"",
+      "line_number": 121,
+      "context": "const content = (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"PublicAuthorizeToast\"\n values={{ roomMode, productName: getBrandName(\"ProductName\") }}\n components={{\n 1: (\n <Text\n key=\"productName\"",
       "module": "/packages/client"
     }
   ],
@@ -81,30 +82,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_variable",
-          "description": "Missing variable(s): {{roomMode}}",
-          "suggestion": ""
-        },
-        {
-          "type": "extra_variable",
-          "description": "Extra variable(s) not in English: {{{roomMode}}",
-          "suggestion": ""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'authorize' (հաստատել) is translated as 'confirm' or 'verify' in Armenian, which is not the correct technical term for logging in or granting access to an account. The correct term should be 'մուտք գործել' (log in) or 'ավտորիզացնել' (authorize).",
-          "suggestion": "Այս սենյակը բացված է <1>{{roomMode}}</1> ռեժիմով։ Եթե դուք ունեք հաշիվ այս {{productName}}-ում, խնդրում ենք մուտք գործել։"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {

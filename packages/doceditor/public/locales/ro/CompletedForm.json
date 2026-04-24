@@ -1,7 +1,8 @@
 {
   "BackToRoom": "Completaţi-l  încă o dată",
   "CheckReadyForms": "Verificați formulare completate",
-  "Description": "Completaţi-l  încă o dată",
+  "CompletedFormDescription": "Completaţi-l  încă o dată",
+  "CompletedFormTitle": "Formularul este completat",
   "DescriptionForAnonymous": "Formularului PDF pe care l-ați trimis i s-a atribuit un număr unic. Pentru verificarea statutului, contactaţi proprietarul formularului.",
   "DescriptionForRegisteredUser": "Formularul PDF trimis este salvat în folderul Formulare competate.",
   "FillItOutAgain": "Completaţi-l  încă o dată",
@@ -18,6 +19,5 @@
   "FormVDRYouFirstRecepientDescription": "Sunteți invitat să completați formularul în calitate de primul destinatar. O notificare a fost transmisă prin e-mail. Puteți începe completarea acum sau copiați link-ul de completare și reveniți mai târziu.",
   "LinkToFillOutForm": "Link-ul pentru completarea formularului:",
   "LinkToForm": "Link-ul către formular:",
-  "LinkToViewOnlyForm": "Link-ul către formular numai cu vizualizare:",
-  "Title": "Formularul este completat"
+  "LinkToViewOnlyForm": "Link-ul către formular numai cu vizualizare:"
 }

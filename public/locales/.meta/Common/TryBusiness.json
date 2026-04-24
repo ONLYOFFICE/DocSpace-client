@@ -3,11 +3,12 @@
   "content": "Try Business",
   "content_en_sha1_hash": "1355ceed14169abd7406ec07f2a5ad9a56c2c888",
   "created_at": "2025-05-19T21:30:49.352Z",
-  "updated_at": "2026-04-07T21:02:56.218Z",
+  "updated_at": "2026-04-12T14:09:46.701Z",
   "comment": {
-    "text": "This translation key is used for the label on a tariff-related component. It displays \"Try Business\" when applicable and indicates whether a user can try a free business tariff or not, depending on the page context.",
+    "text": "This is a button label that appears in the tariff bar for users on a free plan, prompting them to upgrade to a business plan.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:37:20.335Z"
+    "updated_at": "2026-04-11T20:40:22.050Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -45,19 +46,21 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "\"Business\" is a product/plan name (the Business tier) and should be preserved as a proper noun. \"Zkuste podnikat\" translates back as \"Try doing business / Try entrepreneurship\", which loses the plan name entirely and conveys a completely different meaning.",
+          "suggestion": "Zkuste Business",
+          "checked_at": "2026-04-12T14:08:17.576Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German word 'testieren' means 'to certify' or 'to bequeath' (legal context), which is completely wrong for 'to try' (testing/trying out a service).",
-          "suggestion": "Business testen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -75,13 +78,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation 'Kokeile Businesstä' means 'Try from Business' or 'Try out of Business' due to the elative case suffix '-stä'. It should be an imperative or an infinitive phrase meaning 'Try the Business [tariff]'.",
-          "suggestion": "Kokeile Business-versiota"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -141,25 +138,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Experimente negócios' means 'Try businesses' (plural/general concept) instead of 'Try Business' (referring to the specific Business tariff/plan). In a UI context for a tariff, it should refer to the plan itself.",
-          "suggestion": "Experimente o plano Business"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Experimente Negócios' sounds like 'Try Businesses' (plural/general concept) rather than referring to the specific 'Business' tariff/plan. In a software context, 'Business' refers to a specific tier/plan.",
-          "suggestion": "Experimente o Plano Business"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -177,13 +162,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'ව්‍යාපාර සැලසුම බලන්න' means 'View business plan', which is a different action than 'Try Business' (testing/trying a tariff).",
-          "suggestion": "ව්‍යාපාරික පැකේජය උත්සාහ කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

@@ -1,6 +1,6 @@
 {
-  "ActionCannotBeUndone": "Valitut käytöstä poistetut käyttäjät poistetaan {{productName}}-sta. Tätä toimintoa ei voi peruuttaa.",
   "ActionCannotBeUndoneGuests": "Valitut käytöstä poistetut vieraat poistetaan {{productName}}. Tätä toimintoa ei voi peruuttaa.",
+  "ActionCannotBeUndoneUsers": "Valitut käytöstä poistetut käyttäjät poistetaan {{productName}}-sta. Tätä toimintoa ei voi peruuttaa.",
   "CannotReassignFiles": "Jos poistat useita käyttäjiä kerralla, et voi siirtää heidän tiedostojaan muille käyttäjille.",
   "DeleteGroupGuestsSuccessMessage": "Vieraat on poistettu onnistuneesti.",
   "DeleteGroupUsersSuccessMessage": "Käyttäjät on poistettu.",

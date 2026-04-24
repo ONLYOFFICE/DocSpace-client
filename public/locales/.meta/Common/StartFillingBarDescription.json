@@ -3,11 +3,12 @@
   "content": "Select who will complete the fields for each recipient role on this form. Select a recipient role and assign it to a room member",
   "content_en_sha1_hash": "8485683e547463ba672162277ca9dccdbd3fd3e4",
   "created_at": "2025-10-13T13:22:14.685Z",
-  "updated_at": "2026-04-07T22:23:39.224Z",
+  "updated_at": "2026-04-12T17:43:36.693Z",
   "comment": {
-    "text": "This text appears in a dialog or information bar, instructing the user to assign room members to recipient roles within a form. It explains how to select a role and associate it with a specific room member. The purpose is to guide users through the process of defining who completes the form fields for each role.",
+    "text": "This is the body text for an informational bar that appears when setting up a form. It explains how to assign form fields to specific room members for completion.",
     "is_auto": true,
-    "updated_at": "2025-10-13T14:22:24.379Z"
+    "updated_at": "2026-04-11T20:42:09.486Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -57,13 +58,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Raummember' is an incorrect hybrid of German and English (Denglisch). In a professional UI, it should be translated to 'Raummitglied'.",
-          "suggestion": "Wählen Sie aus, wer die Felder für jede Empfängerrolle in diesem Formular ausfüllt. Wählen Sie eine Empfängerrolle und weisen Sie diese einem Raummitglied zu."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -153,13 +148,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The first sentence in Romanian ('Selectați câmpurile de completat...') means 'Select the fields to be completed...', whereas the English text says 'Select who will complete the fields...'. This changes the subject of the action from a person (who) to the fields themselves.",
-          "suggestion": "Selectați cine va completa câmpurile pentru fiecare rol de destinatar din acest formular. Selectați un rol de destinatar și atribuiți-l unui membru al sălii."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -177,13 +166,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation contains grammatical errors in noun declension ('každú rolou príjemcu' and 'Vyberte rolou príjemcu') which makes the sentence nonsensical/incorrectly structured, failing to convey the intended meaning clearly.",
-          "suggestion": "Vyberte, kto vyplní polia pre každú rolu príjemcu v tomto formulári. Vyberte rolu príjemcu a priraďte ju členovi miestnosti."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -201,13 +184,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'формулару' (formularu) is used incorrectly. In Serbian, 'формулар' refers to a mathematical formula. For a document or digital form, the correct term is 'формулар' (in some contexts) but more accurately 'образац'. However, 'формулару' is a grammatical error/wrong word choice for 'form'.",
-          "suggestion": "Изаберите ко ће попунити поља за сваку улогу примаоца у овом обрасцу. Изаберите улогу примаоца и доделите је члану собе."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

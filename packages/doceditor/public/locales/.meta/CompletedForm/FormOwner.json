@@ -3,11 +3,12 @@
   "content": "Form owner",
   "content_en_sha1_hash": "7022aa4d3edf4428c9fb1db5c36d5affdb524284",
   "created_at": "2025-05-19T21:30:57.171Z",
-  "updated_at": "2026-04-07T19:35:05.239Z",
+  "updated_at": "2026-04-11T21:29:36.274Z",
   "comment": {
-    "text": "This translation key is used to display the label \"Form owner\" in a specific part of a completed form. It appears next to an avatar representing the form owner's user account within the form details.",
+    "text": "This is a label identifying the creator or primary manager of a form. It appears next to an avatar and name in the completed form's details.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:47:14.016Z"
+    "updated_at": "2026-04-11T21:29:36.274Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

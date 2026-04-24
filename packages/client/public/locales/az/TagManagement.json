@@ -3,6 +3,6 @@
   "DeleteTag": "Sil etiket",
   "DeleteTagCannotBeUndone": "Bu əməliyyat geri qaytarıla bilməz.",
   "DeleteTagConfirmation": "Bu etiketi silmək, istifadə olunduğu bütün otaqlardan onu aradan qaldıracaq.",
-  "EditTag": "Redaktə et",
+  "EditTag": "Teqi redaktə et",
   "RemoveTag": "<1>{{tag}}</1> etiket silindi."
 }

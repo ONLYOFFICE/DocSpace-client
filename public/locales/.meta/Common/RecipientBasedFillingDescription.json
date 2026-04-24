@@ -3,11 +3,12 @@
   "content": "Fill out the original form with other recipients in VDR.",
   "content_en_sha1_hash": "f7ea31f31e087897513403fc518f11e1da026c4b",
   "created_at": "2025-10-13T13:22:10.804Z",
-  "updated_at": "2026-04-08T01:47:35.533Z",
+  "updated_at": "2026-04-12T03:18:31.900Z",
   "comment": {
-    "text": "This description appears in a dialog or panel related to sharing a form, likely within a virtual data room. It explains how to complete the original form with other recipients. Translators should ensure the description accurately reflects the action of pre-filling the form for recipients.",
+    "text": "This is a description for a feature that allows users to fill out a form collaboratively. It appears below the \"Recipient-based filling\" title in a dialog or panel, explaining that the original form can be filled with other recipients in a Virtual Data Room (VDR).",
     "is_auto": true,
-    "updated_at": "2025-10-13T14:23:55.153Z"
+    "updated_at": "2026-04-11T20:45:30.951Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -24,7 +25,7 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
-      "line_number": 203,
+      "line_number": 204,
       "context": "icon: <FormDataCollectionIcon />,\n },\n {\n id: \"virtual-data-room\",\n title: t(\"Common:RecipientBasedFilling\"),\n description: t(\"Common:RecipientBasedFillingDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: onClickVirtualDataRoom,\n icon: <RoleBasedFillingIcon />,\n },\n ];",
       "module": "/packages/doceditor"
     }
@@ -165,13 +166,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'අථත්‍ය' (athathya) is a misspelling or incorrect word choice for 'Virtual'. In the context of 'Virtual Data Room', it should be 'අතථ්‍ය' (athathya) or more commonly 'අතථ්‍ය දත්ත කාමරය'. However, 'අථත්‍ය' is not a standard Sinhala word and appears to be a typo.",
-          "suggestion": "VDR හි අනෙකුත් ලබන්නන් සමඟ මුල් පෝරමය පුරවන්න."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -193,7 +188,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \"R\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-12T03:18:19.233Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null
@@ -213,13 +210,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation contains a repetitive duplication of the sentence, essentially saying the same thing twice in a row.",
-          "suggestion": "VDR'deki diğer alıcılarla birlikte orijinal formu doldurun."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

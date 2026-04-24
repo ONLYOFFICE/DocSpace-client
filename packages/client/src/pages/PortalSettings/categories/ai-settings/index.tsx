@@ -126,15 +126,15 @@ const AiSettings = ({
   }, [standalone]);
 
   React.useEffect(() => {
-    const titleKey =
+    const title =
       currentTabId === "providers"
-        ? "Common:AIProvider"
+        ? t("Common:AIProvider")
         : currentTabId === "search"
-          ? "Common:WebSearchAI"
+          ? t("Common:WebSearchAI")
           : currentTabId === "knowledge"
-            ? "AIRoom:Knowledge"
-            : "Common:MCPSettingTitle";
-    setDocumentTitle(t(titleKey));
+            ? t("AIRoom:Knowledge")
+            : t("Common:MCPSettingTitle");
+    setDocumentTitle(title);
   }, [t, currentTabId]);
 
   const serversData = [

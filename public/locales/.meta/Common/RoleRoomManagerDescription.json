@@ -3,16 +3,17 @@
   "content": "Room managers can manage the assigned rooms, invite new users and assign roles below their level.",
   "content_en_sha1_hash": "28087aa15e7b634a0bac2753dc18b692629d85a8",
   "created_at": "2025-05-19T21:30:48.123Z",
-  "updated_at": "2026-04-08T00:38:23.495Z",
+  "updated_at": "2026-04-13T08:19:53.914Z",
   "comment": {
-    "text": "Room managers can manage rooms, invite new users, and assign roles below their level. This message is used to describe the capabilities of a room manager in the UI, likely appearing on an access options page or similar setting.",
+    "text": "This is a description of the \"Room Manager\" role, displayed when viewing user roles or permissions. It explains the capabilities of a user assigned this role.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:34:33.929Z"
+    "updated_at": "2026-04-11T20:44:22.985Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 76,
+      "line_number": 77,
       "context": "agentSection: t(\"Common:AIAgents\"),\n }}\n />\n ) as unknown as string;\n default:\n return t(\"Common:RoleRoomManagerDescription\");\n }\n };\n \n const getUserDescription = (roomType: RoomsType, t: TTranslation) => {\n switch (roomType) {",
       "module": "/packages/shared"
     }
@@ -111,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text says 'Room managers', but the Latvian translation uses 'Administratori' (Administrators), which implies a higher or different role level.",
-          "suggestion": "Telpas vadītāji var pārvaldīt piešķirtās telpas, uzaicināt jaunus lietotājus un piešķirt lomas zem viņu līmeņa."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -135,7 +130,15 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The word 'utilizadors' is Catalan, not Portuguese. The correct Portuguese word is 'utilizadores'.",
+          "suggestion": "Os gerentes de sala podem gerenciar as salas atribuídas, convidar novos utilizadores e atribuir funções abaixo de seu nível.",
+          "checked_at": "2026-04-13T08:19:16.108Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -147,13 +150,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Room managers' is translated as 'Administratorii sălii', which refers to a physical room/hall. In the context of ONLYOFFICE DocSpace, 'Room' refers to a digital workspace/room, and 'Manager' is a role. 'Administratorii sălii' sounds like building administrators.",
-          "suggestion": "Managerii sălilor pot gestiona sălile atribuite, pot invita noi utilizatori și pot atribui roluri sub nivelul lor."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -171,7 +168,15 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The word 'level' (úroveň) from the English phrase 'below their level' is missing from the Slovak translation. The phrase 'nižšie ako ich' is incomplete and should include the noun 'úroveň' to be grammatically correct.",
+          "suggestion": "Manažéri miestností môžu spravovať pridelené miestnosti, pozývať nových používateľov a prideľovať roly, ktoré sú nižšie ako ich úroveň.",
+          "checked_at": "2026-04-13T08:19:27.448Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "sl": {

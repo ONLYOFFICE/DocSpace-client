@@ -313,6 +313,7 @@ const RoomSelector = (props) => {
               onSelect={changeRoomType}
               options={roomTypeOptions}
               scaled
+              scaledOptions
               selectedOption={selectedOption}
               displaySelectedOption
               directionY="top"

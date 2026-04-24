@@ -3,11 +3,12 @@
   "content": "File available via parent folder link",
   "content_en_sha1_hash": "b09ede9c47fb311e04009a0a9173e2ac381f5461",
   "created_at": "2025-08-26T11:15:03.862Z",
-  "updated_at": "2026-04-08T09:46:04.036Z",
+  "updated_at": "2026-04-11T20:52:51.269Z",
   "comment": {
-    "text": "This text indicates a file or folder is accessible through a link within its parent folder. It's used as the header text in a UI element (likely a tooltip or dialog) to inform users about this alternative access method. Translators should ensure the description accurately conveys the file/folder's accessibility via a parent folder link.",
+    "text": "This is a header text displayed in a share information bar. It indicates that the current file is accessible because its parent folder has been shared.",
     "is_auto": true,
-    "updated_at": "2025-08-26T11:28:03.351Z"
+    "updated_at": "2026-04-11T20:52:51.269Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Validein' is a proper name (Validein) or a misspelling. In this context, 'parent' (as in parent folder) should be translated as 'valideyn' (metaphorical) or more accurately 'üst' or 'ana' in a technical UI context. 'Validein' makes the sentence sound like it refers to a person named Validein.",
-          "suggestion": "Fayl ana qovluq keçidi vasitəsilə əlçatandır"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -117,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Fails' is a typo/error; it should be 'Fails' (incorrect) vs 'Failis' (file). In Latvian, 'Fails' is not a word for 'File', and 'Fails' in English means 'to fail'. The correct term for file is 'Fails'.",
-          "suggestion": "Faili pieejams, izmantojot vecākā mapes saiti"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -159,13 +148,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Russian translation uses 'корневую папку' (root folder), which implies the top-level directory of a file system. The English text specifies 'parent folder' (родительская папка), which refers to the immediate container of the file.",
-          "suggestion": "Файл доступен по ссылке на родительскую папку"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {

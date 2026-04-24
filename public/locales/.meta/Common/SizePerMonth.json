@@ -3,13 +3,21 @@
   "content": "/month <1>({{size}})</1>",
   "content_en_sha1_hash": "f4889cba452c12d5f16d31e43e447835c7b2e924",
   "created_at": "2026-04-10T13:53:43.243Z",
-  "updated_at": "2026-04-10T13:53:43.243Z",
+  "updated_at": "2026-04-23T17:24:02.179Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label indicating a monthly cost for a specific storage size. `{{size}}` will be replaced by the storage amount (e.g., \"10 GB\").",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:42:25.601Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "line_number": 271,
+      "context": "mainFontSize=\"28px\"\n fractionFontSize=\"20px\"\n />\n <Text fontWeight={700} fontSize=\"20px\">\n <CommonTrans\n i18nKey=\"SizePerMonth\"\n values={{\n size: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n }}\n components={{\n 1: (",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

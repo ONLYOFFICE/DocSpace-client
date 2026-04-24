@@ -3,17 +3,18 @@
   "content": "Enable this setting to disable downloading of this file shared via a link.",
   "content_en_sha1_hash": "ea958f8e25d219ac332c945e5f3c7555883b0866",
   "created_at": "2025-08-26T11:15:03.588Z",
-  "updated_at": "2026-04-08T02:18:44.947Z",
+  "updated_at": "2026-04-13T14:59:05.957Z",
   "comment": {
-    "text": "This text appears in a dialog (likely related to link sharing) and controls whether users can download a shared file. It's used to enable or disable the download option for a file shared via a link. Translators should ensure the meaning of preventing downloads is clear.",
+    "text": "This is a setting description that appears in a dialog box. It explains that enabling this option will prevent users who access the file via a shared link from downloading it.",
     "is_auto": true,
-    "updated_at": "2025-08-26T11:18:52.318Z"
+    "updated_at": "2026-04-11T20:46:02.537Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/index.tsx",
-      "line_number": 427,
-      "context": ": t(\"Common:ChooseExpirationDate\");\n };\n \n const getDisableDownloadText = () => {\n if (isRoom(item)) {\n return t(\"Common:PreventDownloadFilesAndFolders\");\n }\n \n if (isFile(item)) {\n return t(\"Common:PreventDownloadFile\");\n }",
+      "line_number": 431,
+      "context": "if (isRoom(item)) {\n return t(\"Common:PreventDownloadFilesAndFolders\");\n }\n \n if (isFile(item)) {\n return t(\"Common:PreventDownloadFile\");\n }\n \n if (isFolder(item)) {\n return t(\"Common:PreventDownloadFolder\");\n }",
       "module": "/packages/shared"
     }
   ],

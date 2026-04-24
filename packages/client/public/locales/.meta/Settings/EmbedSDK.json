@@ -3,23 +3,24 @@
   "content": "Embed SDK",
   "content_en_sha1_hash": "a9ccf1a96c44b79062482e5c0b3db74a1df2a6dd",
   "created_at": "2026-04-03T21:51:36.584Z",
-  "updated_at": "2026-04-09T03:04:19.849Z",
+  "updated_at": "2026-04-23T17:24:01.933Z",
   "comment": {
-    "text": "Used as the title for the Embed SDK feature card and header within the Developer Tools section of the Portal Settings. It identifies the JavaScript SDK integration option for developers.",
+    "text": "This is a title for a section in the Developer Tools settings, referring to the Embed SDK. It also appears as a card title in the same section.",
     "is_auto": true,
-    "updated_at": "2026-04-03T22:00:35.340Z"
+    "updated_at": "2026-04-11T21:24:11.864Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DeveloperToolsHeader.tsx",
-      "line_number": 72,
-      "context": "const slug = pathname.split(\"/developer-tools/javascript-sdk/\")[1]?.replace(/\\/$/, \"\");\n const key = sdkPresetTitles[slug];\n if (key) return t(key);\n }\n if (pathname.includes(\"/developer-tools/javascript-sdk\"))\n return t(\"Settings:EmbedSDK\");\n if (pathname.includes(\"/developer-tools/plugin-sdk\"))\n return t(\"WebPlugins:PluginSDK\");\n if (pathname.includes(\"/developer-tools/webhooks\")) return t(\"Webhooks:Webhooks\");\n if (pathname.includes(\"/developer-tools/oauth\")) return t(\"OAuth:OAuth\");\n return t(\"Common:DeveloperTools\");",
+      "line_number": 87,
+      "context": "if (slug === \"docspace\") return getBrandName(\"ProductName\");\n const title = getSdkPresetTitle(slug, t);\n if (title) return title;\n }\n if (pathname.includes(\"/developer-tools/javascript-sdk\"))\n return t(\"Settings:EmbedSDK\");\n if (pathname.includes(\"/developer-tools/plugin-sdk\"))\n return t(\"WebPlugins:PluginSDK\");\n if (pathname.includes(\"/developer-tools/webhooks\")) return t(\"Webhooks:Webhooks\");\n if (pathname.includes(\"/developer-tools/oauth\")) return t(\"OAuth:OAuth\");\n return t(\"Common:DeveloperTools\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 87,
-      "context": "linkTitle={t(\"Common:LearnMore\")}\n isBlank\n />\n <Card\n icon={<EmbedSvg />}\n title={t(\"Settings:EmbedSDK\")}\n description={t(\"Settings:EmbedSDKDescription\", { productName: t(\"Common:ProductName\") })}\n url=\"/developer-tools/javascript-sdk\"\n color={globalColors.mainOrange}\n linkTitle={t(\"Settings:StartEmbedding\")}\n />",
+      "line_number": 88,
+      "context": "linkTitle={t(\"Common:LearnMore\")}\n isBlank\n />\n <Card\n icon={<EmbedSvg />}\n title={t(\"Settings:EmbedSDK\")}\n description={t(\"Settings:EmbedSDKDescription\", { productName: getBrandName(\"ProductName\") })}\n url=\"/developer-tools/javascript-sdk\"\n color={globalColors.mainOrange}\n linkTitle={t(\"Settings:StartEmbedding\")}\n />",
       "module": "/packages/client"
     }
   ],
@@ -39,13 +40,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Gömmə' is a literal translation of 'embedding' (as in something being buried or submerged) but is incorrect in a technical software context. In Azerbaijani IT terminology, 'Embed' or 'Yerləşdirmə' should be used to describe integrating code or content into a page.",
-          "suggestion": "Embed SDK"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -81,13 +76,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation 'Upotettu SDK' uses a past participle ('Embedded') which describes a state, whereas 'Embed SDK' in English is a noun phrase/title referring to the 'SDK for embedding'. In Finnish technical contexts, 'Upotettava SDK' (Embeddable SDK) or simply 'Upotus-SDK' would be more accurate for a feature title.",
-          "suggestion": "Upotus-SDK"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -99,13 +88,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian word 'Տեղադրման' means 'Installation' or 'Deployment', whereas 'Embed' in a software context refers to 'Integration' or 'Embedding' (the act of placing one component inside another). 'Տեղադրման SDK' implies an SDK for installing software, which is incorrect for a JavaScript integration tool.",
-          "suggestion": "Ներդրման SDK"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -135,13 +118,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Ielādēšanas SDK' means 'Loading SDK' or 'Download SDK', which is a different concept from 'Embed SDK' (integrating/embedding the SDK into another application).",
-          "suggestion": "Iembeddingas SDK"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -201,13 +178,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Embed' in a technical context refers to integrating or embedding code/content. The Albanian translation 'Mbogëdhënies' means 'Large-scale' or 'Big-giving', which is a complete mistranslation of the technical term 'Embed'.",
-          "suggestion": "SDK i Integruar"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -243,13 +214,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '嵌入式 SDK' means 'Embedded SDK' (referring to an embedded system or an already embedded component), whereas the English 'Embed SDK' refers to the 'SDK for embedding' (the tool used to perform the embedding action).",
-          "suggestion": "嵌入 SDK"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

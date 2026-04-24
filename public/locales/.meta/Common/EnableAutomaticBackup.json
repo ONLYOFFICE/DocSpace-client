@@ -3,16 +3,17 @@
   "content": "Enable automatic backup.",
   "content_en_sha1_hash": "3940fbf299c4c76fb3bd58c6a6f346f85e30bb03",
   "created_at": "2025-05-26T07:15:43.051Z",
-  "updated_at": "2026-04-08T10:39:31.561Z",
+  "updated_at": "2026-04-11T20:53:42.074Z",
   "comment": {
-    "text": "This translation key is used to display the text \"Enable automatic backup\" in a settings page. It appears as an unavailable setting with a disabled checkbox, indicating that automatic backups are not currently enabled on this account or device. Translators should ensure the text accurately reflects the user's current backup status.",
+    "text": "This is a label for a checkbox or toggle switch. It enables or disables the automatic backup feature within the application settings.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:05:41.539Z"
+    "updated_at": "2026-04-11T20:53:42.074Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 473,
+      "line_number": 474,
       "context": "fontWeight={600}\n lineHeight=\"20px\"\n noSelect\n className={styles.settingsUnavailable}\n >\n {t(\"Common:EnableAutomaticBackup\")}\n </Text>\n </div>\n <Text\n className={classNames(\n styles.settingsUnavailable,",
       "module": "/packages/shared"
     }
@@ -63,13 +64,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Spanish translation uses 'Active' (an adjective or imperative form of 'to activate') instead of the infinitive 'Activar' (to enable/activate), which is the standard for UI settings/actions. More importantly, 'Active' in Spanish is often confused with the English word, whereas the intended meaning is the action 'Activar'.",
-          "suggestion": "Activar copia de seguridad automática."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -111,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order in Lao is incorrect, making the sentence sound unnatural or fragmented. 'ສຳຮອງ' (Backup) should follow 'ອັດຕະໂນມັດ' (Automatic) to form 'Automatic backup', but the current structure 'ອັດຕະໂນມັດ ສຳຮອງ' is awkward in this context.",
-          "suggestion": "ເປີດໃຊ້ການສຳຮອງຂໍ້ມູນແບບອັດຕະໂນມັດ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -159,13 +148,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation is overly wordy and uses a passive, unnatural phrasing ('Give the possibility to...') instead of a direct command/setting label. In a UI context, 'Enable automatic backup' should be translated as a concise action or state.",
-          "suggestion": "Включить автоматическое резервное копирование"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {

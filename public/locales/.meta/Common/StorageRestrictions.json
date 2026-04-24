@@ -3,13 +3,21 @@
   "content": "Without action, uploading, creating, and editing files and folders will be restricted until you free up space.",
   "content_en_sha1_hash": "ce05667055adced540e554d2692374783ad62225",
   "created_at": "2026-04-10T13:53:43.359Z",
-  "updated_at": "2026-04-10T13:53:43.359Z",
+  "updated_at": "2026-04-12T17:17:37.664Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a sentence displayed in a modal dialog. It informs the user about storage restrictions when their storage tariff is deactivated or full.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:41:55.827Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/dialogs/StorageTariffDeactivated.tsx",
+      "line_number": 150,
+      "context": "/>\n </Text>\n <br />\n <Text>{t(\"TopUpToReactivateStorage\")}</Text>\n {isStorageTariffLimit ? (\n <Text as=\"span\">{t(\"StorageRestrictions\")}</Text>\n ) : null}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"send-button\"",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,11 +3,12 @@
   "content": "Disable applications",
   "content_en_sha1_hash": "aed213929cbfdd694528e2d66ce136d449480a31",
   "created_at": "2025-05-19T21:30:53.868Z",
-  "updated_at": "2026-04-07T19:35:05.162Z",
+  "updated_at": "2026-04-11T21:18:59.845Z",
   "comment": {
-    "text": "This translation key is used to display a title that indicates disabling applications. It appears in a modal dialog window and is displayed when the user selects an option to disable applications.",
+    "text": "This is the title of a dialog box that appears when a user is about to disable multiple applications.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:50.314Z"
+    "updated_at": "2026-04-11T21:18:59.845Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

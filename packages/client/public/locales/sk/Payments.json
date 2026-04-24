@@ -1,18 +1,17 @@
 {
-  "AccessingProblem": "Ak ste existujúci používateľ a máte problémy s prístupom k tomuto priestoru, kontaktujte administrátora.",
   "CannotCreateNewRoom": "Nie je možné vytvoriť miestnosť",
   "CannotCreatePaidUsers": "Nie je možné pridať platených používateľov",
   "CannotRestoreRoom": "Nie je možné obnoviť miestnosť",
   "ChooseNewPlan": "Chcete si vybrať nový tarifný program?",
+  "GracePeriodActive": "Doba úľavy je aktívna <1>od {{fromDate}} do {{byDate}}</1> (zostávajúce dni: {{delayDaysCount}}).",
+  "LicenseExpiredRestriction": "Nie je možné pridať nových používateľov ani vytvoriť nové miestnosti. Licencia vypršla.",
+  "LicenseGracePeriodInfo": "Počas tohto obdobia administrátorom nie je možné vytvárať nové miestnosti alebo pridávať nových používateľov. Po skončení grace obdobia bude {{productName}} nedostupné, kým sa neaktivuje nová licencia.",
   "NewRoomWillExceedLimit": "Nie je možné vytvoriť túto miestnosť, pretože je dosiahnutý limit počtu miestností vo vašom aktuálnom tarifnom pláne.",
   "NewUsersWillExceedMembersLimit": "Nie je možné pridávať nových platených používateľov, pretože je dosiahnutý limit počtu administrátorov vo vašom aktuálnom tarifnom pláne.",
   "NotPossibleRoomRestoring": "Nie je možné vrátiť túto miestnosť, pretože je dosiahnutý limit počtu miestností vo vašom aktuálnom tarifnom pláne.",
   "NumberOfRoomsAccordingToTariff": "Počet miestností podľa vášho tarifného plánu: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Počet administrátorov podľa vášho tarifného plánu: {{currentValue}}/{{maxValue}}",
+  "PlanPaymentOverdue": "Nie je možné pridať nových používateľov, vytvoriť nové miestnosti ani AI agentov. Platba za plán {{planName}} je vymeraná.",
   "RoomsQuotaAlmostExhausted": "Kvóta miestností je takmer vyčerpaná.",
-  "UsersQuotaAlmostExhausted": "Kvóta platených používateľov je takmer vyčerpaná.",
-  "GracePeriodActive": "Doba úľavy je aktívna <1>od {{fromDate}} do {{byDate}}</1> (zostávajúce dni: {{delayDaysCount}}).",
-  "LicenseExpired": "Nie je možné pridať nových používateľov ani vytvoriť nové miestnosti. Licencia vypršla.",
-  "LicenseGracePeriodInfo": "Počas tohto obdobia administrátorom nie je možné vytvárať nové miestnosti alebo pridávať nových používateľov. Po skončení grace obdobia bude {{productName}} nedostupné, kým sa neaktivuje nová licencia.",
-  "PlanPaymentOverdue": "Nie je možné pridať nových používateľov, vytvoriť nové miestnosti ani AI agentov. Platba za plán {{planName}} je vymeraná."
+  "UsersQuotaAlmostExhausted": "Kvóta platených používateľov je takmer vyčerpaná."
 }

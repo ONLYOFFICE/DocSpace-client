@@ -3,16 +3,17 @@
   "content": "Folder info",
   "content_en_sha1_hash": "4d59109fbdaa3c60825da62bd3a653e870df7bc5",
   "created_at": "2025-12-15T14:02:08.602Z",
-  "updated_at": "2026-04-10T08:21:04.375Z",
+  "updated_at": "2026-04-23T17:24:02.077Z",
   "comment": {
-    "text": "This key displays text on a button or menu item indicating whether the selected item is a folder. It's used to label the \"Show Info\" action, differentiating between folder information (\"Folder info\") and file information. Translators should ensure accuracy and consistency with other file/folder labels.",
+    "text": "This is a button label that opens a panel displaying information about a selected folder.",
     "is_auto": true,
-    "updated_at": "2025-12-17T07:51:25.249Z"
+    "updated_at": "2026-04-11T20:52:20.724Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2422,
+      "line_number": 2481,
       "context": "// },\n \n {\n id: \"option_show-info\",\n key: \"show-info\",\n label: item.isFolder ? t(\"Common:FolderInfo\") : t(\"Common:FileInfo\"),\n icon: InfoOutlineReactSvgUrl,\n onClick: () => this.onShowInfoPanel(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     }
@@ -111,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Kapsora' is not a Latvian word for 'Folder'. It appears to be a hallucination or a misspelling of a different term. The correct Latvian word for 'Folder' in a computing context is 'Mape'.",
-          "suggestion": "Mapes informācija"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {

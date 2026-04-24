@@ -3,24 +3,25 @@
   "content": "Please create the first room in {{sectionName}}.",
   "content_en_sha1_hash": "52d0bc357573a2bc6f7486caa5c8d2793a7f50c7",
   "created_at": "2025-10-27T16:14:14.285Z",
-  "updated_at": "2026-04-08T10:47:32.973Z",
+  "updated_at": "2026-04-13T14:59:06.033Z",
   "comment": {
-    "text": "This text is a prompt displayed when a user navigates to a section with no existing rooms. It instructs the user to create the first room within that section (e.g., \"Please create the first room in My Files.\"). The `sectionName` variable is dynamically populated with the name of the section.",
+    "text": "This is a descriptive text displayed when no rooms are present in a section. It prompts the user to create the first room, with `{{sectionName}}` being a placeholder for the name of the section (e.g., \"Rooms\").",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:38:31.234Z"
+    "updated_at": "2026-04-11T20:53:51.007Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/selectors/Files/hooks/useSelectorBody.tsx",
-      "line_number": 236,
-      "context": "}, [t, isKnowledgeFolder, isEmptyFilesRootScreen, isEmptyAgentsRootScreen]);\n \n const emptyScreenDescription = isEmptyFilesRootScreen\n ? \"\"\n : isEmptyAgentsRootScreen\n ? t(\"Common:EmptyRoomsDescriptionTextAgent\", {\n sectionName: t(\"Common:AIAgents\"),\n })\n : t(\"Common:EmptyRoomsDescriptionText\", {\n sectionName: t(\"Common:Rooms\"),\n });",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/selectors/Files/hooks/useSelectorBody.tsx",
+      "line_number": 241,
+      "context": "? \"\"\n : isEmptyAgentsRootScreen\n ? t(\"EmptyRoomsDescriptionTextAgent\", {\n sectionName: t(\"AIAgents\"),\n })\n : t(\"EmptyRoomsDescriptionText\", {\n sectionName: t(\"Rooms\"),\n });\n \n const SelectorBody = (\n <Selector",
+      "module": "/libs/ui-kit"
     },
     {
-      "file_path": "/packages/shared/selectors/Room/index.tsx",
-      "line_number": 248,
-      "context": "isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl\n }\n emptyScreenHeader={emptyScreenHeader ?? t(\"Common:EmptyRoomsHeader\")}\n emptyScreenDescription={\n emptyScreenDescription ??\n t(\"Common:EmptyRoomsDescriptionText\", {\n sectionName: t(\"Common:Rooms\"),\n })\n }\n searchEmptyScreenImage={\n isBase ? EmptyScreenFilterAltSvgUrl : EmptyScreenFilterAltDarkSvgUrl",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/selectors/Room/index.tsx",
+      "line_number": 338,
+      "context": "isBase ? <EmptyScreenRoomsLight /> : <EmptyScreenRoomsDark />\n }\n emptyScreenHeader={emptyScreenHeader ?? t(\"EmptyRoomsHeader\")}\n emptyScreenDescription={\n emptyScreenDescription ??\n t(\"EmptyRoomsDescriptionText\", {\n sectionName: t(\"Rooms\"),\n })\n }\n searchEmptyScreenImage={\n isBase ? (",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -39,13 +40,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Xüsusilə' means 'Especially' or 'Particularly', which changes the meaning of the sentence from a simple instruction to an emphasized one that doesn't fit the context.",
-          "suggestion": "{{sectionName}} bölməsində ilk otağı yaradın."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {

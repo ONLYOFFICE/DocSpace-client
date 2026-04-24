@@ -3,16 +3,17 @@
   "content": "Import from Nextcloud",
   "content_en_sha1_hash": "404cbbe6db5d9f6a20a347688fdc4598b4e7dce7",
   "created_at": "2025-05-19T21:30:51.664Z",
-  "updated_at": "2026-04-09T02:52:45.796Z",
+  "updated_at": "2026-04-11T21:23:54.656Z",
   "comment": {
-    "text": "Import from Nextcloud is used to describe a button or action that allows users to import data from their Nextcloud account. This translation key appears in the Portal Settings UI, specifically on the layout of the header section. It should be translated to provide a clear and descriptive label for users to understand what option they are selecting.",
+    "text": "This is a button label or header text for importing data. It appears when a user chooses to import files from a Nextcloud instance.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:05.687Z"
+    "updated_at": "2026-04-11T21:23:54.656Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
-      "line_number": 368,
+      "line_number": 369,
       "context": "const translatedHeader =\n header === IMPORT_HEADER_CONST\n ? workspace === \"GoogleWorkspace\"\n ? t(\"ImportFromGoogle\")\n : workspace === \"Nextcloud\"\n ? t(\"ImportFromNextcloud\")\n : workspace === \"Workspace\"\n ? t(\"ImportFromPortal\", {\n organizationName: logoText,\n })\n : t(\"DataImport\")",
       "module": "/packages/client"
     }
@@ -39,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian verb 'Входирай' means 'Log in' or 'Sign in', which is incorrect for the action of 'Importing' data.",
-          "suggestion": "Импортирай от Nextcloud"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -153,13 +148,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Russian translation adds the word 'Workspace' which is not present in the English source text, potentially causing confusion with the 'Workspace' entity in ONLYOFFICE.",
-          "suggestion": "Импортировать из Nextcloud"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -189,13 +178,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The verb 'Uvezi' is in the imperative form (command), whereas 'Import' in a UI context functions as a noun or an infinitive action. In Serbian, 'Uvoz' (noun) or 'Uvezi' (imperative) are used, but 'Uvezi' sounds like a direct command to the user rather than a label for the action/button.",
-          "suggestion": "Uvoz sa Nextcloud-a"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

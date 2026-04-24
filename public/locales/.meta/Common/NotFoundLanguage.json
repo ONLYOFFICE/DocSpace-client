@@ -3,16 +3,17 @@
   "content": "Can't find your language? Contact us at <1>{{supportEmail}}</1> to take part in the translation program and get rewards.",
   "content_en_sha1_hash": "d9fc9ee07a76cc5a6bc5a5eeaad93f29138ddd5e",
   "created_at": "2025-05-19T21:30:46.900Z",
-  "updated_at": "2026-04-10T08:58:38.052Z",
+  "updated_at": "2026-04-12T07:14:23.217Z",
   "comment": {
-    "text": "This translation key is used to display a message when the user cannot find their preferred language in the available options. It appears as a tooltip in the profile settings section, inviting users to contact support for further assistance. Translators should aim to preserve the friendly and encouraging tone of this text.",
+    "text": "This is a tooltip message displayed when a user cannot find their language in the language selection. It encourages them to contact support to participate in the translation program. The `{{supportEmail}}` variable is an email address, and `<1>` is a link tag.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:17.534Z"
+    "updated_at": "2026-04-11T20:47:44.166Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 287,
+      "line_number": 288,
       "context": "const tooltipLanguage = (\n <Text as=\"div\" fontSize=\"12px\">\n <Trans\n t={t}\n i18nKey=\"NotFoundLanguage\"\n ns=\"Common\"\n values={{ supportEmail: documentationEmail }}\n components={{\n 1: (\n <Link",
       "module": "/packages/client"
     }
@@ -75,25 +76,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The verb conjugation 'Vous ne trouver pas' is grammatically incorrect (it uses the infinitive instead of the conjugated form 'trouvez'), which affects the basic meaning/correctness of the sentence.",
-          "suggestion": "Vous ne trouvez pas votre langue ? Contactez-nous à <1>{{supportEmail}}</1> pour prendre part au programme de traduction et obtenir des récompenses."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Armenian translation is missing the word 'to' or a connecting preposition/conjunction (e.g., 'to participate'), making the sentence grammatically incomplete and disconnected between the email and the purpose.",
-          "suggestion": "Չե՞ք կարողանում գտնել ձեր լեզուն: Կապվեք մեզ հետ <1>{{supportEmail}}</1>՝ մասնակցելու թարգմանչական ծրագրին և պարգևներ ստանալու համար:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -117,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation omits the part about 'getting rewards' (ແລະ ຮັບລາງວັນ).",
-          "suggestion": "ບໍ່ສາມາດຫາພາສາຂອງທ່ານໄດ້ແມ່ນບໍ່? ຕິດຕໍ່ພວກເຮົາທີ່ <1>{{supportEmail}}</1> ເພື່ອເຂົ້າຮ່ວມໃນໂຄງການແປພາສາ ແລະ ຮັບລາງວັນ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -133,7 +116,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \"u\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-11T21:47:33.549Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null
@@ -171,13 +156,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Russian translation changes the reward from 'get rewards' to 'get up to 1 year of free use', which is a different and much more specific promise not present in the source text.",
-          "suggestion": "Если Вы не можете найти свой язык, напишите нам по адресу <1>{{supportEmail}}</1>, чтобы принять участие в программе перевода и получать награды."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {

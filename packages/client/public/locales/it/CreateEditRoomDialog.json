@@ -17,8 +17,12 @@
   "FileLifetimeDescription": "Imposta la durata dei file per eliminare automaticamente i file in questa stanza dopo un periodo definito. La durata inizia dalla data di caricamento/creazione del file.",
   "FilesOlderThan": "File più vecchi di:",
   "FormRoomBarDescription": "Questa stanza è a disposizione di chiunque abbia il link. Gli utenti esterni avranno l'autorizzazione come Compilatore moduli per tutti i file.",
+  "GoToIntegrations": "Vai a Integrazioni",
   "Horizontal": "Orizzontale",
   "Icon": "Icona",
+  "NeedMoreIntegrations": "Hai bisogno di più integrazioni?",
+  "NeedMoreIntegrationsDescription": "Utilizza gli webhook per inviare dati al tuo sistema o collega i moduli a migliaia di servizi tramite Zapier.",
+  "NoDatabaseConnections": "Nessuna connessione al database configurata",
   "PeopleSelectorInfo": "Solo un amministratore della stanza o un amministratore di {{productName}} può diventare il proprietario della stanza",
   "Position": "Posizione",
   "PublicRoomBarDescription": "Questa stanza è disponibile per chiunque abbia il link. L'accesso per gli utenti esterni è previsto in base al tipo di diritti di accesso selezionati.",
@@ -41,8 +45,5 @@
   "ViewerInfo": "Informzioni sul visualizzatore",
   "WatermarkPreview": "Anteprima della filigrana",
   "WatermarkPreviewHelp": "Questa anteprima dell'immagine mostra approssimativamente come verrà visualizzata la filigrana nei tuo i file.",
-  "GoToIntegrations": "Vai a Integrazioni",
-  "NeedMoreIntegrations": "Hai bisogno di più integrazioni?",
-  "NeedMoreIntegrationsDescription": "Utilizza gli webhook per inviare dati al tuo sistema o collega i moduli a migliaia di servizi tramite Zapier.",
-  "NoDatabaseConnections": "Nessuna connessione al database configurata"
+  "NoDatabaseConnectionsRoomAdmin": "Le connessioni al database vengono configurate da un amministratore. Una volta configurato un database, potrai abilitare l'esportazione qui."
 }

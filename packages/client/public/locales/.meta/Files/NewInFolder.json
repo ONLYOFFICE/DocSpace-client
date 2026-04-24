@@ -3,11 +3,12 @@
   "content": "New in folder",
   "content_en_sha1_hash": "e5ef7b6c7c00114460d0779f23ffaafda3613917",
   "created_at": "2025-05-19T21:30:55.884Z",
-  "updated_at": "2026-04-07T19:35:05.089Z",
+  "updated_at": "2026-04-11T21:08:51.399Z",
   "comment": {
-    "text": "This translation key is used to display the label \"New in folder\" in a modal dialog header. It appears in the UI when a new file is added to a folder, providing a clear indication of the file's origin within that folder.",
+    "text": "This is a dialog title. It appears when viewing new files within a specific folder.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:39:29.282Z"
+    "updated_at": "2026-04-11T21:08:51.399Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

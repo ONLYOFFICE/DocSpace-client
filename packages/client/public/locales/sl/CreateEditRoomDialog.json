@@ -17,8 +17,12 @@
   "FileLifetimeDescription": "Nastavite življenjsko dobo datoteke za samodejno brisanje datotek v tej sobi po določenem obdobju. Življenjska doba se začne z datumom nalaganja/ustvarjanja datoteke.",
   "FilesOlderThan": "Datoteke starejše od:",
   "FormRoomBarDescription": "Ta soba je na voljo vsem s povezavo. Zunanji uporabniki bodo imeli dovoljenje za izpolnjevanje obrazcev za vse datoteke.",
+  "GoToIntegrations": "Pojdite na Integracije",
   "Horizontal": "Horizontalno",
   "Icon": "Ikona",
+  "NeedMoreIntegrations": "Potrebujete več integracij?",
+  "NeedMoreIntegrationsDescription": "Uporabite webhooks za pošiljanje podatkov v vašo lastno sistemo ali povežite obrazce z tisoči storitev preko Zapier.",
+  "NoDatabaseConnections": "Ni konfiguriranih povezav z bazama podatkov",
   "PeopleSelectorInfo": "Samo skrbnik sobe ali skrbnik {{productName}} lahko postaneta lastnika sobe",
   "Position": "Pozicija",
   "PublicRoomBarDescription": "Ta soba je na voljo vsem s povezavo. Dostop za zunanje uporabnike je zagotovljen v skladu z izbrano vrsto pravic za dostop.",
@@ -41,8 +45,5 @@
   "ViewerInfo": "Informacije o ogledovalcu",
   "WatermarkPreview": "Predogled vodnega žiga",
   "WatermarkPreviewHelp": "Ta predogled približno prikazuje, kako bo vodni žig prikazan v vaših datotekah.",
-  "GoToIntegrations": "Pojdite na Integracije",
-  "NeedMoreIntegrations": "Potrebujete več integracij?",
-  "NeedMoreIntegrationsDescription": "Uporabite webhooks za pošiljanje podatkov v vašo lastno sistemo ali povežite obrazce z tisoči storitev preko Zapier.",
-  "NoDatabaseConnections": "Ni konfiguriranih povezav z bazama podatkov"
+  "NoDatabaseConnectionsRoomAdmin": "Povezave z bazo konfigurira administrator. Ko bo baza nastavljena, boste tukaj lahko omogočili izvoz."
 }

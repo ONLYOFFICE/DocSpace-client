@@ -3,13 +3,21 @@
   "content": "We recommend contacting the {{productName}} owner to choose a new Payer.",
   "content_en_sha1_hash": "b5344d317fd4c5a20440282f49db1b7581e966d7",
   "created_at": "2026-04-10T13:53:42.641Z",
-  "updated_at": "2026-04-10T13:53:42.641Z",
+  "updated_at": "2026-04-11T20:50:41.663Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is an error message displayed to a non-owner administrator when the current payer's email is invalid and there's no active subscription. It suggests contacting the {{productName}} owner to select a new payer.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:50:41.663Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/payer-information/index.tsx",
+      "line_number": 110,
+      "context": "if (isNotPaidPeriod) {\n invalidEmailDescription = isOwner\n ? t(\"InvalidEmailWithoutActiveSubscription\", {\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"InvalidEmailWithoutActiveSubscriptionByAdmin\", {\n productName: getBrandName(\"ProductName\"),\n });\n \n return userNotFound + invalidEmailDescription;\n }",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

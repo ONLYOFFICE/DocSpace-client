@@ -3,17 +3,18 @@
   "content": "Delete this room?",
   "content_en_sha1_hash": "efa9534b795643580e429b3ae955bc0e86472b24",
   "created_at": "2026-03-31T15:18:41.884Z",
-  "updated_at": "2026-03-31T15:19:11.688Z",
+  "updated_at": "2026-04-11T21:05:33.820Z",
   "comment": {
-    "text": "This key provides the title for a confirmation dialog asking the user if they want to delete a room. It appears within a dialog when multiple rooms are selected for deletion. Translators should ensure the wording clearly conveys the action of deleting rooms.",
+    "text": "This is the title of a confirmation dialog that appears when a user attempts to delete multiple rooms.",
     "is_auto": true,
-    "updated_at": "2026-03-31T15:19:11.688Z"
+    "updated_at": "2026-04-11T21:05:33.820Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
       "line_number": 213,
-      "context": "if (isTemplate) {\n return `${t(\"Files:DeleteTemplate\")}?`;\n }\n \n if (isRoomDelete) {\n if (selection.length > 1) return t(\"DeleteRoomsTitle\");\n return t(\"DeleteRoomTitle\");\n }\n \n if (isRecycleBinFolder) return t(\"EmptyTrashDialog:DeleteForeverTitle\");",
+      "context": "if (isTemplate) {\n return `${t(\"Files:DeleteTemplateAction\")}?`;\n }\n \n if (isRoomDelete) {\n if (selection.length > 1) return t(\"DeleteRoomsTitle\");\n return t(\"DeleteRoomTitle\");\n }\n \n if (isRecycleBinFolder) return t(\"EmptyTrashDialog:DeleteForeverTitle\");",
       "module": "/packages/client"
     }
   ],

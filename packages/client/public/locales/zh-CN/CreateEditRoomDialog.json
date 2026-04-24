@@ -17,8 +17,12 @@
   "FileLifetimeDescription": "设置文件有效期，此房间中的文件会在定义的时间段后自动删除。有效期从文件上传/创建之日起开始计算。",
   "FilesOlderThan": "超过以下时间的文件：",
   "FormRoomBarDescription": "任何有链接的人都能够访问此房间。外部用户拥有所有文件的填写权限。",
+  "GoToIntegrations": "前往集成",
   "Horizontal": "水平线",
   "Icon": "图标",
+  "NeedMoreIntegrations": "需要更多集成吗？",
+  "NeedMoreIntegrationsDescription": "使用 Webhooks 将数据发送到您自己的系统，或通过 Zapier 将表单连接到数千个服务。",
+  "NoDatabaseConnections": "未配置数据库连接",
   "PeopleSelectorInfo": "只有房间管理员或{{productName}}管理员才能成为房间的所有者",
   "Position": "位置",
   "PublicRoomBarDescription": "任何人都能通过此链接访问该房间。外部用户的访问权限取决于您的设置。",
@@ -41,8 +45,5 @@
   "ViewerInfo": "查看者信息",
   "WatermarkPreview": "水印预览",
   "WatermarkPreviewHelp": "此图像预览将大致展示水印在您的文件中的显示效果",
-  "GoToIntegrations": "前往集成",
-  "NeedMoreIntegrations": "需要更多集成吗？",
-  "NeedMoreIntegrationsDescription": "使用 Webhooks 将数据发送到您自己的系统，或通过 Zapier 将表单连接到数千个服务。",
-  "NoDatabaseConnections": "未配置数据库连接"
+  "NoDatabaseConnectionsRoomAdmin": "数据库连接由管理员进行配置。数据库设置完成后，您将能够在此启用导出功能。"
 }

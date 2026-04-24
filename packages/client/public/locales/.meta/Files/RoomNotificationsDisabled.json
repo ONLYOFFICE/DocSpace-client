@@ -3,11 +3,12 @@
   "content": "Room notifications disabled",
   "content_en_sha1_hash": "66e212657f39607ac6632eb53f57a7c8a6d38fe5",
   "created_at": "2025-05-19T21:30:56.101Z",
-  "updated_at": "2026-04-07T19:35:05.093Z",
+  "updated_at": "2026-04-11T21:08:24.946Z",
   "comment": {
-    "text": "This translation key is used to display a message when room notifications are disabled. It is displayed as an error toast in a notification system, informing the user of their settings choice. Translators should provide a local equivalent that reflects this specific context.",
+    "text": "This is a toast message indicating that notifications for a room have been turned off. It appears briefly to confirm the action.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:39:14.043Z"
+    "updated_at": "2026-04-11T21:08:24.946Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

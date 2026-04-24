@@ -3,13 +3,21 @@
   "content": "Would you like to enable automatic top-ups so your balance never runs out?",
   "content_en_sha1_hash": "4e8a95782e3c4f52d937db0d2d9ae74053cc4d62",
   "created_at": "2026-04-10T13:53:43.989Z",
-  "updated_at": "2026-04-10T13:53:43.989Z",
+  "updated_at": "2026-04-12T08:23:43.470Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a question displayed in a modal dialog, asking the user if they want to enable automatic top-ups for their balance.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:38:47.344Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/wallet/WalletRefilledModal.tsx",
+      "line_number": 117,
+      "context": "1: <span style={{ fontWeight: 600 }} />,\n }}\n />\n </Text>\n </div>\n <Text>{t(\"WouldYouLikeToEnableAutoTopUps\")}</Text>\n \n <AutomaticPaymentsBlock\n onAdditionalSave={onAdditionalSave}\n noMargin\n />",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

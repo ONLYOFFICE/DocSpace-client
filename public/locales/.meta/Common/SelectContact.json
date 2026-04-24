@@ -3,13 +3,21 @@
   "content": "Select contact",
   "content_en_sha1_hash": "5e50ddcd5c222b7f0343923a74dc600d280d51e3",
   "created_at": "2026-04-10T13:53:43.197Z",
-  "updated_at": "2026-04-10T13:53:43.197Z",
+  "updated_at": "2026-04-23T17:24:02.187Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Button label. Appears when no contact is selected, prompting the user to choose one.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:43:44.695Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
+      "line_number": 444,
+      "context": "const currentContact = isFilterDialogVisible\n ? mobileFilterState.selectedContact\n : filterContact;\n \n const contactSelector = !currentContact ? (\n <AddButton label={t(\"SelectContact\")} onClick={onSelectorAddButtonClick} />\n ) : (\n <SelectedItemPure\n key={`${currentContact}`}\n propKey={currentContact.id}\n label={Encoder.htmlDecode(currentContact.displayName ?? \"\")}",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

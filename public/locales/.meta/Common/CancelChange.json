@@ -3,13 +3,21 @@
   "content": "Cancel change",
   "content_en_sha1_hash": "ee482cca4ea179eb40c0a3f042dd6082445ae2a4",
   "created_at": "2026-04-10T13:53:42.176Z",
-  "updated_at": "2026-04-10T13:53:42.176Z",
+  "updated_at": "2026-04-13T14:59:06.024Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a button label. It allows users to cancel a pending change related to storage settings.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:57:51.201Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StorageWarning.tsx",
+      "line_number": 92,
+      "context": "textDecoration=\"underline dashed\"\n onClick={isCancelLoading ? () => {} : onCancelChange}\n fontWeight={600}\n color=\"accent\"\n >\n {t(\"CancelChange\")}\n </Link>\n {isCancelLoading ? (\n <div className={styles.loaderContainer}>\n <Loader\n color=\"\"",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

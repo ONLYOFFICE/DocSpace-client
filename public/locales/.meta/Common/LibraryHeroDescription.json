@@ -3,13 +3,21 @@
   "content": "Pick a template, edit and fill it in, then collect and analyze responses with AI agents",
   "content_en_sha1_hash": "012f1a828de9e96d7d886497d65bc76f3223234c",
   "created_at": "2026-03-31T15:18:14.806Z",
-  "updated_at": "2026-04-08T06:11:53.535Z",
+  "updated_at": "2026-04-11T20:50:14.819Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a descriptive paragraph displayed on the Library landing page, explaining the functionality of picking, editing, filling, collecting, and analyzing responses using AI agents.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:50:14.819Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/library-landing/HeroSection.tsx",
+      "line_number": 73,
+      "context": "return (\n <section className={styles.hero}>\n <h1 className={styles.heroTitle}>{t(\"Common:LibraryHeroTitle\")}</h1>\n <p className={styles.heroDescription}>\n {t(\"Common:LibraryHeroDescription\")}\n </p>\n \n <HeroSearchBar langId={langId} roomId={roomId} libraryId={libraryId} />\n \n <div className={styles.heroContent}>",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -50,13 +58,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The verb 'επεξεργαστείτε' is reflexive (meaning 'to edit oneself'), whereas the English 'edit' refers to editing the template. The correct non-reflexive form is 'επεξεργαστείτε το' or simply 'επεξεργαστείτε' used as a transitive verb, but in this context, 'επεξεργαστείτε' implies the user is editing themselves.",
-          "suggestion": "Επιλέξτε ένα πρότυπο, επεξεργαστείτε το και συμπληρώστε το, και στη συνέχεια συλλέξτε και αναλύστε τις απαντήσεις με πράκτορες AI"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -110,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'aprietiet' is a misspelling/incorrect form of 'apstrādājiet' (process) or 'aizpildiet' (fill in). In Latvian, 'aprietiet' is not a standard verb for 'to process' or 'to fill in' in this context.",
-          "suggestion": "Izvēlieties šablonu, rediējiet un aizpildiet to, pēc tam savāciet un analizējiet atbildes ar AI agentiem"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -170,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The noun 'predlago' is in the wrong grammatical case (accusative instead of genitive/partitive or incorrect declension for the imperative context) and the pronoun 'jo' (feminine) does not match the gender of 'predlog' (masculine).",
-          "suggestion": "Izberite predlogo, uredite jo in napolnite, nato zberite in analizirajte odgovore z AI agenti"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

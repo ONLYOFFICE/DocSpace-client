@@ -3,11 +3,12 @@
   "content": "Data reassignment",
   "content_en_sha1_hash": "a4efa2d93573777f5a04956a929f586e12bbe4ac",
   "created_at": "2025-05-19T21:30:56.735Z",
-  "updated_at": "2026-04-07T19:35:05.060Z",
+  "updated_at": "2026-04-11T21:05:14.803Z",
   "comment": {
-    "text": "This translation key is used to display a confirmation message when reassigning data in a dialogue. The text \"Data Reassignment\" appears in a header within the dialog and is translated based on the specified usage contexts.",
+    "text": "This is the title of a dialog window that appears when data needs to be reassigned, for example, when changing ownership of documents.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:18.203Z"
+    "updated_at": "2026-04-11T21:05:14.803Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

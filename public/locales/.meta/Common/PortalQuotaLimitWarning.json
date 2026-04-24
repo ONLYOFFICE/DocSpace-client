@@ -3,17 +3,18 @@
   "content": "{{productName}} quota limit is about to be reached.",
   "content_en_sha1_hash": "12cfe976ee502dd3f370293eb50edef4bf9fb538",
   "created_at": "2026-02-18T14:56:07.340Z",
-  "updated_at": "2026-04-10T08:58:38.051Z",
+  "updated_at": "2026-04-12T04:16:15.591Z",
   "comment": {
-    "text": "This key displays a warning message indicating that the user is approaching the quota limit for a product. It appears in the UI, likely as a notification or alert, to inform the user about the impending limit and potentially prevent unexpected disruptions. The `productName` variable will be dynamically replaced with the name of the product.",
+    "text": "This is a dialog header that appears when the portal's storage quota is nearing its limit. `{{productName}}` will be replaced with the product's brand name.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:15:19.113Z"
+    "updated_at": "2026-04-11T20:46:14.622Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/Bar/index.tsx",
-      "line_number": 74,
-      "context": ": t(\"YourFurtherEditsNotSaved\"),\n header: initial\n ? t(\"PortalQuotaReached\", {\n productName: t(\"ProductName\"),\n })\n : t(\"PortalQuotaLimitWarning\", {\n productName: t(\"ProductName\"),\n }),\n };\n }\n };",
+      "line_number": 75,
+      "context": ": t(\"YourFurtherEditsNotSaved\"),\n header: initial\n ? t(\"PortalQuotaReached\", {\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"PortalQuotaLimitWarning\", {\n productName: getBrandName(\"ProductName\"),\n }),\n };\n }\n };",
       "module": "/packages/doceditor"
     }
   ],
@@ -45,13 +46,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech translation 'kvóta se blíží limitu' is semantically awkward and logically flawed (it translates to 'the quota is approaching the limit', whereas the quota IS the limit). It should state that the limit is being reached or the quota is almost exhausted.",
-          "suggestion": "{{productName}} limit kvóty se blíží vyčerpání."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -75,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation uses the past tense 'on lähestytty' (has been approached/reached), which implies the limit has already been hit. The English text 'is about to be reached' indicates an impending limit (future/approaching).",
-          "suggestion": "{{productName}} -tuotteen käyttöraja on lähestymässä."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -177,25 +166,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation says the limit 'is about to be reached' (na zahiri dosežen), which is semantically incorrect and uses a non-existent/incorrect word 'zahiri'. It should convey that the limit is approaching.",
-          "suggestion": "{{productName}} kvota je skoraj dosežena."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Kutia e kuotës' means 'The quota box', which is a literal and incorrect translation of 'quota limit'. In this context, 'limit' refers to a threshold, not a physical box.",
-          "suggestion": "Limiti i kuotës {{productName}} është gati të arrihet."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

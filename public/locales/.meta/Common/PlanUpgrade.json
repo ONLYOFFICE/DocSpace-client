@@ -3,13 +3,21 @@
   "content": "Plan upgrade",
   "content_en_sha1_hash": "a603698bdf69ed201f6228cd608d40a920b6355d",
   "created_at": "2026-04-10T13:53:43.031Z",
-  "updated_at": "2026-04-10T13:53:43.031Z",
+  "updated_at": "2026-04-12T04:26:13.522Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is the title of a modal dialog. It appears when a user is confirming an upgrade to their subscription plan.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:46:21.834Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/UpdatePlanButtonContainer.tsx",
+      "line_number": 360,
+      "context": "<ModalDialog\n visible={isVisiblePaymentConfirm}\n onClose={onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"PlanUpgrade\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <StyledModalBody>\n <Text>\n <CommonTrans\n i18nKey=\"SwitchPlan\"",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

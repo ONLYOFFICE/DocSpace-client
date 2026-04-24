@@ -3,11 +3,12 @@
   "content": "The selected guests will be moved to the {{membersSection}} section and assigned the <strong>'{{ secondType }}'</strong> type. {{productName}} admins can access {{productName}} settings, manage and archive rooms, invite new users and assign roles below their level. {{productName}} admins have access to the {{documentsSection}} section.",
   "content_en_sha1_hash": "88ee3565e7278333f18e98758425d1d926d181c4",
   "created_at": "2025-05-19T21:30:56.920Z",
-  "updated_at": "2026-04-07T19:35:05.050Z",
+  "updated_at": "2026-04-11T21:04:03.284Z",
   "comment": {
-    "text": "The \"ChangeGuestsTypeToAdminMulti\" translation key describes the action of assigning a guest to an admin role in the [productName] settings, moving them to the {{membersSection}} section, and granting access to various features. This text is used in a dialog or button that allows admins to manage user types.",
+    "text": "This is a message displayed in a dialog when changing multiple guests' user type to \"Admin\". It informs the user about the new user type and the permissions associated with it. `{{membersSection}}` refers to a section name, `{{secondType}}` is the new user type (\"Admin\"), `{{productName}}` is the product name, and `{{documentsSection}}` is another section name.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:51.818Z"
+    "updated_at": "2026-04-11T21:04:03.284Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

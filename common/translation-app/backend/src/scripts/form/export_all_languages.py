@@ -76,7 +76,7 @@ def get_available_languages(project_name: str) -> List[str]:
     
     languages = []
     for entry in project_path.iterdir():
-        if entry.is_dir() and entry.name != ".meta":
+        if entry.is_dir() and entry.name != ".meta" and entry.name != ".constants":
             languages.append(entry.name)
     
     return sorted(languages)

@@ -3,17 +3,18 @@
   "content": "Enable two-factor authentication",
   "content_en_sha1_hash": "38c4b35ac7872cc3833e638284e1ef376c3d82fc",
   "created_at": "2025-08-04T07:29:46.183Z",
-  "updated_at": "2026-04-09T02:29:00.889Z",
+  "updated_at": "2026-04-11T21:23:27.193Z",
   "comment": {
-    "text": "This key provides the title for a section related to login history, specifically prompting users to \"Enable two-factor authentication.\" It appears as a subheader within the security settings section of the portal, likely guiding users towards enhanced account protection.",
+    "text": "This is the title of a campaign banner promoting two-factor authentication. It appears on the login history page to encourage users to enable this security feature.",
     "is_auto": true,
-    "updated_at": "2025-08-04T08:11:52.261Z"
+    "updated_at": "2026-04-11T21:23:27.193Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/hooks/useTwoFactorCampaignBanner.ts",
-      "line_number": 58,
-      "context": "const loginHistoryTranslates = useMemo(\n () => ({\n Header: t(\"LoginHistoryCampaignHeader\", {\n productName: t(\"Common:ProductName\"),\n }),\n SubHeader: t(\"LoginHistoryCampaignTitle\"),\n Text: t(\"LoginHistoryCampaignText\"),\n Link: isMobile\n ? \"/portal-settings/security/access-portal/tfa\"\n : \"/portal-settings/security/access-portal\",\n }),",
+      "line_number": 59,
+      "context": "const loginHistoryTranslates = useMemo(\n () => ({\n Header: t(\"LoginHistoryCampaignHeader\", {\n productName: getBrandName(\"ProductName\"),\n }),\n SubHeader: t(\"LoginHistoryCampaignTitle\"),\n Text: t(\"LoginHistoryCampaignText\"),\n Link: isMobile\n ? \"/portal-settings/security/access-portal/tfa\"\n : \"/portal-settings/security/access-portal\",\n }),",
       "module": "/packages/shared"
     }
   ],

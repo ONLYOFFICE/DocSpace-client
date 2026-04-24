@@ -38,6 +38,8 @@ import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 import { DropDown } from "@docspace/ui-kit/components/drop-down";
 import { isMobileDevice } from "@docspace/shared/utils";
+import { getBrandName } from "@docspace/shared/constants/brands";
+
 import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 
 import type { TProviderModelInfo } from "@docspace/shared/api/ai/types";
@@ -233,7 +235,7 @@ export const ModelSelectorPopup = ({
             </Text>
             <HelpButton
               tooltipContent={t("AISettings:RecommendedModelsTooltip", {
-                productName: t("Common:ProductName"),
+                productName: getBrandName("ProductName"),
               })}
               place="bottom"
               size={12}

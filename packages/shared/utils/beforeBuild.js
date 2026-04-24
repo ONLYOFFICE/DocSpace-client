@@ -54,7 +54,7 @@ const beforeBuild = async (
     });
 
     const cultures = fileInDir
-      .filter((dirent) => dirent.isDirectory())
+      .filter((dirent) => dirent.isDirectory() && !dirent.name.startsWith("."))
       .map((d) => d.name);
 
     return cultures;
@@ -65,6 +65,7 @@ const beforeBuild = async (
       const res = path.resolve(dir, dirent.name);
 
       if (dirent.isDirectory()) {
+        if (dirent.name.startsWith(".")) continue;
         yield* getFiles(res);
       } else {
         yield { path: res, fileName: dirent.name };

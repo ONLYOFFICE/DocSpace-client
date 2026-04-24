@@ -3,13 +3,27 @@
   "content": "Contact",
   "content_en_sha1_hash": "b37456c4530be810dc040f50da72eda09addfb0a",
   "created_at": "2026-04-10T13:53:42.290Z",
-  "updated_at": "2026-04-10T13:53:42.290Z",
+  "updated_at": "2026-04-13T14:59:06.029Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label for a filter option and a table column header in the transaction history. It refers to the contact associated with a transaction.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:56:33.522Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/FilterPanel.tsx",
+      "line_number": 134,
+      "context": "<div>{datesComponent}</div>\n </div>\n <div className={styles.filterDialogDivider} />\n <div className={styles.filterDialogSection}>\n <Text fontWeight={600} fontSize=\"15px\">\n {t(\"Contact\")}\n </Text>\n <div>{contactSelector}</div>\n </div>\n </div>\n </ModalDialog.Body>",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/TableView/TableHeader.tsx",
+      "line_number": 77,
+      "context": "enable: true,\n resizable: true,\n minWidth: 120,\n },\n {\n key: \"Contact\",\n title: t(\"Contact\"),\n enable: true,\n resizable: true,\n minWidth: 120,\n },",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

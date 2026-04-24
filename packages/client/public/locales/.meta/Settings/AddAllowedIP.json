@@ -3,11 +3,12 @@
   "content": "Add allowed IP address",
   "content_en_sha1_hash": "af9c05a9deff4df886dbc45b353bc08a5f221460",
   "created_at": "2025-05-19T21:30:50.310Z",
-  "updated_at": "2026-04-09T04:32:00.204Z",
+  "updated_at": "2026-04-11T21:26:03.819Z",
   "comment": {
-    "text": "\"This translation key is used for the 'Add Allowed IP address' label in the access portal settings, which appears as a button label.\"",
+    "text": "This is the label for a button that adds an IP address to a list of allowed addresses for portal access.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:56.633Z"
+    "updated_at": "2026-04-11T21:26:03.819Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -45,13 +46,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical error in number agreement: 'povolenou' is singular, but 'adresy' is plural, making the phrase nonsensical. It should be 'povolenou IP adresu' (singular) or 'povolené IP adresy' (plural). Given the context of a button to add an entry, singular is preferred.",
-          "suggestion": "Přidat povolenou IP adresu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -159,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation uses 'අ.ජා.කෙ.' which is an incorrect and non-standard abbreviation for IP address. In technical Sinhala, 'IP' is typically kept in English or transliterated, as the provided abbreviation does not convey the technical meaning of 'Internet Protocol'.",
-          "suggestion": "අවසර දෙන IP ලිපින එක් කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

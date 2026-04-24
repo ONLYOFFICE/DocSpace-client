@@ -3,13 +3,21 @@
   "content": "Customize your {{planName}} plan",
   "content_en_sha1_hash": "dedf0379b4d790a1161df6c27673df411d75ce35",
   "created_at": "2026-04-10T13:53:42.113Z",
-  "updated_at": "2026-04-10T13:53:42.113Z",
+  "updated_at": "2026-04-11T20:57:59.560Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a suggestion message displayed to users with a paid plan. It encourages them to customize their plan, with `{{planName}}` representing the name of their current plan.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:57:59.560Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/PaymentContainer.tsx",
+      "line_number": 141,
+      "context": "}\n \n if (isPaidPeriod && !isNonProfit) {\n return (\n <Text fontSize=\"16px\" isBold className={styles.paymentInfoSuggestion}>\n <CommonTrans i18nKey=\"BusinessSuggestion\" values={{ planName: tariffPlanTitle }} />\n </Text>\n );\n }\n \n if (isNotPaidPeriod) {",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

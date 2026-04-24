@@ -3,13 +3,21 @@
   "content": "<1>Previous plan:</1> {{amount}} <2>({{price}}/month)</2>",
   "content_en_sha1_hash": "cb807c257bff1837397603e3ebded1258e038895",
   "created_at": "2026-04-10T13:53:43.062Z",
-  "updated_at": "2026-04-10T13:53:43.062Z",
+  "updated_at": "2026-04-12T03:53:54.707Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This text appears in a dialog informing the user about a deactivated storage plan. It displays the details of the previous plan, with `{{amount}}` showing the storage size and `{{price}}` showing the monthly cost.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:45:58.366Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/dialogs/StorageTariffDeactivated.tsx",
+      "line_number": 111,
+      "context": "<ModalDialog.Body>\n <Text fontWeight={600}>{t(\"StorageTariffDeactivated\")}</Text>\n <br />\n <Text as=\"span\">\n <CommonTrans\n i18nKey=\"PreviousPlan\"\n \n values={{\n amount: `${previousStoragePlanSize} ${t(\"Gigabyte\")}`,\n price: formatWalletCurrency(totalPrice, 2),\n }}",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

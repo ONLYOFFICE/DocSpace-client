@@ -3,17 +3,18 @@
   "content": "Select from {{productName}}",
   "content_en_sha1_hash": "3365d131cf57bbe561f947df5ac7dcf4feb0ca97",
   "created_at": "2025-05-19T21:30:48.440Z",
-  "updated_at": "2026-04-10T08:58:38.049Z",
+  "updated_at": "2026-04-12T21:58:38.379Z",
   "comment": {
-    "text": "This translation key is used to display a message prompting users to select from a portal. It appears when selecting files or actions in certain contexts and asks users to choose from a list of options related to a product named \"Product Name\".",
+    "text": "This is a button label or dialog title that appears when selecting a file from the portal. `{{productName}}` will be replaced with the brand name of the product (e.g., ONLYOFFICE DocSpace).",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:52:08.672Z"
+    "updated_at": "2026-04-11T20:43:36.273Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 59,
-      "context": "if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (isFormRoom) {\n return t(\"Common:SelectFromPortal\", {\n productName: t(\"Common:ProductName\"),\n });\n }\n \n if (filterParam === FilesSelectorFilterTypes.DOCX)",
+      "line_number": 60,
+      "context": "if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (isFormRoom) {\n return t(\"Common:SelectFromPortal\", {\n productName: getBrandName(\"ProductName\"),\n });\n }\n \n if (filterParam === FilesSelectorFilterTypes.DOCX)",
       "module": "/packages/client"
     }
   ],
@@ -63,13 +64,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Spanish translation omits the preposition 'from' (de), changing the meaning from 'Select from {{productName}}' to 'Select {{productName}}'.",
-          "suggestion": "Seleccionar de {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -81,13 +76,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The preposition 'de' is used incorrectly in French. 'Sélectionner de' implies selecting something out of a material or a source, whereas 'Select from [List/Portal]' should be 'Sélectionner dans [Portal]' or 'Sélectionner parmi [Portal]'.",
-          "suggestion": "Sélectionner dans {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -165,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'තෝදන්න' (thodanna) is a misspelling of 'තෝරන්න' (thoranna). 'තෝදන්න' is not a valid word for 'select' in Sinhala.",
-          "suggestion": "{{productName}} වෙතින් තෝරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -183,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The preposition 'from' (iz) is missing, which changes the meaning from 'Select from [Product]' to 'Select [Product]'.",
-          "suggestion": "Izberi iz {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

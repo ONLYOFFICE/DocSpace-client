@@ -3,18 +3,19 @@
   "content": "PB",
   "content_en_sha1_hash": "a092b2d4c9d52807932bfedae96b01210db7e06b",
   "created_at": "2025-05-19T21:30:47.361Z",
-  "updated_at": "2026-04-08T02:45:55.635Z",
+  "updated_at": "2026-04-13T14:59:06.030Z",
   "comment": {
-    "text": "This translation key is used to display \"Petabyte\" as a unit of measurement for file size. It appears in a list of byte units on a page where file sizes are being displayed, and is used when the selected value exceeds 1 petabyte.",
+    "text": "A short label for the unit of digital information, Petabyte. It appears in contexts where storage sizes are displayed, such as billing or storage usage reports.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:02.138Z"
+    "updated_at": "2026-04-11T20:46:23.702Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 710,
-      "context": "t(\"Common:Bytes\"),\n t(\"Common:Kilobyte\"),\n t(\"Common:Megabyte\"),\n t(\"Common:Gigabyte\"),\n t(\"Common:Terabyte\"),\n t(\"Common:Petabyte\"),\n t(\"Common:Exabyte\"),\n ];\n \n if (bytes <= 0) return `${`0 ${t(\"Common:Bytes\")}`}`;",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/billing/utils/common.ts",
+      "line_number": 55,
+      "context": "t(\"Common:Bytes\"),\n t(\"Common:Kilobyte\"),\n t(\"Common:Megabyte\"),\n t(\"Common:Gigabyte\"),\n t(\"Common:Terabyte\"),\n t(\"Common:Petabyte\"),\n t(\"Common:Exabyte\"),\n ];\n \n if (bytes <= 0) return `${`0 ${t(\"Bytes\")}`}`;",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English source is the abbreviation 'PB', but the Arabic translation provides the full word 'بيتابايت' (Petabyte). In a list of units where other entries might be abbreviated, this inconsistency can be problematic, though the primary issue is that 'PB' is a specific symbol/abbreviation and 'بيتابايت' is the full name.",
-          "suggestion": "PB"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -147,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'PO' is incorrect for the unit 'Petabyte'. The standard SI abbreviation for Petabyte is 'PB'. 'PO' does not represent this unit in Romanian or any standard technical notation.",
-          "suggestion": "PB"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

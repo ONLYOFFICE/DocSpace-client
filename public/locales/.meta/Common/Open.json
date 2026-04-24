@@ -3,13 +3,26 @@
   "content": "Open",
   "content_en_sha1_hash": "cf9b77061f7b3126b49d50a6fa68f7ca8c26b7a3",
   "created_at": "2026-03-20T09:07:38.471Z",
-  "updated_at": "2026-04-08T03:34:10.837Z",
+  "updated_at": "2026-04-23T17:24:02.051Z",
   "comment": {
-    "text": "This key is used to display the text \"Open\" on a button, likely within a version row in the version history section. It allows users to open a file associated with the version. Translators should ensure the translation accurately conveys the action of opening a file.",
+    "text": "This is a button label that allows users to open a file or folder. It appears in various contexts, such as confirming an AI agent's action or within a version history context menu.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:16:11.105Z"
+    "updated_at": "2026-04-11T20:47:16.140Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/ToolCallMessage/open-file-confirm-dialog/index.tsx",
+      "line_number": 109,
+      "context": "<ModalDialog.Footer>\n <div className={styles.toolCallFooter}>\n <div className={styles.buttonsBlockContainer}>\n <Button\n primary\n label={t(\"Open\")}\n onClick={onOpenAction}\n scale={isMobile()}\n size={ButtonSize.normal}\n data-testid=\"open-file-button\"\n />",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/uploader/index.tsx",
+      "line_number": 328,
+      "context": "href={folderUrl}\n target=\"_blank\"\n rel=\"noopener noreferrer\"\n className={styles.toastLink}\n >\n {getCommonTranslation(\"Open\")}\n </a>\n </>\n )}\n </>,\n getCommonTranslation(\"Done\"),",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/pages/VersionHistory/Section/Body/VersionRow.js",
       "line_number": 205,
@@ -18,26 +31,26 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 142,
-      "context": "getFolderLink,\n manageFormFilling,\n removeSharedFolderOrFile,\n } from \"@docspace/shared/api/files\";\n \n import { checkDialogsOpen } from \"@docspace/shared/utils/checkDialogsOpen\";\n import { hasOwnProperty } from \"@docspace/shared/utils/object\";\n import { createLoader } from \"@docspace/shared/utils/createLoader\";\n import {\n FILLING_STATUS_ID,\n SHARED_WITH_ME_PATH,",
+      "line_number": 2076,
+      "context": "disabled: false,\n },\n withOpen && {\n id: \"option_open\",\n key: \"open\",\n label: t(\"Open\"),\n icon: FolderReactSvgUrl,\n onClick: () => this.onOpenFolder(item, t),\n disabled:\n !this.treeFoldersStore.isFavoritesFolder &&\n !this.treeFoldersStore.isRecentFolder &&",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 142,
-      "context": "getFolderLink,\n manageFormFilling,\n removeSharedFolderOrFile,\n } from \"@docspace/shared/api/files\";\n \n import { checkDialogsOpen } from \"@docspace/shared/utils/checkDialogsOpen\";\n import { hasOwnProperty } from \"@docspace/shared/utils/object\";\n import { createLoader } from \"@docspace/shared/utils/createLoader\";\n import {\n FILLING_STATUS_ID,\n SHARED_WITH_ME_PATH,",
+      "line_number": 2076,
+      "context": "disabled: false,\n },\n withOpen && {\n id: \"option_open\",\n key: \"open\",\n label: t(\"Open\"),\n icon: FolderReactSvgUrl,\n onClick: () => this.onOpenFolder(item, t),\n disabled:\n !this.treeFoldersStore.isFavoritesFolder &&\n !this.treeFoldersStore.isRecentFolder &&",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 142,
-      "context": "getFolderLink,\n manageFormFilling,\n removeSharedFolderOrFile,\n } from \"@docspace/shared/api/files\";\n \n import { checkDialogsOpen } from \"@docspace/shared/utils/checkDialogsOpen\";\n import { hasOwnProperty } from \"@docspace/shared/utils/object\";\n import { createLoader } from \"@docspace/shared/utils/createLoader\";\n import {\n FILLING_STATUS_ID,\n SHARED_WITH_ME_PATH,",
+      "line_number": 2076,
+      "context": "disabled: false,\n },\n withOpen && {\n id: \"option_open\",\n key: \"open\",\n label: t(\"Open\"),\n icon: FolderReactSvgUrl,\n onClick: () => this.onOpenFolder(item, t),\n disabled:\n !this.treeFoldersStore.isFavoritesFolder &&\n !this.treeFoldersStore.isRecentFolder &&",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 142,
-      "context": "getFolderLink,\n manageFormFilling,\n removeSharedFolderOrFile,\n } from \"@docspace/shared/api/files\";\n \n import { checkDialogsOpen } from \"@docspace/shared/utils/checkDialogsOpen\";\n import { hasOwnProperty } from \"@docspace/shared/utils/object\";\n import { createLoader } from \"@docspace/shared/utils/createLoader\";\n import {\n FILLING_STATUS_ID,\n SHARED_WITH_ME_PATH,",
+      "line_number": 2076,
+      "context": "disabled: false,\n },\n withOpen && {\n id: \"option_open\",\n key: \"open\",\n label: t(\"Open\"),\n icon: FolderReactSvgUrl,\n onClick: () => this.onOpenFolder(item, t),\n disabled:\n !this.treeFoldersStore.isFavoritesFolder &&\n !this.treeFoldersStore.isRecentFolder &&",
       "module": "/packages/client"
     },
     {
@@ -51,6 +64,24 @@
       "line_number": 99,
       "context": "setProtocol(window?.location?.protocol);\n }, []);\n \n const contextOptionsProps = [\n {\n label: t(\"Common:Open\"),\n key: \"space_open\",\n icon: ExternalLinkIcon,\n onClick: () => window.open(`${protocol}//${item.domain}/`, \"_blank\"),\n },\n {",
       "module": "/packages/management"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
+      "line_number": 92,
+      "context": "const getOpenItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_open\",\n key: \"open\",\n label: t(\"Common:Open\"),\n icon: FolderReactSvgUrl,\n onClick: () => openFolder(i.id, i.title),\n disabled: false,\n };\n },",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
+      "line_number": 92,
+      "context": "const getOpenItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_open\",\n key: \"open\",\n label: t(\"Common:Open\"),\n icon: FolderReactSvgUrl,\n onClick: () => openFolder(i.id, i.title),\n disabled: false,\n };\n },",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsContextMenu.ts",
+      "line_number": 322,
+      "context": "if (onOpen) {\n model.push({\n id: \"option_open-folder\",\n key: \"open-folder\",\n label: t(\"Common:Open\"),\n icon: EyeReactSvgUrl,\n onClick: onOpen,\n disabled: false,\n });\n }",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -69,13 +100,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Açmaq' is an infinitive verb (To open). For a button label, the imperative form 'Aç' is the standard and correct way to convey the action in Azerbaijani.",
-          "suggestion": "Aç"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {

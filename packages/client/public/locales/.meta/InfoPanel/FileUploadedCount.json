@@ -3,23 +3,24 @@
   "content": "Files added ({{count}}).",
   "content_en_sha1_hash": "6967f445fbc05fa8f07f7d586b8da6d95254bbeb",
   "created_at": "2025-05-19T21:30:54.829Z",
-  "updated_at": "2026-04-07T19:35:05.114Z",
+  "updated_at": "2026-04-11T21:13:27.872Z",
   "comment": {
-    "text": "This translation key displays a message indicating the number of files uploaded, used to provide feedback on file addition in a history view. It appears as a count value within the \"Files added\" section of the UI.",
+    "text": "This is a notification message displayed in the information panel when multiple files have been uploaded. The `{{count}}` variable represents the number of files uploaded.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:02.150Z"
+    "updated_at": "2026-04-11T21:13:27.872Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
       "line_number": 54,
-      "context": "switch (feed.action.key) {\n case FeedActionKeys.FileCreated:\n return t(\"InfoPanel:FileCreated\");\n case FeedActionKeys.FileUploaded:\n if (hasRelatedItems)\n return t(\"InfoPanel:FileUploadedCount\", {\n count,\n });\n return t(\"InfoPanel:FileUploaded\");\n case FeedActionKeys.UserFileUpdated:\n return t(\"InfoPanel:UserFileUpdated\");",
+      "context": "switch (feed.action.key) {\n case FeedActionKeys.FileCreated:\n return t(\"InfoPanel:FileCreatedNotify\");\n case FeedActionKeys.FileUploaded:\n if (hasRelatedItems)\n return t(\"InfoPanel:FileUploadedCount\", {\n count,\n });\n return t(\"InfoPanel:FilesAddedNotify\");\n case FeedActionKeys.UserFileUpdated:\n return t(\"InfoPanel:UserFileUpdated\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 48,
-      "context": "switch (feed.action.key) {\n case FeedActionKeys.FileCreated:\n return t(\"InfoPanel:FileCreated\");\n case FeedActionKeys.FileUploaded:\n if (hasRelatedItems)\n return t(\"InfoPanel:FileUploadedCount\", {\n count,\n });\n return t(\"InfoPanel:FileUploaded\");\n case FeedActionKeys.UserFileUpdated:\n return t(\"InfoPanel:UserFileUpdated\");",
+      "context": "switch (feed.action.key) {\n case FeedActionKeys.FileCreated:\n return t(\"InfoPanel:FileCreatedNotify\");\n case FeedActionKeys.FileUploaded:\n if (hasRelatedItems)\n return t(\"InfoPanel:FileUploadedCount\", {\n count,\n });\n return t(\"InfoPanel:FilesAddedNotify\");\n case FeedActionKeys.UserFileUpdated:\n return t(\"InfoPanel:UserFileUpdated\");",
       "module": "/packages/client"
     }
   ],

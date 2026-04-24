@@ -3,11 +3,12 @@
   "content": "Enable this setting to disable downloads and content copying for users with the \"{{role}}\" role.",
   "content_en_sha1_hash": "d2ad963c095604e49bab1866809e7b2772f3a3e1",
   "created_at": "2025-05-19T21:30:56.829Z",
-  "updated_at": "2026-04-07T19:35:05.057Z",
+  "updated_at": "2026-04-11T21:04:33.373Z",
   "comment": {
-    "text": "This translation key is used to display a descriptive text that explains the purpose of a setting to restrict downloads and content copying, particularly for users with a specific role. It appears in a dialog box where users can adjust this setting.",
+    "text": "This is a descriptive text within a dialog, explaining the \"Restrict Copy and Download\" setting. It informs the user that enabling this option will disable downloads and content copying for users assigned the role specified by the `{{role}}` variable.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:04.499Z"
+    "updated_at": "2026-04-11T21:04:33.373Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

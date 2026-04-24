@@ -20,6 +20,8 @@
   "GetCode": "Obține codul",
   "GetSuitableApp": "Obțineți o aplicație potrivită",
   "GetSuitableAppDescription": "Folosiți o aplicație compatibilă, cum ar fi Google Authenticator pentru <1>Android</1> și <4>iOS</4>, sau Authenticator pentru <8>Windows Phone</8>.",
+  "InviteLinkQuotaErrorBody": "Înregistrarea prin link nu mai este disponibilă, deoarece limita a fost depășită.",
+  "InviteQuotaErrorCustomizedBody": "Veți fi redirecționat(ă) către pagina <1>Login</1> în 10 secunde.",
   "LoginRegistryButton": "Înregistrați-vă",
   "Newsletter": "Doresc să mă abonez la buletinul informativ {{organizationName}}",
   "PassworResetTitle": "Acum puteți crea o parolă nouă",
@@ -37,7 +39,5 @@
   "TfaSubTitle": "Urmați aceste pașii simpli pentru a continua să lucrați în acest {{productName}}:",
   "TfaTitle": "Autentificarea cu doi factori este activată pentru accesul securizat",
   "VerifyConnection": "Verificați conexiunea",
-  "VerifyConnectionDescription": "Introduceți codul din 6 cifre generat de aplicația dvs de autentificare în câmpul de mai jos pentru a finaliza configurarea.",
-  "InviteLinkQuotaErrorBody": "Înregistrarea prin link nu mai este disponibilă, deoarece limita a fost depășită.",
-  "InviteQuotaErrorCustomizedBody": "Veți fi redirecționat(ă) către pagina <1>Login</1> în 10 secunde."
+  "VerifyConnectionDescription": "Introduceți codul din 6 cifre generat de aplicația dvs de autentificare în câmpul de mai jos pentru a finaliza configurarea."
 }

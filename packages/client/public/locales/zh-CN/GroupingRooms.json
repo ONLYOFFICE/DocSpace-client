@@ -8,7 +8,7 @@
   "DisablingRoomGroups": "禁用房间组",
   "DisablingRoomGroupsDescription": "群组将被保存但隐藏。请在“个人资料”>“文件管理”中重新启用。",
   "EditRoomGroups": "编辑房间组",
-  "EmptyGroupDescription": "此处没有房间。请尝试添加房间或移除此组。",
+  "EmptyGroupRoomsDescription": "此处没有房间。请尝试添加房间或移除此组。",
   "GroupHasBeenDeleted": "群组已被删除",
   "GroupIcon": "群组图标",
   "GroupIsEmpty": "群组为空",

@@ -3,11 +3,12 @@
   "content": "Storage quota successfully set to default.",
   "content_en_sha1_hash": "b6fea99a34e64a58d31ebe5913e5b51c86e315db",
   "created_at": "2025-05-19T21:30:49.128Z",
-  "updated_at": "2026-04-07T22:18:29.167Z",
+  "updated_at": "2026-04-12T17:20:52.256Z",
   "comment": {
-    "text": "This translation key is used for a success message when setting a storage quota to its default value, typically displayed after a button click or operation in the FilesActionsStore and SpaceQuota components. It informs users that the quota has been successfully reset to its original size.",
+    "text": "This is a toast message confirming that the storage quota has been successfully reverted to its default setting.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:38:23.334Z"
+    "updated_at": "2026-04-11T20:41:57.533Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -75,13 +76,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'ποσόστωση' is a non-existent or incorrect term for 'quota' in Greek. The correct technical term is 'quota' (transliterated) or 'όριο' (limit). Additionally, 'αποθ. χώρου' is an abbreviation for 'storage space' which is acceptable but 'ποσόστωση' makes the sentence semantically incorrect.",
-          "suggestion": "Το όριο αποθηκευτικού χώρου ορίστηκε επιτυχώς στην προεπιλεγμένη τιμή."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -195,13 +190,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Складишна' (Skladišna) is a literal translation of 'Storage' but in the context of IT/Cloud services (quota/disk space), 'Простор' or 'Квота простора' is the correct technical term. 'Складишна' refers to physical warehouse storage.",
-          "suggestion": "Квота простора је успешно враћена на подразумевану."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

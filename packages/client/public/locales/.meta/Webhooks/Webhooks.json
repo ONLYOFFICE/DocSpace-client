@@ -3,29 +3,30 @@
   "content": "Webhooks",
   "content_en_sha1_hash": "fdfe2da709ca2c4f3b21ce6ad01969c1158e9db6",
   "created_at": "2025-05-19T21:30:49.888Z",
-  "updated_at": "2026-04-08T18:53:00.793Z",
+  "updated_at": "2026-04-23T17:24:01.934Z",
   "comment": {
-    "text": "The translation key \"Webhooks\" is used to display the label for a plugin that manages webhooks functionality. It appears in a portal settings category and likely serves as a button or section title, guiding users through webhook configurations or management.",
+    "text": "This is a page title and a card title in the Developer Tools settings. It refers to the functionality for configuring webhooks.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:44.481Z"
+    "updated_at": "2026-04-11T21:28:04.143Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DeveloperToolsHeader.tsx",
-      "line_number": 75,
+      "line_number": 90,
       "context": "}\n if (pathname.includes(\"/developer-tools/javascript-sdk\"))\n return t(\"Settings:EmbedSDK\");\n if (pathname.includes(\"/developer-tools/plugin-sdk\"))\n return t(\"WebPlugins:PluginSDK\");\n if (pathname.includes(\"/developer-tools/webhooks\")) return t(\"Webhooks:Webhooks\");\n if (pathname.includes(\"/developer-tools/oauth\")) return t(\"OAuth:OAuth\");\n return t(\"Common:DeveloperTools\");\n };\n \n const isSubPage = (pathname: string): boolean => {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 103,
-      "context": "color={globalColors.secondGreen}\n linkTitle={t(\"Common:ReadInstructions\")}\n />\n <Card\n icon={<WebhookSvg />}\n title={t(\"Webhooks:Webhooks\")}\n description={t(\"Settings:WebhooksDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}\n url=\"/developer-tools/webhooks?create=true\"\n color={globalColors.mainRed}\n linkTitle={t(\"Webhooks:CreateWebhook\")}\n />",
+      "line_number": 104,
+      "context": "color={globalColors.secondGreen}\n linkTitle={t(\"Common:ReadInstructions\")}\n />\n <Card\n icon={<WebhookSvg />}\n title={t(\"Webhooks:Webhooks\")}\n description={t(\"Settings:WebhooksDescription\", { organizationName: getBrandName(\"OrganizationName\"), productName: getBrandName(\"ProductName\") })}\n url=\"/developer-tools/webhooks?create=true\"\n color={globalColors.mainRed}\n linkTitle={t(\"Webhooks:CreateWebhook\")}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/index.js",
-      "line_number": 44,
-      "context": "import { toastr } from \"@docspace/ui-kit/components/toast\";\n import { setDocumentTitle } from \"SRC_DIR/helpers/utils\";\n import { EmptyServerErrorContainer } from \"SRC_DIR/components/EmptyContainer/EmptyServerErrorContainer\";\n import { DeleteWebhookDialog } from \"./sub-components/DeleteWebhookDialog\";\n import { WebhookConfigsLoader } from \"./sub-components/Loaders\";\n import WebhooksTable from \"./sub-components/WebhooksTable\";\n import WebhookInfo from \"./sub-components/WebhookInfo\";\n import WebhookDialog from \"./sub-components/WebhookDialog\";\n \n const MainWrapper = styled.div`\n width: 100%;",
+      "line_number": 93,
+      "context": "isLoadedArticleBody,\n isLoadedSectionHeader,\n } = props;\n \n const { t } = useTranslation([\"Webhooks\", \"Common\"]);\n \n setDocumentTitle(t(\"Webhooks\"));\n \n const [searchParams] = useSearchParams();\n const [isCreateOpened, setIsCreateOpened] = useState(",
       "module": "/packages/client"
     }
   ],
@@ -39,13 +40,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ويب هوك' is a phonetic transliteration of 'Web hook' (singular), whereas the English term is 'Webhooks' (plural). In a technical UI context, it is more accurate to use the standard technical term or ensure the plural sense is captured.",
-          "suggestion": "خطافات الويب"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -99,13 +94,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Վեբկեռիկներ' is a diminutive/incorrect form. In technical contexts, 'Webhooks' should be transliterated as 'Վեբհուկներ' to maintain professional terminology.",
-          "suggestion": "Վեբհուկներ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {

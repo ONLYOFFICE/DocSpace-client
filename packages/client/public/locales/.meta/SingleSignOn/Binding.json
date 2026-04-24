@@ -3,23 +3,24 @@
   "content": "Binding:",
   "content_en_sha1_hash": "f2886990d903944b4327ac362e3de88962586c2c",
   "created_at": "2025-05-19T21:30:50.068Z",
-  "updated_at": "2026-04-08T23:37:08.235Z",
+  "updated_at": "2026-04-13T14:59:05.892Z",
   "comment": {
-    "text": "This translation key is used for the text \"Binding:\" which appears as a label in a UI component. It is likely used to describe a binding option or setting within an Identity Provider (IdP) settings context, possibly displayed in a dialog or dropdown menu.",
+    "text": "This is a label for a dropdown menu or input field in the Single Sign-On (SSO) settings, indicating the type of binding used for communication between the service provider and the identity provider.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:18.868Z"
+    "updated_at": "2026-04-11T21:26:59.318Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/IdpSettings.js",
-      "line_number": 38,
-      "context": "import SsoComboBox from \"./sub-components/SsoComboBox\";\n import SsoFormField from \"./sub-components/SsoFormField\";\n import UploadXML from \"./sub-components/UploadXML\";\n import {\n ssoBindingOptions,\n sloBindingOptions,\n nameIdOptions,\n } from \"./sub-components/constants\";\n \n const PROVIDER_URL = \"https://idpservice/idp\";",
+      "line_number": 131,
+      "context": "}\n dataTestId=\"sso_endpoint_url\"\n >\n <div className=\"radio-button-box\">\n <Text fontSize=\"12px\" fontWeight={400} noSelect>\n {t(\"Binding\")}\n </Text>\n \n <RadioButtonGroup\n className=\"radio-button-group\"\n isDisabled={!enableSso}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/IdpSettings.js",
-      "line_number": 38,
-      "context": "import SsoComboBox from \"./sub-components/SsoComboBox\";\n import SsoFormField from \"./sub-components/SsoFormField\";\n import UploadXML from \"./sub-components/UploadXML\";\n import {\n ssoBindingOptions,\n sloBindingOptions,\n nameIdOptions,\n } from \"./sub-components/constants\";\n \n const PROVIDER_URL = \"https://idpservice/idp\";",
+      "line_number": 131,
+      "context": "}\n dataTestId=\"sso_endpoint_url\"\n >\n <div className=\"radio-button-box\">\n <Text fontSize=\"12px\" fontWeight={400} noSelect>\n {t(\"Binding\")}\n </Text>\n \n <RadioButtonGroup\n className=\"radio-button-group\"\n isDisabled={!enableSso}",
       "module": "/packages/client"
     }
   ],
@@ -39,13 +40,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Birləşdirən:' means 'The one who connects' (an active agent/person), whereas in the context of SSO/SAML settings, 'Binding' refers to a technical protocol or method of communication. The correct technical term should be 'Bağlama:' or 'Bağlanma:'.",
-          "suggestion": "Bağlama:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -75,25 +70,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "In the context of SSO/SAML (Identity Provider settings), 'Binding' refers to the communication protocol mechanism (e.g., HTTP-Redirect, HTTP-POST), not a hyperlink or connection ('Enlace').",
-          "suggestion": "Vinculación:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish word 'Sitova' means 'binding' in the sense of 'legally binding' or 'obligatory'. In the context of SSO/SAML/IdP settings (as indicated by 'ssoBindingOptions'), 'Binding' refers to a technical protocol binding (e.g., HTTP-Redirect, HTTP-POST). The correct technical term in Finnish is 'Sidonta'.",
-          "suggestion": "Sidonta:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -111,25 +94,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "In the context of SSO/SAML (Identity Provider settings), 'Binding' refers to the communication protocol mechanism (e.g., HTTP-POST, HTTP-Redirect). 'Vincolo' in Italian means a constraint, obligation, or tie, which is incorrect for this technical context.",
-          "suggestion": "Binding:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The English source includes a colon (':') which is a standard UI convention for labels. The Japanese translation omits it, which may affect UI consistency.",
-          "suggestion": "バインド:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -165,37 +136,19 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "In the context of SSO/SAML (as indicated by 'ssoBindingOptions' and 'sloBindingOptions'), 'Binding' refers to the communication protocol mechanism (e.g., HTTP-POST, HTTP-Redirect). 'Vinculativo' means 'binding' in the sense of 'legally binding' or 'obligatory', which is incorrect for a technical protocol setting.",
-          "suggestion": "Vinculação:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Vinculativo' means 'binding' in the sense of 'legally binding' or 'obligatory'. In the context of SSO/SAML (as indicated by the code constants like ssoBindingOptions), 'Binding' refers to the communication protocol mechanism (e.g., HTTP-Redirect, HTTP-POST).",
-          "suggestion": "Vinculação:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "In the context of SSO/SAML (Identity Provider settings), 'Binding' refers to a technical protocol mechanism (e.g., HTTP-Redirect, HTTP-POST). 'Legătură' means a physical or social connection/link, which is incorrect for a technical protocol setting.",
-          "suggestion": "Metodă de legătură:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -237,13 +190,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "In the context of SSO/SAML (Identity Provider settings), 'Binding' refers to a communication protocol method (e.g., HTTP-Redirect, HTTP-POST). 'Bağlayıcı' means 'a person or thing that binds/connects' (like a glue or a person), whereas the technical term for a protocol binding in Turkish IT terminology is 'Bağlama yöntemi' or simply 'Bağlama'.",
-          "suggestion": "Bağlama:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -255,13 +202,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "In the context of SSO/SAML (Identity Provider settings), 'Binding' refers to a technical protocol mechanism (e.g., HTTP-Redirect, HTTP-POST). 'Kết hợp' means 'combination' or 'merging', which is incorrect for this technical term.",
-          "suggestion": "Liên kết:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

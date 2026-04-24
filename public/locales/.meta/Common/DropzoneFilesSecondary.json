@@ -3,13 +3,20 @@
   "content": "or drop files here",
   "content_en_sha1_hash": "a82642b561d330ae97d89f42858110de129a5f87",
   "created_at": "2026-03-20T09:07:38.522Z",
-  "updated_at": "2026-04-08T11:34:49.340Z",
+  "updated_at": "2026-04-23T17:24:01.940Z",
   "comment": {
-    "text": "This text appears in the file uploader UI, likely near a dropzone area. It provides secondary instructions to the user, suggesting they can drop files into the designated area. Translators should ensure the wording is clear and encourages file uploads.",
+    "text": "This is a secondary instruction text displayed within a file upload dropzone. It appears when the user can upload multiple files by dragging and dropping them into the designated area.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:21:58.933Z"
+    "updated_at": "2026-04-11T20:54:37.789Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/uploader/index.tsx",
+      "line_number": 411,
+      "context": "}\n if (folderMode && !multipleMode) {\n return getCommonTranslation(\"DropzoneFolderSecondary\");\n }\n if (!folderMode && multipleMode) {\n return getCommonTranslation(\"DropzoneFilesSecondary\");\n }\n return getCommonTranslation(\"DropzoneTitleSecondary\");\n };\n \n return (",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
       "line_number": 220,
@@ -177,13 +184,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The verb 'испустите' (isпустити) means 'to release', 'to emit', or 'to let go', which is incorrect in the context of a drag-and-drop file uploader. The correct term for 'drop' in this UI context is 'превуците' (drag/drop) or 'пустите' (let go/drop).",
-          "suggestion": "или превуците датотеке овде"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

@@ -3,13 +3,21 @@
   "content": "Show me the most recent submissions for \"{{formName}}\"",
   "content_en_sha1_hash": "fdfc672245e32038759fd89a6e8f6c294701a1a2",
   "created_at": "2026-03-31T15:18:19.858Z",
-  "updated_at": "2026-04-08T01:49:40.618Z",
+  "updated_at": "2026-04-23T17:24:02.134Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a prompt suggestion for an AI chat panel, displayed as a clickable option. It asks the AI to retrieve recent submissions for a specific form, where `{{formName}}` will be replaced by the form's title.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:45:32.603Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/ai-chat-panel/index.tsx",
+      "line_number": 130,
+      "context": "formName: pendingAttachmentFile.title,\n }),\n },\n {\n title: t(\"Common:RecentResponses\"),\n prompt: t(\"Common:RecentResponsesPrompt\", {\n formName: pendingAttachmentFile.title,\n }),\n },\n {\n title: t(\"Common:WhoFilledItOut\"),",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -32,25 +40,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation is grammatically incomplete and lacks the noun 'submissions' (подавания/заявки), making the sentence end abruptly with 'most recent submitted for'.",
-          "suggestion": "Покажи ми най-новите подавания за \"{{formName}}\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation is in Slovak, not Czech. 'Ukáž mi' is Slovak; the Czech equivalent is 'Ukaž mi'.",
-          "suggestion": "Ukaž mi nejnovější podání pro \"{{formName}}\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -116,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation uses 'per' (a prepositional error/loanword influence) instead of the correct Latvian preposition 'par' or 'attiecībā uz', and 'jaunākos' is grammatically incorrect in this context (should be 'jaunākos iesniegumus').",
-          "suggestion": "Rādiet man jaunākos iesniegumus formai \"{{formName}}\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -194,13 +184,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation uses the singular 'podnošenje' (submission), whereas the English text uses the plural 'submissions'.",
-          "suggestion": "Prikaži mi najnovije podnesenja za \"{{formName}}\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

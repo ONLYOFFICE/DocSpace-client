@@ -4,6 +4,12 @@
  *
  * This script scans the locales directories and generates metadata files
  * for all translation keys, preserving existing metadata where available.
+ *
+ * Options:
+ *   --model=MODEL           Override LLM model (e.g. --model=anthropic/claude-sonnet-4)
+ *   --regenerate            Regenerate ALL comments (including existing ones)
+ *   --provider=claude-code  Use Claude Code CLI (free with subscription)
+ *   --concurrency=N         Parallel LLM calls (default: 1)
  */
 const fs = require("fs-extra");
 const { writeJsonWithConsistentEol } = require("../utils/fsUtils");
@@ -20,6 +26,9 @@ const {
   verifyConnection,
   isOpenRouterModel,
   getProviderName,
+  FatalProviderError,
+  isFatalProviderError,
+  detectFatalProviderMessage,
 } = require("../utils/llmProvider");
 const { autoComment: autoCommentPrompt } = require("../prompts/auto-comment");
 
@@ -27,13 +36,126 @@ const { autoComment: autoCommentPrompt } = require("../prompts/auto-comment");
 
 const cliArgs = process.argv.slice(2);
 const modelArg = cliArgs.find((a) => a.startsWith("--model="));
+const concurrencyArg = cliArgs.find((a) => a.startsWith("--concurrency="));
+const CONCURRENCY = concurrencyArg
+  ? parseInt(concurrencyArg.split("=")[1], 10)
+  : 1;
+const REGENERATE = cliArgs.includes("--regenerate");
+const USE_CLAUDE_CODE = cliArgs.includes("--provider=claude-code");
 
-// Auto-detect model: explicit --model, or env, or OpenRouter default if key set, or Ollama default
+// Auto-detect model: explicit --model, or task-specific config, or generic, or Ollama default
 const MODEL = modelArg
   ? modelArg.split("=").slice(1).join("=")
-  : process.env.OLLAMA_MODEL
-    || (openRouterConfig.apiKey ? openRouterConfig.model : null)
-    || "gemma4:latest";
+  : USE_CLAUDE_CODE
+    ? process.env.CLAUDE_CODE_MODEL || "sonnet"
+    : (openRouterConfig.apiKey
+        ? openRouterConfig.commentModel || openRouterConfig.model
+        : null) ||
+      process.env.OLLAMA_DEFAULT_MODEL ||
+      "gemma4:26b";
+
+const PROVIDER_NAME = USE_CLAUDE_CODE
+  ? "claude-code"
+  : isOpenRouterModel(MODEL)
+    ? "openrouter"
+    : "ollama";
+console.log(`Provider: ${PROVIDER_NAME}`);
+if (CONCURRENCY > 1) console.log(`Concurrency: ${CONCURRENCY}`);
+console.log(`Model: ${MODEL}`);
+if (!openRouterConfig.apiKey && !modelArg && !USE_CLAUDE_CODE) {
+  console.log(
+    "Note: OPENROUTER_API_KEY not set — using Ollama. Set it in .env or use --provider=claude-code.",
+  );
+}
+
+/**
+ * Generate comment via Claude Code CLI (uses subscription, not API credits).
+ * @param {string} keyPath - Key name for logging
+ * @param {string} prompt - The prompt text
+ * @returns {Promise<string|null>} Generated comment or null
+ */
+function runClaudeCode(prompt) {
+  const { spawn } = require("child_process");
+  return new Promise((resolve, reject) => {
+    const child = spawn("claude", ["-p", "--model", MODEL], {
+      env: { ...process.env, LANG: "en_US.UTF-8" },
+      stdio: ["pipe", "pipe", "pipe"],
+    });
+
+    let stdout = "";
+    let stderr = "";
+
+    child.stdout.on("data", (data) => {
+      stdout += data;
+    });
+    child.stderr.on("data", (data) => {
+      stderr += data;
+    });
+
+    child.stdin.write(prompt);
+    child.stdin.end();
+
+    const timer = setTimeout(() => {
+      child.kill();
+      reject(new Error("Claude Code timed out after 120s"));
+    }, 120000);
+
+    child.on("close", (code) => {
+      clearTimeout(timer);
+      if (code === 0) {
+        resolve(stdout.trim());
+      } else {
+        const msg = (stderr || stdout || "").substring(0, 300);
+        if (detectFatalProviderMessage(msg)) {
+          reject(new FatalProviderError(`Claude Code fatal: ${msg}`));
+        } else {
+          reject(new Error(`Claude Code error: ${msg}`));
+        }
+      }
+    });
+
+    child.on("error", (err) => {
+      clearTimeout(timer);
+      reject(new Error(`Claude Code spawn error: ${err.message}`));
+    });
+  });
+}
+
+async function generateViaClaudeCode(keyPath, prompt) {
+  const maxRetries = 3;
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      console.log(
+        `Generating comment for ${keyPath} (attempt ${attempt}/${maxRetries}) [claude-code]`,
+      );
+      const stdout = await runClaudeCode(prompt);
+
+      const cleaned = stdout
+        .replace(/<think>[\s\S]*?<\/think>/gi, "")
+        .replace(/<think>[\s\S]*/gi, "")
+        .trim();
+
+      if (cleaned) {
+        process.stdout.write(
+          `  [response] ${cleaned.substring(0, 100)}${cleaned.length > 100 ? "..." : ""}\n`,
+        );
+        return cleaned;
+      }
+      throw new Error("Empty response");
+    } catch (error) {
+      if (isFatalProviderError(error)) {
+        throw error;
+      }
+      console.error(
+        `  Error (attempt ${attempt}/${maxRetries}): ${error.message}`,
+      );
+      if (attempt < maxRetries) {
+        await new Promise((r) => setTimeout(r, 2000 * attempt));
+      }
+    }
+  }
+  return null;
+}
 
 /**
  * Generates a comment for a translation key using Ollama with retry mechanism
@@ -51,20 +173,27 @@ async function generateBasicComment(keyPath, content, usages) {
     return null;
   }
 
+  const prompt = autoCommentPrompt({ keyPath, content, usages });
+
+  // Claude Code provider — use CLI
+  if (USE_CLAUDE_CODE) {
+    return generateViaClaudeCode(keyPath, prompt);
+  }
+
   // Check if provider is available
   const providerReady = await verifyConnection(MODEL);
   if (!providerReady) {
-    console.log(`${getProviderName(MODEL)} is not available. Skipping comment generation.`);
+    console.log(
+      `${getProviderName(MODEL)} is not available. Skipping comment generation.`,
+    );
     return null;
   }
 
-  const prompt = autoCommentPrompt({ keyPath, content, usages });
-
   const inactivityMs = isOpenRouterModel(MODEL)
-    ? (openRouterConfig.inactivityTimeout || 30000)
+    ? openRouterConfig.inactivityTimeout || 30000
     : ollamaConfig.inactivityTimeout;
   const firstTokenMs = isOpenRouterModel(MODEL)
-    ? (openRouterConfig.firstTokenTimeout || 120000)
+    ? openRouterConfig.firstTokenTimeout || 120000
     : ollamaConfig.firstTokenTimeout;
 
   // Retry configuration
@@ -81,13 +210,15 @@ async function generateBasicComment(keyPath, content, usages) {
       let activeTimeout = null;
       let contentStarted = false;
 
-      const chatResult = await createStreamingChat(MODEL, [
-        { role: "user", content: prompt },
-      ], {
-        temperature: 0.1,
-        maxTokens: 8192,
-        think: true,
-      });
+      const chatResult = await createStreamingChat(
+        MODEL,
+        [{ role: "user", content: prompt }],
+        {
+          temperature: 0.1,
+          maxTokens: 8192,
+          think: true,
+        },
+      );
 
       const resetTimer = () => {
         clearTimeout(activeTimeout);
@@ -144,6 +275,16 @@ async function generateBasicComment(keyPath, content, usages) {
         throw new Error("Model returned empty response");
       }
     } catch (error) {
+      if (
+        isFatalProviderError(error) ||
+        detectFatalProviderMessage(error.message)
+      ) {
+        throw isFatalProviderError(error)
+          ? error
+          : new FatalProviderError(
+              `${getProviderName(MODEL)} fatal: ${error.message}`,
+            );
+      }
       lastError = error;
       retries++;
 
@@ -258,71 +399,98 @@ async function generateAutoComment(projectName) {
 
       let processedCount = 0;
 
-      for (const keyFile of keyFiles) {
-        try {
-          const keyMeta = await fs.readJson(keyFile);
-          const keyPath = keyMeta.key_path || path.basename(keyFile, ".json");
+      // Process key files in parallel batches
+      for (
+        let batchStart = 0;
+        batchStart < keyFiles.length;
+        batchStart += CONCURRENCY
+      ) {
+        const batch = keyFiles.slice(batchStart, batchStart + CONCURRENCY);
 
+        const results = await Promise.allSettled(
+          batch.map(async (keyFile) => {
+            const keyMeta = await fs.readJson(keyFile);
+            const keyPath = keyMeta.key_path || path.basename(keyFile, ".json");
+
+            if (REGENERATE || !keyMeta.comment || keyMeta.comment.text === "") {
+              const comment = await generateBasicComment(
+                keyPath,
+                keyMeta.content,
+                keyMeta.usage,
+              );
+              return { keyFile, keyMeta, keyPath, comment, needsComment: true };
+            }
+            return {
+              keyFile,
+              keyMeta,
+              keyPath,
+              comment: null,
+              needsComment: false,
+            };
+          }),
+        );
+
+        // Process results sequentially (writes to shared stats)
+        for (const result of results) {
           processedCount++;
           stats.namespaces[namespace].processedKeys++;
 
-          // Show progress information
+          if (result.status === "rejected") {
+            if (isFatalProviderError(result.reason)) {
+              throw result.reason;
+            }
+            console.error(`Error: ${result.reason.message}`);
+            stats.namespaces[namespace].errors++;
+            stats.errors.push({ error: result.reason.message });
+            continue;
+          }
+
+          const { keyFile, keyMeta, keyPath, comment, needsComment } =
+            result.value;
+
           console.log(
             `Processing key: ${keyPath} (${processedCount}/${keyFiles.length} in ${namespace})`,
           );
 
-          if (!keyMeta.comment || keyMeta.comment.text === "") {
-            const comment = await generateBasicComment(
-              keyPath,
-              keyMeta.content,
-              keyMeta.usage,
+          if (!needsComment) {
+            stats.namespaces[namespace].skippedKeys++;
+            stats.skippedKeys++;
+            console.log(
+              `  ↷ Skipped ${keyPath}: already has a comment (use --regenerate to overwrite)`,
             );
+            continue;
+          }
 
-            if (comment && comment !== "") {
-              // Initialize comment object if it doesn't exist
-              if (!keyMeta.comment) {
-                keyMeta.comment = {
-                  text: "",
-                  is_auto: false,
-                  updated_at: null,
-                };
-              }
-
-              keyMeta.comment.text = comment;
-              keyMeta.comment.is_auto = true;
-              const now = new Date().toISOString();
-              keyMeta.comment.updated_at = now;
-              keyMeta.updated_at = now;
-
-              await writeJsonWithConsistentEol(keyFile, keyMeta);
-
-              // Update stats
-              stats.namespaces[namespace].updatedComments++;
-              stats.updatedComments++;
-              console.log(`  ✓ Generated comment for ${keyPath}`);
-            } else {
-              stats.namespaces[namespace].skippedKeys++;
-              stats.skippedKeys++;
-              console.log(`  ✗ Skipped ${keyPath}: no comment generated`);
+          if (comment && comment !== "") {
+            if (!keyMeta.comment) {
+              keyMeta.comment = { text: "", is_auto: false, updated_at: null };
             }
+            keyMeta.comment.text = comment;
+            keyMeta.comment.is_auto = true;
+            keyMeta.comment.model = MODEL;
+            const now = new Date().toISOString();
+            keyMeta.comment.updated_at = now;
+            keyMeta.updated_at = now;
+
+            await writeJsonWithConsistentEol(keyFile, keyMeta);
+
+            stats.namespaces[namespace].updatedComments++;
+            stats.updatedComments++;
+            console.log(`  ✓ Generated comment for ${keyPath}`);
           } else {
             stats.namespaces[namespace].skippedKeys++;
             stats.skippedKeys++;
-            console.log(`  ↷ Skipped ${keyPath}: already has a comment`);
+            console.log(`  ✗ Skipped ${keyPath}: no comment generated`);
           }
-        } catch (error) {
-          console.error(`Error reading metadata file ${keyFile}:`, error);
-          stats.namespaces[namespace].errors++;
-          stats.errors.push({
-            file: keyFile,
-            error: error.message,
-          });
         }
       }
     }
 
     return stats;
   } catch (error) {
+    if (isFatalProviderError(error)) {
+      throw error;
+    }
     console.error(
       `Error generating metadata for project ${projectName} (current namespace: ${currentNamespace}):`,
       error,
@@ -419,6 +587,9 @@ async function generateAutoCommentsMetadata() {
         );
       }
     } catch (error) {
+      if (isFatalProviderError(error)) {
+        throw error;
+      }
       console.error(`Error processing project ${project}:`, error);
       overallStats.errors.push({
         project,

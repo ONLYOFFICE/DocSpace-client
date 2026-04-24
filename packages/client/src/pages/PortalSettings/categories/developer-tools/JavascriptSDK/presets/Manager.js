@@ -95,6 +95,7 @@ import {
   SelectedItemsContainer,
   CheckboxGroup,
 } from "./StyledPresets";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const MANAGER_EVENT_TYPES = [
   "onAppReady",
@@ -437,9 +438,9 @@ const Manager = (props) => {
   return (
     <PresetWrapper
       description={t("CustomDescription", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
       })}
-      header={t("CreateSamplePortal", { productName: t("Common:ProductName") })}
+      header={t("CreateSamplePortal", { productName: getBrandName("ProductName") })}
     >
       <Container>
         <PreviewBlock
@@ -611,7 +612,7 @@ const Manager = (props) => {
                     <TooltipContent
                       title={t("Header")}
                       description={t("HeaderDescription", {
-                        productName: t("Common:ProductName"),
+                        productName: getBrandName("ProductName"),
                       })}
                       img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
                     />

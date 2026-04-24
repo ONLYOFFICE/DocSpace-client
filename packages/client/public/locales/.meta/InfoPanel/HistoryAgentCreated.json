@@ -3,11 +3,12 @@
   "content": "<1>«{{roomTitle}}»</1> agent created",
   "content_en_sha1_hash": "d417cc806d4a82a7289f23aad8f177222782249c",
   "created_at": "2025-11-03T12:10:31.497Z",
-  "updated_at": "2025-11-03T12:22:43.474Z",
+  "updated_at": "2026-04-11T21:13:11.196Z",
   "comment": {
-    "text": "This key displays a notification within the History section of the Info Panel, confirming the creation of an agent for a specific room. The text includes the room title, providing context for the user. Translators should ensure the sentence structure and word order maintain clarity within the notification.",
+    "text": "This is a history feed message indicating that an AI agent has been created. `{{roomTitle}}` is the name of the room where the agent was created.",
     "is_auto": true,
-    "updated_at": "2025-11-03T12:22:43.474Z"
+    "updated_at": "2026-04-11T21:13:11.196Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

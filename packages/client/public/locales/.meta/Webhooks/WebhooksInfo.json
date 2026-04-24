@@ -3,17 +3,18 @@
   "content": "Use webhooks to perform custom actions on the side of any application or website you are using based on various events in {{organizationName}} {{productName}}.\nHere, you can create and manage all your webhooks, configure them, and browse history of every webhook to audit their performance.",
   "content_en_sha1_hash": "750432e6ab1214b46a206263443e9af320afcacf",
   "created_at": "2025-05-19T21:30:49.892Z",
-  "updated_at": "2026-04-08T18:50:48.587Z",
+  "updated_at": "2026-04-11T21:28:02.307Z",
   "comment": {
-    "text": "Use webhooks to perform custom actions on any application or website based on various events in {{organizationName}} {{productName}}.",
+    "text": "This is an informational text paragraph explaining what webhooks are and how to manage them within the application. It appears on the Webhooks settings page and includes `{{organizationName}}` (the name of the user's organization) and `{{productName}}` (the name of the product, e.g., DocSpace).",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:43.922Z"
+    "updated_at": "2026-04-11T21:28:02.307Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhookInfo.js",
-      "line_number": 53,
-      "context": "const { webhooksGuideUrl, logoText } = props;\n \n return (\n <div>\n <InfoText as=\"p\">\n {t(\"WebhooksInfo\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n })}\n </InfoText>\n {webhooksGuideUrl ? (",
+      "line_number": 54,
+      "context": "const { webhooksGuideUrl, logoText } = props;\n \n return (\n <div>\n <InfoText as=\"p\">\n {t(\"WebhooksInfo\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n })}\n </InfoText>\n {webhooksGuideUrl ? (",
       "module": "/packages/client"
     }
   ],
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'audit' was translated as 'تعديل' (modify/edit), which changes the meaning from 'reviewing/inspecting' to 'changing'.",
-          "suggestion": "استخدم ويب هوك لتنفيذ إجراءات مخصصة على جانب أي تطبيق أو موقع ويب تستخدمه بناءً على أحداث مختلفة في {{organizationName}} {{productName}}.\nهنا، يمكنك إنشاء وإدارة جميع ويب هوك الخاصة بك وتكوينها وتصفح سجل كل ويب هوك لمراجعة أدائها."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -45,25 +40,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation incorrectly translates 'webhooks' as 'уеб куки' (web cookies). A webhook is a technical mechanism for real-time data transfer, whereas a cookie is a small piece of data stored on a user's browser. This is a critical technical error.",
-          "suggestion": "Използвайте уебхукове, за да извършвате персонализирани действия отстрани на всяко приложение или сайт, които използвате въз основа на различни събития в {{organizationName}} {{productName}}.\nТук можете да създавате и управлявате всичките си уебхукове, да ги конфигурирате и да преглеждате хронологията на всеки уебхук, за да проверите ефективността му."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'webhooks' was translated as 'webové háčky' in the second sentence. In a technical context, 'webhook' is a standard industry term and should remain untranslated to avoid confusion and maintain professional terminology.",
-          "suggestion": "Pomocí webhooků můžete provádět vlastní akce na straně jakékoli aplikace nebo webové stránky, kterou používáte, na základě různých událostí v aplikaci {{organizationName}} {{productName}}.\nZde můžete vytvářet a spravovat všechny své webhooks, konfigurovat je a procházet historii každého webhooku pro audit jejich výkonnosti."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -93,13 +76,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The French translation uses 'télécharger l'historique' (download the history) instead of 'browse history' (parcourir l'historique). This changes the functionality from viewing/navigating to a file download action.",
-          "suggestion": "Ici, vous pouvez créer et gérer tous vos webhooks, les configurer et parcourir l'historique de chaque webhook pour vérifier leur efficacité."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -129,25 +106,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'configure' was left in English instead of being translated into Lao, which is inconsistent with the rest of the localized text.",
-          "suggestion": "ຊ້ webhooks ເພື່ອປະຕິບັດການກໍານົດເອງຢູ່ຂ້າງຂອງແອັບພລິເຄຊັນຫຼືເວັບໄຊທ໌ທີ່ທ່ານກໍາລັງໃຊ້ໂດຍອີງໃສ່ເຫດການຕ່າງໆໃນ {{organizationName}} {{productName}}.\nທີ່ນີ້, ທ່ານສາມາດສ້າງແລະຈັດການ webhooks ທັງຫມົດຂອງທ່ານ, ຕັ້ງຄ່າພວກມັນ, ແລະທ່ອງປະຫວັດສາດຂອງ webhook ທັງຫມົດເພື່ອກວດສອບປະສິດທິພາບຂອງພວກມັນ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation uses the term 'tīmekļa aizķeres' (plural) in the first sentence, but the grammar 'visus savus tīmekļa aizķeres' in the second sentence is grammatically incorrect for the gender of the noun (should be 'visas savas' if referring to 'aizķeres' as feminine). More importantly, 'tīmekļa aizķere' is a literal but non-standard translation for 'webhook' in a technical context; however, the critical error is the grammatical mismatch in 'visus savus tīmekļa aizķeres' which makes the sentence nonsensical.",
-          "suggestion": "Izmantojiet tīmekļa aizķeres, lai veiktu pielāgotas darbības jebkurā izmantotajā lietojumprogrammā vai tīmekļa vietnē, pamatojoties uz dažādiem notikumiem {{organizationName}} {{productName}}.\nŠeit varat izveidot un pārvaldīt visas savas tīmekļa aizķeres, konfigurēt tās un pārlūkot katras tīmekļa aizķeres vēsturi, lai pārbaudītu to veiktspēju."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -177,25 +142,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'pe partea aplicației sau paginii web pe care utilizați' is grammatically incorrect and changes the meaning; it should be 'pe partea oricărei aplicații sau site web pe care o utilizați' to match 'on the side of any application or website you are using'.",
-          "suggestion": "Utilizați webhook-uri pentru a efectua acțiuni personalizate pe partea oricărei aplicații sau site web pe care o utilizați, pe baza diverselor evenimente din {{organizationName}} {{productName}}.\nAici puteți crea și gestiona toate webhook-urile, să le configurați și să parcurgeți istoricul fiecărui webhook pentru a le audita performanța."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'browse' (view/look through) was translated as 'загружать' (to upload/download), which changes the meaning from viewing history to downloading it.",
-          "suggestion": "Используйте вебхуки для выполнения пользовательских действий на стороне любого используемого вами приложения или веб-сайта на основе различных событий в {{organizationName}} {{productName}}. Здесь вы можете создавать все ваши вебхуки и управлять ими, настраивать их и просматривать историю каждого вебхука для проверки их эффективности."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -243,13 +196,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'on the side of' is translated literally as 'ở bên cạnh', which in Vietnamese means 'physically next to' or 'beside'. In a technical context regarding webhooks, it should mean 'on the part of' or 'within' the external application/website.",
-          "suggestion": "Sử dụng webhook để thực hiện các hành động tùy chỉnh trên bất kỳ ứng dụng hoặc trang web nào bạn đang sử dụng dựa trên các sự kiện khác nhau trong {{organizationName}} {{productName}}.\nTại đây, bạn có thể tạo và quản lý tất cả các webhook của mình, cấu hình chúng và xem lịch sử của mọi webhook để kiểm tra hiệu suất của chúng."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
@@ -261,13 +208,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'lidhjet tuaja në internet' (your internet connections) is used as a translation for 'webhooks'. In a technical context, 'webhooks' should remain 'webhook' or 'webhooks' to avoid confusion with general internet connections.",
-          "suggestion": "Përdorni webhook për të kryer veprime të personalizuara në anën e çdo aplikacioni ose faqe interneti që po përdorni bazuar në ngjarje të ndryshme në {{organizationName}} {{productName}}.\nKëtu, ju mund të krijoni dhe menaxhoni të gjitha webhook-et tuaja, t'i konfiguroni ato dhe të shfletoni historikun e çdo webhook për të audituar performancën e tyre."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

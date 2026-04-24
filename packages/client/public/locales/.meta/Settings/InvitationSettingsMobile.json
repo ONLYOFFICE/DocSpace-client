@@ -3,17 +3,18 @@
   "content": "Configure the invitation options for internal members and external guests of your {{productName}}.",
   "content_en_sha1_hash": "0707e43a921ad3d7878d76b2c887092971a33349",
   "created_at": "2025-05-26T07:15:51.107Z",
-  "updated_at": "2026-04-09T02:47:02.671Z",
+  "updated_at": "2026-04-11T21:23:43.493Z",
   "comment": {
-    "text": "Configure the invitation options for internal members and external guests of your {{productName}}. This translation key is used to display a title on a mobile view of access portal settings, guiding users to configure their invitation preferences.",
+    "text": "This is a subtitle for a settings category on mobile, describing the purpose of the \"Invitation Settings\" section. It explains that users can configure invitation options for both internal members and external guests, with `{{productName}}` being replaced by the product's brand name.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:09:48.117Z"
+    "updated_at": "2026-04-11T21:23:43.493Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 99,
-      "context": "/>\n <CategoryItem\n title={t(\"InvitationSettings\")}\n subtitle={\n <Trans\n i18nKey=\"InvitationSettingsMobile\"\n ns=\"Settings\"\n t={t}\n values={{ productName: t(\"Common:ProductName\") }}\n />\n }",
+      "line_number": 100,
+      "context": "/>\n <CategoryItem\n title={t(\"InvitationSettings\")}\n subtitle={\n <Trans\n i18nKey=\"InvitationSettingsMobile\"\n ns=\"Settings\"\n t={t}\n values={{ productName: getBrandName(\"ProductName\") }}\n />\n }",
       "module": "/packages/client"
     }
   ],

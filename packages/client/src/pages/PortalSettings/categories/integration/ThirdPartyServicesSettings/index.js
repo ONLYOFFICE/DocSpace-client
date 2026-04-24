@@ -48,6 +48,7 @@ const EXTERNAL_DB_CONSUMER_NAME = "externaldb";
 
 import ThirdPartyLoader from "./sub-components/thirdPartyLoader";
 import styles from "./ThirdPartyServicesSettings.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 class ThirdPartyServices extends React.Component {
   constructor(props) {
@@ -177,7 +178,7 @@ class ThirdPartyServices extends React.Component {
               />
               <Text>
                 {t("IntegrationRequest", {
-                  productName: t("Common:ProductName"),
+                  productName: getBrandName("ProductName"),
                   organizationName: logoText,
                 })}
               </Text>

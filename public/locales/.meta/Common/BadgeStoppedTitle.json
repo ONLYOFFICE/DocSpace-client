@@ -3,11 +3,12 @@
   "content": "Filling out the form was forcibly stopped",
   "content_en_sha1_hash": "68653a48592c18289fe22fc2b2c53f991e86ce35",
   "created_at": "2025-05-19T21:30:43.225Z",
-  "updated_at": "2026-04-08T16:18:56.078Z",
+  "updated_at": "2026-04-11T20:58:29.886Z",
   "comment": {
-    "text": "This translation key is used for the title of a \"BadgeStoppedTitle\" indicator, which indicates that the user's turn has been forcibly stopped while filling out a form. The translated version appears in a specific UI context where the form status transitions to \"Stopped\".",
+    "text": "This is a badge title indicating that a form-filling process was prematurely terminated. It appears as a short status label.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:15.421Z"
+    "updated_at": "2026-04-11T20:58:29.886Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

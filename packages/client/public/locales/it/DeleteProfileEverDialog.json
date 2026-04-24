@@ -1,6 +1,6 @@
 {
-  "ActionCannotBeUndone": "Gli utenti disattivati selezionati verranno rimossi da {{productName}}. Questa azione non può essere annullata.",
   "ActionCannotBeUndoneGuests": "Gli ospiti disabilitati selezionati saranno rimossi da {{productName}}. Questa azione non può essere annullata.",
+  "ActionCannotBeUndoneUsers": "Gli utenti disattivati selezionati verranno rimossi da {{productName}}. Questa azione non può essere annullata.",
   "CannotReassignFiles": "Se elimini più utenti contemporaneamente, non potrai riassegnare i loro file ad altri utenti.",
   "DeleteGroupGuestsSuccessMessage": "Gli ospiti sono stati eliminati con successo.",
   "DeleteGroupUsersSuccessMessage": "Gli utenti sono stati eliminati con successo.",

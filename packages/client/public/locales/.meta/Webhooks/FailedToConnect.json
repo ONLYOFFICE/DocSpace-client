@@ -3,11 +3,12 @@
   "content": "We couldn’t deliver this payload: failed to connect to host",
   "content_en_sha1_hash": "1b25cf1f64afabdb272c5f4f640f17f53dbc8be8",
   "created_at": "2025-05-19T21:30:49.718Z",
-  "updated_at": "2026-04-08T20:14:01.323Z",
+  "updated_at": "2026-04-11T21:29:03.721Z",
   "comment": {
-    "text": "This translation key is used to display an error message when a connection to a host fails. It appears as a status message in the UI, typically under a request details section, and indicates that the payload delivery was unsuccessful.",
+    "text": "This is an error message displayed within the Webhook Event Details when a webhook payload could not be delivered due to a connection failure.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:47:04.100Z"
+    "updated_at": "2026-04-11T21:29:03.721Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -39,25 +40,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'payload' is translated as 'полезен товар' (useful cargo/goods), which is a literal translation of the individual words but is incorrect in a technical/IT context. In software, 'payload' refers to the data transmitted in a request.",
-          "suggestion": "Не можахме да доставим този пейлоуд: не успяхме да се свържем с хоста"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'payload' is translated as 'náklad' (cargo/freight), which is a literal translation for physical goods. In a technical/IT context regarding webhooks and data transfer, 'payload' should be translated as 'data' or 'payload' (as a technical term) to avoid confusion with physical logistics.",
-          "suggestion": "Nepodařilo se doručit tento payload: nepodařilo se připojit k hostiteli"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -87,13 +76,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'payload' in a technical context (webhooks/API) refers to the data packet being transmitted, not a 'commande' (order/command). 'Délivrer' is also a literal translation of 'deliver' that sounds unnatural for data transmission in French.",
-          "suggestion": "Nous n'avons pas pu transmettre cette charge utile : la connexion à l'hôte a échoué."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -129,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'payload' is translated as 'lietderīga slodzi', which means 'beneficial/useful load'. In a technical context, 'payload' refers to the data transmitted in a packet and should not be translated as 'beneficial'.",
-          "suggestion": "Mēs nevarējām piegādāt šo datu piedāvājumu: neizdevās izveidot savienojumu ar hostu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -213,13 +190,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'deliver' (доставити/передати) was incorrectly translated as 'видалити' (delete), which changes the meaning from a delivery failure to a deletion failure.",
-          "suggestion": "Не вдалося доставити це корисне навантаження: не вдалося під’єднатися до вузла"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

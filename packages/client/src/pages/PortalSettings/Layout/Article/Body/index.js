@@ -43,6 +43,7 @@ import {
   // selectKeyOfTreeElement,
   getCurrentSettingsCategory,
 } from "../../../utils";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const ArticleBodyContent = (props) => {
   const {
@@ -200,7 +201,7 @@ const ArticleBodyContent = (props) => {
       case "ManagementCategorySecurity":
         return t("ManagementCategorySecurity");
       case "PortalAccess":
-        return t("PortalAccess", { productName: t("Common:ProductName") });
+        return t("PortalAccess", { productName: getBrandName("ProductName") });
       case "TwoFactorAuth":
         return t("TwoFactorAuth");
       case "ManagementCategoryIntegration":
@@ -222,7 +223,7 @@ const ArticleBodyContent = (props) => {
       case "Common:RestoreBackup":
         return t("Common:RestoreBackup");
       case "PortalDeletion":
-        return t("PortalDeletion", { productName: t("Common:ProductName") });
+        return t("PortalDeletion", { productName: getBrandName("ProductName") });
       case "Common:Bonus":
         return t("Common:Bonus");
       case "Common:FreeAccessToLicensedVersion":

@@ -1,0 +1,29 @@
+{
+  "key_path": "ModelNameHint",
+  "content": "Use a name that helps you identify this model.",
+  "content_en_sha1_hash": "d05ac9b7bbf99a1b0edc51f59765c11c70498b92",
+  "created_at": "2026-04-23T17:24:00.375Z",
+  "updated_at": "2026-04-23T17:40:06.114Z",
+  "comment": {
+    "text": "Hint text for the model name input field in the AI settings panel, providing guidance for naming a model.",
+    "is_auto": true,
+    "updated_at": "2026-04-23T17:40:06.114Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/ModelSettingsPanel.tsx",
+      "line_number": 120,
+      "context": "value={displayName}\n onChange={(e) => setDisplayName(e.target.value)}\n scale\n testId=\"model-name-input\"\n />\n <Text className={styles.hint}>{t(\"AISettings:ModelNameHint\")}</Text>\n </FieldContainer>\n \n <FieldContainer\n labelText={t(\"AISettings:Capabilities\")}\n labelVisible",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

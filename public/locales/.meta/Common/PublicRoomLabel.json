@@ -3,11 +3,12 @@
   "content": "Public",
   "content_en_sha1_hash": "dc5eb704bbcae1aff4efb71c55461d47767dabe7",
   "created_at": "2025-05-19T21:30:47.669Z",
-  "updated_at": "2026-04-08T01:58:46.915Z",
+  "updated_at": "2026-04-12T03:35:08.122Z",
   "comment": {
-    "text": "The PublicRoomLabel translation key is used to display the English content \"Public\" in a public room context, likely appearing as a button label or title. This text is used to identify and distinguish public rooms from other types of rooms in an application.",
+    "text": "This is a short label identifying a public room. It appears as a room type in a list or selection.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:34:50.482Z"
+    "updated_at": "2026-04-11T20:45:43.894Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -75,13 +76,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English source is a single adjective 'Public', whereas the French translation 'Salles publiques' (Public rooms) adds a noun that is not present in the source. In a UI context where this is a label/category, it should match the brevity of the English.",
-          "suggestion": "Public"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -159,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'ප්‍රසිද්ධ' means 'famous' or 'well-known'. In the context of a 'Public Room', the correct term should denote 'open to everyone' or 'not private'.",
-          "suggestion": "පොදු"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -213,13 +202,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '公共房间' (Public Room) adds the word 'Room' (房间), which is not present in the English source 'Public'. This creates a mismatch in UI consistency if the label is intended to be a simple adjective/category name.",
-          "suggestion": "公开"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

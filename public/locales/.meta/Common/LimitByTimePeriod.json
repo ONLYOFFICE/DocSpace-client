@@ -3,16 +3,17 @@
   "content": "Limit by time period",
   "content_en_sha1_hash": "03e40a5e784a8aec64ccc72778ffd126b2588b86",
   "created_at": "2025-08-26T11:15:03.626Z",
-  "updated_at": "2026-04-08T05:46:59.178Z",
+  "updated_at": "2026-04-11T20:49:50.949Z",
   "comment": {
-    "text": "This text appears as the header for a dialog or panel allowing users to set an expiration date for a link. It indicates the option to limit the link's availability by a specific time period. Translators should ensure the translation accurately conveys the concept of setting a time-based expiration.",
+    "text": "This is a section header or dialog title. It indicates that the following settings allow the user to restrict access or availability based on a specific time frame.",
     "is_auto": true,
-    "updated_at": "2025-08-26T11:25:10.120Z"
+    "updated_at": "2026-04-11T20:49:50.949Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/LinkSettingsPanel/index.tsx",
-      "line_number": 290,
+      "line_number": 291,
       "context": "<Text\n fontSize=\"16px\"\n fontWeight={700}\n className={styles.linkSettingsText}\n >\n {t(\"Common:LimitByTimePeriod\")}\n </Text>\n \n <Text\n fontSize=\"12px\"\n fontWeight={400}",
       "module": "/packages/client"
     },

@@ -3,11 +3,12 @@
   "content": "File Filter",
   "content_en_sha1_hash": "ea6736bc0efcc52efe621b7052f08fa65d6b97a9",
   "created_at": "2025-05-19T21:30:54.493Z",
-  "updated_at": "2026-04-07T19:35:05.131Z",
+  "updated_at": "2026-04-11T21:15:41.502Z",
   "comment": {
-    "text": "The \"FileFilter\" translation key is used to display the label for a filter toggle button, allowing users to select files by author. This appears in a UI component where users can manage filters on lists of files. Translators should focus on creating a clear and concise label that accurately reflects this functionality.",
+    "text": "Label for a toggle switch in the developer settings. It allows users to filter files based on various criteria.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:39.638Z"
+    "updated_at": "2026-04-11T21:15:41.502Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

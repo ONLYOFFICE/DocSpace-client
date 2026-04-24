@@ -3,13 +3,39 @@
   "content": "Pricing & billing",
   "content_en_sha1_hash": "06a83c0feaccd19d02c6b2d80a5c2dbc997ac3d6",
   "created_at": "2026-04-10T13:53:44.420Z",
-  "updated_at": "2026-04-10T13:53:44.420Z",
+  "updated_at": "2026-04-23T17:24:02.180Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a link or dialog title that directs users to information about pricing and billing for AI services.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:00:00.359Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
+      "line_number": 374,
+      "context": "onClick={onOpenPricingBilling}\n textDecoration=\"underline dotted\"\n color=\"accent\"\n >\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"AIPricingAndBilling\")}\n </Text>\n </Link>\n </div>\n \n <div className={styles.tabsWrapper}>",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/GetStartedBody.tsx",
+      "line_number": 288,
+      "context": "className={styles.pricingBillingLink}\n onClick={onPricingBillingClick}\n textDecoration=\"underline dotted\"\n color=\"accent\"\n >\n <Text>{t(\"AIPricingAndBilling\")}</Text>\n </Link>\n </div>\n </div>\n </div>\n </ModalDialog.Body>",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/PricingBillingBody.tsx",
+      "line_number": 65,
+      "context": "isBackButton={isBackButton}\n onBackClick={onBack}\n onCloseClick={onClose}\n withBodyScroll\n >\n <ModalDialog.Header>{t(\"AIPricingAndBilling\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.pricingBody}>\n <Text fontSize=\"12px\">{t(\"AIPricingIntro\")}</Text>\n \n <Text fontSize=\"16px\" fontWeight=\"700\">",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/TopUpAiModal.tsx",
+      "line_number": 124,
+      "context": "onClick={onPricingBillingClick}\n textDecoration=\"underline dotted\"\n color=\"accent\"\n fontWeight={600}\n >\n {t(\"AIPricingAndBilling\")}\n </Link>\n </>\n );\n };",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

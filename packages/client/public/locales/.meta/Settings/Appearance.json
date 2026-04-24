@@ -3,11 +3,12 @@
   "content": "Appearance",
   "content_en_sha1_hash": "41def7a0febe741da87c5b79ce78ce27b83f3ae7",
   "created_at": "2025-05-19T21:30:50.583Z",
-  "updated_at": "2026-04-09T04:10:12.859Z",
+  "updated_at": "2026-04-13T14:59:05.840Z",
   "comment": {
-    "text": "This translation key is used to display the label \"Appearance\" in the Portal Settings categories. It appears as a section title and is likely used on a page or tab related to visual customization options. The translation of this key will determine the text displayed for this category.",
+    "text": "This is a section title in the portal settings, allowing users to configure the visual theme and layout of their ONLYOFFICE DocSpace.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:45.604Z"
+    "updated_at": "2026-04-11T21:25:37.931Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -18,8 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/index.tsx",
-      "line_number": 47,
-      "context": "import CommonStore from \"SRC_DIR/store/CommonStore\";\n import DefaultTemplatesStore from \"SRC_DIR/store/portal-settings/DefaultTemplatesStore\";\n \n import Customization from \"./customization\";\n import Branding from \"./branding\";\n import Appearance from \"./appearance\";\n import DefaultTemplates from \"./DefaultTemplates\";\n \n import LoaderTabs from \"./sub-components/loaderTabs\";\n import useCommon from \"./useCommon\";\n import { resetSessionStorage } from \"../../utils\";",
+      "line_number": 117,
+      "context": "await getCustomizationData();\n },\n },\n {\n id: \"appearance\",\n name: t(\"Appearance\"),\n content: <Appearance />,\n onClick: () => {},\n },\n {\n id: \"default-templates\",",
       "module": "/packages/client"
     },
     {
@@ -87,13 +88,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish word 'Ulkomuoto' refers to the physical appearance of a person or an object's shape. In the context of software settings (UI customization), 'Ulkoasu' is the correct term for 'Appearance'.",
-          "suggestion": "Ulkoasu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -117,25 +112,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation '表示' (Display/Show) refers to the act of showing something or the visibility of elements. In the context of 'Portal Settings' and 'visual customization options' (as per metadata), 'Appearance' refers to the visual theme, look, or style of the interface. '表示' is too narrow and technically incorrect for a settings category.",
-          "suggestion": "外観"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '외관' (outer appearance/exterior) is more suited for physical objects. In the context of software UI settings (Portal Settings), '테마' (Theme) or '디스플레이' (Display) is more appropriate, but specifically for 'Appearance' as a category for visual customization, '모양' or '디자인' is often used. However, '외관' sounds like the physical casing of a device.",
-          "suggestion": "테마"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -231,13 +214,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "In the context of software settings (UI customization, themes, colors), 'Appearance' should be translated as 'Giao diện' rather than 'Hình thức' (which refers to physical appearance or outward form of a person/object).",
-          "suggestion": "Giao diện"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

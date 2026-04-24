@@ -41,6 +41,7 @@ import {
   ControlsSection,
   RowContainer,
 } from "../presets/StyledPresets";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const MainElementParameter = ({
   t,
@@ -135,7 +136,7 @@ export const MainElementParameter = ({
               scale
               onChange={setButtonText}
               placeholder={t("SelectToPortal", {
-                productName: t("Common:ProductName"),
+                productName: getBrandName("ProductName"),
               })}
               value={buttonValue}
               tabIndex={3}

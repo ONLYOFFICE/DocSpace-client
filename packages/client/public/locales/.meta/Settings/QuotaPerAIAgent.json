@@ -3,23 +3,24 @@
   "content": "Quota per {{aiAgent}}",
   "content_en_sha1_hash": "ca43fdb6c37f3b33cc11a6a1d44d3718b6a7f3d4",
   "created_at": "2025-12-22T09:40:15.250Z",
-  "updated_at": "2026-04-10T08:58:38.061Z",
+  "updated_at": "2026-04-13T14:59:05.903Z",
   "comment": {
-    "text": "This key displays the text \"Quota per [AI Agent Name]\" in the Portal Settings, specifically on a button or link leading to the AI Agent quota management page. It's used to indicate the quota allocation for individual AI agents. The AI Agent name will be dynamically inserted into the string.",
+    "text": "This is a title for a settings category or a label within a settings page. It indicates a quota limit associated with a specific AI agent, where `{{aiAgent}}` will be replaced by the name of the AI agent.",
     "is_auto": true,
-    "updated_at": "2025-12-22T10:09:55.892Z"
+    "updated_at": "2026-04-11T21:22:47.560Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/MobileQuotas.js",
-      "line_number": 66,
+      "line_number": 67,
       "context": "sectionName: t(\"Common:MyDocuments\"),\n })}\n isDisabled={isDisabled}\n />\n <CategoryItem\n title={t(\"QuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-ai-agent\"\n subtitle={t(\"SetDefaultAIAgentQuota\", {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerAIAgent.tsx",
-      "line_number": 32,
-      "context": "import { useTranslation } from \"react-i18next\";\n import { inject, observer } from \"mobx-react\";\n \n import QuotaPerItemComponent from \"./QuotaPerItem\";\n \n type QuotaPerAIAgentComponentProps = {\n setAIAgentQuota: (size: number, t: (key: string) => string) => void;\n defaultAIAgentsQuota: number;\n isDefaultAIAgentsQuotaSet: boolean;\n };",
+      "line_number": 54,
+      "context": "const disableQuota = () => setAIAgentQuota(-1, t);\n \n return (\n <QuotaPerItemComponent\n type=\"agent\"\n formLabel={t(\"QuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n toggleLabel={t(\"DefineQuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}",
       "module": "/packages/client"
     }
   ],
@@ -63,13 +64,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Πόσοτα' is not a valid Greek word for 'Quota'. It appears to be a misspelling or a non-existent term. The correct term for quota/allocation in this context is 'ΌQuota' or 'Ποσό' (amount), but specifically for technical limits, 'Όριο' (limit) or 'Quota' (transliterated/used as a loanword) is preferred. However, 'Πόσοτα' is linguistically incorrect.",
-          "suggestion": "Όριο ανά {{aiAgent}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -81,13 +76,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'per' (indicating allocation per agent) is missing, which changes the meaning from 'Quota per [Agent]' to just '[Agent] Quota'.",
-          "suggestion": "Kvota per {{aiAgent}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -129,13 +118,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The preposition 'par' in Latvian is used incorrectly here. In this context (quota per/for an entity), 'par' implies 'about' or 'concerning'. The correct preposition to indicate allocation or limit per unit is 'katram' (for each) or 'par' is simply not the standard way to express 'quota per [item]' in Latvian UI.",
-          "suggestion": "Kvota katram {{aiAgent}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -207,13 +190,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation uses the plural 'Kvote' (Quotas), whereas the English source uses the singular 'Quota'.",
-          "suggestion": "Kvota za {{aiAgent}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

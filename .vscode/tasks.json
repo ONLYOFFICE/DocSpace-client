@@ -1329,9 +1329,20 @@
       }
     },
     {
+      "label": "Translation App | translation stats (Markdown)",
+      "type": "shell",
+      "command": "node '${workspaceFolder}/common/scripts/translation-stats.js' --md='${workspaceFolder}/translation-stats.md'",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "focus": true
+      }
+    },
+    {
       "label": "Translation App | verify translations (no LLM)",
       "type": "shell",
-      "command": "cd '${workspaceFolder}/common/translation-app/backend' && node src/scripts/verify-translations-spell-check.js --no-llm",
+      "command": "cd '${workspaceFolder}/common/translation-app/backend' && npm install --silent && node src/scripts/verify-translations-spell-check.js --no-llm",
       "group": "build",
       "presentation": {
         "reveal": "always",
@@ -1342,7 +1353,18 @@
     {
       "label": "Translation App | verify translations (LLM)",
       "type": "shell",
-      "command": "cd '${workspaceFolder}/common/translation-app/backend' && node src/scripts/verify-translations-spell-check.js",
+      "command": "cd '${workspaceFolder}/common/translation-app/backend' && npm install --silent && node src/scripts/verify-translations-spell-check.js",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      }
+    },
+    {
+      "label": "Translation App | verify translations (LLM + recheck)",
+      "type": "shell",
+      "command": "cd '${workspaceFolder}/common/translation-app/backend' && npm install --silent && node src/scripts/verify-translations-spell-check.js --recheck",
       "group": "build",
       "presentation": {
         "reveal": "always",
@@ -1364,7 +1386,7 @@
     {
       "label": "Translation App | update metadata",
       "type": "shell",
-      "command": "cd '${workspaceFolder}/common/translation-app/backend' && npm run generate-metadata && npm run save-meta-keys-usage && npm run generate-auto-comments-metadata",
+      "command": "cd '${workspaceFolder}/common/translation-app/backend' && npm install --silent && npm run generate-metadata && npm run save-meta-keys-usage && npm run generate-auto-comments-metadata",
       "group": "build",
       "presentation": {
         "reveal": "always",

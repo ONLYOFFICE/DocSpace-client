@@ -3,11 +3,12 @@
   "content": "Integration name",
   "content_en_sha1_hash": "f28419904f21e4ead21f3c80d3ff939d87dfb4c7",
   "created_at": "2025-10-27T16:14:31.644Z",
-  "updated_at": "2025-11-19T15:02:41.583Z",
+  "updated_at": "2026-04-11T21:02:48.685Z",
   "comment": {
-    "text": "This text appears as the label for a form field, specifically within the AI Settings section of Portal Settings. It represents the name of an integration being configured, and translators should ensure accuracy and clarity for users setting up integrations.",
+    "text": "This is a label for an input field where the user enters the name of an AI integration. It appears in the AI settings section.",
     "is_auto": true,
-    "updated_at": "2025-10-27T17:27:51.671Z"
+    "updated_at": "2026-04-11T21:02:48.685Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

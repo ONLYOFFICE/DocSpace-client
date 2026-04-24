@@ -3,23 +3,24 @@
   "content": "Link <1>«{{oldLinkTitle}}»</1> renamed to <1>«{{linkTitle}}»</1>",
   "content_en_sha1_hash": "21f8bbe2e723f0d28d57598de084970a742352cf",
   "created_at": "2025-05-19T21:30:54.916Z",
-  "updated_at": "2026-04-07T19:35:05.119Z",
+  "updated_at": "2026-04-13T14:59:05.796Z",
   "comment": {
-    "text": "This translation key is used to display a notification when a room's external link has been renamed. The notification will show a before-and-after comparison of the old and new link titles. It appears in the UI for the \"Room External Link\" feature.",
+    "text": "This is a feed message indicating that an external link associated with a room has been renamed. It appears in the activity feed to inform users of the change. `{{oldLinkTitle}}` is the original name of the link, and `{{linkTitle}}` is the new name.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:40:49.333Z"
+    "updated_at": "2026-04-11T21:12:52.331Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 262,
-      "context": "return t(\"InfoPanel:RoomLogoChanged\");\n case FeedActionKeys.RoomLogoDeleted:\n return t(\"InfoPanel:RoomLogoChanged\");\n case FeedActionKeys.RoomExternalLinkCreated:\n return t(\"InfoPanel:RoomExternalLinkCreated\");\n case FeedActionKeys.RoomExternalLinkRenamed:\n return (\n <Trans\n t={t}\n ns=\"InfoPanel\"\n i18nKey=\"RoomExternalLinkRenamed\"",
+      "line_number": 267,
+      "context": "case FeedActionKeys.RoomExternalLinkRenamed:\n return (\n <Trans\n t={t}\n ns=\"InfoPanel\"\n i18nKey=\"RoomExternalLinkRenamed\"\n values={{\n linkTitle: (feed.data as TFeedData).title,\n oldLinkTitle: (feed.data as TFeedData).oldTitle,\n }}\n components={{ 1: <strong key={(feed.data as TFeedData).title} /> }}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 227,
-      "context": "return t(\"InfoPanel:RoomLogoChanged\");\n case FeedActionKeys.RoomLogoDeleted:\n return t(\"InfoPanel:RoomLogoChanged\");\n case FeedActionKeys.RoomExternalLinkCreated:\n return t(\"InfoPanel:RoomExternalLinkCreated\");\n case FeedActionKeys.RoomExternalLinkRenamed:\n return (\n <Trans\n t={t as TFunction}\n ns=\"InfoPanel\"\n i18nKey=\"RoomExternalLinkRenamed\"",
+      "line_number": 232,
+      "context": "case FeedActionKeys.RoomExternalLinkRenamed:\n return (\n <Trans\n t={t as TFunction}\n ns=\"InfoPanel\"\n i18nKey=\"RoomExternalLinkRenamed\"\n values={{\n linkTitle: feed.data.title,\n oldLinkTitle: feed.data.oldTitle,\n }}\n components={{ 1: <strong /> }}",
       "module": "/packages/client"
     }
   ],

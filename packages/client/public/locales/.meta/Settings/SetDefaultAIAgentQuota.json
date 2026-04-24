@@ -3,23 +3,24 @@
   "content": "Set the default storage quota for {{aiAgents}} in this {{productName}}. It can be adjusted later in the settings or customized individually when creating each {{aiAgent}}.",
   "content_en_sha1_hash": "0b464c6f59c8a1f568d8cf6788d5def210229e8d",
   "created_at": "2025-12-19T13:03:37.711Z",
-  "updated_at": "2026-04-09T01:05:54.821Z",
+  "updated_at": "2026-04-11T21:22:13.063Z",
   "comment": {
-    "text": "This text describes the ability to set a default storage quota for AI agents within the product. It appears as a subtitle or toggle description in the Portal Settings, specifically in the storage management section, and indicates that the quota can be adjusted later. Translators should ensure the phrasing accurately reflects the adjustability of this default setting.",
+    "text": "This is a subtitle or toggle description for setting the default storage quota for AI agents. It explains that the quota can be adjusted later or customized individually, and includes variables for `productName`, `aiAgents` (plural), and `aiAgent` (singular).",
     "is_auto": true,
-    "updated_at": "2025-12-22T10:09:37.054Z"
+    "updated_at": "2026-04-11T21:22:13.063Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/MobileQuotas.js",
-      "line_number": 71,
-      "context": "title={t(\"QuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-ai-agent\"\n subtitle={t(\"SetDefaultAIAgentQuota\", {\n productName: t(\"Common:ProductName\"),\n aiAgents: t(\"Common:AIAgents\"),\n aiAgent: t(\"Common:AIAgent\"),\n })}\n isDisabled={isDisabled}",
+      "line_number": 72,
+      "context": "title={t(\"QuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-ai-agent\"\n subtitle={t(\"SetDefaultAIAgentQuota\", {\n productName: getBrandName(\"ProductName\"),\n aiAgents: t(\"Common:AIAgents\"),\n aiAgent: t(\"Common:AIAgent\"),\n })}\n isDisabled={isDisabled}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerAIAgent.tsx",
-      "line_number": 65,
-      "context": "saveQuota={saveQuota}\n {...initialSizeProp}\n isQuotaSet={isDefaultAIAgentsQuotaSet}\n tabIndex={3}\n dataTestId=\"quota_ai_agent\"\n toggleDescription={t(\"SetDefaultAIAgentQuota\", {\n productName: t(\"Common:ProductName\"),\n aiAgents: t(\"Common:AIAgents\"),\n aiAgent: t(\"Common:AIAgent\"),\n })}\n />",
+      "line_number": 66,
+      "context": "saveQuota={saveQuota}\n {...initialSizeProp}\n isQuotaSet={isDefaultAIAgentsQuotaSet}\n tabIndex={3}\n dataTestId=\"quota_ai_agent\"\n toggleDescription={t(\"SetDefaultAIAgentQuota\", {\n productName: getBrandName(\"ProductName\"),\n aiAgents: t(\"Common:AIAgents\"),\n aiAgent: t(\"Common:AIAgent\"),\n })}\n />",
       "module": "/packages/client"
     }
   ],
@@ -75,13 +76,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'luodessa jokainen {{aiAgent}}' is grammatically incorrect in Finnish and fails to convey the meaning 'when creating each {{aiAgent}}'. It should be 'luotaessa jokaista {{aiAgent}}ia' or similar to indicate the action of creating each individual agent.",
-          "suggestion": "Määritä oletusvarastokapasiteetti {{aiAgents}}ille tässä {{productName}}:ssä. Sitä voidaan säätää myöhemmin asetuksissa tai räätälöidä yksilöllisesti luotaessa jokaista {{aiAgent}}ia."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -117,25 +112,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'customized individually' was translated as 'ປັບແນວໂນ້ມເປັນເອກະລາດ' (adjust trends independently), which is semantically incorrect in this context. It should mean 'customized/set separately'.",
-          "suggestion": "ຕັ້ງຄ່າຂອບເຂດການເກັບຂໍ້ມູນເລີ່ມຕົ້ນສຳລັບ {{aiAgents}} ໃນ {{productName}} ນີ້. ສາມາດປັບປ່ຽນໄດ້ໃນພາຍຫຼັງໃນການຕັ້ງຄ່າ ຫຼື ກຳນົດແຍກຕ່າງຫາກເມື່ອສ້າງ {{aiAgent}} ແຕ່ລະອັນ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'noslēguma default kvotu' is redundant and grammatically incorrect in Latvian. 'Noslēguma' means 'final/concluding', whereas the English 'default' refers to a preset value. Using both 'noslēguma' and 'default' is a mistranslation of the technical intent.",
-          "suggestion": "Iestatiet {{aiAgents}} par default glabes kvotu šajā {{productName}}. To var regulēt vēlāk iestatījumos vai personalizēt atsevišķi, izveidojot katru {{aiAgent}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -189,13 +172,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'podnapetost' means 'under-voltage' or 'undervoltage' in Slovenian. The correct term for 'quota' in the context of storage is 'kvota' or 'limit'.",
-          "suggestion": "Nastavite privzeto kvoto shrambitve za {{aiAgents}} v tem {{productName}}. Kasneje jo lahko prilagodite v nastavitvah ali prilagodite individualno pri ustvarjanju vsakega {{aiAgent}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
@@ -207,13 +184,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "wrong_language",
-          "description": "The translation is in Ukrainian, not Serbian (Cyrillic). Words like 'Поставити', 'складишного', 'у цьому', and 'Його можна буде' are Ukrainian.",
-          "suggestion": "Поставите подразчајни лимит складиштног простора за {{aiAgents}} у овом {{productName}}. Може се касније прилагодити у подешавањима или подесити индивидуално при креирању сваког {{aiAgent}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

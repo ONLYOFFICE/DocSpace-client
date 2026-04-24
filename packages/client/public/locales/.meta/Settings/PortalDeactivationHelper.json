@@ -3,17 +3,18 @@
   "content": "If you wish to deactivate this {{productName}}, your space and all information associated with it will be blocked so that no one has access to it for a particular period. To do that, click the Deactivate button. A link to confirm the operation will be sent to the email address of the space owner.\nIn case you want to come back to the space and continue using it, you will need to use the second link provided in the confirmation email. So, please, keep this email in a safe place.",
   "content_en_sha1_hash": "9a1c4489d8b479bfef9c9f90a924b29e8ecfec2c",
   "created_at": "2025-05-19T21:30:52.193Z",
-  "updated_at": "2026-04-09T02:03:12.263Z",
+  "updated_at": "2026-04-11T21:23:01.367Z",
   "comment": {
-    "text": "\"This translation key is used to describe the process of deactivating a portal and blocking access to its associated information. It will appear on the Deactivate button in the Portal Settings page, providing users with instructions and warnings about the impact of deactivation.\"",
+    "text": "This is a helper text providing instructions and warnings about deactivating a portal. It appears below the main description on the portal deactivation page and includes a `{{productName}}` variable for the product's brand name.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:47.953Z"
+    "updated_at": "2026-04-11T21:23:01.367Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/delete-data/portalDeactivation.js",
-      "line_number": 83,
-      "context": "<MainContainer>\n <Text fontSize=\"13px\" className=\"description\">\n {t(\"PortalDeactivationDescription\")}\n </Text>\n <Text className=\"helper\">\n {t(\"PortalDeactivationHelper\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <ButtonWrapper>\n <Button",
+      "line_number": 84,
+      "context": "<MainContainer>\n <Text fontSize=\"13px\" className=\"description\">\n {t(\"PortalDeactivationDescription\")}\n </Text>\n <Text className=\"helper\">\n {t(\"PortalDeactivationHelper\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <ButtonWrapper>\n <Button",
       "module": "/packages/client"
     }
   ],
@@ -27,37 +28,19 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'إستضافتك' (your hosting) instead of 'مساحتك' (your space). In the context of ONLYOFFICE DocSpace, 'Space' is a specific entity, and translating it as 'hosting' changes the technical meaning of the product feature.",
-          "suggestion": "إذا كنت ترغب في إلغاء تنشيط {{productName}} هذا، فسيتم حظر مساحتك وجميع المعلومات المرتبطة بها حتى لا يتمكن أي شخص من الوصول إليها لفترة معينة. للقيام بذلك، انقر فوق زر إلغاء التنشيط. سيتم إرسال ارتباط لتأكيد العملية إلى عنوان البريد الإلكتروني لمالك المساحة.\nفي حالة رغبتك في العودة إلى المساحة ومتابعة استخدامها، ستحتاج إلى استخدام الارتباط الثاني الموجود في رسالة البريد الإلكتروني للتأكيد. لذا، من فضلك، احتفظ بهذا البريد الإلكتروني في مكان آمن."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'domeniniz' (your domain) instead of 'space' (məkan/sahə). In the context of ONLYOFFICE DocSpace, a 'space' is a specific organizational unit, whereas a 'domain' refers to a web address/network entity. This changes the technical meaning of the warning.",
-          "suggestion": "Bu {{productName}}-i deaktiv etmək istəyirsinizsə, məkanınız və onunla əlaqəli bütün məlumatlar bloklanacaq ki, heç kim müəyyən müddət ərzində ona daxil ola bilməsin. Bunu etmək üçün Deaktiv edin düyməsini sıxın. Əməliyyatı təsdiqləmək üçün məkan sahibinin e-poçt ünvanına keçid göndəriləcək.\nDomenə qayıtmaq və ondan istifadə etməyə davam etmək istədiyiniz halda, təsdiq e-məktubunda verilmiş ikinci keçiddən istifadə etməlisiniz. Buna görə də, lütfən, bu e-məktubu təhlükəsiz yerdə saxlayın."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical gender mismatch: 'втория линк' (masculine) is paired with 'предоставена' (feminine), which makes the sentence grammatically incorrect in Bulgarian.",
-          "suggestion": "В случай, че искате да се върнете в пространството и да продължите да го ползвате, ще трябва да използвате втория линк, предоставен в имейла за потвърждение. Затова, моля, запазете този имейл на сигурно място."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -87,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Finnish translation omits the instruction to 'keep this email in a safe place' (säilytä tämä sähköposti), which is a critical warning for the user to avoid losing access.",
-          "suggestion": "Jos haluat deaktivoida tämän {{productName}}-n, tilasi ja kaiken siihen liittyvän tiedon, siihen pääsy estetään kaikilta tietyksi ajaksi. Tehdäksesi sen, klikkaa Deaktivoi-painiketta. Vahvistuslinkki lähetetään tilan omistajan sähköpostiosoitteeseen.\nJos haluat tulla takaisin tilaan ja jatkaa sen käyttämistä, sinun täytyy käyttää vahvistussähköpostissa olevaa toista linkkiä. Joten, säilytä tämä sähköposti turvallisessa paikassa."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -159,25 +136,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses European Portuguese spelling ('desactivar', 'utilizá-lo', 'terá de') instead of Brazilian Portuguese ('desativar', 'utilizá-lo', 'terá que'), which is inconsistent with the target locale (Portuguese - Brazil).",
-          "suggestion": "Caso pretenda desativar este {{productName}}, o seu espaço e toda a informação a ele associada serão bloqueados para que ninguém tenha acesso ao mesmo durante um determinado período. Para fazer isso, clique no botão Desativar. Será enviado um link para confirmar a operação para o e-mail do proprietário do espaço.\nCaso pretenda voltar ao espaço e continuar a utilizá-lo, você terá que utilizar o segundo link fornecido no e-mail de confirmação. Então, por favor, guarde este e-mail em um lugar seguro."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation uses the past tense ('a fost trimis' - was sent) instead of the future tense ('will be sent') used in the English source. This implies the action has already happened, which is incorrect for an instruction describing a future step.",
-          "suggestion": "Dacă doriţi să dezactivați acest {{productName}}, spaţiul dvs şi toate informaţiile asociate cu acesta vor fi blocate, astfel încât nimeni nu-l va accesa pentru o anumită perioadă. Pentru a face acest lucru, apăsaţi butonul Dezactivare. Un link pentru confirmarea operaţiei va fi trimis către adresa de email a proprietarului spaţiului.\nÎn cazul în care doriţi să reveniţi la spaţiu şi să continuaţi să îl utilizaţi, va trebui să folosiţi al doilea link furnizat în email-ul de confirmare. Aşadar, vă rugăm să păstraţi acest email într-un loc sigur."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -225,13 +190,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical error in the first sentence: 'ваш простір і всю пов’язану з ним інформацію буде заблоковано' uses a singular verb 'буде' for a compound subject, and the case of 'всю... інформацію' is incorrect for the subject position. It should be 'ваш простір і вся пов’язана з ним інформація будуть заблоковані'.",
-          "suggestion": "Якщо ви деактивуєте цей {{productName}}, ваш простір і вся пов’язана з ним інформація будуть заблоковані, щоб ніхто не мав до них доступу протягом певного періоду. Для цього натисніть кнопку «Деактивувати». На адресу електронної пошти власника простору буде надіслано посилання для підтвердження операції.\nЯкщо ви забажаєте повернутися до простору та продовжити його використання, вам потрібно буде скористатися другим посиланням, наданим в електронному листі з підтвердженням. Тому, будь ласка, зберігайте цей електронний лист у безпечному місці."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -243,13 +202,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The second paragraph of the English text, which explains how to reactivate the space using the second link in the email, is completely missing from the Chinese translation.",
-          "suggestion": "如果您希望停用此{{productName}}，您的空间及其所有相关信息将被阻止，以便在特定时期内无人可以访问它。为此，请点击停用按钮。确认操作的链接将发送到空间所有者的电子邮件地址。\n\n如果您想重新回到该空间并继续使用，您需要使用确认邮件中提供的第二个链接。因此，请务必妥善保存此邮件。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

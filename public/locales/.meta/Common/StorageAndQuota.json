@@ -3,11 +3,12 @@
   "content": "Storage / Quota",
   "content_en_sha1_hash": "0803802b74bb476878a34c8d544b0b2f5a1fecb8",
   "created_at": "2025-05-19T21:30:49.101Z",
-  "updated_at": "2026-04-07T22:19:54.669Z",
+  "updated_at": "2026-04-23T17:24:01.898Z",
   "comment": {
-    "text": "This translation key is used to display a label indicating storage and quota information. It appears as a table header column title in a UI component, informing users about the available storage capacity. The text will vary depending on whether default rooms quota has been set or not.",
+    "text": "This is a column header or a label in a details panel, indicating the total storage used and the allocated quota for a specific item or room. It appears when a default quota is set.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:38:32.496Z"
+    "updated_at": "2026-04-11T20:42:01.040Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -18,19 +19,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 773,
+      "line_number": 765,
       "context": "showStorageInfo &&\n columns.splice(columns.length, 0, {\n key: \"Storage\",\n title:\n isDefaultRoomsQuotaSet && !isArchiveFolder\n ? t(\"Common:StorageAndQuota\")\n : t(\"Common:Storage\"),\n enable: roomQuotaColumnIsEnable,\n sortBy: SortByFieldName.UsedSpace,\n resizable: true,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 773,
+      "line_number": 765,
       "context": "showStorageInfo &&\n columns.splice(columns.length, 0, {\n key: \"Storage\",\n title:\n isDefaultRoomsQuotaSet && !isArchiveFolder\n ? t(\"Common:StorageAndQuota\")\n : t(\"Common:Storage\"),\n enable: roomQuotaColumnIsEnable,\n sortBy: SortByFieldName.UsedSpace,\n resizable: true,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 773,
+      "line_number": 765,
       "context": "showStorageInfo &&\n columns.splice(columns.length, 0, {\n key: \"Storage\",\n title:\n isDefaultRoomsQuotaSet && !isArchiveFolder\n ? t(\"Common:StorageAndQuota\")\n : t(\"Common:Storage\"),\n enable: roomQuotaColumnIsEnable,\n sortBy: SortByFieldName.UsedSpace,\n resizable: true,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     }
@@ -75,13 +76,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Ποσόστωση' (Percentage) is used instead of 'Όριο ποσοστού' or 'Quota' (Ποσό/Όριο). In the context of storage, 'Quota' refers to a limit/allocation, not the mathematical concept of percentage.",
-          "suggestion": "Αποθ. χώρος / Όριο"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -177,13 +172,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'සලාකය' (salāka) is not the correct term for 'Quota' in a computing/storage context. It is an obscure or incorrect term. The standard technical term for Quota in Sinhala is 'සීමාව' (limit) or 'කොටාව' (quota/share).",
-          "suggestion": "ආචයනය / සීමාව"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -195,13 +184,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Shranjevanje' means 'Saving' (as in saving a file), whereas the English 'Storage' in this context refers to 'Storage space' or 'Capacity'. The correct term for storage in Slovenian is 'Shranjevanje prostora' or more commonly 'Shramba'.",
-          "suggestion": "Shramba / Kvota"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

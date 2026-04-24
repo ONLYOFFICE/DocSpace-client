@@ -40,6 +40,7 @@ import { SettingsDSConnectSkeleton } from "@docspace/shared/skeletons/settings";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import * as Styled from "./index.styled";
 import styles from "./index.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const URL_REGEX =
   /^(?:https?:\/\/(?:[^\/]+\/)?|^\/)[-a-zA-Z0-9@:%._\+~#=]{1,256}\/?$/;
@@ -362,7 +363,7 @@ const DocumentService = ({
                 <Label
                   htmlFor="internalAdress"
                   text={t("Settings:DocumentServiceLocationUrlInternal", {
-                    productName: t("Common:ProductName"),
+                    productName: getBrandName("ProductName"),
                   })}
                 />
                 <InputBlock
@@ -389,7 +390,7 @@ const DocumentService = ({
                 <Label
                   htmlFor="portalAdress"
                   text={t("Settings:DocumentServiceLocationUrlPortal", {
-                    productName: t("Common:ProductName"),
+                    productName: getBrandName("ProductName"),
                   })}
                 />
                 <InputBlock

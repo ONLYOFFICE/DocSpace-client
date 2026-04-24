@@ -3,11 +3,12 @@
   "content": "Don't display cancellation notification again",
   "content_en_sha1_hash": "537727f09456ab87cd615e057378ddfcf8cdf4b9",
   "created_at": "2025-05-19T21:30:55.169Z",
-  "updated_at": "2026-04-07T19:35:05.100Z",
+  "updated_at": "2026-04-11T21:10:56.177Z",
   "comment": {
-    "text": "\"Don't display cancellation notification again\" is a message that allows users to toggle off the display of a confirmation notification when canceling an operation. This option appears as a button in a file management interface and helps avoid repetitive notifications.",
+    "text": "This is a checkbox label. It allows the user to disable future notifications about canceling an operation.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:40:16.929Z"
+    "updated_at": "2026-04-11T21:10:56.177Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,17 +3,18 @@
   "content": "Set storage quota to define the maximum disk space for this {{productName}}.",
   "content_en_sha1_hash": "499f7a97f93e9c092c5eca67c5fa8cfdfa381f2e",
   "created_at": "2025-05-19T21:30:48.569Z",
-  "updated_at": "2026-04-07T23:27:37.683Z",
+  "updated_at": "2026-04-12T21:12:45.877Z",
   "comment": {
-    "text": "\"Defines the maximum disk space allowed for {{productName}}. This quota will be displayed as a storage limit option in the [Change Storage Quota Dialog] when setting or editing storage limits.\"",
+    "text": "This is a descriptive sentence within a dialog, explaining the purpose of setting a storage quota. It includes the variable `{{productName}}` which will be replaced with the product's brand name.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:41:44.059Z"
+    "updated_at": "2026-04-11T20:43:13.444Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/change-storage-quota/index.tsx",
-      "line_number": 145,
-      "context": "<Text className={styles.description}>\n {isDisableQuota\n ? t(\"Common:TurnOffDiskSpaceLimit\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"Common:SetDiskSpaceQuota\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {!isDisableQuota ? (\n <QuotaForm",
+      "line_number": 146,
+      "context": "<Text className={styles.description}>\n {isDisableQuota\n ? t(\"Common:TurnOffDiskSpaceLimit\", {\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"Common:SetDiskSpaceQuota\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n {!isDisableQuota ? (\n <QuotaForm",
       "module": "/packages/shared"
     }
   ],
@@ -105,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation uses 'ກຸ້ມຂັ້ນເງິນ' (monetary limit/quota) instead of 'ໂກຕ້າການເກັບຮັກສາ' (storage quota). The current translation incorrectly implies a financial/money limit rather than disk space.",
-          "suggestion": "ກຳນົດໂກຕ້າການເກັບຮັກສາເພື່ອຕັ້ງຄ່າຂະໜາດສູງສຸດຂອງເນື້ອທີ່ໃນ {{productName}} ນີ້."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -159,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation incorrectly interprets 'Set storage quota' as 'Set storage quota to show/display the maximum disk space' (පෙන්වීමට), whereas the English source means 'Set storage quota to define/limit the maximum disk space'.",
-          "suggestion": "මෙම {{productName}} සඳහා උපරිම තැටියේ ඉඩ ප්‍රමාණය නිර්වචනය කිරීමට ආචයන සලාකය සකසන්න."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

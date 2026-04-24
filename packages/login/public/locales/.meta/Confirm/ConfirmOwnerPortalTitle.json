@@ -3,17 +3,18 @@
   "content": "Please confirm you want to change the {{productName}} owner to {{newOwner}}.",
   "content_en_sha1_hash": "299d4f92a0e0c064c9b4b9ea7b85d72d15f3e4d6",
   "created_at": "2025-05-19T21:30:57.340Z",
-  "updated_at": "2026-04-07T19:35:05.242Z",
+  "updated_at": "2026-04-11T21:30:32.411Z",
   "comment": {
-    "text": "This translation key is used to display a message that asks users to confirm changing the owner of a product. It appears as a subtitle in a UI element and provides context through placeholders for the product name and new owner.",
+    "text": "This is the title of a confirmation dialog. It appears when a user attempts to change the owner of the portal, asking them to confirm this action. `{{productName}}` is the name of the product (e.g., ONLYOFFICE DocSpace), and `{{newOwner}}` is the email address of the new owner.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:47:31.298Z"
+    "updated_at": "2026-04-11T21:30:32.411Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PortalOwnerChange/page.client.tsx",
-      "line_number": 91,
-      "context": "})}\n </Text>\n ) : (\n <>\n <Text className=\"subtitle\">\n {t(\"ConfirmOwnerPortalTitle\", {\n newOwner,\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <div className={styles.buttonsWrapper}>",
+      "line_number": 92,
+      "context": "})}\n </Text>\n ) : (\n <>\n <Text className=\"subtitle\">\n {t(\"ConfirmOwnerPortalTitle\", {\n newOwner,\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <div className={styles.buttonsWrapper}>",
       "module": "/packages/login"
     }
   ],

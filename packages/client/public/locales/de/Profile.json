@@ -27,5 +27,5 @@
   "TelegramAccountDisconnect": "Telegramm trennen",
   "TelegramAccountDisconnectDescription": "Ihr @{{username}}-Konto ist für Telegram-Benachrichtigungen angemeldet. Sie können die Verbindung zu diesem Konto trennen. In diesem Fall erhalten Sie keine Benachrichtigungen.",
   "TerminateAllSessions": "Alle Sitzungen außer der aktuellen beenden",
-  "TwoFactorDescription": "Zwei-Faktor-Authentifizierung über eine App für Generierung von Codes wurde für alle aktiviert."
+  "TwoFactorDescription": "Zwei-Faktor-Authentifizierung über eine App zur Code-Generierung wurde vom Administrator für alle Benutzer aktiviert."
 }

@@ -65,6 +65,7 @@ import styles from "./EmbeddingPanel.module.scss";
 
 import { DisplayBlock } from "./sub-components/DisplayBlock";
 import { CheckboxElement } from "./sub-components/CheckboxElement";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type LinkParamsLinkShareToType = {
 	denyDownload: boolean;
@@ -431,7 +432,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
 									</Trans>
 								) : (
 									t("EmbeddingPanel:EmbeddingBarDescription", {
-										productName: t("Common:ProductName"),
+										productName: getBrandName("ProductName"),
 									})
 								)}
 							</Text>
@@ -521,7 +522,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
 										img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
 										title={t("JavascriptSdk:Header")}
 										description={t("JavascriptSdk:HeaderDescription", {
-											productName: t("Common:ProductName"),
+											productName: getBrandName("ProductName"),
 										})}
 										dataTestId="show_title"
 									/>

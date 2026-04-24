@@ -3,11 +3,12 @@
   "content": "Embed",
   "content_en_sha1_hash": "ad02e14e2841dfbd22ab2caa12b5541c5b01a53a",
   "created_at": "2025-08-26T11:15:03.751Z",
-  "updated_at": "2026-04-10T08:21:04.331Z",
+  "updated_at": "2026-04-23T17:24:01.907Z",
   "comment": {
-    "text": "This key is used to label an option or button related to embedding content or functionality. It likely appears as a button or menu item allowing users to embed something, often related to sharing or security settings. Translators should consider the context of embedding, which often involves sharing or integrating content elsewhere.",
+    "text": "This is a button label that, when clicked, opens settings related to embedding the current document or file into another web page.",
     "is_auto": true,
-    "updated_at": "2025-08-26T11:28:46.207Z"
+    "updated_at": "2026-04-11T20:54:10.639Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -18,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2375,
+      "line_number": 2434,
       "context": "disabled: !item.indexing || !item.security?.IndexExport,\n },\n {\n id: \"option_embedding-setting\",\n key: \"embedding-settings\",\n label: t(\"Common:Embed\"),\n icon: CodeReactSvgUrl,\n onClick: () => this.onOpenEmbeddingSettings(item),\n disabled: !item.security?.Embed,\n },\n {",
       "module": "/packages/client"
     },
@@ -93,13 +94,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian word 'Տեղադրել' (Teghadrel) typically means 'to install', 'to place', or 'to post'. In the context of software 'embedding' (integrating content into another site via code), the more accurate technical term is 'Ներդրել' (Nerdrel).",
-          "suggestion": "Ներդրել"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -129,13 +124,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian word 'Iegult' means 'to lie down' or 'to nestle' (physical movement/positioning). In the context of software and web content (embedding code/functionality), the correct term is 'Iembedding' or 'Iekļaut'.",
-          "suggestion": "Iembedding"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -195,13 +184,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'E ngulitur' means 'embedded' in the sense of being deeply rooted, ingrained, or fixed (like a habit or a physical object stuck in something). In a software UI context for 'Embed' (integrating content/code), the correct term should be an imperative verb or a noun related to integration.",
-          "suggestion": "Ngjit"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -219,13 +202,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Göm' is an imperative verb (command) which sounds unnatural for a UI button or menu label in this context. In Turkish software localization, 'Embed' is typically translated as a noun or a gerund to represent the action/feature.",
-          "suggestion": "Yerleştir"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

@@ -1,6 +1,6 @@
 {
-  "ActionCannotBeUndone": "Izbrani onemogočeni uporabniki bodo odstranjeni iz {{productName}}. Tega dejanja ni mogoče razveljaviti.",
   "ActionCannotBeUndoneGuests": "Izbrani onemogočeni gostje bodo odstranjeni iz {{productName}}. Tega dejanja ni mogoče razveljaviti.",
+  "ActionCannotBeUndoneUsers": "Izbrani onemogočeni uporabniki bodo odstranjeni iz {{productName}}. Tega dejanja ni mogoče razveljaviti.",
   "CannotReassignFiles": "Če izbrišete več uporabnikov hkrati, ne morete dodeliti njihovih datotek drugim uporabnikom.",
   "DeleteGroupGuestsSuccessMessage": "Gostje so bili uspešno izbrisani.",
   "DeleteGroupUsersSuccessMessage": "Uporabniki so bili uspešno izbrisani.",

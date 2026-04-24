@@ -3,11 +3,12 @@
   "content": "Link has been copied to the clipboard",
   "content_en_sha1_hash": "2254c41229de93951969596ba422451fa0eff387",
   "created_at": "2025-05-19T21:30:46.142Z",
-  "updated_at": "2026-04-08T05:42:25.552Z",
+  "updated_at": "2026-04-23T17:24:01.725Z",
   "comment": {
-    "text": "This translation key is used to display a success message when a link is successfully copied to the clipboard, typically in a button or link copy action. It appears as an alert or notification in UI components such as ExternalLinks and MetadataUrlField, and is used to provide a positive feedback to users after they have copied a link.",
+    "text": "This is a toast message that appears after a user successfully copies a link to their clipboard.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:41.864Z"
+    "updated_at": "2026-04-11T20:49:44.633Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -30,49 +31,49 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 502,
+      "line_number": 507,
       "context": "? `${window.location.href}&preview=${id}`\n : webUrl\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n onCopyLink = async (item, t) => {\n const { shared, navigationPath } = this.selectedFolderStore;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 502,
+      "line_number": 507,
       "context": "? `${window.location.href}&preview=${id}`\n : webUrl\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n onCopyLink = async (item, t) => {\n const { shared, navigationPath } = this.selectedFolderStore;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 502,
+      "line_number": 507,
       "context": "? `${window.location.href}&preview=${id}`\n : webUrl\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n onCopyLink = async (item, t) => {\n const { shared, navigationPath } = this.selectedFolderStore;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 502,
+      "line_number": 507,
       "context": "? `${window.location.href}&preview=${id}`\n : webUrl\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n onCopyLink = async (item, t) => {\n const { shared, navigationPath } = this.selectedFolderStore;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 502,
+      "line_number": 507,
       "context": "? `${window.location.href}&preview=${id}`\n : webUrl\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n onCopyLink = async (item, t) => {\n const { shared, navigationPath } = this.selectedFolderStore;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 502,
+      "line_number": 507,
       "context": "? `${window.location.href}&preview=${id}`\n : webUrl\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n onCopyLink = async (item, t) => {\n const { shared, navigationPath } = this.selectedFolderStore;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 502,
+      "line_number": 507,
       "context": "? `${window.location.href}&preview=${id}`\n : webUrl\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n onCopyLink = async (item, t) => {\n const { shared, navigationPath } = this.selectedFolderStore;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 502,
+      "line_number": 507,
       "context": "? `${window.location.href}&preview=${id}`\n : webUrl\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n onCopyLink = async (item, t) => {\n const { shared, navigationPath } = this.selectedFolderStore;",
       "module": "/packages/client"
     },
@@ -87,6 +88,18 @@
       "line_number": 176,
       "context": "window.location.assign(fileURL);\n };\n \n const copyLinkFile = async () => {\n await copyShareLink(fileURL);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n const handleClickFile = () => {\n if (isYournTurn) handleFillForm();\n else handleViewForm();",
       "module": "/packages/doceditor"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useFilesActions.ts",
+      "line_number": 96,
+      "context": "const copyFileLink = React.useCallback(\n async (itemId: number) => {\n try {\n const itemLink = await api.files.getFileLink(itemId);\n copyShareLink(itemLink.sharedTo.shareLink);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n } catch (error) {\n toastr.error(\n error instanceof Error ? error.message : String(error),\n );\n }",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useFolderActions.ts",
+      "line_number": 55,
+      "context": "const copyFolderLink = React.useCallback(\n async (itemId: number) => {\n const itemLink = await api.files.getFolderLink(itemId);\n copyShareLink(itemLink.sharedTo.shareLink);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n },\n [t],\n );\n \n return { openFolder, copyFolderLink };",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -201,37 +214,19 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "In a digital/software context, 'Link' should be translated as 'Link' or 'Elo', whereas 'Ligação' usually refers to a physical connection, a phone call, or a relationship. 'Link' is the standard term in Portuguese UI for URLs.",
-          "suggestion": "O link foi copiado para a área de transferência"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'área de trabalho' (Desktop) instead of 'área de transferência' (Clipboard). This changes the technical meaning of where the link was stored.",
-          "suggestion": "Link foi copiado para a área de transferência"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation means 'Media file upload failed', which is the opposite of the English success message 'Link has been copied to the clipboard'.",
-          "suggestion": "Linkul a fost copiat în clipboard"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -243,13 +238,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'පසුරුපුවරුවට' (pasurupuvāruvaṭa) is a misspelling or incorrect term for 'clipboard'. The correct technical term in Sinhala is 'පිටපත් කිරීමේ පුවරුව' or simply 'ක්ලිප්බෝඩ් එකට'. Additionally, 'පිටපත් විය' is a passive form that sounds unnatural for a system notification.",
-          "suggestion": "සබැඳිය ක්ලිප්බෝඩ් එකට පිටපත් කරන ලදී"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

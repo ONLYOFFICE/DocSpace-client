@@ -3,11 +3,12 @@
   "content": "Webhook removed",
   "content_en_sha1_hash": "80509c5a189f693eee965d8eb57cef6201a59d6e",
   "created_at": "2025-05-19T21:30:49.885Z",
-  "updated_at": "2026-04-08T18:53:29.170Z",
+  "updated_at": "2026-04-11T21:28:05.103Z",
   "comment": {
-    "text": "The \"WebhookRemoved\" translation key is used to display a success message when a webhook is removed in the Portal Settings. This message is typically shown after a button or action that deletes a webhook, and it indicates that the removal process has been completed successfully.",
+    "text": "Toast message. Appears after a webhook has been successfully deleted.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:44.814Z"
+    "updated_at": "2026-04-11T21:28:05.103Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order is incorrect for Arabic grammar, making the sentence sound unnatural and technically 'broken' (it reads like 'Webhook was removed' but with the verb placed incorrectly in a way that disrupts the flow). In Arabic, the verb or the noun phrase should be structured differently for a success message.",
-          "suggestion": "تمت إزالة الـ Webhook"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -51,13 +46,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech translation 'Odstranění webhooku' is a noun phrase meaning 'Webhook removal' (the process), whereas the English 'Webhook removed' is a past participle indicating a completed action/status. For a success toast message, the past tense is required.",
-          "suggestion": "Webhook byl odstraněn"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -153,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'Eliminare Webhook' means 'Webhook Removal' (a noun phrase/action), whereas the English 'Webhook removed' is a status message indicating a completed action (past participle).",
-          "suggestion": "Webhook eliminat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

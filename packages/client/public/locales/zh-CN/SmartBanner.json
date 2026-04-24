@@ -1,5 +1,5 @@
 {
-  "AppName": "{{organizationName}} 文档",
-  "AppStore": "在App Store 商店",
-  "GooglePlay": "在Google Play 商店"
+  "AppStore": "在 App Store",
+  "GooglePlay": "在Google Play 商店",
+  "SmartBannerAppName": "{{organizationName}} 文档"
 }

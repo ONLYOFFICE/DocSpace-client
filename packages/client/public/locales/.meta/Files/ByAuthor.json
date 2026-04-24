@@ -3,16 +3,17 @@
   "content": "Author",
   "content_en_sha1_hash": "5fda23d62015b99fb2a9f86b38bcdf2bdf7609c8",
   "created_at": "2025-05-19T21:30:55.305Z",
-  "updated_at": "2026-04-07T19:35:05.078Z",
+  "updated_at": "2026-04-23T17:24:01.847Z",
   "comment": {
-    "text": "This translation key is used to display \"Author\" in various UI contexts, typically as a column title or label. It appears in settings dialogs and table headers, providing context for users to filter or sort data by author.",
+    "text": "This is a short label indicating the author of a file or plugin. It appears in file details, plugin information, and as a column header in tables.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:40:08.220Z"
+    "updated_at": "2026-04-11T21:10:25.483Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Info.tsx",
-      "line_number": 67,
+      "line_number": 68,
       "context": "</Text>\n <div className={styles.info}>\n {plugin.author ? (\n <>\n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\" truncate>\n {t(\"Files:ByAuthor\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight={600} lineHeight=\"20px\">\n {plugin.author}\n </Text>\n </>",
       "module": "/packages/client"
     },
@@ -24,37 +25,37 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 253,
+      "line_number": 245,
       "context": "} = this.props;\n \n const authorBlock = !isPublicRoom\n ? {\n key: \"Author\",\n title: t(\"ByAuthor\"),\n enable: authorColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Author,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 253,
+      "line_number": 245,
       "context": "} = this.props;\n \n const authorBlock = !isPublicRoom\n ? {\n key: \"Author\",\n title: t(\"ByAuthor\"),\n enable: authorColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Author,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 253,
+      "line_number": 245,
       "context": "} = this.props;\n \n const authorBlock = !isPublicRoom\n ? {\n key: \"Author\",\n title: t(\"ByAuthor\"),\n enable: authorColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Author,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 253,
+      "line_number": 245,
       "context": "} = this.props;\n \n const authorBlock = !isPublicRoom\n ? {\n key: \"Author\",\n title: t(\"ByAuthor\"),\n enable: authorColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Author,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 253,
+      "line_number": 245,
       "context": "} = this.props;\n \n const authorBlock = !isPublicRoom\n ? {\n key: \"Author\",\n title: t(\"ByAuthor\"),\n enable: authorColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Author,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 253,
+      "line_number": 245,
       "context": "} = this.props;\n \n const authorBlock = !isPublicRoom\n ? {\n key: \"Author\",\n title: t(\"ByAuthor\"),\n enable: authorColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Author,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
@@ -72,7 +73,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 125,
+      "line_number": 126,
       "context": "{ key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"DateAndTimeCreation\", label: t(\"Files:ByCreation\") },\n { key: \"Author\", label: t(\"Files:ByAuthor\") },\n ];\n \n const dataSortOrder = [\n { key: \"descending\", label: t(\"Descending\"), default: true },\n { key: \"ascending\", label: t(\"Ascending\") },",
       "module": "/packages/client"
     },

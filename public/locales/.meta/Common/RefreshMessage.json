@@ -3,18 +3,19 @@
   "content": "Refresh message",
   "content_en_sha1_hash": "477004aadda455680bcab1d2ce9840ec07843b62",
   "created_at": "2025-10-27T16:14:24.162Z",
-  "updated_at": "2026-04-08T01:41:33.262Z",
+  "updated_at": "2026-04-12T03:07:31.796Z",
   "comment": {
-    "text": "This text appears on a button that, when clicked, displays a \"Work in Progress\" notification. It's a tooltip explaining the button's functionality, indicating that a refresh action is being initiated. Translators should ensure the text accurately conveys the action of refreshing and the expectation of a temporary interruption.",
+    "text": "Tooltip for a button that reloads or regenerates a message.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:28:35.036Z"
+    "updated_at": "2026-04-11T20:45:22.094Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/message/Buttons.tsx",
-      "line_number": 184,
-      "context": "</div>\n \n {/*{isLast ? (*/}\n {/*  <div*/}\n {/*    className={styles.buttonsBlockItem}*/}\n {/*    title={t(\"RefreshMessage\")}*/}\n {/*    onClick={() => {*/}\n {/*      toastr.info(t(\"Common:WorkInProgress\"));*/}\n {/*    }}*/}\n {/*  >*/}\n {/*    <ReactSVG src={RefreshIconUrl} />*/}",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/buttons/index.tsx",
+      "line_number": 197,
+      "context": "</div>\n \n {/*{isLast ? (*/}\n {/*  <div*/}\n {/*    className={styles.buttonsBlockItem}*/}\n {/*    title={t(\"RefreshMessage\")}*/}\n {/*    onClick={() => {*/}\n {/*      toastr.info(t(\"WorkInProgress\"));*/}\n {/*    }}*/}\n {/*  >*/}\n {/*    <RefreshIcon />*/}",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation 'Yeni mesaj yenilə' means 'Refresh new message' (imperative command), whereas the English 'Refresh message' in this context refers to the action/functionality of refreshing the message state. The Azerbaijani version sounds like a command to the user to perform an action, rather than a description of the button's function.",
-          "suggestion": "Mesajı yenilə"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -105,13 +100,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '새로 고침 메시지' literally means 'Refresh message' (as in a message that is being refreshed), whereas the context indicates it is a tooltip for a button that triggers a 'Work in Progress' notification. In Korean UI patterns, this should be phrased as '새로 고침 중 메시지 표시' or similar to indicate the action of showing a message during refresh, or more naturally, the English source itself is slightly ambiguous and the Korean translation is too literal/noun-heavy, failing to convey the functional intent described in the context.",
-          "suggestion": "새로 고침 메시지 표시"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {

@@ -3,13 +3,21 @@
   "content": "Enable SSL verification",
   "content_en_sha1_hash": "b1de2c8be8ca70dc18509559f44e4759b65a0684",
   "created_at": "2025-05-19T21:30:49.698Z",
-  "updated_at": "2026-04-08T20:25:46.652Z",
+  "updated_at": "2026-04-11T21:29:14.438Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a radio button label. It enables or disables SSL verification for webhooks.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:29:14.438Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/SSLVerification.js",
+      "line_number": 85,
+      "context": "name=\"ssl\"\n onClick={handleOnChange}\n options={[\n {\n id: \"enable-ssl\",\n label: t(\"EnableSSL\"),\n value: \"true\",\n dataTestId: \"enable_ssl_radio_button\",\n },\n {\n id: \"disable-ssl\",",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

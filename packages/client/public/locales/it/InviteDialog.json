@@ -17,7 +17,6 @@
   "InviteViaLinkDescriptionAgentMembers": "Crea un link universale per i membri di {{productName}} per l’auto-autorizzazione nell’agente.",
   "InviteViaLinkDescriptionRoomGuest": "Crea un link universale per l'autorizzazione automatica nella stanza come ospite.",
   "InviteViaLinkDescriptionRoomMembers": "Crea un link universale per i membri di {{productName}} per l'autorizzazione automatica nella stanza.",
-  "LinkCopySuccess": "Il link di collegamento è stato copiato",
   "SendInvitation": "Invia invito",
   "UserAgentMaxAvailableRoleWarning": "Ospiti e Utenti non possono essere assegnati come gestori dell’agente. Solo gli amministratori della stanza e di {{productName}} sono idonei per il ruolo specificato.",
   "UserMaxAvailableRoleWarning": "Gli ospiti e gli utenti non possono essere assegnati come gestori di stanze. Solo gli amministratori della Stanza e di {{productName}} sono adatti al ruolo specificato.",

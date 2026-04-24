@@ -3,35 +3,66 @@
   "content": "View",
   "content_en_sha1_hash": "69bd4ef9fbd0894a22759c3766b859defbdedbc8",
   "created_at": "2025-05-19T21:30:49.521Z",
-  "updated_at": "2026-04-10T08:21:04.295Z",
+  "updated_at": "2026-04-23T17:24:01.677Z",
   "comment": {
-    "text": "This translation key is used to display the text \"View\" as a label for a button or similar UI element. It appears in various contexts, including a Smart Banner component and a filter section on the Home page, where it serves as a placeholder for an action that allows users to view content or settings.",
+    "text": "This is a button label or menu item for viewing content. It can appear as a standalone button on a smart banner or as a menu option in a context menu.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:35:22.854Z"
+    "updated_at": "2026-04-11T20:39:24.409Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/SmartBanner/index.js",
       "line_number": 98,
-      "context": "<SmartBanner\n title={t(\"SmartBanner:AppName\", {\n organizationName: logoText,\n })}\n author=\"Ascensio System SIA\"\n button={t(\"Common:View\")}\n force={force}\n onClose={() => setIsBannerVisible(false)}\n onInstall={() => setIsBannerVisible(false)}\n storeText={storeText}\n price={priceText}",
+      "context": "<SmartBanner\n title={t(\"SmartBanner:SmartBannerAppName\", {\n organizationName: logoText,\n })}\n author=\"Ascensio System SIA\"\n button={t(\"Common:View\")}\n force={force}\n onClose={() => setIsBannerVisible(false)}\n onInstall={() => setIsBannerVisible(false)}\n storeText={storeText}\n price={priceText}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1135,
-      "context": "case RoomsType.ReadOnlyRoom:\n return {\n id: \"filter_type-view-only\",\n key: RoomsType.ReadOnlyRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:ViewOnlyRooms\"),\n };\n case RoomsType.FormRoom:\n return {\n id: \"filter_type-form\",\n key: RoomsType.FormRoom,",
+      "line_number": 1868,
+      "context": "onSearch={onSearch}\n onClearFilter={onClearFilter}\n getSelectedInputValue={getSelectedInputValue}\n filterHeader={t(\"Common:AdvancedFilter\")}\n placeholder={t(\"Common:Search\")}\n view={t(\"Common:View\")}\n isFavoritesFolder={isFavoritesFolder}\n isPersonalRoom={isPersonalRoom}\n isRooms={isRooms}\n removeSelectedItem={removeSelectedItem}\n clearAll={clearAll}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2111,
+      "line_number": 2170,
       "context": "key: \"view\",\n label:\n this.treeFoldersStore.isRecentFolder ||\n this.treeFoldersStore.isFavoritesFolder\n ? t(\"Open\")\n : t(\"Common:View\"),\n icon: EyeReactSvgUrl,\n onClick: (fileId) => this.onMediaFileClick(fileId, item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/index.tsx",
+      "line_number": 104,
+      "context": "userId=\"\"\n isRecentFolder\n currentDeviceType={currentDeviceType}\n filterHeader={t(\"Common:AdvancedFilter\")}\n placeholder={t(\"Common:Search\")}\n view={t(\"Common:View\")}\n filterTitle={t(\"Files:Filter\")}\n sortByTitle={t(\"Common:SortBy\")}\n selectorLabel=\"\"\n isIndexing={false}\n initSearchValue={initSearchValue}",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
+      "line_number": 178,
+      "context": "const getViewItem = useCallback(\n (i: TFileItem) => {\n return {\n id: \"option_view\",\n key: \"view\",\n label: t(\"Common:View\"),\n icon: EyeReactSvgUrl,\n onClick: () => openFile(i),\n disabled: false,\n };\n },",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsContextMenu.ts",
+      "line_number": 205,
+      "context": "}\n \n model.push({\n id: \"option_view\",\n key: \"view\",\n label: t(\"Common:View\"),\n icon: EyeReactSvgUrl,\n onClick: () => openForm(file, \"view\"),\n disabled: false,\n });",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsContextMenu.ts",
+      "line_number": 205,
+      "context": "}\n \n model.push({\n id: \"option_view\",\n key: \"view\",\n label: t(\"Common:View\"),\n icon: EyeReactSvgUrl,\n onClick: () => openForm(file, \"view\"),\n disabled: false,\n });",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsContextMenu.ts",
+      "line_number": 205,
+      "context": "}\n \n model.push({\n id: \"option_view\",\n key: \"view\",\n label: t(\"Common:View\"),\n icon: EyeReactSvgUrl,\n onClick: () => openForm(file, \"view\"),\n disabled: false,\n });",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 198,
-      "context": "},\n [ShareRights.Read]: {\n access: ShareAccessRights.ReadOnly,\n description: t(\"Common:RoleViewerDescription\"),\n key: \"viewing\",\n label: t(\"Common:Viewer\"),\n icon: EyeReactSvgUrl,\n },\n [ShareRights.FillForms]: {\n access: ShareAccessRights.FormFilling,\n description: \"\",",
+      "line_number": 359,
+      "context": "case ShareAccessRights.Review:\n return t(\"Common:Review\");\n case ShareAccessRights.Comment:\n return t(\"Common:Comment\");\n case ShareAccessRights.ReadOnly:\n return t(\"Common:View\");\n case ShareAccessRights.FormFilling:\n return t(\"Common:FillOut\");\n default:\n return \"\";\n }",
       "module": "/packages/shared"
     }
   ],
@@ -123,13 +154,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao word 'ມຸມມອງ' means 'perspective' or 'point of view' (noun). In the context of a UI button or action (e.g., 'View' in a Smart Banner or 'View' as an action to open a file), the translation should be a verb meaning 'to see' or 'to view' (e.g., 'ເບິ່ງ').",
-          "suggestion": "ເບິ່ງ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -183,13 +208,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak word 'Vyhliadka' means 'Prospect' or 'View' in the sense of a landscape/scenery. In a UI context for a button (action to view content), the correct term is 'Zobraziť'.",
-          "suggestion": "Zobraziť"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -237,13 +256,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Shikoni' is the imperative form (command) addressed to 'you' (plural/formal). In UI design for buttons/actions, 'View' should be translated as a noun or an infinitive-style action. 'Shikoni' sounds like a command to the user to look at something, rather than a label for the action of viewing.",
-          "suggestion": "Shiko"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -3,11 +3,12 @@
   "content": "{{aiProvider}} removed successfully",
   "content_en_sha1_hash": "2fb87679d6f9b8437e82dbd2fee722409102e1c9",
   "created_at": "2025-12-17T14:56:14.667Z",
-  "updated_at": "2026-02-19T13:36:32.696Z",
+  "updated_at": "2026-04-11T21:02:31.402Z",
   "comment": {
-    "text": "This key displays a success message in a dialog after an AI provider has been successfully deleted. It informs the user that the selected AI provider has been removed, using a generic \"AI Provider\" label. Translators should ensure the message maintains a positive and informative tone.",
+    "text": "This is a toast message confirming the successful removal of an AI provider. The `{{aiProvider}}` variable will be replaced with the localized name of the AI provider (e.g., \"AI Assistant\").",
     "is_auto": true,
-    "updated_at": "2025-12-22T09:53:22.141Z"
+    "updated_at": "2026-04-11T21:02:31.402Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

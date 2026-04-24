@@ -3,13 +3,21 @@
   "content": "Browse {{count}} templates available in {{language}}",
   "content_en_sha1_hash": "bd48c3259b19d78df06e5d7ec88daed65fdd632a",
   "created_at": "2026-03-31T15:18:14.862Z",
-  "updated_at": "2026-04-08T06:05:37.322Z",
+  "updated_at": "2026-04-11T20:50:08.639Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a description for a step in a library landing page. It informs the user about the number of templates available in a specific language. `{{count}}` is the number of templates, and `{{language}}` is the language name.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:50:08.639Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/library-landing/HeroSection.tsx",
+      "line_number": 57,
+      "context": "const { t } = useTranslation(\"Common\");\n \n const steps = [\n {\n title: t(\"Common:LibraryStep1Title\"),\n desc: t(\"Common:LibraryStep1Desc\", { count: templatesCount, language }),\n },\n {\n title: t(\"Common:LibraryStep2Title\"),\n desc: t(\"Common:LibraryStep2Desc\"),\n },",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -104,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian verb 'Pārliecinieties' means 'Make sure' or 'Verify', whereas the English 'Browse' means to look through or explore. This changes the intent of the action.",
-          "suggestion": "Pārlūko {{count}} šablonus, kas pieejami {{language}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {

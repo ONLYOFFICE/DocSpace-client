@@ -3,11 +3,12 @@
   "content": "Right panel collapsed",
   "content_en_sha1_hash": "abe48a9ab885b3e2aa26172a01e02da3e777858c",
   "created_at": "2025-05-19T21:30:54.621Z",
-  "updated_at": "2026-04-07T19:35:05.138Z",
+  "updated_at": "2026-04-11T21:14:52.125Z",
   "comment": {
-    "text": "The \"RightPanelCollapsed\" translation key is used to display the text \"Right panel collapsed\" when the right panel in a specific UI element is minimized or hidden. This text appears in a checkbox label and is used to indicate the state of the right panel's visibility.",
+    "text": "This is a checkbox label in the Developer Tools settings. It indicates whether the right panel of the editor is collapsed by default.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:27.187Z"
+    "updated_at": "2026-04-11T21:14:52.125Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

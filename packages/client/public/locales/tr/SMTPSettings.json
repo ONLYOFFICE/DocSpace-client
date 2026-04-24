@@ -1,6 +1,6 @@
 {
   "AuthViaNTLM": "NTLM aracılığıyla kimlik doğrulama",
-  "EnableSSL": "SSL'yi etkinleştir",
+  "EnableSMTPSSL": "SSL'yi etkinleştir",
   "EnterDomain": "Alan adını girin",
   "EnterLogin": "Login girin",
   "EnterPort": "Bağlantı noktasını girin",

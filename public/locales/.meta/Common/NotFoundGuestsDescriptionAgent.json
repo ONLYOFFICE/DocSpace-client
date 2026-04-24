@@ -3,18 +3,19 @@
   "content": "New guests will be added here once you invite them to the agent.",
   "content_en_sha1_hash": "ea62d4ac88eb6d79e4a854f9878e6a21b5253350",
   "created_at": "2025-11-03T12:10:21.136Z",
-  "updated_at": "2026-04-08T03:58:54.416Z",
+  "updated_at": "2026-04-11T20:47:45.777Z",
   "comment": {
-    "text": "This text is displayed in an empty state when no guests have been added to an agent. It instructs the user that new guests will appear after they are invited. Appears within a tabbed interface for people and guests.",
+    "text": "This is a description for an empty state in the People section, displayed when no guests have been invited to the agent yet.",
     "is_auto": true,
-    "updated_at": "2025-11-03T12:12:33.310Z"
+    "updated_at": "2026-04-11T20:47:45.777Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 693,
-      "context": "}\n emptyScreenDescription={\n emptyScreenDescription ??\n (activeTabId === GUESTS_TAB_ID\n ? isAgent\n ? t(\"Common:NotFoundGuestsDescriptionAgent\")\n : t(\"Common:NotFoundGuestsDescription\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"Common:EmptyDescription\", {\n productName: t(\"Common:ProductName\"),\n })",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/selectors/People/index.tsx",
+      "line_number": 778,
+      "context": "}\n emptyScreenDescription={\n emptyScreenDescription ??\n (activeTabId === GUESTS_TAB_ID\n ? isAgent\n ? t(\"NotFoundGuestsDescriptionAgent\")\n : t(\"NotFoundGuestsDescription\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"EmptyDescription\", {\n productName: getBrandName(\"ProductName\"),\n })",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'agent' is translated as 'العميل' (customer/client), which is incorrect in the context of an AI agent or software agent. In technical software contexts, 'agent' should be transliterated or translated as 'الوكيل'.",
-          "suggestion": "سيتم إضافة الضيوف الجدد هنا بمجرد دعوتهم إلى الوكيل."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -57,13 +52,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation uses 'vorstellen' (to introduce) instead of 'einladen' (to invite), which changes the meaning of the action required by the user.",
-          "suggestion": "Neue Gäste werden hier hinzugefügt, sobald Sie sie zum Agenten einladen."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -123,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical error in the subject-verb agreement: 'Jaunie viesi' (plural) is paired with 'tiks pievienoti' (passive voice, but the noun form 'viesi' is nominative, whereas the sentence structure implies a plural subject that doesn't match the singular/plural agreement correctly in this specific Latvian construction, or more simply, 'Jaunie viesi' is nominative but the sentence structure is slightly awkward/incorrectly declined for the intended meaning). Specifically, 'Jaunie viesi' is nominative, but the sentence lacks proper agreement or uses a slightly broken structure. However, the most critical error is the case/agreement: 'Jaunie viesi' (New guests) vs 'Jaunā viesi' or 'Jauni viesi' (plural). Actually, the error is 'Jaunie viesi' (Nominative) vs 'Jauni viesi'. In Latvian, 'Jauni viesi' is the correct plural nominative. 'Jaunie' is an incorrect form here.",
-          "suggestion": "Jauni viesi tiks pievienoti šeit, kad jūs uzaicināsiet viņus aģentam."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -159,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation contains a grammatical error that changes the meaning of the noun: 'Invitații' means 'Invitations', whereas the English text refers to 'New guests' ('Oaspeți noi'). Additionally, the sentence ends with a prepositional error ('în agentul' instead of 'în agent').",
-          "suggestion": "Oaspeții noi vor fi adăugați aici după ce îi invitați în agent."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

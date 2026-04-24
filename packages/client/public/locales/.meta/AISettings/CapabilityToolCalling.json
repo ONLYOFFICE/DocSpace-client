@@ -1,0 +1,29 @@
+{
+  "key_path": "CapabilityToolCalling",
+  "content": "Tool Calling",
+  "content_en_sha1_hash": "d43b0c97e23ca8627a2ee60e923fb74a91937b05",
+  "created_at": "2026-04-23T17:24:00.296Z",
+  "updated_at": "2026-04-23T17:41:42.421Z",
+  "comment": {
+    "text": "Checkbox label in the AI model settings panel used to enable or disable the tool calling capability.",
+    "is_auto": true,
+    "updated_at": "2026-04-23T17:41:42.421Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/ModelSettingsPanel.tsx",
+      "line_number": 142,
+      "context": "label={t(\"AISettings:CapabilityVision\")}\n isChecked={capabilities.vision}\n onChange={() => handleCapabilityChange(\"vision\")}\n />\n <Checkbox\n label={t(\"AISettings:CapabilityToolCalling\")}\n isChecked={capabilities.toolCalling}\n onChange={() => handleCapabilityChange(\"toolCalling\")}\n />\n <Checkbox\n label={t(\"AISettings:CapabilityExtendedThinking\")}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

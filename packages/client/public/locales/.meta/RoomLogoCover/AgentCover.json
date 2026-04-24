@@ -3,11 +3,12 @@
   "content": "Agent cover",
   "content_en_sha1_hash": "e32d1df54cb16aa495e5e330a82c5e326f523fa1",
   "created_at": "2025-11-13T14:53:05.216Z",
-  "updated_at": "2026-04-09T06:53:21.279Z",
+  "updated_at": "2026-04-11T21:21:01.886Z",
   "comment": {
-    "text": "This key displays the text \"Agent cover\" in the header of a dialog. The dialog appears when a user is potentially viewing agent-related content within a room logo cover setting. Translators should consider this refers to a covering or visual element specifically associated with agents.",
+    "text": "This is a dialog title or avatar editor title. It appears when editing the cover image for an AI agent.",
     "is_auto": true,
-    "updated_at": "2025-11-13T14:55:45.302Z"
+    "updated_at": "2026-04-11T21:21:01.886Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -45,49 +46,25 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Корица на агент' means 'Agent's cover' (as in a book cover belonging to an agent) or 'Cover of an agent'. In the context of UI/UX for a 'Room Logo Cover', 'Cover' refers to a background image or a cover photo. The Bulgarian translation should use 'Ковър' (transliteration used in UI) or 'Фон' (background) to denote the visual element, rather than 'Корица' which implies a physical book cover.",
-          "suggestion": "Ковър на агент"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Zakrytí agenta' means 'Agent hiding' or 'Covering of the agent' (as in concealing someone). In the context of a UI header for a 'Room Logo Cover' setting, 'cover' refers to a background image or a cover photo. The Czech term for a cover image/background is 'obrazovka', 'obálka', or simply 'cover' (if used as a loanword), but 'zakrytí' implies the act of obscuring something.",
-          "suggestion": "Cover agenta"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation 'Agentensymbol' means 'Agent symbol/icon', whereas the English 'Agent cover' refers to a background/covering image (as indicated by the context 'RoomLogoCover' and 'room_logo_cover_dialog').",
-          "suggestion": "Agenten-Cover"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Εξώφυλλο πράκτορα' translates to 'Agent's book cover' or 'Agent's magazine cover'. In the context of a UI header for a 'Room Logo Cover' setting, 'cover' refers to a background image or cover photo, not a physical book cover. 'Πρόσωπο' or 'Κάλυψη' would be more appropriate for a digital cover/background.",
-          "suggestion": "Κάλυψη πράκτορα"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -99,13 +76,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Agentin peite' implies a physical cover or blanket belonging to an agent. In the context of UI (Room Logo Cover), 'cover' refers to a background image or header image. 'Peite' is an incorrect term for a UI background/cover; 'kansikuva' or 'taustakuva' would be appropriate.",
-          "suggestion": "Agentin kansikuva"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -141,49 +112,25 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ການຄຸ້ມຄອງຕົວແທນ' means 'Agent Management' or 'Agent Protection'. In the context of 'RoomLogoCover', 'Cover' refers to a visual background image or header image, not management/protection.",
-          "suggestion": "ພາບພື້ນຫຼັງຕົວແທນ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Aģenta vāka foto' means 'Agent cover photo', which adds the word 'photo' (foto) that is not present in the English source. In the context of a UI header for a cover setting, this changes the meaning from a general 'cover' to specifically a 'photo'.",
-          "suggestion": "Aģenta vāks"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'omslag' in Dutch typically refers to a book cover or a physical wrap/fold. In the context of a UI header for a 'Room Logo Cover' (visual background/image), 'Agent-afbeelding' or 'Agent-achtergrond' would be more appropriate. 'Omslag' sounds like a literal translation of a physical object rather than a digital UI element.",
-          "suggestion": "Agent-afbeelding"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Okładka agenta' means 'The agent's cover' (as in a book cover belonging to a person), whereas the context indicates it refers to a 'Room Logo Cover' for an AI Agents folder. In UI terminology for covers/backgrounds, 'Okładka agenta' sounds like a physical object belonging to a person rather than a visual theme/cover for a section.",
-          "suggestion": "Okładka agentów"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -201,13 +148,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Copertă de agent' implies a physical book cover or a protective cover for a person/agent. In the context of UI (Room Logo Cover), 'cover' refers to a background image or header image. In Romanian, 'Copertă' is used for books, while 'Imagine de fundal' or 'Acoperire' is more appropriate for UI elements, but specifically, 'Agent cover' in this context refers to the 'Agent's cover image'.",
-          "suggestion": "Imagine de fundal agent"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -225,13 +166,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Krytie agenta' means 'Agent's coverage' (as in insurance or protection), whereas the context indicates it refers to a visual 'cover' (background image/header) for an AI Agent room.",
-          "suggestion": "Krytie pre agenta"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -273,25 +208,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Bảo hiểm đại lý' means 'Agent insurance'. Based on the context (RoomLogoCover, image cropper, header), 'cover' refers to a visual background/cover image, not financial insurance.",
-          "suggestion": "Ảnh bìa đại lý"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '智能体覆盖范围' means 'Agent coverage area' (as in scope or range), whereas the context and code indicate this refers to a 'Room Logo Cover' (a visual background/cover image) for an AI Agents folder. The English 'cover' here is a noun referring to a background image/overlay, not a verb or a measure of scope.",
-          "suggestion": "智能体封面"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

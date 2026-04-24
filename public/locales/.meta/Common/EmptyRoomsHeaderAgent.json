@@ -3,18 +3,19 @@
   "content": "No agents here yet",
   "content_en_sha1_hash": "e6f0a167840ed14c72445fd927a603c17bf1fa27",
   "created_at": "2025-11-03T12:10:17.484Z",
-  "updated_at": "2026-04-08T10:45:26.246Z",
+  "updated_at": "2026-04-11T20:53:48.222Z",
   "comment": {
-    "text": "This text appears on a screen to indicate that there are no agents currently present. It's used as a header for an empty agent listing screen. Translators should maintain a similar tone to indicate an empty agent list.",
+    "text": "This is a header text displayed when there are no agents listed in the \"Rooms\" section of the application.",
     "is_auto": true,
-    "updated_at": "2025-11-03T12:13:00.230Z"
+    "updated_at": "2026-04-11T20:53:48.222Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/selectors/Files/hooks/useSelectorBody.tsx",
-      "line_number": 228,
-      "context": "return t(\"Common:SelectorEmptyScreenHeaderKnowledge\");\n }\n \n if (isEmptyFilesRootScreen) return t(\"Common:SelectorEmptyScreenHeader\");\n \n if (isEmptyAgentsRootScreen) return t(\"Common:EmptyRoomsHeaderAgent\");\n \n return t(\"Common:EmptyRoomsHeader\");\n }, [t, isKnowledgeFolder, isEmptyFilesRootScreen, isEmptyAgentsRootScreen]);\n \n const emptyScreenDescription = isEmptyFilesRootScreen",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/selectors/Files/hooks/useSelectorBody.tsx",
+      "line_number": 230,
+      "context": "return t(\"SelectorEmptyScreenHeaderKnowledge\");\n }\n \n if (isEmptyFilesRootScreen) return t(\"SelectorEmptyScreenHeader\");\n \n if (isEmptyAgentsRootScreen) return t(\"EmptyRoomsHeaderAgent\");\n \n return t(\"EmptyRoomsHeader\");\n }, [isKnowledgeFolder, isEmptyFilesRootScreen, isEmptyAgentsRootScreen, t]);\n \n const emptyScreenDescription = isEmptyFilesRootScreen",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {

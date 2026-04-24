@@ -1,5 +1,5 @@
 {
   "Description1": "Muokkaus keskeyttää lähetykset ja piilottaa lomakkeen lomakkeen täyttäjiltä.",
   "Description2": "Voit jatkaa sitä myöhemmin vastauksien keräämisen jatkamiseksi.",
-  "Title": "Pysäytetäänkö lähetykset muokkaamista varten?"
+  "PauseSubmissionsTitle": "Pysäytetäänkö lähetykset muokkaamista varten?"
 }

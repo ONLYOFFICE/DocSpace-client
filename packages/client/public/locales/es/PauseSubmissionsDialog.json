@@ -1,5 +1,5 @@
 {
   "Description1": "La edición pausará los envíos y ocultará el formulario a los rellenadores de formularios.",
   "Description2": "Puedes reanudarlo más tarde para continuar recopilando respuestas.",
-  "Title": "¿Pausar las envíos para editar?"
+  "PauseSubmissionsTitle": "¿Pausar las envíos para editar?"
 }

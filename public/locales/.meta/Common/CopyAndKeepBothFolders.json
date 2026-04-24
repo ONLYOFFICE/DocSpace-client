@@ -3,16 +3,17 @@
   "content": "Copy and keep both folders",
   "content_en_sha1_hash": "176432b01539932c5ac6c8eb8c154f33251b3418",
   "created_at": "2025-05-19T21:30:43.753Z",
-  "updated_at": "2026-04-08T14:16:49.817Z",
+  "updated_at": "2026-04-23T17:24:01.709Z",
   "comment": {
-    "text": "This translation key is used to display the text \"Copy and keep both folders\" in a file conflict resolution dialog. It is likely displayed as a button or option within the dialog, prompting users to choose whether to copy the contents of both source and destination folders.",
+    "text": "This is a button label within a conflict resolution dialog. It appears when a user attempts to copy a folder to a location where a folder with the same name already exists, offering to keep both the original and the copied folder.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:56.988Z"
+    "updated_at": "2026-04-11T20:56:21.614Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
-      "line_number": 288,
+      "line_number": 298,
       "context": "const getDuplicateTitle = () => {\n return isFileDialog\n ? t(\"Common:CreateFileCopy\")\n : isFolderDialog\n ? t(\"Common:CopyAndKeepBothFolders\")\n : t(\"Common:CopyAndKeepAll\");\n };\n const getDuplicateDescription = () => {\n return isFileDialog\n ? t(\"Common:CreateDescription\")",
       "module": "/packages/client"
     }
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical error in Arabic: 'بكلتا' (feminine dual) is used with 'المجلدين' (masculine dual). It should be 'بكلِّ' or 'بكلتا المجلّدتين' if folders were feminine, but since 'مجلد' is masculine, it must be 'بكل المجلدين' or 'بالمجلدين معاً'.",
-          "suggestion": "انسخ واحتفظ بكلا المجلدين"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {

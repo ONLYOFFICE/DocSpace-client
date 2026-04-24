@@ -3,13 +3,21 @@
   "content": "<2>{{price}}</2><3>/year</3>",
   "content_en_sha1_hash": "92ecc3c41c8c7b6dc7c9384e83b6089126a69f26",
   "created_at": "2026-04-10T13:53:43.707Z",
-  "updated_at": "2026-04-10T13:53:43.707Z",
+  "updated_at": "2026-04-12T14:54:12.630Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a price display for a yearly subscription. It shows the total price ({{price}}) followed by \"/year\", with the price in a larger font and \"/year\" in bold.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:40:44.472Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/TotalTariffContainer.tsx",
+      "line_number": 72,
+      "context": "</Text>\n ) : (\n <Text fontWeight={600} fontSize=\"16px\">\n {isYearTariff ? (\n <CommonTrans\n i18nKey=\"TotalPricePerYear\"\n \n values={{ price: formatPaymentCurrency(totalPrice) }}\n components={{\n 2: <span key=\"large-font-year\" className={styles.largerFontSize} />,\n 3: <Text fontWeight={600} as=\"span\" key=\"bold-text-year\" />,",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

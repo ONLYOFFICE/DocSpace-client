@@ -3,16 +3,17 @@
   "content": "See all connectors",
   "content_en_sha1_hash": "a539ba0228d0ead28c404acb9364e7d9b0f2a540",
   "created_at": "2025-05-19T21:30:54.665Z",
-  "updated_at": "2026-04-07T19:35:05.139Z",
+  "updated_at": "2026-04-11T21:14:40.011Z",
   "comment": {
-    "text": "This translation key is used to display a button label that opens a URL in a new tab when clicked. It appears as a \"See all connectors\" link within a portal settings page, likely to provide users with access to additional connection options.",
+    "text": "This is a link label. Clicking it opens a new browser tab displaying all available connectors.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:22.148Z"
+    "updated_at": "2026-04-11T21:14:40.011Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/Integration.tsx",
-      "line_number": 127,
+      "line_number": 128,
       "context": "className=\"link\"\n noHover\n color={currentColorScheme?.main?.accent ?? undefined}\n onClick={() => window.open(allConnectorsUrl, \"_blank\")}\n >\n {t(\"SeeAllConnectors\")}\n </Link>\n \n <div data-testid=\"all_connectors_icon\" className=\"icon\">\n <ReactSVG\n className=\"icon-arrow\"",
       "module": "/packages/client"
     }

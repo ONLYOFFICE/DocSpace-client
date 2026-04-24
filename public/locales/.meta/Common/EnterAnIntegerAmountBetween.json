@@ -3,13 +3,21 @@
   "content": "Enter an integer amount between {{min}} and {{max}}",
   "content_en_sha1_hash": "5b742496fe6ba3d460427b62e7a61750590a2b2d",
   "created_at": "2026-04-10T13:53:42.477Z",
-  "updated_at": "2026-04-10T13:53:42.477Z",
+  "updated_at": "2026-04-11T20:53:31.171Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is an error message or input description that appears below an input field. It instructs the user to enter a whole number within a specified range. `{{min}}` and `{{max}}` are placeholders for the minimum and maximum allowed values, respectively.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:53:31.171Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/AutoPayments.tsx",
+      "line_number": 229,
+      "context": "setIsCurrentSettings(false);\n };\n \n const description = (min: number, max: number) => (\n <Text fontSize=\"12px\" className={styles.inputDescription} fontWeight={400}>\n {t(\"EnterAnIntegerAmountBetween\", {\n min: formatWalletCurrency!(min, 0),\n max: formatWalletCurrency!(max, 0),\n })}\n </Text>\n );",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

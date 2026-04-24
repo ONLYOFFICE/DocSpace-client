@@ -23,7 +23,7 @@
   "RemoveGuestsDescription": "Các khách được chọn sẽ bị xóa khỏi tất cả các phòng mà bạn đã mời họ vào. Hành động này không thể được hoàn tác.",
   "ResetAuth": "Đặt lại xác thực",
   "SendInviteAgain": "Gửi lại lời mời",
-  "ShareGuest": "Chia sẻ khách",
+  "ShareGuest": "Chia sẻ thông tin khách",
   "SSOAccountTooltip": "Tài khoản người dùng này được tải từ SSO. Nếu bạn cần thay đổi tên người dùng và địa chỉ email, hãy tham khảo máy chủ SSO.",
   "StandardLogin": "Đăng nhập chuẩn",
   "SuccessChangeGuestStatus": "Trạng thái khách đã được thay đổi thành công",

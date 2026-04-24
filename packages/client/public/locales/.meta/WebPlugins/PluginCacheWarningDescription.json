@@ -3,11 +3,12 @@
   "content": "Plugins are cached based on their version number. To ensure your changes are applied, please increment the version number in your <1>package.json</1> file before uploading. The system will not update a plugin if the version remains the same",
   "content_en_sha1_hash": "944c88e6d8553b6978e3434b2c1d5f8841a6f519",
   "created_at": "2026-03-20T09:07:38.976Z",
-  "updated_at": "2026-04-08T18:39:57.082Z",
+  "updated_at": "2026-04-11T21:27:53.844Z",
   "comment": {
-    "text": "This translation key provides a warning message displayed in a dialog to inform users that plugin changes require an incremented version number in the package.json file to be applied. It explains why the plugin might not be updating and guides users on how to resolve this. This message helps users understand plugin update behavior.",
+    "text": "This is a warning message in a modal dialog. It informs the user that plugin updates require incrementing the version number in the `package.json` file, which is highlighted in the text.",
     "is_auto": true,
-    "updated_at": "2026-03-20T10:30:46.646Z"
+    "updated_at": "2026-04-11T21:27:53.844Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

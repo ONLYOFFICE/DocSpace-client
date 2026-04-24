@@ -4,11 +4,11 @@
   "ErrorViewDescription": "나중에 다시 시도해 주세요",
   "ErrorViewDescriptionNetworkError": "인터넷 연결이 없는 것 같습니다.",
   "ErrorViewHeader": "갤러리가 일시적으로 사용할 수 없습니다.",
+  "GalleryTitle": "{{organizationName}} 템플릿 갤러리",
   "SelectTemplate": "템플릿 선택",
+  "SubmitToGalleryDialogMainInfo": "템플릿을 공개 갤러리에 제출하여 다른 사용자들이 작업에 활용할 수 있도록 하세요. 템플릿이 검토를 통과하면 알림을 받고 기여에 대한 보상을 받게 됩니다.",
   "SuggestChanges": "변경 사항 제안",
   "TemplateInfo": "템플릿 정보",
   "UploadGallery": "갤러리에 업로드",
-  "ViewAllTemplates": "모든 템플릿 보기",
-  "GalleryTitle": "{{organizationName}} 템플릿 갤러리",
-  "SubmitToGalleryDialogMainInfo": "템플릿을 공개 갤러리에 제출하여 다른 사용자들이 작업에 활용할 수 있도록 하세요. 템플릿이 검토를 통과하면 알림을 받고 기여에 대한 보상을 받게 됩니다."
+  "ViewAllTemplates": "모든 템플릿 보기"
 }

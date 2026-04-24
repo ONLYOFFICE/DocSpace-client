@@ -3,17 +3,18 @@
   "content": "Properties",
   "content_en_sha1_hash": "bc6c88db2f0703a9e2461a4a8060ccf1cb881998",
   "created_at": "2025-05-19T21:30:54.899Z",
-  "updated_at": "2026-04-07T19:35:05.118Z",
+  "updated_at": "2026-04-13T14:59:05.792Z",
   "comment": {
-    "text": "The translation key \"Properties\" is used to display a label for properties related to rooms or spaces. It appears in the UI as part of the Room Bar and Gallery components, likely on buttons, thumbnails, or descriptions that show room information.",
+    "text": "This is a section header in the information panel, indicating the display of an item's characteristics or attributes.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:40:52.019Z"
+    "updated_at": "2026-04-11T21:12:58.847Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/index.tsx",
-      "line_number": 110,
-      "context": "\"Common\",\n \"Translations\",\n \"Files\",\n \"RoomLogoCover\",\n ]);\n const [itemProperties, setItemProperties] = useState<\n ReturnType<DetailsHelper[\"getPropertyList\"]>\n >([]);\n const [isThumbnailError, setIsThumbmailError] = useState(false);\n \n const onThumbnailError = () => setIsThumbmailError(true);",
+      "line_number": 289,
+      "context": "/>\n </div>\n )}\n <div className={commonStyles.subtitle}>\n <Text fontWeight=\"600\" fontSize=\"14px\">\n {t(\"Properties\")}\n </Text>\n </div>\n <div className={commonStyles.properties}>\n {itemProperties.map((property) => {\n return (",
       "module": "/packages/client"
     },
     {

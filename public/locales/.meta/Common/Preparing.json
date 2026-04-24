@@ -3,29 +3,42 @@
   "content": "Preparing",
   "content_en_sha1_hash": "96a9b7cdbe400c8b44756e76d158b85eb3370995",
   "created_at": "2025-10-27T16:14:24.376Z",
-  "updated_at": "2026-04-08T02:23:21.715Z",
+  "updated_at": "2026-04-13T14:59:05.931Z",
   "comment": {
-    "text": "This key displays a \"Preparing\" message, likely indicating a process is running or loading, specifically related to an AI tool. It appears within a tooltip that provides additional information to the user. Translators should ensure the translated text conveys a similar sense of temporary status and anticipation.",
+    "text": "This is a short label displayed on a badge, indicating that a form or other item is currently being prepared or processed.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:29:56.822Z"
+    "updated_at": "2026-04-11T20:46:07.212Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/forms-grid/FormStatusBadge.tsx",
+      "line_number": 60,
+      "context": "<Badge\n noHover\n isVersionBadge\n backgroundColor={globalColors.gray}\n color={globalColors.white}\n label={t(\"Common:Preparing\")}\n title={t(\"Common:Preparing\")}\n borderRadius=\"50px\"\n fontSize=\"9px\"\n fontWeight={800}\n maxWidth=\"max-content\"",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/forms-grid/FormStatusBadge.tsx",
+      "line_number": 60,
+      "context": "<Badge\n noHover\n isVersionBadge\n backgroundColor={globalColors.gray}\n color={globalColors.white}\n label={t(\"Common:Preparing\")}\n title={t(\"Common:Preparing\")}\n borderRadius=\"50px\"\n fontSize=\"9px\"\n fontWeight={800}\n maxWidth=\"max-content\"",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 283,
-      "context": "const getPreparingForAITooltipContent = () => {\n return (\n <div>\n <Text fontWeight={600} fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:PreparingForAI\")}\n </Text>\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:PreparingForAIInfo\")}\n </Text>\n </div>",
+      "line_number": 342,
+      "context": "\"badge-version badge-version-current tablet-badge icons-group\",\n )}\n backgroundColor={\n themeIsBase ? globalColors.gray : globalColors.grayDark\n }\n label={t(\"Common:Preparing\")}\n title={t(\"Common:Preparing\")}\n {...versionBadgeProps}\n style={{ width: \"max-content\" }}\n />\n </BadgeWrapper>",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 283,
-      "context": "const getPreparingForAITooltipContent = () => {\n return (\n <div>\n <Text fontWeight={600} fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:PreparingForAI\")}\n </Text>\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:PreparingForAIInfo\")}\n </Text>\n </div>",
+      "line_number": 342,
+      "context": "\"badge-version badge-version-current tablet-badge icons-group\",\n )}\n backgroundColor={\n themeIsBase ? globalColors.gray : globalColors.grayDark\n }\n label={t(\"Common:Preparing\")}\n title={t(\"Common:Preparing\")}\n {...versionBadgeProps}\n style={{ width: \"max-content\" }}\n />\n </BadgeWrapper>",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 283,
-      "context": "const getPreparingForAITooltipContent = () => {\n return (\n <div>\n <Text fontWeight={600} fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:PreparingForAI\")}\n </Text>\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:PreparingForAIInfo\")}\n </Text>\n </div>",
+      "line_number": 342,
+      "context": "\"badge-version badge-version-current tablet-badge icons-group\",\n )}\n backgroundColor={\n themeIsBase ? globalColors.gray : globalColors.grayDark\n }\n label={t(\"Common:Preparing\")}\n title={t(\"Common:Preparing\")}\n {...versionBadgeProps}\n style={{ width: \"max-content\" }}\n />\n </BadgeWrapper>",
       "module": "/packages/shared"
     }
   ],
@@ -45,13 +58,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Hazırlanma' is a noun meaning 'the act of preparing oneself' or 'self-preparation'. For a system status/loading message, the correct form is 'Hazırlanır' (is preparing) or 'Hazırlanır...' to indicate an ongoing process.",
-          "suggestion": "Hazırlanır"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -75,13 +82,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation 'Ετοιμασία' is a noun meaning 'Readiness' or 'Preparation'. In the context of a loading/status message ('Preparing'), a participle or a verb form is required to indicate an ongoing process.",
-          "suggestion": "Προετοιμασία"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -93,13 +94,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish word 'Valmistautuminen' means 'the act of preparing oneself' (like a person preparing for an exam). In the context of a software process or loading state, 'Valmistellaan' (Preparing/Being prepared) or 'Ladataan' (Loading) is the correct functional translation.",
-          "suggestion": "Valmistellaan"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -147,13 +142,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English 'Preparing' is a present participle indicating an ongoing process (status), whereas the Dutch 'Voorbereiding' is a noun meaning 'Preparation'. For a loading/status message, the verb form is required.",
-          "suggestion": "Bezig met voorbereiden"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -171,13 +160,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Preparando-se' is reflexive, meaning 'Preparing oneself' (as in a person getting ready). For a system process or loading state, the impersonal 'Preparando' should be used.",
-          "suggestion": "Preparando"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {

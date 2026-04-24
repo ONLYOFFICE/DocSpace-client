@@ -3,11 +3,12 @@
   "content": "Incorrect first name",
   "content_en_sha1_hash": "cb0f8aba1a2ba9ca01a2add1595e6bb8a36ef169",
   "created_at": "2025-05-19T21:30:45.864Z",
-  "updated_at": "2026-04-08T06:54:59.677Z",
+  "updated_at": "2026-04-11T20:51:04.905Z",
   "comment": {
-    "text": "This translation key \"IncorrectFirstName\" is used to display an error message when a user enters an invalid first name. In the UI, it appears as part of a dialog's validation error messages in the /packages/client/src/components/dialogs/ChangeNameDialog component.",
+    "text": "This is an error message displayed when a user enters an invalid first name in a form field, such as during registration or when changing their name.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:52.898Z"
+    "updated_at": "2026-04-11T20:51:04.905Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -45,13 +46,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation 'Грешно име' means 'Wrong name' (generic), whereas the English source specifically specifies 'first name'. This loses the distinction between first name and last name in a name-change dialog.",
-          "suggestion": "Неправилно име"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -69,13 +64,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation 'Λανθασμένο όνομα' means 'Incorrect name' (generic), missing the specific 'first' (πρώτο) qualifier present in the English source 'Incorrect first name'.",
-          "suggestion": "Λανθασμένο πρώτο όνομα"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -117,37 +106,19 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation '유효하지 않은 이름입니다' means 'Invalid name', which is too generic. It fails to specify that the error is specifically regarding the 'first name' as indicated in the English source.",
-          "suggestion": "유효하지 않은 이름(이름)입니다"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation 'ຊື່ບໍ່ຖືກຕ້ອງ' means 'Incorrect name' in general. It is missing the specific word for 'first' (ຊື່ແຖວທຳອິດ or ຊື່ຕົວ), which is necessary to distinguish it from 'last name' in a name change dialog.",
-          "suggestion": "ຊື່ແຖວທຳອິດບໍ່ຖືກຕ້ອງ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation 'Nepareizs vārds' means 'Incorrect name' (generic), whereas the English source specifically specifies 'first name'.",
-          "suggestion": "Nepareizs vārda vārds"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -165,37 +136,19 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation 'Nome incorreto' is ambiguous as it could mean 'Incorrect name' (general) rather than specifically 'Incorrect first name'. It misses the 'first' (primeiro) qualifier.",
-          "suggestion": "Primeiro nome incorreto"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation 'Nome incorreto' means 'Incorrect name', omitting the specific 'first' (primeiro) qualifier present in the English 'Incorrect first name'.",
-          "suggestion": "Primeiro nome incorreto"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation uses the wrong gender/case agreement. 'Prenumele' is a definite noun, and 'incorect' is masculine singular, but in this context, it should either be an indefinite phrase or match the noun's grammatical requirements for an error message. More importantly, 'Prenumele incorect' translates to 'The incorrect first name' (as a noun phrase) rather than 'Incorrect first name' (as a descriptive error).",
-          "suggestion": "Prenume incorect"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -243,13 +196,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation 'Невірне ім'я' means 'Incorrect name' (generic), whereas the English source specifically specifies 'first name'. This loses the distinction between first name and last name in a name-change context.",
-          "suggestion": "Невірне ім'я користувача"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -267,13 +214,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Albanian translation 'Emri i pasaktë' means 'Incorrect name' (general), whereas the English source specifies 'Incorrect first name'. This loses the distinction between first name and last name.",
-          "suggestion": "Emri i parë i pasaktë"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

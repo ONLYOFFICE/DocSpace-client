@@ -3,11 +3,12 @@
   "content": "Watermark Preview",
   "content_en_sha1_hash": "dbfb9b8a63ad0c23b973116c08bce722f4620ccf",
   "created_at": "2025-05-19T21:30:56.860Z",
-  "updated_at": "2026-04-07T19:35:05.060Z",
+  "updated_at": "2026-04-11T21:04:20.660Z",
   "comment": {
-    "text": "This translation key is used to display a watermark preview in an image editing component. It appears as a textual overlay on the image and provides a brief explanation of its purpose. Translators should focus on providing a clear and concise description that is suitable for the context where this text will be displayed.",
+    "text": "This is a label for a section displaying a preview of the selected image watermark. It appears within the \"Create/Edit Room\" dialog.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:59.709Z"
+    "updated_at": "2026-04-11T21:04:20.660Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

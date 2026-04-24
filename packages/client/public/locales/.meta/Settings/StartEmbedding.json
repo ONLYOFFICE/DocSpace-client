@@ -3,17 +3,18 @@
   "content": "Start embedding",
   "content_en_sha1_hash": "9692ceb6fdc1f9092d6c3c5fe0eb133b41bf547d",
   "created_at": "2026-04-03T21:51:36.592Z",
-  "updated_at": "2026-04-09T00:53:02.160Z",
+  "updated_at": "2026-04-11T21:22:03.215Z",
   "comment": {
-    "text": "This key is used as the link title within a card in the Developer Tools settings section. It serves as a call to action for users to begin the process of embedding the SDK.",
+    "text": "This is a button label that, when clicked, navigates the user to the section for embedding ONLYOFFICE DocSpace into other applications.",
     "is_auto": true,
-    "updated_at": "2026-04-03T21:57:40.753Z"
+    "updated_at": "2026-04-11T21:22:03.215Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 91,
-      "context": "icon={<EmbedSvg />}\n title={t(\"Settings:EmbedSDK\")}\n description={t(\"Settings:EmbedSDKDescription\", { productName: t(\"Common:ProductName\") })}\n url=\"/developer-tools/javascript-sdk\"\n color={globalColors.mainOrange}\n linkTitle={t(\"Settings:StartEmbedding\")}\n />\n <Card\n icon={<PluginSvg />}\n title={t(\"WebPlugins:PluginSDK\")}\n description={t(\"Settings:PluginDescription\", { productName: t(\"Common:ProductName\") })}",
+      "line_number": 92,
+      "context": "icon={<EmbedSvg />}\n title={t(\"Settings:EmbedSDK\")}\n description={t(\"Settings:EmbedSDKDescription\", { productName: getBrandName(\"ProductName\") })}\n url=\"/developer-tools/javascript-sdk\"\n color={globalColors.mainOrange}\n linkTitle={t(\"Settings:StartEmbedding\")}\n />\n <Card\n icon={<PluginSvg />}\n title={t(\"WebPlugins:PluginSDK\")}\n description={t(\"Settings:PluginDescription\", { productName: getBrandName(\"ProductName\") })}",
       "module": "/packages/client"
     }
   ],
@@ -45,13 +46,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech translation 'Začátkem vkládání' is a noun phrase meaning 'With the beginning of embedding' or 'By starting the embedding'. It is not an imperative command/call to action. The English 'Start embedding' is an imperative verb phrase.",
-          "suggestion": "Začít vkládat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {

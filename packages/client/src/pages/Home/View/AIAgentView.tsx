@@ -31,6 +31,8 @@ import { inject, observer } from "mobx-react";
 
 import NewChat from "@docspace/ui-kit/ai-agent/new-chat";
 
+import styles from "./AIAgentView.module.scss";
+
 import NoAccessContainer, {
   NoAccessContainerType,
 } from "SRC_DIR/components/EmptyContainer/NoAccessContainer";
@@ -71,7 +73,9 @@ const AIAgentViewComponent = ({
     <>
       {shouldRenderChat ? (
         <Activity mode={currentView === "chat" ? "visible" : "hidden"}>
-          <NewChat />
+          <div className={styles.aiAgentChat}>
+            <NewChat />
+          </div>
         </Activity>
       ) : null}
 

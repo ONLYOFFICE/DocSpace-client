@@ -42,10 +42,12 @@
     .linkInput {
       margin-bottom: 8px;
       margin-top: 16px;
+      // !important overrides WebKit's -webkit-text-fill-color on disabled/read-only inputs.
       -webkit-text-fill-color: $gray-text !important;
       color: $gray-text;
 
       :global(.dark) & {
+        // !important overrides WebKit's -webkit-text-fill-color on disabled/read-only inputs.
         -webkit-text-fill-color: $gray-dark !important;
         color: $gray-dark;
       }
@@ -117,6 +119,7 @@
 
   :global(.edit-link-panel) {
     :global(.scroll-body) {
+      // !important overrides the default padding-inline-end applied by the Scrollbar component.
       padding-inline-end: 0 !important;
     }
   }

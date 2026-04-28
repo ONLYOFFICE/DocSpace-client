@@ -68,7 +68,7 @@
     display: flex;
     flex-direction: column;
     padding: 6px 0;
-    box-shadow: 0px 12px 40px $popup-shadow;
+    box-shadow: 0 12px 40px $popup-shadow;
     border-radius: 6px;
 
     :global(.dark) & {
@@ -84,8 +84,8 @@
   bottom: 0;
   z-index: 500;
   padding-top: 6px;
-  box-shadow: 0px -4px 60px $popup-shadow;
-  border-radius: 6px 6px 0px 0px;
+  box-shadow: 0 -4px 60px $popup-shadow;
+  border-radius: 6px 6px 0 0;
   background: $white;
   visibility: hidden;
 
@@ -432,7 +432,7 @@
   :global(.root_label),
   :global(.path),
   :global(.room_title) {
-    padding: 5px 0px;
+    padding: 5px 0;
     font-weight: 400;
     font-size: 13px;
     line-height: 20px;

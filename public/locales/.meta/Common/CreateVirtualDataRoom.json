@@ -3,16 +3,23 @@
   "content": "Create virtual data room",
   "content_en_sha1_hash": "cffe205b69e44d4beb86299712697b1f2e680fe5",
   "created_at": "2025-05-19T21:30:43.931Z",
-  "updated_at": "2026-02-19T13:36:32.289Z",
+  "updated_at": "2026-04-23T17:24:01.676Z",
   "comment": {
-    "text": "This translation key is used to display the label for creating a virtual data room. It appears as a button label in an empty screen form, and its purpose is to provide a clear instruction for the user when they are presented with an option to create a virtual data room. The translated text will be displayed instead of \"CreateVirtualDataRoom\".",
+    "text": "This is a button label that allows users to create a new virtual data room. It appears on empty screens where no rooms exist yet, and in selection dialogs for creating different room types.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:50.142Z"
+    "updated_at": "2026-04-11T20:55:57.790Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
+      "file_path": "/libs/ui-kit/components/selector/sub-components/EmptySreen/EmptyScreenFormRoom.tsx",
+      "line_number": 62,
+      "context": ": t(\"SelectorVDREmptyScreenDescription\") || \"\";\n \n const buttonLabel =\n createDefineRoomType === RoomType.FillingFormsRoom\n ? t(\"CreateFormFillingRoom\") || \"\"\n : t(\"CreateVirtualDataRoom\") || \"\";\n \n return (\n <section className={styles.newEmptyScreen}>\n <FormRoomEmptyScreenImage className=\"empty-image\" />\n <Heading level={3} className=\"empty-header\">",
+      "module": "/libs/ui-kit"
+    },
+    {
       "file_path": "/packages/client/src/components/ShareCollectSelector/ShareCollectSelector.tsx",
-      "line_number": 268,
+      "line_number": 283,
       "context": "icon: InfoIcon,\n onClose: onCloseInfoBar,\n };\n \n const createDefineRoomLabels: Partial<Record<RoomsType, string>> = {\n [RoomsType.VirtualDataRoom]: t(\"Common:CreateVirtualDataRoom\"),\n [RoomsType.FormRoom]: t(\"Common:CreateFormFillingRoom\"),\n };\n \n return (\n <FilesSelectorWrapper",
       "module": "/packages/client"
     },
@@ -39,13 +46,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Virtual məlumat otağı yaradın\" is in the past tense (\"you created\"). The English \"Create virtual data room\" implies a command or option for creation, and should be in the present tense or infinitive form.",
-          "suggestion": "Virtual məlumat otağı yarat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -129,13 +130,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Creëer een virtuele data kamer\" sounds a bit literal and clunky in Dutch. \"Virtuele dataruimte\" is a more common and natural way to refer to a virtual data room.",
-          "suggestion": "Creëer een virtuele dataruimte"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -171,13 +166,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'අතථ්‍ය දත්ත කාමරයක් සාදන්න' while conveying the general idea, is not the most natural or accurate rendering of 'Create virtual data room'. 'අතථ්‍ය' (athathya) implies something unreal or illusory, which might not be the intended nuance. A more suitable translation would emphasize the 'virtual' aspect as being digital or online.",
-          "suggestion": "Consider 'විචිත්‍ර‍්‍රීය දත්ත කාමරයක් සාදන්න' (vichitriy dath kamaraayak sadann) - 'Create a digital data room', or 'සරිව‍්‍රතී‍්‍ර‍ය දත්ත කාමරයක් සාදන්න' (sarivathriy dath kamaraayak sadann) - 'Create a virtual data room' which uses a more commonly understood term for 'virtual' in Sinhala. The best option depends on the target audience."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -195,13 +184,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'виртуелну' is misspelled. It should be 'виртуелну собу'.",
-          "suggestion": "виртуелну собу"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -229,6 +212,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

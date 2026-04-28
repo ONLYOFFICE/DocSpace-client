@@ -3,13 +3,27 @@
   "content": "Customize the template and share it for filling",
   "content_en_sha1_hash": "7c93e4e7bb9d472af8298653a3fd37f83379029a",
   "created_at": "2026-03-31T15:18:14.920Z",
-  "updated_at": "2026-03-31T15:18:14.920Z",
+  "updated_at": "2026-04-23T17:24:02.138Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a description for a step in a workflow, appearing as part of a list of instructions. It describes the second step: customizing a template and then sharing it for others to fill out.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:50:06.244Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/library-landing/HeroSection.tsx",
+      "line_number": 61,
+      "context": "title: t(\"Common:LibraryStep1Title\"),\n desc: t(\"Common:LibraryStep1Desc\", { count: templatesCount, language }),\n },\n {\n title: t(\"Common:LibraryStep2Title\"),\n desc: t(\"Common:LibraryStep2Desc\"),\n },\n {\n title: t(\"Common:LibraryStep3Title\"),\n desc: t(\"Common:LibraryStep3Desc\"),\n },",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/forms/library/[langId]/[categoryId]/template/[templateId]/page.client.tsx",
+      "line_number": 265,
+      "context": "<div>\n <div className={styles.stepTitle}>\n {t(\"Common:LibraryStep2Title\")}\n </div>\n <div className={styles.stepDesc}>\n {t(\"Common:LibraryStep2Desc\")}\n </div>\n </div>\n </li>\n <li className={styles.stepItem}>\n <span className={styles.stepNumber}>3</span>",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

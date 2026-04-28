@@ -1,8 +1,7 @@
 {
   "AuthViaNTLM": "Autenticação via NTLM",
-  "EnableSSL": "Habilitar SSL",
+  "EnableSMTPSSL": "Habilitar SSL",
   "EnterDomain": "Digite o domínio",
-  "EnterEmail": "Digite o e-mail",
   "EnterLogin": "Digite login",
   "EnterPort": "Digite a porta",
   "Host": "Host",

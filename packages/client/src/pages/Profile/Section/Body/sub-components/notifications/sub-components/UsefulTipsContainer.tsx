@@ -34,6 +34,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 
 import TargetUserStore from "SRC_DIR/store/contacts/TargetUserStore";
 import styles from "../Notifications.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type UsefulTipsContainerProps = {
   t: TFunction;
@@ -65,7 +66,7 @@ const UsefulTipsContainer = ({
     <div className={styles.notificationContainer}>
       <div className={styles.row}>
         <Text {...textProps} className="subscription-title">
-          {t("UsefulTips", { productName: t("Common:ProductName") })}
+          {t("UsefulTips", { productName: getBrandName("ProductName") })}
         </Text>
         <ToggleButton
           className="useful-tips toggle-btn"
@@ -75,7 +76,7 @@ const UsefulTipsContainer = ({
         />
       </div>
       <Text {...textDescriptionsProps}>
-        {t("UsefulTipsDescription", { productName: t("Common:ProductName") })}
+        {t("UsefulTipsDescription", { productName: getBrandName("ProductName") })}
       </Text>
     </div>
   );

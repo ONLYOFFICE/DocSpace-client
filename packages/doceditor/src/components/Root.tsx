@@ -56,6 +56,7 @@ import { useDisconnectUsers } from "@/hooks/useDisconnectUsers";
 import { getPersonalFolderTree } from "@docspace/shared/api/files";
 import FillingStatusDialog from "./filling-status-dialog";
 import Editor from "./Editor";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const ErrorContainer = dynamic(
   () => import("@docspace/ui-kit/components/error-container/ErrorContainer"),
@@ -301,7 +302,7 @@ const Root = ({
     shareFormDialogVisible,
   ]);
 
-  const organizationName = settings?.logoText || t("Common:OrganizationName");
+  const organizationName = settings?.logoText || getBrandName("OrganizationName");
 
   React.useEffect(() => {
     if (user?.isVisitor) return;

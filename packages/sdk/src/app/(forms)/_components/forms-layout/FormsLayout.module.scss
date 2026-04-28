@@ -1,15 +1,11 @@
+@use "@docspace/ui-kit/styles/mixins";
+
 .root {
   display: flex;
   width: 100%;
   height: 100%;
   position: relative;
   overflow: hidden;
-
-  @media (max-width: 767.9px) {
-    > :not(:first-child) {
-      display: none;
-    }
-  }
 }
 
 .headerEditing {
@@ -23,9 +19,71 @@
   gap: 16px;
 }
 
+.burgerButton {
+  display: none;
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  margin-inline-start: -8px;
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--color-background-hover);
+    outline: none;
+  }
+
+  .burgerIcon {
+    display: block;
+    width: 20px;
+    height: 20px;
+
+    path {
+      fill: currentColor;
+    }
+  }
+
+  @include mixins.mobile {
+    display: inline-flex;
+  }
+}
+
 .headerNavigation {
   flex: 1;
   min-width: 0;
+  position: relative;
+}
+
+.tourAnchor {
+  position: absolute;
+  top: 50%;
+  inset-inline-start: 0;
+  transform: translateY(-50%);
+  pointer-events: none;
+  opacity: 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  white-space: nowrap;
+
+  // Match Navigation .heading which grows to 21px on tablet
+  @include mixins.tablet-and-below {
+    font-size: 21px;
+    line-height: 28px;
+  }
+
+  // Navigation .heading resets back to 18px on mobile
+  @include mixins.mobile {
+    font-size: 18px;
+    line-height: 24px;
+  }
 }
 
 .root :global([class*="Navigation_item"]:not([class*="itemWrapper"])) {
@@ -52,12 +110,14 @@
     min-width: var(--nav-dropdown-min-width, auto);
   }
 
-  @media (max-width: 1023.9px) {
+  @include mixins.tablet-and-below {
     min-width: 280px;
   }
 
-  @media (max-width: 600px) {
+  @include mixins.mobile {
     min-width: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 }
 
@@ -91,4 +151,21 @@
 .contentHidden {
   opacity: 0;
   transition: opacity 0.15s ease;
+}
+
+.floatingButtonContainer {
+  position: absolute;
+  z-index: 300;
+  inset-inline-end: 24px;
+  bottom: calc(24px + env(safe-area-inset-bottom, 0));
+
+  :global(.layout-progress-bar_wrapper) {
+    position: static;
+    width: fit-content;
+    height: fit-content;
+  }
+
+  @include mixins.mobile {
+    inset-inline-end: 16px;
+  }
 }

@@ -1,8 +1,8 @@
 {
   "ChooseFromList": "Valitse listalta",
-  "FileLocked": "Asiakirjat. Lukittu",
+  "FileLocked": "Tiedosto lukittu",
   "FileProtected": "Tiedosto on suojattu salasanalla",
-  "FileUnlocked": "Asiakirjat. Lukitus poistettu",
+  "FileUnlocked": "Lukitus poistettu",
   "FolderTitleBoxNet": "Laatikkohakemisto",
   "FolderTitleDocuSign": "DocuSign-tili",
   "FolderTitleDropBox": "Dropbox-hakemisto",
@@ -18,7 +18,7 @@
   "SearchByHeadOfGroup": "Hae ryhmän päällikön mukaan",
   "SearchByOwner": "Haku Omistajien mukaan",
   "SubNewForm": "Tyhjä",
-  "SubNewFormFile": "Luo tekstitiedostosta",
+  "SubNewFormFile": "Tekstitiedostosta",
   "ThirdPartyInfo": "Muuta kolmannen osapuolen tietoja",
   "ThirdPartyTitle": "Kolmannen osapuolen palvelut",
   "TrashItemsDeleteSuccess": "Valitut elementit poistettiin onnistuneesti {{sectionName}}-osiosta"

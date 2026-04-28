@@ -27,7 +27,6 @@
 import React, { useEffect } from "react";
 import { now, parseToDateTime, formatDate, formatDateLocalized, isBefore, isAfter } from "@docspace/ui-kit/utils/date";
 import { Outlet, useLocation } from "react-router";
-import { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
@@ -63,8 +62,10 @@ import IndicatorLoader from "./components/IndicatorLoader";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 import DialogsWrapper from "./components/dialogs/DialogsWrapper";
 import useCreateFileError from "./Hooks/useCreateFileError";
+import { SectionNavigationProvider } from "./contexts/SectionNavigationContext";
 
 import ReactSmartBanner from "./components/SmartBanner";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const Shell = ({ page = "home", ...rest }) => {
   const {
@@ -100,8 +101,6 @@ const Shell = ({ page = "home", ...rest }) => {
     getAIConfig,
   } = rest;
 
-  const theme = useTheme();
-
   useCreateFileError({
     setPortalTariff,
     setFormCreationInfo,
@@ -111,7 +110,7 @@ const Shell = ({ page = "home", ...rest }) => {
   const { t, ready } = useTranslation(["Common", "SmartBanner"]);
 
   useEffect(() => {
-    if (!logoText) setLogoText(t("Common:OrganizationName"));
+    if (!logoText) setLogoText(getBrandName("OrganizationName"));
   }, [logoText, setLogoText]);
 
   useEffect(() => {
@@ -344,7 +343,7 @@ const Shell = ({ page = "home", ...rest }) => {
       headerText: t("Attention"),
       text: `${t("BarMaintenanceDescription", {
         targetDate,
-        productName: `${logoText} ${t("Common:ProductName")}`,
+        productName: `${logoText} ${getBrandName("ProductName")}`,
       })} ${t("BarMaintenanceDisclaimer")}`,
       isMaintenance: true,
       onAction: () => {
@@ -527,27 +526,29 @@ const Shell = ({ page = "home", ...rest }) => {
   const isMobileOnly = currentDeviceType === DeviceType.mobile;
 
   return (
-    <Layout>
-      {toast}
-      <RootTooltip />
-      {isMobileOnly && !isFrame ? (
-        <ReactSmartBanner t={t} ready={ready} />
-      ) : null}
-      {withoutNavMenu ? null : <NavMenu />}
-      <IndicatorLoader />
-      <ScrollToTop />
-      <DialogsWrapper t={t} />
-
-      <Main isDesktop={isDesktop}>
-        {!isMobileOnly && !isFrame ? (
+    <SectionNavigationProvider>
+      <Layout>
+        {toast}
+        <RootTooltip />
+        {isMobileOnly && !isFrame ? (
           <ReactSmartBanner t={t} ready={ready} />
         ) : null}
-        {barTypeInFrame !== "none" ? <MainBar /> : null}
-        <div className="main-container">
-          <Outlet />
-        </div>
-      </Main>
-    </Layout>
+        {withoutNavMenu ? null : <NavMenu />}
+        <IndicatorLoader />
+        <ScrollToTop />
+        <DialogsWrapper t={t} />
+
+        <Main isDesktop={isDesktop}>
+          {!isMobileOnly && !isFrame ? (
+            <ReactSmartBanner t={t} ready={ready} />
+          ) : null}
+          {barTypeInFrame !== "none" ? <MainBar /> : null}
+          <div className="main-container">
+            <Outlet />
+          </div>
+        </Main>
+      </Layout>
+    </SectionNavigationProvider>
   );
 };
 

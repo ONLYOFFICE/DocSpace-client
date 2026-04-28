@@ -25,8 +25,11 @@
     "storybook-serve": "pnpm nx storybook-serve @docspace/shared",
     "test": "pnpm nx test @docspace/shared",
     "wipe": "pnpm nx reset && shx rm -rf node_modules pnpm-lock.yaml packages/**/node_modules",
+    "translation-stats": "node common/scripts/translation-stats.js",
+    "verify-translations": "node common/translation-app/backend/src/scripts/verify-translations-spell-check.js",
     "licenses-audit": "node scripts/check-licenses.js",
     "licenses-aggregate": "node scripts/aggregate-licenses.js",
+    "biome-plugins:generate": "node scripts/generate-biome-i18n-constants-plugin.js",
     "check-circular": "pnpm madge --circular ./packages",
     "check-circular:graph": "pnpm madge --circular --image graph.svg ./packages",
     "lint": "pnpm nx run-many -t lint -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk @docspace/shared",
@@ -55,7 +58,7 @@
   "packageManager": "pnpm@10.30.0",
   "pnpm": {
     "overrides": {
-      "pnpm": "^10.28.2",
+      "pnpm": "^10.33.0",
       "on-headers": "^1.1.0",
       "@types/react": "19.2.10",
       "@types/react-dom": "19.2.3",
@@ -82,7 +85,9 @@
       "picomatch@^4": "^4.0.4",
       "yaml@^1": "^1.10.3",
       "yaml@^2": "^2.8.3",
-      "brace-expansion": ">=5.0.5"
+      "brace-expansion": ">=5.0.5",
+      "axios": ">=1.15.0",
+      "follow-redirects": ">=1.16.0"
     }
   }
 }

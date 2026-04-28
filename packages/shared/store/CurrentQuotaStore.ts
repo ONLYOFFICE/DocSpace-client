@@ -34,7 +34,8 @@ import {
 } from "../api/settings";
 
 import { toastr, type TData } from "@docspace/ui-kit/components/toast";
-import { EmployeeType, PortalFeaturesLimitations } from "../enums";
+import { EmployeeType } from "../enums";
+import { PortalFeaturesLimitations } from "@docspace/ui-kit/enums";
 import api from "../api";
 import {
   TPaymentFeature,
@@ -45,14 +46,16 @@ import {
 import {
   MANAGER,
   TOTAL_SIZE,
+  ROOM,
+  YEAR_KEY,
+  FREE_BACKUP,
+} from "@docspace/ui-kit/billing/constants";
+import {
   FILE_SIZE,
   USERS,
-  ROOM,
   USERS_IN_ROOM,
   COUNT_FOR_SHOWING_BAR,
   PERCENTAGE_FOR_SHOWING_BAR,
-  YEAR_KEY,
-  FREE_BACKUP,
 } from "../constants";
 import { Nullable, TTranslation } from "../types";
 import { UserStore } from "./UserStore";

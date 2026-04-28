@@ -32,6 +32,9 @@
       "PUBLIC_DIR/*": [
         "../../public/*"
       ],
+      "@docspace/shared/*": [
+        "../shared/*"
+      ],
       "ASSETS_DIR/*": [
         "./public/*"
       ]

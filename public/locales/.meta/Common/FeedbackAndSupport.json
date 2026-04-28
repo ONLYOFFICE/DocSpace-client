@@ -3,11 +3,12 @@
   "content": "Feedback & Support",
   "content_en_sha1_hash": "7714e1a8a44cee405d24cfadd08ff22d9fc4f6b9",
   "created_at": "2025-05-19T21:30:45.233Z",
-  "updated_at": "2026-03-20T09:07:45.714Z",
+  "updated_at": "2026-04-11T20:52:54.124Z",
   "comment": {
-    "text": "This translation key is used to display a label on a user menu item for accessing support and feedback features. It appears in the user menu, allowing users to access common feedback and support options. The exact UI component this label is part of can be found at /packages/client/src/store/ProfileActionsStore.js line 439.",
+    "text": "This is a button label in the user menu. It opens a link to the feedback and support page.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:15.957Z"
+    "updated_at": "2026-04-11T20:52:54.124Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -87,25 +88,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Italian translation 'Feedback & Supporto' is not the most natural or idiomatic translation of 'Feedback & Support'. While 'Supporto' is a literal translation of 'Support', it sounds somewhat awkward in Italian. A more common and natural phrasing would be 'Feedback e Assistenza'.",
-          "suggestion": "Feedback e Assistenza"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The ampersand (&) is used instead of a more natural Japanese conjunction. While acceptable, it's less common and might appear less polished.",
-          "suggestion": "Consider using 'および' (oyobi) or 'と' (to) instead of '＆'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -153,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation \"Feedback și asistența\" is not the most natural or accurate translation of \"Feedback & Support\". \"Asistența\" implies assistance, which isn't fully encompassed by 'Support' in this context.",
-          "suggestion": "Feedback și suport"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -183,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The ampersand (&) in the English content is used instead of a space. This isn't standard Slovenian style.",
-          "suggestion": "Replace '&' with ' in Povratne informacije in Pomoč."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -223,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

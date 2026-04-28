@@ -1,6 +1,6 @@
 {
-  "ActionCannotBeUndone": "Atlasītie atspējotie lietotāji tiks noņemti no {{productName}}. Šo darbību nevarēs atsaukt.",
   "ActionCannotBeUndoneGuests": "Atlasītie viesi ar īpašām vajadzībām tiks noņemti no {{productName}}. Šo darbību nevarēs atsaukt.",
+  "ActionCannotBeUndoneUsers": "Atlasītie atspējotie lietotāji tiks noņemti no {{productName}}. Šo darbību nevarēs atsaukt.",
   "CannotReassignFiles": "Ja vienlaikus izdzēšat vairākus lietotājus, jūs nevarat atkārtoti piešķirt viņu failus citiem lietotājiem.",
   "DeleteGroupGuestsSuccessMessage": "Viesi ir veiksmīgi izdzēsti.",
   "DeleteGroupUsersSuccessMessage": "Lietotāji ir veiksmīgi izdzēsti.",

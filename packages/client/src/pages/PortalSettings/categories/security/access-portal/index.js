@@ -46,362 +46,367 @@ import { BruteForceProtectionSection } from "./bruteForceProtection";
 import { DevToolsAccessSection } from "./devToolsAccess";
 
 import MobileView from "./mobileView";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const HEADER_HEIGHT_DESKTOP = 69;
 const HEADER_HEIGHT_TABLET = 61;
 const TABS_HEIGHT = 32;
 
 const AccessPortal = (props) => {
-	const {
-		t,
-		currentColorScheme,
-		passwordStrengthSettingsUrl,
-		tfaSettingsUrl,
-		trustedMailDomainSettingsUrl,
-		administratorMessageSettingsUrl,
-		lifetimeSettingsUrl,
-		ipSettingsUrl,
-		isMobileView,
-		resetIsInit,
-		helpCenterDomain,
-		invitationSettingsUrl,
-		limitedDevToolsBlockHelpUrl,
-		scrollToSettings,
-		setScrollToSettings,
-		tReady,
-	} = props;
+  const {
+    t,
+    currentColorScheme,
+    passwordStrengthSettingsUrl,
+    tfaSettingsUrl,
+    trustedMailDomainSettingsUrl,
+    administratorMessageSettingsUrl,
+    lifetimeSettingsUrl,
+    ipSettingsUrl,
+    isMobileView,
+    resetIsInit,
+    helpCenterDomain,
+    invitationSettingsUrl,
+    limitedDevToolsBlockHelpUrl,
+    scrollToSettings,
+    setScrollToSettings,
+    tReady,
+  } = props;
 
-	const invitationSettingsRef = useRef(null);
-	const scrollElement = document.getElementsByClassName("section-scroll")[0];
+  const invitationSettingsRef = useRef(null);
+  const scrollElement = document.getElementsByClassName("section-scroll")[0];
 
-	const [isPasswordStrengthLoaded, setPasswordStrengthLoaded] = useState(false);
-	const [isTfaLoaded, setTfaLoaded] = useState(false);
-	const [isTrustedMailLoaded, setTrustedMailLoaded] = useState(false);
+  const [isPasswordStrengthLoaded, setPasswordStrengthLoaded] = useState(false);
+  const [isTfaLoaded, setTfaLoaded] = useState(false);
+  const [isTrustedMailLoaded, setTrustedMailLoaded] = useState(false);
 
-	const onSettingsSkeletonNotShown = (setting) => {
-		if (setting === "PasswordStrength") setPasswordStrengthLoaded(true);
-		if (setting === "Tfa") setTfaLoaded(true);
-		if (setting === "TrustedMail") setTrustedMailLoaded(true);
-	};
+  const onSettingsSkeletonNotShown = (setting) => {
+    if (setting === "PasswordStrength") setPasswordStrengthLoaded(true);
+    if (setting === "Tfa") setTfaLoaded(true);
+    if (setting === "TrustedMail") setTrustedMailLoaded(true);
+  };
 
-	useEffect(() => {
-		setDocumentTitle(
-			t("PortalAccess", { productName: t("Common:ProductName") }),
-		);
+  useEffect(() => {
+    setDocumentTitle(
+      t("PortalAccess", { productName: getBrandName("ProductName") }),
+    );
 
-		return () => {
-			resetIsInit();
-			setScrollToSettings(false);
-		};
-	}, []);
+    return () => {
+      resetIsInit();
+      setScrollToSettings(false);
+    };
+  }, []);
 
-	useEffect(() => {
-		const settingsBeforeInvitationSettings =
-			!isPasswordStrengthLoaded || !isTfaLoaded || !isTrustedMailLoaded;
+  useEffect(() => {
+    const settingsBeforeInvitationSettings =
+      !isPasswordStrengthLoaded || !isTfaLoaded || !isTrustedMailLoaded;
 
-		if (
-			!scrollToSettings ||
-			!invitationSettingsRef.current ||
-			!scrollElement ||
-			settingsBeforeInvitationSettings ||
-			!tReady
-		)
-			return;
+    if (
+      !scrollToSettings ||
+      !invitationSettingsRef.current ||
+      !scrollElement ||
+      settingsBeforeInvitationSettings ||
+      !tReady
+    )
+      return;
 
-		const coordinateY =
-			invitationSettingsRef.current.offsetTop -
-			(isDesktop() ? HEADER_HEIGHT_DESKTOP : HEADER_HEIGHT_TABLET) -
-			TABS_HEIGHT;
+    const coordinateY =
+      invitationSettingsRef.current.offsetTop -
+      (isDesktop() ? HEADER_HEIGHT_DESKTOP : HEADER_HEIGHT_TABLET) -
+      TABS_HEIGHT;
 
-		scrollElement.scrollTo(0, coordinateY);
-		setScrollToSettings(false);
-	}, [
-		invitationSettingsRef.current,
-		scrollElement,
-		scrollToSettings,
-		isPasswordStrengthLoaded,
-		isTfaLoaded,
-		isTrustedMailLoaded,
-		tReady,
-	]);
+    scrollElement.scrollTo(0, coordinateY);
+    setScrollToSettings(false);
+  }, [
+    invitationSettingsRef.current,
+    scrollElement,
+    scrollToSettings,
+    isPasswordStrengthLoaded,
+    isTfaLoaded,
+    isTrustedMailLoaded,
+    tReady,
+  ]);
 
-	const settingsBeforeInvitationSettingsProps = scrollToSettings
-		? { onSettingsSkeletonNotShown }
-		: {};
+  const settingsBeforeInvitationSettingsProps = scrollToSettings
+    ? { onSettingsSkeletonNotShown }
+    : {};
 
-	if (isMobileView)
-		return <MobileView t={t} withoutExternalLink={!helpCenterDomain} />;
+  if (isMobileView)
+    return <MobileView t={t} withoutExternalLink={!helpCenterDomain} />;
 
-	return (
-		<MainContainer
-			className="desktop-view"
-			withoutExternalLink={!helpCenterDomain}
-		>
-			<Text className="subtitle">{t("PortalSecurityTitle")}</Text>
+  return (
+    <MainContainer
+      className="desktop-view"
+      withoutExternalLink={!helpCenterDomain}
+    >
+      <Text className="subtitle">{t("PortalSecurityTitle")}</Text>
 
-			<Text fontSize="16px" fontWeight="700">
-				{t("SettingPasswordTittle")}
-			</Text>
+      <Text fontSize="16px" fontWeight="700">
+        {t("SettingPasswordTittle")}
+      </Text>
 
-			<div className="category-item-description">
-				<Text fontSize="13px" fontWeight="400">
-					{t("SettingPasswordDescription")}
-				</Text>
-				<Text fontSize="13px" fontWeight="400">
-					<Trans t={t} i18nKey="SaveToApply" />
-				</Text>
-				{passwordStrengthSettingsUrl ? (
-					<Link
-						className="link-learn-more"
-						dataTestId="password_strength_learn_more"
-						target="_blank"
-						isHovered
-						color={currentColorScheme.main?.accent}
-						href={passwordStrengthSettingsUrl}
-					>
-						{t("Common:LearnMore")}
-					</Link>
-				) : null}
-			</div>
+      <div className="category-item-description">
+        <Text fontSize="13px" fontWeight="400">
+          {t("SettingPasswordDescription")}
+        </Text>
+        <Text fontSize="13px" fontWeight="400">
+          <Trans t={t} i18nKey="SaveToApply" />
+        </Text>
+        {passwordStrengthSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            dataTestId="password_strength_learn_more"
+            target="_blank"
+            isHovered
+            color={currentColorScheme.main?.accent}
+            href={passwordStrengthSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
+      </div>
 
-			<PasswordStrengthSection {...settingsBeforeInvitationSettingsProps} />
-			<StyledSettingsSeparator />
-			<Text fontSize="16px" fontWeight="700">
-				{t("TwoFactorAuth")}
-			</Text>
+      <PasswordStrengthSection {...settingsBeforeInvitationSettingsProps} />
+      <StyledSettingsSeparator />
+      <Text fontSize="16px" fontWeight="700">
+        {t("TwoFactorAuth")}
+      </Text>
 
-			<div className="category-item-description">
-				<Text fontSize="13px" fontWeight="400">
-					{t("TwoFactorAuthEnableDescription", {
-						productName: t("Common:ProductName"),
-					})}
-				</Text>
-				<Text fontSize="13px" fontWeight="400">
-					<Trans t={t} i18nKey="TwoFactorAuthSave" />
-				</Text>
-				{tfaSettingsUrl ? (
-					<Link
-						className="link-learn-more"
-						dataTestId="tfa_learn_more"
-						target="_blank"
-						isHovered
-						color={currentColorScheme.main?.accent}
-						href={tfaSettingsUrl}
-					>
-						{t("Common:LearnMore")}
-					</Link>
-				) : null}
-			</div>
+      <div className="category-item-description">
+        <Text fontSize="13px" fontWeight="400">
+          {t("TwoFactorAuthEnableDescription", {
+            productName: getBrandName("ProductName"),
+          })}
+        </Text>
+        <Text fontSize="13px" fontWeight="400">
+          <Trans t={t} i18nKey="TwoFactorAuthSave" />
+        </Text>
+        {tfaSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            dataTestId="tfa_learn_more"
+            target="_blank"
+            isHovered
+            color={currentColorScheme.main?.accent}
+            href={tfaSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
+      </div>
 
-			<TfaSection {...settingsBeforeInvitationSettingsProps} />
-			<StyledSettingsSeparator />
+      <TfaSection {...settingsBeforeInvitationSettingsProps} />
+      <StyledSettingsSeparator />
 
-			<Text fontSize="16px" fontWeight="700">
-				{t("TrustedMail")}
-			</Text>
-			<div className="category-item-description">
-				<Text fontSize="13px" fontWeight="400">
-					{t("TrustedMailSettingDescription")}
-				</Text>
-				<Text fontSize="13px" fontWeight="400">
-					<Trans t={t} i18nKey="SaveToApply" />
-				</Text>
-				{trustedMailDomainSettingsUrl ? (
-					<Link
-						className="link-learn-more"
-						dataTestId="trusted_mail_learn_more"
-						target="_blank"
-						isHovered
-						color={currentColorScheme.main?.accent}
-						href={trustedMailDomainSettingsUrl}
-					>
-						{t("Common:LearnMore")}
-					</Link>
-				) : null}
-			</div>
+      <Text fontSize="16px" fontWeight="700">
+        {t("TrustedMail")}
+      </Text>
+      <div className="category-item-description">
+        <Text fontSize="13px" fontWeight="400">
+          {t("TrustedMailSettingDescription")}
+        </Text>
+        <Text fontSize="13px" fontWeight="400">
+          <Trans t={t} i18nKey="SaveToApply" />
+        </Text>
+        {trustedMailDomainSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            dataTestId="trusted_mail_learn_more"
+            target="_blank"
+            isHovered
+            color={currentColorScheme.main?.accent}
+            href={trustedMailDomainSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
+      </div>
 
-			<TrustedMailSection {...settingsBeforeInvitationSettingsProps} />
-			<StyledSettingsSeparator />
+      <TrustedMailSection {...settingsBeforeInvitationSettingsProps} />
+      <StyledSettingsSeparator />
 
-			<Text fontSize="16px" fontWeight="700">
-				{t("DeveloperToolsAccess")}
-			</Text>
-			<div className="category-item-description">
-				<Text fontSize="13px" fontWeight="400">
-					{t("DeveloperToolsAccessDescription", {
-						productName: t("Common:ProductName"),
-					})}
-				</Text>
-				{limitedDevToolsBlockHelpUrl ? (
-					<Link
-						className="link-learn-more"
-						dataTestId="developer_tools_access_learn_more"
-						target="_blank"
-						isHovered
-						color={currentColorScheme.main?.accent}
-						href={limitedDevToolsBlockHelpUrl}
-					>
-						{t("Common:LearnMore")}
-					</Link>
-				) : null}
-			</div>
-			<DevToolsAccessSection />
-			<StyledSettingsSeparator />
+      <Text fontSize="16px" fontWeight="700">
+        {t("DeveloperToolsAccess")}
+      </Text>
+      <div className="category-item-description">
+        <Text fontSize="13px" fontWeight="400">
+          <Trans
+            t={t}
+            i18nKey="DeveloperToolsAccessDescription"
+            values={{ productName: getBrandName("ProductName") }}
+            components={{ strong: <strong /> }}
+          />
+        </Text>
+        {limitedDevToolsBlockHelpUrl ? (
+          <Link
+            className="link-learn-more"
+            dataTestId="developer_tools_access_learn_more"
+            target="_blank"
+            isHovered
+            color={currentColorScheme.main?.accent}
+            href={limitedDevToolsBlockHelpUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
+      </div>
+      <DevToolsAccessSection />
+      <StyledSettingsSeparator />
 
-			<Text fontSize="16px" fontWeight="700" ref={invitationSettingsRef}>
-				{t("InvitationSettings")}
-			</Text>
-			<div className="category-item-description">
-				<Text fontSize="13px" fontWeight="400">
-					{t("InvitationSettingsDescription", {
-						productName: t("Common:ProductName"),
-					})}
-				</Text>
+      <Text fontSize="16px" fontWeight="700" ref={invitationSettingsRef}>
+        {t("InvitationSettings")}
+      </Text>
+      <div className="category-item-description">
+        <Text fontSize="13px" fontWeight="400">
+          {t("InvitationSettingsDescription", {
+            productName: getBrandName("ProductName"),
+          })}
+        </Text>
 
-				{invitationSettingsUrl ? (
-					<Link
-						className="link-learn-more"
-						dataTestId="invitation_settings_learn_more"
-						color={currentColorScheme.main?.accent}
-						target="_blank"
-						isHovered
-						href={invitationSettingsUrl}
-						fontWeight={600}
-					>
-						{t("Common:LearnMore")}
-					</Link>
-				) : null}
-			</div>
-			<InvitationSettingsSection />
+        {invitationSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            dataTestId="invitation_settings_learn_more"
+            color={currentColorScheme.main?.accent}
+            target="_blank"
+            isHovered
+            href={invitationSettingsUrl}
+            fontWeight={600}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
+      </div>
+      <InvitationSettingsSection />
 
-			<StyledSettingsSeparator />
+      <StyledSettingsSeparator />
 
-			<Text fontSize="16px" fontWeight="700">
-				{t("IPSecurity")}
-			</Text>
-			<div className="category-item-description">
-				<Text fontSize="13px" fontWeight="400">
-					{t("IPSecuritySettingDescription")}
-				</Text>
+      <Text fontSize="16px" fontWeight="700">
+        {t("IPSecurity")}
+      </Text>
+      <div className="category-item-description">
+        <Text fontSize="13px" fontWeight="400">
+          {t("IPSecuritySettingDescription")}
+        </Text>
 
-				{ipSettingsUrl ? (
-					<Link
-						className="link-learn-more"
-						dataTestId="ip_security_learn_more"
-						target="_blank"
-						isHovered
-						color={currentColorScheme.main?.accent}
-						href={ipSettingsUrl}
-					>
-						{t("Common:LearnMore")}
-					</Link>
-				) : null}
-			</div>
+        {ipSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            dataTestId="ip_security_learn_more"
+            target="_blank"
+            isHovered
+            color={currentColorScheme.main?.accent}
+            href={ipSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
+      </div>
 
-			<IpSecuritySection />
+      <IpSecuritySection />
 
-			<StyledSettingsSeparator />
+      <StyledSettingsSeparator />
 
-			<Text fontSize="16px" fontWeight="700">
-				{t("BruteForceProtection")}
-			</Text>
+      <Text fontSize="16px" fontWeight="700">
+        {t("BruteForceProtection")}
+      </Text>
 
-			<BruteForceProtectionSection />
+      <BruteForceProtectionSection />
 
-			<StyledSettingsSeparator />
+      <StyledSettingsSeparator />
 
-			<Text fontSize="16px" fontWeight="700">
-				{t("AdminsMessage")}
-			</Text>
-			<div className="category-item-description">
-				<Text fontSize="13px" fontWeight="400">
-					{t("AdminsMessageSettingDescription", {
-						productName: t("Common:ProductName"),
-					})}
-				</Text>
-				<Text fontSize="13px" fontWeight="400">
-					<Trans t={t} i18nKey="SaveToApply" />
-				</Text>
+      <Text fontSize="16px" fontWeight="700">
+        {t("AdminsMessage")}
+      </Text>
+      <div className="category-item-description">
+        <Text fontSize="13px" fontWeight="400">
+          {t("AdminsMessageSettingDescription", {
+            productName: getBrandName("ProductName"),
+          })}
+        </Text>
+        <Text fontSize="13px" fontWeight="400">
+          <Trans t={t} i18nKey="SaveToApply" />
+        </Text>
 
-				{administratorMessageSettingsUrl ? (
-					<Link
-						className="link-learn-more"
-						dataTestId="administrator_message_learn_more"
-						target="_blank"
-						isHovered
-						color={currentColorScheme.main?.accent}
-						href={administratorMessageSettingsUrl}
-					>
-						{t("Common:LearnMore")}
-					</Link>
-				) : null}
-			</div>
+        {administratorMessageSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            dataTestId="administrator_message_learn_more"
+            target="_blank"
+            isHovered
+            color={currentColorScheme.main?.accent}
+            href={administratorMessageSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
+      </div>
 
-			<AdminMessageSection />
+      <AdminMessageSection />
 
-			<StyledSettingsSeparator />
-			<Text fontSize="16px" fontWeight="700">
-				{t("SessionLifetime")}
-			</Text>
+      <StyledSettingsSeparator />
+      <Text fontSize="16px" fontWeight="700">
+        {t("SessionLifetime")}
+      </Text>
 
-			<div className="category-item-description">
-				<Text fontSize="13px" fontWeight="400">
-					{t("SessionLifetimeSettingDescription")}
-				</Text>
+      <div className="category-item-description">
+        <Text fontSize="13px" fontWeight="400">
+          {t("SessionLifetimeSettingDescription")}
+        </Text>
 
-				{lifetimeSettingsUrl ? (
-					<Link
-						className="link-learn-more"
-						dataTestId="session_lifetime_learn_more"
-						target="_blank"
-						isHovered
-						color={currentColorScheme.main?.accent}
-						href={lifetimeSettingsUrl}
-					>
-						{t("Common:LearnMore")}
-					</Link>
-				) : null}
-			</div>
+        {lifetimeSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            dataTestId="session_lifetime_learn_more"
+            target="_blank"
+            isHovered
+            color={currentColorScheme.main?.accent}
+            href={lifetimeSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
+      </div>
 
-			<SessionLifetimeSection />
-		</MainContainer>
-	);
+      <SessionLifetimeSection />
+    </MainContainer>
+  );
 };
 
 export default inject(({ settingsStore, setup }) => {
-	const {
-		currentColorScheme,
-		passwordStrengthSettingsUrl,
-		tfaSettingsUrl,
-		trustedMailDomainSettingsUrl,
-		administratorMessageSettingsUrl,
-		lifetimeSettingsUrl,
-		ipSettingsUrl,
-		currentDeviceType,
-		helpCenterDomain,
-		limitedDevToolsBlockHelpUrl,
-		scrollToSettings,
-		setScrollToSettings,
-		invitationSettingsUrl,
-	} = settingsStore;
-	const { resetIsInit } = setup;
+  const {
+    currentColorScheme,
+    passwordStrengthSettingsUrl,
+    tfaSettingsUrl,
+    trustedMailDomainSettingsUrl,
+    administratorMessageSettingsUrl,
+    lifetimeSettingsUrl,
+    ipSettingsUrl,
+    currentDeviceType,
+    helpCenterDomain,
+    limitedDevToolsBlockHelpUrl,
+    scrollToSettings,
+    setScrollToSettings,
+    invitationSettingsUrl,
+  } = settingsStore;
+  const { resetIsInit } = setup;
 
-	const isMobileView = currentDeviceType === DeviceType.mobile;
+  const isMobileView = currentDeviceType === DeviceType.mobile;
 
-	return {
-		currentColorScheme,
-		passwordStrengthSettingsUrl,
-		tfaSettingsUrl,
-		trustedMailDomainSettingsUrl,
-		administratorMessageSettingsUrl,
-		lifetimeSettingsUrl,
-		ipSettingsUrl,
-		isMobileView,
-		resetIsInit,
-		helpCenterDomain,
-		limitedDevToolsBlockHelpUrl,
-		scrollToSettings,
-		setScrollToSettings,
-		invitationSettingsUrl,
-	};
+  return {
+    currentColorScheme,
+    passwordStrengthSettingsUrl,
+    tfaSettingsUrl,
+    trustedMailDomainSettingsUrl,
+    administratorMessageSettingsUrl,
+    lifetimeSettingsUrl,
+    ipSettingsUrl,
+    isMobileView,
+    resetIsInit,
+    helpCenterDomain,
+    limitedDevToolsBlockHelpUrl,
+    scrollToSettings,
+    setScrollToSettings,
+    invitationSettingsUrl,
+  };
 })(withTranslation(["Settings", "Profile"])(observer(AccessPortal)));
+

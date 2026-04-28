@@ -112,6 +112,7 @@ import type {
   OptionActions,
   UploadType,
 } from "./EmptyViewContainer.types";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const isUser = (access: AccessType) => {
   return (
@@ -156,7 +157,7 @@ export const getFolderDescription = (
     )
     .with([FolderType.FormRoom, DefaultFolderType, P._], () =>
       t("EmptyView:FormFolderDefaultDescription", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
       }),
     )
     .with([P._, DefaultFolderType, P.when(isAdmin)], () =>
@@ -176,7 +177,7 @@ export const getRoomDescription = (
   if (isNotAdmin || isArchiveFolderRoot)
     return t("Common:UserEmptyDescription");
 
-  return t("EmptyView:EmptyDescription");
+  return t("EmptyView:EmptyViewDescription");
 };
 
 const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {
@@ -218,19 +219,19 @@ const getAIAgentsAIDisabledDescription = (
   return match([standalone, isPortalAdmin])
     .with([true, true], () =>
       t("Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
         aiChats: t("Common:AIChats"),
       }),
     )
     .with([false, true], () =>
       t("EmptyView:EmptyAIAgentsAIDisabledSaasAdminDescription", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
         aiAgents: t("Common:AIAgents"),
       }),
     )
     .otherwise(() =>
       t("EmptyView:EmptyAIAgentsAIDisabledDescription", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
         aiAgents: t("Common:AIAgents"),
       }),
     );
@@ -288,7 +289,7 @@ export const getRootDescription = (
     )
     .with([FolderType.SHARE, P._], () =>
       t("EmptyView:EmptyShareDescription", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
       }),
     )
     .with([FolderType.Recent, P._], () => t("EmptyView:EmptyRecentDescription"))
@@ -297,7 +298,7 @@ export const getRootDescription = (
     )
     .with([FolderType.Archive, ShareAccessRights.None], () =>
       t("Files:ArchiveEmptyScreen", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
       }),
     )
     .with([FolderType.Archive, ShareAccessRights.DenyAccess], () =>
@@ -408,7 +409,7 @@ export const getRootTitle = (
       ],
       () =>
         t("Common:EmptyRootRoomHeader", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
         }),
     )
     .with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>

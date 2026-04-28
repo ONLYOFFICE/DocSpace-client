@@ -3,11 +3,12 @@
   "content": "To get your personal renewal terms, contact your dedicated manager or write us at <1>{{email}}</1>",
   "content_en_sha1_hash": "17439806cfb45e88065e7067074cc6372d5414cb",
   "created_at": "2025-05-26T07:15:40.102Z",
-  "updated_at": "2026-02-19T13:36:33.179Z",
+  "updated_at": "2026-04-11T21:01:19.836Z",
   "comment": {
-    "text": "This translation key is used to generate a text that provides contact information for personal renewal terms. It appears on a page related to enterprise payment settings and is likely displayed in a support section or as part of a notice. The key should be translated into various languages to provide accessibility and inclusivity.",
+    "text": "This is a descriptive text within a payment support section, instructing users on how to renew their subscription. It includes a clickable email address (`{{email}}`) for contact.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:08:49.376Z"
+    "updated_at": "2026-04-11T21:01:19.836Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -199,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

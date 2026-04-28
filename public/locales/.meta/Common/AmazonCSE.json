@@ -3,11 +3,12 @@
   "content": "Client-Side Encryption",
   "content_en_sha1_hash": "b8e10276e48f038db512681466dbafb12118bd5c",
   "created_at": "2025-05-26T07:15:40.353Z",
-  "updated_at": "2026-02-19T13:36:33.072Z",
+  "updated_at": "2026-04-11T20:59:23.762Z",
   "comment": {
-    "text": "Client-Side Encryption is a setting that allows files to be encrypted locally on the client's device before being sent to Amazon. This option enables users to manage their own encryption keys. It appears in settings related to file uploads and storage.",
+    "text": "This is a label for a checkbox or radio button in the Amazon S3 storage settings. It refers to a method of encrypting data on the client side before it's sent to Amazon S3.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:08:05.048Z"
+    "updated_at": "2026-04-11T20:59:23.762Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -199,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

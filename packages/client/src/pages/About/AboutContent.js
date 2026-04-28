@@ -26,8 +26,8 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
 import { AboutContent as AboutContentComponent } from "@docspace/shared/components/about-dialog/About.content";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const AboutContent = (props) => {
   const {
@@ -41,11 +41,9 @@ const AboutContent = (props) => {
     isBrandingAvailable,
   } = props;
 
-  const { t } = useTranslation("Common");
-
   const logoName = isBrandingAvailable
     ? logoText
-    : t("Common:OrganizationName");
+    : getBrandName("OrganizationName");
 
   return (
     <AboutContentComponent

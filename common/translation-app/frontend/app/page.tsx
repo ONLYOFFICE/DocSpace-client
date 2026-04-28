@@ -6,6 +6,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 import TranslationStats from "@/components/TranslationStats";
 import SearchInput from "@/components/SearchInput";
 import ExportImportPanel from "@/components/ExportImportPanel";
+import ProjectTranslationModal from "@/components/ProjectTranslationModal";
 
 export default function Home() {
   const [projects, setProjects] = useState<any[]>([]);
@@ -16,6 +17,7 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [searchResults, setSearchResults] = useState<any>(null);
   const [isSearching, setIsSearching] = useState<boolean>(false);
+  const [translateModalProject, setTranslateModalProject] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchProjects() {
@@ -304,97 +306,75 @@ export default function Home() {
         {!loading && !error && projects.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {projects.map((project) => (
-              <Link
+              <div
                 key={project.name}
-                href={`/projects/${project.name}`}
-                passHref
-              >
-                <div
-                  className={`block p-6 border rounded-lg hover:shadow-md transition-all duration-200 ease-in-out group
+                className={`relative border rounded-lg hover:shadow-md transition-all duration-200 ease-in-out group
                   ${
                     project.fullyTranslated
-                      ? "border-green-200 dark:border-green-700 bg-green-50 dark:bg-green-900/10 hover:bg-green-100 dark:hover:bg-green-900/20"
-                      : "border-pink-200 dark:border-pink-700 bg-pink-50 dark:bg-pink-900/10 hover:bg-pink-100 dark:hover:bg-pink-900/20"
+                      ? "border-green-200 dark:border-green-700 bg-green-50 dark:bg-green-900/10"
+                      : "border-pink-200 dark:border-pink-700 bg-pink-50 dark:bg-pink-900/10"
                   }`}
-                >
-                  <div className="flex items-center mb-3">
-                    <div className="h-10 w-10 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center mr-3 text-primary-600 dark:text-primary-400">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                        />
+              >
+                <Link href={`/projects/${project.name}`} passHref className="block p-6">
+                  <div className="flex items-center mb-3 pr-8">
+                    <div className="h-10 w-10 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center mr-3 text-primary-600 dark:text-primary-400 shrink-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                       </svg>
                     </div>
-                    <div className="flex items-center">
+                    <div className="flex items-center flex-wrap gap-1">
                       <h3 className="text-lg font-medium text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                         {project.name}
                       </h3>
-                      <span
-                        className={`ml-2 px-2 py-0.5 text-xs font-medium rounded-full ${
-                          project.fullyTranslated
-                            ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
-                            : "bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-200"
-                        }`}
-                      >
-                        {project.fullyTranslated
-                          ? "Fully Translated"
-                          : "Needs Translation"}
+                      <span className={`ml-1 px-2 py-0.5 text-xs font-medium rounded-full ${
+                        project.fullyTranslated
+                          ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                          : "bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-200"
+                      }`}>
+                        {project.fullyTranslated ? "Fully Translated" : "Needs Translation"}
                       </span>
                     </div>
                   </div>
-                  <div className="flex flex-wrap gap-3 mt-2 ml-1">
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      <span className="inline-flex items-center">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-4 w-4 mr-1"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                          />
-                        </svg>
-                        {project.fileCount || "0"} files
-                      </span>
-                    </p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      <span className="inline-flex items-center">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-4 w-4 mr-1"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
-                          />
-                        </svg>
-                        {project.languageCount || "0"} languages
-                      </span>
-                    </p>
+                  <div className="flex gap-3 ml-1">
+                    <span className="text-sm text-gray-500 dark:text-gray-400 inline-flex items-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                      {project.fileCount || "0"} files
+                    </span>
+                    <span className="text-sm text-gray-500 dark:text-gray-400 inline-flex items-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                      </svg>
+                      {project.languageCount || "0"} languages
+                    </span>
                   </div>
-                </div>
-              </Link>
+                </Link>
+
+                {/* Icon button — top-right corner, only for untranslated projects */}
+                {!project.fullyTranslated && (
+                  <button
+                    onClick={() => setTranslateModalProject(project.name)}
+                    title="Translate all missing keys with AI"
+                    className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-lg bg-primary-600 hover:bg-primary-700 text-white shadow-sm transition-colors"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                    </svg>
+                  </button>
+                )}
+              </div>
             ))}
           </div>
+        )}
+
+        {translateModalProject && (
+          <ProjectTranslationModal
+            isOpen={true}
+            onClose={() => setTranslateModalProject(null)}
+            projectName={translateModalProject}
+            sourceLanguage="en"
+          />
         )}
       </div>
 

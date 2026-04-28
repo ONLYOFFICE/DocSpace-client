@@ -240,7 +240,7 @@ const InviteInput = ({
 	return (
 		<>
 			<StyledSubHeader className="invite-input-text">
-				{t("Files:AddUsersOrGroups")}
+				{t("Files:AddUsersOrGroupsTitle")}
 
 				<StyledLink
 					className="link-list invite-input-text"

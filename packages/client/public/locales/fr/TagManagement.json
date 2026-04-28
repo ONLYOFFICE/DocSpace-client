@@ -1,1 +1,8 @@
-{}
+{
+  "ChangesToTag": "Toute modification de ce tag affectera tous les espaces où il est utilisé.",
+  "DeleteTag": "Supprimer l'étiquette",
+  "DeleteTagCannotBeUndone": "Cette action ne peut pas être annulée.",
+  "DeleteTagConfirmation": "Supprimer ce tag le retirera de toutes les salles où il est utilisé.",
+  "EditTag": "Modifier l'étiquette",
+  "RemoveTag": "<1>{{tag}}</1> balise supprimée."
+}

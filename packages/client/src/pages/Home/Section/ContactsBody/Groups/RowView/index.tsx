@@ -28,17 +28,18 @@ import { inject, observer } from "mobx-react";
 
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
-import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
+import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 import ContactsHotkeysStore from "SRC_DIR/store/contacts/ContactsHotkeysStore";
 import { TContactsViewAs } from "SRC_DIR/helpers/contacts";
 
+import { RowContainer } from "@docspace/ui-kit/components/rows";
+
 import EmptyScreenGroups from "../../EmptyScreenGroups";
 
-import { GroupsRowContainer } from "./RowView.styled";
-
 import GroupsRow from "./GroupsRow";
+import styles from "./RowView.module.scss";
 
 type RowViewProps = {
   sectionWidth?: number;
@@ -77,8 +78,8 @@ const RowView = ({
   if (groups && groups?.length === 0) return <EmptyScreenGroups />;
 
   return (
-    <GroupsRowContainer
-      className="people-row-container"
+    <RowContainer
+      className={`${styles.groupsRowContainer} people-row-container`}
       useReactWindow
       fetchMoreFiles={fetchMoreGroups!}
       hasMoreFiles={hasMoreGroups!}
@@ -96,7 +97,7 @@ const RowView = ({
           itemIndex={index}
         />
       ))}
-    </GroupsRowContainer>
+    </RowContainer>
   );
 };
 

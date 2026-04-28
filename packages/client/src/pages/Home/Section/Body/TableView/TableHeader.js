@@ -42,6 +42,11 @@ class FilesTableHeader extends React.Component {
     const resetColumnsSize =
       (splitColumns && splitColumns.length !== columns.length) || !splitColumns;
 
+    if (!storageColumns) {
+      const tableColumns = columns.map((c) => c.enable && c.key);
+      this.setTableColumns(tableColumns);
+    }
+
     this.state = {
       columns,
       resetColumnsSize,
@@ -56,10 +61,6 @@ class FilesTableHeader extends React.Component {
           ? props.roomsFilter.sortOrder
           : props.filter.sortOrder,
     };
-
-    const tableColumns = columns.map((c) => c.enable && c.key);
-
-    this.setTableColumns(tableColumns);
 
     this.isBeginScrolling = false;
   }
@@ -189,14 +190,15 @@ class FilesTableHeader extends React.Component {
     const resetColumnsSize =
       (splitColumns && splitColumns.length !== columns.length) || !splitColumns;
 
-    const tableColumns = columns.map((c) => c.enable && c.key);
+    if (!storageColumns) {
+      const tableColumns = columns.map((c) => c.enable && c.key);
+      this.setTableColumns(tableColumns);
+    }
 
     const sortBy =
       isRooms || isAIAgentsFolder ? roomsFilter.sortBy : filter.sortBy;
     const sortOrder =
       isRooms || isAIAgentsFolder ? roomsFilter.sortOrder : filter.sortOrder;
-
-    this.setTableColumns(tableColumns);
 
     this.setState({
       columns,

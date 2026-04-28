@@ -3,11 +3,12 @@
   "content": "Connection URL",
   "content_en_sha1_hash": "22b85b6a5b0bef41e8b971f0d7606df9f534107e",
   "created_at": "2025-05-26T07:15:41.520Z",
-  "updated_at": "2026-02-19T13:36:33.141Z",
+  "updated_at": "2026-04-11T20:56:37.009Z",
   "comment": {
-    "text": "This translation key is used to display the connection URL label in a dialogue box, providing users with clear information about the required field. It appears as a label above a text input field, guiding users to enter a valid connection URL.",
+    "text": "This is a label for a text input field where users enter the URL for a connection.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:06:17.046Z"
+    "updated_at": "2026-04-11T20:56:37.009Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -199,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

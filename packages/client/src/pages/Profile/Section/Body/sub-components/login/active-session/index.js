@@ -39,7 +39,7 @@ import {
 	LogoutSessionDialog,
 	LogoutAllSessionDialog,
 } from "SRC_DIR/components/dialogs";
-import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
+import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
 
 import SessionsTable from "./SessionsTable";
 import styles from "./active-sessions.module.scss";

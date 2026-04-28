@@ -35,7 +35,8 @@ export type TFrameMode =
   | "room-selector"
   | "file-selector"
   | "system"
-  | "forms";
+  | "forms"
+  | "chat";
 
 export type TFrameSelectorType =
   | "roomsOnly"
@@ -81,33 +82,52 @@ export type TEditorCustomization = {
   help?: boolean;
   hideRightMenu?: boolean;
   hideRulers?: boolean;
-  integrationMode?: string;
+  integrationMode?: "embed";
   macros?: boolean;
-  macrosMode?: string;
+  macrosMode?: "disable" | "warn" | "enable";
   mentionShare?: boolean;
   mobileForceView?: boolean;
   plugins?: boolean;
   toolbarHideFileName?: boolean;
   toolbarNoTabs?: boolean;
   uiTheme?: string;
-  unit?: string;
+  unit?: "cm" | "pt" | "inch";
   zoom?: number;
 };
 
 export type TFrameEvents = {
-  onAppError?: null | ((e: Event | string) => void);
-  onAppReady?: null | (() => void);
-  onAuthSuccess?: null | (() => void);
-  onCloseCallback?: null | ((e: Event) => void);
+  onAppError?: null | ((message: string) => void);
+  onAppReady?: null | ((data: { frameId: string }) => void);
+  onAuthSuccess?: null | ((data: object) => void);
+  onCloseCallback?: null | (() => void);
   onContentReady?: null | (() => void);
-  onDownload?: null | ((e: Event | string) => void);
-  onEditorCloseCallback?: null | ((e: Event) => void);
+  onCustomAction?:
+    | null
+    | ((data: { action: string; type: string; item: object }) => void);
+  onDownload?: null | ((url: string) => void);
+  onEditorCloseCallback?: null | (() => void);
+  onEditorOpen?: null | ((data: object) => void);
+  onFileManagerClick?: null | ((data: object) => void);
+  onNavigate?: null | ((data: { section: string }) => void);
   onNoAccess?: null | (() => void);
   onNotFound?: null | (() => void);
-  onSelectCallback?: null | ((e: Event | object) => void);
+  onSelectCallback?: null | ((item: object) => void);
   onSignOut?: null | (() => void);
-  onEditorOpen?: null | ((e: Event | object) => void);
-  onFileManagerClick?: null | ((e: Event | object) => void);
+  onUploadError?:
+    | null
+    | ((data: {
+        fileName: string;
+        message: string;
+        uploadId?: number;
+      }) => void);
+  onUploadProgress?: null | ((data: object) => void);
+  onUploadSuccess?:
+    | null
+    | ((data: {
+        fileName: string;
+        fileSize: number;
+        uploadId?: number;
+      }) => void);
 };
 
 export type TFrameConfig = {
@@ -118,8 +138,9 @@ export type TFrameConfig = {
   destroyText?: string;
   disableActionButton?: boolean;
   downloadToEvent?: boolean;
-  editorCustomization?: TEditorCustomization | object;
-  editorGoBack?: boolean | string;
+  editorCustomization?: TEditorCustomization;
+  editorGoBack?: boolean | "event";
+  withoutGoBackText?: boolean;
   editorType?: string;
   events?: TFrameEvents;
   filter?: TFrameFilter;
@@ -131,7 +152,7 @@ export type TFrameConfig = {
   init?: boolean | null;
   isSDK?: boolean;
   locale?: string | null;
-  mode: TFrameMode | string;
+  mode?: TFrameMode;
   name?: string;
   requestToken?: string | null;
   roomType?: RoomsType | RoomsType[];
@@ -147,7 +168,8 @@ export type TFrameConfig = {
   showSignOut?: boolean;
   showTitle?: boolean;
   src: string;
-  theme?: TFrameTheme | string;
+  stylesUrl?: string | null;
+  theme?: TFrameTheme;
   type?: TFrameType;
   viewAs?: TFrameViewAs;
   libraryId?: string | number;

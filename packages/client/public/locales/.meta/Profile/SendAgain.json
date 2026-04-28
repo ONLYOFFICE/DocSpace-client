@@ -3,22 +3,23 @@
   "content": "Send again",
   "content_en_sha1_hash": "9fafcfcc8089c0d4519f16a47cf411b0b51890a7",
   "created_at": "2025-05-19T21:30:53.377Z",
-  "updated_at": "2026-02-19T13:36:32.974Z",
+  "updated_at": "2026-04-11T21:20:37.394Z",
   "comment": {
-    "text": "The \"SendAgain\" translation key is used to display the phrase \"Send again\" in a button or similar UI element. It appears as an action option on a profile page, likely within a file upload or message sending section. This text invites users to retry a previous action.",
+    "text": "This is the label for a button that allows a user to resend a verification email or similar communication.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:49.877Z"
+    "updated_at": "2026-04-11T21:20:37.394Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 530,
+      "line_number": 531,
       "context": "<ReactSVG\n className={styles.sendAgainIcon}\n src={SendClockReactSvgUrl}\n />\n <Text className={styles.sendAgainText} fontWeight={600}>\n {t(\"SendAgain\")}\n </Text>\n </div>\n ) : null}\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 530,
+      "line_number": 531,
       "context": "<ReactSVG\n className={styles.sendAgainIcon}\n src={SendClockReactSvgUrl}\n />\n <Text className={styles.sendAgainText} fontWeight={600}>\n {t(\"SendAgain\")}\n </Text>\n </div>\n ) : null}\n </div>",
       "module": "/packages/client"
     }
@@ -33,18 +34,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"أعد الإرسال مرة أخرى\" is overly verbose and not the most natural way to say \"Send again\" in Arabic (Saudi Arabia). While technically correct, it's redundant.",
-          "suggestion": "أعد الإرسال / أرسل مرة أخرى"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the phrasing \"أعد الإرسال مرة أخرى\" includes two 'again' concepts, potentially making it clunky. Consider a more concise alternative.",
-          "suggestion": "أعد الإرسال"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -128,13 +118,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation \"Izveidot jaunu identitāti\" (Create a new identity) does not accurately convey the meaning of \"Send again\". It suggests a completely different action.",
-          "suggestion": "A more accurate translation for \"Send again\" would be something like \"Nosūtīt atkal\" or \"Sūtīt vēlreiz\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -222,6 +206,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -1,7 +1,8 @@
 {
   "BackToRoom": "Volver a la sala",
   "CheckReadyForms": "Comprobar formularios listos",
-  "Description": "Su formulario se ha rellenado y guardado",
+  "CompletedFormDescription": "Su formulario se ha rellenado y guardado",
+  "CompletedFormTitle": "El formulario está completado",
   "DescriptionForAnonymous": "A su formulario PDF enviado se le ha asignado un número de formulario único. Para comprobar el estado, por favor, póngase en contacto con el propietario del formulario.",
   "DescriptionForRegisteredUser": "Su formulario PDF enviado está a su disposición en la carpeta Completado.",
   "FillItOutAgain": "Vuelva a rellenarlo",
@@ -18,6 +19,5 @@
   "FormVDRYouFirstRecepientDescription": "Se le ha asignado la tarea de rellenar el formulario como primer destinatario. Se le ha enviado una notificación a su correo electrónico. Puede empezar a rellenarlo ahora o copiar el enlace para rellenarlo y volver más tarde.",
   "LinkToFillOutForm": "Enlace para rellenar el formulario:",
   "LinkToForm": "Enlace al formulario:",
-  "LinkToViewOnlyForm": "Enlace al formulario en modo de solo lectura:",
-  "Title": "El formulario está completado"
+  "LinkToViewOnlyForm": "Enlace al formulario en modo de solo lectura:"
 }

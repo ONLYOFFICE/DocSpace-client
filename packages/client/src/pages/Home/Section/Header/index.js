@@ -1268,7 +1268,7 @@ export default inject(
 
     const isShared = shared || navigationPath.find((r) => r.shared);
 
-    const showNavigationButton = !!((!security?.CopyLink && !isArchive) ||
+    const showNavigationButton = !!((!security?.CopySharedLink && !isArchive) ||
     isPublicRoom ||
     isSharedWithMeFolderRoot ||
     isArchive ||
@@ -1367,7 +1367,7 @@ export default inject(
       theme,
       isFrame,
       showTitle: frameConfig?.showTitle,
-      hideInfoPanel: isFrame,
+      hideInfoPanel: isFrame && !frameConfig?.infoPanelVisible,
       showMenu: frameConfig?.showMenu,
       currentDeviceType,
       insideGroupTempTitle,

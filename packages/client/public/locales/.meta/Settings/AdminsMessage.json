@@ -3,28 +3,29 @@
   "content": "Administrator Message Settings",
   "content_en_sha1_hash": "accdf6092b6a057074bd1eada900a50effd27962",
   "created_at": "2025-05-19T21:30:50.388Z",
-  "updated_at": "2026-03-26T08:26:58.261Z",
+  "updated_at": "2026-04-23T17:24:02.039Z",
   "comment": {
-    "text": "The translation key \"AdminsMessage\" is used to display a title for settings related to administrator messages, including descriptions and links within the Portal Settings UI. This key appears in various places, such as headings and category titles, providing context to administrators about message settings and their corresponding actions.",
+    "text": "This is a section title in the portal settings, indicating where administrators can configure messages displayed to users.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:53.588Z"
+    "updated_at": "2026-04-11T21:25:55.627Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 314,
-      "context": "<BruteForceProtectionSection />\n \n <StyledSettingsSeparator />\n \n <Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"AdminsMessage\")}\n </Text>\n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"AdminsMessageSettingDescription\", {\n productName: t(\"Common:ProductName\"),",
+      "line_number": 318,
+      "context": "<BruteForceProtectionSection />\n \n <StyledSettingsSeparator />\n \n <Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"AdminsMessage\")}\n </Text>\n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"AdminsMessageSettingDescription\", {\n productName: getBrandName(\"ProductName\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 123,
+      "line_number": 124,
       "context": "subtitle={t(\"BruteForceProtectionDescriptionMobile\")}\n url=\"/portal-settings/security/access-portal/brute-force-protection\"\n onClickLink={onClickLink}\n />\n <CategoryItem\n title={t(\"AdminsMessage\")}\n subtitle={\n <Trans i18nKey=\"AdminsMessageMobileDescription\" ns=\"Settings\" t={t} />\n }\n url=\"/portal-settings/security/access-portal/admin-message\"\n onClickLink={onClickLink}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 231,
+      "line_number": 248,
       "context": "{\n id: \"portal-settings_catalog-admin-message\",\n key: \"1-0-7\",\n icon: \"\",\n link: \"admin-message\",\n tKey: \"AdminsMessage\",\n },\n {\n id: \"portal-settings_catalog-session-life-time\",\n key: \"1-0-8\",\n icon: \"\",",
       "module": "/packages/client"
     }
@@ -45,13 +46,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Mesaj\" translates to 'Message', \"Parametrləri\" is a more literal translation of 'Settings'. It doesn't quite convey the intended meaning of configuration options.",
-          "suggestion": "Administrator Tənzimləmələri"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -69,18 +64,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Einstellungen von Nachrichten für Administrator' is not the most natural or accurate translation of 'Administrator Message Settings'. It's a literal translation but sounds awkward in German.",
-          "suggestion": "A more natural translation would be 'Administratoreinstellungen für Nachrichten' or 'Nachrichten-Einstellungen für Administratoren'."
-        },
-        {
-          "type": "formatting",
-          "description": "The translation uses a preposition 'von' which can make it sound clunky.  A better structure avoids this.",
-          "suggestion": "Consider restructuring to remove the 'von' preposition; for example, 'Administratoreinstellungen für Nachrichten'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -110,13 +94,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ադմինիստրատորի հաղորդագրության կարգավորումներ' is a literal translation of 'Administrator Message Settings' but doesn't quite capture the intended meaning. It implies 'settings *of* an administrator's message', rather than 'settings *for* administrator messages'.",
-          "suggestion": "Consider 'Համակարգչային հաղորդագրությունների կարգավորումներ' (System Message Settings) or 'Վարչական հաղորդագրությունների կարգավորումներ' (Administration Message Settings)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -140,13 +118,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation \"ການຕັ້ງຄ່າຂໍ້ຄວາມຂອງຜູ້ເບິ່ງແຍງລະບົບ\" is a very literal translation and sounds unnatural. It translates to 'Settings of Messages of System Overseer.' A more natural translation would be something like 'ການຕັ້ງຄ່າສາຍເລິກຂອງຜູ້ເບິ່ງແຍງ' (Settings for Administrator) or 'ການຕັ້ງຄ່າຂໍ້ຄວາມຂອງຜູ້ປົກຄອງ' (Administrator Message Settings).",
-          "suggestion": "Consider 'ການຕັ້ງຄ່າສາຍເລິກຂອງຜູ້ເບິ່ງແຍງ' or 'ການຕັ້ງຄ່າຂໍ້ຄວາມຂອງຜູ້ປົກຄອງ'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -158,13 +130,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Beheerder Bericht Instellingen' is not the most natural or accurate translation of 'Administrator Message Settings'. 'Bericht' translates to 'message' or 'report', but 'Instellingen' is correct for 'Settings'. A more accurate translation would convey the idea of configurations or options.",
-          "suggestion": "Beheerder Berichtinstellingen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -194,13 +160,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Настройки сообщений администратору' is a literal translation but might be misinterpreted. 'Администратору' implies messages *to* an administrator, rather than settings *for* administrator messages. A more accurate translation would emphasize the settings aspect.",
-          "suggestion": "Настройки сообщений для администратора"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -224,30 +184,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Подешавања порука администратора\" is a literal translation and could be improved for natural flow in Serbian. \"Settings\" often translates to something more concise and idiomatic.",
-          "suggestion": "Подешавања за поруке администратора"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Подешавања\" is a valid translation for \"Settings\", it may sound a bit formal. Depending on the overall tone of the application, a more colloquial or abbreviated term might be preferable. This is dependent on the specific application context.",
-          "suggestion": "Поруке администратора - подешавања"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Podešavanja poruka administratora' is technically correct but sounds a bit clunky and literal. A more natural phrasing might be preferred.",
-          "suggestion": "Administratorske poruke - Podešavanja"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -259,33 +202,22 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Параметри повідомлень адміністратору' is a literal translation but doesn't fully capture the meaning of 'Administrator Message Settings'. A more natural Ukrainian phrasing would convey that settings *for* administrator messages are being adjusted.",
-          "suggestion": "Налаштування повідомлень адміністратора"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Cài đặt Tin nhắn Quản trị viên' is a bit clunky and overly literal. A more natural phrasing would be more appropriate.",
-          "suggestion": "Cài đặt thông báo quản trị"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation uses space instead of hyphens where it might be clearer to use hyphens, especially in a settings context. Although not a critical error, it could impact readability.",
-          "suggestion": "Cài đặt Tin nhắn-Quản trị viên"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

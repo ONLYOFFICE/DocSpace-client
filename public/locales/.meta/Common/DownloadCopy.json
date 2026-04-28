@@ -3,11 +3,12 @@
   "content": "Download copy",
   "content_en_sha1_hash": "f779a16e5bd57fac3371cd6ff082decdc8a0baad",
   "created_at": "2025-05-26T07:15:42.718Z",
-  "updated_at": "2026-03-20T09:07:45.758Z",
+  "updated_at": "2026-04-11T20:54:42.847Z",
   "comment": {
-    "text": "This translation key is used to display a button that triggers manual backups, allowing users to download a copy of their data. It appears on a page with a backup settings interface and is likely used in a dialog or modal window when the user initiates a manual backup process. The translated text should read \"Download copy\".",
+    "text": "Button label. This button allows users to download a copy of a backup.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:05:48.350Z"
+    "updated_at": "2026-04-11T20:54:42.847Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -199,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,11 +3,12 @@
   "content": "Buy now",
   "content_en_sha1_hash": "c38860a3ba58e9263dba3ac926101f8b2358d4c9",
   "created_at": "2025-06-08T12:02:00.173Z",
-  "updated_at": "2025-08-11T18:11:59.377Z",
+  "updated_at": "2026-04-11T21:01:22.666Z",
   "comment": {
-    "text": "This translation key is used to display the button label \"Buy now\" on a payment button component, located in the /packages/shared/pages/Payments/Standalone/sub-components/ButtonContainer.tsx file. It appears as a primary action button when clicked. Translators should provide a phrase that encourages immediate purchase.",
+    "text": "This is a button label. It appears on a payment page, prompting the user to complete a purchase.",
     "is_auto": true,
-    "updated_at": "2025-06-08T12:02:52.485Z"
+    "updated_at": "2026-04-11T21:01:22.666Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -199,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

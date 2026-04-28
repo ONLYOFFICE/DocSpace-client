@@ -27,13 +27,13 @@
 import isNil from "lodash/isNil";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Button } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
-import { getDisabledTriggersForUser, validateUrl } from "../Webhooks.helpers";
+import { validateUrl } from "../Webhooks.helpers";
 
 import styles from "../Webhooks.styled.module.scss";
 
@@ -52,7 +52,7 @@ const WebhookDialog = (props) => {
     onSubmit,
     webhook,
     additionalId,
-    user,
+    webhookTriggers,
   } = props;
 
   const { t } = useTranslation(["Webhooks", "Common"]);
@@ -181,11 +181,6 @@ const WebhookDialog = (props) => {
     );
   }, [webhook]);
 
-  const disabledTriggers = useMemo(
-    () => getDisabledTriggersForUser(user),
-    [user],
-  );
-
   return (
     <ModalDialog
       visible={visible}
@@ -244,7 +239,7 @@ const WebhookDialog = (props) => {
             toggleTrigger={toggleTrigger}
             triggerAll={triggerAll}
             onChange={handleOnChangeTriggerAll}
-            disabledTriggers={disabledTriggers}
+            webhookTriggers={webhookTriggers}
           />
           <LabledInput
             id={`${additionalId}-target-id-input`}
@@ -254,7 +249,7 @@ const WebhookDialog = (props) => {
             value={webhookInfo.targetId}
             onChange={onInputChange}
             isDisabled={isLoading}
-            maxLength={36}
+            maxLength={255}
             dataTestId="target-id-input"
           />
           <button
@@ -293,8 +288,9 @@ const WebhookDialog = (props) => {
   );
 };
 
-export default inject(({ userStore }) => {
+export default inject(({ webhooksStore }) => {
   return {
-    user: userStore?.user,
+    webhookTriggers: webhooksStore?.webhookTriggers,
   };
 })(observer(WebhookDialog));
+

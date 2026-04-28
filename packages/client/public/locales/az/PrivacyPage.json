@@ -1,10 +1,10 @@
 {
-  "PrivacyButton": "{{organizationName}} Desktop Editors tətbiqini açmaq",
-  "PrivacyClick": "Şifrələnmiş sənədlərlə işləmək üçün brauzer dialoqunda <1> {{organizationName}} Desktop </1> düyməsini klikləyin .",
+  "PrivacyButton": "{{OnlyofficeDesktopEditors}} tətbiqini açmaq",
+  "PrivacyClick": "Şifrələnmiş sənədlərlə işləmək üçün brauzer dialoqunda <1>{{OnlyofficeDesktopEditors}}</1> düyməsini klikləyin.",
   "PrivacyDescriptionConnect": "Buludunuz bağlandıqdan sonra bu faylı masaüstü tətbiqinin interfeysindən aça bilərsiniz",
-  "PrivacyDescriptionEditors": "Əgər sizdə {{organizationName}} Desktop Editors proqramı mövcuddursa və açılmırsa, çox güman brauzer tərəfindən bloklanılır.",
+  "PrivacyDescriptionEditors": "Əgər sizdə {{OnlyofficeDesktopEditors}} quraşdırılıbsa, lakin onu bu səhifədən aça bilmirsinizsə, brauzeriniz onu bloklaya bilər.",
   "PrivacyDialog": "Dialoq pəncərəsi görsənmirsə, aşağıdakı düyməyə klikəyin",
-  "PrivacyEditors": "{{organizationName}} Desktop Editors yoxdurmu?",
+  "PrivacyEditors": "{{OnlyofficeDesktopEditors}} yoxdurmu?",
   "PrivacyHeader": "Bu sənəd şifrələnmişdir ",
   "PrivacyInstall": "İndi quraşdır"
 }

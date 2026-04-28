@@ -4,7 +4,6 @@
   "ChangeInstruction": "Да бисте променили власника {{productName}}-а, изаберите име новог власника испод.",
   "ChangeOwner": "Промени {{productName}} власника",
   "ChangeUser": "Промени корисника",
-  "DeactivateOrDeletePortal": "Деактивирај или обриши {{productName}}",
   "DoTheSame": "Учини исто као администратори",
   "ManagePortal": "Управљај {{productName}} конфигурацијом",
   "ManageUser": "Управљај корисничким налозима",

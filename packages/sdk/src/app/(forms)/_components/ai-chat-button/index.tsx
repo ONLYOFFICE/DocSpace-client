@@ -43,7 +43,11 @@ import AiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.re
 
 import styles from "./AiChatButton.module.scss";
 
-const AiChatButton = () => {
+type AiChatButtonProps = {
+  shiftUp?: boolean;
+};
+
+const AiChatButton = ({ shiftUp = false }: AiChatButtonProps) => {
   const { t } = useTranslation(["Common"]);
   const {
     togglePanel,
@@ -72,6 +76,7 @@ const AiChatButton = () => {
         type="button"
         className={styles.floatingButton}
         data-position={panelPosition}
+        data-shift-up={shiftUp ? "true" : "false"}
         onClick={togglePanel}
         data-tour="ai-chat-button"
         data-tooltip-id="ai-chat-fab-tooltip"

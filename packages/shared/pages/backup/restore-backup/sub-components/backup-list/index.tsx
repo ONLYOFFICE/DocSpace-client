@@ -58,6 +58,7 @@ import type {
 } from "./BackupList.types";
 import { initState } from "./BackupList.constants";
 import styles from "../../RestoreBackup.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const BackupListModalDialog = ({
   isNotify,
@@ -202,7 +203,7 @@ const BackupListModalDialog = ({
       )}
     >
       {t("Common:RestoreBackupWarningText", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
       })}{" "}
       {!standalone ? (
         <Text
@@ -213,7 +214,7 @@ const BackupListModalDialog = ({
           )}
         >
           {t("Common:RestoreBackupResetInfoWarningText", {
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
           })}
         </Text>
       ) : null}
@@ -337,7 +338,12 @@ const BackupListModalDialog = ({
               size={ButtonSize.normal}
               label={t("Common:Restore")}
               onClick={onRestorePortal}
-              isDisabled={isCopyingToLocal || !isChecked}
+              isDisabled={
+                isCopyingToLocal ||
+                !isChecked ||
+                filesList.length === 0 ||
+                !state.selectedFileId
+              }
               testId="backup_list_restore_button"
             />
             <Button
@@ -355,3 +361,4 @@ const BackupListModalDialog = ({
 };
 
 export default BackupListModalDialog;
+

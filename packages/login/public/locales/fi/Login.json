@@ -1,6 +1,5 @@
 {
   "ChangePasswordSuccess": "Salasanan vaihtaminen onnistui",
-  "CodeTitle": "Koodi lähetettiin sinulle sähköpostitse",
   "ConfirmEmailChange": "Vahvista sähköpostiosoitteen muutos",
   "ConfirmEmailChangeText": "Olet pyytänyt muuttamaan sähköpostiosoitteen {{productName}}-tililläsi. Jotta voimme jatkaa, kirjaudu sisään käyttämällä nykyisiä tunnistetietojasi.",
   "ErrorInvalidText": "10 sekunnin kuluttua sinut ohjataan <1>{{productName}}</1>",
@@ -17,7 +16,7 @@
   "RegisterTextBodyAfterDomainsList": "Rekisteröidy kirjoittamalla sähköpostiosoitteesi ja napsauttamalla Lähetä pyyntö. Sinulle lähetetään aktivointilinkki.  ",
   "RegisterTextBodyBeforeDomainsList": "Rekisteröityminen on saatavilla käyttäjille, joilla on sähköpostitili osoitteessa",
   "RegisterTitle": "Rekisteröintipyyntö",
-  "RegistrationEmailWatermark": "sähköposti",
+  "RegistrationEmailWatermark": "Sähköposti",
   "RememberHelper": "Istunnon oletuskesto on 20 minuuttia. Valitse tämä vaihtoehto, jos haluat asettaa sen 1 vuodeksi. Voit asettaa oman arvon Asetuksissa.",
   "SignInLDAP": "Kirjaudu sisään: {{ldap_domain}}",
   "SignInLdapHelper": "Käytä yrityksen verkkotunnuksen tunnistetietoja",

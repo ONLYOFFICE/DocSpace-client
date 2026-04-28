@@ -33,11 +33,16 @@ import { inject, observer } from "mobx-react";
 import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import type {
   TAiProvider,
+  TModelSettingsDto,
   TProviderTypeWithUrl,
 } from "@docspace/shared/api/ai/types";
-import { getAvailableProviderUrls } from "@docspace/shared/api/ai";
+import {
+  getAvailableProviderUrls,
+  getProviderModelSettings,
+} from "@docspace/shared/api/ai";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
@@ -50,6 +55,7 @@ import { DeleteAIProviderDialog } from "./dialogs/delete";
 import { AiProviderTile } from "./Tile";
 import { ProvidersLoader } from "./ProvidersLoader";
 import { DefaultProvider } from "./DefaultProvider";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type TDeleteDialogData =
   | {
@@ -67,10 +73,12 @@ type TUpdateDialogData =
   | {
       visible: false;
       provider: null;
+      models: null;
     }
   | {
       visible: true;
       provider: TAiProvider;
+      models: TModelSettingsDto[];
     };
 
 type AIProviderProps = {
@@ -99,6 +107,7 @@ const AIProviderComponent = ({
   const [updateDialogData, setUpdateDialogData] = useState<TUpdateDialogData>({
     visible: false,
     provider: null,
+    models: null,
   });
   const [deleteDialogData, setDeleteDialogData] = useState<TDeleteDialogData>({
     visible: false,
@@ -112,7 +121,7 @@ const AIProviderComponent = ({
 
   const hideAddProviderDialog = () => setaddDialogVisible(false);
   const hideUpdateDialog = () =>
-    setUpdateDialogData({ visible: false, provider: null });
+    setUpdateDialogData({ visible: false, provider: null, models: null });
 
   const hideDeleteProviderDialog = () =>
     setDeleteDialogData({ visible: false, providerId: null });
@@ -129,7 +138,12 @@ const AIProviderComponent = ({
   };
 
   const onUpdateAIProvider = async (provider: TAiProvider) => {
-    setUpdateDialogData({ visible: true, provider });
+    try {
+      const models = await getProviderModelSettings(provider.id);
+      setUpdateDialogData({ visible: true, provider, models });
+    } catch (e) {
+      toastr.error(e as string);
+    }
   };
 
   useEffect(() => {
@@ -163,7 +177,7 @@ const AIProviderComponent = ({
         dataTestId="provider-section-description"
       >
         {t("AISettings:AIProviderSettingDescription", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
           aiChats: t("Common:AIChats"),
         })}
       </Text>
@@ -225,6 +239,7 @@ const AIProviderComponent = ({
           onClose={hideUpdateDialog}
           aiProviderTypesWithUrls={aiProviderTypesWithUrls}
           providerData={updateDialogData.provider}
+          initialModels={updateDialogData.models}
         />
       ) : null}
 

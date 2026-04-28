@@ -3,23 +3,24 @@
   "content": "Specify your company information, add links to external resources and email addresses displayed within the {{productName}} interface.",
   "content_en_sha1_hash": "d799aef730dd0a79a451093abbc8378f23c3c2f2",
   "created_at": "2025-05-26T07:15:40.974Z",
-  "updated_at": "2026-02-19T13:36:33.161Z",
+  "updated_at": "2026-04-11T20:58:10.768Z",
   "comment": {
-    "text": "This translation key is used to display company information and links to external resources within the {{productName}} interface. It appears in a section description, providing context for users when interacting with branding-related settings.",
+    "text": "This is a section description explaining where to customize company information and external links within the {{productName}} interface.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:06:51.116Z"
+    "updated_at": "2026-04-11T20:58:10.768Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 144,
-      "context": "className={classNames(\n styles.sectionDescription,\n \"section-description\",\n )}\n >\n {t(\"BrandingSectionDescription\", {\n productName: t(\"ProductName\"),\n })}\n </div>\n <div className={classNames(styles.header, \"header\")}>\n {t(\"CompanyInfoSettings\")}",
+      "line_number": 145,
+      "context": "className={classNames(\n styles.sectionDescription,\n \"section-description\",\n )}\n >\n {t(\"BrandingSectionDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </div>\n <div className={classNames(styles.header, \"header\")}>\n {t(\"CompanyInfoSettings\")}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/MobileView/index.tsx",
-      "line_number": 70,
-      "context": "onClickLink={onClickLink}\n />\n {displayAbout ? (\n <CategoryItem\n title={t(\"CompanyInfoSettings\")}\n subtitle={t(\"BrandingSectionDescription\", {\n productName: t(\"ProductName\"),\n })}\n url={`${baseUrl}/branding/company-info`}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}",
+      "line_number": 71,
+      "context": "onClickLink={onClickLink}\n />\n {displayAbout ? (\n <CategoryItem\n title={t(\"CompanyInfoSettings\")}\n subtitle={t(\"BrandingSectionDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n url={`${baseUrl}/branding/company-info`}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}",
       "module": "/packages/shared"
     }
   ],
@@ -205,6 +206,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,11 +3,12 @@
   "content": "Data reassignment",
   "content_en_sha1_hash": "a4efa2d93573777f5a04956a929f586e12bbe4ac",
   "created_at": "2025-05-19T21:30:56.735Z",
-  "updated_at": "2026-02-19T13:36:32.403Z",
+  "updated_at": "2026-04-11T21:05:14.803Z",
   "comment": {
-    "text": "This translation key is used to display a confirmation message when reassigning data in a dialogue. The text \"Data Reassignment\" appears in a header within the dialog and is translated based on the specified usage contexts.",
+    "text": "This is the title of a dialog window that appears when data needs to be reassigned, for example, when changing ownership of documents.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:18.203Z"
+    "updated_at": "2026-04-11T21:05:14.803Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -195,13 +196,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Chuyển giao lại dữ liệu\" while technically correct, implies a transfer of data *back* to a previous location or state. \"Data reassignment\" usually means reassigning data to a new location or person, not returning it.",
-          "suggestion": "Consider \"Phân công lại dữ liệu\" or \"Điều chỉnh lại dữ liệu\" to more accurately convey the meaning of 'data reassignment'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

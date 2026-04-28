@@ -3,16 +3,17 @@
   "content": "Send notification about space restoring to users",
   "content_en_sha1_hash": "e040fbeb56224222df87a697364fe2553d230591",
   "created_at": "2025-05-26T07:15:47.743Z",
-  "updated_at": "2026-02-19T13:36:33.212Z",
+  "updated_at": "2026-04-12T21:29:41.985Z",
   "comment": {
-    "text": "This translation key is used to display a notification message about restoring space to users. It appears on a checkbox label in a UI element where users can choose to send notifications upon restoring their space. The translated text should be concise and clear for users.",
+    "text": "This is a checkbox label. It allows the user to choose whether to send a notification to users when a space is restored from backup.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:03:45.881Z"
+    "updated_at": "2026-04-11T20:43:21.303Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/index.tsx",
-      "line_number": 453,
+      "line_number": 454,
       "context": "styles.restoreBackupCheckboxNotification,\n \"restore-backup-checkbox_notification\",\n )}\n onChange={onChangeCheckbox}\n isChecked={checkboxState.notification}\n label={t(\"Common:SendNotificationAboutRestoring\")}\n isDisabled={!isEnableRestore}\n dataTestId=\"about_restoring_checkbox\"\n />\n {warningContent}\n <Checkbox",
       "module": "/packages/shared"
     }
@@ -199,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

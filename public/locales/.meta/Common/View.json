@@ -3,35 +3,66 @@
   "content": "View",
   "content_en_sha1_hash": "69bd4ef9fbd0894a22759c3766b859defbdedbc8",
   "created_at": "2025-05-19T21:30:49.521Z",
-  "updated_at": "2026-03-31T15:18:46.203Z",
+  "updated_at": "2026-04-23T17:24:01.677Z",
   "comment": {
-    "text": "This translation key is used to display the text \"View\" as a label for a button or similar UI element. It appears in various contexts, including a Smart Banner component and a filter section on the Home page, where it serves as a placeholder for an action that allows users to view content or settings.",
+    "text": "This is a button label or menu item for viewing content. It can appear as a standalone button on a smart banner or as a menu option in a context menu.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:35:22.854Z"
+    "updated_at": "2026-04-11T20:39:24.409Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/SmartBanner/index.js",
       "line_number": 98,
-      "context": "<SmartBanner\n title={t(\"SmartBanner:AppName\", {\n organizationName: logoText,\n })}\n author=\"Ascensio System SIA\"\n button={t(\"Common:View\")}\n force={force}\n onClose={() => setIsBannerVisible(false)}\n onInstall={() => setIsBannerVisible(false)}\n storeText={storeText}\n price={priceText}",
+      "context": "<SmartBanner\n title={t(\"SmartBanner:SmartBannerAppName\", {\n organizationName: logoText,\n })}\n author=\"Ascensio System SIA\"\n button={t(\"Common:View\")}\n force={force}\n onClose={() => setIsBannerVisible(false)}\n onInstall={() => setIsBannerVisible(false)}\n storeText={storeText}\n price={priceText}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1135,
-      "context": "case RoomsType.ReadOnlyRoom:\n return {\n id: \"filter_type-view-only\",\n key: RoomsType.ReadOnlyRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:ViewOnlyRooms\"),\n };\n case RoomsType.FormRoom:\n return {\n id: \"filter_type-form\",\n key: RoomsType.FormRoom,",
+      "line_number": 1868,
+      "context": "onSearch={onSearch}\n onClearFilter={onClearFilter}\n getSelectedInputValue={getSelectedInputValue}\n filterHeader={t(\"Common:AdvancedFilter\")}\n placeholder={t(\"Common:Search\")}\n view={t(\"Common:View\")}\n isFavoritesFolder={isFavoritesFolder}\n isPersonalRoom={isPersonalRoom}\n isRooms={isRooms}\n removeSelectedItem={removeSelectedItem}\n clearAll={clearAll}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2112,
+      "line_number": 2170,
       "context": "key: \"view\",\n label:\n this.treeFoldersStore.isRecentFolder ||\n this.treeFoldersStore.isFavoritesFolder\n ? t(\"Open\")\n : t(\"Common:View\"),\n icon: EyeReactSvgUrl,\n onClick: (fileId) => this.onMediaFileClick(fileId, item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/index.tsx",
+      "line_number": 104,
+      "context": "userId=\"\"\n isRecentFolder\n currentDeviceType={currentDeviceType}\n filterHeader={t(\"Common:AdvancedFilter\")}\n placeholder={t(\"Common:Search\")}\n view={t(\"Common:View\")}\n filterTitle={t(\"Files:Filter\")}\n sortByTitle={t(\"Common:SortBy\")}\n selectorLabel=\"\"\n isIndexing={false}\n initSearchValue={initSearchValue}",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
+      "line_number": 178,
+      "context": "const getViewItem = useCallback(\n (i: TFileItem) => {\n return {\n id: \"option_view\",\n key: \"view\",\n label: t(\"Common:View\"),\n icon: EyeReactSvgUrl,\n onClick: () => openFile(i),\n disabled: false,\n };\n },",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsContextMenu.ts",
+      "line_number": 205,
+      "context": "}\n \n model.push({\n id: \"option_view\",\n key: \"view\",\n label: t(\"Common:View\"),\n icon: EyeReactSvgUrl,\n onClick: () => openForm(file, \"view\"),\n disabled: false,\n });",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsContextMenu.ts",
+      "line_number": 205,
+      "context": "}\n \n model.push({\n id: \"option_view\",\n key: \"view\",\n label: t(\"Common:View\"),\n icon: EyeReactSvgUrl,\n onClick: () => openForm(file, \"view\"),\n disabled: false,\n });",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsContextMenu.ts",
+      "line_number": 205,
+      "context": "}\n \n model.push({\n id: \"option_view\",\n key: \"view\",\n label: t(\"Common:View\"),\n icon: EyeReactSvgUrl,\n onClick: () => openForm(file, \"view\"),\n disabled: false,\n });",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 198,
-      "context": "},\n [ShareRights.Read]: {\n access: ShareAccessRights.ReadOnly,\n description: t(\"Common:RoleViewerDescription\"),\n key: \"viewing\",\n label: t(\"Common:Viewer\"),\n icon: EyeReactSvgUrl,\n },\n [ShareRights.FillForms]: {\n access: ShareAccessRights.FormFilling,\n description: \"\",",
+      "line_number": 359,
+      "context": "case ShareAccessRights.Review:\n return t(\"Common:Review\");\n case ShareAccessRights.Comment:\n return t(\"Common:Comment\");\n case ShareAccessRights.ReadOnly:\n return t(\"Common:View\");\n case ShareAccessRights.FormFilling:\n return t(\"Common:FillOut\");\n default:\n return \"\";\n }",
       "module": "/packages/shared"
     }
   ],
@@ -51,25 +82,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Baxın\" can mean \"View\" in certain contexts, it more commonly translates to \"Look\" or \"Watch.\" \"View\" in the context of a user interface (like a list or gallery) is better conveyed by a more neutral term.",
-          "suggestion": "Consider using \"Görünüş\" or \"Rəy\" depending on the specific UI context. \"Görünüş\" is closer to the concept of \"View\" as a visual representation, while \"Rəy\" can mean 'opinion' or 'view' in a more abstract sense, which might be appropriate if 'View' refers to a display of data."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Преглед\" can sometimes translate to \"View\", it's more commonly associated with \"Review\" or \"Overview.\" \"View\" in the context of a user interface element (e.g., \"View Profile\") often requires a more specific translation depending on the specific meaning.",
-          "suggestion": "Consider alternatives like \"Гледане\" (gledane) for a more literal 'viewing' or explore context-specific options."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -81,13 +100,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Anzeigen\" can mean \"View\" in certain contexts (like displaying something), it's not the most accurate or common translation of \"View\" in the general sense, especially when referring to a visual viewpoint or the act of viewing content. A more suitable translation might be \"Betrachten\" or \"Ansehen\".",
-          "suggestion": "Consider \"Betrachten\" or \"Ansehen\" as alternatives to \"Anzeigen\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -111,13 +124,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Afficher\" can mean 'to display' or 'to show', it's not the most natural translation of 'View' in this context, which likely refers to a visual perspective or access to information.  A more appropriate translation would depend on the specific context of 'View'.",
-          "suggestion": "Consider alternatives like 'Voir' (to see), 'Consulter' (to consult/view), or 'Présentation' (Presentation) depending on context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -147,13 +154,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"ມຸມມອງ\" (mum mong) can be understood to mean 'view' or 'perspective,' it's a more complex meaning than the English 'View' which often refers to a visual perspective or a way to see something (e.g., 'view a website' or 'view a photo'). A more direct translation for the common meaning of 'View' might be 'ວິວ' (wiw) or 'ການເບິ່ງ' (kan boeng).",
-          "suggestion": "Consider using 'ວິວ' (wiw) or 'ການເບິ່ງ' (kan boeng) for a more direct translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -177,13 +178,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Portuguese translation \"Ver\" while literally meaning 'to see' or 'to view', isn't the most natural translation for 'View' in the context of a UI element or a permission. A more appropriate translation would be 'Visualizar' or 'Exibir'.",
-          "suggestion": "Visualizar"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -207,25 +202,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation \"දකින්න\" (dakinna) primarily means \"to see\" or \"to watch,\" and while it can imply viewing, it's not the most accurate translation of \"View\" in the context of a UI element or a system capability. It carries a more active sense of observation.",
-          "suggestion": "Consider \"පෙනුම්\" (penum) which is closer to \"view\" in the sense of appearance or a visual representation, or \"ලක්ශණය\" (lakshanaya) which can mean \"characteristic\" or \"feature\" depending on the context. The best choice depends on the precise role of 'View' in the application."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Vyhliadka\" can mean 'view', in the context of a UI element like a 'View' in software, it doesn't quite convey the intended meaning. It suggests a scenic overlook rather than a display or perspective.",
-          "suggestion": "Consider alternatives like \"Zobrazenie\", \"Pohľad\" or \"Perspektíva\" which better capture the UI element sense of 'View'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -237,13 +220,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'Преглед' while acceptable, isn't the most common or direct translation of 'View' in the context of UI elements or displays. 'Поглед' might be a closer equivalent, depending on the specific application. 'Преглед' often implies a review or overview.",
-          "suggestion": "Consider 'Поглед' as a possible alternative, or further context needed to determine the best fit."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -255,13 +232,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Görüntüle' can mean 'View', it's more accurately translated as 'Display' or 'Show'. 'View' in the context of user interface (e.g., 'View Details') is often better translated as 'İzleme' or 'Görünüm' depending on the nuance.",
-          "suggestion": "Consider 'İzleme' or 'Görünüm' as alternatives depending on context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

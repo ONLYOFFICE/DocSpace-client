@@ -3,11 +3,12 @@
   "content": "Trial expired",
   "content_en_sha1_hash": "b4420c2f63be184a11970f1c2fdeaa3108ec551c",
   "created_at": "2025-05-19T21:30:49.343Z",
-  "updated_at": "2026-02-19T13:36:32.296Z",
+  "updated_at": "2026-04-12T14:13:05.165Z",
   "comment": {
-    "text": "This translation key is used to display a message indicating that a trial period has expired. It appears on screen when an account's trial period is over, typically in a UI component related to billing or subscription settings. The translator should consider the context of a \"trial period\" to provide an accurate translation.",
+    "text": "This is a status label indicating that a trial period has ended. It appears in the tariff bar or payment subscription details.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:37:23.155Z"
+    "updated_at": "2026-04-11T20:40:23.786Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -18,7 +19,7 @@
     },
     {
       "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/TariffTitleContainer.tsx",
-      "line_number": 77,
+      "line_number": 78,
       "context": "[styles.isLicenseDateExpired]: isLicenseDateExpired,\n })}\n fontWeight={600}\n fontSize=\"14px\"\n >\n {t(\"TrialExpired\")}\n </Text>\n ) : (\n <Text\n className={classNames(styles.paymentsSubscriptionExpired, {\n [styles.isTrial]: isTrial,",
       "module": "/packages/shared"
     }
@@ -87,13 +88,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Դատավարության ժամկետն ավարտվել է' is a more formal and literal translation of 'Trial expired'. It translates to 'The duration of the proceedings has expired'. While technically correct, it may not be the most natural or user-friendly translation for a 'Trial expired' message, which typically implies a time-limited access or evaluation period.",
-          "suggestion": "Consider a translation like 'Ամրձակային ժամանակաշրջանն ավարտվել է' (Armrzakayin zhamkets'ann avartvel e) which translates to 'The trial period has expired,' or 'Ժամանակն ավարտվել է' (Zhamank'n avartvel e) which means 'The time has expired'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -165,13 +160,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'නැහැසුම ඉකුත් වී ඇත' while understandable, doesn't perfectly capture the nuance of 'Trial expired'. 'නැහැසුම' translates to 'rejection' or 'exclusion,' not 'trial.' A more accurate translation would convey the concept of a limited-time period ending.",
-          "suggestion": "සාණුවල කාලය අවසන් වී ඇත (Saanuwal kalaaya awasana vee tha) - 'The trial period has ended'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

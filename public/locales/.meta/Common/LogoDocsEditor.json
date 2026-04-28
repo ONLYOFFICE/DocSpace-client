@@ -3,16 +3,17 @@
   "content": "Logo for the editors header",
   "content_en_sha1_hash": "139b31fd58237986c24a80fd96c63f2f78bb1fbf",
   "created_at": "2025-08-13T18:28:02.522Z",
-  "updated_at": "2026-02-19T13:36:33.170Z",
+  "updated_at": "2026-04-11T20:49:13.395Z",
   "comment": {
-    "text": "Text displayed as a logo label in the editors header, specifically related to documents. It appears within the WhiteLabel branding settings and includes the logo's dimensions. Translators should ensure the description accurately reflects the visual representation of the logo.",
+    "text": "This is a label indicating the logo specifically used in the header of the document editors. It appears in the branding settings for customizing the DocSpace interface.",
     "is_auto": true,
-    "updated_at": "2025-08-13T18:29:28.317Z"
+    "updated_at": "2026-04-11T20:49:13.395Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 394,
+      "line_number": 395,
       "context": "</div>\n \n <div className={styles.logoWrapper}>\n <Text fontSize=\"15px\" fontWeight=\"600\">\n {/* t(\"LogoForEditors\", { editorName: t(\"Common:Documents\") })} */}\n {t(\"LogoDocsEditor\")} ({logoUrls[4].size.width}x\n {logoUrls[4].size.height})\n </Text>\n \n <div className={styles.logosWrapper}>\n <Logo",
       "module": "/packages/shared"
     }
@@ -193,6 +194,18 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

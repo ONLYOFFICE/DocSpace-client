@@ -3,16 +3,17 @@
   "content": "Favicon",
   "content_en_sha1_hash": "b0f47aaf773c75735c1c4c32a2e40c0f4e7feecf",
   "created_at": "2025-05-26T07:15:44.913Z",
-  "updated_at": "2026-02-19T13:36:33.169Z",
+  "updated_at": "2026-04-11T20:49:11.784Z",
   "comment": {
-    "text": "This translation key is used to display a favicon size description in a user interface, typically appearing on a settings page or branding configuration screen. The exact wording and formatting will vary based on the logo image being referenced, but its purpose is consistent: to inform users about the dimensions of their selected favicon image.",
+    "text": "This is a label for an image upload field, indicating where to upload the favicon for the DocSpace branding.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:04:48.861Z"
+    "updated_at": "2026-04-11T20:49:11.784Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 375,
+      "line_number": 376,
       "context": "</div>\n </div>\n ) : null}\n <div className={styles.logoWrapper}>\n <Text fontSize=\"15px\" fontWeight=\"600\">\n {t(\"LogoFavicon\")} ({logoUrls[2].size.width}x\n {logoUrls[2].size.height})\n </Text>\n <Logo\n name={logoUrls[2].name}\n src={logoUrls[2].path.light}",
       "module": "/packages/shared"
     }
@@ -199,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

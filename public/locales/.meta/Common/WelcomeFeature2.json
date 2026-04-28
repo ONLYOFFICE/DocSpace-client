@@ -3,13 +3,21 @@
   "content": "Monitor progress and submissions instantly",
   "content_en_sha1_hash": "677a209dd0b24ee5f78ffea7d28f2549dd265a98",
   "created_at": "2026-03-31T15:18:26.923Z",
-  "updated_at": "2026-03-31T15:18:26.923Z",
+  "updated_at": "2026-04-23T17:24:02.158Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a short descriptive sentence appearing in a welcome tour dialog, explaining a feature of the application. It describes the ability to track progress and submissions immediately.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:39:04.869Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/welcome-tour-dialog/index.tsx",
+      "line_number": 120,
+      "context": "<div className={styles.featureIcon}>\n <ReactSVG src={featureIcons[1]} />\n </div>\n <div className={styles.featureText}>\n <Text fontWeight={600} fontSize=\"13px\">{t(\"Common:WelcomeFeature2Title\", \"Real-time Tracking\")}</Text>\n <Text fontSize=\"12px\" className={styles.featureDesc}>{t(\"Common:WelcomeFeature2\", \"Monitor progress and submissions instantly\")}</Text>\n </div>\n </div>\n <div className={styles.featureCard}>\n <div className={styles.featureIcon}>\n <ReactSVG src={featureIcons[2]} />",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

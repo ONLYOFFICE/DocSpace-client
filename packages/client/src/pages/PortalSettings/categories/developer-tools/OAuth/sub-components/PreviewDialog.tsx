@@ -46,6 +46,7 @@ import OnlyofficeDark from "PUBLIC_DIR/images/onlyoffice.dark.react.svg";
 
 import OAuthStore from "SRC_DIR/store/OAuthStore";
 import styles from "../OAuth.styled.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const htmlBlock = `<body>
     <button id="docspace-button" class="docspace-button">
@@ -200,7 +201,7 @@ const PreviewDialog = ({
 									t={t}
 									ns="OAuth"
 									i18nKey="SignIn"
-									values={{ productName: t("Common:ProductName") }}
+									values={{ productName: getBrandName("ProductName") }}
 								/>
 							}
 							IconComponent={icon}

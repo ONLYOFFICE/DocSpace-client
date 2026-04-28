@@ -3,13 +3,21 @@
   "content": "Ready-made templates at your fingertips",
   "content_en_sha1_hash": "76466817b25bc170d90d2dc3623e28564f672eaf",
   "created_at": "2026-03-31T15:18:14.995Z",
-  "updated_at": "2026-03-31T15:18:14.995Z",
+  "updated_at": "2026-04-11T20:50:09.444Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is the title for a section on the Library landing page, highlighting the availability of templates.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:50:09.444Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/library-landing/StatsBar.tsx",
+      "line_number": 49,
+      "context": "}: StatsBarProps) => {\n const { t } = useTranslation(\"Common\");\n \n return (\n <section className={styles.stats}>\n <h2 className={styles.statsTitle}>{t(\"Common:LibraryStatsTitle\")}</h2>\n <p className={styles.statsSubtitle}>\n {t(\"Common:LibraryStatsSubtitle\")}\n </p>\n \n <div className={styles.statsCards}>",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

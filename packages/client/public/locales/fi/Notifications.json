@@ -1,4 +1,5 @@
 {
+  "ActionsWithFilesDescription": "Tunnisteet korostavat tiedostojen toimintaa — lataukset, muokkaukset tai jaetut tiedostot — kaikilla {{rooms}}, {{shared}}, {{documents}} ja {{aiAgents}} -osioilla.",
   "AdminSetupRequired": "Adminin asennus vaaditaan",
   "Badges": "Merkit",
   "DailyFeed": "Päivittäinen {{productName}}-syöte",
@@ -8,6 +9,8 @@
   "LdapEmailTooltip": "Tämä käyttäjätili ladataan LDAP:sta. Käyttäjän sähköpostiosoitetta ei ole määritetty, ja nykyinen osoite on luotu automaattisesti eikä sitä voi käyttää ilmoitusten lähettämiseen.",
   "NotConfigured": "Ei määritetty",
   "Notifications": "Ilmoitukset",
+  "RoomsActivityDescription": "Saat välittömästi sähköposti-ilmoituksia uusista jaetuista tiedostoista/kansioista ja aktiviteetista {{rooms}}:ssa ja {{aiAgents}}:ssä.",
+  "RoomUpdateNotify": "Yhteinen sisältö, {{rooms}} ja {{aiAgents}} aktiviteetti",
   "SettingUpNotifications": "Ilmoitusten määritys",
   "SuccessConnected": "{{serviceName}} on yhdistetty onnistuneesti ilmoituskanavana. Saat sieltä nyt päivityksiä.",
   "SuccessDisconnected": "{{serviceName}} onnistui irrottamaan ilmoituskanavana. Ilmoituksia ei enää lähetetä sinne.",

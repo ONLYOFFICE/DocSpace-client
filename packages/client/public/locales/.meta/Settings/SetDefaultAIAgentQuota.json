@@ -3,23 +3,24 @@
   "content": "Set the default storage quota for {{aiAgents}} in this {{productName}}. It can be adjusted later in the settings or customized individually when creating each {{aiAgent}}.",
   "content_en_sha1_hash": "0b464c6f59c8a1f568d8cf6788d5def210229e8d",
   "created_at": "2025-12-19T13:03:37.711Z",
-  "updated_at": "2025-12-22T10:09:37.054Z",
+  "updated_at": "2026-04-11T21:22:13.063Z",
   "comment": {
-    "text": "This text describes the ability to set a default storage quota for AI agents within the product. It appears as a subtitle or toggle description in the Portal Settings, specifically in the storage management section, and indicates that the quota can be adjusted later. Translators should ensure the phrasing accurately reflects the adjustability of this default setting.",
+    "text": "This is a subtitle or toggle description for setting the default storage quota for AI agents. It explains that the quota can be adjusted later or customized individually, and includes variables for `productName`, `aiAgents` (plural), and `aiAgent` (singular).",
     "is_auto": true,
-    "updated_at": "2025-12-22T10:09:37.054Z"
+    "updated_at": "2026-04-11T21:22:13.063Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/MobileQuotas.js",
-      "line_number": 71,
-      "context": "title={t(\"QuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-ai-agent\"\n subtitle={t(\"SetDefaultAIAgentQuota\", {\n productName: t(\"Common:ProductName\"),\n aiAgents: t(\"Common:AIAgents\"),\n aiAgent: t(\"Common:AIAgent\"),\n })}\n isDisabled={isDisabled}",
+      "line_number": 72,
+      "context": "title={t(\"QuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-ai-agent\"\n subtitle={t(\"SetDefaultAIAgentQuota\", {\n productName: getBrandName(\"ProductName\"),\n aiAgents: t(\"Common:AIAgents\"),\n aiAgent: t(\"Common:AIAgent\"),\n })}\n isDisabled={isDisabled}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerAIAgent.tsx",
-      "line_number": 65,
-      "context": "saveQuota={saveQuota}\n {...initialSizeProp}\n isQuotaSet={isDefaultAIAgentsQuotaSet}\n tabIndex={3}\n dataTestId=\"quota_ai_agent\"\n toggleDescription={t(\"SetDefaultAIAgentQuota\", {\n productName: t(\"Common:ProductName\"),\n aiAgents: t(\"Common:AIAgents\"),\n aiAgent: t(\"Common:AIAgent\"),\n })}\n />",
+      "line_number": 66,
+      "context": "saveQuota={saveQuota}\n {...initialSizeProp}\n isQuotaSet={isDefaultAIAgentsQuotaSet}\n tabIndex={3}\n dataTestId=\"quota_ai_agent\"\n toggleDescription={t(\"SetDefaultAIAgentQuota\", {\n productName: getBrandName(\"ProductName\"),\n aiAgents: t(\"Common:AIAgents\"),\n aiAgent: t(\"Common:AIAgent\"),\n })}\n />",
       "module": "/packages/client"
     }
   ],

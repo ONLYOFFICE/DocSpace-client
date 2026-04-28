@@ -1,15 +1,14 @@
 {
   "AuthViaNTLM": "Autentifikácia cez NTLM",
-  "EnableSSL": "Povoliť SSL",
+  "EnableSMTPSSL": "Povoliť SSL",
   "EnterDomain": "Zadajte doménu",
-  "EnterEmail": "Zadajte email",
   "EnterLogin": "Zadajte prihlasovacie meno",
   "EnterPort": "Zadajte port",
   "Host": "Host",
-  "HostLogin": "Prihlasovacie meno",
-  "HostPassword": "Prihlasovacie heslo",
+  "HostLogin": "Prihlasovacie údaje hosta",
+  "HostPassword": "Heslo hostiteľa",
   "Port": "Port",
-  "SenderDisplayName": "Zobraziť Meno odosielateľa",
+  "SenderDisplayName": "Meno odosielateľa pre zobrazenie",
   "SenderEmailAddress": "E-mailová adresa odosielateľa",
   "SendTestMail": "Odoslať testovací e-mail"
 }

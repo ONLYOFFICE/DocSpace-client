@@ -39,7 +39,7 @@ const CreationBlock = ({ t, textStyles, keyTextStyles }) => {
       </Row>
       <Row className={styles.hotkeysRow}>
         <>
-          <Text {...textStyles}>{t("Article:UploadFolder")}</Text>
+          <Text {...textStyles}>{t("Common:UploadFolder")}</Text>
           <Text {...keyTextStyles}>Shift + i</Text>
         </>
       </Row>

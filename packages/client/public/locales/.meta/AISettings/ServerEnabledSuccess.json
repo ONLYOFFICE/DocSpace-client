@@ -3,11 +3,12 @@
   "content": "Server enabled successfully",
   "content_en_sha1_hash": "d4a176a9ae00f7e3e74e5cea4dc4fe7279d89458",
   "created_at": "2025-10-27T16:14:31.649Z",
-  "updated_at": "2026-02-19T13:36:32.700Z",
+  "updated_at": "2026-04-11T21:02:20.363Z",
   "comment": {
-    "text": "This key displays a success message in a toast notification after a server is successfully enabled within the AI Settings portal. It confirms to the user that the server enablement process completed successfully. Translators should ensure the message conveys a positive confirmation.",
+    "text": "This is a toast message confirming that an AI server has been successfully enabled in the settings. It appears briefly after the user enables a server.",
     "is_auto": true,
-    "updated_at": "2025-10-27T17:15:51.877Z"
+    "updated_at": "2026-04-11T21:02:20.363Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

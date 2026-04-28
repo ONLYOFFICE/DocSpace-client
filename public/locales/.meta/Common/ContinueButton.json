@@ -3,13 +3,20 @@
   "content": "Continue",
   "content_en_sha1_hash": "2e02623966f9391facf6eaefc8b079ed5b630bee",
   "created_at": "2025-05-19T21:30:43.691Z",
-  "updated_at": "2026-03-26T08:26:57.987Z",
+  "updated_at": "2026-04-23T17:24:01.705Z",
   "comment": {
-    "text": "This translation key is used as a label for a \"Continue\" button that appears in various dialogs and confirms user actions. It provides a clear and consistent text to be translated, allowing users to proceed after completing a task or operation.",
+    "text": "This is the label for a button that allows users to proceed with an action, such as confirming a service, closing an editor without saving, or initiating a file conversion.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:59.020Z"
+    "updated_at": "2026-04-11T20:56:28.058Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/sub-components/ConfirmationDialog.tsx",
+      "line_number": 75,
+      "context": "))}\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"ContinueButton\")}\n size={ButtonSize.normal}\n onClick={onConfirm}\n primary\n scale\n testId=\"service-confirmation-dialog-continue-button\"",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/dialogs/CloseEditIndexDialog/index.tsx",
       "line_number": 83,
@@ -30,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DisableAiServicesDialog/index.js",
-      "line_number": 132,
+      "line_number": 133,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n size=\"normal\"\n label={t(\"Common:ContinueButton\")}\n scale\n onClick={onContinue}\n isLoading={isLoading}\n testId=\"disable_ai_services_continue_button\"\n />",
       "module": "/packages/client"
     },
@@ -42,25 +49,19 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/PortalRenamingDialog/index.js",
-      "line_number": 56,
+      "line_number": 57,
       "context": "</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"PortalRenamingContinueBtn\"\n label={t(\"Common:ContinueButton\")}\n size=\"normal\"\n scale\n primary\n onClick={onSave}\n isLoading={isSaving}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/WarningQuotaDialog/WarningQuotaDialog.tsx",
-      "line_number": 107,
+      "line_number": 108,
       "context": "onClick={onClickRedirect}\n scale\n testId=\"continue_change_quota_button\"\n />\n <Button\n label={t(\"Common:ContinueButton\")}\n size={ButtonSize.normal}\n onClick={onCloseDialog}\n scale\n testId=\"cancel_continue_change_quota_button\"\n />",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/sub-components/ConfirmationDialog.tsx",
-      "line_number": 76,
-      "context": "))}\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:ContinueButton\")}\n size={ButtonSize.normal}\n onClick={onConfirm}\n primary\n scale\n testId=\"service-confirmation-dialog-continue-button\"",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/EmailInputForm.tsx",
-      "line_number": 113,
+      "line_number": 114,
       "context": "id=\"email-continue\"\n className=\"login-continue-button\"\n primary\n size={ButtonSize.medium}\n scale\n label={t(\"Common:ContinueButton\")}\n tabIndex={1}\n isDisabled={isLoading}\n isLoading={isLoading}\n onClick={onContinue}\n testId=\"email_continue_button\"",
       "module": "/packages/login"
     },
@@ -72,7 +73,7 @@
     },
     {
       "file_path": "/packages/login/src/app/(root)/wizard/page.client.tsx",
-      "line_number": 554,
+      "line_number": 555,
       "context": "<Button\n size={ButtonSize.medium}\n scale\n primary\n label={t(\"Common:ContinueButton\")}\n isLoading={isCreated}\n onClick={onContinueClick}\n testId=\"wizard_continue_button\"\n />\n </div>",
       "module": "/packages/login"
     },
@@ -171,13 +172,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation \"続ける\" (tsuzukeru) literally means \"to continue\" or \"to proceed,\" but in the context of a button labeled \"Continue,\" a more natural and common translation would be \"次へ\" (tsugi e) which means \"Next\". \"続ける\" is grammatically correct but sounds unnatural in this UI element.",
-          "suggestion": "次へ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -237,13 +232,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'ඉදිරියට' (idiriyata) can mean 'forward' or 'onward,' it doesn't directly translate to 'Continue' in the context of a button. It can be understood, but a more accurate translation might be needed depending on the surrounding UI elements and overall functionality.",
-          "suggestion": "Consider using a translation that more closely aligns with the action of proceeding, such as 'కొనసాగించు' (Konasaaginu - if aiming for a more formal feel) or a phrase that emphasizes continuation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -261,13 +250,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Настави\" is an imperative form of the verb \"наставити\" (to continue), but it doesn't agree in number or politeness with the implied subject (the button). It sounds abrupt and informal.  A more appropriate translation for a button label would be a noun or a more polite imperative.",
-          "suggestion": "Consider alternatives like \"Наставити\" (Nastaviti - infinitive form, more formal and neutral), \"Наставите\" (Nastavite - polite imperative form), or a noun like \"Настављање\" (Nastavljanje - continuation)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -295,6 +278,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -17,7 +17,6 @@
   "InviteViaLinkDescriptionAgentMembers": "Luo universaali linkki {{productName}}-jäsenille itsevahvistusta varten agentissa.",
   "InviteViaLinkDescriptionRoomGuest": "Luo universaali linkki itsevahvistukseen huoneessa vieraana.",
   "InviteViaLinkDescriptionRoomMembers": "Luo universaali linkki {{productName}}-jäsenille itsevahvistusta varten huoneessa.",
-  "LinkCopySuccess": "Linkki on kopioitu",
   "SendInvitation": "Lähetä kutsu",
   "UserAgentMaxAvailableRoleWarning": "Vieraat ja käyttäjät eivät voi olla agenttien päälliköitä. Vain huone- ja {{productName}}-ylläpitäjät soveltuvat määritettyyn rooliin.",
   "UserMaxAvailableRoleWarning": "Vieraita ja käyttäjiä ei voida asettaa huoneen johtajiksi. Vain huoneen ja {{productName}} pääkäyttäjät ovat sopivia tähän rooliin.",

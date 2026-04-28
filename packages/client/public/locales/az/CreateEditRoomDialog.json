@@ -6,6 +6,7 @@
   "AutomaticIndexing": "Avtomatik indeksləşdirmə",
   "AutomaticIndexingDescription": "Fayl və qovluqları seriya nömrəsinə görə indeksləşdirmək üçün avtomatik indeksləşdirməni aktivləşdirin. Nömrə üzrə çeşidləmə bütün istifadəçilər üçün standart olaraq təyin ediləcək.",
   "ChooseRoomType": "Otaq növünü seçin",
+  "ConfigureDatabaseConnection": "İnteqrasiya → Üçüncü tərəf xidmətlərində verilənlər bazası bağlantısını konfiqurasiya edin",
   "CreateRoomConfirmation": "Yaddaşa qoşulmadan davam edilsin?\nSiz hələ qoşulmamış üçüncü tərəfin yaddaş seçimini etmisiniz. Xidmətə qoşulmadan davam etsəniz, bu seçim əlavə edilməyəcək.",
   "CreateRoomWatermarksConfirmation": "Bu otaqdakı sənədlərə tətbiq olunacaq su nişanını təyin etməmisiniz. Otaq redaktə parametrlərində su nişanını həmişə əlavə edə bilərsiniz. Su nişanı olmadan davam edilsin?",
   "CreateTagOption": "Teq yaradın",
@@ -16,8 +17,12 @@
   "FileLifetimeDescription": "Faylın istifadə müddətini elə təyin edin ki, bu otaqdakı fayllar müəyyən müddətdən sonra avtomatik silinsin. Faylın istifadə müddəti yükləndiyi/yaradıldığı tarixdən başlayır.",
   "FilesOlderThan": "Daha köhnə fayllar:",
   "FormRoomBarDescription": "Bu otaq əlaqəsi olan hər kəs üçün əlçatandır. Xarici istifadəçilərin bütün fayllar üçün Forma Doldurma icazəsi olacaq.",
+  "GoToIntegrations": "İnteqrasiyalara keçin",
   "Horizontal": "Üfüqi",
   "Icon": "Simvol",
+  "NeedMoreIntegrations": "Daha çox inteqrasiyaya ehtiyacınız var?",
+  "NeedMoreIntegrationsDescription": "Webhooks vasitəsilə məlumatı öz sisteminizə göndərin, və ya formları Zapier vasitəsilə minlərlə xidmətə bağlayın.",
+  "NoDatabaseConnections": "Verilənlər bazası bağlantıları konfiqurasiya edilməmişdir",
   "PeopleSelectorInfo": "Yalnız otaq administratoru və ya {{productName}} administratoru otağın sahibi ola bilər",
   "Position": "Mövqe",
   "PublicRoomBarDescription": "Bu otaq linkə keçidi olan hər kəs üçün əlçatandır. Seçilmiş giriş hüquqlarının növündən asılı olaraq xarici istifadəçilərə giriş verilir.",
@@ -39,5 +44,6 @@
   "UserName": "İstifadəçi Adı",
   "ViewerInfo": "İzləyici məlumatı",
   "WatermarkPreview": "Su nişanı önizləməsi",
-  "WatermarkPreviewHelp": "Bu şəkil önizləməsi su nişanının fayllarınızda necə görünəcəyini təxmini göstərir."
+  "WatermarkPreviewHelp": "Bu şəkil önizləməsi su nişanının fayllarınızda necə görünəcəyini təxmini göstərir.",
+  "NoDatabaseConnectionsRoomAdmin": "Verilənlər bazası bağlantıları administrator tərəfindən tənzimlənir. Verilənlər bazası qurulduqdan sonra, burada ixracı aktivləşdirmək mümkün olacaq."
 }

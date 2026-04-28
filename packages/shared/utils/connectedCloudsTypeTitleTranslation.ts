@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { TTranslation } from "../types";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const connectedCloudsTypeTitleTranslation = (
   key: string,
@@ -33,31 +34,31 @@ export const connectedCloudsTypeTitleTranslation = (
   switch (key) {
     case "Box":
     case "BoxNet":
-      return t("Common:TypeTitleBoxNet");
+      return getBrandName("TypeTitleBoxNet");
 
     case "DropBox":
     case "DropboxV2":
-      return t("Common:TypeTitleDropBox");
+      return getBrandName("TypeTitleDropBox");
 
     case "DocuSign":
-      return t("Common:TypeTitleDocuSign");
+      return getBrandName("TypeTitleDocuSign");
 
     case "Google":
     case "GoogleDrive":
-      return t("Common:TypeTitleGoogle");
+      return getBrandName("TypeTitleGoogle");
 
     case "OneDrive":
     case "SkyDrive":
-      return t("Common:TypeTitleSkyDrive");
+      return getBrandName("TypeTitleSkyDrive");
 
     case "SharePoint":
-      return t("Common:TypeTitleSharePoint");
+      return getBrandName("TypeTitleSharePoint");
     case "WebDav":
-      return t("Common:TypeTitleWebDav");
+      return getBrandName("TypeTitleWebDav");
     case "kDrive":
-      return t("Common:TypeTitlekDrive");
+      return getBrandName("TypeTitlekDrive");
     case "Yandex":
-      return t("Common:TypeTitleYandex");
+      return getBrandName("TypeTitleYandex");
 
     default:
       return key;

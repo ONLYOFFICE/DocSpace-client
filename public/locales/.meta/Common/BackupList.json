@@ -3,22 +3,23 @@
   "content": "Backup List",
   "content_en_sha1_hash": "104eab22b64bfdd7ac57f7948dadb9a22f16bc6c",
   "created_at": "2025-05-26T07:15:40.738Z",
-  "updated_at": "2026-02-19T13:36:33.212Z",
+  "updated_at": "2026-04-11T20:58:40.941Z",
   "comment": {
-    "text": "The \"BackupList\" translation key is used to display the text \"Backup List\" in the restore backup page's settings section and in a modal dialog for managing backups. It appears as an unavailable button in the restoration process and is displayed within a modal window when the backup list is visible.",
+    "text": "This is the title for a dialog window that displays a list of available backups. It also appears as the label for a button that opens this dialog.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:07:23.424Z"
+    "updated_at": "2026-04-11T20:58:40.941Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/index.tsx",
-      "line_number": 430,
+      "line_number": 431,
       "context": ")}\n {...onClickVersionListProp}\n noSelect\n dataTestId=\"restore_backup_list_button\"\n >\n {t(\"Common:BackupList\")}\n </Text>\n \n {isVisibleBackupListDialog ? (\n <BackupListModalDialog\n isVisibleDialog={isVisibleBackupListDialog}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/backup-list/index.tsx",
-      "line_number": 229,
+      "line_number": 230,
       "context": "<ModalDialog\n displayType={ModalDialogType.aside}\n visible={isVisibleDialog}\n onClose={onModalClose}\n >\n <ModalDialog.Header>{t(\"Common:BackupList\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.backupList} data-testid=\"backup-list-modal\">\n <div\n className={classNames(\n styles.backupListContent,",
       "module": "/packages/shared"
     }
@@ -205,6 +206,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

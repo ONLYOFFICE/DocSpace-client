@@ -625,7 +625,7 @@ class BackupStore {
       );
       saveToLocalStorage("LocalCopyThirdPartyStorageValues", this.formSettings);
     } else {
-      saveToLocalStorage("LocalCopyFolder", `${selectedId}`);
+      saveToLocalStorage("LocalCopyFolder", selectedId);
     }
   };
 
@@ -923,3 +923,4 @@ class BackupStore {
 }
 
 export default BackupStore;
+

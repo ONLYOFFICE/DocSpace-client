@@ -3,11 +3,12 @@
   "content": "First name",
   "content_en_sha1_hash": "7e568a90221d853052b3466e581eb5f7c030b901",
   "created_at": "2025-05-19T21:30:45.407Z",
-  "updated_at": "2026-02-19T13:36:32.345Z",
+  "updated_at": "2026-04-11T20:52:25.479Z",
   "comment": {
-    "text": "This translation key is used to display the label \"First name\" in various UI elements, particularly in a change name dialog and an attribute mapping form. It appears as a required field label in these contexts, prompting users for their first name.",
+    "text": "This is a label for an input field where users enter their first name. It appears in dialogs for changing user information and in portal settings for LDAP attribute mapping.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:09.473Z"
+    "updated_at": "2026-04-11T20:52:25.479Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -24,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
-      "line_number": 137,
+      "line_number": 138,
       "context": "style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.firstName}\n labelText={t(\"Common:FirstName\")}\n isRequired\n dataTestId=\"first_name_field_container\"\n >\n <LdapFieldComponent\n name={FIRST_NAME}",
       "module": "/packages/client"
     },
@@ -69,25 +70,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation \"Име\" while technically meaning 'name,' is not the standard translation for \"First name.\" A more accurate translation would be \"Първо име\".",
-          "suggestion": "Първо име"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Křestní jméno\" is a technically correct translation of \"First name\" in some contexts (referring to a baptismal name), it's not the most common or natural translation for a field label like \"First name\". A more appropriate translation would be \"Jméno\".",
-          "suggestion": "Jméno"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -135,25 +124,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation \"名\" only translates to \"name\". It's missing the \"first\" qualifier. \"名\" alone is too short and doesn't accurately represent \"First name\".",
-          "suggestion": "氏名 (Shimei) - which includes 'name' but is often used in formal contexts. Alternatively, 最初の名前 (Saisho no namae) - which means 'first name'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"이름\" (ireum) can mean 'name', a more accurate translation of 'First name' would be 'FirstName' or '명' (myeong).  '이름' is a more general term for 'name'.",
-          "suggestion": "Consider 'FirstName' or '명' (myeong)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -213,13 +190,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Krstné meno' is a literal translation of 'baptismal name', 'First name' typically refers to the given name, not necessarily a name given at baptism. A more accurate translation would be 'Krstné meno' or 'Mená'.",
-          "suggestion": "Krstné meno"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -231,13 +202,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Име' translates to 'Name', not 'First name'.",
-          "suggestion": "Име и презиме"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -249,13 +214,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Turkish translation \"İsim\" is a valid word for 'name', but \"First name\" is best translated as \"Adı\" or \"Adı Soyadı\" (if including surname). \"İsim\" is a more general term for name and doesn't specifically denote 'first name'.",
-          "suggestion": "Adı"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -267,25 +226,19 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"First name\" is a label or field name, and \"Tên\" is a valid translation for the noun \"name\" in Vietnamese. However, as a field label, a more suitable translation might be 'Tên (lót)' or 'Họ và tên (lót)' to explicitly indicate it's referring to the first name, especially in forms or data entry contexts. 'Tên' alone is too general.",
-          "suggestion": "Consider 'Tên (lót)' or 'Họ và tên (lót)' for greater clarity."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"名字\" (mingzi) is a general term for \"name,\" not specifically \"first name.\" While often used interchangeably, \"first name\" has a more specific meaning.",
-          "suggestion": "Consider a more specific translation like \"名\" (ming - name) or a fuller translation that conveys the meaning of \"first name,\" such as \"姓\" (xìng) for family name, if a distinction is necessary. The best choice depends on the application."
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

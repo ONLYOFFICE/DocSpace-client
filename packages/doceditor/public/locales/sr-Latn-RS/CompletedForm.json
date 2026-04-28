@@ -1,7 +1,8 @@
 {
   "BackToRoom": "Nazad u prostoriju",
   "CheckReadyForms": "Proveri spremne formulare",
-  "Description": "Vaš formular je završen i sačuvan",
+  "CompletedFormDescription": "Vaš formular je završen i sačuvan",
+  "CompletedFormTitle": "Formular je završen",
   "DescriptionForAnonymous": "Podneli ste popunjeni PDF formular kome je dodeljen jedinstven broj. Da biste proverili status, kontaktirajte vlasnika formulara.",
   "DescriptionForRegisteredUser": "Popunjeni PDF je dostupan u Završeno folderu.",
   "FillItOutAgain": "Popuni ponovo",
@@ -18,6 +19,5 @@
   "FormVDRYouFirstRecepientDescription": "Vi ste zaduženi da popunite obrazac kao prvi primalac. Obaveštenje je poslato na vašu elektronsku poštu. Možete da počnete da ga popunjavate sada ili da kopirate link za popunjavanje i vratite se kasnije.",
   "LinkToFillOutForm": "Link za popunjavanje obrasca:",
   "LinkToForm": "Link za obrazac:",
-  "LinkToViewOnlyForm": "Link za obrazac samo za pregled:",
-  "Title": "Formular je završen"
+  "LinkToViewOnlyForm": "Link za obrazac samo za pregled:"
 }

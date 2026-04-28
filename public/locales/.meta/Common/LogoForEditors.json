@@ -3,34 +3,35 @@
   "content": "Logo for {{editorName}} editor",
   "content_en_sha1_hash": "89f9e561b961db8b10235d97e4f4165c31621ca9",
   "created_at": "2025-08-11T10:23:37.730Z",
-  "updated_at": "2026-02-19T13:36:33.170Z",
+  "updated_at": "2026-04-11T20:49:11.025Z",
   "comment": {
-    "text": "This key displays a label indicating the logo is specifically for a particular editor, such as \"Documents.\" It appears as a text label within the WhiteLabel branding settings page, showing the logo's dimensions alongside its designation. Translators should ensure the text accurately conveys the logo's purpose and association with the specified editor.",
+    "text": "This is a label for a logo upload field. It indicates which editor the logo will be used for, with `{{editorName}}` being a variable for the specific editor (e.g., \"Documents\", \"Spreadsheets\").",
     "is_auto": true,
-    "updated_at": "2025-08-11T10:24:32.556Z"
+    "updated_at": "2026-04-11T20:49:11.025Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 393,
+      "line_number": 394,
       "context": "/>\n </div>\n \n <div className={styles.logoWrapper}>\n <Text fontSize=\"15px\" fontWeight=\"600\">\n {/* t(\"LogoForEditors\", { editorName: t(\"Common:Documents\") })} */}\n {t(\"LogoDocsEditor\")} ({logoUrls[4].size.width}x\n {logoUrls[4].size.height})\n </Text>\n \n <div className={styles.logosWrapper}>",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 393,
+      "line_number": 394,
       "context": "/>\n </div>\n \n <div className={styles.logoWrapper}>\n <Text fontSize=\"15px\" fontWeight=\"600\">\n {/* t(\"LogoForEditors\", { editorName: t(\"Common:Documents\") })} */}\n {t(\"LogoDocsEditor\")} ({logoUrls[4].size.width}x\n {logoUrls[4].size.height})\n </Text>\n \n <div className={styles.logosWrapper}>",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 393,
+      "line_number": 394,
       "context": "/>\n </div>\n \n <div className={styles.logoWrapper}>\n <Text fontSize=\"15px\" fontWeight=\"600\">\n {/* t(\"LogoForEditors\", { editorName: t(\"Common:Documents\") })} */}\n {t(\"LogoDocsEditor\")} ({logoUrls[4].size.width}x\n {logoUrls[4].size.height})\n </Text>\n \n <div className={styles.logosWrapper}>",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 393,
+      "line_number": 394,
       "context": "/>\n </div>\n \n <div className={styles.logoWrapper}>\n <Text fontSize=\"15px\" fontWeight=\"600\">\n {/* t(\"LogoForEditors\", { editorName: t(\"Common:Documents\") })} */}\n {t(\"LogoDocsEditor\")} ({logoUrls[4].size.width}x\n {logoUrls[4].size.height})\n </Text>\n \n <div className={styles.logosWrapper}>",
       "module": "/packages/shared"
     }

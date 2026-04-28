@@ -34,6 +34,7 @@ import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Text } from "@docspace/ui-kit/components/text";
 
 import styles from "./DisableAiServicesDialog.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const DisableAiServicesDialogComponent = ({
   visible,
@@ -48,7 +49,7 @@ const DisableAiServicesDialogComponent = ({
   const { t } = useTranslation(["Settings", "Common"]);
 
   const effectVars = {
-    productName: t("Common:ProductName"),
+    productName: getBrandName("ProductName"),
     aiSettings: t("AISettings"),
     aiServices: t("Common:AIServices"),
     aiAgents: t("Common:AIAgents"),
@@ -81,7 +82,7 @@ const DisableAiServicesDialogComponent = ({
           lineHeight="20px"
         >
           {t("DisableAiServicesDescription", {
-            organizationName: t("Common:OrganizationName"),
+            organizationName: getBrandName("OrganizationName"),
           })}
         </Text>
         <Text fontSize="13px" fontWeight={400} as="div">

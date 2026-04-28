@@ -31,6 +31,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import type {
   TFile,
   TFilesSettings,
+  TFolder,
   TFolderSecurity,
 } from "@docspace/shared/api/files/types";
 import type { TUser } from "@docspace/shared/api/people/types";
@@ -62,6 +63,8 @@ export type CommonData = {
   inProgressFolderId?: number;
   initialFiles?: TFile[];
   initialTotal?: number;
+  initialFolders?: TFolder[];
+  initialSection?: FormsSection;
 };
 
 export default function useInitCommonStores(commonData: CommonData): boolean {
@@ -118,8 +121,22 @@ export default function useInitCommonStores(commonData: CommonData): boolean {
         ? commonData.initialFiles.filter((f) => f.folderId === roomId)
         : commonData.initialFiles;
       formsListStore.setSection(FormsSection.MyForms);
-      formsListStore.setItems(files, commonData.initialTotal ?? files.length);
+      const FORMS_PAGE_COUNT = 25;
+      const apiExhausted = commonData.initialFiles.length < FORMS_PAGE_COUNT;
+      const total = apiExhausted ? files.length : files.length + 1;
+      formsListStore.setItems(files, total);
       formsListStore.setFolders([]);
+      formsListStore.setIsLoading(false);
+    } else if (
+      commonData.initialFolders &&
+      commonData.initialFolders.length > 0 &&
+      commonData.initialSection &&
+      (commonData.initialSection === FormsSection.InProgress ||
+        commonData.initialSection === FormsSection.CompletedForms)
+    ) {
+      formsListStore.setSection(commonData.initialSection);
+      formsListStore.setItems([], 0);
+      formsListStore.setFolders(commonData.initialFolders);
       formsListStore.setIsLoading(false);
     }
 

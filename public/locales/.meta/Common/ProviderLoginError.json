@@ -3,11 +3,12 @@
   "content": "Authorization error",
   "content_en_sha1_hash": "14a7e84261230bbb4b1ed8b2fc1a0afddf92688d",
   "created_at": "2025-05-19T21:30:47.577Z",
-  "updated_at": "2026-02-19T13:36:33.065Z",
+  "updated_at": "2026-04-12T03:42:54.282Z",
   "comment": {
-    "text": "The \"ProviderLoginError\" translation key is used to display an error message when a user attempts to log in through a provider that has failed authorization. This error message appears on screen after an invalid login attempt and informs the user of the issue. It is displayed in a notification dialog box, typically triggered by an error caught during the login process.",
+    "text": "This is the title of a toast message that appears when there is an error during the authorization process with an external provider.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:34:53.992Z"
+    "updated_at": "2026-04-11T20:45:50.239Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -159,13 +160,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'බලය දීමේ දෝෂයකි' (balaya dime doyayakiki) is a literal translation of 'Authorization error,' it's not the most natural or commonly used phrasing in Sinhala. A more suitable translation would convey the meaning more clearly and accurately for a user experience.",
-          "suggestion": "සරල ක්‍රියාදායකයාකමැරියාවකි (sarala kriyadakayakameariyawakiki) - This translates to 'Simple action failure' or 'Basic action error' and is more commonly used in technical contexts. Alternatively, 'අවසරයකමැරියාවකි' (awasayakameariyawakiki) - 'Authorization failure' can be used which is more direct."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -189,13 +184,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Greška u ovlašćenju\" is a literal translation of 'Authorization error,' it's not the most natural or idiomatic phrasing in Serbian. A more common and clearer translation would be 'Greška u autorizaciji' or 'Problem sa autorizacijom'.",
-          "suggestion": "Greška u autorizaciji"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -217,6 +206,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

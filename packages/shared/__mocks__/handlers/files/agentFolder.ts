@@ -89,7 +89,12 @@ const getFolderInfo = ({
       providerId: 1,
       modelId: "GPT-5.1",
       prompt: "",
-      thinking: thinkingSupported,
+      multimodal: { image: { formats: [".png", ".jpg", ".jpeg", ".gif", ".webp"] } },
+      capabilities: {
+        vision: false,
+        toolCalling: true,
+        thinking: thinkingSupported,
+      },
     },
     id: 2,
     rootFolderId: 224866,

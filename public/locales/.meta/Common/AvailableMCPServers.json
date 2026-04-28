@@ -3,18 +3,19 @@
   "content": "Available {{mcpServers}}",
   "content_en_sha1_hash": "9684aad5701521b48b37d8cea8feb7399340b203",
   "created_at": "2025-12-19T10:16:18.690Z",
-  "updated_at": "2025-12-22T09:46:05.909Z",
+  "updated_at": "2026-04-11T20:58:45.305Z",
   "comment": {
-    "text": "This key displays a header label for a selection dialog or similar UI element listing available Minecraft server options. The `{{mcpServers}}` placeholder will be replaced with the title of the MCP setting, allowing for dynamic content. Translators should consider this as a descriptive title for a selection interface.",
+    "text": "This is a dialog header label. It displays the title for a list of available servers, where `{{mcpServers}}` will be replaced by the localized term for \"MCP Servers\".",
     "is_auto": true,
-    "updated_at": "2025-12-22T09:46:05.909Z"
+    "updated_at": "2026-04-11T20:58:45.305Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/selectors/MCPServers/index.tsx",
-      "line_number": 198,
-      "context": "useAside={false}\n onClose={onClose}\n onSelect={onSelect}\n withHeader\n headerProps={{\n headerLabel: t(\"Common:AvailableMCPServers\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n }),\n withoutBackButton: false,\n onBackClick: onBackClick,\n onCloseClick: onClose,",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/selectors/MCPServers/index.tsx",
+      "line_number": 259,
+      "context": "isMultiSelect\n {...withAsideProps}\n onSelect={onSelect}\n withHeader\n headerProps={{\n headerLabel: t(\"AvailableMCPServers\", {\n mcpServers: t(\"MCPSettingTitle\"),\n }),\n withoutBackButton: false,\n onBackClick: onBackClick,\n onCloseClick: onClose ?? onBackClick,",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {

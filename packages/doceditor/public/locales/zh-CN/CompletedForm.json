@@ -1,7 +1,8 @@
 {
   "BackToRoom": "返回房间",
   "CheckReadyForms": "检查已完成的表单",
-  "Description": "您的表单已完成并保存",
+  "CompletedFormDescription": "您的表单已完成并保存",
+  "CompletedFormTitle": "表单已完成",
   "DescriptionForAnonymous": "您提交的 PDF 表单已分配了一个唯一的编号。若要检查状态，请联系表单所有者。",
   "DescriptionForRegisteredUser": "您提交的 PDF 表单可在“完成”文件夹中查看。",
   "FillItOutAgain": " 再次填写",
@@ -18,6 +19,5 @@
   "FormVDRYouFirstRecepientDescription": "您被指定为填写此表单的第一个接收者，通知已发送至您的邮箱。您可以立即开始填写，或者复制填写链接稍后填写。",
   "LinkToFillOutForm": "填写表单链接：",
   "LinkToForm": "表单链接：",
-  "LinkToViewOnlyForm": "只读表单链接：",
-  "Title": "表单已完成"
+  "LinkToViewOnlyForm": "只读表单链接："
 }

@@ -310,9 +310,12 @@ export default function useFilesFilter({
   }, [t]);
 
   const onChangeViewAs = React.useCallback(() => {
-    const newViewAs = filesViewAs === "tile" ? "row" : "tile";
-
-    setFilesViewAs(newViewAs);
+    if (filesViewAs === "tile") {
+      const isDesktopWidth = window.innerWidth > 1024;
+      setFilesViewAs(isDesktopWidth ? "table" : "row");
+    } else {
+      setFilesViewAs("tile");
+    }
   }, [setFilesViewAs, filesViewAs]);
 
   const removeSelectedItem = React.useCallback(

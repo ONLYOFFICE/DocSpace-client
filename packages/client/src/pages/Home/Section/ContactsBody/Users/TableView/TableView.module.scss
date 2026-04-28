@@ -1,0 +1,276 @@
+// (c) Copyright Ascensio System SIA 2009-2026
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+.styledTableContainer:has(
+  :global(
+    .table-container_body
+      .table-list-item:first-child:first-child
+      > .table-row-selected
+  )
+) {
+  :global(.table-container_header) {
+    border-image-slice: 1;
+    border-image-source: var(--table-header-lengthen-border-image-source);
+  }
+}
+
+.styledTableContainer {
+  :global(.table-row-selected .table-container_user-name-cell) {
+    margin-inline-start: -24px;
+    padding-inline-start: 24px;
+  }
+
+  :global(.table-row-selected .table-container_row-context-menu-wrapper) {
+    margin-inline-end: -20px;
+    padding-inline-end: 20px;
+  }
+
+  :global(
+    .table-row-selected
+      + .table-row-selected
+      .table-row
+      .table-container_user-name-cell
+  ),
+  :global(
+    .table-row-selected
+      + .table-row-selected
+      .table-row
+      .table-container_row-context-menu-wrapper
+  ) {
+    border-image-slice: 1;
+  }
+
+  :global(
+    .table-row-selected
+      + .table-row-selected
+      .table-row
+      .table-container_user-name-cell
+  ) {
+    margin-inline-start: -24px;
+    padding-inline-start: 24px;
+    border-inline: 0; // for Safari macOS
+
+    border-image-source: linear-gradient(
+      to right,
+      var(--files-section-table-view-row-border-color-transition) 17px,
+      var(--files-section-table-view-row-border-color) 31px
+    );
+  }
+
+  :global(
+    .table-row-selected
+      + .table-row-selected
+      .table-row
+      .table-container_row-context-menu-wrapper
+  ) {
+    margin-inline-end: -20px;
+    padding-inline-end: 20px;
+
+    border-image-source: linear-gradient(
+      to left,
+      var(--files-section-table-view-row-border-color-transition) 17px,
+      var(--files-section-table-view-row-border-color) 31px
+    );
+  }
+
+  :global(
+    .user-item:not(.table-row-selected)
+      + .table-row-selected
+      .table-row
+      .table-container_user-name-cell
+  ) {
+    margin-inline-start: -24px;
+    padding-inline-start: 24px;
+  }
+
+  :global(
+    .user-item:not(.table-row-selected)
+      + .table-row-selected
+      .table-row
+      .table-container_row-context-menu-wrapper
+  ) {
+    margin-inline-end: -20px;
+    padding-inline-end: 20px;
+  }
+
+  :global(.table-container_user-name-cell .additional-badges) {
+    margin-inline-end: 12px;
+  }
+}
+
+.styledWrapper {
+  display: contents;
+}
+
+.styledPeopleRow {
+  :global(.table-container_cell) {
+    border-top: 1px solid var(--files-section-table-view-row-border-color);
+    margin-top: -1px;
+  }
+
+  &:hover {
+    :global(.table-container_cell) {
+      cursor: pointer;
+      background: var(
+        --files-section-table-view-row-background-active
+      ) !important;
+    }
+
+    :global(.table-container_user-name-cell) {
+      margin-inline-start: -24px;
+      padding-inline-start: 24px;
+    }
+
+    :global(.table-container_row-context-menu-wrapper) {
+      margin-inline-end: -20px;
+      padding-inline-end: 20px;
+    }
+  }
+
+  :global(.table-container_row-context-menu-wrapper) {
+    height: 49px !important;
+    max-height: none !important;
+    box-sizing: border-box;
+    justify-content: flex-end;
+    padding-inline-end: 0;
+  }
+
+  :global(.table-container_cell:not(.table-container_row-checkbox-wrapper)) {
+    height: auto;
+    max-height: 48px;
+  }
+
+  &.checked,
+  &.active {
+    :global(.table-container_cell) {
+      background: var(
+        --files-section-table-view-row-background-active
+      ) !important;
+    }
+  }
+
+  :global(.table-container_row-checkbox-wrapper) {
+    padding-inline-end: 0;
+    min-width: 48px;
+  }
+
+  :global(.table-container_row-checkbox-wrapper .table-container_row-checkbox) {
+    margin-inline-start: -4px;
+    padding-block: 16px;
+    padding-inline: 12px 0;
+  }
+
+  :global(.table-container_row-checkbox-wrapper .table-container_row-loader) {
+    border-bottom: unset;
+    padding-inline-start: 7px;
+  }
+
+  :global(.link-with-dropdown-group) {
+    margin-inline-end: 12px;
+  }
+
+  :global(.table-cell_username) {
+    display: flex;
+    margin-inline-end: 12px;
+  }
+
+  :global(.table-cell_type),
+  :global(.table-cell_groups),
+  :global(.table-cell_room) {
+    margin-inline-start: -8px;
+    padding-inline-end: 12px;
+  }
+
+  :global(.table-cell_email a) {
+    margin-inline-end: 12px;
+  }
+
+  &.hideColumns {
+    :global(.groups-combobox),
+    :global(.type-combobox) {
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+
+  :global(.groups-combobox),
+  :global(.type-combobox) {
+    & > div {
+      width: auto;
+      max-width: fit-content;
+    }
+  }
+
+  :global(.type-combobox),
+  :global(.groups-combobox),
+  :global(.room-combobox) {
+    padding-inline-start: 8px;
+    overflow: hidden;
+  }
+
+  :global(.type-combobox .combo-button),
+  :global(.groups-combobox .combo-button),
+  :global(.room-combobox .combo-button) {
+    padding-inline-start: 8px;
+    margin-inline-start: -8px;
+  }
+
+  :global(.type-combobox .combo-button .combo-button-label),
+  :global(.groups-combobox .combo-button .combo-button-label),
+  :global(.room-combobox .combo-button .combo-button-label) {
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  :global(.room-combobox .combo-buttons_arrow-icon) {
+    display: none;
+  }
+
+  :global(.plainTextItem) {
+    padding-inline-start: 8px;
+  }
+
+  :global(.me-label) {
+    padding-inline-start: 4px;
+    color: var(--info-panel-me-label-color);
+  }
+}
+
+.styledGroupsComboBox {
+  :global(.combo-button) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border-radius: 3px;
+  }
+
+  :global(.dropdown) {
+    z-index: 105;
+  }
+}
+

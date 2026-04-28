@@ -66,8 +66,8 @@ class TfaStore {
 
       const type = sms ? "sms" : app ? "app" : "none";
       this.tfaSettings = type;
-      this.smsAvailable = res[0].avaliable;
-      this.appAvailable = res[1].avaliable;
+      this.smsAvailable = res[0].available;
+      this.appAvailable = res[1].available;
 
       return type;
     } catch (e) {
@@ -100,3 +100,4 @@ class TfaStore {
 }
 
 export { TfaStore };
+

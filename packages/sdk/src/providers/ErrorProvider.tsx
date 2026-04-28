@@ -31,11 +31,8 @@ import React from "react";
 import { TUser } from "@docspace/shared/api/people/types";
 
 import ErrorBoundary from "@docspace/shared/components/error-boundary/ErrorBoundary";
-import {
-  TSettings,
-  TFirebaseSettings,
-} from "@docspace/shared/api/settings/types";
-import FirebaseHelper from "@docspace/shared/utils/firebase";
+import { TSettings } from "@docspace/shared/api/settings/types";
+import type FirebaseHelper from "@docspace/shared/utils/firebase";
 
 import useDeviceType from "@/hooks/useDeviceType";
 
@@ -48,9 +45,23 @@ type TErrorProvider = {
 };
 
 const ErrorProvider = ({ children, user, settings }: TErrorProvider) => {
-  const firebaseHelper = new FirebaseHelper(
-    settings?.firebase ?? ({} as TFirebaseSettings),
-  );
+  const [firebaseHelper, setFirebaseHelper] = React.useState<
+    FirebaseHelper | undefined
+  >(undefined);
+
+  React.useEffect(() => {
+    const fb = settings?.firebase;
+    if (!fb?.apiKey) return;
+    let cancelled = false;
+    import("@docspace/shared/utils/firebase").then((mod) => {
+      if (cancelled) return;
+      setFirebaseHelper(new mod.default(fb));
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [settings?.firebase]);
+
   const { currentDeviceType } = useDeviceType();
   return (
     <ErrorBoundary

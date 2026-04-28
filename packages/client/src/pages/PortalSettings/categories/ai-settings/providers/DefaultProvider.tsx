@@ -47,6 +47,7 @@ import AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 import ServicesStore from "SRC_DIR/store/ServicesStore";
 import classNames from "classnames";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type DefaultProviderProps = {
   aiProviders?: AISettingsStore["aiProviders"];
@@ -98,7 +99,7 @@ const DefaultProviderComponent = ({
 
     return {
       key: model.modelId,
-      label: aiConfig?.modelAliases?.[model.modelId] || model.modelId,
+      label: model.alias || model.modelId,
     };
   };
 
@@ -112,7 +113,7 @@ const DefaultProviderComponent = ({
   const getTooltipContent = () => (
     <Text fontSize="12px" lineHeight="16px">
       {t("AISettings:PortalAiDisabledTooltip", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
       })}
     </Text>
   );
@@ -197,7 +198,7 @@ const DefaultProviderComponent = ({
     return (
       defaultProviderModels?.map((m) => ({
         key: m.modelId,
-        label: aiConfig?.modelAliases?.[m.modelId] || m.modelId,
+        label: m.alias || m.modelId,
       })) || []
     );
   };
@@ -208,13 +209,13 @@ const DefaultProviderComponent = ({
     return (
       <div style={{ display: "contents" }}>
         {defaultProviderModels.map((m) => {
-          const label = aiConfig?.modelAliases?.[m.modelId] || m.modelId;
+          const label = m.alias || m.modelId;
           const isSelected = m.modelId === selectedModelId;
           const safeFormat = (v: number) =>
             formatAiModelsCurrency ? formatAiModelsCurrency(v) : String(v);
           const priceLabel =
             m.price != null
-              ? t("Services:AIModelPrice", {
+              ? t("Common:AIModelPrice", {
                   inputPrice: safeFormat(m.price.prompt),
                   outputPrice: safeFormat(m.price.completion),
                 })
@@ -355,7 +356,7 @@ const DefaultProviderComponent = ({
           {t("AISettings:DefaultProviderDescription", {
             aiProvider: t("Common:AIProvider"),
             aiAgents: t("Common:AIAgents"),
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
           })}
         </Text>
 

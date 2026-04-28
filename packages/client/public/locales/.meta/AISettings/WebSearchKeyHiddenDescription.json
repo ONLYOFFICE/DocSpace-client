@@ -3,11 +3,12 @@
   "content": "The API key is displayed only once upon saving and is then hidden for security purposes.",
   "content_en_sha1_hash": "74d31a0ea0755223860edc0fa1e51abfdbad7bde",
   "created_at": "2025-10-27T16:14:31.662Z",
-  "updated_at": "2026-03-20T09:07:45.564Z",
+  "updated_at": "2026-04-11T21:02:12.247Z",
   "comment": {
-    "text": "This text explains that the API key is shown briefly when saved but is then hidden for security. It appears as a description near the Web Search key selection in the AI Settings portal. Translators should ensure the description accurately conveys the key's temporary visibility.",
+    "text": "This is a descriptive text displayed in a banner. It informs the user that an API key, once saved, will be hidden for security reasons.",
     "is_auto": true,
-    "updated_at": "2025-10-27T17:12:55.778Z"
+    "updated_at": "2026-04-11T21:02:12.247Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -18,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
-      "line_number": 271,
+      "line_number": 272,
       "context": "<div\n className={styles.aiBanner}\n data-testid=\"web-search-key-hidden-banner\"\n >\n <Text fontSize=\"12px\" fontWeight={400} lineHeight=\"16px\">\n {t(\"AISettings:WebSearchKeyHiddenDescription\")}\n </Text>\n </div>\n ) : (\n <>\n <PasswordInput",
       "module": "/packages/client"
     }

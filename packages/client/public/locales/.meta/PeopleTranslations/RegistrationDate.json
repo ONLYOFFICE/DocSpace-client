@@ -3,11 +3,12 @@
   "content": "Registration date",
   "content_en_sha1_hash": "c498221a5aad95b5674daf56badfb16892c6ed05",
   "created_at": "2025-05-19T21:30:53.492Z",
-  "updated_at": "2025-12-17T07:49:07.868Z",
+  "updated_at": "2026-04-11T21:20:08.435Z",
   "comment": {
-    "text": "This translation key is used to display the registration date of a user in the application. It appears as a label on an info panel and is rendered when the user's status is active. Translators should provide a human-readable version of this date in their respective language.",
+    "text": "This is a label for a date field, indicating when a user registered. It appears in the user information panel and as an option in a filter for user lists.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:38.249Z"
+    "updated_at": "2026-04-11T21:20:08.435Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -24,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 800,
+      "line_number": 801,
       "context": "};\n \n const registrationDate = {\n id: \"registration_date\",\n key: \"registrationDate\",\n label: t(\"PeopleTranslations:RegistrationDate\"),\n default: true,\n };\n \n if (isGuests) {\n options.push(firstName, email);",
       "module": "/packages/client"
     }
@@ -153,13 +154,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation \"Înregistrat la data de\" is not the most accurate or natural translation of \"Registration date\". It literally translates to \"Registered on the date of\". A more accurate and natural translation would be \"Data înregistrării\" or \"Data înscrierii\".",
-          "suggestion": "Consider using \"Data înregistrării\" or \"Data înscrierii\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -171,18 +166,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'පහregister කිරීමේ දිනය' is not an accurate translation of 'Registration date'. It seems to be a direct transliteration and incorrect combination of English and Sinhala words. The word 'register' shouldn't be used in this context in Sinhala.",
-          "suggestion": "නි ලියාපදිංචි කිරීමේ දිනය (ni liyāpadiñci kirimē dinaya) - which translates to 'date of registration'"
-        },
-        {
-          "type": "spelling",
-          "description": "Although 'register' is not a Sinhala word, it is transliterated, and this transliteration is not standardized, potentially leading to confusion for readers.",
-          "suggestion": "Avoid direct transliterations. Use appropriate Sinhala vocabulary."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

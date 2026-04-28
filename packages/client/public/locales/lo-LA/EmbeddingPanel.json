@@ -6,6 +6,6 @@
   "EmbeddingBarDescription": "ການຝັງຈະສາມາດໃຊ້ໄດ້ສໍາລັບ URL ທີ່ລະບຸໂດຍຜູ້ບໍລິຫານ {{productName}} ຢູ່ໃນການຕັ້ງຄ່າ JavaScript SDK ເທົ່ານັ້ນ.",
   "Height": "ລວງສູງ,ຄວາມສູງ",
   "Link": "ເຊື່ອມຕໍ່",
-  "LinkProtectedWithPassword": "ເຊື່ອມຕໍ່ຖືກປົກປ້ອງດ້ວຍລະຫັດລັບ។",
+  "LinkProtectedWithPassword": "ລິ້ງນີ້ຖືກປົກປ້ອງດ້ວຍລະຫັດຜ່ານ.",
   "Width": "ຄວາມກວ້າງ"
 }

@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
-import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
+import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
 import OAuthStore from "SRC_DIR/store/OAuthStore";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 

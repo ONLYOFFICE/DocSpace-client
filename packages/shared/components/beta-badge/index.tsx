@@ -34,6 +34,8 @@ import { DeviceType } from "../../enums";
 
 import { type BetaBadgeProps } from "./BetaBadge.types";
 import { MobileOffset, OtherOffset } from "./BetaBadge.constants";
+import { getBrandName } from "@docspace/shared/constants/brands";
+import { getConstName } from "@docspace/shared/constants/consts";
 
 const BetaBadge = ({
   place,
@@ -51,7 +53,7 @@ const BetaBadge = ({
   const tooltipDescription = (
     <>
       {t("Common:BetaBadgeDescription", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
       })}
       {!withOutFeedbackLink ? (
         <Trans
@@ -104,7 +106,7 @@ const BetaBadge = ({
     <InfoBadge
       offset={offset}
       place={isMobile ? mobilePlace : place}
-      label={t("Common:BetaLabel")}
+      label={getConstName("BetaLabel")}
       {...tooltipProps}
     />
   );

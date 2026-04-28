@@ -3,11 +3,12 @@
   "content": "Public",
   "content_en_sha1_hash": "dc5eb704bbcae1aff4efb71c55461d47767dabe7",
   "created_at": "2025-05-19T21:30:47.669Z",
-  "updated_at": "2026-03-31T15:18:46.828Z",
+  "updated_at": "2026-04-12T03:35:08.122Z",
   "comment": {
-    "text": "The PublicRoomLabel translation key is used to display the English content \"Public\" in a public room context, likely appearing as a button label or title. This text is used to identify and distinguish public rooms from other types of rooms in an application.",
+    "text": "This is a short label identifying a public room. It appears as a room type in a list or selection.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:34:50.482Z"
+    "updated_at": "2026-04-11T20:45:43.894Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -75,13 +76,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Salles publiques\" is too literal and doesn't convey the intended meaning of \"Public\" in this context. \"Public\" refers to a room accessible to everyone, not necessarily a 'public hall' or 'public rooms'.",
-          "suggestion": "A better translation might be \"Public\" (keeping the original word), \"Commun(e)\" or \"Ouvert(e) à tous/toutes\" depending on the exact nuance desired."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -153,13 +148,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Russian translation \"Публичная\" is an adjective, but \"Public\" in this context likely refers to a noun (Public Room). A more accurate translation would be \"Общественный\" (Obshchestvennyy).",
-          "suggestion": "Общественный"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -195,13 +184,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Herkese Açık\" is a valid translation, it's a bit verbose for a simple label like \"Public.\" A more concise and commonly used translation would be \"Herkese\" or possibly \"Açık\". \"Public\" often implies accessibility, and \"Herkese\" captures that but can feel heavy in UI contexts.",
-          "suggestion": "Consider \"Herkese\" or \"Açık\" for a more concise translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -217,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

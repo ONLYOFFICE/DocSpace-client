@@ -4,8 +4,10 @@ import { getSocket } from '@/lib/socket';
 
 interface OllamaModel {
   name: string;
-  modified_at: string;
-  size: number;
+  displayName?: string;
+  provider?: string;
+  modified_at?: string;
+  size?: number;
 }
 
 interface TranslationProgress {
@@ -110,10 +112,10 @@ export const useOllamaStore = create<OllamaState>((set, get) => ({
         loading: false 
       });
     } catch (error: any) {
-      console.error('Error fetching Ollama models:', error);
-      set({ 
+      console.error('Error fetching models:', error);
+      set({
         isConnected: false,
-        error: 'Failed to connect to Ollama API. Make sure Ollama is running locally.',
+        error: 'Failed to fetch models. Make sure Ollama is running locally or OpenRouter API key is configured.',
         loading: false
       });
     }

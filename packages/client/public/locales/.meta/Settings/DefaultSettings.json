@@ -3,16 +3,17 @@
   "content": "Default settings",
   "content_en_sha1_hash": "57afbebd04d4d02458682eb7fa90339a9d41caac",
   "created_at": "2025-05-19T21:30:51.088Z",
-  "updated_at": "2026-03-20T09:07:45.624Z",
+  "updated_at": "2026-04-11T21:24:58.202Z",
   "comment": {
-    "text": "This translation key is used to display a label for a button or dialog that refers to default settings. It appears in various UI components such as buttons and save/cancel dialogs, prompting users to reset to default settings when they have unsaved changes. The exact placement may vary across different files.",
+    "text": "This is a button label. It appears on settings pages and allows users to revert all settings on the current page to their default values.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:25.567Z"
+    "updated_at": "2026-04-11T21:24:58.202Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 422,
+      "line_number": 423,
       "context": "<SaveCancelButtons\n onSaveClick={onSubmit}\n onCancelClick={onReset}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Settings:DefaultSettings\")}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonDisabled={saveButtonDisabled}\n disableRestoreToDefault={\n isDefaultSettings || isSaveLoading || isResetLoading\n }",
       "module": "/packages/client"
     },
@@ -51,18 +52,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Defolt' is a misspelling of 'Default'.",
-          "suggestion": "Default"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "'parametrlər' translates to 'parameters' which isn't the best equivalent for 'settings'. 'Parametrlər' is closer to configuration options, whereas 'settings' is more general.",
-          "suggestion": "A more appropriate translation would be 'Quraşdırılmış parametrlər' or 'Başlanğıc parametrləri' depending on the specific nuance desired. Alternatively, 'Ayarlar' can be used which translates to 'Settings'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -176,30 +166,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"По умолчанию\" while technically meaning 'by default', isn't the most natural or precise translation for \"Default settings\". It lacks the sense of 'settings' being implied in the original English phrase.",
-          "suggestion": "Настройки по умолчанию"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Sinhala word 'පෙරනිමි' (peranim) appears to be a misspelling or uncommon phrasing. It's unclear what it intends to convey.",
-          "suggestion": "Consider using 'ප්‍රdefaultValueමී සැකසුම්' (pradamika säkasum) which directly translates to 'default settings'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "'පෙරනිමි' doesn't accurately convey the meaning of 'default'. It implies something 'old' or 'previous' which is not the intended meaning.",
-          "suggestion": "Use 'ප්‍රdefaultValueමී' (pradamika) to convey 'default'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -217,13 +190,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Подразумевана подешавања' is understandable, a more accurate and common translation of 'Default settings' in Serbian (Cyrillic) would be 'Зобарне подешавања'. 'Подразумевана' implies 'implied' or 'assumed' which isn't the primary meaning of 'default'.",
-          "suggestion": "Зобарне подешавања"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -251,6 +218,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

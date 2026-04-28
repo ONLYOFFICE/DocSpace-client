@@ -44,6 +44,7 @@ import {
 } from "./WhiteLabel.helper";
 import { WhiteLabelHeader } from "./WhiteLabelHeader";
 import styles from "./WhiteLabel.module.scss";
+import { getConstName } from "@docspace/shared/constants/consts";
 
 export const WhiteLabel = (props: IWhiteLabel) => {
   const {
@@ -520,7 +521,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
             fontWeight="600"
             className="settings_unavailable"
           >
-            {t("LogoForEditors", { editorName: t("Common:PDF") })} (
+            {t("LogoForEditors", { editorName: getConstName("PDF") })} (
             {logoUrls[12].size.width}x{logoUrls[12].size.height})
           </Text>
           <div className={styles.logosWrapper}>

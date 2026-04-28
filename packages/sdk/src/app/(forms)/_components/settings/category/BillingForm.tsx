@@ -28,36 +28,139 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { observer } from "mobx-react";
+import { MemoryRouter } from "react-router";
 
 import { Text } from "@docspace/ui-kit/components/text";
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { BillingRoot, Wallet, PaymentMethod } from "@docspace/ui-kit/billing";
+import AiPage from "@docspace/ui-kit/billing/services/pages/ai-tools/AiPage";
+import type { TPaymentConfig } from "@docspace/ui-kit/billing/types";
+import { useFormsUserStore } from "../../../_store/FormsUserStore";
+import { useFormsTourStore } from "../../../_store/FormsTourStore";
+
+import { BillingCards, type BillingCardTab } from "@/components/BillingCards";
+import cardStyles from "@/components/BillingCards/BillingCards.module.scss";
+
+import WalletIcon from "@docspace/ui-kit/assets/icons/16/wallet.react.svg";
+import AiIcon from "@docspace/ui-kit/assets/icons/16/ai-agents.svg";
+import CardIcon from "@docspace/ui-kit/assets/icons/16/card.react.svg";
 
 import styles from "./SettingsPanel.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const PAYMENTS_PATH = "/portal-settings/payments/portal-payments";
 
+type BillingTab = "wallet" | "ai" | "payment-method";
+
+const TAB_DEFS: {
+  id: BillingTab;
+  titleKey: string;
+  tKey: string;
+  iconClass: string;
+  icon: React.ReactNode;
+  nativeIcon?: boolean;
+}[] = [
+  {
+    id: "wallet",
+    titleKey: "Wallet",
+    tKey: "BillingWalletCardDesc",
+    iconClass: cardStyles.billingIconWallet,
+    icon: <WalletIcon />,
+  },
+  {
+    id: "ai",
+    titleKey: "OrganizationAI",
+    tKey: "BillingAICardDesc",
+    iconClass: cardStyles.billingIconAi,
+    icon: <AiIcon />,
+  },
+  {
+    id: "payment-method",
+    titleKey: "PaymentMethod",
+    tKey: "BillingPaymentMethodCardDesc",
+    iconClass: cardStyles.billingIconPayment,
+    icon: <CardIcon />,
+    nativeIcon: true,
+  },
+];
+
 const BillingForm = () => {
-  const { t } = useTranslation(["Common"]);
+  const { t, i18n } = useTranslation();
+  const { user } = useFormsUserStore();
+  const tourStore = useFormsTourStore();
+  const [activeTab, setActiveTab] = React.useState<BillingTab>("ai");
+
   const onOpenBilling = React.useCallback(() => {
     const url = `${window.location.origin}${PAYMENTS_PATH}`;
     window.open(url, "_blank");
   }, []);
 
+  const billingConfig = React.useMemo<TPaymentConfig>(
+    () => ({
+      language: i18n.language || "en",
+      user: user
+        ? {
+            id: user.id,
+            email: user.email,
+            isOwner: user.isOwner,
+          }
+        : undefined,
+    }),
+    [i18n.language, user],
+  );
+
+  const tabs: BillingCardTab[] = TAB_DEFS.map((d) => ({
+    id: d.id,
+    // biome-ignore lint/plugin/no-dynamic-i18n-key: titleKey/tKey literals defined on TAB_DEFS entries are captured by the locales scanner
+    title: t(d.titleKey, {
+      productName: getBrandName("ProductName"),
+      organizationName: getBrandName("OrganizationName"),
+    }),
+    // biome-ignore lint/plugin/no-dynamic-i18n-key: see above
+    description: t(d.tKey),
+    iconClass: d.iconClass,
+    icon: d.icon,
+    nativeIcon: d.nativeIcon,
+  }));
+
   return (
     <div className={styles.billingWrapper}>
-      <Text fontSize="22px" fontWeight={600}>
-        {t("Common:WorkInProgress")}
+      <Text fontSize="12px" lineHeight="16px" className={styles.billingNotice}>
+        {t("BillingPortalNotice")}{" "}
+        <Link
+          type={LinkType.action}
+          fontSize="12px"
+          isTextOverflow={false}
+          className={styles.billingPortalLink}
+          onClick={onOpenBilling}
+        >
+          {t("OpenPortalBilling")}
+        </Link>
       </Text>
-      <Button
-        primary
-        size={ButtonSize.normal}
-        label={t("Common:OpenBilling")}
-        onClick={onOpenBilling}
-        scale={false}
+
+      <BillingCards
+        tabs={tabs}
+        activeTab={activeTab}
+        onTabChange={(id) => setActiveTab(id as BillingTab)}
       />
+
+      {!tourStore.showMockItems && (
+        <MemoryRouter>
+          <BillingRoot config={billingConfig}>
+            <div key={activeTab} className={styles.billingContent}>
+              {activeTab === "payment-method" && <PaymentMethod />}
+              {activeTab === "wallet" && (
+                <Wallet showPortalSettingsLoader={false} />
+              )}
+              {activeTab === "ai" && <AiPage />}
+            </div>
+          </BillingRoot>
+        </MemoryRouter>
+      )}
     </div>
   );
 };
 
-export default BillingForm;
+export default observer(BillingForm);
 

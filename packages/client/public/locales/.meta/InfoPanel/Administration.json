@@ -3,11 +3,12 @@
   "content": "Administration",
   "content_en_sha1_hash": "b8be3d1264310c3b8c848d4b90d5206179a40cc4",
   "created_at": "2025-05-19T21:30:54.760Z",
-  "updated_at": "2026-02-19T13:36:32.626Z",
+  "updated_at": "2026-04-11T21:13:54.841Z",
   "comment": {
-    "text": "This translation key is used to display the title \"Administration\" in a UI component, likely an InfoPanel, indicating access or management of administrative settings. It appears on a file at /packages/client/src/store/InfoPanelStore.js, suggesting it may be part of a larger admin interface.",
+    "text": "This is a label for a section or category in the InfoPanel and Share dialogs, representing administrators or administrative roles.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:12.315Z"
+    "updated_at": "2026-04-11T21:13:54.841Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -18,7 +19,7 @@
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 563,
+      "line_number": 564,
       "context": "owner.push(member);\n } else if (access === ShareAccessRights.RoomManager || isOwner) {\n if (administrators.length === 0) {\n administrators.push({\n id: \"administrators\",\n displayName: t(\"InfoPanel:Administration\"),\n isTitle: true,\n } satisfies TTitleShare);\n }\n \n administrators.push(member);",
       "module": "/packages/shared"
     }

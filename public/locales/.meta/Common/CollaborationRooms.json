@@ -3,16 +3,17 @@
   "content": "Collaboration",
   "content_en_sha1_hash": "0a4d7a1ab7027fe1ecc947122932b427b1c9e59b",
   "created_at": "2025-05-19T21:30:43.503Z",
-  "updated_at": "2026-03-31T15:18:46.226Z",
+  "updated_at": "2026-04-11T20:57:08.302Z",
   "comment": {
-    "text": "This translation key is used to display the label for a room filter type in the UI. It appears in a filter dropdown menu on the Home page, specifically under the \"Editing Room\" and \"Custom Room\" filters, and provides a clear indication of what rooms are being filtered by collaboration capabilities.",
+    "text": "This is a label for a type of room where users can collaboratively edit documents. It appears in filters, room type selections, and other UI elements to identify editing rooms.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:05.758Z"
+    "updated_at": "2026-04-11T20:57:08.302Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 54,
+      "line_number": 55,
       "context": "case RoomsType.FillingFormsRoom:\n return t(\"Common:FillingFormRooms\");\n \n case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRooms\");\n \n case RoomsType.ReviewRoom:\n return t(\"Common:Review\");\n \n case RoomsType.ReadOnlyRoom:",
       "module": "/packages/client"
     },
@@ -87,13 +88,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Salles de collaboration\" is too literal and doesn't accurately convey the meaning of 'Collaboration' in this context (likely referring to rooms *for* collaboration).  A more natural translation would be something like 'Espaces de collaboration'.",
-          "suggestion": "Espaces de collaboration"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -165,13 +160,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Совместное редактирование\" (Joint editing) doesn't fully capture the meaning of 'Collaboration'. While it includes a component, it's more specific than the English term.",
-          "suggestion": "Consider \"Сотрудничество\" (Sotrudnichestvo) which more accurately reflects the broader concept of collaboration."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -223,6 +212,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

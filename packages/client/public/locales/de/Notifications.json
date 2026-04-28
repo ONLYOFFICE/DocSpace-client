@@ -1,4 +1,5 @@
 {
+  "ActionsWithFilesDescription": "Badges zeigen die Dateiakтивность – Uploads, Bearbeitungen oder Freigaben – in den Bereichen {{rooms}}, {{shared}}, {{documents}} und {{aiAgents}} an.",
   "AdminSetupRequired": "Administrator-Einrichtung erforderlich",
   "Badges": "Abzeichen",
   "DailyFeed": "Täglicher {{productName}}-Feed",
@@ -8,6 +9,8 @@
   "LdapEmailTooltip": "Dieses Benutzerkonto wird aus LDAP geladen. Die E-Mail-Adresse des Benutzers wurde nicht angegeben. Die aktuelle Adresse wurde automatisch generiert und kann nicht zum Senden von Benachrichtigungen verwendet werden.",
   "NotConfigured": "Nicht konfiguriert",
   "Notifications": "Benachrichtigungen",
+  "RoomsActivityDescription": "Erhalten Sie sofortige E-Mail-Benachrichtigungen über neue freigegebene Dateien/Ordner und Aktivitäten innerhalb Ihrer {{rooms}} und {{aiAgents}}.",
+  "RoomUpdateNotify": "Geteilte Inhalte, {{rooms}} und {{aiAgents}}-Aktivität",
   "SettingUpNotifications": "Benachrichtigungen einrichten",
   "SuccessConnected": "{{serviceName}} wurde erfolgreich als Benachrichtigungskanal verbunden. Sie erhalten nun Updates darüber.",
   "SuccessDisconnected": "{{serviceName}} wurde erfolgreich als Benachrichtigungskanal getrennt. Benachrichtigungen werden dort nicht mehr gesendet.",

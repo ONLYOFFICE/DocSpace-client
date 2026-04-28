@@ -3,11 +3,12 @@
   "content": "Groups will be saved but hidden. Re-enable in Profile, File management.",
   "content_en_sha1_hash": "2ceef816d8c798e357707dc2a86437ae22b42d10",
   "created_at": "2026-02-19T13:36:24.873Z",
-  "updated_at": "2026-03-20T09:39:30.768Z",
+  "updated_at": "2026-04-11T21:11:36.916Z",
   "comment": {
-    "text": "This text explains the effect of disabling room groups – they will be saved but hidden, and can be re-enabled in the Profile > File management section. It appears as a description within a dialog related to room group editing. Translators should ensure the meaning of \"hidden\" and \"re-enable\" is clear in the target language.",
+    "text": "This is the body text of a tooltip that appears when a user hovers over the \"Disable groups\" option in the room settings. It explains that existing groups will be hidden but not deleted, and can be re-enabled later.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:39:30.768Z"
+    "updated_at": "2026-04-11T21:11:36.916Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

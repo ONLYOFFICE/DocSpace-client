@@ -3,17 +3,18 @@
   "content": "Delete this agent?",
   "content_en_sha1_hash": "346fba156dd926e2feaa82d4353a4322146ba0d1",
   "created_at": "2025-10-27T16:14:31.194Z",
-  "updated_at": "2026-03-20T09:07:45.494Z",
+  "updated_at": "2026-04-11T21:05:51.756Z",
   "comment": {
-    "text": "This key provides the title for a dialog asking the user to confirm the deletion of an AI agent. The text appears as a question within the dialog box, prompting confirmation before the agent is removed. Translators should ensure the wording conveys a clear request for confirmation.",
+    "text": "This is the title of a confirmation dialog. It appears when a user attempts to delete an AI agent, asking for confirmation.",
     "is_auto": true,
-    "updated_at": "2025-10-27T17:57:15.076Z"
+    "updated_at": "2026-04-11T21:05:51.756Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
       "line_number": 205,
-      "context": "return t(\"Common:MoveTo\");\n };\n \n const getDialogTitle = () => {\n if (isAIAgent) {\n return t(\"DeleteDialog:DeleteAIAgentTitle\");\n }\n \n if (isTemplate) {\n return `${t(\"Files:DeleteTemplate\")}?`;\n }",
+      "context": "return t(\"Common:MoveTo\");\n };\n \n const getDialogTitle = () => {\n if (isAIAgent) {\n return t(\"DeleteDialog:DeleteAIAgentTitle\");\n }\n \n if (isTemplate) {\n return `${t(\"Files:DeleteTemplateAction\")}?`;\n }",
       "module": "/packages/client"
     }
   ],

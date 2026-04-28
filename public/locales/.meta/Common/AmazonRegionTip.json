@@ -3,11 +3,12 @@
   "content": "Enter the AWS region where your Amazon bucket resides.",
   "content_en_sha1_hash": "8b30b6e8c00c36cc42c9387f6a8891f2053a78a2",
   "created_at": "2025-05-26T07:15:40.388Z",
-  "updated_at": "2026-02-19T13:36:33.073Z",
+  "updated_at": "2026-04-11T20:59:20.985Z",
   "comment": {
-    "text": "\"Used in a tooltip within a region selection input field, indicating the user to enter the AWS region of their Amazon bucket.\"",
+    "text": "This is a tooltip that appears when the user hovers over the AWS region input field, providing guidance on what to enter.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:07:56.901Z"
+    "updated_at": "2026-04-11T20:59:20.985Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -199,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

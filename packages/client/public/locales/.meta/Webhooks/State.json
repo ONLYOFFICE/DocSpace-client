@@ -3,17 +3,18 @@
   "content": "State",
   "content_en_sha1_hash": "a72502067518684f9deeec70cf119fd26326cd33",
   "created_at": "2025-05-19T21:30:49.847Z",
-  "updated_at": "2026-02-19T13:36:32.749Z",
+  "updated_at": "2026-04-13T14:59:05.852Z",
   "comment": {
-    "text": "This translation key represents the label for a table header column that displays information about API keys or webhooks in a developer tool. The key is used to render the English word \"State\" as displayed on-screen in various UI components.",
+    "text": "This is a table column header. It indicates the current status or condition of an item, such as an API key, OAuth application, or webhook.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:50.302Z"
+    "updated_at": "2026-04-11T21:28:18.645Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/TableView/TableHeader.tsx",
-      "line_number": 27,
-      "context": "//\n // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing\n // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0\n // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode\n \n import { useState } from \"react\";\n import { TableHeader as TableHeaderComponent } from \"@docspace/ui-kit/components/table\";\n \n import { useTranslation } from \"react-i18next\";\n import { inject, observer } from \"mobx-react\";\n import { TableHeaderColumn, TableHeaderProps } from \"../../types\";",
+      "line_number": 88,
+      "context": "title: t(\"Common:Permissions\"),\n enable: true,\n resizable: true,\n },\n {\n key: \"State\",\n title: t(\"State\"),\n enable: true,\n resizable: true,\n },\n ];",
       "module": "/packages/client"
     },
     {
@@ -24,8 +25,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhooksTable/WebhooksTableView/WebhookTableHeader.js",
-      "line_number": 27,
-      "context": "//\n // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing\n // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0\n // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode\n \n import { useState, useEffect } from \"react\";\n import { TableHeader } from \"@docspace/ui-kit/components/table\";\n \n import { useTranslation } from \"react-i18next\";\n import { inject, observer } from \"mobx-react\";",
+      "line_number": 111,
+      "context": "enable: true,\n resizable: true,\n onChange: onColumnChange,\n },\n {\n key: \"State\",\n title: t(\"State\"),\n enable: true,\n resizable: true,\n onChange: onColumnChange,\n },",
       "module": "/packages/client"
     }
   ],
@@ -57,13 +58,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech word 'Stát' translates to 'State' or 'Country' in English, not 'State' in the context of a webhook state (e.g., 'pending', 'success', 'failed'). A more appropriate translation would depend on the specific meaning of 'State' in the original English.",
-          "suggestion": "Consider alternatives like 'Stav' (condition), 'Status' (borrowed word), or a more descriptive phrase based on the specific states being represented."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -99,13 +94,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation \"Պետություն\" (Petut'yun) typically refers to a nation-state or country, not the technical term 'State' as in 'Webhooks:State' which likely refers to a status or condition.  A more appropriate translation would depend on the precise context of 'State' in webhooks, but it's likely something along the lines of 'չափավարություն' (chaph'avarut'yun - status/condition) or 'վիճակ' (vichak - state/condition).",
-          "suggestion": "Consider 'չափավարություն' or 'վիճակ' based on the context of 'Webhooks:State'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -135,13 +124,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Valsts' generally translates to 'State' in the political or national sense, not the technical 'State' as in the context of a webhook's state (e.g., pending, active, failed).",
-          "suggestion": "Consider alternatives like 'Stāvoklis' (status/condition) or 'Situācija' (situation) which better capture the technical meaning of 'State' in a webhook context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -153,13 +136,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation \"Województwo\" translates to \"Province\" or \"Voivodeship,\" which doesn't accurately reflect the English term \"State\" in the context of webhooks. \"State\" in this context likely refers to the status or condition of a webhook (e.g., active, inactive, pending).",
-          "suggestion": "A more appropriate translation might be \"Stan\" (which can mean 'state' or 'condition') or \"Status\" (borrowed directly, and commonly used in Polish IT contexts)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -189,13 +166,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation \"තත්‍වය\" (thathwaya) primarily means \"truth\" or \"reality.\" While it can have a sense of verification or state in certain contexts, it's not the most accurate translation for \"State\" in the context of Webhooks. \"State\" here likely refers to the status or condition of a webhook, such as 'pending', 'active', or 'failed'.",
-          "suggestion": "Consider alternatives like \"స్థితి\" (sthithi - in some contexts, although needs proper context validation) or a descriptive phrase depending on the desired nuance. A more accurate translation requires deeper understanding of the webhook's 'State' meaning in this specific application."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -207,13 +178,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Država\" (State/Country) doesn't accurately reflect the English term \"State\" in the context of webhooks. \"State\" in this context refers to the status or condition of a webhook (e.g., active, inactive, pending).",
-          "suggestion": "A more appropriate translation would be \"Stanje\" which means 'status' or 'condition'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -247,6 +212,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

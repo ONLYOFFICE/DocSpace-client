@@ -44,6 +44,7 @@ import { LearnMoreWrapper } from "../StyledSecurity";
 import useSecurity from "../useSecurity";
 import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 import styles from "./tfa.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const TFA_HASH = "#tfa-section";
 const SCROLL_MARGIN_TOP =
@@ -236,7 +237,7 @@ const TwoFactorAuth = (props) => {
       <LearnMoreWrapper withoutExternalLink={!tfaSettingsUrl}>
         <Text fontSize="13px" fontWeight="400">
           {t("TwoFactorAuthEnableDescription", {
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
           })}
         </Text>
         {tfaSettingsUrl ? (

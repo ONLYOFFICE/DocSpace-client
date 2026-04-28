@@ -3,11 +3,12 @@
   "content": "Move to",
   "content_en_sha1_hash": "349f807a5e5497d0e5f0e5eb83dd8a59d2dd2c7d",
   "created_at": "2025-05-19T21:30:46.631Z",
-  "updated_at": "2026-03-31T15:18:46.019Z",
+  "updated_at": "2026-04-23T17:24:01.666Z",
   "comment": {
-    "text": "The translation key \"MoveTo\" is used to display the label for a button that allows users to move files or items to a new location. It appears in various UI elements, such as file management dialogs and context menus, providing an intuitive way for users to select a destination. This text should be translated to provide a clear and consistent experience across different languages.",
+    "text": "This is a button label or menu item that initiates the action of moving a selected file or folder to a different location.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:27.277Z"
+    "updated_at": "2026-04-11T20:48:28.575Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -18,19 +19,19 @@
     },
     {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 51,
+      "line_number": 52,
       "context": "isThirdParty?: boolean,\n isSelectFolder?: boolean,\n ) => {\n if (isRestore) return t(\"Common:RestoreTo\");\n if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isMove) return t(\"Common:MoveTo\");\n if (isCopy && !isEditorDialog) return t(\"Common:Copy\");\n if (isRestoreAll) return t(\"Common:Restore\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1934,
+      "line_number": 1984,
       "context": "icon: CopyReactSvgUrl,\n items: [\n {\n id: \"option_move-to\",\n key: \"move-to\",\n label: t(\"Common:MoveTo\"),\n icon: MoveReactSvgUrl,\n onClick: isEditing\n ? () => this.onShowEditingToast(t)\n : () => this.onMoveAction(item),\n disabled: false,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1934,
+      "line_number": 1984,
       "context": "icon: CopyReactSvgUrl,\n items: [\n {\n id: \"option_move-to\",\n key: \"move-to\",\n label: t(\"Common:MoveTo\"),\n icon: MoveReactSvgUrl,\n onClick: isEditing\n ? () => this.onShowEditingToast(t)\n : () => this.onMoveAction(item),\n disabled: false,",
       "module": "/packages/client"
     },
@@ -39,6 +40,18 @@
       "line_number": 292,
       "context": "case \"moveTo\":\n if (!this.isAvailableOption(\"moveTo\")) return null;\n return {\n id: \"menu-move-to\",\n label: t(\"Common:MoveTo\"),\n onClick: this.moveToHandle,\n iconUrl: MoveReactSvgUrl,\n };\n case \"pin\":\n return {",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
+      "line_number": 313,
+      "context": "const getMoveToItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_move-to\",\n key: \"move-to\",\n label: t(\"Common:MoveTo\"),\n icon: MoveReactSvgUrl,\n onClick: () => onMoveClick?.(i),\n disabled: !onMoveClick,\n };\n },",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
+      "line_number": 313,
+      "context": "const getMoveToItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_move-to\",\n key: \"move-to\",\n label: t(\"Common:MoveTo\"),\n icon: MoveReactSvgUrl,\n onClick: () => onMoveClick?.(i),\n disabled: !onMoveClick,\n };\n },",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/media-viewer/MediaViewer.helpers.tsx",
@@ -63,13 +76,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation \"Yerini dəyiş\" translates to \"Change your place\" or \"Change position,\" which is not the intended meaning of \"Move to.\" It doesn't convey the action of relocating or proceeding to a specified location.",
-          "suggestion": "A more accurate translation would be something like \"Getmək\" (to go/move) or \"Köçürülmə\" (relocation), or a phrase like \"O yerə keç\" (Go to that place)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -87,13 +94,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'Verschieben' translates to 'move' or 'relocate', but 'MoveTo' implies a destination. A more accurate translation might be 'Gehe zu' or 'Bewegen zu'.",
-          "suggestion": "Gehe zu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -111,13 +112,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Siirrä' can mean 'move', it's more accurately translated as 'transfer' or 'relocate'. 'Move to' implies movement *towards* a location, which 'Siirrä' doesn't fully convey. A better translation might be 'Siirry'.",
-          "suggestion": "Siirry"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -129,13 +124,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'Տեղափոխել' translates to 'relocate' or 'transport' rather than 'move to'. While it conveys a movement, it's not the most direct equivalent.",
-          "suggestion": "Consider 'ԲԱՑԱՐՄԱՆԻՑ ՏԵՂԵՎԱՐՄԱՆԻՑ' (Bacarmanic tegevarmanic) or 'ԸՆԹԱՐՄԱՆԻՑ' (Entarmanic) to better reflect 'Move to'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -147,25 +136,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"に移動します\" while technically correct, doesn't fully capture the brevity and directness of \"Move to\". It's a more formal/complete phrasing than often used in UI elements or short instructions.",
-          "suggestion": "Consider alternatives like \"移動\" or \"へ移動\" for a more concise and common phrasing, depending on the context. \"移動\" is the most succinct."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation \"이동 위치\" (idong wichi) translates more closely to 'movement location' or 'destination' rather than the English phrase 'Move to'. It lacks the action implied in the original phrase.",
-          "suggestion": "Consider a translation like \"이동하다\" (idonghada - to move) or \"이동\" (idong - move/movement) depending on the context.  Alternatively, \"~로 이동\" (~ro idong - move to ~) could be used to directly translate 'Move to'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -207,37 +184,19 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation \"Mutare în\" is a literal translation of \"Move to\" but doesn't convey the intended meaning in a natural way. \"Move to\" is often used to indicate direction or location, not necessarily a physical movement.",
-          "suggestion": "Consider alternatives like \"Mergi la\", \"Du-te la\", \"Îndreptă-te spre\", or a more context-specific translation depending on the intended meaning of 'Move to'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Переместить' can mean 'move', it's more accurately translated as 'relocate' or 'move (something to a new place)'. 'Move to' implies direction and destination, which isn't fully captured by 'Переместить'. A more contextually appropriate translation might be 'Перейти в' or 'Двигаться к'.",
-          "suggestion": "Consider 'Перейти в' or 'Двигаться к' depending on the specific context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation \"මෙයට ගෙනයන්න\" (meyata gena yanna) literally translates to 'bring here' or 'take here'. 'Move to' implies a change in location, not necessarily bringing something to a location. A more accurate translation would convey the meaning of relocating or transferring.",
-          "suggestion": "තැවරීමට\" (tawarimita) - meaning 'to move to', or \"වරයකට යන්න\" (warakota yanna) - meaning 'to go to a place'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -255,37 +214,19 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Помери у\" does not accurately translate \"Move to\". \"Помери у\" literally means \"Move in/into\". \"Move to\" implies a destination, which would be better conveyed with a term like \"Пребаци на\" or \"Премести се у\".",
-          "suggestion": "Consider using \"Пребаци на\" or \"Премести се у\" as a more accurate translation of \"Move to\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Pomeri u' does not accurately convey the meaning of 'Move to'. 'Pomeri u' translates more closely to 'Move into' or 'Move towards' and implies movement *into* something, whereas 'Move to' implies movement *to* a location.",
-          "suggestion": "Consider alternatives such as 'Idi na' (Go to), 'Preseli se u' (Relocate to), or 'Prebaci se na' (Switch to), depending on the specific context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Turkish translation 'Şuraya taşı' translates to 'Move there/to that place' rather than the intended 'Move to'. It implies a destination specified elsewhere, not a general instruction to move to a place.",
-          "suggestion": "Taşı"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -301,6 +242,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

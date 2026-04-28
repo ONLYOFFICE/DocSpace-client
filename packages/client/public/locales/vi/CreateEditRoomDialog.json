@@ -6,6 +6,7 @@
   "AutomaticIndexing": "Tự động lập chỉ mục",
   "AutomaticIndexingDescription": "Cho phép lập chỉ mục tự động cho các tập tin và thư mục chỉ mục theo số seri. Sắp xếp theo số sẽ được đặt làm mặc định cho tất cả người dùng.",
   "ChooseRoomType": "Chọn loại phòng",
+  "ConfigureDatabaseConnection": "Cấu hình kết nối cơ sở dữ liệu trong Tích hợp → Dịch vụ bên thứ ba",
   "CreateRoomConfirmation": "Tiếp tục mà không cần kết nối bộ nhớ?\nBạn đã chọn tùy chọn bộ nhớ của bên thứ ba chưa được kết nối. Nếu bạn tiếp tục mà không kết nối dịch vụ, tùy chọn này sẽ không được thêm vào.",
   "CreateRoomWatermarksConfirmation": "Bạn chưa đặt watermark để áp dụng cho các tài liệu trong phòng này. Bạn luôn có thể thêm watermark trong cài đặt chỉnh sửa phòng. Tiếp tục mà không có watermark?",
   "CreateTagOption": "Tạo thẻ tag",
@@ -16,8 +17,12 @@
   "FileLifetimeDescription": "Đặt thời gian tồn tại của tập tin để tự động xóa các tập tin trong phòng này sau một khoảng thời gian xác định. Thời gian tồn tại bắt đầu vào ngày tạo/tải tập tin lên.",
   "FilesOlderThan": "Tập tin cũ hơn:",
   "FormRoomBarDescription": "Phòng này khả dụng cho bất kỳ ai có liên kết. Người dùng bên ngoài sẽ có quyền Điền Biểu Mẫu cho tất cả các tập tin.",
+  "GoToIntegrations": "Truy cập Tích hợp",
   "Horizontal": "Ngang",
   "Icon": "Biểu tượng",
+  "NeedMoreIntegrations": "Cần thêm tích hợp nào không?",
+  "NeedMoreIntegrationsDescription": "Sử dụng webhook để gửi dữ liệu đến hệ thống của riêng bạn, hoặc kết nối biểu mẫu với hàng nghìn dịch vụ thông qua Zapier.",
+  "NoDatabaseConnections": "Chưa cấu hình kết nối cơ sở dữ liệu",
   "PeopleSelectorInfo": "Chỉ quản trị viên phòng hoặc quản trị viên {{productName}} mới có thể trở thành chủ sở hữu của phòng",
   "Position": "Vị trí",
   "PublicRoomBarDescription": "Phòng này khả dụng cho bất kỳ ai có liên kết. Quyền truy cập cho người dùng bên ngoài được cung cấp tùy thuộc vào loại quyền truy cập đã chọn.",
@@ -39,5 +44,6 @@
   "UserName": "Tên người dùng",
   "ViewerInfo": "Thông tin người xem",
   "WatermarkPreview": "Xem trước watermark",
-  "WatermarkPreviewHelp": "Bản xem trước hình ảnh này cho thấy gần đúng cách watermark sẽ được hiển thị trong các tập tin của bạn."
+  "WatermarkPreviewHelp": "Bản xem trước hình ảnh này cho thấy gần đúng cách watermark sẽ được hiển thị trong các tập tin của bạn.",
+  "NoDatabaseConnectionsRoomAdmin": "Các kết nối cơ sở dữ liệu được cấu hình bởi quản trị viên. Sau khi cơ sở dữ liệu được thiết lập, bạn sẽ có thể kích hoạt tính năng xuất tại đây."
 }

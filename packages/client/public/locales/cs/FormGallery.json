@@ -3,10 +3,12 @@
   "EmptyFormGalleryScreenDescription": "Nebyly nalezeny žádné výsledky odpovídající vašemu dotazu",
   "ErrorViewDescription": "Zkuste to prosím později",
   "ErrorViewDescriptionNetworkError": "Zdá se, že není k dispozici připojení k internetu.",
+  "ErrorViewHeader": "Galerie je dočasně nedostupná.",
+  "GalleryTitle": "{{organizationName}} Galerie šablon",
+  "SelectTemplate": "Vyberte šablonu",
+  "SubmitToGalleryDialogMainInfo": "Odešlete svou šablonu do veřejné galerie, aby ji ostatní mohli použít ve své práci. Jakmile šablona projde moderací, upozorníme vás a odměníme vás za váš přínos.",
   "SuggestChanges": "Navrhnout změny",
   "TemplateInfo": "Informace o šabloně",
-  "ViewAllTemplates": "Zobrazit všechny šablony",
-  "ErrorViewHeader": "Galerie je dočasně nedostupná.",
-  "SelectTemplate": "Vyberte šablonu",
-  "UploadGallery": "Nahrát do Galerie"
+  "UploadGallery": "Nahrát do Galerie",
+  "ViewAllTemplates": "Zobrazit všechny šablony"
 }

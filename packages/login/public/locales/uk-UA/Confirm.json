@@ -20,6 +20,8 @@
   "GetCode": "Отримати код",
   "GetSuitableApp": "Отримайте відповідний додаток",
   "GetSuitableAppDescription": "Використовуйте сумісний додаток, такий як Google Authenticator для <1>Android</1> та <4>iOS</4>, або Authenticator для <8>Windows Phone</8>.",
+  "InviteLinkQuotaErrorBody": "Реєстрація за посиланням більше недоступна, оскільки ліміт вичерпано.",
+  "InviteQuotaErrorCustomizedBody": "Ви будете перенаправлені на сторінку <1>Вхід</1> через 10 секунд.",
   "LoginRegistryButton": "Приєднатися",
   "Newsletter": "Я хочу підписатися на розсилку {{organizationName}}",
   "PassworResetTitle": "Тепер ви можете створити новий пароль.",
@@ -37,7 +39,5 @@
   "TfaSubTitle": "Дотримуйтесь простих кроків, щоб продовжити роботу в {{productName}}:",
   "TfaTitle": "Двофакторна автентифікація увімкнена для безпечного доступу",
   "VerifyConnection": "Перевірте з'єднання",
-  "VerifyConnectionDescription": "Введіть 6-значний код, згенерований вашим додатком автентифікації, у поле нижче, щоб завершити налаштування.",
-  "InviteLinkQuotaErrorBody": "Реєстрація за посиланням більше недоступна, оскільки ліміт вичерпано.",
-  "InviteQuotaErrorCustomizedBody": "Ви будете перенаправлені на сторінку <1>Вхід</1> через 10 секунд."
+  "VerifyConnectionDescription": "Введіть 6-значний код, згенерований вашим додатком автентифікації, у поле нижче, щоб завершити налаштування."
 }

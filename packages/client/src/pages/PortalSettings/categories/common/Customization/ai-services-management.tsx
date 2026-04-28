@@ -47,6 +47,8 @@ import LoaderCustomization from "../sub-components/loaderCustomization";
 import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 import useCommon from "../useCommon";
 import DisableAiServicesDialog from "SRC_DIR/components/dialogs/DisableAiServicesDialog";
+import { AI_ENUM } from "@docspace/ui-kit/billing/constants";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 interface AiServicesManagementProps {
   isMobileView: boolean;
@@ -60,7 +62,7 @@ interface AiServicesManagementProps {
   aiServicesManagementUrl?: string;
   currentColorScheme?: SettingsStore["currentColorScheme"];
   fetchTreeFolders: TreeFoldersStore["fetchTreeFolders"];
-  handleServicesQuotas: (serviceName?: string) => Promise<unknown>;
+  handleServiceQuota: (serviceName?: string) => Promise<unknown>;
   fetchAiServiceBalance: () => Promise<void>;
   defaultFolderType: SettingsStore["defaultFolderType"];
   updateDefaultFolderType: SettingsStore["updateDefaultFolderType"];
@@ -78,7 +80,7 @@ const AiServicesManagementComponent = ({
   aiServicesManagementUrl,
   currentColorScheme,
   fetchTreeFolders,
-  handleServicesQuotas,
+  handleServiceQuota,
   fetchAiServiceBalance,
   defaultFolderType,
   updateDefaultFolderType,
@@ -156,7 +158,7 @@ const AiServicesManagementComponent = ({
     if (type === false) {
       try {
         await Promise.all([
-          handleServicesQuotas("aitools"),
+          handleServiceQuota(AI_ENUM),
           fetchAiServiceBalance(),
         ]);
         setShowDisableDialog(true);
@@ -225,11 +227,11 @@ const AiServicesManagementComponent = ({
       ) : null}
       <Text className="category-item-description" fontSize="13px">
         {t("AiServicesManagementDescription", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
           aiAgents: t("Common:AIAgents"),
           aiSettings: t("AISettings"),
           aiServices: t("Common:AIServices"),
-          organizationName: t("Common:OrganizationName"),
+          organizationName: getBrandName("OrganizationName"),
         })}
       </Text>
       {aiServicesManagementUrl ? (
@@ -312,7 +314,7 @@ export const AiServicesManagement = inject<TStore>(
     } = settingsStore;
     const { isLoaded, initSettings, setIsLoadedAiServicesManagement } = common;
     const { fetchTreeFolders } = treeFoldersStore;
-    const { handleServicesQuotas } = paymentStore;
+    const { handleServiceQuota } = paymentStore;
     const { fetchAiServiceBalance } = servicesStore;
     const isMobileView = deviceType === DeviceType.mobile;
     return {
@@ -328,10 +330,11 @@ export const AiServicesManagement = inject<TStore>(
       },
       common,
       fetchTreeFolders,
-      handleServicesQuotas,
+      handleServiceQuota,
       fetchAiServiceBalance,
       defaultFolderType,
       updateDefaultFolderType,
     };
   },
 )(withLoading(observer(AiServicesManagementComponent)));
+

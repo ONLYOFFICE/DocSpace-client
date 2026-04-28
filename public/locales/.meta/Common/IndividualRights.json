@@ -3,11 +3,12 @@
   "content": "Individual rights in the room",
   "content_en_sha1_hash": "50106622971aec0a90a7902b87dffefc200e8765",
   "created_at": "2025-10-07T15:38:57.539Z",
-  "updated_at": "2026-02-19T13:36:33.152Z",
+  "updated_at": "2026-04-11T20:51:00.320Z",
   "comment": {
-    "text": "Text displayed in a tooltip within a group member dialog, indicating whether the member has individual rights within the room. Translators should choose between \"IndividualRights\" (for rooms) and \"IndividualRightsShare\" as appropriate. This helps users understand the permissions associated with a member.",
+    "text": "This is a tooltip that appears when hovering over a user's name in a room, indicating that the user has specific permissions within that room.",
     "is_auto": true,
-    "updated_at": "2025-10-07T15:44:37.810Z"
+    "updated_at": "2026-04-11T20:51:00.320Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

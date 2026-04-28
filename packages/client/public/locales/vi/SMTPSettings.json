@@ -1,8 +1,7 @@
 {
   "AuthViaNTLM": "Xác thực qua NTLM",
-  "EnableSSL": "Bật SSL",
+  "EnableSMTPSSL": "Bật SSL",
   "EnterDomain": "Nhập tên miền",
-  "EnterEmail": "Nhập địa chỉ email",
   "EnterLogin": "Nhập thông tin đăng nhập",
   "EnterPort": "Nhập cổng",
   "Host": "Host",

@@ -47,7 +47,7 @@
   "LdapSettings": "LDAP設定",
   "LdapSettingsCertCnNoMatch": "証明書名がホスト名と一致しません",
   "LdapSettingsCertExpired": "証明書の有効期限が切れています",
-  "LdapSettingsCertIssuerChaining": "証明書の発行者チェーンが提供されていませんЕ",
+  "LdapSettingsCertIssuerChaining": "証明書発行者のチェーンが提供されていません",
   "LdapSettingsCertMalformed": "不正な証明書",
   "LdapSettingsCertUnrecognizedError": "認識できないエラー",
   "LdapSettingsCertUntrustedCa": "証明書を発行した認証局が信頼されていません",

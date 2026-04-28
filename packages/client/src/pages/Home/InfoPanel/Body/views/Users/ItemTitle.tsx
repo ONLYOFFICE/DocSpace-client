@@ -26,7 +26,7 @@
 
 import { useRef, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { decode } from "he";
 
 import { Text } from "@docspace/ui-kit/components/text";
@@ -52,6 +52,7 @@ import ContactsConextOptionsStore from "SRC_DIR/store/contacts/ContactsContextOp
 import { TPeopleListItem } from "SRC_DIR/helpers/contacts";
 
 import styles from "./Users.module.scss";
+import { getConstName } from "@docspace/shared/constants/consts";
 
 type ItemTitleProps = {
 	userSelection: TPeopleListItem;
@@ -181,7 +182,7 @@ const ItemTitle = ({
 					>
 						<Badge
 							className={styles.ssoBadge}
-							label={t("Common:SSO")}
+							label={getConstName("SSO")}
 							color={globalColors.white}
 							backgroundColor={
 								theme.isBase
@@ -203,7 +204,7 @@ const ItemTitle = ({
 					>
 						<Badge
 							className={styles.ldapBadge}
-							label={t("Common:LDAP")}
+							label={getConstName("LDAP")}
 							color={globalColors.white}
 							backgroundColor={
 								theme.isBase

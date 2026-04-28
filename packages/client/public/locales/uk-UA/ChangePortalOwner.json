@@ -4,7 +4,6 @@
   "ChangeInstruction": "Щоб змінити власника {{productName}}, виберіть ім’я нового власника нижче.",
   "ChangeOwner": "Змінити власника {{productName}}",
   "ChangeUser": "Змінити користувача",
-  "DeactivateOrDeletePortal": "Деактивувати або видалити {{productName}}",
   "DoTheSame": "Робіть те саме, що й адміністратори",
   "ManagePortal": "Керує конфігурацією {{productName}}",
   "ManageUser": "Керує обліковими записами користувачів",

@@ -20,6 +20,8 @@
   "GetCode": "Kod al",
   "GetSuitableApp": "Uygun bir uygulama edinin",
   "GetSuitableAppDescription": "Google Authenticator gibi uyumlu bir uygulama kullanın <1>Android</1> ve <4>iOS</4> için veya Authenticator <8>Windows Phone</8> için.",
+  "InviteLinkQuotaErrorBody": "Bağlantı üzerinden kayıt artık sınır aşıldığı için mümkün değildir.",
+  "InviteQuotaErrorCustomizedBody": "10 saniye içinde <1>Giriş</1> sayfasına yönlendirileceksiniz.",
   "LoginRegistryButton": "Katıl",
   "Newsletter": "{{organizationName}} haber bültenine abone olmak istiyorum",
   "PassworResetTitle": "Şimdi yeni şifre oluşturabilirsiniz.",
@@ -37,7 +39,5 @@
   "TfaSubTitle": "Bu {{productName}}'de çalışmaya devam etmek için basit adımları izleyin:",
   "TfaTitle": "İki faktörlü kimlik doğrulama, güvenli erişim için etkinleştirildi",
   "VerifyConnection": "Bağlantıyı doğrula",
-  "VerifyConnectionDescription": "Aşağıdaki alana, kimlik doğrulama uygulamanız tarafından oluşturulan 6 haneli kodu girerek kurulumu tamamlayın.",
-  "InviteLinkQuotaErrorBody": "Bağlantı üzerinden kayıt artık sınır aşıldığı için mümkün değildir.",
-  "InviteQuotaErrorCustomizedBody": "10 saniye içinde <1>Giriş</1> sayfasına yönlendirileceksiniz."
+  "VerifyConnectionDescription": "Aşağıdaki alana, kimlik doğrulama uygulamanız tarafından oluşturulan 6 haneli kodu girerek kurulumu tamamlayın."
 }

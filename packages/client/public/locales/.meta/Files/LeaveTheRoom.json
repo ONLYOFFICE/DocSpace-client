@@ -3,28 +3,29 @@
   "content": "Leave the room",
   "content_en_sha1_hash": "0494f65ff12e4895fbbc91bd002080a4361c346d",
   "created_at": "2025-05-19T21:30:55.737Z",
-  "updated_at": "2026-03-31T15:18:46.050Z",
+  "updated_at": "2026-04-23T17:24:01.829Z",
   "comment": {
-    "text": "This translation key is used for the label of a \"Leave Room\" button in a modal dialog, which allows users to exit a room. The text appears as part of a header and is also used as a filter option in a panel that manages room ownership.",
+    "text": "This is a button label or menu item. It allows a user to exit a room they are currently in.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:39:39.799Z"
+    "updated_at": "2026-04-11T21:09:19.852Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
-      "line_number": 78,
+      "line_number": 79,
       "context": "};\n }, []);\n \n const titleText = isAIAgent\n ? t(\"Files:LeaveTheAgent\")\n : t(\"Files:LeaveTheRoom\");\n \n const roomDescription = isRoomOwner\n ? t(\"Files:LeaveRoomDescription\")\n : t(\"Files:WantLeaveRoom\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
-      "line_number": 104,
-      "context": "productName: t(\"Common:ProductName\"),\n });\n \n const footerCheckboxLabel = isAIAgent\n ? t(\"Files:LeaveTheAgent\")\n : t(\"Files:LeaveTheRoom\");\n \n const selectorComponent = (\n <PeopleSelector\n withCancelButton\n onCancel={handleClosePanel}",
+      "line_number": 105,
+      "context": "productName: getBrandName(\"ProductName\"),\n });\n \n const footerCheckboxLabel = isAIAgent\n ? t(\"Files:LeaveTheAgent\")\n : t(\"Files:LeaveTheRoom\");\n \n const selectorComponent = (\n <PeopleSelector\n withCancelButton\n onCancel={handleClosePanel}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2581,
+      "line_number": 2642,
       "context": "disabled: !isAIAgent,\n },\n {\n id: \"option_leave-room\",\n key: \"leave-room\",\n label: isAIAgent ? t(\"LeaveTheAgent\") : t(\"LeaveTheRoom\"),\n icon: LeaveRoomSvgUrl,\n onClick: this.onLeaveRoom,\n disabled: isKnowledgeOrResult\n ? false\n : isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),",
       "module": "/packages/client"
     }
@@ -69,13 +70,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Αποχώρηση από το δωμάτιο\" (Apochórisi apo to domátio) literally translates to \"Departure from the room.\" While technically correct, it's more formal and less natural than a simple \"Leave the room.\"  A more direct and common translation would be something like \"Έξοδος από το δωμάτιο\" (Exodos apo to domatio) or simply \"Βγες από το δωμάτιο\" (Vges apo to domatio).",
-          "suggestion": "Consider using \"Έξοδος από το δωμάτιο\" or \"Βγες από το δωμάτιο\" for a more natural translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -189,13 +184,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Напусти собу' does not accurately translate 'Leave the room'. 'Напусти' means 'leave' or 'abandon', but 'собу' is an incorrect case of 'соба' (room). The correct translation would require the locative case.",
-          "suggestion": "Изађи из собе (Изађи из просторије)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

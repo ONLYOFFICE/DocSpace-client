@@ -36,7 +36,6 @@ import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { FolderType } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
 import { FormsSection } from "@/types/forms";
 
@@ -45,6 +44,7 @@ import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import { useFormsListStore } from "../../_store/FormsListStore";
 import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
+import DualRingSpinner from "../forms-layout/DualRingSpinner";
 import styles from "./FormsEditor.module.scss";
 
 type FormsEditorProps = {
@@ -57,6 +57,8 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
   const searchParams = useSearchParams();
   const roomIdRef = React.useRef(searchParams.get("roomId") ?? "");
   roomIdRef.current = searchParams.get("roomId") ?? "";
+  const libraryIdRef = React.useRef(searchParams.get("libraryId") ?? "");
+  libraryIdRef.current = searchParams.get("libraryId") ?? "";
   const {
     editingFile,
     editorAction,
@@ -100,9 +102,13 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
 
     if (!roomId || !formTitle) {
       closeEditor();
+      const earlyParams = new URLSearchParams();
+      if (roomIdRef.current) earlyParams.set("roomId", roomIdRef.current);
+      if (libraryIdRef.current)
+        earlyParams.set("libraryId", libraryIdRef.current);
+      const earlyQs = earlyParams.toString();
       router.replace(
-        sectionToPath(FormsSection.CompletedForms) +
-          (roomIdRef.current ? `?roomId=${roomIdRef.current}` : ""),
+        `${sectionToPath(FormsSection.CompletedForms)}${earlyQs ? `?${earlyQs}` : ""}`,
       );
       setIsCompleting(false);
       return;
@@ -132,12 +138,22 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
         );
 
         if (subfolder) {
+          const params = new URLSearchParams();
+          if (roomIdRef.current) params.set("roomId", roomIdRef.current);
+          if (libraryIdRef.current)
+            params.set("libraryId", libraryIdRef.current);
+          const qs = params.toString();
+
           runInAction(() => {
             formsListStore.setItems([], 0);
             formsListStore.setFolders([]);
             formsListStore.setIsLoading(true);
             openCompletedFolder(subfolder);
           });
+
+          router.replace(
+            `${sectionToPath(FormsSection.CompletedForms)}${qs ? `?${qs}` : ""}`,
+          );
           return;
         }
 
@@ -149,9 +165,13 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
 
     // Fallback: navigate to CompletedForms root
     closeEditor();
+    const fallbackParams = new URLSearchParams();
+    if (roomIdRef.current) fallbackParams.set("roomId", roomIdRef.current);
+    if (libraryIdRef.current)
+      fallbackParams.set("libraryId", libraryIdRef.current);
+    const fallbackQs = fallbackParams.toString();
     router.replace(
-      sectionToPath(FormsSection.CompletedForms) +
-        (roomIdRef.current ? `?roomId=${roomIdRef.current}` : ""),
+      `${sectionToPath(FormsSection.CompletedForms)}${fallbackQs ? `?${fallbackQs}` : ""}`,
     );
     setIsCompleting(false);
   }, [
@@ -179,7 +199,9 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
         !href.includes("/doceditor") &&
         !href.includes("about:blank")
       ) {
-        onNavigatedAway?.();
+        if (!completionStarted.current) {
+          onNavigatedAway?.();
+        }
         return true;
       }
     } catch {
@@ -241,11 +263,7 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
 
   return (
     <div className={styles.editorWrapper}>
-      {(!isIframeLoaded || isCompleting) && (
-        <div className={styles.loaderOverlay}>
-          <Loader type={LoaderTypes.track} size="40px" />
-        </div>
-      )}
+      {(!isIframeLoaded || isCompleting) && <DualRingSpinner />}
       {!isCompleting && (
         <iframe
           ref={iframeRef}

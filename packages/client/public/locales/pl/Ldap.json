@@ -14,7 +14,7 @@
   "LdapConnectionTypeStartTls": "StartTLS",
   "LdapConnectionTypeStartTlsTooltip": "StartTLS umożliwia ulepszenie połączenia jawnego do połączenia szyfrowanego (TLS lub SSL) zamiast używania oddzielnego portu do komunikacji szyfrowanej.",
   "LdapConnectionTypeUnencrypted": "Niezaszyfrowana komunikacja",
-  "LdapDisclaimer": "Należy pamiętać, że e-mail użytkownika portalu zostanie pobrany z ustawienia „Atrybut poczty”. Jeśli go nie ma, zostanie sformułowany w następujący sposób: „Atrybut logowania + @ + domena LDAP”. Jeśli dany adres e-mail nie istnieje, użytkownik nie otrzyma żadnego powiadomienia z portalu.",
+  "LdapDisclaimer": "Proszę pamiętać: adres e-mail użytkownika portalu zostanie pobrany z ustawienia „Atrybut poczty”. Jeśli zostanie on pominięty, zostanie on utworzony w następujący sposób: „Atrybut logowania + @ + domena LDAP”. W przypadku, gdy taki adres e-mail nie istnieje, użytkownik nie otrzyma żadnego powiadomienia z portalu.",
   "LdapGroupAttribute": "Atrybut grupy",
   "LdapGroupAttributeTooltip": "Wprowadź atrybut obiektu grupy, który określa, jakich użytkowników obejmuje ta grupa.",
   "LdapGroupDN": "Nazwa wyróżniająca grupy",

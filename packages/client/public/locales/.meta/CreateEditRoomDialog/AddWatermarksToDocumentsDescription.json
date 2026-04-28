@@ -3,11 +3,12 @@
   "content": "Protect all documents in this room with watermarks.\nIf a document already contains a watermark, it will not be replaced.\nWhen this setting is enabled, documents can only be downloaded as PDFs to ensure the watermark remains intact.",
   "content_en_sha1_hash": "343dcbb91a9dd4a5863fa3ce14e5951d891934ff",
   "created_at": "2025-11-26T19:18:12.280Z",
-  "updated_at": "2025-11-26T19:18:51.673Z",
+  "updated_at": "2026-04-11T21:04:56.756Z",
   "comment": {
-    "text": "This text describes the \"Add Watermarks to Documents\" setting, which protects documents in the virtual data room by adding watermarks. Enabling this setting restricts downloads to PDF format to preserve the watermarks. It appears within a dialog to configure room settings.",
+    "text": "This is the descriptive text for a checkbox option in the \"Create/Edit Room\" dialog. It explains the implications of enabling watermarks for documents within a virtual data room, specifically regarding existing watermarks and download restrictions.",
     "is_auto": true,
-    "updated_at": "2025-11-26T19:18:51.673Z"
+    "updated_at": "2026-04-11T21:04:56.756Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

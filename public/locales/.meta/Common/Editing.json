@@ -3,34 +3,35 @@
   "content": "Editing",
   "content_en_sha1_hash": "3b9ba1a2515114c2d31fe79b93a1d942f595ac41",
   "created_at": "2025-05-19T21:30:44.758Z",
-  "updated_at": "2026-02-19T13:36:33.109Z",
+  "updated_at": "2026-04-11T20:54:27.545Z",
   "comment": {
-    "text": "This translation key is used to display \"Editing\" as a label for editing permissions in a share component, likely on a share settings button or within a settings dialog. The translator should focus on creating a clear and concise phrase that accurately represents this permission type.",
+    "text": "This is a label for a sharing permission option, indicating that the recipient has full editing rights to the shared document.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:32.900Z"
+    "updated_at": "2026-04-11T20:54:27.545Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 120,
+      "line_number": 121,
       "context": "Record<ShareRights, TShareLinkAccessRightOption>\n > = {\n [ShareRights.Editing]: {\n access: ShareAccessRights.Editing,\n key: \"editing\",\n label: t(\"Common:Editing\"),\n icon: AccessEditReactSvgUrl,\n },\n [ShareRights.CustomFilter]: {\n access: ShareAccessRights.CustomFilter,\n key: \"custom-filter\",",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 120,
+      "line_number": 121,
       "context": "Record<ShareRights, TShareLinkAccessRightOption>\n > = {\n [ShareRights.Editing]: {\n access: ShareAccessRights.Editing,\n key: \"editing\",\n label: t(\"Common:Editing\"),\n icon: AccessEditReactSvgUrl,\n },\n [ShareRights.CustomFilter]: {\n access: ShareAccessRights.CustomFilter,\n key: \"custom-filter\",",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 120,
+      "line_number": 121,
       "context": "Record<ShareRights, TShareLinkAccessRightOption>\n > = {\n [ShareRights.Editing]: {\n access: ShareAccessRights.Editing,\n key: \"editing\",\n label: t(\"Common:Editing\"),\n icon: AccessEditReactSvgUrl,\n },\n [ShareRights.CustomFilter]: {\n access: ShareAccessRights.CustomFilter,\n key: \"custom-filter\",",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 120,
+      "line_number": 121,
       "context": "Record<ShareRights, TShareLinkAccessRightOption>\n > = {\n [ShareRights.Editing]: {\n access: ShareAccessRights.Editing,\n key: \"editing\",\n label: t(\"Common:Editing\"),\n icon: AccessEditReactSvgUrl,\n },\n [ShareRights.CustomFilter]: {\n access: ShareAccessRights.CustomFilter,\n key: \"custom-filter\",",
       "module": "/packages/shared"
     }
@@ -51,13 +52,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation \"Redaktə edilir\" means \"is being edited.\" The English word \"Editing\" refers to the act of editing itself, not the process of being edited. A more accurate translation would be \"Redaktə\" or \"Yayım\".",
-          "suggestion": "Redaktə"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -123,13 +118,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation '편집 중' literally translates to 'Editing in progress' or 'Currently editing'. While not entirely wrong, it implies an ongoing process, whereas 'Editing' in English refers to the activity itself, not necessarily the state of being in progress.",
-          "suggestion": "편집 (Edit)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -225,16 +214,16 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Đang chỉnh sửa\" is a possible translation for \"Editing,\" it implies an ongoing process. \"Editing\" can also mean the act of editing itself, not necessarily happening right now. A more versatile translation might be \"Chỉnh sửa\".",
-          "suggestion": "Chỉnh sửa"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

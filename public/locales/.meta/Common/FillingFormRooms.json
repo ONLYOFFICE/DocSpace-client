@@ -3,16 +3,17 @@
   "content": "Filling form",
   "content_en_sha1_hash": "7d83d7eca125edcf45bdc6c74e4efc3a8e517850",
   "created_at": "2025-05-19T21:30:45.351Z",
-  "updated_at": "2026-03-31T15:18:46.226Z",
+  "updated_at": "2026-04-11T20:52:31.090Z",
   "comment": {
-    "text": "The translation key \"FillingFormRooms\" is used to display the label for a filter option in the Home page's room filtering section, specifically when selecting rooms of type \"Filling Forms Room\". This text will appear as the label on a filter dropdown.",
+    "text": "This is a label for a room type, indicating a space dedicated to filling out forms. It appears in filters and as a room title.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:11.304Z"
+    "updated_at": "2026-04-11T20:52:31.090Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 51,
+      "line_number": 52,
       "context": "case RoomsType.AIRoom:\n return t(\"Common:AIRoomTitle\");\n \n case RoomsType.FillingFormsRoom:\n return t(\"Common:FillingFormRooms\");\n \n case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRooms\");\n \n case RoomsType.ReviewRoom:",
       "module": "/packages/client"
     },
@@ -63,66 +64,31 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Φόρμα συμπλήρωσης\" while literally meaning 'Form of filling', doesn't quite capture the concise meaning of \"Filling form\". A more natural Greek translation would better convey the intended meaning.",
-          "suggestion": "Consider using something like \"Συμπλήρωση φόρμας\" (Symplirosi formass) or \"Φόρμα για συμπλήρωση\" (Forma gia symplirosi) which means 'Form to fill' or 'Form filling'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Relleno de formularios\" is a literal translation, it doesn't quite capture the nuance of \"Filling form.\" It implies the act of *filling* a form, not the form itself. A better translation would convey the concept of the form itself.",
-          "suggestion": "Formulario"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Täyttölomake\" is a valid Finnish word, it's a compound word literally meaning 'filling form'. A more natural and concise translation for \"Filling form\" would be \"Täytettävä lomake\" or simply \"Lomake\". \"Täyttölomake\" sounds somewhat clunky.",
-          "suggestion": "Täytettävä lomake"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Salles de remplissages de formulaires\" is overly literal and doesn't convey the intended meaning of 'Filling form' in a natural French way. It translates to 'Rooms of filling out forms', which is awkward.",
-          "suggestion": "A more appropriate translation would be \"Formulaires à remplir\" or \"Remplissage de formulaires\" depending on the context. \"Formulaires à remplir\" is a common phrase meaning 'Forms to fill out'.  \"Remplissage de formulaires\" would translate to 'Form filling'."
-        },
-        {
-          "type": "grammar",
-          "description": "Even if we interpret 'Salles de remplissages de formulaires' as intended, the construction 'de remplissages' is grammatically unusual. It implies a collection of filling processes.",
-          "suggestion": "If 'salles' (rooms) is truly needed, it could be rephrased as 'Salles de formulaire à remplir' (Rooms for filling out forms)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Լրացման ձև\" (Lracman rev) literally translates to 'Form for filling'. While understandable, a more natural Armenian translation for 'Filling form' would be something along the lines of 'Լրացվող ձև' (Lracvog rev) which means 'Form to be filled'.",
-          "suggestion": "Լրացվող ձև"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -152,13 +118,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Aizpildīšanas veidlapa' is too literal. While technically correct, it's not the most natural or common way to say 'Filling form' in Latvian.  'Aizpildīšanas' implies the action of filling. A more natural translation would focus on the form itself.",
-          "suggestion": "Forms for filling out (Aizpildāmas formas) or Filling forms (Aizpildīšanas formas)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -188,13 +148,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Completare formular\" is not the most natural or accurate translation of \"Filling form.\" While \"completare\" means 'to complete,' \"formular\" is the diminutive form of \"formular\", it's better to use \"formularul\" or just \"formular\".",
-          "suggestion": "Completarea formularului"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -206,13 +160,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'පුරවන ආකෘතිපත්‍ර' (Puravana aakruthipatara) is a literal translation of 'Filling form'. While technically correct, it's not the most natural or common way to express this in Sinhala. A more fluent translation would be 'ආකෘතිය පුරවා' (Akruthiyu purawa) or 'ආකෘතිය පිරවෙන' (Akruthiyu pirawene).",
-          "suggestion": "Consider 'ආකෘතිය පුරවා' (Akruthiyu purawa) or 'ආකෘතිය පිරවෙන' (Akruthiyu pirawene)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -224,13 +172,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Obrazec za izpolnjevanje' while technically correct, is a bit literal and clunky. 'Obrazec za izpolnitev' would be a more natural and idiomatic translation of 'Filling form' in this context, suggesting a form to be filled out.",
-          "suggestion": "Obrazec za izpolnitev"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -248,13 +190,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Doldurma formu\" is not the most natural or accurate translation of \"Filling form.\" \"Doldurma formu\" literally translates to \"filling form,\" but a more common and idiomatic translation would be something like \"Form doldurma\" or \"Formu doldurma\".",
-          "suggestion": "Form doldurma"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -270,6 +206,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

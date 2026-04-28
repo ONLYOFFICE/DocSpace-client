@@ -25,24 +25,42 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+
 import classNames from "classnames";
 
-import styles from "./CreateEditDialogParams.module.scss";
+import styles from "./StyledParam.module.scss";
 
 type StyledParamProps = {
+  storageLocation?: boolean;
+  folderName?: string;
   increaseGap?: boolean;
   className?: string;
+  style?: React.CSSProperties;
   children?: React.ReactNode;
 };
 
-const StyledParam = ({ increaseGap, className, children }: StyledParamProps) => {
+const StyledParam = ({
+  storageLocation,
+  folderName,
+  increaseGap,
+  className,
+  style,
+  children,
+}: StyledParamProps) => {
+  const composedStyle = increaseGap
+    ? ({ "--param-info-gap": "12px", ...style } as React.CSSProperties)
+    : style;
+
   return (
     <div
       className={classNames(
         styles.styledParam,
-        { [styles.increaseGap]: increaseGap },
+        {
+          [styles.withFolderName]: !storageLocation && !!folderName,
+        },
         className,
       )}
+      style={composedStyle}
     >
       {children}
     </div>

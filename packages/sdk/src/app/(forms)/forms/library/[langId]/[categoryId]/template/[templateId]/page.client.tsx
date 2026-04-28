@@ -44,7 +44,7 @@ import { sectionToPath } from "../../../../../../_utils/sectionFromPathname";
 import { useLibraryParams } from "../../../../../../_hooks/useLibraryParams";
 import { libraryUrl } from "../../../../../../_utils/libraryUrl";
 import { useLibraryBreadcrumb } from "../../../../../../_components/library-breadcrumb/LibraryBreadcrumbContext";
-import { getThumbnail, setThumbnail } from "../../../../../../_utils/thumbnailCache";
+import { stripHost } from "../../../../../../_utils/thumbnailUrl";
 import { useFormsSettingsStore } from "../../../../../../_store/FormsSettingsStore";
 
 import styles from "../../../../../../_components/library-template-detail/LibraryTemplateDetail.module.scss";
@@ -132,41 +132,8 @@ const LibraryTemplateRoute = () => {
     return () => controller.abort();
   }, [templateId, templateType, categoryId]);
 
-  // Thumbnail
   const templateIsFile = isFileType(template);
-  const thumbUrl =
-    templateIsFile && template.thumbnailUrl
-      ? template.thumbnailUrl.replace(/^https?:\/\/[^/]+/, "")
-      : "";
-  const [blobThumbnail, setBlobThumbnail] = useState("");
-
-  useEffect(() => {
-    if (!thumbUrl) return;
-
-    const cached = getThumbnail(thumbUrl);
-    if (cached) {
-      setBlobThumbnail(cached);
-      return;
-    }
-
-    let cancelled = false;
-    fetch(thumbUrl, { credentials: "include" })
-      .then((res) => {
-        if (!res.ok) throw new Error(`${res.status}`);
-        return res.blob();
-      })
-      .then((blob) => {
-        if (cancelled) return;
-        const blobUrl = URL.createObjectURL(blob);
-        setThumbnail(thumbUrl, blobUrl);
-        setBlobThumbnail(blobUrl);
-      })
-      .catch(() => {});
-
-    return () => {
-      cancelled = true;
-    };
-  }, [thumbUrl]);
+  const thumbUrl = templateIsFile ? stripHost(template.thumbnailUrl) : "";
 
   const handleUseTemplate = useCallback(async () => {
     if (!template) return;
@@ -259,15 +226,16 @@ const LibraryTemplateRoute = () => {
       <div className={styles.content}>
         <div className={styles.leftColumn}>
           <div className={styles.preview}>
-            {blobThumbnail
-              ? // biome-ignore lint/performance/noImgElement: blob URL not supported by next/image
-                (<img
-                  className={styles.thumbnail}
-                  src={blobThumbnail}
-                  alt={title}
-                  draggable={false}
-                />)
-              : (<div className={styles.thumbnailPlaceholder} />
+            {thumbUrl ? (
+              // biome-ignore lint/performance/noImgElement: authenticated same-origin thumbnail with immutable caching; next/image proxy is not applicable
+              <img
+                className={styles.thumbnail}
+                src={thumbUrl}
+                alt={title}
+                draggable={false}
+              />
+            ) : (
+              <div className={styles.thumbnailPlaceholder} />
             )}
           </div>
 

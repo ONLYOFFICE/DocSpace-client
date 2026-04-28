@@ -62,6 +62,7 @@ import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 
 import { FilesSelectorProps } from "./FilesSelector.types";
 import { getAcceptButtonLabel, getIsDisabled } from "./utils";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 let disabledItems: (string | number)[] = [];
 
@@ -235,7 +236,7 @@ const FilesSelectorWrapper = ({
       // for backup
       if (!selection.length) return t("Common:BackupNotAllowedInFormRoom");
 
-      const option = { organizationName: t("Common:OrganizationName") };
+      const option = { organizationName: getBrandName("OrganizationName") };
 
       if (isCopy)
         return several

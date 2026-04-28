@@ -72,6 +72,7 @@ import MobileView from "./MobileView";
 import { encryptionUploadDialog } from "../../../helpers/desktop";
 
 import styles from "./main-button.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const ArticleMainButtonContent = (props) => {
   const {
@@ -197,22 +198,15 @@ const ArticleMainButtonContent = (props) => {
     window.dispatchEvent(event);
   }, [isWarningRoomsDialog]);
 
-  const onCreateAgent = React.useCallback(
-    () => {
-      // TODO: AI: Add quota if it needed
+  const onCreateAgent = React.useCallback(() => {
+    if (isWarningRoomsDialog) {
+      setQuotaWarningDialogVisible(true);
+      return;
+    }
 
-      // if (isWarningRoomsDialog) {
-      //   setQuotaWarningDialogVisible(true);
-      //   return;
-      // }
-
-      const event = new Event(Events.AGENT_CREATE);
-      window.dispatchEvent(event);
-    },
-    [
-      // isWarningRoomsDialog
-    ],
-  );
+    const event = new Event(Events.AGENT_CREATE);
+    window.dispatchEvent(event);
+  }, [isWarningRoomsDialog]);
 
   const onShowSelectFileDialog = React.useCallback(() => {
     if (isMobile) {
@@ -314,7 +308,7 @@ const ArticleMainButtonContent = (props) => {
         id: "actions_upload-from-docspace",
         className: "main-button_drop-down",
         icon: ActionsUploadReactSvgUrl,
-        label: t("Common:FromPortal", { productName: t("Common:ProductName") }),
+        label: t("Common:FromPortal", { productName: getBrandName("ProductName") }),
         key: "actions_upload-from-docspace",
         disabled: false,
         onClick: () => onShowFormRoomSelectFileDialog(FilterType.PDFForm),
@@ -395,7 +389,7 @@ const ArticleMainButtonContent = (props) => {
         id: "actions_upload-files",
         className: "main-button_drop-down",
         icon: ActionsUploadReactSvgUrl,
-        label: t("UploadFiles"),
+        label: t("Common:UploadFiles"),
         onClick: onUploadFileClick,
         key: "upload-files",
       },
@@ -408,7 +402,7 @@ const ArticleMainButtonContent = (props) => {
         className: "main-button_drop-down",
         icon: MoveReactSvgUrl,
         label: t("EmptyView:UploadFromPortalTitle", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
         }),
         onClick: onShowAiKnowledgeSelectFileDialog,
         key: "upload-files-product",
@@ -505,7 +499,7 @@ const ArticleMainButtonContent = (props) => {
         id: "actions_upload-folders",
         className: "main-button_drop-down",
         icon: ActionsUploadReactSvgUrl,
-        label: t("UploadFolder"),
+        label: t("Common:UploadFolder"),
         disabled: isPrivacy,
         onClick: onUploadFolderClick,
         key: "upload-folder",
@@ -968,3 +962,4 @@ export default inject(
     "EmptyView",
   ])(observer(ArticleMainButtonContent)),
 );
+

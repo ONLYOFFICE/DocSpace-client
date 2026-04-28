@@ -3,11 +3,12 @@
   "content": "You are about to delete the <strong>files ({{filesCount}})</strong> and <strong>folders ({{foldersCount}})</strong>.",
   "content_en_sha1_hash": "8835009707c55340cb17b9a28925b9ff148c948d",
   "created_at": "2025-10-01T15:20:12.156Z",
-  "updated_at": "2026-03-20T09:07:45.491Z",
+  "updated_at": "2026-04-11T21:05:45.432Z",
   "comment": {
-    "text": "This key displays a confirmation message within a delete dialog, informing the user about the number of files and folders they are about to permanently delete. It uses `filesCount` and `foldersCount` variables to dynamically populate the message with the actual quantities. This text appears as part of a confirmation prompt.",
+    "text": "This is the main text of a confirmation dialog that appears when a user attempts to delete both files and folders. It informs the user about the impending deletion, with `{{filesCount}}` and `{{foldersCount}}` representing the number of files and folders, respectively.",
     "is_auto": true,
-    "updated_at": "2025-10-01T15:20:29.212Z"
+    "updated_at": "2026-04-11T21:05:45.432Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

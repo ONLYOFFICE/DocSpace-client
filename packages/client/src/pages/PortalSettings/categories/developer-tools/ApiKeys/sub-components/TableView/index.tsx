@@ -26,7 +26,7 @@
 
 import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
-import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
+import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
 import { TableBody, TableContainer } from "@docspace/ui-kit/components/table";
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
@@ -113,3 +113,4 @@ export default inject(({ setup, settingsStore, userStore }: TStore) => {
     culture,
   };
 })(observer(TableView));
+

@@ -3,46 +3,47 @@
   "content": "Editor",
   "content_en_sha1_hash": "c7e9fb2ea6c3b8c3ce97645eb902c348d859f36d",
   "created_at": "2025-05-19T21:30:44.767Z",
-  "updated_at": "2026-03-26T08:26:58.087Z",
+  "updated_at": "2026-04-23T17:24:01.905Z",
   "comment": {
-    "text": "The translation key \"Editor\" is used to display the label for an editing feature within a user interface, likely in a settings or configuration panel. It appears as a title and is linked to navigate to an editor view or functionality. The translated term should describe this editing capability in a neutral and descriptive manner.",
+    "text": "This is a label for the \"Editor\" access right, indicating a user has full editing permissions. It appears in various contexts, such as user role selections and descriptions of document access levels.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:32.573Z"
+    "updated_at": "2026-04-11T20:54:20.357Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
-      "line_number": 80,
+      "line_number": 81,
       "context": "access: ShareAccessRights.ReadOnly,\n type: \"user\",\n },\n editor: {\n key: \"editor\",\n label: this.t(\"Common:Editor\"),\n access: ShareAccessRights.Editing,\n type: \"user\",\n },\n formFiller: {\n key: \"formFiller\",",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 106,
-      "context": "description: t(\"JavascriptSdk:PublicRoomPresetInfo\"),\n image: theme.isBase ? PublicRoomImg : PublicRoomImgDark,\n handleOnClick: navigateToPublicRoom,\n },\n {\n title: t(\"Common:Editor\"),\n description: t(\"EditorDescription\"),\n image: theme.isBase ? EditorImg : EditorImgDark,\n handleOnClick: navigateToEditor,\n },\n {",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DeveloperToolsHeader.tsx",
+      "line_number": 62,
+      "context": "): string | null => {\n switch (slug) {\n case \"public-room\":\n return t(\"Common:PublicRoom\");\n case \"editor\":\n return t(\"Common:Editor\");\n case \"viewer\":\n return t(\"Common:Viewer\");\n case \"room-selector\":\n return t(\"Common:RoomSelector\");\n case \"file-selector\":",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 562,
-      "context": "{\n id: \"portal-settings_catalog-javascript-sdk_editor\",\n key: \"8-1-4\",\n icon: \"\",\n link: \"editor\",\n tKey: \"Common:Editor\",\n },\n {\n id: \"portal-settings_catalog-javascript-sdk_viewer\",\n key: \"8-1-5\",\n icon: \"\",",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
+      "line_number": 99,
+      "context": "description: t(\"JavascriptSdk:PublicRoomPresetInfo\"),\n image: theme.isBase ? PublicRoomImg : PublicRoomImgDark,\n handleOnClick: navigateToPublicRoom,\n },\n {\n title: t(\"Common:Editor\"),\n description: t(\"EditorPresetDescription\"),\n image: theme.isBase ? EditorImg : EditorImgDark,\n handleOnClick: navigateToEditor,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PublicRoom/PublicRoomPage.js",
-      "line_number": 97,
+      "line_number": 98,
       "context": "case ShareAccessRights.Comment:\n return t(\"Common:Commenting\");\n case ShareAccessRights.Review:\n return t(\"Common:Reviewing\");\n case ShareAccessRights.Editing:\n return t(\"Common:Editor\");\n case ShareAccessRights.FormFilling:\n return t(\"Common:FillingOnly\");\n default:\n return t(\"Common:ViewOnly\");\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 177,
+      "line_number": 178,
       "context": "> = {\n [ShareRights.Editing]: {\n access: ShareAccessRights.Editing,\n description: t(\"Common:RoleEditorDescription\"),\n key: \"editing\",\n label: t(\"Common:Editor\"),\n icon: AccessEditReactSvgUrl,\n },\n [ShareRights.Review]: {\n access: ShareAccessRights.Review,\n description: t(\"Common:RoleReviewerDescription\"),",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 206,
+      "line_number": 207,
       "context": "access: isNone ? EmployeeType.User : ShareAccessRights.Collaborator,\n type: EmployeeType.User,\n },\n editor: {\n key: \"editor\",\n label: t(\"Common:Editor\"),\n description: t(\"Common:RoleEditorDescription\"),\n access: ShareAccessRights.Editing,\n type: EmployeeType.User,\n },\n formFiller: {",
       "module": "/packages/shared"
     },
@@ -93,13 +94,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation \"Πρόγραμμα επεξεργασίας\" translates to \"Editing Program\" which is a more descriptive term than the English \"Editor\". While not strictly incorrect, it loses the conciseness of the original term.",
-          "suggestion": "Consider a shorter, more direct translation like \"Επεξεργαστής\" (Epexergastis) which more closely matches the meaning of 'Editor'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -111,13 +106,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation \"Editori\" is not the standard or most accurate translation of \"Editor.\" While it's a possible derivation, \"Toimittaja\" or \"Edistaja\" would be more appropriate depending on the context. 'Editori' sounds like a person's name rather than a function or role.",
-          "suggestion": "Consider using 'Toimittaja' (for news editor) or 'Edistaja' (for a more general editor).  A more context-specific translation might be best."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -141,13 +130,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation 'エディタ' is a transliteration of 'Editor' and doesn't convey the full meaning in some contexts. A more appropriate translation might depend on the specific usage of 'Editor'.",
-          "suggestion": "Consider alternatives like \"編集者\" (henshasha - editor/author) or \"編集機能\" (henshū kinō - editing function) depending on the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -255,13 +238,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'可编辑' (Ke Bijiao) translates to 'Editable' or 'Modifiable,' not simply 'Editor.' It doesn't convey the same meaning as the English term 'Editor'.",
-          "suggestion": "Consider a more accurate translation like '编辑器' (Bianjiqi) or '编辑' depending on the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

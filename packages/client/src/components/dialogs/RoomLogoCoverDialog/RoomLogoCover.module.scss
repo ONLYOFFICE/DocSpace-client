@@ -467,11 +467,11 @@
     height: var(--scroll-body-height);
 
     :global(.room-logo-container) {
-      padding-left: 15px;
+      padding-inline-start: 15px;
     }
 
     :global(.icon-container) {
-      padding-right: 1px;
+      padding-inline-end: 1px;
     }
   }
 }

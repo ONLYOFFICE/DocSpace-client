@@ -35,8 +35,6 @@ import { TRoomParams } from "@docspace/shared/utils/rooms";
 import ViewerInfoWatermark from "./ViewerInfo";
 import ImageWatermark from "./ImageWatermark";
 
-import styles from "../../CreateEditRoomDialog.module.scss";
-
 const imageWatermark = "image";
 const viewerInfoWatermark = "viewerInfo";
 

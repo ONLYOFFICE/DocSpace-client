@@ -24,13 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@use "@docspace/ui-kit/styles/mixins";
-
-// Shared base styles for all param variants
-@mixin param-base {
+// ToggleParam — always row layout with text left, toggle right
+.toggleParam {
   box-sizing: border-box;
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 8px;
   width: 100%;
+  max-width: 100%;
 
   :global(.set_room_params-info) {
     display: flex;
@@ -52,6 +54,8 @@
     }
 
     :global(.set_room_params-info-description) {
+      box-sizing: border-box;
+      max-width: 100%;
       font-weight: 400;
       font-size: 12px;
       line-height: 16px;
@@ -61,84 +65,8 @@
 
   :global(.set_room_params-toggle) {
     width: 28px;
+    min-width: 28px;
     height: 16px;
     margin: 2px 0;
-  }
-
-  :global(.ai-combobox) {
-    padding: 0;
-  }
-
-  :global(.provider-combobox.has-error .combo-button) {
-    border-color: var(--input-error-border);
-  }
-
-  :global(.ai-button-group) {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-
-    @include mixins.mobile {
-      flex-direction: column;
-    }
-
-    :global(.ai-button-icon) {
-      div {
-        height: 16px;
-      }
-    }
-  }
-
-  :global(.ai-mcp-group) {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 8px;
-
-    :global(.ai-mcp-item) {
-      height: 32px;
-      padding: 0 8px;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      border-radius: 3px;
-      background: var(--filled-button-background-color);
-
-      img {
-        width: 16px;
-        height: 16px;
-      }
-    }
-  }
-}
-
-// StyledParam — base wrapper used directly by AgentDialog sub-components
-.styledParam {
-  @include param-base;
-
-  &.increaseGap :global(.set_room_params-info) {
-    gap: 12px;
-  }
-}
-
-// ToggleParam — always row layout with text left, toggle right
-.toggleParam {
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 8px;
-  max-width: 100%;
-
-  @include param-base;
-
-  :global(.set_room_params-info-description) {
-    box-sizing: border-box;
-    max-width: 100%;
-  }
-
-  :global(.set_room_params-toggle) {
-    width: 28px;
-    min-width: 28px;
   }
 }

@@ -286,7 +286,7 @@
   flex-direction: column;
 
   :global(.thirdparty-combobox) {
-    padding: 0px;
+    padding: 0;
 
     :global(.dropdown-container) {
       border: 1px solid $gray-strong;
@@ -471,6 +471,7 @@
     align-items: center;
     justify-content: center;
     transition: all 0.2s ease;
+    // !important overrides the border applied to child elements by .folderInput's border rule.
     border-top: none !important;
     border-bottom: none !important;
     border-inline-end: none !important;
@@ -500,7 +501,7 @@
   }
 
   :global(.title-without-top) {
-    margin-top: 0px;
+    margin-top: 0;
   }
 
   :global(.watermark-checkbox) {

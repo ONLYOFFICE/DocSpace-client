@@ -123,25 +123,6 @@
   }
 }
 
-// InputParam — always column layout with label + input
-.inputParam {
-  flex-direction: column;
-  gap: 4px;
-  max-height: 54px;
-
-  @include param-base;
-
-  :global(.input-label-wrapper) {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-
-    :global(.input-label) {
-      cursor: pointer;
-    }
-  }
-}
-
 // ToggleParam — always row layout with text left, toggle right
 .toggleParam {
   flex-direction: row;

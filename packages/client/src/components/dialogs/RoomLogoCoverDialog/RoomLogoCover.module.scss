@@ -279,6 +279,7 @@
   }
 
   :global(.hex-color-picker) {
+    // !important overrides react-colorful's inline styles.
     padding-bottom: 0 !important;
     width: auto !important;
 
@@ -286,6 +287,7 @@
       border-bottom: none;
 
       :global(.react-colorful__interactive) {
+        // !important overrides react-colorful's inline styles.
         width: calc(100% - 16px) !important;
         height: calc(100% - 16px);
       }
@@ -448,11 +450,11 @@
       width: 100vw;
 
       :global(.modal-body) {
-        padding: 0px 16px 8px;
+        padding: 0 16px 8px;
       }
 
       :global(.modal-footer) {
-        margin-top: 0px;
+        margin-top: 0;
       }
 
       :global(.modal-header) {

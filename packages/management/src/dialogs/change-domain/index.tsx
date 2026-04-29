@@ -114,7 +114,7 @@ export const ChangeDomainDialog = observer(() => {
             hasError={!!domainNameError}
             onChange={onHandleDomain}
             value={domain}
-            placeholder={t("EnterDomain")}
+            placeholder={t("EnterDomainName")}
             scale
           />
           <div>

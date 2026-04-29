@@ -53,12 +53,14 @@ const useGoBackAndClose = (
       }
     )?.FileLocation; // t("FileLocation");
 
+    const withoutGoBackText = sdkConfig?.withoutGoBackText;
+
     if (editorGoBack === false || user?.isVisitor || !user) {
       console.log("goBack", goBack);
     } else if (editorGoBack === "event") {
       goBack = {
         requestClose: true,
-        text: openFileLocationText,
+        text: withoutGoBackText ? undefined : openFileLocationText,
         blank: openOnNewPage,
       };
     } else {

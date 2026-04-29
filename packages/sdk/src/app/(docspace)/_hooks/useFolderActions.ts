@@ -36,7 +36,7 @@ export default function useFolderActions({ t }: UseFolderActionsProps) {
       setCurrentIsRootRoom(false);
       setSelection([]);
 
-      window.history.pushState({}, "", filterUrl);
+      window.history.pushState({}, "", `${window.location.pathname}${filterUrl}`);
     },
     [
       shareKey,

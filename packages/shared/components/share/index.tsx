@@ -58,10 +58,13 @@ const Share = (props: ShareProps) => {
     isEditor = false,
     onAddUser,
     onClickGroup,
+    disabledSharedUser: disabledSharedUserProp,
+    hideLinkTypeSelector,
   } = props;
 
   // HACK: Hide share option for rooms — remove after implementation is ready
   const disabledSharedUser =
+    disabledSharedUserProp ||
     infoPanelSelection.rootFolderType === FolderType.Rooms ||
     infoPanelSelection.rootFolderType === FolderType.AIAgents;
 
@@ -86,6 +89,7 @@ const Share = (props: ShareProps) => {
     setShareChanged,
     setView,
     shareChanged,
+    hideLinkTypeSelector,
   });
 
   const links = getLinkElements();

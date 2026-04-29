@@ -1,14 +1,16 @@
 @use "@docspace/ui-kit/styles/variables/colors";
 
 .tooltip {
-  background-color: colors.$black;
+  background-color: var(--tooltip-bg-color, var(--background-color));
   border-radius: 6px;
-  color: colors.$white;
+  color: var(--tooltip-text-color, var(--text-color));
   padding: 16px;
-  max-width: 340px;
-  min-width: 240px;
+  max-width: min(340px, calc(100vw - 32px));
+  min-width: min(240px, calc(100vw - 32px));
   position: relative;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0px 2px 8px rgba(0, 0, 0, 0.08),
+    0px 8px 24px rgba(0, 0, 0, 0.12);
 }
 
 .close {
@@ -22,10 +24,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--tooltip-text-color, var(--text-color));
   opacity: 0.7;
 
   &:hover {
     opacity: 1;
+  }
+
+  svg path {
+    fill: currentColor;
   }
 }
 
@@ -58,5 +65,18 @@
 .buttons {
   display: flex;
   gap: 8px;
+}
+
+:global(.tour-outline-item) {
+  outline: 2px solid var(--accent-button);
+  outline-offset: -2px;
+  border-radius: 3px;
+}
+
+:global([data-tour-active="true"]) {
+  position: relative;
+  z-index: 1;
+  box-shadow: inset 0 0 0 2px var(--accent-button);
+  border-radius: 4px;
 }
 

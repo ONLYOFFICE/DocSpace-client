@@ -359,12 +359,15 @@ jobs:
           DEPS_TEST_SUCCESS=true
 
           # Run pnpm audit
-          if ! pnpm audit --audit-level=moderate; then
-            echo "❌ Dependencies audit failed"
-            AUDIT_SUCCESS=false
-          else
-            echo "✅ Dependencies audit passed"
-          fi
+          # TODO: Re-enable when pnpm fixes the bulk advisory endpoint issue
+          # See: https://github.com/pnpm/pnpm/issues/9238
+          echo "⚠️ pnpm audit temporarily disabled (npm registry retired old endpoint)"
+          # if ! pnpm audit --audit-level=moderate; then
+          #   echo "❌ Dependencies audit failed"
+          #   AUDIT_SUCCESS=false
+          # else
+          #   echo "✅ Dependencies audit passed"
+          # fi
 
           # Run dependency tests
           echo "🔍 Running dependency tests..."

@@ -43,9 +43,7 @@ import { Component as DeleteData } from "../categories/delete-data";
 import { Component as StorageManagement } from "../categories/storage-management";
 import { Component as Payments } from "../categories/payments";
 import { Component as Bonus } from "../../Bonus";
-import { Component as Services } from "../categories/payments/SaaS/services";
 import { Component as AISettings } from "../categories/ai-settings";
-import AiPage from "../categories/payments/SaaS/services/pages/ai-tools/AiPage";
 
 import useSecurity from "../categories/security/useSecurity";
 import useBackup from "../categories/data-management/backup/useBackup";
@@ -54,13 +52,11 @@ import useDeleteData from "../categories/delete-data/useDeleteData";
 import useCommon from "../categories/common/useCommon";
 import useDataImport from "../categories/data-import/useDataImport";
 import usePayments from "../categories/payments/usePayments";
-import useServices from "../categories/payments/SaaS/services/useServices";
 import useAiSettings from "../categories/ai-settings/useAiSettings";
 import { createDefaultHookSettingsProps } from "../utils/createDefaultHookSettingsProps";
 import { isMainSectionChange } from "../utils/isMainSectionChange";
 import { TView, ViewProps } from "./View.types";
-import BackupPage from "../categories/payments/SaaS/services/pages/backup/BackupPage";
-import AdditionalStoragePage from "../categories/payments/SaaS/services/pages/additional-storage/AdditionalStoragePage";
+import { Component as ServicesPage } from "../categories/payments/ServicesPage";
 
 const getViewFromPathname = (pathname: string): TView => {
   if (pathname.includes("customization")) return "customization";
@@ -107,7 +103,6 @@ const View = ({
   ldapStore,
   common,
   paymentStore,
-  servicesStore,
   currentTariffStatusStore,
   defaultTemplatesStore,
 
@@ -152,7 +147,6 @@ const View = ({
     ldapStore,
     common,
     paymentStore,
-    servicesStore,
     currentTariffStatusStore,
     defaultTemplatesStore,
   });
@@ -166,7 +160,7 @@ const View = ({
   const { getDataImportInitialValue } = useDataImport(defaultProps.dataImport);
   const { getDeleteDataInitialValue } = useDeleteData(defaultProps.deleteData);
   const { getPaymentsInitialValue } = usePayments(defaultProps.payment);
-  const { getServicesInitialValue } = useServices(defaultProps.services);
+
   const { getAiSettingsInitialValue } = useAiSettings({
     fetchAIProviders,
     initDefaultProvider,
@@ -297,12 +291,6 @@ const View = ({
             await standaloneInit(t);
             break;
 
-          case "ai-services":
-          case "backup-service":
-          case "disk-storage":
-            await getServicesInitialValue();
-            break;
-
           case "ai-settings":
             await getAiSettingsInitialValue();
             break;
@@ -341,10 +329,12 @@ const View = ({
       {currentView === "delete-data" ? <DeleteData /> : null}
       {currentView === "payments" ? <Payments /> : null}
       {currentView === "bonus" ? <Bonus /> : null}
-      {currentView === "ai-services" ? <AiPage /> : null}
       {currentView === "ai-settings" ? <AISettings /> : null}
-      {currentView === "backup-service" ? <BackupPage /> : null}
-      {currentView === "disk-storage" ? <AdditionalStoragePage /> : null}
+      {currentView === "ai-services" ||
+      currentView === "backup-service" ||
+      currentView === "disk-storage" ? (
+        <ServicesPage />
+      ) : null}
     </LoaderWrapper>
   );
 };
@@ -369,7 +359,6 @@ export const ViewComponent = inject(
     storageManagement,
     ldapStore,
     paymentStore,
-    servicesStore,
     currentTariffStatusStore,
     aiSettingsStore,
     defaultTemplatesStore,
@@ -410,7 +399,6 @@ export const ViewComponent = inject(
       ldapStore,
       common,
       paymentStore,
-      servicesStore,
       currentTariffStatusStore,
       ssoFormStore: ssoStore,
       defaultTemplatesStore,

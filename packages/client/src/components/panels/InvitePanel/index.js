@@ -58,6 +58,7 @@ import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions"
 import PeopleSelector from "@docspace/ui-kit/selectors/People";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
+import { filterNotReadOnlyOptions } from "@docspace/shared/utils/filterNotReadOnlyOptions";
 import { fixAccess } from "./utils";
 import ExternalLinks from "./sub-components/ExternalLinks";
 import InviteInput from "./sub-components/InviteInput";
@@ -817,7 +818,13 @@ const InvitePanel = ({
   const access = defaultAccess ?? ShareAccessRights.ReadOnly;
 
   const filteredAccesses =
-    roomType === -1 ? accessOptions : filterPaidRoleOptions(accessOptions);
+    roomType === -1
+      ? accessOptions
+      : roomType === RoomsType.AIRoom
+        ? filterNotReadOnlyOptions(accessOptions).filter(
+            (o) => !o.isSeparator && !o.disabled,
+          )
+        : filterPaidRoleOptions(accessOptions);
 
   const onSubmitLinkSettingsPanel = (defaultLink) => {
     if (roomId === -1) {

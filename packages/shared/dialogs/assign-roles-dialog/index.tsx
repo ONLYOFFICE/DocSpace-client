@@ -62,12 +62,14 @@ export const AssignRolesDialog = ({
           label={t("Common:Assign")}
           size={ButtonSize.normal}
           scale
+          testId="submit_assign_role_button"
         />
         <Button
           onClick={onClose}
           label={t("Common:Later")}
           size={ButtonSize.normal}
           scale
+          testId="assign_role_later_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

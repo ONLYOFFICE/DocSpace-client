@@ -41,7 +41,7 @@ import {
 } from "./types";
 import { Nullable } from "../../types";
 import { Encoder } from "@docspace/ui-kit/utils/encoder";
-import { AI_TOOLS } from "../../constants";
+import { AI_TOOLS } from "@docspace/ui-kit/billing/constants";
 
 const baseURL = "/apisystem";
 
@@ -372,24 +372,6 @@ export async function getPaymentAccount(signal?: AbortSignal) {
   return res;
 }
 
-export async function getPaymentLink(
-  adminCount: number,
-  backUrl: string,
-  signal?: AbortSignal,
-) {
-  const res = (await request({
-    method: "put",
-    url: `/portal/payment/url`,
-    data: {
-      quantity: { admin: adminCount },
-      backUrl,
-    },
-    signal,
-  })) as string;
-
-  return res;
-}
-
 export function updatePayment(adminCount, isYearTariff) {
   const data = isYearTariff ? { adminyear: adminCount } : { admin: adminCount };
 
@@ -449,29 +431,6 @@ export function getPaymentTariff() {
   return request({ method: "get", url: "/portal/payment/tariff" });
 }
 
-export function sendPaymentRequest(email, userName, message) {
-  return request({
-    method: "post",
-    url: `/portal/payment/request `,
-    data: {
-      email,
-      userName,
-      message,
-    },
-  });
-}
-
-export function getBalance(refresh?: boolean, signal?: AbortSignal) {
-  const params = refresh ? { refresh: true } : {};
-
-  return request({
-    method: "get",
-    url: `/portal/payment/customer/balance`,
-    params,
-    signal,
-  }) as TBalance;
-}
-
 export async function getServiceQuotaBalance(
   serviceName: string = AI_TOOLS,
   refresh?: boolean,
@@ -512,19 +471,6 @@ export async function getWalletPayer(refresh?: boolean, signal?: AbortSignal) {
   return user;
 }
 
-export async function getCardLinked(backUrl, signal?: AbortSignal) {
-  const params = backUrl ? { backUrl } : {};
-
-  const res = (await request({
-    method: "get",
-    url: "/portal/payment/checkoutsetupurl",
-    params,
-    signal,
-  })) as string;
-
-  return res;
-}
-
 export async function saveDeposite(amount: number, currency: string) {
   return request({
     method: "post",
@@ -545,85 +491,6 @@ export async function buyWalletService(quantity: number, serviceName: string) {
       serviceName,
     },
   }) as string;
-}
-
-export async function getTransactionHistory(
-  startDate: string,
-  endDate: string,
-  credit: boolean = true,
-  debit: boolean = true,
-  participantName: string = "",
-  offset: number = 0,
-  limit: number = 25,
-  serviceName: string = "",
-  signal?: AbortSignal,
-) {
- //debugger
-  const params = {
-    startDate,
-    endDate,
-    credit,
-    debit,
-    offset,
-    limit,
-  };
-
-  if (participantName) {
-    params.participantName = participantName;
-  }
-
-  if (serviceName) {
-    params.serviceName = serviceName;
-  }
-  if (serviceName === AI_TOOLS) {
-    params.writeOffServiceQuota = true;
-  }
-
-  const options = {
-    method: "get",
-    url: "/portal/payment/customer/operations",
-    params,
-    signal,
-  };
-  const res = (await request(options)) as TCustomerOperation;
-
-  return res;
-}
-
-export async function getAutoTopUpSettings(signal?: AbortSignal) {
-  const options = {
-    method: "get",
-    url: "/portal/payment/topupsettings",
-    signal,
-  };
-  const res = (await request(options)) as TAutoTopUpSettings;
-
-  return res;
-}
-
-export async function updateAutoTopUpSettings(
-  enabled: boolean,
-  minBalance: number,
-  upToBalance: number,
-  currency: string,
-) {
-  const body = enabled
-    ? {
-        settings: {
-          enabled,
-          minBalance,
-          upToBalance,
-          currency,
-        },
-      }
-    : {};
-
-  const options = {
-    method: "post",
-    url: "/portal/payment/topupsettings",
-    data: { ...body },
-  };
-  return request(options);
 }
 
 export async function startTransactionHistoryReport(
@@ -767,3 +634,4 @@ export const setAiModelRestrictions = async (
     signal,
   });
 };
+

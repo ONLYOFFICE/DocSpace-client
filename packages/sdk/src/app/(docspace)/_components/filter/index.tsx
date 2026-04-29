@@ -93,7 +93,7 @@ export const Filter = observer(({ filesFilter, shareKey }: FilterProps) => {
       isIndexEditingMode={false}
       getSortData={getSortData}
       getSelectedSortData={getSelectedSortData}
-      viewAs={filesViewAs || "row"}
+      viewAs={filesViewAs === "table" ? "row" : filesViewAs || "row"}
       viewSelectorVisible
       getFilterData={getFilterData}
       userId=""

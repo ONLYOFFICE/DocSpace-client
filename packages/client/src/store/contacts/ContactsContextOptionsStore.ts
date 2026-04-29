@@ -86,6 +86,7 @@ import SettingsSetupStore from "../SettingsSetupStore";
 import UsersStore from "./UsersStore";
 import DialogStore from "./DialogStore";
 import TargetUserStore from "./TargetUserStore";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const PROXY_HOMEPAGE_URL = combineUrl(window.ClientConfig?.proxy?.url, "/");
 
@@ -353,7 +354,7 @@ class ContactsConextOptionsStore {
       label: getUserTypeTranslation(EmployeeType.Admin, t),
       title: getUserTypeTranslation(EmployeeType.Admin, t),
       icon: isGuests ? PersonAdminReactSvgUrl : null,
-      badgeLabel: isGuests ? t("Common:Paid") : undefined,
+      badgeLabel: isGuests && !standalone ? t("Common:Paid") : undefined,
       isPaidBadge: !standalone,
       onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
       "data-action": EmployeeType.Admin,
@@ -368,7 +369,7 @@ class ContactsConextOptionsStore {
       label: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
       title: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
       icon: isGuests ? PersonManagerReactSvgUrl : null,
-      badgeLabel: isGuests ? t("Common:Paid") : undefined,
+      badgeLabel: isGuests && !standalone? t("Common:Paid") : undefined,
       isPaidBadge: !standalone,
       onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
       "data-action": EmployeeType.RoomAdmin,
@@ -671,7 +672,7 @@ class ContactsConextOptionsStore {
               className: "main-button_drop-down",
               icon: PersonAdminReactSvgUrl,
               label: t("Common:PortalAdmin", {
-                productName: t("Common:ProductName"),
+                productName: getBrandName("ProductName"),
               }),
               onClick: () => this.inviteUser(EmployeeType.Admin),
               "data-type": EmployeeType.Admin,

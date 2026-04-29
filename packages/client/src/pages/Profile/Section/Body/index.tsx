@@ -173,7 +173,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     },
     {
       id: "file-management",
-      name: t?.("FileManagement"),
+      name: t?.("Common:FileManagement"),
       content: <FileManagement />,
       onClick: async () => {
         await getFileManagementData();
@@ -181,7 +181,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     },
     {
       id: "interface-theme",
-      name: t?.("InterfaceTheme"),
+      name: t?.("Common:InterfaceTheme"),
       content: <InterfaceTheme />,
       onClick: () => {},
     },

@@ -82,6 +82,7 @@ import {
   TShareMembers,
   TTitleShare,
 } from "./Share.types";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const getAccessTypeOptions = (t: TTranslation, withIcon = true) => {
   return [
@@ -95,7 +96,7 @@ export const getAccessTypeOptions = (t: TTranslation, withIcon = true) => {
       internal: true,
       key: "users",
       label: t("Common:SpaceUsersOnly", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
       }),
       icon: withIcon ? PeopleIcon : undefined,
     },
@@ -420,7 +421,7 @@ export const getAccessTypeText = (
 ) => {
   const accessType = link.sharedTo.internal
     ? t("Common:SpaceUsersOnly", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
       })
     : t("Common:AnyoneWithLink");
 

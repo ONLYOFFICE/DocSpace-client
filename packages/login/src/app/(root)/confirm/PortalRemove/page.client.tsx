@@ -38,6 +38,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 import { TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import styles from "../confirm.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type RemovePortalFormProps = {
   siteUrl?: string;
@@ -101,7 +102,7 @@ const RemovePortalForm = ({
     <>
       <Text className="subtitle">
         {t("PortalRemoveTitle", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
         })}
       </Text>
       <div className={styles.buttonsWrapper}>

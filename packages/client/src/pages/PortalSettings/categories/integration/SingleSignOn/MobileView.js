@@ -30,6 +30,7 @@ import styles from "./MobileView.module.scss";
 import { useNavigate } from "react-router";
 
 import { CategoryItem } from "@docspace/ui-kit/components/category-item";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 
 const MobileView = ({ isSSOAvailable, logoText }) => {
@@ -59,7 +60,7 @@ const MobileView = ({ isSSOAvailable, logoText }) => {
           organizationName: logoText,
         })}
         subtitle={t("SpMetadataDescription", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
           organizationName: logoText,
         })}
         url="/portal-settings/integration/sso/metadata"

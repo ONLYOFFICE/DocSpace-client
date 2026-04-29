@@ -3,11 +3,12 @@
   "content": "User not found. You can edit the email by double-clicking on it.",
   "content_en_sha1_hash": "a69a2a02c45d24c439ce46372f59b9cb3857ef41",
   "created_at": "2025-05-26T07:15:53.249Z",
-  "updated_at": "2026-02-19T13:36:32.533Z",
+  "updated_at": "2026-04-11T21:14:13.801Z",
   "comment": {
-    "text": "This translation key is used for a tooltip message that informs users when they attempt to edit an email and the recipient has not been found in the system. It appears when the user hovers over or clicks on a specific button or element in the InvitePanel component, displayed at line 346 of Item.js, indicating that an email can be edited by double-clicking on it.",
+    "text": "This is an error tooltip that appears when an invited user's email address is not found. It informs the user that they can edit the email by double-clicking on it.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:09:40.570Z"
+    "updated_at": "2026-04-11T21:14:13.801Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

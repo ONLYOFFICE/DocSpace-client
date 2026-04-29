@@ -82,6 +82,7 @@ export type LinkRowProps = {
   onCloseContextMenu: () => void;
 
   isShareLink?: boolean;
+  hideLinkTypeSelector?: boolean;
 } & (
   | {
       isRoomsLink?: undefined | false;
@@ -134,6 +135,7 @@ export type ShareProps = {
   isEditor?: boolean;
   onAddUser?: (item: TFolder | TFile) => void;
   disabledSharedUser?: boolean;
+  hideLinkTypeSelector?: boolean;
   onClickGroup?: (group: TGroup) => void;
 };
 
@@ -195,6 +197,7 @@ export interface UseShareProps {
     visible: boolean;
     item?: TFile | TFolder;
   }) => void;
+  hideLinkTypeSelector?: boolean;
 }
 
 export type TTitleID =

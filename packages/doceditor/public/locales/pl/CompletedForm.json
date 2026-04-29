@@ -1,7 +1,8 @@
 {
   "BackToRoom": "Wróć do pokoju",
   "CheckReadyForms": "Sprawdź gotowe formularze",
-  "Description": "Twój formularz został wypełniony i zapisany",
+  "CompletedFormDescription": "Twój formularz został wypełniony i zapisany",
+  "CompletedFormTitle": "Formularz został wypełniony",
   "DescriptionForAnonymous": "Przesłano wypełniony formularz PDF, któremu przypisano unikatowy numer. Aby sprawdzić status, skontaktuj się z właścicielem formularza.",
   "DescriptionForRegisteredUser": "Wypełniony formularz PDF zostanie będzie dostępny w katalogu Gotowe.",
   "FillItOutAgain": "Wypełnij ponownie",
@@ -18,6 +19,5 @@
   "FormVDRYouFirstRecepientDescription": "Jesteś pierwszym odbiorcą formularza i musisz go wypełnić. Powiadomienie zostało wysłane na Twój adres e-mail. Możesz zacząć wypełniać formularz teraz lub skopiować link do wypełniania i wrócić później.",
   "LinkToFillOutForm": "Link do wypełnienia formularza:",
   "LinkToForm": "Link do formularza:",
-  "LinkToViewOnlyForm": "Link do formularza tylko do odczytu:",
-  "Title": "Formularz został wypełniony"
+  "LinkToViewOnlyForm": "Link do formularza tylko do odczytu:"
 }

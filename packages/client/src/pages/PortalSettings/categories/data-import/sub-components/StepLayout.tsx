@@ -27,6 +27,7 @@
 import { Text } from "@docspace/ui-kit/components/text";
 import { LayoutProps } from "../types";
 import styles from "../StyledDataImport.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const StepLayout = (props: LayoutProps) => {
   const { t, step, totalSteps, title, description, component, logoText } =
@@ -37,7 +38,7 @@ const StepLayout = (props: LayoutProps) => {
       <div className={styles.descriptionWrapper}>
         <Text className="data-import-description" lineHeight="20px">
           {t("Settings:AboutDataImport", {
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
             organizationName: logoText,
           })}
         </Text>

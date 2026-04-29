@@ -31,6 +31,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 
 import { useTranslation } from "react-i18next";
 import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 import styles from "../Webhooks.styled.module.scss";
 
@@ -42,7 +43,7 @@ const WebhookInfo = (props) => {
 		<div>
 			<Text as="p" className={styles.infoText}>
 				{t("WebhooksInfo", {
-					productName: t("Common:ProductName"),
+					productName: getBrandName("ProductName"),
 					organizationName: logoText,
 				})}
 			</Text>

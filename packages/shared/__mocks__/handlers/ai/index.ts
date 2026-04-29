@@ -32,6 +32,7 @@ import {
   aiProvidersDeleteHandler,
   aiProvidersPostHandler,
   aiProvidersPutHandler,
+  aiProvidersPreviewHandler,
 } from "./providers";
 import {
   aiServerHandler,
@@ -72,6 +73,7 @@ export {
   aiProvidersDeleteHandler,
   aiProvidersPostHandler,
   aiProvidersPutHandler,
+  aiProvidersPreviewHandler,
   aiServerHandler,
   aiServersGetHandler,
   aiServersPostHandler,
@@ -106,6 +108,7 @@ export const aiHandlers = (port: string) => [
   aiProvidersDeleteHandler(port),
   aiProvidersPostHandler(port),
   aiProvidersPutHandler(port),
+  aiProvidersPreviewHandler(port),
   aiServersGetHandler(port),
   aiServersPostHandler(port),
   aiServersDeleteHandler(port),

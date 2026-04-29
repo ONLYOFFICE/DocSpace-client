@@ -17,7 +17,6 @@
   "InviteViaLinkDescriptionAgentMembers": "إنشاء رابط عالمي لأعضاء {{productName}} للمصادقة الذاتية في الوكيل.",
   "InviteViaLinkDescriptionRoomGuest": "قم بإنشاء رابط عالمي للتفويض الذاتي في الغرفة كضيف.",
   "InviteViaLinkDescriptionRoomMembers": "أنشئ رابطًا عالميًا لأعضاء {{productName}} لتمكينهم من التفويض الذاتي في الغرفة.",
-  "LinkCopySuccess": "تم نسخ الرابط",
   "SendInvitation": "إرسال دعوة",
   "UserAgentMaxAvailableRoleWarning": "لا يمكن تعيين الضيوف والمستخدمين كمديرين للوكيل. مسؤولو الغرفة ومسؤولو {{productName}} فقط هم المناسبون للدور المحدد.",
   "UserMaxAvailableRoleWarning": "لا يمكن تعيين الضيوف والمستخدمين كمديري غرف. فقط مسؤولو الغرف وإدارة {{productName}} مناسبون لهذا الدور المحدد.",

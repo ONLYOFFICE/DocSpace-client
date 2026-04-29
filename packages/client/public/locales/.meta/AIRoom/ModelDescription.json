@@ -3,16 +3,17 @@
   "content": "Select the {{aiProvider}} and model to be used in this room’s chats. This setting is mandatory and applies to all participants.",
   "content_en_sha1_hash": "e5bb15987ba113eb704a2bf6efe77ffcea5a7295",
   "created_at": "2025-12-17T14:56:15.166Z",
-  "updated_at": "2026-03-31T15:18:45.968Z",
+  "updated_at": "2026-04-23T17:24:01.732Z",
   "comment": {
-    "text": "This key provides a mandatory explanation within a dialog (likely for creating or editing an agent) that instructs users to select an AI provider and model for use in the chat room, affecting all participants. The text clarifies this selection is required. It appears as a descriptive text element within a room settings configuration.",
+    "text": "This is a descriptive text within a dialog, explaining the purpose of selecting an AI provider and model for chat rooms. It appears as part of a sentence, with `{{aiProvider}}` being a variable for the AI provider's name.",
     "is_auto": true,
-    "updated_at": "2025-12-22T09:47:48.850Z"
+    "updated_at": "2026-04-11T21:01:49.799Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/Model.tsx",
-      "line_number": 356,
+      "line_number": 366,
       "context": "lineHeight=\"16px\"\n fontWeight={400}\n className=\"set_room_params-info-description\"\n noSelect\n >\n {t(\"ModelDescription\", {\n aiProvider: t(\"Common:AIProvider\"),\n })}\n </Text>\n <Text\n fontSize=\"12px\"",
       "module": "/packages/client"
     }

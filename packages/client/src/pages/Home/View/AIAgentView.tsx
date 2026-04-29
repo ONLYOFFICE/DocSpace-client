@@ -150,7 +150,11 @@ const AIAgentViewComponent = ({
             modelAliases={aiConfig?.modelAliases}
             standalone // NOTE: AI SaaS same as AI Standalone in v.4.0
             getResultStorageId={getResultStorageId}
-            multimodal={chatSettings?.multimodal}
+            multimodal={
+              chatSettings?.capabilities?.vision !== false
+                ? chatSettings?.multimodal
+                : undefined
+            }
             setMediaViewerVisible={setMediaViewerVisible}
             setAiPlaylistImages={setAiPlaylistImages}
             goToWebSearchSettings={goToWebSearchSettings}

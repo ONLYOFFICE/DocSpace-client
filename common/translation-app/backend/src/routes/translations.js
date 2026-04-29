@@ -461,7 +461,7 @@ async function routes(fastify, options) {
         }
 
         // remove .meta file for this key
-        fsUtils.removeMetaFile(projectName, namespace, keyPath);
+        await fsUtils.removeMetaFile(projectName, namespace, keyPath);
 
         // Broadcast update to connected clients
         fastify.io.emit("translation:key-deleted", {

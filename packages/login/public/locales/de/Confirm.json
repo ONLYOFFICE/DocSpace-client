@@ -20,6 +20,8 @@
   "GetCode": "Code erhalten",
   "GetSuitableApp": "Eine passende App erhalten",
   "GetSuitableAppDescription": "Verwenden Sie eine kompatible App wie Google Authenticator für <1>Android</1> und <4>iOS</4> oder Authenticator für <8>Windows Phone</8>.",
+  "InviteLinkQuotaErrorBody": "Die Anmeldung über den Link ist nicht mehr möglich, da die Kapazität ausgeschöpft ist.",
+  "InviteQuotaErrorCustomizedBody": "In 10 Sekunden werden Sie zur <1>Login</1>-Seite weitergeleitet.",
   "LoginRegistryButton": "Beitreten",
   "Newsletter": "Ich möchte den Newsletter von {{organizationName}} abonnieren",
   "PassworResetTitle": "Jetzt können Sie ein neues Kennwort erstellen.",
@@ -37,7 +39,5 @@
   "TfaSubTitle": "Befolgen Sie diese einfachen Schritte, um mit {{productName}} weiterzuarbeiten:",
   "TfaTitle": "Zwei-Faktor-Authentifizierung für sicheren Zugriff aktiviert",
   "VerifyConnection": "Verbindung bestätigen",
-  "VerifyConnectionDescription": "Geben Sie den von Ihrer Authentifizierungs-App generierten sechsstelligen Code in das Feld unten ein, um die Einrichtung abzuschließen.",
-  "InviteLinkQuotaErrorBody": "Die Anmeldung über den Link ist nicht mehr möglich, da die Kapazität ausgeschöpft ist.",
-  "InviteQuotaErrorCustomizedBody": "In 10 Sekunden werden Sie zur <1>Login</1>-Seite weitergeleitet."
+  "VerifyConnectionDescription": "Geben Sie den von Ihrer Authentifizierungs-App generierten sechsstelligen Code in das Feld unten ein, um die Einrichtung abzuschließen."
 }

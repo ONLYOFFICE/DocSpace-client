@@ -1,0 +1,90 @@
+@use "@docspace/ui-kit/styles/mixins";
+
+.articleFlex {
+	display: flex;
+	flex-direction: column;
+	border-inline-end: none !important;
+
+	&:global([data-show-text="false"]) {
+		min-width: 80px !important;
+		max-width: 80px !important;
+	}
+
+	@include mixins.mobile {
+		position: relative !important;
+		top: auto !important;
+		width: auto !important;
+		height: 100% !important;
+		z-index: 205 !important;
+		min-width: var(--article-tablet-width-collapsed) !important;
+		max-width: var(--article-tablet-width-collapsed) !important;
+	}
+
+	@include mixins.mobile {
+		&:global([data-show-text="true"]) {
+			min-width: var(--article-tablet-width) !important;
+			max-width: var(--article-tablet-width) !important;
+		}
+	}
+}
+
+.scrollbar {
+	flex: 1;
+	min-height: 0;
+
+	@include mixins.mobile {
+		height: 100% !important;
+	}
+}
+
+.navBottom {
+	flex-shrink: 0;
+	padding: 8px 20px 16px;
+
+	@include mixins.tablet {
+		padding: 8px 8px 16px;
+	}
+}
+
+.borderToggle {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	inset-inline-end: -4px;
+	width: 8px;
+	cursor: pointer;
+	z-index: 1;
+
+	&::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		width: 1px;
+		left: 50%;
+		transform: translateX(-50%);
+		background: var(--info-panel-border);
+		transition: width 0.15s, background-color 0.15s;
+	}
+
+	&:hover::after,
+	&:active::after {
+		width: 3px;
+		background-color: var(--text-secondary);
+		border-radius: 2px;
+	}
+
+	&:focus-visible {
+		outline: none;
+
+		&::after {
+			width: 3px;
+			background-color: var(--text-secondary);
+			border-radius: 2px;
+		}
+	}
+
+	@include mixins.mobile {
+		display: none;
+	}
+}

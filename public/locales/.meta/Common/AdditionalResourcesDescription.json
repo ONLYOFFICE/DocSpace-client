@@ -3,17 +3,18 @@
   "content": "Choose whether you want to display links to additional resources in {{productName}} menu.",
   "content_en_sha1_hash": "ba7ac198833cace77d47f785c15e7a5c1bb730da",
   "created_at": "2025-05-26T07:15:40.229Z",
-  "updated_at": "2026-02-19T13:36:33.158Z",
+  "updated_at": "2026-04-11T21:01:01.970Z",
   "comment": {
-    "text": "This translation key provides the text for a description that explains why additional resources are not currently available. It is displayed in the UI of a settings page and is translated as part of the branding options for {productName}.",
+    "text": "This is a descriptive text that appears below the \"Additional Resources\" heading on the branding settings page. It explains that the user can choose to show or hide links to extra resources within the {{productName}} menu.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:08:13.926Z"
+    "updated_at": "2026-04-11T21:01:01.970Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/AdditionalResources/index.tsx",
-      "line_number": 91,
-      "context": "<div className={styles.additionalHeader}>\n {t(\"Common:AdditionalResources\")}\n </div>\n </div>\n <div className={styles.additionalDescription}>\n {t(\"Common:AdditionalResourcesDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </div>\n <div className={classNames(styles.brandingCheckbox)}>\n <Checkbox",
+      "line_number": 92,
+      "context": "<div className={styles.additionalHeader}>\n {t(\"Common:AdditionalResources\")}\n </div>\n </div>\n <div className={styles.additionalDescription}>\n {t(\"Common:AdditionalResourcesDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </div>\n <div className={classNames(styles.brandingCheckbox)}>\n <Checkbox",
       "module": "/packages/shared"
     }
   ],
@@ -199,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

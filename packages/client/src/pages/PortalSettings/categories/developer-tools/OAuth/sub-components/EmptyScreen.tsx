@@ -36,6 +36,7 @@ import EmptyScreenOauthLightSvg from "PUBLIC_DIR/images/emptyview/empty.oauth2.l
 import EmptyScreenOauthDarkSvg from "PUBLIC_DIR/images/emptyview/empty.oauth2.dark.svg";
 
 import RegisterNewButton from "./RegisterNewButton";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const OAuthEmptyScreen = ({
   apiOAuthLink,
@@ -59,7 +60,7 @@ const OAuthEmptyScreen = ({
       t={t}
       i18nKey="OAuthAppDescription"
       values={{
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
         organizationName: logoText,
       }}
     />

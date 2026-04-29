@@ -1,0 +1,29 @@
+{
+  "key_path": "SelectAtLeastOneModel",
+  "content": "Select at least one model",
+  "content_en_sha1_hash": "625bdbb477ad3a482d3c8ab2bb9c8c627bed57a1",
+  "created_at": "2026-04-23T17:24:00.508Z",
+  "updated_at": "2026-04-23T17:38:34.839Z",
+  "comment": {
+    "text": "Error text displayed when no models are selected in the AI provider configuration.",
+    "is_auto": true,
+    "updated_at": "2026-04-23T17:38:34.839Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/SelectedModelsList.tsx",
+      "line_number": 101,
+      "context": "/>\n ))}\n </div>\n {hasError ? (\n <Text className={styles.selectedModelsErrorText} fontSize=\"12px\">\n {t(\"AISettings:SelectAtLeastOneModel\")}\n </Text>\n ) : null}\n </div>\n );\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

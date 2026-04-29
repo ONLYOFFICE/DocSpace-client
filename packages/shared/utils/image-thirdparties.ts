@@ -40,6 +40,7 @@ import TelegramSvgUrl from "PUBLIC_DIR/images/thirdparties/telegram.svg?url";
 import TwitterSvgUrl from "PUBLIC_DIR/images/thirdparties/twitter.svg?url";
 import ZoomSvgUrl from "PUBLIC_DIR/images/thirdparties/zoom.svg?url";
 import WeixinSvgUrl from "PUBLIC_DIR/images/thirdparties/weixin.svg?url";
+import NextCloudSvgUrl from "PUBLIC_DIR/images/thirdparties/nextcloud.svg?url";
 
 export const thirdpartiesLogo = new Map([
   ["appleid.svg", AppleidSvgUrl],
@@ -58,4 +59,5 @@ export const thirdpartiesLogo = new Map([
   ["twitter.svg", TwitterSvgUrl],
   ["weixin.svg", WeixinSvgUrl],
   ["zoom.svg", ZoomSvgUrl],
+  ["nextcloud.svg", NextCloudSvgUrl],
 ]);

@@ -3,13 +3,21 @@
   "content": "This is your main workspace. All your PDF forms are stored here. Upload new forms or create them from scratch.",
   "content_en_sha1_hash": "591aedc85b906cbd9ea66b4dbb7209010c3a07e8",
   "created_at": "2026-03-31T15:18:26.814Z",
-  "updated_at": "2026-03-31T15:18:26.814Z",
+  "updated_at": "2026-04-23T17:24:02.160Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is the content of a tooltip that appears during a product tour. It describes the \"My Forms\" section as the main workspace for PDF forms, where users can upload or create new ones.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:40:31.594Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_utils/tourSteps.ts",
+      "line_number": 231,
+      "context": "return [\n navSectionStep(\n \"my-forms\",\n t(\"Common:MyForms\"),\n t(\n \"Common:TourMyForms\",\n \"This is your main workspace. All your PDF forms are stored here. Upload new forms or create them from scratch.\",\n ),\n showMenu,\n callbacks,\n ),",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

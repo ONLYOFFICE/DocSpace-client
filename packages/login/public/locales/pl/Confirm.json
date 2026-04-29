@@ -20,6 +20,8 @@
   "GetCode": "Uzyskaj kod",
   "GetSuitableApp": "Pobierz odpowiednią aplikację.",
   "GetSuitableAppDescription": "Użyj kompatybilnej aplikacji, takiej jak Google Authenticator dla <1>Androida</1> i <4>iOS</4>, lub Authenticator dla <8>Windows Phone</8>.",
+  "InviteLinkQuotaErrorBody": "Rejestracja za pomocą linku nie jest już dostępna, ponieważ osiągnięto limit.",
+  "InviteQuotaErrorCustomizedBody": "Zostaniesz przekierowany na stronę <1>Logowania</1> za 10 sekund.",
   "LoginRegistryButton": "Dołącz",
   "Newsletter": "Chcę otrzymywać newsletter {{organizationName}}",
   "PassworResetTitle": "Teraz możesz utworzyć nowe hasło.",
@@ -37,7 +39,5 @@
   "TfaSubTitle": "Postępuj zgodnie z prostymi krokami, aby kontynuować pracę w tym {{productName}}:",
   "TfaTitle": "Uwierzytelnianie dwuskładnikowe włączone dla bezpiecznego dostępu",
   "VerifyConnection": "Zweryfikuj połączenie",
-  "VerifyConnectionDescription": "Wprowadź 6-cyfrowy kod wygenerowany przez Twoją aplikację uwierzytelniającą do pola poniżej, aby zakończyć konfigurację.",
-  "InviteLinkQuotaErrorBody": "Rejestracja za pomocą linku nie jest już dostępna, ponieważ osiągnięto limit.",
-  "InviteQuotaErrorCustomizedBody": "Zostaniesz przekierowany na stronę <1>Logowania</1> za 10 sekund."
+  "VerifyConnectionDescription": "Wprowadź 6-cyfrowy kod wygenerowany przez Twoją aplikację uwierzytelniającą do pola poniżej, aby zakończyć konfigurację."
 }

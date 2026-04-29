@@ -3,16 +3,17 @@
   "content": "The link has expired.",
   "content_en_sha1_hash": "ef3fc8d140fe94ebbb33acc6c724acb2c51a4cb9",
   "created_at": "2025-05-19T21:30:46.180Z",
-  "updated_at": "2026-03-20T09:07:45.522Z",
+  "updated_at": "2026-04-23T17:24:01.883Z",
   "comment": {
-    "text": "The \"LinkExpired\" translation key is used to display an error message when a link has expired, likely in a login or confirmation process. It appears as a label on a button or dialog, providing users with a clear explanation of the issue. Translators should provide a corresponding error message in the local language that conveys a similar sense of urgency and clarity.",
+    "text": "This is an error message displayed as a toast notification or on an error page, indicating that a shared link is no longer valid because its expiration date has passed.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:40.400Z"
+    "updated_at": "2026-04-11T20:49:40.539Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 496,
+      "line_number": 497,
       "context": "const isExpired = isAfter(now(), parseToDateTime(expirationDate));\n const isLimit = link?.currentUseCount >= link?.maxUseCount;\n \n if (isExpired) {\n if (!showToast) return;\n return toastr.error(t(\"Common:LinkExpired\"));\n }\n if (isLimit) {\n if (!showToast) return;\n return toastr.error(t(\"Common:LinkNoLongerAvailable\"));\n }",
       "module": "/packages/client"
     },
@@ -42,7 +43,7 @@
     },
     {
       "file_path": "/packages/shared/components/share/sub-components/LinkRow.tsx",
-      "line_number": 147,
+      "line_number": 148,
       "context": "shareLink={shareLink}\n isExpiredLink={isExpiredLink}\n disabledCopy={isArchiveFolder}\n onCopyLink={() =>\n isExpiredLink\n ? toastr.error(t(\"Common:LinkExpired\"))\n : onCopyLink(link)\n }\n />\n <LinkExpiration\n t={t}",
       "module": "/packages/shared"
     }
@@ -63,13 +64,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Linkin' is misspelled. It should be 'Linkin'",
-          "suggestion": "Linkin"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -159,7 +154,15 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \"ł\"",
+          "suggestion": "",
+          "checked_at": "2026-04-11T21:47:37.840Z",
+          "checked_by": "deterministic"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -235,6 +238,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

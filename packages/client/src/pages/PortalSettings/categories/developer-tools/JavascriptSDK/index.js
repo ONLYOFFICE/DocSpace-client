@@ -59,19 +59,12 @@ import CSPSetting from "./sub-components/csp";
 import { isMobile } from "@docspace/ui-kit/utils/device";
 import classNames from "classnames";
 import styles from "./sub-components/StyledPortalIntegration.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const PortalIntegration = (props) => {
   const { t, currentColorScheme, sdkLink, theme, tReady } = props;
 
-  const isSmall = useRef(
-    (() => {
-      const content = document.querySelector(".section-wrapper-content");
-      const rect = content.getBoundingClientRect();
-      return rect.width <= 600;
-    })(),
-  );
-
-  const [isFlex, setIsFlex] = useState(isSmall.current);
+  const [isFlex, setIsFlex] = useState(false);
 
   const navigate = useNavigate();
 
@@ -86,9 +79,9 @@ const PortalIntegration = (props) => {
 
   const presetsData = [
     {
-      title: t("Common:ProductName"),
+      title: getBrandName("ProductName"),
       description: t("PortalDescription", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
       }),
       image: theme.isBase ? PortalImg : PortalImgDark,
       handleOnClick: navigateToPortal,
@@ -101,7 +94,7 @@ const PortalIntegration = (props) => {
     },
     {
       title: t("Common:Editor"),
-      description: t("EditorDescription"),
+      description: t("EditorPresetDescription"),
       image: theme.isBase ? EditorImg : EditorImgDark,
       handleOnClick: navigateToEditor,
     },
@@ -126,7 +119,7 @@ const PortalIntegration = (props) => {
     {
       title: t("Common:Custom"),
       description: t("CustomDescription", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
       }),
       image: theme.isBase ? CustomImg : CustomImgDark,
       handleOnClick: navigateToCustom,
@@ -143,20 +136,18 @@ const PortalIntegration = (props) => {
     if (tReady) setDocumentTitle(t("JavascriptSdk"));
   }, [tReady]);
 
-  const onResize = (entries) => {
-    const belowThreshold = entries[0].contentRect.width <= 600;
-    if (belowThreshold !== isSmall.current) {
-      isSmall.current = belowThreshold;
-      setIsFlex(belowThreshold);
-    }
-  };
-
   useEffect(() => {
-    const rObserver = new ResizeObserver(onResize);
     const content = document.querySelector(".section-wrapper-content");
+    if (!content) return;
+
+    const onResize = (entries) => {
+      setIsFlex(entries[0].contentRect.width <= 600);
+    };
+
+    const rObserver = new ResizeObserver(onResize);
     rObserver.observe(content);
     return () => {
-      rObserver.unobserve(content);
+      rObserver.disconnect();
     };
   }, []);
 
@@ -164,7 +155,7 @@ const PortalIntegration = (props) => {
     <div className={classNames(styles.sdkContainer, { [styles.isMobile]: isMobile() })}>
       <div className={styles.categoryDescription}>
         <Text className="sdk-description">
-          {t("SDKDescription", { productName: t("Common:ProductName") })}
+          {t("SDKDescription", { productName: getBrandName("ProductName") })}
         </Text>
         <Link
           color={currentColorScheme?.main?.accent}
@@ -179,7 +170,7 @@ const PortalIntegration = (props) => {
         <CSPSetting t={t} theme={theme} />
       </div>
       <div className={classNames(styles.categoryHeader, { [styles.isMobile]: isMobile() })}>
-        {t("SelectModeEmbedding", { productName: t("Common:ProductName") })}
+        {t("SelectModeEmbedding", { productName: getBrandName("ProductName") })}
       </div>
       <Text lineHeight="20px" color={theme.sdkPresets.secondaryColor}>
         {t("InitializeSDK")}

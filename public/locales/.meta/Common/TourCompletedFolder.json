@@ -3,13 +3,21 @@
   "content": "Each completed file is named with a number, the submitter's name, and the submission date. Use the AI Chat button to ask questions or get summaries about submissions.",
   "content_en_sha1_hash": "67322cfe2b2165935ee717df44eb105df580ae8b",
   "created_at": "2026-03-31T15:18:26.684Z",
-  "updated_at": "2026-03-31T15:18:26.684Z",
+  "updated_at": "2026-04-23T17:24:02.164Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a tooltip message that appears when a user is guided through the \"Completed submissions\" folder in the forms section. It explains the naming convention for completed files and highlights the AI Chat feature for interacting with submissions.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:40:37.494Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_utils/tourSteps.ts",
+      "line_number": 282,
+      "context": "callbacks,\n ),\n {\n target: '[data-tour=\"forms-grid\"]',\n content: t(\n \"Common:TourCompletedFolder\",\n \"Each completed file is named with a number, the submitter's name, and the submission date. Use the AI Chat button to ask questions or get summaries about submissions.\",\n ),\n title: t(\"Common:TourCompletedFolderTitle\", \"Completed submissions\"),\n data: {\n page: \"/forms/completed-forms\",",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

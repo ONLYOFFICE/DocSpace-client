@@ -33,6 +33,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.left.react.svg?url";
 import { Link } from "@docspace/ui-kit/components/link";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const DEFAULT_CREATION_TEXT =
 	"A {{productName}} account will be created for {{email}}. Please, complete your registration:";
@@ -85,7 +86,7 @@ export const GreetingUserContainer = ({
 					defaults={DEFAULT_CREATION_TEXT}
 					values={{
 						email,
-						productName: t("Common:ProductName"),
+						productName: getBrandName("ProductName"),
 					}}
 					components={{
 						1: (

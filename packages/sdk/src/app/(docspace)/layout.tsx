@@ -41,7 +41,7 @@ import { Layout } from "./_components/layout";
 import { SectionWrapper as Section } from "./_components/section";
 import FilesMediaViewer from "./_components/FilesMediaViewer";
 import SelectionArea from "./_components/selection-area";
-import Header, { HeaderProps } from "./_components/header";
+import Header, { type HeaderProps } from "./_components/header";
 import { Filter, FilterProps } from "./_components/filter";
 import { DeviceTypeObserver } from "./_components/DeviceTypeObserver";
 import Dialogs from "./_components/dialogs";
@@ -66,7 +66,8 @@ export default async function DocspaceLayout({
     shareKey,
   } as FilterProps;
 
-  const actions: unknown[] = [getFilesSettings()];
+  let filesSettings: TFilesSettings | undefined;
+  let folderList: TGetFolder | undefined;
 
   if (filter) {
     const pathname = hdrs.get(PATHNAME_HEADER) ?? "";
@@ -78,30 +79,46 @@ export default async function DocspaceLayout({
 
     filesFilter.pageCount = PAGE_COUNT;
 
-    actions.push(getFolder(filesFilter.folder, filesFilter));
+    try {
+      [filesSettings, folderList] = await Promise.all([
+        getFilesSettings(),
+        getFolder(filesFilter.folder, filesFilter),
+      ]);
+    } catch {
+      filesSettings = await getFilesSettings().catch(() => undefined);
+    }
+  } else {
+    filesSettings = await getFilesSettings().catch(() => undefined);
   }
 
-  const [filesSettings, folderList] = await Promise.all(actions);
+  if (folderList) {
+    const { current, pathParts, folders, files } = folderList;
 
-  const { current, pathParts, folders, files } = folderList as TGetFolder;
+    navigationProps.current = current;
+    navigationProps.pathParts = pathParts;
+    navigationProps.isEmptyList = !folders.length && !files.length;
+  }
 
-  navigationProps.current = current;
-  navigationProps.pathParts = pathParts;
-  navigationProps.isEmptyList = !folders.length && !files.length;
+  const folders = folderList?.folders ?? [];
+  const files = folderList?.files ?? [];
 
   return (
     <main style={{ width: "100%", height: "100%" }}>
       <Layout initSettingsStoreData={{ viewAs: initViewAs }}>
         <RootScrollbar>
           <Section
-            sectionHeaderContent={<Header {...navigationProps} />}
-            sectionFilterContent={<Filter {...filterProps} />}
+            sectionHeaderContent={
+              <Header {...navigationProps} />
+            }
+            sectionFilterContent={filter ? <Filter {...filterProps} /> : null}
             sectionBodyContent={children}
             isEmptyPage={folders.length === 0 ? files.length === 0 : false}
-            filesFilter={filter!}
+            filesFilter={filter ?? ""}
           />
           <SelectionArea />
-          <FilesMediaViewer filesSettings={filesSettings as TFilesSettings} />
+          <FilesMediaViewer
+            filesSettings={filesSettings as TFilesSettings}
+          />
           <DeviceTypeObserver />
           <Dialogs />
         </RootScrollbar>

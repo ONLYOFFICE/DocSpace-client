@@ -1,3 +1,5 @@
+@use "@docspace/ui-kit/styles/mixins";
+
 .chatPanel {
   position: relative;
   z-index: 1;
@@ -12,13 +14,12 @@
   &[data-position="right"] {
     order: 1;
   }
-}
 
-@media (max-width: 600px) {
-  .chatPanel {
+  @include mixins.mobile {
     position: fixed;
     inset: 0;
     width: 100% !important;
+    height: 100dvh;
     z-index: 310;
     border: none;
     transition: none;
@@ -46,6 +47,10 @@
     align-items: center;
     gap: 12px;
   }
+
+  @include mixins.mobile {
+    height: var(--section-header-height-mobile);
+  }
 }
 
 .positionIconFlipped {
@@ -61,6 +66,10 @@
   position: relative;
   --section-header-height: 0px;
   --section-submenu-height: 0px;
+
+  @include mixins.mobile {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
 
   :global(.chat-container) {
     height: auto;

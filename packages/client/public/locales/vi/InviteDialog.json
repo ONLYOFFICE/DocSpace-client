@@ -17,7 +17,6 @@
   "InviteViaLinkDescriptionAgentMembers": "Tạo một liên kết phổ quát cho các thành viên {{productName}} để tự thực hiện ủy quyền trong hệ thống đại lý.",
   "InviteViaLinkDescriptionRoomGuest": "Tạo một liên kết phổ quát để tự xác thực trong phòng với tư cách là khách.",
   "InviteViaLinkDescriptionRoomMembers": "Tạo một liên kết phổ quát cho các thành viên {{productName}} để tự thực hiện ủy quyền trong phòng.",
-  "LinkCopySuccess": "Liên kết đã được sao chép",
   "SendInvitation": "Gửi lời mời",
   "UserAgentMaxAvailableRoleWarning": "Khách và Người dùng không thể được chỉ định làm người quản lý Đại lý. Chỉ có quản trị viên Phòng và {{productName}} mới phù hợp với vai trò được chỉ định.",
   "UserMaxAvailableRoleWarning": "Khách và Người dùng không thể được chỉ định làm người quản lý Phòng. Chỉ Phòng và quản trị viên {{productName}} mới phù hợp với vai trò được chỉ định.",

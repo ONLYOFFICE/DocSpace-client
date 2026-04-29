@@ -3,17 +3,18 @@
   "content": "Select the default {{aiProvider}} and model for all features across {{productName}} ({{aiAgents}}, document editors, etc.)",
   "content_en_sha1_hash": "c109f910ea4554e6c57cf82c8ec650e1603a6500",
   "created_at": "2026-02-19T13:36:29.990Z",
-  "updated_at": "2026-03-26T08:26:58.108Z",
+  "updated_at": "2026-04-11T21:03:03.070Z",
   "comment": {
-    "text": "This text explains the purpose of setting a default AI provider and model for all features within the product. It appears as a description on the AI settings page, guiding users to configure the default AI experience. Translators should ensure the phrasing accurately reflects the concept of a default selection for various AI-powered features.",
+    "text": "This is a descriptive text explaining the purpose of selecting a default AI provider and model. It appears below the \"Default AI Provider\" heading in the AI settings. It contains variables for the AI provider name (e.g., \"OpenAI\"), AI agents (e.g., \"AI Assistants\"), and the product name (e.g., \"ONLYOFFICE DocSpace\").",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:28:04.668Z"
+    "updated_at": "2026-04-11T21:03:03.070Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/DefaultProvider.tsx",
-      "line_number": 355,
-      "context": "fontSize=\"16px\"\n >\n {t(\"AISettings:DefaultProviderTitle\")}\n </Heading>\n <Text className={styles.description} lineHeight=\"20px\">\n {t(\"AISettings:DefaultProviderDescription\", {\n aiProvider: t(\"Common:AIProvider\"),\n aiAgents: t(\"Common:AIAgents\"),\n productName: t(\"Common:ProductName\"),\n })}\n </Text>",
+      "line_number": 356,
+      "context": "fontSize=\"16px\"\n >\n {t(\"AISettings:DefaultProviderTitle\")}\n </Heading>\n <Text className={styles.description} lineHeight=\"20px\">\n {t(\"AISettings:DefaultProviderDescription\", {\n aiProvider: t(\"Common:AIProvider\"),\n aiAgents: t(\"Common:AIAgents\"),\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>",
       "module": "/packages/client"
     }
   ],

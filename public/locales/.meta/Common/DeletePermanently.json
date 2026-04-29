@@ -3,11 +3,12 @@
   "content": "Delete permanently",
   "content_en_sha1_hash": "e63b5153bde0d2b885dec00616d064be3e88c11b",
   "created_at": "2025-05-19T21:30:44.471Z",
-  "updated_at": "2026-03-20T09:07:45.482Z",
+  "updated_at": "2026-04-11T20:55:19.318Z",
   "comment": {
-    "text": "\"This translation key is used to display a message that confirms permanent deletion. In the CreateEditRoomDialog component, this key is applied as the label of an action button, prompting users to permanently delete files.\"",
+    "text": "This is a button label or a confirmation dialog message. It indicates that an item will be permanently removed and cannot be recovered, bypassing the trash or recycle bin.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:44.028Z"
+    "updated_at": "2026-04-11T20:55:19.318Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -21,6 +22,18 @@
       "line_number": 189,
       "context": "if (isTemplate) {\n return t(\"Common:Delete\");\n }\n \n if (isRoomDelete || isAIAgent) {\n return t(\"Common:DeletePermanently\");\n }\n \n if (isRecycleBinFolder)\n return t(\"Common:DeleteForeverButton\");",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsActions.ts",
+      "line_number": 89,
+      "context": "[],\n );\n \n const deleteFromList = useCallback(\n async (fileId: number) => {\n if (!window.confirm(t(\"Common:DeletePermanently\") + \"?\")) return;\n \n try {\n await deleteFile(fileId, false, true);\n const newItems = formsListStore.items.filter((f) => f.id !== fileId);\n formsListStore.setItems(newItems, newItems.length);",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsActions.ts",
+      "line_number": 89,
+      "context": "[],\n );\n \n const deleteFromList = useCallback(\n async (fileId: number) => {\n if (!window.confirm(t(\"Common:DeletePermanently\") + \"?\")) return;\n \n try {\n await deleteFile(fileId, false, true);\n const newItems = formsListStore.items.filter((f) => f.id !== fileId);\n formsListStore.setItems(newItems, newItems.length);",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -63,13 +76,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Διαγραφή μόνιμα\" is understandable, a more natural and commonly used translation for \"Delete permanently\" would be \"Μόνιμη διαγραφή\". The current translation places the adverb 'μόνιμα' after the verb, which isn't typical Greek sentence structure.",
-          "suggestion": "Μόνιμη διαγραφή"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -117,13 +124,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'ລົບລ້າງຖາວອນ' is understandable, it's a rather literal and slightly awkward translation of 'Delete permanently'. A more natural and common phrasing would convey the meaning more effectively.",
-          "suggestion": "Consider 'ລົບຖິ້ມຢ່າງຖາວອນ' or 'ລົບຖິ້ມຖาวร' which are more commonly used and sound more natural in Lao."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -189,25 +190,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Обриши трајно\" is understandable, a more idiomatic and accurate translation of \"Delete permanently\" would be \"Делетно избриши\" or \"Трајно избриши\". \"Обриши\" implies a simple deletion, whereas \"Delete permanently\" implies a more irreversible action.",
-          "suggestion": "Делетно избриши"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Obriši trajno' is a literal translation of 'Delete permanently' but isn't the most natural or idiomatic way to express this in Serbian. A more common and natural phrasing would be 'Kada obrišete...' or 'Trajno brisanje'.",
-          "suggestion": "Consider alternatives like 'Kada obrišete...' or 'Trajno brisanje'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -229,6 +218,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

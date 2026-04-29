@@ -3,10 +3,12 @@
   "EmptyFormGalleryScreenDescription": "Hakuasi vastaavia tuloksia ei löytynyt",
   "ErrorViewDescription": "Ole hyvä ja yritä myöhemmin uudelleen",
   "ErrorViewDescriptionNetworkError": "Näyttää siltä, ettei Internet-yhteyttä ole",
+  "ErrorViewHeader": "Galleria on toistaiseksi poissa käytöstä.",
+  "GalleryTitle": "{{organizationName}} Malligalleria",
+  "SelectTemplate": "Valitse malli",
+  "SubmitToGalleryDialogMainInfo": "Lähetä mallipohjasi julkiseen galleriaan, jotta muut voivat käyttää sitä työssään. Kun mallipohja on läpäissyt moderoinnin, ilmoitamme sinulle ja palkitsemme panoksestasi.",
   "SuggestChanges": "Ehdota muutoksia",
   "TemplateInfo": "Mallin tiedot",
-  "ViewAllTemplates": "Näytä kaikki mallit",
-  "ErrorViewHeader": "Galleria on toistaiseksi poissa käytöstä.",
-  "SelectTemplate": "Valitse malli",
-  "UploadGallery": "Lähetä Galleriaan"
+  "UploadGallery": "Lähetä Galleriaan",
+  "ViewAllTemplates": "Näytä kaikki mallit"
 }

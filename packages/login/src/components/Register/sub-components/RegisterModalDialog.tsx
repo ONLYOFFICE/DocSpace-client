@@ -110,7 +110,10 @@ const RegisterModalDialog = ({
             hasError={isShowError ? emailErr : undefined}
             labelVisible={false}
             errorMessage={
-              errorText ? t(`Common:${errorText}`) : t("Common:RequiredField")
+              errorText
+                // biome-ignore lint/plugin/no-dynamic-i18n-key: errorText is a runtime-provided key fragment composed with "Common:" prefix
+                ? t(`Common:${errorText}`)
+                : t("Common:RequiredField")
             }
             dataTestId="register_email_field"
           >

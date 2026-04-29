@@ -3,17 +3,18 @@
   "content": "Import from {{organizationName}} Workspace",
   "content_en_sha1_hash": "e724af9a3984c03739c4b609de92912ffbbdbb33",
   "created_at": "2025-05-19T21:30:51.672Z",
-  "updated_at": "2026-03-20T09:07:45.560Z",
+  "updated_at": "2026-04-11T21:23:53.750Z",
   "comment": {
-    "text": "This translation key is used for the \"Import from {{organizationName}} Workspace\" text, which appears on a button or similar element in the Portal Settings page, allowing users to import data from a specified organization workspace.",
+    "text": "This is a button label for importing data. It appears when the user is importing from a generic \"Workspace\" and includes the `organizationName` variable, which will be replaced by the name of the organization.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:05.288Z"
+    "updated_at": "2026-04-11T21:23:53.750Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
-      "line_number": 370,
-      "context": "? workspace === \"GoogleWorkspace\"\n ? t(\"ImportFromGoogle\")\n : workspace === \"Nextcloud\"\n ? t(\"ImportFromNextcloud\")\n : workspace === \"Workspace\"\n ? t(\"ImportFromPortal\", {\n organizationName: logoText,\n })\n : t(\"DataImport\")\n : !standalone && isPaymentPage\n ? t(\"Billing\")",
+      "line_number": 371,
+      "context": "? workspace === \"GoogleWorkspace\"\n ? t(\"ImportFromGoogle\")\n : workspace === \"Nextcloud\"\n ? t(\"ImportFromNextcloud\")\n : workspace === \"Workspace\"\n ? t(\"ImportFromPortal\", {\n organizationName: logoText,\n })\n : t(\"DataImport\")\n : !standalone && isPaymentPage\n ? t(\"Common:Billing\")",
       "module": "/packages/client"
     }
   ],
@@ -39,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Входирай от {{organizationName}} Workspace\" is not the most natural or accurate translation of \"Import from {{organizationName}} Workspace\". \"Входирай\" implies 'log in' or 'enter', not 'import'.",
-          "suggestion": "Импортирай от {{organizationName}} Workspace"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -87,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation uses a hyphen where a space might be preferred. While acceptable, 'Workspace-ից' could be improved to 'աշխատասեղանից' (ashkhatasեղanits) for a more natural flow in Armenian.",
-          "suggestion": "Ներմուծում {{organizationName}} աշխատասեղանից"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -165,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '{{organizationName}} වැඩබිම් වෙතින් ආනයනය කරන්න' is a literal translation. A more natural and idiomatic Sinhala translation for 'Import from {{organizationName}} Workspace' might be something along the lines of '{{organizationName}} වැඩබිමෙන් දත්ත ආපනයනය කරන්න' or '{{organizationName}} වැඩබිමට දත්ත ආපනයනය කරන්න'. The current translation feels somewhat awkward in Sinhala.",
-          "suggestion": "{{organizationName}} වැඩබිමෙන් දත්ත ආපනයනය කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -189,30 +172,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation \"Увези са {{organizationName}} Workspace-а\" uses the verb 'увези' (uvesi) which means 'import' in the sense of bringing something in (like smuggling). The correct term would convey 'Import from' in the sense of 'take data from'.",
-          "suggestion": "Извуци са {{organizationName}} Workspace-а"
-        },
-        {
-          "type": "formatting",
-          "description": "The Serbian translation adds a hyphen to Workspace. While not technically incorrect, it's unusual in a UI context and can be inconsistent.",
-          "suggestion": "Извуци са {{organizationName}} Workspace"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation includes an unnecessary hyphen before 'a' in 'Workspace-a'. It should be 'Workspace' or 'Workspace-om'.",
-          "suggestion": "Uvezi sa {{organizationName}} Workspace"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -234,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

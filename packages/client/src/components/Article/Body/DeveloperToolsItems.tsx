@@ -117,6 +117,8 @@ const DeveloperToolsItems = ({
           location.pathname === item.path ||
           location.pathname.startsWith(`${item.path}/`);
         const isFirstChild = index === 0;
+        const isLastChild = index === visibleItems.length - 1;
+        // biome-ignore lint/plugin/no-dynamic-i18n-key: translationKey literals on items[] are captured by the locales scanner
         const title = t(item.translationKey);
 
         return (
@@ -132,7 +134,7 @@ const DeveloperToolsItems = ({
             folderId={item.id}
             LinkRouter={Link}
             withAnimation={!isMobileView}
-            isEndOfBlock={isFirstChild}
+            isEndOfBlock={isFirstChild || isLastChild}
           />
         );
       })}

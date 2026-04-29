@@ -17,8 +17,8 @@
   "RoleGuestDescriprion": "Gostje lahko dostopajo do sob, v katere so bili povabljeni, ter ustvarjajo in urejajo dokumente, če so jim bile dodeljene ustrezne vloge v sobi.",
   "SearchByHeadOfGroup": "Iskanje po vodji skupine",
   "SearchByOwner": "Iskanje po lastnikih",
-  "SubNewForm": "Od začetka",
-  "SubNewFormFile": "Iz obstoječe tekstovne datoteke",
+  "SubNewForm": "Prazno",
+  "SubNewFormFile": "Iz tekstovne datoteke",
   "ThirdPartyInfo": "Spremenite podatke tretjih oseb",
   "ThirdPartyTitle": "Storitve tretjih oseb",
   "TrashItemsDeleteSuccess": "Izbrani elementi so bili uspešno izbrisani iz {{sectionName}}"

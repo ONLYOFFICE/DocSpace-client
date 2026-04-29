@@ -56,6 +56,8 @@ import type {
   TGetAgents,
   TDefaultProvider,
   TUpdateDefaultProviderData,
+  TModelSettingsDto,
+  TPreviewModelsRequest,
 } from "./types";
 
 const baseUrl = "/ai";
@@ -107,6 +109,31 @@ export const getAvailableProviderUrls = async () => {
     method: "get",
     url: `${baseUrl}/providers/available`,
   })) as TProviderTypeWithUrl[];
+
+  return res;
+};
+
+export const previewProviderModels = async (
+  data: TPreviewModelsRequest,
+  abortController?: AbortController | null,
+) => {
+  const res = (await request({
+    method: "post",
+    url: `${baseUrl}/providers/models/preview`,
+    data,
+    signal: abortController?.signal,
+  })) as TModelSettingsDto[];
+
+  return res;
+};
+
+export const getProviderModelSettings = async (
+  providerId: TAiProvider["id"],
+) => {
+  const res = (await request({
+    method: "get",
+    url: `${baseUrl}/providers/${providerId}/models`,
+  })) as TModelSettingsDto[];
 
   return res;
 };

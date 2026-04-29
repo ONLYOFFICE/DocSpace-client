@@ -9,7 +9,7 @@
   "TitleSharing": "Mời các thành viên {{productName}} khác vào phòng để điền vào các biểu mẫu PDF đã tải lên. Sao chép liên kết truy cập công khai để chia sẻ phòng với người dùng bên ngoài.",
   "TitleStarting": "Khi một biểu mẫu được mở để điền, một bản sao riêng lẻ sẽ tự động được tạo cho mỗi người trả lời và được lưu vào thư mục Đang tiến hành. Điều đó có nghĩa là biểu mẫu đã được bắt đầu điền nhưng chưa được hoàn thành.",
   "TitleSubmitting": "Khi nút Hoàn thành & Gửi trên bản sao biểu mẫu đã mở được nhấp vào, nó sẽ được chuyển đến thư mục Hoàn thành.",
-  "WelcomeDescription": "Tại đây, bạn có thể tổ chức điền biểu mẫu PDF đơn giản, dễ dàng thu thập và phân tích câu trả lời. Bạn đã sẵn sàng để bắt đầu chưa?",
   "WelcomeFillingForm": "Chào mừng bạn đến với Phòng Điền Biểu Mẫu!",
-  "WelcomeStartTutorial": "Cùng khám phá nhanh nhé"
+  "WelcomeStartTutorial": "Cùng khám phá nhanh nhé",
+  "WelcomeTipsDescription": "Tại đây, bạn có thể tổ chức điền biểu mẫu PDF đơn giản, dễ dàng thu thập và phân tích câu trả lời. Bạn đã sẵn sàng để bắt đầu chưa?"
 }

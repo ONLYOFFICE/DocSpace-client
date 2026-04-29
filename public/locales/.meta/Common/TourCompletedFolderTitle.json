@@ -3,13 +3,21 @@
   "content": "Completed submissions",
   "content_en_sha1_hash": "1fd53940677c024b1bb98327953b52df8c3ec2c8",
   "created_at": "2026-03-31T15:18:26.702Z",
-  "updated_at": "2026-03-31T15:18:26.702Z",
+  "updated_at": "2026-04-23T17:24:02.164Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is the title for a tour step explaining the \"Completed submissions\" folder. It appears as a short label.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:40:36.488Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_utils/tourSteps.ts",
+      "line_number": 285,
+      "context": "target: '[data-tour=\"forms-grid\"]',\n content: t(\n \"Common:TourCompletedFolder\",\n \"Each completed file is named with a number, the submitter's name, and the submission date. Use the AI Chat button to ask questions or get summaries about submissions.\",\n ),\n title: t(\"Common:TourCompletedFolderTitle\", \"Completed submissions\"),\n data: {\n page: \"/forms/completed-forms\",\n openCompletedFolder: true,\n } satisfies TourStepData,\n skipBeacon: true,",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

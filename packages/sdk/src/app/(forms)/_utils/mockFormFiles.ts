@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
+import type { RoomMember } from "@docspace/shared/api/rooms/types";
 import {
   FileStatus,
   FolderType,
@@ -202,6 +203,50 @@ const MOCK_USERS = [
   "David Wilson",
 ];
 
+const MOCK_LIBRARY_LANGUAGES = [
+  "English",
+  "French",
+  "German",
+  "Spanish",
+  "Italian",
+  "Portuguese",
+  "Russian",
+  "Chinese",
+];
+
+export function createMockLibraryFolders(): TFolder[] {
+  const now = new Date().toISOString();
+
+  return MOCK_LIBRARY_LANGUAGES.map(
+    (title, i) =>
+      ({
+        id: -(i + 400),
+        parentId: 0,
+        title,
+        filesCount: 0,
+        foldersCount: 3,
+        new: 0,
+        mute: false,
+        pinned: false,
+        private: false,
+        rootFolderId: 0,
+        canShare: false,
+        security: mockFolderSecurity,
+        access: ShareAccessRights.None,
+        shared: false,
+        created: now,
+        createdBy: mockUser,
+        updated: now,
+        updatedBy: mockUser,
+        rootFolderType: FolderType.USER,
+        isFolder: true,
+        indexing: false,
+        denyDownload: false,
+        fileEntryType: 0,
+      }) as unknown as TFolder,
+  );
+}
+
 export function createMockCompletedFiles(folderTitle: string): TFile[] {
   const baseDate = new Date("2026-03-10");
 
@@ -245,4 +290,35 @@ export function createMockCompletedFiles(folderTitle: string): TFile[] {
       fileEntryType: 1,
     } as unknown as TFile;
   });
+}
+
+function mockMember(
+  id: string,
+  displayName: string,
+  email: string,
+  access: number,
+  isAdmin: boolean,
+): RoomMember {
+  return {
+    access,
+    canEditAccess: false,
+    isLocked: false,
+    isOwner: false,
+    subjectType: 1,
+    sharedTo: {
+      id,
+      displayName,
+      email,
+      avatar: "",
+      hasAvatar: false,
+      isAdmin,
+      isOwner: false,
+    },
+  } as unknown as RoomMember;
+}
+
+export function createMockRoomMembers(): RoomMember[] {
+  return [
+    mockMember("mock-admin-1", "Alice Johnson", "alice.johnson@example.com", 1 /* FullAccess */, true),
+  ];
 }

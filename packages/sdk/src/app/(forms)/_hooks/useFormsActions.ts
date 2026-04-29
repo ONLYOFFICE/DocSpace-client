@@ -49,7 +49,7 @@ import { useSDKConfig } from "@/providers/SDKConfigProvider";
 import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
 import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
-import useFormsData from "./useFormsData";
+import { useFormsDataContext } from "../_context/FormsDataContext";
 
 type UseFormsActionsProps = { t: TTranslation };
 
@@ -58,7 +58,7 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
   const { openEditor } = useFormsNavigationStore();
   const { closePanel } = useFormsAiAgentStore();
   const formsListStore = useFormsListStore();
-  const { fetchSection } = useFormsData();
+  const { fetchSection } = useFormsDataContext();
 
   const openForm = useCallback(
     (file: TFile, action: EditorAction = "edit") => {
@@ -86,6 +86,8 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
 
   const deleteFromList = useCallback(
     async (fileId: number) => {
+      if (!window.confirm(t("Common:DeletePermanently") + "?")) return;
+
       try {
         await deleteFile(fileId, false, true);
         const newItems = formsListStore.items.filter((f) => f.id !== fileId);
@@ -136,6 +138,8 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
 
   const deleteFolderFromList = useCallback(
     async (folderId: number) => {
+      if (!window.confirm(t("Common:DeletePermanently") + "?")) return;
+
       try {
         await deleteFolderApi(folderId, false, true);
         const newFolders = formsListStore.folders.filter(
@@ -153,6 +157,7 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
     async (file: TFile) => {
       try {
         await manageFormFilling(file.id, FormFillingManageAction.Start);
+        toastr.success(t("Common:ReadyToFillOut"));
         await fetchSection();
       } catch (error) {
         toastr.error(error as string);

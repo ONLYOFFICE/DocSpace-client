@@ -37,6 +37,7 @@ import { isDesktop } from "@docspace/shared/utils";
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
 import styles from "./StyledDeleteData.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const PortalDeactivation = (props) => {
   const { t, tReady, owner, currentColorScheme, sendActivationLink } = props;
@@ -49,7 +50,7 @@ const PortalDeactivation = (props) => {
 
   useEffect(() => {
     setDocumentTitle(
-      t("PortalDeactivation", { productName: t("Common:ProductName") }),
+      t("PortalDeactivation", { productName: getBrandName("ProductName") }),
     );
     onCheckView();
     window.addEventListener("resize", onCheckView);
@@ -81,7 +82,7 @@ const PortalDeactivation = (props) => {
       </Text>
       <Text className={styles.helper}>
         {t("PortalDeactivationHelper", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
         })}
       </Text>
       <div className={styles.buttonWrapper}>
@@ -98,7 +99,7 @@ const PortalDeactivation = (props) => {
           <Text fontSize="12px" fontWeight="600">
             {t("MainBar:ConfirmEmailHeader", {
               email: owner.email,
-              productName: t("Common:ProductName"),
+              productName: getBrandName("ProductName"),
             })}
             <Link
               className={styles.requestAgainLink}

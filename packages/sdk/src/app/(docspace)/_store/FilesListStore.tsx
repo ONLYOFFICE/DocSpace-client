@@ -29,10 +29,13 @@
 import React from "react";
 import { makeAutoObservable } from "mobx";
 
+import { FolderType } from "@docspace/shared/enums";
+
 import { TFileItem, TFolderItem } from "../_hooks/useItemList";
 
 class FilesListStore {
   items: (TFileItem | TFolderItem)[] = [];
+  rootFolderType: FolderType | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -40,6 +43,24 @@ class FilesListStore {
 
   setItems = (items?: (TFileItem | TFolderItem)[]) => {
     this.items = items || [];
+  };
+
+  setRootFolderType = (type: FolderType) => {
+    this.rootFolderType = type;
+  };
+
+  updateItemFavorite = (id: number | string, isFavorite: boolean) => {
+    const item = this.items.find((i) => i.id === id);
+    if (item) item.isFavorite = isFavorite;
+  };
+
+  removeItem = (id: number | string) => {
+    this.items = this.items.filter((i) => i.id !== id);
+  };
+
+  updateItemTitle = (id: number | string, title: string) => {
+    const item = this.items.find((i) => i.id === id);
+    if (item) item.title = title;
   };
 
   get itemsCount() {

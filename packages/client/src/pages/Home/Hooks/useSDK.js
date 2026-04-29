@@ -31,6 +31,7 @@ import {
   frameCallbackData,
   frameCallCommand,
   createPasswordHash,
+  frameHandlePing,
 } from "@docspace/shared/utils/common";
 
 const useSDK = ({
@@ -59,10 +60,14 @@ const useSDK = ({
   isLoading,
 }) => {
   const handleMessage = async (e) => {
+    if (window.self === window.parent || e.source !== window.parent) return;
+
     const eventData = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
 
+    if (frameHandlePing(eventData)) return;
+
     if (eventData.data) {
-      const { data, methodName } = eventData.data;
+      const { data, methodName, callId } = eventData.data;
 
       let res;
 
@@ -195,7 +200,7 @@ const useSDK = ({
         res = err;
       }
 
-      frameCallbackData(res);
+      frameCallbackData(res, callId);
     }
   };
 

@@ -3,13 +3,21 @@
   "content": "Pick a template, edit and fill it in, then collect and analyze responses with AI agents",
   "content_en_sha1_hash": "012f1a828de9e96d7d886497d65bc76f3223234c",
   "created_at": "2026-03-31T15:18:14.806Z",
-  "updated_at": "2026-03-31T15:18:14.806Z",
+  "updated_at": "2026-04-11T20:50:14.819Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a descriptive paragraph displayed on the Library landing page, explaining the functionality of picking, editing, filling, collecting, and analyzing responses using AI agents.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:50:14.819Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/library-landing/HeroSection.tsx",
+      "line_number": 73,
+      "context": "return (\n <section className={styles.hero}>\n <h1 className={styles.heroTitle}>{t(\"Common:LibraryHeroTitle\")}</h1>\n <p className={styles.heroDescription}>\n {t(\"Common:LibraryHeroDescription\")}\n </p>\n \n <HeroSearchBar langId={langId} roomId={roomId} libraryId={libraryId} />\n \n <div className={styles.heroContent}>",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

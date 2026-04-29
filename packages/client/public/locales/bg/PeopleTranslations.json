@@ -28,7 +28,7 @@
   "StandardLogin": "Стандартен вход",
   "SuccessChangeGuestStatus": "Статусът на гост беше променен успешно",
   "SuccessChangeUserStatus": "Потребителският статус беше променен успешно",
-  "SuccessCopyContantLink": "Линкът за контакт е копиран успешно. Линкът е <strong>валиден 7 дни.</strong>",
+  "SuccessCopyContantLink": "Линкът за контакт е копиран успешно. Линкът е <strong>валиден за 7 дни.</strong>",
   "SuccessDeleteGroup": "Групата беше изтрита успешно",
   "SuccessDeleteGroups": "Групите бяха изтрити успешно",
   "SuccessDeletePersonalData": "Личните данни бяха изтрити успешно",

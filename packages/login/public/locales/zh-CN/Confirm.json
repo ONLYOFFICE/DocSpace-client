@@ -20,6 +20,8 @@
   "GetCode": "获取代码",
   "GetSuitableApp": "获取合适的应用",
   "GetSuitableAppDescription": "使用兼容的应用，例如适用于 <1>Android</1> 和 <4>iOS</4>的Google Authenticator，或适用于 <8>Windows Phone</8>的Authenticator。",
+  "InviteLinkQuotaErrorBody": "通过链接注册已不可用，因为已达到限制。",
+  "InviteQuotaErrorCustomizedBody": "您将在 10 秒后被重定向到 <1>登录</1> 页面。",
   "LoginRegistryButton": "加入",
   "Newsletter": "我想订阅{{organizationName}}资讯",
   "PassworResetTitle": "现在您可创建新密码。",
@@ -37,7 +39,5 @@
   "TfaSubTitle": "请按照简单的步骤继续使用此{{productName}}：",
   "TfaTitle": "启用双重身份验证以确保安全访问",
   "VerifyConnection": "验证连接",
-  "VerifyConnectionDescription": "请在下方输入身份验证器应用生成的6位验证码以完成设置。",
-  "InviteLinkQuotaErrorBody": "通过链接注册已不可用，因为已达到限制。",
-  "InviteQuotaErrorCustomizedBody": "您将在 10 秒后被重定向到 <1>登录</1> 页面。"
+  "VerifyConnectionDescription": "请在下方输入身份验证器应用生成的6位验证码以完成设置。"
 }

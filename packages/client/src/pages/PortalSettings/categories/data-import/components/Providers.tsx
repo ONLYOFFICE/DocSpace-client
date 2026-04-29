@@ -32,7 +32,7 @@ import { ReactSVG } from "react-svg";
 import { Text } from "@docspace/ui-kit/components/text";
 
 import GoogleWorkspaceSvgUrl from "PUBLIC_DIR/images/workspace.google.react.svg?url";
-import NextcloudWorkspaceSvgUrl from "PUBLIC_DIR/images/workspace.nextcloud.react.svg?url";
+import NextcloudWorkspaceSvgUrl from "PUBLIC_DIR/images/thirdparties/nextcloud.svg?url";
 import WorkspaceSvgUrl from "PUBLIC_DIR/images/workspace.onlyoffice.react.svg?url";
 import GoogleWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.google.react.svg?url";
 import NextcloudWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.nextcloud.react.svg?url";
@@ -44,6 +44,7 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import styles from "../StyledDataImport.module.scss";
 import DataImportLoader from "../sub-components/DataImportLoader";
 import { ProvidersProps, InjectedProvidersProps } from "../types";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const Providers = (props: ProvidersProps) => {
   const {
@@ -85,7 +86,7 @@ const Providers = (props: ProvidersProps) => {
     <div className={styles.workspacesContainer}>
       <Text className="data-import-description">
         {t("DataImportDescription", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
           organizationName: logoText,
         })}
 

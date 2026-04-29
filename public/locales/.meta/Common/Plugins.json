@@ -3,11 +3,12 @@
   "content": "Plugins",
   "content_en_sha1_hash": "ab2e26dd8b8868a3969cb3321e0c983c0d9d67d4",
   "created_at": "2025-05-19T21:30:47.398Z",
-  "updated_at": "2026-03-26T08:26:58.205Z",
+  "updated_at": "2026-04-12T04:22:52.270Z",
   "comment": {
-    "text": "The translation key \"Plugins\" is used to display the label for a plugin management section in the Portal Settings. It appears as the title of a category and is also used as a button text and dialog header in the UI. The key is likely displayed when the user enables plugins, allowing them to manage plugin settings.",
+    "text": "This is a label for a section or category within the portal settings, referring to the functionality for managing plugins.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:00.811Z"
+    "updated_at": "2026-04-11T20:46:19.385Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -24,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 388,
+      "line_number": 405,
       "context": "{\n id: \"portal-settings_catalog-plugins\",\n key: \"4-3\",\n icon: \"\",\n link: \"plugins\",\n tKey: \"Plugins\",\n isCategory: true,\n },\n {\n id: \"portal-settings_catalog-document-service\",\n key: \"4-4\",",
       "module": "/packages/client"
     }
@@ -93,25 +94,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Միացումներ\" (Miatsumner) while literally meaning 'connections' or 'attachments', doesn't accurately convey the meaning of 'Plugins' in a software context. Plugins typically refer to modules or extensions that add functionality to a program. A more accurate translation would consider terms related to modules, extensions, or add-ons.",
-          "suggestion": "Consider alternative translations such as: \"մոդուլներ\" (modulner - modules), \"ներածքներ\" (neratsqner - extensions), or \"ավելացումներ\" (avelatsumner - additions/supplements). The best choice depends on the specific software context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word 'Plugins' is plural, while the Italian translation 'Plugin' is singular. The translation should reflect the plural form.",
-          "suggestion": "Plugin"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -177,13 +166,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation \"පේනු\" is not the accurate translation for \"Plugins\". It appears to be a transliteration or a misinterpretation.  \"Plugins\" generally refers to add-ons or extensions for software or systems.",
-          "suggestion": "Consider using a more appropriate translation like \"ආමුණනය\" (aamunaya) which means 'extension' or 'addition', or a transliteration that attempts to capture the original English pronunciation in Sinhala script (e.g., \"ප්ලගින්\"). The best choice depends on the context and target audience."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -229,6 +212,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

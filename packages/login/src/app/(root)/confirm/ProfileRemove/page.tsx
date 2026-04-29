@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { redirect } from "next/navigation";
 import { logger } from "logger.mjs";
 import { getSettings, getUserFromConfirm } from "@/utils/actions";
 
@@ -48,6 +49,8 @@ async function Page(props: ProfileRemoveProps) {
     getSettings(),
     getUserFromConfirm(uid ?? "", confirmKey),
   ]);
+
+  if (user === "access-restricted") redirect("/access-restricted");
 
   return settings && typeof settings !== "string" ? (
     <ProfileRemoveForm

@@ -32,6 +32,7 @@ import { FormWrapper } from "@docspace/ui-kit/components/form-wrapper";
 
 import { getColorTheme } from "@/api/settings";
 import AuthClient from "./AuthClient";
+import CreatePortalClient from "./CreatePortalClient";
 
 export default async function AuthPage({
   searchParams,
@@ -39,7 +40,7 @@ export default async function AuthPage({
   searchParams: Promise<Record<string, string | undefined>>;
 }) {
   const params = await searchParams;
-  const { providerName, redirectURL, key, emplType } = params;
+  const { providerName, successRedirectURL, inviteKey, emplType } = params;
 
   if (!providerName) {
     return <div>Missing providerName parameter</div>;
@@ -48,16 +49,22 @@ export default async function AuthPage({
   const cookieStore = await cookies();
   const hasAuth = !!cookieStore.get("asc_auth_key");
 
-  if (hasAuth && redirectURL) {
-    redirect(redirectURL);
+  if (hasAuth && successRedirectURL && providerName !== "createPortal") {
+    redirect(successRedirectURL);
   }
 
   const colorTheme = await getColorTheme();
   const bgPattern = getBgPattern(colorTheme?.selected);
 
-  const confirmHeader = new URLSearchParams(
-    params as Record<string, string>,
-  ).toString();
+  const definedParams = Object.fromEntries(
+    Object.entries(params).filter(([, v]) => v !== undefined),
+  ) as Record<string, string>;
+  const confirmParams = new URLSearchParams(definedParams);
+  if (confirmParams.has("inviteKey")) {
+    confirmParams.set("key", confirmParams.get("inviteKey")!);
+    confirmParams.delete("inviteKey");
+  }
+  const confirmHeader = confirmParams.toString();
 
   return (
     <div style={{ width: "100%", height: "100vh" }}>
@@ -82,15 +89,20 @@ export default async function AuthPage({
         }}
       >
         <FormWrapper id="auth-form">
-          <AuthClient
-            providerName={providerName}
-            redirectURL={redirectURL ?? null}
-            inviteKey={key ?? null}
-            emplType={emplType ?? null}
-            confirmHeader={confirmHeader}
-          />
+          {providerName === "createPortal" ? (
+            <CreatePortalClient />
+          ) : (
+            <AuthClient
+              providerName={providerName}
+              successRedirectURL={successRedirectURL ?? null}
+              inviteKey={inviteKey ?? null}
+              emplType={emplType ?? null}
+              confirmHeader={confirmHeader}
+            />
+          )}
         </FormWrapper>
       </div>
     </div>
   );
 }
+

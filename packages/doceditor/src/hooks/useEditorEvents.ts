@@ -96,6 +96,7 @@ import type {
 } from "@/types";
 import { onSDKInfo } from "@/utils/events";
 import externalAIFetch, { abortAllRequests } from "@/utils/aiProxy";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 let docEditor: TDocEditor | null = null;
 
@@ -297,7 +298,7 @@ const useEditorEvents = ({
 
             if (provider) {
               const models = await getModels(provider.id);
-              provider.title = `${t("Common:ProductName")} [${provider.title}]`;
+              provider.title = `${getBrandName("ProductName")} [${provider.title}]`;
               model = models[0]?.modelId || model;
             }
           }

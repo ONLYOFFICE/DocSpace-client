@@ -1,1 +1,8 @@
-{}
+{
+  "ChangesToTag": "Změny tohoto tagu ovlivní všechny místnosti, kde je použit.",
+  "DeleteTag": "Smazat tag",
+  "DeleteTagCannotBeUndone": "Tato akce nelze zrušit.",
+  "DeleteTagConfirmation": "Odstranění tohoto tagu ho odstraní ze všech místností, kde je použit.",
+  "EditTag": "Upravit tag",
+  "RemoveTag": "<1>{{tag}}</1> tag odstraněn."
+}

@@ -24,14 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+"use no memo";
 "use client";
 
 import { useEffect, useMemo, useRef } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { useJoyride, EVENTS, STATUS, ACTIONS } from "react-joyride";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { DeviceType } from "@docspace/shared/enums";
 
+import useDeviceType from "@/hooks/useDeviceType";
 import { useFormsTourStore } from "../_store/FormsTourStore";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 import { useFormsListStore } from "../_store/FormsListStore";
@@ -39,15 +43,20 @@ import { getTourSteps, type TourStepData, type TourStepCallbacks, type TourStepF
 import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
 import { useFormsUserStore } from "../_store/FormsUserStore";
 import { createMockFormFolders, createMockCompletedFiles } from "../_utils/mockFormFiles";
+import { appendRoomParams, formsQuerySuffix } from "../_utils/formsUrl";
 import TourTooltip from "../_components/tour-tooltip";
 
-export default function useFormsTour() {
+export default function useFormsTour(showMenu = true) {
+  const { isBase } = useTheme();
   const tourStore = useFormsTourStore();
   const navStore = useFormsNavigationStore();
   const formsListStore = useFormsListStore();
   const formsSettingsStore = useFormsSettingsStore();
   const { user } = useFormsUserStore();
   const router = useRouter();
+  const { currentDeviceType } = useDeviceType();
+  const isMobile = currentDeviceType === DeviceType.mobile;
+  const isTablet = currentDeviceType === DeviceType.tablet;
   const pathname = usePathname();
   const pathnameRef = useRef(pathname);
   pathnameRef.current = pathname;
@@ -56,22 +65,23 @@ export default function useFormsTour() {
   searchParamsRef.current = searchParams;
   const { t } = useTranslation(["Common"]);
 
+  const stepAbortRef = useRef<AbortController | null>(null);
+  const freshStepSignal = () => {
+    stepAbortRef.current?.abort();
+    const ctrl = new AbortController();
+    stepAbortRef.current = ctrl;
+    return ctrl.signal;
+  };
+  const currentSignalRef = useRef<AbortSignal | undefined>(undefined);
+
+  const navigateWithParams = (path: string) => {
+    router.replace(appendRoomParams(path, searchParamsRef.current));
+  };
+
   const tourCallbacks = useMemo<TourStepCallbacks>(
     () => ({
-      navigate: (path: string) => {
-        const currentPathname = pathnameRef.current;
-        if (currentPathname.startsWith(path)) return;
-        const sp = searchParamsRef.current;
-        const params = new URLSearchParams();
-        const rid = sp.get("roomId") ?? "";
-        const lid = sp.get("libraryId") ?? "";
-        if (rid) params.set("roomId", rid);
-        if (lid) params.set("libraryId", lid);
-        const qs = params.toString();
-        router.replace(`${path}${qs ? `?${qs}` : ""}`);
-      },
       openCompletedFolder: () => {
-        if (!navStore.completedFolder && tourStore.showMockItems) {
+        if (!navStore.completedFolder && tourStore.isDemo) {
           const folders = createMockFormFolders();
           if (folders[0]) {
             navStore.openCompletedFolder(folders[0]);
@@ -84,8 +94,9 @@ export default function useFormsTour() {
           }
         }
       },
+      getSignal: () => currentSignalRef.current,
     }),
-    [navStore, tourStore, formsListStore, router],
+    [navStore, tourStore, formsListStore],
   );
 
   const canCreate = !!formsSettingsStore.folderSecurity?.Create;
@@ -94,8 +105,8 @@ export default function useFormsTour() {
   const showSettings = !!(user?.isOwner || user?.isAdmin);
 
   const tourFlags = useMemo<TourStepFlags>(
-    () => ({ canCreate, showLibrary, showSettings }),
-    [canCreate, showLibrary, showSettings],
+    () => ({ canCreate, showLibrary, showSettings, showMenu, isTouch: isTablet }),
+    [canCreate, showLibrary, showSettings, showMenu, isTablet],
   );
 
   const steps = useMemo(
@@ -106,17 +117,20 @@ export default function useFormsTour() {
   const { controls, on, state, Tour } = useJoyride({
     continuous: true,
     steps,
-    stepIndex: tourStore.stepIndex,
-    run: tourStore.isRunning,
-    scrollToFirstStep: true,
+    run: isMobile ? false : tourStore.isRunning,
+    scrollToFirstStep: false,
     tooltipComponent: TourTooltip,
     options: {
-      arrowColor: globalColors.black,
+      arrowColor: isBase ? globalColors.white : globalColors.black,
       arrowBase: 18,
       arrowSize: 8,
       overlayColor: "rgba(0, 0, 0, 0.5)",
       overlayClickAction: "close",
+      blockTargetInteraction: true,
+      skipScroll: true,
       zIndex: 10000,
+      beforeTimeout: 15000,
+      targetWaitTimeout: 15000,
     },
     locale: {
       back: t("Common:Back"),
@@ -126,6 +140,54 @@ export default function useFormsTour() {
       skip: t("Common:Skip"),
     },
   });
+
+  useEffect(() => {
+    if (isMobile && tourStore.isRunning) {
+      tourStore.completeTour();
+    }
+  }, [isMobile, tourStore]);
+
+  useEffect(() => {
+    if (!tourStore.isRunning) return;
+
+    const qs_suffix = formsQuerySuffix(searchParamsRef.current);
+
+    const routes: string[] = [
+      `/forms/my-forms${qs_suffix}`,
+      `/forms/in-progress${qs_suffix}`,
+      `/forms/completed-forms${qs_suffix}`,
+    ];
+
+    if (showLibrary) routes.push(`/forms/library${qs_suffix}`);
+
+    if (showSettings) {
+      routes.push(
+        `/forms/settings/billing${qs_suffix}`,
+        `/forms/settings/ai-agent${qs_suffix}`,
+        `/forms/settings/access${qs_suffix}`,
+        `/forms/settings/collect-data${qs_suffix}`,
+      );
+    }
+
+    for (const route of routes) {
+      router.prefetch(route);
+    }
+  }, [tourStore.isRunning, showLibrary, showSettings, router]);
+
+  useEffect(() => {
+    if (!tourStore.isRunning) {
+      stepAbortRef.current?.abort();
+      stepAbortRef.current = null;
+      currentSignalRef.current = undefined;
+    }
+  }, [tourStore.isRunning]);
+
+  useEffect(() => {
+    return () => {
+      stepAbortRef.current?.abort();
+      stepAbortRef.current = null;
+    };
+  }, []);
 
   useEffect(() => {
     const dismissContextMenu = () => {
@@ -141,66 +203,84 @@ export default function useFormsTour() {
         target === "#create-blank-form" ||
         target === '[data-testid="plus-button"]');
 
-    const unsubBefore = on(EVENTS.STEP_BEFORE, (data) => {
+    const unsubBeforeHook = on(EVENTS.STEP_BEFORE_HOOK, (data) => {
+      currentSignalRef.current = freshStepSignal();
+
       const stepData = data.step.data as TourStepData | undefined;
       const targetPage = stepData?.page;
 
-      // Close menus when leaving menu steps
-      if (!isContextMenuStep(data.step.target) && !isPlusMenuStep(data.step.target)) {
+      if (
+        !isContextMenuStep(data.step.target) &&
+        !isPlusMenuStep(data.step.target)
+      ) {
         dismissContextMenu();
       }
 
-      // Close completed folder when leaving that step
       if (navStore.completedFolder && !stepData?.openCompletedFolder) {
         navStore.goBackToCompletedRoot();
       }
 
       const currentPathname = pathnameRef.current;
       if (targetPage && !currentPathname.startsWith(targetPage)) {
-        const sp = searchParamsRef.current;
-        const params = new URLSearchParams();
-        const rid = sp.get("roomId") ?? "";
-        const lid = sp.get("libraryId") ?? "";
-        if (rid) params.set("roomId", rid);
-        if (lid) params.set("libraryId", lid);
-        const qs = params.toString();
-        router.replace(`${targetPage}${qs ? `?${qs}` : ""}`);
+        navigateWithParams(targetPage);
       }
     });
 
     const unsubAfter = on(EVENTS.STEP_AFTER, (data) => {
+      stepAbortRef.current?.abort();
+      stepAbortRef.current = null;
+      currentSignalRef.current = undefined;
+
       if (data.action === ACTIONS.CLOSE) {
         dismissContextMenu();
         tourStore.completeTour();
-        tourCallbacks.navigate("/forms/my-forms");
-        return;
+        navigateWithParams("/forms/my-forms");
       }
-      const nextIndex =
-        data.index + (data.action === ACTIONS.PREV ? -1 : 1);
-      tourStore.setStepIndex(nextIndex);
     });
 
     const unsubEnd = on(EVENTS.TOUR_END, () => {
+      stepAbortRef.current?.abort();
+      stepAbortRef.current = null;
+      currentSignalRef.current = undefined;
       dismissContextMenu();
       tourStore.completeTour();
-      tourCallbacks.navigate("/forms/my-forms");
+      navigateWithParams("/forms/my-forms");
     });
 
     const unsubStatus = on(EVENTS.TOUR_STATUS, (data) => {
       if (data.status === STATUS.SKIPPED) {
+        stepAbortRef.current?.abort();
+        stepAbortRef.current = null;
+        currentSignalRef.current = undefined;
         dismissContextMenu();
         tourStore.completeTour();
-        tourCallbacks.navigate("/forms/my-forms");
+        navigateWithParams("/forms/my-forms");
       }
     });
 
+    const unsubTargetNotFound = on(EVENTS.TARGET_NOT_FOUND, (data) => {
+      if (process.env.NODE_ENV !== "production") {
+        // eslint-disable-next-line no-console
+        console.warn(
+          "[forms tour] target not found, ending tour:",
+          data.step?.target,
+        );
+      }
+      stepAbortRef.current?.abort();
+      stepAbortRef.current = null;
+      currentSignalRef.current = undefined;
+      tourStore.completeTour();
+      navigateWithParams("/forms/my-forms");
+    });
+
     return () => {
-      unsubBefore();
+      unsubBeforeHook();
       unsubAfter();
       unsubEnd();
       unsubStatus();
+      unsubTargetNotFound();
     };
-  }, [on, router, tourStore, navStore, tourCallbacks]);
+  }, [on, tourStore, navStore]);
 
-  return { Tour, controls, state };
+  return { Tour: isMobile ? null : Tour, controls, state };
 }

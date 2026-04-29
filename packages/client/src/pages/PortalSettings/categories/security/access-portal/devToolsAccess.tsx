@@ -43,6 +43,7 @@ import type { TData } from "@docspace/ui-kit/components/toast";
 
 import { LearnMoreWrapper } from "../StyledSecurity";
 import styles from "./devToolsAccess.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const DevToolsAccess = ({
   accessDevToolsForUsers,
@@ -193,7 +194,7 @@ const DevToolsAccess = ({
       <LearnMoreWrapper>
         <Text fontSize="13px" fontWeight="400">
           {t("DeveloperToolsAccessDescription", {
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
           })}
         </Text>
         {limitedDevToolsBlockHelpUrl ? (

@@ -45,6 +45,7 @@ import styles from "../../styles/AddEditDialog.module.scss";
 import { useAdvancedSettings } from "../../hooks/useAdvancedSettings";
 import { useBaseParams } from "../../hooks/useBaseParams";
 import { useIcon } from "../../hooks/useIcon";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type AddMCPDialogProps = {
   onClose: VoidFunction;
@@ -129,7 +130,7 @@ const AddMCPDialogComponent = ({
           <div className={styles.connectDocspace}>
             <Text className={styles.connectDocspaceDescription}>
               {t("AISettings:ConnectProductToYourDataAndTools", {
-                productName: t("Common:ProductName"),
+                productName: getBrandName("ProductName"),
               })}
             </Text>
             {mcpServersSettingsUrl ? (

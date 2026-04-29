@@ -8,13 +8,13 @@
   "NeedSettings": "Potrebujete zadať nastavenia",
   "NoPlugins": "Nie sú pridané žiadne pluginy",
   "NotNeedSettings": "Nemusíte zadávať nastavenia",
+  "PluginCacheWarningDescription": "Pluginy sú ukladané do cache na základe ich verzie. Aby ste zabezpečili aplikáciu vašich zmien, pred nahrávaním prosím zvýšte číslo verzie v súbore <1>package.json</1>. Systém neaktualizuje plugin, ak zostane číslo verzie rovnaké.",
+  "PluginDeletedSuccessfully": "Doplnok bol úspešne odstránený",
   "PluginIsNotCompatible": "Verzia plugin SDK nezodpovedá verzii {{productName}}. Prosím, aktualizujte na kompatibilnú verziu.",
   "PluginLoadedSuccessfully": "Plugin bol úspešne načítaný.",
   "PluginSamples": "Ukážky pluginov",
   "PluginSDK": "Plugin SDK",
   "PluginSDKDescription": "Pomocou pluginu SDK môžete rozšíriť funkčnosť {{productName}}, pripojiť služby tretích strán alebo vylepšiť skúsenosti existujúcich používateľov. Tu nájdete ukážky pluginov so zdrojovým kódom, ktoré sú k dispozícii na GitHub.",
   "PluginSDKInstruction": "Kliknutím na tlačidlo získate podrobné pokyny na vytvorenie vlastných pluginov.",
-  "UploadDescription": "Môžete pridať pluginy, ktoré rozšíria funkčnosť priestoru {{productName}} o ďalšie možnosti. Kliknite na Nahrať plugin alebo vložte súbor do archívu ZIP.",
-  "PluginCacheWarningDescription": "Pluginy sú ukladané do cache na základe ich verzie. Aby ste zabezpečili aplikáciu vašich zmien, pred nahrávaním prosím zvýšte číslo verzie v súbore <1>package.json</1>. Systém neaktualizuje plugin, ak zostane číslo verzie rovnaké.",
-  "PluginDeletedSuccessfully": "Doplnok bol úspešne odstránený"
+  "UploadDescription": "Môžete pridať pluginy, ktoré rozšíria funkčnosť priestoru {{productName}} o ďalšie možnosti. Kliknite na Nahrať plugin alebo vložte súbor do archívu ZIP."
 }

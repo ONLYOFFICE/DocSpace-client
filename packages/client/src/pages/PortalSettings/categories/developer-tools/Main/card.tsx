@@ -45,16 +45,16 @@ type CardProps = {
 const Card = ({ title, description, url, linkTitle, color, icon, isBlank = false }: CardProps) => {
     const navigate = useNavigate();
 
-    const onClickLink = () => {
+    const handleClick = () => {
         if (isBlank) {
             window.open(url, '_blank');
         } else {
             navigate(url);
         }
-    }
-    
+    };
+
     return (
-        <div className={styles.card}>
+        <div className={styles.card} onClick={handleClick} style={{ cursor: 'pointer' }}>
             <div
                 className={styles.cardIcon}
                 style={{ backgroundColor: `${color}1a` }}
@@ -68,12 +68,12 @@ const Card = ({ title, description, url, linkTitle, color, icon, isBlank = false
                 <Text fontSize="12px">{description}</Text>
             </div>
             <hr className={styles.cardDivider} />
-            <Link 
-                className={styles.cardLink} 
-                onClick={onClickLink}
-                color="accent" 
-                type={LinkType.page} 
-                fontSize="14px" 
+            <Link
+                className={styles.cardLink}
+                onClick={handleClick}
+                color="accent"
+                type={LinkType.page}
+                fontSize="14px"
                 fontWeight={600}
             >
                 {linkTitle}

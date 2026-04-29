@@ -3,16 +3,17 @@
   "content": "Actions",
   "content_en_sha1_hash": "c3cd636a585b20c40ac2df5ffb403e83cb2eef51",
   "created_at": "2025-05-19T21:30:42.878Z",
-  "updated_at": "2026-03-31T15:18:45.854Z",
+  "updated_at": "2026-04-11T21:01:28.818Z",
   "comment": {
-    "text": "This translation key is used to display a button or label that indicates actions available in an article or profile section. It appears on a main button and in some header sections, where it shows a title such as \"Actions\" or \"Invite\", depending on the context.",
+    "text": "This is a button label that opens a menu of available actions for the current context, such as creating a new room or managing user settings.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:27.497Z"
+    "updated_at": "2026-04-11T21:01:28.818Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 681,
+      "line_number": 675,
       "context": "if (!isAccountsPage) return onCreateRoom();\n if (isContactsGroupsPage) return createGroup();\n };\n \n const mainButtonText =\n isRoomAdmin && isAccountsPage ? t(\"Common:Invite\") : t(\"Common:Actions\");\n \n let isDisabled = false;\n \n if (isSettingsPage) {\n isDisabled = isSettingsPage;",
       "module": "/packages/client"
     },
@@ -33,6 +34,12 @@
       "line_number": 263,
       "context": "contextOptions={contextOptions}\n canEdit={canChangeVersionFileHistory}\n isTabletView={isTabletView}\n isSavingComment={isSavingComment}\n isEditing={isEditing}\n contextTitle={t(\"Common:Actions\")}\n versionDeleteProcess={versionDeletionProcess}\n dataTestId={dataTestId}\n versionDeleteRow={\n versionDeletionProcess\n ? versionSelectedForDeletion === info.versionGroup",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/main-button/index.tsx",
+      "line_number": 205,
+      "context": "return (\n <>\n <div className={styles.mainButtonWrapper}>\n <MainButton\n id=\"docs-actions-main-button\"\n text={t(\"Common:Actions\")}\n isDropdown\n isDisabled={isDisabled}\n model={isDisabled ? [] : desktopModel}\n />\n </div>",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/dialogs/download-dialog/sub-components/OnePasswordRow.tsx",
@@ -129,25 +136,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'Actions' can have multiple Korean translations depending on the context. '작업' (jak-up) generally means 'work' or 'task', which isn't always the best fit for 'Actions' in a UI/software context. Alternatives like '행동' (haeng-dong - action) or '동작' (dong-jak - movement/action) might be more accurate, but require understanding the specific usage of 'Actions'.",
-          "suggestion": "Consider alternatives like '행동' or '동작', or further context to determine the most appropriate translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"ການດໍາເນີນການ\" is a valid Lao word, it's a rather formal and literal translation of \"Actions.\"  It doesn't quite capture the nuance of the English term, which can imply a range of actions, not just 'operations' or 'procedures'. A more natural translation might be something like \"ການກະເຮັດ\" or \"ປະຕິບັດງານ\", depending on the context.",
-          "suggestion": "Consider \"ການກະເຮັດ\" or \"ປະຕິບັດງານ\" as potentially more appropriate alternatives, depending on context.  Further context would help determine the most suitable translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -241,6 +236,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -28,6 +28,7 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { observer } from "mobx-react";
 
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -35,16 +36,24 @@ import type { TFolder } from "@docspace/shared/api/files/types";
 import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
+import { useFormsTourStore } from "../../_store/FormsTourStore";
 import { libraryUrl } from "../../_utils/libraryUrl";
 import LibraryCountryList from "../../_components/forms-grid/LibraryCountryList";
+import FormsEmpty from "../../_components/forms-empty";
+import { createMockLibraryFolders } from "../../_utils/mockFormFiles";
 
 const LibraryPage = () => {
   const router = useRouter();
   const { libraryId, roomId } = useFormsSettingsStore();
-  const [folders, setFolders] = useState<TFolder[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const tourStore = useFormsTourStore();
+  const [folders, setFolders] = useState<TFolder[]>(() =>
+    tourStore.showMockItems ? createMockLibraryFolders() : [],
+  );
+  const [isLoading, setIsLoading] = useState(!tourStore.showMockItems);
 
   useEffect(() => {
+    if (tourStore.showMockItems) return;
+
     if (!libraryId) {
       setIsLoading(false);
       return;
@@ -73,7 +82,7 @@ const LibraryPage = () => {
       });
 
     return () => controller.abort();
-  }, [libraryId]);
+  }, [libraryId, tourStore.showMockItems]);
 
   const handleOpenFolder = useCallback(
     (folder: TFolder) => {
@@ -119,11 +128,11 @@ const LibraryPage = () => {
     );
   }
 
-  if (folders.length === 0) return null;
+  if (folders.length === 0) return <FormsEmpty />;
 
   return (
     <LibraryCountryList folders={folders} onOpenFolder={handleOpenFolder} />
   );
 };
 
-export default LibraryPage;
+export default observer(LibraryPage);

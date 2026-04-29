@@ -40,6 +40,7 @@ import AccessSelector from "SRC_DIR/components/AccessSelector";
 import { isMobile } from "@docspace/shared/utils";
 import { Link } from "@docspace/ui-kit/components/link";
 import LdapFieldComponent from "./LdapFieldComponent";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const FIRST_NAME = "firstName";
 const SECOND_NAME = "secondName";
@@ -267,7 +268,7 @@ const AttributeMapping = (props) => {
           </div>
           <Text fontWeight={400} fontSize="12px" lineHeight="16px">
             {t("LdapUserTypeTooltip", {
-              productName: t("Common:ProductName"),
+              productName: getBrandName("ProductName"),
             })}
           </Text>
         </div>

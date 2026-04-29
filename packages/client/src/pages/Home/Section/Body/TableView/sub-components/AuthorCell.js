@@ -32,7 +32,9 @@ import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_s
 
 import { Avatar } from "@docspace/ui-kit/components/avatar";
 
-import { StyledText, StyledAuthorCell } from "./CellStyles";
+import { Text } from "@docspace/ui-kit/components/text";
+
+import styles from "./CellStyles.module.scss";
 
 const AuthorCell = ({ fileOwner, sideColor, item }) => {
   const { t } = useTranslation();
@@ -47,22 +49,23 @@ const AuthorCell = ({ fileOwner, sideColor, item }) => {
   );
 
   return (
-    <StyledAuthorCell className="author-cell">
+    <div className={`${styles.styledAuthorCell} author-cell`}>
       <Avatar
         source={avatarSource}
         className="author-avatar-cell"
         role="user"
       />
-      <StyledText
+      <Text
         color={sideColor}
         fontSize="12px"
         fontWeight={600}
+        className={styles.styledText}
         title={name}
         truncate
       >
         {name}
-      </StyledText>
-    </StyledAuthorCell>
+      </Text>
+    </div>
   );
 };
 

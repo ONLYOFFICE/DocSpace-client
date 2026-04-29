@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useTheme } from "styled-components";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { useTranslation } from "react-i18next";
 
 import EmptyScreenPersonSvgUrl from "PUBLIC_DIR/images/emptyview/empty.contacts.info.light.svg?url";

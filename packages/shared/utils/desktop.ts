@@ -34,10 +34,12 @@ import { ThemeKeys } from "@docspace/ui-kit/enums";
 
 import { desktopConstants, getEditorTheme } from "./common";
 import { checkIsSSR } from "@docspace/ui-kit/utils/device";
+import { createApiKey } from "../api/api-keys";
+import type { TApiKeyRequest } from "../api/api-keys/types";
 
 const isSSR = checkIsSSR();
 
-export function regDesktop(
+export async function regDesktop(
   user: TUser,
   isEncryption: boolean,
   keys?: { [key: string]: string | boolean },
@@ -77,6 +79,28 @@ export function regDesktop(
       }
     } else {
       extendedData = { ...data };
+    }
+
+    if (window.AscDesktopEditor?.getCloudKeys) {
+      const desktopKeys =
+        window.AscDesktopEditor.getCloudKeys(
+          desktopConstants.domain as string,
+        ) ?? [];
+
+      if (desktopKeys.length === 0) {
+        try {
+          const apiKey = await createApiKey({
+            name: "Desktop Editor",
+            permissions: ["*"],
+          } as TApiKeyRequest);
+          extendedData = {
+            ...extendedData,
+            apiKey: { id: apiKey.id, name: apiKey.name, key: apiKey.key },
+          };
+        } catch (e) {
+          console.error("Failed to create API key for desktop editor", e);
+        }
+      }
     }
 
     window.AscDesktopEditor?.execCommand(

@@ -25,7 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Button } from "@docspace/ui-kit/components/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router";
 
 import { inject, observer } from "mobx-react";
 
@@ -61,7 +62,10 @@ const Webhooks = (props) => {
 
   setDocumentTitle(t("Webhooks"));
 
-  const [isCreateOpened, setIsCreateOpened] = useState(false);
+  const [searchParams] = useSearchParams();
+  const [isCreateOpened, setIsCreateOpened] = useState(
+    () => searchParams.get("create") === "true",
+  );
   const [isSettingsOpened, setIsSettingsOpened] = useState(false);
   const [isDeleteOpened, setIsDeleteOpened] = useState(false);
 

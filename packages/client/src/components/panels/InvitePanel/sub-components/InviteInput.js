@@ -78,6 +78,7 @@ import {
   makeFreeRole,
   makeViewerRole,
 } from "../utils";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const minSearchValue = 2;
 const filterSeparator = ";";
@@ -652,14 +653,14 @@ const InviteInput = ({
       >
         {roomId === -1
           ? t("InviteMembersManuallyDescription", {
-              productName: t("Common:ProductName"),
+              productName: getBrandName("ProductName"),
             })
           : !allowInvitingGuests
             ? t("InviteToRoomManuallyInfoMembers", {
-                productName: t("Common:ProductName"),
+                productName: getBrandName("ProductName"),
               })
             : t("InviteToRoomManuallyInfoGuest", {
-                productName: t("Common:ProductName"),
+                productName: getBrandName("ProductName"),
               })}
       </Text>
       {roomId === -1 || allowInvitingGuests ? (
@@ -756,22 +757,20 @@ const InviteInput = ({
           </DropDown>
         )}
 
-        <AccessSelector
-          className="add-manually-access"
-          t={t}
-          roomType={roomType}
-          defaultAccess={selectedAccess}
-          onSelectAccess={onSelectAccess}
-          containerRef={inputsRef}
-          isOwner={isOwner}
-          isAdmin={isAdmin}
-          isMobileView={isMobileView}
-          dataTestId="invite_panel_access_selector"
-          {...(roomId === -1 && {
-            isSelectionDisabled: isUserTariffLimit,
-            selectionErrorText: <PaidQuotaLimitError />,
-          })}
-        />
+        {roomId !== -1 ? (
+          <AccessSelector
+            className="add-manually-access"
+            t={t}
+            roomType={roomType}
+            defaultAccess={selectedAccess}
+            onSelectAccess={onSelectAccess}
+            containerRef={inputsRef}
+            isOwner={isOwner}
+            isAdmin={isAdmin}
+            isMobileView={isMobileView}
+            dataTestId="invite_panel_access_selector"
+          />
+        ) : null}
       </div>
     </>
   );

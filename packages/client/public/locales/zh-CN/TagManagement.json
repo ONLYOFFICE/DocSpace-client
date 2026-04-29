@@ -1,1 +1,8 @@
-{}
+{
+  "ChangesToTag": "更改此标签将影响所有使用它的房间。",
+  "DeleteTag": "删除标签",
+  "DeleteTagCannotBeUndone": "此操作无法撤销。",
+  "DeleteTagConfirmation": "删除此标签将从所有使用它的房间中移除它。",
+  "EditTag": "编辑标签",
+  "RemoveTag": "<1>{{tag}}</1> 标签已移除。"
+}

@@ -1,4 +1,7 @@
 {
+  "AgentCreated": "KI-Agent erstellt",
+  "AgentDeleted": "KI-Agent gelöscht",
+  "AgentUpdated": "AI Agent aktualisiert",
   "Before": "Vor",
   "CreateWebhook": "Webhook erstellen",
   "DeleteHint": "Webhook wird dauerhaft gelöscht.\nSie können diese Aktion nicht rückgängig machen.",
@@ -33,6 +36,9 @@
   "FolderRestored": "Ordner wiederhergestellt",
   "FolderTrashed": "Ordner gelöscht",
   "FolderUpdated": "Ordner aktualisiert",
+  "FormFilledOut": "Formular ausgefüllt",
+  "FormStopped": "Formular gestoppt",
+  "FormSubmit": "Formular übermittelt",
   "From": "Von",
   "Generate": "Generieren",
   "GroupCreated": "Gruppe erstellt",

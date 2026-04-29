@@ -96,7 +96,7 @@ export default function UploaderClient({
     [],
   );
 
-  const getFolderUrl = (folderId: number) => {
+  const getFolderUrl = (folderId: string | number) => {
     return `${window.location.origin}/rooms/personal/filter?folder=${folderId}`;
   };
 

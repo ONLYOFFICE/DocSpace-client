@@ -1,5 +1,5 @@
 {
-  "AppName": "{{organizationName}} 문서",
   "AppStore": "App Store에서",
-  "GooglePlay": "Google Play에서"
+  "GooglePlay": "Google Play에서",
+  "SmartBannerAppName": "{{organizationName}} 문서"
 }

@@ -9,7 +9,7 @@
   "TitleSharing": "Convide outros membros do {{productName}} para a sala para preencher os formulários PDF enviados. Copie um link de acesso público para compartilhar a sala com usuários externos.",
   "TitleStarting": "Quando um formulário é aberto para preenchimento, uma cópia individual é automaticamente criada para cada respondente e é salva na pasta In Progress. Isso significa que o formulário foi iniciado, mas ainda não foi concluído.",
   "TitleSubmitting": "Depois que o botão Concluir e Enviar for clicado na cópia do formulário aberto, ele será movido para a pasta Concluído.",
-  "WelcomeDescription": "Aqui, você pode organizar o preenchimento direto de formulários em PDF, coletar e analisar respostas facilmente. Pronto para começar?",
   "WelcomeFillingForm": "Bem-vindo à sala de preenchimento de formulários!",
-  "WelcomeStartTutorial": "Faça um pequeno tour"
+  "WelcomeStartTutorial": "Faça um pequeno tour",
+  "WelcomeTipsDescription": "Aqui, você pode organizar o preenchimento direto de formulários em PDF, coletar e analisar respostas facilmente. Pronto para começar?"
 }

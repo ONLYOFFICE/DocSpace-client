@@ -3,13 +3,21 @@
   "content": "Manage your subscription plan and payment details for this forms room.",
   "content_en_sha1_hash": "cbc6fb39dca4bcd7cfa52dc11480ea857dd5a945",
   "created_at": "2026-03-31T15:18:26.646Z",
-  "updated_at": "2026-03-31T15:18:26.646Z",
+  "updated_at": "2026-04-23T17:24:02.165Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is the content of a tooltip that appears when a user hovers over the \"Billing\" section in the settings. It describes where to manage subscription and payment information for the current forms room.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:40:39.368Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_utils/tourSteps.ts",
+      "line_number": 315,
+      "context": "showSettings &&\n settingsStep(\n \"billing\",\n t(\"Common:Billing\", \"Billing\"),\n t(\n \"Common:TourBilling\",\n \"Manage your subscription plan and payment details for this forms room.\",\n ),\n callbacks,\n ),\n showSettings &&",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

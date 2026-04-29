@@ -36,6 +36,7 @@ import {
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
 import styles from "./ChangeRoomOwnerPanel.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const ChangeRoomOwner = (props) => {
   const {
@@ -93,10 +94,10 @@ const ChangeRoomOwner = (props) => {
 
   const infoText = isAIAgent
     ? t("Files:ChangeAgentOwnerSelectorInfo", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
       })
     : t("CreateEditRoomDialog:PeopleSelectorInfo", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
       });
 
   const footerCheckboxLabel = isAIAgent

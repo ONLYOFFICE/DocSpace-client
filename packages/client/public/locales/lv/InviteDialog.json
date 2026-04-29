@@ -17,7 +17,6 @@
   "InviteViaLinkDescriptionAgentMembers": "Izveidojiet universālu saiti {{productName}} biedriem, lai paši varētu autorizēties aģentā.",
   "InviteViaLinkDescriptionRoomGuest": "Izveidot universālu saiti pašapstiprināšanai telpā kā viesim.",
   "InviteViaLinkDescriptionRoomMembers": "Izveido universālu saiti {{productName}} biedriem pašapstiprināšanai telpā.",
-  "LinkCopySuccess": "Saite ir nokopēta",
   "SendInvitation": "Sūtīt ielūgumu",
   "UserAgentMaxAvailableRoleWarning": "Viesi un lietotāji nevar tikt iecelti par aģentu vadītājiem. Šī amata funkcijai ir piemēroti tikai Istabu un {{productName}} administratori.",
   "UserMaxAvailableRoleWarning": "Viesi un lietotāji nevar būt telpu pārvaldnieki. Norādītajai lomai ir piemērota tikai telpa un {{productName}} administratori.",

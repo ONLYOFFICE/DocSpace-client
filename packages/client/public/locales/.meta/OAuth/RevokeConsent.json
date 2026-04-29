@@ -3,17 +3,18 @@
   "content": "Revoke consent",
   "content_en_sha1_hash": "13255b407052cfd4a359f6e8e175137b48388a31",
   "created_at": "2025-05-19T21:30:54.007Z",
-  "updated_at": "2025-05-24T07:14:58.359Z",
+  "updated_at": "2026-04-13T14:59:05.905Z",
   "comment": {
-    "text": "This translation key is used to display a message when revoking consent in an authorized app. The text will be shown in a Revoke Dialog, prompting users to confirm their decision. Translators should consider conveying this action's significance and potential implications for user access and data security.",
+    "text": "This is a button label that allows a user to revoke their consent for an authorized application to access their data.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:38.662Z"
+    "updated_at": "2026-04-11T21:18:28.542Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/authorized-apps/sub-components/RevokeDialog.tsx",
-      "line_number": 33,
-      "context": "const name = bufferSelection?.name;\n \n const firstDesc = isGroup ? (\n <Trans\n t={t}\n i18nKey=\"RevokeConsentDescriptionGroup\"\n ns=\"OAuth\"\n values={{\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }}",
+      "line_number": 106,
+      "context": "autoMaxHeight\n withFooterBorder={isMobile}\n onClose={onCloseAction}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"RevokeConsent\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text style={{ marginBottom: \"16px\" }}>{firstDesc}</Text>\n \n <Text>{secondDesc}</Text>\n </ModalDialog.Body>",
       "module": "/packages/client"
     }
   ],
@@ -93,13 +94,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"承認の取り消し\" is a literal translation, it's not the most natural or commonly used phrase for 'Revoke consent' in a technical context like OAuth. It sounds somewhat formal and lengthy.",
-          "suggestion": "Consider alternatives like \"同意の取り消し\" (Dōi no torikeshi) or a more concise phrase like \"同意解除\" (Dōi kaijo), which is commonly used in similar contexts."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -177,13 +172,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation \"Опозови пристанак\" is not the most accurate or natural translation of \"Revoke consent.\" \"Опозови\" implies shaming or discrediting, which doesn't align with the meaning of revoking consent. A more appropriate translation would convey the idea of withdrawing or cancelling consent.",
-          "suggestion": "Одузми пристанак"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -195,13 +184,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"İzni iptal et\" is understandable, a more precise translation of \"Revoke consent\" would be \"Rıza'yı iptal et\" or \"Onayı iptal et\". \"İzin\" is a broader term that can mean 'permission' rather than specifically 'consent'.",
-          "suggestion": "Rıza'yı iptal et"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

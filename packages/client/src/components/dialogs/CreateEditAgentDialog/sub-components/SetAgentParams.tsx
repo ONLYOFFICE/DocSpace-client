@@ -165,7 +165,6 @@ type setAgentParamsProps = {
   setCover?: DialogsStore["setCover"];
   isDefaultAIAgentsQuotaSet?: CurrentQuotasStore["isDefaultAIAgentsQuotaSet"];
   infoPanelSelection?: TRoom;
-  modelAliases?: TAIConfig["modelAliases"];
   systemAiEnabled?: TAIConfig["systemAiEnabled"];
 };
 
@@ -203,7 +202,6 @@ const setAgentParams = ({
   onClickAction,
   selectedServers,
   setSelectedServers,
-  modelAliases,
   systemAiEnabled,
 }: setAgentParamsProps) => {
   const { t } = useTranslation([
@@ -529,7 +527,6 @@ const setAgentParams = ({
 
       <ModelSettings
         agentParams={agentParams}
-        modelAliases={modelAliases}
         systemAiEnabled={systemAiEnabled}
         setAgentParams={setAgentParams}
       />
@@ -635,7 +632,6 @@ export default inject(
       isDefaultAIAgentsQuotaSet,
       infoPanelSelection,
 
-      modelAliases: aiConfig?.modelAliases,
       systemAiEnabled: aiConfig?.systemAiEnabled,
     };
   },

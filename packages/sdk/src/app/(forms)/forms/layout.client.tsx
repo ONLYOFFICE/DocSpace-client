@@ -27,46 +27,88 @@
 "use client";
 
 import React from "react";
-import { createPortal } from "react-dom";
 import { observer } from "mobx-react";
-import { runInAction } from "mobx";
+import dynamic from "next/dynamic";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 import Section from "@docspace/ui-kit/components/section";
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
+import { Backdrop } from "@docspace/ui-kit/components/backdrop";
+import {
+  FloatingButton,
+  FloatingButtonIcons,
+} from "@docspace/ui-kit/components/floating-button";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import { setAuthToken } from "@docspace/shared/api/client";
-import { ShareAccessRights } from "@docspace/shared/enums";
+import {
+  frameCallbackData,
+  frameCallEvent,
+  frameHandlePing,
+  getFrameId,
+} from "@docspace/shared/utils/common";
+import { DeviceType } from "@docspace/shared/enums";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
-import { FormsSection } from "@/types/forms";
-import { sectionFromPathname, sectionToPath } from "../_utils/sectionFromPathname";
+import {
+  FormsSection,
+  DEFAULT_SETTINGS_SUBSECTION,
+  type CustomActionsConfig,
+} from "@/types/forms";
+import {
+  sectionFromPathname,
+  sectionToPath,
+  settingsSubSectionToPath,
+} from "../_utils/sectionFromPathname";
+import { appendRoomParams } from "../_utils/formsUrl";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 // LibraryNavigationStore removed — library uses URL routing now
 import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
 import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
+import { useFormsDbSettingsStore } from "../_store/FormsDbSettingsStore";
 import { useFormsUserStore } from "../_store/FormsUserStore";
-import useInitCommonStores, { type CommonData } from "../_hooks/useInitCommonStores";
+import useInitCommonStores, {
+  type CommonData,
+} from "../_hooks/useInitCommonStores";
 import useFormsData from "../_hooks/useFormsData";
 import { FormsDataProvider } from "../_context/FormsDataContext";
 import useFolderActions from "../_hooks/useFolderActions";
 import useFormsSocket from "../_hooks/useFormsSocket";
 import useFormEventHooks from "../_hooks/useFormEventHooks";
 import useEditorGuard from "../_hooks/useEditorGuard";
+
 import { MIN_SECTION_WIDTH } from "../_api/aiAgentSettings";
 import { useFormsTourStore } from "../_store/FormsTourStore";
-import useFormsTour from "../_hooks/useFormsTour";
+import { useFormsCustomActionsStore } from "../_store/FormsCustomActionsStore";
+import useTourSandbox from "../_hooks/useTourSandbox";
 import FormsSidebar from "../_components/sidebar";
+import DualRingSpinner from "../_components/forms-layout/DualRingSpinner";
 import FormsEditor from "../_components/forms-editor";
-import AiChatPanel from "../_components/ai-chat-panel";
-import AiChatButton from "../_components/ai-chat-button";
-import CreateFormDialog from "../_components/create-form-dialog";
 import FormsHeader from "../_components/forms-header";
-import MobileStub from "../_components/mobile-stub";
-import WelcomeTourDialog from "../_components/welcome-tour-dialog";
-import { createMockFormFiles, createMockFormFolders, createMockCompletedFiles } from "../_utils/mockFormFiles";
+
+const AiChatPanel = dynamic(() => import("../_components/ai-chat-panel"), {
+  ssr: false,
+});
+const AiChatButton = dynamic(() => import("../_components/ai-chat-button"), {
+  ssr: false,
+});
+const CreateFormDialog = dynamic(
+  () => import("../_components/create-form-dialog"),
+  { ssr: false },
+);
+const WelcomeTourDialog = dynamic(
+  () => import("../_components/welcome-tour-dialog"),
+  { ssr: false },
+);
+const FormsTourHost = dynamic(
+  () => import("../_components/forms-tour/FormsTourHost"),
+  { ssr: false },
+);
+import {
+  createMockFormFolders,
+  createMockFormFiles,
+  createMockCompletedFiles,
+} from "../_utils/mockFormFiles";
 import styles from "../_components/forms-layout/FormsLayout.module.scss";
 
 type FormsShellProps = {
@@ -75,9 +117,10 @@ type FormsShellProps = {
 };
 
 const FormsShell = ({ commonData, children }: FormsShellProps) => {
-  useSDKConfig();
+  const { sdkConfig } = useSDKConfig();
   const isReady = useInitCommonStores(commonData);
 
+  const formsNavigationStore = useFormsNavigationStore();
   const {
     editingFile,
     closeEditor,
@@ -85,20 +128,34 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     inProgressFolder,
     goBackToCompletedRoot,
     goBackToInProgressRoot,
-  } = useFormsNavigationStore();
+    isSidebarOpen,
+    closeSidebar,
+  } = formsNavigationStore;
   // libraryNav removed — library uses URL routing now
   const aiStore = useFormsAiAgentStore();
+  const dbSettingsStore = useFormsDbSettingsStore();
+  const { sendToDb } = dbSettingsStore;
   const { user } = useFormsUserStore();
   const formsSettingsStore = useFormsSettingsStore();
   const { roomId, socketUrl, hasManagementAccess } = formsSettingsStore;
   const formsListStore = useFormsListStore();
   const { items, folders, isLoading } = formsListStore;
   const tourStore = useFormsTourStore();
+  const customActionsStore = useFormsCustomActionsStore();
   const { currentDeviceType } = useDeviceType();
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const activeSection = sectionFromPathname(pathname);
+
+  const initialShowMenu = React.useRef(
+    searchParams.get("showMenu") !== "false",
+  );
+  const showMenu = initialShowMenu.current && sdkConfig?.showMenu !== false;
+
+  const uploadFilesDirectRef = React.useRef<(files: File[]) => Promise<void>>(
+    async () => {},
+  );
 
   const authTokenSet = React.useRef(false);
   React.useEffect(() => {
@@ -110,6 +167,112 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
       setAuthToken(token);
     }
   }, [commonData.authToken]);
+
+  const appReadySent = React.useRef(false);
+  React.useEffect(() => {
+    if (isReady && !appReadySent.current) {
+      appReadySent.current = true;
+      frameCallEvent({ event: "onAppReady", data: { frameId: getFrameId() } });
+    }
+  }, [isReady]);
+
+  const prevSectionForEvent = React.useRef(activeSection);
+  React.useEffect(() => {
+    if (prevSectionForEvent.current !== activeSection) {
+      prevSectionForEvent.current = activeSection;
+      frameCallEvent({ event: "onNavigate", data: { section: activeSection } });
+    }
+  }, [activeSection]);
+
+  React.useEffect(() => {
+    const handler = (e: MessageEvent) => {
+      let eventData;
+      if (window.self === window.parent || e.source !== window.parent) return;
+
+      try {
+        eventData = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
+      } catch {
+        return;
+      }
+
+      if (frameHandlePing(eventData)) return;
+
+      if (
+        eventData?.type === "uploadFileData" &&
+        eventData?.buffer instanceof ArrayBuffer
+      ) {
+        const fileName = eventData.fileName as string;
+        const uploadId = eventData.uploadId as number | undefined;
+        const file = new File([eventData.buffer], fileName, {
+          lastModified: eventData.lastModified,
+        });
+        uploadFilesDirectRef
+          .current([file])
+          .then(() => {
+            frameCallEvent({
+              event: "onUploadSuccess",
+              data: {
+                fileName,
+                fileSize: file.size,
+                ...(uploadId !== undefined && { uploadId }),
+              },
+            });
+          })
+          .catch((error: unknown) => {
+            frameCallEvent({
+              event: "onUploadError",
+              data: {
+                fileName,
+                message: error instanceof Error ? error.message : String(error),
+                ...(uploadId !== undefined && { uploadId }),
+              },
+            });
+          });
+        return;
+      }
+
+      const methodName = eventData?.data?.methodName;
+      const data = eventData?.data?.data;
+      const callId = eventData?.data?.callId;
+
+      switch (methodName) {
+        case "navigateSection": {
+          const section = data?.section as string;
+          if (!section) return;
+
+          const validSections = Object.values(FormsSection) as string[];
+          if (!validSections.includes(section)) return;
+
+          if (section === FormsSection.Settings) {
+            router.replace(
+              appendRoomParams(
+                settingsSubSectionToPath(DEFAULT_SETTINGS_SUBSECTION),
+                searchParams,
+              ),
+            );
+          } else {
+            router.replace(
+              appendRoomParams(
+                sectionToPath(section as FormsSection),
+                searchParams,
+              ),
+            );
+          }
+
+          frameCallbackData({ section }, callId);
+          break;
+        }
+        case "setCustomActions": {
+          if (data) customActionsStore.setActions(data as CustomActionsConfig);
+          frameCallbackData(data, callId);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener("message", handler);
+    return () => window.removeEventListener("message", handler);
+  }, [router, searchParams, customActionsStore]);
 
   const socketFolderIds = React.useMemo(() => {
     const ids = new Set<string>();
@@ -129,20 +292,56 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     aiStore.folderAgentsMap,
   ]);
 
-  const socketFileIds = React.useMemo(
-    () => items.map((f) => f.id),
-    [items],
-  );
+  const socketFileIds = React.useMemo(() => items.map((f) => f.id), [items]);
 
   const formsData = useFormsData();
-  const { fetchSection, fetchMore, fetchSubfolder } = formsData;
+  const { fetchSection, fetchMore, fetchSubfolder, refreshAfterMutation } =
+    formsData;
 
-  useFormsSocket(socketUrl, socketFolderIds, socketFileIds, fetchSection);
+  useFormsSocket(
+    socketUrl,
+    socketFolderIds,
+    socketFileIds,
+    fetchSection,
+    refreshAfterMutation,
+  );
   useFormEventHooks(hasManagementAccess ? aiStore : null, socketUrl);
+
 
   const isEditing = Boolean(editingFile);
 
   useEditorGuard(isEditing);
+
+  // Single-overlay coordination: only one of {sidebar drawer, AI panel, editor}
+  // can be active at a time on mobile. Also close the sidebar when leaving
+  // mobile so no stale overlay stays rendered.
+  React.useEffect(() => {
+    if (currentDeviceType !== DeviceType.mobile && isSidebarOpen) {
+      closeSidebar();
+    }
+  }, [currentDeviceType, isSidebarOpen, closeSidebar]);
+
+  const prevSidebarOpen = React.useRef(isSidebarOpen);
+  React.useEffect(() => {
+    if (!prevSidebarOpen.current && isSidebarOpen && aiStore.isPanelVisible) {
+      aiStore.closePanel();
+    }
+    prevSidebarOpen.current = isSidebarOpen;
+  }, [isSidebarOpen, aiStore]);
+
+  const prevPanelVisible = React.useRef(aiStore.isPanelVisible);
+  React.useEffect(() => {
+    if (!prevPanelVisible.current && aiStore.isPanelVisible && isSidebarOpen) {
+      closeSidebar();
+    }
+    prevPanelVisible.current = aiStore.isPanelVisible;
+  }, [aiStore.isPanelVisible, isSidebarOpen, closeSidebar]);
+
+  React.useEffect(() => {
+    if (isEditing && isSidebarOpen) {
+      closeSidebar();
+    }
+  }, [isEditing, isSidebarOpen, closeSidebar]);
 
   const prevIsLoading = React.useRef(isLoading);
   const pendingEditorClose = React.useRef(false);
@@ -158,11 +357,30 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   }, [isLoading, closeEditor]);
 
   React.useEffect(() => {
-    if (roomId && user?.id && hasManagementAccess) {
-      aiStore.initForRoom(roomId, user.id);
-      aiStore.autoEnableIfAvailable();
+    if (!roomId || !user?.id || !hasManagementAccess) return;
+
+    aiStore.initForRoom(roomId, user.id);
+
+    const runAutoEnable = () => aiStore.autoEnableIfAvailable();
+    const win = window as Window & {
+      requestIdleCallback?: (
+        cb: () => void,
+        opts?: { timeout: number },
+      ) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+    if (win.requestIdleCallback) {
+      const id = win.requestIdleCallback(runAutoEnable, { timeout: 2000 });
+      return () => win.cancelIdleCallback?.(id);
     }
+    const id = window.setTimeout(runAutoEnable, 2000);
+    return () => window.clearTimeout(id);
   }, [roomId, user?.id, aiStore, hasManagementAccess]);
+
+  React.useEffect(() => {
+    if (!roomId || !user?.id || !hasManagementAccess || !sendToDb) return;
+    aiStore.initAskFromDBAgent();
+  }, [roomId, user?.id, aiStore, hasManagementAccess, sendToDb]);
 
   const prevPathname = React.useRef(pathname);
   const prevCompletedFolderShell = React.useRef(completedFolder);
@@ -185,11 +403,11 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
         activeSection === FormsSection.Settings;
 
       if (isSettingsInternalNav) {
-        setTimeout(() => {
-          window.dispatchEvent(
-            new CustomEvent(AnimationEvents.END_ANIMATION),
-          );
-        }, 0);
+        if (!tourStore.isRunning) {
+          setTimeout(() => {
+            window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
+          }, 0);
+        }
       } else {
         if (prevSection === FormsSection.CompletedForms) {
           goBackToCompletedRoot();
@@ -229,6 +447,14 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
                 new CustomEvent(AnimationEvents.END_ANIMATION),
               );
             }, 0);
+          } else if (
+            activeSection === FormsSection.MyForms ||
+            activeSection === FormsSection.InProgress ||
+            activeSection === FormsSection.CompletedForms
+          ) {
+            formsListStore.setItems([], 0);
+            formsListStore.setFolders([]);
+            formsListStore.setIsLoading(true);
           }
 
           if (prevSection === FormsSection.Settings) {
@@ -245,7 +471,11 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
         aiStore.clearOverride();
       }
 
-      if (activeSection === FormsSection.Settings && hasManagementAccess && !tourStore.isRunning) {
+      if (
+        activeSection === FormsSection.Settings &&
+        hasManagementAccess &&
+        !tourStore.isRunning
+      ) {
         aiStore.closePanel();
       }
 
@@ -257,15 +487,23 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
         aiStore.setCurrentFolder(null);
       }
     }
-  }, [pathname, completedFolder, inProgressFolder, activeSection, hasManagementAccess, aiStore, formsListStore]);
+  }, [
+    pathname,
+    completedFolder,
+    inProgressFolder,
+    activeSection,
+    hasManagementAccess,
+    aiStore,
+    formsListStore,
+  ]);
 
   const prevEditingFile = React.useRef(editingFile);
   React.useEffect(() => {
     if (prevEditingFile.current && !editingFile && !completedFolder) {
-      fetchSection();
+      refreshAfterMutation();
     }
     prevEditingFile.current = editingFile;
-  }, [editingFile, fetchSection, completedFolder]);
+  }, [editingFile, refreshAfterMutation, completedFolder]);
 
   const prevCompletedForFormCompletion = React.useRef(completedFolder);
   React.useEffect(() => {
@@ -273,70 +511,50 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     prevCompletedForFormCompletion.current = completedFolder;
 
     if (completedFolder && completedFolder !== prev && editingFile) {
-      const params = new URLSearchParams();
-      const rid = searchParams.get("roomId") ?? "";
-      const lid = searchParams.get("libraryId") ?? "";
-      if (rid) params.set("roomId", rid);
-      if (lid) params.set("libraryId", lid);
-      const qs = params.toString();
       router.replace(
-        `${sectionToPath(FormsSection.CompletedForms)}${qs ? `?${qs}` : ""}`,
+        appendRoomParams(
+          sectionToPath(FormsSection.CompletedForms),
+          searchParams,
+        ),
       );
     }
-  }, [completedFolder, editingFile, closeEditor, router, searchParams]);
+  }, [completedFolder, editingFile, router, searchParams]);
 
   const {
     onUploadFiles,
+    uploadFilesToFolder,
+    uploadProgress,
     onCreateBlankForm,
     isCreateFormDialogVisible,
     isCreatingForm,
     onCloseCreateFormDialog,
     onSaveCreateForm,
-  } = useFolderActions();
+  } = useFolderActions(fetchSection, refreshAfterMutation);
+  uploadFilesDirectRef.current = uploadFilesToFolder;
 
   const formsDataValue = React.useMemo(
-    () => ({ fetchSection, fetchMore, fetchSubfolder }),
-    [fetchSection, fetchMore, fetchSubfolder],
+    () => ({ fetchSection, fetchMore, fetchSubfolder, refreshAfterMutation }),
+    [fetchSection, fetchMore, fetchSubfolder, refreshAfterMutation],
   );
 
   const handleEditorNavigatedAway = React.useCallback(() => {
     closeEditor();
   }, [closeEditor]);
 
-  const { Tour } = useFormsTour();
+  useTourSandbox(fetchSection);
 
   // Show welcome dialog on first visit
   const [showWelcome, setShowWelcome] = React.useState(false);
   React.useEffect(() => {
-    if (isReady && !tourStore.tourCompleted) {
+    if (
+      isReady &&
+      !tourStore.tourCompleted &&
+      !tourStore.isRunning &&
+      activeSection === FormsSection.MyForms
+    ) {
       setShowWelcome(true);
     }
-  }, [isReady, tourStore.tourCompleted]);
-
-  // Clean up mock data when tour ends
-  const prevTourRunning = React.useRef(tourStore.isRunning);
-  const savedUserAccess = React.useRef<number | null>(null);
-  const savedAskFromDBAgentId = React.useRef<number | null>(null);
-  React.useEffect(() => {
-    if (prevTourRunning.current && !tourStore.isRunning) {
-      // Tour just ended — restore original state
-      if (tourStore.showMockItems === false) {
-        formsListStore.reset();
-        fetchSection();
-      }
-      runInAction(() => {
-        if (savedAskFromDBAgentId.current !== null) {
-          aiStore.askFromDBAgentId = savedAskFromDBAgentId.current;
-          savedAskFromDBAgentId.current = null;
-        }
-        if (savedUserAccess.current !== null) {
-          formsSettingsStore.userAccess = savedUserAccess.current;
-          savedUserAccess.current = null;
-        }
-      });
-    }
-    prevTourRunning.current = tourStore.isRunning;
-  }, [tourStore.isRunning, tourStore.showMockItems, formsListStore, fetchSection, aiStore, formsSettingsStore]);
+  }, [isReady, tourStore.tourCompleted, tourStore.isRunning, activeSection]);
 
   // Inject mock data when navigating between sections during tour
   React.useEffect(() => {
@@ -345,7 +563,10 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     if (activeSection === FormsSection.CompletedForms) {
       if (completedFolder) {
         formsListStore.setFolders([]);
-        formsListStore.setItems(createMockCompletedFiles(completedFolder.title), 5);
+        formsListStore.setItems(
+          createMockCompletedFiles(completedFolder.title),
+          5,
+        );
       } else {
         formsListStore.setFolders(createMockFormFolders());
         formsListStore.setItems([], 0);
@@ -356,6 +577,10 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     } else if (activeSection === FormsSection.MyForms) {
       formsListStore.setFolders([]);
       formsListStore.setItems(createMockFormFiles(), 10);
+    } else {
+      // Settings / Library — clear mock data from previous section
+      formsListStore.setFolders([]);
+      formsListStore.setItems([], 0);
     }
     formsListStore.setIsLoading(false);
   }, [activeSection, completedFolder, tourStore.isRunning, formsListStore]);
@@ -364,19 +589,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   const isSettings = activeSection === FormsSection.Settings;
 
   if (!isReady) {
-    return (
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "100%",
-          height: "100%",
-        }}
-      >
-        <Loader type={LoaderTypes.dualRing} size="40px" />
-      </div>
-    );
+    return <DualRingSpinner />;
   }
 
   return (
@@ -384,11 +597,29 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
       className={styles.root}
       ref={rootRef}
       style={
-        { "--min-section-width": `${MIN_SECTION_WIDTH}px` } as React.CSSProperties
+        {
+          "--min-section-width": `${MIN_SECTION_WIDTH}px`,
+        } as React.CSSProperties
       }
     >
-      <MobileStub />
-      <FormsSidebar />
+      {showMenu && <FormsSidebar />}
+      {showMenu && (
+        <Backdrop
+          visible={
+            isSidebarOpen && currentDeviceType === DeviceType.mobile
+          }
+          onClick={closeSidebar}
+          zIndex={220}
+          withBackground
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+          }}
+        />
+      )}
       <AiChatPanel rootRef={rootRef} />
       <div className={styles.sectionArea}>
         <Section
@@ -397,7 +628,10 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
           settingsStudio={false}
           viewAs={isSettings ? "settings" : "tile"}
           isEmptyPage={
-            !isEditing && !isLoading && items.length === 0 && folders.length === 0
+            !isEditing &&
+            !isLoading &&
+            items.length === 0 &&
+            folders.length === 0
           }
           currentDeviceType={currentDeviceType}
         >
@@ -405,6 +639,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
             <FormsHeader
               onUploadFiles={onUploadFiles}
               onCreateBlankForm={onCreateBlankForm}
+              showMenu={showMenu}
             />
           </Section.SectionHeader>
           <Section.SectionBody>
@@ -418,42 +653,43 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
             </FormsDataProvider>
           </Section.SectionBody>
         </Section>
-        <AiChatButton />
+        <AiChatButton shiftUp={!!uploadProgress} />
+        {uploadProgress && (
+          <div className={styles.floatingButtonContainer}>
+            <FloatingButton
+              icon={FloatingButtonIcons.upload}
+              percent={uploadProgress.percent}
+              completed={uploadProgress.completed}
+              alert={uploadProgress.alert}
+            />
+          </div>
+        )}
       </div>
-      <CreateFormDialog
-        visible={isCreateFormDialogVisible}
-        isCreating={isCreatingForm}
-        onClose={onCloseCreateFormDialog}
-        onSave={onSaveCreateForm}
-      />
-      <WelcomeTourDialog
-        visible={showWelcome}
-        onStart={() => {
-          setShowWelcome(false);
-          formsListStore.setFolders([]);
-          formsListStore.setItems(createMockFormFiles(), 10);
-          formsListStore.setIsLoading(false);
-          // Ensure AI features are visible during tour
-          runInAction(() => {
-            if (!aiStore.askFromDBAgentId) {
-              savedAskFromDBAgentId.current = aiStore.askFromDBAgentId;
-              aiStore.askFromDBAgentId = -999;
-            }
-            if (!hasManagementAccess) {
-              savedUserAccess.current = formsSettingsStore.userAccess as number;
-              formsSettingsStore.userAccess = ShareAccessRights.RoomManager;
-            }
-          });
-          tourStore.startTour();
-        }}
-        onSkip={() => {
-          setShowWelcome(false);
-          tourStore.completeTour();
-        }}
-      />
-      {Tour && createPortal(Tour, document.body)}
+      {isCreateFormDialogVisible && (
+        <CreateFormDialog
+          visible={isCreateFormDialogVisible}
+          isCreating={isCreatingForm}
+          onClose={onCloseCreateFormDialog}
+          onSave={onSaveCreateForm}
+        />
+      )}
+      {showWelcome && (
+        <WelcomeTourDialog
+          visible={showWelcome}
+          onStart={() => {
+            setShowWelcome(false);
+            tourStore.startTour();
+          }}
+          onSkip={() => {
+            setShowWelcome(false);
+            tourStore.completeTour();
+          }}
+        />
+      )}
+      {!tourStore.tourCompleted && <FormsTourHost showMenu={showMenu} />}
     </div>
   );
 };
 
 export default observer(FormsShell);
+

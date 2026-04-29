@@ -3,11 +3,12 @@
   "content": "You can resume it later to continue collecting responses.",
   "content_en_sha1_hash": "cb96551fcc74b4c7b2ae7d592140c4146c3cc0de",
   "created_at": "2026-03-20T09:07:41.570Z",
-  "updated_at": "2026-03-20T09:52:20.983Z",
+  "updated_at": "2026-04-11T21:19:32.420Z",
   "comment": {
-    "text": "This text appears within a dialog that allows users to pause submissions. It explains that a paused collection of responses can be resumed at a later time. The key provides clarifying information following a previous description within the same dialog.",
+    "text": "This is the second sentence in the body of a dialog that appears when a user pauses submissions for a form. It informs the user that they can resume collecting responses later.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:52:20.983Z"
+    "updated_at": "2026-04-11T21:19:32.420Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

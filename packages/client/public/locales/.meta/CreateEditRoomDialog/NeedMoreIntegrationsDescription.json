@@ -3,17 +3,18 @@
   "content": "Use webhooks to send data to your own system, or connect forms to thousands of services via Zapier.",
   "content_en_sha1_hash": "2aacb84b9528e1906fc2bd5da0416409c40e3530",
   "created_at": "2026-03-20T09:07:44.155Z",
-  "updated_at": "2026-03-20T09:28:40.732Z",
+  "updated_at": "2026-04-23T17:24:01.746Z",
   "comment": {
-    "text": "This text describes the ability to connect the form to external systems. It appears in a dialog, likely within a room creation or editing flow, to explain options for sending data via webhooks or Zapier integrations. Translators should convey the idea of expanding functionality through connections.",
+    "text": "This is a descriptive text displayed in a banner or information box within a dialog. It appears when a database connection is present, offering suggestions for further integrations.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:28:40.732Z"
+    "updated_at": "2026-04-11T21:04:40.213Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/FormRoomBlock/IntegrationBar.tsx",
-      "line_number": 61,
-      "context": "const headerText = hasDatabaseConnection\n ? t(\"NeedMoreIntegrations\")\n : t(\"NoDatabaseConnections\");\n \n const descriptionText = hasDatabaseConnection\n ? t(\"NeedMoreIntegrationsDescription\")\n : t(\"ConfigureDatabaseConnection\");\n \n const handleClose = hasDatabaseConnection\n ? () => setIsDismissed(true)\n : undefined;",
+      "line_number": 64,
+      "context": "const descriptionText =\n isRoomAdmin && !hasDatabaseConnection\n ? t(\"NoDatabaseConnectionsRoomAdmin\")\n : hasDatabaseConnection\n ? t(\"NeedMoreIntegrationsDescription\")\n : t(\"ConfigureDatabaseConnection\");\n \n const handleClose = hasDatabaseConnection\n ? () => setIsDismissed(true)\n : undefined;",
       "module": "/packages/client"
     }
   ],

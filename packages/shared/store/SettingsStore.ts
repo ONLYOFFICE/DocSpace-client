@@ -91,6 +91,7 @@ import {
   isPublicRoom,
   openUrl,
 } from "../utils/common";
+import { applyCustomStyles } from "../utils/customStyles";
 import FirebaseHelper from "../utils/firebase";
 
 const themes = {
@@ -1615,6 +1616,8 @@ class SettingsStore {
     runInAction(() => {
       this.frameConfig = frameConfig;
     });
+
+    applyCustomStyles(frameConfig?.stylesUrl);
 
     if (frameConfig) {
       frameCallEvent({

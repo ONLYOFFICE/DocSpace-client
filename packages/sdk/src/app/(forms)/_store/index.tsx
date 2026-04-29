@@ -26,17 +26,12 @@
 
 "use client";
 
-import { Provider } from "mobx-react";
-
-import store from "@/app/(docspace)/_store";
 import { SettingsStoreContextProvider } from "@/app/(docspace)/_store/SettingsStore";
 import { FilesSettingsStoreContextProvider } from "@/app/(docspace)/_store/FilesSettingsStore";
 import { FilesSelectionStoreContextProvider } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { FilesListStoreContextProvider } from "@/app/(docspace)/_store/FilesListStore";
 import { NavigationStoreContextProvider } from "@/app/(docspace)/_store/NavigationStore";
-import { MediaViewerStoreContextProvider } from "@/app/(docspace)/_store/MediaViewerStore";
 import { DialogsStoreContextProvider } from "@/app/(docspace)/_store/DialogsStore";
-import { DownloadDialogStoreContextProvider } from "@/app/(docspace)/_store/DownloadDialogStore";
 import { ActiveItemsStoreContextProvider } from "@/app/(docspace)/_store/ActiveItemsStore";
 
 import { FormsNavigationStoreContextProvider } from "./FormsNavigationStore";
@@ -47,6 +42,7 @@ import { FormsDbSettingsStoreContextProvider } from "./FormsDbSettingsStore";
 import { FormsAiAgentStoreContextProvider } from "./FormsAiAgentStore";
 import { FormsUserStoreContextProvider } from "./FormsUserStore";
 import { FormsTourStoreContextProvider } from "./FormsTourStore";
+import { FormsCustomActionsStoreContextProvider } from "./FormsCustomActionsStore";
 
 export const FormsStoreProviders = ({
   children,
@@ -54,40 +50,36 @@ export const FormsStoreProviders = ({
   children: React.ReactNode;
 }) => {
   return (
-    <Provider {...store}>
-      <SettingsStoreContextProvider initData={{ viewAs: "tile" }}>
-        <FilesSettingsStoreContextProvider>
-          <FilesListStoreContextProvider>
-            <FilesSelectionStoreContextProvider>
-              <NavigationStoreContextProvider>
-                <MediaViewerStoreContextProvider>
-                  <DialogsStoreContextProvider>
-                    <DownloadDialogStoreContextProvider>
-                      <ActiveItemsStoreContextProvider>
-                        <FormsSettingsStoreContextProvider>
-                          <FormsUserStoreContextProvider>
-                            <FormsDbSettingsStoreContextProvider>
-                              <FormsAiAgentStoreContextProvider>
-                                <FormsNavigationStoreContextProvider>
-                                    <FormsListStoreContextProvider>
-                                      <FormsTourStoreContextProvider>
-                                        {children}
-                                      </FormsTourStoreContextProvider>
-                                    </FormsListStoreContextProvider>
-                                </FormsNavigationStoreContextProvider>
-                              </FormsAiAgentStoreContextProvider>
-                            </FormsDbSettingsStoreContextProvider>
-                          </FormsUserStoreContextProvider>
-                        </FormsSettingsStoreContextProvider>
-                      </ActiveItemsStoreContextProvider>
-                    </DownloadDialogStoreContextProvider>
-                  </DialogsStoreContextProvider>
-                </MediaViewerStoreContextProvider>
-              </NavigationStoreContextProvider>
-            </FilesSelectionStoreContextProvider>
-          </FilesListStoreContextProvider>
-        </FilesSettingsStoreContextProvider>
-      </SettingsStoreContextProvider>
-    </Provider>
+    <SettingsStoreContextProvider initData={{ viewAs: "tile" }}>
+      <FilesSettingsStoreContextProvider>
+        <FilesListStoreContextProvider>
+          <FilesSelectionStoreContextProvider>
+            <NavigationStoreContextProvider>
+              <DialogsStoreContextProvider>
+                <ActiveItemsStoreContextProvider>
+                  <FormsSettingsStoreContextProvider>
+                    <FormsUserStoreContextProvider>
+                      <FormsDbSettingsStoreContextProvider>
+                        <FormsAiAgentStoreContextProvider>
+                          <FormsNavigationStoreContextProvider>
+                            <FormsListStoreContextProvider>
+                              <FormsCustomActionsStoreContextProvider>
+                                <FormsTourStoreContextProvider>
+                                  {children}
+                                </FormsTourStoreContextProvider>
+                              </FormsCustomActionsStoreContextProvider>
+                            </FormsListStoreContextProvider>
+                          </FormsNavigationStoreContextProvider>
+                        </FormsAiAgentStoreContextProvider>
+                      </FormsDbSettingsStoreContextProvider>
+                    </FormsUserStoreContextProvider>
+                  </FormsSettingsStoreContextProvider>
+                </ActiveItemsStoreContextProvider>
+              </DialogsStoreContextProvider>
+            </NavigationStoreContextProvider>
+          </FilesSelectionStoreContextProvider>
+        </FilesListStoreContextProvider>
+      </FilesSettingsStoreContextProvider>
+    </SettingsStoreContextProvider>
   );
 };

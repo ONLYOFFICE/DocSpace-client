@@ -208,16 +208,6 @@ export interface LinkParamsType {
   updateLink?: (newLink: TFileLink) => void;
 }
 
-export type TShareRightsType =
-  | "ExternalLink"
-  | "Group"
-  | "PrimaryExternalLink"
-  | "User";
-
-export type TAvailableShareRights = Partial<
-  Record<TShareRightsType, ShareRights[]>
->;
-
 export type TShareLinkAccessRightOption = {
   key: string;
   icon: string;
@@ -310,6 +300,7 @@ declare global {
         value: unknown,
         callback: unknown,
       ) => void;
+      getCloudKeys?: (domain: string) => Array<{ id: string }>;
       getViewportSettings?: () => {
         widgetType: "window" | "tab";
         captionHeight: number;
@@ -330,9 +321,7 @@ declare global {
     RendererProcessVariable?: {
       theme?: { id: string; system: string; type: string; addlocal: string };
     };
-    Tiff: new (
-      arg: object,
-    ) => {
+    Tiff: new (arg: object) => {
       toDataURL: () => string;
     };
     dataLayer?: Record<string, unknown>[];

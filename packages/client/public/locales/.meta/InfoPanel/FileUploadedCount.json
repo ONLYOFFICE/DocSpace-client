@@ -3,23 +3,24 @@
   "content": "Files added ({{count}}).",
   "content_en_sha1_hash": "6967f445fbc05fa8f07f7d586b8da6d95254bbeb",
   "created_at": "2025-05-19T21:30:54.829Z",
-  "updated_at": "2025-08-04T07:30:01.219Z",
+  "updated_at": "2026-04-11T21:13:27.872Z",
   "comment": {
-    "text": "This translation key displays a message indicating the number of files uploaded, used to provide feedback on file addition in a history view. It appears as a count value within the \"Files added\" section of the UI.",
+    "text": "This is a notification message displayed in the information panel when multiple files have been uploaded. The `{{count}}` variable represents the number of files uploaded.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:02.150Z"
+    "updated_at": "2026-04-11T21:13:27.872Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
       "line_number": 54,
-      "context": "switch (feed.action.key) {\n case FeedActionKeys.FileCreated:\n return t(\"InfoPanel:FileCreated\");\n case FeedActionKeys.FileUploaded:\n if (hasRelatedItems)\n return t(\"InfoPanel:FileUploadedCount\", {\n count,\n });\n return t(\"InfoPanel:FileUploaded\");\n case FeedActionKeys.UserFileUpdated:\n return t(\"InfoPanel:UserFileUpdated\");",
+      "context": "switch (feed.action.key) {\n case FeedActionKeys.FileCreated:\n return t(\"InfoPanel:FileCreatedNotify\");\n case FeedActionKeys.FileUploaded:\n if (hasRelatedItems)\n return t(\"InfoPanel:FileUploadedCount\", {\n count,\n });\n return t(\"InfoPanel:FilesAddedNotify\");\n case FeedActionKeys.UserFileUpdated:\n return t(\"InfoPanel:UserFileUpdated\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 48,
-      "context": "switch (feed.action.key) {\n case FeedActionKeys.FileCreated:\n return t(\"InfoPanel:FileCreated\");\n case FeedActionKeys.FileUploaded:\n if (hasRelatedItems)\n return t(\"InfoPanel:FileUploadedCount\", {\n count,\n });\n return t(\"InfoPanel:FileUploaded\");\n case FeedActionKeys.UserFileUpdated:\n return t(\"InfoPanel:UserFileUpdated\");",
+      "context": "switch (feed.action.key) {\n case FeedActionKeys.FileCreated:\n return t(\"InfoPanel:FileCreatedNotify\");\n case FeedActionKeys.FileUploaded:\n if (hasRelatedItems)\n return t(\"InfoPanel:FileUploadedCount\", {\n count,\n });\n return t(\"InfoPanel:FilesAddedNotify\");\n case FeedActionKeys.UserFileUpdated:\n return t(\"InfoPanel:UserFileUpdated\");",
       "module": "/packages/client"
     }
   ],
@@ -63,13 +64,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Προσθήκη αρχείων ({{count}}).\" doesn't perfectly capture the nuance of 'Files added'. A more accurate translation might be 'Έχουν προστεθεί αρχεία ({{count}}).' or 'Ανέβηκαν αρχεία ({{count}}).'",
-          "suggestion": "Έχουν προστεθεί αρχεία ({{count}})."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -93,30 +88,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Ֆայլերն ավելացվել են ({{count}}):\" is a literal translation that doesn't quite convey the meaning of \"Files added ({{count}}).\" A more natural Armenian phrasing would be \"Բացվել են {{count}} ֆայլեր\" or \"{{count}} ֆայլեր ավելացվել են\".",
-          "suggestion": "Consider translating as \"Բացվել են {{count}} ֆայլեր\" or \"{{count}} ֆայլեր ավելացվել են\"."
-        },
-        {
-          "type": "formatting",
-          "description": "The colon at the end of the translated sentence is not typical for this type of UI text. It should be removed to match the English version's style.",
-          "suggestion": "Remove the colon at the end of the sentence."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English content refers to 'Files added', implying multiple files. The Italian translation 'File aggiunti' uses the singular form, suggesting only one file. While grammatically correct in Italian, it doesn't perfectly match the original meaning.",
-          "suggestion": "File aggiunti ({{count}})."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -134,13 +112,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ເອກະສານເພີ່ມເຕີມ ({{count}}).' is a literal translation of 'Files added'. A more natural translation might be 'ເອກະສານທີ່ອັບໂຫລດ ({{count}}).' or 'ອັບໂຫລດເອກະສານ ({{count}}).'. 'ເພີ່ມເຕີມ' implies 'additional' rather than 'uploaded'.",
-          "suggestion": "ອັບໂຫລດເອກະສານ ({{count}})."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -176,37 +148,19 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The Romanian translation \"Fişiere au fost adăugate ({{count}}).\" is grammatically incorrect. 'Fişiere' is plural, but the verb 'au fost' (they were) doesn't agree with a singular 'file'. The correct construction should use a singular verb.",
-          "suggestion": "Fişier a fost adăugat ({{count}})."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Russian translation lacks a period at the end of the sentence, mirroring the English version.",
-          "suggestion": "Файлы добавлены {{count}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ගොනු එක් කරන ලදි ({{count}}).' is not the most natural or accurate way to convey 'Files added ({{count}}).' A more suitable translation would be something like 'ගොනු ඇමුණුන ({{count}}).' or 'ගොනු යාවදුන ({{count}}).'  'එක් කරන ලදි' implies a process of merging or joining, which isn't precisely what file uploading means.",
-          "suggestion": "ගොනු ඇමුණුන ({{count}})."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -224,30 +178,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Додати фајлови ({{count}}).' doesn't accurately convey the meaning of \"Files added ({{count}})\". 'Додати' means 'Added' but in a more active sense, like 'to add'. A more accurate translation would imply the user is adding files.",
-          "suggestion": "Uploaded files ({{count}})."
-        },
-        {
-          "type": "spelling",
-          "description": "While 'фајлови' is a valid word for 'files', 'datoteke' might be more commonly used and feel more natural in this context. However, 'фајлови' is acceptable.",
-          "suggestion": "datoteke"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Dodati fajlovi ({{count}})' is not the most natural or accurate translation of 'Files added ({{count}})' in Serbian. A better translation would be something like 'Uneti fajlovi ({{count}})' or 'Pričanjeni fajlovi ({{count}})' to convey 'added' in the context of uploading.",
-          "suggestion": "Uneti fajlovi ({{count}})"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

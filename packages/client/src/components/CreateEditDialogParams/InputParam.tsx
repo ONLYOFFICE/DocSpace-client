@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
 
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { Label } from "@docspace/ui-kit/components/label";
@@ -34,22 +33,7 @@ import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { Text } from "@docspace/ui-kit/components/text";
 
 import { StyledParam } from "./StyledParam";
-
-const StyledInputParam = styled(StyledParam)`
-  flex-direction: column;
-  gap: 4px;
-  max-height: 54px;
-
-  .input-label-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-
-    .input-label {
-      cursor: pointer;
-    }
-  }
-`;
+import styles from "./InputParam.module.scss";
 
 type InputParamProps = {
 	ref?: React.RefObject<HTMLInputElement | null>;
@@ -93,7 +77,7 @@ const InputParam = ({
 	dataTestId,
 }: InputParamProps) => {
 	return (
-		<StyledInputParam>
+		<StyledParam className={styles.inputParam}>
 			<div className="input-label-wrapper">
 				<Label
 					title={title}
@@ -142,7 +126,7 @@ const InputParam = ({
 					testId={dataTestId}
 				/>
 			</FieldContainer>
-		</StyledInputParam>
+		</StyledParam>
 	);
 };
 

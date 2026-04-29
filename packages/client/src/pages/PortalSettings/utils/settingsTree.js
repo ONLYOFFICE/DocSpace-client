@@ -156,6 +156,23 @@ export const settingsTree = [
           },
         ],
       },
+      {
+        id: "portal-settings_catalog-default-templates",
+        key: "0-3",
+        icon: "",
+        link: "default-templates",
+        tKey: "DefaultTemplates",
+        isCategory: true,
+        children: [
+          {
+            id: "portal-settings_catalog-default-templates_subLink",
+            key: "0-3-0",
+            icon: "",
+            link: "default-templates",
+            tKey: "DefaultTemplates",
+          },
+        ],
+      },
     ],
   },
   {

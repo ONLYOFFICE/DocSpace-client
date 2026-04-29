@@ -39,12 +39,15 @@ import BackupSvgUrl from "PUBLIC_DIR/images/icons/16/backup.svg?url";
 import AiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/ai-agents.svg?url";
 
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
+import { frameCallEvent } from "@docspace/shared/utils/common";
 
 import { FormsSection } from "@/types/forms";
+import type { CustomContextMenuAction } from "@/types/forms";
 
 import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
 import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
 import { useFormsDbSettingsStore } from "../_store/FormsDbSettingsStore";
+import { useFormsCustomActionsStore } from "../_store/FormsCustomActionsStore";
 import useFormsActions from "./useFormsActions";
 import { sectionFromPathname } from "../_utils/sectionFromPathname";
 
@@ -74,6 +77,52 @@ export default function useFormsContextMenu() {
     downloadFolder,
     deleteFolderFromList,
   } = useFormsActions({ t });
+  const { fileActions, folderActions } = useFormsCustomActionsStore();
+
+  const appendCustomItems = useCallback(
+    (
+      model: TFormsContextMenuItem[],
+      actions: CustomContextMenuAction[],
+      type: "file" | "folder",
+      item: TFile | TFolder,
+    ) => {
+      const filtered = actions.filter(
+        (a) => !a.section || a.section.includes(activeSection),
+      );
+      if (!filtered.length) return;
+
+      model.push({
+        id: "custom-separator",
+        key: "custom-separator",
+        label: "",
+        icon: "",
+        onClick: () => {},
+        disabled: false,
+        isSeparator: true,
+      } as TFormsContextMenuItem & { isSeparator: boolean });
+
+      for (const action of filtered) {
+        model.push({
+          id: `custom_${action.key}`,
+          key: action.key,
+          label: action.label,
+          icon: action.icon ?? "",
+          disabled: false,
+          onClick: () => {
+            frameCallEvent({
+              event: "onCustomAction",
+              data: {
+                action: action.key,
+                type,
+                item,
+              },
+            });
+          },
+        });
+      }
+    },
+    [activeSection],
+  );
 
   const getContextMenuModel = useCallback(
     (file: TFile): TFormsContextMenuItem[] => {
@@ -241,6 +290,8 @@ export default function useFormsContextMenu() {
         }
       }
 
+      appendCustomItems(model, fileActions, "file", file);
+
       return model;
     },
     [
@@ -255,6 +306,8 @@ export default function useFormsContextMenu() {
       askFromDBAgentId,
       hasManagementAccess,
       sendToDb,
+      fileActions,
+      appendCustomItems,
     ],
   );
 
@@ -295,9 +348,11 @@ export default function useFormsContextMenu() {
         });
       }
 
+      appendCustomItems(model, folderActions, "folder", folder);
+
       return model;
     },
-    [t, downloadFolder, deleteFolderFromList],
+    [t, downloadFolder, deleteFolderFromList, folderActions, appendCustomItems],
   );
 
   return { getContextMenuModel, getFolderContextMenuModel };

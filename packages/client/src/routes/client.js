@@ -626,6 +626,26 @@ const ClientRoutes = [
     },
   },
   {
+    path: "/no-access",
+    async lazy() {
+      const { default: NoAccessContainer, NoAccessContainerType } =
+        await componentLoader(
+          () =>
+            import("SRC_DIR/components/EmptyContainer/NoAccessContainer"),
+        );
+
+      const Component = () => (
+        <PrivateRoute>
+          <ErrorBoundary>
+            <NoAccessContainer type={NoAccessContainerType.Account} />
+          </ErrorBoundary>
+        </PrivateRoute>
+      );
+
+      return { Component };
+    },
+  },
+  {
     path: "/error/offline",
     async lazy() {
       const { ErrorOfflineContainer } = await componentLoader(

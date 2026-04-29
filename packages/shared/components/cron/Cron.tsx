@@ -48,6 +48,7 @@ import { getPeriodFromCronParts, getUnits } from "./Cron.utils";
 
 import type { PeriodType, CronProps } from "./Cron.types";
 import styles from "./Cron.module.scss";
+import { getConstName } from "@docspace/shared/constants/consts";
 
 const Cron = ({
   value = defaultCronString,
@@ -217,7 +218,7 @@ const Cron = ({
             dataTestId={dataTestId ? `${dataTestId}_minutes` : undefined}
           />
         ) : null}
-        <span className={styles.suffix}>{t("Common:UTC")}</span>
+        <span className={styles.suffix}>{getConstName("UTC")}</span>
       </div>
     </div>
   );

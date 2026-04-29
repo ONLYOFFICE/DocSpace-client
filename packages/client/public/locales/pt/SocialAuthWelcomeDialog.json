@@ -1,6 +1,6 @@
 {
   "ChangeData": "Alterar dados e senha",
-  "ClickButtonBelow": "Se você gostaria de fazer login usando seu e-mail, por favor, defina sua própria senha. <br /> Quando estiver pronto, por favor, clique no botão abaixo.",
+  "ClickButtonBelow": "Se desejar fazer login usando seu e-mail, defina sua própria senha. <br/> Quando estiver pronto, clique no botão abaixo.",
   "ContinueToProduct": "Continue para {{productName}}",
   "GeneratedPassword": "Senha gerada",
   "ProductNameDetail": "{{productName}} nome",

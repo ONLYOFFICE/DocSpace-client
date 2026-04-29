@@ -3,11 +3,12 @@
   "content": "To continue getting support and updates, buy a renewal.",
   "content_en_sha1_hash": "ec58935d8687f19ed9ad71853d7932c9a2c5e29f",
   "created_at": "2025-05-26T07:15:40.078Z",
-  "updated_at": "2026-02-19T13:36:33.178Z",
+  "updated_at": "2026-04-11T21:48:25.808Z",
   "comment": {
-    "text": "This translation key is used to display a message encouraging users to renew their license to continue receiving support and updates. It appears in a subscription-related UI element on an enterprise payment page.",
+    "text": "This is a text label displayed when a license is about to expire or has expired. It prompts the user to renew their license to continue receiving support and updates.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:08:52.164Z"
+    "updated_at": "2026-04-11T21:01:21.788Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -33,7 +34,15 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \"n\"",
+          "suggestion": "",
+          "checked_at": "2026-04-11T21:48:25.797Z",
+          "checked_by": "deterministic"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -199,6 +208,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

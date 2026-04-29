@@ -333,7 +333,11 @@ const TemplateAccessSettingsPanel = ({
 			<Scrollbar>
 				<div className={styles.settingsBody}>
 					<div className={styles.block}>
-						<Heading className={styles.subHeaderInline}>
+						<Heading
+							className={styles.subHeaderInline}
+							fontSize="16px"
+							fontWeight={700}
+						>
 							{t("Files:TemplateAvailable")}
 
 							<ToggleButton
@@ -358,7 +362,11 @@ const TemplateAccessSettingsPanel = ({
 							roomId={templateId}
 						/>
 
-						<Heading className={`${styles.subHeader} invite-input-text`}>
+						<Heading
+							className={`${styles.subHeader} invite-input-text`}
+							fontSize="16px"
+							fontWeight={700}
+						>
 							{t("Files:AccessToTemplate")}
 						</Heading>
 						{hasInvitedUsers ? (
@@ -428,7 +436,11 @@ const TemplateAccessSettingsPanel = ({
 			<ModalDialog.Body>
 				<>
 					<div className={styles.block}>
-						<Heading className={styles.subHeaderInline}>
+						<Heading
+							className={styles.subHeaderInline}
+							fontSize="16px"
+							fontWeight={700}
+						>
 							{t("Files:TemplateAvailable")}
 
 							<ToggleButton
@@ -452,7 +464,11 @@ const TemplateAccessSettingsPanel = ({
 							isDisabled={isAvailable}
 							roomId={templateId}
 						/>
-						<Heading className={`${styles.subHeader} invite-input-text`}>
+						<Heading
+							className={`${styles.subHeader} invite-input-text`}
+							fontSize="16px"
+							fontWeight={700}
+						>
 							{t("Files:AccessToTemplate")}
 						</Heading>
 						{hasInvitedUsers ? (

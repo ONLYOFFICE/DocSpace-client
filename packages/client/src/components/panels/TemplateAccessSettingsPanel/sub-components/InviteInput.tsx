@@ -244,7 +244,11 @@ const InviteInput = ({
 
   return (
     <>
-      <Heading className={`${styles.subHeader} invite-input-text`}>
+      <Heading
+        className={`${styles.subHeader} invite-input-text`}
+        fontSize="16px"
+        fontWeight={700}
+      >
         {t("Files:AddUsersOrGroupsTitle")}
 
         <Link

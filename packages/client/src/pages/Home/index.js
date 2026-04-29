@@ -167,6 +167,7 @@ const PureHome = (props) => {
 
     aiConfig,
     currentTab,
+    selectedResultFileId,
     setIsAboutDialogVisible,
 
     pluginFloatingOperationsArray,
@@ -365,7 +366,7 @@ const PureHome = (props) => {
 
       sectionProps.isEmptyPage = isEmptyPage;
       sectionProps.isTrashFolder = isRecycleBinFolder;
-      sectionProps.fullHeightBody = isChat;
+      sectionProps.fullHeightBody = isChat || !!selectedResultFileId;
     } else {
       sectionProps.isAccounts = isContactsPage;
     }
@@ -501,6 +502,7 @@ const PureHome = (props) => {
         !isDisabledKnowledge &&
         shouldShowFilter &&
         !isProfile &&
+        !selectedResultFileId &&
         (!isFrame || showFilter) ? (
           <Section.SectionFilter>
             <SectionFilterContent />
@@ -841,6 +843,7 @@ export const Component = inject(
 
       isErrorAIAgentNotAvailable,
       currentTab: aiRoomStore.currentTab,
+      selectedResultFileId: aiRoomStore.selectedResultFileId,
       aiConfig: settingsStore.aiConfig,
 
       setIsAboutDialogVisible: profileActionsStore.setIsAboutDialogVisible,

@@ -55,6 +55,7 @@ const InfoPanelHeaderGeneral = ({
   enablePlugins,
 
   isRecentFolder,
+  selectedResultFileId,
 }: HeaderProps) => {
   const { t } = useTranslation(["Common", "InfoPanel"]);
 
@@ -117,7 +118,7 @@ const InfoPanelHeaderGeneral = ({
     content: null,
   };
 
-  const showAIChatTab = !isAIAgents();
+  const showAIChatTab = !isAIAgents() || !!selectedResultFileId;
 
   const templateSubmenu = showAIChatTab
     ? [memberTab, detailsTab, aiChatTab]

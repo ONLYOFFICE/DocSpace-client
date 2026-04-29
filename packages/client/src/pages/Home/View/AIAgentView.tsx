@@ -87,9 +87,7 @@ const AIAgentViewComponent = ({
 export const AIAgentView = inject(
   ({ filesStore, clientLoadingStore, accessRightsStore }: TStore) => {
     const { isErrorAIAgentNotAvailable } = filesStore;
-
     const { showArticleLoader, showBodyLoader } = clientLoadingStore;
-
     const { canUseChat } = accessRightsStore;
 
     return {
@@ -100,4 +98,3 @@ export const AIAgentView = inject(
     };
   },
 )(observer(AIAgentViewComponent));
-

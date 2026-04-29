@@ -43,7 +43,11 @@ import { Toast, toastr, ToastType } from "@docspace/ui-kit/components/toast";
 import { RootTooltip } from "@docspace/ui-kit/components/tooltip";
 import AiAgentProviders from "@docspace/ui-kit/ai-agent/providers";
 import { updateTempContent } from "@docspace/shared/utils/common";
-import { DeviceType, IndexedDBStores } from "@docspace/shared/enums";
+import { DeviceType, IndexedDBStores, InfoPanelEvents, SearchArea } from "@docspace/shared/enums";
+import { setFileView } from "SRC_DIR/helpers/info-panel";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { CategoryType } from "@docspace/shared/constants";
+import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
 import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 import { sendToastReport } from "@docspace/shared/utils/crashReport";
@@ -100,6 +104,9 @@ const Shell = ({ page = "home", ...rest }) => {
     isGuest,
     setSocialAuthWelcomeDialogVisible,
     getAIConfig,
+    getAgentRoomId,
+    openResultFile,
+    closeEditorPanel,
   } = rest;
 
   const theme = useTheme();
@@ -534,6 +541,9 @@ const Shell = ({ page = "home", ...rest }) => {
         locale={language}
         theme={isBase ? "theme-portal-base" : "theme-portal-dark"}
         isStandalone={standalone}
+        getAgentRoomId={getAgentRoomId}
+        openResultFile={openResultFile}
+        closeEditorPanel={closeEditorPanel}
       >
         <Layout>
           {toast}
@@ -570,6 +580,8 @@ const ShellWrapper = inject(
     userStore,
     currentTariffStatusStore,
     dialogsStore,
+    selectedFolderStore,
+    aiRoomStore,
   }) => {
     const { i18n } = useTranslation();
 
@@ -678,6 +690,31 @@ const ShellWrapper = inject(
       standalone,
       setSocialAuthWelcomeDialogVisible,
       getAIConfig,
+      getAgentRoomId: () => {
+        const id = selectedFolderStore.rootRoomId;
+        return id ? Number(id) : null;
+      },
+      openResultFile: (fileId) => {
+        if (!selectedFolderStore.isAIRoom) return;
+        const roomId = selectedFolderStore.rootRoomId || selectedFolderStore.id;
+        if (!roomId) return;
+
+        aiRoomStore.setCurrentTab("result");
+        aiRoomStore.setSelectedResultFileId(Number(fileId));
+
+        const filesFilter = FilesFilter.getDefault();
+        filesFilter.folder = String(roomId);
+        filesFilter.searchArea = SearchArea.ResultStorage;
+        const path = getCategoryUrl(CategoryType.AIAgent, roomId);
+        clientLoadingStore.setIsSectionBodyLoading(true, false);
+        window.DocSpace.navigate(`${path}?${filesFilter.toUrlParams()}`);
+
+        window.dispatchEvent(new CustomEvent(InfoPanelEvents.showInfoPanel));
+        setFileView("info_ai_chat");
+      },
+      closeEditorPanel: () => {
+        aiRoomStore.setSelectedResultFileId(null);
+      },
     };
   },
 )(observer(Shell));

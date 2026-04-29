@@ -270,6 +270,7 @@ const useEditorEvents = ({
     if (config?.errorMessage) docEditor?.showMessage?.(config.errorMessage);
 
     const connector = docEditor?.createConnector?.();
+    let provider: TAiProvider | undefined;
 
     if (connector && successAuth) {
       try {
@@ -279,7 +280,6 @@ const useEditorEvents = ({
 
         if (defaultPortalProvider) {
           const DEFAULT_MODEL = "gpt-5.2";
-          let provider: TAiProvider | undefined;
           let model = defaultPortalProvider.defaultModel || DEFAULT_MODEL;
 
           if (defaultPortalProvider.providerId === -1) {
@@ -377,43 +377,49 @@ const useEditorEvents = ({
               externalAIFetch(connector, e as TEditorAIEvent, providerId),
             );
 
-            // Bridges tool calls from the parent chat window into the editor's
-            // AI plugin. The chat posts `{ type: "callEditorTool", callId,
-            // name, arguments }` and we forward the call via the connector,
-            // then post an ack back so the host-side handler can resolve.
-            const onParentMessage = (event: MessageEvent) => {
-              if (event.source !== window.parent) return;
-              const payload = event.data;
-              if (
-                !payload ||
-                typeof payload !== "object" ||
-                (payload as { type?: unknown }).type !== "callEditorTool"
-              )
-                return;
-
-              const { callId, name, arguments: args } = payload as {
-                callId?: string;
-                name?: string;
-                arguments?: Record<string, unknown>;
-              };
-              if (typeof name !== "string") return;
-
-              connector.sendEvent("ai_onCallTool", {
-                name,
-                arguments: args ?? {},
-              });
-
-              window.parent?.postMessage(
-                { type: "editorToolResult", callId, result: "" },
-                "*",
-              );
-            };
-            window.addEventListener("message", onParentMessage);
           }
         }
+
       } catch (error) {
         console.error("Failed to initialize AI provider:", error);
       }
+    }
+
+    // Active whenever connector exists — does not require successAuth or a configured provider.
+    if (connector) {
+      const onParentMessage = (event: MessageEvent) => {
+        if (event.source !== window.parent) return;
+        const payload = event.data;
+        if (
+          !payload ||
+          typeof payload !== "object" ||
+          (payload as { type?: unknown }).type !== "callEditorTool"
+        )
+          return;
+
+        const { callId, name, arguments: args } = payload as {
+          callId?: string;
+          name?: string;
+          arguments?: Record<string, unknown>;
+        };
+        if (typeof name !== "string") return;
+
+        if (provider) {
+          connector.sendEvent("ai_onCallTool", { name, arguments: args ?? {} });
+          window.parent?.postMessage(
+            { type: "editorToolResult", callId, result: "" },
+            "*",
+          );
+        } else {
+          window.parent?.postMessage(
+            { type: "editorToolResult", callId, result: JSON.stringify({ error: "AI provider not configured" }) },
+            "*",
+          );
+        }
+      };
+      window.addEventListener("message", onParentMessage);
+      // Signal parent that this window is ready to receive callEditorTool messages.
+      window.parent?.postMessage({ type: "editorDocumentReady" }, "*");
     }
 
     // Do not remove: it's for Back button on Mobile App

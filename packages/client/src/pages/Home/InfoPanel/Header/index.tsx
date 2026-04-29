@@ -50,6 +50,7 @@ const InfoPanelHeaderContent = ({
     infoPanelItemsList,
     enablePlugins,
     isRecentFolder,
+    selectedResultFileId,
   } = restProps as Exclude<InfoPanelHeaderContentProps, { isGallery: true }>;
 
   return (
@@ -63,6 +64,7 @@ const InfoPanelHeaderContent = ({
       infoPanelItemsList={infoPanelItemsList}
       enablePlugins={enablePlugins}
       isRecentFolder={isRecentFolder}
+      selectedResultFileId={selectedResultFileId}
     />
   );
 };
@@ -73,6 +75,7 @@ export default inject(
     infoPanelStore,
     pluginStore,
     treeFoldersStore,
+    aiRoomStore,
   }: TStore) => {
     const { infoPanelItemsList } = pluginStore;
 
@@ -91,6 +94,8 @@ export default inject(
 
     const { isRecentFolder } = treeFoldersStore;
 
+    const { selectedResultFileId } = aiRoomStore;
+
     return {
       selection,
       roomsView,
@@ -105,6 +110,8 @@ export default inject(
       enablePlugins,
 
       isRecentFolder,
+
+      selectedResultFileId,
     };
   },
 )(observer(InfoPanelHeaderContent));

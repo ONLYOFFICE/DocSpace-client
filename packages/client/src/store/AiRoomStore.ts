@@ -38,6 +38,8 @@ class AiRoomStore {
 
   currentTab: "chat" | "knowledge" | "result" = "chat";
 
+  selectedResultFileId: Nullable<number> = null;
+
   aiPlaylistImages: TChatPlaylistImage[] = [];
 
   constructor() {
@@ -54,6 +56,11 @@ class AiRoomStore {
 
   setCurrentTab = (currentTab: "chat" | "knowledge" | "result") => {
     this.currentTab = currentTab;
+    if (currentTab !== "result") this.selectedResultFileId = null;
+  };
+
+  setSelectedResultFileId = (id: Nullable<number>) => {
+    this.selectedResultFileId = id;
   };
 
   setKnowledgeId = (knowledgeId: Nullable<number>) => {

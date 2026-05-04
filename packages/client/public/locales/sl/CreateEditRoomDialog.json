@@ -6,6 +6,7 @@
   "AutomaticIndexing": "Samodejno indeksiranje",
   "AutomaticIndexingDescription": "Omogočite samodejno indeksiranje za indeksiranje datotek in map po serijski številki. Razvrščanje po številki bo nastavljeno kot privzeto za vse uporabnike.",
   "ChooseRoomType": "Izberi tip sobe",
+  "ConfigureDatabaseConnection": "Konfigurirajte povezavo z bazo podatkov v Integracije → Tretje strani",
   "CreateRoomConfirmation": "Nadaljuj brez povezovanja pomnilnika?\nIzbrali ste možnost shranjevanja tretje osebe, ki še ni povezana. Če nadaljujete brez povezave s storitvijo, ta možnost ne bo dodana.",
   "CreateRoomWatermarksConfirmation": "Za dokumente v tej sobi niste nastavili vodnega žiga. Vodni žig lahko vedno dodate v nastavitvah urejanja sobe. Želite nadaljevati brez vodnega žiga?",
   "CreateTagOption": "Ustvari oznako",
@@ -16,8 +17,12 @@
   "FileLifetimeDescription": "Nastavite življenjsko dobo datoteke za samodejno brisanje datotek v tej sobi po določenem obdobju. Življenjska doba se začne z datumom nalaganja/ustvarjanja datoteke.",
   "FilesOlderThan": "Datoteke starejše od:",
   "FormRoomBarDescription": "Ta soba je na voljo vsem s povezavo. Zunanji uporabniki bodo imeli dovoljenje za izpolnjevanje obrazcev za vse datoteke.",
+  "GoToIntegrations": "Pojdite na Integracije",
   "Horizontal": "Horizontalno",
   "Icon": "Ikona",
+  "NeedMoreIntegrations": "Potrebujete več integracij?",
+  "NeedMoreIntegrationsDescription": "Uporabite webhooks za pošiljanje podatkov v vašo lastno sistemo ali povežite obrazce z tisoči storitev preko Zapier.",
+  "NoDatabaseConnections": "Ni konfiguriranih povezav z bazama podatkov",
   "PeopleSelectorInfo": "Samo skrbnik sobe ali skrbnik {{productName}} lahko postaneta lastnika sobe",
   "Position": "Pozicija",
   "PublicRoomBarDescription": "Ta soba je na voljo vsem s povezavo. Dostop za zunanje uporabnike je zagotovljen v skladu z izbrano vrsto pravic za dostop.",
@@ -39,5 +44,6 @@
   "UserName": "Uporabniško ime",
   "ViewerInfo": "Informacije o ogledovalcu",
   "WatermarkPreview": "Predogled vodnega žiga",
-  "WatermarkPreviewHelp": "Ta predogled približno prikazuje, kako bo vodni žig prikazan v vaših datotekah."
+  "WatermarkPreviewHelp": "Ta predogled približno prikazuje, kako bo vodni žig prikazan v vaših datotekah.",
+  "NoDatabaseConnectionsRoomAdmin": "Povezave z bazo konfigurira administrator. Ko bo baza nastavljena, boste tukaj lahko omogočili izvoz."
 }

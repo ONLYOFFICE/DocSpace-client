@@ -66,7 +66,7 @@ class PrimaryProgressDataStore {
       if (progressInfo.alert) {
         this.setNeedErrorChecking(true, operation);
       }
-      if (!progressInfo.label) {
+      if (!progressInfo.label && !operationObject.canceled) {
         if (progressInfo.percent > 0 && !progressInfo.completed) {
           progressInfo.label = getOperationsProgressTitle(
             operation,
@@ -140,6 +140,10 @@ class PrimaryProgressDataStore {
       this.primaryOperationsArray.length > 0 &&
       this.primaryOperationsArray.every((op) => op.completed)
     );
+  }
+
+  get primaryOperationsCanceled() {
+    return this.primaryOperationsArray.some((op) => op.canceled);
   }
 
   get primaryOperationsAlert() {

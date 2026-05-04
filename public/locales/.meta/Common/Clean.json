@@ -3,11 +3,12 @@
   "content": "Clean",
   "content_en_sha1_hash": "fa893d87e1fa0a69c7942dd1e65f3bd1932e53d1",
   "created_at": "2025-08-26T11:15:03.639Z",
-  "updated_at": "2025-08-26T11:30:48.462Z",
+  "updated_at": "2026-04-11T20:57:14.114Z",
   "comment": {
-    "text": "This key translates the label for a \"Clean\" button, likely used to clear or reset password-related input fields within an Edit Link panel. It appears as a button with a bold font weight, intended to provide a clear action for users.",
+    "text": "This is a button label that, when clicked, clears the password set for a shared link.",
     "is_auto": true,
-    "updated_at": "2025-08-26T11:30:48.462Z"
+    "updated_at": "2026-04-11T20:57:14.114Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

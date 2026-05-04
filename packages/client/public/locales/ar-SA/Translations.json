@@ -1,8 +1,8 @@
 {
   "ChooseFromList": "اختر من القائمة",
-  "FileLocked": "الملف مؤمن",
+  "FileLocked": "الملف مقفل",
   "FileProtected": "الملف محمي بكلمة مرور",
-  "FileUnlocked": "ملف مفتوح",
+  "FileUnlocked": "تم إلغاء قفل الملف",
   "FolderTitleBoxNet": "مجلد Box",
   "FolderTitleDocuSign": "حساب DocuSign",
   "FolderTitleDropBox": "مجلد Dropbox",
@@ -11,7 +11,7 @@
   "FolderTitleSharePoint": "مجلد SharePoint",
   "FolderTitleSkyDrive": "مجلد OneDrive",
   "FolderTitleWebDav": "مجلد WebDAV",
-  "FolderTitleYandex": "مجلد Yandex",
+  "FolderTitleYandex": "دليل Yandex",
   "NewForm": "نموذج PDF",
   "OwnerChange": "تغيير المالك",
   "RoleGuestDescriprion": "يمكن للضيوف الوصول إلى الغرف التي تمت دعوتهم إليها، وكذلك إنشاء وتعديل المستندات إذا تم تعيين الأدوار المناسبة لهم في الغرفة.",
@@ -20,6 +20,6 @@
   "SubNewForm": "فارغ",
   "SubNewFormFile": "من ملف نصي",
   "ThirdPartyInfo": "تغيير معلومات الجهة الخارجية",
-  "ThirdPartyTitle": "الخدمات الجهة الخارجية",
+  "ThirdPartyTitle": "خدمات الطرف الثالث",
   "TrashItemsDeleteSuccess": "تم حذف العناصر المحددة بنجاح من {{sectionName}}"
 }

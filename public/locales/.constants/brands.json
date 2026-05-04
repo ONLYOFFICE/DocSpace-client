@@ -1,0 +1,71 @@
+{
+  "OrganizationName": "ONLYOFFICE",
+  "ProductName": "DocSpace",
+  "ProductEditorsName": "Docs",
+  "OnlyofficeDesktopEditors": "ONLYOFFICE Desktop Editors",
+
+  "ProviderApple": "Apple",
+  "ProviderApple-si": "ඇපල්",
+
+  "ProviderFacebook": "Facebook",
+  "ProviderFacebook-ar-SA": "فيسبوك",
+  "ProviderFacebook-si": "ෆේස්බුක්",
+
+  "ProviderGoogle": "Google",
+  "ProviderGoogle-ar-SA": "جوجل",
+  "ProviderGoogle-si": "ගූගල්",
+  "ProviderGoogle-zh-CN": "Google谷歌",
+
+  "ProviderLinkedIn": "LinkedIn",
+  "ProviderLinkedIn-ar-SA": "لينكدان",
+  "ProviderLinkedIn-si": "ලින්ක්ඩින්",
+  "ProviderLinkedIn-zh-CN": "LinkedIn领英",
+
+  "ProviderMicrosoft": "Microsoft",
+  "ProviderMicrosoft-ar-SA": "مايكروسوفت",
+  "ProviderMicrosoft-si": "මයික්‍රොසොෆ්ට්",
+  "ProviderMicrosoft-zh-CN": "Microsoft微软",
+
+  "ProviderTelegram": "Telegram",
+  "ProviderTelegram-bg": "Телеграм",
+  "ProviderTelegram-ko-KR": "텔레그램",
+
+  "ProviderTwitter": "X",
+
+  "ProviderWechat": "WeChat",
+  "ProviderWechat-ko-KR": "위챗",
+  "ProviderWechat-zh-CN": "微信",
+
+  "ProviderZoom": "Zoom",
+  "ProviderZoom-ar-SA": "زووم",
+  "ProviderZoom-lo-LA": "ຊູມ",
+  "ProviderZoom-si": "සූම්",
+
+  "Nextcloud": "Nextcloud",
+
+  "TypeTitleBoxNet": "Box",
+  "TypeTitleDocuSign": "DocuSign",
+  "TypeTitleDocuSign-it": "Docusign",
+  "TypeTitleDocuSign-si": "ඩොකුසයින්",
+
+  "TypeTitleDropBox": "Dropbox",
+  "TypeTitleDropBox-si": "ඩ්‍රොප්බොක්ස්",
+
+  "TypeTitleGoogle": "Google Drive",
+  "TypeTitleGoogle-si": "ගූගල් ඩ්‍රයිව්",
+  "TypeTitleGoogle-zh-CN": "Google 云端硬盘",
+
+  "TypeTitleSharePoint": "SharePoint",
+  "TypeTitleSharePoint-si": "ෂෙයාර්පොයින්ට්",
+
+  "TypeTitleSkyDrive": "OneDrive",
+  "TypeTitleSkyDrive-si": "වන්ඩ්‍රයිව්",
+
+  "TypeTitleWebDav": "WebDAV",
+
+  "TypeTitleYandex": "Yandex.Disk",
+  "TypeTitleYandex-ru": "Яндекс.Диск",
+  "TypeTitleYandex-si": "යාන්ඩෙක්ස්.ඩිස්ක්",
+
+  "TypeTitlekDrive": "kDrive"
+}

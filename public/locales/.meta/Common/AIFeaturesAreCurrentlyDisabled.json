@@ -3,28 +3,215 @@
   "content": "AI features are currently disabled",
   "content_en_sha1_hash": "6adeffc685fa3ba4cb9a4a3d009c17fcc6414f1f",
   "created_at": "2025-11-03T12:10:13.543Z",
-  "updated_at": "2026-02-19T13:36:33.086Z",
+  "updated_at": "2026-04-11T21:00:26.092Z",
   "comment": {
-    "text": "This text is a message displayed in the UI to inform users that AI features are temporarily unavailable. It appears within a chat information block and on a \"no access\" screen, likely indicating a technical limitation or planned downtime for AI functionality. Translators should ensure the meaning of \"disabled\" or \"unavailable\" is accurately conveyed in the target language.",
+    "text": "This is an informational message displayed in the chat interface or on a screen when AI features are unavailable. It informs the user that AI functionality is currently turned off.",
     "is_auto": true,
-    "updated_at": "2025-11-03T12:15:16.040Z"
+    "updated_at": "2026-04-11T21:00:26.092Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/chat/components/chat-info-block/index.tsx",
-      "line_number": 59,
-      "context": "});\n \n return (\n <PublicRoomBar\n className={styles.chatInfoBlock}\n headerText={t(\"Common:AIFeaturesAreCurrentlyDisabled\")}\n bodyText={bodyText}\n iconName={InfoIcon}\n dataTestId=\"chat-info-block\"\n />\n );",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-info-block/index.tsx",
+      "line_number": 58,
+      "context": "});\n \n return (\n <PublicRoomBar\n className={styles.chatInfoBlock}\n headerText={t(\"AIFeaturesAreCurrentlyDisabled\")}\n bodyText={bodyText}\n iconName={<InfoIcon />}\n dataTestId=\"chat-info-block\"\n />\n );",
+      "module": "/libs/ui-kit"
     },
     {
-      "file_path": "/packages/shared/components/chat/components/chat-no-access-screen/index.tsx",
-      "line_number": 64,
-      "context": "const title =\n isPortalAdmin && standalone\n ? t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle\", {\n aiProvider: t(\"Common:AIProvider\"),\n })\n : t(\"Common:AIFeaturesAreCurrentlyDisabled\");\n \n const description = match([standalone, isPortalAdmin])\n // standalone admin\n .with([true, true], () =>\n t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription\", {",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-no-access-screen/index.tsx",
+      "line_number": 65,
+      "context": "const title =\n isPortalAdmin && standalone\n ? t(\"EmptyAIAgentsAIDisabledStandaloneAdminTitle\", {\n aiProvider: t(\"AIProvider\"),\n })\n : t(\"AIFeaturesAreCurrentlyDisabled\");\n \n const description = match([standalone, isPortalAdmin])\n // standalone admin\n .with([true, true], () =>\n t(",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
     "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

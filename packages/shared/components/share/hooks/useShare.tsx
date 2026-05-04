@@ -46,6 +46,7 @@ export const useShare = ({
   setIsScrollLocked,
   setEditLinkPanelIsVisible,
   setEmbeddingPanelData,
+  hideLinkTypeSelector,
 }: UseShareProps) => {
   const isFolder = infoPanelSelection.isFolder;
 
@@ -494,6 +495,7 @@ export const useShare = ({
           onCloseContextMenu={onCloseContextMenu}
           changeExpirationOption={changeExpirationOption}
           availableShareRights={availableShareRights}
+          hideLinkTypeSelector={hideLinkTypeSelector}
         />
       )),
     ];

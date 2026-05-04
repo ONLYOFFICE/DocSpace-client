@@ -532,7 +532,7 @@ export default inject(
     const { currentColorScheme, setMainBarVisible } = settingsStore;
 
     return {
-      isAdmin: user?.isAdmin,
+      isAdmin: user?.isAdmin || user?.isOwner,
       isUser: user?.isCollaborator,
       isRoomAdmin: user?.isRoomAdmin,
       userEmail: user?.email,

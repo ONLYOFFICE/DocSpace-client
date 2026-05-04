@@ -73,10 +73,9 @@ const Tiles: FC<TilesProps> = ({
     (item: { id: Key | null | undefined }) => {
       setGallerySelected(item);
       onCreateTemplate();
-      setTemplateGalleryVisible(false);
       setSubmitToGalleryDialogVisible(false);
     },
-    [setGallerySelected, onCreateTemplate, setTemplateGalleryVisible],
+    [setGallerySelected, onCreateTemplate],
   );
 
   const handleSelectByIndex = useCallback(

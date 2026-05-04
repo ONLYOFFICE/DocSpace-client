@@ -34,6 +34,7 @@ export type FormsDataApi = {
   fetchSection: (section?: FormsSection) => Promise<void>;
   fetchMore: () => Promise<void>;
   fetchSubfolder: (folderId: number, signal: AbortSignal) => Promise<void>;
+  refreshAfterMutation: (section?: FormsSection) => Promise<void>;
 };
 
 const FormsDataContext = createContext<FormsDataApi | null>(null);

@@ -17,7 +17,6 @@
   "InviteViaLinkDescriptionAgentMembers": "{{productName}} üzvləri üçün agentdə özləri müəyyən edilmələri üçün universal link yaradın.",
   "InviteViaLinkDescriptionRoomGuest": "Otaqda qonaq olaraq özünütəsdiq etmək üçün universal link yaradın.",
   "InviteViaLinkDescriptionRoomMembers": "{{productName}} üzvləri üçün otaqda özləri müəyyən edilmələri üçün universal link yaradın.",
-  "LinkCopySuccess": "Link köçürüldü",
   "SendInvitation": "Dəvət göndərin",
   "UserAgentMaxAvailableRoleWarning": "Qonaqlar və İstifadəçilər agent menecerləri təyin edilə bilməz. Yalnız Otaq və {{productName}} adminləri göstərilən rol üçün uyğundur.",
   "UserMaxAvailableRoleWarning": "Qonaq və İstifadəçilər Otaq administratoru kimi təyin edilə bilməz. Yalnız Otaq və {{productName}} administratorları göstərilən rol üçün uyğundur.",

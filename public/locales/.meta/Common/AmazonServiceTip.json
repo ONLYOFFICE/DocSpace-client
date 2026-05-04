@@ -3,11 +3,12 @@
   "content": "This is an optional property; change it only if you want to try a different service endpoint.",
   "content_en_sha1_hash": "cf596eeefe16397a9a7b7c67ec961476f771d730",
   "created_at": "2025-05-26T07:15:40.401Z",
-  "updated_at": "2026-02-19T13:36:33.073Z",
+  "updated_at": "2026-04-11T21:48:14.421Z",
   "comment": {
-    "text": "This translation key is used to describe an optional property that can be changed to try a different service endpoint. It appears as a tooltip next to a text input field in the Amazon settings component. Translators should update this text if it needs to differ from the original English content, allowing users to understand its purpose and usage.",
+    "text": "This is a tooltip that appears when hovering over the \"Service URL\" field in the Amazon S3 backup settings. It explains that changing this field is optional and only necessary to use a different service endpoint.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:07:48.288Z"
+    "updated_at": "2026-04-11T20:59:20.228Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -195,10 +196,24 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \"c\"",
+          "suggestion": "",
+          "checked_at": "2026-04-11T21:48:14.416Z",
+          "checked_by": "deterministic"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

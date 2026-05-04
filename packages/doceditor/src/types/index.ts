@@ -69,6 +69,7 @@ export type SdkSearchParams = {
   locale?: string | null | undefined;
   theme?: string | undefined;
   editorGoBack?: boolean | "event";
+  withoutGoBackText?: boolean;
   is_file?: boolean;
   isSDK?: boolean;
 };

@@ -3,16 +3,17 @@
   "content": "You may create a new room specifically for the backup, choose one of the existing rooms, or save the copy in their {{roomName}} room.",
   "content_en_sha1_hash": "2f37d9051c90dfc970642bac71d6899484e612bd",
   "created_at": "2025-05-26T07:15:47.398Z",
-  "updated_at": "2026-03-20T09:07:45.756Z",
+  "updated_at": "2026-04-13T07:43:03.566Z",
   "comment": {
-    "text": "This translation key is used to describe a room name in a backup process. It appears on buttons and dialogs in the auto-backup and manual-backup pages, prompting users to select or create a specific room for their backups.",
+    "text": "This is a descriptive text explaining options for saving a backup. It appears in the auto-backup and manual-backup dialogs. The `{{roomName}}` variable will be replaced with the name of a specific room, such as \"My Documents\".",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:03:51.188Z"
+    "updated_at": "2026-04-11T20:44:04.009Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 505,
+      "line_number": 506,
       "context": "className={classNames(\n styles.backupDescription,\n \"backup-description\",\n )}\n >\n {t(\"Common:RoomsModuleDescription\", {\n roomName: t(\"Common:MyDocuments\"),\n })}\n </Text>\n {isCheckedDocuments ? (\n <RoomsModule",
       "module": "/packages/shared"
     },
@@ -205,6 +206,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,28 +3,29 @@
   "content": "Quota per room",
   "content_en_sha1_hash": "c6d44419e178bb95bb2e8d662bb28b6b56efd1ec",
   "created_at": "2025-05-19T21:30:52.338Z",
-  "updated_at": "2026-03-26T08:26:58.276Z",
+  "updated_at": "2026-04-13T14:59:05.902Z",
   "comment": {
-    "text": "The translation key \"QuotaPerRoom\" represents the label for a quota setting related to room capacity in a storage management system. It is used as a title on a category page where users can set and manage quotas per room, typically in a portal settings interface.",
+    "text": "This is a title for a settings section or a link label that allows administrators to configure storage quotas for individual rooms within ONLYOFFICE DocSpace.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:41.593Z"
+    "updated_at": "2026-04-11T21:22:46.630Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/MobileQuotas.js",
-      "line_number": 47,
-      "context": "};\n \n return (\n <StyledBaseQuotaComponent>\n <CategoryItem\n title={t(\"QuotaPerRoom\")}\n onClickLink={onClickLink}\n url=\"portal-settings/management/disk-space/quota-per-room\"\n subtitle={t(\"SetDefaultRoomQuota\", {\n productName: t(\"Common:ProductName\"),\n })}",
+      "line_number": 48,
+      "context": "};\n \n return (\n <StyledBaseQuotaComponent>\n <CategoryItem\n title={t(\"QuotaPerRoom\")}\n onClickLink={onClickLink}\n url=\"portal-settings/management/disk-space/quota-per-room\"\n subtitle={t(\"SetDefaultRoomQuota\", {\n productName: getBrandName(\"ProductName\"),\n })}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerRoom.js",
-      "line_number": 32,
-      "context": "import { useTranslation } from \"react-i18next\";\n import { inject, observer } from \"mobx-react\";\n \n import QuotaPerItemComponent from \"./QuotaPerItem\";\n \n const QuotaPerRoomComponent = (props) => {\n const { setRoomQuota, defaultRoomsQuota, isDefaultRoomsQuotaSet } = props;\n const { t } = useTranslation(\"Settings\");\n \n const initialSizeProp = isDefaultRoomsQuotaSet\n ? { initialSize: defaultRoomsQuota }",
+      "line_number": 43,
+      "context": "? { initialSize: defaultRoomsQuota }\n : {};\n \n return (\n <QuotaPerItemComponent\n formLabel={t(\"QuotaPerRoom\")}\n toggleLabel={t(\"DefineQuotaPerRoom\")}\n disableQuota={() => setRoomQuota(-1, t)}\n saveQuota={(size) => setRoomQuota(size, t)}\n {...initialSizeProp}\n isQuotaSet={isDefaultRoomsQuotaSet}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 454,
+      "line_number": 471,
       "context": "{\n id: \"portal-settings_catalog-storageManagement_quota-per-room\",\n key: \"6-0-1\",\n icon: \"\",\n link: \"quota-per-room\",\n tKey: \"QuotaPerRoom\",\n },\n {\n id: \"portal-settings_catalog-storageManagement_quota-per-user\",\n key: \"6-0-2\",\n icon: \"\",",
       "module": "/packages/client"
     }
@@ -45,13 +46,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Otaq üçün kvota' is a literal translation, a more natural and common phrasing in Azerbaijani would be 'Otağa ayrılmış kvota' or 'Otaq başına kvota'. 'Üçün' can sound a bit awkward in this context.",
-          "suggestion": "Otağa ayrılmış kvota"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -69,13 +64,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Quote pro Zimmer\" doesn't accurately convey the meaning of \"Quota per room\". \"Quota\" refers to a limited number or allocation, which isn't captured by \"Quote\".",
-          "suggestion": "Kontingent pro Zimmer"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -99,25 +88,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Quota pour la salle\" is technically correct, it's not the most natural or idiomatic translation of \"Quota per room\" in French. It sounds a bit literal.",
-          "suggestion": "Quota par chambre"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Քվոտա մեկ սենյակի համար\" (Kvota mek senyaki hamar) is a very literal translation. A more natural and common way to express 'Quota per room' in Armenian would be something like \"սենյակային քվոտա\" (senyakayin kvota) or \"քվոտա սենյակը համարյա\" (kvota senyaku hamar).",
-          "suggestion": "Consider \"սենյակային քվոտա\" (senyakayin kvota) or \"քվոտա սենյակը համարյա\" (kvota senyaku hamar)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -129,13 +106,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"ルームあたりの容量制限\" (Room-ata no yōryū seigen) doesn't accurately convey \"Quota per room.\" 'Quota' implies a defined limit or allocation, while '容量制限' (yōryū seigen) literally means 'capacity limit.' It's a related concept, but not a direct equivalent.",
-          "suggestion": "Consider alternatives like \"部屋ごとの割り当て上限\" (heya goto no wariatejō jōgen) - 'Allocation limit per room' or \"部屋ごとの利用制限\" (heya goto no riyō seigen) - 'Usage limit per room'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -195,13 +166,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation \"කාමරයකට සලාකය\" doesn't accurately convey the meaning of \"Quota per room.\" 'සලාකය' generally refers to a discount or reduction, not a quota or limit.",
-          "suggestion": "කාමරයකට පැනක් (Kamarayakata penak) - Meaning 'quota per room' or කාමරයකටgetMax සංඛ්‍යාව (Kamarayakata max sankyawā) - Meaning 'Maximum number per room'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -219,13 +184,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation \"Квота по соби\" is not the most accurate or natural translation of \"Quota per room.\" \"По соби\" literally means \"per room\" but doesn't convey the meaning of a limit or allocation. A more accurate translation would emphasize the concept of a quota or limit.",
-          "suggestion": "Consider \"Квота по соба\" or \"Дозвољена количина по соби\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -253,6 +212,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

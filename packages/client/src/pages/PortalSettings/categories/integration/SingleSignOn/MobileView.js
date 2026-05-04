@@ -24,18 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
+
+import styles from "./MobileView.module.scss";
 import { useNavigate } from "react-router";
 
 import { CategoryItem } from "@docspace/ui-kit/components/category-item";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
-const StyledWrapper = styled.div`
-  margin-top: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-`;
 
 const MobileView = ({ isSSOAvailable, logoText }) => {
   const { t } = useTranslation(["SingleSignOn", "Settings"]);
@@ -47,7 +43,7 @@ const MobileView = ({ isSSOAvailable, logoText }) => {
   };
 
   return (
-    <StyledWrapper>
+    <div className={styles.styledWrapper}>
       <CategoryItem
         title={t("ServiceProviderSettings", {
           organizationName: logoText,
@@ -64,7 +60,7 @@ const MobileView = ({ isSSOAvailable, logoText }) => {
           organizationName: logoText,
         })}
         subtitle={t("SpMetadataDescription", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
           organizationName: logoText,
         })}
         url="/portal-settings/integration/sso/metadata"
@@ -73,7 +69,7 @@ const MobileView = ({ isSSOAvailable, logoText }) => {
         onClickLink={onClickLink}
         dataTestId="sp_metadata"
       />
-    </StyledWrapper>
+    </div>
   );
 };
 

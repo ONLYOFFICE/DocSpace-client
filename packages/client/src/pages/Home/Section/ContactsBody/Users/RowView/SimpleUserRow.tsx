@@ -25,16 +25,18 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
+import { Row } from "@docspace/ui-kit/components/rows";
 import type { TData } from "@docspace/ui-kit/components/rows/row/Row.types";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 
 import UserContent from "./UserContent";
 
-import { StyledSimpleUserRow, StyledWrapper } from "./RowView.styled";
 import type { SimpleUserRowProps } from "./RowView.types";
+import styles from "./RowView.module.scss";
 
 const SimpleUserRow = (props: SimpleUserRowProps) => {
   const {
@@ -63,24 +65,27 @@ const SimpleUserRow = (props: SimpleUserRowProps) => {
   );
 
   return (
-    <StyledWrapper
-      className={`user-item row-wrapper ${
-        isChecked || isActive ? "row-selected" : ""
-      } ${item.id}`}
-      value={value}
-      checked={isChecked}
-      isActive={isActive}
+    <div
+      className={classNames(
+        styles.styledWrapper,
+        "user-item row-wrapper",
+        { "row-selected": isChecked || isActive },
+        String(item.id),
+      )}
+      {...({ value } as unknown as { value?: string })}
     >
       <div className="user-item user-row-container">
-        <StyledSimpleUserRow
+        <Row
           key={item.id}
           data={item as unknown as TData}
           element={element}
           onSelect={onContentRowSelect!}
           checked={isChecked}
-          isActive={isActive}
           mode="modern"
-          className="user-row"
+          className={classNames(styles.styledSimpleUserRow, "user-row", {
+            [styles.checked]: isChecked,
+            [styles.active]: isActive,
+          })}
           onContextClick={onRowContextClick!}
           contextOptions={item.options as unknown as ContextMenuModel[]}
           getContextModel={getContextModel!}
@@ -94,9 +99,9 @@ const SimpleUserRow = (props: SimpleUserRowProps) => {
           }
         >
           <UserContent {...props} />
-        </StyledSimpleUserRow>
+        </Row>
       </div>
-    </StyledWrapper>
+    </div>
   );
 };
 

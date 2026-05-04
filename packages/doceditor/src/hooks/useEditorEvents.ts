@@ -95,7 +95,8 @@ import type {
   TEditorAIEvent,
 } from "@/types";
 import { onSDKInfo } from "@/utils/events";
-import externalAIFetch from "@/utils/aiProxy";
+import externalAIFetch, { abortAllRequests } from "@/utils/aiProxy";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 let docEditor: TDocEditor | null = null;
 
@@ -297,7 +298,7 @@ const useEditorEvents = ({
 
             if (provider) {
               const models = await getModels(provider.id);
-              provider.title = `${t("Common:ProductName")} [${provider.title}]`;
+              provider.title = `${getBrandName("ProductName")} [${provider.title}]`;
               model = models[0]?.modelId || model;
             }
           }
@@ -869,6 +870,13 @@ const useEditorEvents = ({
       );
     };
   }, [onOrientationChange]);
+
+  React.useEffect(() => {
+    return () => {
+      abortAllRequests();
+      docEditor = null;
+    };
+  }, []);
 
   const onSubmit = useCallback(() => {
     const origin = window.location.origin;

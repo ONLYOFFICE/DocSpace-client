@@ -3,16 +3,17 @@
   "content": "Show",
   "content_en_sha1_hash": "d97d1ee339e4eeaba8cac91dca37c8b4ec8f5501",
   "created_at": "2025-05-19T21:30:51.426Z",
-  "updated_at": "2026-03-20T09:07:45.622Z",
+  "updated_at": "2026-04-11T21:24:16.101Z",
   "comment": {
-    "text": "This translation key is used to display a label for a toggle button that controls whether advanced document service settings are shown or hidden. It appears as part of a UI element and changes its text based on the current state of the setting. The translator should focus on creating a clear, concise label that accurately reflects the purpose of this setting in the PortalSettings page.",
+    "text": "This is a link label that, when clicked, reveals advanced settings within the Document Service integration section.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:15.354Z"
+    "updated_at": "2026-04-11T21:24:16.101Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 332,
+      "line_number": 333,
       "context": "isHovered\n onClick={onChangeIsShowAdvancedSettings}\n dataTestId=\"show_hide_advanced_settings_link\"\n >\n {!isShowAdvancedSettings\n ? t(\"Settings:DocumentServiceShow\")\n : t(\"Settings:DocumentServiceHide\")}\n </Link>\n </Styled.LocationSubheader>\n \n {isShowAdvancedSettings ? (",
       "module": "/packages/client"
     }
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Göstərin' is the imperative form (command form) of 'show'. 'Show' in this context, likely refers to a display setting or option. A more appropriate translation would be something like 'Göster' (show) or 'Rəylə' (display) or 'Aç' (open).",
-          "suggestion": "Göster"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -105,13 +100,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While '표시' (pyo-si) can mean 'show' or 'display', in the context of a setting label ('Settings:DocumentServiceShow'), a more natural and commonly used translation would be '보기' (bo-gi) or '활성화' (hwa-seong-hwa). '표시' is more suitable for showing a specific element on a screen, not activating a service.",
-          "suggestion": "보기"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -183,13 +172,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Прикажи\" while meaning 'Show', doesn't perfectly align with the context of a setting, which often implies a toggle or visibility setting. A more suitable translation might be \"Покажи\" or \"Види\" depending on the desired nuance.",
-          "suggestion": "Покажи"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -217,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

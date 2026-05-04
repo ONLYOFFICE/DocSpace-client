@@ -42,6 +42,9 @@ import {
   TextInput,
 } from "@docspace/ui-kit/components/text-input";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
+
+import { removeEmojiCharacters } from "../../utils/removeEmojiCharacters";
 
 import { useTagManagement } from "./TagManagement.provider";
 import { useCreateTagMutation } from "./hooks/useTagsQuery";
@@ -53,6 +56,7 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
   roomName,
 }) => {
   const { t } = useTranslation("Common");
+  const isMobile = useIsMobile();
   const {
     searchValue,
     deferredSearchValue,
@@ -76,7 +80,7 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
 
   const onChangeSearchValue = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      const value = event.target.value;
+      const value = removeEmojiCharacters(event.target.value);
       setInputValue(value);
       startTransition(() => {
         setSearchValue(value);
@@ -144,7 +148,7 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
         <>
           <TextInput
             scale
-            autoFocus
+            autoFocus={!isMobile}
             withBorder={false}
             value={inputValue}
             size={InputSize.base}

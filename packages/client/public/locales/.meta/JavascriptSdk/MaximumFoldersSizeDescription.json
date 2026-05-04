@@ -3,11 +3,12 @@
   "content": "Folders larger than this size won't be uploaded.",
   "content_en_sha1_hash": "e62937e88d2663a1dec3fcffc16373c22f7a534c",
   "created_at": "2026-03-20T09:07:42.423Z",
-  "updated_at": "2026-03-20T09:47:50.634Z",
+  "updated_at": "2026-04-11T21:15:10.669Z",
   "comment": {
-    "text": "This text describes the size limit for folders being uploaded. It appears as a tooltip in the Uploader settings, informing users that folders exceeding this size will not be uploaded. Translators should ensure the description accurately reflects the maximum folder size limit.",
+    "text": "This is a tooltip that appears when hovering over a setting related to folder upload limits. It informs the user that folders exceeding the specified size will not be uploaded.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:47:50.634Z"
+    "updated_at": "2026-04-11T21:15:10.669Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

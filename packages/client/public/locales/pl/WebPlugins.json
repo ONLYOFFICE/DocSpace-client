@@ -8,6 +8,8 @@
   "NeedSettings": "Należy wprowadzić ustawienia",
   "NoPlugins": "Nie dodano żadnych wtyczek",
   "NotNeedSettings": "Nie trzeba wchodzić w ustawienia",
+  "PluginCacheWarningDescription": "Wtyczki są buforowane na podstawie ich numeru wersji. Aby upewnić się, że Twoje zmiany zostaną zastosowane, zwiększ numer wersji w pliku <1>package.json</1> przed przesłaniem. System nie zaktualizuje wtyczki, jeśli numer wersji pozostanie taki sam.",
+  "PluginDeletedSuccessfully": "Wtyczka została pomyślnie usunięta",
   "PluginIsNotCompatible": "Wersja SDK wtyczki nie pasuje do wersji {{productName}}. Proszę zaktualizować do kompatybilnej wersji.",
   "PluginLoadedSuccessfully": "Wtyczka załadowana pomyślnie",
   "PluginSamples": "Próbki wtyczek",

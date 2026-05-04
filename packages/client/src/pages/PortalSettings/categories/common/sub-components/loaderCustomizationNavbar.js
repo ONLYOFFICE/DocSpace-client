@@ -24,80 +24,58 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-const StyledLoader = styled.div`
-  .section {
-    padding-bottom: 16px;
-  }
-  .title-long {
-    width: 283px;
-    padding-bottom: 4px;
-  }
-
-  .width {
-    width: 100%;
-  }
-
-  .padding-bottom {
-    padding-bottom: 4px;
-  }
-
-  .padding-top {
-    padding-top: 5px;
-  }
-
-  .display {
-    display: block;
-  }
-`;
+import styles from "./loaderCustomizationNavbar.module.scss";
 
 const LoaderCustomizationNavbar = () => {
   return (
-    <StyledLoader>
-      <div className="section">
-        <RectangleSkeleton height="22px" className="title-long" />
-        <RectangleSkeleton height="80px" className="width padding-bottom" />
+    <div>
+      <div className={styles.section}>
+        <RectangleSkeleton height="22px" className={styles.titleLong} />
+        <RectangleSkeleton
+          height="80px"
+          className={`${styles.width} ${styles.paddingBottom}`}
+        />
         <RectangleSkeleton height="20px" width="73px" />
       </div>
 
-      <div className="section">
+      <div className={styles.section}>
         <RectangleSkeleton
           height="22px"
           width="201px"
-          className="title padding-bottom display"
+          className={`${styles.paddingBottom} ${styles.display}`}
         />
-        <RectangleSkeleton height="80px" className="width" />
+        <RectangleSkeleton height="80px" className={styles.width} />
       </div>
 
-      <div className="section">
+      <div className={styles.section}>
         <RectangleSkeleton
           height="22px"
           width="119px"
-          className="padding-top"
+          className={styles.paddingTop}
         />
-        <RectangleSkeleton height="40px" className="width" />
+        <RectangleSkeleton height="40px" className={styles.width} />
         <RectangleSkeleton
           height="20px"
           width="73px"
-          className="width padding-top"
+          className={`${styles.width} ${styles.paddingTop}`}
         />
       </div>
 
-      <div className="section">
+      <div className={styles.section}>
         <RectangleSkeleton
           height="22px"
           width="150px"
-          className="title padding-bottom display"
+          className={`${styles.paddingBottom} ${styles.display}`}
         />
         <RectangleSkeleton
           height="20px"
           width="253px"
-          className="padding-top"
+          className={styles.paddingTop}
         />
       </div>
-    </StyledLoader>
+    </div>
   );
 };
 

@@ -26,7 +26,11 @@
 
 "use client";
 
-import { FormsSection } from "@/types/forms";
+import {
+  FormsSection,
+  SettingsSubSection,
+  DEFAULT_SETTINGS_SUBSECTION,
+} from "@/types/forms";
 
 const FORMS_PREFIX = "/forms/";
 
@@ -50,4 +54,27 @@ export function sectionFromPathname(pathname: string): FormsSection {
 
 export function sectionToPath(section: FormsSection): string {
   return `${FORMS_PREFIX.slice(0, -1)}/${section}`;
+}
+
+const SETTINGS_PREFIX = "/forms/settings/";
+
+const SETTINGS_SUB_MAP: Record<string, SettingsSubSection> = {
+  [SettingsSubSection.Billing]: SettingsSubSection.Billing,
+  [SettingsSubSection.AiAgent]: SettingsSubSection.AiAgent,
+  [SettingsSubSection.Access]: SettingsSubSection.Access,
+  [SettingsSubSection.CollectData]: SettingsSubSection.CollectData,
+};
+
+export function settingsSubSectionFromPathname(
+  pathname: string,
+): SettingsSubSection {
+  const idx = pathname.indexOf(SETTINGS_PREFIX);
+  if (idx === -1) return DEFAULT_SETTINGS_SUBSECTION;
+
+  const sub = pathname.slice(idx + SETTINGS_PREFIX.length).split("/")[0];
+  return SETTINGS_SUB_MAP[sub] ?? DEFAULT_SETTINGS_SUBSECTION;
+}
+
+export function settingsSubSectionToPath(sub: SettingsSubSection): string {
+  return `/forms/settings/${sub}`;
 }

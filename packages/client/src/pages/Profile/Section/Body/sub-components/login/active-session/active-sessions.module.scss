@@ -73,12 +73,19 @@
   color: var(--profile-active-sessions-cell-color);
 }
 
-.divider {
+.divider, .rowDivider{
+  margin: -2px 5px;
   display: inline-block;
   height: 12px;
-  width: 2px;
+}
+
+.divider {
   background-color: var(--profile-active-sessions-divider-color);
-  margin: -2px 5px;
+}
+
+ .rowDivider{
+  width: 0;
+  border-inline-start: 2px solid var(--profile-active-sessions-divider-color);
 }
 
 .tickIcon {

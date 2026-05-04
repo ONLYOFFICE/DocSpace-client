@@ -3,16 +3,17 @@
   "content": "Backup room",
   "content_en_sha1_hash": "d713be356f0517828e717778afb3cc8136c8c476",
   "created_at": "2025-05-26T07:15:47.386Z",
-  "updated_at": "2026-03-20T09:07:45.756Z",
+  "updated_at": "2026-04-13T07:46:02.780Z",
   "comment": {
-    "text": "This translation key is used to display the label \"Backup room\" in a radio button group within a backup settings page. It is intended for use by users who need to select a specific type of file or resource to back up. This option appears in various UI contexts, including restore backup and manual backup pages.",
+    "text": "This is a radio button label or an option in a dropdown menu. It refers to the \"Rooms\" module within DocSpace, indicating that the backup or restore operation will apply to rooms.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:03:54.388Z"
+    "updated_at": "2026-04-11T20:44:04.788Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 493,
+      "line_number": 494,
       "context": "<div className={styles.modules}>\n <RadioButton\n key={0}\n {...commonRadioButtonProps}\n id=\"backup-room\"\n label={t(\"Common:RoomsModule\")}\n name={`${BackupStorageType.DocumentModuleType}`}\n isChecked={isCheckedDocuments}\n isDisabled={isLoadingData}\n testId=\"auto_backup_room_radio_button\"\n />",
       "module": "/packages/shared"
     },
@@ -24,7 +25,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/index.tsx",
-      "line_number": 228,
+      "line_number": 229,
       "context": "options={[\n { id: \"local-file\", value: LOCAL_FILE, label: t(\"Common:LocalFile\") },\n {\n id: \"backup-room\",\n value: BACKUP_ROOM,\n label: t(\"Common:RoomsModule\"),\n },\n {\n id: \"third-party-resource\",\n value: DISK_SPACE,\n label: t(\"Common:ThirdPartyResource\"),",
       "module": "/packages/shared"
     }
@@ -51,13 +52,29 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Bulgarian translation uses plural form 'стаи' (rooms) instead of singular 'стая' (room) to match the English 'Backup room'. The gerund construction 'Архивиране на' also differs from the simple noun phrase structure of the English label.",
+          "suggestion": "Архивна стая",
+          "checked_at": "2026-04-13T07:43:32.768Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation 'Zálohovat místnosti' is a verb phrase (to backup rooms), but the English 'Backup room' is a noun phrase used as a UI label. This changes the grammatical function and meaning. In the radio button context, the Czech version reads as an action rather than a label option.",
+          "suggestion": "Záloha místností or Zálohování místností (noun phrase equivalent to convey 'Backup of rooms' as a label)",
+          "checked_at": "2026-04-13T07:43:15.552Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -81,7 +98,15 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Finnish translation shifts meaning from 'Backup room' (indicating the backup operation/destination) to 'Varmuuskopioitava huone' (a room that can be backed up). In the UI context of backup storage options, the English emphasizes the action/operation, while the Finnish emphasizes the capability of the room. This changes the semantic meaning of the UI option.",
+          "suggestion": "Huoneen varmuuskopio (room backup) or Huoneiden varmuuskopiointi (backing up of rooms)",
+          "checked_at": "2026-04-13T07:43:47.464Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -177,7 +202,15 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Singular/plural mismatch: English 'Backup room' (singular) is translated as 'Varnostno kopiranje sob' with plural 'sob' (rooms), changing the grammatical number.",
+          "suggestion": "Varnostno kopiranje sobe (using singular genitive 'sobe' to match English singular 'room')",
+          "checked_at": "2026-04-13T07:45:33.842Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -211,6 +244,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

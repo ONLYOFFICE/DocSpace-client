@@ -3,11 +3,12 @@
   "content": "{{date}} will be moved to {{sectionName}}",
   "content_en_sha1_hash": "dd1133c3ff4ac7d8500d3788b0169671c5cd596e",
   "created_at": "2025-06-02T10:19:23.365Z",
-  "updated_at": "2026-03-26T08:26:58.075Z",
+  "updated_at": "2026-04-11T21:08:11.509Z",
   "comment": {
-    "text": "This translation key is used to display a message that announces when a file will be moved to the trash section on a specific date. It appears in the UI as part of a details view for files set to expire or be deleted permanently, providing context for users about upcoming file actions.",
+    "text": "This is a message displayed in the details panel for a file or folder. It informs the user about the scheduled date ({{date}}) when the item will be moved to the trash section ({{sectionName}}).",
     "is_auto": true,
-    "updated_at": "2025-06-02T10:21:42.113Z"
+    "updated_at": "2026-04-11T21:08:11.509Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

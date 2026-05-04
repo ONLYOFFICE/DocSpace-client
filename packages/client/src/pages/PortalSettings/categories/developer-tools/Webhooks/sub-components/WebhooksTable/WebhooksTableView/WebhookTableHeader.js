@@ -140,6 +140,6 @@ const WebhookTableHeader = (props) => {
 export default inject(({ userStore }) => {
   return {
     userId: userStore.user.id,
-    isAdmin: userStore.user.isAdmin,
+    isAdmin: userStore.user.isAdmin || userStore.user.isOwner,
   };
 })(observer(WebhookTableHeader));

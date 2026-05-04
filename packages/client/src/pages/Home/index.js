@@ -140,11 +140,15 @@ const PureHome = (props) => {
     clearSecondaryProgressData,
     primaryOperationsArray,
     cancelUpload,
+    cancelSecondaryOperation,
+    cancelSecondaryOperationById,
+    secondaryOperationsStopped,
     secondaryOperationsAlert,
     clearUploadData,
     clearUploadedFiles,
     mainButtonVisible,
     primaryOperationsAlert,
+    primaryOperationsCanceled,
     clearConversionData,
     isErrorChecking,
     setOperationCancelVisible,
@@ -292,6 +296,14 @@ const PureHome = (props) => {
       return;
     }
 
+    if (
+      secondaryActiveOperations?.length > 0 &&
+      !primaryOperationsArray?.length
+    ) {
+      cancelSecondaryOperation();
+      return;
+    }
+
     if (hideConfirmCancelOperation) {
       cancelUpload();
       return;
@@ -301,6 +313,9 @@ const PureHome = (props) => {
   }, [
     hideConfirmCancelOperation,
     cancelUpload,
+    cancelSecondaryOperation,
+    secondaryActiveOperations,
+    primaryOperationsArray,
     setOperationCancelVisible,
     handlePluginCancelOperation,
     pluginOperations,
@@ -413,13 +428,16 @@ const PureHome = (props) => {
   sectionProps.secondaryOperationsCompleted = secondaryOperationsCompleted;
   sectionProps.dropTargetPreview = dropTargetPreview;
   sectionProps.clearSecondaryProgressData = onClearSecondaryProgressData;
+  sectionProps.cancelSecondaryOperationById = cancelSecondaryOperationById;
   sectionProps.primaryOperationsArray = primaryOperationsArray;
   sectionProps.clearPrimaryProgressData = clearPrimaryProgressData;
   sectionProps.clearDropPreviewLocation = clearDropPreviewLocation;
   sectionProps.primaryOperationsCompleted = primaryOperationsCompleted;
   sectionProps.cancelUpload = onCancelUpload;
+  sectionProps.secondaryOperationsStopped = secondaryOperationsStopped;
   sectionProps.secondaryOperationsAlert = secondaryOperationsAlert;
   sectionProps.primaryOperationsAlert = primaryOperationsAlert;
+  sectionProps.primaryOperationsCanceled = primaryOperationsCanceled;
   sectionProps.needErrorChecking = isErrorChecking;
   sectionProps.mainButtonVisible = mainButtonVisible;
   sectionProps.withTabs = sectionWithTabs;
@@ -629,6 +647,7 @@ export const Component = inject(
       primaryOperationsArray,
       primaryOperationsCompleted,
       primaryOperationsAlert,
+      primaryOperationsCanceled,
       isErrorChecking,
       isPrimaryProgressVisbile,
       dropTargetPreview,
@@ -642,7 +661,10 @@ export const Component = inject(
       secondaryOperationsCompleted,
       clearSecondaryProgressData,
       secondaryActiveOperations,
+      secondaryOperationsStopped,
       secondaryOperationsAlert,
+      cancelSecondaryOperation,
+      cancelSecondaryOperationById,
     } = secondaryProgressDataStore;
 
     const { startUpload } = uploadDataStore;
@@ -805,14 +827,18 @@ export const Component = inject(
       secondaryActiveOperations,
       secondaryOperationsCompleted,
       clearSecondaryProgressData,
+      secondaryOperationsStopped,
       secondaryOperationsAlert,
       primaryOperationsArray,
       primaryOperationsCompleted,
       cancelUpload,
+      cancelSecondaryOperation,
+      cancelSecondaryOperationById,
       clearUploadData,
       clearUploadedFiles,
       mainButtonVisible,
       primaryOperationsAlert,
+      primaryOperationsCanceled,
       clearConversionData,
       isErrorChecking,
       setOperationCancelVisible,

@@ -8,4 +8,8 @@ export type HeaderProps = {
   isEmptyList: boolean;
 
   showTitle?: boolean;
+  onBurgerClick?: () => void;
+  isInfoPanelVisible?: boolean;
+  onToggleInfoPanel?: () => void;
+  headerOffset?: number;
 };

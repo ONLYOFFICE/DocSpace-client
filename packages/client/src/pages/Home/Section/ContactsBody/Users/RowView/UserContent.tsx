@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -37,8 +36,10 @@ import { Text } from "@docspace/ui-kit/components/text";
 
 import Badges from "../../Badges";
 
+import { RowContent } from "@docspace/ui-kit/components/rows";
+
 import { UserContentProps } from "./RowView.types";
-import { StyledRowContent } from "./RowView.styled";
+import styles from "./RowView.module.scss";
 
 const UserContent = ({
   item,
@@ -55,7 +56,6 @@ const UserContent = ({
   isMe,
 }: UserContentProps) => {
   const { t } = useTranslation(["People", "Common"]);
-  const theme = useTheme();
   const {
     displayName,
     email,
@@ -80,12 +80,12 @@ const UserContent = ({
 
   const nameColor =
     isPending || isDisabled
-      ? theme.peopleTableRow.pendingNameColor
-      : theme.peopleTableRow.nameColor;
+      ? "var(--people-table-row-pending-name-color)"
+      : "var(--people-table-row-name-color)";
   const sideInfoColor =
     isPending || isDisabled
-      ? theme.peopleTableRow.pendingSideInfoColor
-      : theme.peopleTableRow.sideInfoColor;
+      ? "var(--people-table-row-pending-side-info-color)"
+      : "var(--people-table-row-side-info-color)";
 
   const roleLabel = getUserTypeName(
     isOwner,
@@ -105,7 +105,7 @@ const UserContent = ({
   );
 
   return (
-    <StyledRowContent sideColor={sideInfoColor} sectionWidth={sectionWidth}>
+    <RowContent className={styles.styledRowContent} sideColor={sideInfoColor} sectionWidth={sectionWidth}>
       <Link
         className="name-block"
         type={LinkType.page}
@@ -190,7 +190,7 @@ const UserContent = ({
       ) : (
         <div />
       )}
-    </StyledRowContent>
+    </RowContent>
   );
 };
 

@@ -31,7 +31,7 @@ import TagList from "./TagList";
 
 import InputParam from "SRC_DIR/components/CreateEditDialogParams/InputParam";
 import TagHandler from "SRC_DIR/helpers/TagHandler";
-import { removeEmojiCharacters } from "SRC_DIR/helpers/utils";
+import { removeEmojiCharacters } from "@docspace/shared/utils";
 
 import TagDropdown from "./TagDropdown";
 import styles from "./TagInput.module.scss";

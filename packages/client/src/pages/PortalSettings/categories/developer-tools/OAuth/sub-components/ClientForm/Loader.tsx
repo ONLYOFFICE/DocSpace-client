@@ -25,23 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 import { DeviceType } from "@docspace/shared/enums";
 
-import {
-	StyledBlock,
-	StyledButtonContainer,
-	StyledCheckboxGroup,
-	StyledContainer,
-	StyledHeaderRow,
-	StyledInputBlock,
-	StyledInputGroup,
-	StyledInputRow,
-	StyledScopesCheckbox,
-	StyledScopesContainer,
-	StyledScopesName,
-} from "./ClientForm.styled";
+import styles from "./ClientForm.styled.module.scss";
 
 const HelpButtonSkeleton = () => {
 	return <RectangleSkeleton width="12px" height="12px" />;
@@ -61,29 +50,29 @@ const ClientFormLoader = ({
 	const buttonHeight = currentDeviceType !== "desktop" ? "40px" : "32px";
 
 	return (
-		<StyledContainer>
-			<StyledBlock>
-				<StyledHeaderRow>
+		<div className={styles.styledContainer}>
+			<div className={styles.styledBlock}>
+				<div className={styles.styledHeaderRow}>
 					<RectangleSkeleton width="78px" height="22px" />
-				</StyledHeaderRow>
-				<StyledInputBlock>
-					<StyledInputGroup>
-						<StyledHeaderRow>
+				</div>
+				<div className={styles.styledInputBlock}>
+					<div className={styles.styledInputGroup}>
+						<div className={styles.styledHeaderRow}>
 							<RectangleSkeleton width="65px" height="20px" />
-						</StyledHeaderRow>
-						<StyledInputRow>
+						</div>
+						<div className={styles.styledInputRow}>
 							<RectangleSkeleton width="100%" height="32px" />
-						</StyledInputRow>
-					</StyledInputGroup>
-					<StyledInputGroup>
-						<StyledHeaderRow>
+						</div>
+					</div>
+					<div className={styles.styledInputGroup}>
+						<div className={styles.styledHeaderRow}>
 							<RectangleSkeleton width="80px" height="20px" />
-						</StyledHeaderRow>
-						<StyledInputRow>
+						</div>
+						<div className={styles.styledInputRow}>
 							<RectangleSkeleton width="100%" height="32px" />
-						</StyledInputRow>
-					</StyledInputGroup>
-					<StyledInputGroup>
+						</div>
+					</div>
+					<div className={styles.styledInputGroup}>
 						<div className="label">
 							<RectangleSkeleton width="60px" height="20px" />
 						</div>
@@ -93,105 +82,105 @@ const ClientFormLoader = ({
 							<RectangleSkeleton width="109px" height="20px" />
 						</div>
 						<RectangleSkeleton width="130px" height="16px" />
-					</StyledInputGroup>
-					<StyledInputGroup>
-						<StyledHeaderRow>
+					</div>
+					<div className={styles.styledInputGroup}>
+						<div className={styles.styledHeaderRow}>
 							<RectangleSkeleton width="75px" height="20px" />
-						</StyledHeaderRow>
-						<StyledInputRow>
+						</div>
+						<div className={styles.styledInputRow}>
 							<RectangleSkeleton width="100%" height="60px" />
-						</StyledInputRow>
-					</StyledInputGroup>
-					<StyledInputGroup>
-						<StyledHeaderRow>
+						</div>
+					</div>
+					<div className={styles.styledInputGroup}>
+						<div className={styles.styledHeaderRow}>
 							<RectangleSkeleton width="75px" height="20px" />
-						</StyledHeaderRow>
-						<StyledCheckboxGroup>
+						</div>
+						<div className={styles.styledCheckboxGroup}>
 							<CheckboxSkeleton />
 							<RectangleSkeleton width="151px" height="18px" />
 							<HelpButtonSkeleton />
-						</StyledCheckboxGroup>
-					</StyledInputGroup>
-				</StyledInputBlock>
-			</StyledBlock>
+						</div>
+					</div>
+				</div>
+			</div>
 			{isEdit ? (
-				<StyledBlock>
-					<StyledHeaderRow>
+				<div className={styles.styledBlock}>
+					<div className={styles.styledHeaderRow}>
 						<RectangleSkeleton width="47px" height="22px" />
 						<HelpButtonSkeleton />
-					</StyledHeaderRow>
-					<StyledInputBlock>
-						<StyledInputGroup>
-							<StyledHeaderRow>
+					</div>
+					<div className={styles.styledInputBlock}>
+						<div className={styles.styledInputGroup}>
+							<div className={styles.styledHeaderRow}>
 								<RectangleSkeleton width="96px" height="20px" />
-							</StyledHeaderRow>
-							<StyledInputRow>
+							</div>
+							<div className={styles.styledInputRow}>
 								<RectangleSkeleton width="100%" height="32px" />
-							</StyledInputRow>
-						</StyledInputGroup>
-						<StyledInputGroup>
-							<StyledHeaderRow>
+							</div>
+						</div>
+						<div className={styles.styledInputGroup}>
+							<div className={styles.styledHeaderRow}>
 								<RectangleSkeleton width="60px" height="20px" />
-							</StyledHeaderRow>
-							<StyledInputRow>
+							</div>
+							<div className={styles.styledInputRow}>
 								<RectangleSkeleton
 									className="loader"
 									width="calc(100% - 91px)"
 									height="32px"
 								/>
 								<RectangleSkeleton width="91px" height="32px" />
-							</StyledInputRow>
-						</StyledInputGroup>
-					</StyledInputBlock>
-				</StyledBlock>
+							</div>
+						</div>
+					</div>
+				</div>
 			) : null}
-			<StyledBlock>
-				<StyledHeaderRow>
+			<div className={styles.styledBlock}>
+				<div className={styles.styledHeaderRow}>
 					<RectangleSkeleton width="96px" height="22px" />
-				</StyledHeaderRow>
-				<StyledInputBlock>
-					<StyledInputGroup>
-						<StyledHeaderRow>
+				</div>
+				<div className={styles.styledInputBlock}>
+					<div className={styles.styledInputGroup}>
+						<div className={styles.styledHeaderRow}>
 							<RectangleSkeleton width="87px" height="20px" />
 							<HelpButtonSkeleton />
-						</StyledHeaderRow>
-						<StyledInputRow>
+						</div>
+						<div className={styles.styledInputRow}>
 							<RectangleSkeleton
 								className="loader"
 								width="calc(100% - 40px)"
 								height="32px"
 							/>
 							<RectangleSkeleton width="32px" height="32px" />
-						</StyledInputRow>
-					</StyledInputGroup>
-					<StyledInputGroup>
-						<StyledHeaderRow>
+						</div>
+					</div>
+					<div className={styles.styledInputGroup}>
+						<div className={styles.styledHeaderRow}>
 							<RectangleSkeleton width="96px" height="20px" />
 							<HelpButtonSkeleton />
-						</StyledHeaderRow>
-						<StyledInputRow>
+						</div>
+						<div className={styles.styledInputRow}>
 							<RectangleSkeleton
 								className="loader"
 								width="calc(100% - 40px)"
 								height="32px"
 							/>
 							<RectangleSkeleton width="32px" height="32px" />
-						</StyledInputRow>
-					</StyledInputGroup>
-				</StyledInputBlock>
-			</StyledBlock>
-			<StyledScopesContainer>
-				<StyledHeaderRow className="header">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div className={styles.styledScopesContainer}>
+				<div className={classNames(styles.styledHeaderRow, "header")}>
 					<RectangleSkeleton width="111px" height="22px" />
 					<HelpButtonSkeleton />
-				</StyledHeaderRow>
+				</div>
 				<RectangleSkeleton className="header" width="34px" height="22px" />
 				<RectangleSkeleton
 					className="header header-last"
 					width="37px"
 					height="22px"
 				/>
-				<StyledScopesName>
+				<div className={styles.styledScopesName}>
 					<RectangleSkeleton
 						className="scope-name-loader"
 						width="98px"
@@ -207,14 +196,14 @@ const ClientFormLoader = ({
 						width="230px"
 						height="17px"
 					/>
-				</StyledScopesName>
-				<StyledScopesCheckbox>
+				</div>
+				<div className={styles.styledScopesCheckbox}>
 					<CheckboxSkeleton className="checkbox-read" />
-				</StyledScopesCheckbox>
-				<StyledScopesCheckbox>
+				</div>
+				<div className={styles.styledScopesCheckbox}>
 					<CheckboxSkeleton />
-				</StyledScopesCheckbox>
-				<StyledScopesName>
+				</div>
+				<div className={styles.styledScopesName}>
 					<RectangleSkeleton
 						className="scope-name-loader"
 						width="98px"
@@ -230,14 +219,14 @@ const ClientFormLoader = ({
 						width="230px"
 						height="17px"
 					/>
-				</StyledScopesName>
-				<StyledScopesCheckbox>
+				</div>
+				<div className={styles.styledScopesCheckbox}>
 					<CheckboxSkeleton className="checkbox-read" />
-				</StyledScopesCheckbox>
-				<StyledScopesCheckbox>
+				</div>
+				<div className={styles.styledScopesCheckbox}>
 					<CheckboxSkeleton />
-				</StyledScopesCheckbox>
-				<StyledScopesName>
+				</div>
+				<div className={styles.styledScopesName}>
 					<RectangleSkeleton
 						className="scope-name-loader"
 						width="98px"
@@ -253,14 +242,14 @@ const ClientFormLoader = ({
 						width="230px"
 						height="17px"
 					/>
-				</StyledScopesName>
-				<StyledScopesCheckbox>
+				</div>
+				<div className={styles.styledScopesCheckbox}>
 					<CheckboxSkeleton className="checkbox-read" />
-				</StyledScopesCheckbox>
-				<StyledScopesCheckbox>
+				</div>
+				<div className={styles.styledScopesCheckbox}>
 					<CheckboxSkeleton />
-				</StyledScopesCheckbox>
-				<StyledScopesName>
+				</div>
+				<div className={styles.styledScopesName}>
 					<RectangleSkeleton
 						className="scope-name-loader"
 						width="98px"
@@ -276,14 +265,14 @@ const ClientFormLoader = ({
 						width="230px"
 						height="17px"
 					/>
-				</StyledScopesName>
-				<StyledScopesCheckbox>
+				</div>
+				<div className={styles.styledScopesCheckbox}>
 					<CheckboxSkeleton className="checkbox-read" />
-				</StyledScopesCheckbox>
-				<StyledScopesCheckbox>
+				</div>
+				<div className={styles.styledScopesCheckbox}>
 					<CheckboxSkeleton />
-				</StyledScopesCheckbox>{" "}
-				<StyledScopesName>
+				</div>{" "}
+				<div className={styles.styledScopesName}>
 					<RectangleSkeleton
 						className="scope-name-loader"
 						width="98px"
@@ -294,37 +283,37 @@ const ClientFormLoader = ({
 						width="200px"
 						height="17px"
 					/>
-				</StyledScopesName>
-				<StyledScopesCheckbox>
+				</div>
+				<div className={styles.styledScopesCheckbox}>
 					<CheckboxSkeleton className="checkbox-read" />
-				</StyledScopesCheckbox>
-			</StyledScopesContainer>
-			<StyledBlock>
-				<StyledHeaderRow>
+				</div>
+			</div>
+			<div className={styles.styledBlock}>
+				<div className={styles.styledHeaderRow}>
 					<RectangleSkeleton width="162px" height="22px" />
-				</StyledHeaderRow>
-				<StyledInputBlock>
-					<StyledInputGroup>
-						<StyledHeaderRow>
+				</div>
+				<div className={styles.styledInputBlock}>
+					<div className={styles.styledInputGroup}>
+						<div className={styles.styledHeaderRow}>
 							<RectangleSkeleton width="114px" height="20px" />
 							<HelpButtonSkeleton />
-						</StyledHeaderRow>
-						<StyledInputRow>
+						</div>
+						<div className={styles.styledInputRow}>
 							<RectangleSkeleton width="100%" height="32px" />
-						</StyledInputRow>
-					</StyledInputGroup>
-					<StyledInputGroup>
-						<StyledHeaderRow>
+						</div>
+					</div>
+					<div className={styles.styledInputGroup}>
+						<div className={styles.styledHeaderRow}>
 							<RectangleSkeleton width="96px" height="20px" />
 							<HelpButtonSkeleton />
-						</StyledHeaderRow>
-						<StyledInputRow>
+						</div>
+						<div className={styles.styledInputRow}>
 							<RectangleSkeleton width="100%" height="32px" />
-						</StyledInputRow>
-					</StyledInputGroup>
-				</StyledInputBlock>
-			</StyledBlock>
-			<StyledButtonContainer>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div className={styles.styledButtonContainer}>
 				<RectangleSkeleton
 					width={currentDeviceType === "desktop" ? "86px" : "100%"}
 					height={buttonHeight}
@@ -333,8 +322,8 @@ const ClientFormLoader = ({
 					width={currentDeviceType === "desktop" ? "86px" : "100%"}
 					height={buttonHeight}
 				/>
-			</StyledButtonContainer>
-		</StyledContainer>
+			</div>
+		</div>
 	);
 };
 

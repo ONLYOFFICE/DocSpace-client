@@ -85,8 +85,8 @@ export const CompletedFormEmpty = () => {
         <section
           className={classNames(styles.textWrapper, "completed-form__empty")}
         >
-          <Heading level={HeadingLevel.h1}>{t("CompletedForm:Title")}</Heading>
-          <Text>{t("CompletedForm:Description")}</Text>
+          <Heading level={HeadingLevel.h1}>{t("CompletedForm:CompletedFormTitle")}</Heading>
+          <Text>{t("CompletedForm:CompletedFormDescription")}</Text>
         </section>
       </div>
     </section>

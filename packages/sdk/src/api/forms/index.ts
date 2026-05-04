@@ -59,7 +59,10 @@ export async function getFormsFolder(
 
     const [req] = await createRequest([`/files/${params}`], [], "GET");
 
-    const res = await fetch(req, { next: { revalidate: 300 } });
+    const res = await fetch(req, {
+      next: { revalidate: 300 },
+      signal: AbortSignal.timeout(8000),
+    });
 
     if (!res.ok) {
       logger.error(`GET /files/${params} failed: ${res.status}`);

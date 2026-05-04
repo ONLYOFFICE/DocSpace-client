@@ -24,57 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { mobile } from "@docspace/shared/utils";
 
-const StyledLoader = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  .header {
-    width: 155px;
-    height: 22px;
-    margin-bottom: 8px;
-
-    @media ${mobile} {
-      width: 171px;
-    }
-  }
-
-  .subheader {
-    width: 297px;
-    height: 16px;
-    margin-bottom: 16px;
-
-    @media ${mobile} {
-      width: 100%;
-    }
-  }
-
-  .body {
-    width: 100%;
-    max-width: 700px;
-  }
-
-  .submenu {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 22px;
-  }
-`;
+import styles from "./DeleteDataLoader.module.scss";
 
 const DeleteDataLoader = () => {
   return (
-    <StyledLoader>
-      <div className="submenu">
+    <div className={styles.loader}>
+      <div className={styles.submenu}>
         <RectangleSkeleton height="28px" width="72px" />
         <RectangleSkeleton height="28px" width="72px" />
       </div>
-      <RectangleSkeleton className="header" />
-      <RectangleSkeleton className="subheader" />
-      <RectangleSkeleton className="body" height="100px" />
-    </StyledLoader>
+      <RectangleSkeleton className={styles.header} />
+      <RectangleSkeleton className={styles.subheader} />
+      <RectangleSkeleton className={styles.body} height="100px" />
+    </div>
   );
 };
 

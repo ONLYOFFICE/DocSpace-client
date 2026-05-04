@@ -6,6 +6,7 @@
   "AutomaticIndexing": "Indexação automática",
   "AutomaticIndexingDescription": "Habilite a indexação automática para indexar arquivos e pastas por número de série. A classificação por número será definida como padrão para todos os utilizadors.",
   "ChooseRoomType": "Escolha o tipo de sala",
+  "ConfigureDatabaseConnection": "Configure a conexão com o banco de dados em Integração → Serviços de terceiros",
   "CreateRoomConfirmation": "Continuar sem se conectar ao armazenamento?\nSelecionou uma opção de armazenamento de terceiros que ainda não está associada. Se prosseguir sem associar o serviço, esta opção não será adicionada.",
   "CreateRoomWatermarksConfirmation": "Você não definiu uma marca d'água para ser aplicada aos documentos nesta sala. Você sempre pode adicionar uma marca d'água nas configurações de edição da sala. Continuar sem marca d'água?",
   "CreateTagOption": "Criar tag",
@@ -16,8 +17,12 @@
   "FileLifetimeDescription": "Defina o tempo de vida do arquivo para excluir automaticamente os arquivos nesta sala após um período definido. O tempo de vida começa na data de upload/criação do arquivo.",
   "FilesOlderThan": "Ficheiros mais antigos que:",
   "FormRoomBarDescription": "Esta sala está disponível para qualquer pessoa com o link. Os usuários externos terão permissão de preenchimento de formulário para todos os arquivos.",
+  "GoToIntegrations": "Ir para Integrações",
   "Horizontal": "Horizontais",
   "Icon": "Ícone",
+  "NeedMoreIntegrations": "Precisa de mais integrações?",
+  "NeedMoreIntegrationsDescription": "Use webhooks para enviar dados para o seu próprio sistema ou conecte formulários a milhares de serviços via Zapier.",
+  "NoDatabaseConnections": "Nenhuma conexão de banco de dados configurada",
   "PeopleSelectorInfo": "Somente um administrador da sala ou administrador do {{productName}} pode se tornar o proprietário da sala",
   "Position": "Posição",
   "PublicRoomBarDescription": "Este quarto está disponível para qualquer pessoa com o link. O acesso para usuários externos é fornecido dependendo do tipo selecionado de direitos de acesso.",
@@ -39,5 +44,6 @@
   "UserName": "Nome de Utilizador",
   "ViewerInfo": "Informações do visualizador",
   "WatermarkPreview": "Pré-visualização da marca d'água",
-  "WatermarkPreviewHelp": "Esta visualização de imagem mostra aproximadamente como a marca d'água será exibida em seus arquivos."
+  "WatermarkPreviewHelp": "Esta visualização de imagem mostra aproximadamente como a marca d'água será exibida em seus arquivos.",
+  "NoDatabaseConnectionsRoomAdmin": "As conexões de banco de dados são configuradas por um administrador. Assim que um banco de dados for configurado, você poderá ativar a exportação aqui."
 }

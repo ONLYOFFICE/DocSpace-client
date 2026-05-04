@@ -3,17 +3,18 @@
   "content": "Room copied",
   "content_en_sha1_hash": "84a37f78a1044b9e21ef84fec5b8c4ffddbd830b",
   "created_at": "2025-05-19T21:30:49.819Z",
-  "updated_at": "2026-03-20T09:07:45.616Z",
+  "updated_at": "2026-04-13T14:59:05.880Z",
   "comment": {
-    "text": "This translation key is used to display a confirmation message when a room has been successfully copied. The text will appear in a UI context where rooms are being duplicated or transferred, providing feedback to users about the outcome of this action.",
+    "text": "Toast message. Appears briefly to confirm that a room has been successfully duplicated.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:54.188Z"
+    "updated_at": "2026-04-11T21:28:29.561Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
-      "line_number": 86,
-      "context": "return t(\"RoomArchived\");\n case WebhookTriggers.RoomDeleted:\n return t(\"RoomDeleted\");\n case WebhookTriggers.RoomRestored:\n return t(\"RoomRestored\");\n case WebhookTriggers.RoomCopied:\n return t(\"RoomCopied\");\n case WebhookTriggers.FormFilledOut:\n return t(\"FormFilledOut\");\n case WebhookTriggers.FormStopped:\n return t(\"FormStopped\");",
+      "line_number": 87,
+      "context": "case WebhookTriggers.RoomDeleted:\n return t(\"RoomDeleted\");\n case WebhookTriggers.RoomRestored:\n return t(\"RoomRestored\");\n case WebhookTriggers.RoomCopied:\n return t(\"RoomCopied\");\n case WebhookTriggers.FormFilledOut:\n return t(\"FormFilledOut\");\n case WebhookTriggers.FormStopped:\n return t(\"FormStopped\");\n case WebhookTriggers.FormSubmit:",
       "module": "/packages/client"
     }
   ],
@@ -141,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'Grupul a fost copiat' translates to 'The group was copied'. This doesn't accurately reflect the English 'Room copied', which implies a room (e.g., a chat room) has been duplicated or replicated. 'Grupul' refers to a group, not a room.",
-          "suggestion": "Camera a fost copiată"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -177,13 +172,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Соба копирана\" translates to \"Room copied\" literally, but it appears there's an error. 'Соба' (Soba) means 'room' but should be 'Ауторска соба' or a similar term indicating a copyright room/space.",
-          "suggestion": "Consider using 'Ауторска соба копирана' or a more contextually accurate translation for 'Room copied' related to copyright or a designated space. Without more context, it's difficult to offer a definitively correct suggestion."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -211,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

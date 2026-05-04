@@ -39,16 +39,33 @@ export default function useFormsSocket(
   folderIds: (string | number)[],
   fileIds: (string | number)[],
   onFilesUpdated?: () => void,
+  onMutationExpectingThumbnail?: () => void,
 ) {
   const isInit = useRef(false);
   const onFilesUpdatedRef = useRef(onFilesUpdated);
   onFilesUpdatedRef.current = onFilesUpdated;
+  const onMutationRef = useRef(onMutationExpectingThumbnail);
+  onMutationRef.current = onMutationExpectingThumbnail;
 
   useEffect(() => {
     if (!socketUrl || isInit.current) return;
 
     isInit.current = true;
-    SocketHelper?.connect(socketUrl, "");
+
+    const doConnect = () => SocketHelper?.connect(socketUrl, "");
+    const win = window as Window & {
+      requestIdleCallback?: (
+        cb: () => void,
+        opts?: { timeout: number },
+      ) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+    if (win.requestIdleCallback) {
+      const id = win.requestIdleCallback(doConnect, { timeout: 1000 });
+      return () => win.cancelIdleCallback?.(id);
+    }
+    const id = window.setTimeout(doConnect, 500);
+    return () => window.clearTimeout(id);
   }, [socketUrl]);
 
   const folderIdsKey = folderIds.filter(Boolean).join(",");
@@ -80,7 +97,9 @@ export default function useFormsSocket(
   const handleModifyFolder = useCallback((opt?: TOptSocket) => {
     if (!opt?.cmd || !opt?.type) return;
 
-    if (opt.cmd === "create" || opt.cmd === "update" || opt.cmd === "delete") {
+    if (opt.cmd === "create" || opt.cmd === "update") {
+      (onMutationRef.current ?? onFilesUpdatedRef.current)?.();
+    } else if (opt.cmd === "delete") {
       onFilesUpdatedRef.current?.();
     }
   }, []);
@@ -89,7 +108,7 @@ export default function useFormsSocket(
     if (!opt?.cmd) return;
 
     if ((opt.cmd as string) === "create-form") {
-      onFilesUpdatedRef.current?.();
+      (onMutationRef.current ?? onFilesUpdatedRef.current)?.();
     }
   }, []);
 
@@ -98,7 +117,7 @@ export default function useFormsSocket(
   }, []);
 
   const handleStopEdit = useCallback(() => {
-    onFilesUpdatedRef.current?.();
+    (onMutationRef.current ?? onFilesUpdatedRef.current)?.();
   }, []);
 
   useEffect(() => {

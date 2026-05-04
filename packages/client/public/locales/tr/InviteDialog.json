@@ -17,7 +17,6 @@
   "InviteViaLinkDescriptionAgentMembers": "{{productName}} üyeleri için, acentada kendi yetkilendirmeleri için evrensel bir bağlantı oluşturun.",
   "InviteViaLinkDescriptionRoomGuest": "Oda içinde misafir olarak kendi yetkilendirmesi için evrensel bir bağlantı oluşturun.",
   "InviteViaLinkDescriptionRoomMembers": "{{productName}} üyeleri için odada kendi yetkilendirmesi için evrensel bir bağlantı oluşturun.",
-  "LinkCopySuccess": "Bağlantı kopyalandı",
   "SendInvitation": "Davetiye gönder",
   "UserAgentMaxAvailableRoleWarning": "Konuklar ve Kullanıcılar, Ajan yöneticisi olarak atanemez. Sadece Oda ve {{productName}} yöneticileri belirtilen rol için uygundur.",
   "UserMaxAvailableRoleWarning": "Konuklar ve Kullanıcılar Oda yöneticisi olarak atanamaz. Belirtilen rol için yalnızca Oda ve {{productName}} yöneticileri uygundur.",

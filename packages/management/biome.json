@@ -3,6 +3,10 @@
   "extends": [
     "../shared/biome.json"
   ],
+  "plugins": [
+    "../shared/biome-plugins/no-dynamic-i18n-key.grit",
+    "../shared/biome-plugins/no-constants-via-i18n.grit"
+  ],
   "linter": {
     "rules": {
       "performance": {

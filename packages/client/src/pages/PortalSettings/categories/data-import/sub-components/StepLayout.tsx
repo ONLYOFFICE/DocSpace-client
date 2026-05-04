@@ -24,28 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-
 import { Text } from "@docspace/ui-kit/components/text";
 import { LayoutProps } from "../types";
-
-const DescriptionWrapper = styled.div`
-  max-width: 700px;
-
-  .data-import-description {
-    color: ${(props) => props.theme.client.settings.migration.descriptionColor};
-  }
-
-  .data-import-counter {
-    margin-top: 19px;
-    margin-bottom: 8px;
-  }
-
-  .data-import-section-description {
-    margin-bottom: 16px;
-    font-size: 12px;
-  }
-`;
+import styles from "../StyledDataImport.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const StepLayout = (props: LayoutProps) => {
   const { t, step, totalSteps, title, description, component, logoText } =
@@ -53,10 +35,10 @@ const StepLayout = (props: LayoutProps) => {
 
   return (
     <>
-      <DescriptionWrapper>
+      <div className={styles.descriptionWrapper}>
         <Text className="data-import-description" lineHeight="20px">
           {t("Settings:AboutDataImport", {
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
             organizationName: logoText,
           })}
         </Text>
@@ -69,7 +51,7 @@ const StepLayout = (props: LayoutProps) => {
           {step}/{totalSteps}. {title}
         </Text>
         <div className="data-import-section-description">{description}</div>
-      </DescriptionWrapper>
+      </div>
       {component}
     </>
   );

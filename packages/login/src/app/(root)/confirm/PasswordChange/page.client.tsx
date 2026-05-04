@@ -121,7 +121,8 @@ const PasswordChangeForm = ({
       if (errorMessage === "Invalid params") {
         toastr.error(t("Common:SomethingWentWrong"));
       } else {
-        toastr.error(t(`${errorMessage}`));
+        // biome-ignore lint/plugin/no-dynamic-i18n-key: errorMessage is a server-provided i18n key; value is not known at compile time
+        toastr.error(t(errorMessage));
       }
       setIsLoading(false);
     }

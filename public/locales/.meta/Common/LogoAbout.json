@@ -3,16 +3,17 @@
   "content": "Logo for the About page",
   "content_en_sha1_hash": "9eedc846ebbca15548685b786487a57f168857ec",
   "created_at": "2025-05-26T07:15:44.866Z",
-  "updated_at": "2026-02-19T13:36:33.169Z",
+  "updated_at": "2026-04-11T20:49:15.184Z",
   "comment": {
-    "text": "The translation key \"LogoAbout\" is used to display the title of the About page logo. It appears in a descriptive text on a settings page and provides context for the logged-in user about the logo being displayed.",
+    "text": "This is a label for the logo displayed on the \"About\" page of the application. It appears next to the logo image.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:05:00.611Z"
+    "updated_at": "2026-04-11T20:49:15.184Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 334,
+      "line_number": 335,
       "context": "</div>\n \n {showAbout ? (\n <div className={styles.logoWrapper}>\n <Text fontSize=\"15px\" fontWeight=\"600\">\n {t(\"LogoAbout\")} ({logoUrls[6].size.width}x\n {logoUrls[6].size.height})\n </Text>\n <div className={styles.logosWrapper}>\n <Logo\n name={logoUrls[6].name}",
       "module": "/packages/shared"
     }
@@ -199,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

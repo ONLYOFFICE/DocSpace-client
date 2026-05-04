@@ -73,7 +73,7 @@ const EmailChangeDialog = ({
         <div className={styles.wrapper}>
           <Text>{displayName}</Text>
           <EmailInput
-            placeholder={t("SMTPSettings:EnterEmail")}
+            placeholder={t("Common:EnterEmail")}
             className="import-email-input"
             value={tempEmail}
             onChange={handleEmailChange}
@@ -109,3 +109,4 @@ const EmailChangeDialog = ({
 };
 
 export default EmailChangeDialog;
+

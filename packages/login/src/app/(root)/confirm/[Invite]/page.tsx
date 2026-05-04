@@ -92,6 +92,14 @@ async function Page(props: LinkInviteProps) {
   ]);
 
   if (
+    user === "access-restricted" ||
+    passwordSettings === "access-restricted" ||
+    invitationSettings === "access-restricted"
+  ) {
+    redirect("/access-restricted");
+  }
+
+  if (
     !invitationSettings?.allowInvitingGuests &&
     emplType === String(EmployeeType.Guest)
   ) {

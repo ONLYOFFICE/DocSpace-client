@@ -30,7 +30,6 @@ import {
   tfaStore,
   currentTariffStatusStore,
   currentQuotaStore,
-  paymentQuotasStore,
   settingsStore,
 } from "@docspace/shared/store";
 
@@ -105,13 +104,13 @@ const pluginStore = new PluginStore(
   settingsStore,
   selectedFolderStore,
   userStore,
+  currentTariffStatusStore,
 );
 
 const paymentStore = new PaymentStore(
   userStore,
   currentTariffStatusStore,
   currentQuotaStore,
-  paymentQuotasStore,
 );
 const servicesStore = new ServicesStore(currentTariffStatusStore, paymentStore);
 
@@ -399,7 +398,6 @@ const store = {
   tfaStore,
   currentTariffStatusStore,
   currentQuotaStore,
-  paymentQuotasStore,
   settingsStore,
 
   paymentStore,
@@ -465,3 +463,4 @@ const store = {
 };
 
 export default store;
+

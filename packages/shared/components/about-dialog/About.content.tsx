@@ -37,6 +37,7 @@ import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { IContentProps } from "./About.types";
 import styles from "./About.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const AboutContent = ({
   buildVersionInfo,
@@ -108,7 +109,7 @@ export const AboutContent = ({
               enableUserSelect
               color="accent"
             >
-              &nbsp;{logoText} {t("Common:ProductName")}&nbsp;
+              &nbsp;{logoText} {getBrandName("ProductName")}&nbsp;
             </Link>
 
             <Text
@@ -148,7 +149,7 @@ export const AboutContent = ({
               enableUserSelect
               color="accent"
             >
-              &nbsp;{logoText} {t("Common:ProductEditorsName")}&nbsp;
+              &nbsp;{logoText} {getBrandName("ProductEditorsName")}&nbsp;
             </Link>
             <Text
               className={classNames(

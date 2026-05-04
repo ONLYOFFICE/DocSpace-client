@@ -26,7 +26,7 @@
 
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Badge } from "@docspace/ui-kit/components/badge";
@@ -35,11 +35,12 @@ import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import ItemIcon from "SRC_DIR/components/ItemIcon";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 
-import { StyledStatistics, StyledMainTitle } from "./StyledComponent";
+import styles from "./StyledComponent.module.scss";
 
 import RoomsList from "./sub-components/RoomsList";
 import UsersList from "./sub-components/UsersList";
 import AIAgentList from "./sub-components/AIAgentList.js";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const buttonProps = {
   className: "button-element",
@@ -47,7 +48,7 @@ const buttonProps = {
 };
 const StatisticsComponent = (props) => {
   const { t } = useTranslation("Settings");
-  const theme = useTheme();
+  const { isBase } = useTheme();
   const { isStatisticsAvailable } = props;
 
   const iconElement = (
@@ -87,15 +88,15 @@ const StatisticsComponent = (props) => {
   );
 
   return (
-    <StyledStatistics>
+    <div className={styles.statistics}>
       <div className="title-container">
-        <StyledMainTitle fontWeight={700} fontSize="16px">
+        <Text className={styles.mainTitle} fontWeight={700} fontSize="16px">
           {t("Statistics")}
-        </StyledMainTitle>
+        </Text>
         {!isStatisticsAvailable ? (
           <Badge
             backgroundColor={
-              theme.isBase
+              isBase
                 ? globalColors.favoritesStatus
                 : globalColors.favoriteStatusDark
             }
@@ -106,7 +107,7 @@ const StatisticsComponent = (props) => {
         ) : null}
       </div>
       <Text className="statistics-description">
-        {t("StatisticDescription", { productName: t("Common:ProductName") })}
+        {t("StatisticDescription", { productName: getBrandName("ProductName") })}
       </Text>
       {isStatisticsAvailable ? (
         <>
@@ -130,7 +131,7 @@ const StatisticsComponent = (props) => {
           />
         </>
       ) : null}
-    </StyledStatistics>
+    </div>
   );
 };
 

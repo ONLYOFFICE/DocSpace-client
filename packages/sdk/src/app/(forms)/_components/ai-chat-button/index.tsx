@@ -35,6 +35,7 @@ import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
+import { useFormsTourStore } from "../../_store/FormsTourStore";
 
 import { ReactSVG } from "react-svg";
 
@@ -42,7 +43,11 @@ import AiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.re
 
 import styles from "./AiChatButton.module.scss";
 
-const AiChatButton = () => {
+type AiChatButtonProps = {
+  shiftUp?: boolean;
+};
+
+const AiChatButton = ({ shiftUp = false }: AiChatButtonProps) => {
   const { t } = useTranslation(["Common"]);
   const {
     togglePanel,
@@ -52,15 +57,18 @@ const AiChatButton = () => {
     isPanelVisible,
     panelPosition,
   } = useFormsAiAgentStore();
-  const { editingFile } = useFormsNavigationStore();
+  const { editingFile, completedFolder } = useFormsNavigationStore();
   const { hasManagementAccess } = useFormsSettingsStore();
+  const { forceShowAiChat } = useFormsTourStore();
 
-  if (!aiAgentEnabled || !hasManagementAccess || isPanelVisible || editingFile)
-    return null;
+  if (!(forceShowAiChat && completedFolder)) {
+    if (!aiAgentEnabled || !hasManagementAccess || isPanelVisible || editingFile)
+      return null;
 
-  if (isPreparingAgent) return null;
+    if (isPreparingAgent) return null;
 
-  if (!currentAgentId) return null;
+    if (!currentAgentId) return null;
+  }
 
   return (
     <>
@@ -68,7 +76,9 @@ const AiChatButton = () => {
         type="button"
         className={styles.floatingButton}
         data-position={panelPosition}
+        data-shift-up={shiftUp ? "true" : "false"}
         onClick={togglePanel}
+        data-tour="ai-chat-button"
         data-tooltip-id="ai-chat-fab-tooltip"
         data-tooltip-content={t("Common:AIChatButton")}
       >

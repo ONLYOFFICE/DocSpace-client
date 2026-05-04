@@ -31,23 +31,35 @@ import { observer } from "mobx-react";
 
 import { FormsSection } from "@/types/forms";
 
+import { useFormsListStore } from "../../_store/FormsListStore";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
+import { useFormsTourStore } from "../../_store/FormsTourStore";
 import { useFormsDataContext } from "../../_context/FormsDataContext";
 import FormsGrid from "../../_components/forms-grid";
 
 const InProgressPage = () => {
+  const formsListStore = useFormsListStore();
   const formsSettingsStore = useFormsSettingsStore();
   const { editingFile, inProgressFolder, goBackToInProgressRoot } =
     useFormsNavigationStore();
+  const tourStore = useFormsTourStore();
   const { fetchSection, fetchMore, fetchSubfolder } = useFormsDataContext();
 
   const fetchSectionRef = React.useRef(fetchSection);
   fetchSectionRef.current = fetchSection;
   React.useEffect(() => {
+    if (tourStore.showMockItems) return;
     if (inProgressFolder) return;
+
+    const ssrHasData =
+      formsListStore.section === FormsSection.InProgress &&
+      !formsListStore.isLoading &&
+      formsListStore.folders.length > 0;
+    if (ssrHasData) return;
+
     fetchSectionRef.current(FormsSection.InProgress);
-  }, [inProgressFolder]);
+  }, [inProgressFolder, tourStore.showMockItems, formsListStore]);
 
   React.useEffect(() => {
     if (!inProgressFolder || editingFile) return;
@@ -66,13 +78,13 @@ const InProgressPage = () => {
   }, [inProgressFolder, editingFile, goBackToInProgressRoot]);
 
   React.useEffect(() => {
-    if (!inProgressFolder) return;
+    if (!inProgressFolder || tourStore.showMockItems) return;
 
     const controller = new AbortController();
     fetchSubfolder(inProgressFolder.id, controller.signal).catch(() => {});
 
     return () => controller.abort();
-  }, [inProgressFolder, fetchSubfolder]);
+  }, [inProgressFolder, fetchSubfolder, tourStore.showMockItems]);
 
   return (
     <FormsGrid

@@ -39,7 +39,7 @@ import { useNavigate } from "react-router";
 import { isMobile, isDesktop } from "@docspace/ui-kit/utils/device";
 import ProgressContainer from "./ProgressContainer";
 import ToggleAutoSync from "./ToggleAutoSync";
-import StyledLdapPage from "../styled-components/StyledLdapPage";
+import StyledLdapPage from "../styled-containers/StyledLdapPage";
 import { onChangeUrl } from "../utils";
 
 const SyncContainer = ({

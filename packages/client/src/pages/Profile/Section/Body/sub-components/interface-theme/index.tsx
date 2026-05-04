@@ -107,10 +107,10 @@ const InterfaceTheme = (props: InterfaceThemeProps) => {
 
   const systemThemeLabel = isDesktopClient
     ? t("Profile:DesktopTheme")
-    : t("Profile:SystemTheme");
+    : t("SystemTheme");
   const systemThemeDescriptionLabel = isDesktopClient
     ? t("Profile:DesktopThemeDescription")
-    : t("Profile:SystemThemeDescription");
+    : t("SystemThemeDescription");
 
   return (
     <div

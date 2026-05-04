@@ -6,6 +6,7 @@
   "AutomaticIndexing": "Automaattinen indeksointi",
   "AutomaticIndexingDescription": "Ota käyttöön automaattinen indeksointi hakemistotiedostoihin ja kansioihin sarjanumeron perusteella. Numeron perusteella järjestäminen asetetaan oletuksena kaikille käyttäjille.",
   "ChooseRoomType": "Valitse huonetyyppi",
+  "ConfigureDatabaseConnection": "Määritä tietokantayhteys kohdassa Integraatio → Kolmannen osapuolen palvelut",
   "CreateRoomConfirmation": "Jatka yhdistämättä muistiin?\nEt voi alentaa kolmannen osapuolen muistivaihtoehtoa, joka ei ole vielä yhdistetty. Jos jatkat yhdistämättä palvelua, tätä vaihtoehtoa ei lisätä.",
   "CreateRoomWatermarksConfirmation": "Et ole valinnut vesileimaa käytettäväksi tämän huoneen asiakirjoihin. Voit aina lisätä vesileiman huoneen muokkausasetuksissa. Jatketaanko ilman vesileimaa?",
   "CreateTagOption": "Luo merkki",
@@ -16,8 +17,12 @@
   "FileLifetimeDescription": "Aseta tiedoston käyttöikä poistaaksesi automaattisesti tämän huoneen tiedostot määrätyn ajanjakson jälkeen. Käyttöikä alkaa tiedoston lataamis-/luomispäivämäärästä.",
   "FilesOlderThan": "Tiedostot, jotka ovat vanhempia kuin:",
   "FormRoomBarDescription": "Tämä huone on kenelle tahansa, jolla on linkki. Ulkoiset käyttäjät saavat lomakkeen täyttäjänoikeudet kaikkiin tiedostoihin.",
+  "GoToIntegrations": "Siirry integraatioihin",
   "Horizontal": "Vaakasuora",
   "Icon": "Kuvake",
+  "NeedMoreIntegrations": "Tarvitsetko lisää integraatioita?",
+  "NeedMoreIntegrationsDescription": "Käytä webhooks-tekniikkaa lähettämään tiedot omalle järjestelmällesi, tai yhdistä lomakkeet tuhansiin palveluihin Zapierin kautta.",
+  "NoDatabaseConnections": "Ei määritettyjä tietokantayhteyksiä",
   "PeopleSelectorInfo": "Vain huoneen järjestelmänvalvojasta tai {{productName}}:n järjestelmänvalvojasta voi tulla huoneen omistaja.",
   "Position": "Asema",
   "PublicRoomBarDescription": "Tämä huone on kaikille, joilla on linkki. Ulkoisilla käyttäjillä on pääsy riippuen valituista pääsyoikeuksista. ",
@@ -39,5 +44,6 @@
   "UserName": "Käyttäjänimi",
   "ViewerInfo": "Katsojan tiedot",
   "WatermarkPreview": "Vesileiman esikatselu",
-  "WatermarkPreviewHelp": "Tämä esikatselu näyttää karkeasti kuinka vesileima näytetään tiedostoissasi."
+  "WatermarkPreviewHelp": "Tämä esikatselu näyttää karkeasti kuinka vesileima näytetään tiedostoissasi.",
+  "NoDatabaseConnectionsRoomAdmin": "Tietokantayhteydet määritetään ylläpitäjän toimesta. Kun tietokanta on määritetty, voit ottaa viennin käyttöön tässä."
 }

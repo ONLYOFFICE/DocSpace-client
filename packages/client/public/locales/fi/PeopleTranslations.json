@@ -28,7 +28,7 @@
   "StandardLogin": "Standardi kirjautuminen",
   "SuccessChangeGuestStatus": "Vieras-status on onnistuneesti muutettu",
   "SuccessChangeUserStatus": "Käyttäjän tilan muuttaminen onnistui",
-  "SuccessCopyContantLink": "Kontaktilinkki onnistuneesti kopioitu. Linkki on <strong> 7 päivää voimassa. </strong>",
+  "SuccessCopyContantLink": "Kontaktilinkki kopioitu onnistuneesti. Linkki on <strong>voimassa 7 päivää.</strong>",
   "SuccessDeleteGroup": "Ryhmä on onnistuneesti poistettu",
   "SuccessDeleteGroups": "Ryhmät ovat onnistuneesti poistettu",
   "SuccessDeletePersonalData": "Henkilötietojen poistaminen onnistui",

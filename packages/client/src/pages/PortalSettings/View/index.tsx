@@ -39,30 +39,24 @@ import { Component as Backup } from "../categories/data-management";
 import RestoreBackup from "../categories/data-management/backup/restore-backup";
 import { Component as Integration } from "../categories/integration";
 import { Component as DataImport } from "../categories/data-import";
-import { Component as DeveloperTools } from "../categories/developer-tools";
 import { Component as DeleteData } from "../categories/delete-data";
 import { Component as StorageManagement } from "../categories/storage-management";
 import { Component as Payments } from "../categories/payments";
 import { Component as Bonus } from "../../Bonus";
-import { Component as Services } from "../categories/payments/SaaS/services";
 import { Component as AISettings } from "../categories/ai-settings";
-import AiPage from "../categories/payments/SaaS/services/pages/ai-tools/AiPage";
 
 import useSecurity from "../categories/security/useSecurity";
 import useBackup from "../categories/data-management/backup/useBackup";
 import useIntegration from "../categories/integration/useIntegration";
-import useDeveloperTools from "../categories/developer-tools/useDeveloperTools";
 import useDeleteData from "../categories/delete-data/useDeleteData";
 import useCommon from "../categories/common/useCommon";
 import useDataImport from "../categories/data-import/useDataImport";
 import usePayments from "../categories/payments/usePayments";
-import useServices from "../categories/payments/SaaS/services/useServices";
 import useAiSettings from "../categories/ai-settings/useAiSettings";
 import { createDefaultHookSettingsProps } from "../utils/createDefaultHookSettingsProps";
 import { isMainSectionChange } from "../utils/isMainSectionChange";
 import { TView, ViewProps } from "./View.types";
-import BackupPage from "../categories/payments/SaaS/services/pages/backup/BackupPage";
-import AdditionalStoragePage from "../categories/payments/SaaS/services/pages/additional-storage/AdditionalStoragePage";
+import { Component as ServicesPage } from "../categories/payments/ServicesPage";
 
 const getViewFromPathname = (pathname: string): TView => {
   if (pathname.includes("customization")) return "customization";
@@ -73,7 +67,6 @@ const getViewFromPathname = (pathname: string): TView => {
   if (pathname.includes("integration")) return "integration";
   if (pathname.includes("data-import")) return "data-import";
   if (pathname.includes("management")) return "management";
-  if (pathname.includes("developer-tools")) return "developer-tools";
   if (pathname.includes("delete-data")) return "delete-data";
   if (pathname.includes("backup")) return "backup-service";
   if (pathname.includes("disk-storage")) return "disk-storage";
@@ -110,7 +103,6 @@ const View = ({
   ldapStore,
   common,
   paymentStore,
-  servicesStore,
   currentTariffStatusStore,
   defaultTemplatesStore,
 
@@ -155,7 +147,6 @@ const View = ({
     ldapStore,
     common,
     paymentStore,
-    servicesStore,
     currentTariffStatusStore,
     defaultTemplatesStore,
   });
@@ -167,12 +158,9 @@ const View = ({
     ...defaultProps.integration,
   });
   const { getDataImportInitialValue } = useDataImport(defaultProps.dataImport);
-  const { getDeveloperToolsInitialValue } = useDeveloperTools(
-    defaultProps.developerTools,
-  );
   const { getDeleteDataInitialValue } = useDeleteData(defaultProps.deleteData);
   const { getPaymentsInitialValue } = usePayments(defaultProps.payment);
-  const { getServicesInitialValue } = useServices(defaultProps.services);
+
   const { getAiSettingsInitialValue } = useAiSettings({
     fetchAIProviders,
     initDefaultProvider,
@@ -293,9 +281,6 @@ const View = ({
           case "management":
             await init();
             break;
-          case "developer-tools":
-            await getDeveloperToolsInitialValue();
-            break;
           case "delete-data":
             await getDeleteDataInitialValue();
             break;
@@ -304,12 +289,6 @@ const View = ({
             break;
           case "bonus":
             await standaloneInit(t);
-            break;
-
-          case "ai-services":
-          case "backup-service":
-          case "disk-storage":
-            await getServicesInitialValue();
             break;
 
           case "ai-settings":
@@ -347,14 +326,15 @@ const View = ({
       {currentView === "integration" ? <Integration /> : null}
       {currentView === "data-import" ? <DataImport /> : null}
       {currentView === "management" ? <StorageManagement /> : null}
-      {currentView === "developer-tools" ? <DeveloperTools /> : null}
       {currentView === "delete-data" ? <DeleteData /> : null}
       {currentView === "payments" ? <Payments /> : null}
       {currentView === "bonus" ? <Bonus /> : null}
-      {currentView === "ai-services" ? <AiPage /> : null}
       {currentView === "ai-settings" ? <AISettings /> : null}
-      {currentView === "backup-service" ? <BackupPage /> : null}
-      {currentView === "disk-storage" ? <AdditionalStoragePage /> : null}
+      {currentView === "ai-services" ||
+      currentView === "backup-service" ||
+      currentView === "disk-storage" ? (
+        <ServicesPage />
+      ) : null}
     </LoaderWrapper>
   );
 };
@@ -379,7 +359,6 @@ export const ViewComponent = inject(
     storageManagement,
     ldapStore,
     paymentStore,
-    servicesStore,
     currentTariffStatusStore,
     aiSettingsStore,
     defaultTemplatesStore,
@@ -420,7 +399,6 @@ export const ViewComponent = inject(
       ldapStore,
       common,
       paymentStore,
-      servicesStore,
       currentTariffStatusStore,
       ssoFormStore: ssoStore,
       defaultTemplatesStore,

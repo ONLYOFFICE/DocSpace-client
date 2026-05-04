@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
 
@@ -41,6 +40,7 @@ import OAuthStore from "SRC_DIR/store/OAuthStore";
 export type UseDeveloperToolsProps = {
   getCSPSettings?: SettingsStore["getCSPSettings"];
   loadWebhooks?: WebhooksStore["loadWebhooks"];
+  loadWebhookTriggers?: WebhooksStore["loadWebhookTriggers"];
   fetchClients?: OAuthStore["fetchClients"];
   fetchScopes?: OAuthStore["fetchScopes"];
   isInit?: OAuthStore["isInit"];
@@ -58,6 +58,7 @@ export type UseDeveloperToolsProps = {
 const useDeveloperTools = ({
   getCSPSettings,
   loadWebhooks,
+  loadWebhookTriggers,
   fetchClients,
   fetchScopes,
   isInit,
@@ -69,22 +70,13 @@ const useDeveloperTools = ({
   setErrorKeys,
   addAbortControllers,
 }: UseDeveloperToolsProps) => {
-  const { ready: translationsReady } = useTranslation([
-    "JavascriptSdk",
-    "Webhooks",
-    "Settings",
-    "WebPlugins",
-    "Common",
-    "OAuth",
-  ]);
-
   const getJavascriptSDKData = React.useCallback(async () => {
     await getCSPSettings?.();
   }, [getCSPSettings]);
 
   const getWebhooksData = React.useCallback(async () => {
-    await loadWebhooks?.();
-  }, [loadWebhooks]);
+    await Promise.all([loadWebhooks?.(), loadWebhookTriggers?.()]);
+  }, [loadWebhooks, loadWebhookTriggers]);
 
   const getOAuthData = React.useCallback(async () => {
     const actions = [];
@@ -132,25 +124,6 @@ const useDeveloperTools = ({
     }
   }, [getApiKeys, getApiKeyPermissions, addAbortControllers]);
 
-  // Waiting for translations to load for the API page, since there is no request logic there.
-  const waiters = React.useRef<((ready: boolean) => void)[]>([]);
-  React.useEffect(() => {
-    if (translationsReady) {
-      waiters.current.forEach((resolve) => resolve(true));
-      waiters.current = [];
-    }
-  }, [translationsReady]);
-
-  const waitForTranslations = React.useCallback((): Promise<boolean> => {
-    return new Promise((resolve) => {
-      if (translationsReady) {
-        resolve(true);
-      } else {
-        waiters.current.push(resolve);
-      }
-    });
-  }, [translationsReady]);
-
   const getDeveloperToolsInitialValue = React.useCallback(async () => {
     const actions = [];
 
@@ -166,18 +139,12 @@ const useDeveloperTools = ({
     if (window.location.pathname.includes("api-keys"))
       actions.push(getKeysData());
 
-    if (window.location.pathname.includes("api")) {
-      await waitForTranslations();
-      return;
-    }
-
     await Promise.all(actions);
   }, [
     getJavascriptSDKData,
     getWebhooksData,
     getOAuthData,
     getKeysData,
-    waitForTranslations,
   ]);
 
   return {

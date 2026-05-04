@@ -29,8 +29,11 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import api from "@docspace/shared/api";
+import { createThumbnails } from "@docspace/shared/api/files";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
+import { FilterType } from "@docspace/shared/enums";
+import { thumbnailStatuses } from "@docspace/shared/constants";
 
 export type CategoryItem = {
   id: number | string;
@@ -44,6 +47,8 @@ export type CategoryData = {
   items: CategoryItem[];
   isLoading: boolean;
 };
+
+const MAX_CONCURRENT_FETCHES = 4;
 
 export default function useLibraryLandingData(folders: TFolder[]) {
   const [categories, setCategories] = useState<CategoryData[]>([]);
@@ -64,8 +69,7 @@ export default function useLibraryLandingData(folders: TFolder[]) {
       folders.map((folder) => ({ folder, items: [], isLoading: true })),
     );
 
-    for (const [idx, folder] of folders.entries()) {
-      void (async () => {
+    const fetchCategory = async (idx: number, folder: TFolder) => {
       try {
         const filter = FilesFilter.getDefault();
         filter.page = 0;
@@ -98,6 +102,30 @@ export default function useLibraryLandingData(folders: TFolder[]) {
           ),
         ];
 
+        const thumbIds = res.files
+          .filter((f) => typeof f.id === "number" && f.thumbnailStatus !== thumbnailStatuses.CREATED)
+          .map((f) => f.id as number);
+        if (thumbIds.length) createThumbnails(thumbIds).catch(() => {});
+
+        if (res.folders.length > 0) {
+          const thumbFilter = FilesFilter.getDefault();
+          thumbFilter.page = 0;
+          thumbFilter.pageCount = 100;
+          thumbFilter.withSubfolders = true;
+          thumbFilter.filterType = FilterType.PDFForm;
+
+          api.files
+            .getFolder(folder.id, thumbFilter, controller.signal)
+            .then((thumbRes) => {
+              if (controller.signal.aborted) return;
+              const ids = thumbRes.files
+                .filter((f) => typeof f.id === "number" && f.thumbnailStatus !== thumbnailStatuses.CREATED)
+                .map((f) => f.id as number);
+              if (ids.length) createThumbnails(ids).catch(() => {});
+            })
+            .catch(() => {});
+        }
+
         setCategories((prev) =>
           prev.map((cat, i) =>
             i === idx ? { ...cat, items, isLoading: false } : cat,
@@ -111,8 +139,25 @@ export default function useLibraryLandingData(folders: TFolder[]) {
           ),
         );
       }
-      })();
-    }
+    };
+
+    void (async () => {
+      const queue = folders.map((folder, idx) => ({ idx, folder }));
+      let cursor = 0;
+
+      const runNext = async (): Promise<void> => {
+        const entry = queue[cursor++];
+        if (!entry || controller.signal.aborted) return;
+        await fetchCategory(entry.idx, entry.folder);
+        return runNext();
+      };
+
+      const workers = Array.from(
+        { length: Math.min(MAX_CONCURRENT_FETCHES, queue.length) },
+        () => runNext(),
+      );
+      await Promise.all(workers);
+    })();
 
     return () => controller.abort();
   }, [folderIds]); // eslint-disable-line react-hooks/exhaustive-deps

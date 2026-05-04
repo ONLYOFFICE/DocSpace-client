@@ -35,15 +35,17 @@ import {
   TAIConfig,
   TMCPTool,
   TServer,
+  TModelCapabilities,
 } from "@docspace/ui-kit/types/ai";
 
-export type { TMessage, TChat, TAIConfig, TMCPTool, TServer };
+export type { TMessage, TChat, TAIConfig, TMCPTool, TServer, TModelCapabilities };
 
 export type TCreateAiProvider = {
   type: ProviderType;
   title: string;
   key: string;
   url: string;
+  modelSettings?: TModelSettingsItem[];
 };
 
 export type TAiProvider = {
@@ -61,6 +63,7 @@ export type TUpdateAiProvider = {
   title?: TCreateAiProvider["title"];
   key?: TCreateAiProvider["key"];
   url?: TCreateAiProvider["url"];
+  modelSettings?: TModelSettingsItem[];
 };
 
 export type TDeleteAiProviders = { ids: TAiProvider["id"][] };
@@ -71,6 +74,8 @@ export type TModel = {
   providerId: TAiProvider["id"];
   providerTitle: TAiProvider["title"];
   modelId: string;
+  alias?: string;
+  capabilities?: TModelCapabilities;
   price?: {
     prompt: number;
     completion: number;
@@ -164,10 +169,46 @@ export type TEditAgentData = Partial<TCreateAgentData>;
 export type TDefaultProvider = {
   providerId: TAiProvider["id"];
   providerTitle: TAiProvider["title"];
+  providerType?: ProviderType;
   defaultModel: TModel["modelId"];
+  defaultModelAlias?: string;
 };
 
 export type TUpdateDefaultProviderData = {
   providerId: TAiProvider["id"];
   defaultModel: TModel["modelId"];
+};
+
+export type TModelSettingsItem = {
+  modelId: string;
+  isEnabled: boolean;
+  alias?: string;
+  capabilities?: TModelCapabilities;
+};
+
+export type TModelSettingsDto = {
+  id: string;
+  alias?: string;
+  isEnabled: boolean;
+  isRecommended: boolean;
+  capabilities: TModelCapabilities;
+};
+
+export type TProviderModelInfo = {
+  modelId: string;
+  displayName: string;
+  isRecommended: boolean;
+  capabilities: TModelCapabilities;
+};
+
+export type TSelectedModelData = {
+  modelId: string;
+  displayName?: string;
+  capabilities?: TModelCapabilities;
+};
+
+export type TPreviewModelsRequest = {
+  type: ProviderType;
+  key: string;
+  url?: string;
 };

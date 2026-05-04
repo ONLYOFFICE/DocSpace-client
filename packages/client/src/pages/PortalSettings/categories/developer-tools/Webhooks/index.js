@@ -25,13 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Button } from "@docspace/ui-kit/components/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router";
 
 import { inject, observer } from "mobx-react";
 
-import styled from "styled-components";
-
-import { injectDefaultTheme, isMobile } from "@docspace/shared/utils";
+import { isMobile } from "@docspace/shared/utils";
 
 import { useTranslation } from "react-i18next";
 
@@ -44,37 +43,7 @@ import WebhooksTable from "./sub-components/WebhooksTable";
 import WebhookInfo from "./sub-components/WebhookInfo";
 import WebhookDialog from "./sub-components/WebhookDialog";
 
-const MainWrapper = styled.div`
-  width: 100%;
-
-  .toggleButton {
-    display: flex;
-    align-items: center;
-  }
-`;
-
-const ButtonSeating = styled.div.attrs(injectDefaultTheme)`
-  position: fixed;
-  z-index: 2;
-  width: 100vw;
-  height: 73px;
-  bottom: 0;
-
-  inset-inline-start: 0;
-  background-color: ${(props) => props.theme.backgroundColor};
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const StyledCreateButton = styled(Button)`
-  width: calc(100% - 32px);
-`;
-
-const WebhookInfoWrapper = styled.div`
-  margin-bottom: ${(props) => (props.withEmptyScreen ? "0px" : "25px")};
-`;
+import styles from "./Webhooks.styled.module.scss";
 
 const Webhooks = (props) => {
   const {
@@ -93,7 +62,10 @@ const Webhooks = (props) => {
 
   setDocumentTitle(t("Webhooks"));
 
-  const [isCreateOpened, setIsCreateOpened] = useState(false);
+  const [searchParams] = useSearchParams();
+  const [isCreateOpened, setIsCreateOpened] = useState(
+    () => searchParams.get("create") === "true",
+  );
   const [isSettingsOpened, setIsSettingsOpened] = useState(false);
   const [isDeleteOpened, setIsDeleteOpened] = useState(false);
 
@@ -122,25 +94,28 @@ const Webhooks = (props) => {
   ) : null;
 
   return (
-    <MainWrapper>
-      <WebhookInfoWrapper withEmptyScreen={errorWebhooks}>
+    <div className={styles.mainWrapper}>
+      <div
+        className={`${styles.webhookInfoWrapper}${errorWebhooks ? ` ${styles.error}` : ""}`}
+      >
         <WebhookInfo />
-      </WebhookInfoWrapper>
+      </div>
 
       {errorWebhooks ? (
         <EmptyServerErrorContainer />
       ) : (
         <>
           {isMobile() ? (
-            <ButtonSeating>
-              <StyledCreateButton
+            <div className={styles.buttonSeating}>
+              <Button
+                className={styles.styledCreateButton}
                 label={t("CreateWebhook")}
                 primary
                 size="normal"
                 onClick={openCreateModal}
                 testId="create_webhook_button"
               />
-            </ButtonSeating>
+            </div>
           ) : (
             <Button
               id="create-webhook-button"
@@ -182,7 +157,7 @@ const Webhooks = (props) => {
         header={t("DeleteWebhookForeverQuestion")}
         handleSubmit={handleWebhookDelete}
       />
-    </MainWrapper>
+    </div>
   );
 };
 

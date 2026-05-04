@@ -28,11 +28,6 @@
 
 .container {
   box-sizing: border-box;
-
-  * {
-    box-sizing: border-box;
-  }
-
   background-image: var(--bg-pattern);
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -42,6 +37,10 @@
   width: 100%;
   min-height: 100dvh;
   height: 100%;
+
+  * {
+    box-sizing: border-box;
+  }
 
   :global(.scroller) {
     > :global(.scroll-body) {
@@ -56,11 +55,11 @@
   }
 
   @include mixins.mobile {
+    background-image: none;
+
     :global(.completed-form__default-layout) {
       padding: 0px 16px 16px;
     }
-
-    background-image: none;
   }
 }
 

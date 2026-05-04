@@ -41,7 +41,7 @@
   overflow: hidden;
   z-index: 1;
 
-  top: 80px;
+  top: var(--share-info-bar-sticky-top, 0px);
   background-color: var(--background-color);
 
   .shareInfoBar {

@@ -39,7 +39,9 @@ import {
 import { FormFillingManageAction } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { frameCallEvent } from "@docspace/shared/utils/common";
-import type { TFile } from "@docspace/shared/api/files/types";
+import { isFolder } from "@docspace/shared/utils/typeGuards";
+import { XlsxUpdateService } from "@docspace/shared/services/xlsx-update.service";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import type { TTranslation } from "@docspace/shared/types";
 
 import type { EditorAction } from "../_store/FormsNavigationStore";
@@ -49,7 +51,10 @@ import { useSDKConfig } from "@/providers/SDKConfigProvider";
 import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
 import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
-import useFormsData from "./useFormsData";
+import { useFormsDeleteDialogStore } from "../_store/FormsDeleteDialogStore";
+import { useFormsProgressStore } from "../_store/FormsProgressStore";
+import { useFormsStopFillingDialogStore } from "../_store/FormsStopFillingDialogStore";
+import { useFormsDataContext } from "../_context/FormsDataContext";
 
 type UseFormsActionsProps = { t: TTranslation };
 
@@ -58,7 +63,10 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
   const { openEditor } = useFormsNavigationStore();
   const { closePanel } = useFormsAiAgentStore();
   const formsListStore = useFormsListStore();
-  const { fetchSection } = useFormsData();
+  const deleteDialogStore = useFormsDeleteDialogStore();
+  const progressStore = useFormsProgressStore();
+  const stopFillingDialogStore = useFormsStopFillingDialogStore();
+  const { fetchSection } = useFormsDataContext();
 
   const openForm = useCallback(
     (file: TFile, action: EditorAction = "edit") => {
@@ -85,16 +93,23 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
   );
 
   const deleteFromList = useCallback(
-    async (fileId: number) => {
-      try {
-        await deleteFile(fileId, false, true);
-        const newItems = formsListStore.items.filter((f) => f.id !== fileId);
-        formsListStore.setItems(newItems, newItems.length);
-      } catch (error) {
-        toastr.error(error as string);
-      }
+    (fileId: number) => {
+      deleteDialogStore.open({
+        kind: "file",
+        onConfirm: async () => {
+          try {
+            await deleteFile(fileId, false, true);
+            const newItems = formsListStore.items.filter(
+              (f) => f.id !== fileId,
+            );
+            formsListStore.setItems(newItems, newItems.length);
+          } catch (error) {
+            toastr.error(error as string);
+          }
+        },
+      });
     },
-    [formsListStore, t],
+    [formsListStore, deleteDialogStore],
   );
 
   const downloadAbortRef = useRef<AbortController | null>(null);
@@ -135,24 +150,30 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
   );
 
   const deleteFolderFromList = useCallback(
-    async (folderId: number) => {
-      try {
-        await deleteFolderApi(folderId, false, true);
-        const newFolders = formsListStore.folders.filter(
-          (f) => f.id !== folderId,
-        );
-        formsListStore.setFolders(newFolders);
-      } catch (error) {
-        toastr.error(error as string);
-      }
+    (folderId: number) => {
+      deleteDialogStore.open({
+        kind: "folder",
+        onConfirm: async () => {
+          try {
+            await deleteFolderApi(folderId, false, true);
+            const newFolders = formsListStore.folders.filter(
+              (f) => f.id !== folderId,
+            );
+            formsListStore.setFolders(newFolders);
+          } catch (error) {
+            toastr.error(error as string);
+          }
+        },
+      });
     },
-    [formsListStore, t],
+    [formsListStore, deleteDialogStore],
   );
 
   const startFilling = useCallback(
     async (file: TFile) => {
       try {
         await manageFormFilling(file.id, FormFillingManageAction.Start);
+        toastr.success(t("Common:ReadyToFillOut"));
         await fetchSection();
       } catch (error) {
         toastr.error(error as string);
@@ -173,6 +194,63 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
     [t, fetchSection],
   );
 
+  const stopFilling = useCallback(
+    (file: TFile) => {
+      stopFillingDialogStore.open({
+        formId: file.id,
+        onConfirm: async () => {
+          try {
+            await manageFormFilling(file.id, FormFillingManageAction.Stop);
+            await fetchSection();
+          } catch (error) {
+            toastr.error(error as string);
+          }
+        },
+      });
+    },
+    [stopFillingDialogStore, fetchSection],
+  );
+
+  const syncXlsxData = useCallback(
+    async (item: TFile | TFolder) => {
+      if (progressStore.isBusy) return;
+
+      let progressStarted = false;
+      try {
+        const response = await XlsxUpdateService.start(
+          item.id,
+          isFolder(item),
+        );
+        if (!response) return;
+
+        const { form, task, isNewFile } = response;
+
+        if (task.isCompleted) {
+          XlsxUpdateService.assertTaskSucceeded(task);
+        } else {
+          progressStore.start("other");
+          progressStarted = true;
+          await XlsxUpdateService.poll(form.id, task.id, (progress) => {
+            progressStore.update(progress?.percentage ?? 0);
+          });
+          progressStore.finish();
+        }
+
+        const messageVar = { formName: form.title };
+        toastr.success(
+          isNewFile
+            ? t("Common:SpreadsheetGenerated", messageVar)
+            : t("Common:SpreadsheetUpdated", messageVar),
+        );
+      } catch (error) {
+        if (progressStarted) progressStore.error();
+        toastr.error(error as string);
+        console.error(error);
+      }
+    },
+    [t, progressStore],
+  );
+
   return {
     openForm,
     downloadFile,
@@ -181,5 +259,7 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
     deleteFolderFromList,
     startFilling,
     resetFilling,
+    stopFilling,
+    syncXlsxData,
   };
 }

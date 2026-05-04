@@ -48,6 +48,7 @@ import generalStyles from "../AISettings.module.scss";
 import styles from "./Search.module.scss";
 import { ResetWebSearchDialog } from "./dialogs/reset";
 import { SearchLoader } from "./SearchLoader";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type TSearchProps = {
   webSearchInitied?: AISettingsStore["webSearchInitied"];
@@ -211,7 +212,7 @@ const SearchComponent = ({
         <Text className={generalStyles.description}>
           {t("AISettings:SearchDescription", {
             webSearch: t("Common:WebSearchAI"),
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
             aiChats: t("Common:AIChats"),
           })}
         </Text>

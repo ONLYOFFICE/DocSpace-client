@@ -29,6 +29,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -43,7 +44,7 @@ import { sectionToPath } from "../../../../../../_utils/sectionFromPathname";
 import { useLibraryParams } from "../../../../../../_hooks/useLibraryParams";
 import { libraryUrl } from "../../../../../../_utils/libraryUrl";
 import { useLibraryBreadcrumb } from "../../../../../../_components/library-breadcrumb/LibraryBreadcrumbContext";
-import { getThumbnail, setThumbnail } from "../../../../../../_utils/thumbnailCache";
+import { stripHost } from "../../../../../../_utils/thumbnailUrl";
 import { useFormsSettingsStore } from "../../../../../../_store/FormsSettingsStore";
 
 import styles from "../../../../../../_components/library-template-detail/LibraryTemplateDetail.module.scss";
@@ -131,41 +132,8 @@ const LibraryTemplateRoute = () => {
     return () => controller.abort();
   }, [templateId, templateType, categoryId]);
 
-  // Thumbnail
   const templateIsFile = isFileType(template);
-  const thumbUrl =
-    templateIsFile && template.thumbnailUrl
-      ? template.thumbnailUrl.replace(/^https?:\/\/[^/]+/, "")
-      : "";
-  const [blobThumbnail, setBlobThumbnail] = useState("");
-
-  useEffect(() => {
-    if (!thumbUrl) return;
-
-    const cached = getThumbnail(thumbUrl);
-    if (cached) {
-      setBlobThumbnail(cached);
-      return;
-    }
-
-    let cancelled = false;
-    fetch(thumbUrl, { credentials: "include" })
-      .then((res) => {
-        if (!res.ok) throw new Error(`${res.status}`);
-        return res.blob();
-      })
-      .then((blob) => {
-        if (cancelled) return;
-        const blobUrl = URL.createObjectURL(blob);
-        setThumbnail(thumbUrl, blobUrl);
-        setBlobThumbnail(blobUrl);
-      })
-      .catch(() => {});
-
-    return () => {
-      cancelled = true;
-    };
-  }, [thumbUrl]);
+  const thumbUrl = templateIsFile ? stripHost(template.thumbnailUrl) : "";
 
   const handleUseTemplate = useCallback(async () => {
     if (!template) return;
@@ -224,7 +192,25 @@ const LibraryTemplateRoute = () => {
     router,
   ]);
 
-  if (isLoading || !template) return null;
+  if (isLoading || !template) {
+    return (
+      <div style={{ display: "flex", gap: 32, paddingTop: 8, width: "100%", flexWrap: "wrap" }}>
+        <div style={{ flex: "0 0 auto", width: "min(420px, 100%)", display: "flex", flexDirection: "column", gap: 40 }}>
+          <RectangleSkeleton width="100%" height="594px" borderRadius="4px" animate />
+        </div>
+        <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: 24 }}>
+          <RectangleSkeleton width="80%" height="40px" borderRadius="4px" animate />
+          <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
+            <RectangleSkeleton width="120px" height="46px" borderRadius="4px" animate />
+            <RectangleSkeleton width="80px" height="46px" borderRadius="4px" animate />
+            <RectangleSkeleton width="80px" height="46px" borderRadius="4px" animate />
+          </div>
+          <RectangleSkeleton width="160px" height="40px" borderRadius="4px" animate />
+          <RectangleSkeleton width="100%" height="120px" borderRadius="4px" animate />
+        </div>
+      </div>
+    );
+  }
 
   const title = template.title.replace(/\.pdf$/i, "");
   const updatedDate = template.updated
@@ -240,15 +226,16 @@ const LibraryTemplateRoute = () => {
       <div className={styles.content}>
         <div className={styles.leftColumn}>
           <div className={styles.preview}>
-            {blobThumbnail
-              ? // biome-ignore lint/performance/noImgElement: blob URL not supported by next/image
-                (<img
-                  className={styles.thumbnail}
-                  src={blobThumbnail}
-                  alt={title}
-                  draggable={false}
-                />)
-              : (<div className={styles.thumbnailPlaceholder} />
+            {thumbUrl ? (
+              // biome-ignore lint/performance/noImgElement: authenticated same-origin thumbnail with immutable caching; next/image proxy is not applicable
+              <img
+                className={styles.thumbnail}
+                src={thumbUrl}
+                alt={title}
+                draggable={false}
+              />
+            ) : (
+              <div className={styles.thumbnailPlaceholder} />
             )}
           </div>
 

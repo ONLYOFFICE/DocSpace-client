@@ -35,7 +35,7 @@ import { ComboBox } from "@docspace/ui-kit/components/combobox";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 
-import { removeEmojiCharacters } from "SRC_DIR/helpers/utils";
+import { removeEmojiCharacters } from "@docspace/shared/utils";
 
 const Dialog = ({
   t,

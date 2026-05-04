@@ -1,4 +1,5 @@
 // (c) Copyright Ascensio System SIA 2009-2026
+import { getBrandName } from "@docspace/shared/constants/brands";
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -37,7 +38,7 @@ export const getGoogleStepDescription = (
       return t("Settings:SelectFileDescriptionGoogle");
     case 2:
       return t("Settings:SelectUsersDescriptionGoogle", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
         organizationName: logoText,
       });
     case 3:
@@ -46,7 +47,7 @@ export const getGoogleStepDescription = (
           <b>{t("Settings:RolesAreSet")}</b>
           <div>
             {t("Settings:UsersAreRegistered", {
-              productName: t("Common:ProductName"),
+              productName: getBrandName("ProductName"),
             })}
           </div>
         </>
@@ -57,7 +58,7 @@ export const getGoogleStepDescription = (
             ns="Settings"
             i18nKey="SelectUserTypesDescription"
             values={{
-              productName: t("Common:ProductName"),
+              productName: getBrandName("ProductName"),
             }}
             components={{
               1: <b />,
@@ -68,13 +69,13 @@ export const getGoogleStepDescription = (
       );
     case 4:
       return t("Settings:ImportSectionDescription", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
       });
     case 5:
       return t("Settings:ImportProcessingDescription");
     case 6:
       return t("Settings:ImportCompleteDescriptionGoogle", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
         organizationName: logoText,
       });
     default:
@@ -96,7 +97,7 @@ export const getWorkspaceStepDescription = (
       });
     case 2:
       return t("Settings:SelectUsersDescriptionWorkspace", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
         organizationName: logoText,
       });
     case 3:
@@ -105,7 +106,7 @@ export const getWorkspaceStepDescription = (
           <b>{t("Settings:RolesAreSet")}</b>
           <div>
             {t("Settings:UsersAreRegistered", {
-              productName: t("Common:ProductName"),
+              productName: getBrandName("ProductName"),
             })}
           </div>
         </>
@@ -116,7 +117,7 @@ export const getWorkspaceStepDescription = (
             ns="Settings"
             i18nKey="SelectUserTypesDescription"
             values={{
-              productName: t("Common:ProductName"),
+              productName: getBrandName("ProductName"),
             }}
             components={{
               1: <b />,
@@ -127,13 +128,13 @@ export const getWorkspaceStepDescription = (
       );
     case 4:
       return t("Settings:ImportSectionDescription", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
       });
     case 5:
       return t("Settings:ImportProcessingDescription");
     case 6:
       return t("Settings:ImportCompleteDescriptionWorkspace", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
         organizationName: logoText,
       });
     default:

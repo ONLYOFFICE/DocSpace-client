@@ -44,6 +44,7 @@ import LoginHistory from "./login-history";
 import AuditTrail from "./audit-trail";
 import { resetSessionStorage } from "../../utils";
 import useSecurity from "./useSecurity";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const SecurityWrapper = (props) => {
   const {
@@ -75,7 +76,7 @@ const SecurityWrapper = (props) => {
   const data = [
     {
       id: "access-portal",
-      name: t("PortalAccess", { productName: t("Common:ProductName") }),
+      name: t("PortalAccess", { productName: getBrandName("ProductName") }),
       content: <AccessPortal />,
       onClick: async () => {
         clearAbortControllerArr();

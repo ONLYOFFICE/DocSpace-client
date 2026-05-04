@@ -25,41 +25,23 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import isNil from "lodash/isNil";
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Button } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
-import { getDisabledTriggersForUser, validateUrl } from "../Webhooks.helpers";
+import { validateUrl } from "../Webhooks.helpers";
+
+import styles from "../Webhooks.styled.module.scss";
 
 import { LabledInput } from "./LabledInput";
 import { SSLVerification } from "./SSLVerification";
 import SecretKeyInput from "./SecretKeyInput";
 import TriggersForm from "./TriggersForm";
 
-const StyledWebhookForm = styled.form`
-  margin-top: 7px;
-
-  .margin-0 {
-    margin: 0;
-  }
-`;
-
-const Footer = styled.div`
-  width: 100%;
-  display: flex;
-
-  button {
-    width: 100%;
-  }
-  button:first-of-type {
-    margin-inline-end: 10px;
-  }
-`;
 
 const WebhookDialog = (props) => {
   const {
@@ -70,7 +52,7 @@ const WebhookDialog = (props) => {
     onSubmit,
     webhook,
     additionalId,
-    user,
+    webhookTriggers,
   } = props;
 
   const { t } = useTranslation(["Webhooks", "Common"]);
@@ -199,11 +181,6 @@ const WebhookDialog = (props) => {
     );
   }, [webhook]);
 
-  const disabledTriggers = useMemo(
-    () => getDisabledTriggersForUser(user),
-    [user],
-  );
-
   return (
     <ModalDialog
       visible={visible}
@@ -213,7 +190,7 @@ const WebhookDialog = (props) => {
     >
       <ModalDialog.Header>{header}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledWebhookForm onSubmit={onFormSubmit}>
+        <form className={styles.styledWebhookForm} onSubmit={onFormSubmit}>
           <LabledInput
             id={`${additionalId}-name-input`}
             label={t("WebhookName")}
@@ -262,7 +239,7 @@ const WebhookDialog = (props) => {
             toggleTrigger={toggleTrigger}
             triggerAll={triggerAll}
             onChange={handleOnChangeTriggerAll}
-            disabledTriggers={disabledTriggers}
+            webhookTriggers={webhookTriggers}
           />
           <LabledInput
             id={`${additionalId}-target-id-input`}
@@ -272,7 +249,7 @@ const WebhookDialog = (props) => {
             value={webhookInfo.targetId}
             onChange={onInputChange}
             isDisabled={isLoading}
-            maxLength={36}
+            maxLength={255}
             dataTestId="target-id-input"
           />
           <button
@@ -281,11 +258,11 @@ const WebhookDialog = (props) => {
             hidden
             aria-label="submit"
           />
-        </StyledWebhookForm>
+        </form>
       </ModalDialog.Body>
 
       <ModalDialog.Footer>
-        <Footer>
+        <div className={styles.footer}>
           <Button
             id={isSettingsModal ? "save-button" : "create-button"}
             label={
@@ -305,14 +282,15 @@ const WebhookDialog = (props) => {
             testId="webhook_cancel_button"
             onClick={onModalClose}
           />
-        </Footer>
+        </div>
       </ModalDialog.Footer>
     </ModalDialog>
   );
 };
 
-export default inject(({ userStore }) => {
+export default inject(({ webhooksStore }) => {
   return {
-    user: userStore?.user,
+    webhookTriggers: webhooksStore?.webhookTriggers,
   };
 })(observer(WebhookDialog));
+

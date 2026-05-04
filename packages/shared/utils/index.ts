@@ -92,6 +92,7 @@ import * as userFilterUtils from "./userFilterUtils";
 import * as filterConstants from "./filterConstants";
 import { getAiProviderIcon, getServerIconUrl, getAiProviderLabel } from "./ai";
 import { presentInArray } from "./presentInArray";
+import { removeEmojiCharacters } from "./removeEmojiCharacters";
 
 export {
   isBetaLanguage,
@@ -150,6 +151,7 @@ export {
   getTextColor,
   trimSeparator,
   getTitleWithoutExtension,
+  removeEmojiCharacters,
 };
 
 export const getModalType = () => {

@@ -41,7 +41,7 @@ const onServicesClick = () => {
 
 const OPENAI_LABEL = "OpenAI";
 const TOGETHER_AI_LABEL = "TogetherAI";
-const OPENAI_COMPATIBLE_LABEL = "OpenAI-compatible";
+const OPENAI_COMPATIBLE_LABEL = "Custom";
 const ANTHROPIC_LABEL = "Anthropic";
 const OPENROUTER_LABEL = "OpenRouter";
 const DEEPSEEK_LABEL = "DeepSeek";

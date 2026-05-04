@@ -36,6 +36,7 @@ import PluginIncompatibleSvg from "PUBLIC_DIR/images/plugin.incompatible.react.s
 import { PluginStatus } from "SRC_DIR/helpers/plugins/enums";
 import { InfoProps } from "../SettingsPluginDialog.types";
 import styles from "../SettingsPluginDialog.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const Info = ({ t, plugin, withDelete, withSeparator }: InfoProps) => {
   const locale = getCookie(LANGUAGE) || "en";
@@ -47,7 +48,7 @@ const Info = ({ t, plugin, withDelete, withSeparator }: InfoProps) => {
       : t("NeedSettings");
 
   const incompatibleTooltip = t("WebPlugins:PluginIsNotCompatible", {
-    productName: t("Common:ProductName"),
+    productName: getBrandName("ProductName"),
   });
 
   return (
@@ -165,7 +166,7 @@ const Info = ({ t, plugin, withDelete, withSeparator }: InfoProps) => {
         {plugin.descriptionLocale ? (
           <>
             <Text fontSize="13px" fontWeight={400} lineHeight="20px" truncate>
-              {t("Common:Description")}
+              {t("Common:DescriptionLabel")}
             </Text>
             <Text
               dataTestId="settings_plugin_description"

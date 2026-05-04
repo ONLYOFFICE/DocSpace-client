@@ -206,7 +206,7 @@ const DeleteDialogComponent = (props) => {
     }
 
     if (isTemplate) {
-      return `${t("Files:DeleteTemplate")}?`;
+      return `${t("Files:DeleteTemplateAction")}?`;
     }
 
     if (isRoomDelete) {

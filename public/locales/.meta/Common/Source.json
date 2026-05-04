@@ -1,0 +1,29 @@
+{
+  "key_path": "Source",
+  "content": "Source",
+  "content_en_sha1_hash": "6da13addb000b67d42a6d66391713819e634149f",
+  "created_at": "2026-04-13T14:58:59.726Z",
+  "updated_at": "2026-04-13T14:59:23.245Z",
+  "comment": {
+    "text": "Column header in the transaction history table that shows the origin of a transaction. Appears as a short label.",
+    "is_auto": true,
+    "updated_at": "2026-04-13T14:59:23.245Z",
+    "model": "gpt-oss:20b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/TableView/TableHeader.tsx",
+      "line_number": 61,
+      "context": "minWidth: 150,\n },\n ...(isAiTools\n ? [\n {\n key: \"Source\",\n title: t(\"Source\"),\n enable: true,\n resizable: true,\n minWidth: 150,\n },",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

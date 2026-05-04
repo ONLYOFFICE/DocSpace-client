@@ -29,6 +29,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
 import { TUserStatisticsInfoProps } from "../UserStatisticsDialog.types";
 import styles from "../UserStatisticsDialog.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const UserStatisticsInfo = ({
   statistics,
@@ -43,7 +44,7 @@ export const UserStatisticsInfo = ({
     const portalUsersText = portalUsers
       ? t("EditUserCount", {
           count: portalUsers,
-          productName: t("ProductName"),
+          productName: getBrandName("ProductName"),
         })
       : null;
 
@@ -85,7 +86,7 @@ export const UserStatisticsInfo = ({
               editingCount: totalUsers,
               count: portalUsers,
               externalCount: externalUsers,
-              productName: t("ProductName"),
+              productName: getBrandName("ProductName"),
             }}
             components={{ 1: <Text fontWeight={600} as="span" /> }}
           />

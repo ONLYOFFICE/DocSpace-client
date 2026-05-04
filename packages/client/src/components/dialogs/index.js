@@ -71,7 +71,6 @@ import CancelOperationDialog from "./CancelOperationDialog";
 import FormFillingTipsDialog from "./FormFillingTipsDialog";
 import ReducedRightsDialog from "./ReducedRightsDialog";
 import SocialAuthWelcomeDialog from "./SocialAuthWelcomeDialog";
-import StorageTariffDeactiveted from "./StorageTariffDeactiveted";
 import ConnectAccountDialog from "./ConnectAccountDialog";
 import DisconnectAccountDialog from "./DisconnectAccountDialog";
 import CreateAgentDialog from "./CreateEditAgentDialog/CreateAgentDialog";
@@ -128,7 +127,6 @@ export {
   FormFillingTipsDialog,
   ReducedRightsDialog,
   SocialAuthWelcomeDialog,
-  StorageTariffDeactiveted,
   ConnectAccountDialog,
   DisconnectAccountDialog,
   CreateAgentDialog,
@@ -137,3 +135,4 @@ export {
   AddRoomToGroupDialog,
   PauseSubmissionsDialog,
 };
+

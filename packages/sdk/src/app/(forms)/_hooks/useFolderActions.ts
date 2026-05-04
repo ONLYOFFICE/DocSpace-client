@@ -42,17 +42,23 @@ import { usePathname } from "next/navigation";
 import { FormsSection } from "@/types/forms";
 import { sectionFromPathname } from "../_utils/sectionFromPathname";
 import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
-import useFormsData from "./useFormsData";
+import { useFormsProgressStore } from "../_store/FormsProgressStore";
+import type { FormsDataApi } from "../_context/FormsDataContext";
 
 const DEFAULT_CHUNK_SIZE = 10 * 1024 * 1024;
 const DEFAULT_UPLOAD_THREADS = 3;
 
-export default function useFolderActions() {
+export default function useFolderActions(
+  externalFetchSection?: FormsDataApi["fetchSection"],
+  externalRefreshAfterMutation?: FormsDataApi["refreshAfterMutation"],
+) {
   const { t } = useTranslation(["Common"]);
   const formsSettingsStore = useFormsSettingsStore();
+  const progressStore = useFormsProgressStore();
   const pathname = usePathname();
   const activeSection = sectionFromPathname(pathname);
-  const { fetchSection } = useFormsData();
+  const fetchSection = externalFetchSection!;
+  const refreshAfterMutation = externalRefreshAfterMutation ?? fetchSection;
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
@@ -81,6 +87,10 @@ export default function useFolderActions() {
       const folderId = getFolderId();
       if (!folderId) return;
 
+      if (progressStore.isBusy) {
+        return;
+      }
+
       const chunkSize =
         formsSettingsStore.filesSettings?.chunkUploadSize ?? DEFAULT_CHUNK_SIZE;
       const maxThreads =
@@ -88,6 +98,10 @@ export default function useFolderActions() {
         DEFAULT_UPLOAD_THREADS;
 
       const fileArray = Array.from(files);
+      const totalBytes = fileArray.reduce((sum, f) => sum + f.size, 0);
+      let uploadedBytes = 0;
+
+      progressStore.start("upload");
 
       try {
         await runWithConcurrency(fileArray, 2, async (file: File) => {
@@ -113,18 +127,35 @@ export default function useFolderActions() {
                 chunk.index,
                 chunk.data,
               );
+
+              uploadedBytes += chunk.size;
+              const percent =
+                totalBytes > 0
+                  ? Math.round((uploadedBytes / totalBytes) * 100)
+                  : 100;
+              progressStore.update(percent);
             },
           );
 
           await finalizeUploadSession(folderId, session.id);
         });
 
-        await fetchSection(activeSection);
+        progressStore.finish();
+        await refreshAfterMutation(activeSection);
       } catch (error) {
+        progressStore.error();
         toastr.error(error as string);
+        throw error;
       }
     },
-    [getFolderId, formsSettingsStore, fetchSection, activeSection, t],
+    [
+      getFolderId,
+      formsSettingsStore,
+      refreshAfterMutation,
+      activeSection,
+      progressStore,
+      t,
+    ],
   );
 
   const onUploadFiles = useCallback(() => {
@@ -142,7 +173,7 @@ export default function useFolderActions() {
 
     input.onchange = () => {
       if (input.files?.length) {
-        uploadFilesToFolder(input.files);
+        uploadFilesToFolder(input.files).catch(() => {});
       }
       input.value = "";
     };
@@ -171,18 +202,19 @@ export default function useFolderActions() {
       try {
         await createFile(+folderId, `${name}.pdf`);
         setIsCreateFormDialogVisible(false);
-        await fetchSection(activeSection);
+        await refreshAfterMutation(activeSection);
       } catch (error) {
         toastr.error(error as string);
       } finally {
         setIsCreatingForm(false);
       }
     },
-    [getFolderId, fetchSection, activeSection, t],
+    [getFolderId, refreshAfterMutation, activeSection, t],
   );
 
   return {
     onUploadFiles,
+    uploadFilesToFolder,
     onCreateBlankForm,
     isCreateFormDialogVisible,
     isCreatingForm,

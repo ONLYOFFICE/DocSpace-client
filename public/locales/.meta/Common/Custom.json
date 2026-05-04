@@ -3,13 +3,20 @@
   "content": "Custom",
   "content_en_sha1_hash": "081ae3fdc403609cf6e760849ebb14117b7a50cb",
   "created_at": "2025-05-19T21:30:44.262Z",
-  "updated_at": "2026-03-26T08:26:58.125Z",
+  "updated_at": "2026-04-23T17:24:01.926Z",
   "comment": {
-    "text": "This translation key is used for \"Custom\" labels and descriptions in the Portal Settings page, particularly in the categories and developer tools sections. It appears as a title or heading, indicating custom themes or settings. Translators should provide an equivalent label that accurately reflects the UI context.",
+    "text": "This is a short label or title. It appears in a color picker to indicate a custom color option, or as a title for custom theme settings or custom developer tools options.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:49.404Z"
+    "updated_at": "2026-04-11T20:55:49.218Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/components/color-picker/ColorPicker.tsx",
+      "line_number": 80,
+      "context": "lineHeight=\"22px\"\n fontWeight={700}\n truncate\n data-testid=\"color-picker-title\"\n >\n {t(\"Custom\")}\n </Text>\n </div>\n <div className={styles.hexClose}>\n <IconButton\n className={styles.tableHeaderIconButton}",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
       "line_number": 696,
@@ -17,21 +24,21 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 130,
-      "context": "description: t(\"FileSelectorDescription\"),\n image: theme.isBase ? FileSelectorImg : FileSelectorImgDark,\n handleOnClick: navigateToFileSelector,\n },\n {\n title: t(\"Common:Custom\"),\n description: t(\"CustomDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n image: theme.isBase ? CustomImg : CustomImgDark,\n handleOnClick: navigateToCustom,",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DeveloperToolsHeader.tsx",
+      "line_number": 70,
+      "context": "case \"room-selector\":\n return t(\"Common:RoomSelector\");\n case \"file-selector\":\n return t(\"Common:FileSelector\");\n case \"custom\":\n return t(\"Common:Custom\");\n case \"uploader\":\n return t(\"Common:Uploader\");\n default:\n return null;\n }",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 541,
-      "context": "{\n id: \"portal-settings_catalog-javascript-sdk_custom\",\n key: \"8-1-1\",\n icon: \"\",\n link: \"custom\",\n tKey: \"Common:Custom\",\n },\n {\n id: \"portal-settings_catalog-javascript-sdk_room-selector\",\n key: \"8-1-2\",\n icon: \"\",",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
+      "line_number": 123,
+      "context": "description: t(\"FileSelectorDescription\"),\n image: theme.isBase ? FileSelectorImg : FileSelectorImgDark,\n handleOnClick: navigateToFileSelector,\n },\n {\n title: t(\"Common:Custom\"),\n description: t(\"CustomDescription\", {\n productName: getBrandName(\"ProductName\"),\n }),\n image: theme.isBase ? CustomImg : CustomImgDark,\n handleOnClick: navigateToCustom,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 126,
-      "context": "icon: AccessEditReactSvgUrl,\n },\n [ShareRights.CustomFilter]: {\n access: ShareAccessRights.CustomFilter,\n key: \"custom-filter\",\n label: t(\"Common:CustomFilter\"),\n icon: CustomFilterReactSvgUrl,\n },\n [ShareRights.Review]: {\n access: ShareAccessRights.Review,\n key: \"review\",",
+      "line_number": 258,
+      "context": "label: t(\"Common:Unlimited\"),\n onClick: () => setUnlimited(),\n },\n {\n key: \"custom\",\n label: t(\"Common:Custom\"),\n onClick: () => onCalendarOpen(),\n },\n ];\n };",
       "module": "/packages/shared"
     }
   ],
@@ -75,13 +82,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation \"Προσαρμοσμένα\" (Prosarmozmena) translates more closely to 'Customized' or 'Adapted' rather than simply 'Custom'. While related, it doesn't perfectly capture the meaning of 'Custom'.",
-          "suggestion": "Consider alternatives like \"Εξατομικευμένο\" (Exatomikeymeno) which translates to 'Personalized' or 'Custom', or a more literal translation depending on the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -99,25 +100,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Personnalisées\" is acceptable, but \"Personnalisé\" (singular) might be more appropriate depending on the context. \"Personnalisées\" implies a plural meaning, while \"Custom\" can often refer to a single customized item.",
-          "suggestion": "Consider 'Personnalisé' if the context suggests a single custom item."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation \"Հարմարեցնել\" (Harmartsetnel) translates to 'to adapt' or 'to customize', but it's a verb. \"Custom\" is an adjective or noun and requires a different translation to accurately convey its meaning.",
-          "suggestion": "Consider using a noun like \"Մարմնավորում\" (Marmnavorum - embodiment/customization) or \"Անհատականություն\" (Anhatakanut'yun - individuality/customization) depending on the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -177,13 +166,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Particularizat' can sometimes be appropriate, it doesn't accurately convey the meaning of 'Custom' in most contexts. 'Custom' often refers to personalized, bespoke, or tailored options. 'Particularizat' implies something that has been categorized or made specific.",
-          "suggestion": "Consider alternatives like 'Personalizat', 'Modificat', 'Individualizat', or 'Specializat', depending on the intended context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -213,25 +196,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Прилагођени' while technically meaning 'adapted' or 'adjusted', isn't the most accurate or natural translation of 'Custom'. It implies a modification rather than something created or designed specifically.",
-          "suggestion": "Consider 'Примерски' (Primerski) which directly translates to 'custom' or 'bespoke', or 'Направљен по мери' (Napračen po meri) which means 'made to measure'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Prilagođeni' can be a valid translation for 'Custom,' it implies 'adjusted' or 'adapted'. 'Custom' often refers to something made or designed specifically, and a more accurate translation might be 'Posebno izrađeni' (specially made) or 'Individualni' (individual).",
-          "suggestion": "Consider 'Posebno izrađeni' or 'Individualni' for a more precise translation of 'Custom'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -243,13 +214,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Налаштовуваний\" is a possible translation for \"Custom,\" it's quite formal and potentially less suitable depending on the context. A more common and often better translation, especially for UI elements, would be \"Власноруч\" or \"Змінюваний\".  \"Налаштовуваний\" implies a complex, detailed customization process.",
-          "suggestion": "Consider \"Власноруч\" or \"Змінюваний\" depending on the specific context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -259,6 +224,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

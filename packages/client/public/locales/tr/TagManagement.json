@@ -1,1 +1,8 @@
-{}
+{
+  "ChangesToTag": "Bu etikete yapılan değişiklikler, kullanıldığı tüm odaları etkileyecektir.",
+  "DeleteTag": "Etiket sil",
+  "DeleteTagCannotBeUndone": "Bu işlem geri alınamaz.",
+  "DeleteTagConfirmation": "Bu etiketi silmek, kullanıldığı tüm odalardan kaldıracaktır.",
+  "EditTag": "Etiket düzenle",
+  "RemoveTag": "<1>{{tag}}</1> etiketi kaldırıldı."
+}

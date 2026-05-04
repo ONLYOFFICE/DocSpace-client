@@ -132,7 +132,13 @@ const RowContent = observer(
         </div>
 
         {mainInfo ? (
-          <Text fontSize="12px" fontWeight={400} className="row_update-text">
+          <Text
+            containerMinWidth="200px"
+            containerWidth="15%"
+            fontSize="12px"
+            fontWeight={400}
+            className="row_update-text"
+          >
             {mainInfo}
           </Text>
         ) : (

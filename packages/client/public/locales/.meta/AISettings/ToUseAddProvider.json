@@ -3,11 +3,12 @@
   "content": "To use {{value}}, make sure to connect at least one {{aiProvider}} first.",
   "content_en_sha1_hash": "7ac37664b2a8a6b4459dada1c0cb3184e8fd4a9b",
   "created_at": "2025-12-17T14:56:14.846Z",
-  "updated_at": "2026-03-20T09:07:45.563Z",
+  "updated_at": "2026-04-11T21:02:16.102Z",
   "comment": {
-    "text": "This key displays a tooltip message prompting the user to connect an AI provider before using a specific feature. It appears as a tooltip on buttons or within a div, and the text will vary depending on the feature being used (e.g., Knowledge, Web Search AI, or MCPServer). Translators should understand this message explains a prerequisite for functionality.",
+    "text": "This is a tooltip text that appears when a user tries to use an AI-powered feature (like AI Knowledge, Web Search AI, or an MCP server) without having any AI providers connected. It informs the user that they need to connect an AI provider first. `{{value}}` is the name of the feature, and `{{aiProvider}}` is the general term for an AI provider.",
     "is_auto": true,
-    "updated_at": "2025-12-23T10:37:57.010Z"
+    "updated_at": "2026-04-11T21:02:16.102Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -18,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
-      "line_number": 204,
+      "line_number": 205,
       "context": "<div\n className={generalStyles.search}\n data-tooltip-id={tooltipId}\n data-tooltip-content={\n !hasAIProviders\n ? t(\"AISettings:ToUseAddProvider\", {\n value: t(\"Common:WebSearchAI\"),\n aiProvider: t(\"Common:AIProvider\"),\n })\n : undefined\n }",
       "module": "/packages/client"
     },
@@ -30,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/mcp-tile/index.tsx",
-      "line_number": 107,
+      "line_number": 108,
       "context": "icon={\n <MCPIcon title={item.name} imgSrc={icon} size={MCPIconSize.Large} />\n }\n tooltipText={\n disableActions\n ? t(\"AISettings:ToUseAddProvider\", {\n value: t(\"Common:MCPServer\"),\n aiProvider: t(\"Common:AIProvider\"),\n })\n : undefined\n }",
       "module": "/packages/client"
     }

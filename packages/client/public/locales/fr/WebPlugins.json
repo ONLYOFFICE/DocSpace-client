@@ -8,6 +8,8 @@
   "NeedSettings": "Il est nécessaire de saisir les paramètres",
   "NoPlugins": "Aucun module complémentaire n'a été ajouté",
   "NotNeedSettings": "Il n'est pas nécessaire de saisir les paramètres",
+  "PluginCacheWarningDescription": "Les plugins sont mis en cache en fonction de leur numéro de version. Pour vous assurer que vos modifications sont appliquées, veuillez incrémenter le numéro de version dans votre fichier <1>package.json</1> avant de le télécharger. Le système ne mettra pas à jour un plugin si la version reste la même.",
+  "PluginDeletedSuccessfully": "Module complémentaire est supprimé avec succès",
   "PluginIsNotCompatible": "La version du SDK du plugin ne correspond pas à la version de {{productName}}. Veuillez mettre à jour vers une version compatible.",
   "PluginLoadedSuccessfully": "Plugin chargé avec succès",
   "PluginSamples": "Exemples de plugins",

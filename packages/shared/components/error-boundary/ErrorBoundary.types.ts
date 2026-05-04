@@ -39,7 +39,7 @@ export type ErrorBoundaryProps = PropsWithChildren & {
 	/** Application version string */
 	version: string;
 	/** Firebase helper instance for error reporting and analytics */
-	firebaseHelper: FirebaseHelper;
+	firebaseHelper?: FirebaseHelper;
 	/** Current device type (desktop, mobile, etc.) */
 	currentDeviceType: DeviceType;
 	/** Current color scheme (light/dark) */

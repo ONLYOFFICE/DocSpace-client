@@ -75,7 +75,11 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
     activeSection === FormsSection.InProgress && !inProgressFolder;
 
   const fileItems = React.useMemo(
-    () => items.map((file: TFile) => convertFileToItem(file)),
+    () =>
+      items.map((file: TFile) => ({
+        item: convertFileToItem(file),
+        originalFile: file,
+      })),
     [items, convertFileToItem],
   );
 
@@ -150,13 +154,14 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
         </div>
       );
     }
+
     return <FormsEmpty />;
   }
 
   // Library views are now handled by dedicated route pages under /forms/library/[langId]/...
   // FormsGrid only handles MyForms, InProgress, CompletedForms sections
 
-  if (((isCompletedRoot || isInProgressRoot) || !hasItems) && hasFolders) {
+  if ((isCompletedRoot || isInProgressRoot || !hasItems) && hasFolders) {
     const onOpenFolder = isCompletedRoot
       ? openCompletedFolder
       : openInProgressFolder;
@@ -180,9 +185,14 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
   if (hasItems) {
     return (
       <>
-        <div className={styles.filesGrid} ref={gridRef}>
-          {fileItems.map((item) => (
-            <FormsTile key={`file_${item.id}`} item={item} getIcon={getIcon} />
+        <div className={styles.filesGrid} ref={gridRef} data-tour="forms-grid">
+          {fileItems.map(({ item, originalFile }) => (
+            <FormsTile
+              key={`file_${item.id}`}
+              item={item}
+              originalFile={originalFile}
+              getIcon={getIcon}
+            />
           ))}
           {hasMore &&
             Array.from({ length: skeletonCount }, (_, i) => (

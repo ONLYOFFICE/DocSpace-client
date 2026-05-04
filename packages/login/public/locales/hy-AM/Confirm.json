@@ -20,6 +20,8 @@
   "GetCode": "Ստանալ կոդը",
   "GetSuitableApp": "Ձեռք բերեք համապատասխան հավելված",
   "GetSuitableAppDescription": "Օգտագործեք համատեղելի հավելված, օրինակ՝ Google Authenticator <1>Android</1> և <4>iOS</4> համար, կամ Authenticator <8>Windows Phone</8> համար։",
+  "InviteLinkQuotaErrorBody": "Գրանցումը հղման միջոցով այլևս հասանելի չէ, քանի որ սահմանափակումը գերազանցվել է։",
+  "InviteQuotaErrorCustomizedBody": "10 վայրկյանից դուք կուղղորդվեք դեպի <1>Մուտք</1> էջ։",
   "LoginRegistryButton": "Միանալ",
   "Newsletter": "Ես ցանկանում եմ բաժանորդագրվել {{organizationName}} տեղեկագրին",
   "PassworResetTitle": "Այժմ Դուք կարող եք ստեղծել նոր գաղտնաբառ.",

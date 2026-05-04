@@ -32,7 +32,6 @@ export type TView =
   | "integration"
   | "data-import"
   | "management"
-  | "developer-tools"
   | "delete-data"
   | "payments"
   | "bonus"

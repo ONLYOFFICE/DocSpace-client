@@ -43,6 +43,7 @@ import {
   // selectKeyOfTreeElement,
   getCurrentSettingsCategory,
 } from "../../../utils";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const ArticleBodyContent = (props) => {
   const {
@@ -150,10 +151,6 @@ const ArticleBodyContent = (props) => {
         setSelectedKeys(["7-0"]);
       }
 
-      if (location.pathname.includes("developer")) {
-        setSelectedKeys(["8-0"]);
-      }
-
       if (location.pathname.includes("delete-data")) {
         setSelectedKeys(["9-0"]);
       }
@@ -204,7 +201,7 @@ const ArticleBodyContent = (props) => {
       case "ManagementCategorySecurity":
         return t("ManagementCategorySecurity");
       case "PortalAccess":
-        return t("PortalAccess", { productName: t("Common:ProductName") });
+        return t("PortalAccess", { productName: getBrandName("ProductName") });
       case "TwoFactorAuth":
         return t("TwoFactorAuth");
       case "ManagementCategoryIntegration":
@@ -226,9 +223,7 @@ const ArticleBodyContent = (props) => {
       case "Common:RestoreBackup":
         return t("Common:RestoreBackup");
       case "PortalDeletion":
-        return t("PortalDeletion", { productName: t("Common:ProductName") });
-      case "Common:DeveloperTools":
-        return t("Common:DeveloperTools");
+        return t("PortalDeletion", { productName: getBrandName("ProductName") });
       case "Common:Bonus":
         return t("Common:Bonus");
       case "Common:FreeAccessToLicensedVersion":
@@ -340,7 +335,9 @@ const ArticleBodyContent = (props) => {
   return !isLoadedArticleBody || isProfileLoading ? (
     <ArticleFolderLoader />
   ) : (
-    items
+    <>
+      {items}
+    </>
   );
 };
 

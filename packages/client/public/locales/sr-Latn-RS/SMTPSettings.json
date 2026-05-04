@@ -1,8 +1,7 @@
 {
   "AuthViaNTLM": "Autentifikacija putem NTLM-a",
-  "EnableSSL": "Omogući SSL",
+  "EnableSMTPSSL": "Omogući SSL",
   "EnterDomain": "Unesi domen",
-  "EnterEmail": "Unesi email",
   "EnterLogin": "Unesi login",
   "EnterPort": "Unesi port",
   "Host": "Host",

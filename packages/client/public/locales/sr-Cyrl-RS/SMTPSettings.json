@@ -1,15 +1,14 @@
 {
   "AuthViaNTLM": "Аутентификација путем NTLM-а",
-  "EnableSSL": "Омогући SSL",
+  "EnableSMTPSSL": "Омогући SSL",
   "EnterDomain": "Унеси домен",
-  "EnterEmail": "Унеси емаил",
   "EnterLogin": "Унеси логин",
   "EnterPort": "Унеси порт",
   "Host": "Хост",
-  "HostLogin": "Хост пријава",
+  "HostLogin": "Пријава на хост",
   "HostPassword": "Хост лозинка",
   "Port": "Порт",
-  "SenderDisplayName": "Дисплаy име посиљаоца",
+  "SenderDisplayName": "Име пошиљаоца које се приказује",
   "SenderEmailAddress": "Емаил адреса пошаљиоца",
   "SendTestMail": "Пошаљите пробну пошту"
 }

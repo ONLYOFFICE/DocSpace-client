@@ -53,12 +53,14 @@ const useGoBackAndClose = (
       }
     )?.FileLocation; // t("FileLocation");
 
+    const withoutGoBackText = sdkConfig?.withoutGoBackText;
+
     if (editorGoBack === false || user?.isVisitor || !user) {
       console.log("goBack", goBack);
     } else if (editorGoBack === "event") {
       goBack = {
         requestClose: true,
-        text: openFileLocationText,
+        text: withoutGoBackText ? undefined : openFileLocationText,
         blank: openOnNewPage,
       };
     } else {
@@ -80,7 +82,7 @@ const useGoBackAndClose = (
   }
 
   if (fileInfo?.rootFolderType === FolderType.DefaultTemplates) {
-    goBack.url = "/portal-settings/customization/default-templates";
+    goBack.url = `${window.location.origin}/portal-settings/customization/default-templates`;
   }
 
   let showClose =

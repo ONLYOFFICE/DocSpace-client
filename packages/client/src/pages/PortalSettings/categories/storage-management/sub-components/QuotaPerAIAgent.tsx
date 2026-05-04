@@ -28,6 +28,7 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import QuotaPerItemComponent from "./QuotaPerItem";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type QuotaPerAIAgentComponentProps = {
   setAIAgentQuota: (size: number, t: (key: string) => string) => void;
@@ -63,7 +64,7 @@ const QuotaPerAIAgentComponent = (props: QuotaPerAIAgentComponentProps) => {
       tabIndex={3}
       dataTestId="quota_ai_agent"
       toggleDescription={t("SetDefaultAIAgentQuota", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
         aiAgents: t("Common:AIAgents"),
         aiAgent: t("Common:AIAgent"),
       })}

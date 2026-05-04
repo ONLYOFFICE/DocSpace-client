@@ -28,6 +28,7 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { observer } from "mobx-react";
 
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -35,16 +36,24 @@ import type { TFolder } from "@docspace/shared/api/files/types";
 import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
+import { useFormsTourStore } from "../../_store/FormsTourStore";
 import { libraryUrl } from "../../_utils/libraryUrl";
 import LibraryCountryList from "../../_components/forms-grid/LibraryCountryList";
+import FormsEmpty from "../../_components/forms-empty";
+import { createMockLibraryFolders } from "../../_utils/mockFormFiles";
 
 const LibraryPage = () => {
   const router = useRouter();
   const { libraryId, roomId } = useFormsSettingsStore();
-  const [folders, setFolders] = useState<TFolder[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const tourStore = useFormsTourStore();
+  const [folders, setFolders] = useState<TFolder[]>(() =>
+    tourStore.showMockItems ? createMockLibraryFolders() : [],
+  );
+  const [isLoading, setIsLoading] = useState(!tourStore.showMockItems);
 
   useEffect(() => {
+    if (tourStore.showMockItems) return;
+
     if (!libraryId) {
       setIsLoading(false);
       return;
@@ -73,7 +82,7 @@ const LibraryPage = () => {
       });
 
     return () => controller.abort();
-  }, [libraryId]);
+  }, [libraryId, tourStore.showMockItems]);
 
   const handleOpenFolder = useCallback(
     (folder: TFolder) => {
@@ -90,18 +99,40 @@ const LibraryPage = () => {
 
   if (isLoading) {
     return (
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 16, paddingTop: 32 }}>
-        <RectangleSkeleton width="320px" height="200px" borderRadius="8px" animate />
-        <RectangleSkeleton width="240px" height="24px" borderRadius="4px" animate />
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", paddingTop: 32, width: "100%" }}>
+        <div style={{ width: "100%", maxWidth: 320 }}>
+          <RectangleSkeleton width="100%" height="200px" borderRadius="8px" animate />
+        </div>
+        <div style={{ marginTop: 32 }}>
+          <RectangleSkeleton width="min(280px, 70vw)" height="30px" borderRadius="4px" animate />
+        </div>
+        <div style={{ marginTop: 12 }}>
+          <RectangleSkeleton width="min(340px, 80vw)" height="22px" borderRadius="4px" animate />
+        </div>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          gap: "12px 16px",
+          width: "100%",
+          maxWidth: 960,
+          marginTop: 40,
+        }}>
+          {Array.from({ length: 8 }, (_, i) => (
+            <div key={i} style={{ display: "flex", alignItems: "center", gap: 12, padding: "14px 16px" }}>
+              <RectangleSkeleton width="32px" height="24px" borderRadius="3px" animate />
+              <RectangleSkeleton width="80px" height="22px" borderRadius="4px" animate />
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
 
-  if (folders.length === 0) return null;
+  if (folders.length === 0) return <FormsEmpty />;
 
   return (
     <LibraryCountryList folders={folders} onOpenFolder={handleOpenFolder} />
   );
 };
 
-export default LibraryPage;
+export default observer(LibraryPage);

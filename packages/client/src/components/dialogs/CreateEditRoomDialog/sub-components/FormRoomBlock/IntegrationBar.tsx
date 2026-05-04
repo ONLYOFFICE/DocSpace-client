@@ -36,12 +36,14 @@ import styles from "./FormRoomBlock.module.scss";
 type IntegrationBarProps = {
   t: (key: string) => string;
   hasDatabaseConnection?: boolean;
+  isRoomAdmin?: boolean;
 };
 
 const STORAGE_KEY = "form_room_integrations_bar_dismissed";
 
 const IntegrationBar = ({
   t,
+  isRoomAdmin = false,
   hasDatabaseConnection = false,
 }: IntegrationBarProps) => {
   const [isDismissed, setIsDismissed] = useLocalStorage<boolean>(
@@ -49,17 +51,18 @@ const IntegrationBar = ({
     false,
   );
 
-  if (hasDatabaseConnection && isDismissed) {
-    return null;
-  }
+  if (hasDatabaseConnection && (isRoomAdmin || isDismissed)) return null;
 
   const headerText = hasDatabaseConnection
     ? t("NeedMoreIntegrations")
     : t("NoDatabaseConnections");
 
-  const descriptionText = hasDatabaseConnection
-    ? t("NeedMoreIntegrationsDescription")
-    : t("ConfigureDatabaseConnection");
+  const descriptionText =
+    isRoomAdmin && !hasDatabaseConnection
+      ? t("NoDatabaseConnectionsRoomAdmin")
+      : hasDatabaseConnection
+        ? t("NeedMoreIntegrationsDescription")
+        : t("ConfigureDatabaseConnection");
 
   const handleClose = hasDatabaseConnection
     ? () => setIsDismissed(true)
@@ -74,14 +77,17 @@ const IntegrationBar = ({
       bodyText={
         <div className={styles.barBody}>
           <span className={styles.barDescription}>{descriptionText}</span>
-          <Link
-            color="accent"
-            type={LinkType.page}
-            className={styles.barLink}
-            href="/portal-settings/integration/third-party-services"
-          >
-            {t("GoToIntegrations")}
-          </Link>
+          {!isRoomAdmin && (
+            <Link
+              color="accent"
+              type={LinkType.page}
+              className={styles.barLink}
+              href="/portal-settings/integration/third-party-services?consumer=externaldb"
+              isHovered
+            >
+              {t("GoToIntegrations")}
+            </Link>
+          )}
         </div>
       }
       onClose={handleClose}

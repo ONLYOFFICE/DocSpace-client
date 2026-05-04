@@ -33,6 +33,10 @@ import { useTranslation } from "react-i18next";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import articleStyles from "@docspace/ui-kit/components/article/Article.module.scss";
+import { DeviceType } from "@docspace/shared/enums";
+
+import useDeviceType from "@/hooks/useDeviceType";
+
 import styles from "./FormsSidebar.module.scss";
 
 import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
@@ -44,9 +48,13 @@ import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.rea
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 
-import { FormsSection } from "@/types/forms";
+import { FormsSection, DEFAULT_SETTINGS_SUBSECTION } from "@/types/forms";
 
-import { sectionFromPathname, sectionToPath } from "../../_utils/sectionFromPathname";
+import {
+  sectionFromPathname,
+  sectionToPath,
+  settingsSubSectionToPath,
+} from "../../_utils/sectionFromPathname";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import { libraryUrl } from "../../_utils/libraryUrl";
@@ -68,7 +76,12 @@ const FormsSidebar = () => {
     closeEditor,
     goBackToCompletedRoot,
     goBackToInProgressRoot,
+    isSidebarOpen,
+    closeSidebar,
   } = useFormsNavigationStore();
+  const { currentDeviceType } = useDeviceType();
+  const isMobile = currentDeviceType === DeviceType.mobile;
+  const isTablet = currentDeviceType === DeviceType.tablet;
   const formsSettingsStore = useFormsSettingsStore();
   const { hasLibrary } = formsSettingsStore;
   const showLibrary = hasLibrary && !!formsSettingsStore.folderSecurity?.Create;
@@ -76,15 +89,17 @@ const FormsSidebar = () => {
   const { user } = useFormsUserStore();
   const showSettings = user?.isOwner || user?.isAdmin;
 
-  const [showText, setShowText] = React.useState(true);
+  const [userShowText, setUserShowText] = React.useState(true);
 
   React.useEffect(() => {
     const saved = localStorage.getItem(SHOW_SIDEBAR_TEXT_KEY);
-    if (saved === "false") setShowText(false);
+    if (saved === "false") setUserShowText(false);
   }, []);
 
+  const showText = isTablet ? false : isMobile ? true : userShowText;
+
   const toggleShowText = React.useCallback(() => {
-    setShowText((prev) => {
+    setUserShowText((prev) => {
       const next = !prev;
       localStorage.setItem(SHOW_SIDEBAR_TEXT_KEY, String(next));
       return next;
@@ -109,19 +124,27 @@ const FormsSidebar = () => {
     },
   ];
 
-  const onSettingsClick = React.useCallback(() => {
-    if (activeSection === FormsSection.Settings) {
-      setTimeout(() => window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION)), 0);
-      return;
-    }
+  const buildParams = React.useCallback(() => {
     const params = new URLSearchParams();
     const rid = searchParams.get("roomId") ?? "";
     const lid = searchParams.get("libraryId") ?? "";
+    const su = searchParams.get("stylesUrl") ?? "";
     if (rid) params.set("roomId", rid);
     if (lid) params.set("libraryId", lid);
-    const qs = params.toString();
-    router.replace(`${sectionToPath(FormsSection.Settings)}${qs ? `?${qs}` : ""}`);
-  }, [router, searchParams, activeSection]);
+    if (su) params.set("stylesUrl", su);
+    return params.toString();
+  }, [searchParams]);
+
+  const onSettingsClick = React.useCallback(() => {
+    if (activeSection === FormsSection.Settings) {
+      setTimeout(() => window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION)), 0);
+      if (isMobile) closeSidebar();
+      return;
+    }
+    const qs = buildParams();
+    router.replace(`${settingsSubSectionToPath(DEFAULT_SETTINGS_SUBSECTION)}${qs ? `?${qs}` : ""}`);
+    if (isMobile) closeSidebar();
+  }, [router, buildParams, activeSection, isMobile, closeSidebar]);
 
   return (
     <div
@@ -130,6 +153,8 @@ const FormsSidebar = () => {
       data-show-text={showText ? "true" : "false"}
       data-open="true"
       data-with-main-button="false"
+      data-sidebar-open={isSidebarOpen ? "true" : "false"}
+      aria-hidden={isMobile && !isSidebarOpen}
     >
       <div style={{ height: "16px", flexShrink: 0 }} />
       <Scrollbar
@@ -161,15 +186,12 @@ const FormsSidebar = () => {
                 if (!handled) {
                   setTimeout(() => window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION)), 0);
                 }
+                if (isMobile) closeSidebar();
                 return;
               }
-              const params = new URLSearchParams();
-              const rid = searchParams.get("roomId") ?? "";
-              const lid = searchParams.get("libraryId") ?? "";
-              if (rid) params.set("roomId", rid);
-              if (lid) params.set("libraryId", lid);
-              const qs = params.toString();
+              const qs = buildParams();
               router.replace(`${sectionToPath(section.key)}${qs ? `?${qs}` : ""}`);
+              if (isMobile) closeSidebar();
             }}
             showText={showText}
           />
@@ -184,19 +206,16 @@ const FormsSidebar = () => {
               isActive={activeSection === FormsSection.Library}
               onClick={() => {
                 if (activeSection === FormsSection.Library) {
-                  // Navigate to library root (country list)
                   const rid = searchParams.get("roomId") ?? "";
                   const lid = searchParams.get("libraryId") ?? "";
-                  router.push(libraryUrl({ roomId: rid || undefined, libraryId: lid || undefined }));
+                  const su = searchParams.get("stylesUrl") ?? "";
+                  router.push(libraryUrl({ roomId: rid || undefined, libraryId: lid || undefined, stylesUrl: su || undefined }));
+                  if (isMobile) closeSidebar();
                   return;
                 }
-                const params = new URLSearchParams();
-                const rid = searchParams.get("roomId") ?? "";
-                const lid = searchParams.get("libraryId") ?? "";
-                if (rid) params.set("roomId", rid);
-                if (lid) params.set("libraryId", lid);
-                const qs = params.toString();
+                const qs = buildParams();
                 router.replace(`${sectionToPath(FormsSection.Library)}${qs ? `?${qs}` : ""}`);
+                if (isMobile) closeSidebar();
               }}
               showText={showText}
             />

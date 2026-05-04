@@ -239,8 +239,6 @@ class FilesStore {
 
   isErrorAIAgentNotAvailable = false;
 
-  isErrorAccountNotAvailable = false;
-
   roomsController = null;
 
   filesController = null;
@@ -977,10 +975,6 @@ class FilesStore {
 
   setIsErrorAIAgentNotAvailable = (state) => {
     this.isErrorAIAgentNotAvailable = state;
-  };
-
-  setIsErrorAccountNotAvailable = (state) => {
-    this.isErrorAccountNotAvailable = state;
   };
 
   setTempActionFilesIds = (tempActionFilesIds) => {
@@ -1864,7 +1858,7 @@ class FilesStore {
           filterData.searchArea = SearchArea.Active;
           const newUrl = getCategoryUrl(CategoryType.Chat, folderId);
 
-          history.pushState(null, "", `${newUrl}?${filterData.toUrlParams()}`);
+          history.replaceState(null, "", `${newUrl}?${filterData.toUrlParams()}`);
         }
 
         if (newTotal > 0) {
@@ -2361,6 +2355,7 @@ class FilesStore {
 
               const isFiltered =
                 subjectId ||
+                filter.subjectOwnerId ||
                 filterValue ||
                 type ||
                 filter.provider ||
@@ -2531,6 +2526,7 @@ class FilesStore {
 
               const isFiltered =
                 subjectId ||
+                filter.subjectOwnerId ||
                 filterValue ||
                 type ||
                 filter.provider ||
@@ -2794,6 +2790,7 @@ class FilesStore {
         "pdf-view",
         "make-form",
         "edit-pdf",
+        "update-xlsx-data",
         "separator0",
         "ask-ai",
         "separator6",
@@ -2863,6 +2860,10 @@ class FilesStore {
         fileOptions = removeOptions(fileOptions, [
           "remove-shared-folder-or-file",
         ]);
+      }
+
+      if (!item.security?.UpdateXlsx) {
+        fileOptions = removeOptions(fileOptions, ["update-xlsx-data"]);
       }
 
       if (this.publicRoomStore.isPublicRoom) {
@@ -3454,6 +3455,7 @@ class FilesStore {
       "select",
       "open",
       // "separator0",
+      "update-xlsx-data",
       "sharing-settings",
       "copy-shared-link",
       "manage-links",
@@ -3485,6 +3487,10 @@ class FilesStore {
 
     if (item.external && item.isLinkExpired) {
       folderOptions = ["select", "separator0", "remove-shared-folder-or-file"];
+    }
+
+    if (!item.security?.UpdateXlsx) {
+      folderOptions = removeOptions(folderOptions, ["update-xlsx-data"]);
     }
 
     if (!isSharedWithMeFolderSection) {
@@ -5157,6 +5163,7 @@ class FilesStore {
 
     const {
       subjectId,
+      subjectOwnerId,
       filterValue,
       type,
       withSubfolders: withRoomsSubfolders,
@@ -5185,6 +5192,7 @@ class FilesStore {
           withRoomsSubfolders ||
           searchInContentRooms ||
           subjectId ||
+          subjectOwnerId ||
           tags ||
           withoutTags ||
           quotaFilter
@@ -5232,3 +5240,4 @@ class FilesStore {
 }
 
 export default FilesStore;
+

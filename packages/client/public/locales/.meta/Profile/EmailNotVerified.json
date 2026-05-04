@@ -3,22 +3,23 @@
   "content": "Email is not verified",
   "content_en_sha1_hash": "7aa3f602be968a5b4cba5393057ed4f0013e45a4",
   "created_at": "2025-05-19T21:30:53.354Z",
-  "updated_at": "2026-02-19T13:36:32.974Z",
+  "updated_at": "2026-04-11T21:20:47.423Z",
   "comment": {
-    "text": "This translation key is used to display a message indicating that an email address has not been verified. It appears in a UI component for editing or managing user emails. The translator should provide a localized version of this phrase to be displayed to users when their email verification status is unknown or invalid.",
+    "text": "This is a tooltip that appears when the user hovers over their email address in the profile settings, indicating that the email has not yet been verified.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:54.003Z"
+    "updated_at": "2026-04-11T21:20:47.423Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 488,
+      "line_number": 489,
       "context": "</Text>\n <div className={styles.emailContainer}>\n <div className={styles.emailEditContainer}>\n <Text\n data-tooltip-id=\"emailTooltip\"\n data-tooltip-content={t(\"EmailNotVerified\")}\n as=\"div\"\n className={classNames(styles.emailTextContainer, {\n [styles.pending]: withActivationBar,\n })}\n fontWeight={600}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 488,
+      "line_number": 489,
       "context": "</Text>\n <div className={styles.emailContainer}>\n <div className={styles.emailEditContainer}>\n <Text\n data-tooltip-id=\"emailTooltip\"\n data-tooltip-content={t(\"EmailNotVerified\")}\n as=\"div\"\n className={classNames(styles.emailTextContainer, {\n [styles.pending]: withActivationBar,\n })}\n fontWeight={600}",
       "module": "/packages/client"
     }
@@ -87,13 +88,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Էլփոստը հաստատված չէ\" is a literal translation of 'Email is not verified'. While understandable, a more natural and common Armenian phrasing would be 'Հասցեն էլփոստը չի հաստատվել' or 'Էլփոստի հաստատումը չկայացած է'.",
-          "suggestion": "Հասցեն էլփոստը չի հաստատվել"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -135,18 +130,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Adres e-mail nie został jeszcze zweryfikowany' is a bit verbose and formal for a simple 'Email is not verified'. While technically correct, it's not ideal for user-facing text.",
-          "suggestion": "E-mail nie został zweryfikowany"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation includes a hyphenated word ('nie został'). Consider if breaking it could improve readability, although this is a minor point and depends on the overall design.",
-          "suggestion": "E-mail nie jest zweryfikowany"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -176,13 +160,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'වි-තැපෑල සත්‍යාපනය කර නැත' while understandable, is not the most natural or common way to express 'Email is not verified' in Sinhala. A more idiomatic translation would be closer to 'විද්යුත් ලිපිනය සත්‍යාපනය කර නැත' or 'වි-තැපැල් ලිපිනය සත්‍යාපනය කර නැත'.",
-          "suggestion": "විද්යුත් ලිපිනය සත්‍යාපනය කර නැත"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -228,6 +206,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -212,9 +212,10 @@ const IpSecurity = (props) => {
   const onSaveClick = async () => {
     setIsSaving(true);
 
-    const valid = ips.map((ip) => isValidIp(ip));
+    const errors = validateAllIps(ips);
+    setErrorMessages(errors);
 
-    if (valid.includes(false)) {
+    if (errors.some((e) => e !== null)) {
       setIsSaving(false);
       return;
     }
@@ -343,6 +344,7 @@ const IpSecurity = (props) => {
         displaySettings
         hasScroll={false}
         isSaving={isSaving}
+        saveButtonDisabled={errorMessages.some((e) => e !== null)}
         additionalClassSaveButton="ip-security-save"
         additionalClassCancelButton="ip-security-cancel"
         saveButtonDataTestId="ip_security_save_button"

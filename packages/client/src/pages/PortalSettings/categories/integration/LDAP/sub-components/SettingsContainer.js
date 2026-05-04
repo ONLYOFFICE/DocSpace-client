@@ -47,7 +47,7 @@ import GroupMembership from "./GroupMembership";
 import CertificateDialog from "./CertificateDialog";
 import ToggleLDAP from "./ToggleLDAP";
 
-import StyledLdapPage from "../styled-components/StyledLdapPage";
+import StyledLdapPage from "../styled-containers/StyledLdapPage";
 
 import { onChangeUrl } from "../utils";
 

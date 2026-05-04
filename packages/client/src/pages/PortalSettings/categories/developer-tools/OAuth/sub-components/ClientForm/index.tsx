@@ -46,7 +46,7 @@ import OAuthBlock from "./components/OAuthBlock";
 import ScopesBlock from "./components/ScopesBlock";
 import ButtonsBlock from "./components/ButtonsBlock";
 
-import { StyledContainer } from "./ClientForm.styled";
+import styles from "./ClientForm.styled.module.scss";
 import { ClientFormProps, ClientStore } from "./ClientForm.types";
 import { isValidUrl } from "./ClientForm.utils";
 
@@ -60,6 +60,7 @@ const ClientForm = ({
   scopeList,
 
   fetchScopes,
+  fetchClients,
 
   resetDialogVisible,
   setResetDialogVisible,
@@ -72,7 +73,6 @@ const ClientForm = ({
   setJwtToken,
 }: ClientFormProps) => {
   const navigate = useNavigate();
-  const location = useLocation();
 
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [isRequestRunning, setIsRequestRunning] =
@@ -123,11 +123,7 @@ const ClientForm = ({
   }, [clientSecretProps, setClientSecretProps]);
 
   const onCancelClick = () => {
-    if (location.pathname.includes("portal-settings")) {
-      navigate("/portal-settings/developer-tools/oauth");
-    } else {
-      navigate("/developer-tools/oauth");
-    }
+    navigate("/developer-tools/oauth");
   };
 
   const onSaveClick = async () => {
@@ -162,10 +158,14 @@ const ClientForm = ({
         await setJwtToken!();
 
         await addClient?.(form);
+
+        await fetchClients?.();
       } else {
         await setJwtToken!();
 
         await updateClient?.(clientId, form);
+
+        await fetchClients?.();
       }
 
       onCancelClick();
@@ -425,7 +425,7 @@ const ClientForm = ({
 
   return (
     <>
-      <StyledContainer>
+      <div className={styles.styledContainer}>
         {isLoading ? (
           <ClientFormLoader
             isEdit={isEdit}
@@ -494,7 +494,7 @@ const ClientForm = ({
             />
           </>
         )}
-      </StyledContainer>
+      </div>
       {resetDialogVisible ? <ResetDialog /> : null}
     </>
   );
@@ -507,6 +507,7 @@ export default inject(
       scopeList,
 
       fetchScopes,
+      fetchClients,
 
       setResetDialogVisible,
       resetDialogVisible,
@@ -523,6 +524,7 @@ export default inject(
       scopeList,
 
       fetchScopes,
+      fetchClients,
 
       setResetDialogVisible,
       currentDeviceType,

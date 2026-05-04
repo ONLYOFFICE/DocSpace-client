@@ -27,7 +27,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { Trans, useTranslation } from "react-i18next";
-import { Navigate, useLocation } from "react-router";
+import { Navigate, useLocation, useNavigate } from "react-router";
 
 import useToolsSettings from "@docspace/ui-kit/ai-agent/chat/hooks/useToolsSettings";
 import useInitChats from "@docspace/ui-kit/ai-agent/chat/hooks/useInitChats";
@@ -99,7 +99,6 @@ type ViewProps = UseContactsProps &
     aiConfig: SettingsStore["aiConfig"];
     resultId: AiRoomStore["resultId"];
     setHotkeyCaret: FilesStore["setHotkeyCaret"];
-    setIsErrorAccountNotAvailable: FilesStore["setIsErrorAccountNotAvailable"];
     currentExtensionGallery: OformsStore["currentExtensionGallery"];
   };
 
@@ -172,13 +171,12 @@ const View = ({
   aiAgentSelectorDialogProps,
   setAiAgentSelectorDialogProps,
 
-  setIsErrorAccountNotAvailable,
-
   canUseChat,
   aiConfig,
   resultId,
 }: ViewProps) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { t } = useTranslation(["Files", "Common", "AIRoom"]);
 
   const isContactsPage = location.pathname.includes("accounts");
@@ -511,8 +509,8 @@ const View = ({
           typedError?.response?.data?.error?.message === "Access denied" &&
           isContactsPage
         ) {
-          setIsErrorAccountNotAvailable(true);
           setIsSectionHeaderLoading(false, false);
+          navigate("/no-access");
         }
 
         setIsChangePageRequestRunning(false);
@@ -701,7 +699,6 @@ export const ViewComponent = inject(
       aiAgentsController,
 
       clearFiles,
-      setIsErrorAccountNotAvailable,
     } = filesStore;
 
     const {
@@ -808,8 +805,6 @@ export const ViewComponent = inject(
 
       aiAgentSelectorDialogProps,
       setAiAgentSelectorDialogProps,
-
-      setIsErrorAccountNotAvailable,
 
       canUseChat,
       aiConfig,

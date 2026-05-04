@@ -3,11 +3,12 @@
   "content": "After files will be moved to {{sectionName}}.",
   "content_en_sha1_hash": "772c05fb87bfce6033351176146d02a6a2363a1e",
   "created_at": "2025-06-02T10:19:22.898Z",
-  "updated_at": "2026-03-20T09:07:45.550Z",
+  "updated_at": "2026-04-11T21:09:32.885Z",
   "comment": {
-    "text": "This translation key is used to display a notice informing users that files will be moved to the trash after a certain period. It appears in a UI element related to file management, likely a button or dialog related to deleting or archiving files. The exact section name and phrase are placeholders for localization purposes.",
+    "text": "This is a toast message that appears after files are moved to the trash. It is part of a sentence and includes the `{{sectionName}}` variable, which will be replaced by the localized name of the trash section.",
     "is_auto": true,
-    "updated_at": "2025-06-02T10:21:49.651Z"
+    "updated_at": "2026-04-11T21:09:32.885Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -51,6 +51,7 @@ import { FilterType, FolderType } from "@docspace/shared/enums";
 
 import { useFormsAiAgentStore } from "../../../_store/FormsAiAgentStore";
 import { useFormsSettingsStore } from "../../../_store/FormsSettingsStore";
+import { useFormsTourStore } from "../../../_store/FormsTourStore";
 
 import styles from "./SettingsPanel.module.scss";
 
@@ -61,6 +62,7 @@ type AIAgentFormProps = {
 const AIAgentForm = ({ inline }: AIAgentFormProps) => {
   const { t } = useTranslation(["Common"]);
   const store = useFormsAiAgentStore();
+  const tourStore = useFormsTourStore();
   const {
     aiAgentEnabled,
     setAiAgentEnabled,
@@ -92,16 +94,18 @@ const AIAgentForm = ({ inline }: AIAgentFormProps) => {
 
   // Check AI availability when settings page opens
   useEffect(() => {
+    if (tourStore.showMockItems) return;
     store.checkAiAvailability();
-  }, [store]);
+  }, [store, tourStore.showMockItems]);
 
   useEffect(() => {
+    if (tourStore.showMockItems) return;
     if (aiProvidersAvailable) {
       getProviders()
         .then((items) => setProviders(items))
         .catch(() => {});
     }
-  }, [aiProvidersAvailable]);
+  }, [aiProvidersAvailable, tourStore.showMockItems]);
 
   useEffect(() => {
     if (defaultProvider) {
@@ -125,10 +129,11 @@ const AIAgentForm = ({ inline }: AIAgentFormProps) => {
   }, []);
 
   useEffect(() => {
+    if (tourStore.showMockItems) return;
     if (defaultProvider?.providerId) {
       fetchModels(defaultProvider.providerId);
     }
-  }, [defaultProvider?.providerId, fetchModels]);
+  }, [defaultProvider?.providerId, fetchModels, tourStore.showMockItems]);
 
   const providerOptions: TOption[] = providers.map((p) => ({
     key: p.id,
@@ -270,9 +275,10 @@ const AIAgentForm = ({ inline }: AIAgentFormProps) => {
   };
 
   const toggleDisabled =
-    isCheckingProviders ||
-    isCreatingAgents ||
-    (!isEnabled && !aiProvidersAvailable);
+    !tourStore.showMockItems &&
+    (isCheckingProviders ||
+      isCreatingAgents ||
+      (!isEnabled && !aiProvidersAvailable));
 
   return (
     <div className={inline ? styles.inlineBody : styles.panelBody}>
@@ -291,16 +297,24 @@ const AIAgentForm = ({ inline }: AIAgentFormProps) => {
         <Text fontSize="12px" fontWeight={400}>
           {t("Common:AIAgentDescription")}
         </Text>
-        {isCheckingProviders && (
+        {!tourStore.showMockItems && isCheckingProviders && (
           <div className={styles.statusRow}>
             <Loader type={LoaderTypes.track} size="16px" />
             <Text fontSize="12px">{t("Common:CheckingAIProviders")}</Text>
           </div>
         )}
-        {!isCheckingProviders && !aiProvidersAvailable && (
-          <Text fontSize="12px" fontWeight={400} color={globalColors.gray}>
-            {t("Common:AIProvidersNotAvailable")}
-          </Text>
+        {!tourStore.showMockItems && !isCheckingProviders && !aiProvidersAvailable && (
+          <div className={styles.statusRow}>
+            <Text fontSize="12px" fontWeight={400} color={globalColors.gray}>
+              {t("Common:AIProvidersNotAvailable")}
+            </Text>
+            <Button
+              label={t("Common:TryAgain")}
+              size={ButtonSize.extraSmall}
+              onClick={() => store.checkAiAvailability()}
+              scale={false}
+            />
+          </div>
         )}
         {isCreatingAgents && (
           <div className={styles.statusRow}>
@@ -308,7 +322,8 @@ const AIAgentForm = ({ inline }: AIAgentFormProps) => {
             <Text fontSize="12px">{t("Common:CreatingAIAgents")}</Text>
           </div>
         )}
-        {!isCheckingProviders &&
+        {!tourStore.showMockItems &&
+          !isCheckingProviders &&
           aiProvidersAvailable &&
           !vectorizationEnabled && (
             <Text fontSize="12px" fontWeight={400} color={globalColors.mainRed}>

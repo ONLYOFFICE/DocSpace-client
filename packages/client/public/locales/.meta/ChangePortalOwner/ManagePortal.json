@@ -3,17 +3,18 @@
   "content": "Manage {{productName}} configuration",
   "content_en_sha1_hash": "3d925499631de7eb215f4470087196a7d76ce21f",
   "created_at": "2025-05-19T21:30:56.991Z",
-  "updated_at": "2026-02-19T13:36:32.350Z",
+  "updated_at": "2026-04-11T21:03:30.114Z",
   "comment": {
-    "text": "ManagePortal is used in a change portal owner dialog to display configuration options for managing the portal, specifically when setting access rights. This translation key appears on a button or label within the dialog box, indicating the purpose of the action being performed. It is related to the common product name and is used to create a localized user interface.",
+    "text": "This is a list item describing a user right. It indicates the ability to configure the settings of the DocSpace portal. `{{productName}}` will be replaced with \"DocSpace\".",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:40.633Z"
+    "updated_at": "2026-04-11T21:03:30.114Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 109,
-      "context": "const ownerRights = [\n t(\"DoTheSame\"),\n t(\"AppointAdmin\"),\n t(\"SetAccessRights\"),\n t(\"ManagePortal\", { productName: t(\"Common:ProductName\") }),\n t(\"ManageUser\"),\n t(\"ChangePortalOwner:ChangeOwner\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"BackupPortal\", { productName: t(\"Common:ProductName\") }),",
+      "line_number": 110,
+      "context": "const ownerRights = [\n t(\"DoTheSame\"),\n t(\"AppointAdmin\"),\n t(\"SetAccessRights\"),\n t(\"ManagePortal\", { productName: getBrandName(\"ProductName\") }),\n t(\"ManageUser\"),\n t(\"ChangePortalOwner:ChangeOwner\", {\n productName: getBrandName(\"ProductName\"),\n }),\n t(\"BackupPortal\", { productName: getBrandName(\"ProductName\") }),",
       "module": "/packages/client"
     }
   ],
@@ -51,25 +52,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"{{productName}} einrichten\" doesn't accurately convey the meaning of \"Manage {{productName}} configuration.\" \"Einrichten\" implies setting up or installing, while \"Manage\" suggests control and adjustment of existing settings. A more accurate translation would convey the sense of configuration management.",
-          "suggestion": "Consider alternatives like \"{{productName}} konfigurieren\" or \"{{productName}} Einstellungen verwalten\" to better reflect the English meaning."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation 'Διαχειριστείτε ρυθμίσεις {{productName}}' is a literal translation but not the most natural way to express \"Manage {{productName}} configuration\" in Greek. A more appropriate translation would focus on the action of managing the configuration, not just listing settings.",
-          "suggestion": "Διαχειριστείτε τις ρυθμίσεις του {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -81,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'asetuksia' should have an 'n' after the 's'. It should be 'asetuksien'.",
-          "suggestion": "Hallitse {{productName}}-n asetuksien"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -123,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ຄຸ້ມບານການຕັ້ງຄ່າ {{productName}}' doesn't accurately convey the meaning of 'Manage {{productName}} configuration'. 'ຄຸ້ມບານ' implies guardianship or responsibility, not management.",
-          "suggestion": "ການຈັດການຕັ້ງຄ່າ {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -165,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'spațiului' (of the space) isn't the most natural or idiomatic translation for 'configuration' in this context. 'Configurarea' (the configuration) would be a better choice to convey the direct object.",
-          "suggestion": "Gestionați configurarea {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

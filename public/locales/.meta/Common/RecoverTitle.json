@@ -3,11 +3,12 @@
   "content": "Access recovery",
   "content_en_sha1_hash": "27cdeed1252a2d59d9bf1278b5eb5a19975f0b4a",
   "created_at": "2025-05-19T21:30:47.772Z",
-  "updated_at": "2026-02-19T13:36:33.153Z",
+  "updated_at": "2026-04-12T03:10:48.994Z",
   "comment": {
-    "text": "The \"RecoverTitle\" translation key is used to display the text \"Access recovery\" in a modal dialog that allows users to recover access. This key appears in the header of a modal dialog and provides context for the user's interaction.",
+    "text": "This is the title of a dialog box that appears when a user needs to recover access to their account or a specific document.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:34:46.800Z"
+    "updated_at": "2026-04-11T20:45:24.830Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -51,13 +52,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Zugriffswiederherstellung\" is technically correct, it's a very literal and somewhat clunky translation of \"Access recovery.\" It sounds overly formal and technical in German. A more natural and user-friendly translation would be preferable.",
-          "suggestion": "Wiederherstellung des Zugriffs"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -75,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Käytä palautusta\" doesn't accurately reflect the meaning of \"Access recovery.\" \"Palautusta\" refers to 'recovery' in the sense of restoring something that was lost or damaged, not accessing a recovery system or process.",
-          "suggestion": "A more accurate translation could be something like \"Palautusvalikko\" (Recovery Menu), \"Pääsy palautukseen\" (Access to recovery), or \"Palautusvaihtoehto\" (Recovery Option). The best choice depends on the specific context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -93,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Մատչման վերականգնում\" does not accurately convey the meaning of \"Access recovery.\" \"Մատչման\" implies matching or pairing, which isn't the intended meaning. \"Վերականգնում\" is correct for 'recovery', but the preceding word is problematic.",
-          "suggestion": "A more accurate translation might be \"Համարձվածության վերականգնում\" (Hamardzvadutyun verakanum) meaning 'Access recovery', or “Մուտքի վերականգնում” (Mut'qi verakanum) - 'Access Recovery'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -111,13 +94,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation 'アクセス回復機能' (akusesu kaifuku kinō) literally translates to 'Access Recovery Function'. While not entirely wrong, 'Access recovery' is a shorter and more common phrasing in this context. It might be overly technical.",
-          "suggestion": "アクセス復旧機能 (akusesu fukkyū kinō) - 'Access Restoration Function' or simply アクセス復旧 (akusesu fukkyū) - 'Access Restoration'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -129,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation \"ການເຂົ້າເຖິງການກູ້ຄືນ\" is a literal translation of \"access recovery\" which doesn't quite convey the intended meaning. \"ການກູ້ຄືນ\" literally means 'recovery,' but 'access' requires a different word to capture the meaning of regaining access.",
-          "suggestion": "Consider alternatives like \"ວິທີຟື້ນຟູການເຂົ້າໃຊ້ງານ\" (way to restore access) or \"ການຟື້ນຟູການເຂົ້າໃຊ້\" (restoration of access). The best option depends on the overall context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -177,25 +148,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Russian translation \"Доступ к порталу\" (Access to portal) doesn't fully convey the meaning of \"Access recovery\". While it implies access, it doesn't specify that it's related to *recovering* access.",
-          "suggestion": "Consider alternatives that emphasize recovery, such as \"Восстановление доступа\" (Restoration of access) or \"Восстановление доступа к аккаунту\" (Restoration of account access)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ප්‍රතිසාධනයට ප්‍රවේශය' while containing relevant terms, doesn't fully capture the nuance of 'Access recovery'. 'Access recovery' implies regaining access, whereas the translation is more literal 'access to recovery'.",
-          "suggestion": "ප්‍රතිසාධන ළඟාවීම (Pratisādhanā lagāavimā) - This translates to 'access to regaining' or 'access to recovery', a closer meaning."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -213,30 +172,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Приступи опоравку\" does not accurately translate \"Access recovery.\" \"Приступи\" means \"approaches\" or \"accesses,\" and \"опоравку\" is in the accusative case but doesn't convey the meaning of 'recovery' effectively. It is also not a common phrasing.",
-          "suggestion": "A more accurate translation would be something like \"Опоравак приступа\" (Oporavak pristupa) or \"Приступавање опоравку\" (Pristupanje oporavku).  A simpler option, depending on the context, could be \"Повратак приступу\" (Povratak pristupu)."
-        },
-        {
-          "type": "spelling",
-          "description": "The word \"опоравку\" while technically not misspelled, isn't the most natural or widely used term in this context for 'recovery'.",
-          "suggestion": "Consider using alternatives like \"повратак\" (povratak) or maintaining a more literal translation if the technical term is essential."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation \"Pristupi oporavku\" doesn't accurately convey the meaning of \"Access recovery.\" \"Oporavku\" implies recovery *of something*, while \"Access recovery\" refers to the process of regaining access. A more accurate translation would involve phrasing suggesting regaining access.",
-          "suggestion": "Mogucnosti oporavke pristupa"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -260,13 +202,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"访问恢复\" doesn't accurately convey the meaning of \"Access recovery.\" \"访问\" means 'access' which is part of the original, but \"恢复\" typically means 'restore' or 'recover' in the sense of bringing something back to a previous state. \"Access recovery\" refers to regaining access, a process of recovering lost access, not necessarily restoring something that was lost.",
-          "suggestion": "Consider alternatives like \"访问恢复途径\" (Access recovery methods) or \"访问权限恢复\" (Access permission recovery) or \"重置访问\" (Reset access) depending on the exact context."
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

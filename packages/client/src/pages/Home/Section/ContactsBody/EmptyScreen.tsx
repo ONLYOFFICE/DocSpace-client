@@ -27,7 +27,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
+import { useTheme } from "@docspace/ui-kit/context";
 
 import {
   EmptyView,
@@ -76,7 +76,7 @@ const EmptyScreen = ({
     "EmptyView",
     "DeleteDialog",
   ]);
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   const isEmptyGroup = contactsTab === "inside_group";
   const isEmptyGuests = contactsTab === "guests";
@@ -107,7 +107,7 @@ const EmptyScreen = ({
     resetFilter(contactsTab!, currentGroup?.id);
   };
 
-  const icon = theme.isBase ? (
+  const icon = isBase ? (
     <EmptyScreenPersonSvgLight />
   ) : (
     <EmptyScreenPersonSvgDark />

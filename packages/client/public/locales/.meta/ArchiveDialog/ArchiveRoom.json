@@ -3,17 +3,18 @@
   "content": "You are about to archive a room.",
   "content_en_sha1_hash": "863849fb82a1d7db1673fcb6185bc406346832af",
   "created_at": "2025-05-19T21:30:57.057Z",
-  "updated_at": "2025-08-04T07:30:01.045Z",
+  "updated_at": "2026-04-13T14:59:05.745Z",
   "comment": {
-    "text": "You are used to provide a notification message when archiving a single room in an archive dialog. The text appears on a button or similar UI element that confirms the archiving action.",
+    "text": "This is a dialog message confirming the user's action to archive a single room. It appears when the user attempts to archive one room.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:33.470Z"
+    "updated_at": "2026-04-11T21:03:14.162Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ArchiveDialog/index.js",
-      "line_number": 81,
-      "context": "const getDescription = () => {\n if (restoreAll) return t(\"ArchiveDialog:RestoreAllRooms\");\n \n return items.length > 1\n ? `${t(\"ArchiveDialog:ArchiveRooms\")} ${t(\"Common:WantToContinue\")}`\n : `${t(\"ArchiveDialog:ArchiveRoom\")} ${t(\"Common:WantToContinue\")}`;\n };\n \n const description = getDescription();",
+      "line_number": 82,
+      "context": "const getDescription = () => {\n if (restoreAll) return t(\"ArchiveDialog:RestoreAllRooms\");\n \n return items.length > 1\n ? `${t(\"ArchiveDialog:ArchiveRooms\")} ${t(\"Common:WantToContinue\")}`\n : `${t(\"ArchiveDialog:ArchiveRoom\")} ${t(\"Common:WantToContinue\")}`;\n };\n \n const description = getDescription();\n \n return (",
       "module": "/packages/client"
     }
   ],

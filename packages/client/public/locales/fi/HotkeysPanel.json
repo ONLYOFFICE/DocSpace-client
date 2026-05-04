@@ -45,5 +45,6 @@
   "HotkeysUploadFile": "Lataa tiedosto",
   "HotkeysUploadingObjects": "Kohteiden lataaminen",
   "HotkeysZoomIn": "Lähennä",
-  "HotkeysZoomOut": "Loitonna"
+  "HotkeysZoomOut": "Loitonna",
+  "OpenContextMenu": "Avaa kontekstivalikko"
 }

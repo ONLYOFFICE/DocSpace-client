@@ -20,6 +20,8 @@
   "GetCode": "Hanki koodi",
   "GetSuitableApp": "Hanki sopiva sovellus",
   "GetSuitableAppDescription": "Käytä yhteensopivaa sovellusta, kuten Google Authenticator <1>Android</1>-laitteille ja <4>iOS</4>-laitteille, tai Authenticator <8>Windows Phone</8>-laitteille.",
+  "InviteLinkQuotaErrorBody": "Rekisteröityminen linkin kautta ei ole enää mahdollista, koska raja on ylitetty.",
+  "InviteQuotaErrorCustomizedBody": "Sinut ohjataan <1>Kirjautuminen</1>-sivulle 10 sekunnin kuluttua.",
   "LoginRegistryButton": "Liity",
   "Newsletter": "Haluan tilata {{organizationName}}:n uutiskirjeen",
   "PassworResetTitle": "Nyt voit luoda uuden salasanan.",

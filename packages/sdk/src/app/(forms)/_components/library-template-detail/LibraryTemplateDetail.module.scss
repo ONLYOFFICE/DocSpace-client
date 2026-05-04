@@ -1,3 +1,5 @@
+@use "@docspace/ui-kit/styles/mixins";
+
 .root {
   display: flex;
   flex-direction: column;
@@ -9,6 +11,8 @@
   display: flex;
   gap: 56px;
   align-items: flex-start;
+  min-width: 0;
+  max-width: 100%;
 }
 
 /* ── Left Column ── */
@@ -107,6 +111,8 @@
   font-weight: 700;
   line-height: 40px;
   color: var(--color-text-primary);
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .metaRow {
@@ -162,10 +168,11 @@
   font-weight: 400;
   line-height: 24px;
   color: var(--color-text-secondary);
+  overflow-wrap: break-word;
 }
 
 /* ── Responsive ── */
-@media (max-width: 1023.9px) {
+@include mixins.tablet-and-below {
   .leftColumn {
     width: 320px;
   }
@@ -176,7 +183,7 @@
   }
 }
 
-@media (max-width: 767.9px) {
+@include mixins.mobile {
   .content {
     flex-direction: column;
     gap: 32px;

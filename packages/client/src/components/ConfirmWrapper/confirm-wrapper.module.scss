@@ -27,8 +27,7 @@
 @use "@docspace/ui-kit/styles/mixins";
 
 .wrapper {
-  width: 100vw;
-  z-index: 0;
+  width: 100%;
   display: flex;
   flex-direction: row;
   box-sizing: border-box;
@@ -54,6 +53,7 @@
   z-index: -1;
 
   @include mixins.mobile {
+    position: relative;
     background-image: none;
   }
 }

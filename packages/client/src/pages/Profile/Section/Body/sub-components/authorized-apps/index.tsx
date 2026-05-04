@@ -6,7 +6,7 @@ import { Consumer } from "@docspace/ui-kit/utils/context";
 import { Text } from "@docspace/ui-kit/components/text";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
-import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
+import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
 import OAuthStore from "SRC_DIR/store/OAuthStore";
 import InfoDialog from "SRC_DIR/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/InfoDialog";
 

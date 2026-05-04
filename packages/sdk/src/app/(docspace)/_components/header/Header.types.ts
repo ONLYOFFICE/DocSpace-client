@@ -11,4 +11,5 @@ export type HeaderProps = {
   onBurgerClick?: () => void;
   isInfoPanelVisible?: boolean;
   onToggleInfoPanel?: () => void;
+  headerOffset?: number;
 };

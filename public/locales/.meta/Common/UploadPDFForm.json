@@ -3,7 +3,7 @@
   "content": "Upload PDF form",
   "content_en_sha1_hash": "b5afa97be11c4d1636475bc3623a9f975f26ebd9",
   "created_at": "2025-05-19T21:30:49.443Z",
-  "updated_at": "2026-04-23T17:24:01.617Z",
+  "updated_at": "2026-04-27T12:45:07.437Z",
   "comment": {
     "text": "This is a button label that allows users to upload a PDF form.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/forms-header/index.tsx",
-      "line_number": 278,
+      "line_number": 304,
       "context": "return [\n {\n id: \"upload-forms\",\n key: \"upload-forms\",\n label: t(\"Common:UploadPDFForm\"),\n icon: ActionsUploadReactSvgUrl,\n onClick: onUploadFiles,\n },\n {\n id: \"create-blank-form\",",
       "module": "/packages/sdk"
     }

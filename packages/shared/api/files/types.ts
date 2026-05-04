@@ -90,6 +90,7 @@ export type TFileSecurity = {
   Embed: boolean;
   Vectorization: boolean;
   AskAi?: boolean;
+  UpdateXlsx?: boolean;
 };
 
 export type TShareSettings = {
@@ -150,6 +151,7 @@ export type TFolderSecurity = {
   Embed: boolean;
   ChangeOwner: boolean;
   IndexExport: boolean;
+  UpdateXlsx?: boolean;
 };
 
 export type TFolder = {

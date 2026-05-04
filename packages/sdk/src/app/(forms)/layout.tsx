@@ -26,7 +26,7 @@
 
 import { FormsStoreProviders } from "./_store";
 
-export default async function FormsLayout({
+export default function FormsLayout({
   children,
 }: {
   children: React.ReactNode;

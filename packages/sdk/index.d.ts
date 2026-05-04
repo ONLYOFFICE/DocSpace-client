@@ -24,6 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+declare module "*.scss" {
+  const content: Record<string, string>;
+  export default content;
+}
+
 declare module "*.svg?url" {
   const content: string;
   export default content;

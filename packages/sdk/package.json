@@ -25,7 +25,9 @@
     "test:e2e:docker:dev:update-screenshots": "docker-compose run --rm tests-dev pnpm exec playwright test --update-snapshots",
     "test:e2e:docker:clear": "docker rmi tests",
     "test:e2e:ui": "pnpm run test:build && pnpm exec playwright test --ui",
-    "test:clean-failed-tests": "node scripts/cleanFailedTests.js"
+    "test:clean-failed-tests": "node scripts/cleanFailedTests.js",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@docspace/shared": "workspace:*",
@@ -65,10 +67,12 @@
     "@types/react-virtualized": "9.21.30",
     "cross-env": "^10.1.0",
     "css-minimizer-webpack-plugin": "^7.0.4",
+    "jsdom": "^27.4.0",
     "prettier": "^3.8.1",
     "shx": "0.4.0",
     "terser-webpack-plugin": "5.3.16",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "vitest": "4.1.0"
   },
   "nx": {
     "targets": {

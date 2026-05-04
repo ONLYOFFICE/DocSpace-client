@@ -43,6 +43,9 @@ import { FormsAiAgentStoreContextProvider } from "./FormsAiAgentStore";
 import { FormsUserStoreContextProvider } from "./FormsUserStore";
 import { FormsTourStoreContextProvider } from "./FormsTourStore";
 import { FormsCustomActionsStoreContextProvider } from "./FormsCustomActionsStore";
+import { FormsDeleteDialogStoreContextProvider } from "./FormsDeleteDialogStore";
+import { FormsProgressStoreContextProvider } from "./FormsProgressStore";
+import { FormsStopFillingDialogStoreContextProvider } from "./FormsStopFillingDialogStore";
 
 export const FormsStoreProviders = ({
   children,
@@ -64,9 +67,15 @@ export const FormsStoreProviders = ({
                           <FormsNavigationStoreContextProvider>
                             <FormsListStoreContextProvider>
                               <FormsCustomActionsStoreContextProvider>
-                                <FormsTourStoreContextProvider>
-                                  {children}
-                                </FormsTourStoreContextProvider>
+                                <FormsDeleteDialogStoreContextProvider>
+                                  <FormsStopFillingDialogStoreContextProvider>
+                                    <FormsProgressStoreContextProvider>
+                                      <FormsTourStoreContextProvider>
+                                        {children}
+                                      </FormsTourStoreContextProvider>
+                                    </FormsProgressStoreContextProvider>
+                                  </FormsStopFillingDialogStoreContextProvider>
+                                </FormsDeleteDialogStoreContextProvider>
                               </FormsCustomActionsStoreContextProvider>
                             </FormsListStoreContextProvider>
                           </FormsNavigationStoreContextProvider>

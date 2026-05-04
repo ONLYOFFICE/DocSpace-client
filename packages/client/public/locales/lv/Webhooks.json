@@ -95,5 +95,7 @@
   "WebhookRemoved": "Tīmekļa aizķere ir noņemta",
   "Webhooks": "Tīmekļa aizķeres",
   "WebhooksGuide": "Tīmekļa aizķeru rokasgrāmata",
-  "WebhooksInfo": "Izmantojiet tīmekļa aizķeres, lai veiktu pielāgotas darbības jebkurā izmantotajā lietojumprogrammā vai tīmekļa vietnē, pamatojoties uz dažādiem notikumiem {{organizationName}} {{productName}}.\nŠeit varat izveidot un pārvaldīt visas savas tīmekļa aizķeres, konfigurēt tās un pārlūkot katras tīmekļa aizķeres vēsturi, lai pārbaudītu to veiktspēju."
+  "WebhooksInfo": "Izmantojiet tīmekļa aizķeres, lai veiktu pielāgotas darbības jebkurā izmantotajā lietojumprogrammā vai tīmekļa vietnē, pamatojoties uz dažādiem notikumiem {{organizationName}} {{productName}}.\nŠeit varat izveidot un pārvaldīt visas savas tīmekļa aizķeres, konfigurēt tās un pārlūkot katras tīmekļa aizķeres vēsturi, lai pārbaudītu to veiktspēju.",
+  "FileDownloaded": "Fails lejupielādēts",
+  "FolderDownloaded": "Mape lejupielādēta"
 }

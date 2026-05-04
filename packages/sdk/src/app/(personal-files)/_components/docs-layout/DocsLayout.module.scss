@@ -22,6 +22,19 @@
 	}
 }
 
+// ui-kit Article positions itself absolute with top:64px on mobile (assumes a 64px header).
+// In the SDK personal-files there is no header, so we reset to in-flow positioning.
+.root :global(#article-container) {
+	@include mixins.mobile {
+		position: relative !important;
+		top: auto !important;
+		height: 100% !important;
+		width: auto !important;
+		min-width: var(--article-tablet-width-collapsed) !important;
+		max-width: var(--article-tablet-width-collapsed) !important;
+	}
+}
+
 .root :global(.section-body_header) {
 	@include mixins.mobile {
 		min-width: 100% !important;
@@ -42,5 +55,17 @@
 
 	@media (max-width: 600px) {
 		min-width: 0;
+	}
+}
+
+.root :global([class*="Navigation_box"]) {
+	padding-top: var(--nav-dropbox-padding-top, 18px);
+
+	@include mixins.tablet-and-below {
+		padding-top: var(--nav-dropbox-padding-top, 14px);
+	}
+
+	@include mixins.mobile {
+		padding-top: var(--nav-dropbox-padding-top, 10px) !important;
 	}
 }

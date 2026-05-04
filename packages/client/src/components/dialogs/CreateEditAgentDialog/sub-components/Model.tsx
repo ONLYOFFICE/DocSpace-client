@@ -84,6 +84,7 @@ const ModelSettings = ({
   const [isProvidersLoading, setIsProvidersLoading] = React.useState(false);
   const [isProvidersFetched, setIsProvidersFetched] = React.useState(false);
   const [isModelsLoading, setIsModelsLoading] = React.useState(false);
+  const [isModelsFetched, setIsModelsFetched] = React.useState(false);
   const [hasProviderBeenSwitched, setHasProviderBeenSwitched] =
     React.useState(false);
 
@@ -192,15 +193,14 @@ const ModelSettings = ({
 
           if (!model) {
             const preferredModel = m.find((mo) => mo.modelId === defaultModel);
-            setSelectedModel(preferredModel || m[0]);
-
+            setSelectedModel(preferredModel || m[0] || null);
             return;
           }
 
           setSelectedModel(model);
         } else {
           const preferredModel = m.find((mo) => mo.modelId === defaultModel);
-          setSelectedModel(preferredModel || m[0]);
+          setSelectedModel(preferredModel || m[0] || null);
         }
       } catch (e) {
         toastr.error(e as string);
@@ -226,7 +226,7 @@ const ModelSettings = ({
         if (model) {
           setSelectedModel(model);
         } else {
-          setSelectedModel(cachedModels[0]);
+          setSelectedModel(cachedModels[0] ?? null);
         }
       } else {
         const preferredModelId =
@@ -236,17 +236,23 @@ const ModelSettings = ({
 
         const preferredModel =
           cachedModels.find((mo) => mo.modelId === preferredModelId) ??
-          cachedModels[0];
+          cachedModels[0] ??
+          null;
 
         setSelectedModel(preferredModel);
       }
+
       setIsModelsLoading(false);
+      setIsModelsFetched(true);
       return;
     }
 
     setSelectedModel(null);
+    setIsModelsLoading(true);
+    setIsModelsFetched(false);
     fetchModels().finally(() => {
       setIsModelsLoading(false);
+      setIsModelsFetched(true);
     });
   }, [selectedProvider?.id]);
 
@@ -281,6 +287,7 @@ const ModelSettings = ({
       setSelectedModel(null);
       setError(null);
       setIsModelsLoading(true);
+      setIsModelsFetched(false);
       setHasProviderBeenSwitched(true);
     },
     [providers, selectedProvider.id],
@@ -345,7 +352,10 @@ const ModelSettings = ({
 
   const isModelLoading =
     isModelsLoading ||
-    (!selectedModel?.modelId && !error && !hasProviderBeenSwitched);
+    (!isModelsFetched &&
+      !selectedModel?.modelId &&
+      !error &&
+      !hasProviderBeenSwitched);
 
   return (
     <StyledParam increaseGap>
@@ -421,7 +431,7 @@ const ModelSettings = ({
           className="ai-combobox"
           displaySelectedOption
           dropDownClassName="not-selectable"
-          isDisabled={!!error || isModelLoading}
+          isDisabled={!!error || isModelLoading || !models.length}
           isLoading={isModelLoading}
           dataTestId="create_agent_model_combobox"
         />
@@ -431,4 +441,3 @@ const ModelSettings = ({
 };
 
 export default ModelSettings;
-

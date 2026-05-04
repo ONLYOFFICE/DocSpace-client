@@ -61,6 +61,7 @@ const Header = ({
   onBurgerClick,
   isInfoPanelVisible = false,
   onToggleInfoPanel,
+  headerOffset = 0,
 }: HeaderProps) => {
   const searchParams = useSearchParams();
 
@@ -145,6 +146,23 @@ const Header = ({
     };
   }, [onBackToParentFolder]);
 
+  const { outerOffsetStyle, innerOffsetStyle } = useMemo(() => {
+    if (!headerOffset) {
+      return {
+        outerOffsetStyle: undefined as React.CSSProperties | undefined,
+        innerOffsetStyle: undefined as React.CSSProperties | undefined,
+      };
+    }
+    return {
+      outerOffsetStyle: { alignSelf: "stretch" } as React.CSSProperties,
+      innerOffsetStyle: {
+        position: "relative",
+        marginInlineStart: `${headerOffset}px`,
+        height: "100%",
+      } as React.CSSProperties,
+    };
+  }, [headerOffset]);
+
   if (!current || !pathParts) return null;
 
   return (
@@ -154,6 +172,7 @@ const Header = ({
         [styles.isExternalFolder]: false,
         [styles.isLifetimeEnabled]: false,
       })}
+      style={outerOffsetStyle}
     >
       {tableGroupMenuVisible ? (
         <TableGroupMenu
@@ -169,7 +188,7 @@ const Header = ({
           checkboxOptions={getHeaderMenu()}
         />
       ) : (
-        <div className="header-container">
+        <div className="header-container" style={innerOffsetStyle}>
           <Navigation
             showText
             isRootFolder={currentNavigationItems.length === 0}

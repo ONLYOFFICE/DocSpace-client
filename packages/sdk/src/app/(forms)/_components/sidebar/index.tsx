@@ -124,21 +124,27 @@ const FormsSidebar = () => {
     },
   ];
 
+  const buildParams = React.useCallback(() => {
+    const params = new URLSearchParams();
+    const rid = searchParams.get("roomId") ?? "";
+    const lid = searchParams.get("libraryId") ?? "";
+    const su = searchParams.get("stylesUrl") ?? "";
+    if (rid) params.set("roomId", rid);
+    if (lid) params.set("libraryId", lid);
+    if (su) params.set("stylesUrl", su);
+    return params.toString();
+  }, [searchParams]);
+
   const onSettingsClick = React.useCallback(() => {
     if (activeSection === FormsSection.Settings) {
       setTimeout(() => window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION)), 0);
       if (isMobile) closeSidebar();
       return;
     }
-    const params = new URLSearchParams();
-    const rid = searchParams.get("roomId") ?? "";
-    const lid = searchParams.get("libraryId") ?? "";
-    if (rid) params.set("roomId", rid);
-    if (lid) params.set("libraryId", lid);
-    const qs = params.toString();
+    const qs = buildParams();
     router.replace(`${settingsSubSectionToPath(DEFAULT_SETTINGS_SUBSECTION)}${qs ? `?${qs}` : ""}`);
     if (isMobile) closeSidebar();
-  }, [router, searchParams, activeSection, isMobile, closeSidebar]);
+  }, [router, buildParams, activeSection, isMobile, closeSidebar]);
 
   return (
     <div
@@ -183,12 +189,7 @@ const FormsSidebar = () => {
                 if (isMobile) closeSidebar();
                 return;
               }
-              const params = new URLSearchParams();
-              const rid = searchParams.get("roomId") ?? "";
-              const lid = searchParams.get("libraryId") ?? "";
-              if (rid) params.set("roomId", rid);
-              if (lid) params.set("libraryId", lid);
-              const qs = params.toString();
+              const qs = buildParams();
               router.replace(`${sectionToPath(section.key)}${qs ? `?${qs}` : ""}`);
               if (isMobile) closeSidebar();
             }}
@@ -205,19 +206,14 @@ const FormsSidebar = () => {
               isActive={activeSection === FormsSection.Library}
               onClick={() => {
                 if (activeSection === FormsSection.Library) {
-                  // Navigate to library root (country list)
                   const rid = searchParams.get("roomId") ?? "";
                   const lid = searchParams.get("libraryId") ?? "";
-                  router.push(libraryUrl({ roomId: rid || undefined, libraryId: lid || undefined }));
+                  const su = searchParams.get("stylesUrl") ?? "";
+                  router.push(libraryUrl({ roomId: rid || undefined, libraryId: lid || undefined, stylesUrl: su || undefined }));
                   if (isMobile) closeSidebar();
                   return;
                 }
-                const params = new URLSearchParams();
-                const rid = searchParams.get("roomId") ?? "";
-                const lid = searchParams.get("libraryId") ?? "";
-                if (rid) params.set("roomId", rid);
-                if (lid) params.set("libraryId", lid);
-                const qs = params.toString();
+                const qs = buildParams();
                 router.replace(`${sectionToPath(FormsSection.Library)}${qs ? `?${qs}` : ""}`);
                 if (isMobile) closeSidebar();
               }}

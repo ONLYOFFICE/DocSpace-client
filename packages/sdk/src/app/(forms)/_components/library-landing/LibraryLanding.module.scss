@@ -27,7 +27,7 @@
   font-size: 23px;
   font-weight: 700;
   line-height: 30px;
-  color: var(--color-text-primary);
+  color: var(--landing-title-color, var(--color-text-primary));
 }
 
 .heroDescription {
@@ -35,7 +35,7 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 22px;
-  color: var(--color-text-secondary);
+  color: var(--landing-description-color, var(--color-text-secondary));
   max-width: 560px;
 }
 
@@ -60,17 +60,25 @@
   left: 0;
   right: 0;
   z-index: 100;
-  background-color: var(--background-color, rgb(255, 255, 255));
-  border: 1px solid rgb(208, 213, 218);
+  background-color: var(
+    --landing-dropdown-bg,
+    var(--background-color, rgb(255, 255, 255))
+  );
+  border: 1px solid var(--landing-dropdown-border-color, rgb(208, 213, 218));
   border-radius: 6px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: var(
+    --landing-search-dropdown-shadow,
+    0 4px 16px rgba(0, 0, 0, 0.08)
+  );
   max-height: 320px;
   overflow-y: auto;
 }
 
 :global(.dark) .searchDropdown {
-  border-color: rgb(71, 71, 71);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.24);
+  box-shadow: var(
+    --landing-search-dropdown-shadow-dark,
+    0 4px 16px rgba(0, 0, 0, 0.24)
+  );
 }
 
 .searchResultItem {
@@ -79,17 +87,13 @@
   padding: 10px 16px;
   font-size: 14px;
   line-height: 20px;
-  color: var(--color-text-primary);
+  color: var(--landing-title-color, var(--color-text-primary));
   cursor: pointer;
   transition: background-color 0.15s;
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.04);
+    background-color: var(--landing-item-hover-bg, rgba(0, 0, 0, 0.04));
   }
-}
-
-:global(.dark) .searchResultItem:hover {
-  background-color: rgba(255, 255, 255, 0.06);
 }
 
 .searchResultHighlight {
@@ -100,7 +104,7 @@
   padding: 16px;
   text-align: center;
   font-size: 13px;
-  color: var(--color-text-secondary);
+  color: var(--landing-description-color, var(--color-text-secondary));
 }
 
 .searchMoreResults {
@@ -108,12 +112,12 @@
   text-align: center;
   font-size: 13px;
   font-weight: 600;
-  color: var(--color-scheme-main-accent, rgb(71, 129, 209));
-  border-block-start: 1px solid rgb(208, 213, 218);
-}
-
-:global(.dark) .searchMoreResults {
-  border-color: rgb(71, 71, 71);
+  color: var(
+    --landing-accent-color,
+    var(--color-scheme-main-accent, rgb(71, 129, 209))
+  );
+  border-block-start: 1px solid
+    var(--landing-dropdown-border-color, rgb(208, 213, 218));
 }
 
 .searchLoading {
@@ -150,7 +154,7 @@
   font-size: 19px;
   font-weight: 700;
   line-height: 26px;
-  color: var(--color-text-primary);
+  color: var(--landing-title-color, var(--color-text-primary));
 }
 
 .stepsList {
@@ -176,7 +180,10 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background-color: var(--color-scheme-main-accent, rgb(71, 129, 209));
+  background-color: var(
+    --landing-accent-color,
+    var(--color-scheme-main-accent, rgb(71, 129, 209))
+  );
   color: rgb(255, 255, 255);
   font-size: 13px;
   font-weight: 700;
@@ -187,7 +194,7 @@
   font-size: 15px;
   font-weight: 600;
   line-height: 22px;
-  color: var(--color-text-primary);
+  color: var(--landing-title-color, var(--color-text-primary));
 }
 
 .stepDesc {
@@ -195,7 +202,7 @@
   font-size: 13px;
   font-weight: 400;
   line-height: 20px;
-  color: var(--color-text-secondary);
+  color: var(--landing-description-color, var(--color-text-secondary));
 }
 
 /* ── Stats Bar ── */
@@ -212,7 +219,7 @@
   font-size: 19px;
   font-weight: 700;
   line-height: 26px;
-  color: var(--color-text-primary);
+  color: var(--landing-title-color, var(--color-text-primary));
 }
 
 .statsSubtitle {
@@ -220,7 +227,7 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 22px;
-  color: var(--color-text-secondary);
+  color: var(--landing-description-color, var(--color-text-secondary));
 }
 
 .statsCards {
@@ -228,12 +235,12 @@
   grid-template-columns: 1fr 1fr;
   margin-block-start: 24px;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.03);
+  background-color: var(--landing-stats-bg, rgba(0, 0, 0, 0.03));
   border-radius: 12px;
 }
 
 :global(.dark) .statsCards {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: var(--landing-stats-bg-dark, rgba(255, 255, 255, 0.05));
 }
 
 .statsCard {
@@ -244,26 +251,27 @@
   padding: 24px;
 
   &:first-child {
-    border-inline-end: 1px solid rgba(0, 0, 0, 0.08);
+    border-inline-end: 1px solid
+      var(--landing-stats-border, rgba(0, 0, 0, 0.08));
   }
 }
 
 :global(.dark) .statsCard:first-child {
-  border-color: rgba(255, 255, 255, 0.1);
+  border-color: var(--landing-stats-border-dark, rgba(255, 255, 255, 0.1));
 }
 
 .statsNumber {
   font-size: 48px;
   font-weight: 700;
   line-height: 1;
-  color: var(--color-text-primary);
+  color: var(--landing-title-color, var(--color-text-primary));
 }
 
 .statsLabel {
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
-  color: var(--color-text-secondary);
+  color: var(--landing-description-color, var(--color-text-secondary));
   max-width: 220px;
 }
 
@@ -280,7 +288,7 @@
   font-size: 23px;
   font-weight: 700;
   line-height: 30px;
-  color: var(--color-text-primary);
+  color: var(--landing-title-color, var(--color-text-primary));
   text-align: center;
 }
 
@@ -302,7 +310,7 @@
   font-size: 17px;
   font-weight: 700;
   line-height: 24px;
-  color: var(--color-text-primary);
+  color: var(--landing-title-color, var(--color-text-primary));
 }
 
 .categorySkeletons {
@@ -333,7 +341,10 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background-color: var(--color-scheme-main-accent, rgb(71, 129, 209));
+    background-color: var(
+      --landing-accent-color,
+      var(--color-scheme-main-accent, rgb(71, 129, 209))
+    );
   }
 }
 
@@ -341,7 +352,10 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
-  color: var(--color-scheme-main-accent, rgb(71, 129, 209));
+  color: var(
+    --landing-accent-color,
+    var(--color-scheme-main-accent, rgb(71, 129, 209))
+  );
   text-decoration: none;
 
   &:hover {
@@ -383,11 +397,11 @@
 
   .statsCard:first-child {
     border-inline-end: none;
-    border-block-end: 1px solid rgba(0, 0, 0, 0.08);
+    border-block-end: 1px solid var(--landing-stats-border, rgba(0, 0, 0, 0.08));
   }
 
   :global(.dark) .statsCard:first-child {
-    border-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--landing-stats-border-dark, rgba(255, 255, 255, 0.1));
   }
 
   .categoriesGrid {
@@ -398,3 +412,4 @@
     padding-inline-start: 16px;
   }
 }
+

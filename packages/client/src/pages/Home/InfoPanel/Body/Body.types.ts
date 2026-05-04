@@ -30,6 +30,7 @@ import DialogsStore from "SRC_DIR/store/DialogsStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import PluginStore from "SRC_DIR/store/PluginStore";
+import type TreeFoldersStore from "SRC_DIR/store/TreeFoldersStore";
 
 export type BodyProps = {
   selection: InfoPanelStore["infoPanelSelection"];
@@ -39,7 +40,9 @@ export type BodyProps = {
   getIsRooms: InfoPanelStore["getIsRooms"];
   getIsAIAgent: InfoPanelStore["getIsAIAgent"];
   getIsTrash: InfoPanelStore["getIsTrash"];
-  setView: InfoPanelStore["setView"];
+
+  enablePlugins: SettingsStore["enablePlugins"];
+  isRecentFolder: TreeFoldersStore["isRecentFolder"];
 
   infoPanelItemsList: PluginStore["infoPanelItemsList"];
 

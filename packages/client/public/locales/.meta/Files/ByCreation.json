@@ -3,7 +3,7 @@
   "content": "Created",
   "content_en_sha1_hash": "accf40c89baa4fa88e6a7ff11e1f805beecafd3f",
   "created_at": "2025-05-19T21:30:55.310Z",
-  "updated_at": "2026-04-23T17:24:01.908Z",
+  "updated_at": "2026-04-27T12:45:07.482Z",
   "comment": {
     "text": "Table header label. It indicates the column for sorting items by their creation date.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 280,
+      "line_number": 290,
       "context": "onClick: this.onFilter,\n },\n { ...authorBlock },\n {\n key: \"Created\",\n title: t(\"ByCreation\"),\n enable: createdColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.CreationDate,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 280,
+      "line_number": 290,
       "context": "onClick: this.onFilter,\n },\n { ...authorBlock },\n {\n key: \"Created\",\n title: t(\"ByCreation\"),\n enable: createdColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.CreationDate,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 280,
+      "line_number": 290,
       "context": "onClick: this.onFilter,\n },\n { ...authorBlock },\n {\n key: \"Created\",\n title: t(\"ByCreation\"),\n enable: createdColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.CreationDate,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },

@@ -97,6 +97,10 @@ export const getTriggerTranslate = (trigger: number, t: TTranslation) => {
       return t("AgentUpdated");
     case WebhookTriggers.AgentDeleted:
       return t("AgentDeleted");
+    case WebhookTriggers.FileDownloaded:
+      return t("FileDownloaded");
+    case WebhookTriggers.FolderDownloaded:
+      return t("FolderDownloaded");
     default:
       return "";
   }

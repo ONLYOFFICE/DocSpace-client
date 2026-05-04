@@ -3,7 +3,7 @@
   "content": "Shared by",
   "content_en_sha1_hash": "a5fe3b3e382690e112e5d06a9d9588409cdd93a3",
   "created_at": "2025-11-13T07:58:01.497Z",
-  "updated_at": "2026-04-23T17:24:01.897Z",
+  "updated_at": "2026-04-27T12:45:07.477Z",
   "comment": {
     "text": "This is a label indicating who shared a file or folder. It appears in file details, table headers, and filter options.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 425,
+      "line_number": 435,
       "context": "const sharedByBlock =\n !isPublicRoom && !isInSharedFolder\n ? {\n key: \"SharedByShareWithMe\",\n title: t(\"SharedBy\"),\n enable: sharedByShareWithMeColumnIsEnabled,\n resizable: true,\n onChange: this.onColumnChange,\n }\n : {",
       "module": "/packages/client"
     },

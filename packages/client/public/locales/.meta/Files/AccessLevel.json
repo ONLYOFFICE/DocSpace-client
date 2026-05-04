@@ -3,7 +3,7 @@
   "content": "Access level",
   "content_en_sha1_hash": "b125f10821825256f5c288cc1daf7dfe19f6281b",
   "created_at": "2025-09-23T07:24:22.232Z",
-  "updated_at": "2026-04-23T17:24:01.897Z",
+  "updated_at": "2026-04-27T12:45:07.477Z",
   "comment": {
     "text": "This is a column header in a table, indicating the permission level a user has for a file or folder. It appears in file lists and details panels.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 459,
+      "line_number": 469,
       "context": "},\n sharedByBlock,\n author,\n {\n key: \"AccessLevelShareWithMe\",\n title: t(\"AccessLevel\"),\n enable: accessLevelShareWithMeColumnIsEnabled,\n resizable: true,\n onChange: this.onColumnChange,\n },\n {",
       "module": "/packages/client"
     }

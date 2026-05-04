@@ -5,12 +5,13 @@
   display: grid;
   grid-template-columns: repeat(
     auto-fill,
-    minmax(clamp(216px, 13.4vw, 360px), 1fr)
+    minmax(var(--tile-min-width, clamp(216px, 13.4vw, 360px)), 1fr)
   );
   grid-gap: 16px;
   width: 100%;
   box-sizing: border-box;
   margin-inline-start: 1px;
+  padding-inline: var(--tile-grid-padding-inline, 0);
 }
 
 .foldersGrid {

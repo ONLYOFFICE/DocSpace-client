@@ -33,7 +33,7 @@ import type { TFolder } from "@docspace/shared/api/files/types";
 
 import WorldMapUrl from "PUBLIC_DIR/images/world-map.react.svg?url";
 
-import { getFlagUrl } from "../../_utils/flagsMap";
+import { getFlagUrlForFolder } from "../../_utils/flagsMap";
 import styles from "./LibraryCountryList.module.scss";
 
 type LibraryCountryListProps = {
@@ -85,7 +85,7 @@ const LibraryCountryList = ({
       </p>
       <div className={styles.grid}>
         {sortedFolders.map((folder) => {
-          const flagUrl = getFlagUrl(folder.title);
+          const flagUrl = getFlagUrlForFolder(folder) ?? WorldMapUrl;
           return (
             <div
               key={folder.id}
@@ -95,16 +95,13 @@ const LibraryCountryList = ({
               role="button"
               tabIndex={0}
             >
-              {flagUrl
-                ? // biome-ignore lint/performance/noImgElement: static SVG flag icon
-                  (<img
-                    className={styles.flagIcon}
-                    src={flagUrl}
-                    alt=""
-                    draggable={false}
-                  />)
-                : (<div className={styles.flagIcon} />)
-              }
+              {/* biome-ignore lint/performance/noImgElement: static SVG flag icon */}
+              <img
+                className={styles.flagIcon}
+                src={flagUrl}
+                alt=""
+                draggable={false}
+              />
               <span className={styles.countryName}>{folder.title}</span>
             </div>
           );

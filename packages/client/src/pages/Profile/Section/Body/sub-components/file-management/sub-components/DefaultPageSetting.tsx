@@ -123,6 +123,8 @@ const StartPageSettingComponent = ({
         scaledOptions
         displaySelectedOption
         isDefaultMode={!isMobile()}
+        dataTestId="default_homepage_combobox"
+        dropDownTestId="default_homepage_combobox_dropdown"
       />
     </div>
   );
@@ -137,3 +139,4 @@ export const DefaultPageSetting = inject(
     return { defaultFolderType, updateDefaultFolderType, userType };
   },
 )(observer(StartPageSettingComponent));
+

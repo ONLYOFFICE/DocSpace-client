@@ -48,6 +48,7 @@ const initDesktop = (
     (keys) => {
       setEncryptionKeys(keys);
     },
+    undefined,
     true,
     (callback) => {
       getEncryptionAccess?.(fileId)

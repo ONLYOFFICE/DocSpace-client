@@ -44,6 +44,7 @@ export async function regDesktop(
   isEncryption: boolean,
   keys?: { [key: string]: string | boolean },
   setEncryptionKeys?: (value: { [key: string]: string | boolean }) => void,
+  updateEncryptionKeys?: (value: { [key: string]: string | boolean }) => void,
   isEditor?: boolean,
   getEncryptionAccess?: (
     callback?: (data: { keys: { [key: string]: string | boolean } }) => void,
@@ -116,7 +117,7 @@ export async function regDesktop(
             break;
           }
           case "updateEncryptionKeys": {
-            setEncryptionKeys?.(params);
+            updateEncryptionKeys?.(params);
             break;
           }
           case "relogin": {

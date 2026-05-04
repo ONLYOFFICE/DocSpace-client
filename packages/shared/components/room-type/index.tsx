@@ -25,11 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
+import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 
 import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow.react.svg?url";
+import PrivateRoomLogoUrl from "PUBLIC_DIR/images/icons/32/room/private.svg?url";
 
-import { RoomsType } from "../../enums";
+import { RoomsType, RoomsTypePrivate } from "../../enums";
 
 import { RoomLogo } from "@docspace/ui-kit/components/room-logo";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
@@ -63,6 +65,8 @@ const RoomType = ({
   };
 
   const isFormRoom = roomType === RoomsType.FormRoom;
+  const isPrivateRoom =
+    roomType === RoomsTypePrivate && !isTemplate && !isTemplateRoom;
 
   const disabled = isFormRoom && disabledFormRoom;
 
@@ -76,11 +80,18 @@ const RoomType = ({
   const content = (
     <>
       <div className="choose_room-logo_wrapper">
-        <RoomLogo
-          type={room.type}
-          isTemplate={isTemplate}
-          isTemplateRoom={isTemplateRoom}
-        />
+        {isPrivateRoom ? (
+          <ReactSVG
+            className="choose_room-private-logo"
+            src={PrivateRoomLogoUrl}
+          />
+        ) : (
+          <RoomLogo
+            type={room.type}
+            isTemplate={isTemplate}
+            isTemplateRoom={isTemplateRoom}
+          />
+        )}
       </div>
 
       <div className="choose_room-info_wrapper">

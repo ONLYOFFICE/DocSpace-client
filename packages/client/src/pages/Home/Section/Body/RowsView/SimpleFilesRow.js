@@ -135,6 +135,7 @@ const SimpleFilesRow = React.memo((props) => {
       icon={item.icon}
       fileExst={item.fileExst}
       isRoom={item.isRoom}
+      isPrivateRoom={item.isPrivateRoom}
       title={item.title}
       logo={item.logo}
       showDefault={

@@ -24,9 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import SecuritySvgUrl from "PUBLIC_DIR/images/security.svg?url";
+import Security12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/security.react.svg?url";
 
 import React from "react";
+import { ReactSVG } from "react-svg";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
@@ -40,6 +41,7 @@ type ItemIconProps = {
 	fileExst?: string;
 	isPrivacy?: boolean;
 	isRoom?: boolean;
+	isPrivateRoom?: boolean;
 	title: string;
 	logo?: TLogo | string;
 	color?: string;
@@ -62,6 +64,7 @@ const ItemIcon = ({
 	fileExst,
 	isPrivacy,
 	isRoom,
+	isPrivateRoom,
 	title,
 	logo,
 	color,
@@ -81,36 +84,40 @@ const ItemIcon = ({
 	const isLoadedRoomIcon = !!logo;
 	const showDefaultRoomIcon = !isLoadedRoomIcon && isRoom;
 
+	const showEncryptedBadge =
+		(isPrivacy && !!fileExst) || (isRoom && !!isPrivateRoom && !isArchive);
+
 	return (
-		<>
-			<div
-				className={classNames(styles.iconWrapper, { [styles.isRoom]: isRoom })}
-			>
-				<RoomIcon
-					color={color}
-					title={title}
-					size={size}
-					radius={radius}
-					isArchive={isArchive}
-					showDefault={showDefault || showDefaultRoomIcon}
-					imgClassName={imgClassName || "react-svg-icon"}
-					logo={isRoom ? logo : icon}
-					badgeUrl={badgeUrl || ""}
-					isTemplate={isTemplate}
-					withEditing={withEditing}
-					model={model}
-					onChangeFile={onChangeFile}
-					className={className}
-					dataTestId={dataTestId}
-				/>
-			</div>
-			{isPrivacy && fileExst ? (
-				<div
+		<div
+			className={classNames(styles.iconWrapper, {
+				[styles.isRoom]: isRoom,
+				[styles.hasEncryptedBadge]: showEncryptedBadge,
+			})}
+		>
+			<RoomIcon
+				color={color}
+				title={title}
+				size={size}
+				radius={radius}
+				isArchive={isArchive}
+				showDefault={showDefault || showDefaultRoomIcon}
+				imgClassName={imgClassName || "react-svg-icon"}
+				logo={isRoom ? logo : icon}
+				badgeUrl={badgeUrl || ""}
+				isTemplate={isTemplate}
+				withEditing={withEditing}
+				model={model}
+				onChangeFile={onChangeFile}
+				className={className}
+				dataTestId={dataTestId}
+			/>
+			{showEncryptedBadge ? (
+				<ReactSVG
 					className={styles.encryptedFileIcon}
-					style={{ backgroundImage: `url(${SecuritySvgUrl})` }}
+					src={Security12ReactSvgUrl}
 				/>
 			) : null}
-		</>
+		</div>
 	);
 };
 

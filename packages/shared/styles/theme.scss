@@ -2926,3 +2926,21 @@
   --files-version-history-comment-color: #{$gray-dark};
   --files-version-history-badge-delete-text-color: #{$dark-gray-dark};
 }
+
+.light {
+  --text-secondary: #{$gray-text};
+  --row-background-color: #{$light-gray-hover};
+  --divider-color: #{$gray-light-mid};
+  --background-secondary: #{$gray-light};
+  --color-error: #{$light-error-status};
+  --color-error-light: #{rgba($light-error-status, 0.08)};
+}
+
+.dark {
+  --text-secondary: #{$dark-gray-dark};
+  --row-background-color: #{$light-dark-gray-hover};
+  --divider-color: #{$gray-dark-strong};
+  --background-secondary: #{$gray-dark-mid};
+  --color-error: #{$dark-error-status};
+  --color-error-light: #{rgba($dark-error-status, 0.12)};
+}

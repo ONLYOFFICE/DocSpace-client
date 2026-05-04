@@ -89,8 +89,8 @@ importers:
         specifier: 1.6.13
         version: 1.6.13
       '@onlyoffice/ai-chat':
-        specifier: file:onlyoffice-ai-chat-0.2.5.tgz
-        version: file:libs/ui-kit/onlyoffice-ai-chat-0.2.5.tgz(60c7ff7e0752d9b8c8f0813e75124904)
+        specifier: file:onlyoffice-ai-chat-0.2.8.tgz
+        version: file:libs/ui-kit/onlyoffice-ai-chat-0.2.8.tgz(60c7ff7e0752d9b8c8f0813e75124904)
       '@onlyoffice/docspace-api-sdk':
         specifier: file:onlyoffice-docspace-api-sdk-3.6.0.tgz
         version: file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.6.0.tgz
@@ -3207,9 +3207,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@onlyoffice/ai-chat@file:libs/ui-kit/onlyoffice-ai-chat-0.2.5.tgz':
-    resolution: {integrity: sha512-55lFQiE99SvXXJpvL7MK2l/rWn5zYiGvjWPnw+RFDhk7PK/U6+JDphkWY1gzC0OaVCwTr0Ufq7WUEkStHKbSAA==, tarball: file:libs/ui-kit/onlyoffice-ai-chat-0.2.5.tgz}
-    version: 0.2.5
+  '@onlyoffice/ai-chat@file:libs/ui-kit/onlyoffice-ai-chat-0.2.8.tgz':
+    resolution: {integrity: sha512-k5nXsbHZarNvO5TF7cwIwMK7eXrO9VMPQWQK1eWVmkQ1GlrS1oWY1NIHefCIrl7XRh9edEEab2PClfcAiBWJ3w==, tarball: file:libs/ui-kit/onlyoffice-ai-chat-0.2.8.tgz}
+    version: 0.2.8
     peerDependencies:
       '@anthropic-ai/sdk': ^0.60.0
       '@assistant-ui/react': ^0.11.0
@@ -11712,7 +11712,7 @@ snapshots:
   '@nx/nx-win32-x64-msvc@22.4.5':
     optional: true
 
-  '@onlyoffice/ai-chat@file:libs/ui-kit/onlyoffice-ai-chat-0.2.5.tgz(60c7ff7e0752d9b8c8f0813e75124904)':
+  '@onlyoffice/ai-chat@file:libs/ui-kit/onlyoffice-ai-chat-0.2.8.tgz(60c7ff7e0752d9b8c8f0813e75124904)':
     dependencies:
       '@assistant-ui/react': 0.11.58(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(use-sync-external-store@1.6.0(react@19.2.4))
       assistant-stream: 0.3.11

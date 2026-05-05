@@ -26,8 +26,8 @@
 
 import React from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { useStores } from "@onlyoffice/ai-chat";
-import type { Profile } from "@onlyoffice/ai-chat";
+import { useStores } from "@docspace/ui-kit/ai-agent/providers";
+import type { Profile } from "@docspace/ui-kit/ai-agent/providers";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";

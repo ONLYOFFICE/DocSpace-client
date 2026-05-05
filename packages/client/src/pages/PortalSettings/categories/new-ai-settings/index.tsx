@@ -25,10 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router";
 
 import { Tabs, TTabItem } from "@docspace/ui-kit/components/tabs";
-import { useStores } from "@docspace/ui-kit/ai-agent/providers";
+import { useI18n, useStores } from "@docspace/ui-kit/ai-agent/providers";
 import {
   AiModels,
   ModelAssignment,
@@ -58,6 +59,8 @@ const detectTabFromPath = (pathname: string) => {
 const NewAISettings = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { t: aiT } = useI18n();
+  const { t } = useTranslation("AIRoom");
 
   const { useProfilesStore } = useStores();
   const profiles = useProfilesStore((s) => s.profiles);
@@ -99,34 +102,34 @@ const NewAISettings = () => {
   const data: TTabItem[] = [
     {
       id: TAB_IDS.AI_MODELS,
-      name: "AI Models",
+      name: aiT("AIModels"),
       content: <AiModels />,
       onClick: makeOnClick(TAB_IDS.AI_MODELS),
     },
     {
       id: TAB_IDS.MODEL_ASSIGNMENT,
-      name: "Model Assignment",
+      name: aiT("ModelAssignment"),
       content: <ModelAssignment />,
       onClick: makeOnClick(TAB_IDS.MODEL_ASSIGNMENT),
       isDisabled: disableNonAiModels,
     },
     {
       id: TAB_IDS.MCP_SERVERS,
-      name: "MCP Servers",
+      name: aiT("MCPServers"),
       content: <McpServers />,
       onClick: makeOnClick(TAB_IDS.MCP_SERVERS),
       isDisabled: disableNonAiModels,
     },
     {
       id: TAB_IDS.WEB_SEARCH,
-      name: "Web Search",
+      name: aiT("WebSearch"),
       content: <WebSearch />,
       onClick: makeOnClick(TAB_IDS.WEB_SEARCH),
       isDisabled: disableNonAiModels,
     },
     {
       id: TAB_IDS.KNOWLEDGE,
-      name: "Knowledge",
+      name: t("Knowledge"),
       content: <Knowledge />,
       onClick: makeOnClick(TAB_IDS.KNOWLEDGE),
       isDisabled: disableNonAiModels,

@@ -26,7 +26,7 @@
 
 import { useMemo, useCallback } from "react";
 import { useNavigate, LinkProps } from "react-router";
-import { useStores } from "@onlyoffice/ai-chat";
+import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 import { isMobile } from "react-device-detect";
 
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";

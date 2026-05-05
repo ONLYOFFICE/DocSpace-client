@@ -27,7 +27,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useApi, useStores } from "@onlyoffice/ai-chat";
+import { useApi, useStores } from "@docspace/ui-kit/ai-agent/providers";
 
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";

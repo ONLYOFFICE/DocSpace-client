@@ -91,11 +91,13 @@ const DefaultProviderComponent = ({
     models?: TModel[] | null,
     selectedModelId?: string | null,
   ): TOption => {
-    if (!models || !selectedModelId)
+    if (!models?.length || !selectedModelId)
       return { key: "-2", label: t("Common:NoModelsFound") };
 
     const model =
       models.find((m) => m.modelId === selectedModelId) || models[0];
+
+    if (!model) return { key: "-2", label: t("Common:NoModelsFound") };
 
     return {
       key: model.modelId,
@@ -428,7 +430,7 @@ const DefaultProviderComponent = ({
                 dataTestId="default-model-combobox"
                 dropDownTestId="default-model-dropdown"
                 isLoading={isDefaultProviderModelsLoading}
-                isDisabled={isDisabled || !defaultProviderModels}
+                isDisabled={isDisabled || !defaultProviderModels?.length}
                 directionY="both"
                 dropDownMaxHeight={300}
                 scaledOptions

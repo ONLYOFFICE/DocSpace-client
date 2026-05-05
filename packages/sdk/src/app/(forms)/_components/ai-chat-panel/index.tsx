@@ -52,9 +52,15 @@ import styles from "./AiChatPanel.module.scss";
 
 type AiChatPanelProps = {
   rootRef: React.RefObject<HTMLDivElement | null>;
+  headerOffset?: number;
+  headerHeight?: number;
 };
 
-const AiChatPanel = ({ rootRef }: AiChatPanelProps) => {
+const AiChatPanel = ({
+  rootRef,
+  headerOffset = 0,
+  headerHeight = 0,
+}: AiChatPanelProps) => {
   const { t } = useTranslation(["Common"]);
   const aiAgentStore = useFormsAiAgentStore();
   const {
@@ -159,6 +165,14 @@ const AiChatPanel = ({ rootRef }: AiChatPanelProps) => {
     setPanelPosition(panelPosition === "left" ? "right" : "left");
   }, [panelPosition, setPanelPosition]);
 
+  const chatHeaderStyle = React.useMemo<React.CSSProperties | undefined>(() => {
+    if (!headerOffset && !headerHeight) return undefined;
+    const style: React.CSSProperties = {};
+    if (headerOffset) style.paddingInlineStart = `${16 + headerOffset}px`;
+    if (headerHeight) style.height = `${headerHeight}px`;
+    return style;
+  }, [headerOffset, headerHeight]);
+
   if (!isPanelVisible || !agentRoomId || !hasManagementAccess || editingFile)
     return null;
 
@@ -175,7 +189,7 @@ const AiChatPanel = ({ rootRef }: AiChatPanelProps) => {
         rootRef={rootRef}
         onResizeEnd={handleResizeEnd}
       />
-      <div className={styles.chatHeader}>
+      <div className={styles.chatHeader} style={chatHeaderStyle}>
         <div className={styles.headerTitle}>
           {isMobile && (
             <IconButton

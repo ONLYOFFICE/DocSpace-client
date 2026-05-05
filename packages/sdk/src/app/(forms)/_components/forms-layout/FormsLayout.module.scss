@@ -10,6 +10,7 @@
 
 .headerEditing {
   flex: 0 1 auto;
+  align-self: stretch;
 }
 
 .headerRow {
@@ -17,6 +18,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
+  align-self: stretch;
 }
 
 .burgerButton {
@@ -58,6 +60,7 @@
 .headerNavigation {
   flex: 1;
   min-width: 0;
+  align-self: stretch;
   position: relative;
 }
 
@@ -86,12 +89,17 @@
   }
 }
 
+.root,
+.root * {
+  font-family: var(--font-face);
+}
+
 .root :global([class*="Navigation_item"]:not([class*="itemWrapper"])) {
   column-gap: 10px;
 }
 
 .root :global(.articleItemText) {
-  font-weight: 600;
+  font-weight: var(--article-item-text-weight, 600);
 }
 
 .sectionArea {
@@ -108,6 +116,15 @@
 
   :global([class*="Navigation_box"]) {
     min-width: var(--nav-dropdown-min-width, auto);
+    padding-top: var(--nav-dropbox-padding-top, 18px);
+
+    @include mixins.tablet-and-below {
+      padding-top: var(--nav-dropbox-padding-top, 14px);
+    }
+
+    @include mixins.mobile {
+      padding-top: var(--nav-dropbox-padding-top, 10px) !important;
+    }
   }
 
   @include mixins.tablet-and-below {

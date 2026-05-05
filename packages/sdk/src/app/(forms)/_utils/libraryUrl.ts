@@ -31,6 +31,7 @@ type LibraryUrlOptions = {
   templateType?: "file" | "folder";
   roomId?: number | string;
   libraryId?: number | string;
+  stylesUrl?: string;
 };
 
 export function libraryUrl(opts: LibraryUrlOptions = {}): string {
@@ -51,6 +52,7 @@ export function libraryUrl(opts: LibraryUrlOptions = {}): string {
   const params = new URLSearchParams();
   if (opts.roomId) params.set("roomId", String(opts.roomId));
   if (opts.libraryId) params.set("libraryId", String(opts.libraryId));
+  if (opts.stylesUrl) params.set("stylesUrl", opts.stylesUrl);
   if (opts.templateId && opts.templateType) {
     params.set("type", opts.templateType);
   }

@@ -3,7 +3,7 @@
   "content": "Location",
   "content_en_sha1_hash": "d219c68101f532de10add2cf42fb9dbeca73d3be",
   "created_at": "2025-05-19T21:30:46.299Z",
-  "updated_at": "2026-04-23T17:24:01.895Z",
+  "updated_at": "2026-04-27T12:45:07.476Z",
   "comment": {
     "text": "This is a column header or a label in the details panel, indicating the storage path or physical location of a file or folder within DocSpace.",
     "is_auto": true,
@@ -19,19 +19,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 523,
+      "line_number": 533,
       "context": "resizable: true,\n onChange: this.onColumnChange,\n },\n {\n key: \"LocationRecent\",\n title: t(\"Common:Location\"),\n enable: locationRecentColumnIsEnabled,\n resizable: true,\n onChange: this.onColumnChange,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 523,
+      "line_number": 533,
       "context": "resizable: true,\n onChange: this.onColumnChange,\n },\n {\n key: \"LocationRecent\",\n title: t(\"Common:Location\"),\n enable: locationRecentColumnIsEnabled,\n resizable: true,\n onChange: this.onColumnChange,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 523,
+      "line_number": 533,
       "context": "resizable: true,\n onChange: this.onColumnChange,\n },\n {\n key: \"LocationRecent\",\n title: t(\"Common:Location\"),\n enable: locationRecentColumnIsEnabled,\n resizable: true,\n onChange: this.onColumnChange,\n },\n {",
       "module": "/packages/client"
     },

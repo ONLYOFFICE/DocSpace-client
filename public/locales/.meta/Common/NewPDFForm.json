@@ -3,7 +3,7 @@
   "content": "New PDF form",
   "content_en_sha1_hash": "816b1bfcda481c3a942fc4c6236e3a5e93454429",
   "created_at": "2025-05-19T21:30:46.763Z",
-  "updated_at": "2026-04-23T17:24:01.891Z",
+  "updated_at": "2026-04-27T12:45:07.475Z",
   "comment": {
     "text": "This text labels a new PDF form, appearing as a default name in a creation dialog and when generating a new PDF form file.",
     "is_auto": true,
@@ -43,7 +43,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/forms-header/index.tsx",
-      "line_number": 285,
+      "line_number": 311,
       "context": "onClick: onUploadFiles,\n },\n {\n id: \"create-blank-form\",\n key: \"create-blank-form\",\n label: t(\"Common:NewPDFForm\"),\n icon: FormPlusReactSvgUrl,\n onClick: onCreateBlankForm,\n },\n ];\n }, [formsSettingsStore.folderSecurity, t, onUploadFiles, onCreateBlankForm]);",
       "module": "/packages/sdk"
     },

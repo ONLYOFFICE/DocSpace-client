@@ -37,6 +37,8 @@ import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?u
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import BackupSvgUrl from "PUBLIC_DIR/images/icons/16/backup.svg?url";
 import AiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/ai-agents.svg?url";
+import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
+import SpreadsheetSvgUrl from "PUBLIC_DIR/images/icons/16/spreadsheet.svg?url";
 
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { frameCallEvent } from "@docspace/shared/utils/common";
@@ -51,13 +53,61 @@ import { useFormsCustomActionsStore } from "../_store/FormsCustomActionsStore";
 import useFormsActions from "./useFormsActions";
 import { sectionFromPathname } from "../_utils/sectionFromPathname";
 
-export type TFormsContextMenuItem = {
+type ContextMenuItem = {
   id: string;
   key: string;
   label: string;
   icon: string;
   onClick: () => void;
   disabled: boolean;
+  isSeparator?: false;
+};
+
+type ContextMenuSeparator = {
+  id: string;
+  key: string;
+  label: "";
+  icon: "";
+  onClick: () => void;
+  disabled: false;
+  isSeparator: true;
+};
+
+export type TFormsContextMenuItem = ContextMenuItem | ContextMenuSeparator;
+
+const CUSTOM_ACTIONS_KEY = "custom-actions";
+
+const makeSeparator = (key: string): ContextMenuSeparator => ({
+  id: `separator_${key}`,
+  key,
+  label: "",
+  icon: "",
+  onClick: () => {},
+  disabled: false,
+  isSeparator: true,
+});
+
+const isSeparatorItem = (
+  item: TFormsContextMenuItem,
+): item is ContextMenuSeparator => item.isSeparator === true;
+
+const dropDanglingSeparators = (
+  items: TFormsContextMenuItem[],
+): TFormsContextMenuItem[] => {
+  const result: TFormsContextMenuItem[] = [];
+  for (const item of items) {
+    if (isSeparatorItem(item)) {
+      const last = result[result.length - 1];
+      if (!last || isSeparatorItem(last)) continue;
+      result.push(item);
+    } else {
+      result.push(item);
+    }
+  }
+  while (result.length && isSeparatorItem(result[result.length - 1])) {
+    result.pop();
+  }
+  return result;
 };
 
 export default function useFormsContextMenu() {
@@ -74,60 +124,42 @@ export default function useFormsContextMenu() {
     downloadFile,
     startFilling,
     resetFilling,
+    stopFilling,
+    syncXlsxData,
     downloadFolder,
     deleteFolderFromList,
   } = useFormsActions({ t });
   const { fileActions, folderActions } = useFormsCustomActionsStore();
 
-  const appendCustomItems = useCallback(
+  const buildCustomItems = useCallback(
     (
-      model: TFormsContextMenuItem[],
       actions: CustomContextMenuAction[],
       type: "file" | "folder",
       item: TFile | TFolder,
-    ) => {
+    ): ContextMenuItem[] => {
       const filtered = actions.filter(
         (a) => !a.section || a.section.includes(activeSection),
       );
-      if (!filtered.length) return;
 
-      model.push({
-        id: "custom-separator",
-        key: "custom-separator",
-        label: "",
-        icon: "",
-        onClick: () => {},
+      return filtered.map((action) => ({
+        id: `custom_${action.key}`,
+        key: action.key,
+        label: action.label,
+        icon: action.icon ?? "",
         disabled: false,
-        isSeparator: true,
-      } as TFormsContextMenuItem & { isSeparator: boolean });
-
-      for (const action of filtered) {
-        model.push({
-          id: `custom_${action.key}`,
-          key: action.key,
-          label: action.label,
-          icon: action.icon ?? "",
-          disabled: false,
-          onClick: () => {
-            frameCallEvent({
-              event: "onCustomAction",
-              data: {
-                action: action.key,
-                type,
-                item,
-              },
-            });
-          },
-        });
-      }
+        onClick: () => {
+          frameCallEvent({
+            event: "onCustomAction",
+            data: { action: action.key, type, item },
+          });
+        },
+      }));
     },
     [activeSection],
   );
 
   const getContextMenuModel = useCallback(
     (file: TFile): TFormsContextMenuItem[] => {
-      const model: TFormsContextMenuItem[] = [];
-
       const isPreparing = file.isFillingPreparing;
       const canEdit =
         !isPreparing &&
@@ -141,158 +173,178 @@ export default function useFormsContextMenu() {
       const canDelete = file.security?.Delete;
       const canStartFilling = !isPreparing && file.security?.StartFilling;
       const canResetFilling = !isPreparing && file.security?.ResetFilling;
+      const canStopFilling = file.security?.StopFilling;
+      const canUpdateXlsx = file.security?.UpdateXlsx;
+      const canAskFromDb =
+        Boolean(askFromDBAgentId) && hasManagementAccess && sendToDb;
 
-      switch (activeSection) {
-        case FormsSection.MyForms: {
-          if (canEdit) {
-            model.push({
+      const optionsModel: Partial<
+        Record<string, TFormsContextMenuItem | null>
+      > = {
+        "fill-form": canFillForm
+          ? {
+              id: "option_fill-form",
+              key: "fill-form",
+              label: t("Common:FillFormButton"),
+              icon: FormFillRectSvgUrl,
+              onClick: () => openForm(file, "fill"),
+              disabled: false,
+            }
+          : null,
+        edit: canEdit
+          ? {
               id: "option_edit",
               key: "edit",
               label: t("Common:EditButton"),
               icon: PencilReactSvgUrl,
               onClick: () => openForm(file, "edit"),
               disabled: false,
-            });
-          }
-
-          if (canFillForm) {
-            model.push({
-              id: "option_fill-form",
-              key: "fill-form",
-              label: t("Common:FillFormButton"),
-              icon: FormFillRectSvgUrl,
-              onClick: () => openForm(file, "fill"),
+            }
+          : null,
+        separator0: makeSeparator("separator0"),
+        "update-xlsx-data": canUpdateXlsx
+          ? {
+              id: "option_update-xlsx-data",
+              key: "update-xlsx-data",
+              label: t("Common:SyncXlsxData"),
+              icon: SpreadsheetSvgUrl,
+              onClick: () => syncXlsxData(file),
               disabled: false,
-            });
-
-            if (askFromDBAgentId && hasManagementAccess && sendToDb) {
-              model.push({
+            }
+          : null,
+        "separator-after-xlsx": makeSeparator("separator-after-xlsx"),
+        "ask-from-db":
+          canFillForm && canAskFromDb && askFromDBAgentId
+            ? {
                 id: "option_ask-from-db",
                 key: "ask-from-db",
                 label: t("Common:AskFromDB"),
                 icon: AiAgentsReactSvgUrl,
                 onClick: () => openPanelWithAgent(askFromDBAgentId, file),
                 disabled: false,
-              });
-            }
-          }
-
-          if (canStartFilling) {
-            model.push({
+              }
+            : null,
+        separator6: makeSeparator("separator6"),
+        "start-filling": canStartFilling
+          ? {
               id: "option_start-filling",
               key: "start-filling",
               label: t("Common:StartFilling"),
               icon: FormFillRectSvgUrl,
               onClick: () => startFilling(file),
               disabled: false,
-            });
-          }
-
-          if (canResetFilling) {
-            model.push({
+            }
+          : null,
+        "reset-filling": canResetFilling
+          ? {
               id: "option_reset-filling",
               key: "reset-filling",
               label: t("Common:ResetAndStartFilling"),
               icon: BackupSvgUrl,
               onClick: () => resetFilling(file),
               disabled: false,
-            });
-          }
-
-          model.push({
-            id: "option_view",
-            key: "view",
-            label: t("Common:View"),
-            icon: EyeReactSvgUrl,
-            onClick: () => openForm(file, "view"),
-            disabled: false,
-          });
-
-          if (canDownload) {
-            model.push({
+            }
+          : null,
+        view: {
+          id: "option_view",
+          key: "view",
+          label: t("Common:View"),
+          icon: EyeReactSvgUrl,
+          onClick: () => openForm(file, "view"),
+          disabled: false,
+        },
+        separator1: makeSeparator("separator1"),
+        download: canDownload
+          ? {
               id: "option_download",
               key: "download",
               label: t("Common:Download"),
               icon: DownloadReactSvgUrl,
               onClick: () => downloadFile(file.id),
               disabled: false,
-            });
-          }
-
-          if (canDelete) {
-            model.push({
+            }
+          : null,
+        separator5: makeSeparator("separator5"),
+        "separator-after-custom": makeSeparator("separator-after-custom"),
+        delete: canDelete
+          ? {
               id: "option_delete",
               key: "delete",
               label: t("Common:Delete"),
               icon: TrashReactSvgUrl,
               onClick: () => deleteFromList(file.id),
               disabled: false,
-            });
-          }
-          break;
-        }
-
-        case FormsSection.InProgress: {
-          if (canFillForm) {
-            model.push({
-              id: "option_fill-form",
-              key: "fill-form",
-              label: t("Common:FillFormButton"),
-              icon: FormFillRectSvgUrl,
-              onClick: () => openForm(file, "fill"),
+            }
+          : null,
+        "stop-filling": canStopFilling
+          ? {
+              id: "option_stop-filling",
+              key: "stop-filling",
+              label: t("Common:StopFilling"),
+              icon: AccessNoneReactSvgUrl,
+              onClick: () => stopFilling(file),
               disabled: false,
-            });
-          }
+            }
+          : null,
+      };
 
-          model.push({
-            id: "option_view",
-            key: "view",
-            label: t("Common:View"),
-            icon: EyeReactSvgUrl,
-            onClick: () => openForm(file, "view"),
-            disabled: false,
-          });
+      const sectionKeys: Record<FormsSection, string[]> = {
+        [FormsSection.MyForms]: [
+          "fill-form",
+          "edit",
+          "view",
+          "separator0",
+          "update-xlsx-data",
+          "separator-after-xlsx",
+          "ask-from-db",
+          "separator6",
+          "start-filling",
+          "reset-filling",
+          "separator1",
+          "download",
+          "separator5",
+          CUSTOM_ACTIONS_KEY,
+          "separator-after-custom",
+          "stop-filling",
+          "delete",
+        ],
+        [FormsSection.InProgress]: [
+          "fill-form",
+          "view",
+          "separator0",
+          "update-xlsx-data",
+          "separator1",
+          "download",
+          "separator5",
+          CUSTOM_ACTIONS_KEY,
+          "separator-after-custom",
+          "stop-filling",
+        ],
+        [FormsSection.CompletedForms]: [
+          "view",
+          "separator1",
+          "download",
+          "separator5",
+          CUSTOM_ACTIONS_KEY,
+        ],
+        [FormsSection.Library]: [],
+        [FormsSection.Settings]: [],
+      };
 
-          if (canDownload) {
-            model.push({
-              id: "option_download",
-              key: "download",
-              label: t("Common:Download"),
-              icon: DownloadReactSvgUrl,
-              onClick: () => downloadFile(file.id),
-              disabled: false,
-            });
-          }
-          break;
+      const keys = sectionKeys[activeSection] ?? [];
+      const customItems = buildCustomItems(fileActions, "file", file);
+
+      const expanded: TFormsContextMenuItem[] = [];
+      for (const key of keys) {
+        if (key === CUSTOM_ACTIONS_KEY) {
+          expanded.push(...customItems);
+          continue;
         }
-
-        case FormsSection.CompletedForms: {
-          model.push({
-            id: "option_view",
-            key: "view",
-            label: t("Common:View"),
-            icon: EyeReactSvgUrl,
-            onClick: () => openForm(file, "view"),
-            disabled: false,
-          });
-
-          if (canDownload) {
-            model.push({
-              id: "option_download",
-              key: "download",
-              label: t("Common:Download"),
-              icon: DownloadReactSvgUrl,
-              onClick: () => downloadFile(file.id),
-              disabled: false,
-            });
-          }
-          break;
-        }
+        const item = optionsModel[key];
+        if (item) expanded.push(item);
       }
 
-      appendCustomItems(model, fileActions, "file", file);
-
-      return model;
+      return dropDanglingSeparators(expanded);
     },
     [
       t,
@@ -302,57 +354,105 @@ export default function useFormsContextMenu() {
       downloadFile,
       startFilling,
       resetFilling,
+      stopFilling,
+      syncXlsxData,
       openPanelWithAgent,
       askFromDBAgentId,
       hasManagementAccess,
       sendToDb,
       fileActions,
-      appendCustomItems,
+      buildCustomItems,
     ],
   );
 
   const getFolderContextMenuModel = useCallback(
     (folder: TFolder, onOpen?: () => void): TFormsContextMenuItem[] => {
-      const model: TFormsContextMenuItem[] = [];
+      const canDownload = folder.security?.Download;
+      const canDelete = folder.security?.Delete;
+      const canUpdateXlsx = folder.security?.UpdateXlsx;
 
-      if (onOpen) {
-        model.push({
-          id: "option_open-folder",
-          key: "open-folder",
-          label: t("Common:Open"),
-          icon: EyeReactSvgUrl,
-          onClick: onOpen,
-          disabled: false,
-        });
+      const optionsModel: Partial<
+        Record<string, TFormsContextMenuItem | null>
+      > = {
+        "open-folder": onOpen
+          ? {
+              id: "option_open-folder",
+              key: "open-folder",
+              label: t("Common:Open"),
+              icon: EyeReactSvgUrl,
+              onClick: onOpen,
+              disabled: false,
+            }
+          : null,
+        separator0: makeSeparator("separator0"),
+        "update-xlsx-data": canUpdateXlsx
+          ? {
+              id: "option_update-xlsx-data",
+              key: "update-xlsx-data",
+              label: t("Common:SyncXlsxData"),
+              icon: SpreadsheetSvgUrl,
+              onClick: () => syncXlsxData(folder),
+              disabled: false,
+            }
+          : null,
+        separator1: makeSeparator("separator1"),
+        "download-folder": canDownload
+          ? {
+              id: "option_download-folder",
+              key: "download-folder",
+              label: t("Common:Download"),
+              icon: DownloadReactSvgUrl,
+              onClick: () => downloadFolder(folder.id),
+              disabled: false,
+            }
+          : null,
+        separator5: makeSeparator("separator5"),
+        "separator-after-custom": makeSeparator("separator-after-custom"),
+        "delete-folder": canDelete
+          ? {
+              id: "option_delete-folder",
+              key: "delete-folder",
+              label: t("Common:Delete"),
+              icon: TrashReactSvgUrl,
+              onClick: () => deleteFolderFromList(folder.id),
+              disabled: false,
+            }
+          : null,
+      };
+
+      const keys = [
+        "open-folder",
+        "separator0",
+        "update-xlsx-data",
+        "separator1",
+        "download-folder",
+        "separator5",
+        CUSTOM_ACTIONS_KEY,
+        "separator-after-custom",
+        "delete-folder",
+      ];
+      const customItems = buildCustomItems(folderActions, "folder", folder);
+
+      const expanded: TFormsContextMenuItem[] = [];
+      for (const key of keys) {
+        if (key === CUSTOM_ACTIONS_KEY) {
+          expanded.push(...customItems);
+          continue;
+        }
+        const item = optionsModel[key];
+        if (item) expanded.push(item);
       }
 
-      if (folder.security?.Download) {
-        model.push({
-          id: "option_download-folder",
-          key: "download-folder",
-          label: t("Common:Download"),
-          icon: DownloadReactSvgUrl,
-          onClick: () => downloadFolder(folder.id),
-          disabled: false,
-        });
-      }
-
-      if (folder.security?.Delete) {
-        model.push({
-          id: "option_delete-folder",
-          key: "delete-folder",
-          label: t("Common:Delete"),
-          icon: TrashReactSvgUrl,
-          onClick: () => deleteFolderFromList(folder.id),
-          disabled: false,
-        });
-      }
-
-      appendCustomItems(model, folderActions, "folder", folder);
-
-      return model;
+      return dropDanglingSeparators(expanded);
     },
-    [t, downloadFolder, deleteFolderFromList, folderActions, appendCustomItems],
+    [
+      t,
+      downloadFolder,
+      deleteFolderFromList,
+      syncXlsxData,
+      folderActions,
+      buildCustomItems,
+    ],
   );
 
   return { getContextMenuModel, getFolderContextMenuModel };

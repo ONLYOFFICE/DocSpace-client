@@ -23,7 +23,7 @@
   font-size: 23px;
   font-weight: 700;
   line-height: 30px;
-  color: var(--color-text-primary);
+  color: var(--color-main-text, var(--color-text-primary));
   text-align: center;
 }
 
@@ -32,7 +32,7 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 22px;
-  color: var(--color-text-secondary);
+  color: var(--color-text-maxcontrast, var(--color-text-secondary));
   text-align: center;
 }
 
@@ -72,7 +72,7 @@
   font-size: 15px;
   font-weight: 400;
   line-height: 22px;
-  color: var(--color-text-primary);
+  color: var(--color-main-text, var(--color-text-primary));
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -93,3 +93,4 @@
     max-width: 400px;
   }
 }
+

@@ -29,13 +29,11 @@ import { isLockedSharedRoom as isLockedSharedRoomUtil } from "@docspace/shared/u
 import { FolderType } from "@docspace/shared/enums";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
-import {
-  isRoom as isRoomUtil,
-  isFolder as isFolderUtil,
-} from "@docspace/shared/utils/typeGuards";
+import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
 
 import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
 import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
+import { getAvailableInfoPanelTabs } from "SRC_DIR/helpers/info-panel/tabs";
 
 import { BodyProps } from "./Body.types";
 
@@ -60,9 +58,10 @@ const InfoPanelBodyGeneral = ({
   getIsRooms,
   getIsAIAgent,
   getIsTrash,
-  setView,
 
   infoPanelItemsList,
+  enablePlugins,
+  isRecentFolder,
 
   maxImageUploadSize,
 
@@ -92,12 +91,6 @@ const InfoPanelBodyGeneral = ({
     selection?.rootFolderType === FolderType.RoomTemplates;
 
   const isRoom = isRoomUtil(selection);
-  const isAgent =
-    selection &&
-    "rootFolderType" in selection &&
-    // "roomType" in selection &&
-    // selection.roomType &&
-    selection.rootFolderType === FolderType.AIAgents;
   const isFolder = selection && "isFolder" in selection && !!selection.isFolder;
 
   const isRoot = isFolder && selection?.id === selection?.rootFolderId;
@@ -114,37 +107,24 @@ const InfoPanelBodyGeneral = ({
     isLockedSharedRoom ||
     isRoot;
 
+  const { tabs: availableTabs, useRoomsView } = useMemo(
+    () =>
+      getAvailableInfoPanelTabs({
+        selection,
+        isTrash,
+        isRecentFolder,
+        enablePlugins,
+        infoPanelItemsList,
+      }),
+    [selection, isTrash, isRecentFolder, enablePlugins, infoPanelItemsList],
+  );
+
   const currentView = useMemo(() => {
-    return isRoom || isTemplatesRoom || isAgent ? roomsView : fileView;
-  }, [isRoom, roomsView, fileView, isTemplatesRoom, isAgent]);
+    const raw = useRoomsView ? roomsView : fileView;
+    return availableTabs.includes(raw) ? raw : availableTabs[0] ?? InfoPanelView.infoDetails;
+  }, [availableTabs, useRoomsView, roomsView, fileView]);
 
   const deferredCurrentView = React.useDeferredValue(currentView);
-
-  useEffect(() => {
-    if (
-      fileView === InfoPanelView.infoShare &&
-      selection &&
-      isFolderUtil(selection) &&
-      !selection?.canShare &&
-      !isTemplatesRoom &&
-      !isAgent
-    ) {
-      setView(InfoPanelView.infoDetails);
-    }
-  }, [fileView, selection, isTemplatesRoom, isAgent]);
-
-  useEffect(() => {
-    if (!currentView.startsWith("info_plugin-")) return;
-
-    const itemKey = currentView.replace("info_plugin-", "");
-    const item = infoPanelItemsList.find((item) => item.key === itemKey);
-
-    if (isAgent) {
-      setView(InfoPanelView.infoMembers);
-    } else if (!item || isTrash || isTemplatesRoom) {
-      setView(InfoPanelView.infoDetails);
-    }
-  }, [currentView, isAgent, isTrash, isTemplatesRoom, infoPanelItemsList]);
 
   const isExpiredLink = useEventCallback(() =>
     checkIsExpiredLinkAsync(selection),

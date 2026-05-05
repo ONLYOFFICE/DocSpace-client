@@ -3,7 +3,7 @@
   "content": "Size",
   "content_en_sha1_hash": "b7152342a267362add3c0d7f69f720f7a9c76c9e",
   "created_at": "2025-05-19T21:30:48.889Z",
-  "updated_at": "2026-04-23T17:24:01.896Z",
+  "updated_at": "2026-04-27T12:45:07.477Z",
   "comment": {
     "text": "This is a label for the size of a file or item, displayed in various information panels and table headers.",
     "is_auto": true,
@@ -25,37 +25,37 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 299,
+      "line_number": 309,
       "context": "onChange: this.onColumnChange,\n },\n { ...erasureBlock },\n {\n key: \"Size\",\n title: t(\"Common:Size\"),\n enable: sizeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Size,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 299,
+      "line_number": 309,
       "context": "onChange: this.onColumnChange,\n },\n { ...erasureBlock },\n {\n key: \"Size\",\n title: t(\"Common:Size\"),\n enable: sizeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Size,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 299,
+      "line_number": 309,
       "context": "onChange: this.onColumnChange,\n },\n { ...erasureBlock },\n {\n key: \"Size\",\n title: t(\"Common:Size\"),\n enable: sizeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Size,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 299,
+      "line_number": 309,
       "context": "onChange: this.onColumnChange,\n },\n { ...erasureBlock },\n {\n key: \"Size\",\n title: t(\"Common:Size\"),\n enable: sizeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Size,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 299,
+      "line_number": 309,
       "context": "onChange: this.onColumnChange,\n },\n { ...erasureBlock },\n {\n key: \"Size\",\n title: t(\"Common:Size\"),\n enable: sizeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Size,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 299,
+      "line_number": 309,
       "context": "onChange: this.onColumnChange,\n },\n { ...erasureBlock },\n {\n key: \"Size\",\n title: t(\"Common:Size\"),\n enable: sizeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Size,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },

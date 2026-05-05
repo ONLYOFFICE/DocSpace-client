@@ -54,6 +54,7 @@ type FormsHeaderProps = {
   onUploadFiles: () => void;
   onCreateBlankForm: () => void;
   showMenu: boolean;
+  headerOffset?: number;
 };
 
 const BurgerButton = ({
@@ -77,6 +78,7 @@ const FormsHeader = ({
   onUploadFiles,
   onCreateBlankForm,
   showMenu,
+  headerOffset = 0,
 }: FormsHeaderProps) => {
   const { t } = useTranslation(["Common"]);
   const pathname = usePathname();
@@ -267,6 +269,30 @@ const FormsHeader = ({
     setNavDropdownMinWidth(Math.ceil(max + 67));
   }, [navigationItems]);
 
+  const headerStyle = React.useMemo<React.CSSProperties | undefined>(() => {
+    if (!navDropdownMinWidth && !headerOffset) return undefined;
+    const style: React.CSSProperties = {};
+    if (navDropdownMinWidth) {
+      (style as Record<string, string>)["--nav-dropdown-min-width"] =
+        `${navDropdownMinWidth}px`;
+    }
+    if (headerOffset) {
+      style.paddingInlineStart = `${headerOffset}px`;
+    }
+    return style;
+  }, [navDropdownMinWidth, headerOffset]);
+
+  const editingWrapperStyle = React.useMemo<
+    React.CSSProperties | undefined
+  >(() => {
+    if (!headerOffset) return undefined;
+    return {
+      position: "relative",
+      marginInlineStart: `${headerOffset}px`,
+      height: "100%",
+    };
+  }, [headerOffset]);
+
   const getContextOptionsPlus = React.useCallback(() => {
     const security = formsSettingsStore.folderSecurity;
     if (!security?.Create) return [];
@@ -346,7 +372,7 @@ const FormsHeader = ({
     return (
       <div
         className={styles.headerRow}
-        style={navDropdownMinWidth ? { "--nav-dropdown-min-width": `${navDropdownMinWidth}px` } as React.CSSProperties : undefined}
+        style={headerStyle}
       >
         {showMenu && (
           <BurgerButton
@@ -396,43 +422,51 @@ const FormsHeader = ({
   }
 
   if (isEditing) {
+    const editingNavigation = (
+      <Navigation
+        showText
+        isRootFolder={false}
+        canCreate={false}
+        title={editingFile?.title || ""}
+        rootRoomTitle=""
+        isDesktop={currentDeviceType === DeviceType.desktop}
+        isFrame
+        navigationItems={navigationItems}
+        getContextOptionsPlus={() => []}
+        getContextOptionsFolder={() => []}
+        onClickFolder={handleEditorBreadcrumbClick}
+        isTrashFolder={false}
+        isEmptyPage={false}
+        isEmptyFilesList={false}
+        onBackToParentFolder={handleEditorBack}
+        showRootFolderTitle={false}
+        withLogo=""
+        burgerLogo=""
+        withMenu={false}
+        currentDeviceType={currentDeviceType}
+        titleIcon=""
+        titleIconTooltip=""
+        showNavigationButton={false}
+        isCurrentFolderInfo={false}
+        showTitle
+        isPublicRoom={false}
+        isRoom={false}
+        isInfoPanelVisible={false}
+        toggleInfoPanel={() => {}}
+        onLogoClick={() => {}}
+        hideInfoPanel={() => {}}
+        clearTrash={() => {}}
+        showFolderInfo={() => {}}
+      />
+    );
+
     return (
       <div className={styles.headerEditing}>
-        <Navigation
-          showText
-          isRootFolder={false}
-          canCreate={false}
-          title={editingFile?.title || ""}
-          rootRoomTitle=""
-          isDesktop={currentDeviceType === DeviceType.desktop}
-          isFrame
-          navigationItems={navigationItems}
-          getContextOptionsPlus={() => []}
-          getContextOptionsFolder={() => []}
-          onClickFolder={handleEditorBreadcrumbClick}
-          isTrashFolder={false}
-          isEmptyPage={false}
-          isEmptyFilesList={false}
-          onBackToParentFolder={handleEditorBack}
-          showRootFolderTitle={false}
-          withLogo=""
-          burgerLogo=""
-          withMenu={false}
-          currentDeviceType={currentDeviceType}
-          titleIcon=""
-          titleIconTooltip=""
-          showNavigationButton={false}
-          isCurrentFolderInfo={false}
-          showTitle
-          isPublicRoom={false}
-          isRoom={false}
-          isInfoPanelVisible={false}
-          toggleInfoPanel={() => {}}
-          onLogoClick={() => {}}
-          hideInfoPanel={() => {}}
-          clearTrash={() => {}}
-          showFolderInfo={() => {}}
-        />
+        {editingWrapperStyle ? (
+          <div style={editingWrapperStyle}>{editingNavigation}</div>
+        ) : (
+          editingNavigation
+        )}
       </div>
     );
   }
@@ -441,7 +475,7 @@ const FormsHeader = ({
     return (
       <div
         className={styles.headerRow}
-        style={navDropdownMinWidth ? { "--nav-dropdown-min-width": `${navDropdownMinWidth}px` } as React.CSSProperties : undefined}
+        style={headerStyle}
       >
         <div className={styles.headerNavigation}>
           <Navigation
@@ -488,7 +522,7 @@ const FormsHeader = ({
     return (
       <div
         className={styles.headerRow}
-        style={navDropdownMinWidth ? { "--nav-dropdown-min-width": `${navDropdownMinWidth}px` } as React.CSSProperties : undefined}
+        style={headerStyle}
       >
         <div className={styles.headerNavigation}>
           <Navigation
@@ -550,7 +584,7 @@ const FormsHeader = ({
     return (
       <div
         className={styles.headerRow}
-        style={navDropdownMinWidth ? { "--nav-dropdown-min-width": `${navDropdownMinWidth}px` } as React.CSSProperties : undefined}
+        style={headerStyle}
       >
         <div className={styles.headerNavigation}>
           <Navigation
@@ -596,7 +630,7 @@ const FormsHeader = ({
   return (
     <div
       className={styles.headerRow}
-      style={navDropdownMinWidth ? { "--nav-dropdown-min-width": `${navDropdownMinWidth}px` } as React.CSSProperties : undefined}
+      style={headerStyle}
     >
       {showMenu && (
         <BurgerButton

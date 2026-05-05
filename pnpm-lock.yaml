@@ -254,6 +254,9 @@ importers:
       '@biomejs/biome':
         specifier: 2.3.14
         version: 2.3.14
+      '@playwright/test':
+        specifier: 1.58.1
+        version: 1.58.1
       '@rollup/plugin-commonjs':
         specifier: ^28.0.9
         version: 28.0.9(rollup@4.60.1)
@@ -1122,7 +1125,10 @@ importers:
         version: 10.1.0
       css-minimizer-webpack-plugin:
         specifier: ^7.0.4
-        version: 7.0.4(webpack@5.105.4)
+        version: 7.0.4(esbuild@0.27.5)(webpack@5.105.4(esbuild@0.27.5))
+      jsdom:
+        specifier: ^27.4.0
+        version: 27.4.0(@noble/hashes@2.0.1)
       prettier:
         specifier: ^3.8.1
         version: 3.8.1
@@ -1131,10 +1137,13 @@ importers:
         version: 0.4.0
       terser-webpack-plugin:
         specifier: 5.3.16
-        version: 5.3.16(webpack@5.105.4)
+        version: 5.3.16(esbuild@0.27.5)(webpack@5.105.4(esbuild@0.27.5))
       typescript:
         specifier: 5.9.3
         version: 5.9.3
+      vitest:
+        specifier: 4.1.0
+        version: 4.1.0(@types/node@24.10.7)(@vitest/ui@4.1.0)(jsdom@27.4.0(@noble/hashes@2.0.1))(msw@2.12.14(@types/node@24.10.7)(typescript@5.9.3))(vite@8.0.8(@types/node@24.10.7)(esbuild@0.27.5)(sass@1.79.6)(terser@5.46.0)(yaml@2.8.3))
 
   packages/shared:
     dependencies:
@@ -12770,6 +12779,18 @@ snapshots:
     dependencies:
       postcss: 8.5.8
 
+  css-minimizer-webpack-plugin@7.0.4(esbuild@0.27.5)(webpack@5.105.4(esbuild@0.27.5)):
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.31
+      cssnano: 7.1.4(postcss@8.5.8)
+      jest-worker: 30.3.0
+      postcss: 8.5.8
+      schema-utils: 4.3.3
+      serialize-javascript: 7.0.5
+      webpack: 5.105.4(esbuild@0.27.5)
+    optionalDependencies:
+      esbuild: 0.27.5
+
   css-minimizer-webpack-plugin@7.0.4(webpack@5.105.4):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
@@ -16419,6 +16440,17 @@ snapshots:
       type-fest: 2.19.0
       unique-string: 3.0.0
 
+  terser-webpack-plugin@5.3.16(esbuild@0.27.5)(webpack@5.105.4(esbuild@0.27.5)):
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.31
+      jest-worker: 27.5.1
+      schema-utils: 4.3.3
+      serialize-javascript: 7.0.5
+      terser: 5.46.0
+      webpack: 5.105.4(esbuild@0.27.5)
+    optionalDependencies:
+      esbuild: 0.27.5
+
   terser-webpack-plugin@5.3.16(webpack@5.105.4):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
@@ -16437,7 +16469,6 @@ snapshots:
       webpack: 5.105.4(esbuild@0.27.5)
     optionalDependencies:
       esbuild: 0.27.5
-    optional: true
 
   terser-webpack-plugin@5.4.0(webpack@5.105.4):
     dependencies:
@@ -16853,7 +16884,6 @@ snapshots:
       - '@swc/core'
       - esbuild
       - uglify-js
-    optional: true
 
   websocket-driver@0.7.4:
     dependencies:

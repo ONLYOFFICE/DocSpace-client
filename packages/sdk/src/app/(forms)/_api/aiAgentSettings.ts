@@ -29,12 +29,54 @@ import { getProgress } from "@docspace/shared/api/files";
 import type { TOperation } from "@docspace/shared/api/files/types";
 import { FolderType } from "@docspace/shared/enums";
 
+import {
+  externalStorageGet,
+  externalStorageSet,
+  isExternalStorageAvailable,
+} from "@/utils/externalStorage";
+
 const FOLDER_AGENTS_STORAGE_KEY = "forms_folder_agents";
 const AI_ENABLED_STORAGE_KEY = "forms_ai_enabled";
 const ASK_FROM_DB_AGENT_KEY = "askFromDBAgent";
 const USER_DISABLED_STORAGE_KEY = "forms_ai_user_disabled";
 const PANEL_WIDTH_STORAGE_KEY = "forms_chat_panel_width";
 const PANEL_POSITION_STORAGE_KEY = "forms_chat_panel_position";
+
+const EXT_FOLDER_AGENTS = (roomId: string | number) =>
+  `aiforms.folderAgents.${roomId}`;
+const EXT_AI_ENABLED = (roomId: string | number) =>
+  `aiforms.aiEnabled.${roomId}`;
+const EXT_USER_DISABLED = (roomId: string | number) =>
+  `aiforms.userDisabled.${roomId}`;
+const EXT_ASK_FROM_DB = (roomId: string | number) =>
+  `aiforms.askFromDB.${roomId}`;
+const EXT_PANEL_WIDTH = (roomId: string | number) =>
+  `aiforms.panelWidth.${roomId}`;
+const EXT_PANEL_POSITION = "aiforms.panelPosition";
+
+const safeGet = (key: string): string | null => {
+  try {
+    return localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+};
+
+const safeSet = (key: string, value: string): void => {
+  try {
+    localStorage.setItem(key, value);
+  } catch {
+    /* noop */
+  }
+};
+
+const safeRemove = (key: string): void => {
+  try {
+    localStorage.removeItem(key);
+  } catch {
+    /* noop */
+  }
+};
 
 export const tokenToHash = (token: string): string => {
   let h = 0;
@@ -43,6 +85,17 @@ export const tokenToHash = (token: string): string => {
   }
   return (h >>> 0).toString(36);
 };
+
+export const SERVICE_TAG_PREFIX = "aiforms-";
+
+export const serviceTagForFolder = (folderId: number | string) =>
+  `${SERVICE_TAG_PREFIX}f-${folderId}`;
+
+export const serviceTagForAskDB = (roomId: number | string) =>
+  `${SERVICE_TAG_PREFIX}askdb-r-${roomId}`;
+
+export const isServiceTag = (tag: string): boolean =>
+  tag.startsWith(SERVICE_TAG_PREFIX);
 
 export type FolderAgentEntry = {
   agentId: number;
@@ -62,26 +115,50 @@ export const saveFolderAgentsMap = (
   map: FolderAgentsMap,
   userHash?: string,
 ) => {
-  localStorage.setItem(folderAgentsKey(roomId, userHash), JSON.stringify(map));
+  safeSet(folderAgentsKey(roomId, userHash), JSON.stringify(map));
+  void externalStorageSet(EXT_FOLDER_AGENTS(roomId), map);
 };
 
-export const loadFolderAgentsMap = (
+const parseFolderAgents = (raw: string): FolderAgentsMap | null => {
+  try {
+    return JSON.parse(raw) as FolderAgentsMap;
+  } catch {
+    return null;
+  }
+};
+
+export const loadFolderAgentsMap = async (
   roomId: string | number,
   userHash?: string,
-): FolderAgentsMap => {
-  try {
-    const val = localStorage.getItem(folderAgentsKey(roomId, userHash));
-    return val ? (JSON.parse(val) as FolderAgentsMap) : {};
-  } catch {
+): Promise<FolderAgentsMap> => {
+  if (await isExternalStorageAvailable()) {
+    const ext = await externalStorageGet<FolderAgentsMap>(
+      EXT_FOLDER_AGENTS(roomId),
+    );
+    if (ext !== null) return ext;
+
+    const lsVal = safeGet(folderAgentsKey(roomId, userHash));
+    if (lsVal !== null) {
+      const parsed = parseFolderAgents(lsVal);
+      if (parsed) {
+        void externalStorageSet(EXT_FOLDER_AGENTS(roomId), parsed);
+        return parsed;
+      }
+    }
     return {};
   }
+
+  const val = safeGet(folderAgentsKey(roomId, userHash));
+  if (!val) return {};
+  return parseFolderAgents(val) ?? {};
 };
 
 export const clearFolderAgentsMap = (
   roomId: string | number,
   userHash?: string,
 ) => {
-  localStorage.removeItem(folderAgentsKey(roomId, userHash));
+  safeRemove(folderAgentsKey(roomId, userHash));
+  void externalStorageSet(EXT_FOLDER_AGENTS(roomId), {});
 };
 
 
@@ -95,14 +172,27 @@ export const saveAiEnabled = (
   enabled: boolean,
   userHash?: string,
 ) => {
-  localStorage.setItem(aiEnabledKey(roomId, userHash), String(enabled));
+  safeSet(aiEnabledKey(roomId, userHash), String(enabled));
+  void externalStorageSet(EXT_AI_ENABLED(roomId), enabled);
 };
 
-export const loadAiEnabled = (
+export const loadAiEnabled = async (
   roomId: string | number,
   userHash?: string,
-): boolean => {
-  return localStorage.getItem(aiEnabledKey(roomId, userHash)) === "true";
+): Promise<boolean> => {
+  if (await isExternalStorageAvailable()) {
+    const ext = await externalStorageGet<boolean>(EXT_AI_ENABLED(roomId));
+    if (ext !== null) return ext;
+
+    const lsVal = safeGet(aiEnabledKey(roomId, userHash));
+    if (lsVal !== null) {
+      const parsed = lsVal === "true";
+      void externalStorageSet(EXT_AI_ENABLED(roomId), parsed);
+      return parsed;
+    }
+    return false;
+  }
+  return safeGet(aiEnabledKey(roomId, userHash)) === "true";
 };
 
 
@@ -116,18 +206,34 @@ export const saveAskFromDBAgentId = (
   agentId: number,
   userHash?: string,
 ) => {
-  localStorage.setItem(askFromDBAgentKey(roomId, userHash), String(agentId));
+  safeSet(askFromDBAgentKey(roomId, userHash), String(agentId));
+  void externalStorageSet(EXT_ASK_FROM_DB(roomId), agentId);
 };
 
-export const loadAskFromDBAgentId = (
+export const loadAskFromDBAgentId = async (
   roomId: string | number,
   userHash?: string,
-): number | null => {
-  const val = localStorage.getItem(askFromDBAgentKey(roomId, userHash));
+): Promise<number | null> => {
+  if (await isExternalStorageAvailable()) {
+    const ext = await externalStorageGet<number>(EXT_ASK_FROM_DB(roomId));
+    if (ext !== null && Number.isFinite(ext)) return ext;
+
+    const lsVal = safeGet(askFromDBAgentKey(roomId, userHash));
+    if (lsVal !== null) {
+      const parsed = Number(lsVal);
+      if (Number.isFinite(parsed)) {
+        void externalStorageSet(EXT_ASK_FROM_DB(roomId), parsed);
+        return parsed;
+      }
+    }
+    return null;
+  }
+
+  const val = safeGet(askFromDBAgentKey(roomId, userHash));
   if (!val) return null;
   const parsed = Number(val);
   return Number.isFinite(parsed) ? parsed : null;
-}
+};
 
 const userDisabledKey = (roomId: string | number, userHash?: string) =>
   userHash
@@ -139,16 +245,27 @@ export const saveUserExplicitlyDisabled = (
   disabled: boolean,
   userHash?: string,
 ) => {
-  localStorage.setItem(userDisabledKey(roomId, userHash), String(disabled));
+  safeSet(userDisabledKey(roomId, userHash), String(disabled));
+  void externalStorageSet(EXT_USER_DISABLED(roomId), disabled);
 };
 
-export const loadUserExplicitlyDisabled = (
+export const loadUserExplicitlyDisabled = async (
   roomId: string | number,
   userHash?: string,
-): boolean => {
-  return (
-    localStorage.getItem(userDisabledKey(roomId, userHash)) === "true"
-  );
+): Promise<boolean> => {
+  if (await isExternalStorageAvailable()) {
+    const ext = await externalStorageGet<boolean>(EXT_USER_DISABLED(roomId));
+    if (ext !== null) return ext;
+
+    const lsVal = safeGet(userDisabledKey(roomId, userHash));
+    if (lsVal !== null) {
+      const parsed = lsVal === "true";
+      void externalStorageSet(EXT_USER_DISABLED(roomId), parsed);
+      return parsed;
+    }
+    return false;
+  }
+  return safeGet(userDisabledKey(roomId, userHash)) === "true";
 };
 
 
@@ -246,14 +363,30 @@ export const savePanelWidth = (
   width: number,
   userHash?: string,
 ) => {
-  localStorage.setItem(panelWidthKey(roomId, userHash), String(width));
+  safeSet(panelWidthKey(roomId, userHash), String(width));
+  void externalStorageSet(EXT_PANEL_WIDTH(roomId), width);
 };
 
-export const loadPanelWidth = (
+export const loadPanelWidth = async (
   roomId: string | number,
   userHash?: string,
-): number | null => {
-  const val = localStorage.getItem(panelWidthKey(roomId, userHash));
+): Promise<number | null> => {
+  if (await isExternalStorageAvailable()) {
+    const ext = await externalStorageGet<number>(EXT_PANEL_WIDTH(roomId));
+    if (ext !== null && Number.isFinite(ext)) return ext;
+
+    const lsVal = safeGet(panelWidthKey(roomId, userHash));
+    if (lsVal !== null) {
+      const parsed = Number(lsVal);
+      if (Number.isFinite(parsed)) {
+        void externalStorageSet(EXT_PANEL_WIDTH(roomId), parsed);
+        return parsed;
+      }
+    }
+    return null;
+  }
+
+  const val = safeGet(panelWidthKey(roomId, userHash));
   if (!val) return null;
   const parsed = Number(val);
   return Number.isFinite(parsed) ? parsed : null;
@@ -263,11 +396,27 @@ export const savePanelPosition = (
   position: PanelPosition,
   userHash?: string,
 ) => {
-  localStorage.setItem(panelPositionKey(userHash), position);
+  safeSet(panelPositionKey(userHash), position);
+  void externalStorageSet(EXT_PANEL_POSITION, position);
 };
 
-export const loadPanelPosition = (userHash?: string): PanelPosition => {
-  const val = localStorage.getItem(panelPositionKey(userHash));
+export const loadPanelPosition = async (
+  userHash?: string,
+): Promise<PanelPosition> => {
+  if (await isExternalStorageAvailable()) {
+    const ext = await externalStorageGet<PanelPosition>(EXT_PANEL_POSITION);
+    if (ext === "right" || ext === "left") return ext;
+
+    const lsVal = safeGet(panelPositionKey(userHash));
+    if (lsVal !== null) {
+      const normalized: PanelPosition = lsVal === "right" ? "right" : "left";
+      void externalStorageSet(EXT_PANEL_POSITION, normalized);
+      return normalized;
+    }
+    return "left";
+  }
+
+  const val = safeGet(panelPositionKey(userHash));
   return val === "right" ? "right" : "left";
 };
 

@@ -32,20 +32,17 @@ import { AsideHeader } from "@docspace/ui-kit/components/aside";
 import { Tabs } from "@docspace/ui-kit/components/tabs";
 import { isLockedSharedRoom } from "@docspace/shared/utils";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
-import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
 
-import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 import { hideInfoPanel } from "SRC_DIR/helpers/info-panel";
-import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
+import { getAvailableInfoPanelTabs } from "SRC_DIR/helpers/info-panel/tabs";
 
 import styles from "./Header.module.scss";
 import { HeaderProps } from "./Header.types";
 
 const InfoPanelHeaderGeneral = ({
   selection,
-  // setIsVisible,
   roomsView,
   fileView,
   setView,
@@ -90,117 +87,38 @@ const InfoPanelHeaderGeneral = ({
     hideInfoPanel();
   };
 
-  const setMembers = () => setView(InfoPanelView.infoMembers);
-  const setHistory = () => setView(InfoPanelView.infoHistory);
-  const setDetails = () => setView(InfoPanelView.infoDetails);
-  const setShare = () => setView(InfoPanelView.infoShare);
+  const { tabs: availableTabs, useRoomsView } = getAvailableInfoPanelTabs({
+    selection,
+    isTrash,
+    isRecentFolder,
+    enablePlugins,
+    infoPanelItemsList,
+  });
 
-  const memberTab = {
-    id: "info_members",
-    name: isTemplate ? t("Common:Accesses") : t("Common:Contacts"),
-    onClick: setMembers,
-    content: null,
-  };
+  const rawView = useRoomsView ? roomsView : fileView;
+  const selectedTabId = availableTabs.includes(rawView)
+    ? rawView
+    : (availableTabs[0] ?? InfoPanelView.infoDetails);
 
-  const detailsTab = {
-    id: "info_details",
-    name: t("InfoPanel:SubmenuDetails"),
-    onClick: setDetails,
-    content: null,
-  };
+  const tabItems = availableTabs.map((id) => {
+    let name: string;
+    if (id === InfoPanelView.infoMembers) {
+      name = isTemplate ? t("Common:Accesses") : t("Common:Contacts");
+    } else if (id === InfoPanelView.infoHistory) {
+      name = t("InfoPanel:SubmenuHistory");
+    } else if (id === InfoPanelView.infoDetails) {
+      name = t("InfoPanel:SubmenuDetails");
+    } else if (id === InfoPanelView.infoShare) {
+      name = t("Common:Share");
+    } else {
+      const key = id.replace("info_plugin-", "");
+      name =
+        infoPanelItemsList.find((item) => item.key === key)?.value.subMenu
+          .name ?? id;
+    }
 
-  const templateSubmenu = [memberTab, detailsTab];
-
-  const tabsData = [
-    {
-      id: "info_history",
-      name: t("InfoPanel:SubmenuHistory"),
-      onClick: setHistory,
-      content: null,
-    },
-    detailsTab,
-  ];
-
-  const isRoomsType =
-    (!isRecentFolder &&
-      selection &&
-      "rootFolderType" in selection &&
-      isRoomUtil(selection) &&
-      (selection.rootFolderType === FolderType.Rooms ||
-        selection.rootFolderType === FolderType.Archive)) ||
-    (!isRecentFolder &&
-      selection &&
-      "rootFolderType" in selection &&
-      selection.rootFolderType === FolderType.RoomTemplates);
-
-  const isAgentType =
-    !isRecentFolder &&
-    selection &&
-    "rootFolderType" in selection &&
-    "roomType" in selection &&
-    selection.roomType &&
-    selection.rootFolderType === FolderType.AIAgents;
-
-  if (isRoomsType || isAgentType) tabsData.unshift(memberTab);
-
-  if (
-    selection &&
-    "canShare" in selection &&
-    selection.canShare &&
-    !isRoomUtil(selection)
-  ) {
-    tabsData.unshift({
-      id: "info_share",
-      name: t("Common:Share"),
-      onClick: setShare,
-      content: null,
-    });
-  }
-
-  if (!isAIAgents() && enablePlugins && infoPanelItemsList.length > 0) {
-    const isRoom = selection && "roomType" in selection && selection.roomType;
-    const isFile = selection && "fileExst" in selection && selection.fileExst;
-
-    infoPanelItemsList.forEach((item) => {
-      const onClick = async () => {
-        setView(`info_plugin-${item.key}`);
-      };
-
-      const tabsItem = {
-        id: `info_plugin-${item.key}`,
-        name: item.value.subMenu.name,
-        onClick,
-        content: null,
-      };
-
-      if (!item.value.filesType) {
-        tabsData.push(tabsItem);
-        return;
-      }
-
-      if (isRoom && item.value.filesType.includes(PluginFileType.room)) {
-        tabsData.push(tabsItem);
-        return;
-      }
-
-      if (isFile && item.value.filesType.includes(PluginFileType.file)) {
-        if (
-          item.value.filesExsts &&
-          !item.value.filesExsts.includes(selection?.fileExst)
-        ) {
-          return;
-        }
-
-        tabsData.push(tabsItem);
-
-        return;
-      }
-
-      if (item.value.filesType.includes(PluginFileType.folder)) {
-        tabsData.push(tabsItem);
-      }
-    });
-  }
+    return { id, name, onClick: () => setView(id), content: null };
+  });
 
   return (
     <div
@@ -221,8 +139,8 @@ const InfoPanelHeaderGeneral = ({
         <div className="tabs">
           <Tabs
             style={{ width: "100%" }}
-            items={isTemplate ? templateSubmenu : tabsData}
-            selectedItemId={isRoomsType || isAgentType ? roomsView : fileView}
+            items={tabItems}
+            selectedItemId={selectedTabId}
             withAnimation
           />
         </div>

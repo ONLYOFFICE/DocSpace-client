@@ -95,5 +95,7 @@
   "WebhookRemoved": "Webhook eliminat",
   "Webhooks": "Webhook-uri",
   "WebhooksGuide": "Ghid Webhooks",
-  "WebhooksInfo": "Utilizați webhook-uri pentru a efectua acțiuni personalizate pe partea oricărei aplicații sau site web pe care o utilizați, pe baza diverselor evenimente din {{organizationName}} {{productName}}.\nAici puteți crea și gestiona toate webhook-urile, să le configurați și să parcurgeți istoricul fiecărui webhook pentru a le audita performanța."
+  "WebhooksInfo": "Utilizați webhook-uri pentru a efectua acțiuni personalizate pe partea oricărei aplicații sau site web pe care o utilizați, pe baza diverselor evenimente din {{organizationName}} {{productName}}.\nAici puteți crea și gestiona toate webhook-urile, să le configurați și să parcurgeți istoricul fiecărui webhook pentru a le audita performanța.",
+  "FileDownloaded": "Fișier descărcat",
+  "FolderDownloaded": "Folder descărcat"
 }

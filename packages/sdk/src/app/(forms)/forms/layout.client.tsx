@@ -33,10 +33,7 @@ import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 import Section from "@docspace/ui-kit/components/section";
 import { Backdrop } from "@docspace/ui-kit/components/backdrop";
-import {
-  FloatingButton,
-  FloatingButtonIcons,
-} from "@docspace/ui-kit/components/floating-button";
+import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import { setAuthToken } from "@docspace/shared/api/client";
 import {
@@ -48,6 +45,7 @@ import {
 import { DeviceType } from "@docspace/shared/enums";
 
 import useDeviceType from "@/hooks/useDeviceType";
+import useFrameHeaderConfig from "@/hooks/useFrameHeaderConfig";
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 import {
   FormsSection,
@@ -80,6 +78,7 @@ import useEditorGuard from "../_hooks/useEditorGuard";
 import { MIN_SECTION_WIDTH } from "../_api/aiAgentSettings";
 import { useFormsTourStore } from "../_store/FormsTourStore";
 import { useFormsCustomActionsStore } from "../_store/FormsCustomActionsStore";
+import { useFormsProgressStore } from "../_store/FormsProgressStore";
 import useTourSandbox from "../_hooks/useTourSandbox";
 import FormsSidebar from "../_components/sidebar";
 import DualRingSpinner from "../_components/forms-layout/DualRingSpinner";
@@ -94,6 +93,14 @@ const AiChatButton = dynamic(() => import("../_components/ai-chat-button"), {
 });
 const CreateFormDialog = dynamic(
   () => import("../_components/create-form-dialog"),
+  { ssr: false },
+);
+const DeleteFormDialog = dynamic(
+  () => import("../_components/delete-form-dialog"),
+  { ssr: false },
+);
+const StopFillingDialog = dynamic(
+  () => import("../_components/stop-filling-dialog"),
   { ssr: false },
 );
 const WelcomeTourDialog = dynamic(
@@ -152,6 +159,19 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     searchParams.get("showMenu") !== "false",
   );
   const showMenu = initialShowMenu.current && sdkConfig?.showMenu !== false;
+
+  const { headerOffset, headerHeight, frameHeaderVars } =
+    useFrameHeaderConfig();
+
+  const isChatPanelOnLeft =
+    aiStore.isPanelVisible &&
+    !!aiStore.currentAgentId &&
+    hasManagementAccess &&
+    !editingFile &&
+    aiStore.panelPosition === "left";
+
+  const formsHeaderOffset = isChatPanelOnLeft ? 0 : headerOffset;
+  const chatPanelHeaderOffset = isChatPanelOnLeft ? headerOffset : 0;
 
   const uploadFilesDirectRef = React.useRef<(files: File[]) => Promise<void>>(
     async () => {},
@@ -357,11 +377,16 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   }, [isLoading, closeEditor]);
 
   React.useEffect(() => {
+    if (!user?.id) return;
+    void tourStore.hydrateForUser(String(user.id));
+  }, [user?.id, tourStore]);
+
+  React.useEffect(() => {
     if (!roomId || !user?.id || !hasManagementAccess) return;
 
-    aiStore.initForRoom(roomId, user.id);
-
-    const runAutoEnable = () => aiStore.autoEnableIfAvailable();
+    let cancelled = false;
+    let idleId: number | undefined;
+    let timeoutId: number | undefined;
     const win = window as Window & {
       requestIdleCallback?: (
         cb: () => void,
@@ -369,12 +394,27 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
       ) => number;
       cancelIdleCallback?: (id: number) => void;
     };
-    if (win.requestIdleCallback) {
-      const id = win.requestIdleCallback(runAutoEnable, { timeout: 2000 });
-      return () => win.cancelIdleCallback?.(id);
-    }
-    const id = window.setTimeout(runAutoEnable, 2000);
-    return () => window.clearTimeout(id);
+
+    (async () => {
+      await aiStore.initForRoom(roomId, user.id);
+      if (cancelled) return;
+
+      const runAutoEnable = () => {
+        if (!cancelled) aiStore.autoEnableIfAvailable();
+      };
+
+      if (win.requestIdleCallback) {
+        idleId = win.requestIdleCallback(runAutoEnable, { timeout: 2000 });
+      } else {
+        timeoutId = window.setTimeout(runAutoEnable, 2000);
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+      if (idleId !== undefined) win.cancelIdleCallback?.(idleId);
+      if (timeoutId !== undefined) window.clearTimeout(timeoutId);
+    };
   }, [roomId, user?.id, aiStore, hasManagementAccess]);
 
   React.useEffect(() => {
@@ -523,13 +563,13 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   const {
     onUploadFiles,
     uploadFilesToFolder,
-    uploadProgress,
     onCreateBlankForm,
     isCreateFormDialogVisible,
     isCreatingForm,
     onCloseCreateFormDialog,
     onSaveCreateForm,
   } = useFolderActions(fetchSection, refreshAfterMutation);
+  const progressStore = useFormsProgressStore();
   uploadFilesDirectRef.current = uploadFilesToFolder;
 
   const formsDataValue = React.useMemo(
@@ -548,13 +588,20 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   React.useEffect(() => {
     if (
       isReady &&
+      tourStore.isHydrated &&
       !tourStore.tourCompleted &&
       !tourStore.isRunning &&
       activeSection === FormsSection.MyForms
     ) {
       setShowWelcome(true);
     }
-  }, [isReady, tourStore.tourCompleted, tourStore.isRunning, activeSection]);
+  }, [
+    isReady,
+    tourStore.isHydrated,
+    tourStore.tourCompleted,
+    tourStore.isRunning,
+    activeSection,
+  ]);
 
   // Inject mock data when navigating between sections during tour
   React.useEffect(() => {
@@ -620,8 +667,12 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
           }}
         />
       )}
-      <AiChatPanel rootRef={rootRef} />
-      <div className={styles.sectionArea}>
+      <AiChatPanel
+        rootRef={rootRef}
+        headerOffset={chatPanelHeaderOffset}
+        headerHeight={headerHeight}
+      />
+      <div className={styles.sectionArea} style={frameHeaderVars}>
         <Section
           withBodyScroll={!isEditing}
           withoutFooter={isEditing}
@@ -640,6 +691,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
               onUploadFiles={onUploadFiles}
               onCreateBlankForm={onCreateBlankForm}
               showMenu={showMenu}
+              headerOffset={formsHeaderOffset}
             />
           </Section.SectionHeader>
           <Section.SectionBody>
@@ -653,14 +705,14 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
             </FormsDataProvider>
           </Section.SectionBody>
         </Section>
-        <AiChatButton shiftUp={!!uploadProgress} />
-        {uploadProgress && (
+        <AiChatButton shiftUp={progressStore.icon !== null} />
+        {progressStore.icon !== null && (
           <div className={styles.floatingButtonContainer}>
             <FloatingButton
-              icon={FloatingButtonIcons.upload}
-              percent={uploadProgress.percent}
-              completed={uploadProgress.completed}
-              alert={uploadProgress.alert}
+              icon={progressStore.icon}
+              percent={progressStore.percent}
+              completed={progressStore.completed}
+              alert={progressStore.alert}
             />
           </div>
         )}
@@ -673,6 +725,8 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
           onSave={onSaveCreateForm}
         />
       )}
+      <DeleteFormDialog />
+      <StopFillingDialog />
       {showWelcome && (
         <WelcomeTourDialog
           visible={showWelcome}

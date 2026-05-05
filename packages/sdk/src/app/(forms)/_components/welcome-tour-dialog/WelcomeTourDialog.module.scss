@@ -11,7 +11,7 @@
 
 .videoContainer {
   flex: 1;
-  border-radius: 8px;
+  border-radius: var(--tour-video-radius, 8px);
   overflow: hidden;
   min-width: 0;
 }
@@ -20,7 +20,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: var(--tour-video-radius, 8px);
 }
 
 .featuresList {
@@ -36,8 +36,11 @@
   align-items: flex-start;
   gap: 12px;
   padding: 10px 12px;
-  border-radius: 6px;
-  background-color: var(--color-light-gray-hover, rgba(255, 255, 255, 0.05));
+  border-radius: var(--tour-card-radius, 6px);
+  background-color: var(
+    --tour-card-bg,
+    var(--color-light-gray-hover, rgba(255, 255, 255, 0.05))
+  );
 }
 
 .featureIcon {
@@ -51,7 +54,7 @@
     height: 20px;
 
     path {
-      fill: var(--color-scheme-main-accent);
+      fill: var(--tour-accent-color, var(--color-scheme-main-accent));
     }
   }
 }
@@ -63,11 +66,12 @@
 }
 
 .featureDesc {
-  color: var(--color-light-gray-dark);
+  color: var(--tour-description-color, var(--color-light-gray-dark));
   line-height: 16px;
 }
 
 .question {
-  font-weight: 600;
+  font-weight: var(--tour-question-weight, 600);
   line-height: 20px;
 }
+

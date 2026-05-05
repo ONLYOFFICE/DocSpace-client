@@ -84,10 +84,7 @@ export async function proxy(request: NextRequest) {
   requestHeaders.set(THEME_HEADER, theme ?? "");
   requestHeaders.set(LOCALE_HEADER, locale ?? "");
   requestHeaders.set(SHARE_KEY_HEADER, shareKey ?? "");
-  requestHeaders.set(
-    STYLES_URL_HEADER,
-    sanitizeStylesUrl(searchParams.get("stylesUrl")),
-  );
+  requestHeaders.set(STYLES_URL_HEADER, searchParams.get("stylesUrl") ?? "");
 
   if (request.nextUrl.pathname.includes("forms")) {
     const roomId = searchParams.get("roomId") ?? "";
@@ -97,11 +94,7 @@ export async function proxy(request: NextRequest) {
     requestHeaders.set(LIBRARY_ID_HEADER, libraryId);
     requestHeaders.set(FILTER_HEADER, searchParams.toString());
 
-    return NextResponse.next({
-      request: {
-        headers: requestHeaders,
-      },
-    });
+    return NextResponse.next({ request: { headers: requestHeaders } });
   }
 
   if (request.nextUrl.pathname.includes("personal-files")) {
@@ -120,11 +113,7 @@ export async function proxy(request: NextRequest) {
     requestHeaders.set(AGENT_ID_HEADER, agentId);
     requestHeaders.set(FILTER_HEADER, searchParams.toString());
 
-    return NextResponse.next({
-      request: {
-        headers: requestHeaders,
-      },
-    });
+    return NextResponse.next({ request: { headers: requestHeaders } });
   }
 
   if (request.nextUrl.pathname.includes("public-room")) {
@@ -144,8 +133,9 @@ export async function proxy(request: NextRequest) {
     }
 
     if (validationResult?.anonymousSessionKeyCookie) {
-      const cookieNameValue =
-        validationResult.anonymousSessionKeyCookie.split(";")[0]?.trim();
+      const cookieNameValue = validationResult.anonymousSessionKeyCookie
+        .split(";")[0]
+        ?.trim();
 
       if (cookieNameValue) {
         const existingCookies = requestHeaders.get("cookie") || "";
@@ -202,3 +192,4 @@ export const config = {
     "/personal-files/:path*",
   ],
 };
+

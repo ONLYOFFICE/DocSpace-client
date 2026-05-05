@@ -3,7 +3,7 @@
   "content": "In progress",
   "content_en_sha1_hash": "b6bd42e4e7302e5e9a15930c8fcdb73fc2c0cf18",
   "created_at": "2025-05-19T21:30:45.918Z",
-  "updated_at": "2026-04-23T17:24:01.782Z",
+  "updated_at": "2026-04-27T12:45:07.459Z",
   "comment": {
     "text": "This label indicates that an operation or process is currently running. It appears in a dialog showing the status of a data reassignment and as a section title in the forms module.",
     "is_auto": true,
@@ -19,19 +19,19 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/forms-header/index.tsx",
-      "line_number": 147,
+      "line_number": 149,
       "context": "case FormsSection.MyForms:\n return t(\"Common:MyForms\");\n case FormsSection.Library:\n return t(\"Common:Library\");\n case FormsSection.InProgress:\n return t(\"Common:InProgress\");\n case FormsSection.CompletedForms:\n return t(\"Common:CompletedForms\");\n case FormsSection.Settings:\n return t(\"Common:Settings\");\n default:",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/forms-header/index.tsx",
-      "line_number": 147,
+      "line_number": 149,
       "context": "case FormsSection.MyForms:\n return t(\"Common:MyForms\");\n case FormsSection.Library:\n return t(\"Common:Library\");\n case FormsSection.InProgress:\n return t(\"Common:InProgress\");\n case FormsSection.CompletedForms:\n return t(\"Common:CompletedForms\");\n case FormsSection.Settings:\n return t(\"Common:Settings\");\n default:",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/forms-header/index.tsx",
-      "line_number": 147,
+      "line_number": 149,
       "context": "case FormsSection.MyForms:\n return t(\"Common:MyForms\");\n case FormsSection.Library:\n return t(\"Common:Library\");\n case FormsSection.InProgress:\n return t(\"Common:InProgress\");\n case FormsSection.CompletedForms:\n return t(\"Common:CompletedForms\");\n case FormsSection.Settings:\n return t(\"Common:Settings\");\n default:",
       "module": "/packages/sdk"
     },

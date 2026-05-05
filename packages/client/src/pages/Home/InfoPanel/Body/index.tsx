@@ -43,7 +43,6 @@ const InfoPanelBodyContent: React.FC<InfoPanelBodyContentProps> = ({
     fileView,
     getIsFiles,
     getIsRooms,
-    setView,
     maxImageUploadSize,
     editRoomDialogProps,
     createRoomDialogProps,
@@ -59,6 +58,8 @@ const InfoPanelBodyContent: React.FC<InfoPanelBodyContentProps> = ({
     getIsTrash,
     infoPanelItemsList,
     editAgentDialogProps,
+    enablePlugins,
+    isRecentFolder,
   } = restProps as Exclude<InfoPanelBodyContentProps, { isGallery: true }>;
 
   return (
@@ -69,7 +70,6 @@ const InfoPanelBodyContent: React.FC<InfoPanelBodyContentProps> = ({
       fileView={fileView}
       getIsFiles={getIsFiles}
       getIsRooms={getIsRooms}
-      setView={setView}
       maxImageUploadSize={maxImageUploadSize}
       editRoomDialogProps={editRoomDialogProps}
       createRoomDialogProps={createRoomDialogProps}
@@ -85,6 +85,8 @@ const InfoPanelBodyContent: React.FC<InfoPanelBodyContentProps> = ({
       getIsTrash={getIsTrash}
       infoPanelItemsList={infoPanelItemsList}
       editAgentDialogProps={editAgentDialogProps}
+      enablePlugins={enablePlugins}
+      isRecentFolder={isRecentFolder}
     />
   );
 };
@@ -98,6 +100,7 @@ export default inject(
     peopleStore,
     filesActionsStore,
     pluginStore,
+    treeFoldersStore,
   }: TStore) => {
     const { contactsTab } = peopleStore.usersStore;
 
@@ -110,7 +113,6 @@ export default inject(
       getIsFiles,
       getIsRooms,
       getIsAIAgent,
-      setView,
       getIsTrash,
     } = infoPanelStore;
 
@@ -144,9 +146,11 @@ export default inject(
       getIsRooms,
       getIsAIAgent,
       getIsTrash,
-      setView,
 
       infoPanelItemsList,
+
+      enablePlugins: settingsStore.enablePlugins,
+      isRecentFolder: treeFoldersStore.isRecentFolder,
 
       maxImageUploadSize: settingsStore.maxImageUploadSize,
 

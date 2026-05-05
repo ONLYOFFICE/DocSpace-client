@@ -1,100 +1,103 @@
 @use "@docspace/ui-kit/styles/mixins";
 
 .articleFlex {
-	display: flex;
-	flex-direction: column;
-	border-inline-end: none !important;
+  display: flex;
+  flex-direction: column;
+  border-inline-end: none !important;
 
-	&:global([data-show-text="false"]) {
-		min-width: 80px !important;
-		max-width: 80px !important;
-	}
+  &:global([data-show-text="false"]) {
+    min-width: 80px !important;
+    max-width: 80px !important;
+  }
 
-	@include mixins.mobile {
-		position: absolute;
-		inset-block-start: var(--section-header-height-mobile);
-		inset-inline-start: 0;
-		width: 100%;
-		min-width: 0 !important;
-		max-width: none !important;
-		height: calc(100% - var(--section-header-height-mobile));
-		z-index: 230;
-		box-shadow: 4px 0 16px rgb(0 0 0 / 15%);
-		transform: translateX(-100%);
-		transition: transform 0.2s ease-out;
-		will-change: transform;
+  @include mixins.mobile {
+    position: absolute;
+    inset-block-start: var(--section-header-height-mobile);
+    inset-inline-start: 0;
+    width: 100%;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: calc(100% - var(--section-header-height-mobile));
+    z-index: 230;
+    box-shadow: 4px 0 16px rgb(0 0 0 / 15%);
+    transform: translateX(-100%);
+    transition: transform 0.2s ease-out;
+    will-change: transform;
 
-		&:global([data-sidebar-open="true"]) {
-			transform: translateX(0);
-		}
+    &:global([data-sidebar-open="true"]) {
+      transform: translateX(0);
+    }
 
-		:global([dir="rtl"]) & {
-			transform: translateX(100%);
+    :global([dir="rtl"]) & {
+      transform: translateX(100%);
 
-			&:global([data-sidebar-open="true"]) {
-				transform: translateX(0);
-			}
-		}
-	}
+      &:global([data-sidebar-open="true"]) {
+        transform: translateX(0);
+      }
+    }
+  }
 }
 
 .scrollbar {
-	flex: 1;
-	min-height: 0;
+  flex: 1;
+  min-height: 0;
 
-	@include mixins.mobile {
-		height: 100% !important;
-	}
+  @include mixins.mobile {
+    height: 100% !important;
+  }
 }
 
 .navBottom {
-	flex-shrink: 0;
-	padding: 8px 20px 16px;
+  flex-shrink: 0;
+  padding: 8px 20px 16px;
 
-	@include mixins.tablet {
-		padding: 8px 8px 16px;
-	}
+  @include mixins.tablet {
+    padding: 8px 8px 16px;
+  }
 }
 
 .borderToggle {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	inset-inline-end: -4px;
-	width: 8px;
-	cursor: pointer;
-	z-index: 1;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  inset-inline-end: -4px;
+  width: 8px;
+  cursor: pointer;
+  z-index: 1;
 
-	&::after {
-		content: "";
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		width: 1px;
-		left: 50%;
-		transform: translateX(-50%);
-		background: var(--info-panel-border);
-		transition: width 0.15s, background-color 0.15s;
-	}
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--info-panel-border);
+    transition:
+      width 0.15s,
+      background-color 0.15s;
+  }
 
-	&:hover::after,
-	&:active::after {
-		width: 3px;
-		background-color: var(--text-secondary);
-		border-radius: 2px;
-	}
+  &:hover::after,
+  &:active::after {
+    width: 3px;
+    background-color: var(--text-secondary);
+    border-radius: 2px;
+  }
 
-	&:focus-visible {
-		outline: none;
+  &:focus-visible {
+    outline: none;
 
-		&::after {
-			width: 3px;
-			background-color: var(--text-secondary);
-			border-radius: 2px;
-		}
-	}
+    &::after {
+      width: 3px;
+      background-color: var(--text-secondary);
+      border-radius: 2px;
+    }
+  }
 
-	@include mixins.tablet-and-below {
-		display: none;
-	}
+  @include mixins.tablet-and-below {
+    display: none;
+  }
 }
+

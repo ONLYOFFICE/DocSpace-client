@@ -3,7 +3,7 @@
   "content": "Erasure",
   "content_en_sha1_hash": "e5eaa5fb5b757374407ffad2c33964c599e1aee8",
   "created_at": "2025-05-19T21:30:55.314Z",
-  "updated_at": "2026-04-23T17:24:01.908Z",
+  "updated_at": "2026-04-27T12:45:07.482Z",
   "comment": {
     "text": "This is a column header and a filter option label in the file list, referring to the date of an item's last modification or \"erasure\" (deletion/removal).",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 257,
+      "line_number": 267,
       "context": ": {};\n \n const erasureBlock = isPersonalReadOnly\n ? {\n key: \"Erasure\",\n title: t(\"ByErasure\"),\n enable: erasureColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.ModifiedDate,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 257,
+      "line_number": 267,
       "context": ": {};\n \n const erasureBlock = isPersonalReadOnly\n ? {\n key: \"Erasure\",\n title: t(\"ByErasure\"),\n enable: erasureColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.ModifiedDate,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },

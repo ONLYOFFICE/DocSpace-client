@@ -2323,7 +2323,7 @@ class ContextOptionsStore {
       {
         id: "option_access-settings",
         key: "access-settings",
-        label: t("AccessSettings"),
+        label: t("AccessSettingsTitle"),
         icon: PersonReactSvgUrl,
         onClick: () => this.onOpenTemplateAccessOptions(),
         disabled: !isTemplateOwner,

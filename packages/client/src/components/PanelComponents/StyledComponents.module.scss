@@ -67,9 +67,114 @@
   height: 100%;
   padding-inline-end: 16px;
 
-  .row_context-menu-wrapper {
-    width: auto;
-    display: none;
+  :global {
+    .row_context-menu-wrapper {
+      width: auto;
+      display: none;
+    }
+
+    .styled-element {
+      margin-inline-end: 8px !important;
+    }
+
+    .upload-panel_file-name {
+      max-width: 412px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      align-items: center;
+      display: flex;
+    }
+
+    .enter-password {
+      white-space: nowrap;
+      max-width: 97px;
+      overflow: hidden;
+    }
+
+    .password-input {
+      position: absolute;
+      top: 37px;
+      inset-inline: 0;
+      max-width: 470px;
+      width: calc(100% - 16px);
+      display: flex;
+    }
+
+    .conversion-button {
+      margin-inline-start: 8px;
+      width: 100%;
+      max-width: 78px;
+    }
+
+    .row_content > a,
+    .row_content > p {
+      margin: auto 0;
+      line-height: 16px;
+    }
+
+    .upload_panel-icon {
+      margin-inline-start: auto;
+      padding-inline-start: 16px;
+      line-height: 24px;
+      display: flex;
+      align-items: center;
+      flex-direction: row-reverse;
+
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      .enter-password {
+        color: var(--files-panels-upload-color);
+        margin-inline-end: 8px;
+        text-decoration: underline dashed;
+        cursor: pointer;
+      }
+    }
+
+    .img_error {
+      filter: grayscale(1);
+    }
+
+    .convert_icon {
+      padding-inline-end: 12px;
+    }
+
+    .upload-panel_file-row-link {
+      cursor: default;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .file-exst {
+      color: var(--files-panels-upload-color);
+    }
+
+    .actions-wrapper {
+      display: flex;
+      margin-inline-start: auto;
+      padding-inline-start: 16px;
+      align-items: center;
+
+      .upload-panel_percent-text {
+        margin-inline-start: 16px;
+        color: var(--files-panels-upload-progress-color);
+      }
+
+      .upload-panel_close-button,
+      .upload-panel_check-button {
+        margin-inline-start: 16px;
+      }
+
+      .upload-panel_check-button {
+        path {
+          fill: var(--files-panels-upload-positive-status-color);
+        }
+      }
+    }
   }
 
   @media (hover: hover) and (pointer: fine) {
@@ -77,124 +182,21 @@
   }
 
   &[data-show-password] {
-    .styled-element,
-    .row_content {
+    :global(.styled-element),
+    :global(.row_content) {
       margin-top: -36px;
     }
 
-    .password-input {
+    :global(.password-input) {
       top: 48px;
     }
   }
 
-  .styled-element {
-    margin-inline-end: 8px !important;
-  }
-
-  .upload-panel_file-name {
-    max-width: 412px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    align-items: center;
-    display: flex;
-  }
-
-  .enter-password {
-    white-space: nowrap;
-    max-width: 97px;
-    overflow: hidden;
-  }
-
-  .password-input {
-    position: absolute;
-    top: 37px;
-    inset-inline: 0;
-    max-width: 470px;
-    width: calc(100% - 16px);
-    display: flex;
-  }
-
-  .conversion-button {
-    margin-inline-start: 8px;
-    width: 100%;
-    max-width: 78px;
-  }
-
-  .row_content > a,
-  .row_content > p {
-    margin: auto 0;
-    line-height: 16px;
-  }
-
-  .upload_panel-icon {
-    margin-inline-start: auto;
-    padding-inline-start: 16px;
-    line-height: 24px;
-    display: flex;
-    align-items: center;
-    flex-direction: row-reverse;
-
-    svg {
-      width: 16px;
-      height: 16px;
-    }
-
-    .enter-password {
-      color: var(--files-panels-upload-color);
-      margin-inline-end: 8px;
-      text-decoration: underline dashed;
-      cursor: pointer;
-    }
-  }
-
-  .img_error {
-    filter: grayscale(1);
-  }
-
-  .convert_icon {
-    padding-inline-end: 12px;
-  }
-
-  .upload-panel_file-row-link {
-    cursor: default;
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
-  &[data-media-active] .upload-panel_file-row-link {
+  &[data-media-active] :global(.upload-panel_file-row-link) {
     cursor: pointer;
   }
 
-  &[data-error] .upload-panel-file-error_text {
+  &[data-error] :global(.upload-panel-file-error_text) {
     color: var(--files-panels-upload-color);
-  }
-
-  .file-exst {
-    color: var(--files-panels-upload-color);
-  }
-
-  .actions-wrapper {
-    display: flex;
-    margin-inline-start: auto;
-    padding-inline-start: 16px;
-    align-items: center;
-
-    .upload-panel_percent-text {
-      margin-inline-start: 16px;
-      color: var(--files-panels-upload-progress-color);
-    }
-
-    .upload-panel_close-button,
-    .upload-panel_check-button {
-      margin-inline-start: 16px;
-    }
-
-    .upload-panel_check-button {
-      path {
-        fill: var(--files-panels-upload-positive-status-color);
-      }
-    }
   }
 }

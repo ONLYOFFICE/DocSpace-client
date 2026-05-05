@@ -53,6 +53,9 @@ const isDev = process.env.NODE_ENV !== productionMode;
 
 const nextConfig = {
   basePath: "/sdk",
+  outputFileTracingIncludes: {
+    "/forms/**": ["./src/app/(forms)/_styles/*.scss"],
+  },
   serverExternalPackages: [
     "nconf",
     "date-and-time",
@@ -263,3 +266,4 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 });
 
 module.exports = withBundleAnalyzer(nextConfig);
+

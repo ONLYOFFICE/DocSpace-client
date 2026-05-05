@@ -75,6 +75,16 @@
     height: auto;
   }
 
+  :global(.scroll-body) {
+    --scrollbar-padding-inline-end: 20px;
+    --scrollbar-padding-inline-end-mobile: 20px;
+  }
+
+  [data-testid="chat-input-send-button"] {
+    width: 32px;
+    height: 32px;
+  }
+
   [data-testid="chat-message-body"] {
     overflow: visible;
     height: auto;

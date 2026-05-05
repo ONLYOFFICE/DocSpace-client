@@ -31,6 +31,9 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Badge } from "@docspace/ui-kit/components/badge";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import { LANGUAGE } from "@docspace/ui-kit/constants";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
@@ -86,7 +89,10 @@ const KeyItem: React.FC<KeyItemProps> = ({
   }, [onRotate, keyData]);
 
   const isCurrentlyDeleting = isDeleting && deletingKeyId === keyData.id;
-  const createdDate = keyData.date ? new Date(keyData.date) : null;
+  const locale = getCookie(LANGUAGE) || "";
+  const createdDate = keyData.date
+    ? getCorrectDate(locale, keyData.date)
+    : null;
 
   return (
     <div className={styles.keyItem}>
@@ -136,7 +142,7 @@ const KeyItem: React.FC<KeyItemProps> = ({
             <Text fontSize="13px" fontWeight={600}>
               {t("Common:KeyCreatedOn")}:
             </Text>
-            <Text fontSize="13px">{createdDate.toLocaleDateString()}</Text>
+            <Text fontSize="13px">{createdDate}</Text>
           </div>
         )}
         <div className={styles.keyInfo}>

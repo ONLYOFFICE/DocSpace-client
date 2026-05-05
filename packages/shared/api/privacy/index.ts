@@ -66,7 +66,7 @@ export async function updateEncryptionKeys(data: TPrivacyRoomRequest) {
   const res = (await request({
     method: "put",
     url: "privacyroom/keys",
-    data,
+    data: { update: true, ...data },
   })) as TPrivacyRoomKeysResponse;
 
   return res;

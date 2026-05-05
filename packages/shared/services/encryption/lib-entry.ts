@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// IIFE bundle entry — exposes window.OnlyofficeCrypto for DocEditor.
+// IIFE bundle entry - exposes window.OnlyofficeCrypto for DocEditor.
 // Excludes secretStorage and any React/MobX/api dependencies.
 
 export type {

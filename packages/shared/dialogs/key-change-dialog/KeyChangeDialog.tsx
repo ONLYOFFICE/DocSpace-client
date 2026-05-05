@@ -118,13 +118,13 @@ const KeyChangeDialog: React.FC<KeyChangeDialogProps> = ({
                 {t("Common:KeyChangedKnownFingerprint")}
               </Text>
               <Text className={styles.fingerprintValue}>
-                {knownFp || "…"}
+                {knownFp || "..."}
               </Text>
               <Text className={styles.metaLine}>
                 {t("Common:KeyChangedFirstSeen", {
                   date: formatDate(knownFirstSeenAt),
                 })}
-                {" · "}
+                {" | "}
                 {t("Common:KeyChangedLastSeen", {
                   date: formatDate(knownLastSeenAt),
                 })}
@@ -135,7 +135,7 @@ const KeyChangeDialog: React.FC<KeyChangeDialogProps> = ({
                 {t("Common:KeyChangedNewFingerprint")}
               </Text>
               <Text className={styles.fingerprintValue}>
-                {newFp || "…"}
+                {newFp || "..."}
               </Text>
             </div>
           </div>

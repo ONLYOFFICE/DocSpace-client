@@ -62,7 +62,7 @@ const C = {
 
 // Helpers
 function freshNonce(): Uint8Array {
-  // FILE_NONCE_SIZE is 16 bytes — well within jsdom's 65536-byte limit
+  // FILE_NONCE_SIZE is 16 bytes - well within jsdom's 65536-byte limit
   return globalThis.crypto.getRandomValues(
     new Uint8Array(C.FILE_NONCE_SIZE),
   );
@@ -109,7 +109,7 @@ function fillRandom(bytes: Uint8Array): Uint8Array {
 // NOTE: encryptChunked accepts File | Blob | ArrayBuffer | Uint8Array.
 // jsdom's Blob.slice() does not implement .arrayBuffer(), so all tests use
 // Uint8Array directly to exercise that code path without hitting the jsdom
-// limitation. The "File input" test is an exception — it passes a tiny file
+// limitation. The "File input" test is an exception - it passes a tiny file
 // whose single slice never exceeds the Blob.slice() limitation because we
 // only test with small data sizes there.
 
@@ -187,7 +187,7 @@ describe("streamingEncryption", () => {
     it("throws InvalidFormatError when chunk size field is zero", () => {
       const nonce = freshNonce();
       const good = writeDSE3Header(1, nonce, null);
-      // chunkPlaintextSize is a uint32BE starting at offset 7 — zero it out
+      // chunkPlaintextSize is a uint32BE starting at offset 7 - zero it out
       good[7] = 0;
       good[8] = 0;
       good[9] = 0;
@@ -247,7 +247,7 @@ describe("streamingEncryption", () => {
 
     it("returns false for random bytes whose first byte is not 0x44", () => {
       const random = globalThis.crypto.getRandomValues(new Uint8Array(64));
-      // 0x44 = 'D' — force it away
+      // 0x44 = 'D' - force it away
       random[0] = 0x00;
       expect(isDSE3Format(random)).toBe(false);
     });

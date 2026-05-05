@@ -84,7 +84,7 @@ describe("DSE3 v2 tamper tests — AAD binding", () => {
     expect(header.chunkCount).toBe(2);
 
     const headerSize = getDSE3HeaderSize(header);
-    // Swap chunk 0 with chunk 1 — each chunk owns its IV and tag in place.
+    // Swap chunk 0 with chunk 1 - each chunk owns its IV and tag in place.
     const tampered = new Uint8Array(encBytes);
     const c0 = tampered.slice(headerSize, headerSize + CHUNK_TOTAL_SIZE);
     const c1 = tampered.slice(
@@ -124,7 +124,7 @@ describe("DSE3 v2 tamper tests — AAD binding", () => {
     const encBytes = await encryptN(dek, 2);
     const tampered = new Uint8Array(encBytes);
 
-    // chunkCount lives at offset 11..14 (big-endian u32) — see writeDSE3Header.
+    // chunkCount lives at offset 11..14 (big-endian u32) - see writeDSE3Header.
     // Bumping it to 3 makes the AAD claim 3 chunks while the encryption
     // used 2; lastFlag for chunk 1 would also flip, so the second chunk
     // must fail to decrypt.
@@ -146,7 +146,7 @@ describe("DSE3 v2 tamper tests — AAD binding", () => {
     const encBytes = await encryptN(dek, 1);
     const tampered = new Uint8Array(encBytes);
 
-    // fileNonce starts at offset 15 in the fixed header — flip a byte.
+    // fileNonce starts at offset 15 in the fixed header - flip a byte.
     tampered[15] ^= 0xff;
 
     const tamperedHeader = parseDSE3Header(tampered);
@@ -192,7 +192,7 @@ describe("DSE3 v2 tamper tests — AAD binding", () => {
   it("rejects tampered encrypted filename (header bit flip)", async () => {
     const dek = generateDEK();
     // Pass Uint8Array (not File) so we don't trip over jsdom's missing
-    // Blob.slice().arrayBuffer() — see streamingEncryption.test.ts header.
+    // Blob.slice().arrayBuffer() - see streamingEncryption.test.ts header.
     const { encryptedBlob } = await encryptFile(new Uint8Array([1, 2, 3]), {
       dek,
       fileName: "report.docx",

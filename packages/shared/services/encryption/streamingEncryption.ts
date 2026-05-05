@@ -368,7 +368,7 @@ export async function decryptChunked(
     if (i < header.chunkCount - 1) {
       ciphertextSize = header.chunkPlaintextSize + AES_GCM_TAG_SIZE;
     } else {
-      // Final chunk: remaining bytes minus expected tag — reject if there's
+      // Final chunk: remaining bytes minus expected tag - reject if there's
       // extra trailing data that would otherwise be silently ignored.
       ciphertextSize = bytes.byteLength - cursor;
       if (ciphertextSize < AES_GCM_TAG_SIZE) {

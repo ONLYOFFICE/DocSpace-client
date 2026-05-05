@@ -132,7 +132,7 @@ describe("fileKeys", () => {
       // header layout, but it's somewhere after offset 33 and before the
       // first chunk IV (which starts after the encryptedName).
       // Header layout: [33-byte fixed header][encryptedName(?)][chunks].
-      // We flip byte 35 — inside encryptedName for non-empty names.
+      // We flip byte 35 - inside encryptedName for non-empty names.
       encBytes[35] ^= 0x80;
       await expect(decryptFile(encBytes, dek)).rejects.toBeInstanceOf(
         DecryptionError,

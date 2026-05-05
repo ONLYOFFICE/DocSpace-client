@@ -142,7 +142,7 @@ export function uint64BE(value: number): Uint8Array {
   }
   const buf = new Uint8Array(8);
   const view = new DataView(buf.buffer);
-  // High 32 bits via float arithmetic — JS bitwise ops are int32-only.
+  // High 32 bits via float arithmetic - JS bitwise ops are int32-only.
   const high = Math.floor(value / 0x1_0000_0000);
   const low = value >>> 0;
   view.setUint32(0, high, false);

@@ -112,7 +112,7 @@ describe("hpke wrapDEK / unwrapDEK", () => {
       fileId: 42,
     });
 
-    // Bob expects Carol as the sender — must fail (HPKE-Auth check).
+    // Bob expects Carol as the sender - must fail (HPKE-Auth check).
     await expect(
       unwrapDEK({
         wrapped,
@@ -185,7 +185,7 @@ describe("hpke wrapDEK / unwrapDEK", () => {
       fileId: 42,
     });
 
-    // Bob's key, but we claim a different recipient UUID — AAD does not
+    // Bob's key, but we claim a different recipient UUID - AAD does not
     // match, AEAD fails.
     await expect(
       unwrapDEK({

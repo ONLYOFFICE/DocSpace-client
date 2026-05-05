@@ -66,7 +66,7 @@ describe("roomFileAccess wrap → unwrap → revoke roundtrip", () => {
 
     dek = generateDEK();
 
-    // Alice (sender) wraps the DEK for herself, Bob, and Carol — exactly
+    // Alice (sender) wraps the DEK for herself, Bob, and Carol - exactly
     // the layout the upload pipeline pushes via setFileEncryptionKeys.
     fileKeys = await wrapDekForRecipients({
       dek,

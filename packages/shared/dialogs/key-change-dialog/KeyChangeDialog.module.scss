@@ -37,9 +37,9 @@
 
 .warningBox {
   padding: 12px;
-  background-color: var(--color-warning-light, #fff8e6);
+  background-color: var(--toast-warning-bg);
   border-radius: 4px;
-  border-left: 3px solid var(--color-warning, #f5a623);
+  border-left: 3px solid var(--status-warning);
 }
 
 .fingerprintsTable {

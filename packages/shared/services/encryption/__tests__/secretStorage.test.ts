@@ -70,7 +70,7 @@ describe("SecretStorage cache", () => {
 
   it("getCached for a different userId returns null AND clears the cache", () => {
     SecretStorage.cacheUnlocked("alice", makeIdentity(1));
-    // Mallory asks for her own identity — must not get Alice's, AND the
+    // Mallory asks for her own identity - must not get Alice's, AND the
     // cached state must be wiped to prevent re-use after a logout/login.
     expect(SecretStorage.getCached("mallory")).toBeNull();
     expect(SecretStorage.getCached("alice")).toBeNull();
@@ -95,7 +95,7 @@ describe("SecretStorage cache", () => {
     SecretStorage.cacheUnlocked("bob", makeIdentity(2));
     // Bob's identity must be live and Alice's must be gone. We check Bob
     // first because getCached("alice") has a side-effect (clearState on
-    // mismatch) that would also wipe Bob's entry — the cache is single-
+    // mismatch) that would also wipe Bob's entry - the cache is single-
     // slot, so reading the wrong user is destructive.
     expect(SecretStorage.getCached("bob")).not.toBeNull();
     expect(SecretStorage.getCached("alice")).toBeNull();
@@ -112,7 +112,7 @@ describe("SecretStorage cache", () => {
   it("lock() wipes both buffers (zeroBuffer)", () => {
     const kp = makeIdentity(1);
     // Capture the *exact* arrays held by the cache so we can inspect them
-    // after lock(). cacheUnlocked copies into fresh Uint8Arrays — pull them
+    // after lock(). cacheUnlocked copies into fresh Uint8Arrays - pull them
     // back via getCached before locking.
     SecretStorage.cacheUnlocked("alice", kp);
     const cached = SecretStorage.getCached("alice")!;
@@ -168,7 +168,7 @@ describe("SecretStorage cache", () => {
       vi.restoreAllMocks();
     }
 
-    // Now stop calling for longer than the idle threshold — must expire.
+    // Now stop calling for longer than the idle threshold - must expire.
     vi.spyOn(Date, "now").mockReturnValue(
       t0 + 4 * halfIdle + SESSION_CACHE_DURATION_MS + 1,
     );

@@ -266,7 +266,7 @@ export function resetTofuStores(): void {
   instances.clear();
 }
 
-// Mismatch resolver — lives in the React context (shows a modal); helpers
+// Mismatch resolver - lives in the React context (shows a modal); helpers
 // without React access call the registered handler. No handler ⇒ refuse.
 
 export type KeyMismatchInfo = {

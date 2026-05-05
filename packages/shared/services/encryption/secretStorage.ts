@@ -130,7 +130,7 @@ export async function requireUnlock(
     return null;
   }
 
-  // Reason is always "no-cache" in practice — getCached() above wipes
+  // Reason is always "no-cache" in practice - getCached() above wipes
   // _state on expiry/mismatch before this runs.
   const reason: "no-cache" | "expired" | "user-mismatch" = (() => {
     if (!_state) return "no-cache";

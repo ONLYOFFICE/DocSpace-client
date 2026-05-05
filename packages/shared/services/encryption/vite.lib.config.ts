@@ -27,11 +27,11 @@
 // Vite library-mode build config for the standalone onlyoffice-crypto bundle.
 //
 // Outputs:
-//   dist/crypto/onlyoffice-crypto.js      — ES module
-//   dist/crypto/onlyoffice-crypto.umd.js  — UMD (global: OnlyofficeCrypto)
+//   dist/crypto/onlyoffice-crypto.js      - ES module
+//   dist/crypto/onlyoffice-crypto.umd.js  - UMD (global: OnlyofficeCrypto)
 //
 // All dependencies are bundled; the library has no runtime npm requirements.
-// Web Crypto API is a browser/Node built-in — no polyfill is included.
+// Web Crypto API is a browser/Node built-in - no polyfill is included.
 
 import { resolve } from "path";
 import { defineConfig } from "vite";
@@ -57,7 +57,7 @@ export default defineConfig({
     rollupOptions: {
       external: [],
       output: {
-        // Single IIFE file — <script src="onlyoffice-crypto.iife.js">
+        // Single IIFE file - <script src="onlyoffice-crypto.iife.js">
         // All exports available via window.OnlyofficeCrypto
         inlineDynamicImports: true,
       },

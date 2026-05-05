@@ -75,7 +75,7 @@ export function rememberEncryptedFilename(
   try {
     s.setItem(`${KEY_PREFIX}${fileId}`, originalName);
   } catch {
-    // storage full / disabled — degrade silently
+    // storage full / disabled - degrade silently
   }
   notify(fileId);
 }

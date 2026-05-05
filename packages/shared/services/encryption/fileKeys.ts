@@ -52,7 +52,7 @@ export function generateDEK(): Uint8Array {
 
 export type EncryptFileOptions = {
   dek?: Uint8Array;
-  /** Encrypted into the DSE3 header — server never sees the real name. */
+  /** Encrypted into the DSE3 header - server never sees the real name. */
   fileName?: string;
   onProgress?: ProgressCallback;
 };

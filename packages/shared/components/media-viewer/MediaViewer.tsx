@@ -42,9 +42,10 @@ import { isNullOrUndefined } from "../../utils/typeGuards";
 import { ViewerWrapper } from "./sub-components/ViewerWrapper";
 
 import { getFileEncryptionAccess } from "../../api/files";
-import { decryptFile } from "../../services/encryption/encryptionService";
-import { unwrapDEK } from "../../services/encryption/keyManagement";
-import { requestUnlock } from "../../services/encryption/secretStorage";
+import { decryptFile } from "../../services/encryption/fileKeys";
+import { unwrapDekForCurrentUser } from "../../services/encryption/roomFileAccess";
+import { requireUnlock } from "../../services/encryption/secretStorage";
+import { getCachedEncryptedFilename } from "../../services/encryption/filenameCache";
 
 import { mapSupplied, mediaTypes } from "./MediaViewer.constants";
 import type { MediaViewerProps } from "./MediaViewer.types";
@@ -437,16 +438,12 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
           throw new Error("User ID not available for decryption");
         }
         const encryptionInfo = await getFileEncryptionAccess(fileId);
-        const userFileKey = encryptionInfo.fileKeys?.find(
-          (k) => k.userId === userId || k.userId === String(userId),
-        );
-
-        if (!userFileKey) {
+        if (!encryptionInfo?.fileKeys) {
           throw new Error("You don't have access to decrypt this file");
         }
 
-        const privateKey = await requestUnlock();
-        if (!privateKey) {
+        const identity = await requireUnlock(String(userId));
+        if (!identity) {
           throw new Error("Encryption key not available");
         }
 
@@ -460,15 +457,25 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
 
         const encryptedData = await response.arrayBuffer();
 
-        // Unwrap the file DEK using our private key
-        const dek = await unwrapDEK(userFileKey.privateKeyEnc, privateKey);
+        const dek = await unwrapDekForCurrentUser({
+          fileKeys: encryptionInfo.fileKeys,
+          roomMemberKeys: encryptionInfo.userKeys ?? [],
+          currentUserId: String(userId),
+          currentIdentity: identity,
+          fileId,
+        });
 
         // Decrypt file (DSE3 format is self-describing)
         const { data: decryptedBlob, fileName: decryptedName } =
-          await decryptFile(encryptedData, dek);
+          await decryptFile(encryptedData, dek, {
+            cacheFilenameForFileId: fileId,
+          });
 
         // Use decrypted name from DSE3 header for extension detection
         const displayName = decryptedName || title;
+        if (decryptedName) {
+          setTitle(decryptedName);
+        }
         const ext = getFileExtension(displayName).toLowerCase();
         const mimeTypes: Record<string, string> = {
           jpg: "image/jpeg",
@@ -548,7 +555,12 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       setBufferSelection?.(foundFile);
     }
 
-    setTitle(currentTitle);
+    if (isEncrypted && fileId) {
+      const cached = getCachedEncryptedFilename(fileId);
+      setTitle(cached || currentTitle);
+    } else {
+      setTitle(currentTitle);
+    }
   }, [
     src,
     files,

@@ -167,9 +167,9 @@ import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 import { XlsxUpdateService } from "@docspace/shared/services/xlsx-update.service";
 import { showCreatedPDFFormDialog } from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
 import { getFileEncryptionAccess } from "@docspace/shared/api/files";
-import { requestUnlock } from "@docspace/shared/services/encryption/secretStorage";
-import { decryptFile } from "@docspace/shared/services/encryption/encryptionService";
-import { unwrapDEK } from "@docspace/shared/services/encryption/keyManagement";
+import { requireUnlock } from "@docspace/shared/services/encryption/secretStorage";
+import { decryptFile } from "@docspace/shared/services/encryption/fileKeys";
+import { unwrapDekForCurrentUser } from "@docspace/shared/services/encryption/roomFileAccess";
 import {
   generateEditSessionId,
   storeEditBuffer,
@@ -768,17 +768,16 @@ class ContextOptionsStore {
         return;
       }
 
-      const myFileKey = encryptionInfo.fileKeys.find(
-        (k) => k.userId === userId || k.userId === String(userId),
+      const hasOwnEntry = encryptionInfo.fileKeys.some(
+        (k) => String(k.userId) === String(userId),
       );
-
-      if (!myFileKey) {
+      if (!hasOwnEntry) {
         toastr.error(t("Common:EncryptionDecryptAccessDenied"));
         return;
       }
 
-      const privateKey = await requestUnlock();
-      if (!privateKey) {
+      const identity = await requireUnlock(String(userId));
+      if (!identity) {
         toastr.error(t("Common:EncryptionKeyNotAvailable"));
         return;
       }
@@ -795,16 +794,24 @@ class ContextOptionsStore {
 
       const encryptedData = await response.arrayBuffer();
 
-      // Unwrap DEK and decrypt the self-describing DSE3 blob
-      const dek = await unwrapDEK(myFileKey.privateKeyEnc, privateKey);
+      const dek = await unwrapDekForCurrentUser({
+        fileKeys: encryptionInfo.fileKeys,
+        roomMemberKeys: encryptionInfo.userKeys ?? [],
+        currentUserId: String(userId),
+        currentIdentity: identity,
+        fileId: item.id,
+      });
       const { data: decryptedBlob, fileName: decryptedName } =
-        await decryptFile(encryptedData, dek);
+        await decryptFile(encryptedData, dek, {
+          cacheFilenameForFileId: item.id,
+        });
 
       const buffer = await decryptedBlob.arrayBuffer();
       const sessionId = generateEditSessionId(item.id);
-
-      // Use decrypted name from DSE3 header (server only has obfuscated UUID name)
       const realFileName = decryptedName || item.title;
+      const myFileKey = encryptionInfo.fileKeys.find(
+        (k) => String(k.userId) === String(userId),
+      );
 
       await storeEditBuffer({
         id: sessionId,
@@ -813,7 +820,7 @@ class ContextOptionsStore {
         fileName: realFileName,
         fileType: item.contentType || "application/octet-stream",
         userPublicKey: encryptionKeys[0].publicKey,
-        wrappedDEK: myFileKey.privateKeyEnc,
+        wrappedDEK: myFileKey?.privateKeyEnc,
         userId: String(userId),
         createdAt: Date.now(),
       });

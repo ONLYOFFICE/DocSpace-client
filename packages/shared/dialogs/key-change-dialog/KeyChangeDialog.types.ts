@@ -24,15 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export * from "./types";
-export * from "./errors";
-export * from "./utils";
-export * from "./identity";
-export * from "./hpke";
-export * from "./fileKeys";
-export * from "./streamingEncryption";
-export * from "./recovery";
-export * from "./secretStorage";
-export * from "./roomFileAccess";
-export * from "./tofuStore";
-export * from "./filenameCache";
+export type KeyChangeDialogProps = {
+  visible: boolean;
+  /** Display name to show; falls back to userId if missing. */
+  displayName?: string;
+  userId: string;
+  /** Base64 raw X25519 public key currently stored in TOFU. */
+  knownPublicKey: string;
+  /** Base64 raw X25519 public key returned by the server right now. */
+  newPublicKey: string;
+  knownFirstSeenAt: number;
+  knownLastSeenAt: number;
+  onAccept: () => void;
+  onRefuse: () => void;
+};

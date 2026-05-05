@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,24 +24,29 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+// Decrypt + zip helpers. No UI / API calls beyond the actual download —
+// callers pass in the unlocked identity and the file's encryption access info.
+
 import { Zip, ZipPassThrough } from "fflate";
 
-import { decryptFile } from "@docspace/shared/services/encryption/encryptionService";
-import { SecretStorageService } from "@docspace/shared/services/encryption/secretStorage";
-import {
-  decryptPrivateKey,
-  unwrapDEK,
-} from "@docspace/shared/services/encryption/keyManagement";
-import type { SerializedKeyPair } from "@docspace/shared/services/encryption/types";
+import { decryptFile } from "@docspace/shared/services/encryption/fileKeys";
+import { unwrapDekForCurrentUser } from "@docspace/shared/services/encryption/roomFileAccess";
+import type {
+  IdentityKeyPair,
+  ServerAccessKeyDto,
+} from "@docspace/shared/services/encryption/types";
+import type { RoomMemberPublicKey } from "@docspace/shared/services/encryption/roomFileAccess";
 
 export type DecryptConfig = {
   encryptedData: ArrayBuffer;
-  wrappedDEK: string; // base64 wrapped DEK from server's files_file_keys
+  fileId: number;
+  fileKeys: ServerAccessKeyDto[];
+  roomMemberKeys: RoomMemberPublicKey[];
+  userId: string;
+  identity: IdentityKeyPair;
+  /** Fallback when the DSE3 header has no encrypted name. */
   originalFileName: string;
   originalFileType: string;
-  userKeys: SerializedKeyPair;
-  userId: string;
-  onPassphraseRequired: () => Promise<string | null>;
   onProgress?: (progress: number) => void;
 };
 
@@ -54,109 +59,46 @@ export type DecryptResult = {
 export async function decryptDownloadedFile(
   config: DecryptConfig,
 ): Promise<DecryptResult> {
-  const {
-    encryptedData,
-    wrappedDEK,
-    originalFileName,
-    originalFileType,
-    userKeys,
-    onPassphraseRequired,
-    onProgress,
-  } = config;
-
-  let privateKey = await SecretStorageService.getCachedKey();
-
-  if (!privateKey) {
-    const passphrase = await onPassphraseRequired();
-
-    if (!passphrase) {
-      return {
-        success: false,
-        error: "Passphrase required for decryption",
-      };
-    }
-
-    if (passphrase === "__KEY_CACHED__") {
-      privateKey = await SecretStorageService.getCachedKey();
-      if (!privateKey) {
-        return {
-          success: false,
-          error: "Failed to retrieve cached encryption key",
-        };
-      }
-    } else {
-      try {
-        privateKey = await decryptPrivateKey(
-          userKeys.privateKeyEnc,
-          passphrase,
-        );
-
-        await SecretStorageService.cacheDecryptedKey(privateKey);
-      } catch {
-        return {
-          success: false,
-          error: "Invalid passphrase",
-        };
-      }
-    }
-  }
-
   try {
-    // Unwrap the file DEK and decrypt the self-describing DSE3 blob
-    const dek = await unwrapDEK(wrappedDEK, privateKey);
-    const { data: decryptedBlob, fileName: decryptedName } = await decryptFile(
-      encryptedData,
-      dek,
-      { onProgress },
-    );
-
-    // Use decrypted name from DSE3 header if available, fall back to server name
-    const finalName = decryptedName || originalFileName;
-    const decryptedFile = new File([decryptedBlob], finalName, {
-      type: originalFileType || "application/octet-stream",
+    const dek = await unwrapDekForCurrentUser({
+      fileKeys: config.fileKeys,
+      roomMemberKeys: config.roomMemberKeys,
+      currentUserId: config.userId,
+      currentIdentity: config.identity,
+      fileId: config.fileId,
     });
 
-    return {
-      success: true,
-      file: decryptedFile,
-    };
-  } catch (decryptError) {
+    const { data: decryptedBlob, fileName: decryptedName } = await decryptFile(
+      config.encryptedData,
+      dek,
+      { onProgress: config.onProgress, cacheFilenameForFileId: config.fileId },
+    );
+
+    const finalName = decryptedName || config.originalFileName;
+    const decryptedFile = new File([decryptedBlob], finalName, {
+      type: config.originalFileType || "application/octet-stream",
+    });
+
+    return { success: true, file: decryptedFile };
+  } catch (error) {
     return {
       success: false,
       error:
-        decryptError instanceof Error
-          ? decryptError.message
-          : "Decryption failed",
+        error instanceof Error ? error.message : "Decryption failed",
     };
   }
 }
 
-export async function createDecryptedPreviewUrl(
-  config: DecryptConfig,
-): Promise<string | null> {
-  const result = await decryptDownloadedFile(config);
-
-  if (!result.success || !result.file) {
-    return null;
-  }
-
-  return URL.createObjectURL(result.file);
-}
+export type DownloadAndDecryptConfig = Omit<DecryptConfig, "encryptedData"> & {
+  downloadUrl: string;
+  onDownloadProgress?: (progress: number) => void;
+};
 
 export async function downloadAndDecryptFile(
-  downloadUrl: string,
-  wrappedDEK: string,
-  originalFileName: string,
-  originalFileType: string,
-  userKeys: SerializedKeyPair,
-  userId: string,
-  onPassphraseRequired: () => Promise<string | null>,
-  onProgress?: (progress: number) => void,
-  onDecryptProgress?: (progress: number) => void,
+  config: DownloadAndDecryptConfig,
 ): Promise<DecryptResult> {
   try {
-    const response = await fetch(downloadUrl);
-
+    const response = await fetch(config.downloadUrl);
     if (!response.ok) {
       return {
         success: false,
@@ -166,28 +108,20 @@ export async function downloadAndDecryptFile(
 
     const contentLength = response.headers.get("content-length");
     const total = contentLength ? Number.parseInt(contentLength, 10) : 0;
-
     const reader = response.body?.getReader();
     if (!reader) {
-      return {
-        success: false,
-        error: "Failed to read response stream",
-      };
+      return { success: false, error: "Failed to read response stream" };
     }
 
     const chunks: Uint8Array[] = [];
     let loaded = 0;
-
     while (true) {
       const { done, value } = await reader.read();
-
       if (done) break;
-
       chunks.push(value);
       loaded += value.length;
-
-      if (total && onProgress) {
-        onProgress(loaded / total);
+      if (total && config.onDownloadProgress) {
+        config.onDownloadProgress(loaded / total);
       }
     }
 
@@ -200,21 +134,20 @@ export async function downloadAndDecryptFile(
 
     return await decryptDownloadedFile({
       encryptedData: encryptedData.buffer,
-      wrappedDEK,
-      originalFileName,
-      originalFileType,
-      userKeys,
-      userId,
-      onPassphraseRequired,
-      onProgress: onDecryptProgress,
+      fileId: config.fileId,
+      fileKeys: config.fileKeys,
+      roomMemberKeys: config.roomMemberKeys,
+      userId: config.userId,
+      identity: config.identity,
+      originalFileName: config.originalFileName,
+      originalFileType: config.originalFileType,
+      onProgress: config.onProgress,
     });
-  } catch (downloadError) {
+  } catch (error) {
     return {
       success: false,
       error:
-        downloadError instanceof Error
-          ? downloadError.message
-          : "Download failed",
+        error instanceof Error ? error.message : "Download failed",
     };
   }
 }
@@ -228,11 +161,9 @@ export function triggerFileDownload(
   a.href = url;
   a.download = fileName || (file instanceof File ? file.name : "download");
   a.style.display = "none";
-
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
-
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
@@ -244,42 +175,23 @@ export type BatchDecryptResult = {
 };
 
 export async function downloadAndDecryptFileToBuffer(
-  downloadUrl: string,
-  wrappedDEK: string,
-  originalFileName: string,
-  originalFileType: string,
-  userKeys: SerializedKeyPair,
-  userId: string,
-  onPassphraseRequired: () => Promise<string | null>,
-  onDownloadProgress?: (progress: number) => void,
-  onDecryptProgress?: (progress: number) => void,
+  config: DownloadAndDecryptConfig,
 ): Promise<BatchDecryptResult> {
-  const decryptResult = await downloadAndDecryptFile(
-    downloadUrl,
-    wrappedDEK,
-    originalFileName,
-    originalFileType,
-    userKeys,
-    userId,
-    onPassphraseRequired,
-    onDownloadProgress,
-    onDecryptProgress,
-  );
+  const decryptResult = await downloadAndDecryptFile(config);
 
   if (!decryptResult.success || !decryptResult.file) {
     return {
       success: false,
-      fileName: originalFileName,
+      fileName: config.originalFileName,
       error: decryptResult.error,
     };
   }
 
   const arrayBuffer = await decryptResult.file.arrayBuffer();
-
   return {
     success: true,
     data: new Uint8Array(arrayBuffer),
-    fileName: originalFileName,
+    fileName: decryptResult.file.name,
   };
 }
 
@@ -300,7 +212,6 @@ export function createZipFromBuffers(
     zip.add(entry);
     entry.push(file.data, true);
   }
-
   zip.end();
 
   const result = new Uint8Array(totalSize);
@@ -309,7 +220,6 @@ export function createZipFromBuffers(
     result.set(chunk, offset);
     offset += chunk.length;
   }
-
   return result;
 }
 
@@ -334,24 +244,18 @@ export function deduplicateFileNames(names: string[]): string[] {
       }
     }
   }
-
   return result;
 }
 
+/** Returns true if `userId` has an entry in the file's `fileKeys`. */
 export function canUserDecrypt(
-  fileKeys: Array<{ userId: string }> | null | undefined,
+  fileKeys:
+    | Array<{ userId: string }>
+    | null
+    | undefined,
   userId: string | null | undefined,
 ): boolean {
-  if (!fileKeys || fileKeys.length === 0) return true;
+  if (!fileKeys || fileKeys.length === 0) return false;
   if (!userId) return false;
-
-  return fileKeys.some((key) => key.userId === userId);
-}
-
-export function getUserWrappedDEK(
-  fileKeys: Array<{ userId: string; privateKeyEnc: string }>,
-  userId: string,
-): string | null {
-  const userKey = fileKeys.find((key) => key.userId === userId);
-  return userKey?.privateKeyEnc ?? null;
+  return fileKeys.some((key) => String(key.userId) === String(userId));
 }

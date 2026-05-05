@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,27 +24,32 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+// Client-side prep for encrypted uploads. Caller wraps the returned DEK for
+// recipients via wrapDekForRecipients after the server assigns a fileId.
+
 import { RoomsType } from "@docspace/shared/enums";
-import { encryptFile } from "@docspace/shared/services/encryption/encryptionService";
+import { encryptFile } from "@docspace/shared/services/encryption/fileKeys";
 import { estimateEncryptedSize } from "@docspace/shared/services/encryption/streamingEncryption";
+import { getFileExtension } from "@docspace/shared/utils/common";
 
 export type UploadConfig = {
   file: File;
   folderId: number;
   roomType: RoomsType;
   isPrivate?: boolean;
-  userPublicKey: string | null;
-  userId: string | null;
   onProgress?: (progress: number) => void;
 };
 
 export type PreparedUpload = {
   data: Blob;
   encrypted: boolean;
-  dek: Uint8Array | null; // raw DEK — caller wraps for recipients after upload
-  uploadFileName: string; // obfuscated name for server (UUID.ext) or real name if not encrypted
+  /** Raw 32-byte AES-256 DEK; null if not encrypted. Caller wipes after wrap. */
+  dek: Uint8Array | null;
+  /** What the server stores; obfuscated `${uuid}${.ext}` for encrypted uploads. */
+  uploadFileName: string;
   originalFileType: string;
   originalFileSize: number;
+  originalFileName: string;
 };
 
 const ENCRYPTABLE_ROOM_TYPES: RoomsType[] = [RoomsType.CustomRoom];
@@ -53,37 +58,25 @@ export function isEncryptableRoomType(roomType: RoomsType): boolean {
   return ENCRYPTABLE_ROOM_TYPES.includes(roomType);
 }
 
+/** Caller is responsible for the user-key check. */
 export function shouldEncryptUpload(
   roomType: RoomsType,
-  userPublicKey: string | null | undefined,
-  userId: string | null | undefined,
   isPrivate: boolean = false,
 ): boolean {
-  return (
-    isEncryptableRoomType(roomType) && isPrivate && !!userPublicKey && !!userId
-  );
+  return isEncryptableRoomType(roomType) && isPrivate;
+}
+
+function newUuid(): string {
+  return globalThis.crypto.randomUUID();
 }
 
 export async function prepareEncryptedUpload(
   config: UploadConfig,
 ): Promise<PreparedUpload> {
-  const {
-    file,
-    roomType,
-    isPrivate = false,
-    userPublicKey,
-    userId,
-    onProgress,
-  } = config;
+  const { file, roomType, isPrivate = false, onProgress } = config;
+  const shouldEncrypt = shouldEncryptUpload(roomType, isPrivate);
 
-  const shouldEncrypt = shouldEncryptUpload(
-    roomType,
-    userPublicKey,
-    userId,
-    isPrivate,
-  );
-
-  if (!shouldEncrypt || !userPublicKey || !userId) {
+  if (!shouldEncrypt) {
     return {
       data: file,
       encrypted: false,
@@ -91,24 +84,27 @@ export async function prepareEncryptedUpload(
       uploadFileName: file.name,
       originalFileType: file.type || "application/octet-stream",
       originalFileSize: file.size,
+      originalFileName: file.name,
     };
   }
 
-  // Encrypt file — real name is also stored encrypted inside DSE3 header.
-  // Server receives the real name for display in file list (name obfuscation
-  // will be added when batch header decryption API is available).
+  // Server name is `${uuid}${.ext}`: random uuid hides the user-chosen
+  // name; the extension stays so editor / preview routing keeps working.
   const { encryptedBlob, dek } = await encryptFile(file, {
     fileName: file.name,
     onProgress,
   });
 
+  const ext = getFileExtension(file.name);
+
   return {
     data: encryptedBlob,
     encrypted: true,
     dek,
-    uploadFileName: file.name,
+    uploadFileName: `${newUuid()}${ext}`,
     originalFileType: file.type || "application/octet-stream",
     originalFileSize: file.size,
+    originalFileName: file.name,
   };
 }
 
@@ -117,30 +113,23 @@ export function createEncryptedFormData(
   additionalFields: Record<string, string> = {},
 ): FormData {
   const formData = new FormData();
-
   formData.append("file", preparedUpload.data, preparedUpload.uploadFileName);
-
   if (preparedUpload.encrypted) {
     formData.append("encrypted", "true");
   }
-
   for (const [key, value] of Object.entries(additionalFields)) {
     formData.append(key, value);
   }
-
   return formData;
 }
 
 export async function prepareMultipleEncryptedUploads(
   files: File[],
   roomType: RoomsType,
-  userPublicKey: string | null,
-  userId: string | null,
   isPrivate: boolean = false,
   onFileProgress?: (fileIndex: number, progress: number) => void,
 ): Promise<PreparedUpload[]> {
   const results: PreparedUpload[] = [];
-
   for (let i = 0; i < files.length; i++) {
     const file = files[i];
     const prepared = await prepareEncryptedUpload({
@@ -148,18 +137,16 @@ export async function prepareMultipleEncryptedUploads(
       folderId: 0,
       roomType,
       isPrivate,
-      userPublicKey,
-      userId,
       onProgress: (progress) => onFileProgress?.(i, progress),
     });
     results.push(prepared);
   }
-
   return results;
 }
 
 export function estimateEncryptedUploadSize(files: File[]): number {
-  return files.reduce((total, file) => {
-    return total + estimateEncryptedSize(file.size);
-  }, 0);
+  return files.reduce(
+    (total, file) => total + estimateEncryptedSize(file.size),
+    0,
+  );
 }

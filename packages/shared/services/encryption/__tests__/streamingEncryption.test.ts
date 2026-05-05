@@ -35,16 +35,32 @@ import {
   getDSE3HeaderSize,
   estimateEncryptedSize,
 } from "../streamingEncryption";
-import { ENCRYPTION_CONSTANTS } from "../types";
-import { InvalidFormatError, DecryptionError } from "../errors";
-import { generateDEK } from "../keyManagement";
+import {
+  AES_GCM_IV_SIZE,
+  AES_GCM_TAG_SIZE,
+  DSE3_CHUNK_PLAINTEXT_SIZE,
+  DSE3_FILE_NONCE_SIZE,
+  DSE3_FIXED_HEADER_SIZE,
+  VERSION_DSE3_FILE,
+} from "../types";
+import {
+  DecryptionError,
+  InvalidFormatError,
+  UnsupportedVersionError,
+} from "../errors";
+import { generateDEK } from "../fileKeys";
 
-const C = ENCRYPTION_CONSTANTS;
+// Convenience aliases preserved from previous shape.
+const C = {
+  DSE3_HEADER_VERSION: VERSION_DSE3_FILE,
+  CHUNK_PLAINTEXT_SIZE: DSE3_CHUNK_PLAINTEXT_SIZE,
+  FILE_NONCE_SIZE: DSE3_FILE_NONCE_SIZE,
+  DSE3_FIXED_HEADER_SIZE,
+  AES_GCM_IV_SIZE,
+  AES_GCM_TAG_SIZE,
+};
 
-// ---------------------------------------------------------------------------
 // Helpers
-// ---------------------------------------------------------------------------
-
 function freshNonce(): Uint8Array {
   // FILE_NONCE_SIZE is 16 bytes — well within jsdom's 65536-byte limit
   return globalThis.crypto.getRandomValues(
@@ -97,10 +113,7 @@ function fillRandom(bytes: Uint8Array): Uint8Array {
 // whose single slice never exceeds the Blob.slice() limitation because we
 // only test with small data sizes there.
 
-// ---------------------------------------------------------------------------
 // Tests
-// ---------------------------------------------------------------------------
-
 describe("streamingEncryption", () => {
   // -------------------------------------------------------------------------
   // writeDSE3Header / parseDSE3Header round-trip
@@ -157,14 +170,13 @@ describe("streamingEncryption", () => {
       expect(() => parseDSE3Header(good)).toThrow(/magic/);
     });
 
-    it("throws InvalidFormatError when version byte is unsupported", () => {
+    it("throws UnsupportedVersionError when version byte is unsupported", () => {
       const nonce = freshNonce();
       const good = writeDSE3Header(1, nonce, null);
       // Version byte is at index 4
       good[4] = 0x99;
 
-      expect(() => parseDSE3Header(good)).toThrow(InvalidFormatError);
-      expect(() => parseDSE3Header(good)).toThrow(/version/);
+      expect(() => parseDSE3Header(good)).toThrow(UnsupportedVersionError);
     });
 
     it("throws InvalidFormatError when the data is too short for the fixed header", () => {
@@ -182,7 +194,18 @@ describe("streamingEncryption", () => {
       good[10] = 0;
 
       expect(() => parseDSE3Header(good)).toThrow(InvalidFormatError);
-      expect(() => parseDSE3Header(good)).toThrow(/chunk size/);
+    });
+
+    it("throws InvalidFormatError when chunk size exceeds DSE3_MAX_CHUNK_SIZE", () => {
+      const nonce = freshNonce();
+      const good = writeDSE3Header(1, nonce, null);
+      // Set chunkPlaintextSize to 0xFFFFFFFF (4 GiB) → exceeds 16 MiB cap.
+      good[7] = 0xff;
+      good[8] = 0xff;
+      good[9] = 0xff;
+      good[10] = 0xff;
+
+      expect(() => parseDSE3Header(good)).toThrow(InvalidFormatError);
     });
 
     it("getDSE3HeaderSize returns DSE3_FIXED_HEADER_SIZE when there is no encrypted name", () => {

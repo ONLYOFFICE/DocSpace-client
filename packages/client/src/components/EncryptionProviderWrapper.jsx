@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,8 +27,24 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { EncryptionProvider } from "@docspace/shared/context/EncryptionContext";
+import {
+  EncryptionProvider,
+  useEncryption,
+} from "@docspace/shared/context/EncryptionContext";
 import { PassphraseDialog } from "@docspace/shared/dialogs/passphrase-dialog";
+import { KeyChangeDialog } from "@docspace/shared/dialogs/key-change-dialog";
+
+const FilenameRecoveryEffect = inject(({ filesStore }) => ({
+  recover: filesStore?.recoverEncryptedFilenamesForCurrentView,
+}))(
+  observer(({ recover }) => {
+    const { isUnlocked } = useEncryption();
+    React.useEffect(() => {
+      if (isUnlocked && recover) recover();
+    }, [isUnlocked, recover]);
+    return null;
+  }),
+);
 
 const EncryptionProviderWrapper = ({ userKeys, children }) => {
   const PassphraseDialogAdapter = React.useCallback(
@@ -55,23 +71,29 @@ const EncryptionProviderWrapper = ({ userKeys, children }) => {
     <EncryptionProvider
       userKeys={userKeys}
       PassphraseDialog={PassphraseDialogAdapter}
+      KeyChangeDialog={KeyChangeDialog}
     >
+      <FilenameRecoveryEffect />
       {children}
     </EncryptionProvider>
   );
 };
 
+// userId comes from userStore.user — encryptionKeys[].userId is sometimes
+// blank in the server response.
 export default inject(({ userStore }) => {
   const keys = userStore?.encryptionKeys;
   const firstKey = keys && keys.length > 0 ? keys[0] : null;
+  const ownerId = userStore?.user?.id;
 
-  const userKeys = firstKey
-    ? {
-        publicKey: firstKey.publicKey,
-        privateKeyEnc: firstKey.privateKeyEnc,
-        userId: firstKey.userId,
-      }
-    : null;
+  const userKeys =
+    firstKey && ownerId
+      ? {
+          publicKey: firstKey.publicKey,
+          privateKeyEnc: firstKey.privateKeyEnc,
+          userId: String(ownerId),
+        }
+      : null;
 
   return {
     userKeys,

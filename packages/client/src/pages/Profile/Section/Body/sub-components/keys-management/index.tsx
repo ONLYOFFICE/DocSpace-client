@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,122 +24,81 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useCallback, useRef } from "react";
+import { useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
+import { useEncryption } from "@docspace/shared/context/EncryptionContext";
 import {
-  generateKeyPair,
-  serializeKeyPair,
-  exportKeyToFile,
-  importKeyFromFile,
+  exportIdentityToBlob,
   getPublicKeyFingerprint,
-  reEncryptPrivateKey,
-} from "@docspace/shared/services/encryption/keyManagement";
-import { SecretStorageService } from "@docspace/shared/services/encryption/secretStorage";
-import type { SerializedKeyPair } from "@docspace/shared/services/encryption/types";
+} from "@docspace/shared/services/encryption/identity";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
-import {
-  setEncryptionKeys,
-  updateEncryptionKeys,
-  deleteEncryptionKey,
-} from "@docspace/shared/api/privacy";
+import { getEncryptionKeys } from "@docspace/shared/api/privacy";
 
 import { KeysList } from "./KeysList";
-import { PassphraseModal } from "./PassphraseModal";
-import { ConfirmationModal } from "./ConfirmationModal";
-import { KeyRotationDialog } from "./KeyRotationDialog";
+import { useGenerateKeyFlow } from "./flows/useGenerateKeyFlow";
+import { useImportKeyFlow } from "./flows/useImportKeyFlow";
+import { useRecoverKeyFlow } from "./flows/useRecoverKeyFlow";
+import { useDeleteKeyFlow } from "./flows/useDeleteKeyFlow";
+import { useRotatePassphraseFlow } from "./flows/useRotatePassphraseFlow";
 
 import styles from "./keys-management.module.scss";
 
 type KeysManagementProps = {
   encryptionKeys?: TEncryptionKeyPair[] | null;
   setUserEncryptionKeys?: (keys: TEncryptionKeyPair[]) => void;
+  userId?: string;
 };
 
 const KeysManagement = ({
   encryptionKeys,
   setUserEncryptionKeys,
+  userId,
 }: KeysManagementProps) => {
   const { t } = useTranslation(["Common"]);
+  const { isUnlocked, lock } = useEncryption();
 
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const hasKeys = !!encryptionKeys && encryptionKeys.length > 0;
 
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [isImporting, setIsImporting] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [deletingKeyId, setDeletingKeyId] = useState<string | null>(null);
-  const [showPassphraseModal, setShowPassphraseModal] = useState(false);
-  const [showConfirmReplace, setShowConfirmReplace] = useState(false);
-  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
-  const [pendingAction, setPendingAction] = useState<
-    "generate" | "import" | null
-  >(null);
-  const [pendingDeleteKeyId, setPendingDeleteKeyId] = useState<string | null>(
-    null,
-  );
-  const [importedKeyData, setImportedKeyData] =
-    useState<SerializedKeyPair | null>(null);
+  // Re-fetch after each POST/PUT so we have server-assigned key ids.
+  const refreshKeysFromServer = useCallback(async () => {
+    try {
+      const fresh = await getEncryptionKeys();
+      setUserEncryptionKeys?.(fresh ?? []);
+    } catch (error) {
+      console.error("Failed to refresh keys:", error);
+    }
+  }, [setUserEncryptionKeys]);
 
-  const [showRotationDialog, setShowRotationDialog] = useState(false);
-  const [isRotating, setIsRotating] = useState(false);
-  const [rotationError, setRotationError] = useState<string | null>(null);
-  const [rotatingKey, setRotatingKey] = useState<TEncryptionKeyPair | null>(
-    null,
-  );
+  const generate = useGenerateKeyFlow({ userId, hasKeys, refreshKeysFromServer });
+  const importFlow = useImportKeyFlow({
+    userId,
+    hasKeys,
+    refreshKeysFromServer,
+  });
+  const recover = useRecoverKeyFlow({
+    userId,
+    encryptionKeys,
+    refreshKeysFromServer,
+  });
+  const remove = useDeleteKeyFlow({ refreshKeysFromServer });
+  const rotate = useRotatePassphraseFlow({ userId, refreshKeysFromServer });
 
-  const hasKeys = encryptionKeys && encryptionKeys.length > 0;
+  const busy =
+    generate.isPending ||
+    importFlow.isPending ||
+    remove.isPending ||
+    rotate.isPending ||
+    recover.isPending;
 
-  const handleGenerateKey = useCallback(
-    async (passphrase: string) => {
-      setIsGenerating(true);
-      try {
-        const keyPair = await generateKeyPair();
-        const serialized = await serializeKeyPair(keyPair, passphrase);
-
-        // Use PUT when replacing existing keys, POST for new keys
-        if (hasKeys) {
-          await updateEncryptionKeys({
-            publicKey: serialized.publicKey,
-            privateKeyEnc: serialized.privateKeyEnc,
-          });
-        } else {
-          await setEncryptionKeys({
-            publicKey: serialized.publicKey,
-            privateKeyEnc: serialized.privateKeyEnc,
-          });
-        }
-
-        await SecretStorageService.cacheDecryptedKey(keyPair.privateKey);
-
-        const newKey: TEncryptionKeyPair = {
-          id: crypto.randomUUID(),
-          publicKey: serialized.publicKey,
-          privateKeyEnc: serialized.privateKeyEnc,
-          userId: "",
-          date: new Date().toISOString(),
-        };
-        setUserEncryptionKeys?.([newKey]);
-        toastr.success(t("Common:EncryptionKeyGenerated"));
-      } catch (error) {
-        toastr.error(t("Common:EncryptionError"));
-        console.error("Key generation failed:", error);
-      } finally {
-        setIsGenerating(false);
-        setShowPassphraseModal(false);
-        setPendingAction(null);
-      }
-    },
-    [t, setUserEncryptionKeys, hasKeys],
-  );
-
-  const handleExportSingleKey = useCallback(
+  const handleExport = useCallback(
     async (keyData: TEncryptionKeyPair) => {
       try {
-        const blob = exportKeyToFile({
+        const blob = exportIdentityToBlob({
           publicKey: keyData.publicKey,
           privateKeyEnc: keyData.privateKeyEnc,
         });
@@ -152,7 +111,6 @@ const KeysManagement = ({
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
-
         toastr.success(t("Common:EncryptionKeyExported"));
       } catch (error) {
         toastr.error(t("Common:EncryptionError"));
@@ -162,262 +120,70 @@ const KeysManagement = ({
     [t],
   );
 
-  const handleImportFile = useCallback(
-    async (event: React.ChangeEvent<HTMLInputElement>) => {
-      const file = event.target.files?.[0];
-      if (!file) return;
-
-      setIsImporting(true);
-
-      try {
-        const keyData = await importKeyFromFile(file);
-        setImportedKeyData(keyData);
-
-        if (hasKeys) {
-          setPendingAction("import");
-          setShowConfirmReplace(true);
-        } else {
-          await setEncryptionKeys({
-            publicKey: keyData.publicKey,
-            privateKeyEnc: keyData.privateKeyEnc,
-          });
-          const newKey: TEncryptionKeyPair = {
-            id: crypto.randomUUID(),
-            publicKey: keyData.publicKey,
-            privateKeyEnc: keyData.privateKeyEnc,
-            userId: "",
-            date: new Date().toISOString(),
-          };
-          setUserEncryptionKeys?.([newKey]);
-          toastr.success(t("Common:EncryptionKeyImported"));
-        }
-      } catch (error) {
-        toastr.error(
-          error instanceof Error ? error.message : t("Common:EncryptionError"),
-        );
-        console.error("Key import failed:", error);
-      } finally {
-        setIsImporting(false);
-        if (fileInputRef.current) {
-          fileInputRef.current.value = "";
-        }
-      }
-    },
-    [hasKeys, t, setUserEncryptionKeys],
-  );
-
-  const handleConfirmReplace = useCallback(async () => {
-    if (pendingAction === "import" && importedKeyData) {
-      try {
-        await updateEncryptionKeys({
-          publicKey: importedKeyData.publicKey,
-          privateKeyEnc: importedKeyData.privateKeyEnc,
-        });
-        const newKey: TEncryptionKeyPair = {
-          id: crypto.randomUUID(),
-          publicKey: importedKeyData.publicKey,
-          privateKeyEnc: importedKeyData.privateKeyEnc,
-          userId: "",
-          date: new Date().toISOString(),
-        };
-        setUserEncryptionKeys?.([newKey]);
-        toastr.success(t("Common:EncryptionKeyImported"));
-      } catch (error) {
-        toastr.error(t("Common:EncryptionError"));
-        console.error("Key replacement failed:", error);
-      } finally {
-        setShowConfirmReplace(false);
-        setImportedKeyData(null);
-        setPendingAction(null);
-      }
-    } else if (pendingAction === "generate") {
-      setShowConfirmReplace(false);
-      setShowPassphraseModal(true);
-    }
-  }, [pendingAction, importedKeyData, t, setUserEncryptionKeys]);
-
-  const requestGenerateKey = useCallback(() => {
-    if (hasKeys) {
-      setPendingAction("generate");
-      setShowConfirmReplace(true);
-    } else {
-      setShowPassphraseModal(true);
-      setPendingAction("generate");
-    }
-  }, [hasKeys]);
-
-  const handleDeleteKeyRequest = useCallback((keyId: string) => {
-    setPendingDeleteKeyId(keyId);
-    setShowConfirmDelete(true);
-  }, []);
-
-  const handleConfirmDelete = useCallback(async () => {
-    if (!pendingDeleteKeyId) return;
-
-    setIsDeleting(true);
-    setDeletingKeyId(pendingDeleteKeyId);
-    setShowConfirmDelete(false);
-
-    try {
-      await deleteEncryptionKey(pendingDeleteKeyId);
-      const remainingKeys = (encryptionKeys || []).filter(
-        (key) => key.id !== pendingDeleteKeyId,
-      );
-      setUserEncryptionKeys?.(remainingKeys);
-      SecretStorageService.clearCache();
-      toastr.success(t("Common:EncryptionKeyDeleted"));
-    } catch (error) {
-      toastr.error(t("Common:EncryptionError"));
-      console.error("Key deletion failed:", error);
-    } finally {
-      setIsDeleting(false);
-      setDeletingKeyId(null);
-      setPendingDeleteKeyId(null);
-    }
-  }, [pendingDeleteKeyId, t, setUserEncryptionKeys, encryptionKeys]);
-
-  const handleRotateRequest = useCallback((keyData: TEncryptionKeyPair) => {
-    setRotatingKey(keyData);
-    setRotationError(null);
-    setShowRotationDialog(true);
-  }, []);
-
-  const handleRotatePassphrase = useCallback(
-    async (oldPassphrase: string, newPassphrase: string) => {
-      if (!rotatingKey) return;
-
-      setIsRotating(true);
-      setRotationError(null);
-
-      try {
-        const newEncryptedPrivateKey = await reEncryptPrivateKey(
-          rotatingKey.privateKeyEnc,
-          oldPassphrase,
-          newPassphrase,
-        );
-
-        await deleteEncryptionKey(rotatingKey.id);
-        await setEncryptionKeys({
-          publicKey: rotatingKey.publicKey,
-          privateKeyEnc: newEncryptedPrivateKey,
-        });
-        await SecretStorageService.clearCache();
-
-        const updatedKey: TEncryptionKeyPair = {
-          id: crypto.randomUUID(),
-          publicKey: rotatingKey.publicKey,
-          privateKeyEnc: newEncryptedPrivateKey,
-          userId: rotatingKey.userId,
-          date: new Date().toISOString(),
-        };
-        setUserEncryptionKeys?.([updatedKey]);
-
-        toastr.success(t("Common:PassphraseUpdated"));
-        setShowRotationDialog(false);
-        setRotatingKey(null);
-      } catch (error) {
-        console.error("Passphrase rotation failed:", error);
-        setRotationError(t("Common:InvalidPassphrase"));
-      } finally {
-        setIsRotating(false);
-      }
-    },
-    [rotatingKey, t, setUserEncryptionKeys],
-  );
-
-  const handleRotationCancel = useCallback(() => {
-    setShowRotationDialog(false);
-    setRotatingKey(null);
-    setRotationError(null);
-  }, []);
-
   return (
     <div className={styles.sectionBody}>
       <KeysList
         keys={encryptionKeys || []}
-        onDelete={handleDeleteKeyRequest}
-        onExport={handleExportSingleKey}
-        onRotate={handleRotateRequest}
-        isDeleting={isDeleting}
-        deletingKeyId={deletingKeyId}
+        onDelete={remove.request}
+        onExport={handleExport}
+        onRotate={rotate.request}
+        isDeleting={remove.isPending}
+        deletingKeyId={remove.pendingId}
       />
       <div className={styles.contentBody}>
         <div className={styles.inputGroup}>
           <Button
             size={ButtonSize.small}
-            onClick={requestGenerateKey}
+            onClick={generate.request}
             label={t("Common:GenerateNewKey")}
-            isLoading={isGenerating}
-            isDisabled={isGenerating || isImporting || isDeleting}
+            isLoading={generate.isPending}
+            isDisabled={busy}
           />
           <div className={styles.buttonsSeparator}>{t("Common:Or")}</div>
           <Button
             primary
             size={ButtonSize.small}
-            onClick={() => fileInputRef.current?.click()}
+            onClick={importFlow.request}
             label={t("Common:ImportKey")}
-            isLoading={isImporting}
-            isDisabled={isGenerating || isImporting || isDeleting}
+            isLoading={importFlow.isPending}
+            isDisabled={busy}
           />
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept=".json"
-            style={{ display: "none" }}
-            onChange={handleImportFile}
-          />
+          {importFlow.fileInput}
+          {recover.available ? (
+            <Button
+              size={ButtonSize.small}
+              onClick={recover.request}
+              label={t("Common:UseRecoveryPhrase")}
+              isDisabled={busy}
+            />
+          ) : null}
+          {hasKeys && isUnlocked ? (
+            <Button
+              size={ButtonSize.small}
+              onClick={() => {
+                lock();
+                toastr.success(t("Common:EncryptionLocked"));
+              }}
+              label={t("Common:LockNow")}
+              isDisabled={busy}
+            />
+          ) : null}
         </div>
       </div>
-      {showPassphraseModal && (
-        <PassphraseModal
-          visible
-          onSubmit={handleGenerateKey}
-          onCancel={() => {
-            setShowPassphraseModal(false);
-            setPendingAction(null);
-          }}
-          isNew={!hasKeys || pendingAction === "generate"}
-          isLoading={isGenerating}
-        />
-      )}
-      <ConfirmationModal
-        visible={showConfirmReplace}
-        title={t("Common:ReplaceKey")}
-        message={t("Common:ReplaceKeyWarning")}
-        onConfirm={handleConfirmReplace}
-        onCancel={() => {
-          setShowConfirmReplace(false);
-          setPendingAction(null);
-          setImportedKeyData(null);
-        }}
-      />
-      <ConfirmationModal
-        visible={showConfirmDelete}
-        title={t("Common:DeleteKey")}
-        message={t("Common:DeleteKeyWarning")}
-        onConfirm={handleConfirmDelete}
-        onCancel={() => {
-          setShowConfirmDelete(false);
-          setPendingDeleteKeyId(null);
-        }}
-      />
-      {showRotationDialog && (
-        <KeyRotationDialog
-          visible
-          onSubmit={handleRotatePassphrase}
-          onCancel={handleRotationCancel}
-          error={rotationError}
-          isLoading={isRotating}
-        />
-      )}
+      {generate.modals}
+      {importFlow.modals}
+      {recover.modals}
+      {remove.modals}
+      {rotate.modals}
     </div>
   );
 };
 
 export default inject(({ userStore }: TStore) => {
-  const { encryptionKeys, setUserEncryptionKeys } = userStore;
+  const { encryptionKeys, setUserEncryptionKeys, user } = userStore;
   return {
     encryptionKeys,
     setUserEncryptionKeys,
+    userId: user?.id ? String(user.id) : undefined,
   };
 })(observer(KeysManagement));

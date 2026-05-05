@@ -42,7 +42,8 @@ import {
 } from "@docspace/shared/enums";
 import { LOADER_TIMEOUT, OPERATIONS_NAME } from "@docspace/shared/constants";
 import uniqueid from "lodash/uniqueId";
-import { reEncryptRoomKeysForNewMembers } from "SRC_DIR/helpers/roomEncryption";
+import { addMembersToEncryptedRoom } from "SRC_DIR/helpers/roomEncryption";
+import { requireUnlock } from "@docspace/shared/services/encryption/secretStorage";
 
 import { Button } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -450,31 +451,58 @@ const InvitePanel = ({
             operationId,
           });
 
-          reEncryptRoomKeysForNewMembers(roomId, newMemberIds, {
-            currentUserId,
-            onProgress: (processed, total) => {
-              const percent = Math.floor((processed / total) * 100);
-              setSecondaryProgressBarData({
-                operation: OPERATIONS_NAME.roomReencryption,
-                percent,
-                operationId,
+          requireUnlock(String(currentUserId))
+            .then((identity) => {
+              if (!identity) {
+                setSecondaryProgressBarData({
+                  operation: OPERATIONS_NAME.roomReencryption,
+                  percent: 100,
+                  completed: true,
+                  alert: true,
+                  operationId,
+                });
+                toastr.error(t("Common:EncryptionLockedAddMembers"));
+                return null;
+              }
+              return addMembersToEncryptedRoom(roomId, newMemberIds, {
+                currentUserId: String(currentUserId),
+                identity,
+                onProgress: (processed, total) => {
+                  const percent = Math.floor((processed / total) * 100);
+                  setSecondaryProgressBarData({
+                    operation: OPERATIONS_NAME.roomReencryption,
+                    percent,
+                    operationId,
+                  });
+                },
               });
-            },
-          })
-            .then(() => {
+            })
+            .then((results) => {
+              if (results === null) return;
+              const failures = results.filter((r) => !r.success);
               setSecondaryProgressBarData({
                 operation: OPERATIONS_NAME.roomReencryption,
                 percent: 100,
                 completed: true,
-                alert: false,
+                alert: failures.length > 0,
                 operationId,
               });
+              if (failures.length > 0) {
+                toastr.warning(
+                  t("Common:EncryptedReencryptPartialFailure", {
+                    count: failures.length,
+                  }),
+                );
+              } else if (results.length > 0) {
+                toastr.success(t("Common:EncryptedReencryptCompleted"));
+              }
             })
             .catch((error) => {
               console.error(
                 "Failed to re-encrypt file keys for new members:",
                 error,
               );
+              toastr.error(t("Common:EncryptedReencryptFailed"));
               setSecondaryProgressBarData({
                 operation: OPERATIONS_NAME.roomReencryption,
                 percent: 100,

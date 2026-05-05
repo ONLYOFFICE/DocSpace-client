@@ -37,10 +37,12 @@ type Props = {
   setRemoveUserConfirmation: (
     visible: boolean,
     callback?: () => Promise<void>,
+    isEncryptedRoom?: boolean,
   ) => void;
   removeUserConfirmation: {
     visible: boolean;
     callback: () => Promise<void> | null;
+    isEncryptedRoom?: boolean;
   };
 };
 
@@ -51,6 +53,8 @@ const RemoveUserConfirmationDialog = ({
   const { t, ready } = useTranslation(["People", "Common"]);
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const isEncryptedRoom = !!removeUserConfirmation.isEncryptedRoom;
 
   const onClose = () => {
     if (isLoading) return;
@@ -80,7 +84,11 @@ const RemoveUserConfirmationDialog = ({
     >
       <ModalDialog.Header>{t("People:RemoveUser")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text>{t("People:RemoveUserConfirmationText")}</Text>
+        <Text>
+          {isEncryptedRoom
+            ? t("Common:RemoveUserFromEncryptedRoomWarning")
+            : t("People:RemoveUserConfirmationText")}
+        </Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

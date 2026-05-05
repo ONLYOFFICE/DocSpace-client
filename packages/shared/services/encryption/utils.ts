@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,9 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { WebCryptoUnavailableError, InvalidFormatError } from "./errors";
+import { USER_ID_BYTES } from "./types";
 
-export function arrayBufferToBase64(buffer: ArrayBuffer): string {
-  const bytes = new Uint8Array(buffer);
+export function arrayBufferToBase64(buffer: ArrayBuffer | Uint8Array): string {
+  const bytes = buffer instanceof Uint8Array ? buffer : new Uint8Array(buffer);
   let binary = "";
   for (let i = 0; i < bytes.byteLength; i++) {
     binary += String.fromCharCode(bytes[i]);
@@ -47,6 +48,17 @@ export function base64ToArrayBuffer(base64: string): ArrayBuffer {
     bytes[i] = binary.charCodeAt(i);
   }
   return bytes.buffer as ArrayBuffer;
+}
+
+export function base64ToUint8Array(base64: string): Uint8Array {
+  return new Uint8Array(base64ToArrayBuffer(base64));
+}
+
+export function base64UrlEncode(buffer: ArrayBuffer | Uint8Array): string {
+  return arrayBufferToBase64(buffer)
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/g, "");
 }
 
 export function getCrypto(): SubtleCrypto {
@@ -75,37 +87,21 @@ export function concatBuffers(
   const result = new Uint8Array(totalLength);
   let offset = 0;
   for (const buf of buffers) {
-    result.set(
-      buf instanceof Uint8Array ? buf : new Uint8Array(buf),
-      offset,
-    );
+    result.set(buf instanceof Uint8Array ? buf : new Uint8Array(buf), offset);
     offset += buf.byteLength;
   }
   return result;
 }
 
-export function uint32BE(value: number): Uint8Array {
-  const buf = new Uint8Array(4);
-  const view = new DataView(buf.buffer);
-  view.setUint32(0, value, false);
-  return buf;
-}
-
-export function readUint32BE(
-  data: ArrayBuffer | Uint8Array,
-  offset: number,
-): number {
-  const view = new DataView(
-    data instanceof Uint8Array ? data.buffer : data,
-    data instanceof Uint8Array ? data.byteOffset : 0,
-  );
-  return view.getUint32(offset, false);
+/** Best-effort wipe; JS GC offers no real guarantee. */
+export function zeroBuffer(buf: ArrayBuffer | Uint8Array): void {
+  const view = buf instanceof Uint8Array ? buf : new Uint8Array(buf);
+  view.fill(0);
 }
 
 export function uint16BE(value: number): Uint8Array {
   const buf = new Uint8Array(2);
-  const view = new DataView(buf.buffer);
-  view.setUint16(0, value, false);
+  new DataView(buf.buffer).setUint16(0, value, false);
   return buf;
 }
 
@@ -120,7 +116,76 @@ export function readUint16BE(
   return view.getUint16(offset, false);
 }
 
-export function zeroBuffer(buf: ArrayBuffer | Uint8Array): void {
-  const view = buf instanceof Uint8Array ? buf : new Uint8Array(buf);
-  view.fill(0);
+export function uint32BE(value: number): Uint8Array {
+  const buf = new Uint8Array(4);
+  new DataView(buf.buffer).setUint32(0, value, false);
+  return buf;
+}
+
+export function readUint32BE(
+  data: ArrayBuffer | Uint8Array,
+  offset: number,
+): number {
+  const view = new DataView(
+    data instanceof Uint8Array ? data.buffer : data,
+    data instanceof Uint8Array ? data.byteOffset : 0,
+  );
+  return view.getUint32(offset, false);
+}
+
+export function uint64BE(value: number): Uint8Array {
+  if (!Number.isFinite(value) || value < 0 || !Number.isInteger(value)) {
+    throw new InvalidFormatError("uint64BE: value must be a non-negative integer");
+  }
+  if (value > Number.MAX_SAFE_INTEGER) {
+    throw new InvalidFormatError("uint64BE: value exceeds MAX_SAFE_INTEGER");
+  }
+  const buf = new Uint8Array(8);
+  const view = new DataView(buf.buffer);
+  // High 32 bits via float arithmetic — JS bitwise ops are int32-only.
+  const high = Math.floor(value / 0x1_0000_0000);
+  const low = value >>> 0;
+  view.setUint32(0, high, false);
+  view.setUint32(4, low, false);
+  return buf;
+}
+
+const UUID_REGEX =
+  /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
+
+export function uuidToBytes(uuid: string): Uint8Array {
+  if (typeof uuid !== "string" || !UUID_REGEX.test(uuid)) {
+    throw new InvalidFormatError(`invalid UUID: ${uuid}`);
+  }
+  const hex = uuid.replace(/-/g, "").toLowerCase();
+  const bytes = new Uint8Array(USER_ID_BYTES);
+  for (let i = 0; i < USER_ID_BYTES; i++) {
+    bytes[i] = Number.parseInt(hex.slice(i * 2, i * 2 + 2), 16);
+  }
+  return bytes;
+}
+
+export function bytesToUuid(bytes: Uint8Array): string {
+  if (!(bytes instanceof Uint8Array) || bytes.byteLength !== USER_ID_BYTES) {
+    throw new InvalidFormatError(
+      `bytesToUuid: input must be ${USER_ID_BYTES} bytes`,
+    );
+  }
+  const hex: string[] = [];
+  for (let i = 0; i < USER_ID_BYTES; i++) {
+    hex.push(bytes[i].toString(16).padStart(2, "0"));
+  }
+  const j = hex.join("");
+  return `${j.slice(0, 8)}-${j.slice(8, 12)}-${j.slice(12, 16)}-${j.slice(16, 20)}-${j.slice(20, 32)}`;
+}
+
+const utf8Encoder = new TextEncoder();
+const utf8Decoder = new TextDecoder("utf-8", { fatal: true });
+
+export function utf8(s: string): Uint8Array {
+  return utf8Encoder.encode(s);
+}
+
+export function fromUtf8(bytes: Uint8Array): string {
+  return utf8Decoder.decode(bytes);
 }

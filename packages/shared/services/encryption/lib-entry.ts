@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,91 +24,95 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// Public API entry point for the standalone onlyoffice-crypto bundle.
-//
-// Intentionally excludes:
-//   - secretStorage.ts  (browser IndexedDB — consumers supply their own storage)
-//   - keyRotation.ts    (re-exports keyManagement internals; nothing extra to surface)
-//   - Any React / MobX dependencies
-//   - Any @docspace/shared/api/* dependencies
+// IIFE bundle entry — exposes window.OnlyofficeCrypto for DocEditor.
+// Excludes secretStorage and any React/MobX/api dependencies.
 
-// ============================================================================
-// Types and constants
-// ============================================================================
 export type {
-  ECDHKeyPair,
-  SerializedKeyPair,
-  KeyStatus,
-  KeyExportFormat,
-  WrappedDEK,
+  Argon2idParams,
+  IdentityKeyPair,
+  SerializedIdentity,
   ServerAccessKeyDto,
   DSE3Header,
   EncryptFileResult,
   DecryptFileResult,
   ProgressCallback,
-  RecoveryBackup,
+  KeyStatus,
+  SuiteId,
 } from "./types";
 
 export {
-  DSE3_CIPHER_AES_256_GCM,
+  SUITE_X25519_HKDF_AES256GCM,
+  ARGON2ID_DEFAULT_M_KIB,
+  ARGON2ID_DEFAULT_T,
+  ARGON2ID_DEFAULT_P,
+  DSE3_CHUNK_PLAINTEXT_SIZE,
+  DSE3_FIXED_HEADER_SIZE,
+  DSE3_FILE_NONCE_SIZE,
   DSE3_FLAG_HAS_ENCRYPTED_NAME,
-  ENCRYPTION_CONSTANTS,
+  CHUNKED_ENCRYPTION_THRESHOLD,
+  X25519_PUBLIC_KEY_SIZE,
+  X25519_PRIVATE_KEY_SIZE,
+  AES_KEY_SIZE_BYTES,
+  VERSION_IDENTITY,
+  VERSION_HPKE_WRAP,
+  VERSION_DSE3_FILE,
 } from "./types";
 
-// ============================================================================
-// Error classes
-// ============================================================================
+// Errors
 export {
   CryptoError,
   InvalidPassphraseError,
+  InvalidRecoveryPhraseError,
   DecryptionError,
   NoAccessError,
   InvalidFormatError,
+  UnsupportedVersionError,
+  UnsupportedSuiteError,
+  AuthenticationError,
   WebCryptoUnavailableError,
   KeyNotFoundError,
 } from "./errors";
 
-// ============================================================================
-// Buffer utilities (useful for consumers handling raw key/ciphertext bytes)
-// ============================================================================
-export { arrayBufferToBase64, base64ToArrayBuffer } from "./utils";
-
-// ============================================================================
-// Key management
-// ============================================================================
+// Buffer / encoding utilities
 export {
-  generateKeyPair,
-  exportPublicKey,
-  importPublicKey,
-  encryptPrivateKey,
-  decryptPrivateKey,
-  reEncryptPrivateKey,
-  serializeKeyPair,
-  exportKeyToFile,
-  importKeyFromFile,
-  generateDEK,
-  wrapDEK,
-  unwrapDEK,
+  arrayBufferToBase64,
+  base64ToArrayBuffer,
+  base64ToUint8Array,
+  uuidToBytes,
+  bytesToUuid,
+} from "./utils";
+
+// Identity (X25519 keypair, dual-envelope passphrase + recovery)
+export {
+  generateIdentityKeyPair,
+  serializeIdentity,
+  unlockWithPassphrase,
+  unlockWithRecoveryPhrase,
+  changePassphrase,
   getPublicKeyFingerprint,
-  getKeyStatus,
-} from "./keyManagement";
+  exportIdentityToBlob,
+  importIdentityFromFile,
+  DEFAULT_ARGON2_PARAMS,
+} from "./identity";
 
-// ============================================================================
-// File encryption / decryption
-// ============================================================================
-export { encryptFile, decryptFile, encryptFileName, decryptFileName } from "./encryptionService";
+// HPKE-Auth wrap/unwrap for DEKs
+export { wrapDEK, unwrapDEK, inspectWrap } from "./hpke";
 
-// ============================================================================
-// Streaming / DSE3 format helpers
-// ============================================================================
-export { isDSE3Format, parseDSE3Header, estimateEncryptedSize } from "./streamingEncryption";
+// File-level encryption
+export { generateDEK, encryptFile, decryptFile, wipeDek } from "./fileKeys";
 
-// ============================================================================
-// Recovery
-// ============================================================================
+// DSE3 streaming primitives
+export {
+  isDSE3Format,
+  parseDSE3Header,
+  estimateEncryptedSize,
+  shouldUseChunkedEncryption,
+} from "./streamingEncryption";
+
+// Recovery mnemonic
 export {
   generateRecoveryMnemonic,
   validateMnemonic,
-  backupPrivateKey,
-  restorePrivateKey,
+  splitMnemonicForDisplay,
+  normalizeMnemonic,
 } from "./recovery";

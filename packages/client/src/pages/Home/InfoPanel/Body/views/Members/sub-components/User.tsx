@@ -28,11 +28,13 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import api from "@docspace/shared/api";
+import { getGroupById } from "@docspace/shared/api/groups";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import {
   FolderType,
   RoomSecurityError,
   RoomsType,
+  ShareAccessRights,
 } from "@docspace/shared/enums";
 import { User as ShareUser } from "@docspace/shared/components/share/sub-components/User";
 
@@ -41,6 +43,8 @@ import type { TGroup } from "@docspace/shared/api/groups/types";
 
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
 import { filterNotReadOnlyOptions } from "@docspace/shared/utils/filterNotReadOnlyOptions";
+
+import { revokeMemberFromEncryptedRoom } from "SRC_DIR/helpers/roomEncryption";
 
 import MembersHelper from "../Members.utils";
 import type { UserProps } from "../Members.types";
@@ -146,8 +150,56 @@ const User = ({
       });
   };
 
+  const revokeEncryptedAccess = async () => {
+    try {
+      // Groups need expansion to individual user ids — file wraps are
+      // keyed per recipient, not per group.
+      const isGroup = "isGroup" in user && user.isGroup;
+      let revokedIds: string[] = [String(user.id)];
+      if (isGroup) {
+        const group = await getGroupById(String(user.id), true);
+        revokedIds = (group.members ?? []).map((m) => String(m.id));
+        if (revokedIds.length === 0) return;
+      }
+
+      const results = await revokeMemberFromEncryptedRoom(
+        Number(room.id),
+        revokedIds,
+        {},
+      );
+      const failures = results.filter((r) => !r.success);
+      if (failures.length > 0) {
+        toastr.warning(
+          t("Common:EncryptedRevokePartialFailure", {
+            count: failures.length,
+          }),
+        );
+        return;
+      }
+      if (results.length > 0) {
+        toastr.success(t("Common:EncryptedRevokeCompleted"));
+      }
+    } catch (err) {
+      console.error("[ENCRYPTION] revoke encrypted access failed:", err);
+      toastr.error(t("Common:EncryptedRevokeFailed"));
+    }
+  };
+
   const onOptionClick = async (option: TOption) => {
     if (option.access === userRole?.access) return;
+
+    const isRemoval = option.access === ShareAccessRights.None;
+    const isPrivateRoom = room.private;
+    if (isRemoval && isPrivateRoom) {
+      return setRemoveUserConfirmation!(
+        true,
+        async () => {
+          await updateRole(option, false);
+          await revokeEncryptedAccess();
+        },
+        true,
+      );
+    }
 
     return updateRole(option, false);
   };

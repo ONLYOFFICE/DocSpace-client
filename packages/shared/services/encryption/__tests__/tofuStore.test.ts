@@ -1,0 +1,336 @@
+// (c) Copyright Ascensio System SIA 2009-2026
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
+
+import {
+  TofuStore,
+  getTofuStore,
+  resetTofuStores,
+} from "../tofuStore";
+
+// Minimal in-memory IDBFactory good enough for tofuStore.ts. Persists data
+// per-database in a module-level Map so reopening a DB returns the same data
+// (mirrors real IndexedDB). Object-store schema is fixed (keyPath: "userId"),
+// matching what tofuStore.openDB creates on upgrade.
+type Store = Map<string, unknown>;
+
+class MockOpenRequest {
+  result: MockDB | null = null;
+  error: Error | null = null;
+  onupgradeneeded: (() => void) | null = null;
+  onsuccess: (() => void) | null = null;
+  onerror: (() => void) | null = null;
+  onblocked: (() => void) | null = null;
+}
+
+class MockRequest<T> {
+  result: T | undefined;
+  error: Error | null = null;
+  onsuccess: (() => void) | null = null;
+  onerror: (() => void) | null = null;
+}
+
+class MockObjectStoreNames {
+  constructor(private names: Set<string>) {}
+  contains(name: string): boolean {
+    return this.names.has(name);
+  }
+}
+
+class MockObjectStore {
+  constructor(private store: Store) {}
+
+  get(key: string): MockRequest<unknown> {
+    const req = new MockRequest<unknown>();
+    queueMicrotask(() => {
+      req.result = this.store.get(key);
+      req.onsuccess?.();
+    });
+    return req;
+  }
+
+  put(value: { userId: string }): MockRequest<void> {
+    const req = new MockRequest<void>();
+    queueMicrotask(() => {
+      this.store.set(value.userId, value);
+      req.onsuccess?.();
+    });
+    return req;
+  }
+
+  delete(key: string): MockRequest<void> {
+    const req = new MockRequest<void>();
+    queueMicrotask(() => {
+      this.store.delete(key);
+      req.onsuccess?.();
+    });
+    return req;
+  }
+
+  getAll(): MockRequest<unknown[]> {
+    const req = new MockRequest<unknown[]>();
+    queueMicrotask(() => {
+      req.result = Array.from(this.store.values());
+      req.onsuccess?.();
+    });
+    return req;
+  }
+
+  clear(): MockRequest<void> {
+    const req = new MockRequest<void>();
+    queueMicrotask(() => {
+      this.store.clear();
+      req.onsuccess?.();
+    });
+    return req;
+  }
+}
+
+class MockTransaction {
+  constructor(private store: Store) {}
+  objectStore(_name: string): MockObjectStore {
+    return new MockObjectStore(this.store);
+  }
+}
+
+class MockDB {
+  objectStoreNames: MockObjectStoreNames;
+  constructor(
+    private store: Store,
+    private storeNames: Set<string>,
+  ) {
+    this.objectStoreNames = new MockObjectStoreNames(storeNames);
+  }
+  createObjectStore(name: string, _options: { keyPath: string }): void {
+    this.storeNames.add(name);
+  }
+  transaction(_names: string, _mode: IDBTransactionMode): MockTransaction {
+    return new MockTransaction(this.store);
+  }
+}
+
+const dbs = new Map<string, { store: Store; storeNames: Set<string> }>();
+
+function resetMockIDB(): void {
+  dbs.clear();
+}
+
+const mockIDB = {
+  open(name: string, _version: number): MockOpenRequest {
+    const req = new MockOpenRequest();
+    let entry = dbs.get(name);
+    const isFresh = !entry;
+    if (!entry) {
+      entry = { store: new Map(), storeNames: new Set() };
+      dbs.set(name, entry);
+    }
+    const db = new MockDB(entry.store, entry.storeNames);
+    queueMicrotask(() => {
+      if (isFresh) {
+        req.result = db;
+        req.onupgradeneeded?.();
+      }
+      req.result = db;
+      req.onsuccess?.();
+    });
+    return req;
+  },
+};
+
+// Tests
+describe("TofuStore", () => {
+  beforeEach(() => {
+    resetMockIDB();
+    resetTofuStores();
+    vi.stubGlobal("indexedDB", mockIDB);
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it("records first-seen on a brand-new userId", async () => {
+    const tofu = new TofuStore("alice");
+    const result = await tofu.checkKey("bob", "PK_BOB_1");
+    expect(result.kind).toBe("first-seen");
+
+    const list = await tofu.list();
+    expect(list).toHaveLength(1);
+    expect(list[0].userId).toBe("bob");
+    expect(list[0].publicKey).toBe("PK_BOB_1");
+    expect(list[0].verifiedAt).toBeNull();
+    expect(list[0].firstSeenAt).toBe(list[0].lastSeenAt);
+  });
+
+  it("returns match + bumps lastSeenAt on identical key", async () => {
+    const tofu = new TofuStore("alice");
+    const before = await tofu.checkKey("bob", "PK_BOB_1");
+    expect(before.kind).toBe("first-seen");
+
+    const t0 = await tofu.list();
+    const firstSeenAt = t0[0].firstSeenAt;
+
+    // small delay so lastSeenAt advances
+    await new Promise((r) => setTimeout(r, 5));
+
+    const result = await tofu.checkKey("bob", "PK_BOB_1");
+    expect(result.kind).toBe("match");
+    if (result.kind !== "match") return;
+    expect(result.record.firstSeenAt).toBe(firstSeenAt);
+    expect(result.record.lastSeenAt).toBeGreaterThanOrEqual(firstSeenAt);
+  });
+
+  it("returns mismatch without overwriting when key changes", async () => {
+    const tofu = new TofuStore("alice");
+    await tofu.checkKey("bob", "PK_BOB_1");
+
+    const result = await tofu.checkKey("bob", "PK_BOB_2");
+    expect(result.kind).toBe("mismatch");
+    if (result.kind !== "mismatch") return;
+    expect(result.known.publicKey).toBe("PK_BOB_1");
+    expect(result.submitted).toBe("PK_BOB_2");
+
+    // Stored record is still the original key.
+    const list = await tofu.list();
+    expect(list[0].publicKey).toBe("PK_BOB_1");
+  });
+
+  it("acceptKey overwrites the record and resets verifiedAt", async () => {
+    const tofu = new TofuStore("alice");
+    await tofu.checkKey("bob", "PK_BOB_1");
+    await tofu.markVerified("bob");
+    const verifiedRecord = (await tofu.list())[0];
+    expect(verifiedRecord.verifiedAt).not.toBeNull();
+    const originalFirstSeen = verifiedRecord.firstSeenAt;
+
+    await tofu.acceptKey("bob", "PK_BOB_2");
+
+    const list = await tofu.list();
+    expect(list[0].publicKey).toBe("PK_BOB_2");
+    expect(list[0].verifiedAt).toBeNull();
+    // firstSeenAt is preserved across an acceptKey.
+    expect(list[0].firstSeenAt).toBe(originalFirstSeen);
+
+    // Subsequent check with the new key now matches.
+    const result = await tofu.checkKey("bob", "PK_BOB_2");
+    expect(result.kind).toBe("match");
+  });
+
+  it("markVerified is a no-op for unknown userId", async () => {
+    const tofu = new TofuStore("alice");
+    await tofu.markVerified("bob");
+    const list = await tofu.list();
+    expect(list).toHaveLength(0);
+  });
+
+  it("forget removes the record", async () => {
+    const tofu = new TofuStore("alice");
+    await tofu.checkKey("bob", "PK_BOB_1");
+    await tofu.forget("bob");
+    const list = await tofu.list();
+    expect(list).toHaveLength(0);
+
+    // After forget, the next check is again first-seen.
+    const result = await tofu.checkKey("bob", "PK_BOB_1");
+    expect(result.kind).toBe("first-seen");
+  });
+
+  it("clear wipes the entire scope", async () => {
+    const tofu = new TofuStore("alice");
+    await tofu.checkKey("bob", "PK_BOB_1");
+    await tofu.checkKey("carol", "PK_CAROL_1");
+    expect((await tofu.list()).length).toBe(2);
+    await tofu.clear();
+    expect((await tofu.list()).length).toBe(0);
+  });
+
+  it("isolates state per scopeId", async () => {
+    const aliceStore = new TofuStore("alice");
+    const eveStore = new TofuStore("eve");
+
+    await aliceStore.checkKey("bob", "PK_BOB_1");
+
+    // Eve has never seen bob, so she gets first-seen with HER chosen key.
+    const result = await eveStore.checkKey("bob", "PK_BOB_DIFFERENT");
+    expect(result.kind).toBe("first-seen");
+
+    // Alice's record is untouched by Eve's session.
+    const aliceList = await aliceStore.list();
+    expect(aliceList[0].publicKey).toBe("PK_BOB_1");
+  });
+
+  it("getTofuStore reuses the same instance for one scopeId", () => {
+    const a = getTofuStore("alice");
+    const b = getTofuStore("alice");
+    expect(a).toBe(b);
+  });
+
+  it("getTofuStore returns different instances for different scopeIds", () => {
+    const a = getTofuStore("alice");
+    const e = getTofuStore("eve");
+    expect(a).not.toBe(e);
+  });
+
+  it("rejects empty arguments", async () => {
+    const tofu = new TofuStore("alice");
+    await expect(tofu.checkKey("", "x")).rejects.toThrow();
+    await expect(tofu.checkKey("bob", "")).rejects.toThrow();
+    await expect(tofu.acceptKey("", "x")).rejects.toThrow();
+    await expect(tofu.acceptKey("bob", "")).rejects.toThrow();
+    expect(() => new TofuStore("")).toThrow();
+  });
+});
+
+describe("TofuStore — IndexedDB unavailable (soft-fail)", () => {
+  beforeEach(() => {
+    resetTofuStores();
+    vi.stubGlobal("indexedDB", undefined);
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it("checkKey returns first-seen even though nothing is persisted", async () => {
+    const tofu = new TofuStore("alice");
+    const a = await tofu.checkKey("bob", "PK_BOB_1");
+    expect(a.kind).toBe("first-seen");
+    // Nothing was persisted, so a second call again returns first-seen
+    // (and not mismatch). This matches the doc'd "no TOFU" baseline.
+    const b = await tofu.checkKey("bob", "PK_BOB_2");
+    expect(b.kind).toBe("first-seen");
+  });
+
+  it("list/clear/forget/markVerified/acceptKey are safe no-ops", async () => {
+    const tofu = new TofuStore("alice");
+    expect(await tofu.list()).toEqual([]);
+    await tofu.clear();
+    await tofu.forget("bob");
+    await tofu.markVerified("bob");
+    await tofu.acceptKey("bob", "PK_BOB_1");
+  });
+});

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,108 +24,131 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { DSE3Header, ProgressCallback } from "./types";
+// DSE3 v2 streaming AEAD: chunked AES-256-GCM with per-chunk AAD that
+// binds suite, fileNonce, chunkCount, chunkIndex, and lastFlag.
+
 import {
-  ENCRYPTION_CONSTANTS,
-  DSE3_CIPHER_AES_256_GCM,
+  AAD_DSE3_CHUNK_PREFIX,
+  AAD_DSE3_FILENAME_PREFIX,
+  AES_GCM_IV_SIZE,
+  AES_GCM_TAG_SIZE,
+  AES_KEY_SIZE_BYTES,
+  CHUNKED_ENCRYPTION_THRESHOLD,
+  DSE3_CHUNK_OVERHEAD,
+  DSE3_CHUNK_PLAINTEXT_SIZE,
+  DSE3_FILE_NONCE_SIZE,
+  DSE3_FIXED_HEADER_SIZE,
   DSE3_FLAG_HAS_ENCRYPTED_NAME,
+  DSE3_MAX_CHUNK_COUNT,
+  DSE3_MAX_CHUNK_SIZE,
+  MAGIC_DSE3_FILE,
+  SUITE_X25519_HKDF_AES256GCM,
+  VERSION_DSE3_FILE,
+  type DSE3Header,
+  type ProgressCallback,
 } from "./types";
-import { InvalidFormatError, DecryptionError } from "./errors";
 import {
+  DecryptionError,
+  InvalidFormatError,
+  UnsupportedSuiteError,
+  UnsupportedVersionError,
+} from "./errors";
+import {
+  concatBuffers,
+  fromUtf8,
   getCrypto,
   getRandomBytes,
-  concatBuffers,
-  uint32BE,
-  uint16BE,
-  readUint32BE,
   readUint16BE,
+  readUint32BE,
+  uint16BE,
+  uint32BE,
+  utf8,
 } from "./utils";
-
-const C = ENCRYPTION_CONSTANTS;
-const CHUNK_OVERHEAD = C.AES_GCM_IV_SIZE + 16; // IV + GCM tag
-
-// ============================================================================
-// DSE3 Header
-// ============================================================================
-
-function buildAAD(fileNonce: Uint8Array, chunkIndex: number): Uint8Array {
-  return concatBuffers(fileNonce, uint32BE(chunkIndex));
-}
 
 export function writeDSE3Header(
   chunkCount: number,
   fileNonce: Uint8Array,
   encryptedName: Uint8Array | null,
 ): Uint8Array {
+  if (chunkCount < 1 || chunkCount > DSE3_MAX_CHUNK_COUNT) {
+    throw new InvalidFormatError(`invalid chunkCount: ${chunkCount}`);
+  }
+  if (fileNonce.byteLength !== DSE3_FILE_NONCE_SIZE) {
+    throw new InvalidFormatError(
+      `fileNonce must be ${DSE3_FILE_NONCE_SIZE} bytes`,
+    );
+  }
   const nameLen = encryptedName?.byteLength ?? 0;
+  if (nameLen > 0xffff) {
+    throw new InvalidFormatError("encryptedName length exceeds u16");
+  }
   const flags = encryptedName ? DSE3_FLAG_HAS_ENCRYPTED_NAME : 0;
 
-  const header = concatBuffers(
-    C.DSE3_MAGIC,
-    new Uint8Array([C.DSE3_HEADER_VERSION]),
-    new Uint8Array([flags]),
-    new Uint8Array([DSE3_CIPHER_AES_256_GCM]),
-    uint32BE(C.CHUNK_PLAINTEXT_SIZE),
+  return concatBuffers(
+    MAGIC_DSE3_FILE,
+    new Uint8Array([VERSION_DSE3_FILE, SUITE_X25519_HKDF_AES256GCM, flags]),
+    uint32BE(DSE3_CHUNK_PLAINTEXT_SIZE),
     uint32BE(chunkCount),
     fileNonce,
     uint16BE(nameLen),
     ...(encryptedName ? [encryptedName] : []),
   );
-
-  return header;
 }
 
-export function parseDSE3Header(data: ArrayBuffer | Uint8Array): DSE3Header {
-  const bytes =
-    data instanceof Uint8Array ? data : new Uint8Array(data);
+export function parseDSE3Header(
+  data: ArrayBuffer | Uint8Array,
+): DSE3Header {
+  const bytes = data instanceof Uint8Array ? data : new Uint8Array(data);
 
-  if (bytes.byteLength < C.DSE3_FIXED_HEADER_SIZE) {
+  if (bytes.byteLength < DSE3_FIXED_HEADER_SIZE) {
     throw new InvalidFormatError("data too short for DSE3 header");
   }
-
-  const magic = bytes.slice(0, 4);
-  if (
-    magic[0] !== C.DSE3_MAGIC[0] ||
-    magic[1] !== C.DSE3_MAGIC[1] ||
-    magic[2] !== C.DSE3_MAGIC[2] ||
-    magic[3] !== C.DSE3_MAGIC[3]
-  ) {
-    throw new InvalidFormatError("invalid DSE3 magic bytes");
+  for (let i = 0; i < MAGIC_DSE3_FILE.length; i++) {
+    if (bytes[i] !== MAGIC_DSE3_FILE[i]) {
+      throw new InvalidFormatError("invalid DSE3 magic bytes");
+    }
   }
-
   const version = bytes[4];
-  if (version !== C.DSE3_HEADER_VERSION) {
-    throw new InvalidFormatError(`unsupported DSE3 version: ${version}`);
+  if (version !== VERSION_DSE3_FILE) {
+    throw new UnsupportedVersionError(version, VERSION_DSE3_FILE);
   }
-
-  const flags = bytes[5];
-  const cipher = bytes[6];
-  if (cipher !== DSE3_CIPHER_AES_256_GCM) {
-    throw new InvalidFormatError(`unsupported cipher: ${cipher}`);
+  const suite = bytes[5];
+  if (suite !== SUITE_X25519_HKDF_AES256GCM) {
+    throw new UnsupportedSuiteError(suite);
   }
-
+  const flags = bytes[6];
   const chunkPlaintextSize = readUint32BE(bytes, 7);
-  if (chunkPlaintextSize === 0) {
-    throw new InvalidFormatError("chunk size cannot be zero");
+  if (chunkPlaintextSize === 0 || chunkPlaintextSize > DSE3_MAX_CHUNK_SIZE) {
+    throw new InvalidFormatError(
+      `invalid chunkPlaintextSize: ${chunkPlaintextSize}`,
+    );
   }
-
   const chunkCount = readUint32BE(bytes, 11);
-  const fileNonce = bytes.slice(15, 15 + C.FILE_NONCE_SIZE);
-  const nameLen = readUint16BE(bytes, 15 + C.FILE_NONCE_SIZE);
+  if (chunkCount === 0 || chunkCount > DSE3_MAX_CHUNK_COUNT) {
+    throw new InvalidFormatError(`invalid chunkCount: ${chunkCount}`);
+  }
+  const fileNonce = bytes.slice(15, 15 + DSE3_FILE_NONCE_SIZE);
+  const nameLen = readUint16BE(bytes, 15 + DSE3_FILE_NONCE_SIZE);
 
   let encryptedName: Uint8Array | null = null;
   if (nameLen > 0) {
-    const nameStart = C.DSE3_FIXED_HEADER_SIZE;
+    const nameStart = DSE3_FIXED_HEADER_SIZE;
     if (bytes.byteLength < nameStart + nameLen) {
       throw new InvalidFormatError("data too short for encrypted name");
     }
     encryptedName = bytes.slice(nameStart, nameStart + nameLen);
   }
+  if (encryptedName === null && (flags & DSE3_FLAG_HAS_ENCRYPTED_NAME) !== 0) {
+    throw new InvalidFormatError("flag claims name but nameLen is 0");
+  }
+  if (encryptedName !== null && (flags & DSE3_FLAG_HAS_ENCRYPTED_NAME) === 0) {
+    throw new InvalidFormatError("nameLen non-zero but flag not set");
+  }
 
   return {
     version,
+    suite,
     flags,
-    cipher,
     chunkPlaintextSize,
     chunkCount,
     fileNonce,
@@ -134,49 +157,128 @@ export function parseDSE3Header(data: ArrayBuffer | Uint8Array): DSE3Header {
 }
 
 export function getDSE3HeaderSize(header: DSE3Header): number {
-  return C.DSE3_FIXED_HEADER_SIZE + (header.encryptedName?.byteLength ?? 0);
+  return DSE3_FIXED_HEADER_SIZE + (header.encryptedName?.byteLength ?? 0);
 }
 
 export function isDSE3Format(data: ArrayBuffer | Uint8Array): boolean {
-  const bytes =
-    data instanceof Uint8Array ? data : new Uint8Array(data);
+  const bytes = data instanceof Uint8Array ? data : new Uint8Array(data);
   if (bytes.byteLength < 4) return false;
-  return (
-    bytes[0] === C.DSE3_MAGIC[0] &&
-    bytes[1] === C.DSE3_MAGIC[1] &&
-    bytes[2] === C.DSE3_MAGIC[2] &&
-    bytes[3] === C.DSE3_MAGIC[3]
+  for (let i = 0; i < MAGIC_DSE3_FILE.length; i++) {
+    if (bytes[i] !== MAGIC_DSE3_FILE[i]) return false;
+  }
+  return true;
+}
+
+// AAD construction
+function buildChunkAad(
+  fileNonce: Uint8Array,
+  chunkCount: number,
+  chunkIndex: number,
+): Uint8Array {
+  const lastFlag = chunkIndex === chunkCount - 1 ? 0x01 : 0x00;
+  return concatBuffers(
+    utf8(AAD_DSE3_CHUNK_PREFIX),
+    new Uint8Array([SUITE_X25519_HKDF_AES256GCM]),
+    fileNonce,
+    uint32BE(chunkCount),
+    uint32BE(chunkIndex),
+    new Uint8Array([lastFlag]),
   );
 }
 
-// ============================================================================
-// Chunked Encryption (DSE3)
-// ============================================================================
+function buildNameAad(fileNonce: Uint8Array): Uint8Array {
+  return concatBuffers(
+    utf8(AAD_DSE3_FILENAME_PREFIX),
+    new Uint8Array([SUITE_X25519_HKDF_AES256GCM]),
+    fileNonce,
+  );
+}
 
-async function importAESKey(
-  rawKey: Uint8Array,
+// AES-256-GCM key import (per-call, since DEK is consumed transiently)
+async function importDek(
+  raw: Uint8Array,
   usages: KeyUsage[],
 ): Promise<CryptoKey> {
+  if (raw.byteLength !== AES_KEY_SIZE_BYTES) {
+    throw new InvalidFormatError(`DEK must be ${AES_KEY_SIZE_BYTES} bytes`);
+  }
   const subtle = getCrypto();
   return subtle.importKey(
     "raw",
-    rawKey as BufferSource,
-    { name: "AES-GCM", length: C.AES_KEY_SIZE },
+    raw as BufferSource,
+    { name: "AES-GCM", length: 256 },
     false,
     usages,
   );
 }
 
+// Filename encryption (single-shot, AES-GCM under DEK with name AAD)
+export async function encryptFileNameRaw(
+  name: string,
+  dek: Uint8Array,
+  fileNonce: Uint8Array,
+): Promise<Uint8Array> {
+  const subtle = getCrypto();
+  const aesKey = await importDek(dek, ["encrypt"]);
+  const iv = getRandomBytes(AES_GCM_IV_SIZE);
+  const aad = buildNameAad(fileNonce);
+  const ct = await subtle.encrypt(
+    {
+      name: "AES-GCM",
+      iv: iv as BufferSource,
+      additionalData: aad as BufferSource,
+      tagLength: AES_GCM_TAG_SIZE * 8,
+    },
+    aesKey,
+    utf8(name.normalize("NFC")) as BufferSource,
+  );
+  return concatBuffers(iv, new Uint8Array(ct));
+}
+
+export async function decryptFileNameRaw(
+  encrypted: Uint8Array,
+  dek: Uint8Array,
+  fileNonce: Uint8Array,
+): Promise<string> {
+  if (encrypted.byteLength < AES_GCM_IV_SIZE + AES_GCM_TAG_SIZE) {
+    throw new InvalidFormatError("encrypted name too short");
+  }
+  const subtle = getCrypto();
+  const aesKey = await importDek(dek, ["decrypt"]);
+  const iv = encrypted.slice(0, AES_GCM_IV_SIZE);
+  const ct = encrypted.slice(AES_GCM_IV_SIZE);
+  const aad = buildNameAad(fileNonce);
+  try {
+    const pt = await subtle.decrypt(
+      {
+        name: "AES-GCM",
+        iv: iv as BufferSource,
+        additionalData: aad as BufferSource,
+        tagLength: AES_GCM_TAG_SIZE * 8,
+      },
+      aesKey,
+      ct as BufferSource,
+    );
+    return fromUtf8(new Uint8Array(pt));
+  } catch {
+    throw new DecryptionError("file name decryption failed");
+  }
+}
+
+// Streaming chunked encryption
 export async function encryptChunked(
   data: File | Blob | ArrayBuffer | Uint8Array,
   dek: Uint8Array,
   encryptedName: Uint8Array | null,
   onProgress?: ProgressCallback,
+  /** If provided, used as the fileNonce; otherwise a fresh one is generated.
+   * Callers that need to encrypt the filename under the same nonce should
+   * supply it here. */
+  fileNonceIn?: Uint8Array,
 ): Promise<Blob> {
   const subtle = getCrypto();
-  const aesKey = await importAESKey(dek, ["encrypt"]);
+  const aesKey = await importDek(dek, ["encrypt"]);
 
-  // Get total size
   let totalSize: number;
   if (data instanceof File || data instanceof Blob) {
     totalSize = data.size;
@@ -188,19 +290,29 @@ export async function encryptChunked(
 
   const chunkCount = Math.max(
     1,
-    Math.ceil(totalSize / C.CHUNK_PLAINTEXT_SIZE),
+    Math.ceil(totalSize / DSE3_CHUNK_PLAINTEXT_SIZE),
   );
+  if (chunkCount > DSE3_MAX_CHUNK_COUNT) {
+    throw new InvalidFormatError(
+      `file too large: would require ${chunkCount} chunks (max ${DSE3_MAX_CHUNK_COUNT})`,
+    );
+  }
 
-  // Per-file random nonce — included in every chunk's AAD to prevent
-  // cross-file chunk substitution when files share the same DEK
-  const fileNonce = getRandomBytes(C.FILE_NONCE_SIZE);
-
+  const fileNonce =
+    fileNonceIn && fileNonceIn.byteLength === DSE3_FILE_NONCE_SIZE
+      ? fileNonceIn
+      : getRandomBytes(DSE3_FILE_NONCE_SIZE);
+  if (fileNonceIn && fileNonceIn.byteLength !== DSE3_FILE_NONCE_SIZE) {
+    throw new InvalidFormatError(
+      `fileNonce must be ${DSE3_FILE_NONCE_SIZE} bytes`,
+    );
+  }
   const header = writeDSE3Header(chunkCount, fileNonce, encryptedName);
   const parts: BlobPart[] = [header as BlobPart];
 
   for (let i = 0; i < chunkCount; i++) {
-    const offset = i * C.CHUNK_PLAINTEXT_SIZE;
-    const end = Math.min(offset + C.CHUNK_PLAINTEXT_SIZE, totalSize);
+    const offset = i * DSE3_CHUNK_PLAINTEXT_SIZE;
+    const end = Math.min(offset + DSE3_CHUNK_PLAINTEXT_SIZE, totalSize);
 
     let plaintext: ArrayBuffer;
     if (data instanceof File || data instanceof Blob) {
@@ -211,21 +323,20 @@ export async function encryptChunked(
       plaintext = data.slice(offset, end);
     }
 
-    const iv = getRandomBytes(C.AES_GCM_IV_SIZE);
-    const aad = buildAAD(fileNonce, i);
+    const iv = getRandomBytes(AES_GCM_IV_SIZE);
+    const aad = buildChunkAad(fileNonce, chunkCount, i);
 
-    const ciphertext = await subtle.encrypt(
+    const ct = await subtle.encrypt(
       {
         name: "AES-GCM",
         iv: iv as BufferSource,
         additionalData: aad as BufferSource,
-        tagLength: C.AES_GCM_TAG_BITS,
+        tagLength: AES_GCM_TAG_SIZE * 8,
       },
       aesKey,
       plaintext,
     );
-
-    parts.push(iv as BlobPart, ciphertext);
+    parts.push(iv as BlobPart, ct);
     onProgress?.((i + 1) / chunkCount);
   }
 
@@ -240,28 +351,37 @@ export async function decryptChunked(
   onProgress?: ProgressCallback,
 ): Promise<Blob> {
   const subtle = getCrypto();
-  const aesKey = await importAESKey(dek, ["decrypt"]);
-  const bytes =
-    data instanceof Uint8Array ? data : new Uint8Array(data);
+  const aesKey = await importDek(dek, ["decrypt"]);
+  const bytes = data instanceof Uint8Array ? data : new Uint8Array(data);
 
   const parts: ArrayBuffer[] = [];
   let cursor = headerSize;
 
   for (let i = 0; i < header.chunkCount; i++) {
-    if (cursor + C.AES_GCM_IV_SIZE > bytes.byteLength) {
-      throw new InvalidFormatError(
-        `chunk ${i}: unexpected end reading IV`,
-      );
+    if (cursor + AES_GCM_IV_SIZE > bytes.byteLength) {
+      throw new InvalidFormatError(`chunk ${i}: unexpected end reading IV`);
     }
-
-    const iv = bytes.slice(cursor, cursor + C.AES_GCM_IV_SIZE);
-    cursor += C.AES_GCM_IV_SIZE;
+    const iv = bytes.slice(cursor, cursor + AES_GCM_IV_SIZE);
+    cursor += AES_GCM_IV_SIZE;
 
     let ciphertextSize: number;
     if (i < header.chunkCount - 1) {
-      ciphertextSize = header.chunkPlaintextSize + 16; // GCM tag
+      ciphertextSize = header.chunkPlaintextSize + AES_GCM_TAG_SIZE;
     } else {
+      // Final chunk: remaining bytes minus expected tag — reject if there's
+      // extra trailing data that would otherwise be silently ignored.
       ciphertextSize = bytes.byteLength - cursor;
+      if (ciphertextSize < AES_GCM_TAG_SIZE) {
+        throw new InvalidFormatError(
+          `chunk ${i}: final ciphertext too short for tag`,
+        );
+      }
+      const maxFinal = header.chunkPlaintextSize + AES_GCM_TAG_SIZE;
+      if (ciphertextSize > maxFinal) {
+        throw new InvalidFormatError(
+          `chunk ${i}: trailing bytes after final chunk`,
+        );
+      }
     }
 
     if (cursor + ciphertextSize > bytes.byteLength) {
@@ -273,44 +393,41 @@ export async function decryptChunked(
     const ciphertext = bytes.slice(cursor, cursor + ciphertextSize);
     cursor += ciphertextSize;
 
-    const aad = buildAAD(header.fileNonce, i);
-
+    const aad = buildChunkAad(header.fileNonce, header.chunkCount, i);
     try {
-      const plaintext = await subtle.decrypt(
+      const pt = await subtle.decrypt(
         {
           name: "AES-GCM",
           iv: iv as BufferSource,
           additionalData: aad as BufferSource,
-          tagLength: C.AES_GCM_TAG_BITS,
+          tagLength: AES_GCM_TAG_SIZE * 8,
         },
         aesKey,
         ciphertext as BufferSource,
       );
-      parts.push(plaintext);
+      parts.push(pt);
     } catch {
       throw new DecryptionError(
         `chunk ${i} failed — data may be corrupted or tampered`,
       );
     }
-
     onProgress?.((i + 1) / header.chunkCount);
   }
 
+  if (cursor !== bytes.byteLength) {
+    throw new InvalidFormatError("trailing bytes after last chunk");
+  }
   return new Blob(parts);
 }
 
-// ============================================================================
-// Helpers
-// ============================================================================
-
 export function shouldUseChunkedEncryption(fileSize: number): boolean {
-  return fileSize >= C.CHUNKED_ENCRYPTION_THRESHOLD;
+  return fileSize >= CHUNKED_ENCRYPTION_THRESHOLD;
 }
 
 export function estimateEncryptedSize(originalSize: number): number {
   const chunkCount = Math.max(
     1,
-    Math.ceil(originalSize / C.CHUNK_PLAINTEXT_SIZE),
+    Math.ceil(originalSize / DSE3_CHUNK_PLAINTEXT_SIZE),
   );
-  return C.DSE3_FIXED_HEADER_SIZE + chunkCount * CHUNK_OVERHEAD + originalSize;
+  return DSE3_FIXED_HEADER_SIZE + chunkCount * DSE3_CHUNK_OVERHEAD + originalSize;
 }

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,16 +31,31 @@ import React, {
   useCallback,
   useEffect,
   useMemo,
+  useRef,
   type ReactNode,
 } from "react";
 
 import {
-  SecretStorageService,
+  SecretStorage,
   registerUnlockHandler,
   unregisterUnlockHandler,
 } from "../../services/encryption/secretStorage";
-import { decryptPrivateKey } from "../../services/encryption/keyManagement";
-import type { SerializedKeyPair } from "../../services/encryption/types";
+import {
+  registerKeyMismatchHandler,
+  unregisterKeyMismatchHandler,
+  type KeyMismatchInfo,
+  type KeyMismatchDecision,
+} from "../../services/encryption/tofuStore";
+import { unlockWithPassphrase } from "../../services/encryption/identity";
+import type {
+  IdentityKeyPair,
+  SerializedIdentity,
+} from "../../services/encryption/types";
+
+// React context for the unlocked X25519 identity. `userKeys` carries the
+// serialized envelope plus the userId required to verify cache ownership.
+
+export type EncryptionUserKeys = SerializedIdentity & { userId: string };
 
 export type EncryptionContextValue = {
   isUnlocked: boolean;
@@ -49,15 +64,18 @@ export type EncryptionContextValue = {
   unlockError: string | null;
   unlock: (passphrase: string) => Promise<boolean>;
   lock: () => void;
-  getSecretKey: () => Promise<CryptoKey | null>;
-  requireUnlock: () => Promise<CryptoKey | null>;
+  getIdentity: () => IdentityKeyPair | null;
+  /** Prompts via the registered PassphraseDialog if cache is empty. */
+  requireIdentity: () => Promise<IdentityKeyPair | null>;
+  resolveKeyMismatch: (info: KeyMismatchInfo) => Promise<KeyMismatchDecision>;
   clearError: () => void;
 };
 
 type EncryptionProviderProps = {
   children: ReactNode;
-  userKeys: SerializedKeyPair | null;
+  userKeys: EncryptionUserKeys | null;
   PassphraseDialog?: React.ComponentType<PassphraseDialogProps>;
+  KeyChangeDialog?: React.ComponentType<KeyChangeDialogModalProps>;
 };
 
 export type PassphraseDialogProps = {
@@ -68,40 +86,54 @@ export type PassphraseDialogProps = {
   onCancel: () => void;
 };
 
+export type KeyChangeDialogModalProps = {
+  visible: boolean;
+  displayName?: string;
+  userId: string;
+  knownPublicKey: string;
+  newPublicKey: string;
+  knownFirstSeenAt: number;
+  knownLastSeenAt: number;
+  onAccept: () => void;
+  onRefuse: () => void;
+};
+
 const EncryptionContext = createContext<EncryptionContextValue | null>(null);
 
 export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
   children,
   userKeys,
   PassphraseDialog,
+  KeyChangeDialog,
 }) => {
-  // State
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [isUnlocking, setIsUnlocking] = useState(false);
   const [unlockError, setUnlockError] = useState<string | null>(null);
   const [showPassphraseDialog, setShowPassphraseDialog] = useState(false);
-  const [pendingResolve, setPendingResolve] = useState<
-    ((key: CryptoKey | null) => void) | null
+  const pendingResolveRef = useRef<
+    ((kp: IdentityKeyPair | null) => void) | null
+  >(null);
+
+  const [keyChangeRequest, setKeyChangeRequest] =
+    useState<KeyMismatchInfo | null>(null);
+  const keyChangeResolveRef = useRef<
+    ((d: KeyMismatchDecision) => void) | null
   >(null);
 
   const hasConfiguredKey = !!userKeys?.publicKey && !!userKeys?.privateKeyEnc;
 
-  // Check cached key on mount AND when userKeys changes (login/logout/user switch)
   useEffect(() => {
-    if (!hasConfiguredKey) {
+    if (!hasConfiguredKey || !userKeys?.userId) {
       setIsUnlocked(false);
       setShowPassphraseDialog(false);
-      setPendingResolve(null);
+      pendingResolveRef.current?.(null);
+      pendingResolveRef.current = null;
+      SecretStorage.lock();
       return;
     }
-
-    // Pass userId so IndexedDB can verify the cached key belongs to this user
-    SecretStorageService.hasDecryptedKey(userKeys?.userId).then((has) => {
-      setIsUnlocked(has);
-    });
+    setIsUnlocked(SecretStorage.hasUnlocked(userKeys.userId));
   }, [hasConfiguredKey, userKeys?.publicKey, userKeys?.userId]);
 
-  // Clear error when dialog is closed
   useEffect(() => {
     if (!showPassphraseDialog) {
       setUnlockError(null);
@@ -110,30 +142,27 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
 
   const unlock = useCallback(
     async (passphrase: string): Promise<boolean> => {
-      if (!userKeys?.privateKeyEnc) {
-        console.warn("Cannot unlock: no encryption keys configured");
+      if (!userKeys?.privateKeyEnc || !userKeys?.userId) {
         setUnlockError("No encryption keys configured");
         return false;
       }
-
       setIsUnlocking(true);
       setUnlockError(null);
-
       try {
-        const privateKey = await decryptPrivateKey(
-          userKeys.privateKeyEnc,
+        const kp = await unlockWithPassphrase(
+          {
+            publicKey: userKeys.publicKey,
+            privateKeyEnc: userKeys.privateKeyEnc,
+          },
           passphrase,
         );
-
-        await SecretStorageService.cacheDecryptedKey(privateKey, userKeys.userId);
+        SecretStorage.cacheUnlocked(userKeys.userId, kp);
         setIsUnlocked(true);
-
         return true;
       } catch (error) {
-        const errorMessage =
+        const message =
           error instanceof Error ? error.message : "Decryption failed";
-        setUnlockError(errorMessage);
-        console.warn("Unlock failed:", error);
+        setUnlockError(message);
         return false;
       } finally {
         setIsUnlocking(false);
@@ -142,8 +171,8 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     [userKeys],
   );
 
-  const lock = useCallback(async () => {
-    await SecretStorageService.lockEncryption();
+  const lock = useCallback(() => {
+    SecretStorage.lock();
     setIsUnlocked(false);
   }, []);
 
@@ -151,65 +180,119 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     setUnlockError(null);
   }, []);
 
-  const getSecretKey = useCallback(async (): Promise<CryptoKey | null> => {
-    return SecretStorageService.getCachedKey();
-  }, []);
+  const getIdentity = useCallback((): IdentityKeyPair | null => {
+    if (!userKeys?.userId) return null;
+    return SecretStorage.getCached(userKeys.userId);
+  }, [userKeys?.userId]);
 
-  const requireUnlock = useCallback(async (): Promise<CryptoKey | null> => {
-    // Try cached key first (even if isUnlocked — it may have expired)
-    const cachedKey = await SecretStorageService.getCachedKey(
-      userKeys?.userId,
-    );
-    if (cachedKey) return cachedKey;
+  const requireIdentity = useCallback(async (): Promise<IdentityKeyPair | null> => {
+    if (!userKeys?.userId) return null;
 
-    // No cached key — need to prompt for passphrase
-    if (!hasConfiguredKey) {
-      return null;
-    }
+    const cached = SecretStorage.getCached(userKeys.userId);
+    if (cached) return cached;
 
+    if (!hasConfiguredKey) return null;
     if (!PassphraseDialog) {
-      console.warn(
-        "Cannot prompt for passphrase: no PassphraseDialog component provided",
-      );
+      if (typeof console !== "undefined") {
+        console.warn(
+          "Cannot prompt for passphrase: no PassphraseDialog component provided",
+        );
+      }
       return null;
     }
 
-    // Reset unlock state since cache is empty
     setIsUnlocked(false);
-
-    return new Promise((resolve) => {
-      setPendingResolve(() => resolve);
+    return new Promise<IdentityKeyPair | null>((resolve) => {
+      pendingResolveRef.current = resolve;
       setShowPassphraseDialog(true);
     });
   }, [hasConfiguredKey, PassphraseDialog, userKeys?.userId]);
 
   useEffect(() => {
-    registerUnlockHandler(requireUnlock);
+    registerUnlockHandler(async () => {
+      return requireIdentity();
+    });
     return () => {
       unregisterUnlockHandler();
     };
-  }, [requireUnlock]);
+  }, [requireIdentity]);
+
+  // Auto-lock on tab visibility hidden.
+  useEffect(() => {
+    if (typeof document === "undefined") return undefined;
+    const handler = () => {
+      if (document.visibilityState === "hidden") {
+        SecretStorage.lock();
+        setIsUnlocked(false);
+      }
+    };
+    document.addEventListener("visibilitychange", handler);
+    return () => {
+      document.removeEventListener("visibilitychange", handler);
+    };
+  }, []);
+
+  const resolveKeyMismatch = useCallback(
+    async (info: KeyMismatchInfo): Promise<KeyMismatchDecision> => {
+      if (!KeyChangeDialog) {
+        if (typeof console !== "undefined") {
+          console.warn(
+            "Encryption key mismatch detected but no KeyChangeDialog was provided; refusing.",
+          );
+        }
+        return "refuse";
+      }
+      // Concurrent prompt: refuse the in-flight one and show the new.
+      if (keyChangeResolveRef.current) {
+        keyChangeResolveRef.current("refuse");
+        keyChangeResolveRef.current = null;
+      }
+      return new Promise<KeyMismatchDecision>((resolve) => {
+        keyChangeResolveRef.current = resolve;
+        setKeyChangeRequest(info);
+      });
+    },
+    [KeyChangeDialog],
+  );
+
+  useEffect(() => {
+    registerKeyMismatchHandler(resolveKeyMismatch);
+    return () => {
+      unregisterKeyMismatchHandler();
+    };
+  }, [resolveKeyMismatch]);
+
+  const handleKeyChangeAccept = useCallback(() => {
+    keyChangeResolveRef.current?.("accept");
+    keyChangeResolveRef.current = null;
+    setKeyChangeRequest(null);
+  }, []);
+
+  const handleKeyChangeRefuse = useCallback(() => {
+    keyChangeResolveRef.current?.("refuse");
+    keyChangeResolveRef.current = null;
+    setKeyChangeRequest(null);
+  }, []);
 
   const handlePassphraseSubmit = useCallback(
     async (passphrase: string): Promise<void> => {
       const success = await unlock(passphrase);
-
-      if (success) {
-        const key = await SecretStorageService.getCachedKey();
-        pendingResolve?.(key);
+      if (success && userKeys?.userId) {
+        const kp = SecretStorage.getCached(userKeys.userId);
+        pendingResolveRef.current?.(kp);
+        pendingResolveRef.current = null;
         setShowPassphraseDialog(false);
-        setPendingResolve(null);
       }
     },
-    [unlock, pendingResolve],
+    [unlock, userKeys?.userId],
   );
 
   const handlePassphraseCancel = useCallback(() => {
-    pendingResolve?.(null);
+    pendingResolveRef.current?.(null);
+    pendingResolveRef.current = null;
     setShowPassphraseDialog(false);
-    setPendingResolve(null);
     setUnlockError(null);
-  }, [pendingResolve]);
+  }, []);
 
   const value = useMemo<EncryptionContextValue>(
     () => ({
@@ -219,8 +302,9 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
       unlockError,
       unlock,
       lock,
-      getSecretKey,
-      requireUnlock,
+      getIdentity,
+      requireIdentity,
+      resolveKeyMismatch,
       clearError,
     }),
     [
@@ -230,8 +314,9 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
       unlockError,
       unlock,
       lock,
-      getSecretKey,
-      requireUnlock,
+      getIdentity,
+      requireIdentity,
+      resolveKeyMismatch,
       clearError,
     ],
   );
@@ -248,20 +333,31 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
           onCancel={handlePassphraseCancel}
         />
       )}
+      {KeyChangeDialog && keyChangeRequest && (
+        <KeyChangeDialog
+          visible
+          userId={keyChangeRequest.userId}
+          displayName={keyChangeRequest.displayName}
+          knownPublicKey={keyChangeRequest.knownKey}
+          newPublicKey={keyChangeRequest.newKey}
+          knownFirstSeenAt={keyChangeRequest.knownFirstSeenAt}
+          knownLastSeenAt={keyChangeRequest.knownLastSeenAt}
+          onAccept={handleKeyChangeAccept}
+          onRefuse={handleKeyChangeRefuse}
+        />
+      )}
     </EncryptionContext.Provider>
   );
 };
 
 export const useEncryption = (): EncryptionContextValue => {
   const context = useContext(EncryptionContext);
-
   if (!context) {
     throw new Error(
       "useEncryption must be used within an EncryptionProvider. " +
         "Wrap your app with <EncryptionProvider>.",
     );
   }
-
   return context;
 };
 
@@ -276,9 +372,7 @@ export function withEncryption<P extends object>(
     const encryption = useEncryption();
     return <Component {...(props as P)} encryption={encryption} />;
   };
-
   WithEncryption.displayName = `withEncryption(${Component.displayName || Component.name || "Component"})`;
-
   return WithEncryption;
 }
 

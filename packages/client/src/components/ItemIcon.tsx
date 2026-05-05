@@ -25,11 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import Security12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/security.react.svg?url";
+import Locked12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/locked.react.svg?url";
 
 import React from "react";
 import { ReactSVG } from "react-svg";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
 
 import type { TLogo } from "@docspace/ui-kit/types";
 import { RoomIcon, type TModel } from "@docspace/ui-kit/components";
@@ -57,6 +59,8 @@ type ItemIconProps = {
 	className: string;
 	isTemplate?: boolean;
 	dataTestId?: string;
+	encrypted?: boolean;
+	hasEncryptionKeys?: boolean;
 };
 
 const ItemIcon = ({
@@ -80,12 +84,29 @@ const ItemIcon = ({
 	className,
 	isTemplate,
 	dataTestId,
+	encrypted,
+	hasEncryptionKeys,
 }: ItemIconProps) => {
+	const { t } = useTranslation(["Common"]);
 	const isLoadedRoomIcon = !!logo;
 	const showDefaultRoomIcon = !isLoadedRoomIcon && isRoom;
 
-	const showEncryptedBadge =
+	const showLegacyEncryptedBadge =
 		(isPrivacy && !!fileExst) || (isRoom && !!isPrivateRoom && !isArchive);
+
+	const isEncryptedFile = !!encrypted && !!fileExst;
+	// Heuristic: user with zero keys can decrypt nothing in any room.
+	const showNoAccessBadge = isEncryptedFile && !hasEncryptionKeys;
+
+	const showEncryptedBadge =
+		showLegacyEncryptedBadge || isEncryptedFile;
+
+	const badgeSrc = showNoAccessBadge ? Locked12ReactSvgUrl : Security12ReactSvgUrl;
+	const badgeTitle = showNoAccessBadge
+		? t("Common:NoAccessToEncryptedFile")
+		: isEncryptedFile
+			? t("Common:EncryptedFile")
+			: undefined;
 
 	return (
 		<div
@@ -113,14 +134,21 @@ const ItemIcon = ({
 			/>
 			{showEncryptedBadge ? (
 				<ReactSVG
-					className={styles.encryptedFileIcon}
-					src={Security12ReactSvgUrl}
+					className={classNames(styles.encryptedFileIcon, {
+						[styles.noAccessIcon]: showNoAccessBadge,
+					})}
+					src={badgeSrc}
+					title={badgeTitle}
 				/>
 			) : null}
 		</div>
 	);
 };
 
-export default inject(({ treeFoldersStore }: TStore) => {
-	return { isPrivacy: treeFoldersStore.isPrivacyFolder };
+export default inject(({ treeFoldersStore, userStore }: TStore) => {
+	const keys = userStore?.encryptionKeys;
+	return {
+		isPrivacy: treeFoldersStore.isPrivacyFolder,
+		hasEncryptionKeys: Array.isArray(keys) && keys.length > 0,
+	};
 })(observer(ItemIcon));

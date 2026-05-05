@@ -314,6 +314,7 @@ class DialogsStore {
   removeUserConfirmation = {
     visible: false,
     callback: null,
+    isEncryptedRoom: false,
   };
 
   isShareFormData = { visible: false, updateAccessLink: null, fileId: null };
@@ -1095,11 +1096,17 @@ class DialogsStore {
   /**
    * @param {boolean} visible
    * @param {()=>Promise<void>=} callback
+   * @param {boolean} [isEncryptedRoom=false]
    */
-  setRemoveUserConfirmation = (visible, callback = null) => {
+  setRemoveUserConfirmation = (
+    visible,
+    callback = null,
+    isEncryptedRoom = false,
+  ) => {
     this.removeUserConfirmation = {
       visible,
       callback,
+      isEncryptedRoom,
     };
   };
 

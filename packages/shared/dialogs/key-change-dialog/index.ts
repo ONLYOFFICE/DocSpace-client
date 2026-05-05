@@ -24,15 +24,5 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export * from "./types";
-export * from "./errors";
-export * from "./utils";
-export * from "./identity";
-export * from "./hpke";
-export * from "./fileKeys";
-export * from "./streamingEncryption";
-export * from "./recovery";
-export * from "./secretStorage";
-export * from "./roomFileAccess";
-export * from "./tofuStore";
-export * from "./filenameCache";
+export { default as KeyChangeDialog } from "./KeyChangeDialog";
+export type { KeyChangeDialogProps } from "./KeyChangeDialog.types";

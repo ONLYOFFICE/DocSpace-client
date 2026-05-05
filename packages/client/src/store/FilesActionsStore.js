@@ -86,7 +86,8 @@ import {
   deduplicateFileNames,
   triggerFileDownload,
 } from "SRC_DIR/helpers/encryptedDownload";
-import { requestUnlock } from "@docspace/shared/services/encryption/secretStorage";
+import { requireUnlock } from "@docspace/shared/services/encryption/secretStorage";
+import { forgetEncryptedFilename } from "@docspace/shared/services/encryption/filenameCache";
 
 import {
   getCategoryTypeByFolderType,
@@ -579,6 +580,7 @@ class FilesActionStore {
               );
 
               this.uploadDataStore.removeFiles(fileIds);
+              fileIds.forEach((id) => forgetEncryptedFilename(id));
             }
 
             if (currentFolderId) {
@@ -1007,21 +1009,17 @@ class FilesActionStore {
       if (!encryptionInfo || !encryptionInfo.fileKeys) {
         return Promise.resolve();
       }
-
-      const myFileKey = encryptionInfo.fileKeys.find(
-        (k) => k.userId === userId || k.userId === String(userId),
+      const hasOwnEntry = encryptionInfo.fileKeys.some(
+        (k) => String(k.userId) === String(userId),
       );
-
-      if (!myFileKey) {
+      if (!hasOwnEntry) {
         return Promise.resolve();
       }
 
-      const downloadUrl = file.viewUrl;
-
-      const userKeys = {
-        publicKey: encryptionKeys[0].publicKey,
-        privateKeyEnc: encryptionKeys[0].privateKeyEnc,
-      };
+      const identity = await requireUnlock(String(userId));
+      if (!identity) {
+        return Promise.resolve();
+      }
 
       setSecondaryProgressBarData({
         operation: OPERATIONS_NAME.download,
@@ -1029,22 +1027,16 @@ class FilesActionStore {
         operationId,
       });
 
-      const result = await downloadAndDecryptFile(
-        downloadUrl,
-        myFileKey.privateKeyEnc,
-        file.title,
-        file.contentType || "application/octet-stream",
-        userKeys,
-        String(userId),
-        async () => {
-          const privateKey = await requestUnlock();
-
-          if (!privateKey) {
-            return null;
-          }
-          return "__KEY_CACHED__";
-        },
-        (progress) => {
+      const result = await downloadAndDecryptFile({
+        downloadUrl: file.viewUrl,
+        fileId: file.id,
+        fileKeys: encryptionInfo.fileKeys,
+        roomMemberKeys: encryptionInfo.userKeys ?? [],
+        userId: String(userId),
+        identity,
+        originalFileName: file.title,
+        originalFileType: file.contentType || "application/octet-stream",
+        onDownloadProgress: (progress) => {
           setSecondaryProgressBarData({
             operation: OPERATIONS_NAME.download,
             percent: Math.floor(progress * 70),
@@ -1052,7 +1044,7 @@ class FilesActionStore {
             operationId,
           });
         },
-        (progress) => {
+        onProgress: (progress) => {
           setSecondaryProgressBarData({
             operation: OPERATIONS_NAME.download,
             percent: 70 + Math.floor(progress * 30),
@@ -1060,7 +1052,7 @@ class FilesActionStore {
             operationId,
           });
         },
-      );
+      });
 
       setSecondaryProgressBarData({
         operation: OPERATIONS_NAME.download,
@@ -1110,17 +1102,10 @@ class FilesActionStore {
     const operationId = uniqueid("operation_");
 
     try {
-      const privateKey = await requestUnlock();
-      if (!privateKey) {
+      const identity = await requireUnlock(String(userId));
+      if (!identity) {
         return;
       }
-
-      const onPassphraseRequired = async () => "__KEY_CACHED__";
-
-      const userKeys = {
-        publicKey: encryptionKeys[0].publicKey,
-        privateKeyEnc: encryptionKeys[0].privateKeyEnc,
-      };
 
       const fileNames = deduplicateFileNames(
         encryptedFiles.map((f) => f.title),
@@ -1156,24 +1141,24 @@ class FilesActionStore {
             continue;
           }
 
-          const myFileKey = encryptionInfo.fileKeys.find(
-            (k) => k.userId === userId || k.userId === String(userId),
+          const hasOwnEntry = encryptionInfo.fileKeys.some(
+            (k) => String(k.userId) === String(userId),
           );
-
-          if (!myFileKey) {
+          if (!hasOwnEntry) {
             failures.push(fileName);
             continue;
           }
 
-          const result = await downloadAndDecryptFileToBuffer(
-            file.viewUrl,
-            myFileKey.privateKeyEnc,
-            fileName,
-            file.contentType || "application/octet-stream",
-            userKeys,
-            String(userId),
-            onPassphraseRequired,
-            (progress) => {
+          const result = await downloadAndDecryptFileToBuffer({
+            downloadUrl: file.viewUrl,
+            fileId: file.id,
+            fileKeys: encryptionInfo.fileKeys,
+            roomMemberKeys: encryptionInfo.userKeys ?? [],
+            userId: String(userId),
+            identity,
+            originalFileName: fileName,
+            originalFileType: file.contentType || "application/octet-stream",
+            onDownloadProgress: (progress) => {
               setSecondaryProgressBarData({
                 operation: OPERATIONS_NAME.download,
                 percent: Math.floor(fileBase + progress * fileShare * 0.6),
@@ -1181,7 +1166,7 @@ class FilesActionStore {
                 operationId,
               });
             },
-            (progress) => {
+            onProgress: (progress) => {
               setSecondaryProgressBarData({
                 operation: OPERATIONS_NAME.download,
                 percent: Math.floor(
@@ -1191,7 +1176,7 @@ class FilesActionStore {
                 operationId,
               });
             },
-          );
+          });
 
           if (result.success && result.data) {
             results.push({ name: result.fileName, data: result.data });
@@ -1425,6 +1410,7 @@ class FilesActionStore {
 
         this.updateFilesAfterDelete(operationId, operation);
         this.filesStore.removeFiles([itemId], null, null, destFolderId);
+        forgetEncryptedFilename(itemId);
       });
     }
     if (isRoom) {

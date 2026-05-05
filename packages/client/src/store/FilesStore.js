@@ -65,6 +65,12 @@ import {
   frameCallEvent,
   getCategoryType,
 } from "@docspace/shared/utils/common";
+import {
+  getCachedEncryptedFilename,
+  subscribeFilenameCache,
+} from "@docspace/shared/services/encryption/filenameCache";
+import { SecretStorage } from "@docspace/shared/services/encryption/secretStorage";
+import { recoverEncryptedFilenames } from "SRC_DIR/helpers/encryptedFilenameRecovery";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { getI18n } from "react-i18next";
@@ -157,6 +163,9 @@ class FilesStore {
   indexingStore;
 
   pluginStore;
+
+  // MobX dependency for getFilesListItems so a cache write triggers re-render.
+  encryptedFilenameCacheVersion = 0;
 
   privateViewAs =
     !isDesktop() && storageViewAs !== "tile" ? "row" : storageViewAs || "table";
@@ -311,6 +320,13 @@ class FilesStore {
     this.settingsStore = settingsStore;
     this.indexingStore = indexingStore;
     this.aiRoomStore = aiRoomStore;
+
+    // Singleton lifetime; never unsubscribed.
+    subscribeFilenameCache(() => {
+      runInAction(() => {
+        this.encryptedFilenameCacheVersion += 1;
+      });
+    });
 
     SocketHelper?.on(SocketEvents.ChangedQuotaUsedValue, (res) => {
       const { isFrame } = this.settingsStore;
@@ -3854,6 +3870,18 @@ class FilesStore {
       .then((file) => this.setFile(file));
   };
 
+  recoverEncryptedFilenamesForCurrentView = () => {
+    const userId = this.userStore?.user?.id;
+    if (!userId) return;
+    const identity = SecretStorage.getCached(String(userId));
+    if (!identity) return;
+    const candidates = (this.files ?? [])
+      .filter((f) => f.encrypted && f.id && f.viewUrl)
+      .map((f) => ({ id: f.id, viewUrl: f.viewUrl }));
+    if (candidates.length === 0) return;
+    void recoverEncryptedFilenames(candidates, String(userId), identity);
+  };
+
   renameFolder = (folderId, title) => {
     return api.files.renameFolder(folderId, title).then((folder) => {
       this.setFolder(folder);
@@ -4253,6 +4281,11 @@ class FilesStore {
 
       const isForm = fileExst === ".oform";
 
+      // `void` registers the MobX dep — background cache writes re-render.
+      void this.encryptedFilenameCacheVersion;
+      const displayTitle =
+        encrypted && id ? getCachedEncryptedFilename(id) || title : title;
+
       return {
         access,
         daysRemaining: autoDelete && getDaysRemaining(autoDelete),
@@ -4286,7 +4319,7 @@ class FilesStore {
         rootFolderId,
         // selectedItem,
         shared,
-        title,
+        title: displayTitle,
         updated,
         updatedBy,
         version,

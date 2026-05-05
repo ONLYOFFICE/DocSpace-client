@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,53 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// Pure crypto — no API dependencies. The caller (client helpers) handles
-// server API calls (deleteEncryptionKey, setEncryptionKeys, etc.).
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 
-export { reEncryptPrivateKey } from "./keyManagement";
+.description {
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.warningBox {
+  padding: 12px;
+  background-color: var(--color-warning-light, #fff8e6);
+  border-radius: 4px;
+  border-left: 3px solid var(--color-warning, #f5a623);
+}
+
+.fingerprintsTable {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  background: var(--row-background-color);
+  border-radius: 8px;
+  border: 1px solid var(--divider-color);
+}
+
+.fingerprintRow {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fingerprintLabel {
+  color: var(--text-secondary);
+}
+
+.fingerprintValue {
+  font-family: "Roboto Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  user-select: all;
+  word-break: break-all;
+}
+
+.metaLine {
+  color: var(--text-secondary);
+  font-size: 12px;
+}

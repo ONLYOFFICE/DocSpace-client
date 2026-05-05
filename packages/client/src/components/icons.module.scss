@@ -110,3 +110,13 @@
     }
   }
 }
+
+.noAccessIcon {
+  svg {
+    fill: var(--text-secondary);
+  }
+
+  path {
+    fill: var(--text-secondary);
+  }
+}

@@ -54,11 +54,16 @@ import {
 } from "@docspace/shared/api/files";
 import { getFilePublicKeys } from "@docspace/shared/api/privacy";
 import {
-  unwrapDEK,
-  wrapDEK,
-  importPublicKey,
-} from "@docspace/shared/services/encryption/keyManagement";
-import { requestUnlock } from "@docspace/shared/services/encryption/secretStorage";
+  unwrapDekForCurrentUser,
+  wrapDekForRecipients,
+} from "@docspace/shared/services/encryption/roomFileAccess";
+import { wipeDek } from "@docspace/shared/services/encryption/fileKeys";
+import { requireUnlock } from "@docspace/shared/services/encryption/secretStorage";
+import {
+  getTofuStore,
+  getKeyMismatchHandler,
+} from "@docspace/shared/services/encryption/tofuStore";
+import { rememberEncryptedFilename } from "@docspace/shared/services/encryption/filenameCache";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
 
@@ -205,6 +210,41 @@ class UploadDataStore {
     this.encryptionEnabled = enabled;
   };
 
+  wrapForSelfThenRoom = async (
+    fileId,
+    currentUserId,
+    publicKeyBase64,
+    publicKeyId,
+    dek,
+  ) => {
+    try {
+      const identity = await requireUnlock(currentUserId);
+      if (!identity) {
+        wipeDek(dek);
+        throw new Error(
+          "Encryption identity is locked — cannot wrap DEK for upload",
+        );
+      }
+      const ownWraps = await wrapDekForRecipients({
+        dek,
+        senderIdentity: identity,
+        senderUserId: currentUserId,
+        recipients: [
+          {
+            userId: currentUserId,
+            publicKey: publicKeyBase64,
+            publicKeyId,
+          },
+        ],
+        fileId,
+      });
+      await setFileEncryptionKeys(fileId, ownWraps);
+      await this.encryptKeysForRoomMembers(fileId, currentUserId);
+    } finally {
+      wipeDek(dek);
+    }
+  };
+
   encryptKeysForRoomMembers = async (fileId, currentUserId) => {
     try {
       const [publicKeys, encryptionInfo] = await Promise.all([
@@ -219,47 +259,84 @@ class UploadDataStore {
         existingFileKeys.map((k) => String(k.userId)),
       );
 
-      const publicKeyMap = new Map();
+      // Each recipient's pubkey is TOFU-checked; mismatches go through the
+      // registered handler and only proceed if the user accepts.
+      const tofu = getTofuStore(String(currentUserId));
+      const mismatchHandler = getKeyMismatchHandler();
+      const recipients = [];
       if (Array.isArray(publicKeys)) {
         for (const pk of publicKeys) {
           if (!pk.publicKey || !pk.userId) continue;
           const uid = String(pk.userId);
           if (uid === String(currentUserId)) continue;
           if (existingKeyUserIds.has(uid)) continue;
-          publicKeyMap.set(uid, { publicKey: pk.publicKey, keyId: pk.id || "" });
+
+          const result = await tofu.checkKey(uid, pk.publicKey);
+          if (result.kind === "mismatch") {
+            if (!mismatchHandler) {
+              // No handler ⇒ skip; the recipient can request access later.
+              continue;
+            }
+            let decision;
+            try {
+              decision = await mismatchHandler({
+                userId: uid,
+                knownKey: result.known.publicKey,
+                newKey: result.submitted,
+                knownFirstSeenAt: result.known.firstSeenAt,
+                knownLastSeenAt: result.known.lastSeenAt,
+              });
+            } catch (e) {
+              console.error(
+                "[ENCRYPTION] Key mismatch resolver threw:",
+                e,
+              );
+              continue;
+            }
+            if (decision !== "accept") continue;
+            await tofu.acceptKey(uid, pk.publicKey);
+          }
+
+          recipients.push({
+            userId: uid,
+            publicKey: pk.publicKey,
+            publicKeyId: pk.id || "",
+          });
         }
       }
+      if (recipients.length === 0) return;
 
-      if (publicKeyMap.size === 0) return;
+      const identity = await requireUnlock(String(currentUserId));
+      if (!identity) return;
 
-      const privateKey = await requestUnlock();
-      if (!privateKey) return;
+      let dek;
+      try {
+        dek = await unwrapDekForCurrentUser({
+          fileKeys: existingFileKeys,
+          roomMemberKeys: encryptionInfo.userKeys ?? [],
+          currentUserId: String(currentUserId),
+          currentIdentity: identity,
+          fileId,
+        });
+      } catch (error) {
+        console.error(
+          "[ENCRYPTION] Failed to unwrap own DEK for re-wrap:",
+          error,
+        );
+        return;
+      }
 
-      // Unwrap the file DEK using current user's wrapped key
-      const myKey = existingFileKeys.find(
-        (k) => String(k.userId) === String(currentUserId),
-      );
-      if (!myKey) return;
-
-      const dek = await unwrapDEK(myKey.privateKeyEnc, privateKey);
-
-      const newKeys = [];
-
-      for (const [userId, { publicKey: pubKeyBase64, keyId }] of publicKeyMap) {
-        try {
-          const memberPubKey = await importPublicKey(pubKeyBase64);
-          const wrappedDEK = await wrapDEK(dek, memberPubKey);
-          newKeys.push({
-            userId,
-            publicKeyId: keyId,
-            privateKeyEnc: wrappedDEK,
-          });
-        } catch (error) {
-          console.error(
-            `[ENCRYPTION] Failed to wrap DEK for user ${userId}:`,
-            error,
-          );
-        }
+      let newKeys;
+      try {
+        newKeys = await wrapDekForRecipients({
+          dek,
+          senderIdentity: identity,
+          senderUserId: String(currentUserId),
+          recipients,
+          fileId,
+        });
+      } finally {
+        wipeDek(dek);
       }
 
       if (newKeys.length > 0) {
@@ -300,21 +377,16 @@ class UploadDataStore {
   shouldEncryptCurrentUpload = () => {
     const { roomType, private: isPrivate } = this.selectedFolderStore;
     const { publicKey, userId } = this.getUserEncryptionKeys();
-
-    return shouldEncryptUpload(roomType, publicKey, userId, isPrivate);
+    return shouldEncryptUpload(roomType, isPrivate) && !!publicKey && !!userId;
   };
 
   prepareFileForEncryptedUpload = async (file, folderId, onProgress) => {
     const { roomType, private: isPrivate } = this.selectedFolderStore;
-    const { publicKey, userId } = this.getUserEncryptionKeys();
-
     return prepareEncryptedUpload({
       file,
       folderId,
       roomType: roomType || RoomsType.CustomRoom,
       isPrivate: isPrivate || false,
-      userPublicKey: publicKey,
-      userId,
       onProgress,
     });
   };
@@ -1482,31 +1554,31 @@ class UploadDataStore {
 
       const currentFileData = this.files[indexOfFile];
       if (currentFileData?.encrypted && currentFileData?.dek) {
-        const { publicKey, userId, publicKeyId } = this.getUserEncryptionKeys();
+        if (currentFileData.file?.name) {
+          rememberEncryptedFilename(fileId, currentFileData.file.name);
+        }
 
-        // Wrap DEK for the uploading user and store via API
-        importPublicKey(publicKey)
-          .then((pubKey) => wrapDEK(currentFileData.dek, pubKey))
-          .then((wrappedDEK) =>
-            setFileEncryptionKeys(fileId, [
-              {
-                userId,
-                publicKeyId: publicKeyId || "",
-                privateKeyEnc: wrappedDEK,
-              },
-            ]),
-          )
-          .then(() => {
-            if (userId) {
-              return this.encryptKeysForRoomMembers(fileId, userId);
-            }
-          })
-          .catch((error) => {
+        const { publicKey, userId, publicKeyId } = this.getUserEncryptionKeys();
+        if (!userId || !publicKey) {
+          console.error(
+            "[ENCRYPTION] Cannot wrap DEK: encryption keys missing for current user",
+          );
+        } else {
+          // Wrap own slot, then the rest of the room. Must run after the
+          // server assigns fileId — the wrap's AAD binds to it.
+          this.wrapForSelfThenRoom(
+            fileId,
+            String(userId),
+            publicKey,
+            publicKeyId || "",
+            currentFileData.dek,
+          ).catch((error) => {
             console.error(
               "[ENCRYPTION] Failed to set file encryption keys:",
               error,
             );
           });
+        }
       }
 
       if (fileInfo.version > 2) {
@@ -1874,7 +1946,8 @@ class UploadDataStore {
 
     const { file, toFolderId /* , action */ } = item;
     let fileToUpload = file;
-    const fileName = file.name;
+    // Replaced with the obfuscated upload name for encrypted uploads.
+    let fileName = file.name;
 
     const actualFolderId = isAIRoom ? knowledgeId : toFolderId;
 
@@ -1882,12 +1955,8 @@ class UploadDataStore {
     let isEncrypted = file.encrypted || false;
 
     const { publicKey, userId } = this.getUserEncryptionKeys();
-    const shouldEncrypt = shouldEncryptUpload(
-      roomType,
-      publicKey,
-      userId,
-      isPrivate,
-    );
+    const shouldEncrypt =
+      shouldEncryptUpload(roomType, isPrivate) && !!publicKey && !!userId;
 
     if (shouldEncrypt && !isEncrypted) {
       try {
@@ -1914,7 +1983,8 @@ class UploadDataStore {
         );
 
         if (prepared.encrypted) {
-          fileToUpload = new File([prepared.data], file.name, {
+          fileName = prepared.uploadFileName;
+          fileToUpload = new File([prepared.data], prepared.uploadFileName, {
             type: "application/octet-stream",
             lastModified: file.lastModified,
           });

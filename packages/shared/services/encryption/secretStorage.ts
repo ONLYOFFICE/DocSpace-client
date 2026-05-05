@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,236 +24,125 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ENCRYPTION_CONSTANTS } from "./types";
+// In-memory cache of the unlocked X25519 keypair for the current user.
+// Single-slot, per-page-session. Lives in main thread (no Worker isolation).
 
-const DB_NAME = "docspace_encryption";
-const STORE_NAME = "keys";
-const DB_VERSION = 1;
-const PRIVATE_KEY_ID = "user_private_key";
-const TIMESTAMP_KEY = "cache_timestamp";
-const USER_ID_KEY = "cache_user_id";
+import { SESSION_CACHE_DURATION_MS, type IdentityKeyPair } from "./types";
+import { zeroBuffer } from "./utils";
 
-type UnlockRequestCallback = () => Promise<CryptoKey | null>;
-let globalUnlockRequestHandler: UnlockRequestCallback | null = null;
+type CacheEntry = {
+  userId: string;
+  publicKey: Uint8Array;
+  privateKey: Uint8Array;
+  lastUsedAt: number;
+};
 
-export function registerUnlockHandler(
-  handler: UnlockRequestCallback,
-): void {
-  globalUnlockRequestHandler = handler;
+let _state: CacheEntry | null = null;
+
+type UnlockRequestCallback = (
+  reason: "no-cache" | "expired" | "user-mismatch",
+  expectedUserId?: string,
+) => Promise<IdentityKeyPair | null>;
+
+let _unlockHandler: UnlockRequestCallback | null = null;
+
+export function registerUnlockHandler(handler: UnlockRequestCallback): void {
+  _unlockHandler = handler;
 }
 
 export function unregisterUnlockHandler(): void {
-  globalUnlockRequestHandler = null;
+  _unlockHandler = null;
 }
 
-export async function requestUnlock(): Promise<CryptoKey | null> {
-  const cachedKey = await SecretStorageService.getCachedKey();
-  if (cachedKey) return cachedKey;
+function isExpired(entry: CacheEntry): boolean {
+  return Date.now() - entry.lastUsedAt > SESSION_CACHE_DURATION_MS;
+}
 
-  if (!globalUnlockRequestHandler) {
-    console.warn(
-      "[SecretStorage] No unlock handler registered. " +
-        "Ensure EncryptionProvider is mounted.",
-    );
-    return null;
+function bump(entry: CacheEntry): void {
+  entry.lastUsedAt = Date.now();
+}
+
+function clearState(): void {
+  if (_state) {
+    zeroBuffer(_state.privateKey);
+    zeroBuffer(_state.publicKey);
+    _state = null;
   }
-
-  return globalUnlockRequestHandler();
 }
 
-// ============================================================================
-// IndexedDB helpers
-// ============================================================================
-
-function openDB(): Promise<IDBDatabase> {
-  return new Promise((resolve, reject) => {
-    const request = indexedDB.open(DB_NAME, DB_VERSION);
-
-    request.onupgradeneeded = () => {
-      const db = request.result;
-      if (!db.objectStoreNames.contains(STORE_NAME)) {
-        db.createObjectStore(STORE_NAME);
-      }
+export const SecretStorage = {
+  cacheUnlocked(userId: string, kp: IdentityKeyPair): void {
+    if (!userId) {
+      throw new Error("SecretStorage.cacheUnlocked: userId is required");
+    }
+    clearState();
+    _state = {
+      userId,
+      publicKey: new Uint8Array(kp.publicKey),
+      privateKey: new Uint8Array(kp.privateKey),
+      lastUsedAt: Date.now(),
     };
-
-    request.onsuccess = () => resolve(request.result);
-    request.onerror = () => reject(request.error);
-  });
-}
-
-function idbPut(
-  db: IDBDatabase,
-  key: string,
-  value: unknown,
-): Promise<void> {
-  return new Promise((resolve, reject) => {
-    const tx = db.transaction(STORE_NAME, "readwrite");
-    const store = tx.objectStore(STORE_NAME);
-    const req = store.put(value, key);
-    req.onsuccess = () => resolve();
-    req.onerror = () => reject(req.error);
-  });
-}
-
-function idbGet<T>(db: IDBDatabase, key: string): Promise<T | undefined> {
-  return new Promise((resolve, reject) => {
-    const tx = db.transaction(STORE_NAME, "readonly");
-    const store = tx.objectStore(STORE_NAME);
-    const req = store.get(key);
-    req.onsuccess = () => resolve(req.result as T | undefined);
-    req.onerror = () => reject(req.error);
-  });
-}
-
-function idbClear(db: IDBDatabase): Promise<void> {
-  return new Promise((resolve, reject) => {
-    const tx = db.transaction(STORE_NAME, "readwrite");
-    const store = tx.objectStore(STORE_NAME);
-    const req = store.clear();
-    req.onsuccess = () => resolve();
-    req.onerror = () => reject(req.error);
-  });
-}
-
-function isIndexedDBAvailable(): boolean {
-  return typeof indexedDB !== "undefined";
-}
-
-// ============================================================================
-// SecretStorageService
-//
-// Stores CryptoKey objects in IndexedDB with extractable=false.
-// The raw key material is never accessible to JavaScript — even if XSS
-// reads IndexedDB, the attacker gets an opaque CryptoKey handle that
-// cannot be exported.
-// ============================================================================
-
-export const SecretStorageService = {
-  async cacheDecryptedKey(
-    privateKey: CryptoKey,
-    userId?: string,
-  ): Promise<void> {
-    if (!isIndexedDBAvailable()) {
-      console.warn("IndexedDB not available — key will not be cached");
-      return;
-    }
-
-    try {
-      let keyToStore = privateKey;
-
-      if (privateKey.extractable) {
-        const subtle = globalThis.crypto.subtle;
-        const pkcs8 = await subtle.exportKey("pkcs8", privateKey);
-        keyToStore = await subtle.importKey(
-          "pkcs8",
-          pkcs8,
-          { name: "ECDH", namedCurve: ENCRYPTION_CONSTANTS.ECDH_CURVE },
-          false,
-          ["deriveKey", "deriveBits"],
-        );
-        new Uint8Array(pkcs8).fill(0);
-      }
-
-      const db = await openDB();
-      try {
-        await idbPut(db, PRIVATE_KEY_ID, keyToStore);
-        await idbPut(db, TIMESTAMP_KEY, Date.now());
-        if (userId) {
-          await idbPut(db, USER_ID_KEY, userId);
-        }
-      } finally {
-        db.close();
-      }
-    } catch (error) {
-      console.warn("Failed to cache encryption key:", error);
-    }
   },
 
-  async getCachedKey(userId?: string): Promise<CryptoKey | null> {
-    if (!isIndexedDBAvailable()) return null;
-
-    try {
-      const db = await openDB();
-      try {
-        const timestamp = await idbGet<number>(db, TIMESTAMP_KEY);
-        if (
-          !timestamp ||
-          Date.now() - timestamp >
-            ENCRYPTION_CONSTANTS.SESSION_CACHE_DURATION_MS
-        ) {
-          await idbClear(db);
-          return null;
-        }
-
-        // If userId provided, verify the cached key belongs to this user
-        if (userId) {
-          const cachedUserId = await idbGet<string>(db, USER_ID_KEY);
-          if (cachedUserId && cachedUserId !== userId) {
-            await idbClear(db);
-            return null;
-          }
-        }
-
-        const key = await idbGet<CryptoKey>(db, PRIVATE_KEY_ID);
-        return key ?? null;
-      } finally {
-        db.close();
-      }
-    } catch (error) {
-      console.warn("Failed to retrieve cached key:", error);
+  /** Side-effect: any expiry / userId-mismatch wipes the slot before returning null. */
+  getCached(userId: string): IdentityKeyPair | null {
+    if (!_state) return null;
+    if (_state.userId !== userId) {
+      clearState();
       return null;
     }
-  },
-
-  async hasDecryptedKey(userId?: string): Promise<boolean> {
-    if (!isIndexedDBAvailable()) return false;
-    try {
-      const db = await openDB();
-      try {
-        const timestamp = await idbGet<number>(db, TIMESTAMP_KEY);
-        if (
-          !timestamp ||
-          Date.now() - timestamp >
-            ENCRYPTION_CONSTANTS.SESSION_CACHE_DURATION_MS
-        ) {
-          return false;
-        }
-
-        // If userId provided, verify ownership
-        if (userId) {
-          const cachedUserId = await idbGet<string>(db, USER_ID_KEY);
-          if (cachedUserId && cachedUserId !== userId) {
-            return false;
-          }
-        }
-
-        const key = await idbGet<CryptoKey>(db, PRIVATE_KEY_ID);
-        return key !== undefined;
-      } finally {
-        db.close();
-      }
-    } catch {
-      return false;
+    if (isExpired(_state)) {
+      clearState();
+      return null;
     }
+    bump(_state);
+    return {
+      publicKey: _state.publicKey,
+      privateKey: _state.privateKey,
+    };
   },
 
-  async clearCache(): Promise<void> {
-    if (!isIndexedDBAvailable()) return;
-    try {
-      const db = await openDB();
-      try {
-        await idbClear(db);
-      } finally {
-        db.close();
-      }
-    } catch {
-      // Ignore errors during cleanup
-    }
+  hasUnlocked(userId: string): boolean {
+    return SecretStorage.getCached(userId) !== null;
   },
 
-  async lockEncryption(): Promise<void> {
-    await this.clearCache();
+  lock(): void {
+    clearState();
   },
 };
 
-export default SecretStorageService;
+export async function requireUnlock(
+  userId: string,
+): Promise<IdentityKeyPair | null> {
+  if (!userId) {
+    throw new Error("requireUnlock: userId is required");
+  }
+
+  const cached = SecretStorage.getCached(userId);
+  if (cached) return cached;
+
+  if (!_unlockHandler) {
+    if (typeof console !== "undefined") {
+      console.warn(
+        "[SecretStorage] No unlock handler registered. Mount EncryptionProvider before calling requireUnlock.",
+      );
+    }
+    return null;
+  }
+
+  // Reason is always "no-cache" in practice — getCached() above wipes
+  // _state on expiry/mismatch before this runs.
+  const reason: "no-cache" | "expired" | "user-mismatch" = (() => {
+    if (!_state) return "no-cache";
+    if (_state.userId !== userId) return "user-mismatch";
+    return "expired";
+  })();
+
+  const kp = await _unlockHandler(reason, userId);
+  if (!kp) return null;
+
+  if (!SecretStorage.hasUnlocked(userId)) {
+    SecretStorage.cacheUnlocked(userId, kp);
+  }
+  return kp;
+}

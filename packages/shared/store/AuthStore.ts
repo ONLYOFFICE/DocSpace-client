@@ -486,13 +486,13 @@ class AuthStore {
 
     this.isLogout = true;
 
-    // Clear encryption state: MobX store + IndexedDB cache
+    // Clear encryption state: MobX store + in-memory unlocked-identity cache
     this.userStore?.clearEncryptionKeys();
     try {
-      const { SecretStorageService } = await import(
+      const { SecretStorage } = await import(
         "../services/encryption/secretStorage"
       );
-      await SecretStorageService.lockEncryption();
+      SecretStorage.lock();
     } catch {
       // Encryption module may not be loaded — safe to ignore
     }

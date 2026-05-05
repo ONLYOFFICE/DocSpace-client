@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2026
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -41,6 +41,13 @@ export class InvalidPassphraseError extends CryptoError {
   }
 }
 
+export class InvalidRecoveryPhraseError extends CryptoError {
+  constructor() {
+    super("Invalid recovery phrase", "INVALID_RECOVERY_PHRASE");
+    this.name = "InvalidRecoveryPhraseError";
+  }
+}
+
 export class DecryptionError extends CryptoError {
   constructor(detail?: string) {
     super(
@@ -71,6 +78,33 @@ export class InvalidFormatError extends CryptoError {
   }
 }
 
+export class UnsupportedVersionError extends CryptoError {
+  constructor(version: number, expected: number) {
+    super(
+      `Unsupported format version: got ${version}, expected ${expected}`,
+      "UNSUPPORTED_VERSION",
+    );
+    this.name = "UnsupportedVersionError";
+  }
+}
+
+export class UnsupportedSuiteError extends CryptoError {
+  constructor(suite: number) {
+    super(`Unsupported cipher suite: 0x${suite.toString(16)}`, "UNSUPPORTED_SUITE");
+    this.name = "UnsupportedSuiteError";
+  }
+}
+
+export class AuthenticationError extends CryptoError {
+  constructor(detail?: string) {
+    super(
+      `Authentication failed${detail ? `: ${detail}` : ""}`,
+      "AUTHENTICATION_FAILED",
+    );
+    this.name = "AuthenticationError";
+  }
+}
+
 export class WebCryptoUnavailableError extends CryptoError {
   constructor() {
     super(
@@ -83,10 +117,7 @@ export class WebCryptoUnavailableError extends CryptoError {
 
 export class KeyNotFoundError extends CryptoError {
   constructor(keyId?: string) {
-    super(
-      `Key not found${keyId ? `: ${keyId}` : ""}`,
-      "KEY_NOT_FOUND",
-    );
+    super(`Key not found${keyId ? `: ${keyId}` : ""}`, "KEY_NOT_FOUND");
     this.name = "KeyNotFoundError";
   }
 }

@@ -848,7 +848,6 @@
   "MoveToTrashItems": "これらの {{itemCount}} 個のアイテムは、ゴミ箱に移動されます。",
   "MultiplyOverwrite": "複数のフォルダは 1 つにマージされ、ファイルはバージョン アップデートで上書きされます",
   "MyDocuments": "私の文書",
-  "MyForms": "マイ フォーム",
   "Name": "名前",
   "NeedMoreGoToServices": "もっと必要ですか？<1>サービス</1>に行ってください",
   "NeedPassword": "ルームへアクセスするにはパスワードが必要です",

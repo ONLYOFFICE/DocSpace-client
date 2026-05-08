@@ -29,26 +29,24 @@
 import React from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
+import { NavMenu } from "@docspace/ui-kit/components/nav-menu";
+import type { NavMenuGroup } from "@docspace/ui-kit/components/nav-menu";
 import articleStyles from "@docspace/ui-kit/components/article/Article.module.scss";
+import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import { DeviceType } from "@docspace/shared/enums";
 
 import useDeviceType from "@/hooks/useDeviceType";
-
-import styles from "./FormsSidebar.module.scss";
+import { FormsSection, DEFAULT_SETTINGS_SUBSECTION } from "@/types/forms";
 
 import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
 import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 import FormGalleryReactSvgUrl from "PUBLIC_DIR/images/form.gallery.react.svg?url";
 import TemplateGalleryReactSvgUrl from "PUBLIC_DIR/images/template.gallery.react.svg?url";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
-
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
-
-import { FormsSection, DEFAULT_SETTINGS_SUBSECTION } from "@/types/forms";
 
 import {
   sectionFromPathname,
@@ -59,9 +57,11 @@ import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import { libraryUrl } from "../../_utils/libraryUrl";
 import { useFormsUserStore } from "../../_store/FormsUserStore";
-import SidebarNavItem from "./SidebarNavItem";
+
+import styles from "./FormsSidebar.module.scss";
 
 const SHOW_SIDEBAR_TEXT_KEY = "forms_showSidebarText";
+const LIBRARY_ID = "library";
 
 const FormsSidebar = () => {
   const { t } = useTranslation(["Common"]);
@@ -85,7 +85,6 @@ const FormsSidebar = () => {
   const formsSettingsStore = useFormsSettingsStore();
   const { hasLibrary } = formsSettingsStore;
   const showLibrary = hasLibrary && !!formsSettingsStore.folderSecurity?.Create;
-  // Library navigation is URL-based now
   const { user } = useFormsUserStore();
   const showSettings = user?.isOwner || user?.isAdmin;
 
@@ -106,24 +105,6 @@ const FormsSidebar = () => {
     });
   }, []);
 
-  const sections = [
-    {
-      key: FormsSection.MyForms,
-      label: t("Common:MyForms"),
-      icon: FormFileReactSvgUrl,
-    },
-    {
-      key: FormsSection.InProgress,
-      label: t("Common:InProgress"),
-      icon: FormFillRectSvgUrl,
-    },
-    {
-      key: FormsSection.CompletedForms,
-      label: t("Common:CompletedForms"),
-      icon: FormGalleryReactSvgUrl,
-    },
-  ];
-
   const buildParams = React.useCallback(() => {
     const params = new URLSearchParams();
     const rid = searchParams.get("roomId") ?? "";
@@ -135,16 +116,149 @@ const FormsSidebar = () => {
     return params.toString();
   }, [searchParams]);
 
-  const onSettingsClick = React.useCallback(() => {
-    if (activeSection === FormsSection.Settings) {
-      setTimeout(() => window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION)), 0);
+  const navigateToSection = React.useCallback(
+    (section: FormsSection) => {
+      if (activeSection === section) {
+        let handled = false;
+        if (editingFile) {
+          closeEditor();
+          handled = true;
+        }
+        if (section === FormsSection.CompletedForms && completedFolder) {
+          goBackToCompletedRoot();
+          handled = true;
+        }
+        if (section === FormsSection.InProgress && inProgressFolder) {
+          goBackToInProgressRoot();
+          handled = true;
+        }
+        if (!handled) {
+          setTimeout(
+            () =>
+              window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION)),
+            0,
+          );
+        }
+        if (isMobile) closeSidebar();
+        return;
+      }
+      const qs = buildParams();
+      router.replace(`${sectionToPath(section)}${qs ? `?${qs}` : ""}`);
+      if (isMobile) closeSidebar();
+    },
+    [
+      activeSection,
+      editingFile,
+      completedFolder,
+      inProgressFolder,
+      closeEditor,
+      goBackToCompletedRoot,
+      goBackToInProgressRoot,
+      buildParams,
+      router,
+      isMobile,
+      closeSidebar,
+    ],
+  );
+
+  const onLibraryClick = React.useCallback(() => {
+    if (activeSection === FormsSection.Library) {
+      const rid = searchParams.get("roomId") ?? "";
+      const lid = searchParams.get("libraryId") ?? "";
+      const su = searchParams.get("stylesUrl") ?? "";
+      router.push(
+        libraryUrl({
+          roomId: rid || undefined,
+          libraryId: lid || undefined,
+          stylesUrl: su || undefined,
+        }),
+      );
       if (isMobile) closeSidebar();
       return;
     }
     const qs = buildParams();
-    router.replace(`${settingsSubSectionToPath(DEFAULT_SETTINGS_SUBSECTION)}${qs ? `?${qs}` : ""}`);
+    router.replace(
+      `${sectionToPath(FormsSection.Library)}${qs ? `?${qs}` : ""}`,
+    );
     if (isMobile) closeSidebar();
-  }, [router, buildParams, activeSection, isMobile, closeSidebar]);
+  }, [activeSection, buildParams, searchParams, router, isMobile, closeSidebar]);
+
+  const onSettingsClick = React.useCallback(() => {
+    if (activeSection === FormsSection.Settings) {
+      setTimeout(
+        () =>
+          window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION)),
+        0,
+      );
+      if (isMobile) closeSidebar();
+      return;
+    }
+    const qs = buildParams();
+    router.replace(
+      `${settingsSubSectionToPath(DEFAULT_SETTINGS_SUBSECTION)}${qs ? `?${qs}` : ""}`,
+    );
+    if (isMobile) closeSidebar();
+  }, [activeSection, buildParams, router, isMobile, closeSidebar]);
+
+  const groups = React.useMemo<NavMenuGroup[]>(() => {
+    const myFormsChildren: NavMenuGroup["items"][number]["children"] = [
+      {
+        id: FormsSection.InProgress,
+        label: t("Common:InProgress"),
+        icon: FormFillRectSvgUrl,
+        onClick: () => navigateToSection(FormsSection.InProgress),
+      },
+      {
+        id: FormsSection.CompletedForms,
+        label: t("Common:CompletedForms"),
+        icon: FormGalleryReactSvgUrl,
+        onClick: () => navigateToSection(FormsSection.CompletedForms),
+      },
+    ];
+
+    if (showSettings) {
+      myFormsChildren.push({
+        id: FormsSection.Settings,
+        label: t("Common:Settings"),
+        icon: SettingsReactSvgUrl,
+        onClick: onSettingsClick,
+      });
+    }
+
+    const mainItems: NavMenuGroup["items"] = [
+      {
+        id: FormsSection.MyForms,
+        label: t("Common:MyForms"),
+        icon: FormFileReactSvgUrl,
+        onClick: () => navigateToSection(FormsSection.MyForms),
+        children: myFormsChildren,
+      },
+    ];
+
+    if (showLibrary) {
+      mainItems.push({
+        id: LIBRARY_ID,
+        label: t("Common:Library"),
+        icon: TemplateGalleryReactSvgUrl,
+        onClick: onLibraryClick,
+      });
+    }
+
+    return [{ id: "main", items: mainItems }];
+  }, [t, navigateToSection, onLibraryClick, showLibrary, showSettings, onSettingsClick]);
+
+  const activeId =
+    activeSection === FormsSection.Library
+      ? LIBRARY_ID
+      : (activeSection as string);
+
+  const expandedId =
+    activeSection === FormsSection.MyForms ||
+    activeSection === FormsSection.InProgress ||
+    activeSection === FormsSection.CompletedForms ||
+    activeSection === FormsSection.Settings
+      ? FormsSection.MyForms
+      : undefined;
 
   return (
     <div
@@ -161,79 +275,12 @@ const FormsSidebar = () => {
         className={`article-body__scrollbar ${styles.scrollbar}`}
         scrollClass="article-scroller"
       >
-        {sections.map((section) => (
-          <SidebarNavItem
-            key={section.key}
-            id={`forms-nav-${section.key}`}
-            label={section.label}
-            icon={section.icon}
-            isActive={activeSection === section.key}
-            onClick={() => {
-              if (activeSection === section.key) {
-                let handled = false;
-                if (editingFile) {
-                  closeEditor();
-                  handled = true;
-                }
-                if (section.key === FormsSection.CompletedForms && completedFolder) {
-                  goBackToCompletedRoot();
-                  handled = true;
-                }
-                if (section.key === FormsSection.InProgress && inProgressFolder) {
-                  goBackToInProgressRoot();
-                  handled = true;
-                }
-                if (!handled) {
-                  setTimeout(() => window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION)), 0);
-                }
-                if (isMobile) closeSidebar();
-                return;
-              }
-              const qs = buildParams();
-              router.replace(`${sectionToPath(section.key)}${qs ? `?${qs}` : ""}`);
-              if (isMobile) closeSidebar();
-            }}
-            showText={showText}
-          />
-        ))}
-        {showLibrary && (
-          <>
-            <div style={{ height: "12px", flexShrink: 0 }} />
-            <SidebarNavItem
-              id="forms-nav-library"
-              label={t("Common:Library")}
-              icon={TemplateGalleryReactSvgUrl}
-              isActive={activeSection === FormsSection.Library}
-              onClick={() => {
-                if (activeSection === FormsSection.Library) {
-                  const rid = searchParams.get("roomId") ?? "";
-                  const lid = searchParams.get("libraryId") ?? "";
-                  const su = searchParams.get("stylesUrl") ?? "";
-                  router.push(libraryUrl({ roomId: rid || undefined, libraryId: lid || undefined, stylesUrl: su || undefined }));
-                  if (isMobile) closeSidebar();
-                  return;
-                }
-                const qs = buildParams();
-                router.replace(`${sectionToPath(FormsSection.Library)}${qs ? `?${qs}` : ""}`);
-                if (isMobile) closeSidebar();
-              }}
-              showText={showText}
-            />
-          </>
-        )}
+        <NavMenu
+          groups={groups}
+          activeItemId={activeId}
+          defaultExpandedId={expandedId}
+        />
       </Scrollbar>
-      {showSettings && (
-        <div className={styles.navBottom}>
-          <SidebarNavItem
-            id="forms-nav-settings"
-            label={t("Common:Settings")}
-            icon={SettingsReactSvgUrl}
-            isActive={activeSection === FormsSection.Settings}
-            onClick={onSettingsClick}
-            showText={showText}
-          />
-        </div>
-      )}
       <div
         className={styles.borderToggle}
         onClick={toggleShowText}
@@ -246,7 +293,9 @@ const FormsSidebar = () => {
           }
         }}
         data-tooltip-id="sidebar-toggle-tooltip"
-        data-tooltip-content={showText ? t("Common:HideArticleMenu") : t("Common:ShowArticleMenu")}
+        data-tooltip-content={
+          showText ? t("Common:HideArticleMenu") : t("Common:ShowArticleMenu")
+        }
       />
       <Tooltip id="sidebar-toggle-tooltip" place="right" float />
     </div>

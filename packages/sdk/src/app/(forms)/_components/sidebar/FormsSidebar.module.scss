@@ -47,15 +47,6 @@
   }
 }
 
-.navBottom {
-  flex-shrink: 0;
-  padding: 8px 20px 16px;
-
-  @include mixins.tablet {
-    padding: 8px 8px 16px;
-  }
-}
-
 .borderToggle {
   position: absolute;
   top: 0;

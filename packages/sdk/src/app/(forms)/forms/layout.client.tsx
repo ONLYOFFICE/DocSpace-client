@@ -30,10 +30,20 @@ import React from "react";
 import { observer } from "mobx-react";
 import dynamic from "next/dynamic";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 import Section from "@docspace/ui-kit/components/section";
 import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
+import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
+import type { QuickActionItem } from "@docspace/ui-kit/components/quick-actions";
+import {
+  BlankPdfIcon,
+  GeneratePdfAiIcon,
+  CreateFromTextIcon,
+  CreateFromTemplateIcon,
+} from "@docspace/ui-kit/components/quick-actions/icons";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import { setAuthToken } from "@docspace/shared/api/client";
 import {
@@ -58,6 +68,7 @@ import {
   settingsSubSectionToPath,
 } from "../_utils/sectionFromPathname";
 import { appendRoomParams } from "../_utils/formsUrl";
+import { libraryUrl } from "../_utils/libraryUrl";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 // LibraryNavigationStore removed — library uses URL routing now
 import { useFormsListStore } from "../_store/FormsListStore";
@@ -572,6 +583,42 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   const progressStore = useFormsProgressStore();
   uploadFilesDirectRef.current = uploadFilesToFolder;
 
+  const { t } = useTranslation(["Common"]);
+  const canCreateForms = !!formsSettingsStore.folderSecurity?.Create;
+  const showQuickActions =
+    activeSection === FormsSection.MyForms &&
+    canCreateForms;
+
+  const quickActionItems = React.useMemo<QuickActionItem[]>(
+    () => [
+      {
+        id: "quick-blank-pdf",
+        icon: <BlankPdfIcon />,
+        label: t("Common:NewPDFForm"),
+        onClick: onCreateBlankForm,
+      },
+      {
+        id: "quick-generate-ai",
+        icon: <GeneratePdfAiIcon />,
+        label: t("Common:GenerateWithAI"),
+        onClick: () => toastr.info(t("Common:UnderDevelopment")),
+      },
+      {
+        id: "quick-from-text",
+        icon: <CreateFromTextIcon />,
+        label: t("Common:FromTextFile"),
+        onClick: () => toastr.info(t("Common:UnderDevelopment")),
+      },
+      {
+        id: "quick-use-template",
+        icon: <CreateFromTemplateIcon />,
+        label: t("Common:UseTemplate"),
+        onClick: () => router.push(libraryUrl({})),
+      },
+    ],
+    [t, onCreateBlankForm, router],
+  );
+
   const formsDataValue = React.useMemo(
     () => ({ fetchSection, fetchMore, fetchSubfolder, refreshAfterMutation }),
     [fetchSection, fetchMore, fetchSubfolder, refreshAfterMutation],
@@ -700,6 +747,12 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
             )}
             <FormsDataProvider value={formsDataValue}>
               <div style={{ display: isEditing ? "none" : undefined }}>
+                {showQuickActions && (
+                  <QuickActions
+                    items={quickActionItems}
+                    className={styles.quickActions}
+                  />
+                )}
                 {children}
               </div>
             </FormsDataProvider>

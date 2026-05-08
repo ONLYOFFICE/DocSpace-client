@@ -24,13 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const getGreeting = (firstName: string | undefined): string => {
+export const getGreetingKey = (): string => {
   const hour = new Date().getHours();
-  const name = firstName ? `, ${firstName}` : "";
-
-  if (hour >= 5 && hour < 12) return `Good morning${name}!`;
-  if (hour >= 12 && hour < 18) return `Good afternoon${name}!`;
-  return `Good evening${name}!`;
+  if (hour >= 5 && hour < 12) return "GoodMorning";
+  if (hour >= 12 && hour < 18) return "GoodAfternoon";
+  return "GoodEvening";
 };
 
 export const makeCreateUrl = (

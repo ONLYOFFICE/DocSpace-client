@@ -35,6 +35,7 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { getPersonalFolderTree } from "@docspace/shared/api/files";
+import { getConstName } from "@docspace/shared/constants/consts";
 
 import {
   BlankPdfIcon,
@@ -51,70 +52,40 @@ import AiAgentsIcon from "@docspace/ui-kit/assets/icons/16/ai-agents.svg";
 import BgPatternGreenUrl from "PUBLIC_DIR/images/background.pattern.green.react.svg?url";
 
 import { ModuleCard, type ModuleItem } from "./ModuleCard";
-import { getGreeting, makeCreateUrl } from "./utils";
+import { getGreetingKey, makeCreateUrl } from "./utils";
 import styles from "./Dashboard.module.scss";
 
-const getCreateItems = (parentId: number | null): QuickActionItem[] => [
+const getCreateItems = (
+  parentId: number | null,
+  t: (key: string) => string,
+): QuickActionItem[] => [
   {
     id: "document",
     icon: <CreateDocumentIcon />,
-    label: "Document",
+    label: t("Common:Document"),
     onClick: () =>
       window.open(makeCreateUrl("New document.docx", parentId), "_blank"),
   },
   {
     id: "spreadsheet",
     icon: <CreateSpreadsheetIcon />,
-    label: "Spreadsheet",
+    label: t("Common:Spreadsheet"),
     onClick: () =>
       window.open(makeCreateUrl("New spreadsheet.xlsx", parentId), "_blank"),
   },
   {
     id: "presentation",
     icon: <CreatePresentationIcon />,
-    label: "Presentation",
+    label: t("Common:Presentation"),
     onClick: () =>
       window.open(makeCreateUrl("New presentation.pptx", parentId), "_blank"),
   },
   {
     id: "pdf",
     icon: <BlankPdfIcon />,
-    label: "PDF",
+    label: getConstName("PDF"),
     onClick: () =>
       window.open(makeCreateUrl("New PDF form.pdf", parentId), "_blank"),
-  },
-];
-
-const MODULE_ITEMS: ModuleItem[] = [
-  {
-    icon: <CatalogFolderIcon />,
-    title: "AI Files",
-    description:
-      "Store, organize, and share files across teams  in a structured workspace.",
-    installed: true,
-    href: "/sdk/personal-files",
-  },
-  {
-    icon: <CatalogRoomsIcon />,
-    title: "AI Rooms",
-    description:
-      "Create secure collaboration spaces for  projects, customers, or departments.",
-    installed: false,
-  },
-  {
-    icon: <CatalogDocumentsIcon />,
-    title: "AI Forms",
-    description:
-      "Build forms, collect responses, and manage structured data — all in one place.",
-    installed: true,
-    href: "/sdk/forms",
-  },
-  {
-    icon: <AiAgentsIcon />,
-    title: "AI Chat & Agents",
-    description:
-      "Bring AI assistants and agents directly  into your workspace.",
-    installed: false,
   },
 ];
 
@@ -136,30 +107,68 @@ const Dashboard = ({ firstName }: DashboardProps) => {
     toastr.info(t("Common:UnderDevelopment"));
   };
 
+  const greetingName = firstName ? `, ${firstName}` : "";
+  const greetingKey = getGreetingKey();
+  const greeting =
+    greetingKey === "GoodMorning"
+      ? t("Common:GoodMorning", { name: greetingName })
+      : greetingKey === "GoodAfternoon"
+        ? t("Common:GoodAfternoon", { name: greetingName })
+        : t("Common:GoodEvening", { name: greetingName });
+
+  const moduleItems: ModuleItem[] = [
+    {
+      icon: <CatalogFolderIcon />,
+      title: t("Common:DashboardAIFilesTitle"),
+      description: t("Common:DashboardAIFilesDescription"),
+      installed: true,
+      href: "/sdk/personal-files",
+    },
+    {
+      icon: <CatalogRoomsIcon />,
+      title: t("Common:DashboardAIRoomsTitle"),
+      description: t("Common:DashboardAIRoomsDescription"),
+      installed: false,
+    },
+    {
+      icon: <CatalogDocumentsIcon />,
+      title: t("Common:DashboardAIFormsTitle"),
+      description: t("Common:DashboardAIFormsDescription"),
+      installed: true,
+      href: "/sdk/forms",
+    },
+    {
+      icon: <AiAgentsIcon />,
+      title: t("Common:DashboardAIChatAgentsTitle"),
+      description: t("Common:DashboardAIChatAgentsDescription"),
+      installed: false,
+    },
+  ];
+
   return (
     <div className={styles.dashboard}>
       <PortalLogo className={styles.logo} />
 
       <Text as="h1" className={styles.greeting}>
-        {getGreeting(firstName)}
+        {greeting}
       </Text>
 
       <section className={styles.section}>
         <Text as="h2" className={styles.sectionTitle}>
-          Create new
+          {t("Common:CreateNew")}
         </Text>
         <QuickActions
-          items={getCreateItems(myFolderId)}
+          items={getCreateItems(myFolderId, t)}
           className={styles.quickActions}
         />
       </section>
 
       <section className={styles.section}>
         <Text as="h2" className={styles.sectionTitle}>
-          Modules
+          {t("Common:Modules")}
         </Text>
         <Text as="p" className={styles.sectionSubtitle}>
-          Expand your DocSpace with premium modules
+          {t("Common:DashboardModulesSubtitle")}
         </Text>
 
         <div
@@ -172,18 +181,17 @@ const Dashboard = ({ firstName }: DashboardProps) => {
         >
           <div className={styles.modulesBannerText}>
             <Text as="p" className={styles.modulesBannerTitle}>
-              Each app is licensed separately — install only what fits your
-              workflow
+              {t("Common:DashboardModulesBannerText")}
             </Text>
             <div className={styles.modulesBannerTags}>
               <Text as="span" className={styles.modulesBannerTag}>
-                No bundles required
+                {t("Common:NoBundlesRequired")}
               </Text>
               <Text as="span" className={styles.modulesBannerTag}>
-                Add or remove anytime
+                {t("Common:AddOrRemoveAnytime")}
               </Text>
               <Text as="span" className={styles.modulesBannerTag}>
-                Pay per module
+                {t("Common:PayPerModule")}
               </Text>
             </div>
           </div>
@@ -195,7 +203,7 @@ const Dashboard = ({ firstName }: DashboardProps) => {
         </div>
 
         <div className={styles.modulesGrid}>
-          {MODULE_ITEMS.map((mod) => (
+          {moduleItems.map((mod) => (
             <ModuleCard key={mod.title} mod={mod} onInstall={handleInstall} />
           ))}
         </div>

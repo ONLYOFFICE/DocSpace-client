@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
@@ -45,6 +46,8 @@ type ModuleCardProps = {
 };
 
 export const ModuleCard = ({ mod, onInstall }: ModuleCardProps) => {
+  const { t } = useTranslation(["Common"]);
+
   const handleOpen = () => {
     if (mod.href) window.open(mod.href, "_blank");
   };
@@ -63,7 +66,7 @@ export const ModuleCard = ({ mod, onInstall }: ModuleCardProps) => {
       {mod.installed ? (
         <Button
           className={styles.moduleBtn}
-          label="Open"
+          label={t("Common:Open")}
           size={ButtonSize.small}
           onClick={handleOpen}
         />
@@ -71,7 +74,7 @@ export const ModuleCard = ({ mod, onInstall }: ModuleCardProps) => {
         <Button
           primary
           className={styles.moduleBtn}
-          label="Install"
+          label={t("Common:Install")}
           size={ButtonSize.small}
           onClick={onInstall}
         />
@@ -79,4 +82,3 @@ export const ModuleCard = ({ mod, onInstall }: ModuleCardProps) => {
     </div>
   );
 };
-

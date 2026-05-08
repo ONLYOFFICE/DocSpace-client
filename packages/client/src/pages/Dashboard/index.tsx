@@ -26,6 +26,7 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import PortalLogo from "@docspace/ui-kit/components/portal-logo/PortalLogo";
 import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
@@ -122,6 +123,7 @@ interface DashboardProps {
 }
 
 const Dashboard = ({ firstName }: DashboardProps) => {
+  const { t } = useTranslation(["Common"]);
   const [myFolderId, setMyFolderId] = React.useState<number | null>(null);
 
   React.useEffect(() => {
@@ -131,7 +133,7 @@ const Dashboard = ({ firstName }: DashboardProps) => {
   }, []);
 
   const handleInstall = () => {
-    toastr.info("This module is currently under development.");
+    toastr.info(t("Common:UnderDevelopment"));
   };
 
   return (
@@ -187,7 +189,7 @@ const Dashboard = ({ firstName }: DashboardProps) => {
           </div>
           <Button
             className={styles.modulesPricingBtn}
-            label="See pricing"
+            label={t("Common:SeePricing")}
             size={ButtonSize.small}
           />
         </div>

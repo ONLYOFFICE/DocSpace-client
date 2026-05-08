@@ -33,12 +33,14 @@ import { useTranslation } from "react-i18next";
 
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
+import { NavMenu } from "@docspace/ui-kit/components/nav-menu";
+import type { NavMenuGroup } from "@docspace/ui-kit/components/nav-menu";
 import articleStyles from "@docspace/ui-kit/components/article/Article.module.scss";
-import { FolderType, DeviceType } from "@docspace/shared/enums";
+import { FolderType } from "@docspace/shared/enums";
 import FilesFilter from "@docspace/shared/api/files/filter";
 
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
-import CatalogDocumentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
+import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import CatalogFavoritesReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.favorites.react.svg?url";
 import CatalogSettingsRestoreReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-restore.svg?url";
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
@@ -49,10 +51,7 @@ import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { DocsSection, DOCS_SECTION_FOLDER_ALIAS } from "@/types/docs";
 import { PAGE_COUNT } from "@/utils/constants";
 
-import { useSDKConfig } from "@/providers/SDKConfigProvider";
 import { useSidebar } from "../../_contexts/SidebarContext";
-import DocsMainButton from "../main-button";
-import SidebarNavItem from "./SidebarNavItem";
 import styles from "./DocsSidebar.module.scss";
 
 const FOLDER_TYPE_TO_SECTION: Partial<Record<FolderType, DocsSection>> = {
@@ -62,23 +61,23 @@ const FOLDER_TYPE_TO_SECTION: Partial<Record<FolderType, DocsSection>> = {
   [FolderType.TRASH]: DocsSection.Trash,
 };
 
+const SETTINGS_ID = "settings";
+
 const DocsSidebar = () => {
   const { t } = useTranslation(["Common"]);
   const navigationStore = useNavigationStore();
   const filesSelectionStore = useFilesSelectionStore();
   const { rootFolderType } = useFilesListStore();
-  const activeSection = rootFolderType != null ? FOLDER_TYPE_TO_SECTION[rootFolderType] : undefined;
-  const { showText, currentDeviceType, toggleShowText } = useSidebar();
-  const { sdkConfig } = useSDKConfig();
+  const activeSection =
+    rootFolderType != null ? FOLDER_TYPE_TO_SECTION[rootFolderType] : undefined;
+  const { showText, toggleShowText } = useSidebar();
 
   const router = useRouter();
   const pathname = usePathname();
 
   const isSettings = pathname === "/personal-files/settings";
-  const showMainButton = currentDeviceType === DeviceType.desktop;
-  const isMainButtonDisabled = isSettings || activeSection !== DocsSection.MyDocuments || !!sdkConfig?.disableActionButton;
 
-  const handleSectionClick = React.useCallback(
+  const navigateToSection = React.useCallback(
     (section: DocsSection) => {
       if (section === activeSection && pathname === "/personal-files") return;
 
@@ -100,13 +99,7 @@ const DocsSidebar = () => {
         router.replace(`/personal-files${filterUrl}`);
       }
     },
-    [
-      activeSection,
-      navigationStore,
-      filesSelectionStore,
-      pathname,
-      router,
-    ],
+    [activeSection, navigationStore, filesSelectionStore, pathname, router],
   );
 
   const onSettingsClick = React.useCallback(() => {
@@ -114,31 +107,61 @@ const DocsSidebar = () => {
     router.push("/personal-files/settings");
   }, [router, isSettings]);
 
-  const sections = React.useMemo(
+  const groups = React.useMemo<NavMenuGroup[]>(
     () => [
       {
-        key: DocsSection.MyDocuments,
-        label: t("Common:Documents"),
-        icon: CatalogDocumentsReactSvgUrl,
-      },
-      {
-        key: DocsSection.Favorites,
-        label: t("Common:Favorites"),
-        icon: CatalogFavoritesReactSvgUrl,
-      },
-      {
-        key: DocsSection.Recent,
-        label: t("Common:Recent"),
-        icon: CatalogSettingsRestoreReactSvgUrl,
-      },
-      {
-        key: DocsSection.Trash,
-        label: t("Common:TrashSection"),
-        icon: CatalogTrashReactSvgUrl,
+        id: "main",
+        items: [
+          {
+            id: DocsSection.MyDocuments,
+            label: t("Common:Documents"),
+            icon: CatalogFolderReactSvgUrl,
+            onClick: () => navigateToSection(DocsSection.MyDocuments),
+            children: [
+              {
+                id: DocsSection.Recent,
+                label: t("Common:Recent"),
+                icon: CatalogSettingsRestoreReactSvgUrl,
+                onClick: () => navigateToSection(DocsSection.Recent),
+              },
+              {
+                id: DocsSection.Favorites,
+                label: t("Common:Favorites"),
+                icon: CatalogFavoritesReactSvgUrl,
+                onClick: () => navigateToSection(DocsSection.Favorites),
+              },
+              {
+                id: DocsSection.Trash,
+                label: t("Common:TrashSection"),
+                icon: CatalogTrashReactSvgUrl,
+                onClick: () => navigateToSection(DocsSection.Trash),
+              },
+              {
+                id: SETTINGS_ID,
+                label: t("Common:Settings"),
+                icon: SettingsReactSvgUrl,
+                onClick: onSettingsClick,
+              },
+            ],
+          },
+        ],
       },
     ],
-    [t],
+    [t, navigateToSection, onSettingsClick],
   );
+
+  const activeId = isSettings
+    ? SETTINGS_ID
+    : (activeSection as string | undefined);
+
+  const expandedId =
+    isSettings ||
+    activeSection === DocsSection.MyDocuments ||
+    activeSection === DocsSection.Recent ||
+    activeSection === DocsSection.Favorites ||
+    activeSection === DocsSection.Trash
+      ? DocsSection.MyDocuments
+      : undefined;
 
   return (
     <div
@@ -146,36 +169,19 @@ const DocsSidebar = () => {
       className={`${articleStyles.article} ${styles.articleFlex}`}
       data-show-text={showText ? "true" : "false"}
       data-open="true"
-      data-with-main-button={showMainButton ? "true" : "false"}
+      data-with-main-button="false"
     >
       <div style={{ height: "16px", flexShrink: 0 }} />
-      {showMainButton && <DocsMainButton mode="desktop" isDisabled={isMainButtonDisabled} />}
       <Scrollbar
         className={`article-body__scrollbar ${styles.scrollbar}`}
         scrollClass="article-scroller"
       >
-        {sections.map((section) => (
-          <SidebarNavItem
-            key={section.key}
-            id={`docs-nav-${section.key}`}
-            label={section.label}
-            icon={section.icon}
-            isActive={!isSettings && activeSection === section.key}
-            onClick={() => handleSectionClick(section.key)}
-            showText={showText}
-          />
-        ))}
-      </Scrollbar>
-      <div className={styles.navBottom}>
-        <SidebarNavItem
-          id="docs-nav-settings"
-          label={t("Common:Settings")}
-          icon={SettingsReactSvgUrl}
-          isActive={isSettings}
-          onClick={onSettingsClick}
-          showText={showText}
+        <NavMenu
+          groups={groups}
+          activeItemId={activeId}
+          defaultExpandedId={expandedId}
         />
-      </div>
+      </Scrollbar>
       <div
         className={styles.borderToggle}
         onClick={toggleShowText}
@@ -189,9 +195,7 @@ const DocsSidebar = () => {
         }}
         data-tooltip-id="sidebar-toggle-tooltip"
         data-tooltip-content={
-          showText
-            ? t("Common:HideArticleMenu")
-            : t("Common:ShowArticleMenu")
+          showText ? t("Common:HideArticleMenu") : t("Common:ShowArticleMenu")
         }
       />
       <Tooltip id="sidebar-toggle-tooltip" place="right" float />
@@ -200,3 +204,4 @@ const DocsSidebar = () => {
 };
 
 export default observer(DocsSidebar);
+

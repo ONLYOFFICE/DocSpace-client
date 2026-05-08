@@ -69,3 +69,10 @@
 		padding-top: var(--nav-dropbox-padding-top, 10px) !important;
 	}
 }
+
+.quickActions {
+	margin: 0 auto 16px;
+	justify-content: center;
+	max-width: 736px; // 4 tiles * 172px + 3 gaps * 16px
+	width: 100%;
+}

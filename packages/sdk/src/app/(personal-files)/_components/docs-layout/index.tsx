@@ -47,6 +47,7 @@ import type {
 } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
 import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
+import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
 
 import { SectionWrapper } from "@/app/(docspace)/_components/section";
 import Header from "@/app/(docspace)/_components/header";
@@ -71,8 +72,10 @@ import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 import { SidebarProvider, useSidebar } from "../../_contexts/SidebarContext";
 import DocsMainButton from "../main-button";
+import CreateFileDialog from "../create-file-dialog";
 import { useInfoPanelStore } from "../../_store/InfoPanelStore";
 import useDocsActions from "../../_hooks/useDocsActions";
+import { useDocsMenuModels } from "../../_hooks/useDocsMenuModels";
 import useTrashActions from "../../_hooks/useTrashActions";
 import useFileOperations from "../../_hooks/useFileOperations";
 import useRenameActions from "../../_hooks/useRenameActions";
@@ -124,9 +127,29 @@ const DocsLayoutInner = observer(({
   const { headerOffset, frameHeaderVars } = useFrameHeaderConfig();
 
   const isMyDocuments = rootFolderType === FolderType.USER;
-  const showMobileButton = currentDeviceType !== DeviceType.desktop && isMyDocuments;
+  const isDesktop = currentDeviceType === DeviceType.desktop;
+  const showMobileButton = !isDesktop && isMyDocuments;
+  const isActionButtonEnabled = isMyDocuments && !sdkConfig?.disableActionButton;
+  const showDesktopActions = isActionButtonEnabled && isDesktop;
 
-  const { uploadFilesToFolder } = useDocsActions();
+  const docsActions = useDocsActions();
+  const {
+    uploadFilesToFolder,
+    openCreateDialog,
+    closeCreateDialog,
+    onSaveCreate,
+    dialogVisible,
+    dialogType,
+    isCreating,
+    onUploadFiles,
+    onUploadFolder,
+  } = docsActions;
+
+  const { desktopModel, quickActionItems } = useDocsMenuModels({
+    openCreateDialog,
+    onUploadFiles,
+    onUploadFolder,
+  });
 
   useDocsFrameBridge({ isReady: true, uploadFilesToFolder });
   const {
@@ -236,7 +259,29 @@ const DocsLayoutInner = observer(({
                     headerOffset={headerOffset}
                   />
                 }
-                sectionFilterContent={<Filter filesFilter={filesFilter} />}
+                sectionFilterContent={
+                  <>
+                    {showDesktopActions && (
+                      <QuickActions
+                        items={quickActionItems}
+                        className={styles.quickActions}
+                      />
+                    )}
+                    <Filter
+                      filesFilter={filesFilter}
+                      showMainButton={showDesktopActions}
+                      mainButtonProps={
+                        showDesktopActions
+                          ? {
+                              isDropdown: true,
+                              model: desktopModel,
+                              text: t("Common:New"),
+                            }
+                          : undefined
+                      }
+                    />
+                  </>
+                }
                 sectionBodyContent={
                   <List
                     total={total}
@@ -258,7 +303,20 @@ const DocsLayoutInner = observer(({
             </RootScrollbar>
           </DropZone>
           <DocsInfoPanel />
-          {showMobileButton && <DocsMainButton mode="mobile" isDisabled={sdkConfig?.disableActionButton} />}
+          {showMobileButton && (
+            <DocsMainButton
+              mode="mobile"
+              isDisabled={sdkConfig?.disableActionButton}
+              actions={docsActions}
+            />
+          )}
+          <CreateFileDialog
+            visible={dialogVisible}
+            type={dialogType}
+            isCreating={isCreating}
+            onClose={closeCreateDialog}
+            onSave={onSaveCreate}
+          />
           <DeleteDialog
             visible={deleteDialogVisible}
             isLoading={isDeleting}

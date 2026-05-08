@@ -228,7 +228,7 @@ const FormsSidebar = () => {
     const mainItems: NavMenuGroup["items"] = [
       {
         id: FormsSection.MyForms,
-        label: t("Common:MyForms"),
+        label: t("Common:DashboardAIFormsTitle"),
         icon: FormFileReactSvgUrl,
         onClick: () => navigateToSection(FormsSection.MyForms),
         children: myFormsChildren,

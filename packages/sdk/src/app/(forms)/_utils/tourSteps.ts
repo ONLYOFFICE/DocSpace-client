@@ -226,7 +226,7 @@ export function getTourSteps(
   return [
     navSectionStep(
       "my-forms",
-      t("Common:MyForms"),
+      t("Common:DashboardAIFormsTitle"),
       t(
         "Common:TourMyForms",
         "This is your main workspace. All your PDF forms are stored here. Upload new forms or create them from scratch.",

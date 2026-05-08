@@ -114,7 +114,7 @@ const DocsSidebar = () => {
         items: [
           {
             id: DocsSection.MyDocuments,
-            label: t("Common:Documents"),
+            label: t("Common:DashboardAIFilesTitle"),
             icon: CatalogFolderReactSvgUrl,
             onClick: () => navigateToSection(DocsSection.MyDocuments),
             children: [

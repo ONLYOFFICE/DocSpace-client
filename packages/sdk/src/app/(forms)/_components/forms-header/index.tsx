@@ -142,7 +142,7 @@ const FormsHeader = ({
   const getSectionTitle = React.useCallback(() => {
     switch (activeSection) {
       case FormsSection.MyForms:
-        return t("Common:MyForms");
+        return t("Common:DashboardAIFormsTitle");
       case FormsSection.Library:
         return t("Common:Library");
       case FormsSection.InProgress:

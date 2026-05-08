@@ -410,6 +410,24 @@ const ClientRoutes = [
     lazy: () => import("SRC_DIR/pages/Sdk"),
   },
   {
+    path: "/dashboard",
+    async lazy() {
+      const { Dashboard } = await componentLoader(
+        () => import("SRC_DIR/pages/Dashboard"),
+      );
+
+      const Component = () => (
+        <PrivateRoute>
+          <ErrorBoundary>
+            <Dashboard />
+          </ErrorBoundary>
+        </PrivateRoute>
+      );
+
+      return { Component };
+    },
+  },
+  {
     path: "/about",
     async lazy() {
       const { isDesktop, isTablet } = await import("@docspace/shared/utils");

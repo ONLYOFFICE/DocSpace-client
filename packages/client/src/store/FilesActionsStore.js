@@ -86,6 +86,11 @@ import {
   deduplicateFileNames,
   triggerFileDownload,
 } from "SRC_DIR/helpers/encryptedDownload";
+import {
+  decryptEncryptedItemToFile,
+  addCopySuffix,
+  tagFileForCopy,
+} from "SRC_DIR/helpers/encryptedCopy";
 import { requireUnlock } from "@docspace/shared/services/encryption/secretStorage";
 import { forgetEncryptedFilename } from "@docspace/shared/services/encryption/filenameCache";
 
@@ -123,7 +128,6 @@ import { hideInfoPanel } from "SRC_DIR/helpers/info-panel";
 import { OPERATIONS_NAME, CategoryType } from "@docspace/shared/constants";
 import { FileOperationStatus } from "@docspace/shared/enums";
 import i18n from "../i18n";
-import { checkProtocol } from "../helpers/files-helpers";
 import FilesHeaderOptionStore from "./FilesHeaderOptionStore";
 import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 
@@ -1523,6 +1527,10 @@ class FilesActionStore {
   };
 
   duplicateAction = async (item) => {
+    if (item.fileExst && item.encrypted) {
+      return this.duplicateEncryptedFile(item);
+    }
+
     const { setSecondaryProgressBarData } =
       this.uploadDataStore.secondaryProgressDataStore;
     const { clearActiveOperations } = this.uploadDataStore;
@@ -1603,6 +1611,82 @@ class FilesActionStore {
         clearActiveOperations(fileIds, folderIds);
         this.setGroupMenuBlocked(false);
       });
+  };
+
+  duplicateEncryptedFile = async (item) => {
+    return this.copyEncryptedFilesToFolder([item], item.folderId, {
+      private: true,
+      roomType: this.selectedFolderStore.roomType ?? RoomsType.CustomRoom,
+    });
+  };
+
+  copyEncryptedFilesToFolder = async (items, destFolderId, destInfo) => {
+    const { user, encryptionKeys } = this.userStore;
+
+    if (!encryptionKeys || encryptionKeys.length === 0) {
+      toastr.error(i18n.t("Common:EncryptionKeysNotConfigured"));
+      return;
+    }
+
+    const userId = user?.id;
+    if (!userId) return;
+
+    const identity = await requireUnlock(String(userId));
+    if (!identity) {
+      toastr.error(i18n.t("Common:EncryptionLockedAddMembers"));
+      return;
+    }
+
+    const sameRoomRoot =
+      destInfo?.private === true &&
+      destInfo?.rootFolderId === this.selectedFolderStore.rootFolderId;
+
+    const destContext = {
+      roomType: destInfo?.roomType ?? RoomsType.CustomRoom,
+      isPrivate: !!sameRoomRoot,
+    };
+
+    const filesToUpload = [];
+    const failed = [];
+
+    for (const item of items) {
+      try {
+        const decryptedFile = await decryptEncryptedItemToFile(
+          item,
+          String(userId),
+          identity,
+        );
+
+        const newName = sameRoomRoot
+          ? addCopySuffix(decryptedFile.name)
+          : decryptedFile.name;
+        const tagged = tagFileForCopy(
+          new File([decryptedFile], newName, { type: decryptedFile.type }),
+          destFolderId,
+          destContext,
+        );
+        filesToUpload.push(tagged);
+      } catch (error) {
+        console.error(
+          `[ENCRYPTION] client copy failed for file ${item.id}:`,
+          error,
+        );
+        failed.push(item.title);
+      }
+    }
+
+    if (filesToUpload.length > 0) {
+      this.uploadDataStore.startUpload(filesToUpload, destFolderId, i18n.t);
+    }
+
+    if (failed.length > 0) {
+      toastr.error(
+        i18n.t("Common:EncryptedCopyFailed", {
+          defaultValue: "Failed to copy encrypted files: {{names}}",
+          names: failed.join(", "),
+        }),
+      );
+    }
   };
 
   getItemsInfo = (items) => {
@@ -3013,8 +3097,7 @@ class FilesActionStore {
   };
 
   openItemAction = async (item, t, e) => {
-    const { openDocEditor, isPrivacyFolder, setSelection, categoryType } =
-      this.filesStore;
+    const { openDocEditor, setSelection, categoryType } = this.filesStore;
     const { currentDeviceType, frameConfig, isFrame } = this.settingsStore;
     const { fileItemsList } = this.pluginStore;
     const { enablePlugins } = this.settingsStore;
@@ -3043,10 +3126,7 @@ class FilesActionStore {
     const canWebEdit = item.viewAccessibility?.WebEdit;
     const canViewedDocs = item.viewAccessibility?.WebView;
 
-    const { id, viewUrl, fileStatus, encrypted, isFolder, webUrl, isRoom } =
-      item;
-    if (encrypted && isPrivacyFolder) return checkProtocol(item.id, true);
-
+    const { id, viewUrl, fileStatus, isFolder, webUrl, isRoom } = item;
     if (isRecycleBinFolder || isLoading) return;
 
     if (isFolder || isRoom) {

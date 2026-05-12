@@ -166,15 +166,6 @@ import {
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 import { XlsxUpdateService } from "@docspace/shared/services/xlsx-update.service";
 import { showCreatedPDFFormDialog } from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
-import { getFileEncryptionAccess } from "@docspace/shared/api/files";
-import { requireUnlock } from "@docspace/shared/services/encryption/secretStorage";
-import { decryptFile } from "@docspace/shared/services/encryption/fileKeys";
-import { unwrapDekForCurrentUser } from "@docspace/shared/services/encryption/roomFileAccess";
-import {
-  generateEditSessionId,
-  storeEditBuffer,
-} from "@docspace/shared/utils/encryptedEditBuffer";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 const LOADER_TIMER = 500;
@@ -747,100 +738,6 @@ class ContextOptionsStore {
   onClickDownloadEncrypted = (item) => {
     const { openUrl } = this.settingsStore;
     openUrl(item.viewUrl, UrlActionType.Download);
-  };
-
-  onClickEditEncrypted = async (item, t) => {
-    const { encryptionKeys, user } = this.userStore;
-
-    if (!encryptionKeys || encryptionKeys.length === 0) {
-      toastr.error(t("Common:EncryptionKeysRequired"));
-      return;
-    }
-
-    const userId = user?.id;
-    if (!userId) return;
-
-    try {
-      const encryptionInfo = await getFileEncryptionAccess(item.id);
-
-      if (!encryptionInfo || !encryptionInfo.fileKeys) {
-        toastr.error(t("Common:EncryptionAccessNotAvailable"));
-        return;
-      }
-
-      const hasOwnEntry = encryptionInfo.fileKeys.some(
-        (k) => String(k.userId) === String(userId),
-      );
-      if (!hasOwnEntry) {
-        toastr.error(t("Common:EncryptionDecryptAccessDenied"));
-        return;
-      }
-
-      const identity = await requireUnlock(String(userId));
-      if (!identity) {
-        toastr.error(t("Common:EncryptionKeyNotAvailable"));
-        return;
-      }
-
-      const response = await fetch(item.viewUrl);
-      if (!response.ok) {
-        toastr.error(
-          t("Common:EncryptionFetchFileFailed", {
-            status: response.status,
-          }),
-        );
-        return;
-      }
-
-      const encryptedData = await response.arrayBuffer();
-
-      const dek = await unwrapDekForCurrentUser({
-        fileKeys: encryptionInfo.fileKeys,
-        roomMemberKeys: encryptionInfo.userKeys ?? [],
-        currentUserId: String(userId),
-        currentIdentity: identity,
-        fileId: item.id,
-      });
-      const { data: decryptedBlob, fileName: decryptedName } =
-        await decryptFile(encryptedData, dek, {
-          cacheFilenameForFileId: item.id,
-        });
-
-      const buffer = await decryptedBlob.arrayBuffer();
-      const sessionId = generateEditSessionId(item.id);
-      const realFileName = decryptedName || item.title;
-      const myFileKey = encryptionInfo.fileKeys.find(
-        (k) => String(k.userId) === String(userId),
-      );
-
-      await storeEditBuffer({
-        id: sessionId,
-        fileId: item.id,
-        buffer,
-        fileName: realFileName,
-        fileType: item.contentType || "application/octet-stream",
-        userPublicKey: encryptionKeys[0].publicKey,
-        wrappedDEK: myFileKey?.privateKeyEnc,
-        userId: String(userId),
-        createdAt: Date.now(),
-      });
-
-      const searchParams = new URLSearchParams();
-      searchParams.append("fileId", String(item.id));
-      searchParams.append("encrypted", sessionId);
-
-      const url = combineUrl(
-        window.ClientConfig?.proxy?.url,
-        `/doceditor?${searchParams.toString()}`,
-      );
-
-      const { openOnNewPage } = this.filesSettingsStore;
-      window.open(url, openOnNewPage ? "_blank" : "_self");
-    } catch (error) {
-      toastr.error(
-        error.message || "An error occurred while opening the encrypted file.",
-      );
-    }
   };
 
   onClickDownloadAs = () => {
@@ -2248,14 +2145,6 @@ class ContextOptionsStore {
         disabled: false,
       },
       {
-        id: "option_edit-encrypted",
-        key: "edit-encrypted",
-        label: t("Common:EditEncryptedFile"),
-        icon: AccessEditReactSvgUrl,
-        onClick: () => this.onClickEditEncrypted(item, t),
-        disabled: !item.security?.Edit,
-      },
-      {
         id: "option_vectorization",
         key: "vectorization",
         label: t("Files:Vectorization"),
@@ -3128,7 +3017,6 @@ class ContextOptionsStore {
               "open-pdf",
               "fill-form",
               "edit",
-              "edit-encrypted",
               "start-filling",
               "vectorization",
               "preview",
@@ -3837,6 +3725,12 @@ class ContextOptionsStore {
 
     const showUploadFolder = !(isMobile || isTablet);
 
+    const privateFolderActions = [
+      createNewFolder,
+      { key: "separator", isSeparator: true },
+      uploadFiles,
+    ];
+
     const options = isAIAgentsFolder
       ? [
           {
@@ -3857,22 +3751,25 @@ class ContextOptionsStore {
                 icon: CatalogRoomsReactSvgUrl,
               },
             ]
-        : [
-            createNewDoc,
-            createNewSpreadsheet,
-            createNewPresentation,
-            ...formActions,
-            createNewFolder,
-            ...templateGallery,
-            { key: "separator", isSeparator: true },
-            uploadFiles,
-            showUploadFolder ? uploadFolder : null,
-          ];
+        : isPrivacyFolder
+          ? privateFolderActions
+          : [
+              createNewDoc,
+              createNewSpreadsheet,
+              createNewPresentation,
+              ...formActions,
+              createNewFolder,
+              ...templateGallery,
+              { key: "separator", isSeparator: true },
+              uploadFiles,
+              showUploadFolder ? uploadFolder : null,
+            ];
     if (
       !isAIAgents() &&
       mainButtonItemsList &&
       enablePlugins &&
-      !isRoomsFolder
+      !isRoomsFolder &&
+      !isPrivacyFolder
     ) {
       const pluginItems = [];
 

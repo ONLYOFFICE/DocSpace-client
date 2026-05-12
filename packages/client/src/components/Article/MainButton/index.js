@@ -69,7 +69,6 @@ import {
 import { getContactsView, createGroup } from "SRC_DIR/helpers/contacts";
 
 import MobileView from "./MobileView";
-import { encryptionUploadDialog } from "../../../helpers/desktop";
 
 import styles from "./main-button.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";
@@ -80,8 +79,6 @@ const ArticleMainButtonContent = (props) => {
     isMobileArticle,
 
     isPrivacy,
-    encryptedFile,
-    encrypted,
     startUpload,
     setAction,
     setSelectFileDialogVisible,
@@ -243,21 +240,8 @@ const ArticleMainButtonContent = (props) => {
   );
 
   const onUploadFileClick = React.useCallback(() => {
-    if (isPrivacy) {
-      encryptionUploadDialog((f, isEncrypted) => {
-        f.encrypted = isEncrypted;
-        startUpload([f], null, t); // TODO: createFoldersTree
-      });
-    } else {
-      inputFilesElement.current.click();
-    }
-  }, [
-    isPrivacy,
-    encrypted,
-    encryptedFile,
-    encryptionUploadDialog,
-    startUpload,
-  ]);
+    inputFilesElement.current.click();
+  }, []);
 
   const onUploadFolderClick = React.useCallback(() => {
     inputFolderElement.current.click();
@@ -494,13 +478,12 @@ const ArticleMainButtonContent = (props) => {
       key: "pptx",
     };
 
-    if (!(isMobile || isTablet)) {
+    if (!(isMobile || isTablet) && !isPrivacy) {
       newUploadActions.push({
         id: "actions_upload-folders",
         className: "main-button_drop-down",
         icon: ActionsUploadReactSvgUrl,
         label: t("Common:UploadFolder"),
-        disabled: isPrivacy,
         onClick: onUploadFolderClick,
         key: "upload-folder",
       });
@@ -536,25 +519,17 @@ const ArticleMainButtonContent = (props) => {
       return;
     }
 
-    const newActions = [
-      createNewDocumentDocx,
-      createNewSpreadsheetXlsx,
-      createNewPresentationPptx,
-      formActions,
-      createNewFolder,
-    ];
+    const newActions = isPrivacy
+      ? [createNewFolder]
+      : [
+          createNewDocumentDocx,
+          createNewSpreadsheetXlsx,
+          createNewPresentationPptx,
+          formActions,
+          createNewFolder,
+        ];
 
-    if (pluginItems.length > 0) {
-      // menuModel.push({
-      //   id: "actions_more-plugins",
-      //   className: "main-button_drop-down",
-      //   icon: PluginMoreReactSvgUrl,
-      //   label: t("Common:More"),
-      //   disabled: false,
-      //   key: "more-plugins",
-      //   items: pluginItems,
-      // });
-
+    if (pluginItems.length > 0 && !isPrivacy) {
       newActions.push({
         id: "actions_more-plugins",
         className: "main-button_drop-down",
@@ -566,7 +541,7 @@ const ArticleMainButtonContent = (props) => {
       });
     }
 
-    if (templateGalleryAvailable) {
+    if (templateGalleryAvailable && !isPrivacy) {
       if (isDesktop()) {
         newActions.push({
           isSeparator: true,

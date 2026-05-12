@@ -263,8 +263,12 @@ const InvitePanel = ({
   }, [allowInvitingGuests]);
 
   useEffect(() => {
+    if (selectedRoom?.private) {
+      setShowGuestsTab(false);
+      return;
+    }
     if (typeof hasGuests === "boolean") setShowGuestsTab(hasGuests);
-  }, [hasGuests]);
+  }, [hasGuests, selectedRoom?.private]);
 
   useEffect(() => {
     if (roomId === -1) {

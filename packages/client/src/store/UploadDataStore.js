@@ -381,7 +381,13 @@ class UploadDataStore {
   };
 
   prepareFileForEncryptedUpload = async (file, folderId, onProgress) => {
-    const { roomType, private: isPrivate } = this.selectedFolderStore;
+    const overrideCtx = file?.uploadContext;
+    const roomType =
+      overrideCtx?.roomType ?? this.selectedFolderStore.roomType;
+    const isPrivate =
+      overrideCtx && "isPrivate" in overrideCtx
+        ? overrideCtx.isPrivate
+        : this.selectedFolderStore.private;
     return prepareEncryptedUpload({
       file,
       folderId,
@@ -1942,7 +1948,12 @@ class UploadDataStore {
     }
 
     const { chunkUploadSize } = this.filesSettingsStore;
-    const { roomType, private: isPrivate } = this.selectedFolderStore;
+    const overrideCtx = item.file?.uploadContext;
+    const roomType = overrideCtx?.roomType ?? this.selectedFolderStore.roomType;
+    const isPrivate =
+      overrideCtx && "isPrivate" in overrideCtx
+        ? overrideCtx.isPrivate
+        : this.selectedFolderStore.private;
 
     const { file, toFolderId /* , action */ } = item;
     let fileToUpload = file;

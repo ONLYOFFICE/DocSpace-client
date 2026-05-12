@@ -2738,6 +2738,7 @@ class FilesStore {
       isArchiveFolder,
       isRecentFolder,
       isFavoritesFolder,
+      isPrivacyFolder,
     } = this.treeFoldersStore;
     const { security } = this.selectedFolderStore;
 
@@ -3064,13 +3065,32 @@ class FilesStore {
 
       if (isEncrypted) {
         fileOptions = removeOptions(fileOptions, [
-          "open",
           "link-for-room-members",
+          "sharing-settings",
+          "copy-shared-link",
+          "manage-links",
+          "copy-general-link",
           "send-by-email",
+          "create-room",
+          "create-room-separator",
+          "ask-ai",
+          "separator6",
+          "make-form",
+          "submit-to-gallery",
+          "separator-SubmitToGallery",
+          "docu-sign",
+          "custom-filter",
+          "update-xlsx-data",
+          "vectorization",
+          "embedding-settings",
+          "convert",
+          "download-as",
           "mark-as-favorite",
+          "rename",
+          "edit-index",
+          "show-version-history",
         ]);
         fileOptions.push("download-encrypted");
-        fileOptions.push("edit-encrypted");
       }
 
       // if (isFavoritesFolder || isRecentFolder) {
@@ -3151,19 +3171,6 @@ class FilesStore {
       if (this.publicRoomStore.isPublicRoom || !canEmbed) {
         fileOptions = removeOptions(fileOptions, ["embedding-settings"]);
       }
-
-      // if (isPrivacyFolder) {
-      //   fileOptions = removeOptions(fileOptions, [
-      //     "preview",
-      //     "view",
-      //     "separator0",
-      //     "download-as",
-      //   ]);
-
-      //   // if (!isDesktopClient) {
-      //   //   fileOptions = removeOptions(fileOptions, ["sharing-settings"]);
-      //   // }
-      // }
 
       fileOptions = removeSeparator(fileOptions);
 
@@ -3352,6 +3359,19 @@ class FilesStore {
 
       if (!isPublicRoomType || this.publicRoomStore.isPublicRoom) {
         roomOptions = removeOptions(roomOptions, ["external-link"]);
+      }
+
+      if (item.private) {
+        roomOptions = removeOptions(roomOptions, [
+          "external-link",
+          "link-for-room-members",
+          "embedding-settings",
+          "edit-index",
+          "export-room-index",
+          "short-tour",
+          "save-as-template",
+          "duplicate-room",
+        ]);
       }
 
       if (!canEditRoom) {
@@ -3567,11 +3587,20 @@ class FilesStore {
     //   ]);
     // }
 
-    // if (isPrivacyFolder) {
-    //   folderOptions = removeOptions(folderOptions, [
-    //     // "sharing-settings",
-    //   ]);
-    // }
+    if (isPrivacyFolder) {
+      folderOptions = removeOptions(folderOptions, [
+        "sharing-settings",
+        "copy-shared-link",
+        "manage-links",
+        "link-for-room-members",
+        "create-room-separator",
+        "create-room",
+        "mark-as-favorite",
+        "remove-from-favorites",
+        "edit-index",
+        "rename",
+      ]);
+    }
 
     if (isRecycleBinFolder) {
       folderOptions = removeOptions(folderOptions, [

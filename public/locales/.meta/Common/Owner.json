@@ -3,7 +3,7 @@
   "content": "Owner",
   "content_en_sha1_hash": "89ff31225c5f042fff61e92ec8cf80e417a7140c",
   "created_at": "2025-05-19T21:30:47.205Z",
-  "updated_at": "2026-04-27T12:45:07.453Z",
+  "updated_at": "2026-05-12T08:51:58.421Z",
   "comment": {
     "text": "This is a label identifying the owner of a document or a portal. It appears as a short, standalone text.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
-      "line_number": 220,
+      "line_number": 223,
       "context": "getPropertyTitle = (propertyId: string) => {\n switch (propertyId) {\n case \"Owner\":\n case \"OwnedBy\":\n return this.t(\"Common:Owner\");\n case \"Location\":\n return this.t(\"Common:Location\");\n \n case \"Type\":\n return this.t(\"Common:Type\");",
       "module": "/packages/client"
     },

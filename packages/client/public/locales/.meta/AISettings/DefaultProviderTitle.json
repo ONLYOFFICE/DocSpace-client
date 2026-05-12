@@ -3,7 +3,7 @@
   "content": "Default provider",
   "content_en_sha1_hash": "8428a03f18470a4b05509f89c343e45d618714d5",
   "created_at": "2026-02-19T13:36:29.988Z",
-  "updated_at": "2026-04-11T21:03:00.502Z",
+  "updated_at": "2026-05-08T13:10:45.615Z",
   "comment": {
     "text": "This is a heading for a section in the AI settings, indicating the default AI provider.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/DefaultProvider.tsx",
-      "line_number": 353,
+      "line_number": 355,
       "context": "level={3}\n fontWeight={700}\n lineHeight=\"22px\"\n fontSize=\"16px\"\n >\n {t(\"AISettings:DefaultProviderTitle\")}\n </Heading>\n <Text className={styles.description} lineHeight=\"20px\">\n {t(\"AISettings:DefaultProviderDescription\", {\n aiProvider: t(\"Common:AIProvider\"),\n aiAgents: t(\"Common:AIAgents\"),",
       "module": "/packages/client"
     }

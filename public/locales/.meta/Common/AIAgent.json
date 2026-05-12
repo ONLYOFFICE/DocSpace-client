@@ -3,7 +3,7 @@
   "content": "AI agent",
   "content_en_sha1_hash": "ab15eb3d82fcf6e76a2ede7896d22471a681f18e",
   "created_at": "2025-12-19T10:16:17.398Z",
-  "updated_at": "2026-04-23T17:24:01.638Z",
+  "updated_at": "2026-05-08T13:10:45.499Z",
   "comment": {
     "text": "This string refers to an AI agent, likely a feature or service within the application. It appears as a label in various contexts, including a selector and an empty screen description.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/AIAgent/index.tsx",
-      "line_number": 185,
+      "line_number": 186,
       "context": "const { getAgentList: onLoadNextPage } = useAgentsHelper({\n withCreate: true,\n isInit: isInitRef.current,\n setIsInit,\n createDefineLabel: t(\"CreateAIAgent\", {\n aiAgent: t(\"AIAgent\"),\n }),\n excludeItems,\n searchValue,\n setHasNextPage,\n setTotal,",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/AIAgent/index.tsx",
-      "line_number": 185,
+      "line_number": 186,
       "context": "const { getAgentList: onLoadNextPage } = useAgentsHelper({\n withCreate: true,\n isInit: isInitRef.current,\n setIsInit,\n createDefineLabel: t(\"CreateAIAgent\", {\n aiAgent: t(\"AIAgent\"),\n }),\n excludeItems,\n searchValue,\n setHasNextPage,\n setTotal,",
       "module": "/libs/ui-kit"
     },
@@ -139,7 +139,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/ai-chat-panel/index.tsx",
-      "line_number": 190,
+      "line_number": 204,
       "context": "tooltipId=\"close-panel-tooltip\"\n tooltipContent={t(\"Common:CloseButton\")}\n />\n )}\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"Common:AIAgent\")}\n </Text>\n {isSyncing && (\n <span\n title={t(\"Common:SyncingKnowledgeBase\")}\n style={{ display: \"flex\", alignItems: \"center\" }}",
       "module": "/packages/sdk"
     },

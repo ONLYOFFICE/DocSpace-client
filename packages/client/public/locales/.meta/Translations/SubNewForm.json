@@ -3,7 +3,7 @@
   "content": "Blank",
   "content_en_sha1_hash": "276c9361fff15e60f48af4d733ec83315d2bb251",
   "created_at": "2025-05-19T21:30:50.007Z",
-  "updated_at": "2026-04-23T17:24:01.618Z",
+  "updated_at": "2026-05-08T13:10:45.493Z",
   "comment": {
     "text": "This is a button label for creating a new, empty form. It appears in menus for creating new documents.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3603,
+      "line_number": 3666,
       "context": "};\n \n const createTemplateForm = {\n id: \"personal_template_black\",\n key: \"new-form\",\n label: t(\"Translations:SubNewForm\"),\n icon: FormBlankReactSvgUrl,\n onClick: () => this.onCreate(\"pdf\", t),\n };\n \n const createTemplateNewFormFile = {",
       "module": "/packages/client"
     }

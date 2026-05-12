@@ -24,6 +24,7 @@
   "FileCopied": "Fișierul a fost copiat",
   "FileCreated": "Fișierul a fost creat",
   "FileDeleted": "Fișierul a fost șters",
+  "FileDownloaded": "Fișier descărcat",
   "FileMoved": "Fișierul a fost mutat",
   "FileRestored": "Fișierul a fost restaurat",
   "FileTrashed": "Fișierul a fost mutat în Coșul de gunoi",
@@ -32,6 +33,7 @@
   "FolderCopied": "Folderul a fost copiat",
   "FolderCreated": "Folderul a fost creat",
   "FolderDeleted": "Folderul a fost șters",
+  "FolderDownloaded": "Folder descărcat",
   "FolderMoved": "Folderul a fost mutat",
   "FolderRestored": "Folderul a fost restaurat",
   "FolderTrashed": "Folderul a fost mutat în Coșul de gunoi",
@@ -95,7 +97,5 @@
   "WebhookRemoved": "Webhook eliminat",
   "Webhooks": "Webhook-uri",
   "WebhooksGuide": "Ghid Webhooks",
-  "WebhooksInfo": "Utilizați webhook-uri pentru a efectua acțiuni personalizate pe partea oricărei aplicații sau site web pe care o utilizați, pe baza diverselor evenimente din {{organizationName}} {{productName}}.\nAici puteți crea și gestiona toate webhook-urile, să le configurați și să parcurgeți istoricul fiecărui webhook pentru a le audita performanța.",
-  "FileDownloaded": "Fișier descărcat",
-  "FolderDownloaded": "Folder descărcat"
+  "WebhooksInfo": "Utilizați webhook-uri pentru a efectua acțiuni personalizate pe partea oricărei aplicații sau site web pe care o utilizați, pe baza diverselor evenimente din {{organizationName}} {{productName}}.\nAici puteți crea și gestiona toate webhook-urile, să le configurați și să parcurgeți istoricul fiecărui webhook pentru a le audita performanța."
 }

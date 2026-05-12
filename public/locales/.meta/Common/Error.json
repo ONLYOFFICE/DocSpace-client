@@ -3,7 +3,7 @@
   "content": "Error",
   "content_en_sha1_hash": "7f2f6a15cf8da2b27e5a4af47b58e7ad71c0b3d9",
   "created_at": "2025-05-19T21:30:45.027Z",
-  "updated_at": "2026-04-23T17:24:02.002Z",
+  "updated_at": "2026-05-08T13:10:45.632Z",
   "comment": {
     "text": "This is a general error message displayed in toast notifications or as part of a larger error message when an unexpected issue occurs.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1301,
+      "line_number": 1304,
       "context": "...transProps,\n }),\n );\n } catch (error) {\n console.error(\"Error adding rooms to group:\", error);\n toastr.error(t(\"Common:Error\"));\n }\n };\n \n onRemoveRoomsFromGroup = async (roomIds, t) => {\n const currentGroupId = this.filesStore.roomsFilter?.groupId;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1301,
+      "line_number": 1304,
       "context": "...transProps,\n }),\n );\n } catch (error) {\n console.error(\"Error adding rooms to group:\", error);\n toastr.error(t(\"Common:Error\"));\n }\n };\n \n onRemoveRoomsFromGroup = async (roomIds, t) => {\n const currentGroupId = this.filesStore.roomsFilter?.groupId;",
       "module": "/packages/client"
     },

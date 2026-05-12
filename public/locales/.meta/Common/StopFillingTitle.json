@@ -3,7 +3,7 @@
   "content": "Stop filling?",
   "content_en_sha1_hash": "b3fff789a91323a06fd3adcd922650270391f583",
   "created_at": "2025-05-19T21:30:49.074Z",
-  "updated_at": "2026-04-12T17:34:04.648Z",
+  "updated_at": "2026-05-08T13:10:45.702Z",
   "comment": {
     "text": "This is the title of a confirmation dialog. It appears when a user attempts to stop filling out a form or document.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/stop-filling-dialog/index.tsx",
+      "line_number": 59,
+      "context": "visible={visible}\n displayType={ModalDialogType.modal}\n onClose={close}\n data-testid=\"stop-filling-dialog\"\n >\n <ModalDialog.Header>{t(\"Common:StopFillingTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>{t(\"Common:StopFillingBody\")}</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"stop-filling-dialog_submit\"\n key=\"OKButton\"",
+      "module": "/packages/sdk"
+    },
     {
       "file_path": "/packages/shared/dialogs/stop-filling/StopFillingDialog.tsx",
       "line_number": 71,

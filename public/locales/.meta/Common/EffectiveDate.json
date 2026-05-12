@@ -3,7 +3,7 @@
   "content": "Effective date",
   "content_en_sha1_hash": "153c9b215753daae6275e067c18ee6e9c92da512",
   "created_at": "2026-04-10T13:53:45.082Z",
-  "updated_at": "2026-04-11T20:54:12.281Z",
+  "updated_at": "2026-05-08T13:10:45.737Z",
   "comment": {
     "text": "This is a label in the order summary for billing, indicating the date when a change to a subscription plan (like a downgrade) will take effect.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
-      "line_number": 244,
+      "line_number": 256,
       "context": ") : null}\n {!isExceedingStorageLimit && !isNewSubscription ? (\n <div className={styles.summaryRow}>\n <Text fontSize=\"14px\" className={styles.rowLabel}>\n {isDowngradeStoragePlan\n ? t(\"EffectiveDate\")\n : t(\"RemainingPeriod\")}\n </Text>\n <Text\n fontWeight=\"600\"\n fontSize=\"14px\"",
       "module": "/libs/ui-kit"
     }

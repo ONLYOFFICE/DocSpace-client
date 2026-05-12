@@ -23,6 +23,7 @@
   "NeedMoreIntegrations": "Potřebujete více integrací?",
   "NeedMoreIntegrationsDescription": "Použijte webhooks k odesílání dat do vašeho vlastního systému nebo připojte formuláře k tisícům služeb přes Zapier.",
   "NoDatabaseConnections": "Žádné připojení k databázi není nakonfigurováno",
+  "NoDatabaseConnectionsRoomAdmin": "Připojení k databázím konfiguruje administrátor. Jakmile bude databáze nastavena, budete zde moci povolit export.",
   "PeopleSelectorInfo": "Vlastníkem místnosti se může stát pouze správce místnosti nebo správce prostoru {{productName}}",
   "Position": "Pozice",
   "PublicRoomBarDescription": "Tato místnost je přístupná všem uživatelům s odkazem. Přístup pro externí uživatele je zajištěn v závislosti na zvoleném typu přístupových práv.",
@@ -44,6 +45,5 @@
   "UserName": "Uživatelské jméno",
   "ViewerInfo": "Informace o prohlížeči",
   "WatermarkPreview": "Náhled vodoznaku",
-  "WatermarkPreviewHelp": "Tento náhled obrázku zhruba ukazuje, jak se vodoznak zobrazí ve vašich souborech.",
-  "NoDatabaseConnectionsRoomAdmin": "Připojení k databázím konfiguruje administrátor. Jakmile bude databáze nastavena, budete zde moci povolit export."
+  "WatermarkPreviewHelp": "Tento náhled obrázku zhruba ukazuje, jak se vodoznak zobrazí ve vašich souborech."
 }

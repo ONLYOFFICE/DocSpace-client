@@ -3,7 +3,7 @@
   "content": "This item will be permanently deleted. Are you sure?",
   "content_en_sha1_hash": "bc9b11f940706f51e5a6fa996be78b0f399ba112",
   "created_at": "2026-04-03T21:51:27.561Z",
-  "updated_at": "2026-04-11T20:55:21.110Z",
+  "updated_at": "2026-05-08T13:10:45.716Z",
   "comment": {
     "text": "This is a confirmation message displayed in a dialog when a user attempts to permanently delete a single item from the trash.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/delete-form-dialog/index.tsx",
+      "line_number": 52,
+      "context": "return (\n <ModalDialog visible={visible} onClose={close} autoMaxHeight>\n <ModalDialog.Header>{t(\"Common:DeletePermanently\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{t(\"Common:DeleteItemForever\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:Delete\")}\n size={ButtonSize.normal}",
+      "module": "/packages/sdk"
+    },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/delete-dialog/index.tsx",
       "line_number": 57,

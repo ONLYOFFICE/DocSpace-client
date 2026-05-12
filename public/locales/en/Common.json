@@ -76,6 +76,7 @@
   "AIDisabledInfoBlockAdminSaasDescription": "AI capabilities are currently turned off, which means this agent can’t process chats or tasks. To restore full functionality, enable AI features in the {{productName}} settings.",
   "AIDisabledInfoBlockAdminStandaloneDescription": "AI capabilities are currently turned off, which means this agent can’t process chats or tasks. Connect your own AI service to unlock advanced features in {{productName}}.",
   "AIDisabledInfoBlockUserDescription": "AI capabilities are currently turned off, which means this agent can’t process chats or tasks. To get back on track, ask your {{productName}} admin to enable AI features.",
+  "AIFeature": "AI feature",
   "AIFeaturesAreCurrentlyDisabled": "AI features are currently disabled",
   "AIGetStartedStep1Description": "Transfer credits from your {{productName}} wallet to {{organizationName}} AI. If your wallet is empty, top it up first. Credits never expire.",
   "AIGetStartedStep1Title": "Add funds to your AI balance",
@@ -143,6 +144,7 @@
   "Amount": "Amount",
   "AmountSelection": "Amount selection",
   "AmoutWithStorageUnit": "Amount ({{storageUnit}})",
+  "AnalyzeResponsesFaster": "Analyze responses faster and uncover deeper insights with AI.",
   "Analyzing": "Analyzing...",
   "AndMore": "and <1>{{count}} more</1>",
   "Anonymous": "Anonymous",
@@ -308,6 +310,7 @@
   "ConflictResolveSelectAction": "Please select the action:",
   "Connect": "Connect",
   "ConnectAndConfigureServices": "This section is used to connect and configure the services.",
+  "ConnectDatabase": "Connect a database",
   "Connected": "Connected",
   "ConnectFolderTitle": "Folder title",
   "ConnectingAccount": "Connecting account",
@@ -601,6 +604,7 @@
   "FillingOnly": "For filling only",
   "FillingStatus": "Filling status",
   "FillOut": "fill out",
+  "FillOutTheForm": "Fill out the form",
   "Finish": "Finish",
   "FirstAddPaymentMethod": "First you need to add a payment method",
   "FirstName": "First name",
@@ -1510,6 +1514,7 @@
   "WhenBalanceDropsTo": "When the balance drops to {{min}}, the wallet will be automatically topped up to {{max}}.",
   "WhenBalanceGoesBellow": "When balance goes below",
   "WhiteLabel": "Logo settings",
+  "WhiteLabelLogoSubtitle": "Upload logos with a transparent background (PNG, SVG, JPG) for light and dark themes, or generate one instantly by entering your Your logo below.",
   "WhiteLabelTooltip": "The sizes are shown for the Retina displays. For the displays with standard resolutions the logo width and height will be resized accordingly upon upload.",
   "WhoFilledItOut": "Who filled it out",
   "WhoFilledItOutPrompt": "List all people who have filled out the form \"{{formName}}\"",
@@ -1532,6 +1537,5 @@
   "YourName": "Your name",
   "YourPrice": "Your price",
   "YourTurn": "Your turn",
-  "YouWillBeContacted": "The sales team will contact you after creating the request.",
-  "WhiteLabelLogoSubtitle": "Upload logos with a transparent background (PNG, SVG, JPG) for light and dark themes, or generate one instantly by entering your Your logo below."
+  "YouWillBeContacted": "The sales team will contact you after creating the request."
 }

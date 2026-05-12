@@ -3,7 +3,7 @@
   "content": "User not found. You can edit the email by double-clicking on it.",
   "content_en_sha1_hash": "a69a2a02c45d24c439ce46372f59b9cb3857ef41",
   "created_at": "2025-05-26T07:15:53.249Z",
-  "updated_at": "2026-04-11T21:14:13.801Z",
+  "updated_at": "2026-05-08T13:10:45.588Z",
   "comment": {
     "text": "This is an error tooltip that appears when an invited user's email address is not found. It informs the user that they can edit the email by double-clicking on it.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/Item.js",
-      "line_number": 353,
+      "line_number": 354,
       "context": "iconName={InfoEditReactSvgUrl}\n displayType=\"auto\"\n offsetRight={0}\n tooltipContent={\n hasNotFoundEmail\n ? t(\"EmailErrorMessageUserNotFound\")\n : t(\"EmailErrorMessage\")\n }\n openOnClick={false}\n size={16}\n color={theme.infoPanel.errorColor}",
       "module": "/packages/client"
     }

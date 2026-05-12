@@ -3,7 +3,7 @@
   "content": "Remaining period",
   "content_en_sha1_hash": "f5023b8b9e7191d0cd371a3a36ee2dbe6bdf5e2d",
   "created_at": "2026-04-10T13:53:45.647Z",
-  "updated_at": "2026-04-12T02:59:47.962Z",
+  "updated_at": "2026-05-08T13:10:45.737Z",
   "comment": {
     "text": "This is a label in the order summary for a storage plan. It indicates the duration of the current subscription that will be credited when changing the plan.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
-      "line_number": 245,
+      "line_number": 257,
       "context": "{!isExceedingStorageLimit && !isNewSubscription ? (\n <div className={styles.summaryRow}>\n <Text fontSize=\"14px\" className={styles.rowLabel}>\n {isDowngradeStoragePlan\n ? t(\"EffectiveDate\")\n : t(\"RemainingPeriod\")}\n </Text>\n <Text\n fontWeight=\"600\"\n fontSize=\"14px\"\n className={styles.rowValue}",
       "module": "/libs/ui-kit"
     }

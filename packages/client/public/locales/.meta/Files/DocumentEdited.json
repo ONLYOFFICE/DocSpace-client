@@ -3,7 +3,7 @@
   "content": "Cannot perform the action because the document is being edited.",
   "content_en_sha1_hash": "9be506c1a16ad8098b7a66bc532cf3279e05ab0f",
   "created_at": "2025-05-19T21:30:55.469Z",
-  "updated_at": "2026-04-23T17:24:02.054Z",
+  "updated_at": "2026-05-08T13:10:45.663Z",
   "comment": {
     "text": "Toast message. Appears when a user tries to perform an action on a document that is currently open for editing by another user.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1359,
+      "line_number": 1362,
       "context": "onSelectItem({ id: item.id, isFolder: item.isFolder }, true, false);\n };\n \n onShowEditingToast = (t) => {\n toastr.error(t(\"Files:DocumentEdited\"));\n };\n \n onShowWaitOperationToast = (t) => {\n toastr.warning(t(\"Files:WaitOperation\"));\n };",
       "module": "/packages/client"
     }

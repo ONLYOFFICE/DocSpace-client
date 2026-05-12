@@ -3,7 +3,7 @@
   "content": "New agent",
   "content_en_sha1_hash": "d200d92a331aabd52dfb0d7911c95be2fdd35eab",
   "created_at": "2025-10-27T16:14:17.785Z",
-  "updated_at": "2026-04-23T17:24:01.634Z",
+  "updated_at": "2026-05-08T13:10:45.496Z",
   "comment": {
     "text": "This is a button label or an item in a dropdown list. It allows users to create a new AI agent.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3707,
+      "line_number": 3770,
       "context": "const options = isAIAgentsFolder\n ? [\n {\n key: \"new-agent\",\n label: t(\"Common:NewAgent\"),\n onClick: this.onCreateAgent,\n icon: CatalogAIAgentsReactSvgUrl,\n },\n ]\n : isRoomsFolder",
       "module": "/packages/client"
     },

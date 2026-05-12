@@ -3,7 +3,7 @@
   "content": "Mark as read",
   "content_en_sha1_hash": "c1ee860bc3a94be1ae96eaa05833713b79c6634b",
   "created_at": "2025-05-19T21:30:55.828Z",
-  "updated_at": "2026-04-27T12:45:07.446Z",
+  "updated_at": "2026-05-08T13:10:45.511Z",
   "comment": {
     "text": "This is a button label that marks new files or updates as read, removing the \"new\" indicator.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2541,
+      "line_number": 2604,
       "context": "isSeparator: true,\n },\n {\n id: \"option_mark-read\",\n key: \"mark-read\",\n label: t(\"MarkRead\"),\n icon: TickRoundedSvgUrl,\n onClick: () => this.onClickMarkRead(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     }

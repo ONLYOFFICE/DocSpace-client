@@ -3,7 +3,7 @@
   "content": "Accesses",
   "content_en_sha1_hash": "3e2ca80db95767e37d4fe7d8f846aa94cb667515",
   "created_at": "2025-05-19T21:30:42.828Z",
-  "updated_at": "2026-04-11T21:01:37.997Z",
+  "updated_at": "2026-05-08T13:10:45.605Z",
   "comment": {
     "text": "This is a tab label within the Info Panel. It refers to the section where users can manage access permissions for a document or folder.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/headerGeneral.tsx",
-      "line_number": 100,
-      "context": "const setDetails = () => setView(InfoPanelView.infoDetails);\n const setShare = () => setView(InfoPanelView.infoShare);\n \n const memberTab = {\n id: \"info_members\",\n name: isTemplate ? t(\"Common:Accesses\") : t(\"Common:Contacts\"),\n onClick: setMembers,\n content: null,\n };\n \n const detailsTab = {",
+      "line_number": 106,
+      "context": ": (availableTabs[0] ?? InfoPanelView.infoDetails);\n \n const tabItems = availableTabs.map((id) => {\n let name: string;\n if (id === InfoPanelView.infoMembers) {\n name = isTemplate ? t(\"Common:Accesses\") : t(\"Common:Contacts\");\n } else if (id === InfoPanelView.infoHistory) {\n name = t(\"InfoPanel:SubmenuHistory\");\n } else if (id === InfoPanelView.infoDetails) {\n name = t(\"InfoPanel:SubmenuDetails\");\n } else if (id === InfoPanelView.infoShare) {",
       "module": "/packages/client"
     }
   ],

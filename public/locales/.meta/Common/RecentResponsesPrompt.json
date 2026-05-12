@@ -3,7 +3,7 @@
   "content": "Show me the most recent submissions for \"{{formName}}\"",
   "content_en_sha1_hash": "fdfc672245e32038759fd89a6e8f6c294701a1a2",
   "created_at": "2026-03-31T15:18:19.858Z",
-  "updated_at": "2026-04-23T17:24:02.134Z",
+  "updated_at": "2026-05-08T13:10:45.715Z",
   "comment": {
     "text": "This is a prompt suggestion for an AI chat panel, displayed as a clickable option. It asks the AI to retrieve recent submissions for a specific form, where `{{formName}}` will be replaced by the form's title.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/ai-chat-panel/index.tsx",
-      "line_number": 130,
+      "line_number": 136,
       "context": "formName: pendingAttachmentFile.title,\n }),\n },\n {\n title: t(\"Common:RecentResponses\"),\n prompt: t(\"Common:RecentResponsesPrompt\", {\n formName: pendingAttachmentFile.title,\n }),\n },\n {\n title: t(\"Common:WhoFilledItOut\"),",
       "module": "/packages/sdk"
     }

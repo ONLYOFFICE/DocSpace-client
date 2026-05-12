@@ -91,8 +91,8 @@ importers:
         specifier: 1.6.13
         version: 1.6.13
       '@onlyoffice/docspace-api-sdk':
-        specifier: file:onlyoffice-docspace-api-sdk-3.6.0.tgz
-        version: file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.6.0.tgz
+        specifier: file:onlyoffice-docspace-api-sdk-3.7.0.tgz
+        version: file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.7.0.tgz
       '@onlyoffice/document-editor-react':
         specifier: 2.1.1
         version: 2.1.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -3178,9 +3178,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@onlyoffice/docspace-api-sdk@file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.6.0.tgz':
-    resolution: {integrity: sha512-Cgg11ZXTNKrsp8VwYB4HmkixD+xPJZk0fDaYksNIAyFGWDG1oxMk6NW9axclCcqDCUUVNRzg/MUyk4OL5MbsiA==, tarball: file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.6.0.tgz}
-    version: 3.6.0
+  '@onlyoffice/docspace-api-sdk@file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.7.0.tgz':
+    resolution: {integrity: sha512-Sp2tFtcc8Yq9BrO8fnaFst6uJYR7LJYmvFuvj3J2QWHaA2ugVnauTUAfwg7dIbzdmpyD8IzM8iIct1EdXvnJkQ==, tarball: file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.7.0.tgz}
+    version: 3.7.0
 
   '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz':
     resolution: {integrity: sha512-g7xq2Orc2iS6OfKg+zZT61hScteT0B00pFiqYA8yddUzLOMMDMMHOiRKObw6QZkhizkPXEHgWsH1n9Z2nOlWrA==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz}
@@ -10893,7 +10893,7 @@ snapshots:
   '@nx/nx-win32-x64-msvc@22.4.5':
     optional: true
 
-  '@onlyoffice/docspace-api-sdk@file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.6.0.tgz':
+  '@onlyoffice/docspace-api-sdk@file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.7.0.tgz':
     dependencies:
       axios: 1.16.0
     transitivePeerDependencies:

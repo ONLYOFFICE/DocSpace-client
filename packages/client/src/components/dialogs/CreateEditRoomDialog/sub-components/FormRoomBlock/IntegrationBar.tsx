@@ -40,6 +40,7 @@ type IntegrationBarProps = {
 };
 
 const STORAGE_KEY = "form_room_integrations_bar_dismissed";
+const BASE_PATH = "/portal-settings/integration/third-party-services";
 
 const IntegrationBar = ({
   t,
@@ -70,6 +71,10 @@ const IntegrationBar = ({
 
   const icon = hasDatabaseConnection ? <></> : <DangerToastReactSvg />;
 
+  const link = hasDatabaseConnection
+    ? BASE_PATH
+    : `${BASE_PATH}?consumer=externaldb`;
+
   return (
     <PublicRoomBar
       iconName={icon}
@@ -82,7 +87,7 @@ const IntegrationBar = ({
               color="accent"
               type={LinkType.page}
               className={styles.barLink}
-              href="/portal-settings/integration/third-party-services?consumer=externaldb"
+              href={link}
               isHovered
             >
               {t("GoToIntegrations")}

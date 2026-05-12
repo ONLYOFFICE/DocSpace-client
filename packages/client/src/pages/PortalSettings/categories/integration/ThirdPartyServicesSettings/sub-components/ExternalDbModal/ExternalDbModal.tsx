@@ -149,6 +149,7 @@ const ExternalDbModal: React.FC<ExternalDbModalProps> = ({
       if (!success) return;
 
       await onSave(filteredData);
+      toastr.success(t("Settings:ThirdPartyPropsActivated"));
     } catch (error) {
       toastr.error(error as Error);
     }
@@ -194,6 +195,7 @@ const ExternalDbModal: React.FC<ExternalDbModalProps> = ({
               onClick={handleTestConnection}
               isLoading={isTesting}
               isDisabled={!isValid || externalLoading}
+              tabIndex={0}
             />
             {match(connected)
               .with(true, () => (

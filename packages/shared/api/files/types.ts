@@ -151,6 +151,7 @@ export type TFolderSecurity = {
   ChangeOwner: boolean;
   IndexExport: boolean;
   UpdateXlsx?: boolean;
+  AnalyzeResponses?: boolean;
 };
 
 export type TFolder = {
@@ -195,6 +196,7 @@ export type TFolder = {
   sharedForUser?: boolean;
   isLinkExpired?: boolean;
   external?: boolean;
+  originalFormId?: number;
 };
 
 export type TGetFolderPath = TFolder[];

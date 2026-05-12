@@ -31,6 +31,13 @@ export const getGreetingKey = (): string => {
   return "GoodEvening";
 };
 
+export const NEW_FILE_NAMES = {
+  document: "New document.docx",
+  spreadsheet: "New spreadsheet.xlsx",
+  presentation: "New presentation.pptx",
+  pdf: "New PDF form.pdf",
+} as const;
+
 export const makeCreateUrl = (
   fileTitle: string,
   parentId: number | null,

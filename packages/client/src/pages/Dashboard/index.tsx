@@ -52,42 +52,8 @@ import AiAgentsIcon from "@docspace/ui-kit/assets/icons/16/ai-agents.svg";
 import BgPatternGreenUrl from "PUBLIC_DIR/images/background.pattern.green.react.svg?url";
 
 import { ModuleCard, type ModuleItem } from "./ModuleCard";
-import { getGreetingKey, makeCreateUrl } from "./utils";
+import { getGreetingKey, makeCreateUrl, NEW_FILE_NAMES } from "./utils";
 import styles from "./Dashboard.module.scss";
-
-const getCreateItems = (
-  parentId: number | null,
-  t: (key: string) => string,
-): QuickActionItem[] => [
-  {
-    id: "document",
-    icon: <CreateDocumentIcon />,
-    label: t("Common:Document"),
-    onClick: () =>
-      window.open(makeCreateUrl("New document.docx", parentId), "_blank"),
-  },
-  {
-    id: "spreadsheet",
-    icon: <CreateSpreadsheetIcon />,
-    label: t("Common:Spreadsheet"),
-    onClick: () =>
-      window.open(makeCreateUrl("New spreadsheet.xlsx", parentId), "_blank"),
-  },
-  {
-    id: "presentation",
-    icon: <CreatePresentationIcon />,
-    label: t("Common:Presentation"),
-    onClick: () =>
-      window.open(makeCreateUrl("New presentation.pptx", parentId), "_blank"),
-  },
-  {
-    id: "pdf",
-    icon: <BlankPdfIcon />,
-    label: getConstName("PDF"),
-    onClick: () =>
-      window.open(makeCreateUrl("New PDF form.pdf", parentId), "_blank"),
-  },
-];
 
 interface DashboardProps {
   firstName?: string;
@@ -100,8 +66,56 @@ const Dashboard = ({ firstName }: DashboardProps) => {
   React.useEffect(() => {
     getPersonalFolderTree()
       .then(([folder]) => setMyFolderId(folder.id as number))
-      .catch(() => {});
+      .catch((err) => {
+        console.error("Failed to load personal folder tree", err);
+      });
   }, []);
+
+  const createItems = React.useMemo<QuickActionItem[]>(
+    () => [
+      {
+        id: "document",
+        icon: <CreateDocumentIcon />,
+        label: t("Common:Document"),
+        onClick: () =>
+          window.open(
+            makeCreateUrl(NEW_FILE_NAMES.document, myFolderId),
+            "_blank",
+          ),
+      },
+      {
+        id: "spreadsheet",
+        icon: <CreateSpreadsheetIcon />,
+        label: t("Common:Spreadsheet"),
+        onClick: () =>
+          window.open(
+            makeCreateUrl(NEW_FILE_NAMES.spreadsheet, myFolderId),
+            "_blank",
+          ),
+      },
+      {
+        id: "presentation",
+        icon: <CreatePresentationIcon />,
+        label: t("Common:Presentation"),
+        onClick: () =>
+          window.open(
+            makeCreateUrl(NEW_FILE_NAMES.presentation, myFolderId),
+            "_blank",
+          ),
+      },
+      {
+        id: "pdf",
+        icon: <BlankPdfIcon />,
+        label: getConstName("PDF"),
+        onClick: () =>
+          window.open(
+            makeCreateUrl(NEW_FILE_NAMES.pdf, myFolderId),
+            "_blank",
+          ),
+      },
+    ],
+    [t, myFolderId],
+  );
 
   const handleInstall = () => {
     toastr.info(t("Common:UnderDevelopment"));
@@ -118,6 +132,7 @@ const Dashboard = ({ firstName }: DashboardProps) => {
 
   const moduleItems: ModuleItem[] = [
     {
+      id: "ai-files",
       icon: <CatalogFolderIcon />,
       title: t("Common:DashboardAIFilesTitle"),
       description: t("Common:DashboardAIFilesDescription"),
@@ -125,12 +140,14 @@ const Dashboard = ({ firstName }: DashboardProps) => {
       href: "/sdk/personal-files",
     },
     {
+      id: "ai-rooms",
       icon: <CatalogRoomsIcon />,
       title: t("Common:DashboardAIRoomsTitle"),
       description: t("Common:DashboardAIRoomsDescription"),
       installed: false,
     },
     {
+      id: "ai-forms",
       icon: <CatalogDocumentsIcon />,
       title: t("Common:DashboardAIFormsTitle"),
       description: t("Common:DashboardAIFormsDescription"),
@@ -138,6 +155,7 @@ const Dashboard = ({ firstName }: DashboardProps) => {
       href: "/sdk/forms",
     },
     {
+      id: "ai-agents",
       icon: <AiAgentsIcon />,
       title: t("Common:DashboardAIChatAgentsTitle"),
       description: t("Common:DashboardAIChatAgentsDescription"),
@@ -157,10 +175,7 @@ const Dashboard = ({ firstName }: DashboardProps) => {
         <Text as="h2" className={styles.sectionTitle}>
           {t("Common:CreateNew")}
         </Text>
-        <QuickActions
-          items={getCreateItems(myFolderId, t)}
-          className={styles.quickActions}
-        />
+        <QuickActions items={createItems} className={styles.quickActions} />
       </section>
 
       <section className={styles.section}>
@@ -204,7 +219,7 @@ const Dashboard = ({ firstName }: DashboardProps) => {
 
         <div className={styles.modulesGrid}>
           {moduleItems.map((mod) => (
-            <ModuleCard key={mod.title} mod={mod} onInstall={handleInstall} />
+            <ModuleCard key={mod.id} mod={mod} onInstall={handleInstall} />
           ))}
         </div>
       </section>

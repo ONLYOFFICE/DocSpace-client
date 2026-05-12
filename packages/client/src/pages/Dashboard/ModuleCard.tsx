@@ -33,6 +33,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import styles from "./Dashboard.module.scss";
 
 export type ModuleItem = {
+  id: string;
   icon: React.ReactNode;
   title: string;
   description: string;

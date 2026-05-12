@@ -32,6 +32,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 import type { NavMenuGroup } from "@docspace/ui-kit/components/nav-menu";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { DeviceType, FolderType } from "@docspace/shared/enums";
 import FilesFilter from "@docspace/shared/api/files/filter";
 
@@ -191,11 +192,13 @@ const DocsSidebar = () => {
             id: AI_ROOMS_ID,
             label: t("Common:DashboardAIRoomsTitle"),
             icon: CatalogRoomsReactSvgUrl,
+            onClick: () => toastr.info(t("Common:UnderDevelopment")),
           },
           {
             id: AI_AGENTS_ID,
             label: t("Common:DashboardAIChatAgentsTitle"),
             icon: CatalogAiAgentsReactSvgUrl,
+            onClick: () => toastr.info(t("Common:UnderDevelopment")),
           },
         ],
       },

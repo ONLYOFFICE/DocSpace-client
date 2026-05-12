@@ -4,6 +4,8 @@ import React from "react";
 
 import { DeviceType } from "@docspace/shared/enums";
 
+import { useSidebarShowText } from "@/components/apps-sidebar/useSidebarShowText";
+
 type SidebarContextType = {
   showText: boolean;
   currentDeviceType: DeviceType;
@@ -25,49 +27,15 @@ export const SidebarProvider = ({
   children: React.ReactNode;
   currentDeviceType: DeviceType;
 }) => {
-  const [showText, setShowText] = React.useState(() => {
-    if (typeof window === "undefined") return true;
-    if (currentDeviceType === DeviceType.mobile) return false;
-    if (currentDeviceType === DeviceType.tablet) {
-      try {
-        const saved = localStorage.getItem(SHOW_SIDEBAR_TEXT_KEY);
-        return saved === null ? false : saved !== "false";
-      } catch {
-        return false;
-      }
-    }
-    return true;
+  const { showText, toggleShowText } = useSidebarShowText({
+    storageKey: SHOW_SIDEBAR_TEXT_KEY,
+    currentDeviceType,
   });
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
 
   React.useEffect(() => {
-    if (currentDeviceType === DeviceType.mobile) {
-      setShowText(true);
-    } else if (currentDeviceType === DeviceType.desktop) {
-      setShowText(true);
-      setIsSidebarOpen(false);
-    } else if (currentDeviceType === DeviceType.tablet) {
-      try {
-        const saved = localStorage.getItem(SHOW_SIDEBAR_TEXT_KEY);
-        setShowText(saved === null ? false : saved !== "false");
-      } catch {
-        setShowText(false);
-      }
-      setIsSidebarOpen(false);
-    }
+    if (currentDeviceType !== DeviceType.mobile) setIsSidebarOpen(false);
   }, [currentDeviceType]);
-
-  const toggleShowText = React.useCallback(() => {
-    setShowText((prev) => {
-      const next = !prev;
-      try {
-        localStorage.setItem(SHOW_SIDEBAR_TEXT_KEY, String(next));
-      } catch {
-        // localStorage unavailable (incognito/restricted)
-      }
-      return next;
-    });
-  }, []);
 
   const openSidebar = React.useCallback(() => setIsSidebarOpen(true), []);
   const closeSidebar = React.useCallback(() => setIsSidebarOpen(false), []);

@@ -32,12 +32,14 @@ import { useTranslation } from "react-i18next";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 import type { NavMenuGroup } from "@docspace/ui-kit/components/nav-menu";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import { DeviceType } from "@docspace/shared/enums";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import { FormsSection, DEFAULT_SETTINGS_SUBSECTION } from "@/types/forms";
 import AppsSidebar from "@/components/apps-sidebar";
+import { useSidebarShowText } from "@/components/apps-sidebar/useSidebarShowText";
 
 import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
 import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
@@ -82,29 +84,16 @@ const FormsSidebar = () => {
   } = useFormsNavigationStore();
   const { currentDeviceType } = useDeviceType();
   const isMobile = currentDeviceType === DeviceType.mobile;
-  const isTablet = currentDeviceType === DeviceType.tablet;
   const formsSettingsStore = useFormsSettingsStore();
   const { hasLibrary } = formsSettingsStore;
   const showLibrary = hasLibrary && !!formsSettingsStore.folderSecurity?.Create;
   const { user } = useFormsUserStore();
   const showSettings = user?.isOwner || user?.isAdmin;
 
-  const [userShowText, setUserShowText] = React.useState(true);
-
-  React.useEffect(() => {
-    const saved = localStorage.getItem(SHOW_SIDEBAR_TEXT_KEY);
-    if (saved === "false") setUserShowText(false);
-  }, []);
-
-  const showText = isTablet ? false : isMobile ? true : userShowText;
-
-  const toggleShowText = React.useCallback(() => {
-    setUserShowText((prev) => {
-      const next = !prev;
-      localStorage.setItem(SHOW_SIDEBAR_TEXT_KEY, String(next));
-      return next;
-    });
-  }, []);
+  const { showText, toggleShowText } = useSidebarShowText({
+    storageKey: SHOW_SIDEBAR_TEXT_KEY,
+    currentDeviceType,
+  });
 
   const buildParams = React.useCallback(() => {
     const params = new URLSearchParams();
@@ -261,11 +250,13 @@ const FormsSidebar = () => {
         id: AI_ROOMS_ID,
         label: t("Common:DashboardAIRoomsTitle"),
         icon: CatalogRoomsReactSvgUrl,
+        onClick: () => toastr.info(t("Common:UnderDevelopment")),
       },
       {
         id: AI_AGENTS_ID,
         label: t("Common:DashboardAIChatAgentsTitle"),
         icon: CatalogAiAgentsReactSvgUrl,
+        onClick: () => toastr.info(t("Common:UnderDevelopment")),
       },
     ];
 

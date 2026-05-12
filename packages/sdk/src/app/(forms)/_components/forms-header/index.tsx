@@ -42,27 +42,16 @@ import BurgerButton from "@/components/apps-sidebar/BurgerButton";
 import { sectionFromPathname } from "../../_utils/sectionFromPathname";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsListStore } from "../../_store/FormsListStore";
-import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import { useLibraryParams } from "../../_hooks/useLibraryParams";
 import { libraryUrl } from "../../_utils/libraryUrl";
-import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
-import FormPlusReactSvgUrl from "PUBLIC_DIR/images/form.plus.react.svg?url";
-
 import styles from "../forms-layout/FormsLayout.module.scss";
 
 type FormsHeaderProps = {
-  onUploadFiles: () => void;
-  onCreateBlankForm: () => void;
   showMenu: boolean;
   headerOffset?: number;
 };
 
-const FormsHeader = ({
-  onUploadFiles,
-  onCreateBlankForm,
-  showMenu,
-  headerOffset = 0,
-}: FormsHeaderProps) => {
+const FormsHeader = ({ showMenu, headerOffset = 0 }: FormsHeaderProps) => {
   const { t } = useTranslation(["Common"]);
   const pathname = usePathname();
   const activeSection = sectionFromPathname(pathname);
@@ -107,7 +96,6 @@ const FormsHeader = ({
   }, [libParams.categoryId]);
 
   const { items, folders } = useFormsListStore();
-  const formsSettingsStore = useFormsSettingsStore();
   const { currentDeviceType } = useDeviceType();
 
   const isLibrary = activeSection === FormsSection.Library;
@@ -273,28 +261,6 @@ const FormsHeader = ({
       height: "100%",
     };
   }, [headerOffset]);
-
-  const getContextOptionsPlus = React.useCallback(() => {
-    const security = formsSettingsStore.folderSecurity;
-    if (!security?.Create) return [];
-
-    return [
-      {
-        id: "upload-forms",
-        key: "upload-forms",
-        label: t("Common:UploadPDFForm"),
-        icon: ActionsUploadReactSvgUrl,
-        onClick: onUploadFiles,
-      },
-      {
-        id: "create-blank-form",
-        key: "create-blank-form",
-        label: t("Common:NewPDFForm"),
-        icon: FormPlusReactSvgUrl,
-        onClick: onCreateBlankForm,
-      },
-    ];
-  }, [formsSettingsStore.folderSecurity, t, onUploadFiles, onCreateBlankForm]);
 
   const handleEditorBack = React.useCallback(() => {
     closeEditor();
@@ -633,7 +599,7 @@ const FormsHeader = ({
           isDesktop={currentDeviceType === DeviceType.desktop}
           isFrame
           navigationItems={[]}
-          getContextOptionsPlus={getContextOptionsPlus}
+          getContextOptionsPlus={() => []}
           getContextOptionsFolder={() => []}
           onClickFolder={() => {}}
           isTrashFolder={false}

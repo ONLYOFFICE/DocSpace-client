@@ -26,8 +26,6 @@
 
 "use client";
 
-import React from "react";
-
 import MenuIcon from "PUBLIC_DIR/images/menu.react.svg";
 
 import styles from "./BurgerButton.module.scss";
@@ -35,13 +33,12 @@ import styles from "./BurgerButton.module.scss";
 type BurgerButtonProps = {
   onClick: () => void;
   label: string;
-  className?: string;
 };
 
-const BurgerButton = ({ onClick, label, className }: BurgerButtonProps) => (
+const BurgerButton = ({ onClick, label }: BurgerButtonProps) => (
   <button
     type="button"
-    className={`${styles.burgerButton}${className ? ` ${className}` : ""}`}
+    className={styles.burgerButton}
     onClick={onClick}
     aria-label={label}
   >

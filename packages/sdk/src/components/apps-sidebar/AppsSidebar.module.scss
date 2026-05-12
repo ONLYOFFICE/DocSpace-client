@@ -12,12 +12,12 @@
 
   @include mixins.mobile {
     position: absolute;
-    inset-block-start: var(--section-header-height-mobile);
+    inset-block-start: var(--section-header-height-mobile, 53px);
     inset-inline-start: 0;
     width: 100%;
     min-width: 0 !important;
     max-width: none !important;
-    height: calc(100% - var(--section-header-height-mobile));
+    height: calc(100% - var(--section-header-height-mobile, 53px));
     z-index: 230;
     box-shadow: 4px 0 16px rgb(0 0 0 / 15%);
     transform: translateX(-100%);

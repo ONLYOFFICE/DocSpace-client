@@ -786,8 +786,6 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
         >
           <Section.SectionHeader>
             <FormsHeader
-              onUploadFiles={onUploadFiles}
-              onCreateBlankForm={onCreateBlankForm}
               showMenu={showMenu}
               headerOffset={formsHeaderOffset}
             />

@@ -191,10 +191,7 @@ const CreateGroupDialog = ({
             primary
             scale
             onClick={onCreateGroup}
-            isDisabled={
-              !groupParams.groupName ||
-              (!groupParams.groupManager && !groupParams.groupMembers.length)
-            }
+            isDisabled={!groupParams.groupName || !groupParams.groupManager}
             isLoading={isLoading}
           />
           <Button
@@ -237,3 +234,4 @@ export default inject(
     currentUserId: userStore.user?.id,
   }),
 )(observer(CreateGroupDialog));
+

@@ -47,6 +47,9 @@ import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 import FormGalleryReactSvgUrl from "PUBLIC_DIR/images/form.gallery.react.svg?url";
 import TemplateGalleryReactSvgUrl from "PUBLIC_DIR/images/template.gallery.react.svg?url";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
+import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
+import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url";
+import CatalogAiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
 
 import {
   sectionFromPathname,
@@ -62,6 +65,9 @@ import styles from "./FormsSidebar.module.scss";
 
 const SHOW_SIDEBAR_TEXT_KEY = "forms_showSidebarText";
 const LIBRARY_ID = "library";
+const AI_FILES_ID = "ai-files";
+const AI_ROOMS_ID = "ai-rooms";
+const AI_AGENTS_ID = "ai-agents";
 
 const FormsSidebar = () => {
   const { t } = useTranslation(["Common"]);
@@ -200,6 +206,11 @@ const FormsSidebar = () => {
     if (isMobile) closeSidebar();
   }, [activeSection, buildParams, router, isMobile, closeSidebar]);
 
+  const onAIFilesClick = React.useCallback(() => {
+    router.push("/personal-files");
+    if (isMobile) closeSidebar();
+  }, [router, isMobile, closeSidebar]);
+
   const groups = React.useMemo<NavMenuGroup[]>(() => {
     const myFormsChildren: NavMenuGroup["items"][number]["children"] = [
       {
@@ -225,7 +236,13 @@ const FormsSidebar = () => {
       });
     }
 
-    const mainItems: NavMenuGroup["items"] = [
+    const enabledItems: NavMenuGroup["items"] = [
+      {
+        id: AI_FILES_ID,
+        label: t("Common:DashboardAIFilesTitle"),
+        icon: CatalogFolderReactSvgUrl,
+        onClick: onAIFilesClick,
+      },
       {
         id: FormsSection.MyForms,
         label: t("Common:DashboardAIFormsTitle"),
@@ -236,7 +253,7 @@ const FormsSidebar = () => {
     ];
 
     if (showLibrary) {
-      mainItems.push({
+      enabledItems.push({
         id: LIBRARY_ID,
         label: t("Common:Library"),
         icon: TemplateGalleryReactSvgUrl,
@@ -244,8 +261,36 @@ const FormsSidebar = () => {
       });
     }
 
-    return [{ id: "main", items: mainItems }];
-  }, [t, navigateToSection, onLibraryClick, showLibrary, showSettings, onSettingsClick]);
+    const availableItems: NavMenuGroup["items"] = [
+      {
+        id: AI_ROOMS_ID,
+        label: t("Common:DashboardAIRoomsTitle"),
+        icon: CatalogRoomsReactSvgUrl,
+      },
+      {
+        id: AI_AGENTS_ID,
+        label: t("Common:DashboardAIChatAgentsTitle"),
+        icon: CatalogAiAgentsReactSvgUrl,
+      },
+    ];
+
+    return [
+      { id: "enabled", label: t("Common:EnabledApps"), items: enabledItems },
+      {
+        id: "available",
+        label: t("Common:AvailableApps"),
+        items: availableItems,
+      },
+    ];
+  }, [
+    t,
+    navigateToSection,
+    onLibraryClick,
+    showLibrary,
+    showSettings,
+    onSettingsClick,
+    onAIFilesClick,
+  ]);
 
   const activeId =
     activeSection === FormsSection.Library

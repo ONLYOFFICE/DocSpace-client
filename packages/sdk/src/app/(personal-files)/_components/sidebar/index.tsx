@@ -44,6 +44,9 @@ import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.
 import CatalogFavoritesReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.favorites.react.svg?url";
 import CatalogSettingsRestoreReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-restore.svg?url";
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
+import CatalogDocumentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
+import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url";
+import CatalogAiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
 
 import { useNavigationStore } from "@/app/(docspace)/_store/NavigationStore";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
@@ -62,6 +65,9 @@ const FOLDER_TYPE_TO_SECTION: Partial<Record<FolderType, DocsSection>> = {
 };
 
 const SETTINGS_ID = "settings";
+const AI_FORMS_ID = "ai-forms";
+const AI_ROOMS_ID = "ai-rooms";
+const AI_AGENTS_ID = "ai-agents";
 
 const DocsSidebar = () => {
   const { t } = useTranslation(["Common"]);
@@ -107,10 +113,15 @@ const DocsSidebar = () => {
     router.push("/personal-files/settings");
   }, [router, isSettings]);
 
+  const onAIFormsClick = React.useCallback(() => {
+    router.push("/forms");
+  }, [router]);
+
   const groups = React.useMemo<NavMenuGroup[]>(
     () => [
       {
-        id: "main",
+        id: "enabled",
+        label: t("Common:EnabledApps"),
         items: [
           {
             id: DocsSection.MyDocuments,
@@ -144,24 +155,39 @@ const DocsSidebar = () => {
               },
             ],
           },
+          {
+            id: AI_FORMS_ID,
+            label: t("Common:DashboardAIFormsTitle"),
+            icon: CatalogDocumentsReactSvgUrl,
+            onClick: onAIFormsClick,
+          },
+        ],
+      },
+      {
+        id: "available",
+        label: t("Common:AvailableApps"),
+        items: [
+          {
+            id: AI_ROOMS_ID,
+            label: t("Common:DashboardAIRoomsTitle"),
+            icon: CatalogRoomsReactSvgUrl,
+          },
+          {
+            id: AI_AGENTS_ID,
+            label: t("Common:DashboardAIChatAgentsTitle"),
+            icon: CatalogAiAgentsReactSvgUrl,
+          },
         ],
       },
     ],
-    [t, navigateToSection, onSettingsClick],
+    [t, navigateToSection, onSettingsClick, onAIFormsClick],
   );
 
   const activeId = isSettings
     ? SETTINGS_ID
     : (activeSection as string | undefined);
 
-  const expandedId =
-    isSettings ||
-    activeSection === DocsSection.MyDocuments ||
-    activeSection === DocsSection.Recent ||
-    activeSection === DocsSection.Favorites ||
-    activeSection === DocsSection.Trash
-      ? DocsSection.MyDocuments
-      : undefined;
+  const expandedId = DocsSection.MyDocuments;
 
   return (
     <div

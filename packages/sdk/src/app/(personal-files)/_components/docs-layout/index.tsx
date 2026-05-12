@@ -70,8 +70,9 @@ import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
+import BurgerButton from "@/components/apps-sidebar/BurgerButton";
+
 import { SidebarProvider, useSidebar } from "../../_contexts/SidebarContext";
-import DocsMainButton from "../main-button";
 import CreateFileDialog from "../create-file-dialog";
 import { useInfoPanelStore } from "../../_store/InfoPanelStore";
 import useDocsActions from "../../_hooks/useDocsActions";
@@ -119,18 +120,16 @@ const DocsLayoutInner = observer(({
   const { t } = useTranslation(["Common"]);
   const { isEmptyList } = useSettingsStore();
   const { rootFolderType } = useFilesListStore();
-  const { currentDeviceType } = useSidebar();
   const infoPanelStore = useInfoPanelStore();
   const { sdkConfig } = useSDKConfig();
   const router = useRouter();
+  const { toggleSidebar } = useSidebar();
+  const showMenu = sdkConfig?.showMenu !== false;
 
   const { headerOffset, frameHeaderVars } = useFrameHeaderConfig();
 
   const isMyDocuments = rootFolderType === FolderType.USER;
-  const isDesktop = currentDeviceType === DeviceType.desktop;
-  const showMobileButton = !isDesktop && isMyDocuments;
   const isActionButtonEnabled = isMyDocuments && !sdkConfig?.disableActionButton;
-  const showDesktopActions = isActionButtonEnabled && isDesktop;
 
   const docsActions = useDocsActions();
   const {
@@ -245,23 +244,31 @@ const DocsLayoutInner = observer(({
         <RenameContext.Provider value={renameHandler}>
         <FileOperationsContext.Provider value={fileOperationsHandler}>
         <div className={styles.root} style={frameHeaderVars}>
-          {sdkConfig?.showMenu !== false && <DocsSidebar />}
+          {showMenu && <DocsSidebar />}
           <DropZone onFilesDropped={uploadFilesToFolder} disabled={!isMyDocuments}>
             <RootScrollbar>
               <SectionWrapper
                 sectionHeaderContent={
-                  <Header
-                    current={current}
-                    pathParts={pathParts}
-                    isEmptyList={isEmptyList}
-                    isInfoPanelVisible={sdkConfig?.infoPanelVisible ? infoPanelStore.isVisible : false}
-                    onToggleInfoPanel={sdkConfig?.infoPanelVisible ? infoPanelStore.toggle : undefined}
-                    headerOffset={headerOffset}
-                  />
+                  <div className={styles.headerRow}>
+                    {showMenu && (
+                      <BurgerButton
+                        onClick={toggleSidebar}
+                        label={t("Common:ShowArticleMenu")}
+                      />
+                    )}
+                    <Header
+                      current={current}
+                      pathParts={pathParts}
+                      isEmptyList={isEmptyList}
+                      isInfoPanelVisible={sdkConfig?.infoPanelVisible ? infoPanelStore.isVisible : false}
+                      onToggleInfoPanel={sdkConfig?.infoPanelVisible ? infoPanelStore.toggle : undefined}
+                      headerOffset={headerOffset}
+                    />
+                  </div>
                 }
                 sectionFilterContent={
                   <>
-                    {showDesktopActions && (
+                    {isActionButtonEnabled && (
                       <QuickActions
                         items={quickActionItems}
                         className={styles.quickActions}
@@ -269,9 +276,9 @@ const DocsLayoutInner = observer(({
                     )}
                     <Filter
                       filesFilter={filesFilter}
-                      showMainButton={showDesktopActions}
+                      showMainButton={isActionButtonEnabled}
                       mainButtonProps={
-                        showDesktopActions
+                        isActionButtonEnabled
                           ? {
                               isDropdown: true,
                               model: desktopModel,
@@ -303,13 +310,6 @@ const DocsLayoutInner = observer(({
             </RootScrollbar>
           </DropZone>
           <DocsInfoPanel />
-          {showMobileButton && (
-            <DocsMainButton
-              mode="mobile"
-              isDisabled={sdkConfig?.disableActionButton}
-              actions={docsActions}
-            />
-          )}
           <CreateFileDialog
             visible={dialogVisible}
             type={dialogType}

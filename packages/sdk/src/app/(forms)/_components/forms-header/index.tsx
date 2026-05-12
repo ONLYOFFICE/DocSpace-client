@@ -37,6 +37,7 @@ import { DeviceType } from "@docspace/shared/enums";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import { FormsSection } from "@/types/forms";
+import BurgerButton from "@/components/apps-sidebar/BurgerButton";
 
 import { sectionFromPathname } from "../../_utils/sectionFromPathname";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
@@ -46,7 +47,6 @@ import { useLibraryParams } from "../../_hooks/useLibraryParams";
 import { libraryUrl } from "../../_utils/libraryUrl";
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import FormPlusReactSvgUrl from "PUBLIC_DIR/images/form.plus.react.svg?url";
-import MenuIcon from "PUBLIC_DIR/images/menu.react.svg";
 
 import styles from "../forms-layout/FormsLayout.module.scss";
 
@@ -56,23 +56,6 @@ type FormsHeaderProps = {
   showMenu: boolean;
   headerOffset?: number;
 };
-
-const BurgerButton = ({
-  onClick,
-  label,
-}: {
-  onClick: () => void;
-  label: string;
-}) => (
-  <button
-    type="button"
-    className={styles.burgerButton}
-    onClick={onClick}
-    aria-label={label}
-  >
-    <MenuIcon className={styles.burgerIcon} />
-  </button>
-);
 
 const FormsHeader = ({
   onUploadFiles,
@@ -127,9 +110,7 @@ const FormsHeader = ({
   const formsSettingsStore = useFormsSettingsStore();
   const { currentDeviceType } = useDeviceType();
 
-  const isMyForms = activeSection === FormsSection.MyForms;
   const isLibrary = activeSection === FormsSection.Library;
-  const canCreateForms = isMyForms && !!formsSettingsStore.folderSecurity?.Create;
   const isSettings = activeSection === FormsSection.Settings;
   const isEditing = Boolean(editingFile);
   const isInsideCompletedFolder =
@@ -645,8 +626,8 @@ const FormsHeader = ({
         <Navigation
           showText
           isRootFolder
-          canCreate={canCreateForms}
-          isPlusButtonVisible={canCreateForms}
+          canCreate={false}
+          isPlusButtonVisible={false}
           title={getSectionTitle()}
           rootRoomTitle=""
           isDesktop={currentDeviceType === DeviceType.desktop}

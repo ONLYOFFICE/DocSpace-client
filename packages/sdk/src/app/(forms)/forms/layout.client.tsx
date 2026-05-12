@@ -95,6 +95,11 @@ import FormsSidebar from "../_components/sidebar";
 import DualRingSpinner from "../_components/forms-layout/DualRingSpinner";
 import FormsEditor from "../_components/forms-editor";
 import FormsHeader from "../_components/forms-header";
+import FormsFilter from "../_components/forms-filter";
+import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
+import FormPlusReactSvgUrl from "PUBLIC_DIR/images/form.plus.react.svg?url";
+import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
+import type { MainButtonProps } from "@docspace/ui-kit/components/main-button/MainButton.types";
 
 const AiChatPanel = dynamic(() => import("../_components/ai-chat-panel"), {
   ssr: false,
@@ -447,6 +452,10 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     prevCompletedFolderShell.current = completedFolder;
     prevInProgressFolderShell.current = inProgressFolder;
 
+    if (sectionChanged || folderChanged) {
+      formsListStore.setSearchValue("");
+    }
+
     if (sectionChanged) {
       // Navigation within settings sub-pages should not trigger full section-change logic
       const isSettingsInternalNav =
@@ -588,6 +597,48 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   const showQuickActions =
     activeSection === FormsSection.MyForms &&
     canCreateForms;
+
+  const isFilterableSection =
+    activeSection === FormsSection.MyForms ||
+    activeSection === FormsSection.InProgress ||
+    activeSection === FormsSection.CompletedForms;
+  const isInsideSubfolder = !!completedFolder || !!inProgressFolder;
+  const showFilter =
+    isFilterableSection && !isEditing && !isInsideSubfolder;
+  const showFilterMainButton =
+    activeSection === FormsSection.MyForms && canCreateForms;
+
+  const filterMenuModel = React.useMemo<ContextMenuModel[]>(
+    () => [
+      {
+        id: "filter-upload-forms",
+        key: "upload-forms",
+        label: t("Common:UploadPDFForm"),
+        icon: ActionsUploadReactSvgUrl,
+        onClick: onUploadFiles,
+      },
+      {
+        id: "filter-create-blank-form",
+        key: "create-blank-form",
+        label: t("Common:NewPDFForm"),
+        icon: FormPlusReactSvgUrl,
+        onClick: onCreateBlankForm,
+      },
+    ],
+    [t, onUploadFiles, onCreateBlankForm],
+  );
+
+  const filterMainButtonProps = React.useMemo<MainButtonProps | undefined>(
+    () =>
+      showFilterMainButton
+        ? {
+            isDropdown: true,
+            model: filterMenuModel,
+            text: t("Common:New"),
+          }
+        : undefined,
+    [showFilterMainButton, filterMenuModel, t],
+  );
 
   const quickActionItems = React.useMemo<QuickActionItem[]>(
     () => [
@@ -751,6 +802,12 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
                   <QuickActions
                     items={quickActionItems}
                     className={styles.quickActions}
+                  />
+                )}
+                {showFilter && (
+                  <FormsFilter
+                    showMainButton={showFilterMainButton}
+                    mainButtonProps={filterMainButtonProps}
                   />
                 )}
                 {children}

@@ -31,12 +31,8 @@ import { observer } from "mobx-react";
 import { useRouter, usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
-import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-import { NavMenu } from "@docspace/ui-kit/components/nav-menu";
 import type { NavMenuGroup } from "@docspace/ui-kit/components/nav-menu";
-import articleStyles from "@docspace/ui-kit/components/article/Article.module.scss";
-import { FolderType } from "@docspace/shared/enums";
+import { DeviceType, FolderType } from "@docspace/shared/enums";
 import FilesFilter from "@docspace/shared/api/files/filter";
 
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
@@ -53,9 +49,9 @@ import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionSt
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { DocsSection, DOCS_SECTION_FOLDER_ALIAS } from "@/types/docs";
 import { PAGE_COUNT } from "@/utils/constants";
+import AppsSidebar from "@/components/apps-sidebar";
 
 import { useSidebar } from "../../_contexts/SidebarContext";
-import styles from "./DocsSidebar.module.scss";
 
 const FOLDER_TYPE_TO_SECTION: Partial<Record<FolderType, DocsSection>> = {
   [FolderType.USER]: DocsSection.MyDocuments,
@@ -76,7 +72,14 @@ const DocsSidebar = () => {
   const { rootFolderType } = useFilesListStore();
   const activeSection =
     rootFolderType != null ? FOLDER_TYPE_TO_SECTION[rootFolderType] : undefined;
-  const { showText, toggleShowText } = useSidebar();
+  const {
+    showText,
+    toggleShowText,
+    currentDeviceType,
+    isSidebarOpen,
+    closeSidebar,
+  } = useSidebar();
+  const isMobile = currentDeviceType === DeviceType.mobile;
 
   const router = useRouter();
   const pathname = usePathname();
@@ -85,7 +88,10 @@ const DocsSidebar = () => {
 
   const navigateToSection = React.useCallback(
     (section: DocsSection) => {
-      if (section === activeSection && pathname === "/personal-files") return;
+      if (section === activeSection && pathname === "/personal-files") {
+        if (isMobile) closeSidebar();
+        return;
+      }
 
       const folderAlias = DOCS_SECTION_FOLDER_ALIAS[section];
       const filter = FilesFilter.getDefault();
@@ -104,18 +110,32 @@ const DocsSidebar = () => {
       } else {
         router.replace(`/personal-files${filterUrl}`);
       }
+      if (isMobile) closeSidebar();
     },
-    [activeSection, navigationStore, filesSelectionStore, pathname, router],
+    [
+      activeSection,
+      navigationStore,
+      filesSelectionStore,
+      pathname,
+      router,
+      isMobile,
+      closeSidebar,
+    ],
   );
 
   const onSettingsClick = React.useCallback(() => {
-    if (isSettings) return;
+    if (isSettings) {
+      if (isMobile) closeSidebar();
+      return;
+    }
     router.push("/personal-files/settings");
-  }, [router, isSettings]);
+    if (isMobile) closeSidebar();
+  }, [router, isSettings, isMobile, closeSidebar]);
 
   const onAIFormsClick = React.useCallback(() => {
     router.push("/forms");
-  }, [router]);
+    if (isMobile) closeSidebar();
+  }, [router, isMobile, closeSidebar]);
 
   const groups = React.useMemo<NavMenuGroup[]>(
     () => [
@@ -187,47 +207,18 @@ const DocsSidebar = () => {
     ? SETTINGS_ID
     : (activeSection as string | undefined);
 
-  const expandedId = DocsSection.MyDocuments;
-
   return (
-    <div
-      id="article-container"
-      className={`${articleStyles.article} ${styles.articleFlex}`}
-      data-show-text={showText ? "true" : "false"}
-      data-open="true"
-      data-with-main-button="false"
-    >
-      <div style={{ height: "16px", flexShrink: 0 }} />
-      <Scrollbar
-        className={`article-body__scrollbar ${styles.scrollbar}`}
-        scrollClass="article-scroller"
-      >
-        <NavMenu
-          groups={groups}
-          activeItemId={activeId}
-          defaultExpandedId={expandedId}
-        />
-      </Scrollbar>
-      <div
-        className={styles.borderToggle}
-        onClick={toggleShowText}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            toggleShowText();
-          }
-        }}
-        data-tooltip-id="sidebar-toggle-tooltip"
-        data-tooltip-content={
-          showText ? t("Common:HideArticleMenu") : t("Common:ShowArticleMenu")
-        }
-      />
-      <Tooltip id="sidebar-toggle-tooltip" place="right" float />
-    </div>
+    <AppsSidebar
+      groups={groups}
+      activeId={activeId}
+      defaultExpandedId={DocsSection.MyDocuments}
+      showText={showText}
+      toggleShowText={toggleShowText}
+      isOpen={isSidebarOpen}
+      currentDeviceType={currentDeviceType}
+      tooltipId="docs-sidebar-toggle-tooltip"
+    />
   );
 };
 
 export default observer(DocsSidebar);
-

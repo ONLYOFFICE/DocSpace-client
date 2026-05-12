@@ -8,6 +8,10 @@ type SidebarContextType = {
   showText: boolean;
   currentDeviceType: DeviceType;
   toggleShowText: () => void;
+  isSidebarOpen: boolean;
+  openSidebar: () => void;
+  closeSidebar: () => void;
+  toggleSidebar: () => void;
 };
 
 const SidebarContext = React.createContext<SidebarContextType | null>(null);
@@ -34,12 +38,14 @@ export const SidebarProvider = ({
     }
     return true;
   });
+  const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
 
   React.useEffect(() => {
     if (currentDeviceType === DeviceType.mobile) {
-      setShowText(false);
+      setShowText(true);
     } else if (currentDeviceType === DeviceType.desktop) {
       setShowText(true);
+      setIsSidebarOpen(false);
     } else if (currentDeviceType === DeviceType.tablet) {
       try {
         const saved = localStorage.getItem(SHOW_SIDEBAR_TEXT_KEY);
@@ -47,6 +53,7 @@ export const SidebarProvider = ({
       } catch {
         setShowText(false);
       }
+      setIsSidebarOpen(false);
     }
   }, [currentDeviceType]);
 
@@ -62,13 +69,32 @@ export const SidebarProvider = ({
     });
   }, []);
 
+  const openSidebar = React.useCallback(() => setIsSidebarOpen(true), []);
+  const closeSidebar = React.useCallback(() => setIsSidebarOpen(false), []);
+  const toggleSidebar = React.useCallback(
+    () => setIsSidebarOpen((prev) => !prev),
+    [],
+  );
+
   const value = React.useMemo(
     () => ({
       showText,
       currentDeviceType,
       toggleShowText,
+      isSidebarOpen,
+      openSidebar,
+      closeSidebar,
+      toggleSidebar,
     }),
-    [showText, currentDeviceType, toggleShowText],
+    [
+      showText,
+      currentDeviceType,
+      toggleShowText,
+      isSidebarOpen,
+      openSidebar,
+      closeSidebar,
+      toggleSidebar,
+    ],
   );
 
   return (

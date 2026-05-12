@@ -31,16 +31,13 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
-import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
-import { NavMenu } from "@docspace/ui-kit/components/nav-menu";
 import type { NavMenuGroup } from "@docspace/ui-kit/components/nav-menu";
-import articleStyles from "@docspace/ui-kit/components/article/Article.module.scss";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import { DeviceType } from "@docspace/shared/enums";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import { FormsSection, DEFAULT_SETTINGS_SUBSECTION } from "@/types/forms";
+import AppsSidebar from "@/components/apps-sidebar";
 
 import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
 import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
@@ -60,8 +57,6 @@ import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import { libraryUrl } from "../../_utils/libraryUrl";
 import { useFormsUserStore } from "../../_store/FormsUserStore";
-
-import styles from "./FormsSidebar.module.scss";
 
 const SHOW_SIDEBAR_TEXT_KEY = "forms_showSidebarText";
 const LIBRARY_ID = "library";
@@ -306,44 +301,16 @@ const FormsSidebar = () => {
       : undefined;
 
   return (
-    <div
-      id="article-container"
-      className={`${articleStyles.article} ${styles.articleFlex}`}
-      data-show-text={showText ? "true" : "false"}
-      data-open="true"
-      data-with-main-button="false"
-      data-sidebar-open={isSidebarOpen ? "true" : "false"}
-      aria-hidden={isMobile && !isSidebarOpen}
-    >
-      <div style={{ height: "16px", flexShrink: 0 }} />
-      <Scrollbar
-        className={`article-body__scrollbar ${styles.scrollbar}`}
-        scrollClass="article-scroller"
-      >
-        <NavMenu
-          groups={groups}
-          activeItemId={activeId}
-          defaultExpandedId={expandedId}
-        />
-      </Scrollbar>
-      <div
-        className={styles.borderToggle}
-        onClick={toggleShowText}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            toggleShowText();
-          }
-        }}
-        data-tooltip-id="sidebar-toggle-tooltip"
-        data-tooltip-content={
-          showText ? t("Common:HideArticleMenu") : t("Common:ShowArticleMenu")
-        }
-      />
-      <Tooltip id="sidebar-toggle-tooltip" place="right" float />
-    </div>
+    <AppsSidebar
+      groups={groups}
+      activeId={activeId}
+      defaultExpandedId={expandedId}
+      showText={showText}
+      toggleShowText={toggleShowText}
+      isOpen={isSidebarOpen}
+      currentDeviceType={currentDeviceType}
+      tooltipId="forms-sidebar-toggle-tooltip"
+    />
   );
 };
 

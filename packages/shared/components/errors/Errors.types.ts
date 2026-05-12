@@ -39,7 +39,7 @@ export type Error520Props = {
 	/** Current version of the application */
 	version: string;
 	/** Firebase helper instance for crash reporting */
-	firebaseHelper: FirebaseHelper;
+	firebaseHelper?: FirebaseHelper;
 	/** Optional color scheme for theming */
 	currentColorScheme?: TColorScheme;
 	/** Current device type (desktop, mobile, etc.) */

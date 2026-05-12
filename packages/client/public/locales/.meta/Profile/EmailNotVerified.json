@@ -3,22 +3,23 @@
   "content": "Email is not verified",
   "content_en_sha1_hash": "7aa3f602be968a5b4cba5393057ed4f0013e45a4",
   "created_at": "2025-05-19T21:30:53.354Z",
-  "updated_at": "2026-04-09T07:08:23.955Z",
+  "updated_at": "2026-04-11T21:20:47.423Z",
   "comment": {
-    "text": "This translation key is used to display a message indicating that an email address has not been verified. It appears in a UI component for editing or managing user emails. The translator should provide a localized version of this phrase to be displayed to users when their email verification status is unknown or invalid.",
+    "text": "This is a tooltip that appears when the user hovers over their email address in the profile settings, indicating that the email has not yet been verified.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:54.003Z"
+    "updated_at": "2026-04-11T21:20:47.423Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 488,
+      "line_number": 489,
       "context": "</Text>\n <div className={styles.emailContainer}>\n <div className={styles.emailEditContainer}>\n <Text\n data-tooltip-id=\"emailTooltip\"\n data-tooltip-content={t(\"EmailNotVerified\")}\n as=\"div\"\n className={classNames(styles.emailTextContainer, {\n [styles.pending]: withActivationBar,\n })}\n fontWeight={600}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 488,
+      "line_number": 489,
       "context": "</Text>\n <div className={styles.emailContainer}>\n <div className={styles.emailEditContainer}>\n <Text\n data-tooltip-id=\"emailTooltip\"\n data-tooltip-content={t(\"EmailNotVerified\")}\n as=\"div\"\n className={classNames(styles.emailTextContainer, {\n [styles.pending]: withActivationBar,\n })}\n fontWeight={600}",
       "module": "/packages/client"
     }
@@ -159,13 +160,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'වි-තැපෑල' (Vi-thapæla) is an unnatural and incorrect way to translate 'Email' in a modern UI context. It uses a hyphenated prefix that doesn't exist in standard Sinhala for this term. The standard term is 'ඊමේල්' (Email) or 'විද්‍යුත් තැපෑල' (Vidyuth thapæla).",
-          "suggestion": "ඊමේල් සත්‍යාපනය කර නැත"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -219,13 +214,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Albanian translation 'Email-i nuk verifikohet' uses the present continuous tense ('is not being verified'), which implies an ongoing process. The English 'Email is not verified' is a state (the email has not been verified).",
-          "suggestion": "Email-i nuk është i verifikuar"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

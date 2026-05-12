@@ -3,11 +3,12 @@
   "content": "and <1>{{count}} more</1>",
   "content_en_sha1_hash": "a3f1d7063a4cc3d879b42663726817ec56372d51",
   "created_at": "2025-05-19T21:30:43.003Z",
-  "updated_at": "2026-04-08T16:55:19.366Z",
+  "updated_at": "2026-04-11T20:59:13.639Z",
   "comment": {
-    "text": "This translation key \"AndMore\" is used to display a phrase indicating that there are additional items beyond what's visible in a list. It appears as a label on a button or similar element, likely used to prompt users to view more items when only a portion of the total count is shown.",
+    "text": "This text is part of a sentence indicating additional items. It appears when a list of items is truncated, with `{{count}}` representing the number of hidden items and `<1>` being a link to view them.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:23.465Z"
+    "updated_at": "2026-04-11T20:59:13.639Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic word order is incorrect. '{{count}} المزيد' translates to 'more the {{count}}', which is grammatically incorrect for this context. It should be '{{count}} المزيد' (meaning '{{count}} more') or 'و {{count}} أخرى' to sound natural.",
-          "suggestion": "و<1>{{count}} المزيد</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -63,13 +58,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation 'και <1>{{count}} ακόμα</1>' is grammatically incomplete and sounds unnatural. In Greek, when indicating 'X more [items]', the word 'ακόμα' (more/still) should typically follow the number or be replaced by 'περισσότερα' to convey the intended meaning of 'additional items'.",
-          "suggestion": "και <1>{{count}} ακόμα περισσότερα</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -81,25 +70,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'more' (lisää) is missing from the Finnish translation, making the phrase incomplete.",
-          "suggestion": "ja <1>{{count}} lisää</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'et <1>{{count}} plus</1>' is grammatically incorrect in French for this context. In French, 'plus' follows the noun or the count to indicate 'more', but '{{count}} plus' sounds like 'plus' is an addition operation or is misplaced. The correct way to express 'X more' is '{{count}} de plus'.",
-          "suggestion": "et <1>{{count}} de plus</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -111,25 +88,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Italian translation 'e <1>{{count}} più</1>' is grammatically incorrect for this context. In Italian, when expressing 'X more' (additional items), the word 'altri' (masculine) or 'altre' (feminine) must be used. 'Più' alone is used for 'more' in comparisons (e.g., 'bigger than'), not for counting additional items.",
-          "suggestion": "e <1>{{count}} altri</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation '以上' (ijō) means 'or more' or 'more than', which changes the meaning from 'X more' (additional count) to 'X or more' (total count threshold).",
-          "suggestion": "あと<1>{{count}}件</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {

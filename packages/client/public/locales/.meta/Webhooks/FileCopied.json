@@ -3,13 +3,21 @@
   "content": "File copied",
   "content_en_sha1_hash": "4a6bc2861eef671be7f536859194a8d6b3428164",
   "created_at": "2025-05-19T21:30:49.720Z",
-  "updated_at": "2026-04-08T20:12:26.451Z",
+  "updated_at": "2026-04-13T14:59:05.877Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a toast message indicating that a file has been successfully duplicated. It appears briefly after a copy operation is completed.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:29:02.880Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
+      "line_number": 59,
+      "context": "case WebhookTriggers.FileDeleted:\n return t(\"FileDeleted\");\n case WebhookTriggers.FileRestored:\n return t(\"FileRestored\");\n case WebhookTriggers.FileCopied:\n return t(\"FileCopied\");\n case WebhookTriggers.FileMoved:\n return t(\"FileMoved\");\n case WebhookTriggers.FolderCreated:\n return t(\"FolderCreated\");\n case WebhookTriggers.FolderUpdated:",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -98,25 +106,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao word 'ເຟັ້ນ' (fen) is a misspelling or incorrect term for 'file'. The correct term for file in this context is 'ໄຟລ໌'.",
-          "suggestion": "ໄຟລ໌ຖືກສຳເນົາແລ້ວ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian word 'Fails' means 'Fail' (as in unsuccessful/failure), whereas the English 'File' refers to a document/data object. The correct term for 'File' in Latvian is 'Fails' (noun) but in this context, it is a misspelling or incorrect usage of 'Fails' (failure) vs 'Fails' (file). Actually, 'Fails' in Latvian means 'Failures'. The correct word for 'File' is 'Fails' (noun), but 'Fails nokopēts' translates to 'Failure copied'.",
-          "suggestion": "Fails nokopēta"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -158,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'ප්‍රතිලේඛනය කරන ලදී' means 'replicated' or 'reproduced', which is not the standard or accurate term for 'copied' in a file management context.",
-          "suggestion": "ගොනුව පිටපත් කරන ලදී"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

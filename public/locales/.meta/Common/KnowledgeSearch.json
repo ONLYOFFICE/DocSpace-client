@@ -3,18 +3,19 @@
   "content": "Knowledge search",
   "content_en_sha1_hash": "30c8bc7af59d4f92c383f90eeb2ec4c907ca8c85",
   "created_at": "2025-10-27T16:14:24.683Z",
-  "updated_at": "2026-04-08T06:21:43.416Z",
+  "updated_at": "2026-04-13T14:59:06.007Z",
   "comment": {
-    "text": "This key displays the label \"Knowledge search\" next to a search tool call within a chat message. It appears as part of the header for a tool call and provides context about the search performed. Translators should ensure this accurately reflects the action being performed.",
+    "text": "This is a label for a search tool. It indicates that the tool performs a search within a knowledge base.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:37:04.486Z"
+    "updated_at": "2026-04-11T20:50:27.400Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/message/ToolCallMessage/ToolCallHeader/SearchToolContent.tsx",
-      "line_number": 105,
-      "context": "return (\n <>\n <ReactSVG className={styles.searchToolIcon} src={DocumentsIcon} />\n <Text fontSize=\"13px\" lineHeight=\"20px\" fontWeight={600} truncate>\n {t(\"Common:KnowledgeSearch\")} | <span title={toolInfo}>{toolInfo}</span>\n </Text>\n </>\n );\n };",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/ToolCallMessage/ToolCallHeader/search-tool-content/index.tsx",
+      "line_number": 133,
+      "context": "<DocumentsIcon\n className={styles.searchToolIcon}\n data-testid=\"documents-icon\"\n />\n <Text fontSize=\"13px\" lineHeight=\"20px\" fontWeight={600} truncate>\n {t(\"KnowledgeSearch\")} |{\" \"}\n <span title={toolInfo}>{toolInfo}</span>\n </Text>\n </>\n );\n };",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -111,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Zinu' in Latvian means 'of knowledge' (genitive case) or 'news', but in this context, it is a misspelling or incorrect form for 'Zināšanu' (Knowledge). 'Zinu meklēšana' sounds like 'Searching for news' or is grammatically awkward for a UI label. The correct term for 'Knowledge search' in a technical context is 'Zināšanu meklēšana'.",
-          "suggestion": "Zināšanu meklēšana"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {

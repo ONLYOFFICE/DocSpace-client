@@ -33,7 +33,9 @@ import json
 import sys
 import os
 import re
-import tempfile
+import zipfile
+import io
+import xml.etree.ElementTree as ET
 from pathlib import Path
 from typing import Optional, Dict, List, Tuple, Any
 from datetime import datetime
@@ -46,93 +48,11 @@ except ImportError:
     print("Warning: python-dotenv not installed. Using system environment variables only.", file=sys.stderr)
 
 try:
-    import docspace_api_sdk
-    from docspace_api_sdk.rest import ApiException
-    DOCSPACE_SDK_AVAILABLE = True
-except ImportError:
-    DOCSPACE_SDK_AVAILABLE = False
-    print("Warning: docspace-api-sdk not installed. Download functionality will be disabled.", file=sys.stderr)
-
-try:
     import requests
     REQUESTS_AVAILABLE = True
 except ImportError:
     REQUESTS_AVAILABLE = False
     print("Warning: requests library not installed. Download functionality will be disabled.", file=sys.stderr)
-
-import importlib.util
-
-
-def prepare_docbuilder_env(reexec_if_needed: bool = False):
-    """
-    Ensure macOS can locate bundled Document Builder frameworks when importing docbuilder.
-    The wheel ships native frameworks under site-packages/docbuilder/lib; we add that path
-    to DYLD_FRAMEWORK_PATH and DYLD_LIBRARY_PATH before import.
-    """
-    if sys.platform != "darwin":
-        return
-
-    spec = importlib.util.find_spec("docbuilder")
-    if not spec or not spec.origin:
-        return
-
-    lib_dir = Path(spec.origin).resolve().parent / "lib"
-    if not lib_dir.exists():
-        return
-
-    missing = False
-    for env in ("DYLD_FRAMEWORK_PATH", "DYLD_LIBRARY_PATH"):
-        current = os.environ.get(env, "")
-        parts = [p for p in current.split(":") if p]
-        if str(lib_dir) not in parts:
-            parts.insert(0, str(lib_dir))
-            os.environ[env] = ":".join(parts)
-            missing = True
-
-    if missing and reexec_if_needed and not os.environ.get("DOCBUILDER_ENV_PATCHED"):
-        os.environ["DOCBUILDER_ENV_PATCHED"] = "1"
-        os.execve(sys.executable, [sys.executable] + sys.argv, os.environ)
-
-    try:
-        import ctypes
-        for fw in ("graphics", "kernel"):
-            fw_path = lib_dir / f"{fw}.framework" / fw
-            if fw_path.exists():
-                ctypes.CDLL(str(fw_path), mode=ctypes.RTLD_GLOBAL)
-    except Exception:
-        pass
-
-
-# Docbuilder will be imported lazily when needed for PDF parsing
-# This avoids the macOS DYLD library loading issues at module import time
-DOCBUILDER_AVAILABLE = None  # Will be set on first use
-_docbuilder_module = None
-
-
-def get_docbuilder():
-    """
-    Lazily import docbuilder module.
-    This is needed because on macOS, the DYLD paths must be set before loading.
-    """
-    global DOCBUILDER_AVAILABLE, _docbuilder_module
-
-    if DOCBUILDER_AVAILABLE is not None:
-        return _docbuilder_module
-
-    try:
-        # Prepare environment for macOS
-        prepare_docbuilder_env(reexec_if_needed=False)
-
-        # Now try to import
-        import docbuilder
-        _docbuilder_module = docbuilder
-        DOCBUILDER_AVAILABLE = True
-        return _docbuilder_module
-    except (ImportError, OSError) as e:
-        DOCBUILDER_AVAILABLE = False
-        print(f"Warning: docbuilder not available: {e}", file=sys.stderr)
-        print("PDF parsing will be disabled.", file=sys.stderr)
-        return None
 
 
 # Project locales mapping (from config.js)
@@ -182,6 +102,14 @@ def load_env_file():
             print(f"Warning: Failed to load .env file: {e}", file=sys.stderr)
 
 
+def _api_get(url: str, api_key: str, verify_ssl: bool) -> dict:
+    """Make an authenticated GET request to DocSpace API."""
+    headers = {"Authorization": f"Bearer {api_key}"}
+    response = requests.get(url, headers=headers, verify=verify_ssl)
+    response.raise_for_status()
+    return response.json()
+
+
 def download_files_from_room(
     portal_url: str,
     api_key: str,
@@ -200,113 +128,59 @@ def download_files_from_room(
     Returns:
         Dictionary mapping language codes to lists of downloaded file paths
     """
-    if not DOCSPACE_SDK_AVAILABLE or not REQUESTS_AVAILABLE:
-        print("Error: Required libraries not available for download.", file=sys.stderr)
+    if not REQUESTS_AVAILABLE:
+        print("Error: requests library not available for download.", file=sys.stderr)
         return {}
 
-    configuration = docspace_api_sdk.Configuration(
-        host=portal_url.rstrip('/')
-    )
-    custom_headers = {"Authorization": f"Bearer {api_key}"}
+    no_ssl_verify = os.environ.get('DOCSPACE_NO_SSL_VERIFY', '').lower() in ('true', '1', 'yes')
+    verify_ssl = not no_ssl_verify
+    base_url = portal_url.rstrip('/')
+
+    if no_ssl_verify:
+        import urllib3
+        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
     downloaded_files: Dict[str, List[Path]] = {}
 
-    with docspace_api_sdk.ApiClient(configuration) as api_client:
-        files_api = docspace_api_sdk.FilesApi(api_client)
-        folders_api = docspace_api_sdk.FoldersApi(api_client)
+    try:
+        # Get room contents via raw API (SDK deserializes as base type, losing file IDs)
+        print(f"Downloading room (ID: {room_id})...")
+        data = _api_get(f"{base_url}/api/2.0/files/{room_id}", api_key, verify_ssl)
+        room_data = data.get('response', {})
 
-        try:
-            # Get room contents
-            print(f"Downloading room (ID: {room_id})...")
-            result = folders_api.bulk_download_folder(
-                folder_id=room_id, _headers=custom_headers)
-            room_data = result.response
+        folders = room_data.get('folders', []) or []
+        files = room_data.get('files', []) or []
 
-            # Get subfolders (language folders)
-            folders = room_data.folders if hasattr(
-                room_data, 'folders') else []
-            files = room_data.files if hasattr(room_data, 'files') else []
+        print(f"Found {len(folders)} language folder(s) and {len(files)} file(s) in root")
 
-            print(
-                f"Found {len(folders)} language folder(s) and {len(files)} file(s) in root")
+        # Process each language folder
+        for folder in folders:
+            lang_code = folder['title']
+            folder_id = folder['id']
+            print(f"\nProcessing language: {lang_code}")
 
-            # Process each language folder
-            for folder in folders:
-                lang_code = folder.title
-                folder_id = folder.id
-                print(f"\nProcessing language: {lang_code}")
+            lang_output_dir = output_dir / lang_code
+            lang_output_dir.mkdir(parents=True, exist_ok=True)
 
-                # Create language output directory
-                lang_output_dir = output_dir / lang_code
-                lang_output_dir.mkdir(parents=True, exist_ok=True)
+            folder_data = _api_get(f"{base_url}/api/2.0/files/{folder_id}", api_key, verify_ssl)
+            folder_files = (folder_data.get('response') or {}).get('files', []) or []
 
-                # Get folder contents
-                folder_result = folders_api.get_folder_by_folder_id(
-                    folder_id=folder_id, _headers=custom_headers)
-                folder_data = folder_result.response
-                folder_files = folder_data.files if hasattr(
-                    folder_data, 'files') else []
+            downloaded_files[lang_code] = []
 
-                downloaded_files[lang_code] = []
-
-                for file_info in folder_files:
-                    if not file_info.title.lower().endswith('.pdf'):
-                        continue
-
-                    file_id = file_info.id
-                    file_name = file_info.title
-
-                    try:
-                        # Download file using direct HTTP request
-                        download_url = f"{configuration.host}/api/2.0/files/file/{file_id}/download"
-                        headers = {"Authorization": f"Bearer {api_key}"}
-
-                        response = requests.get(
-                            download_url, headers=headers, stream=True)
-                        response.raise_for_status()
-
-                        # Save file
-                        file_path = lang_output_dir / file_name
-                        with open(file_path, 'wb') as f:
-                            for chunk in response.iter_content(chunk_size=8192):
-                                f.write(chunk)
-
-                        downloaded_files[lang_code].append(file_path)
-                        print(f"  ✓ Downloaded: {file_name}")
-
-                    except Exception as e:
-                        print(
-                            f"  ✗ Failed to download '{file_name}': {e}", file=sys.stderr)
-
-                print(
-                    f"  Downloaded {len(downloaded_files[lang_code])} file(s)")
-
-            # Also check for files in root (in case structure is different)
-            for file_info in files:
-                if not file_info.title.lower().endswith('.pdf'):
+            for file_info in folder_files:
+                if not file_info['title'].lower().endswith('.pdf'):
                     continue
 
-                file_id = file_info.id
-                file_name = file_info.title
-
-                # Try to extract language from filename
-                # Expected format: project-language-review.pdf
-                match = re.search(
-                    r'-([a-z]{2}(?:-[A-Z]{2})?)-review\.pdf$', file_name)
-                if match:
-                    lang_code = match.group(1)
-                else:
-                    lang_code = "unknown"
-
-                lang_output_dir = output_dir / lang_code
-                lang_output_dir.mkdir(parents=True, exist_ok=True)
+                file_name = file_info['title']
+                download_url = file_info.get('viewUrl') or f"{base_url}/api/2.0/files/file/{file_info['id']}/download"
 
                 try:
-                    download_url = f"{configuration.host}/api/2.0/files/file/{file_id}/download"
-                    headers = {"Authorization": f"Bearer {api_key}"}
-
                     response = requests.get(
-                        download_url, headers=headers, stream=True)
+                        download_url,
+                        headers={"Authorization": f"Bearer {api_key}"},
+                        stream=True,
+                        verify=verify_ssl
+                    )
                     response.raise_for_status()
 
                     file_path = lang_output_dir / file_name
@@ -314,177 +188,167 @@ def download_files_from_room(
                         for chunk in response.iter_content(chunk_size=8192):
                             f.write(chunk)
 
-                    if lang_code not in downloaded_files:
-                        downloaded_files[lang_code] = []
                     downloaded_files[lang_code].append(file_path)
-                    print(
-                        f"✓ Downloaded from root: {file_name} → {lang_code}/")
+                    print(f"  ✓ Downloaded: {file_name}")
 
                 except Exception as e:
-                    print(
-                        f"✗ Failed to download '{file_name}': {e}", file=sys.stderr)
+                    print(f"  ✗ Failed to download '{file_name}': {e}", file=sys.stderr)
 
-        except ApiException as e:
-            print(f"✗ Failed to access room: {e}", file=sys.stderr)
-            if hasattr(e, 'status'):
-                print(f"  HTTP Status: {e.status}", file=sys.stderr)
-            return {}
-        except Exception as e:
-            print(f"✗ Failed to access room: {e}", file=sys.stderr)
-            return {}
+            print(f"  Downloaded {len(downloaded_files[lang_code])} file(s)")
+
+        # Also handle files directly in room root
+        for file_info in files:
+            if not file_info['title'].lower().endswith('.pdf'):
+                continue
+
+            file_name = file_info['title']
+            download_url = file_info.get('viewUrl') or f"{base_url}/api/2.0/files/file/{file_info['id']}/download"
+
+            match = re.search(r'-([a-z]{2}(?:-[A-Z]{2})?)-review\.pdf$', file_name)
+            lang_code = match.group(1) if match else "unknown"
+
+            lang_output_dir = output_dir / lang_code
+            lang_output_dir.mkdir(parents=True, exist_ok=True)
+
+            try:
+                response = requests.get(
+                    download_url,
+                    headers={"Authorization": f"Bearer {api_key}"},
+                    stream=True,
+                    verify=verify_ssl
+                )
+                response.raise_for_status()
+
+                file_path = lang_output_dir / file_name
+                with open(file_path, 'wb') as f:
+                    for chunk in response.iter_content(chunk_size=8192):
+                        f.write(chunk)
+
+                if lang_code not in downloaded_files:
+                    downloaded_files[lang_code] = []
+                downloaded_files[lang_code].append(file_path)
+                print(f"✓ Downloaded from root: {file_name} → {lang_code}/")
+
+            except Exception as e:
+                print(f"✗ Failed to download '{file_name}': {e}", file=sys.stderr)
+
+    except Exception as e:
+        print(f"✗ Failed to access room: {e}", file=sys.stderr)
+        return {}
 
     return downloaded_files
 
 
-def parse_pdf_form_fields(pdf_path: Path) -> Dict[str, Any]:
+def parse_oform_pdf(pdf_path: Path) -> Dict[str, Dict[str, Dict[str, Any]]]:
     """
-    Parse PDF form fields and extract translation data using ONLYOFFICE Document Builder.
+    Parse ONLYOFFICE OFORM PDF to extract translation form fields.
 
-    Expected field naming convention:
-    - {namespace}.{key}_target: Translation text
-    - {namespace}.{key}_confirmed: Checkbox (boolean)
-
-    Args:
-        pdf_path: Path to PDF file
+    OFORM_PDF files embed a ZIP archive (OOXML package) inside the PDF binary.
+    Form fields are stored as SDT elements in word/document.xml with:
+      - w:formPr w:key="Namespace.key_target"   → text field
+      - w:formPr w:key="Namespace.key_confirmed" → checkbox (w14:checked w14:val)
 
     Returns:
-        Dictionary with parsed translations:
-        {
-            "namespace": {
-                "key": {
-                    "target": "translated text",
-                    "confirmed": True/False
-                }
-            }
-        }
+        {namespace: {key: {"target": str, "confirmed": bool}}}
     """
-    docbuilder = get_docbuilder()
-    if docbuilder is None:
-        print("Error: docbuilder not available. Cannot parse PDF.", file=sys.stderr)
-        return {}
-
     translations: Dict[str, Dict[str, Dict[str, Any]]] = {}
 
     try:
-        # Create builder instance and open the PDF
-        builder = docbuilder.CDocBuilder()
+        with open(pdf_path, 'rb') as f:
+            content = f.read()
 
-        # Open the PDF file
-        if not builder.OpenFile(str(pdf_path), ""):
-            print(f"  Warning: Could not open PDF file: {pdf_path.name}")
+        # The OOXML ZIP is embedded in the PDF binary
+        zip_start = content.find(b'PK\x03\x04')
+        eocd = content.rfind(b'PK\x05\x06')
+        if zip_start == -1 or eocd == -1:
+            print(f"  Warning: No embedded OFORM data found in {pdf_path.name}")
             return {}
 
-        # Get API context
-        context = builder.GetContext()
-        globalObj = context.GetGlobal()
-        api = globalObj['Api']
-
-        # Get document
-        document = api.GetDocument()
-
-        # Get all form fields
-        all_forms = document.GetAllForms()
-
-        if all_forms is None or (hasattr(all_forms, '__len__') and len(all_forms) == 0):
-            print(f"  Warning: No form fields found in {pdf_path.name}")
-            builder.CloseFile()
+        zip_data = content[zip_start:eocd + 22]
+        try:
+            zf = zipfile.ZipFile(io.BytesIO(zip_data))
+        except zipfile.BadZipFile:
+            print(f"  Warning: Could not read embedded ZIP in {pdf_path.name}")
             return {}
 
-        # Convert to list if needed
-        forms_count = all_forms.GetLength() if hasattr(
-            all_forms, 'GetLength') else len(all_forms)
+        if 'word/document.xml' not in zf.namelist():
+            print(f"  Warning: word/document.xml not found in {pdf_path.name}")
+            return {}
 
-        for i in range(forms_count):
-            try:
-                form = all_forms[i] if hasattr(
-                    all_forms, '__getitem__') else all_forms.Get(i)
+        doc_xml = zf.read('word/document.xml').decode('utf-8')
 
-                # Get form key (field name)
-                field_name = form.GetFormKey() if hasattr(
-                    form, 'GetFormKey') else str(form.GetKey())
+        # XML namespaces used in OOXML
+        ns = {
+            'w': 'http://schemas.openxmlformats.org/wordprocessingml/2006/main',
+            'w14': 'http://schemas.microsoft.com/office/word/2010/wordml',
+        }
 
-                if not field_name:
-                    continue
+        root = ET.fromstring(doc_xml)
 
-                # Parse field name to extract namespace, key, and field type
-                # Expected format: Namespace.key.path_target or Namespace.key.path_confirmed
+        # Collect all w:formPr elements with a w:key attribute
+        form_key_attr = '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}key'
+        checked_val_attr = '{http://schemas.microsoft.com/office/word/2010/wordml}val'
 
-                if field_name.endswith('_target'):
-                    base_key = field_name[:-7]  # Remove '_target'
-                    field_type = 'target'
-                elif field_name.endswith('_confirmed'):
-                    base_key = field_name[:-10]  # Remove '_confirmed'
-                    field_type = 'confirmed'
-                else:
-                    continue  # Skip unknown field types
-
-                # Split into namespace and key
-                parts = base_key.split('.', 1)
-                if len(parts) != 2:
-                    continue
-
-                namespace, key = parts
-
-                # Initialize namespace if not exists
-                if namespace not in translations:
-                    translations[namespace] = {}
-
-                # Initialize key if not exists
-                if key not in translations[namespace]:
-                    translations[namespace][key] = {
-                        'target': '',
-                        'confirmed': False
-                    }
-
-                # Extract field value based on type
-                if field_type == 'target':
-                    # Text form field
-                    value = ''
-                    if hasattr(form, 'GetText'):
-                        value = form.GetText() or ''
-                    elif hasattr(form, 'GetValue'):
-                        value = form.GetValue() or ''
-                    translations[namespace][key]['target'] = str(value)
-
-                elif field_type == 'confirmed':
-                    # Checkbox form field
-                    is_checked = False
-                    if hasattr(form, 'IsChecked'):
-                        is_checked = bool(form.IsChecked())
-                    elif hasattr(form, 'GetValue'):
-                        val = form.GetValue()
-                        is_checked = str(val).lower() in (
-                            'yes', 'true', '1', 'on', 'checked')
-                    translations[namespace][key]['confirmed'] = is_checked
-
-            except Exception as field_error:
-                print(
-                    f"  Warning: Error processing form field {i}: {field_error}", file=sys.stderr)
+        for sdt in root.iter('{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdt'):
+            sdt_pr = sdt.find('{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdtPr')
+            if sdt_pr is None:
                 continue
 
-        builder.CloseFile()
-        return translations
+            form_pr = sdt_pr.find('{http://schemas.openxmlformats.org/wordprocessingml/2006/main}formPr')
+            if form_pr is None:
+                continue
+
+            field_key = form_pr.get(form_key_attr, '')
+            if not field_key:
+                continue
+
+            if field_key.endswith('_target'):
+                base_key = field_key[:-7]
+                field_type = 'target'
+            elif field_key.endswith('_confirmed'):
+                base_key = field_key[:-10]
+                field_type = 'confirmed'
+            else:
+                continue
+
+            parts = base_key.split('.', 1)
+            if len(parts) != 2:
+                continue
+            namespace, key = parts
+
+            if namespace not in translations:
+                translations[namespace] = {}
+            if key not in translations[namespace]:
+                translations[namespace][key] = {'target': '', 'confirmed': False}
+
+            sdt_content = sdt.find('{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdtContent')
+            if sdt_content is None:
+                continue
+
+            if field_type == 'target':
+                # Collect all text runs
+                texts = []
+                for t in sdt_content.iter('{http://schemas.openxmlformats.org/wordprocessingml/2006/main}t'):
+                    texts.append(t.text or '')
+                translations[namespace][key]['target'] = ''.join(texts)
+
+            elif field_type == 'confirmed':
+                # Find w14:checked element inside sdtContent
+                checked = sdt_content.find('.//{http://schemas.microsoft.com/office/word/2010/wordml}checked')
+                if checked is not None:
+                    val = checked.get(checked_val_attr, '0')
+                    translations[namespace][key]['confirmed'] = val == '1'
 
     except Exception as e:
-        print(f"  Error parsing PDF {pdf_path.name}: {e}", file=sys.stderr)
-        return {}
+        print(f"  Error parsing {pdf_path.name}: {e}", file=sys.stderr)
+
+    return translations
 
 
 def parse_pdf_with_fallback(pdf_path: Path) -> Dict[str, Dict[str, Dict[str, Any]]]:
-    """
-    Parse PDF form using docbuilder.
-
-    Args:
-        pdf_path: Path to PDF file
-
-    Returns:
-        Parsed translations dictionary
-    """
-    translations = parse_pdf_form_fields(pdf_path)
-
+    translations = parse_oform_pdf(pdf_path)
     if not translations:
         print(f"  Note: No form fields found in {pdf_path.name}")
-
     return translations
 
 
@@ -669,35 +533,27 @@ def save_translations_to_metadata(
                 except json.JSONDecodeError:
                     existing_meta = {}
 
-            # Update approval status
-            if 'approvals' not in existing_meta:
-                existing_meta['approvals'] = {}
+            # Only update languages[language].approved_at when confirmed.
+            # Skip file entirely if there's nothing to change.
+            if not is_confirmed:
+                continue
 
-            existing_meta['approvals'][language] = {
-                'approved': is_confirmed,
-                'approvedAt': timestamp if is_confirmed else None,
-                'approvedBy': 'pdf-import',
-                'value': target_value
-            }
+            if not meta_file_path.exists():
+                continue  # Don't create new .meta files — they're managed by the app
 
-            # Add to history
-            if 'history' not in existing_meta:
-                existing_meta['history'] = []
+            # Update languages[language].approved_at — this is what the translation
+            # app uses to display the "reviewed" checkmark
+            if 'languages' not in existing_meta:
+                existing_meta['languages'] = {}
+            if language not in existing_meta['languages']:
+                existing_meta['languages'][language] = {}
 
-            history_entry = {
-                'timestamp': timestamp,
-                'action': 'pdf-import',
-                'language': language,
-                'value': target_value,
-                'confirmed': is_confirmed
-            }
-            existing_meta['history'].append(history_entry)
+            lang_entry = existing_meta['languages'][language]
+            if lang_entry.get('approved_at') == timestamp:
+                continue  # Already up to date
 
-            # Keep only last 50 history entries
-            if len(existing_meta['history']) > 50:
-                existing_meta['history'] = existing_meta['history'][-50:]
+            lang_entry['approved_at'] = timestamp
 
-            # Write metadata file
             if not dry_run:
                 with open(meta_file_path, 'w', encoding='utf-8') as f:
                     json.dump(existing_meta, f, indent=2, ensure_ascii=False)

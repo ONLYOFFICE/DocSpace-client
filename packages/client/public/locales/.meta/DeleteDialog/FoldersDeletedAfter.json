@@ -3,11 +3,12 @@
   "content": "The folders will be permanently deleted in 30 days.",
   "content_en_sha1_hash": "e6e4ec19e0831226e7fbffb291747e44d34075ec",
   "created_at": "2025-09-24T13:10:15.417Z",
-  "updated_at": "2026-03-20T09:07:45.493Z",
+  "updated_at": "2026-04-11T21:05:22.103Z",
   "comment": {
-    "text": "This text informs the user about the timeframe for permanent deletion of moved folders. It appears within a dialog (DeleteDialog) after folders are moved to the trash, indicating they will be permanently deleted after 30 days. This helps users understand the consequences of moving folders to the trash.",
+    "text": "This text is part of a confirmation message in a dialog box, informing the user that deleted folders will be permanently removed after 30 days. It appears after the user confirms moving items to the trash.",
     "is_auto": true,
-    "updated_at": "2025-09-24T13:11:44.530Z"
+    "updated_at": "2026-04-11T21:05:22.103Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

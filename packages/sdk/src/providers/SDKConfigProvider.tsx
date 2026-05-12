@@ -13,6 +13,7 @@ import {
   frameCallCommand,
   frameHandlePing,
 } from "@docspace/shared/utils/common";
+import { applyCustomStyles } from "@docspace/shared/utils/customStyles";
 import { TFrameConfig } from "@docspace/shared/types/Frame";
 
 const SDKConfigContext = createContext<TFrameConfig | null>(null);
@@ -45,6 +46,7 @@ export const SDKConfigProvider: React.FC<{ children: React.ReactNode }> = ({
         switch (methodName) {
           case "setConfig":
             setSdkConfig(data);
+            applyCustomStyles(data?.stylesUrl);
             res = data;
             break;
           case "navigateSection":

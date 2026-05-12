@@ -3,11 +3,12 @@
   "content": "Please note that the editors will be unavailable during the upgrade. We also recommend to <1>backup your data</1> before you start.",
   "content_en_sha1_hash": "6254435f524d28160ed4c7af92aa2d841ada3ca0",
   "created_at": "2025-05-26T07:15:49.220Z",
-  "updated_at": "2026-04-10T08:58:38.048Z",
+  "updated_at": "2026-04-12T13:23:52.381Z",
   "comment": {
-    "text": "This translation key is used to display a note informing users that editors will be unavailable during an upgrade process. The note also recommends backing up data before starting the process. It appears in the UI on the official documentation page for upgrading to a pro version, likely as part of a banner or informational message.",
+    "text": "This is an instructional note displayed in a banner, informing users about the implications of upgrading to a Pro plan. It advises them that editors will be unavailable and suggests backing up data before starting the upgrade process. The `<1>backup your data</1>` tag indicates a clickable link within the sentence.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:02:22.856Z"
+    "updated_at": "2026-04-11T20:39:55.753Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -105,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation contains a repetitive word error: 'ຂໍ້ມູນຂໍ້ມູນ' (data data), which is a typo.",
-          "suggestion": "ກະລຸນາຮັບຊາບວ່າຕົວແກ້ໄຂຈະບໍ່ສາມາດໃຊ້ໄດ້ໃນລະຫວ່າງການອັບເກຣດ. ພວກເຮົາຍັງແນະນໍາໃຫ້ <1>ສໍາຮອງຂໍ້ມູນຂອງທ່ານ</1> ກ່ອນທີ່ທ່ານຈະເລີ່ມຕົ້ນ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -159,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation of 'backup your data' is 'ඔබගේ දත්ත උපස්ථයක් තැබීමට' which literally translates to 'to keep a backup of your data'. While understandable, the phrasing 'backup your data' in the context of a recommendation is more accurately translated as 'ඔබගේ දත්ත උපස්ථ කර ගැනීමට' (to back up your data) to match the verb action intended in the English source.",
-          "suggestion": "උත්ශ්‍රේණිය අතරතුර සංස්කරක භාවිතා කිරීමට නොහැකි බව කරුණාවෙන් සලකන්න. ආරම්භ කිරීමට පෙර <1>ඔබගේ දත්ත උපස්ථ කර ගැනීමට</1> අපි නිර්දේශ කරමු."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -207,13 +196,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'không hữu dụng' (not useful/not handy) is an inaccurate translation for 'unavailable' (not accessible/not available). In a technical context, 'unavailable' means the service cannot be used, whereas 'không hữu dụng' implies the service exists but is not helpful.",
-          "suggestion": "Xin lưu ý rằng các trình chỉnh sửa sẽ không khả dụng trong quá trình nâng cấp. Chúng tôi cũng khuyên bạn nên <1>sao lưu dữ liệu của mình</1> trước khi bạn bắt đầu."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

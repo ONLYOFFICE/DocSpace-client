@@ -35,13 +35,21 @@ import {
 
 import "@docspace/shared/styles/theme.scss";
 
+import { sanitizeStylesUrl } from "@docspace/shared/utils/customStyles";
+
 import "@/styles/globals.scss";
 import { getColorTheme, getPortalCultures, getSettings } from "@/api/settings";
-import { LOCALE_HEADER, THEME_HEADER } from "@/utils/constants";
+import {
+  LOCALE_HEADER,
+  STYLES_URL_HEADER,
+  THEME_HEADER,
+} from "@/utils/constants";
+import { loadStyles } from "@/utils/loadStyles";
 import Providers from "@/providers";
 import { getSelf } from "@/api/people";
 import Scripts from "@/components/Scripts";
 import { logger } from "@/../logger.mjs";
+import { loadLocale } from "@/utils/translationLoaders";
 
 export const metadata: Metadata = {
   title: "ONLYOFFICE",
@@ -63,12 +71,17 @@ export default async function RootLayout({
 
   const cookieStore = await cookies();
 
-  const [self, portalSettings, colorTheme, portalCultures] = await Promise.all([
-    getSelf(),
-    getSettings(),
-    getColorTheme(),
-    getPortalCultures(),
-  ]);
+  const rawStylesUrl = hdrs.get(STYLES_URL_HEADER) ?? "";
+  const sanitizedStylesUrl = sanitizeStylesUrl(rawStylesUrl);
+
+  const [self, portalSettings, colorTheme, portalCultures, themeStyles] =
+    await Promise.all([
+      getSelf(),
+      getSettings(),
+      getColorTheme(),
+      getPortalCultures(),
+      Promise.resolve(sanitizedStylesUrl ? "" : loadStyles(rawStylesUrl)),
+    ]);
 
   const theme =
     (hdrs.get(THEME_HEADER) as ThemeKeys | null) ||
@@ -79,6 +92,12 @@ export default async function RootLayout({
     self?.cultureName ||
     (typeof portalSettings === "object" && portalSettings.culture) ||
     "en";
+
+  const initialLocaleNsMap =
+    locale && locale !== "en"
+      ? await loadLocale(locale).catch(() => null)
+      : null;
+  const initialLocaleResources = initialLocaleNsMap?.get("Common");
 
   const systemTheme = cookieStore.get(SYSTEM_THEME_KEY)?.value as
     | ThemeKeys
@@ -117,8 +136,21 @@ export default async function RootLayout({
         <meta name="google" content="notranslate" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
+        {sanitizedStylesUrl ? (
+          <link
+            id="sdk-custom-styles"
+            rel="stylesheet"
+            href={sanitizedStylesUrl}
+            referrerPolicy="no-referrer"
+          />
+        ) : null}
       </head>
       <body style={styles} className={`${dirClass} ${themeClass}`}>
+        {themeStyles && (
+          <style href="sdk-theme" precedence="high">
+            {themeStyles}
+          </style>
+        )}
         <Providers
           contextData={{
             initialTheme: theme,
@@ -129,8 +161,8 @@ export default async function RootLayout({
             colorTheme,
             locale,
             portalCultures,
-            authToken:
-              cookieStore.get("asc_auth_key")?.value || undefined,
+            authToken: cookieStore.get("asc_auth_key")?.value || undefined,
+            initialLocaleResources,
           }}
         >
           {children}

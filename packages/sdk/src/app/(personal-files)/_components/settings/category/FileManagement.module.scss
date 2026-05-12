@@ -39,14 +39,13 @@
 
 .toggleBtnWrapper {
   display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .toggleBtn {
-  height: 20px;
-  line-height: 20px;
-  position: relative;
-
-  & > svg {
-    margin-top: 2px;
-  }
+  flex-shrink: 0;
+  width: 28px;
+  height: 16px;
 }
+

@@ -3,13 +3,20 @@
   "content": "or drop file here",
   "content_en_sha1_hash": "a14bf554e59e9cd5cf0f303dcfd839a050b061d2",
   "created_at": "2025-05-19T21:30:44.718Z",
-  "updated_at": "2026-04-08T11:32:44.489Z",
+  "updated_at": "2026-04-23T17:24:01.940Z",
   "comment": {
-    "text": "This translation key is used to display a secondary label on dropzone buttons, typically indicating that files can be dropped here instead of being selected. It appears in various UI elements where a file input or drag-and-drop functionality is present, such as portal settings categories and an image editor component. Translators should focus on providing a clear and descriptive phrase for this context.",
+    "text": "This is a secondary text label within a file upload dropzone. It appears when a user can drag and drop a single file into the designated area.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:34.473Z"
+    "updated_at": "2026-04-11T20:54:35.220Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/uploader/index.tsx",
+      "line_number": 413,
+      "context": "return getCommonTranslation(\"DropzoneFolderSecondary\");\n }\n if (!folderMode && multipleMode) {\n return getCommonTranslation(\"DropzoneFilesSecondary\");\n }\n return getCommonTranslation(\"DropzoneTitleSecondary\");\n };\n \n return (\n <div className={styles.uploaderContainer} style={{ width, height }}>\n <Dropzone",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
       "line_number": 222,
@@ -147,13 +154,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'sau fixaţi aici fişierul' means 'or fix the file here', which is incorrect for a drag-and-drop context. The correct verb for 'drop' in this UI context is 'lăsați' or 'trageți'.",
-          "suggestion": "sau lăsați fişierul aici"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

@@ -1,7 +1,9 @@
 {
+  "AgentInViewModeWarning": "أنت في وضع <strong>العرض فقط</strong> لـ {{aiAgent}} هذا. يمكنك رؤية نتائج نشاط {{aiChat}} من المستخدمين الآخرين.",
   "AIAgentAccessRedirectNote": "ستتم إعادة توجيهك تلقائيًا إلى قسم {{sectionName}} خلال 5 ثوانٍ.",
   "AIChat": "دردشة الذكاء الاصطناعي",
   "AIInstructions": "تعليمات الذكاء الاصطناعي",
+  "AIProviderAndModel": "{{aiProvider}} و نموذج",
   "CreateChat": "إنشاء دردشة",
   "CreateChatDescription": "انتقل إلى علامة التبويب {{aiChat}} للبدء.",
   "EmptyKnowledgeDescription": "سيتم فهرسة الملفات التي يتم تحميلها هنا واستخدامها كسياق في علامة التبويب {{aiChat}}. أضف ملفات (بحد أقصى 10 ميجابايت لكل ملف) لطرح أسئلة على الذكاء الاصطناعي، أو إنشاء محتوى، أو التعاون بشأن المعلومات.",
@@ -20,12 +22,10 @@
   "KnowledgeUnavailableDescriptionUser": "قاعدة المعرفة معطلة حاليًا. لتفعيل البحث الدلالي ومعالجة المستندات لـ {{aiAgents}}، يرجى الاتصال بمسؤول {{productName}} لتهيئة مزود التضمينات.",
   "MCP": "أدوات MCP لهذه الغرفة",
   "MCPDescriptionServers": "استخدم {{mcpServers}} التي يربطها المسؤول لتعزيز تجربة الدردشة مع الذكاء الاصطناعي. يمكن لـ {{mcpServers}} المساعدة في استخراج البيانات، والملخصات، والاقتراحات الذكية، إلخ.",
-  "Model": "{{aiProvider}} و نموذج",
   "ModelDescription": "حدد {{aiProvider}} والنموذج المراد استخدامه في محادثات هذه الغرفة. هذا الإعداد إلزامي وينطبق على جميع المشاركين.",
   "NoAccessAIAgentTitle": "عذراً، ليس لديك وصول إلى {{aiAgent}}",
   "ResponseQualityNode": "<1>ملاحظة:</1> قد تختلف جودة الاستجابة حسب النموذج؛ يوصى بالنماذج الأحدث للحصول على أفضل النتائج.",
   "ResultStorage": "تخزين النتائج",
   "UploadFilesDevice": "تحميل الملفات من جهازكم الشخصي",
-  "UploadFilesPortal": "تحميل الملفات من {{sectionNameFirst}} أو {{sectionNameSecond}}",
-  "AgentInViewModeWarning": "أنت في وضع <strong>العرض فقط</strong> لـ {{aiAgent}} هذا. يمكنك رؤية نتائج نشاط {{aiChat}} من المستخدمين الآخرين."
+  "UploadFilesPortal": "تحميل الملفات من {{sectionNameFirst}} أو {{sectionNameSecond}}"
 }

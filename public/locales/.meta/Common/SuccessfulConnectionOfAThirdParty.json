@@ -3,11 +3,12 @@
   "content": "Third-party service was successfully connected.",
   "content_en_sha1_hash": "d90004d45511c7e00dbd7ab694c8f7ffb4579948",
   "created_at": "2025-05-26T07:15:48.645Z",
-  "updated_at": "2026-04-07T22:13:31.109Z",
+  "updated_at": "2026-04-12T16:39:49.777Z",
   "comment": {
-    "text": "This translation key is used to display a success message when a third-party service is successfully connected. It appears as an alert after clicking a connection button in the ConnectDialog component.",
+    "text": "Toast message. Appears after a third-party service (e.g., Google Drive, Dropbox) has been successfully linked to the user's account.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:03:27.753Z"
+    "updated_at": "2026-04-11T20:41:36.237Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -153,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'තෙවන පාර්ශ්ව සේවාව සම්බන්ධිතයි' translates to 'Third-party service is connected' (a state), whereas the English 'was successfully connected' implies a completed action/event. More importantly, 'සම්බන්ධිතයි' is grammatically awkward for a success notification; 'සාර්ථකව සම්බන්ධ විය' is the correct way to convey a successful action.",
-          "suggestion": "තෙවන පාර්ශ්ව සේවාව සාර්ථකව සම්බන්ධ විය."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

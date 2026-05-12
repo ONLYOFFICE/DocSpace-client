@@ -3,17 +3,18 @@
   "content": "AI Agent Created",
   "content_en_sha1_hash": "492946ca8bbd5072556015fdec837b3b8b076c35",
   "created_at": "2026-03-31T15:18:27.255Z",
-  "updated_at": "2026-04-08T20:38:35.448Z",
+  "updated_at": "2026-04-27T12:45:07.507Z",
   "comment": {
-    "text": "This key displays a message indicating that an AI agent has been successfully created. It appears within a list of webhook trigger events, likely in a settings or configuration panel related to webhooks. Translators should ensure the wording accurately reflects the creation event.",
+    "text": "This is a webhook trigger label that appears in a list of available webhook events. It indicates that an AI agent has been successfully created.",
     "is_auto": true,
-    "updated_at": "2026-03-31T15:19:42.300Z"
+    "updated_at": "2026-04-11T21:29:25.704Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
-      "line_number": 94,
-      "context": "return t(\"FormFilledOut\");\n case WebhookTriggers.FormStopped:\n return t(\"FormStopped\");\n case WebhookTriggers.FormSubmit:\n return t(\"FormSubmit\");\n case WebhookTriggers.AgentCreated:\n return t(\"AgentCreated\");\n case WebhookTriggers.AgentUpdated:\n return t(\"AgentUpdated\");\n case WebhookTriggers.AgentDeleted:\n return t(\"AgentDeleted\");",
+      "line_number": 95,
+      "context": "case WebhookTriggers.FormStopped:\n return t(\"FormStopped\");\n case WebhookTriggers.FormSubmit:\n return t(\"FormSubmit\");\n case WebhookTriggers.AgentCreated:\n return t(\"AgentCreated\");\n case WebhookTriggers.AgentUpdated:\n return t(\"AgentUpdated\");\n case WebhookTriggers.AgentDeleted:\n return t(\"AgentDeleted\");\n case WebhookTriggers.FileDownloaded:",
       "module": "/packages/client"
     }
   ],
@@ -201,13 +202,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Vietnamese translation 'Tạo tác nhân AI' is an imperative command ('Create AI agent') rather than a past-tense notification of a completed event ('AI Agent Created').",
-          "suggestion": "Đã tạo tác nhân AI"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

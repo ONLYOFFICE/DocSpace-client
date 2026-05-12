@@ -3,11 +3,12 @@
   "content": "Close menu",
   "content_en_sha1_hash": "6c9fc990898478022834278db2a52594773d2b71",
   "created_at": "2025-08-26T11:15:03.725Z",
-  "updated_at": "2026-04-08T15:21:26.946Z",
+  "updated_at": "2026-04-11T20:57:10.034Z",
   "comment": {
-    "text": "This key provides the text for a button that closes a menu, likely within a dialog or similar UI element. It's used as the label for a button, allowing users to dismiss the menu and return to the previous view. Translators should ensure the text accurately conveys the action of closing a menu.",
+    "text": "This is a button label that closes a menu.",
     "is_auto": true,
-    "updated_at": "2025-08-26T11:30:31.365Z"
+    "updated_at": "2026-04-11T20:57:10.034Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -153,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'වට්ටෝරුව' means 'recipe' or 'clock/watch', whereas the English text refers to a 'menu'.",
-          "suggestion": "මෙනුව වසන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

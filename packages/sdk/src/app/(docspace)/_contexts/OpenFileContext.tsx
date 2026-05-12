@@ -35,5 +35,5 @@ import type { TFileItem } from "@/app/(docspace)/_hooks/useItemList";
  * When set, clicking a file calls this handler instead of window.open.
  */
 export const OpenFileContext = React.createContext<
-  ((file: TFileItem) => void) | null
+  ((file: TFileItem, preview?: boolean) => void) | null
 >(null);

@@ -3,23 +3,24 @@
   "content": "Check users from the list to import into {{organizationName}} {{productName}}. Users from Google Workspace will be imported without First Name / Last Name, and their email name will be used instead. Names of the users can be changed after the import. Users already existing in {{organizationName}} {{productName}} are highlighted with a green color and are not checked by default.",
   "content_en_sha1_hash": "24b72ad22f9e64bc2e50b7ce28e5cc96671b7535",
   "created_at": "2025-05-19T21:30:52.560Z",
-  "updated_at": "2026-04-09T01:30:34.860Z",
+  "updated_at": "2026-04-11T21:22:23.827Z",
   "comment": {
-    "text": "This translation key is used to describe the step in the data import process that allows users to select and import Google Workspace users into {{organizationName}} {{productName}}. It explains how the import will handle user names and highlights existing users within the organization. This text appears on a UI component, likely a stepper or dialog, guiding users through the data import process.",
+    "text": "This is a description displayed on a step in the Google Workspace user import wizard. It explains how users are imported, specifically noting that Google Workspace users will have their email name used as their first/last name, and that existing users are highlighted. It contains `{{organizationName}}` (e.g., \"ONLYOFFICE\") and `{{productName}}` (e.g., \"DocSpace\") variables.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:32.975Z"
+    "updated_at": "2026-04-11T21:22:23.827Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 60,
-      "context": "/>\n ),\n },\n {\n title: t(\"Settings:SelectUsers\"),\n description: t(\"Settings:SelectUsersDescriptionGoogle\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: <SelectUsersStep t={t} canDisable shouldSetUsers />,\n },",
+      "line_number": 61,
+      "context": "/>\n ),\n },\n {\n title: t(\"Settings:SelectUsers\"),\n description: t(\"Settings:SelectUsersDescriptionGoogle\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n }),\n component: <SelectUsersStep t={t} canDisable shouldSetUsers />,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/getStepDescription.js",
-      "line_number": 39,
-      "context": ") => {\n switch (stepIndex) {\n case 1:\n return t(\"Settings:SelectFileDescriptionGoogle\");\n case 2:\n return t(\"Settings:SelectUsersDescriptionGoogle\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n });\n case 3:\n return isTypeSelectEmpty ? (",
+      "line_number": 40,
+      "context": ") => {\n switch (stepIndex) {\n case 1:\n return t(\"Settings:SelectFileDescriptionGoogle\");\n case 2:\n return t(\"Settings:SelectUsersDescriptionGoogle\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n });\n case 3:\n return isTypeSelectEmpty ? (",
       "module": "/packages/client"
     }
   ],
@@ -45,13 +46,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'входирате' is a non-existent word in Bulgarian (likely a calque from 'import'). The correct technical term is 'импортирате'.",
-          "suggestion": "Проверете потребителите от списъка, за да ги импортирате в {{organizationName}} {{productName}}. Потребителите от Google Workspace ще бъдат импортирани без име/фамилия и вместо това ще се използва имейлът им. Имената на потребителите могат да се променят след импортирането. Вече съществуващите потребители в {{organizationName}} {{productName}} са маркирани със зелен цвят и не са избрани по подразбиране."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -81,13 +76,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation states existing users are highlighted with a 'wrong color' (virheellä värillä) instead of 'green color' (vihreällä värillä).",
-          "suggestion": "Valitse {{organizationName}} {{productName}}:n tuotavat käyttäjät listalta. Google Workspacesta tuotavat käyttäjät tuodaan ilman etunimeä/sukunimeä ja sen sijaan käytetään heidän sähköpostinimeään. Käyttäjien nimet voidaan vaihtaa tuonnin jälkeen. Jo {{organizationName}} {{productName}}-ssa olemassaolevat käyttäjät on korostettu vihreällä värillä ja niitä ei ole oletuksena valittu."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -171,13 +160,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'email name' was translated as 'විද්‍යුත් ලිපිලේඛන නම' (electronic document name), which is incorrect. In this context, it should refer to the 'email address' (විද්‍යුත් තැපැල් ලිපිනය).",
-          "suggestion": "{{organizationName}} {{productName}} වෙතට ආනයනය කිරීමට ලැයිස්තුවෙන් පරිශීලකයින් තෝරන්න. Google Workspace වෙතින් පරිශීලකයින් පළමු නම / අවසන් නම නොමැතිව ආනයනය කරනු ලැබේ, ඒ වෙනුවට ඔවුන්ගේ විද්‍යුත් තැපැල් ලිපිනය භාවිතා කරනු ලැබේ. ආනයනය කිරීමෙන් පසු පරිශීලකයින්ගේ නම් වෙනස් කළ හැකිය. {{organizationName}} {{productName}} හි දැනටමත් සිටින පරිශීලකයින් කොළ පැහැයෙන් දක්නට ලැබෙන අතර පෙරනිසම සලකුණු කරනු නොලැබේ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

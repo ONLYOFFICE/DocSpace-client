@@ -3,11 +3,12 @@
   "content": "Continue without connecting the storage?\nYou have selected a third-party storage option that is not connected yet. If you proceed without connecting the service, this option will not be added.",
   "content_en_sha1_hash": "2d29b440ea315d9ac9d67057564aa95d991d43fd",
   "created_at": "2025-05-19T21:30:56.786Z",
-  "updated_at": "2026-04-07T19:35:05.055Z",
+  "updated_at": "2026-04-11T21:04:52.794Z",
   "comment": {
-    "text": "This translation key is used for a confirmation message that appears when a user selects a third-party storage option that is not yet connected. The message prompts the user to decide whether to proceed without connecting the service. It appears in a dialog box, likely as part of a Create Room feature.",
+    "text": "This is the body text of a confirmation dialog that appears when a user tries to create a room with a third-party storage option that hasn't been connected yet.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:11.029Z"
+    "updated_at": "2026-04-11T21:04:52.794Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

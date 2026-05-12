@@ -1,0 +1,84 @@
+{
+  "key_path": "SyncWithDatabaseStatus",
+  "content": "Synchronized: {{success}} out of {{total}}",
+  "content_en_sha1_hash": "20152d874e05238730db73a4bb499ea03fce4b96",
+  "created_at": "2026-05-08T13:10:43.426Z",
+  "updated_at": "2026-05-08T14:55:18.774Z",
+  "comment": {
+    "text": "Status label indicating the progress of a database synchronization, where {{success}} is the number of successfully processed items and {{total}} is the total number of items.",
+    "is_auto": true,
+    "updated_at": "2026-05-08T13:12:49.060Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/CreateEditRoomStore.ts",
+      "line_number": 835,
+      "context": "const successCount = forms.filter((f) => f.success).length;\n const errorCount = forms.filter((f) => !f.success && !!f.error).length;\n const total = forms.length;\n const pendingCount = total - successCount;\n \n const statusLabel = t(\"Files:SyncWithDatabaseStatus\", {\n success: successCount,\n total,\n });\n const pendingLabel =\n pendingCount > 0",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": true,
+      "ai_model": "google/gemma-4-26b-a4b-it",
+      "ai_spell_check_issues": [
+        {
+          "type": "variable_mismatch",
+          "description": "Expected variables {{success}}, {{total}} but got "
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": true,
+      "ai_model": "google/gemma-4-26b-a4b-it",
+      "ai_spell_check_issues": [
+        {
+          "type": "variable_mismatch",
+          "description": "Expected variables {{success}}, {{total}} but got {{total}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": true,
+      "ai_model": "google/gemma-4-26b-a4b-it",
+      "ai_spell_check_issues": [
+        {
+          "type": "variable_mismatch",
+          "description": "Expected variables {{success}}, {{total}} but got {{ van de{{total}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": true,
+      "ai_model": "google/gemma-4-26b-a4b-it",
+      "ai_spell_check_issues": [
+        {
+          "type": "variable_mismatch",
+          "description": "Expected variables {{success}}, {{total}} but got {{success}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": true,
+      "ai_model": "google/gemma-4-26b-a4b-it",
+      "ai_spell_check_issues": [
+        {
+          "type": "variable_mismatch",
+          "description": "Expected variables {{success}}, {{total}} but got {{total}}"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

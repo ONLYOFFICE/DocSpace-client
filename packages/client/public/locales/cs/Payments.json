@@ -1,11 +1,10 @@
 {
-  "AccessingProblem": "Pokud jste stávající uživatel a máte problémy s přístupem do tohoto prostoru, obraťte se na správce.",
   "CannotCreateNewRoom": "Místnost nelze vytvořit",
   "CannotCreatePaidUsers": "Nelze přidávat placené uživatele",
   "CannotRestoreRoom": "Místnost nelze obnovit",
   "ChooseNewPlan": "Chcete si vybrat nový cenový tarif?",
   "GracePeriodActive": "Okamžitá lhůta je aktivní <1>od {{fromDate}} do {{byDate}}</1> (zbylo dní: {{delayDaysCount}}).",
-  "LicenseExpired": "Nemohu přidat nové uživatele a vytvořit nové místnosti. Licenční období vypršelo.",
+  "LicenseExpiredRestriction": "Nemohu přidat nové uživatele a vytvořit nové místnosti. Licenční období vypršelo.",
   "LicenseGracePeriodInfo": "Během tohoto období nemohou administrátoři vytvářet nové místnosti ani přidávat nové uživatele. Jakmile skončí období odpuštění, {{productName}} bude nedostupné, dokud nebude aktivována nová licence.",
   "NewRoomWillExceedLimit": "Vytvoření této místnosti není možné, protože byl dosažen limit počtu místností zahrnutých do vašeho aktuálního tarifu.",
   "NewUsersWillExceedMembersLimit": "Přidání nových placených uživatelů není možné, protože je dosažen limit pro počet administrátorů zahrnutých ve vašem aktuálním tarifu.",

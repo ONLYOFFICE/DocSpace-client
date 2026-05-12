@@ -3,13 +3,20 @@
   "content": "A versatile chat powered by your chosen text model. Use it to solve everyday tasks and collaborate on text documents, spreadsheets, and presentations. All files added to the room are automatically used as context during your conversations with the chat.",
   "content_en_sha1_hash": "09632c1987210f7024ec0e3a3c6d32e5d2b64847",
   "created_at": "2025-10-27T16:14:10.301Z",
-  "updated_at": "2026-04-08T17:22:17.082Z",
+  "updated_at": "2026-04-11T20:59:44.151Z",
   "comment": {
-    "text": "This key provides a short description for an AI-powered chat room. It explains that the chat uses a text model to help with tasks and collaboration, automatically using any added files as context. This description appears within the UI to inform users about the functionality of the AI room.",
+    "text": "Description for an AI Room. This text appears as a description of the AI Room type when creating a new room.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:54:25.838Z"
+    "updated_at": "2026-04-11T20:59:44.151Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/components/room-type/RoomType.utils.ts",
+      "line_number": 44,
+      "context": "case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoomDescription\");\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRoomDescription\");\n case RoomsType.AIRoom:\n return t(\"Common:AIRoomDescription\");\n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoomInfo\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomInfo\");\n default:",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
       "line_number": 44,
@@ -105,13 +112,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The final sentence contains a tautology/repetition error: '...ໃນລະຫວ່າງການສົນທະນາຂອງທ່ານກັບການສົນທະນາ' translates to '...during your conversations with the conversation', which is logically incorrect and differs from the English 'conversations with the chat'.",
-          "suggestion": "ການສົນທະນາທີ່ຫຼາກຫຼາຍທີ່ຂັບເຄື່ອນໂດຍຮູບແບບຂໍ້ຄວາມທີ່ທ່ານເລືອກ. ໃຊ້ມັນເພື່ອແກ້ໄຂວຽກງານປະຈຳວັນ ແລະ ຮ່ວມມືກັນໃນເອກະສານຂໍ້ຄວາມ, ສະເປຣດຊີດ ແລະ ການນຳສະເໜີ. ໄຟລ໌ທັງໝົດທີ່ເພີ່ມເຂົ້າໃນຫ້ອງຈະຖືກໃຊ້ໂດຍອັດຕະໂນມັດເປັນບໍລິບົດໃນລະຫວ່າງການສົນທະນາຂອງທ່ານກັບແຊັດ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {

@@ -3,28 +3,29 @@
   "content": "Example: {{example}}",
   "content_en_sha1_hash": "293ca42e3dda6b344ea17733c7b72ab1a0dc1b5e",
   "created_at": "2025-05-19T21:30:45.215Z",
-  "updated_at": "2026-04-08T10:01:34.384Z",
+  "updated_at": "2026-04-11T20:53:04.138Z",
   "comment": {
-    "text": "This translation key is used to display a placeholder text that will be replaced with the actual editor URL when editing document services. It appears in the UI as a subtitle and is accessed through an integration category page in the Portal Settings application.",
+    "text": "This is an example of a document service URL, displayed as a subtitle below the input field in the Document Service settings. The `{{example}}` variable will be replaced with a placeholder URL.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:16.624Z"
+    "updated_at": "2026-04-11T20:53:04.138Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 278,
+      "line_number": 279,
       "context": "hasError={!docServiceUrlIsValid}\n isDisabled={isSaveLoading || isResetLoading}\n dataTestId=\"editor_url_input_block\"\n />\n <Text className=\"subtitle\">\n {t(\"Common:Example\", {\n example: EDITOR_URL_PLACEHOLDER,\n })}\n </Text>\n <Checkbox\n id=\"isDisabledCertificat\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 278,
+      "line_number": 279,
       "context": "hasError={!docServiceUrlIsValid}\n isDisabled={isSaveLoading || isResetLoading}\n dataTestId=\"editor_url_input_block\"\n />\n <Text className=\"subtitle\">\n {t(\"Common:Example\", {\n example: EDITOR_URL_PLACEHOLDER,\n })}\n </Text>\n <Checkbox\n id=\"isDisabledCertificat\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 278,
+      "line_number": 279,
       "context": "hasError={!docServiceUrlIsValid}\n isDisabled={isSaveLoading || isResetLoading}\n dataTestId=\"editor_url_input_block\"\n />\n <Text className=\"subtitle\">\n {t(\"Common:Example\", {\n example: EDITOR_URL_PLACEHOLDER,\n })}\n </Text>\n <Checkbox\n id=\"isDisabledCertificat\"",
       "module": "/packages/client"
     }

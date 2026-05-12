@@ -3,17 +3,18 @@
   "content": "Check list of unimported users to import into {{organizationName}} {{productName}}.",
   "content_en_sha1_hash": "f813ddb0fd692acc396a9c04232098593d622568",
   "created_at": "2025-05-19T21:30:50.334Z",
-  "updated_at": "2026-04-10T08:58:38.064Z",
+  "updated_at": "2026-04-11T21:26:01.111Z",
   "comment": {
-    "text": "Check list of unimported users to import into {{organizationName}} {{productName}}. This description appears on a button or dialog in the Add Emails step of a data import process, providing context for users about what to expect during the import operation.",
+    "text": "This is a description for a step in a wizard. It explains that the user should review a list of unimported users before importing them into the specified organization and product. `{{organizationName}}` is the name of the organization, and `{{productName}}` is the name of the product (e.g., ONLYOFFICE DocSpace).",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:55.737Z"
+    "updated_at": "2026-04-11T21:26:01.111Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 71,
-      "context": "<SelectUsersStep t={t} canDisable={false} shouldSetUsers={false} />\n ),\n },\n {\n title: t(\"Settings:AddEmails\"),\n description: t(\"Settings:AddEmailsDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: <AddEmailsStep t={t} />,\n },",
+      "line_number": 72,
+      "context": "<SelectUsersStep t={t} canDisable={false} shouldSetUsers={false} />\n ),\n },\n {\n title: t(\"Settings:AddEmails\"),\n description: t(\"Settings:AddEmailsDescription\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n }),\n component: <AddEmailsStep t={t} />,\n },",
       "module": "/packages/client"
     }
   ],
@@ -99,13 +100,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation contains a repetitive and awkward phrasing ('가져오기할 가져오기하지 않은') which makes the sentence grammatically broken and confusing, though the core intent is present.",
-          "suggestion": "{{organizationName}} {{productName}}로 가져오기 위해 가져오지 않은 사용자 목록을 확인하세요."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -117,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation is missing the preposition 'into' (or its equivalent), which changes the meaning from 'importing users INTO the product' to 'importing the product' (or an incomplete thought).",
-          "suggestion": "Pārbaudiet neimportēto lietotāju sarakstu, lai importētu tos {{organizationName}} {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {

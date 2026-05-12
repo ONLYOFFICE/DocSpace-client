@@ -3,22 +3,23 @@
   "content": "<1>{{displayName}}</1> invites you to join the {{productName}} <1>{{spaceAddress}}</1> for secure document collaboration.",
   "content_en_sha1_hash": "516f637e20928aaf05537ea5e25558d4c52dc3d1",
   "created_at": "2025-05-19T21:30:45.945Z",
-  "updated_at": "2026-04-10T08:58:38.054Z",
+  "updated_at": "2026-04-11T20:50:37.089Z",
   "comment": {
-    "text": "This translation key is used to display a welcome message when an invitation is sent to join a secure document collaboration space. It includes placeholders for the user's name and the product name, making it adaptable to different users and products. The text appears in a greeting component after a successful file upload or invitation creation.",
+    "text": "This is a message displayed to a user who has been invited to a DocSpace portal. It informs them that `displayName` has invited them to join the `productName` at `spaceAddress` for document collaboration.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:49.576Z"
+    "updated_at": "2026-04-11T20:50:37.089Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/login/src/components/GreetingContainer/GreetingCreateUserContainer/index.tsx",
-      "line_number": 105,
-      "context": "}\n \n return (\n <Trans\n {...commonProps}\n i18nKey=\"InvitationToPortal\"\n defaults={DEFAULT_PORTAL_TEXT}\n values={{\n displayName,\n productName: t(\"Common:ProductName\"),\n ...(roomData.title",
+      "line_number": 106,
+      "context": "}\n \n return (\n <Trans\n {...commonProps}\n i18nKey=\"InvitationToPortal\"\n defaults={DEFAULT_PORTAL_TEXT}\n values={{\n displayName,\n productName: getBrandName(\"ProductName\"),\n ...(roomData.title",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/GreetingContainer/GreetingLoginContainer.tsx",
-      "line_number": 77,
+      "line_number": 78,
       "context": "const { type, roomName, displayName, spaceAddress } = invitationLinkData;\n \n const keyProp = roomName\n ? { tKey: \"InvitationToRoom\" }\n : { tKey: \"InvitationToPortal\" };\n \n const renderEmailChangeContent = () => {\n if (!(emailChange && type !== \"invitation\")) return null;\n \n return (",
       "module": "/packages/login"
     }
@@ -147,13 +148,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The verb 'asociați' (to associate/link) is used incorrectly in this context. In Romanian, when inviting someone to join a space or platform, 'să vă alăturați' (to join) is the correct semantic equivalent for 'to join'.",
-          "suggestion": "<1>{{displayName}}</1> vă invită să vă alăturați {{productName}} <1>{{spaceAddress}}</1> pentru colaborarea securizată asupra documentelor."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -171,18 +166,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_variable",
-          "description": "Missing variable(s): {{spaceAddress}}",
-          "suggestion": ""
-        },
-        {
-          "type": "extra_variable",
-          "description": "Extra variable(s) not in English: {{{spaceAddress}}",
-          "suggestion": ""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {

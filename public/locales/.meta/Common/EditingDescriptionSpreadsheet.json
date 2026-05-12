@@ -3,16 +3,17 @@
   "content": "Viewing, editing, commenting.",
   "content_en_sha1_hash": "9f37b340053f970003d60e35c4232ce4a09215c6",
   "created_at": "2025-09-29T18:22:03.314Z",
-  "updated_at": "2026-04-08T11:22:23.981Z",
+  "updated_at": "2026-04-11T20:54:23.908Z",
   "comment": {
-    "text": "This key provides a short description of the access level granted, specifically indicating the ability to view, edit, and comment. It's used as a tooltip or label to clarify editing permissions, likely on a button or within a similar UI element. Translators should aim for a succinct and easily understood equivalent.",
+    "text": "This is a short description of access rights for a spreadsheet, indicating that users can view, edit, and comment on the document. It appears as a label within a sharing settings dialog.",
     "is_auto": true,
-    "updated_at": "2025-09-29T18:25:43.158Z"
+    "updated_at": "2026-04-11T20:54:23.908Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 672,
+      "line_number": 673,
       "context": "),\n access: ShareAccessRights.Editing,\n isForm: P.not(true),\n },\n () => {\n const x = t(\"Common:EditingDescriptionSpreadsheet\");\n console.log(x);\n return x;\n },\n )\n .with(",
       "module": "/packages/shared"
     }
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Bakı' means the city of Baku. The correct word for 'Viewing' in this context is 'Baxış' or 'Görmə'.",
-          "suggestion": "Baxış, redaktə, şərh."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {

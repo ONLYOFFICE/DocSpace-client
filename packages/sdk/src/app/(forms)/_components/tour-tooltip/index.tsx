@@ -24,8 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+"use no memo";
 "use client";
 
+import { useId } from "react";
 import type { TooltipRenderProps } from "react-joyride";
 
 import { ReactSVG } from "react-svg";
@@ -39,30 +41,58 @@ export default function TourTooltip({
   index,
   step,
   size,
-  isLastStep,
   backProps,
   closeProps,
   primaryProps,
+  skipProps,
   tooltipProps,
 }: TooltipRenderProps) {
   const stopPropagation = (e: React.MouseEvent) => {
     e.stopPropagation();
   };
 
+  const titleId = useId();
+  const descId = useId();
+  const hasSkip = !!skipProps?.title && index < size - 1;
+
   return (
-    <div {...tooltipProps} className={styles.tooltip} onClick={stopPropagation} onMouseDown={stopPropagation}>
-      <button className={styles.close} {...closeProps}>
+    <div
+      {...tooltipProps}
+      role="dialog"
+      aria-modal
+      aria-labelledby={step.title ? titleId : undefined}
+      aria-describedby={step.content ? descId : undefined}
+      className={styles.tooltip}
+      onClick={stopPropagation}
+      onMouseDown={stopPropagation}
+    >
+      <button type="button" className={styles.close} {...closeProps}>
         <ReactSVG src={CrossReactSvgUrl} />
       </button>
 
-      {step.title && <div className={styles.title}>{step.title}</div>}
-      {step.content && <div className={styles.content}>{step.content}</div>}
+      {step.title && (
+        <div id={titleId} className={styles.title}>
+          {step.title}
+        </div>
+      )}
+      {step.content && (
+        <div id={descId} className={styles.content}>
+          {step.content}
+        </div>
+      )}
 
       <div className={styles.footer}>
         <span className={styles.progress}>
           {index + 1} / {size}
         </span>
         <div className={styles.buttons}>
+          {hasSkip && (
+            <Button
+              label={skipProps.title}
+              size={ButtonSize.extraSmall}
+              onClick={skipProps.onClick}
+            />
+          )}
           {index > 0 && (
             <Button
               label={backProps.title}

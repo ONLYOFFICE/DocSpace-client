@@ -1,4 +1,5 @@
 {
+  "ActionsWithFilesDescription": "バッジは、{{rooms}}、{{shared}}、{{documents}}、および{{aiAgents}}セクション全体で、アップロード、編集、または共有などのファイルアクティビティをハイライトします。",
   "AdminSetupRequired": "管理者の設定が必要です",
   "Badges": "バッジ",
   "DailyFeed": "{{productName}}の毎日フィード",
@@ -8,12 +9,11 @@
   "LdapEmailTooltip": "このユーザーアカウントはLDAPから読み込まれています。ユーザーのメールアドレスは指定されておらず、現在のものは自動的に生成されており、通知を送信するためには使用できません。",
   "NotConfigured": "設定されていません",
   "Notifications": "通知",
+  "RoomsActivityDescription": "{{rooms}} および {{aiAgents}} 内の新しい共有ファイル/フォルダやアクティビティに関するメール通知を即座に受け取れます。",
+  "RoomUpdateNotify": "共有コンテンツ、{{rooms}} および {{aiAgents}} のアクティビティ",
   "SettingUpNotifications": "通知の設定",
   "SuccessConnected": "{{serviceName}} は通知チャネルとして正常に接続されました。これで、そちらで更新情報を受け取ることができます。",
   "SuccessDisconnected": "{{serviceName}}は通知チャネルとして正常に切断されました。通知はそこに送信されなくなります。",
   "UsefulTips": "{{productName}}の使い方やヒント",
-  "UsefulTipsDescription": "{{productName}}に関するお役立ちガイドをゲット",
-  "ActionsWithFilesDescription": "バッジは、{{rooms}}、{{shared}}、{{documents}}、および{{aiAgents}}セクション全体で、アップロード、編集、または共有などのファイルアクティビティをハイライトします。",
-  "RoomsActivityDescription": "{{rooms}} および {{aiAgents}} 内の新しい共有ファイル/フォルダやアクティビティに関するメール通知を即座に受け取れます。",
-  "RoomUpdateNotify": "共有コンテンツ、{{rooms}} および {{aiAgents}} のアクティビティ"
+  "UsefulTipsDescription": "{{productName}}に関するお役立ちガイドをゲット"
 }

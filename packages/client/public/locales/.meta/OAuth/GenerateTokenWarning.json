@@ -3,11 +3,12 @@
   "content": "This token can be used to access your account (<1>{{supportEmail}}</1>) via API calls. Don't share it with anyone. Make sure you copy this token now as you won't see it again.",
   "content_en_sha1_hash": "9631ed702f217ba0c462057da6317a7f1e0b872e",
   "created_at": "2025-05-19T21:30:53.903Z",
-  "updated_at": "2026-04-07T19:35:05.164Z",
+  "updated_at": "2026-04-11T21:18:48.380Z",
   "comment": {
-    "text": "This translation key is used for a warning message that advises users not to share their API token and provides instructions on how to copy it. It appears in a generate developer token dialog, prompting users to take action before the token is lost.",
+    "text": "This is a warning message displayed within a dialog when a user generates an API token. It informs the user about the token's purpose, security, and the need to copy it immediately, with `{{supportEmail}}` being a clickable email address.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:46.102Z"
+    "updated_at": "2026-04-11T21:18:48.380Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

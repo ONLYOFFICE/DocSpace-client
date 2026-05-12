@@ -326,6 +326,12 @@ test.describe("Profile", () => {
   }) => {
     mockRequest.use(themeProviderHandler(TEST_PORT));
 
+    await page.route("*/**/logo.ashx**", async (route) => {
+      await route.fulfill({
+        path: `../../public/images/logo/dark_loginpage.svg`,
+      });
+    });
+
     await page.goto(`${baseUrl}/profile/interface-theme`);
 
     const interfaceTheme = page.getByTestId("profile-interface-theme");
@@ -333,13 +339,14 @@ test.describe("Profile", () => {
 
     const darkThemeButton = page.getByTestId("theme_Dark_radio_button");
     await expect(darkThemeButton).toBeVisible();
-    await darkThemeButton.click();
 
-    await page.route("*/**/logo.ashx**", async (route) => {
-      await route.fulfill({
-        path: `../../public/images/logo/dark_loginpage.svg`,
-      });
-    });
+    const themeResponsePromise = page.waitForResponse(
+      (r) =>
+        r.url().includes("/people/theme") && r.request().method() === "PUT",
+    );
+
+    await darkThemeButton.click();
+    await themeResponsePromise;
 
     await expectScreenshot(page,[
       "desktop",

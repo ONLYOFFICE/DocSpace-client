@@ -3,11 +3,12 @@
   "content": "Auth via NTLM",
   "content_en_sha1_hash": "207bb87de2e4b6d870453e16a0021127ffef3143",
   "created_at": "2025-05-19T21:30:53.288Z",
-  "updated_at": "2026-04-08T22:02:51.082Z",
+  "updated_at": "2026-04-11T21:21:12.047Z",
   "comment": {
-    "text": "This translation key is used to display the phrase \"Auth via NTLM\" as a label for a checkbox in a settings UI. When checked, it likely enables authentication using NTLM protocol. It appears in the SMTP Settings page under Custom Settings.",
+    "text": "This is a checkbox label in the SMTP settings. It allows users to enable or disable NTLM authentication for the SMTP server.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:02.152Z"
+    "updated_at": "2026-04-11T21:21:12.047Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -27,18 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "suspicious_length",
-          "description": "Translation is 6.1x longer than English (79 vs 13 chars) — possibly duplicated text",
-          "suggestion": ""
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The translation is an extremely long, descriptive definition of NTLM rather than a concise UI label. It translates to 'Authentication via the protocol for user authentication and access management in local network environments', which is inappropriate for a checkbox label.",
-          "suggestion": "المصادقة عبر NTLM"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -164,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'තහවුරුව' (thahavuruva) means 'confirmation' or 'assurance' (a noun), whereas 'Auth' in this context is a shorthand for 'Authentication' (the process). In a UI checkbox context, it should be 'සත්‍යාපනය' (authentication).",
-          "suggestion": "NTLM හරහා සත්‍යාපනය"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

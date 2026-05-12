@@ -3,29 +3,30 @@
   "content": "Two-factor authentication",
   "content_en_sha1_hash": "edfd617aa53e034bf19dce690f417b00bc824fa9",
   "created_at": "2025-05-19T21:30:53.005Z",
-  "updated_at": "2026-04-09T00:17:17.547Z",
+  "updated_at": "2026-04-11T21:21:38.952Z",
   "comment": {
-    "text": "Two-factor authentication is a security feature used to add an extra layer of protection when accessing the portal. This translation key is used as the label for a settings category and button in the portal's security settings, informing users about this security measure.",
+    "text": "This is a section title for the \"Two-factor authentication\" settings. It appears on the security settings page.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:14.880Z"
+    "updated_at": "2026-04-11T21:21:38.952Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 170,
+      "line_number": 171,
       "context": "</div>\n \n <PasswordStrengthSection {...settingsBeforeInvitationSettingsProps} />\n <StyledSettingsSeparator />\n <Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"TwoFactorAuth\")}\n </Text>\n \n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"TwoFactorAuthEnableDescription\", {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 68,
+      "line_number": 69,
       "context": "}\n url=\"/portal-settings/security/access-portal/password\"\n onClickLink={onClickLink}\n />\n <CategoryItem\n title={t(\"TwoFactorAuth\")}\n subtitle={\n <Trans i18nKey=\"TwoFactorAuthMobileDescription\" ns=\"Settings\" t={t} />\n }\n url=\"/portal-settings/security/access-portal/tfa\"\n onClickLink={onClickLink}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 204,
-      "context": "return t(\"CustomTitlesWelcome\");\n case \"ManagementCategorySecurity\":\n return t(\"ManagementCategorySecurity\");\n case \"PortalAccess\":\n return t(\"PortalAccess\", { productName: t(\"Common:ProductName\") });\n case \"TwoFactorAuth\":\n return t(\"TwoFactorAuth\");\n case \"ManagementCategoryIntegration\":\n return t(\"ManagementCategoryIntegration\");\n case \"ThirdPartyAuthorization\":\n return t(\"ThirdPartyAuthorization\");",
+      "line_number": 205,
+      "context": "return t(\"CustomTitlesWelcome\");\n case \"ManagementCategorySecurity\":\n return t(\"ManagementCategorySecurity\");\n case \"PortalAccess\":\n return t(\"PortalAccess\", { productName: getBrandName(\"ProductName\") });\n case \"TwoFactorAuth\":\n return t(\"TwoFactorAuth\");\n case \"ManagementCategoryIntegration\":\n return t(\"ManagementCategoryIntegration\");\n case \"ThirdPartyAuthorization\":\n return t(\"ThirdPartyAuthorization\");",
       "module": "/packages/client"
     },
     {
@@ -177,13 +178,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'ද්වි සාධක තහවුරුව' translates to 'Two-factor confirmation' rather than 'Two-factor authentication'. In a security context, 'authentication' should be translated as 'සත්‍යාපනය' (Sathyapanaya) to be technically accurate.",
-          "suggestion": "ද්වි-සාධක සත්‍යාපනය"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

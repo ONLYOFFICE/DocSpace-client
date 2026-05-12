@@ -3,11 +3,12 @@
   "content": "Edit shared link",
   "content_en_sha1_hash": "1ed6cbc969f7985c370f20cac0430ca2e849fcca",
   "created_at": "2025-08-26T11:15:03.515Z",
-  "updated_at": "2026-04-08T11:17:12.335Z",
+  "updated_at": "2026-04-11T20:54:18.583Z",
   "comment": {
-    "text": "This key displays the title of a modal dialog used to edit a shared link. The text changes based on the link's properties (primary, public, or form room) and appears in the dialog header. Translators should consider the different variations (\"Edit Shared Link,\" \"Edit Additional Link,\" \"Edit Link\") reflect different scenarios for link modification.",
+    "text": "This is the title of a dialog box. It appears when a user is editing a shared link that is the primary link for a document.",
     "is_auto": true,
-    "updated_at": "2025-08-26T11:29:05.507Z"
+    "updated_at": "2026-04-11T20:54:18.583Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

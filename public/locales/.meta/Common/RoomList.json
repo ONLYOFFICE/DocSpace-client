@@ -3,13 +3,20 @@
   "content": "Room list",
   "content_en_sha1_hash": "61e05608df86be266bae6e1183981c8d88c82435",
   "created_at": "2025-05-19T21:30:48.199Z",
-  "updated_at": "2026-04-08T00:25:26.033Z",
+  "updated_at": "2026-04-13T14:59:05.770Z",
   "comment": {
-    "text": "The \"RoomList\" translation key is used to display a room list label on buttons and other UI elements. It appears in contexts where users can select or view rooms, such as in contact options and selector components. Translators should replace this term with local language equivalents to make the interface accessible to diverse user bases.",
+    "text": "This is a label for a list of rooms. It appears as a header in a dialog and as a menu item.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:34:31.081Z"
+    "updated_at": "2026-04-11T20:44:14.294Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/selectors/Room/index.tsx",
+      "line_number": 287,
+      "context": "const headerSelectorProps: TSelectorHeader = withHeader\n ? {\n withHeader,\n headerProps: {\n ...headerProps,\n headerLabel: headerProps.headerLabel || t(\"RoomList\"),\n },\n }\n : {};\n \n const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/index.tsx",
       "line_number": 456,
@@ -18,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 216,
+      "line_number": 217,
       "context": "};\n case \"room-list\":\n return {\n key: option,\n icon: FolderReactSvgUrl,\n label: t(\"Common:RoomList\"),\n onClick: () => this.openUserRoomList(item),\n };\n case \"enable\":\n return {\n id: \"option_enable\",",
       "module": "/packages/client"
     }
@@ -171,37 +178,19 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Spisek sob' is grammatically incorrect. 'Spisek' is a masculine noun, but 'sob' (genitive plural of 'soba') requires a masculine or neuter noun that agrees in case, or more commonly, the term 'Seznam' should be used for a UI list. Furthermore, 'Spisek' can also mean 'conspiracy' in certain contexts, which is inappropriate for a UI label.",
-          "suggestion": "Seznam sob"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'собе' is an incorrect declension/form. In Serbian, 'List of rooms' should be 'Листа соба'.",
-          "suggestion": "Листа соба"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Lista sobe' is singular ('List of room'), whereas the English source 'Room list' is plural ('List of rooms').",
-          "suggestion": "Lista soba"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -213,13 +202,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Ukrainian translation 'Список кімнати' means 'List of the room' (singular), whereas the English 'Room list' refers to a list containing multiple rooms (plural).",
-          "suggestion": "Список кімнат"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -237,13 +220,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Albanian translation 'Lista e dhomës' is singular ('List of the room'), whereas the English 'Room list' is plural ('List of rooms').",
-          "suggestion": "Lista e dhomave"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

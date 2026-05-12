@@ -3,11 +3,12 @@
   "content": "Submitted their part. The form was sent to the next recipient.",
   "content_en_sha1_hash": "ac28d650168db48183ff89dd841048e4ac6db235",
   "created_at": "2025-10-13T15:41:56.780Z",
-  "updated_at": "2026-04-08T07:03:11.261Z",
+  "updated_at": "2026-04-11T20:51:15.292Z",
   "comment": {
-    "text": "This text describes when a portion of a form has been submitted and forwarded to the next person in the process. It appears in the role history section of the filling form process, displaying the submission date as part of a timeline. Translators should ensure the meaning is clear and accurately reflects the form submission event.",
+    "text": "This is a history log entry describing that a user has submitted their part of a form, which was then sent to the next recipient in a workflow.",
     "is_auto": true,
-    "updated_at": "2025-10-13T15:43:43.832Z"
+    "updated_at": "2026-04-11T20:51:15.292Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -111,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The first sentence 'Iesniegtu savu daļu' uses the conditional mood ('would have submitted') instead of the past tense ('submitted'). This changes the meaning from a completed action to a hypothetical one.",
-          "suggestion": "Iesnieca savu daļu. Forma tika nosūtīta nākamajam saņēmējam."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -147,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'fragmentul desemnat' is a literal and incorrect translation of 'their part'. In this context, 'part' refers to a section or portion of a form/task, not a 'fragment'. Furthermore, 'desemnat' (designated) adds a meaning not present in the English source.",
-          "suggestion": "A trimis partea sa. Formularul a fost trimis următorului destinatar."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -183,13 +172,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ka plotësuar pjesën e tij' uses a possessive pronoun ('e tij' - his) which implies the person submitted 'his part'. In the context of a form process, 'their part' refers to the specific section/portion of the form they were responsible for. The Albanian translation sounds like they filled out a part belonging to a third person.",
-          "suggestion": "Plotësoi pjesën e tyre. Formulari u dërgua te marrësi tjetër."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

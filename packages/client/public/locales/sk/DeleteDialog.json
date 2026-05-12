@@ -13,13 +13,14 @@
   "DeleteGroupDescription": "Skupina {{groupName}} bude vymazaná. Používatelia v skupine nebudú z {{productName}} odstránení. Ste si istí, že chcete pokračovať?",
   "DeleteGroupTitle": "Vymazať skupinu",
   "DeleteItem": "Čoskoro presuniete <strong>{{name}}</strong> do {{trashSection}}.",
-  "DeleteItemForever": "Mazanie <strong>{{name}}</strong> bude zahájené.",
+  "DeleteItemForeverConfirm": "Mazanie <strong>{{name}}</strong> bude zahájené.",
   "DeleteItemsSharedNote": "Upozorňujeme, že ak ste ich s niekým zdieľali, stanú sa nedostupnými.",
-  "DeleteRoom": "Miestnosť <strong>\"{{roomName}}\"</strong> bude trvale odstránená. Všetky dáta a prístupy používateľov budú stratené.",
+  "DeleteRoomConfirm": "Miestnosť <strong>\"{{roomName}}\"</strong> bude trvale odstránená. Všetky dáta a prístupy používateľov budú stratené.",
   "DeleteRooms": "Vybrané <strong>miestnosti ({{count}})</strong> budú trvalo odstránené. Všetky údaje a prístup používateľov budú stratené.",
   "DeleteRoomsTitle": "Vymazať túto miestnosť?",
   "DeleteRoomTitle": "Zmazať túto miestnosť?",
   "DeleteRoomWarning": "Rozumiem následky a chcem zmazať miestnosť.",
+  "DeleteTemplate": "Naozaj chcete vymazať šablónovú miestnosť <1>«{{templateName}}»</1>? Šablóna sa už nedá obnoviť.",
   "DeleteTemplates": "Naozaj chcete odstrániť vybrané šablóny miestností? Nebudú sa dať obnoviť.",
   "DeleteTemplateWarning": "Rozumiem dôsledky a chcem odstrániť šablónu.",
   "FileDeletedAfter": "Súbor bude natrvalo vymazaný do 30 dní.",
@@ -33,6 +34,5 @@
   "ItemsDeletedAfter": "Tieto položky budú trvale vymazané o 30 dní.",
   "ItemsPermanentlyDeleted": "Tieto položky budú trvale odstránené z {{trashSection}}.",
   "removeFromListDescription": "Odstránite <1>{{title}}</1> zo zoznamu. Ste si istý/á, že chcete pokračovať?",
-  "removeFromListDescriptionPlural": "Odstránite <1>{{count}} položiek</1>. Ste si istí, že chcete pokračovať?",
-  "DeleteTemplate": "Naozaj chcete vymazať šablónovú miestnosť <1>«{{templateName}}»</1>? Šablóna sa už nedá obnoviť."
+  "removeFromListDescriptionPlural": "Odstránite <1>{{count}} položiek</1>. Ste si istí, že chcete pokračovať?"
 }

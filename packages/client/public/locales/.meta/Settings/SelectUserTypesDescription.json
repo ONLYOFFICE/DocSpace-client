@@ -3,41 +3,42 @@
   "content": "Select {{productName}} roles for the imported users: <1>{{productName}} admin</1>, <1>Room admin</1> or <1>User</1>. By default, User role is selected for each user. You can manage the roles after the import.",
   "content_en_sha1_hash": "e90aa9f2a0e200f361dff9163df3131462ddc07f",
   "created_at": "2025-05-19T21:30:52.598Z",
-  "updated_at": "2026-04-10T08:58:38.061Z",
+  "updated_at": "2026-04-11T21:22:18.498Z",
   "comment": {
-    "text": "\"This translation key describes a message that appears in the data import process for Google Workspace, Nextcloud Workspace, and Onlyoffice Workspace. It instructs users to select roles (admin, Room admin, or User) for imported users, explaining that User role is selected by default.\"",
+    "text": "This is a descriptive text that appears during the user import process, explaining how to assign roles to imported users. It includes `{{productName}}` for the product name and `<1>` tags to bold specific role names.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:31.240Z"
+    "updated_at": "2026-04-11T21:22:18.498Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 82,
-      "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n values={{\n productName: t(\"Common:ProductName\"),\n }}\n components={{\n 1: <b />,",
+      "line_number": 83,
+      "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n values={{\n productName: getBrandName(\"ProductName\"),\n }}\n components={{\n 1: <b />,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 93,
-      "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n values={{\n productName: t(\"Common:ProductName\"),\n }}\n components={{\n 1: <b />,",
+      "line_number": 94,
+      "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n values={{\n productName: getBrandName(\"ProductName\"),\n }}\n components={{\n 1: <b />,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
-      "line_number": 87,
-      "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n values={{\n productName: t(\"Common:ProductName\"),\n }}\n components={{\n 1: <b />,",
+      "line_number": 88,
+      "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n values={{\n productName: getBrandName(\"ProductName\"),\n }}\n components={{\n 1: <b />,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/getStepDescription.js",
-      "line_number": 58,
-      "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n values={{\n productName: t(\"Common:ProductName\"),\n }}\n components={{\n 1: <b />,",
+      "line_number": 59,
+      "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n values={{\n productName: getBrandName(\"ProductName\"),\n }}\n components={{\n 1: <b />,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/getStepDescription.js",
-      "line_number": 58,
-      "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n values={{\n productName: t(\"Common:ProductName\"),\n }}\n components={{\n 1: <b />,",
+      "line_number": 59,
+      "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n values={{\n productName: getBrandName(\"ProductName\"),\n }}\n components={{\n 1: <b />,",
       "module": "/packages/client"
     }
   ],
@@ -51,25 +52,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The verb 'Select' (اختر) is missing at the beginning of the sentence, making the sentence fragment '{{productName}} for the imported users' instead of 'Select {{productName}} roles for the imported users'.",
-          "suggestion": "{{productName}} للمستخدمين المستوردين: اختر أدوار {{productName}}: <1>مشرف {{productName}}</1>، <1>مشرف الغرفة</1> أو <1>مستخدم</1>. بشكل افتراضي، يتم تحديد دور المستخدم لكل مستخدم. يمكنك إدارة الأدوار بعد الاستيراد."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation introduces a new term 'Bacarıqlı istifadəçi' (Skilled user) which does not exist in the source text. The source says 'User role is selected', but the translation says 'Skilled user role is selected'.",
-          "suggestion": "İdxal edilmiş istifadəçilər üçün {{productName}} rollarını seçin: <1>{{productName}} admini</1>, <1>Otaq admini</1> və ya <1>istifadəçi</1>. Varsayılan olaraq, hər bir istifadəçi üçün İstifadəçi rolu seçilir. Siz idxaldan sonra rolları idarə edə bilərsiniz."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -93,25 +82,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'User' was translated as 'ισχύος' (which means 'power' or 'force'), instead of 'Χρήστης'. This makes the sentence nonsensical.",
-          "suggestion": "Επιλέξτε ρόλους {{productName}} για τους εισαγόμενους χρήστες: <1>Διαχειριστής {{productName}}</1>, <1>Διαχειριστής δωματίου</1> ή <1>Χρήστης</1>. Από προεπιλογή, έχει επιλεγεί ο ρόλος Χρήστης για κάθε χρήστη. Μπορείτε να διαχειριστείτε τους ρόλους μετά την εισαγωγή."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation for 'User' is 'Avanzado' (Advanced), which changes the meaning of the role. It should be 'Usuario'.",
-          "suggestion": "Seleccione roles de {{productName}} para los usuarios importados: <1>Administrador de {{productName}}</1>, <1>Administrador de sala</1> o <1>Usuario</1>. De forma predeterminada, el rol Usuario se selecciona para cada usuario. Puede administrar los roles después de la importación."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -123,13 +100,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of the 'User' role is 'Avancé' (Advanced), which changes the meaning of the role from 'User' to 'Advanced'.",
-          "suggestion": "Sélectionnez les rôles dans {{productName}} pour les utilisateurs importés: <1>Administrateur {{productName}}</1>, <1>Administrateur de salle</1> ou <1>Utilisateur</1>. Par défaut, le rôle Utilisateur est sélectionné pour chaque utilisateur. Vous pouvez gérer les rôles après l'importation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -141,13 +112,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'User' is translated as 'Esperto' (Expert), which changes the meaning of the role. It should be 'Utente'.",
-          "suggestion": "Seleziona i ruoli {{productName}} per gli utenti importati: <1>Amministratore {{productName}}</1>, <1>Amministratore stanza</1> o <1>Utente</1>. Per impostazione predefinita, il ruolo Utente è selezionato per ciascun utente. Puoi gestire i ruoli dopo l'importazione."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -177,13 +142,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses inconsistent terminology for roles. It translates 'Room admin' as 'Kamer beheerders' (plural) and 'User' as 'Users' (plural), whereas the English source uses singular forms ('Room admin', 'User') to match the context of selecting a role for 'each user'.",
-          "suggestion": "Selecteer {{productName}}-rollen voor de geïmporteerde gebruikers: <1>{{productName}}-admin</1>, <1>Kamerbeheerder</1> of <1>Gebruiker</1>. Standaard is de rol Gebruiker geselecteerd voor elke gebruiker. U kunt de rollen na het importeren beheren."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -225,13 +184,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The default role is translated as 'Pokročilý používateľ' (Advanced user) instead of 'User' (Používateľ), which changes the meaning of the instruction.",
-          "suggestion": "Vyberte roly {{productName}} pre importovaných používateľov: <1>Administrátor {{productName}}</1>, <1>Administrátor miestnosti</1> alebo <1>Používateľ</1>. V predvolenom nastavení je pre každého používateľa vybraná rola Používateľ. Roly môžete spravovať po importe."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -261,13 +214,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation for 'Room admin' is 'Кімнати' (Rooms), which is a noun, instead of the required role 'Адміністратор кімнати' (Room admin). Also, 'User' is translated as 'Досвідчений користувач' (Experienced user), which is a complete hallucination/error; it should simply be 'Користувач'.",
-          "suggestion": "Виберіть ролі {{productName}} для імпортованих користувачів: <1>Адміністратор {{productName}}</1>, <1>Адміністратор кімнати</1> або <1>Користувач</1>. За замовчуванням для кожного користувача вибрана роль «Користувач». Ви можете керувати ролями після імпорту."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

@@ -3,23 +3,24 @@
   "content": "{{productName}} admins can access {{productName}} settings, manage and archive rooms, invite new users and assign roles below their level. All admins have access to the {{sectionName}} section.<br/> <1>In {{agentSection}}</1>: can create, configure and manage {{agentSection}}, including their knowledge base and access settings.",
   "content_en_sha1_hash": "bab4e02ce9aa9451d52b5912286876ff2522a52d",
   "created_at": "2025-12-16T07:24:33.027Z",
-  "updated_at": "2026-04-08T00:46:18.102Z",
+  "updated_at": "2026-04-13T08:35:42.804Z",
   "comment": {
-    "text": "This text describes the permissions and access granted to administrators within the {{productName}} portal. It appears within UI elements related to user roles and access options, explaining what administrators can do, including managing rooms, users, roles, and the {{agentSection}}. Translators should ensure the text accurately conveys the scope of administrator privileges.",
+    "text": "This is a description of the Portal Admin role, displayed when viewing user roles or assigning a new role. It explains the permissions of a Portal Admin, including managing rooms, inviting users, and accessing settings. `{{productName}}` is the product name (e.g., ONLYOFFICE DocSpace), `{{sectionName}}` is the name of a specific section, and `{{agentSection}}` refers to a section related to agents. The `<1>` tag bolds the text within it.",
     "is_auto": true,
-    "updated_at": "2025-12-17T07:50:32.798Z"
+    "updated_at": "2026-04-11T20:44:30.049Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 135,
-      "context": "label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: (\n <Trans\n t={t as TFunction}\n ns=\"Common\"\n i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n productName: t(\"Common:ProductName\"),",
+      "line_number": 136,
+      "context": "label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: (\n <Trans\n t={t as TFunction}\n ns=\"Common\"\n i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n productName: getBrandName(\"ProductName\"),",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getUserTypeDescription.tsx",
-      "line_number": 45,
-      "context": "if (isPortalAdmin)\n return (\n <Trans\n t={t as TFunction}\n ns=\"Common\"\n i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n productName: t(\"Common:ProductName\"),",
+      "line_number": 46,
+      "context": "if (isPortalAdmin)\n return (\n <Trans\n t={t as TFunction}\n ns=\"Common\"\n i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n productName: getBrandName(\"ProductName\"),",
       "module": "/packages/shared"
     }
   ],
@@ -39,13 +40,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'In {{agentSection}}' was translated as 'In {{agentSection}}' (keeping the English word 'In'), which is grammatically incorrect in Azerbaijani and fails to translate the preposition.",
-          "suggestion": "{{productName}} administratorları {{productName}} parametrlərinə daxil ola, otaqları idarə edib arxivləşdirə, yeni istifadəçilər dəvət edib və səviyyələrindən aşağı rollar təyin edə bilirlər. Bütün administratorlar {{sectionName}} bölməsinə daxil olurlar.<br/> <1>{{agentSection}}-də</1>: bilik bazası və giriş parametrləri də daxil olmaqla, {{agentSection}} yarada, konfiqurasiya edə və idarə edə bilirlər."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -81,13 +76,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation adds 'kohtaisia asioita' (specific things) after {{agentSection}}, which changes the meaning from 'manage {{agentSection}}' to 'manage {{agentSection}}-specific things'. This alters the scope of the permission.",
-          "suggestion": "{{productName}}-ylläpitäjät voivat käyttää {{productName}}-asetuksia, hallita ja arkistoida huoneita, kutsua uusia käyttäjiä ja määrittää rooleja alemmalle tasolle. Kaikilla ylläpitäjillä on pääsy {{sectionName}}-osioon.<br/> <1>Kohdassa {{agentSection}}</1>: voivat luoda, määrittää ja hallita {{agentSection}}, mukaan lukien niiden tietopankki ja pääsyn asetukset."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -99,13 +88,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'admins' is translated as 'վարորդները' (drivers), which is a completely incorrect translation for a software administrator role. It should be 'ադմինիստրատորները' or 'կառավարողները'.",
-          "suggestion": "{{productName}} ադմինիստրատորները կարող են մուտք գործել {{productName}} կարգավորումներին, կառավարել և արխիվացնել սենյակները, հրավիրել նոր օգտատերեր և վերագրել դերեր իրենց մակարդակից ցածր մակարդակին։ Բոլոր ադմինիստրատորները մուտք ունեն {{sectionName}} բաժնի։<br/> <1>{{agentSection}}-ում</1>: կարող են ստեղծել, կազմաձևել և կառավարել {{agentSection}}՝ ներառյալ նրանց գիտելիքների բազան և մուտքի կարգավորումները։"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -123,36 +106,27 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "The scope of the <1> tags differs between English and Korean. In English, only 'In {{agentSection}}' is wrapped in <1> tags (which applies <strong> styling), but in Korean the entire second sentence is wrapped in <1> tags. This causes significantly more text to be bolded than the English version intends.",
+          "suggestion": "<1>{{agentSection}}에서는</1>: 지식 기반 및 액세스 설정을 포함하여 {{agentSection}}을를 생성, 구성 및 관리할 수 있습니다.",
+          "checked_at": "2026-04-13T08:34:19.617Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'admins' is translated as 'ຜູ້ອໍານາດ' (which means 'authorities' or 'powerful people'), whereas in a software UI context, 'admins' should be translated as 'ຜູ້ດູແລລະບົບ' or 'ແອດມິນ' to refer to system administrators.",
-          "suggestion": "ຜູ້ດູແລລະບົບຂອງ {{productName}} ສາມາດເຂົ້າເຖິງການຕັ້ງຄ່າ {{productName}}, ຄຸ້ມຄອງ ແລະ ເກັບຮັກສາຫ້ອງ, ເຊີນຜູ້ໃຊ້ໃໝ່, ແລະ ມອບໝາຍບົດບາດທີ່ຕໍ່າກວ່າລະດັບຂອງພວກເຂົາ. ຜູ້ດູແລລະບົບທັງໝົດສາມາດເຂົ້າເຖິງພາກສ່ວນ {{sectionName}}.<br/> <1>ໃນ {{agentSection}}</1>: ສາມາດສ້າງ, ຕັ້ງຄ່າ, ແລະ ຄຸ້ມຄອງ {{agentSection}}, ລວມທັງຖານຄວາມຮູ້ ແລະ ການຕັ້ງຄ່າການເຂົ້າເຖິງຂອງພວກເຂົາ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'assign roles below their level' is translated as 'piešķirt papildus, kas ir zemāks par viņu līmeni', which is grammatically incorrect and nonsensical in Latvian (it translates to 'assign extras that are lower than their level'). It fails to mention 'roles' (lomas).",
-          "suggestion": "{{productName}} administratori var piekļūt {{productName}} iestatījumiem, vadīt un arhīvēt istabas, invitēt jaunus lietotājus un piešķirt lomas, kas ir zemāka par viņu līmeni. Visi administratori ir piekļūst {{sectionName}} sadaļai.<br/> <1>{{agentSection}} sadaļā</1>: var radīt, konfigurēt un vadīt {{agentSection}}, ieskaitot to zināšanu bāzi un piekļuves iestatījumus."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'All admins have access' is translated as 'Visu administratoru ir piekļuve', which is grammatically incorrect in Latvian (should be 'Visi administratori...');",
-          "suggestion": "Visi administratori ir piekļūst {{sectionName}} sadaļai."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -194,30 +168,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of the phrase 'In {{agentSection}}' is partially left in English ('In {{agentSection}}'), which fails to translate the preposition 'In' into Sinhala, making the sentence structure awkward and technically incorrect for a localized UI.",
-          "suggestion": "{{productName}} පරිපාලකයින්ට {{productName}} සැකසීම් වෙත ප්‍රවේශ වීමට, කාමර කළමනාකරණය කිරීමට සහ ගබඩා කිරීමට, නව පරිශීලකයන්ට ආරාධනා කිරීමට සහ ඔවුන්ගේ මට්ටමට පහළ භූමිකාවන් පවරා දීමට හැකිය. සියලුම පරිපාලකයින්ට {{sectionName}} කොටස වෙත ප්‍රවේශය ඇත.<br/> <1>{{agentSection}} තුළ</1>: දැනුම පදනම සහ ප්‍රවේශ සැකසීම් ඇතුළුව {{agentSection}} නිර්මාණය කිරීමට, වින්‍යාස කිරීමට සහ කළමනාකරණය කිරීමට හැකිය."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The grammatical structure 'Administrátorov {{productName}} môžu pristupovať' is incorrect in Slovak; it translates to 'Admins of {{productName}} can access' but uses the accusative case for the subject, making it ungrammatical. It should be 'Administrátori {{productName}}'.",
-          "suggestion": "Administrátori {{productName}} môžu pristupovať k nastaveniam {{productName}}, spravovať a archivovať miestnosti, pozývať nových používateľov a prideliť úlohy nižšej úrovne. Všetci administrátori majú prístup k sekcii {{sectionName}}.<br/> <1>Vo {{agentSection}}</1>: môžu vytvárať, konfigurovať a spravovať {{agentSection}}, vrátane ich znalostnej bázy a nastavení prístupu."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'vrátane ich základnej znalosti' is a literal and incorrect translation of 'including their knowledge base'. In Slovak, 'knowledge base' is 'znalostná báza'. 'Základná znalosť' means 'basic knowledge'.",
-          "suggestion": "Administrátori {{productName}} môžu pristupovať k nastaveniam {{productName}}, spravovať a archivovať miestnosti, pozývať nových používateľov a prideliť úlohy nižšej úrovne. Všetci administrátori majú prístup k sekcii {{sectionName}}.<br/> <1>Vo {{agentSection}}</1>: môžu vytvárať, konfigurovať a spravovať {{agentSection}}, vrátane ich znalostnej bázy a nastavení prístupu."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -247,13 +204,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'In {{agentSection}}' was not translated, leaving English text inside the tag.",
-          "suggestion": "{{productName}} yöneticileri, {{productName}} ayarlarına erişebilir, odaları yönetebilir ve arşivleyebilir, yeni kullanıcılar davet edebilir ve seviyelerinin altındaki rolleri atayabilir. Tüm yöneticiler {{sectionName}} bölümüne erişebilir.<br/> <1>{{agentSection}} içinde</1>: bilgi tabanları ve erişim ayarları dahil olmak üzere {{agentSection}} oluşturabilir, yapılandırabilir ve yönetebilir."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

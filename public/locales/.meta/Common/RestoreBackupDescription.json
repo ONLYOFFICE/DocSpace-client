@@ -3,16 +3,17 @@
   "content": "Use this option to restore your space from the previously saved backup file.",
   "content_en_sha1_hash": "11a400f57bd31afaba762b7268abcb9729fcb0cf",
   "created_at": "2025-05-26T07:15:46.907Z",
-  "updated_at": "2026-04-08T01:15:27.816Z",
+  "updated_at": "2026-04-13T09:20:08.284Z",
   "comment": {
-    "text": "Use this option to restore your space from a previously saved backup file. This message is used on a restore page in the UI, informing users of how to access and recover their data from a saved backup.",
+    "text": "This is a descriptive text that appears below the \"Restore backup\" heading, explaining the purpose of restoring a space from a backup file.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:04:01.723Z"
+    "updated_at": "2026-04-11T20:44:54.082Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/index.tsx",
-      "line_number": 414,
+      "line_number": 415,
       "context": "styles.restoreDescription,\n styles.settingsUnavailable,\n \"restore-description\",\n )}\n >\n {t(\"Common:RestoreBackupDescription\")}\n </Text>\n </div>\n {radioButtonContent}\n {backupModules}",
       "module": "/packages/shared"
     }
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'space' (referring to the ONLYOFFICE DocSpace instance) was translated as 'إستضافتك' (your hosting), which is technically incorrect in this context. It should be 'مساحتك' to match the product terminology.",
-          "suggestion": "استخدم هذا الخيار لاستعادة مساحتك من ملف النسخ الاحتياطي المحفوظ مسبقًا."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -45,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'портала' (the portal) instead of 'пространството' (the space). In the context of ONLYOFFICE DocSpace, 'space' is a specific technical entity, and translating it as 'portal' changes the meaning of what is being restored.",
-          "suggestion": "Използвайте тази опция, за да възстановите вашето пространство от предварително записания архивен файл."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -63,13 +52,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical gender error: 'Bereich' is masculine (der Bereich), but the translation uses 'Ihr' (feminine/formal accusative for 'die'), which should be 'Ihren' in this context.",
-          "suggestion": "Nutzen Sie diese Option, um Ihren Bereich aus der vorher gespeicherten Sicherungsdatei wiederherzustellen."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -81,7 +64,15 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Spanish translation incorrectly starts with English word 'Use' instead of the Spanish imperative verb form",
+          "suggestion": "Utilice esta opción para restaurar su espacio de la copia de seguridad guardada anteriormente.",
+          "checked_at": "2026-04-13T09:18:25.481Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -99,13 +90,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'space' (referring to a DocSpace/workspace) is translated as 'կայքէջ' (website), which is incorrect in this technical context.",
-          "suggestion": "Օգտագործեք այս տարբերակը՝ Ձեր տարածքը նախկինում պահված պահուստային ֆայլից վերականգնելու համար:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -117,13 +102,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese word '復するために' is grammatically incorrect and incomplete. It appears to be a truncated version of '復元するために' (to restore). As written, it is nonsensical.",
-          "suggestion": "バックアップ・ファイルからスペースを復元するためにこの操作を使用してください。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -135,25 +114,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'space' (referring to a digital workspace/environment) is translated as 'ປະຕູ' (door), which is incorrect in this technical context.",
-          "suggestion": "ໃຊ້ຕົວເລືອກນີ້ເພື່ອຟື້ນຟູສະເປສ໌ຂອງທ່ານຈາກໄຟລ໌ສຳຮອງທີ່ບັນທຶກໄວ້ກ່ອນໜ້ານີ້."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'space' (referring to the ONLYOFFICE DocSpace 'space') has been translated as 'portālu' (portal), which is a different concept in the context of the product.",
-          "suggestion": "Izmantojiet šo iespēju, lai atjaunotu savu telpu no iepriekš noglabāta rezerves faila."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -165,7 +132,15 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text says 'restore your space' but the Polish translation uses 'portalu' (portal) instead of the word for 'space'. These are different concepts in DocSpace. Additionally, the possessive 'your' (twojego) is missing from the Polish—it says 'the portal' not 'your space'.",
+          "suggestion": "Użyj tej opcji do przywrócenia twojej przestrzeni z wcześniej zapisanego pliku kopii zapasowej.",
+          "checked_at": "2026-04-13T09:19:17.649Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -183,25 +158,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Romanian translation omits the specific detail that the backup is a 'previously saved' file, instead using 'existing' (existentă), which slightly alters the technical instruction.",
-          "suggestion": "Utilizați această opțiune pentru a restaura spațiul dvs. dintr-un fișier de rezervă salvat anterior."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'space' (referring to the ONLYOFFICE DocSpace instance) is translated as 'портал' (portal), which is a different product concept and inconsistent with the product terminology.",
-          "suggestion": "Используйте эту опцию, чтобы восстановить ваше пространство из ранее сохраненного резервного файла."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -237,25 +200,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Turkish translation describes 'exporting/downloading data as a file' (taking data as a file), whereas the English text describes 'restoring data from a backup file'. This is a functional reversal of the action.",
-          "suggestion": "Alanınızı daha önce kaydedilmiş bir yedek dosyasından geri yüklemek için bu seçeneği kullanın."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation changes 'space' (простір/простір DocSpace) to 'portal' (портал), which is a different technical entity in the ONLYOFFICE ecosystem.",
-          "suggestion": "Використовуйте цю опцію, щоб відновити ваш простір із раніше збереженого файлу резервної копії."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -267,7 +218,15 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English specifies 'your space' as the object being restored, but the Chinese translates this as '门户数据' (portal data), which is a different concept. The translation loses the possessive 'your' and changes the specific meaning of 'space' to the more general 'portal data'.",
+          "suggestion": "设置此选项，从之前保存的备份文件中恢复你的空间。",
+          "checked_at": "2026-04-13T09:20:08.283Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {

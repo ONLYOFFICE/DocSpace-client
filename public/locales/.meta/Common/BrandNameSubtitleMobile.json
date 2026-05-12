@@ -3,16 +3,17 @@
   "content": "Enter your company or brand name which will be displayed in notifications, exported spreadsheets, and other resources.",
   "content_en_sha1_hash": "d3355c5c354b7d41afd6a94ee2b9e9c1634eedda",
   "created_at": "2025-05-26T07:15:41.035Z",
-  "updated_at": "2026-04-08T15:58:00.392Z",
+  "updated_at": "2026-04-11T20:58:05.524Z",
   "comment": {
-    "text": "The BrandNameSubtitleMobile translation key is used to display a brand name subtitle on mobile notifications and other UI elements. It appears in a mobile view of branding settings, where users enter their company or brand name that will be displayed in various resources.",
+    "text": "This is a subtitle for a settings category item on mobile, explaining where the entered company or brand name will be displayed.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:06:59.358Z"
+    "updated_at": "2026-04-11T20:58:05.524Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/MobileView/index.tsx",
-      "line_number": 53,
+      "line_number": 54,
       "context": "return (\n <div className={styles.mobileView}>\n <CategoryItem\n title={t(\"BrandName\")}\n subtitle={t(\"BrandNameSubtitleMobile\")}\n url={`${baseUrl}/branding/brand-name`}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}\n />",
       "module": "/packages/shared"
     }
@@ -69,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'viedyissä' is a typo or a non-existent word in Finnish; it should be 'viedyissä' (exported).",
-          "suggestion": "Syötä yrityksesi tai brändinimi, joka näytetään ilmoituksissa, viedyissä laskentataulukoissa ja muissa resursseissa."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -189,13 +184,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Vietnamese sentence structure is grammatically broken, making it sound like 'Enter your company name will be displayed...', which is nonsensical. It lacks a relative pronoun or a connecting structure to link the action of entering the name to the fact that the name will be displayed.",
-          "suggestion": "Nhập tên công ty hoặc thương hiệu của bạn; tên này sẽ được hiển thị trong thông báo, bảng tính được xuất và các tài nguyên khác."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
@@ -219,13 +208,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Hyni' means 'Enter' in the sense of 'to go inside' or 'to log in'. In the context of a text input field, 'Shkruani' (Write) or 'Vendosni' (Put/Place) should be used.",
-          "suggestion": "Shkruani emrin e kompanisë ose markës tuaj, i cili do të shfaqet në njoftimet, tabelat e skemëruar dhe burime të tjera."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

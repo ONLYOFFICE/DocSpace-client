@@ -29,6 +29,7 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/ui-kit/components/text";
 
 import styles from "./configuration.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const Header = () => {
   const { t } = useTranslation(["Management", "Common"]);
@@ -43,7 +44,7 @@ export const Header = () => {
       </Text>
       <Text fontSize="12px" lineHeight="16px" fontWeight={400}>
         {t("ConfigurationDescription", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
         })}
       </Text>
     </div>

@@ -3,13 +3,21 @@
   "content": "Add credits from your wallet to {{organizationName}} AI to start using features. AI expenses are handled through a sub-account, ensuring a spending limit and protecting your wallet balance.",
   "content_en_sha1_hash": "bf766c710200c1f0c8ac6bce1b014b6158c04275",
   "created_at": "2026-04-10T13:53:44.961Z",
-  "updated_at": "2026-04-10T13:53:44.961Z",
+  "updated_at": "2026-04-11T20:55:55.390Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a descriptive text within a modal window, explaining how to add credits from a user's wallet to an organization's AI sub-account. It clarifies the purpose of the sub-account for managing AI expenses and protecting the main wallet balance. `{{organizationName}}` will be replaced with the name of the organization.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:55:55.390Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/TopUpAiModal.tsx",
+      "line_number": 85,
+      "context": "const isDisabled = (isLoading || walletCustomerStatusNotActive) ?? false;\n \n return (\n <>\n <Text className={modalStyles.description}>\n {t(\"CreditsFromWalletDescription\", {\n organizationName: logoText,\n })}\n </Text>\n \n <Link",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

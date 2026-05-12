@@ -1,8 +1,8 @@
 {
-  "ChangesToTag": "Zmijene tega žoga vplivajo na vse sobe, kjer je uporabljen.",
-  "DeleteTag": "Čisti oznako",
-  "DeleteTagCannotBeUndone": "Ta dejanje se ni prepovedljivo.",
-  "DeleteTagConfirmation": "Črpanje tega oznake bo odstranilo iz vseh sob, kjer je uporabljen.",
+  "ChangesToTag": "Spremembe te oznake bodo vplivale na vse sobe, kjer se jo uporablja.",
+  "DeleteTag": "Izbriši oznako",
+  "DeleteTagCannotBeUndone": "To dejanja ni mogoče razveljavati.",
+  "DeleteTagConfirmation": "Brisanje te oznake bo jo odstranilo iz vseh sob, kjer je uporabljena.",
   "EditTag": "Uredi oznako",
   "RemoveTag": "<1>{{tag}}</1> oznaka je odstranjena."
 }

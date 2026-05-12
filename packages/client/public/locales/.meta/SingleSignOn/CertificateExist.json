@@ -3,23 +3,24 @@
   "content": "Certificate with same action type already exists",
   "content_en_sha1_hash": "9973f20d2024018f1ead9a6896ef807f27346f7c",
   "created_at": "2025-05-19T21:30:50.070Z",
-  "updated_at": "2026-04-08T23:35:29.302Z",
+  "updated_at": "2026-04-13T14:59:05.919Z",
   "comment": {
-    "text": "\"This translation key is used to display an error message when a certificate with the same action type already exists. It appears in forms or UI elements that allow users to create or edit certificates, such as the SSO form store.\"",
+    "text": "This is an error message displayed when a user attempts to add a certificate with an action type (e.g., signing, encryption) that is already associated with an existing certificate.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:18.520Z"
+    "updated_at": "2026-04-11T21:26:58.509Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/store/SsoFormStore.js",
-      "line_number": 807,
-      "context": "this.idpCertificates = this.idpCertificates.filter(\n (certificate) => certificate.crt !== cert,\n );\n };\n \n checkSpCertificateExist = () => {\n if (\n this.spAction === SSO_SIGNING_ENCRYPT &&\n this.spCertificates.length > 0 &&\n !this.isEdit\n )",
+      "line_number": 833,
+      "context": "action: this.spAction,\n },\n ];\n \n if (this.checkSpCertificateExist()) {\n toastr.error(t(\"CertificateExist\"));\n return;\n }\n \n this.isCertificateLoading = true;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/SsoFormStore.js",
-      "line_number": 807,
-      "context": "this.idpCertificates = this.idpCertificates.filter(\n (certificate) => certificate.crt !== cert,\n );\n };\n \n checkSpCertificateExist = () => {\n if (\n this.spAction === SSO_SIGNING_ENCRYPT &&\n this.spCertificates.length > 0 &&\n !this.isEdit\n )",
+      "line_number": 833,
+      "context": "action: this.spAction,\n },\n ];\n \n if (this.checkSpCertificateExist()) {\n toastr.error(t(\"CertificateExist\"));\n return;\n }\n \n this.isCertificateLoading = true;",
       "module": "/packages/client"
     }
   ],
@@ -147,13 +148,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "wrong_language",
-          "description": "The translation is provided in German instead of Romanian.",
-          "suggestion": "Există deja un certificat cu același tip de acțiune"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

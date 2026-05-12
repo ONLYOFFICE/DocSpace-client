@@ -3,17 +3,18 @@
   "content": "Scopes",
   "content_en_sha1_hash": "c23540e5fb551edff0ac95649a1d551f9736d55e",
   "created_at": "2025-05-19T21:30:54.029Z",
-  "updated_at": "2026-04-07T19:35:05.167Z",
+  "updated_at": "2026-04-13T14:59:05.872Z",
   "comment": {
-    "text": "This translation key is used to display the label \"Scopes\" in a list or table view within the Portal Settings UI. It appears as a column header and provides context for users to select scopes, likely related to access or permissions settings.",
+    "text": "This is a table column header and a label within a dialog, referring to the permissions or access levels granted to an OAuth application.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:35.779Z"
+    "updated_at": "2026-04-11T21:18:20.692Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/InfoDialog.tsx",
-      "line_number": 246,
-      "context": "truncate\n >\n {t(\"Access\")}\n </Text>{\" \"}\n <ScopeList\n selectedScopes={client?.scopes || []}\n scopes={scopeList || []}\n t={t}\n />\n <Text\n className=\"block-header\"",
+      "line_number": 257,
+      "context": "fontSize=\"14px\"\n lineHeight=\"16px\"\n fontWeight=\"600\"\n truncate\n >\n {t(\"Scopes\")}\n </Text>\n <div className=\"property-tag_list\">\n {client?.scopes.map((scope) => (\n <Tag\n key={scope}",
       "module": "/packages/client"
     },
     {

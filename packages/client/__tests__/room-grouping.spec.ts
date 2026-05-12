@@ -77,7 +77,7 @@ test.describe("Room grouping", () => {
       await expect(groupManagementButton).toBeVisible();
       await groupManagementButton.click();
 
-      const dialog = page.getByTestId("modal-dialog");
+      const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
 
       // Screenshot: Edit room groups panel with grouping enabled and groups listed
@@ -112,7 +112,7 @@ test.describe("Room grouping", () => {
       await expect(groupManagementButton).toBeVisible();
       await groupManagementButton.click();
 
-      const dialog = page.getByTestId("modal-dialog");
+      const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
 
       // Screenshot: Edit room groups panel with no groups (empty state)
@@ -180,7 +180,7 @@ test.describe("Room grouping", () => {
       await expect(groupManagementButton).toBeVisible();
       await groupManagementButton.click();
 
-      const dialog = page.getByTestId("modal-dialog");
+      const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
 
       // Click the grouping toggle to disable grouping
@@ -228,7 +228,7 @@ test.describe("Room grouping", () => {
       await expect(groupManagementButton).toBeVisible();
       await groupManagementButton.click();
 
-      const dialog = page.getByTestId("modal-dialog");
+      const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
 
       // Toggle off
@@ -269,7 +269,7 @@ test.describe("Room grouping", () => {
       await expect(groupManagementButton).toBeVisible();
       await groupManagementButton.click();
 
-      const dialog = page.getByTestId("modal-dialog");
+      const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
 
       // Toggle off grouping
@@ -318,7 +318,7 @@ test.describe("Room grouping", () => {
       await expect(groupManagementButton).toBeVisible();
       await groupManagementButton.click();
 
-      const dialog = page.getByTestId("modal-dialog");
+      const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
 
       // The info bar/tooltip should be visible
@@ -363,7 +363,7 @@ test.describe("Room grouping", () => {
       await expect(groupManagementButton).toBeVisible();
       await groupManagementButton.click();
 
-      const dialog = page.getByTestId("modal-dialog");
+      const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
 
       // Find and click the close button on the tooltip
@@ -632,7 +632,7 @@ test.describe("Room grouping", () => {
       await expect(groupManagementButton).toBeVisible();
       await groupManagementButton.click();
 
-      const dialog = page.getByTestId("modal-dialog");
+      const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
 
       // Click "Create a new group" button
@@ -677,7 +677,7 @@ test.describe("Room grouping", () => {
       await expect(groupManagementButton).toBeVisible();
       await groupManagementButton.click();
 
-      const dialog = page.getByTestId("modal-dialog");
+      const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
 
       // Click "Create a new group"
@@ -731,7 +731,7 @@ test.describe("Room grouping", () => {
       await expect(groupManagementButton).toBeVisible();
       await groupManagementButton.click();
 
-      const dialog = page.getByTestId("modal-dialog");
+      const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
 
       // Toggle off grouping
@@ -779,7 +779,7 @@ test.describe("Room grouping", () => {
       await expect(groupManagementButton).toBeVisible();
       await groupManagementButton.click();
 
-      const dialog = page.getByTestId("modal-dialog");
+      const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
 
       // Click the delete icon on the first group
@@ -789,7 +789,7 @@ test.describe("Room grouping", () => {
         await deleteIcon.click();
 
         // Delete confirmation dialog should appear
-        const confirmDialog = page.getByTestId("modal-dialog");
+        const confirmDialog = page.getByTestId("modal-dialog").last();
         await expect(confirmDialog).toBeVisible();
 
         // Screenshot: Delete group confirmation dialog
@@ -826,7 +826,7 @@ test.describe("Room grouping", () => {
       await expect(groupManagementButton).toBeVisible();
       await groupManagementButton.click();
 
-      const dialog = page.getByTestId("modal-dialog");
+      const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
 
       // Click the delete icon on the first group
@@ -841,7 +841,7 @@ test.describe("Room grouping", () => {
         await cancelButton.click();
 
         // The main dialog should still be visible (returned to groups panel)
-        const mainDialog = page.getByTestId("modal-dialog");
+        const mainDialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
         await expect(mainDialog).toBeVisible();
       }
     });
@@ -874,7 +874,7 @@ test.describe("Room grouping", () => {
       await expect(groupManagementButton).toBeVisible();
       await groupManagementButton.click();
 
-      const dialog = page.getByTestId("modal-dialog");
+      const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
 
       // Click on the group data area (name/icon) of the first group

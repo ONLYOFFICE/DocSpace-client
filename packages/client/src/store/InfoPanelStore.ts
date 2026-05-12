@@ -65,8 +65,6 @@ type TSelection =
   | Array<TRoom | TFolder | TFile>;
 
 class InfoPanelStore {
-  userStore = {} as UserStore;
-
   isVisible = false;
 
   isMobileHidden = false;
@@ -95,9 +93,7 @@ class InfoPanelStore {
 
   shareChanged = false;
 
-  constructor(userStore: UserStore) {
-    this.userStore = userStore;
-
+  constructor(public userStore: UserStore) {
     makeAutoObservable(this);
   }
 
@@ -414,6 +410,13 @@ class InfoPanelStore {
     return (
       this.roomsView === InfoPanelView.infoShare ||
       this.fileView === InfoPanelView.infoShare
+    );
+  }
+
+  get isDetailsTabActive(): boolean {
+    return (
+      this.roomsView === InfoPanelView.infoDetails ||
+      this.fileView === InfoPanelView.infoDetails
     );
   }
 

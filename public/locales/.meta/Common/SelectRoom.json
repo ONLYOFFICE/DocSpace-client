@@ -3,11 +3,12 @@
   "content": "Select room",
   "content_en_sha1_hash": "1cb6b5cee4e5862ec22f1890431e0589c7eacb25",
   "created_at": "2025-05-19T21:30:48.514Z",
-  "updated_at": "2026-04-07T23:35:39.725Z",
+  "updated_at": "2026-04-12T21:53:27.735Z",
   "comment": {
-    "text": "This translation key is used for the label of a button in a filter section on a home page. It displays \"Select room\" and is typically used as a title or header for a dropdown or button that allows users to select a room.",
+    "text": "This is a button label that allows users to choose a specific room for filtering content.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:51:47.570Z"
+    "updated_at": "2026-04-11T20:43:24.953Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -129,13 +130,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Gender disagreement: 'sala' is a feminine noun in Portuguese, so the article must be 'a' instead of 'o'.",
-          "suggestion": "Selecione a sala"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {

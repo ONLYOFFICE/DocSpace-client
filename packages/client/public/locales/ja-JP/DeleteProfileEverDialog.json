@@ -1,6 +1,6 @@
 {
-  "ActionCannotBeUndone": "選択された無効なユーザーは{{productName}}から削除されます。この操作は取り消すことができません。",
   "ActionCannotBeUndoneGuests": "選択された障害のあるゲストは、{{productName}}から削除されます。この操作は元に戻すことはできません。",
+  "ActionCannotBeUndoneUsers": "選択された無効なユーザーは{{productName}}から削除されます。この操作は取り消すことができません。",
   "CannotReassignFiles": "複数のユーザーを一度に削除した場合、そのユーザーのファイルを他のユーザーに再割り当てすることはできません。",
   "DeleteGroupGuestsSuccessMessage": "ゲストは正常に削除されました。",
   "DeleteGroupUsersSuccessMessage": "ユーザーが正常に削除されました。",

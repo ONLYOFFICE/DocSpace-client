@@ -3,16 +3,17 @@
   "content": "<1>Your limit:</1> {{limit}} users",
   "content_en_sha1_hash": "363fae895ff965e155cc4fad6e094894d10fd0d6",
   "created_at": "2025-09-19T15:39:07.615Z",
-  "updated_at": "2026-04-08T11:13:07.399Z",
+  "updated_at": "2026-04-11T20:54:14.074Z",
   "comment": {
-    "text": "This translation key displays the user limit within a dialog, likely a user statistics or settings dialog. It shows a label \"Your limit:\" followed by the numerical value of the limit. Translators should ensure the wording accurately conveys the concept of a user limit.",
+    "text": "This is a line of text within a dialog box displaying user statistics. It shows the current user limit, where `{{limit}}` is a number representing the maximum allowed users. The `<1>` tag bolds the \"Your limit:\" part of the text.",
     "is_auto": true,
-    "updated_at": "2025-09-19T15:42:43.025Z"
+    "updated_at": "2026-04-11T20:54:14.074Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/UserStatisticsDialog/sub-components/UserStatisticsInfo.tsx",
-      "line_number": 74,
+      "line_number": 75,
       "context": "return (\n <div>\n <div className={styles.textContainer}>\n <Text lineHeight=\"20px\">\n <Trans\n i18nKey=\"EditUserLimit\"\n t={t}\n values={{ limit: limitUsers }}\n components={{ 1: <Text fontWeight={600} as=\"span\" /> }}\n />\n </Text>",
       "module": "/packages/shared"
     }
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani word 'limiti' is in the accusative case, which makes the phrase grammatically incorrect in this context. It should be in the nominative case 'limitiniz' (your limit) or 'limit' to function as a label.",
-          "suggestion": "<1>Limitiniz:</1> {{limit}} istifadəçi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -87,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian word 'օգտատերեր' is the plural form of 'users', which sounds unnatural when following a specific number ({{limit}}). In Armenian, when a number is present, the noun should be in the singular form.",
-          "suggestion": "<1>Ձեր սահմանաչափը՝</1> {{limit}} օգտատեր"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {

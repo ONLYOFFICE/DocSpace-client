@@ -35,7 +35,6 @@ import { RoomsType, ShareAccessRights } from "@docspace/ui-kit/enums";
 
 import { createApiKey } from "@docspace/shared/api/api-keys";
 import { createRoom, setRoomSecurity } from "@docspace/shared/api/rooms";
-import { getGroups } from "@docspace/shared/api/groups";
 
 export default function CreatePortalClient() {
   const [status, setStatus] = useState("Preparing...");
@@ -67,21 +66,16 @@ export default function CreatePortalClient() {
         setStatus("Inviting everyone to the room...");
         setPercent(60);
 
-        const { items: groups } = await getGroups();
-        const everyoneGroup = groups.find((g) => g.isSystem);
-
-        if (everyoneGroup) {
-          await setRoomSecurity(formRoomId, {
-            invitations: [
-              {
-                id: everyoneGroup.id,
-                access: ShareAccessRights.FormFilling,
-              },
-            ],
-            notify: false,
-            message: "",
-          });
-        }
+        await setRoomSecurity(formRoomId, {
+          invitations: [
+            {
+              id: "c5cc67d1-c3e8-43c0-a3ad-3928ae3e5b5e", // Everyone system group
+              access: ShareAccessRights.FormFilling,
+            },
+          ],
+          notify: false,
+          message: "",
+        });
 
         setStatus("Done!");
         setPercent(100);

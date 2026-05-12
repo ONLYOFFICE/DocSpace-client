@@ -3,11 +3,12 @@
   "content": "You cannot disable the restriction on downloading and copying data because this setting is enforced at the room level for all files.",
   "content_en_sha1_hash": "5fc62c010d3055bab64d90486b438d05848dc72f",
   "created_at": "2025-08-26T11:15:00.099Z",
-  "updated_at": "2026-04-08T01:04:47.215Z",
+  "updated_at": "2026-04-13T09:10:35.689Z",
   "comment": {
-    "text": "This text explains why a user cannot disable download and copy restrictions. It appears as a tooltip in a dialog (EditLinkPanel) when download restrictions are enforced at the room level, informing the user that the setting cannot be changed. Translators should convey the reason for the restriction.",
+    "text": "This is a tooltip that appears when a user tries to disable the download and copy restriction for a file, explaining that the setting is enforced at the room level.",
     "is_auto": true,
-    "updated_at": "2025-08-26T11:18:07.011Z"
+    "updated_at": "2026-04-11T20:44:48.365Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -114,8 +115,10 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'līmeņa līmenī' is a redundant repetition (meaning 'level level') and the sentence structure 'visiem failiem līmeņa līmenī' is grammatically incorrect/nonsensical in Latvian for 'at the room level'.",
-          "suggestion": "Jūs nevarat atspējot ierobežojumu datu lejupielādei un kopēšanai, jo šis iestatījums tiek ievadīts telpas līmenī visiem failiem."
+          "description": "The verb 'tiek ievadīts' (is being entered/introduced) does not convey the same meaning as 'is enforced'. The English clearly states the setting is enforced (imposed/mandated), but the Latvian uses a verb that means 'entered' or 'introduced', losing the sense of enforcement and authority.",
+          "suggestion": "Jūs nevarat atspējot ierobežojumu datu lejupielādei un kopēšanai, jo šis iestatījums tiek noteikts telpas līmenī visiem failiem. (or: ...jo šis iestatījums ir spēkā telpas līmenī visiem failiem.)",
+          "checked_at": "2026-04-13T09:08:57.486Z",
+          "checked_by": "claude-code/haiku"
         }
       ],
       "approved_at": null
@@ -183,7 +186,22 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ново' (new) is used instead of 'ово' (this). The English says 'this setting is enforced' but the Serbian translation says 'this NEW setting is enforced', changing the meaning.",
+          "suggestion": "Change 'је ново подешавање' to 'је ово подешавање'",
+          "checked_at": "2026-04-13T09:10:27.430Z",
+          "checked_by": "claude-code/haiku"
+        },
+        {
+          "type": "wrong_language",
+          "description": "The word 'sve' at the end is in Latin script instead of Cyrillic. The text should be entirely in Serbian Cyrillic script.",
+          "suggestion": "Change 'за sve фајлове' to 'за све фајлове'",
+          "checked_at": "2026-04-13T09:10:27.430Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

@@ -3,11 +3,12 @@
   "content": "The invitation will be sent again to the selected users with the 'Pending' status.",
   "content_en_sha1_hash": "55886668778f3f617d123dd0f693ab2a77946f58",
   "created_at": "2025-05-19T21:30:53.268Z",
-  "updated_at": "2026-04-09T06:43:11.481Z",
+  "updated_at": "2026-04-11T21:21:13.999Z",
   "comment": {
-    "text": "\"This translation key is used for a modal dialog's header, displaying 'The invitation will be sent again to the selected users with the 'Pending' status'. It appears on the footer of a send invite dialog.\"",
+    "text": "This is a message in a confirmation dialog. It informs the user that invitations will be resent to users whose previous invitations are still pending.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:04.317Z"
+    "updated_at": "2026-04-11T21:21:13.999Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses the past tense ('göndərildi' - was sent) instead of the future tense ('göndəriləcək' - will be sent), which changes the meaning from a notification of an upcoming action to a notification of a completed action.",
-          "suggestion": "'Gözləmə' statusunda olan seçilmiş istifadəçilərə dəvətnamə yenidən göndəriləcək."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -147,49 +142,25 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The adjective 'selecționate' (feminine plural) is used to modify 'utilizatorilor' (masculine plural), which is a grammatical mismatch in Romanian. It should be 'selecționați'.",
-          "suggestion": "Invitația va fi trimisă din nou utilizatorilor selecționați cu statutul 'În așteptare'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Russian translation adds information not present in the English source: 'которые не заблокированы' (who are not blocked).",
-          "suggestion": "Приглашение будет отправлено еще раз выбранным пользователям со статусом 'Ожидание'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'පරිශ්‍රීලකයින්' (parishreelakayin) is a misspelling/incorrect term for 'users'. The correct term for users in Sinhala is 'පරිශීලකයින්' (parishilakayin).",
-          "suggestion": "'පොරොත්තු' තත්ත්වයේ තිබෙන තෝරාගත් පරිශීලකයින් වෙත ආරාධනය නැවත යවනු ලැබේ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Pending' is translated as 'Nevybavené', which in a software/status context usually means 'unresolved' or 'unprocessed' (like tasks or tickets). For a user status in an invitation flow, 'Čakajúci' is the standard and accurate translation for 'Pending'.",
-          "suggestion": "Pozvánka bude znova odoslaná vybraným používateľom so stavom 'Čakajúci'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {

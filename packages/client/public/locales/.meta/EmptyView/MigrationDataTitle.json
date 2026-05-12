@@ -3,17 +3,18 @@
   "content": "Import data",
   "content_en_sha1_hash": "d82c9379e1e7f3c8b31e78c834bcefe2101dcaed",
   "created_at": "2025-11-25T18:15:42.150Z",
-  "updated_at": "2025-12-23T10:30:53.544Z",
+  "updated_at": "2026-04-11T21:06:44.358Z",
   "comment": {
-    "text": "This text appears as the title for a section explaining data import. It’s used within an empty state view, likely related to data migration or onboarding. Translators should ensure the meaning accurately reflects the action of importing data.",
+    "text": "This is the title for a section or dialog related to importing data into the application. It appears when the user needs to bring external data into their ONLYOFFICE DocSpace.",
     "is_auto": true,
-    "updated_at": "2025-11-25T18:17:36.507Z"
+    "updated_at": "2026-04-11T21:06:44.358Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 446,
-      "context": "},\n ],\n };\n \n const migrationData = {\n title: t(\"EmptyView:MigrationDataTitle\"),\n description: t(\"EmptyView:MigrationDataDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n icon: <InviteUserFormIcon />,",
+      "line_number": 447,
+      "context": "},\n ],\n };\n \n const migrationData = {\n title: t(\"EmptyView:MigrationDataTitle\"),\n description: t(\"EmptyView:MigrationDataDescription\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n }),\n icon: <InviteUserFormIcon />,",
       "module": "/packages/client"
     }
   ],

@@ -3,22 +3,23 @@
   "content": "This user account is loaded from SSO. If you need to change the user name and email address, refer to the SSO server.",
   "content_en_sha1_hash": "1d49453415a6a5acd60e0631a6a68b712b362f82",
   "created_at": "2025-05-19T21:30:53.515Z",
-  "updated_at": "2026-04-09T07:25:10.595Z",
+  "updated_at": "2026-04-11T21:20:00.923Z",
   "comment": {
-    "text": "This translation key displays a message explaining that the user account is loaded from Single Sign-On (SSO) and provides instructions on how to update the username and email address. It appears in tooltips next to badges indicating SSO-loaded accounts, likely on profile or information pages. The text helps users understand their account's origin and provides context for changing their details.",
+    "text": "This is a tooltip that appears when hovering over an SSO badge, informing the user that the account is managed by an SSO server and changes to name/email must be made there.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:34.983Z"
+    "updated_at": "2026-04-11T21:20:00.923Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/ItemTitle.tsx",
-      "line_number": 179,
-      "context": "</Text>\n ) : null}\n {isSSO ? (\n <div\n data-tooltip-id=\"system-tooltip\"\n data-tooltip-content={t(\"PeopleTranslations:SSOAccountTooltip\")}\n data-tooltip-place=\"bottom\"\n >\n <Badge\n className={styles.ssoBadge}\n label={t(\"Common:SSO\")}",
+      "line_number": 180,
+      "context": "</Text>\n ) : null}\n {isSSO ? (\n <div\n data-tooltip-id=\"system-tooltip\"\n data-tooltip-content={t(\"PeopleTranslations:SSOAccountTooltip\")}\n data-tooltip-place=\"bottom\"\n >\n <Badge\n className={styles.ssoBadge}\n label={getConstName(\"SSO\")}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 443,
+      "line_number": 444,
       "context": "fontSize=\"9px\"\n fontWeight={800}\n noHover\n />\n <Tooltip anchorSelect={`div[id='sso-badge-profile'] div`}>\n {t(\"PeopleTranslations:SSOAccountTooltip\")}\n </Tooltip>\n </>\n ) : null}\n \n {profile!.isLDAP ? (",
       "module": "/packages/client"
     }
@@ -39,13 +40,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'refer to the SSO server' is translated as 'SSO serverini yoxlayın' (check the SSO server), which implies inspecting or verifying the server rather than consulting or contacting it for changes. A more accurate translation for 'refer to' in this context is 'müraciət edin'.",
-          "suggestion": "Bu istifadəçi hesabı SSO-dan yüklənib. İstifadəçi adı və e-poçt ünvanını dəyişmək lazımdırsa, SSO serverinə müraciət edin."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -111,25 +106,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation lacks necessary spacing between words and the term 'SSO', which makes it look like a single concatenated word ('계정은SSO에서', '경우SSO'). While technically readable, it is a typographical error in Korean spacing rules that affects professional UI quality.",
-          "suggestion": "이 사용자 계정은 SSO에서 로드되었습니다. 사용자명과 이메일 주소를 변경해야 하는 경우 SSO 서버를 참고하세요."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation adds 'ຄູ່ມືການໃຊ້ງານ' (user manual) which is not in the English source. The English says 'refer to the SSO server', whereas the Lao says 'refer to the SSO server user manual'.",
-          "suggestion": "ບັນຊີຜູ້ໃຊ້ສະບັບນີ້ຖືກໂຫຼດມາຈາກ SSO. ຖ້າທ່ານຕ້ອງການປ່ຽນຊື່ຜູ້ໃຊ້ ແລະ ທີ່ຢູ່ອີເມລ໌, ກະລຸນາອ້າງອີງໄປທີ່ເຄື່ອງແມ່ຂ່າຍ SSO."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -147,13 +130,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical error in the first sentence: 'Dane konto użytkownika' is incorrect. 'Dane' (data) is plural, while 'konto' (account) is singular. It should be 'To konto użytkownika' or 'Dane tego konta użytkownika'.",
-          "suggestion": "To konto użytkownika jest ładowane z SSO. Aby zmienić nazwę użytkownika i adres e-mail, należy zwrócić się do serwera SSO."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {

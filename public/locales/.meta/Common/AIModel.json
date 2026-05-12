@@ -3,13 +3,21 @@
   "content": "Model",
   "content_en_sha1_hash": "68c2cc7f0ceaa3e499ecb4db331feb4debbbcc23",
   "created_at": "2026-04-10T13:53:44.298Z",
-  "updated_at": "2026-04-10T13:53:44.298Z",
+  "updated_at": "2026-04-11T21:00:08.564Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a table header label. It identifies a column displaying the name of an AI model.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:00:08.564Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/sub-components/ModelSettingsTable/TableView/TableHeader.tsx",
+      "line_number": 26,
+      "context": "const t = useCommonTranslation();\n \n const defaultColumns = [\n {\n key: \"Model\",\n title: t(\"AIModel\"),\n enable: true,\n resizable: true,\n default: true,\n active: true,\n minWidth: 240,",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,16 +3,17 @@
   "content": "Your @{{username}} account is connected for Telegram notifications. You can disconnect from this account. In this case, you will not receive notifications.",
   "content_en_sha1_hash": "95c57b78036ac34ad47ddaf4ffde62ac2b15acc2",
   "created_at": "2025-10-13T13:22:22.961Z",
-  "updated_at": "2026-04-09T06:57:27.115Z",
+  "updated_at": "2026-04-11T21:20:32.892Z",
   "comment": {
-    "text": "This text explains to the user that their Telegram account is connected for notifications and provides the option to disconnect. It appears within a disconnect account dialog, informing the user that disconnecting will prevent them from receiving Telegram notifications. The username will be dynamically inserted into the text.",
+    "text": "This is the body text of a dialog box that appears when a user chooses to disconnect their Telegram account. It informs the user that their account is currently connected for notifications and explains the consequence of disconnecting. The `{{username}}` variable will be replaced with the user's Telegram username.",
     "is_auto": true,
-    "updated_at": "2025-10-13T14:27:47.715Z"
+    "updated_at": "2026-04-11T21:20:32.892Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DisconnectAccountDialog/index.tsx",
-      "line_number": 81,
+      "line_number": 82,
       "context": "<ModalDialog.Header>\n {t(\"Profile:TelegramAccountDisconnect\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\" fontWeight={400}>\n {t(\"Profile:TelegramAccountDisconnectDescription\", {\n username,\n })}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
       "module": "/packages/client"
     }
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ayrılığa çıxa bilərsiniz' means 'you can go on vacation/leave'. The correct term for disconnecting an account is 'bağlantını kəsə bilərsiniz' or 'ayrılmaq bilərsiniz'.",
-          "suggestion": "Sizin @{{username}} hesabınız Telegram bildirişləri üçün qoşuludur. Siz bu hesabdan bağlantını kəsə bilərsiniz. Bu halda, siz bildirişlər almayacaqsınız."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -147,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Vă puteți deconecta acest cont' is grammatically incorrect in Romanian and changes the meaning slightly; it should be 'Vă puteți deconecta de acest cont' (You can disconnect FROM this account) to match the English 'disconnect from this account'.",
-          "suggestion": "Contul dvs. @{{username}} este conectat pentru a primi notificările prin Telegram. Vă puteți deconecta de acest cont. În acest caz, nu veți primi notificări."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -183,13 +172,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The phrase 'from this account' (shkëputeni nga kjo llogari) is missing in the Albanian translation, which slightly changes the clarity of what is being disconnected.",
-          "suggestion": "Llogaria juaj @{{username}} është lidhur për njoftime në Telegram. Mund të shkëputeni nga kjo llogari. Në atë rast, nuk do të merrni më njoftime."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

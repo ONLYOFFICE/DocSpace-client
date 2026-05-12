@@ -1,18 +1,17 @@
 {
-  "AccessingProblem": "Nëse jeni përdorues ekzistues dhe keni probleme me aksesin në këtë hapësirë, ju lutemi kontaktoni administratorin.",
   "CannotCreateNewRoom": "Dhoma nuk mund të krijohet",
   "CannotCreatePaidUsers": "Përdoruesit me pagesë nuk mund të shtohen",
   "CannotRestoreRoom": "Dhoma nuk mund të restaurohet",
   "ChooseNewPlan": "Dëshironi të zgjidhni një plan të ri çmimi?",
+  "GracePeriodActive": "Periudha e lehtësimit është aktive <1>nga {{fromDate}} deri në {{byDate}}</1> (ditë të mbetura: {{delayDaysCount}}).",
+  "LicenseExpiredRestriction": "Nuk mund të shtohen përdorues të rinj dhe të krijohen dhoma të reja. Licenca ka skaduar.",
+  "LicenseGracePeriodInfo": "Gjatë kësaj kohe, administratorët nuk mund të krijojnë dhoma të reja ose të shtojnë përdokues të rinj. Pasi të përfundojë periudha e lehtësimit, {{productName}} do të jetë jo-funksional deri sa të aktivizohet një licencë e re.",
   "NewRoomWillExceedLimit": "Krijimi i kësaj dhome nuk është i mundur pasi është arritur kufiri për numrin e dhomave të përfshira në planin tuaj aktual.",
   "NewUsersWillExceedMembersLimit": "Shtimi i përdoruesve të rinj me pagesë nuk është i mundur pasi është arritur kufiri për numrin e administratorëve të përfshirë në planin tuaj aktual.",
   "NotPossibleRoomRestoring": "Rivendosja e kësaj dhome nuk është e mundur pasi është arritur kufiri për numrin e dhomave të përfshira në planin tuaj aktual.",
   "NumberOfRoomsAccordingToTariff": "Numri i dhomave sipas planit tuaj tarifor: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Numri i administratorëve sipas planit tuaj tarifor: {{currentValue}}/{{maxValue}}",
+  "PlanPaymentOverdue": "Nuk mund të shtohen përdorues të rinj, të krijohen dhoma të reja apo agjentë AI. Pagesa e planit {{planName}} ka mbyllë kohën.",
   "RoomsQuotaAlmostExhausted": "Kuota e dhomave është pothuajse e shteruar.",
-  "UsersQuotaAlmostExhausted": "Kuota e përdoruesve me pagesë është pothuajse e shteruar.",
-  "GracePeriodActive": "Periudha e lehtësimit është aktive <1>nga {{fromDate}} deri në {{byDate}}</1> (ditë të mbetura: {{delayDaysCount}}).",
-  "LicenseExpired": "Nuk mund të shtohen përdorues të rinj dhe të krijohen dhoma të reja. Licenca ka skaduar.",
-  "LicenseGracePeriodInfo": "Gjatë kësaj kohe, administratorët nuk mund të krijojnë dhoma të reja ose të shtojnë përdokues të rinj. Pasi të përfundojë periudha e lehtësimit, {{productName}} do të jetë jo-funksional deri sa të aktivizohet një licencë e re.",
-  "PlanPaymentOverdue": "Nuk mund të shtohen përdorues të rinj, të krijohen dhoma të reja apo agjentë AI. Pagesa e planit {{planName}} ka mbyllë kohën."
+  "UsersQuotaAlmostExhausted": "Kuota e përdoruesve me pagesë është pothuajse e shteruar."
 }

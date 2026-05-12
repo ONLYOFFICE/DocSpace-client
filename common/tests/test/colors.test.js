@@ -65,11 +65,10 @@ beforeAll(() => {
     ".test.",
     ".stories.",
     path.normalize("libs/ui-kit/utils/encoder/index.ts"),
-    path.normalize(
-      "libs/ui-kit/components/error-container/ErrorContainer.tsx"
-    ),
+    path.normalize("libs/ui-kit/components/error-container/ErrorContainer.tsx"),
     path.normalize("libs/ui-kit/styles/variables/_colors.scss"),
     path.normalize("packages/client/src/components/SmartBanner/main.css"),
+    path.normalize("packages/sdk/src/styles/customization-theme.scss"),
   ];
 
   const javascripts = workspaces.flatMap((wsPath) => {
@@ -79,7 +78,7 @@ beforeAll(() => {
       (filePath) =>
         filePath &&
         jsPattern.test(filePath) &&
-        !excludePatterns.some((pattern) => filePath.includes(pattern))
+        !excludePatterns.some((pattern) => filePath.includes(pattern)),
     );
   });
 
@@ -90,12 +89,12 @@ beforeAll(() => {
       (filePath) =>
         filePath &&
         scssPattern.test(filePath) &&
-        !excludePatterns.some((pattern) => filePath.includes(pattern))
+        !excludePatterns.some((pattern) => filePath.includes(pattern)),
     );
   });
 
   console.log(
-    `Found javascripts by js(x)|ts(x) filter = ${javascripts.length}.`
+    `Found javascripts by js(x)|ts(x) filter = ${javascripts.length}.`,
   );
   console.log(`Found styles by scss|sass|css filter = ${scssFiles.length}.`);
 
@@ -136,3 +135,4 @@ describe("Color Tests", () => {
     expect(issues.length, message).toBe(0);
   });
 });
+

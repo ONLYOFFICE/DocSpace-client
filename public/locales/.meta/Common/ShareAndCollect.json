@@ -3,11 +3,12 @@
   "content": "Share & collect",
   "content_en_sha1_hash": "39376ae6d9b8a7366e97fa2bb58d1d646af34823",
   "created_at": "2025-05-19T21:30:48.624Z",
-  "updated_at": "2026-04-07T23:23:31.625Z",
+  "updated_at": "2026-04-23T17:24:01.676Z",
   "comment": {
-    "text": "The translation key \"ShareAndCollect\" is used to describe a feature that allows users to share and collect files. It appears in a header component of a file explorer, typically seen on buttons or labels, prompting users to select files for sharing or collecting.",
+    "text": "This is a dialog title or button label that initiates the process of sharing a document and collecting data through a fillable form. It appears when a user wants to share a document for data collection.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:41:20.062Z"
+    "updated_at": "2026-04-11T20:43:08.524Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -18,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/components/ShareCollectSelector/ShareCollectSelector.tsx",
-      "line_number": 283,
+      "line_number": 298,
       "context": "withBreadCrumbs\n withoutBackButton={false}\n withCancelButton\n currentFolderId=\"\"\n headerProps={{\n headerLabel: t(\"Common:ShareAndCollect\"),\n onCloseClick: onClose,\n ...headerProps,\n }}\n rootFolderType={file.rootFolderType as unknown as SdkFolderType}\n createDefineRoomType={createDefineRoomType}",
       "module": "/packages/client"
     },
@@ -147,25 +148,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'colete' in Portuguese (from the verb 'coletar') is often used for collecting data or physical objects, but in the context of file management and sharing, 'reunir' or 'coletar' can sound unnatural or imply a different action. However, more critically, 'colete' is also the word for a 'vest' (clothing). In a UI context for file sharing, 'Compartilhar e coletar' is technically correct but 'coletar' is a weak choice for 'collecting files' in a collaborative sense. However, per the strict rules, the most critical issue is that 'colete' is the imperative/subjunctive form, whereas 'Compartilhe' is imperative. While it conveys the meaning, 'coletar' is the standard infinitive used in UI buttons alongside 'compartilhar'.",
-          "suggestion": "Compartilhar e coletar"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'colete' in Portuguese (Brazil) is a literal translation of 'collect' that refers to collecting objects or gathering data, but in the context of file management and sharing, 'coletar' sounds unnatural or implies a different action. A more appropriate term for gathering/collecting files or items in a UI context is 'reunir' or 'agrupar', but specifically for 'Share & collect' as a feature name, 'Compartilhar e coletar' is acceptable, though 'colete' is the imperative form which might be too aggressive or slightly off-context compared to the infinitive/noun usage often found in headers. However, the most critical issue is that 'colete' can also mean 'vest' (clothing) in Portuguese, though contextually it's understood as a verb. More importantly, 'coletar' is often used for data; for files, 'reunir' or 'agrupar' is better. But strictly looking at the 'incorrect_translation' rule, 'colete' is a valid verb form, but 'coletar' (infinitive) is standard for UI actions.",
-          "suggestion": "Compartilhar e coletar"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {

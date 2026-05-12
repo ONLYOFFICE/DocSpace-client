@@ -3,11 +3,12 @@
   "content": "Your subscription is expiring on {{date}}",
   "content_en_sha1_hash": "8188a3ae6c5b0e34b2926ddc70d79038d6e78b7f",
   "created_at": "2025-05-19T21:30:49.205Z",
-  "updated_at": "2026-04-07T22:14:48.569Z",
+  "updated_at": "2026-04-12T16:47:44.190Z",
   "comment": {
-    "text": "This translation key is used to display a notification about an expiring subscription on the client's tariff bar. The date of expiration is inserted into the translated string. It appears in the tariff bar component, typically as an orange notification indicator.",
+    "text": "This is a status message displayed in a banner, informing the user that their subscription is nearing its expiration date. The `{{date}}` variable will be replaced with the specific expiration date.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:38:04.213Z"
+    "updated_at": "2026-04-11T20:41:38.978Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

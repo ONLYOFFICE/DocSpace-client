@@ -3,35 +3,42 @@
   "content": "Room admin",
   "content_en_sha1_hash": "50dcd25d31ede11f1a215aad608488dd7f404e89",
   "created_at": "2025-05-19T21:30:48.170Z",
-  "updated_at": "2026-04-10T08:21:04.344Z",
+  "updated_at": "2026-04-23T17:24:01.929Z",
   "comment": {
-    "text": "This translation key is used as a label for a dropdown button that displays \"Room admin\" in the PortalSettings page. It is also used in a payment form to display the term \"AdministratorDescription\". The text appears in a dialog and a payment container, indicating its use in UI elements related to user management and payment processing.",
+    "text": "This is a label for a user role, indicating a room administrator. It appears in billing information, user type selection, and an invitation menu.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:34:32.187Z"
+    "updated_at": "2026-04-11T20:44:19.365Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
+      "file_path": "/libs/ui-kit/billing/main-tariff/PaymentContainer.tsx",
+      "line_number": 88,
+      "context": "{t(\"AdministratorDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <br />\n <Text isBold>{t(\"RoomAdmin\")}</Text>\n <Text>{t(\"RoomManagerDescription\")}</Text>\n </>\n }\n dataTestId=\"admin_accounts_help_button\"\n />",
+      "module": "/libs/ui-kit"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/index.tsx",
-      "line_number": 69,
-      "context": "};\n \n const typeOptions = [\n {\n key: UserTypes.RoomAdmin,\n label: t(\"Common:RoomAdmin\"),\n onClick: setTypeRoomAdmin,\n },\n {\n key: UserTypes.User,\n label: t(`Common:User`),",
+      "line_number": 70,
+      "context": "};\n \n const typeOptions = [\n {\n key: UserTypes.RoomAdmin,\n label: t(\"Common:RoomAdmin\"),\n onClick: setTypeRoomAdmin,\n },\n {\n key: UserTypes.User,\n label: t(\"Common:User\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 690,
+      "line_number": 691,
       "context": "? [\n {\n id: \"accounts-add_manager\",\n className: \"main-button_drop-down\",\n icon: PersonManagerReactSvgUrl,\n label: t(\"Common:RoomAdmin\"),\n onClick: () => this.inviteUser(EmployeeType.RoomAdmin),\n \"data-type\": EmployeeType.RoomAdmin,\n action: EmployeeType.RoomAdmin,\n key: \"manager\",\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 356,
-      "context": "case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");\n case EmployeeType.Guest:\n default:\n return t(\"Common:Guest\");",
+      "line_number": 352,
+      "context": "case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: getBrandName(\"ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");\n case EmployeeType.Guest:\n default:\n return t(\"Common:Guest\");",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 356,
-      "context": "case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");\n case EmployeeType.Guest:\n default:\n return t(\"Common:Guest\");",
+      "line_number": 352,
+      "context": "case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: getBrandName(\"ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");\n case EmployeeType.Guest:\n default:\n return t(\"Common:Guest\");",
       "module": "/packages/shared"
     },
     {
@@ -75,13 +82,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English 'Room admin' refers to a person/role (Administrator), whereas the German 'Raumverwaltung' refers to the process or entity of 'Room management'.",
-          "suggestion": "Raum-Admin"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -99,7 +100,15 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish term 'järjestelmänvalvoja' (system administrator) has different connotations than 'Room admin'. It suggests system-level administration rather than room-level administration, which could confuse users about the scope of their administrative privileges.",
+          "suggestion": "Huoneen pääkäyttäjä or Huoneen hallitsija (both meaning room-level administrator/manager)",
+          "checked_at": "2026-04-13T08:13:47.668Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -201,13 +210,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Админ собе' is grammatically incorrect and sounds unnatural in Serbian. It literally translates to 'Admin of the room' in a broken way. In Serbian, the correct term for 'Room admin' (as a role/title) should be 'Админ просторије'.",
-          "suggestion": "Админ просторије"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

@@ -3,13 +3,21 @@
   "content": "Image generation",
   "content_en_sha1_hash": "eef911848cb6f5e8847627024f9d0a9d983cdd64",
   "created_at": "2026-04-10T13:53:45.255Z",
-  "updated_at": "2026-04-10T13:53:45.255Z",
+  "updated_at": "2026-04-13T14:59:06.024Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label for a feature or service. It refers to the creation of images using AI.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:51:10.031Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/GetStartedBody.tsx",
+      "line_number": 96,
+      "context": "description: t(\"TextGenerationDescription\"),\n icon: <GenerationIcon />,\n },\n {\n id: \"image-generation\",\n title: t(\"ImageGeneration\"),\n description: t(\"ImageGenerationDescription\"),\n icon: <ImageGenerationIcon />,\n },\n {\n id: \"error-checking\",",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

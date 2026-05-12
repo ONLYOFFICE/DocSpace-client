@@ -3,11 +3,12 @@
   "content": "Blank Document",
   "content_en_sha1_hash": "d26df7d41149d9440f027f76cb19fd06b1dedc96",
   "created_at": "2026-02-18T14:56:25.372Z",
-  "updated_at": "2026-04-09T04:06:00.090Z",
+  "updated_at": "2026-04-11T21:25:30.959Z",
   "comment": {
-    "text": "This key provides the title for a blank Microsoft Word document template. It is used to label the template when creating a new document within the application. Translators should ensure the title is clear and descriptive of a new, empty Word document.",
+    "text": "This is a label for a document template. It appears in a list of available templates when creating a new document, indicating an empty document.",
     "is_auto": true,
-    "updated_at": "2026-03-20T10:29:09.808Z"
+    "updated_at": "2026-04-11T21:25:30.959Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -111,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Blāsts' is a phonetic transliteration of the English word 'Blasts' or a misspelling, which does not mean 'Blank' in Latvian. The correct term for an empty/blank document is 'Balsks' or 'Tukšs'.",
-          "suggestion": "Tukšs dokuments"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -147,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'Document Anonim' means 'Anonymous Document', which implies identity concealment. The English 'Blank Document' refers to an empty document template.",
-          "suggestion": "Document gol"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -177,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The adjective 'Prazno' is in the neuter gender, but 'dokument' is a masculine noun in Slovenian. The adjective must agree with the noun's gender.",
-          "suggestion": "Prazen dokument"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

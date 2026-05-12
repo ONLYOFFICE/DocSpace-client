@@ -3,13 +3,21 @@
   "content": "Quickly generate summaries of documents to save time and focus on key points.",
   "content_en_sha1_hash": "12b226b4bb1c9cb46100abf0bf1251bd8eae3a51",
   "created_at": "2026-04-10T13:53:45.730Z",
-  "updated_at": "2026-04-10T13:53:45.730Z",
+  "updated_at": "2026-04-12T16:25:29.129Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a description for a feature that quickly generates document summaries, helping users save time and focus on key information.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:41:30.017Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/GetStartedBody.tsx",
+      "line_number": 73,
+      "context": "icon: <ChatIcon />,\n },\n {\n id: \"summarization\",\n title: t(\"Summarization\"),\n description: t(\"SummarizationDescription\"),\n icon: <SummarizationIcon />,\n },\n {\n id: \"text-translation\",\n title: t(\"TextTranslation\"),",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

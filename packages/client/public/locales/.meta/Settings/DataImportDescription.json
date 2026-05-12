@@ -3,17 +3,18 @@
   "content": "Import data from a third party service to {{organizationName}} {{productName}}. Data import allows transferring data such as all users, their personal and shared documents.",
   "content_en_sha1_hash": "d3eff090b70a55f1d87037e6d061a57396691184",
   "created_at": "2025-05-19T21:30:51.065Z",
-  "updated_at": "2026-04-10T08:58:38.063Z",
+  "updated_at": "2026-04-11T21:25:00.676Z",
   "comment": {
-    "text": "The translation key \"DataImportDescription\" is used to describe the data import feature for transferring data from a third party service to an organization's product. It appears in UI elements related to data import settings, such as portals and workspaces. The translation should provide a clear and concise explanation of this functionality.",
+    "text": "This is a descriptive text explaining the Data Import feature. It appears on the Data Import settings page and informs the user about transferring data from a third-party service. `{{organizationName}}` is the name of the user's organization, and `{{productName}}` is the name of the ONLYOFFICE product.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:26.266Z"
+    "updated_at": "2026-04-11T21:25:00.676Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/Providers.tsx",
-      "line_number": 87,
-      "context": "if (showPortalSettingsLoader || !ready) return <DataImportLoader />;\n \n return (\n <WorkspacesContainer>\n <Text className=\"data-import-description\">\n {t(\"DataImportDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n })}\n \n {dataImportUrl ? (",
+      "line_number": 88,
+      "context": "if (showPortalSettingsLoader || !ready) return <DataImportLoader />;\n \n return (\n <WorkspacesContainer>\n <Text className=\"data-import-description\">\n {t(\"DataImportDescription\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n })}\n \n {dataImportUrl ? (",
       "module": "/packages/client"
     }
   ],
@@ -69,25 +70,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation changes the meaning of the first sentence. The English says 'Import data FROM a third party service TO [product]', but the Finnish says 'Import [product]'s data from a third party service', which implies the product's own data is being moved, rather than external data being brought into the product.",
-          "suggestion": "Tuo tietoja kolmannen osapuolen palvelusta {{organizationName}} {{productName}} -ympäristöön. Tietojen tuonti mahdollistaa tietojen siirron esim. käyttäjien, heidän henkilökohtaisten ja jaettujen asiakirjojensa välillä."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical gender error: 'service' is masculine in French, so it should be 'un service tierce' (incorrect) or 'un service tiers' (correct). The current 'une service tierce' is grammatically incorrect and sounds unnatural.",
-          "suggestion": "Importer des données depuis un service tiers vers {{organizationName}} {{productName}}. L'importation des données permet de transférer des données telles que tous les utilisateurs, leurs documents personnels et partagés."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -105,37 +94,19 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'their personal and shared documents' is translated as 'その個人、共有ドキュメント' (their individual, shared documents), which incorrectly implies the users themselves are being transferred or that 'personal' is an adjective for the users rather than their documents. It should be 'ユーザーの個人用および共有ドキュメント' to clarify that the documents belong to the users.",
-          "suggestion": "サードパーティサービスから{{organizationName}} {{productName}}にデータをインポートします。データのインポートでは、すべてのユーザー、およびユーザーの個人用および共有ドキュメントなどのデータを転送できます。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase '가져오기하세요' is grammatically incorrect and unnatural in Korean. '가져오기' is a noun, and adding '하세요' directly to it is a misuse of honorifics. It should be '가져오십시오' or '가져오세요', or more naturally in a UI description, '가져옵니다'.",
-          "suggestion": "제3자 서비스의 데이터를 {{organizationName}} {{productName}}로 가져옵니다. 데이터 가져오기를 통해 모든 사용자와 그들의 개인 및 공유 문서와 같은 데이터를 전송할 수 있습니다."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ສ່ວນບຸກຄົນ' (meaning 'part personal' or 'personal part') is used incorrectly to translate 'their personal [documents]'. It fails to convey that the documents belong to the users.",
-          "suggestion": "ນຳເຂົ້າຂໍ້ມູນຈາກບໍລິການພາກສ່ວນທີສາມໄປຫາ {{organizationName}} {{productName}}. ການນໍາເຂົ້າຂໍ້ມູນອະນຸຍາດໃຫ້ໂອນຂໍ້ມູນເຊັ່ນ: ຜູ້ໃຊ້ທັງໝົດ, ເອກະສານສ່ວນຕົວ ແລະ ເອກະສານທີ່ແບ່ງປັນຂອງພວກເຂົາ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -171,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'permite de a transfera' is grammatically incorrect in Romanian (it should be 'permite transferarea' or 'permite să transferați'). More importantly, 'toți utilizatori' is missing the definite article 'i', which changes the natural flow and precision of the sentence.",
-          "suggestion": "Importul datelor dintr-un serviciu terță parte în {{organizationName}} {{productName}}. Importul datelor permite transferarea datelor, cum ar fi toți utilizatorii, documentele lor personale și partajate."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

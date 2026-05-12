@@ -3,17 +3,18 @@
   "content": "Remove the unnecessary files or contact the {{productName}} administrator to upgrade the tariff plan.",
   "content_en_sha1_hash": "9fd6bb65f7678c7fb00eb2a9266bacc48fe55e5b",
   "created_at": "2025-05-19T21:30:54.119Z",
-  "updated_at": "2026-04-07T19:35:05.153Z",
+  "updated_at": "2026-04-13T14:59:05.741Z",
   "comment": {
-    "text": "This translation key is used to display a message prompting users to remove unnecessary files or contact an administrator to upgrade their tariff plan. It appears in a quota management interface and informs users of available options to modify their plans.",
+    "text": "This is an error message displayed to users when their storage quota is exceeded. It suggests either deleting files or contacting an administrator to upgrade the tariff plan. `{{productName}}` will be replaced with the product's brand name.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:24.113Z"
+    "updated_at": "2026-04-11T21:17:42.767Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 57,
-      "context": "onClose && onClose(type);\n };\n \n const getTenantCustomQuota = () => {\n if (!isAdmin)\n return t(\"RemoveFilesOrContactToUpgradeQuota\", {\n productName: t(\"Common:ProductName\"),\n });\n \n return (\n <Trans",
+      "line_number": 133,
+      "context": ");\n };\n \n const getStorageTariffDescription = () => {\n if (!isAdmin)\n return t(\"RemoveFilesOrContactToUpgrade\", {\n productName: getBrandName(\"ProductName\"),\n });\n \n return (\n <Trans",
       "module": "/packages/client"
     }
   ],

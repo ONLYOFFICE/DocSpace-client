@@ -204,7 +204,7 @@ test.describe("Knowledge base", () => {
 
     await resetButton.click();
 
-    const resetDialog = page.getByRole("dialog");
+    const resetDialog = page.getByRole("dialog").filter({ hasText: "Reset settings" });
     await expect(resetDialog).toBeVisible();
 
     const reqPromise = page.waitForRequest(

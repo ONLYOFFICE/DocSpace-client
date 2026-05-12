@@ -29,6 +29,7 @@ import type { TAIRoomChatSettings } from "@docspace/ui-kit/types/ai";
 
 import type { TFile, TFolder, TShareSettings } from "../files/types";
 import type {
+  DistributedTaskStatus,
   ExportRoomIndexTaskStatus,
   FolderType,
   LinkSharingEntityType,
@@ -402,4 +403,13 @@ export type TFeedAction<T = TFeedData> = {
 export type TFeed = {
   total: number;
   items: TFeedAction[];
+};
+
+export type ExternalSyncDB = {
+  id: string;
+  forms: { id: number; title: string; success: boolean; error?: string }[];
+  error?: string;
+  isCompleted: boolean;
+  percentage: number;
+  status: DistributedTaskStatus;
 };

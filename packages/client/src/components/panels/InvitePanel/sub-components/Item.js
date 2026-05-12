@@ -38,6 +38,7 @@ import classNames from "classnames";
 
 import { Avatar } from "@docspace/ui-kit/components/avatar";
 import { Text } from "@docspace/ui-kit/components/text";
+import { Encoder } from "@docspace/ui-kit/utils/encoder";
 import { parseAddresses } from "@docspace/shared/utils";
 import {
 	getUserType,
@@ -324,7 +325,7 @@ const Item = ({
 					})}
 				>
 					<Text {...textProps} truncate>
-						{inputValue}
+						{Encoder.htmlDecode(inputValue ?? "")}
 					</Text>
 					{status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}
 				</div>

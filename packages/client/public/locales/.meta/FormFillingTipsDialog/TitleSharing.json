@@ -3,17 +3,18 @@
   "content": "Invite other {{productName}} members to the room to fill out the uploaded PDF forms. Copy a public access link to share the room with external users.",
   "content_en_sha1_hash": "ad1e0c87a150973b6306b6c592210f7a01ea10ce",
   "created_at": "2025-05-19T21:30:55.146Z",
-  "updated_at": "2026-04-07T19:35:05.102Z",
+  "updated_at": "2026-04-11T21:11:05.885Z",
   "comment": {
-    "text": "This translation key is used to describe a tip on how to share a room for filling out PDF forms in a user interface. It explains that users should invite other members of {{productName}} to join and copy a public access link to share the room with external users. This appears to be part of a dialog or guidance component, likely related to sharing or inviting others to complete a form.",
+    "text": "This is a description within a \"Form Filling Tips\" dialog. It explains how to share a room for PDF form filling, differentiating between internal {{productName}} members and external users.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:40:20.251Z"
+    "updated_at": "2026-04-11T21:11:05.885Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/components/guidance/configs/form-filling.ts",
-      "line_number": 30,
-      "context": "],\n },\n {\n id: 2,\n header: t(\"FormFillingTipsDialog:HeaderSharing\"),\n description: t(\"FormFillingTipsDialog:TitleSharing\", {\n productName: t(\"Common:ProductName\"),\n }),\n key: \"form-filling-sharing\",\n placement: \"bottom\",\n position: [",
+      "line_number": 31,
+      "context": "],\n },\n {\n id: 2,\n header: t(\"FormFillingTipsDialog:HeaderSharing\"),\n description: t(\"FormFillingTipsDialog:TitleSharing\", {\n productName: getBrandName(\"ProductName\"),\n }),\n key: \"form-filling-sharing\",\n placement: \"bottom\",\n position: [",
       "module": "/packages/shared"
     }
   ],

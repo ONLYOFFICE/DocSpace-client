@@ -3,13 +3,20 @@
   "content": "Custom",
   "content_en_sha1_hash": "081ae3fdc403609cf6e760849ebb14117b7a50cb",
   "created_at": "2025-05-19T21:30:44.262Z",
-  "updated_at": "2026-04-10T08:21:04.341Z",
+  "updated_at": "2026-04-23T17:24:01.926Z",
   "comment": {
-    "text": "This translation key is used for \"Custom\" labels and descriptions in the Portal Settings page, particularly in the categories and developer tools sections. It appears as a title or heading, indicating custom themes or settings. Translators should provide an equivalent label that accurately reflects the UI context.",
+    "text": "This is a short label or title. It appears in a color picker to indicate a custom color option, or as a title for custom theme settings or custom developer tools options.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:49.404Z"
+    "updated_at": "2026-04-11T20:55:49.218Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/components/color-picker/ColorPicker.tsx",
+      "line_number": 80,
+      "context": "lineHeight=\"22px\"\n fontWeight={700}\n truncate\n data-testid=\"color-picker-title\"\n >\n {t(\"Custom\")}\n </Text>\n </div>\n <div className={styles.hexClose}>\n <IconButton\n className={styles.tableHeaderIconButton}",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
       "line_number": 696,
@@ -17,15 +24,21 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DeveloperToolsHeader.tsx",
+      "line_number": 70,
+      "context": "case \"room-selector\":\n return t(\"Common:RoomSelector\");\n case \"file-selector\":\n return t(\"Common:FileSelector\");\n case \"custom\":\n return t(\"Common:Custom\");\n case \"uploader\":\n return t(\"Common:Uploader\");\n default:\n return null;\n }",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 122,
-      "context": "description: t(\"FileSelectorDescription\"),\n image: theme.isBase ? FileSelectorImg : FileSelectorImgDark,\n handleOnClick: navigateToFileSelector,\n },\n {\n title: t(\"Common:Custom\"),\n description: t(\"CustomDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n image: theme.isBase ? CustomImg : CustomImgDark,\n handleOnClick: navigateToCustom,",
+      "line_number": 123,
+      "context": "description: t(\"FileSelectorDescription\"),\n image: theme.isBase ? FileSelectorImg : FileSelectorImgDark,\n handleOnClick: navigateToFileSelector,\n },\n {\n title: t(\"Common:Custom\"),\n description: t(\"CustomDescription\", {\n productName: getBrandName(\"ProductName\"),\n }),\n image: theme.isBase ? CustomImg : CustomImgDark,\n handleOnClick: navigateToCustom,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 126,
-      "context": "icon: AccessEditReactSvgUrl,\n },\n [ShareRights.CustomFilter]: {\n access: ShareAccessRights.CustomFilter,\n key: \"custom-filter\",\n label: t(\"Common:CustomFilter\"),\n icon: CustomFilterReactSvgUrl,\n },\n [ShareRights.Review]: {\n access: ShareAccessRights.Review,\n key: \"review\",",
+      "line_number": 258,
+      "context": "label: t(\"Common:Unlimited\"),\n onClick: () => setUnlimited(),\n },\n {\n key: \"custom\",\n label: t(\"Common:Custom\"),\n onClick: () => onCalendarOpen(),\n },\n ];\n };",
       "module": "/packages/shared"
     }
   ],
@@ -87,25 +100,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Personnalisées' is feminine plural, whereas the English 'Custom' is a neutral adjective/label. In a UI context for a heading or category, it should be the masculine singular 'Personnalisé' or the noun 'Personnalisation' to avoid gender agreement errors with unknown subsequent nouns.",
-          "suggestion": "Personnalisé"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Հարմարեցնել' means 'to adjust' or 'to adapt' (a verb). In the context of UI labels for themes or settings, 'Custom' should be an adjective/noun meaning 'customized' or 'user-defined'.",
-          "suggestion": "Անհատական"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -153,13 +154,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word 'Custom' is an adjective meaning 'personalized' or 'bespoke' (e.g., Custom Themes). The Portuguese translation 'Personalizar' is a verb meaning 'to customize'. In a UI heading context, the adjective 'Personalizado' or the noun 'Personalização' should be used.",
-          "suggestion": "Personalizado"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -195,13 +190,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Po meri' means 'tailor-made' or 'according to my measure' in a literal/physical sense. In a UI context for settings, themes, or developer tools, 'Custom' should be translated as 'Prilagojeno' to denote user-defined or customized configurations.",
-          "suggestion": "Prilagojeno"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

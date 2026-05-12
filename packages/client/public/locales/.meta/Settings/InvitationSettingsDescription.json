@@ -3,23 +3,24 @@
   "content": "Configure the invitation options for internal members and external guests of your {{productName}}. These settings can help you comply with your company's security guidelines, for example, if you use LDAP or other user management systems.",
   "content_en_sha1_hash": "679bd3552b0cd51701c408c4776d782a843309fd",
   "created_at": "2025-05-26T07:15:51.088Z",
-  "updated_at": "2026-04-09T02:48:44.449Z",
+  "updated_at": "2026-04-23T17:24:02.039Z",
   "comment": {
-    "text": "Configure invitation options for internal members and external guests to comply with security guidelines. This description is used in a portal settings section, providing context to users about the purpose of the invitation settings.",
+    "text": "This is a descriptive text explaining the purpose of the \"Invitation Settings\" section. It appears below the section title and describes how to configure invitation options for internal and external users, mentioning security compliance. The `{{productName}}` variable will be replaced with the actual product name (e.g., ONLYOFFICE DocSpace).",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:09:57.271Z"
+    "updated_at": "2026-04-11T21:23:47.137Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 256,
-      "context": "<Text fontSize=\"16px\" fontWeight=\"700\" ref={invitationSettingsRef}>\n {t(\"InvitationSettings\")}\n </Text>\n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"InvitationSettingsDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n \n {invitationSettingsUrl ? (",
+      "line_number": 260,
+      "context": "<Text fontSize=\"16px\" fontWeight=\"700\" ref={invitationSettingsRef}>\n {t(\"InvitationSettings\")}\n </Text>\n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"InvitationSettingsDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n \n {invitationSettingsUrl ? (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 252,
-      "context": "return (\n <>\n <LearnMoreWrapper>\n <Text fontSize=\"13px\" fontWeight=\"400\" className={styles.contentText}>\n {t(\"InvitationSettingsDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n \n {invitationSettingsUrl ? (",
+      "line_number": 253,
+      "context": "return (\n <>\n <LearnMoreWrapper>\n <Text fontSize=\"13px\" fontWeight=\"400\" className={styles.contentText}>\n {t(\"InvitationSettingsDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n \n {invitationSettingsUrl ? (",
       "module": "/packages/client"
     }
   ],
@@ -69,13 +70,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Inconsistency in the level of formality (tuteo vs. usted). The sentence starts with 'su' (formal) but uses 'ayudarte' (informal), which creates a grammatical clash in Spanish.",
-          "suggestion": "Configure las opciones de invitación para miembros internos e invitados externos de su {{productName}}. Estos ajustes pueden ayudarle a cumplir las directrices de seguridad de su empresa, por ejemplo, si utiliza LDAP u otros sistemas de gestión de usuarios."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -117,13 +112,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of 'security guidelines' as 'ຂໍ້ຍົກຍ້ອນດ້ານຄວາມປອດໄພ' is incorrect. 'ຂໍ້ຍົກຍ້ອນ' means 'excuses' or 'reasons for exemption', which completely changes the meaning from 'guidelines/rules' to 'excuses'. Also, 'other user management systems' was translated as 'ລະບົບຄຸ້ມຄອງຜູ້ໃຊ້ຄັ້ງອື່ນ' which means 'other times user management systems', which is nonsensical.",
-          "suggestion": "ຕັ້ງຄ່າຕົວເລືອກການເຊີນຊວນສໍາລັບສະມາຊິກພາຍໃນ ແລະ ແຂກຮັບເຊີນພາຍນອກຂອງ {{productName}} ຂອງທ່ານ. ການຕັ້ງຄ່າເຫຼົ່ານີ້ສາມາດຊ່ວຍທ່ານປະຕິບັດຕາມແນວທາງຄວາມປອດໄພຂອງບໍລິສັດຂອງທ່ານ, ຕົວຢ່າງເຊັ່ນ, ຖ້າທ່ານໃຊ້ LDAP ຫຼືລະບົບຄຸ້ມຄອງຜູ້ໃຊ້ອື່ນໆ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -153,18 +142,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Portuguese translation describes a completely different functionality (enabling/disabling invitation via Contacts vs LDAP) instead of explaining how to configure invitation options for internal/external members to comply with security guidelines.",
-          "suggestion": "Configure as opções de convite para membros internos e convidados externos do seu {{productName}}. Essas configurações podem ajudar você a cumprir as diretrizes de segurança da sua empresa, por exemplo, se você usa LDAP ou outros sistemas de gerenciamento de usuários."
-        },
-        {
-          "type": "missing_content",
-          "description": "The translation fails to mention 'internal members', 'external guests', or the purpose of 'complying with security guidelines'.",
-          "suggestion": "Configure as opções de convite para membros internos e convidados externos do seu {{productName}}. Essas configurações podem ajudar você a cumprir as diretrizes de segurança da sua empresa, por exemplo, se você usa LDAP ou outros sistemas de gerenciamento de usuários."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -182,13 +160,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'සාක්‍රමිකතා' (sakramikatha) is a misspelling/incorrect term for 'invitation' (ආරාධනා). It appears to be a corruption of 'ආරාධනා' or a misuse of a different term.",
-          "suggestion": "ඔබේ {{productName}} හි අභ්‍යන්තර සාමාජිකයන් සහ බාහිර ආගන්තුකයන් සඳහා ආරාධනා විකල්පයන් සකසන්න. ඔබේ සමාගමේ ආරක්ෂණ මාර්ගෝපදේශයන් සමඟින් ඔබට මෙම සැකසුම් උපකාරී විය හැකිය, උදාහරණයක් ලෙස, ඔබ LDAP හෝ වෙනත් පරිශීලක කළමනාකරණ ක්‍රම භාවිතා කරන්නේ නම්."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

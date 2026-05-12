@@ -3,11 +3,12 @@
   "content": "Changes to this tag will affect all rooms where it is used.",
   "content_en_sha1_hash": "3d048c8b0733811ca8f8d357e3c557bcfe8ae03c",
   "created_at": "2026-02-19T13:36:19.063Z",
-  "updated_at": "2026-04-08T21:32:21.384Z",
+  "updated_at": "2026-04-11T21:27:18.067Z",
   "comment": {
-    "text": "This text explains that modifying the tag will impact all rooms using it. It appears within a dialog box (EditTag modal) to inform the user about the consequences of their changes. Translators should ensure the meaning of widespread impact is conveyed accurately.",
+    "text": "This is a sentence displayed in a modal dialog. It informs the user that changes made to a tag will be applied universally across all rooms where that tag is utilized.",
     "is_auto": true,
-    "updated_at": "2026-03-20T10:30:30.246Z"
+    "updated_at": "2026-04-11T21:27:18.067Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -39,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Gender mismatch: 'етикет' (tag) is masculine in Bulgarian, but the translation uses 'тази етикета' (feminine), which is grammatically incorrect and sounds unnatural.",
-          "suggestion": "Промените в този етикет ще повлияят на всички стаи, където се използва."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -117,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian sentence is grammatically incorrect and nonsensical. 'Mainīties šim tagam ietekmēs' translates roughly to 'To change to this tag will affect', which is a broken structure. It fails to convey that 'Changes made to this tag' will have an effect.",
-          "suggestion": "Izdarītās izmaiņas šajā tagā ietekmēs visas istabas, kurās tas tiek izmantots."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -165,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation uses 'ස්ථානවලට' (places/locations) instead of 'කාමරවලට' (rooms). In the context of ONLYOFFICE DocSpace, 'rooms' refers to specific functional entities (Rooms), and translating it as 'places' is semantically inaccurate for a technical UI.",
-          "suggestion": "මෙම ටැගයට කරන වෙනස්කම්, එය භාවිතා කරන සියලුම කාමරවලට බලපානු ඇත."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -183,25 +166,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'žoga' means 'ball' in Slovenian. The correct term for 'tag' in this context is 'oznaka'. Additionally, 'Zmijene' is grammatically incorrect (should be 'Spremembe').",
-          "suggestion": "Spremembe te oznake bodo vplivale na vse sobe, kjer se jo uporablja."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The gender of the noun 'etiketë' (tag) is incorrect. In Albanian, 'etiketë' is a feminine noun, so the demonstrative pronoun should be 'kjo' instead of 'ky'.",
-          "suggestion": "Ndryshimet tek kjo etiketë do të ndikojnë në të gjitha ambientet ku përdoret."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

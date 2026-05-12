@@ -3,11 +3,12 @@
   "content": "Bonus",
   "content_en_sha1_hash": "4d963cfab70d8c850b1221649bcc7b4d96d558d3",
   "created_at": "2025-05-19T21:30:43.309Z",
-  "updated_at": "2026-04-08T16:09:28.495Z",
+  "updated_at": "2026-04-11T20:58:13.395Z",
   "comment": {
-    "text": "This translation key is used to display the text \"Bonus\" in various parts of the UI, such as article titles and settings pages. It appears in interactive elements like buttons and dialogues, indicating a reward or special feature within the application.",
+    "text": "This is a label for a menu item or section title, referring to a bonus or reward feature within the application.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:12.495Z"
+    "updated_at": "2026-04-11T20:58:13.395Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -18,8 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 226,
-      "context": "return t(\"Ldap:LdapSyncTitle\");\n case \"Common:RestoreBackup\":\n return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":\n return t(\"PortalDeletion\", { productName: t(\"Common:ProductName\") });\n case \"Common:Bonus\":\n return t(\"Common:Bonus\");\n case \"Common:FreeAccessToLicensedVersion\":\n return \"Common:FreeAccessToLicensedVersion\";\n case \"DataImport\":\n return t(\"DataImport\");",
+      "line_number": 227,
+      "context": "return t(\"Ldap:LdapSyncTitle\");\n case \"Common:RestoreBackup\":\n return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":\n return t(\"PortalDeletion\", { productName: getBrandName(\"ProductName\") });\n case \"Common:Bonus\":\n return t(\"Common:Bonus\");\n case \"Common:FreeAccessToLicensedVersion\":\n return \"Common:FreeAccessToLicensedVersion\";\n case \"DataImport\":\n return t(\"DataImport\");",
       "module": "/packages/client"
     },
     {

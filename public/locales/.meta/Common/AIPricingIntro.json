@@ -3,13 +3,21 @@
   "content": "AI features are pay-as-you-go. Credits are deducted from your balance based on actual usage.",
   "content_en_sha1_hash": "5d59efaccc14e9609622923328bdb9cc8c8eb2b6",
   "created_at": "2026-04-10T13:53:44.539Z",
-  "updated_at": "2026-04-10T13:53:44.539Z",
+  "updated_at": "2026-04-11T20:59:53.543Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is an introductory sentence in a modal dialog explaining how AI feature billing works. It informs users that AI features are charged based on usage, deducting credits from their balance.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:59:53.543Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/PricingBillingBody.tsx",
+      "line_number": 68,
+      "context": "withBodyScroll\n >\n <ModalDialog.Header>{t(\"AIPricingAndBilling\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.pricingBody}>\n <Text fontSize=\"12px\">{t(\"AIPricingIntro\")}</Text>\n \n <Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"AIWhatYouPayForTitle\")}\n </Text>",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

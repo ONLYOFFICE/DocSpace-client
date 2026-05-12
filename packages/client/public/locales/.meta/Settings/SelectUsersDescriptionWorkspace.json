@@ -3,23 +3,24 @@
   "content": "Check users from the list to import into {{organizationName}} {{productName}}. Users already existing in {{organizationName}} {{productName}} are highlighted with a green color and are not checked by default.",
   "content_en_sha1_hash": "b24626641e322d96b1b2e59ef0226541279b877f",
   "created_at": "2025-05-19T21:30:52.575Z",
-  "updated_at": "2026-04-09T01:21:53.489Z",
+  "updated_at": "2026-04-11T21:22:21.692Z",
   "comment": {
-    "text": "This translation key is used to display a description for selecting users to import into {{organizationName}} {{productName}}, indicating which users have already been imported and are highlighted in green. It appears on a UI component related to file or data import.",
+    "text": "This is a description displayed during the user import process. It explains how to select users from a list to import into the specified organization and product, noting that existing users are highlighted and unchecked by default. `{{organizationName}}` and `{{productName}}` are variables for the organization's and product's names.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:32.132Z"
+    "updated_at": "2026-04-11T21:22:21.692Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
-      "line_number": 65,
-      "context": "/>\n ),\n },\n {\n title: t(\"Settings:SelectUsers\"),\n description: t(\"Settings:SelectUsersDescriptionWorkspace\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: <SelectUsersStep t={t} canDisable shouldSetUsers />,\n },",
+      "line_number": 66,
+      "context": "/>\n ),\n },\n {\n title: t(\"Settings:SelectUsers\"),\n description: t(\"Settings:SelectUsersDescriptionWorkspace\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n }),\n component: <SelectUsersStep t={t} canDisable shouldSetUsers />,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/getStepDescription.js",
-      "line_number": 98,
-      "context": "case 1:\n return t(\"Settings:SelectFileDescriptionWorkspace\", {\n organizationName: logoText,\n });\n case 2:\n return t(\"Settings:SelectUsersDescriptionWorkspace\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n });\n case 3:\n return isTypeSelectEmpty ? (",
+      "line_number": 99,
+      "context": "case 1:\n return t(\"Settings:SelectFileDescriptionWorkspace\", {\n organizationName: logoText,\n });\n case 2:\n return t(\"Settings:SelectUsersDescriptionWorkspace\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n });\n case 3:\n return isTypeSelectEmpty ? (",
       "module": "/packages/client"
     }
   ],
@@ -45,13 +46,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'входирате' is a non-existent word/incorrect transliteration. The correct term for 'to import' in this context is 'импортирате'.",
-          "suggestion": "Проверете потребителите от списъка, за да импортирате в {{organizationName}} {{productName}}. Вече съществуващите потребители в {{organizationName}} {{productName}} са маркирани със зелен цвят и не са избрани по подразбиране."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -81,13 +76,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation states that existing users are highlighted with a 'wrong color' (virheellä värillä) instead of 'green color' (vihreällä värillä).",
-          "suggestion": "Valitse {{organizationName}} {{productName}}:n tuotavat käyttäjät listalta. Jo {{organizationName}} {{productName}}-ssa olemassaolevat käyttäjät on korostettu vihreällä värillä, eikä niitä ole oletuksena valittu."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -123,13 +112,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of 'are not checked by default' as 'ບໍ່ໄດ້ຖືກກວດສອບຕາມຄ່າເລີ່ມຕົ້ນ' means 'are not inspected/verified by default'. In the context of a selection list, 'checked' refers to the checkbox state (selected). The Lao translation should use a term related to 'selecting' or 'marking' to avoid confusion with 'verifying/inspecting'.",
-          "suggestion": "ກວດເບິ່ງຜູ້ໃຊ້ຈາກລາຍຊື່ເພື່ອນໍາເຂົ້າເຂົ້າໄປໃນ {{organizationName}} {{productName}}. ຜູ້ໃຊ້ທີ່ມີຢູ່ແລ້ວຢູ່ໃນ {{organizationName}} {{productName}} ຈະຖືກເນັ້ນໃສ່ດ້ວຍສີຂຽວ ແລະບໍ່ໄດ້ຖືກເລືອກໄວ້ຕາມຄ່າເລີ່ມຕົ້ນ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -153,37 +136,19 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Verifique' in Portuguese means 'Verify' or 'Check' (as in to inspect), whereas in this UI context 'Check' means 'to tick/select a checkbox'. 'Selecione' is the correct term for selecting items from a list.",
-          "suggestion": "Selecione os usuários da lista para importar para o {{organizationName}} {{productName}}. Os usuários já existentes no {{organizationName}} {{productName}} são destacados em verde e não estão selecionados por padrão."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Verifique' in Portuguese means 'Verify' or 'Check' (as in inspect), whereas in this UI context, 'Check' means 'to select/tick a checkbox'. Using 'Verifique' is misleading for a user selection action.",
-          "suggestion": "Selecione os usuários da lista para importar para o {{organizationName}} {{productName}}. Os usuários já existentes no {{organizationName}} {{productName}} são destacados em verde e não estão selecionados por padrão."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'exstenți' is a spelling error (should be 'existenți'), but more importantly, the gender agreement is incorrect. 'Utilizatorii' is masculine, but the adjective 'evidențiate' is feminine plural.",
-          "suggestion": "Bifați utilizatorii din listă pentru a le importa în {{organizationName}} {{productName}}. Utilizatorii deja existenți în {{organizationName}} {{productName}} sunt evidențiați cu verde și nu sunt bifați în mod implicit."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

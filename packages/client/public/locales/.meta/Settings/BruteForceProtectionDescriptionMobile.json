@@ -3,16 +3,17 @@
   "content": "To protect the portal against brute-force attacks, you can set up the limits of unsuccessful login attempts by the user.",
   "content_en_sha1_hash": "df581d5d7ed874eec5e55be026d206a447996258",
   "created_at": "2025-05-19T21:30:50.835Z",
-  "updated_at": "2026-04-09T04:00:31.717Z",
+  "updated_at": "2026-04-11T21:25:25.102Z",
   "comment": {
-    "text": "This translation key is used to describe the protection mechanism against brute-force attacks on mobile devices. It helps users understand how to set limits on unsuccessful login attempts made by a user.",
+    "text": "This is a subtitle for a settings category item. It describes the purpose of the \"Brute-Force Protection\" setting, explaining that it allows users to configure limits for failed login attempts to enhance portal security.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:35.237Z"
+    "updated_at": "2026-04-11T21:25:25.102Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 118,
+      "line_number": 119,
       "context": "url=\"/portal-settings/security/access-portal/ip\"\n onClickLink={onClickLink}\n />\n <CategoryItem\n title={t(\"BruteForceProtection\")}\n subtitle={t(\"BruteForceProtectionDescriptionMobile\")}\n url=\"/portal-settings/security/access-portal/brute-force-protection\"\n onClickLink={onClickLink}\n />\n <CategoryItem\n title={t(\"AdminsMessage\")}",
       "module": "/packages/client"
     }
@@ -105,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'brute-force attacks' is translated as 'ການໂຈມຕີໂດຍບັງເອີນ' which means 'accidental attacks'. This is a critical error as it changes the technical meaning from a malicious security threat to an accidental occurrence.",
-          "suggestion": "ເພື່ອປົກປ້ອງປະຕູຈາກການໂຈມຕີແບບ brute-force, ທ່ານສາມາດຕັ້ງຂໍ້ຈໍາກັດຂອງຄວາມພະຍາຍາມເຂົ້າສູ່ລະບົບທີ່ບໍ່ປະສົບຜົນສໍາເລັດໂດຍຜູ້ໃຊ້."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -159,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation contains a significant semantic error. It translates 'unsuccessful login attempts' as 'තැත් කළ හැකි වාර ගණන' (number of times one can attempt/try), which implies a limit on successful attempts or general attempts, rather than specifically limiting 'unsuccessful' (failed) login attempts. This changes the security context of the feature.",
-          "suggestion": "බෲට් ෆෝර්ස් ප්‍රහාර වලින් ද්වාරය ආරක්ෂා කිරීම සඳහා, පරිශීලකයා විසින් සිදු කරනු ලබන අසාර්ථක ලොගින් වාර ගණන සීමා කිරීමට ඔබට හැකියාව ඇත."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

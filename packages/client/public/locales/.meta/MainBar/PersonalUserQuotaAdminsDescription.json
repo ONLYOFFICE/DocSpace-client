@@ -3,16 +3,17 @@
   "content": "To upload and create new files and folders, please free up disk space, or manage quota per user in the <1>Storage management settings.</1>",
   "content_en_sha1_hash": "d3fb9b35c837c5329abc87569daecaa83b8fff21",
   "created_at": "2025-05-19T21:30:54.114Z",
-  "updated_at": "2026-04-07T19:35:05.153Z",
+  "updated_at": "2026-04-11T21:17:45.940Z",
   "comment": {
-    "text": "This translation key describes a message displayed to users when they try to upload files or create new folders and do not have enough disk space. The message directs them to manage quota per user in Storage management settings. It appears as a tooltip on the QuotasBar component.",
+    "text": "This is a message displayed in the Quotas Bar. It informs users that they have exceeded their personal storage quota and provides a link to the \"Storage management settings\" to free up space or manage user quotas.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:25.064Z"
+    "updated_at": "2026-04-11T21:17:45.940Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 164,
+      "line_number": 165,
       "context": "});\n \n return (\n <Trans\n t={t}\n i18nKey=\"PersonalUserQuotaAdminsDescription\"\n components={{\n 1: (\n <Link\n fontSize=\"12px\"\n fontWeight=\"400\"",
       "module": "/packages/client"
     }

@@ -3,11 +3,12 @@
   "content": "Room grouping is disabled",
   "content_en_sha1_hash": "e2755224a1bcc0b618e6adb4dfdb36ac6d435f7b",
   "created_at": "2026-02-19T13:36:24.886Z",
-  "updated_at": "2026-03-20T09:35:32.370Z",
+  "updated_at": "2026-04-11T21:11:25.525Z",
   "comment": {
-    "text": "This key displays a success message to the user when room grouping is disabled. It appears as a notification (using `toastr`) after attempting to disable room grouping functionality. Translators should ensure the message clearly indicates that room grouping is no longer active.",
+    "text": "This is a toast message indicating that the room grouping feature has been turned off. It appears briefly after a user action to disable grouping.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:35:32.370Z"
+    "updated_at": "2026-04-11T21:11:25.525Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,17 +3,18 @@
   "content": "Create and manage all API keys for your {{organizationName}} {{productName}}.",
   "content_en_sha1_hash": "9382389dde3009cae36131b69c5c0694038fffce",
   "created_at": "2026-04-03T21:51:36.613Z",
-  "updated_at": "2026-04-09T04:13:31.088Z",
+  "updated_at": "2026-04-11T21:25:41.492Z",
   "comment": {
-    "text": "This text serves as a description for the API Keys card within the developer tools settings. It informs users that they can create and manage API keys associated with their specific organization and product.",
+    "text": "This is the description text for a card on the settings page. It explains that users can create and manage API keys for their organization's product. `{{organizationName}}` is the name of the organization, and `{{productName}}` is the name of the product (e.g., DocSpace).",
     "is_auto": true,
-    "updated_at": "2026-04-03T22:01:30.051Z"
+    "updated_at": "2026-04-11T21:25:41.492Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 120,
-      "context": "linkTitle={t(\"Settings:RegisterApp\")}\n />\n <Card\n icon={<KeySvg />}\n title={t(\"Settings:ApiKeys\")}\n description={t(\"Settings:ApiKeysCardDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}\n url=\"/developer-tools/api-keys?create=true\"\n color={globalColors.lightGrayDark}\n linkTitle={t(\"Settings:CreateKey\")}\n />\n </div>",
+      "line_number": 121,
+      "context": "linkTitle={t(\"Settings:RegisterApp\")}\n />\n <Card\n icon={<KeySvg />}\n title={t(\"Settings:ApiKeys\")}\n description={t(\"Settings:ApiKeysCardDescription\", { organizationName: getBrandName(\"OrganizationName\"), productName: getBrandName(\"ProductName\") })}\n url=\"/developer-tools/api-keys?create=true\"\n color={globalColors.lightGrayDark}\n linkTitle={t(\"Settings:CreateKey\")}\n />\n </div>",
       "module": "/packages/client"
     }
   ],
@@ -111,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'aprakstītiem' (described) was added at the end, which changes the meaning to 'all API keys described for your...', making the sentence nonsensical in this context.",
-          "suggestion": "Izveidojiet un pārvaldojiet visus API atslavas jūsu {{organizationName}} {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {

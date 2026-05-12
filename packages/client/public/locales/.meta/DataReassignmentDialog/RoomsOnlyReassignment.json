@@ -3,11 +3,12 @@
   "content": "We will transfer rooms created by contact.",
   "content_en_sha1_hash": "ecadc43845f163b0194851cbc47e4b338ba1785e",
   "created_at": "2025-05-19T21:30:56.759Z",
-  "updated_at": "2026-04-07T19:35:05.062Z",
+  "updated_at": "2026-04-11T21:05:03.720Z",
   "comment": {
-    "text": "This translation key is used to display a message describing why rooms created by contact are being reassigned. It appears in a data reassignment dialog and informs users of the reason for the transfer. Translators should focus on conveying this context in their translations.",
+    "text": "This is a line of text within a dialog box that appears when reassigning data. It informs the user that only rooms created by the contact will be transferred.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:14.436Z"
+    "updated_at": "2026-04-11T21:05:03.720Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

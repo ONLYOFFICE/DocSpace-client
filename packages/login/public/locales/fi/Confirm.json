@@ -20,6 +20,8 @@
   "GetCode": "Hanki koodi",
   "GetSuitableApp": "Hanki sopiva sovellus",
   "GetSuitableAppDescription": "Käytä yhteensopivaa sovellusta, kuten Google Authenticator <1>Android</1>-laitteille ja <4>iOS</4>-laitteille, tai Authenticator <8>Windows Phone</8>-laitteille.",
+  "InviteLinkQuotaErrorBody": "Rekisteröityminen linkin kautta ei ole enää mahdollista, koska raja on ylitetty.",
+  "InviteQuotaErrorCustomizedBody": "Sinut ohjataan <1>Kirjautuminen</1>-sivulle 10 sekunnin kuluttua.",
   "LoginRegistryButton": "Liity",
   "Newsletter": "Haluan tilata {{organizationName}}:n uutiskirjeen",
   "PassworResetTitle": "Nyt voit luoda uuden salasanan.",
@@ -37,7 +39,5 @@
   "TfaSubTitle": "Noudata yksinkertaisia ohjeita jatkaaksesi työtä tässä {{productName}}:ssa:",
   "TfaTitle": "Kaksivaiheinen tunnistautuminen käytössä turvallisen pääsyn varmistamiseksi",
   "VerifyConnection": "Tarkista yhteys",
-  "VerifyConnectionDescription": "Syötä alla olevaan kenttään authenticator-sovelluksesi luoma 6-numeroinen koodi suorittaaksesi asetuksen loppuun.",
-  "InviteLinkQuotaErrorBody": "Rekisteröityminen linkin kautta ei ole enää mahdollista, koska raja on ylitetty.",
-  "InviteQuotaErrorCustomizedBody": "Sinut ohjataan <1>Kirjautuminen</1>-sivulle 10 sekunnin kuluttua."
+  "VerifyConnectionDescription": "Syötä alla olevaan kenttään authenticator-sovelluksesi luoma 6-numeroinen koodi suorittaaksesi asetuksen loppuun."
 }

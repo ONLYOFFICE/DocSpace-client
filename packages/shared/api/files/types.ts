@@ -89,6 +89,7 @@ export type TFileSecurity = {
   Embed: boolean;
   Vectorization: boolean;
   AskAi?: boolean;
+  UpdateXlsx?: boolean;
 };
 
 export type TShareSettings = {
@@ -149,6 +150,8 @@ export type TFolderSecurity = {
   Embed: boolean;
   ChangeOwner: boolean;
   IndexExport: boolean;
+  UpdateXlsx?: boolean;
+  AnalyzeResponses?: boolean;
 };
 
 export type TFolder = {
@@ -193,6 +196,7 @@ export type TFolder = {
   sharedForUser?: boolean;
   isLinkExpired?: boolean;
   external?: boolean;
+  originalFormId?: number;
 };
 
 export type TGetFolderPath = TFolder[];

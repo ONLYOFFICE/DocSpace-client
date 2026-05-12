@@ -3,11 +3,12 @@
   "content": "This file is accessible via a shared link from its parent folder, but you can create a custom external link with specific permissions.",
   "content_en_sha1_hash": "21b1fc46186eef68a1016e49be49251201770088",
   "created_at": "2025-08-26T11:15:03.874Z",
-  "updated_at": "2026-04-08T09:47:53.000Z",
+  "updated_at": "2026-04-11T20:52:52.223Z",
   "comment": {
-    "text": "This text explains that a file or folder can be accessed through a parent folder's shared link, but users have the option to create a custom link with tailored permissions. It appears as explanatory text within a UI element, likely a dialog or panel, related to sharing files or folders. Translators should ensure the meaning of accessibility via a parent link and the possibility of custom links is preserved.",
+    "text": "This is the body text of an informational message displayed in the Share Info Bar for a file. It informs the user that the file is accessible through a shared link of its parent folder, but a custom external link can still be created for it.",
     "is_auto": true,
-    "updated_at": "2025-08-26T11:28:23.765Z"
+    "updated_at": "2026-04-11T20:52:52.223Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -69,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'pääkansioista' is in the plural partitive case ('from the parent folders'), whereas the English text uses the singular 'its parent folder'. This changes the meaning from a specific single parent to multiple potential folders.",
-          "suggestion": "Tämä tiedosto on saatavilla jaetun linkin kautta sen pääkansiosta, mutta voit luoda mukautetun ulkoisen linkin tietyillä käyttöoikeuksilla."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -99,13 +94,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English source refers to 'This file', but the Japanese translation refers to 'このフォルダー' (This folder). While the code context shows this string is used for both files and folders, the specific string provided for verification must match the English source provided.",
-          "suggestion": "このファイルは親フォルダーからの共有リンクを介してアクセスできますが、特定の権限を持つカスタム外部リンクを作成することができます。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -153,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The preposition 'către' (towards/to) in 'linkul partajat către folderul părinte' incorrectly implies the link is directed towards the parent folder, whereas the English 'from its parent folder' means the link is inherited from or originates from the parent folder.",
-          "suggestion": "Acest fișier este accesibil prin linkul partajat al folderului părinte, dar puteți crea un link extern particularizat cu permisiuni specifice."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

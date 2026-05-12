@@ -3,16 +3,17 @@
   "content": "Changes will be applied after the confirmation via email.",
   "content_en_sha1_hash": "059370ea0ddcef692f1b1ed25c98607d7d0b27d0",
   "created_at": "2025-05-19T21:30:50.287Z",
-  "updated_at": "2026-04-09T04:36:17.853Z",
+  "updated_at": "2026-04-11T21:26:08.372Z",
   "comment": {
-    "text": "This translation key is used for the confirmation text displayed when a user confirms changing the owner of access rights via email. It will appear in a modal dialog footer to inform the user about the process after confirming.",
+    "text": "This text appears as an informational message within a dialog box, confirming that a change of portal owner will be finalized after email confirmation.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:57.654Z"
+    "updated_at": "2026-04-11T21:26:08.372Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 246,
+      "line_number": 247,
       "context": "</div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <div className={styles.footerWrapper}>\n <Text className={styles.info}>\n {t(\"Settings:AccessRightsChangeOwnerConfirmText\")}\n </Text>\n <div className={styles.buttonWrapper}>\n <Button\n tabIndex={5}\n label={t(\"Common:ChangeButton\")}",
       "module": "/packages/client"
     }
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation adds 'məktubundan' (from the letter), which changes the meaning to 'after the confirmation letter via email' instead of 'after confirmation via email'. This makes the sentence redundant and slightly unnatural.",
-          "suggestion": "Dəyişikliklər e-poçt vasitəsilə təsdiqləndikdən sonra tətbiq olunacaq."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -147,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'confirmarea e-mailului' means 'confirmation of the email' (confirming the email itself), whereas the English 'confirmation via email' means the confirmation process happens through the medium of email.",
-          "suggestion": "Modificările vor fi aplicate după confirmarea prin e-mail."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -171,13 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation 'potvrdení e-mailu' means 'confirmation of the email' (confirming the email itself), whereas the English 'confirmation via email' means the confirmation process happens through/by means of email.",
-          "suggestion": "Zmeny sa vykonajú po potvrdení prostredníctvom e-mailu."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {

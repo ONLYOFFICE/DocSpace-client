@@ -33,15 +33,18 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
+import { DeviceType } from "@docspace/shared/enums";
 
 import Chat from "@docspace/ui-kit/ai-agent/chat";
 
+import useDeviceType from "@/hooks/useDeviceType";
 import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import useItemIcon from "@/app/(docspace)/_hooks/useItemIcon";
 
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
+import ArrowLeftReactSvgUrl from "PUBLIC_DIR/images/arrow.left.react.svg?url";
 import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 
 import ResizeHandle from "./ResizeHandle";
@@ -49,9 +52,15 @@ import styles from "./AiChatPanel.module.scss";
 
 type AiChatPanelProps = {
   rootRef: React.RefObject<HTMLDivElement | null>;
+  headerOffset?: number;
+  headerHeight?: number;
 };
 
-const AiChatPanel = ({ rootRef }: AiChatPanelProps) => {
+const AiChatPanel = ({
+  rootRef,
+  headerOffset = 0,
+  headerHeight = 0,
+}: AiChatPanelProps) => {
   const { t } = useTranslation(["Common"]);
   const aiAgentStore = useFormsAiAgentStore();
   const {
@@ -67,6 +76,8 @@ const AiChatPanel = ({ rootRef }: AiChatPanelProps) => {
   } = aiAgentStore;
   const { filesSettings, hasManagementAccess } = useFormsSettingsStore();
   const { editingFile } = useFormsNavigationStore();
+  const { currentDeviceType } = useDeviceType();
+  const isMobile = currentDeviceType === DeviceType.mobile;
 
   const panelRef = React.useRef<HTMLDivElement>(null);
 
@@ -154,6 +165,14 @@ const AiChatPanel = ({ rootRef }: AiChatPanelProps) => {
     setPanelPosition(panelPosition === "left" ? "right" : "left");
   }, [panelPosition, setPanelPosition]);
 
+  const chatHeaderStyle = React.useMemo<React.CSSProperties | undefined>(() => {
+    if (!headerOffset && !headerHeight) return undefined;
+    const style: React.CSSProperties = {};
+    if (headerOffset) style.paddingInlineStart = `${16 + headerOffset}px`;
+    if (headerHeight) style.height = `${headerHeight}px`;
+    return style;
+  }, [headerOffset, headerHeight]);
+
   if (!isPanelVisible || !agentRoomId || !hasManagementAccess || editingFile)
     return null;
 
@@ -170,8 +189,17 @@ const AiChatPanel = ({ rootRef }: AiChatPanelProps) => {
         rootRef={rootRef}
         onResizeEnd={handleResizeEnd}
       />
-      <div className={styles.chatHeader}>
+      <div className={styles.chatHeader} style={chatHeaderStyle}>
         <div className={styles.headerTitle}>
+          {isMobile && (
+            <IconButton
+              iconName={ArrowLeftReactSvgUrl}
+              size={16}
+              onClick={closePanel}
+              tooltipId="close-panel-tooltip"
+              tooltipContent={t("Common:CloseButton")}
+            />
+          )}
           <Text fontSize="16px" fontWeight={700}>
             {t("Common:AIAgent")}
           </Text>
@@ -185,27 +213,33 @@ const AiChatPanel = ({ rootRef }: AiChatPanelProps) => {
           )}
         </div>
         <div className={styles.headerActions}>
-          <IconButton
-            iconName={LogoutReactSvgUrl}
-            size={16}
-            className={
-              panelPosition === "right" ? styles.positionIconFlipped : undefined
-            }
-            onClick={handleTogglePosition}
-            tooltipId="move-panel-tooltip"
-            tooltipContent={
-              panelPosition === "right"
-                ? t("Common:MovePanelLeft")
-                : t("Common:MovePanelRight")
-            }
-          />
-          <IconButton
-            iconName={CrossReactSvgUrl}
-            size={17}
-            onClick={closePanel}
-            tooltipId="close-panel-tooltip"
-            tooltipContent={t("Common:CloseButton")}
-          />
+          {!isMobile && (
+            <>
+              <IconButton
+                iconName={LogoutReactSvgUrl}
+                size={16}
+                className={
+                  panelPosition === "right"
+                    ? styles.positionIconFlipped
+                    : undefined
+                }
+                onClick={handleTogglePosition}
+                tooltipId="move-panel-tooltip"
+                tooltipContent={
+                  panelPosition === "right"
+                    ? t("Common:MovePanelLeft")
+                    : t("Common:MovePanelRight")
+                }
+              />
+              <IconButton
+                iconName={CrossReactSvgUrl}
+                size={17}
+                onClick={closePanel}
+                tooltipId="close-panel-tooltip"
+                tooltipContent={t("Common:CloseButton")}
+              />
+            </>
+          )}
         </div>
       </div>
 

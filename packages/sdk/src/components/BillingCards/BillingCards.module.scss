@@ -26,10 +26,18 @@
 
 @use "@docspace/ui-kit/styles/variables/colors";
 
+@keyframes billingCardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
 .billingCards {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
+  max-width: 700px;
 }
 
 .billingCard {

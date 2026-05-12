@@ -3,18 +3,25 @@
   "content": "Automatic collection of form results into spreadsheets. Spreadsheets are created in the same folder where filled form copies are stored. A separate XLSX file is generated for each form. Each row represents a single filled form, and columns correspond to form fields.",
   "content_en_sha1_hash": "4bb02cceb171f7eb039d48f9e80a983b55c65ca8",
   "created_at": "2026-03-20T09:07:28.003Z",
-  "updated_at": "2026-04-08T15:15:24.234Z",
+  "updated_at": "2026-04-23T17:24:01.745Z",
   "comment": {
-    "text": "This text describes the feature that automatically saves form responses into individual XLSX spreadsheets. The spreadsheets are created alongside the form copies, with each row representing a single submission and columns matching form fields. This description appears within a dialog to explain an option for saving form data.",
+    "text": "This is the descriptive text for a toggle switch that enables automatic collection of form results into separate XLSX spreadsheets. It explains where the spreadsheets are created and their structure.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:24:07.307Z"
+    "updated_at": "2026-04-11T20:57:04.665Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/FormRoomBlock/FormRoomBlock.tsx",
-      "line_number": 73,
-      "context": "return (\n <div className={styles.formRoomBlock}>\n <ToggleParam\n id=\"save-form-as-xlsx\"\n title={t(\"Common:CollectResultsInXlsx\")}\n description={t(\"Common:CollectResultsInXlsxDescription\")}\n isChecked={roomParams.saveFormAsXLSX || false}\n onCheckedChange={onSaveFormAsXLSXChange}\n isDisabled={isDisabled}\n />",
+      "line_number": 75,
+      "context": "return (\n <div className={styles.formRoomBlock}>\n <ToggleParam\n id=\"save-form-as-xlsx\"\n title={t(\"Common:CollectResultsInXlsx\")}\n description={t(\"Common:CollectResultsInXlsxDescription\")}\n isChecked={roomParams.saveFormAsXLSX || false}\n onCheckedChange={onSaveFormAsXLSXChange}\n isDisabled={isDisabled}\n />\n <ToggleParam",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/ConnectDatabaseForm.tsx",
+      "line_number": 167,
+      "context": "isChecked={store.collectXlsx}\n onChange={onToggleXlsx}\n />\n </div>\n <Text fontSize=\"12px\" fontWeight={400}>\n {t(\"Common:CollectResultsInXlsxDescription\")}\n </Text>\n </div>\n \n <div className={styles.toggleBlock}>\n <div className={styles.toggleHeader}>",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -33,13 +40,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Hər sətir tək doldurulmuş formanı' translates to 'Each row [is] a single filled form', which is grammatically awkward and slightly changes the meaning of 'represents'. In Azerbaijani, 'tək' (single/alone) is used incorrectly here; it should be 'hər bir' or 'tək bir' to convey 'a single'. More importantly, the sentence structure lacks a verb or proper connection to 'represents'.",
-          "suggestion": "Forma nəticələrinin cədvəllərə avtomatik toplanması. Cədvəllər doldurulmuş forma nüsxələrinin saxlandığı eyni qovluqda yaradılır. Hər forma üçün ayrı bir XLSX faylı yaradılır. Hər sətir tək bir doldurulmuş formanı, sütunlar isə forma sahələrini təmsil edir."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -87,13 +88,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'spreadsheets' is translated as 'աշխատանքային գրադարաններում' (in work libraries), which is a semantic error. In the context of software and XLSX files, 'spreadsheets' should be translated as 'աղյուսակներ'.",
-          "suggestion": "Ձևի արդյունքների ավտոմատ հավաքում աղյուսակներում։ Աղյուսակները ստեղծվում են նույն թղթապանակում, որտեղ պահվում են լրացված ձևի պատճենները։ Յուրաքանչյուր ձևի համար ստեղծվում է առանձին XLSX ֆայլ։ Յուրաքանչյուր տողը ներկայացնում է մեկ լրացված ձև, իսկ սյուները համապատասխանում են ձևի դաշտերին։"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -123,13 +118,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'karopā' (box/crate) is used instead of 'mappē' (folder). In a digital context, 'folder' must be translated as 'mappe'.",
-          "suggestion": "Automātiska formu rezultātu savākšana tabulās. Tabulas tiek izvekotas tajā pašā mappē, kur saglabātas pildītas formas kopijas. Katrai formai tiek ģenerēts atsevišķs XLSX fails. Katra rinda apraksta vienu pildītu formu, un kolonnas atspoguļo formu laukus."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -159,13 +148,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'un formular completat singur' translates to 'a form filled by itself' or 'a single form filled alone', which changes the meaning of 'a single filled form' (meaning one submission per row).",
-          "suggestion": "Colectarea automată a rezultatelor formularului în fișiere de calcul. Fișierele de calcul sunt create în același folder unde sunt stocate copiile formularului completat. Pentru fiecare formular este generat un fișier XLSX separat. Fiecare rând reprezintă un singur formular completat, iar coloanele corespund câmpurilor formularului."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -183,37 +166,19 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical error in gender agreement: 'v tej istej priečinku' is incorrect. 'Priečinok' is masculine, so it should be 'v tom istom priečinku'.",
-          "suggestion": "Automatické zhromažďovanie výsledkov formulárov do tabuľiek. Tabuľky sú vytvorené v tom istom priečinku, kde sú uložené kópie vyplnených formulárov. Pre každý formulár sa generuje samostatný XLSX súbor. Každý riadok predstavuje jeden vyplnený formulár a stĺpce zodpovedajú políkam formulára."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'spreadsheets' is incorrectly translated as 'razporedne knjižnice' (which means 'distributed libraries') and 'XLSX vmesnik' (which means 'XLSX interface'). The correct term for spreadsheets is 'celice' or more commonly 'razporednice' or 'tabele', but in a technical context, 'celice' or 'delovne knjige' is used. 'Razporedne knjižnice' is a hallucination/incorrect term.",
-          "suggestion": "Avtomatsko zbiranje rezultatov obrazcev v delovne knjige. Delovne knjige se ustvarjajo v isti mapi, kjer so shranjene kopije zapolnjenih obrazcev. Za vsak obrazec se generira ločen XLSX dokument. Vsaka vrstica predstavlja en sam zapolnjen obrazec, in stolpci ustrezajo poljem obrazca."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'fletë të gjëndifta' is a nonsensical translation for 'spreadsheets'. In Albanian, 'spreadsheet' is typically translated as 'fletë pune' or 'tabelë'. 'Gjëndifta' is not a standard word in this context.",
-          "suggestion": "Mbledhja automatike e rezultateve të formularëve në fletë pune. Fletët e punës krijohen në të njëjtën dosje ku ruhen kopjet e plotësuara të formularëve. Krijohet një skedar XLSX i veçantë për çdo formular. Çdo rresht përfaqëson një formular të plotësuar, dhe kolonat korrespondojnë me fusha të formularit."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

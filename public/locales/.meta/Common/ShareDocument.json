@@ -3,11 +3,12 @@
   "content": "Share this document",
   "content_en_sha1_hash": "e221ad72445df0b9bdff3f83c62c294910835379",
   "created_at": "2025-05-19T21:30:48.642Z",
-  "updated_at": "2026-04-07T23:15:06.413Z",
+  "updated_at": "2026-04-12T20:58:21.850Z",
   "comment": {
-    "text": "This translation key is used to display a message encouraging users to share a document. It appears as part of a UI element containing a button or link that allows users to share a file, and its purpose is to provide context for the sharing action.",
+    "text": "This is the header text for a share information bar. It appears when a user is sharing a document, indicating the action being performed.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:41:15.941Z"
+    "updated_at": "2026-04-11T20:43:04.365Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -111,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Nosūtīt šo dokumentu' means 'Send this document', which is not the same as 'Share this document'. In a UI context, 'Share' (dalīties) and 'Send' (nosūtīt) are distinct actions.",
-          "suggestion": "Dalīties ar šo dokumentu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -171,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Deli ta dokument' translates to 'Share this document' (imperative), but 'Deli' is the informal singular form. In a professional UI context like ONLYOFFICE, the formal 'Deli' (imperative) or a noun-based approach is expected, but more importantly, 'Deli' can be confused with 'parts' or 'shares' depending on context. However, the primary error is that 'Deli' is the informal imperative; for a professional UI, 'Delite' (formal) or 'Deli dokument' is preferred. More critically, if the intent was 'Share this document' as a command, 'Deli' is grammatically acceptable but often considered too informal for enterprise software.",
-          "suggestion": "Delite ta dokument"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

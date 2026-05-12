@@ -58,6 +58,12 @@
   }
 }
 
+.popupTop {
+  &:global(.dropdown-container) {
+    margin-top: -16px;
+  }
+}
+
 .sectionHeader {
   display: flex;
   align-items: center;

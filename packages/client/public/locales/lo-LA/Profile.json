@@ -1,11 +1,11 @@
 {
   "ActiveSessions": "ເຊດຊັນທີ່ເຄື່ອນໄຫວ",
-  "AutoDeleteTitle": "ການນັ່ງຖະຫວ່າງທັງໝົດທີ່ມີອາຍຸເກີນ 60 ມື້ຈະຖືກລົບອອກໂດຍອັດຕະໂນມັດ.",
+  "AutoDeleteTitle": "ເຊດຊັນທັງໝົດທີ່ມີອາຍຸເກີນ 60 ມື້ຈະຖືກລົບອອກໂດຍອັດຕະໂນມັດ.",
   "ChangePasswordAfterLoggingOut": "ປ່ຽນລະຫັດຜ່ານຫຼັງຈາກອອກຈາກລະບົບ",
   "ConnectSocialNetworks": "ເຊື່ອມຕໍ່ເຄືອຂ່າຍສັງຄົມຂອງທ່ານ",
   "DescriptionForSecurity": "ເພື່ອຄວາມປອດໄພຫຼາຍຂຶ້ນ, ທ່ານຈໍາເປັນຕ້ອງປ່ຽນລະຫັດຜ່ານຂອງທ່ານ.",
   "DesktopTheme": "ຊິງຄ໌ກັບການຕັ້ງຄ່າ Desktop Editor",
-  "DesktopThemeDescription": "ສະຫຼັບລະຫວ່າງຮູບແບບສີສັນແຈ້ງ ແລະມືດໂດຍອັດຕະໂນມັດເມື່ອຕົວແກ້ໄຂເດັສທັອບຂອງທ່ານ.",
+  "DesktopThemeDescription": "ສະຫຼັບລະຫວ່າງຮູບແບບແຈ້ງ ແລະມືດໂດຍອັດຕະໂນມັດ ໂດຍອີງຕາມຮູບແບບປັດຈຸບັນຂອງ Desktop Editors.",
   "EditPhoto": "ແກ້ໄຂຮູບພາບ",
   "EmailChangeSuccess": "ອີເມວຂອງທ່ານໄດ້ຖືກປ່ຽນສຳເລັດແລ້ວ.",
   "EmailNotVerified": "ອີເມວບໍ່ໄດ້ຖືກຢືນຢັນ",
@@ -26,6 +26,6 @@
   "TelegramAccountDescription": "ເພື່ອເຊື່ອມຕໍ່ TelegramBot ກັບບັນຊີຂອງທ່ານປະຕິບັດຕາມການເຊື່ອມຕໍ່ລັບຄລິກທີ່ປຸ່ມ \"ເຊື່ອມຕໍ່ Telegram\".",
   "TelegramAccountDisconnect": "ຕັດການເຊື່ອມຕໍ່ Telegram",
   "TelegramAccountDisconnectDescription": "ບັນຊີ @{{username}} ຂອງທ່ານຖືກເຊື່ອມຕໍ່ສໍາລັບການແຈ້ງເຕືອນ Telegram. ທ່ານສາມາດຕັດການເຊື່ອມຕໍ່ຈາກບັນຊີນີ້ໄດ້. ໃນກໍລະນີນີ້, ທ່ານຈະບໍ່ໄດ້ຮັບການແຈ້ງເຕືອນ.",
-  "TerminateAllSessions": "ດຶບມື້ຍຸ່ງງານທັງໝົດ ທີ່ບໍ່ແມ່ນຊຸດປະຈຸບັນ",
+  "TerminateAllSessions": "ຍົກເລີກທຸກເຊດຊັນຍົກເວັ້ນເຊດຊັນປະຈຸບັນ",
   "TwoFactorDescription": "ການຢືນຢັນຕົວຕົນສອງຂັ້ນຕອນຜ່ານແອັບພລິເຄຊັນທີ່ສ້າງລະຫັດໄດ້ຖືກເປີດໂດຍ Admin."
 }

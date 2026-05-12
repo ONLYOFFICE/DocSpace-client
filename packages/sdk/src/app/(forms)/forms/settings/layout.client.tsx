@@ -32,6 +32,7 @@ import { observer } from "mobx-react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 import { Tabs, type TTabItem } from "@docspace/ui-kit/components/tabs";
+import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
 import { getRoomMembers } from "@docspace/shared/api/rooms";
 import type { RoomMember } from "@docspace/shared/api/rooms/types";
 
@@ -43,7 +44,9 @@ import {
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
 import { useFormsTourStore } from "../../_store/FormsTourStore";
+import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import { createMockRoomMembers } from "../../_utils/mockFormFiles";
+import styles from "../../_components/settings/category/SettingsPanel.module.scss";
 
 type SettingsMembersContextValue = {
   members: RoomMember[];
@@ -55,7 +58,8 @@ const SettingsMembersContext =
 
 export function useSettingsMembers(): SettingsMembersContextValue {
   const ctx = React.useContext(SettingsMembersContext);
-  if (!ctx) throw new Error("useSettingsMembers must be used within SettingsShell");
+  if (!ctx)
+    throw new Error("useSettingsMembers must be used within SettingsShell");
   return ctx;
 }
 
@@ -71,8 +75,20 @@ const SettingsShell = ({ children }: SettingsShellProps) => {
   const { roomId } = useFormsSettingsStore();
   const aiStore = useFormsAiAgentStore();
   const tourStore = useFormsTourStore();
-
   const activeSubSection = settingsSubSectionFromPathname(pathname);
+
+  const [selectedId, setSelectedId] = React.useState(activeSubSection);
+  const [isPending, startTransition] = React.useTransition();
+
+  React.useEffect(() => {
+    setSelectedId(activeSubSection);
+  }, [activeSubSection]);
+
+  React.useEffect(() => {
+    if (!isPending) {
+      window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
+    }
+  }, [isPending]);
 
   const [members, setMembers] = React.useState<RoomMember[]>(() =>
     tourStore.showMockItems ? createMockRoomMembers() : [],
@@ -114,36 +130,53 @@ const SettingsShell = ({ children }: SettingsShellProps) => {
     [members, fetchMembers],
   );
 
+  const wrappedContent = (
+    <LoaderWrapper isLoading={isPending}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 16,
+          paddingTop: 16,
+        }}
+      >
+        {children}
+      </div>
+    </LoaderWrapper>
+  );
+
   const tabs: TTabItem[] = React.useMemo(
     () => [
       {
         id: SettingsSubSection.Billing,
         name: t("Common:Billing"),
-        content: null,
+        content: wrappedContent,
       },
       {
         id: SettingsSubSection.AiAgent,
         name: t("Common:AIAgent"),
-        content: null,
+        content: wrappedContent,
       },
       {
         id: SettingsSubSection.Access,
         name: t("Common:AccessSettings"),
-        content: null,
+        content: wrappedContent,
       },
       {
         id: SettingsSubSection.CollectData,
         name: t("Common:CollectData"),
-        content: null,
+        content: wrappedContent,
       },
     ],
-    [t],
+    [t, wrappedContent],
   );
 
   const onSelect = React.useCallback(
     (tab: TTabItem) => {
       const sub = tab.id as SettingsSubSection;
-      if (sub === activeSubSection) return;
+      if (sub === selectedId) return;
+
+      setSelectedId(sub);
 
       const params = new URLSearchParams();
       const rid = searchParams.get("roomId") ?? "";
@@ -151,16 +184,20 @@ const SettingsShell = ({ children }: SettingsShellProps) => {
       if (rid) params.set("roomId", rid);
       if (lid) params.set("libraryId", lid);
       const qs = params.toString();
-      router.replace(
-        `${settingsSubSectionToPath(sub)}${qs ? `?${qs}` : ""}`,
-      );
+      startTransition(() => {
+        router.replace(`${settingsSubSectionToPath(sub)}${qs ? `?${qs}` : ""}`);
+      });
     },
-    [activeSubSection, searchParams, router],
+    [selectedId, searchParams, router],
   );
 
   return (
     <SettingsMembersContext.Provider value={membersCtx}>
-      <div data-tour="settings-container" style={{ position: "relative" }}>
+      <div
+        data-tour="settings-container"
+        className={styles.settingsShell}
+        style={{ position: "relative" }}
+      >
         <div
           data-tour="settings-spotlight"
           style={{
@@ -174,11 +211,11 @@ const SettingsShell = ({ children }: SettingsShellProps) => {
         />
         <Tabs
           items={tabs}
-          selectedItemId={activeSubSection}
+          selectedItemId={selectedId}
           onSelect={onSelect}
           withoutStickyIntend
+          withAnimation
         />
-        <div>{children}</div>
       </div>
     </SettingsMembersContext.Provider>
   );

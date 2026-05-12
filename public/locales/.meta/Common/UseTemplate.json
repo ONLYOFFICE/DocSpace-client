@@ -3,13 +3,21 @@
   "content": "Use this template",
   "content_en_sha1_hash": "258ae8d23f548949eee3089f152e1a1894e245a5",
   "created_at": "2026-03-26T08:26:45.136Z",
-  "updated_at": "2026-04-07T20:36:04.837Z",
+  "updated_at": "2026-04-23T17:24:02.167Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a button label. It allows users to select and apply a chosen template.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:39:29.347Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/forms/library/[langId]/[categoryId]/template/[templateId]/page.client.tsx",
+      "line_number": 331,
+      "context": "<Button\n className={styles.useButton}\n label={\n isCopying\n ? t(\"Common:CopyingTemplate\")\n : t(\"Common:UseTemplate\")\n }\n size={ButtonSize.normal}\n onClick={handleUseTemplate}\n isDisabled={isCopying}\n isLoading={isCopying}",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -116,13 +124,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical gender error: 'szablon' is masculine, so the demonstrative pronoun must be 'tego' instead of 'tej'.",
-          "suggestion": "Użyj tego szablonu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -176,13 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation uses the plural demonstrative pronoun 'ове' (these) with a singular noun 'шаблон' (template), resulting in a grammatical mismatch that affects the meaning ('Use these template').",
-          "suggestion": "Користите овај шаблон"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

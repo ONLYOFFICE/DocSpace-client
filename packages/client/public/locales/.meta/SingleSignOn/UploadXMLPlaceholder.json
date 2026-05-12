@@ -3,11 +3,12 @@
   "content": "URL to IdP Metadata XML",
   "content_en_sha1_hash": "8131093e63b5f58eca9b027abe15945f20663a3c",
   "created_at": "2025-05-19T21:30:50.197Z",
-  "updated_at": "2026-04-08T22:08:56.157Z",
+  "updated_at": "2026-04-11T21:26:11.740Z",
   "comment": {
-    "text": "This translation key is used for the placeholder text in a form input field where users can enter a URL to upload IdP metadata XML. The text appears as a placeholder in a text input field and helps users understand what information is expected from them.",
+    "text": "This is a placeholder text for an input field. It prompts the user to enter a URL pointing to an Identity Provider (IdP) Metadata XML file, used for Single Sign-On configuration.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:00.577Z"
+    "updated_at": "2026-04-11T21:26:11.740Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -111,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'vietrādis' is a misspelling or a non-existent word in Latvian. It appears to be a typo for 'vietnē' (in location) or a failed attempt to translate 'URL to...'. The current phrasing 'IdP metadatu XML vietrādis URL' is grammatically incorrect and nonsensical.",
-          "suggestion": "IdP metadatu XML URL"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -159,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation uses 'ඒ.ස.නි.' which is an incorrect/non-standard abbreviation for 'URL'. In technical contexts, 'URL' should be transliterated or kept as is to ensure user understanding.",
-          "suggestion": "IdP Metadata XML සඳහා URL එක"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -219,13 +208,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'IdP Meta të dhënave XML' is grammatically broken and incorrectly splits the term 'Metadata'. In Albanian, 'Metadata' should be treated as a single technical term or translated as 'metadata'. The current version 'Meta të dhënave' translates roughly to 'Meta of data', which is nonsensical in this context.",
-          "suggestion": "URL-ja e XML të metadatas së IdP"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

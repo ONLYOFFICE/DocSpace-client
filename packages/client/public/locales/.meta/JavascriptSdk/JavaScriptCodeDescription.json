@@ -3,17 +3,18 @@
   "content": "Embedding {{productName}} or its part using JavaScript. Copy the JavaScript code below.",
   "content_en_sha1_hash": "58a5dc751eef7422d7b3bd3ebf9706afd35bb2ee",
   "created_at": "2025-05-19T21:30:54.544Z",
-  "updated_at": "2026-04-07T19:35:05.134Z",
+  "updated_at": "2026-04-11T21:15:25.482Z",
   "comment": {
-    "text": "This translation key is used for describing JavaScript code related to embedding a product using JavaScript. It appears on a page providing code to insert into the UI, and its purpose is to guide users on how to use it correctly.",
+    "text": "This is a descriptive text appearing below a section header, explaining how to embed the product or its parts using JavaScript. It includes a `productName` variable for the product's brand name.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:34.054Z"
+    "updated_at": "2026-04-11T21:15:25.482Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/CodeToInsert.js",
-      "line_number": 60,
-      "context": "<CodeWrapper height=\"fit-content\">\n <CategorySubHeader className=\"copy-window-code\">\n {`JavaScript ${t(\"CodeTitle\")}`}\n </CategorySubHeader>\n <Text lineHeight=\"20px\" className=\"preview-description\">\n {t(\"JavaScriptCodeDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <CodeBlock config={config} scriptUrl={scriptUrl} theme={theme} />\n </CodeWrapper>",
+      "line_number": 61,
+      "context": "<CodeWrapper height=\"fit-content\">\n <CategorySubHeader className=\"copy-window-code\">\n {`JavaScript ${t(\"CodeTitle\")}`}\n </CategorySubHeader>\n <Text lineHeight=\"20px\" className=\"preview-description\">\n {t(\"JavaScriptCodeDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <CodeBlock config={config} scriptUrl={scriptUrl} theme={theme} />\n </CodeWrapper>",
       "module": "/packages/client"
     }
   ],

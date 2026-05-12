@@ -3,16 +3,17 @@
   "content": "Content creators can create and edit files in the room, but can't manage users, or access settings.",
   "content_en_sha1_hash": "b4f64217478f8374be46634b2bf16cd639a3dc2f",
   "created_at": "2025-05-19T21:30:48.002Z",
-  "updated_at": "2026-04-08T00:52:00.346Z",
+  "updated_at": "2026-04-13T08:49:55.933Z",
   "comment": {
-    "text": "This translation key is used for a description that explains the permissions and limitations of a Content Creator role within a room, likely appearing in user interface elements such as a form or settings panel. The content creator can create and edit files but lacks access to managing users or accessing settings.",
+    "text": "This is a description of the \"Content Creator\" user role. It explains the permissions associated with this role within a room.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:34:38.257Z"
+    "updated_at": "2026-04-11T20:44:36.853Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 102,
+      "line_number": 103,
       "context": "aiAgent: t(\"Common:AIAgent\"),\n }}\n />\n ) as unknown as string;\n default:\n return t(\"Common:RoleContentCreatorDescription\");\n }\n };\n \n const getFormFillerDescription = (roomType: RoomsType, t: TTranslation) => {\n switch (roomType) {",
       "module": "/packages/shared"
     }
@@ -75,13 +76,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The French translation adds 'd'accès' (access) to 'paramètres', which changes the meaning from 'access settings' to 'access settings' (as in settings for access), whereas the English implies the user cannot access the settings themselves.",
-          "suggestion": "Les créateurs de contenu peuvent créer et modifier des fichiers dans la salle, mais ne peuvent pas gérer les utilisateurs ou accéder aux paramètres."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -135,13 +130,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'utilizadors' is misspelled in Portuguese; the correct spelling is 'utilizadores'.",
-          "suggestion": "Os criadores de conteúdo podem criar e editar arquivos na sala, mas não podem gerenciar utilizadores ou acessar configurações."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {

@@ -3,16 +3,17 @@
   "content": "The destination already contains a folder named «<1>{{folderName}}</1>».",
   "content_en_sha1_hash": "84e03768c28e7d8864816ce977c8c2b9f91a4f66",
   "created_at": "2025-05-19T21:30:45.425Z",
-  "updated_at": "2026-04-10T08:58:38.055Z",
+  "updated_at": "2026-04-23T17:24:01.706Z",
   "comment": {
-    "text": "This translation key is used to display a message when a user attempts to add a new folder that already exists in the destination. The message informs the user that a folder with the same name already exists and cannot be created. It appears in the ConflictResolveDialog component where the user encounters conflicting actions for resolving folder additions.",
+    "text": "This is an error message displayed in a dialog. It informs the user that a folder with the specified name ({{folderName}}) already exists at the destination. The folder name is highlighted in bold.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:08.790Z"
+    "updated_at": "2026-04-11T20:52:23.452Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
-      "line_number": 251,
+      "line_number": 261,
       "context": "const singleFolderMessage = (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"FolderActionRequired\"\n values={{ folderName: items[0].title }}\n components={{ 1: <span className=\"bold\" /> }}\n />\n );",
       "module": "/packages/client"
     }

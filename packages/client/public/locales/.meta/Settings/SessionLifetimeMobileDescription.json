@@ -3,17 +3,18 @@
   "content": "Session Lifetime allows to set time (in minutes) before the {{productName}} users will need to enter the space credentials again in order to access the space.",
   "content_en_sha1_hash": "044392ac82e8db7a4c5bc674f8ca2ef7321edd16",
   "created_at": "2025-05-19T21:30:52.644Z",
-  "updated_at": "2026-04-09T01:09:27.929Z",
+  "updated_at": "2026-04-11T21:22:14.999Z",
   "comment": {
-    "text": "\"Defines the session lifetime duration message to be displayed to mobile users, explaining how long their access credentials are valid before needing re-entry.\"",
+    "text": "This is a subtitle for a settings item. It explains that \"Session Lifetime\" sets the duration (in minutes) after which users must re-enter credentials to access the space. `{{productName}}` will be replaced with the product's brand name.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:29.559Z"
+    "updated_at": "2026-04-11T21:22:14.999Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 132,
-      "context": "url=\"/portal-settings/security/access-portal/admin-message\"\n onClickLink={onClickLink}\n />\n <CategoryItem\n title={t(\"SessionLifetime\")}\n subtitle={t(\"SessionLifetimeMobileDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n url=\"/portal-settings/security/access-portal/lifetime\"\n onClickLink={onClickLink}\n />",
+      "line_number": 133,
+      "context": "url=\"/portal-settings/security/access-portal/admin-message\"\n onClickLink={onClickLink}\n />\n <CategoryItem\n title={t(\"SessionLifetime\")}\n subtitle={t(\"SessionLifetimeMobileDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n url=\"/portal-settings/security/access-portal/lifetime\"\n onClickLink={onClickLink}\n />",
       "module": "/packages/client"
     }
   ],
@@ -57,13 +58,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical error in subject-verb agreement: 'οι χρήστες... χρειαστεί' should be 'οι χρήστες... χρειαστούν' to match the plural subject.",
-          "suggestion": "Η επιλογή Διάρκεια περιόδου λειτουργίας επιτρέπει τον καθορισμό του χρόνου (σε λεπτά) πριν οι χρήστες του {{productName}} χρειαστούν να εισάγουν ξανά τα διαπιστευτήρια του χώρου για να έχουν πρόσβαση στον χώρο."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -75,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish sentence contains a grammatical error ('jälkeen' is placed incorrectly) that makes the sentence structure nonsensical: 'syöttää tilan kirjautumistiedot jälkeen päästäkseen tilaan' translates roughly to 'after enter the space credentials to access the space', which is broken.",
-          "suggestion": "Istunnon kesto mahdollistaa ajan (minuuteissa) asettamisen, jonka jälkeen {{productName}}-käyttäjien on syötettävä tilan kirjautumistiedot uudelleen päästäkseen tilaan."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -129,13 +118,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Dutch sentence structure is grammatically broken and nonsensical ('Duur van de sessie hiermee kan de tijd...'). It translates roughly to 'Session lifetime with this can the time...', failing to convey the functional meaning of the English sentence.",
-          "suggestion": "Met de sessieduur kunt u de tijd (in minuten) instellen voordat de {{productName}}-gebruikers hun inloggegevens opnieuw moeten invoeren om toegang te krijgen tot de ruimte."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -159,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation contains a grammatical error in the subordinate clause ('...înainte ca utilizatorii... vor fi nevoiți') that changes the logical flow. In Romanian, 'înainte ca' requires the subjunctive mood ('să fie nevoiți'), otherwise, the sentence structure is broken.",
-          "suggestion": "Durata de expirare a sesiunii permite stabilirea perioadei de timp (exprimată în minute) înainte ca utilizatorii spațiului {{productName}} să fie nevoiți să introducă din nou datele de autentificare pentru a accesa spaţiul."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -177,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation incorrectly interprets 'Session Lifetime' as 'නවතියේ කාලය' (which translates closer to 'Ninth time' or 'Ninth period') instead of 'සැසියේ කාලසීමාව' (Session duration/lifetime). Additionally, 'space credentials' is translated as 'අවකාශයගේ සහතිකපත්ර' (space certificates), which is technically incorrect in a security context; it should refer to login credentials/details.",
-          "suggestion": "සැසියේ කාලසීමාව මගින් {{productName}} පරිශීලකයින්ට අවකාශයට ප්‍රවේශ වීම සඳහා නැවත අවකාශයේ ඇතුළත් කිරීමේ තොරතුරු (credentials) ඇතුළත් කළ යුතු කාලය (මිනිත්තු වලින්) සැකසීමට ඉඩ සලසයි."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -195,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'seje' is a typo or incorrect term; it likely intended to be 'sesije' (session). 'Življenjska doba seje' translates to 'Life span of the sowing/seed', which is incorrect in a technical context.",
-          "suggestion": "Življenjska doba sesije omogoča nastavitev časa (v minutah), preden bodo morali uporabniki {{productName}} znova vnesti poverilnice prostora za dostop do prostora."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -219,13 +184,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Turkish translation conveys the opposite meaning. The English says users MUST enter credentials AGAIN after the time expires, but the Turkish says they can access the space WITHOUT entering credentials again (girmeleri gerekmeden önce).",
-          "suggestion": "Oturum Ömrü, {{productName}} kullanıcılarının alana tekrar erişebilmeleri için alan kimlik bilgilerini yeniden girmeleri gereken süreyi (dakika bazında) ayarlamanıza olanak tanır."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

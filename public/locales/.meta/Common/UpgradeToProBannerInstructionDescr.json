@@ -3,11 +3,12 @@
   "content": "Use the official documentation to upgrade:",
   "content_en_sha1_hash": "543e777ff5b1b9ec51febc46ab0a1b341669aea6",
   "created_at": "2025-05-26T07:15:49.164Z",
-  "updated_at": "2026-04-07T20:53:19.606Z",
+  "updated_at": "2026-04-12T13:31:49.738Z",
   "comment": {
-    "text": "This translation key is used to provide a brief instruction on how to upgrade to a professional plan, likely appearing as a tooltip or inline message in a UI element such as a button. The text should encourage users to refer to official documentation for further instructions.",
+    "text": "This is a line of text appearing in a banner that instructs users on how to upgrade their ONLYOFFICE DocSpace. It is part of a sentence providing a link to official documentation.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:02:33.791Z"
+    "updated_at": "2026-04-11T20:40:01.164Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -85,7 +86,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \":\" but translation ends with \"՝\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-12T13:30:43.193Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null
@@ -159,13 +162,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'උත්ශ්‍රේණිය' (Uthshreniya) is a misspelling/incorrect usage for 'upgrade' in this context. While it attempts to mean 'upgrade', the correct term for upgrading a software/plan is 'උත්සන්න කිරීම' or 'අලුත් කිරීම'. More importantly, the current phrasing 'උත්ශ්‍රේණිය සඳහා' means 'for the upgrade', whereas the English 'to upgrade' implies the action of performing the upgrade.",
-          "suggestion": "අලුත් කිරීම සඳහා නිල ප්‍රලේඛනය භාවිතා කරන්න:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

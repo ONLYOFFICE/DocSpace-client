@@ -3,18 +3,19 @@
   "content": "Thinking",
   "content_en_sha1_hash": "d08d8da0b3e11289424be3c1bb9a5c234b24ea17",
   "created_at": "2025-11-25T06:36:44.927Z",
-  "updated_at": "2026-04-07T21:56:09.597Z",
+  "updated_at": "2026-04-12T15:48:16.078Z",
   "comment": {
-    "text": "This key displays a loading indicator and text to show that a process is in progress. It appears within a chat message body as a visual cue, likely indicating a \"thinking\" or processing state. Translators should ensure the translation conveys the idea of ongoing computation or thought.",
+    "text": "Thinking is a status message displayed while the AI assistant is processing a request.",
     "is_auto": true,
-    "updated_at": "2025-11-25T06:38:41.426Z"
+    "updated_at": "2026-04-11T20:41:11.066Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/message/Think/index.tsx",
-      "line_number": 70,
-      "context": ") : (\n <Loader type={LoaderTypes.track} size=\"12px\" />\n )}\n \n <Text fontSize=\"13px\" lineHeight=\"15px\" fontWeight={600}>\n {t(\"Thinking\")}\n </Text>\n \n <TriangleDownIcon\n data-size={IconSizeType.scale}\n className={cn(styles.icon, { [styles.iconOpened]: isOpen })}",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/Think/index.tsx",
+      "line_number": 80,
+      "context": "data-testid=\"think-loader\"\n />\n )}\n \n <Text fontSize=\"13px\" lineHeight=\"15px\" fontWeight={600}>\n {t(\"Thinking\")}\n </Text>\n \n <TriangleDownIcon\n data-size={IconSizeType.scale}\n className={cn(styles.icon, { [styles.iconOpened]: isOpen })}",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Düşünmə' is an imperative command meaning 'Don't think'. For a loading state, it should be a continuous participle/gerund indicating an ongoing process.",
-          "suggestion": "Düşünür..."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -63,13 +58,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Σκέψη' is a noun meaning 'Thought' or 'The act of thinking'. In the context of a loading indicator/process in progress, it should be a participle or a verb form indicating an ongoing action (e.g., 'Σκέψη...' or 'Επεξεργασία...'). 'Σκέψη' sounds like a static concept rather than a status.",
-          "suggestion": "Σκέψη..."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -93,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Մտածել' is an infinitive verb ('To think'), which sounds unnatural for a loading state/status indicator. In UI contexts for ongoing processes, a participle or a noun form is required to convey 'Thinking...' (the process is happening now).",
-          "suggestion": "Մտածում է"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -117,25 +100,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '생각' is a noun meaning 'thought' or 'idea'. In the context of a loading indicator (ongoing process), it should be a present participle or a verb form indicating the action is currently happening (e.g., '생각 중...').",
-          "suggestion": "생각 중..."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ຄິດ' (Khid) means 'to think' (verb/action), but in the context of a loading indicator, it lacks the progressive aspect (ongoing process). It sounds like a command or a simple verb rather than a status indicator like 'Thinking...' or 'Processing...'.",
-          "suggestion": "ກຳລັງຄິດ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -171,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Gândire' refers to the abstract concept of 'thought' or 'the act of thinking' as a noun. In the context of a loading indicator/UI state, it should be a present participle or a verb indicating an ongoing process (e.g., 'Se gândește...' or 'Procesare...').",
-          "suggestion": "Se gândește..."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -225,25 +190,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Turkish translation 'Düşünme' is the imperative form (command) meaning 'Do not think'. For a loading state, the continuous form 'Düşünüyor...' or 'Düşünülüyor...' should be used.",
-          "suggestion": "Düşünüyor..."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Мислення' is a noun meaning 'the process of thinking' (cognition). In the context of a loading indicator/status, the English 'Thinking' functions as a present participle describing an ongoing action. The Ukrainian translation should be a verb form or a participle to indicate the process is currently happening.",
-          "suggestion": "Думаю..."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

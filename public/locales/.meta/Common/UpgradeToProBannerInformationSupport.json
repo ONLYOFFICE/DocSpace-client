@@ -3,11 +3,12 @@
   "content": "Get tech assistance <1>{{helpUrl}}</1>",
   "content_en_sha1_hash": "653923be289053ccbdd59fa114cf2caef5bfa3c5",
   "created_at": "2025-05-26T07:15:49.153Z",
-  "updated_at": "2026-04-10T08:58:38.048Z",
+  "updated_at": "2026-04-12T13:33:31.112Z",
   "comment": {
-    "text": "This translation key is used to display a help message for contacting technical support. It appears as part of a payment contact container and is linked to a URL for additional information or feedback. The user will likely click on this text to access more detailed assistance.",
+    "text": "This is a link within a banner or section related to payments or upgrades, offering technical assistance. The `{{helpUrl}}` variable will be replaced with a URL to a help or support page.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:02:35.975Z"
+    "updated_at": "2026-04-11T20:40:02.071Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -105,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "extra_variable",
-          "description": "Extra variable(s) not in English: {{ helpUrl }}",
-          "suggestion": ""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {

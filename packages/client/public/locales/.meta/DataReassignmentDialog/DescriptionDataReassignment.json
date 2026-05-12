@@ -3,11 +3,12 @@
   "content": "We will transfer shared files and rooms created by contact.",
   "content_en_sha1_hash": "4c763ae72ab73b9a43fee32552151f57d344ded9",
   "created_at": "2025-10-03T13:19:28.237Z",
-  "updated_at": "2026-02-19T13:36:32.403Z",
+  "updated_at": "2026-04-11T21:05:12.688Z",
   "comment": {
-    "text": "This text explains that shared files and rooms will be transferred as part of a data reassignment process. It appears within the body of the Data Reassignment Dialog, providing information to the user about what's happening. Translators should ensure the meaning is clear and conveys the action of transferring data.",
+    "text": "This is a sentence in a dialog box, explaining that shared files and rooms created by a specific contact will be transferred.",
     "is_auto": true,
-    "updated_at": "2025-10-03T13:20:53.665Z"
+    "updated_at": "2026-04-11T21:05:12.688Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,23 +3,24 @@
   "content": "Action button",
   "content_en_sha1_hash": "81156442640c6af1ec3dd4728dd68a78bc720a31",
   "created_at": "2025-05-19T21:30:54.343Z",
-  "updated_at": "2026-04-07T19:35:05.125Z",
+  "updated_at": "2026-04-13T14:59:05.857Z",
   "comment": {
-    "text": "The translation key \"ActionButton\" is used to describe an action button that triggers specific functionality in a Developer Tools preset, appearing on the Manager page. The exact wording may vary depending on the UI component it's part of (e.g., dialog title, button label).",
+    "text": "This is a label for a UI element that represents an action button within the JavaScript SDK presets.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:54.201Z"
+    "updated_at": "2026-04-11T21:16:23.587Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 41,
-      "context": "import { EventLogBlock } from \"../sub-components/EventLogBlock\";\n \n import LeftMenuUrl from \"PUBLIC_DIR/images/sdk-presets_left-menu.react.svg?url\";\n import TitleUrl from \"PUBLIC_DIR/images/sdk-presets_title.react.svg?url\";\n import ColumnsUrl from \"PUBLIC_DIR/images/sdk-presets_columns.react.svg?url\";\n import ActionButtonUrl from \"PUBLIC_DIR/images/sdk-presets_action-button.react.svg?url\";\n import SearchUrl from \"PUBLIC_DIR/images/sdk-presets_search.react.svg?url\";\n import HeaderUrl from \"PUBLIC_DIR/images/sdk-presets_header.react.svg?url\";\n import LeftMenuDarkUrl from \"PUBLIC_DIR/images/sdk-presets_left-menu_dark.png?url\";\n import TitleDarkUrl from \"PUBLIC_DIR/images/sdk-presets_title_dark.png?url\";\n import ColumnsDarkUrl from \"PUBLIC_DIR/images/sdk-presets_columns_dark.png?url\";",
+      "line_number": 557,
+      "context": "/>\n </LabelGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"ActionButton\")}\n onChange={toggleActionButton}\n isChecked={!config.disableActionButton}\n dataTestId=\"action_button_checkbox\"\n />\n <HelpButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 41,
-      "context": "import { EventLogBlock } from \"../sub-components/EventLogBlock\";\n \n import LeftMenuUrl from \"PUBLIC_DIR/images/sdk-presets_left-menu.react.svg?url\";\n import TitleUrl from \"PUBLIC_DIR/images/sdk-presets_title.react.svg?url\";\n import ColumnsUrl from \"PUBLIC_DIR/images/sdk-presets_columns.react.svg?url\";\n import ActionButtonUrl from \"PUBLIC_DIR/images/sdk-presets_action-button.react.svg?url\";\n import SearchUrl from \"PUBLIC_DIR/images/sdk-presets_search.react.svg?url\";\n import HeaderUrl from \"PUBLIC_DIR/images/sdk-presets_header.react.svg?url\";\n import LeftMenuDarkUrl from \"PUBLIC_DIR/images/sdk-presets_left-menu_dark.png?url\";\n import TitleDarkUrl from \"PUBLIC_DIR/images/sdk-presets_title_dark.png?url\";\n import ColumnsDarkUrl from \"PUBLIC_DIR/images/sdk-presets_columns_dark.png?url\";",
+      "line_number": 557,
+      "context": "/>\n </LabelGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"ActionButton\")}\n onChange={toggleActionButton}\n isChecked={!config.disableActionButton}\n dataTestId=\"action_button_checkbox\"\n />\n <HelpButton",
       "module": "/packages/client"
     }
   ],

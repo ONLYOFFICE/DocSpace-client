@@ -3,23 +3,24 @@
   "content": "Agent <1>«{{oldRoomTitle}}»</1> renamed to <2>«{{roomTitle}}»</2>",
   "content_en_sha1_hash": "59183043f5e7482f22944eecac72d5e38b0faf57",
   "created_at": "2025-11-03T12:10:31.580Z",
-  "updated_at": "2025-11-03T12:23:09.789Z",
+  "updated_at": "2026-04-13T14:59:05.796Z",
   "comment": {
-    "text": "This key displays a message indicating that an agent's room title has been changed. It appears within the History view of the InfoPanel, informing users about the new room title after a rename action. The placeholders `<1>` and `<2>` represent the old and new room titles, respectively.",
+    "text": "This is a history feed message indicating that an agent (a room or a person) has been renamed. It appears in the InfoPanel and includes the old name (`{{oldRoomTitle}}`) and the new name (`{{roomTitle}}`) of the agent.",
     "is_auto": true,
-    "updated_at": "2025-11-03T12:23:09.789Z"
+    "updated_at": "2026-04-11T21:13:53.975Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 164,
-      "context": "/>\n ),\n }}\n />\n );\n case FeedActionKeys.AgentRenamed:\n return (\n <Trans\n t={t}\n ns=\"InfoPanel\"\n i18nKey=\"AgentRenamed\"",
+      "line_number": 169,
+      "context": "case FeedActionKeys.AgentRenamed:\n return (\n <Trans\n t={t}\n ns=\"InfoPanel\"\n i18nKey=\"AgentRenamed\"\n values={{\n oldRoomTitle: (feed.data as TFeedData).oldTitle,\n roomTitle: (feed.data as TFeedData).newTitle,\n }}\n components={{",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 153,
-      "context": "components={{\n 1: <HistoryText key={feed.data.title!} title={feed.data.title!} />,\n }}\n />\n );\n case FeedActionKeys.AgentRenamed:\n return (\n <Trans\n t={t as TFunction}\n ns=\"InfoPanel\"\n i18nKey=\"AgentRenamed\"",
+      "line_number": 158,
+      "context": "case FeedActionKeys.AgentRenamed:\n return (\n <Trans\n t={t as TFunction}\n ns=\"InfoPanel\"\n i18nKey=\"AgentRenamed\"\n values={{\n oldRoomTitle: feed.data.oldTitle,\n roomTitle: feed.data.newTitle,\n }}\n components={{",
       "module": "/packages/client"
     }
   ],

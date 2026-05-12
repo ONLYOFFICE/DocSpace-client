@@ -3,11 +3,12 @@
   "content": "Assign users to roles to begin filling out form",
   "content_en_sha1_hash": "8373f6c3cff880c6ce515b8640173ea9b9a99e01",
   "created_at": "2025-05-19T21:30:43.197Z",
-  "updated_at": "2026-04-08T16:21:25.464Z",
+  "updated_at": "2026-04-11T20:58:32.650Z",
   "comment": {
-    "text": "The translation key \"BadgeDraftTitle\" is used to display a title that explains when users can begin filling out a form. It appears in a file status display and indicates when a form is in draft state. Translators should focus on conveying the concept of user assignment to roles for the purpose of initiating form completion.",
+    "text": "This is a badge title displayed on a form that is in the \"Draft\" status, indicating that users need to be assigned roles before the form can be filled out.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:16.564Z"
+    "updated_at": "2026-04-11T20:58:32.650Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -39,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation changes the meaning from an instruction ('Assign users to roles...') to a description of an action ('Assign users to roles so that they can start...'). The English text is a directive/instruction, whereas the Bulgarian version sounds like a purpose statement or a description of a process.",
-          "suggestion": "Възложете роли на потребителите, за да започнете попълването на формуляра"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -147,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation uses 'către utilizatorii', which is grammatically incorrect and changes the meaning to 'towards the users'. The English 'Assign users to roles' implies assigning the users themselves to specific roles, whereas the Romanian phrasing is awkward and structurally flawed.",
-          "suggestion": "Atribuiți utilizatorii unor roluri pentru a începe completarea formularului"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -207,25 +196,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Vietnamese translation is missing the preposition 'vào' or 'cho' after 'người dùng', making the sentence grammatically broken and meaning 'Assign users roles' instead of 'Assign users TO roles'.",
-          "suggestion": "Chỉ định người dùng vào các vai trò để bắt đầu điền vào biểu mẫu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Chinese translation '分配用户角色' means 'Assign user roles', whereas the English 'Assign users to roles' means assigning specific users to existing roles. The current translation implies creating/assigning the roles themselves rather than the users to them.",
-          "suggestion": "将用户分配至角色以开始填写表单"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

@@ -3,11 +3,12 @@
   "content": "The Service provider certificates used to sign and encrypt the requests and responses from the SP",
   "content_en_sha1_hash": "1e5d8b6931596c260395a4c8c3dc9e23e6e18228",
   "created_at": "2025-05-19T21:30:50.158Z",
-  "updated_at": "2026-04-08T22:45:52.703Z",
+  "updated_at": "2026-04-11T21:26:26.306Z",
   "comment": {
-    "text": "This translation key is used for the tooltip that displays the meaning of \"Service provider certificates\" in the Single Sign On settings page. It appears as a button label when the prefix is set to \"sp\" and provides context about the certificates used by a service provider.",
+    "text": "This is a tooltip that appears when hovering over the \"Service provider certificates\" label. It explains the purpose of these certificates in signing and encrypting requests and responses from the Service Provider (SP).",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:06.429Z"
+    "updated_at": "2026-04-11T21:26:26.306Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -39,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation repeats 'доставчика на услуги' (Service provider) at the end, which is a literal translation of 'from the SP', but it fails to distinguish that 'SP' refers back to the same entity, making the sentence redundant and slightly confusing in Bulgarian. More importantly, it misses the nuance that 'SP' is an abbreviation for the subject already mentioned.",
-          "suggestion": "Сертификатите на доставчика на услуги, използвани за подписване и криптиране на заявките и отговорите от него"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -75,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation omits the phrase 'and responses', which is a key part of the technical description of what the certificates are used for.",
-          "suggestion": "Palveluntarjoajan sertifikaatit, joita käytetään SP:n pyyntöjen ja vastausten allekirjoittamiseen ja salaamiseen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -129,25 +118,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Service provider certificates' was translated as 'De dienstverleningscertificaten', which means 'The service provision certificates'. In an SSO/SAML context, 'Service Provider' is a specific technical role (SP) and should be translated as 'Serviceprovider-certificaten' or 'Certificaten van de serviceprovider'.",
-          "suggestion": "De serviceprovider-certificaten die worden gebruikt om de verzoeken en antwoorden van de SP te ondertekenen en te versleutelen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation repeats 'usługodawcy' (Service provider) twice, which changes the meaning of the end of the sentence. The English text says 'from the SP' (from the Service Provider), but the Polish translation says 'requests and responses of the service provider', which is a semantic shift in how the relationship is described, and more importantly, it fails to distinguish between the certificates belonging to the provider and the source of the requests/responses.",
-          "suggestion": "Certyfikaty usługodawcy używane do podpisywania i szyfrowania żądań oraz odpowiedzi pochodzących od SP"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {

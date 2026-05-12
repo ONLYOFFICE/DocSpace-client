@@ -3,17 +3,18 @@
   "content": "No {{aiAgents}} available yet",
   "content_en_sha1_hash": "4331963c254d9449870c6ee9b9137fa979134fc7",
   "created_at": "2025-12-19T13:03:52.836Z",
-  "updated_at": "2025-12-22T09:57:29.445Z",
+  "updated_at": "2026-04-11T21:07:06.291Z",
   "comment": {
-    "text": "This translation key displays a message indicating that no AI agents are currently available. It's used in an empty state view, likely within a user interface element showing AI agent functionality, and informs users that AI agents haven’t been set up or are unavailable. Translators should ensure the language accurately reflects the absence of AI agents.",
+    "text": "This is a message displayed when no AI agents are configured for the current user. It appears in an empty state view and includes a variable `{{aiAgents}}` which will be replaced by the localized term for \"AI Agents\".",
     "is_auto": true,
-    "updated_at": "2025-12-22T09:57:29.445Z"
+    "updated_at": "2026-04-11T21:07:06.291Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 184,
-      "context": "return t(\"EmptyView:EmptyDescription\");\n };\n \n const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {\n return isUser(access)\n ? t(\"EmptyView:EmptyAIAgentsUserTitle\", {\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"EmptyView:EmptyAIAgentsTitle\", {\n aiAgent: t(\"Common:AIAgent\"),\n });",
+      "line_number": 185,
+      "context": "return t(\"EmptyView:EmptyViewDescription\");\n };\n \n const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {\n return isUser(access)\n ? t(\"EmptyView:EmptyAIAgentsUserTitle\", {\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"EmptyView:EmptyAIAgentsTitle\", {\n aiAgent: t(\"Common:AIAgent\"),\n });",
       "module": "/packages/client"
     }
   ],

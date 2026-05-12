@@ -3,23 +3,24 @@
   "content": "Default Templates",
   "content_en_sha1_hash": "25a73de07cb5568979d641c9cdc35f2af9be1da8",
   "created_at": "2026-02-18T14:56:26.335Z",
-  "updated_at": "2026-04-09T03:34:47.595Z",
+  "updated_at": "2026-04-13T14:59:05.839Z",
   "comment": {
-    "text": "This key displays the label \"Default Templates\" likely in a UI section related to portal settings, specifically within a page for managing default templates. It appears as a heading or title for a section or component that allows users to view or modify default template configurations.",
+    "text": "This is a section title in the portal settings, referring to the management of default document templates.",
     "is_auto": true,
-    "updated_at": "2026-03-20T10:27:47.617Z"
+    "updated_at": "2026-04-11T21:24:55.117Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/DefaultTemplates/index.tsx",
-      "line_number": 37,
-      "context": "import withLoading from \"SRC_DIR/HOCs/withLoading\";\n import { setDocumentTitle } from \"SRC_DIR/helpers/utils\";\n \n import TemplatesRow from \"./TemplatesRow\";\n import styles from \"./DefaultTemplates.module.scss\";\n \n type Props = {\n templates?: TStore[\"defaultTemplatesStore\"][\"templates\"];\n };",
+      "line_number": 47,
+      "context": "const DefaultTemplates = ({ templates }: Props) => {\n const { t } = useTranslation(\"Settings\");\n \n useEffect(() => {\n setDocumentTitle(t(\"DefaultTemplates\"));\n }, []);\n \n return (\n <div className={styles.wrapper} data-testid=\"default-templates\">\n <Text className={styles.description}>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/index.tsx",
-      "line_number": 43,
-      "context": "import config from \"PACKAGE_FILE\";\n import withLoading from \"SRC_DIR/HOCs/withLoading\";\n import BrandingStore from \"SRC_DIR/store/portal-settings/BrandingStore\";\n import CommonStore from \"SRC_DIR/store/CommonStore\";\n import DefaultTemplatesStore from \"SRC_DIR/store/portal-settings/DefaultTemplatesStore\";\n \n import Customization from \"./customization\";\n import Branding from \"./branding\";\n import Appearance from \"./appearance\";\n import DefaultTemplates from \"./DefaultTemplates\";",
+      "line_number": 123,
+      "context": "content: <Appearance />,\n onClick: () => {},\n },\n {\n id: \"default-templates\",\n name: t(\"DefaultTemplates\"),\n content: <DefaultTemplates />,\n onClick: async () => {\n clearAbortControllerArr();\n await getTemplatesData();\n },",
       "module": "/packages/client"
     },
     {
@@ -123,25 +124,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ເຫຼັກແບບມາດຕະຖານ' translates to 'Standard Iron/Steel' instead of 'Default Templates'. 'ເຫຼັກ' (Iron/Steel) is incorrect in this context.",
-          "suggestion": "ແບບຟອມມາດຕະຖານ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Nodefiltri' means 'Node filters', which is completely unrelated to 'Default Templates'.",
-          "suggestion": "Standarta šabloni"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -189,13 +178,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Défautové' is a Gallicism (derived from French 'défaut') and is not the correct Slovak term for 'Default' in a technical/software context. In Slovak, 'Default' should be translated as 'Predvolené'.",
-          "suggestion": "Predvolené šablóny"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -213,13 +196,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Шаблонски податке' means 'Template data' (accusative case), whereas the English 'Default Templates' refers to the templates themselves as a heading/title. Additionally, 'Default' is missing from the translation.",
-          "suggestion": "Подразумевани шаблони"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -237,13 +214,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Шаблонні значення за замовчуванням' means 'Default template values', whereas the English 'Default Templates' refers to the templates themselves (objects/files), not their values.",
-          "suggestion": "Шаблони за замовчуванням"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

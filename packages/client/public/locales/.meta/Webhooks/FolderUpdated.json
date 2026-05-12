@@ -3,17 +3,18 @@
   "content": "Folder updated",
   "content_en_sha1_hash": "35d20622dba94a642c7f8160c54fa9fa47f19ac1",
   "created_at": "2025-05-19T21:30:49.761Z",
-  "updated_at": "2026-04-08T19:57:52.752Z",
+  "updated_at": "2026-04-13T14:59:05.878Z",
   "comment": {
-    "text": "The translation key \"FolderUpdated\" is used to display the phrase \"Folder updated\" when a folder's contents have changed. This message appears in UI elements related to file management and webhooks, likely in buttons or dialog windows that notify users of updates.",
+    "text": "This is a toast message indicating that a folder has been successfully updated.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:47:02.025Z"
+    "updated_at": "2026-04-11T21:28:52.284Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
-      "line_number": 64,
-      "context": "return t(\"FileCopied\");\n case WebhookTriggers.FileMoved:\n return t(\"FileMoved\");\n case WebhookTriggers.FolderCreated:\n return t(\"FolderCreated\");\n case WebhookTriggers.FolderUpdated:\n return t(\"FolderUpdated\");\n case WebhookTriggers.FolderTrashed:\n return t(\"FolderTrashed\");\n case WebhookTriggers.FolderDeleted:\n return t(\"FolderDeleted\");",
+      "line_number": 65,
+      "context": "case WebhookTriggers.FileMoved:\n return t(\"FileMoved\");\n case WebhookTriggers.FolderCreated:\n return t(\"FolderCreated\");\n case WebhookTriggers.FolderUpdated:\n return t(\"FolderUpdated\");\n case WebhookTriggers.FolderTrashed:\n return t(\"FolderTrashed\");\n case WebhookTriggers.FolderDeleted:\n return t(\"FolderDeleted\");\n case WebhookTriggers.FolderRestored:",
       "module": "/packages/client"
     }
   ],
@@ -171,13 +172,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Фасцикла' is an incorrect/non-standard term for 'Folder' in Serbian. The standard term is 'Овртиљак' or 'Фолдер'.",
-          "suggestion": "Фолдер је ажуриран"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

@@ -3,11 +3,12 @@
   "content": "Overview",
   "content_en_sha1_hash": "0efc2e6be4c23b9a513d7ce0dcff8ed80e8912e7",
   "created_at": "2026-04-03T21:51:36.622Z",
-  "updated_at": "2026-04-09T02:15:45.674Z",
+  "updated_at": "2026-04-11T21:23:08.213Z",
   "comment": {
-    "text": "This label is used for a navigation item within the Developer Tools menu. It identifies the link that directs users to the developer tools overview page.",
+    "text": "This is a navigation item label for the \"Overview\" section within the developer tools. It appears as a short label in a list of developer tool categories.",
     "is_auto": true,
-    "updated_at": "2026-04-03T21:59:32.057Z"
+    "updated_at": "2026-04-11T21:23:08.213Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -111,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian word 'Paskaidrojums' means 'Explanation' or 'Description', whereas 'Overview' in a navigation context refers to a general summary or a high-level view (Latvian: 'Apraksts' or 'Kopsavilkums').",
-          "suggestion": "Apraksts"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -147,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian word 'Sursă' means 'Source', which is a completely different meaning from 'Overview'.",
-          "suggestion": "Prezentare generală"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

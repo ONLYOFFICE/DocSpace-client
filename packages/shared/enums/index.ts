@@ -606,6 +606,8 @@ export enum WebhookTriggers {
   AgentCreated = 2147483648,
   AgentUpdated = 4294967296,
   AgentDeleted = 8589934592,
+  FileDownloaded = 17179869184,
+  FolderDownloaded = 34359738368,
 }
 
 export enum RoomSecurityError {

@@ -3,13 +3,21 @@
   "content": "Once you add credits, all AI features become available instantly. No additional setup required.",
   "content_en_sha1_hash": "69459040cd009cec36b9da367692d47cc2977b6b",
   "created_at": "2026-04-10T13:53:44.238Z",
-  "updated_at": "2026-04-10T13:53:44.238Z",
+  "updated_at": "2026-04-11T21:00:12.054Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a descriptive text appearing in a \"Get Started\" section for AI features. It explains that AI features become available immediately after adding credits, without further setup.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:00:12.054Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/GetStartedBody.tsx",
+      "line_number": 201,
+      "context": "<Text\n fontSize=\"12px\"\n lineHeight=\"16px\"\n className={styles.stepDescription}\n >\n {t(\"AIGetStartedStep2Description\")}\n </Text>\n </div>\n </div>\n \n <div className={styles.stepConnectorDashed}>",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

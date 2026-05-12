@@ -3,11 +3,12 @@
   "content": "Brand name",
   "content_en_sha1_hash": "6b4b8b5df0e218b10da0dadc07407d9783d4e3ad",
   "created_at": "2025-05-26T07:15:41.010Z",
-  "updated_at": "2026-04-08T16:03:46.674Z",
+  "updated_at": "2026-04-13T14:59:05.903Z",
   "comment": {
-    "text": "This translation key is used to display the brand name as a label in various UI elements, such as mobile category titles and branding settings. It appears on screens like the Branding mobile view, where it's displayed next to an icon. Translators should provide the actual brand name for this text.",
+    "text": "This is a label for a section in the portal settings where users can configure the brand name displayed within the application. It appears as a navigation link and a page title.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:07:07.186Z"
+    "updated_at": "2026-04-11T20:58:08.505Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -24,13 +25,13 @@
     },
     {
       "file_path": "/packages/shared/pages/Branding/BrandName/index.tsx",
-      "line_number": 49,
-      "context": "import { useTheme } from \"@docspace/ui-kit/context/ThemeContext\";\n \n import { NotAvailable } from \"../WhiteLabel/NotAvailable\";\n import { IWhiteLabelData } from \"../WhiteLabel/WhiteLabel.types\";\n \n import { IBrandNameProps } from \"./BrandName.types\";\n import styles from \"./BrandName.module.scss\";\n \n export const BrandName = ({\n showNotAvailable,\n isSettingPaid,",
+      "line_number": 137,
+      "context": ">\n {showNotAvailable ? <NotAvailable /> : null}\n \n <div className={classNames(styles.headerContainer, \"header-container\")}>\n <Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"BrandName\")}\n </Text>\n \n {!isSettingPaid && !standalone ? (\n <Badge\n className={classNames(styles.paidBadge, \"paid-badge\")}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/MobileView/index.tsx",
-      "line_number": 52,
+      "line_number": 53,
       "context": "const { t } = useTranslation(\"Common\");\n \n return (\n <div className={styles.mobileView}>\n <CategoryItem\n title={t(\"BrandName\")}\n subtitle={t(\"BrandNameSubtitleMobile\")}\n url={`${baseUrl}/branding/brand-name`}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}",
       "module": "/packages/shared"
     }

@@ -1,8 +1,8 @@
 {
   "ChangeData": "Փոխել տվյալները և գաղտնաբառը",
+  "ClickButtonBelow": "Եթե ցանկանում եք մուտք գործել ձեր էլ. հասցեով, խնդրում ենք սահմանել ձեր սեփական գաղտնաբառը: <br/> Երբ պատրաստ լինեք, խնդրում ենք սեղմել ստորև նշված կոճակը:",
   "ContinueToProduct": "Շարունակել՝  {{productName}}",
   "GeneratedPassword": "Գեներացված գաղտնաբառ",
   "ProductNameDetail": "{{productName}} անուն",
-  "ReviewAccountDetails": "Reserve um momento para revisar os detalhes da sua conta:",
-  "ClickButtonBelow": "Եթե ցանկանում եք մուտք գործել ձեր էլ. հասցեով, խնդրում ենք սահմանել ձեր սեփական գաղտնաբառը: <br/> Երբ պատրաստ լինեք, խնդրում ենք սեղմել ստորև նշված կոճակը:"
+  "ReviewAccountDetails": "Reserve um momento para revisar os detalhes da sua conta:"
 }

@@ -44,6 +44,7 @@ import { AboutDialog } from "../../../components/about-dialog";
 import { ICompanyInfo } from "./CompanyInfo.types";
 import { useCompanySettings } from "./useCompanySettings";
 import styles from "./CompanyInfo.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const CompanyInfo = ({
 	isSettingPaid,
@@ -142,7 +143,7 @@ export const CompanyInfo = ({
 					)}
 				>
 					{t("BrandingSectionDescription", {
-						productName: t("ProductName"),
+						productName: getBrandName("ProductName"),
 					})}
 				</div>
 				<div className={classNames(styles.header, "header")}>

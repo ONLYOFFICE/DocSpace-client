@@ -29,17 +29,35 @@ type Waiter = {
   resolve: (el: Element) => void;
   reject: (err: Error) => void;
   timer: ReturnType<typeof setTimeout>;
+  signal?: AbortSignal;
+  onAbort?: () => void;
 };
 
 const waiters: Waiter[] = [];
 let sharedObserver: MutationObserver | null = null;
+
+function cleanupWaiter(w: Waiter) {
+  clearTimeout(w.timer);
+  if (w.signal && w.onAbort) {
+    w.signal.removeEventListener("abort", w.onAbort);
+  }
+}
+
+function removeWaiter(w: Waiter) {
+  const idx = waiters.indexOf(w);
+  if (idx !== -1) waiters.splice(idx, 1);
+  if (waiters.length === 0 && sharedObserver) {
+    sharedObserver.disconnect();
+    sharedObserver = null;
+  }
+}
 
 function checkWaiters() {
   for (let i = waiters.length - 1; i >= 0; i--) {
     const w = waiters[i];
     const el = document.querySelector(w.selector);
     if (el) {
-      clearTimeout(w.timer);
+      cleanupWaiter(w);
       waiters.splice(i, 1);
       w.resolve(el);
     }
@@ -54,31 +72,52 @@ function checkWaiters() {
 function ensureObserver() {
   if (sharedObserver) return;
   sharedObserver = new MutationObserver(checkWaiters);
-  sharedObserver.observe(document.body, { childList: true, subtree: true });
+  sharedObserver.observe(document.body, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+  });
 }
 
 export function waitForElement(
   selector: string,
   timeout = 10000,
+  signal?: AbortSignal,
 ): Promise<Element> {
   return new Promise((resolve, reject) => {
+    if (signal?.aborted) {
+      reject(new DOMException("Aborted", "AbortError"));
+      return;
+    }
+
     const el = document.querySelector(selector);
     if (el) {
       resolve(el);
       return;
     }
 
-    const timer = setTimeout(() => {
-      const idx = waiters.findIndex((w) => w.timer === timer);
-      if (idx !== -1) waiters.splice(idx, 1);
-      if (waiters.length === 0 && sharedObserver) {
-        sharedObserver.disconnect();
-        sharedObserver = null;
-      }
-      reject(new Error(`Timeout waiting for element: ${selector}`));
-    }, timeout);
+    const waiter: Waiter = {
+      selector,
+      resolve,
+      reject,
+      signal,
+      timer: setTimeout(() => {
+        cleanupWaiter(waiter);
+        removeWaiter(waiter);
+        reject(new Error(`Timeout waiting for element: ${selector}`));
+      }, timeout),
+    };
 
-    waiters.push({ selector, resolve, reject, timer });
+    if (signal) {
+      waiter.onAbort = () => {
+        cleanupWaiter(waiter);
+        removeWaiter(waiter);
+        reject(new DOMException("Aborted", "AbortError"));
+      };
+      signal.addEventListener("abort", waiter.onAbort, { once: true });
+    }
+
+    waiters.push(waiter);
     ensureObserver();
   });
 }

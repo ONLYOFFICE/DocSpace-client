@@ -3,16 +3,17 @@
   "content": "This subsection allows you to provide users with secure and convenient ways to access the portal.",
   "content_en_sha1_hash": "0f3b230f6983fda1db2a358a7aa46ce3c5840a0f",
   "created_at": "2025-05-19T21:30:52.300Z",
-  "updated_at": "2026-04-09T01:56:17.210Z",
+  "updated_at": "2026-04-11T21:22:51.423Z",
   "comment": {
-    "text": "This translation key is used for the subtitle displayed next to a button or similar element that allows users to access the secure portal. It provides a brief description of the functionality offered by this section, helping users understand its purpose in the portal settings page.",
+    "text": "This is a subtitle for the \"Security\" section of the portal settings, introducing options related to user access.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:43.037Z"
+    "updated_at": "2026-04-11T21:22:51.423Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 140,
+      "line_number": 141,
       "context": "return (\n <MainContainer\n className=\"desktop-view\"\n withoutExternalLink={!helpCenterDomain}\n >\n <Text className=\"subtitle\">{t(\"PortalSecurityTitle\")}</Text>\n \n <Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"SettingPasswordTittle\")}\n </Text>",
       "module": "/packages/client"
     }
@@ -105,25 +106,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'ປະຕູ' (door/gate) is used as a literal translation for 'portal'. In a software/web context, 'portal' should be translated as 'ພໍຕອນ' or 'ເວັບໄຊທ໌' to avoid sounding like a physical door.",
-          "suggestion": "ພາກສ່ວນຍ່ອຍນີ້ຊ່ວຍໃຫ້ທ່ານສາມາດໃຫ້ຜູ້ໃຊ້ມີວິທີທີ່ປອດໄພແລະສະດວກໃນການເຂົ້າເຖິງພໍຕອນ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation changes the subject of the sentence. The English says the subsection allows 'you' (the admin) to provide ways for users. The Latvian says the subsection allows 'users' to provide ways, which reverses the logic of the functionality.",
-          "suggestion": "Šī apakšsadaļa ļauj jums nodrošināt lietotājiem drošus un ērtus veidus, kā piekļūt portālam."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -153,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation contains a grammatical error that changes the subject-verb relationship: 'vă permite să le oferă' translates to 'allows you to offer them', whereas the English 'allows you to provide users' implies the subsection is the tool for the user to provide access. More importantly, 'vă permite să le oferă' is syntactically broken in Romanian (it uses two subjects incorrectly).",
-          "suggestion": "Această subsecțiune vă permite să oferiți utilizatorilor modalități sigure și convenabile de a accesa portalul."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -171,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'පරිශ්‍රීලකයින්ට' (parishreelakayinta) is a misspelling of 'පරිශීලකයින්ට' (parishilakayinta). While it is a typo, in a UI context, it renders the word 'users' incorrectly.",
-          "suggestion": "මෙම අනුකොටස පරිශීලකයින්ට ද්වාරය වෙත ප්‍රවේශ වීමට ආරක්‍ෂිත සහ පහසු ක්‍රම ලබා දීමට ඉඩ සලසයි."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -231,13 +208,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation starts with 'y nënseksion', which is a typo/fragment. It should be 'Ky nënseksion' (This subsection).",
-          "suggestion": "Ky nënseksion ju lejon t'u ofroni përdoruesve mënyra të sigurta dhe të përshtatshme për të hyrë në portal."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

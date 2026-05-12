@@ -1,3 +1,5 @@
+@use "@docspace/ui-kit/styles/mixins";
+
 .root {
   display: flex;
   flex-direction: column;
@@ -170,7 +172,7 @@
 }
 
 /* ── Responsive ── */
-@media (max-width: 1023.9px) {
+@include mixins.tablet-and-below {
   .leftColumn {
     width: 320px;
   }
@@ -181,7 +183,7 @@
   }
 }
 
-@media (max-width: 767.9px) {
+@include mixins.mobile {
   .content {
     flex-direction: column;
     gap: 32px;

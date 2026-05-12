@@ -1,7 +1,7 @@
 {
-  "ChangesToTag": "Mainīties šim tagam ietekmēs visus istabas, kur tas tiek izmantots.",
+  "ChangesToTag": "Izdarītās izmaiņas šajā tagā ietekmēs visas istabas, kurās tas tiek izmantots.",
   "DeleteTag": "Dzēst tagu",
-  "DeleteTagCannotBeUndone": "Šis rīcība nevar atgriezt.",
+  "DeleteTagCannotBeUndone": "Šo darbību nevar atcelt.",
   "DeleteTagConfirmation": "Dzīrojot šo atzīmi, tā tiks noņemta no visām istabām, kur tā ir izmantota.",
   "EditTag": "Rediģēt tagu",
   "RemoveTag": "<1>{{tag}}</1> tag noņemts."

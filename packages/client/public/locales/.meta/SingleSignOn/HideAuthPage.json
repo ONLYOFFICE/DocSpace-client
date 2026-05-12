@@ -3,16 +3,17 @@
   "content": "Hide auth page",
   "content_en_sha1_hash": "5316ca6866fa2cf3366a0647deae3c189d460422",
   "created_at": "2025-05-19T21:30:50.088Z",
-  "updated_at": "2026-04-08T23:27:51.460Z",
+  "updated_at": "2026-04-11T21:26:52.059Z",
   "comment": {
-    "text": "The translation key \"HideAuthPage\" is used to display a label for a checkbox that allows users to hide the authentication page in the Portal Settings. This value appears as a label on a Checkbox component and can be translated to provide clarity for users in different languages.",
+    "text": "Checkbox label. When checked, it hides the authentication page for Single Sign-On (SSO) users, directing them straight to the portal.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:16.034Z"
+    "updated_at": "2026-04-11T21:26:52.059Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/AdvancedSettings.tsx",
-      "line_number": 87,
+      "line_number": 89,
       "context": "<div className=\"advanced-block\">\n <Checkbox\n id=\"hide-auth-page\"\n className=\"checkbox-input\"\n label={t(\"HideAuthPage\")}\n name=\"hideAuthPage\"\n isChecked={hideAuthPage}\n isDisabled={!enableSso || isLoadingXml}\n onChange={setCheckbox}\n dataTestId=\"hide_auth_page_checkbox\"",
       "module": "/packages/client"
     }
@@ -45,13 +46,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech translation uses the plural 'stránky' (pages), whereas the English source refers to a single 'page'.",
-          "suggestion": "Skrýt stránku pro ověření"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -87,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'իսկորոշման' (iskoroshmann) is a misspelling or incorrect term for 'authentication'. The correct term for authentication in Armenian is 'աուտենտիֆիկացման' or 'մուտքագրման'.",
-          "suggestion": "Թաքցնել մուտքագրման էջը"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -117,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ເຊື່ອງ ໜ້າການ ກວດສອບ' translates to 'Hide the verification page' or 'Hide the inspection page'. In the context of 'auth page' (authentication), 'ການກວດສອບສິດ' or 'ໜ້າເຂົ້າສູ່ລະບົບ' would be more accurate to convey authentication/login.",
-          "suggestion": "ເຊື່ອງໜ້າເຂົ້າສູ່ລະບົບ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -171,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation means 'Hide two-factor page' instead of 'Hide auth page'. 'Auth' (Authentication) is not the same as 'Two-factor' (2FA).",
-          "suggestion": "අභිජාන පිටුව සඟවන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

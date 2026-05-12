@@ -52,7 +52,10 @@ export async function getFilesSettings(): Promise<TFilesSettings | undefined> {
 	try {
 		const [req] = await createRequest([`/files/settings`], [["", ""]], "GET");
 
-		const res = await fetch(req, { next: { revalidate: 900 } });
+		const res = await fetch(req, {
+			next: { revalidate: 900 },
+			signal: AbortSignal.timeout(8000),
+		});
 
 		if (!res.ok) {
 			logger.error(`GET /files/settings failed: ${res.status}`);
@@ -77,7 +80,10 @@ export async function getFoldersTree(): Promise<TFolder[]> {
 			"GET",
 		);
 
-		const res = await fetch(req, { next: { revalidate: 300 } });
+		const res = await fetch(req, {
+			next: { revalidate: 300 },
+			signal: AbortSignal.timeout(8000),
+		});
 
 		if (!res.ok) {
 			logger.error(
@@ -173,7 +179,10 @@ export async function getFolder(
 			[signal],
 		);
 
-		const res = await fetch(req, { next: { revalidate: 300 } });
+		const res = await fetch(req, {
+			next: { revalidate: 300 },
+			signal: AbortSignal.timeout(8000),
+		});
 
 		if (!res.ok) {
 			logger.error(`GET /files/${params} failed: ${res.status}`);
@@ -209,7 +218,10 @@ export async function getFolderInfo(
 			"GET",
 		);
 
-		const res = await fetch(req, { next: { revalidate: 300 } });
+		const res = await fetch(req, {
+			next: { revalidate: 300 },
+			signal: AbortSignal.timeout(8000),
+		});
 
 		if (!res.ok) {
 			logger.error(`GET /files/folder/${folderId} failed: ${res.status}`);
@@ -238,7 +250,10 @@ export async function validateShareFolder(share: string) {
 			"GET",
 		);
 
-		const res = await fetch(req, { next: { revalidate: 300 } });
+		const res = await fetch(req, {
+			next: { revalidate: 300 },
+			signal: AbortSignal.timeout(8000),
+		});
 
 		if (!res.ok) {
 			logger.error(`GET /files/share/${share} failed: ${res.status}`);

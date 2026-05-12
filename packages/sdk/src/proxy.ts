@@ -27,6 +27,8 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
+import { sanitizeStylesUrl } from "@docspace/shared/utils/customStyles";
+
 import {
   AGENT_ID_HEADER,
   FILTER_HEADER,
@@ -35,6 +37,7 @@ import {
   PATHNAME_HEADER,
   ROOM_ID_HEADER,
   SHARE_KEY_HEADER,
+  STYLES_URL_HEADER,
   THEME_HEADER,
 } from "@/utils/constants";
 import { handlePublicRoomValidation } from "@/utils/middleware/handlePublicRoomValidation";
@@ -81,6 +84,7 @@ export async function proxy(request: NextRequest) {
   requestHeaders.set(THEME_HEADER, theme ?? "");
   requestHeaders.set(LOCALE_HEADER, locale ?? "");
   requestHeaders.set(SHARE_KEY_HEADER, shareKey ?? "");
+  requestHeaders.set(STYLES_URL_HEADER, searchParams.get("stylesUrl") ?? "");
 
   if (request.nextUrl.pathname.includes("forms")) {
     const roomId = searchParams.get("roomId") ?? "";
@@ -88,6 +92,12 @@ export async function proxy(request: NextRequest) {
 
     requestHeaders.set(ROOM_ID_HEADER, roomId);
     requestHeaders.set(LIBRARY_ID_HEADER, libraryId);
+    requestHeaders.set(FILTER_HEADER, searchParams.toString());
+
+    return NextResponse.next({ request: { headers: requestHeaders } });
+  }
+
+  if (request.nextUrl.pathname.includes("personal-files")) {
     requestHeaders.set(FILTER_HEADER, searchParams.toString());
 
     return NextResponse.next({
@@ -103,11 +113,7 @@ export async function proxy(request: NextRequest) {
     requestHeaders.set(AGENT_ID_HEADER, agentId);
     requestHeaders.set(FILTER_HEADER, searchParams.toString());
 
-    return NextResponse.next({
-      request: {
-        headers: requestHeaders,
-      },
-    });
+    return NextResponse.next({ request: { headers: requestHeaders } });
   }
 
   if (request.nextUrl.pathname.includes("public-room")) {
@@ -127,8 +133,9 @@ export async function proxy(request: NextRequest) {
     }
 
     if (validationResult?.anonymousSessionKeyCookie) {
-      const cookieNameValue =
-        validationResult.anonymousSessionKeyCookie.split(";")[0]?.trim();
+      const cookieNameValue = validationResult.anonymousSessionKeyCookie
+        .split(";")[0]
+        ?.trim();
 
       if (cookieNameValue) {
         const existingCookies = requestHeaders.get("cookie") || "";
@@ -181,5 +188,8 @@ export const config = {
     "/forms",
     "/forms/:path*",
     "/chat",
+    "/personal-files",
+    "/personal-files/:path*",
   ],
 };
+

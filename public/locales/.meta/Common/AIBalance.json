@@ -3,13 +3,21 @@
   "content": "AI balance",
   "content_en_sha1_hash": "c96f5be7ba541dec486eafdc64864179ef481ad4",
   "created_at": "2026-04-10T13:53:44.192Z",
-  "updated_at": "2026-04-10T13:53:44.192Z",
+  "updated_at": "2026-04-11T21:00:34.653Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label for an item in a list, indicating the user's remaining AI credits or usage. It appears as a short label.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:00:34.653Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/GetStartedBody.tsx",
+      "line_number": 183,
+      "context": "<div className={styles.item}>\n <div className={styles.icon}>\n <AiSvg />\n </div>\n <Text fontWeight={600} fontSize={\"12px\"}>\n {t(\"AIBalance\")}\n </Text>\n </div>\n </div>\n </div>\n </div>",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

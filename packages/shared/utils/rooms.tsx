@@ -162,6 +162,7 @@ const getFetchedRoomParams = (
     ...(isDefaultRoomsQuotaSet && {
       quota: item.quotaLimit,
     }),
+    logo: item.logo,
   };
   return fetchedRoomParams;
 };

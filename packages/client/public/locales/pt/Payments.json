@@ -1,18 +1,17 @@
 {
-  "AccessingProblem": "Se já é um utilizador e tiver problemas em aceder a este espaço, por favor contacte o administrador.",
   "CannotCreateNewRoom": "A sala não pode ser criada",
   "CannotCreatePaidUsers": "Os utilizadores pagos não podem ser adicionados",
   "CannotRestoreRoom": "O quarto não pode ser restaurado",
   "ChooseNewPlan": "Gostaria de escolher outro plano de preços?",
+  "GracePeriodActive": "O período de carência está ativo <1>de {{fromDate}} a {{byDate}}</1> (dias restantes: {{delayDaysCount}}).",
+  "LicenseExpiredRestriction": "Não é possível adicionar novos usuários e criar novas salas. A licença expirou.",
+  "LicenseGracePeriodInfo": "Durante este período, os administradores não conseguem criar salas novas ou adicionar usuários novos. Assim que o período de carência terminar, o {{productName}} ficará indisponível até que uma nova licença seja ativada.",
   "NewRoomWillExceedLimit": "Não é possível criar este quarto porque o limite do número de quartos incluídos no seu plano atual foi atingido.",
   "NewUsersWillExceedMembersLimit": "Não é possível adicionar novos utilizadores pagos, uma vez que foi atingido o limite do número de administradores incluídos no seu plano atual.",
   "NotPossibleRoomRestoring": "Não é possível restaurar este quarto, uma vez que foi atingido o limite do número de quartos incluídos no seu plano atual.",
   "NumberOfRoomsAccordingToTariff": "Número de quartos de acordo com o seu plano tarifário: {{currentValue}}/{{maxValue}}",
-  "NumberOfUsersAccordingToTariff": "Número de administradores de acordo com o seu plano tarifário: {{currentValue}}/{{{maxValue}}",
+  "NumberOfUsersAccordingToTariff": "Número de administradores de acordo com o seu plano tarifário: {{currentValue}}/{{maxValue}}",
+  "PlanPaymentOverdue": "Não é possível adicionar novos usuários, criar novas salas ou agentes de IA. Pagamento do plano {{planName}} em atraso.",
   "RoomsQuotaAlmostExhausted": "A quota de quartos está quase esgotada.",
-  "UsersQuotaAlmostExhausted": "A quota de utilizadores pagos está quase esgotada.",
-  "GracePeriodActive": "O período de carência está ativo <1>de {{fromDate}} a {{byDate}}</1> (dias restantes: {{delayDaysCount}}).",
-  "LicenseExpired": "Não é possível adicionar novos usuários e criar novas salas. A licença expirou.",
-  "LicenseGracePeriodInfo": "Durante este período, os administradores não conseguem criar salas novas ou adicionar usuários novos. Assim que o período de carência terminar, o {{productName}} ficará indisponível até que uma nova licença seja ativada.",
-  "PlanPaymentOverdue": "Não é possível adicionar novos usuários, criar novas salas ou agentes de IA. Pagamento do plano {{planName}} em atraso."
+  "UsersQuotaAlmostExhausted": "A quota de utilizadores pagos está quase esgotada."
 }

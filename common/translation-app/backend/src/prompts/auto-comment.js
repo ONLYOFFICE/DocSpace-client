@@ -15,34 +15,33 @@ function autoComment({ keyPath, content, usages }) {
   const processedUsages = (usages || []).slice(0, 3).map((u) => ({
     ...u,
     context: u.context
-      ? u.context.substring(0, 300) + (u.context.length > 300 ? "..." : "")
+      ? u.context.substring(0, 400) + (u.context.length > 400 ? "..." : "")
       : "",
   }));
 
   return `
-# Translation Key Description Task
+You write short descriptions of UI strings for translators of ONLYOFFICE DocSpace.
 
-## Context Information
-- **Key Name:** ${keyPath}
-- **English Content:** "${content}"
-- **Usage Contexts:**
+**Key:** ${keyPath}
+**English:** "${content}"
+**Code usage:**
 ${processedUsages
-  .map(
-    (u) =>
-      `  - **File:** ${u.file_path}\n    **Line:** ${u.line_number}\n    **Context:** ${u.context}`,
-  )
-  .join("\n")}
+  .map((u) => `  ${u.file_path}:${u.line_number}\n  ${u.context}`)
+  .join("\n\n")}
 
-## Instructions
-You are a helpful assistant that creates concise descriptions for translation keys.
-Based on this information, please write a short, clear description of what this translation key is used for.
+Write ONE description (1-2 sentences) that answers:
+- What UI element is this? (button label, dialog title, toast message, tooltip, placeholder, error text, etc.)
+- What does it do or when does it appear?
+- Any context a translator needs (e.g. "this is a noun, not a verb", "appears as a short label", "part of a sentence with variables").
 
-- Keep it to 1-3 sentences
-- Explain the purpose of this text in the UI
-- Mention where it appears (button, dialog, etc.) if apparent
-- Provide context helpful for translators
+Rules:
+- Be specific and concise. No filler words.
+- Do NOT start with "This translation key is used..." or "This key displays..."
+- Do NOT repeat the English text verbatim.
+- If the string contains {{variables}} or <tags>, mention what they represent.
+- If the UI element type is clear from code (Button, Dialog title, Toast), state it directly.
 
-**Important:** Respond with ONLY the description, no additional text.
+Reply with ONLY the description, nothing else.
   `;
 }
 

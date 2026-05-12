@@ -3,11 +3,12 @@
   "content": "Generate New Self-Signed Certificate",
   "content_en_sha1_hash": "f8c8d1050f78ee5b1b7950f3eb401a6f5e677f78",
   "created_at": "2025-05-19T21:30:50.081Z",
-  "updated_at": "2026-04-08T23:31:27.567Z",
+  "updated_at": "2026-04-11T21:26:54.475Z",
   "comment": {
-    "text": "This translation key is used to display the label for a button that generates a new self-signed certificate. It appears in an action component and prompts users to open or generate a certificate.",
+    "text": "This is a button label. Clicking it generates a new self-signed certificate for Single Sign-On (SSO) configuration.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:16.920Z"
+    "updated_at": "2026-04-11T21:26:54.475Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The term 'Self-Signed' is missing from the translation. The current translation only says 'New Signed Certificate', which is technically different from a 'Self-Signed Certificate'.",
-          "suggestion": "Yeni özü imzalanmış sertifikat yaradın"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -147,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'New' is missing from the Romanian translation, which changes the instruction from generating a 'new' certificate to just generating 'a' certificate.",
-          "suggestion": "Generează un nou certificat cu semnătură automată"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

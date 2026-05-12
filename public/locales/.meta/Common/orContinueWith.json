@@ -3,16 +3,17 @@
   "content": "or continue with",
   "content_en_sha1_hash": "a1aa5858e0e7bb74686ebe81912f61fc201800cb",
   "created_at": "2025-05-19T21:30:47.130Z",
-  "updated_at": "2026-04-08T03:31:17.692Z",
+  "updated_at": "2026-04-24T09:05:19.151Z",
   "comment": {
-    "text": "This translation key is used for the label \"or continue with\" that appears in a social login flow. It prompts the user to either use their email address or proceed with the current authentication method. The text is commonly found on buttons or labels within login confirmation dialogs.",
+    "text": "This text appears as a separator between different login options, indicating that users can either log in with an email/password or continue using social media or SSO providers.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:23:28.654Z"
+    "updated_at": "2026-04-11T20:47:12.060Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/page.client.tsx",
-      "line_number": 627,
+      "line_number": 628,
       "context": "{!emailFromLink && (oauthDataExists() || ssoExists()) ? (\n <>\n <div className={styles.line}>\n <Text color={globalColors.gray} className={styles.orLabel}>\n {t(\"Common:orContinueWith\")}\n </Text>\n </div>\n <SocialButtonsGroup\n providers={thirdPartyProviders}\n onClick={onSocialButtonClick}",
       "module": "/packages/login"
     },
@@ -34,76 +35,126 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:02:05.405Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "0749a65f807f6017"
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation has a misplaced postposition 'ilə' (meaning 'with'), resulting in an ungrammatical phrase that does not correctly convey the meaning of 'or continue with'. In Azerbaijani, postpositions like 'ilə' must follow the noun they modify, not precede the verb, so the current translation 'və ya ilə davam edin' is semantically incorrect for the login separator context.",
+          "suggestion": "və ya davam edin",
+          "checked_at": "2026-04-24T09:02:05.405Z",
+          "checked_by": "openrouter/tencent/hy3-preview:free"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:02:05.407Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "7e9760a3f122b0f1"
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:02:16.663Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "b8f69b1eeb22926d"
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:02:16.663Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "be22520ec5733f57"
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:02:16.663Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "5e2fdef399ba2b78"
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:02:37.566Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "e17735c0a2f23ad7"
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Finnish translation is missing the equivalent of 'with' from the English phrase 'or continue with', which is necessary to convey the full meaning of continuing with social media or SSO providers.",
+          "suggestion": "tai jatka palvelulla",
+          "checked_at": "2026-04-24T09:02:37.566Z",
+          "checked_by": "openrouter/tencent/hy3-preview:free"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:02:37.567Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "aa0755a66fead4fa"
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Armenian translation omits the equivalent of 'with' from the original English phrase 'or continue with', resulting in incomplete meaning that does not fully convey the intended separator text for login options.",
+          "suggestion": "կամ շարունակել հետ",
+          "checked_at": "2026-04-24T09:02:46.105Z",
+          "checked_by": "openrouter/tencent/hy3-preview:free"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:03:12.411Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "5045f991b8c61f3a"
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "missing_content",
-          "description": "The translation 'あるいは' (or/alternatively) only translates the conjunction 'or' and omits the verb phrase 'continue with', which is necessary to provide context for the social login buttons following the label.",
-          "suggestion": "または次で続行"
+          "type": "incorrect_translation",
+          "description": "The Japanese translation incorrectly adds the word '次' (next) which is not present in the English source, altering the original meaning. The English text is a separator meaning 'or continue with [social/SSO providers]', but the translation implies 'or continue with next' which does not match the source content.",
+          "suggestion": "または以下で続行",
+          "checked_at": "2026-04-24T09:03:12.410Z",
+          "checked_by": "openrouter/tencent/hy3-preview:free"
         }
       ],
       "approved_at": null
@@ -114,8 +165,10 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation '또는 다음을 이용:' means 'or use the following:', which implies a list follows. The English 'or continue with' is a prepositional phrase used to introduce social login options. While similar in context, the Korean version adds a colon and a specific verb structure that changes the nuance from a connector to a command/instruction.",
-          "suggestion": "또는 다음으로 계속:"
+          "description": "The Korean translation '또는 다음으로 계속:' incorrectly conveys the meaning of 'or continue with' in the login separator context. The original text offers an alternative login method (social/SSO providers), but the translation implies proceeding to the next step, which changes the intended meaning.",
+          "suggestion": "또는 다음으로 계속",
+          "checked_at": "2026-04-24T09:03:38.272Z",
+          "checked_by": "openrouter/tencent/hy3-preview:free"
         }
       ],
       "approved_at": null
@@ -124,49 +177,73 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:03:38.273Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "d421ab607e145237"
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:03:38.273Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "5d7cdd617ca7e07a"
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:03:46.606Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "54ea1c30e75d80cc"
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:03:46.606Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "fe3d24b894db5b41"
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:03:46.606Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "cfa805fbc2888b88"
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:03:54.964Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "cfa805fbc2888b88"
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:03:54.964Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "071b68d9ba3a73ee"
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:03:54.965Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "ab54266d03b21fc8"
     },
     "si": {
       "ai_translated": false,
@@ -174,8 +251,10 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'හෝ මෙය සමඟ ඉදිරියට' translates to 'or forward with this', which is grammatically incomplete and awkward in a UI context. It lacks the verb 'proceed' or 'continue' in a way that makes sense for a social login label.",
-          "suggestion": "හෝ මෙය මගින් ඉදිරියට යන්න"
+          "description": "The Sinhala translation adds 'මෙය' (this) which is not present in the English source, and uses 'මගින්' (through) instead of the correct equivalent for 'with', altering the original meaning of 'or continue with'.",
+          "suggestion": "හෝ සමඟ ඉදිරියට යන්න",
+          "checked_at": "2026-04-24T09:04:28.776Z",
+          "checked_by": "openrouter/tencent/hy3-preview:free"
         }
       ],
       "approved_at": null
@@ -184,55 +263,87 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:04:28.776Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "d5e9c0347fb08760"
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:04:28.776Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "adeb0818bdd44d02"
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:04:39.878Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "e3d989b89d8665f8"
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:04:39.878Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "61b16c81378af945"
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:05:06.030Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "3efd0185d1a204aa"
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:05:06.030Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "19de9ed70e8401a8"
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:05:06.030Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "3e5d10dd0c4d761e"
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Chinese translation '或选择' means 'or choose', which does not convey the original meaning of 'or continue with' (indicating users can proceed with alternative login methods after the email/password option). The translation fails to preserve the intent of continuing the login flow with other providers.",
+          "suggestion": "或继续使用",
+          "checked_at": "2026-04-24T09:05:19.150Z",
+          "checked_by": "openrouter/tencent/hy3-preview:free"
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:04:39.878Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "1099f3c99501a2fa"
     }
   }
 }

@@ -3,11 +3,12 @@
   "content": "View all rooms",
   "content_en_sha1_hash": "591754375f09aba76e3a8dcea7c5fcb1e4f2fdfe",
   "created_at": "2025-05-19T21:30:47.074Z",
-  "updated_at": "2026-04-08T03:39:48.019Z",
+  "updated_at": "2026-04-12T05:42:51.153Z",
   "comment": {
-    "text": "\"View all rooms\" is used to describe the content of a button or link that allows users to view all available rooms. This translation key appears in UI contexts where room management functionality is displayed, such as in settings or profile pages.",
+    "text": "This is a description of an OAuth permission scope. It informs the user that an application is requesting permission to view all rooms within DocSpace.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:11.372Z"
+    "updated_at": "2026-04-11T20:47:23.314Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -207,13 +208,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Albanian translation means 'View basic information for your profile', which is completely different from the English 'View all rooms'.",
-          "suggestion": "Shiko të gjitha dhomat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

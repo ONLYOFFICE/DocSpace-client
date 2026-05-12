@@ -3,11 +3,12 @@
   "content": "Reactivate link",
   "content_en_sha1_hash": "f271b20a28fc605f08783c87c682440e160ccd0f",
   "created_at": "2026-02-18T14:56:09.264Z",
-  "updated_at": "2026-04-08T01:53:25.091Z",
+  "updated_at": "2026-04-12T03:27:22.333Z",
   "comment": {
-    "text": "This text appears on a button that allows users to reactivate an expired link. It's used in a component related to expired items and likely triggers a reactivation process when clicked. The translators should consider the context of reactivating a link within a broader sharing feature.",
+    "text": "This is a button label that appears when a shared link has expired. Clicking it reactivates the link, making it accessible again.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:14:12.271Z"
+    "updated_at": "2026-04-11T20:45:37.380Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -39,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation 'Активиране на връзката' means 'Activation of the link' (a noun phrase), whereas the English 'Reactivate link' is an imperative command (verb phrase) for an action. It also misses the 're-' prefix (re-activation).",
-          "suggestion": "Реактивиране на връзката"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -99,25 +94,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation '再アクティブ化リンク' is a noun phrase meaning 'Reactivation link' (a link that performs reactivation) rather than a verb phrase/command 'Reactivate link' (the action of reactivating the link). In UI buttons, the verb should come first or be phrased as an action.",
-          "suggestion": "リンクを再アクティブ化"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '활성화 링크' means 'Active link' or 'Activation link' (a noun phrase), whereas the English 'Reactivate link' is a command/action (verb phrase) to restore an expired link.",
-          "suggestion": "링크 재활성화"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -129,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'atsei' is a misspelling or incorrect form. In Latvian, 'saite' (link) in the accusative case should be 'saiti'. 'Atsei' does not have a clear meaning in this context.",
-          "suggestion": "Reaktivizēt saiti"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -147,13 +124,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Aktywować link' means 'Activate link', which implies a first-time activation. The English 'Reactivate link' implies restoring something that was previously active but is now expired/inactive. The prefix 're-' is missing.",
-          "suggestion": "Reaktywuj link"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -189,13 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation 'Aktivovať odkaz' means 'Activate link'. The English source 'Reactivate link' implies restoring something that was previously active but is now expired. The prefix 're-' is missing.",
-          "suggestion": "Znovuaktivovať odkaz"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -207,13 +172,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Albanian translation 'Rivë në aktivitet lidhjen' is grammatically incorrect and nonsensical. 'Rivë në aktivitet' is not a valid way to express 'reactivate'.",
-          "suggestion": "Riaktivizo lidhjen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -231,25 +190,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Turkish translation 'Yeniden Etkinleştirme Bağlantısı' translates to 'Reactivation Link' (a noun phrase), whereas the English 'Reactivate link' is an imperative command (an action). In the context of a button, it should be a verb phrase.",
-          "suggestion": "Bağlantıyı yeniden etkinleştir"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Активувати' means 'Activate', whereas the English source 'Reactivate' implies restoring something that was previously inactive or expired. The prefix 'Re-' is missing.",
-          "suggestion": "Повторно активувати посилання"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

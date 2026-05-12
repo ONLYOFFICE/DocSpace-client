@@ -3,11 +3,12 @@
   "content": "POST request header successfully copied to clipboard",
   "content_en_sha1_hash": "ca124d3d017bd3d886527d03bb4cc89a5a901183",
   "created_at": "2025-05-19T21:30:49.793Z",
-  "updated_at": "2026-04-08T19:36:36.561Z",
+  "updated_at": "2026-04-11T21:28:38.675Z",
   "comment": {
-    "text": "This translation key is used to display a message when the request headers are successfully copied to the clipboard. It appears as a button label in the UI.",
+    "text": "This is a toast message that appears briefly to confirm that the content of a POST request header has been copied to the user's clipboard.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:57.175Z"
+    "updated_at": "2026-04-11T21:28:38.675Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -81,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation refers to the 'request body' (հարցման մարմինը) instead of the 'request header' (հարցման վերնագիրը).",
-          "suggestion": "POST հարցման վերնագիրը հաջողությամբ պատճենվեց սեղմատախտակում"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -159,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'පසුරු පුවරුවට' (pasuru puvaruvata) is a misspelling or incorrect term for 'clipboard'. The correct technical term is 'පිටපත් පුවරුව' (pitapath puvaruva). Additionally, 'විය' (was/happened) makes it sound like a passive occurrence rather than a successful action.",
-          "suggestion": "POST ඉල්ලීමේ ශ්‍රීර්ෂකය සාර්ථකව පිටපත් පුවරුවට පිටපත් කරන ලදී"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -177,25 +166,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Glava' is a literal translation of 'Head' but in a technical networking context (HTTP headers), the correct term in Slovenian is 'Gibalo' or more commonly 'Glavica' or simply 'Headers' (zaglavki). 'Glava' refers to a biological head.",
-          "suggestion": "Zaglavje POST zahteve je bilo uspešno kopirano v odložišče"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'привремену меморију' (temporary memory/RAM) instead of 'clipboard' (меморија за копирање/клипборд). In a technical UI context, 'clipboard' refers to a specific OS function, not general temporary memory.",
-          "suggestion": "Заглавље POST захтева је успешно копирано у клипборд"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

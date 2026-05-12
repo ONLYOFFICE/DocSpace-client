@@ -3,16 +3,17 @@
   "content": "the room",
   "content_en_sha1_hash": "47a42f9a1dbc2961c03e3f7866f26a097ca7e7ef",
   "created_at": "2025-08-26T11:15:00.756Z",
-  "updated_at": "2026-04-07T23:09:07.589Z",
+  "updated_at": "2026-04-12T20:07:27.064Z",
   "comment": {
-    "text": "This key displays the text \"Share the room\" when sharing a room item. It appears as part of a sharing option, likely indicating the item being shared is a room. Translators should ensure the wording accurately conveys the action of sharing access to a room.",
+    "text": "This is a short noun phrase used as part of a sentence to refer to a room when sharing it. It appears in a dialog or menu related to sharing.",
     "is_auto": true,
-    "updated_at": "2025-08-26T11:16:23.026Z"
+    "updated_at": "2026-04-11T20:42:54.709Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 452,
+      "line_number": 453,
       "context": "link.access === ShareAccessRights.FormFilling\n ? t(\"Common:ShareForm\")\n : t(\"Common:ShareContents\");\n \n const shareParent = isRoom(item)\n ? t(\"Common:ShareTheRoom\")\n : t(\"Common:ShareTheFolder\");\n \n return (\n <Trans\n t={t}",
       "module": "/packages/shared"
     }
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'oтаğ' is a mix of Latin and Cyrillic characters and is not a valid Azerbaijani word. The correct word for 'the room' in Azerbaijani is 'otağı'.",
-          "suggestion": "otağı"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -57,13 +52,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The English text includes the definite article 'the', which is missing in the German translation. In the context of 'Share the room', 'den Raum' is required to maintain the grammatical structure and meaning.",
-          "suggestion": "den Raum"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -129,13 +118,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation 'kamer' is missing the definite article 'de', which is necessary to match the meaning of 'the room' in this context.",
-          "suggestion": "de kamer"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {

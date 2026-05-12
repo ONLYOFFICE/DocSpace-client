@@ -4,11 +4,11 @@
   "ErrorViewDescription": "Încercați din nou mai târziu.",
   "ErrorViewDescriptionNetworkError": "Se pare că nu aveți conexiune la Internet.",
   "ErrorViewHeader": "Galeria este temporar indisponibilă",
+  "GalleryTitle": "Galerie de șabloane {{organizationName}}",
   "SelectTemplate": "Selectează șablon",
+  "SubmitToGalleryDialogMainInfo": "Trimiteți șablonul în galeria publică pentru ca alții să îl folosească în munca lor. După ce șablonul trece de moderare, veți fi notificat și răsplătit pentru contribuția dumneavoastră.",
   "SuggestChanges": "Propuneri privind modificări",
   "TemplateInfo": "Informații despre șablon",
   "UploadGallery": "Încarcă în Galerie",
-  "ViewAllTemplates": "Afișează toate șabloanele",
-  "GalleryTitle": "Galerie de șabloane {{organizationName}}",
-  "SubmitToGalleryDialogMainInfo": "Trimiteți șablonul în galeria publică pentru ca alții să îl folosească în munca lor. După ce șablonul trece de moderare, veți fi notificat și răsplătit pentru contribuția dumneavoastră."
+  "ViewAllTemplates": "Afișează toate șabloanele"
 }

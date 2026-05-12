@@ -1,4 +1,5 @@
 {
+  "ActionsWithFilesDescription": "Значици ће истакнути активност датотека — отпремања, уређивања или дељења — у секцијама {{rooms}}, {{shared}}, {{documents}} и {{aiAgents}}.",
   "AdminSetupRequired": "Потребно подешавање од стране администратора",
   "Badges": "Значке",
   "DailyFeed": "Дневни садржај {{productName}}-а",
@@ -8,12 +9,11 @@
   "LdapEmailTooltip": "Овај кориснички налог је учитан са LDAP-а. Емаил адреса корисника није наведена и тренутна је генерисана аутоматски и не може се користити за слање обавештења.",
   "NotConfigured": "Није конфигурисано",
   "Notifications": "Обавештења",
+  "RoomsActivityDescription": "Прима за е-пошту обавештења за нове делове/фолдере и активности у вашем {{rooms}} и {{aiAgents}}.",
+  "RoomUpdateNotify": "Подељено садржајем, активностима {{rooms}} и {{aiAgents}}",
   "SettingUpNotifications": "Подешавање обавештења",
   "SuccessConnected": "{{serviceName}} је успешно повезан као канал за обавештења. Сада ћеш тамо примати ажурирања.",
   "SuccessDisconnected": "{{serviceName}} је успешно искључен као канал за обавештења. Обавештења више неће бити слана тамо.",
   "UsefulTips": "Корисни {{productName}} савети",
-  "UsefulTipsDescription": "Добиј корисне водиче о {{productName}}-у",
-  "RoomsActivityDescription": "Прима за е-пошту обавештења за нове делове/фолдере и активности у вашем {{rooms}} и {{aiAgents}}.",
-  "RoomUpdateNotify": "Подељено садржајем, активностима {{rooms}} и {{aiAgents}}",
-  "ActionsWithFilesDescription": "Значици ће истакнути активност датотека — отпремања, уређивања или дељења — у секцијама {{rooms}}, {{shared}}, {{documents}} и {{aiAgents}}."
+  "UsefulTipsDescription": "Добиј корисне водиче о {{productName}}-у"
 }

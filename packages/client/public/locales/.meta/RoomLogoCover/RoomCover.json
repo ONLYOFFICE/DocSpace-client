@@ -3,11 +3,12 @@
   "content": "Room cover",
   "content_en_sha1_hash": "629fe77eb87170248f519263ffdf53af11eb35b4",
   "created_at": "2025-05-19T21:30:53.318Z",
-  "updated_at": "2026-04-09T06:50:28.243Z",
+  "updated_at": "2026-04-11T21:21:00.449Z",
   "comment": {
-    "text": "The \"RoomCover\" translation key is used to display a localized string for a room cover image. It appears in a dialog box for editing room logos, where it serves as a title or placeholder text until an image is selected.",
+    "text": "This is a dialog title for uploading or editing the cover image for a room. It appears when a user wants to customize the visual representation of a room.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:58.284Z"
+    "updated_at": "2026-04-11T21:21:00.449Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -51,13 +52,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech translation 'Zakrytí místnosti' means 'covering/shielding of a room' (as in an action or physical covering), whereas the context refers to a 'Room cover' image (a background/cover photo).",
-          "suggestion": "Obrázek pozadí místnosti"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -81,13 +76,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation 'Huoneen etusivu' means 'Room homepage' or 'Room front page', whereas the English 'Room cover' refers to a cover image/background for the room.",
-          "suggestion": "Huoneen kansikuva"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -99,13 +88,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Սենյակի կազմ' means 'Room composition' or 'Room structure', which is incorrect for a visual 'cover' (image/background).",
-          "suggestion": "Սենյակի պատկերը"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -129,37 +112,19 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ຫຸ້ມຫ້ອງ' means 'to cover a room' (verb phrase), whereas the English 'Room cover' in this context refers to a noun (the cover image/banner for a room).",
-          "suggestion": "ພາບໜ້າປົກຂອງຫ້ອງ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Telpas vāka foto' translates to 'Room cover photo', adding the word 'foto' which is not present in the English source 'Room cover'. While contextually related, it changes the literal string content.",
-          "suggestion": "Telpas vāks"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Dutch translation 'Kamer omslag' means 'Room wrap/fold' or 'Room turnover', which is incorrect in the context of a cover image/background. The correct term for a cover image is 'Kamerachtergrond' or 'Coverafbeelding'.",
-          "suggestion": "Kamercover"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -171,37 +136,19 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Cobertura do quarto' refers to a physical roof or a building's covering. In the context of a UI element for a 'Room cover image' (avatar/logo), the correct term should refer to a background or cover image.",
-          "suggestion": "Capa do quarto"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Cobertura de sala' refers to a roof or a physical covering of a room. In the context of a UI element for a 'Room cover image' (avatar/logo), the correct term should refer to a background or cover image.",
-          "suggestion": "Capa da sala"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Copertă de sală' refers to a physical roof or awning for a hall/room. In the context of a digital UI (Room Cover image), it should refer to a background or cover image.",
-          "suggestion": "Imagine de fundal a camerei"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -219,13 +166,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Kryt miestnosti' means 'Room cover/lid/protection' in a physical sense (like a lid for a container or a protective cover). In the context of a UI for a room logo/avatar, 'cover' refers to a background image or header image. The correct term should refer to a cover image or background.",
-          "suggestion": "Obrázok pozadia miestnosti"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -249,13 +190,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Oda kapağı' refers to a physical lid or cover for a room (like a lid on a container), whereas in the context of UI/UX (Room Cover/Agent Cover), it refers to a background cover image or header image.",
-          "suggestion": "Oda kaplama görseli"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -267,13 +202,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Mặt ngoài của phòng' means 'The exterior/outside of the room' (physical structure), whereas the context refers to a 'Room cover image' (a digital banner or cover photo).",
-          "suggestion": "Ảnh bìa phòng"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

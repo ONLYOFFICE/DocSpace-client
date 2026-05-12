@@ -3,16 +3,17 @@
   "content": "Do you really want to leave this room? You will be able to join it again via new invitation by a room admin.",
   "content_en_sha1_hash": "13519137916019126edd61d57af7ca5d5cc99ed0",
   "created_at": "2025-05-19T21:30:56.317Z",
-  "updated_at": "2026-04-07T19:35:05.099Z",
+  "updated_at": "2026-04-23T17:24:01.830Z",
   "comment": {
-    "text": "This translation key is used for a confirmation message that appears when a user attempts to leave a room. The message informs them they will be able to rejoin via a new invitation by an admin. It is displayed in a dialog box within the Leave Room Dialog component.",
+    "text": "This is a confirmation message displayed in a dialog when a user who is not the room owner attempts to leave a room. It informs them that they will need a new invitation to rejoin.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:58.459Z"
+    "updated_at": "2026-04-11T21:07:40.283Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
-      "line_number": 82,
+      "line_number": 83,
       "context": "? t(\"Files:LeaveTheAgent\")\n : t(\"Files:LeaveTheRoom\");\n \n const roomDescription = isRoomOwner\n ? t(\"Files:LeaveRoomDescription\")\n : t(\"Files:WantLeaveRoom\");\n \n const agentDescription = isRoomOwner\n ? t(\"Files:LeaveAgentDescription\")\n : t(\"Files:WantLeaveAgent\");",
       "module": "/packages/client"
     }

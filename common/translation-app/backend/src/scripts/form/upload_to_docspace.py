@@ -73,7 +73,8 @@ def upload_forms_to_docspace(
     forms_dir: Path,
     portal_url: str,
     api_key: str,
-    room_name: str
+    room_name: str,
+    verify_ssl: bool = True
 ) -> bool:
     """
     Upload translation forms to DocSpace VDR room.
@@ -91,6 +92,11 @@ def upload_forms_to_docspace(
     configuration = docspace_api_sdk.Configuration(
         host=portal_url.rstrip('/')
     )
+    configuration.verify_ssl = verify_ssl
+
+    if not verify_ssl:
+        import urllib3
+        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
     # Test connection (skip profile check due to SDK validation issues)
     print("Initializing DocSpace connection...")
@@ -226,7 +232,8 @@ def upload_forms_to_docspace(
                         response = requests.post(
                             upload_url,
                             files=files,
-                            headers=headers
+                            headers=headers,
+                            verify=verify_ssl
                         )
                         response.raise_for_status()
 
@@ -301,6 +308,13 @@ Environment variables (set in .env file):
     )
 
     parser.add_argument(
+        "--no-ssl-verify",
+        action="store_true",
+        default=False,
+        help="Disable SSL certificate verification (for self-signed certificates)"
+    )
+
+    parser.add_argument(
         "--portal-url",
         type=str,
         help="DocSpace portal URL (overrides DOCSPACE_PORTAL_URL env variable)"
@@ -346,12 +360,16 @@ Environment variables (set in .env file):
     print(f"Room name: {args.room_name}")
     print()
 
+    # Determine SSL verification setting
+    no_ssl_verify = args.no_ssl_verify or os.environ.get('DOCSPACE_NO_SSL_VERIFY', '').lower() == 'true'
+
     # Upload forms
     success = upload_forms_to_docspace(
         forms_dir=forms_dir,
         portal_url=portal_url,
         api_key=api_key,
-        room_name=args.room_name
+        room_name=args.room_name,
+        verify_ssl=not no_ssl_verify
     )
 
     sys.exit(0 if success else 1)

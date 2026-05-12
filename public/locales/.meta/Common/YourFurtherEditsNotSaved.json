@@ -3,28 +3,29 @@
   "content": "Your further edits may not be saved.",
   "content_en_sha1_hash": "3dbfb8cd57bf68171c29e8fb98b89ce9f2c8182b",
   "created_at": "2026-02-18T14:56:21.766Z",
-  "updated_at": "2026-04-07T19:52:33.687Z",
+  "updated_at": "2026-04-24T09:18:49.947Z",
   "comment": {
-    "text": "This message warns users that subsequent edits might not be saved. It appears in a UI component (likely a bar or notification) related to \"room\" type content, indicating a potential limitation or warning regarding further modifications. Translators should ensure the message conveys a sense of caution regarding data loss.",
+    "text": "This is a warning message displayed in a bar at the top of the document editor. It appears when a user's storage quota is exceeded, indicating that subsequent changes might not be saved.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:08:05.567Z"
+    "updated_at": "2026-04-11T20:38:38.735Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/Bar/index.tsx",
-      "line_number": 55,
+      "line_number": 56,
       "context": "switch (type) {\n case \"room\":\n return {\n description: initial\n ? t(\"EditingUnavailable\")\n : t(\"YourFurtherEditsNotSaved\"),\n header: initial ? t(\"RoomQuotaReached\") : t(\"RoomQuotaLimitWarning\"),\n };\n case \"user\":\n return {\n description: initial",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/doceditor/src/components/Bar/index.tsx",
-      "line_number": 55,
+      "line_number": 56,
       "context": "switch (type) {\n case \"room\":\n return {\n description: initial\n ? t(\"EditingUnavailable\")\n : t(\"YourFurtherEditsNotSaved\"),\n header: initial ? t(\"RoomQuotaReached\") : t(\"RoomQuotaLimitWarning\"),\n };\n case \"user\":\n return {\n description: initial",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/doceditor/src/components/Bar/index.tsx",
-      "line_number": 55,
+      "line_number": 56,
       "context": "switch (type) {\n case \"room\":\n return {\n description: initial\n ? t(\"EditingUnavailable\")\n : t(\"YourFurtherEditsNotSaved\"),\n header: initial ? t(\"RoomQuotaReached\") : t(\"RoomQuotaLimitWarning\"),\n };\n case \"user\":\n return {\n description: initial",
       "module": "/packages/doceditor"
     }
@@ -129,7 +130,15 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "\"may not be saved\" expresses possibility/uncertainty (might not be saved), but \"kunnen niet worden opgeslagen\" means \"cannot be saved\" (impossibility). The Dutch translation removes the conditional nuance.",
+          "suggestion": "Uw verdere wijzigingen worden mogelijk niet opgeslagen.",
+          "checked_at": "2026-04-12T08:04:46.801Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -153,92 +162,107 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'Edițiile ulterioare pot fi fără salvare' is grammatically incorrect and semantically awkward. It literally translates to 'Further edits can be without saving', which fails to convey the warning that edits *might not be saved* (the risk of data loss).",
-          "suggestion": "Edițiile ulterioare s-ar putea să nu fie salvate."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:16:49.139Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "acc2be28ee296f1b"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:17:13.352Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "1e56243469e7e0d9"
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical error in Slovak: 'úpravy' (plural) does not match 'byť uložené' (singular/incorrect agreement). The verb 'nemusí' is singular, but the subject 'úpravy' is plural. It should be 'nemusia'.",
-          "suggestion": "Vaše ďalšie úpravy nemusia byť uložené."
-        }
-      ],
-      "approved_at": null
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:17:59.636Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "eeb56c813ffbac6a"
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:18:15.441Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "81b650b2b6d47f30"
     },
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:18:20.084Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "ab12a9bce75f2fd1"
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'додатне' (additional/extra) is used incorrectly here. In Serbian, 'further edits' in this context should be translated as 'наредне' (subsequent) or 'даље' (further). 'Додатне уређивање' sounds like 'additional editing sessions' rather than 'subsequent changes'.",
-          "suggestion": "Ваша даља уређивања можда неће бити сачувана."
-        }
-      ],
-      "approved_at": null
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:18:25.712Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "b95f3396df90e699"
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:18:29.490Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "c99b7e6caa06bd9b"
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:18:34.566Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "07ea910cfda4c9a7"
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:18:41.805Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "a06e3ecbf241ae3e"
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:18:46.451Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "342342638e225844"
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:18:49.946Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "6abe14abdcade1bc"
     }
   }
 }

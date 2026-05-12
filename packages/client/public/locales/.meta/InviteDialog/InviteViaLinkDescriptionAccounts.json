@@ -3,17 +3,18 @@
   "content": "Create a universal link for self-authorization in {{productName}}",
   "content_en_sha1_hash": "533c585d8d2f76cf27cc52d2d1d5266fd4da6892",
   "created_at": "2025-05-19T21:30:54.732Z",
-  "updated_at": "2026-04-07T19:35:05.124Z",
+  "updated_at": "2026-04-11T21:14:04.489Z",
   "comment": {
-    "text": "Create a universal link for self-authorization in {{productName}}. This text is used to display an invite message when creating a universal link for user authorization in the application, appearing in the Invite Panel component.",
+    "text": "This is a description for a feature that allows users to create a shareable link. It explains that the link enables self-authorization for new users in the specified product. `{{productName}}` will be replaced with the product's brand name.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:14.500Z"
+    "updated_at": "2026-04-11T21:14:04.489Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/ExternalLinks.js",
-      "line_number": 172,
-      "context": "? getAgentAccesses()\n : filterPaidRoleOptions(accesses);\n \n const description =\n roomId === -1\n ? t(\"InviteViaLinkDescriptionAccounts\", {\n productName: t(\"Common:ProductName\"),\n })\n : roomType === RoomsType.AIRoom\n ? allowInvitingGuests\n ? t(\"InviteViaLinkDescriptionAgentGuest\")",
+      "line_number": 173,
+      "context": "? getAgentAccesses()\n : filterPaidRoleOptions(accesses);\n \n const description =\n roomId === -1\n ? t(\"InviteViaLinkDescriptionAccounts\", {\n productName: getBrandName(\"ProductName\"),\n })\n : roomType === RoomsType.AIRoom\n ? allowInvitingGuests\n ? t(\"InviteViaLinkDescriptionAgentGuest\")",
       "module": "/packages/client"
     }
   ],

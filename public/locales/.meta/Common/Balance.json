@@ -3,13 +3,21 @@
   "content": "Balance: <1>{{balance}}</1>",
   "content_en_sha1_hash": "7e5c34d10f5c64693045e238d4218431c25f1de0",
   "created_at": "2026-04-10T13:53:41.988Z",
-  "updated_at": "2026-04-10T13:53:41.988Z",
+  "updated_at": "2026-04-13T14:59:06.027Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This string displays the current account balance in a wallet information component. The `{{balance}}` variable will be replaced with the actual balance amount.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:58:28.041Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/WalletInfo.tsx",
+      "line_number": 64,
+      "context": "} = props;\n const t = useCommonTranslation();\n \n const keyProp = isBalanceInsufficient\n ? { tKey: \"BalanceInsufficient\" }\n : { tKey: \"Balance\" };\n \n return (\n <div\n className={classNames(styles.walletInfoContainer, {\n [styles.shortView]: shortView,",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

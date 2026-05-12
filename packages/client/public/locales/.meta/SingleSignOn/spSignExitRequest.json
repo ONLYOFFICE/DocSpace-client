@@ -3,11 +3,12 @@
   "content": "Sign Logout Requests",
   "content_en_sha1_hash": "fd1f4f7fefacb45ef56a56caa93e85ad86fd41e8",
   "created_at": "2025-05-19T21:30:50.172Z",
-  "updated_at": "2026-04-08T22:27:53.619Z",
+  "updated_at": "2026-04-11T21:26:20.916Z",
   "comment": {
-    "text": "The \"spSignExitRequest\" translation key is used to display the label for a checkbox related to Single Sign-On (SSO) requests in a portal settings page. It is translated as \"Sign Logout Requests\" and appears in a checkbox set component.",
+    "text": "This is a checkbox label in the Single Sign-On settings. It allows administrators to enable or disable the signing of logout requests sent by the service provider (ONLYOFFICE DocSpace).",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:04.366Z"
+    "updated_at": "2026-04-11T21:26:20.916Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -39,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'упълномощен изход' means 'authorized exit/logout', which is incorrect. In the context of SSO (Single Sign-On), 'Sign Logout' refers to 'SAML Single Logout' or 'Sign-out requests'. The Bulgarian translation incorrectly interprets 'Sign' as 'Authorized/Empowered' instead of the technical 'Sign-out' process.",
-          "suggestion": "Заявки за изход чрез SSO"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -75,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English term 'Sign' in the context of SSO (Single Sign-On) refers to 'signing' or 'verifying' a digital signature, not 'signing' a document with a pen. The Finnish translation 'Allekirjoita' (to sign a document) is incorrect for a technical SSO logout request verification process.",
-          "suggestion": "Vahvista uloskirjautumispyynnöt"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -117,37 +106,19 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'Sign' (referring to Single Sign-On/Signature context) is missing from the Lao translation, making it a general 'Logout Requests' instead of 'Sign Logout Requests'.",
-          "suggestion": "ການຮ້ອງຂໍອອກຈາກລະບົບການລົງຊື່"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Parakstīt' means 'to sign' (as in a signature/handwriting), whereas in the context of SSO (Single Sign-On), 'Sign' is part of 'Sign Out' (Logout). The Latvian translation incorrectly treats 'Sign' as a verb meaning to write a signature rather than part of the logout process.",
-          "suggestion": "Izrakstīšanās pieprasījumi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Sign Logout Verzoeken' is a literal word-for-word translation that results in incorrect Dutch grammar and meaning. In Dutch, 'Sign' (as in 'to sign' or 'signature') does not translate to 'Sign' in this context, and the noun phrase is incorrectly constructed. Given the SSO context, it refers to 'Sign-out requests'.",
-          "suggestion": "Aanmeldverzoeken voor uitloggen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -165,25 +136,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Solicitações de logout de assinatura' incorrectly translates 'Sign' as 'assinatura' (subscription/signature) instead of 'Sign-On' (authentication). In the context of SSO (Single Sign-On), 'Sign' refers to the authentication process.",
-          "suggestion": "Solicitações de logout de Single Sign-On"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Sign Logout Requests' in the context of SSO (Single Sign-On) refers to the action of signing/verifying logout requests, not the act of a user signing a document. The Romanian translation 'Semnează solicitarea de deconectare' implies a person is signing a paper/form, whereas it should refer to the technical process of signing/verifying the requests.",
-          "suggestion": "Semnare cereri de deconectare"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -195,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'නික්මීමේ ඉල්ලීම් අත්සන් තබන්න' means 'Sign the logout requests' (as in applying a physical signature to a document). In the context of SSO (Single Sign-On), 'Sign' refers to the digital signing/verification of the request. The current translation is misleading for a technical setting.",
-          "suggestion": "Logout ඉල්ලීම් ඩිජිටල් අත්සන් කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -219,13 +172,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Потпиши' (Sign/Signatures) refers to the act of signing a document with a pen/signature, whereas in the context of SSO (Single Sign-On), 'Sign' is part of 'Sign Out' or refers to the technical process of signing/verifying requests. However, the English 'Sign Logout Requests' is actually a truncated or poorly phrased version of 'Sign Logout Requests' (meaning to digitally sign them). The Serbian translation 'Потпиши захтеве за одјављивање' implies 'Sign (the) logout requests' as a command to a person, which is a semantic mismatch for a technical checkbox setting. In SSO context, this usually refers to 'Signing logout requests' (the process).",
-          "suggestion": "Потписивање захтева за одјављивање"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -249,37 +196,19 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Yêu cầu Đăng xuất Ký tên' incorrectly interprets 'Sign' as the verb 'to sign/signature' (Ký tên) instead of the technical abbreviation for 'Single Sign-On' (SSO). In this context, 'Sign Logout Requests' refers to requests to sign out of the SSO session.",
-          "suggestion": "Yêu cầu đăng xuất SSO"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '签署' (to sign/execute a document) is incorrect in the context of SSO/SAML. In technical SSO terminology, 'Sign' refers to 'Digital Signature' (签名). '签署' implies a human signing a contract.",
-          "suggestion": "签名登出请求"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Sign Logout Requests' in the context of SSO (Single Sign-On) refers to 'Signing' (as in digital signatures/signing requests), not 'Signing' (as in the act of signing a document/subscribing). The Albanian translation 'Nënshkruani' is an imperative verb meaning 'Sign [something]!' (command), which is incorrect for a checkbox label. It should be a noun phrase referring to the signing of requests.",
-          "suggestion": "Nënshkrimi i kërkesave për dalje"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

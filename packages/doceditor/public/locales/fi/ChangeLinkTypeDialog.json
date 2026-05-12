@@ -1,4 +1,4 @@
 {
-  "Description": "Tiedoston linkki on jo olemassa muokkausluvalla. Vaihdetaanko käyttöoikeudet täyttöön?",
-  "Title": "Vaihda linkin tyyppi"
+  "ChangeLinkTypeDescription": "Tiedoston linkki on jo olemassa muokkausluvalla. Vaihdetaanko käyttöoikeudet täyttöön?",
+  "ChangeLinkTypeTitle": "Vaihda linkin tyyppi"
 }

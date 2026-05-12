@@ -54,6 +54,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 export interface UsersContentProps {
   isUserTariffLimit: boolean;
@@ -75,7 +76,7 @@ const UsersContent = ({
       {isPaymentPageAvailable
         ? t("ChooseNewPlan")
         : t("MainBar:ContactToUpgradeTariff", {
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
           })}
     </Text>
   );

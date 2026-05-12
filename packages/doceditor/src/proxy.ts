@@ -27,6 +27,8 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
+import { sanitizeStylesUrl } from "@docspace/shared/utils/customStyles";
+
 // This function can be marked `async` if using `await` inside
 export function proxy(request: NextRequest) {
   const host = request.headers.get("x-forwarded-host");
@@ -58,6 +60,7 @@ export function proxy(request: NextRequest) {
   let theme = searchParams.get("theme");
   const locale = searchParams.get("locale");
   const shareKey = searchParams.get("share");
+  const stylesUrl = sanitizeStylesUrl(searchParams.get("stylesUrl"));
 
   if (theme) {
     const firstChar = theme[0].toUpperCase();
@@ -69,6 +72,7 @@ export function proxy(request: NextRequest) {
     "x-sdk-config-theme": theme ?? "",
     "x-sdk-config-locale": locale ?? "",
     "x-sdk-config-share-key": shareKey ?? "",
+    "x-sdk-config-styles-url": stylesUrl,
   };
 
   Object.entries(headers).forEach(([key, value]) => {

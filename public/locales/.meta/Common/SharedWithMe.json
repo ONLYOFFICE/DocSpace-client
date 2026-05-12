@@ -3,28 +3,29 @@
   "content": "Shared with me",
   "content_en_sha1_hash": "f40ca84f04474455cba711b1643a006b59aa1210",
   "created_at": "2025-05-19T21:30:48.661Z",
-  "updated_at": "2026-04-07T23:14:20.569Z",
+  "updated_at": "2026-04-12T19:35:41.684Z",
   "comment": {
-    "text": "This translation key is used to display the phrase \"Shared with me\" in various contexts within a workspace settings page. It likely appears as a label on buttons or sections related to shared files and folders, guiding users through the export process.",
+    "text": "A label for a section or category in the UI, referring to files and folders that have been shared with the current user. It appears as a short label, often within settings or import/export options.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:40:43.380Z"
+    "updated_at": "2026-04-11T20:43:02.424Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 215,
+      "line_number": 216,
       "context": "<Trans\n t={t}\n i18nKey=\"SharedFilesAndFoldersDescription\"\n ns=\"Settings\"\n values={{\n sectionName: t(\"Common:SharedWithMe\"),\n }}\n components={{\n 1: <span />,\n }}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 215,
+      "line_number": 216,
       "context": "<Trans\n t={t}\n i18nKey=\"SharedFilesAndFoldersDescription\"\n ns=\"Settings\"\n values={{\n sectionName: t(\"Common:SharedWithMe\"),\n }}\n components={{\n 1: <span />,\n }}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
-      "line_number": 145,
+      "line_number": 146,
       "context": "personalExportDetails={{\n name: t(\"Common:MyDocuments\"),\n icon: UserSolidIcon,\n }}\n sharedFilesAndFoldersExportDetails={{\n name: t(\"Common:SharedWithMe\"),\n icon: SharedIcon,\n }}\n hasCommonFiles\n hasProjectFiles\n />",
       "module": "/packages/client"
     },
@@ -63,13 +64,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation 'Mənimlə paylaşın' means 'Share with me' (an imperative command), whereas the English source 'Shared with me' is a passive description of items already shared by others.",
-          "suggestion": "Mənimlə paylaşılanlar"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -81,13 +76,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech translation 'Sdílel se mnou' uses a masculine singular verb form meaning 'He shared with me', whereas the English 'Shared with me' is a passive participle/adjective phrase describing items. The correct translation should be a passive construction.",
-          "suggestion": "Sdílené se mnou"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -123,13 +112,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Ինձ հետ համօգտագործվում է' is a passive voice construction meaning 'It is being shared with me'. In a UI context for a section label or folder name, this is grammatically unnatural and overly wordy. The standard UI translation for 'Shared with me' should be 'Ինձ կիսվածը' or 'Ինձ հետ կիսվածը'.",
-          "suggestion": "Ինձ հետ կիսվածը"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -153,13 +136,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ບິ່ງແລ້ວແດ່' means 'Please look at this' or 'Have a look', which is completely different from the English meaning 'Shared with me' (referring to files/folders shared by others).",
-          "suggestion": "ແບ່ງປັນກັບຂ້ອຍ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -183,25 +160,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Portuguese translation 'Compartilhou comigo' is in the past tense (He/She/It shared with me), whereas the English 'Shared with me' is a noun phrase/label used to describe a category of items. The correct translation for a UI label should be 'Compartilhados comigo'.",
-          "suggestion": "Compartilhados comigo"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Portuguese translation 'Compartilhou comigo' is in the past tense (He/She/It shared with me), whereas the English 'Shared with me' is a noun phrase/label used to describe a category of items. In a UI context for a section or label, it should be 'Compartilhados comigo'.",
-          "suggestion": "Compartilhados comigo"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -213,13 +178,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Доступно для меня' means 'Available to me', which implies permission or accessibility. The standard UI translation for 'Shared with me' (referring to items shared by others) is 'Доступные мне' or 'Поделились со мной'.",
-          "suggestion": "Доступные мне"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -273,13 +232,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation '共享' means 'Shared' or 'Sharing', which misses the 'with me' component of the English phrase 'Shared with me'.",
-          "suggestion": "与我共享"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

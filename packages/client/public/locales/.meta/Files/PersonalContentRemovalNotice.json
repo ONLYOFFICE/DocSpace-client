@@ -3,16 +3,17 @@
   "content": "Your personal files and folders in the {{sectionName}} section will be <1>deleted</1> since Guests don't have access to this section. Files remain available for viewing and downloading <1>for 30 days</1>.",
   "content_en_sha1_hash": "ffca39de3d5ca19023e9ef716b66c6633b7fc354",
   "created_at": "2025-05-19T21:30:55.950Z",
-  "updated_at": "2026-04-07T19:35:05.091Z",
+  "updated_at": "2026-04-11T21:08:42.119Z",
   "comment": {
-    "text": "This translation key is used for a warning message that informs users about the deletion of their personal files and folders in a specific section when they are removed from access. It appears on a dialog component, specifically on a reduced rights confirmation notice.",
+    "text": "This is a paragraph of text within a dialog, informing the user that their personal files will be deleted from a specific section (e.g., \"My Documents\") because guests lack access. It also states that files will be available for viewing and downloading for 30 days. The `{{sectionName}}` variable will be replaced with the name of the section, and the `<1>` tags indicate bolded text.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:39:24.639Z"
+    "updated_at": "2026-04-11T21:08:42.119Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ReducedRightsDialog/index.tsx",
-      "line_number": 62,
+      "line_number": 63,
       "context": "/>\n <Text style={{ marginTop: \"16px\" }}>\n <Trans\n t={t}\n ns=\"Files\"\n i18nKey=\"PersonalContentRemovalNotice\"\n values={{ sectionName: t(\"Common:MyDocuments\") }}\n components={{ 1: <span style={{ fontWeight: 600 }} /> }}\n />\n </Text>\n <Text style={{ marginTop: \"16px\" }}>",
       "module": "/packages/client"
     }

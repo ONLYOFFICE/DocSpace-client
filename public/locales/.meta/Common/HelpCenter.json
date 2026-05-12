@@ -3,11 +3,12 @@
   "content": "Help Center",
   "content_en_sha1_hash": "110158257eb2f2c817d5a9d691e7637cfd12a11a",
   "created_at": "2025-05-19T21:30:45.755Z",
-  "updated_at": "2026-04-08T07:06:06.827Z",
+  "updated_at": "2026-04-11T20:51:18.775Z",
   "comment": {
-    "text": "The \"Help Center\" translation key is used to display a link to the help center, providing users with access to support resources. It appears in various UI elements, such as buttons and dropdowns, typically when the user needs assistance or has questions about a specific feature or process. Translators should ensure that the text accurately reflects local language equivalents of \"Help Center\".",
+    "text": "This is a link or menu item label that, when clicked, directs the user to the Help Center for assistance or information.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:57.028Z"
+    "updated_at": "2026-04-11T20:51:18.775Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -24,7 +25,7 @@
     },
     {
       "file_path": "/packages/management/src/app/settings/encrypt-data/page.client.tsx",
-      "line_number": 112,
+      "line_number": 113,
       "context": "<Text>\n <Trans\n t={t}\n i18nKey=\"MoreDetails\"\n ns=\"Management\"\n values={{ link: t(\"Common:HelpCenter\") }}\n components={{\n 1: (\n <Link\n key=\"more-details-link\"\n className=\"link\"",
       "module": "/packages/management"
     }
@@ -81,13 +82,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation includes '(englanniksi)', which means '(in English)'. This adds information not present in the source and changes the meaning from a simple label to a description of the language used.",
-          "suggestion": "Ohjekeskus"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -159,13 +154,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Centrum' is incorrect in Romanian; the correct word is 'Centru'. 'Centrum' is Latin/other language spelling.",
-          "suggestion": "Centru de ajutor"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

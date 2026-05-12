@@ -12,7 +12,7 @@
   "ErrorAccountAlreadyUse": "Propojený účet již používaný jiným uživatelem",
   "LogoutActiveConnection": "Odhlášení z aktivního připojení",
   "LogoutAllActiveSessionsDescription": "Všechna aktivní připojení kromě tohoto připojení budou odhlášena, protože jsou právě používána.",
-  "LogoutBtn": "Odhlášení",
+  "LogoutBtn": "Odhlásit se",
   "LogoutDescription": "Poznámka. Všechna aktivní připojení kromě tohoto připojení budou odhlášena, protože jsou právě používána.",
   "LogoutFrom": "Odhlášení z {{platform}} {{browser}}?",
   "MyProfile": "Můj profil",
@@ -23,9 +23,9 @@
   "ShowBackupCodes": "Zobrazit záložní kódy",
   "SuccessLogout": "Aktivní připojení bylo odhlášeno: {{platform}}, {{browser}}",
   "TelegramAccount": "Telegram účet",
+  "TelegramAccountDescription": "Pro připojení TelegramBot k vašemu účtu přejděte po tajném odkazu a klikněte na tlačítko „Connect Telegram“.",
   "TelegramAccountDisconnect": "Odpojit Telegram",
   "TelegramAccountDisconnectDescription": "Váš účet @{{username}} je propojený pro telegramové notifikace. Můžete se od tohoto účtu odpojit. V tomto případě nebudete dostávat notifikace.",
   "TerminateAllSessions": "Ukončení všech relací kromě aktuální",
-  "TwoFactorDescription": "Dvoufázové ověřování prostřednictvím aplikace generující kódy bylo správcem povoleno pro všechny uživatele.",
-  "TelegramAccountDescription": "Pro připojení TelegramBot k vašemu účtu přejděte po tajném odkazu a klikněte na tlačítko „Connect Telegram“."
+  "TwoFactorDescription": "Dvoufázové ověřování prostřednictvím aplikace generující kódy bylo správcem povoleno pro všechny uživatele."
 }

@@ -2,6 +2,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import styles from "../Plugins.module.scss";
 import { UploadDecsriptionProps } from "../Plugins.types";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const UploadDescription = ({
   pluginsSdkUrl,
@@ -11,7 +12,7 @@ const UploadDescription = ({
   return (
     <div className={styles.uploadDescription}>
       <Text className={styles.uploadDescriptionText}>
-        {t("UploadDescription", { productName: t("Common:ProductName") })}
+        {t("UploadDescription", { productName: getBrandName("ProductName") })}
       </Text>
       {pluginsSdkUrl ? (
         <Link

@@ -34,6 +34,7 @@ import { injectDefaultTheme } from "@docspace/shared/utils";
 import { CategoryItem } from "@docspace/ui-kit/components/category-item";
 
 import LoaderCustomizationNavbar from "./sub-components/loaderCustomizationNavbar";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const StyledComponent = styled.div.attrs(injectDefaultTheme)`
   .combo-button-label {
@@ -88,7 +89,7 @@ const CustomizationNavbar = ({
       />
       {enablePortalRename ? (
         <CategoryItem
-          title={t("PortalRenaming", { productName: t("Common:ProductName") })}
+          title={t("PortalRenaming", { productName: getBrandName("ProductName") })}
           subtitle={t("PortalRenamingNavDescription")}
           url="/portal-settings/customization/general/portal-renaming"
           onClickLink={onClickLink}
@@ -106,7 +107,7 @@ const CustomizationNavbar = ({
         <CategoryItem
           title={t("AdManagement")}
           subtitle={t("AdManagementDescription", {
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
           })}
           url="/portal-settings/customization/general/ad-management"
           onClickLink={onClickLink}
@@ -117,8 +118,8 @@ const CustomizationNavbar = ({
           aiServices: t("Common:AIServices"),
         })}
         subtitle={t("AiServicesManagementDescription", {
-          productName: t("Common:ProductName"),
-          organizationName: t("Common:OrganizationName"),
+          productName: getBrandName("ProductName"),
+          organizationName: getBrandName("OrganizationName"),
           aiSettings: t("AISettings"),
           aiAgents: t("Common:AIAgents"),
           aiServices: t("Common:AIServices"),

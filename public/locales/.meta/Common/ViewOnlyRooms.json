@@ -3,16 +3,17 @@
   "content": "View-only",
   "content_en_sha1_hash": "bd0aae2579470d5e5f8f929445ef59305e61809b",
   "created_at": "2025-05-19T21:30:49.539Z",
-  "updated_at": "2026-04-07T20:21:36.945Z",
+  "updated_at": "2026-04-12T12:21:04.884Z",
   "comment": {
-    "text": "This translation key is used to display a label for rooms that can only be viewed, typically in a filtering or search interface. It appears as a filter option on pages like the Home page's Filter section, allowing users to select view-only rooms. Translators should aim for an accurate and descriptive phrase that maintains the intended accessibility and functionality of the UI component.",
+    "text": "This text labels a room type in the interface, specifically for rooms where content can only be viewed, not edited. It appears as a short label in filters and room type displays.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:35:17.156Z"
+    "updated_at": "2026-04-11T20:39:21.716Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 60,
+      "line_number": 61,
       "context": "case RoomsType.ReviewRoom:\n return t(\"Common:Review\");\n \n case RoomsType.ReadOnlyRoom:\n return t(\"Common:ViewOnlyRooms\");\n \n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoom\");\n \n case RoomsType.VirtualDataRoom:",
       "module": "/packages/client"
     },
@@ -39,13 +40,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Yalnız baxın' is an imperative command ('Only look' or 'Just watch'), whereas the English 'View-only' is an adjective describing a state or permission level (read-only).",
-          "suggestion": "Yalnız baxış"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -141,13 +136,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Apenas ver' sounds like a command ('Just view') or an incomplete phrase. In a UI context for a status or filter type, 'Somente leitura' is the standard and accurate term for 'View-only'.",
-          "suggestion": "Somente leitura"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -189,25 +178,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Само-за-преглед' is a literal, word-for-word translation that is grammatically incorrect and nonsensical in Serbian. It translates roughly to 'Self-for-view'.",
-          "suggestion": "Само за преглед"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Samo-za-pregled' uses hyphens between words, which is grammatically incorrect in Serbian and looks like a machine-translated technical string rather than a natural UI label. It should be a standard phrase.",
-          "suggestion": "Samo za pregled"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -237,13 +214,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Shikoni-vetëm' is a literal, word-for-word translation that sounds unnatural in Albanian. In a UI context for 'View-only' (permissions/status), it should be an adjective or a noun phrase rather than an imperative command.",
-          "suggestion": "Vetëm për shikim"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

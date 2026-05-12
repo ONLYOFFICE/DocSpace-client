@@ -3,18 +3,19 @@
   "content": "AI capabilities are currently turned off, which means this agent can’t process chats or tasks. To get back on track, ask your {{productName}} admin to enable AI features.",
   "content_en_sha1_hash": "b586f9691b5442ebacd7e527ad626e87d0309aa8",
   "created_at": "2025-11-03T12:10:13.557Z",
-  "updated_at": "2026-04-08T17:28:08.973Z",
+  "updated_at": "2026-04-11T21:00:27.019Z",
   "comment": {
-    "text": "This text explains to users that AI features are currently disabled, preventing chat and task processing. It appears within a chat information block and instructs users to contact their {{productName}} administrator to re-enable AI functionality. Translators should ensure the language is clear and conveys the reason for limited functionality.",
+    "text": "This is an informational message displayed to a regular user when AI capabilities are disabled. It informs them that the AI agent cannot process chats or tasks and advises them to contact their {{productName}} admin to enable AI features.",
     "is_auto": true,
-    "updated_at": "2025-11-03T12:15:39.524Z"
+    "updated_at": "2026-04-11T21:00:27.019Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/chat/components/chat-info-block/index.tsx",
-      "line_number": 45,
-      "context": "isPortalAdmin,\n }: ChatInfoBlockProps) => {\n const { t } = useTranslation(\"Common\");\n \n const bodyText = !isPortalAdmin\n ? t(\"Common:AIDisabledInfoBlockUserDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : standalone\n ? t(\"Common:AIDisabledInfoBlockAdminStandaloneDescription\", {\n productName: t(\"Common:ProductName\"),",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-info-block/index.tsx",
+      "line_number": 44,
+      "context": "standalone,\n isPortalAdmin,\n }: ChatInfoBlockProps) => {\n const t = useCommonTranslation();\n const bodyText = !isPortalAdmin\n ? t(\"AIDisabledInfoBlockUserDescription\", {\n productName: getBrandName(\"ProductName\"),\n })\n : standalone\n ? t(\"AIDisabledInfoBlockAdminStandaloneDescription\", {\n productName: getBrandName(\"ProductName\"),",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'bu da agentin söhbətləri və tapşırıqları işləməyini olar' is grammatically incorrect and semantically broken in Azerbaijani. It translates roughly to 'this can the agent's chats and tasks working', failing to convey that the agent *cannot* process them.",
-          "suggestion": "S.İ. (Süni İntellekt) funksiyaları hazırda söndürülüb, bu o deməkdir ki, bu agent söhbətləri və ya tapşırıqları emal edə bilməz. Yenidən işə düşmək üçün {{productName}} administratorundan S.İ. funksiyalarını aktiv etməsini xahiş edin."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -75,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation adds 'Teknologian' (Technology's) at the beginning, which makes the sentence 'Technology's AI capabilities...' instead of the original 'AI capabilities...'. While minor, it changes the subject focus unnecessarily.",
-          "suggestion": "Tekoälyominaisuudet ovat tällä hetkellä pois käytöstä, mikä tarkoittaa, että tämä agentti ei voi käsitellä keskusteluja tai tehtäviä. Jotta pääset takaisin raiteille, pyydä {{productName}}-järjestelmän ylläpitäjää ottamaan tekoälyominaisuudet käyttöön."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -171,13 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'vrátili do koľají' is a literal, incorrect translation of 'get back on track' (which should be 'vrátiť sa do normálu' or 'pokračovať v práci'). Additionally, 'zapol' is not a valid Slovak word; it is likely a typo for 'zapnutie' or 'zapli'.",
-          "suggestion": "AI funkcie sú momentálne vypnuté, čo znamená, že tento agent nemôže spracovávať chaty ani úlohy. Aby ste mohli pokračovať v práci, požiadajte administrátora {{productName}} o zapnutie AI funkcií."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -207,13 +190,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Tekrar yola getirmek için' is a literal translation of 'To get back on track' that sounds unnatural and incorrect in Turkish in this context. It implies 'to bring someone back to the right path' rather than 'to resume normal operations'.",
-          "suggestion": "AI yetenekleri şu anda kapalı durumda, bu da bu aracın sohbetleri veya görevleri işleyemediği anlamına gelir. Sorunu gidermek için {{productName}} yöneticinizden AI özelliklerini etkinleştirmesini isteyin."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

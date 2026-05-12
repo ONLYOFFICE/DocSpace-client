@@ -3,16 +3,17 @@
   "content": "Delete groups",
   "content_en_sha1_hash": "a8684815af19b3a3a7eed7ed736aa2d166e42f33",
   "created_at": "2025-05-19T21:30:56.695Z",
-  "updated_at": "2026-04-07T19:35:05.063Z",
+  "updated_at": "2026-04-11T21:05:48.894Z",
   "comment": {
-    "text": "This translation key is used to display the text \"Delete groups\" in a delete group dialog. It is part of a modal dialog that prompts the user to confirm deletion of all groups. The key appears on the header section of the dialog.",
+    "text": "This is the title of a confirmation dialog that appears when a user attempts to delete multiple groups.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:24.260Z"
+    "updated_at": "2026-04-11T21:05:48.894Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteGroupDialog/index.js",
-      "line_number": 80,
+      "line_number": 81,
       "context": "return (\n <ModalDialog visible={visible} onClose={onClose} displayType=\"modal\">\n <ModalDialog.Header>\n {hasMoreGroups\n ? t(\"DeleteDialog:DeleteAllGroupsTitle\")\n : t(\"DeleteDialog:DeleteGroupTitle\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n {hasMoreGroups",
       "module": "/packages/client"
     }

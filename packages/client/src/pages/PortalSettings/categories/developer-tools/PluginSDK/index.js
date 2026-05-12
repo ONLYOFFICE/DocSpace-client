@@ -37,6 +37,7 @@ import GithubDark from "PUBLIC_DIR/images/thirdparties/github.dark.react.svg";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 import { StyledContainer } from "./StyledPluginSDK";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const PluginSDK = ({
   systemPluginList,
@@ -58,7 +59,7 @@ const PluginSDK = ({
 
   const isMobile = currentDeviceType === "mobile";
 
-  const icon = !theme.isBase ? <GithubLight /> : <GithubDark />;
+  const icon = theme.isBase ? <GithubLight /> : <GithubDark />;
 
   const getPluginList = () => {
     if (isLoading) {
@@ -95,7 +96,7 @@ const PluginSDK = ({
           <div className="plugin-info-container">
             <Text>{p.name}</Text>
             <Text className="description">
-              {t("VersionHistory:Version")} {p.version}
+              {t("VersionHistory:VersionShort")} {p.version}
             </Text>
           </div>
         </div>
@@ -129,7 +130,9 @@ const PluginSDK = ({
         fontWeight={400}
         lineHeight="20px"
       >
-        {t("PluginSDKDescription", { productName: t("Common:ProductName") })}
+        {t("PluginSDKDescription", {
+          productName: getBrandName("ProductName"),
+        })}
       </Text>
       <Text
         className="description"
@@ -173,3 +176,4 @@ export default inject(({ pluginStore, settingsStore }) => {
     apiPluginSDKLink,
   };
 })(observer(PluginSDK));
+

@@ -3,13 +3,21 @@
   "content": "Subscription deactivated — non-payment",
   "content_en_sha1_hash": "6244400f48c757281fab42d54dc81d4c61f933c3",
   "created_at": "2026-04-10T13:53:45.694Z",
-  "updated_at": "2026-04-10T13:53:45.694Z",
+  "updated_at": "2026-04-23T17:24:02.175Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a status message displayed when a subscription has been deactivated due to non-payment, specifically for storage plan changes.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:41:41.891Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "line_number": 162,
+      "context": "enabled?: boolean,\n ) => {\n switch (serviceName) {\n case TOTAL_SIZE:\n if (previousStoragePlanSize && !isStorageDeactivationVisited) {\n return t(\"SubscriptionDeactivated\");\n }\n \n if (hasScheduledStorageChange) {\n return t(\"ChangeShedule\");\n }",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

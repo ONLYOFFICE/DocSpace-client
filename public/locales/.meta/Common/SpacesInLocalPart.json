@@ -3,13 +3,20 @@
   "content": "Local part can't contain spaces",
   "content_en_sha1_hash": "1303a27e549235cda77cad1ed3ebba10af960eb5",
   "created_at": "2025-05-19T21:30:48.980Z",
-  "updated_at": "2026-04-10T08:21:04.300Z",
+  "updated_at": "2026-04-23T17:24:01.691Z",
   "comment": {
-    "text": "The translation key \"SpacesInLocalPart\" is used to display an error message when a local part of a username or email address contains spaces. This error typically appears in dialogs or input fields where users can edit their account information. The goal is to prevent usernames from being set up incorrectly and to ensure consistency with standard naming conventions.",
+    "text": "This is an error message displayed when a user enters a space in the local part of an email address (the part before the \"@\" symbol).",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:39:02.817Z"
+    "updated_at": "2026-04-11T20:42:15.676Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
+      "line_number": 135,
+      "context": "case ErrorKeys.PunycodeLocalPart:\n return t(\"PunycodeLocalPart\");\n case ErrorKeys.IncorrectLocalPart:\n return t(\"IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:\n return t(\"SpacesInLocalPart\");\n case ErrorKeys.MaxLengthExceeded:\n return t(\"MaxLengthExceeded\");\n case ErrorKeys.IncorrectEmail:\n return t(\"IncorrectEmail\");\n case ErrorKeys.ManyEmails:",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeEmailDialog/index.js",
       "line_number": 139,
@@ -18,7 +25,7 @@
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 197,
+      "line_number": 193,
       "context": "case ErrorKeys.PunycodeLocalPart:\n return t(\"Common:PunycodeLocalPart\");\n case ErrorKeys.IncorrectLocalPart:\n return t(\"Common:IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:\n return t(\"Common:SpacesInLocalPart\");\n case ErrorKeys.MaxLengthExceeded:\n return t(\"Common:MaxLengthExceeded\");\n default:\n return t(\"Common:IncorrectDomain\");\n }",
       "module": "/packages/shared"
     }
@@ -39,13 +46,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Lokal yol' means 'Local path' (as in a file path), whereas the context refers to the 'Local part' of an email or username. This is a semantic error that changes the technical meaning.",
-          "suggestion": "Lokal hissədə boşluqlara icazə verilmir"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -63,13 +64,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation conveys the opposite meaning. The English says 'can't contain' (prohibition), while the German says 'beinhaltet' (contains/includes), which sounds like a statement of fact rather than an error message.",
-          "suggestion": "Lokaler Teil darf keine Leerzeichen enthalten"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -93,13 +88,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Le local' is a literal translation of 'Local part' that is semantically incorrect in French in this context. In technical terms regarding email/usernames, 'partie locale' should be used. Additionally, 'peux' is a conjugation error (should be 'peut'), though the primary critical issue is the semantic error of 'Le local' meaning 'the local place/premises' instead of 'the local part'.",
-          "suggestion": "La partie locale ne peut pas contenir d'espaces"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -129,13 +118,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation means 'Local area is insufficient' or 'Not enough local space', which refers to storage capacity. The English text refers to a syntax error where a 'local part' (of an email/username) cannot contain 'spaces'.",
-          "suggestion": "ສ່ວນທ້ອງຖິ່ນບໍ່ສາມາດມີຍະຫວ່າງໄດ້"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -153,13 +136,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Identyfikator użytkownika nie może zawierać spacji' means 'User ID cannot contain spaces', whereas the English source 'Local part can't contain spaces' refers specifically to the 'local part' (the part of an email or username before the @ symbol). This is a semantic mismatch in a technical context.",
-          "suggestion": "Część lokalna nie może zawierać spacji"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -183,25 +160,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Russian translation changes the subject from 'Local part' (the part of an email address before the @) to 'Mailbox name' (Имя почтового ящика), which is a different technical concept.",
-          "suggestion": "Локальная часть не может содержать пробелы"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'ස්ථානීය කොටස' (Sthāniya kotasa) translates to 'local part' in a geographical or physical sense (e.g., a local area). In the context of an email or username 'local part' (the part before the @ symbol), this is a mistranslation. A more accurate technical term is needed.",
-          "suggestion": "ප්‍රාදේශීය කොටසෙහි හිස්තැන් තිබිය නොහැක"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -219,13 +184,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Local part' is transliterated into Serbian ('Лоцал парт') instead of being translated. This is a phonetic transcription of English words, which is incorrect for a professional UI translation.",
-          "suggestion": "Локални део не сме садржати размаке"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

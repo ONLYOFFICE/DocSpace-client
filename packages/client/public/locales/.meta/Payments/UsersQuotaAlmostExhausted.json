@@ -3,16 +3,17 @@
   "content": "The quota of paid users is almost exhausted.",
   "content_en_sha1_hash": "927d67a9f7bbc37eff445b88935db61772b1bae8",
   "created_at": "2025-05-19T21:30:53.753Z",
-  "updated_at": "2026-04-07T19:35:05.175Z",
+  "updated_at": "2026-04-11T21:19:34.287Z",
   "comment": {
-    "text": "This translation key is used to display an alert message when the quota of paid users is almost exhausted, prompting a warning or action in the UI. It appears in a dialog component to inform the user about their subscription level status.",
+    "text": "This is a warning message displayed in a dialog. It informs the user that the number of paid users allowed by their plan is nearing its limit.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:02.921Z"
+    "updated_at": "2026-04-11T21:19:34.287Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/sub-components/UsersContent.tsx",
-      "line_number": 96,
+      "line_number": 97,
       "context": "</>\n );\n \n return (\n <>\n <Text fontWeight={600}>{t(\"UsersQuotaAlmostExhausted\")}</Text>\n <br />\n <Text>\n {t(\"NumberOfUsersAccordingToTariff\", {\n currentValue: addedManagersCount,\n maxValue: maxCountManagersByQuota,",
       "module": "/packages/client"
     }

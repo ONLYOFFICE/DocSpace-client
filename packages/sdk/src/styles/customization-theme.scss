@@ -1,0 +1,525 @@
+:root {
+  // Colors — Primary
+  --color-primary: #00679e;
+  --color-primary-hover: #3285b1;
+  --color-primary-element: #00679e;
+  --color-primary-element-hover: #00507a;
+  --color-primary-element-active: #005a8a;
+  --color-primary-element-text: #ffffff;
+  --color-primary-light: #e5eff5;
+  --color-primary-light-hover: #d9e3e8;
+  --color-primary-light-text: #00293f;
+
+  // Colors — Main
+  --color-main-background: #ffffff;
+  --color-main-background-blur: rgba(255, 255, 255, 0.8);
+  --color-main-text: #222222;
+  --color-text-maxcontrast: #767676;
+  --color-text-disabled: #b3b3b3;
+
+  // Colors — Background states
+  --color-background-hover: #f5f5f5;
+  --color-background-dark: #ededed;
+  --color-background-darker: #dbdbdb;
+
+  // Colors — Border
+  --color-border: #ededed;
+  --color-border-dark: #dbdbdb;
+  --color-border-maxcontrast: #7d7d7d;
+
+  // Colors — Status
+  --color-error-element: #c90000;
+  --color-success-element: #099f05;
+
+  // Backdrop
+  --backdrop-color: 0, 0, 0;
+
+  // Colors — Loader
+  --color-loading-light: #cccccc;
+  --color-loading-dark: #444444;
+
+  // Typography
+  --font-face:
+    system-ui, -apple-system, "Segoe UI", Roboto, Oxygen-Sans, Cantarell,
+    Ubuntu, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --default-font-size: 15px;
+
+  // Border radius
+  --border-radius-element: 8px;
+  --border-radius-pill: 100px;
+  --border-radius-container: 12px;
+}
+
+body.light {
+  // ── Typography ─────────────────────────────────────────────────────────────
+  --font-family: var(--font-face);
+  --text-size: var(--default-font-size);
+  --text-weight: 400;
+  --button-text-weight: 700;
+
+  // ── Button (default / secondary) ───────────────────────────────────────────
+  --button-root-bg: var(--color-primary-light);
+  --button-root-color: var(--color-primary-light-text);
+  --button-root-border: transparent;
+  --button-root-border-radius: var(--border-radius-element);
+  --button-root-bg-hover: var(--color-primary-light-hover);
+  --button-root-bg-active: var(--color-primary-light-hover);
+  --button-root-bg-disabled: var(--color-primary-light);
+  --button-root-color-hover: var(--color-primary-light-text);
+  --button-root-border-hover: transparent;
+  --button-root-border-active: transparent;
+
+  // ── Button (primary) ───────────────────────────────────────────────────────
+  --button-primary-bg: var(--color-primary-element);
+  --button-primary-color: var(--color-primary-element-text);
+  --button-primary-border: transparent;
+  --button-primary-border-radius: var(--border-radius-element);
+  --button-primary-bg-hover: var(--color-primary-element-hover);
+  --button-primary-bg-active: var(--color-primary-element-hover);
+  --button-primary-bg-disabled: var(--color-primary-element);
+  --button-primary-border-hover: transparent;
+  --button-primary-border-active: transparent;
+
+  // ── Tabs ───────────────────────────────────────────────────────────────────
+  --tabs-primary-text: var(--color-text-maxcontrast);
+  --tabs-primary-active-text: var(--color-main-text);
+  --tabs-primary-hover-text: var(--color-main-text);
+  --tabs-underline: var(--color-border);
+  --tabs-underline-radius: 0;
+
+  // ── TextInput / PasswordInput / SearchInput ────────────────────────────────
+  --text-input-bg: var(--color-main-background);
+  --text-input-border-color: var(--color-border-maxcontrast);
+  --text-input-color: var(--color-main-text);
+  --text-input-radius: var(--border-radius-element);
+  --input-border: 2px solid;
+  --text-input-border-hover: var(--color-border-maxcontrast);
+  --text-input-border-focus: var(--color-border-maxcontrast);
+
+  // ── ModalDialog ────────────────────────────────────────────────────────────
+  --modal-dialog-bg: var(--color-main-background);
+  --modal-dialog-color: var(--color-main-text);
+  --modal-dialog-backdrop: rgba(var(--backdrop-color), 0.5);
+  --modal-dialog-radius: var(--border-radius-container);
+  --modal-dialog-header-border-display: none;
+  --modal-dialog-header-title-position: absolute;
+  --modal-dialog-header-title-inset: 50%;
+  --modal-dialog-header-title-transform: translateX(-50%);
+  --modal-dialog-header-title-text-align: center;
+
+  // ── ComboBox ───────────────────────────────────────────────────────────────
+  --combobox-bg: var(--color-main-background);
+  --combobox-radius: var(--border-radius-element);
+  --combobox-inner-padding: 0;
+  --combobox-border-color: var(--color-border-maxcontrast);
+  --combobox-hover-border-color: var(--color-border-maxcontrast);
+  --combobox-focus-border-color: var(--color-border-maxcontrast);
+
+  // ── ToggleButton ───────────────────────────────────────────────────────────
+  --toggle-button-checked-color: var(--color-primary-element);
+  --toggle-button-off-color: var(--color-text-maxcontrast);
+  --toggle-button-off-hover-color: var(--color-border-maxcontrast);
+
+  // ── Checkbox ───────────────────────────────────────────────────────────────
+  --checkbox-fill-color: var(--color-primary-element);
+  --checkbox-arrow-color: var(--color-primary-element-text);
+
+  // ── Tooltip ────────────────────────────────────────────────────────────────
+  --tooltip-bg: var(--color-main-text);
+  --tooltip-color: var(--color-main-background);
+
+  // ── Scrollbar ──────────────────────────────────────────────────────────────
+  --scrollbar-bg: var(--color-border-dark);
+  --scrollbar-bg-hover: var(--color-border-maxcontrast);
+
+  // ── IconButton ─────────────────────────────────────────────────────────────
+  --icon-button-color: var(--color-text-maxcontrast);
+  --icon-button-hover-color: var(--color-main-text);
+
+  // ── Badge ──────────────────────────────────────────────────────────────────
+  --badge-bg: var(--color-primary-element);
+
+  // ── Link ───────────────────────────────────────────────────────────────────
+  --link-color: var(--color-primary-element);
+
+  // ── Avatar ─────────────────────────────────────────────────────────────────
+  --avatar-bg: var(--color-background-dark);
+  --avatar-initials-bg: var(--color-primary-light);
+  --avatar-initials-color: var(--color-main-text);
+
+  // ── Chat ───────────────────────────────────────────────────────────────────
+  --chat-background: var(--color-main-background);
+  --chat-text-color: var(--color-main-text);
+  --chat-accent-color: var(--color-primary-element);
+  --chat-icon-color: var(--color-text-maxcontrast);
+  --chat-message-text-color: var(--color-main-text);
+  --chat-user-message-background: var(--color-primary-element);
+  --chat-input-background: var(--color-background-hover);
+  --chat-send-button-background: var(--color-primary-element);
+  --chat-send-button-color: var(--color-primary-element-text);
+  --chat-divider-color: var(--color-border-dark);
+  --chat-header-button-color: var(--color-text-maxcontrast);
+  --chat-header-button-hover-background-color: var(--color-background-hover);
+  --chat-border-radius-base: var(--border-radius-element);
+  --chat-font-size: var(--default-font-size);
+
+  // ── AiChatButton ───────────────────────────────────────────────────────────
+  --ai-chat-button-bg: var(--color-primary-element);
+  --ai-chat-button-color: var(--color-primary-element-text);
+
+  // ── Loader ─────────────────────────────────────────────────────────────────
+  --loader-track-base: var(--color-loading-dark);
+  --loader-track-primary: var(--color-loading-light);
+
+  // ── LibraryCategoryListView ─────────────────────────────────────────────────
+  --library-list-accent-color: var(--color-primary);
+
+  // ── LibraryLanding ─────────────────────────────────────────────────────────
+  --landing-title-color: var(--color-main-text);
+  --landing-description-color: var(--color-text-maxcontrast);
+  --landing-accent-color: var(--color-primary);
+  --landing-dropdown-bg: var(--color-main-background);
+  --landing-dropdown-border-color: var(--color-border);
+  --landing-item-hover-bg: var(--color-background-hover);
+  --landing-stats-bg: rgba(0, 0, 0, 0.03);
+  --landing-stats-border: var(--color-border);
+  --landing-search-dropdown-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+
+  // ── MobileStub ─────────────────────────────────────────────────────────────
+  --mobile-stub-bg: var(--color-main-background);
+  --mobile-stub-title-color: var(--color-main-text);
+  --mobile-stub-description-color: var(--color-text-maxcontrast);
+
+  // ── WelcomeTourDialog ──────────────────────────────────────────────────────
+  --tour-video-radius: var(--border-radius-element);
+  --tour-card-radius: var(--border-radius-element);
+  --tour-accent-color: var(--color-primary);
+  --tour-description-color: var(--color-text-maxcontrast);
+  --tour-question-weight: 600;
+
+  // ── FormsSidebar ───────────────────────────────────────────────────────────
+  --article-bg: var(--color-primary-light);
+  --sidebar-item-gap: 4px;
+
+  // ── ArticleItem ─────────────────────────────────────────────────────────────
+  --article-item-border-radius: var(--border-radius-element);
+  --article-item-bg: transparent;
+  --article-item-text-weight: 400;
+  --article-item-text: var(--color-main-text);
+  --article-item-text-active: var(--color-primary-element-text);
+  --article-item-icon: var(--color-main-text);
+  --article-item-icon-active: var(--color-primary-element-text);
+  --article-item-active-bg: var(--color-primary-element);
+  --article-item-active-hover-bg: var(--color-primary-element-hover);
+  --article-item-hover-bg: var(--color-background-hover);
+
+  // ── FileTile ───────────────────────────────────────────────────────────────
+  --tile-bg: transparent;
+  --file-tile-border-style: none;
+  --tile-radius: var(--border-radius-element);
+  --tile-icon-display: none;
+  --tile-bottom-padding-inline: 16px;
+  --tile-grid-padding-inline: 16px;
+  --tile-thumbnail-padding-inline: 16px;
+  --tile-thumbnail-image-radius: 0px;
+  --tile-hover-bg: var(--color-background-hover);
+  --tile-thumbnail-image-hover-bg: var(--color-background-hover);
+  --tile-thumbnail-transition: 0;
+  --tile-hover-text-decoration: none;
+  --tile-text-size: var(--default-font-size);
+  --tile-text-weight: 400;
+  --tile-text-color: var(--color-main-text);
+  --tile-badge-box-shadow: none;
+  --tile-option-button-padding-end: 8px;
+  --tile-min-width: 198px;
+
+  // ── Calendar / DatePicker ──────────────────────────────────────────────────
+  --calendar-bg: var(--color-main-background);
+  --calendar-border: var(--color-border);
+  --calendar-shadow: none;
+  --calendar-radius: var(--border-radius-element);
+  --calendar-title: var(--color-main-text);
+  --calendar-weekday: var(--color-text-maxcontrast);
+  --calendar-arrow: var(--color-main-text);
+  --calendar-disabled-arrow: var(--color-border-maxcontrast);
+  --calendar-outline: var(--color-border);
+  --calendar-hover-bg: var(--color-primary-light-hover);
+  --calendar-accent: var(--color-primary-element);
+  --calendar-selected-text: var(--color-primary-element-text);
+  --calendar-past: var(--color-text-maxcontrast);
+  --calendar-disabled: var(--color-border-maxcontrast);
+  --calendar-hover-radius: var(--border-radius-element);
+  --calendar-current-radius: var(--border-radius-element);
+  --calendar-focused-radius: var(--border-radius-element);
+  --calendar-focused-bg: var(--color-primary-element);
+  --calendar-focused-text: var(--color-primary-element-text);
+  --date-picker-bg: var(--color-main-background);
+  --date-picker-header-border: 1px solid var(--color-border);
+
+  // ── AddButton ──────────────────────────────────────────────────────────────
+  --add-button-radius: var(--border-radius-element);
+  --add-button-bg: var(--color-primary-light);
+  --add-button-bg-hover: var(--color-primary-light-hover);
+  --add-button-icon-color: var(--color-primary-light-text);
+  --add-button-icon-color-hover: var(--color-primary-light-text);
+
+  // ── SelectedItem ───────────────────────────────────────────────────────────
+  --selected-item-radius: var(--border-radius-element);
+  --selected-item-bg: var(--color-primary-light);
+  --selected-item-bg-hover: var(--color-primary-light-hover);
+  --selected-item-active-bg: var(--color-primary-element);
+  --selected-item-active-text: var(--color-primary-element-text);
+}
+
+body.dark {
+  // Colors — Primary
+  --color-primary: #1a8fd1;
+  --color-primary-hover: #3399d6;
+  --color-primary-element: #1a8fd1;
+  --color-primary-element-hover: #006aa3;
+  --color-primary-element-active: #005a8a;
+  --color-primary-element-text: #ffffff;
+  --color-primary-light: #1c2e3a;
+  --color-primary-light-hover: #243847;
+  --color-primary-light-text: #cce8f7;
+
+  --color-main-background: #1c1c1e;
+  --color-main-background-blur: rgba(28, 28, 30, 0.8);
+  --color-main-text: #f2f2f7;
+  --color-text-maxcontrast: #aeaeb2;
+  --color-text-disabled: #6c6c70;
+
+  --color-background-hover: #2c2c2e;
+  --color-background-dark: #3a3a3c;
+  --color-background-darker: #4a4a4e;
+
+  --color-border: #3a3a3c;
+  --color-border-dark: #4a4a4e;
+  --color-border-maxcontrast: #6c6c70;
+
+  // Colors — Loader
+  --color-loading-light: #777777;
+  --color-loading-dark: #cccccc;
+
+  // ── Typography ─────────────────────────────────────────────────────────────
+  --font-family: var(--font-face);
+  --text-size: var(--default-font-size);
+  --text-weight: 400;
+  --button-text-weight: 700;
+
+  // ── Button (default / secondary) ───────────────────────────────────────────
+  --button-root-bg: transparent;
+  --button-root-color: var(--color-main-text);
+  --button-root-border: 2px solid var(--color-border-dark);
+  --button-root-border-radius: var(--border-radius-pill);
+  --button-root-bg-hover: var(--color-background-hover);
+  --button-root-bg-active: var(--color-background-dark);
+  --button-root-bg-disabled: transparent;
+  --button-root-color-hover: var(--color-main-text);
+  --button-root-border-hover: 2px solid var(--color-border-dark);
+  --button-root-border-active: 2px solid var(--color-border-dark);
+
+  // ── Button (primary) ───────────────────────────────────────────────────────
+  --button-primary-bg: var(--color-primary-element);
+  --button-primary-color: var(--color-primary-element-text);
+  --button-primary-border: transparent;
+  --button-primary-bg-hover: var(--color-primary-element-hover);
+  --button-primary-bg-active: var(--color-primary-element-active);
+  --button-primary-bg-disabled: var(--color-primary-light);
+  --button-primary-border-hover: transparent;
+  --button-primary-border-active: transparent;
+
+  // ── Tabs ───────────────────────────────────────────────────────────────────
+  --tabs-primary-text: var(--color-text-maxcontrast);
+  --tabs-primary-active-text: var(--color-main-text);
+  --tabs-primary-hover-text: var(--color-main-text);
+  --tabs-underline: var(--color-primary-element);
+  --tabs-underline-radius: 0;
+
+  // ── TextInput / PasswordInput / SearchInput ────────────────────────────────
+  --text-input-bg: var(--color-main-background);
+  --text-input-border-color: var(--color-border-maxcontrast);
+  --text-input-color: var(--color-main-text);
+  --text-input-radius: var(--border-radius-element);
+  --input-border: 2px solid;
+  --text-input-border-hover: var(--color-primary-element);
+  --text-input-border-focus: var(--color-primary-element);
+
+  // ── ModalDialog ────────────────────────────────────────────────────────────
+  --modal-dialog-bg: var(--color-main-background);
+  --modal-dialog-color: var(--color-main-text);
+  --modal-dialog-backdrop: rgba(var(--backdrop-color), 0.7);
+  --modal-dialog-radius: var(--border-radius-container);
+  --modal-dialog-header-border-display: none;
+  --modal-dialog-header-title-position: absolute;
+  --modal-dialog-header-title-inset: 50%;
+  --modal-dialog-header-title-transform: translateX(-50%);
+  --modal-dialog-header-title-text-align: center;
+
+  // ── ComboBox ───────────────────────────────────────────────────────────────
+  --combobox-bg: var(--color-main-background);
+  --combobox-radius: var(--border-radius-pill);
+  --combobox-inner-padding: 0;
+  --combobox-border-color: var(--color-border-maxcontrast);
+  --combobox-hover-border-color: var(--color-primary-element);
+  --combobox-focus-border-color: var(--color-primary-element);
+
+  // ── ToggleButton ───────────────────────────────────────────────────────────
+  --toggle-button-checked-color: var(--color-primary-element);
+  --toggle-button-off-color: var(--color-text-maxcontrast);
+  --toggle-button-off-hover-color: var(--color-border-maxcontrast);
+
+  // ── Checkbox ───────────────────────────────────────────────────────────────
+  --checkbox-fill-color: var(--color-primary-element);
+  --checkbox-arrow-color: var(--color-primary-element-text);
+
+  // ── Tooltip ────────────────────────────────────────────────────────────────
+  --tooltip-bg: var(--color-main-text);
+  --tooltip-color: var(--color-main-background);
+
+  // ── Scrollbar ──────────────────────────────────────────────────────────────
+  --scrollbar-bg: var(--color-border-dark);
+  --scrollbar-bg-hover: var(--color-border-maxcontrast);
+
+  // ── IconButton ─────────────────────────────────────────────────────────────
+  --icon-button-color: var(--color-text-maxcontrast);
+  --icon-button-hover-color: var(--color-main-text);
+
+  // ── Badge ──────────────────────────────────────────────────────────────────
+  --badge-bg: var(--color-primary-element);
+
+  // ── Link ───────────────────────────────────────────────────────────────────
+  --link-color: var(--color-primary-element);
+
+  // ── Avatar ─────────────────────────────────────────────────────────────────
+  --avatar-bg: var(--color-background-hover);
+  --avatar-initials-bg: var(--color-primary-light);
+  --avatar-initials-color: var(--color-main-text);
+
+  // ── AiChatButton ───────────────────────────────────────────────────────────
+  --ai-chat-button-bg: var(--color-primary-element);
+  --ai-chat-button-color: var(--color-primary-element-text);
+
+  // ── Loader ─────────────────────────────────────────────────────────────────
+  --loader-track-base: var(--color-loading-dark);
+  --loader-track-primary: var(--color-loading-light);
+
+  // ── LibraryCategoryListView ─────────────────────────────────────────────────
+  --library-list-accent-color: var(--color-primary);
+
+  // ── LibraryLanding ─────────────────────────────────────────────────────────
+  --landing-title-color: var(--color-main-text);
+  --landing-description-color: var(--color-text-maxcontrast);
+  --landing-accent-color: var(--color-primary);
+  --landing-dropdown-bg: var(--color-main-background);
+  --landing-dropdown-border-color: var(--color-border);
+  --landing-item-hover-bg: var(--color-background-hover);
+  --landing-stats-bg: rgba(255, 255, 255, 0.05);
+  --landing-stats-border: var(--color-border);
+  --landing-stats-border-dark: var(--color-border);
+  --landing-search-dropdown-shadow-dark: 0 4px 16px rgba(0, 0, 0, 0.24);
+
+  // ── MobileStub ─────────────────────────────────────────────────────────────
+  --mobile-stub-bg: var(--color-main-background);
+  --mobile-stub-title-color: var(--color-main-text);
+  --mobile-stub-description-color: var(--color-text-maxcontrast);
+
+  // ── WelcomeTourDialog ──────────────────────────────────────────────────────
+  --tour-video-radius: var(--border-radius-element);
+  --tour-card-radius: var(--border-radius-element);
+  --tour-card-bg: var(--color-background-hover);
+  --tour-accent-color: var(--color-primary);
+  --tour-description-color: var(--color-text-maxcontrast);
+  --tour-question-weight: 600;
+
+  // ── FormsSidebar ───────────────────────────────────────────────────────────
+  --article-bg: var(--color-main-background-blur);
+  --sidebar-item-gap: 4px;
+
+  // ── ArticleItem ─────────────────────────────────────────────────────────────
+  --article-item-border-radius: var(--border-radius-element);
+  --article-item-bg: transparent;
+  --article-item-text-weight: 400;
+  --article-item-text: var(--color-main-text);
+  --article-item-text-active: var(--color-primary);
+  --article-item-icon: var(--color-text-maxcontrast);
+  --article-item-icon-active: var(--color-primary);
+  --article-item-active-bg: var(--color-background-hover);
+  --article-item-active-hover-bg: var(--color-background-hover);
+  --article-item-hover-bg: var(--color-background-hover);
+
+  // ── FileTile ───────────────────────────────────────────────────────────────
+  --tile-bg: transparent;
+  --file-tile-border-style: none;
+  --tile-radius: var(--border-radius-element);
+  --tile-hover-bg: var(--color-background-hover);
+  --tile-icon-display: none;
+  --tile-bottom-padding-inline: 16px;
+  --tile-grid-padding-inline: 16px;
+  --tile-thumbnail-padding-inline: 16px;
+  --tile-thumbnail-image-radius: var(--border-radius-container);
+  --tile-thumbnail-bg: var(--color-background-dark);
+  --tile-thumbnail-image-hover-bg: var(--color-background-hover);
+  --tile-thumbnail-transition: 0;
+  --tile-hover-text-decoration: none;
+  --tile-text-size: var(--default-font-size);
+  --tile-text-weight: 400;
+  --tile-text-color: var(--color-main-text);
+  --tile-badge-box-shadow: none;
+  --tile-option-button-padding-end: 8px;
+  --tile-min-width: 198px;
+
+  // ── Calendar / DatePicker ──────────────────────────────────────────────────
+  --calendar-bg: var(--color-main-background);
+  --calendar-border: var(--color-border);
+  --calendar-shadow: none;
+  --calendar-radius: var(--border-radius-element);
+  --calendar-title: var(--color-main-text);
+  --calendar-weekday: var(--color-text-maxcontrast);
+  --calendar-arrow: var(--color-main-text);
+  --calendar-disabled-arrow: var(--color-border-maxcontrast);
+  --calendar-outline: var(--color-border);
+  --calendar-hover-bg: var(--color-background-hover);
+  --calendar-accent: var(--color-primary-element);
+  --calendar-selected-text: var(--color-primary-element-text);
+  --calendar-past: var(--color-text-maxcontrast);
+  --calendar-disabled: var(--color-border-maxcontrast);
+  --calendar-hover-radius: var(--border-radius-element);
+  --calendar-current-radius: var(--border-radius-element);
+  --calendar-focused-radius: var(--border-radius-element);
+  --calendar-focused-bg: var(--color-primary-element);
+  --calendar-focused-text: var(--color-primary-element-text);
+  --date-picker-bg: var(--color-main-background);
+  --date-picker-header-border: 1px solid var(--color-border);
+
+  // ── AddButton ──────────────────────────────────────────────────────────────
+  --add-button-radius: var(--border-radius-element);
+  --add-button-bg: var(--color-primary-light);
+  --add-button-bg-hover: var(--color-primary-light-hover);
+  --add-button-icon-color: var(--color-primary-element);
+  --add-button-icon-color-hover: var(--color-primary-element);
+
+  // ── SelectedItem ───────────────────────────────────────────────────────────
+  --selected-item-radius: var(--border-radius-element);
+  --selected-item-bg: var(--color-primary-light);
+  --selected-item-bg-hover: var(--color-primary-light-hover);
+  --selected-item-active-bg: var(--color-primary-element);
+  --selected-item-active-text: var(--color-primary-element-text);
+
+  // ── Chat ───────────────────────────────────────────────────────────────────
+  --chat-background: var(--color-main-background);
+  --chat-text-color: var(--color-main-text);
+  --chat-accent-color: var(--color-primary-element);
+  --chat-icon-color: var(--color-text-maxcontrast);
+  --chat-message-text-color: var(--color-main-text);
+  --chat-user-message-background: var(--color-primary-element);
+  --chat-input-background: var(--color-background-hover);
+  --chat-send-button-background: var(--color-primary-element);
+  --chat-send-button-color: var(--color-primary-element-text);
+  --chat-divider-color: var(--color-border-dark);
+  --chat-header-button-color: var(--color-text-maxcontrast);
+  --chat-header-button-hover-background-color: var(--color-background-hover);
+  --chat-border-radius-base: var(--border-radius-element);
+  --chat-font-size: var(--default-font-size);
+}

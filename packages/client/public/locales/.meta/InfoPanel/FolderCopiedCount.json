@@ -3,23 +3,24 @@
   "content": "Folders copied ({{count}}).",
   "content_en_sha1_hash": "a1dca028ddb924f234b5c17d714194b24989bb6e",
   "created_at": "2025-05-19T21:30:54.838Z",
-  "updated_at": "2026-04-07T19:35:05.115Z",
+  "updated_at": "2026-04-11T21:13:25.252Z",
   "comment": {
-    "text": "This translation key displays the number of folders copied, indicating a successful file transfer action. It appears on the History page, showing the count of copies made.",
+    "text": "This is a toast message indicating the number of folders that have been successfully copied. The `{{count}}` variable represents the number of folders.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:00.904Z"
+    "updated_at": "2026-04-11T21:13:25.252Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
       "line_number": 137,
-      "context": "return t(\"InfoPanel:FoldersTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FolderCopied:\n if (hasRelatedItems)\n return t(\"InfoPanel:FolderCopiedCount\", {\n count,\n });\n return t(\"InfoPanel:FolderCopied\");\n case FeedActionKeys.FolderDeleted:\n if (hasRelatedItems)",
+      "context": "return t(\"InfoPanel:FoldersTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FolderCopied:\n if (hasRelatedItems)\n return t(\"InfoPanel:FolderCopiedCount\", {\n count,\n });\n return t(\"InfoPanel:FoldersCopiedNotify\");\n case FeedActionKeys.FolderDeleted:\n if (hasRelatedItems)",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 131,
-      "context": "return t(\"InfoPanel:FoldersTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FolderCopied:\n if (hasRelatedItems)\n return t(\"InfoPanel:FolderCopiedCount\", {\n count,\n });\n return t(\"InfoPanel:FolderCopied\");\n case FeedActionKeys.FolderDeleted:\n if (hasRelatedItems)",
+      "context": "return t(\"InfoPanel:FoldersTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FolderCopied:\n if (hasRelatedItems)\n return t(\"InfoPanel:FolderCopiedCount\", {\n count,\n });\n return t(\"InfoPanel:FoldersCopiedNotify\");\n case FeedActionKeys.FolderDeleted:\n if (hasRelatedItems)",
       "module": "/packages/client"
     }
   ],

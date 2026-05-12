@@ -3,13 +3,27 @@
   "content": "Format",
   "content_en_sha1_hash": "041a5dec481d6bf0724caeaa84bc135d7d9062d4",
   "created_at": "2026-03-31T15:18:15.073Z",
-  "updated_at": "2026-04-08T05:57:11.038Z",
+  "updated_at": "2026-04-23T17:24:02.166Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label for a document property, indicating the file format (e.g., DOCX, PDF) of a template in the library.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:49:59.801Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/forms/library/[langId]/[categoryId]/template/[templateId]/page.client.tsx",
+      "line_number": 299,
+      "context": "</div>\n )}\n {templateIsFile && template.fileExst && (\n <div className={styles.metaItem}>\n <span className={styles.metaLabel}>\n {t(\"Common:LibraryTemplateFormat\")}\n </span>\n <span className={styles.metaValue}>\n {template.fileExst.replace(\".\", \"\").toUpperCase()}\n </span>\n </div>",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/forms/library/[langId]/[categoryId]/template/[templateId]/page.client.tsx",
+      "line_number": 299,
+      "context": "</div>\n )}\n {templateIsFile && template.fileExst && (\n <div className={styles.metaItem}>\n <span className={styles.metaLabel}>\n {t(\"Common:LibraryTemplateFormat\")}\n </span>\n <span className={styles.metaValue}>\n {template.fileExst.replace(\".\", \"\").toUpperCase()}\n </span>\n </div>",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

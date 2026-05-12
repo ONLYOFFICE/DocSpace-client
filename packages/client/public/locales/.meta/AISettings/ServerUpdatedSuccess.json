@@ -3,16 +3,17 @@
   "content": "Server updated successfully",
   "content_en_sha1_hash": "fe15c3e760745ca5a195baaeb78c9791dc57ac67",
   "created_at": "2025-10-27T16:14:31.651Z",
-  "updated_at": "2025-12-19T13:32:32.894Z",
+  "updated_at": "2026-04-11T21:02:18.502Z",
   "comment": {
-    "text": "This key displays a success message in a toast notification after a server is successfully updated. It appears within the AI Settings server editing dialog in the Portal Settings section. Translators should ensure the message conveys a positive confirmation of the server update action.",
+    "text": "Toast message confirming that the server settings have been successfully updated.",
     "is_auto": true,
-    "updated_at": "2025-10-27T17:14:57.406Z"
+    "updated_at": "2026-04-11T21:02:18.502Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/dialogs/edit/index.tsx",
-      "line_number": 126,
+      "line_number": 127,
       "context": "}\n \n try {\n await updateMCP?.(server.id, updateData);\n \n toastr.success(t(\"AISettings:ServerUpdatedSuccess\"));\n \n onClose();\n } catch (e) {\n toastr.error(e as TData);\n console.error(e);",
       "module": "/packages/client"
     }

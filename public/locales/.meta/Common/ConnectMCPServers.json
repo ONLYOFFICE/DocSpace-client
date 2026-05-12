@@ -3,18 +3,19 @@
   "content": "To use manage connection, you need to connect {{mcpServers}} inside room settings",
   "content_en_sha1_hash": "8b74de859fa41700ee1ba0cad31c4cff054d2a67",
   "created_at": "2025-12-18T11:15:07.721Z",
-  "updated_at": "2026-04-08T14:37:27.639Z",
+  "updated_at": "2026-04-23T17:24:02.170Z",
   "comment": {
-    "text": "This text appears as a tooltip on a button within room settings. It instructs users to connect Minecraft server instances (MCP servers) to manage connections. The `{{mcpServers}}` placeholder will be replaced with a label for MCP settings.",
+    "text": "This is a tooltip message that appears when the \"Manage connection\" option is disabled. It informs the user that they need to connect to {{mcpServers}} (which is a placeholder for \"MCP servers\") within the room settings to enable this feature.",
     "is_auto": true,
-    "updated_at": "2025-12-22T09:45:27.052Z"
+    "updated_at": "2026-04-11T20:56:36.289Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/chat/components/chat-input/ToolsSettings.tsx",
-      "line_number": 392,
-      "context": "},\n icon: ManageConnectionsReactSvgUrl,\n disabled: !showManageConnectionItem,\n getTooltipContent: () => (\n <Text>\n {t(\"ConnectMCPServers\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n })}\n </Text>\n ),\n },",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-input/tools-settings/index.tsx",
+      "line_number": 454,
+      "context": "},\n iconNode: <ManageConnectionsReactSvg />,\n disabled: !showManageConnectionItem,\n getTooltipContent: () => (\n <Text>\n {t(\"ConnectMCPServers\", {\n mcpServers: t(\"MCPSettingTitle\"),\n })}\n </Text>\n ),\n },",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation is grammatically incorrect and changes the meaning. '{{mcpServers}} qoşulmalısınız' means 'You must connect {{mcpServers}}', whereas the English 'connect {{mcpServers}} inside room settings' implies that the user needs to perform the action of connecting the servers within that specific menu. The current phrasing is awkward and doesn't clearly state that the servers themselves need to be connected.",
-          "suggestion": "Bağlantını idarə etmək üçün otaq parametrlərində {{mcpServers}} qoşmalısınız"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -117,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The verb 'pasaver' is not a valid Latvian word in this context; it appears to be a hallucination or a typo for 'piesaistīt' (to connect) or 'konfigurēt' (to configure).",
-          "suggestion": "Lai izmantotu savienojuma pārvaldību, jums ir jāpiesaistīt {{mcpServers}} telpas iestatījumos"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {

@@ -3,17 +3,18 @@
   "content": "The sizes are shown for the Retina displays. For the displays with standard resolutions the logo width and height will be resized accordingly upon upload.",
   "content_en_sha1_hash": "fba22904e71580d8ea3a4b8838ac44bbd60ffca4",
   "created_at": "2025-05-26T07:15:49.630Z",
-  "updated_at": "2026-04-07T19:58:45.434Z",
+  "updated_at": "2026-04-12T08:36:49.777Z",
   "comment": {
-    "text": "This translation key is used for a tooltip that explains how logo sizes will be resized on standard-resolution displays when uploaded, appearing next to a settings button in the WhiteLabelHeader.",
+    "text": "This is a tooltip that appears when hovering over the help icon next to the logo upload fields. It explains how logo dimensions are handled for different display types.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:01:47.198Z"
+    "updated_at": "2026-04-11T20:38:53.234Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/WhiteLabelHeader.tsx",
       "line_number": 97,
-      "context": "fontSize=\"13px\"\n >\n {t(\"WhiteLabelSubtitle\")}\n <HelpButton\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"Common:WhiteLabelTooltip\")}</Text>\n }\n place=\"right\"\n offsetRight={0}\n dataTestId=\"white_label_helper_button\"\n />",
+      "context": "fontSize=\"13px\"\n >\n {t(\"WhiteLabelLogoSubtitle\")}\n <HelpButton\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"Common:WhiteLabelTooltip\")}</Text>\n }\n place=\"right\"\n offsetRight={0}\n dataTestId=\"white_label_helper_button\"\n />",
       "module": "/packages/shared"
     }
   ],
@@ -123,25 +124,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation is missing a period/punctuation between the two sentences, creating a run-on sentence that affects readability and clarity.",
-          "suggestion": "Rozmiary są wyświetlane dla wyświetlaczy Retina. W przypadku wyświetlaczy o standardowych rozdzielczościach szerokość i wysokość logo zostaną dostosowane po wgraniu."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'displays' was translated as 'mostradores' (which means 'gauges' or 'indicators') instead of 'ecrãs' or 'visores'. This changes the technical meaning of the sentence.",
-          "suggestion": "Os tamanhos são mostrados para os ecrãs Retina. Para os ecrãs com resoluções padrão, a largura e altura do logótipo serão redimensionadas em conformidade no momento do carregamento."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {

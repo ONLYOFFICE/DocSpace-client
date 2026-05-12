@@ -3,16 +3,17 @@
   "content": "User quota",
   "content_en_sha1_hash": "e848c684e600a150cf50f9258ca8622add08c8f9",
   "created_at": "2025-05-19T21:30:54.255Z",
-  "updated_at": "2026-04-07T19:35:05.147Z",
+  "updated_at": "2026-04-11T21:16:53.862Z",
   "comment": {
-    "text": "The \"User quota\" translation key is used to display a label in UI elements, such as field labels and tooltips. It provides a clear and concise description of the quota setting being configured or edited within the LDAP integration settings.",
+    "text": "This is a label for an input field where administrators can set a storage quota for LDAP users.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:05.462Z"
+    "updated_at": "2026-04-11T21:16:53.862Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
-      "line_number": 222,
+      "line_number": 223,
       "context": "<FieldContainer\n style={FIELD_STYLE}\n isVertical\n labelVisible\n hasError={errors.userQuotaLimit}\n labelText={t(\"LdapQuota\")}\n tooltipContent={t(\"LdapUserQuotaTooltip\", {\n contactsName: t(\"Common:Contacts\"),\n })}\n inlineHelpButton\n dataTestId=\"quota_field_container\"",
       "module": "/packages/client"
     }

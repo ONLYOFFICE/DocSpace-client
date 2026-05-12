@@ -3,22 +3,23 @@
   "content": "Shared files and folders",
   "content_en_sha1_hash": "8cb552a10fc5a2919fbca9ebc6f9dfb0566bbf62",
   "created_at": "2025-10-03T10:07:00.002Z",
-  "updated_at": "2026-04-09T00:59:14.968Z",
+  "updated_at": "2026-04-11T21:22:08.427Z",
   "comment": {
-    "text": "This text labels a checkbox within the \"Settings\" section of the Portal data import process. It indicates whether to import shared files and folders during the import. Translators should ensure the translation accurately reflects the action of importing shared resources.",
+    "text": "This is a checkbox label in the data import settings. It indicates an option to include shared files and folders during the import process.",
     "is_auto": true,
-    "updated_at": "2025-10-17T14:44:45.285Z"
+    "updated_at": "2026-04-11T21:22:08.427Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 208,
+      "line_number": 209,
       "context": "/>\n \n <ImportSection\n isChecked={importOptions.importSharedFilesAndFolders}\n onChange={(e) => onChange(e, \"importSharedFilesAndFolders\")}\n sectionName={t(\"Settings:SharedFilesAndFolders\")}\n description={\n <Trans\n t={t}\n i18nKey=\"SharedFilesAndFoldersDescription\"\n ns=\"Settings\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 208,
+      "line_number": 209,
       "context": "/>\n \n <ImportSection\n isChecked={importOptions.importSharedFilesAndFolders}\n onChange={(e) => onChange(e, \"importSharedFilesAndFolders\")}\n sectionName={t(\"Settings:SharedFilesAndFolders\")}\n description={\n <Trans\n t={t}\n i18nKey=\"SharedFilesAndFoldersDescription\"\n ns=\"Settings\"",
       "module": "/packages/client"
     }

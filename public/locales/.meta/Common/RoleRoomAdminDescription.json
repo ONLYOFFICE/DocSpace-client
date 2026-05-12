@@ -3,22 +3,23 @@
   "content": "Room admins can create and manage the assigned rooms, invite new users and assign roles below their level. All admins have access to the {{sectionName}} section.<br/> <1>In {{agentSection}}</1>: can create and manage {{agentSection}}, including their knowledge base and access settings.",
   "content_en_sha1_hash": "0db14bbd835eb618b2d813dcfe5941205de491f2",
   "created_at": "2025-12-16T07:24:33.081Z",
-  "updated_at": "2026-04-08T00:41:11.678Z",
+  "updated_at": "2026-04-13T08:25:07.948Z",
   "comment": {
-    "text": "This text describes the permissions and responsibilities of a Room Admin user role. It explains their ability to manage rooms, users, roles, and access settings within the application, specifically including details about managing agents and their associated knowledge base. This description appears within UI elements related to user roles and access controls.",
+    "text": "This is a description of the Room Admin role, displayed in tooltips or information sections. It explains the permissions of a Room Admin, including managing rooms, inviting users, and accessing the `sectionName` (e.g., \"Documents\") and `agentSection` (e.g., \"AI Assistant\") sections. The `1` tag bolds specific text.",
     "is_auto": true,
-    "updated_at": "2025-12-17T07:50:20.731Z"
+    "updated_at": "2026-04-11T20:44:25.375Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 65,
+      "line_number": 66,
       "context": "case None:\n return (\n <Trans\n t={t as TFunction}\n ns=\"Common\"\n i18nKey=\"RoleRoomAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n sectionName: t(\"Common:Documents\"),",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getUserTypeDescription.tsx",
-      "line_number": 62,
+      "line_number": 63,
       "context": "if (isRoomAdmin)\n return (\n <Trans\n t={t as TFunction}\n ns=\"Common\"\n i18nKey=\"RoleRoomAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n sectionName: t(\"Common:Documents\"),",
       "module": "/packages/shared"
     }
@@ -41,9 +42,11 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation of the phrase 'In {{agentSection}}' is left in English ('In {{agentSection}}'), which fails to translate the preposition and context into Azerbaijani.",
-          "suggestion": "\"Otaq administratorları təyin edilmiş otaqları yarada və idarə edə, yeni istifadəçilər dəvət edə və səviyyələrindən aşağı rolu təyin edə bilərlər. Bütün administratorlar {{sectionName}} bölməsinə daxil olurlar.<br/> <1>{{agentSection}}-da</1>: öz bilik bazalarını və giriş parametrlərini daxil olmaqla, {{agentSection}}-ı yarada və idarə edə bilərlər.\""
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \"\"\"",
+          "suggestion": "",
+          "checked_at": "2026-04-13T08:23:11.155Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null
@@ -81,13 +84,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'assign roles below their level' is translated as 'määrittää rooleja alemmalle tasolle', which implies assigning roles to a lower level, rather than assigning roles that are lower than the admin's own level.",
-          "suggestion": "Huoneiden ylläpitäjät voivat luoda ja hallita määrätyt huoneet, kutsua uusia käyttäjiä ja määrittää rooleja, jotka ovat heidän tasoaan alempia. Kaikilla ylläpitäjillä on pääsy {{sectionName}}-osioon.<br/> <1>Kohdassa {{agentSection}}</1>: voivat luoda ja hallita {{agentSection}}-kohtaisia asioita, mukaan lukien niiden tietokanta ja käyttöoikeusasetukset."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -119,9 +116,11 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'In {{agentSection}}' was left untranslated in English within the Korean text, making the sentence structure unnatural and partially English.",
-          "suggestion": "{{agentSection}}에서: 지식 기반 및 액세스 설정을 포함하여 {{agentSection}}을 생성 및 관리할 수 있습니다."
+          "type": "wrong_language",
+          "description": "The phrase 'In {{agentSection}}' contains untranslated English text ('In') within the Korean translation. This breaks the Korean text and must be translated.",
+          "suggestion": "<1>{{agentSection}}에서</1>",
+          "checked_at": "2026-04-13T08:24:03.970Z",
+          "checked_by": "claude-code/haiku"
         }
       ],
       "approved_at": null
@@ -135,18 +134,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'piešķirt papildus savā līmenī' (assign additional in their level) is nonsensical and fails to convey 'assign roles below their level'. Also, 'apgārtās telpas' is not a standard term for 'assigned rooms', and 'rīķina' is a misspelling/incorrect word for 'accessing' or 'section'.",
-          "suggestion": "Administrātori telpās var izveidot un vadīt pievienotās telpas, ielūgt jaunus lietotājus un piešķirt lomas, kas ir zemāki par viņu līmeni. Visi administratori ir piekļuve {{sectionName}} sadaļai.<br/> <1>{{agentSection}} sadaļā</1>: var izveidot un vadīt {{agentSection}}, ieskaitot to zināšanu bāzi un piekļuves iestatījumus."
-        },
-        {
-          "type": "missing_content",
-          "description": "The translation 'Man {{agentSection}}' is a mistranslation of 'In {{agentSection}}'. 'Man' in Latvian means 'To me' or 'I', which changes the meaning of the sentence structure.",
-          "suggestion": "<1>{{agentSection}} sadaļā</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -182,78 +170,37 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Russian translation says 'can create the section {{agentSection}}' (могут создавать раздел {{agentSection}}), whereas the English says 'can create and manage {{agentSection}}' (referring to the agents themselves, not the section). This changes the meaning from managing entities within a section to creating the section itself.",
-          "suggestion": "Администраторы комнат могут создавать назначенные им комнаты и управлять ими, приглашать новых пользователей, а также назначать роли ниже своего уровня. Все администраторы имеют доступ к разделу {{sectionName}}.<br/> <1>В {{agentSection}}</1>: могут создавать и управлять {{agentSection}}, включая их базу знаний и настройки доступа."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'In {{agentSection}}' was translated as 'In {{agentSection}}' but the English structure implies the subject of the sentence is the admin. The Sinhala translation 'In {{agentSection}}: ... හැකිය' is grammatically awkward and fails to translate the prepositional context correctly, making the sentence structure broken.",
-          "suggestion": "කාමර පරිපාලකයින්ට පවරා ඇති කාමර නිර්මාණය කිරීමට සහ කළමනාකරණය කිරීමට, නව පරිශීලකයන්ට ආරාධනා කිරීමට සහ ඔවුන්ගේ මට්ටමට පහළ මට්ටම්වල භූමිකාවන් පවරා දීමට හැකිය. සියලුම පරිපාලකයින්ට {{sectionName}} කොටසට ප්‍රවේශය ඇත.<br/> <1>{{agentSection}} තුළ</1>: ඔවුන්ගේ දැනුම පදනම සහ ප්‍රවේශ සැකසුම් ඇතුළුව {{agentSection}} නිර්මාණය කිරීමට සහ කළමනාකරණය කිරීමට හැකිය."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The first sentence starts with 'Administrátoromi miestností môžu...', which is grammatically incorrect and changes the meaning. 'Administrátoromi' is not a valid word; it seems to be a failed attempt at a plural instrumental case or a typo. It should be 'Administrátori miestností' (Room admins) to match the subject 'can create'.",
-          "suggestion": "Administrátori miestností môžu vytvárať a spravovať pridelené miestnosti, pozývať nových používateľov a priraďovať úlohy nižšie ako ich úroveň. Všetci administrátori majú prístup k sekcii {{sectionName}}.<br/> <1>V {{agentSection}}</1>: môžu vytvárať a spravovať {{agentSection}}, vrátane ich znalostnej bázy a nastavení prístupu."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'namestijo nove uporabnike' means 'install new users' instead of 'invite new users' (vabijo nove uporabnike).",
-          "suggestion": "Upravniki sob lahko kreirajo in upravljajo dodeljene sobe, vabijo nove uporabnike in dodeljujejo vloge pod svojo raven. Vsi upravniki imajo dostop do razdelka {{sectionName}}.<br/> <1>V {{agentSection}}</1>: lahko kreirajo in upravljajo {{agentSection}}, vključno z njihovo bazo znanja in nastavitvami dostopa."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical error in 'njihim bazom znanja' (incorrect case/gender agreement) which affects the clarity of 'their knowledge base'.",
-          "suggestion": "Upravniki sob lahko kreirajo in upravljajo dodeljene sobe, vabijo nove uporabnike in dodeljujejo vloge pod svojo raven. Vsi upravniki imajo dostop do razdelka {{sectionName}}.<br/> <1>V {{agentSection}}</1>: lahko kreirajo in upravljajo {{agentSection}}, vključno z njihovo bazo znanja in nastavitvami dostopa."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'të i_shto rolet' contains a typo/formatting error (underscore) and the grammar 'të i_shto' is incorrect for the intended meaning 'assign roles'.",
-          "suggestion": "Administratorët e dhomës mund të krijojnë dhe menaxhojnë dhomat e caktuara, të ftojnë përdorues të rinj dhe të caktojnë rolet nën nivelin e tyre. Të gjithë administratorët kanë akses në seksionin {{sectionName}}.<br/> <1>Në {{agentSection}}</1>: mund të krijojnë dhe menaxhojnë {{agentSection}}, duke përfshirë bazën e tyre të njohurive dhe cilësimet e aksesit."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Room' (in the context of a digital workspace/room) is translated as 'собеседовања' (interviews), which is a completely different meaning and contextually incorrect for a DocSpace UI.",
-          "suggestion": "Администратори собе могу креирати и управљати додељеним собама, позивати нове кориснике и додељивати улоге испод свог нивоа. Сви администратори имају приступ секцији {{sectionName}}.<br/> <1>У {{agentSection}}</1>: могу креирати и управљати {{agentSection}}, укључујући њихову базу знања и подешавања приступа."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

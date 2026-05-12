@@ -3,11 +3,12 @@
   "content": "Automatically switch between light and dark themes when your system does.",
   "content_en_sha1_hash": "c63fc79ca86878cd4320587abf222c6e63118c5c",
   "created_at": "2026-04-03T21:51:34.692Z",
-  "updated_at": "2026-04-07T22:05:52.625Z",
+  "updated_at": "2026-04-12T16:08:27.078Z",
   "comment": {
-    "text": "This key provides the description for the \"System\" theme option within the interface theme selection settings. It explains that the application will automatically switch between light and dark modes to match the user's operating system preferences.",
+    "text": "This is a description for a radio button option. It explains that selecting this option will make the application's theme (light or dark) automatically match the operating system's theme setting.",
     "is_auto": true,
-    "updated_at": "2026-04-03T21:52:49.699Z"
+    "updated_at": "2026-04-11T20:41:21.847Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -15,6 +16,12 @@
       "line_number": 113,
       "context": "const systemThemeLabel = isDesktopClient\n ? t(\"Profile:DesktopTheme\")\n : t(\"SystemTheme\");\n const systemThemeDescriptionLabel = isDesktopClient\n ? t(\"Profile:DesktopThemeDescription\")\n : t(\"SystemThemeDescription\");\n \n return (\n <div\n className={styles.interfaceTheme}\n data-testid=\"profile-interface-theme\"",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/settings/category/InterfaceTheme.tsx",
+      "line_number": 116,
+      "context": "label={t(\"Common:SystemTheme\")}\n isChecked={isSystemTheme}\n onChange={onChangeSystemTheme}\n />\n <Text as=\"div\" className={styles.systemThemeDescription}>\n {t(\"Common:SystemThemeDescription\")}\n </Text>\n </div>\n <RadioButtonGroup\n orientation=\"vertical\"\n name=\"interface-theme\"",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -27,13 +34,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'القوالب' (templates) is used instead of 'السمات' (themes). In UI context, 'themes' refers to visual modes, whereas 'templates' refers to document layouts.",
-          "suggestion": "قم بالتبديل تلقائيًا بين السمات الفاتحة والداكنة عندما يقوم نظامك بذلك."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -207,13 +208,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'khi hệ thống của bạn hoạt động' means 'when your system is operating/working', which changes the meaning from 'when your system does [switch]' to a general state of the system being active.",
-          "suggestion": "Tự động chuyển đổi giữa chế độ sáng và tối theo cài đặt của hệ thống."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

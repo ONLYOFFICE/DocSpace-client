@@ -3,22 +3,23 @@
   "content": "I confirm and want to proceed",
   "content_en_sha1_hash": "9a1708e8dbfcfa98c4531a9a57767fd20d9a308a",
   "created_at": "2025-05-26T07:15:49.400Z",
-  "updated_at": "2026-04-07T20:39:50.652Z",
+  "updated_at": "2026-04-12T12:45:53.928Z",
   "comment": {
-    "text": "This translation key is used to display a confirmation message for user agreement. It appears in various UI elements, such as buttons and checkboxes, where users are asked to confirm their actions or settings. Translators should ensure that this text accurately conveys the intended meaning and tone in different languages.",
+    "text": "This is the label for a checkbox that users must select to confirm their understanding and agreement before proceeding with a backup restoration.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:01:55.183Z"
+    "updated_at": "2026-04-11T20:39:37.296Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/index.tsx",
-      "line_number": 467,
+      "line_number": 468,
       "context": "styles.restoreBackupDescription,\n \"restore-backup-checkbox\",\n )}\n onChange={onChangeCheckbox}\n isChecked={checkboxState.confirmation}\n label={t(\"Common:UserAgreement\")}\n isDisabled={!isEnableRestore}\n dataTestId=\"user_agreement_checkbox\"\n />\n <ButtonContainer\n standalone={standalone}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/backup-list/index.tsx",
-      "line_number": 313,
+      "line_number": 314,
       "context": "className={classNames(\n styles.backupListAgreementText,\n \"backup-list_agreement-text\",\n )}\n >\n {t(\"Common:UserAgreement\")}\n <HelpButton\n className={classNames(\n styles.backupListTooltip,\n \"backup-list_tooltip\",\n )}",
       "module": "/packages/shared"
     }
@@ -63,13 +64,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation 'Επιβεβαίωση και συνέχιση' means 'Confirmation and continuation' (nouns), whereas the English text 'I confirm and want to proceed' is a first-person active statement (verb phrase). This changes the tone from a user action/declaration to a simple label.",
-          "suggestion": "Επιβεβαιώνω και θέλω να συνεχίσω"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {

@@ -4,11 +4,11 @@
   "ErrorViewDescription": "Ju lutem provojeni përsëri më vonë",
   "ErrorViewDescriptionNetworkError": "Shkruan se nuk ka lidhje me internet.",
   "ErrorViewHeader": "Galeria është përkohësisht e padisponueshme",
+  "GalleryTitle": "{{organizationName}} Galeria e Shablloneve",
   "SelectTemplate": "Zgjidhni shabllon",
+  "SubmitToGalleryDialogMainInfo": "Dërgoni shabllonin tuaj në galerinë publike që të lejoni të përdorësojnë të tjerët në punën e tyre. Pasi shablloni të kalojë moderimin, do të jeni njoftuar dhe të shpëtonuar për kontributin tuaj.",
   "SuggestChanges": "Sugjeroni ndryshime",
   "TemplateInfo": "Info shablloni",
   "UploadGallery": "Ngarko në Galeri",
-  "ViewAllTemplates": "Shikoni të gjitha shabllonet",
-  "GalleryTitle": "{{organizationName}} Galeria e Shablloneve",
-  "SubmitToGalleryDialogMainInfo": "Dërgoni shabllonin tuaj në galerinë publike që të lejoni të përdorësojnë të tjerët në punën e tyre. Pasi shablloni të kalojë moderimin, do të jeni njoftuar dhe të shpëtonuar për kontributin tuaj."
+  "ViewAllTemplates": "Shikoni të gjitha shabllonet"
 }

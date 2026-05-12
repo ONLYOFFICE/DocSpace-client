@@ -3,11 +3,12 @@
   "content": "Mobile editing.",
   "content_en_sha1_hash": "950b8cee66034eb2754ac6639406c09cff5b454d",
   "created_at": "2025-05-26T07:15:49.276Z",
-  "updated_at": "2026-04-07T20:47:39.482Z",
+  "updated_at": "2026-04-12T13:16:01.091Z",
   "comment": {
-    "text": "The \"UpgradeToProBannerItemMobileHeader\" translation key is used to display a mobile-specific header for an upgrade to pro banner. It appears on a payment benefits container page and includes a title and image.",
+    "text": "This is a short header for a feature benefit listed in a banner promoting a paid plan. It describes the ability to edit documents on mobile devices.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:02:10.941Z"
+    "updated_at": "2026-04-11T20:39:51.247Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation 'تحرير الهاتف' means 'Editing the phone' (as in modifying the device itself), whereas the English 'Mobile editing' refers to the capability of editing documents on a mobile device.",
-          "suggestion": "التحرير عبر الهاتف"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -147,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Editare mobilă' means 'Furniture editing' in Romanian. The English 'Mobile editing' refers to editing on a mobile device.",
-          "suggestion": "Editare pe mobilă"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

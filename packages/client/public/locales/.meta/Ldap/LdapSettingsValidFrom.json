@@ -3,11 +3,12 @@
   "content": "Valid from",
   "content_en_sha1_hash": "160fdedf5c4e86942b5000450c3a0ca95b3784f6",
   "created_at": "2025-05-19T21:30:54.303Z",
-  "updated_at": "2026-04-07T19:35:05.150Z",
+  "updated_at": "2026-04-11T21:16:38.110Z",
   "comment": {
-    "text": "The \"LdapSettingsValidFrom\" translation key is used to display the valid from date of an LDAP certificate in a user interface. It appears in a certificate details dialog and is part of a list of dates related to certificate validity.",
+    "text": "This is a label indicating the start date of an LDAP certificate's validity period, displayed within a certificate details dialog.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:59.072Z"
+    "updated_at": "2026-04-11T21:16:38.110Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "Are you sure you want to remove the {{service}}? This will not affect your {{account}} account in any way.",
   "content_en_sha1_hash": "6c59206f54809027b688a9b82f186032c0a4a006",
   "created_at": "2025-05-26T07:15:48.781Z",
-  "updated_at": "2026-04-07T21:54:18.853Z",
+  "updated_at": "2026-04-12T15:46:34.479Z",
   "comment": {
-    "text": "This translation key is used for a confirmation prompt in a user interface, specifically a dialog that allows users to disconnect from third-party services. The text appears as part of a modal dialog and informs the user about the consequences of removing the service, which will not affect their account in any way.",
+    "text": "This is the body text of a confirmation dialog. It appears when a user attempts to disconnect a third-party cloud service, asking for confirmation. `{{service}}` is the name of the cloud service (e.g., \"Google Drive\"), and `{{account}}` is the name of the user's account with that service (e.g., \"Google\").",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:03:19.236Z"
+    "updated_at": "2026-04-11T20:41:10.203Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -153,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "wrong_language",
-          "description": "The provided translation is in Slovenian, not Sinhala.",
-          "suggestion": "ඔබට {{service}} ඉවත් කිරීමට අවශ්‍යද යන්න පිළිබඳව ඔබට විශ්වාසද? මෙයින් ඔබගේ {{account}} ගිණුමට කිසිදු බලපෑමක් ඇති නොවේ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -183,13 +178,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "wrong_language",
-          "description": "The translation is provided in Cyrillic script, but the requirement specified Serbian (Latin).",
-          "suggestion": "Da li ste sigurni da želite da uklonite {{service}}? Ovo na koji način neće uticati na vaš {{account}} nalog."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -219,13 +208,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order in the second sentence is grammatically incorrect in Albanian, making the relationship between 'account' and '{{account}}' confusing. It translates to '...will not affect in any way your account of {{account}}' instead of 'your {{account}} account'.",
-          "suggestion": "Jeni i sigurt që dëshironi të hiqni {{service}}? Kjo nuk do të ndikojë në asnjë mënyrë në llogarinë tuaj {{account}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

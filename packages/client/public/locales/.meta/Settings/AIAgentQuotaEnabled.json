@@ -3,11 +3,12 @@
   "content": "{{aiAgent}} quota has been successfully enabled.",
   "content_en_sha1_hash": "20c6168f345ce2475276018960151e13d2ae30ee",
   "created_at": "2025-12-19T13:03:34.338Z",
-  "updated_at": "2026-04-10T08:21:04.400Z",
+  "updated_at": "2026-04-11T21:25:52.485Z",
   "comment": {
-    "text": "This key displays a success message in a toastr notification, confirming that the AI Agent quota has been enabled. The message includes the AI Agent name, which is retrieved from another translation key (\"Common:AIAgent\"). It appears after attempting to set the default AI Agent quota.",
+    "text": "This is a toast message confirming that the AI Agent quota has been successfully enabled. The `{{aiAgent}}` variable will be replaced with the localized term for \"AI Agent\".",
     "is_auto": true,
-    "updated_at": "2025-12-22T10:10:31.910Z"
+    "updated_at": "2026-04-11T21:25:52.485Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -57,13 +58,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Η' is a feminine article, but 'ποσό' (amount/quota) is a neuter noun in Greek. The correct article should be 'Το'.",
-          "suggestion": "Το ποσό της {{aiAgent}} ενεργοποιήθηκε με επιτυχία."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -117,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian verb 'ienrojusi' (has entered/enrolled) is used incorrectly. It implies the quota itself performed an action of entering something, rather than being enabled/activated.",
-          "suggestion": "{{aiAgent}} kvota ir veiksmīgi aktivizēta."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -135,13 +124,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation uses the wrong grammatical case and gender for the noun 'limit'. 'Limitę' is the accusative form, but the sentence requires the nominative 'Limit'. Additionally, 'zostało' (neuter) does not agree with 'limit' (masculine).",
-          "suggestion": "Limit {{aiAgent}} został pomyślnie włączony."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -177,25 +160,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation 'Kvotné {{aiAgent}}' is grammatically incorrect and changes the meaning. 'Kvotné' is an adjective meaning 'quota-based' or 'quotas' (plural adjective), whereas the English refers to a specific 'quota' (noun) belonging to the AI Agent. It sounds like 'Quota-based {{aiAgent}} were successfully enabled' instead of '{{aiAgent}} quota has been enabled'.",
-          "suggestion": "{{aiAgent}} kvóta bola úspešne zapnutá."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Kvotica' is a misspelling/incorrect form of 'Kvorota' (quota). In Slovenian, the correct term is 'Kvorota'.",
-          "suggestion": "Kvorota {{aiAgent}} je bila uspešno vključena."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
@@ -213,13 +184,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical number mismatch: The English text refers to a single quota ('{{aiAgent}} quota'), but the Serbian translation uses the plural 'Kvote' (Quotas), which changes the meaning.",
-          "suggestion": "Kvota za {{aiAgent}} je uspešno omogućena."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

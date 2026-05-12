@@ -3,16 +3,17 @@
   "content": "There will be two different files in the folder.",
   "content_en_sha1_hash": "f5a9a4d6d05f3820e3d7543868c93f4b514a48f4",
   "created_at": "2025-05-19T21:30:43.866Z",
-  "updated_at": "2026-04-08T13:55:32.453Z",
+  "updated_at": "2026-04-23T17:24:01.710Z",
   "comment": {
-    "text": "This translation key is used to display a message indicating that two files will be copied. It appears in a conflict resolution dialog and provides context for users when choosing how to proceed with conflicting file names.",
+    "text": "This is a description displayed in a dialog when a file conflict is detected. It informs the user that two different files will exist in the folder if they choose to create a copy.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:52.491Z"
+    "updated_at": "2026-04-11T20:56:05.875Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
-      "line_number": 293,
+      "line_number": 303,
       "context": "? t(\"Common:CopyAndKeepBothFolders\")\n : t(\"Common:CopyAndKeepAll\");\n };\n const getDuplicateDescription = () => {\n return isFileDialog\n ? t(\"Common:CreateDescription\")\n : isFolderDialog\n ? t(\"Common:CreateFolderDescription\")\n : t(\"Common:FoldersAndFilesWillBeCopied\");\n };\n const getSkipDescription = () => {",
       "module": "/packages/client"
     },
@@ -105,13 +106,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation says 'files will be saved' (저장됩니다), whereas the English text states 'there will be' (exist/be present). In the context of a conflict resolution dialog, the English describes the resulting state of the folder, while the Korean implies an action of saving is occurring.",
-          "suggestion": "폴더에 두 개의 서로 다른 파일이 있게 됩니다."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -123,13 +118,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Mapē' is a misspelling or incorrect word choice; it appears to be a typo for 'Mapē' (which doesn't exist in this context) or a confusion with 'Māpē' (in the folder). The current spelling 'Mapē' is incorrect in Latvian.",
-          "suggestion": "Māpē būs divi dažādi faili."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -159,13 +148,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation is grammatically incomplete and ends abruptly with a preposition ('în dosarul'), making it nonsensical. It translates to 'Two different files will be saved in the folder.' but the sentence structure is broken.",
-          "suggestion": "În folder vor fi două fișiere diferite."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -177,13 +160,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation uses the present tense ('are' / 'ඇත') instead of the future tense ('will be' / 'වනු ඇත') used in the English source. In the context of a conflict resolution dialog, this changes the meaning from a prediction of what will happen to a statement of current state.",
-          "suggestion": "බහාලුමෙහි වෙනස් ගොනු දෙකක් වනු ඇත."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -219,13 +196,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical error in noun-adjective agreement: 'два різних файли' is grammatically incorrect in Ukrainian. It should be 'два різні файли'.",
-          "suggestion": "У папці буде два різні файли."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

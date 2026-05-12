@@ -3,13 +3,21 @@
   "content": "This is a ready-made form template that you can use as a starting point for your document. Pick it, customize the fields to match your needs, then share it for filling. Completed forms are saved to My Forms where you can review, download, or process them with AI agents.",
   "content_en_sha1_hash": "b2d5dbe0b1bfcfe8325bca8df1aae536f937e2f5",
   "created_at": "2026-03-31T15:18:15.154Z",
-  "updated_at": "2026-04-08T05:58:03.281Z",
+  "updated_at": "2026-04-23T17:24:02.167Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a paragraph of descriptive text explaining how to use a form template from the library. It appears below the \"About\" section title on the template's detail page.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:50:00.760Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/forms/library/[langId]/[categoryId]/template/[templateId]/page.client.tsx",
+      "line_number": 345,
+      "context": "<div className={styles.description}>\n <h3 className={styles.sectionTitle}>\n {t(\"Common:LibraryTemplateAbout\")}\n </h3>\n <p className={styles.descriptionText}>\n {t(\"Common:LibraryTemplateAboutText\")}\n </p>\n </div>\n \n <div className={styles.description}>\n <h3 className={styles.sectionTitle}>",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -50,13 +58,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical gender mismatch in Greek: 'Αυτή είναι ένα έτοιμο πρότυπο φόρμα' is incorrect. 'Πρότυπο' is neuter, so it should be 'Αυτό είναι ένα έτοιμο πρότυπο φόρμα'.",
-          "suggestion": "Αυτό είναι ένα έτοιμο πρότυπο φόρμα που μπορείτε να χρησιμοποιήσετε ως σημείο εκκίνησης για το έγγραφό σας. Επιλέξτε το, προσαρμόστε τα πεδία ώστε να ταιριάζουν με τις ανάγκες σας, και στη συνέχεια μοιραστείτε το για συμπλήρωση. Οι συμπληρωμένες φόρμες αποθηκεύονται στα My Forms όπου μπορείτε να τις ελέγξετε, να τις κατεβάσετε ή να τις επεξεργαστείτε με βοηθούς ΤΝ (AI agents)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -158,13 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'hotovo vypracovaná' is grammatically incorrect in Slovak; it should be 'hotová' or 'vopred vypracovaná'. Additionally, 'výchoší' is a typo for 'výchozí' (Czech) or 'výchozí bod' (Slovak uses 'východiskový bod').",
-          "suggestion": "Toto je hotová šablóna formulára, ktorú môžete použiť ako východiskový bod pre váš dokument. Vyberte ju, prispôsobte políčka podľa vašich potrieb a potom ju zdieľajte na vyplnenie. Vyplnené formuláre sa ukladajú do Moje formuláre, kde ich môžete prehliadať, stiahnuť alebo spracovať pomocou AI agentov."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {

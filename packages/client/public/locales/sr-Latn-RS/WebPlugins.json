@@ -2,7 +2,7 @@
   "DeletePlugin": "Obriši dodatak",
   "DeletePluginDescription": "Ovaj dodatak više neće biti dostupan korisnicima {{productName}}-a. Da li ste sigurni da želite da nastavite?",
   "DeletePluginTitle": "Obriši dodatak?",
-  "ExpandFunctionality": "Proširi fukcionalnost koristeći Plugin SDK (SDK za dodatke)",
+  "ExpandFunctionality": "Proširi funkcionalnost koristeći Plugin SDK (SDK za dodatke)",
   "GoToRepo": "Idi u repozitorijum",
   "Metadata": "Metapodaci",
   "NeedSettings": "Potrebno je ući u podešavanja",
@@ -12,9 +12,9 @@
   "PluginDeletedSuccessfully": "Dodatak je uspešno obrisan",
   "PluginIsNotCompatible": "Verzija plugin SDK-a se ne poklapa sa verzijom {{productName}}. Molimo ažuriraj na kompatibilnu verziju.",
   "PluginLoadedSuccessfully": "Plugin uspešno učitan",
-  "PluginSamples": "Uzorci dodataka",
+  "PluginSamples": "Primeri dodataka",
   "PluginSDK": "Plugin SDK (SDK za dodatke)",
   "PluginSDKDescription": "Pomoću Plugin SDK-a (SDK za dodatke) možete proširiti funkcionalnost vašeg {{productName}}-a, povezati treće strane usluge ili unaprediti postojeće korisničko iskustvo. Ovde možete pronaći uzorke dodataka sa dostupnim izvornim kodom na GitHub-u.",
   "PluginSDKInstruction": "Kliknite na dugme za detaljne instrukcije kako da kreirate sopstvene dodatke.",
-  "UploadDescription": "Možete dodati dodatke da biste proširili funkcionalnost {{productName}}-a sa dodatnim mogućnostima. Kliknite na \"Postavi dodatak\" i izaberite datoteku dodatka u ZIP arhivi."
+  "UploadDescription": "Možete dodati dodatke da biste proširili funkcionalnost {{productName}}-a sa dodatnim mogućnostima. Kliknite na \"Postavi dodatak\" ili prevucite datoteku u ZIP arhivi."
 }

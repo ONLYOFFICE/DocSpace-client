@@ -3,17 +3,18 @@
   "content": "Delivery date",
   "content_en_sha1_hash": "1093fae5fbc2f03091a8f32f8add755d266e6d58",
   "created_at": "2025-05-19T21:30:49.690Z",
-  "updated_at": "2026-04-08T20:29:04.120Z",
+  "updated_at": "2026-04-13T14:59:05.874Z",
   "comment": {
-    "text": "The \"DeliveryDate\" translation key is used to display the date related to deliveries. It appears in a filter dialog within the application, allowing users to select and manage dates. Translators should provide an alternative text for this date format as it may vary across languages.",
+    "text": "This is a label for a date picker input field, allowing users to select a delivery date for filtering webhook history.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:47:07.675Z"
+    "updated_at": "2026-04-11T21:29:17.003Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/FilterDialog/DeliveryDatePicker.js",
-      "line_number": 138,
-      "context": ") : null}\n </div>\n );\n };\n \n const DeliveryDatePicker = ({\n filters,\n setFilters,\n isApplied,\n setIsApplied,\n }) => {",
+      "line_number": 237,
+      "context": "}, []);\n \n return (\n <>\n <Text fontWeight={600} fontSize=\"15px\">\n {t(\"DeliveryDate\")}\n </Text>\n <Selectors ref={selectorRef}>\n {filters.deliveryDate ? (\n <SelectedDateTime\n isTimeEqual={isTimeEqual}",
       "module": "/packages/client"
     }
   ],
@@ -99,13 +100,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term '전송 날짜' (Transmission/Sending date) is used for data transfer or messaging. In the context of a 'Delivery date' for logistics or item delivery, '배송 날짜' is the correct term.",
-          "suggestion": "배송 날짜"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -153,13 +148,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English 'Delivery date' refers to the date when an item is received/delivered, whereas the Russian 'Дата отправки' means 'Dispatch date' or 'Shipping date' (the date it is sent).",
-          "suggestion": "Дата доставки"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -207,25 +196,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Vietnamese translation 'Ngày gửi' means 'Date sent' or 'Sending date', which refers to the moment an item leaves a sender. 'Delivery date' refers to the moment an item arrives at its destination. In a logistics/filter context, 'Ngày giao hàng' or 'Ngày nhận hàng' is more accurate.",
-          "suggestion": "Ngày giao hàng"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term '传递日期' (chuándì rìqī) refers to the act of transmitting or passing something (like a signal or a message). In the context of a delivery date for goods or services, '交付日期' (jiāofù rìqī) or '送达日期' (sòngdá rìqī) is the standard and correct terminology.",
-          "suggestion": "交付日期"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

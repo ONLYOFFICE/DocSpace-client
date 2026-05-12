@@ -3,16 +3,17 @@
   "content": "Hide default authentication page and automatically redirect to SSO service.",
   "content_en_sha1_hash": "c798644a2826666749452b9712f3f550f8cfe279",
   "created_at": "2025-05-19T21:30:50.061Z",
-  "updated_at": "2026-04-08T23:40:06.582Z",
+  "updated_at": "2026-04-11T21:27:02.171Z",
   "comment": {
-    "text": "This translation key is used to describe a tooltip that explains the meaning of hiding the default authentication page and automatically redirecting to an SSO service. The tooltip appears when a checkbox related to Single Sign-On (SSO) integration is enabled or disabled in the Portal Settings category.",
+    "text": "This is a tooltip that appears when hovering over the help icon next to the \"Hide default authentication page\" checkbox. It explains the function of this setting, which is to bypass the standard login page and directly use Single Sign-On.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:19.891Z"
+    "updated_at": "2026-04-11T21:27:02.171Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/AdvancedSettings.tsx",
-      "line_number": 95,
+      "line_number": 97,
       "context": "isDisabled={!enableSso || isLoadingXml}\n onChange={setCheckbox}\n dataTestId=\"hide_auth_page_checkbox\"\n />\n <HelpButton\n tooltipContent={t(\"AdvancedSettingsTooltip\")}\n dataTestId=\"hide_auth_page_help_button\"\n />\n </div>\n \n <div className=\"advanced-block\">",
       "module": "/packages/client"
     }
@@ -45,13 +46,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text uses the singular 'page', but the Czech translation uses the plural 'stránky' (pages).",
-          "suggestion": "Skrýt výchozí ověřovací stránku a automaticky přesměrovat na službu SSO."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -159,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation incorrectly translates 'default authentication page' as 'පෙරනිමි ද්වි සාධක පිටුව' (default two-factor page), which changes the meaning from general authentication to two-factor authentication.",
-          "suggestion": "පෙරනිමි සහතික කිරීමේ පිටුව සඟවා ස්වයංක්‍රීයව තනි-පිවිසුම් (SSO) සේවාව වෙත හරවා යවන්න."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

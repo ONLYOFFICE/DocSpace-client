@@ -1,18 +1,17 @@
 {
-  "AccessingProblem": " 既存のユーザーでこのスペースへのアクセスに問題がある場合は、管理者までご連絡ください。",
   "CannotCreateNewRoom": "ルームを作成できません",
   "CannotCreatePaidUsers": "有料ユーザーを追加できません",
   "CannotRestoreRoom": "ルームを復元できません",
   "ChooseNewPlan": " 新しい料金プランの選択を希望されますか？",
+  "GracePeriodActive": "猶予期間は<1>{{fromDate}}から{{byDate}}まで有効です（残り日数：{{delayDaysCount}}）。</1>",
+  "LicenseExpiredRestriction": "新しいユーザーを追加したり、新しいルームを作成したりすることはできません。ライセンスの期限が切れています。",
+  "LicenseGracePeriodInfo": "この間は、管理者は新しいルームを作成したり、新しいユーザーを追加したりすることができません。猶予期間が終了すると、{{productName}} は新しいライセンスが有効になるまでご利用いただけなくなります。",
   "NewRoomWillExceedLimit": "現在のプランではルームの数の上限に達しているため、このルームを作成できません。",
   "NewUsersWillExceedMembersLimit": "現在のプランでは管理者の数の上限に達しているため、新しい有料ユーザーを追加できません。",
   "NotPossibleRoomRestoring": "現在のプランではルームの数の上限に達しているため、このルームを復元できません。",
   "NumberOfRoomsAccordingToTariff": "ご利用の料金プランのルーム数：{{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "料金プランごとの管理者の数：{{currentValue}}/{{maxValue}}",
+  "PlanPaymentOverdue": "新しいユーザーを追加したり、新しいルームやAIエージェントを作成したりすることはできません。{{planName}}プランの支払いが期限を過ぎています。",
   "RoomsQuotaAlmostExhausted": "ルームのストレージ容量が残りわずかです。",
-  "UsersQuotaAlmostExhausted": "有料ユーザーのストレージ容量が残りわずかです。",
-  "GracePeriodActive": "猶予期間は<1>{{fromDate}}から{{byDate}}まで有効です（残り日数：{{delayDaysCount}}）。</1>",
-  "LicenseExpired": "新しいユーザーを追加したり、新しいルームを作成したりすることはできません。ライセンスの期限が切れています。",
-  "LicenseGracePeriodInfo": "この間は、管理者は新しいルームを作成したり、新しいユーザーを追加したりすることができません。猶予期間が終了すると、{{productName}} は新しいライセンスが有効になるまでご利用いただけなくなります。",
-  "PlanPaymentOverdue": "新しいユーザーを追加したり、新しいルームやAIエージェントを作成したりすることはできません。{{planName}}プランの支払いが期限を過ぎています。"
+  "UsersQuotaAlmostExhausted": "有料ユーザーのストレージ容量が残りわずかです。"
 }

@@ -54,6 +54,7 @@ import {
   checkPropertyByLink,
 } from "../../../utils";
 import LoaderSectionHeader from "../loaderSectionHeader";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const HeaderContainer = styled.div`
   position: relative;
@@ -373,10 +374,11 @@ const SectionHeaderContent = (props) => {
             : t("DataImport")
       : !standalone && isPaymentPage
         ? t("Common:Billing")
+        // biome-ignore lint/plugin/no-dynamic-i18n-key: header is passed from route config; underlying keys are declared as literals at callsites
         : t(header, {
             organizationName: logoText,
             license: t("Common:EnterpriseLicense"),
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
             aiServices: t("Common:AIServices"),
           });
 

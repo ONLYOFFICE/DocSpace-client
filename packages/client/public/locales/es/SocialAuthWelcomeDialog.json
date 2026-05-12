@@ -1,8 +1,8 @@
 {
   "ChangeData": "Cambiar datos y contraseña\n",
+  "ClickButtonBelow": "Si desea iniciar sesión con su correo electrónico, establezca su propia contraseña. <br/> Una vez hecho esto, haga clic en el botón de abajo.",
   "ContinueToProduct": "Continuar a {{productName}}",
   "GeneratedPassword": "Contraseña generada\n",
   "ProductNameDetail": "Nombre de {{productName}}",
-  "ReviewAccountDetails": "Por favor, tómese un momento para revisar los detalles de su cuenta:\n",
-  "ClickButtonBelow": "Si desea iniciar sesión con su correo electrónico, establezca su propia contraseña. <br/> Una vez hecho esto, haga clic en el botón de abajo."
+  "ReviewAccountDetails": "Por favor, tómese un momento para revisar los detalles de su cuenta:\n"
 }

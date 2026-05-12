@@ -3,11 +3,12 @@
   "content": "Enable this setting to disable downloads of files and folders from this room shared via a link",
   "content_en_sha1_hash": "2ea92290a035527ea6287be4963fdb388e78c6ae",
   "created_at": "2025-08-26T11:15:03.614Z",
-  "updated_at": "2026-04-08T02:18:21.966Z",
+  "updated_at": "2026-04-12T03:58:19.601Z",
   "comment": {
-    "text": "This text appears in a dialog (likely an \"Edit Link Panel\") and describes a setting that prevents users from downloading files and folders shared via a link within a room. It explains the functionality of disabling downloads for shared content.",
+    "text": "This is a checkbox label in the link sharing settings for a room. It prevents users who access the room via a shared link from downloading its files and folders.",
     "is_auto": true,
-    "updated_at": "2025-08-26T11:18:37.036Z"
+    "updated_at": "2026-04-11T20:46:01.687Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

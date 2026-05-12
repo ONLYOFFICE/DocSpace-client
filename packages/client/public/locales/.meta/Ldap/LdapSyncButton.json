@@ -3,11 +3,12 @@
   "content": "Sync users",
   "content_en_sha1_hash": "ef3b2becca7b9d065d4fc56d36dab3c502ddc054",
   "created_at": "2025-05-19T21:30:54.308Z",
-  "updated_at": "2026-04-07T19:35:05.150Z",
+  "updated_at": "2026-04-11T21:16:36.227Z",
   "comment": {
-    "text": "This translation key is used for the \"Sync users\" label on a button that triggers LDAP synchronization. The button appears in a sync container component and is disabled when LDAP integration is not enabled or UID is disabled.",
+    "text": "Button label. This button initiates the synchronization of user data from an LDAP server to DocSpace.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:58.500Z"
+    "updated_at": "2026-04-11T21:16:36.227Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

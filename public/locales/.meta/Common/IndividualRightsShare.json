@@ -3,11 +3,12 @@
   "content": "Individual rights",
   "content_en_sha1_hash": "5785bb996e7dca407fc9b1a4f1d0d442268e3b19",
   "created_at": "2025-10-07T15:38:57.568Z",
-  "updated_at": "2026-04-08T06:47:25.290Z",
+  "updated_at": "2026-04-11T20:50:59.460Z",
   "comment": {
-    "text": "This key displays the text \"Individual rights\" within a dialog (likely for editing group members). It's used in a tooltip to inform users about the rights associated with a group member, and the specific wording changes based on whether the group is a room or not. Translators should maintain the clear and informative nature of the text.",
+    "text": "This is a tooltip label that appears when hovering over a user's name in a shared folder or file, indicating that their permissions are set individually rather than inherited from a group.",
     "is_auto": true,
-    "updated_at": "2025-10-07T15:43:41.073Z"
+    "updated_at": "2026-04-11T20:50:59.460Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'الصلاحيات الفردية' means 'Individual permissions/authorities' rather than 'Individual rights'. In the context of user management and rights, 'حقوق' is the correct term for 'rights'.",
-          "suggestion": "الحقوق الفردية"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {

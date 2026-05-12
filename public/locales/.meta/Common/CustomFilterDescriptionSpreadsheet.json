@@ -3,16 +3,17 @@
   "content": "Viewing with applied filters. All other editing options are available.",
   "content_en_sha1_hash": "9bc8b8a1283e8a6d26e7f7d02bbb7c0ffe8ebd4c",
   "created_at": "2025-09-29T18:22:02.567Z",
-  "updated_at": "2026-04-08T12:40:52.518Z",
+  "updated_at": "2026-04-11T20:55:47.171Z",
   "comment": {
-    "text": "This text describes the view when custom filters are applied to a spreadsheet. It appears as a notification or label indicating that filtered data is being displayed and other editing options remain available. Translators should ensure the message clearly conveys that filters are active.",
+    "text": "This is a description displayed in the sharing settings for a spreadsheet. It informs the user that the document is being viewed with applied filters, and all other editing options remain available.",
     "is_auto": true,
-    "updated_at": "2025-09-29T18:28:29.445Z"
+    "updated_at": "2026-04-11T20:55:47.171Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 682,
+      "line_number": 683,
       "context": ".with(\n {\n fileType: FileType.Spreadsheet,\n access: ShareAccessRights.CustomFilter,\n },\n () => t(\"Common:CustomFilterDescriptionSpreadsheet\"),\n )\n .with(\n {\n fileType: P.union(\n FileType.Spreadsheet,",
       "module": "/packages/shared"
     }

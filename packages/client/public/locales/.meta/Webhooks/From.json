@@ -3,17 +3,18 @@
   "content": "From",
   "content_en_sha1_hash": "3f66052a107eaf9bae7cad0f61fb462f47ec2c47",
   "created_at": "2025-05-19T21:30:49.764Z",
-  "updated_at": "2026-04-08T19:54:57.518Z",
+  "updated_at": "2026-04-13T14:59:05.874Z",
   "comment": {
-    "text": "This translation key is used for displaying a time range on the \"Delivery Date\" filter component. It displays the departure and arrival times of a delivery in 12-hour format.",
+    "text": "This is a label for a date range filter, indicating the start date for filtering webhook delivery history. It appears as part of a sentence with a time variable.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:47:01.703Z"
+    "updated_at": "2026-04-11T21:28:49.283Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/FilterDialog/DeliveryDatePicker.js",
-      "line_number": 114,
-      "context": "closeCalendar,\n i18n,\n }) => {\n const formattedTime = isTimeEqual\n ? \"\"\n : ` ${formatDate(filters.deliveryFrom.setZone(window.timezone), \"HH:mm\")} - ${formatDate(filters.deliveryTo.setZone(window.timezone), \"HH:mm\")}`;\n \n return (\n <div>\n <SelectedItem\n className=\"selectedItem delete-delivery-date-button\"",
+      "line_number": 273,
+      "context": "isInline\n fontWeight={600}\n color={globalColors.gray}\n className=\"mr-8\"\n >\n {t(\"From\")}\n </Text>\n <TimePicker\n classNameInput=\"from-time\"\n onChange={setDeliveryFrom}\n hasError={!isTimeValid}",
       "module": "/packages/client"
     }
   ],
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Etibarən' means 'On behalf of' or 'By', which is used for signatures. In the context of a time range (From - To), the correct preposition for 'From' is 'Dən' or 'Başlanğıc'.",
-          "suggestion": "Dən"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -51,13 +46,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word 'From' in the context of a time range (departure time) means 'Od'. The Czech translation 'Odesilatel' means 'Sender', which refers to a person or entity, not a time point.",
-          "suggestion": "Od"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -111,13 +100,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '시작' means 'Start' or 'Beginning', which is used for actions or events. In the context of a time range (From - To), the correct prepositional meaning for 'From' is '부터'.",
-          "suggestion": "부터"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {

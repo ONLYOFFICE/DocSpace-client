@@ -3,16 +3,17 @@
   "content": "Confirmation e-mail has been sent to {{ownerName}}",
   "content_en_sha1_hash": "c8567fd0bac3cc5bbb926b90bc69044d2c9b723d",
   "created_at": "2025-05-19T21:30:50.965Z",
-  "updated_at": "2026-04-09T03:53:31.526Z",
+  "updated_at": "2026-04-11T21:25:15.286Z",
   "comment": {
-    "text": "The translation key \"ConfirmEmailSended\" is used to display a success message after sending a confirmation email to an owner. It appears in a success notification dialogue, informing the user that a confirmation email has been sent to the selected owner. The message includes the owner's name for personalization.",
+    "text": "Toast message confirming an email has been sent to change the portal owner. `{{ownerName}}` is the display name of the new owner.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:30.338Z"
+    "updated_at": "2026-04-11T21:25:15.286Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 84,
+      "line_number": 85,
       "context": "setIsLoading(true);\n sendOwnerChange(selectedUser.id)\n .then(() => {\n onClose && onClose();\n toastr.success(\n t(\"Settings:ConfirmEmailSended\", {\n ownerName: displayName,\n }),\n );\n })\n .catch((error) => {",
       "module": "/packages/client"
     }
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation is grammatically incorrect and changes the meaning. It currently reads 'Confirmation e-mail {{ownerName}} has been sent', which implies the email belongs to the person, rather than being sent TO the person. It lacks the necessary preposition 'to'.",
-          "suggestion": "Təsdiqləmə e-məktubu {{ownerName}}-ə göndərildi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -51,25 +46,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Czech translation is missing a space before the variable {{ownerName}}, which will cause the name to be concatenated directly to the word 'odeslán' (e.g., 'odeslánJan').",
-          "suggestion": "Potvrzující e-mail byl odeslán {{ownerName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German word 'Bestätiguns-E-Mail' contains a typo; it is missing the 'g' (should be 'Bestätigungs-E-Mail').",
-          "suggestion": "Bestätigungs-E-Mail wurde an {{ownerName}} gesendet."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -87,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation uses 'osoitteen' (address), which implies an email address, but the English text and the variable 'ownerName' indicate a person's name. This creates a semantic mismatch where the message says 'sent to the address [Name]'.",
-          "suggestion": "Vahvistusviesti on lähetetty käyttäjälle {{ownerName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -183,13 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation is missing the preposition 'to' (v slovenčine chýba predložka 'na' alebo 'používateľovi'), which makes the sentence grammatically incorrect and changes the relationship between the action and the recipient.",
-          "suggestion": "Potvrdzujúci e-mail bol odoslaný na {{ownerName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -207,13 +178,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation is grammatically incorrect and lacks the necessary preposition 'to', which changes the relationship between the email and the owner. In Serbian, 'poslat {{ownerName}}' implies the email was sent *as* the owner, rather than *to* the owner.",
-          "suggestion": "Email konfirmacije je poslat korisniku {{ownerName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

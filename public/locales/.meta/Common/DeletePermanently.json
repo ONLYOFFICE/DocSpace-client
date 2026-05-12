@@ -3,11 +3,12 @@
   "content": "Delete permanently",
   "content_en_sha1_hash": "e63b5153bde0d2b885dec00616d064be3e88c11b",
   "created_at": "2025-05-19T21:30:44.471Z",
-  "updated_at": "2026-04-08T12:17:19.595Z",
+  "updated_at": "2026-05-08T13:10:45.555Z",
   "comment": {
-    "text": "\"This translation key is used to display a message that confirms permanent deletion. In the CreateEditRoomDialog component, this key is applied as the label of an action button, prompting users to permanently delete files.\"",
+    "text": "This is a button label or a confirmation dialog message. It indicates that an item will be permanently removed and cannot be recovered, bypassing the trash or recycle bin.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:44.028Z"
+    "updated_at": "2026-04-11T20:55:19.318Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -21,6 +22,12 @@
       "line_number": 189,
       "context": "if (isTemplate) {\n return t(\"Common:Delete\");\n }\n \n if (isRoomDelete || isAIAgent) {\n return t(\"Common:DeletePermanently\");\n }\n \n if (isRecycleBinFolder)\n return t(\"Common:DeleteForeverButton\");",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/delete-form-dialog/index.tsx",
+      "line_number": 50,
+      "context": "void confirm();\n }, [confirm]);\n \n return (\n <ModalDialog visible={visible} onClose={close} autoMaxHeight>\n <ModalDialog.Header>{t(\"Common:DeletePermanently\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{t(\"Common:DeleteItemForever\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

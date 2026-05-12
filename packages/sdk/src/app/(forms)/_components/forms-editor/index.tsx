@@ -36,7 +36,6 @@ import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { FolderType } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
 import { FormsSection } from "@/types/forms";
 
@@ -45,6 +44,7 @@ import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import { useFormsListStore } from "../../_store/FormsListStore";
 import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
+import DualRingSpinner from "../forms-layout/DualRingSpinner";
 import styles from "./FormsEditor.module.scss";
 
 type FormsEditorProps = {
@@ -263,11 +263,7 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
 
   return (
     <div className={styles.editorWrapper}>
-      {(!isIframeLoaded || isCompleting) && (
-        <div className={styles.loaderOverlay}>
-          <Loader type={LoaderTypes.track} size="40px" />
-        </div>
-      )}
+      {(!isIframeLoaded || isCompleting) && <DualRingSpinner />}
       {!isCompleting && (
         <iframe
           ref={iframeRef}

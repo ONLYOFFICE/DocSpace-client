@@ -3,11 +3,12 @@
   "content": "With subfolders",
   "content_en_sha1_hash": "bbacf97a73d40195b05d23b1680d86eb7a229fab",
   "created_at": "2025-05-19T21:30:49.612Z",
-  "updated_at": "2026-04-07T19:56:48.919Z",
+  "updated_at": "2026-04-12T08:28:36.820Z",
   "comment": {
-    "text": "WithSubfolders is a term used to describe an option that allows users to search within subfolders. It appears as a checkbox label in a UI component, enabling or disabling this feature based on user configuration.",
+    "text": "Checkbox label. Indicates whether a search or operation should include items within subfolders.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:26:39.984Z"
+    "updated_at": "2026-04-11T20:38:48.825Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -207,13 +208,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'nëndosje' in Albanian refers to 'submitting' or 'subjection' (from the verb 'dosje' or 'dosje' context, but more commonly 'dorëzim' or 'submetim'). The correct term for 'subfolders' is 'nënfolder'.",
-          "suggestion": "Me nënfolder"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -3,11 +3,12 @@
   "content": "We’re analyzing and processing this file so that it can be used by AI as part of the knowledge base. Once preparation is complete, the file will be available for search, summaries, and other AI-powered features.",
   "content_en_sha1_hash": "8bc3ada3b8ab51a09bf8d5919d81bcf8a3a5d5cb",
   "created_at": "2025-10-27T16:14:24.410Z",
-  "updated_at": "2026-04-08T02:21:22.364Z",
+  "updated_at": "2026-04-12T04:02:47.546Z",
   "comment": {
-    "text": "This text explains that a file is currently being processed for use with AI features. It appears as informational text within a UI element, likely near a badge or status indicator, to let users know why a file might not be immediately searchable or usable. Translators should maintain the explanation of AI processing.",
+    "text": "This is an informational message displayed below a \"Preparing for AI\" label, explaining that a file is being processed for AI features like search and summaries.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:29:03.797Z"
+    "updated_at": "2026-04-11T20:46:04.881Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The first sentence in Azerbaijani is grammatically incorrect and changes the subject/action. 'Bu faylın məlumatları təhlil edir və işləyirik' translates to 'It analyzes this file's information and we are working', which is a broken construction. It should be 'We are analyzing and processing this file'.",
-          "suggestion": "Bu faylı süni intellekt tərəfindən (AI) məlumat bazasının bir hissəsi kimi istifadə edilə bilməsi üçün təhlil edir və emal edirik. Hazırlıq başa çatdıqdan sonra, fayl axtarış, xülasələr və digər süni intellektlə təmin edilmiş funksiyalar üçün mövcud olacaq."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -51,13 +46,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'příprav' is a grammatical error (incorrect declension/form). It should be 'přípravy' to be correct in Czech.",
-          "suggestion": "Analyzujeme a zpracováváme tento soubor, aby jej bylo možné využít pro AI jako součást znalostní báze. Po dokončení přípravy bude soubor dostupný pro vyhledávání, shrnutí a další funkce poháněné umělou inteligencí."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -123,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical error in the final phrase 'citām MI darbināmiem rīkiem' makes the sentence nonsensical. 'Rīkiem' (tools) is dative plural, but 'citām' (other) is feminine dative plural, and 'darbināmiem' (worker-like/operated by people) is masculine dative plural. It should be 'citām MI darbinātām funkcijām' to match 'features' or 'citiem MI darbināliem rīkiem' to match 'tools'.",
-          "suggestion": "Mēs analizējam un apstrādājam šo failu, lai to varētu izmantot MI kā daļu no zināšanu bāzes. Kad sagatavošana būs pabeigta, fails būs pieejams meklēšanai, kopsavilkumiem un citām MI darbinātām funkcijām."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -183,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translator incorrectly used the abbreviation 'UI' for 'Artificial Intelligence' in Slovenian. In Slovenian, 'UI' stands for 'User Interface' (Uporabniški vmesnik), whereas 'Artificial Intelligence' is 'Umetna inteligenca' (UI). This creates a confusing and incorrect technical meaning.",
-          "suggestion": "Analiziramo in obdelujemo to datoteko, da bi jo lahko uporabila umetna inteligenca kot del baze znanja. Ko bo priprava končana, bo datoteka na voljo za iskanje, povzetke in druge funkcije, ki jih poganja umetna inteligenca."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

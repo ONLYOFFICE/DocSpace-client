@@ -50,6 +50,7 @@ import {
 	StyledPreviewContainer,
 	StyledBlocksContainer,
 } from "../OAuth.styled";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const htmlBlock = `<body>
     <button id="docspace-button" class="docspace-button">
@@ -204,7 +205,7 @@ const PreviewDialog = ({
 									t={t}
 									ns="OAuth"
 									i18nKey="SignIn"
-									values={{ productName: t("Common:ProductName") }}
+									values={{ productName: getBrandName("ProductName") }}
 								/>
 							}
 							IconComponent={icon}

@@ -3,11 +3,12 @@
   "content": "Custom domain name",
   "content_en_sha1_hash": "206b756397ab3dc81264df6cc5ef34724be21bde",
   "created_at": "2025-05-19T21:30:50.988Z",
-  "updated_at": "2026-04-09T03:50:59.619Z",
+  "updated_at": "2026-04-11T21:25:09.278Z",
   "comment": {
-    "text": "Custom domain name label for a toggle button in DNS settings.",
+    "text": "This is the label for a toggle button that enables or disables the custom domain name feature in the portal settings.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:29.275Z"
+    "updated_at": "2026-04-11T21:25:09.278Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -69,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation 'Muokattu verkkotunnuksen nimi' means 'Modified domain name' instead of 'Custom domain name'. In a technical context, 'Custom' refers to a user-defined or personalized setting, whereas 'Muokattu' implies something that has already been edited/changed.",
-          "suggestion": "Oma verkkotunnus"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -87,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Պատվերով տիրույթի անուն' means 'Domain name by order' or 'Ordered domain name', which implies a domain that has been purchased or requested. In a technical DNS context, 'Custom domain name' refers to a user-defined or non-default domain (e.g., 'domain.com' instead of 'workspace.onlyoffice.com').",
-          "suggestion": "Ընտրված տիրույթի անուն"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -201,13 +190,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ім’я настроюваного домену' means 'Name of the configurable domain', which is a literal and incorrect translation of 'Custom domain name'. In a technical context, 'Custom domain' should be translated as 'Власний домен'.",
-          "suggestion": "Власне доменне ім'я"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

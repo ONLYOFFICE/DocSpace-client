@@ -3,13 +3,21 @@
   "content": "Subscription will be automatically renewed on {{finalDate}} with updated pricing and specifications. You can cancel it or change your billing info on your Stripe customer portal.",
   "content_en_sha1_hash": "f7c32402a08d667135c600c9b76018150ae168ad",
   "created_at": "2026-04-10T13:53:42.085Z",
-  "updated_at": "2026-04-10T13:53:42.085Z",
+  "updated_at": "2026-04-11T20:58:01.260Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is an informational text displayed below the payment details, informing the user about the automatic renewal of their subscription. `{{finalDate}}` is the date of the renewal.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:58:01.260Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/PaymentContainer.tsx",
+      "line_number": 202,
+      "context": "<Text\n fontSize=\"14px\"\n lineHeight=\"16px\"\n className={styles.paymentInfoManagersPrice}\n >\n <CommonTrans i18nKey=\"BusinessFinalDateInfo\" values={{ finalDate: paymentDate }} />\n </Text>\n );\n };\n \n return (",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

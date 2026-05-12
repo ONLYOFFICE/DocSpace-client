@@ -3,11 +3,12 @@
   "content": "Here, you can set storage quota for users and rooms.",
   "content_en_sha1_hash": "efbbb4d56fa28e8b96099485a18c6bc5e107536e",
   "created_at": "2025-05-19T21:30:52.363Z",
-  "updated_at": "2026-04-09T01:46:53.130Z",
+  "updated_at": "2026-04-11T21:22:43.740Z",
   "comment": {
-    "text": "This translation key is used to display a descriptive message about setting storage quotas for users and rooms. It appears in a UI element that manages storage settings, likely in a portal or admin panel.",
+    "text": "This is a descriptive sentence appearing below the \"Quotas\" heading in the Storage Management settings. It explains that this section allows setting storage limits for users and rooms.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:40.606Z"
+    "updated_at": "2026-04-11T21:22:43.740Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -153,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'පරිශ්‍රීලකයින්' (parishrilakayin) is a misspelling/incorrect term for 'users'. The correct term for users in this context is 'පරිශීලකයින්' (parishilakayin).",
-          "suggestion": "මෙහිදී ඔබට පරිශීලකයින් සහ කාමර සඳහා ආචයන සීමාවන් සැකසීමට හැකිය."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -177,13 +172,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'собе' is an incorrect/incomplete translation for 'rooms'. In this context, it should be 'собе» (rooms) or 'просторе' (spaces). 'Собе' is not a standard Serbian word for rooms.",
-          "suggestion": "Овде можете поставити квоту складишта за кориснике и собе."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

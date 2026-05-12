@@ -3,17 +3,18 @@
   "content": "Position",
   "content_en_sha1_hash": "cf1c85adba548e8d681255278976584a7e4a44de",
   "created_at": "2025-05-19T21:30:56.819Z",
-  "updated_at": "2026-04-07T19:35:05.057Z",
+  "updated_at": "2026-04-13T14:59:05.761Z",
   "comment": {
-    "text": "This translation key is used to display the label \"Position\" on a UI component, likely in a file management or edit room interface, such as a watermark or viewer info section in a dialog box.",
+    "text": "This is a label for a dropdown menu or radio button group. It refers to the placement of an element, such as a watermark, on a page.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:06.165Z"
+    "updated_at": "2026-04-11T21:04:37.563Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/Watermarks/ViewerInfo.tsx",
-      "line_number": 202,
-      "context": "}),\n };\n }\n \n const initialInfoRef = initialInfo.current;\n const [selectedPosition, setSelectedPosition] = useState(\n initialInfoRef.rotate,\n );\n const [textValue, setTextValue] = useState(initialInfoRef.text);\n \n useEffect(() => {",
+      "line_number": 307,
+      "context": "type={InputType.text}\n testId=\"virtual_data_room_watermark_text_input\"\n />\n \n <Text className=\"watermark-title\" fontWeight={600} lineHeight=\"20px\">\n {t(\"Position\")}\n </Text>\n <ComboBox\n selectedOption={selectedPosition}\n options={initialInfoRef?.dataRotate as TOption[]}\n onSelect={onPositionChange}",
       "module": "/packages/client"
     }
   ],

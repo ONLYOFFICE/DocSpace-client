@@ -3,11 +3,12 @@
   "content": "Once approved, the shared guest will be added to your Guests list in {{sectionName}}.",
   "content_en_sha1_hash": "53ade9db446a8314d8f155257ef6e87bca066eb8",
   "created_at": "2025-06-02T10:19:12.506Z",
-  "updated_at": "2026-04-08T07:10:23.239Z",
+  "updated_at": "2026-04-11T20:51:24.889Z",
   "comment": {
-    "text": "This translation key is used to display a message explaining that once a shared guest has been approved, they will be added to the user's Guests list in a specific section. The message appears as a label on a button in a confirmation dialog.",
+    "text": "This is a descriptive text displayed to a guest user. It informs them that upon approval, they will be added to the host's guest list, with `{{sectionName}}` being the name of the section where the guest list is located (e.g., \"Contacts\").",
     "is_auto": true,
-    "updated_at": "2025-06-02T10:21:33.589Z"
+    "updated_at": "2026-04-11T20:51:24.889Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

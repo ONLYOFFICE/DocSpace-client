@@ -28,6 +28,7 @@ import { headers, cookies } from "next/headers";
 
 import { ThemeKeys } from "@docspace/ui-kit/enums";
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
+import { sanitizeStylesUrl } from "@docspace/shared/utils/customStyles";
 import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/constants";
 
 import "@docspace/shared/styles/theme.scss";
@@ -79,6 +80,8 @@ export default async function RootLayout({
     (typeof settings === "object" && settings.culture) ||
     "en";
 
+  const stylesUrl = sanitizeStylesUrl(hdrs.get("x-sdk-config-styles-url"));
+
   const baseURL = await getBaseUrl();
 
   if (settings === "access-restricted") {
@@ -98,6 +101,14 @@ export default async function RootLayout({
         <meta name="google" content="notranslate" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
+        {stylesUrl ? (
+          <link
+            id="sdk-custom-styles"
+            rel="stylesheet"
+            href={stylesUrl}
+            referrerPolicy="no-referrer"
+          />
+        ) : null}
       </head>
       <body className={themeClass}>
         <Providers

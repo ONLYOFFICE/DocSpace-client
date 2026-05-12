@@ -3,17 +3,18 @@
   "content": "Lifetime (min)",
   "content_en_sha1_hash": "20610b86435a234a6314cab2a967b3e0bbfd719f",
   "created_at": "2025-05-19T21:30:51.805Z",
-  "updated_at": "2026-04-09T02:31:37.482Z",
+  "updated_at": "2026-04-13T14:59:05.899Z",
   "comment": {
-    "text": "This translation key describes the minimum lifetime of a session. It is used to set the duration for which user data remains stored in session storage.",
+    "text": "This is a label for an input field where users define the session lifetime in minutes.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:00.159Z"
+    "updated_at": "2026-04-11T21:23:30.830Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/sessionLifetime.js",
-      "line_number": 43,
-      "context": "import isEqual from \"lodash/isEqual\";\n \n import { DeviceType } from \"@docspace/shared/enums\";\n import { saveToSessionStorage } from \"@docspace/shared/utils/saveToSessionStorage\";\n import { getFromSessionStorage } from \"@docspace/shared/utils/getFromSessionStorage\";\n import SessionLifetimeLoader from \"../sub-components/loaders/session-lifetime-loader\";\n import { LearnMoreWrapper } from \"../StyledSecurity\";\n import useSecurity from \"../useSecurity\";\n import { createDefaultHookSettingsProps } from \"../../../utils/createDefaultHookSettingsProps\";\n import styles from \"./sessionLifetime.module.scss\";",
+      "line_number": 289,
+      "context": "/>\n \n {type ? (\n <>\n <Text className={styles.lifetime} fontSize=\"15px\" fontWeight=\"600\">\n {t(\"Lifetime\")}\n </Text>\n <TextInput\n className={styles.lifetimeInput}\n testId=\"session_lifetime_input\"\n maxLength={4}",
       "module": "/packages/client"
     }
   ],
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Lifetime (min)' refers to the duration/period of existence, whereas the Arabic translation 'الوقت المتبقي (دقيقة)' means 'Remaining time (minute)'. This changes the meaning from a setting for duration to a status of time left.",
-          "suggestion": "مدة الصلاحية (دقيقة)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -75,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Elinikä' refers to the biological lifespan of a living being. In a technical context regarding session duration, 'Kesto' (duration) or 'Elinikä' used metaphorically is incorrect; 'Istunnon kesto' or simply 'Kesto' is the standard technical term.",
-          "suggestion": "Kesto (min)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -93,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Աշխատաժամ' means 'Working hours' or 'Workload', whereas the English 'Lifetime' in this context refers to 'Duration' or 'Period of existence'.",
-          "suggestion": "Կյանքի տևողություն (րոպե)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -117,25 +100,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word '수명' (sumyeong) refers to the biological lifespan of a living organism. In a technical context regarding session duration, '유지 시간' or '만료 시간' is the correct term.",
-          "suggestion": "최소 유지 시간(분)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Lifetime' in this technical context refers to 'duration' or 'validity period' of a session, not 'the duration of a human life'. 'ຕະຫຼອດຊີວິດ' means 'throughout one's life/lifelong'.",
-          "suggestion": "ໄລຍະເວລາ (ນາທີ)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -153,13 +124,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation 'Długość' means 'Length' (spatial or physical), whereas the English 'Lifetime' in this context refers to 'Duration' or 'Time period'.",
-          "suggestion": "Czas trwania (min)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -219,13 +184,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English abbreviation '(min)' refers to 'minutes' in the context of session duration, but the Turkish translation 'Kullanım ömrü' refers to 'product lifespan/shelf life'. Additionally, 'dk' is the correct abbreviation for minutes, but the term 'Kullanım ömrü' is semantically incorrect for a session timeout/lifetime setting.",
-          "suggestion": "Oturum süresi (dk)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -243,13 +202,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word '寿命' (shòumìng) typically refers to the biological lifespan of a living being or the operational life of hardware. In the context of a digital session duration, '有效期' (validity period) or '会话时长' (session duration) is the correct technical term.",
-          "suggestion": "有效期（分钟）"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

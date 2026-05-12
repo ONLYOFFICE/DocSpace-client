@@ -24,120 +24,70 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import arSA from "PUBLIC_DIR/images/flags/ar-SA.react.svg?url";
-import az from "PUBLIC_DIR/images/flags/az.react.svg?url";
-import bg from "PUBLIC_DIR/images/flags/bg.react.svg?url";
-import cs from "PUBLIC_DIR/images/flags/cs.react.svg?url";
-import deAT from "PUBLIC_DIR/images/flags/de-AT.react.svg?url";
-import deCH from "PUBLIC_DIR/images/flags/de-CH.react.svg?url";
-import de from "PUBLIC_DIR/images/flags/de.react.svg?url";
-import elGR from "PUBLIC_DIR/images/flags/el-GR.react.svg?url";
-import enGB from "PUBLIC_DIR/images/flags/en-GB.react.svg?url";
-import enUS from "PUBLIC_DIR/images/flags/en-US.react.svg?url";
-import esMX from "PUBLIC_DIR/images/flags/es-MX.react.svg?url";
-import es from "PUBLIC_DIR/images/flags/es.react.svg?url";
-import fi from "PUBLIC_DIR/images/flags/fi.react.svg?url";
-import fr from "PUBLIC_DIR/images/flags/fr.react.svg?url";
-import hyAM from "PUBLIC_DIR/images/flags/hy-AM.react.svg?url";
-import it from "PUBLIC_DIR/images/flags/it.react.svg?url";
-import jaJP from "PUBLIC_DIR/images/flags/ja-JP.react.svg?url";
-import koKR from "PUBLIC_DIR/images/flags/ko-KR.react.svg?url";
-import loLA from "PUBLIC_DIR/images/flags/lo-LA.react.svg?url";
-import lv from "PUBLIC_DIR/images/flags/lv.react.svg?url";
-import nl from "PUBLIC_DIR/images/flags/nl.react.svg?url";
-import pl from "PUBLIC_DIR/images/flags/pl.react.svg?url";
-import ptBR from "PUBLIC_DIR/images/flags/pt-BR.react.svg?url";
-import pt from "PUBLIC_DIR/images/flags/pt.react.svg?url";
-import ro from "PUBLIC_DIR/images/flags/ro.react.svg?url";
-import ru from "PUBLIC_DIR/images/flags/ru.react.svg?url";
-import si from "PUBLIC_DIR/images/flags/si.react.svg?url";
-import sk from "PUBLIC_DIR/images/flags/sk.react.svg?url";
-import sl from "PUBLIC_DIR/images/flags/sl.react.svg?url";
-import sqAL from "PUBLIC_DIR/images/flags/sq-AL.react.svg?url";
-import sr from "PUBLIC_DIR/images/flags/sr.react.svg?url";
-import tr from "PUBLIC_DIR/images/flags/tr.react.svg?url";
-import ukUA from "PUBLIC_DIR/images/flags/uk-UA.react.svg?url";
-import vi from "PUBLIC_DIR/images/flags/vi.react.svg?url";
-import zhCN from "PUBLIC_DIR/images/flags/zh-CN.react.svg?url";
+import {
+  getFlagAssetByCode,
+  isKnownCountryCode,
+  lookupCountryByAlias,
+} from "./countriesCatalog";
 
-const FLAGS_MAP: Record<string, string> = {
-  "ar-SA": arSA,
-  az,
-  bg,
-  cs,
-  "de-AT": deAT,
-  "de-CH": deCH,
-  de,
-  "el-GR": elGR,
-  "en-GB": enGB,
-  "en-US": enUS,
-  "es-MX": esMX,
-  es,
-  fi,
-  fr,
-  "hy-AM": hyAM,
-  it,
-  "ja-JP": jaJP,
-  "ko-KR": koKR,
-  "lo-LA": loLA,
-  lv,
-  nl,
-  pl,
-  "pt-BR": ptBR,
-  pt,
-  ro,
-  ru,
-  si,
-  sk,
-  sl,
-  "sq-AL": sqAL,
-  sr,
-  tr,
-  "uk-UA": ukUA,
-  vi,
-  "zh-CN": zhCN,
-};
+// Bracketed prefix: "[US] United States", "[us]Foo".
+const BRACKET_PREFIX_RE = /^\[([A-Za-z]{2})\]/;
+// Separator-prefix: "US - United States", "US - Foo", "US: Foo", "US | Foo".
+// Requires a real separator (em dash, en dash, hyphen, colon, pipe) followed by whitespace
+// to avoid false positives on natural-language titles like "It is what it is".
+const SEPARATOR_PREFIX_RE = /^([A-Za-z]{2})\s*[\u2014\-\u2013:|]\s+/;
+// Whole-string country code: "US", "us".
+const WHOLE_STRING_RE = /^([A-Za-z]{2})$/;
 
-const LANGUAGE_NAME_MAP: Record<string, string> = {
-  arabic: "ar-SA",
-  azerbaijani: "az",
-  bulgarian: "bg",
-  czech: "cs",
-  german: "de",
-  greek: "el-GR",
-  english: "en-US",
-  spanish: "es",
-  finnish: "fi",
-  french: "fr",
-  armenian: "hy-AM",
-  italian: "it",
-  japanese: "ja-JP",
-  korean: "ko-KR",
-  lao: "lo-LA",
-  latvian: "lv",
-  dutch: "nl",
-  polish: "pl",
-  portuguese: "pt",
-  romanian: "ro",
-  russian: "ru",
-  sinhala: "si",
-  slovak: "sk",
-  slovenian: "sl",
-  albanian: "sq-AL",
-  serbian: "sr",
-  turkish: "tr",
-  ukrainian: "uk-UA",
-  vietnamese: "vi",
-  chinese: "zh-CN",
-};
+/**
+ * Resolves a folder title to an ISO 3166-1 alpha-2 country code.
+ *
+ * Strategy chain (first match wins):
+ *   1. Bracketed prefix `[XX]` - explicit override, robust to renames.
+ *   2. Inline prefix `XX - ...` (with separator+space) - admin-friendly.
+ *   3. Whole-string code (`"US"`).
+ *   4. Alias match against the catalog (case-insensitive, trimmed).
+ *
+ * Returns `undefined` when no rule matches.
+ */
+export function resolveCountryCode(
+  title: string | undefined | null,
+): string | undefined {
+  if (!title) return undefined;
+  const trimmed = title.trim();
+  if (!trimmed) return undefined;
 
-export function getFlagUrl(key: string): string | undefined {
-  const direct = FLAGS_MAP[key];
-  if (direct) return direct;
+  const bracket = trimmed.match(BRACKET_PREFIX_RE);
+  if (bracket) {
+    const code = bracket[1].toUpperCase();
+    if (isKnownCountryCode(code)) return code;
+  }
 
-  // Language name match (case-insensitive)
-  const locale = LANGUAGE_NAME_MAP[key.toLowerCase()];
-  if (locale) return FLAGS_MAP[locale];
+  const inline = trimmed.match(SEPARATOR_PREFIX_RE);
+  if (inline) {
+    const code = inline[1].toUpperCase();
+    if (isKnownCountryCode(code)) return code;
+  }
 
-  return undefined;
+  const whole = trimmed.match(WHOLE_STRING_RE);
+  if (whole) {
+    const code = whole[1].toUpperCase();
+    if (isKnownCountryCode(code)) return code;
+  }
+
+  return lookupCountryByAlias(trimmed);
+}
+
+/** Returns the flag asset URL for a known country code, or undefined. */
+export function getFlagUrl(code: string | undefined): string | undefined {
+  return getFlagAssetByCode(code);
+}
+
+/** Resolves a folder to its flag URL via {@link resolveCountryCode}. */
+export function getFlagUrlForFolder(
+  folder: { title: string } | undefined | null,
+): string | undefined {
+  if (!folder) return undefined;
+  const code = resolveCountryCode(folder.title);
+  return getFlagAssetByCode(code);
 }

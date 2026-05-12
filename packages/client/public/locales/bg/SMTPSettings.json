@@ -1,6 +1,6 @@
 {
   "AuthViaNTLM": "Удостоверяване чрез NTLM",
-  "EnableSSL": "Активиране на SSL",
+  "EnableSMTPSSL": "Активиране на SSL",
   "EnterDomain": "Въведете домейн",
   "EnterLogin": "Въведете логин",
   "EnterPort": "Въведете порт",

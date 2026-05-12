@@ -79,6 +79,7 @@ const EmailInputForm = ({
         hasError={isEmailErrorShow ? !emailValid : undefined}
         errorMessage={
           emailErrorText
+            // biome-ignore lint/plugin/no-dynamic-i18n-key: errorText is a runtime-provided key fragment composed with "Common:" prefix
             ? t(`Common:${emailErrorText}`)
             : t("Common:RequiredField")
         }

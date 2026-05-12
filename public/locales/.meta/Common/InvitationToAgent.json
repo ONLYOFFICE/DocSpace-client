@@ -3,16 +3,17 @@
   "content": "<1>{{displayName}}</1> invites you to join the {{aiAgent}} <1>{{agentName}}</1>.",
   "content_en_sha1_hash": "c291e936eeda4cfe61676f56a30dc6bdc0b1815d",
   "created_at": "2025-12-19T10:16:30.756Z",
-  "updated_at": "2026-04-08T06:36:21.912Z",
+  "updated_at": "2026-04-11T20:50:38.499Z",
   "comment": {
-    "text": "This key displays an invitation to another user to join an agent-managed space. It appears within the UI to prompt a user to accept an invitation to a specific agent room, displaying the inviting user's name and the agent's name. Translators should ensure the flow of invitation is clear and natural in their language.",
+    "text": "This is a greeting message displayed when a user is invited to an AI agent. It informs the user who invited them (`{{displayName}}`), the type of agent (`{{aiAgent}}`), and the agent's name (`<1>{{agentName}}</1>`).",
     "is_auto": true,
-    "updated_at": "2025-12-22T09:43:52.505Z"
+    "updated_at": "2026-04-11T20:50:38.499Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/login/src/components/GreetingContainer/GreetingCreateUserContainer/index.tsx",
-      "line_number": 75,
+      "line_number": 76,
       "context": "if (roomData?.isAgent) {\n return (\n <Trans\n {...commonProps}\n i18nKey=\"InvitationToAgent\"\n defaults={DEFAULT_AGENT_TEXT}\n values={{\n displayName,\n agentName: roomData.title,\n aiAgent: t(\"Common:AIAgent\"),",
       "module": "/packages/login"
     }
@@ -57,13 +58,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'συμμετάstate' is a broken hybrid of Greek 'συμμετάσχετε' and English 'state', which is nonsensical.",
-          "suggestion": "<1>{{displayName}}</1> σας καλεί να συμμετάσχετε στο {{aiAgent}} <1>{{agentName}}</1>."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -171,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'uvaša' is a misspelling or incorrect form of the verb 'vabiti' (to invite). The correct form for 'invites you' in this context should be 'vas vabi'.",
-          "suggestion": "<1>{{displayName}}</1> vas vabi, da se pridružite {{aiAgent}} <1>{{agentName}}</1>."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

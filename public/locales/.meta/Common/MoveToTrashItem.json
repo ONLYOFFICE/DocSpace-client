@@ -3,13 +3,21 @@
   "content": "This item will be moved to Trash.",
   "content_en_sha1_hash": "744540358335d035766a06b08199a0b6f13d73bb",
   "created_at": "2026-04-03T21:51:30.645Z",
-  "updated_at": "2026-04-08T04:28:14.015Z",
+  "updated_at": "2026-04-11T20:48:23.793Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a confirmation message displayed in a dialog when a single item is being moved to the trash.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:48:23.793Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/delete-dialog/index.tsx",
+      "line_number": 60,
+      "context": "const message = isTrash\n ? itemCount === 1\n ? t(\"Common:DeleteItemForever\")\n : t(\"Common:DeleteItemsForever\", { itemCount })\n : itemCount === 1\n ? t(\"Common:MoveToTrashItem\")\n : t(\"Common:MoveToTrashItems\", { itemCount });\n \n return (\n <ModalDialog visible={visible} onClose={onClose} autoMaxHeight>\n <ModalDialog.Header>{t(\"Common:Delete\")}</ModalDialog.Header>",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -50,13 +58,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Κάμινα' is a proper noun (likely a name) and does not mean 'Trash' or 'Recycle Bin' in Greek. The correct term for Trash in a software context is 'Κάδος Απορριμμάτων'.",
-          "suggestion": "Αυτό το στοιχείο θα μεταφερθεί στον Κάδο Απορριμμάτων."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -110,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Smoglai' is not a correct translation for 'Trash' in Latvian. 'Smoglai' is a grammatical form of 'smog' (air pollution), whereas the correct term for a digital trash bin is 'Zemnieku kastiņš' or 'Mēstule'.",
-          "suggestion": "Šis objekts tiks pārvietots uz Mēstuli."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {

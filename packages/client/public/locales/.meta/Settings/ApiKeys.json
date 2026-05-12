@@ -3,29 +3,30 @@
   "content": "API keys",
   "content_en_sha1_hash": "94fcf3c2dc0d96560fa470737eb39fb09d17ef08",
   "created_at": "2025-05-19T21:30:50.537Z",
-  "updated_at": "2026-04-09T04:14:00.381Z",
+  "updated_at": "2026-04-23T17:24:01.930Z",
   "comment": {
-    "text": "The translation key \"ApiKeys\" refers to the label displayed on the API keys page, typically found in a developer tools section. It is used as the title of the page, and its content should reflect the purpose of this feature in the application. This text appears in the UI as part of the page header or title section.",
+    "text": "This is a section title within the portal settings, referring to a feature for managing API keys.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:47.550Z"
+    "updated_at": "2026-04-11T21:25:42.394Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/index.tsx",
-      "line_number": 147,
+      "line_number": 148,
       "context": "}\n };\n \n useEffect(() => {\n if (ready) {\n setDocumentTitle(t(\"Settings:ApiKeys\"));\n }\n }, [ready]);\n \n return (\n <div className={styles.apiKeys}>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DeveloperToolsHeader.tsx",
-      "line_number": 65,
-      "context": "custom: \"Common:Custom\",\n uploader: \"Common:Uploader\",\n };\n \n const getTitle = (pathname: string, t: (key: string) => string): string => {\n if (pathname.includes(\"/developer-tools/api-keys\")) return t(\"Settings:ApiKeys\");\n if (pathname.includes(\"/developer-tools/javascript-sdk/\")) {\n const slug = pathname.split(\"/developer-tools/javascript-sdk/\")[1]?.replace(/\\/$/, \"\");\n const key = sdkPresetTitles[slug];\n if (key) return t(key);\n }",
+      "line_number": 79,
+      "context": "return null;\n }\n };\n \n const getTitle = (pathname: string, t: (key: string) => string): string => {\n if (pathname.includes(\"/developer-tools/api-keys\")) return t(\"Settings:ApiKeys\");\n if (pathname.includes(\"/developer-tools/javascript-sdk/\")) {\n const slug = pathname.split(\"/developer-tools/javascript-sdk/\")[1]?.replace(/\\/$/, \"\");\n if (slug === \"docspace\") return getBrandName(\"ProductName\");\n const title = getSdkPresetTitle(slug, t);\n if (title) return title;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 119,
-      "context": "color={globalColors.purple}\n linkTitle={t(\"Settings:RegisterApp\")}\n />\n <Card\n icon={<KeySvg />}\n title={t(\"Settings:ApiKeys\")}\n description={t(\"Settings:ApiKeysCardDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}\n url=\"/developer-tools/api-keys?create=true\"\n color={globalColors.lightGrayDark}\n linkTitle={t(\"Settings:CreateKey\")}\n />",
+      "line_number": 120,
+      "context": "color={globalColors.purple}\n linkTitle={t(\"Settings:RegisterApp\")}\n />\n <Card\n icon={<KeySvg />}\n title={t(\"Settings:ApiKeys\")}\n description={t(\"Settings:ApiKeysCardDescription\", { organizationName: getBrandName(\"OrganizationName\"), productName: getBrandName(\"ProductName\") })}\n url=\"/developer-tools/api-keys?create=true\"\n color={globalColors.lightGrayDark}\n linkTitle={t(\"Settings:CreateKey\")}\n />",
       "module": "/packages/client"
     }
   ],
@@ -75,13 +76,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation contains a repetitive word error ('la la'), which is a grammatical mistake that affects the quality of the UI string.",
-          "suggestion": "Claves de la API"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {

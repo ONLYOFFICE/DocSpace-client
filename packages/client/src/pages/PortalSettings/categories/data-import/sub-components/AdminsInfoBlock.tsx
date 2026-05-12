@@ -28,6 +28,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { AdminsInfoBlockProps } from "../types";
 import { StyledInfoBlock } from "../StyledDataImport";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const AdminsInfoBlock = ({
   totalUsedUsers,
@@ -63,7 +64,7 @@ const AdminsInfoBlock = ({
           tooltipContent={
             <Text fontSize="12px">
               {t("LicenseLimitDescription", {
-                productName: t("Common:ProductName"),
+                productName: getBrandName("ProductName"),
                 maxLimit: limitAdmins,
               })}
             </Text>

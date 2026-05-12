@@ -1,10 +1,10 @@
 {
-  "PrivacyButton": "Odpri {{organizationName}} namizne urejevalnike",
-  "PrivacyClick": "Klikni za odprtje <1>{{organizationName}} namizja</1> v pogovornem oknu brskalnika za delo s šifriranimi dokumenti.",
+  "PrivacyButton": "Odpri {{OnlyofficeDesktopEditors}}",
+  "PrivacyClick": "Klikni za odprtje <1>{{OnlyofficeDesktopEditors}}</1> v pogovornem oknu brskalnika za delo s šifriranimi dokumenti.",
   "PrivacyDescriptionConnect": "To datoteko lahko odprete z vmesnikom namizne aplikacije, ko ste povezani v oblaku",
-  "PrivacyDescriptionEditors": "Če imate nameščene {{organizationName}} namizne urejevalnike, vendar jih ne morete odpreti iz te strani, jih morda blokira vaš brskalnik.",
+  "PrivacyDescriptionEditors": "Če imate nameščene {{OnlyofficeDesktopEditors}}, vendar jih ne morete odpreti iz te strani, jih morda blokira vaš brskalnik.",
   "PrivacyDialog": "Če ne vidite pogovornega okna, kliknite spodnji gumb",
-  "PrivacyEditors": "Nimate {{organizationName}} namiznih urejevalnikov?",
+  "PrivacyEditors": "Nimate {{OnlyofficeDesktopEditors}}?",
   "PrivacyHeader": "Ta dokument je šifriran",
   "PrivacyInstall": "Namesti zdaj"
 }

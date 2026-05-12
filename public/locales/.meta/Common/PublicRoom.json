@@ -3,16 +3,23 @@
   "content": "Public room",
   "content_en_sha1_hash": "02f21f2d4127882b2b2ef75e41181154716ce237",
   "created_at": "2025-05-19T21:30:47.651Z",
-  "updated_at": "2026-04-10T08:21:04.325Z",
+  "updated_at": "2026-04-23T17:24:01.889Z",
   "comment": {
-    "text": "This translation key is used to display the label \"Public room\" in various UI elements, such as a filter option and a button. It appears in different contexts within the application, including file browsing and portal settings, and its purpose is to provide a clear indication of the selected room type.",
+    "text": "This is a label for a room type, indicating a room that is publicly accessible. It appears in various contexts, such as room type filters and room type displays.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:34:51.197Z"
+    "updated_at": "2026-04-11T20:45:45.807Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
+      "file_path": "/libs/ui-kit/components/room-type/RoomType.utils.ts",
+      "line_number": 21,
+      "context": "case RoomsType.CustomRoom:\n return t(\"Common:CustomRoomTitle\");\n case RoomsType.AIRoom:\n return t(\"Common:AIRoomTitle\");\n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoom\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomTitle\");\n default:\n return \"\";\n }",
+      "module": "/libs/ui-kit"
+    },
+    {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 63,
+      "line_number": 64,
       "context": "case RoomsType.ReadOnlyRoom:\n return t(\"Common:ViewOnlyRooms\");\n \n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoom\");\n \n case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoom\");\n \n case RoomsType.FormRoom:",
       "module": "/packages/client"
     },
@@ -23,8 +30,14 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DeveloperToolsHeader.tsx",
+      "line_number": 60,
+      "context": "slug: string,\n t: (key: string) => string,\n ): string | null => {\n switch (slug) {\n case \"public-room\":\n return t(\"Common:PublicRoom\");\n case \"editor\":\n return t(\"Common:Editor\");\n case \"viewer\":\n return t(\"Common:Viewer\");\n case \"room-selector\":",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 92,
+      "line_number": 93,
       "context": "}),\n image: theme.isBase ? PortalImg : PortalImgDark,\n handleOnClick: navigateToPortal,\n },\n {\n title: t(\"Common:PublicRoom\"),\n description: t(\"JavascriptSdk:PublicRoomPresetInfo\"),\n image: theme.isBase ? PublicRoomImg : PublicRoomImgDark,\n handleOnClick: navigateToPublicRoom,\n },\n {",
       "module": "/packages/client"
     },
@@ -183,13 +196,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'ප්‍රසිද්ධ කාමරය' means 'Famous room' or 'Well-known room'. In the context of software/UI (Public room), it should refer to a room that is accessible to the public/everyone.",
-          "suggestion": "පොදු කාමරය"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

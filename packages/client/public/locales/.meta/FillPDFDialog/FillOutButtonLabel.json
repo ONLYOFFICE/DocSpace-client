@@ -3,11 +3,12 @@
   "content": "Fill in",
   "content_en_sha1_hash": "d20fc7ca1f2cd76352a54a4eafef3df897d87c84",
   "created_at": "2025-05-19T21:30:55.156Z",
-  "updated_at": "2026-04-07T19:35:05.100Z",
+  "updated_at": "2026-04-11T21:11:00.989Z",
   "comment": {
-    "text": "The translation key \"FillOutButtonLabel\" is used to display the label on a button that prompts users to fill in information. In this case, it appears as part of a dialog titled \"FillPDFDialog\", where the user is prompted to fill in data.",
+    "text": "This is a button label that appears in a dialog for filling out PDF forms, prompting the user to begin the form-filling process.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:40:18.208Z"
+    "updated_at": "2026-04-11T21:11:00.989Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

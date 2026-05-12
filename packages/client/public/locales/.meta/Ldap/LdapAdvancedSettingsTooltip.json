@@ -3,16 +3,17 @@
   "content": "Choose user attributes which you want to be synchronized with your LDAP server.",
   "content_en_sha1_hash": "dec832695169557933b47b02e558945a055dace1",
   "created_at": "2025-05-19T21:30:54.165Z",
-  "updated_at": "2026-04-07T19:35:05.142Z",
+  "updated_at": "2026-04-11T21:17:24.232Z",
   "comment": {
-    "text": "Choose user attributes which you want to be synchronized with your LDAP server. This tooltip appears on a component in the PortalSettings page, providing context for users configuring attribute mapping for their LDAP integration.",
+    "text": "This is a tooltip that appears when hovering over the help button next to \"Attribute Mapping\" in the LDAP settings. It explains the purpose of attribute mapping.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:16.802Z"
+    "updated_at": "2026-04-11T21:17:24.232Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
-      "line_number": 127,
+      "line_number": 128,
       "context": "<Text fontWeight={600} fontSize=\"14px\">\n {t(\"LdapAttributeMapping\")}\n </Text>\n <HelpButton\n dataTestId=\"attribute_mapping_help_button\"\n tooltipContent={t(\"LdapAdvancedSettingsTooltip\")}\n />\n </div>\n <div className=\"ldap_attribute-mapping\">\n <FieldContainer\n style={FIELD_STYLE}",
       "module": "/packages/client"
     }

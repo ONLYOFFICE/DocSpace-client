@@ -8,7 +8,7 @@
   "DisablingRoomGroups": "Deaktivácia skupín miestností",
   "DisablingRoomGroupsDescription": "Skupiny budú uložené, ale skryté. Opätovne zapnúť v Profile, riadenie súborov.",
   "EditRoomGroups": "Upraviť skupiny miestností",
-  "EmptyGroupDescription": "Tu nie sú žiadne miestnosti. Skúste pridať miestnosť alebo odstrániť túto skupinu.",
+  "EmptyGroupRoomsDescription": "Tu nie sú žiadne miestnosti. Skúste pridať miestnosť alebo odstrániť túto skupinu.",
   "GroupHasBeenDeleted": "Skupina bola odstránená",
   "GroupIcon": "Ikona skupiny",
   "GroupIsEmpty": "Skupina je prázdna",
@@ -17,6 +17,7 @@
   "RemoveFromGroup": "Odobrať z skupiny",
   "RemoveGroup": "Odobrať skupinu",
   "RemoveGroupConfirmation": "Bola ste na pokraji zmazania skupiny miestností. Chcete pokračovať?",
+  "RemoveGroupInfo": "Izby zahrnuté v skupine budú zobrazené v sekcii <strong>Všetky izby</strong>.",
   "RoomAddedToGroup": "Vybraná miestnosť bola pridaná do <1>{{groupName}}</1>.",
   "RoomGrouping": "Skupinovanie miestností",
   "RoomGroupingDisabled": "Skupinovanie miestností je deaktivované",
@@ -24,6 +25,5 @@
   "RoomGroupingSettingDescription": "Môžete miestnosti zradiť do priečienok a ľahko medzi nimi prepínať.",
   "RoomRemovedFromGroup": "Vybraná miestnosť bola odstránená z <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "Vybrané miestnosti boli pridané do <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "Vybrané miestnosti boli odstránené z <1>{{groupName}}</1>.",
-  "RemoveGroupInfo": "Izby zahrnuté v skupine budú zobrazené v sekcii <strong>Všetky izby</strong>."
+  "RoomsRemovedFromGroup": "Vybrané miestnosti boli odstránené z <1>{{groupName}}</1>."
 }

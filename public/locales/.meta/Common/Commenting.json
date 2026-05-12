@@ -3,16 +3,17 @@
   "content": "commenting",
   "content_en_sha1_hash": "17e804d39985b2a5398ed68ed204d2de943b9a85",
   "created_at": "2025-05-19T21:30:43.560Z",
-  "updated_at": "2026-04-08T15:10:14.067Z",
+  "updated_at": "2026-04-11T20:56:58.530Z",
   "comment": {
-    "text": "This translation key is used to display the text \"Commenting\" in a public room page, specifically on a share access control element. It appears as part of a UI that indicates the current permissions and viewing rights.",
+    "text": "This is a label indicating a user's access level to a document, specifically that they have permission to add comments. It appears as a short label in a list of access rights.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:03.641Z"
+    "updated_at": "2026-04-11T20:56:58.530Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PublicRoom/PublicRoomPage.js",
-      "line_number": 93,
+      "line_number": 94,
       "context": "const getAccessTranslation = () => {\n switch (access) {\n case ShareAccessRights.ReadOnly:\n return t(\"Common:ViewOnly\");\n case ShareAccessRights.Comment:\n return t(\"Common:Commenting\");\n case ShareAccessRights.Review:\n return t(\"Common:Reviewing\");\n case ShareAccessRights.Editing:\n return t(\"Common:Editor\");\n case ShareAccessRights.FormFilling:",
       "module": "/packages/client"
     }
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Şərh edir' is a verb phrase meaning 'is commenting' (third-person singular), whereas the English 'Commenting' in this UI context refers to a permission level or access right (a noun/gerund).",
-          "suggestion": "Şərh etmə"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -69,13 +64,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English term 'Commenting' refers to the permission/action (gerund), whereas 'comentario' is a noun meaning 'a comment'. In the context of access rights (e.g., View Only, Commenting, Editing), the Spanish translation should reflect the permission level.",
-          "suggestion": "Comentar"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -93,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'մեկնաբանելով' is a gerund/participle meaning 'while commenting' or 'by commenting'. In a UI context for access rights (e.g., 'Commenting', 'Editing'), a noun form is required to denote the permission level.",
-          "suggestion": "մեկնաբանություն"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -153,25 +136,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English 'Commenting' refers to a permission level (the ability to comment), whereas the Portuguese 'comentaristas' means 'commentators' (the people who comment).",
-          "suggestion": "Comentários"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word 'commenting' is a gerund/action describing a permission level, whereas the Romanian 'Comentarii' means 'Comments' (plural noun). In the context of access rights (ReadOnly, Reviewing, Editing), the translation should describe the permission/action.",
-          "suggestion": "Comentare"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

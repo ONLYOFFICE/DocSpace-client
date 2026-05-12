@@ -3,11 +3,12 @@
   "content": "Delete tag",
   "content_en_sha1_hash": "2cde39d111249b1f09dd97821db5e78d3f071119",
   "created_at": "2026-02-19T13:36:19.063Z",
-  "updated_at": "2026-04-08T21:30:48.950Z",
+  "updated_at": "2026-04-11T21:27:17.203Z",
   "comment": {
-    "text": "This key displays the title of a dialog box used to confirm the deletion of a tag. It appears as the header within the \"Delete Tag\" modal. Translators should ensure the text accurately conveys the action of permanently removing a tag.",
+    "text": "This is the title of a modal dialog that appears when a user is about to delete a tag.",
     "is_auto": true,
-    "updated_at": "2026-03-20T10:30:16.617Z"
+    "updated_at": "2026-04-11T21:27:17.203Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -165,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian word 'Čisti' means 'to clean' or 'to clear' (as in clearing a cache or cleaning a surface), whereas the English 'Delete' in this context refers to the permanent removal of an object (a tag).",
-          "suggestion": "Izbriši oznako"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

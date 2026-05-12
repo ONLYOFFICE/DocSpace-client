@@ -3,13 +3,21 @@
   "content": "There are no completed forms yet.",
   "content_en_sha1_hash": "52608cebdfc3035d0aa1541928f0f072664134c8",
   "created_at": "2026-03-20T09:07:38.698Z",
-  "updated_at": "2026-04-08T11:03:13.574Z",
+  "updated_at": "2026-04-11T20:54:04.992Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This text appears in the \"Completed forms\" section when no forms have been completed yet. It informs the user that there is no content to display in this section.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:54:04.992Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/forms-empty/index.tsx",
+      "line_number": 69,
+      "context": "case FormsSection.Library:\n return t(\"Common:EmptyLibrary\");\n case FormsSection.InProgress:\n return t(\"Common:EmptyInProgressForms\");\n case FormsSection.CompletedForms:\n return t(\"Common:EmptyCompletedForms\");\n default:\n return t(\"Common:EmptyFolder\");\n }\n };",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -50,13 +58,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation uses 'στοιχεία' (data/details) instead of 'φόρμες' (forms), which changes the specific object being referred to.",
-          "suggestion": "Δεν υπάρχουν ακόμη συμπληρωμένες φόρμες."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -176,13 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "extra_tag",
-          "description": "Extra tag(s) not in English: </p>, <p>",
-          "suggestion": ""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

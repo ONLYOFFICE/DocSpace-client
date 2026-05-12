@@ -27,13 +27,13 @@
 import type { Location } from "react-router";
 import find from "lodash/find";
 import { findWindows } from "windows-iana";
+import { getCultureLabel } from "../constants/cultures";
 import {
   parseToDateTime,
   startOf,
   dateDiffAbs,
 } from "@docspace/ui-kit/utils/date";
 import { isMobile } from "react-device-detect";
-import type { I18nextProviderProps } from "react-i18next";
 import resizeImage from "resize-image";
 import { pbkdf2 } from "@noble/hashes/pbkdf2.js";
 import { sha256 } from "@noble/hashes/sha2.js";
@@ -65,8 +65,6 @@ import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.patt
 
 import { AvatarRole } from "@docspace/ui-kit/components/avatar";
 import { ThemeKeys } from "@docspace/ui-kit/enums";
-
-import { flagsIcons } from "./image-flags";
 
 import { parseAddress } from "./email";
 
@@ -117,8 +115,6 @@ export const desktopConstants = Object.freeze({
 });
 
 let timer: null | ReturnType<typeof setTimeout> = null;
-type I18n = I18nextProviderProps["i18n"];
-
 export function changeLanguage(i18n: TI18n, currentLng = getCookie(LANGUAGE)) {
   return currentLng
     ? i18n.language !== currentLng
@@ -350,7 +346,7 @@ export const getUserTypeTranslation = (type: EmployeeType, t: TTranslation) => {
       return t("Common:Owner");
     case EmployeeType.Admin:
       return t("Common:PortalAdmin", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
       });
     case EmployeeType.RoomAdmin:
       return t("Common:RoomAdmin");
@@ -418,27 +414,27 @@ export function toCommunityHostname(hostname: string) {
 export function getProviderLabel(provider: string, t: (key: string) => string) {
   switch (provider) {
     case "apple":
-      return t("Common:ProviderApple");
+      return getBrandName("ProviderApple");
     case "google":
-      return t("Common:ProviderGoogle");
+      return getBrandName("ProviderGoogle");
     case "facebook":
-      return t("Common:ProviderFacebook");
+      return getBrandName("ProviderFacebook");
     case "twitter":
-      return t("Common:ProviderTwitter");
+      return getBrandName("ProviderTwitter");
     case "linkedin":
-      return t("Common:ProviderLinkedIn");
+      return getBrandName("ProviderLinkedIn");
     case "microsoft":
-      return t("Common:ProviderMicrosoft");
+      return getBrandName("ProviderMicrosoft");
     case "sso":
-      return t("Common:SSO");
+      return getConstName("SSO");
     case "zoom":
-      return t("Common:ProviderZoom");
+      return getBrandName("ProviderZoom");
     case "weixin":
-      return t("Common:ProviderWechat");
+      return getBrandName("ProviderWechat");
     case "sso-full":
       return t("Common:ProviderSsoSetting");
     case "nextcloud":
-      return t("Common:Nextcloud");
+      return getBrandName("Nextcloud");
     default:
       return "";
   }
@@ -716,6 +712,8 @@ export const frameHandlePing = (eventData: {
 };
 
 import { getConvertedSize } from "@docspace/ui-kit/billing/utils/common";
+import { getBrandName } from "@docspace/shared/constants/brands";
+import { getConstName } from "@docspace/shared/constants/consts";
 
 export const getConvertedQuota = (
   t: (key: string) => string,
@@ -1155,49 +1153,6 @@ export const insertDataLayer = (id: string) => {
   window.dataLayer.push({ user_id: id });
 };
 
-export const mapCulturesToArray = (
-  culturesArg: string[],
-  isBetaBadge: boolean = true,
-  i18nArg?: I18n,
-) => {
-  let t = null;
-
-  if (i18nArg) {
-    t = i18nArg.getFixedT(null, "Common");
-  }
-
-  return culturesArg.map((culture, index) => {
-    let iconName = culture;
-
-    switch (culture) {
-      case "sr-Cyrl-RS":
-      case "sr-Latn-RS":
-        iconName = "sr";
-        break;
-      default:
-        break;
-    }
-
-    const icon = flagsIcons?.get(`${iconName}.react.svg`);
-
-    const cultureObj = t
-      ? {
-          key: culture,
-          label: t(`Culture_${culture}`),
-          icon,
-          ...(isBetaBadge && { isBeta: isBetaLanguage(culture) }),
-          index,
-        }
-      : {
-          key: culture,
-          icon,
-          index,
-        };
-
-    return cultureObj;
-  });
-};
-
 export const mapTimezonesToArray = (
   timezones: TTimeZone[],
 ): {
@@ -1269,7 +1224,9 @@ export const getUserTypeName = (
   if (isOwner) return t("Common:Owner");
 
   if (isPortalAdmin)
-    return t("Common:PortalAdmin", { productName: t("Common:ProductName") });
+    return t("Common:PortalAdmin", {
+      productName: getBrandName("ProductName"),
+    });
 
   if (isRoomAdmin) return t("Common:RoomAdmin");
 

@@ -3,16 +3,17 @@
   "content": "Overwrite with version update",
   "content_en_sha1_hash": "85c42df31bdf2069fe66ddcdd0fbefbdae0a2df4",
   "created_at": "2025-05-19T21:30:47.196Z",
-  "updated_at": "2026-04-08T03:20:39.652Z",
+  "updated_at": "2026-04-23T17:24:01.706Z",
   "comment": {
-    "text": "This translation key is used to display a title that instructs users to overwrite existing files or folders when merging changes. It appears in conflict resolution dialogs and is typically displayed as a button label or header in UI components. The user is prompted to overwrite existing content with the new version update.",
+    "text": "This is a dialog title or button label. It appears when a user is prompted to resolve a conflict, indicating an option to replace an existing file with a newer version.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:08.456Z"
+    "updated_at": "2026-04-11T20:47:03.306Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
-      "line_number": 270,
+      "line_number": 280,
       "context": ": t(\"Common:FilesAndFoldersAlreadyContains\");\n };\n \n const getOverwriteTitle = () => {\n return isFileDialog\n ? t(\"Common:OverwriteTitle\")\n : isFolderDialog\n ? t(\"Common:MergeFolders\")\n : t(\"Common:MergeAndOverwrite\");\n };",
       "module": "/packages/client"
     },

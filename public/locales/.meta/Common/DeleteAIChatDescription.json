@@ -3,13 +3,21 @@
   "content": "You are about to delete <strong>{{chatName}}<1>.</1></strong>\n All messages and chat history will be permanently removed and cannot be restored.",
   "content_en_sha1_hash": "d87c5d2ee8a8264920525dc32861e456aff3ba2a",
   "created_at": "2026-03-20T09:07:38.613Z",
-  "updated_at": "2026-04-10T08:58:38.056Z",
+  "updated_at": "2026-04-11T20:55:24.523Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is the body text of a confirmation dialog that appears when a user attempts to delete an AI chat. It informs the user that the chat, identified by `{{chatName}}`, and its history will be permanently removed.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:55:24.523Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-header/sub-components/delete-chat/index.tsx",
+      "line_number": 117,
+      "context": "<ModalDialog.Header>\n {t(\"DeleteAIAgentChatTitle\")}\n </ModalDialog.Header>\n <ModalDialog.Body className={styles.modalWrapper}>\n <CommonTrans\n i18nKey=\"DeleteAIChatDescription\"\n values={{ chatName: chatTitle }}\n components={{\n 1: <Text key=\"chat-title\" fontWeight={400} as=\"span\" />,\n }}\n />{\" \"}",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -26,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Yarıma' means 'to half' or 'to a half', which is a mistranslation of 'You are about to'. The correct phrase should indicate an imminent action.",
-          "suggestion": "<strong>{{chatName}}<1>.</1></strong> silmək üzrəsiniz. Bütün mesajlar və söhbət tarixçəsi daimi şəkildə silinəcək və bərpa edilə bilməyəcəkdir."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -80,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'չափաբանության' (geometry) is used instead of 'քննարկման' (discussion) or 'խոսակցության' (conversation). The English 'chat history' refers to a conversation, not mathematical geometry.",
-          "suggestion": "Դուք այժմ ջնջելու եք <strong>{{chatName}}<1>.</1></strong> Բոլոր հաղորդագրություններն ու խոսակցության պատմությունը կջնջվեն մշտականօրինաբար և չեն կարող վերականգնվել։"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -146,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Pe cale să ștergeți' is a literal/incorrect translation of 'You are about to'. In Romanian, this sounds like 'On the way to delete' and is grammatically incorrect for this context.",
-          "suggestion": "Aveți intenția să ștergeți <strong>{{chatName}}<1>.</1></strong>\nToate mesajele și istoricul conversației vor fi șterse permanent și nu pot fi recuperate."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -194,13 +184,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses the first-person singular 'Brišem' (I am deleting), whereas the English source uses the second-person 'You are about to delete'.",
-          "suggestion": "Predstoji brisanje <strong>{{chatName}}<1>.</1></strong>\nSve poruke i istorija chata biće trajno obrisane i neće moći da budu vraćene."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

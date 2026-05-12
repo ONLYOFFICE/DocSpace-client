@@ -3,16 +3,17 @@
   "content": "Create your {{aiAgent}}",
   "content_en_sha1_hash": "649169a62bf10f732f23ef5cafd8b41596e1e842",
   "created_at": "2025-12-19T13:03:52.824Z",
-  "updated_at": "2025-12-22T09:57:55.976Z",
+  "updated_at": "2026-04-11T21:07:07.178Z",
   "comment": {
-    "text": "This translation key provides the title for a button or similar UI element that prompts the user to create an AI agent. It appears within an empty state view when no AI agents are present and is dynamically personalized with the term for \"AI agent\" or \"AI agents\". The text encourages user action to populate the AI agent list.",
+    "text": "This is the title displayed when no AI agents are present and AI is enabled for all users. The `{{aiAgent}}` variable will be replaced with the localized term for \"AI Agent\".",
     "is_auto": true,
-    "updated_at": "2025-12-22T09:57:55.976Z"
+    "updated_at": "2026-04-11T21:07:07.178Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 187,
+      "line_number": 188,
       "context": "const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {\n return isUser(access)\n ? t(\"EmptyView:EmptyAIAgentsUserTitle\", {\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"EmptyView:EmptyAIAgentsTitle\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n };\n \n const getAIAgentsAIDisabledTitle = (",
       "module": "/packages/client"
     }

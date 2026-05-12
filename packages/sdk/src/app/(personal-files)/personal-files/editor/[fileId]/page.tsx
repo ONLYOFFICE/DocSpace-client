@@ -28,10 +28,12 @@ import EditorPage from "./page.client";
 
 type EditorPageProps = {
   params: Promise<{ fileId: string }>;
+  searchParams: Promise<Record<string, string>>;
 };
 
-export default async function Editor({ params }: EditorPageProps) {
+export default async function Editor({ params, searchParams }: EditorPageProps) {
   const { fileId } = await params;
+  const { action } = await searchParams;
 
-  return <EditorPage fileId={fileId} />;
+  return <EditorPage fileId={fileId} action={action} />;
 }

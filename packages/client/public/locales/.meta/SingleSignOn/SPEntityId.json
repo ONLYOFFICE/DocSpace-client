@@ -3,11 +3,12 @@
   "content": "SP Entity Id (link to metadata XML)",
   "content_en_sha1_hash": "4f511e076ad748fe91c1e8f019f742f025d91a46",
   "created_at": "2025-05-19T21:30:50.162Z",
-  "updated_at": "2026-04-08T22:35:24.894Z",
+  "updated_at": "2026-04-11T21:26:24.574Z",
   "comment": {
-    "text": "This translation key is used for the label and tooltip of a field that displays a link to an entity's metadata XML in a Single Sign-On (SSO) provider settings page. The text appears as a button label in a PortalSettings categories integration setting.",
+    "text": "This is a label for an input field where the user enters the Service Provider Entity ID, which is a URL pointing to the metadata XML for Single Sign-On configuration.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:05.822Z"
+    "updated_at": "2026-04-11T21:26:24.574Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation incorrectly expands 'XML' to 'لغة التوصيف الموسعة' (Extensible Markup Language). While technically correct as a definition, in a technical UI context, 'XML' should be kept as 'XML' to match the English source and user expectation for a file format/link type.",
-          "suggestion": "معرف كيان SP (ارتباط إلى ملف XML الخاص ببيانات التعريف)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -45,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'SP Entity Id' refers to 'Service Provider Entity ID' in the context of SAML/SSO. The Bulgarian translation 'Идентификация на обекта на доставчика на услуги' translates to 'Identification of the service provider's object', which is a literal and incorrect interpretation of 'SP' (Service Provider) and 'Entity ID' (a specific technical identifier).",
-          "suggestion": "SP Entity Id (връзка към XML метаданни)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -165,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The term 'Entity Id' is heavily abbreviated to 'හැඳු.' (which is an incomplete form of 'හැඳුනුම්පත' or 'හැඳුනුම් අංකය'), making the technical term 'Entity ID' unclear and potentially unrecognizable to the user.",
-          "suggestion": "SP එන්ටිටි හැඳුනුම්පත (පාරදත්ත XML වෙත සබැඳියි)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -225,13 +208,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'meta të dhënat' is incorrectly split. In Albanian, 'metadata' is a single technical term 'metatënat' or 'metadata'. Splitting it into 'meta të dhënat' changes the meaning to 'meta the data', which is grammatically incorrect and awkward in a technical context.",
-          "suggestion": "ID-ja e entitetit të SP (lidhja me metadata XML)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

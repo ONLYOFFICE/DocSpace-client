@@ -25,12 +25,22 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 @use "@docspace/ui-kit/styles/variables/colors";
+@use "@docspace/ui-kit/styles/mixins";
 
 // Wrapper — compensates for scroll-body padding-inline-end: 16px
 // Same pattern as EditLinkPanel: withoutPadding + extend right + own padding
 .panelBody {
   margin-inline-end: -16px;
   width: calc(100% + 16px);
+}
+
+.settingsShell {
+  @include mixins.mobile {
+    :global(.sticky) {
+      background: var(--section-header-bg, var(--background-color));
+      z-index: 201;
+    }
+  }
 }
 
 // Reset panel offsets when rendered inline (e.g. inside Tabs)

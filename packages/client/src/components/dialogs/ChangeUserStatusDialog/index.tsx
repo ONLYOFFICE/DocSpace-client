@@ -41,6 +41,7 @@ import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import { TChangeUserStatusDialogData } from "SRC_DIR/helpers/contacts";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type ChangeUserStatusDialogComponentProps = {
 	getPeopleListItem: UsersStore["getPeopleListItem"];
@@ -168,14 +169,14 @@ const ChangeUserStatusDialogComponent = ({
 
 		bodyText = onlyOneUser
 			? isGuests
-				? t("DisableGuestDescription", { productName: t("Common:ProductName") })
-				: t("DisableUserDescription", { productName: t("Common:ProductName") })
+				? t("DisableGuestDescription", { productName: getBrandName("ProductName") })
+				: t("DisableUserDescription", { productName: getBrandName("ProductName") })
 			: isGuests
 				? t("DisableGuestsDescription", {
-						productName: t("Common:ProductName"),
+						productName: getBrandName("ProductName"),
 					})
 				: t("DisableUsersDescription", {
-						productName: t("Common:ProductName"),
+						productName: getBrandName("ProductName"),
 					});
 
 		bodyText += isGuests
@@ -196,11 +197,11 @@ const ChangeUserStatusDialogComponent = ({
 
 		bodyText = onlyOneUser
 			? isGuests
-				? t("EnableGuestDescription", { productName: t("Common:ProductName") })
-				: t("EnableUserDescription", { productName: t("Common:ProductName") })
+				? t("EnableGuestDescription", { productName: getBrandName("ProductName") })
+				: t("EnableUserDescription", { productName: getBrandName("ProductName") })
 			: isGuests
-				? t("EnableGuestsDescription", { productName: t("Common:ProductName") })
-				: t("EnableUsersDescription", { productName: t("Common:ProductName") });
+				? t("EnableGuestsDescription", { productName: getBrandName("ProductName") })
+				: t("EnableUsersDescription", { productName: getBrandName("ProductName") });
 
 		buttonLabelSave = t("Common:Enable");
 	}

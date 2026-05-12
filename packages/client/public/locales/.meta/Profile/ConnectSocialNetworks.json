@@ -3,11 +3,12 @@
   "content": "Connect your social networks",
   "content_en_sha1_hash": "3a18b50746f026e86d03625c28c76cefe4402bb9",
   "created_at": "2025-05-19T21:30:53.342Z",
-  "updated_at": "2026-04-09T07:11:25.857Z",
+  "updated_at": "2026-04-11T21:20:52.960Z",
   "comment": {
-    "text": "This translation key is used to display the text \"Connect your social networks\" in the profile section of a client application. It appears as a bold heading below a set of buttons, prompting users to connect their social media accounts.",
+    "text": "This is a section heading on the user's profile page. It introduces a section where users can link their social media accounts to their ONLYOFFICE DocSpace profile.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:55.767Z"
+    "updated_at": "2026-04-11T21:20:52.960Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -63,13 +64,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "wrong_language",
-          "description": "The translation uses a Cyrillic 'С' (U+0421) instead of a Latin 'C' (U+0043) at the beginning of the sentence, which will cause rendering issues or incorrect character display in a Spanish context.",
-          "suggestion": "Conecte sus redes sociales"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {

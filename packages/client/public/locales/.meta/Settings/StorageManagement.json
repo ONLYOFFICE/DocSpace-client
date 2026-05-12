@@ -3,11 +3,12 @@
   "content": "Storage management",
   "content_en_sha1_hash": "aee08f8d5281c4277ee7ebdfe0a0f452865e73b5",
   "created_at": "2025-05-19T21:30:52.780Z",
-  "updated_at": "2026-04-09T00:50:33.310Z",
+  "updated_at": "2026-04-11T21:22:00.493Z",
   "comment": {
-    "text": "The \"StorageManagement\" translation key is used to display the storage management section title on the Portal Settings page. It provides a clear and concise label for this section, helping users navigate through the settings. This translation key appears in a header context, likely as part of a category or tab navigation menu.",
+    "text": "This is a section title in the portal settings. It refers to the management of storage space within ONLYOFFICE DocSpace.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:24.252Z"
+    "updated_at": "2026-04-11T21:22:00.493Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -18,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 232,
+      "line_number": 233,
       "context": "return t(\"Common:Bonus\");\n case \"Common:FreeAccessToLicensedVersion\":\n return \"Common:FreeAccessToLicensedVersion\";\n case \"DataImport\":\n return t(\"DataImport\");\n case \"StorageManagement\":\n return t(\"StorageManagement\");\n case \"Services\":\n return t(\"Services\");\n case \"AISettings\":\n return t(\"Settings:AISettings\");",
       "module": "/packages/client"
     },
@@ -141,13 +142,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "In a cloud/software context, 'Storage' refers to disk space or data storage (pamięć masowa/miejsce na dane), whereas 'pamięć' in Polish often implies RAM (memory). 'Zarządzanie pamięcią' is more commonly associated with RAM management.",
-          "suggestion": "Zarządzanie pamięcią masową"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {

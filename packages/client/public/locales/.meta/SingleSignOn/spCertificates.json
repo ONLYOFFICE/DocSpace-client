@@ -3,17 +3,18 @@
   "content": "SP Certificates",
   "content_en_sha1_hash": "ddb5368e6f2802175629771e18ffdae9be88db3d",
   "created_at": "2025-05-19T21:30:50.156Z",
-  "updated_at": "2026-04-08T22:47:22.563Z",
+  "updated_at": "2026-04-13T14:59:05.891Z",
   "comment": {
-    "text": "\"SP Certificates\" - This translation key is used to display a label for Single Sign-On certificates in the PortalSettings UI. It typically appears as a button or modal title, guiding users to select their SP certificates.",
+    "text": "This is a label for a section or setting related to Service Provider (SP) certificates within the Single Sign-On (SSO) configuration. It appears in the integration settings.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:06.714Z"
+    "updated_at": "2026-04-11T21:26:27.212Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/Certificates.js",
-      "line_number": 77,
-      "context": "provider,\n enableSso,\n openIdpModal,\n openSpModal,\n idpCertificates,\n spCertificates,\n idpShowAdditionalParameters,\n spShowAdditionalParameters,\n idpVerifyAlgorithm,\n spEncryptAlgorithm,\n spSigningAlgorithm,",
+      "line_number": 112,
+      "context": "return (\n <StyledWrapper>\n <div className=\"certificates-box\">\n <Text as=\"h2\" fontSize=\"15px\" fontWeight={600}>\n {prefix === \"idp\" ? t(\"idpCertificates\") : t(\"spCertificates\")}\n </Text>\n \n <HelpButton\n offsetRight={0}\n tooltipContent={",
       "module": "/packages/client"
     }
   ],
@@ -39,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Сертификати на доставчика на услуги' means 'Service Provider Certificates' in a general sense, but in the context of SSO (Single Sign-On), 'SP' specifically stands for 'Service Provider'. The current translation is too verbose and loses the technical distinction of 'SP' as a specific entity type in SSO protocols.",
-          "suggestion": "SP сертификати"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -129,25 +124,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Certyfikaty usługodawcy' means 'Service Provider Certificates' in a general sense, but in the context of SSO (Single Sign-On), 'SP' specifically stands for 'Service Provider'. While technically related, in technical UI localization for SSO, 'SP' is often treated as a specific technical entity or left as 'SP' to avoid confusion with general service providers. However, the primary issue is that 'usługodawcy' is singular (of the service provider), whereas 'SP Certificates' is plural/generic.",
-          "suggestion": "Certyfikaty SP"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The acronym 'SP' (Service Provider) in the context of SSO was incorrectly translated as 'PS'. In Portuguese technical terminology for SSO, 'SP' is maintained or referred to as 'Provedor de Serviço', but 'PS' is a different acronym entirely.",
-          "suggestion": "Certificados SP"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -159,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Certificate de furnizor de servicii' means 'Service provider certificates', which is a generic term. In the context of SSO (Single Sign-On), 'SP' specifically stands for 'Service Provider'. While technically related, in a technical UI, 'SP' is a specific acronym that should be preserved or translated as 'Service Provider' (Furnizor de Servicii) specifically in the context of the SP/IdP relationship. However, the current translation is a literal expansion that loses the technical identifier 'SP' which is standard in SSO configurations.",
-          "suggestion": "Certificate SP"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

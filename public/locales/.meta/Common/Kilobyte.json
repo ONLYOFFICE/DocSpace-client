@@ -3,13 +3,20 @@
   "content": "KB",
   "content_en_sha1_hash": "315b39a0fc19fb45d146c17b813d46c7acb0b872",
   "created_at": "2025-05-19T21:30:46.020Z",
-  "updated_at": "2026-04-10T08:21:04.350Z",
+  "updated_at": "2026-04-13T14:59:05.858Z",
   "comment": {
-    "text": "This translation key \"KB\" is used to display \"Kilobyte\", a unit of digital information. It will appear in options lists and menus where file sizes or storage options are displayed, typically on screens related to quotas or data management.",
+    "text": "This is a unit of measurement for file size, appearing as a short label in dropdowns and lists. It represents 1024 bytes.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:46.770Z"
+    "updated_at": "2026-04-11T20:50:29.017Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/utils/common.ts",
+      "line_number": 51,
+      "context": "let power = 0;\n let resultSize = bytes;\n \n const sizeNames = [\n t(\"Common:Bytes\"),\n t(\"Common:Kilobyte\"),\n t(\"Common:Megabyte\"),\n t(\"Common:Gigabyte\"),\n t(\"Common:Terabyte\"),\n t(\"Common:Petabyte\"),\n t(\"Common:Exabyte\"),",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
       "line_number": 102,
@@ -147,25 +154,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'KO' is incorrect. In Romanian, the abbreviation for Kilobyte is 'KB'. 'KO' is not a standard unit of digital information.",
-          "suggestion": "KB"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Russian abbreviation 'Кб' is incorrect for 'Kilobyte'. In Russian technical notation, 'Kilobyte' is abbreviated as 'Кб' only if referring to Kilobits (rarely) or is a common misspelling. The standard abbreviation for Kilobyte is 'КБ' (capital B) or more commonly 'кб' (lowercase) depending on style, but 'Кб' specifically looks like a typo for 'КБ'. However, more critically, in the context of digital storage units (KB, MB, GB), the standard Russian abbreviation is 'КБ'.",
-          "suggestion": "КБ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -207,13 +202,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses the Cyrillic letter 'Б' (Be) instead of the Latin 'B' (Bee). In technical contexts for units like KB (Kilobyte), the Latin 'B' is the standard international symbol. Using the Cyrillic 'Б' is a character substitution error.",
-          "suggestion": "KB"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

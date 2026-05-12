@@ -3,11 +3,12 @@
   "content": "Recipients from the form",
   "content_en_sha1_hash": "83bbf535962d24d5f87410be92858dee26395713",
   "created_at": "2025-10-13T13:22:10.851Z",
-  "updated_at": "2026-04-08T01:46:09.119Z",
+  "updated_at": "2026-04-12T03:16:19.953Z",
   "comment": {
-    "text": "This key displays the label \"Recipients from the form\" as a title within a dialog or panel. It indicates the recipients associated with data entered on a form, likely within a user interface element for managing or selecting roles. Translators should ensure the meaning remains clear and accurately reflects the origin of the recipients.",
+    "text": "This is a section title within a dialog. It labels a list of recipients who have filled out a form, allowing the user to manage their roles.",
     "is_auto": true,
-    "updated_at": "2025-10-13T14:23:05.906Z"
+    "updated_at": "2026-04-11T20:45:28.797Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'əldə edənlər' means 'those who obtain/acquire', which is an incorrect translation for 'recipients' (which should be 'alıcılar' or 'qəbul edənlər' in this context).",
-          "suggestion": "Formadakı alıcılar"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -63,13 +58,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'φορμάρι' is a non-standard, incorrect, or slangy way to say 'form' in Greek. The correct technical term is 'φόρμα'.",
-          "suggestion": "Παραλήπτες από τη φόρμα"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {

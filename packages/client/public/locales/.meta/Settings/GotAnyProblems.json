@@ -3,11 +3,12 @@
   "content": "Got any problems? Contact our <1>support team</1>",
   "content_en_sha1_hash": "6596e77e088d0f8759c50db5cc4dbb2959abefc6",
   "created_at": "2026-03-20T09:07:39.797Z",
-  "updated_at": "2026-04-09T02:59:43.221Z",
+  "updated_at": "2026-04-11T21:24:03.860Z",
   "comment": {
-    "text": "This key displays a message prompting users to contact the support team if they encounter problems. It appears as part of a support link within a modal dialog related to third-party service integrations in the settings portal. Translators should maintain the informal tone and ensure the `<1>support team</1>` is handled appropriately for the target language.",
+    "text": "This is a sentence displayed in a modal window, prompting users to contact support if they encounter issues. The `<1>` tag wraps the \"support team\" text, which is a clickable link.",
     "is_auto": true,
-    "updated_at": "2026-03-20T10:27:02.000Z"
+    "updated_at": "2026-04-11T21:24:03.860Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -33,25 +34,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Nə vaqeətlə qarşılaşdınız?' is a nonsensical/incorrect translation of 'Got any problems?'. It literally translates to something like 'What times did you encounter?' instead of 'Encountered any problems?' or 'Have any problems?'.",
-          "suggestion": "Problemləriniz var? <1>Dəstək komandası</1> ilə əlaqə saxlayın."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'поддържащ екип' is a literal translation of 'supporting team' (as in a team that provides support to someone) rather than 'support team' (the department/service). In Bulgarian, 'поддръжка' or 'екип за поддръжка' is the standard term for technical support.",
-          "suggestion": "Имате ли проблеми? Свържете се с нашия <1>екип за поддръжка</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -75,13 +64,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'support team' was not translated into Spanish, leaving English text in the middle of the sentence.",
-          "suggestion": "¿Tiene algún problema? Contacte a nuestro <1>equipo de soporte</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -129,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Liênicējieties' is Lithuanian, not Latvian. The correct Latvian word is 'Saņemieties' or 'Sazinieties'.",
-          "suggestion": "Vai ir kādi problemi? Sazinieties ar mūsu <1>atbalsta komandu</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -189,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation 'podrško' means 'support', but the English source specifies 'support team'. The word 'team' is missing.",
-          "suggestion": "Imate težave? Obrnite se na našo <1>ekipo za podporo</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
@@ -207,13 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Имате ли нешто проблема?' is grammatically incorrect in Serbian and sounds unnatural (literal translation of 'Have you anything problems?'). It should be 'Imate li nekih problema?' or 'Imate li problema?'.",
-          "suggestion": "Имате ли проблема? Контактирајте наш <1>тим за подршку</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

@@ -29,6 +29,7 @@ import { useTranslation } from "react-i18next";
 
 import ErrorContainer from "@docspace/ui-kit/components/error-container/ErrorContainer";
 import styles from "./Errors.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const ErrorUnavailable = () => {
   const { t, ready } = useTranslation("Common");
@@ -38,7 +39,7 @@ const ErrorUnavailable = () => {
       <div className={styles.errorUnavailableWrapper}>
         <ErrorContainer
           headerText={t("ErrorDeactivatedText", {
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
           })}
         />
       </div>

@@ -3,28 +3,29 @@
   "content": "Editing is currently unavailable for this file.",
   "content_en_sha1_hash": "81538d0f7dce9f77f60d11d44a2922c532824dd9",
   "created_at": "2026-02-18T14:55:51.922Z",
-  "updated_at": "2026-04-08T11:21:29.654Z",
+  "updated_at": "2026-04-11T20:54:23.006Z",
   "comment": {
-    "text": "This key displays a message informing the user that editing is temporarily unavailable for a file. It appears within a component (likely a status bar or notification) to indicate editing restrictions, potentially due to quota limits or other system issues. Translators should ensure the message conveys the unavailability of editing in a clear and user-friendly manner.",
+    "text": "This is an error message displayed in a toast or notification bar. It informs the user that they cannot currently edit the file, likely due to a quota limit being reached.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:21:03.849Z"
+    "updated_at": "2026-04-11T20:54:23.006Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/Bar/index.tsx",
-      "line_number": 54,
+      "line_number": 55,
       "context": "): QuotaInfo => {\n switch (type) {\n case \"room\":\n return {\n description: initial\n ? t(\"EditingUnavailable\")\n : t(\"YourFurtherEditsNotSaved\"),\n header: initial ? t(\"RoomQuotaReached\") : t(\"RoomQuotaLimitWarning\"),\n };\n case \"user\":\n return {",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/doceditor/src/components/Bar/index.tsx",
-      "line_number": 54,
+      "line_number": 55,
       "context": "): QuotaInfo => {\n switch (type) {\n case \"room\":\n return {\n description: initial\n ? t(\"EditingUnavailable\")\n : t(\"YourFurtherEditsNotSaved\"),\n header: initial ? t(\"RoomQuotaReached\") : t(\"RoomQuotaLimitWarning\"),\n };\n case \"user\":\n return {",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/doceditor/src/components/Bar/index.tsx",
-      "line_number": 54,
+      "line_number": 55,
       "context": "): QuotaInfo => {\n switch (type) {\n case \"room\":\n return {\n description: initial\n ? t(\"EditingUnavailable\")\n : t(\"YourFurtherEditsNotSaved\"),\n header: initial ? t(\"RoomQuotaReached\") : t(\"RoomQuotaLimitWarning\"),\n };\n case \"user\":\n return {",
       "module": "/packages/doceditor"
     }
@@ -177,13 +178,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation adds the word 'virtualno' (virtual), which is not present in the English source, and uses 'Uredi' (an imperative verb/command) instead of 'Urejanje' (the noun 'Editing').",
-          "suggestion": "Urejanje za to datoteko trenutno ni mogoče."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

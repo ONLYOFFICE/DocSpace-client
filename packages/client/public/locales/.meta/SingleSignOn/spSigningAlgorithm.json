@@ -3,17 +3,18 @@
   "content": "Signing Algorithm",
   "content_en_sha1_hash": "5876cdfee061eaf6c6ae5e34c3638b9562c92889",
   "created_at": "2025-05-19T21:30:50.175Z",
-  "updated_at": "2026-04-08T22:24:18.987Z",
+  "updated_at": "2026-04-13T14:59:05.891Z",
   "comment": {
-    "text": "This translation key is used to display the \"Signing Algorithm\" label, likely appearing on a form or settings page related to single sign-on certificates. It's part of the UI component that allows users to manage and configure their certificate settings.",
+    "text": "This is a label for a dropdown menu or input field within the Single Sign-On settings. It allows users to select the cryptographic algorithm used for signing authentication requests or responses.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:04.043Z"
+    "updated_at": "2026-04-11T21:26:19.705Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/Certificates.js",
-      "line_number": 82,
-      "context": "spCertificates,\n idpShowAdditionalParameters,\n spShowAdditionalParameters,\n idpVerifyAlgorithm,\n spEncryptAlgorithm,\n spSigningAlgorithm,\n isLoadingXml,\n isDisabledSpSigning,\n isDisabledSpEncrypt,\n isDisabledIdpSigning,\n } = props;",
+      "line_number": 207,
+      "context": "{provider === \"ServiceProvider\" ? (\n <>\n <SsoComboBox\n isDisabled={isDisabledSpSigning}\n labelText={t(\"spSigningAlgorithm\")}\n name=\"spSigningAlgorithm\"\n options={verifyAlgorithmsOptions}\n tabIndex={14}\n value={spSigningAlgorithm}\n dataTestId=\"sp_signing_combobox\"",
       "module": "/packages/client"
     }
   ],
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation 'Alqoritmin imzalanması' means 'Signing of the algorithm', whereas the English 'Signing Algorithm' refers to the type of algorithm used for signing.",
-          "suggestion": "İmzalama alqoritmi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -63,13 +58,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation 'Υπογραφή αλγορίθμου' means 'Algorithm signature' (the signature of an algorithm), whereas the English 'Signing Algorithm' refers to the 'Algorithm used for signing'.",
-          "suggestion": "Αλγόριθμος υπογραφής"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -117,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ຂັ້ນຕອນການເຊັນຊື່' means 'Signing Process' or 'Steps for signing', whereas the English 'Signing Algorithm' refers to a mathematical method/logic (Algorithm).",
-          "suggestion": "ອັນກໍຣິທຶມການເຊັນຊື່"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -135,13 +118,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Dutch translation 'Ondertekening Algoritme' is a literal word-for-word translation that is grammatically incorrect in Dutch. In Dutch, compound nouns should be joined or used with a preposition. 'Ondertekeningsalgoritme' is the correct technical term.",
-          "suggestion": "Ondertekeningsalgoritme"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -195,25 +172,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'пријављивања' means 'logging in' or 'signing in' (authentication), whereas 'Signing Algorithm' in the context of certificates refers to 'digital signing' (cryptographic signature).",
-          "suggestion": "Алгоритам потписивања"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Algoritam prijavljivanja' means 'Login Algorithm' or 'Sign-in Algorithm'. In the context of certificates and SSO (as indicated by 'spSigningAlgorithm'), 'Signing' refers to the cryptographic process of creating a digital signature, not the user authentication process.",
-          "suggestion": "Algoritam potpisivanja"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

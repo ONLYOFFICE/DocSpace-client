@@ -3,13 +3,20 @@
   "content": "OK",
   "content_en_sha1_hash": "9ce3bd4224c8c1780db56b4125ecf3f24bf748b7",
   "created_at": "2025-06-05T23:02:58.880Z",
-  "updated_at": "2026-04-10T08:21:04.297Z",
+  "updated_at": "2026-04-23T17:24:01.687Z",
   "comment": {
-    "text": "The \"OKButton\" translation key is used to display the label for an OK button in various modal dialogs, such as archive, backup, and pricing plan change dialogs. This label serves as a confirmation action when users want to proceed or accept changes. It appears on buttons with \"primary\" and \"scale\" styles.",
+    "text": "This is the label for an \"OK\" button, typically used to confirm an action or close a dialog box.",
     "is_auto": true,
-    "updated_at": "2025-06-05T23:06:42.518Z"
+    "updated_at": "2026-04-11T20:47:19.816Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/dialogs/ChangePricingPlanDialog.tsx",
+      "line_number": 118,
+      "context": "</div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"ok-button\"\n label={t(\"OKButton\")}\n size={ButtonSize.normal}\n primary\n onClick={onCloseModal}\n tabIndex={3}\n />",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/dialogs/ArchiveDialog/index.js",
       "line_number": 106,
@@ -24,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
-      "line_number": 328,
+      "line_number": 338,
       "context": "headerLabel={t(\"Common:ActionRequired\")}\n isLoading={!ready}\n onSubmit={isUploadConflict ? onAcceptUploadType : onAcceptType}\n onClose={onCloseConflictDialog}\n cancelButtonLabel={t(\"CancelButton\")}\n submitButtonLabel={t(\"OKButton\")}\n messageText={messageText}\n selectActionText={t(\"Common:ConflictResolveSelectAction\")}\n overwriteTitle={overwriteTitle}\n overwriteDescription={overwriteDescription}\n duplicateTitle={duplicateTitle}",
       "module": "/packages/client"
     },
@@ -42,20 +49,20 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeletePluginDialog/index.tsx",
-      "line_number": 71,
+      "line_number": 72,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"delete-button\"\n key=\"DeletePortalBtn\"\n label={t(\"Common:OKButton\")}\n size={ButtonSize.normal}\n scale\n primary\n isLoading={isRequestRunning}\n testId=\"confirm_delete_plugin_button\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/index.js",
-      "line_number": 182,
-      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"OKButton\"\n label={\n isPaymentPageAvailable ? t(\"UpgradePlan\") : t(\"Common:OKButton\")\n }\n size=\"normal\"\n primary\n onClick={isPaymentPageAvailable ? onUpgradePlan : onClose}\n scale",
+      "line_number": 185,
+      "context": "<Button\n key=\"OKButton\"\n label={\n isPaymentPageAvailable\n ? t(\"Common:UpgradePlan\")\n : t(\"Common:OKButton\")\n }\n size=\"normal\"\n primary\n onClick={isPaymentPageAvailable ? onUpgradePlan : onClose}\n scale",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
-      "line_number": 101,
-      "context": "</div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"OKButton\"\n label={isRoomOwner ? t(\"Files:AssignOwner\") : t(\"Common:OKButton\")}\n size=\"normal\"\n primary\n scale\n onClick={onLeaveRoom}\n isDisabled={isLoading}",
+      "line_number": 97,
+      "context": "const okButtonLabel = isRoomOwner\n ? t(\"Files:AssignOwner\")\n : showFormFillingWarning\n ? t(\"Files:LeaveButton\")\n : t(\"Common:OKButton\");\n \n return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{titleText}</ModalDialog.Header>\n <ModalDialog.Body>",
       "module": "/packages/client"
     },
     {
@@ -72,7 +79,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ReducedRightsDialog/index.tsx",
-      "line_number": 76,
+      "line_number": 77,
       "context": "</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"OKButton\"\n label={t(\"Common:OKButton\")}\n size={ButtonSize.normal}\n primary\n onClick={onCloseDialog}\n scale={currentDeviceType === DeviceType.mobile}\n />",
       "module": "/packages/client"
     },
@@ -102,7 +109,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/PreviewDialog.tsx",
-      "line_number": 288,
+      "line_number": 289,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n size={ButtonSize.normal}\n scale\n label={t(\"Common:OKButton\")}\n onClick={onClose}\n testId=\"preview_dialog_ok_button\"\n />\n </ModalDialog.Footer>\n </ModalDialog>",
       "module": "/packages/client"
     },
@@ -156,7 +163,7 @@
     },
     {
       "file_path": "/packages/shared/dialogs/change-storage-quota/index.tsx",
-      "line_number": 162,
+      "line_number": 163,
       "context": "/>\n ) : null}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:OKButton\")}\n size={ButtonSize.normal}\n primary\n onClick={onSaveClick}\n isLoading={isLoading}\n isDisabled={!isDisableQuota ? size.trim() === \"\" : false}",
       "module": "/packages/shared"
     },
@@ -243,13 +250,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation '大丈夫' (Daijoubu) means 'It's okay', 'I'm fine', or 'No problem'. In the context of a UI button for confirmation (OKButton), it is semantically incorrect. The standard UI translation for a confirmation button is 'OK' or 'はい'.",
-          "suggestion": "OK"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {

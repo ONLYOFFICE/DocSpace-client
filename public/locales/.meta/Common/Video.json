@@ -3,11 +3,12 @@
   "content": "Video",
   "content_en_sha1_hash": "bc17c1f0179a888f2a7e8389f67d4f2cf5cf4531",
   "created_at": "2025-05-19T21:30:49.512Z",
-  "updated_at": "2026-04-07T20:32:28.144Z",
+  "updated_at": "2026-04-12T12:26:23.703Z",
   "comment": {
-    "text": "This translation key is used to display the type of a file. It appears as \"Video\" on files categorized as videos in a UI component.",
+    "text": "This is a file type label, appearing in lists or details to identify a video file.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:35:24.739Z"
+    "updated_at": "2026-04-11T20:39:25.219Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -159,13 +160,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'දෘශ්‍යකය' (drushyakaya) refers to a 'visual object' or 'visual entity' rather than the media format 'Video'. In a UI context for file types, 'වීඩියෝ' (Video) is the standard and accurate term.",
-          "suggestion": "වීඩියෝ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

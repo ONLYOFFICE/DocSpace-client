@@ -3,17 +3,18 @@
   "content": "As the current owner, you must transfer ownership to another user before leaving this agent.",
   "content_en_sha1_hash": "1b66b271e767abe92382fe4a9716cf6948dd2904",
   "created_at": "2025-10-27T16:14:30.378Z",
-  "updated_at": "2025-10-27T17:59:04.405Z",
+  "updated_at": "2026-04-23T17:24:01.830Z",
   "comment": {
-    "text": "This text explains the requirement for the current owner to transfer ownership before leaving an agent. It appears in a dialog, likely within a room or agent management interface, to inform users about the necessary action. Translators should ensure the wording accurately conveys the importance of transferring ownership.",
+    "text": "This is a dialog message displayed to the owner of an AI agent when they attempt to leave it, explaining that ownership must be transferred first.",
     "is_auto": true,
-    "updated_at": "2025-10-27T17:59:04.405Z"
+    "updated_at": "2026-04-11T21:09:22.346Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
-      "line_number": 85,
-      "context": "const roomDescription = isRoomOwner\n ? t(\"Files:LeaveRoomDescription\")\n : t(\"Files:WantLeaveRoom\");\n \n const agentDescription = isRoomOwner\n ? t(\"Files:LeaveAgentDescription\")\n : t(\"Files:WantLeaveAgent\");\n \n const descriptionText = isAIAgent ? agentDescription : roomDescription;\n \n return (",
+      "line_number": 86,
+      "context": "const roomDescription = isRoomOwner\n ? t(\"Files:LeaveRoomDescription\")\n : t(\"Files:WantLeaveRoom\");\n \n const agentDescription = isRoomOwner\n ? t(\"Files:LeaveAgentDescription\")\n : t(\"Files:WantLeaveAgent\");\n \n const descriptionText = isAIAgent ? agentDescription : roomDescription;\n \n const showFormFillingWarning = isFormFiller && !isAIAgent && !isRoomOwner;",
       "module": "/packages/client"
     }
   ],

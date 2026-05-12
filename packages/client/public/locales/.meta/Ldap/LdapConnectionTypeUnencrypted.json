@@ -3,11 +3,12 @@
   "content": "Unencrypted communication",
   "content_en_sha1_hash": "bc1d8c39d5290a229552fb64a476b343bca25d9c",
   "created_at": "2025-05-19T21:30:54.196Z",
-  "updated_at": "2026-04-07T19:35:05.144Z",
+  "updated_at": "2026-04-11T21:17:14.554Z",
   "comment": {
-    "text": "This translation key is used for the label of a checkbox indicating unencrypted LDAP connection type. It appears in a settings page within a file, and its purpose is to display the description of this option to users, allowing them to understand what \"unencrypted communication\" means in the context of LDAP connections.",
+    "text": "This is a radio button label in the LDAP settings. It indicates that the connection to the LDAP server will not use encryption.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:13.062Z"
+    "updated_at": "2026-04-11T21:17:14.554Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

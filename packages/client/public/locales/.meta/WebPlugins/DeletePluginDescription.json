@@ -3,17 +3,18 @@
   "content": "This plugin will no longer be available to {{productName}} users. Are you sure you want to continue?",
   "content_en_sha1_hash": "f9dd38d9a79d72110282ab407149bc43bb96edf0",
   "created_at": "2025-05-19T21:30:49.904Z",
-  "updated_at": "2026-04-08T18:47:31.607Z",
+  "updated_at": "2026-04-11T21:28:00.485Z",
   "comment": {
-    "text": "This translation key is used for a confirmation message that appears when deleting a plugin in an application, prompting users to confirm their action. The message includes placeholders for product name and title. It is displayed within a delete dialog modal.",
+    "text": "This is the body text of a confirmation dialog that appears when a user attempts to delete a plugin. It informs the user that the plugin will no longer be available and asks for confirmation. `{{productName}}` will be replaced with the product's brand name.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:43.396Z"
+    "updated_at": "2026-04-11T21:28:00.485Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeletePluginDialog/index.tsx",
-      "line_number": 65,
-      "context": "return (\n <ModalDialog isLoading={!ready} visible={isVisible} onClose={onClose}>\n <ModalDialog.Header>{t(\"DeletePluginTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {t(\"DeletePluginDescription\", { productName: t(\"Common:ProductName\") })}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"delete-button\"\n key=\"DeletePortalBtn\"",
+      "line_number": 66,
+      "context": "return (\n <ModalDialog isLoading={!ready} visible={isVisible} onClose={onClose}>\n <ModalDialog.Header>{t(\"DeletePluginTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {t(\"DeletePluginDescription\", { productName: getBrandName(\"ProductName\") })}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"delete-button\"\n key=\"DeletePortalBtn\"",
       "module": "/packages/client"
     }
   ],
@@ -69,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish word 'Haluako' is a question form meaning 'Does [someone] want to?', whereas the English 'Are you sure you want to continue?' requires a second-person question 'Haluatko varmasti jatkaa?' or 'Oletko varma, että haluat jatkaa?'. The current version is grammatically incorrect for a direct user prompt.",
-          "suggestion": "Tämä liitännäinen ei ole enää saatavilla {{productName}}-n käyttäjille. Haluatko varmasti jatkaa?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -105,13 +100,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The second sentence of the English text ('Are you sure you want to continue?') is completely missing from the Korean translation.",
-          "suggestion": "{{productName}} 사용자는 더 이상 이 플러그인을 사용할 수 없게 됩니다. 계속하시겠습니까?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -165,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'පේනුව' (Pen) is used instead of 'මෙම ප්ලගිනය' (This plugin). This is a hallucination/incorrect noun choice.",
-          "suggestion": "මෙම ප්ලගිනය තවදුරටත් {{productName}} පරිශීලකයින්ට නොලැබෙනු ඇත. ඔබට ඉදිරියට යාමට අවශ්‍යද?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

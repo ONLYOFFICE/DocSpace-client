@@ -13,13 +13,14 @@
   "DeleteGroupDescription": "ຄຸ້ມກຸ່ມ {{groupName}} ຈະຖືກລົບອອກ. ຜູ້ໃຊ້ໃນກຸ່ມນີ້ຈະບໍ່ຖືກຖອນອອກຈາກ {{productName}}. ທ່ານຕ້ອງການດໍາເນີນຕໍ່ບໍ?",
   "DeleteGroupTitle": "ລົບກຸ່ມ",
   "DeleteItem": "ທ່ານກຳລັງຈະຍ້າຍ <strong>{{name}}</strong> ໄປໃສ່ {{trashSection}}.",
-  "DeleteItemForever": "ທ່ານກຳລັງຈະລຶບ <strong>{{name}}</strong>.",
+  "DeleteItemForeverConfirm": "ທ່ານກຳລັງຈະລຶບ <strong>{{name}}</strong>.",
   "DeleteItemsSharedNote": "ກະ​ລຸ​ນາ​ສັງ​ເກດ​ວ່າ​ຖ້າ​ຫາກ​ວ່າ​ທ່ານ​ໄດ້​ແບ່ງ​ປັນ​ໃຫ້​ເຂົາ​ເຈົ້າ​ກັບ​ຜູ້​ໃດ​ຜູ້​ຫນຶ່ງ​, ພວກ​ເຂົາ​ຈະ​ກາຍ​ເປັນ​ບໍ່​ມີ​.",
-  "DeleteRoom": "ຫ້ອງ <strong>\"{{roomName}}\"</strong> ຈະຖືກລຶບອອກຖາວອນ. ຂໍ້ມູນ ແລະການເຂົ້າເຖິງຜູ້ໃຊ້ທັງໝົດຈະສູນເສຍໄປ.",
+  "DeleteRoomConfirm": "ຫ້ອງ <strong>\"{{roomName}}\"</strong> ຈະຖືກລຶບອອກຖາວອນ. ຂໍ້ມູນ ແລະການເຂົ້າເຖິງຜູ້ໃຊ້ທັງໝົດຈະສູນເສຍໄປ.",
   "DeleteRooms": "ຫ້ອງ <strong>({{count}})</strong> ທີ່ເລືອກໄວ້ຈະຖືກລຶບອອກຢ່າງຖາວອນ. ຂໍ້ມູນ ແລະ ການເຂົ້າເຖິງຂອງຜູ້ໃຊ້ທັງໝົດຈະສູນຫາຍໄປ.",
   "DeleteRoomsTitle": "ລຶບຫ້ອງນີ້ບໍ?",
   "DeleteRoomTitle": "ລຶບຫ້ອງນີ້ບໍ?",
   "DeleteRoomWarning": "ຂ້ອຍເຂົ້າໃຈຜົນສະທ້ອນແລະຕ້ອງການລຶບຫ້ອງ",
+  "DeleteTemplate": "ທ່ານຕ້ອງການລຶບຫ້ອງແມ່ແບບ <1>«{{templateName}}»</1> ແທ້ຫຼືບໍ່? ແມ່ແບບນີ້ບໍ່ສາມາດກູ້ຄືນໄດ້.",
   "DeleteTemplates": "ທ່ານຕ້ອງການລົບແມ່ແບບຫ້ອງທີ່ເລືອກໄວ້ຈິງໆບໍ? ມັນບໍ່ສາມາດກູ້ຄືນໄດ້.",
   "DeleteTemplateWarning": "ຂ້ອຍເຂົ້າໃຈຜົນສະທ້ອນແລະຕ້ອງການລຶບແມ່ແບບ",
   "FileDeletedAfter": "ໄຟລ໌ດັ່ງກ່າວຈະຖືກລຶບອອກຖາວອນໃນ 30 ມື້.",
@@ -33,6 +34,5 @@
   "ItemsDeletedAfter": "ລາຍການເຫຼົ່ານີ້ຈະຖືກລຶບອອກຖາວອນໃນ 30 ມື້.",
   "ItemsPermanentlyDeleted": "ລາຍການເຫຼົ່ານີ້ຈະຖືກລຶບອອກຈາກ {{trashSection}} ຢ່າງຖາວອນ.",
   "removeFromListDescription": "ທ່ານກຳລັງຈະລຶບ <1>{{title}}</1> ອອກຈາກລາຍຊື່. ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການສືບຕໍ່?",
-  "removeFromListDescriptionPlural": "ທ່ານກຳລັງຈະລຶບ <1>ລາຍການ ({{count}})</1> ອອກຈາກລາຍຊື່. ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການສືບຕໍ່?",
-  "DeleteTemplate": "ທ່ານຕ້ອງການລຶບຫ້ອງແມ່ແບບ <1>«{{templateName}}»</1> ແທ້ຫຼືບໍ່? ແມ່ແບບນີ້ບໍ່ສາມາດກູ້ຄືນໄດ້."
+  "removeFromListDescriptionPlural": "ທ່ານກຳລັງຈະລຶບ <1>ລາຍການ ({{count}})</1> ອອກຈາກລາຍຊື່. ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການສືບຕໍ່?"
 }

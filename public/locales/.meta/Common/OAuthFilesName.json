@@ -3,11 +3,12 @@
   "content": "Files & Folders",
   "content_en_sha1_hash": "96caf6283cd48a7add2d2a99add1e7e2e180be29",
   "created_at": "2025-05-19T21:30:46.992Z",
-  "updated_at": "2026-04-08T03:48:20.212Z",
+  "updated_at": "2026-04-11T20:47:31.516Z",
   "comment": {
-    "text": "This translation key is used to display the label \"Files & Folders\" in various contexts within the application. It appears on file-related menus and settings pages, guiding users through navigation options.",
+    "text": "This is a label for a permission group in OAuth settings, referring to access to files and folders.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:14.196Z"
+    "updated_at": "2026-04-11T20:47:31.516Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -38,6 +38,7 @@ import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { TChangeUserTypeDialogData } from "SRC_DIR/helpers/contacts";
 import { getChangeTypeKey } from "./getChangeTypeKey";
 import styles from "./ChangeUserType.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type ChangeUserTypeDialogProps = {
   visible: boolean;
@@ -89,7 +90,7 @@ const ChangeUserTypeDialog = ({
     userName: isSingleUser ? userNames[0] : undefined,
     membersSection: t("Common:Members"),
     documentsSection: t("Common:MyDocuments"),
-    productName: t("Common:ProductName"),
+    productName: getBrandName("ProductName"),
     secondType,
   };
   const translationKey = getChangeTypeKey(
@@ -211,7 +212,7 @@ const ChangeUserTypeDialog = ({
               i18nKey="ChangeUserTypeNote"
               ns="ChangeUserTypeDialog"
               t={t}
-              values={{ productName: t("Common:ProductName") }}
+              values={{ productName: getBrandName("ProductName") }}
               components={{
                 1: <span style={{ fontWeight: 600 }} />,
               }}

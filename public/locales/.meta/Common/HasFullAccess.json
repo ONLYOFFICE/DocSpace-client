@@ -3,17 +3,18 @@
   "content": "He has full access to the room",
   "content_en_sha1_hash": "5539dff97c62fdc09da717399b225a9c3eeaa745",
   "created_at": "2025-05-19T21:30:45.734Z",
-  "updated_at": "2026-04-08T07:07:11.596Z",
+  "updated_at": "2026-04-11T20:51:20.715Z",
   "comment": {
-    "text": "This translation key is used to display a message indicating that a user has full access to a room. It appears in an info panel on the Home page and is part of a tooltip that shows permissions related to room ownership or admin status.",
+    "text": "This is part of a tooltip that appears when hovering over a user's name in a sharing dialog. It indicates that the user has complete permissions within the room.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:57.724Z"
+    "updated_at": "2026-04-11T20:51:20.715Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/components/share/sub-components/User.tsx",
-      "line_number": 137,
-      "context": "const tooltipContent = `${\n \"isOwner\" in user && user.isOwner\n ? t(\"Common:PortalOwner\", { productName: t(\"Common:ProductName\") })\n : t(\"Common:PortalAdmin\", { productName: t(\"Common:ProductName\") })\n }. ${t(\"Common:HasFullAccess\")}`;\n \n const itemAvatar = isSystem\n ? EveryoneIconUrl\n : isExpect\n ? AtReactSvgUrl",
+      "line_number": 138,
+      "context": "const tooltipContent = `${\n \"isOwner\" in user && user.isOwner\n ? t(\"Common:PortalOwner\", { productName: getBrandName(\"ProductName\") })\n : t(\"Common:PortalAdmin\", { productName: getBrandName(\"ProductName\") })\n }. ${t(\"Common:HasFullAccess\")}`;\n \n const itemAvatar = isSystem\n ? EveryoneIconUrl\n : isExpect\n ? AtReactSvgUrl",
       "module": "/packages/shared"
     }
   ],

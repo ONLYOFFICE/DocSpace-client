@@ -19,7 +19,7 @@
   "NotificationsChannels": "Paziņojumu kanāli",
   "ProviderSuccessfullyConnected": "Piegādātājs ir veiksmīgi savienots",
   "ProviderSuccessfullyDisconnected": "Piegādātājs ir veiksmīgi atvienots",
-  "SendAgain": "Izveidot jaunu identitāti",
+  "SendAgain": "Nosūtīt vēlreiz",
   "ShowBackupCodes": "Rādīt rezerves kodus",
   "SuccessLogout": "Tika izrakstīts no aktīvā savienojuma: {{platform}}, {{browser}}",
   "TelegramAccount": "Telegram konts",

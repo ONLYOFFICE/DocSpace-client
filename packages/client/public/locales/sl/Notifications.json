@@ -1,4 +1,5 @@
 {
+  "ActionsWithFilesDescription": "Žetje bodo poudarila dejavnost oziroma spletne strani — nalopi, ureditve ali deljenje — v razdelkih {{rooms}}, {{shared}}, {{documents}} in {{aiAgents}}.",
   "AdminSetupRequired": "Potrebna je nastavitev administratorja",
   "Badges": "Značke",
   "DailyFeed": "Dnevni vir {{productName}}",
@@ -8,12 +9,11 @@
   "LdapEmailTooltip": "Ta uporabniški račun je naložen iz LDAP. Uporabnikova e-poštna naslov ni bila navedena in trenutna je bila ustvarjena samodejno ter je ni mogoče uporabiti za pošiljanje obvestil.",
   "NotConfigured": "Ni konfigurirano",
   "Notifications": "Obvestila",
+  "RoomsActivityDescription": "Prejemajte takojšnje e-poštovne obvestila o novih deljenih datotekah/mapah in aktivnosti v vaših {{rooms}} in {{aiAgents}}.",
+  "RoomUpdateNotify": "Deljeni vsebine, {{rooms}} in aktivnost {{aiAgents}}",
   "SettingUpNotifications": "Nastavljanje obvestil",
   "SuccessConnected": "{{serviceName}} je bil uspešno povezan kot kanal za obveščanje. Sedaj boste prejemali posodobitve tam.",
   "SuccessDisconnected": "{{serviceName}} je bil uspešno izklopljen kot kanal za obveščanja. Obveščanja ne bodo več poslana tja.",
   "UsefulTips": "Uporabni {{productName}} nasveti",
-  "UsefulTipsDescription": "Pridobite uporabna navodila za {{productName}}",
-  "ActionsWithFilesDescription": "Žetje bodo poudarila dejavnost oziroma spletne strani — nalopi, ureditve ali deljenje — v razdelkih {{rooms}}, {{shared}}, {{documents}} in {{aiAgents}}.",
-  "RoomsActivityDescription": "Prejemajte takojšnje e-poštovne obvestila o novih deljenih datotekah/mapah in aktivnosti v vaših {{rooms}} in {{aiAgents}}.",
-  "RoomUpdateNotify": "Deljeni vsebine, {{rooms}} in aktivnost {{aiAgents}}"
+  "UsefulTipsDescription": "Pridobite uporabna navodila za {{productName}}"
 }

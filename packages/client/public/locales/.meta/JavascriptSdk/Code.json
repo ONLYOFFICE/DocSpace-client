@@ -3,23 +3,24 @@
   "content": "Code to insert",
   "content_en_sha1_hash": "73eb0e1ccc3a17f76090eb3ee695245eb8c9ba3b",
   "created_at": "2025-05-19T21:30:54.384Z",
-  "updated_at": "2026-04-07T19:35:05.128Z",
+  "updated_at": "2026-04-13T14:59:05.779Z",
   "comment": {
-    "text": "\"Used as a header text in an EmbeddingPanel component, displaying 'Code' for a translation key that provides a placeholder for inserting code.\"",
+    "text": "This is a label for a section or button, likely indicating a block of code or a code-related action.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:50.124Z"
+    "updated_at": "2026-04-11T21:16:11.160Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 549,
+      "line_number": 550,
       "context": "<Text\n className={styles.embeddingPanelHeaderText}\n fontSize=\"15px\"\n fontWeight={600}\n >\n {t(\"JavascriptSdk:Code\")}\n </Text>\n <IconButton\n className={styles.embeddingPanelCopyIcon}\n size={16}\n iconName={CopyReactSvgUrl}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/PreviewBlock.js",
-      "line_number": 33,
-      "context": "import { useTranslation } from \"react-i18next\";\n import { objectToGetParams } from \"@docspace/shared/utils/common\";\n import { Tabs, TabsTypes } from \"@docspace/ui-kit/components/tabs\";\n \n import EyeReactSvgUrl from \"PUBLIC_DIR/images/eye.react.svg?url\";\n import CodeReactSvgUrl from \"PUBLIC_DIR/images/code.react.svg?url\";\n \n import { CodeToInsert } from \"./CodeToInsert\";\n import { GetCodeBlock } from \"./GetCodeBlock\";\n \n import { Preview } from \"../presets/StyledPresets\";",
+      "line_number": 87,
+      "context": "content: preview,\n iconName: EyeReactSvgUrl,\n },\n {\n id: \"code\",\n name: t(\"Code\"),\n content: code,\n iconName: CodeReactSvgUrl,\n },\n ];",
       "module": "/packages/client"
     }
   ],

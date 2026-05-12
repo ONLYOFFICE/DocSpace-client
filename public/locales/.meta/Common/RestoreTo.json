@@ -3,16 +3,17 @@
   "content": "Restore to",
   "content_en_sha1_hash": "55a3efe467e20e4698ed5e79684c4b701ff485cb",
   "created_at": "2025-05-19T21:30:47.920Z",
-  "updated_at": "2026-04-08T01:07:41.066Z",
+  "updated_at": "2026-04-13T09:13:46.241Z",
   "comment": {
-    "text": "This translation key is used to display a button or dialog title indicating that files can be restored from a previous state. It appears in UI components related to file management and selection, such as the FilesSelector component.",
+    "text": "This is a button label. It appears in a dialog when restoring a file or folder, indicating the action of restoring to a specific location.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:34:41.340Z"
+    "updated_at": "2026-04-11T20:44:50.112Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 49,
+      "line_number": 50,
       "context": "isRestore?: boolean,\n isFormRoom?: boolean,\n isThirdParty?: boolean,\n isSelectFolder?: boolean,\n ) => {\n if (isRestore) return t(\"Common:RestoreTo\");\n if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isMove) return t(\"Common:MoveTo\");\n if (isCopy && !isEditorDialog) return t(\"Common:Copy\");\n if (isRestoreAll) return t(\"Common:Restore\");\n if (isSelect) {",
       "module": "/packages/client"
     }
@@ -36,8 +37,10 @@
       "ai_spell_check_issues": [
         {
           "type": "missing_content",
-          "description": "The English text 'Restore to' implies a destination or a specific state (preposition 'to'), whereas the Azerbaijani translation 'Bərpa edin' only means 'Restore'. This loses the directional context required for a 'Restore to' action.",
-          "suggestion": "Bərpa et"
+          "description": "The translation 'Bərpa et' only means 'Restore' and completely omits the 'to' preposition that indicates restoring to a specific destination/location. The English phrase specifically denotes choosing a target location for restoration, which is essential context from the code usage. The translation loses this critical meaning.",
+          "suggestion": "Bir yerə bərpa et (restore to a place) or similar phrasing that includes the destination element",
+          "checked_at": "2026-04-13T09:12:16.132Z",
+          "checked_by": "claude-code/haiku"
         }
       ],
       "approved_at": null
@@ -75,13 +78,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The English text 'Restore to' implies a destination or a target state (indicated by the preposition 'to'), whereas the Finnish translation 'Palauta' only means 'Restore'. This makes it a command rather than a label for a target location/state.",
-          "suggestion": "Palauta kohteeseen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -93,13 +90,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Armenian translation 'Վերականգնել' means 'Restore', missing the prepositional sense of 'to' (indicating a destination or target state) present in the English 'Restore to'.",
-          "suggestion": "Վերականգնել մինչև"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -123,7 +114,15 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The preposition 'ເປັນ' (meaning 'to be/become') is semantically inappropriate. In Lao, restoring to a destination requires a directional preposition like 'ໄປ' (to) or 'ໄປຍັງ' (to/at), not 'ເປັນ'. This changes the meaning from 'restore to [a location]' to 'restore to be' or 'restore as', which is incorrect in this file restoration context.",
+          "suggestion": "ຟື້ນຟູໄປ or ຟື້ນຟູໄປຍັງ",
+          "checked_at": "2026-04-13T09:13:08.219Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -171,13 +170,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'මෙයට ප්‍රත්‍යර්පණය' translates more like 'Restoration to this' or 'Restoration to this [object]', which sounds unnatural and grammatically incomplete for a UI button/label. In a UI context for 'Restore to', it should imply 'Restore to [location/state]'.",
-          "suggestion": "මෙයට නැවත ලබාගන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

@@ -3,16 +3,17 @@
   "content": "Agent name",
   "content_en_sha1_hash": "fc92420ca3d433f14f64480bd1e736eb2a2093aa",
   "created_at": "2025-10-27T16:14:10.199Z",
-  "updated_at": "2026-04-08T17:40:02.529Z",
+  "updated_at": "2026-04-23T17:24:01.732Z",
   "comment": {
-    "text": "Label for an input field in the Create/Edit Agent dialog, prompting the user to enter the agent's name. This text is used to clearly indicate what information is being requested from the user. Translators should ensure the translation accurately conveys the need for a name.",
+    "text": "This is a label for an input field where users enter the name of an agent. It appears within a dialog for creating or editing an agent.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:52:51.709Z"
+    "updated_at": "2026-04-11T21:00:47.886Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/SetAgentParams.tsx",
-      "line_number": 486,
+      "line_number": 484,
       "context": "/>\n );\n \n const tagsTitle = \"\";\n \n const inputTitle = `${t(\"Common:AgentName\")}:`;\n \n return (\n <StyledSetAgentParams disableImageRescaling={disableImageRescaling}>\n <div className=\"logo-name-container\">\n {element}",
       "module": "/packages/client"
     }
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation 'اسم العميل' means 'Customer name' instead of 'Agent name'. In a technical/business context, 'Agent' (الوكيل) is distinct from 'Customer/Client' (العميل).",
-          "suggestion": "اسم الوكيل"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -189,13 +184,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'agenata' is grammatically incorrect in Serbian. The correct genitive form of 'agent' is 'agenta'.",
-          "suggestion": "Ime agenta"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

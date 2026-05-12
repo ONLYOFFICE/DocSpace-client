@@ -3,13 +3,21 @@
   "content": "Last revision",
   "content_en_sha1_hash": "c6c1689fe7afd04a955e525cb4ea81f7a2ecdf06",
   "created_at": "2026-03-31T15:18:15.113Z",
-  "updated_at": "2026-04-08T05:54:22.504Z",
+  "updated_at": "2026-04-23T17:24:02.166Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a short label indicating the date and time of the last modification for a library template.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:49:56.941Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/forms/library/[langId]/[categoryId]/template/[templateId]/page.client.tsx",
+      "line_number": 291,
+      "context": "<div className={styles.metaRow}>\n {updatedDate && (\n <div className={styles.metaItem}>\n <span className={styles.metaLabel}>\n {t(\"Common:LibraryTemplateLastRevision\")}\n </span>\n <span className={styles.metaValue}>{updatedDate}</span>\n </div>\n )}\n {templateIsFile && template.fileExst && (",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -158,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Zadnje revizijo' is in the accusative case, which implies 'Last revision [as an object]'. For a UI label/status, the nominative case 'Zadnja revizija' is required to mean 'Last revision'.",
-          "suggestion": "Zadnja revizija"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

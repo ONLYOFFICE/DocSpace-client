@@ -3,11 +3,12 @@
   "content": "Assign recipients",
   "content_en_sha1_hash": "a49c45ec13a9f05a2961da96af3a165f56370328",
   "created_at": "2025-10-13T13:21:58.745Z",
-  "updated_at": "2026-04-08T16:41:48.756Z",
+  "updated_at": "2026-04-11T20:59:00.682Z",
   "comment": {
-    "text": "This text appears as the title of a dialog window used to assign recipients. It indicates the action of assigning recipients to something, likely within a room or shared space. Translators should consider the context of recipient assignment in this UI element.",
+    "text": "This is the title of a dialog window where users can assign roles to recipients.",
     "is_auto": true,
-    "updated_at": "2025-10-13T14:26:53.585Z"
+    "updated_at": "2026-04-11T20:59:00.682Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Qəyyumları' means 'guardians' or 'trustees' (legal context), whereas 'recipients' in a UI context refers to people receiving something (e.g., 'alıcılar').",
-          "suggestion": "Alıcıları təyin et"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -189,13 +184,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'primaoce' is a misspelling of 'primaoca'. In Serbian, the plural form for 'recipients' should be 'primaoca'.",
-          "suggestion": "Dodeli primaoca"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

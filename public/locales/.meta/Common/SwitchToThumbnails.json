@@ -3,24 +3,25 @@
   "content": "Switch to thumbnails view",
   "content_en_sha1_hash": "7319bf6b4edb601de0b266f9131c2c8f253e74c9",
   "created_at": "2025-05-19T21:30:49.233Z",
-  "updated_at": "2026-04-07T22:09:38.059Z",
+  "updated_at": "2026-04-12T16:15:36.675Z",
   "comment": {
-    "text": "This translation key is used for the \"Switch to thumbnails view\" text in a view selector component. It appears as an icon label on a button and is displayed when switching between different views. Translators should replace \"Switch to thumbnails view\" with the desired localized equivalent.",
+    "text": "This is a tooltip for an icon button. It appears when the user hovers over the button, indicating that clicking it will change the current view to a thumbnail layout.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:37:56.859Z"
+    "updated_at": "2026-04-11T20:41:25.642Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/view-selector/index.tsx",
-      "line_number": 88,
-      "context": "key={value}\n data-view={value}\n title={\n value === \"row\"\n ? t(\"Common:SwitchViewToCompact\")\n : t(\"Common:SwitchToThumbnails\")\n }\n data-testid=\"view-selector-icon\"\n >\n {typeof icon === \"string\" ? <ReactSVG src={icon} /> : icon}\n </TooltipContainer>",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/components/filter/sub-components/ViewSelector.tsx",
+      "line_number": 112,
+      "context": "key={value}\n data-view={value}\n title={\n value === \"row\"\n ? (t(\"SwitchViewToCompact\") ?? \"\")\n : (t(\"SwitchToThumbnails\") ?? \"\")\n }\n data-testid=\"view-selector-icon\"\n >\n {typeof icon === \"string\" ? <ReactSVG src={icon} /> : icon}\n </TooltipContainer>",
+      "module": "/libs/ui-kit"
     },
     {
-      "file_path": "/packages/shared/components/view-selector/index.tsx",
-      "line_number": 88,
-      "context": "key={value}\n data-view={value}\n title={\n value === \"row\"\n ? t(\"Common:SwitchViewToCompact\")\n : t(\"Common:SwitchToThumbnails\")\n }\n data-testid=\"view-selector-icon\"\n >\n {typeof icon === \"string\" ? <ReactSVG src={icon} /> : icon}\n </TooltipContainer>",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/components/filter/sub-components/ViewSelector.tsx",
+      "line_number": 112,
+      "context": "key={value}\n data-view={value}\n title={\n value === \"row\"\n ? (t(\"SwitchViewToCompact\") ?? \"\")\n : (t(\"SwitchToThumbnails\") ?? \"\")\n }\n data-testid=\"view-selector-icon\"\n >\n {typeof icon === \"string\" ? <ReactSVG src={icon} /> : icon}\n </TooltipContainer>",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -57,13 +58,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation 'Thumbnails aktivieren' means 'Activate thumbnails', which implies turning a feature on/off, whereas the English 'Switch to thumbnails view' refers to changing the visual layout/mode.",
-          "suggestion": "Zur Miniaturansicht wechseln"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -165,13 +160,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'සිඟිති' (singithi) means 'tiny', 'small', or 'infant/child-like', which is an incorrect way to describe 'thumbnails' in a UI context. It implies something cute or miniature rather than the technical term for image previews.",
-          "suggestion": "කුඩා රූප දැක්මට මාරු වන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

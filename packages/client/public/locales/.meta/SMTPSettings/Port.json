@@ -3,17 +3,18 @@
   "content": "Port",
   "content_en_sha1_hash": "fe035157cda20b361ce30613e29b5d6f1a46b5fc",
   "created_at": "2025-05-19T21:30:53.306Z",
-  "updated_at": "2026-04-08T21:52:09.448Z",
+  "updated_at": "2026-04-13T14:59:05.890Z",
   "comment": {
-    "text": "This translation key is used to display \"Port\" in a user interface, typically appearing as part of a settings or configuration section. It likely corresponds to an SMTP port number setting, guiding the user to input a valid port value (0-65535).",
+    "text": "This is a label for an input field where users enter a numerical port number for SMTP server settings. It appears as a short label next to the input field.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:59.788Z"
+    "updated_at": "2026-04-11T21:21:05.214Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/sub-components/CustomSettings.js",
-      "line_number": 111,
-      "context": "const requirementColor = {\n color: theme.client.settings.integration.smtp.requirementColor,\n };\n \n const isPortValid =\n Number(settings[PORT]) > 0 && Number(settings[PORT]) < 65536;\n \n const enableAuthComponent = (\n <div className=\"smtp-settings_auth\">\n <ToggleButton",
+      "line_number": 196,
+      "context": "scale\n testId=\"smtp_host_domain_input\"\n />\n \n <div className=\"smtp-settings_title\">\n <Text {...commonTextProps}>{t(\"Port\")}</Text>{\" \"}\n <Text as=\"span\" {...requirementColor}>\n *\n </Text>\n </div>\n <TextInput",
       "module": "/packages/client"
     }
   ],
@@ -105,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ຜອດຶ' is nonsensical/gibberish and does not mean 'Port' in a technical/networking context.",
-          "suggestion": "ພອດ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -159,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'තොට' (Thota) refers to a physical harbor or a landing place for boats. In a technical/computing context (SMTP port number), the correct term should refer to a communication port.",
-          "suggestion": "පෝට්"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

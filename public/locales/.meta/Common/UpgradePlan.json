@@ -3,17 +3,18 @@
   "content": "Upgrade plan",
   "content_en_sha1_hash": "e80fe7c8f56aeba1c9594500c8faf418c36a8fe5",
   "created_at": "2026-04-10T13:53:43.834Z",
-  "updated_at": "2026-04-10T13:55:40.148Z",
+  "updated_at": "2026-04-23T17:24:01.828Z",
   "comment": {
-    "text": "This key is used for a button or action label that directs users to a payment page to upgrade their current subscription quota. It appears within the InviteQuotaWarningDialog when a user needs to increase their limits.",
+    "text": "Button label. This button navigates the user to the payment page to upgrade their subscription plan.",
     "is_auto": true,
-    "updated_at": "2026-04-10T13:55:40.148Z"
+    "updated_at": "2026-04-11T20:40:06.584Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/index.js",
-      "line_number": 103,
-      "context": "}\n \n setIsVisible(false);\n };\n \n const onUpgradePlan = () => {\n onClose();\n \n const paymentPageUrl = \"/portal-settings/payments/portal-payments\";\n \n navigate(paymentPageUrl);",
+      "line_number": 184,
+      "context": "<ModalDialog.Footer>\n <Button\n key=\"OKButton\"\n label={\n isPaymentPageAvailable\n ? t(\"Common:UpgradePlan\")\n : t(\"Common:OKButton\")\n }\n size=\"normal\"\n primary\n onClick={isPaymentPageAvailable ? onUpgradePlan : onClose}",
       "module": "/packages/client"
     }
   ],

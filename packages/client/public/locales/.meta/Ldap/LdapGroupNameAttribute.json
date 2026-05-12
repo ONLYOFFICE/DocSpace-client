@@ -3,16 +3,17 @@
   "content": "Group Name Attribute",
   "content_en_sha1_hash": "e8b8084a19124762c9b8ebabd5800b40497124b5",
   "created_at": "2025-05-19T21:30:54.221Z",
-  "updated_at": "2026-04-07T19:35:05.145Z",
+  "updated_at": "2026-04-11T21:17:06.534Z",
   "comment": {
-    "text": "This translation key describes the label for a field used to input a Group Name Attribute in LDAP group membership settings, typically found within a portal's category page. The field is expected to be filled and validated before proceeding.",
+    "text": "This is a label for an input field in the LDAP settings, asking for the attribute used to identify group names in the LDAP directory.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:09.861Z"
+    "updated_at": "2026-04-11T21:17:06.534Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/GroupMembership.js",
-      "line_number": 186,
+      "line_number": 187,
       "context": "style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.groupNameAttribute}\n labelText={t(\"LdapGroupNameAttribute\")}\n isRequired\n tooltipContent={t(\"LdapGroupNameAttributeTooltip\")}\n dataTestId=\"group_name_attribute_field_container\"\n >\n <LdapFieldComponent",
       "module": "/packages/client"
     }

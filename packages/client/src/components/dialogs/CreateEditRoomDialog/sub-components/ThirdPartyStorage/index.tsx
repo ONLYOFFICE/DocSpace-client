@@ -45,6 +45,7 @@ import ToggleParam from "SRC_DIR/components/CreateEditDialogParams/ToggleParam";
 
 import ThirdPartyComboBox from "./ThirdPartyComboBox";
 import FolderInput from "./FolderInput";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const StyledThirdPartyStorage = styled(StyledParam)`
   flex-direction: column;
@@ -124,7 +125,7 @@ const ThirdPartyStorage = ({
 			const data = isRoomAdmin ? (
 				<Text as="p">
 					{t("ThirdPartyStorageRoomAdminNoStorageAlert", {
-						productName: t("Common:ProductName"),
+						productName: getBrandName("ProductName"),
 					})}
 				</Text>
 			) : (

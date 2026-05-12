@@ -3,17 +3,18 @@
   "content": "SSL verification",
   "content_en_sha1_hash": "2450230a66301a4510305fe23394616284bb507b",
   "created_at": "2025-05-19T21:30:49.844Z",
-  "updated_at": "2026-04-08T19:10:01.386Z",
+  "updated_at": "2026-04-13T14:59:05.881Z",
   "comment": {
-    "text": "The \"SSL Verification\" translation key is used to display a confirmation message when verifying an SSL connection. In the PortalSettings page, this translation appears in a UI element related to developer tools, where it likely informs users about the security validation process for webhooks.",
+    "text": "This is a checkbox label in the Webhooks settings. It enables or disables SSL certificate verification for webhook requests.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:50.638Z"
+    "updated_at": "2026-04-11T21:28:19.443Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/SSLVerification.js",
-      "line_number": 56,
-      "context": "img {\n margin-inline-start: 4px;\n }\n `;\n \n export const SSLVerification = ({ onChange, value, isDisabled }) => {\n const { t } = useTranslation([\"Webhooks\"]);\n \n const handleOnChange = (e) => {\n onChange({\n target: { name: e.target.name, value: e.target.value === \"true\" },",
+      "line_number": 68,
+      "context": "};\n \n return (\n <div>\n <Header>\n {t(\"SSLVerification\")}{\" \"}\n <HelpButton\n className=\"verificationHelpButton\"\n iconName={InfoReactSvgUrl}\n tooltipContent={<Text fontSize=\"12px\">{t(\"SSLHint\")}</Text>}\n place=\"bottom\"",
       "module": "/packages/client"
     }
   ],
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'مصادقة' (Authentication) is used instead of 'التحقق من' (Verification). In a technical context, SSL Verification refers to the process of validating a certificate, whereas Authentication refers to proving identity.",
-          "suggestion": "التحقق من SSL"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -75,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation 'SSL-varmenne' means 'SSL certificate', whereas the English 'SSL verification' refers to the process of verifying/validating the SSL. This changes the meaning from an action/process to a noun/object.",
-          "suggestion": "SSL-varmennus"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {

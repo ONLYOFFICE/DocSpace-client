@@ -3,13 +3,21 @@
   "content": "You are using {{planName}} plan",
   "content_en_sha1_hash": "d4806feb989611df3effd43da85972098a769b7a",
   "created_at": "2026-04-10T13:53:42.127Z",
-  "updated_at": "2026-04-10T13:53:42.127Z",
+  "updated_at": "2026-04-11T20:57:58.756Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a text label indicating the user's current subscription plan. It appears on the billing page and includes a variable `{{planName}}` for the plan's title.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:57:58.756Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/PaymentContainer.tsx",
+      "line_number": 110,
+      "context": "console.log(\"isPaidPeriod\", isPaidPeriod, \"isFreeTariff\", isFreeTariff);\n if (isPaidPeriod || isGracePeriod) {\n return (\n <Text fontSize=\"16px\" isBold>\n <CommonTrans i18nKey=\"BusinessTitle\" values={{ planName: currentTariffPlanTitle }} />\n </Text>\n );\n }\n };",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

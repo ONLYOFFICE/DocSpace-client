@@ -3,16 +3,17 @@
   "content": "Show the About window",
   "content_en_sha1_hash": "98aa21413f85ee58c0e572a4de32cd4c30502a72",
   "created_at": "2025-06-02T10:19:17.147Z",
-  "updated_at": "2026-04-10T08:58:38.049Z",
+  "updated_at": "2026-04-12T19:26:25.226Z",
   "comment": {
-    "text": "Show the About window button label in a checkbox within a branding company info page.",
+    "text": "Label for a checkbox that, when checked, displays the \"About\" window containing information about the application.",
     "is_auto": true,
-    "updated_at": "2025-06-02T10:21:21.794Z"
+    "updated_at": "2026-04-11T20:42:49.810Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 194,
+      "line_number": 195,
       "context": "<Checkbox\n isDisabled={!isBrandingAvailable || !isSettingPaid}\n isChecked={showAbout}\n onChange={onChangeDisplayAbout}\n dataTestId=\"show-about-window-checkbox\"\n label={t(\"Common:ShowAboutWindow\")}\n />\n </FieldContainer>\n \n <FieldContainer\n id=\"fieldContainerCompanyName\"",
       "module": "/packages/shared"
     }
@@ -33,18 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "extra_variable",
-          "description": "Extra variable(s) not in English: {{About Pencərəsinin göstərilməsi}}",
-          "suggestion": ""
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses a noun phrase 'About Pencərəsinin göstərilməsi' (Showing of the About window) instead of an imperative command 'Show the About window' suitable for a checkbox label. Additionally, it incorrectly treats 'About' as a variable/token by wrapping it in curly braces, which changes the technical meaning.",
-          "suggestion": "Haqqında pəncərəsini göstər"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -128,13 +118,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Overzichtvenster' means 'Overview window'. The English text refers to an 'About window' (information about the software), which in Dutch is typically 'Info-venster' or 'Over venster'.",
-          "suggestion": "Toon het Info-venster"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -170,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses the word 'ගැන' (about/concerning) in isolation, which makes the sentence grammatically incomplete and nonsensical in Sinhala. It fails to translate the noun 'About' as a proper name for the window.",
-          "suggestion": "\"About\" කවුළුව පෙන්වන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -200,25 +178,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Прикажи О прозору' is grammatically incorrect and nonsensical in Serbian. It literally translates to 'Show About window' but uses 'О' (the preposition 'about') as a noun, which is incorrect. In Serbian, 'About' in the context of an 'About window' is typically translated as 'О програму' or 'О нас'.",
-          "suggestion": "Прикажи прозор „О програму”"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Prikaži O prozoru' is grammatically incorrect and nonsensical in Serbian. It literally translates to 'Show About window' but uses 'O' (the preposition 'about') as if it were the noun, resulting in a broken sentence structure.",
-          "suggestion": "Prikaži prozor 'O nama'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

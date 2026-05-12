@@ -3,11 +3,12 @@
   "content": "Empty field",
   "content_en_sha1_hash": "9ea77181ac6a721f1181cacbc3707cd24c6a1b38",
   "created_at": "2025-05-19T21:30:44.813Z",
-  "updated_at": "2026-04-08T10:59:29.950Z",
+  "updated_at": "2026-04-23T17:24:02.002Z",
   "comment": {
-    "text": "This translation key is used to display an error message when a field is empty. It appears on the \"Attribute Mapping\" page as part of a form, specifically under fields marked as required (e.g., FirstName).",
+    "text": "This is an error message that appears when a required input field is left empty.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:31.015Z"
+    "updated_at": "2026-04-11T20:54:02.514Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -18,19 +19,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
-      "line_number": 135,
+      "line_number": 136,
       "context": "<div className=\"ldap_attribute-mapping\">\n <FieldContainer\n style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.firstName}\n labelText={t(\"Common:FirstName\")}\n isRequired\n dataTestId=\"first_name_field_container\"\n >",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
-      "line_number": 135,
+      "line_number": 136,
       "context": "<div className=\"ldap_attribute-mapping\">\n <FieldContainer\n style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.firstName}\n labelText={t(\"Common:FirstName\")}\n isRequired\n dataTestId=\"first_name_field_container\"\n >",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
-      "line_number": 135,
+      "line_number": 136,
       "context": "<div className=\"ldap_attribute-mapping\">\n <FieldContainer\n style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.firstName}\n labelText={t(\"Common:FirstName\")}\n isRequired\n dataTestId=\"first_name_field_container\"\n >",
       "module": "/packages/client"
     },
@@ -78,31 +79,31 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/GroupMembership.js",
-      "line_number": 113,
+      "line_number": 114,
       "context": "<div className=\"group_membership-container\">\n <FieldContainer\n isVertical\n labelVisible\n style={FIELD_STYLE}\n errorMessage={t(\"Common:EmptyFieldError\")}\n labelText={t(\"LdapGroupDN\")}\n isRequired\n hasError={errors.groupDN}\n tooltipContent={t(\"LdapGroupDNTooltip\")}\n dataTestId=\"group_dn_field_container\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/GroupMembership.js",
-      "line_number": 113,
+      "line_number": 114,
       "context": "<div className=\"group_membership-container\">\n <FieldContainer\n isVertical\n labelVisible\n style={FIELD_STYLE}\n errorMessage={t(\"Common:EmptyFieldError\")}\n labelText={t(\"LdapGroupDN\")}\n isRequired\n hasError={errors.groupDN}\n tooltipContent={t(\"LdapGroupDNTooltip\")}\n dataTestId=\"group_dn_field_container\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/GroupMembership.js",
-      "line_number": 113,
+      "line_number": 114,
       "context": "<div className=\"group_membership-container\">\n <FieldContainer\n isVertical\n labelVisible\n style={FIELD_STYLE}\n errorMessage={t(\"Common:EmptyFieldError\")}\n labelText={t(\"LdapGroupDN\")}\n isRequired\n hasError={errors.groupDN}\n tooltipContent={t(\"LdapGroupDNTooltip\")}\n dataTestId=\"group_dn_field_container\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/GroupMembership.js",
-      "line_number": 113,
+      "line_number": 114,
       "context": "<div className=\"group_membership-container\">\n <FieldContainer\n isVertical\n labelVisible\n style={FIELD_STYLE}\n errorMessage={t(\"Common:EmptyFieldError\")}\n labelText={t(\"LdapGroupDN\")}\n isRequired\n hasError={errors.groupDN}\n tooltipContent={t(\"LdapGroupDNTooltip\")}\n dataTestId=\"group_dn_field_container\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/GroupMembership.js",
-      "line_number": 113,
+      "line_number": 114,
       "context": "<div className=\"group_membership-container\">\n <FieldContainer\n isVertical\n labelVisible\n style={FIELD_STYLE}\n errorMessage={t(\"Common:EmptyFieldError\")}\n labelText={t(\"LdapGroupDN\")}\n isRequired\n hasError={errors.groupDN}\n tooltipContent={t(\"LdapGroupDNTooltip\")}\n dataTestId=\"group_dn_field_container\"",
       "module": "/packages/client"
     },
@@ -113,8 +114,14 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/ConnectDatabaseForm.tsx",
+      "line_number": 95,
+      "context": "[store],\n );\n \n const onTestConnection = React.useCallback(async () => {\n if (!store.host.trim() || !store.port.trim()) {\n toastr.error(t(\"Common:EmptyFieldError\"));\n return;\n }\n \n store.setIsTesting(true);\n try {",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/shared/pages/Branding/BrandName/index.tsx",
-      "line_number": 112,
+      "line_number": 113,
       "context": "const getErrorText = () => {\n if (!error) return \"\";\n \n switch (error) {\n case \"Empty\":\n return t(\"Common:EmptyFieldError\");\n case \"MinLength\":\n return t(\"Common:BrandNameLength\", {\n minLength: 2,\n maxLength: 40,\n });",
       "module": "/packages/shared"
     }
@@ -207,13 +214,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ຊ່ອງວ່າງ' means 'space' or 'gap' (as in a physical gap or a whitespace character), whereas the English 'Empty field' in this context refers to a form field that has not been filled out. The translation should indicate that the field is empty/blank.",
-          "suggestion": "ຊ່ອງຂໍ້ມູນຫວ່າງ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -267,13 +268,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation is incomplete; it ends with a trailing space and is missing the noun 'pole' (field) to complete the phrase 'Prázdne pole'.",
-          "suggestion": "Prázdne pole"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {

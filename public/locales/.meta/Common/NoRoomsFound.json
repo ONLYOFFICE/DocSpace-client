@@ -3,18 +3,19 @@
   "content": "No rooms found",
   "content_en_sha1_hash": "ad2c3ebdb031938200e1b48e4c1f024860a8d3b2",
   "created_at": "2025-05-19T21:30:46.846Z",
-  "updated_at": "2026-04-08T04:03:37.736Z",
+  "updated_at": "2026-04-11T20:47:51.282Z",
   "comment": {
-    "text": "The translation key \"NoRoomsFound\" is used to display a message indicating that no rooms are available for selection in an empty screen form. It appears as a heading on an empty room selection screen and provides context for users when no rooms can be found.",
+    "text": "This is a heading displayed when no rooms are found in the application, indicating an empty state.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:19.588Z"
+    "updated_at": "2026-04-11T20:47:51.282Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/selector/sub-components/EmptySreen/EmptyScreenFormRoom.tsx",
-      "line_number": 73,
-      "context": "className=\"empty-image\"\n src={formRoomEmptyScreenImage}\n alt=\"empty-screen\"\n />\n <Heading level={3} className=\"empty-header\">\n {t(\"Common:NoRoomsFound\")}\n </Heading>\n <Text className=\"empty-description\">{description}</Text>\n <div className=\"empty_button-wrapper\" onClick={onCreateClickAction}>\n <SelectorAddButton\n isAction",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/components/selector/sub-components/EmptySreen/EmptyScreenFormRoom.tsx",
+      "line_number": 68,
+      "context": "return (\n <section className={styles.newEmptyScreen}>\n <FormRoomEmptyScreenImage className=\"empty-image\" />\n <Heading level={3} className=\"empty-header\">\n {t(\"NoRoomsFound\") || \"\"}\n </Heading>\n <Text className=\"empty-description\">{description}</Text>\n <div className=\"empty_button-wrapper\" onClick={onCreateClickAction}>\n <AddButton\n isAction",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -153,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'මමගෙ කාමරයක් හමුවේ් නැත.' means 'My room was not found,' which changes the meaning from a general 'No rooms found' to a personal 'My room was not found.'",
-          "suggestion": "කාමර කිසිවක් හමු නොවීය"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

@@ -3,16 +3,17 @@
   "content": "The quota of rooms is almost exhausted.",
   "content_en_sha1_hash": "a53e0908fec6be50fa0a49846a1efd994db59482",
   "created_at": "2025-05-19T21:30:53.728Z",
-  "updated_at": "2026-04-07T19:35:05.174Z",
+  "updated_at": "2026-04-11T21:19:35.097Z",
   "comment": {
-    "text": "This translation key is used to display a warning message indicating that the available rooms are almost exhausted. It appears in a dialog box in the UI, specifically in the \"RoomsContent\" component, and is intended to notify users of an impending room availability issue.",
+    "text": "This is a warning message displayed in a dialog, informing the user that the number of rooms they can create is nearing its limit based on their current plan.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:05.975Z"
+    "updated_at": "2026-04-11T21:19:35.097Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/sub-components/RoomsContent.tsx",
-      "line_number": 80,
+      "line_number": 81,
       "context": "</>\n );\n \n return (\n <>\n <Text fontWeight={600}>{t(\"RoomsQuotaAlmostExhausted\")}</Text>\n <br />\n <Text>\n {t(\"NumberOfRoomsAccordingToTariff\", {\n currentValue: usedRoomsCount,\n maxValue: maxCountRoomsByQuota,",
       "module": "/packages/client"
     }

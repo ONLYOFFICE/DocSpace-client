@@ -3,24 +3,25 @@
   "content": "Copy message",
   "content_en_sha1_hash": "26902efda37d4a30d3f6fd110ba9cc653bae0c8b",
   "created_at": "2025-10-27T16:14:24.116Z",
-  "updated_at": "2026-04-08T14:10:41.437Z",
+  "updated_at": "2026-04-11T20:56:15.691Z",
   "comment": {
-    "text": "This text appears as the tooltip on a button that copies a message. It informs the user that clicking the button will initiate a copy action for the message content. This helps users quickly duplicate and share messages.",
+    "text": "Tooltip for a button that copies the content of a chat message to the clipboard.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:42:45.026Z"
+    "updated_at": "2026-04-11T20:56:15.691Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/message/Buttons.tsx",
-      "line_number": 176,
-      "context": "<>\n <div className={styles.buttonsBlock}>\n <div\n className={styles.buttonsBlockItem}\n onClick={onCopyAction}\n title={t(\"CopyMessage\")}\n >\n <ReactSVG src={CopyIconUrl} />\n </div>\n \n {/*{isLast ? (*/}",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/buttons/index.tsx",
+      "line_number": 188,
+      "context": "<>\n <div className={styles.buttonsBlock}>\n <div\n className={styles.buttonsBlockItem}\n onClick={onCopyAction}\n title={t(\"CopyMessage\")}\n data-testid=\"copy-message-button\"\n >\n <CopyIcon />\n </div>",
+      "module": "/libs/ui-kit"
     },
     {
-      "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/message/index.tsx",
-      "line_number": 165,
-      "context": "})\n .join(\"\");\n \n copy(fullText);\n }}\n title={t(\"CopyMessage\")}\n >\n <ReactSVG src={CopyIconUrl} />\n </div>\n </div>\n </div>",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/index.tsx",
+      "line_number": 204,
+      "context": "})\n .join(\"\");\n \n copy(fullText);\n }}\n title={t(\"CopyMessage\")}\n >\n <CopyIcon />\n </div>\n </div>\n </div>",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -39,13 +40,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Mesajı surət əldə et' is a literal, word-for-word translation of 'Get a copy of the message' which sounds unnatural and grammatically awkward for a UI tooltip. In Azerbaijani UI, 'Copy' as a command is typically translated as 'Kopyala'.",
-          "suggestion": "Mesajı kopyala"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -111,13 +106,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '복사 메시지' literally means 'Copy message' as a noun phrase (like a title), whereas the context requires a verb phrase/command 'Copy the message'. In Korean UI, '메시지 복사' is the standard way to express the action of copying a message.",
-          "suggestion": "메시지 복사"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {

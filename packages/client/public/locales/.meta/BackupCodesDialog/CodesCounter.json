@@ -3,17 +3,18 @@
   "content": "codes:",
   "content_en_sha1_hash": "182fa94ceffa8e593b7c9b54ae58703edfb9445b",
   "created_at": "2025-05-19T21:30:57.036Z",
-  "updated_at": "2026-04-07T19:35:05.044Z",
+  "updated_at": "2026-04-13T14:59:05.747Z",
   "comment": {
-    "text": "This translation key is used to display a count of backup codes. It appears as a counter text in a dialog component and indicates the number of codes available for backup purposes.",
+    "text": "This is a short label indicating the number of backup codes. It appears next to a numerical value, for example, \"10 codes:\".",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:35.703Z"
+    "updated_at": "2026-04-11T21:03:16.713Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/BackupCodesDialog/index.js",
-      "line_number": 91,
-      "context": "<Text className=\"backup-codes-description-two\" lineHeight=\"20px\">\n {t(\"BackupCodesSecondDescription\")}\n </Text>\n \n <Text\n className={styles.backupCodesCounter}\n fontWeight={600}\n lineHeight=\"20px\"\n >\n {backupCodesCount} {t(\"CodesCounter\")}\n </Text>",
+      "line_number": 95,
+      "context": "<Text\n className={styles.backupCodesCounter}\n fontWeight={600}\n lineHeight=\"20px\"\n >\n {backupCodesCount} {t(\"CodesCounter\")}\n </Text>\n \n <Text\n className=\"backup-codes-codes\"\n isBold",
       "module": "/packages/client"
     }
   ],

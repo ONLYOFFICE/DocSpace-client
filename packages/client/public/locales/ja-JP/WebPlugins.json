@@ -5,7 +5,7 @@
   "ExpandFunctionality": "プラグインSDKを使用した機能拡張",
   "GoToRepo": "リポジトリへ",
   "Metadata": "メタデータ",
-  "NeedSettings": "設定の入力",
+  "NeedSettings": "設定が必要です",
   "NoPlugins": "プラグインの追加なし",
   "NotNeedSettings": "設定入力が不要",
   "PluginCacheWarningDescription": "プラグインはバージョン番号に基づいてキャッシュされます。変更を適用するには、アップロードする前に<1>package.json</1>ファイルのバージョン番号をインクリメントしてください。バージョン番号が同じままである場合、システムはプラグインを更新しません。",

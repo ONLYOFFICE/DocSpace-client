@@ -3,16 +3,17 @@
   "content": "Sharing and renaming.",
   "content_en_sha1_hash": "c218ed34c6e78de9b5ec4a249d8cfd125fba42aa",
   "created_at": "2025-09-29T18:22:04.726Z",
-  "updated_at": "2026-04-08T08:24:28.656Z",
+  "updated_at": "2026-04-11T20:51:43.942Z",
   "comment": {
-    "text": "This text describes the \"Full Access\" permission level, specifically indicating the ability to share and rename a file. It appears within a UI component likely related to sharing files, providing users with a clear explanation of the permissions they are granting.",
+    "text": "This is a short description displayed in a sharing settings dialog. It explains the permissions granted by \"Full Access\" when the user is not the owner of the shared item, indicating they can share and rename it.",
     "is_auto": true,
-    "updated_at": "2025-09-29T18:23:55.064Z"
+    "updated_at": "2026-04-11T20:51:43.942Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 760,
+      "line_number": 761,
       "context": ".with(\n {\n fileType: P.any,\n access: ShareAccessRights.FullAccess,\n },\n () => t(\"Common:FullAccessDescriptionOther\"),\n )\n .with(\n {\n fileType: P.any,\n access: ShareAccessRights.ReadOnly,",
       "module": "/packages/shared"
     }
@@ -123,13 +124,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation 'przekazywanie nazw' means 'passing/transferring names', which is a mistranslation of 'renaming' (changing the name).",
-          "suggestion": "Udostępnianie i zmiana nazw."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {

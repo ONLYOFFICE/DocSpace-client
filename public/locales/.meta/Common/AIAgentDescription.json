@@ -3,13 +3,21 @@
   "content": "Enable AI assistant that can answer questions about completed form submissions.",
   "content_en_sha1_hash": "25c95f051ebf2427033cc2933c72d17229771c5e",
   "created_at": "2026-03-20T09:07:26.679Z",
-  "updated_at": "2026-04-08T17:35:45.154Z",
+  "updated_at": "2026-04-23T17:24:02.138Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a descriptive text that appears below a toggle switch. It explains the function of enabling an AI assistant for form submissions.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:00:45.074Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/AIAgentForm.tsx",
+      "line_number": 298,
+      "context": "isDisabled={toggleDisabled}\n onChange={onToggleAiAgent}\n />\n </div>\n <Text fontSize=\"12px\" fontWeight={400}>\n {t(\"Common:AIAgentDescription\")}\n </Text>\n {!tourStore.showMockItems && isCheckingProviders && (\n <div className={styles.statusRow}>\n <Loader type={LoaderTypes.track} size=\"16px\" />\n <Text fontSize=\"12px\">{t(\"Common:CheckingAIProviders\")}</Text>",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

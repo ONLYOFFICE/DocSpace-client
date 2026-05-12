@@ -3,11 +3,12 @@
   "content": "Authorization error",
   "content_en_sha1_hash": "14a7e84261230bbb4b1ed8b2fc1a0afddf92688d",
   "created_at": "2025-05-19T21:30:47.577Z",
-  "updated_at": "2026-04-08T02:09:03.213Z",
+  "updated_at": "2026-04-12T03:42:54.282Z",
   "comment": {
-    "text": "The \"ProviderLoginError\" translation key is used to display an error message when a user attempts to log in through a provider that has failed authorization. This error message appears on screen after an invalid login attempt and informs the user of the issue. It is displayed in a notification dialog box, typically triggered by an error caught during the login process.",
+    "text": "This is the title of a toast message that appears when there is an error during the authorization process with an external provider.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:34:53.992Z"
+    "updated_at": "2026-04-11T20:45:50.239Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -177,13 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'овлашћење' (authorization/empowerment) in Serbian refers to the granting of permission or authority to someone, whereas in a technical login context, 'Authorization error' refers to the authentication/authorization process failing. 'Грешка при аутентификацији' or 'Грешка при овлашћавању' would be more accurate, but 'Грешка у овлашћењу' sounds like an error in the document of authorization itself.",
-          "suggestion": "Грешка при овлашћавању"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

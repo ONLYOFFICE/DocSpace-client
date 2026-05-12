@@ -3,11 +3,12 @@
   "content": "This folder is accessible via a shared link from its parent folder, but you can create a custom external link with specific permissions.",
   "content_en_sha1_hash": "f3f337f8ea7d04e160b4327acea94dc3fe5bf047",
   "created_at": "2025-08-26T11:15:03.897Z",
-  "updated_at": "2026-04-08T09:14:39.841Z",
+  "updated_at": "2026-04-11T20:52:22.536Z",
   "comment": {
-    "text": "This text explains that a folder can be accessed through a shared link from its parent folder. It also indicates the user has the option to create a custom external link with specific permissions. This description appears within a UI element, likely a dialog or panel, related to sharing or access control.",
+    "text": "This is a descriptive text appearing in a share information bar for a folder. It informs the user that the folder is accessible through a parent folder's shared link, but also offers the option to create a new, custom external link for it.",
     "is_auto": true,
-    "updated_at": "2025-08-26T11:26:49.474Z"
+    "updated_at": "2026-04-11T20:52:22.536Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -69,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation uses the plural 'yläkansioista' (from its parent folders), whereas the English text uses the singular 'its parent folder'.",
-          "suggestion": "Tämä kansio on käytettävissä jaetun linkin kautta sen yläkansiosta, mutta voit luoda oman ulkoisen linkin tietyillä käyttöoikeuksilla."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -117,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation incorrectly translates 'parent folder' as 'vecākā faila' (parent file) instead of 'vecākā mapē' (parent folder).",
-          "suggestion": "Šis mape ir pieejama, izmantojot kopīgu saiti no tās vecākās mapes, bet jūs varat izveidot pielāgotu ārēju saiti ar konkrētām atļaujām."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -135,13 +124,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical gender error: 'folder' in Polish is masculine ('ten folder'), but the translation uses the neuter form 'Ta folder'.",
-          "suggestion": "Ten folder jest dostępny za pomocą udostępnionego linku z folderu nadrzędnego, ale możesz utworzyć niestandardowy zewnętrzny link z określonymi uprawnieniami."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {

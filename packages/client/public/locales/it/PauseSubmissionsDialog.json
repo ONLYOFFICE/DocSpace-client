@@ -1,5 +1,5 @@
 {
   "Description1": "La modifica metterà in pausa le invii e nasconderà il modulo ai compilatori.",
   "Description2": "Puoi riprenderlo in seguito per continuare a raccogliere le risposte.",
-  "Title": "Metti in pausa le invii per modificare?"
+  "PauseSubmissionsTitle": "Metti in pausa le invii per modificare?"
 }

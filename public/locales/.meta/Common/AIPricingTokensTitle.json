@@ -3,13 +3,21 @@
   "content": "Tokens",
   "content_en_sha1_hash": "c38c6c1f3a2743f8626703abb302e403d20ff81c",
   "created_at": "2026-04-10T13:53:44.621Z",
-  "updated_at": "2026-04-10T13:53:44.621Z",
+  "updated_at": "2026-04-11T20:59:48.973Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a section title in the AI service pricing details, indicating the unit of measurement for AI usage.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:59:48.973Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/PricingBillingBody.tsx",
+      "line_number": 77,
+      "context": "</Text>\n \n <div className={styles.pricingSection}>\n <div className={styles.pricingSectionHeader}>\n <Text fontSize=\"14px\" fontWeight=\"700\">\n {t(\"AIPricingTokensTitle\")}\n </Text>\n <HelpButton\n iconName={HelpReactSvgUrl}\n style={{ height: \"15px\", margin: \"0\" }}\n tooltipContent={",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

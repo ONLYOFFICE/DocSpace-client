@@ -3,16 +3,17 @@
   "content": "If checked all new users will receive welcome letter. Available only when Mail Attribute is mapped to LDAP.",
   "content_en_sha1_hash": "9d5bbfe758465098b39bf00c96aa285961833c28",
   "created_at": "2025-05-19T21:30:54.265Z",
-  "updated_at": "2026-04-07T19:35:05.148Z",
+  "updated_at": "2026-04-11T21:16:50.792Z",
   "comment": {
-    "text": "This translation key is used for the tooltip that explains when checking \"LdapSendWelcomeLetter\" enables sending welcome letters to new users, available only when a specific mail attribute is mapped to LDAP. It appears as a HelpButton in an Advanced Settings section of the PortalSettings page.",
+    "text": "This is a tooltip that appears when hovering over the \"Send Welcome Letter\" checkbox. It explains that new users will receive a welcome email if the checkbox is enabled, but only if the Mail Attribute is mapped to LDAP.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:04.218Z"
+    "updated_at": "2026-04-11T21:16:50.792Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AdvancedSettings.js",
-      "line_number": 68,
+      "line_number": 70,
       "context": "label={t(\"LdapSendWelcomeLetter\")}\n isChecked={isSendWelcomeEmail}\n onChange={onChangeSendWelcomeEmail}\n isDisabled={!isLdapEnabled || isUIDisabled}\n />\n <HelpButton tooltipContent={t(\"LdapSendWelcomeLetterTooltip\")} />\n </div>\n \n <div className=\"ldap_advanced-settings-header\">\n <Checkbox\n className=\"ldap_checkbox-disable-email-verification\"",
       "module": "/packages/client"
     }

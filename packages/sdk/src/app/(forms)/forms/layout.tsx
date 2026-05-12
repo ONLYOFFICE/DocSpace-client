@@ -38,9 +38,11 @@ import { getSettings } from "@/api/settings";
 import {
   FILTER_HEADER,
   LIBRARY_ID_HEADER,
+  PAGE_COUNT,
   ROOM_ID_HEADER,
   PATHNAME_HEADER,
 } from "@/utils/constants";
+import { FormsSection } from "@/types/forms";
 
 import FormsShell from "./layout.client";
 
@@ -63,6 +65,11 @@ export default async function FormsServerLayout({
     pathname.endsWith("/my-forms") ||
     pathname.endsWith("/forms") ||
     pathname.endsWith("/forms/");
+  const isInProgressRoute =
+    pathname.endsWith("/in-progress") || pathname.endsWith("/in-progress/");
+  const isCompletedRoute =
+    pathname.endsWith("/completed-forms") ||
+    pathname.endsWith("/completed-forms/");
 
   const filterHeader = hdrs.get(FILTER_HEADER) || "";
   const filterParams = new URLSearchParams(filterHeader);
@@ -131,6 +138,32 @@ export default async function FormsServerLayout({
   const initialFiles = isMyFormsRoute ? roomData?.files : undefined;
   const initialTotal = isMyFormsRoute ? roomData?.total : undefined;
 
+  const virtualFolderIdToPrefetch = isInProgressRoute
+    ? inProgressFolderId
+    : isCompletedRoute
+      ? doneFolderId
+      : undefined;
+
+  const virtualFolderData = virtualFolderIdToPrefetch
+    ? await getFormsFolder(
+        virtualFolderIdToPrefetch,
+        (() => {
+          const f = FilesFilter.getDefault();
+          f.pageCount = PAGE_COUNT;
+          return f;
+        })(),
+      ).catch(() => undefined)
+    : undefined;
+
+  const initialFolders = virtualFolderData?.folders;
+  const initialSection = isMyFormsRoute
+    ? FormsSection.MyForms
+    : isInProgressRoute
+      ? FormsSection.InProgress
+      : isCompletedRoute
+        ? FormsSection.CompletedForms
+        : undefined;
+
   return (
     <FormsShell
       commonData={{
@@ -149,6 +182,8 @@ export default async function FormsServerLayout({
         inProgressFolderId,
         initialFiles,
         initialTotal,
+        initialFolders,
+        initialSection,
       }}
     >
       {children}

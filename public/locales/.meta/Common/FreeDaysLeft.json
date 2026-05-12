@@ -3,16 +3,17 @@
   "content": "{{count}} Free days left",
   "content_en_sha1_hash": "00a662738fd8c9e8f2a747858170f89777247fd7",
   "created_at": "2025-05-26T07:15:43.878Z",
-  "updated_at": "2026-04-08T08:36:03.957Z",
+  "updated_at": "2026-04-11T20:51:52.549Z",
   "comment": {
-    "text": "This translation key is used to display a countdown message indicating free trial days remaining. It appears in the UI as a label on a payments component, providing users with a visual representation of their trial period duration.",
+    "text": "This is a text label indicating the remaining days of a free trial period. It appears on the payment page, with `{{count}}` representing the number of days.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:05:25.865Z"
+    "updated_at": "2026-04-11T20:51:52.549Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/TariffTitleContainer.tsx",
-      "line_number": 87,
+      "line_number": 88,
       "context": "[styles.isTrial]: isTrial,\n })}\n fontWeight={600}\n fontSize=\"14px\"\n >\n {t(\"FreeDaysLeft\", { count: Number(trialDaysLeft) })}\n </Text>\n );\n }\n \n if (!isLifetimeLicense && isGracePeriod) {",
       "module": "/packages/shared"
     }

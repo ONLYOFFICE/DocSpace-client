@@ -143,7 +143,8 @@ const ScopesBlock = ({
 							fontWeight={600}
 							lineHeight="16px"
 						>
-							{t(`${name}`)}
+							{/* biome-ignore lint/plugin/no-dynamic-i18n-key: name is an already-translated string returned by getScopeTKeyName; keys are declared as literals inside that helper */}
+							{t(name)}
 						</Text>
 
 						{value.read?.name ? (
@@ -162,7 +163,8 @@ const ScopesBlock = ({
 								>
 									{value.read?.name}
 								</Text>{" "}
-								— {t(`${value.read?.tKey}`)}
+								{/* biome-ignore lint/plugin/no-dynamic-i18n-key: tKey keys are declared as literals in getScopeTKeyDescription */}
+								— {t(value.read?.tKey ?? "")}
 							</Text>
 						) : null}
 						{value.write?.name ? (
@@ -181,7 +183,8 @@ const ScopesBlock = ({
 								>
 									{value.write?.name}
 								</Text>{" "}
-								— {t(`${value.write?.tKey}`)}
+								{/* biome-ignore lint/plugin/no-dynamic-i18n-key: tKey keys are declared as literals in getScopeTKeyDescription */}
+								— {t(value.write?.tKey ?? "")}
 							</Text>
 						) : null}
 					</StyledScopesName>

@@ -3,11 +3,12 @@
   "content": "Reset to default",
   "content_en_sha1_hash": "39c90eb758c57422548baebb38a39652279feb65",
   "created_at": "2026-02-18T14:56:29.456Z",
-  "updated_at": "2026-04-09T01:42:53.818Z",
+  "updated_at": "2026-04-11T21:22:39.029Z",
   "comment": {
-    "text": "This text appears on a button or action within a settings interface, likely within a dialog. It indicates an action to revert settings or templates to their original, default configuration. Translators should ensure the wording conveys the meaning of restoring to a pre-defined state.",
+    "text": "This is a button label and a dialog title. It indicates an action to revert settings or a template to their original, factory-set values.",
     "is_auto": true,
-    "updated_at": "2026-03-20T10:26:12.299Z"
+    "updated_at": "2026-04-11T21:22:39.029Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -18,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/DefaultTemplates/TemplatesRow.tsx",
-      "line_number": 134,
+      "line_number": 135,
       "context": "disabled: false,\n icon: DownloadIcon,\n },\n {\n key: \"reset\",\n label: t(\"Settings:ResetToDefault\"),\n onClick: () => setIsDialogVisible(true),\n disabled: false,\n icon: ResetIcon,\n },\n ];",
       "module": "/packages/client"
     }
@@ -39,13 +40,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation is grammatically incorrect and incomplete. 'Sıfırlanaraq standart vəziyyətə' translates roughly to 'By being reset to default state', which is a participle phrase rather than an imperative action/button label. It lacks a verb to indicate the action of resetting.",
-          "suggestion": "Standart vəziyyətə qaytar"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -177,13 +172,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'podnasadnje' is not a standard Slovenian term for 'default'. It appears to be a literal or incorrect derivation. The correct term for 'default' in a technical context is 'osnovno' or 'privzeto'.",
-          "suggestion": "Ponastavi na privzeto"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
@@ -195,13 +184,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation contains a typo ('Повврати' instead of 'Поврати') and uses a non-standard/incorrect term 'подефолтно' which is a transliteration of English rather than a proper Serbian word.",
-          "suggestion": "Поврати на подразумевано"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -219,18 +202,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "suspicious_length",
-          "description": "Translation is 6.4x longer than English (103 vs 16 chars) — possibly duplicated text",
-          "suggestion": ""
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The translation consists of a single word repeated excessively, which is nonsensical and does not convey the meaning of 'Reset to default'.",
-          "suggestion": "Скинути до стандартних"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

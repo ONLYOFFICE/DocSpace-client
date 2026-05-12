@@ -3,18 +3,25 @@
   "content": "Drop to: {{folderName}}",
   "content_en_sha1_hash": "e078085b1f00e4e3d886ab2241801879621c6a7f",
   "created_at": "2025-08-11T18:11:29.863Z",
-  "updated_at": "2026-04-08T11:36:25.351Z",
+  "updated_at": "2026-04-13T14:59:06.032Z",
   "comment": {
-    "text": "This key displays a tooltip on a button indicating the destination folder when dropping a file. The text \"Drop to: {{folderName}}\" informs the user where the file will be placed. Translators should ensure the destination folder name is clearly communicated.",
+    "text": "This is a tooltip that appears when dragging an item, indicating the target folder where the item will be dropped. `{{folderName}}` is the name of the destination folder.",
     "is_auto": true,
-    "updated_at": "2025-08-11T18:12:30.269Z"
+    "updated_at": "2026-04-11T20:54:38.687Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/operations-progress-button/PreviewButton.tsx",
-      "line_number": 300,
-      "context": "tooltipContent={\n animationState !== \"hidingUnder\" &&\n animationState !== \"dropping\" &&\n (dropTargetFolderName || lastKnownTitle) ? (\n <Text fontWeight={600} fontSize=\"14px\">\n {t(\"Common:DropToLocation\", {\n folderName: dropTargetFolderName || lastKnownTitle,\n })}\n </Text>\n ) : null\n }",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/components/operations-progress-button/PreviewButton.tsx",
+      "line_number": 305,
+      "context": "tooltipContent={\n animationState !== \"hidingUnder\" &&\n animationState !== \"dropping\" &&\n (dropTargetFolderName || lastKnownTitle) ? (\n <Text fontWeight={600} fontSize=\"14px\">\n {/* t(\"Common:DropToLocation\", { folderName: dropTargetFolderName || lastKnownTitle }) */}\n {t(\"DropToLocation\", {\n folderName: dropTargetFolderName! || lastKnownTitle!,\n })}\n </Text>\n ) : null",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/components/operations-progress-button/PreviewButton.tsx",
+      "line_number": 306,
+      "context": "animationState !== \"hidingUnder\" &&\n animationState !== \"dropping\" &&\n (dropTargetFolderName || lastKnownTitle) ? (\n <Text fontWeight={600} fontSize=\"14px\">\n {/* t(\"Common:DropToLocation\", { folderName: dropTargetFolderName || lastKnownTitle }) */}\n {t(\"DropToLocation\", {\n folderName: dropTargetFolderName! || lastKnownTitle!,\n })}\n </Text>\n ) : null\n }",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -33,13 +40,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation 'En: {{folderName}} düşün' translates to 'Think: {{folderName}}' or 'Think about {{folderName}}', which is a completely wrong meaning. The English 'Drop to' refers to the action of dragging and dropping a file into a destination.",
-          "suggestion": "{{folderName}} qovluğuna buraxın"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -51,13 +52,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech translation 'Uložit do:' means 'Save to:', which describes a different action than 'Drop to:'. In the context of drag-and-drop, 'Drop to:' refers to the destination of the drop action, whereas 'Save to:' implies a command to save a file.",
-          "suggestion": "Přetáhnout do: {{folderName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -111,13 +106,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation '내보내기 위치' means 'Export location', which implies a deliberate export action. The English 'Drop to' refers to a drag-and-drop interaction. The translation should reflect the action of dropping a file.",
-          "suggestion": "{{folderName}}(으)로 드롭"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -129,13 +118,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian verb 'Noklusēt' means 'to set as default' (e.g., setting a default browser), which is incorrect in the context of dragging and dropping a file. The correct term for 'dropping' an object in this context should relate to 'nometīt' or 'pārvietot'.",
-          "suggestion": "Nomet uz: {{folderName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -183,25 +166,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation 'Uložiť do:' means 'Save to:', which describes an action rather than the destination location indicated by 'Drop to:'. In the context of a drag-and-drop tooltip, it should indicate where the item will land.",
-          "suggestion": "Priložiť do: {{folderName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Shrani v:' means 'Save to:', which describes a different action than 'Drop to:'. While similar in context, 'Drop' refers to the drag-and-drop action, whereas 'Save' refers to the storage action.",
-          "suggestion": "Prevrni v: {{folderName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

@@ -33,6 +33,7 @@ import {
 } from "@docspace/ui-kit/components/table";
 import { Text } from "@docspace/ui-kit/components/text";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { Encoder } from "@docspace/ui-kit/utils/encoder";
 import {
   Avatar,
   AvatarRole,
@@ -179,10 +180,10 @@ const TableRow = (props: TableRowProps) => {
           <Text
             fontSize="12px"
             fontWeight={600}
-            title={item.createBy?.displayName}
+            title={Encoder.htmlDecode(item.createBy?.displayName ?? "")}
             truncate
           >
-            {item.createBy?.displayName}
+            {Encoder.htmlDecode(item.createBy?.displayName ?? "")}
           </Text>
         </TableCell>
         <TableCell>

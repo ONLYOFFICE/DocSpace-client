@@ -3,13 +3,21 @@
   "content": "Output ({{currency}}/1M)",
   "content_en_sha1_hash": "e02b245e12993218dee7e0ca1be519a09823ecfc",
   "created_at": "2026-04-10T13:53:45.567Z",
-  "updated_at": "2026-04-10T13:53:45.567Z",
+  "updated_at": "2026-04-12T05:18:59.229Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a table column header that displays the output cost of an AI model. The `{{currency}}` variable will be replaced with a currency symbol (e.g., $, €, ¥).",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:47:04.900Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/sub-components/ModelSettingsTable/TableView/TableHeader.tsx",
+      "line_number": 42,
+      "context": "resizable: true,\n minWidth: 120,\n },\n {\n key: \"Output\",\n title: t(\"OutputCurrency\", { currency: aiModelsCurrencySymbol }),\n enable: true,\n resizable: true,\n minWidth: 120,\n },\n {",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

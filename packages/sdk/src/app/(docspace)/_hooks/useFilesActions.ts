@@ -43,7 +43,7 @@ export default function useFilesActions({ t }: UseFilesActionsProps) {
         file.viewAccessibility.ImageView || file.viewAccessibility.MediaView;
 
       if (!isMediaOrImage && openFileOverride) {
-        openFileOverride(file);
+        openFileOverride(file, preview);
         return;
       }
 

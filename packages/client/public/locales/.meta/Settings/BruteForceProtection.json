@@ -3,22 +3,23 @@
   "content": "Brute Force Protection",
   "content_en_sha1_hash": "ad05e298131255f6f589995a3c3f681dfa43a007",
   "created_at": "2025-05-19T21:30:50.820Z",
-  "updated_at": "2026-04-09T04:02:51.668Z",
+  "updated_at": "2026-04-23T17:24:02.039Z",
   "comment": {
-    "text": "This translation key is used to display a description of \"Brute Force Protection\" in the portal settings category, particularly on the mobile view and within the security access portal. It appears as a subtitle next to the category title, helping users understand its purpose.",
+    "text": "This is a section title in the portal settings, referring to a security feature that prevents automated attempts to guess login credentials.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:35.931Z"
+    "updated_at": "2026-04-11T21:25:26.722Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 45,
-      "context": "import { TrustedMailSection } from \"./trustedMail\";\n import { InvitationSettingsSection } from \"./invitationSettings\";\n import { IpSecuritySection } from \"./ipSecurity\";\n import { AdminMessageSection } from \"./adminMessage\";\n import { SessionLifetimeSection } from \"./sessionLifetime\";\n import { BruteForceProtectionSection } from \"./bruteForceProtection\";\n import { DevToolsAccessSection } from \"./devToolsAccess\";\n \n import MobileView from \"./mobileView\";\n \n const HEADER_HEIGHT_DESKTOP = 69;",
+      "line_number": 310,
+      "context": "<IpSecuritySection />\n \n <StyledSettingsSeparator />\n \n <Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"BruteForceProtection\")}\n </Text>\n \n <BruteForceProtectionSection />\n \n <StyledSettingsSeparator />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 117,
+      "line_number": 118,
       "context": "}\n url=\"/portal-settings/security/access-portal/ip\"\n onClickLink={onClickLink}\n />\n <CategoryItem\n title={t(\"BruteForceProtection\")}\n subtitle={t(\"BruteForceProtectionDescriptionMobile\")}\n url=\"/portal-settings/security/access-portal/brute-force-protection\"\n onClickLink={onClickLink}\n />\n <CategoryItem",
       "module": "/packages/client"
     },
@@ -39,37 +40,19 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation 'الحماية من الاعتداء' means 'Protection from Assault/Attack' in a general or physical sense. In a cybersecurity context, 'Brute Force Protection' should specifically refer to 'Brute Force' attacks (attempts to crack passwords via trial and error).",
-          "suggestion": "الحماية من هجمات القوة الغاشمة"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Brute Force' in a cybersecurity context refers to a specific type of attack (trial-and-error). The translation 'Kobud gücdən' is a literal translation of 'brute force' as in physical strength/violence, which is incorrect for technical security terminology.",
-          "suggestion": "Brüt qüvvə hücumlarından qorunma"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Груба Сила' is a literal, word-for-word translation of 'Brute Force' that does not convey the technical cybersecurity meaning. In Bulgarian, 'Brute Force' in the context of cyberattacks is typically translated as 'Brute Force атака' or 'Метод на груба сила', but 'Защита от груба сила' sounds like protection against physical strength/violence.",
-          "suggestion": "Защита от Brute Force атаки"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -99,13 +82,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Väsytyshyökkäys' is a literal/incorrect translation for 'Brute Force attack' in a cybersecurity context. In Finnish technical terminology, 'Brute force' is typically used as is, or translated as 'raaka voima' or 'väkivaltainen hyökkäys'. 'Väsytys' means 'weariness' or 'tiring out', which does not convey the technical meaning of a brute force attack.",
-          "suggestion": "Brute force -suojaus"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -117,13 +94,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Կոպիտ ուժի պաշտպանություն' is a literal, word-for-word translation of 'Brute Force' that does not convey the technical cybersecurity meaning. In Armenian technical terminology, 'Brute Force' (an attack method) should be translated as 'կոպիտ ուժային հարձակում' or similar, rather than 'կոպիտ ուժ' (which implies physical violence or crude strength).",
-          "suggestion": "Brute-force հարձակումների պաշտպանություն"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -135,13 +106,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "wrong_language",
-          "description": "The Japanese translation is identical to the English text (Latin script) instead of being translated into Japanese.",
-          "suggestion": "ブルートフォース攻撃保護"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -153,13 +118,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses a mix of English and Lao in an incorrect grammatical order. 'Brute Force' is left in English, and the Lao word for 'Protection' (ການປົກປ້ອງ) is placed after it, resulting in a fragmented phrase rather than a cohesive term.",
-          "suggestion": "ການປົກປ້ອງການໂຈມຕີແບບ Brute Force"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -213,37 +172,19 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'hrubá sila' is a literal translation of 'brute force' used in physical contexts (e.g., physical strength). In cybersecurity, 'brute force' refers to a specific type of attack (brute-force attack), which should be translated using the technical term 'brutálna sila' or 'brutálna sila (útok)'.",
-          "suggestion": "Ochrana proti brutálnej sile"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Zaščita pred vdorom' means 'Protection against intrusion/breach', which is a general security term. 'Brute Force Protection' specifically refers to protection against repeated automated attempts to guess credentials. While related, it is not a precise technical translation.",
-          "suggestion": "Zaščita pred brute force napadi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order is unnatural and grammatically incorrect in Serbian. 'Brute Force' is left in English while the noun 'заштита' (protection) follows it, creating a broken phrase. In Serbian, the modifier should precede the noun or the entire term should be translated/adapted.",
-          "suggestion": "Заштита од brute force напада"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -261,13 +202,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Захист від грубої сили' is a literal translation of 'Brute Force' in a physical sense (physical violence/strength). In a cybersecurity context, 'Brute Force' refers to a type of attack (brute-force attack), which should be translated using technical terminology.",
-          "suggestion": "Захист від перебору паролів"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -279,13 +214,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '安全保护' (Security Protection) is too generic and fails to convey the specific technical meaning of 'Brute Force Protection'. It misses the 'Brute Force' aspect of the security feature.",
-          "suggestion": "暴力破解防护"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

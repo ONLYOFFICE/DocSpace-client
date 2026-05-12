@@ -3,11 +3,12 @@
   "content": "No files or folders match this filter. Try another or remove the filter to view all files.",
   "content_en_sha1_hash": "f2861dacb0262bcf7db8f51e73d24b3a7e422750",
   "created_at": "2025-05-19T21:30:44.832Z",
-  "updated_at": "2026-04-08T10:57:15.219Z",
+  "updated_at": "2026-04-11T20:54:00.052Z",
   "comment": {
-    "text": "\"No files or folders match this filter. Try another or remove the filter to view all files.\" This translation key is used in a UI element to display a message when a file filter does not return any results, prompting the user to adjust their search or remove the filter. It appears in an empty filter container component.",
+    "text": "This is an empty state message displayed when no files or folders match the applied filter in the file list. It suggests trying a different filter or removing the current one.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:30.431Z"
+    "updated_at": "2026-04-11T20:54:00.052Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -15,6 +16,12 @@
       "line_number": 74,
       "context": "const descriptionText = isAIAgentsFolder\n ? t(\"Common:EmptyFilterAIAgentsDescription\")\n : isRooms\n ? t(\"Common:EmptyFilterRoomsDescription\")\n : t(\"Common:EmptyFilterFilesDescription\");\n \n const getIconURL = () => {\n if (isAIAgentsFolder) {\n return theme.isBase ? (\n <EmptyFilterAIAgentsLightIcon />",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/empty-view/index.tsx",
+      "line_number": 37,
+      "context": "? t(\"Common:NoFindingsFound\")\n : isRoot\n ? getRootTitle(t)\n : getTitle(t);\n const description = isFiltered\n ? t(\"Common:EmptyFilterFilesDescription\")\n : isRoot\n ? getRootDescription(t)\n : getDescription(t);\n const icon = isFiltered\n ? getFilterIcon(isBaseTheme)",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

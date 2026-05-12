@@ -3,11 +3,12 @@
   "content": "Number of attempts",
   "content_en_sha1_hash": "1fdff331916efb2b880604cb7c80296a41565cd7",
   "created_at": "2025-05-19T21:30:52.094Z",
-  "updated_at": "2026-04-09T02:17:40.379Z",
+  "updated_at": "2026-04-11T21:23:12.315Z",
   "comment": {
-    "text": "The \"NumberOfAttempts\" translation key is used to display the label for a field that shows the number of attempts allowed or made by a user. It appears in an input container on a security settings page and should be translated as the text \"Number of attempts\".",
+    "text": "This is a label for an input field where the user defines the number of failed login attempts allowed before a brute-force protection action is triggered.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:51.279Z"
+    "updated_at": "2026-04-11T21:23:12.315Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Təşəbbüslərin' means 'initiatives'. In the context of security settings and brute force protection, 'attempts' should be translated as 'cəhd' (attempt).",
-          "suggestion": "Cəhd sayı"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {

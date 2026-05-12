@@ -1,18 +1,17 @@
 {
-  "AccessingProblem": "기존 사용자인데 이 스페이스에 액세스하는 데 문제가 있는 경우 관리자에게 문의하시기 바랍니다.",
   "CannotCreateNewRoom": "룸을 생성할 수 없습니다",
   "CannotCreatePaidUsers": "유료 사용자를 추가할 수 없습니다",
   "CannotRestoreRoom": "룸을 복원할 수 없습니다",
   "ChooseNewPlan": "새로운 요금제를 선택하시겠습니까?",
+  "GracePeriodActive": "유예 기간은 <1>{{fromDate}}부터 {{byDate}}까지</1> 유효합니다 (남은 일수: {{delayDaysCount}}).",
+  "LicenseExpiredRestriction": "새 사용자를 추가하거나 새 방을 만들 수 없습니다. 라이선스가 만료되었습니다.",
+  "LicenseGracePeriodInfo": "이 기간 동안 관리자는 새 방을 만들거나 새 사용자를 추가할 수 없습니다. 유예 기간이 끝나면, 새 라이선스가 활성화될 때까지 {{productName}}을(를) 사용할 수 없습니다.",
   "NewRoomWillExceedLimit": "현재 사용 중인 요금제에 포함된 룸 수가 한도에 도달했기 때문에 이 룸을 생성할 수 없습니다.",
   "NewUsersWillExceedMembersLimit": "현재 사용 중인 요금제에 포함된 관리자 수가 한도에 도달했기 때문에 새로운 유로 사용자를 추가할 수 없습니다.",
   "NotPossibleRoomRestoring": "현재 사용 중인 요금제에 포함된 룸 수가 한도에 도달했기 때문에 이 룸을 복원할 수 없습니다.",
   "NumberOfRoomsAccordingToTariff": "요금제에 따른 룸 수: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "요금제에 따른 관리자 수: {{currentValue}}/{{maxValue}}",
+  "PlanPaymentOverdue": "새 사용자 추가, 새 공간 생성 또는 AI 에이전트 생성 불가. {{planName}} 요금 납부 기한 초과.",
   "RoomsQuotaAlmostExhausted": "룸 할당량이 거의 소진되었습니다.",
-  "UsersQuotaAlmostExhausted": "유료 사용자 할당량이 거의 소진되었습니다.",
-  "GracePeriodActive": "유예 기간은 <1>{{fromDate}}부터 {{byDate}}까지</1> 유효합니다 (남은 일수: {{delayDaysCount}}).",
-  "LicenseExpired": "새 사용자를 추가하거나 새 방을 만들 수 없습니다. 라이선스가 만료되었습니다.",
-  "LicenseGracePeriodInfo": "이 기간 동안 관리자는 새 방을 만들거나 새 사용자를 추가할 수 없습니다. 유예 기간이 끝나면, 새 라이선스가 활성화될 때까지 {{productName}}을(를) 사용할 수 없습니다.",
-  "PlanPaymentOverdue": "새 사용자 추가, 새 공간 생성 또는 AI 에이전트 생성 불가. {{planName}} 요금 납부 기한 초과."
+  "UsersQuotaAlmostExhausted": "유료 사용자 할당량이 거의 소진되었습니다."
 }

@@ -122,19 +122,19 @@ const FileSelector = (props) => {
   const fileOptions = [
     {
       key: FilterType.FoldersOnly,
-      label: t(`Common:Folders`),
+      label: t("Common:Folders"),
     },
     {
       key: FilterType.DocumentsOnly,
-      label: t(`Common:Documents`),
+      label: t("Common:Documents"),
     },
     {
       key: FilterType.PresentationsOnly,
-      label: t(`Common:Presentations`),
+      label: t("Common:Presentations"),
     },
     {
       key: FilterType.SpreadsheetsOnly,
-      label: t(`Common:Spreadsheets`),
+      label: t("Common:Spreadsheets"),
     },
     {
       key: FilterType.PDFForm,
@@ -146,23 +146,23 @@ const FileSelector = (props) => {
     },
     {
       key: FilterType.DiagramsOnly,
-      label: t(`Common:Diagrams`),
+      label: t("Common:Diagrams"),
     },
     {
       key: FilterType.ArchiveOnly,
-      label: t(`Common:Archives`),
+      label: t("Common:Archives"),
     },
     {
       key: FilterType.ImagesOnly,
-      label: t(`Common:Images`),
+      label: t("Common:Images"),
     },
     {
       key: FilterType.MediaOnly,
-      label: t(`Common:Media`),
+      label: t("Common:Media"),
     },
     {
       key: FilterType.FilesOnly,
-      label: t(`Common:Files`),
+      label: t("Common:Files"),
     },
   ];
 

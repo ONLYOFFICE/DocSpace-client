@@ -3,11 +3,12 @@
   "content": "Authenticator application configuration will be reset.",
   "content_en_sha1_hash": "ffbed1b3d21982dae035e132087888bf52daaf37",
   "created_at": "2025-05-19T21:30:53.322Z",
-  "updated_at": "2026-04-09T06:55:22.293Z",
+  "updated_at": "2026-04-11T21:20:58.407Z",
   "comment": {
-    "text": "This translation key is used to display a message when resetting an authenticator application's configuration. It appears in a modal dialog and serves as a warning or notification to the user about the upcoming action.",
+    "text": "This is a sentence in a dialog body, informing the user that the authenticator application's configuration will be reset.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:57.748Z"
+    "updated_at": "2026-04-11T21:20:58.407Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation omits the word 'configuration', changing the meaning from 'the configuration will be reset' to 'the application will be reset'.",
-          "suggestion": "Autentifikasiya tətbiqinin konfiqurasiyası sıfırlanacaq."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -87,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'ԻՍԿՈՐՈՇԻՉ' (Iskoroshich) is a literal, non-standard translation for 'Authenticator'. In a technical context, 'Authenticator' should be transliterated or referred to as 'Ավտենտիֆիկատոր'.",
-          "suggestion": "Ավտենտիֆիկատոր հավելվածի կարգավորումները կվերականգնվեն:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -117,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'ຄໍາຮ້ອງສະຫມັກ' (application/request form) is used instead of 'ແອັບພລິເຄຊັນ' (software application). In this technical context, 'Authenticator application' refers to a software app, not a formal request or application form.",
-          "suggestion": "ການຕັ້ງຄ່າແອັບພລິເຄຊັນຢັ້ງຢືນຈະຖືກຕັ້ງຄືນໃຫມ່."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -171,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation uses 'ද්වි-සාධක යෙදුම' (Two-factor application) instead of 'Authenticator application'. While related, 'Authenticator' refers to the specific type of app, and the translation shifts the meaning slightly towards the concept of 2FA rather than the specific tool being reset.",
-          "suggestion": "අවසාධක යෙදුමේ (Authenticator application) වින්‍යාසය යළි සැකසෙනු ඇත."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

@@ -30,6 +30,7 @@ export const THEME_HEADER = "x-sdk-config-theme";
 export const LOCALE_HEADER = "x-sdk-config-locale";
 export const FILTER_HEADER = "x-sdk-config-filter";
 export const SHARE_KEY_HEADER = "x-sdk-config-share-key";
+export const STYLES_URL_HEADER = "x-sdk-config-styles-url";
 export const PATHNAME_HEADER = "x-pathname";
 
 export const PUBLIC_ROOM_TITLE_HEADER = "x-public-room-title";

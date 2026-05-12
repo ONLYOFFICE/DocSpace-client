@@ -3,16 +3,17 @@
   "content": "Form room",
   "content_en_sha1_hash": "d52d36abd86c722b352cf2a1f855ae5a1408dd21",
   "created_at": "2025-05-19T21:30:45.520Z",
-  "updated_at": "2026-04-08T08:45:32.923Z",
+  "updated_at": "2026-04-11T20:52:02.310Z",
   "comment": {
-    "text": "The translation key \"Common:FormRoom\" is used to display the label \"Form room\" in the UI, likely on a filter selection button or dropdown option. This text helps distinguish between different types of rooms, such as form rooms, public rooms, and collaboration rooms, in the application.",
+    "text": "This is a short label identifying a specific type of room within the application, used in filters and room type displays.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:05.565Z"
+    "updated_at": "2026-04-11T20:52:02.310Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 69,
+      "line_number": 70,
       "context": "case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoom\");\n \n case RoomsType.FormRoom:\n return t(\"Common:FormRoom\");\n default:\n break;\n }\n };",
       "module": "/packages/client"
     },
@@ -51,13 +52,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Стая за формуляри' means 'Room for forms/questionnaires', whereas the context indicates 'Form room' is a specific type of room (likely a Virtual Data Room variant) used as a category label, not a room containing physical or digital forms.",
-          "suggestion": "Форм стая"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -93,37 +88,19 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Salles de remplissages de formulaires' (Rooms for filling out forms) is overly wordy and grammatically awkward for a UI label. In the context of room types (Virtual Data Room, Public Room, etc.), it should be a concise noun phrase.",
-          "suggestion": "Salle de formulaires"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ձևի սենյակ' literally means 'Room of the shape/form' (as in a geometric shape or a physical form), which is incorrect in this technical context. In software/data management, 'Form' refers to a data entry form. The Armenian translation should reflect a 'Form-based room' or 'Room for forms'.",
-          "suggestion": "Ֆորմա սենյակ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "In the context of DocSpace (a digital workspace), 'Form room' refers to a specific type of virtual room/space (RoomsType.FormRoom), not a physical room containing forms ('Stanza dei moduli'). The translation 'Stanza dei moduli' implies a physical room where forms are kept, whereas it should be a functional room type.",
-          "suggestion": "Stanza modulo"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -135,25 +112,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '양식 방' (Yang-sik Bang) literally means 'Template Room' or 'Style Room'. In the context of a 'Form Room' (a specific type of data/virtual room), 'Form' refers to a structured document or data entry form. '양식' is a literal translation of 'form' (as in a template), but in software UI, 'Form' as a room type is better expressed as '폼' (transliteration) or '서식' to avoid confusion with 'style/format'. However, the most critical issue is that '양식 방' sounds like a physical room for templates rather than a functional software room type.",
-          "suggestion": "폼 룸"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ຫ້ອງຟອມ' is a transliteration of 'Form Room' (Room + Form) rather than a translation of the functional concept. In this context, 'Form' refers to a data entry form or a specific type of virtual room, but 'ຟອມ' is just the phonetic sound of the English word 'Form'.",
-          "suggestion": "ຫ້ອງແບບຟອມ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -165,25 +130,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Formulier kamer' literally means 'Form room' in the sense of a room containing a paper/digital form, but in the context of 'Virtual Data Room' and 'Collaboration Room', 'Form Room' refers to a specific room type. In Dutch, 'Form' (as in shape/format) is not 'Formulier'. However, more critically, 'Formulier kamer' is grammatically incorrect as a compound noun in Dutch; it should be 'Formulierkamer' or 'Formulier-kamer'. Given the context of room types, it is likely a mistranslation of the concept.",
-          "suggestion": "Formkamer"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Pokój z formularzami' (Room with forms) changes the meaning from a specific room type 'Form room' to a description of a room containing forms. In the context of a room type filter, it should be a noun phrase identifying the category.",
-          "suggestion": "Pokój formularzy"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -201,13 +154,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Sală Formulare' means 'Forms Room' (a room for filling out forms), whereas the context indicates 'Form room' is a specific type of room (likely a Virtual Data Room variant) used to distinguish it from 'Public rooms' or 'Collaboration rooms'. In Romanian, 'Form' in this technical context should not be translated as 'Formulare' (forms/applications).",
-          "suggestion": "Sală Form"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -237,25 +184,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation is a literal word-for-word translation of 'Form' (as in a document/template) and 'Room' (as in a physical space), resulting in a nonsensical phrase in Serbian. In this context, 'Form' refers to a specific type of room (likely a Data Room or a room for forms/templates), and 'соба' is an incorrect/archaic term for a room in a software UI context.",
-          "suggestion": "Простор за обрасце"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Obrazac soba' is a literal word-for-word translation that is grammatically incorrect and nonsensical in Serbian. In this context, 'Form' refers to a specific type of room (likely a data room or a structured room), not a paper form. 'Obrazac' means a document/form to fill out, and 'soba' is a physical room. The translation fails to convey the technical concept of a 'Form Room' type.",
-          "suggestion": "Soba sa obrascima"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -279,25 +214,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '表单填写房间' (Form filling room) adds the verb 'filling' (填写), which is not present in the source 'Form room'. In the context of room types (Virtual Data Room, Public Room, etc.), 'Form room' refers to a specific category of room, not an action of filling out a form.",
-          "suggestion": "表单室"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Forma dhomë' is a literal word-for-word translation that results in a nonsensical phrase in Albanian. In this context, 'Form' refers to a specific type of room (likely a data room or a structured room), but 'Forma' in Albanian means 'Shape' or 'Form' (as in a document/shape), and 'dhomë' means 'room'. The combination is grammatically incorrect and does not convey the technical concept of a 'Form room' type.",
-          "suggestion": "Dhomë forme"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

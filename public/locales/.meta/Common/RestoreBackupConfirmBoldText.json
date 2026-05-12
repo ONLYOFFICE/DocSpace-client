@@ -3,17 +3,18 @@
   "content": "You are about to restore {{productName}} from a backup file.",
   "content_en_sha1_hash": "6039791e5b28c520e61f9beb72dc5ff5f50b10ea",
   "created_at": "2026-03-20T09:07:35.034Z",
-  "updated_at": "2026-04-08T01:20:09.429Z",
+  "updated_at": "2026-04-13T09:25:01.292Z",
   "comment": {
-    "text": "This key displays a confirmation message within a restore backup modal, informing the user that a backup restoration process for a specific product is about to begin. The text is presented in bold to emphasize the action being taken. Translators should ensure the wording clearly conveys the restoration of a product from a backup file.",
+    "text": "This is the bolded first part of a confirmation message in a modal dialog. It informs the user that they are about to restore the product from a backup file. `{{productName}}` will be replaced with the product's brand name.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:12:43.848Z"
+    "updated_at": "2026-04-11T20:44:57.180Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/restore-confirm-modal/index.tsx",
-      "line_number": 82,
-      "context": "<Text\n as=\"p\"\n fontWeight={600}\n className={styles.restoreBackupConfirmText}\n >\n {t(\"Common:RestoreBackupConfirmBoldText\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Text as=\"p\" className={styles.restoreBackupConfirmText}>\n {t(\"Common:RestoreBackupConfirmReplaceText\")}",
+      "line_number": 83,
+      "context": "<Text\n as=\"p\"\n fontWeight={600}\n className={styles.restoreBackupConfirmText}\n >\n {t(\"Common:RestoreBackupConfirmBoldText\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <Text as=\"p\" className={styles.restoreBackupConfirmText}>\n {t(\"Common:RestoreBackupConfirmReplaceText\")}",
       "module": "/packages/shared"
     }
   ],
@@ -39,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation is a fragment ('Before you restore...') rather than a complete sentence ('You are about to restore...'). It lacks the main verb/action, making it grammatically incomplete and failing to convey the intended meaning of an imminent action.",
-          "suggestion": "Предстои да възстановите {{productName}} от резервен файл."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -75,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation contains a grammatical error ('Olet aike') that makes the sentence nonsensical. It should be 'Olet aikeissa'.",
-          "suggestion": "Olet aikeissa palauttaa {{productName}} varmuuskopiointitiedostosta."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -123,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian verb 'parakstījis' means 'has signed', which makes the sentence 'You have signed to restore...', whereas the English 'are about to' indicates an imminent action.",
-          "suggestion": "Jūs drīz atjaunosiet {{productName}} no kopumācijas faila."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -177,19 +160,21 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The verb 'Skmerujete' is a misspelling/incorrect form of 'Zamýšľate' or 'Chystáte sa'. 'Skmerujete' does not exist in Slovak in this context and likely stems from a confusion with 'zamierate' or a typo, making the sentence nonsensical.",
-          "suggestion": "Zamýšľate obnoviť {{productName}} zo záložného súboru."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovenian phrase 'Na želite obnoviti' is grammatically incorrect and does not convey the meaning of 'You are about to restore'. The word 'želite' means 'you want', not 'you are about to'. The prefix 'Na' is not a standard Slovenian construction for expressing imminent action.",
+          "suggestion": "Nameravate obnoviti {{productName}} iz varnostne kopije. (You intend to restore {{productName}} from a backup file.) OR Obnoviti boste {{productName}} iz varnostne kopije. (You will restore {{productName}} from a backup file.)",
+          "checked_at": "2026-04-13T09:24:26.134Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {
@@ -201,25 +186,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "wrong_language",
-          "description": "The translation uses the Latin word 'fajla' instead of the Cyrillic 'фајла', violating the requirement for Serbian (Cyrillic).",
-          "suggestion": "Спреман сте да вратите {{productName}} из фајла за резервну копију."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Skrećete se ka' is a literal and incorrect translation of 'You are about to'. In Serbian, this sounds like 'You are turning towards' or 'You are deviating towards', which does not convey the intent of an imminent action.",
-          "suggestion": "Spremate se da vratite {{productName}} iz rezervne kopije."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

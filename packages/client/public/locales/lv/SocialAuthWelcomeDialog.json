@@ -1,8 +1,8 @@
 {
   "ChangeData": "Izmainīt datus un paroli",
+  "ClickButtonBelow": "Ja vēlaties pieslēgties, izmantojot savu e-pastu, lūdzu, norīciet savu paroli. <br/> Kad būsiet gatavs, lūdzu, noklikšķiniet uz tālāk esošās pogas.",
   "ContinueToProduct": "Turpiniet ar {{productName}}",
-  "GeneratedPassword": "Ģenerēts parole",
+  "GeneratedPassword": "Ģenerēta parole",
   "ProductNameDetail": "{{productName}} nosaukums",
-  "ReviewAccountDetails": "Lūdzu, atcerieties pārskatīt savus konta datus:",
-  "ClickButtonBelow": "Ja vēlaties pieslēgties, izmantojot savu e-pastu, lūdzu, norīciet savu paroli. <br/> Kad būsiet gatavs, lūdzu, noklikšķiniet uz tālāk esošās pogas."
+  "ReviewAccountDetails": "Lūdzu, atcerieties pārskatīt savus konta datus:"
 }

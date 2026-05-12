@@ -34,6 +34,7 @@ import { Button } from "@docspace/ui-kit/components/button";
 import RecoverAccessModalDialog from "@docspace/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog";
 import ErrorContainer from "@docspace/ui-kit/components/error-container/ErrorContainer";
 import { Link } from "@docspace/ui-kit/components/link";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const StyledBodyContent = styled.div`
   max-width: 480px;
@@ -79,21 +80,21 @@ const PortalUnavailable = ({ onLogoutClick }) => {
         visible={isVisible}
         t={t}
         emailPlaceholderText={t("Common:RegistrationEmail")}
-        textBody={t("PortalUnavailable:AccessingProblem", {
-          productName: t("Common:ProductName"),
+        textBody={t("PortalUnavailable:AccessingProblemContact", {
+          productName: getBrandName("ProductName"),
         })}
         onClose={onCloseDialog}
       />
       <ErrorContainer
         className="portal-unavailable_container"
         headerText={t("ErrorUnavailableText", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
         })}
       >
         <StyledBodyContent>
           <Text textAlign="center" className="portal-unavailable_text">
-            {t("PortalUnavailable:AccessingProblem", {
-              productName: t("Common:ProductName"),
+            {t("PortalUnavailable:AccessingProblemContact", {
+              productName: getBrandName("ProductName"),
             })}
           </Text>
           {!window.navigator.userAgent.includes("ZoomWebKit") &&
@@ -113,7 +114,7 @@ const PortalUnavailable = ({ onLogoutClick }) => {
             color="accent"
           >
             {t("PortalUnavailable:ContactAdministrator", {
-              productName: t("Common:ProductName"),
+              productName: getBrandName("ProductName"),
             })}
           </Link>
         </StyledBodyContent>

@@ -3,17 +3,18 @@
   "content": "Please note: you can enable RTL languages for the {{productName}} interface in the beta mode. RTL support for the editors will be available soon.",
   "content_en_sha1_hash": "fb20ee1d78cc2f8f9667ecd70cb1b191fa803c61",
   "created_at": "2025-05-19T21:30:43.263Z",
-  "updated_at": "2026-04-08T16:17:09.108Z",
+  "updated_at": "2026-04-11T20:58:22.119Z",
   "comment": {
-    "text": "This translation key is used to provide a tooltip message that explains how to enable Right-to-Left (RTL) languages in the {{productName}} interface. The message appears when hovering over the Beta Badge component and is intended to inform users about upcoming RTL support for the editors.",
+    "text": "This is a tooltip description for a beta badge. It informs users that RTL language support for the product interface is available in beta, and editor support is coming soon. `{{productName}}` will be replaced with the product's brand name.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:14.098Z"
+    "updated_at": "2026-04-11T20:58:22.119Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/components/beta-badge/index.tsx",
-      "line_number": 53,
-      "context": "}: BetaBadgeProps) => {\n const { t } = useTranslation([\"Common\", \"Settings\"]);\n \n const tooltipDescription = (\n <>\n {t(\"Common:BetaBadgeDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n {!withOutFeedbackLink ? (\n <Trans\n t={t}",
+      "line_number": 55,
+      "context": "}: BetaBadgeProps) => {\n const { t } = useTranslation([\"Common\", \"Settings\"]);\n \n const tooltipDescription = (\n <>\n {t(\"Common:BetaBadgeDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n {!withOutFeedbackLink ? (\n <Trans\n t={t}",
       "module": "/packages/shared"
     }
   ],
@@ -69,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'editors' (referring to text/document editors) was translated as 'toimittajille' (which means 'for journalists/reporters').",
-          "suggestion": "Huomaa: voit ottaa RTL-kielet käyttöön {{productName}}-käyttöliittymässä beta-tilassa. RTL-tuki editorille on saatavilla pian."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -123,13 +118,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'redactie' in Dutch refers to 'editorial staff' or 'the act of editing/redaction', whereas in this context 'editors' refers to the software components (document editors).",
-          "suggestion": "Let op: u kunt RTL-talen inschakelen voor de {{productName}}-interface in de bètamodus. RTL-ondersteuning voor de editors komt binnenkort beschikbaar."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -207,13 +196,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'editors' in this context refers to the document editing tools/software components, but 'người chỉnh sửa' translates to 'human editors' (people who edit).",
-          "suggestion": "Xin lưu ý: bạn có thể bật ngôn ngữ RTL cho giao diện {{productName}} ở chế độ beta. Hỗ trợ RTL cho các trình chỉnh sửa sẽ sớm được cung cấp."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
@@ -225,13 +208,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Ju lutemi vini re' is a literal translation of 'Please note' that sounds unnatural in Albanian for this context. While 'vini re' means 'note', 'Ju lutemi vini re' is grammatically awkward. More importantly, 'vini re' is often used as an imperative 'take note', but in a UI tooltip, 'Ju lutemi mbani parasysh' or simply 'Shënim:' is more appropriate. However, the most critical issue is that 'vini re' is being used as a direct translation of the polite 'Please note', which in Albanian UI context is better served by 'Ju bëjmë me dije' or 'Ju lutemi kini parasysh'.",
-          "suggestion": "Ju lutemi kini parasysh: mund të aktivizoni gjuhët RTL për ndërfaqen {{productName}} në modalitetin beta. Mbështetja RTL për redaktorët do të jetë e disponueshme së shpejti."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

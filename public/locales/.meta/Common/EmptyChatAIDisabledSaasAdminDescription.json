@@ -3,18 +3,19 @@
   "content": "The AI service is turned off, preventing this agent from processing chats or performing tasks. To restore full functionality, enable AI features in the {{productName}} settings.",
   "content_en_sha1_hash": "3701608d9d13b0f9a0ae4b7a8e7ac16d12d3d769",
   "created_at": "2025-11-03T12:10:17.296Z",
-  "updated_at": "2026-04-08T11:05:25.064Z",
+  "updated_at": "2026-04-11T20:54:07.025Z",
   "comment": {
-    "text": "This text explains to users, specifically SaaS administrators, that the AI service is disabled, preventing chat processing. It guides them to enable AI features in the product settings to restore functionality; it appears within a screen indicating lack of access.",
+    "text": "This is an error message displayed to a SaaS administrator when the AI service is disabled, explaining that the AI agent cannot process chats or perform tasks. It includes the `{{productName}}` variable for the product's brand name.",
     "is_auto": true,
-    "updated_at": "2025-11-03T12:13:29.098Z"
+    "updated_at": "2026-04-11T20:54:07.025Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/chat/components/chat-no-access-screen/index.tsx",
-      "line_number": 76,
-      "context": "aiChats: t(\"Common:AIChats\"),\n }),\n )\n // saas admin\n .with([false, true], () =>\n t(\"Common:EmptyChatAIDisabledSaasAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n // standalone/saas user\n .with([P._, false], () =>",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-no-access-screen/index.tsx",
+      "line_number": 80,
+      "context": "},\n ),\n )\n // saas admin\n .with([false, true], () =>\n t(\"EmptyChatAIDisabledSaasAdminDescription\", {\n productName: getBrandName(\"ProductName\"),\n }),\n )\n // standalone/saas user\n .with([P._, false], () =>",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -183,13 +184,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses the singular 'ćaskanje' (chatting/chatting process) instead of the plural 'chats' (conversations), which changes the scope of what the agent cannot process.",
-          "suggestion": "AI usluga je isključena, sprečavajući ovog agenta da obrađuje ćaskanja ili obavlja zadatke. Da biste vratili punu funkcionalnost, omogućite AI funkcije u podešavanjima {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -201,13 +196,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The abbreviation for AI (Artificial Intelligence) in Ukrainian is 'ШІ' (Штучний Інтелект), but the translation uses 'ШI' (Cyrillic 'Ш' followed by Latin 'I'). This is a character encoding error that looks like a typo.",
-          "suggestion": "Послуга ШІ вимкнена, що не дозволяє цьому агенту обробляти чати або виконувати завдання. Щоб відновити повну функціональність, увімкніть функції ШІ у налаштуваннях {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

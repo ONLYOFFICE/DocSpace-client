@@ -3,13 +3,21 @@
   "content": "Change scheduled: Subscription cancellation, {{fromSize}} → {{toSize}}",
   "content_en_sha1_hash": "9a5b3685f4aabcb578921d12e653603b2e33668f",
   "created_at": "2026-04-10T13:53:44.863Z",
-  "updated_at": "2026-04-10T13:53:44.863Z",
+  "updated_at": "2026-04-23T17:24:02.178Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a warning message displayed when a user has scheduled a subscription cancellation. It informs the user about the change from their current storage plan ({{fromSize}}) to a cancelled state ({{toSize}}).",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:57:38.624Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "line_number": 141,
+      "context": "const isScheduled = !!hasScheduledStorageChange;\n const isDowngrade = isScheduled && !isStorageCancellation();\n \n const warningTitle = isStorageCancellation()\n ? t(\"CancellationScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,\n })\n : t(\"DowngradeScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

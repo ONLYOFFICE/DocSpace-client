@@ -6,16 +6,11 @@
   height: 100%;
   position: relative;
   overflow: hidden;
-
-  @media (max-width: 767.9px) {
-    > :not(:first-child) {
-      display: none;
-    }
-  }
 }
 
 .headerEditing {
   flex: 0 1 auto;
+  align-self: stretch;
 }
 
 .headerRow {
@@ -23,11 +18,49 @@
   display: flex;
   align-items: center;
   gap: 16px;
+  align-self: stretch;
+}
+
+.burgerButton {
+  display: none;
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  margin-inline-start: -8px;
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--color-background-hover);
+    outline: none;
+  }
+
+  .burgerIcon {
+    display: block;
+    width: 20px;
+    height: 20px;
+
+    path {
+      fill: currentColor;
+    }
+  }
+
+  @include mixins.mobile {
+    display: inline-flex;
+  }
 }
 
 .headerNavigation {
   flex: 1;
   min-width: 0;
+  align-self: stretch;
   position: relative;
 }
 
@@ -56,12 +89,17 @@
   }
 }
 
+.root,
+.root * {
+  font-family: var(--font-face);
+}
+
 .root :global([class*="Navigation_item"]:not([class*="itemWrapper"])) {
   column-gap: 10px;
 }
 
 .root :global(.articleItemText) {
-  font-weight: 600;
+  font-weight: var(--article-item-text-weight, 600);
 }
 
 .sectionArea {
@@ -78,14 +116,25 @@
 
   :global([class*="Navigation_box"]) {
     min-width: var(--nav-dropdown-min-width, auto);
+    padding-top: var(--nav-dropbox-padding-top, 18px);
+
+    @include mixins.tablet-and-below {
+      padding-top: var(--nav-dropbox-padding-top, 14px);
+    }
+
+    @include mixins.mobile {
+      padding-top: var(--nav-dropbox-padding-top, 10px) !important;
+    }
   }
 
-  @media (max-width: 1023.9px) {
+  @include mixins.tablet-and-below {
     min-width: 280px;
   }
 
-  @media (max-width: 600px) {
+  @include mixins.mobile {
     min-width: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 }
 
@@ -125,11 +174,15 @@
   position: absolute;
   z-index: 300;
   inset-inline-end: 24px;
-  bottom: 24px;
+  bottom: calc(24px + env(safe-area-inset-bottom, 0));
 
   :global(.layout-progress-bar_wrapper) {
     position: static;
     width: fit-content;
     height: fit-content;
+  }
+
+  @include mixins.mobile {
+    inset-inline-end: 16px;
   }
 }

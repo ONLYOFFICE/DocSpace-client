@@ -3,11 +3,12 @@
   "content": "{{aiAgent}} quota has been successfully disabled.",
   "content_en_sha1_hash": "a2dbab9c75930c08562f4e10a66ae9ba252e85dc",
   "created_at": "2025-12-19T13:03:34.327Z",
-  "updated_at": "2026-04-10T08:21:04.400Z",
+  "updated_at": "2026-04-11T21:25:53.323Z",
   "comment": {
-    "text": "This key displays a success message in a toastr notification confirming that an AI agent quota has been disabled. The message includes the name of the AI agent, retrieved from a separate translation key \"Common:AIAgent\". Translators should ensure the AI agent name is accurately localized.",
+    "text": "Toast message. Appears after successfully disabling the AI Assistant quota. `{{aiAgent}}` will be replaced with \"AI Assistant\".",
     "is_auto": true,
-    "updated_at": "2025-12-22T10:10:48.074Z"
+    "updated_at": "2026-04-11T21:25:53.323Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -51,25 +52,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Quota' is used as a feminine noun in German ('die Quota'), but the article 'Das' (neuter) is used. More importantly, 'Quota' is an uncommon/Anglicized form in German; 'Kontingent' is the standard term. However, the most critical error is the grammatical gender mismatch with the article.",
-          "suggestion": "Das {{aiAgent}}-Kontingent wurde erfolgreich deaktiviert."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'ποσόστωση' (posostosi) is an incorrect and non-standard translation for 'quota' in this context. 'Ποσόστωση' refers to a process of determining a percentage or proportion, whereas 'quota' in software limits should be translated as 'όριο' (limit) or 'ποσό' (amount/quota).",
-          "suggestion": "Το όριο {{aiAgent}} απενεργοποιήθηκε επιτυχώς."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -135,13 +124,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation uses the wrong grammatical case for the noun 'limit'. 'Limitę' is the accusative case, but the sentence requires the nominative case 'Limit' to act as the subject.",
-          "suggestion": "Limit {{aiAgent}} został pomyślnie wyłączony."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -189,37 +172,19 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Albanian word 'fiksuar' means 'fixed' or 'repaired', whereas the English text means 'disabled'. In this context, 'fiksuar' is the opposite of the intended action.",
-          "suggestion": "Kota e {{aiAgent}} është çaktivizuar me sukses."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'неук инвалидирана' is a nonsensical/incorrect translation of 'disabled'. It appears to be a literal, broken translation of 'un-invalidated' or a machine translation error. In Serbian, 'disabled' in the context of a quota/feature should be 'onemogućena'.",
-          "suggestion": "{{aiAgent}} квота је успешно онемогућена."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation uses the plural 'Kvote' (Quotas), whereas the English source uses the singular 'quota'.",
-          "suggestion": "Kvota za {{aiAgent}} je uspešno onemogućena."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

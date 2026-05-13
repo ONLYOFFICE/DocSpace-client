@@ -30,16 +30,12 @@ import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
+import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 import type { InfoPanelViewType } from "SRC_DIR/store/InfoPanelStore";
 
 import { InfoPanelView } from "./index";
 
-type TSelection =
-  | TRoom
-  | TFolder
-  | TFile
-  | null
-  | (TRoom | TFolder | TFile)[];
+type TSelection = TRoom | TFolder | TFile | null | (TRoom | TFolder | TFile)[];
 
 type TPluginItem = {
   key: string;
@@ -56,6 +52,7 @@ export type TGetAvailableInfoPanelTabsParams = {
   isRecentFolder: boolean;
   enablePlugins: boolean;
   infoPanelItemsList: TPluginItem[];
+  selectedResultFileId?: number | null;
 };
 
 export type TInfoPanelTabsResult = {
@@ -76,6 +73,7 @@ export function getAvailableInfoPanelTabs({
   isRecentFolder,
   enablePlugins,
   infoPanelItemsList,
+  selectedResultFileId,
 }: TGetAvailableInfoPanelTabsParams): TInfoPanelTabsResult {
   const detailsOnly: TInfoPanelTabsResult = {
     tabs: [InfoPanelView.infoDetails],
@@ -130,6 +128,12 @@ export function getAvailableInfoPanelTabs({
   }
 
   tabs.push(InfoPanelView.infoHistory, InfoPanelView.infoDetails);
+
+  const showAIChatTab = !isAIAgents() || !!selectedResultFileId;
+
+  if (showAIChatTab) {
+    tabs.push(InfoPanelView.infoAIChat);
+  }
 
   if (!isAIAgentsSection && enablePlugins && infoPanelItemsList.length > 0) {
     const hasRoomType = "roomType" in selection && !!selection.roomType;

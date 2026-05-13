@@ -3090,7 +3090,33 @@ class FilesStore {
           "edit-index",
           "show-version-history",
         ]);
+
         fileOptions.push("download-encrypted");
+
+        const userKeys = this.userStore?.encryptionKeys;
+        const hasEncryptionKeys =
+          Array.isArray(userKeys) && userKeys.length > 0;
+
+        if (!hasEncryptionKeys) {
+          fileOptions = removeOptions(fileOptions, [
+            "fill-form",
+            "edit",
+            "open-pdf",
+            "edit-pdf",
+            "pdf-view",
+            "preview",
+            "view",
+            "download",
+            "filling-status",
+            "start-filling",
+            "reset-and-start-filling",
+            "separate-stop-filling",
+            "stop-filling",
+            "block-unblock-version",
+            "version",
+            "finalize-version",
+          ]);
+        }
       }
 
       // if (isFavoritesFolder || isRecentFolder) {
@@ -3291,7 +3317,9 @@ class FilesStore {
       return agentOptions;
     }
     if (isRoom) {
-      const canInviteUserInRoom = item.security?.EditAccess;
+      const canInviteUserInRoom = item.private
+        ? item.security?.EditRoom
+        : item.security?.EditAccess;
       const canRemoveRoom = item.security?.Delete;
 
       const canArchiveRoom = item.security?.Move;
@@ -3334,6 +3362,7 @@ class FilesStore {
         "separator1",
         "duplicate-room",
         "download",
+        "download-encrypted",
         "change-room-owner",
         "archive-room",
         "unarchive-room",
@@ -3341,6 +3370,10 @@ class FilesStore {
         "delete",
         "remove-shared-room",
       ];
+
+      if (!item.private) {
+        roomOptions = removeOptions(roomOptions, ["download-encrypted"]);
+      }
 
       if (!item.external) {
         roomOptions = removeOptions(roomOptions, ["remove-shared-room"]);
@@ -3371,6 +3404,7 @@ class FilesStore {
           "short-tour",
           "save-as-template",
           "duplicate-room",
+          "download",
         ]);
       }
 

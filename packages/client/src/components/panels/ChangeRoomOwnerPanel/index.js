@@ -24,13 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 import PeopleSelector from "@docspace/ui-kit/selectors/People";
 import { withTranslation } from "react-i18next";
 import Filter from "@docspace/shared/api/people/filter";
-import { EmployeeType, EmployeeStatus } from "@docspace/shared/enums";
+import {
+  EmployeeType,
+  EmployeeStatus,
+  MembersSubjectType,
+} from "@docspace/shared/enums";
+import { getUserList } from "@docspace/shared/api/people";
+import { getRoomMembers } from "@docspace/shared/api/rooms";
 import {
   ModalDialog,
   ModalDialogType,
@@ -52,6 +58,8 @@ const ChangeRoomOwner = (props) => {
     useModal = true,
     isAIAgent,
     updateInfoPanelMembers,
+    roomId,
+    isPrivateRoom,
   } = props;
 
   const handleClosePanel = () => {
@@ -85,6 +93,52 @@ const ChangeRoomOwner = (props) => {
     newFilter.employeeStatus = EmployeeStatus.Active;
     return newFilter;
   }, []);
+
+  const baseExclude = useMemo(
+    () => (isPrivateRoom && userId ? [userId] : []),
+    [isPrivateRoom, userId],
+  );
+
+  const [excludeItems, setExcludeItems] = useState(baseExclude);
+
+  useEffect(() => {
+    setExcludeItems(baseExclude);
+
+    if (!isPrivateRoom || !roomId) return undefined;
+
+    const controller = new AbortController();
+    let cancelled = false;
+
+    const adminsFilter = Filter.getDefault();
+    adminsFilter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
+    adminsFilter.employeeStatus = EmployeeStatus.Active;
+    adminsFilter.pageCount = 100;
+
+    Promise.all([
+      getRoomMembers(roomId, { count: 100 }, controller.signal),
+      getUserList(adminsFilter, controller.signal),
+    ])
+      .then(([members, admins]) => {
+        if (cancelled) return;
+        const memberIds = new Set(
+          (members?.items ?? [])
+            .filter((m) => m?.subjectType === MembersSubjectType.User)
+            .map((m) => m?.sharedTo?.id)
+            .filter(Boolean),
+        );
+        const nonMemberAdmins = (admins?.items ?? [])
+          .map((a) => a.id)
+          .filter((id) => id && !memberIds.has(id));
+        const merged = new Set([...baseExclude, ...nonMemberAdmins]);
+        setExcludeItems([...merged]);
+      })
+      .catch(() => {});
+
+    return () => {
+      cancelled = true;
+      controller.abort();
+    };
+  }, [isPrivateRoom, roomId, baseExclude]);
 
   const ownerIsCurrentUser = roomOwnerId === userId;
 
@@ -127,6 +181,9 @@ const ChangeRoomOwner = (props) => {
       filterUserId={roomOwnerId}
       currentUserId={userId}
       disableDisabledUsers
+      excludeItems={
+        isPrivateRoom && excludeItems.length ? excludeItems : undefined
+      }
       withInfo
       infoText={infoText}
       emptyScreenHeader={t("Common:NotFoundMembers")}
@@ -190,6 +247,8 @@ export default inject(
       userId: id,
       isAIAgent: room?.isAIAgent,
       updateInfoPanelMembers,
+      roomId: room?.id,
+      isPrivateRoom: !!(room?.isPrivateRoom ?? room?.private),
     };
   },
 )(

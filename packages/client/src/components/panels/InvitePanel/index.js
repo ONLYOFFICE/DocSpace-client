@@ -780,28 +780,32 @@ const InvitePanel = ({
     }
   };
 
+  const isPrivateRoom = !!selectedRoom?.private;
+
   const bodyInvitePanel = useMemo(() => {
     return (
       <div style={{ display: "contents" }} ref={invitePanelBodyRef}>
-        <ExternalLinks
-          t={t}
-          shareLinks={shareLinks}
-          setShareLinks={setShareLinks}
-          getInfo={getInfo}
-          roomType={roomType}
-          onChangeExternalLinksVisible={onChangeExternalLinksVisible}
-          externalLinksVisible={externalLinksVisible}
-          setActiveLink={setActiveLink}
-          activeLink={activeLink}
-          isMobileView={isMobileView}
-          setLinkSettingsPanelVisible={setLinkSettingsPanelVisible}
-          onSelectAccess={onSelectAccess}
-          copyLink={copyLink}
-          editLink={editLink}
-          isLinksToggling={isLinksToggling}
-          setIsLinksToggling={setIsLinksToggling}
-          setInviteContactsLink={setInviteContactsLink}
-        />
+        {isPrivateRoom ? null : (
+          <ExternalLinks
+            t={t}
+            shareLinks={shareLinks}
+            setShareLinks={setShareLinks}
+            getInfo={getInfo}
+            roomType={roomType}
+            onChangeExternalLinksVisible={onChangeExternalLinksVisible}
+            externalLinksVisible={externalLinksVisible}
+            setActiveLink={setActiveLink}
+            activeLink={activeLink}
+            isMobileView={isMobileView}
+            setLinkSettingsPanelVisible={setLinkSettingsPanelVisible}
+            onSelectAccess={onSelectAccess}
+            copyLink={copyLink}
+            editLink={editLink}
+            isLinksToggling={isLinksToggling}
+            setIsLinksToggling={setIsLinksToggling}
+            setInviteContactsLink={setInviteContactsLink}
+          />
+        )}
 
         <InviteInput
           t={t}
@@ -816,6 +820,7 @@ const InvitePanel = ({
           setInputValue={setInputValue}
           usersList={usersList}
           setUsersList={setUsersList}
+          isPrivateRoom={isPrivateRoom}
         />
         {hasInvitedUsers ? (
           <ItemsList
@@ -844,6 +849,7 @@ const InvitePanel = ({
     hasInvitedUsers,
     invitePanelBodyRef,
     setInviteContactsLink,
+    isPrivateRoom,
   ]);
 
   const closeUsersPanel = () => {
@@ -967,7 +973,7 @@ const InvitePanel = ({
             onAccessRightsChange={() => {}}
             isMultiSelect
             disableDisabledUsers
-            withGroups
+            withGroups={!isPrivateRoom}
             roomId={roomId}
             isAgent={roomType === RoomsType.AIRoom}
             disableInvitedUsers={invitedUsersArray}

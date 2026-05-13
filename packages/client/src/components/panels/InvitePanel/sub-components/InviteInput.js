@@ -111,6 +111,7 @@ const InviteInput = ({
   usersList,
   setUsersList,
   allowInvitingGuests,
+  isPrivateRoom,
 }) => {
   const [isChangeLangMail, setIsChangeLangMail] = useState(false);
   const [isAddEmailPanelBlocked, setIsAddEmailPanelBlocked] = useState(true);
@@ -267,7 +268,11 @@ const InviteInput = ({
       const users =
         roomId === -1
           ? await getUserList(filter)
-          : await getMembersList(AccountsSearchArea.Any, roomId, filter);
+          : await getMembersList(
+              isPrivateRoom ? AccountsSearchArea.People : AccountsSearchArea.Any,
+              roomId,
+              filter,
+            );
 
       setUsersList(
         roomId === -1
@@ -450,6 +455,8 @@ const InviteInput = ({
       return;
     }
 
+    if (isPrivateRoom) return;
+
     const items = toUserItems(inputValue);
 
     const filteredItems = items
@@ -552,7 +559,7 @@ const InviteInput = ({
       prevDropDownContent.current = usersList.map((user) =>
         getItemContent(user),
       );
-    } else if (roomId !== -1 && !allowInvitingGuests)
+    } else if (roomId !== -1 && (!allowInvitingGuests || isPrivateRoom))
       prevDropDownContent.current = (
         <DropDownItem disabled className={styles.noUsersList}>
           <Text truncate fontSize="13px" fontWeight={400} lineHeight="20px">
@@ -600,7 +607,7 @@ const InviteInput = ({
       );
     }
     return prevDropDownContent.current;
-  }, [usersList, inputValue, selectedAccess]);
+  }, [usersList, inputValue, selectedAccess, isPrivateRoom]);
 
   const onSelectAccess = (item) => {
     setSelectedAccess(item.access);

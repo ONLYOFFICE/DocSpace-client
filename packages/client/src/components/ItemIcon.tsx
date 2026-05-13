@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import Security12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/security.react.svg?url";
-import Locked12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/locked.react.svg?url";
+import Lock12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
 
 import React from "react";
 import { ReactSVG } from "react-svg";
@@ -95,13 +95,12 @@ const ItemIcon = ({
 		(isPrivacy && !!fileExst) || (isRoom && !!isPrivateRoom && !isArchive);
 
 	const isEncryptedFile = !!encrypted && !!fileExst;
-	// Heuristic: user with zero keys can decrypt nothing in any room.
 	const showNoAccessBadge = isEncryptedFile && !hasEncryptionKeys;
 
 	const showEncryptedBadge =
 		showLegacyEncryptedBadge || isEncryptedFile;
 
-	const badgeSrc = showNoAccessBadge ? Locked12ReactSvgUrl : Security12ReactSvgUrl;
+	const badgeSrc = showNoAccessBadge ? Lock12ReactSvgUrl : Security12ReactSvgUrl;
 	const badgeTitle = showNoAccessBadge
 		? t("Common:NoAccessToEncryptedFile")
 		: isEncryptedFile

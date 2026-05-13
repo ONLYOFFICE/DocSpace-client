@@ -735,8 +735,15 @@ class ContextOptionsStore {
     }
   };
 
-  onClickDownloadEncrypted = (item) => {
+  onClickDownloadEncrypted = (item, t) => {
     const { openUrl } = this.settingsStore;
+
+    if (item.isFolder || item.roomType) {
+      return this.filesActionsStore
+        .downloadFiles([], [item.id], { label: t("Common:ArchivingData") })
+        .catch((err) => toastr.error(err));
+    }
+
     openUrl(item.viewUrl, UrlActionType.Download);
   };
 
@@ -2391,7 +2398,7 @@ class ContextOptionsStore {
         key: "download-encrypted",
         label: t("Common:DownloadWithoutDecryption"),
         icon: DownloadReactSvgUrl,
-        onClick: () => this.onClickDownloadEncrypted(item),
+        onClick: () => this.onClickDownloadEncrypted(item, t),
         disabled: !item.security?.Download,
       },
       {

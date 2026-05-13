@@ -52,6 +52,7 @@ import { DocsSection, DOCS_SECTION_FOLDER_ALIAS } from "@/types/docs";
 import { PAGE_COUNT } from "@/utils/constants";
 import AppsSidebar from "@/components/apps-sidebar";
 
+import { useDocsUserStore } from "../../_store/DocsUserStore";
 import { useSidebar } from "../../_contexts/SidebarContext";
 
 const FOLDER_TYPE_TO_SECTION: Partial<Record<FolderType, DocsSection>> = {
@@ -81,6 +82,7 @@ const DocsSidebar = () => {
     closeSidebar,
   } = useSidebar();
   const isMobile = currentDeviceType === DeviceType.mobile;
+  const { user } = useDocsUserStore();
 
   const router = useRouter();
   const pathname = usePathname();
@@ -219,7 +221,7 @@ const DocsSidebar = () => {
       toggleShowText={toggleShowText}
       isOpen={isSidebarOpen}
       currentDeviceType={currentDeviceType}
-      tooltipId="docs-sidebar-toggle-tooltip"
+      user={user}
     />
   );
 };

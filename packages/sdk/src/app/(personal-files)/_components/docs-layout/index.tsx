@@ -48,6 +48,7 @@ import type {
 import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
 import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
+import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 
 import { SectionWrapper } from "@/app/(docspace)/_components/section";
 import Header from "@/app/(docspace)/_components/header";
@@ -123,7 +124,7 @@ const DocsLayoutInner = observer(({
   const infoPanelStore = useInfoPanelStore();
   const { sdkConfig } = useSDKConfig();
   const router = useRouter();
-  const { toggleSidebar } = useSidebar();
+  const { toggleSidebar, isSidebarOpen, closeSidebar, currentDeviceType } = useSidebar();
   const showMenu = sdkConfig?.showMenu !== false;
 
   const { headerOffset, frameHeaderVars } = useFrameHeaderConfig();
@@ -245,6 +246,21 @@ const DocsLayoutInner = observer(({
             <FileOperationsContext.Provider value={fileOperationsHandler}>
               <div className={styles.root} style={frameHeaderVars}>
                 {showMenu && <DocsSidebar />}
+                {showMenu && (
+                  <Backdrop
+                    visible={isSidebarOpen && currentDeviceType === DeviceType.mobile}
+                    onClick={closeSidebar}
+                    zIndex={220}
+                    withBackground
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      width: "100%",
+                      height: "100%",
+                    }}
+                  />
+                )}
                 <DropZone onFilesDropped={uploadFilesToFolder} disabled={!isMyDocuments}>
                   <RootScrollbar>
                     <SectionWrapper

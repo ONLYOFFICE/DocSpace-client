@@ -3,11 +3,12 @@
 .articleFlex {
   display: flex;
   flex-direction: column;
-  border-inline-end: none !important;
 
-  &:global([data-show-text="false"]) {
-    min-width: 80px !important;
-    max-width: 80px !important;
+  @include mixins.desktop {
+    &:global([data-show-text="false"]) {
+      min-width: var(--article-tablet-width-collapsed-v) !important;
+      max-width: var(--article-tablet-width-collapsed-v) !important;
+    }
   }
 
   @include mixins.mobile {
@@ -38,6 +39,40 @@
   }
 }
 
+.header {
+  flex-shrink: 0;
+
+  &[data-show-text="false"] {
+    justify-content: center;
+    padding-inline: 0;
+  }
+
+  @include mixins.mobile {
+    justify-content: center;
+  }
+}
+
+.logoWrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.logoFull {
+  display: block;
+  height: 24px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.logoBurger {
+  display: block;
+  height: 28px;
+  width: 28px;
+  object-fit: contain;
+}
+
 .scrollbar {
   flex: 1;
   min-height: 0;
@@ -47,47 +82,12 @@
   }
 }
 
-.borderToggle {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  inset-inline-end: -4px;
-  width: 8px;
-  cursor: pointer;
-  z-index: 1;
-
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 1px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--info-panel-border);
-    transition:
-      width 0.15s,
-      background-color 0.15s;
-  }
-
-  &:hover::after,
-  &:active::after {
-    width: 3px;
-    background-color: var(--text-secondary);
-    border-radius: 2px;
-  }
-
-  &:focus-visible {
-    outline: none;
-
-    &::after {
-      width: 3px;
-      background-color: var(--text-secondary);
-      border-radius: 2px;
-    }
-  }
+.footer {
+  flex-shrink: 0;
+  padding-block: 8px;
+  padding-inline: 12px;
 
   @include mixins.tablet-and-below {
-    display: none;
+    padding-inline: 16px;
   }
 }

@@ -29,12 +29,18 @@
 import { useTranslation } from "react-i18next";
 
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
-import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { NavMenu } from "@docspace/ui-kit/components/nav-menu";
 import type { NavMenuGroup } from "@docspace/ui-kit/components/nav-menu";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { getLogoUrl } from "@docspace/ui-kit/utils/getLogoUrl";
+import { WhiteLabelLogoType } from "@docspace/ui-kit/enums";
 import articleStyles from "@docspace/ui-kit/components/article/Article.module.scss";
 import { DeviceType } from "@docspace/shared/enums";
+import type { TUser } from "@docspace/shared/api/people/types";
 
+import CollapseButton from "./CollapseButton";
+import FooterMenu from "./FooterMenu";
+import ProfileBlock from "./ProfileBlock";
 import styles from "./AppsSidebar.module.scss";
 
 export type AppsSidebarProps = {
@@ -45,7 +51,7 @@ export type AppsSidebarProps = {
   toggleShowText: () => void;
   isOpen: boolean;
   currentDeviceType: DeviceType;
-  tooltipId?: string;
+  user?: TUser | null;
 };
 
 const AppsSidebar = ({
@@ -56,10 +62,29 @@ const AppsSidebar = ({
   toggleShowText,
   isOpen,
   currentDeviceType,
-  tooltipId = "apps-sidebar-toggle-tooltip",
+  user,
 }: AppsSidebarProps) => {
   const { t } = useTranslation(["Common"]);
+  const { isBase } = useTheme();
   const isMobile = currentDeviceType === DeviceType.mobile;
+  const collapseLabel = showText
+    ? t("Common:HideArticleMenu")
+    : t("Common:ShowArticleMenu");
+
+  const fullLogo = getLogoUrl(
+    WhiteLabelLogoType.LightSmall,
+    !isBase,
+    false,
+    "",
+    true,
+  );
+  const burgerLogo = getLogoUrl(
+    WhiteLabelLogoType.LeftMenu,
+    !isBase,
+    false,
+    "",
+    true,
+  );
 
   return (
     <div
@@ -71,7 +96,20 @@ const AppsSidebar = ({
       data-sidebar-open={isOpen ? "true" : "false"}
       aria-hidden={isMobile && !isOpen}
     >
-      <div style={{ height: "16px", flexShrink: 0 }} />
+      <div
+        className={`${articleStyles.articleHeader} ${styles.header}`}
+        data-show-text={showText ? "true" : "false"}
+      >
+        <div className={styles.logoWrapper}>
+          {/* biome-ignore lint/performance/noImgElement: portal whitelabel logo served from /logo.ashx */}
+          <img
+            className={showText ? styles.logoFull : styles.logoBurger}
+            src={showText ? fullLogo : burgerLogo}
+            alt="portal logo"
+          />
+        </div>
+      </div>
+
       <Scrollbar
         className={`article-body__scrollbar ${styles.scrollbar}`}
         scrollClass="article-scroller"
@@ -80,25 +118,23 @@ const AppsSidebar = ({
           groups={groups}
           activeItemId={activeId}
           defaultExpandedId={defaultExpandedId}
+          iconOnly={!showText}
         />
       </Scrollbar>
-      <div
-        className={styles.borderToggle}
-        onClick={toggleShowText}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            toggleShowText();
-          }
-        }}
-        data-tooltip-id={tooltipId}
-        data-tooltip-content={
-          showText ? t("Common:HideArticleMenu") : t("Common:ShowArticleMenu")
-        }
+
+      <div className={styles.footer}>
+        <FooterMenu showText={showText} />
+      </div>
+
+      <CollapseButton
+        showText={showText}
+        toggleShowText={toggleShowText}
+        label={collapseLabel}
       />
-      <Tooltip id={tooltipId} place="right" float />
+
+      {user && !isMobile ? (
+        <ProfileBlock user={user} showText={showText} />
+      ) : null}
     </div>
   );
 };

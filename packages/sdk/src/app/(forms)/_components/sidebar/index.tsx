@@ -300,7 +300,7 @@ const FormsSidebar = () => {
       toggleShowText={toggleShowText}
       isOpen={isSidebarOpen}
       currentDeviceType={currentDeviceType}
-      tooltipId="forms-sidebar-toggle-tooltip"
+      user={user}
     />
   );
 };

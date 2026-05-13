@@ -1,0 +1,23 @@
+.profileBlock {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border-top: var(--article-profile-border-v);
+  background-color: var(--article-profile-bg-v);
+  flex-shrink: 0;
+
+  &[data-show-text="false"] {
+    justify-content: center;
+    padding-inline: 0;
+  }
+}
+
+.avatar {
+  flex-shrink: 0;
+}
+
+.name {
+  flex: 1;
+  min-width: 0;
+}

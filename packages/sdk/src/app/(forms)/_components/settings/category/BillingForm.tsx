@@ -31,71 +31,96 @@ import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 import { MemoryRouter } from "react-router";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { BillingRoot, Wallet, PaymentMethod } from "@docspace/ui-kit/billing";
-import AiPage from "@docspace/ui-kit/billing/services/pages/ai-tools/AiPage";
+import { BillingRoot } from "@docspace/ui-kit/billing";
+import AiPaywallPage from "@docspace/ui-kit/billing/services/pages/ai-tools/AiPaywallPage";
+import AiPageLoader from "@docspace/ui-kit/billing/services/pages/ai-tools/AiPageLoader";
+import { useServicesStore } from "@docspace/ui-kit/billing/store/ServicesStoreProvider";
+import { AI_TOOLS, AI_ENUM } from "@docspace/ui-kit/billing/constants";
 import type { TPaymentConfig } from "@docspace/ui-kit/billing/types";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { useFormsUserStore } from "../../../_store/FormsUserStore";
 import { useFormsTourStore } from "../../../_store/FormsTourStore";
 
-import { BillingCards, type BillingCardTab } from "@/components/BillingCards";
-import cardStyles from "@/components/BillingCards/BillingCards.module.scss";
-
-import WalletIcon from "@docspace/ui-kit/assets/icons/16/wallet.react.svg";
-import AiIcon from "@docspace/ui-kit/assets/icons/16/ai-agents.svg";
-import CardIcon from "@docspace/ui-kit/assets/icons/16/card.react.svg";
-
 import styles from "./SettingsPanel.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
-import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
-const PAYMENTS_PATH = "/portal-settings/payments/portal-payments";
+import AiBillingDashboard from "./AiBillingDashboard";
 
-type BillingTab = "wallet" | "ai" | "payment-method";
+const PAYMENT_CALLBACK_PATH = "/billing/payment-complete";
 
-const TAB_DEFS: {
-  id: BillingTab;
-  titleKey: string;
-  tKey: string;
-  iconClass: string;
-  icon: React.ReactNode;
-  nativeIcon?: boolean;
-}[] = [
-  {
-    id: "wallet",
-    titleKey: "Wallet",
-    tKey: "BillingWalletCardDesc",
-    iconClass: cardStyles.billingIconWallet,
-    icon: <WalletIcon />,
+type RenderTarget = "loading" | "paywall" | "dashboard";
+
+const AiBillingContent = observer(
+  ({ integrationUrl }: { integrationUrl?: string }) => {
+    const { t } = useTranslation();
+    const servicesStore = useServicesStore();
+
+    const [renderTarget, setRenderTarget] =
+      React.useState<RenderTarget>("loading");
+
+    React.useEffect(() => {
+      let cancelled = false;
+
+      (async () => {
+        try {
+          const hadTopUp = await servicesStore.aiPaywallInit(t);
+
+          if (cancelled) return;
+
+          if (hadTopUp) {
+            await servicesStore.initServiceData(
+              t,
+              AI_TOOLS,
+              AI_ENUM,
+              integrationUrl,
+            );
+
+            if (cancelled) return;
+            setRenderTarget("dashboard");
+          } else {
+            setRenderTarget("paywall");
+          }
+        } catch (e) {
+          console.error("[ai-billing-content] bootstrap failed", e);
+          if (!cancelled) {
+            toastr.error(t("UnexpectedError"));
+            setRenderTarget("paywall");
+          }
+        }
+      })();
+
+      return () => {
+        cancelled = true;
+      };
+      // integrationUrl is derived from window.location.origin and is stable
+      // across the component's lifetime; bootstrap intentionally runs once on mount.
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    const onPaywallCompleted = React.useCallback(() => {
+      setRenderTarget("dashboard");
+    }, []);
+
+    if (renderTarget === "loading") {
+      return <AiPageLoader />;
+    }
+
+    if (renderTarget === "dashboard") {
+      return <AiBillingDashboard integrationUrl={integrationUrl} />;
+    }
+
+    return (
+      <AiPaywallPage
+        integrationUrl={integrationUrl}
+        onCompleted={onPaywallCompleted}
+      />
+    );
   },
-  {
-    id: "ai",
-    titleKey: "OrganizationAI",
-    tKey: "BillingAICardDesc",
-    iconClass: cardStyles.billingIconAi,
-    icon: <AiIcon />,
-  },
-  {
-    id: "payment-method",
-    titleKey: "PaymentMethod",
-    tKey: "BillingPaymentMethodCardDesc",
-    iconClass: cardStyles.billingIconPayment,
-    icon: <CardIcon />,
-    nativeIcon: true,
-  },
-];
+);
 
 const BillingForm = () => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const { user } = useFormsUserStore();
   const tourStore = useFormsTourStore();
-  const [activeTab, setActiveTab] = React.useState<BillingTab>("ai");
-
-  const onOpenBilling = React.useCallback(() => {
-    const url = `${window.location.origin}${PAYMENTS_PATH}`;
-    window.open(url, "_blank");
-  }, []);
 
   const billingConfig = React.useMemo<TPaymentConfig>(
     () => ({
@@ -111,58 +136,18 @@ const BillingForm = () => {
     [i18n.language, user],
   );
 
-  const { sdkConfig } = useSDKConfig();
-  const integrationUrl = sdkConfig?.integrationUrl;
-
-  const tabs: BillingCardTab[] = TAB_DEFS.map((d) => ({
-    id: d.id,
-    // biome-ignore lint/plugin/no-dynamic-i18n-key: titleKey/tKey literals defined on TAB_DEFS entries are captured by the locales scanner
-    title: t(d.titleKey, {
-      productName: getBrandName("ProductName"),
-      organizationName: getBrandName("OrganizationName"),
-    }),
-    // biome-ignore lint/plugin/no-dynamic-i18n-key: see above
-    description: t(d.tKey),
-    iconClass: d.iconClass,
-    icon: d.icon,
-    nativeIcon: d.nativeIcon,
-  }));
+  const integrationUrl =
+    typeof window !== "undefined"
+      ? `${window.location.origin}${PAYMENT_CALLBACK_PATH}`
+      : undefined;
 
   return (
     <div className={styles.billingWrapper}>
-      <Text fontSize="12px" lineHeight="16px" className={styles.billingNotice}>
-        {t("BillingPortalNotice")}{" "}
-        <Link
-          type={LinkType.action}
-          fontSize="12px"
-          isTextOverflow={false}
-          className={styles.billingPortalLink}
-          onClick={onOpenBilling}
-        >
-          {t("OpenPortalBilling")}
-        </Link>
-      </Text>
-
-      <BillingCards
-        tabs={tabs}
-        activeTab={activeTab}
-        onTabChange={(id) => setActiveTab(id as BillingTab)}
-      />
-
       {!tourStore.showMockItems && (
         <MemoryRouter>
           <BillingRoot config={billingConfig}>
-            <div key={activeTab} className={styles.billingContent}>
-              {activeTab === "payment-method" && (
-                <PaymentMethod integrationUrl={integrationUrl} />
-              )}
-              {activeTab === "wallet" && (
-                <Wallet
-                  showPortalSettingsLoader={false}
-                  integrationUrl={integrationUrl}
-                />
-              )}
-              {activeTab === "ai" && <AiPage integrationUrl={integrationUrl} />}
+            <div className={styles.billingContent}>
+              <AiBillingContent integrationUrl={integrationUrl} />
             </div>
           </BillingRoot>
         </MemoryRouter>

@@ -95,13 +95,13 @@ const AppsSidebar = ({
         className={`${articleStyles.articleHeader} ${styles.header}`}
         data-show-text={showText ? "true" : "false"}
       >
-        <div className={styles.logoWrapper}>
+        <a href="/" className={styles.logoWrapper}>
           <img
             className={showText ? styles.logoFull : styles.logoBurger}
             src={showText ? fullLogo : burgerLogo}
             alt="portal logo"
           />
-        </div>
+        </a>
       </div>
 
       <Scrollbar

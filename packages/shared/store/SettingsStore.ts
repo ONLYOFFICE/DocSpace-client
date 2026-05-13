@@ -785,6 +785,12 @@ class SettingsStore {
       : this.siteDomain;
   }
 
+  get docspacePricesUrl() {
+    return this.siteDomain && this.siteEntries?.docspaceprices
+      ? `${this.siteDomain}${this.siteEntries.docspaceprices}`
+      : this.siteDomain;
+  }
+
   get demoOrderUrl() {
     return this.siteDomain && this.siteEntries?.demoorder
       ? `${this.siteDomain}${this.siteEntries.demoorder}`

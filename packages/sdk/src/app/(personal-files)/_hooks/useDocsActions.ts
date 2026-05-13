@@ -101,23 +101,21 @@ export default function useDocsActions() {
       const folderId = getFolderId();
       if (!folderId) return;
 
-      if (type !== "folder") {
-        const name = getDefaultFileName(type, t);
-        router.push(
-          `/personal-files/editor/create?parentId=${folderId}&fileTitle=${encodeURIComponent(`${name}.${type}`)}`,
-        );
-        return;
-      }
-
       if (filesSettings?.keepNewFileName) {
         const name = getDefaultFileName(type, t);
-        setIsCreating(true);
-        createFolder(folderId, name)
-          .then(() => router.refresh())
-          .catch((error: unknown) => {
-            toastr.error(error instanceof Error ? error.message : String(error));
-          })
-          .finally(() => setIsCreating(false));
+        if (type === "folder") {
+          setIsCreating(true);
+          createFolder(folderId, name)
+            .then(() => router.refresh())
+            .catch((error: unknown) => {
+              toastr.error(error instanceof Error ? error.message : String(error));
+            })
+            .finally(() => setIsCreating(false));
+        } else {
+          router.push(
+            `/personal-files/editor/create?parentId=${folderId}&fileTitle=${encodeURIComponent(`${name}.${type}`)}`,
+          );
+        }
         return;
       }
 
@@ -136,6 +134,14 @@ export default function useDocsActions() {
       const folderId = getFolderId();
       if (!folderId) return;
 
+      if (dialogType !== "folder") {
+        setDialogVisible(false);
+        router.push(
+          `/personal-files/editor/create?parentId=${folderId}&fileTitle=${encodeURIComponent(`${name}.${dialogType}`)}`,
+        );
+        return;
+      }
+
       setIsCreating(true);
       try {
         await createFolder(folderId, name);
@@ -147,7 +153,7 @@ export default function useDocsActions() {
         setIsCreating(false);
       }
     },
-    [getFolderId, router],
+    [getFolderId, dialogType, router],
   );
 
   const uploadFilesToFolder = useCallback(
@@ -257,3 +263,6 @@ export default function useDocsActions() {
     uploadFilesToFolder,
   };
 }
+
+export type DocsActions = ReturnType<typeof useDocsActions>;
+

@@ -30,10 +30,19 @@ import React from "react";
 import { observer } from "mobx-react";
 import dynamic from "next/dynamic";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 import Section from "@docspace/ui-kit/components/section";
-import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
+import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
+import type { QuickActionItem } from "@docspace/ui-kit/components/quick-actions";
+import {
+  BlankPdfIcon,
+  GeneratePdfAiIcon,
+  CreateFromTextIcon,
+  CreateFromTemplateIcon,
+} from "@docspace/ui-kit/components/quick-actions/icons";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import { setAuthToken } from "@docspace/shared/api/client";
 import {
@@ -58,6 +67,7 @@ import {
   settingsSubSectionToPath,
 } from "../_utils/sectionFromPathname";
 import { appendRoomParams } from "../_utils/formsUrl";
+import { libraryUrl } from "../_utils/libraryUrl";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 // LibraryNavigationStore removed — library uses URL routing now
 import { useFormsListStore } from "../_store/FormsListStore";
@@ -80,10 +90,14 @@ import { useFormsTourStore } from "../_store/FormsTourStore";
 import { useFormsCustomActionsStore } from "../_store/FormsCustomActionsStore";
 import { useFormsProgressStore } from "../_store/FormsProgressStore";
 import useTourSandbox from "../_hooks/useTourSandbox";
-import FormsSidebar from "../_components/sidebar";
 import DualRingSpinner from "../_components/forms-layout/DualRingSpinner";
 import FormsEditor from "../_components/forms-editor";
 import FormsHeader from "../_components/forms-header";
+import FormsFilter from "../_components/forms-filter";
+import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
+import FormPlusReactSvgUrl from "PUBLIC_DIR/images/form.plus.react.svg?url";
+import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
+import type { MainButtonProps } from "@docspace/ui-kit/components/main-button/MainButton.types";
 
 const AiChatPanel = dynamic(() => import("../_components/ai-chat-panel"), {
   ssr: false,
@@ -135,8 +149,6 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     inProgressFolder,
     goBackToCompletedRoot,
     goBackToInProgressRoot,
-    isSidebarOpen,
-    closeSidebar,
   } = formsNavigationStore;
   // libraryNav removed — library uses URL routing now
   const aiStore = useFormsAiAgentStore();
@@ -332,37 +344,6 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
 
   useEditorGuard(isEditing);
 
-  // Single-overlay coordination: only one of {sidebar drawer, AI panel, editor}
-  // can be active at a time on mobile. Also close the sidebar when leaving
-  // mobile so no stale overlay stays rendered.
-  React.useEffect(() => {
-    if (currentDeviceType !== DeviceType.mobile && isSidebarOpen) {
-      closeSidebar();
-    }
-  }, [currentDeviceType, isSidebarOpen, closeSidebar]);
-
-  const prevSidebarOpen = React.useRef(isSidebarOpen);
-  React.useEffect(() => {
-    if (!prevSidebarOpen.current && isSidebarOpen && aiStore.isPanelVisible) {
-      aiStore.closePanel();
-    }
-    prevSidebarOpen.current = isSidebarOpen;
-  }, [isSidebarOpen, aiStore]);
-
-  const prevPanelVisible = React.useRef(aiStore.isPanelVisible);
-  React.useEffect(() => {
-    if (!prevPanelVisible.current && aiStore.isPanelVisible && isSidebarOpen) {
-      closeSidebar();
-    }
-    prevPanelVisible.current = aiStore.isPanelVisible;
-  }, [aiStore.isPanelVisible, isSidebarOpen, closeSidebar]);
-
-  React.useEffect(() => {
-    if (isEditing && isSidebarOpen) {
-      closeSidebar();
-    }
-  }, [isEditing, isSidebarOpen, closeSidebar]);
-
   const prevIsLoading = React.useRef(isLoading);
   const pendingEditorClose = React.useRef(false);
   React.useEffect(() => {
@@ -435,6 +416,10 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     prevPathname.current = pathname;
     prevCompletedFolderShell.current = completedFolder;
     prevInProgressFolderShell.current = inProgressFolder;
+
+    if (sectionChanged || folderChanged) {
+      formsListStore.setSearchValue("");
+    }
 
     if (sectionChanged) {
       // Navigation within settings sub-pages should not trigger full section-change logic
@@ -572,6 +557,84 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   const progressStore = useFormsProgressStore();
   uploadFilesDirectRef.current = uploadFilesToFolder;
 
+  const { t } = useTranslation(["Common"]);
+  const canCreateForms = !!formsSettingsStore.folderSecurity?.Create;
+  const showQuickActions =
+    activeSection === FormsSection.MyForms &&
+    canCreateForms;
+
+  const isFilterableSection =
+    activeSection === FormsSection.MyForms ||
+    activeSection === FormsSection.InProgress ||
+    activeSection === FormsSection.CompletedForms;
+  const isInsideSubfolder = !!completedFolder || !!inProgressFolder;
+  const showFilter =
+    isFilterableSection && !isEditing && !isInsideSubfolder;
+  const showFilterMainButton =
+    activeSection === FormsSection.MyForms && canCreateForms;
+
+  const filterMenuModel = React.useMemo<ContextMenuModel[]>(
+    () => [
+      {
+        id: "filter-upload-forms",
+        key: "upload-forms",
+        label: t("Common:UploadPDFForm"),
+        icon: ActionsUploadReactSvgUrl,
+        onClick: onUploadFiles,
+      },
+      {
+        id: "filter-create-blank-form",
+        key: "create-blank-form",
+        label: t("Common:NewPDFForm"),
+        icon: FormPlusReactSvgUrl,
+        onClick: onCreateBlankForm,
+      },
+    ],
+    [t, onUploadFiles, onCreateBlankForm],
+  );
+
+  const filterMainButtonProps = React.useMemo<MainButtonProps | undefined>(
+    () =>
+      showFilterMainButton
+        ? {
+            isDropdown: true,
+            model: filterMenuModel,
+            text: t("Common:New"),
+          }
+        : undefined,
+    [showFilterMainButton, filterMenuModel, t],
+  );
+
+  const quickActionItems = React.useMemo<QuickActionItem[]>(
+    () => [
+      {
+        id: "quick-blank-pdf",
+        icon: <BlankPdfIcon />,
+        label: t("Common:NewPDFForm"),
+        onClick: onCreateBlankForm,
+      },
+      {
+        id: "quick-generate-ai",
+        icon: <GeneratePdfAiIcon />,
+        label: t("Common:GenerateWithAI"),
+        onClick: () => toastr.info(t("Common:UnderDevelopment")),
+      },
+      {
+        id: "quick-from-text",
+        icon: <CreateFromTextIcon />,
+        label: t("Common:FromTextFile"),
+        onClick: () => toastr.info(t("Common:UnderDevelopment")),
+      },
+      {
+        id: "quick-use-template",
+        icon: <CreateFromTemplateIcon />,
+        label: t("Common:UseTemplate"),
+        onClick: () => router.push(libraryUrl({})),
+      },
+    ],
+    [t, onCreateBlankForm, router],
+  );
+
   const formsDataValue = React.useMemo(
     () => ({ fetchSection, fetchMore, fetchSubfolder, refreshAfterMutation }),
     [fetchSection, fetchMore, fetchSubfolder, refreshAfterMutation],
@@ -649,24 +712,6 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
         } as React.CSSProperties
       }
     >
-      {showMenu && <FormsSidebar />}
-      {showMenu && (
-        <Backdrop
-          visible={
-            isSidebarOpen && currentDeviceType === DeviceType.mobile
-          }
-          onClick={closeSidebar}
-          zIndex={220}
-          withBackground
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-          }}
-        />
-      )}
       <AiChatPanel
         rootRef={rootRef}
         headerOffset={chatPanelHeaderOffset}
@@ -687,12 +732,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
           currentDeviceType={currentDeviceType}
         >
           <Section.SectionHeader>
-            <FormsHeader
-              onUploadFiles={onUploadFiles}
-              onCreateBlankForm={onCreateBlankForm}
-              showMenu={showMenu}
-              headerOffset={formsHeaderOffset}
-            />
+            <FormsHeader headerOffset={formsHeaderOffset} />
           </Section.SectionHeader>
           <Section.SectionBody>
             {isEditing && (
@@ -700,6 +740,18 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
             )}
             <FormsDataProvider value={formsDataValue}>
               <div style={{ display: isEditing ? "none" : undefined }}>
+                {showQuickActions && (
+                  <QuickActions
+                    items={quickActionItems}
+                    className={styles.quickActions}
+                  />
+                )}
+                {showFilter && (
+                  <FormsFilter
+                    showMainButton={showFilterMainButton}
+                    mainButtonProps={filterMainButtonProps}
+                  />
+                )}
                 {children}
               </div>
             </FormsDataProvider>

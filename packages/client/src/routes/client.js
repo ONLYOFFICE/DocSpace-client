@@ -342,7 +342,61 @@ const ClientRoutes = [
         ),
       },
       ...generalClientRoutes,
+      {
+        path: "/ai-files",
+        async lazy() {
+          const { AiFiles } = await componentLoader(
+            () => import("SRC_DIR/pages/AiFiles"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ErrorBoundary>
+                <AiFiles />
+              </ErrorBoundary>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
+      {
+        path: "/ai-forms",
+        async lazy() {
+          const { AiForms } = await componentLoader(
+            () => import("SRC_DIR/pages/AiForms"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ErrorBoundary>
+                <AiForms />
+              </ErrorBoundary>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
     ],
+  },
+  {
+    path: "/dashboard",
+    async lazy() {
+      const { Dashboard } = await componentLoader(
+        () => import("SRC_DIR/pages/Dashboard"),
+      );
+
+      const Component = () => (
+        <PrivateRoute>
+          <ErrorBoundary>
+            <Dashboard />
+          </ErrorBoundary>
+        </PrivateRoute>
+      );
+
+      return { Component };
+    },
   },
   {
     path: "/Products/Files/",

@@ -34,6 +34,9 @@ const SECTION_PREFIXES = [
   "/portal-settings",
   "/developer-tools",
   "/accounts",
+  "/dashboard",
+  "/ai-files",
+  "/ai-forms",
 ] as const;
 
 function getSectionPrefix(pathname: string): string {
@@ -59,25 +62,26 @@ export const SectionNavigationProvider = ({
   const navigate = useNavigate();
 
   const stackRef = useRef<string[]>([]);
-  const prevSectionRef = useRef<string>(getSectionPrefix(location.pathname));
+  const prevPathnameRef = useRef<string>(location.pathname);
 
   useEffect(() => {
     const currentSection = getSectionPrefix(location.pathname);
+    const prevSection = getSectionPrefix(prevPathnameRef.current);
 
-    if (currentSection !== prevSectionRef.current) {
-      stackRef.current.push(prevSectionRef.current);
-      prevSectionRef.current = currentSection;
+    if (currentSection !== prevSection) {
+      stackRef.current.push(prevPathnameRef.current);
     }
+
+    prevPathnameRef.current = location.pathname;
   }, [location.pathname]);
 
   const navigateBack = () => {
     const prev = stackRef.current.pop();
 
     if (prev) {
-      prevSectionRef.current = getSectionPrefix(prev);
       navigate(prev);
     } else {
-      navigate("/");
+      navigate(-1 as unknown as string);
     }
   };
 

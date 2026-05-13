@@ -24,38 +24,43 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
-
-import { ArticleItemPure } from "@docspace/ui-kit/components/article/item/ArticleItem";
-
-type SidebarNavItemProps = {
-  id: string;
-  label: string;
-  icon: string;
-  isActive: boolean;
-  onClick: () => void;
-  showText?: boolean;
+export const getGreetingKey = (): string => {
+  const hour = new Date().getHours();
+  if (hour >= 5 && hour < 12) return "GoodMorning";
+  if (hour >= 12 && hour < 18) return "GoodAfternoon";
+  return "GoodEvening";
 };
 
-const SidebarNavItem = ({
-  id,
-  label,
-  icon,
-  isActive,
-  onClick,
-  showText = true,
-}: SidebarNavItemProps) => {
-  return (
-    <ArticleItemPure
-      id={id}
-      text={label}
-      icon={icon}
-      showText={showText}
-      isActive={isActive}
-      onClick={onClick}
-      linkData={{ path: "", state: {} }}
-    />
-  );
+export const NEW_FILE_NAMES = {
+  document: "New document.docx",
+  spreadsheet: "New spreadsheet.xlsx",
+  presentation: "New presentation.pptx",
+  pdf: "New PDF form.pdf",
+} as const;
+
+export const makeCreateUrl = (
+  fileTitle: string,
+  parentId: number | null,
+): string => {
+  const params = new URLSearchParams({ fileTitle });
+  if (parentId) params.set("parentId", String(parentId));
+  return `/sdk/personal-files/editor/create?${params.toString()}`;
 };
 
-export default SidebarNavItem;
+export type DashboardModuleId =
+  | "ai-files"
+  | "ai-rooms"
+  | "ai-forms"
+  | "ai-agents";
+
+// TODO: replace with capability/feature-flag check from settingsStore once
+// the backend exposes the list of active modules.
+export const INSTALLED_MODULES: Record<DashboardModuleId, boolean> = {
+  "ai-files": true,
+  "ai-rooms": false,
+  "ai-forms": true,
+  "ai-agents": false,
+};
+
+export const isModuleInstalled = (id: DashboardModuleId): boolean =>
+  INSTALLED_MODULES[id] ?? false;

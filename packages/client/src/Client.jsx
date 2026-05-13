@@ -44,6 +44,7 @@ import {
   ArticleMainButtonContent,
 } from "./components/Article";
 import ArticleWrapper from "./components/ArticleWrapper";
+import NewArticle from "./components/NewArticle";
 
 const ClientArticle = React.memo(
   ({
@@ -53,6 +54,12 @@ const ClientArticle = React.memo(
     isAccountsArticle,
     isDeveloperToolsArticle,
   }) => {
+    const useDocSpace = localStorage.getItem("useDocSpace") === "true";
+
+    if (!useDocSpace) {
+      return <NewArticle />;
+    }
+
     return (
       <ArticleWrapper
         isInfoPanelVisible={isInfoPanelVisible}

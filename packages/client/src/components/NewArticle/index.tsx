@@ -1,0 +1,211 @@
+// (c) Copyright Ascensio System SIA 2009-2026
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import React from "react";
+import { inject, observer } from "mobx-react";
+import { useLocation, useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
+
+import { toastr } from "@docspace/ui-kit/components/toast";
+import type { NavMenuGroup } from "@docspace/ui-kit/components/nav-menu";
+import { DeviceType } from "@docspace/shared/enums";
+import type { TUser } from "@docspace/shared/api/people/types";
+
+import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
+import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url";
+import CatalogAiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
+import CatalogFavoritesReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.favorites.react.svg?url";
+import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
+import CatalogSettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
+import CatalogRestoreReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-restore.svg?url";
+import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
+import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
+import FormGalleryReactSvgUrl from "PUBLIC_DIR/images/form.gallery.react.svg?url";
+
+import AppsSidebar from "../AppsSidebar";
+import { useSidebarShowText } from "../AppsSidebar/useSidebarShowText";
+
+const AI_FILES_ID = "ai-files";
+const AI_FORMS_ID = "ai-forms";
+const AI_ROOMS_ID = "ai-rooms";
+const AI_AGENTS_ID = "ai-agents";
+
+const PATH_TO_PARENT_ID: Record<string, string> = {
+  "/ai-files": AI_FILES_ID,
+  "/ai-forms": AI_FORMS_ID,
+};
+
+const AI_FILES_SECTION_TO_ID: Record<string, string> = {
+  recent: "ai-files-recent",
+  favorites: "ai-files-favorites",
+  trash: "ai-files-trash",
+  settings: "ai-files-settings",
+};
+
+const AI_FORMS_SECTION_TO_ID: Record<string, string> = {
+  "in-progress": "ai-forms-in-progress",
+  "completed-forms": "ai-forms-completed",
+  settings: "ai-forms-settings",
+};
+
+type NewArticleProps = {
+  user?: TUser | null;
+  currentDeviceType: DeviceType;
+};
+
+const NewArticle = ({ user, currentDeviceType }: NewArticleProps) => {
+  const { t } = useTranslation(["Common"]);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const { showText, toggleShowText } = useSidebarShowText({
+    storageKey: "home_showSidebarText",
+    currentDeviceType,
+  });
+
+  const activeId = React.useMemo(() => {
+    const section = new URLSearchParams(location.search).get("section") ?? "";
+    if (location.pathname.startsWith("/ai-files")) {
+      return AI_FILES_SECTION_TO_ID[section] ?? AI_FILES_ID;
+    }
+    if (location.pathname.startsWith("/ai-forms")) {
+      return AI_FORMS_SECTION_TO_ID[section] ?? AI_FORMS_ID;
+    }
+    for (const [path, id] of Object.entries(PATH_TO_PARENT_ID)) {
+      if (location.pathname.startsWith(path)) return id;
+    }
+    return undefined;
+  }, [location.pathname, location.search]);
+
+  const groups = React.useMemo<NavMenuGroup[]>(
+    () => [
+      {
+        id: "enabled",
+        label: t("Common:EnabledApps"),
+        items: [
+          {
+            id: AI_FILES_ID,
+            label: t("Common:DashboardAIFilesTitle"),
+            icon: CatalogFolderReactSvgUrl,
+            onClick: () => navigate("/ai-files"),
+            children: [
+              {
+                id: "ai-files-recent",
+                label: t("Common:Recent"),
+                icon: CatalogRestoreReactSvgUrl,
+                onClick: () => navigate("/ai-files?section=recent"),
+              },
+              {
+                id: "ai-files-favorites",
+                label: t("Common:Favorites"),
+                icon: CatalogFavoritesReactSvgUrl,
+                onClick: () => navigate("/ai-files?section=favorites"),
+              },
+              {
+                id: "ai-files-trash",
+                label: t("Common:TrashSection"),
+                icon: CatalogTrashReactSvgUrl,
+                onClick: () => navigate("/ai-files?section=trash"),
+              },
+              {
+                id: "ai-files-settings",
+                label: t("Common:Settings"),
+                icon: CatalogSettingsReactSvgUrl,
+                onClick: () => navigate("/ai-files?section=settings"),
+              },
+            ],
+          },
+          {
+            id: AI_FORMS_ID,
+            label: t("Common:DashboardAIFormsTitle"),
+            icon: FormFileReactSvgUrl,
+            onClick: () => navigate("/ai-forms"),
+            children: [
+              {
+                id: "ai-forms-in-progress",
+                label: t("Common:InProgress"),
+                icon: FormFillRectSvgUrl,
+                onClick: () => navigate("/ai-forms?section=in-progress"),
+              },
+              {
+                id: "ai-forms-completed",
+                label: t("Common:CompletedForms"),
+                icon: FormGalleryReactSvgUrl,
+                onClick: () => navigate("/ai-forms?section=completed-forms"),
+              },
+              {
+                id: "ai-forms-settings",
+                label: t("Common:Settings"),
+                icon: CatalogSettingsReactSvgUrl,
+                onClick: () => navigate("/ai-forms?section=settings"),
+              },
+            ],
+          },
+
+        ],
+      },
+      {
+        id: "available",
+        label: t("Common:AvailableApps"),
+        items: [
+          {
+            id: AI_ROOMS_ID,
+            label: t("Common:DashboardAIRoomsTitle"),
+            icon: CatalogRoomsReactSvgUrl,
+            onClick: () => toastr.info(t("Common:UnderDevelopment")),
+          },
+          {
+            id: AI_AGENTS_ID,
+            label: t("Common:DashboardAIChatAgentsTitle"),
+            icon: CatalogAiAgentsReactSvgUrl,
+            onClick: () => toastr.info(t("Common:UnderDevelopment")),
+          },
+        ],
+      },
+    ],
+    [t, navigate],
+  );
+
+  return (
+    <AppsSidebar
+      groups={groups}
+      activeId={activeId}
+      showText={showText}
+      toggleShowText={toggleShowText}
+      currentDeviceType={currentDeviceType}
+      user={user}
+    />
+  );
+};
+
+const NewArticleConnected = inject<TStore>(
+  ({ userStore, settingsStore }) => ({
+    user: userStore.user,
+    currentDeviceType: settingsStore.currentDeviceType,
+  }),
+)(observer(NewArticle));
+
+export default NewArticleConnected;

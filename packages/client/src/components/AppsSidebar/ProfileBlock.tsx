@@ -24,64 +24,53 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { useNavigate } from "react-router";
-import { useTranslation } from "react-i18next";
-
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import {
+  Avatar,
+  AvatarRole,
+  AvatarSize,
+} from "@docspace/ui-kit/components/avatar";
 import { Text } from "@docspace/ui-kit/components/text";
+import { Encoder } from "@docspace/ui-kit/utils/encoder";
+import type { TUser } from "@docspace/shared/api/people/types";
 
-import styles from "./Dashboard.module.scss";
+import styles from "./ProfileBlock.module.scss";
 
-export type ModuleItem = {
-  id: string;
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-  installed: boolean;
-  href?: string;
+type ProfileBlockProps = {
+  user: TUser;
+  showText: boolean;
 };
 
-type ModuleCardProps = {
-  mod: ModuleItem;
-  onInstall: () => void;
-};
-
-export const ModuleCard = ({ mod, onInstall }: ModuleCardProps) => {
-  const { t } = useTranslation(["Common"]);
-  const navigate = useNavigate();
-
-  const handleOpen = () => {
-    if (mod.href) navigate(mod.href);
-  };
+const ProfileBlock = ({ user, showText }: ProfileBlockProps) => {
+  const displayName = user.displayName
+    ? Encoder.htmlDecode(user.displayName)
+    : "";
 
   return (
-    <div className={styles.moduleCard}>
-      <span className={styles.moduleIcon}>{mod.icon}</span>
-      <div className={styles.moduleInfo}>
-        <Text as="p" className={styles.moduleTitle} isBold>
-          {mod.title}
+    <div
+      className={styles.profileBlock}
+      data-show-text={showText ? "true" : "false"}
+      onClick={() => window.location.assign("/profile")}
+    >
+      <Avatar
+        className={styles.avatar}
+        size={AvatarSize.min}
+        role={AvatarRole.user}
+        source={user.avatar || ""}
+        userName={displayName}
+      />
+      {showText ? (
+        <Text
+          className={styles.name}
+          fontWeight={600}
+          noSelect
+          truncate
+          dir="auto"
+        >
+          {displayName}
         </Text>
-        <Text as="p" className={styles.moduleDescription}>
-          {mod.description}
-        </Text>
-      </div>
-      {mod.installed ? (
-        <Button
-          className={styles.moduleBtn}
-          label={t("Common:Open")}
-          size={ButtonSize.small}
-          onClick={handleOpen}
-        />
-      ) : (
-        <Button
-          primary
-          className={styles.moduleBtn}
-          label={t("Common:Install")}
-          size={ButtonSize.small}
-          onClick={onInstall}
-        />
-      )}
+      ) : null}
     </div>
   );
 };
+
+export default ProfileBlock;

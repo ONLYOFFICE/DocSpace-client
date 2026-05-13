@@ -39,6 +39,10 @@ type Props = {
 };
 
 const DefaultPageRedirectComponent = ({ defaultFolderType }: Props) => {
+  const useDocSpace = localStorage.getItem("useDocSpace") === "true";
+
+  if (!useDocSpace) return <Navigate to="/dashboard" replace />;
+
   const defaultUrl = getUrlByDefaultFolderType(
     defaultFolderType || FolderType.Rooms,
   );

@@ -1,0 +1,29 @@
+{
+  "key_path": "FormRoomAIModalConnect",
+  "content": "Connect database",
+  "content_en_sha1_hash": "d8d84ff0edcc3cc09365d802bd544d6bdd713955",
+  "created_at": "2026-05-08T13:10:42.391Z",
+  "updated_at": "2026-05-08T13:20:28.621Z",
+  "comment": {
+    "text": "Button label for the primary action in the AI connection dialog, used to initiate the database connection process.",
+    "is_auto": true,
+    "updated_at": "2026-05-08T13:20:28.621Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/AskAIConnectDialog/index.tsx",
+      "line_number": 98,
+      "context": "primary\n key=\"ConnectButton\"\n onClick={onConnect}\n size={ButtonSize.normal}\n id=\"ask-ai-connect-dialog_connect\"\n label={t(\"InfoPanel:FormRoomAIModalConnect\")}\n />\n <Button\n scale\n key=\"ContinueButton\"\n onClick={onContinue}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

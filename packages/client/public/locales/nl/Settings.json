@@ -319,6 +319,5 @@
   "WantToCancelUpload": "Wilt u het uploaden annuleren?",
   "WantToContinueQuota": "Wilt u doorgaan of de opslagquota voor gebruikers wijzigen?",
   "WebhooksDescription": "Voer aangepaste acties uit aan de zijkant van elke applicatie of website die u gebruikt, op basis van verschillende gebeurtenissen in {{organizationName}} {{productName}}.",
-  "WhiteLabelLogoSubtitle": "Upload logo's met een transparante achtergrond (PNG, SVG, JPG) voor lichte en donkere thema's, of genereer er direct een door uw logo hieronder in te voeren.",
   "WithoutEmailHint": "U heeft geen gebruikers om e-mailadressen aan toe te voegen. Ga door naar de volgende stap."
 }

@@ -3,7 +3,7 @@
   "content": "Select",
   "content_en_sha1_hash": "8598222918d3c6e513d63060cf55e2971ded729a",
   "created_at": "2025-05-19T21:30:48.355Z",
-  "updated_at": "2026-04-23T17:24:01.667Z",
+  "updated_at": "2026-05-08T13:10:45.507Z",
   "comment": {
     "text": "This is a button label. It appears on various selectors (people, AI agents, files) to confirm the user's selection.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
-      "line_number": 516,
+      "line_number": 520,
       "context": "<PeopleSelector\n withCancelButton\n onCancel={onCloseContactSelector}\n cancelButtonLabel=\"\"\n disableSubmitButton={false}\n submitButtonLabel={t(\"SelectAction\")}\n onSubmit={onSubmitContactSelector}\n withHeader\n headerProps={{\n onCloseClick: onCloseContactSelector,\n isCloseable: true,",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/AIAgent/index.tsx",
-      "line_number": 244,
+      "line_number": 258,
       "context": "{...cancelButtonSelectorProps}\n {...searchSelectorProps}\n withPadding={withPadding}\n onSelect={onSelect}\n items={items}\n submitButtonLabel={t(\"SelectAction\")}\n onSubmit={onSubmit}\n isMultiSelect={false}\n emptyScreenImage={\n isBase ? (\n <EmptyScreenAIAgentsSelectorLight />",
       "module": "/libs/ui-kit"
     },
@@ -31,13 +31,13 @@
     },
     {
       "file_path": "/libs/ui-kit/selectors/Groups/index.tsx",
-      "line_number": 190,
+      "line_number": 186,
       "context": "onClearSearch={onClearSearch}\n isSearchLoading={false}\n disableSubmitButton={!selectedItem}\n isMultiSelect={false}\n items={itemsList}\n submitButtonLabel={t(\"SelectAction\")}\n onSubmit={onSubmitAction}\n emptyScreenImage={emptyScreenImg}\n emptyScreenHeader={t(\"NotFoundGroups\")}\n emptyScreenDescription={t(\"GroupsNotFoundDescription\")}\n searchEmptyScreenImage={emptyScreenImg}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/People/index.tsx",
-      "line_number": 760,
+      "line_number": 747,
       "context": "renderCustomItem={renderCustomItem}\n aria-label={ariaLabel || \"People Selector\"}\n data-selector-type={dataSelectorType || \"people\"}\n dataTestId={dataTestId || \"people-selector\"}\n items={itemsList}\n submitButtonLabel={submitButtonLabel || t(\"SelectAction\")}\n onSubmit={onSubmit}\n disableSubmitButton={disableSubmitButton || !selectedItems.length}\n selectedItem={isMultiSelect ? null : selectedItems[0]}\n submitButtonId={submitButtonId}\n emptyScreenImage={emptyScreenImage}",
       "module": "/libs/ui-kit"
     },
@@ -151,7 +151,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2068,
+      "line_number": 2131,
       "context": "const optionsModel = [\n {\n id: \"option_select\",\n key: \"select\",\n label: t(\"Common:SelectAction\"),\n icon: CheckBoxReactSvgUrl,\n onClick: () => this.onSelect(item),\n disabled: false,\n },\n withOpen && {",
       "module": "/packages/client"
     },

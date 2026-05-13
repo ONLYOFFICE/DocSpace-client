@@ -3,7 +3,7 @@
   "content": "Are you sure you want to continue?",
   "content_en_sha1_hash": "8de6e73ba7b7e7a2c5f18e2bc38d0a44a17be1d3",
   "created_at": "2025-05-19T21:30:49.566Z",
-  "updated_at": "2026-04-12T09:21:20.219Z",
+  "updated_at": "2026-05-08T13:10:45.517Z",
   "comment": {
     "text": "This is a confirmation message displayed in a modal dialog, asking the user if they wish to proceed with an action. It appears in various contexts, such as before deleting a chat or when confirming an action related to AI tools or billing.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/index.tsx",
-      "line_number": 216,
+      "line_number": 214,
       "context": "values={{ balance: formatAiServiceCurrency() }}\n components={{\n 1: <span style={{ fontWeight: 600 }} />,\n }}\n />,\n t(\"WantToContinue\"),\n ],\n },\n };\n \n const getDialogContent = (actionType: string | null) => {",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
-      "line_number": 213,
+      "line_number": 215,
       "context": "body: [\n t(\"AIToolsDescription\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n }),\n t(\"WantToContinue\"),\n ],\n };\n \n const onOpenPricingBilling = () => {\n setIsPricingBillingVisible(true);",
       "module": "/libs/ui-kit"
     },

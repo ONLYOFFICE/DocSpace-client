@@ -319,6 +319,5 @@
   "WantToCancelUpload": "Chcete zrušiť nahrávanie?",
   "WantToContinueQuota": "Chcete pokračovať alebo zmeniť kvótu úložiska používateľa?",
   "WebhooksDescription": "Vykonávajte vlastné akcie na bočnom panelu akéhokoľvek aplikácie alebo webovej stránky, na základe rôznych udalostí v {{organizationName}} {{productName}}.",
-  "WhiteLabelLogoSubtitle": "Nahrajte logá s transparentným pozadím (PNG, SVG, JPG) pre svetlú a tmavú tému alebo si jedno okamžite vygenerujte zadaním vášho loga nižšie.",
   "WithoutEmailHint": "Nemáte používateľov bez zadaného e-mailu. Pokračujte na ďalší krok."
 }

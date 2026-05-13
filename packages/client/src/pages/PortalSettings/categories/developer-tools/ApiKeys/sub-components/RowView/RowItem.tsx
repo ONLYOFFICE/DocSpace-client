@@ -28,6 +28,7 @@ import { useTranslation } from "react-i18next";
 import { Row, RowContent } from "@docspace/ui-kit/components/rows";
 import { Text } from "@docspace/ui-kit/components/text";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { Encoder } from "@docspace/ui-kit/utils/encoder";
 import { isMobile } from "@docspace/shared/utils";
 
 import { useContextOptions } from "../useContextOptions";
@@ -80,7 +81,8 @@ const RowItem = (props: RowItemType) => {
                 fontSize="12px"
                 className="row-content_text"
               >
-                {item.key} | {item.createBy.displayName}
+                {item.key} |{" "}
+                {Encoder.htmlDecode(item.createBy.displayName ?? "")}
               </Text>
             </div>
           ) : null}
@@ -101,3 +103,4 @@ const RowItem = (props: RowItemType) => {
 };
 
 export default RowItem;
+

@@ -3,7 +3,7 @@
   "content": "Customize cover",
   "content_en_sha1_hash": "b5b9c63cc83c3598cc9ddb9857ac47fb18bca819",
   "created_at": "2025-05-19T21:30:53.313Z",
-  "updated_at": "2026-04-11T21:21:01.125Z",
+  "updated_at": "2026-05-08T13:10:45.675Z",
   "comment": {
     "text": "This is a button label that allows users to modify the cover image of a room.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/DialogsStore.js",
-      "line_number": 1066,
+      "line_number": 1080,
       "context": "icon: TrashIconSvgUrl,\n key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_DELETE,\n onClick: onDelete ? onDelete() : () => this.deleteRoomLogo(),\n }\n : {\n label: t(\"RoomLogoCover:CustomizeCover\"),\n icon: PenSvgUrl,\n key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_CUSTOMIZE_COVER,\n onClick: () => this.setRoomLogoCoverDialogVisible(true),\n },\n ];",
       "module": "/packages/client"
     }

@@ -24,6 +24,7 @@
   "FileCopied": "تم نسخ الملف",
   "FileCreated": "تم إنشاء الملف",
   "FileDeleted": "تم حذف الملف",
+  "FileDownloaded": "تم تنزيل الملف",
   "FileMoved": "تم نقل الملف",
   "FileRestored": "تم استعادة الملف",
   "FileTrashed": "تم نقل الملف إلى المهملات",
@@ -32,6 +33,7 @@
   "FolderCopied": "تم نسخ المجلد",
   "FolderCreated": "تم إنشاء المجلد",
   "FolderDeleted": "تم حذف المجلد",
+  "FolderDownloaded": "تم تنزيل المجلد",
   "FolderMoved": "تم نقل المجلد",
   "FolderRestored": "تم استعادة المجلد",
   "FolderTrashed": "تم نقل المجلد إلى المهملات",
@@ -95,7 +97,5 @@
   "WebhookRemoved": "تمت إزالة الـ Webhook",
   "Webhooks": "خطافات الويب",
   "WebhooksGuide": "دليل ويب هوك",
-  "WebhooksInfo": "استخدم ويب هوك لتنفيذ إجراءات مخصصة على جانب أي تطبيق أو موقع ويب تستخدمه بناءً على أحداث مختلفة في {{organizationName}} {{productName}}.\nهنا، يمكنك إنشاء وإدارة جميع ويب هوك الخاصة بك وتكوينها وتصفح سجل كل ويب هوك لمراجعة أدائها.",
-  "FileDownloaded": "تم تنزيل الملف",
-  "FolderDownloaded": "تم تنزيل المجلد"
+  "WebhooksInfo": "استخدم ويب هوك لتنفيذ إجراءات مخصصة على جانب أي تطبيق أو موقع ويب تستخدمه بناءً على أحداث مختلفة في {{organizationName}} {{productName}}.\nهنا، يمكنك إنشاء وإدارة جميع ويب هوك الخاصة بك وتكوينها وتصفح سجل كل ويب هوك لمراجعة أدائها."
 }

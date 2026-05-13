@@ -3,7 +3,7 @@
   "content": "Duplicate",
   "content_en_sha1_hash": "972d57379db3e5be76d4ead709fef1ad71ff03d6",
   "created_at": "2025-05-19T21:30:44.727Z",
-  "updated_at": "2026-04-23T17:24:02.074Z",
+  "updated_at": "2026-05-08T13:10:45.666Z",
   "comment": {
     "text": "Button label. Creates a copy of the selected item.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2002,
+      "line_number": 2065,
       "context": "disabled: false,\n },\n {\n id: \"option_create-duplicate\",\n key: \"duplicate\",\n label: t(\"Common:Duplicate\"),\n icon: DuplicateReactSvgUrl,\n onClick: () => this.onDuplicate(item, t),\n disabled: false,\n },\n ],",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2002,
+      "line_number": 2065,
       "context": "disabled: false,\n },\n {\n id: \"option_create-duplicate\",\n key: \"duplicate\",\n label: t(\"Common:Duplicate\"),\n icon: DuplicateReactSvgUrl,\n onClick: () => this.onDuplicate(item, t),\n disabled: false,\n },\n ],",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2002,
+      "line_number": 2065,
       "context": "disabled: false,\n },\n {\n id: \"option_create-duplicate\",\n key: \"duplicate\",\n label: t(\"Common:Duplicate\"),\n icon: DuplicateReactSvgUrl,\n onClick: () => this.onDuplicate(item, t),\n disabled: false,\n },\n ],",
       "module": "/packages/client"
     },

@@ -209,6 +209,7 @@ export const OPERATIONS_NAME = Object.freeze({
   upload: "upload",
   deleteVersionFile: "deleteVersionFile",
   backup: "backup",
+  syncDatabase: "syncDatabase",
 });
 
 export const thumbnailStatuses = {

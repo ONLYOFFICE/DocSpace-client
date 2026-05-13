@@ -3,7 +3,7 @@
   "content": "Save as PDF form",
   "content_en_sha1_hash": "a43317ae627c650dad0fca77c887e0530bc4974c",
   "created_at": "2025-05-19T21:30:46.344Z",
-  "updated_at": "2026-04-23T17:24:01.730Z",
+  "updated_at": "2026-05-08T13:10:45.535Z",
   "comment": {
     "text": "This is a button label or dialog title. It appears when converting a document to a fillable PDF form.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2186,
+      "line_number": 2249,
       "context": "disabled: false,\n },\n {\n id: \"option_make-form\",\n key: \"make-form\",\n label: t(\"Common:MakeForm\"),\n icon: FormPlusReactSvgUrl,\n onClick: () => this.onClickMakeForm(item, t),\n disabled: false,\n },\n ...pinOptions,",
       "module": "/packages/client"
     }

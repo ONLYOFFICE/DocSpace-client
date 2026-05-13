@@ -663,6 +663,24 @@ const ClientRoutes = [
       return { Component };
     },
   },
+  {
+    path: "/billing/payment-complete",
+    async lazy() {
+      const { Component: PaymentComplete } = await componentLoader(
+        () => import("SRC_DIR/pages/PaymentComplete"),
+      );
+
+      const Component = () => (
+        <PrivateRoute>
+          <ErrorBoundary>
+            <PaymentComplete />
+          </ErrorBoundary>
+        </PrivateRoute>
+      );
+
+      return { Component };
+    },
+  },
 ];
 
 export default ClientRoutes;

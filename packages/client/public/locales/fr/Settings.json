@@ -319,6 +319,5 @@
   "WantToCancelUpload": "Voulez-vous annuler le téléversement ?",
   "WantToContinueQuota": "Voulez-vous continuer ou modifier le quota de stockage de l'utilisateur ?",
   "WebhooksDescription": "Exécuter des actions personnalisées pour toute application ou site web que vous utilisez, en fonction de divers événements dans {{organizationName}} {{productName}}.",
-  "WhiteLabelLogoSubtitle": "Téléchargez des logos avec un fond transparent (PNG, SVG, JPG) pour les thèmes clair et sombre, ou générez-en un instantanément en saisissant votre logo ci-dessous.",
   "WithoutEmailHint": "Vous n'avez aucun utilisateur sans adresse e-mail. Veuillez passer à l'étape suivante."
 }

@@ -3,7 +3,7 @@
   "content": "Me",
   "content_en_sha1_hash": "94563ec383e29aa3743abd9b337b2e084fb199fb",
   "created_at": "2025-05-19T21:30:46.429Z",
-  "updated_at": "2026-04-13T14:59:05.726Z",
+  "updated_at": "2026-05-08T13:10:45.483Z",
   "comment": {
     "text": "This label appears next to a user's name to indicate that the user is the current user. It is displayed in parentheses.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/People/index.tsx",
-      "line_number": 656,
+      "line_number": 643,
       "context": ">\n {Encoder.htmlDecode(label ?? \"\")}\n </Text>\n {!isGroup && String(id) === currentUserId ? (\n <Text className={styles.isMeLabel} fontWeight={600} fontSize=\"14px\">\n ({t(\"MeLabel\")})\n </Text>\n ) : null}\n {status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}\n </div>\n {!isGroup ? (",
       "module": "/libs/ui-kit"
     },

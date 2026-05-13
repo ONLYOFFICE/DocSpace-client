@@ -319,6 +319,5 @@
   "WantToCancelUpload": "Da li želite da otkažete otpremanje?",
   "WantToContinueQuota": "Da li želite da nastavite ili da promenite korisničku kvotu za skladište?",
   "WebhooksDescription": "Izvršite prilagođene akcije sa strane bilo koje aplikacije ili veb-sajta koji koristite na osnovu različitih događaja u {{organizationName}} {{productName}}.",
-  "WhiteLabelLogoSubtitle": "Otpremite logotipe sa providnom pozadinom (PNG, SVG, JPG) za svetlu i tamnu temu ili ih trenutno generišite tako što ćete uneti svoj logo ispod.",
   "WithoutEmailHint": "Nemate korisnike bez email-ova. Molimo pređite na sledeći korak."
 }

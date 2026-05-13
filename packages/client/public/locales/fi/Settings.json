@@ -319,6 +319,5 @@
   "WantToCancelUpload": "Haluatko peruuttaa latauksen?",
   "WantToContinueQuota": "Haluatko jatkaa vai muuttaa käyttäjien muistin kiintiötä?",
   "WebhooksDescription": "Suorita mukautetut toiminnot minkä tahansa sovelluksen tai verkkosivuston sivulla perustuen erilaisiin tapahtumiin {{organizationName}} {{productName}}.",
-  "WhiteLabelLogoSubtitle": "Lataa läpinäkyvällä taustalla olevia logoja (PNG, SVG, JPG) vaaleaa ja tummaa teemaa varten tai luo logo välittömästi syöttämällä logosi alla.",
   "WithoutEmailHint": "Sinulla ei ole käyttäjiä ilman sähköposteja. Ole hyvä ja jatka seuraavaan vaiheeseen."
 }

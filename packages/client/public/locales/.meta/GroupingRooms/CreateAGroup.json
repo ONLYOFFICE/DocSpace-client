@@ -3,7 +3,7 @@
   "content": "Create a group",
   "content_en_sha1_hash": "d3a1fae6a760d743fbd077e9fc79a07fd1e4d9df",
   "created_at": "2026-02-19T13:36:24.870Z",
-  "updated_at": "2026-04-23T17:24:02.076Z",
+  "updated_at": "2026-05-08T13:10:45.669Z",
   "comment": {
     "text": "This is a button label that allows users to create a new group for organizing rooms.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2391,
+      "line_number": 2454,
       "context": "disabled: isPublicRoom || Boolean(item.external && item.isLinkExpired),\n },\n {\n id: \"option_create-group\",\n key: \"create-group\",\n label: t(\"GroupingRooms:CreateAGroup\"),\n icon: CreateGroupReactSvgUrl,\n onClick: () =>\n this.dialogsStore.setEditRoomGroupsDialogVisible(true, [item.id]),\n disabled: false,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2391,
+      "line_number": 2454,
       "context": "disabled: isPublicRoom || Boolean(item.external && item.isLinkExpired),\n },\n {\n id: \"option_create-group\",\n key: \"create-group\",\n label: t(\"GroupingRooms:CreateAGroup\"),\n icon: CreateGroupReactSvgUrl,\n onClick: () =>\n this.dialogsStore.setEditRoomGroupsDialogVisible(true, [item.id]),\n disabled: false,\n },",
       "module": "/packages/client"
     },

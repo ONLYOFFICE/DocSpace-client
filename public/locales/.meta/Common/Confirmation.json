@@ -3,7 +3,7 @@
   "content": "Confirmation",
   "content_en_sha1_hash": "3424edc2354c7c55f6eb740b673d349b02d27c8d",
   "created_at": "2025-05-19T21:30:43.625Z",
-  "updated_at": "2026-04-23T17:24:01.689Z",
+  "updated_at": "2026-05-08T13:10:45.527Z",
   "comment": {
     "text": "This is the title of a confirmation dialog. It appears when the AI assistant wants to open a file or use a tool, prompting the user to confirm the action.",
     "is_auto": true,
@@ -37,19 +37,19 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
-      "line_number": 183,
+      "line_number": 186,
       "context": "}\n };\n \n const confirmationDialogContent = isAiToolsServiceOn\n ? {\n title: t(\"Confirmation\"),\n body: [\n t(\"DisableAIToolsConfirm\", {\n organizationName: logoText,\n }),\n <CommonTrans",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
-      "line_number": 183,
+      "line_number": 186,
       "context": "}\n };\n \n const confirmationDialogContent = isAiToolsServiceOn\n ? {\n title: t(\"Confirmation\"),\n body: [\n t(\"DisableAIToolsConfirm\", {\n organizationName: logoText,\n }),\n <CommonTrans",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/backup/BackupPage.tsx",
-      "line_number": 115,
+      "line_number": 117,
       "context": "setIsLoading(false);\n }\n };\n \n const confirmationDialogContent = {\n title: t(\"Confirmation\"),\n \n body: !isBackupServiceOn\n ? t(\"EnableBackupConfirm\", {\n productName: getBrandName(\"ProductName\"),\n })",
       "module": "/libs/ui-kit"
     },

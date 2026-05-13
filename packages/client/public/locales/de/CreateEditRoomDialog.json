@@ -23,6 +23,7 @@
   "NeedMoreIntegrations": "Brauchen Sie mehr Integrationen?",
   "NeedMoreIntegrationsDescription": "Nutzen Sie Webhooks, um Daten an Ihr eigenes System zu senden, oder verbinden Sie Formulare mit Tausenden von Diensten über Zapier.",
   "NoDatabaseConnections": "Keine Datenbankverbindungen konfiguriert",
+  "NoDatabaseConnectionsRoomAdmin": "Datenbankverbindungen werden von einem Administrator konfiguriert. Sobald eine Datenbank eingerichtet ist, können Sie den Export hier aktivieren.",
   "PeopleSelectorInfo": "Nur ein Raumadministrator oder ein {{productName}}-Administrator kann Besitzer des Raums werden",
   "Position": "Position",
   "PublicRoomBarDescription": "Dieser Raum ist für jeden zugänglich, der den Link hat. Der Zugang für externe Nutzer ist abhängig von der gewählten Art der Zugangsrechte.",
@@ -44,6 +45,5 @@
   "UserName": "Benutzername",
   "ViewerInfo": "Betrachter-Info",
   "WatermarkPreview": "Wasserzeichen-Vorschau",
-  "WatermarkPreviewHelp": "Diese Bildvorschau zeigt ungefähr, wie das Wasserzeichen in Ihren Dateien angezeigt wird.",
-  "NoDatabaseConnectionsRoomAdmin": "Datenbankverbindungen werden von einem Administrator konfiguriert. Sobald eine Datenbank eingerichtet ist, können Sie den Export hier aktivieren."
+  "WatermarkPreviewHelp": "Diese Bildvorschau zeigt ungefähr, wie das Wasserzeichen in Ihren Dateien angezeigt wird."
 }

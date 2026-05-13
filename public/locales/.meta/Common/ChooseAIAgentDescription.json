@@ -3,7 +3,7 @@
   "content": "Select the agent where you want to chat with AI about the selected file. You can pick an existing agent.",
   "content_en_sha1_hash": "d501d9f264fdff39ef143d4e36f2c7ad9a8d514c",
   "created_at": "2025-11-17T11:52:13.064Z",
-  "updated_at": "2026-04-11T20:57:20.053Z",
+  "updated_at": "2026-05-08T13:10:45.745Z",
   "comment": {
     "text": "This is a description for a tooltip or information icon. It explains how to select an AI agent for chatting about a file, and that existing agents can be chosen.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/AIAgent/index.tsx",
-      "line_number": 294,
-      "context": "title: t(\"ChooseAIAgent\", {\n aiAgent: t(\"AIAgent\"),\n }),\n icon: <InfoIconSvgUrl />,\n onClose: () => setWithInfo(!withInfo),\n description: t(\"ChooseAIAgentDescription\"),\n }}\n hideBackButton\n />\n );\n };",
+      "line_number": 243,
+      "context": "title: t(\"ChooseAIAgent\", {\n aiAgent: t(\"AIAgent\"),\n }),\n icon: <InfoIconSvgUrl />,\n onClose: () => setWithInfo((prev) => !prev),\n description: t(\"ChooseAIAgentDescription\"),\n };\n }, [externalInfoBarData, t, setWithInfo]);\n \n return (\n <Selector",
       "module": "/libs/ui-kit"
     }
   ],

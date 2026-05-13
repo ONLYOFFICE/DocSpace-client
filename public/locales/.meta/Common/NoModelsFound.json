@@ -3,7 +3,7 @@
   "content": "No models found",
   "content_en_sha1_hash": "3d02178b7a78aaa935e174c3b52e143f4d548b07",
   "created_at": "2026-02-18T14:56:04.517Z",
-  "updated_at": "2026-04-23T17:24:01.731Z",
+  "updated_at": "2026-05-08T13:10:45.536Z",
   "comment": {
     "text": "This text appears in a dropdown list or as a label when no AI models are available for selection.",
     "is_auto": true,
@@ -13,14 +13,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/Model.tsx",
-      "line_number": 306,
+      "line_number": 313,
       "context": "value: selectedModel.modelId,\n label: selectedModel.alias ?? selectedModel.modelId,\n }\n : {\n key: \"empty-selected-option\",\n label: isModelsLoading ? \"\" : t(\"Common:NoModelsFound\"),\n };\n }, [selectedModel, isModelsLoading, t]);\n \n const onSelectModel = React.useCallback(\n (option: TOption) => {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/DefaultProvider.tsx",
       "line_number": 95,
-      "context": "t: TTranslation,\n models?: TModel[] | null,\n selectedModelId?: string | null,\n ): TOption => {\n if (!models || !selectedModelId)\n return { key: \"-2\", label: t(\"Common:NoModelsFound\") };\n \n const model =\n models.find((m) => m.modelId === selectedModelId) || models[0];\n \n return {",
+      "context": "t: TTranslation,\n models?: TModel[] | null,\n selectedModelId?: string | null,\n ): TOption => {\n if (!models?.length || !selectedModelId)\n return { key: \"-2\", label: t(\"Common:NoModelsFound\") };\n \n const model =\n models.find((m) => m.modelId === selectedModelId) || models[0];\n \n if (!model) return { key: \"-2\", label: t(\"Common:NoModelsFound\") };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/DefaultProvider.tsx",
+      "line_number": 95,
+      "context": "t: TTranslation,\n models?: TModel[] | null,\n selectedModelId?: string | null,\n ): TOption => {\n if (!models?.length || !selectedModelId)\n return { key: \"-2\", label: t(\"Common:NoModelsFound\") };\n \n const model =\n models.find((m) => m.modelId === selectedModelId) || models[0];\n \n if (!model) return { key: \"-2\", label: t(\"Common:NoModelsFound\") };",
       "module": "/packages/client"
     },
     {

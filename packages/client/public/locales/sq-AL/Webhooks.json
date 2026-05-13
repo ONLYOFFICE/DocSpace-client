@@ -24,6 +24,7 @@
   "FileCopied": "Skedari u kopjua",
   "FileCreated": "Skedari u krijua",
   "FileDeleted": "Skedari u fshi",
+  "FileDownloaded": "Skedar i shkarkuar",
   "FileMoved": "Skedari u zhvendos",
   "FileRestored": "Skedari u rivendos",
   "FileTrashed": "Skedari u hodh në kosh",
@@ -32,6 +33,7 @@
   "FolderCopied": "Dosja u kopjua",
   "FolderCreated": "Dosja u krijua",
   "FolderDeleted": "Dosja u fshi",
+  "FolderDownloaded": "Dosja u shkarkua",
   "FolderMoved": "Dosja u zhvendos",
   "FolderRestored": "Dosja u rivendos",
   "FolderTrashed": "Dosja u hodh në kosh",
@@ -95,7 +97,5 @@
   "WebhookRemoved": "Webhook-u u fshi",
   "Webhooks": "Webhooks",
   "WebhooksGuide": "Guida e Webhook-ave",
-  "WebhooksInfo": "Përdorni webhook për të kryer veprime të personalizuara në anën e çdo aplikacioni ose faqe interneti që po përdorni bazuar në ngjarje të ndryshme në {{organizationName}} {{productName}}.\nKëtu, ju mund të krijoni dhe menaxhoni të gjitha webhook-et tuaja, t'i konfiguroni ato dhe të shfletoni historikun e çdo webhook për të audituar performancën e tyre.",
-  "FileDownloaded": "Skedar i shkarkuar",
-  "FolderDownloaded": "Dosja u shkarkua"
+  "WebhooksInfo": "Përdorni webhook për të kryer veprime të personalizuara në anën e çdo aplikacioni ose faqe interneti që po përdorni bazuar në ngjarje të ndryshme në {{organizationName}} {{productName}}.\nKëtu, ju mund të krijoni dhe menaxhoni të gjitha webhook-et tuaja, t'i konfiguroni ato dhe të shfletoni historikun e çdo webhook për të audituar performancën e tyre."
 }

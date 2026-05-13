@@ -65,6 +65,26 @@ const openRouterConfig = {
   ),
 };
 
+// LM Studio configuration (OpenAI-compatible local API)
+const lmstudioConfig = {
+  apiUrl: process.env.LMSTUDIO_API_URL || "http://localhost:1234/v1",
+  // Optional API key — LM Studio server can be configured to require one
+  apiKey: process.env.LMSTUDIO_API_KEY || "",
+  model: process.env.LMSTUDIO_MODEL || "",
+  // Per-task model overrides (fall back to generic model above)
+  spellCheckModel: process.env.LMSTUDIO_SPELLCHECK_MODEL || "",
+  commentModel: process.env.LMSTUDIO_COMMENT_MODEL || "",
+  // Local service: same generous timeouts as Ollama
+  firstTokenTimeout: parseInt(
+    process.env.LMSTUDIO_FIRST_TOKEN_TIMEOUT_MS || "600000",
+    10,
+  ), // 10 min default
+  inactivityTimeout: parseInt(
+    process.env.LMSTUDIO_INACTIVITY_TIMEOUT_MS || "30000",
+    10,
+  ), // 30 sec default
+};
+
 // Concurrency for LLM calls (spell-check, auto-comments)
 const concurrencyConfig = {
   spellCheck: parseInt(process.env.SPELLCHECK_CONCURRENCY || "1", 10),
@@ -81,6 +101,7 @@ module.exports = {
   serverConfig,
   ollamaConfig,
   openRouterConfig,
+  lmstudioConfig,
   translationConfig,
   metadataConfig,
   concurrencyConfig,

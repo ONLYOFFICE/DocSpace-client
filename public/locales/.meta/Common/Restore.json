@@ -3,7 +3,7 @@
   "content": "Restore",
   "content_en_sha1_hash": "3cbe6d6b9a8d1596bb5bca12e14d81c9e108a1a3",
   "created_at": "2025-05-19T21:30:47.901Z",
-  "updated_at": "2026-04-23T17:24:01.667Z",
+  "updated_at": "2026-05-08T13:10:45.507Z",
   "comment": {
     "text": "This is a button label or dialog title. It appears when restoring a file, folder, or room from the trash.",
     "is_auto": true,
@@ -43,31 +43,31 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2585,
+      "line_number": 2648,
       "context": "},\n ...moveActions,\n {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: this.onRestoreAction,\n disabled: false,\n },\n indexOptions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2585,
+      "line_number": 2648,
       "context": "},\n ...moveActions,\n {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: this.onRestoreAction,\n disabled: false,\n },\n indexOptions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2585,
+      "line_number": 2648,
       "context": "},\n ...moveActions,\n {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: this.onRestoreAction,\n disabled: false,\n },\n indexOptions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2585,
+      "line_number": 2648,
       "context": "},\n ...moveActions,\n {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: this.onRestoreAction,\n disabled: false,\n },\n indexOptions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2552,
+      "line_number": 2562,
       "context": "itemsCollection\n .set(\"download\", download)\n .set(\"downloadAs\", downloadAs)\n .set(\"restore\", {\n id: \"menu-restore\",\n label: t(\"Common:Restore\"),\n onClick: () => setRestorePanelVisible(true),\n iconUrl: MoveReactSvgUrl,\n })\n .set(\"delete\", deleteOption)\n .set(\"showInfo\", showInfo);",
       "module": "/packages/client"
     },

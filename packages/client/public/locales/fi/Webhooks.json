@@ -24,6 +24,7 @@
   "FileCopied": "Tiedosto kopioitu",
   "FileCreated": "Tiedosto luotu",
   "FileDeleted": "Tiedosto poistettu",
+  "FileDownloaded": "Tiedosto ladattu",
   "FileMoved": "Tiedosto siirretty",
   "FileRestored": "Tiedosto palautettu",
   "FileTrashed": "Tiedosto siirretty roskakoriin",
@@ -32,6 +33,7 @@
   "FolderCopied": "Kansio kopioitu",
   "FolderCreated": "Kansio luotu",
   "FolderDeleted": "Kansio poistettu",
+  "FolderDownloaded": "Kansio ladattu",
   "FolderMoved": "Kansio siirretty",
   "FolderRestored": "Kansio palautettu",
   "FolderTrashed": "Kansio siirretty roskakoriin",
@@ -95,7 +97,5 @@
   "WebhookRemoved": "Webhook poistettu",
   "Webhooks": "Webhookit",
   "WebhooksGuide": "Webhooks-opas",
-  "WebhooksInfo": "Webhookien avulla voit  suorittaa mukautettuja toimintoja millä tahansa sovelluksella tai verkkosivulla {{organizationName}} {{productName}}:n tapahtumien perusteella.\nTässä voit luoda ja hallita kaikkia webhookeja, määrittää ne ja selata kaikkien webhookien historiaa tarkastaaksesi niiden suoritusta.",
-  "FileDownloaded": "Tiedosto ladattu",
-  "FolderDownloaded": "Kansio ladattu"
+  "WebhooksInfo": "Webhookien avulla voit  suorittaa mukautettuja toimintoja millä tahansa sovelluksella tai verkkosivulla {{organizationName}} {{productName}}:n tapahtumien perusteella.\nTässä voit luoda ja hallita kaikkia webhookeja, määrittää ne ja selata kaikkien webhookien historiaa tarkastaaksesi niiden suoritusta."
 }

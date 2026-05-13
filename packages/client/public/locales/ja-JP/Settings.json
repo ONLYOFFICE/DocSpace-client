@@ -319,6 +319,5 @@
   "WantToCancelUpload": "アップロードをキャンセルしますか？",
   "WantToContinueQuota": "ユーザーストレージ容量制限を継続または変更しますか？",
   "WebhooksDescription": "{{organizationName}} {{productName}} の様々なイベントに基づいて、使用している任意のアプリケーションやウェブサイトのサイドでカスタムアクションを実行します。",
-  "WhiteLabelLogoSubtitle": "ライトテーマおよびダークテーマ用に、背景が透明なロゴ（PNG、SVG、JPG）をアップロードするか、下の欄にロゴ名を入力してすぐに作成してください。",
   "WithoutEmailHint": "メールのないユーザーはいません。次のステップに進んでください。"
 }

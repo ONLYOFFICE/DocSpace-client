@@ -23,6 +23,7 @@
   "NeedMoreIntegrations": "Potrebne vam su više integracija?",
   "NeedMoreIntegrationsDescription": "Koristite webhooks za slanje podataka u svoj sistem, ili povežite obrasce sa hiljadama servisa putem Zapiera.",
   "NoDatabaseConnections": "Nije konfigurisano nijedno povezivanje sa bazom podataka",
+  "NoDatabaseConnectionsRoomAdmin": "Povezivanje sa bazom podataka konfiguriše administrator. Kada se baza podataka podesi, moći ćete da omogućite izvoz ovde.",
   "PeopleSelectorInfo": "Samo admin sobe ili {{productName}} admin mogu da postanu vlasnici sobe",
   "Position": "Pozicija",
   "PublicRoomBarDescription": "Ova soba je dostupna svakome ko ima link. Pristup spoljnim korisnicima se omogućava u zavisnosti od odabranog tipa pristupnih prava.",
@@ -44,6 +45,5 @@
   "UserName": "Korisničko ime",
   "ViewerInfo": "Informacije o pregledatelju",
   "WatermarkPreview": "Pregled vodenog žiga",
-  "WatermarkPreviewHelp": "Ova slika prikazuje kako će vodeni žig izgledati u vašim fajlovima.",
-  "NoDatabaseConnectionsRoomAdmin": "Povezivanje sa bazom podataka konfiguriše administrator. Kada se baza podataka podesi, moći ćete da omogućite izvoz ovde."
+  "WatermarkPreviewHelp": "Ova slika prikazuje kako će vodeni žig izgledati u vašim fajlovima."
 }

@@ -766,7 +766,7 @@ test.describe("AI chat", () => {
 
       await removeItem.click();
 
-      const dialog = page.getByRole("dialog");
+      const dialog = page.getByRole("dialog").filter({ hasNotText: "Synchronization with database" });
       await expect(dialog).toBeVisible();
 
       const confirmButton = dialog.getByTestId("delete-chat-confirm-button");
@@ -826,7 +826,7 @@ test.describe("AI chat", () => {
 
       await renameItem.click();
 
-      const dialog = await page.getByRole("dialog");
+      const dialog = page.getByRole("dialog").filter({ hasNotText: "Synchronization with database" });
       await expect(dialog).toBeVisible();
 
       const input = dialog.getByRole("textbox");
@@ -1200,7 +1200,7 @@ test.describe("AI chat", () => {
       await expect(sendButton).toHaveAttribute("aria-disabled", "false");
       await sendButton.click();
 
-      const dialog = page.getByRole("dialog");
+      const dialog = page.getByRole("dialog").filter({ hasNotText: "Synchronization with database" });
       await expect(dialog).toBeVisible();
 
       const toolCallHeader = dialog.getByTestId("tool-call-header");

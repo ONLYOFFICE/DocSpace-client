@@ -3,7 +3,7 @@
   "content": "Email address not valid. You can edit the email by double-clicking on it.",
   "content_en_sha1_hash": "c3b76d1a9c93105e923664b7b759f4e5e023e836",
   "created_at": "2025-05-19T21:30:54.716Z",
-  "updated_at": "2026-04-13T14:59:05.782Z",
+  "updated_at": "2026-05-08T13:10:45.589Z",
   "comment": {
     "text": "This is an error message displayed in a tooltip when an invalid email address is entered during an invitation process. It instructs the user on how to correct the email.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/Item.js",
-      "line_number": 354,
+      "line_number": 355,
       "context": "displayType=\"auto\"\n offsetRight={0}\n tooltipContent={\n hasNotFoundEmail\n ? t(\"EmailErrorMessageUserNotFound\")\n : t(\"EmailErrorMessage\")\n }\n openOnClick={false}\n size={16}\n color={theme.infoPanel.errorColor}\n />",
       "module": "/packages/client"
     }

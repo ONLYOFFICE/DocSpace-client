@@ -71,7 +71,7 @@ export default async function Docs({
   const filter = FilesFilter.getDefault();
   filter.folder = params.folder || "@my";
   filter.pageCount = params.pageCount ? Number(params.pageCount) : PAGE_COUNT;
-  if (params.page) filter.page = Number(params.page);
+  if (params.page) filter.page = Math.max(0, Number(params.page) - 1);
   if (params.sortBy) filter.sortBy = params.sortBy as typeof filter.sortBy;
   if (params.sortOrder) filter.sortOrder = params.sortOrder as typeof filter.sortOrder;
   if (params.search) filter.search = params.search;

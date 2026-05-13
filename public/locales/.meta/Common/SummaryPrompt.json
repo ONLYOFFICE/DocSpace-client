@@ -3,7 +3,7 @@
   "content": "Give me a brief summary of all collected data from \"{{formName}}\"",
   "content_en_sha1_hash": "96482520f78e714238c33b115b1d3b0a79b68c95",
   "created_at": "2026-03-31T15:18:23.908Z",
-  "updated_at": "2026-04-23T17:24:02.135Z",
+  "updated_at": "2026-05-08T13:10:45.716Z",
   "comment": {
     "text": "This is a prompt for an AI chat panel, asking for a summary of data collected from a form. `{{formName}}` will be replaced by the title of the form.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/ai-chat-panel/index.tsx",
-      "line_number": 142,
+      "line_number": 148,
       "context": "formName: pendingAttachmentFile.title,\n }),\n },\n {\n title: t(\"Common:Summary\"),\n prompt: t(\"Common:SummaryPrompt\", {\n formName: pendingAttachmentFile.title,\n }),\n },\n ]\n : undefined,",
       "module": "/packages/sdk"
     }

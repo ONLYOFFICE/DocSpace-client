@@ -3,7 +3,7 @@
   "content": "Copy here",
   "content_en_sha1_hash": "92816e8a2d8cd79faa7d9b23fa0080284e21fef3",
   "created_at": "2025-05-19T21:30:43.763Z",
-  "updated_at": "2026-04-23T17:24:01.668Z",
+  "updated_at": "2026-05-08T13:10:45.508Z",
   "comment": {
     "text": "This is a button label. It appears in file selection dialogs to confirm copying selected files to the current location.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/docs-layout/index.tsx",
-      "line_number": 100,
+      "line_number": 101,
       "context": "portalSettings: TSettings;\n filesFilter: string;\n };\n \n const getSubmitLabel = (mode: SelectorMode, t: (key: string) => string) => {\n if (mode === \"copy\") return t(\"Common:CopyHere\");\n if (mode === \"move\") return t(\"Common:MoveHere\");\n return t(\"Common:RestoreHere\");\n };\n \n const DocsLayoutInner = observer(({",
       "module": "/packages/sdk"
     }

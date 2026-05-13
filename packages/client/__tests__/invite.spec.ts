@@ -64,7 +64,7 @@ test.describe("Invite", () => {
     mockRequest.use(getEmptyPortalInvitationLink(TEST_PORT, EmployeeType.User));
     await menuItem.click();
 
-    const inviteDialog = page.getByTestId("modal-dialog");
+    const inviteDialog = page.getByTestId("modal-dialog").filter({ hasNotText: "Synchronization with database" });
     await expect(inviteDialog).toBeVisible();
 
     await expect(inviteDialog).toHaveScreenshot([
@@ -97,7 +97,7 @@ test.describe("Invite", () => {
     mockRequest.use(getPortalInvitationLink(TEST_PORT, EmployeeType.User));
     await menuItem.click();
 
-    const inviteDialog = page.getByTestId("modal-dialog");
+    const inviteDialog = page.getByTestId("modal-dialog").filter({ hasNotText: "Synchronization with database" });
     await expect(inviteDialog).toBeVisible();
 
     await expect(inviteDialog).toHaveScreenshot([
@@ -132,7 +132,7 @@ test.describe("Invite", () => {
     mockRequest.use(getPortalInvitationLink(TEST_PORT, EmployeeType.User));
     await menuItem.click();
 
-    const inviteDialog = page.getByTestId("modal-dialog");
+    const inviteDialog = page.getByTestId("modal-dialog").filter({ hasNotText: "Synchronization with database" });
     await expect(inviteDialog).toBeVisible();
 
     await expect(inviteDialog).toHaveScreenshot([

@@ -183,7 +183,7 @@ test.describe("AI Provider", () => {
     const deleteItem = page.getByTestId("delete_item");
     await deleteItem.click();
 
-    const deleteProviderDialog = page.getByRole("dialog");
+    const deleteProviderDialog = page.getByRole("dialog").filter({ hasText: "Delete AI provider" });
     await expect(deleteProviderDialog).toBeVisible();
     await expect(deleteProviderDialog).toContainText("Delete AI provider");
 
@@ -248,7 +248,7 @@ test.describe("AI Provider", () => {
     const deleteItem = page.getByTestId("delete_item");
     await deleteItem.click();
 
-    const deleteProviderDialog = page.getByRole("dialog");
+    const deleteProviderDialog = page.getByRole("dialog").filter({ hasText: "Delete AI provider" });
     await expect(deleteProviderDialog).toBeVisible();
     await expect(deleteProviderDialog).toContainText("Delete AI provider");
 

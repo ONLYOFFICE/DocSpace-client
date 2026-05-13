@@ -3,7 +3,7 @@
   "content": "Members",
   "content_en_sha1_hash": "1cb449c1126609b4b41e1d87f65f0d7cd19b49b9",
   "created_at": "2025-05-19T21:30:46.449Z",
-  "updated_at": "2026-04-13T14:59:05.727Z",
+  "updated_at": "2026-05-08T13:10:45.484Z",
   "comment": {
     "text": "This is a label for a section or item, referring to the users associated with a particular account or room.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/People/index.tsx",
-      "line_number": 697,
+      "line_number": 684,
       "context": "? {\n withTabs: true,\n tabsData: [\n {\n id: PEOPLE_TAB_ID,\n name: t(\"Members\"),\n onClick: () => changeActiveTab(PEOPLE_TAB_ID),\n content: null,\n },\n ...[\n withGroups && {",
       "module": "/libs/ui-kit"
     },
@@ -49,13 +49,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 712,
+      "line_number": 713,
       "context": "if (isSettingsPage) return t(\"Common:Settings\");\n \n if (isContactsPage) {\n switch (contactsTab) {\n case \"people\":\n return t(\"Common:Members\");\n case \"groups\":\n return t(\"Common:Groups\");\n case \"inside_group\": {\n return isLoading && insideGroupTempTitle\n ? insideGroupTempTitle",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 712,
+      "line_number": 713,
       "context": "if (isSettingsPage) return t(\"Common:Settings\");\n \n if (isContactsPage) {\n switch (contactsTab) {\n case \"people\":\n return t(\"Common:Members\");\n case \"groups\":\n return t(\"Common:Groups\");\n case \"inside_group\": {\n return isLoading && insideGroupTempTitle\n ? insideGroupTempTitle",
       "module": "/packages/client"
     },

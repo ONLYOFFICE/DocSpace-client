@@ -319,6 +319,5 @@
   "WantToCancelUpload": "¿Desea cancelar la carga?",
   "WantToContinueQuota": "¿Desea continuar o cambiar la cuota de almacenamiento del usuario?",
   "WebhooksDescription": "Realice acciones personalizadas en cualquier aplicación o sitio web que esté utilizando, basándose en diversos eventos en {{organizationName}} {{productName}}.",
-  "WhiteLabelLogoSubtitle": "Suba logotipos con fondo transparente (PNG, SVG, JPG) para temas claros y oscuros, o genere uno al instante introduciendo su logotipo a continuación.",
   "WithoutEmailHint": "No tiene usuarios sin correos electrónicos. Continúe con el siguiente paso."
 }

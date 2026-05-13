@@ -319,6 +319,5 @@
   "WantToCancelUpload": "Czy chcesz anulować przesyłanie?",
   "WantToContinueQuota": "Chcesz kontynuować czy zmienić limit pamięci użytkownika?",
   "WebhooksDescription": "Wykonuj niestandardowe akcje po stronie dowolnej aplikacji lub witryny, której używasz, na podstawie różnych zdarzeń w {{organizationName}} {{productName}}.",
-  "WhiteLabelLogoSubtitle": "Prześlij logotypy z przezroczystym tłem (PNG, SVG, JPG) dla jasnych i ciemnych motywów lub wygeneruj jeden natychmiast, wpisując nazwę swojego logo poniżej.",
   "WithoutEmailHint": "Nie masz użytkowników bez adresu e-mail. Przejdź do kolejnego kroku."
 }

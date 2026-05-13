@@ -23,6 +23,7 @@
   "NeedMoreIntegrations": "더 많은 통합이 필요하신가요?",
   "NeedMoreIntegrationsDescription": "웹훅을 사용하여 데이터를 자체 시스템으로 전송하거나 Zapier를 통해 수천 개의 서비스에 양식을 연결하세요.",
   "NoDatabaseConnections": "데이터베이스 연결이 구성되지 않았습니다",
+  "NoDatabaseConnectionsRoomAdmin": "데이터베이스 연결은 관리자가 구성합니다. 데이터베이스가 설정되면 여기서 내보내기를 활성화할 수 있습니다.",
   "PeopleSelectorInfo": "방 관리자 또는 {{productName}} 관리자만 방 소유자가 될 수 있습니다",
   "Position": "위치",
   "PublicRoomBarDescription": "이 룸은 링크를 가진 누구나 사용할 수 있습니다. 외부 사용자에 대한 액세스는 선택한 액세스 권한 유형에 따라 제공됩니다.",
@@ -44,6 +45,5 @@
   "UserName": "사용자 이름",
   "ViewerInfo": "뷰어 정보",
   "WatermarkPreview": "워터마크 미리보기",
-  "WatermarkPreviewHelp": "이 이미지 미리보기는 워터마크가 파일에 어떻게 표시되는지 대략적으로 보여줍니다. ",
-  "NoDatabaseConnectionsRoomAdmin": "데이터베이스 연결은 관리자가 구성합니다. 데이터베이스가 설정되면 여기서 내보내기를 활성화할 수 있습니다."
+  "WatermarkPreviewHelp": "이 이미지 미리보기는 워터마크가 파일에 어떻게 표시되는지 대략적으로 보여줍니다. "
 }

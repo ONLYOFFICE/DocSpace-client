@@ -51,6 +51,7 @@ const ProfileBlock = ({ user, showText }: ProfileBlockProps) => {
     <div
       className={styles.profileBlock}
       data-show-text={showText ? "true" : "false"}
+      onClick={() => window.location.assign("/profile")}
     >
       <Avatar
         className={styles.avatar}
@@ -75,3 +76,4 @@ const ProfileBlock = ({ user, showText }: ProfileBlockProps) => {
 };
 
 export default ProfileBlock;
+

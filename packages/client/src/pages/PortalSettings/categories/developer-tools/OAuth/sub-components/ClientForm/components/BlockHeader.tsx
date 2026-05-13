@@ -24,11 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import classNames from "classnames";
+
 import { Text } from "@docspace/ui-kit/components/text";
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
-import { StyledHeaderRow } from "../ClientForm.styled";
+import styles from "../ClientForm.styled.module.scss";
 
 interface BlockHeaderProps {
   header: string;
@@ -44,7 +46,7 @@ const BlockHeader = ({
   isRequired,
 }: BlockHeaderProps) => {
   return (
-    <StyledHeaderRow className={className}>
+    <div className={classNames(styles.styledHeaderRow, className)}>
       <Text
         fontSize="16px"
         fontWeight={700}
@@ -75,7 +77,7 @@ const BlockHeader = ({
           tooltipContent={helpButtonText}
         />
       ) : null}
-    </StyledHeaderRow>
+    </div>
   );
 };
 

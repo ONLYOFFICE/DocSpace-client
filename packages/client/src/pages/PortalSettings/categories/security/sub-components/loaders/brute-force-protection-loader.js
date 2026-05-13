@@ -24,35 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-const StyledLoader = styled.div`
-  padding-inline-end: 8px;
-
-  .header {
-    margin-bottom: 12px;
-  }
-
-  .content {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .buttons {
-    width: calc(100% - 32px);
-    position: absolute;
-    bottom: 16px;
-  }
-`;
+import styles from "./brute-force-protection-loader.module.scss";
 
 const BruteForceProtectionLoader = () => {
   return (
-    <StyledLoader>
-      <RectangleSkeleton className="header" height="80px" />
+    <div className={styles.loader}>
+      <RectangleSkeleton className={styles.header} height="80px" />
 
-      <div className="content">
+      <div className={styles.content}>
         <div>
           <RectangleSkeleton width="140px" height="20px" />
           <RectangleSkeleton height="32px" />
@@ -69,8 +50,8 @@ const BruteForceProtectionLoader = () => {
         </div>
       </div>
 
-      <RectangleSkeleton className="buttons" height="40px" />
-    </StyledLoader>
+      <RectangleSkeleton className={styles.buttons} height="40px" />
+    </div>
   );
 };
 

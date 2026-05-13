@@ -36,7 +36,7 @@ import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 import { searchMigrationUsers } from "SRC_DIR/pages/PortalSettings/utils/importUtils";
 import AccountsTable from "./AccountsTable";
 import AccountsPaging from "../../sub-components/AccountsPaging";
-import { Wrapper } from "../../StyledDataImport";
+import styles from "../../StyledDataImport.module.scss";
 import { AddEmailsStepProps, InjectedAddEmailsStepProps } from "../../types";
 import { MigrationButtons } from "../../sub-components/MigrationButtons";
 import UsersInfoBlock from "../../sub-components/UsersInfoBlock";
@@ -121,7 +121,7 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
 	);
 
 	return (
-		<Wrapper>
+		<div className={styles.wrapper}>
 			{users.withoutEmail.length > 0 ? (
 				<>
 					<NoEmailUsersBlock
@@ -179,7 +179,7 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
 					isSixthStep={false}
 				/>
 			) : null}
-		</Wrapper>
+		</div>
 	);
 };
 

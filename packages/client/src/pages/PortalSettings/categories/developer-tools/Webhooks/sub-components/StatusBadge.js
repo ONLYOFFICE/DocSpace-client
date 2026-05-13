@@ -25,18 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { Badge } from "@docspace/ui-kit/components/badge";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
-const StyledBadge = styled(Badge)`
-  p {
-    background-color: transparent;
-  }
-`;
+import styles from "../Webhooks.styled.module.scss";
 
 const StatusBadge = (props) => {
   const { status, theme } = props;
@@ -68,7 +63,8 @@ const StatusBadge = (props) => {
   }
 
   return (
-    <StyledBadge
+    <Badge
+      className={styles.styledBadge}
       id="webhook-status"
       backgroundColor={badgeColorScheme.backgroundColor}
       color={badgeColorScheme.color}

@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
 
-import { TableCell } from "@docspace/ui-kit/components/table";
+import classNames from "classnames";
+import { TableCell, TableRow } from "@docspace/ui-kit/components/table";
 import { Link } from "@docspace/ui-kit/components/link";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Text } from "@docspace/ui-kit/components/text";
@@ -36,7 +36,6 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/ui-kit/components/avatar";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { TGroup } from "@docspace/shared/api/groups/types";
 
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
@@ -44,7 +43,7 @@ import ContactsHotkeysStore from "SRC_DIR/store/contacts/ContactsHotkeysStore";
 
 import Badges from "../../Badges";
 
-import { GroupsRowWrapper, GroupsRow } from "./TableView.styled";
+import styles from "./TableView.module.scss";
 
 type GroupsTableItemProps = {
   item: TGroup;
@@ -80,7 +79,6 @@ const GroupsTableItem = ({
   withContentSelection,
 }: GroupsTableItemProps) => {
   const { t } = useTranslation(["People", "Common", "PeopleTranslations"]);
-  const theme = useTheme();
   const isActive = bufferSelection?.id === item.id;
 
   const onChange = () => {
@@ -112,22 +110,24 @@ const GroupsTableItem = ({
 
   const getContextModel: () => ContextMenuModel[] = () => getModel!(t, item);
 
+  // used for selection-area
   const value = `folder_${item.id}_false_index_${itemIndex}`;
 
   return (
-    <GroupsRowWrapper
-      id={item.id}
-      className={`group-item ${
-        (isChecked || isActive) && "table-row-selected"
-      } ${item.id}`}
-      value={value}
+    <div
+      id={String(item.id)}
+      className={classNames(styles.groupsRowWrapper, "group-item", {
+        "table-row-selected": isChecked || isActive,
+      }, String(item.id))}
+      {...({ value } as unknown as { value?: string })}
       data-testid={`contacts_table_groups_row_${itemIndex}`}
     >
-      <GroupsRow
+      <TableRow
         key={item.id}
-        className="table-row"
-        checked={isChecked}
-        isActive={isActive}
+        className={classNames(styles.groupsRow, "table-row", {
+          [styles.checked]: isChecked,
+          [styles.active]: isActive,
+        })}
         onClick={onRowClick}
         fileContextClick={onRowContextClick}
         contextOptions={
@@ -192,7 +192,7 @@ const GroupsTableItem = ({
               fontWeight="600"
               fontSize="13px"
               className="table-cell_group-people"
-              color={theme.filesSection.tableView.row.sideColor}
+              color="var(--files-section-table-view-row-side-color)"
             >
               {item.membersCount}
             </Text>
@@ -211,7 +211,7 @@ const GroupsTableItem = ({
               fontWeight="600"
               fontSize="13px"
               className="table-cell_group-manager"
-              color={globalColors.gray}
+              color="var(--files-section-table-view-row-side-color)"
               dir="auto"
               truncate
             >
@@ -221,8 +221,8 @@ const GroupsTableItem = ({
         ) : (
           <div />
         )}
-      </GroupsRow>
-    </GroupsRowWrapper>
+      </TableRow>
+    </div>
   );
 };
 

@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect, useState, useCallback } from "react";
+import classNames from "classnames";
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
 
 import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
@@ -35,52 +35,10 @@ import { Link } from "@docspace/ui-kit/components/link";
 import { AddButton } from "@docspace/ui-kit/components/add-button";
 import { SelectedItem } from "@docspace/ui-kit/components/selected-item";
 import { InfoBar } from "@docspace/shared/components/info-bar";
-import { injectDefaultTheme, tablet } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
-const CategoryHeader = styled.div`
-  margin-top: 24px;
-  margin-bottom: 16px;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 22px;
-`;
-
-const Container = styled.div.attrs(injectDefaultTheme)`
-  margin-bottom: 4px;
-
-  &.description-holder {
-    display: block;
-    color: ${(props) => props.theme.sdkPresets.secondaryColor};
-    margin-bottom: 16px;
-  }
-
-  &.description-holder > div {
-    display: inline-block;
-    margin-inline-start: 4px;
-    transform: translateY(1px);
-  }
-
-  &.input-holder {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    @media ${tablet} {
-      margin-bottom: 8px;
-    }
-  }
-`;
-
-const ChipsContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px 4px;
-  margin-top: 8px;
-  margin-bottom: 16px;
-  flex-wrap: wrap;
-`;
+import styles from "./csp.module.scss";
 
 const CSP = ({
   cspDomains,
@@ -171,10 +129,10 @@ const CSP = ({
 
   return (
     <>
-      <CategoryHeader>
+      <div className={styles.categoryHeader}>
         {t("CSPHeader", { productName: getBrandName("ProductName") })}
-      </CategoryHeader>
-      <Container className="description-holder">
+      </div>
+      <div className={classNames(styles.container, styles.descriptionHolder)}>
         {t("CSPDescription", {
           productName: getBrandName("ProductName"),
           organizationName: logoText,
@@ -185,7 +143,7 @@ const CSP = ({
           size={12}
           tooltipContent={<Text fontSize="12px">{t("CSPHelp")}</Text>}
         />
-      </Container>
+      </div>
       {standalone && window.location.protocol !== "https:" ? (
         <InfoBar
           title={t("CSPInfoBarHeader")}
@@ -209,7 +167,7 @@ const CSP = ({
           }
         />
       ) : null}
-      <Container className="input-holder">
+      <div className={classNames(styles.container, styles.inputHolder)}>
         <TextInput
           onChange={onChangeDomain}
           value={domain}
@@ -224,14 +182,14 @@ const CSP = ({
           isDisabled={!domain.trim()}
           onClick={addDomain}
         />
-      </Container>
+      </div>
       <Text
         lineHeight="20px"
         color={error ? theme?.input.focusErrorBorderColor : globalColors.gray}
       >
         {error || t("CSPUrlHelp", { productName: getBrandName("ProductName") })}
       </Text>
-      <ChipsContainer>{getChips(cspDomains)}</ChipsContainer>
+      <div className={styles.chipsContainer}>{getChips(cspDomains)}</div>
     </>
   );
 };

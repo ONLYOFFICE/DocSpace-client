@@ -30,7 +30,7 @@ import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url
 
 import { useState } from "react";
 import { inject, observer } from "mobx-react";
-import styled, { useTheme } from "styled-components";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
@@ -39,42 +39,9 @@ import { RowContainer, Row } from "@docspace/ui-kit/components/rows";
 import { Text } from "@docspace/ui-kit/components/text";
 
 import { TEnhancedMigrationUser } from "@docspace/shared/api/settings/types";
-import { tablet } from "@docspace/ui-kit/utils/device";
-
 import UsersRow from "./UsersRow";
 import { AddEmailRowProps, RowViewProps } from "../../../../types";
-
-const StyledRowContainer = styled(RowContainer)`
-  margin: 0 0 20px;
-
-  .clear-icon {
-    margin-inline-end: 8px;
-  }
-
-  .buttons-box {
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-  }
-`;
-
-const StyledRow = styled(Row)`
-  box-sizing: border-box;
-  height: 40px;
-  min-height: 40px;
-
-  .row-header-title {
-    color: ${(props) => props.theme.client.settings.migration.tableHeaderText};
-    font-weight: 600;
-    font-size: 12px;
-  }
-
-  @media ${tablet} {
-    .row_content {
-      height: auto;
-    }
-  }
-`;
+import styles from "../../../../StyledDataImport.module.scss";
 
 const checkedAccountType = "withoutEmail";
 
@@ -116,17 +83,18 @@ const RowView = (props: RowViewProps) => {
     checkedUsers.withoutEmail.length === usersWithFilledEmails.length;
 
   return (
-    <StyledRowContainer useReactWindow={false}>
+    <RowContainer className={styles.styledRowContainerEmail} useReactWindow={false}>
       {accountsData.length > 0 ? (
         <>
-          <StyledRow
+          <Row
+            className={styles.styledRowEmail}
             checked={isChecked}
             onSelect={toggleAll}
             indeterminate={isIndeterminate}
             isDisabled={usersWithFilledEmails.length === 0}
           >
             <Text className="row-header-title">{t("Common:Name")}</Text>
-          </StyledRow>
+          </Row>
           {accountsData.map((data) => (
             <UsersRow
               t={t}
@@ -172,7 +140,7 @@ const RowView = (props: RowViewProps) => {
         />
       )}
       <div />
-    </StyledRowContainer>
+    </RowContainer>
   );
 };
 

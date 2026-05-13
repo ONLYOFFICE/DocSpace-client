@@ -36,7 +36,7 @@ import { isMobile } from "@docspace/ui-kit/utils/device";
 
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import StyledLdapPage from "./styled-components/StyledLdapPage";
+import StyledLdapPage from "./styled-containers/StyledLdapPage";
 
 import ToggleLDAP from "./sub-components/ToggleLDAP";
 import { SyncContainerSection } from "./sub-components/SyncContainer";

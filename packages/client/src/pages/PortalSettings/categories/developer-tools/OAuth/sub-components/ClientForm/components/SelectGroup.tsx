@@ -30,7 +30,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { AddButton } from "@docspace/ui-kit/components/add-button";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
-import { StyledInputGroup } from "../ClientForm.styled";
+import styles from "../ClientForm.styled.module.scss";
 
 interface SelectGroupProps {
   label: string;
@@ -73,7 +73,7 @@ const SelectGroup = ({
   };
 
   return (
-    <StyledInputGroup data-testid={dataTestId}>
+    <div className={styles.styledInputGroup} data-testid={dataTestId}>
       <div className="label">
         <Text
           fontSize="13px"
@@ -118,7 +118,7 @@ const SelectGroup = ({
         style={{ display: "none" }}
         accept="image/png, image/jpeg, image/svg+xml"
       />
-    </StyledInputGroup>
+    </div>
   );
 };
 

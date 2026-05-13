@@ -33,7 +33,7 @@ import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { Text } from "@docspace/ui-kit/components/text";
 import { getFolderPath } from "@docspace/shared/api/files";
 
-import { StyledText } from "./CellStyles";
+import styles from "./CellStyles.module.scss";
 
 type TPath = {
 	id: number;
@@ -80,18 +80,18 @@ const LocationCell = ({ sideColor, item }: LocationCellProps) => {
 	}, [path, originId, title]);
 
 	return [
-		<StyledText
+		<Text
 			key="cell"
 			fontSize="12px"
 			fontWeight={600}
 			color={sideColor}
-			className="row_update-text"
+			className={`${styles.styledText} row_update-text`}
 			truncate
 			data-tooltip-id={`${id}`}
 			data-tip=""
 		>
 			{title || "—"}
-		</StyledText>,
+		</Text>,
 
 		withTooltip ? (
 			<Tooltip

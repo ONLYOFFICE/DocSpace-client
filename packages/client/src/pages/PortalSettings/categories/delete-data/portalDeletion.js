@@ -37,7 +37,7 @@ import { sendDeletePortalEmail } from "@docspace/shared/api/portal";
 import { isDesktop } from "@docspace/shared/utils";
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
-import { MainContainer, ButtonWrapper } from "./StyledDeleteData";
+import styles from "./StyledDeleteData.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 const PortalDeletion = (props) => {
@@ -90,14 +90,14 @@ const PortalDeletion = (props) => {
     owner?.activationStatus === EmployeeActivationStatus.NotActivated;
 
   return (
-    <MainContainer>
-      <Text fontSize="13px" className="description">
+    <div className={styles.mainContainer}>
+      <Text fontSize="13px" className={styles.description}>
         {t("PortalDeletionDescription")}
       </Text>
-      <Text className="helper">{t("PortalDeletionHelper")}</Text>
-      <ButtonWrapper>
+      <Text className={styles.helper}>{t("PortalDeletionHelper")}</Text>
+      <div className={styles.buttonWrapper}>
         <Button
-          className="delete-button button"
+          className={`delete-button ${styles.button}`}
           label={t("Common:Delete")}
           primary
           size={isDesktopView ? "small" : "normal"}
@@ -112,7 +112,7 @@ const PortalDeletion = (props) => {
               productName: getBrandName("ProductName"),
             })}
             <Link
-              className="request-again-link"
+              className={styles.requestAgainLink}
               color={currentColorScheme?.main?.accent}
               fontSize="12px"
               fontWeight="400"
@@ -123,14 +123,14 @@ const PortalDeletion = (props) => {
             </Link>
           </Text>
         ) : null}
-      </ButtonWrapper>
+      </div>
       <DeletePortalDialog
         visible={isDialogVisible}
         onClose={() => setIsDialogVisible(false)}
         owner={owner}
         stripeUrl={stripeUrl}
       />
-    </MainContainer>
+    </div>
   );
 };
 

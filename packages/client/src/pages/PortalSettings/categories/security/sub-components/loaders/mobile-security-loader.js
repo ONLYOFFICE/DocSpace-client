@@ -24,60 +24,41 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-const StyledLoader = styled.div`
-  .header {
-    width: 273px;
-    margin-bottom: 18px;
-  }
-
-  .submenu {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 30px;
-  }
-
-  .category {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 30px;
-  }
-`;
+import styles from "./mobile-security-loader.module.scss";
 
 const MobileSecurityLoader = () => {
   return (
-    <StyledLoader>
-      <RectangleSkeleton className="header" height="37px" />
-      <div className="submenu">
+    <div className={styles.loader}>
+      <RectangleSkeleton className={styles.header} height="37px" />
+      <div className={styles.submenu}>
         <RectangleSkeleton height="28px" width="72px" />
         <RectangleSkeleton height="28px" width="72px" />
         <RectangleSkeleton height="28px" width="72px" />
         <RectangleSkeleton height="28px" width="72px" />
       </div>
 
-      <div className="category">
+      <div className={styles.category}>
         <RectangleSkeleton height="22px" width="236px" />
         <RectangleSkeleton height="60px" />
       </div>
 
-      <div className="category">
+      <div className={styles.category}>
         <RectangleSkeleton height="22px" width="227px" />
         <RectangleSkeleton height="120px" />
       </div>
 
-      <div className="category">
+      <div className={styles.category}>
         <RectangleSkeleton height="22px" />
         <RectangleSkeleton height="40px" />
       </div>
 
-      <div className="category">
+      <div className={styles.category}>
         <RectangleSkeleton height="22px" width="101px" />
         <RectangleSkeleton height="40px" />
       </div>
-    </StyledLoader>
+    </div>
   );
 };
 

@@ -27,20 +27,13 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { withTranslation } from "react-i18next";
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
-import { injectDefaultTheme } from "@docspace/shared/utils";
 import { CategoryItem } from "@docspace/ui-kit/components/category-item";
 
 import LoaderCustomizationNavbar from "./sub-components/loaderCustomizationNavbar";
+import styles from "./customization-navbar.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";
-
-const StyledComponent = styled.div.attrs(injectDefaultTheme)`
-  .combo-button-label {
-    max-width: 100%;
-  }
-`;
 
 const CustomizationNavbar = ({
   t,
@@ -66,7 +59,7 @@ const CustomizationNavbar = ({
   return !isLoadedPage ? (
     <LoaderCustomizationNavbar />
   ) : (
-    <StyledComponent>
+    <div className={styles.customizationNavbar}>
       <CategoryItem
         title={t("StudioTimeLanguageSettings")}
         subtitle={t("LanguageAndTimeZoneSettingsNavDescription")}
@@ -127,7 +120,7 @@ const CustomizationNavbar = ({
         url="/portal-settings/customization/general/ai-services-management"
         onClickLink={onClickLink}
       />
-    </StyledComponent>
+    </div>
   );
 };
 

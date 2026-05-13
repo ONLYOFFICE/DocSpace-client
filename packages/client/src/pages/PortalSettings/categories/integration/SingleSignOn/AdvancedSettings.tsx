@@ -25,9 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+
+import styles from "./AdvancedSettings.module.scss";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
@@ -43,29 +44,6 @@ interface InjectedProps {
 	setCheckbox: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const StyledWrapper = styled.div`
-  margin: 24px 0;
-
-  .advanced-title {
-    margin-bottom: 16px;
-  }
-
-  .advanced-block {
-    margin-bottom: 8px;
-    display: flex;
-    align-items: baseline;
-
-    .help-icon {
-      position: relative;
-      bottom: 2px;
-    }
-  }
-
-  .checkbox-input {
-    width: fit-content;
-    margin-inline: 0 4px;
-  }
-`;
 
 const AdvancedSettings = (props: InjectedProps) => {
 	const {
@@ -77,15 +55,15 @@ const AdvancedSettings = (props: InjectedProps) => {
 	} = props;
 	const { t } = useTranslation(["SingleSignOn", "Settings", "Common"]);
 	return (
-		<StyledWrapper>
-			<Text className="advanced-title" fontWeight={600} fontSize="14px">
+		<div className={styles.styledWrapper}>
+			<Text className={styles.advancedTitle} fontWeight={600} fontSize="14px">
 				{t("AdvancedSettings")}
 			</Text>
 
-			<div className="advanced-block">
+			<div className={styles.advancedBlock}>
 				<Checkbox
 					id="hide-auth-page"
-					className="checkbox-input"
+					className={styles.checkboxInput}
 					label={t("HideAuthPage")}
 					name="hideAuthPage"
 					isChecked={hideAuthPage}
@@ -99,10 +77,10 @@ const AdvancedSettings = (props: InjectedProps) => {
 				/>
 			</div>
 
-			<div className="advanced-block">
+			<div className={styles.advancedBlock}>
 				<Checkbox
 					id="disable-email-verification"
-					className="checkbox-input"
+					className={styles.checkboxInput}
 					label={t("Settings:DisableEmailVerification")}
 					name="disableEmailVerification"
 					isChecked={disableEmailVerification}
@@ -118,7 +96,7 @@ const AdvancedSettings = (props: InjectedProps) => {
 					dataTestId="disable_email_verification_help_button"
 				/>
 			</div>
-		</StyledWrapper>
+		</div>
 	);
 };
 

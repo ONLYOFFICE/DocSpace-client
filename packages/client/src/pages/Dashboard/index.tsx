@@ -62,9 +62,10 @@ import styles from "./Dashboard.module.scss";
 
 interface DashboardProps {
   firstName?: string;
+  pricingUrl?: string;
 }
 
-const Dashboard = ({ firstName }: DashboardProps) => {
+const Dashboard = ({ firstName, pricingUrl }: DashboardProps) => {
   const { t } = useTranslation(["Common"]);
   const [myFolderId, setMyFolderId] = React.useState<number | null>(null);
 
@@ -113,10 +114,7 @@ const Dashboard = ({ firstName }: DashboardProps) => {
         icon: <BlankPdfIcon />,
         label: getConstName("PDF"),
         onClick: () =>
-          window.open(
-            makeCreateUrl(NEW_FILE_NAMES.pdf, myFolderId),
-            "_blank",
-          ),
+          window.open(makeCreateUrl(NEW_FILE_NAMES.pdf, myFolderId), "_blank"),
       },
     ],
     [t, myFolderId],
@@ -219,6 +217,10 @@ const Dashboard = ({ firstName }: DashboardProps) => {
             className={styles.modulesPricingBtn}
             label={t("Common:SeePricing")}
             size={ButtonSize.small}
+            isDisabled={!pricingUrl}
+            onClick={() => {
+              if (pricingUrl) window.open(pricingUrl, "_blank");
+            }}
           />
         </div>
 
@@ -233,8 +235,15 @@ const Dashboard = ({ firstName }: DashboardProps) => {
 };
 
 const DashboardConnected = inject(
-  ({ userStore }: { userStore: { user: { firstName?: string } | null } }) => ({
+  ({
+    userStore,
+    settingsStore,
+  }: {
+    userStore: { user: { firstName?: string } | null };
+    settingsStore: { docspacePricesUrl?: string };
+  }) => ({
     firstName: userStore.user?.firstName,
+    pricingUrl: settingsStore.docspacePricesUrl,
   }),
 )(observer(Dashboard));
 

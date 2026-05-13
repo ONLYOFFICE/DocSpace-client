@@ -42,6 +42,7 @@ const HeaderComponent = ({
   isLoaded,
   isAuthenticated,
   isPreparationPortal,
+  isDashboard,
   theme,
   toggleArticleOpen,
   customHeader,
@@ -85,7 +86,7 @@ const HeaderComponent = ({
         needNavMenu={false}
         isDesktopView={isDesktopView}
       >
-        {currentProductId !== "home" ? (
+        {currentProductId !== "home" && !isDashboard ? (
           <HeaderCatalogBurger onClick={toggleArticleOpen} />
         ) : null}
         {customHeader || (

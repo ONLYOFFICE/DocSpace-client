@@ -24,56 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import { useSearchParams } from "react-router";
+import { useTranslation } from "react-i18next";
 
-import {
-  Avatar,
-  AvatarRole,
-  AvatarSize,
-} from "@docspace/ui-kit/components/avatar";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Encoder } from "@docspace/ui-kit/utils/encoder";
-import type { TUser } from "@docspace/shared/api/people/types";
+import SdkIframe from "SRC_DIR/components/SdkIframe";
 
-import styles from "./ProfileBlock.module.scss";
-
-type ProfileBlockProps = {
-  user: TUser;
-  showText: boolean;
+const SECTION_TO_PATH: Record<string, string> = {
+  recent: "/sdk/personal-files/recent",
+  favorites: "/sdk/personal-files/favorites",
+  trash: "/sdk/personal-files/trash",
+  settings: "/sdk/personal-files/settings",
 };
 
-const ProfileBlock = ({ user, showText }: ProfileBlockProps) => {
-  const displayName = user.displayName
-    ? Encoder.htmlDecode(user.displayName)
-    : "";
-
-  return (
-    <div
-      className={styles.profileBlock}
-      data-show-text={showText ? "true" : "false"}
-      onClick={() => window.location.assign("/profile")}
-    >
-      <Avatar
-        className={styles.avatar}
-        size={AvatarSize.min}
-        role={AvatarRole.user}
-        source={user.avatar || ""}
-        userName={displayName}
-      />
-      {showText ? (
-        <Text
-          className={styles.name}
-          fontWeight={600}
-          noSelect
-          truncate
-          dir="auto"
-        >
-          {displayName}
-        </Text>
-      ) : null}
-    </div>
-  );
+export const AiFiles = () => {
+  const { t } = useTranslation(["Common"]);
+  const [searchParams] = useSearchParams();
+  const section = searchParams.get("section") ?? "";
+  const src = SECTION_TO_PATH[section] ?? "/sdk/personal-files";
+  return <SdkIframe src={src} title={t("Common:DashboardAIFilesTitle")} />;
 };
 
-export default ProfileBlock;
-
+export default AiFiles;

@@ -24,35 +24,53 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import {
+  Avatar,
+  AvatarRole,
+  AvatarSize,
+} from "@docspace/ui-kit/components/avatar";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Encoder } from "@docspace/ui-kit/utils/encoder";
+import type { TUser } from "@docspace/shared/api/people/types";
 
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import CollapseIcon from "@docspace/ui-kit/assets/article-hide-menu-icon.react.svg";
+import styles from "./ProfileBlock.module.scss";
 
-import styles from "./CollapseButton.module.scss";
-
-type CollapseButtonProps = {
+type ProfileBlockProps = {
+  user: TUser;
   showText: boolean;
-  toggleShowText: () => void;
-  label?: string;
 };
 
-const CollapseButton = ({
-  showText,
-  toggleShowText,
-  label,
-}: CollapseButtonProps) => (
-  <div className={styles.wrapper} data-show-text={showText ? "true" : "false"}>
-    <IconButton
-      iconNode={<CollapseIcon />}
-      size={20}
-      isFill={false}
-      isStroke
-      onClick={toggleShowText}
-      title={label}
-    />
-  </div>
-);
+const ProfileBlock = ({ user, showText }: ProfileBlockProps) => {
+  const displayName = user.displayName
+    ? Encoder.htmlDecode(user.displayName)
+    : "";
 
-export default CollapseButton;
+  return (
+    <div
+      className={styles.profileBlock}
+      data-show-text={showText ? "true" : "false"}
+      onClick={() => window.location.assign("/profile")}
+    >
+      <Avatar
+        className={styles.avatar}
+        size={AvatarSize.min}
+        role={AvatarRole.user}
+        source={user.avatar || ""}
+        userName={displayName}
+      />
+      {showText ? (
+        <Text
+          className={styles.name}
+          fontWeight={600}
+          noSelect
+          truncate
+          dir="auto"
+        >
+          {displayName}
+        </Text>
+      ) : null}
+    </div>
+  );
+};
 
+export default ProfileBlock;

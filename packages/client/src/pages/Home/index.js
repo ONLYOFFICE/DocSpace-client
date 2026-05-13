@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useCallback } from "react";
-import { useLocation, Outlet } from "react-router";
+import { useLocation, Outlet, Navigate } from "react-router";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -525,6 +525,14 @@ const PureHome = (props) => {
 
 const Home = withTranslation(["UploadPanel", "Files", "People"])(PureHome);
 
+const HomeWithGuard = (props) => {
+  const useDocSpace = localStorage.getItem("useDocSpace") === "true";
+
+  if (!useDocSpace) return <Navigate to="/dashboard" replace />;
+
+  return <Home {...props} />;
+};
+
 export const Component = inject(
   ({
     authStore,
@@ -851,5 +859,5 @@ export const Component = inject(
       getPluginIconUrl,
     };
   },
-)(observer(Home));
+)(observer(HomeWithGuard));
 

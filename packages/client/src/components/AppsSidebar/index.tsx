@@ -24,14 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
-
 import { useTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
 
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { NavMenu } from "@docspace/ui-kit/components/nav-menu";
 import type { NavMenuGroup } from "@docspace/ui-kit/components/nav-menu";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { getLogoUrl } from "@docspace/ui-kit/utils/getLogoUrl";
 import { WhiteLabelLogoType } from "@docspace/ui-kit/enums";
 import articleStyles from "@docspace/ui-kit/components/article/Article.module.scss";
@@ -49,7 +47,6 @@ export type AppsSidebarProps = {
   defaultExpandedId?: string;
   showText: boolean;
   toggleShowText: () => void;
-  isOpen: boolean;
   currentDeviceType: DeviceType;
   user?: TUser | null;
 };
@@ -60,12 +57,12 @@ const AppsSidebar = ({
   defaultExpandedId,
   showText,
   toggleShowText,
-  isOpen,
   currentDeviceType,
   user,
 }: AppsSidebarProps) => {
   const { t } = useTranslation(["Common"]);
-  const { isBase } = useTheme();
+  const theme = useTheme() as { isBase?: boolean };
+  const isBase = theme?.isBase ?? true;
   const isMobile = currentDeviceType === DeviceType.mobile;
   const collapseLabel = showText
     ? t("Common:HideArticleMenu")
@@ -93,15 +90,12 @@ const AppsSidebar = ({
       data-show-text={showText ? "true" : "false"}
       data-open="true"
       data-with-main-button="false"
-      data-sidebar-open={isOpen ? "true" : "false"}
-      aria-hidden={isMobile && !isOpen}
     >
       <div
         className={`${articleStyles.articleHeader} ${styles.header}`}
         data-show-text={showText ? "true" : "false"}
       >
         <div className={styles.logoWrapper}>
-          {/* biome-ignore lint/performance/noImgElement: portal whitelabel logo served from /logo.ashx */}
           <img
             className={showText ? styles.logoFull : styles.logoBurger}
             src={showText ? fullLogo : burgerLogo}

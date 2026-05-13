@@ -24,26 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import { useSearchParams } from "react-router";
+import { useTranslation } from "react-i18next";
 
-import MenuIcon from "PUBLIC_DIR/images/menu.react.svg";
+import SdkIframe from "SRC_DIR/components/SdkIframe";
 
-import styles from "./BurgerButton.module.scss";
-
-type BurgerButtonProps = {
-  onClick: () => void;
-  label: string;
+const SECTION_TO_PATH: Record<string, string> = {
+  "in-progress": "/sdk/forms/in-progress",
+  "completed-forms": "/sdk/forms/completed-forms",
+  settings: "/sdk/forms/settings",
 };
 
-const BurgerButton = ({ onClick, label }: BurgerButtonProps) => (
-  <button
-    type="button"
-    className={styles.burgerButton}
-    onClick={onClick}
-    aria-label={label}
-  >
-    <MenuIcon className={styles.burgerIcon} />
-  </button>
-);
+export const AiForms = () => {
+  const { t } = useTranslation(["Common"]);
+  const [searchParams] = useSearchParams();
+  const section = searchParams.get("section") ?? "";
+  const src = SECTION_TO_PATH[section] ?? "/sdk/forms/my-forms";
+  return <SdkIframe src={src} title={t("Common:DashboardAIFormsTitle")} />;
+};
 
-export default BurgerButton;
+export default AiForms;

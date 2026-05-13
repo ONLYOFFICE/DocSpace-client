@@ -24,64 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { useNavigate } from "react-router";
-import { useTranslation } from "react-i18next";
+import styles from "./SdkIframe.module.scss";
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Text } from "@docspace/ui-kit/components/text";
-
-import styles from "./Dashboard.module.scss";
-
-export type ModuleItem = {
-  id: string;
-  icon: React.ReactNode;
+type SdkIframeProps = {
+  src: string;
   title: string;
-  description: string;
-  installed: boolean;
-  href?: string;
 };
 
-type ModuleCardProps = {
-  mod: ModuleItem;
-  onInstall: () => void;
-};
+export const SdkIframe = ({ src, title }: SdkIframeProps) => (
+  <iframe className={styles.iframe} src={src} title={title} />
+);
 
-export const ModuleCard = ({ mod, onInstall }: ModuleCardProps) => {
-  const { t } = useTranslation(["Common"]);
-  const navigate = useNavigate();
-
-  const handleOpen = () => {
-    if (mod.href) navigate(mod.href);
-  };
-
-  return (
-    <div className={styles.moduleCard}>
-      <span className={styles.moduleIcon}>{mod.icon}</span>
-      <div className={styles.moduleInfo}>
-        <Text as="p" className={styles.moduleTitle} isBold>
-          {mod.title}
-        </Text>
-        <Text as="p" className={styles.moduleDescription}>
-          {mod.description}
-        </Text>
-      </div>
-      {mod.installed ? (
-        <Button
-          className={styles.moduleBtn}
-          label={t("Common:Open")}
-          size={ButtonSize.small}
-          onClick={handleOpen}
-        />
-      ) : (
-        <Button
-          primary
-          className={styles.moduleBtn}
-          label={t("Common:Install")}
-          size={ButtonSize.small}
-          onClick={onInstall}
-        />
-      )}
-    </div>
-  );
-};
+export default SdkIframe;

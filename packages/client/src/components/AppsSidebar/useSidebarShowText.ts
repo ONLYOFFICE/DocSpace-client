@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
-
 import { useCallback, useEffect, useState } from "react";
 
 import { DeviceType } from "@docspace/shared/enums";
@@ -33,7 +31,6 @@ import { DeviceType } from "@docspace/shared/enums";
 type Options = {
   storageKey: string;
   currentDeviceType: DeviceType;
-  /** Default for tablet when nothing is stored. */
   tabletDefault?: boolean;
 };
 
@@ -52,18 +49,10 @@ const writeSaved = (key: string, value: boolean) => {
   try {
     localStorage.setItem(key, String(value));
   } catch {
-    // localStorage unavailable (incognito/restricted)
+    // localStorage unavailable
   }
 };
 
-/**
- * Resolves and persists the sidebar's "show text" state.
- *
- * Rules:
- * - desktop: user-controlled, persisted in localStorage; defaults to true
- * - tablet:  user-controlled, persisted in localStorage; defaults to `tabletDefault`
- * - mobile:  always true (drawer is full-width)
- */
 export const useSidebarShowText = ({
   storageKey,
   currentDeviceType,

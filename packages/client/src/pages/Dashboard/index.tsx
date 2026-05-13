@@ -154,7 +154,7 @@ const Dashboard = ({ firstName, pricingUrl }: DashboardProps) => {
       title: t("Common:DashboardAIFilesTitle"),
       description: t("Common:DashboardAIFilesDescription"),
       installed: isModuleInstalled("ai-files"),
-      href: "/sdk/personal-files",
+      href: "/ai-files",
     },
     {
       id: "ai-rooms",
@@ -169,7 +169,7 @@ const Dashboard = ({ firstName, pricingUrl }: DashboardProps) => {
       title: t("Common:DashboardAIFormsTitle"),
       description: t("Common:DashboardAIFormsDescription"),
       installed: isModuleInstalled("ai-forms"),
-      href: "/sdk/forms",
+      href: "/ai-forms",
     },
     {
       id: "ai-agents",

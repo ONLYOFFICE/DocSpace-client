@@ -38,7 +38,6 @@ class FormsNavigationStore {
   editorAction: EditorAction = "fill";
   completedFolder: TFolder | null = null;
   inProgressFolder: TFolder | null = null;
-  isSidebarOpen = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -68,18 +67,6 @@ class FormsNavigationStore {
   closeEditor = () => {
     this.editingFile = null;
     this.editorAction = "fill";
-  };
-
-  openSidebar = () => {
-    this.isSidebarOpen = true;
-  };
-
-  closeSidebar = () => {
-    this.isSidebarOpen = false;
-  };
-
-  toggleSidebar = () => {
-    this.isSidebarOpen = !this.isSidebarOpen;
   };
 }
 

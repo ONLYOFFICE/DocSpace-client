@@ -48,11 +48,9 @@ import type {
 import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
 import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
-import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 
 import { SectionWrapper } from "@/app/(docspace)/_components/section";
 import Header from "@/app/(docspace)/_components/header";
-import useDeviceType from "@/hooks/useDeviceType";
 import useFrameHeaderConfig from "@/hooks/useFrameHeaderConfig";
 import { Filter } from "@/app/(docspace)/_components/filter";
 import SelectionArea from "@/app/(docspace)/_components/selection-area";
@@ -71,9 +69,7 @@ import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
-import BurgerButton from "@/components/apps-sidebar/BurgerButton";
 
-import { SidebarProvider, useSidebar } from "../../_contexts/SidebarContext";
 import CreateFileDialog from "../create-file-dialog";
 import { useInfoPanelStore } from "../../_store/InfoPanelStore";
 import useDocsActions from "../../_hooks/useDocsActions";
@@ -83,7 +79,6 @@ import useFileOperations from "../../_hooks/useFileOperations";
 import useRenameActions from "../../_hooks/useRenameActions";
 import type { SelectorMode } from "../../_hooks/useFileOperations";
 import { useDocsFrameBridge } from "../../_hooks/useDocsFrameBridge";
-import DocsSidebar from "../sidebar";
 import DropZone from "../drop-zone";
 import DeleteDialog from "../delete-dialog";
 import RenameDialog from "../rename-dialog";
@@ -108,7 +103,7 @@ const getSubmitLabel = (mode: SelectorMode, t: (key: string) => string) => {
   return t("Common:RestoreHere");
 };
 
-const DocsLayoutInner = observer(({
+const DocsLayout = observer(({
   folders,
   files,
   total,
@@ -124,8 +119,6 @@ const DocsLayoutInner = observer(({
   const infoPanelStore = useInfoPanelStore();
   const { sdkConfig } = useSDKConfig();
   const router = useRouter();
-  const { toggleSidebar, isSidebarOpen, closeSidebar, currentDeviceType } = useSidebar();
-  const showMenu = sdkConfig?.showMenu !== false;
 
   const { headerOffset, frameHeaderVars } = useFrameHeaderConfig();
 
@@ -245,42 +238,18 @@ const DocsLayoutInner = observer(({
           <RenameContext.Provider value={renameHandler}>
             <FileOperationsContext.Provider value={fileOperationsHandler}>
               <div className={styles.root} style={frameHeaderVars}>
-                {showMenu && <DocsSidebar />}
-                {showMenu && (
-                  <Backdrop
-                    visible={isSidebarOpen && currentDeviceType === DeviceType.mobile}
-                    onClick={closeSidebar}
-                    zIndex={220}
-                    withBackground
-                    style={{
-                      position: "absolute",
-                      top: 0,
-                      left: 0,
-                      width: "100%",
-                      height: "100%",
-                    }}
-                  />
-                )}
                 <DropZone onFilesDropped={uploadFilesToFolder} disabled={!isMyDocuments}>
                   <RootScrollbar>
                     <SectionWrapper
                       sectionHeaderContent={
-                        <div className={styles.headerRow}>
-                          {showMenu && (
-                            <BurgerButton
-                              onClick={toggleSidebar}
-                              label={t("Common:ShowArticleMenu")}
-                            />
-                          )}
-                          <Header
-                            current={current}
-                            pathParts={pathParts}
-                            isEmptyList={isEmptyList}
-                            isInfoPanelVisible={sdkConfig?.infoPanelVisible ? infoPanelStore.isVisible : false}
-                            onToggleInfoPanel={sdkConfig?.infoPanelVisible ? infoPanelStore.toggle : undefined}
-                            headerOffset={headerOffset}
-                          />
-                        </div>
+                        <Header
+                          current={current}
+                          pathParts={pathParts}
+                          isEmptyList={isEmptyList}
+                          isInfoPanelVisible={sdkConfig?.infoPanelVisible ? infoPanelStore.isVisible : false}
+                          onToggleInfoPanel={sdkConfig?.infoPanelVisible ? infoPanelStore.toggle : undefined}
+                          headerOffset={headerOffset}
+                        />
                       }
                       sectionFilterContent={
                         <>
@@ -439,15 +408,5 @@ const DocsLayoutInner = observer(({
     </OpenFileContext.Provider>
   );
 });
-
-const DocsLayout = (props: DocsLayoutProps) => {
-  const { currentDeviceType } = useDeviceType();
-
-  return (
-    <SidebarProvider currentDeviceType={currentDeviceType}>
-      <DocsLayoutInner {...props} />
-    </SidebarProvider>
-  );
-};
 
 export default DocsLayout;

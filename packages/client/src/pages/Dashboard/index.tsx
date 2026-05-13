@@ -26,6 +26,7 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
+import { Navigate, useNavigate, useSearchParams } from "react-router";
 import { useTranslation } from "react-i18next";
 
 import PortalLogo from "@docspace/ui-kit/components/portal-logo/PortalLogo";
@@ -34,6 +35,7 @@ import type { QuickActionItem } from "@docspace/ui-kit/components/quick-actions"
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { TwoStateToggle } from "@docspace/ui-kit/components/two-state-toggle";
 import { getPersonalFolderTree } from "@docspace/shared/api/files";
 import { getConstName } from "@docspace/shared/constants/consts";
 
@@ -67,6 +69,8 @@ interface DashboardProps {
 
 const Dashboard = ({ firstName, pricingUrl }: DashboardProps) => {
   const { t } = useTranslation(["Common"]);
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [myFolderId, setMyFolderId] = React.useState<number | null>(null);
 
   React.useEffect(() => {
@@ -133,6 +137,16 @@ const Dashboard = ({ firstName, pricingUrl }: DashboardProps) => {
         ? t("Common:GoodAfternoon", { name: greetingName })
         : t("Common:GoodEvening", { name: greetingName });
 
+  const design = searchParams.get("design");
+  if (design === "old") {
+    localStorage.setItem("useDocSpace", "old");
+    return <Navigate to="/" replace />;
+  }
+  if (design === "new") {
+    localStorage.setItem("useDocSpace", "new");
+    return <Navigate to="/dashboard" replace />;
+  }
+
   const moduleItems: ModuleItem[] = [
     {
       id: "ai-files",
@@ -168,6 +182,10 @@ const Dashboard = ({ firstName, pricingUrl }: DashboardProps) => {
 
   return (
     <div className={styles.dashboard}>
+      <TwoStateToggle
+        className={styles.viewToggle}
+        onNavigate={(url) => navigate(url)}
+      />
       <PortalLogo className={styles.logo} />
 
       <Text as="h1" className={styles.greeting}>

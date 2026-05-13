@@ -27,6 +27,7 @@
 @use "@docspace/ui-kit/styles/variables/colors" as *;
 
 .dashboard {
+  position: relative;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -35,6 +36,12 @@
   gap: 40px;
   min-height: 100%;
   box-sizing: border-box;
+}
+
+.viewToggle {
+  position: absolute;
+  top: 16px;
+  inset-inline-end: 24px;
 }
 
 .logo {

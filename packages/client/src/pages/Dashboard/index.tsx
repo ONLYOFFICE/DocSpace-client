@@ -52,7 +52,12 @@ import AiAgentsIcon from "@docspace/ui-kit/assets/icons/16/ai-agents.svg";
 import BgPatternGreenUrl from "PUBLIC_DIR/images/background.pattern.green.react.svg?url";
 
 import { ModuleCard, type ModuleItem } from "./ModuleCard";
-import { getGreetingKey, makeCreateUrl, NEW_FILE_NAMES } from "./utils";
+import {
+  getGreetingKey,
+  isModuleInstalled,
+  makeCreateUrl,
+  NEW_FILE_NAMES,
+} from "./utils";
 import styles from "./Dashboard.module.scss";
 
 interface DashboardProps {
@@ -136,7 +141,7 @@ const Dashboard = ({ firstName }: DashboardProps) => {
       icon: <CatalogFolderIcon />,
       title: t("Common:DashboardAIFilesTitle"),
       description: t("Common:DashboardAIFilesDescription"),
-      installed: true,
+      installed: isModuleInstalled("ai-files"),
       href: "/sdk/personal-files",
     },
     {
@@ -144,14 +149,14 @@ const Dashboard = ({ firstName }: DashboardProps) => {
       icon: <CatalogRoomsIcon />,
       title: t("Common:DashboardAIRoomsTitle"),
       description: t("Common:DashboardAIRoomsDescription"),
-      installed: false,
+      installed: isModuleInstalled("ai-rooms"),
     },
     {
       id: "ai-forms",
       icon: <CatalogDocumentsIcon />,
       title: t("Common:DashboardAIFormsTitle"),
       description: t("Common:DashboardAIFormsDescription"),
-      installed: true,
+      installed: isModuleInstalled("ai-forms"),
       href: "/sdk/forms",
     },
     {
@@ -159,7 +164,7 @@ const Dashboard = ({ firstName }: DashboardProps) => {
       icon: <AiAgentsIcon />,
       title: t("Common:DashboardAIChatAgentsTitle"),
       description: t("Common:DashboardAIChatAgentsDescription"),
-      installed: false,
+      installed: isModuleInstalled("ai-agents"),
     },
   ];
 

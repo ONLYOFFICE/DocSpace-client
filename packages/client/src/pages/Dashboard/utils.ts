@@ -46,3 +46,21 @@ export const makeCreateUrl = (
   if (parentId) params.set("parentId", String(parentId));
   return `/sdk/personal-files/editor/create?${params.toString()}`;
 };
+
+export type DashboardModuleId =
+  | "ai-files"
+  | "ai-rooms"
+  | "ai-forms"
+  | "ai-agents";
+
+// TODO: replace with capability/feature-flag check from settingsStore once
+// the backend exposes the list of active modules.
+export const INSTALLED_MODULES: Record<DashboardModuleId, boolean> = {
+  "ai-files": true,
+  "ai-rooms": false,
+  "ai-forms": true,
+  "ai-agents": false,
+};
+
+export const isModuleInstalled = (id: DashboardModuleId): boolean =>
+  INSTALLED_MODULES[id] ?? false;

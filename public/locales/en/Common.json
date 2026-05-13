@@ -434,6 +434,7 @@
   "DomainAlreadyAdded": "This domain has already been added",
   "DomainIpAddress": "Domains as IP addresses are not supported",
   "Done": "Done",
+  "Dashboard": "Dashboard",
   "DashboardAIChatAgentsDescription": "Bring AI assistants and agents directly into your workspace.",
   "DashboardAIChatAgentsTitle": "AI Chat & Agents",
   "DashboardAIFilesDescription": "Store, organize, and share files across teams in a structured workspace.",

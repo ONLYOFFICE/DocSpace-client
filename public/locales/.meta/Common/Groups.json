@@ -3,7 +3,7 @@
   "content": "Groups",
   "content_en_sha1_hash": "ae9629f4ebb82c6331c0809fa9a0e54b00e578e6",
   "created_at": "2025-05-19T21:30:45.668Z",
-  "updated_at": "2026-05-08T13:10:45.484Z",
+  "updated_at": "2026-05-13T17:07:46.023Z",
   "comment": {
     "text": "This is a label for a section or category within the application, referring to collections of users. It appears in selectors for filtering or organizing users, and as a title for a dedicated \"Groups\" page.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/libs/ui-kit/selectors/People/index.tsx",
-      "line_number": 691,
+      "line_number": 687,
       "context": "content: null,\n },\n ...[\n withGroups && {\n id: GROUP_TAB_ID,\n name: t(\"Groups\"),\n onClick: () => changeActiveTab(GROUP_TAB_ID),\n content: null,\n },\n ],\n ...[",
       "module": "/libs/ui-kit"
     },
@@ -49,19 +49,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 146,
+      "line_number": 140,
       "context": "/>\n \n <ImportSection\n isChecked={importOptions.importGroups}\n onChange={(e) => onChange(e, \"importGroups\")}\n sectionName={t(\"Common:Groups\")}\n description={\n <Trans\n t={t}\n i18nKey=\"GroupsSectionDescription\"\n ns=\"Settings\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 146,
+      "line_number": 140,
       "context": "/>\n \n <ImportSection\n isChecked={importOptions.importGroups}\n onChange={(e) => onChange(e, \"importGroups\")}\n sectionName={t(\"Common:Groups\")}\n description={\n <Trans\n t={t}\n i18nKey=\"GroupsSectionDescription\"\n ns=\"Settings\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 146,
+      "line_number": 140,
       "context": "/>\n \n <ImportSection\n isChecked={importOptions.importGroups}\n onChange={(e) => onChange(e, \"importGroups\")}\n sectionName={t(\"Common:Groups\")}\n description={\n <Trans\n t={t}\n i18nKey=\"GroupsSectionDescription\"\n ns=\"Settings\"",
       "module": "/packages/client"
     },

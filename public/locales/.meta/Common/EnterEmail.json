@@ -3,7 +3,7 @@
   "content": "Enter email",
   "content_en_sha1_hash": "2561af4e3ae4688b16392bbda30fa27b36cf9e1a",
   "created_at": "2026-04-11T18:34:14.960Z",
-  "updated_at": "2026-04-11T20:53:30.273Z",
+  "updated_at": "2026-05-13T17:07:46.045Z",
   "comment": {
     "text": "This is a placeholder text for an email input field, prompting the user to type their email address.",
     "is_auto": true,
@@ -31,14 +31,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/RowView/UsersRowContent.tsx",
-      "line_number": 234,
-      "context": "displayName={displayName}\n />\n ) : (\n <EmailInputWrapper ref={emailInputRef}>\n <EmailInput\n placeholder={t(\"Common:EnterEmail\")}\n className=\"import-email-input\"\n value={tempEmail}\n onChange={handleEmailChange}\n onValidateInput={onValidateEmail}\n hasError={hasError}",
+      "line_number": 160,
+      "context": "displayName={displayName}\n />\n ) : (\n <div className={styles.emailInputWrapper} ref={emailInputRef}>\n <EmailInput\n placeholder={t(\"Common:EnterEmail\")}\n className=\"import-email-input\"\n value={tempEmail}\n onChange={handleEmailChange}\n onValidateInput={onValidateEmail}\n hasError={hasError}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/TableView/UsersTableRow.tsx",
-      "line_number": 231,
-      "context": "<TableCell>\n {isEmailOpen ? (\n <EmailInputWrapper ref={emailInputRef}>\n <EmailInput\n placeholder={t(\"Common:EnterEmail\")}\n className=\"import-email-input\"\n value={tempEmail}\n onChange={handleEmailChange}\n onValidateInput={onValidateEmail}\n onKeyDown={handleKeyDown}",
+      "line_number": 170,
+      "context": "<TableCell>\n {isEmailOpen ? (\n <div className={styles.emailInputWrapper} ref={emailInputRef}>\n <EmailInput\n placeholder={t(\"Common:EnterEmail\")}\n className=\"import-email-input\"\n value={tempEmail}\n onChange={handleEmailChange}\n onValidateInput={onValidateEmail}\n onKeyDown={handleKeyDown}",
       "module": "/packages/client"
     },
     {

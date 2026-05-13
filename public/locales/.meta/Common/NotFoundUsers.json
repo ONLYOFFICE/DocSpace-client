@@ -3,7 +3,7 @@
   "content": "No users found",
   "content_en_sha1_hash": "612eb3c64c413c645d13566a1cfa74199923df23",
   "created_at": "2025-05-19T21:30:46.927Z",
-  "updated_at": "2026-04-11T20:47:41.509Z",
+  "updated_at": "2026-05-13T17:07:46.069Z",
   "comment": {
     "text": "This is an error message or informational text indicating that no users were found, either when searching for users to invite or when displaying a list of accounts in portal settings.",
     "is_auto": true,
@@ -19,73 +19,73 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/RowView/index.tsx",
-      "line_number": 148,
+      "line_number": 116,
       "context": ") : (\n <EmptyScreenContainer\n imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/RowView/index.tsx",
-      "line_number": 148,
+      "line_number": 116,
       "context": ") : (\n <EmptyScreenContainer\n imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/TableView/index.tsx",
-      "line_number": 144,
+      "line_number": 145,
       "context": ") : (\n <EmptyScreenContainer\n imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/TableView/index.tsx",
-      "line_number": 144,
-      "context": ") : (\n <EmptyScreenContainer\n imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/RowView/index.tsx",
-      "line_number": 193,
-      "context": ") : (\n <EmptyScreenContainer\n imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/RowView/index.tsx",
-      "line_number": 193,
-      "context": ") : (\n <EmptyScreenContainer\n imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/TableView/index.tsx",
       "line_number": 145,
       "context": ") : (\n <EmptyScreenContainer\n imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/RowView/index.tsx",
+      "line_number": 108,
+      "context": ") : (\n <EmptyScreenContainer\n imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/RowView/index.tsx",
+      "line_number": 108,
+      "context": ") : (\n <EmptyScreenContainer\n imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/TableView/index.tsx",
-      "line_number": 145,
+      "line_number": 146,
+      "context": ") : (\n <EmptyScreenContainer\n imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/TableView/index.tsx",
+      "line_number": 146,
       "context": ") : (\n <EmptyScreenContainer\n imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/RowView/index.tsx",
-      "line_number": 206,
+      "line_number": 128,
       "context": ") : (\n <EmptyScreenContainer\n imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/RowView/index.tsx",
-      "line_number": 206,
+      "line_number": 128,
       "context": ") : (\n <EmptyScreenContainer\n imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/TableView/index.tsx",
-      "line_number": 204,
+      "line_number": 163,
       "context": ") : (\n <EmptyScreenContainer\n imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/TableView/index.tsx",
-      "line_number": 204,
+      "line_number": 163,
       "context": ") : (\n <EmptyScreenContainer\n imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton",
       "module": "/packages/client"
     }

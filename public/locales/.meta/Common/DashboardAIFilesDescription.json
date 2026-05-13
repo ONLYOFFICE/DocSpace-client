@@ -1,0 +1,29 @@
+{
+  "key_path": "DashboardAIFilesDescription",
+  "content": "Store, organize, and share files across teams in a structured workspace.",
+  "content_en_sha1_hash": "586ba7e784019224bbcbc3ac50cf955ad5f65a24",
+  "created_at": "2026-05-13T17:07:27.866Z",
+  "updated_at": "2026-05-13T17:18:12.915Z",
+  "comment": {
+    "text": "Description for the AI Files module card on the Dashboard, summarizing the module's purpose.",
+    "is_auto": true,
+    "updated_at": "2026-05-13T17:18:12.915Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
+      "line_number": 155,
+      "context": "const moduleItems: ModuleItem[] = [\n {\n id: \"ai-files\",\n icon: <CatalogFolderIcon />,\n title: t(\"Common:DashboardAIFilesTitle\"),\n description: t(\"Common:DashboardAIFilesDescription\"),\n installed: isModuleInstalled(\"ai-files\"),\n href: \"/ai-files\",\n },\n {\n id: \"ai-rooms\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

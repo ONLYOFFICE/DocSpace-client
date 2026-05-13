@@ -1,0 +1,29 @@
+{
+  "key_path": "DashboardAIRoomsDescription",
+  "content": "Create secure collaboration spaces for projects, customers, or departments.",
+  "content_en_sha1_hash": "9fbb9f76ec96ea18d24cc9ae1258648d6fe747db",
+  "created_at": "2026-05-13T17:07:27.916Z",
+  "updated_at": "2026-05-13T17:15:21.561Z",
+  "comment": {
+    "text": "Description text for the AI Rooms feature card in the dashboard catalog.",
+    "is_auto": true,
+    "updated_at": "2026-05-13T17:15:21.561Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
+      "line_number": 163,
+      "context": "},\n {\n id: \"ai-rooms\",\n icon: <CatalogRoomsIcon />,\n title: t(\"Common:DashboardAIRoomsTitle\"),\n description: t(\"Common:DashboardAIRoomsDescription\"),\n installed: isModuleInstalled(\"ai-rooms\"),\n },\n {\n id: \"ai-forms\",\n icon: <CatalogDocumentsIcon />,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

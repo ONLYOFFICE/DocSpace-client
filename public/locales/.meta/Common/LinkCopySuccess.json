@@ -3,7 +3,7 @@
   "content": "Link has been copied to the clipboard",
   "content_en_sha1_hash": "2254c41229de93951969596ba422451fa0eff387",
   "created_at": "2025-05-19T21:30:46.142Z",
-  "updated_at": "2026-05-08T13:10:45.534Z",
+  "updated_at": "2026-05-13T17:07:46.049Z",
   "comment": {
     "text": "This is a toast message that appears after a user successfully copies a link to their clipboard.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/MetadataUrlField.js",
-      "line_number": 73,
-      "context": "}) => {\n const { t } = useTranslation(\"Translations\");\n \n const onCopyClick = () => {\n copy(placeholder);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n return (\n <StyledWrapper>\n <Text className=\"label\" fontSize=\"13px\" as=\"div\" fontWeight={600}>",
+      "line_number": 51,
+      "context": "}) => {\n const { t } = useTranslation(\"Translations\");\n \n const onCopyClick = () => {\n copy(placeholder);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n return (\n <div className={styles.styledWrapper}>\n <Text className={styles.label} fontSize=\"13px\" as=\"div\" fontWeight={600}>",
       "module": "/packages/client"
     },
     {

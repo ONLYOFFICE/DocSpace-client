@@ -1,0 +1,53 @@
+{
+  "key_path": "DashboardAIFormsTitle",
+  "content": "AI Forms",
+  "content_en_sha1_hash": "33a1b46a973e52f51cccc28f16aa0cc70f3d7b45",
+  "created_at": "2026-05-13T17:07:27.900Z",
+  "updated_at": "2026-05-13T17:15:48.956Z",
+  "comment": {
+    "text": "Title for the AI Forms module, used as a label in the navigation menu and as a heading for the dashboard card and module page.",
+    "is_auto": true,
+    "updated_at": "2026-05-13T17:15:48.956Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/NewArticle/index.tsx",
+      "line_number": 143,
+      "context": "},\n ],\n },\n {\n id: AI_FORMS_ID,\n label: t(\"Common:DashboardAIFormsTitle\"),\n icon: FormFileReactSvgUrl,\n onClick: () => navigate(\"/ai-forms\"),\n children: [\n {\n id: \"ai-forms-in-progress\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/AiForms/index.tsx",
+      "line_number": 43,
+      "context": "export const AiForms = () => {\n const { t } = useTranslation([\"Common\"]);\n const [searchParams] = useSearchParams();\n const section = searchParams.get(\"section\") ?? \"\";\n const src = SECTION_TO_PATH[section] ?? \"/sdk/forms/my-forms\";\n return <SdkIframe src={src} title={t(\"Common:DashboardAIFormsTitle\")} />;\n };\n \n export default AiForms;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
+      "line_number": 169,
+      "context": "installed: isModuleInstalled(\"ai-rooms\"),\n },\n {\n id: \"ai-forms\",\n icon: <CatalogDocumentsIcon />,\n title: t(\"Common:DashboardAIFormsTitle\"),\n description: t(\"Common:DashboardAIFormsDescription\"),\n installed: isModuleInstalled(\"ai-forms\"),\n href: \"/ai-forms\",\n },\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/forms-header/index.tsx",
+      "line_number": 111,
+      "context": "const activeSubfolder = completedFolder ?? inProgressFolder;\n \n const getSectionTitle = React.useCallback(() => {\n switch (activeSection) {\n case FormsSection.MyForms:\n return t(\"Common:DashboardAIFormsTitle\");\n case FormsSection.Library:\n return t(\"Common:Library\");\n case FormsSection.InProgress:\n return t(\"Common:InProgress\");\n case FormsSection.CompletedForms:",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_utils/tourSteps.ts",
+      "line_number": 229,
+      "context": "} = flags ?? {};\n \n return [\n navSectionStep(\n \"my-forms\",\n t(\"Common:DashboardAIFormsTitle\"),\n t(\n \"Common:TourMyForms\",\n \"This is your main workspace. All your PDF forms are stored here. Upload new forms or create them from scratch.\",\n ),\n showMenu,",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

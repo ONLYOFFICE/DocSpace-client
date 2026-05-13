@@ -534,11 +534,11 @@ const PASS_THROUGH_PREFIXES = [
 ];
 
 const HomeWithGuard = (props) => {
-  const useDocSpace = localStorage.getItem("useDocSpace") === "true";
+  const isLegacyMode = localStorage.getItem("useDocSpace") === "old";
   const { pathname } = useLocation();
 
   if (
-    !useDocSpace &&
+    !isLegacyMode &&
     !PASS_THROUGH_PREFIXES.some((p) => pathname.startsWith(p))
   )
     return <Navigate to="/dashboard" replace />;

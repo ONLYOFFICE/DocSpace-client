@@ -54,11 +54,11 @@ const ClientArticle = React.memo(
     isAccountsArticle,
     isDeveloperToolsArticle,
   }) => {
-    const useDocSpace = localStorage.getItem("useDocSpace") === "true";
+    const isLegacyMode = localStorage.getItem("useDocSpace") === "old";
     const useLegacyArticle =
       isAccountsArticle || isDeveloperToolsArticle;
 
-    if (!useDocSpace && !useLegacyArticle) {
+    if (!isLegacyMode && !useLegacyArticle) {
       return <NewArticle />;
     }
 

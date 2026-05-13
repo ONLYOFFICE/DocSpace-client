@@ -42,7 +42,11 @@ import Settings from "./index";
 
 import layoutStyles from "../docs-layout/DocsLayout.module.scss";
 
-const DocsSettingsLayout = observer(() => {
+type DocsSettingsLayoutProps = {
+  canSeeBilling?: boolean;
+};
+
+const DocsSettingsLayout = observer(({ canSeeBilling }: DocsSettingsLayoutProps) => {
   const { t } = useTranslation(["Common"]);
 
   useDocsFrameBridge({ isReady: true });
@@ -60,7 +64,7 @@ const DocsSettingsLayout = observer(() => {
               </div>
             }
             sectionFilterContent={<div />}
-            sectionBodyContent={<Settings />}
+            sectionBodyContent={<Settings canSeeBilling={canSeeBilling} />}
             isEmptyPage={false}
             filesFilter=""
             showFilter={false}

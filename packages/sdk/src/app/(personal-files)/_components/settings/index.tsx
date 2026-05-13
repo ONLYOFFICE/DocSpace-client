@@ -33,16 +33,17 @@ import { Tabs, type TTabItem } from "@docspace/ui-kit/components/tabs";
 import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 
-import { useDocsUserStore } from "../../_store/DocsUserStore";
 import BillingForm from "./category/BillingForm";
 import FileManagement from "./category/FileManagement";
 import InterfaceTheme from "./category/InterfaceTheme";
 
-const Settings = () => {
+type SettingsProps = {
+  canSeeBilling?: boolean;
+};
+
+const Settings = ({ canSeeBilling }: SettingsProps) => {
   const { t } = useTranslation(["Common", "Profile"]);
-  const { user } = useDocsUserStore();
-  const canSeeBilling = user?.isAdmin || user?.isOwner;
-  const [selectedTabId, setSelectedTabId] = React.useState(() =>
+  const [selectedTabId, setSelectedTabId] = React.useState(
     canSeeBilling ? "billing" : "file-management",
   );
   const [isPending, startTransition] = React.useTransition();

@@ -26,6 +26,7 @@
 
 import Security12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/security.react.svg?url";
 import Lock12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
+import PrivateRoom32SvgUrl from "PUBLIC_DIR/images/icons/32/room/private.svg?url";
 
 import React from "react";
 import { ReactSVG } from "react-svg";
@@ -100,6 +101,9 @@ const ItemIcon = ({
 	const showEncryptedBadge =
 		showLegacyEncryptedBadge || isEncryptedFile;
 
+	const showPrivateRoomDefaultIcon =
+		!!isRoom && !!isPrivateRoom && !isArchive && !isLoadedRoomIcon && !isTemplate;
+
 	const badgeSrc = showNoAccessBadge ? Lock12ReactSvgUrl : Security12ReactSvgUrl;
 	const badgeTitle = showNoAccessBadge
 		? t("Common:NoAccessToEncryptedFile")
@@ -114,23 +118,31 @@ const ItemIcon = ({
 				[styles.hasEncryptedBadge]: showEncryptedBadge,
 			})}
 		>
-			<RoomIcon
-				color={color}
-				title={title}
-				size={size}
-				radius={radius}
-				isArchive={isArchive}
-				showDefault={showDefault || showDefaultRoomIcon}
-				imgClassName={imgClassName || "react-svg-icon"}
-				logo={isRoom ? logo : icon}
-				badgeUrl={badgeUrl || ""}
-				isTemplate={isTemplate}
-				withEditing={withEditing}
-				model={model}
-				onChangeFile={onChangeFile}
-				className={className}
-				dataTestId={dataTestId}
-			/>
+			{showPrivateRoomDefaultIcon ? (
+				<ReactSVG
+					className={classNames(className, styles.privateRoomDefaultIcon)}
+					src={PrivateRoom32SvgUrl}
+					data-testid={dataTestId ?? "private-room-icon"}
+				/>
+			) : (
+				<RoomIcon
+					color={color}
+					title={title}
+					size={size}
+					radius={radius}
+					isArchive={isArchive}
+					showDefault={showDefault || showDefaultRoomIcon}
+					imgClassName={imgClassName || "react-svg-icon"}
+					logo={isRoom ? logo : icon}
+					badgeUrl={badgeUrl || ""}
+					isTemplate={isTemplate}
+					withEditing={withEditing}
+					model={model}
+					onChangeFile={onChangeFile}
+					className={className}
+					dataTestId={dataTestId}
+				/>
+			)}
 			{showEncryptedBadge ? (
 				<ReactSVG
 					className={classNames(styles.encryptedFileIcon, {

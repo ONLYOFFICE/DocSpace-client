@@ -37,7 +37,6 @@ import { DeviceType } from "@docspace/shared/enums";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import { FormsSection } from "@/types/forms";
-import BurgerButton from "@/components/apps-sidebar/BurgerButton";
 
 import { sectionFromPathname } from "../../_utils/sectionFromPathname";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
@@ -47,11 +46,10 @@ import { libraryUrl } from "../../_utils/libraryUrl";
 import styles from "../forms-layout/FormsLayout.module.scss";
 
 type FormsHeaderProps = {
-  showMenu: boolean;
   headerOffset?: number;
 };
 
-const FormsHeader = ({ showMenu, headerOffset = 0 }: FormsHeaderProps) => {
+const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
   const { t } = useTranslation(["Common"]);
   const pathname = usePathname();
   const activeSection = sectionFromPathname(pathname);
@@ -63,7 +61,6 @@ const FormsHeader = ({ showMenu, headerOffset = 0 }: FormsHeaderProps) => {
     closeEditor,
     goBackToCompletedRoot,
     goBackToInProgressRoot,
-    toggleSidebar,
   } = useFormsNavigationStore();
 
   const router = useRouter();
@@ -321,12 +318,6 @@ const FormsHeader = ({ showMenu, headerOffset = 0 }: FormsHeaderProps) => {
         className={styles.headerRow}
         style={headerStyle}
       >
-        {showMenu && (
-          <BurgerButton
-            onClick={toggleSidebar}
-            label={t("Common:ShowArticleMenu")}
-          />
-        )}
         <div className={styles.headerNavigation}>
           <Navigation
             showText
@@ -579,12 +570,6 @@ const FormsHeader = ({ showMenu, headerOffset = 0 }: FormsHeaderProps) => {
       className={styles.headerRow}
       style={headerStyle}
     >
-      {showMenu && (
-        <BurgerButton
-          onClick={toggleSidebar}
-          label={t("Common:ShowArticleMenu")}
-        />
-      )}
       <div className={styles.headerNavigation}>
         <span data-tour={`section-${activeSection}`} className={styles.tourAnchor}>
           {getSectionTitle()}

@@ -33,7 +33,6 @@ import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 import Section from "@docspace/ui-kit/components/section";
-import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
 import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
 import type { QuickActionItem } from "@docspace/ui-kit/components/quick-actions";
@@ -91,7 +90,6 @@ import { useFormsTourStore } from "../_store/FormsTourStore";
 import { useFormsCustomActionsStore } from "../_store/FormsCustomActionsStore";
 import { useFormsProgressStore } from "../_store/FormsProgressStore";
 import useTourSandbox from "../_hooks/useTourSandbox";
-import FormsSidebar from "../_components/sidebar";
 import DualRingSpinner from "../_components/forms-layout/DualRingSpinner";
 import FormsEditor from "../_components/forms-editor";
 import FormsHeader from "../_components/forms-header";
@@ -151,8 +149,6 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     inProgressFolder,
     goBackToCompletedRoot,
     goBackToInProgressRoot,
-    isSidebarOpen,
-    closeSidebar,
   } = formsNavigationStore;
   // libraryNav removed — library uses URL routing now
   const aiStore = useFormsAiAgentStore();
@@ -347,37 +343,6 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   const isEditing = Boolean(editingFile);
 
   useEditorGuard(isEditing);
-
-  // Single-overlay coordination: only one of {sidebar drawer, AI panel, editor}
-  // can be active at a time on mobile. Also close the sidebar when leaving
-  // mobile so no stale overlay stays rendered.
-  React.useEffect(() => {
-    if (currentDeviceType !== DeviceType.mobile && isSidebarOpen) {
-      closeSidebar();
-    }
-  }, [currentDeviceType, isSidebarOpen, closeSidebar]);
-
-  const prevSidebarOpen = React.useRef(isSidebarOpen);
-  React.useEffect(() => {
-    if (!prevSidebarOpen.current && isSidebarOpen && aiStore.isPanelVisible) {
-      aiStore.closePanel();
-    }
-    prevSidebarOpen.current = isSidebarOpen;
-  }, [isSidebarOpen, aiStore]);
-
-  const prevPanelVisible = React.useRef(aiStore.isPanelVisible);
-  React.useEffect(() => {
-    if (!prevPanelVisible.current && aiStore.isPanelVisible && isSidebarOpen) {
-      closeSidebar();
-    }
-    prevPanelVisible.current = aiStore.isPanelVisible;
-  }, [aiStore.isPanelVisible, isSidebarOpen, closeSidebar]);
-
-  React.useEffect(() => {
-    if (isEditing && isSidebarOpen) {
-      closeSidebar();
-    }
-  }, [isEditing, isSidebarOpen, closeSidebar]);
 
   const prevIsLoading = React.useRef(isLoading);
   const pendingEditorClose = React.useRef(false);
@@ -747,24 +712,6 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
         } as React.CSSProperties
       }
     >
-      {showMenu && <FormsSidebar />}
-      {showMenu && (
-        <Backdrop
-          visible={
-            isSidebarOpen && currentDeviceType === DeviceType.mobile
-          }
-          onClick={closeSidebar}
-          zIndex={220}
-          withBackground
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-          }}
-        />
-      )}
       <AiChatPanel
         rootRef={rootRef}
         headerOffset={chatPanelHeaderOffset}
@@ -785,10 +732,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
           currentDeviceType={currentDeviceType}
         >
           <Section.SectionHeader>
-            <FormsHeader
-              showMenu={showMenu}
-              headerOffset={formsHeaderOffset}
-            />
+            <FormsHeader headerOffset={formsHeaderOffset} />
           </Section.SectionHeader>
           <Section.SectionBody>
             {isEditing && (

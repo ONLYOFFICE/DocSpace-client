@@ -42,6 +42,11 @@
   position: absolute;
   top: 16px;
   inset-inline-end: 24px;
+
+  @media (max-width: 1148px) {
+    position: static;
+    align-self: center;
+  }
 }
 
 .logo {

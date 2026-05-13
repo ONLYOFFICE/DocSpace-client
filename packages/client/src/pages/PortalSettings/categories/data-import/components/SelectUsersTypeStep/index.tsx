@@ -35,7 +35,7 @@ import { searchMigrationUsers } from "SRC_DIR/pages/PortalSettings/utils/importU
 import AccountsTable from "./AccountsTable";
 import AccountsPaging from "../../sub-components/AccountsPaging";
 
-import { Wrapper } from "../../StyledDataImport";
+import styles from "../../StyledDataImport.module.scss";
 import { InjectedTypeSelectProps, TypeSelectProps } from "../../types";
 import { MigrationButtons } from "../../sub-components/MigrationButtons";
 import AdminsInfoBlock from "../../sub-components/AdminsInfoBlock";
@@ -120,7 +120,7 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
 	);
 
 	return (
-		<Wrapper>
+		<div className={styles.wrapper}>
 			{Buttons}
 
 			{limitAdmins ? (
@@ -168,7 +168,7 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
 					isSixthStep={false}
 				/>
 			) : null}
-		</Wrapper>
+		</div>
 	);
 };
 

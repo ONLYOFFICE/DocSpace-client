@@ -38,7 +38,7 @@ import {
 } from "@docspace/ui-kit/components/modal-dialog";
 import { LoadingButton } from "@docspace/ui-kit/components/loading-button";
 
-import { StyledUploadBody } from "../StyledPanels";
+import styles from "./UploadPanel.module.scss";
 import FileList from "./FileList";
 import withLoader from "../../../HOCs/withLoader";
 
@@ -134,9 +134,9 @@ class UploadPanelComponent extends React.Component {
       >
         <ModalDialog.Header>{title}</ModalDialog.Header>
         <ModalDialog.Body>
-          <StyledUploadBody>
+          <div className={styles.uploadBody}>
             <FileList />
-          </StyledUploadBody>
+          </div>
         </ModalDialog.Body>
       </ModalDialog>
     );

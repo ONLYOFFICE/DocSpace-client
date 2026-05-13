@@ -29,7 +29,7 @@ import React from "react";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Textarea } from "@docspace/ui-kit/components/textarea";
 
-import { StyledInputGroup } from "../ClientForm.styled";
+import styles from "../ClientForm.styled.module.scss";
 
 interface TextAreaProps {
 	label: string;
@@ -53,7 +53,7 @@ const TextAreaGroup = ({
 	dataTestId,
 }: TextAreaProps) => {
 	return (
-		<StyledInputGroup>
+		<div className={styles.styledInputGroup}>
 			<div className="label">
 				<Text
 					fontSize="13px"
@@ -77,7 +77,7 @@ const TextAreaGroup = ({
 				maxLength={255}
 				dataTestId={dataTestId}
 			/>
-		</StyledInputGroup>
+		</div>
 	);
 };
 

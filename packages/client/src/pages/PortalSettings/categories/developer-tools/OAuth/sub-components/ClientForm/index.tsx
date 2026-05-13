@@ -46,7 +46,7 @@ import OAuthBlock from "./components/OAuthBlock";
 import ScopesBlock from "./components/ScopesBlock";
 import ButtonsBlock from "./components/ButtonsBlock";
 
-import { StyledContainer } from "./ClientForm.styled";
+import styles from "./ClientForm.styled.module.scss";
 import { ClientFormProps, ClientStore } from "./ClientForm.types";
 import { isValidUrl } from "./ClientForm.utils";
 
@@ -425,7 +425,7 @@ const ClientForm = ({
 
   return (
     <>
-      <StyledContainer>
+      <div className={styles.styledContainer}>
         {isLoading ? (
           <ClientFormLoader
             isEdit={isEdit}
@@ -494,7 +494,7 @@ const ClientForm = ({
             />
           </>
         )}
-      </StyledContainer>
+      </div>
       {resetDialogVisible ? <ResetDialog /> : null}
     </>
   );

@@ -51,7 +51,7 @@ import { Tag } from "@docspace/ui-kit/components/tag";
 
 import OAuthStore from "SRC_DIR/store/OAuthStore";
 
-import { StyledInfoContainer } from "../OAuth.styled";
+import styles from "../OAuth.styled.module.scss";
 
 interface InfoDialogProps {
   visible: boolean;
@@ -123,9 +123,15 @@ const InfoDialog = ({
     >
       <ModalDialog.Header>{t("Common:Info")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledInfoContainer
-          showDescription={showDescription}
-          withShowText={withShowText}
+        <div
+          className={styles.styledInfoContainer}
+          style={
+            {
+              "--description-max-height":
+                !showDescription && withShowText ? "100px" : "100%",
+              "--description-margin-bottom": withShowText ? "4px" : "0",
+            } as React.CSSProperties
+          }
         >
           <div className="client-block">
             <div className="client-block__info">
@@ -350,7 +356,7 @@ const InfoDialog = ({
               </Text>
             </>
           ) : null}
-        </StyledInfoContainer>
+        </div>
       </ModalDialog.Body>
     </ModalDialog>
   );

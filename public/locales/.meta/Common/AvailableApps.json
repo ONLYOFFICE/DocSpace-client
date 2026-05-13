@@ -1,0 +1,29 @@
+{
+  "key_path": "AvailableApps",
+  "content": "Available apps",
+  "content_en_sha1_hash": "fc05e2a31db7d125194ebf090f0441bc287bc29d",
+  "created_at": "2026-05-13T17:07:24.977Z",
+  "updated_at": "2026-05-13T17:20:40.769Z",
+  "comment": {
+    "text": "A section label in a menu or list that introduces a collection of accessible applications.",
+    "is_auto": true,
+    "updated_at": "2026-05-13T17:20:40.769Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/NewArticle/index.tsx",
+      "line_number": 172,
+      "context": "],\n },\n {\n id: \"available\",\n label: t(\"Common:AvailableApps\"),\n items: [\n {\n id: AI_ROOMS_ID,\n label: t(\"Common:DashboardAIRoomsTitle\"),\n icon: CatalogRoomsReactSvgUrl,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

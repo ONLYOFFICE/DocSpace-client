@@ -1,0 +1,29 @@
+{
+  "key_path": "DashboardModulesSubtitle",
+  "content": "Expand your DocSpace with premium modules",
+  "content_en_sha1_hash": "6d2d853e6cae5a4707cdcf743ca3d0afdfd26eba",
+  "created_at": "2026-05-13T17:07:27.955Z",
+  "updated_at": "2026-05-13T17:14:09.666Z",
+  "comment": {
+    "text": "Subtitle for the premium modules section on the Dashboard, appearing under the \"Modules\" heading.",
+    "is_auto": true,
+    "updated_at": "2026-05-13T17:14:09.666Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
+      "line_number": 207,
+      "context": "<section className={styles.section}>\n <Text as=\"h2\" className={styles.sectionTitle}>\n {t(\"Common:Modules\")}\n </Text>\n <Text as=\"p\" className={styles.sectionSubtitle}>\n {t(\"Common:DashboardModulesSubtitle\")}\n </Text>\n \n <div\n className={styles.modulesBanner}\n style={",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

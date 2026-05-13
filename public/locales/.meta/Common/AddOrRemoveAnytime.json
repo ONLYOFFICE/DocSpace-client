@@ -1,0 +1,29 @@
+{
+  "key_path": "AddOrRemoveAnytime",
+  "content": "Add or remove anytime",
+  "content_en_sha1_hash": "8243820524fd37206aa01f87af049a0146d927f7",
+  "created_at": "2026-05-13T17:07:23.172Z",
+  "updated_at": "2026-05-13T17:23:00.834Z",
+  "comment": {
+    "text": "Short label used as a tag in the dashboard banner to indicate the flexibility of adding or removing modules.",
+    "is_auto": true,
+    "updated_at": "2026-05-13T17:23:00.834Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
+      "line_number": 227,
+      "context": "<div className={styles.modulesBannerTags}>\n <Text as=\"span\" className={styles.modulesBannerTag}>\n {t(\"Common:NoBundlesRequired\")}\n </Text>\n <Text as=\"span\" className={styles.modulesBannerTag}>\n {t(\"Common:AddOrRemoveAnytime\")}\n </Text>\n <Text as=\"span\" className={styles.modulesBannerTag}>\n {t(\"Common:PayPerModule\")}\n </Text>\n </div>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

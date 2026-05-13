@@ -25,30 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
 
 import CodeMirror, { EditorView } from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { githubLightInit, githubDarkInit } from "@uiw/codemirror-theme-github";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { injectDefaultTheme, NoUserSelect } from "@docspace/shared/utils";
 
-const StyledContainer = styled.div.attrs(injectDefaultTheme)`
-  border: 1px solid ${(props) => props.theme.plugins.borderColor};
-  border-radius: 6px;
-  max-width: 800px;
-  width: 100%;
-  overflow: hidden;
-  background-color: ${(props) => props.theme.sdkPresets.previewBackgroundColor};
-
-  .cm-scroller {
-    overflow-x: hidden;
-  }
-
-  .cm-gutters {
-    ${NoUserSelect}
-  }
-`;
+import styles from "./CodeBlock.module.scss";
 
 const CodeBlock = ({ config, scriptUrl, theme }) => {
   const configWithoutEvents = { ...config };
@@ -83,7 +66,7 @@ const CodeBlock = ({ config, scriptUrl, theme }) => {
   });
 
   return (
-    <StyledContainer dir="ltr">
+    <div className={styles.container} dir="ltr">
       <CodeMirror
         value={codeString}
         theme={theme.isBase ? baseTheme : darkTheme}
@@ -91,7 +74,7 @@ const CodeBlock = ({ config, scriptUrl, theme }) => {
         editable
         readOnly
       />
-    </StyledContainer>
+    </div>
   );
 };
 

@@ -3,7 +3,7 @@
   "content": "Author",
   "content_en_sha1_hash": "5fda23d62015b99fb2a9f86b38bcdf2bdf7609c8",
   "created_at": "2025-05-19T21:30:55.305Z",
-  "updated_at": "2026-05-12T08:51:58.441Z",
+  "updated_at": "2026-05-13T17:07:46.063Z",
   "comment": {
     "text": "This is a short label indicating the author of a file or plugin. It appears in file details, plugin information, and as a column header in tables.",
     "is_auto": true,
@@ -79,7 +79,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
-      "line_number": 397,
+      "line_number": 339,
       "context": "return \"id\" in config ? (\n <>\n <Label className=\"label\" text={t(\"FileFilter\")} />\n <ToggleButton\n className=\"toggle\"\n label={t(\"Files:ByAuthor\")}\n onChange={toggleAuthor}\n isChecked={isUserFilterSet}\n isDisabled={!!config.requestToken}\n dataTestId=\"files_author_toggle_button\"\n />",
       "module": "/packages/client"
     },

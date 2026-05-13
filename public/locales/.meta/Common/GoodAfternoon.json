@@ -1,0 +1,29 @@
+{
+  "key_path": "GoodAfternoon",
+  "content": "Good afternoon{{name}}!",
+  "content_en_sha1_hash": "5900ef87ec7474a63fb2cb1fdf0a94f8340c1b66",
+  "created_at": "2026-05-13T17:07:30.390Z",
+  "updated_at": "2026-05-13T17:12:28.109Z",
+  "comment": {
+    "text": "Greeting text on the Dashboard that appears during the afternoon, including the user's name in the {{name}} variable.",
+    "is_auto": true,
+    "updated_at": "2026-05-13T17:12:28.109Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
+      "line_number": 137,
+      "context": "const greetingKey = getGreetingKey();\n const greeting =\n greetingKey === \"GoodMorning\"\n ? t(\"Common:GoodMorning\", { name: greetingName })\n : greetingKey === \"GoodAfternoon\"\n ? t(\"Common:GoodAfternoon\", { name: greetingName })\n : t(\"Common:GoodEvening\", { name: greetingName });\n \n const design = searchParams.get(\"design\");\n if (design === \"old\") {\n localStorage.setItem(\"useDocSpace\", \"old\");",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

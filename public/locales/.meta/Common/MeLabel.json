@@ -3,7 +3,7 @@
   "content": "Me",
   "content_en_sha1_hash": "94563ec383e29aa3743abd9b337b2e084fb199fb",
   "created_at": "2025-05-19T21:30:46.429Z",
-  "updated_at": "2026-05-08T13:10:45.483Z",
+  "updated_at": "2026-05-13T17:07:46.018Z",
   "comment": {
     "text": "This label appears next to a user's name to indicate that the user is the current user. It is displayed in parentheses.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/People/index.tsx",
-      "line_number": 643,
+      "line_number": 639,
       "context": ">\n {Encoder.htmlDecode(label ?? \"\")}\n </Text>\n {!isGroup && String(id) === currentUserId ? (\n <Text className={styles.isMeLabel} fontWeight={600} fontSize=\"14px\">\n ({t(\"MeLabel\")})\n </Text>\n ) : null}\n {status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}\n </div>\n {!isGroup ? (",
       "module": "/libs/ui-kit"
     },
@@ -32,7 +32,7 @@
     {
       "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/sub-components/Item.tsx",
       "line_number": 106,
-      "context": "<div className=\"invite-input-item\">\n <Text truncate className=\"invite-input-text\">\n {Encoder.htmlDecode(name ?? \"\")}\n </Text>\n <Text truncate className=\"invite-input-text_me\">\n {item.isOwner ? `(${t(\"Common:MeLabel\")})` : null}\n </Text>\n </div>\n </StyledInviteUserBody>\n {canDelete ? (\n <ReactSVG",
+      "context": "<div className=\"invite-input-item\">\n <Text truncate className=\"invite-input-text\">\n {Encoder.htmlDecode(name ?? \"\")}\n </Text>\n <Text truncate className=\"invite-input-text_me\">\n {item.isOwner ? `(${t(\"Common:MeLabel\")})` : null}\n </Text>\n </div>\n </div>\n {canDelete ? (\n <ReactSVG",
       "module": "/packages/client"
     },
     {
@@ -61,7 +61,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/Users/TableView/TableRow.tsx",
-      "line_number": 331,
+      "line_number": 327,
       "context": ": displayName?.trim()\n ? displayName\n : email}\n {isMe?.(id) ? (\n <Text className=\"me-label\" fontWeight=\"600\" fontSize=\"13px\">\n ({t(\"Common:MeLabel\")})\n </Text>\n ) : null}\n </Text>\n <Badges\n statusType={statusType}",
       "module": "/packages/client"
     },

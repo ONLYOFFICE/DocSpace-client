@@ -3,7 +3,7 @@
   "content": "Filter",
   "content_en_sha1_hash": "d7decf1aa22b02ae8abf9a96849ee423eee838e4",
   "created_at": "2025-05-19T21:30:55.685Z",
-  "updated_at": "2026-04-13T14:59:05.806Z",
+  "updated_at": "2026-05-13T17:07:46.084Z",
   "comment": {
     "text": "This is a button label or dialog title that allows users to narrow down a list of items (e.g., transactions, files, webhooks) by specific criteria.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/FilterDialog/index.js",
-      "line_number": 141,
-      "context": "filters.deliveryTo === historyFilters.deliveryTo\n : filters.deliveryDate === null && filters.status.length === 0;\n \n return (\n <ModalDialog visible={visible} onClose={closeModal} displayType=\"aside\">\n <ModalDialog.Header>{t(\"Files:Filter\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <DialogBodyWrapper>\n <DeliveryDatePicker\n isApplied={isApplied}\n setIsApplied={setIsApplied}",
+      "line_number": 126,
+      "context": "filters.deliveryTo === historyFilters.deliveryTo\n : filters.deliveryDate === null && filters.status.length === 0;\n \n return (\n <ModalDialog visible={visible} onClose={closeModal} displayType=\"aside\">\n <ModalDialog.Header>{t(\"Files:Filter\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.dialogBodyWrapper}>\n <DeliveryDatePicker\n isApplied={isApplied}\n setIsApplied={setIsApplied}",
       "module": "/packages/client"
     },
     {

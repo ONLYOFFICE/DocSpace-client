@@ -3,7 +3,7 @@
   "content": "Delete webhook",
   "content_en_sha1_hash": "1d387ca0c456960cba27386fd37fb23f3da6e285",
   "created_at": "2025-05-19T21:30:49.683Z",
-  "updated_at": "2026-04-11T21:29:19.362Z",
+  "updated_at": "2026-05-13T17:07:46.132Z",
   "comment": {
     "text": "This is the label for a dropdown menu item that, when clicked, initiates the process of deleting a webhook.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhooksTable/WebhooksTableView/WebhooksTableRow.js",
-      "line_number": 151,
+      "line_number": 124,
       "context": "key: \"Separator dropdownItem\",\n isSeparator: true,\n },\n {\n key: \"Delete webhook dropdownItem\",\n label: t(\"DeleteWebhook\"),\n icon: DeleteIcon,\n onClick: onDeleteOpen,\n dataTestId: \"webhook_delete_item\",\n },\n ];",
       "module": "/packages/client"
     }

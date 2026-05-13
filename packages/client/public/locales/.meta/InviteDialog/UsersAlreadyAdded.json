@@ -3,7 +3,7 @@
   "content": "Some users have already been added",
   "content_en_sha1_hash": "11ba705efbb4050c93a4d4827ad25f4eb90bb39d",
   "created_at": "2025-05-19T21:30:54.741Z",
-  "updated_at": "2026-05-08T13:10:45.544Z",
+  "updated_at": "2026-05-13T17:07:46.050Z",
   "comment": {
     "text": "This is a toast message that appears when a user attempts to add individuals who are already members of a group or have already been invited.",
     "is_auto": true,
@@ -43,7 +43,7 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/sub-components/InviteInput.tsx",
-      "line_number": 169,
+      "line_number": 164,
       "context": "(item: TUser | TGroup) => {\n const { id, shared } = item;\n \n const addUser = () => {\n if (shared) {\n toastr.warning(t(\"UsersAlreadyAdded\"));\n } else {\n setInviteItems([item, ...inviteItems] as TSelectorItem[]);\n }\n \n setInputValue(\"\");",
       "module": "/packages/client"
     }

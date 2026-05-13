@@ -1,0 +1,35 @@
+{
+  "key_path": "DashboardAIChatAgentsTitle",
+  "content": "AI Chat & Agents",
+  "content_en_sha1_hash": "9a4a7875ed47a39ae39c321c00f14c9ba7c7d722",
+  "created_at": "2026-05-13T17:07:27.855Z",
+  "updated_at": "2026-05-13T17:19:12.427Z",
+  "comment": {
+    "text": "Title for a dashboard module and a menu item label identifying the AI chat and agents feature.",
+    "is_auto": true,
+    "updated_at": "2026-05-13T17:19:12.427Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/NewArticle/index.tsx",
+      "line_number": 182,
+      "context": "icon: CatalogRoomsReactSvgUrl,\n onClick: () => toastr.info(t(\"Common:UnderDevelopment\")),\n },\n {\n id: AI_AGENTS_ID,\n label: t(\"Common:DashboardAIChatAgentsTitle\"),\n icon: CatalogAiAgentsReactSvgUrl,\n onClick: () => toastr.info(t(\"Common:UnderDevelopment\")),\n },\n ],\n },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
+      "line_number": 177,
+      "context": "href: \"/ai-forms\",\n },\n {\n id: \"ai-agents\",\n icon: <AiAgentsIcon />,\n title: t(\"Common:DashboardAIChatAgentsTitle\"),\n description: t(\"Common:DashboardAIChatAgentsDescription\"),\n installed: isModuleInstalled(\"ai-agents\"),\n },\n ];",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

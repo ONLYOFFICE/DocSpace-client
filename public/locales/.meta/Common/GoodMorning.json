@@ -1,0 +1,29 @@
+{
+  "key_path": "GoodMorning",
+  "content": "Good morning{{name}}!",
+  "content_en_sha1_hash": "bac83b928a76a6e94d485b8932dd12b239b1da00",
+  "created_at": "2026-05-13T17:07:30.414Z",
+  "updated_at": "2026-05-13T17:11:31.627Z",
+  "comment": {
+    "text": "Dashboard greeting text that displays a personalized welcome. The {{name}} variable contains a comma and the user's first name.",
+    "is_auto": true,
+    "updated_at": "2026-05-13T17:11:31.627Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
+      "line_number": 135,
+      "context": "const greetingName = firstName ? `, ${firstName}` : \"\";\n const greetingKey = getGreetingKey();\n const greeting =\n greetingKey === \"GoodMorning\"\n ? t(\"Common:GoodMorning\", { name: greetingName })\n : greetingKey === \"GoodAfternoon\"\n ? t(\"Common:GoodAfternoon\", { name: greetingName })\n : t(\"Common:GoodEvening\", { name: greetingName });\n \n const design = searchParams.get(\"design\");",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

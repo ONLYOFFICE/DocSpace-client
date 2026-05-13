@@ -371,6 +371,7 @@ const DefaultProviderComponent = ({
             hasError={!!defaultProviderModelsError}
             errorMessage={defaultProviderModelsError || ""}
             errorMessageWidth="100%"
+            dataTestId="default-provider-field-container"
           >
             <ComboBox
               className={classNames({

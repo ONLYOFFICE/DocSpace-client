@@ -3,7 +3,7 @@
   "content": "Info",
   "content_en_sha1_hash": "4b631f69842530d659306c8f06dbad594a6b1807",
   "created_at": "2025-05-19T21:30:45.900Z",
-  "updated_at": "2026-05-08T13:10:45.605Z",
+  "updated_at": "2026-05-13T17:07:46.081Z",
   "comment": {
     "text": "This is the title for various information panels and dialogs, indicating that the content within provides details or context.",
     "is_auto": true,
@@ -26,7 +26,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/InfoDialog.tsx",
       "line_number": 124,
-      "context": "visible={visible}\n displayType={ModalDialogType.aside}\n onClose={onClose}\n withBodyScroll\n >\n <ModalDialog.Header>{t(\"Common:Info\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <StyledInfoContainer\n showDescription={showDescription}\n withShowText={withShowText}\n >",
+      "context": "visible={visible}\n displayType={ModalDialogType.aside}\n onClose={onClose}\n withBodyScroll\n >\n <ModalDialog.Header>{t(\"Common:Info\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div\n className={styles.styledInfoContainer}\n style={\n {",
       "module": "/packages/client"
     },
     {

@@ -3,7 +3,7 @@
   "content": "Your balance: <1>{{balance}}</1> will remain in your account.",
   "content_en_sha1_hash": "74d20de589ac8dea1f69534bd705cabc328d92c4",
   "created_at": "2026-04-10T13:53:44.988Z",
-  "updated_at": "2026-05-08T13:10:45.731Z",
+  "updated_at": "2026-05-13T17:07:46.213Z",
   "comment": {
     "text": "This is a line of text within a confirmation dialog. It informs the user that their remaining balance, represented by `{{balance}}`, will stay in their account after disabling AI tools.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
-      "line_number": 192,
+      "line_number": 203,
       "context": "body: [\n t(\"DisableAIToolsConfirm\", {\n organizationName: logoText,\n }),\n <CommonTrans\n key=\"DisableAIToolsConfirmBalance\"\n i18nKey=\"DisableAIToolsConfirmBalance\"\n values={{\n balance: formatAiServiceCurrency(\n aiServiceBalance ?? 0,\n 3,",
       "module": "/libs/ui-kit"
     }

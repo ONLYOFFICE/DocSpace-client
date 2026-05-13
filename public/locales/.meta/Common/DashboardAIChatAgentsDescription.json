@@ -1,0 +1,29 @@
+{
+  "key_path": "DashboardAIChatAgentsDescription",
+  "content": "Bring AI assistants and agents directly into your workspace.",
+  "content_en_sha1_hash": "7115d029a863c5f0e499aa9ffea5d7949901ec0f",
+  "created_at": "2026-05-13T17:07:27.844Z",
+  "updated_at": "2026-05-13T17:19:48.931Z",
+  "comment": {
+    "text": "Description for the AI agents module card on the dashboard, appearing under the module title.",
+    "is_auto": true,
+    "updated_at": "2026-05-13T17:19:48.931Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
+      "line_number": 178,
+      "context": "},\n {\n id: \"ai-agents\",\n icon: <AiAgentsIcon />,\n title: t(\"Common:DashboardAIChatAgentsTitle\"),\n description: t(\"Common:DashboardAIChatAgentsDescription\"),\n installed: isModuleInstalled(\"ai-agents\"),\n },\n ];\n \n return (",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -25,27 +25,19 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import styled from "styled-components";
 
-const StyledLoader = styled.div`
-  padding-bottom: 18px;
-
-  .loader-description {
-    display: block;
-    padding-bottom: 8px;
-  }
-`;
+import styles from "./loaderBrandingDescription.module.scss";
 
 const LoaderBrandingDescription = () => {
   return (
-    <StyledLoader>
+    <div className={styles.loader}>
       <RectangleSkeleton
         width="700px"
         height="16px"
-        className="loader-description"
+        className={styles.loaderDescription}
       />
       <RectangleSkeleton width="93px" height="16px" />
-    </StyledLoader>
+    </div>
   );
 };
 

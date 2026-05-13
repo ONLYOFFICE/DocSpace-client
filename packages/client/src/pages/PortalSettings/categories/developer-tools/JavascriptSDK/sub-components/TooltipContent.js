@@ -25,54 +25,22 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Text } from "@docspace/ui-kit/components/text";
-import styled from "styled-components";
 
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-
-const Wrapper = styled.div`
-  box-sizing: border-box;
-
-  max-width: 216px;
-  width: 100%;
-  padding: 8px 4px 16px;
-`;
-
-const HeaderContainer = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-
-  margin-bottom: 8px;
-
-  svg {
-    cursor: pointer;
-    path {
-      fill: ${globalColors.black};
-    }
-  }
-`;
-
-const ImgWrapper = styled.div`
-  margin-top: 16px;
-
-  img {
-    width: 100%;
-  }
-`;
+import styles from "./TooltipContent.module.scss";
 
 export const TooltipContent = ({ title, description, img }) => {
   return (
-    <Wrapper>
-      <HeaderContainer>
+    <div className={styles.wrapper}>
+      <header className={styles.headerContainer}>
         <Text fontSize="16px" fontWeight={700} lineHeight="22px">
           {title}
         </Text>
         {/* <XImg /> */}
-      </HeaderContainer>
+      </header>
       <Text>{description}</Text>
-      <ImgWrapper>
+      <div className={styles.imgWrapper}>
         <img src={img} alt={title} />
-      </ImgWrapper>
-    </Wrapper>
+      </div>
+    </div>
   );
 };

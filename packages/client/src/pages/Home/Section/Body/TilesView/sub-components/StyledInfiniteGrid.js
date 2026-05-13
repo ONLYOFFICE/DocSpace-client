@@ -24,57 +24,46 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-import { desktop, tablet } from "@docspace/shared/utils";
+import React from "react";
 import { InfiniteLoaderComponent } from "@docspace/ui-kit/components/infinite-loader";
 
-const paddingCss = css`
-  @media ${desktop} {
-    margin-inline-start: 1px;
-    padding-inline-end: 0;
-  }
+import styles from "./StyledInfiniteGrid.module.scss";
 
-  @media ${tablet} {
-    margin-inline-start: -1px;
-    margin-inline-end: 3px;
-  }
-`;
+const StyledCard = ({ cardHeight, children, className, ...rest }) => (
+  <div
+    className={`${styles.card}${className ? ` ${className}` : ""}`}
+    style={{ height: `${cardHeight}px` }}
+    {...rest}
+  >
+    {children}
+  </div>
+);
 
-const StyledCard = styled.div`
-  display: block;
-  height: ${({ cardHeight }) => `${cardHeight}px`};
-`;
+const StyledItem = ({ isRoom, isTemplate, children, className, ...rest }) => (
+  <div
+    className={`${styles.item}${className ? ` ${className}` : ""}`}
+    data-is-room={isRoom || undefined}
+    data-is-template={isTemplate || undefined}
+    {...rest}
+  >
+    {children}
+  </div>
+);
 
-const StyledItem = styled.div`
-  display: grid;
-  grid-template-columns: ${(props) =>
-    props.isRoom || props.isTemplate
-      ? "repeat(auto-fill, minmax(clamp(275px, 13.4vw, 350px), 1fr))"
-      : "repeat(auto-fill, minmax(clamp(216px, 13.4vw, 360px), 1fr))"};
-  gap: ${(props) => (props.isRoom ? "16px" : "14px 16px")};
+const StyledHeaderItem = ({ children, className, ...rest }) => (
+  <div
+    className={`${styles.headerItem}${className ? ` ${className}` : ""}`}
+    {...rest}
+  >
+    {children}
+  </div>
+);
 
-  ${paddingCss};
-
-  ${(props) =>
-    !props.isRoom &&
-    css`
-      @media ${tablet} {
-        gap: 14px;
-      }
-    `}
-`;
-
-const StyledHeaderItem = styled.div`
-  height: 20px;
-  grid-column: -1 / 1;
-`;
-
-const StyledInfiniteLoader = styled(InfiniteLoaderComponent)`
-  overflow: visible !important;
-
-  & > div {
-    overflow: visible !important;
-  }
-`;
+const StyledInfiniteLoader = ({ className, ...props }) => (
+  <InfiniteLoaderComponent
+    className={`${styles.infiniteLoader}${className ? ` ${className}` : ""}`}
+    {...props}
+  />
+);
 
 export { StyledCard, StyledItem, StyledHeaderItem, StyledInfiniteLoader };

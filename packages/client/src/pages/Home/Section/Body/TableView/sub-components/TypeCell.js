@@ -28,7 +28,9 @@ import React from "react";
 import { FileType } from "@docspace/shared/enums";
 import { getSinglePDFTitle } from "@docspace/shared/utils/getPDFTite";
 
-import { StyledTypeCell } from "./CellStyles";
+import { Text } from "@docspace/ui-kit/components/text";
+
+import styles from "./CellStyles.module.scss";
 import { getRoomTypeName } from "../../../../../../helpers/filesUtils";
 
 const TypeCell = ({ t, item, sideColor }) => {
@@ -68,10 +70,11 @@ const TypeCell = ({ t, item, sideColor }) => {
   const data = Exst ? `${Exst} ${type}` : type;
 
   return (
-    <StyledTypeCell
+    <Text
       fontSize="12px"
       fontWeight="600"
       color={sideColor}
+      className={styles.styledTypeCell}
       truncate
       title={data}
     >
@@ -84,7 +87,7 @@ const TypeCell = ({ t, item, sideColor }) => {
         </>
       ) : null}
       <span className="type">{type}</span>
-    </StyledTypeCell>
+    </Text>
   );
 };
 export default React.memo(TypeCell);

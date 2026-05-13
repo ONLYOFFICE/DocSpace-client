@@ -40,7 +40,7 @@ import RegisterNewButton from "../RegisterNewButton";
 import TableView from "./TableView";
 import RowView from "./RowView";
 
-import { StyledContainer } from "./List.styled";
+import styles from "./List.styled.module.scss";
 import OAuthLoader from "./Loader";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
@@ -78,7 +78,7 @@ const List = ({
   );
 
   return (
-    <StyledContainer>
+    <div className={styles.styledContainer}>
       <Text
         fontSize="13px"
         fontWeight={400}
@@ -132,7 +132,7 @@ const List = ({
           )}
         </>
       )}
-    </StyledContainer>
+    </div>
   );
 };
 

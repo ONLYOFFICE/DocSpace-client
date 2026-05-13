@@ -3,7 +3,7 @@
   "content": "Error uploading files: {{count}}",
   "content_en_sha1_hash": "58de59ef14082ec9957dcf4b46c13ec933ca7a05",
   "created_at": "2025-05-19T21:30:55.637Z",
-  "updated_at": "2026-05-08T13:10:45.744Z",
+  "updated_at": "2026-05-13T17:07:46.226Z",
   "comment": {
     "text": "This is an error message displayed within a button label, indicating that some files failed to upload. `{{count}}` represents the number of files that encountered an error.",
     "is_auto": true,
@@ -13,8 +13,14 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/components/operations-progress-button/index.tsx",
-      "line_number": 348,
-      "context": ") {\n return (\n <Text fontWeight={600}>\n {operationName}\n <br />\n {t(\"ErrorUploadingFiles\", {\n count: getErrorCount()!,\n })}\n </Text>\n );\n }",
+      "line_number": 363,
+      "context": ") {\n return (\n <Text fontWeight={600}>\n {operationName}\n <br />\n {/* t(\"Common:ErrorUploadingFiles\", { count: getErrorCount() }) */}\n {t(\"ErrorUploadingFiles\", {\n count: getErrorCount()!,\n })}\n </Text>\n );",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/components/operations-progress-button/index.tsx",
+      "line_number": 364,
+      "context": "return (\n <Text fontWeight={600}>\n {operationName}\n <br />\n {/* t(\"Common:ErrorUploadingFiles\", { count: getErrorCount() }) */}\n {t(\"ErrorUploadingFiles\", {\n count: getErrorCount()!,\n })}\n </Text>\n );\n }",
       "module": "/libs/ui-kit"
     }
   ],

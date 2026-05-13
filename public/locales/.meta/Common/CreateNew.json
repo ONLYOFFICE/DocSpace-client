@@ -1,0 +1,29 @@
+{
+  "key_path": "CreateNew",
+  "content": "Create new",
+  "content_en_sha1_hash": "547703394f410af94d93bacaad9158fda8fc9228",
+  "created_at": "2026-05-13T17:07:26.858Z",
+  "updated_at": "2026-05-13T17:20:15.077Z",
+  "comment": {
+    "text": "Section title for the Quick Actions area on the Dashboard, introducing options to initiate new tasks.",
+    "is_auto": true,
+    "updated_at": "2026-05-13T17:20:15.077Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
+      "line_number": 197,
+      "context": "{greeting}\n </Text>\n \n <section className={styles.section}>\n <Text as=\"h2\" className={styles.sectionTitle}>\n {t(\"Common:CreateNew\")}\n </Text>\n <QuickActions items={createItems} className={styles.quickActions} />\n </section>\n \n <section className={styles.section}>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

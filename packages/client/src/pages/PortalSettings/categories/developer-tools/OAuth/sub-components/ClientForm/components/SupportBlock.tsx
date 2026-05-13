@@ -30,7 +30,7 @@ import { TTranslation } from "@docspace/shared/types";
 import { IClientReqDTO } from "@docspace/shared/utils/oauth/types";
 
 import { getOAuthValidationCodeTranslation } from "../ClientForm.utils";
-import { StyledBlock, StyledInputBlock } from "../ClientForm.styled";
+import styles from "../ClientForm.styled.module.scss";
 
 import BlockHeader from "./BlockHeader";
 import InputGroup from "./InputGroup";
@@ -75,9 +75,9 @@ const SupportBlock = ({
   const termsError = errorFields.includes("terms_url");
 
   return (
-    <StyledBlock>
+    <div className={styles.styledBlock}>
       <BlockHeader header={t("SupportAndLegalInfo")} />
-      <StyledInputBlock>
+      <div className={styles.styledInputBlock}>
         <InputGroup
           label={t("PrivacyPolicyURL")}
           name="policy_url"
@@ -120,8 +120,8 @@ const SupportBlock = ({
           onBlur={onBlur}
           dataTestId="terms_url_input_group"
         />
-      </StyledInputBlock>
-    </StyledBlock>
+      </div>
+    </div>
   );
 };
 

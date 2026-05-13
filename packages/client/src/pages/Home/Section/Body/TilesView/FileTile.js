@@ -26,7 +26,6 @@
 
 import classNames from "classnames";
 import { use, useRef, useEffect, useState, useCallback, useMemo } from "react";
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
@@ -46,15 +45,13 @@ import { TagManagement } from "SRC_DIR/components/TagManagement";
 
 import FilesTileContent from "./FilesTileContent";
 import { FileTileContext } from "./FileTile.provider";
+import styles from "./FileTile.module.scss";
 
 import withFileActions from "../../../../../HOCs/withFileActions";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
 import ItemIcon from "../../../../../components/ItemIcon";
 import withBadges from "../../../../../HOCs/withBadges";
 
-const StyledDragAndDrop = styled(DragAndDrop)`
-  border-radius: 12px;
-`;
 
 const FileTile = (props) => {
   const {
@@ -303,10 +300,10 @@ const FileTile = (props) => {
 
   return (
     <div ref={selectableRef} id={id}>
-      <StyledDragAndDrop
+      <DragAndDrop
         data-title={item.title}
         value={value}
-        className={classNameMemo}
+        className={classNames(styles.dragAndDrop, classNameMemo)}
         onDrop={onDrop}
         onMouseDown={onMouseDown}
         dragging={dragging ? isDragging : null}
@@ -316,7 +313,7 @@ const FileTile = (props) => {
         data-document-title={documentTitle}
       >
         {renderTile()}
-      </StyledDragAndDrop>
+      </DragAndDrop>
     </div>
   );
 };

@@ -3,7 +3,7 @@
   "content": "Submit",
   "content_en_sha1_hash": "2dacf65959849884a011f36f76a04eebea94c5ea",
   "created_at": "2025-05-19T21:30:52.819Z",
-  "updated_at": "2026-04-11T21:21:55.781Z",
+  "updated_at": "2026-05-13T17:07:46.065Z",
   "comment": {
     "text": "This is a button label. It confirms an action, such as submitting a form or applying settings.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/index.js",
-      "line_number": 256,
+      "line_number": 186,
       "context": "productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n })}\n </Text>\n <Button\n label={t(\"Submit\")}\n primary\n size=\"normal\"\n minWidth=\"138px\"\n onClick={submitRequest}\n scale={isMobile()}",
       "module": "/packages/client"
     }

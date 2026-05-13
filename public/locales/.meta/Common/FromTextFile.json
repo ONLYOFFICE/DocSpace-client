@@ -1,0 +1,29 @@
+{
+  "key_path": "FromTextFile",
+  "content": "From text file",
+  "content_en_sha1_hash": "521c29206ecb79ca73e09f93fdfd9794e26a24c1",
+  "created_at": "2026-05-13T17:07:30.211Z",
+  "updated_at": "2026-05-13T17:13:21.728Z",
+  "comment": {
+    "text": "Button label in a quick actions menu used to initiate the creation of a new document from a text file.",
+    "is_auto": true,
+    "updated_at": "2026-05-13T17:13:21.728Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/forms/layout.client.tsx",
+      "line_number": 625,
+      "context": "onClick: () => toastr.info(t(\"Common:UnderDevelopment\")),\n },\n {\n id: \"quick-from-text\",\n icon: <CreateFromTextIcon />,\n label: t(\"Common:FromTextFile\"),\n onClick: () => toastr.info(t(\"Common:UnderDevelopment\")),\n },\n {\n id: \"quick-use-template\",\n icon: <CreateFromTemplateIcon />,",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

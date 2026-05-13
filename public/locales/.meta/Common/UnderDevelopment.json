@@ -1,0 +1,53 @@
+{
+  "key_path": "UnderDevelopment",
+  "content": "This feature is under development",
+  "content_en_sha1_hash": "d0cf4ed9c9a0a0e3f159d3f5147e814bc0004e5c",
+  "created_at": "2026-05-13T17:07:38.876Z",
+  "updated_at": "2026-05-13T17:08:15.781Z",
+  "comment": {
+    "text": "Informational toast message shown when a user clicks on a feature that is not yet available or attempts an installation.",
+    "is_auto": true,
+    "updated_at": "2026-05-13T17:08:15.781Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/NewArticle/index.tsx",
+      "line_number": 178,
+      "context": "items: [\n {\n id: AI_ROOMS_ID,\n label: t(\"Common:DashboardAIRoomsTitle\"),\n icon: CatalogRoomsReactSvgUrl,\n onClick: () => toastr.info(t(\"Common:UnderDevelopment\")),\n },\n {\n id: AI_AGENTS_ID,\n label: t(\"Common:DashboardAIChatAgentsTitle\"),\n icon: CatalogAiAgentsReactSvgUrl,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/NewArticle/index.tsx",
+      "line_number": 178,
+      "context": "items: [\n {\n id: AI_ROOMS_ID,\n label: t(\"Common:DashboardAIRoomsTitle\"),\n icon: CatalogRoomsReactSvgUrl,\n onClick: () => toastr.info(t(\"Common:UnderDevelopment\")),\n },\n {\n id: AI_AGENTS_ID,\n label: t(\"Common:DashboardAIChatAgentsTitle\"),\n icon: CatalogAiAgentsReactSvgUrl,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
+      "line_number": 128,
+      "context": "],\n [t, myFolderId],\n );\n \n const handleInstall = () => {\n toastr.info(t(\"Common:UnderDevelopment\"));\n };\n \n const greetingName = firstName ? `, ${firstName}` : \"\";\n const greetingKey = getGreetingKey();\n const greeting =",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/forms/layout.client.tsx",
+      "line_number": 620,
+      "context": "},\n {\n id: \"quick-generate-ai\",\n icon: <GeneratePdfAiIcon />,\n label: t(\"Common:GenerateWithAI\"),\n onClick: () => toastr.info(t(\"Common:UnderDevelopment\")),\n },\n {\n id: \"quick-from-text\",\n icon: <CreateFromTextIcon />,\n label: t(\"Common:FromTextFile\"),",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/forms/layout.client.tsx",
+      "line_number": 620,
+      "context": "},\n {\n id: \"quick-generate-ai\",\n icon: <GeneratePdfAiIcon />,\n label: t(\"Common:GenerateWithAI\"),\n onClick: () => toastr.info(t(\"Common:UnderDevelopment\")),\n },\n {\n id: \"quick-from-text\",\n icon: <CreateFromTextIcon />,\n label: t(\"Common:FromTextFile\"),",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

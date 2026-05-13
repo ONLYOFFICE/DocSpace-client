@@ -3,7 +3,7 @@
   "content": "Trash",
   "content_en_sha1_hash": "e3bf62bb7f5af7ba291b2df1a11d573bdb55d7e9",
   "created_at": "2025-05-19T21:30:49.325Z",
-  "updated_at": "2026-05-12T08:51:58.388Z",
+  "updated_at": "2026-05-13T17:07:46.019Z",
   "comment": {
     "text": "This is a noun referring to the \"Trash\" section where deleted files are stored. It appears as a label in various UI components, often as part of a longer sentence or as a section name.",
     "is_auto": true,
@@ -120,6 +120,12 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/components/NewArticle/index.tsx",
+      "line_number": 129,
+      "context": "icon: CatalogFavoritesReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=favorites\"),\n },\n {\n id: \"ai-files-trash\",\n label: t(\"Common:TrashSection\"),\n icon: CatalogTrashReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=trash\"),\n },\n {\n id: \"ai-files-settings\",",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/HOCs/withHotkeys.js",
       "line_number": 440,
       "context": "if (confirmDelete) {\n setDeleteDialogVisible(true);\n } else {\n const translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n deleteAction(translations).catch((err) => toastr.error(err));\n }\n }",
@@ -231,12 +237,6 @@
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/settings/category/FileManagement.tsx",
       "line_number": 143,
       "context": "onChange={onChangeDeleteConfirm}\n isChecked={settings.confirmDelete}\n />\n <Text>\n {t(\"TrashMoveConfirmation\", {\n sectionName: t(\"Common:TrashSection\"),\n })}\n </Text>\n </div>\n \n <div className={styles.toggleBtnWrapper}>",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(personal-files)/_components/sidebar/index.tsx",
-      "line_number": 136,
-      "context": "label: t(\"Common:Recent\"),\n icon: CatalogSettingsRestoreReactSvgUrl,\n },\n {\n key: DocsSection.Trash,\n label: t(\"Common:TrashSection\"),\n icon: CatalogTrashReactSvgUrl,\n },\n ],\n [t],\n );",
       "module": "/packages/sdk"
     },
     {

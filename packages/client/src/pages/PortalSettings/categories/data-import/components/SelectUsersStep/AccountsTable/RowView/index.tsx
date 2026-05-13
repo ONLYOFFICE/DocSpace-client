@@ -29,103 +29,18 @@ import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/emptyFilter/empty.fil
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 
 import { inject, observer } from "mobx-react";
-import { tablet } from "@docspace/ui-kit/utils/device";
-import styled, { useTheme } from "styled-components";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { RowContainer, Row } from "@docspace/ui-kit/components/rows";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { TEnhancedMigrationUser } from "@docspace/shared/api/settings/types";
 
 import UsersRow from "./UsersRow";
 import { InjectedRowViewProps, RowViewProps } from "../../../../types";
-
-const StyledRowContainer = styled(RowContainer)`
-  margin: 0 0 20px;
-
-  .table-group-menu {
-    height: 61px;
-    position: sticky;
-    z-index: 201;
-    margin-inline-end: -16px;
-    width: 100%;
-
-    margin-top: 20px;
-    top: 61px;
-    margin-bottom: -29.5px;
-
-    .table-container_group-menu {
-      padding: 0px 16px;
-      border-image-slice: 0;
-      box-shadow: ${globalColors.menuShadow} 0px 15px 20px;
-    }
-
-    .table-container_group-menu-checkbox {
-      margin-inline-end: 8px;
-    }
-
-    .table-container_group-menu-separator {
-      margin: 0 16px;
-    }
-  }
-
-  .header-container-text {
-    font-size: 12px;
-    color: ${(props) =>
-      props.theme.client.settings.migration.tableRowTextColor};
-  }
-
-  .table-container_header {
-    position: absolute;
-  }
-
-  .clear-icon {
-    margin-inline-end: 8px;
-  }
-
-  .ec-desc {
-    max-width: 348px;
-  }
-
-  .row-main-container-wrapper {
-    @media ${tablet} {
-      margin: 0;
-    }
-  }
-
-  .buttons-box {
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-  }
-`;
-
-const StyledRow = styled(Row)`
-  box-sizing: border-box;
-  height: 40px;
-  min-height: 40px;
-
-  .row-header-item {
-    display: flex;
-    align-items: center;
-    margin-inline-start: 6px;
-  }
-
-  .checkbox-text {
-    color: ${(props) => props.theme.client.settings.migration.tableHeaderText};
-    font-weight: 600;
-    font-size: 12px;
-  }
-
-  @media ${tablet} {
-    .row_content {
-      height: auto;
-    }
-  }
-`;
+import styles from "../../../../StyledDataImport.module.scss";
 
 const checkedAccountType = "withEmail";
 
@@ -158,10 +73,10 @@ const RowView = (props: RowViewProps) => {
   const isChecked = checkedUsers.withEmail.length === withEmailUsers.length;
 
   return (
-    <StyledRowContainer useReactWindow={false}>
+    <RowContainer className={styles.styledRowContainer} useReactWindow={false}>
       {accountsData.length > 0 ? (
         <>
-          <StyledRow>
+          <Row className={styles.styledRow}>
             <div className="row-header-item">
               {checkedUsers.withEmail.length > 0 ? (
                 <Checkbox
@@ -172,7 +87,7 @@ const RowView = (props: RowViewProps) => {
                 />
               ) : null}
             </div>
-          </StyledRow>
+          </Row>
 
           {accountsData.map((data) => (
             <UsersRow
@@ -215,7 +130,7 @@ const RowView = (props: RowViewProps) => {
         />
       )}
       <div />
-    </StyledRowContainer>
+    </RowContainer>
   );
 };
 

@@ -3,7 +3,7 @@
   "content": "Select date",
   "content_en_sha1_hash": "b84a6ecbc04c1f54b6fa504c6441ca78e07db586",
   "created_at": "2025-05-19T21:30:48.374Z",
-  "updated_at": "2026-05-08T13:10:45.589Z",
+  "updated_at": "2026-05-13T17:07:46.069Z",
   "comment": {
     "text": "This is the label for a date picker component, prompting the user to choose a specific date.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/FilterDialog/DeliveryDatePicker.js",
-      "line_number": 257,
+      "line_number": 217,
       "context": ") : (\n <DatePicker\n outerDate={filters.deliveryDate}\n isMobile={isMobile()}\n onChange={onDateSet}\n selectDateText={t(\"Common:SelectDate\")}\n showCalendarIcon={false}\n locale={i18n.language}\n dataTestId=\"delivery_date_picker\"\n />\n )}",
       "module": "/packages/client"
     },

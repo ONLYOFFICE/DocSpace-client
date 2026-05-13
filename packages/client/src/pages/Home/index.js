@@ -525,10 +525,23 @@ const PureHome = (props) => {
 
 const Home = withTranslation(["UploadPanel", "Files", "People"])(PureHome);
 
+const PASS_THROUGH_PREFIXES = [
+  "/accounts",
+  "/contacts",
+  "/developer-tools",
+  "/portal-settings",
+  "/profile",
+];
+
 const HomeWithGuard = (props) => {
   const useDocSpace = localStorage.getItem("useDocSpace") === "true";
+  const { pathname } = useLocation();
 
-  if (!useDocSpace) return <Navigate to="/dashboard" replace />;
+  if (
+    !useDocSpace &&
+    !PASS_THROUGH_PREFIXES.some((p) => pathname.startsWith(p))
+  )
+    return <Navigate to="/dashboard" replace />;
 
   return <Home {...props} />;
 };

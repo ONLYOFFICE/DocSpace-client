@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useSearchParams } from "react-router";
+import { useTranslation } from "react-i18next";
 
 import SdkIframe from "SRC_DIR/components/SdkIframe";
 
@@ -36,10 +37,11 @@ const SECTION_TO_PATH: Record<string, string> = {
 };
 
 export const AiFiles = () => {
+  const { t } = useTranslation(["Common"]);
   const [searchParams] = useSearchParams();
   const section = searchParams.get("section") ?? "";
   const src = SECTION_TO_PATH[section] ?? "/sdk/personal-files";
-  return <SdkIframe src={src} title="AI Files" />;
+  return <SdkIframe src={src} title={t("Common:DashboardAIFilesTitle")} />;
 };
 
 export default AiFiles;

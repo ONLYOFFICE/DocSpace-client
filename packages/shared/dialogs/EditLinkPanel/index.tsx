@@ -74,7 +74,7 @@ import {
   RoomsType,
   ShareAccessRights,
 } from "../../enums";
-import { StyledEditLinkBodyContent } from "./EditLinkPanel.styled";
+import styles from "./EditLinkPanel.module.scss";
 
 import LinkBlock from "./LinkBlock";
 import ToggleBlock from "./ToggleBlock";
@@ -510,7 +510,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
               : t("Common:EditLink")}
         </ModalDialog.Header>
         <ModalDialog.Body>
-          <StyledEditLinkBodyContent className="edit-link_body">
+          <div className={`${styles.editLinkBodyContent} edit-link_body`}>
             {accessOptions.length > 1 ? (
               <RoleLinkBlock
                 t={t}
@@ -572,7 +572,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
               canChangeLifetime={canChangeLifetime}
               headerText={t("Common:LimitByTimePeriod")}
             />
-          </StyledEditLinkBodyContent>
+          </div>
         </ModalDialog.Body>
         <ModalDialog.Footer>
           <Button

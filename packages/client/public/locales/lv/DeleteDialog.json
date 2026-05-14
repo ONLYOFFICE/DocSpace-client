@@ -17,7 +17,7 @@
   "DeleteItemsSharedNote": "Ņemiet vērā: ja tos kopīgojāt ar kādu personu, tas kļūs nepieejams.",
   "DeleteRoomConfirm": "Istaba <strong>\"{{roomName}}\"</strong> tiks izdzēsta pavisam. Visi dati un lietotāju piekļuves tiks zaudēti.",
   "DeleteRooms": "Atlasītās <strong>telpas ({{count}})</strong> tiks neatgriezeniski dzēstas. Visi dati un lietotāju piekļuve tiks zaudēta.",
-  "DeleteRoomsTitle": "Vai dzēst šo telpu?",
+  "DeleteRoomsTitle": "Dzēst šīs istabas?",
   "DeleteRoomTitle": "Dzēst šo istabu?",
   "DeleteRoomWarning": "Es saprotu sekmes un vēlos dzēst istabu.",
   "DeleteTemplate": "Vai tiešām vēlaties dzēst veidnes telpu <1>«{{templateName}}»</1>? Veidni nevar atjaunot.",

@@ -17,7 +17,7 @@
   "DeleteItemsSharedNote": "誰かと共有している場合は、利用できなくなりますのでご注意ください。",
   "DeleteRoomConfirm": "<strong>「{{roomName}}」</strong> ルームは永久に削除されます。すべてのデータとユーザーアクセスが失われます。",
   "DeleteRooms": "選択された<strong>ルーム ({{count}}</strong>) は完全に削除されます。すべてのデータとユーザーアクセス権は失われます。",
-  "DeleteRoomsTitle": "この部屋を削除しますか？",
+  "DeleteRoomsTitle": "これらのルームを削除しますか？",
   "DeleteRoomTitle": "このルームを削除しますか？",
   "DeleteRoomWarning": "私は上記の説明を理解しており、ルームを削除したいです",
   "DeleteTemplate": "本当にテンプレートルーム<1>«{{templateName}}»</1>を削除しますか？テンプレートは復元できません。",

@@ -24,33 +24,44 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+@use "@docspace/ui-kit/styles/variables/colors" as *;
 
-export const Header = styled.div`
-  width: 100%;
-  padding: 8px 0 12px;
-
-  color: ${(props) =>
-    props.theme.createEditRoomDialog.commonParam.descriptionColor};
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 16px;
-`;
-
-export const SelectGroupManager = styled.div`
+.roleLinkBlockWrapper {
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  flex-direction: column;
   gap: 8px;
-  width: min-content;
-  height: 32px;
-  cursor: pointer;
-  margin: 8px 0;
+  padding: 0 16px 20px 16px;
 
-  .label {
-    font-size: 13px;
-    font-weight: 600;
-    line-height: 20px;
-    color: ${(props) => props.theme.createEditGroupDialog.textColor};
+  :global(.dropdown-container) {
+    margin-top: 4px;
   }
-`;
+
+  :global(.combo-button_selected-icon-container) {
+    svg path {
+      fill: $black;
+
+      :global(.dark) & {
+        fill: $white;
+      }
+    }
+  }
+
+  :global(.combo-button_selected-icon) svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  :global(.combo-buttons_arrow-icon),
+  :global(.combo-buttons_expander-icon) > div {
+    width: 16px;
+    height: 16px;
+
+    svg path {
+      fill: $gray;
+    }
+  }
+
+  :global(.combo-buttons_expander-icon) {
+    rotate: 90deg;
+  }
+}

@@ -24,32 +24,49 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { Text } from "@docspace/ui-kit/components/text";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
-
-export const SystemFoldersTitle = styled(Text)`
-  font-weight: 600;
-  line-height: 20px;
-`;
-
-export const SystemFoldersDescription = styled(Text)`
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
-  color: ${(props) =>
-    props.theme.createEditRoomDialog.roomType.dropdownItem.descriptionText};
-`;
-
-export const SystemFoldersHeader = styled.div`
+// ToggleParam — always row layout with text left, toggle right
+.toggleParam {
+  box-sizing: border-box;
   display: flex;
-  align-items: center;
+  flex-direction: row;
   justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  max-width: 100%;
 
-  margin-bottom: 2px;
-`;
+  :global(.set_room_params-info) {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow: hidden;
 
-export const SystemFoldersToggleButton = styled(ToggleButton)`
-  width: 30px;
-  height: 16px;
-`;
+    :global(.set_room_params-info-title) {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 6px;
+
+      :global(.set_room_params-info-title-text) {
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 20px;
+      }
+    }
+
+    :global(.set_room_params-info-description) {
+      box-sizing: border-box;
+      max-width: 100%;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 16px;
+      color: var(--param-description-color);
+    }
+  }
+
+  :global(.set_room_params-toggle) {
+    width: 28px;
+    min-width: 28px;
+    height: 16px;
+    margin: 2px 0;
+  }
+}

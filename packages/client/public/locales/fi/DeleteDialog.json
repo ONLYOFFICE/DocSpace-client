@@ -17,7 +17,7 @@
   "DeleteItemsSharedNote": "Ole hyvä ja huomioi, että jos olet jakanut tiedot jonkun kanssa, ne tiedot eivät ole enää saatavilla.",
   "DeleteRoomConfirm": "Huone <strong>\"{{roomName}}\"</strong> poistetaan pysyvästi. Kaikki tiedot ja käyttäjäoikeudet menetetään.",
   "DeleteRooms": "Valitut <strong>huoneet ({{count}})</strong> poistetaan pysyvästi. Kaikki data ja käyttäjien pääsy menetetään.",
-  "DeleteRoomsTitle": "Poistetaanko tämä huone?",
+  "DeleteRoomsTitle": "Poistetaanko nämä huoneet?",
   "DeleteRoomTitle": "Poistetaanko tämä huone?",
   "DeleteRoomWarning": "Ymmärrän seuraukset ja haluan poistaa huoneen.",
   "DeleteTemplate": "Haluatko todella poistaa mallihuoneen <1>«{{templateName}}»</1>? Mallia ei voida palauttaa.",

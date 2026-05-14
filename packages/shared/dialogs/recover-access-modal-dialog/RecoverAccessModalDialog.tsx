@@ -26,7 +26,7 @@
 
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -88,7 +88,7 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
 	);
 
 	const { t } = useTranslation(["Login", "Common"]);
-	const theme = useTheme();
+	const { isBase } = useTheme();
 
 	const captcha = useCaptcha({
 		publicKey: reCaptchaPublicKey,
@@ -326,7 +326,7 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
 							id="recover-access-captcha-widget"
 							type={captcha.captchaType}
 							publicKey={reCaptchaPublicKey}
-							themeMode={theme.isBase ? "light" : "dark"}
+							themeMode={isBase ? "light" : "dark"}
 							visible={captcha.isVisible}
 							hasError={captcha.isError}
 							errorText={t("Errors:LoginWithBruteForceCaptcha")}

@@ -17,7 +17,7 @@
   "DeleteItemsSharedNote": "Tieni presente che se li hai condivisi con qualcuno, non saranno più disponibili.",
   "DeleteRoomConfirm": "La stanza <strong>\"{{roomName}}\"</strong> verrà eliminata definitivamente. Tutti i dati e gli accessi utente andranno persi.",
   "DeleteRooms": "Le <strong>stanze selezionate ({{count}})</strong> verranno eliminate definitivamente. Tutti i dati e l'accesso degli utenti andranno persi.",
-  "DeleteRoomsTitle": "Eliminare questa stanza?",
+  "DeleteRoomsTitle": "Eliminare queste stanze?",
   "DeleteRoomTitle": "Eliminare questa stanza?",
   "DeleteRoomWarning": "Comprendo le conseguenze e desidero eliminare la stanza",
   "DeleteTemplate": "Sei sicuro di voler eliminare il modello di stanza <1>«{{templateName}}»</1>? Il modello non potrà essere ripristinato.",

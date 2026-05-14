@@ -25,10 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, useEffect } from "react";
-import styled, { css } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { mobile } from "@docspace/ui-kit/utils/device";
 
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Text } from "@docspace/ui-kit/components/text";
@@ -38,65 +36,11 @@ import { ImageEditor } from "@docspace/ui-kit/components/image-editor";
 
 import { loadAvatar } from "@docspace/shared/api/people";
 import { dataUrlToFile } from "@docspace/shared/utils/dataUrlToFile";
+import styles from "./AvatarEditorDialog.module.scss";
 
 const IMAGE_CROPPER_HEIGHT = 448;
 const HEADER = 70;
 const BUTTONS = 72;
-
-const StyledModalDialog = styled(ModalDialog)`
-  #modal-dialog {
-    max-height: fit-content;
-
-    .modal-header {
-      height: 54px;
-      min-height: 54px;
-    }
-
-    .modal-footer {
-      box-sizing: border-box;
-      max-height: 72px;
-    }
-
-    ${(props) =>
-      props.scrollBodyHeight &&
-      css`
-        .modal-body {
-          height: ${`${props.scrollBodyHeight}px`};
-        }
-      `}
-  }
-  .wrapper-image-editor {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    .avatar-editor {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-
-      @media ${mobile} {
-        justify-content: center;
-      }
-    }
-  }
-`;
-
-const StyledBodyContent = styled.div`
-  display: contents;
-
-  .wrapper-image-editor {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    .avatar-editor {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-    }
-  }
-`;
 
 const AvatarEditorDialog = (props) => {
   const { t } = useTranslation([
@@ -200,15 +144,20 @@ const AvatarEditorDialog = (props) => {
   };
 
   return (
-    <StyledModalDialog
+    <ModalDialog
+      className={styles.modalDialog}
       displayType="modal"
       withBodyScroll
       visible={visible}
       onClose={onCloseModal}
       withFooterBorder
       withBodyScrollForcibly={!!scrollBodyHeight}
-      scrollBodyHeight={scrollBodyHeight}
       dataTestId={dataTestId}
+      style={
+        scrollBodyHeight
+          ? { "--modal-body-height": `${scrollBodyHeight}px` }
+          : undefined
+      }
     >
       <ModalDialog.Header>
         <Text fontSize="21px" fontWeight={700}>
@@ -216,7 +165,7 @@ const AvatarEditorDialog = (props) => {
         </Text>
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledBodyContent>
+        <div className={styles.bodyContent}>
           <ImageEditor
             t={t}
             className="wrapper-image-editor"
@@ -228,7 +177,7 @@ const AvatarEditorDialog = (props) => {
             maxImageSize={maxImageUploadSize}
             editorBorderRadius={editorBorderRadius}
           />
-        </StyledBodyContent>
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -252,7 +201,7 @@ const AvatarEditorDialog = (props) => {
           testId="avatar_editor_cancel_button"
         />
       </ModalDialog.Footer>
-    </StyledModalDialog>
+    </ModalDialog>
   );
 };
 

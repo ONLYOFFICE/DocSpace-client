@@ -24,67 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
 import hexRgb from "hex-rgb";
 import { Text } from "@docspace/ui-kit/components/text";
 import { getTextColor } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { CustomLogoProps, ICover } from "../RoomLogoCoverDialog.types";
-
-interface StyledLogoProps {
-  isBase: boolean;
-  color: string | null;
-  textColor: string | null;
-}
-
-const StyledLogo = styled.div<StyledLogoProps>`
-  background-color: ${(props) => props.color};
-  width: 96px;
-  height: 96px;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  .custom-logo-cover {
-    svg {
-      transform: scale(3);
-      path {
-        fill: ${(props) => props.textColor};
-      }
-    }
-  }
-  .logo-cover_wrapper {
-    width: 100%;
-    height: 100%;
-    display: flex;
-
-    .logo-cover-text {
-      width: fit-content;
-      height: fit-content;
-      margin: auto;
-    }
-  }
-
-  ${(props) =>
-    !props.isBase &&
-    props.color &&
-    css`
-      background-color: ${hexRgb(props.color, { alpha: 0.09, format: "css" })};
-
-      .custom-logo-cover {
-        svg {
-          path {
-            fill: ${props.color};
-          }
-        }
-      }
-
-      .logo-cover-text {
-        color: ${props.color};
-      }
-    `}
-`;
+import styles from "../RoomLogoCover.module.scss";
 
 export const CustomLogo = ({
   color,
@@ -95,11 +40,21 @@ export const CustomLogo = ({
 }: CustomLogoProps) => {
   const textColor = color && getTextColor(color, 202);
 
+  const darkBg =
+    color && !isBaseTheme
+      ? hexRgb(color, { alpha: 0.09, format: "css" })
+      : undefined;
+
   return (
-    <StyledLogo
-      color={color as string}
-      textColor={textColor}
-      isBase={isBaseTheme}
+    <div
+      className={styles.customLogo}
+      style={
+        {
+          "--logo-color": color,
+          "--logo-text-color": textColor,
+          "--logo-color-dark": darkBg,
+        } as React.CSSProperties
+      }
     >
       {withoutIcon ? (
         <div className="logo-cover_wrapper">
@@ -122,6 +77,6 @@ export const CustomLogo = ({
           className="custom-logo-cover"
         />
       )}
-    </StyledLogo>
+    </div>
   );
 };

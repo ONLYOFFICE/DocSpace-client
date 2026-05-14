@@ -27,100 +27,11 @@
 import { Text } from "@docspace/ui-kit/components/text";
 import { Loader } from "@docspace/ui-kit/components/loader";
 import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
-import styled from "styled-components";
 
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import InterruptIcon from "PUBLIC_DIR/images/interrupt.icon.react.svg";
-import { commonIconsStyles, injectDefaultTheme } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { withTranslation, Trans } from "react-i18next";
-
-const StyledCheckIcon = styled(CheckIcon).attrs(injectDefaultTheme)`
-  ${commonIconsStyles}
-  path {
-    fill: ${globalColors.lightStatusPositive} !important;
-  }
-`;
-
-const StyledProgress = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding-top: 24px;
-
-  .description {
-    line-height: 20px;
-  }
-
-  .user-name {
-    font-weight: 600;
-  }
-
-  .progress-container {
-    display: flex;
-    gap: 16px;
-  }
-
-  .progress-section {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .progress-section-text {
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 16px;
-  }
-
-  .progress-status {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .in-progress {
-    display: flex;
-    gap: 4px;
-  }
-
-  .transfer-information {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .status {
-    font-size: 14px;
-    line-height: 16px;
-  }
-
-  .status-icon {
-    padding: 2px;
-  }
-
-  .status-pending {
-    padding-inline-start: 24px;
-    height: 20px;
-  }
-
-  .check-icon {
-    width: 16px;
-  }
-
-  .user {
-    display: inline;
-    font-weight: 600;
-  }
-
-  .in-progress-loader {
-    height: 20px;
-  }
-
-  .data-start {
-    line-height: 20px;
-  }
-`;
+import styles from "../../DataReassignment.module.scss";
 
 const percentRoomReassignment = 70;
 const percentFilesInRoomsReassignment = 90;
@@ -151,7 +62,7 @@ const Progress = ({
 
 	const allDataTransferredNode = (
 		<div className="transfer-information">
-			<StyledCheckIcon size="medium" className="status-icon" />
+			<CheckIcon className={`${styles.checkIcon} status-icon`} />
 			<Text className="status">
 				{t("DataReassignmentDialog:AllDataTransferred")}
 			</Text>
@@ -194,7 +105,7 @@ const Progress = ({
 		</Trans>
 	);
 	return (
-		<StyledProgress>
+		<div className={styles.progress}>
 			<div className="data-start"> {reassigningDataStart}</div>
 			<div className="progress-container">
 				<div className="progress-section">
@@ -237,7 +148,7 @@ const Progress = ({
 			<Text lineHeight="20px" className="description">
 				{t("DataReassignmentDialog:ProcessComplete")}
 			</Text>
-		</StyledProgress>
+		</div>
 	);
 };
 

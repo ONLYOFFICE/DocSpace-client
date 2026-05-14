@@ -34,7 +34,7 @@ import { isMobile } from "../../../utils";
 import { DeviceType } from "../../../enums";
 import type { TOption } from "@docspace/ui-kit/components/combobox";
 
-import { RoleLinkBlockWrapper } from "./RoleLinkBlock.styled";
+import styles from "./RoleLinkBlock.module.scss";
 import type { RoleLinkBlockProps } from "./RoleLinkBlock.types";
 
 const RoleLinkBlock = ({
@@ -53,7 +53,7 @@ const RoleLinkBlock = ({
 	};
 
 	return (
-		<RoleLinkBlockWrapper>
+		<div className={styles.roleLinkBlockWrapper}>
 			<Text fontSize="16px" fontWeight={700}>
 				{t("Common:RoleForLink")}
 			</Text>
@@ -76,7 +76,7 @@ const RoleLinkBlock = ({
 				comboIcon={ArrowIcon}
 				dataTestId="edit_link_panel_role_access_select"
 			/>
-		</RoleLinkBlockWrapper>
+		</div>
 	);
 };
 

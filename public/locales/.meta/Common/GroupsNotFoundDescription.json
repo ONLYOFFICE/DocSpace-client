@@ -3,7 +3,7 @@
   "content": "No groups match your search. Please adjust your search parameters or clear the search field to view the full list of groups.",
   "content_en_sha1_hash": "9c3caa1ff1cab6647d8d6b2e9142676a207a5953",
   "created_at": "2025-05-19T21:30:45.677Z",
-  "updated_at": "2026-04-11T20:51:27.030Z",
+  "updated_at": "2026-05-08T13:10:45.607Z",
   "comment": {
     "text": "This is an empty state message displayed when a search for groups yields no results. It prompts the user to adjust their search or clear the field.",
     "is_auto": true,
@@ -13,25 +13,25 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/Groups/index.tsx",
-      "line_number": 194,
+      "line_number": 190,
       "context": "items={itemsList}\n submitButtonLabel={t(\"SelectAction\")}\n onSubmit={onSubmitAction}\n emptyScreenImage={emptyScreenImg}\n emptyScreenHeader={t(\"NotFoundGroups\")}\n emptyScreenDescription={t(\"GroupsNotFoundDescription\")}\n searchEmptyScreenImage={emptyScreenImg}\n searchEmptyScreenHeader={t(\"NotFoundGroups\")}\n searchEmptyScreenDescription={t(\"GroupsNotFoundDescription\")}\n totalItems={totalRef.current}\n hasNextPage={hasNextPage}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/Groups/index.tsx",
-      "line_number": 194,
+      "line_number": 190,
       "context": "items={itemsList}\n submitButtonLabel={t(\"SelectAction\")}\n onSubmit={onSubmitAction}\n emptyScreenImage={emptyScreenImg}\n emptyScreenHeader={t(\"NotFoundGroups\")}\n emptyScreenDescription={t(\"GroupsNotFoundDescription\")}\n searchEmptyScreenImage={emptyScreenImg}\n searchEmptyScreenHeader={t(\"NotFoundGroups\")}\n searchEmptyScreenDescription={t(\"GroupsNotFoundDescription\")}\n totalItems={totalRef.current}\n hasNextPage={hasNextPage}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/People/index.tsx",
-      "line_number": 784,
+      "line_number": 771,
       "context": ": t(\"NotFoundGuestsDescription\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"EmptyDescription\", {\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"GroupsNotFoundDescription\"))\n }\n searchEmptyScreenImage={emptyScreenImage}\n searchEmptyScreenHeader={\n activeTabId === GUESTS_TAB_ID\n ? t(\"NotFoundGuestsFilter\")",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/People/index.tsx",
-      "line_number": 784,
+      "line_number": 771,
       "context": ": t(\"NotFoundGuestsDescription\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"EmptyDescription\", {\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"GroupsNotFoundDescription\"))\n }\n searchEmptyScreenImage={emptyScreenImage}\n searchEmptyScreenHeader={\n activeTabId === GUESTS_TAB_ID\n ? t(\"NotFoundGuestsFilter\")",
       "module": "/libs/ui-kit"
     },

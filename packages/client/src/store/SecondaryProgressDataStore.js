@@ -284,7 +284,8 @@ class SecondaryProgressDataStore {
   };
 
   setSecondaryProgressBarData = (secondaryProgressData) => {
-    const { operation, ...progressInfo } = secondaryProgressData;
+    const { operation, showPanel, description, ...progressInfo } =
+      secondaryProgressData;
 
     if (!operation) return;
 
@@ -332,6 +333,8 @@ class SecondaryProgressDataStore {
 
       this.secondaryOperationsArray.splice(operationIndex, 1, {
         ...operationObject,
+        ...(progressInfo.label && { label: progressInfo.label }),
+        ...(description !== undefined && { description }),
         alert: progressInfo.alert,
         stopped: progressInfo.stopped || operationObject.stopped,
         items: updatedItems,
@@ -341,10 +344,12 @@ class SecondaryProgressDataStore {
     } else {
       const progress = {
         operation,
+        showPanel,
+        description,
         alert: progressInfo.alert,
         stopped: progressInfo.stopped,
         items: [progressInfo],
-        label: getOperationsProgressTitle(operation),
+        label: progressInfo.label ?? getOperationsProgressTitle(operation),
         completed: progressInfo.completed,
         percent: progressInfo.percent,
       };

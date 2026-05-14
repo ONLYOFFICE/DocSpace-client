@@ -3,7 +3,7 @@
   "content": "Payment cards linked to your {{productName}} wallet",
   "content_en_sha1_hash": "bd0df4b698d1389bc5cf9314cc901c1d677fc783",
   "created_at": "2026-04-10T13:53:42.971Z",
-  "updated_at": "2026-04-23T17:24:02.174Z",
+  "updated_at": "2026-05-08T13:10:45.730Z",
   "comment": {
     "text": "This is a descriptive text displayed below the \"Payment Method\" heading. It informs the user that payment cards are linked to their {{productName}} wallet.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
-      "line_number": 166,
+      "line_number": 168,
       "context": "isRefreshing={isRefreshing}\n />\n </div>\n \n <Text className={styles.description} lineHeight=\"20px\">\n {t(\"PaymentMethodDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n \n <CardInformation />",
       "module": "/libs/ui-kit"
     }

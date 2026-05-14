@@ -319,6 +319,5 @@
   "WantToCancelUpload": "Vuoi annullare il caricamento?",
   "WantToContinueQuota": "Vuoi continuare o modificare la quota di archiviazione degli utenti?",
   "WebhooksDescription": "Esegui azioni personalizzate sul lato di qualsiasi applicazione o sito web che stai utilizzando in base a vari eventi in {{organizationName}} {{productName}}.",
-  "WhiteLabelLogoSubtitle": "Carica i loghi con sfondo trasparente (PNG, SVG, JPG) per i temi chiari e scuri, oppure creane uno istantaneamente inserendo il tuo logo qui sotto.",
   "WithoutEmailHint": "Non hai utenti da importare. Ti preghiamo di procedere al passaggio successivo."
 }

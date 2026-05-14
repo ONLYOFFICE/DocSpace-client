@@ -3,7 +3,7 @@
   "content": "Using Plugin SDK you can extend your {{productName}} functionality, connect the third-party services or enhance the existing user experience. Here you can find the plugin samples with code source available on GitHub.",
   "content_en_sha1_hash": "a9a940596b57d8d9f4be6ec87ad72687245e94ad",
   "created_at": "2025-05-19T21:30:49.921Z",
-  "updated_at": "2026-04-11T21:27:48.351Z",
+  "updated_at": "2026-05-08T13:10:45.635Z",
   "comment": {
     "text": "This is a descriptive text explaining the purpose and benefits of the Plugin SDK. It appears on a settings page and includes a variable `{{productName}}` which will be replaced by the product's brand name.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/PluginSDK/index.js",
       "line_number": 133,
-      "context": "className=\"description\"\n fontSize=\"13px\"\n fontWeight={400}\n lineHeight=\"20px\"\n >\n {t(\"PluginSDKDescription\", { productName: getBrandName(\"ProductName\") })}\n </Text>\n <Text\n className=\"description\"\n fontSize=\"13px\"\n fontWeight={400}",
+      "context": "className=\"description\"\n fontSize=\"13px\"\n fontWeight={400}\n lineHeight=\"20px\"\n >\n {t(\"PluginSDKDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <Text\n className=\"description\"",
       "module": "/packages/client"
     }
   ],

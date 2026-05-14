@@ -3,7 +3,7 @@
   "content": "Reorder",
   "content_en_sha1_hash": "33d9978c44777f5262fb2dbe921b919fa3fad96c",
   "created_at": "2025-05-19T21:30:56.040Z",
-  "updated_at": "2026-04-13T14:59:05.775Z",
+  "updated_at": "2026-05-08T13:10:45.582Z",
   "comment": {
     "text": "This is a button label that allows users to change the order of items in a list or index.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 600,
+      "line_number": 601,
       "context": "if (!isIndexEditingMode) return EMPTY_ARRAY;\n \n return [\n {\n id: \"reorder-index\",\n label: t(\"Files:Reorder\"),\n onClick: onIndexReorder,\n iconUrl: RoundedArrowSvgUrl,\n },\n {\n id: \"save-index\",",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Transaction history",
   "content_en_sha1_hash": "aa7d3d7dd9d1706c1bda7bd97c31b7c47a7d310f",
   "created_at": "2026-04-10T13:53:43.722Z",
-  "updated_at": "2026-04-23T17:24:02.187Z",
+  "updated_at": "2026-05-08T13:10:45.742Z",
   "comment": {
     "text": "This is the title for a section or page displaying a user's past transactions.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
-      "line_number": 543,
+      "line_number": 547,
       "context": "<Text\n isBold\n fontSize=\"16px\"\n className={styles.transactionHistoryTitle}\n >\n {headerTitle ?? t(\"TransactionHistory\")}\n </Text>\n )}\n {isMobile ? mobileFilter : null}\n </div>\n {!isMobile ? filterCombobox : null}",
       "module": "/libs/ui-kit"
     }

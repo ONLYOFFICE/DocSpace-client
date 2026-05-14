@@ -23,6 +23,7 @@
   "NeedMoreIntegrations": "Cần thêm tích hợp nào không?",
   "NeedMoreIntegrationsDescription": "Sử dụng webhook để gửi dữ liệu đến hệ thống của riêng bạn, hoặc kết nối biểu mẫu với hàng nghìn dịch vụ thông qua Zapier.",
   "NoDatabaseConnections": "Chưa cấu hình kết nối cơ sở dữ liệu",
+  "NoDatabaseConnectionsRoomAdmin": "Các kết nối cơ sở dữ liệu được cấu hình bởi quản trị viên. Sau khi cơ sở dữ liệu được thiết lập, bạn sẽ có thể kích hoạt tính năng xuất tại đây.",
   "PeopleSelectorInfo": "Chỉ quản trị viên phòng hoặc quản trị viên {{productName}} mới có thể trở thành chủ sở hữu của phòng",
   "Position": "Vị trí",
   "PublicRoomBarDescription": "Phòng này khả dụng cho bất kỳ ai có liên kết. Quyền truy cập cho người dùng bên ngoài được cung cấp tùy thuộc vào loại quyền truy cập đã chọn.",
@@ -44,6 +45,5 @@
   "UserName": "Tên người dùng",
   "ViewerInfo": "Thông tin người xem",
   "WatermarkPreview": "Xem trước watermark",
-  "WatermarkPreviewHelp": "Bản xem trước hình ảnh này cho thấy gần đúng cách watermark sẽ được hiển thị trong các tập tin của bạn.",
-  "NoDatabaseConnectionsRoomAdmin": "Các kết nối cơ sở dữ liệu được cấu hình bởi quản trị viên. Sau khi cơ sở dữ liệu được thiết lập, bạn sẽ có thể kích hoạt tính năng xuất tại đây."
+  "WatermarkPreviewHelp": "Bản xem trước hình ảnh này cho thấy gần đúng cách watermark sẽ được hiển thị trong các tập tin của bạn."
 }

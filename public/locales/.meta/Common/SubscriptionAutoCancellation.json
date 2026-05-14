@@ -3,7 +3,7 @@
   "content": "Subscription will be automatically canceled on {{finalDate}}",
   "content_en_sha1_hash": "052b6c0869cca2a025f2225ae034b9d30f6d3f9b",
   "created_at": "2026-04-10T13:53:43.451Z",
-  "updated_at": "2026-04-23T17:24:02.174Z",
+  "updated_at": "2026-05-08T13:10:45.730Z",
   "comment": {
     "text": "This is a text label indicating that a subscription will be automatically canceled on a specific date. The `{{finalDate}}` variable will be replaced with the cancellation date.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
-      "line_number": 207,
+      "line_number": 209,
       "context": "onClick: openCancelDialog,\n },\n ];\n \n const keyProp = isScheduled\n ? { tKey: \"SubscriptionAutoCancellation\" }\n : { tKey: \"SubscriptionWillBeAutomaticallyRenewed\" };\n \n if (shouldShowLoader) return <AdditionalStoragePageLoader />;\n \n return (",
       "module": "/libs/ui-kit"
     },

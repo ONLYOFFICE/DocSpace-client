@@ -3,7 +3,7 @@
   "content": "Delete permanently",
   "content_en_sha1_hash": "e63b5153bde0d2b885dec00616d064be3e88c11b",
   "created_at": "2025-05-19T21:30:44.471Z",
-  "updated_at": "2026-04-11T20:55:19.318Z",
+  "updated_at": "2026-05-08T13:10:45.555Z",
   "comment": {
     "text": "This is a button label or a confirmation dialog message. It indicates that an item will be permanently removed and cannot be recovered, bypassing the trash or recycle bin.",
     "is_auto": true,
@@ -24,15 +24,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsActions.ts",
-      "line_number": 89,
-      "context": "[],\n );\n \n const deleteFromList = useCallback(\n async (fileId: number) => {\n if (!window.confirm(t(\"Common:DeletePermanently\") + \"?\")) return;\n \n try {\n await deleteFile(fileId, false, true);\n const newItems = formsListStore.items.filter((f) => f.id !== fileId);\n formsListStore.setItems(newItems, newItems.length);",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsActions.ts",
-      "line_number": 89,
-      "context": "[],\n );\n \n const deleteFromList = useCallback(\n async (fileId: number) => {\n if (!window.confirm(t(\"Common:DeletePermanently\") + \"?\")) return;\n \n try {\n await deleteFile(fileId, false, true);\n const newItems = formsListStore.items.filter((f) => f.id !== fileId);\n formsListStore.setItems(newItems, newItems.length);",
+      "file_path": "/packages/sdk/src/app/(forms)/_components/delete-form-dialog/index.tsx",
+      "line_number": 50,
+      "context": "void confirm();\n }, [confirm]);\n \n return (\n <ModalDialog visible={visible} onClose={close} autoMaxHeight>\n <ModalDialog.Header>{t(\"Common:DeletePermanently\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{t(\"Common:DeleteItemForever\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
       "module": "/packages/sdk"
     }
   ],

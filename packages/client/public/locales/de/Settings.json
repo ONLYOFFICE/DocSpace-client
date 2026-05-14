@@ -319,6 +319,5 @@
   "WantToCancelUpload": "Möchten Sie den Upload abbrechen?",
   "WantToContinueQuota": "Möchten Sie fortfahren oder das Benutzer-Speicherlimit ändern?",
   "WebhooksDescription": "Führen Sie benutzerdefinierte Aktionen für jede Anwendung oder Website durch, die Sie verwenden, basierend auf verschiedenen Ereignissen in {{organizationName}} {{productName}}.",
-  "WhiteLabelLogoSubtitle": "Laden Sie Logos mit transparentem Hintergrund (PNG, SVG, JPG) für helle und dunkle Themes hoch oder erstellen Sie sofort eines, indem Sie unten Ihr Logo eingeben.",
   "WithoutEmailHint": "Es gibt keine Benutzer ohne E-Mails. Bitte fahren Sie mit dem nächsten Schritt fort."
 }

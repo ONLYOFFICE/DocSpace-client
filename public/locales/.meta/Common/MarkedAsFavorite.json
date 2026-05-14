@@ -3,7 +3,7 @@
   "content": "Added to favorites",
   "content_en_sha1_hash": "2f1e3bed43fab05cf7aa088a31554bc16e6d5e5c",
   "created_at": "2026-04-03T21:51:34.722Z",
-  "updated_at": "2026-04-23T17:24:01.614Z",
+  "updated_at": "2026-05-08T13:10:45.483Z",
   "comment": {
     "text": "This is a toast message confirming that an item has been successfully added to a user's favorites.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 474,
+      "line_number": 476,
       "context": "onClickFavorite = (action, items, t) => {\n this.filesActionsStore\n .setFavoriteAction(action, items)\n .then(() =>\n action === \"mark\"\n ? toastr.success(t(\"Common:MarkedAsFavorite\"))\n : toastr.success(t(\"Common:RemovedFromFavorites\")),\n )\n .catch((err) => toastr.error(err));\n };",
       "module": "/packages/client"
     },

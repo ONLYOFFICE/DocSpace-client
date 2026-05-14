@@ -3,7 +3,7 @@
   "content": "{{inputPrice}}/M input tokens | {{outputPrice}}/M output tokens",
   "content_en_sha1_hash": "59fd5325bfe26e9733559605cfce51d27cfe98de",
   "created_at": "2026-04-10T13:53:44.328Z",
-  "updated_at": "2026-04-27T12:45:07.488Z",
+  "updated_at": "2026-05-08T13:10:45.615Z",
   "comment": {
     "text": "This text displays the pricing for AI model usage, showing the cost per million input tokens and output tokens. `{{inputPrice}}` and `{{outputPrice}}` are numerical values representing these costs.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/DefaultProvider.tsx",
-      "line_number": 218,
+      "line_number": 220,
       "context": "const isSelected = m.modelId === selectedModelId;\n const safeFormat = (v: number) =>\n formatAiModelsCurrency ? formatAiModelsCurrency(v) : String(v);\n const priceLabel =\n m.price != null\n ? t(\"Common:AIModelPrice\", {\n inputPrice: safeFormat(m.price.prompt),\n outputPrice: safeFormat(m.price.completion),\n })\n : null;",
       "module": "/packages/client"
     }

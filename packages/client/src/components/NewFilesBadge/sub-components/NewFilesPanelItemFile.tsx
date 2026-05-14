@@ -63,9 +63,18 @@ const NewFilesPanelItemFileComponent = ({
     onClose();
   };
 
+  const isFolder = !item.fileExst;
+
   const onClick = async () => {
+    if (isFolder) {
+      openItemAction!({ ...item, isFolder: true });
+      markAsRead!([item.id], []);
+      onClose();
+      return;
+    }
+
     const isMedia =
-      item.viewAccessibility.ImageView || item.viewAccessibility.MediaView;
+      item.viewAccessibility?.ImageView || item.viewAccessibility?.MediaView;
 
     if (isMedia) {
       return window.open(

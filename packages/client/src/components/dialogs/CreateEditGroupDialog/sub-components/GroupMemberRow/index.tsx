@@ -33,6 +33,7 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/ui-kit/components/avatar";
+import { Encoder } from "@docspace/ui-kit/utils/encoder";
 import {
   getUserType,
   getUserTypeTranslation,
@@ -93,7 +94,9 @@ const GroupMemberRow = ({
       />
       <div className="info" data-testid="create_edit_group_member_row_info">
         <div className="info-box">
-          <div className="name">{groupMember.displayName}</div>
+          <div className="name">
+            {Encoder.htmlDecode(groupMember.displayName ?? "")}
+          </div>
           {groupMember.status === EmployeeStatus.Pending ? (
             <StyledSendClockIcon />
           ) : null}

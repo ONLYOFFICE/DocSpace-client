@@ -46,7 +46,7 @@ const getBanner = (version) => `/*
 
 const getAllLocalIps = (os) => {
   const interfaces = os.networkInterfaces();
-  const ips = [];
+  const ips = ["localhost", "*.dev.localhost"];
 
   for (const name of Object.keys(interfaces)) {
     for (const iface of interfaces[name]) {
@@ -63,3 +63,4 @@ export default {
   getBanner,
   getAllLocalIps,
 };
+

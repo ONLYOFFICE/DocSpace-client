@@ -23,6 +23,7 @@
   "NeedMoreIntegrations": "Precisa de mais integrações?",
   "NeedMoreIntegrationsDescription": "Use webhooks para enviar dados para o seu próprio sistema ou conecte formulários a milhares de serviços via Zapier.",
   "NoDatabaseConnections": "Nenhuma conexão de banco de dados configurada",
+  "NoDatabaseConnectionsRoomAdmin": "As conexões de banco de dados são configuradas por um administrador. Assim que um banco de dados for configurado, você poderá ativar a exportação aqui.",
   "PeopleSelectorInfo": "Somente um administrador da sala ou administrador do {{productName}} pode se tornar o proprietário da sala",
   "Position": "Posição",
   "PublicRoomBarDescription": "Este quarto está disponível para qualquer pessoa com o link. O acesso para usuários externos é fornecido dependendo do tipo selecionado de direitos de acesso.",
@@ -44,6 +45,5 @@
   "UserName": "Nome de Utilizador",
   "ViewerInfo": "Informações do visualizador",
   "WatermarkPreview": "Pré-visualização da marca d'água",
-  "WatermarkPreviewHelp": "Esta visualização de imagem mostra aproximadamente como a marca d'água será exibida em seus arquivos.",
-  "NoDatabaseConnectionsRoomAdmin": "As conexões de banco de dados são configuradas por um administrador. Assim que um banco de dados for configurado, você poderá ativar a exportação aqui."
+  "WatermarkPreviewHelp": "Esta visualização de imagem mostra aproximadamente como a marca d'água será exibida em seus arquivos."
 }

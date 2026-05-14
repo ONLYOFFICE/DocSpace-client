@@ -110,7 +110,7 @@ const SetRoomParams = ({
   const [disableImageRescaling, setDisableImageRescaling] = useState(isEdit);
 
   const [previewTitle, setPreviewTitle] = useState(
-    selection?.title || infoPanelSelection?.title || "",
+    roomParams.title || selection?.title || infoPanelSelection?.title || "",
   );
   const [createRoomTitle, setCreateRoomTitleTitle] = useState(roomParams.title);
 
@@ -193,19 +193,23 @@ const SetRoomParams = ({
     [],
   );
 
-  const currentIcon = selection
-    ? selection?.logo?.large
-      ? selection?.logo?.large
-      : selection?.logo?.cover
-        ? selection?.logo
-        : getInfoPanelItemIcon(selection, 96)
-    : infoPanelSelection
-      ? infoPanelSelection?.logo?.large
-        ? infoPanelSelection?.logo?.large
-        : infoPanelSelection?.logo?.cover
-          ? infoPanelSelection?.logo
-          : getInfoPanelItemIcon?.(infoPanelSelection, 96)
-      : undefined;
+  const currentIcon = useMemo(() => {
+    if (roomParams?.logo?.large || roomParams?.logo?.cover) {
+      return roomParams?.logo;
+    }
+
+    if (selection) {
+      return selection.logo?.large || selection.logo?.cover
+        ? selection.logo
+        : getInfoPanelItemIcon(selection, 96);
+    }
+
+    if (infoPanelSelection) {
+      return infoPanelSelection.logo?.large || infoPanelSelection.logo?.cover
+        ? infoPanelSelection.logo
+        : getInfoPanelItemIcon(infoPanelSelection, 96);
+    }
+  }, [selection, infoPanelSelection, getInfoPanelItemIcon]);
 
   const onChangeIcon = (icon) => {
     if (!icon.uploadedFile !== disableImageRescaling)
@@ -342,6 +346,8 @@ const SetRoomParams = ({
     cover && cover.cover
       ? false
       : (!previewIcon &&
+          !roomParams?.logo?.cover &&
+          !roomParams?.logo?.large &&
           !selection?.logo?.cover &&
           !selection?.logo?.large &&
           !infoPanelSelection?.logo?.cover &&
@@ -367,7 +373,7 @@ const SetRoomParams = ({
         color={
           cover
             ? cover.color
-            : (selection?.logo?.color ?? selection?.color) ||
+            : (roomParams?.logo?.color ?? selection?.color) ||
               infoPanelSelection.logo?.color
         }
         size={isMobile() && !horizontalOrientation ? "96px" : "64px"}

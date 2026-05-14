@@ -12,7 +12,7 @@
  *   - Otherwise   → Ollama      (e.g. "gemma4:26b")
  */
 
-const { ollamaConfig, openRouterConfig } = require("../config/config");
+const { ollamaConfig, openRouterConfig, lmstudioConfig } = require("../config/config");
 
 class FatalProviderError extends Error {
   constructor(message) {
@@ -114,26 +114,40 @@ const { verifyOllamaConnection } = require("./ollamaUtils");
 
 // ─── Provider detection ───────────────────────────────────────────────────────
 
+// LM Studio models are prefixed with "lmstudio:" to disambiguate from OpenRouter
+// (which also uses "name/model" format). The prefix is added on listing and stripped
+// before API calls.
+const LMSTUDIO_PREFIX = "lmstudio:";
+
+function isLMStudioModel(model) {
+  return model != null && model.startsWith(LMSTUDIO_PREFIX);
+}
+
+function getLMStudioModelId(model) {
+  return isLMStudioModel(model) ? model.slice(LMSTUDIO_PREFIX.length) : model;
+}
+
 function isOpenRouterModel(model) {
-  return model && model.includes("/");
+  return model != null && model.includes("/") && !isLMStudioModel(model);
 }
 
 function getProviderName(model) {
-  return isOpenRouterModel(model) ? "openrouter" : "ollama";
+  if (isLMStudioModel(model)) return "lmstudio";
+  if (isOpenRouterModel(model)) return "openrouter";
+  return "ollama";
 }
 
 // ─── Connection verification ──────────────────────────────────────────────────
 
 async function verifyConnection(model) {
-  if (isOpenRouterModel(model)) {
-    return verifyOpenRouterConnection();
-  }
+  if (isLMStudioModel(model)) return verifyLMStudioConnection();
+  if (isOpenRouterModel(model)) return verifyOpenRouterConnection();
   return verifyOllamaConnection();
 }
 
 async function verifyOpenRouterConnection() {
   if (!openRouterConfig.apiKey) {
-    console.log("OpenRouter: API key not configured");
+    console.log("[LLM] OpenRouter: API key not configured");
     return false;
   }
   try {
@@ -145,14 +159,30 @@ async function verifyOpenRouterConnection() {
         const body = await readErrorBody(response);
         throwProviderHttpError("OpenRouter", response.status, body);
       }
-      console.log(
-        `OpenRouter connection failed: ${response.status} ${response.statusText}`,
-      );
+      console.log(`[LLM] OpenRouter: connection failed (${response.status} ${response.statusText})`);
       return false;
     }
     return true;
   } catch (error) {
-    console.log(`OpenRouter connection error: ${error.message}`);
+    console.log(`[LLM] OpenRouter: connection error — ${error.message}`);
+    return false;
+  }
+}
+
+async function verifyLMStudioConnection() {
+  try {
+    const headers = {};
+    if (lmstudioConfig.apiKey) {
+      headers.Authorization = `Bearer ${lmstudioConfig.apiKey}`;
+    }
+    const response = await fetch(`${lmstudioConfig.apiUrl}/models`, { headers });
+    if (!response.ok) {
+      console.log(`[LLM] LM Studio: connection failed (${response.status} ${response.statusText}) at ${lmstudioConfig.apiUrl}`);
+      return false;
+    }
+    return true;
+  } catch (error) {
+    console.log(`[LLM] LM Studio: connection error — ${error.message} (url: ${lmstudioConfig.apiUrl})`);
     return false;
   }
 }
@@ -162,12 +192,16 @@ async function verifyOpenRouterConnection() {
 async function listOllamaModels() {
   const ollamaClient = new Ollama({ host: ollamaConfig.apiUrl });
   const { models } = await ollamaClient.list();
-  return (models || []).map((m) => ({
-    id: m.name || m.model,
-    name: m.name || m.model,
-    provider: "ollama",
-    ...m,
-  }));
+  return (models || []).map((m) => {
+    const modelId = m.name || m.model;
+    return {
+      id: modelId,
+      name: modelId,
+      displayName: `[Ollama] ${modelId}`,
+      provider: "ollama",
+      ...m,
+    };
+  });
 }
 
 async function listOpenRouterModels() {
@@ -180,14 +214,35 @@ async function listOpenRouterModels() {
   }
   const data = await response.json();
   return (data.data || []).map((m) => ({
-    // "name" must be the model ID (e.g. "google/gemma-4-26b-a4b-it)
+    // "name" must be the model ID (e.g. "google/gemma-4-26b-a4b-it")
     // because the frontend passes model.name to the backend,
     // and isOpenRouterModel() detects the "/" to route to OpenRouter.
     id: m.id,
     name: m.id,
-    displayName: m.name || m.id,
+    displayName: `[OpenRouter] ${m.name || m.id}`,
     provider: "openrouter",
     context_length: m.context_length,
+  }));
+}
+
+async function listLMStudioModels() {
+  const headers = {};
+  if (lmstudioConfig.apiKey) {
+    headers.Authorization = `Bearer ${lmstudioConfig.apiKey}`;
+  }
+  const response = await fetch(`${lmstudioConfig.apiUrl}/models`, { headers });
+  if (!response.ok) {
+    const body = await readErrorBody(response);
+    throwProviderHttpError("LM Studio", response.status, body);
+  }
+  const data = await response.json();
+  return (data.data || []).map((m) => ({
+    // Prefix with "lmstudio:" so the backend can route to LM Studio regardless
+    // of whether the model ID contains "/" (which OpenRouter also uses).
+    id: `${LMSTUDIO_PREFIX}${m.id}`,
+    name: `${LMSTUDIO_PREFIX}${m.id}`,
+    displayName: `[LM Studio] ${m.id}`,
+    provider: "lmstudio",
   }));
 }
 
@@ -208,9 +263,11 @@ async function listOpenRouterModels() {
  * @returns {Promise<{stream: AsyncIterable<{content: string, thinking: string}>, abort: Function}>}
  */
 async function createStreamingChat(model, messages, options = {}) {
-  const result = isOpenRouterModel(model)
-    ? await createOpenRouterStream(model, messages, options)
-    : await createOllamaStream(model, messages, options);
+  const result = isLMStudioModel(model)
+    ? await createLMStudioStream(model, messages, options)
+    : isOpenRouterModel(model)
+      ? await createOpenRouterStream(model, messages, options)
+      : await createOllamaStream(model, messages, options);
 
   // Wrap stream with repetition loop detection.
   // If the model enters a loop (same phrase repeated 4+ times), abort automatically.
@@ -226,9 +283,7 @@ async function createStreamingChat(model, messages, options = {}) {
           if (item.done) return item;
           const { content, thinking } = item.value;
           if (content && detector.feed(content)) {
-            console.warn(
-              "[llmProvider] Repetition loop detected — aborting stream",
-            );
+            console.warn(`[LLM] Repetition loop detected — aborting stream`);
             result.abort();
             return { done: true, value: undefined };
           }
@@ -355,6 +410,78 @@ async function createOpenRouterStream(model, messages, options = {}) {
   };
 }
 
+async function createLMStudioStream(model, messages, options = {}) {
+  const actualModel = getLMStudioModelId(model);
+  const controller = new AbortController();
+
+  const headers = { "Content-Type": "application/json" };
+  if (lmstudioConfig.apiKey) {
+    headers.Authorization = `Bearer ${lmstudioConfig.apiKey}`;
+  }
+
+  const response = await fetch(`${lmstudioConfig.apiUrl}/chat/completions`, {
+    method: "POST",
+    headers,
+    body: JSON.stringify({
+      model: actualModel,
+      messages,
+      temperature: options.temperature ?? 0.1,
+      max_tokens: options.maxTokens ?? 8192,
+      stream: true,
+    }),
+    signal: controller.signal,
+  });
+
+  if (!response.ok) {
+    const body = await readErrorBody(response);
+    throwProviderHttpError("LM Studio", response.status, body);
+  }
+
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+
+  const asyncIterable = {
+    [Symbol.asyncIterator]() {
+      let buffer = "";
+      let done = false;
+
+      return {
+        async next() {
+          while (!done) {
+            const result = await reader.read();
+            if (result.done) {
+              done = true;
+              if (buffer.trim()) {
+                const token = parseSSELine(buffer);
+                if (token) return { done: false, value: token };
+              }
+              return { done: true, value: undefined };
+            }
+
+            buffer += decoder.decode(result.value, { stream: true });
+            const lines = buffer.split("\n");
+            buffer = lines.pop() || "";
+
+            for (const line of lines) {
+              const token = parseSSELine(line);
+              if (token && (token.content || token.thinking)) {
+                return { done: false, value: token };
+              }
+            }
+          }
+          return { done: true, value: undefined };
+        },
+      };
+    },
+  };
+
+  return {
+    stream: asyncIterable,
+    abort: () => controller.abort(),
+    raw: null,
+  };
+}
+
 function parseSSELine(line) {
   const trimmed = line.trim();
   if (!trimmed || !trimmed.startsWith("data: ")) return null;
@@ -387,9 +514,8 @@ function parseSSELine(line) {
  * @returns {Promise<string>} The assistant's message content
  */
 async function completionChat(model, messages, options = {}) {
-  if (isOpenRouterModel(model)) {
-    return openRouterCompletion(model, messages, options);
-  }
+  if (isLMStudioModel(model)) return lmstudioCompletion(model, messages, options);
+  if (isOpenRouterModel(model)) return openRouterCompletion(model, messages, options);
   return ollamaCompletion(model, messages, options);
 }
 
@@ -456,6 +582,42 @@ async function openRouterCompletion(model, messages, options = {}) {
   }
 }
 
+async function lmstudioCompletion(model, messages, options = {}) {
+  const actualModel = getLMStudioModelId(model);
+  const timeout = options.timeout || lmstudioConfig.firstTokenTimeout;
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeout);
+
+  const headers = { "Content-Type": "application/json" };
+  if (lmstudioConfig.apiKey) {
+    headers.Authorization = `Bearer ${lmstudioConfig.apiKey}`;
+  }
+
+  try {
+    const response = await fetch(`${lmstudioConfig.apiUrl}/chat/completions`, {
+      method: "POST",
+      headers,
+      body: JSON.stringify({
+        model: actualModel,
+        messages,
+        temperature: options.temperature ?? 0,
+        max_tokens: options.maxTokens ?? 8192,
+      }),
+      signal: controller.signal,
+    });
+
+    if (!response.ok) {
+      const body = await readErrorBody(response);
+      throwProviderHttpError("LM Studio", response.status, body);
+    }
+
+    const data = await response.json();
+    return data.choices?.[0]?.message?.content || "";
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 // ─── Streaming fetch (for correctScriptIfNeeded-style raw streaming) ──────────
 
 /**
@@ -471,6 +633,47 @@ async function openRouterCompletion(model, messages, options = {}) {
  */
 async function createRawStream(model, messages, options = {}) {
   const abortController = options.abortController || new AbortController();
+
+  if (isLMStudioModel(model)) {
+    const actualModel = getLMStudioModelId(model);
+    const headers = { "Content-Type": "application/json" };
+    if (lmstudioConfig.apiKey) {
+      headers.Authorization = `Bearer ${lmstudioConfig.apiKey}`;
+    }
+
+    const response = await fetch(`${lmstudioConfig.apiUrl}/chat/completions`, {
+      method: "POST",
+      headers,
+      body: JSON.stringify({
+        model: actualModel,
+        messages,
+        temperature: options.temperature ?? 0.1,
+        stream: true,
+      }),
+      signal: abortController.signal,
+    });
+
+    if (!response.ok) {
+      const body = await readErrorBody(response);
+      throwProviderHttpError("LM Studio", response.status, body);
+    }
+
+    return {
+      reader: response.body.getReader(),
+      parseToken: (line) => {
+        const trimmed = line.trim();
+        if (!trimmed.startsWith("data: ")) return "";
+        const data = trimmed.slice(6);
+        if (data === "[DONE]") return "";
+        try {
+          const parsed = JSON.parse(data);
+          return parsed.choices?.[0]?.delta?.content || "";
+        } catch {
+          return "";
+        }
+      },
+    };
+  }
 
   if (isOpenRouterModel(model)) {
     const response = await fetch(
@@ -548,12 +751,15 @@ module.exports = {
   FatalProviderError,
   isFatalProviderError,
   detectFatalProviderMessage,
+  isLMStudioModel,
   isOpenRouterModel,
   getProviderName,
   verifyConnection,
   verifyOpenRouterConnection,
+  verifyLMStudioConnection,
   listOllamaModels,
   listOpenRouterModels,
+  listLMStudioModels,
   createStreamingChat,
   completionChat,
   createRawStream,

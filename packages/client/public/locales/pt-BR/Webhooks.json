@@ -24,6 +24,7 @@
   "FileCopied": "Arquivo copiado",
   "FileCreated": "Arquivo criado",
   "FileDeleted": "Arquivo deletado",
+  "FileDownloaded": "Arquivo baixado",
   "FileMoved": "Arquivo movido",
   "FileRestored": "Arquivo restaurado",
   "FileTrashed": "Arquivo descartado",
@@ -32,6 +33,7 @@
   "FolderCopied": "Pasta copiada",
   "FolderCreated": "Pasta criada",
   "FolderDeleted": "Pasta apagada",
+  "FolderDownloaded": "Pasta baixada",
   "FolderMoved": "Pasta movida",
   "FolderRestored": "Pasta restaurada",
   "FolderTrashed": "Pasta movida para a lixeira",
@@ -95,7 +97,5 @@
   "WebhookRemoved": "Webhook removido",
   "Webhooks": "Webhooks",
   "WebhooksGuide": "Guia de webhooks",
-  "WebhooksInfo": "Use webhooks para executar ações personalizadas em qualquer aplicativo ou site que você esteja usando com base em vários eventos no {{organizationName}} {{productName}}.\nAqui, você pode criar e gerenciar todos os seus webhooks, configurá-los e navegar no histórico de cada webhook para auditar seu desempenho.",
-  "FileDownloaded": "Arquivo baixado",
-  "FolderDownloaded": "Pasta baixada"
+  "WebhooksInfo": "Use webhooks para executar ações personalizadas em qualquer aplicativo ou site que você esteja usando com base em vários eventos no {{organizationName}} {{productName}}.\nAqui, você pode criar e gerenciar todos os seus webhooks, configurá-los e navegar no histórico de cada webhook para auditar seu desempenho."
 }

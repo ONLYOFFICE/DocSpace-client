@@ -24,6 +24,7 @@
   "FileCopied": "ファイルがコピーされました",
   "FileCreated": "ファイルが作成されました",
   "FileDeleted": "ファイルが削除されました",
+  "FileDownloaded": "ファイルがダウンロードされました",
   "FileMoved": "ファイルが移動しました",
   "FileRestored": "ファイルが復元されました",
   "FileTrashed": "ファイルがゴミ箱に移動されました",
@@ -32,6 +33,7 @@
   "FolderCopied": "フォルダがコピーされました",
   "FolderCreated": "フォルダーが作成されました",
   "FolderDeleted": "フォルダーが削除されました",
+  "FolderDownloaded": "フォルダのダウンロード",
   "FolderMoved": "フォルダーが移動されました",
   "FolderRestored": "フォルダが復元されました",
   "FolderTrashed": "フォルダーがゴミ箱に移動されました",
@@ -95,7 +97,5 @@
   "WebhookRemoved": "ウェブフック削除",
   "Webhooks": "ウェブフック",
   "WebhooksGuide": "ウェブフックガイド",
-  "WebhooksInfo": "{{organizationName}} {{productName}}の様々なイベントに基づいて、使用しているアプリケーションやウェブサイトの側でカスタムアクションを実行するためにウェブフックを使用してください。\nここでは、すべてのウェブフックを作成・管理し、設定し、パフォーマンスを監査するためにすべてのウェブフックの履歴を閲覧することができます。",
-  "FileDownloaded": "ファイルがダウンロードされました",
-  "FolderDownloaded": "フォルダのダウンロード"
+  "WebhooksInfo": "{{organizationName}} {{productName}}の様々なイベントに基づいて、使用しているアプリケーションやウェブサイトの側でカスタムアクションを実行するためにウェブフックを使用してください。\nここでは、すべてのウェブフックを作成・管理し、設定し、パフォーマンスを監査するためにすべてのウェブフックの履歴を閲覧することができます。"
 }

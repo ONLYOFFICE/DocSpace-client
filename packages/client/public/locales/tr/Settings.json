@@ -319,6 +319,5 @@
   "WantToCancelUpload": "Yüklemeyi iptal etmek istiyor musunuz?",
   "WantToContinueQuota": "Devam etmek mi yoksa kullanıcı kotasını değiştirmek mi istiyorsunuz?",
   "WebhooksDescription": "{{organizationName}} {{productName}} üzerindeki çeşitli olaylara dayanarak kullandığınız herhangi bir uygulama veya web sitesinin yan tarafında özel eylemler gerçekleştirin.",
-  "WhiteLabelLogoSubtitle": "Açık ve koyu temalar için şeffaf arka planlı logolar (PNG, SVG, JPG) yükleyin veya aşağıya logonuzu girerek anında bir logo oluşturun.",
   "WithoutEmailHint": "E-postası olmayan kullanıcınız yok. Lütfen bir sonraki adıma geçin."
 }

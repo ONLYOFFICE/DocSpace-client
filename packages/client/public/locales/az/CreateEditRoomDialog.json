@@ -23,6 +23,7 @@
   "NeedMoreIntegrations": "Daha çox inteqrasiyaya ehtiyacınız var?",
   "NeedMoreIntegrationsDescription": "Webhooks vasitəsilə məlumatı öz sisteminizə göndərin, və ya formları Zapier vasitəsilə minlərlə xidmətə bağlayın.",
   "NoDatabaseConnections": "Verilənlər bazası bağlantıları konfiqurasiya edilməmişdir",
+  "NoDatabaseConnectionsRoomAdmin": "Verilənlər bazası bağlantıları administrator tərəfindən tənzimlənir. Verilənlər bazası qurulduqdan sonra, burada ixracı aktivləşdirmək mümkün olacaq.",
   "PeopleSelectorInfo": "Yalnız otaq administratoru və ya {{productName}} administratoru otağın sahibi ola bilər",
   "Position": "Mövqe",
   "PublicRoomBarDescription": "Bu otaq linkə keçidi olan hər kəs üçün əlçatandır. Seçilmiş giriş hüquqlarının növündən asılı olaraq xarici istifadəçilərə giriş verilir.",
@@ -44,6 +45,5 @@
   "UserName": "İstifadəçi Adı",
   "ViewerInfo": "İzləyici məlumatı",
   "WatermarkPreview": "Su nişanı önizləməsi",
-  "WatermarkPreviewHelp": "Bu şəkil önizləməsi su nişanının fayllarınızda necə görünəcəyini təxmini göstərir.",
-  "NoDatabaseConnectionsRoomAdmin": "Verilənlər bazası bağlantıları administrator tərəfindən tənzimlənir. Verilənlər bazası qurulduqdan sonra, burada ixracı aktivləşdirmək mümkün olacaq."
+  "WatermarkPreviewHelp": "Bu şəkil önizləməsi su nişanının fayllarınızda necə görünəcəyini təxmini göstərir."
 }

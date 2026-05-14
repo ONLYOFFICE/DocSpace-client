@@ -73,7 +73,7 @@ test.describe("Room invite", () => {
     mockRequest.use(getEmptyInvitationLink(TEST_PORT));
     await inviteOption.click();
 
-    const inviteDialog = page.getByTestId("modal-dialog");
+    const inviteDialog = page.getByTestId("modal-dialog").filter({ hasNotText: "Synchronization with database" });
     await expect(inviteDialog).toBeVisible();
 
     await page.waitForTimeout(300); // invite panel min loader timeout
@@ -118,7 +118,7 @@ test.describe("Room invite", () => {
     mockRequest.use(getInvitationLink(TEST_PORT));
     await inviteOption.click();
 
-    const inviteDialog = page.getByTestId("modal-dialog");
+    const inviteDialog = page.getByTestId("modal-dialog").filter({ hasNotText: "Synchronization with database" });
     await expect(inviteDialog).toBeVisible();
 
     await page.waitForTimeout(300); // invite panel min loader timeout
@@ -164,7 +164,7 @@ test.describe("Room invite", () => {
     mockRequest.use(getInvitationLink(TEST_PORT));
     await inviteOption.click();
 
-    const inviteDialog = page.getByTestId("modal-dialog");
+    const inviteDialog = page.getByTestId("modal-dialog").filter({ hasNotText: "Synchronization with database" });
     await expect(inviteDialog).toBeVisible();
 
     await page.waitForTimeout(300); // invite panel min loader timeout
@@ -244,7 +244,7 @@ test.describe("Room invite", () => {
     mockRequest.use(getInvitationLink(TEST_PORT, true));
     await inviteOption.click();
 
-    const inviteDialog = page.getByTestId("modal-dialog");
+    const inviteDialog = page.getByTestId("modal-dialog").filter({ hasNotText: "Synchronization with database" });
     await expect(inviteDialog).toBeVisible();
 
     await page.waitForTimeout(300); // invite panel min loader timeout
@@ -293,7 +293,7 @@ test.describe("Room invite", () => {
     mockRequest.use(getInvitationLink(TEST_PORT, false, true));
     await inviteOption.click();
 
-    const inviteDialog = page.getByTestId("modal-dialog");
+    const inviteDialog = page.getByTestId("modal-dialog").filter({ hasNotText: "Synchronization with database" });
     await expect(inviteDialog).toBeVisible();
 
     await page.waitForTimeout(300); // invite panel min loader timeout

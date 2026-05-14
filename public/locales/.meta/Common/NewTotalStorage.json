@@ -3,7 +3,7 @@
   "content": "New total storage ({{storageUnit}})",
   "content_en_sha1_hash": "82175760ecbbdee2dea7da7962e6203145e74c58",
   "created_at": "2026-04-10T13:53:45.444Z",
-  "updated_at": "2026-04-23T17:24:02.182Z",
+  "updated_at": "2026-05-08T13:10:45.738Z",
   "comment": {
     "text": "This is a label indicating the new total storage amount after an upgrade. The `{{storageUnit}}` variable will be replaced with the unit of storage, such as \"Gigabyte\".",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
-      "line_number": 408,
+      "line_number": 410,
       "context": "<Text fontWeight={600}>\n {!hasStorageSubscription\n ? t(\"AmoutWithStorageUnit\", {\n storageUnit: t(\"Gigabyte\"),\n })\n : t(\"NewTotalStorage\", {\n storageUnit: t(\"Gigabyte\"),\n })}\n </Text>\n <FieldContainer\n isVertical",
       "module": "/libs/ui-kit"
     }

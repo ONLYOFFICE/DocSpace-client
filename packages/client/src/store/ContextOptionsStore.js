@@ -167,6 +167,8 @@ import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 import { XlsxUpdateService } from "@docspace/shared/services/xlsx-update.service";
 import { showCreatedPDFFormDialog } from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
 import { getBrandName } from "@docspace/shared/constants/brands";
+import { getRoomInfo } from "@docspace/shared/api/rooms";
+import { SKIP_AI_MODAL_KEY } from "SRC_DIR/components/dialogs/AskAIConnectDialog";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -1006,9 +1008,10 @@ class ContextOptionsStore {
     this.filesActionsStore.onCreateRoomFromTemplate(item);
   };
 
-  onEditRoomTemplate = (item) => {
+  onEditRoomTemplate = (item, cb) => {
     const event = new Event(Events.ROOM_EDIT);
     event.item = { ...item, isEdit: true };
+    event.cb = cb;
     window.dispatchEvent(event);
   };
 
@@ -1866,6 +1869,66 @@ class ContextOptionsStore {
     };
   };
 
+  _resolveRoom = async () => {
+    const { infoPanelRoom } = this.infoPanelStore;
+    const selectedFolder = this.selectedFolderStore.getSelectedFolder();
+
+    if (infoPanelRoom) return infoPanelRoom;
+    if (selectedFolder.isRoom) return selectedFolder;
+
+    const roomPath = selectedFolder.pathParts.find((path) => path.roomType);
+    if (!roomPath) return null;
+
+    const [room = null] = this.filesStore.getFilesListItems([
+      await getRoomInfo(roomPath.id),
+    ]);
+    return room;
+  };
+
+  _syncInfoPanelRoom = (newRoom) => {
+    const { infoPanelStore } = this;
+    if (infoPanelStore.isVisible && infoPanelStore.isDetailsTabActive) {
+      infoPanelStore.setInfoPanelRoom(newRoom);
+    }
+  };
+
+  askAI = async (item) => {
+    const skipAi = JSON.parse(localStorage.getItem(SKIP_AI_MODAL_KEY) ?? "false");
+
+    if (item.parentRoomType !== FolderType.FormRoom || skipAi) {
+      this.filesActionsStore.askAIAction(item);
+      return;
+    }
+
+    const { addActiveItems } = this.filesStore;
+    const { clearActiveOperations } = this.uploadDataStore;
+    const { endLoader, startLoader } = createLoader();
+
+    try {
+      startLoader(() => addActiveItems([item.id], null));
+
+      const room = await this._resolveRoom();
+      if (!room) return;
+
+      if (room.sendFormToExternalDB || !room.security?.EditRoom) {
+        this.filesActionsStore.askAIAction(item);
+        return;
+      }
+
+      this.dialogsStore.setAskAIConnectDialogVisible(true, (action) => {
+        if (action === "connect") {
+          this.onEditRoomTemplate(room, this._syncInfoPanelRoom);
+        } else if (action === "continue") {
+          this.filesActionsStore.askAIAction(item);
+        }
+      });
+    } catch (error) {
+      toastr.error(error);
+    } finally {
+      endLoader(() => clearActiveOperations([item.id]));
+    }
+  };
+
   getFilesContextOptions = (item, t, isInfoPanel, isHeader) => {
     const optionsToRemove = isInfoPanel
       ? ["select", "open", "room-info", "show-info"]
@@ -2237,7 +2300,7 @@ class ContextOptionsStore {
         key: "ask-ai",
         label: t("Common:AskAI"),
         icon: AISvgUrl,
-        onClick: () => this.filesActionsStore.askAIAction(item),
+        onClick: () => this.askAI(item),
         disabled: false,
       },
       {

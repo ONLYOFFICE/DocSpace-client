@@ -3,7 +3,7 @@
   "content": "Select date",
   "content_en_sha1_hash": "b84a6ecbc04c1f54b6fa504c6441ca78e07db586",
   "created_at": "2025-05-19T21:30:48.374Z",
-  "updated_at": "2026-04-23T17:24:01.887Z",
+  "updated_at": "2026-05-08T13:10:45.589Z",
   "comment": {
     "text": "This is the label for a date picker component, prompting the user to choose a specific date.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
-      "line_number": 407,
+      "line_number": 411,
       "context": "1: (\n <DatePicker\n key=\"start-date-picker\"\n initialDate={startDate}\n onChange={onStartDateChange}\n selectDateText={t(\"SelectDate\")}\n locale={getCookie(LANGUAGE) ?? \"en\"}\n openDate={startDate}\n minDate={undefined}\n maxDate={endDate}\n outerDate={startDate}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
-      "line_number": 407,
+      "line_number": 411,
       "context": "1: (\n <DatePicker\n key=\"start-date-picker\"\n initialDate={startDate}\n onChange={onStartDateChange}\n selectDateText={t(\"SelectDate\")}\n locale={getCookie(LANGUAGE) ?? \"en\"}\n openDate={startDate}\n minDate={undefined}\n maxDate={endDate}\n outerDate={startDate}",
       "module": "/libs/ui-kit"
     },

@@ -157,6 +157,11 @@
             "tooltip": "🛠️ Start the \"frontend start storybook\" task"
           },
           {
+            "label": "Start storybook (ui-kit)",
+            "task": "Frontend | storybook (ui-kit)",
+            "tooltip": "🛠️ Start the \"ui-kit storybook\" task"
+          },
+          {
             "label": "Start storybook prod",
             "task": "Frontend | storybook prod",
             "tooltip": "🛠️ Start the \"frontend start storybook\" task"

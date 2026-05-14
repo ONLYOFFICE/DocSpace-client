@@ -32,6 +32,7 @@ import { Portal } from "@docspace/ui-kit/components/portal";
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
 import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
 import { messageActions } from "SRC_DIR/helpers/plugins/utils";
+import PluginWrappedComponent from "SRC_DIR/components/plugins/PluginWrappedComponent";
 import styles from "./PluginDialog.module.scss";
 
 const PluginDialog = ({
@@ -48,6 +49,9 @@ const PluginDialog = ({
   fullScreen,
 
   pluginName,
+
+  reactPluginModalState,
+  closeReactPluginModal,
 
   setSettingsPluginDialogVisible,
   setCurrentSettingsDialogPlugin,
@@ -150,6 +154,42 @@ const PluginDialog = ({
 
   const rootElement = document.getElementById("root");
 
+  if (reactPluginModalState) {
+    const { pluginName: rpName, component, options, currentFile } =
+      reactPluginModalState;
+    const displayType = options?.displayType === "aside" ? "aside" : "modal";
+
+    const body = (
+      <PluginWrappedComponent
+        pluginName={rpName}
+        component={component}
+        currentFile={currentFile}
+      />
+    );
+
+    const reactDialog = options?.fullScreen ? (
+      <div className={styles.fullScreen}>{body}</div>
+    ) : (
+      <ModalDialog
+        visible
+        onClose={closeReactPluginModal}
+        displayType={displayType}
+        autoMaxWidth={options?.autoMaxWidth}
+        autoMaxHeight={options?.autoMaxHeight}
+        withoutPadding={options?.withoutBodyPadding}
+        withoutHeaderMargin={options?.withoutHeaderMargin}
+        withFooterBorder={options?.withFooterBorder}
+      >
+        {options?.dialogHeader && (
+          <ModalDialog.Header>{options.dialogHeader}</ModalDialog.Header>
+        )}
+        <ModalDialog.Body>{body}</ModalDialog.Body>
+      </ModalDialog>
+    );
+
+    return <Portal element={reactDialog} appendTo={rootElement} visible />;
+  }
+
   const dialog = fullScreen ? (
     <div className={styles.fullScreen}>
       <WrappedComponent
@@ -204,6 +244,8 @@ const PluginDialog = ({
 export default inject(({ pluginStore }) => {
   const {
     pluginDialogProps,
+    reactPluginModalState,
+    closeReactPluginModal,
     setSettingsPluginDialogVisible,
     setCurrentSettingsDialogPlugin,
     updatePluginStatus,
@@ -221,6 +263,8 @@ export default inject(({ pluginStore }) => {
 
   return {
     ...pluginDialogProps,
+    reactPluginModalState,
+    closeReactPluginModal,
     setSettingsPluginDialogVisible,
     setCurrentSettingsDialogPlugin,
     updatePluginStatus,

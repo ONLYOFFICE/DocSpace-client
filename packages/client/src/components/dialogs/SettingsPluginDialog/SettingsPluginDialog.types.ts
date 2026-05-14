@@ -60,6 +60,7 @@ export type SettingsPluginDialogProps = {
   withDelete: boolean;
   pluginSettings?: ISettings | null;
   settingsPluginDialogVisible: boolean;
+  reactSettingsSaveButtonState: PluginStore["reactSettingsSaveButtonState"];
   updatePlugin: PluginStore["updatePlugin"];
   onClose: () => void;
   onDelete: () => void;

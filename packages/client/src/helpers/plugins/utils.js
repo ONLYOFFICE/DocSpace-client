@@ -69,6 +69,8 @@ export const messageActions = ({
   updatePlugin,
   setPluginMediaViewerVisible,
   setPluginMediaViewerProps,
+  setReactPluginModalState,
+  reactPluginCurrentFile,
 }) => {
   if (!message || !message.actions || message.actions.length === 0) return;
 
@@ -209,14 +211,24 @@ export const messageActions = ({
 
       case PluginActions.showModal:
         if (message.modalDialogProps) {
-          setPluginDialogVisible?.(true);
-          setPluginDialogProps?.({ ...message.modalDialogProps, pluginName });
+          if (message.modalDialogProps.dialogBodyComponent) {
+            setReactPluginModalState?.({
+              pluginName,
+              component: message.modalDialogProps.dialogBodyComponent,
+              options: message.modalDialogProps,
+              currentFile: reactPluginCurrentFile ?? null,
+            });
+          } else {
+            setPluginDialogVisible?.(true);
+            setPluginDialogProps?.({ ...message.modalDialogProps, pluginName });
+          }
         }
         break;
 
       case PluginActions.closeModal:
         setPluginDialogVisible?.(false);
         setPluginDialogProps?.(null);
+        setReactPluginModalState?.(null);
         break;
 
       case PluginActions.updateContextMenuItems:
@@ -226,6 +238,7 @@ export const messageActions = ({
       case PluginActions.updateInfoPanelItems:
         updateInfoPanelItems?.(pluginName);
 
+        break;
       case PluginActions.updateArticleButtonItems:
         updateArticleButtonItems?.(pluginName);
 

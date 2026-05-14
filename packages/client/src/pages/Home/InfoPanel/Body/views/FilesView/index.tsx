@@ -45,6 +45,7 @@ import { INFO_PANEL_LOADER_EVENT } from "@docspace/shared/constants";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
 import PublicRoomStore from "SRC_DIR/store/PublicRoomStore";
+import { buildCurrentFile } from "SRC_DIR/helpers/plugins/buildPluginContext";
 
 import ItemTitle from "../../sub-components/ItemTitle";
 
@@ -362,7 +363,13 @@ const FilesView = ({
     }
 
     if (isPlugin)
-      return <Plugin selection={selection} infoPanelItem={infoPanelItem} />;
+      return (
+        <Plugin
+          selection={selection}
+          infoPanelItem={infoPanelItem}
+          currentFile={buildCurrentFile(selection)}
+        />
+      );
 
     return value;
   };

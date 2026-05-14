@@ -24,18 +24,69 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+@use "@docspace/ui-kit/styles/variables/colors" as *;
 
-import { Text } from "@docspace/ui-kit/components/text";
-
-export const StyledHeaderText = styled(Text)`
-  margin-inline-end: 16px;
-`;
-
-export const StyledBodyContent = styled.div`
-  height: 100%;
-
-  .search-input {
-    margin: 16px 16px 12px;
+.submitToFormGalleryModal {
+  :global(.info) {
+    line-height: 20px;
+    padding-bottom: 16px;
   }
-`;
+
+  &:not(.isLarge) {
+    :global(.info):last-child {
+      padding-bottom: 0;
+    }
+  }
+
+  :global(.item-wrapper) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border: 1px solid $gray-light-mid;
+    border-radius: 6px;
+    padding: 4px;
+    width: max-content;
+    user-select: none;
+
+    :global(.dark) & {
+      border-color: $gray-dark-strong;
+    }
+  }
+
+  :global(.icon) {
+    width: 24px;
+    height: 24px;
+    margin-inline-end: 4px;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  :global(.item-title) {
+    font-weight: 600;
+    font-size: 13px;
+    display: flex;
+    min-width: 0;
+    gap: 0;
+
+    :global(.name) {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    :global(.exst) {
+      flex-shrink: 0;
+      color: $gray;
+
+      :global(.dark) & {
+        color: $gray;
+      }
+    }
+  }
+}

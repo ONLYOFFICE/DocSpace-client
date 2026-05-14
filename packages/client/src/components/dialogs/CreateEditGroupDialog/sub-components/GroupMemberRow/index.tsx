@@ -44,7 +44,7 @@ import { EmployeeStatus, EmployeeType } from "@docspace/shared/enums";
 import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 
-import * as Styled from "./index.styled";
+import styles from "../../CreateEditGroupDialog.module.scss";
 
 interface GroupMemberRowProps {
   groupMember: TUser;
@@ -82,7 +82,7 @@ const GroupMemberRow = ({
   };
 
   return (
-    <Styled.GroupMemberRow data-testid={dataTestId ?? "group_member_row"}>
+    <div className={styles.groupMemberRow} data-testid={dataTestId ?? "group_member_row"}>
       <Avatar
         className="avatar"
         size={AvatarSize.min}
@@ -109,7 +109,7 @@ const GroupMemberRow = ({
         src={RemoveReactSvgUrl}
         onClick={onRemove}
       />
-    </Styled.GroupMemberRow>
+    </div>
   );
 };
 

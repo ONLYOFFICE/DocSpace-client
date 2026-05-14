@@ -24,43 +24,37 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+@use "@docspace/ui-kit/styles/variables/colors" as *;
 
-import { globalColors } from "@docspace/ui-kit/providers/theme";
+.bodyContent {
+  display: contents;
 
-export const RoleLinkBlockWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-
-  padding: 0px 16px 20px 16px;
-
-  .dropdown-container {
-    margin-top: 4px;
+  :global(.user-delete) {
+    line-height: 20px;
+    padding-bottom: 16px;
   }
 
-  .combo-button_selected-icon-container {
-    svg path {
-      fill: ${({ theme }) => theme.color};
+  :global(.text-warning) {
+    color: $light-error-status;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 22px;
+
+    :global(.dark) & {
+      color: $dark-error-status;
     }
   }
 
-  .combo-button_selected-icon svg {
-    width: 16px;
-    height: 16px;
+  :global(.text-delete-description) {
+    line-height: 20px;
+    padding: 8px 0;
   }
 
-  .combo-buttons_arrow-icon,
-  .combo-buttons_expander-icon > div {
-    width: 16px;
-    height: 16px;
-
-    svg path {
-      fill: ${globalColors.gray};
-    }
+  &.noReassign :global(.text-delete-description) {
+    padding-bottom: 0;
   }
 
-  .combo-buttons_expander-icon {
-    rotate: 90deg;
+  :global(.reassign-data) {
+    line-height: 15px;
   }
-`;
+}

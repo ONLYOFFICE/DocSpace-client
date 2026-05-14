@@ -42,7 +42,7 @@ import DialogStore from "SRC_DIR/store/contacts/DialogStore";
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 
 import BodyComponent from "./sub-components/BodyComponent";
-import { StyledBodyContent } from "./DeleteProfileEverDialog.styled";
+import styles from "./DeleteProfileEverDialog.module.scss";
 
 export type DeleteProfileEvenerDialogComponentsProps = {
 	userIds: UsersStore["getUsersToRemoveIds"];
@@ -272,7 +272,9 @@ const DeleteProfileEverDialogComponent = ({
 						: t("DeletingUsers")}
 			</ModalDialog.Header>
 			<ModalDialog.Body>
-				<StyledBodyContent needReassignData={needReassignData}>
+				<div
+					className={`${styles.bodyContent}${!needReassignData ? ` ${styles.noReassign}` : ""}`}
+				>
 					<BodyComponent
 						needReassignData={needReassignData}
 						onClickReassignData={onClickReassignData}
@@ -282,7 +284,7 @@ const DeleteProfileEverDialogComponent = ({
 						onlyGuests={onlyGuests}
 						t={t}
 					/>
-				</StyledBodyContent>
+				</div>
 			</ModalDialog.Body>
 			<ModalDialog.Footer>
 				<Button

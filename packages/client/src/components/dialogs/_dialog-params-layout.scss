@@ -24,18 +24,65 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+// Shared layout mixin for SetRoomParams / SetAgentParams icon-editor sections.
+// Used by CreateEditRoomDialog and CreateEditAgentDialog.
 
-export const GroupNameParam = styled.div`
+@use "@docspace/ui-kit/styles/mixins";
+
+@mixin dialog-params-layout {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  max-height: 54px;
-  margin: 4px 0 20px;
+  width: 100%;
+  gap: 22px;
+  margin-top: 20px;
 
-  .input-label {
-    cursor: pointer;
-    user-select: none;
-    line-height: 20px;
+  :global(.icon-editor_text) {
+    margin-bottom: 6px;
   }
-`;
+
+  :global(.icon-editor) {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: start;
+    gap: 16px;
+  }
+
+  &.disableImageRescaling :global(.icon-editor) {
+    margin-bottom: 24px;
+  }
+
+  :global(.logo-name-container) {
+    display: flex;
+    align-items: end;
+    gap: 16px;
+
+    @include mixins.mobile {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    :global(.room-params-icon),
+    :global(.react-svg-icon) {
+      min-width: 64px;
+      min-height: 64px;
+
+      @include mixins.mobile {
+        min-width: 96px;
+        min-height: 96px;
+      }
+    }
+
+    :global(.room-title) {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 37px;
+      user-select: none;
+
+      @include mixins.mobile {
+        font-size: 42px;
+        line-height: 56px;
+      }
+    }
+  }
+}

@@ -3,11 +3,11 @@ import React from "react";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { RowLoader } from "@docspace/shared/skeletons/selector";
 
-import { StyledBodyLoader } from "../../CreateEditGroupDialog.styled";
+import styles from "../../CreateEditGroupDialog.module.scss";
 
 export const BodyLoader = () => {
   return (
-    <StyledBodyLoader>
+    <div className={styles.bodyLoader}>
       <div className="title-section">
         <RectangleSkeleton className="group-title" width="50px" />
         <RectangleSkeleton height="32px" />
@@ -38,6 +38,6 @@ export const BodyLoader = () => {
           count={10}
         />
       </div>
-    </StyledBodyLoader>
+    </div>
   );
 };

@@ -533,38 +533,50 @@ const Shell = ({ page = "home", ...rest }) => {
 
   const isMobileOnly = currentDeviceType === DeviceType.mobile;
 
+  const layout = (
+    <Layout>
+      {toast}
+      <RootTooltip />
+      {isMobileOnly && !isFrame ? (
+        <ReactSmartBanner t={t} ready={ready} />
+      ) : null}
+      {withoutNavMenu ? null : <NavMenu />}
+      <IndicatorLoader />
+      <ScrollToTop />
+      <DialogsWrapper t={t} />
+
+      <Main isDesktop={isDesktop}>
+        {!isMobileOnly && !isFrame ? (
+          <ReactSmartBanner t={t} ready={ready} />
+        ) : null}
+        {barTypeInFrame !== "none" ? <MainBar /> : null}
+        <div className="main-container">
+          <Outlet />
+        </div>
+      </Main>
+    </Layout>
+  );
+
+  // Defer mounting AiAgentProviders until authStore is loaded — otherwise
+  // `standalone` flips after the first render, the providers' useMemo
+  // rebuilds the chat stores, and StoresHydrator refires every fetch
+  // (profiles/threads/servers/web-search/knowledge/...) a second time.
   return (
     <SectionNavigationProvider>
-      <AiAgentProviders
-        locale={language}
-        theme={isBase ? "theme-portal-base" : "theme-portal-dark"}
-        isStandalone={standalone}
-        getAgentRoomId={getAgentRoomId}
-        openResultFile={openResultFile}
-        closeEditorPanel={closeEditorPanel}
-      >
-        <Layout>
-          {toast}
-          <RootTooltip />
-          {isMobileOnly && !isFrame ? (
-            <ReactSmartBanner t={t} ready={ready} />
-          ) : null}
-          {withoutNavMenu ? null : <NavMenu />}
-          <IndicatorLoader />
-          <ScrollToTop />
-          <DialogsWrapper t={t} />
-
-          <Main isDesktop={isDesktop}>
-            {!isMobileOnly && !isFrame ? (
-              <ReactSmartBanner t={t} ready={ready} />
-            ) : null}
-            {barTypeInFrame !== "none" ? <MainBar /> : null}
-            <div className="main-container">
-              <Outlet />
-            </div>
-          </Main>
-        </Layout>
-      </AiAgentProviders>
+      {isLoaded ? (
+        <AiAgentProviders
+          locale={language}
+          theme={isBase ? "theme-portal-base" : "theme-portal-dark"}
+          isStandalone={standalone}
+          getAgentRoomId={getAgentRoomId}
+          openResultFile={openResultFile}
+          closeEditorPanel={closeEditorPanel}
+        >
+          {layout}
+        </AiAgentProviders>
+      ) : (
+        layout
+      )}
     </SectionNavigationProvider>
   );
 };

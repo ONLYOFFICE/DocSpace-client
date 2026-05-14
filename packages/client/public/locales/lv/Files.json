@@ -133,7 +133,6 @@
   "MoveFolderItem": "Mape <2>{{title}}</2> veiksmīgi pārvietota uz <1>{{folderName}}</1>",
   "MoveItem": "<2>{{title}}</2> veiksmīgi pārvietota uz <1>{{folderName}}</1>",
   "MoveItems": "<2>{{qty}} elementi</2> veiksmīgi pārvietoti uz <1>{{folderName}}</1>",
-  "MoveOrCopy": "Pārvietot vai kopēt",
   "MoveToArchive": "Pārvietot uz arhīvu",
   "MoveToPublicRoomTitle": "Pāriet uz publisko telpu",
   "MovingToTrash": "Pārvieto uz atkritni",

@@ -133,7 +133,6 @@
   "MoveFolderItem": "Папката <2>{{title}}</2> беше успешно преместена в <1>{{folderName}}</1>",
   "MoveItem": "<2>{{title}}</2> беше успешно преместен в <1>{{folderName}}</1>",
   "MoveItems": "<2>{{qty}} елемента</2> бяха успешно преместени в <1>{{folderName}}</1>",
-  "MoveOrCopy": "Преместване или копиране",
   "MoveToArchive": "Преместване в архив",
   "MoveToPublicRoomTitle": "Преминете към Публична стая",
   "MovingToTrash": "Преместване в Кошче",

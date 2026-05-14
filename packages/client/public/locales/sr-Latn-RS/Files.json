@@ -133,7 +133,6 @@
   "MoveFolderItem": "Folder <2>{{title}}</2> uspešno premešten u <1>{{folderName}}</1>",
   "MoveItem": "<2>{{title}}</2> uspešno premešten u <1>{{folderName}}</1>",
   "MoveItems": "<2>{{qty}} elemenata</2> uspešno premešteno u <1>{{folderName}}</1>",
-  "MoveOrCopy": "Pomeri ili kopiraj",
   "MoveToArchive": "Pomeri u arhivu",
   "MoveToPublicRoomTitle": "Pomeri u Javnu sobu",
   "MovingToTrash": "Premeštanje u otpad",

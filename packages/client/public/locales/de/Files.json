@@ -133,7 +133,6 @@
   "MoveFolderItem": "Der Ordner <2>{{title}}</2> wurde erfolgreich nach <1>{{folderName}}</1> verschoben",
   "MoveItem": "<2>{{title}}</2> erfolgreich nach <1>{{folderName}}</1> verschoben",
   "MoveItems": "<2>{{qty}} Elemente</2> erfolgreich nach <1>{{folderName}}</1> verschoben",
-  "MoveOrCopy": "Verschieben oder kopieren",
   "MoveToArchive": "Ins Archiv verschieben",
   "MoveToPublicRoomTitle": "In den öffentlichen Raum verschieben",
   "MovingToTrash": "In den Papierkorb verschieben",

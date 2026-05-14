@@ -133,7 +133,6 @@
   "MoveFolderItem": "Le dossier <2>{{title}}</2> a été déplacé avec succès dans <1>{{folderName}}</1>",
   "MoveItem": "<2>{{title}}</2> déplacé avec succès dans <1>{{folderName}}</1>",
   "MoveItems": "<2>{{qty}} éléments</2> déplacés avec succès dans <1>{{folderName}}</1>",
-  "MoveOrCopy": "Déplacer ou copier",
   "MoveToArchive": "Déplacer dans l’archive",
   "MoveToPublicRoomTitle": "Déplacer vers la salle publique",
   "MovingToTrash": "Déplacement dans la poubelle",

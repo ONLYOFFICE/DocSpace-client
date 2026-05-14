@@ -470,6 +470,12 @@
   "DashboardAIFormsTitle": "AI Forms",
   "DashboardAIRoomsDescription": "Create secure collaboration spaces for projects, customers, or departments.",
   "DashboardAIRoomsTitle": "AI Rooms",
+  "DashboardInstallConfirmHint": "We'll create a dedicated room and invite Everyone to fill forms there. You can change access settings later.",
+  "DashboardInstallConfirmTitle": "Install {{module}}",
+  "DashboardInstallFailed": "Module installation failed",
+  "DashboardInstallStepCreateRoom": "Creating room",
+  "DashboardInstallStepInviteEveryone": "Inviting Everyone",
+  "DashboardInstallTitle": "Installing {{module}}",
   "DashboardModulesBannerText": "Each app is licensed separately — install only what fits your workflow",
   "DashboardModulesSubtitle": "Expand your DocSpace with premium modules",
   "DontAskAgain": "Don't ask file name again on creation",
@@ -1567,5 +1573,6 @@
   "YourName": "Your name",
   "YourPrice": "Your price",
   "YourTurn": "Your turn",
-  "YouWillBeContacted": "The sales team will contact you after creating the request."
+  "YouWillBeContacted": "The sales team will contact you after creating the request.",
+  "MoveOrCopy": "Move or copy"
 }

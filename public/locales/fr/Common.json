@@ -1567,5 +1567,6 @@
   "PayPerModule": "Payer par module",
   "SeePricing": "Voir les tarifs",
   "StoppedOperation": "{{operationName}} : Arrêté",
-  "UnderDevelopment": "Cette fonctionnalité est en cours de développement"
+  "UnderDevelopment": "Cette fonctionnalité est en cours de développement",
+  "MoveOrCopy": "Déplacer ou copier"
 }

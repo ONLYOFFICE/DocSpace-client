@@ -133,7 +133,6 @@
   "MoveFolderItem": "The folder <2>{{title}}</2> successfully moved to <1>{{folderName}}</1>",
   "MoveItem": "<2>{{title}}</2> successfully moved to <1>{{folderName}}</1>",
   "MoveItems": "<2>{{qty}} elements</2> successfully moved to <1>{{folderName}}</1>",
-  "MoveOrCopy": "Move or copy",
   "MoveToArchive": "Move to archive",
   "MoveToPublicRoomTitle": "Move to Public room",
   "MovingToTrash": "Moving to trash",

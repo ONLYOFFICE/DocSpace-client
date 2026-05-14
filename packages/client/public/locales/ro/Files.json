@@ -133,7 +133,6 @@
   "MoveFolderItem": "Folderul <2>{{title}}</2> a fost deplasat cu succes în <1>{{folderName}}</1>",
   "MoveItem": "<2>{{title}}</2> a fost deplasat cu succes în <1>{{folderName}}</1>",
   "MoveItems": "<2>{{qty}} elemente</2> au fost copiate cu succes în <1>{{folderName}}</1>",
-  "MoveOrCopy": "Mutare sau copiere",
   "MoveToArchive": "Mutare în arhivă",
   "MoveToPublicRoomTitle": "Deplasare în Sală publică",
   "MovingToTrash": "Mutare în coșul de gunoi",

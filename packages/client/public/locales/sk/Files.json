@@ -133,7 +133,6 @@
   "MoveFolderItem": "Priečinok <2>{{title}}</2> bol úspešne presunutý do <1>{{folderName}}</1>",
   "MoveItem": "<2>{{title}}</2> úspešne presunutý do <1>{{folderName}}</1>",
   "MoveItems": "<2>{{qty}} prvkov</2> úspešne presunuté do <1>{{folderName}}</1>",
-  "MoveOrCopy": "Presunúť alebo Kopírovať",
   "MoveToArchive": "Presunúť do archívu",
   "MoveToPublicRoomTitle": "Presunúť do verejnej miestnosti",
   "MovingToTrash": "Premiestnenie do koša",

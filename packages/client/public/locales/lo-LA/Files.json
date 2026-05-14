@@ -133,7 +133,6 @@
   "MoveFolderItem": "ໄຟລ໌ <2>{{title}}</2> ຍ້າຍໄປທີ່ <1>{{folderName}}</1> ຢ່າງສະບາຍດີ",
   "MoveItem": "<2>{{title}}</2> ຍ້າຍໄປສູ່ <1>{{folderName}}</1> ຢ່າງສໍາເລັດແລ້ວ",
   "MoveItems": "<2>{{qty}} ຢ່າງ</2> ຍ້າຍໄປສູ່ <1>{{folderName}}</1> ຢ່າງສໍາເລັດແລ້ວ",
-  "MoveOrCopy": "ຍ້າຍ ຫຼື ສຳເນົາ",
   "MoveToArchive": "ຍ້າຍໄປບ່ອນຊັບມ້ຽນ",
   "MoveToPublicRoomTitle": "ຍ້າຍໄປຫ້ອງສາທາລະນະ",
   "MovingToTrash": "ຍ້າຍໄປຖັງຂີ້ເຫຍື້ອ",

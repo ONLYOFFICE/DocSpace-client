@@ -133,7 +133,6 @@
   "MoveFolderItem": "<2>{{title}}</2> 폴더가 <1>{{folderName}}</1> 폴더로 이동되었습니다",
   "MoveItem": "<2>{{title}}</2>이/가 <1>{{folderName}}</1> 폴더로 이동되었습니다",
   "MoveItems": "<2>{{qty}}개 요소</2>가 <1>{{folderName}}</1> 폴더로 이동되었습니다",
-  "MoveOrCopy": "이동 또는 복사",
   "MoveToArchive": "아카이브로 이동",
   "MoveToPublicRoomTitle": "퍼블릭 룸으로 이동",
   "MovingToTrash": "휴지통으로 이동",

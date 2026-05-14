@@ -133,7 +133,6 @@
   "MoveFolderItem": "Thư mục <2>{{title}}</2> được di chuyển thành công đến <1>{{folderName}}</1>",
   "MoveItem": "<2>{{title}}</2> đã được di chuyển thành công đến <1>{{folderName}}</1>",
   "MoveItems": "<2>{{qty}} phần</2> đã được di chuyển thành công đến <1>{{folderName}}</1>",
-  "MoveOrCopy": "Di chuyển hoặc Sao chép",
   "MoveToArchive": "Di chuyển đến sao lưu",
   "MoveToPublicRoomTitle": "Chuyển đến phòng Công cộng",
   "MovingToTrash": "Chuyển vào thùng rác",

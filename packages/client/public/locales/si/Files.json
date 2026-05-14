@@ -133,7 +133,6 @@
   "MoveFolderItem": "ෆෝල්ඩරය <2>{{title}}</2> සාර්ථකව <1>{{folderName}}</1> වෙත ගෙනයන ලදී.",
   "MoveItem": "<2>{{title}}</2> සාර්ථකව <1>{{folderName}}</1> වෙත ගෙනයන ලදී.",
   "MoveItems": "<2>{{qty}} අංග</2> සාර්ථකව <1>{{folderName}}</1> වෙත ගෙනයන ලදී.",
-  "MoveOrCopy": "පිටපතක් හෝ ගෙනයන්න",
   "MoveToArchive": "සංරක්‍ෂිතයට ගෙනයන්න",
   "MoveToPublicRoomTitle": "ප්‍රසිද්ධ කාමරයකට ගෙනයන්න",
   "MovingToTrash": "කුණු කූඩයට ගෙන යාම",

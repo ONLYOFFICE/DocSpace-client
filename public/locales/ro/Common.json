@@ -1567,5 +1567,6 @@
   "PayPerModule": "Plată per modul",
   "SeePricing": "Vedeți prețurile",
   "StoppedOperation": "{{operationName}}: Oprit",
-  "UnderDevelopment": "Această funcție este în curs de dezvoltare"
+  "UnderDevelopment": "Această funcție este în curs de dezvoltare",
+  "MoveOrCopy": "Mutare sau copiere"
 }

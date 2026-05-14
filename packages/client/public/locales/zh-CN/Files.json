@@ -133,7 +133,6 @@
   "MoveFolderItem": "文件夹<2>{{title}}</2>已成功移至<1>{{folderName}}</1>",
   "MoveItem": "<2>{{title}}</2>已成功移至<1>{{folderName}}</1>",
   "MoveItems": "<2>{{qty}}个元素</2>已成功移至<1>{{folderName}}</1>",
-  "MoveOrCopy": "移动或复制",
   "MoveToArchive": "移动至存档",
   "MoveToPublicRoomTitle": "移至公共房间",
   "MovingToTrash": "正在移至回收站",

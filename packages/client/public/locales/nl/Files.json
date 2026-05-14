@@ -133,7 +133,6 @@
   "MoveFolderItem": "De map <2>{{title}}</2> is succesvol verplaatst naar <1>{{folderName}}</1>",
   "MoveItem": "<2>{{title}}</2> met succes verplaatst naar <1>{{folderName}}</1>",
   "MoveItems": "<2>{{qty}} elementen</2> met succes verplaatst naar <1>{{folderName}}</1>",
-  "MoveOrCopy": "Verplaats of kopieer",
   "MoveToArchive": "Verplaatsen naar archief",
   "MoveToPublicRoomTitle": "Naar Openbare kamer",
   "MovingToTrash": "Verplaatsen naar prullenbak",

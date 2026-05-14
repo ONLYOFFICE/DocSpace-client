@@ -133,7 +133,6 @@
   "MoveFolderItem": "Kansio <2>{{title}}</2> onnistuneesti siirretty kohteeseen <1>{{folderName}}</1>",
   "MoveItem": "<2>{{title}}</2> onnistuneesti siirretty kohteeseen <1>{{folderName}}</1>",
   "MoveItems": "<2>{{qty}} elements</2> onnistuneesti siirretty <1>{{folderName}}</1>",
-  "MoveOrCopy": "Siirrä tai Kopioi",
   "MoveToArchive": "Siirrä arkistoon",
   "MoveToPublicRoomTitle": "Siirry Julkiseen huoneeseen",
   "MovingToTrash": "Siirretään roskakoriin",

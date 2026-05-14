@@ -133,7 +133,6 @@
   "MoveFolderItem": "A pasta <2>{{title}}</2> foi movida com êxito para <1>{{folderName}}</1>",
   "MoveItem": "<2>{{title}}</2> movido com sucesso para <1>{{folderName}}</1>",
   "MoveItems": "<2>{{qty}} elementos</2> movidos com sucesso para <1>{{folderName}}</1>",
-  "MoveOrCopy": "Mover ou copiar",
   "MoveToArchive": "Mover para o arquivo",
   "MoveToPublicRoomTitle": "Mover para sala pública",
   "MovingToTrash": "Mudança para o lixo",

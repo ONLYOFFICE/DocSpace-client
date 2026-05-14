@@ -133,7 +133,6 @@
   "MoveFolderItem": "Папку <2>{{title}}</2> успішно переміщено до <1>{{folderName}}</1>",
   "MoveItem": "<2>{{title}}</2> успішно переміщено до <1>{{folderName}}</1>",
   "MoveItems": "<2>Елементи в кількості {{qty}}</2> успішно переміщено до <1>{{folderName}}</1>",
-  "MoveOrCopy": "Перемістити або скопіювати",
   "MoveToArchive": "Перемістити до архіву",
   "MoveToPublicRoomTitle": "Перейти до публічної кімнати",
   "MovingToTrash": "Переміщення до кошика",

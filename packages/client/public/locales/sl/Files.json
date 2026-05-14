@@ -133,7 +133,6 @@
   "MoveFolderItem": "Mapa <2>{{title}}</2> je bila uspešno premaknjena v <1>{{folderName}}</1>",
   "MoveItem": "<2>{{title}}</2> uspešno premaknjeno v <1>{{folderName}}</1>",
   "MoveItems": "<2>{{qty}} elementov</2> je bilo uspešno premaknjenih v <1>{{folderName}}</1>",
-  "MoveOrCopy": "Premakni ali kopiraj",
   "MoveToArchive": "Premakni v arhiv",
   "MoveToPublicRoomTitle": "Premakni se v javno sobo",
   "MovingToTrash": "Premakni v koš",

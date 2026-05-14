@@ -133,7 +133,6 @@
   "MoveFolderItem": "Պանակը <2>{{title}}</2> հաջողությամբ տեղափոխվել է <1>{{folderName}}</1>",
   "MoveItem": "<2>{{title}}</2> հաջողությամբ տեղափոխվել է  <1>{{folderName}}</1>",
   "MoveItems": "<2>{{qty}} տարրերը</2> հաջողությամբ տեղափոխվել են <1>{{folderName}}</1>",
-  "MoveOrCopy": "Տեղափոխել կամ պատճենել",
   "MoveToArchive": "Տեղափոխել արխիվ",
   "MoveToPublicRoomTitle": "Տեղափոխեք հանրային սենյակ",
   "MovingToTrash": "Տեղափոխել աղբաման",

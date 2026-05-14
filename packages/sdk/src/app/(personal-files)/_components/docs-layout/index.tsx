@@ -61,6 +61,7 @@ import RootScrollbar from "@/app/(docspace)/_components/RootScrollbar";
 import List from "@/app/(docspace)/(files)/_components/list";
 import { OpenFileContext } from "@/app/(docspace)/_contexts/OpenFileContext";
 import { ShareContext } from "@/app/(docspace)/_contexts/ShareContext";
+import { InfoContext } from "@/app/(docspace)/_contexts/InfoContext";
 import { DeleteContext } from "@/app/(docspace)/_contexts/DeleteContext";
 import { FileOperationsContext } from "@/app/(docspace)/_contexts/FileOperationsContext";
 import { RenameContext } from "@/app/(docspace)/_contexts/RenameContext";
@@ -71,7 +72,10 @@ import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
 import CreateFileDialog from "../create-file-dialog";
-import { useInfoPanelStore } from "../../_store/InfoPanelStore";
+import {
+  InfoPanelView,
+  useInfoPanelStore,
+} from "../../_store/InfoPanelStore";
 import useDocsActions from "../../_hooks/useDocsActions";
 import { useDocsMenuModels } from "../../_hooks/useDocsMenuModels";
 import useTrashActions from "../../_hooks/useTrashActions";
@@ -82,7 +86,11 @@ import { useDocsFrameBridge } from "../../_hooks/useDocsFrameBridge";
 import DropZone from "../drop-zone";
 import DeleteDialog from "../delete-dialog";
 import RenameDialog from "../rename-dialog";
-import DocsInfoPanel from "../info-panel";
+import {
+  InfoPanelBody as DocsInfoPanelBody,
+  InfoPanelHeader as DocsInfoPanelHeader,
+  InfoPanelEditLinkDialog,
+} from "../info-panel";
 
 import styles from "./DocsLayout.module.scss";
 
@@ -227,12 +235,22 @@ const DocsLayout = observer(({
   const shareHandler = React.useCallback(
     (item: TFileItem | TFolderItem) => {
       infoPanelStore.open(item);
+      infoPanelStore.setView(InfoPanelView.infoShare);
+    },
+    [infoPanelStore],
+  );
+
+  const infoHandler = React.useCallback(
+    (item: TFileItem | TFolderItem) => {
+      infoPanelStore.open(item);
+      infoPanelStore.setView(InfoPanelView.infoDetails);
     },
     [infoPanelStore],
   );
 
   return (
     <OpenFileContext.Provider value={openFileHandler}>
+     <InfoContext.Provider value={infoHandler}>
       <ShareContext.Provider value={shareHandler}>
         <DeleteContext.Provider value={deleteHandler}>
           <RenameContext.Provider value={renameHandler}>
@@ -285,6 +303,18 @@ const DocsLayout = observer(({
                           current={current}
                         />
                       }
+                      infoPanelHeaderContent={<DocsInfoPanelHeader />}
+                      infoPanelBodyContent={<DocsInfoPanelBody />}
+                      isInfoPanelVisible={infoPanelStore.isVisible}
+                      setIsInfoPanelVisible={(v: boolean) => {
+                        if (v) {
+                          if (!infoPanelStore.isVisible) {
+                            infoPanelStore.toggle();
+                          }
+                        } else {
+                          infoPanelStore.close();
+                        }
+                      }}
                       isEmptyPage={isEmptyList}
                       filesFilter={filesFilter}
                     />
@@ -294,7 +324,7 @@ const DocsLayout = observer(({
                     <Dialogs />
                   </RootScrollbar>
                 </DropZone>
-                <DocsInfoPanel />
+                <InfoPanelEditLinkDialog />
                 <CreateFileDialog
                   visible={dialogVisible}
                   type={dialogType}
@@ -405,6 +435,7 @@ const DocsLayout = observer(({
           </RenameContext.Provider>
         </DeleteContext.Provider>
       </ShareContext.Provider>
+     </InfoContext.Provider>
     </OpenFileContext.Provider>
   );
 });

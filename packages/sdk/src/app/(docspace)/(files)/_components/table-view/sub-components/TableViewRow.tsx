@@ -46,6 +46,7 @@ import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import useFavoritesActions from "@/app/(docspace)/_hooks/useFavoritesActions";
 import useContextMenuModel from "../../../../_hooks/useContextMenuModel";
 import { ShareContext } from "../../../../_contexts/ShareContext";
+import { InfoContext } from "../../../../_contexts/InfoContext";
 import { DeleteContext } from "../../../../_contexts/DeleteContext";
 import { FileOperationsContext } from "../../../../_contexts/FileOperationsContext";
 import { RenameContext } from "../../../../_contexts/RenameContext";
@@ -68,6 +69,7 @@ const TableViewRow = observer(
     const { openFolder } = useFolderActions({ t });
     const { markAsFavorite, removeFromFavorites } = useFavoritesActions({ t });
     const onShareClick = React.useContext(ShareContext);
+    const onInfoClick = React.useContext(InfoContext);
     const deleteCtx = React.useContext(DeleteContext);
     const fileOpsCtx = React.useContext(FileOperationsContext);
     const renameCtx = React.useContext(RenameContext);
@@ -75,6 +77,7 @@ const TableViewRow = observer(
     const { getContextMenuModel } = useContextMenuModel({
       item: observableItem,
       onShareClick: onShareClick ?? undefined,
+      onInfoClick: onInfoClick ?? undefined,
       onDeleteClick: deleteCtx?.deleteItem,
       onCopyClick: fileOpsCtx?.copyItem,
       onMoveClick: fileOpsCtx?.moveItem,

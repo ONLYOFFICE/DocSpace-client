@@ -32,10 +32,23 @@ import { makeAutoObservable, toJS } from "mobx";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import type { LinkParamsType } from "@docspace/shared/types";
 
+export const enum InfoPanelView {
+  infoShare = "info_share",
+  infoHistory = "info_history",
+  infoDetails = "info_details",
+}
+
+export type InfoPanelViewType =
+  | InfoPanelView.infoShare
+  | InfoPanelView.infoHistory
+  | InfoPanelView.infoDetails;
+
 class InfoPanelStore {
   isVisible: boolean = false;
   selection: TFile | TFolder | null = null;
   shareChanged: boolean = false;
+
+  fileView: InfoPanelViewType = InfoPanelView.infoDetails;
 
   editLinkPanelIsVisible: boolean = false;
   linkParams: LinkParamsType | null = null;
@@ -59,6 +72,14 @@ class InfoPanelStore {
 
   toggle = () => {
     this.isVisible = !this.isVisible;
+  };
+
+  setSelection = (item: TFile | TFolder | null) => {
+    this.selection = item ? toJS(item) : null;
+  };
+
+  setView = (view: InfoPanelViewType) => {
+    this.fileView = view;
   };
 
   setShareChanged = (changed: boolean) => {

@@ -30,48 +30,37 @@ import React from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import {
-  ModalDialog,
-  ModalDialogType,
-} from "@docspace/ui-kit/components/modal-dialog";
-import Share from "@docspace/shared/components/share";
-import EditLinkPanel, {
-  type EditLinkPanelRef,
-} from "@docspace/shared/dialogs/EditLinkPanel";
+import EditLinkPanel from "@docspace/shared/dialogs/EditLinkPanel";
 import { getPortalPasswordSettings } from "@docspace/shared/api/settings";
 import type { TPasswordSettings } from "@docspace/shared/api/settings/types";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import { useInfoPanelStore } from "../../_store/InfoPanelStore";
-import { useDocsUserStore } from "../../_store/DocsUserStore";
-import { useShareData } from "../../_hooks/useShareData";
 
-const ShareAside = observer(() => {
+import InfoPanelHeader from "./Header";
+import InfoPanelBody from "./Body";
+
+export { InfoPanelHeader, InfoPanelBody };
+
+/**
+ * EditLinkPanel is rendered as a sibling top-level dialog,
+ * driven by InfoPanelStore.editLinkPanelIsVisible.
+ */
+export const InfoPanelEditLinkDialog = observer(() => {
   const infoPanelStore = useInfoPanelStore();
-  const docsUserStore = useDocsUserStore();
-  const { t, i18n } = useTranslation(["Common"]);
   const { currentDeviceType } = useDeviceType();
-
-  const editLinkRef = React.useRef<EditLinkPanelRef>(null);
-  const [passwordSettings, setPasswordSettings] =
-    React.useState<TPasswordSettings>();
+  const { i18n } = useTranslation();
 
   const {
-    isVisible,
-    selection,
-    shareChanged,
-    setShareChanged,
     editLinkPanelIsVisible,
     setEditLinkPanelIsVisible,
     linkParams,
     setLinkParams,
-    setEmbeddingPanelData,
-    close,
+    selection,
   } = infoPanelStore;
 
-  const { filesLink } = useShareData({ selection: isVisible ? selection : null });
-
-  const selfId = docsUserStore.user?.id ?? "";
+  const [passwordSettings, setPasswordSettings] =
+    React.useState<TPasswordSettings>();
 
   const handleGetPortalPasswordSettings = React.useCallback(async () => {
     try {
@@ -82,71 +71,29 @@ const ShareAside = observer(() => {
     }
   }, []);
 
-  const closeEditLinkPanel = React.useCallback(() => {
+  const onClose = React.useCallback(() => {
     setEditLinkPanelIsVisible(false);
     setLinkParams(null);
   }, [setEditLinkPanelIsVisible, setLinkParams]);
 
-  const onClose = React.useCallback(() => {
-    if (editLinkRef.current?.hasChanges()) {
-      editLinkRef.current?.openChangesDialog("close");
-      return;
-    }
-    closeEditLinkPanel();
-    close();
-  }, [close, closeEditLinkPanel]);
+  if (!editLinkPanelIsVisible || !linkParams || !selection) return null;
 
   return (
-    <>
-      <ModalDialog
-        withBorder
-        withBodyScroll
-        scrollbarCreateContext
-        visible={isVisible}
-        onClose={onClose}
-        displayType={ModalDialogType.aside}
-        containerVisible={editLinkPanelIsVisible}
-      >
-        <ModalDialog.Container>
-          {linkParams && selection ? (
-            <EditLinkPanel
-              ref={editLinkRef}
-              withBackButton
-              item={selection}
-              link={linkParams.link}
-              language={i18n.language}
-              visible={editLinkPanelIsVisible}
-              setIsVisible={closeEditLinkPanel}
-              updateLink={linkParams.updateLink}
-              setLinkParams={setLinkParams}
-              currentDeviceType={currentDeviceType}
-              passwordSettings={passwordSettings}
-              getPortalPasswordSettings={handleGetPortalPasswordSettings}
-              onClose={onClose}
-            />
-          ) : null}
-        </ModalDialog.Container>
-
-        <ModalDialog.Header>{t("Common:Share")}</ModalDialog.Header>
-        <ModalDialog.Body>
-          {selection ? (
-              <Share
-                infoPanelSelection={selection}
-                fileLinkProps={filesLink}
-                selfId={selfId}
-                shareChanged={shareChanged}
-                setShareChanged={setShareChanged}
-                setEditLinkPanelIsVisible={setEditLinkPanelIsVisible}
-                setLinkParams={setLinkParams}
-                setEmbeddingPanelData={setEmbeddingPanelData}
-                disabledSharedUser
-                hideLinkTypeSelector
-              />
-          ) : null}
-        </ModalDialog.Body>
-      </ModalDialog>
-    </>
+    <EditLinkPanel
+      withBackButton
+      item={selection}
+      link={linkParams.link}
+      language={i18n.language}
+      visible={editLinkPanelIsVisible}
+      setIsVisible={setEditLinkPanelIsVisible}
+      updateLink={linkParams.updateLink}
+      setLinkParams={setLinkParams}
+      currentDeviceType={currentDeviceType}
+      passwordSettings={passwordSettings}
+      getPortalPasswordSettings={handleGetPortalPasswordSettings}
+      onClose={onClose}
+    />
   );
 });
 
-export default ShareAside;
+export default InfoPanelBody;

@@ -22,6 +22,7 @@ import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 import DuplicateReactSvgUrl from "PUBLIC_DIR/images/icons/16/duplicate.react.svg?url";
 import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
 import RenameReactSvgUrl from "PUBLIC_DIR/images/rename.react.svg?url";
+import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
 import { useFilesSelectionStore } from "../_store/FilesSelectionStore";
 import { AVAILABLE_CONTEXT_ITEMS } from "../_enums/context-items";
@@ -35,6 +36,7 @@ import useFavoritesActions from "./useFavoritesActions";
 type UseContextMenuModelProps = {
   item?: TFileItem | TFolderItem;
   onShareClick?: (item: TFileItem | TFolderItem) => void;
+  onInfoClick?: (item: TFileItem | TFolderItem) => void;
   onDeleteClick?: (item: TFileItem | TFolderItem) => void;
   onDeleteSelectedClick?: (items: (TFileItem | TFolderItem)[]) => void;
   onCopyClick?: (item: TFileItem | TFolderItem) => void;
@@ -50,6 +52,7 @@ type UseContextMenuModelProps = {
 export default function useContextMenuModel({
   item,
   onShareClick,
+  onInfoClick,
   onDeleteClick,
   onDeleteSelectedClick,
   onCopyClick,
@@ -318,6 +321,21 @@ export default function useContextMenuModel({
       };
     },
     [t, onMoveClick],
+  );
+
+  const getShowInfoItem = useCallback(
+    (i: TFileItem | TFolderItem) => {
+      const isFolder = "isFolder" in i && i.isFolder;
+      return {
+        id: "option_show-info",
+        key: "show-info",
+        label: isFolder ? t("Common:FolderInfo") : t("Common:FileInfo"),
+        icon: InfoOutlineReactSvgUrl,
+        onClick: () => onInfoClick?.(i),
+        disabled: !onInfoClick,
+      };
+    },
+    [t, onInfoClick],
   );
 
   const getRenameItem = useCallback(
@@ -600,6 +618,9 @@ export default function useContextMenuModel({
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.restore))
         actionGroup.push(getRestoreItem(item!));
 
+      if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.showInfo))
+        actionGroup.push(getShowInfoItem(item!));
+
       if (
         contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.markAsFavorite) ||
         contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.removeFromFavorites)
@@ -656,6 +677,7 @@ export default function useContextMenuModel({
       getMoveToItem,
       getRenameItem,
       getRestoreItem,
+      getShowInfoItem,
       getDeleteItem,
       getHeaderContextMenuModel,
       getGroupContextMenuModel,

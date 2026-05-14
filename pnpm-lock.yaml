@@ -566,7 +566,7 @@ importers:
         version: 2.3.14
       '@onlyoffice/docspace-plugin-sdk':
         specifier: file:onlyoffice-docspace-plugin-sdk-2.1.0.tgz
-        version: file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz(@types/node@24.10.7)
+        version: file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz(@types/node@24.10.7)(react@19.2.4)
       '@playwright/test':
         specifier: 1.58.1
         version: 1.58.1
@@ -3162,9 +3162,14 @@ packages:
     version: 3.6.0
 
   '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz':
-    resolution: {integrity: sha512-g7xq2Orc2iS6OfKg+zZT61hScteT0B00pFiqYA8yddUzLOMMDMMHOiRKObw6QZkhizkPXEHgWsH1n9Z2nOlWrA==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz}
+    resolution: {integrity: sha512-7+08SesgNjnxUl3TrlMFoqkW4IpSXqcCxlH5dAwUhtdb3vfGaNqGIYLiyG09FLs3Z7+7Zd5GmYax6s2utv/Htw==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz}
     version: 2.1.0
     hasBin: true
+    peerDependencies:
+      react: '>=18.0.0'
+    peerDependenciesMeta:
+      react:
+        optional: true
 
   '@onlyoffice/docspace-sdk-js@file:packages/client/onlyoffice-docspace-sdk-js-2.2.0.tgz':
     resolution: {integrity: sha512-F/9MLDkDy6fKz0yr67dgtxXqloPJhJLqi1mB442PJhjNW5q9LT7TA5bYWaHJNo0ulFtBkoMEWseKCufKEZXuvw==, tarball: file:packages/client/onlyoffice-docspace-sdk-js-2.2.0.tgz}
@@ -10851,10 +10856,12 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz(@types/node@24.10.7)':
+  '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz(@types/node@24.10.7)(react@19.2.4)':
     dependencies:
       inquirer: 9.3.8(@types/node@24.10.7)
       jszip: 3.10.1
+    optionalDependencies:
+      react: 19.2.4
     transitivePeerDependencies:
       - '@types/node'
 

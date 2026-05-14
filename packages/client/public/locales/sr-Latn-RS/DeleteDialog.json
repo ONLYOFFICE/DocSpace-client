@@ -17,7 +17,7 @@
   "DeleteItemsSharedNote": "Imajte na umu da ako ih podelite sa nekim, oni će postati nedostupni.",
   "DeleteRoomConfirm": "Soba <strong>\"{{roomName}}\"</strong> će biti trajno obrisana. Svi podaci i pristupi korisnika će biti izgubljeni.",
   "DeleteRooms": "Izabrane <strong>sobe ({{count}})</strong> će biti trajno obrisane. Svi podaci i pristup korisnika biće izgubljeni.",
-  "DeleteRoomsTitle": "Da li želite da obrišete ovu sobu?",
+  "DeleteRoomsTitle": "Obrisati ove sobe?",
   "DeleteRoomTitle": "Obrisati ovu sobu?",
   "DeleteRoomWarning": "Razumem posledice i želim da obrišem sobu",
   "DeleteTemplate": "Da li zaista želite da obrišete šablon sobe <1>«{{templateName}}»</1>? Šablon se ne može vratiti.",

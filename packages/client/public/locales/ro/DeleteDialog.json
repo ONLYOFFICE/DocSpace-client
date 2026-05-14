@@ -17,7 +17,7 @@
   "DeleteItemsSharedNote": "Rețineți că, dacă le-ați partajat cu altcineva, aceste vor deveni indisponibile.",
   "DeleteRoomConfirm": "Sala <strong>\"{{roomName}}\"</strong> va fi ștearsă definitiv. Toate datele  și conectările utilizatorilor se vor pierde.",
   "DeleteRooms": "<strong>Săli ({{count}})</strong> selectate vor fi șterse permanent. Toate datele și accesul utilizatorilor vor fi pierdute.",
-  "DeleteRoomsTitle": "Șterge această sală?",
+  "DeleteRoomsTitle": "Doriți să ștergeți aceste săli?",
   "DeleteRoomTitle": "Doriți să ștergeți această sală?",
   "DeleteRoomWarning": "Confirm că înțeleg efectele și doresc să șterg sala",
   "DeleteTemplate": "Doriți să ștergeți șablonul sălii <1>«{{templateName}}»</1>? Recuperarea șablonului este imposibilă.",

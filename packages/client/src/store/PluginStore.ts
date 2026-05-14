@@ -24,9 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { makeAutoObservable, runInAction } from "mobx";
+import { makeAutoObservable, observable, runInAction } from "mobx";
 import axios from "axios";
 import cloneDeep from "lodash/cloneDeep";
+
+import type React from "react";
+import type {
+  PluginRuntime,
+  TCurrentFile,
+} from "@onlyoffice/docspace-plugin-sdk/react";
+import { Actions } from "@onlyoffice/docspace-plugin-sdk";
+import type {
+  ButtonGroup,
+  IModalDialog,
+  TSelector,
+  IMediaViewer,
+  IFloatingOperationsButton,
+} from "@onlyoffice/docspace-plugin-sdk";
 
 import api from "@docspace/shared/api";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -76,6 +90,8 @@ import type {
 } from "SRC_DIR/helpers/plugins/types";
 
 import { getPluginUrl, messageActions } from "../helpers/plugins/utils";
+import { buildCurrentUser } from "../helpers/plugins/buildPluginContext";
+import { rewritePluginImports } from "../helpers/plugins/reactPluginShim";
 import {
   PluginFileType,
   PluginScopes,
@@ -87,6 +103,7 @@ import {
 import type SelectedFolderStore from "./SelectedFolderStore";
 import type { TSelectorProps } from "SRC_DIR/components/PluginSelector/types";
 import { SocketCommands } from "@docspace/ui-kit/utils/socket";
+import { TUser } from "@docspace/shared/api/people/types";
 
 const { api: apiConf, proxy: proxyConf } = defaultConfig;
 const { origin: apiOrigin, prefix: apiPrefix } = apiConf;
@@ -97,12 +114,18 @@ const origin =
 const proxy = window.ClientConfig?.proxy?.url || proxyURL;
 const prefix = window.ClientConfig?.api?.prefix || apiPrefix;
 
+const pluginAxios = axios.create({
+  baseURL: `${origin}${proxy}${prefix}`,
+  withCredentials: true,
+});
+
 type TDispatchMessage = {
   message: IMessage | void;
   pluginName: string;
   setElementProps?: React.Dispatch<unknown>;
   updateCreateDialogProps?: React.Dispatch<unknown>;
   updatePropsContext?: (props: unknown) => void;
+  currentFile?: TCurrentFile | null;
 };
 
 class PluginStore {
@@ -163,6 +186,15 @@ class PluginStore {
 
   pluginMediaViewerProps: null | IMediaViewerClient = null;
 
+  reactSettingsSaveButtonState: ButtonGroup | null = null;
+
+  reactPluginModalState: null | {
+    pluginName: string;
+    component: React.ComponentType<any>;
+    options?: Omit<Partial<IModalDialog>, "dialogBodyComponent">;
+    currentFile: TCurrentFile | null;
+  } = null;
+
   constructor(
     settingsStore: SettingsStore,
     selectedFolderStore: SelectedFolderStore,
@@ -174,7 +206,7 @@ class PluginStore {
     this.userStore = userStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
 
-    makeAutoObservable(this);
+    makeAutoObservable(this, { reactPluginModalState: observable.ref });
 
     // Subscribe to plugin state changes via WebSocket
     this.wsChangeWebPlugin();
@@ -215,6 +247,7 @@ class PluginStore {
     setElementProps,
     updateCreateDialogProps,
     updatePropsContext,
+    currentFile,
   }: TDispatchMessage) => {
     messageActions({
       message,
@@ -242,7 +275,19 @@ class PluginStore {
       updatePluginFloatingOperations: this.updatePluginFloatingOperations,
       setPluginMediaViewerVisible: this.setPluginMediaViewerVisible,
       setPluginMediaViewerProps: this.setPluginMediaViewerProps,
+      setReactPluginModalState: this.setReactPluginModalState,
+      reactPluginCurrentFile: currentFile,
     });
+  };
+
+  setReactPluginModalState = (
+    value: PluginStore["reactPluginModalState"],
+  ): void => {
+    this.reactPluginModalState = value;
+  };
+
+  setReactSettingsSaveButtonState = (state: ButtonGroup | null): void => {
+    this.reactSettingsSaveButtonState = state;
   };
 
   setNeedPageReload = (value: boolean) => {
@@ -415,7 +460,11 @@ class PluginStore {
 
       this.setIsEmptyList(plugins.length === 0);
       await Promise.allSettled(
-        plugins.map((plugin) => this.initPlugin(plugin, undefined, fromList)),
+        plugins.map((plugin) =>
+          plugin.runtime === "module"
+            ? this.initModulePlugin(plugin)
+            : this.initPlugin(plugin, undefined, fromList),
+        ),
       );
     } catch (e) {
       if (axios.isCancel(e)) {
@@ -464,7 +513,11 @@ class PluginStore {
 
       this.setNeedPageReload(true);
 
-      this.initPlugin(plugin);
+      if (plugin.runtime === "module") {
+        this.initModulePlugin(plugin);
+      } else {
+        this.initPlugin(plugin);
+      }
 
       return {
         isPluginCompatible,
@@ -614,7 +667,7 @@ class PluginStore {
 
       if (idx === -1) {
         runInAction(() => {
-          this.plugins = [{ ...plugin }, ...this.plugins];
+          this.plugins = [plugin, ...this.plugins];
         });
 
         this.setIsEmptyList(false);
@@ -717,24 +770,32 @@ class PluginStore {
   };
 
   activatePlugin = async (name: string) => {
-    const plugin = this.plugins.find((p) => p.name === name);
+    const idx = this.plugins.findIndex((p) => p.name === name);
 
-    if (!plugin) return;
+    if (idx === -1) return;
 
-    plugin.enabled = true;
+    runInAction(() => {
+      this.plugins[idx].enabled = true;
+      this.plugins.splice(idx, 1, this.plugins[idx]);
+    });
 
     this.setNeedPageReload(true);
 
-    this.installPlugin(plugin, false);
+    this.installPlugin(this.plugins[idx], false);
   };
 
   deactivatePlugin = async (name: string) => {
-    const plugin = this.plugins.find((p) => p.name === name);
+    const idx = this.plugins.findIndex((p) => p.name === name);
 
-    if (!plugin) return;
+    if (idx === -1) return;
 
-    plugin.enabled = false;
-    plugin.settings = "";
+    runInAction(() => {
+      this.plugins[idx].enabled = false;
+      this.plugins[idx].settings = "";
+      this.plugins.splice(idx, 1, this.plugins[idx]);
+    });
+
+    const plugin = this.plugins[idx];
 
     this.uninstallPluginCss(plugin);
 
@@ -1537,6 +1598,193 @@ class PluginStore {
 
     return null;
   }
+
+  closeReactPluginModal = (): void => {
+    this.reactPluginModalState = null;
+  };
+
+  buildReactPluginRuntime = (
+    pluginName: string,
+    currentFile: TCurrentFile | null,
+    user: TUser | null,
+  ): PluginRuntime => ({
+    currentFile,
+    currentUser: user ? buildCurrentUser(user) : null,
+    actions: {
+      showToast: (props) =>
+        this.dispatchMessage({
+          message: { actions: [Actions.showToast], toastProps: [props] },
+          pluginName,
+        }),
+      showModal: (props) =>
+        this.dispatchMessage({
+          message: {
+            actions: [Actions.showModal],
+            modalDialogProps: props,
+          },
+          pluginName,
+          currentFile,
+        }),
+      closeModal: () =>
+        this.dispatchMessage({
+          message: { actions: [Actions.closeModal] },
+          pluginName,
+        }),
+      showSelector: (props: TSelector) =>
+        this.dispatchMessage({
+          message: { actions: [Actions.showSelector], selectorProps: props },
+          pluginName,
+        }),
+      closeSelector: () =>
+        this.dispatchMessage({
+          message: { actions: [Actions.closeSelector] },
+          pluginName,
+        }),
+      navigate: (path: string) =>
+        this.dispatchMessage({
+          message: { actions: [Actions.navigate], navigatePath: path },
+          pluginName,
+        }),
+      openInfoPanel: () =>
+        this.dispatchMessage({
+          message: { actions: [Actions.openInfoPanel] },
+          pluginName,
+        }),
+      showMediaViewer: (props: IMediaViewer) =>
+        this.dispatchMessage({
+          message: {
+            actions: [Actions.showMediaViewer],
+            mediaViewerProps: props,
+          },
+          pluginName,
+        }),
+      closeMediaViewer: () =>
+        this.dispatchMessage({
+          message: { actions: [Actions.closeMediaViewer] },
+          pluginName,
+        }),
+      updateMediaViewer: (props: IMediaViewer) =>
+        this.dispatchMessage({
+          message: {
+            actions: [Actions.updateMediaViewer],
+            mediaViewerProps: props,
+          },
+          pluginName,
+        }),
+      addFloatingOperationsButton: (props: IFloatingOperationsButton) =>
+        this.dispatchMessage({
+          message: {
+            actions: [Actions.addFloatingOperationsButton],
+            floatingOperationsButtonProps: props,
+          },
+          pluginName,
+        }),
+      removeFloatingOperationsButton: (id: string) =>
+        this.dispatchMessage({
+          message: {
+            actions: [Actions.removeFloatingOperationsButton],
+            floatingOperationsButtonPropsId: id,
+          },
+          pluginName,
+        }),
+      updateFloatingOperationsButton: (props: IFloatingOperationsButton) =>
+        this.dispatchMessage({
+          message: {
+            actions: [Actions.updateFloatingOperationsButton],
+            floatingOperationsButtonProps: props,
+          },
+          pluginName,
+        }),
+    },
+    api: {
+      get: (path, params) =>
+        pluginAxios.get(path, { params }).then((r) => r.data),
+      post: (path, body) => pluginAxios.post(path, body).then((r) => r.data),
+      put: (path, body) => pluginAxios.put(path, body).then((r) => r.data),
+      delete: (path) => pluginAxios.delete(path).then((r) => r.data),
+    },
+    settings: {
+      load: async () => {
+        const entry = this.plugins.find((p) => p.name === pluginName);
+        if (!entry?.settings) return null;
+        try {
+          return JSON.parse(entry.settings);
+        } catch {
+          return null;
+        }
+      },
+      save: async (data: Record<string, unknown>) => {
+        const entry = this.plugins.find((p) => p.name === pluginName);
+        if (!entry) return;
+        const settingsStr = JSON.stringify(data);
+        await api.plugins.updatePlugin(pluginName, entry.enabled, settingsStr);
+        runInAction(() => {
+          entry.settings = settingsStr;
+        });
+        entry.setAdminPluginSettingsValue?.(settingsStr);
+      },
+      setSaveButton: (props: ButtonGroup) => {
+        this.setReactSettingsSaveButtonState(props);
+      },
+    },
+  });
+
+  initModulePlugin = async (
+    plugin: TAPIPlugin,
+    callback?: (plugin: TPlugin) => void,
+  ): Promise<void> => {
+    try {
+      const res = await fetch(plugin.url);
+      if (!res.ok) throw new Error(`HTTP ${res.status} fetching ${plugin.url}`);
+
+      const rawCode = await res.text();
+      const code = rewritePluginImports(rawCode);
+      const blob = new Blob([code], { type: "application/javascript" });
+      const blobUrl = URL.createObjectURL(blob);
+
+      let mod: { default?: Partial<TPlugin> };
+      try {
+        mod = await import(/* @vite-ignore */ blobUrl);
+        URL.revokeObjectURL(blobUrl);
+      } catch (e) {
+        URL.revokeObjectURL(blobUrl);
+        throw e;
+      }
+
+      const exported = mod?.default;
+      if (!exported) throw new Error("Module plugin has no default export");
+
+      const scopes =
+        typeof plugin.scopes === "string"
+          ? (plugin.scopes.split(",") as PluginScopes[])
+          : plugin.scopes;
+
+      const newPlugin = Object.assign(exported as TPlugin, {
+        ...plugin,
+        nameLocaleMap: plugin.nameLocale,
+        descriptionLocaleMap: plugin.descriptionLocale,
+        nameLocale: plugin.nameLocale || plugin.name,
+        descriptionLocale: plugin.descriptionLocale || plugin.description,
+        scopes,
+        iconUrl: getPluginUrl(plugin.url, ""),
+        compatible: this.checkPluginCompatibility(plugin.minDocSpaceVersion),
+      });
+
+      this.initLocalePlugin(newPlugin);
+      this.installPlugin(newPlugin);
+
+      if (newPlugin.scopes.includes(PluginScopes.Settings)) {
+        newPlugin.setAdminPluginSettingsValue?.(plugin.settings || null);
+      }
+
+      callback?.(newPlugin);
+    } catch (e) {
+      console.error(
+        `[Plugin: ${plugin.name}] Failed to load module plugin:`,
+        e,
+      );
+    }
+  };
 }
 
 export default PluginStore;

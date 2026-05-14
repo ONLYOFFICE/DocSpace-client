@@ -190,7 +190,7 @@ class PluginStore {
 
   reactPluginModalState: null | {
     pluginName: string;
-    component: React.ComponentType<any>;
+    component: React.ComponentType<object>;
     options?: Omit<Partial<IModalDialog>, "dialogBodyComponent">;
     currentFile: TCurrentFile | null;
   } = null;

@@ -3,7 +3,7 @@
   "content": "Leave the room",
   "content_en_sha1_hash": "0494f65ff12e4895fbbc91bd002080a4361c346d",
   "created_at": "2025-05-19T21:30:55.737Z",
-  "updated_at": "2026-04-23T17:24:01.829Z",
+  "updated_at": "2026-05-08T13:10:45.581Z",
   "comment": {
     "text": "This is a button label or menu item. It allows a user to exit a room they are currently in.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2642,
+      "line_number": 2705,
       "context": "disabled: !isAIAgent,\n },\n {\n id: \"option_leave-room\",\n key: \"leave-room\",\n label: isAIAgent ? t(\"LeaveTheAgent\") : t(\"LeaveTheRoom\"),\n icon: LeaveRoomSvgUrl,\n onClick: this.onLeaveRoom,\n disabled: isKnowledgeOrResult\n ? false\n : isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),",
       "module": "/packages/client"
     }

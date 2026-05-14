@@ -3,7 +3,7 @@
   "content": "When uploading a large amount of data, the context may be partially truncated, which can reduce the accuracy of responses. It’s recommended to limit the number of files and their total size.",
   "content_en_sha1_hash": "dce1181ee7a007698739a58027258d8d7383988c",
   "created_at": "2025-11-13T07:57:55.565Z",
-  "updated_at": "2026-04-12T21:44:02.745Z",
+  "updated_at": "2026-05-08T13:10:45.724Z",
   "comment": {
     "text": "This is a tooltip description that appears when a user attempts to attach a large number of files to an AI chat, warning about potential truncation and reduced response accuracy.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-input/attachment/index.tsx",
-      "line_number": 172,
+      "line_number": 170,
       "context": "title: t(\"SelectorFilesLimit\", {\n count: CHAT_MAX_FILE_COUNT,\n }),\n icon: <AttachmentReactSvg />,\n onClose: () => setWithInfo(!withInfo),\n description: t(\"SelectorFilesLimitDescription\"),\n }}\n renderInPortal\n />\n );\n };",
       "module": "/libs/ui-kit"
     }

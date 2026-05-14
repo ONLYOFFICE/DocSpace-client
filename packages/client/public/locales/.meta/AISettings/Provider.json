@@ -3,7 +3,7 @@
   "content": "Provider",
   "content_en_sha1_hash": "7ceee3f3615a2bbe4ce0ac5a269a311e4821daf4",
   "created_at": "2025-10-27T16:14:31.653Z",
-  "updated_at": "2026-04-23T17:24:01.915Z",
+  "updated_at": "2026-05-08T13:10:45.614Z",
   "comment": {
     "text": "This is a label for a field where users select or view an AI service provider. It appears in AI settings, either for knowledge base configuration or when managing individual AI providers.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/DefaultProvider.tsx",
-      "line_number": 367,
+      "line_number": 369,
       "context": "<div className={styles.defaultProviderForm}>\n <FieldContainer\n labelVisible\n isVertical\n labelText={t(\"AISettings:Provider\")}\n removeMargin\n hasError={!!defaultProviderModelsError}\n errorMessage={defaultProviderModelsError || \"\"}\n errorMessageWidth=\"100%\"\n >",
       "module": "/packages/client"
     },

@@ -3,7 +3,7 @@
   "content": "Settings",
   "content_en_sha1_hash": "c7f73bb54d928922c3838bb789ee9fb8a5b1eb37",
   "created_at": "2025-05-19T21:30:48.587Z",
-  "updated_at": "2026-04-27T12:45:07.467Z",
+  "updated_at": "2026-05-08T13:10:45.583Z",
   "comment": {
     "text": "This is a label for a button or a title for a dialog, indicating a section or action related to configuration options.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 707,
+      "line_number": 708,
       "context": "]);\n \n const currentTitle = React.useMemo(() => {\n if (isProfile) return t(\"Profile:MyProfile\");\n \n if (isSettingsPage) return t(\"Common:Settings\");\n \n if (isContactsPage) {\n switch (contactsTab) {\n case \"people\":\n return t(\"Common:Members\");",
       "module": "/packages/client"
     },
@@ -85,7 +85,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/sidebar/index.tsx",
-      "line_number": 233,
+      "line_number": 229,
       "context": "</Scrollbar>\n {showSettings && (\n <div className={styles.navBottom}>\n <SidebarNavItem\n id=\"forms-nav-settings\"\n label={t(\"Common:Settings\")}\n icon={SettingsReactSvgUrl}\n isActive={activeSection === FormsSection.Settings}\n onClick={onSettingsClick}\n showText={showText}\n />",
       "module": "/packages/sdk"
     },

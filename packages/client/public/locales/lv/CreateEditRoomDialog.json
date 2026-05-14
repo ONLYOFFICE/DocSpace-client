@@ -23,6 +23,7 @@
   "NeedMoreIntegrations": "Vai jums ir nepieciešamas vairāk integrāciju?",
   "NeedMoreIntegrationsDescription": "Izmantojiet webhooks, lai nosūtītu datus savā sistēmā, vai savienojiet ekrānbalstīšos formu ar tūkstošiem dienestiem caur Zapier.",
   "NoDatabaseConnections": "Nav konfigurēti datu bāzes savienojumi",
+  "NoDatabaseConnectionsRoomAdmin": "Databases savienojumi tiek konfigurēti administratora. Kad datubāze būs iestatīta, jūs varēsiet šeit aktivizēt eksportu.",
   "PeopleSelectorInfo": "Par telpas īpašnieku var kļūt tikai telpas administrators vai {{productName}} administrators",
   "Position": "Amats",
   "PublicRoomBarDescription": "Šī telpa ir pieejama ikvienam, kam ir saite. Piekļuve ārējiem lietotājiem tiek nodrošināta atkarībā no izvēlētā piekļuves tiesību veida.",
@@ -44,6 +45,5 @@
   "UserName": "Lietotājvārds",
   "ViewerInfo": "Informācija par skatītāju",
   "WatermarkPreview": "Ūdenszīmes priekšskatījums",
-  "WatermarkPreviewHelp": "Šis attēla priekšskatījums aptuveni parāda, kā ūdenszīme tiks parādīta jūsu failos.",
-  "NoDatabaseConnectionsRoomAdmin": "Databases savienojumi tiek konfigurēti administratora. Kad datubāze būs iestatīta, jūs varēsiet šeit aktivizēt eksportu."
+  "WatermarkPreviewHelp": "Šis attēla priekšskatījums aptuveni parāda, kā ūdenszīme tiks parādīta jūsu failos."
 }

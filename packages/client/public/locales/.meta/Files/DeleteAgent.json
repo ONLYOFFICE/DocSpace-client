@@ -3,7 +3,7 @@
   "content": "Delete agent",
   "content_en_sha1_hash": "7a10a4a6f851226bb23c4854cba9f735001c9f1b",
   "created_at": "2025-10-27T16:14:30.107Z",
-  "updated_at": "2026-04-23T17:24:02.079Z",
+  "updated_at": "2026-05-08T13:10:45.673Z",
   "comment": {
     "text": "This is a button label that appears in a context menu for an AI agent, allowing the user to remove it.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2683,
+      "line_number": 2746,
       "context": "id: \"option_delete\",\n key: \"delete\",\n label: isRootThirdPartyFolder\n ? t(\"Common:Disconnect\")\n : isAIAgent\n ? t(\"DeleteAgent\")\n : item.isTemplate\n ? t(\"Files:DeleteTemplateAction\")\n : item.isRoom\n ? t(\"Common:DeleteRoom\")\n : t(\"Common:Delete\"),",
       "module": "/packages/client"
     }

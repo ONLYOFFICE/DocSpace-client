@@ -1,0 +1,29 @@
+{
+  "key_path": "FormRoomResultsFolderNote",
+  "content": "The results folder will appear after the first form submission.",
+  "content_en_sha1_hash": "b09cd49589d0ecd06d371473d783ec9283125ccb",
+  "created_at": "2026-05-08T13:10:42.562Z",
+  "updated_at": "2026-05-08T19:46:45.003Z",
+  "comment": {
+    "text": "Informational text within a tooltip that appears when no results folder exists, explaining that the folder is created upon the first form submission.",
+    "is_auto": true,
+    "updated_at": "2026-05-08T13:14:25.127Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/sub-components/FormInfo/CollectionCard.tsx",
+      "line_number": 96,
+      "context": "disabled={!selection.resultsFolderId}\n />\n {!selection.resultsFolderId ? (\n <Tooltip anchorSelect=\"#complete-folder\" clickable>\n <Text>{t(\"InfoPanel:FormRoomNoSubmissionsYet\")}</Text>\n <Text>{t(\"InfoPanel:FormRoomResultsFolderNote\")}</Text>\n <LinkButton\n color=\"accent\"\n onClick={onFillForm}\n type={LinkType.page}\n className={styles.tooltipLink}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

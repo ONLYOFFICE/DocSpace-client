@@ -1,21 +1,23 @@
-const { ollamaConfig } = require("../config/config");
+const { ollamaConfig, openRouterConfig, lmstudioConfig } = require("../config/config");
 const fsUtils = require("../utils/fsUtils");
 const { verifyOllamaConnection } = require("../utils/ollamaUtils");
 const prompts = require("../prompts/translation");
 const {
+  isLMStudioModel,
   isOpenRouterModel,
   getProviderName,
   verifyConnection,
   listOllamaModels,
   listOpenRouterModels,
+  listLMStudioModels,
+  verifyLMStudioConnection,
   createStreamingChat,
   completionChat,
 } = require("../utils/llmProvider");
 
-// Add debugger to help diagnose connection issues
 const DEBUG = true;
 function debug(...args) {
-  if (DEBUG) console.log("[OLLAMA DEBUG]", ...args);
+  if (DEBUG) console.log("[LLM]", ...args);
 }
 
 // Active project translation jobs: jobId -> { cancelled: boolean }
@@ -60,6 +62,21 @@ async function routes(fastify, options) {
         debug(`Ollama error: ${error.message}`);
       }
 
+      // Try LM Studio
+      try {
+        debug(`Attempting to connect to LM Studio at: ${lmstudioConfig.apiUrl}`);
+        const isLMStudioConnected = await verifyLMStudioConnection();
+        if (isLMStudioConnected) {
+          const lmstudioModels = await listLMStudioModels();
+          debug(`LM Studio: retrieved ${lmstudioModels.length} models`);
+          allModels.push(...lmstudioModels);
+        } else {
+          debug("LM Studio: not available");
+        }
+      } catch (error) {
+        debug(`LM Studio error: ${error.message}`);
+      }
+
       // Try OpenRouter
       try {
         const openRouterModels = await listOpenRouterModels();
@@ -73,7 +90,7 @@ async function routes(fastify, options) {
         return reply.code(503).send({
           success: false,
           error: "No LLM providers available",
-          details: "Neither Ollama nor OpenRouter returned models",
+          details: "Neither Ollama, OpenRouter nor LM Studio returned models",
         });
       }
 
@@ -1102,32 +1119,22 @@ async function translateText(text, sourceLanguage, targetLanguage, model, keyCon
       throw new Error(`${getProviderName(model)} service is unavailable`);
     }
 
-    debug(
-      `Connecting to ${getProviderName(model)} for translation`,
-    );
-    debug(`Using model: ${model}`);
-    debug(
-      `Translating text of length ${text.length} from ${sourceInfo.name} (${sourceLanguage}) to ${targetInfo.name} (${targetLanguage})`,
-    );
-
-    // Generate translation using streaming with two-phase timeouts:
-    //   Phase 1 — "first token": reasoning models (gemma4, qwen3, deepseek-r1) think silently
-    //             for minutes before emitting any output. We wait up to firstTokenTimeout.
-    //   Phase 2 — "inactivity": once tokens are flowing, a short gap means a stall/disconnect.
+    const providerName = getProviderName(model);
+    debug(`[${providerName}] model=${model} | ${sourceInfo.name} (${sourceLanguage}) → ${targetInfo.name} (${targetLanguage}) | ${text.length} chars`);
     debug(`System prompt:\n${systemPrompt}\n\nUser prompt:\n${userPrompt}\n`);
-    debug("Sending translation request (streaming)...");
 
     // Emit prompts to UI debug panel before streaming starts
     debugEmit?.("translation:debug:prompt", { systemPrompt, userPrompt, targetLanguage, sourceLanguage });
-
-    // Create streaming chat via provider abstraction (Ollama or OpenRouter).
-    const providerName = getProviderName(model);
-    const inactivityMs = isOpenRouterModel(model)
-      ? (require("../config/config").openRouterConfig.inactivityTimeout)
-      : ollamaConfig.inactivityTimeout;
-    const firstTokenMs = isOpenRouterModel(model)
-      ? (require("../config/config").openRouterConfig.firstTokenTimeout)
-      : ollamaConfig.firstTokenTimeout;
+    const inactivityMs = isLMStudioModel(model)
+      ? lmstudioConfig.inactivityTimeout
+      : isOpenRouterModel(model)
+        ? openRouterConfig.inactivityTimeout
+        : ollamaConfig.inactivityTimeout;
+    const firstTokenMs = isLMStudioModel(model)
+      ? lmstudioConfig.firstTokenTimeout
+      : isOpenRouterModel(model)
+        ? openRouterConfig.firstTokenTimeout
+        : ollamaConfig.firstTokenTimeout;
 
     debug(`Step 1: creating ${providerName} stream for model ${model}...`);
 
@@ -1141,7 +1148,7 @@ async function translateText(text, sourceLanguage, targetLanguage, model, keyCon
       clearTimeout(activeTimeout);
       const ms = contentStarted ? inactivityMs : firstTokenMs;
       activeTimeout = setTimeout(() => {
-        debug(`${contentStarted ? "Inactivity" : "First-content"} timeout after ${ms}ms`);
+        debug(`[${providerName}] ${contentStarted ? "inactivity" : "first-content"} timeout after ${ms}ms — aborting`);
         abortFn?.();
       }, ms);
     };
@@ -1165,18 +1172,18 @@ async function translateText(text, sourceLanguage, targetLanguage, model, keyCon
       // Track raw Ollama stream for external abort (stop button)
       if (chatResult.raw) currentOllamaStream = chatResult.raw;
 
-      debug("Step 2: stream created, waiting for tokens...");
+      debug(`[${providerName}] stream created, waiting for tokens...`);
 
       // Start with firstTokenTimeout — covers cold-start + full reasoning phase
       activeTimeout = setTimeout(() => {
-        debug(`First-token timeout after ${firstTokenMs}ms`);
+        debug(`[${providerName}] first-token timeout after ${firstTokenMs}ms — aborting`);
         abortFn?.();
       }, firstTokenMs);
 
       for await (const chunk of chatResult.stream) {
         const thinkingToken = chunk.thinking || "";
         if (thinkingToken) {
-          if (tokenCount === 0) debug("Step 3: first thinking token received");
+          if (tokenCount === 0) debug(`[${providerName}] first thinking token received`);
           tokenCount++;
           fullThinking += thinkingToken;
           // Reset timer but stay on firstTokenMs — model is still reasoning
@@ -1187,7 +1194,7 @@ async function translateText(text, sourceLanguage, targetLanguage, model, keyCon
         const token = chunk.content || "";
         if (token) {
           if (!contentStarted) {
-            debug("Step 3: first content token received — switching to inactivity timeout");
+            debug(`[${providerName}] first content token received — switching to inactivity timeout`);
             contentStarted = true;
           }
           tokenCount++;
@@ -1210,7 +1217,7 @@ async function translateText(text, sourceLanguage, targetLanguage, model, keyCon
           debugEmit?.("translation:debug:token", { token, isThinking: isInlineThinking });
         }
       }
-      debug(`Step 4: stream done, ${tokenCount} tokens collected`);
+      debug(`[${providerName}] stream done, ${tokenCount} tokens collected`);
     } catch (streamError) {
       if (userAbortRequested) {
         userAbortRequested = false;
@@ -1232,14 +1239,45 @@ async function translateText(text, sourceLanguage, targetLanguage, model, keyCon
     }
 
     // Strip thinking tokens — both complete blocks and truncated ones (hit num_predict limit)
-    const cleanedResponse = fullResponse
+    let cleanedResponse = fullResponse
       .replace(/<think>[\s\S]*?<\/think>/gi, "") // complete: <think>...</think>
       .replace(/<think>[\s\S]*/gi, "")            // incomplete: <think>... (no closing tag)
       .trim();
 
     debug(`Cleaned response:\n${cleanedResponse}\n`);
 
-    // Emit final result to UI debug panel
+    // ── Fallback: reasoning-only model ────────────────────────────────────────
+    // Some reasoning-distilled models (e.g. certain Qwen3 variants in LM Studio)
+    // emit the entire output — including the final answer — inside the reasoning /
+    // thinking field and produce zero content tokens.
+    // Retry as a non-streaming completion with thinking suppressed via a system
+    // instruction so the model outputs the translation directly.
+    if (!cleanedResponse && thinkingText) {
+      debug("Reasoning-only response detected — retrying with thinking suppressed");
+      try {
+        const retryResult = await completionChat(
+          model,
+          [
+            {
+              role: "system",
+              content:
+                systemPrompt +
+                "\n\nIMPORTANT: Respond with the translated text ONLY. Do not think, reason, or explain.",
+            },
+            { role: "user", content: userPrompt },
+          ],
+          { temperature: 0, maxTokens: 512 },
+        );
+        cleanedResponse = (retryResult || "").trim();
+        if (cleanedResponse) {
+          debug(`Retry (thinking suppressed) result: "${cleanedResponse}"`);
+        }
+      } catch (retryErr) {
+        debug(`Retry failed: ${retryErr.message}`);
+      }
+    }
+
+    // Emit final result to UI debug panel (after fallback so it reflects the actual result)
     debugEmit?.("translation:debug:result", {
       result: cleanedResponse,
       thinkingText: thinkingText ?? null,
@@ -1250,7 +1288,11 @@ async function translateText(text, sourceLanguage, targetLanguage, model, keyCon
     }
 
     if (!cleanedResponse) {
-      throw new Error("Model returned empty response");
+      throw new Error(
+        "Model returned empty response. This appears to be a reasoning-only model " +
+        "that produces no output after thinking. Try a non-reasoning model or " +
+        "one that outputs text after the thinking phase.",
+      );
     }
 
     // ── Post-translation auto-fixes (best-effort, never reject) ─────────
@@ -1369,7 +1411,7 @@ async function translateText(text, sourceLanguage, targetLanguage, model, keyCon
       debugEmit?.("translation:debug:aborted", {});
     }
 
-    debug("Translation error details:", {
+    debug(`[${providerName}/${model}] Translation error details:`, {
       message: error.message,
       name: error.name,
       code: error.code,
@@ -1378,7 +1420,7 @@ async function translateText(text, sourceLanguage, targetLanguage, model, keyCon
       userPrompt,
     });
 
-    console.error("Translation error:", error);
+    console.error(`[LLM] Translation error [${providerName}/${model}]:`, error.message);
     throw error;
   }
 }
@@ -1558,8 +1600,7 @@ async function validateTranslation(
       throw new Error(`${getProviderName(model)} service is unavailable`);
     }
 
-    debug(`Using ${getProviderName(model)} model: ${model} for validation`);
-    debug("Sending validation request...");
+    debug(`[${getProviderName(model)}] model=${model} | validation: "${sourceText.substring(0, 60)}" → "${targetText.substring(0, 60)}"`);
 
     const response = await completionChat(
       model,
@@ -1617,13 +1658,8 @@ async function validateTranslation(
       };
     }
   } catch (error) {
-    debug("Validation error details:", {
-      message: error.message,
-      name: error.name,
-      code: error.code,
-      stack: error.stack,
-    });
-    console.error("Translation validation error:", error);
+    debug(`[${getProviderName(model)}/${model}] Validation error:`, error.message);
+    console.error(`[LLM] Validation error [${getProviderName(model)}/${model}]:`, error.message);
     throw error;
   }
 }

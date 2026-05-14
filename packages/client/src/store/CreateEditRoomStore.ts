@@ -23,11 +23,11 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React from "react";
-
 import { makeAutoObservable, when } from "mobx";
 import isEqual from "lodash/isEqual";
 import { TFunction } from "i18next";
+
+import { OPERATIONS_NAME } from "@docspace/ui-kit/constants";
 
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -46,10 +46,9 @@ import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { Nullable } from "@docspace/shared/types";
 import { TRoomIconParams, TRoomParams } from "@docspace/shared/utils/rooms";
 import { TRoom, TWatermark } from "@docspace/shared/api/rooms/types";
-import {
-  addServersForRoom,
-  deleteServersForRoom,
-} from "@docspace/shared/api/ai";
+import { addServersForRoom } from "@docspace/shared/api/ai";
+import { startDbSync } from "@docspace/shared/api/rooms";
+import { DbSyncService } from "@docspace/shared/services/db-sync.service";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
@@ -73,26 +72,6 @@ class CreateEditRoomStore {
 
   onClose: Nullable<VoidFunction> = null;
 
-  filesStore: Nullable<FilesStore> = null;
-
-  tagsStore: Nullable<TagsStore> = null;
-
-  selectedFolderStore: Nullable<SelectedFolderStore> = null;
-
-  filesActionsStore: Nullable<FilesActionsStore> = null;
-
-  thirdPartyStore: Nullable<ThirdPartyStore> = null;
-
-  settingsStore: Nullable<SettingsStore> = null;
-
-  currentQuotaStore: Nullable<CurrentQuotasStore> = null;
-
-  clientLoadingStore: Nullable<ClientLoadingStore> = null;
-
-  dialogsStore: Nullable<DialogsStore> = null;
-
-  avatarEditorDialogStore: Nullable<AvatarEditorDialogStore> = null;
-
   watermarksSettings: TWatermark = {} as TWatermark;
 
   initialWatermarksSettings: TWatermark | { enabled: boolean } =
@@ -103,29 +82,18 @@ class CreateEditRoomStore {
   selectedRoomType: Nullable<RoomsType> = null;
 
   constructor(
-    filesStore: FilesStore,
-    filesActionsStore: FilesActionsStore,
-    selectedFolderStore: SelectedFolderStore,
-    tagsStore: TagsStore,
-    thirdPartyStore: ThirdPartyStore,
-    settingsStore: SettingsStore,
-    currentQuotaStore: CurrentQuotasStore,
-    clientLoadingStore: ClientLoadingStore,
-    dialogsStore: DialogsStore,
-    avatarEditorDialogStore: AvatarEditorDialogStore,
+    public filesStore: FilesStore,
+    public filesActionsStore: FilesActionsStore,
+    public selectedFolderStore: SelectedFolderStore,
+    public tagsStore: TagsStore,
+    public thirdPartyStore: ThirdPartyStore,
+    public settingsStore: SettingsStore,
+    public currentQuotaStore: CurrentQuotasStore,
+    public clientLoadingStore: ClientLoadingStore,
+    public dialogsStore: DialogsStore,
+    public avatarEditorDialogStore: AvatarEditorDialogStore,
   ) {
     makeAutoObservable(this);
-
-    this.filesStore = filesStore;
-    this.tagsStore = tagsStore;
-    this.selectedFolderStore = selectedFolderStore;
-    this.filesActionsStore = filesActionsStore;
-    this.thirdPartyStore = thirdPartyStore;
-    this.settingsStore = settingsStore;
-    this.currentQuotaStore = currentQuotaStore;
-    this.clientLoadingStore = clientLoadingStore;
-    this.dialogsStore = dialogsStore;
-    this.avatarEditorDialogStore = avatarEditorDialogStore;
   }
 
   setSelectedRoomType = (type: RoomsType) => {
@@ -251,6 +219,9 @@ class CreateEditRoomStore {
     t: TFunction,
     newParams: TRoomParams,
     room: TRoom,
+    options?: {
+      cb?: (room: TRoom) => void;
+    },
   ) => {
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore!;
     const { cover, clearCoverProps } = this.dialogsStore!;
@@ -372,8 +343,10 @@ class CreateEditRoomStore {
         toastr.error(e as string);
       }
 
-      if (Object.keys(editRoomParams).length)
-        await api.rooms.editRoom(room.id, editRoomParams);
+      if (Object.keys(editRoomParams).length) {
+        const updatedRoom = await api.rooms.editRoom(room.id, editRoomParams);
+        options?.cb?.(updatedRoom);
+      }
 
       if (isOwnerChanged) {
         requests.push(changeRoomOwner(t, roomOwner.id));
@@ -401,6 +374,13 @@ class CreateEditRoomStore {
 
       if (requests.length) {
         await Promise.all(requests);
+      }
+
+      if (
+        (isSendFormToExternalDBChanged && sendFormToExternalDB) ||
+        (isSaveFormAsXLSXChanged && saveFormAsXLSX)
+      ) {
+        this.syncWithDatabase(room.id, t);
       }
     } catch (e) {
       toastr.error(e as string);
@@ -802,6 +782,80 @@ class CreateEditRoomStore {
 
       showInfoPanel();
       openMembersTab();
+    }
+  };
+
+  syncWithDatabase = async (roomId: number, t: TFunction) => {
+    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
+      this.filesActionsStore.uploadDataStore.secondaryProgressDataStore;
+
+    try {
+      const res = await startDbSync(roomId);
+
+      if (!res) return;
+
+      if (res.isCompleted) {
+        DbSyncService.assertTaskSucceeded(res);
+        toastr.success(t("Files:SyncWithDatabaseSuccess"));
+        return;
+      }
+
+      const basePayload = {
+        operation: OPERATIONS_NAME.syncDatabase,
+        label: t("Files:SyncWithDatabase"),
+        operationId: roomId,
+        showPanel: () => this.dialogsStore.setIsSyncDbPanelVisible(true),
+      };
+
+      setSecondaryProgressBarData({ ...basePayload, percent: 0 });
+
+      const finalTask = await DbSyncService.poll(roomId, (progress) => {
+        setSecondaryProgressBarData({
+          ...basePayload,
+          percent: progress.percentage ?? 0,
+          completed: progress.isCompleted ?? false,
+          alert: false,
+        });
+      }).catch((error) => {
+        clearSecondaryProgressData(roomId, OPERATIONS_NAME.syncDatabase);
+        throw error;
+      });
+
+      this.dialogsStore.setSyncDbForms({
+        operationId: roomId,
+        forms: finalTask.forms,
+      });
+
+      const { forms } = finalTask;
+      const successCount = forms.filter((f) => f.success).length;
+      const errorCount = forms.filter((f) => !f.success && !!f.error).length;
+      const total = forms.length;
+      const pendingCount = total - successCount;
+
+      const statusLabel = t("Files:SyncWithDatabaseStatus", {
+        success: successCount,
+        total,
+      });
+      const pendingLabel =
+        pendingCount > 0
+          ? t("Files:SyncWithDatabasePending", { count: pendingCount })
+          : undefined;
+
+      setSecondaryProgressBarData({
+        ...basePayload,
+        label: statusLabel,
+        description: pendingLabel,
+        percent: 100,
+        completed: true,
+        alert: errorCount > 0,
+      });
+
+      if (errorCount === 0) {
+        toastr.success(t("Files:SyncWithDatabaseSuccess"));
+      }
+    } catch (error) {
+      toastr.error(t("Files:SyncWithDatabaseError"));
+      console.error(error);
     }
   };
 }

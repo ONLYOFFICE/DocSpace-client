@@ -24,6 +24,7 @@
   "FileCopied": "Plik został skopiowany",
   "FileCreated": "Plik został utworzony",
   "FileDeleted": "Plik został usunięty",
+  "FileDownloaded": "Plik pobrany",
   "FileMoved": "Plik został przeniesiony",
   "FileRestored": "Plik został przywrócony",
   "FileTrashed": "Plik został przeniesiony do kosza",
@@ -32,6 +33,7 @@
   "FolderCopied": "Katalog został skopiowany",
   "FolderCreated": "Katalog został utworzony",
   "FolderDeleted": "Katalog został usunięty",
+  "FolderDownloaded": "Pobrano folder",
   "FolderMoved": "Katalog został przeniesiony",
   "FolderRestored": "Katalog został przywrócony",
   "FolderTrashed": "Katalog został przeniesiony do kosza",
@@ -95,7 +97,5 @@
   "WebhookRemoved": "Webhook został usunięty",
   "Webhooks": "Webhooki",
   "WebhooksGuide": "Przewodnik po webhookach",
-  "WebhooksInfo": "Używaj webhooków do wykonywania niestandardowych działań po stronie dowolnej aplikacji lub witryny internetowej, z której korzystasz na podstawie różnych zdarzeń w {{organizationName}} {{productName}}.\nTutaj możesz tworzyć webhooki, zarządzać nimi, konfigurować je, a także przeglądać historię wszystkich webhooków, by zweryfikować ich wydajność.",
-  "FileDownloaded": "Plik pobrany",
-  "FolderDownloaded": "Pobrano folder"
+  "WebhooksInfo": "Używaj webhooków do wykonywania niestandardowych działań po stronie dowolnej aplikacji lub witryny internetowej, z której korzystasz na podstawie różnych zdarzeń w {{organizationName}} {{productName}}.\nTutaj możesz tworzyć webhooki, zarządzać nimi, konfigurować je, a także przeglądać historię wszystkich webhooków, by zweryfikować ich wydajność."
 }

@@ -23,6 +23,7 @@
   "NeedMoreIntegrations": "Potrzebujesz więcej integracji?",
   "NeedMoreIntegrationsDescription": "Wykorzystaj webhooki do wysyłania danych do własnego systemu lub podłącz formularze do tysięcy usług za pośrednictwem Zapier.",
   "NoDatabaseConnections": "Nie skonfigurowano połączeń z bazą danych",
+  "NoDatabaseConnectionsRoomAdmin": "Połączenia z bazami danych są konfigurowane przez administratora. Po skonfigurowaniu bazy danych będziesz mógł włączyć eksport tutaj.",
   "PeopleSelectorInfo": "Tylko administrator pokoju lub administrator {{productName}} może zostać właścicielem pokoju",
   "Position": "Pozycja",
   "PublicRoomBarDescription": "Ten pokój jest dostępny dla każdego, kto ma link. Dostęp dla użytkowników zewnętrznych jest przyznawany w zależności od wybranego typu praw dostępu.",
@@ -44,6 +45,5 @@
   "UserName": "Nazwa użytkownika",
   "ViewerInfo": "Dane osoby przeglądającej",
   "WatermarkPreview": "Podgląd znaku wodnego",
-  "WatermarkPreviewHelp": "Niniejszy podgląd obrazu pokazuje mniej więcej, jak znak wodny będzie wyświetlany w Twoich plikach.",
-  "NoDatabaseConnectionsRoomAdmin": "Połączenia z bazami danych są konfigurowane przez administratora. Po skonfigurowaniu bazy danych będziesz mógł włączyć eksport tutaj."
+  "WatermarkPreviewHelp": "Niniejszy podgląd obrazu pokazuje mniej więcej, jak znak wodny będzie wyświetlany w Twoich plikach."
 }

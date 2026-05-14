@@ -347,12 +347,26 @@ class DialogsStore {
 
   pauseSubmissionsDialogVisible = false;
 
+  askAIConnectDialogVisible = false;
+
+  /**
+   * @type {((res: string) => void) | null}
+   */
+  askAIConnectDialogCallback = null;
+
   /**
    * @type {(res:boolean)=>void | null}
    */
   pauseSubmissionsDialogCallback = null;
 
   roomGroups = [];
+
+  syncDbData = {
+    operationId: null,
+    forms: [],
+  };
+
+  isSyncDbPanelVisible = false;
 
   constructor(
     authStore,
@@ -1172,6 +1186,19 @@ class DialogsStore {
 
   deleteRoomGroup = async (groupId) => {
     await deleteRoomGroup(groupId);
+  };
+
+  setAskAIConnectDialogVisible = (visible, callback = null) => {
+    this.askAIConnectDialogVisible = visible;
+    this.askAIConnectDialogCallback = callback;
+  };
+
+  setSyncDbForms = (data) => {
+    this.syncDbData = data;
+  };
+
+  setIsSyncDbPanelVisible = (visible) => {
+    this.isSyncDbPanelVisible = visible;
   };
 }
 

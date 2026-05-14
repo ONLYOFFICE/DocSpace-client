@@ -3,7 +3,7 @@
   "content": "Actions",
   "content_en_sha1_hash": "c3cd636a585b20c40ac2df5ffb403e83cb2eef51",
   "created_at": "2025-05-19T21:30:42.878Z",
-  "updated_at": "2026-04-11T21:01:28.818Z",
+  "updated_at": "2026-05-08T13:10:45.495Z",
   "comment": {
     "text": "This is a button label that opens a menu of available actions for the current context, such as creating a new room or managing user settings.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 991,
+      "line_number": 992,
       "context": "warningIcon: isRoomStorageQuotaExceeded\n ? WarningQuotaExceededUrl\n : undefined,\n actions: isRoomsFolder\n ? t(\"Common:NewRoom\")\n : t(\"Common:Actions\"),\n contextMenu: t(\"Common:TitleShowFolderActions\"),\n infoPanel: t(\"Common:InfoPanel\"),\n }}\n withMenu={withMenu}\n onPlusClick={onPlusClick}",
       "module": "/packages/client"
     },

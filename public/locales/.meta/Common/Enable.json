@@ -3,7 +3,7 @@
   "content": "Enable",
   "content_en_sha1_hash": "20063ad9053289cecaa20ae630ed2dd758282a07",
   "created_at": "2025-05-19T21:30:44.923Z",
-  "updated_at": "2026-04-23T17:24:01.702Z",
+  "updated_at": "2026-05-08T13:10:45.532Z",
   "comment": {
     "text": "This is a button label. It appears in various contexts, such as enabling a backup service, changing a user's status, or activating an ad management setting.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/backup/BackupPage.tsx",
-      "line_number": 220,
-      "context": "className={styles.backupButton}\n size={ButtonSize.small}\n label={\n !isFreeTariff\n ? t(\"EnablePaidBackup\")\n : t(\"Enable\")\n }\n onClick={handleToggleChange}\n isDisabled={isDisabled}\n primary\n scale",
+      "line_number": 218,
+      "context": "</>\n ) : (\n <Button\n className={styles.backupButton}\n size={ButtonSize.small}\n label={!isFreeTariff ? t(\"EnablePaidBackup\") : t(\"Enable\")}\n onClick={handleToggleChange}\n isDisabled={isDisabled}\n primary\n scale\n />",
       "module": "/libs/ui-kit"
     },
     {
@@ -43,7 +43,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/sub-components/ExternalDbModal/ExternalDbModal.tsx",
-      "line_number": 221,
+      "line_number": 222,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n scale\n label={t(\"Common:Enable\")}\n type=\"submit\"\n isDisabled={!isValid || externalLoading || connected === false}\n isLoading={externalLoading}\n />\n <Button",
       "module": "/packages/client"
     },

@@ -3,7 +3,7 @@
   "content": "Empty archive",
   "content_en_sha1_hash": "a34ca8c2e425ac975dd4ded311c4e04ac532fd9f",
   "created_at": "2025-05-19T21:30:55.267Z",
-  "updated_at": "2026-04-23T17:24:02.056Z",
+  "updated_at": "2026-05-08T13:10:45.665Z",
   "comment": {
     "text": "This is a button label for an action to restore all items from the archive. It appears when the user is viewing the archive and wants to move all archived files and folders back to their original locations.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1782,
+      "line_number": 1785,
       "context": "if (isArchiveFolder) {\n return [\n {\n id: \"header_option_empty-archive\",\n key: \"empty-archive\",\n label: t(\"ArchiveAction\"),\n onClick: this.onEmptyTrashAction,\n disabled: !canDeleteAll,\n icon: ClearTrashReactSvgUrl,\n },\n {",
       "module": "/packages/client"
     }

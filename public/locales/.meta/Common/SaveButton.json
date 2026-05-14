@@ -3,7 +3,7 @@
   "content": "Save",
   "content_en_sha1_hash": "efc007a393f66cdb14d57d385822a3d9e36ef873",
   "created_at": "2025-05-19T21:30:48.300Z",
-  "updated_at": "2026-04-23T17:24:01.668Z",
+  "updated_at": "2026-05-08T13:10:45.508Z",
   "comment": {
     "text": "Button label or dialog header. It confirms and applies changes, such as renaming a chat or saving export settings.",
     "is_auto": true,
@@ -67,7 +67,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditGroupDialog/EditGroupDialog.tsx",
-      "line_number": 237,
+      "line_number": 238,
       "context": "<ModalDialog.Footer>\n <Button\n id=\"edit-group-modal_submit\"\n testId=\"edit_group_save_button\"\n tabIndex={5}\n label={t(\"Common:SaveButton\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={onEditGroup}\n isDisabled={!hasChanges || notEnoughParamsToEdit}",
       "module": "/packages/client"
     },
@@ -139,7 +139,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/DefaultProvider.tsx",
-      "line_number": 443,
+      "line_number": 445,
       "context": "<div className={styles.defaultProviderFormButtons}>\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"Common:SaveButton\")}\n scale={false}\n onClick={onSave}\n isLoading={isSaveRequestRunning}\n isDisabled={isDisabled || isSaveDisabled}\n testId=\"default-provider-save-button\"",
       "module": "/packages/client"
     },

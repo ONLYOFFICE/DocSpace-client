@@ -3,7 +3,7 @@
   "content": "No external links",
   "content_en_sha1_hash": "ff672adde427c15e2c3387c1d27fc7212794d3f5",
   "created_at": "2025-05-19T21:30:55.908Z",
-  "updated_at": "2026-04-23T17:24:02.052Z",
+  "updated_at": "2026-05-08T13:10:45.662Z",
   "comment": {
     "text": "This is a label for an option in a context menu. It indicates that no external links are present or enabled for the selected item.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1050,
+      "line_number": 1053,
       "context": "//         linksArray = [\n //           {\n //             id: \"no-external-links-option\",\n //             key: \"no-external-links\",\n //             label: !links.length\n //               ? t(\"Files:NoExternalLinks\")\n //               : t(\"Files:AllLinksAreDisabled\"),\n //             disableColor: true,\n //           },\n //           !isMobile && {\n //             key: \"separator0\",",
       "module": "/packages/client"
     }

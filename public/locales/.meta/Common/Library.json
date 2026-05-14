@@ -3,7 +3,7 @@
   "content": "Library",
   "content_en_sha1_hash": "b8100f5ba8bd048a7cf11d116fbbd73130c3c6f5",
   "created_at": "2026-03-26T08:26:36.907Z",
-  "updated_at": "2026-04-27T12:45:07.558Z",
+  "updated_at": "2026-05-08T13:10:45.717Z",
   "comment": {
     "text": "This is a label for a section in the Forms module, referring to a collection of form templates. It appears as a navigation item in the sidebar and as a header title when the \"Library\" section is active.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/sidebar/index.tsx",
-      "line_number": 203,
-      "context": "{showLibrary && (\n <>\n <div style={{ height: \"12px\", flexShrink: 0 }} />\n <SidebarNavItem\n id=\"forms-nav-library\"\n label={t(\"Common:Library\")}\n icon={TemplateGalleryReactSvgUrl}\n isActive={activeSection === FormsSection.Library}\n onClick={() => {\n if (activeSection === FormsSection.Library) {\n // Navigate to library root (country list)",
+      "line_number": 204,
+      "context": "{showLibrary && (\n <>\n <div style={{ height: \"12px\", flexShrink: 0 }} />\n <SidebarNavItem\n id=\"forms-nav-library\"\n label={t(\"Common:Library\")}\n icon={TemplateGalleryReactSvgUrl}\n isActive={activeSection === FormsSection.Library}\n onClick={() => {\n if (activeSection === FormsSection.Library) {\n const rid = searchParams.get(\"roomId\") ?? \"\";",
       "module": "/packages/sdk"
     },
     {

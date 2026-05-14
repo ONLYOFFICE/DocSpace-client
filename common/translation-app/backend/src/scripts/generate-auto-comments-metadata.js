@@ -20,10 +20,12 @@ const {
   projectLocalesMap,
   ollamaConfig,
   openRouterConfig,
+  lmstudioConfig,
 } = require("../config/config");
 const {
   createStreamingChat,
   verifyConnection,
+  isLMStudioModel,
   isOpenRouterModel,
   getProviderName,
   FatalProviderError,
@@ -51,20 +53,25 @@ const MODEL = modelArg
     : (openRouterConfig.apiKey
         ? openRouterConfig.commentModel || openRouterConfig.model
         : null) ||
+      (lmstudioConfig.model
+        ? `lmstudio:${lmstudioConfig.commentModel || lmstudioConfig.model}`
+        : null) ||
       process.env.OLLAMA_DEFAULT_MODEL ||
       "gemma4:26b";
 
 const PROVIDER_NAME = USE_CLAUDE_CODE
   ? "claude-code"
-  : isOpenRouterModel(MODEL)
-    ? "openrouter"
-    : "ollama";
+  : isLMStudioModel(MODEL)
+    ? "lmstudio"
+    : isOpenRouterModel(MODEL)
+      ? "openrouter"
+      : "ollama";
 console.log(`Provider: ${PROVIDER_NAME}`);
 if (CONCURRENCY > 1) console.log(`Concurrency: ${CONCURRENCY}`);
 console.log(`Model: ${MODEL}`);
-if (!openRouterConfig.apiKey && !modelArg && !USE_CLAUDE_CODE) {
+if (!openRouterConfig.apiKey && !lmstudioConfig.model && !modelArg && !USE_CLAUDE_CODE) {
   console.log(
-    "Note: OPENROUTER_API_KEY not set — using Ollama. Set it in .env or use --provider=claude-code.",
+    "Note: OPENROUTER_API_KEY not set and LMSTUDIO_MODEL not configured — using Ollama. Set one in .env or use --provider=claude-code.",
   );
 }
 

@@ -59,7 +59,7 @@ const PluginSDK = ({
 
   const isMobile = currentDeviceType === "mobile";
 
-  const icon = !theme.isBase ? <GithubLight /> : <GithubDark />;
+  const icon = theme.isBase ? <GithubLight /> : <GithubDark />;
 
   const getPluginList = () => {
     if (isLoading) {
@@ -130,7 +130,9 @@ const PluginSDK = ({
         fontWeight={400}
         lineHeight="20px"
       >
-        {t("PluginSDKDescription", { productName: getBrandName("ProductName") })}
+        {t("PluginSDKDescription", {
+          productName: getBrandName("ProductName"),
+        })}
       </Text>
       <Text
         className="description"
@@ -174,3 +176,4 @@ export default inject(({ pluginStore, settingsStore }) => {
     apiPluginSDKLink,
   };
 })(observer(PluginSDK));
+

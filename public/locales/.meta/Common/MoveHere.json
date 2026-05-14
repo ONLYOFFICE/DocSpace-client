@@ -3,7 +3,7 @@
   "content": "Move here",
   "content_en_sha1_hash": "d6f5b75c92e201012666c9d9865972c786decb4e",
   "created_at": "2025-05-19T21:30:46.622Z",
-  "updated_at": "2026-04-23T17:24:01.668Z",
+  "updated_at": "2026-05-08T13:10:45.508Z",
   "comment": {
     "text": "This is a button label that appears in file selection dialogs, indicating that the selected files or folders will be moved to the current location.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/docs-layout/index.tsx",
-      "line_number": 101,
+      "line_number": 102,
       "context": "filesFilter: string;\n };\n \n const getSubmitLabel = (mode: SelectorMode, t: (key: string) => string) => {\n if (mode === \"copy\") return t(\"Common:CopyHere\");\n if (mode === \"move\") return t(\"Common:MoveHere\");\n return t(\"Common:RestoreHere\");\n };\n \n const DocsLayoutInner = observer(({\n folders,",
       "module": "/packages/sdk"
     }

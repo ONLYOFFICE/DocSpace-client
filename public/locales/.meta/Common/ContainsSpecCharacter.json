@@ -3,7 +3,7 @@
   "content": "The title can't contain any of the following characters: *+:\"<>?|/",
   "content_en_sha1_hash": "2988d94a573dbf375e5668150d952ca1022bdb80",
   "created_at": "2025-05-26T07:15:41.554Z",
-  "updated_at": "2026-04-23T17:24:01.670Z",
+  "updated_at": "2026-05-08T13:10:45.509Z",
   "comment": {
     "text": "This is an error message that appears when a user enters an invalid character in a title field, such as for a room or an agent.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/SetRoomParams.js",
-      "line_number": 523,
+      "line_number": 529,
       "context": "isWrongTitle={isWrongTitle}\n onFocus={() => setForceHideRoomTypeDropdown(true)}\n onBlur={() => setForceHideRoomTypeDropdown(false)}\n errorMessage={\n isWrongTitle\n ? t(\"Common:ContainsSpecCharacter\")\n : t(\"Common:RequiredField\")\n }\n onKeyUp={onKeyUp}\n isAutoFocussed\n dataTestId=\"create_edit_room_input\"",
       "module": "/packages/client"
     },

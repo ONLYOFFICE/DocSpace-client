@@ -152,7 +152,9 @@ async function Page(props: RootPageProps) {
     }
   }
 
-  const deepLinkSettings = isSDK ? null : await getDeepLinkSettings();
+  const isEmbedded = editorType === "embedded";
+  const deepLinkSettings =
+    isSDK || isEmbedded ? null : await getDeepLinkSettings();
 
   if (data.error?.status === "not-found" && error) {
     data.error.message = error;

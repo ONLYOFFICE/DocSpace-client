@@ -3,7 +3,7 @@
   "content": "Upload files",
   "content_en_sha1_hash": "41aca16f905ad31d0eec695b710915a4892e116f",
   "created_at": "2026-04-03T21:51:34.730Z",
-  "updated_at": "2026-04-23T17:24:01.617Z",
+  "updated_at": "2026-05-08T13:10:45.492Z",
   "comment": {
     "text": "This is a button label that initiates the process of uploading files to the system.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3636,
+      "line_number": 3699,
       "context": "icon: CatalogFolderReactSvgUrl,\n };\n \n const uploadFiles = {\n key: \"upload-files\",\n label: t(\"Common:UploadFiles\"),\n onClick: () => this.onUploadAction(\"file\"),\n icon: ActionsUploadReactSvgUrl,\n };\n \n const uploadFolder = {",
       "module": "/packages/client"
     },

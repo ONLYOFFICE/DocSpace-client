@@ -3,7 +3,7 @@
   "content": "Open location",
   "content_en_sha1_hash": "dbcca6bc5e893598b3c23f1313c9f5d1b45c0114",
   "created_at": "2025-05-19T21:30:55.927Z",
-  "updated_at": "2026-04-23T17:24:01.899Z",
+  "updated_at": "2026-05-08T13:10:45.599Z",
   "comment": {
     "text": "This is a tooltip for an icon button. It appears when hovering over the button, which opens the location of a file or folder.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2529,
+      "line_number": 2592,
       "context": "disabled: false,\n },\n {\n id: \"option_open-location\",\n key: \"open-location\",\n label: t(\"OpenLocation\"),\n icon: FolderLocationReactSvgUrl,\n onClick: () => this.onOpenLocation(item),\n disabled: !!item.requestToken,\n },\n {",
       "module": "/packages/client"
     }

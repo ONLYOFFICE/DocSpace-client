@@ -3,7 +3,7 @@
   "content": "Take a short tour",
   "content_en_sha1_hash": "f769ba61daddc3b54db23529401893568c14a110",
   "created_at": "2025-05-19T21:30:55.154Z",
-  "updated_at": "2026-04-23T17:24:01.827Z",
+  "updated_at": "2026-05-08T13:10:45.580Z",
   "comment": {
     "text": "This is the label for a button that starts a short tutorial or guided tour of the application's features, specifically related to form filling.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2622,
+      "line_number": 2685,
       "context": "disabled: false,\n },\n {\n id: \"option_short-tour\",\n key: \"short-tour\",\n label: t(\"FormFillingTipsDialog:WelcomeStartTutorial\"),\n icon: HelpCenterReactSvgUrl,\n onClick: () => this.onEnableFormFillingGuid(t, item.roomType),\n disabled:\n isArchive ||\n !isFormRoom ||",
       "module": "/packages/client"
     }

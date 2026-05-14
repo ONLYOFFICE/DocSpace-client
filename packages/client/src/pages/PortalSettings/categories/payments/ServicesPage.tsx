@@ -74,10 +74,10 @@ const ServicesPage = (props: ServicesPageProps) => {
   return (
     <BillingRoot config={paymentConfig}>
       {pathname.includes("ai-services") ? (
-        <AiPage getAIConfig={getAIConfig} />
+        <AiPage getAIConfig={getAIConfig} withBottomMargin={true}/>
       ) : null}
-      {pathname.includes("backup") ? <BackupPage /> : null}
-      {pathname.includes("disk-storage") ? <AdditionalStoragePage /> : null}
+      {pathname.includes("backup") ? <BackupPage withBottomMargin={true}/> : null}
+      {pathname.includes("disk-storage") ? <AdditionalStoragePage withBottomMargin={true}/> : null}
     </BillingRoot>
   );
 };

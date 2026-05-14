@@ -3,7 +3,7 @@
   "content": "Order Summary",
   "content_en_sha1_hash": "c7df8a995aa048f4bc07a628c4b3a898c733cb7a",
   "created_at": "2026-04-10T13:53:45.537Z",
-  "updated_at": "2026-04-13T14:59:06.022Z",
+  "updated_at": "2026-05-08T13:10:45.736Z",
   "comment": {
     "text": "This is a section title for a summary of an order, likely for additional storage, appearing on a payment or billing page.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
-      "line_number": 175,
+      "line_number": 187,
       "context": ": t(\"LessThanOneDay\");\n \n return (\n <div className={styles.orderSummaryWrapper}>\n <Text fontWeight=\"700\" fontSize=\"16px\">\n {t(\"OrderSummary\")}\n </Text>\n <div className={styles.summaryCard}>\n <div className={styles.summaryContent}>\n {!isNewSubscription ? (\n <div className={styles.summaryRow}>",
       "module": "/libs/ui-kit"
     }

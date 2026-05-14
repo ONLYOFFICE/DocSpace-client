@@ -257,7 +257,7 @@ test.describe("MCP servers", () => {
     const deleteItem = page.getByTestId("delete_item");
     await deleteItem.click();
 
-    const deleteMcpDialog = page.getByRole("dialog");
+    const deleteMcpDialog = page.getByRole("dialog").filter({ hasText: "Delete server" });
     await expect(deleteMcpDialog).toBeVisible();
     await expect(deleteMcpDialog).toContainText("Delete server");
 
@@ -412,7 +412,7 @@ test.describe("MCP servers", () => {
     const toggleButton = firstCustomMcpTile.getByTestId("mcp-toggle-button");
     await toggleButton.click();
 
-    const disableDialog = page.getByRole("dialog");
+    const disableDialog = page.getByRole("dialog").filter({ hasText: "Disable server" });
     await expect(disableDialog).toBeVisible();
 
     const dialogConfirmButton = disableDialog.getByTestId("disable-mcp-button");

@@ -23,6 +23,7 @@
   "NeedMoreIntegrations": "Wilt u meer integraties?",
   "NeedMoreIntegrationsDescription": "Gebruik webhooks om gegevens naar uw eigen systeem te sturen, of verbind formulieren met duizenden diensten via Zapier.",
   "NoDatabaseConnections": "Geen databaseverbindingen geconfigureerd",
+  "NoDatabaseConnectionsRoomAdmin": "Databaseverbindingen worden door een beheerder geconfigureerd. Zodra een database is ingesteld, kunt u de export hier inschakelen.",
   "PeopleSelectorInfo": "Alleen een kamer beheerder of een {{productName}} beheerder kan de eigenaar van de kamer worden.",
   "Position": "Positie",
   "PublicRoomBarDescription": "Deze kamer is voor iedereen met de link beschikbaar. Toegang voor externe gebruikers is afhankelijk van het geselecteerde type toegangsrechten.",
@@ -44,6 +45,5 @@
   "UserName": "Gebruikersnaam",
   "ViewerInfo": "Kijker info",
   "WatermarkPreview": "Voorbeeld Watermerk",
-  "WatermarkPreviewHelp": "Dit voorbeeld van de afbeelding laat ongeveer zien hoe het watermerk in uw bestanden zal worden weergegeven.",
-  "NoDatabaseConnectionsRoomAdmin": "Databaseverbindingen worden door een beheerder geconfigureerd. Zodra een database is ingesteld, kunt u de export hier inschakelen."
+  "WatermarkPreviewHelp": "Dit voorbeeld van de afbeelding laat ongeveer zien hoe het watermerk in uw bestanden zal worden weergegeven."
 }

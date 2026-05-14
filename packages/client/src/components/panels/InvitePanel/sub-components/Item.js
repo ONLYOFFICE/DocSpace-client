@@ -33,6 +33,8 @@ import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 
 import { useState, useEffect, useCallback } from "react";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes/globalColors";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
@@ -79,7 +81,6 @@ const Item = ({
 	t,
 	item,
 	index,
-	theme,
 	setInviteItems,
 	inviteItems,
 	changeInviteItem,
@@ -96,6 +97,8 @@ const Item = ({
 	style,
 	allowInvitingGuests,
 }) => {
+	const { isBase } = useTheme();
+
 	const {
 		avatar,
 		displayName,
@@ -356,7 +359,7 @@ const Item = ({
 						}
 						openOnClick={false}
 						size={16}
-						color={theme.infoPanel.errorColor}
+						color={isBase ? globalColors.lightErrorStatus : globalColors.darkErrorStatus}
 					/>
 					<DeleteIcon
 						className={classNames(styles.rowIcons, {

@@ -54,6 +54,11 @@ export function unregisterUnlockHandler(): void {
   _unlockHandler = null;
 }
 
+const pendingUnlocks = new Map<
+  string,
+  Promise<IdentityKeyPair | null>
+>();
+
 function isExpired(entry: CacheEntry): boolean {
   return Date.now() - entry.lastUsedAt > SESSION_CACHE_DURATION_MS;
 }
@@ -121,6 +126,9 @@ export async function requireUnlock(
   const cached = SecretStorage.getCached(userId);
   if (cached) return cached;
 
+  const inFlight = pendingUnlocks.get(userId);
+  if (inFlight) return inFlight;
+
   if (!_unlockHandler) {
     if (typeof console !== "undefined") {
       console.warn(
@@ -138,11 +146,20 @@ export async function requireUnlock(
     return "expired";
   })();
 
-  const kp = await _unlockHandler(reason, userId);
-  if (!kp) return null;
+  const handler = _unlockHandler;
+  const promise = (async () => {
+    try {
+      const kp = await handler(reason, userId);
+      if (!kp) return null;
+      if (!SecretStorage.hasUnlocked(userId)) {
+        SecretStorage.cacheUnlocked(userId, kp);
+      }
+      return kp;
+    } finally {
+      pendingUnlocks.delete(userId);
+    }
+  })();
 
-  if (!SecretStorage.hasUnlocked(userId)) {
-    SecretStorage.cacheUnlocked(userId, kp);
-  }
-  return kp;
+  pendingUnlocks.set(userId, promise);
+  return promise;
 }

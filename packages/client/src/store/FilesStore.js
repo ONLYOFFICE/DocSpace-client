@@ -1851,7 +1851,8 @@ class FilesStore {
           (data.current.roomType === RoomsType.PublicRoom ||
             data.current.roomType === RoomsType.FormRoom ||
             data.current.roomType === RoomsType.CustomRoom) &&
-          !this.publicRoomStore.isPublicRoom
+          !this.publicRoomStore.isPublicRoom &&
+          !data.current.private
         ) {
           await this.publicRoomStore.getExternalLinks(data.current.id);
         }

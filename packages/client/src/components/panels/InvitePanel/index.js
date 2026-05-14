@@ -42,7 +42,7 @@ import {
 } from "@docspace/shared/enums";
 import { LOADER_TIMEOUT, OPERATIONS_NAME } from "@docspace/shared/constants";
 import uniqueid from "lodash/uniqueId";
-import { addMembersToEncryptedRoom } from "SRC_DIR/helpers/roomEncryption";
+import { addMembersToEncryptedRoom } from "@docspace/shared/services/encryption/roomEncryption";
 import { requireUnlock } from "@docspace/shared/services/encryption/secretStorage";
 
 import { Button } from "@docspace/ui-kit/components/button";
@@ -425,6 +425,27 @@ const InvitePanel = ({
     try {
       setIsLoading(true);
       const isRooms = roomId !== -1;
+      const isPrivateInvite = isRooms && !!selectedRoom?.private;
+
+      const newMembers = isPrivateInvite
+        ? inviteItems
+            .filter((item) => item.id && !item.isGroup)
+            .map((item) => ({
+              id: item.id,
+              displayName: item.displayName || item.email,
+            }))
+        : [];
+
+      let identity = null;
+      if (isPrivateInvite && newMembers.length > 0) {
+        identity = await requireUnlock(String(currentUserId));
+        if (!identity) {
+          setIsLoading(false);
+          toastr.error(t("Common:EncryptionLockedAddMembers"));
+          return;
+        }
+      }
+
       const result = !isRooms
         ? await api.people.inviteUsers(data)
         : await api.rooms.setRoomSecurity(roomId, data);
@@ -435,87 +456,101 @@ const InvitePanel = ({
       setIsLoading(false);
 
       onClose();
-      toastr.success(t("Common:UsersInvited"));
+
+      if (!isPrivateInvite) {
+        toastr.success(t("Common:UsersInvited"));
+      }
 
       if (result?.warning) {
         toastr.warning(result?.warning);
       }
 
-      if (isRooms && selectedRoom?.private) {
-        const newMemberIds = inviteItems
-          .filter((item) => item.id && !item.isGroup)
-          .map((item) => ({ id: item.id }));
+      if (isPrivateInvite && identity && newMembers.length > 0) {
+        const operationId = uniqueid("operation_");
 
-        if (newMemberIds.length > 0) {
-          const operationId = uniqueid("operation_");
+        setSecondaryProgressBarData({
+          operation: OPERATIONS_NAME.roomReencryption,
+          percent: 0,
+          operationId,
+        });
 
-          setSecondaryProgressBarData({
-            operation: OPERATIONS_NAME.roomReencryption,
-            percent: 0,
-            operationId,
-          });
+        addMembersToEncryptedRoom(roomId, newMembers, {
+          currentUserId: String(currentUserId),
+          identity,
+          onProgress: (processed, total) => {
+            const percent = Math.floor((processed / total) * 100);
+            setSecondaryProgressBarData({
+              operation: OPERATIONS_NAME.roomReencryption,
+              percent,
+              operationId,
+            });
+          },
+        })
+          .then(({ fileResults, skippedMembers }) => {
+            const failures = fileResults.filter((r) => !r.success);
+            const hasAlert =
+              failures.length > 0 || skippedMembers.length > 0;
+            setSecondaryProgressBarData({
+              operation: OPERATIONS_NAME.roomReencryption,
+              percent: 100,
+              completed: true,
+              alert: hasAlert,
+              operationId,
+            });
 
-          requireUnlock(String(currentUserId))
-            .then((identity) => {
-              if (!identity) {
-                setSecondaryProgressBarData({
-                  operation: OPERATIONS_NAME.roomReencryption,
-                  percent: 100,
-                  completed: true,
-                  alert: true,
-                  operationId,
-                });
-                toastr.error(t("Common:EncryptionLockedAddMembers"));
-                return null;
-              }
-              return addMembersToEncryptedRoom(roomId, newMemberIds, {
-                currentUserId: String(currentUserId),
-                identity,
-                onProgress: (processed, total) => {
-                  const percent = Math.floor((processed / total) * 100);
-                  setSecondaryProgressBarData({
-                    operation: OPERATIONS_NAME.roomReencryption,
-                    percent,
-                    operationId,
-                  });
-                },
-              });
-            })
-            .then((results) => {
-              if (results === null) return;
-              const failures = results.filter((r) => !r.success);
-              setSecondaryProgressBarData({
-                operation: OPERATIONS_NAME.roomReencryption,
-                percent: 100,
-                completed: true,
-                alert: failures.length > 0,
-                operationId,
-              });
-              if (failures.length > 0) {
+            if (skippedMembers.length > 0) {
+              const formatName = (m) =>
+                m.displayName ||
+                newMembers.find((n) => n.id === m.id)?.displayName ||
+                m.id;
+              const noKeyNames = skippedMembers
+                .filter((m) => m.reason === "no-key")
+                .map(formatName);
+              const mismatchNames = skippedMembers
+                .filter((m) => m.reason === "key-mismatch-refused")
+                .map(formatName);
+              if (noKeyNames.length > 0) {
                 toastr.warning(
-                  t("Common:EncryptedReencryptPartialFailure", {
-                    count: failures.length,
+                  t("Common:EncryptedSkippedNoKeys", {
+                    users: noKeyNames.join(", "),
                   }),
                 );
-              } else if (results.length > 0) {
-                toastr.success(t("Common:EncryptedReencryptCompleted"));
               }
-            })
-            .catch((error) => {
-              console.error(
-                "Failed to re-encrypt file keys for new members:",
-                error,
+              if (mismatchNames.length > 0) {
+                toastr.warning(
+                  t("Common:EncryptedSkippedKeyMismatch", {
+                    users: mismatchNames.join(", "),
+                  }),
+                );
+              }
+            }
+
+            if (failures.length > 0) {
+              toastr.warning(
+                t("Common:EncryptedReencryptPartialFailure", {
+                  count: failures.length,
+                }),
               );
-              toastr.error(t("Common:EncryptedReencryptFailed"));
-              setSecondaryProgressBarData({
-                operation: OPERATIONS_NAME.roomReencryption,
-                percent: 100,
-                completed: true,
-                alert: true,
-                operationId,
-              });
+            } else if (skippedMembers.length === 0) {
+              toastr.success(t("Common:UsersInvited"));
+            }
+          })
+          .catch((error) => {
+            console.error(
+              "Failed to re-encrypt file keys for new members:",
+              error,
+            );
+            toastr.error(t("Common:EncryptedReencryptFailed"));
+            setSecondaryProgressBarData({
+              operation: OPERATIONS_NAME.roomReencryption,
+              percent: 100,
+              completed: true,
+              alert: true,
+              operationId,
             });
-        }
+          });
+      } else if (isPrivateInvite) {
+        toastr.success(t("Common:UsersInvited"));
       }
 
       updateInfoPanelMembers();

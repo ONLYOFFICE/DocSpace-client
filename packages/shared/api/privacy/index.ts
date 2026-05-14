@@ -88,6 +88,14 @@ export async function getFileAccessKeys(fileId: string | number) {
   return res;
 }
 
+export async function getRoomEncryptionKeys(roomId: string | number) {
+  const res = (await request({
+    method: "get",
+    url: `privacyroom/${roomId}/access`,
+  })) as TEncryptionKeyPair[];
+  return res ?? [];
+}
+
 export async function getFilePublicKeys(fileId: string | number) {
   const res = (await request({
     method: "get",

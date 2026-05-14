@@ -41,6 +41,9 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { validateMembersForEncryption } from "@docspace/shared/services/encryption/roomEncryption";
 import styles from "./ChangeRoomOwnerPanel.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
@@ -74,12 +77,44 @@ const ChangeRoomOwner = (props) => {
     newFooterInputValue,
     isChecked,
   ) => {
-    if (showBackButton) {
-      onOwnerChange && onOwnerChange(user[0]);
-    } else {
-      await changeRoomOwner(t, user[0]?.id, isChecked);
-      updateInfoPanelMembers();
+    const candidate = user[0];
+    if (!candidate?.id) {
+      handleClosePanel();
+      return;
     }
+
+    if (showBackButton) {
+      onOwnerChange && onOwnerChange(candidate);
+      handleClosePanel();
+      return;
+    }
+
+    if (isPrivateRoom && roomId) {
+      const { skipped } = await validateMembersForEncryption(
+        Number(roomId),
+        [candidate.id],
+        String(userId),
+        undefined,
+        { [candidate.id]: candidate.label || candidate.displayName },
+      );
+      if (skipped.length > 0) {
+        const reason = skipped[0].reason;
+        const name =
+          skipped[0].displayName ||
+          candidate.label ||
+          candidate.displayName ||
+          candidate.id;
+        toastr.error(
+          reason === "no-key"
+            ? t("Common:EncryptedChangeOwnerNoKeys", { user: name })
+            : t("Common:EncryptedChangeOwnerKeyMismatch", { user: name }),
+        );
+        return;
+      }
+    }
+
+    await changeRoomOwner(t, candidate.id, isChecked);
+    updateInfoPanelMembers();
     handleClosePanel();
   };
 
@@ -100,9 +135,11 @@ const ChangeRoomOwner = (props) => {
   );
 
   const [excludeItems, setExcludeItems] = useState(baseExclude);
+  const [excludeReady, setExcludeReady] = useState(!isPrivateRoom);
 
   useEffect(() => {
     setExcludeItems(baseExclude);
+    setExcludeReady(!isPrivateRoom);
 
     if (!isPrivateRoom || !roomId) return undefined;
 
@@ -131,8 +168,12 @@ const ChangeRoomOwner = (props) => {
           .filter((id) => id && !memberIds.has(id));
         const merged = new Set([...baseExclude, ...nonMemberAdmins]);
         setExcludeItems([...merged]);
+        setExcludeReady(true);
       })
-      .catch(() => {});
+      .catch(() => {
+        if (cancelled) return;
+        setExcludeReady(true);
+      });
 
     return () => {
       cancelled = true;
@@ -158,7 +199,7 @@ const ChangeRoomOwner = (props) => {
     ? t("Files:LeaveTheAgent")
     : t("Files:LeaveTheRoom");
 
-  const selectorComponent = (
+  const selectorComponent = excludeReady ? (
     <PeopleSelector
       withCancelButton
       onCancel={handleClosePanel}
@@ -191,6 +232,10 @@ const ChangeRoomOwner = (props) => {
       className={styles.changeOwnerPeopleSelector}
       data-test-id="change_owner_people_selector"
     />
+  ) : (
+    <div className={styles.changeOwnerLoader}>
+      <Loader type={LoaderTypes.track} />
+    </div>
   );
 
   return useModal ? (

@@ -3,18 +3,19 @@
   "content": "Please eliminate the mismatch in the conflicting parameter to proceed or keep your active pricing plan.",
   "content_en_sha1_hash": "e14f7d4dcf13a0d0425ac585f4cff62e9d7a024f",
   "created_at": "2025-05-19T21:30:56.603Z",
-  "updated_at": "2026-04-07T19:35:05.068Z",
+  "updated_at": "2026-04-11T21:06:15.244Z",
   "comment": {
-    "text": "This translation key is used for a button that prompts users to resolve conflicts or discrepancies in their pricing plan settings. It appears on a dialog box that allows users to change their pricing plan and aims to encourage them to correct any issues before proceeding.",
+    "text": "This is an error message displayed in a dialog when a user attempts to change their pricing plan but there's a conflict with existing parameters. It instructs the user to resolve the conflict or retain their current plan.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:33.484Z"
+    "updated_at": "2026-04-11T21:06:15.244Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/ChangePricingPlanDialog/index.js",
-      "line_number": 98,
+      "file_path": "/libs/ui-kit/billing/dialogs/ChangePricingPlanDialog.tsx",
+      "line_number": 111,
       "context": "{planUsersLimitations}\n <br />\n {storagePlanLimitations}\n \n <Text fontSize=\"13px\" className={styles.saveOrChange}>\n {t(\"SaveOrChange\")}\n </Text>\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
-      "module": "/packages/client"
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {

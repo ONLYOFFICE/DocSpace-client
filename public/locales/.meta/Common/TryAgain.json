@@ -3,13 +3,32 @@
   "content": "Try again",
   "content_en_sha1_hash": "042c862e4467d7d057cced262e6869dd75c22b7d",
   "created_at": "2025-10-27T16:14:24.460Z",
-  "updated_at": "2026-04-07T21:04:01.259Z",
+  "updated_at": "2026-04-23T17:24:02.098Z",
   "comment": {
-    "text": "This key provides the text for a button that allows a user to retry a failed vectorization process. It appears as a \"Try again\" link, likely within a badge or alert indicating a previous failure. Translators should ensure the translation conveys a clear action to reattempt the operation.",
+    "text": "This is a button label that appears when an error occurs or a service is unavailable, allowing the user to retry the action or check availability.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:25:12.228Z"
+    "updated_at": "2026-04-11T20:40:22.974Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(chat)/error.tsx",
+      "line_number": 74,
+      "context": "<div style={containerStyle}>\n <p style={{ margin: 0, fontSize: \"14px\" }}>\n {t(\"Common:SomethingWentWrong\")}\n </p>\n <button type=\"button\" style={buttonStyle} onClick={reset}>\n {t(\"Common:TryAgain\")}\n </button>\n </div>\n );\n }",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/AIAgentForm.tsx",
+      "line_number": 312,
+      "context": "<div className={styles.statusRow}>\n <Text fontSize=\"12px\" fontWeight={400} color={globalColors.gray}>\n {t(\"Common:AIProvidersNotAvailable\")}\n </Text>\n <Button\n label={t(\"Common:TryAgain\")}\n size={ButtonSize.extraSmall}\n onClick={() => store.checkAiAvailability()}\n scale={false}\n />\n </div>",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/error.tsx",
+      "line_number": 74,
+      "context": "<div style={containerStyle}>\n <p style={{ margin: 0, fontSize: \"14px\" }}>\n {t(\"Common:SomethingWentWrong\")}\n </p>\n <button type=\"button\" style={buttonStyle} onClick={reset}>\n {t(\"Common:TryAgain\")}\n </button>\n </div>\n );\n }",
+      "module": "/packages/sdk"
+    },
     {
       "file_path": "/packages/shared/components/failed-vectorization-badge/index.tsx",
       "line_number": 78,

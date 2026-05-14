@@ -3,11 +3,12 @@
   "content": "The SMTP settings are needed to set up an email account which will be used to send notifications from the portal using your own SMTP server instead of the one {{organizationName}} uses. Please fill in all the fields and click the 'Save' button. You can use the 'Send Test Mail' button to check if all the settings you entered are correct and work as supposed.",
   "content_en_sha1_hash": "4bf36a3101ed85c6f1e5966715d026a0cf242ce9",
   "created_at": "2025-05-19T21:30:52.753Z",
-  "updated_at": "2026-04-09T00:55:32.598Z",
+  "updated_at": "2026-04-11T21:22:04.111Z",
   "comment": {
-    "text": "\"This translation key is used to describe the SMTP settings section, explaining its purpose and guiding users on how to set up their own email account for sending notifications. It appears in a UI component where users configure email settings.\"",
+    "text": "This is a descriptive text explaining the purpose of SMTP settings. It appears on the SMTP settings page and includes a variable `{{organizationName}}` which will be replaced by the name of the organization.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:25.190Z"
+    "updated_at": "2026-04-11T21:22:04.111Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -45,25 +46,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses the plural 'portálů' (portals) instead of the singular 'portálu' (portal) as in the English source.",
-          "suggestion": "SMTP nastavení je potřeba k nastavení emailového účtu, který bude sloužit k zasílání oznámení z portálu pomocí Vašeho vlastního SMTP serveru na rozdíl od toho, který používá {{organizationName}}. Prosím vyplňte všechna pole a klikněte na tlačítko \"Uložit\". Můžete použít funkci \"Odeslat Test Mail\", abyste zjistili, zda všechna nastavení, která jste zadali, fungují správně."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The first sentence in German is grammatically broken and conveys a nonsensical meaning: 'Die SMTP-Einstellungen müssen Ihr E-Mail-Konto einrichten' translates to 'The SMTP settings must set up your email account', whereas the English says the settings are *needed* to set up the account.",
-          "suggestion": "Die SMTP-Einstellungen werden benötigt, um ein E-Mail-Konto einzurichten, das verwendet wird, um Benachrichtigungen vom Portal mithilfe Ihres eigenen SMTP-Servers zu senden, anstatt des Servers, den {{organizationName}} verwendet. Bitte füllen Sie alle Felder aus und klicken Sie auf die Schaltfläche 'Speichern'. Sie können die Schaltfläche 'Test-E-Mail senden' verwenden, um zu prüfen, ob alle von Ihnen eingegebenen Einstellungen korrekt sind und wie vorgesehen funktionieren."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -99,25 +88,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Italian translation omits the phrase 'and work as supposed' at the end of the text, which is part of the instruction regarding the test mail functionality.",
-          "suggestion": "Le impostazioni SMTP ti permettono di configurare un account di posta elettronica che sarà usato per inviare le notifiche dal portale usando il proprio server SMTP invece di quello usato da {{organizationName}}. Compila tutti i campi e clicca sul pulsante 'Salva'. Puoi utilizzare il pulsante 'Invia messaggio di prova' per controllare se tutte le impostazioni inserite sono corrette e funzionano come previsto."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Japanese translation is missing the word 'Send' in the phrase 'Send Test Mail' button. It currently says 'テストメールを送信する'ボタン' (the 'Send test mail' button), which is slightly awkward and omits the specific button label name 'Send Test Mail' as a quoted entity.",
-          "suggestion": "SMTP設定は、{{organizationName}}が使用するSMTPサーバーの代わりに、あなた自身のSMTPサーバーを使用してポータルから通知を送信するために使用するメールアカウントを設定するために必要です。すべてのフィールドに入力し、「保存」ボタンをクリックしてください。「テストメールを送信」ボタンを使用して、入力したすべての設定が正しく、想定通りに動作するかどうかを確認することができます。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -129,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of 'portal' as 'ປະຕູ' (which means a physical door/gate) is contextually incorrect for software UI. In a digital context, 'portal' should be transliterated or translated as 'ພໍຕອນ' or 'ປະຕູທາງຜ່ານ'.",
-          "suggestion": "ການຕັ້ງຄ່າ SMTP ແມ່ນຈໍາເປັນເພື່ອຕັ້ງຄ່າບັນຊີອີເມວທີ່ຈະໃຊ້ເພື່ອສົ່ງການແຈ້ງເຕືອນຈາກພໍຕອນໂດຍໃຊ້ເຊີບເວີ SMTP ຂອງທ່ານເອງແທນທີ່ {{organizationName}}. ກະລຸນາຕື່ມຂໍ້ມູນໃສ່ໃນຊ່ອງຂໍ້ມູນທັງໝົດ ແລະກົດປຸ່ມ 'Save'. ທ່ານ​ສາ​ມາດ​ໃຊ້​ປຸ່ມ 'ສົ່ງ​ອີ​ເມລ​ທົດ​ສອບ​' ເພື່ອ​ກວດ​ກາ​ເບິ່ງ​ວ່າ​ການ​ຕັ້ງ​ຄ່າ​ທັງ​ຫມົດ​ທີ່​ທ່ານ​ໄດ້​ເຂົ້າ​ໄປ​ຖືກຕ້ອງ​ແລະ​ເຮັດ​ວຽກ​ຕາມ​ທີ່​ຄາດ​ວ່າ​."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -201,13 +172,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation contains several grammatical/morphological errors that affect clarity: 'који ће користи' (should be 'који ће се користити'), 'помоу' (typo for 'помоћу'), 'Поша тест имејл' (incorrect verb form/typo for 'Пошаљи'), and 'сва унета подења исправна' (missing verb 'су' and incorrect noun form).",
-          "suggestion": "SMTP подешавања су потребна за подешавање имејл налога који ће се користити за слање обавештења са портала помоћу вашег сопственог SMTP сервера уместо оног који {{organizationName}} користи. Молимо вас да попуните сва поља и кликнете на дугме „Сачувај“. Можете користити дугме „Пошаљи тест имејл“ да проверите да ли су сва унета подешавања исправна и раде како треба."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -219,13 +184,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'başın' is a typo/incorrect conjugation. It should be 'basın' (press/click). 'Başın' means 'your head' in Turkish.",
-          "suggestion": "SMTP ayarları {{organizationName}}'in kullandığının yerine kendi SMTP sunucunuzu kullanarak portalınızdan bildirim göndermek için eposta hesabınızı ayarlarken gerekli olacaktır. Lütfen tüm alanları doldurun ve 'Kaydet' tuşuna basın. 'Test Postası Gönder' tuşunu kullanarak girdğiniz tüm ayarların doğru olduğunu ve çalıştığını deneyebilirsiniz."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -243,13 +202,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase '以从从门户发送通知' contains a repetitive character error ('从从'), which makes the sentence grammatically incorrect and awkward in Chinese.",
-          "suggestion": "需要SMTP设置，以设置一个电子邮件账户，用于使用您自己的SMTP服务器，而非{{organizationName}}使用的SMTP服务器，从而从门户发送通知。请填写所有字段，然后单击“保存”按钮。您可以使用“发送测试邮件”按钮，以检查您输入的所有设置是否正确，并按预期工作。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

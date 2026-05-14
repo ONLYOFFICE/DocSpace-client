@@ -4,7 +4,6 @@
   "ChangeInstruction": "لتغيير مالك {{productName}}، يرجى اختيار اسم المالك الجديد أدناه.",
   "ChangeOwner": "تغيير مالك {{productName}}",
   "ChangeUser": "تغيير المستخدم",
-  "DeactivateOrDeletePortal": "قم بإلغاء تنشيط {{productName}} أو حذفه",
   "DoTheSame": "افعل نفس الشيء مثل المسؤولين",
   "ManagePortal": "إدارة تكوين {{productName}}",
   "ManageUser": "إدارة حسابات المستخدمين",

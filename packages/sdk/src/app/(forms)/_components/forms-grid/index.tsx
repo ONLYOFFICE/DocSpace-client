@@ -75,7 +75,11 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
     activeSection === FormsSection.InProgress && !inProgressFolder;
 
   const fileItems = React.useMemo(
-    () => items.map((file: TFile) => convertFileToItem(file)),
+    () =>
+      items.map((file: TFile) => ({
+        item: convertFileToItem(file),
+        originalFile: file,
+      })),
     [items, convertFileToItem],
   );
 
@@ -182,8 +186,13 @@ const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
     return (
       <>
         <div className={styles.filesGrid} ref={gridRef} data-tour="forms-grid">
-          {fileItems.map((item) => (
-            <FormsTile key={`file_${item.id}`} item={item} getIcon={getIcon} />
+          {fileItems.map(({ item, originalFile }) => (
+            <FormsTile
+              key={`file_${item.id}`}
+              item={item}
+              originalFile={originalFile}
+              getIcon={getIcon}
+            />
           ))}
           {hasMore &&
             Array.from({ length: skeletonCount }, (_, i) => (

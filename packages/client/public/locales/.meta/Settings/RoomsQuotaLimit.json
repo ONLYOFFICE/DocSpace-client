@@ -3,16 +3,17 @@
   "content": "{{roomsQuotaLimit}} for rooms",
   "content_en_sha1_hash": "ee9270f5c126fdf6af89661d474505448542d564",
   "created_at": "2025-05-19T21:30:52.473Z",
-  "updated_at": "2026-04-09T01:40:04.272Z",
+  "updated_at": "2026-04-11T21:22:32.581Z",
   "comment": {
-    "text": "This translation key is used to display a quota limit value for rooms. It appears in a warning quota dialog and will be translated as a string of numbers followed by \" for rooms\".",
+    "text": "This is a line item in a warning dialog about quota limits. It indicates the maximum storage allocated for rooms, where `{{roomsQuotaLimit}}` is the converted size (e.g., \"10 GB\").",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:36.136Z"
+    "updated_at": "2026-04-11T21:22:32.581Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/WarningQuotaDialog/WarningQuotaDialog.tsx",
-      "line_number": 54,
+      "line_number": 55,
       "context": "const getWarningDescription = () => {\n const quotaLimits = [];\n \n if (isDefaultRoomsQuotaSet) {\n quotaLimits.push(\n t(\"Settings:RoomsQuotaLimit\", {\n roomsQuotaLimit: getConvertedSize(t, defaultRoomsQuota),\n }),\n );\n }\n if (isDefaultUsersQuotaSet) {",
       "module": "/packages/client"
     }
@@ -93,13 +94,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation 'ルームごとに{{roomsQuotaLimit}}' means '{{roomsQuotaLimit}} per room', which changes the meaning from the English '{{roomsQuotaLimit}} for rooms' (a total quota for all rooms).",
-          "suggestion": "ルームの制限: {{roomsQuotaLimit}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {

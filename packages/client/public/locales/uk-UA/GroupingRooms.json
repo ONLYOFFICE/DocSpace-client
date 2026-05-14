@@ -8,7 +8,7 @@
   "DisablingRoomGroups": "Вимкнення груп кімнат",
   "DisablingRoomGroupsDescription": "Групи будуть збережені, але приховані. Увімкнути в Профілі, керуванні файлами.",
   "EditRoomGroups": "Редагувати групи кімнат",
-  "EmptyGroupDescription": "Тут немає кімнат. Спробуйте додати кімнату або видалити цю групу.",
+  "EmptyGroupRoomsDescription": "Тут немає кімнат. Спробуйте додати кімнату або видалити цю групу.",
   "GroupHasBeenDeleted": "Група була видалена",
   "GroupIcon": "Іконка групи",
   "GroupIsEmpty": "Група порожня",
@@ -17,6 +17,7 @@
   "RemoveFromGroup": "Видалити з групи",
   "RemoveGroup": "Видалити групу",
   "RemoveGroupConfirmation": "Ви впевнені, що хочете видалити групу кімнат?",
+  "RemoveGroupInfo": "Кімнати, що входять до групи, будуть відображатися в розділі <strong>Усі кімнати</strong>.",
   "RoomAddedToGroup": "Обрана кімната додана до <1>{{groupName}}</1>.",
   "RoomGrouping": "Групування кімнат",
   "RoomGroupingDisabled": "Групування кімнат вимкнено",
@@ -24,6 +25,5 @@
   "RoomGroupingSettingDescription": "Ви можете згруповувати кімнати в папки та легко перемикатися між ними.",
   "RoomRemovedFromGroup": "Вибрана кімната була видалена з <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "Обрані кімнати додано до <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "Вибрані кімнати були видалені з <1>{{groupName}}</1>.",
-  "RemoveGroupInfo": "Кімнати, що входять до групи, будуть відображатися в розділі <strong>Усі кімнати</strong>."
+  "RoomsRemovedFromGroup": "Вибрані кімнати були видалені з <1>{{groupName}}</1>."
 }

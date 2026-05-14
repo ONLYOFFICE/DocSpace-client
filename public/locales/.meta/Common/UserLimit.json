@@ -3,16 +3,17 @@
   "content": "User limit",
   "content_en_sha1_hash": "c00c89a60a03540e20fe0675ceb182b9fc1900a0",
   "created_at": "2026-02-18T14:56:20.525Z",
-  "updated_at": "2026-04-07T20:38:55.430Z",
+  "updated_at": "2026-04-12T12:41:47.991Z",
   "comment": {
-    "text": "This key displays the text \"User limit\" in the Link Settings Panel. It's used as a label to indicate the presence or absence of a user limit setting, likely associated with a toggle button. Translators should ensure the translation accurately conveys the concept of a user restriction.",
+    "text": "This is a label for a toggle switch that enables or disables a user limit setting.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:08:31.232Z"
+    "updated_at": "2026-04-11T20:39:35.462Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/LinkSettingsPanel/index.tsx",
-      "line_number": 189,
+      "line_number": 190,
       "context": "<Text\n fontSize=\"16px\"\n fontWeight={700}\n className={styles.linkSettingsText}\n >\n {t(\"Common:UserLimit\")}\n </Text>\n <ToggleButton\n className={styles.linkSettingsToggle}\n isChecked={userLimitIsChecked}\n onChange={() => setUserLimitIsChecked(!userLimitIsChecked)}",
       "module": "/packages/client"
     }
@@ -69,25 +70,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation 'Käyttäjämäärä' means 'Number of users' (a count), whereas the English 'User limit' refers to a restriction or maximum threshold. In the context of a toggle/setting, it should imply a limit.",
-          "suggestion": "Käyttäjäraja"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Limite d'utilisateur' implies a limit belonging to a single user (singular). In the context of a setting to restrict the number of users, it should refer to the limit on the number of users (plural).",
-          "suggestion": "Limite d'utilisateurs"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {

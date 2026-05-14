@@ -1,11 +1,10 @@
 {
-  "AccessingProblem": "Jos olet olemassaoleva käytttäjä ja sinulla on ongelmia tilaan pääsyn suhteen, ota yhteys järjestelmänvalvojaan.",
   "CannotCreateNewRoom": "Huonetta ei voi luoda",
   "CannotCreatePaidUsers": "Maksettuja käyttäjiä ei voi lisätä",
   "CannotRestoreRoom": "Huonetta ei voi palauttaa",
   "ChooseNewPlan": "Haluaisitko valita uuden hinnoitteluohjelman?",
   "GracePeriodActive": "Armoajanjakso on voimassa <1>ajalta {{fromDate}} aina {{byDate}} asti</1> (jäljellä päiviä: {{delayDaysCount}}).",
-  "LicenseExpired": "Ei voi lisätä uusia käyttäjiä eikä luoda uusia huoneita. Lisenssi on vanhentunut.",
+  "LicenseExpiredRestriction": "Ei voi lisätä uusia käyttäjiä eikä luoda uusia huoneita. Lisenssi on vanhentunut.",
   "LicenseGracePeriodInfo": "Tämän aikana ylläpitäjät eivät voi luoda uusia huoneita tai lisätä uusia käyttäjiä. Kun sietokausi päättyy, {{productName}} ei ole käytettävissä ennen kuin uusi lisenssi aktivoidaan.",
   "NewRoomWillExceedLimit": "Tämän huoneen luominen ei ole mahdollista, koska huoneiden määrän raja, joka kuuluu tilaukseesi, on saavutettu.",
   "NewUsersWillExceedMembersLimit": "Uusien maksettujen käyttäjien lisääminen ei ole mahdollista, koska tilaukseesi kuuluvien pääkäyttäjien määrän raja on saavutettu.",

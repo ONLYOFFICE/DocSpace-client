@@ -3,13 +3,21 @@
   "content": "Your additional storage subscription has been deactivated due to non-payment",
   "content_en_sha1_hash": "d95e5887fc80daff26ead869b2eb0182bf416e2c",
   "created_at": "2026-04-10T13:53:43.376Z",
-  "updated_at": "2026-04-10T13:53:43.376Z",
+  "updated_at": "2026-04-13T14:59:06.010Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is an error message displayed in a dialog box. It informs the user that their additional storage subscription has been deactivated because of a missed payment.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:41:54.636Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/dialogs/StorageTariffDeactivated.tsx",
+      "line_number": 107,
+      "context": "<Text fontSize=\"21px\" isBold>\n {t(\"Warning\")}\n </Text>\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontWeight={600}>{t(\"StorageTariffDeactivated\")}</Text>\n <br />\n <Text as=\"span\">\n <CommonTrans\n i18nKey=\"PreviousPlan\"",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

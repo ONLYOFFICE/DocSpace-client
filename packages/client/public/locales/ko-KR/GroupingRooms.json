@@ -8,7 +8,7 @@
   "DisablingRoomGroups": "룸 그룹 비활성화",
   "DisablingRoomGroupsDescription": "그룹은 저장되지만 숨겨집니다. 프로필 > 파일 관리에서 다시 활성화하십시오.",
   "EditRoomGroups": "룸 그룹 편집",
-  "EmptyGroupDescription": "여기에 방이 없습니다. 방을 추가하거나 이 그룹을 제거해 보세요.",
+  "EmptyGroupRoomsDescription": "여기에 방이 없습니다. 방을 추가하거나 이 그룹을 제거해 보세요.",
   "GroupHasBeenDeleted": "그룹이 삭제되었습니다",
   "GroupIcon": "그룹 아이콘",
   "GroupIsEmpty": "그룹이 비어 있습니다",
@@ -17,6 +17,7 @@
   "RemoveFromGroup": "그룹에서 제거",
   "RemoveGroup": "그룹 제거",
   "RemoveGroupConfirmation": "방 그룹을 삭제하려고 합니다. 계속 진행하시겠습니까?",
+  "RemoveGroupInfo": "그룹에 포함된 방은 <strong>모든 방</strong> 섹션에 표시됩니다.",
   "RoomAddedToGroup": "선택한 방이 <1>{{groupName}}</1>에 추가되었습니다.",
   "RoomGrouping": "룸 그룹화",
   "RoomGroupingDisabled": "룸 그룹화가 비활성화되었습니다",
@@ -24,6 +25,5 @@
   "RoomGroupingSettingDescription": "룸들을 폴더로 그룹화하고 쉽게 전환할 수 있습니다.",
   "RoomRemovedFromGroup": "선택한 방이 <1>{{groupName}}</1>에서 제거되었습니다.",
   "RoomsAddedToGroup": "선택한 객실이 <1>{{groupName}}</1>에 추가되었습니다.",
-  "RoomsRemovedFromGroup": "선택한 객실이 <1>{{groupName}}</1>에서 제거되었습니다.",
-  "RemoveGroupInfo": "그룹에 포함된 방은 <strong>모든 방</strong> 섹션에 표시됩니다."
+  "RoomsRemovedFromGroup": "선택한 객실이 <1>{{groupName}}</1>에서 제거되었습니다."
 }

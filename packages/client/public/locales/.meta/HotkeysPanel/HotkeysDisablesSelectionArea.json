@@ -3,11 +3,12 @@
   "content": "Disable the selection area",
   "content_en_sha1_hash": "457c279db83d4e1a50ca11970ff683688cc1d7b6",
   "created_at": "2025-08-12T19:46:16.154Z",
-  "updated_at": "2026-02-19T13:36:32.519Z",
+  "updated_at": "2026-04-11T21:12:14.520Z",
   "comment": {
-    "text": "This text describes the hotkeys used to disable the selection area. It appears in the Hotkeys Panel, specifically within the section related to selection area controls, and informs the user which keys will deactivate the selection.",
+    "text": "This is a hotkey description that explains what the \"Ctrl + Alt\" key combination does. It describes the action of disabling the selection area.",
     "is_auto": true,
-    "updated_at": "2025-08-12T19:51:18.266Z"
+    "updated_at": "2026-04-11T21:12:14.520Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

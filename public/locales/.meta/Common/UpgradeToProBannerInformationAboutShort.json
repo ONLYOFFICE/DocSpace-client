@@ -3,11 +3,12 @@
   "content": "Learn more about {{license}} Edition on the <1>official website</1>",
   "content_en_sha1_hash": "62cad8c148a203ce2ed7a69d5c5c57a129dd8912",
   "created_at": "2025-05-26T07:15:49.119Z",
-  "updated_at": "2026-04-10T08:58:38.048Z",
+  "updated_at": "2026-04-12T13:38:32.041Z",
   "comment": {
-    "text": "This translation key is used to display a message about learning more about the Enterprise License on the official website. It appears in a banner or notification component and provides a link to access further information about the license edition.",
+    "text": "This is a short informational message displayed in a banner, encouraging users to learn more about a specific ONLYOFFICE edition. `{{license}}` will be replaced with the name of the edition (e.g., \"Enterprise\"). `<1></1>` is a tag for a clickable link to the official website.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:02:42.201Z"
+    "updated_at": "2026-04-11T20:40:04.814Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -39,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Edition' was not translated, leaving it in English. In Bulgarian, it should be 'редакция' or 'версия' to maintain natural flow and complete meaning.",
-          "suggestion": "Научете повече за {{license}} редакция на <1>официалния уебсайт</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -75,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'official website' inside the <1> tag was not translated into Finnish, leaving English text in the middle of the sentence.",
-          "suggestion": "Lue lisää {{license}} -versiosta <1>virallisella verkkosivustolla</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -159,13 +148,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Edition' was not translated, leaving an English word in the middle of the Russian sentence, which breaks the flow and linguistic consistency.",
-          "suggestion": "Узнайте больше об издании {{license}} на <1>официальном сайте</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {

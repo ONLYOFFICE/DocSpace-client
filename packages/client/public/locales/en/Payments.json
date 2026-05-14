@@ -1,11 +1,10 @@
 {
-  "AccessingProblem": "If you are an existing user and have problems accessing this space please contact the administrator.",
   "CannotCreateNewRoom": "Room cannot be created",
   "CannotCreatePaidUsers": "Paid users cannot be added",
   "CannotRestoreRoom": "Room cannot be restored",
   "ChooseNewPlan": "Would you like to choose a new pricing plan?",
   "GracePeriodActive": "The grace period is active <1>from {{fromDate}} to {{byDate}}</1> (days remaining: {{delayDaysCount}}).",
-  "LicenseExpired": "Cannot add new users and create new rooms. License has expired.",
+  "LicenseExpiredRestriction": "Cannot add new users and create new rooms. License has expired.",
   "LicenseGracePeriodInfo": "During this time, admins are not able to create new rooms or add new users. Once the grace period ends, {{productName}} will become unavailable until a new license is activated.",
   "NewRoomWillExceedLimit": "Creating this room is not possible since the limit is reached for the number of rooms included in your current plan.",
   "NewUsersWillExceedMembersLimit": "Adding new paid users is not possible since the limit is reached for the number of admins included in your current plan.",

@@ -3,22 +3,23 @@
   "content": "Administrator Message Settings",
   "content_en_sha1_hash": "accdf6092b6a057074bd1eada900a50effd27962",
   "created_at": "2025-05-19T21:30:50.388Z",
-  "updated_at": "2026-04-09T04:26:13.016Z",
+  "updated_at": "2026-04-23T17:24:02.039Z",
   "comment": {
-    "text": "The translation key \"AdminsMessage\" is used to display a title for settings related to administrator messages, including descriptions and links within the Portal Settings UI. This key appears in various places, such as headings and category titles, providing context to administrators about message settings and their corresponding actions.",
+    "text": "This is a section title in the portal settings, indicating where administrators can configure messages displayed to users.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:53.588Z"
+    "updated_at": "2026-04-11T21:25:55.627Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 314,
-      "context": "<BruteForceProtectionSection />\n \n <StyledSettingsSeparator />\n \n <Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"AdminsMessage\")}\n </Text>\n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"AdminsMessageSettingDescription\", {\n productName: t(\"Common:ProductName\"),",
+      "line_number": 318,
+      "context": "<BruteForceProtectionSection />\n \n <StyledSettingsSeparator />\n \n <Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"AdminsMessage\")}\n </Text>\n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"AdminsMessageSettingDescription\", {\n productName: getBrandName(\"ProductName\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 123,
+      "line_number": 124,
       "context": "subtitle={t(\"BruteForceProtectionDescriptionMobile\")}\n url=\"/portal-settings/security/access-portal/brute-force-protection\"\n onClickLink={onClickLink}\n />\n <CategoryItem\n title={t(\"AdminsMessage\")}\n subtitle={\n <Trans i18nKey=\"AdminsMessageMobileDescription\" ns=\"Settings\" t={t} />\n }\n url=\"/portal-settings/security/access-portal/admin-message\"\n onClickLink={onClickLink}",
       "module": "/packages/client"
     },
@@ -63,13 +64,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation 'Einstellungen von Nachrichten für Administrator' means 'Settings of messages for administrator', which implies settings for messages sent TO an administrator. The English 'Administrator Message Settings' refers to the settings OF the messages that the administrator manages/configures.",
-          "suggestion": "Administrator-Nachrichteneinstellungen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -135,13 +130,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Dutch translation 'Beheerder Bericht Instellingen' is a literal word-for-word concatenation that is grammatically incorrect in Dutch. In Dutch, compound nouns must be joined or used with proper prepositional structure. As written, it reads like three separate words rather than a single concept.",
-          "suggestion": "Instellingen voor beheerberichten"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -171,13 +160,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Administrator Message Settings' refers to settings for messages sent BY the administrator (or regarding the administrator). The Russian translation 'Настройки сообщений администратору' means 'Settings for messages TO the administrator', which reverses the direction of the communication/ownership.",
-          "suggestion": "Настройки сообщений администратора"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -219,13 +202,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Administrator Message Settings' refers to settings for messages sent BY the administrator (or messages related to the administrator). The Ukrainian translation 'Параметри повідомлень адміністратору' means 'Settings for messages TO the administrator', which reverses the direction of the relationship.",
-          "suggestion": "Налаштування повідомлень адміністратора"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

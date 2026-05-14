@@ -3,13 +3,21 @@
   "content": "You don't have sufficient permissions. Please contact the payer (<1>{{payerContact}}</1>) to access and configure the services.",
   "content_en_sha1_hash": "cb9d41656e1db84a50d244f7d087fe587c1651aa",
   "created_at": "2026-04-10T13:53:45.300Z",
-  "updated_at": "2026-04-10T13:53:45.300Z",
+  "updated_at": "2026-04-23T17:24:02.177Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is an error message displayed in a tooltip when a user lacks the necessary permissions to access or configure services. The `{{payerContact}}` variable will be replaced with the name or email of the account's payer.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:50:44.217Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/hooks/usePermissionTooltipText.tsx",
+      "line_number": 12,
+      "context": "const paymentStore = usePaymentStore();\n const { walletCustomerInfo, walletCustomerEmail } = paymentStore.tariff;\n \n return (\n <CommonTrans\n i18nKey=\"InsufficientPermissionsMessage\"\n values={{\n payerContact:\n (walletCustomerInfo as { displayName?: string })?.displayName ||\n walletCustomerEmail ||\n \"\",",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

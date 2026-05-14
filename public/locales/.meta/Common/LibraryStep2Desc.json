@@ -3,13 +3,27 @@
   "content": "Customize the template and share it for filling",
   "content_en_sha1_hash": "7c93e4e7bb9d472af8298653a3fd37f83379029a",
   "created_at": "2026-03-31T15:18:14.920Z",
-  "updated_at": "2026-04-08T06:03:09.347Z",
+  "updated_at": "2026-04-23T17:24:02.138Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a description for a step in a workflow, appearing as part of a list of instructions. It describes the second step: customizing a template and then sharing it for others to fill out.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:50:06.244Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/library-landing/HeroSection.tsx",
+      "line_number": 61,
+      "context": "title: t(\"Common:LibraryStep1Title\"),\n desc: t(\"Common:LibraryStep1Desc\", { count: templatesCount, language }),\n },\n {\n title: t(\"Common:LibraryStep2Title\"),\n desc: t(\"Common:LibraryStep2Desc\"),\n },\n {\n title: t(\"Common:LibraryStep3Title\"),\n desc: t(\"Common:LibraryStep3Desc\"),\n },",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/forms/library/[langId]/[categoryId]/template/[templateId]/page.client.tsx",
+      "line_number": 265,
+      "context": "<div>\n <div className={styles.stepTitle}>\n {t(\"Common:LibraryStep2Title\")}\n </div>\n <div className={styles.stepDesc}>\n {t(\"Common:LibraryStep2Desc\")}\n </div>\n </div>\n </li>\n <li className={styles.stepItem}>\n <span className={styles.stepNumber}>3</span>",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -80,13 +94,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'compilamento' is a non-standard/incorrect term in Italian for 'filling out' a form or template. The correct term is 'compilazione'.",
-          "suggestion": "Personalizza il modello e condividilo per la compilazione"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -110,13 +118,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The verb 'dalīties' is in the infinitive form, which creates a grammatical mismatch with the imperative 'Personalizējiet'. It should be 'dalйтесь' to maintain the imperative mood for both actions.",
-          "suggestion": "Personalizējiet šablonu un dalйтесь ar to piepildīšanai"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -170,13 +172,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'udružite' means 'to unite/join' or 'to merge', which is an incorrect translation for 'share' in this context. Additionally, 'popunjanje' is a calque from English/other languages; 'izpolnjevanje' is the correct term for 'filling out' a form/template.",
-          "suggestion": "Prilagodite predlogo in jo delite za izpolnjevanje"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
@@ -188,18 +184,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "extra_tag",
-          "description": "Extra tag(s) not in English: </strong>, <strong style=\"font-size: 1.1em;\">",
-          "suggestion": ""
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The verb 'поделите' (podelite) is a literal translation of 'share' but in Serbian, when referring to sharing a document/template for others to use, 'поделите га' or 'поделите га са другима' is more natural, but more importantly, 'поделите им' (share to them) is grammatically incorrect in this context; it should be 'поделите га' (share it).",
-          "suggestion": "<strong style=\"font-size: 1.1em;\">Прилагодите шаблон и поделите га за попуњавање</strong>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

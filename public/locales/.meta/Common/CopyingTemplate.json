@@ -3,13 +3,21 @@
   "content": "Copying...",
   "content_en_sha1_hash": "fb01738ac692bf650dd704e2c10cd57e367cedc2",
   "created_at": "2026-03-26T08:26:31.409Z",
-  "updated_at": "2026-04-08T14:13:47.109Z",
+  "updated_at": "2026-04-23T17:24:02.166Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a button label that appears while a template is being copied. It indicates an ongoing process.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:56:17.823Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/forms/library/[langId]/[categoryId]/template/[templateId]/page.client.tsx",
+      "line_number": 330,
+      "context": "<Button\n className={styles.useButton}\n label={\n isCopying\n ? t(\"Common:CopyingTemplate\")\n : t(\"Common:UseTemplate\")\n }\n size={ButtonSize.normal}\n onClick={handleUseTemplate}\n isDisabled={isCopying}",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

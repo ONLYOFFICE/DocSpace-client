@@ -3,46 +3,47 @@
   "content": "File viewing.",
   "content_en_sha1_hash": "e8e372e441f865b8c8a7f1c1fcc3ad023e1beccf",
   "created_at": "2025-09-29T18:22:08.790Z",
-  "updated_at": "2026-04-08T00:36:27.082Z",
+  "updated_at": "2026-04-13T08:17:10.855Z",
   "comment": {
-    "text": "This text describes the \"viewer\" role, granting read-only access to a file. It's used to indicate the ability to view a file's content, appearing alongside the associated icon in the sharing permissions section. Translators should ensure the description conveys the meaning of basic file viewing capabilities.",
+    "text": "This is a short description displayed next to the \"Viewer\" role option in sharing settings. It explains the permissions associated with the Viewer role.",
     "is_auto": true,
-    "updated_at": "2025-09-29T18:23:16.702Z"
+    "updated_at": "2026-04-11T20:44:21.136Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 196,
+      "line_number": 197,
       "context": "label: t(\"Commentator\"),\n icon: AccessCommentReactSvgUrl,\n },\n [ShareRights.Read]: {\n access: ShareAccessRights.ReadOnly,\n description: t(\"Common:RoleViewerDescription\"),\n key: \"viewing\",\n label: t(\"Common:Viewer\"),\n icon: EyeReactSvgUrl,\n },\n [ShareRights.FillForms]: {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 196,
+      "line_number": 197,
       "context": "label: t(\"Commentator\"),\n icon: AccessCommentReactSvgUrl,\n },\n [ShareRights.Read]: {\n access: ShareAccessRights.ReadOnly,\n description: t(\"Common:RoleViewerDescription\"),\n key: \"viewing\",\n label: t(\"Common:Viewer\"),\n icon: EyeReactSvgUrl,\n },\n [ShareRights.FillForms]: {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 196,
+      "line_number": 197,
       "context": "label: t(\"Commentator\"),\n icon: AccessCommentReactSvgUrl,\n },\n [ShareRights.Read]: {\n access: ShareAccessRights.ReadOnly,\n description: t(\"Common:RoleViewerDescription\"),\n key: \"viewing\",\n label: t(\"Common:Viewer\"),\n icon: EyeReactSvgUrl,\n },\n [ShareRights.FillForms]: {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 196,
+      "line_number": 197,
       "context": "label: t(\"Commentator\"),\n icon: AccessCommentReactSvgUrl,\n },\n [ShareRights.Read]: {\n access: ShareAccessRights.ReadOnly,\n description: t(\"Common:RoleViewerDescription\"),\n key: \"viewing\",\n label: t(\"Common:Viewer\"),\n icon: EyeReactSvgUrl,\n },\n [ShareRights.FillForms]: {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 196,
+      "line_number": 197,
       "context": "label: t(\"Commentator\"),\n icon: AccessCommentReactSvgUrl,\n },\n [ShareRights.Read]: {\n access: ShareAccessRights.ReadOnly,\n description: t(\"Common:RoleViewerDescription\"),\n key: \"viewing\",\n label: t(\"Common:Viewer\"),\n icon: EyeReactSvgUrl,\n },\n [ShareRights.FillForms]: {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 238,
+      "line_number": 239,
       "context": "key: \"viewer\",\n label: t(\"Common:RoleViewer\"),\n description:\n roomType === RoomsType.AIRoom\n ? t(\"Common:RoleAIAgentViewerDescription\")\n : t(\"Common:RoleViewerDescription\"),\n access: ShareAccessRights.ReadOnly,\n type: EmployeeType.User,\n },\n };",
       "module": "/packages/shared"
     }
@@ -111,13 +112,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Ֆայլը դիտվում է.' means 'The file is being viewed' (a passive sentence describing an ongoing action), whereas the English 'File viewing.' is a noun phrase describing a capability or permission level.",
-          "suggestion": "Ֆայլերի դիտում"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -165,13 +160,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'A ver o ficheiro' uses an infinitive construction that sounds like an ongoing action ('Viewing the file') rather than a description of a permission or capability. In the context of UI permissions, it should be a noun phrase or a direct description of the role's capability.",
-          "suggestion": "Visualização de ficheiros."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -213,13 +202,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Albanian translation 'Skedari po shihet' translates to 'The file is being viewed' (present continuous passive), which describes an ongoing action. In the context of a permission role description, it should describe the capability/permission (e.g., 'Viewing files' or 'File viewing').",
-          "suggestion": "Shikimi i skedarit"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

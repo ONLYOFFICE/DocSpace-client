@@ -3,11 +3,12 @@
   "content": "Get quick professional help for all the issues you face.",
   "content_en_sha1_hash": "638f386878c8549e1b0339e2dcd4abd04461a4e3",
   "created_at": "2025-05-26T07:15:49.310Z",
-  "updated_at": "2026-04-07T20:45:46.979Z",
+  "updated_at": "2026-04-12T13:10:57.866Z",
   "comment": {
-    "text": "This translation key is used to provide a brief description of professional support options on the \"Upgrade to Pro\" banner in the payment benefits container. The text appears as part of a button or dialog prompt where users can access quick help for issues they're facing.",
+    "text": "This is a short description of a benefit, displayed in a banner promoting an upgrade to a Pro plan. It explains that Pro users receive professional support.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:02:04.382Z"
+    "updated_at": "2026-04-11T20:39:48.562Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

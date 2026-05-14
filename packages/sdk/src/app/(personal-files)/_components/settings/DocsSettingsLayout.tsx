@@ -38,18 +38,24 @@ import { SectionWrapper } from "@/app/(docspace)/_components/section";
 import { DeviceTypeObserver } from "@/app/(docspace)/_components/DeviceTypeObserver";
 import Dialogs from "@/app/(docspace)/_components/dialogs";
 
+import { useSDKConfig } from "@/providers/SDKConfigProvider";
+
 import { SidebarProvider } from "../../_contexts/SidebarContext";
 import DocsSidebar from "../sidebar";
+import { useDocsFrameBridge } from "../../_hooks/useDocsFrameBridge";
 import Settings from "./index";
 
 import layoutStyles from "../docs-layout/DocsLayout.module.scss";
 
 const DocsSettingsLayoutInner = observer(() => {
   const { t } = useTranslation(["Common"]);
+  const { sdkConfig } = useSDKConfig();
+
+  useDocsFrameBridge({ isReady: true });
 
   return (
     <div className={layoutStyles.root}>
-      <DocsSidebar />
+      {sdkConfig?.showMenu !== false && <DocsSidebar />}
       <div className={layoutStyles.sectionArea}>
         <RootScrollbar>
           <SectionWrapper

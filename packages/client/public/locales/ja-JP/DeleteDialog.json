@@ -13,9 +13,10 @@
   "DeleteGroupDescription": "{{groupName}} グループが削除されます。グループ内のユーザーは{{productName}}から削除されません。続けてよろしいですか？",
   "DeleteGroupTitle": "グループの削除",
   "DeleteItem": "あなたは<strong>{{name}}</strong>を{{trashSection}}に移動しようとしています。",
-  "DeleteItemForever": "削除しようとしています：<strong>{{name}}</strong>.",
+  "DeleteItemForeverConfirm": "削除しようとしています：<strong>{{name}}</strong>.",
   "DeleteItemsSharedNote": "誰かと共有している場合は、利用できなくなりますのでご注意ください。",
-  "DeleteRoom": "<strong>「{{roomName}}」</strong> ルームは永久に削除されます。すべてのデータとユーザーアクセスが失われます。",
+  "DeleteRoomConfirm": "<strong>「{{roomName}}」</strong> ルームは永久に削除されます。すべてのデータとユーザーアクセスが失われます。",
+  "DeleteRooms": "選択された<strong>ルーム ({{count}}</strong>) は完全に削除されます。すべてのデータとユーザーアクセス権は失われます。",
   "DeleteRoomsTitle": "この部屋を削除しますか？",
   "DeleteRoomTitle": "このルームを削除しますか？",
   "DeleteRoomWarning": "私は上記の説明を理解しており、ルームを削除したいです",
@@ -33,6 +34,5 @@
   "ItemsDeletedAfter": "これらのアイテムは30日後に永久に削除されます。",
   "ItemsPermanentlyDeleted": "これらのアイテムは{{trashSection}}から永久に削除されます。",
   "removeFromListDescription": "<1>{{title}}</1> をリストから削除しようとしています。続行しますか？",
-  "removeFromListDescriptionPlural": "<1>{{count}}個のアイテム</1>をリストから削除しようとしています。続行しますか？",
-  "DeleteRooms": "選択された<strong>ルーム ({{count}}</strong>) は完全に削除されます。すべてのデータとユーザーアクセス権は失われます。"
+  "removeFromListDescriptionPlural": "<1>{{count}}個のアイテム</1>をリストから削除しようとしています。続行しますか？"
 }

@@ -3,11 +3,12 @@
   "content": "Webhook redelivered",
   "content_en_sha1_hash": "13d28a1ef0e6e6d4e990ba5202f4b9fd878de944",
   "created_at": "2025-05-19T21:30:49.883Z",
-  "updated_at": "2026-04-08T18:55:17.334Z",
+  "updated_at": "2026-04-11T21:28:05.871Z",
   "comment": {
-    "text": "This translation key is used to display a success message when a webhook is successfully retried or redelivered. It appears in various UI elements, such as navigation headers and history tables, after an action related to webhooks has been completed.",
+    "text": "This is a toast message that appears when a webhook event has been successfully redelivered. It confirms the action to the user.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:45.147Z"
+    "updated_at": "2026-04-11T21:28:05.871Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -45,13 +46,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses a feminine grammatical form ('المعاد تسليمها') for 'Webhook', but 'Webhook' is a technical term that is typically treated as masculine in Arabic technical contexts. More importantly, 'ويب هوك' is a transliteration that sounds unnatural; 'تمت إعادة إرسال الويب هوك' or 'تمت إعادة تسليم الويب هوك' is more standard for a success message.",
-          "suggestion": "تمت إعادة تسليم الويب هوك"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -63,13 +58,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'уеб кука' is a literal and incorrect transliteration of 'webhook'. In Bulgarian technical terminology, 'webhook' is typically used as an untranslated loanword or described differently. 'Уеб кука' literally translates to 'web hook' (the physical object), which sounds unnatural and incorrect in a software context.",
-          "suggestion": "Уебхукът е доставен отново"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -87,25 +76,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation uses 'επαναφορά' (restore/recovery), which implies reverting to a previous state, whereas 'redelivered' in the context of webhooks means sending the payload again. The correct term should relate to re-sending.",
-          "suggestion": "Το webhook στάλθηκε εκ νέου"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'redistribuido' means 'redistributed' (as in reallocating resources), whereas 'redelivered' in a webhook context means the message was sent again. The correct technical term is 'reenviado'.",
-          "suggestion": "Webhook reenviado"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -123,13 +100,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian word 'վերահանձնվել' means 're-assigned' or 're-handed over', which is incorrect for a technical webhook redelivery. The correct term should relate to 're-sending' or 're-delivery'.",
-          "suggestion": "Webhook-ը վերաուղարկվել է"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -153,25 +124,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao word 'ຈັດສົ່ງຄືນ' (Chuat song khuen) is more commonly used for physical delivery/shipping of goods. In a technical context for webhooks, 'ສົ່ງຄືນ' or 'ສົ່ງຄືນໃໝ່' (resend/redeliver) is more appropriate to avoid the connotation of physical logistics.",
-          "suggestion": "Webhook ສົ່ງຄືນແລ້ວ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Tīmekļa aizķere' is a literal and incorrect translation for 'Webhook'. In a technical context, 'Webhook' should be left as is or used as a recognized technical term, as 'tīmekļa aizķere' is not a standard IT term in Latvian and sounds nonsensical to developers.",
-          "suggestion": "Webhook ir atkārtoti piegādāts"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -201,13 +160,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order is unnatural in Romanian, making it sound like 'Webhook repeated delivery' rather than 'Webhook redelivered'. In Romanian, the noun should typically precede the participle in this context, or the phrase should be structured as 'Webhook reexpediat'.",
-          "suggestion": "Webhook reexpediat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

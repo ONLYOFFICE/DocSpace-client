@@ -3,16 +3,17 @@
   "content": "Reset authentication",
   "content_en_sha1_hash": "b433426988dd4bcf376fbbd983df57e4b0ffc1f5",
   "created_at": "2025-05-19T21:30:53.508Z",
-  "updated_at": "2026-04-09T07:29:16.526Z",
+  "updated_at": "2026-04-11T21:20:03.381Z",
   "comment": {
-    "text": "This translation key is used to display the text \"Reset authentication\" in various contexts, such as button labels or dialog headers. It is likely used when the user needs to reset their authentication settings, and it appears on screens related to account management or security options.",
+    "text": "This is a button label that, when clicked, initiates the process of resetting a user's authentication settings. It appears in a menu of options related to user management.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:36.347Z"
+    "updated_at": "2026-04-11T21:20:03.381Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 286,
+      "line_number": 287,
       "context": "case \"reset-auth\":\n return {\n id: \"option_reset-auth\",\n key: option,\n icon: RestoreAuthReactSvgUrl,\n label: t(\"PeopleTranslations:ResetAuth\"),\n onClick: () => this.onResetAuth(item),\n disabled: !item.tfaAppEnabled,\n };\n case \"share-guest\":\n return {",
       "module": "/packages/client"
     }
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation is in Turkish, not Azerbaijani. 'Doğrulamanı sıfırlayın' is Turkish; the Azerbaijani equivalent should use 'Doğrulamanı sıfırla' or 'Autentifikasiyanı sıfırlayın'.",
-          "suggestion": "Autentifikasiyanı sıfırlayın"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -159,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'තහවුරුව' (thahavuruva) means 'confirmation' or 'assurance', whereas 'authentication' in a technical security context should be translated as 'සත්‍යාපනය' (sathyapanaya).",
-          "suggestion": "සත්‍යාපනය යළි සකසන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -219,13 +208,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Rivendos' means 'to claim' or 'to assert' (as in claiming a right), whereas 'Reset' in a technical context means to restore to a previous state or clear settings. The correct term should be 'Rifilloni' or 'Rivendosni' (though 'Rifilloni' is more accurate for resetting settings).",
-          "suggestion": "Rifilloni autentifikimin"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -173,7 +173,7 @@ export const useBaseParams = (initialValues?: {
 				</Text>
 			</FieldContainer>
 			<FieldContainer
-				labelText={t("Common:Description")}
+				labelText={t("Common:DescriptionLabel")}
 				isRequired
 				isVertical
 				removeMargin

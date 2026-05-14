@@ -55,6 +55,7 @@ import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { TOption } from "@docspace/ui-kit/components/combobox";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { LANGUAGE } from "@docspace/shared/constants";
+import { getConstName } from "@docspace/shared/constants/consts";
 
 const MAX_USERS_COUNT = 1000;
 
@@ -313,7 +314,7 @@ const LinkSettingsPanel = ({
             minDate={subtractFromDate(now(), 1, "days") ?? undefined}
             maxDate={maxDate}
             useMaxTime={!activeLink.expirationDate}
-            translations={{ AM: t("Common:AM"), PM: t("Common:PM") }}
+            translations={{ AM: t("Common:AM"), PM: getConstName("PM") }}
           />
         </div>
       </ModalDialog.Body>

@@ -3,11 +3,12 @@
   "content": "Enable this setting to disable downloading of files and folders from this folder shared via a link",
   "content_en_sha1_hash": "4198f9e70e43736e0e35e37237c1ff8909531466",
   "created_at": "2025-08-26T11:15:03.599Z",
-  "updated_at": "2026-04-08T02:17:50.689Z",
+  "updated_at": "2026-04-12T03:57:14.143Z",
   "comment": {
-    "text": "This text appears in a link editing dialog to control file and folder sharing permissions. It explains that enabling this setting prevents users from downloading files or folders shared via a link. Translators should convey the meaning of disabling download functionality.",
+    "text": "This is a setting description in a dialog. It explains that enabling this option will prevent downloading of files and folders from a shared folder.",
     "is_auto": true,
-    "updated_at": "2025-08-26T11:18:20.309Z"
+    "updated_at": "2026-04-11T20:46:00.831Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -93,13 +94,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation omits 'folders' (フォルダ), only mentioning 'files' (ファイル). The English source explicitly covers both files and folders.",
-          "suggestion": "この設定を有効にすると、リンクを介して共有されたこのフォルダ内のファイルおよびフォルダのダウンロードを無効にします。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -147,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'sală' (room/hall) is used instead of 'folder' (folder). In a digital file management context, 'folder' should be translated as 'folder' or 'director'.",
-          "suggestion": "Activați această opțiune pentru a dezactiva descărcarea fișierelor și folderelor din acest folder partajat printr-un link"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

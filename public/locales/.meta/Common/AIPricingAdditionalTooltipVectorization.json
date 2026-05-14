@@ -3,13 +3,21 @@
   "content": "<1>Vectorization</1> — Documents are processed and indexed when you upload them to Knowledge Base in AI agents.",
   "content_en_sha1_hash": "1de7f2c83ec30da10516464a3064d2459e9a0df9",
   "created_at": "2026-04-10T13:53:44.371Z",
-  "updated_at": "2026-04-10T13:53:44.371Z",
+  "updated_at": "2026-04-11T21:00:03.094Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a tooltip explaining \"Vectorization\" in the AI pricing section. It clarifies that documents are processed and indexed upon upload to the Knowledge Base for AI agents. The `<1>` tag highlights the term \"Vectorization\".",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:00:03.094Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/PricingBillingBody.tsx",
+      "line_number": 188,
+      "context": "style={{ height: \"15px\", margin: \"0\" }}\n tooltipContent={\n <>\n <CommonTrans\n \n i18nKey=\"AIPricingAdditionalTooltipVectorization\"\n components={{\n 1: <strong />,\n }}\n />\n <br />",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

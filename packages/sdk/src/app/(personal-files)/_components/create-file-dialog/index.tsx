@@ -47,12 +47,22 @@ type CreateFileDialogProps = {
   onSave: (name: string) => void;
 };
 
-const TITLE_KEYS: Record<CreateFileDialogType, string> = {
-  docx: "Common:Document",
-  xlsx: "Common:Spreadsheet",
-  pptx: "Common:Presentation",
-  pdf: "Common:NewPDFForm",
-  folder: "Common:Folder",
+const getTitle = (
+  type: CreateFileDialogType,
+  t: (key: string) => string,
+): string => {
+  switch (type) {
+    case "docx":
+      return t("Common:Document");
+    case "xlsx":
+      return t("Common:Spreadsheet");
+    case "pptx":
+      return t("Common:Presentation");
+    case "pdf":
+      return t("Common:NewPDFForm");
+    case "folder":
+      return t("Common:Folder");
+  }
 };
 
 const DEFAULT_NAMES: Record<CreateFileDialogType, string> = {
@@ -116,7 +126,7 @@ const CreateFileDialog = ({
     [onSubmit],
   );
 
-  const title = t(TITLE_KEYS[type]);
+  const title = getTitle(type, t);
 
   return (
     <ModalDialog visible={visible} onClose={onClose} autoMaxHeight withForm>

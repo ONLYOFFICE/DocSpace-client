@@ -91,7 +91,7 @@ export const WhiteLabelHeader = ({
           )}
           fontSize="13px"
         >
-          {t("WhiteLabelSubtitle")}
+          {t("WhiteLabelLogoSubtitle")}
           <HelpButton
             tooltipContent={
               <Text fontSize="12px">{t("Common:WhiteLabelTooltip")}</Text>

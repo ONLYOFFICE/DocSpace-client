@@ -3,13 +3,27 @@
   "content": "Edit and fill in",
   "content_en_sha1_hash": "9a3a5c6f4c7ec38da1b6a3b2fa64c91befe4da53",
   "created_at": "2026-03-31T15:18:14.898Z",
-  "updated_at": "2026-04-08T06:02:04.625Z",
+  "updated_at": "2026-04-23T17:24:02.137Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a step title in a multi-step process for working with document templates. It appears as the second step, indicating the action of modifying and completing a selected template.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:50:05.354Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/library-landing/HeroSection.tsx",
+      "line_number": 60,
+      "context": "{\n title: t(\"Common:LibraryStep1Title\"),\n desc: t(\"Common:LibraryStep1Desc\", { count: templatesCount, language }),\n },\n {\n title: t(\"Common:LibraryStep2Title\"),\n desc: t(\"Common:LibraryStep2Desc\"),\n },\n {\n title: t(\"Common:LibraryStep3Title\"),\n desc: t(\"Common:LibraryStep3Desc\"),",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/forms/library/[langId]/[categoryId]/template/[templateId]/page.client.tsx",
+      "line_number": 262,
+      "context": "</li>\n <li className={styles.stepItem}>\n <span className={styles.stepNumber}>2</span>\n <div>\n <div className={styles.stepTitle}>\n {t(\"Common:LibraryStep2Title\")}\n </div>\n <div className={styles.stepDesc}>\n {t(\"Common:LibraryStep2Desc\")}\n </div>\n </div>",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,11 +3,12 @@
   "content": "Read now",
   "content_en_sha1_hash": "9f762253688c402f7f083fe41a6f024509cb2b8b",
   "created_at": "2025-05-26T07:15:49.231Z",
-  "updated_at": "2026-04-07T20:48:59.702Z",
+  "updated_at": "2026-04-12T13:22:20.715Z",
   "comment": {
-    "text": "This translation key is used to display a button label that reads \"Read now\" in various contexts throughout the Official Documentation, specifically on upgrade to pro banners. The text appears as an emphasized link and is used to prompt users to click or read more information.",
+    "text": "This is a link label that, when clicked, directs the user to the official documentation for installing ONLYOFFICE DocSpace. It appears within a section providing instructions related to upgrading to a Pro plan.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:02:20.275Z"
+    "updated_at": "2026-04-11T20:39:54.738Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -159,13 +160,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The English text 'Read now' implies an immediate action ('now'), whereas the Russian 'Читать' is a generic infinitive meaning 'To read'. The temporal aspect 'now' is missing.",
-          "suggestion": "Читать сейчас"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {

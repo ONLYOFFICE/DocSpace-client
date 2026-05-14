@@ -48,6 +48,7 @@ import type {
   TModelCapabilities,
   TProviderModelInfo,
 } from "@docspace/shared/api/ai/types";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 import styles from "./ModelSettingsPanel.module.scss";
 
@@ -128,7 +129,7 @@ export const ModelSettingsPanel = ({
           >
             <Text className={styles.capabilitiesDescription}>
               {t("AISettings:CapabilitiesDescription", {
-                productName: t("Common:ProductName"),
+                productName: getBrandName("ProductName"),
               })}
             </Text>
             <div className={styles.checkboxList}>

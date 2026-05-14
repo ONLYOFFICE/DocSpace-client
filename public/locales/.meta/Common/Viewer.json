@@ -3,22 +3,29 @@
   "content": "Viewer",
   "content_en_sha1_hash": "dbad9f126b33570e09839a2d60720898de1a512d",
   "created_at": "2025-08-26T11:15:03.444Z",
-  "updated_at": "2026-04-07T20:28:42.471Z",
+  "updated_at": "2026-04-23T17:24:01.933Z",
   "comment": {
-    "text": "This key refers to a user role with viewing permissions. It's used as a label for a share access right, likely displayed in a sharing dialog or settings panel. Translators should consider the meaning of \"viewer\" in the context of accessing and seeing content.",
+    "text": "This is a label for a user role or permission level, indicating that the user has read-only access. It appears in sharing settings and other access control interfaces.",
     "is_auto": true,
-    "updated_at": "2025-08-26T11:15:57.014Z"
+    "updated_at": "2026-04-11T20:39:23.489Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DeveloperToolsHeader.tsx",
+      "line_number": 64,
+      "context": "case \"public-room\":\n return t(\"Common:PublicRoom\");\n case \"editor\":\n return t(\"Common:Editor\");\n case \"viewer\":\n return t(\"Common:Viewer\");\n case \"room-selector\":\n return t(\"Common:RoomSelector\");\n case \"file-selector\":\n return t(\"Common:FileSelector\");\n case \"custom\":",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 41,
-      "context": "import PortalImg from \"PUBLIC_DIR/images/sdk-presets_portal.react.svg?url\";\n import PublicRoomImg from \"PUBLIC_DIR/images/sdk-presets_public-room.react.svg?url\";\n import RoomSelectorImg from \"PUBLIC_DIR/images/sdk-presets_room-selector.react.svg?url\";\n import FileSelectorImg from \"PUBLIC_DIR/images/sdk-presets_file-selector.react.svg?url\";\n import EditorImg from \"PUBLIC_DIR/images/sdk-presets_editor.react.svg?url\";\n import ViewerImg from \"PUBLIC_DIR/images/sdk-presets_viewer.react.svg?url\";\n import CustomImg from \"PUBLIC_DIR/images/sdk-presets_custom.react.svg?url\";\n import UploaderImg from \"PUBLIC_DIR/images/sdk-presets_uploader.react.svg?url\";\n \n import PortalImgDark from \"PUBLIC_DIR/images/sdk-presets_portal_dark.react.svg?url\";\n import PublicRoomImgDark from \"PUBLIC_DIR/images/sdk-presets_public-room_dark.react.svg?url\";",
+      "line_number": 105,
+      "context": "description: t(\"EditorPresetDescription\"),\n image: theme.isBase ? EditorImg : EditorImgDark,\n handleOnClick: navigateToEditor,\n },\n {\n title: t(\"Viewer\"),\n description: t(\"ViewerDescription\"),\n image: theme.isBase ? ViewerImg : ViewerImgDark,\n handleOnClick: navigateToViewer,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 198,
+      "line_number": 199,
       "context": "},\n [ShareRights.Read]: {\n access: ShareAccessRights.ReadOnly,\n description: t(\"Common:RoleViewerDescription\"),\n key: \"viewing\",\n label: t(\"Common:Viewer\"),\n icon: EyeReactSvgUrl,\n },\n [ShareRights.FillForms]: {\n access: ShareAccessRights.FormFilling,\n description: \"\",",
       "module": "/packages/shared"
     }
@@ -57,25 +64,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English term 'Viewer' refers to a user role with viewing permissions. In German, 'Viewer' is an anglicism often used for software players (like a media viewer), whereas the correct term for a user role in a sharing context is 'Betrachter'.",
-          "suggestion": "Betrachter"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Πρόγραμμα προβολής' means 'Viewing program' or 'Viewer software' (an application), whereas the context specifies a user role (a person with viewing permissions).",
-          "suggestion": "Δήμιος"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -87,25 +82,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Esikatselu' means 'Preview'. In the context of a user role/permission (ShareRights.Read), the correct term should refer to the person/role, such as 'Katselija'.",
-          "suggestion": "Katselija"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "In the context of user roles and permissions (ShareRights.Read), 'Lecteur' refers to a media player (e.g., music/video player). For a user role with viewing permissions, 'Lecteur' is incorrect; 'Lecteur' is a person who reads, but in software UI for access rights, 'Lecteur' is often confused with 'Visualiseur' or 'Consultant'. However, more critically, 'Lecteur' is the standard translation for a media player, whereas 'Lecteur' as a person who reads is rarely used for digital access roles. The standard term for a 'Viewer' role in software permissions is 'Lecteur' (if referring to reading) or 'Visualiseur'. But in French software localization for 'Viewer' (the role), 'Lecteur' is often considered a false friend or ambiguous. Given the context of 'ShareRights.Read', the correct term for a user who can only view/read is 'Lecteur' (one who reads) or 'Consultant'. Wait, looking closer: 'Lecteur' is actually the correct term for 'Reader' (as in Read-only), but in many UI contexts, 'Lecteur' is highly ambiguous. However, the most critical error is that 'Lecteur' is the translation for a media player. For a user role, 'Lecteur' is technically 'Reader'. If the intent is 'one who views', 'Visualiseur' or 'Consultant' is better. But strictly speaking, 'Lecteur' is a valid translation for 'Reader'. Let's re-evaluate: In the context of 'ShareRights.Read', 'Viewer' is the role. In French, a user with read-only access is often called 'Lecteur'. But 'Lecteur' is primarily used for media players. A more accurate term for a user role is 'Consultant' or 'Visiteur'. Actually, 'Lecteur' is acceptable for 'Reader', but 'Viewer' (as in seeing) is better translated as 'Visualiseur'. However, per the strict rules, 'Lecteur' is not 'completely wrong' in a linguistic sense, but it is a poor localization choice. Let's look for a more definitive error. Actually, 'Lecteur' is the standard translation for 'Reader'. If the English is 'Viewer', 'Lecteur' is a mismatch because 'Viewer' implies seeing, not reading. The French for 'Viewer' (one who sees) is 'Visualiseur'.",
-          "suggestion": "Visualiseur"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -147,25 +130,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Kijker' refers to a person watching something (like a spectator), whereas in the context of software permissions and user roles, 'Lezer' (Reader) is the standard term for a user with viewing/read-only access.",
-          "suggestion": "Lezer"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation 'Przeglądarka' means 'Web Browser'. In the context of a user role (ShareRights.Read), the correct term should refer to a person who views content, such as 'Widz' or 'Osoba przeglądająca'.",
-          "suggestion": "Widz"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -189,25 +160,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Просмотрщик' refers to a software tool or a device (a viewer/app). In the context of a user role/permission, the correct term is 'Читатель' or 'Просматривающий', but most commonly in UI/UX for access rights, 'Читатель' or simply 'Просмотр' is used. However, 'Просмотрщик' sounds like a technical utility rather than a person/role.",
-          "suggestion": "Читатель"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'නරඹනය' (Narambanaya) is a noun meaning 'viewing' or 'the act of watching', rather than the person/role 'Viewer'. In the context of a user role, it should refer to the person who views.",
-          "suggestion": "නරඹන්නා"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -219,13 +178,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Pregledovalnik' refers to a software tool or application (a 'viewer' program), whereas the context specifies a user role (a person who views content).",
-          "suggestion": "Ogledovalec"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

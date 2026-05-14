@@ -3,11 +3,12 @@
   "content": "Opened the form to fill out",
   "content_en_sha1_hash": "ba71e193153034a9fff8236f5236eb1cacef1cb3",
   "created_at": "2025-05-19T21:30:45.773Z",
-  "updated_at": "2026-04-08T07:04:47.452Z",
+  "updated_at": "2026-04-11T20:51:17.102Z",
   "comment": {
-    "text": "\"This translation key defines the content for a status message indicating when a form was opened, typically displayed on a button or in a dialogue related to role history management.\"",
+    "text": "This is a history log entry describing an action. It indicates that a form was opened for completion.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:56.258Z"
+    "updated_at": "2026-04-11T20:51:17.102Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -75,13 +76,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text is in the past tense ('Opened'), indicating a completed action/status, whereas the French translation uses the infinitive ('Ouvrir'), which translates to 'To open' or 'Open'.",
-          "suggestion": "Formulaire ouvert pour remplissage"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -165,13 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text is a past tense status message ('Opened...'), whereas the Slovak translation is an infinitive command ('Otvoriť...'). In the context of history/status logs, the translation should reflect that the action has already occurred.",
-          "suggestion": "Formulár bol otvorený na vyplnenie"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {

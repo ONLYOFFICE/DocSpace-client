@@ -28,6 +28,7 @@ import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import MoreLoginModal from "./index";
 import { MoreLoginModalProps } from "./MoreLoginModal.types";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 describe("<MoreLoginModal />", () => {
   const baseProps: MoreLoginModalProps = {
@@ -68,8 +69,8 @@ describe("<MoreLoginModal />", () => {
 
   it("renders all provided social providers", () => {
     render(<MoreLoginModal {...baseProps} />);
-    expect(screen.getByText("Common:ProviderGoogle")).toBeInTheDocument();
-    expect(screen.getByText("Common:ProviderFacebook")).toBeInTheDocument();
+    expect(screen.getByText(getBrandName("ProviderGoogle"))).toBeInTheDocument();
+    expect(screen.getByText(getBrandName("ProviderFacebook"))).toBeInTheDocument();
   });
 
   it("calls onSocialLoginClick when click on provider", () => {

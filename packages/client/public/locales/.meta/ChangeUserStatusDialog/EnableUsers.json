@@ -3,17 +3,18 @@
   "content": "Enable users",
   "content_en_sha1_hash": "17c615111e9de5f0bb43739d228fa20668b04a5e",
   "created_at": "2025-05-19T21:30:56.973Z",
-  "updated_at": "2026-04-07T19:35:05.049Z",
+  "updated_at": "2026-04-11T21:03:37.984Z",
   "comment": {
-    "text": "This translation key is used to display the text \"Enable users\" in a change user status dialog, indicating a user's permission level. It appears on a button or similar UI element, allowing users to enable or disable their permissions. The key should be translated for use with non-English products and platforms.",
+    "text": "This is a button label in a dialog. It enables one or more users who were previously disabled, allowing them to access the DocSpace platform.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:43.374Z"
+    "updated_at": "2026-04-11T21:03:37.984Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
-      "line_number": 195,
-      "context": "? isGuests\n ? t(\"EnableGuest\")\n : t(\"EnableUser\")\n : isGuests\n ? t(\"EnableGuests\")\n : t(\"EnableUsers\");\n \n bodyText = onlyOneUser\n ? isGuests\n ? t(\"EnableGuestDescription\", { productName: t(\"Common:ProductName\") })\n : t(\"EnableUserDescription\", { productName: t(\"Common:ProductName\") })",
+      "line_number": 196,
+      "context": "? isGuests\n ? t(\"EnableGuest\")\n : t(\"EnableUser\")\n : isGuests\n ? t(\"EnableGuests\")\n : t(\"EnableUsers\");\n \n bodyText = onlyOneUser\n ? isGuests\n ? t(\"EnableGuestDescription\", { productName: getBrandName(\"ProductName\") })\n : t(\"EnableUserDescription\", { productName: getBrandName(\"ProductName\") })",
       "module": "/packages/client"
     }
   ],

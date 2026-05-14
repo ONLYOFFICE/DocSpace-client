@@ -39,6 +39,7 @@ import { getDaysRemaining } from "@docspace/shared/utils/common";
 
 import RoomsContent from "./sub-components/RoomsContent";
 import UsersContent from "./sub-components/UsersContent";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const InviteQuotaWarningDialog = (props) => {
   const {
@@ -112,7 +113,7 @@ const InviteQuotaWarningDialog = (props) => {
     <>
       <Text fontWeight={700}>
         {standalone
-          ? t("LicenseExpired")
+          ? t("LicenseExpiredRestriction")
           : t("PlanPaymentOverdue", {
               planName: currentTariffPlanTitle,
             })}
@@ -147,10 +148,10 @@ const InviteQuotaWarningDialog = (props) => {
       <Text>
         {standalone
           ? t("LicenseGracePeriodInfo", {
-              productName: t("Common:ProductName"),
+              productName: getBrandName("ProductName"),
             })
           : t("GracePeriodActivatedDescription", {
-              productName: t("Common:ProductName"),
+              productName: getBrandName("ProductName"),
             })}
       </Text>
     </>

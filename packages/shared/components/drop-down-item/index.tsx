@@ -30,13 +30,14 @@ import {
   DropDownItem as Component,
   type DropDownItemProps,
 } from "@docspace/ui-kit/components/drop-down-item";
+import { getConstName } from "@docspace/shared/constants/consts";
 
 const DropDownItem = (props: DropDownItemProps) => {
   const { t } = useTranslation(["Common"]);
   return (
     <Component
       {...props}
-      betaLabel={t("Common:BetaLabel")}
+      betaLabel={getConstName("BetaLabel")}
       paidLabel={t("Common:Paid")}
     />
   );

@@ -3,11 +3,12 @@
   "content": "POST response header",
   "content_en_sha1_hash": "7f2adfe37c167c810ce7ffd4e55249c87d28d23e",
   "created_at": "2025-05-19T21:30:49.812Z",
-  "updated_at": "2026-04-08T19:25:24.904Z",
+  "updated_at": "2026-04-11T21:28:31.822Z",
   "comment": {
-    "text": "This translation key is used to display the label \"Response Post Header\" in a UI component, specifically in the details section of webhook event details. It appears as an h3 header element and helps to identify the response headers of a POST request.",
+    "text": "This is a heading for a section displaying the HTTP response headers received after a webhook event.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:54.906Z"
+    "updated_at": "2026-04-11T21:28:31.822Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation says 'POST request header' (ترويسة طلب POST) instead of 'POST response header' (ترويسة استجابة POST). It incorrectly identifies the header as part of the request rather than the response.",
-          "suggestion": "ترويسة استجابة POST"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -111,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ໂພສສ່ວນຫົວການຕອບສະໜອງ' is grammatically awkward and incorrectly structures the technical term. It translates more like 'Post head of response' rather than 'POST response header'. In a technical context, 'Header' should be treated as a specific term.",
-          "suggestion": "ສ່ວນຫົວການຕອບສະໜອງຂອງ POST"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -201,13 +190,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Ukrainian translation says 'POST request header' (Заголовок запиту POST) instead of 'POST response header' (Заголовок відповіді POST). In webhooks, the response header is the header sent back by the server, which is different from the request header.",
-          "suggestion": "Заголовок відповіді POST"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -225,13 +208,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Titulli' means 'Title'. In a technical context regarding HTTP/Webhooks, 'Header' should be translated as 'Koka' or 'Header' (technical term), not 'Titulli'. 'Titulli i përgjigjes' means 'Response Title'.",
-          "suggestion": "Headeri i përgjigjes POST"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

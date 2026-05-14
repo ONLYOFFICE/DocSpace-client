@@ -3,16 +3,17 @@
   "content": "I acknowledge that all current data will be overwritten.",
   "content_en_sha1_hash": "b4aee762103e3c14cbc5c340aec124b45758e322",
   "created_at": "2026-03-20T09:07:35.064Z",
-  "updated_at": "2026-04-08T01:21:40.419Z",
+  "updated_at": "2026-04-13T09:26:51.880Z",
   "comment": {
-    "text": "This text appears in a confirmation checkbox within a restore backup dialog. It acknowledges that restoring the backup will erase any existing data and replace it with the data from the backup. The translator should ensure the phrasing clearly conveys the risk of data loss.",
+    "text": "This is the label for a checkbox in a confirmation modal. It appears when restoring a backup, and the user must check it to acknowledge that current data will be overwritten.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:12:57.258Z"
+    "updated_at": "2026-04-11T20:44:58.181Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/restore-confirm-modal/index.tsx",
-      "line_number": 98,
+      "line_number": 99,
       "context": "<Checkbox\n name=\"restoreBackupConfirmAcknowledge\"\n className={styles.restoreBackupConfirmCheckbox}\n onChange={onChangeRestoreAcknowledged}\n isChecked={isRestoreAcknowledged}\n label={t(\"Common:RestoreBackupConfirmAcknowledge\")}\n dataTestId=\"restore_backup_confirm_checkbox\"\n />\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
       "module": "/packages/shared"
     }
@@ -33,7 +34,15 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani uses 'silinəcəyini' (will be deleted/erased) instead of a term meaning 'overwritten' or 'replaced'. In the backup restore context, data is being overwritten with backup data, not deleted. This is a critical semantic difference that misrepresents what happens to the user's data.",
+          "suggestion": "Bütün mövcud məlumatların əvəz olunacağını təsdiq edirəm. (or: Bütün mövcud məlumatların yazılacağını təsdiq edirəm.)",
+          "checked_at": "2026-04-13T09:25:15.495Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -99,13 +108,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation omits the 'I acknowledge' part of the sentence, which is crucial for a confirmation checkbox where the user is actively affirming their understanding of the risk.",
-          "suggestion": "현재의 모든 데이터가 덮어쓰여짐을 확인했습니다."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -117,7 +120,15 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'pārscrits' is not a valid Latvian form. The correct past participle of 'pārrakstīt' (overwrite) in passive voice is 'pārrakstīts'. The current form appears to be missing the 'rak' component needed for proper Latvian grammar.",
+          "suggestion": "Es atzīstu, ka visi pašreiz esošie dati tiks pārrakstīti.",
+          "checked_at": "2026-04-13T09:25:58.728Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -177,25 +188,13 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'të gjëra të dhëna' is a literal and incorrect translation of 'data'. In Albanian, 'data' (information) is 'të dhënat'. The current translation sounds like 'all things given' rather than 'all current data'.",
-          "suggestion": "E pranoj se të gjitha të dhënat aktuale do të mbishkruhen."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation contains a grammatical error in the verb construction ('ће... бити преписане' is incorrect for the subject 'податке'). It should be 'ће... бити преписани' to match the masculine plural noun 'подаци'.",
-          "suggestion": "Признајем да ће сви тренутни подаци бити преписани."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

@@ -1,6 +1,6 @@
 {
   "AuthViaNTLM": "Auth via NTLM",
-  "EnableSSL": "Activeer SSL",
+  "EnableSMTPSSL": "Activeer SSL",
   "EnterDomain": "Voer domein in",
   "EnterLogin": "Voer login in",
   "EnterPort": "Voer poort in",

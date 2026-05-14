@@ -3,11 +3,12 @@
   "content": "Files are stored in a third-party {{thirdpartyTitle}} storage in the \"{{thirdpartyFolderName}}\" folder.\n<strong>{{thirdpartyPath}}</strong>",
   "content_en_sha1_hash": "239bfc851724cfc88af2a746c35bbbec17b7aee4",
   "created_at": "2025-05-19T21:30:56.846Z",
-  "updated_at": "2026-04-07T19:35:05.058Z",
+  "updated_at": "2026-04-11T21:04:26.068Z",
   "comment": {
-    "text": "This translation key is used to display a description about file storage when using a third-party storage service. It appears in a UI component related to permanent settings or room creation/delivery, guiding users on where files are stored externally.",
+    "text": "This is a descriptive text within a dialog, informing the user about the storage location of files. It appears when configuring permanent settings for a room, indicating that files are stored in a third-party service ({{thirdpartyTitle}}) within a specific folder ({{thirdpartyFolderName}}) and displaying the full path ({{thirdpartyPath}}).",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:01.708Z"
+    "updated_at": "2026-04-11T21:04:26.068Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

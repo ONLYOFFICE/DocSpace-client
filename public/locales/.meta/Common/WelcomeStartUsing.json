@@ -3,13 +3,21 @@
   "content": "Start using",
   "content_en_sha1_hash": "4babe9d461675ffadd5f1222e5c663042525e3eb",
   "created_at": "2026-03-31T15:18:27.052Z",
-  "updated_at": "2026-04-07T20:00:31.428Z",
+  "updated_at": "2026-04-23T17:24:02.160Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a button label that appears in a welcome tour dialog. It prompts the user to begin using the application.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:38:57.886Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/welcome-tour-dialog/index.tsx",
+      "line_number": 156,
+      "context": "scale\n onClick={onStart}\n />\n )}\n <Button\n label={t(\"Common:WelcomeStartUsing\", \"Start using\")}\n size={ButtonSize.normal}\n primary={!canTakeTour}\n scale\n onClick={onSkip}\n />",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

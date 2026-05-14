@@ -3,17 +3,18 @@
   "content": "Add emails to incomplete accounts",
   "content_en_sha1_hash": "ab85e01a86fcd93b7f8ff463ad6151d45e207b1e",
   "created_at": "2025-05-19T21:30:50.326Z",
-  "updated_at": "2026-04-09T04:30:53.905Z",
+  "updated_at": "2026-04-11T21:26:02.089Z",
   "comment": {
-    "text": "This translation key is used to display a title for a setting that allows users to add emails to incomplete accounts. It appears in a UI component related to portal settings and data import, likely on a button or dialog window. Translators should focus on conveying a sense of enabling users to complete account information.",
+    "text": "This is a step title in a wizard for importing users. It indicates the step where the user can add email addresses to accounts that were imported without them.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:56.121Z"
+    "updated_at": "2026-04-11T21:26:02.089Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 70,
-      "context": "component: (\n <SelectUsersStep t={t} canDisable={false} shouldSetUsers={false} />\n ),\n },\n {\n title: t(\"Settings:AddEmails\"),\n description: t(\"Settings:AddEmailsDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: <AddEmailsStep t={t} />,",
+      "line_number": 71,
+      "context": "component: (\n <SelectUsersStep t={t} canDisable={false} shouldSetUsers={false} />\n ),\n },\n {\n title: t(\"Settings:AddEmails\"),\n description: t(\"Settings:AddEmailsDescription\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n }),\n component: <AddEmailsStep t={t} />,",
       "module": "/packages/client"
     }
   ],
@@ -81,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation uses 'նամակներ' (letters/messages) instead of 'էլեկտրոնային հասցեներ' (email addresses). In this context, the user is adding email addresses to accounts, not adding messages to accounts.",
-          "suggestion": "Ավելացրեք էլեկտրոնային հասցեներ անավարտ հաշիվներին"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -159,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'වි-තැපැල්' (vi-thäpäl) is a literal, non-standard, and incorrect translation for 'emails'. In Sinhala, 'emails' should be transliterated as 'ඊමේල්' or referred to as 'විද්‍යුත් තැපැල්' (electronic mail). The current term sounds like a broken compound word.",
-          "suggestion": "අසම්පූර්ණ ගිණුම් වලට ඊමේල් එක් කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -177,25 +166,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation uses the dative case ('nepopolnim računom'), which translates to 'Add emails TO incomplete accounts' in a way that implies the emails are being added to the accounts themselves, but the grammatical structure in Slovenian is slightly ambiguous or implies 'adding emails [by means of] incomplete accounts'. More importantly, 'Dodajte' is an imperative command, whereas in UI titles, a noun phrase or an infinitive is often more appropriate, but specifically, the case usage 'nepopolnim računom' is grammatically awkward for this context. However, the most critical error is that 'Dodajte e-mail' is singular/uncountable in this phrasing, whereas the English 'emails' is plural.",
-          "suggestion": "Dodajanje e-pošt nepopolnim računom"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation is missing a space between 'емаил-ове' and 'непотпучним', resulting in a concatenated word that is grammatically incorrect and hard to read.",
-          "suggestion": "Додај емаил-адресе непотпучним налозима"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

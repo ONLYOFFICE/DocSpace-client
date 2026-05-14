@@ -3,11 +3,12 @@
   "content": "Select {{type}}",
   "content_en_sha1_hash": "362dad28aa0bb6ca287f03d3b542c0aea7263bf8",
   "created_at": "2025-05-19T21:30:48.523Z",
-  "updated_at": "2026-04-07T23:35:04.297Z",
+  "updated_at": "2026-04-12T21:51:46.323Z",
   "comment": {
-    "text": "The translation key \"Select {{type}}\" is used to display a prompt in user interfaces that asks users to select a file type. This text appears as a button label or dialog title, guiding users through the process of choosing a specific type of file. Translators should consider the context and conventions of their language when translating this text.",
+    "text": "This is a placeholder or label for a file selection input. It appears when the user needs to choose a specific type of file, with `{{type}}` being replaced by the file category (e.g., \"documents\", \"spreadsheets\").",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:51:45.422Z"
+    "updated_at": "2026-04-11T20:43:24.204Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -45,13 +46,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation contains a redundant repetition of the English word 'Select' within the Czech sentence, making it nonsensical.",
-          "suggestion": "Vyberte {{type}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -147,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'Selectare' is a noun (Selection), whereas the English 'Select' is an imperative verb (command). In UI contexts for buttons or prompts, the imperative form 'Selectați' or 'Selectează' is required to match the meaning.",
-          "suggestion": "Selectați {{type}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

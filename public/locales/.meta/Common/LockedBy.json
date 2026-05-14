@@ -3,11 +3,12 @@
   "content": "This file is locked by {{userName}}",
   "content_en_sha1_hash": "b9caf0799e66f5c8a04cc20f92c36f39cfc201b2",
   "created_at": "2025-08-04T07:29:14.747Z",
-  "updated_at": "2026-04-08T05:17:57.438Z",
+  "updated_at": "2026-04-11T20:49:17.834Z",
   "comment": {
-    "text": "This key displays a tooltip indicating which user has locked a file. It appears as a text label within a UI element (likely a button or icon) to inform the user who currently holds the lock. The `userName` variable should be replaced with the actual username of the locking user.",
+    "text": "This is a tooltip that appears when hovering over a locked file, indicating who has locked it. `{{userName}}` will be replaced with the name of the user who locked the file.",
     "is_auto": true,
-    "updated_at": "2025-08-04T08:11:17.130Z"
+    "updated_at": "2026-04-11T20:49:17.834Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -51,13 +52,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech translation uses the wrong grammatical case for the prepositional phrase. 'Uzamčen' (locked) requires the preposition 'od' (by) or a different construction to indicate the agent. As written, it sounds like the file is locked 'by means of' the user, which is semantically incorrect.",
-          "suggestion": "Tento soubor uzamkl {{userName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -123,13 +118,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation is missing the preposition 'by' (tuvumā/pēc), making the sentence grammatically incorrect and potentially ambiguous. In Latvian, to express 'locked by [user]', a preposition or a specific grammatical construction is required.",
-          "suggestion": "Šis fails ir bloķēts lietotāja {{userName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {

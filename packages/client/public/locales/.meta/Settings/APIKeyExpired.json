@@ -3,11 +3,12 @@
   "content": "This API key has expired and is no longer active",
   "content_en_sha1_hash": "5498c70b6165069d2e537997b766fe0372503688",
   "created_at": "2025-05-19T21:30:50.515Z",
-  "updated_at": "2026-04-09T04:15:54.157Z",
+  "updated_at": "2026-04-11T21:25:45.105Z",
   "comment": {
-    "text": "This translation key is used to display a message indicating that an API key has expired. It appears as a tooltip in a UI element and provides context for users who need to update or deactivate their API key. The exact appearance may vary depending on the application's design, but its purpose remains consistent: to inform users of their account's current status.",
+    "text": "This is a tooltip message that appears when an API key's lifetime icon is hovered over, indicating that the API key has passed its expiration date.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:48.605Z"
+    "updated_at": "2026-04-11T21:25:45.105Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -105,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation uses 'ບໍ່ເຄີຍໃຊ້ງານອີກຕໍ່ໄປ' which means 'never used again' or 'has never been used again'. This changes the meaning from 'is no longer active' (current state) to a statement about past usage history.",
-          "suggestion": "ຄີ API ນີ້ໝົດອາຍຸແລ້ວ ແລະ ບໍ່ສາມາດໃຊ້ງານໄດ້ອີກຕໍ່ໄປ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {

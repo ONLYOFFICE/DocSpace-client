@@ -3,11 +3,12 @@
   "content": "Blank Spreadsheet",
   "content_en_sha1_hash": "a5da75f1bb925b30f2f1c319c42d7a11feb6f0e3",
   "created_at": "2026-02-18T14:56:25.425Z",
-  "updated_at": "2026-04-09T04:03:55.444Z",
+  "updated_at": "2026-04-11T21:25:28.375Z",
   "comment": {
-    "text": "This key provides the title for a blank spreadsheet template. It appears as the name of the default spreadsheet file when creating a new document. Translators should ensure the title accurately reflects an empty, ready-to-use spreadsheet.",
+    "text": "This is a label for a template option. It appears when a user is selecting a new spreadsheet template to create a blank spreadsheet.",
     "is_auto": true,
-    "updated_at": "2026-03-20T10:28:30.969Z"
+    "updated_at": "2026-04-11T21:25:28.375Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -39,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation 'Лист с данни' means 'Data sheet', which implies the presence of data. The English source 'Blank Spreadsheet' specifies that the sheet is empty/blank.",
-          "suggestion": "Праздна електронна таблица"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -93,13 +88,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text is singular ('Blank Spreadsheet'), but the Italian translation is plural ('Fogli di calcolo vuoti'). This creates a mismatch in the document title.",
-          "suggestion": "Foglio di calcolo vuoto"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -123,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'blāķerts' is a phonetic transliteration of the English word 'blank' and is not a valid Latvian word. The correct term for 'blank' in this context is 'tukšs'.",
-          "suggestion": "Tukša tabula"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -141,13 +124,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical gender mismatch: 'Pusta' is feminine, but 'arkusz kalkulacyjny' is masculine. The adjective must agree with the noun.",
-          "suggestion": "Pusty arkusz kalkulacyjny"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -183,25 +160,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Prázdny súbor' means 'Blank file', which is too generic. The English source specifically refers to a 'Spreadsheet' (.xlsx context), so the translation should specify the type of document.",
-          "suggestion": "Prázdna tabuľka"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Prázdno' is Czech, not Slovenian. The correct Slovenian word for 'blank/empty' is 'Prazen' or 'Prazna'. Additionally, 'tablo' is the wrong grammatical form/word for spreadsheet in this context.",
-          "suggestion": "Prazna tabela"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
@@ -219,13 +184,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'spajnica' means 'connector' or 'splice', which is incorrect for a spreadsheet. The correct term for a spreadsheet in Serbian is 'tabelarni list' or 'radna tabela'. Additionally, 'prazan' is masculine, but 'spajnica' is feminine, creating a grammatical mismatch.",
-          "suggestion": "Prazan tabelarni list"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

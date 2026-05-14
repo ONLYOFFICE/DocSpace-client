@@ -3,11 +3,12 @@
   "content": "Third-party resource",
   "content_en_sha1_hash": "001907b089c0c5b90b1c10187b7bc68cca254fae",
   "created_at": "2025-05-26T07:15:48.793Z",
-  "updated_at": "2026-04-07T21:53:16.366Z",
+  "updated_at": "2026-04-12T15:44:55.186Z",
   "comment": {
-    "text": "This translation key is used as a label for a radio button in a UI component, typically displayed on buttons or dialogs. It represents the term \"Third-party resource\" and appears to be associated with backup options, specifically in contexts related to third-party resources, auto-backup, and manual-backup pages.",
+    "text": "This is a label for a filter option or a radio button. It refers to external resources not hosted directly within DocSpace, such as files from third-party cloud storage.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:03:16.729Z"
+    "updated_at": "2026-04-11T20:41:09.125Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -18,7 +19,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 544,
+      "line_number": 545,
       "context": "<div className={styles.modules}>\n <RadioButton\n {...commonRadioButtonProps}\n id=\"third-party-resource\"\n label={t(\"Common:ThirdPartyResource\")}\n name={`${BackupStorageType.ResourcesModuleType}`}\n isChecked={isCheckedThirdParty}\n isDisabled={isLoadingData}\n testId=\"auto_backup_resource_radio_button\"\n />",
       "module": "/packages/shared"
     },
@@ -30,7 +31,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/index.tsx",
-      "line_number": 233,
+      "line_number": 234,
       "context": "label: t(\"Common:RoomsModule\"),\n },\n {\n id: \"third-party-resource\",\n value: DISK_SPACE,\n label: t(\"Common:ThirdPartyResource\"),\n },\n {\n id: \"third-party-storage\",\n value: STORAGE_SPACE,\n label: t(\"Common:ThirdPartyStorage\"),",
       "module": "/packages/shared"
     }
@@ -105,13 +106,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Italian translation 'Archiviazione di terze parti' means 'Third-party storage', whereas the English source is 'Third-party resource'. In a UI context, 'resource' and 'storage' are distinct concepts.",
-          "suggestion": "Risorsa di terze parti"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -189,13 +184,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Shranjevanje pri zunanjem ponudniku' means 'Saving to an external provider', which is a verb phrase/action. The English source 'Third-party resource' is a noun phrase describing a type of entity/resource. In a UI context (radio button label), the translation should name the resource type, not the action of saving.",
-          "suggestion": "Zunanji vir"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

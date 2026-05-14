@@ -3,17 +3,18 @@
   "content": "You can archive the unnecessary rooms or <1>click here</1> to find a more suitable pricing plan for your {{productName}}.",
   "content_en_sha1_hash": "cb8abf7215c9ff542a9c50ac5edbe2a6bd86b4f7",
   "created_at": "2025-05-19T21:30:54.125Z",
-  "updated_at": "2026-04-07T19:35:05.154Z",
+  "updated_at": "2026-04-11T21:17:40.224Z",
   "comment": {
-    "text": "This translation key is used to provide a brief description for a button that allows users to find a more suitable pricing plan for their product. It appears on a Quotas Bar component and needs to be translated into other languages for accessibility and user experience consistency.",
+    "text": "This is a descriptive text displayed when a user is nearing or has exceeded their room quota. It offers solutions: archiving rooms or upgrading their plan. `{{productName}}` is the name of the product (e.g., ONLYOFFICE DocSpace), and `<1>click here</1>` is a clickable link.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:23.070Z"
+    "updated_at": "2026-04-11T21:17:40.224Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 219,
-      "context": "});\n \n return (\n <Trans\n t={t}\n i18nKey=\"RoomQuotaDescription\"\n values={{\n productName: t(\"Common:ProductName\"),\n }}\n components={{\n 1: (",
+      "line_number": 220,
+      "context": "});\n \n return (\n <Trans\n t={t}\n i18nKey=\"RoomQuotaDescription\"\n values={{\n productName: getBrandName(\"ProductName\"),\n }}\n components={{\n 1: (",
       "module": "/packages/client"
     }
   ],

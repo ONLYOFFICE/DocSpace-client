@@ -3,22 +3,23 @@
   "content": "Choose from list",
   "content_en_sha1_hash": "e284f61fe00c23c301b217153f5427eb75cab3eb",
   "created_at": "2025-05-19T21:30:49.956Z",
-  "updated_at": "2026-04-08T21:25:12.048Z",
+  "updated_at": "2026-04-11T21:27:37.542Z",
   "comment": {
-    "text": "This translation key is used to display a message that prompts the user to select from a list of options in various UI components, including buttons and dialogs. The purpose of this text is to provide clear instructions to the user in moments when they need to make a choice from a predefined set of values. It appears as a label on a button component, guiding users through interactive elements.",
+    "text": "This is a button label that, when clicked, opens a list of options for the user to select from.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:36.717Z"
+    "updated_at": "2026-04-11T21:27:37.542Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 218,
+      "line_number": 219,
       "context": ") : (\n <div className={styles.peopleSelector}>\n <AddButton\n className=\"selector-add-button\"\n onClick={onTogglePeopleSelector}\n label={t(\"Translations:ChooseFromList\")}\n noSelect\n titleText={t(\"Translations:ChooseFromList\")}\n testId=\"change_portal_owner_choose_from_list_button\"\n />\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 218,
+      "line_number": 219,
       "context": ") : (\n <div className={styles.peopleSelector}>\n <AddButton\n className=\"selector-add-button\"\n onClick={onTogglePeopleSelector}\n label={t(\"Translations:ChooseFromList\")}\n noSelect\n titleText={t(\"Translations:ChooseFromList\")}\n testId=\"change_portal_owner_choose_from_list_button\"\n />\n </div>",
       "module": "/packages/client"
     },
@@ -36,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
-      "line_number": 643,
+      "line_number": 644,
       "context": "type=\"action\"\n isHovered\n onClick={openUsersPanel}\n dataTestId=\"invite_panel_choose_from_list_link\"\n >\n {t(\"Translations:ChooseFromList\")}\n </Link>\n ) : null}\n </Heading>\n <Text\n className={classNames(styles.description, {",
       "module": "/packages/client"
     },

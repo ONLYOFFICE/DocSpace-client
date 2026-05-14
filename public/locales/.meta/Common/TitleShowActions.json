@@ -3,13 +3,26 @@
   "content": "Show File Actions",
   "content_en_sha1_hash": "5f4d732bf49f42d2b52ab6682a11f986c01135a6",
   "created_at": "2026-02-18T14:56:21.929Z",
-  "updated_at": "2026-04-07T21:41:05.206Z",
+  "updated_at": "2026-04-13T14:59:05.788Z",
   "comment": {
-    "text": "This key displays text on a button or context menu option, indicating that it will show available actions for a file or folder. The displayed text changes based on whether the item is a folder or a regular file. Translators should ensure the text accurately reflects the function of revealing further options.",
+    "text": "This is a tooltip for a button that opens a context menu with actions for a file or folder.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:09:54.627Z"
+    "updated_at": "2026-04-11T20:41:02.386Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/components/tiles/file-tile/index.tsx",
+      "line_number": 375,
+      "context": "displayType={ContextMenuButtonDisplayType.toggle}\n onClick={(e) => {\n e.stopPropagation();\n onContextMenu(e);\n }}\n title={t(\"TitleShowActions\")}\n />\n ) : (\n <div className=\"expandButton\" />\n )}\n <ContextMenu",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/components/tiles/folder-tile/index.tsx",
+      "line_number": 321,
+      "context": "displayType={ContextMenuButtonDisplayType.toggle}\n onClick={(e) => {\n e.stopPropagation();\n onContextMenu(e);\n }}\n title={t(\"TitleShowActions\")}\n />\n ) : (\n <div className=\"expandButton\" />\n )}\n <ContextMenu",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/ContextButton.tsx",
       "line_number": 138,
@@ -45,13 +58,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'əyləmlərini' is a misspelling of 'əməliyyatlarını' (actions/operations). 'Əyləm' is not a standard Azerbaijani word for 'action' in this context; it appears to be a typo or a mistranslation of 'actions'.",
-          "suggestion": "Fayl əməliyyatlarını göstər"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -87,13 +94,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation 'Toimenpiteet' (Actions) omits the verb 'Show', which is part of the English source 'Show File Actions'. While concise, it fails to convey the instructional nature of the button/title.",
-          "suggestion": "Näytä tiedoston toiminnot"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -129,13 +130,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ສະແດງ ໄຟລ໌ ການ​ປະ​ຕິ​ບັດ' literally translates to 'Show File Action/Execution' in a way that sounds like a command to execute a file rather than a menu option to 'Show File Actions' (viewing available options). The word order and phrasing are unnatural for a UI menu.",
-          "suggestion": "ສະແດງການຈັດການໄຟລ໌"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {

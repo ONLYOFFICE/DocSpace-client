@@ -3,11 +3,12 @@
   "content": "These files are protected. Please try entering the password for all files. If you don't remember the password but need these files, you can download them in their original format or simply remove them from the list. Then you can download the rest of the files.",
   "content_en_sha1_hash": "f5fddb42e87596a64459b490711a116988ce134e",
   "created_at": "2025-05-19T21:30:45.260Z",
-  "updated_at": "2026-04-08T09:36:30.063Z",
+  "updated_at": "2026-04-11T20:52:43.235Z",
   "comment": {
-    "text": "\"This translation key is used for a warning message that informs users their files are protected and prompts them to enter a password for download. The text appears in a password input field or related dialog component.\"",
+    "text": "This is a message displayed within a dialog box, informing the user that some files they are trying to download are password-protected and offering options to proceed.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:14.760Z"
+    "updated_at": "2026-04-11T20:52:43.235Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -105,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'ຖ້າມື້' (if day) is used instead of 'ຖ້າທ່ານ' (if you). This is a typo that changes the meaning to 'If day not remember' instead of 'If you don't remember'.",
-          "suggestion": "ເອກະສານເຫຼົ່ານີ້ຖືກປົກປ້ອງໄວ້. ກະລຸນາລອງໃສ່ລະຫັດລັບສໍາລັບເອກະສານທັງຫມົດ. ຖ້າທ່ານຈໍາລະຫັດລັບບໍ່ໄດ້ແຕ່ຕ້ອງການເອກະສານເຫຼົ່ານີ້, ທ່ານສາມາດດາວໂລດພວກມັນໃນຮູບແບບຕົ້ນສະບັບຫຼືລົບພວກມັນອອກຈາກລາຍຊື່. ຈາກນັ້ນທ່ານສາມາດດາວໂລດເອກະສານທີ່ເຫຼືອໄດ້."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -213,13 +208,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The final sentence of the English text ('Then you can download the rest of the files.') is missing from the Albanian translation.",
-          "suggestion": "Këto skedarë janë të mbrojtur. Ju lutem provoni të vendosni fjalëkalimin për të gjithë skedarët. Nëse nuk e mbani mend fjalëkalimin, por ju nevojiten këta skedarë, mund të i shkarkoni në formatin e tyre origjinal ose mundeni thjesht t'i hiqni nga lista. Pastaj mund të shkarkoni pjesën tjetër të skedarëve."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

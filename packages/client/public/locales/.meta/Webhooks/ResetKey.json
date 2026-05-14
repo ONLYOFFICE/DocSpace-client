@@ -3,16 +3,17 @@
   "content": "Reset key",
   "content_en_sha1_hash": "4ef3e8546c333e4167016acc1fdffcc96e5714b7",
   "created_at": "2025-05-19T21:30:49.801Z",
-  "updated_at": "2026-04-08T19:31:48.772Z",
+  "updated_at": "2026-04-23T17:24:01.921Z",
   "comment": {
-    "text": "This translation key is used for the label of a \"Reset\" button, typically found on password input fields. Its purpose is to provide a clear indication of what action will be taken when clicked, in this case, resetting a secret key.",
+    "text": "This is a link label that, when clicked, allows the user to reset a secret key or API key for a service integration.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:56.494Z"
+    "updated_at": "2026-04-11T21:28:36.110Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
-      "line_number": 384,
+      "line_number": 537,
       "context": "lineHeight=\"20px\"\n isHovered\n onClick={onResetKey}\n dataTestId=\"provider-reset-key-link\"\n >\n {t(\"Webhooks:ResetKey\")}\n </Link>\n </div>\n ) : (\n <>\n <PasswordInput",
       "module": "/packages/client"
     },
@@ -177,13 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses a transliteration of the English word 'Reset' ('Ресет') instead of a proper Serbian translation. In the context of a button to reset a key, 'Подеси кључ' or 'Поновно постави кључ' is required.",
-          "suggestion": "Поновно постави кључ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

@@ -3,11 +3,12 @@
   "content": "Encryption keys must be re-entered",
   "content_en_sha1_hash": "f6c9e7a53732f83f529413953357fb0a3f6c84d3",
   "created_at": "2025-05-19T21:30:44.961Z",
-  "updated_at": "2026-04-10T08:21:04.403Z",
+  "updated_at": "2026-04-11T20:53:34.957Z",
   "comment": {
-    "text": "Encryption keys must be re-entered. This message is used to inform users when they need to re-authenticate or update their encryption keys in a login or update process. It typically appears as a notification or confirmation prompt on a desktop application's login page or dialog box.",
+    "text": "This is a toast message informing the user that encryption keys need to be re-entered, likely due to a security-related event or session expiration.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:25.773Z"
+    "updated_at": "2026-04-11T20:53:34.957Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -39,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation uses 'Криптиращите ключове' (The encrypting keys), which implies the keys themselves are performing the action of encryption. The correct technical term for 'Encryption keys' is 'Ключове за криптиране'.",
-          "suggestion": "Ключовете за криптиране трябва да се въведат отново"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -111,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation means 'Please enter the password again to confirm', which is not the same as 'Encryption keys must be re-entered'. It uses 'password' (ລະສັດ/ລະຫັດ) instead of 'encryption keys'.",
-          "suggestion": "ຕ້ອງປ້ອນກະແສລະຫັດເຂົ້າໃໝ່"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -165,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'සංකේතන' contains a spelling error (incorrect vowel sign placement/character combination for 'Encryption'). The correct spelling is 'සංකේතන'.",
-          "suggestion": "සංකේතන යතුරු නැවත ඇතුළත් කළ යුතුය"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -195,13 +178,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Šifrovani ključevi' means 'Encrypted keys', whereas the source 'Encryption keys' refers to 'Ključevi za šifrovanje'. The current translation implies the keys themselves are already encrypted, rather than being the keys used for the encryption process.",
-          "suggestion": "Ključevi za šifrovanje moraju biti ponovo unešeni"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

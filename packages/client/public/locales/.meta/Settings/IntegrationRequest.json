@@ -3,17 +3,18 @@
   "content": "Missing a useful integration or component in {{organizationName}} {{productName}}? Leave a request to our team and we will look into that.",
   "content_en_sha1_hash": "da782db9c5d551ef807b855ecc4b97622a8a8f10",
   "created_at": "2025-05-19T21:30:51.703Z",
-  "updated_at": "2026-04-09T02:49:32.265Z",
+  "updated_at": "2026-04-11T21:23:48.974Z",
   "comment": {
-    "text": "This translation key is used to display a message requesting users to leave a request for a missing integration or component in a specific product. The text appears as a button label on the PortalSettings page, likely prompting users to submit their requests to the team.",
+    "text": "This is a paragraph of text displayed on the integration settings page. It encourages users to request new integrations, with `{{organizationName}}` representing the organization's name and `{{productName}}` representing the product's name.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:04.060Z"
+    "updated_at": "2026-04-11T21:23:48.974Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/index.js",
-      "line_number": 249,
-      "context": "className=\"integration-image\"\n src={imgSrc}\n alt=\"integration_icon\"\n />\n <Text>\n {t(\"IntegrationRequest\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n })}\n </Text>\n <Button",
+      "line_number": 250,
+      "context": "className=\"integration-image\"\n src={imgSrc}\n alt=\"integration_icon\"\n />\n <Text>\n {t(\"IntegrationRequest\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n })}\n </Text>\n <Button",
       "module": "/packages/client"
     }
   ],
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation adds significant extra text '(المجموعة المكتبية المتكاملة ل ...)' which is not present in the source English text. This changes the structure and meaning of the sentence.",
-          "suggestion": "هل تفتقد تكاملاً مفيداً أو مكوناً في {{organizationName}} {{productName}}؟ اترك طلباً لفريقنا وسننظر في ذلك."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -99,13 +94,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The second sentence of the English text ('Leave a request to our team and we will look into that.') is missing in the Japanese translation. The Japanese version only translates the first sentence as a question.",
-          "suggestion": "{{organizationName}} {{productName}}に便利な統合やコンポーネントが足りませんか？私たちのチームにリクエストを送ってください。検討させていただきます。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -117,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ອອກຈາກການຮ້ອງຂໍ' (Leave from the request) is a mistranslation of 'Leave a request'. In Lao, this implies exiting or leaving a request rather than submitting/sending one. Additionally, the sentence ends with 'ພວກເຮົາຈະກວດເບິ່ງວ່າ' which translates to 'we will look into that...' but is grammatically incomplete/awkward in Lao.",
-          "suggestion": "ຂາດການເຊື່ອມໂຍງ ຫຼື ອົງປະກອບທີ່ເປັນປະໂຫຍດໃນ {{organizationName}} {{productName}} ແມ່ນບໍ? ສົ່ງຄຳຮ້ອງຂໍໃຫ້ທີມງານຂອງພວກເຮົາ ແລະ ພວກເຮົາຈະກວດສອບເລື່ອງນີ້."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {

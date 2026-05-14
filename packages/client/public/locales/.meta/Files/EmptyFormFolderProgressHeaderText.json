@@ -3,16 +3,17 @@
   "content": "Nothing here yet",
   "content_en_sha1_hash": "e892255d168b0ccc00b895b653a7ff8d9a7ab4f0",
   "created_at": "2025-05-19T21:30:55.565Z",
-  "updated_at": "2026-04-07T19:35:05.082Z",
+  "updated_at": "2026-04-11T21:09:50.476Z",
   "comment": {
-    "text": "This translation key displays a generic message when an empty folder is shown, indicating that there are no files within it. It appears in UI elements displaying folders with no content.",
+    "text": "This text is displayed in the \"In Progress\" folder when it contains no forms. It indicates that there are no forms currently being worked on.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:39:51.314Z"
+    "updated_at": "2026-04-11T21:09:50.476Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 328,
+      "line_number": 329,
       "context": ".with([P._, FolderType.Done, P._], () =>\n t(\"Files:EmptyFormFolderDoneHeaderText\"),\n )\n \n .with([P._, FolderType.InProgress, P._], () =>\n t(\"Files:EmptyFormFolderProgressHeaderText\"),\n )\n .with(\n [\n P._,\n P.union(FolderType.SubFolderDone, FolderType.SubFolderInProgress),",
       "module": "/packages/client"
     }

@@ -3,11 +3,12 @@
   "content": "Watermark for files in the room disabled",
   "content_en_sha1_hash": "9f0daf643db9ac09f2c5d26712afdb90fbe2454d",
   "created_at": "2025-05-19T21:30:54.954Z",
-  "updated_at": "2026-04-07T19:35:05.121Z",
+  "updated_at": "2026-04-11T21:12:36.424Z",
   "comment": {
-    "text": "This translation key is used to display the message \"Watermark for files in the room disabled\" in a user interface. It likely appears on a settings or configuration page related to file sharing in a room or collaboration environment, such as a button label or tooltip. The translation key provides context for translators regarding the UI element and its purpose.",
+    "text": "This is a toast message indicating that the watermark feature for files within a specific room has been turned off.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:40:43.581Z"
+    "updated_at": "2026-04-11T21:12:36.424Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

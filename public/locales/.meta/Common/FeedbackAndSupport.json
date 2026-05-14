@@ -3,11 +3,12 @@
   "content": "Feedback & Support",
   "content_en_sha1_hash": "7714e1a8a44cee405d24cfadd08ff22d9fc4f6b9",
   "created_at": "2025-05-19T21:30:45.233Z",
-  "updated_at": "2026-04-08T09:52:08.295Z",
+  "updated_at": "2026-04-11T20:52:54.124Z",
   "comment": {
-    "text": "This translation key is used to display a label on a user menu item for accessing support and feedback features. It appears in the user menu, allowing users to access common feedback and support options. The exact UI component this label is part of can be found at /packages/client/src/store/ProfileActionsStore.js line 439.",
+    "text": "This is a button label in the user menu. It opens a link to the feedback and support page.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:15.957Z"
+    "updated_at": "2026-04-11T20:52:54.124Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -105,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation contains unnecessary spaces within words (e.g., 'ຄຳ ຄິດເຫັນ' instead of 'ຄຳຄິດເຫັນ' and 'ສະ ໜັບ ສະ ໜູນ' instead of 'ສະໜັບສະໜູນ'), which breaks word integrity and readability.",
-          "suggestion": "ຄຳຄິດເຫັນ ແລະ ການສະໜັບສະໜູນ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -147,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation uses a definite article ('asistența') for the second noun but not the first, making it grammatically inconsistent and slightly changing the meaning from a general category to a specific one. More importantly, 'asistență' is less common than 'suport' in a software UI context for 'Support'.",
-          "suggestion": "Feedback și suport"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

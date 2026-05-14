@@ -48,6 +48,7 @@ import {
   InjectedImportStepProps,
 } from "../types";
 import { MigrationButtons } from "../sub-components/MigrationButtons";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const Wrapper = styled.div`
   display: flex;
@@ -132,7 +133,7 @@ const ImportStep = (props: ImportStepProps) => {
         }}
         importSection={{
           sectionName: t("Common:Members"),
-          workspace: t("Common:ProductName"),
+          workspace: getBrandName("ProductName"),
           sectionIcon: MembersIcon,
         }}
         isDisabled
@@ -163,7 +164,7 @@ const ImportStep = (props: ImportStepProps) => {
         }}
         importSection={{
           sectionName: t("Common:Groups"),
-          workspace: t("Common:ProductName"),
+          workspace: getBrandName("ProductName"),
           sectionIcon: GroupsIcon,
         }}
         isDisabled={false}
@@ -195,7 +196,7 @@ const ImportStep = (props: ImportStepProps) => {
         }}
         importSection={{
           sectionName: t("Common:MyDocuments"),
-          workspace: t("Common:ProductName"),
+          workspace: getBrandName("ProductName"),
           sectionIcon: DocumentsIcon,
         }}
         isDisabled={false}
@@ -226,7 +227,7 @@ const ImportStep = (props: ImportStepProps) => {
         }}
         importSection={{
           sectionName: t("Common:SharedWithMe"),
-          workspace: t("Common:ProductName"),
+          workspace: getBrandName("ProductName"),
           sectionIcon: SharedOutlineIcon,
         }}
         isDisabled={!importOptions.importPersonalFiles}
@@ -256,7 +257,7 @@ const ImportStep = (props: ImportStepProps) => {
           sectionName={t("Common:CommonFiles")}
           description={t("Settings:CommonFilesDescription", {
             user: user?.displayName,
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
           })}
           exportSection={{
             sectionName: t("Common:Common"),
@@ -265,7 +266,7 @@ const ImportStep = (props: ImportStepProps) => {
           }}
           importSection={{
             sectionName: t("Common:Rooms"),
-            workspace: t("Common:ProductName"),
+            workspace: getBrandName("ProductName"),
             sectionIcon: RoomsIcon,
           }}
           isDisabled={false}
@@ -286,7 +287,7 @@ const ImportStep = (props: ImportStepProps) => {
           }}
           importSection={{
             sectionName: t("Common:Rooms"),
-            workspace: t("Common:ProductName"),
+            workspace: getBrandName("ProductName"),
             sectionIcon: RoomsIcon,
           }}
           isDisabled={false}

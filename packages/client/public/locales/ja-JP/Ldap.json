@@ -47,6 +47,7 @@
   "LdapSettings": "LDAP設定",
   "LdapSettingsCertCnNoMatch": "証明書名がホスト名と一致しません",
   "LdapSettingsCertExpired": "証明書の有効期限が切れています",
+  "LdapSettingsCertIssuerChaining": "証明書発行者のチェーンが提供されていません",
   "LdapSettingsCertMalformed": "不正な証明書",
   "LdapSettingsCertUnrecognizedError": "認識できないエラー",
   "LdapSettingsCertUntrustedCa": "証明書を発行した認証局が信頼されていません",
@@ -70,6 +71,5 @@
   "LdapUserFilterTooltip": "検索LDAPフィルタを使用して、インポートするユーザーを選択してください。",
   "LdapUserQuotaTooltip": "ユーザーのストレージ容量制限を設定するには、LDAP ディレクトリに属性（例：UsersQuotaLimit）を追加し、この属性に整数値を入力します。これにより、容量制限の値がバイト単位で表示されます。ここでは、属性名のみを指定します。この属性は最初のセットアップ時にのみ適用され、後で{{contactsName}}セクションで手動で変更することができます。",
   "LdapUsersType": "ユーザータイプ",
-  "LdapUserTypeTooltip": "全てのユーザーは選択したタイプで{{productName}}に追加されます。",
-  "LdapSettingsCertIssuerChaining": "証明書発行者のチェーンが提供されていません"
+  "LdapUserTypeTooltip": "全てのユーザーは選択したタイプで{{productName}}に追加されます。"
 }

@@ -3,13 +3,21 @@
   "content": "Browse available templates in the library",
   "content_en_sha1_hash": "30c4b329e6ca09c9c2c89624e7099ee9d1e7708c",
   "created_at": "2026-03-31T15:18:14.880Z",
-  "updated_at": "2026-04-08T06:04:54.831Z",
+  "updated_at": "2026-04-23T17:24:02.166Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a short description displayed below a step title in a multi-step process. It instructs the user to browse templates in the library.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:50:07.785Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/forms/library/[langId]/[categoryId]/template/[templateId]/page.client.tsx",
+      "line_number": 254,
+      "context": "<div>\n <div className={styles.stepTitle}>\n {t(\"Common:LibraryStep1Title\")}\n </div>\n <div className={styles.stepDesc}>\n {t(\"Common:LibraryStep1DescShort\")}\n </div>\n </div>\n </li>\n <li className={styles.stepItem}>\n <span className={styles.stepNumber}>2</span>",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -104,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian verb 'Pārliecinieties' means 'Make sure' or 'Ensure', whereas the English verb 'Browse' means to look through or explore. This changes the intent of the action.",
-          "suggestion": "Pārlūkojiet pieejamos šablonus bibliotēkā"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -164,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'kirjici' means 'little book' (diminutive), whereas 'library' in a software context should be 'knjižnica'.",
-          "suggestion": "Prebrskajte dostopne predloge v knjižnici"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

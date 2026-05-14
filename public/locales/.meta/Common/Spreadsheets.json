@@ -3,11 +3,12 @@
   "content": "Spreadsheets",
   "content_en_sha1_hash": "e8a0fe95bcd9c07d210920e52baa1560871c11ad",
   "created_at": "2025-05-19T21:30:49.008Z",
-  "updated_at": "2026-04-07T22:30:59.778Z",
+  "updated_at": "2026-04-23T17:24:01.686Z",
   "comment": {
-    "text": "The translation key \"Common:Spreadsheets\" is used to display a label indicating that only spreadsheets are being filtered or selected in a file filter interface. It appears as part of a dropdown menu or list, providing context for users selecting files by type.",
+    "text": "This is a label for a tab or filter option. It refers to files of the spreadsheet type (e.g., .xlsx).",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:38:55.939Z"
+    "updated_at": "2026-04-11T20:42:12.932Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -31,7 +32,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
       "line_number": 137,
-      "context": "key: FilterType.PresentationsOnly,\n label: t(`Common:Presentations`),\n },\n {\n key: FilterType.SpreadsheetsOnly,\n label: t(`Common:Spreadsheets`),\n },\n {\n key: FilterType.PDFForm,\n label: getManyPDFTitle(t, true),\n },",
+      "context": "key: FilterType.PresentationsOnly,\n label: t(\"Common:Presentations\"),\n },\n {\n key: FilterType.SpreadsheetsOnly,\n label: t(\"Common:Spreadsheets\"),\n },\n {\n key: FilterType.PDFForm,\n label: getManyPDFTitle(t, true),\n },",
       "module": "/packages/client"
     },
     {
@@ -39,6 +40,18 @@
       "line_number": 158,
       "context": "label: t(\"Common:Documents\"),\n typeKey: FilterType.DocumentsOnly,\n },\n {\n key: \"filter-type-spreadsheets\",\n label: t(\"Common:Spreadsheets\"),\n typeKey: FilterType.SpreadsheetsOnly,\n },\n {\n key: \"filter-type-presentations\",\n label: t(\"Common:Presentations\"),",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/useFilesFilter.tsx",
+      "line_number": 185,
+      "context": "},\n {\n id: \"filter_type-spreadsheets\",\n key: FilterType.SpreadsheetsOnly.toString(),\n group: FilterGroups.filterType,\n label: t(\"Common:Spreadsheets\"),\n },\n {\n id: \"filter_type-presentations\",\n key: FilterType.PresentationsOnly.toString(),\n group: FilterGroups.filterType,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/useFilesFilter.tsx",
+      "line_number": 185,
+      "context": "},\n {\n id: \"filter_type-spreadsheets\",\n key: FilterType.SpreadsheetsOnly.toString(),\n group: FilterGroups.filterType,\n label: t(\"Common:Spreadsheets\"),\n },\n {\n id: \"filter_type-presentations\",\n key: FilterType.PresentationsOnly.toString(),\n group: FilterGroups.filterType,",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
@@ -201,13 +214,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Tabele' means 'Tables', which refers to a structural element within a document. The English term 'Spreadsheets' refers to the entire file type (e.g., .xlsx). In the context of a file filter, 'Naložnice' or 'Ekselove tabelne lista' is more accurate, but 'Naložnice' is the standard term for spreadsheet files in Slovenian software localization.",
-          "suggestion": "Naložnice"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -249,13 +256,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Albanian translation 'Fletë kryesore' means 'Main sheets' or 'Home pages', which is incorrect for the context of spreadsheet files (Excel/XLSX).",
-          "suggestion": "Tabele"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -1,0 +1,29 @@
+{
+  "key_path": "FileDownloaded",
+  "content": "File downloaded",
+  "content_en_sha1_hash": "919b37b6dc7d420ba1b42a7ebf7d366df120ee68",
+  "created_at": "2026-04-27T12:45:01.641Z",
+  "updated_at": "2026-04-27T12:45:54.454Z",
+  "comment": {
+    "text": "Label for a webhook trigger event that occurs when a file is downloaded.",
+    "is_auto": true,
+    "updated_at": "2026-04-27T12:45:54.454Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
+      "line_number": 101,
+      "context": "case WebhookTriggers.AgentUpdated:\n return t(\"AgentUpdated\");\n case WebhookTriggers.AgentDeleted:\n return t(\"AgentDeleted\");\n case WebhookTriggers.FileDownloaded:\n return t(\"FileDownloaded\");\n case WebhookTriggers.FolderDownloaded:\n return t(\"FolderDownloaded\");\n default:\n return \"\";\n }",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

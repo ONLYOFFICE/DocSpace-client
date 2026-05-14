@@ -43,6 +43,7 @@ import TargetUserStore from "SRC_DIR/store/contacts/TargetUserStore";
 import Channel from "./sub-components/Channel";
 
 import styles from "./Notifications.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type NotificationsChannelsProps = {
   connectAccountDialogVisible?: TStore["dialogsStore"]["connectAccountDialogVisible"];
@@ -86,7 +87,7 @@ const NotificationsChannels = ({
         checkTg?.();
         toastr.success(
           t("Notifications:SuccessConnected", {
-            serviceName: t("Common:ProviderTelegram"),
+            serviceName: getBrandName("ProviderTelegram"),
           }),
         );
       }

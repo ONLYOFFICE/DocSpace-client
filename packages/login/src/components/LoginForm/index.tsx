@@ -600,8 +600,14 @@ const LoginForm = ({
 
   const passwordErrorMessage = errorMessage() || "";
 
+  const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (isModalOpen) return;
+    onSubmit();
+  };
+
   return (
-    <form className="auth-form-container">
+    <form className="auth-form-container" onSubmit={onFormSubmit}>
       {!emailFromInvitation && !client ? (
         <Text fontSize="16px" fontWeight="600" className="sign-in-subtitle">
           {t("Common:LoginButton")}

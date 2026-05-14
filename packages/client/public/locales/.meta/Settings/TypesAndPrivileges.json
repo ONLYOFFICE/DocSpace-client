@@ -3,29 +3,30 @@
   "content": "<1>Admin account types and their privileges</1> <br> <br> <2>{{productName}} admin</2> <br> {{productName}} configuration, room creation and administration, ability to invite and manage users in {{productName}} and in virtual rooms, ability to manage access rights. <br> <br> <3>Room admin</3> <br> Room administration and archiving, user invitation and management. Several admins can be assigned to a room. <br> <br> <4>User</4> <br> Users can create and edit files in the room, but can't create rooms, manage users, or access settings.",
   "content_en_sha1_hash": "a5f8e3f05414f4551551d409b8f3a24e8f1a73bc",
   "created_at": "2025-05-19T21:30:53.036Z",
-  "updated_at": "2026-04-10T08:58:38.059Z",
+  "updated_at": "2026-04-11T21:21:35.100Z",
   "comment": {
-    "text": "This translation key is used for a tooltip that describes user roles and their corresponding privileges in a workspace configuration. It appears as a tooltip on a settings page, providing an overview of available roles (Admin, Room Admin, User) and their respective access rights.",
+    "text": "This is a tooltip that appears when hovering over an information icon, explaining the different account types and their privileges within ONLYOFFICE DocSpace. It uses `{{productName}}` for the product's brand name and `<1>`, `<2>`, `<3>`, `<4>` for bolding and line breaks.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:13.656Z"
+    "updated_at": "2026-04-11T21:21:35.100Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 96,
-      "context": "place=\"bottom\"\n offsetRight={0}\n tooltipContent={\n <Text>\n <Trans\n i18nKey=\"TypesAndPrivileges\"\n ns=\"Settings\"\n t={t}\n values={{ productName: t(\"Common:ProductName\") }}\n components={{\n 1: <b />,",
+      "line_number": 97,
+      "context": "place=\"bottom\"\n offsetRight={0}\n tooltipContent={\n <Text>\n <Trans\n i18nKey=\"TypesAndPrivileges\"\n ns=\"Settings\"\n t={t}\n values={{ productName: getBrandName(\"ProductName\") }}\n components={{\n 1: <b />,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 108,
-      "context": "place=\"bottom\"\n offsetRight={0}\n tooltipContent={\n <Text>\n <Trans\n i18nKey=\"TypesAndPrivileges\"\n ns=\"Settings\"\n t={t}\n values={{ productName: t(\"Common:ProductName\") }}\n components={{\n 1: <b />,",
+      "line_number": 109,
+      "context": "place=\"bottom\"\n offsetRight={0}\n tooltipContent={\n <Text>\n <Trans\n i18nKey=\"TypesAndPrivileges\"\n ns=\"Settings\"\n t={t}\n values={{ productName: getBrandName(\"ProductName\") }}\n components={{\n 1: <b />,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
-      "line_number": 101,
-      "context": "place=\"bottom\"\n offsetRight={0}\n tooltipContent={\n <Text>\n <Trans\n i18nKey=\"TypesAndPrivileges\"\n ns=\"Settings\"\n t={t}\n values={{ productName: t(\"Common:ProductName\") }}\n components={{\n 1: <b />,",
+      "line_number": 102,
+      "context": "place=\"bottom\"\n offsetRight={0}\n tooltipContent={\n <Text>\n <Trans\n i18nKey=\"TypesAndPrivileges\"\n ns=\"Settings\"\n t={t}\n values={{ productName: getBrandName(\"ProductName\") }}\n components={{\n 1: <b />,",
       "module": "/packages/client"
     }
   ],
@@ -45,13 +46,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translator left the role names 'Room admin' and 'User' in English instead of translating them into Azerbaijani, which is inconsistent with the rest of the UI string.",
-          "suggestion": "<1>Admin hesab tipləri və onların səlahiyyətləri</1> <br> <br> <2>{{productName}} admin</2> <br> {{productName}} konfiqurasiyası, otağın yaradılması və idarə edilməsi, dəvət etmək imkanı {{productName}} və virtual otaqlarda istifadəçiləri və giriş hüquqlarını idarə etmək imkanı. <br> <br> <3>Otaq admini</3> <br> Otağın idarə edilməsi və arxivləşdirilməsi, istifadəçi dəvəti və idarə edilməsi. Bir otağa birdən çox menecer təyin edilə bilər. <br> <br> <4>İstifadəçi</4> <br> İstifadəçilər otaqda fayllar yarada və redaktə edə bilərlər, lakin otaqlar yarada, istifadəçiləri idarə edə və ya parametrlərə daxil ola bilməzlər."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -75,59 +70,25 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation for tag <4> is 'ισχύος' (power/force), which is a mistranslation of the role 'User'.",
-          "suggestion": "<4>Χρήστης</4>"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The sentence following tag <4> uses 'Οι ισχύος' (The powers), which is grammatically incorrect and semantically wrong for 'Users'.",
-          "suggestion": "Οι χρήστες μπορούν να δημιουργούν και να επεξεργάζονται αρχεία στο δωμάτιο, αλλά δεν μπορούν να δημιουργούν δωμάτια, να διαχειρίζονται χρήστες ή να έχουν πρόσβαση στις ρυθμίσεις."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation for tag <4> is 'Avanzado' (Advanced), whereas the English source is 'User'. This changes the meaning of the role description.",
-          "suggestion": "<4>Usuario</4> <br> Los usuarios pueden crear y editar archivos en la sala, pero no pueden crear salas, administrar usuarios ni acceder a la configuración."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The final sentence says users cannot create 'files' (tiedostoja), whereas the English source says they cannot create 'rooms' (huoneita).",
-          "suggestion": "<1>Järjestelmänvalvojatilityypit ja niiden edut</1> <br> <br> <2>{{productName}} järjestelmänvalvoja</2> <br>{{productName}} kokoonpano, huoneiden luonti ja hallinto, oikeus kutsua ja hallita käyttäjiä {{productName}}-ssa ja virtuaalisissa huoneissa, oikeus hallita oikeuksia. <br> <br> <3>Huoneen pääkäyttäjä</3> <br>Huoneen hallinto ja arkistointi, käyttäjien kutsuminen ja hallinta. Huoneessa voi olla useita pääkäyttäjiä.<br> <br> <4>Käyttäjä</4> <br> Käyttäjät voivat luoda ja muokata huoneen tiedostoja, mutta eivät voi luoda huoneita, hallita käyttäjiä tai asetuksia."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation for tag <4> is 'Avancé' (Advanced), whereas the English source is 'User'. This changes the meaning of the role description.",
-          "suggestion": "<4>Utilisateur</4>"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The description for tag <4> uses 'Avancés' (Advanced users) instead of 'Utilisateurs' (Users), which is inconsistent with the role name error and the source text.",
-          "suggestion": "Les utilisateurs peuvent créer et modifier des fichiers dans la salle, mais ne peuvent ni créer de salles, ni gérer des utilisateurs, ni accéder aux paramètres."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -139,18 +100,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation for tag <4> 'User' is 'Esperto' (Expert), which changes the meaning of the user role.",
-          "suggestion": "<4>Utente</4>"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The translation for tag <3> 'Room admin' is 'Amministrazione delle stanze' (Room administration), which describes an action/process rather than a role/title.",
-          "suggestion": "<3>Amministratore della stanza</3>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -168,13 +118,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of 'archiving' as 'ການເອກະສານ' (documentation/documents) is incorrect. In this context, 'archiving' refers to the process of storing data/rooms for long-term retention, which should be 'ການເກັບມ້ຽນ' or 'ການຈັດເກັບ'.",
-          "suggestion": "<1>ປະເພດບັນຊີຜູ້ປົກຄອງ ແລະສິດສັກສິດຂອງເຂົາເຈົ້າ</1> <br> <br> <2>{{productName}} ຜູ້ປົກຄອງ</2> <br> ການຕັ້ງຄັ້ງ {{productName}}, ການສ້າງຫ້ອງ ແລະການບໍລິຫານ, ຄວາມສາມາດໃນການເຊື້ອເຊີນ ແລະຈັດການຜູ້ໃຊ້ໃນ {{productName}} ແລະໃນຫ້ອງດິຈິຕອນ, ຄວາມສາມາດໃນການຈັດການສິດການເຂົ້າໃຊ້. <br> <br> <3>ຜູ້ປົກຄອງຫ້ອງ</3> <br> ການບໍລິຫານ ແລະການເກັບມ້ຽນຫ້ອງ, ການເຊື້ອເຊີນ ແລະການຈັດການຜູ້ໃຊ້. ສາມາດມອບຜູ້ປົກຄອງຫຼາຍຄົນໃຫ້ແກ່ຫ້ອງໄດ້. <br> <br> <4>ຜູ້ໃຊ້</4> <br> ຜູ້ໃຊ້ສາມາດສ້າງ ແລະແກ້ໄຂເອກະສານໃນຫ້ອງໄດ້, ແຕ່ບໍ່ສາມາດສ້າງຫ້ອງ, ຈັດການຜູ້ໃຊ້, ຫຼືເຂົ້າເຖິງການຕັ້ງຄ່າໄດ້."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -186,18 +130,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Room admin' (a role/person) was translated as 'Kamerbeheer' (the action/management), which changes the meaning from a user type to a process.",
-          "suggestion": "<3>Kamerbeheerder</3>"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'User' (the role) was left in English ('Users') in the heading and the description, which is inconsistent with the rest of the Dutch translation.",
-          "suggestion": "<4>Gebruiker</4> <br> Gebruikers kunnen bestanden aanmaken en bewerken in de kamer, maar kunnen geen kamers aanmaken, gebruikers beheren of instellingen openen."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -233,13 +166,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'invite' (ආරාධනා කිරීම/ඇතුළත් කිරීම) is translated as 'ආමන්ත්‍රණය කිරීම' (addressing/saluting), which is incorrect in the context of user management.",
-          "suggestion": "<1>පරිපාලක ගණක වර්ග සහ ඔවුන්ගේ වරප්‍රතා</1> <br> <br> <2>{{productName}} පරිපාලක</2> <br> {{productName}} වින්‍යාසය, කාමර නිර්මාණය සහ පරිපාලනය, {{productName}} සහ අතථ්‍ය කාමරවල පරිශීලකයින් ආරාධනා කිරීම සහ කළමනාකරණය කිරීමේ හැකියාව, ප්‍රවේශ අයිතිවාසිකම් කළමනාකරණය කිරීමේ හැකියාව. <br> <br> <3>කාමර පරිපාලක</3> <br> කාමර පරිපාලනය සහ සංරක්ෂණය, පරිශීලක ආරාධනා කිරීම සහ කළමනාකරණය. කාමරයකට පරිපාලකයින් කිහිප දෙනෙකු පත් කළ හැකිය. <br> <br> <4>පරිශීලක</4> <br> පරිශීලකයින්ට කාමරයේ ගොනු නිර්මාණය කිරීමට සහ සංස්කරණය කිරීමට හැකි නමුත්, කාමර නිර්මාණය කිරීමට, පරිශීලකයින් කළමනාකරණය කිරීමට හෝ සැකසුම් වෙත ප්‍රවේශ වීමට නොහැකිය."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -293,13 +220,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation for tag <3> 'Room admin' is translated as 'Administrja e dhomës' (Room administration), which describes an action/process rather than a user role/type as required by the context.",
-          "suggestion": "<3>Administrator i dhomës</3>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

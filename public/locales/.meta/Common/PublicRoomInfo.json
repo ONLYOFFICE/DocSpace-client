@@ -3,13 +3,20 @@
   "content": "Share documents for viewing, editing, commenting, or reviewing without registration. You can also embed this room into any web interface.",
   "content_en_sha1_hash": "9eb88d5eef886330584cd438a6dc42214e1d9081",
   "created_at": "2025-05-19T21:30:47.660Z",
-  "updated_at": "2026-04-08T01:59:43.999Z",
+  "updated_at": "2026-04-12T03:36:15.332Z",
   "comment": {
-    "text": "This translation key is used to display a tooltip explaining that PublicRoomInfo allows sharing documents without registration, and can be embedded in web interfaces. It appears as a HelpButton in a LabelGroup within a ComboBox, providing context for users configuring portal settings.",
+    "text": "This is a tooltip or descriptive text explaining the functionality of a Public Room, which allows document sharing without registration and embedding into web interfaces.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:34:50.816Z"
+    "updated_at": "2026-04-11T20:45:44.857Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/components/room-type/RoomType.utils.ts",
+      "line_number": 46,
+      "context": "case RoomsType.CustomRoom:\n return t(\"Common:CustomRoomDescription\");\n case RoomsType.AIRoom:\n return t(\"Common:AIRoomDescription\");\n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoomInfo\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomInfo\");\n default:\n return \"\";\n }",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
       "line_number": 477,
@@ -18,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 653,
+      "line_number": 654,
       "context": "<Label className=\"label\" text={t(\"Common:ExternalLink\")} />\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"Common:PublicRoomInfo\")}</Text>\n }\n />\n </LabelGroup>\n <ComboBox\n scaled",
       "module": "/packages/client"
     },
@@ -87,13 +94,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'reviewing' is translated as 'katseltavaksi', which is a repetition of the first word 'viewing' (katseltavaksi). This makes the list redundant and loses the meaning of 'reviewing'.",
-          "suggestion": "Jaa asiakirjoja katseltavaksi, muokattavaksi, kommentoitavaksi tai tarkasteltavaksi ilman rekisteröintiä. Voit myös upottaa tämän huoneen mihin tahansa verkkokäyttöliittymään."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -165,13 +166,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'editing' (editare) is missing from the Romanian translation.",
-          "suggestion": "Partajați documente pentru vizualizarea, editarea, comentarea sau revizuirea fără înregistrare. De asemenea puteți incorpora acestă sală în orice interfață web."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -207,13 +202,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Delite' is an imperative (command) or a misspelling of 'Delite' (you share), but in this context, it sounds like a command 'Share!' rather than a description of a capability. More importantly, 'pregled' and 'pregledanje' are used for both 'viewing' and 'reviewing', creating redundancy and lack of distinction in Serbian.",
-          "suggestion": "Delite dokumente radi pregledanja, uređivanja, komentarisanja ili revizije bez registracije. Takođe možete ugraditi ovu sobu u bilo koji veb interfejs."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -225,13 +214,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'вебінтерфейс' is a typo; it should be 'веб-інтерфейс' (web interface).",
-          "suggestion": "Діліться документами для перегляду, редагування, коментування або рецензування без реєстрації. Ви також можете вбудувати цю кімнату в будь-який веб-інтерфейс."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

@@ -3,13 +3,21 @@
   "content": "Add forms",
   "content_en_sha1_hash": "618d61c52ca4f7bfbad26c6f0f99aaae94c1982d",
   "created_at": "2026-03-31T15:18:26.853Z",
-  "updated_at": "2026-04-07T21:10:07.153Z",
+  "updated_at": "2026-04-23T17:24:02.163Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is the title for a tour step, appearing as a short label above a description. It indicates the action of adding forms.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:40:29.485Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_utils/tourSteps.ts",
+      "line_number": 243,
+      "context": "target: '[data-testid=\"plus-button\"]',\n content: t(\n \"Common:TourPlusButton\",\n \"Use this button to upload existing PDF forms or create new ones from scratch.\",\n ),\n title: t(\"Common:TourPlusButtonTitle\", \"Add forms\"),\n data: { page: \"/forms/my-forms\" } satisfies TourStepData,\n skipBeacon: true,\n },\n canCreate &&\n !isTouch &&",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -104,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'ekrānbalstības formu' means 'screen support form', which is a completely different meaning from 'Add forms'.",
-          "suggestion": "Pievienot formas"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {

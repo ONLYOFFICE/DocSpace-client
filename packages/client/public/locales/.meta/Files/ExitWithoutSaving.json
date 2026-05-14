@@ -3,11 +3,12 @@
   "content": "Exit without saving?",
   "content_en_sha1_hash": "73ba4e3217e4b6c986b82b340dfcc5db9cec0519",
   "created_at": "2025-05-19T21:30:55.642Z",
-  "updated_at": "2026-04-07T19:35:05.084Z",
+  "updated_at": "2026-04-11T21:09:39.970Z",
   "comment": {
-    "text": "This translation key is used for a confirmation message that appears when exiting an edit mode without saving changes. It is part of a warning message in a file editing dialog, prompting users to consider the potential consequences of leaving unsaved work.",
+    "text": "This is the main question text within a confirmation dialog that appears when a user attempts to close a document without saving their changes.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:39:46.492Z"
+    "updated_at": "2026-04-11T21:09:39.970Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

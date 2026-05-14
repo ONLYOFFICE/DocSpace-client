@@ -3,13 +3,20 @@
   "content": "Domains as IP addresses are not supported",
   "content_en_sha1_hash": "bf51d68a049b2ba8093c29b93ff3b61ca192aaa4",
   "created_at": "2025-05-19T21:30:44.599Z",
-  "updated_at": "2026-04-10T08:21:04.299Z",
+  "updated_at": "2026-04-23T17:24:01.690Z",
   "comment": {
-    "text": "This translation key is used to display an error message indicating that domains are not supported as IP addresses. It is displayed in a dialog when the user attempts to enter a domain address that cannot be resolved as an IP address. Translators should consider the context of \"domains\" and how it may differ across languages and regions.",
+    "text": "This is an error message displayed when a user attempts to use an IP address as a domain name, which is not allowed.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:39.177Z"
+    "updated_at": "2026-04-11T20:54:51.737Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
+      "line_number": 127,
+      "context": "case ErrorKeys.LocalDomain:\n return t(\"LocalDomain\");\n case ErrorKeys.IncorrectDomain:\n return t(\"IncorrectDomain\");\n case ErrorKeys.DomainIpAddress:\n return t(\"DomainIpAddress\");\n case ErrorKeys.PunycodeDomain:\n return t(\"PunycodeDomain\");\n case ErrorKeys.PunycodeLocalPart:\n return t(\"PunycodeLocalPart\");\n case ErrorKeys.IncorrectLocalPart:",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeEmailDialog/index.js",
       "line_number": 131,
@@ -18,7 +25,7 @@
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 189,
+      "line_number": 185,
       "context": "return t(\"Common:LocalDomain\");\n case ErrorKeys.IncorrectDomain:\n case ErrorKeys.IncorrectEmail:\n return t(\"Common:IncorrectDomain\");\n case ErrorKeys.DomainIpAddress:\n return t(\"Common:DomainIpAddress\");\n case ErrorKeys.PunycodeDomain:\n return t(\"Common:PunycodeDomain\");\n case ErrorKeys.PunycodeLocalPart:\n return t(\"Common:PunycodeLocalPart\");\n case ErrorKeys.IncorrectLocalPart:",
       "module": "/packages/shared"
     }
@@ -33,13 +40,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation uses a singular predicate ('غير مدعوم' - not supported) for a plural subject ('النطاقات' - Domains), which creates a grammatical mismatch in Arabic. More importantly, 'الأي بي' is a transliteration that might be less professional than the standard technical term 'عناوين IP'.",
-          "suggestion": "النطاقات كعناوين IP غير مدعومة"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -111,25 +112,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation '지원되지 않는 도메인 IP 주소입니다' means 'This is an unsupported domain IP address', which implies the IP address itself is invalid. The English source 'Domains as IP addresses are not supported' specifically means that the user cannot use a domain name in a field that requires an IP address. The Korean version fails to convey the restriction on using domains in place of IPs.",
-          "suggestion": "IP 주소 자리에 도메인을 사용할 수 없습니다"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ທີ່ຢູ່ IP ໂດເມນຍັງບໍ່ຮອງຮັບ' translates to 'Domain IP addresses are not yet supported', which changes the meaning. The English source states that using a domain *as* an IP address is not supported (i.e., you cannot enter a domain name in a field expecting an IP).",
-          "suggestion": "ບໍ່ຮອງຮັບການໃຊ້ໂດເມນເປັນທີ່ຢູ່ IP"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -147,13 +136,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation changes the meaning from 'Domains as IP addresses are not supported' (meaning: you cannot use a domain name in a field expecting an IP) to 'Domain and IP address are not supported' (meaning: both domains and IP addresses are unsupported).",
-          "suggestion": "Domeny w formie adresów IP nie są obsługiwane"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -183,13 +166,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'අ.ජා.කෙ.' which is an incorrect abbreviation for IP (Internet Protocol). In Sinhala, 'අ.ජා.කෙ.' does not convey 'IP address' in a technical context; it looks like a nonsensical abbreviation. Furthermore, the sentence structure 'අ.ජා.කෙ. ලිපින ලෙස වසම් සඳහා සහාය නොදක්වයි' is grammatically awkward and translates more like 'Does not support domains for IP addresses' rather than 'Domains as IP addresses are not supported'.",
-          "suggestion": "IP ලිපින ලෙස වසම් භාවිතා කිරීම සහාය නොදක්වයි"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

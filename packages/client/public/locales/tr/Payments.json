@@ -1,18 +1,17 @@
 {
-  "AccessingProblem": "Mevcut bir kullanıcıysanız ve bu alana erişimde problem yaşıyorsanız, lütfen yönetici ile iletişime geçin.",
   "CannotCreateNewRoom": "Oda oluşturulamıyor",
   "CannotCreatePaidUsers": "Ücretli kullanıcılar eklenemez",
   "CannotRestoreRoom": "Oda geri yüklenemez",
   "ChooseNewPlan": "Yeni bir fiyatlandırma planı seçmek ister misiniz?",
+  "GracePeriodActive": "Geçiş süresi aktif <1>{{fromDate}}'dan {{byDate}}'a kadar</1> (kalan gün sayısı: {{delayDaysCount}}).",
+  "LicenseExpiredRestriction": "Yeni kullanıcı eklenemiyor ve yeni odalar oluşturulamıyor. Lisans süresi dolmuş.",
+  "LicenseGracePeriodInfo": "Bu süre zarfında, yöneticiler yeni odalar oluşturamaz veya yeni kullanıcı ekleyemez. Geçici süre sona erdiğinde, {{productName}} yeni bir lisans etkinleştirilene kadar kullanılamaz olacaktır.",
   "NewRoomWillExceedLimit": "Mevcut planınıza dahil olan oda sayısı sınırına ulaşıldığı için bu odayı oluşturmak mümkün değil.",
   "NewUsersWillExceedMembersLimit": "Mevcut planınıza dahil olan yönetici sayısı sınırına ulaşıldığı için yeni ücretli kullanıcılar eklemek mümkün değil.",
   "NotPossibleRoomRestoring": "Mevcut planınıza dahil olan oda sayısı sınırına ulaşıldığı için bu odayı geri yüklemek mümkün değil.",
   "NumberOfRoomsAccordingToTariff": "Tarife planınıza göre oda sayısı: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Tarife planınıza göre yönetici sayısı: {{currentValue}}/{{maxValue}}",
+  "PlanPaymentOverdue": "Yeni kullanıcı eklenemiyor, yeni oda oluşturulamıyor veya yapay zeka ajanı oluşturulamıyor. {{planName}} plan ödemesi gecikti.",
   "RoomsQuotaAlmostExhausted": "Oda kotası neredeyse doldu.",
-  "UsersQuotaAlmostExhausted": "Ücretli kullanıcı kotası neredeyse doldu.",
-  "GracePeriodActive": "Geçiş süresi aktif <1>{{fromDate}}'dan {{byDate}}'a kadar</1> (kalan gün sayısı: {{delayDaysCount}}).",
-  "LicenseExpired": "Yeni kullanıcı eklenemiyor ve yeni odalar oluşturulamıyor. Lisans süresi dolmuş.",
-  "LicenseGracePeriodInfo": "Bu süre zarfında, yöneticiler yeni odalar oluşturamaz veya yeni kullanıcı ekleyemez. Geçici süre sona erdiğinde, {{productName}} yeni bir lisans etkinleştirilene kadar kullanılamaz olacaktır.",
-  "PlanPaymentOverdue": "Yeni kullanıcı eklenemiyor, yeni oda oluşturulamıyor veya yapay zeka ajanı oluşturulamıyor. {{planName}} plan ödemesi gecikti."
+  "UsersQuotaAlmostExhausted": "Ücretli kullanıcı kotası neredeyse doldu."
 }

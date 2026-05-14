@@ -3,11 +3,12 @@
   "content": "Limit availability period for this link by setting an expiration date.",
   "content_en_sha1_hash": "2169933e858b996075f2e41dfb5e69ff59914d77",
   "created_at": "2025-08-26T11:15:03.504Z",
-  "updated_at": "2026-04-08T15:31:43.272Z",
+  "updated_at": "2026-04-11T20:57:18.335Z",
   "comment": {
-    "text": "This text appears in a dialog (likely an \"Edit Link Panel\") and prompts the user to set an expiration date for a link, limiting its availability. It's used to indicate the option to restrict when a link is active. Translators should ensure the phrasing encourages setting a date to control link access.",
+    "text": "This is a label for a checkbox or radio button that allows users to set an expiration date for a shared link. It appears when no expiration date is currently set.",
     "is_auto": true,
-    "updated_at": "2025-08-26T11:31:07.281Z"
+    "updated_at": "2026-04-11T20:57:18.335Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -147,13 +148,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation omits the core instruction to 'limit availability period' and the specific action of 'setting an expiration date', instead providing a generic statement about choosing a duration.",
-          "suggestion": "Ограничьте срок действия этой ссылки, установив дату истечения."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {

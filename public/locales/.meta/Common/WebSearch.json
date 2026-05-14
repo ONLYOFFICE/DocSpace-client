@@ -3,18 +3,19 @@
   "content": "Web search",
   "content_en_sha1_hash": "381ceddd75a893f19764c7e4cf9cd12c0f6e88c3",
   "created_at": "2025-10-27T16:14:24.651Z",
-  "updated_at": "2026-04-07T20:06:42.600Z",
+  "updated_at": "2026-04-13T14:59:06.007Z",
   "comment": {
-    "text": "This key translates the label \"Web search\" displayed next to a search tool icon in a chat message. It appears as part of a header indicating a web search was performed, along with details about the tool used. Translators should ensure the phrasing accurately describes a web search action.",
+    "text": "This is a button label that initiates a web search. It appears within the AI assistant chat interface.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:23:52.024Z"
+    "updated_at": "2026-04-11T20:39:09.129Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/message/ToolCallMessage/ToolCallHeader/SearchToolContent.tsx",
-      "line_number": 86,
-      "context": "return (\n <>\n <ReactSVG className={styles.searchToolIcon} src={UniverseIcon} />\n <Text fontSize=\"13px\" lineHeight=\"20px\" fontWeight={600} truncate>\n {t(\"Common:WebSearch\")} | <span title={toolInfo}>{toolInfo}</span>\n </Text>\n </>\n );\n };",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/ToolCallMessage/ToolCallHeader/search-tool-content/index.tsx",
+      "line_number": 111,
+      "context": "<UniverseIcon\n className={styles.searchToolIcon}\n data-testid=\"universe-icon\"\n />\n <Text fontSize=\"13px\" lineHeight=\"20px\" fontWeight={600} truncate>\n {t(\"WebSearch\")} |{\" \"}\n <span title={toolInfo}>{toolInfo}</span>\n </Text>\n </>\n );\n };",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -57,13 +58,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation 'Ιστότυπος αναζήτηση' is grammatically incorrect and uses an awkward term. 'Ιστότυπος' means 'template' or 'layout', whereas 'Web' in the context of the internet should be 'Web' (loanword) or 'Διαδίκτυο'. Additionally, the noun-adjective agreement is incorrect.",
-          "suggestion": "Αναζήτηση στο Web"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -171,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Spletna iskalna' is grammatically incomplete and functions as an adjective phrase (meaning 'Web searching...') rather than a noun phrase ('Web search'). It lacks the noun to complete the meaning.",
-          "suggestion": "Iskanje po spletu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

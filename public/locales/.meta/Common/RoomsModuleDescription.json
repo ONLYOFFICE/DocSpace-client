@@ -3,16 +3,17 @@
   "content": "You may create a new room specifically for the backup, choose one of the existing rooms, or save the copy in their {{roomName}} room.",
   "content_en_sha1_hash": "2f37d9051c90dfc970642bac71d6899484e612bd",
   "created_at": "2025-05-26T07:15:47.398Z",
-  "updated_at": "2026-04-10T08:58:38.050Z",
+  "updated_at": "2026-04-13T07:43:03.566Z",
   "comment": {
-    "text": "This translation key is used to describe a room name in a backup process. It appears on buttons and dialogs in the auto-backup and manual-backup pages, prompting users to select or create a specific room for their backups.",
+    "text": "This is a descriptive text explaining options for saving a backup. It appears in the auto-backup and manual-backup dialogs. The `{{roomName}}` variable will be replaced with the name of a specific room, such as \"My Documents\".",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:03:51.188Z"
+    "updated_at": "2026-04-11T20:44:04.009Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 505,
+      "line_number": 506,
       "context": "className={classNames(\n styles.backupDescription,\n \"backup-description\",\n )}\n >\n {t(\"Common:RoomsModuleDescription\", {\n roomName: t(\"Common:MyDocuments\"),\n })}\n </Text>\n {isCheckedDocuments ? (\n <RoomsModule",
       "module": "/packages/shared"
     },
@@ -33,13 +34,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'الخاص بهم' (their/theirs), which is a plural pronoun. In the context of the code (roomName: MyDocuments), this refers to the user's own room. Using 'their' in Arabic sounds like the room belongs to a third party, which is semantically incorrect for a personal document space.",
-          "suggestion": "يمكنك إنشاء غرفة جديدة خصيصًا للنسخ الاحتياطي، أو اختيار إحدى الغرف الموجودة، أو حفظ النسخة في غرفة {{roomName}} الخاصة بك."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -69,13 +64,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation uses 'δωμάτιό τους' (their room), which implies a third-person plural possessive. In the context of the English 'their {{roomName}} room' (where 'their' refers to the user's own documents/room), the Greek phrasing sounds like the room belongs to someone else. More importantly, 'their {{roomName}} room' in English is a slightly awkward way of saying 'the {{roomName}} room', and the Greek translation 'στο δωμάτιό τους {{roomName}}' is grammatically awkward/incorrect for a UI string referring to the user's own space.",
-          "suggestion": "Μπορείτε να δημιουργήσετε ένα νέο δωμάτιο ειδικά για το αντίγραφο ασφαλείας, να επιλέξετε ένα από τα υπάρχοντα δωμάτια ή να αποθηκεύσετε το αντίγραφο στο δωμάτιο {{roomName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -87,13 +76,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'kopioin' is the plural form ('copies'), whereas the English source uses the singular 'the copy'. Additionally, 'heidän' (their) is used, but the context provided by the code (roomName: MyDocuments) implies a singular possessive or a direct reference to the user's own room.",
-          "suggestion": "Voit luoda uuden huoneen erityisesti varmuuskopiota varten, valita yhden olemassa olevista huoneista tai tallentaa kopion {{roomName}}-huoneeseen."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -105,37 +88,19 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation uses the possessive pronoun 'իր' (his/her/its), which is grammatically incorrect when referring to the user's own room in this context. It should use 'Ձեր' (your) to match the 'their {{roomName}} room' logic which, in the context of 'My Documents', refers to the user's specific location.",
-          "suggestion": "Դուք կարող եք ստեղծել նոր սենյակ հատուկ պահուստավորման համար, ընտրել առկա սենյակներից մեկը կամ պատճենը պահել Ձեր {{roomName}} սենյակում:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The use of 'loro' (their) in Italian is grammatically incorrect in this context. The English 'their {{roomName}} room' refers to the user's own room (My Documents), but in Italian, 'loro' implies a third-party group. It should use a possessive referring to the user or be phrased to indicate the specific room name provided by the variable.",
-          "suggestion": "Puoi creare una nuova stanza appositamente per il backup, scegliere una delle stanze esistenti o salvare la copia nella stanza {{roomName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation uses 'その {{roomName}} ルム' (that {{roomName}} room), which is grammatically awkward and redundant because the variable {{roomName}} (e.g., 'My Documents') already functions as a noun. It translates to 'that My Documents room', which sounds unnatural in Japanese. It should be '{{roomName}} ルーム' or '{{roomName}} 内'.",
-          "suggestion": "バックアップのために新しいルームを特別に作成するか、既存のルームのいずれかを選択するか、{{roomName}} にコピーを保存することができます。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -147,13 +112,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "extra_variable",
-          "description": "Extra variable(s) not in English: {{ roomName }}",
-          "suggestion": ""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -165,25 +124,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The use of 'hun' (their) in Dutch is grammatically incorrect and changes the meaning. In the context of 'My Documents' (the variable value), it should refer to the user's own room (e.g., 'uw' or 'je'), not 'their'.",
-          "suggestion": "U kunt een nieuwe kamer aanmaken speciaal voor de back-up, een van de bestaande kamers kiezen, of de kopie opslaan in uw {{roomName}} kamer."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation uses 'w jej pokoju {{roomName}}' (in her/its room), which implies the room belongs to a third party. The English 'in their {{roomName}} room' in this context (referring to 'My Documents') refers to the user's own space. In Polish, using 'jej' is grammatically incorrect for a user's own space/documents. It should use 'Twoim' (your) or simply 'pokoju {{roomName}}'.",
-          "suggestion": "Możesz utworzyć nowy pokój specjalnie do kopii zapasowej, wybrać jeden z istniejących pokoi lub zapisać kopię w pokoju {{roomName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -201,25 +148,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'copiere de rezervă' is a literal translation of 'backup' as a noun/action, but in this context, 'backup' refers to the data/files being backed up. More importantly, 'destinată special pentru copiere de rezervă' is grammatically awkward and doesn't flow naturally in Romanian for this UI context.",
-          "suggestion": "Puteți crea o sală nouă special pentru backup, puteți alege una dintre sălile existente sau puteți salva copia în sala {{roomName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Russian translation omits the word 'their' (or a possessive equivalent) before the variable, which changes the nuance of the destination room in the English source.",
-          "suggestion": "Вы можете создать новую комнату специально для резервного копирования, выбрать одну из существующих комнат или сохранить копию в вашей комнате {{roomName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -249,13 +184,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'njihovoj' (their), which implies a third-person plural possessive. However, the English context and the variable 'MyDocuments' indicate the room belongs to the user. In Serbian, this should be 'vašoj' (your) to match the formal 'Možete' (You can) used at the beginning of the sentence.",
-          "suggestion": "Možete kreirati novu sobu posebno za rezervnu kopiju, izabrati jednu od postojećih soba ili sačuvati kopiju u vašoj {{roomName}} sobi."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -273,25 +202,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'của họ' (their) which refers to a third party, whereas the context and English 'their {{roomName}} room' in this UI context refers to the user's own room (My Documents). In Vietnamese, using 'của họ' sounds like the room belongs to someone else, which is confusing for a user managing their own backups.",
-          "suggestion": "Bạn có thể tạo một phòng mới chuyên dùng để sao lưu, chọn một trong các phòng hiện có hoặc lưu bản sao trong phòng {{roomName}} của bạn."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation changes 'room' to 'folder' (夹) in the final clause, which is inconsistent with the English 'room' and the context of the 'RoomsModule'.",
-          "suggestion": "您可以专门为一个备份创建一个新房间，选择现有的一个房间，或将副本保存在{{roomName}}房间中。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

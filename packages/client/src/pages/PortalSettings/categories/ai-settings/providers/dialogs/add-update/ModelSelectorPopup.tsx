@@ -38,6 +38,8 @@ import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 import { DropDown } from "@docspace/ui-kit/components/drop-down";
 import { isMobileDevice } from "@docspace/shared/utils";
+import { getBrandName } from "@docspace/shared/constants/brands";
+
 import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 
 import type { TProviderModelInfo } from "@docspace/shared/api/ai/types";
@@ -48,6 +50,8 @@ const ROW_HEIGHT = 30;
 const ROW_GAP = 2;
 const SECTION_HEADER_HEIGHT = 36;
 const POPUP_PADDING = 24;
+const BOTTOM_SPACE = 88;
+const MIN_BELOW_SPACE = 170;
 
 type ModelSelectorPopupProps = {
   anchor: React.RefObject<HTMLDivElement | null>;
@@ -159,6 +163,15 @@ export const ModelSelectorPopup = ({
   const isLandscape = windowSize.width > windowSize.height;
   const isMobilePortrait = isMobileHardware && !isLandscape;
   const isMobileLandscape = isMobileHardware && isLandscape;
+  const isDesktop = !isMobileHardware;
+
+  const desktopDirectionY = useMemo<"top" | "bottom">(() => {
+    if (!isDesktop) return "bottom";
+    const rect = anchor.current?.getBoundingClientRect();
+    if (!rect) return "bottom";
+    const availableBelow = windowSize.height - rect.bottom - BOTTOM_SPACE;
+    return availableBelow < MIN_BELOW_SPACE ? "top" : "bottom";
+  }, [isDesktop, anchor, windowSize]);
 
   useEffect(() => {
     if (isMobilePortrait || isSettingsOpen) return;
@@ -222,7 +235,7 @@ export const ModelSelectorPopup = ({
             </Text>
             <HelpButton
               tooltipContent={t("AISettings:RecommendedModelsTooltip", {
-                productName: t("Common:ProductName"),
+                productName: getBrandName("ProductName"),
               })}
               place="bottom"
               size={12}
@@ -301,7 +314,7 @@ export const ModelSelectorPopup = ({
       open
       isDefaultMode
       forwardedRef={anchor}
-      directionY={isMobileLandscape ? "both" : "bottom"}
+      directionY={isMobileLandscape ? "both" : desktopDirectionY}
       directionX="right"
       fixedDirection={isMobilePortrait}
       isMobileView={isMobilePortrait}
@@ -310,9 +323,10 @@ export const ModelSelectorPopup = ({
       zIndex={450}
       className={classNames(styles.popup, {
         [styles.mobileView]: isMobilePortrait,
+        [styles.popupTop]: !isMobilePortrait && desktopDirectionY === "top",
       })}
       withDynamicScrollbar={!isMobilePortrait}
-      bottomSpace={88}
+      bottomSpace={BOTTOM_SPACE}
       topSpace={16}
       useFlexibleHeight
       dataTestId="model-selector-popup"

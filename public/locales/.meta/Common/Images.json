@@ -3,11 +3,12 @@
   "content": "Images",
   "content_en_sha1_hash": "09e871c98fef3b901a775def173e4126aaf73b42",
   "created_at": "2025-05-19T21:30:45.836Z",
-  "updated_at": "2026-04-08T06:58:21.146Z",
+  "updated_at": "2026-04-23T17:24:01.910Z",
   "comment": {
-    "text": "This translation key is used to display the label for a filter option that selects images. It is likely used in a file manager or media library UI element, such as a button or dropdown menu, where users can choose to view only images among other types of files.",
+    "text": "This is a filter option label, allowing users to display only image files in a list.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:54.083Z"
+    "updated_at": "2026-04-11T20:51:08.256Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -25,7 +26,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
       "line_number": 157,
-      "context": "key: FilterType.ArchiveOnly,\n label: t(`Common:Archives`),\n },\n {\n key: FilterType.ImagesOnly,\n label: t(`Common:Images`),\n },\n {\n key: FilterType.MediaOnly,\n label: t(`Common:Media`),\n },",
+      "context": "key: FilterType.ArchiveOnly,\n label: t(\"Common:Archives\"),\n },\n {\n key: FilterType.ImagesOnly,\n label: t(\"Common:Images\"),\n },\n {\n key: FilterType.MediaOnly,\n label: t(\"Common:Media\"),\n },",
       "module": "/packages/client"
     },
     {
@@ -33,6 +34,18 @@
       "line_number": 188,
       "context": "label: t(\"Common:Archives\"),\n typeKey: FilterType.ArchiveOnly,\n },\n {\n key: \"filter-type-images\",\n label: t(\"Common:Images\"),\n typeKey: FilterType.ImagesOnly,\n },\n {\n key: \"filter-type-media\",\n label: t(\"Common:Media\"),",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/useFilesFilter.tsx",
+      "line_number": 221,
+      "context": "},\n {\n id: \"filter_type-images\",\n key: FilterType.ImagesOnly.toString(),\n group: FilterGroups.filterType,\n label: t(\"Common:Images\"),\n },\n {\n id: \"filter_type-media\",\n key: FilterType.MediaOnly.toString(),\n group: FilterGroups.filterType,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/useFilesFilter.tsx",
+      "line_number": 221,
+      "context": "},\n {\n id: \"filter_type-images\",\n key: FilterType.ImagesOnly.toString(),\n group: FilterGroups.filterType,\n label: t(\"Common:Images\"),\n },\n {\n id: \"filter_type-media\",\n key: FilterType.MediaOnly.toString(),\n group: FilterGroups.filterType,",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
@@ -231,13 +244,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Albanian word 'Pamje' means 'Views' or 'Sight', whereas the English context requires 'Images' (visual files/pictures).",
-          "suggestion": "Imazhe"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

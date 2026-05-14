@@ -19,7 +19,7 @@
   "SearchByOwner": "Поиск по владельцам",
   "SubNewForm": "Пустая",
   "SubNewFormFile": "Из текстового файла",
-  "ThirdPartyInfo": "Изменить настройки подключения",
+  "ThirdPartyInfo": "Изменить информацию о стороннем сервисе",
   "ThirdPartyTitle": "Сторонние сервисы",
   "TrashItemsDeleteSuccess": "Выбранные элементы были успешно удалены из раздела {{sectionName}}"
 }

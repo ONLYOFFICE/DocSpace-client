@@ -3,16 +3,17 @@
   "content": "Use this option to delete your space permanently.",
   "content_en_sha1_hash": "eda8701798195496d0dcc13393b3bf9f69ca3417",
   "created_at": "2025-05-19T21:30:52.208Z",
-  "updated_at": "2026-04-09T02:01:13.375Z",
+  "updated_at": "2026-04-11T21:22:59.474Z",
   "comment": {
-    "text": "This translation key is used for a description that informs users about the permanent deletion of their space. It appears on a button in the Portal Settings page when the user has not activated their account.",
+    "text": "This is a descriptive text displayed below the \"Delete Space\" heading in the portal settings. It explains that selecting this option will permanently delete the user's ONLYOFFICE DocSpace.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:47.213Z"
+    "updated_at": "2026-04-11T21:22:59.474Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/delete-data/portalDeletion.js",
-      "line_number": 94,
+      "line_number": 95,
       "context": "owner?.activationStatus === EmployeeActivationStatus.NotActivated;\n \n return (\n <MainContainer>\n <Text fontSize=\"13px\" className=\"description\">\n {t(\"PortalDeletionDescription\")}\n </Text>\n <Text className=\"helper\">{t(\"PortalDeletionHelper\")}</Text>\n <ButtonWrapper>\n <Button\n className=\"delete-button button\"",
       "module": "/packages/client"
     }
@@ -27,25 +28,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'إستضافتك' (your hosting) is used instead of 'مساحتك' (your space). In the context of ONLYOFFICE DocSpace, 'Space' is a specific technical entity, and 'hosting' changes the meaning of the action.",
-          "suggestion": "استخدم هذا الخيار لحذف مساحتك بشكل دائم."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'Domeninizi' (Your domain) instead of 'space' (məkan/sahə). This changes the technical object being deleted.",
-          "suggestion": "Məkanınızı həmişəlik silmək üçün bu seçimdən istifadə edin."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -159,13 +148,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text refers to 'your space', but the Russian translation uses 'портал' (portal). While related, in the context of ONLYOFFICE DocSpace, 'space' (пространство) and 'portal' (портал) are distinct entities. The translation changes the object being deleted.",
-          "suggestion": "Используйте эту опцию, чтобы удалить ваше пространство навсегда."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -183,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation 'S to možnostjo trajno izbrišete svoj prostor' translates to 'With this option you permanently delete your space', which changes the imperative 'Use this option...' to a declarative statement. While close, it lacks the direct instruction of the original.",
-          "suggestion": "To možnost uporabite za trajno izbris svojega prostora."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

@@ -3,16 +3,17 @@
   "content": "Brand name contains forbidden symbols",
   "content_en_sha1_hash": "c3f956a5d1240ffa3f1a1dc7d19d55b0eee9ab16",
   "created_at": "2025-08-04T07:28:54.725Z",
-  "updated_at": "2026-04-08T16:03:24.569Z",
+  "updated_at": "2026-04-11T20:58:07.843Z",
   "comment": {
-    "text": "This key displays an error message indicating that the entered brand name contains prohibited characters. It appears within the brand name input field to inform the user about the reason for the error. Translators should ensure the message clearly explains the issue and suggests avoiding special symbols.",
+    "text": "This is an error message displayed when a user attempts to save a brand name that includes characters not allowed by the system.",
     "is_auto": true,
-    "updated_at": "2025-08-04T08:11:43.393Z"
+    "updated_at": "2026-04-11T20:58:07.843Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/BrandName/index.tsx",
-      "line_number": 119,
+      "line_number": 120,
       "context": "return t(\"Common:BrandNameLength\", {\n minLength: 2,\n maxLength: 40,\n });\n case \"SpecSymbols\":\n return t(\"Common:BrandNameForbidden\");\n default:\n return t(\"Common:Error\");\n }\n };",
       "module": "/packages/shared"
     }

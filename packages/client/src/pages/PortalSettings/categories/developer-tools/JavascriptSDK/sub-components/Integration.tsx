@@ -40,6 +40,7 @@ import {
   IntegrationContainer,
   CategoryHeader,
 } from "./StyledPortalIntegration";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const zoomTitle = "Zoom";
 const wordPressTitle = "WordPress";
@@ -74,7 +75,7 @@ const Integration: React.FC<{
         {t("IntegrationExamples")}
       </CategoryHeader>
       <Text lineHeight="20px" color={theme.sdkPresets.secondaryColor}>
-        {t("IntegrationDescription", { productName: t("Common:ProductName") })}
+        {t("IntegrationDescription", { productName: getBrandName("ProductName") })}
       </Text>
       <div className="icons">
         <TooltipContainer

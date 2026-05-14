@@ -486,6 +486,7 @@ export const settingsTree = [
     key: "8",
     link: "new-ai-settings",
     tKey: "NewAISettings",
+    type: PageType.newAISettings,
     isHeader: true,
     children: [
       {
@@ -773,4 +774,3 @@ export const settingsTreeFull = [
     link: "statistics",
   },
 ];
-

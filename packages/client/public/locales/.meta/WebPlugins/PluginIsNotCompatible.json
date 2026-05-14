@@ -3,29 +3,30 @@
   "content": "The plugin SDK version doesn’t match the {{productName}} version. Please update to a compatible version.",
   "content_en_sha1_hash": "28edf2a7370b5735bfea9e4f0468445b36c1da6a",
   "created_at": "2025-09-24T13:10:10.162Z",
-  "updated_at": "2026-04-08T18:38:40.945Z",
+  "updated_at": "2026-04-11T21:27:51.945Z",
   "comment": {
-    "text": "This key displays an error message indicating that a plugin's SDK version is incompatible with the current version of the product. It appears in tooltips and toast notifications within the Settings Plugin Dialog and Plugin Item components, informing the user to update the plugin to a compatible version. Translators should ensure the message clearly conveys the need for a plugin update.",
+    "text": "This is an error message or tooltip that appears when a plugin's SDK version is incompatible with the {{productName}} version. It informs the user that they need to update the plugin.",
     "is_auto": true,
-    "updated_at": "2025-09-24T13:16:45.281Z"
+    "updated_at": "2026-04-11T21:27:51.945Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Info.tsx",
-      "line_number": 49,
-      "context": "const pluginStatus =\n plugin.status === PluginStatus.active\n ? t(\"NotNeedSettings\")\n : t(\"NeedSettings\");\n \n const incompatibleTooltip = t(\"WebPlugins:PluginIsNotCompatible\", {\n productName: t(\"Common:ProductName\"),\n });\n \n return (\n <div",
+      "line_number": 50,
+      "context": "const pluginStatus =\n plugin.status === PluginStatus.active\n ? t(\"NotNeedSettings\")\n : t(\"NeedSettings\");\n \n const incompatibleTooltip = t(\"WebPlugins:PluginIsNotCompatible\", {\n productName: getBrandName(\"ProductName\"),\n });\n \n return (\n <div",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/hooks/usePluginUpload.ts",
-      "line_number": 55,
-      "context": "return;\n }\n \n if (!isPluginCompatible) {\n toastr.error(\n t(\"PluginIsNotCompatible\", {\n productName: t(\"Common:ProductName\"),\n }),\n );\n } else {\n toastr.success(t(\"PluginLoadedSuccessfully\"));",
+      "line_number": 56,
+      "context": "return;\n }\n \n if (!isPluginCompatible) {\n toastr.error(\n t(\"PluginIsNotCompatible\", {\n productName: getBrandName(\"ProductName\"),\n }),\n );\n } else {\n toastr.success(t(\"PluginLoadedSuccessfully\"));",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/sub-components/PluginItem.tsx",
-      "line_number": 77,
-      "context": "const onOpenSettingsDialog = () => {\n openSettingsDialog?.(name);\n };\n \n const incompatibleTooltip = t(\"WebPlugins:PluginIsNotCompatible\", {\n productName: t(\"ProductName\"),\n });\n \n const badgeId = `plugin_version_${name}_badge`;",
+      "line_number": 78,
+      "context": "const onOpenSettingsDialog = () => {\n openSettingsDialog?.(name);\n };\n \n const incompatibleTooltip = t(\"WebPlugins:PluginIsNotCompatible\", {\n productName: getBrandName(\"ProductName\"),\n });\n \n const badgeId = `plugin_version_${name}_badge`;",
       "module": "/packages/client"
     }
   ],
@@ -93,13 +94,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'թարմացնել համատեղելի տարբերակի' is grammatically incorrect and conveys an incomplete meaning. It translates roughly to 'update a compatible version' instead of 'update to a compatible version'.",
-          "suggestion": "Փլագինի SDK տարբերակը չի համընկնում {{productName}} տարբերակի հետ։ Խնդրում ենք թարմացնել մինչև համատեղելի տարբերակ։"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -159,13 +154,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation contains a grammatical error 'versiunea a {{productName}}' which translates to 'the version of a {{productName}}', making the sentence nonsensical. It should be 'versiunea {{productName}}'.",
-          "suggestion": "Versiunea SDK a pluginului nu se potrivește cu versiunea {{productName}}. Vă rugăm să actualizați la o versiune compatibilă."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

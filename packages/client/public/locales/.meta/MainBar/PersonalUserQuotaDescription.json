@@ -3,17 +3,18 @@
   "content": "To upload and create new files and folders, please free up disk space, or contact the {{productName}} administrator to increase the storage quota.",
   "content_en_sha1_hash": "bd82f05265948b22a11ff3c25bdeb0f4e8cda1c7",
   "created_at": "2025-05-19T21:30:54.115Z",
-  "updated_at": "2026-04-07T19:35:05.153Z",
+  "updated_at": "2026-04-11T21:17:44.895Z",
   "comment": {
-    "text": "This translation key is used for a message that displays when a user attempts to create new files or folders but does not have sufficient disk space. It prompts the user to free up space or contact an administrator to increase their storage quota.",
+    "text": "This is an error message displayed to a regular user when their personal storage quota is full. It informs them how to free up space or request more from an administrator. `{{productName}}` is replaced with the product's brand name.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:24.733Z"
+    "updated_at": "2026-04-11T21:17:44.895Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 157,
-      "context": ");\n };\n \n const getPersonalQuotaDescription = () => {\n if (!isAdmin)\n return t(\"PersonalUserQuotaDescription\", {\n productName: t(\"Common:ProductName\"),\n });\n \n return (\n <Trans",
+      "line_number": 158,
+      "context": ");\n };\n \n const getPersonalQuotaDescription = () => {\n if (!isAdmin)\n return t(\"PersonalUserQuotaDescription\", {\n productName: getBrandName(\"ProductName\"),\n });\n \n return (\n <Trans",
       "module": "/packages/client"
     }
   ],

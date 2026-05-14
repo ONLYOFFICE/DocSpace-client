@@ -3,13 +3,21 @@
   "content": "You are using free {{planName}} plan",
   "content_en_sha1_hash": "afd91c8f7e34a3940572441cec8d07d4eee8863c",
   "created_at": "2026-04-10T13:53:43.322Z",
-  "updated_at": "2026-04-10T13:53:43.322Z",
+  "updated_at": "2026-04-12T17:38:55.232Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a text string displayed on the billing page, indicating the user's current free plan. The `{{planName}}` variable will be replaced with the specific name of the free plan.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:42:07.094Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/PaymentContainer.tsx",
+      "line_number": 101,
+      "context": "const currentPlanTitle = () => {\n if (isFreeTariff) {\n return (\n <Text fontSize=\"16px\" isBold>\n <CommonTrans i18nKey=\"StartupTitle\" values={{ planName: currentTariffPlanTitle }} />\n </Text>\n );\n }\n \n console.log(\"isPaidPeriod\", isPaidPeriod, \"isFreeTariff\", isFreeTariff);",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

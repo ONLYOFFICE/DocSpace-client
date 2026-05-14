@@ -1,4 +1,5 @@
 {
+  "ActionsWithFilesDescription": "Odznaki uwydatnią aktywność plików — przesłania, edycje lub udostępnienia — w sekcjach {{rooms}}, {{shared}}, {{documents}} i {{aiAgents}}.",
   "AdminSetupRequired": "Wymagane skonfigurowanie administratora",
   "Badges": "Etykiety",
   "DailyFeed": "Codzienne aktualności {{productName}}",
@@ -8,12 +9,11 @@
   "LdapEmailTooltip": "To konto użytkownika jest ładowane z LDAP. Adres e-mail użytkownika nie został określony, a aktualny został wygenerowany automatycznie i nie można go użyć do wysyłania powiadomień.",
   "NotConfigured": "Nie skonfigurowano",
   "Notifications": "Powiadomienia",
+  "RoomsActivityDescription": "Otrzymuj natychmiastowe powiadomienia e-mail o nowych udostępnionych plikach/folderach i aktywności w swoich {{rooms}} i {{aiAgents}}.",
+  "RoomUpdateNotify": "Udostępniana zawartość, {{rooms}} i {{aiAgents}} aktywność",
   "SettingUpNotifications": "Konfigurowanie powiadomień",
   "SuccessConnected": "{{serviceName}} zostało pomyślnie podłączone jako kanał powiadomień. Teraz będziesz tam otrzymywać aktualizacje.",
   "SuccessDisconnected": "{{serviceName}} zostało pomyślnie odłączone jako kanał powiadomień. Powiadomienia nie będą już tam wysyłane.",
   "UsefulTips": "Przydatne wskazówki {{productName}}",
-  "UsefulTipsDescription": "Uzyskaj przydatne przewodniki na temat {{productName}}",
-  "ActionsWithFilesDescription": "Odznaki uwydatnią aktywność plików — przesłania, edycje lub udostępnienia — w sekcjach {{rooms}}, {{shared}}, {{documents}} i {{aiAgents}}.",
-  "RoomsActivityDescription": "Otrzymuj natychmiastowe powiadomienia e-mail o nowych udostępnionych plikach/folderach i aktywności w swoich {{rooms}} i {{aiAgents}}.",
-  "RoomUpdateNotify": "Udostępniana zawartość, {{rooms}} i {{aiAgents}} aktywność"
+  "UsefulTipsDescription": "Uzyskaj przydatne przewodniki na temat {{productName}}"
 }

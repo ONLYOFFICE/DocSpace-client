@@ -30,38 +30,73 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { Tabs, type TTabItem } from "@docspace/ui-kit/components/tabs";
+import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
+import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 
+import { useDocsUserStore } from "../../_store/DocsUserStore";
 import BillingForm from "./category/BillingForm";
 import FileManagement from "./category/FileManagement";
 import InterfaceTheme from "./category/InterfaceTheme";
 
 const Settings = () => {
   const { t } = useTranslation(["Common", "Profile"]);
-  const [selectedTabId, setSelectedTabId] = React.useState("billing");
+  const { user } = useDocsUserStore();
+  const canSeeBilling = user?.isAdmin || user?.isOwner;
+  const [selectedTabId, setSelectedTabId] = React.useState(() =>
+    canSeeBilling ? "billing" : "file-management",
+  );
+  const [isPending, startTransition] = React.useTransition();
+
+  React.useEffect(() => {
+    if (!isPending) {
+      window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
+    }
+  }, [isPending]);
+
+  const wrapContent = (content: React.ReactNode) => (
+    <LoaderWrapper isLoading={isPending}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 16,
+          paddingTop: 16,
+        }}
+      >
+        {content}
+      </div>
+    </LoaderWrapper>
+  );
 
   const tabs: TTabItem[] = React.useMemo(
     () => [
-      {
-        id: "billing",
-        name: "Billing",
-        content: <BillingForm />,
-      },
+      ...(canSeeBilling
+        ? [
+            {
+              id: "billing",
+              name: "Billing",
+              content: wrapContent(<BillingForm />),
+            },
+          ]
+        : []),
       {
         id: "file-management",
         name: t("Common:FileManagement"),
-        content: <FileManagement />,
+        content: wrapContent(<FileManagement />),
       },
       {
         id: "interface-theme",
         name: t("Common:InterfaceTheme"),
-        content: <InterfaceTheme />,
+        content: wrapContent(<InterfaceTheme />),
       },
     ],
-    [t],
+    [t, isPending, canSeeBilling],
   );
 
   const onSelect = React.useCallback((tab: TTabItem) => {
-    setSelectedTabId(tab.id);
+    startTransition(() => {
+      setSelectedTabId(tab.id);
+    });
   }, []);
 
   return (
@@ -70,9 +105,11 @@ const Settings = () => {
         items={tabs}
         selectedItemId={selectedTabId}
         onSelect={onSelect}
+        withAnimation
       />
     </div>
   );
 };
 
 export default Settings;
+

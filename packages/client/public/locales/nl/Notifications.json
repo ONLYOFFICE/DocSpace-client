@@ -1,4 +1,5 @@
 {
+  "ActionsWithFilesDescription": "Badges markeren de activiteit van bestanden — uploads, bewerkingen of deelacties — in de secties {{rooms}}, {{shared}}, {{documents}} en {{aiAgents}}.",
   "AdminSetupRequired": "Admin setup vereist",
   "Badges": "Badges",
   "DailyFeed": "Daily {{productName}} feed",
@@ -8,12 +9,11 @@
   "LdapEmailTooltip": "Deze gebruikersaccount wordt geladen vanuit LDAP. Het e-mailadres van de gebruiker is niet gespecificeerd, en het huidige adres is automatisch gegenereerd en kan niet worden gebruikt om notificaties te verzenden.",
   "NotConfigured": "Niet geconfigureerd",
   "Notifications": "Meldingen",
+  "RoomsActivityDescription": "Ontvang onmiddellijke e-mailmeldingen over nieuwe gedeelde bestanden/mappen en activiteiten binnen uw {{rooms}} en {{aiAgents}}.",
+  "RoomUpdateNotify": "Gedeelde inhoud, {{rooms}} en {{aiAgents}} activiteit",
   "SettingUpNotifications": "Meldingen instellen",
   "SuccessConnected": "{{serviceName}} is succesvol verbonden als notificatiekanaal. U ontvangt nu updates daar.",
   "SuccessDisconnected": "{{serviceName}} is succesvol losgekoppeld als notificatiekanaal. Er worden geen notificaties meer naar toe gestuurd.",
   "UsefulTips": "Handige {{productName}} tips",
-  "UsefulTipsDescription": "Ontvang handige gidsen over {{productName}}",
-  "ActionsWithFilesDescription": "Badges markeren de activiteit van bestanden — uploads, bewerkingen of deelacties — in de secties {{rooms}}, {{shared}}, {{documents}} en {{aiAgents}}.",
-  "RoomsActivityDescription": "Ontvang onmiddellijke e-mailmeldingen over nieuwe gedeelde bestanden/mappen en activiteiten binnen uw {{rooms}} en {{aiAgents}}.",
-  "RoomUpdateNotify": "Gedeelde inhoud, {{rooms}} en {{aiAgents}} activiteit"
+  "UsefulTipsDescription": "Ontvang handige gidsen over {{productName}}"
 }

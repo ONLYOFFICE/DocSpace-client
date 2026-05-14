@@ -33,6 +33,7 @@ import ChatNoAccessRightsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.chat.a
 import ChatNoAccessRightsLightIcon from "PUBLIC_DIR/images/emptyview/empty.chat.access.rights.light.svg";
 
 import { EmptyView } from "@docspace/shared/components/empty-view";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const KnowledgeDisabledContainer = (props) => {
   const { t, theme, isFrame, isAdmin, setKnowledgeId, setCurrentTab } = props;
@@ -40,11 +41,11 @@ const KnowledgeDisabledContainer = (props) => {
   const titleRoomNoAccess = t("AIRoom:KnowledgeUnavailable");
   const descriptionRoomNoAccess = isAdmin
     ? t("AIRoom:KnowledgeUnavailableDescription", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
         aiAgents: t("Common:AIAgents"),
       })
     : t("AIRoom:KnowledgeUnavailableDescriptionUser", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
         aiAgents: t("Common:AIAgents"),
       });
 

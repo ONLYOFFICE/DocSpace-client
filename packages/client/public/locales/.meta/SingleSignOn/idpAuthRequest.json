@@ -3,11 +3,12 @@
   "content": "Verify Auth Responses Sign",
   "content_en_sha1_hash": "c23e7e3e2e865e4a6cfba1a6ded472c00450480e",
   "created_at": "2025-05-19T21:30:50.091Z",
-  "updated_at": "2026-04-08T23:26:30.269Z",
+  "updated_at": "2026-04-11T21:26:51.356Z",
   "comment": {
-    "text": "The translation key \"idpAuthRequest\" is used to display a checkbox label that verifies authentication responses signed by an IdP (Identity Provider). It appears in a UI component for single sign-on integration settings, allowing users to toggle this verification.",
+    "text": "This is a checkbox label in the Single Sign-On settings. It enables or disables the verification of signed authentication responses from the Identity Provider.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:15.697Z"
+    "updated_at": "2026-04-11T21:26:51.356Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -33,25 +34,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Doğrulama Cavabları İşarəsini Təsdiqləyin' translates to 'Confirm the Verification Response Sign', which is semantically incorrect. In the context of IdP/SP authentication, 'Sign' refers to a digital signature (imza), not a visual mark or symbol (işarə). The translation should refer to verifying the digital signature of the authentication responses.",
-          "suggestion": "Autentifikasiya cavablarının imzasını yoxlayın"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation 'Потвърждение на подписа за упълномощени отговори' translates to 'Confirmation of the signature for authorized responses', which changes the meaning. The English 'Verify Auth Responses Sign' (in the context of 'Verify Auth Responses Sign[ature]') implies the action of verifying the signature of the authentication responses, not a confirmation of a signature for authorized responses.",
-          "suggestion": "Проверка на подписа на отговорите за автентикация"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -99,13 +88,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'segno' in Italian means 'sign' as in a symbol, mark, or omen. In the context of authentication and security, 'sign' refers to a digital signature, which must be translated as 'firma'.",
-          "suggestion": "Verifica firma delle risposte di autenticazione"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -123,37 +106,19 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation translates 'Sign' as 'verification/correctness' (ຄວາມຖືກຕ້ອງ) instead of 'digital signature' (ລາຍເຊັນ). The current translation means 'Verify the correctness of authentication responses', which misses the technical requirement of verifying the cryptographic signature.",
-          "suggestion": "ຢືນຢັນລາຍເຊັນຂອງການຕອບຮັບການກວດສອບສິດ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'verificēšanas parakstīšanos' translates to 'verification of signing' or 'verifying the signing', which is grammatically awkward and semantically slightly off. In the context of a checkbox label for 'Verify Auth Responses Sign', it should mean 'Verify the signature of authentication responses'.",
-          "suggestion": "Verificēt autentifikācijas atbilžu parakstus"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Dutch translation 'Verifieer Auth Reacties Ondertekening' is a literal word-for-word translation that results in ungrammatical and nonsensical Dutch. It translates to 'Verify Auth Responses Signing' as a list of nouns rather than a functional phrase. In Dutch, 'Ondertekening' (signing) should be linked to the responses or the action.",
-          "suggestion": "Verifieer ondertekening van auth-responses"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -165,25 +130,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Portuguese translation 'Sinal para Verificar...' translates to 'Signal to Verify...', which changes the meaning. In this technical context, 'Sign' is a verb (to sign/digital signature), not a noun (signal).",
-          "suggestion": "Verificar Assinatura de Respostas de Autenticação"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'sinal de respostas' (signal of responses) is a mistranslation of 'Responses Sign', which in this technical context refers to the digital signature (assinatura) of the authentication responses.",
-          "suggestion": "Verificar assinatura das respostas de autenticação"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -201,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ද්වි සාධක ප්‍රතිචාරය සත්‍යාපනය' means 'Verify Two-Factor Response', which is incorrect. The English text refers to 'Auth Responses Sign' (verifying the digital signature of authentication responses), not Two-Factor Authentication (2FA).",
-          "suggestion": "සත්‍යාපන ප්‍රතිචාරවල අත්සන සත්‍යාපනය කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -219,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'Sign' (referring to digital signatures) is missing from the translation. The current translation only means 'Verify Auth Responses', whereas the English specifies verifying the *signature* of those responses.",
-          "suggestion": "Preveri podpise odzivov za avtentikacijo"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -255,13 +196,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Sign' in the English context refers to a 'Digital Signature' (chữ ký số), but the Vietnamese translation uses 'dấu hiệu' which means 'symptom' or 'sign/indication'. This changes the technical meaning from verifying a cryptographic signature to verifying a symptom/indication.",
-          "suggestion": "Xác minh chữ ký phản hồi xác thực"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

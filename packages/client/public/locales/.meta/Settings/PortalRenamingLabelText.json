@@ -3,16 +3,17 @@
   "content": "New space name",
   "content_en_sha1_hash": "09609f05aae47160f36f4e04d315dc2f8abf446b",
   "created_at": "2025-05-19T21:30:52.270Z",
-  "updated_at": "2026-04-09T01:58:18.709Z",
+  "updated_at": "2026-04-11T21:22:54.729Z",
   "comment": {
-    "text": "The translation key \"PortalRenamingLabelText\" is used to display a label for renaming portal names. In the Portal Settings page, this text appears as the label for a form field where users can enter their desired new name for their portal. Translators should provide a clear and concise \"New space name\" that reflects the purpose of this field in the user interface.",
+    "text": "This is the label for a text input field where the user can enter a new name for their DocSpace portal.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:44.405Z"
+    "updated_at": "2026-04-11T21:22:54.729Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 299,
+      "line_number": 300,
       "context": "const settingsBlock = (\n <div className=\"settings-block\">\n <FieldContainer\n id=\"fieldContainerPortalRenaming\"\n className=\"field-container-width\"\n labelText={`${t(\"PortalRenamingLabelText\")}`}\n isVertical\n >\n <TextInput\n tabIndex={10}\n id=\"textInputContainerPortalRenaming\"",
       "module": "/packages/client"
     }
@@ -39,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text refers to a 'space name', but the Bulgarian translation uses 'портала' (portal). While the context mentions portal renaming, the specific string to be translated is 'New space name'. In the context of ONLYOFFICE DocSpace, 'space' and 'portal' are distinct entities.",
-          "suggestion": "Ново име на пространството"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -87,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation uses 'կայքէջ' (website/webpage) instead of 'space' (կայք/տարածք/սփեյս). In the context of ONLYOFFICE DocSpace, 'space' refers to a specific workspace/portal, not a general website.",
-          "suggestion": "Նոր տարածքի անուն"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -117,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ໃໝ່ ປະຕູ ຊື່' is grammatically incorrect and uses the wrong word for 'space'. 'ປະຕູ' means 'door', whereas in the context of ONLYOFFICE DocSpace, 'space' refers to a workspace/area. The word order is also unnatural.",
-          "suggestion": "ຊື່ ສະເປສໃໝ່"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -141,13 +124,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text refers to a 'space' (space name), while the Polish translation uses 'portal' (nazwa portalu). In the context of ONLYOFFICE DocSpace, 'space' and 'portal' are distinct entities.",
-          "suggestion": "Nowa nazwa przestrzeni"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -171,13 +148,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text refers to a 'space' (New space name), but the Russian translation refers to a 'portal' (Новое имя портала). While the key name mentions 'Portal', the source text provided for verification is 'New space name', creating a semantic mismatch between the provided English string and the Russian translation.",
-          "suggestion": "Новое имя пространства"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -213,25 +184,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Turkish translation 'Yeni alan adı' means 'New domain name' (as in a URL/DNS domain), whereas the context specifies this is for renaming a 'space' or 'portal'. In Turkish, 'alan adı' is the standard term for a web domain.",
-          "suggestion": "Yeni alan ismi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text refers to a 'space name', but the Ukrainian translation refers to a 'portal name'. While the context mentions portal renaming, the literal translation of the string provided is inconsistent with the source text.",
-          "suggestion": "Нова назва простору"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

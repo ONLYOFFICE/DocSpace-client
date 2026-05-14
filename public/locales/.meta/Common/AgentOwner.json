@@ -3,11 +3,12 @@
   "content": "Agent owner",
   "content_en_sha1_hash": "da658143e67eb58d6fd36ea0dabf552b942dc53c",
   "created_at": "2025-10-27T16:14:10.214Z",
-  "updated_at": "2026-04-08T17:39:11.211Z",
+  "updated_at": "2026-04-11T21:00:47.182Z",
   "comment": {
-    "text": "This key displays the label for who owns a room, specifically indicating whether the owner is an agent or a standard user. It appears in the \"Change Room Owner\" component, within a text label that dynamically changes based on the room owner's type. Translators should ensure the translated text accurately reflects the role of the owner.",
+    "text": "This is a label identifying the owner of an agent, appearing in the interface for changing room ownership.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:51:36.964Z"
+    "updated_at": "2026-04-11T21:00:47.182Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation 'مالك العميل' means 'Client owner' or 'Owner of the client', whereas the English 'Agent owner' refers to an owner who is an 'Agent'. In this context, 'Agent' refers to a user role, not a person being owned.",
-          "suggestion": "مالك الوكيل"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -165,25 +160,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English term 'Agent owner' refers to an owner who is an agent. The Slovak translation 'Zástupca majiteľa' means 'Owner's representative' or 'Deputy owner', which changes the meaning from a type of owner to a person acting on behalf of an owner.",
-          "suggestion": "Majiteľ agent"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'lastnik' refers to a physical owner of property/objects. In the context of software roles/users, 'lastnik' is unnatural; 'upravljavec' or 'lastnik agenta' (depending on nuance) is better, but specifically, 'Agent lastnik' sounds like 'Agent is an owner' rather than 'Owner of the agent' or 'Agent-type owner'. However, the most critical error is that 'Agent lastnik' is grammatically incorrect in Slovenian for this context; it should be 'Lastnik agenta' or 'Agentov lastnik' if it means owner of the agent, or 'Lastnik (agent)' if it describes the role. Given the context 'indicates whether the owner is an agent', the translation should reflect the role 'Agentov lastnik' or simply 'Agent'.",
-          "suggestion": "Lastnik agenta"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
@@ -195,25 +178,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Власинк' is not a valid Serbian word; it appears to be a typo or a non-existent term. The correct term for 'Owner' in Serbian is 'Власник'.",
-          "suggestion": "Власник агента"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation contains a typo/spelling error ('Vlasink' instead of 'Vlasnik') and a grammatical error in the genitive case ('agenata' instead of 'agenta'), which changes the professional quality and clarity of the term.",
-          "suggestion": "Vlasnik agenta"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

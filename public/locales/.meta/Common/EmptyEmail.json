@@ -3,13 +3,20 @@
   "content": "No email address parsed",
   "content_en_sha1_hash": "3ec5098d22a328eebdf96334a3c8598043907c7e",
   "created_at": "2025-05-19T21:30:44.804Z",
-  "updated_at": "2026-04-10T08:21:04.301Z",
+  "updated_at": "2026-04-13T14:59:05.751Z",
   "comment": {
-    "text": "This translation key is used to display an error message when no email address has been successfully parsed. It appears in a change email dialog component and is associated with the \"EmptyEmail\" error code. Translators should focus on conveying this error in a clear and user-friendly manner.",
+    "text": "This error message appears when an email input field is left blank or no email address could be extracted from the input.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:31.367Z"
+    "updated_at": "2026-04-11T20:54:03.349Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
+      "line_number": 143,
+      "context": "case ErrorKeys.IncorrectEmail:\n return t(\"IncorrectEmail\");\n case ErrorKeys.ManyEmails:\n return t(\"ManyEmails\");\n case ErrorKeys.EmptyEmail:\n return t(\"EmptyEmail\");\n default:\n throw new Error(\"Unknown translation key\");\n }\n });",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeEmailDialog/index.js",
       "line_number": 147,
@@ -27,25 +34,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation is grammatically incorrect and lacks the necessary preposition 'على' or 'بـ' to connect the verb to the object, making it sound unnatural and broken. It literally reads 'Not recognized email address' instead of 'No email address was parsed/recognized'.",
-          "suggestion": "لم يتم التعرف على عنوان البريد الإلكتروني"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'No email address parsed' implies a failure in the parsing process (the system couldn't extract/identify an email), whereas the Azerbaijani translation 'Elektron poçt sahəsi boşdur' means 'The email field is empty'. These are different technical states.",
-          "suggestion": "Elektron poçt ünvanı oxunmadı"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -63,13 +58,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation means 'No email was entered', whereas the English source means 'No email address parsed'. 'Parsed' implies a technical failure to extract/process an email from a string, while 'entered' implies the field was simply left empty. This changes the technical meaning of the error.",
-          "suggestion": "Keine E-Mail-Adresse erkannt"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -81,13 +70,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text refers to a parsing failure ('No email address parsed'), whereas the Spanish translation refers to an empty field ('El campo de email está vacío'). These are different technical states: one implies the system couldn't extract an email from input, the other implies the input was simply empty.",
-          "suggestion": "No se pudo extraer la dirección de correo electrónico"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -117,13 +100,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '誰もメールを解析しない' means 'No one parses emails' (referring to people), whereas the English text 'No email address parsed' is a system status indicating that an email address could not be extracted or identified from the input.",
-          "suggestion": "メールアドレスを解析できませんでした"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -135,13 +112,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao word 'ແບ່ງແຍກ' (baeng yaek) means 'to separate', 'to divide', or 'to segregate'. In the context of data parsing (extracting an email from a string), it is an incorrect choice. It sounds like the email is being physically split apart rather than the system failing to identify/extract an email address.",
-          "suggestion": "ບໍ່ສາມາດກວດສອບທີ່ຢູ່ອີເມວໄດ້"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -159,61 +130,31 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text indicates a failure in the parsing process ('No email address parsed'), whereas the Polish translation states that the email cannot be empty ('Adres e-mail nie może być pusty'). These are different error states: one refers to a processing failure, the other to a validation rule regarding empty input.",
-          "suggestion": "Nie udało się sparsować adresu e-mail"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Portuguese translation 'Sem análise de e-mail' means 'No email analysis'. In this technical context, 'parsed' refers to the process of extracting/identifying an email address from a string. The current translation sounds like a lack of analytical study rather than a failure to extract/identify an email address.",
-          "suggestion": "Nenhum endereço de e-mail identificado"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ninguém analisou o e-mail' means 'Nobody analyzed the email', which implies a human actor. The English 'No email address parsed' is a technical error indicating that the system failed to extract/identify an email address from the input.",
-          "suggestion": "Nenhum endereço de e-mail foi identificado"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'parsat' is not a valid Romanian word; it is a phonetic transliteration of the English technical term 'parsed', which is not used in standard Romanian.",
-          "suggestion": "Niciun e-mail nu a fost extras"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'No email address parsed' implies a failure in the parsing process (the system couldn't extract an email from the input), whereas the Russian 'Поле email пустое' means 'The email field is empty'. These are different error states.",
-          "suggestion": "Не удалось распознать адрес электронной почты"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -267,13 +208,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '没有解析邮件' means 'No email parsed' or 'Did not parse email', which implies the process of parsing failed. The English 'No email address parsed' specifically refers to the absence of an email address within the input (EmptyEmail error).",
-          "suggestion": "未解析到电子邮件地址"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

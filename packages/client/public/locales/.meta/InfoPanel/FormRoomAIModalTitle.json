@@ -1,0 +1,29 @@
+{
+  "key_path": "FormRoomAIModalTitle",
+  "content": "Get better insights",
+  "content_en_sha1_hash": "597850c3db004f7cec365c911e470cc549f2143f",
+  "created_at": "2026-05-08T13:10:42.384Z",
+  "updated_at": "2026-05-08T13:19:43.703Z",
+  "comment": {
+    "text": "Dialog title for the AI connection modal in FormRoom, appearing in the modal header.",
+    "is_auto": true,
+    "updated_at": "2026-05-08T13:19:43.703Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/AskAIConnectDialog/index.tsx",
+      "line_number": 77,
+      "context": "visible={visible}\n onClose={handleClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>\n {t(\"InfoPanel:FormRoomAIModalTitle\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\" fontWeight={400}>\n {t(\"InfoPanel:FormRoomAIModalDescription\")}\n </Text>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,13 +3,21 @@
   "content": "Extended thinking",
   "content_en_sha1_hash": "d2421f6736da794561a9a472415d674e249b27c3",
   "created_at": "2026-03-26T08:26:34.708Z",
-  "updated_at": "2026-04-08T09:57:25.347Z",
+  "updated_at": "2026-04-23T17:24:02.169Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a tooltip that appears when hovering over a help icon, explaining the concept of \"extended thinking\" in the AI assistant.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:52:59.267Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-input/tools-settings/index.tsx",
+      "line_number": 419,
+      "context": "},\n {\n key: \"extended-thinking\",\n label: (\n <div className={styles.extendedThinkingLabel}>\n {t(\"ExtendedThinking\")}{\" \"}\n {thinkingSupported && <ThinkingHelpButton />}\n </div>\n ),\n withToggle: true,\n checked: thinkingEnabled && thinkingSupported,",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -110,13 +118,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Uitgebreide gedachte' (Extended thought) is singular and refers to a single idea, whereas 'Extended thinking' refers to a cognitive process or mode of reasoning.",
-          "suggestion": "Uitgebreid denken"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {

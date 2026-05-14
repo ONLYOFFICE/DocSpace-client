@@ -3,17 +3,18 @@
   "content": "{{productName}} name",
   "content_en_sha1_hash": "0f1403b43faa94c0dc6b13a5e45c10558ce66b12",
   "created_at": "2025-05-19T21:30:50.037Z",
-  "updated_at": "2026-04-10T08:58:38.059Z",
+  "updated_at": "2026-04-11T21:27:07.949Z",
   "comment": {
-    "text": "This translation key is used to display a product name with a descriptive suffix. It appears in a social authentication welcome dialog and is used to provide additional information about the product being shown.",
+    "text": "This text appears in a welcome dialog after a user signs in via social authentication. It displays the product name, where `{{productName}}` is a variable representing the brand name (e.g., \"ONLYOFFICE DocSpace\").",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:21.945Z"
+    "updated_at": "2026-04-11T21:27:07.949Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/SocialAuthWelcomeDialog/index.tsx",
-      "line_number": 118,
-      "context": "</Text>\n \n <div className=\"account-details\">\n <StyledInfoRow className=\"welcome-product-name\">\n <Text className=\"welcome-text\">\n {t(\"SocialAuthWelcomeDialog:ProductNameDetail\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Text fontWeight=\"600\" truncate className=\"welcome-text\">\n {baseDomain == \"localhost\"",
+      "line_number": 119,
+      "context": "</Text>\n \n <div className=\"account-details\">\n <StyledInfoRow className=\"welcome-product-name\">\n <Text className=\"welcome-text\">\n {t(\"SocialAuthWelcomeDialog:ProductNameDetail\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <Text fontWeight=\"600\" truncate className=\"welcome-text\">\n {baseDomain == \"localhost\"",
       "module": "/packages/client"
     }
   ],
@@ -33,13 +34,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order is reversed in Arabic. In Arabic, the noun (name) should come before the modifier (product name) to be grammatically correct and convey the intended meaning. Currently, it reads 'Product Name name' or is syntactically broken.",
-          "suggestion": "اسم {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -147,13 +142,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order is incorrect. In Portuguese, the noun should come before the modifier to convey '{{productName}} name'. The current translation '{{productName}} nome' sounds like '{{productName}} name' in a broken way, whereas 'Nome do {{productName}}' or 'Nome: {{productName}}' is the standard way to express this descriptive suffix.",
-          "suggestion": "Nome do {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -189,13 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Назив' is grammatically incorrect in this context. In Serbian, 'Назив' is not a standard noun for 'name' in this sense; 'Назив' is a rare/archaic form or a misspelling. The correct noun for 'name' is 'Име'.",
-          "suggestion": "Име {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -219,13 +202,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order in Vietnamese is incorrect. '{{productName}} tên' translates to '{{productName}} name' in a way that sounds like a list or a label, but in the context of a descriptive suffix (e.g., 'ONLYOFFICE name'), the noun 'tên' should come before the variable or be phrased as 'Tên của {{productName}}'. However, strictly following the English structure 'X name', the Vietnamese equivalent for a descriptive phrase is 'Tên {{productName}}'.",
-          "suggestion": "Tên {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

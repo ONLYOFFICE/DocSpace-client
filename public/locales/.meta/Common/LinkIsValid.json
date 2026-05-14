@@ -3,11 +3,12 @@
   "content": "The link is valid for <1>{{date}}</1>",
   "content_en_sha1_hash": "963d9b3a0d59aabbefdcf5cad77bdbe0fa590621",
   "created_at": "2025-05-19T21:30:46.198Z",
-  "updated_at": "2026-04-08T05:37:13.023Z",
+  "updated_at": "2026-04-11T20:49:38.790Z",
   "comment": {
-    "text": "This translation key is used to format a message indicating the validity period of a link. It will be displayed in various UI components, such as expired options dialog, likely informing users about the remaining time before a link expires or becomes invalid.",
+    "text": "This is a sentence displayed in a dropdown menu, indicating the validity period of a shared link. The `<1>{{date}}</1>` tag represents the expiration date or \"unlimited\".",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:39.596Z"
+    "updated_at": "2026-04-11T20:49:38.790Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

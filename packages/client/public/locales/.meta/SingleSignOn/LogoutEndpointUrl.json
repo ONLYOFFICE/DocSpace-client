@@ -3,11 +3,12 @@
   "content": "IdP Single Logout Endpoint URL",
   "content_en_sha1_hash": "14ccc5d3c92d9b8022f3772147fe4a998151a5fb",
   "created_at": "2025-05-19T21:30:50.105Z",
-  "updated_at": "2026-04-08T23:16:43.164Z",
+  "updated_at": "2026-04-11T21:26:44.142Z",
   "comment": {
-    "text": "\"This is the URL of the Single Logout endpoint for the IdP. It should be entered by administrators to enable Single Sign-On. This field appears in a settings page.\"",
+    "text": "This is a label for an input field where the user enters the URL for the Identity Provider's Single Logout endpoint. It appears within the Single Sign-On settings.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:13.867Z"
+    "updated_at": "2026-04-11T21:26:44.142Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -81,25 +82,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Ելքի Միակ Վերջնակետ' is a literal, word-for-word translation that is grammatically incorrect and nonsensical in Armenian technical context. 'Single Logout' should be translated as a single concept (e.g., 'Մեկանգամյա ելք'), and 'Endpoint' is better rendered as 'վերջնակետ' in a way that flows with the sentence.",
-          "suggestion": "IdP Մեկանգամյա ելքի վերջնակետի URL"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Italian translation uses 'accesso singolo' (Single Sign-On/Access) instead of 'uscita singola' (Single Logout). This changes the technical meaning from a logout process to a login process.",
-          "suggestion": "URL dell’endpoint di logout singolo IdP"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -117,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order in Lao is incorrect, making the sentence nonsensical. 'ຈຸດສິ້ນສຸດ' (Endpoint) is placed at the end of the sentence after the noun it is supposed to modify, and the structure does not follow natural Lao technical phrasing.",
-          "suggestion": "URL ຈຸດສິ້ນສຸດການອອກຈາກລະບົບແບບຄັ້ງດຽວຂອງ IdP"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -147,25 +130,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order in Portuguese is unnatural and technically incorrect for this context. 'URL do Ponto Final do Fim de Sessão Único' sounds like a literal word-for-word translation that fails to convey the technical concept of a 'Single Logout Endpoint'.",
-          "suggestion": "URL do endpoint de Single Logout do IdP"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'terminal' is a mistranslation of 'endpoint' in a networking/API context. In Portuguese, 'terminal' refers to a physical device or a station, whereas 'endpoint' in IT should be translated as 'endpoint' or 'ponto de extremidade'.",
-          "suggestion": "URL do endpoint de Single Logout do IdP"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -183,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'ඒ.ස.නි.' (A.S.N.), which is an incorrect abbreviation for 'URL'. In Sinhala technical contexts, 'URL' is typically transliterated or referred to as 'URL' directly. 'ඒ.ස.නි.' does not correspond to 'URL' and makes the sentence nonsensical.",
-          "suggestion": "IdP තනි නික්මෙන අන්තයේ URL එක"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -213,13 +178,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "wrong_language",
-          "description": "The translation contains Cyrillic characters ('оdjavljivanje') instead of being strictly in the Latin script as requested.",
-          "suggestion": "URL krajnje tačke za jednostrano odjavljivanje od strane pružaoca usluga"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

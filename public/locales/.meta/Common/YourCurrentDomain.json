@@ -3,11 +3,12 @@
   "content": "Your current domain",
   "content_en_sha1_hash": "b3923c670b1406884e6e252bae5cd97477f25260",
   "created_at": "2025-05-26T07:15:49.720Z",
-  "updated_at": "2026-04-07T19:53:26.288Z",
+  "updated_at": "2026-04-24T09:26:56.946Z",
   "comment": {
-    "text": "This translation key is used to display \"Your current domain\" in various UI elements, such as settings pages and input fields, to provide users with clear information about their active domain. It appears on screens related to domain management and DNS settings, where users can edit or configure their domain details.",
+    "text": "This is a label for a text input field that displays the user's current domain name. It appears in the portal settings and domain settings sections.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:01:42.070Z"
+    "updated_at": "2026-04-11T20:38:40.543Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -34,187 +35,290 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:22:31.185Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "6a835dcdbfe226da"
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:23:27.694Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "a3667dc02e6f67db"
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:23:32.329Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "93ff073efee8b090"
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:23:36.237Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "490c3ce368387339"
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:23:41.958Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "dc174c08b01d3a66"
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation includes the extra word 'όνομα' (name) which is not present in the English source, altering the meaning of the original string 'Your current domain'.",
+          "suggestion": "Το τρέχον τομέα σας",
+          "checked_at": "2026-04-24T09:24:08.015Z",
+          "checked_by": "openrouter/tencent/hy3-preview:free"
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:24:14.671Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "b7385f513f1a933b"
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:24:20.016Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "fbcc146da1260198"
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:24:23.451Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "357161e2d3d2513c"
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:24:28.840Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "ac95d747288e539b"
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:24:32.652Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "d18552e1b0896fba"
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:24:37.278Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "5ad2b7567576f53b"
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:25:02.061Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "db2b306fd1411d14"
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:25:13.612Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "36b28f03950948db"
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:25:17.991Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "701016cb0c60ce5c"
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:25:22.177Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "93fac9d8dc8d2462"
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:25:26.842Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "18ef6d3f4195ca3f"
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:25:31.403Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "c5e26aae65ea2a94"
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:25:35.555Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "b759f6dd8c143d29"
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:25:39.523Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "8aecc992cef3b741"
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:25:43.411Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "290a3025d300810b"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:25:47.509Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "65d260be98abe6c9"
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:25:52.816Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "1fe6c6cb19ed27e2"
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:25:57.494Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "fc57186b4167f7a8"
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:26:06.297Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "86cb2ee08536455e"
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:26:11.827Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "99f49f9385b1b499"
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation 'Mevcut alanınız' incorrectly uses 'alan' (meaning 'area/field') for 'domain' in the context of a user's domain name, leading to a wrong meaning. The correct term for domain name in Turkish is 'alan adı'.",
+          "suggestion": "Mevcut alan adınız",
+          "checked_at": "2026-04-24T09:26:44.806Z",
+          "checked_by": "openrouter/tencent/hy3-preview:free"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:26:48.282Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "74c3d25e364cd784"
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:26:52.470Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "e8b7722b91df17f9"
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:26:56.946Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "4507fd231d0af62e"
     },
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:26:02.165Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "88c31a16fce29d20"
     }
   }
 }

@@ -1,7 +1,8 @@
 {
   "BackToRoom": "Zurück zum Raum",
   "CheckReadyForms": "Fertige Formulare prüfen",
-  "Description": "Ihr Formular ist ausgefüllt und gespeichert",
+  "CompletedFormDescription": "Ihr Formular ist ausgefüllt und gespeichert",
+  "CompletedFormTitle": "Das Formular ist ausgefüllt",
   "DescriptionForAnonymous": "Ihrem eingereichten PDF-Formular wurde eine eindeutige Formularnummer zugewiesen. Um den Status zu überprüfen, wenden Sie sich bitte an den Formularbesitzer.",
   "DescriptionForRegisteredUser": "Ihr eingereichtes PDF-Formular steht Ihnen im Ordner \"Komplett\" zur Verfügung.",
   "FillItOutAgain": "Erneut ausfüllen",
@@ -18,6 +19,5 @@
   "FormVDRYouFirstRecepientDescription": "Sie sind dazu bestimmt, das Formular als erster Empfänger auszufüllen. Eine Benachrichtigung wurde an Ihre E-Mail-Adresse gesendet. Sie können es jetzt ausfüllen oder den Link zum Ausfüllen kopieren und später zurückkehren.",
   "LinkToFillOutForm": "Link zum Ausfüllen des Formulars:",
   "LinkToForm": "Link zum Formular:",
-  "LinkToViewOnlyForm": "Link zum schreibgeschützten Formular:",
-  "Title": "Das Formular ist ausgefüllt"
+  "LinkToViewOnlyForm": "Link zum schreibgeschützten Formular:"
 }

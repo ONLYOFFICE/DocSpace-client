@@ -3,11 +3,12 @@
   "content": "NameId Format",
   "content_en_sha1_hash": "09c33ee71511c0a8e0cba56fd26679f490c998fe",
   "created_at": "2025-05-19T21:30:50.112Z",
-  "updated_at": "2026-04-08T23:12:36.415Z",
+  "updated_at": "2026-04-11T21:26:41.432Z",
   "comment": {
-    "text": "This translation key is used for the label of a dropdown menu in a user interface, specifically related to Single Sign-On settings. It will appear as \"NameId Format\" in the application, and its purpose is to provide a clear indication of the option being selected from a list.",
+    "text": "This is a combo box label for selecting the format of the NameID attribute used in SAML authentication.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:13.041Z"
+    "updated_at": "2026-04-11T21:26:41.432Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -129,13 +130,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'Name' is missing from the translation. In the context of SSO (Single Sign-On), 'NameID' is a specific technical identifier, and 'Formato de ID' (ID Format) is too generic.",
-          "suggestion": "Formato de NameID"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -159,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'නම/හැඳු. ආකෘතිය' translates to 'Name/ID Format'. In the context of SSO (Single Sign-On), 'NameID' is a specific technical attribute/identifier, not a combination of 'Name' and 'ID'. Translating it as 'Name/ID' is technically inaccurate for a configuration setting.",
-          "suggestion": "NameID ආකෘතිය"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

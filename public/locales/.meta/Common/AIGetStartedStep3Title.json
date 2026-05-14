@@ -3,13 +3,21 @@
   "content": "Pay only for what you use",
   "content_en_sha1_hash": "1c73e5014a6c3cbf5e1006673a4ee05a0768e416",
   "created_at": "2026-04-10T13:53:44.281Z",
-  "updated_at": "2026-04-10T13:53:44.281Z",
+  "updated_at": "2026-04-11T21:00:09.327Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is the title for the third step in the AI service \"Get Started\" wizard, highlighting the billing model.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:00:09.327Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/GetStartedBody.tsx",
+      "line_number": 223,
+      "context": "<div className={styles.stepMainRow}>\n <div className={styles.stepNumber}>3</div>\n <div className={styles.stepText}>\n <Text className={styles.stepTitleText}>\n {t(\"AIGetStartedStep3Title\")}\n </Text>\n <Text\n fontSize=\"12px\"\n lineHeight=\"16px\"\n className={styles.stepDescription}",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -23,7 +23,7 @@
   "ShowBackupCodes": "Прикажи резервне кодове",
   "SuccessLogout": "Активна конекција је одјављена: {{platform}}, {{browser}}",
   "TelegramAccount": "Телеграм налог",
-  "TelegramAccountDescription": "Да повежеш ТелеграмБот са својим налогом, испрати тајни линк и кликни на дугме “Повежи Телеграм”.",
+  "TelegramAccountDescription": "Да повежеш ТелеграмБот са својим налогом, отвори тајни линк и кликни на дугме “Повежи Телеграм”.",
   "TelegramAccountDisconnect": "Искључи Телеграм",
   "TelegramAccountDisconnectDescription": "Твој @{{username}} налог је повезан за Телеграм обавештења. Можеш се искључити са овог налога. У том случају, нећеш примати обавештења.",
   "TerminateAllSessions": "Прекини све сесије осим тренутне",

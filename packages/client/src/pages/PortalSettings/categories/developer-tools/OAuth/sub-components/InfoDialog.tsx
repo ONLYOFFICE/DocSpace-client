@@ -184,7 +184,7 @@ const InfoDialog = ({
                 fontWeight="600"
                 truncate
               >
-                {t("Common:Description")}
+                {t("Common:DescriptionLabel")}
               </Text>
 
               <Text

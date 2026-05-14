@@ -7,6 +7,7 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { DeviceType } from "@docspace/shared/enums";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type ReducedRightsDialogProps = {
   visible: boolean;
@@ -50,7 +51,7 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
           i18nKey="YourUserTypeHasChanged"
           values={{
             userType: t("Common:Guest"),
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
             adminName,
           }}
           components={{ 1: <span style={{ fontWeight: 600 }} /> }}
@@ -66,7 +67,7 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
         </Text>
         <Text style={{ marginTop: "16px" }}>
           {t("Common:ForQuestionsContactPortalAdmin", {
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
           })}
         </Text>
       </ModalDialog.Body>

@@ -3,11 +3,12 @@
   "content": "Access recovery",
   "content_en_sha1_hash": "27cdeed1252a2d59d9bf1278b5eb5a19975f0b4a",
   "created_at": "2025-05-19T21:30:47.772Z",
-  "updated_at": "2026-04-08T01:43:16.280Z",
+  "updated_at": "2026-04-12T03:10:48.994Z",
   "comment": {
-    "text": "The \"RecoverTitle\" translation key is used to display the text \"Access recovery\" in a modal dialog that allows users to recover access. This key appears in the header of a modal dialog and provides context for the user's interaction.",
+    "text": "This is the title of a dialog box that appears when a user needs to recover access to their account or a specific document.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:34:46.800Z"
+    "updated_at": "2026-04-11T20:45:24.830Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -69,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation 'Käytä palautusta' means 'Use recovery' (imperative verb), whereas the English 'Access recovery' is a noun phrase acting as a title for the recovery process/access.",
-          "suggestion": "Pääsyn palautus"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -111,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ການເຂົ້າເຖິງການກູ້ຄືນ' literally means 'Accessing the recovery' or 'Access to recovery', which sounds like a process of accessing a recovery tool. In the context of a modal header for recovering access, it should mean 'Recover access'.",
-          "suggestion": "ການກູ້ຄືນການເຂົ້າເຖິງ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -129,13 +118,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Dutch translation 'Toegang herstel' is a literal word-for-word translation that is grammatically incorrect in Dutch. It lacks the necessary connection between 'access' and 'recovery'.",
-          "suggestion": "Toegang herstellen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -165,25 +148,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Russian translation 'Доступ к порталу' means 'Access to the portal', which is a different concept from 'Access recovery' (restoring lost access).",
-          "suggestion": "Восстановление доступа"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'ප්‍රතිසාධනයට ප්‍රවේශය' translates to 'Access to recovery/healing' (often used in a medical or health context). In the context of account/access recovery, it should mean 'Recovering access' or 'Access recovery' (restoring the ability to enter the system).",
-          "suggestion": "ප්‍රවේශය නැවත ලබා ගැනීම"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -201,25 +172,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Приступи опоравку' means 'Proceed to recovery' or 'Approach recovery', which is grammatically awkward and semantically different from the noun phrase 'Access recovery'.",
-          "suggestion": "Опоравк приступа"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Pristupi oporavku' means 'Accesses to recovery' (plural/verb form), whereas the English 'Access recovery' in a modal header context refers to the process of 'Recovery of access'.",
-          "suggestion": "Oporavak pristupa"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -243,25 +202,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '访问恢复' means 'Access restoration' or 'Access recovery' in a sense of restoring a visit/accessing something, but in the context of account/access recovery (recovering one's ability to log in), '找回访问权限' or '恢复访问权限' is the standard technical term. '访问恢复' sounds like a literal, unnatural translation of 'Access recovery'.",
-          "suggestion": "恢复访问权限"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Albanian translation 'Qasja në rikuperimin' means 'Access to the recovery' (implying access to a recovery process/object), whereas the English 'Access recovery' in this context refers to the action of recovering access. The current translation is grammatically awkward and changes the semantic intent of the header.",
-          "suggestion": "Rikuperimi i qasjes"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -36,6 +36,7 @@ import SelectUsersTypeStep from "../../components/SelectUsersTypeStep";
 import ImportStep from "../../components/ImportStep";
 import ImportProcessingStep from "../../components/ImportProcessingStep";
 import ImportCompleteStep from "../../components/ImportCompleteStep";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const getStepsData = (
   t: TFunction,
@@ -58,7 +59,7 @@ export const getStepsData = (
     {
       title: t("Settings:SelectUsers"),
       description: t("Settings:SelectUsersDescriptionGoogle", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
         organizationName: logoText,
       }),
       component: <SelectUsersStep t={t} canDisable shouldSetUsers />,
@@ -70,7 +71,7 @@ export const getStepsData = (
           <b>{t("Settings:RolesAreSet")}</b>
           <div>
             {t("Settings:UsersAreRegistered", {
-              productName: t("Common:ProductName"),
+              productName: getBrandName("ProductName"),
             })}
           </div>
         </>
@@ -81,7 +82,7 @@ export const getStepsData = (
             ns="Settings"
             i18nKey="SelectUserTypesDescription"
             values={{
-              productName: t("Common:ProductName"),
+              productName: getBrandName("ProductName"),
             }}
             components={{
               1: <b />,
@@ -96,7 +97,7 @@ export const getStepsData = (
                   i18nKey="TypesAndPrivileges"
                   ns="Settings"
                   t={t}
-                  values={{ productName: t("Common:ProductName") }}
+                  values={{ productName: getBrandName("ProductName") }}
                   components={{
                     1: <b />,
                     2: <b />,
@@ -120,7 +121,7 @@ export const getStepsData = (
     {
       title: t("Settings:DataImport"),
       description: t("Settings:ImportSectionDescription", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
       }),
       component: (
         <ImportStep
@@ -146,7 +147,7 @@ export const getStepsData = (
     {
       title: t("Settings:DataImportComplete"),
       description: t("Settings:ImportCompleteDescriptionGoogle", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
         organizationName: logoText,
       }),
       component: <ImportCompleteStep t={t} />,

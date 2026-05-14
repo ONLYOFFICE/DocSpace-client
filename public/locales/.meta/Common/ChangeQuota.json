@@ -3,11 +3,12 @@
   "content": "Change quota",
   "content_en_sha1_hash": "02de777a63ceae10d68258c04b8924d83239debc",
   "created_at": "2025-05-19T21:30:43.407Z",
-  "updated_at": "2026-04-08T15:43:11.611Z",
+  "updated_at": "2026-04-11T20:57:30.761Z",
   "comment": {
-    "text": "\"Change quota\" is used as a button label and header title in a modal dialog to prompt user action of changing storage limits. It appears in two contexts: a warning quota dialog and a space quota settings dialog. The translation key should be used for situations where users need to edit or adjust their storage quotas.",
+    "text": "This is the title of a dialog and the label of a button. It allows users to modify the storage limit for a space.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:09.160Z"
+    "updated_at": "2026-04-11T20:57:30.761Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -18,8 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/WarningQuotaDialog/WarningQuotaDialog.tsx",
-      "line_number": 99,
-      "context": "<Text style={{ marginBottom: \"16px\" }}>{getWarningDescription()}</Text>\n <Text>{t(\"Settings:WantToContinue\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:ChangeQuota\")}\n size={ButtonSize.normal}\n primary\n onClick={onClickRedirect}\n scale\n testId=\"continue_change_quota_button\"",
+      "line_number": 100,
+      "context": "<Text style={{ marginBottom: \"16px\" }}>{getWarningDescription()}</Text>\n <Text>{t(\"Settings:WantToContinueQuota\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:ChangeQuota\")}\n size={ButtonSize.normal}\n primary\n onClick={onClickRedirect}\n scale\n testId=\"continue_change_quota_button\"",
       "module": "/packages/client"
     },
     {
@@ -87,13 +88,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German word 'Quote' means 'quotation' (as in a literary quote or a price quote), whereas the English 'quota' in this context refers to a 'limit' or 'allocation' (Kontingent).",
-          "suggestion": "Kontingent ändern"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -195,13 +190,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'සලාකය' (salākaya) means 'portion' or 'share' in a general sense, but in the context of computing and storage limits, 'quota' should be translated as 'කොටාව' (koṭāva).",
-          "suggestion": "කොටාව සංශෝධනය කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

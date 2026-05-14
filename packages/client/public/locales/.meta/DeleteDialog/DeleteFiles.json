@@ -3,17 +3,18 @@
   "content": "You are about to move <strong>files ({{filesCount}})</strong> to {{trashSection}}.",
   "content_en_sha1_hash": "72a77c49883d04edfed07e946b1b55dc78b43806",
   "created_at": "2025-10-01T15:20:12.139Z",
-  "updated_at": "2026-03-20T09:07:45.493Z",
+  "updated_at": "2026-04-13T14:59:05.764Z",
   "comment": {
-    "text": "This key displays a confirmation message within a delete dialog, informing the user that they are about to move a specific number of files to the trash. The message includes the count of files being moved, which is dynamically inserted using the `filesCount` variable. Translators should ensure the wording accurately conveys the action of moving files to the trash.",
+    "text": "This is a confirmation message in a dialog box. It informs the user that they are about to move a specified number of files to the trash. `{{filesCount}}` is the number of files, and `{{trashSection}}` is the name of the trash section (e.g., \"Trash\").",
     "is_auto": true,
-    "updated_at": "2025-10-01T15:20:31.695Z"
+    "updated_at": "2026-04-11T21:05:47.762Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 157,
-      "context": "const foldersCount = items.folders.length;\n \n if (filesCount && foldersCount) {\n return (\n <>\n <Trans t={t} i18nKey=\"DeleteFilesAndFoldersForever\" ns=\"DeleteDialog\">\n You are about to delete the{\" \"}\n <strong>files ({{ filesCount }})</strong> and{\" \"}\n <strong>folders ({{ foldersCount }})</strong>.\n </Trans>{\" \"}\n {!isThirdParty",
+      "line_number": 253,
+      "context": "}\n \n if (filesCount) {\n return (\n <>\n <Trans t={t} i18nKey=\"DeleteFiles\" ns=\"DeleteDialog\">\n You are about to move <strong>files ({{ filesCount }})</strong> to\n {{ trashSection: t(\"Common:TrashSection\") }}.{\" \"}\n </Trans>{\" \"}\n {!isThirdParty ? t(\"FilesDeletedAfter\") : null}{\" \"}\n {t(\"Common:WantToContinue\")}",
       "module": "/packages/client"
     }
   ],

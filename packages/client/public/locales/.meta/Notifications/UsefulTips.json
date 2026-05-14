@@ -3,17 +3,18 @@
   "content": "Useful {{productName}} tips",
   "content_en_sha1_hash": "184f3029f854216318bae47c9d442f284b83b435",
   "created_at": "2025-05-19T21:30:54.092Z",
-  "updated_at": "2026-04-07T19:35:05.158Z",
+  "updated_at": "2026-04-13T14:59:05.909Z",
   "comment": {
-    "text": "This translation key is used to display a notification title indicating useful tips for a specific product. It appears in a toast notification component, providing users with a hint about relevant information or features available for them.",
+    "text": "This is a heading for a section displaying helpful tips. `{{productName}}` will be replaced with the name of the ONLYOFFICE product, e.g., \"DocSpace\".",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:28.158Z"
+    "updated_at": "2026-04-11T21:17:53.785Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/UsefulTipsContainer.tsx",
-      "line_number": 38,
-      "context": "import { toastr } from \"@docspace/ui-kit/components/toast\";\n \n import TargetUserStore from \"SRC_DIR/store/contacts/TargetUserStore\";\n import styles from \"../Notifications.module.scss\";\n \n type UsefulTipsContainerProps = {\n t: TFunction;\n changeSubscription?: TargetUserStore[\"changeSubscription\"];\n usefulTipsSubscription?: TargetUserStore[\"usefulTipsSubscription\"];\n textProps: Record<string, unknown>;\n textDescriptionsProps: Record<string, unknown>;",
+      "line_number": 69,
+      "context": "return (\n <div className={styles.notificationContainer}>\n <div className={styles.row}>\n <Text {...textProps} className=\"subscription-title\">\n {t(\"UsefulTips\", { productName: getBrandName(\"ProductName\") })}\n </Text>\n <ToggleButton\n className=\"useful-tips toggle-btn\"\n onChange={onChangeEmailSubscription}\n isChecked={usefulTipsSubscription}",
       "module": "/packages/client"
     }
   ],

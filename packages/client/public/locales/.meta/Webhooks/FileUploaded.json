@@ -3,13 +3,21 @@
   "content": "File uploaded",
   "content_en_sha1_hash": "71be2f4e3893377ae37b18258e9eddee61125537",
   "created_at": "2025-05-19T21:30:49.742Z",
-  "updated_at": "2026-04-08T20:04:18.217Z",
+  "updated_at": "2026-04-13T14:59:05.876Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a toast message indicating that a file has been successfully uploaded. It appears briefly after a file transfer is complete.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:28:57.531Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
+      "line_number": 49,
+      "context": "case WebhookTriggers.GroupDeleted:\n return t(\"GroupDeleted\");\n case WebhookTriggers.FileCreated:\n return t(\"FileCreated\");\n case WebhookTriggers.FileUploaded:\n return t(\"FileUploaded\");\n case WebhookTriggers.FileUpdated:\n return t(\"FileUpdated\");\n case WebhookTriggers.FileTrashed:\n return t(\"FileTrashed\");\n case WebhookTriggers.FileDeleted:",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -20,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation means 'File updated' instead of 'File uploaded'.",
-          "suggestion": "تم رفع الملف"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -74,13 +76,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "In French, 'téléchargé' is ambiguous and often refers to 'downloaded'. For 'uploaded', 'téléversé' or 'mis en ligne' is the correct technical term to avoid confusion with downloading.",
-          "suggestion": "Fichier téléversé"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -194,13 +190,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Ukrainian translation 'Файл передано' means 'File transmitted' or 'File sent', which is not the same as 'File uploaded'. In a UI context, 'uploaded' should be 'завантажено'.",
-          "suggestion": "Файл завантажено"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

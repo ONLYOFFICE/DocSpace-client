@@ -25,16 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { cookies, headers } from "next/headers";
-import Script from "next/script";
 
 import { getSelectorsByUserAgent } from "react-device-detect";
 
 import { ValidationStatus } from "@docspace/shared/enums";
 
 import {
-	getData,
-	validatePublicRoomKey,
-	getDeepLinkSettings,
+  getData,
+  validatePublicRoomKey,
+  getDeepLinkSettings,
 } from "@/utils/actions";
 import { logger } from "@/../logger.mjs";
 
@@ -44,165 +43,163 @@ import FilePassword from "@/components/file-password";
 import type { TFrameConfig, TFrameTheme } from "@docspace/shared/types/Frame";
 
 const initialSearchParams: Awaited<RootPageProps["searchParams"]> = {
-	fileId: undefined,
-	fileid: undefined,
-	version: undefined,
-	doc: undefined,
-	action: undefined,
-	share: undefined,
-	editorType: undefined,
-	withoutGoBackText: undefined,
-	withTool: undefined,
+  fileId: undefined,
+  fileid: undefined,
+  version: undefined,
+  doc: undefined,
+  action: undefined,
+  share: undefined,
+  editorType: undefined,
+  withoutGoBackText: undefined,
+  withTool: undefined,
 };
 
 async function Page(props: RootPageProps) {
-	const { searchParams: sp } = props;
-	const searchParams = await sp;
-	const {
-		fileId,
-		fileid,
-		version,
-		doc,
-		action,
-		share,
-		editorType,
-		error,
-		locale,
-		theme,
-		is_file,
-		editorGoBack,
-		withoutGoBackText,
-		isSDK,
-		withTool,
-	} = searchParams ?? initialSearchParams;
+  const { searchParams: sp } = props;
+  const searchParams = await sp;
+  const {
+    fileId,
+    fileid,
+    version,
+    doc,
+    action,
+    share,
+    editorType,
+    error,
+    locale,
+    theme,
+    is_file,
+    editorGoBack,
+    withoutGoBackText,
+    isSDK,
+    withTool,
+  } = searchParams ?? initialSearchParams;
 
-	const baseSdkConfig: TFrameConfig & {
-		is_file?: boolean;
-		isSDK?: boolean;
-		withoutGoBackText?: boolean;
-	} = {
-		frameId: "",
-		src: "",
-		editorCustomization: { uiTheme: theme },
-		editorGoBack,
-		withoutGoBackText,
-		editorType,
-		id: fileId,
-		locale,
-		requestToken: share,
-		theme: theme as TFrameTheme,
-		is_file,
-		isSDK,
-	};
+  const baseSdkConfig: TFrameConfig & {
+    is_file?: boolean;
+    isSDK?: boolean;
+    withoutGoBackText?: boolean;
+  } = {
+    frameId: "",
+    src: "",
+    editorCustomization: { uiTheme: theme },
+    editorGoBack,
+    withoutGoBackText,
+    editorType,
+    id: fileId,
+    locale,
+    requestToken: share,
+    theme: theme as TFrameTheme,
+    is_file,
+    isSDK,
+  };
 
-	const cookieStore = await cookies();
-	const hdrs = await headers();
+  const cookieStore = await cookies();
+  const hdrs = await headers();
 
-	const hostname = hdrs.get("x-forwarded-host");
+  const hostname = hdrs.get("x-forwarded-host");
 
-	logger.info(
-		`fileId: ${fileId ?? fileid}, action: ${action ?? "not set"}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, version: ${version ?? "not set"}, editorType: ${editorType ?? "not set"}, doc: ${doc ?? "not set"}, url: ${hostname} Start open file at edit`,
-	);
+  logger.info(
+    `fileId: ${fileId ?? fileid}, action: ${action ?? "not set"}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, version: ${version ?? "not set"}, editorType: ${editorType ?? "not set"}, doc: ${doc ?? "not set"}, url: ${hostname} Start open file at edit`,
+  );
 
-	let type = editorType;
+  let type = editorType;
 
-	const ua = hdrs.get("user-agent");
-	if (ua && !type) {
-		const { isMobile } = getSelectorsByUserAgent(ua);
+  const ua = hdrs.get("user-agent");
+  if (ua && !type) {
+    const { isMobile } = getSelectorsByUserAgent(ua);
 
-		if (isMobile) {
-			type = "mobile";
+    if (isMobile) {
+      type = "mobile";
 
-			logger.debug(
-				`file: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, Open mobile view`,
-			);
-		}
-	}
+      logger.debug(
+        `file: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, Open mobile view`,
+      );
+    }
+  }
 
-	logger.debug(
-		`fileId: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, Start get data for open file`,
-	);
+  logger.debug(
+    `fileId: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, Start get data for open file`,
+  );
 
-	const data = await getData(
-		fileId ?? fileid ?? "",
-		version,
-		doc,
-		action,
-		share,
-		type,
-		withTool,
-	);
+  const data = await getData(
+    fileId ?? fileid ?? "",
+    version,
+    doc,
+    action,
+    share,
+    type,
+    withTool,
+  );
 
-	if (data.error?.status === "access-denied" && share) {
-		const roomData = await validatePublicRoomKey(share, fileId ?? fileid ?? "");
-		if (!roomData) {
-			logger.error(
-				`fileId: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, Wrong share key`,
-			);
-			return;
-		}
-		const { status } = roomData.response;
+  if (data.error?.status === "access-denied" && share) {
+    const roomData = await validatePublicRoomKey(share, fileId ?? fileid ?? "");
+    if (!roomData) {
+      logger.error(
+        `fileId: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, Wrong share key`,
+      );
+      return;
+    }
+    const { status } = roomData.response;
 
-		if (status === ValidationStatus.Password) {
-			logger.debug(
-				`fileId: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, Open file password component`,
-			);
-			return (
-				<FilePassword validationData={roomData.response} shareKey={share} />
-			);
-		}
-	}
+    if (status === ValidationStatus.Password) {
+      logger.debug(
+        `fileId: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, Open file password component`,
+      );
+      return (
+        <FilePassword validationData={roomData.response} shareKey={share} />
+      );
+    }
+  }
 
-	const deepLinkSettings = isSDK ? null : await getDeepLinkSettings();
+  const isEmbedded = editorType === "embedded";
+  const deepLinkSettings =
+    isSDK || isEmbedded ? null : await getDeepLinkSettings();
 
-	if (data.error?.status === "not-found" && error) {
-		data.error.message = error;
-	}
+  if (data.error?.status === "not-found" && error) {
+    data.error.message = error;
+  }
 
-	let url = data.config?.editorUrl ?? data.error?.editorUrl;
-	const urlQuery = url?.includes("?") ? `?${url.split("?")[1]}` : "";
-	url = url?.replace(urlQuery, "");
+  let url = data.config?.editorUrl ?? data.error?.editorUrl;
+  const urlQuery = url?.includes("?") ? `?${url.split("?")[1]}` : "";
+  url = url?.replace(urlQuery, "");
 
-	if (url && !url.endsWith("/")) url += "/";
+  if (url && !url.endsWith("/")) url += "/";
 
-	const docApiUrl = `${url}web-apps/apps/api/documents/api.js${urlQuery}`;
+  const docApiUrl = `${url}web-apps/apps/api/documents/api.js${urlQuery}`;
 
-	if (isSDK) {
-		delete data.config?.editorConfig?.embedded?.embedUrl;
-		delete data.config?.editorConfig?.embedded?.shareUrl;
-	}
+  if (isSDK) {
+    delete data.config?.editorConfig?.embedded?.embedUrl;
+    delete data.config?.editorConfig?.embedded?.shareUrl;
+  }
 
-	if (urlQuery) {
-		if (data.config?.editorUrl) {
-			data.config.editorUrl = data.config?.editorUrl.replace(urlQuery, "");
-		}
+  if (urlQuery) {
+    if (data.config?.editorUrl) {
+      data.config.editorUrl = data.config?.editorUrl.replace(urlQuery, "");
+    }
 
-		if (data.error?.editorUrl) {
-			data.error.editorUrl = data.config?.editorUrl.replace(urlQuery, "");
-		}
-	}
+    if (data.error?.editorUrl) {
+      data.error.editorUrl = data.config?.editorUrl.replace(urlQuery, "");
+    }
+  }
 
-	logger.debug(
-		`fileId: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, docApiUrl: ${docApiUrl}, url: ${hostname} Open file`,
-	);
+  logger.debug(
+    `fileId: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, docApiUrl: ${docApiUrl}, url: ${hostname} Open file`,
+  );
 
-	return (
-		<>
-			{url ? (
-				<Script
-					id="onlyoffice-api-script"
-					strategy="beforeInteractive"
-					src={docApiUrl}
-				/>
-			) : null}
-			<Root
-				{...data}
-				shareKey={share}
-				baseSdkConfig={baseSdkConfig}
-				deepLinkSettings={deepLinkSettings?.handlingMode}
-			/>
-		</>
-	);
+  return (
+    <>
+      {url ? (
+        <script id="onlyoffice-api-script" async src={docApiUrl} />
+      ) : null}
+      <Root
+        {...data}
+        shareKey={share}
+        baseSdkConfig={baseSdkConfig}
+        deepLinkSettings={deepLinkSettings?.handlingMode}
+      />
+    </>
+  );
 }
 
 export default Page;

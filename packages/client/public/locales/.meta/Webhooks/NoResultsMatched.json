@@ -3,11 +3,12 @@
   "content": "No results match this filter. Try a different one or clear filter to view all items.",
   "content_en_sha1_hash": "27002996de1d43e168e2639dc22f37e3c277047d",
   "created_at": "2025-05-19T21:30:49.777Z",
-  "updated_at": "2026-04-08T19:48:54.034Z",
+  "updated_at": "2026-04-11T21:28:44.601Z",
   "comment": {
-    "text": "This translation key is used to display a message when filtering results do not match any items. It appears as a tooltip or button label on a clear filter button in a UI component, prompting users to try again or remove the filter.",
+    "text": "This is an error message displayed when a filter applied to a list or table yields no results. It suggests trying a different filter or clearing the current one.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:59.657Z"
+    "updated_at": "2026-04-11T21:28:44.601Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation uses 'مدخلات' (inputs/entries) instead of 'مرشحات' (filters). This changes the meaning from 'filter' to 'input', which is technically inaccurate for a filtering UI component.",
-          "suggestion": "لا تتطابق أي نتائج مع هذا المرشح. جرب مرشحًا آخر أو امسح المرشح لعرض جميع العناصر."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -87,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'մաքուր զտիչ' (makur ztich) is a literal/calque translation of 'clear filter' that sounds unnatural in Armenian. In this context, 'clear' is a verb (to clear/remove), but the translation uses it as an adjective (clean/pure) or a noun phrase, making the sentence grammatically awkward and semantically unclear.",
-          "suggestion": "Ոչ մի արդյունք չի համապատասխանում այս ֆիլտրին: Փորձեք մեկ այլ կամ ջնջեք զտիչը՝ բոլոր տարրերը դիտելու համար:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -165,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation omits the instruction 'Try a different one' (වෙනත් පෙරහනක් උත්සාහ කරන්න), which is a key part of the English sentence.",
-          "suggestion": "මෙම පෙරහනට ගැළපෙන ප්‍රතිඵල නැත. වෙනත් පෙරහනක් උත්සාහ කරන්න හෝ සියලුම අයිතම බැලීමට පෙරහන ඉවත් කරන්න."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -225,13 +208,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ose të pastër' is grammatically incorrect and changes the meaning. 'Të pastër' means 'to clean' (adjective/noun), whereas the English 'clear filter' is a verb phrase. It should be 'pastroni filtrin' or 'hiqni filtrin'.",
-          "suggestion": "Asnjë rezultat nuk përputhet me këtë filtër. Provoni një tjetër ose pastroni filtrin për të parë të gjithë artikujt."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

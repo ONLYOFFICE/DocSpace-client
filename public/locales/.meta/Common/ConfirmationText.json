@@ -3,11 +3,12 @@
   "content": "All the data you entered will be lost. Are you sure you want to continue?",
   "content_en_sha1_hash": "e99a68715daa80c6d8b8fffc16f35951fc75370e",
   "created_at": "2025-05-19T21:30:43.634Z",
-  "updated_at": "2026-04-08T14:50:39.846Z",
+  "updated_at": "2026-04-11T20:56:45.366Z",
   "comment": {
-    "text": "This translation key is used to display a confirmation message when a user wants to reset data, warning them that all entered data will be lost. It appears in a modal dialog footer and is translated from the English content \"All the data you entered will be lost. Are you sure you want to continue?\".",
+    "text": "This is the body text for a confirmation dialog. It warns the user that unsaved data will be lost if they proceed with an action.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:01.129Z"
+    "updated_at": "2026-04-11T20:56:45.366Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

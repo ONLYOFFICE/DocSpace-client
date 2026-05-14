@@ -1,11 +1,11 @@
 {
   "AuthViaNTLM": "通过 NTLM 授权",
-  "EnableSSL": "启用S​​SL",
+  "EnableSMTPSSL": "启用SSL",
   "EnterDomain": "输入域",
   "EnterLogin": "输入登录名",
   "EnterPort": "输入端口",
   "Host": "主机",
-  "HostLogin": "主机登录",
+  "HostLogin": "SMTP 登录",
   "HostPassword": "主机密码",
   "Port": "端口",
   "SenderDisplayName": "发件人显示名称",

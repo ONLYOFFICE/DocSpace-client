@@ -3,16 +3,17 @@
   "content": "No file will be copied. The original file will be retained in the destination folder.",
   "content_en_sha1_hash": "d031adeeb4ad91e6a7490531b401915486d79266",
   "created_at": "2025-05-19T21:30:48.907Z",
-  "updated_at": "2026-04-07T22:49:00.628Z",
+  "updated_at": "2026-04-23T17:24:01.715Z",
   "comment": {
-    "text": "This translation key provides a message to be displayed when skipping file copy operations, indicating that the original file will remain in the destination folder. It appears in UI elements where users can choose to skip copying files, such as a conflict resolution dialog.",
+    "text": "This is a description that appears in a dialog when a file conflict is detected. It informs the user that the original file will be kept and no copy will be made.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:39:31.002Z"
+    "updated_at": "2026-04-11T20:42:23.736Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
-      "line_number": 300,
+      "line_number": 310,
       "context": "? t(\"Common:CreateFolderDescription\")\n : t(\"Common:FoldersAndFilesWillBeCopied\");\n };\n const getSkipDescription = () => {\n return isFileDialog\n ? t(\"Common:SkipDescription\")\n : isFolderDialog\n ? t(\"Common:SkipFolderDescription\")\n : t(\"Common:FilesAndFolderWillNotBeCopied\");\n };",
       "module": "/packages/client"
     },
@@ -39,13 +40,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses the past tense ('köçürülmədi' - was not copied, 'qaldı' - remained), whereas the English text uses the future tense ('will be copied', 'will be retained') to describe a consequence of a user action. This changes the meaning from a warning/instruction to a statement of a completed event.",
-          "suggestion": "Heç bir fayl köçürülməyəcək. Orijinal fayl hədəf qovluqda saxlanılacaq."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -123,13 +118,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation describes a completely different action (adding a suffix to a file name) instead of stating that no file will be copied and the original will be retained.",
-          "suggestion": "Failam netiks veikota kopēšana. Oriģinālais fails tiks saglabāts mērķa mapē."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -189,13 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation contains incorrect diacritics (combining acute accents) on the letters 'ћ' and 'ћ' (нец́е, ц́е), which are not standard in Serbian Cyrillic and appear to be a character encoding or typing error.",
-          "suggestion": "Ниједна датотека неће бити копирана. Оригинална датотека ће бити задржана у одредишном фолдеру."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

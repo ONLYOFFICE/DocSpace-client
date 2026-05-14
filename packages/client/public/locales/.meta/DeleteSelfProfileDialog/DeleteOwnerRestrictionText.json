@@ -3,17 +3,18 @@
   "content": "Being an owner of this {{productName}}, you must transfer the ownership to another user before you can disable your account. Please choose a new owner to proceed.",
   "content_en_sha1_hash": "de13d05e32215de7ca034dfd288a7c79aefa0aab",
   "created_at": "2025-05-19T21:30:56.616Z",
-  "updated_at": "2026-04-07T19:35:05.066Z",
+  "updated_at": "2026-04-11T21:06:14.265Z",
   "comment": {
-    "text": "This translation key is used to display a message informing users that they must transfer ownership before disabling their account. It appears in a modal dialog prompting users to delete their profile. The user must choose a new owner to proceed.",
+    "text": "This is a message displayed in a dialog box when an owner of a DocSpace account attempts to disable their account. It informs them that they must transfer ownership to another user first, and includes the variable `{{productName}}` for the product's brand name.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:32.122Z"
+    "updated_at": "2026-04-11T21:06:14.265Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteOwnerProfileDialog/index.js",
-      "line_number": 53,
-      "context": "return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"DeleteProfileTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\">\n {t(\"DeleteOwnerRestrictionText\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
+      "line_number": 54,
+      "context": "return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"DeleteProfileTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\">\n {t(\"DeleteOwnerRestrictionText\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
       "module": "/packages/client"
     }
   ],

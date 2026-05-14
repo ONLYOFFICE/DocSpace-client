@@ -3,16 +3,17 @@
   "content": "User quota limit has been reached.",
   "content_en_sha1_hash": "6b544004dacc2a403ec5cc12b031fa0dbe0ffd46",
   "created_at": "2026-02-18T14:56:20.494Z",
-  "updated_at": "2026-04-07T20:37:32.229Z",
+  "updated_at": "2026-04-12T12:35:05.147Z",
   "comment": {
-    "text": "This message informs the user they have exceeded their quota limit. It appears as a header in a UI element, likely a warning or dialog, indicating that further edits are restricted. Translators should ensure the meaning clearly conveys the user's usage limit has been met.",
+    "text": "This is a dialog header that appears when a user has reached their storage or usage limit, indicating that further actions might be restricted.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:08:13.808Z"
+    "updated_at": "2026-04-11T20:39:31.844Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/Bar/index.tsx",
-      "line_number": 63,
+      "line_number": 64,
       "context": "case \"user\":\n return {\n description: initial\n ? t(\"EditingUnavailable\")\n : t(\"YourFurtherEditsNotSaved\"),\n header: initial ? t(\"UserQuotaReached\") : t(\"UserQuotaLimitWarning\"),\n };\n case \"tenant\":\n return {\n description: initial\n ? t(\"EditingUnavailable\")",
       "module": "/packages/doceditor"
     }
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'çatdırılıb' means 'has been delivered' (as in a package or message), whereas the English 'has been reached' in the context of a limit requires 'çatılıb'.",
-          "suggestion": "İstifadəçi kvota limiti çatılıb."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -87,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation uses 'հասանելի է' (is available/accessible), which means the opposite of the English 'has been reached' (limit exceeded).",
-          "suggestion": "Օգտատիրոջ քվոտայի սահմանը հասել է։"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -135,13 +124,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'kwota' in Polish refers to a sum of money (amount/sum), whereas 'quota' in this context refers to a limit on resources or usage (limit/limitacja).",
-          "suggestion": "Limit limitu użytkownika został osiągnięty."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -171,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'ණය' (ṇaya) means 'debt' or 'loan' in Sinhala. The English word 'quota' refers to an allocated amount or limit, not a financial debt. Using 'ණය' changes the meaning to 'User debt limit has been reached'.",
-          "suggestion": "පරිශීලක කෝටා සීමාව ඉක්මවා ඇත."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

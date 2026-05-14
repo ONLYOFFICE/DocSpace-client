@@ -59,11 +59,13 @@ const useDeepLink = ({
     const params = new URLSearchParams(window.location.search);
     const withoutRedirect = params.get("without_redirect");
     const isSDK = params.get("isSDK");
+    const isEmbedded = params.get("editorType") === "embedded";
     const isOpenOnlyApp =
       defaultOpenDocument === "app" || deepLinkSettings === DeepLinkType.App;
 
     if (
       !isSDK &&
+      !isEmbedded &&
       isMobile &&
       !defaultOpenDocument &&
       androidID &&
@@ -76,7 +78,7 @@ const useDeepLink = ({
       setIsShowDeepLink(true);
     }
 
-    if (!isSDK && isMobile && isOpenOnlyApp) {
+    if (!isSDK && !isEmbedded && isMobile && isOpenOnlyApp) {
       getDeepLink(
         window.location.origin,
         email || "",

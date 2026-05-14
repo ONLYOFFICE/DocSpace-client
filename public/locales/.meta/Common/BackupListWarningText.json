@@ -3,16 +3,17 @@
   "content": "If you delete any items from the list, their corresponding files will also be deleted. This action cannot be undone. To delete all the files use the link:",
   "content_en_sha1_hash": "a76a370dbddd6f072c3b10f98c0952d3c93070ad",
   "created_at": "2025-05-26T07:15:40.749Z",
-  "updated_at": "2026-04-08T16:26:02.694Z",
+  "updated_at": "2026-04-12T07:14:23.217Z",
   "comment": {
-    "text": "This translation key is used for a warning message that alerts users about the irreversible nature of deleting items from a backup list. The text appears in a dialog box when the user attempts to delete files and cannot be undone, prompting them to use an alternative method instead.",
+    "text": "This is a warning message displayed in a dialog box when managing backup lists. It informs the user that deleting items from the list will also delete the corresponding files, and this action is irreversible. It also provides a link to delete all files.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:07:19.434Z"
+    "updated_at": "2026-04-11T20:58:40.076Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/backup-list/index.tsx",
-      "line_number": 246,
+      "line_number": 247,
       "context": "styles.backupRestoreDialogHeader,\n \"backup-restore_dialog-header\",\n )}\n >\n <Text fontSize=\"12px\" style={{ marginBottom: \"10px\" }}>\n {t(\"Common:BackupListWarningText\")}\n </Text>\n <Link\n id=\"delete-backups\"\n onClick={onCleanBackupList}\n fontWeight={600}",
       "module": "/packages/shared"
     }
@@ -39,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation changes 'any items' (subset) to 'all items' (entirety), which alters the logic of the warning.",
-          "suggestion": "Ако изтриете някой от елементите от списъка, съответните им файлове също ще бъдат изтрити. Това действие не може да бъде отменено. За да изтриете всички файлове, използвайте връзката:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -57,13 +52,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The second sentence 'Dieser Vorgang nicht rückgängig gemacht werden kann' is grammatically broken and conveys a fragmented meaning. It lacks the auxiliary verb 'kann' in the correct position, making it a non-sentence.",
-          "suggestion": "Falls Sie Elemente aus der Liste löschen, werden auch die entsprechenden Dateien gelöscht. Dieser Vorgang kann nicht rückgängig gemacht werden. Um alle Dateien zu löschen, verwenden Sie den Link:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -97,7 +86,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \":\" but translation ends with \".\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-11T21:48:12.281Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null
@@ -105,13 +96,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Italian translation changes the meaning from 'deleting ANY items' to 'deleting ALL items' (Se si eliminano TUTTI gli elementi), which alters the scope of the warning.",
-          "suggestion": "Se si eliminano elementi dall'elenco, i relativi file verranno eliminati. Questa azione non può essere annullata. Per eliminare tutti i file, utilizzare il collegamento:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -147,13 +132,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation changes the meaning from 'any items' (some/any) to 'all items' (wszystkie), which alters the logic of the warning.",
-          "suggestion": "Jeśli usuniesz jakiekolwiek elementy z listy, odpowiadające im pliki zostaną również usunięte. Ta czynność nie może zostać cofnięta. Aby usunąć wszystkie pliki, użyj linku:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -183,13 +162,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'අථකයක්' (athakayak) is a misspelling or incorrect word choice for 'item'. It appears to be a typo for 'අයිතමයක්' (ayithamayak).",
-          "suggestion": "ඔබ ලැයිස්තුවෙන් කිසියම් අයිතමයක් මකා දැමුවහොත්, ඒවාට අදාළ වන ගොනු ද මකා දැමෙනු ඇත. මෙම ක්‍රියාමාර්ගය අප්‍රතිවර්ත්‍යයි. සියළුම ගොනු මැකීමට සබැඳිය යොදා ගන්න:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

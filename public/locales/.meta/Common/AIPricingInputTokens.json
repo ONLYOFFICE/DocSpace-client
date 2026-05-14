@@ -3,13 +3,21 @@
   "content": "Input tokens",
   "content_en_sha1_hash": "92f7d22224b198889b85d9931cbf9bef6f8e8210",
   "created_at": "2026-04-10T13:53:44.507Z",
-  "updated_at": "2026-04-10T13:53:44.507Z",
+  "updated_at": "2026-04-11T20:59:55.381Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label displayed on a pricing card within the billing section, indicating the cost associated with input tokens for AI services.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:59:55.381Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/PricingBillingBody.tsx",
+      "line_number": 108,
+      "context": "<div className={styles.pricingCard}>\n <div className={styles.pricingRow}>\n <div className={styles.pricingRowLeft}>\n <InputTokensIcon />\n <Text fontSize=\"12px\">{t(\"AIPricingInputTokens\")}</Text>\n </div>\n <Text fontSize=\"12px\" fontWeight=\"600\">\n <CommonTrans\n \n i18nKey=\"AIPricingInputTokensPrice\"",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

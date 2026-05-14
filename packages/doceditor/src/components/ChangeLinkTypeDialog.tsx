@@ -53,9 +53,9 @@ const ChangeLinkTypeDialog = ({
       onClose={onClose}
       displayType={ModalDialogType.modal}
     >
-      <ModalDialog.Header>{t("ChangeLinkTypeDialog:Title")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("ChangeLinkTypeDialog:ChangeLinkTypeTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
-        {t("ChangeLinkTypeDialog:Description")}
+        {t("ChangeLinkTypeDialog:ChangeLinkTypeDescription")}
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

@@ -3,11 +3,12 @@
   "content": "Linux instruction.",
   "content_en_sha1_hash": "4b856283dbe4b6431a050771a1ebbbed5a4f4760",
   "created_at": "2025-05-26T07:15:49.197Z",
-  "updated_at": "2026-04-07T20:49:59.182Z",
+  "updated_at": "2026-04-12T13:26:58.926Z",
   "comment": {
-    "text": "This translation key is used for the instruction \"Linux\" that appears on a button, likely as part of an upgrade to pro banner. It provides clarity for users when clicking on this specific item in Linux-related contexts.",
+    "text": "This is a short label for an item in a list of instructions, specifically referring to Linux. It appears as part of a sentence providing a link to Linux installation instructions.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:02:26.894Z"
+    "updated_at": "2026-04-11T20:39:58.277Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "Move to Public room",
   "content_en_sha1_hash": "c8155200ac9c020a87b44239324908d4208b6394",
   "created_at": "2025-05-19T21:30:55.875Z",
-  "updated_at": "2026-04-07T19:35:05.089Z",
+  "updated_at": "2026-04-11T21:08:53.015Z",
   "comment": {
-    "text": "The translation key \"MoveToPublicRoomTitle\" is used to display the title of a modal dialog that prompts users to move a file to a public room. The translated text appears in the header of the dialog and provides context for the user's action. Translators should provide a clear and descriptive title that reflects the purpose of this dialog.",
+    "text": "This is the title of a dialog box that appears when a user chooses to move a file or folder to a public room.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:39:30.155Z"
+    "updated_at": "2026-04-11T21:08:53.015Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

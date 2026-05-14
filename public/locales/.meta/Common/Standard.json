@@ -3,11 +3,12 @@
   "content": "Standard",
   "content_en_sha1_hash": "2dfa66079d9b7229409430972fd5f1567d78a3b6",
   "created_at": "2025-05-19T21:30:49.027Z",
-  "updated_at": "2026-04-07T22:26:46.321Z",
+  "updated_at": "2026-04-12T17:48:10.251Z",
   "comment": {
-    "text": "This translation key is used to display the \"Standard\" theme name in a portal settings category. It appears as part of the \"Appearance\" section and is displayed below a button that toggles its visibility.",
+    "text": "This is a label for a theme option in the appearance settings. It refers to the default or standard visual theme.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:38:52.879Z"
+    "updated_at": "2026-04-11T20:42:12.088Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -99,13 +100,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '기준' means 'standard' in the sense of a 'criterion' or 'benchmark'. In the context of a UI theme name (Appearance settings), 'Standard' should be translated as '기본' (Default/Standard) or '스탠다드' (transliteration).",
-          "suggestion": "기본"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {

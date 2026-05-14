@@ -38,6 +38,7 @@ import { isDesktop } from "@docspace/shared/utils";
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
 import { MainContainer, ButtonWrapper } from "./StyledDeleteData";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const PortalDeletion = (props) => {
   const {
@@ -59,7 +60,7 @@ const PortalDeletion = (props) => {
 
   useEffect(() => {
     setDocumentTitle(
-      t("Common:DeletePortal", { productName: t("Common:ProductName") }),
+      t("Common:DeletePortal", { productName: getBrandName("ProductName") }),
     );
     onCheckView();
     window.addEventListener("resize", onCheckView);
@@ -108,7 +109,7 @@ const PortalDeletion = (props) => {
           <Text fontSize="12px" fontWeight="600">
             {t("MainBar:ConfirmEmailHeader", {
               email: owner.email,
-              productName: t("Common:ProductName"),
+              productName: getBrandName("ProductName"),
             })}
             <Link
               className="request-again-link"

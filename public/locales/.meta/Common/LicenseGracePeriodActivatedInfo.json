@@ -3,16 +3,17 @@
   "content": "The grace period is active <1>from {{fromDate}} to {{byDate}}</1> (days remaining: <2>{{delayDaysCount}}</2>). During this time, admins are not able to create new rooms or add new users. Once the grace period ends, {{productName}} will become unavailable until a new license is activated.",
   "content_en_sha1_hash": "1ef45c8fce4ffdeee6f5d8c375aec7bd7d430cf2",
   "created_at": "2026-03-20T09:07:32.071Z",
-  "updated_at": "2026-04-10T08:58:38.053Z",
+  "updated_at": "2026-04-11T20:49:53.825Z",
   "comment": {
-    "text": "This key displays information about the active license grace period, including start and end dates, remaining days, and the impact on product availability. It appears as a descriptive message within the TariffTitleContainer component on the Payments page, informing users about restrictions during the grace period. Translators should ensure the explanation of the license grace period's impact is clear.",
+    "text": "This is an informational message displayed when a license's grace period is active. It informs the user about the grace period's duration ({{fromDate}}, {{byDate}}, {{delayDaysCount}}) and the restrictions it imposes, as well as the consequences of its expiration ({{productName}}).",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:18:22.345Z"
+    "updated_at": "2026-04-11T20:49:53.825Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/TariffTitleContainer.tsx",
-      "line_number": 201,
+      "line_number": 202,
       "context": "const getSubDescription = () => {\n if (!isLifetimeLicense && isGracePeriod) {\n return (\n <Text className={styles.gracePeriodInfo} fontSize=\"14px\">\n <Trans\n i18nKey=\"LicenseGracePeriodActivatedInfo\"\n ns=\"Common\"\n t={t}\n values={{\n fromDate: paymentDate,\n byDate: gracePeriodEndDate,",
       "module": "/packages/shared"
     }
@@ -57,13 +58,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase '(με günler που απομένουν: ...)' is in Turkish, not Greek. It should be translated to Greek.",
-          "suggestion": "Η περίοδος χάριτος είναι ενεργή <1>από {{fromDate}} έως {{byDate}}</1> (ημέρες που απομένουν: <2>{{delayDaysCount}}</2>). Κατά τη διάρκεια αυτής της περιόδου, οι διαχειριστές δεν μπορούν να δημιουργήσουν νέους χώρους ή να προσθέσουν νέους χρήστες. Μόλις τελειώσει η περίοδος χάριτος, το {{productName}} θα γίνει μη διαθέσιμο μέχρι να ενεργοποιηθεί μια νέα άδεια."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -75,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Armistusaika' refers to a ceasefire in a military context. In a software licensing context, 'Grace period' should be translated as 'Armoaika'. Additionally, 'tulee käytöstä poissa' is grammatically incorrect and means 'comes from use away'; it should be 'muuttuu käyttökelvottomaksi' or 'ei ole käytettävissä'.",
-          "suggestion": "Armoaika on voimassa <1>{{fromDate}}–{{byDate}}</1> (jäljellä päiviä: <2>{{delayDaysCount}}</2>). Tämän aikana ylläpitäjät eivät voi luoda uusia huoneita tai lisätä uusia käyttäjiä. Kun armoaika päättyy, {{productName}} ei ole käytettävissä, ennen kuin uusi lisenssi on aktivoitu."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -93,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation failed to translate the date range part 'from {{fromDate}} to {{byDate}}', leaving the English words 'from' and 'to' inside the Armenian sentence.",
-          "suggestion": "Անցման ժամկետը գործում է <1>{{fromDate}}-ից {{byDate}}-ը</1> (մնացած օրերը՝ <2>{{delayDaysCount}}</2>). Այս ընթացքում վարչակազմի անձնակազմը չի կարող ստեղծել նոր սենյակներ կամ ավելացնել նոր օգտատերեր։ Անցման ժամկետը ավարտվելուց հետո, {{productName}}-ը հասանելի չի լինելու մինչև նոր լիցենզի գործարկումը։"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -129,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "wrong_language",
-          "description": "The end of the sentence contains Korean characters ('licen스가') instead of Latvian/Latin script.",
-          "suggestion": "Grācijai periods ir aktīvs <1>no {{fromDate}} līdz {{byDate}}</1> (palikušie dienas: <2>{{delayDaysCount}}</2>). Šajā laikā administratori nav spēj izveidot jaunas telpas vai pievienot jaunu lietotāju. Kad grācijai periods beidzas, {{productName}} kļūst nepieejams, līdz tiek aktivizēta jauna licence."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -177,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'අනුකම්පා කාලය' (Anukampa kalaya) is a literal translation of 'grace period' meaning 'mercy/pity period', which is semantically incorrect in a software licensing context. In Sinhala, 'අමනාවරණ කාලය' or 'අමනාවරණ කාලසීමාව' is more appropriate, but more commonly in technical contexts, 'අමනාවරණ කාලය' or simply 'අමනාවරණ කාලය' is used. However, the most critical error is that the translator left the English phrase 'from {{fromDate}} to {{byDate}}' inside the Sinhala sentence instead of translating it.",
-          "suggestion": "අමනාවරණ කාලය <1>{{fromDate}} සිට {{byDate}} දක්වා</1> ක්‍රියාත්මකයි (ඉතිරි දින: <2>{{delayDaysCount}}</2>). මෙම කාලය තුළ, පරිපාලකයින්ට නව කාමර සෑදීමට හෝ නව පරිශීලකයන් එකතු කිරීමට නොහැකිය. අමනාවරණ කාලය අවසන් වූ පසු, {{productName}} නව බලපත්‍රයක් සක්‍රිය කරන තෙක් ලබා ගත නොහැකි වනු ඇත."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -195,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Okres odločitev' is a literal and incorrect translation of 'grace period'. In this context, 'grace period' refers to a period of leniency or an extension, whereas 'okres odločitev' means 'decision period'. Additionally, 'preostalo dni' is grammatically incorrect (should be 'preostalih dni') and 'neuporjen' is an incorrect form for 'unavailable' (should be 'neuporaben').",
-          "suggestion": "Gracefulni obdobje je aktivno <1>od {{fromDate}} do {{byDate}}</1> (preostalih dni: <2>{{delayDaysCount}}</2>). V tem času administratorji ne morejo ustvarjati novih sob ali dodajati novih uporabnikov. Ko se grace period konča, bo {{productName}} neuporaben, dokler ni aktivirana nova licenca."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
@@ -213,18 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Период грacioзности' is a literal, incorrect translation of 'grace period'. In Serbian, the correct term for a grace period in a legal or licensing context is 'Грасцијски период' or 'Период попуста/олекшања', but most commonly 'Грасцијски период'. 'Грациозност' refers to elegance/gracefulness.",
-          "suggestion": "Грасцијски период је активан <1>од {{fromDate}} до {{byDate}}</1> (преостало дана: <2>{{delayDaysCount}}</2>). Током овог периода, администраторима није дозвољено креирање нових соба или додавање нових корисника. Када грасцијски период истегне, {{productName}} ће бити недоступн док се не активира нова лиценца."
-        },
-        {
-          "type": "missing_content",
-          "description": "The word 'недоступн' is a typo/incomplete word; it should be 'недоступнa' or 'недоступан'.",
-          "suggestion": "Период грacioзности је активан <1>од {{fromDate}} до {{byDate}}</1> (преостало дана: <2>{{delayDaysCount}}</2>). Током овог периода, администраторима није дозвољено креирање нових соба или додавање нових корисника. Када период грacioзности истегне, {{productName}} ће бити недоступан док се не активира нова лиценца."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -254,13 +208,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translator failed to translate the date range placeholder text 'from {{fromDate}} to {{byDate}}' into Chinese, leaving English words inside the tags.",
-          "suggestion": "宽限期正在生效 <1>从 {{fromDate}} 到 {{byDate}}</1> (剩余天数: <2>{{delayDaysCount}}</2>). 在此期间，管理员无法创建新房间或添加新用户。一旦宽限期结束，{{productName}} 将无法使用，直到激活新的许可证为止。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

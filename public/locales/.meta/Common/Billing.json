@@ -3,13 +3,20 @@
   "content": "Billing",
   "content_en_sha1_hash": "abaec4522bf67bd0d3efd4801a63c5080b63aa56",
   "created_at": "2026-03-20T09:07:27.552Z",
-  "updated_at": "2026-04-10T08:21:04.294Z",
+  "updated_at": "2026-04-23T17:24:01.674Z",
   "comment": {
-    "text": "This key refers to billing-related functionality within the application. It appears in several places, including a link to navigate to billing settings, as a page title, and within a list of categories. Translators should consider it a general reference to managing payments or subscription details.",
+    "text": "This is a navigation link or page title that refers to the section where users can manage their subscription, payments, and billing information.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:25:14.225Z"
+    "updated_at": "2026-04-11T20:58:19.186Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/index.tsx",
+      "line_number": 75,
+      "context": "init(t);\n return () => resetTariffContainerToBasic();\n }, [isQuotasLoaded]);\n \n useEffect(() => {\n const title = t(\"Billing\");\n if (onSetDocumentTitle) {\n onSetDocumentTitle(title);\n } else {\n document.title = title;\n }",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/PaidQuotaLimitError/index.js",
       "line_number": 63,
@@ -18,14 +25,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 215,
+      "line_number": 216,
       "context": "case \"Migration\":\n return t(\"Migration\");\n case \"Backup\":\n return t(\"Common:Backup\");\n case \"Common:PaymentsTitle\":\n return standalone ? t(\"Common:PaymentsTitle\") : t(\"Common:Billing\");\n case \"ManagementCategoryDataManagement\":\n return t(\"ManagementCategoryDataManagement\");\n case \"LdapSettings\":\n return t(\"Ldap:LdapSettings\");\n case \"LdapSyncTitle\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
-      "line_number": 375,
-      "context": "? t(\"ImportFromPortal\", {\n organizationName: logoText,\n })\n : t(\"DataImport\")\n : !standalone && isPaymentPage\n ? t(\"Common:Billing\")\n : t(header, {\n organizationName: logoText,\n license: t(\"Common:EnterpriseLicense\"),\n productName: t(\"Common:ProductName\"),\n aiServices: t(\"Common:AIServices\"),",
+      "line_number": 376,
+      "context": "? t(\"ImportFromPortal\", {\n organizationName: logoText,\n })\n : t(\"DataImport\")\n : !standalone && isPaymentPage\n ? t(\"Common:Billing\")\n // biome-ignore lint/plugin/no-dynamic-i18n-key: header is passed from route config; underlying keys are declared as literals at callsites\n : t(header, {\n organizationName: logoText,\n license: t(\"Common:EnterpriseLicense\"),\n productName: getBrandName(\"ProductName\"),",
       "module": "/packages/client"
     },
     {
@@ -33,6 +40,18 @@
       "line_number": 464,
       "context": "!isNotPaidPeriod &&\n isAdmin &&\n !isCommunity && {\n key: \"user-menu-payments\",\n icon: PaymentsReactSvgUrl,\n label: standalone ? t(\"Common:PaymentsTitle\") : t(\"Common:Billing\"),\n onClick: (obj) => this.onPaymentsClick(obj),\n additionalElement: <TariffBar />,\n url: PAYMENTS_URL,\n preventNewTab: true,\n },",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_utils/tourSteps.ts",
+      "line_number": 313,
+      "context": "callbacks,\n ),\n showSettings &&\n settingsStep(\n \"billing\",\n t(\"Common:Billing\", \"Billing\"),\n t(\n \"Common:TourBilling\",\n \"Manage your subscription plan and payment details for this forms room.\",\n ),\n callbacks,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/forms/settings/layout.client.tsx",
+      "line_number": 152,
+      "context": "const tabs: TTabItem[] = React.useMemo(\n () => [\n {\n id: SettingsSubSection.Billing,\n name: t(\"Common:Billing\"),\n content: wrappedContent,\n },\n {\n id: SettingsSubSection.AiAgent,\n name: t(\"Common:AIAgent\"),",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -75,13 +94,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation 'Επι πληρωμή' means 'Cash on delivery' (COD), which refers to a specific payment method. In the context of software management, 'Billing' refers to the system of managing payments, subscriptions, and invoices.",
-          "suggestion": "Χρεώσεις"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -129,25 +142,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ການເງິນ' means 'Finance' or 'Financial affairs' in a broad sense. For a software UI context referring to payments, subscriptions, and invoices (Billing), 'ການຊຳລະເງິນ' (Payment/Billing) is more accurate to distinguish it from general finance/accounting.",
-          "suggestion": "ການຊຳລະເງິນ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Rēķinu' is in the accusative case (meaning 'to the invoice' or 'the invoice'), whereas the English 'Billing' is a noun used as a category/section title. In Latvian UI, a noun in the nominative case is required for titles and navigation links.",
-          "suggestion": "Maksājumi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -189,13 +190,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ලීගිං' is a phonetic transliteration of the English word 'Leaging' or a misspelling of 'Billing'. It does not convey the meaning of 'Billing' (payments/invoicing) in Sinhala.",
-          "suggestion": "ගෙවීම්"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -207,13 +202,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Računovodstvo' means 'Accounting' (the department or the profession), whereas 'Billing' in a software context refers to the process of invoicing, payments, or subscription management. 'Obračunovanje' or 'Plačila' would be more accurate for a UI element related to payments.",
-          "suggestion": "Obračunovanje"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

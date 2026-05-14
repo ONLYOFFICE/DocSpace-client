@@ -40,6 +40,7 @@ import OAuthStore from "SRC_DIR/store/OAuthStore";
 export type UseDeveloperToolsProps = {
   getCSPSettings?: SettingsStore["getCSPSettings"];
   loadWebhooks?: WebhooksStore["loadWebhooks"];
+  loadWebhookTriggers?: WebhooksStore["loadWebhookTriggers"];
   fetchClients?: OAuthStore["fetchClients"];
   fetchScopes?: OAuthStore["fetchScopes"];
   isInit?: OAuthStore["isInit"];
@@ -57,6 +58,7 @@ export type UseDeveloperToolsProps = {
 const useDeveloperTools = ({
   getCSPSettings,
   loadWebhooks,
+  loadWebhookTriggers,
   fetchClients,
   fetchScopes,
   isInit,
@@ -73,8 +75,8 @@ const useDeveloperTools = ({
   }, [getCSPSettings]);
 
   const getWebhooksData = React.useCallback(async () => {
-    await loadWebhooks?.();
-  }, [loadWebhooks]);
+    await Promise.all([loadWebhooks?.(), loadWebhookTriggers?.()]);
+  }, [loadWebhooks, loadWebhookTriggers]);
 
   const getOAuthData = React.useCallback(async () => {
     const actions = [];

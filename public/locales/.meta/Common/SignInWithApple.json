@@ -3,16 +3,17 @@
   "content": "Sign in with Apple",
   "content_en_sha1_hash": "a5331c078a904d6fac5ef4352f021b442da8a2d4",
   "created_at": "2025-05-19T21:30:48.744Z",
-  "updated_at": "2026-04-10T08:21:04.401Z",
+  "updated_at": "2026-04-23T17:24:02.127Z",
   "comment": {
-    "text": "This translation key represents the text used to describe the \"Sign in with Apple\" option on a sign-up form. It is displayed as a button or link, allowing users to select this authentication method. Translators should provide a clear and concise version of this phrase for different languages.",
+    "text": "This is the label for a button that allows users to log in using their Apple ID.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:40:32.466Z"
+    "updated_at": "2026-04-11T20:42:45.213Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 461,
+      "line_number": 457,
       "context": "return `${t(\"Common:Disconnect\")} ${providerLabel}`;\n }\n \n switch (provider) {\n case \"apple\":\n return signUp ? t(\"Common:SignUpWithApple\") : t(\"Common:SignInWithApple\");\n case \"google\":\n return signUp\n ? t(\"Common:SignUpWithGoogle\")\n : t(\"Common:SignInWithGoogle\");\n case \"facebook\":",
       "module": "/packages/shared"
     }
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'تسجيل الدخول Apple' is grammatically incorrect and lacks the preposition 'with' (بواسطة/باستخدام), making it sound like 'Sign in Apple' rather than 'Sign in with Apple'.",
-          "suggestion": "تسجيل الدخول باستخدام Apple"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -207,13 +202,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '解绑Apple登录' means 'Unbind Apple login', which is the opposite of the intended action 'Sign in with Apple'.",
-          "suggestion": "使用 Apple 登录"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

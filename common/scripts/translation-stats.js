@@ -37,6 +37,7 @@
  *   --package=client,login      Show only specific packages
  *   --by-package                Show per-package breakdown instead of summary
  *   --json                      Output raw JSON
+ *   --md[=file.md]              Write Markdown report (default: translation-stats.md)
  *   --no-meta                   Skip metadata analysis (faster)
  */
 
@@ -72,6 +73,7 @@ const filterLangs = getArg("lang") ? getArg("lang").split(",").map((s) => s.trim
 const filterPkgs = getArg("package") ? getArg("package").split(",").map((s) => s.trim()) : null;
 const byPackage = hasFlag("by-package");
 const jsonOutput = hasFlag("json");
+const mdOutput = getArg("md") || (hasFlag("md") ? "translation-stats.md" : null);
 const skipMeta = hasFlag("no-meta");
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -158,7 +160,8 @@ async function langDirSize(localesDir, lang) {
 async function loadMetaIssues(localesDir) {
   // .meta lives inside the localesDir
   const metaDir = path.join(localesDir, ".meta");
-  const result = {}; // lang → spellIssueCount
+  // result[lang] = { total, byType: { type → count } }
+  const result = {};
 
   let namespaceDirs;
   try {
@@ -185,8 +188,13 @@ async function loadMetaIssues(localesDir) {
             const meta = JSON.parse(raw);
             for (const [lang, lm] of Object.entries(meta.languages || {})) {
               if (!lm) continue;
-              if (Array.isArray(lm.ai_spell_check_issues) && lm.ai_spell_check_issues.length > 0) {
-                result[lang] = (result[lang] || 0) + 1;
+              const issues = lm.ai_spell_check_issues;
+              if (!Array.isArray(issues) || issues.length === 0) continue;
+              if (!result[lang]) result[lang] = { total: 0, byType: {} };
+              result[lang].total += issues.length;
+              for (const issue of issues) {
+                const t = issue.type || "unknown";
+                result[lang].byType[t] = (result[lang].byType[t] || 0) + 1;
               }
             }
           } catch {
@@ -198,6 +206,70 @@ async function loadMetaIssues(localesDir) {
   );
 
   return result;
+}
+
+/** Count .meta files with/without usage and with/without auto-comments */
+async function loadMetaUsageStats(localesDir) {
+  const metaDir = path.join(localesDir, ".meta");
+  const stats = {
+    total: 0,
+    withUsage: 0,
+    withoutUsage: 0,
+    missingUsageKeys: [],
+    withComment: 0,
+    withoutComment: 0,
+    missingCommentKeys: [],
+  };
+
+  let namespaceDirs;
+  try {
+    namespaceDirs = (await readdir(metaDir, { withFileTypes: true }))
+      .filter((e) => e.isDirectory())
+      .map((e) => e.name);
+  } catch {
+    return stats;
+  }
+
+  await Promise.all(
+    namespaceDirs.map(async (ns) => {
+      const nsDir = path.join(metaDir, ns);
+      let metaFiles;
+      try {
+        metaFiles = (await readdir(nsDir)).filter((f) => f.endsWith(".json"));
+      } catch {
+        return;
+      }
+      await Promise.all(
+        metaFiles.map(async (f) => {
+          try {
+            const raw = await readFile(path.join(nsDir, f), "utf8");
+            const meta = JSON.parse(raw);
+            const keyId = `${ns}:${meta.key_path || f.replace(".json", "")}`;
+
+            stats.total++;
+
+            if (Array.isArray(meta.usage) && meta.usage.length > 0) {
+              stats.withUsage++;
+            } else {
+              stats.withoutUsage++;
+              stats.missingUsageKeys.push(keyId);
+            }
+
+            if (meta.comment && meta.comment.text && meta.comment.text.trim()) {
+              stats.withComment++;
+            } else {
+              stats.withoutComment++;
+              stats.missingCommentKeys.push(keyId);
+            }
+          } catch {
+            // skip
+          }
+        })
+      );
+    })
+  );
+
+  return stats;
 }
 
 // ─── Package analysis ─────────────────────────────────────────────────────────
@@ -226,6 +298,7 @@ async function analyzePackage(pkg) {
 
   // Load metadata if requested
   const metaIssues = skipMeta ? {} : await loadMetaIssues(localesDir);
+  const metaUsage = skipMeta ? { total: 0, withUsage: 0, withoutUsage: 0, missingUsageKeys: [] } : await loadMetaUsageStats(localesDir);
 
   // Per-language stats
   const langStats = await Promise.all(
@@ -253,6 +326,7 @@ async function analyzePackage(pkg) {
         }
       }
 
+      const langMeta = metaIssues[lang] || { total: 0, byType: {} };
       return {
         lang,
         translatedKeys,
@@ -260,7 +334,8 @@ async function analyzePackage(pkg) {
         missingKeys,
         translatedPct: pct(translatedKeys, totalKeys),
         fileSizeBytes,
-        spellIssues: metaIssues[lang] || 0,
+        spellIssues: langMeta.total,
+        spellByType: langMeta.byType,
       };
     })
   );
@@ -272,6 +347,7 @@ async function analyzePackage(pkg) {
     totalKeys,
     langs: allLangs,
     langStats,
+    metaUsage,
   };
 }
 
@@ -392,7 +468,7 @@ async function main() {
     // Aggregate per language across all packages
     const langAgg = {};
     for (const lang of filteredLangs) {
-      langAgg[lang] = { lang, translatedKeys: 0, sameAsEn: 0, missingKeys: 0, fileSizeBytes: 0, spellIssues: 0 };
+      langAgg[lang] = { lang, translatedKeys: 0, sameAsEn: 0, missingKeys: 0, fileSizeBytes: 0, spellIssues: 0, spellByType: {} };
       for (const pkg of results) {
         const ls = pkg.langStats.find((s) => s.lang === lang);
         if (!ls) continue;
@@ -401,6 +477,9 @@ async function main() {
         langAgg[lang].missingKeys += ls.missingKeys;
         langAgg[lang].fileSizeBytes += ls.fileSizeBytes;
         langAgg[lang].spellIssues += ls.spellIssues;
+        for (const [t, c] of Object.entries(ls.spellByType || {})) {
+          langAgg[lang].spellByType[t] = (langAgg[lang].spellByType[t] || 0) + c;
+        }
       }
       langAgg[lang].translatedPct = pct(langAgg[lang].translatedKeys, grandTotalKeys);
     }
@@ -493,7 +572,7 @@ async function main() {
   console.log("");
 
   const aggRows = filteredLangs.map((lang) => {
-    const agg = { lang, translatedKeys: 0, sameAsEn: 0, missingKeys: 0, fileSizeBytes: 0, spellIssues: 0 };
+    const agg = { lang, translatedKeys: 0, sameAsEn: 0, missingKeys: 0, fileSizeBytes: 0, spellIssues: 0, spellByType: {} };
     for (const pkg of results) {
       const ls = pkg.langStats.find((s) => s.lang === lang);
       if (!ls) continue;
@@ -502,6 +581,9 @@ async function main() {
       agg.missingKeys += ls.missingKeys;
       agg.fileSizeBytes += ls.fileSizeBytes;
       agg.spellIssues += ls.spellIssues;
+      for (const [t, c] of Object.entries(ls.spellByType || {})) {
+        agg.spellByType[t] = (agg.spellByType[t] || 0) + c;
+      }
     }
     agg.translatedPct = pct(agg.translatedKeys, grandTotalKeys);
     return agg;
@@ -518,7 +600,240 @@ async function main() {
 
   renderTable(sortedAgg, grandTotalKeys, { title: "All packages — aggregated by language" });
 
+  // ─── Issues summary (if any) ────────────────────────────────────────────
+  if (!skipMeta) {
+    const totalIssues = aggRows.reduce((s, r) => s + r.spellIssues, 0);
+    if (totalIssues > 0) {
+      // Aggregate by type across all languages
+      const globalByType = {};
+      for (const r of aggRows) {
+        for (const [t, c] of Object.entries(r.spellByType)) {
+          globalByType[t] = (globalByType[t] || 0) + c;
+        }
+      }
+      const sortedTypes = Object.entries(globalByType).sort((a, b) => b[1] - a[1]);
+
+      console.log(`\n  ${colorize("SPELL-CHECK ISSUES SUMMARY", "bold")}`);
+      console.log("  " + colorize("─".repeat(50), "dim"));
+      console.log(`  Total issues: ${colorize(String(totalIssues), "yellow")}`);
+      console.log("");
+
+      // By type
+      const COL_TYPE = 26;
+      const COL_CNT = 6;
+      console.log(
+        "  " +
+        colorize(padEnd("Issue type", COL_TYPE), "bold") + "  " +
+        colorize(padStart("Count", COL_CNT), "bold")
+      );
+      console.log("  " + colorize("─".repeat(COL_TYPE + COL_CNT + 2), "dim"));
+      for (const [type, count] of sortedTypes) {
+        console.log(
+          "  " +
+          padEnd(type, COL_TYPE) + "  " +
+          colorize(padStart(String(count), COL_CNT), "yellow")
+        );
+      }
+      console.log("  " + colorize("─".repeat(COL_TYPE + COL_CNT + 2), "dim"));
+
+      // Top languages by issues
+      const langsWithIssues = aggRows
+        .filter((r) => r.spellIssues > 0)
+        .sort((a, b) => b.spellIssues - a.spellIssues);
+
+      if (langsWithIssues.length > 0) {
+        console.log(`\n  ${colorize("Issues by language:", "bold")}`);
+        for (const r of langsWithIssues) {
+          const types = Object.entries(r.spellByType)
+            .sort((a, b) => b[1] - a[1])
+            .map(([t, c]) => `${t}:${c}`)
+            .join(", ");
+          console.log(
+            "  " +
+            padEnd(r.lang, 14) +
+            colorize(padStart(String(r.spellIssues), 4), "yellow") +
+            "  " +
+            colorize(types, "dim")
+          );
+        }
+      }
+    } else {
+      console.log(`\n  ${colorize("No spell-check issues found in .meta files.", "green")}`);
+    }
+  }
+
+  // ─── Meta usage summary ──────────────────────────────────────────────
+  if (!skipMeta) {
+    const grandMetaTotal = results.reduce((s, r) => s + r.metaUsage.total, 0);
+    const grandMetaWithUsage = results.reduce((s, r) => s + r.metaUsage.withUsage, 0);
+    const grandMetaWithout = results.reduce((s, r) => s + r.metaUsage.withoutUsage, 0);
+
+    const grandMetaWithComment = results.reduce((s, r) => s + r.metaUsage.withComment, 0);
+    const grandMetaWithoutComment = results.reduce((s, r) => s + r.metaUsage.withoutComment, 0);
+
+    console.log(`\n  ${colorize("METADATA COVERAGE", "bold")}`);
+    console.log("  " + colorize("─".repeat(50), "dim"));
+    console.log(`  .meta files total:  ${grandMetaTotal}`);
+    console.log(`  With code usage:    ${colorize(String(grandMetaWithUsage), "green")} (${pct(grandMetaWithUsage, grandMetaTotal)}%)`);
+    console.log(`  Without usage:      ${grandMetaWithout > 0 ? colorize(String(grandMetaWithout), "yellow") : "0"}`);
+    console.log(`  With AI comment:    ${colorize(String(grandMetaWithComment), "green")} (${pct(grandMetaWithComment, grandMetaTotal)}%)`);
+    console.log(`  Without comment:    ${grandMetaWithoutComment > 0 ? colorize(String(grandMetaWithoutComment), "yellow") : "0"}`);
+
+    if (grandMetaWithout > 0) {
+      console.log(`\n  ${colorize("Keys without usage:", "bold")}`);
+      for (const r of results) {
+        if (r.metaUsage.withoutUsage === 0) continue;
+        console.log(`  ${colorize(r.name, "cyan")}: ${r.metaUsage.withoutUsage}`);
+        for (const key of r.metaUsage.missingUsageKeys.slice(0, 10)) {
+          console.log(`    ${key}`);
+        }
+        if (r.metaUsage.missingUsageKeys.length > 10) {
+          console.log(`    ... and ${r.metaUsage.missingUsageKeys.length - 10} more`);
+        }
+      }
+    }
+
+    if (grandMetaWithoutComment > 0) {
+      console.log(`\n  ${colorize("Keys without AI comment:", "bold")}`);
+      for (const r of results) {
+        if (r.metaUsage.withoutComment === 0) continue;
+        console.log(`  ${colorize(r.name, "cyan")}: ${r.metaUsage.withoutComment}`);
+        for (const key of r.metaUsage.missingCommentKeys.slice(0, 10)) {
+          console.log(`    ${key}`);
+        }
+        if (r.metaUsage.missingCommentKeys.length > 10) {
+          console.log(`    ... and ${r.metaUsage.missingCommentKeys.length - 10} more`);
+        }
+      }
+    }
+  }
+
+  // ─── Markdown output ───────────────────────────────────────────────────
+  if (mdOutput) {
+    const { writeFileSync } = require("fs");
+    const mdPath = path.resolve(mdOutput);
+    const md = generateMarkdown(results, sortedAgg, grandTotalKeys, grandTotalSize, grandNamespaces, filteredLangs);
+    writeFileSync(mdPath, md, "utf8");
+    console.log(`\n  Markdown report written to: ${colorize(mdPath, "cyan")}`);
+  }
+
   printLegend(true);
+}
+
+function generateMarkdown(results, aggRows, grandTotalKeys, grandTotalSize, grandNamespaces, filteredLangs) {
+  const lines = [];
+  const now = new Date().toISOString().split("T")[0];
+
+  lines.push(`# Translation Statistics`);
+  lines.push(`> Generated: ${now}\n`);
+
+  // Package overview
+  lines.push(`## Packages\n`);
+  lines.push(`| Package | Namespaces | Keys | Languages | Size |`);
+  lines.push(`|---------|-----------|------|-----------|------|`);
+  for (const r of results) {
+    const pkgSize = r.langStats.reduce((s, ls) => s + ls.fileSizeBytes, 0);
+    lines.push(`| ${r.name} | ${r.namespaces} | ${r.totalKeys} | ${r.langs.length} | ${formatBytes(pkgSize)} |`);
+  }
+  lines.push(`| **Total** | **${grandNamespaces}** | **${grandTotalKeys}** | **${filteredLangs.length}** | **${formatBytes(grandTotalSize)}** |`);
+
+  // Summary
+  const avgPct = Math.round(aggRows.reduce((s, r) => s + r.translatedPct, 0) / aggRows.length);
+  const fullyTranslated = aggRows.filter((r) => r.translatedPct === 100).length;
+
+  lines.push(`\n## Summary\n`);
+  lines.push(`- **Reference language:** en`);
+  lines.push(`- **Fully translated:** ${fullyTranslated} / ${filteredLangs.length}`);
+  lines.push(`- **Average coverage:** ${avgPct}%`);
+
+  // Language table
+  lines.push(`\n## Languages\n`);
+  const hasSpell = aggRows.some((r) => r.spellIssues > 0);
+  let header = `| Language | Keys | Pct | Same | Miss | Size |`;
+  let sep = `|----------|------|-----|------|------|------|`;
+  if (hasSpell) {
+    header += ` Issues |`;
+    sep += `--------|`;
+  }
+  lines.push(header);
+  lines.push(sep);
+
+  for (const r of aggRows) {
+    const isRef = r.lang === "en";
+    let row = `| ${isRef ? "**" + r.lang + "** ★" : r.lang} | ${r.translatedKeys}/${grandTotalKeys} | ${r.translatedPct}% | ${isRef ? "-" : r.sameAsEn} | ${r.missingKeys} | ${formatBytes(r.fileSizeBytes)} |`;
+    if (hasSpell) {
+      row += ` ${r.spellIssues || 0} |`;
+    }
+    lines.push(row);
+  }
+
+  // Spell-check issues
+  if (!skipMeta) {
+    const totalIssues = aggRows.reduce((s, r) => s + r.spellIssues, 0);
+    if (totalIssues > 0) {
+      const globalByType = {};
+      for (const r of aggRows) {
+        for (const [t, c] of Object.entries(r.spellByType || {})) {
+          globalByType[t] = (globalByType[t] || 0) + c;
+        }
+      }
+
+      lines.push(`\n## Spell-Check Issues\n`);
+      lines.push(`**Total: ${totalIssues}**\n`);
+      lines.push(`| Issue Type | Count |`);
+      lines.push(`|------------|-------|`);
+      for (const [type, count] of Object.entries(globalByType).sort((a, b) => b[1] - a[1])) {
+        lines.push(`| ${type} | ${count} |`);
+      }
+
+      lines.push(`\n### By Language\n`);
+      lines.push(`| Language | Issues | Breakdown |`);
+      lines.push(`|----------|--------|-----------|`);
+      const langsWithIssues = aggRows
+        .filter((r) => r.spellIssues > 0)
+        .sort((a, b) => b.spellIssues - a.spellIssues);
+      for (const r of langsWithIssues) {
+        const types = Object.entries(r.spellByType || {})
+          .sort((a, b) => b[1] - a[1])
+          .map(([t, c]) => `${t}:${c}`)
+          .join(", ");
+        lines.push(`| ${r.lang} | ${r.spellIssues} | ${types} |`);
+      }
+    } else {
+      lines.push(`\n## Spell-Check Issues\n`);
+      lines.push(`No issues found.`);
+    }
+
+    // Metadata coverage
+    const grandMetaTotal = results.reduce((s, r) => s + r.metaUsage.total, 0);
+    const grandMetaWithUsage = results.reduce((s, r) => s + r.metaUsage.withUsage, 0);
+    const grandMetaWithout = results.reduce((s, r) => s + r.metaUsage.withoutUsage, 0);
+    const grandMetaWithComment = results.reduce((s, r) => s + r.metaUsage.withComment, 0);
+    const grandMetaWithoutComment = results.reduce((s, r) => s + r.metaUsage.withoutComment, 0);
+
+    lines.push(`\n## Metadata Coverage\n`);
+    lines.push(`| Metric | Count | % |`);
+    lines.push(`|--------|-------|---|`);
+    lines.push(`| .meta files | ${grandMetaTotal} | — |`);
+    lines.push(`| With code usage | ${grandMetaWithUsage} | ${pct(grandMetaWithUsage, grandMetaTotal)}% |`);
+    lines.push(`| Without usage | ${grandMetaWithout} | ${pct(grandMetaWithout, grandMetaTotal)}% |`);
+    lines.push(`| With AI comment | ${grandMetaWithComment} | ${pct(grandMetaWithComment, grandMetaTotal)}% |`);
+    lines.push(`| Without comment | ${grandMetaWithoutComment} | ${pct(grandMetaWithoutComment, grandMetaTotal)}% |`);
+
+    if (grandMetaWithout > 0) {
+      lines.push(`\n### Keys Without Usage\n`);
+      for (const r of results) {
+        if (r.metaUsage.withoutUsage === 0) continue;
+        lines.push(`**${r.name}** (${r.metaUsage.withoutUsage}):`);
+        for (const key of r.metaUsage.missingUsageKeys) {
+          lines.push(`- \`${key}\``);
+        }
+      }
+    }
+  }
+
+  lines.push("");
+  return lines.join("\n");
 }
 
 function printLegend(showByPackage) {
@@ -541,6 +856,7 @@ function printLegend(showByPackage) {
     console.log(colorize("    --by-package                show per-package tables", "dim"));
   }
   console.log(colorize("    --json                      machine-readable output", "dim"));
+  console.log(colorize("    --md[=file.md]              write Markdown report (default: translation-stats.md)", "dim"));
   console.log(colorize("    --no-meta                   skip metadata (faster)", "dim"));
   console.log("");
 }

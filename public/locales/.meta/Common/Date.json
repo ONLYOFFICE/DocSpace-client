@@ -3,13 +3,20 @@
   "content": "Date",
   "content_en_sha1_hash": "eb9a4bc1c0c153e4e4b042a79113b815b7e3021d",
   "created_at": "2025-05-19T21:30:44.395Z",
-  "updated_at": "2026-04-10T08:21:04.366Z",
+  "updated_at": "2026-04-13T14:59:05.900Z",
   "comment": {
-    "text": "This translation key is used for displaying the label \"Date\" in various table headers across different UI components. It is typically rendered as a column title and may be editable or resizable based on its configuration settings.",
+    "text": "This is a table header label for a column displaying a date. It appears in transaction history, audit trail, and login history tables.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:46.947Z"
+    "updated_at": "2026-04-11T20:55:35.296Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/TableView/TableHeader.tsx",
+      "line_number": 50,
+      "context": "const isAiTools = serviceName === AI_TOOLS;\n \n const defaultColumns = [\n {\n key: \"Date\",\n title: t(\"Date\"),\n enable: true,\n resizable: true,\n sortBy: \"AZ\",\n active: true,",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/TableView/TableHeader.js",
       "line_number": 54,
@@ -93,13 +100,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Ամիս-ամսաթիվ' means 'Month-date', which is more specific and different from the general English term 'Date'.",
-          "suggestion": "Ամսաթիվ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {

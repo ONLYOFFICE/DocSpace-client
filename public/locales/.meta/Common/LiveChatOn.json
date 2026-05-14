@@ -3,11 +3,12 @@
   "content": "Live chat was successfully connected",
   "content_en_sha1_hash": "7bcf42efaa0f21c0fcd4e7feb04b48e397e369c3",
   "created_at": "2025-05-19T21:30:46.253Z",
-  "updated_at": "2026-04-08T05:25:15.853Z",
+  "updated_at": "2026-04-11T20:49:23.641Z",
   "comment": {
-    "text": "This translation key is used to display a success message when live chat is successfully connected. It appears as a toast notification and indicates that the live chat feature is now active.",
+    "text": "This is a toast message confirming that the live chat widget has successfully connected and is now visible to the user.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:37.537Z"
+    "updated_at": "2026-04-11T20:49:23.641Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -123,13 +124,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation 'Czat na żywo został rozpoczęty' means 'Live chat has been started', which implies the initiation of a session. The English source 'Live chat was successfully connected' refers to the technical connection/establishment of the service. While close, 'został połączony' is the accurate technical equivalent for 'connected'.",
-          "suggestion": "Czat na żywo został pomyślnie połączony"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -159,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation 'සජීව සංවාදයට සම්බන්ධ විය' means 'Connected to live chat' (an action), whereas the English 'Live chat was successfully connected' is a status notification indicating the connection was successful. The word 'successfully' is missing, which is critical for a success toast notification.",
-          "suggestion": "සජීවී සංවාදය සාර්ථකව සම්බන්ධ විය"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

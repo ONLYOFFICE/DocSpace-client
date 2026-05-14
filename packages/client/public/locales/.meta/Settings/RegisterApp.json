@@ -3,17 +3,18 @@
   "content": "Register app",
   "content_en_sha1_hash": "d377a3cb1713d903c61de93c2313f56ca7857d84",
   "created_at": "2026-04-03T21:51:36.610Z",
-  "updated_at": "2026-04-09T01:45:38.776Z",
+  "updated_at": "2026-04-11T21:22:41.632Z",
   "comment": {
-    "text": "This text serves as the title for a card or link within the Developer Tools section of the Portal Settings. It refers to the action of registering a new application for OAuth integration.",
+    "text": "This is the label for a link that allows users to register a new application within the developer tools settings.",
     "is_auto": true,
-    "updated_at": "2026-04-03T21:58:40.335Z"
+    "updated_at": "2026-04-11T21:22:41.632Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 115,
-      "context": "icon={<OAuthSvg />}\n title={t(\"OAuth:OAuth\")}\n description={t(\"Settings:OAuthDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}\n url=\"/developer-tools/oauth/create\"\n color={globalColors.purple}\n linkTitle={t(\"Settings:RegisterApp\")}\n />\n <Card\n icon={<KeySvg />}\n title={t(\"Settings:ApiKeys\")}\n description={t(\"Settings:ApiKeysCardDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}",
+      "line_number": 116,
+      "context": "icon={<OAuthSvg />}\n title={t(\"OAuth:OAuth\")}\n description={t(\"Settings:OAuthDescription\", { organizationName: getBrandName(\"OrganizationName\"), productName: getBrandName(\"ProductName\") })}\n url=\"/developer-tools/oauth/create\"\n color={globalColors.purple}\n linkTitle={t(\"Settings:RegisterApp\")}\n />\n <Card\n icon={<KeySvg />}\n title={t(\"Settings:ApiKeys\")}\n description={t(\"Settings:ApiKeysCardDescription\", { organizationName: getBrandName(\"OrganizationName\"), productName: getBrandName(\"ProductName\") })}",
       "module": "/packages/client"
     }
   ],
@@ -75,13 +76,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The French translation 'Enregistrer l'application' means 'Save the application' (as in saving a file or record). In the context of OAuth and Developer Tools, 'Register' refers to the process of 'Enregistrement' (registration/creation of credentials). 'Enregistrer' is a common false friend here.",
-          "suggestion": "Enregistrer une application"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -195,13 +190,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Turkish translation 'Uygulamayı kaydet' means 'Save the application'. In the context of OAuth and Developer Tools, 'Register app' refers to the technical process of 'App Registration' (creating a new client ID/secret), which is 'Uygulama kaydı' or 'Uygulama kaydetme'. 'Kaydet' implies saving an existing file or entry, whereas 'Register' in this technical context is 'Kaydetmek' (to register) or 'Kayıt' (registration).",
-          "suggestion": "Uygulama kaydet"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

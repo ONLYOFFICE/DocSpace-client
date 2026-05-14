@@ -3,13 +3,21 @@
   "content": "Folder moved",
   "content_en_sha1_hash": "91e37f7d0a130e302a977f6f36f5a32bb8449bcb",
   "created_at": "2025-05-19T21:30:49.754Z",
-  "updated_at": "2026-04-08T19:59:27.268Z",
+  "updated_at": "2026-04-13T14:59:05.879Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a toast message indicating that a folder has been successfully moved. It appears briefly to confirm the action to the user.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:28:54.720Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
+      "line_number": 75,
+      "context": "case WebhookTriggers.FolderRestored:\n return t(\"FolderRestored\");\n case WebhookTriggers.FolderCopied:\n return t(\"FolderCopied\");\n case WebhookTriggers.FolderMoved:\n return t(\"FolderMoved\");\n case WebhookTriggers.RoomCreated:\n return t(\"Files:RoomCreated\");\n case WebhookTriggers.RoomUpdated:\n return t(\"RoomUpdated\");\n case WebhookTriggers.RoomArchived:",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -146,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'ගෙනයන ලදි' (ge-nayana ladi) implies the folder is currently being carried/transported by someone, rather than the action of moving a file/folder within a system (moved/relocated).",
-          "suggestion": "ෆෝල්ඩරය මාරු කරන ලදී"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

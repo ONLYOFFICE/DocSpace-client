@@ -3,17 +3,18 @@
   "content": "For any questions, please contact your {{productName}} admin.",
   "content_en_sha1_hash": "3c577caeeab1ab722445f462b6c19dd04e02860b",
   "created_at": "2025-05-19T21:30:45.549Z",
-  "updated_at": "2026-04-08T08:38:30.137Z",
+  "updated_at": "2026-04-11T20:51:57.447Z",
   "comment": {
-    "text": "This translation key provides a message to be displayed when users need assistance or have questions about their account. It instructs them to contact the admin of their {{productName}} product. This message appears in a dialog box within the client application.",
+    "text": "This is a message displayed in a dialog, informing the user to contact their administrator for assistance. The `{{productName}}` variable will be replaced with the name of the product.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:04.659Z"
+    "updated_at": "2026-04-11T20:51:57.447Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ReducedRightsDialog/index.tsx",
-      "line_number": 68,
-      "context": "values={{ sectionName: t(\"Common:MyDocuments\") }}\n components={{ 1: <span style={{ fontWeight: 600 }} /> }}\n />\n </Text>\n <Text style={{ marginTop: \"16px\" }}>\n {t(\"Common:ForQuestionsContactPortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
+      "line_number": 69,
+      "context": "values={{ sectionName: t(\"Common:MyDocuments\") }}\n components={{ 1: <span style={{ fontWeight: 600 }} /> }}\n />\n </Text>\n <Text style={{ marginTop: \"16px\" }}>\n {t(\"Common:ForQuestionsContactPortalAdmin\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
       "module": "/packages/client"
     }
   ],
@@ -171,13 +172,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'admin' (администратор) is missing from the translation, leaving the sentence incomplete.",
-          "suggestion": "За било каква питања, обратите се свом {{productName}} администратору."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

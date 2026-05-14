@@ -1,11 +1,10 @@
 {
-  "AccessingProblem": "Mövcud istifadəçisinizsə və bu sahəyə daxil olmaqda çətinlik çəkirsinizsə, administratorla əlaqə saxlayın.",
   "CannotCreateNewRoom": "Otaq yaratmaq mümkün deyil",
   "CannotCreatePaidUsers": "Ödənişli istifadəçilər əlavə edilə bilməz",
   "CannotRestoreRoom": "Otağı bərpa etmək mümkün deyil",
   "ChooseNewPlan": "Yeni qiymət planı seçmək istəyirsiniz?",
   "GracePeriodActive": "Təxir müddəti <1>{{fromDate}}-dan {{byDate}}</1> aktivdir (qalan günlər: {{delayDaysCount}}).",
-  "LicenseExpired": "Yeni istifadəçilər əlavə etmək və yeni otaqlar yaratmaq mümkün deyil. Lisenziya müddəti bitib.",
+  "LicenseExpiredRestriction": "Yeni istifadəçilər əlavə etmək və yeni otaqlar yaratmaq mümkün deyil. Lisenziya müddəti bitib.",
   "LicenseGracePeriodInfo": "Bu müddət ərzində, administratorlar yeni otaqlar yarada və ya yeni istifadəçilər əlavə edə bilməzlər. Əyəllə müddəti bitdikdən sonra, {{productName}} yeni lisenziya aktivləşdirilmədən qədər istifadə edilə bilməyəcək.",
   "NewRoomWillExceedLimit": "Bu otağı yaratmaq mümkün deyil, çünki cari planınıza daxil edilmiş otaqların sayı limitə çatıb.",
   "NewUsersWillExceedMembersLimit": "Yeni ödənişli istifadəçiləri əlavə etmək mümkün deyil, çünki cari planınıza daxil edilmiş idarəçilərin sayı limitə çatıb.",

@@ -32,6 +32,7 @@ import {
   frameCallCommand,
   frameHandlePing,
 } from "@docspace/shared/utils/common";
+import { applyCustomStyles } from "@docspace/shared/utils/customStyles";
 import { EDITOR_ID } from "@docspace/shared/constants";
 import { TFrameConfig } from "@docspace/shared/types/Frame";
 
@@ -61,6 +62,7 @@ const useSDK = (baseSdkConfig?: TFrameConfig) => {
             case "setConfig": {
               const newConfig = merge(baseSdkConfig, data);
               setSdkConfig(newConfig);
+              applyCustomStyles(newConfig?.stylesUrl);
               res = newConfig;
               break;
             }

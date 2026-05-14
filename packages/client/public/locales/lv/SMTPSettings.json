@@ -1,6 +1,6 @@
 {
   "AuthViaNTLM": "Autentificēšana, izmantojot NTLM",
-  "EnableSSL": "Izmantot SSL",
+  "EnableSMTPSSL": "Izmantot SSL",
   "EnterDomain": "Ievadiet domēnu",
   "EnterLogin": "Ievadiet pieteikšanās vārdu",
   "EnterPort": "Ievadiet portu",

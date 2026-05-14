@@ -3,11 +3,12 @@
   "content": "Room quota has been successfully disabled.",
   "content_en_sha1_hash": "bc508edc6864a5a5ff719032d851c846cc501122",
   "created_at": "2025-05-19T21:30:52.442Z",
-  "updated_at": "2026-04-10T08:21:04.399Z",
+  "updated_at": "2026-04-11T21:22:34.297Z",
   "comment": {
-    "text": "This translation key is used to display a success message when room quota has been successfully disabled. It is likely used in an UI element such as a button or dialog that triggers this functionality. The text appears after attempting to disable room quota, and its translation will be shown depending on the current room quota status.",
+    "text": "Toast message. Appears after a user successfully disables the room quota setting.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:37.479Z"
+    "updated_at": "2026-04-11T21:22:34.297Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -105,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation means 'Checking the number of rooms has been successfully disabled', which changes the subject from 'Room quota' to 'Checking the number of rooms'.",
-          "suggestion": "ໂຄຕາຫ້ອງໄດ້ຖືກປິດການໃຊ້ງານຢ່າງສຳເລັດຜົນແລ້ວ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -147,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'sală' (hall/room in a physical sense) is used instead of 'camere' or 'spațiu' (digital room/space). In the context of DocSpace, 'Room' refers to a digital workspace/room, and 'Cotă de stocare pentru sală' sounds like a physical hall storage quota.",
-          "suggestion": "Cotă de stocare pentru cameră a fost dezactivată cu succes."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -165,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation means 'Room quantity has not been activated', which is the opposite of the English success message 'Room quota has been successfully disabled'.",
-          "suggestion": "කාමර ප්‍රමාණය සාර්ථකව අක්‍රිය කරන ලදී."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -189,13 +172,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation is incomplete and ends abruptly, missing the verb and the rest of the sentence.",
-          "suggestion": "Квота просторије је успешно онемогућена."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

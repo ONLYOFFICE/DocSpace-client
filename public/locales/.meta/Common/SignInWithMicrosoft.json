@@ -3,16 +3,17 @@
   "content": "Sign in with Microsoft",
   "content_en_sha1_hash": "fd62c61f849bb4cfbfd3a2146d1eff8cd56b5601",
   "created_at": "2025-05-19T21:30:48.781Z",
-  "updated_at": "2026-04-10T08:21:04.402Z",
+  "updated_at": "2026-04-23T17:24:02.128Z",
   "comment": {
-    "text": "This translation key is used for \"Sign in with Microsoft\" in various UI contexts, typically as a button or link in sign-up processes. It appears on a login page or registration form and serves as an alternative to other authentication methods like LinkedIn or SSO. The translators should update this text according to the specific UI component it's used in.",
+    "text": "This is a button label for signing into DocSpace using a Microsoft account. It appears on the login page.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:40:18.178Z"
+    "updated_at": "2026-04-11T20:42:41.406Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 481,
+      "line_number": 477,
       "context": "? t(\"Common:SignUpWithLinkedIn\")\n : t(\"Common:SignInWithLinkedIn\");\n case \"microsoft\":\n return signUp\n ? t(\"Common:SignUpWithMicrosoft\")\n : t(\"Common:SignInWithMicrosoft\");\n case \"sso\":\n return signUp ? t(\"Common:SignUpWithSso\") : t(\"Common:SignInWithSso\");\n case \"zoom\":\n return signUp ? t(\"Common:SignUpWithZoom\") : t(\"Common:SignInWithZoom\");\n case \"weixin\":",
       "module": "/packages/shared"
     }
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'تسجيل الدخول Microsoft' is grammatically incomplete and lacks the preposition 'with' (بواسطة/باستخدام), making it sound like 'Sign in Microsoft' rather than 'Sign in with Microsoft'.",
-          "suggestion": "تسجيل الدخول باستخدام Microsoft"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -51,13 +46,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech translation is grammatically incorrect because 'Microsoft' is used in the nominative case instead of the required instrumental case ('Microsoftem') to follow the preposition 'pomocí'.",
-          "suggestion": "Přihlásit se pomocí Microsoftu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -171,13 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation is grammatically incorrect. 'Microsoft' is a proper noun and requires the prepositional phrase to be in the correct case (instrumental) or use a prepositional construction that makes sense. 'Pomocou Microsoft' is ungrammatical; it should be 'pomocou Microsoftu'.",
-          "suggestion": "Prihlásiť sa pomocou Microsoftu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -219,13 +202,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '解绑Microsoft登录' means 'Unbind Microsoft login', which is the opposite of the intended action 'Sign in with Microsoft'.",
-          "suggestion": "使用 Microsoft 登录"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

@@ -3,18 +3,19 @@
   "content": "Important",
   "content_en_sha1_hash": "4b6d6a30150a506f9b79caf45da5aecb76b0018e",
   "created_at": "2025-06-03T20:59:07.572Z",
-  "updated_at": "2026-04-08T06:57:37.860Z",
+  "updated_at": "2026-04-11T20:51:07.440Z",
   "comment": {
-    "text": "This translation key is used for displaying a critical message \"Important\" on a portal settings page, specifically within a storage warning component. It's intended to grab attention in a cautionary context, likely as part of an error or alert notification.",
+    "text": "This is a bolded heading for a warning message, indicating that the information presented is crucial.",
     "is_auto": true,
-    "updated_at": "2025-06-03T20:59:59.160Z"
+    "updated_at": "2026-04-11T20:51:07.440Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/panels/additional-storage/StorageWarning.tsx",
-      "line_number": 68,
-      "context": "{title ? (\n <Text fontWeight={600} className={styles.warningColor}>\n {title}\n </Text>\n ) : (\n <Text fontWeight={600}>{t(\"Important\")}</Text>\n )}\n </div>\n \n <Text>\n {t(\"Warning\", {",
-      "module": "/packages/client"
+      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StorageWarning.tsx",
+      "line_number": 73,
+      "context": "{title ? (\n <Text fontWeight={600} className={styles.warningColor}>\n {title}\n </Text>\n ) : (\n <Text fontWeight={600}>{t(\"Important\")}</Text>\n )}\n </div>\n \n <Text>\n {t(\"StorageWarning\", {",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {

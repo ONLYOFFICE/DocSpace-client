@@ -3,13 +3,21 @@
   "content": "Browse ready-made form templates. Pick a template to quickly create a new form without starting from scratch.",
   "content_en_sha1_hash": "df9fd1d4ad5d94192e9157b922ee24c897722f3e",
   "created_at": "2026-03-31T15:18:26.797Z",
-  "updated_at": "2026-04-07T21:14:19.319Z",
+  "updated_at": "2026-04-23T17:24:02.164Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is the content of a tooltip that appears during a product tour. It describes the \"Library\" section, which allows users to browse and select pre-made form templates to create new forms quickly.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:40:32.300Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_utils/tourSteps.ts",
+      "line_number": 304,
+      "context": "showLibrary &&\n navSectionStep(\n \"library\",\n t(\"Common:Library\"),\n t(\n \"Common:TourLibrary\",\n \"Browse ready-made form templates. Pick a template to quickly create a new form without starting from scratch.\",\n ),\n showMenu,\n callbacks,\n ),",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -32,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'формуляри шаблони' is grammatically incorrect and redundant in Bulgarian; it translates to 'forms templates' literally without proper connection. It should be 'шаблони за формуляри'.",
-          "suggestion": "Разгледайте готови шаблони за формуляри. Изберете шаблон, за да създадете бързо нова форма, без да започвате от нулата."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -68,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'lomake-aiempaloita' is a typo/incorrect word formation. The correct word for 'templates' in this context is 'malleja' or 'lomakepohjia'. 'Aiempaloita' is not a valid Finnish word.",
-          "suggestion": "Selaa valmiita lomakepohjia. Valitse malli luodaksesi nopeasti uuden lomakkeen ilman, että sinun tarvitsee aloittaa alusta."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -116,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation is nonsensical and fails to convey the original meaning. 'Pārliecinieties' means 'make sure/ensure', whereas the English says 'Browse'. The phrase 'nepieciešamā no bezala' is grammatically incorrect and does not mean 'without starting from scratch'.",
-          "suggestion": "Pārlūkojiet gatavus formu šablonus. Izvēlieties šablonu, lai ātri izveidotu jaunu formu, ne sākot no nulles."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -164,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Browse' is translated as 'අනුගමනය කරන්න' (Follow), which changes the meaning from 'looking through/searching' to 'following/obeying'.",
-          "suggestion": "සූදානම් පෝරම සැකිලි නරඹන්න. මුල සිට ආරම්භ නොකර නව පෝරමයක් ඉක්මනින් නිර්මාණය කිරීමට සැකිල්ලක් තෝරන්න."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

@@ -3,17 +3,18 @@
   "content": "Check users from the list to import into {{organizationName}} {{productName}}. Only users with emails can be selected. Users already existing in {{organizationName}} {{productName}} are highlighted with a green color and are not checked by default.",
   "content_en_sha1_hash": "ad743c3b62e273a22ee36dfcfa2b2fa96612293d",
   "created_at": "2025-05-19T21:30:52.567Z",
-  "updated_at": "2026-04-09T01:27:38.828Z",
+  "updated_at": "2026-04-11T21:22:22.732Z",
   "comment": {
-    "text": "This translation key is used for a tooltip or message that describes the selection process for importing users into Nextcloud, emphasizing the requirement for email addresses and highlighting existing users. It appears in a data import step of a portal settings page, guiding translators to focus on emails and distinguish between new and existing users.",
+    "text": "This is a description displayed during the Nextcloud user import process. It explains which users can be imported and how existing users are indicated, with `{{organizationName}}` and `{{productName}}` representing the organization and product names respectively.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:32.513Z"
+    "updated_at": "2026-04-11T21:22:22.732Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 61,
-      "context": "/>\n ),\n },\n {\n title: t(\"Settings:SelectUsersWithEmail\"),\n description: t(\"Settings:SelectUsersDescriptionNextcloud\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: (\n <SelectUsersStep t={t} canDisable={false} shouldSetUsers={false} />",
+      "line_number": 62,
+      "context": "/>\n ),\n },\n {\n title: t(\"Settings:SelectUsersWithEmail\"),\n description: t(\"Settings:SelectUsersDescriptionNextcloud\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n }),\n component: (\n <SelectUsersStep t={t} canDisable={false} shouldSetUsers={false} />",
       "module": "/packages/client"
     }
   ],
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of 'are not checked by default' as 'لا يتم التحقق منهم بشكل افتراضي' is incorrect in this context. In UI terminology, 'checked' refers to the checkbox state (selected), whereas 'التحقق' means 'verification/validation'. This changes the meaning from 'they are not selected by default' to 'they are not verified by default'.",
-          "suggestion": "تحقق من المستخدمين من القائمة لاستيرادها إلى {{organizationName}} {{productName}}. يمكن تحديد المستخدمين الذين لديهم بريد إلكتروني فقط. يتم تمييز المستخدمين الموجودين بالفعل في {{organizationName}} {{productName}} بلون أخضر ولا يتم تحديدهم بشكل افتراضي."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -75,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation states existing users are highlighted with the 'wrong color' (virheellä värillä) instead of 'green color' (vihreällä värillä).",
-          "suggestion": "Valitse {{organizationName}} {{productName}}:n tuotavat käyttäjät listalta. Vain käyttäjät, joilla on sähköposti, voidaan valita. Jo {{organizationName}} {{productName}}-ssa olemassaolevat käyttäjät on korostettu vihreällä värillä, eivätkä ne ole oletuksena valittuina."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -117,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of 'are not checked by default' as 'ບໍ່ໄດ້ຖືກກວດສອບຕາມຄ່າເລີ່ມຕົ້ນ' is incorrect in this context. In UI terminology, 'checked' refers to a checkbox state (selected), whereas 'ກວດສອບ' means 'to inspect' or 'to verify'. This changes the meaning from 'the checkbox is not selected' to 'they have not been verified'.",
-          "suggestion": "ກວດເບິ່ງຜູ້ໃຊ້ຈາກລາຍຊື່ເພື່ອນໍາເຂົ້າເຂົ້າໄປໃນ {{organizationName}} {{productName}}. ສະເພາະຜູ້ໃຊ້ທີ່ມີອີເມວສາມາດເລືອກໄດ້. ຜູ້ໃຊ້ທີ່ມີຢູ່ແລ້ວຢູ່ໃນ {{organizationName}} {{productName}} ຈະຖືກເນັ້ນໃສ່ດ້ວຍສີຂຽວ ແລະບໍ່ໄດ້ຖືກເລືອກໄວ້ຕາມຄ່າເລີ່ມຕົ້ນ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -147,37 +130,19 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'checked' in 'are not checked by default' refers to the selection state (checkboxes), but the translation 'não são verificados' means 'are not verified/checked for accuracy'.",
-          "suggestion": "Verifique os usuários da lista para importar para o {{organizationName}} {{productName}}. Somente usuários com e-mails podem ser selecionados. Os usuários já existentes no {{organizationName}} {{productName}} são destacados em verde e não estão selecionados por padrão."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'checked' in the context of a selection list means 'selected' (marked with a checkmark), but 'verificados' in Portuguese means 'verified' or 'inspected'. This changes the meaning from 'not selected by default' to 'not verified by default'.",
-          "suggestion": "Verifique os usuários da lista para importar para o {{organizationName}} {{productName}}. Somente usuários com e-mails podem ser selecionados. Os usuários já existentes no {{organizationName}} {{productName}} são destacados em verde e não estão selecionados por padrão."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'utilizatorii care au indicat adresa de e-mail' (users who have indicated an email address) changes the meaning from 'users with emails' (users who possess/have an email address).",
-          "suggestion": "Bifați utilizatorii din listă pentru a-i importa în {{organizationName}} {{productName}}. Pot fi selectați numai utilizatorii care au adrese de e-mail. Utilizatorii deja existenți în {{organizationName}} {{productName}} sunt evidențiați cu verde și nu sunt bifați în mod implicit."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -189,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of 'Check users from the list' as 'පරිශීලකයින් පරීක්ෂා කරන්න' (Check/Inspect users) is semantically incorrect in this UI context. In a selection list, 'Check' means to 'select' or 'tick' the checkbox. The Sinhala translation implies 'inspecting' or 'verifying' the users rather than selecting them.",
-          "suggestion": "{{organizationName}} {{productName}} වෙතට ආනයනය කිරීම සඳහා ලැයිස්තුවෙන් පරිශීලකයින් තෝරන්න. විද්‍යුත් ලිපිනයක් ඇති පරිශීලකයින් පමණක් තෝරා ගත හැකිය. {{organizationName}} {{productName}} හි දැනටමත් සිටින පරිශීලකයින් කොළ පැහැයෙන් දක්නට ලැබෙන අතර පෙරනිද්දීම තෝරාගෙන නොමැත."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -213,25 +172,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The second sentence in Serbian ('Само корисници са емаил-овима ће бити одабрани') means 'Only users with emails will be selected', whereas the English ('Only users with emails can be selected') expresses a capability/possibility ('can be'). This changes the logic from a system constraint to a future action.",
-          "suggestion": "Проверите кориснике са листе које желите да увезете у {{organizationName}} {{productName}}. Само кориснике са емаил-адресама је могуће одабрати. Корисници који већ постоје у {{organizationName}} {{productName}}-у су означени зеленом бојом и подразумевано нису означени."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Samo korisnici sa email-ovima će biti odabrani' (Only users with emails will be selected) changes the meaning of the English 'Only users with emails can be selected' (which describes a capability/constraint). More importantly, the English text implies a selection process where the user chooses, whereas the Serbian version sounds like an automated system action.",
-          "suggestion": "Proverite korisnike sa liste koje želite da uvezete u {{organizationName}} {{productName}}. Samo korisnike sa email adresama je moguće odabrati. Korisnici koji već postoje u {{organizationName}} {{productName}} su označeni zelenom bojom i podrazumevano nisu označeni."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

@@ -3,11 +3,12 @@
   "content": "Disable quota",
   "content_en_sha1_hash": "13a8e1d1f088c27730510bb9d3e85366580a74b1",
   "created_at": "2025-05-19T21:30:44.544Z",
-  "updated_at": "2026-04-08T11:57:35.107Z",
+  "updated_at": "2026-04-11T20:55:00.046Z",
   "comment": {
-    "text": "This translation key is used to display the label \"Disable quota\" in various UI elements, such as a storage management dialog and a settings menu. It appears on buttons and menus that allow users to disable or customize their quota limitations. The key should be translated to provide a clear indication of this action's purpose for end-users.",
+    "text": "This is a button label that disables the storage quota for a user or the entire portal.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:41.407Z"
+    "updated_at": "2026-04-11T20:55:00.046Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -75,25 +76,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Disable quota' is singular, but the Czech translation 'Zakázat kvóty' is plural ('Disable quotas'). This changes the meaning from a specific action on a single quota to a general action on multiple quotas.",
-          "suggestion": "Zakázat kvótu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German word 'Quote' means 'quotation' (as in a citation or price quote). In the context of storage management and limits, the correct term is 'Kontingent'.",
-          "suggestion": "Kontingent deaktivieren"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -153,13 +142,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Atspējot kvotu' uses a gerund/participle form ('Disabling quota') instead of the imperative/infinitive form ('Disable quota') required for a UI button or menu action.",
-          "suggestion": "Atspēgt kvotu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -201,13 +184,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'සලාකය අබල කරන්න' is incorrect. 'සලාකය' (Salakaya) means 'a stick/branch/rod', which is a mistranslation of 'quota'. The correct term for quota in this context should relate to an allocation or limit.",
-          "suggestion": "කොටස අබල කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

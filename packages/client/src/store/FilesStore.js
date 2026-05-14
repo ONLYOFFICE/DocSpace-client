@@ -1840,7 +1840,11 @@ class FilesStore {
           filterData.searchArea = SearchArea.Active;
           const newUrl = getCategoryUrl(CategoryType.Chat, folderId);
 
-          history.replaceState(null, "", `${newUrl}?${filterData.toUrlParams()}`);
+          history.replaceState(
+            null,
+            "",
+            `${newUrl}?${filterData.toUrlParams()}`,
+          );
         }
 
         if (newTotal > 0) {
@@ -2337,6 +2341,7 @@ class FilesStore {
 
               const isFiltered =
                 subjectId ||
+                filter.subjectOwnerId ||
                 filterValue ||
                 type ||
                 filter.provider ||
@@ -2507,6 +2512,7 @@ class FilesStore {
 
               const isFiltered =
                 subjectId ||
+                filter.subjectOwnerId ||
                 filterValue ||
                 type ||
                 filter.provider ||
@@ -2752,7 +2758,12 @@ class FilesStore {
 
       const extsCustomFilter =
         this.filesSettingsStore?.extsWebCustomFilterEditing || EMPTY_ARRAY;
+      const extsWebEdited =
+        this.filesSettingsStore?.extsWebEdited || EMPTY_ARRAY;
       const isExtsCustomFilter = extsCustomFilter.includes(item.fileExst);
+      const isExtsWebEdited = extsWebEdited.includes(item.fileExst);
+      const canShowCustomFilter =
+        canSetUpCustomFilter && isExtsCustomFilter && isExtsWebEdited;
 
       const isSharedWithMeFolderSection =
         this.treeFoldersStore.sharedWithMeFolderId === item.rootFolderId &&
@@ -2881,7 +2892,7 @@ class FilesStore {
         ]);
       }
 
-      if (!canSetUpCustomFilter || !isExtsCustomFilter) {
+      if (!canShowCustomFilter) {
         fileOptions = removeOptions(fileOptions, ["custom-filter"]);
       }
 
@@ -5143,6 +5154,7 @@ class FilesStore {
 
     const {
       subjectId,
+      subjectOwnerId,
       filterValue,
       type,
       withSubfolders: withRoomsSubfolders,
@@ -5171,6 +5183,7 @@ class FilesStore {
           withRoomsSubfolders ||
           searchInContentRooms ||
           subjectId ||
+          subjectOwnerId ||
           tags ||
           withoutTags ||
           quotaFilter
@@ -5218,4 +5231,3 @@ class FilesStore {
 }
 
 export default FilesStore;
-

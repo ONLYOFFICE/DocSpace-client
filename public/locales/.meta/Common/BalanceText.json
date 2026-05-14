@@ -3,13 +3,21 @@
   "content": "Balance",
   "content_en_sha1_hash": "90eef613042c5a51f542421065b68b886d473807",
   "created_at": "2026-04-10T13:53:42.015Z",
-  "updated_at": "2026-04-10T13:53:42.015Z",
+  "updated_at": "2026-04-13T14:59:06.030Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label for the user's account balance, displayed next to the amount in the wallet section.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:58:26.233Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
+      "line_number": 178,
+      "context": "</Link>\n ) : null}\n \n <div className={styles.balanceWrapper}>\n <BalanceAmount\n title={t(\"BalanceText\")}\n showRefresh={!isNotPaidPeriod && isCardLinkedToPortal}\n isRefreshing={isRefreshing || isAutoSpinning}\n progressText={t(\"TopUpInProgress\")}\n isProgressTextVisible={isAutoSpinning}\n onRefresh={onClick}",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,23 +3,24 @@
   "content": "User",
   "content_en_sha1_hash": "9f8a2389a20ca0752aa9e95093515517e90e194c",
   "created_at": "2025-05-19T21:30:49.454Z",
-  "updated_at": "2026-04-07T20:40:10.029Z",
+  "updated_at": "2026-04-23T17:24:01.813Z",
   "comment": {
-    "text": "This translation key \"User\" is used to display the content \"User\" in various UI contexts, such as a warning message and a label in a table. It appears in a dialog box when deleting a profile and in a data import component for selecting users. Translators should provide a translated version of this text that accurately reflects its purpose in these contexts.",
+    "text": "This is a label for a user type, appearing in tables, dropdowns, and dialogs. It refers to a standard user account.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:35:38.662Z"
+    "updated_at": "2026-04-11T20:39:38.193Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 98,
+      "line_number": 99,
       "context": "<Trans\n i18nKey=\"DeleteUserMessage\"\n ns=\"DeleteProfileEverDialog\"\n t={t as TFunction}\n values={{\n userCaption: onlyGuests ? t(\"Common:Guest\") : t(\"Common:User\"),\n user: users[0].displayName,\n }}\n components={{\n 1: <strong />,\n }}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/index.tsx",
-      "line_number": 74,
-      "context": "label: t(\"Common:RoomAdmin\"),\n onClick: setTypeRoomAdmin,\n },\n {\n key: UserTypes.User,\n label: t(`Common:User`),\n onClick: setTypeUser,\n },\n ];\n \n if (isOwner) {",
+      "line_number": 75,
+      "context": "label: t(\"Common:RoomAdmin\"),\n onClick: setTypeRoomAdmin,\n },\n {\n key: UserTypes.User,\n label: t(\"Common:User\"),\n onClick: setTypeUser,\n },\n ];\n \n if (isOwner) {",
       "module": "/packages/client"
     },
     {
@@ -36,20 +37,26 @@
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 703,
+      "line_number": 704,
       "context": "{\n id: \"accounts-add_collaborator\",\n className: \"main-button_drop-down\",\n icon: PersonDefaultReactSvgUrl,\n label: t(\"Common:User\"),\n onClick: () => this.inviteUser(EmployeeType.User),\n \"data-type\": EmployeeType.User,\n action: EmployeeType.User,\n key: \"collaborator\",\n },",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/ConnectDatabaseForm.tsx",
+      "line_number": 255,
+      "context": "/>\n </div>\n \n <div className={styles.fieldGroup}>\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"Common:User\")}\n </Text>\n <TextInput\n scale\n type={InputType.text}\n value={store.user}",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 358,
-      "context": "productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");\n case EmployeeType.Guest:\n default:\n return t(\"Common:Guest\");\n }\n };",
+      "line_number": 354,
+      "context": "productName: getBrandName(\"ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");\n case EmployeeType.Guest:\n default:\n return t(\"Common:Guest\");\n }\n };",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 358,
-      "context": "productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");\n case EmployeeType.Guest:\n default:\n return t(\"Common:Guest\");\n }\n };",
+      "line_number": 354,
+      "context": "productName: getBrandName(\"ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");\n case EmployeeType.Guest:\n default:\n return t(\"Common:Guest\");\n }\n };",
       "module": "/packages/shared"
     },
     {
@@ -195,13 +202,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'පරිශ්‍රීලකයා' is a misspelling/incorrect derivation. The correct term for 'User' in Sinhala is 'පරිශීලකයා'.",
-          "suggestion": "පරිශීලකයා"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -249,13 +250,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '普通用户' means 'Regular User' or 'Standard User', which is a specific subtype. The English source 'User' is a generic term used for labels, table columns, and roles. In the context of a table column or a general label, '用户' is the correct equivalent.",
-          "suggestion": "用户"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

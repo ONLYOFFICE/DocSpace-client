@@ -3,11 +3,12 @@
   "content": "Attribute Mapping",
   "content_en_sha1_hash": "3c36e2ea92c694eb893c563ee8f8242b35bfedcc",
   "created_at": "2025-05-19T21:30:50.063Z",
-  "updated_at": "2026-04-08T23:39:22.787Z",
+  "updated_at": "2026-04-11T21:27:01.095Z",
   "comment": {
-    "text": "Attribute Matching is used as a label to describe a field mapping feature that allows users to map attributes between different systems. It appears in a UI component where users can configure attribute mappings, providing context for users configuring this setting.",
+    "text": "This is a section title on the Single Sign-On settings page, indicating where users can configure how attributes from their identity provider map to DocSpace user attributes.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:19.540Z"
+    "updated_at": "2026-04-11T21:27:01.095Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'تعيين البيانات' means 'Data Assignment' or 'Data Setting', which fails to capture the technical concept of 'Mapping' (linking/matching fields) described in the context.",
-          "suggestion": "ربط السمات"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -153,37 +148,19 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'аттрибутов' is a spelling error in Russian; the correct spelling is 'атрибутов' (one 'т').",
-          "suggestion": "Сопоставление атрибутов"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'උපලක්‍ෂණ' (Upalakshana) typically refers to 'benefits' or 'perks' (often used in HR/payroll contexts), which is incorrect for a technical 'Attribute' in a data mapping context. The correct technical term for 'Attribute' in this context should be 'ගුණාංග' (Gunanga) or 'ලක්ෂණ' (Lakshana).",
-          "suggestion": "ගුණාංග අනුරූපණය"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English term 'Mapping' refers to the process of linking or matching data fields, whereas the Slovak translation 'Zobrazenie' means 'Display' or 'View'. This changes the functional meaning of the feature.",
-          "suggestion": "Mapovanie atribútov"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -231,13 +208,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Harta e atributeve' means 'Map of attributes' (as in a geographical or conceptual map), whereas the English 'Attribute Mapping' refers to the technical process of linking/matching data fields.",
-          "suggestion": "Lidhja e atributeve"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

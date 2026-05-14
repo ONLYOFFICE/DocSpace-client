@@ -3,16 +3,17 @@
   "content": "Number of rooms according to your tariff plan: {{currentValue}}/{{maxValue}}",
   "content_en_sha1_hash": "50c21689104208a689abc871f03f39356411633c",
   "created_at": "2025-05-19T21:30:53.710Z",
-  "updated_at": "2026-04-07T19:35:05.173Z",
+  "updated_at": "2026-04-11T21:19:37.964Z",
   "comment": {
-    "text": "This translation key displays the number of rooms available according to a user's tariff plan. It is used in an invite quota warning dialog to show the current room count and maximum available rooms by quota.",
+    "text": "This is a line of text within a dialog warning the user about their room quota. It displays the current number of rooms used (`{{currentValue}}`) out of the maximum allowed (`{{maxValue}}`) by their tariff plan.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:08.374Z"
+    "updated_at": "2026-04-11T21:19:37.964Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/sub-components/RoomsContent.tsx",
-      "line_number": 83,
+      "line_number": 84,
       "context": "return (\n <>\n <Text fontWeight={600}>{t(\"RoomsQuotaAlmostExhausted\")}</Text>\n <br />\n <Text>\n {t(\"NumberOfRoomsAccordingToTariff\", {\n currentValue: usedRoomsCount,\n maxValue: maxCountRoomsByQuota,\n })}\n </Text>\n <br />",
       "module": "/packages/client"
     }

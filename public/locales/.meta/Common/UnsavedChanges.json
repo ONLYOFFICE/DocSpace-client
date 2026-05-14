@@ -3,11 +3,12 @@
   "content": "Unsaved changes",
   "content_en_sha1_hash": "29267269c048b5a9f836a97c23d40ba065c4b454",
   "created_at": "2025-10-27T16:14:23.063Z",
-  "updated_at": "2026-04-07T20:56:10.595Z",
+  "updated_at": "2026-04-12T13:50:19.471Z",
   "comment": {
-    "text": "This text appears as the title of a dialog box, alerting the user that there are unsaved changes to their work. It's used to inform the user before navigating away from a page or closing a window where data hasn't been saved yet. The translation should convey a clear warning about potential data loss.",
+    "text": "This is the title of a dialog box that appears when a user attempts to close a document or navigate away without saving their recent modifications.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:24:30.449Z"
+    "updated_at": "2026-04-11T20:40:10.499Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -45,13 +46,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Nezaložené' means 'unfounded' or 'unestablished' (e.g., an unfounded claim). The correct term for 'unsaved' in the context of data/changes is 'neuvedené' or 'neuložené'.",
-          "suggestion": "Neuložené změny"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -117,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Saglabātie grozs' means 'Saved basket/cart', which is the opposite of 'Unsaved changes'.",
-          "suggestion": "Nesaglabātas izmaiņas"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -171,13 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Nezakázané' means 'unbanned' or 'not prohibited', which is the opposite of the intended meaning 'unsaved'.",
-          "suggestion": "Nezapísané zmeny"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -195,13 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses the singular form 'промена' (change), whereas the English source is plural 'changes'. In Serbian, when referring to unsaved changes in a UI context, the plural form is required to be grammatically correct and accurate to the source.",
-          "suggestion": "Несачуване промене"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

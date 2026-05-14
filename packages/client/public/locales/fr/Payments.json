@@ -1,11 +1,10 @@
 {
-  "AccessingProblem": "Si vous êtes un utilisateur existant et que vous avez des problèmes pour accéder à cet espace, veuillez contacter l’administrateur.",
   "CannotCreateNewRoom": "Impossible de créer une salle",
   "CannotCreatePaidUsers": "Impossible d'ajouter des utilisateurs payants",
   "CannotRestoreRoom": "Impossible de restaurer la salle",
   "ChooseNewPlan": "Vous souhaitez choisir un nouveau plan tarifaire ?",
   "GracePeriodActive": "La période de grâce est active <1>du {{fromDate}} au {{byDate}}</1> (jours restants : {{delayDaysCount}}).",
-  "LicenseExpired": "Impossible d'ajouter de nouveaux utilisateurs et de créer de nouvelles salles. La licence a expiré.",
+  "LicenseExpiredRestriction": "Impossible d'ajouter de nouveaux utilisateurs et de créer de nouvelles salles. La licence a expiré.",
   "LicenseGracePeriodInfo": "Pendant ce temps, les administrateurs ne peuvent pas créer de nouvelles salles ou ajouter de nouveaux utilisateurs. Une fois la période de grâce terminée, {{productName}} sera indisponible jusqu'à ce qu'une nouvelle licence soit activée.",
   "NewRoomWillExceedLimit": "La création de cette salle n'est pas possible car la limite du nombre de salles incluses dans votre plan actuel est atteinte.",
   "NewUsersWillExceedMembersLimit": "L'ajout de nouveaux utilisateurs payants n'est pas possible car la limite est atteinte pour le nombre d'administrateurs inclus dans votre plan actuel.",

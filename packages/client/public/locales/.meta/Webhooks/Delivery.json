@@ -3,11 +3,12 @@
   "content": "Delivery",
   "content_en_sha1_hash": "9631af52c66f1a5cd964380b009c74efdee01947",
   "created_at": "2025-05-19T21:30:49.687Z",
-  "updated_at": "2026-04-08T20:30:00.132Z",
+  "updated_at": "2026-04-11T21:29:17.811Z",
   "comment": {
-    "text": "This translation key is used for displaying the title of a column in a table related to webhooks, specifically indicating \"Delivery\". It is likely used on a history table page where users view past webhook events.",
+    "text": "Table column header. It indicates the status of a webhook delivery attempt.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:47:07.939Z"
+    "updated_at": "2026-04-11T21:29:17.811Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -195,25 +196,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word 'Delivery' is a noun referring to the act or process of delivering. The Vietnamese translation 'Đã gửi' means 'Sent' (past tense verb), which describes a status rather than a column title/category.",
-          "suggestion": "Chuyển phát"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "In the context of webhooks and event history, 'Delivery' refers to the successful transmission or dispatch of a payload to a destination. '传递' (chuándì) is too abstract and often used for passing objects or information in a general sense. In technical UI for webhooks, '投递' or '发送状态' is more accurate for the delivery status/process.",
-          "suggestion": "投递"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

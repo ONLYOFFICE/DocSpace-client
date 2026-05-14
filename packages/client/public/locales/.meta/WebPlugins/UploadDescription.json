@@ -3,17 +3,18 @@
   "content": "You can add plugins to extend the functionality of {{productName}} with extra features. Click Upload plugin or drop file in the ZIP archive.",
   "content_en_sha1_hash": "dacf9512f3550b50c54e9898f5427ca019da6e73",
   "created_at": "2025-05-19T21:30:49.925Z",
-  "updated_at": "2026-04-08T18:29:56.262Z",
+  "updated_at": "2026-04-13T14:59:05.889Z",
   "comment": {
-    "text": "This translation key is used to display a message encouraging users to upload plugins to extend the functionality of {{productName}}. It appears as a text in a dropzone component where users can upload files, and also on an empty screen when no plugins are available.",
+    "text": "This is a descriptive text explaining how to add plugins. It appears on the plugin settings page and includes `{{productName}}` which will be replaced by the product's brand name (e.g., ONLYOFFICE DocSpace).",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:39.790Z"
+    "updated_at": "2026-04-11T21:27:46.458Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/sub-components/UploadDescription.tsx",
-      "line_number": 6,
-      "context": "import { Text } from \"@docspace/ui-kit/components/text\";\n import { Link, LinkTarget } from \"@docspace/ui-kit/components/link\";\n import styles from \"../Plugins.module.scss\";\n import { UploadDecsriptionProps } from \"../Plugins.types\";\n \n const UploadDescription = ({\n pluginsSdkUrl,\n currentColorScheme,\n t,\n }: UploadDecsriptionProps) => {\n return (",
+      "line_number": 15,
+      "context": "t,\n }: UploadDecsriptionProps) => {\n return (\n <div className={styles.uploadDescription}>\n <Text className={styles.uploadDescriptionText}>\n {t(\"UploadDescription\", { productName: getBrandName(\"ProductName\") })}\n </Text>\n {pluginsSdkUrl ? (\n <Link\n className=\"link-learn-more\"\n color={currentColorScheme?.main?.accent ?? undefined}",
       "module": "/packages/client"
     }
   ],
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of 'Click Upload plugin or drop file in the ZIP archive' is inaccurate. The Azerbaijani text says 'Install the plugin or place the file in the ZIP archive', which changes the user action from 'Clicking/Uploading' to 'Installing'.",
-          "suggestion": "{{productName}}-in funksionallığını əlavə funksiyalarla genişləndirmək üçün plaginlər əlavə edə bilərsiniz. Plagini yükləyin və ya faylı ZIP arxivinə sürükləyin."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -63,13 +58,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Click Upload plugin' is translated as 'Κάντε κλικ στο πρόσθετο Μεταφόρτωση', which literally means 'Click on the plugin Upload'. This changes the meaning from clicking a specific button/action to clicking on a plugin itself. It should be 'Κάντε κλικ στο Μεταφόρτωση πρόσθετου'.",
-          "suggestion": "Μπορείτε να προσθέσετε πρόσθετα για να επεκτείνετε τη λειτουργικότητα του {{productName}} με επιπλέον δυνατότητες. Κάντε κλικ στο Μεταφόρτωση πρόσθετου ή αποθέστε το αρχείο σε μορφή ZIP."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -81,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'pudota tiedosto ZIP-arkistoon' (drop file into ZIP archive) is the opposite of the English meaning 'drop file in the ZIP archive' (which implies the file being dropped should be a ZIP archive). The Finnish version suggests dropping a file into an existing archive, which is technically incorrect for an upload action.",
-          "suggestion": "Voit lisätä lisäosia laajentaaksesi {{productName}}-n toiminnallisuutta lisätoiminnoilla. Klikkaa Lataa lisäosa tai pudota ZIP-arkisto."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -123,25 +106,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation changes the instruction from 'drop file in the ZIP archive' to 'select plugin file in the ZIP folder', which alters the user action required for the dropzone component.",
-          "suggestion": "ທ່ານສາມາດເພີ່ມປລັກອິນເພື່ອຂະຫຍາຍການເຮັດວຽກຂອງ {{productName}} ດ້ວຍຄຸນສົມບັດພິເສດ. ຄລິກ ອັບໂຫລດ plugin ຫຼື ລາກໄຟລ໌ ZIP ມາໃສ່."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation incorrectly states 'Click Upload plugin in the ZIP archive' (ZIP arhīvā noklikšķiniet uz Augšupielādēt spraudni), whereas the English original says 'Click Upload plugin OR drop file in the ZIP archive'. The Latvian version implies the action happens inside the archive, which is logically impossible and changes the instruction.",
-          "suggestion": "Varat pievienot spraudņus, lai paplašinātu {{productName}} funkcionalitāti ar papildu funkcijām. Noklikšķiniet uz Augšupielādēt spraudni vai nometiet failu ZIP arhīvā."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -183,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation uses the word 'පේනු' (penu), which means 'pens'. The correct technical term for 'plugin' in this context should be 'ප්ලගිනය' (plugin) or a descriptive term for an add-on. Using 'pen' makes the sentence nonsensical.",
-          "suggestion": "අමතර විශේෂාංග සමඟ {{productName}} හි ක්‍රියාකාරීත්වය පුළුල් කිරීම සඳහා ඔබට ප්ලගිනයන් එක් කළ හැකිය. 'Upload plugin' ක්ලික් කරන්න හෝ ZIP ආකෘතියේ ඇති ගොනුව මෙතැනට ඇද දමන්න."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -207,25 +172,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation omits the 'drop file' instruction, only mentioning selecting a file. The English text explicitly allows dragging and dropping files into the zone.",
-          "suggestion": "Можете додати додатке да бисте проширили функционалност {{productName}} са додатним могућностима. Кликните на „Постави додатак“ или превуците датотеку у ZIP архиви."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation omits the 'drop file' instruction, which is a key part of the UI interaction (drag-and-drop functionality).",
-          "suggestion": "Možete dodati dodatke da biste proširili funkcionalnost {{productName}}-a sa dodatnim mogućnostima. Kliknite na \"Postavi dodatak\" ili prevucite datoteku u ZIP arhivi."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -237,13 +190,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'Вивантажити плагіни' (Upload plugins - plural) instead of 'Upload plugin' (singular) as specified in the English source. This creates a mismatch between the UI button text and the instruction.",
-          "suggestion": "Ви можете додати плагіни, щоб розширити функціональність простору {{productName}} додатковими функціями. Натисніть «Вивантажити плагін» або перетягніть файл у ZIP-архіві."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

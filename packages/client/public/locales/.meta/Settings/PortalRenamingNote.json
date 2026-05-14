@@ -3,16 +3,17 @@
   "content": "<strong>Note:</strong> Your old space address will become unavailable to new users once you click the Save button.",
   "content_en_sha1_hash": "2c9edfd2e118ab897a57d7d5168c0a41b4ae4d12",
   "created_at": "2025-05-19T21:30:52.293Z",
-  "updated_at": "2026-04-10T08:58:38.061Z",
+  "updated_at": "2026-04-11T21:22:52.295Z",
   "comment": {
-    "text": "This translation key is used to display a note about making an old space address unavailable to new users. It appears in a portal settings page and is displayed next to a save button. The translator should provide a message that informs users of this change's consequences.",
+    "text": "This is a note displayed below the portal renaming input field. It informs the user about the consequence of changing their space address.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:43.366Z"
+    "updated_at": "2026-04-11T21:22:52.295Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 356,
+      "line_number": 357,
       "context": "<div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight={400}>\n {t(\"PortalRenamingDescriptionText\", { domain })}\n </Text>\n <Text fontSize=\"13px\" fontWeight={400}>\n <Trans t={t} i18nKey=\"PortalRenamingNote\" />\n </Text>\n {renamingSettingsUrl ? (\n <Link\n className=\"link-learn-more\"\n color={currentColorScheme.main?.accent}",
       "module": "/packages/client"
     }
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translator used 'عنوان بوابتك' (your portal address) instead of 'عنوان مساحتك' (your space address). While 'portal' is in the context, the English text specifically refers to the 'space address'.",
-          "suggestion": "<strong>ملاحظة:</strong> سوف يصبح عنوان مساحتك القديم غير متاح للمستخدمين الجدد بمجرد أن تضغط على زر حفظ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -111,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'space' in the context of 'space address' (referring to a digital workspace/portal) has been translated literally as 'ອາວະກາດ' (outer space/cosmos), which is incorrect for software UI.",
-          "suggestion": "<strong>ໝາຍເຫດ:</strong> ທີ່ຢູ່ສະເປດເກົ່າຂອງທ່ານຈະບໍ່ສາມາດໃຊ້ໄດ້ສຳລັບຜູ້ໃຊ້ໃໝ່ ເມື່ອທ່ານຄລິກປຸ່ມບັນທຶກ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -129,13 +118,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation says the old address will become 'available' (beschikbaar) instead of 'unavailable' (niet meer beschikbaar/onbeschikbaar).",
-          "suggestion": "<strong>Note:</strong> Let op: uw oude ruimteadres wordt niet meer beschikbaar voor nieuwe gebruikers zodra u op de Opslaan knop klikt."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -159,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Adresa dvs de spaţiu veche' is a literal and unnatural translation of 'Your old space address'. In Romanian, 'spațiu' refers to physical space or a character, whereas in this context, 'space' refers to a digital workspace/environment. Furthermore, the word order is awkward.",
-          "suggestion": "<strong>Notă:</strong> Vechea adresă a spațiului dvs. va deveni indisponibilă pentru noii utilizatori odată ce faceți clic pe butonul Salvare."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -177,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'ලබා ගැනීමට නොහැකිය' (cannot obtain/get) implies that users are unable to access it, whereas the English 'will become unavailable' in this context means the address itself will cease to function or be accessible for new users. More importantly, the Sinhala phrasing 'නව පරිශ්‍රීලකයින්ට' is a misspelling/incorrect word choice for 'new users' (should be නව පරිශීලකයින්ට).",
-          "suggestion": "<strong>සටහන:</strong> ඔබ Save බොත්තම එබූ පසු, ඔබගේ පැරණි අවකාශ ලිපිනය නව පරිශීලකයින්ට ලබාගත නොහැකි වනු ඇත."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

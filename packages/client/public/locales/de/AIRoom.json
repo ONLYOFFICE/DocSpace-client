@@ -1,7 +1,9 @@
 {
+  "AgentInViewModeWarning": "Sie befinden sich im <strong>nur-Lesen</strong>-Modus für diesen {{aiAgent}}. Sie können die Ergebnisse der {{aiChat}}-Aktivitäten anderer Benutzer sehen.",
   "AIAgentAccessRedirectNote": "Sie werden in 5 Sekunden automatisch zum Abschnitt {{sectionName}} weitergeleitet.",
   "AIChat": "KI-Chat",
   "AIInstructions": "KI-Anweisungen",
+  "AIProviderAndModel": "{{aiProvider}} und Modell",
   "CreateChat": "Chat erstellen",
   "CreateChatDescription": "Gehen Sie zur Registerkarte {{aiChat}}, um zu beginnen.",
   "EmptyKnowledgeDescription": "Dateien, die hier hochgeladen werden, werden indiziert und als Kontext im {{aiChat}}-Tab verwendet. Fügen Sie Dateien hinzu (jeweils bis zu 10 MB), um Fragen an die KI zu stellen, Inhalte zu generieren oder Informationen zu bearbeiten.",
@@ -11,6 +13,7 @@
   "EmptyResultsTitle": "Noch keine Ergebnisse",
   "EmptyResultsViewerDescription": "Sie sehen die Ergebnisse der {{aiChat}}-Aktivität anderer Benutzer hier, sobald diese verfügbar sind.",
   "InstructionsDescriptionAgent": "Beschreiben Sie, wie das {{aiAgent}} sich verhalten und antworten soll. Definieren Sie seine Rolle, seinen Ton und seine Hauptaufgaben.",
+  "InstructionsDescriptionAgentExample": "Beispiel: „Sie sind ein KI-PR-Assistent, der beim Schreiben und Bearbeiten von Pressemitteilungen hilft. Behalten Sie einen professionellen, selbstbewus und medienfreundlichen Ton bei. Heben Sie Kernbotschaften klar hervor, vermeiden Sie Fachjargon und halten Sie den Text prägnant und ansprechend.“",
   "Knowledge": "Wissensdatenbank",
   "KnowledgeDescription": "Laden Sie Dateien von Ihrem Computer oder {{productName}} hoch, um den Chat mit mehr Kontext zu versehen. Hinweis: Einige oder alle hochgeladenen Inhalte können während des Gesprächs sichtbar sein.",
   "KnowledgeSelectIn": "In {{productName}} wählen",
@@ -19,13 +22,10 @@
   "KnowledgeUnavailableDescriptionUser": "Die Wissensdatenbank ist derzeit deaktiviert. Um die semantische Suche und die Dokumentenverarbeitung für {{aiAgents}} zu aktivieren, wenden Sie sich bitte an Ihren {{productName}}-Administrator, um den Embeddings-Anbieter zu konfigurieren.",
   "MCP": "MCP-Tools für diesen Raum",
   "MCPDescriptionServers": "Nutzen Sie {{mcpServers}}, die vom Administrator verbunden wurden, um das Chat-Erlebnis mit KI zu verbessern. {{mcpServers}} kann bei Datenextraktion, Zusammenfassungen, intelligenten Vorschlägen usw. unterstützen.",
-  "Model": "{{aiProvider}} und Modell",
   "ModelDescription": "Wählen Sie den {{aiProvider}} und das Modell, das in den Chats dieses Raumes verwendet werden soll. Diese Einstellung ist zwingend erforderlich und gilt für alle Teilnehmer.",
   "NoAccessAIAgentTitle": "Sie haben keinen Zugriff auf dieses {{aiAgent}}",
   "ResponseQualityNode": "<1>Hinweis:</1> Die Antwortqualität kann je nach Modell variieren; für beste Ergebnisse werden neuere Modelle empfohlen.",
   "ResultStorage": "Ergebnisspeicherung",
   "UploadFilesDevice": "Laden Sie Dateien von Ihrem persönlichen Gerät hoch",
-  "UploadFilesPortal": "Laden Sie Dateien von {{sectionNameFirst}} oder {{sectionNameSecond}} hoch",
-  "AgentInViewModeWarning": "Sie befinden sich im <strong>nur-Lesen</strong>-Modus für diesen {{aiAgent}}. Sie können die Ergebnisse der {{aiChat}}-Aktivitäten anderer Benutzer sehen.",
-  "InstructionsDescriptionAgentExample": "Beispiel: „Sie sind ein KI-PR-Assistent, der beim Schreiben und Bearbeiten von Pressemitteilungen hilft. Behalten Sie einen professionellen, selbstbewus und medienfreundlichen Ton bei. Heben Sie Kernbotschaften klar hervor, vermeiden Sie Fachjargon und halten Sie den Text prägnant und ansprechend.“"
+  "UploadFilesPortal": "Laden Sie Dateien von {{sectionNameFirst}} oder {{sectionNameSecond}} hoch"
 }

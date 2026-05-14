@@ -3,16 +3,17 @@
   "content": "Select an option or create one",
   "content_en_sha1_hash": "2571b4424ae499623b7168722a07d2d539dd56dc",
   "created_at": "2026-02-19T13:36:18.706Z",
-  "updated_at": "2026-04-07T23:52:59.803Z",
+  "updated_at": "2026-04-27T12:45:07.548Z",
   "comment": {
-    "text": "This text appears within a UI element, likely a button or label, offering the user two choices: select an existing option or create a new one. It's used to guide the user when they need to choose or add a tag. Translators should ensure the phrasing accurately conveys this dual action.",
+    "text": "This is a placeholder text for a dropdown or input field. It prompts the user to either choose an existing item from a list or create a new one.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:10:49.174Z"
+    "updated_at": "2026-04-11T20:43:45.536Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/components/tag-management/TagManagement.filter.tsx",
-      "line_number": 193,
+      "line_number": 195,
       "context": "lineHeight=\"16px\"\n noSelect\n >\n {showCreateTag\n ? t(\"Common:OrSelectFromAvailableMatches\")\n : t(\"Common:SelectAnOptionOrCreateOne\")}\n </Text>\n ) : null}\n </>\n );\n };",
       "module": "/packages/shared"
     }
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Bir seçim seçin' is a tautology (pleonasm) in Azerbaijani, meaning 'Select a selection'. It is redundant and sounds unnatural.",
-          "suggestion": "Seçim edin və ya yenisini yaradın"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -213,13 +208,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Chinese translation '创建一个' (create one) is grammatically incomplete in Chinese; it lacks a noun/object to complete the thought, making it sound like 'create a' instead of 'create one'.",
-          "suggestion": "选择一个选项或创建一个新选项"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -3,16 +3,17 @@
   "content": "Scopes are used to limit your app's access to all user-related data, and they'll let you specify exactly what kind of access you need.",
   "content_en_sha1_hash": "626ffa4197cd8a9b599084855d2df9504318e839",
   "created_at": "2025-05-19T21:30:54.034Z",
-  "updated_at": "2026-04-07T19:35:05.167Z",
+  "updated_at": "2026-04-23T17:24:02.003Z",
   "comment": {
-    "text": "ScopesHelp is used to describe what scopes are and how they limit app access. It appears as a tooltip or help text next to a field where users select scopes, such as in forms related to OAuth settings.",
+    "text": "This is the help text for the \"Scopes\" section in the OAuth client settings. It explains what scopes are used for when configuring an application's access permissions.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:35.140Z"
+    "updated_at": "2026-04-11T21:18:18.937Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/ScopesBlock.tsx",
-      "line_number": 239,
+      "line_number": 242,
       "context": "return (\n <StyledScopesContainer isRequiredError={isRequiredError}>\n <BlockHeader\n className=\"header\"\n header={t(\"ScopesHeader\")}\n helpButtonText={t(\"ScopesHelp\")}\n isRequired\n />\n \n <Text\n className=\"header\"",
       "module": "/packages/client"
     }

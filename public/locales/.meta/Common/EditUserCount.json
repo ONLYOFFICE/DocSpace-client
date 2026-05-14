@@ -3,17 +3,18 @@
   "content": "{{count}} {{productName}} users",
   "content_en_sha1_hash": "bae40159efb2f2263adf84c6e57307ea8d807a8a",
   "created_at": "2025-09-19T15:39:07.642Z",
-  "updated_at": "2026-04-10T08:58:38.056Z",
+  "updated_at": "2026-04-11T20:54:17.054Z",
   "comment": {
-    "text": "This key displays the number of users who have edited something, formatted as \"{{count}} {{productName}} users\". It's used within the User Statistics Dialog to show a specific count of users who have made edits, likely related to a product. Translators should ensure \"productName\" is also translated appropriately.",
+    "text": "This string displays the number of users with editing permissions. It appears within a dialog showing user statistics, where `{{count}}` is the number of users and `{{productName}}` is the product's brand name.",
     "is_auto": true,
-    "updated_at": "2025-09-19T16:00:58.292Z"
+    "updated_at": "2026-04-11T20:54:17.054Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/UserStatisticsDialog/sub-components/UserStatisticsInfo.tsx",
-      "line_number": 44,
-      "context": "const percentEditing = Math.round((totalUsers / limitUsers) * 100);\n \n const detailedEditInfo = () => {\n const portalUsersText = portalUsers\n ? t(\"EditUserCount\", {\n count: portalUsers,\n productName: t(\"ProductName\"),\n })\n : null;",
+      "line_number": 45,
+      "context": "const percentEditing = Math.round((totalUsers / limitUsers) * 100);\n \n const detailedEditInfo = () => {\n const portalUsersText = portalUsers\n ? t(\"EditUserCount\", {\n count: portalUsers,\n productName: getBrandName(\"ProductName\"),\n })\n : null;",
       "module": "/packages/shared"
     }
   ],
@@ -105,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order in Lao is incorrect, making the meaning 'Users {{count}} {{productName}}' instead of '{{count}} {{productName}} users'. In Lao, the number/count should typically precede the noun it modifies.",
-          "suggestion": "{{count}} ຜູ້ໃຊ້ {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -159,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order in Sinhala makes the sentence semantically incorrect. It reads as 'productName users [count]' instead of '[count] productName users'. In Sinhala, the number (count) should typically precede the noun phrase it modifies to convey the intended meaning.",
-          "suggestion": "{{count}} {{productName}} පරිශීලකයින්"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

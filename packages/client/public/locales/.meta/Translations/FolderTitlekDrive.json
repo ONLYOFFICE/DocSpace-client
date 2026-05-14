@@ -3,16 +3,17 @@
   "content": "kDrive directory",
   "content_en_sha1_hash": "511e7a3843fca1fac23d32cb4e3c38073aaa218a",
   "created_at": "2025-05-19T21:30:49.978Z",
-  "updated_at": "2026-04-08T21:14:35.804Z",
+  "updated_at": "2026-04-11T21:27:30.696Z",
   "comment": {
-    "text": "The translation key \"FolderTitlekDrive\" is used to display the label for a kDrive directory in various UI elements. It is typically used as the text displayed on buttons, dialog windows, or other interactive elements when interacting with a kDrive directory in the application.",
+    "text": "This is a folder title that appears in the file browser to identify a connected kDrive storage.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:33.200Z"
+    "updated_at": "2026-04-11T21:27:30.696Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 121,
+      "line_number": 122,
       "context": "case \"SharePoint\":\n return t(\"Translations:FolderTitleSharePoint\");\n case \"WebDav\":\n return t(\"Translations:FolderTitleWebDav\");\n case \"kDrive\":\n return t(\"Translations:FolderTitlekDrive\");\n case \"Yandex\":\n return t(\"Translations:FolderTitleYandex\");\n \n default:\n return key;",
       "module": "/packages/client"
     }
@@ -81,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian word 'գրացուցակ' means 'list' or 'directory' in the sense of a contact list or a list of items, whereas in the context of file storage (kDrive), 'directory' refers to a 'folder'.",
-          "suggestion": "kDrive թղթապանակ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -183,13 +178,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation is in the instrumental case ('direktorijum'), whereas the English source is a noun phrase in the nominative case. In UI labels/titles, the nominative case should be used.",
-          "suggestion": "kDrive direktorijum"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

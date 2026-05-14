@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "autoprefixer": "^10.4.21",
-    "axios": "1.15.0",
+    "axios": "1.15.2",
     "framer-motion": "^11.18.2",
     "next": "16.2.3",
     "postcss": "^8.5.6",

@@ -3,11 +3,12 @@
   "content": "Do you want to cancel uploading?",
   "content_en_sha1_hash": "a28e82059854ba65308fed5a353ef5e666701889",
   "created_at": "2025-05-19T21:30:43.388Z",
-  "updated_at": "2026-04-08T15:47:30.322Z",
+  "updated_at": "2026-04-11T20:57:35.533Z",
   "comment": {
-    "text": "This translation key is used to display a confirmation message when cancelling an uploading process. It appears in a cancel operation dialog and prompts the user to confirm cancellation of the upload process.",
+    "text": "This is a confirmation dialog message asking the user if they want to stop an ongoing file upload.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:09.725Z"
+    "updated_at": "2026-04-11T20:57:35.533Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -51,13 +52,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation refers to 'the current process' (den aktuellen Vorgang) instead of specifically 'uploading' (das Hochladen). While the code context shows a fallback to 'CancelCurrentProcess', the specific English string provided for verification is 'Do you want to cancel uploading?', making the German translation too generic and technically inaccurate for this specific key.",
-          "suggestion": "Möchten Sie das Hochladen abbrechen?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -81,25 +76,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "In French, 'téléchargement' is commonly used for both 'uploading' and 'downloading', but in a technical context, 'téléchargement' usually refers to 'downloading'. To specifically mean 'uploading', 'téléversement' should be used to avoid ambiguity.",
-          "suggestion": "Voulez-vous annuler le téléversement ?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Armenian translation is grammatically incomplete. 'բեռնել' is the infinitive verb 'to upload', but the sentence lacks the object or the noun form to make sense (e.g., 'the upload' or 'uploading process'). It translates literally to 'Do you want to interrupt to upload?'",
-          "suggestion": "Ցանկանու՞մ եք չեղարկել բեռնումը"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {

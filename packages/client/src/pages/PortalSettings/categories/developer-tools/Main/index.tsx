@@ -44,6 +44,7 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import Card from "./card";
 
 import styles from "./main.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const Main = (props: { apiBasicLink: string }) => {
   const { t, ready } = useTranslation(["Common", "Settings", "JavascriptSdk", "WebPlugins", "Webhooks", "OAuth"]);
@@ -70,13 +71,13 @@ const Main = (props: { apiBasicLink: string }) => {
       <div className={styles.main}>
         <div className={styles.header}>
           <Text fontSize="23px" fontWeight={700} lineHeight="28px">{t("Common:DeveloperTools")}</Text>
-          <Text fontSize="13px" fontWeight={400} lineHeight="20px">{t("Settings:DeveloperToolsDescription", { organizationName: t("Common:OrganizationName"), productName: t("Common:ProductName") })}</Text>
+          <Text fontSize="13px" fontWeight={400} lineHeight="20px">{t("Settings:DeveloperToolsDescription", { organizationName: getBrandName("OrganizationName"), productName: getBrandName("ProductName") })}</Text>
         </div>
         <div className={styles.grid}>
           <Card 
             icon={<DevToolsSvg />} 
             title={t("Settings:RestAPI")} 
-            description={t("Settings:RestAPIDescription", { organizationName: t("Common:OrganizationName"), productName: t("Common:ProductName") })} 
+            description={t("Settings:RestAPIDescription", { organizationName: getBrandName("OrganizationName"), productName: getBrandName("ProductName") })} 
             url={apiBasicLink}
             color={globalColors.lightBlueMain}
             linkTitle={t("Common:LearnMore")} 
@@ -85,7 +86,7 @@ const Main = (props: { apiBasicLink: string }) => {
           <Card 
             icon={<EmbedSvg />} 
             title={t("Settings:EmbedSDK")} 
-            description={t("Settings:EmbedSDKDescription", { productName: t("Common:ProductName") })} 
+            description={t("Settings:EmbedSDKDescription", { productName: getBrandName("ProductName") })} 
             url="/developer-tools/javascript-sdk" 
             color={globalColors.mainOrange}
             linkTitle={t("Settings:StartEmbedding")} 
@@ -93,7 +94,7 @@ const Main = (props: { apiBasicLink: string }) => {
           <Card 
             icon={<PluginSvg />} 
             title={t("WebPlugins:PluginSDK")} 
-            description={t("Settings:PluginDescription", { productName: t("Common:ProductName") })} 
+            description={t("Settings:PluginDescription", { productName: getBrandName("ProductName") })} 
             url="/developer-tools/plugin-sdk" 
             color={globalColors.secondGreen}
             linkTitle={t("Common:ReadInstructions")} 
@@ -101,7 +102,7 @@ const Main = (props: { apiBasicLink: string }) => {
           <Card
             icon={<WebhookSvg />}
             title={t("Webhooks:Webhooks")}
-            description={t("Settings:WebhooksDescription", { organizationName: t("Common:OrganizationName"), productName: t("Common:ProductName") })}
+            description={t("Settings:WebhooksDescription", { organizationName: getBrandName("OrganizationName"), productName: getBrandName("ProductName") })}
             url="/developer-tools/webhooks?create=true"
             color={globalColors.mainRed}
             linkTitle={t("Webhooks:CreateWebhook")}
@@ -109,7 +110,7 @@ const Main = (props: { apiBasicLink: string }) => {
           <Card
             icon={<OAuthSvg />}
             title={t("OAuth:OAuth")}
-            description={t("Settings:OAuthDescription", { organizationName: t("Common:OrganizationName"), productName: t("Common:ProductName") })}
+            description={t("Settings:OAuthDescription", { organizationName: getBrandName("OrganizationName"), productName: getBrandName("ProductName") })}
             url="/developer-tools/oauth/create"
             color={globalColors.purple}
             linkTitle={t("Settings:RegisterApp")}
@@ -117,7 +118,7 @@ const Main = (props: { apiBasicLink: string }) => {
           <Card
             icon={<KeySvg />}
             title={t("Settings:ApiKeys")}
-            description={t("Settings:ApiKeysCardDescription", { organizationName: t("Common:OrganizationName"), productName: t("Common:ProductName") })}
+            description={t("Settings:ApiKeysCardDescription", { organizationName: getBrandName("OrganizationName"), productName: getBrandName("ProductName") })}
             url="/developer-tools/api-keys?create=true"
             color={globalColors.lightGrayDark}
             linkTitle={t("Settings:CreateKey")}

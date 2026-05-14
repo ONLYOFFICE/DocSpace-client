@@ -47,6 +47,7 @@ import AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 import ServicesStore from "SRC_DIR/store/ServicesStore";
 import classNames from "classnames";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type DefaultProviderProps = {
   aiProviders?: AISettingsStore["aiProviders"];
@@ -90,11 +91,13 @@ const DefaultProviderComponent = ({
     models?: TModel[] | null,
     selectedModelId?: string | null,
   ): TOption => {
-    if (!models || !selectedModelId)
+    if (!models?.length || !selectedModelId)
       return { key: "-2", label: t("Common:NoModelsFound") };
 
     const model =
       models.find((m) => m.modelId === selectedModelId) || models[0];
+
+    if (!model) return { key: "-2", label: t("Common:NoModelsFound") };
 
     return {
       key: model.modelId,
@@ -112,7 +115,7 @@ const DefaultProviderComponent = ({
   const getTooltipContent = () => (
     <Text fontSize="12px" lineHeight="16px">
       {t("AISettings:PortalAiDisabledTooltip", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
       })}
     </Text>
   );
@@ -355,7 +358,7 @@ const DefaultProviderComponent = ({
           {t("AISettings:DefaultProviderDescription", {
             aiProvider: t("Common:AIProvider"),
             aiAgents: t("Common:AIAgents"),
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
           })}
         </Text>
 
@@ -426,7 +429,7 @@ const DefaultProviderComponent = ({
                 dataTestId="default-model-combobox"
                 dropDownTestId="default-model-dropdown"
                 isLoading={isDefaultProviderModelsLoading}
-                isDisabled={isDisabled || !defaultProviderModels}
+                isDisabled={isDisabled || !defaultProviderModels?.length}
                 directionY="both"
                 dropDownMaxHeight={300}
                 scaledOptions

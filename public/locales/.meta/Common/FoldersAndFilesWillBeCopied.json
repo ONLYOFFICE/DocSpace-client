@@ -3,16 +3,17 @@
   "content": "Folders and files will be copied in the destination",
   "content_en_sha1_hash": "ed4d4023708822fb6b8b2fba6bbc8907ef33e46a",
   "created_at": "2025-05-19T21:30:45.452Z",
-  "updated_at": "2026-04-08T09:05:22.986Z",
+  "updated_at": "2026-04-23T17:24:01.714Z",
   "comment": {
-    "text": "\"This translation key is used in a conflict resolution dialog, specifically when resolving file conflicts, and provides a message to the user indicating that folders and files will be copied in the destination.\"",
+    "text": "This is a descriptive sentence appearing in a dialog box when a user attempts to copy folders and files, informing them that the selected items will be duplicated in the chosen destination.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:07.635Z"
+    "updated_at": "2026-04-11T20:52:16.207Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
-      "line_number": 296,
+      "line_number": 306,
       "context": "const getDuplicateDescription = () => {\n return isFileDialog\n ? t(\"Common:CreateDescription\")\n : isFolderDialog\n ? t(\"Common:CreateFolderDescription\")\n : t(\"Common:FoldersAndFilesWillBeCopied\");\n };\n const getSkipDescription = () => {\n return isFileDialog\n ? t(\"Common:SkipDescription\")\n : isFolderDialog",
       "module": "/packages/client"
     }
@@ -69,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'tiedostota' is a typo/incorrect form; it should be 'tiedostot' to match the plural 'Folders and files'.",
-          "suggestion": "Kansiot ja tiedostot kopioidaan kohteeseen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -105,13 +100,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word '목표' (target/goal) is used for 'destination', which sounds unnatural in a file system context. In software UI, '대상' or '대상 폴더' is the standard term for a destination path/folder.",
-          "suggestion": "폴더와 파일이 대상 위치로 복사됩니다"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -135,13 +124,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation says 'will NOT be copied' (nie zostaną skopiowane), which is the opposite of the English source 'will be copied'.",
-          "suggestion": "Pliki i katalogi zostaną skopiowane do lokalizacji docelowej"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {

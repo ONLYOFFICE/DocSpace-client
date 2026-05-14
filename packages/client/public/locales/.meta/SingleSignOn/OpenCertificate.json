@@ -3,11 +3,12 @@
   "content": "Public Certificate",
   "content_en_sha1_hash": "aea63e2f05925daedf345ab7abde382b62df4287",
   "created_at": "2025-05-19T21:30:50.116Z",
-  "updated_at": "2026-04-08T23:11:18.054Z",
+  "updated_at": "2026-04-11T21:26:39.930Z",
   "comment": {
-    "text": "The \"OpenCertificate\" translation key is used to display the label for a certificate-related button or dialog. It appears in the modal dialog headers and body, indicating that it corresponds to an open certificate. The translation should be displayed as \"Public Certificate\".",
+    "text": "This is a label for a text area where users can input or view a public certificate, appearing in modals for adding IdP or SP certificates within Single Sign-On settings.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:12.279Z"
+    "updated_at": "2026-04-11T21:26:39.930Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -153,25 +154,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Russian translation 'Открытый сертификат' means 'Open certificate' (as in an unclosed or opened file/state), whereas the English 'Public Certificate' refers to the cryptographic concept of a 'Public Key Certificate'.",
-          "suggestion": "Публичный сертификат"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'ප්‍රසිද්ධ' (prasiddha) means 'famous' or 'well-known'. In a technical/cryptographic context, 'Public Certificate' should use the term for 'public' meaning 'accessible to the public' or 'non-private', which is 'ප්‍රසිද්ධ' (famous) vs 'පොදු' (public/common).",
-          "suggestion": "පොදු සහතිකය"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -201,13 +190,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "In a technical/cryptographic context, 'Public Certificate' refers to a 'Açık Sertifika' or 'Genel Sertifika'. 'Kamu Sertifikası' translates to 'Public Sector Certificate' or 'Government Certificate', which is a different concept.",
-          "suggestion": "Genel Sertifika"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

@@ -3,28 +3,29 @@
   "content": "Your registration email address",
   "content_en_sha1_hash": "8cc0ae7ce8d6f84fb6f6364ece769b5cac5b2cd4",
   "created_at": "2025-05-19T21:30:47.781Z",
-  "updated_at": "2026-04-08T01:40:19.032Z",
+  "updated_at": "2026-04-23T17:24:02.044Z",
   "comment": {
-    "text": "This translation key is used to display the phrase \"Your registration email address\" in various UI components, typically as a placeholder or label for an input field related to user registration. It appears in sales department request dialogs and modal dialogs for accessing portal services, prompting users to enter their registration email address.",
+    "text": "This is a placeholder text for an email input field. It appears in various registration, login, and access recovery forms, prompting the user to enter their email address.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:34:46.485Z"
+    "updated_at": "2026-04-11T20:45:21.341Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalUnavailable/index.js",
-      "line_number": 81,
-      "context": "return (\n <StyledBody>\n <RecoverAccessModalDialog\n visible={isVisible}\n t={t}\n emailPlaceholderText={t(\"Common:RegistrationEmail\")}\n textBody={t(\"PortalUnavailable:AccessingProblem\", {\n productName: t(\"Common:ProductName\"),\n })}\n onClose={onCloseDialog}\n />",
+      "line_number": 82,
+      "context": "return (\n <StyledBody>\n <RecoverAccessModalDialog\n visible={isVisible}\n t={t}\n emailPlaceholderText={t(\"Common:RegistrationEmail\")}\n textBody={t(\"PortalUnavailable:AccessingProblemContact\", {\n productName: getBrandName(\"ProductName\"),\n })}\n onClose={onCloseDialog}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/sub-components/ForgotPasswordModalDialog.tsx",
-      "line_number": 221,
+      "line_number": 224,
       "context": "}\n dataTestId=\"email_input_field\"\n >\n <EmailInput\n hasError={isShowError ? emailError : undefined}\n placeholder={t(\"Common:RegistrationEmail\")}\n isAutoFocussed\n id=\"forgot-password-modal_email\"\n name=\"e-mail\"\n size={InputSize.base}\n scale",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/Register/sub-components/RegisterModalDialog.tsx",
-      "line_number": 119,
+      "line_number": 122,
       "context": "}\n dataTestId=\"register_email_field\"\n >\n <EmailInput\n hasError={isShowError ? emailErr : undefined}\n placeholder={t(\"Common:RegistrationEmail\")}\n isAutoFocussed\n id=\"registration-modal_email\"\n name=\"e-mail\"\n size={InputSize.base}\n scale",
       "module": "/packages/login"
     }
@@ -45,25 +46,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'address' (ünvan) is missing from the translation, making it 'Your registration email' instead of 'Your registration email address'.",
-          "suggestion": "Sizin qeydiyyat elektron poçt ünvanınız"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'address' (адрес) is missing from the Bulgarian translation, making it 'Your registration email' instead of 'Your registration email address'.",
-          "suggestion": "Вашият регистрационен имейл адрес"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -75,13 +64,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The German translation 'Ihr Registrierungsemail' translates to 'Your registration email', missing the word 'address' (Adresse). While often used interchangeably in casual speech, in a UI label context, 'email address' is more precise.",
-          "suggestion": "Ihre Registrierungs-E-Mail-Adresse"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -105,13 +88,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The possessive adjective 'Your' is missing from the translation, which changes the tone from a direct instruction/label to a generic noun phrase.",
-          "suggestion": "Votre adresse e-mail d'enregistrement"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -123,13 +100,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The gender of the noun 'email' is incorrect in Italian. 'Email' is feminine, so the possessive adjective 'Il tuo' (masculine) should be 'La tua' (feminine).",
-          "suggestion": "La tua email di registrazione"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -141,13 +112,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation '가입 이메일' (Registration email) omits the possessive 'Your', which is part of the source string 'Your registration email address'. While concise, it loses the specific nuance of the English source.",
-          "suggestion": "사용자의 가입 이메일 주소"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -165,13 +130,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'address' is missing from the Dutch translation, which changes the meaning from 'email address' to just 'email'.",
-          "suggestion": "Uw registratie e-mailadres"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -183,13 +142,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'address' (endereço) is missing from the translation, which changes the meaning from 'email address' to just 'registration email'.",
-          "suggestion": "O seu endereço de e-mail de registo"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -207,25 +160,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'address' (адрес) is missing from the Russian translation, which changes the meaning from 'email address' to just 'email'.",
-          "suggestion": "Ваш регистрационный адрес электронной почты"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'Your' is missing from the Sinhala translation, which changes the direct address of the label.",
-          "suggestion": "ඔබේ ලියාපදිංචි වි-තැපැල් ලිපිනය"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

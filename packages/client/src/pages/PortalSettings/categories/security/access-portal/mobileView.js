@@ -33,6 +33,7 @@ import { CategoryItem } from "@docspace/ui-kit/components/category-item";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 import { MainContainer } from "../StyledSecurity";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const MobileView = (props) => {
   const { t, withoutExternalLink } = props;
@@ -41,7 +42,7 @@ const MobileView = (props) => {
 
   useEffect(() => {
     setDocumentTitle(
-      t("PortalAccess", { productName: t("Common:ProductName") }),
+      t("PortalAccess", { productName: getBrandName("ProductName") }),
     );
   }, []);
 
@@ -99,7 +100,7 @@ const MobileView = (props) => {
             i18nKey="InvitationSettingsMobile"
             ns="Settings"
             t={t}
-            values={{ productName: t("Common:ProductName") }}
+            values={{ productName: getBrandName("ProductName") }}
           />
         }
         url="/portal-settings/security/access-portal/invitation-settings"
@@ -130,7 +131,7 @@ const MobileView = (props) => {
       <CategoryItem
         title={t("SessionLifetime")}
         subtitle={t("SessionLifetimeMobileDescription", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
         })}
         url="/portal-settings/security/access-portal/lifetime"
         onClickLink={onClickLink}

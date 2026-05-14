@@ -3,16 +3,17 @@
   "content": "Define quota per room",
   "content_en_sha1_hash": "47a3cb53c72a46cf615a95cb8036dc8ac249a47d",
   "created_at": "2025-05-19T21:30:51.096Z",
-  "updated_at": "2026-04-09T03:32:21.323Z",
+  "updated_at": "2026-04-11T21:24:52.680Z",
   "comment": {
-    "text": "This translation key defines the label for a button that allows users to set the quota per room. The label is used on a form element where users can define their storage limits. It appears in the UI as part of a settings dialog or form page.",
+    "text": "This is the label for a toggle switch that enables or disables the ability to set a storage quota for individual rooms.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:25.178Z"
+    "updated_at": "2026-04-11T21:24:52.680Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerRoom.js",
-      "line_number": 43,
+      "line_number": 44,
       "context": ": {};\n \n return (\n <QuotaPerItemComponent\n formLabel={t(\"QuotaPerRoom\")}\n toggleLabel={t(\"DefineQuotaPerRoom\")}\n disableQuota={() => setRoomQuota(-1, t)}\n saveQuota={(size) => setRoomQuota(size, t)}\n {...initialSizeProp}\n isQuotaSet={isDefaultRoomsQuotaSet}\n tabIndex={1}",
       "module": "/packages/client"
     }
@@ -51,13 +52,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German word 'Quote' means 'quotation' (as in a price quote or a literary quote). The correct technical term for a storage limit or allocation is 'Kontingent' or 'Quota'.",
-          "suggestion": "Kontingent pro Raum definieren"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -159,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'සලාකය' (salākaya) means 'portion' or 'share' in a general sense, but in a technical/computing context for storage limits, 'quota' should be translated as 'කොටස' (quota/limit) or more accurately 'සීමාව' (limit). More importantly, 'දක්වන්න' means 'to show/display', whereas the English 'Define' means 'to set/establish'.",
-          "suggestion": "කාමරයකට කොටසක් නියම කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

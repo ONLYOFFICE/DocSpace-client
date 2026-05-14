@@ -43,6 +43,7 @@ import {
   ServicesList,
   BillingRoot,
 } from "@docspace/ui-kit/billing";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const PaymentsPage = (props) => {
   const {
@@ -81,7 +82,7 @@ const PaymentsPage = (props) => {
     {
       id: "portal-payments",
       name: t("Common:PortalTariffPlan", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
       }),
       content: <MainTariff />,
       onClick: () => {

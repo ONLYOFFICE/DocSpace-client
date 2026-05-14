@@ -34,6 +34,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 
 import { useTranslation } from "react-i18next";
 import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const InfoText = styled(Text).attrs(injectDefaultTheme)`
   max-width: 660px;
@@ -51,7 +52,7 @@ const WebhookInfo = (props) => {
 		<div>
 			<InfoText as="p">
 				{t("WebhooksInfo", {
-					productName: t("Common:ProductName"),
+					productName: getBrandName("ProductName"),
 					organizationName: logoText,
 				})}
 			</InfoText>

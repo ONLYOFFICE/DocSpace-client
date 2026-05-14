@@ -3,13 +3,20 @@
   "content": "Done",
   "content_en_sha1_hash": "e9b450d14bc2363d292c84f17cfad5cfbd58a458",
   "created_at": "2025-05-19T21:30:44.608Z",
-  "updated_at": "2026-04-08T11:48:21.328Z",
+  "updated_at": "2026-04-23T17:24:01.863Z",
   "comment": {
-    "text": "This translation key is used to display the phrase \"Done\" in various contexts throughout the application, typically as a confirmation message or label. It appears on buttons, such as the OK button and navigation headers, where it indicates completion or success of an action. Translators should provide a complete and accurate translation that maintains consistency across these different UI elements.",
+    "text": "Button label or toast message indicating the completion of an action.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:38.758Z"
+    "updated_at": "2026-04-11T20:54:50.791Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/uploader/index.tsx",
+      "line_number": 333,
+      "context": "{getCommonTranslation(\"Open\")}\n </a>\n </>\n )}\n </>,\n getCommonTranslation(\"Done\"),\n );\n \n onUploadSuccess?.(uploadedFiles);\n } catch (err) {\n const message =",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/dialogs/SubmitToFormGallery/index.js",
       "line_number": 118,
@@ -45,6 +52,12 @@
       "line_number": 107,
       "context": "await retryWebhook(item.id);\n await fetchHistoryItems({\n ...(historyFilters ? formatFilters(historyFilters) : {}),\n configId: id,\n });\n toastr.success(t(\"WebhookRedilivered\"), <b>{t(\"Common:Done\")}</b>);\n };\n \n const contextOptions = [\n {\n id: \"webhook-details\",",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsTour.ts",
+      "line_number": 138,
+      "context": "targetWaitTimeout: 15000,\n },\n locale: {\n back: t(\"Common:Back\"),\n close: t(\"Common:CloseButton\"),\n last: t(\"Common:Done\"),\n next: t(\"Common:Next\"),\n skip: t(\"Common:Skip\"),\n },\n });",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -63,13 +76,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'İcra edildi' means 'Executed' or 'Performed', which is too formal and specific for a general UI button or success toast. For a 'Done' button or a simple success message, 'Hazır' or 'Tamam' is more appropriate for UI consistency.",
-          "suggestion": "Tamam"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -93,13 +100,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Τέλος' (meaning 'The end' or 'Finish') is too dramatic for a UI button or success toast. In a software context, 'Done' as a button or confirmation should be 'Ολοκληρώθηκε' (Completed) or 'Εντάξει' (OK).",
-          "suggestion": "Ολοκληρώθηκε"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -153,13 +154,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Gatavs' means 'Ready' (masculine). In the context of a button or a success message (e.g., 'Done' as in 'Task completed'), 'Done' should be translated as 'Gatavs' only if it means 'Ready', but for completion/success, 'Done' is typically 'Gatavots' or 'Izpildīts'. More importantly, 'Gatavs' is gender-specific (masculine), which is inappropriate for a neutral UI action/status.",
-          "suggestion": "Gatavots"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -195,13 +190,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word 'Done' (meaning 'Completed' or 'Finished') is translated as 'Успешно' (meaning 'Successfully'). While related, 'Done' in UI contexts like buttons or headers should typically be 'Готово'. 'Успешно' is an adverb describing how an action was performed, whereas 'Done' describes the state of the task.",
-          "suggestion": "Готово"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {

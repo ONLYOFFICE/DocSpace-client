@@ -3,11 +3,12 @@
   "content": "The decryption process in progress",
   "content_en_sha1_hash": "b86e0f9fb7d337435ac35794b69427793f2c847c",
   "created_at": "2025-08-04T07:29:08.253Z",
-  "updated_at": "2026-04-08T12:25:39.792Z",
+  "updated_at": "2026-04-11T20:55:29.539Z",
   "comment": {
-    "text": "This text appears as a header within the Decryption Portal, indicating that the decryption process is currently running. It informs the user that the decryption is in progress. Translators should ensure the tone remains informative and reassuring.",
+    "text": "This is a dialog title that appears when a document is being decrypted.",
     "is_auto": true,
-    "updated_at": "2025-08-04T08:11:24.853Z"
+    "updated_at": "2026-04-11T20:55:29.539Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Decriptə' is a misspelling of the technical term 'Dekriptə'.",
-          "suggestion": "Dekriptə etmə prosesi davam edir"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {

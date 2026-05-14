@@ -3,17 +3,18 @@
   "content": "As an owner/admin you can view and manage all API keys in this {{productName}}.",
   "content_en_sha1_hash": "5593ee7bc8d8372051b5728cbe1f5f45794ca38f",
   "created_at": "2025-05-19T21:30:50.545Z",
-  "updated_at": "2026-04-10T08:58:38.063Z",
+  "updated_at": "2026-04-11T21:25:40.474Z",
   "comment": {
-    "text": "This translation key is used for describing API keys management features within a portal settings page. It will be displayed to owners/admins as a tooltip or description in the UI. The context suggests it appears on a page related to developer tools and settings.",
+    "text": "This is a descriptive text displayed on the API Keys settings page. It informs the user that they can manage API keys within the product, with `{{productName}}` being replaced by the brand name.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:47.119Z"
+    "updated_at": "2026-04-11T21:25:40.474Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/index.tsx",
-      "line_number": 159,
-      "context": "className={classNames(styles.apiKeysDescription, {\n withEmptyScreen: !!error,\n })}\n >\n <Text lineHeight=\"20px\" className={styles.apiKeysText}>\n {t(\"Settings:ApiKeysDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Text\n className={classNames(",
+      "line_number": 160,
+      "context": "className={classNames(styles.apiKeysDescription, {\n withEmptyScreen: !!error,\n })}\n >\n <Text lineHeight=\"20px\" className={styles.apiKeysText}>\n {t(\"Settings:ApiKeysDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <Text\n className={classNames(",
       "module": "/packages/client"
     }
   ],
@@ -99,13 +100,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation changes the subject from 'As an owner/admin' (the user's role) to 'API key owner/admin' (a specific role for the keys), which alters the intended meaning of the permission description.",
-          "suggestion": "소유자/관리자로서 이 {{productName}}의 모든 API 키를 확인 및 관리할 수 있습니다."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -147,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'all' (toate) is missing from the Romanian translation, which changes the scope of the permission described.",
-          "suggestion": "În calitate de proprietar/administrator puteți vedea și gestiona toate cheile API în {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

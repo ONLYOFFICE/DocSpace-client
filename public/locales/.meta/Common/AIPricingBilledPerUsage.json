@@ -3,13 +3,21 @@
   "content": "Usage-based billing",
   "content_en_sha1_hash": "4ffaad3abe39b74d187676c8855c97154a556cae",
   "created_at": "2026-04-10T13:53:44.464Z",
-  "updated_at": "2026-04-10T13:53:44.464Z",
+  "updated_at": "2026-04-23T17:24:02.177Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a short label indicating that pricing for a service is determined by its usage. It appears in the billing section.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:59:58.082Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "line_number": 215,
+      "context": "return t(\"AIPricingAvailableCredits\", {\n price: formatAiServiceCurrency(),\n });\n }\n \n return t(\"AIPricingBilledPerUsage\");\n default:\n return \"\";\n }\n };",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

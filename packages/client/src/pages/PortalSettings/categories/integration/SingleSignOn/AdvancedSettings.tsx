@@ -32,6 +32,8 @@ import { inject, observer } from "mobx-react";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { getBrandName } from "@docspace/shared/constants/brands";
+import { getConstName } from "@docspace/shared/constants/consts";
 
 interface InjectedProps {
 	hideAuthPage: boolean;
@@ -110,8 +112,8 @@ const AdvancedSettings = (props: InjectedProps) => {
 				/>
 				<HelpButton
 					tooltipContent={t("Settings:DisableEmailDescription", {
-						sectionName: t("Common:SSO"),
-						productName: t("Common:ProductName"),
+						sectionName: getConstName("SSO"),
+						productName: getBrandName("ProductName"),
 					})}
 					dataTestId="disable_email_verification_help_button"
 				/>

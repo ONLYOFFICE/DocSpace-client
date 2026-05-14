@@ -3,11 +3,12 @@
   "content": "Copy public link",
   "content_en_sha1_hash": "a06b066cea1096a0cf9ea23b4ac87cb7383239a1",
   "created_at": "2025-05-19T21:30:43.800Z",
-  "updated_at": "2026-04-08T14:05:11.419Z",
+  "updated_at": "2026-04-11T20:56:13.467Z",
   "comment": {
-    "text": "This translation key is used for a button that copies a public link when clicked. In the context of a file upload process, this link can be shared publicly to provide quick access to the uploaded content. It appears as a primary button in a dialog box, allowing users to easily share their files.",
+    "text": "This is a button label that allows users to copy a public link to a newly created PDF form.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:55.104Z"
+    "updated_at": "2026-04-11T20:56:13.467Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

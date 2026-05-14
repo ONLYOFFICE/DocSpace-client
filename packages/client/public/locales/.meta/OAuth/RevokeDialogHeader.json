@@ -3,11 +3,12 @@
   "content": "Revoke token",
   "content_en_sha1_hash": "9b8466169cf13a97ddbd21c83909af55a5a8e71a",
   "created_at": "2025-05-19T21:30:54.026Z",
-  "updated_at": "2026-04-07T19:35:05.167Z",
+  "updated_at": "2026-04-11T21:18:21.488Z",
   "comment": {
-    "text": "The translation key \"RevokeDialogHeader\" is used to display the text \"Revoke token\" in a modal dialog header. It appears when revoking a developer token and serves as a label for the revoke action. Translators should provide an equivalent phrase that communicates this same action in the user's native language.",
+    "text": "This is the title of a dialog box that appears when a user is about to revoke an OAuth token. It also serves as the label for the menu option that triggers this action.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:36.193Z"
+    "updated_at": "2026-04-11T21:18:21.488Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

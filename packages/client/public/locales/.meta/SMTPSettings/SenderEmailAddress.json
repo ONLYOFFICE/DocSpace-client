@@ -3,11 +3,12 @@
   "content": "Sender Email Address",
   "content_en_sha1_hash": "6024d73decdbc08c243c279344fce41f143a2909",
   "created_at": "2025-05-19T21:30:53.309Z",
-  "updated_at": "2026-04-08T21:45:19.233Z",
+  "updated_at": "2026-04-11T21:21:03.476Z",
   "comment": {
-    "text": "This translation key represents the label for an email address input field in a user interface, likely found within settings or configuration pages. It is used to display the prompt \"Sender Email Address\" on-screen, guiding users to enter their sender's email address.",
+    "text": "This is a label for an input field where the user enters the email address that will appear as the sender of emails sent from the system.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:59.170Z"
+    "updated_at": "2026-04-11T21:21:03.476Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

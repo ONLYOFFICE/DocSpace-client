@@ -36,7 +36,7 @@ export type TourStepData = {
 
 export type TourStepCallbacks = {
   openCompletedFolder: () => void;
-  navigate: (path: string) => void;
+  getSignal: () => AbortSignal | undefined;
 };
 
 export type TourStepFlags = {
@@ -44,10 +44,21 @@ export type TourStepFlags = {
   showLibrary: boolean;
   showSettings: boolean;
   showMenu: boolean;
+  isTouch: boolean;
 };
 
-function openContextMenu(): Promise<void> {
-  // Find the first tile and right-click it to open context menu
+function isAbortError(err: unknown) {
+  return err instanceof DOMException && err.name === "AbortError";
+}
+
+function silenceNonAbort(err: unknown) {
+  if (!isAbortError(err) && process.env.NODE_ENV !== "production") {
+    // eslint-disable-next-line no-console
+    console.warn("[forms tour] waitForElement failed:", err);
+  }
+}
+
+function openContextMenu(signal?: AbortSignal): Promise<void> {
   const tile = document.querySelector('[data-testid="tile"]') as HTMLElement | null;
   if (!tile) return Promise.resolve();
 
@@ -61,9 +72,9 @@ function openContextMenu(): Promise<void> {
   });
   tile.dispatchEvent(event);
 
-  return waitForElement("#option_view")
+  return waitForElement("#option_view", 3000, signal)
     .then(() => {})
-    .catch(() => {});
+    .catch(silenceNonAbort);
 }
 
 function contextMenuStep(
@@ -77,23 +88,24 @@ function contextMenuStep(
     target: `#${targetId}`,
     spotlightTarget: () => {
       const item = document.querySelector(`#${targetId}`);
-      // Walk up to find the context menu container (ul with role)
       const ul = item?.closest("ul");
       return (ul as HTMLElement) ?? null;
     },
     spotlightPadding: 8,
-    placement: "right" as const,
+    placement: "auto" as const,
     content,
     title,
     data: { page } satisfies TourStepData,
     skipBeacon: true,
     before: async () => {
-      callbacks?.navigate(page);
-      await waitForElement('[data-tour="forms-grid"]', 3000).catch(() => {});
+      const signal = callbacks?.getSignal();
+      await waitForElement('[data-tour="forms-grid"]', 3000, signal).catch(
+        silenceNonAbort,
+      );
       if (!document.querySelector(`#${targetId}`)) {
-        await openContextMenu();
+        await openContextMenu(signal);
       }
-      await waitForElement(`#${targetId}`, 3000).catch(() => {});
+      await waitForElement(`#${targetId}`, 3000, signal).catch(silenceNonAbort);
       document
         .querySelector(`#${targetId}`)
         ?.classList.add("tour-outline-item");
@@ -112,7 +124,7 @@ function navSectionStep(
   content: string,
   showMenu: boolean,
   callbacks?: TourStepCallbacks,
-  extraBefore?: () => Promise<void>,
+  extraBefore?: (signal?: AbortSignal) => Promise<void>,
 ): Step {
   const path = `/forms/${section}`;
   const navItemSelector = `#forms-nav-${section}`;
@@ -123,9 +135,6 @@ function navSectionStep(
     target,
     spotlightTarget: showMenu
       ? () => {
-          // When sidebar shows text, spotlight the article item container (full-width nav item).
-          // When sidebar is icon-only (narrow), spotlight the invisible content-header anchor
-          // instead — it sits directly behind the visible section title in the header.
           const articleContainer = document.querySelector("#article-container");
           const isTextVisible =
             articleContainer?.getAttribute("data-show-text") === "true";
@@ -135,9 +144,6 @@ function navSectionStep(
             return (wrapper?.firstElementChild as HTMLElement) ?? wrapper;
           }
 
-          // The tourAnchor CSS now mirrors Navigation .heading at every breakpoint
-          // (18px desktop/mobile, 21px tablet), so its getBoundingClientRect()
-          // always matches the visible title text.
           return document.querySelector(anchorSelector) as HTMLElement | null;
         }
       : undefined,
@@ -147,14 +153,17 @@ function navSectionStep(
     data: { page: path } satisfies TourStepData,
     skipBeacon: true,
     before: async () => {
+      const signal = callbacks?.getSignal();
       if (!showMenu) {
-        callbacks?.navigate(path);
-        await waitForElement(anchorSelector).catch(() => {});
+        await waitForElement(anchorSelector, 10000, signal).catch(
+          silenceNonAbort,
+        );
       }
-      if (extraBefore) await extraBefore();
-      // Outline the visible nav item (invisible anchors don't need it)
+      if (extraBefore) await extraBefore(signal);
       if (showMenu) {
-        await waitForElement(navItemSelector).catch(() => {});
+        await waitForElement(navItemSelector, 10000, signal).catch(
+          silenceNonAbort,
+        );
         document
           .querySelector(navItemSelector)
           ?.classList.add("tour-outline-item");
@@ -175,10 +184,6 @@ function settingsStep(
   callbacks?: TourStepCallbacks,
 ): Step {
   const path = `/forms/settings/${subSection}`;
-  // Wait for the *page content* element, not the tab — the tab is always in the
-  // DOM (Tabs renders all items at once), so waiting for it resolves before the
-  // URL actually changes.  The page wrapper is unmounted/remounted on each route
-  // transition, so it only appears once navigation has fully completed.
   const pageSelector = `[data-tour="settings-${subSection}"]`;
   const tabSelector = `[data-testid="${subSection}_tab"]`;
   const containerSelector = '[data-tour="settings-spotlight"]';
@@ -192,8 +197,8 @@ function settingsStep(
     data: { page: path } satisfies TourStepData,
     skipBeacon: true,
     before: async () => {
-      callbacks?.navigate(path);
-      await waitForElement(pageSelector);
+      const signal = callbacks?.getSignal();
+      await waitForElement(pageSelector, 10000, signal).catch(silenceNonAbort);
       (document.querySelector(tabSelector) as HTMLElement | null)
         ?.setAttribute("data-tour-active", "true");
     },
@@ -210,11 +215,15 @@ export function getTourSteps(
   callbacks?: TourStepCallbacks,
   flags?: TourStepFlags,
 ): Step[] {
-  const { canCreate = true, showLibrary = true, showSettings = true, showMenu = true } =
-    flags ?? {};
+  const {
+    canCreate = true,
+    showLibrary = true,
+    showSettings = true,
+    showMenu = true,
+    isTouch = false,
+  } = flags ?? {};
 
   return [
-    // My Forms
     navSectionStep(
       "my-forms",
       t("Common:MyForms"),
@@ -225,7 +234,6 @@ export function getTourSteps(
       showMenu,
       callbacks,
     ),
-    // Plus button — only with Create permission
     canCreate && {
       target: '[data-testid="plus-button"]',
       content: t(
@@ -236,8 +244,8 @@ export function getTourSteps(
       data: { page: "/forms/my-forms" } satisfies TourStepData,
       skipBeacon: true,
     },
-    // Context menu — Ask from DB — only with Create permission
     canCreate &&
+      !isTouch &&
       contextMenuStep(
         "option_ask-from-db",
         t("Common:TourCtxAskFromDBTitle", "Ask from DB"),
@@ -248,7 +256,6 @@ export function getTourSteps(
         "/forms/my-forms",
         callbacks,
       ),
-    // In Progress
     navSectionStep(
       "in-progress",
       t("Common:InProgress"),
@@ -259,7 +266,6 @@ export function getTourSteps(
       showMenu,
       callbacks,
     ),
-    // Completed Forms
     navSectionStep(
       "completed-forms",
       t("Common:CompletedForms"),
@@ -270,7 +276,6 @@ export function getTourSteps(
       showMenu,
       callbacks,
     ),
-    // Inside completed folder + AI Chat
     {
       target: '[data-tour="forms-grid"]',
       content: t(
@@ -284,11 +289,13 @@ export function getTourSteps(
       } satisfies TourStepData,
       skipBeacon: true,
       before: async () => {
+        const signal = callbacks?.getSignal();
         callbacks?.openCompletedFolder();
-        await waitForElement('[data-tour="forms-grid"]');
+        await waitForElement('[data-tour="forms-grid"]', 10000, signal).catch(
+          silenceNonAbort,
+        );
       },
     },
-    // Library — only if visible
     showLibrary &&
       navSectionStep(
         "library",
@@ -300,7 +307,6 @@ export function getTourSteps(
         showMenu,
         callbacks,
       ),
-    // Settings — Billing — only for Owner/Admin
     showSettings &&
       settingsStep(
         "billing",
@@ -311,7 +317,6 @@ export function getTourSteps(
         ),
         callbacks,
       ),
-    // Settings — AI Agent — only for Owner/Admin
     showSettings &&
       settingsStep(
         "ai-agent",
@@ -322,7 +327,6 @@ export function getTourSteps(
         ),
         callbacks,
       ),
-    // Settings — Access — only for Owner/Admin
     showSettings &&
       settingsStep(
         "access",
@@ -333,7 +337,6 @@ export function getTourSteps(
         ),
         callbacks,
       ),
-    // Settings — Collect Data — only for Owner/Admin
     showSettings &&
       settingsStep(
         "collect-data",

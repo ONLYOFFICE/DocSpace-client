@@ -3,16 +3,17 @@
   "content": "Backup can be saved to your third-party account (Dropbox, Box.com, OneDrive or Google Drive). You need to connect your third-party account (Dropbox, Box.com, OneDrive or Google Drive) before you will be able to save your backup there.",
   "content_en_sha1_hash": "c0e812cbda982e696e4ea4d91c8c7d55b6033146",
   "created_at": "2025-05-26T07:15:48.804Z",
-  "updated_at": "2026-04-07T21:51:35.704Z",
+  "updated_at": "2026-04-12T15:43:17.803Z",
   "comment": {
-    "text": "This translation key is used to describe third-party backup storage options. It informs users that they need to connect their third-party account to save backups there. This message appears in the UI on certain pages of the auto-backup and manual-backup processes, particularly when selecting a third-party storage type.",
+    "text": "This is a descriptive text that explains how to save a backup to a third-party cloud storage service. It appears below the option to select a third-party account for backup.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:03:13.581Z"
+    "updated_at": "2026-04-11T20:41:08.153Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 556,
+      "line_number": 557,
       "context": "className={classNames(\n styles.backupDescription,\n \"backup-description\",\n )}\n >\n {t(\"Common:ThirdPartyResourceDescription\")}\n </Text>\n {isCheckedThirdParty ? (\n <ThirdPartyModule\n {...(setDefaultFolderId && { setDefaultFolderId })}\n setSelectedFolder={setSelectedFolder}",
       "module": "/packages/shared"
     },
@@ -51,13 +52,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The second sentence in the Czech translation is incomplete. It ends abruptly after 'musíte účet třetí strany (Dropbox, Box.com, OneDrive nebo Disk Google)', missing the verb 'propojit' (to connect) which is essential to the meaning.",
-          "suggestion": "Zálohu lze uložit na účet třetí strany (Dropbox, Box.com, OneDrive nebo Disk Google). Předtím, než tam budete moci zálohu uložit, musíte účet třetí strany (Dropbox, Box.com, OneDrive nebo Disk Google) propojit."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -93,13 +88,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'backup' is translated inconsistently. In the first sentence, it is 'Պահուստավորում' (the process of backing up), but in the second sentence, it is 'պահեստավորումը' (storage), which changes the meaning from 'saving your backup' to 'saving your storage'.",
-          "suggestion": "Պահուստավորումը կարող է պահպանվել ձեր երրորդ կողմի հաշվում (Dropbox, Box.com, OneDrive կամ Google Drive): Դուք պետք է միացնեք ձեր երրորդ կողմի հաշիվը (Dropbox, Box.com, OneDrive կամ Google Drive), նախքան Դուք կկարողանաք այնտեղ պահել Ձեր պահուստային պատճենը:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {

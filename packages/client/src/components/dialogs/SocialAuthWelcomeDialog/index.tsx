@@ -21,6 +21,7 @@ import {
   StyledInfoRow,
   StyledModalDialog,
 } from "./StyledSocialAuthWelcome";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 interface SocialAuthWelcomeDialogProps extends WithTranslation {
   visible: boolean;
@@ -93,7 +94,7 @@ const SocialAuthWelcomeDialogComponent = ({
     >
       <ModalDialog.Header>
         {t("Common:EmptyRootRoomHeader", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
         })}
       </ModalDialog.Header>
       <ModalDialog.Body>
@@ -116,7 +117,7 @@ const SocialAuthWelcomeDialogComponent = ({
             <StyledInfoRow className="welcome-product-name">
               <Text className="welcome-text">
                 {t("SocialAuthWelcomeDialog:ProductNameDetail", {
-                  productName: t("Common:ProductName"),
+                  productName: getBrandName("ProductName"),
                 })}
               </Text>
               <Text fontWeight="600" truncate className="welcome-text">
@@ -216,7 +217,7 @@ const SocialAuthWelcomeDialogComponent = ({
           id="continue-to-docspace"
           className="auth-social-button"
           label={t("SocialAuthWelcomeDialog:ContinueToProduct", {
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
           })}
           primary
           onClick={onContinueClick}

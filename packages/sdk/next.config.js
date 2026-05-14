@@ -53,8 +53,8 @@ const isDev = process.env.NODE_ENV !== productionMode;
 
 const nextConfig = {
   basePath: "/sdk",
-  typescript: {
-    ignoreBuildErrors: true,
+  outputFileTracingIncludes: {
+    "/forms/**": ["./src/app/(forms)/_styles/*.scss"],
   },
   serverExternalPackages: [
     "nconf",
@@ -98,7 +98,37 @@ const nextConfig = {
 
     if (isProduction) {
       config.optimization = {
-        splitChunks: { chunks: "all" },
+        splitChunks: {
+          chunks: "all",
+          cacheGroups: {
+            defaultVendors: {
+              test: /[\\/]node_modules[\\/]/,
+              priority: -10,
+              reuseExistingChunk: true,
+            },
+            default: {
+              minChunks: 2,
+              priority: -20,
+              reuseExistingChunk: true,
+            },
+            aiChat: {
+              test: /[\\/](?:ai-agent[\\/]chat|react-markdown|react-syntax-highlighter|refractor|katex|rehype-[^\\/]+|remark-[^\\/]+|hast-util-[^\\/]+|mdast-util-[^\\/]+|unified|parse5|linkify-react|linkifyjs|property-information)[\\/]/,
+              name: "ai-chat-vendor",
+              chunks: "async",
+              priority: 30,
+              reuseExistingChunk: true,
+              enforce: true,
+            },
+            firebase: {
+              test: /[\\/](?:@firebase|firebase[\\/]compat)[\\/]/,
+              name: "firebase-vendor",
+              chunks: "async",
+              priority: 30,
+              reuseExistingChunk: true,
+              enforce: true,
+            },
+          },
+        },
         minimize: true,
         minimizer: [
           new CssMinimizerPlugin({
@@ -236,3 +266,4 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 });
 
 module.exports = withBundleAnalyzer(nextConfig);
+

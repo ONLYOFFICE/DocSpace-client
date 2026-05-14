@@ -3,11 +3,12 @@
   "content": "Third-party {{service}} is deleted",
   "content_en_sha1_hash": "d86937aacc3666d3c688a15acd671e3d6e2dafd7",
   "created_at": "2025-05-26T07:15:48.633Z",
-  "updated_at": "2026-04-07T22:14:26.099Z",
+  "updated_at": "2026-04-12T16:43:10.060Z",
   "comment": {
-    "text": "This translation key is used to display a success message when a third-party service is deleted. It will appear as a toast notification in a delete confirmation dialog.",
+    "text": "This is a toast message confirming the successful deletion of a third-party service. The `{{service}}` variable will be replaced with the name of the deleted service.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:03:31.489Z"
+    "updated_at": "2026-04-11T20:41:37.130Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation uses 'silinir' (is being deleted/is deleting), which implies an ongoing process, whereas the English 'is deleted' implies a completed action (success message).",
-          "suggestion": "Üçüncü tərəf {{service}} silindi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -57,13 +52,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation uses 'deaktiviert' (deactivated) instead of 'gelöscht' (deleted), which changes the meaning of the action.",
-          "suggestion": "{{service}} wurde gelöscht"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -81,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation uses the present tense 'poistetaan' (is being deleted / is deleted as a general fact), whereas the context specifies this is a success message for a completed action. It should use the past tense 'poistettu' (has been deleted).",
-          "suggestion": "Kolmannen osapuolen {{service}} on poistettu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -147,13 +130,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'eliminado' (eliminated/exterminated) is semantically incorrect for a software context. In UI/UX, 'deleted' should be translated as 'excluído' or 'removido'.",
-          "suggestion": "O {{service}} de terceiros foi excluído"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -171,25 +148,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Russian word 'отключен' means 'disabled' or 'disconnected', whereas the English word 'deleted' means 'removed/deleted' (удален). This changes the meaning of the action performed.",
-          "suggestion": "Сторонний сервис {{service}} удален"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'මැකිණි' (makini) means 'faded' or 'vanished' (like ink or a memory), which is inappropriate for a software action like 'deleted'. The correct term for deleting a service/account is 'මකා දමන ලදී' or 'ඉවත් කරන ලදී'.",
-          "suggestion": "{{service}} තෙවන පාර්ශ්වය මකා දමන ලදී"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -201,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Tretja oseba' means 'Third person', whereas the English 'Third-party' in this context refers to an external service or provider. 'Tretja oseba' implies a human being, which is incorrect for a software service.",
-          "suggestion": "Tretja stran {{service}} je izbrisana"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -219,13 +178,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Treća strana' literally means 'Third party' as in a person or entity, whereas in this technical context, it refers to a 'Third-party service'. The current translation sounds like 'The third party {{service}} is deleted', which is semantically incorrect in Serbian.",
-          "suggestion": "Trećestranska {{service}} je obrisana"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

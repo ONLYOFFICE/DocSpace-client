@@ -29,7 +29,7 @@ async function getAvailableLanguages(projectName) {
     const projectPath = resolveProjectPath(projectName);
     const entries = await fs.readdir(projectPath, { withFileTypes: true });
     return entries
-      .filter((entry) => entry.isDirectory() && entry.name !== ".meta")
+      .filter((entry) => entry.isDirectory() && entry.name !== ".meta" && entry.name !== ".constants")
       .map((entry) => entry.name);
   } catch (error) {
     console.error(

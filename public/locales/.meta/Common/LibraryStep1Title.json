@@ -3,13 +3,27 @@
   "content": "Choose a template",
   "content_en_sha1_hash": "b65c748ea14d63092341a8182d27fba25bfe8f23",
   "created_at": "2026-03-31T15:18:14.845Z",
-  "updated_at": "2026-04-08T06:03:56.016Z",
+  "updated_at": "2026-04-23T17:24:02.136Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is the title for the first step in a multi-step process, likely for creating a new form. It instructs the user to select a template.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:50:07.010Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/library-landing/HeroSection.tsx",
+      "line_number": 56,
+      "context": "}: HeroSectionProps) => {\n const { t } = useTranslation(\"Common\");\n \n const steps = [\n {\n title: t(\"Common:LibraryStep1Title\"),\n desc: t(\"Common:LibraryStep1Desc\", { count: templatesCount, language }),\n },\n {\n title: t(\"Common:LibraryStep2Title\"),\n desc: t(\"Common:LibraryStep2Desc\"),",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/forms/library/[langId]/[categoryId]/template/[templateId]/page.client.tsx",
+      "line_number": 251,
+      "context": "<ol className={styles.stepsList}>\n <li className={styles.stepItem}>\n <span className={styles.stepNumber}>1</span>\n <div>\n <div className={styles.stepTitle}>\n {t(\"Common:LibraryStep1Title\")}\n </div>\n <div className={styles.stepDesc}>\n {t(\"Common:LibraryStep1DescShort\")}\n </div>\n </div>",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -158,13 +172,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'predlago' is in the wrong grammatical case. In Slovenian, after the verb 'izberite' (choose), the direct object should be in the accusative case: 'predlogo'.",
-          "suggestion": "Izberite predlogo"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

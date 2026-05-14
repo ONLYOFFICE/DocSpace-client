@@ -35,6 +35,7 @@ import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { mobile } from "@docspace/shared/utils";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -131,7 +132,7 @@ const ToggleLDAP = ({
           className="settings_unavailable"
         >
           {t("LdapToggleDescription", {
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
           })}
         </Text>
       </div>

@@ -52,6 +52,7 @@ import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?u
 import { connectedCloudsTypeTitleTranslation as ProviderKeyTranslation } from "SRC_DIR/helpers/filesUtils";
 import { ThirdPartyStore } from "SRC_DIR/store/ThirdPartyStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const StyledStorageLocation = styled.div.attrs(injectDefaultTheme)`
   display: flex;
@@ -279,7 +280,7 @@ const ThirdPartyComboBox = ({
 		return (
 			<Text fontSize="12px" noSelect>
 				{t("Common:EnableThirdPartyIntegration", {
-					productName: t("Common:ProductName"),
+					productName: getBrandName("ProductName"),
 				})}
 			</Text>
 		);

@@ -3,11 +3,12 @@
   "content": "No time limit",
   "content_en_sha1_hash": "ba3ffdc5c084cea0b7c0c475d3801a30fcb258b6",
   "created_at": "2025-05-19T21:30:46.946Z",
-  "updated_at": "2026-04-08T03:52:57.818Z",
+  "updated_at": "2026-04-11T20:47:38.821Z",
   "comment": {
-    "text": "\"NoTimeLimit\" is a translation key used to display the phrase \"No time limit\" in the Link Row component of a file's UI, likely appearing as part of a dropdown menu or button. This text provides context about a link's expiration status, indicating that there is no deadline for accessing its content.",
+    "text": "This text is a label indicating that a shared link will not expire. It appears next to a checkbox or radio button option for setting link expiration.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:15.879Z"
+    "updated_at": "2026-04-11T20:47:38.821Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -105,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao word 'ໝຸດ' (mut) is used incorrectly here. It likely refers to a 'dot' or 'point', whereas the intended meaning is 'limit' or 'deadline'. The translation should use 'ກຳນົດ' (kam-not) for 'limit/deadline'.",
-          "suggestion": "ບໍ່ມີກຳນົດເວລາ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -213,13 +208,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'kohor' is a typo; the correct Albanian word for 'time' in this context is 'kohore'.",
-          "suggestion": "Nuk ka kufizim kohore"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

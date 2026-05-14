@@ -3,16 +3,17 @@
   "content": "Payload URL",
   "content_en_sha1_hash": "a097fab3ebda07ac0c8349da3156f6eb4496cb07",
   "created_at": "2025-05-19T21:30:49.784Z",
-  "updated_at": "2026-04-08T19:42:10.049Z",
+  "updated_at": "2026-04-23T17:24:02.010Z",
   "comment": {
-    "text": "The \"PayloadUrl\" translation key is used to display a label for entering or selecting a URL. In the context of a Webhook Dialog component, this text appears as a placeholder and label for an input field where users can enter or select a payload URL.",
+    "text": "This is a label for an input field where users enter a URL for a webhook payload.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:58.642Z"
+    "updated_at": "2026-04-11T21:28:41.945Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhookDialog.js",
-      "line_number": 232,
+      "line_number": 227,
       "context": "required\n dataTestId=\"webhook_name_input\"\n />\n <LabledInput\n id={`${additionalId}-payload-url-input`}\n label={t(\"PayloadUrl\")}\n placeholder={t(\"EnterUrl\")}\n name=\"uri\"\n value={webhookInfo.uri}\n onChange={onInputChange}\n hasError={!isValid.uri}",
       "module": "/packages/client"
     }
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'الحمولة' (Al-Hamoula) is a literal translation of 'Payload' used in logistics/cargo. In a technical Webhook/API context, 'Payload' refers to the data transmitted, and 'Payload URL' should be translated using technical terminology like 'رابط بيانات الحمولة' or more commonly 'رابط الحمولة البرمجية' or simply 'رابط الـ Payload' to avoid confusion with physical cargo.",
-          "suggestion": "رابط بيانات الحمولة"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -45,25 +40,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Полезен товар' is a literal translation of 'Payload' in a physical/logistics sense, which is incorrect for a technical Webhook context. In IT/Webhooks, 'Payload' refers to the data transmitted, and 'Payload URL' should be translated as 'URL на полезното съдържание' or simply 'URL на полезния товар' is too literal and sounds unnatural. However, the most critical error is that 'Полезен товар' implies a physical cargo/goods.",
-          "suggestion": "URL адрес на полезното съдържание"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'náklad' refers to physical cargo/freight. In the context of webhooks and IT, 'payload' refers to the data transmitted in a request. 'Adresa URL nákladu' sounds like a shipping address for physical goods.",
-          "suggestion": "URL adresa datového balíčku"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -75,13 +58,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'φορτίου' (of cargo/load) is a literal translation of 'payload' in a physical sense, which is incorrect in a technical/webhooks context. In computing, 'payload' refers to the data transmitted, and the term 'Payload URL' is typically transliterated or translated as 'URL payload' or 'URL δεδομένων'. Using 'URL φορτίου' sounds like a shipping/logistics term.",
-          "suggestion": "URL payload"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -99,25 +76,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "In a technical context (Webhooks), 'Payload' refers to the data transmitted, not a physical or literal 'charge'. 'URL de la charge' is a literal translation that sounds unnatural and incorrect in IT. The standard term is 'URL de la charge utile'.",
-          "suggestion": "URL de la charge utile"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Ուժային բեռ' translates to 'Forceful load' or 'Powerful cargo', which is a literal and incorrect translation of the technical term 'Payload' in the context of webhooks/IT. In webhooks, 'Payload' refers to the data transmitted, often translated as 'բեռնվածք' or simply kept as 'Payload' in technical Armenian.",
-          "suggestion": "Payload URL"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -141,25 +106,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "wrong_language",
-          "description": "The translation uses Latin script instead of the Lao script. While 'Payload URL' is a technical term, it should ideally be transliterated or translated into Lao script to maintain consistency with the target language UI.",
-          "suggestion": "URL ຂໍ້ມູນ Payload"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Lietderīgās slodzes vietrādis URL' is semantically incorrect. 'Slodze' means 'load/burden' (physical or computational), and 'vietrādis' is not a standard term in this context. In webhooks, 'Payload' refers to the data transmitted, and 'Payload URL' is a technical term that should be translated as 'Sūtīšanas URL' or 'Datu izvietošanas URL', or more commonly kept as 'Payload URL' if the term is treated as technical jargon. The current translation sounds like 'Useful load location URL'.",
-          "suggestion": "Payload URL"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -201,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'ඒ.ස.නි.' which is an abbreviation for 'අන්තර්ජාල ලිපිනය' (Internet Address/URL) but it is incorrectly applied to 'Payload'. The term 'Payload' is left in English script, and the abbreviation used is not standard or clear in this technical context.",
-          "suggestion": "Payload URL"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -225,13 +172,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses a mix of Cyrillic and Latin characters ('Паyлоад') where the 'y' is a Latin character, and 'Payload' is transliterated poorly. In technical Serbian, 'Payload' is typically either left in English or translated as 'Payload' (transliterated) or 'Sadržaj' (content). However, the current string 'Паyлоад' contains a Latin 'y' instead of the Cyrillic 'у', which is a character encoding/orthography error.",
-          "suggestion": "Payload URL"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

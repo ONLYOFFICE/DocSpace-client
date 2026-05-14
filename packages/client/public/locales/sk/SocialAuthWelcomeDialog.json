@@ -1,8 +1,8 @@
 {
   "ChangeData": "Zmena údajov a hesla",
+  "ClickButtonBelow": "Ak si prajete prihlásiť sa pomocou e-mailu, nastavte si vlastné heslo. <br/> Po dokončení kliknite na tlačidlo nižšie.",
   "ContinueToProduct": "Pokračujte v {{productName}}",
   "GeneratedPassword": "Vygenerované heslo",
   "ProductNameDetail": "{{productName}} meno",
-  "ReviewAccountDetails": "Prosím, venujte chvíľu na preverenie údajov vášho účtu:",
-  "ClickButtonBelow": "Ak si prajete prihlásiť sa pomocou e-mailu, nastavte si vlastné heslo. <br/> Po dokončení kliknite na tlačidlo nižšie."
+  "ReviewAccountDetails": "Prosím, venujte chvíľu na preverenie údajov vášho účtu:"
 }

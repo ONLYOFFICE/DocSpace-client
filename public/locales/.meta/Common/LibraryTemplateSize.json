@@ -3,13 +3,21 @@
   "content": "Size",
   "content_en_sha1_hash": "b7152342a267362add3c0d7f69f720f7a9c76c9e",
   "created_at": "2026-03-31T15:18:15.093Z",
-  "updated_at": "2026-04-08T05:53:35.870Z",
+  "updated_at": "2026-04-23T17:24:02.166Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label displaying the size of a file template in the library. It appears next to the actual size value (e.g., \"10 KB\").",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:49:56.259Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/forms/library/[langId]/[categoryId]/template/[templateId]/page.client.tsx",
+      "line_number": 317,
+      "context": "</div>\n )}\n {templateIsFile && template.contentLength && (\n <div className={styles.metaItem}>\n <span className={styles.metaLabel}>\n {t(\"Common:LibraryTemplateSize\")}\n </span>\n <span className={styles.metaValue}>\n {template.contentLength}\n </span>\n </div>",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -26,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Ölçek' means 'Scale' (as in a map scale or a ratio). For 'Size' (dimensions/magnitude), the correct term is 'Ölçü'.",
-          "suggestion": "Ölçü"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {

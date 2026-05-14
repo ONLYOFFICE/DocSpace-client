@@ -3,11 +3,12 @@
   "content": "Storage quota",
   "content_en_sha1_hash": "fbd20573f984732d839815359efcd0afd938b995",
   "created_at": "2025-05-19T21:30:49.110Z",
-  "updated_at": "2026-04-07T22:19:30.667Z",
+  "updated_at": "2026-04-12T17:24:16.634Z",
   "comment": {
-    "text": "This translation key is used to display the storage quota label. It is displayed on a filter form and in room quota dialogs, indicating that it controls the maximum amount of space allowed for rooms. The goal is to provide clarity about the purpose of this setting, allowing users to make informed decisions when filtering or editing rooms.",
+    "text": "This is a label for a setting related to storage limits, or a filter option to display items based on their storage quota. It appears in a form for managing room quotas and in a filter menu.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:38:29.439Z"
+    "updated_at": "2026-04-11T20:41:59.537Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -57,25 +58,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Speicherquote' in German typically refers to a percentage or a ratio (rate) of storage used, rather than the allocated capacity or limit. In the context of a storage limit/quota for rooms, 'Speicherplatzkontingent' or 'Speicherkontingent' is the correct technical term.",
-          "suggestion": "Speicherkontingent"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Ποσόστωση' is a misspelling or a non-existent word in this context. The correct term for 'quota' is 'Όριο' (limit) or 'Ποσοστό' (percentage/ratio), but in the context of storage, 'Όριο αποθηκευτικού χώρου' is the standard term. Additionally, 'αποθ.' is an abbreviation that might be too informal for a UI label.",
-          "suggestion": "Όριο αποθηκευτικού χώρου"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -123,25 +112,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ກຳນົດເຂດນຳໃຊ້ຄັງຂໍ້ມູນ' translates more closely to 'Define the usage area of the data warehouse' or 'Set the data warehouse usage zone'. It fails to convey the concept of a 'quota' (a fixed limit or allowance).",
-          "suggestion": "ໂຄຕ້າການຈັດເກັບຂໍ້ມູນ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Krātuves' is a misspelling or incorrect form of 'Krātuve' (storage). In Latvian, 'Storage quota' should be 'Krātuves kvota', but 'Krātuves' is grammatically incorrect in this context or contains a typo.",
-          "suggestion": "Krātuves kvota"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -183,13 +160,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'සලාකය' (salāka) is a misspelling or incorrect term for 'quota'. In Sinhala, 'quota' should be translated as 'සීමාව' (limit) or 'කොටස' (portion/quota). 'සලාකය' does not carry the meaning of a storage limit.",
-          "suggestion": "ආචයන සීමාව"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -207,13 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Складишна' (Skladišna) refers to a warehouse or a physical storage facility. In the context of digital storage/disk space, 'Квота складишта' or 'Квота простора' is the correct terminology.",
-          "suggestion": "Квота складишта"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

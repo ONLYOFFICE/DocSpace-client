@@ -20,6 +20,8 @@
   "GetCode": "Iegūt kodu",
   "GetSuitableApp": "Izvēlieties piemērotu lietotni",
   "GetSuitableAppDescription": "Izmantojiet saderīgu lietotni, piemēram, Google Authenticator <1>Android</1> un <4>iOS</4> ierīcēm, vai Authenticator <8>Windows Phone</8> ierīcēm.",
+  "InviteLinkQuotaErrorBody": "Reģistrācija, izmantojot saiti, vairs nav pieejama, jo ir pārsniegts limits.",
+  "InviteQuotaErrorCustomizedBody": "Jūs tiksiet novirzīts uz <1>Pieejšanās</1> lapu 10 sekundēs.",
   "LoginRegistryButton": "Pievienoties",
   "Newsletter": "Es vēlos abonēt {{organizationName}} informatīvo izdevumu",
   "PassworResetTitle": "Tagad jūs varat izveidot jaunu paroli.",
@@ -37,7 +39,5 @@
   "TfaSubTitle": "Sekojiet vienkāršiem soļiem, lai turpinātu darbu šajā {{productName}}:",
   "TfaTitle": "Divu faktoru autentifikācija aktivizēta drošai piekļuvei",
   "VerifyConnection": "Pārbaudīt savienojumu",
-  "VerifyConnectionDescription": "Ievadiet 6 ciparu kodu, kas ģenerēts ar jūsu autentifikācijas lietotni, zemāk esošajā laukā, lai pabeigtu iestatīšanu.",
-  "InviteLinkQuotaErrorBody": "Reģistrācija, izmantojot saiti, vairs nav pieejama, jo ir pārsniegts limits.",
-  "InviteQuotaErrorCustomizedBody": "Jūs tiksiet novirzīts uz <1>Pieejšanās</1> lapu 10 sekundēs."
+  "VerifyConnectionDescription": "Ievadiet 6 ciparu kodu, kas ģenerēts ar jūsu autentifikācijas lietotni, zemāk esošajā laukā, lai pabeigtu iestatīšanu."
 }

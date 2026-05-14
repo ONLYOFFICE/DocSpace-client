@@ -3,13 +3,21 @@
   "content": "Set up automatic data collection from completed forms. Export results to XLSX or connect a MySQL database.",
   "content_en_sha1_hash": "b829bdb220fa78520dc122d2113a8f3afb399600",
   "created_at": "2026-03-31T15:18:26.666Z",
-  "updated_at": "2026-04-07T21:23:52.154Z",
+  "updated_at": "2026-04-23T17:24:02.165Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is the content of a tooltip that appears when hovering over the \"Collect Data\" setting in the forms section. It describes the functionality of automatically collecting data from completed forms and options for exporting or connecting to a database.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:40:38.491Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_utils/tourSteps.ts",
+      "line_number": 345,
+      "context": "showSettings &&\n settingsStep(\n \"collect-data\",\n t(\"Common:CollectData\"),\n t(\n \"Common:TourCollectData\",\n \"Set up automatic data collection from completed forms. Export results to XLSX or connect a MySQL database.\",\n ),\n callbacks,\n ),\n ].filter(Boolean) as Step[];",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -32,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Export' was translated as 'Изчислете' (Calculate), which changes the meaning from data transfer to mathematical computation.",
-          "suggestion": "Настройте автоматично събиране на данни от завършени формуляри. Експортирайте резултатите в XLSX или свържете с база данни MySQL."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -80,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation contains a nonsensical fragment 'XLSX-ի վ Into', which appears to be a mix of Armenian and English/broken syntax, making the sentence grammatically incorrect and confusing.",
-          "suggestion": "Կազմակերպեք տվյալների ավտոմատ հավաքագրում ավարտված ձևերից: Արդյունքները արտահանեք XLSX ձևաչափով կամ միացրեք MySQL տվյալների բազա:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -164,13 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "wrong_language",
-          "description": "The word 'базе' is in Russian (Cyrillic) instead of Slovak.",
-          "suggestion": "Nastavte automatické zhromažďovanie údajov z vyplnených formulárov. Exportujte výsledky do XLSX alebo pripojte k databáze MySQL."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {

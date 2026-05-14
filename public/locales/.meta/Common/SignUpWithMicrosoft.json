@@ -3,16 +3,17 @@
   "content": "Sign up with Microsoft",
   "content_en_sha1_hash": "e42ef65d8922b6518d457278329d7e64a6f24601",
   "created_at": "2025-05-19T21:30:48.853Z",
-  "updated_at": "2026-04-10T08:21:04.402Z",
+  "updated_at": "2026-04-23T17:24:02.128Z",
   "comment": {
-    "text": "This translation key is used to display the label for a Microsoft sign-up button. It appears on the login form and is translated to support different languages, ensuring a consistent user experience across various regions.",
+    "text": "Button label for signing up using a Microsoft account.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:39:50.292Z"
+    "updated_at": "2026-04-11T20:42:32.895Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 480,
+      "line_number": 476,
       "context": "return signUp\n ? t(\"Common:SignUpWithLinkedIn\")\n : t(\"Common:SignInWithLinkedIn\");\n case \"microsoft\":\n return signUp\n ? t(\"Common:SignUpWithMicrosoft\")\n : t(\"Common:SignInWithMicrosoft\");\n case \"sso\":\n return signUp ? t(\"Common:SignUpWithSso\") : t(\"Common:SignInWithSso\");\n case \"zoom\":\n return signUp ? t(\"Common:SignUpWithZoom\") : t(\"Common:SignInWithZoom\");",
       "module": "/packages/shared"
     }
@@ -39,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Sign up' (registration) is translated as 'Влезте' (Sign in/Log in), which changes the intent of the action.",
-          "suggestion": "Регистрирайте се чрез Microsoft"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -57,13 +52,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation 'Anmeldung bei Microsoft' means 'Sign in with Microsoft' or 'Login with Microsoft', whereas the English source is 'Sign up with Microsoft' (registration).",
-          "suggestion": "Mit Microsoft registrieren"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -117,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation means 'Sign in with Microsoft' instead of 'Sign up with Microsoft'. 'ເຂົ້າສູ່ລະບົບ' means 'Sign in/Log in', whereas 'Sign up' should be 'ລົງທະບຽນ'.",
-          "suggestion": "ລົງທະບຽນດ້ວຍ Microsoft"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -135,13 +118,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Dutch translation 'Aanmelden' typically means 'Sign in' or 'Log in', whereas the English source is 'Sign up' (registering a new account).",
-          "suggestion": "Registreren via Microsoft"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -153,37 +130,19 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Portuguese translation 'Inscreva-se na Microsoft' implies signing up *within* or *at* Microsoft, rather than using a Microsoft account to sign up for the service. It changes the meaning from 'using Microsoft as an identity provider' to 'registering for a Microsoft service'.",
-          "suggestion": "Cadastre-se com a Microsoft"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation refers to 'Linkedin' instead of 'Microsoft', which is a completely different service provider.",
-          "suggestion": "Cadastre-se com Microsoft"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'Conectare prin Microsoft' means 'Sign in with Microsoft' or 'Connect via Microsoft', whereas the English source is 'Sign up with Microsoft'. This is a critical distinction between creating a new account and logging into an existing one.",
-          "suggestion": "Înregistrare cu Microsoft"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

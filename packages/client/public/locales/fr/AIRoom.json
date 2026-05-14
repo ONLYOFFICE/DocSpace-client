@@ -1,7 +1,9 @@
 {
+  "AgentInViewModeWarning": "Vous êtes en mode <strong>lecture seule</strong> pour cet {{aiAgent}}. Vous pouvez voir les résultats de l'activité de {{aiChat}} d'autres utilisateurs.",
   "AIAgentAccessRedirectNote": "Vous serez automatiquement redirigé vers la section {{sectionName}} dans 5 secondes.",
   "AIChat": "Chat IA",
   "AIInstructions": "Instructions IA",
+  "AIProviderAndModel": "{{aiProvider}} et modèle",
   "CreateChat": "Créer une discussion",
   "CreateChatDescription": "Rendez-vous sur l'onglet {{aiChat}} pour commencer.",
   "EmptyKnowledgeDescription": "Les fichiers téléchargés ici seront indexés et utilisés comme contexte dans l'onglet {{aiChat}}. Ajoutez des fichiers (jusqu'à 10 Mo chacun) pour poser des questions à l'IA, générer du contenu ou collaborer sur des informations.",
@@ -20,12 +22,10 @@
   "KnowledgeUnavailableDescriptionUser": "La base de connaissances est actuellement désactivée. Pour activer la recherche sémantique et le traitement de documents pour {{aiAgents}}, veuillez contacter l'administrateur de votre {{productName}} pour configurer le fournisseur d'embeddings.",
   "MCP": "Outils MCP pour cette salle",
   "MCPDescriptionServers": "Utilisez {{mcpServers}} connecté par l'administrateur pour améliorer l'expérience de chat avec l'IA. {{mcpServers}} peut aider avec l'extraction de données, les résumés, les suggestions intelligentes, etc.",
-  "Model": "{{aiProvider}} et modèle",
   "ModelDescription": "Sélectionnez le {{aiProvider}} et le modèle à utiliser dans les discussions de cette salle. Ce paramètre est obligatoire et s'applique à tous les participants.",
   "NoAccessAIAgentTitle": "Désolé, vous n'avez pas accès à ce {{aiAgent}}",
   "ResponseQualityNode": "<1>Remarque :</1> La qualité des réponses peut varier selon le modèle ; les modèles plus récents sont recommandés pour de meilleurs résultats.",
   "ResultStorage": "Stockage des résultats",
   "UploadFilesDevice": "élécharger des fichiers depuis votre appareil personnel",
-  "UploadFilesPortal": "Télécharger des fichiers depuis {{sectionNameFirst}} ou {{sectionNameSecond}}",
-  "AgentInViewModeWarning": "Vous êtes en mode <strong>lecture seule</strong> pour cet {{aiAgent}}. Vous pouvez voir les résultats de l'activité de {{aiChat}} d'autres utilisateurs."
+  "UploadFilesPortal": "Télécharger des fichiers depuis {{sectionNameFirst}} ou {{sectionNameSecond}}"
 }

@@ -3,28 +3,29 @@
   "content": "Created",
   "content_en_sha1_hash": "accf40c89baa4fa88e6a7ff11e1f805beecafd3f",
   "created_at": "2025-05-19T21:30:55.310Z",
-  "updated_at": "2026-04-07T19:35:05.078Z",
+  "updated_at": "2026-04-27T12:45:07.482Z",
   "comment": {
-    "text": "This translation key is used for the label that appears next to a column header, specifically the \"Created\" column in a table view. It's part of the UI element on the page /packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js. The translated text will be displayed as the title for this column.",
+    "text": "Table header label. It indicates the column for sorting items by their creation date.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:40:07.907Z"
+    "updated_at": "2026-04-11T21:10:24.376Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 288,
+      "line_number": 290,
       "context": "onClick: this.onFilter,\n },\n { ...authorBlock },\n {\n key: \"Created\",\n title: t(\"ByCreation\"),\n enable: createdColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.CreationDate,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 288,
+      "line_number": 290,
       "context": "onClick: this.onFilter,\n },\n { ...authorBlock },\n {\n key: \"Created\",\n title: t(\"ByCreation\"),\n enable: createdColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.CreationDate,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 288,
+      "line_number": 290,
       "context": "onClick: this.onFilter,\n },\n { ...authorBlock },\n {\n key: \"Created\",\n title: t(\"ByCreation\"),\n enable: createdColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.CreationDate,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
@@ -36,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 124,
+      "line_number": 125,
       "context": "const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"DateAndTimeCreation\", label: t(\"Files:ByCreation\") },\n { key: \"Author\", label: t(\"Files:ByAuthor\") },\n ];\n \n const dataSortOrder = [\n { key: \"descending\", label: t(\"Descending\"), default: true },",
       "module": "/packages/client"
     },

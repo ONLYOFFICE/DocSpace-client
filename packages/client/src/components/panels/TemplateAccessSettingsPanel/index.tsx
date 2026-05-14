@@ -66,6 +66,7 @@ import {
 import TemplateAccessSelector from "../../TemplateAccessSelector";
 import ItemsList from "./sub-components/ItemsList";
 import InviteInput from "./sub-components/InviteInput";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type TemplateAccessSettingsContainer =
 	| {
@@ -325,7 +326,7 @@ const TemplateAccessSettingsPanel = ({
 					dataTestId="template_access_settings_back_button"
 				/>
 				<Text fontSize="21px" fontWeight={700} className="header-component">
-					{t("Files:AccessSettings")}
+					{t("Files:AccessSettingsTitle")}
 				</Text>
 				<IconButton
 					size={17}
@@ -352,7 +353,7 @@ const TemplateAccessSettingsPanel = ({
 						</StyledSubHeader>
 						<StyledDescription>
 							{t("Files:TemplateAvailableDescription", {
-								productName: t("Common:ProductName"),
+								productName: getBrandName("ProductName"),
 							})}
 						</StyledDescription>
 					</StyledBlock>
@@ -431,7 +432,7 @@ const TemplateAccessSettingsPanel = ({
 				) : null}
 			</ModalDialog.Container>
 
-			<ModalDialog.Header>{t("Files:AccessSettings")}</ModalDialog.Header>
+			<ModalDialog.Header>{t("Files:AccessSettingsTitle")}</ModalDialog.Header>
 			<ModalDialog.Body>
 				<>
 					<StyledBlock>
@@ -447,7 +448,7 @@ const TemplateAccessSettingsPanel = ({
 						</StyledSubHeader>
 						<StyledDescription>
 							{t("Files:TemplateAvailableDescription", {
-								productName: t("Common:ProductName"),
+								productName: getBrandName("ProductName"),
 							})}
 						</StyledDescription>
 					</StyledBlock>

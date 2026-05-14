@@ -3,11 +3,12 @@
   "content": "View and manage all contacts",
   "content_en_sha1_hash": "f7289c71c27551c49981978e5345662aa8dd1dbc",
   "created_at": "2025-05-19T21:30:46.982Z",
-  "updated_at": "2026-04-08T03:49:03.005Z",
+  "updated_at": "2026-04-11T20:47:32.313Z",
   "comment": {
-    "text": "This translation key is used to display a label for managing all contacts. It is likely used in an OAuth authorization or settings interface, where users can view and manage their contact information.",
+    "text": "This is a description of an OAuth permission scope. It informs the user that an application will be able to view and manage all their contacts.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:14.444Z"
+    "updated_at": "2026-04-11T20:47:32.313Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -27,49 +28,25 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation uses 'الحسابات' (Accounts) instead of 'جهات الاتصال' (Contacts), which changes the meaning of the string.",
-          "suggestion": "عرض وإدارة جميع جهات الاتصال"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation uses 'hesablara' (accounts) instead of 'kontaktlara' (contacts), which changes the meaning of the string.",
-          "suggestion": "Bütün kontaktlara baxın və idarə edin"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation uses 'профили' (profiles) instead of 'контакти' (contacts), which changes the meaning of the scope.",
-          "suggestion": "Прегледайте и управлявайте всички контакти"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech translation uses 'účtů' (accounts) instead of 'kontaktů' (contacts), which changes the meaning of the string.",
-          "suggestion": "Zobrazení a správa všech kontaktů"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -81,13 +58,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation uses 'λογαριασμών' (accounts) instead of 'επαφών' (contacts), which changes the meaning of the string.",
-          "suggestion": "Προβολή και διαχείριση όλων των επαφών"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -99,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation uses 'tilejä' (accounts/tiles) instead of 'yhteystietoja' or 'kontakteja' (contacts).",
-          "suggestion": "Näytä ja hallitse kaikki yhteystiedot"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -135,13 +100,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation uses '계정' (Accounts) instead of '연락처' (Contacts), which changes the fundamental meaning of the string.",
-          "suggestion": "모든 연락처 보기 및 관리"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -153,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'kontus' is an incorrect/non-existent form in Latvian for 'contacts'. The correct term is 'kontaktus'.",
-          "suggestion": "Skatīt un pārvaldīt visus kontaktus"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {

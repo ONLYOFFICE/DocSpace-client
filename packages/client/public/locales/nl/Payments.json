@@ -1,18 +1,17 @@
 {
-  "AccessingProblem": "Als u een bestaande gebruiker bent en problemen hebt met de toegang tot deze ruimte, neem dan contact op met de beheerder.",
   "CannotCreateNewRoom": "Kamer kan niet worden aangemaakt",
   "CannotCreatePaidUsers": "Betaalde gebruikers kunnen niet worden toegevoegd",
   "CannotRestoreRoom": "Kamer kan niet worden hersteld",
   "ChooseNewPlan": "Wilt u een nieuw prijsplan kiezen?",
+  "GracePeriodActive": "De grace-periode is actief <1>vanaf {{fromDate}} tot {{byDate}}</1> (resterende dagen: {{delayDaysCount}}).",
+  "LicenseExpiredRestriction": "Kan geen nieuwe gebruikers toevoegen en nieuwe ruimtes aanmaken. Licentie is verlopen.",
+  "LicenseGracePeriodInfo": "Gedurende deze tijd kunnen beheerders geen nieuwe ruimtes aanmaken of nieuwe gebruikers toevoegen. Nadat de grace period is afgelopen, zal {{productName}} onbeschikbaar zijn totdat een nieuwe licentie is geactiveerd.",
   "NewRoomWillExceedLimit": "Deze kamer kan niet worden aangemaakt omdat de limiet is bereikt voor het aantal kamers in uw huidige plan.",
   "NewUsersWillExceedMembersLimit": "Nieuwe betaalde gebruikers toevoegen is niet mogelijk omdat de limiet is bereikt voor het aantal beheerders in uw huidige plan.",
   "NotPossibleRoomRestoring": "Het is niet mogelijk om deze kamer te herstellen omdat de limiet is bereikt voor het aantal kamers in uw huidige plan.",
   "NumberOfRoomsAccordingToTariff": "Aantal kamers volgens uw tariefplan: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Aantal beheerders volgens uw tariefplan: {{currentValue}}/{{maxValue}}",
+  "PlanPaymentOverdue": "Kan geen nieuwe gebruikers, nieuwe ruimtes of AI-agenten toevoegen. Betaling voor het {{planName}}-abonnement is vervallen.",
   "RoomsQuotaAlmostExhausted": "Het aantal kamers is bijna opgebruikt.",
-  "UsersQuotaAlmostExhausted": "Het aantal betaalde gebruikers is bijna opgebruikt.",
-  "GracePeriodActive": "De grace-periode is actief <1>vanaf {{fromDate}} tot {{byDate}}</1> (resterende dagen: {{delayDaysCount}}).",
-  "LicenseExpired": "Kan geen nieuwe gebruikers toevoegen en nieuwe ruimtes aanmaken. Licentie is verlopen.",
-  "LicenseGracePeriodInfo": "Gedurende deze tijd kunnen beheerders geen nieuwe ruimtes aanmaken of nieuwe gebruikers toevoegen. Nadat de grace period is afgelopen, zal {{productName}} onbeschikbaar zijn totdat een nieuwe licentie is geactiveerd.",
-  "PlanPaymentOverdue": "Kan geen nieuwe gebruikers, nieuwe ruimtes of AI-agenten toevoegen. Betaling voor het {{planName}}-abonnement is vervallen."
+  "UsersQuotaAlmostExhausted": "Het aantal betaalde gebruikers is bijna opgebruikt."
 }

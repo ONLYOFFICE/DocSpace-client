@@ -28,6 +28,7 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import QuotaPerItemComponent from "./QuotaPerItem";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const QuotaPerUserComponent = (props) => {
   const { setUserQuota, isDefaultUsersQuotaSet, defaultUsersQuota } = props;
@@ -50,7 +51,7 @@ const QuotaPerUserComponent = (props) => {
       tabIndex={2}
       dataTestId="quota_user"
       toggleDescription={t("UserDefaultQuotaDescription", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
         sectionName: t("Common:MyDocuments"),
       })}
     />

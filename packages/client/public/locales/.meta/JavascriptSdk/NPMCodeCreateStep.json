@@ -3,16 +3,17 @@
   "content": "Create HTML element with id from config and insert it inside document body for place SDK frame:",
   "content_en_sha1_hash": "d26d5cf18e35d7c6302f29f1f6f2e1c25a844581",
   "created_at": "2025-05-19T21:30:54.593Z",
-  "updated_at": "2026-04-07T19:35:05.136Z",
+  "updated_at": "2026-04-11T21:14:59.525Z",
   "comment": {
-    "text": "This translation key is used to describe the action of creating an HTML element and inserting it into the document body. It appears in a UI component, likely a button or dialog prompt, that guides users through a step-by-step process for placing a Software Development Kit (SDK) frame.",
+    "text": "This is a descriptive text explaining the first step in creating an HTML element for the SDK frame. It appears below a code snippet in the developer tools settings.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:29.855Z"
+    "updated_at": "2026-04-11T21:14:59.525Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/CodeToInsert.js",
-      "line_number": 103,
+      "line_number": 104,
       "context": "isReadOnly\n enableCopy\n isJSONField\n />\n <Text lineHeight=\"20px\" className=\"preview-description\">\n {t(\"NPMCodeCreateStep\")}\n </Text>\n <Textarea\n value={`const container = document.createElement('div');\n container.id = '${config.frameId}';\n document.body.appendChild(container);`}",
       "module": "/packages/client"
     }

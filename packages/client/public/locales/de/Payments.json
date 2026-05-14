@@ -1,11 +1,10 @@
 {
-  "AccessingProblem": "Wenn Sie ein bestehender Benutzer sind und Probleme mit dem Zugang zu diesem Bereich haben, wenden Sie sich bitte an den Administrator.",
   "CannotCreateNewRoom": "Raum kann nicht erstellt werden",
   "CannotCreatePaidUsers": "Bezahlte Benutzer können nicht hinzugefügt werden",
   "CannotRestoreRoom": "Raum kann nicht wiederhergestellt werden",
   "ChooseNewPlan": "Möchten Sie einen neuen Preisplan wählen?",
   "GracePeriodActive": "Die Schonfrist ist aktiv <1>von {{fromDate}} bis {{byDate}}</1> (verbleibende Tage: {{delayDaysCount}}).",
-  "LicenseExpired": "Das Hinzufügen neuer Benutzer und das Erstellen neuer Räume ist nicht möglich. Die Lizenz ist abgelaufen.",
+  "LicenseExpiredRestriction": "Das Hinzufügen neuer Benutzer und das Erstellen neuer Räume ist nicht möglich. Die Lizenz ist abgelaufen.",
   "LicenseGracePeriodInfo": "Während dieser Zeit können Administratoren keine neuen Räume erstellen oder neue Benutzer hinzufügen. Nach Ablauf der Gnadenfrist wird {{productName}} nicht verfügbar sein, bis eine neue Lizenz aktiviert wird.",
   "NewRoomWillExceedLimit": "Das Erstellen dieses Raums ist nicht möglich, da das Limit für die Anzahl der in Ihrem aktuellen Plan enthaltenen Räume erreicht ist.",
   "NewUsersWillExceedMembersLimit": "Das Hinzufügen neuer bezahlter Benutzer ist nicht möglich, da das Limit für die Anzahl der Administratoren in Ihrem aktuellen Plan erreicht ist.",

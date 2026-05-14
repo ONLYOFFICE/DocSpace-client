@@ -3,16 +3,17 @@
   "content": "The brand name must be between {{minLength}} and {{maxLength}} characters long",
   "content_en_sha1_hash": "1ca3c9910301c028680b5fa7d009f48869f2a5b1",
   "created_at": "2025-08-04T07:28:55.030Z",
-  "updated_at": "2026-04-08T16:02:07.570Z",
+  "updated_at": "2026-04-11T20:58:07.141Z",
   "comment": {
-    "text": "This key displays an error message informing the user about the acceptable length range for a brand name. It appears within a form field, likely during brand name creation or editing, to guide the user to enter a name between 2 and 40 characters. Translators should ensure the message accurately conveys the length constraints.",
+    "text": "This is an error message that appears when the entered brand name is too short or too long. It informs the user about the required minimum and maximum length for the brand name. `{{minLength}}` and `{{maxLength}}` are numbers representing these limits.",
     "is_auto": true,
-    "updated_at": "2025-08-04T08:11:35.229Z"
+    "updated_at": "2026-04-11T20:58:07.141Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/BrandName/index.tsx",
-      "line_number": 114,
+      "line_number": 115,
       "context": "switch (error) {\n case \"Empty\":\n return t(\"Common:EmptyFieldError\");\n case \"MinLength\":\n return t(\"Common:BrandNameLength\", {\n minLength: 2,\n maxLength: 40,\n });\n case \"SpecSymbols\":\n return t(\"Common:BrandNameForbidden\");",
       "module": "/packages/shared"
     }
@@ -117,13 +118,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation uses 'zīmēm' (brands/marks) instead of 'zīmēm' (characters/letters), which changes the meaning from character count to brand count.",
-          "suggestion": "Zīmola nosaukums ir jāsastāda starp {{minLength}} un {{maxLength}} rakstzīmēm."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {

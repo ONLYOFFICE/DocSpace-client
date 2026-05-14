@@ -3,13 +3,21 @@
   "content": "Automatically top up my card when my credit balance falls below a threshold",
   "content_en_sha1_hash": "62f4f5cbae64f449a70ce13dfd1a4a42b4047460",
   "created_at": "2026-04-10T13:53:41.878Z",
-  "updated_at": "2026-04-10T13:53:41.878Z",
+  "updated_at": "2026-04-11T20:58:53.169Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a descriptive text displayed below a toggle button. It explains the functionality of automatically topping up a user's card when their credit balance is low.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:58:53.169Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/AutoPayments.tsx",
+      "line_number": 344,
+      "context": "dataTestId=\"auto_payments_toggle_button\"\n />\n </div>\n \n <Text fontSize=\"12px\" className={styles.autoPaymentDescription}>\n {t(\"AutomaticallyTopUpCard\")}\n </Text>\n \n {isAutomaticPaymentsEnabled\n ? isCurrentSettings\n ? renderCurrentSettings()",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

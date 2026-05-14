@@ -3,17 +3,18 @@
   "content": "Check period (sec)",
   "content_en_sha1_hash": "2f27bf98f858795f1e0a25310a2844495f181541",
   "created_at": "2025-05-19T21:30:50.889Z",
-  "updated_at": "2026-04-09T03:57:28.035Z",
+  "updated_at": "2026-04-13T14:59:05.896Z",
   "comment": {
-    "text": "The \"Check period (sec)\" translation key is used to display the duration of time allowed for a check or validation process. In the Portal Settings category's security access-portal component, it appears as part of the brute force protection settings and indicates how often checks should be performed on user login attempts.",
+    "text": "This is a label for an input field where the user defines the time interval, in seconds, for checking brute-force login attempts.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:33.283Z"
+    "updated_at": "2026-04-11T21:25:20.099Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/bruteForceProtection.js",
-      "line_number": 72,
-      "context": "setup,\n } = props;\n \n const defaultNumberAttempt = numberAttempt?.toString();\n const defaultBlockingTime = blockingTime?.toString();\n const defaultCheckPeriod = checkPeriod?.toString();\n \n const [currentNumberAttempt, setCurrentNumberAttempt] =\n useState(defaultNumberAttempt);\n const [currentBlockingTime, setCurrentBlockingTime] =\n useState(defaultBlockingTime);",
+      "line_number": 346,
+      "context": "</FieldContainer>\n \n <FieldContainer\n className=\"input-container\"\n labelVisible\n labelText={t(\"CheckPeriod\")}\n isVertical\n place=\"top\"\n hasError={hasErrorCheckPeriod}\n errorMessage={t(\"ErrorMessageBruteForceProtection\")}\n >",
       "module": "/packages/client"
     }
   ],
@@ -153,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'අවේක්‍ෂණ' (avekshana) means 'observation' or 'waiting', whereas 'Check period' in this technical context refers to a 'verification' or 'validation' interval. A more accurate term for 'Check' in a security/validation context is 'පරීක්ෂණ' (parikshana).",
-          "suggestion": "පරීක්ෂණ කාලය (තත්.)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -177,25 +172,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation uses the verb 'Провери' (Check/Verify - imperative), which implies an action to be performed by the user. In the context of a settings field, 'Check period' refers to a 'Period of checking' or 'Interval of checking'.",
-          "suggestion": "Период провере (сек)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian word 'Proveri' is an imperative verb meaning 'Check!' (a command to perform an action). In this context, 'Check period' refers to a noun phrase meaning 'Interval for checking' or 'Verification period'.",
-          "suggestion": "Period provere (sek)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

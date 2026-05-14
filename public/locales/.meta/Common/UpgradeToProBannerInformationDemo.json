@@ -3,11 +3,12 @@
   "content": "Request demonstration <1>here</1>",
   "content_en_sha1_hash": "5a17e37a14adcdf587aa798979c9909eed1f5cd0",
   "created_at": "2025-05-26T07:15:49.130Z",
-  "updated_at": "2026-04-10T08:58:38.048Z",
+  "updated_at": "2026-04-12T13:36:49.020Z",
   "comment": {
-    "text": "This translation key is used to display a button or link that requests a demonstration, likely in a user interface related to upgrading to a premium plan. It appears as \"Request demonstration\" and is translated from \"UpgradeToProBannerInformationDemo\".",
+    "text": "This is a clickable text link within a banner, prompting users to request a demonstration of the Pro version. The `<1>here</1>` tag indicates a clickable link.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:02:40.158Z"
+    "updated_at": "2026-04-11T20:40:03.900Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Demonu' is an incorrect/non-existent form of 'demonstrasiya'. In Azerbaijani, 'demonu' is not the correct way to say 'demonstration'.",
-          "suggestion": "Demonstrasiya <1>buradan</1> tələb edin"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {

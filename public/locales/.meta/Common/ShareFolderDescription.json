@@ -3,11 +3,12 @@
   "content": "Provide access to the folder and set the permission levels.",
   "content_en_sha1_hash": "85cdb69a150659c5463be79cc84498e6c5fe9ad6",
   "created_at": "2025-08-26T11:15:01.383Z",
-  "updated_at": "2026-04-07T23:13:09.716Z",
+  "updated_at": "2026-04-12T20:42:51.701Z",
   "comment": {
-    "text": "This text appears in a sharing dialog or panel. It explains the action of granting access and setting permissions for a shared folder. Translators should ensure the description accurately reflects the folder sharing process.",
+    "text": "This is a descriptive sentence appearing in an information bar when sharing a folder. It explains that users can grant access and define permission levels for the folder.",
     "is_auto": true,
-    "updated_at": "2025-08-26T11:16:58.294Z"
+    "updated_at": "2026-04-11T20:43:00.852Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -111,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation uses the plural 'mapēm' (to folders), whereas the English text refers to a single 'the folder'.",
-          "suggestion": "Piešķiriet piekļuvi mapei un iestatiet atļauju līmeņus."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -129,13 +124,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Udostępnij dostęp' is a pleonasm (redundant) in Polish, literally meaning 'Share access'. The English 'Provide access' should be translated as 'Udziel dostępu' or 'Przyznaj dostęp' to be semantically correct and natural.",
-          "suggestion": "Udziel dostępu do folderu i ustaw poziomy uprawnień."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {

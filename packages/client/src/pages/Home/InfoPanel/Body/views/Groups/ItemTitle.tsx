@@ -43,6 +43,7 @@ import { TGroup } from "@docspace/shared/api/groups/types";
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 
 import styles from "../Users/Users.module.scss";
+import { getConstName } from "@docspace/shared/constants/consts";
 
 type ItemTitleProps = {
   isRoomAdmin?: boolean;
@@ -121,7 +122,7 @@ const ItemTitle = ({
           >
             <Badge
               className="ldap-badge"
-              label={t("Common:LDAP")}
+              label={getConstName("LDAP")}
               color={globalColors.white}
               backgroundColor={globalColors.secondPurple}
               fontSize="9px"

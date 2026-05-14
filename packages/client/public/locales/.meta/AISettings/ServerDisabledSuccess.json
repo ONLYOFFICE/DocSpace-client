@@ -3,11 +3,12 @@
   "content": "Server disabled successfully",
   "content_en_sha1_hash": "76482d89c727a7a5e18e9b3e0c45c2e71e48d841",
   "created_at": "2025-10-27T16:14:31.649Z",
-  "updated_at": "2025-10-27T17:16:49.160Z",
+  "updated_at": "2026-04-11T21:02:21.136Z",
   "comment": {
-    "text": "This key displays a success message in a dialog after a server is successfully disabled within the AI settings portal. It confirms to the user that the server disabling operation completed successfully. Translators should ensure the message conveys a positive confirmation of the action taken.",
+    "text": "This is a toast message confirming that a server has been successfully disabled. It appears briefly after the user disables a server in the AI settings.",
     "is_auto": true,
-    "updated_at": "2025-10-27T17:16:49.160Z"
+    "updated_at": "2026-04-11T21:02:21.136Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

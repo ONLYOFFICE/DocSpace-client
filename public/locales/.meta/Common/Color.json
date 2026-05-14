@@ -3,11 +3,12 @@
   "content": "Color",
   "content_en_sha1_hash": "1d0c8304baedcf8e3a78982c2e7c0b04622bf2a0",
   "created_at": "2025-05-19T21:30:43.522Z",
-  "updated_at": "2026-04-08T15:14:13.428Z",
+  "updated_at": "2026-04-11T20:57:03.758Z",
   "comment": {
-    "text": "This translation key is used to display the label \"Color\" in various contexts within the application, including a color picker dialog and portal settings. It appears as part of the header and theme settings sections.",
+    "text": "This is a label for a color selection option, used in dialogs for customizing room logos or portal appearance settings.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:04.890Z"
+    "updated_at": "2026-04-11T20:57:03.758Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

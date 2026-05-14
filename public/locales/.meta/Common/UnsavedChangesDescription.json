@@ -3,11 +3,12 @@
   "content": "You have unsaved changes. If you leave now, your updates will be lost. Are you sure you want to leave?",
   "content_en_sha1_hash": "bf93e223453b70379fe230b3e48ccbdff6974aef",
   "created_at": "2025-10-27T16:14:23.077Z",
-  "updated_at": "2026-04-07T20:55:51.861Z",
+  "updated_at": "2026-04-12T13:48:33.952Z",
   "comment": {
-    "text": "This text appears within a confirmation dialog, warning the user that they have unsaved changes and will lose them if they leave the application. It's used to inform the user about potential data loss and confirm their intention to proceed. The description will appear in the body of the unsaved changes modal.",
+    "text": "This is the body text of a confirmation dialog. It appears when a user attempts to navigate away from a page with unsaved changes, warning them that their work will be lost if they proceed.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:24:15.569Z"
+    "updated_at": "2026-04-11T20:40:09.626Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Köhnələşdirilməmiş' means 'obsolete' or 'outdated' rather than 'unsaved'. The correct term for unsaved changes is 'yadda saxlanılmamış'.",
-          "suggestion": "Yadda saxlanılmamış dəyişiklikləriniz var. İndi çıxsanız, yeniləmələriniz itiriləcək. Çıxmaq istədiyinizə əminsiniz?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -165,13 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'nenakopírované' means 'not copied'. The English text says 'unsaved' (not saved).",
-          "suggestion": "Máte neuložené zmeny. Ak teraz odídete, vaše aktualizácie budú stratené. Ste si istí, že chcete odísť?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -207,13 +196,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'unsaved' is translated as 'незавантажені' (which means 'not downloaded' or 'not uploaded'), whereas the correct term for unsaved changes is 'незбережені'.",
-          "suggestion": "У вас є незбережені зміни. Якщо ви зараз підете, ваші оновлення будуть втрачені. Ви впевнені, що хочете піти?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

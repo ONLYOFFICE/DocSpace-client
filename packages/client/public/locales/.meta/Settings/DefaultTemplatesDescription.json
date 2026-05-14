@@ -3,11 +3,12 @@
   "content": "Admins can assign default templates for DOCX, XLSX, and other formats. When users create new documents, these templates are applied automatically based on language and region. Admins can upload or reset templates to default. Each template shows its status, last modified date, and file size.",
   "content_en_sha1_hash": "a69271c260bdb74fce8be26cdc6a3b62b54ede4f",
   "created_at": "2026-02-18T14:56:26.355Z",
-  "updated_at": "2026-04-09T03:34:08.914Z",
+  "updated_at": "2026-04-11T21:24:54.347Z",
   "comment": {
-    "text": "This text describes the default templates feature, explaining that administrators can set templates for various file formats (DOCX, XLSX, etc.) which are automatically applied to new documents based on language and region. It appears as a descriptive text on the Default Templates page within Portal Settings.",
+    "text": "This is a descriptive text displayed below the \"Default Templates\" heading in the portal settings. It explains how administrators can manage default document templates for various file types, and how these templates are automatically applied to new documents based on user language and region.",
     "is_auto": true,
-    "updated_at": "2026-03-20T10:27:32.064Z"
+    "updated_at": "2026-04-11T21:24:54.347Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -81,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Admins' (Administrators) is translated as 'Վարորդները' (Drivers), which is a completely wrong meaning in this context.",
-          "suggestion": "Ադմինիստրատորները կարող են նշանակել լռակայական ձևանմուշներ DOCX, XLSX և այլ ձևաչափների համար։ Երբ օգտատերերը ստեղծում են նոր փաստաթղթեր, այս ձևանմուշները ավտոմատ կերպով կկիրառվեն՝ հիմնվելով լեզվի և տարածաշրջանի վրա։ Ադմինիստրատորները կարող են վերբեռնել կամ վերականգնել ձևանմուշները լռակայական վիճակին։ Յուրաքանչյուր ձևանմուշը ցույց է տալիս իր կարգավիճակը, վերջին փոփոխության ամսաթիվը և ֆայլի չափը։"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -99,13 +94,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The first sentence contains a grammatical error in Japanese that changes the subject/agent relationship. '管理者には...割り当てることができます' implies 'For administrators, it is possible to assign...', whereas the English 'Admins can assign...' implies the administrators are the ones performing the action. In a UI context, this makes the sentence awkward and technically inaccurate regarding the actor.",
-          "suggestion": "管理者は、DOCX、XLSX、その他の形式のデフォルトテンプレートを割り当てることができます。ユーザーが新しいドキュメントを作成する際、これらのテンプレートは言語と地域に基づいて自動的に適用されます。管理者は、テンプレートをアップロードしたり、デフォルトにリセットしたりできます。各テンプレートは、ステータス、最終更新日、ファイルサイズを表示します。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -123,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'default' is incorrectly translated as 'noslēgtus', which means 'closed' or 'secret' in Latvian. The correct term for 'default' in this context is 'standarta'.",
-          "suggestion": "Admini var piešķirt standarta šablonus DOCX, XLSX un citām formātiem. Kad lietotāji izveido jaunus dokumentus, šie šabloni tiek piemēroti automātiski, pamatojoties uz valodu un reģionu. Admini var augšupielādēt vai atiestatīt šablonus uz standarta. Katrs šablonis parāda savu statusu, pēdējo rediģēšanas datumu un faila izmēru."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -177,13 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'Administívna funkcia umožňuje' (Administrative function allows) instead of 'Administrátori môžu' (Admins can). This changes the subject from the users (Admins) to an abstract function, which is stylistically awkward and technically inaccurate in the context of user permissions.",
-          "suggestion": "Administrátori môžu priradiť predvolené šablóny pre formáty DOCX, XLSX a iné. Keď používatelia vytvoria nové dokumenty, tieto šablóny sa aplikujú automaticky na základe jazyka a regiónu. Administrátori môžu nahrávať alebo resetovať šablóny na predvolené. Každá šablóna zobrazuje svoj stav, dátum poslednej úpravy a veľkosť súboru."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -195,13 +172,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'reset' was translated as 'rikuperojnë' (to recover/retrieve), which changes the meaning from resetting to a default state to recovering something lost.",
-          "suggestion": "Administratorët mund të ngarkojnë ose të kthejnë shabllonet në të paracaktuar."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

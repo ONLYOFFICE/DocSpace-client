@@ -3,16 +3,17 @@
   "content": "If your account is not included in the backup file, you will lose access. Please ensure you are restoring the correct backup file, as this action cannot be undone.",
   "content_en_sha1_hash": "5cbeb8674dde916fd8a96bd799f65f83428adcd3",
   "created_at": "2026-03-20T09:07:35.054Z",
-  "updated_at": "2026-04-08T01:22:36.388Z",
+  "updated_at": "2026-04-13T09:27:34.944Z",
   "comment": {
-    "text": "This text appears within a confirmation dialog during the backup restoration process. It warns the user that restoring the wrong backup file could result in loss of account access, emphasizing the irreversible nature of the action. Translators should convey the importance of verifying the correct backup file before proceeding.",
+    "text": "This is a warning message displayed in a confirmation modal when restoring a backup. It informs the user about potential loss of access if their account is not in the backup.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:13:12.570Z"
+    "updated_at": "2026-04-11T20:44:59.196Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/restore-confirm-modal/index.tsx",
-      "line_number": 90,
+      "line_number": 91,
       "context": "</Text>\n <Text as=\"p\" className={styles.restoreBackupConfirmText}>\n {t(\"Common:RestoreBackupConfirmReplaceText\")}\n </Text>\n <Text as=\"p\" className={styles.restoreBackupConfirmText}>\n {t(\"Common:RestoreBackupConfirmAccessText\")}\n </Text>\n \n <Checkbox\n name=\"restoreBackupConfirmAcknowledge\"\n className={styles.restoreBackupConfirmCheckbox}",
       "module": "/packages/shared"
     }
@@ -60,8 +61,17 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'backup file' is translated as 'αρχείο καταγραφής' (log file), which is technically incorrect in the context of data restoration. It should be 'αρχείοสำรอง' or 'αρχείο backup'.",
-          "suggestion": "Εάν ο λογαριασμός σας δεν περιλαμβάνεται στο αρχείοสำรอง, θα χάσετε πρόσβαση. Παρακαλούμε να διασφαλίσετε ότι ανακαταστήσατε το σωστό αρχείοสำรอง, καθώς αυτή η ενέργεια δεν μπορεί να αντιστραφεί."
+          "description": "Verb tense changes meaning: English 'are restoring' (present continuous - action being checked before happening) is translated as 'ανακαταστήσατε' (past tense - action already completed). This reverses the intent: the warning should verify the correct file BEFORE restoration, not confirm restoration already happened.",
+          "suggestion": "Παρακαλούμε να διασφαλίσετε ότι ανακαταστάσετε το σωστό αρχείο...",
+          "checked_at": "2026-04-13T09:27:34.943Z",
+          "checked_by": "claude-code/haiku"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "'Backup file' is translated as 'αρχείο καταγραφής' (recording/logging file), not backup file. These are different concepts. 'Καταγραφή' means recording or logging, not backup storage.",
+          "suggestion": "Replace 'αρχείο καταγραφής' with 'αρχείο αντιγράφου ασφαλείας' (backup file) throughout the text.",
+          "checked_at": "2026-04-13T09:27:34.943Z",
+          "checked_by": "claude-code/haiku"
         }
       ],
       "approved_at": null
@@ -129,13 +139,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'upenić' is a typo/misspelling of 'upewnić'. While minor, in a critical warning dialog, this spelling error affects the professional quality and clarity of the instruction.",
-          "suggestion": "Jeśli Państwa konto nie znajduje się w pliku kopii zapasowej, utracą Państwo dostęp. Prosimy upewnić się, że przywracają Państwo poprawny plik kopii zapasowej, ponieważ ta akcja nie może zostać cofnięta."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -177,37 +181,19 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'ni prepovedljivo' means 'is not forbidden/prohibited', which is the opposite of the English 'cannot be undone' (irreversible).",
-          "suggestion": "Če vaš račun ni vključen v varnostno kopijo, boste izgubili dostop. Prosimo, preverite, da obnovite pravilno varnostno kopijo, saj tega dejanja ni mogoče prevrniti."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical gender error: 'kjo veprim' is incorrect because 'veprim' is a masculine noun in Albanian. It should be 'ky veprim'.",
-          "suggestion": "Nëse llogaria juaj nuk është përfshirë në skedarin e backup-ut, do të humbni aksesin. Ju lutemi sigurohuni që po rikuperoni skedarin e backup-ut të saktë, pasi ky veprim nuk mund të zhbëhet."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'account' was translated as 'налог' (nalog), which in Serbian typically means 'order', 'charge', or 'command'. In the context of software/IT, 'account' should be translated as 'налог' (nalog) only in very specific contexts, but for a user account, 'кориснички налог' or simply 'налог' is often confused with 'order'. However, the more critical error is that 'налог' is highly ambiguous here; 'кориснички налог' is the standard term for 'user account'.",
-          "suggestion": "Ако ваш кориснички налог није укључен у фајл за резервну копију, изгубићете приступ. Молимо вас да се уверите да враћате исправни фајл за резервну копију, јер ова акција не може бити поништена."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

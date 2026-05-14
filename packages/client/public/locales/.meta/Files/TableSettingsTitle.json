@@ -3,18 +3,25 @@
   "content": "Manage displayed columns",
   "content_en_sha1_hash": "edef33d6c30b6b2dbcd0652de4bbdd3b72cfe10e",
   "created_at": "2025-05-19T21:30:56.214Z",
-  "updated_at": "2026-04-07T19:35:05.096Z",
+  "updated_at": "2026-04-27T12:45:07.482Z",
   "comment": {
-    "text": "This translation key is used for the title of a settings panel or modal that allows users to manage displayed table columns. It appears in a UI component, possibly as a button or title, and provides context for users to understand its purpose.",
+    "text": "This is the title for a dialog or pop-up menu that allows users to customize which columns are visible in a table view.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:39:05.932Z"
+    "updated_at": "2026-04-11T21:08:03.590Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 1036,
+      "line_number": 1038,
       "context": "isIndexEditingMode={isIndexEditingMode}\n infoPanelVisible={infoPanelVisible}\n useReactWindow\n tagRef={tagRef}\n setHideColumns={setHideColumns}\n settingsTitle={t(\"Files:TableSettingsTitle\")}\n showSettings={isFrame ? showSettings : true}\n />\n );\n }\n }",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/table-view/index.tsx",
+      "line_number": 166,
+      "context": "useReactWindow={!isSSR}\n sortBy={filterSortBy ?? undefined}\n sorted={filterSortOrder === \"descending\"}\n sortingVisible\n showSettings\n settingsTitle={t(\"Files:TableSettingsTitle\")}\n />\n <TableBody\n columnStorageName={COLUMN_STORAGE_NAME}\n columnInfoPanelStorageName={COLUMN_INFO_PANEL_STORAGE_NAME}\n fetchMoreFiles={fetchMoreFiles}",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

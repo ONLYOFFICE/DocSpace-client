@@ -3,17 +3,18 @@
   "content": "Create key",
   "content_en_sha1_hash": "e028cb09f2a481aec3b30e1b7d57d0e8976efb23",
   "created_at": "2026-04-03T21:51:36.617Z",
-  "updated_at": "2026-04-09T03:52:19.502Z",
+  "updated_at": "2026-04-11T21:25:13.605Z",
   "comment": {
-    "text": "Used as a link title or button label within the Developer Tools section of the Portal Settings. It represents the action of generating a new API key.",
+    "text": "This is a button label that creates a new API key.",
     "is_auto": true,
-    "updated_at": "2026-04-03T22:01:11.557Z"
+    "updated_at": "2026-04-11T21:25:13.605Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 123,
-      "context": "icon={<KeySvg />}\n title={t(\"Settings:ApiKeys\")}\n description={t(\"Settings:ApiKeysCardDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}\n url=\"/developer-tools/api-keys?create=true\"\n color={globalColors.lightGrayDark}\n linkTitle={t(\"Settings:CreateKey\")}\n />\n </div>\n </div>\n </ConfirmWrapper>\n );",
+      "line_number": 124,
+      "context": "icon={<KeySvg />}\n title={t(\"Settings:ApiKeys\")}\n description={t(\"Settings:ApiKeysCardDescription\", { organizationName: getBrandName(\"OrganizationName\"), productName: getBrandName(\"ProductName\") })}\n url=\"/developer-tools/api-keys?create=true\"\n color={globalColors.lightGrayDark}\n linkTitle={t(\"Settings:CreateKey\")}\n />\n </div>\n </div>\n </ConfirmWrapper>\n );",
       "module": "/packages/client"
     }
   ],
@@ -207,13 +208,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '创建键' (Create key/button) is too literal and sounds unnatural in a software context. In Chinese UI, 'Key' in the context of API/Security is typically translated as '密钥' (Secret Key/API Key). '键' usually refers to a physical keyboard key.",
-          "suggestion": "创建密钥"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

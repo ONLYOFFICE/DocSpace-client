@@ -54,6 +54,7 @@ import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 import { TContactsTab, getContactsUrl } from "SRC_DIR/helpers/contacts";
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
+import { getConstName } from "@docspace/shared/constants/consts";
 
 type TFilterValues = (TGroupItem | TItem)[];
 
@@ -412,9 +413,9 @@ export const useContactsFilter = ({
       if (usersFilter?.accountLoginType?.toString()) {
         const label =
           AccountLoginType.SSO === usersFilter.accountLoginType.toString()
-            ? t("Common:SSO")
+            ? getConstName("SSO")
             : AccountLoginType.LDAP === usersFilter.accountLoginType.toString()
-              ? t("Common:LDAP")
+              ? getConstName("LDAP")
               : t("PeopleTranslations:StandardLogin");
         filterValues.push({
           key: usersFilter.accountLoginType.toString(),
@@ -629,12 +630,12 @@ export const useContactsFilter = ({
           {
             key: AccountLoginType.SSO,
             group: "filter-login-type",
-            label: t("Common:SSO"),
+            label: getConstName("SSO"),
           },
           {
             key: AccountLoginType.LDAP,
             group: "filter-login-type",
-            label: t("Common:LDAP"),
+            label: getConstName("LDAP"),
           },
           {
             key: AccountLoginType.STANDART,

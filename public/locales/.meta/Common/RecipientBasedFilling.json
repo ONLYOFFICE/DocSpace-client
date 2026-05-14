@@ -3,11 +3,12 @@
   "content": "Recipient role-based filling",
   "content_en_sha1_hash": "ebc4e0839dc0c879f17088af65d2186c9e8179ca",
   "created_at": "2025-10-13T13:22:10.782Z",
-  "updated_at": "2026-04-08T01:48:44.141Z",
+  "updated_at": "2026-04-12T03:19:38.137Z",
   "comment": {
-    "text": "This text appears as the title for a button or option, likely in a dialog or panel, and describes the action of filling out a form based on the recipient's role. It allows users to share a form with specific individuals or roles within a room or data room.",
+    "text": "This is a title for an option to share a form for recipient role-based filling. It appears in dialogs for sharing forms.",
     "is_auto": true,
-    "updated_at": "2025-10-13T14:24:22.180Z"
+    "updated_at": "2026-04-11T20:45:31.707Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -24,7 +25,7 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
-      "line_number": 202,
+      "line_number": 203,
       "context": "onClick: onClickFormRoom,\n icon: <FormDataCollectionIcon />,\n },\n {\n id: \"virtual-data-room\",\n title: t(\"Common:RecipientBasedFilling\"),\n description: t(\"Common:RecipientBasedFillingDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: onClickVirtualDataRoom,\n icon: <RoleBasedFillingIcon />,\n },",
       "module": "/packages/doceditor"
     }
@@ -51,13 +52,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian word order is incorrect, making the phrase ungrammatical and confusing. It translates literally to 'Recipient, based on role filling', which does not convey the concept of 'role-based filling for the recipient'.",
-          "suggestion": "Попълване въз основа на ролята на получателя"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -75,13 +70,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation is redundant and tautological ('Recipient role based on roles'), which fails to accurately convey the English meaning of 'filling out [a form] based on the recipient's role'.",
-          "suggestion": "Συμπλήρωση βάσει ρόλου παραλήπτη"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -135,25 +124,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Adresāta lomas balstīta aizpildīšana' is grammatically incorrect and awkward. 'Lomas balstīta' is a literal, incorrect way to say 'role-based'. It should be 'lomu balstīta' or 'balstīta uz lomu'.",
-          "suggestion": "Aizpildīšana, balstoties uz adresāta lomu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Dutch translation 'Ontvangergerol-gebaseerd' is a nonsensical compound word. 'Gerol' means 'rolled' in Dutch, whereas the English 'role' refers to a function or position ('rol'). The translation incorrectly attempts to combine 'recipient' and 'role' into a single broken word.",
-          "suggestion": "Invullen op basis van rol van de ontvanger"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -195,13 +172,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'rola-založené' is a literal, calqued translation from English that is grammatically incorrect and unnatural in Slovak. The use of a comma after 'Príjemca' also incorrectly separates the subject from the action.",
-          "suggestion": "Vyplňovanie na základe role príjemcu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {

@@ -221,6 +221,7 @@ export const enum PageType {
   groups = "groups",
   guests = "guests",
   aiSettings = "aiSettings",
+  newAISettings = "new-ai-settings",
 }
 
 export const enum ConflictResolveType {
@@ -333,7 +334,6 @@ export const enum TariffState {
   Delay = 2,
   NotPaid = 3,
 }
-
 
 /**
  * Enum for payment method status.
@@ -606,6 +606,8 @@ export enum WebhookTriggers {
   AgentCreated = 2147483648,
   AgentUpdated = 4294967296,
   AgentDeleted = 8589934592,
+  FileDownloaded = 17179869184,
+  FolderDownloaded = 34359738368,
 }
 
 export enum RoomSecurityError {

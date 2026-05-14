@@ -3,16 +3,17 @@
   "content": "Allow inviting guests",
   "content_en_sha1_hash": "4a09c16f30591c146b613bc29c19cb5ea20bb65c",
   "created_at": "2025-05-26T07:15:51.094Z",
-  "updated_at": "2026-04-09T02:48:07.920Z",
+  "updated_at": "2026-04-11T21:23:45.843Z",
   "comment": {
-    "text": "This translation key controls the text displayed on a button that allows users to invite guests. The text is used in a portal settings page and changes depending on the user's preference. It appears as part of a styled text element with an onClick event listener, indicating its interactive function.",
+    "text": "This is a checkbox label in the portal settings. It allows administrators to control whether users can invite external guests to DocSpace.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:09:53.925Z"
+    "updated_at": "2026-04-11T21:23:45.843Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 323,
+      "line_number": 324,
       "context": "fontWeight=\"600\"\n lineHeight=\"20px\"\n onClick={onChangeGuests}\n noSelect\n >\n {t(\"InvitationSettingsGuests\")}\n </Text>\n </div>\n \n <Text\n fontSize=\"12px\"",
       "module": "/packages/client"
     }
@@ -39,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation 'Позволете канени гости' translates to 'Allow invited guests', which changes the meaning from an action (allowing the act of inviting) to a state (allowing guests who are already invited).",
-          "suggestion": "Позволете поканяване на гости"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -123,13 +118,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Dutch translation 'Sta gasten uit te nodigen' is grammatically incorrect and does not convey the intended meaning of 'Allow inviting guests'. It translates roughly to 'Stand guests to invite'.",
-          "suggestion": "Sta het uitnodigen van gasten toe"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -147,25 +136,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation 'Permitir convites' (Allow invitations) omits the specific object 'guests' (convidados) present in the English source 'Allow inviting guests'.",
-          "suggestion": "Permitir convite de convidados"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation is redundant and grammatically awkward ('invitarea în calitate de invitat' means 'inviting in the capacity of a guest'). It fails to convey the functional command 'Allow inviting guests'.",
-          "suggestion": "Permite invitarea oaspeților"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

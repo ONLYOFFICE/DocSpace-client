@@ -3,13 +3,27 @@
   "content": "Form managers",
   "content_en_sha1_hash": "ee318aa8a16693899a12fb9cec3ac9ecd5c957a6",
   "created_at": "2026-03-20T09:07:28.351Z",
-  "updated_at": "2026-04-08T08:48:46.479Z",
+  "updated_at": "2026-04-11T20:52:04.015Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a section header in the form settings, indicating the area where users can manage individuals responsible for forms.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:52:04.015Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/ContactsForm.tsx",
+      "line_number": 249,
+      "context": "</div>\n \n <div className={styles.toggleBlock}>\n <div className={styles.toggleHeader}>\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"Common:FormManagers\")}\n </Text>\n </div>\n <Text fontSize=\"12px\" fontWeight={400}>\n {t(\"Common:FormManagersDescription\")}\n </Text>",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/ContactsForm.tsx",
+      "line_number": 249,
+      "context": "</div>\n \n <div className={styles.toggleBlock}>\n <div className={styles.toggleHeader}>\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"Common:FormManagers\")}\n </Text>\n </div>\n <Text fontSize=\"12px\" fontWeight={400}>\n {t(\"Common:FormManagersDescription\")}\n </Text>",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -50,13 +64,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English 'Form managers' refers to people/entities that manage forms (plural noun), whereas the Greek 'Διαχείριση Φορμών' means 'Form management' (action/process).",
-          "suggestion": "Διαχειριστές Φορμών"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -110,13 +118,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian text is identical to the English text, meaning it is not actually translated into Latvian.",
-          "suggestion": "Formu vadītāji"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -158,13 +160,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text is plural ('managers'), but the Sinhala translation is singular ('කළමනාකරු').",
-          "suggestion": "පෝරම කළමනාකරුවන්"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -182,13 +178,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Albanian translation 'Menaxherë formaresash' translates to 'Managers of forms' (plural/possessive) or implies managers of a specific form-related entity, but 'formaresash' is a non-standard/incorrect word construction in Albanian for 'forms'. The correct term for 'forms' is 'formave'.",
-          "suggestion": "Menaxherët e formave"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

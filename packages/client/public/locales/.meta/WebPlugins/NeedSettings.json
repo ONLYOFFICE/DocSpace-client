@@ -3,17 +3,18 @@
   "content": "Need enter settings",
   "content_en_sha1_hash": "7c8461e2e83ab971323d60705984dfd56a9fc031",
   "created_at": "2025-05-19T21:30:49.912Z",
-  "updated_at": "2026-04-08T18:43:14.283Z",
+  "updated_at": "2026-04-13T14:59:05.776Z",
   "comment": {
-    "text": "This translation key is used for the label of a settings-related button or dialog. It displays the phrase \"Need enter settings\" to indicate that user settings need to be accessed or updated, typically in a plugin management interface.",
+    "text": "This is a status label indicating that a plugin requires configuration. It appears in the plugin's information dialog.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:42.023Z"
+    "updated_at": "2026-04-11T21:27:56.283Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Info.tsx",
-      "line_number": 46,
-      "context": "const locale = getCookie(LANGUAGE) || \"en\";\n const uploadDate = plugin.createOn && getCorrectDate(locale, plugin.createOn);\n \n const pluginStatus =\n plugin.status === PluginStatus.active\n ? t(\"NotNeedSettings\")\n : t(\"NeedSettings\");\n \n const incompatibleTooltip = t(\"WebPlugins:PluginIsNotCompatible\", {\n productName: t(\"Common:ProductName\"),\n });",
+      "line_number": 48,
+      "context": "const uploadDate = plugin.createOn && getCorrectDate(locale, plugin.createOn);\n \n const pluginStatus =\n plugin.status === PluginStatus.active\n ? t(\"NotNeedSettings\")\n : t(\"NeedSettings\");\n \n const incompatibleTooltip = t(\"WebPlugins:PluginIsNotCompatible\", {\n productName: getBrandName(\"ProductName\"),\n });",
       "module": "/packages/client"
     }
   ],
@@ -39,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation 'Нужни са настройки за влизане' means 'Settings for logging in are required', which changes the meaning from 'Settings need to be entered/configured' to a requirement for authentication/login.",
-          "suggestion": "Необходими са настройки"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -75,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Need enter settings' (likely a shorthand for 'Settings required' or 'Need to enter settings') is translated as 'Tarvitsee sisäänpääsyasetukset', which means 'Needs access settings' or 'Requires entry settings'. In the context of a plugin status, it should indicate that settings are required for the plugin to function.",
-          "suggestion": "Asetukset vaaditaan"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -105,25 +94,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English source 'Need enter settings' (likely a typo for 'Need to enter settings' or 'Settings required') implies a requirement or a status. The Japanese '設定の入力' means 'Input of settings', which describes an action of typing data rather than the necessity of accessing/configuring settings.",
-          "suggestion": "設定が必要です"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Need enter settings' (likely a shorthand for 'Settings are required' or 'Need to enter settings') is translated as '설정을 입력해야 합니다', which means 'You must input/type the settings'. In a UI context for plugin status, this implies data entry rather than accessing a configuration menu.",
-          "suggestion": "설정 필요"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -141,13 +118,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English source 'Need enter settings' (likely a typo for 'Need to enter settings' or 'Settings required') implies a requirement or a state. The Dutch translation 'Instellingen invoeren' means 'Enter settings' (as a command/action), which changes the meaning from a status/requirement to an instruction.",
-          "suggestion": "Instellingen vereist"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -177,25 +148,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Need enter settings' (likely a shorthand for 'Need to enter settings' or 'Settings required') is translated as 'Нужно ввести настройки', which means 'Need to input/enter settings' (as in typing data). In the context of a plugin status, it should mean 'Settings are required' or 'Need to access settings'.",
-          "suggestion": "Требуется настройка"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'සැකසුම් යෙදිය යුතුය' means 'Settings must be applied', whereas the English 'Need enter settings' implies the user needs to access or enter the settings interface.",
-          "suggestion": "සැකසුම් වෙත ඇතුළු විය යුතුය"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -231,13 +190,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English source 'Need enter settings' (likely a shorthand for 'Need to enter settings' or 'Settings required') implies that settings must be configured or accessed. The Ukrainian translation 'Необхідно ввести параметри' means 'It is necessary to input/type parameters', which suggests data entry rather than accessing a settings menu.",
-          "suggestion": "Потрібні налаштування"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -249,13 +202,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Need enter settings' (likely a shorthand for 'Settings required' or 'Need to enter settings') is translated as '需要输入设置', which means 'Need to input settings' (as in typing data). In the context of plugin management, it should mean that the user needs to access/configure the settings.",
-          "suggestion": "需要进入设置"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

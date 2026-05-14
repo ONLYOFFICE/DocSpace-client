@@ -3,11 +3,12 @@
   "content": "Add watermark elements",
   "content_en_sha1_hash": "94abb53514ef98225a4845be5d8c3af77e687253",
   "created_at": "2025-05-19T21:30:56.773Z",
-  "updated_at": "2026-04-07T19:35:05.054Z",
+  "updated_at": "2026-04-11T21:04:58.607Z",
   "comment": {
-    "text": "This translation key is used for the \"Add Watermark Elements\" title in a dialog component, appearing as the header of a watermark viewer section. It provides context for users when adding watermarks to their room.",
+    "text": "This is the title for a section within a dialog, prompting the user to add elements to a watermark. It appears when configuring watermark settings.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:12.762Z"
+    "updated_at": "2026-04-11T21:04:58.607Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

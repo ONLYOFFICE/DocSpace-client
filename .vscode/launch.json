@@ -39,6 +39,45 @@
                 "${workspaceFolder}/packages/doceditor/**",
                 "!**/node_modules/**"
             ]
+        },
+        {
+            "type": "node-terminal",
+            "request": "launch",
+            "name": "Debug @docspace/login",
+            "command": "pnpm start",
+            "cwd": "${workspaceFolder}/packages/login",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "env": {
+                "NODE_OPTIONS": "--use-system-ca"
+            }
+        },
+        {
+            "type": "node-terminal",
+            "request": "launch",
+            "name": "Debug @docspace/sdk",
+            "command": "pnpm start",
+            "cwd": "${workspaceFolder}/packages/sdk",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "env": {
+                "NODE_OPTIONS": "--use-system-ca"
+            }
+        },
+        {
+            "type": "node-terminal",
+            "request": "launch",
+            "name": "Debug @docspace/management",
+            "command": "pnpm start",
+            "cwd": "${workspaceFolder}/packages/management",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "env": {
+                "NODE_OPTIONS": "--use-system-ca"
+            }
         }
     ]
 }

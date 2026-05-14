@@ -3,16 +3,17 @@
   "content": "Restore backup",
   "content_en_sha1_hash": "a65eaa8807ce20b05cbf7055a7847567a029f9cc",
   "created_at": "2026-03-20T09:07:35.022Z",
-  "updated_at": "2026-04-08T01:16:42.273Z",
+  "updated_at": "2026-04-13T09:21:24.620Z",
   "comment": {
-    "text": "This key provides the title for a confirmation dialog that appears when restoring a backup. It's used within the header of a modal dialog, confirming the user's intent to restore data from a backup. Translators should ensure the text clearly conveys the action of restoring a backup.",
+    "text": "This is the title of a confirmation dialog that appears when a user initiates the process of restoring a backup.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:12:13.361Z"
+    "updated_at": "2026-04-11T20:44:55.362Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/restore-confirm-modal/index.tsx",
-      "line_number": 70,
+      "line_number": 71,
       "context": "isCloseable={!isLoading}\n isLarge\n dataTestId=\"restore_backup_confirm_dialog\"\n >\n <ModalDialog.Header>\n {t(\"Common:RestoreBackupConfirmTitle\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div\n className={styles.restoreBackupConfirmModalBody}\n data-testid=\"restore_backup_confirm_modal\"",
       "module": "/packages/shared"
     }
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation 'Bərpərmək backup' is grammatically incorrect and nonsensical. 'Bərpərmək' is not a valid word; the verb 'to restore' should be 'bərpa etmək'.",
-          "suggestion": "Ehtiyat nüsxəni bərpa et"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -117,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Atgādināt kopiju' means 'Remind copy' or 'Remind a copy', which is semantically incorrect. The correct term for 'Restore' in this context is 'Atjaunot'.",
-          "suggestion": "Atjaunot kopiju"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -153,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Restaură' is a noun (restoration) or a misspelling, whereas the English 'Restore' is an imperative verb. In Romanian UI context for an action/title, 'Restaurare' (noun) or 'Restabilește' (verb) is required. 'Restaură' is grammatically incorrect in this context.",
-          "suggestion": "Restaurare backup"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -183,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian verb 'Povprejti' means 'to average' or 'to find the mean'. The correct verb for 'to restore' in this context is 'Obnovi'.",
-          "suggestion": "Obnovi varnostno kopijo"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
@@ -201,13 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation uses the wrong grammatical case for 'backup'. 'Резервног копија' is grammatically incorrect; it should be 'резервне копије' to match the genitive case required by the noun 'рестаурација'.",
-          "suggestion": "Рестаурација резервне копије"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

@@ -3,16 +3,17 @@
   "content": "Content creators can use the chat and work with files in Result storage.\nThey can upload files to the knowledge base but can’t manage users or access agent settings.",
   "content_en_sha1_hash": "e27411f3623a5d8953b04314ff55c986854b2ed2",
   "created_at": "2025-11-19T19:14:48.494Z",
-  "updated_at": "2026-04-08T00:56:29.040Z",
+  "updated_at": "2026-04-13T08:58:50.148Z",
   "comment": {
-    "text": "This key provides a description of the role \"Content Creator\" in an AI Room. It explains their ability to chat, work with files, upload to the knowledge base, but not manage users or agent settings. Translators should ensure this accurately reflects the content creator's permissions.",
+    "text": "This is a description of the \"Content Creator\" role for an AI Agent, displayed in a list of available roles. It explains the permissions associated with this role.",
     "is_auto": true,
-    "updated_at": "2025-11-19T19:17:29.637Z"
+    "updated_at": "2026-04-11T20:44:41.509Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 85,
+      "line_number": 86,
       "context": "const getUserDescription = (roomType: RoomsType, t: TTranslation) => {\n switch (roomType) {\n case RoomsType.FormRoom:\n return t(\"Common:RolePowerUserFormRoomDescription\");\n case RoomsType.AIRoom:\n return t(\"Common:RoleAIAgentContentCreatorDescription\");\n case None:\n return (\n <Trans\n t={t as TFunction}\n ns=\"Common\"",
       "module": "/packages/shared"
     }
@@ -69,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Result storage' is translated as 'tulostallennustila', which in Finnish context usually refers to 'print storage' or 'output storage'. In the context of ONLYOFFICE/AI, 'Result storage' is a specific technical component/location name and should likely be treated as a proper noun or translated more accurately to reflect 'storage of results'.",
-          "suggestion": "Sisällöntuottajat voivat käyttää chattia ja työskennellä Result-tallennustilassa olevien tiedostojen kanssa. He voivat ladata tiedostoja tietopankkiin, mutta he eivät voi hallita käyttäjiä tai käyttää agentin asetuksia."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -87,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'չեն կարողանում օգտվողներով կառավարել' is grammatically incorrect and semantically broken in Armenian. It translates roughly to 'cannot manage with users' instead of 'cannot manage users'. Additionally, 'մանգաղ' is a typo/nonsense word in this context; it seems to be a failed attempt to translate 'manage' or 'access', but it does not exist in Armenian. The translation of 'access agent settings' is also garbled.",
-          "suggestion": "Բովանդակության ստեղծողները կարող են օգտագործել չաթը և աշխատել Result պահեստում գտնվող ֆայլերի հետ։ Նրանք կարող են ֆայլեր բեռնել գիտելիքների բազա, բայց չեն կարող կառավարել օգտվողներին կամ մուտք գործել գործակալի կարգավորումներ։"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -189,13 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'chat' is incorrectly translated as 'ћет' (cet), which is a fragment/typo and does not mean 'chat' in Serbian. It should be 'чат'.",
-          "suggestion": "Креатори садржаја могу користити чат и радити са датотекама у складишту резултата.\nМогу да учитавају фајлове у базу знања, али не могу да управљају корисницима или приступе подешавањима агента."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -207,7 +190,15 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "\"access agent settings\" is translated as \"aracı ayarlarını değiştiremezler\" (cannot modify/change agent settings), but \"access\" in English means they have no access at all to that feature, whereas the Turkish specifically means \"cannot modify\" (implying viewing might still be possible). These convey different permission levels.",
+          "suggestion": "Dosyaları bilgi tabanına yükleyebilirler ancak kullanıcıları yönetemezler veya aracı ayarlarına erişemezler. (Use \"erişemezler\" for \"access\")",
+          "checked_at": "2026-04-13T08:58:43.457Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

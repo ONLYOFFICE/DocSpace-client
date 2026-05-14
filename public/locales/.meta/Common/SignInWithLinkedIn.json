@@ -3,16 +3,17 @@
   "content": "Sign in with LinkedIn",
   "content_en_sha1_hash": "c3ef8d2884998eed756a696c641cca91c150684a",
   "created_at": "2025-05-19T21:30:48.771Z",
-  "updated_at": "2026-04-10T08:21:04.402Z",
+  "updated_at": "2026-04-23T17:24:02.128Z",
   "comment": {
-    "text": "The translation key \"SignInWithLinkedIn\" is used to display a label for signing in with LinkedIn on the login screen. It appears as part of a button or similar UI element, allowing users to connect their LinkedIn account to access the application. The text should be clear and concise for internationalization purposes.",
+    "text": "This is a button label that allows users to sign in to DocSpace using their LinkedIn account.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:40:22.096Z"
+    "updated_at": "2026-04-11T20:42:42.895Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 477,
+      "line_number": 473,
       "context": "? t(\"Common:SignUpWithTwitter\")\n : t(\"Common:SignInWithTwitter\");\n case \"linkedin\":\n return signUp\n ? t(\"Common:SignUpWithLinkedIn\")\n : t(\"Common:SignInWithLinkedIn\");\n case \"microsoft\":\n return signUp\n ? t(\"Common:SignUpWithMicrosoft\")\n : t(\"Common:SignInWithMicrosoft\");\n case \"sso\":",
       "module": "/packages/shared"
     }
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The preposition 'with' is missing in the Arabic translation, making the phrase 'Sign in LinkedIn' instead of 'Sign in with LinkedIn'.",
-          "suggestion": "تسجيل الدخول باستخدام LinkedIn"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -207,13 +202,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Chinese translation '解绑LinkedIn登录' means 'Unbind LinkedIn login', which is the opposite of the English 'Sign in with LinkedIn'.",
-          "suggestion": "使用 LinkedIn 登录"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

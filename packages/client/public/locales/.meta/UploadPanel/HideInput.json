@@ -3,11 +3,12 @@
   "content": "Hide",
   "content_en_sha1_hash": "34d8b60fe25332f7b98585e82e753eaf502c3e50",
   "created_at": "2025-05-19T21:30:49.949Z",
-  "updated_at": "2026-04-08T20:51:19.592Z",
+  "updated_at": "2026-04-11T21:27:41.356Z",
   "comment": {
-    "text": "This translation key is used to display \"Hide\" when a password input field needs to be toggled on or off. It appears as a button text in an error file component and is linked to the visibility of a password input field.",
+    "text": "This is a button label that appears when a password input field is visible, allowing the user to hide it.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:37.892Z"
+    "updated_at": "2026-04-11T21:27:41.356Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

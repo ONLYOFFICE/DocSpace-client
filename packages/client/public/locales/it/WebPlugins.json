@@ -3,7 +3,7 @@
   "DeletePluginDescription": "Questo plugin non sarà più disponibile per gli utenti di {{productName}}. Sei sicuro di voler continuare?",
   "DeletePluginTitle": "Eliminare il plugin?",
   "ExpandFunctionality": "Espandi le funzionalità utilizzando l'SDK del plugin",
-  "GoToRepo": "Vai su GitHub",
+  "GoToRepo": "Vai al repository",
   "Metadata": "Metadata",
   "NeedSettings": "È necessario inserire le impostazioni",
   "NoPlugins": "Nessun plugin aggiunto",

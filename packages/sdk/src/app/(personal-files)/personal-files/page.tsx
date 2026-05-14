@@ -59,13 +59,22 @@ const serializeFilter = (filter: FilesFilter) => {
   return params.toString();
 };
 
-export default async function Docs() {
+export default async function Docs({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string>>;
+}) {
   const cookieStore = await cookies();
   const authToken = cookieStore.get("asc_auth_key")?.value || "";
+  const params = await searchParams;
 
   const filter = FilesFilter.getDefault();
-  filter.folder = "@my";
-  filter.pageCount = PAGE_COUNT;
+  filter.folder = params.folder || "@my";
+  filter.pageCount = params.pageCount ? Number(params.pageCount) : PAGE_COUNT;
+  if (params.page) filter.page = Math.max(0, Number(params.page) - 1);
+  if (params.sortBy) filter.sortBy = params.sortBy as typeof filter.sortBy;
+  if (params.sortOrder) filter.sortOrder = params.sortOrder as typeof filter.sortOrder;
+  if (params.search) filter.search = params.search;
 
   const filesFilter = serializeFilter(filter);
 
@@ -77,7 +86,7 @@ export default async function Docs() {
   try {
     [filesSettings, folderData, portalSettings, user] = await Promise.all([
       getFilesSettings(),
-      getFolder("@my", filter),
+      getFolder(filter.folder, filter),
       getSettings(),
       getSelf(),
     ]);

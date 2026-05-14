@@ -40,6 +40,7 @@ import { useLocation } from "react-router";
 import { isMobile } from "react-device-detect";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { checkProtocol } from "../../helpers/files-helpers";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const StyledPrivacyPage = styled.div.attrs(injectDefaultTheme)`
   margin-top: ${isMobile ? "80px" : "36px"};
@@ -134,7 +135,7 @@ const PrivacyPageComponent = ({ t, tReady, logoText, desktopUrl }) => {
         setIsDisabled(false);
         toastr.info(
           t("PrivacyEditors", {
-            organizationName: logoText,
+            OnlyofficeDesktopEditors: getBrandName("OnlyofficeDesktopEditors"),
           }),
         );
       });
@@ -171,7 +172,7 @@ const PrivacyPageComponent = ({ t, tReady, logoText, desktopUrl }) => {
             i18nKey="PrivacyClick"
             ns="PrivacyPage"
             values={{
-              organizationName: logoText,
+              OnlyofficeDesktopEditors: getBrandName("OnlyofficeDesktopEditors"),
             }}
             components={{
               1: <strong />,
@@ -193,7 +194,7 @@ const PrivacyPageComponent = ({ t, tReady, logoText, desktopUrl }) => {
           primary
           isDisabled={isDisabled}
           label={t("PrivacyButton", {
-            organizationName: logoText,
+            OnlyofficeDesktopEditors: getBrandName("OnlyofficeDesktopEditors"),
           })}
         />
 
@@ -206,9 +207,8 @@ const PrivacyPageComponent = ({ t, tReady, logoText, desktopUrl }) => {
             fontWeight={300}
           >
             {t("PrivacyEditors", {
-              organizationName: logoText,
+              OnlyofficeDesktopEditors: getBrandName("OnlyofficeDesktopEditors"),
             })}
-            ?
           </Text>
           <Link
             className="privacy-rooms-link privacy-rooms-install-text"
@@ -228,7 +228,7 @@ const PrivacyPageComponent = ({ t, tReady, logoText, desktopUrl }) => {
         >
           <p>
             {t("PrivacyDescriptionEditors", {
-              organizationName: logoText,
+              OnlyofficeDesktopEditors: getBrandName("OnlyofficeDesktopEditors"),
             })}
             .
           </p>

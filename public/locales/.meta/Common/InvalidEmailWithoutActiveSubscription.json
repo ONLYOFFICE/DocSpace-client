@@ -3,13 +3,21 @@
   "content": "We recommend choosing a new Payer who gets access to subscription settings in {{productName}}.",
   "content_en_sha1_hash": "9892967bb06c7eefb95a79087af920be8fb6dea6",
   "created_at": "2026-04-10T13:53:42.627Z",
-  "updated_at": "2026-04-10T13:53:42.627Z",
+  "updated_at": "2026-04-11T20:50:42.521Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is an error message displayed to the current owner of a subscription when their email is invalid and the subscription is not in a paid period. It suggests choosing a new payer. `{{productName}}` is the name of the product.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:50:42.521Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/payer-information/index.tsx",
+      "line_number": 107,
+      "context": "productName: getBrandName(\"ProductName\"),\n });\n \n if (isNotPaidPeriod) {\n invalidEmailDescription = isOwner\n ? t(\"InvalidEmailWithoutActiveSubscription\", {\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"InvalidEmailWithoutActiveSubscriptionByAdmin\", {\n productName: getBrandName(\"ProductName\"),\n });",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

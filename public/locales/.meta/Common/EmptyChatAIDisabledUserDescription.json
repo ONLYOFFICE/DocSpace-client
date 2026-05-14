@@ -3,18 +3,19 @@
   "content": "AI capabilities are currently turned off, which means this agent can’t process chats or tasks. To get back on track, ask your {{productName}} admin to enable AI features.",
   "content_en_sha1_hash": "b586f9691b5442ebacd7e527ad626e87d0309aa8",
   "created_at": "2025-11-03T12:10:17.276Z",
-  "updated_at": "2026-04-08T11:04:27.544Z",
+  "updated_at": "2026-04-11T20:54:06.206Z",
   "comment": {
-    "text": "This text explains to users why AI features are unavailable in the chat interface. It instructs them to contact their {{productName}} administrator to re-enable AI functionality. It appears within a \"no access\" screen for the chat.",
+    "text": "Error message displayed when a user tries to use AI features that have been disabled by an administrator. It informs the user that AI is off and suggests contacting their admin. `{{productName}}` will be replaced with the product's brand name (e.g., ONLYOFFICE DocSpace).",
     "is_auto": true,
-    "updated_at": "2025-11-03T12:13:19.893Z"
+    "updated_at": "2026-04-11T20:54:06.206Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/chat/components/chat-no-access-screen/index.tsx",
-      "line_number": 82,
-      "context": "productName: t(\"Common:ProductName\"),\n }),\n )\n // standalone/saas user\n .with([P._, false], () =>\n t(\"Common:EmptyChatAIDisabledUserDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n .otherwise(() => \"\");",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-no-access-screen/index.tsx",
+      "line_number": 86,
+      "context": "productName: getBrandName(\"ProductName\"),\n }),\n )\n // standalone/saas user\n .with([P._, false], () =>\n t(\"EmptyChatAIDisabledUserDescription\", {\n productName: getBrandName(\"ProductName\"),\n }),\n )\n .otherwise(() => \"\");",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'bu da agentin söhbətləri və tapşırıqları işləməyini olar' is grammatically broken and conveys an unclear meaning in Azerbaijani. It fails to accurately translate 'which means this agent can’t process chats or tasks'.",
-          "suggestion": "S.İ. (Süni İntellekt) funksiyaları hazırda söndürülü, bu o deməkdir ki, bu agent söhbətləri və ya tapşırıqları emal edə bilməz. Yenidən işə başlamak üçün, {{productName}} administratorundan S.İ. funksiyalarını aktiv etməsini xahiş edin."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -165,13 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'vrátili do koľají' is an incorrect/non-existent idiom in Slovak (likely a literal translation of 'get back on track'). Additionally, 'zapol' is a typo/incorrect word; the correct verb for 'enable' is 'zapnúť' or 'aktivovať'.",
-          "suggestion": "AI funkcie sú momentálne vypnuté, čo znamená, že tento agent nemôže spracovávať chaty ani úlohy. Aby ste mohli pokračovať, požiadajte administrátora {{productName}} o zapnutie AI funkcií."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -201,13 +190,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Tekrar yola getirmek için' is a literal translation of 'To get back on track' that sounds unnatural and incorrect in Turkish in this context. It implies 'to bring someone back to the right path' (rehabilitating/correcting behavior) rather than 'to resume normal operations' or 'to resolve the issue'.",
-          "suggestion": "AI yetenekleri şu anda kapalı durumda, bu da bu aracın sohbetleri veya görevleri işleyemediği anlamına gelir. Sorunu gidermek için {{productName}} yöneticinizden AI özelliklerini etkinleştirmesini isteyin."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

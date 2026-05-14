@@ -3,11 +3,12 @@
   "content": "Disable quota for this room",
   "content_en_sha1_hash": "5436cd032d1bc297d0b70db7a712281ddfd02ce0",
   "created_at": "2025-05-19T21:30:56.795Z",
-  "updated_at": "2026-04-07T19:35:05.055Z",
+  "updated_at": "2026-04-11T21:04:49.050Z",
   "comment": {
-    "text": "This translation key is used to display a message indicating that the quota for a room should be disabled. It appears in a Quota Form component as the label for a checkbox, allowing users to toggle this setting.",
+    "text": "This is a checkbox label. It allows the user to disable the storage quota for a specific room.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:09.687Z"
+    "updated_at": "2026-04-11T21:04:49.050Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

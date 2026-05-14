@@ -3,11 +3,12 @@
   "content": "Set quota to define storage limit.",
   "content_en_sha1_hash": "76b938d40e18046c5b737223c4a69f182b330d1c",
   "created_at": "2025-05-19T21:30:48.578Z",
-  "updated_at": "2026-04-07T23:26:57.549Z",
+  "updated_at": "2026-04-12T21:11:13.177Z",
   "comment": {
-    "text": "This translation key is used to display a label that informs the user about the storage limit they are setting. It appears in a change quota dialog where users can adjust the storage limits for files.",
+    "text": "This is a descriptive text within a modal dialog, explaining the purpose of setting a quota to define a storage limit.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:41:41.333Z"
+    "updated_at": "2026-04-11T20:43:12.493Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -105,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'ຄູ໋ຕ້າ' (khu ta) is a phonetic transliteration of 'quota' that is not standard Lao and is often used incorrectly. In a technical context for storage, 'ໂກຕ້າ' or 'ກຳນົດໂຄຕ້າ' is more appropriate, but more importantly, the current phrasing is awkward. However, the primary issue is that 'ຄູ໋ຕ້າ' is not a recognized term in Lao for 'quota'.",
-          "suggestion": "ກຳນົດໂກຕ້າເພື່ອຄຸ້ມຄອງຂີດຈຳກັດການເກັບຮັກສາ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -147,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Serați' is not a valid Romanian word in this context. It appears to be a mistranslation or a typo for 'Setați' (Set).",
-          "suggestion": "Setați cota pentru a defini limita spațiului de stocare."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -165,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'සලාකය' (salākaya) is used incorrectly. It appears to be a mistranslation or a typo for 'කෝටාව' (quota). 'සලාකය' does not mean 'quota' in this context.",
-          "suggestion": "ආචයන සීමාව නිර්වචනය කිරීමට කෝටාව සකසන්න."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

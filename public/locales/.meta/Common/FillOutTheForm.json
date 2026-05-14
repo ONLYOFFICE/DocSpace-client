@@ -1,0 +1,40 @@
+{
+  "key_path": "FillOutTheForm",
+  "content": "Fill out the form",
+  "content_en_sha1_hash": "6af93ad193a684463801b4d54db6ee6a6949b8d2",
+  "created_at": "2026-05-08T13:10:29.240Z",
+  "updated_at": "2026-05-08T19:46:45.003Z",
+  "comment": {
+    "text": "Clickable link label within a tooltip that directs the user to a form page.",
+    "is_auto": true,
+    "updated_at": "2026-05-08T13:11:21.562Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/sub-components/FormInfo/CollectionCard.tsx",
+      "line_number": 103,
+      "context": "color=\"accent\"\n onClick={onFillForm}\n type={LinkType.page}\n className={styles.tooltipLink}\n >\n {t(\"Common:FillOutTheForm\")}\n </LinkButton>\n </Tooltip>\n ) : null}\n </>\n );",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": true,
+      "ai_model": "google/gemma-4-26b-a4b-it",
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_script",
+          "description": "Translation contains characters from wrong writing system for sr-Cyrl-RS"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

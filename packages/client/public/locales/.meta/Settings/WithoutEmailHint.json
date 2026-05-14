@@ -3,11 +3,12 @@
   "content": "You don’t have users without emails. Please proceed to the next step.",
   "content_en_sha1_hash": "12a3fe47045d798f04cd05aa9c40ce724578493c",
   "created_at": "2025-05-19T21:30:53.237Z",
-  "updated_at": "2026-04-08T23:44:42.870Z",
+  "updated_at": "2026-04-11T21:21:14.850Z",
   "comment": {
-    "text": "This translation key is used to display a hint message when users attempt to add emails without having any users. The purpose of this message is to inform users that they need to have at least one user before proceeding. It appears on the \"Add Emails Step\" page in the data import component.",
+    "text": "This is a text message displayed when there are no users without email addresses to process during a data import. It informs the user that they can proceed to the next step.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:05.752Z"
+    "updated_at": "2026-04-11T21:21:14.850Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -45,13 +46,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech translation says 'You don't have users without emails', which implies the user has only users WITH emails. The English source 'You don’t have users without emails' is actually a double negative that, in this context, is intended to mean 'You have no users to assign these emails to' or 'You cannot proceed because there are no users available'. However, the Czech translation 'Bez e-mailů nemáte uživatele' literally means 'Without emails, you don't have users', which reverses the logic of the requirement (the requirement is to have users first, not emails).",
-          "suggestion": "Nemáte žádné uživatele bez e-mailů. Pokračujte v dalším kroku."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -81,37 +76,19 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The French translation says 'There are no users without email addresses', which is the opposite of the English meaning 'You don't have users without emails' (implying all current users have emails, or there are no users to begin with). Based on the context, the English message is intended to say that the user cannot proceed because they lack users who don't have emails, or more likely, the English itself is slightly awkward, but the French translation 'Il n'y a aucun utilisateur sans l'adresse e-mail' literally means 'There is no user without an email address', which fails to convey the instruction/warning logic intended.",
-          "suggestion": "Vous n'avez aucun utilisateur sans adresse e-mail. Veuillez passer à l'étape suivante."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation says 'You don't have users without emails', which is the literal translation of the English text but logically contradicts the intended context provided in the metadata. The metadata states the message should inform users that they need to have at least one user before proceeding. The English source text itself appears to be logically flawed/incorrectly phrased for its purpose, and the Armenian translation follows that error, resulting in a message that says the opposite of what is intended (it implies there are no users lacking emails, rather than saying there are no users at all).",
-          "suggestion": "Դուք չունեք օգտատերեր: Խնդրում ենք անցնել հաջորդ քայլին:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Italian translation says 'You don't have users without emails' (implying all users have emails), whereas the English context and logic indicate the message should inform the user that they have NO users at all to proceed with the email import.",
-          "suggestion": "Non hai utenti da importare. Ti preghiamo di procedere al passaggio successivo."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -135,37 +112,19 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Jums nav lietotāju bez e-pasta ziņojumiem' translates to 'You don't have users without email messages', which changes the meaning from 'users without emails' to 'users without email messages'.",
-          "suggestion": "Jums nav lietotāju bez e-pasta adresēm. Lūdzu, turpiniet ar nākamo soli."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Dutch translation says 'You don't have users without emails', which is the literal translation of the English text but contradicts the intended logic described in the context. The context states the message should inform users that they need to have at least one user before proceeding. The English source text itself appears to be logically flawed/incorrectly phrased based on the metadata, and the Dutch translation follows this error, resulting in a message that tells the user they have no users without emails (which is a confusing/opposite instruction to what is needed).",
-          "suggestion": "U heeft geen gebruikers om e-mailadressen aan toe te voegen. Ga door naar de volgende stap."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation is missing a period between the two sentences, causing them to run together as a single, grammatically incorrect sentence. While the prompt says not to report punctuation, in this specific case, the lack of a separator changes the logical structure of the two distinct instructions.",
-          "suggestion": "Nie masz użytkowników bez adresu e-mail. Przejdź do kolejnego kroku."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -195,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation contains a spelling error in the word 'පරිශ්‍රීලකයින්' (should be 'පරිශීලකයින්') and the term 'වි-තැපෑලක්' is an unnatural/incorrect way to translate 'emails' in this context, making the sentence awkward and technically inaccurate.",
-          "suggestion": "ඔබ සතුව විද්‍යුත් තැපෑලක් නොමැති පරිශීලකයින් නැත. කරුණාකර ඊළඟ පියවරට යන්න."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -243,30 +196,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation is a literal word-for-word translation that results in a logical contradiction. The English 'You don’t have users without emails' (meaning: all your users have emails) is translated as 'Bạn không có người dùng không có email', which is confusing and fails to convey the intended hint: that the user needs to create users first before they can add emails.",
-          "suggestion": "Bạn chưa có người dùng nào có email. Vui lòng chuyển sang bước tiếp theo."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation conveys the opposite meaning. The English says 'You don’t have users without emails' (meaning all users have emails), but the context and logic imply the user is trying to add emails when no users exist. More importantly, the Chinese text starts with '的用户' (the users'), which is grammatically broken and implies a missing subject, and the logic 'all users have emails' contradicts the intended warning that there are no users to assign emails to.",
-          "suggestion": "您没有未绑定电子邮件的用户。请继续下一步。"
-        },
-        {
-          "type": "missing_content",
-          "description": "The translation is grammatically incomplete; it starts with '的用户' (of the users), leaving the subject of the sentence missing.",
-          "suggestion": "您没有未绑定电子邮件的用户。请继续下一步。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

@@ -3,22 +3,23 @@
   "content": "This information will be displayed in the <1>{{link}}</1> window.",
   "content_en_sha1_hash": "feea1754462fa327a2109f784fab5e00ffad9082",
   "created_at": "2025-05-26T07:15:41.415Z",
-  "updated_at": "2026-04-10T08:58:38.057Z",
+  "updated_at": "2026-04-11T20:56:53.482Z",
   "comment": {
-    "text": "This translation key is used for a description displayed in a dialog window. When users view certain settings, this text will be shown explaining where the information can be accessed further.",
+    "text": "This is a descriptive text that appears below the company information settings. It informs the user where the entered company details will be visible. The `{{link}}` variable represents a clickable link to the \"About\" window.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:06:25.893Z"
+    "updated_at": "2026-04-11T20:56:53.482Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 155,
+      "line_number": 156,
       "context": "</div>\n <div className={classNames(styles.description, \"description\")}>\n {isSettingPaid ? (\n <Trans\n t={t}\n i18nKey=\"CompanyInfoSettingsDescription\"\n ns=\"Common\"\n values={{ link }}\n components={{\n 1: (\n <Link",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 155,
+      "line_number": 156,
       "context": "</div>\n <div className={classNames(styles.description, \"description\")}>\n {isSettingPaid ? (\n <Trans\n t={t}\n i18nKey=\"CompanyInfoSettingsDescription\"\n ns=\"Common\"\n values={{ link }}\n components={{\n 1: (\n <Link",
       "module": "/packages/shared"
     }

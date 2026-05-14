@@ -3,11 +3,12 @@
   "content": "Room editing",
   "content_en_sha1_hash": "7e94cbdf2a5ee908ecc10921847ef048385a3221",
   "created_at": "2025-05-19T21:30:56.831Z",
-  "updated_at": "2026-04-07T19:35:05.057Z",
+  "updated_at": "2026-04-11T21:04:32.448Z",
   "comment": {
-    "text": "This translation key is used to display a label for a room editing button in a Create/Edit Room Dialog. It appears on the header of the dialog and changes depending on whether the user is editing an existing template or creating a new room.",
+    "text": "This is the title of a dialog window used to modify the settings or details of an existing room.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:04.198Z"
+    "updated_at": "2026-04-11T21:04:32.448Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

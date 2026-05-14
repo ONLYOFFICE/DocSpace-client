@@ -3,16 +3,17 @@
   "content": "Enable external link access to other users.",
   "content_en_sha1_hash": "55fbc631105e51f47c0051057b6a4a0e4b6d66df",
   "created_at": "2025-05-19T21:30:56.538Z",
-  "updated_at": "2026-04-07T19:35:05.074Z",
+  "updated_at": "2026-04-11T21:06:38.387Z",
   "comment": {
-    "text": "\"Allow external users to access your public room link.\"",
+    "text": "This is the description text for an option to share a public room. It explains that enabling this option allows external users to access the room via a link.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:42.070Z"
+    "updated_at": "2026-04-11T21:06:38.387Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 331,
+      "line_number": 332,
       "context": "disabled: !security?.EditAccess || isFrame,\n };\n \n const sharePublicRoom = {\n title: t(\"EmptyView:SharePublicRoomOptionTitle\"),\n description: t(\"EmptyView:SharePublicRoomOptionDescription\"),\n icon: <SharedIcon />,\n key: \"share-public-room\",\n onClick: actions.createAndCopySharedLink,\n disabled: isFrame,\n };",
       "module": "/packages/client"
     }

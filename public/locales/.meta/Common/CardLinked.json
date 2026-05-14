@@ -3,13 +3,21 @@
   "content": "Card linked",
   "content_en_sha1_hash": "31ca8a7e8fc03c83180ed05978d5b26c59bcdbb0",
   "created_at": "2026-04-10T13:53:42.193Z",
-  "updated_at": "2026-04-10T13:53:42.193Z",
+  "updated_at": "2026-04-11T20:57:33.648Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a short label indicating that a credit card has been successfully linked to the user's account. It appears next to a card icon.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:57:33.648Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/card-information/index.tsx",
+      "line_number": 64,
+      "context": "<CardIconUrl />\n </div>\n \n <div className={styles.cardContent}>\n <Text fontSize=\"14px\" fontWeight={600} lineHeight=\"16px\">\n {walletCustomerStatusNotActive ? t(\"CardUnlinked\") : t(\"CardLinked\")}\n </Text>\n </div>\n \n <div\n className={classNames(styles.tickedWrapper, {",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

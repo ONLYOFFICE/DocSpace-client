@@ -3,34 +3,35 @@
   "content": "Filling",
   "content_en_sha1_hash": "98325be45e57b01ea42841fb2dc63e31875877c1",
   "created_at": "2025-08-26T11:14:56.341Z",
-  "updated_at": "2026-04-08T09:25:01.547Z",
+  "updated_at": "2026-04-11T20:52:32.783Z",
   "comment": {
-    "text": "This key represents the action of filling out forms. It's used as a label for a UI element, likely a button or menu item, granting access to form-filling functionality. Translators should consider a term that accurately conveys the action of completing a form.",
+    "text": "This is a label for a sharing permission option. It indicates that the user with this permission can fill out forms.",
     "is_auto": true,
-    "updated_at": "2025-08-26T11:27:25.127Z"
+    "updated_at": "2026-04-11T20:52:32.783Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 151,
+      "line_number": 152,
       "context": "title: t(\"Common:ReadOnly\"),\n },\n [ShareRights.FillForms]: {\n access: ShareAccessRights.FormFilling,\n key: \"filling\",\n label: t(\"Common:Filling\"),\n icon: FillFormsReactSvgUrl,\n },\n };\n \n return linkAccess",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 151,
+      "line_number": 152,
       "context": "title: t(\"Common:ReadOnly\"),\n },\n [ShareRights.FillForms]: {\n access: ShareAccessRights.FormFilling,\n key: \"filling\",\n label: t(\"Common:Filling\"),\n icon: FillFormsReactSvgUrl,\n },\n };\n \n return linkAccess",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 151,
+      "line_number": 152,
       "context": "title: t(\"Common:ReadOnly\"),\n },\n [ShareRights.FillForms]: {\n access: ShareAccessRights.FormFilling,\n key: \"filling\",\n label: t(\"Common:Filling\"),\n icon: FillFormsReactSvgUrl,\n },\n };\n \n return linkAccess",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 151,
+      "line_number": 152,
       "context": "title: t(\"Common:ReadOnly\"),\n },\n [ShareRights.FillForms]: {\n access: ShareAccessRights.FormFilling,\n key: \"filling\",\n label: t(\"Common:Filling\"),\n icon: FillFormsReactSvgUrl,\n },\n };\n \n return linkAccess",
       "module": "/packages/shared"
     }
@@ -51,13 +52,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Dolğu' refers to the act of filling a container (like a glass with water) or a physical filling. In the context of 'filling out forms' (Form Filling), the correct term should relate to completing or filling in data.",
-          "suggestion": "Doldurma"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -81,13 +76,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek word 'Γέμιση' refers to the physical act of filling a container (e.g., filling a glass with water). In the context of UI/forms, 'Συμπλήρωση' is the correct term for 'filling out' or 'completing' a form.",
-          "suggestion": "Συμπλήρωση"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -141,25 +130,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian word 'Apdrošināšana' means 'Insurance'. The English context 'Filling' refers to the action of completing/filling out forms.",
-          "suggestion": "Aizpildīšana"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Dutch word 'Vulling' refers to a physical filling (like food stuffing or dental filling). In the context of filling out forms, the correct term should describe the action of completing or filling in a form.",
-          "suggestion": "Invullen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -171,25 +148,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Enchimento' refers to the physical act of filling a container (like a bottle or a tank). In the context of forms/documents, 'Preenchimento' is the correct term for 'filling out'.",
-          "suggestion": "Preenchimento"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Enchimento' refers to the physical act of filling a container (like a tank or a bottle). In the context of forms and UI permissions, the correct term should refer to 'preenchimento' (completing/filling out a form).",
-          "suggestion": "Preenchimento"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -219,13 +184,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Polnjenje' refers to the process of filling a container (like a glass with water) or the act of refilling. In the context of 'filling out forms', the correct term should be 'Izpolnjevanje'.",
-          "suggestion": "Izpolnjevanje"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

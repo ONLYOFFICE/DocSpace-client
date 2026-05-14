@@ -3,13 +3,21 @@
   "content": "Available in {{count}} countries",
   "content_en_sha1_hash": "d69aedcd2f5c84bd66d6c2613c7df606cce06360",
   "created_at": "2026-03-31T15:18:15.055Z",
-  "updated_at": "2026-04-08T06:08:48.770Z",
+  "updated_at": "2026-04-11T20:50:11.670Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a short label displaying the number of countries where the library is available. The `{{count}}` variable represents this number.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:50:11.670Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/library-landing/StatsBar.tsx",
+      "line_number": 68,
+      "context": "</div>\n \n <div className={styles.statsCard}>\n <span className={styles.statsNumber}>{countriesCount}</span>\n <span className={styles.statsLabel}>\n {t(\"Common:LibraryStatsCountries\", { count: countriesCount })}\n </span>\n </div>\n </div>\n </section>\n );",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -146,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'රටවල් {{count}} ක ප්‍රමාණයක පවතින' translates to 'Exists in a quantity of {{count}} countries', which is semantically awkward and grammatically incorrect for expressing availability across a number of countries.",
-          "suggestion": "රටවල් {{count}} ක පවතිනවා"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -176,13 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation uses the wrong grammatical case for the noun following the number. In Serbian, when a number (count) is used, the noun must be in the genitive singular (земаља), but the preposition 'у' requires the accusative case (земље) for direction/location in this context, or more naturally, the preposition 'у' is used with the locative. However, the most critical error is that 'Доступно у {{count}} земаља' is grammatically incorrect; it should be 'Доступно у {{count}} земље' or 'Доступно у {{count}} држава'.",
-          "suggestion": "Доступно у {{count}} земље"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -194,13 +190,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Turkish translation uses the possessive suffix '-nde' (in its/their), which implies 'Available in its {{count}} countries' instead of 'Available in {{count}} countries'.",
-          "suggestion": "{{count}} ülkede mevcut"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -218,13 +208,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Chinese translation '支持 {{count}} 个国家' means 'Supports {{count}} countries', whereas the English 'Available in {{count}} countries' refers to availability/presence in those locations. While similar, '支持' (support) is semantically different from 'available in' in this context.",
-          "suggestion": "可在 {{count}} 个国家使用"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

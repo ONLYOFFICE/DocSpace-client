@@ -36,7 +36,10 @@ export async function getCSP(): Promise<TGetCSPSettings | undefined> {
   try {
     const [req] = await createRequest([`/security/csp`], [["", ""]], "GET");
 
-    const res = await fetch(req, { next: { revalidate: 900 } });
+    const res = await fetch(req, {
+      next: { revalidate: 900 },
+      signal: AbortSignal.timeout(8000),
+    });
 
     if (!res.ok) {
       logger.error(`GET /security/csp failed: ${res.status}`);

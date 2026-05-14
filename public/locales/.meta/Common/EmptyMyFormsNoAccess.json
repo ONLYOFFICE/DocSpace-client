@@ -3,13 +3,21 @@
   "content": "There are no forms available yet.",
   "content_en_sha1_hash": "9f9f31306c6de5f541cf1d38ec573ffbe28ff39e",
   "created_at": "2026-03-31T15:18:11.122Z",
-  "updated_at": "2026-04-08T10:48:45.760Z",
+  "updated_at": "2026-04-11T20:53:51.946Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a message displayed when a user with insufficient permissions tries to access their \"My Forms\" section, indicating that no forms are available to them.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:53:51.946Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/forms-empty/index.tsx",
+      "line_number": 63,
+      "context": "const getEmptyTitle = () => {\n switch (activeSection) {\n case FormsSection.MyForms:\n return canCreate\n ? t(\"Common:EmptyMyForms\")\n : t(\"Common:EmptyMyFormsNoAccess\");\n case FormsSection.Library:\n return t(\"Common:EmptyLibrary\");\n case FormsSection.InProgress:\n return t(\"Common:EmptyInProgressForms\");\n case FormsSection.CompletedForms:",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -50,13 +58,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation refers to 'form elements' (στοιχεία φόρμας) instead of 'forms' (φόρμες).",
-          "suggestion": "Δεν υπάρχουν διαθέσιμες φόρμες ακόμα."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -110,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian word 'ekrānkārta' means 'widget', whereas the English text refers to 'forms'.",
-          "suggestion": "Nav pieejamas nekādas velapas."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -164,13 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical error in Slovak: 'Nie je' (singular) does not agree with 'formuláre' (plural). It should be 'Nie sú'.",
-          "suggestion": "Zatiaľ nie sú k dispozícii žiadne formuláre."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {

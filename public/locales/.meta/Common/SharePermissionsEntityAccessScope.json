@@ -3,16 +3,17 @@
   "content": "<1>{{accessType}}</1> will be able to <3>{{accessRights}}</3> {{shareContents}} of {{shareParent}}.",
   "content_en_sha1_hash": "d60c21d40db2e8ae5b6226321b0b0a4a461a4f2e",
   "created_at": "2025-08-26T11:15:00.768Z",
-  "updated_at": "2026-04-10T08:58:38.049Z",
+  "updated_at": "2026-04-12T20:21:20.028Z",
   "comment": {
-    "text": "This key displays a message explaining the access granted to a user, specifying their access type, rights, and the content/parent they can access. It's used to clarify sharing permissions within the UI, likely in a sharing dialog or permissions management section. Translators should ensure the phrasing accurately reflects the level of access being described.",
+    "text": "This is a sentence displayed in the sharing permissions dialog, indicating what a specific user or group ({{accessType}}) can do ({{accessRights}}) with the shared content ({{shareContents}}) within its parent folder or project ({{shareParent}}).",
     "is_auto": true,
-    "updated_at": "2025-08-26T11:16:42.149Z"
+    "updated_at": "2026-04-11T20:42:57.230Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 459,
+      "line_number": 460,
       "context": "return (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"SharePermissionsEntityAccessScope\"\n values={{ accessType, accessRights, shareContents, shareParent }}\n components={{\n 1: <strong key=\"strong-access-type\" />,\n 3: <strong key=\"strong-access-rights\" />,\n }}",
       "module": "/packages/shared"
     }
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation changes the grammatical structure in a way that makes the sentence awkward and potentially changes the relationship between the variables. The English structure is 'X will be able to [do Y] to [Z]', whereas the Azerbaijani version translates to 'X will have the ability to [do Y] the [Z] part of [Parent]', which is a semantic shift in how permissions are applied.",
-          "suggestion": "<1>{{accessType}}</1> {{shareParent}} -ın {{shareContents}} hissəsinə <3>{{accessRights}}</3> imkanı olacaq."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -57,13 +52,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation changes the meaning from 'will be able to [access rights]' to 'can [access rights] share'. The English sentence describes the capability/permission granted, whereas the German version incorrectly implies the action of sharing the content itself.",
-          "suggestion": "<1>{{accessType}}</1> wird in der Lage sein, {{shareContents}} von {{shareParent}} zu <3>{{accessRights}}</3>."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -135,13 +124,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation 'zawartości {{shareContents}} z {{shareParent}}' is grammatically incorrect and changes the meaning. In the English source, '{{shareContents}}' is the object being acted upon, and '{{shareParent}}' is the container. The Polish version translates to 'contents {{shareContents}} with {{shareParent}}', which is nonsensical in this context.",
-          "suggestion": "<1>{{accessType}}</1> będzie mógł/mogła <3>{{accessRights}}</3> {{shareContents}} {{shareParent}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -153,25 +136,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "extra_variable",
-          "description": "Extra variable(s) not in English: {{ accessType}}",
-          "suggestion": ""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation changes the meaning from 'will be able to [action]' to 'are permissions of [action]', which is grammatically incorrect and fails to convey the intended action/capability of the access type.",
-          "suggestion": "<1>{{accessType}}</1> va putea să <3>{{accessRights}}</3> {{shareContents}} din {{shareParent}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -183,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation reorders the logic in a way that makes the sentence grammatically awkward or potentially incorrect depending on the variable values. Specifically, '{{shareParent}} හි' (of {{shareParent}}) is placed before the rights/contents, whereas the English structure links the action directly to the parent at the end. More importantly, the Sinhala structure '{{accessType}} හට ... කිරීමට හැකි වනු ඇත' ({{accessType}} will be able to ...) is a valid construction, but the placement of the variables makes the relationship between 'accessRights' and 'shareContents' ambiguous compared to the English source.",
-          "suggestion": "<1>{{accessType}}</1> හට {{shareParent}} හි {{shareContents}} සඳහා <3>{{accessRights}}</3> කිරීමට හැකි වනු ඇත."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -225,13 +190,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Turkish translation changes the meaning from 'will be able to [access rights]' to 'will be able to share [access rights]'. The English text describes what the user can DO with the content, whereas the Turkish text describes the act of sharing the content itself.",
-          "suggestion": "<1>{{accessType}}</1>, {{shareParent}} içindeki {{shareContents}} öğesine <3>{{accessRights}}</3> erişebilecek."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

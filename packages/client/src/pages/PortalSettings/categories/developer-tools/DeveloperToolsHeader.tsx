@@ -32,6 +32,7 @@ import styled from "styled-components";
 import { Heading } from "@docspace/ui-kit/components/heading";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
+import { getBrandName } from "@docspace/shared/constants/brands";
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 
 const StyledHeader = styled.div`
@@ -50,23 +51,37 @@ const StyledHeader = styled.div`
   }
 `;
 
-const sdkPresetTitles: Record<string, string> = {
-  docspace: "Common:ProductName",
-  "public-room": "Common:PublicRoom",
-  editor: "Common:Editor",
-  viewer: "JavascriptSdk:Viewer",
-  "room-selector": "Common:RoomSelector",
-  "file-selector": "Common:FileSelector",
-  custom: "Common:Custom",
-  uploader: "Common:Uploader",
+const getSdkPresetTitle = (
+  slug: string,
+  t: (key: string) => string,
+): string | null => {
+  switch (slug) {
+    case "public-room":
+      return t("Common:PublicRoom");
+    case "editor":
+      return t("Common:Editor");
+    case "viewer":
+      return t("Common:Viewer");
+    case "room-selector":
+      return t("Common:RoomSelector");
+    case "file-selector":
+      return t("Common:FileSelector");
+    case "custom":
+      return t("Common:Custom");
+    case "uploader":
+      return t("Common:Uploader");
+    default:
+      return null;
+  }
 };
 
 const getTitle = (pathname: string, t: (key: string) => string): string => {
   if (pathname.includes("/developer-tools/api-keys")) return t("Settings:ApiKeys");
   if (pathname.includes("/developer-tools/javascript-sdk/")) {
     const slug = pathname.split("/developer-tools/javascript-sdk/")[1]?.replace(/\/$/, "");
-    const key = sdkPresetTitles[slug];
-    if (key) return t(key);
+    if (slug === "docspace") return getBrandName("ProductName");
+    const title = getSdkPresetTitle(slug, t);
+    if (title) return title;
   }
   if (pathname.includes("/developer-tools/javascript-sdk"))
     return t("Settings:EmbedSDK");

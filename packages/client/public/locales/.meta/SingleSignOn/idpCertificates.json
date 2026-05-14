@@ -3,17 +3,18 @@
   "content": "IdP Public Certificates",
   "content_en_sha1_hash": "679a32da5ca5df7ade6ce92aeed35c5f2dfdfa18",
   "created_at": "2025-05-19T21:30:50.093Z",
-  "updated_at": "2026-04-08T23:24:13.162Z",
+  "updated_at": "2026-04-13T14:59:05.891Z",
   "comment": {
-    "text": "\"IdP Public Certificates\" describes a list of certificates related to identity provider authentication, used in single sign-on settings. This translation key appears in a UI component that manages certificate configurations for integration purposes.",
+    "text": "This is a label for a section or field displaying public certificates from an Identity Provider (IdP) within the Single Sign-On settings. It refers to the certificates used for verifying the IdP's identity.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:15.389Z"
+    "updated_at": "2026-04-11T21:26:50.350Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/Certificates.js",
-      "line_number": 76,
-      "context": "const {\n provider,\n enableSso,\n openIdpModal,\n openSpModal,\n idpCertificates,\n spCertificates,\n idpShowAdditionalParameters,\n spShowAdditionalParameters,\n idpVerifyAlgorithm,\n spEncryptAlgorithm,",
+      "line_number": 112,
+      "context": "return (\n <StyledWrapper>\n <div className=\"certificates-box\">\n <Text as=\"h2\" fontSize=\"15px\" fontWeight={600}>\n {prefix === \"idp\" ? t(\"idpCertificates\") : t(\"spCertificates\")}\n </Text>\n \n <HelpButton\n offsetRight={0}\n tooltipContent={",
       "module": "/packages/client"
     }
   ],
@@ -141,37 +142,19 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation uses a singular noun 'Certificate' (which is actually plural in Romanian, but the article 'al' is singular) with a singular possessive structure, creating a grammatical mismatch. More importantly, 'Certificate Publice' is plural, but 'al furnizorului' is singular, which is awkward. However, the primary error is that 'Certificate' in Romanian is the same as English, but the phrasing 'Certificate Publice al...' is grammatically incorrect; it should be 'Certificatele publice ale...' or 'Certificate publice ale...'.",
-          "suggestion": "Certificate publice ale furnizorului de identitate (IdP)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Public Certificates' is incorrectly translated as 'Открытые сертификаты'. In a technical/cryptographic context, 'Public Certificate' should be 'Публичный сертификат'. 'Открытые' implies 'open' or 'unlocked' rather than the cryptographic concept of a public key/certificate.",
-          "suggestion": "Публичные сертификаты IdP"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Public' in a technical context (Public Certificates) refers to 'open/accessible' or 'non-private' keys, not 'famous/well-known'. The Sinhala word 'ප්‍රසිද්ධ' (prasiddha) means 'famous' or 'celebrated', which is incorrect for cryptographic certificates.",
-          "suggestion": "IdP පොදු සහතික"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -201,18 +184,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'IdP Varlık Kimliği' means 'IdP Entity Identity', which completely misses the concept of 'Public Certificates'.",
-          "suggestion": "IdP Genel Sertifikaları"
-        },
-        {
-          "type": "missing_content",
-          "description": "The word 'Certificates' is missing from the translation.",
-          "suggestion": "IdP Genel Sertifikaları"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

@@ -8,7 +8,7 @@
   "DisablingRoomGroups": "Deshabilitar grupos de salas",
   "DisablingRoomGroupsDescription": "Los grupos se guardarán pero estarán ocultos. Vuelva a habilitar en Perfil, Gestión de archivos.",
   "EditRoomGroups": "Editar grupos de salas",
-  "EmptyGroupDescription": "No hay salas aquí. Intente añadir una sala o eliminar este grupo.",
+  "EmptyGroupRoomsDescription": "No hay salas aquí. Intente añadir una sala o eliminar este grupo.",
   "GroupHasBeenDeleted": "El grupo ha sido eliminado",
   "GroupIcon": "Icono de grupo",
   "GroupIsEmpty": "El grupo está vacío",

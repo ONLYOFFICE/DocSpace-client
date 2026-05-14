@@ -3,17 +3,18 @@
   "content": "Quotas",
   "content_en_sha1_hash": "34ed58657019e0ff061ea2eef787a27a97813fe2",
   "created_at": "2025-05-19T21:30:52.354Z",
-  "updated_at": "2026-04-09T01:49:37.174Z",
+  "updated_at": "2026-04-13T14:59:05.901Z",
   "comment": {
-    "text": "The translation key \"Quotas\" corresponds to a title that displays storage management quotas. It is used in the \"Storage Management\" category of the Portal Settings page, appearing as a main title on screen, likely in a section header or button label.",
+    "text": "This is a section title within the portal settings. It labels the area where administrators can manage storage limits for users and rooms.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:40.917Z"
+    "updated_at": "2026-04-11T21:22:44.546Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/Quotas.js",
-      "line_number": 40,
-      "context": "import { Link } from \"@docspace/ui-kit/components/link\";\n \n import { StyledBaseQuotaComponent, StyledMainTitle } from \"./StyledComponent\";\n import { QuotaPerRoomComponentSection } from \"./sub-components/QuotaPerRoom\";\n import { QuotaPerUserComponentSection } from \"./sub-components/QuotaPerUser\";\n import MobileQuotasComponent from \"./sub-components/MobileQuotas\";\n import { QuotaPerAIAgentComponentSection } from \"./sub-components/QuotaPerAIAgent\";\n \n const QuotaPerItemsComponent = ({ isStatisticsAvailable }) => {\n if (isMobile())\n return <MobileQuotasComponent isDisabled={!isStatisticsAvailable} />;",
+      "line_number": 66,
+      "context": "return (\n <StyledBaseQuotaComponent>\n <div className=\"title-container\">\n <StyledMainTitle fontSize=\"16px\" fontWeight={700}>\n {t(\"Quotas\")}\n </StyledMainTitle>\n \n {!isStatisticsAvailable ? (\n <Badge\n backgroundColor={",
       "module": "/packages/client"
     }
   ],
@@ -57,13 +58,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek word 'Ποσοστώσεις' means 'Percentages'. In the context of storage management, 'Quotas' refers to limits or allocations (Όρια or Διαθέσιμα), not mathematical percentages.",
-          "suggestion": "Όρια"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -93,13 +88,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Italian word 'Quote' typically refers to 'quotations' (as in price quotes or literary quotes). In the context of storage management and technical limits, the correct term is 'Quote' (plural of 'quota').",
-          "suggestion": "Quote"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -165,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'සලාක' (Salaka) is not the correct term for 'Quotas' in the context of storage management. It appears to be a phonetic transliteration or an incorrect term. The correct term for an allocated limit or quota in Sinhala is 'සීමාවන්' (Limits) or 'කොටස්' (Portions/Quotas).",
-          "suggestion": "සීමාවන්"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

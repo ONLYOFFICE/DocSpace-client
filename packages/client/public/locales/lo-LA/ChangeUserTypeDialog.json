@@ -1,6 +1,10 @@
 {
   "ChangeContactType": "ປ່ຽນປະເພດຕິດຕໍ່",
+  "ChangeGuestsTypeMessage": "ແຂກ <strong>{{userName}}</strong> ຈະຖືກຍ້າຍໄປຍັງພາກສ່ວນ {{membersSection}} ແລະ ຖືກກຳນົດໃຫ້ເປັນປະເພດ ຜູ້ໃຊ້. ຜູ້ໃຊ້ຈະມີພາກສ່ວນ {{documentsSection}} ເປັນຂອງຕົນເອງ, ສາມາດສ້າງ ແລະ ແກ້ໄຂໄຟລ໌ໄດ້, ແຕ່ບໍ່ສາມາດສ້າງຫ້ອງໄດ້.",
   "ChangeGuestsTypeMessageMulti": "ບັນດາແຂກຮັບເຊີນທີ່ຖືກເລືອກຈະຖືກຍ້າຍໄປທີ່ພາກສ່ວນ {{membersSection}} ແລະຖືກມອບຫມາຍໃຫ້ເປັນປະເພດຜູ້ໃຊ້ (User). ຜູ້ໃຊ້ມີພາກສ່ວນ {{documentsSection}} ຂອງຕົນເອງ, ສາມາດສ້າງ ແລະແກ້ໄຂເອກະສານໄດ້, ແຕ່ບໍ່ສາມາດສ້າງຫ້ອງໄດ້.",
+  "ChangeGuestsTypeToAdmin": "ແຂກ <strong>{{userName}}</strong> ຈະຖືກຍ້າຍໄປຍັງພາກສ່ວນ {{membersSection}} ແລະ ຖືກກຳນົດປະເພດເປັນ <strong>'{{ secondType }}'</strong>. ຜູ້ດູແລ {{productName}} ສາມາດເຂົ້າເຖິງການຕັ້ງຄ່າ {{productName}}, ຈັດການ ແລະ ສ້າງບ່ອນເກັບຂໍ້ມູນ (archive) ຫ້ອງຕ່າງໆ, ເຊີນຜູ້ໃຊ້ໃໝ່ ແລະ ກຳນົດບົດບາດໃຫ້ກັບຜູ້ທີ່ຢູ່ລະດັບຕ່ຳກວ່າພວກເຂົາ. ຜູ້ດູແລ {{productName}} ສາມາດເຂົ້າເຖິງພາກສ່ວນ {{documentsSection}}.",
+  "ChangeGuestsTypeToAdminMulti": "ແຂກທີ່ຖືກເລືອກຈະຖືກຍ້າຍໄປຍັງສ່ວນ {{membersSection}} ແລະ ຖືກກຳນົດໃຫ້ເປັນປະເພດ <strong>'{{ secondType }}'</strong>. ຜູ້ດູແລ {{productName}} ສາມາດເຂົ້າເຖິງການຕັ້ງຄ່າ {{productName}}, ຈັດການ ແລະ ສ້າງບ່ອນເກັບເອກະສານ (archive) ຫ້ອງຕ່າງໆ, ເຊີນຜູ້ໃຊ້ໃໝ່ ແລະ ກຳນົດບົດບາດໃຫ້ກັບຜູ້ທີ່ຢູ່ລະດັບຕ່ຳກວ່າພວກເຂົາ. ຜູ້ດູແລ {{productName}} ສາມາດເຂົ້າເຖິງສ່ວນ {{documentsSection}}.",
+  "ChangeGuestsTypeToManager": "ແຂກ <strong>{{userName}}</strong> ຈະຖືກຍ້າຍໄປຍັງພາກສ່ວນ {{membersSection}} ແລະ ຖືກກຳນົດປະເພດເປັນ <strong>'{{ secondType }}'</strong>. ຜູ້ດູແລຫ້ອງສາມາດສ້າງ ແລະ ຈັດການຫ້ອງທີ່ຖືກມອບໝາຍ, ເຊີນຜູ້ໃຊ້ໃໝ່, ແລະ ກຳນົດບົດບາດເປັນຜູ້ດູແລຫ້ອງ ຫຼື ຕຳແໜ່ງທີ່ຕ່ຳກວ່ານັ້ນ. ຜູ້ດູແລຫ້ອງສາມາດເຂົ້າເຖິງພາກສ່ວນ {{documentsSection}}.",
   "ChangeGuestsTypeToManagerMulti": "ບັນດາແຂກຮັບເຊີນທີ່ຖືກເລືອກຈະຖືກຍ້າຍໄປທີ່ພາກສ່ວນ {{membersSection}} ແລະຖືກມອບໝາຍໃຫ້ເປັນປະເພດ <strong>'{{ secondType }}'</strong>. ຜູ້ປົກຄອງຫ້ອງສາມາດສ້າງ ແລະ ຈັດການຫ້ອງທີ່ຖືກມອບໝາຍ,ເຊີນຜູ້ໃຊ້ໃໝ່, ແລະມອບບົດບາດຂອງຜູ້ປົກຄອງຫ້ອງ ແລະ ຕ່ຳກວ່າ. ຜູ້ປົກຄອງຫ້ອງສາມາດເຂົ້າເຖິງພາກສ່ວນ {{documentsSection}}.",
   "ChangeUserTypeButton": "ປ່ຽນປະເພດ",
   "ChangeUserTypeMessage": "ຜູ້ໃຊ້ທີ່ມີປະເພດ <strong>'{{ firstType }}'</strong> ຈະຖືກຍ້າຍໄປປະເພດ <strong>'{{ secondType }}'</strong>.",
@@ -9,9 +13,5 @@
   "DataReassignmentWithFilesDeletion": "ເອກະສານທີ່ແບ່ງປັນທັງໝົດທີ່ສ້າງໂດຍຜູ້ຕິດຕໍ່ນີ້ຈະຖືກ <1>ມອບໝາຍໃຫ້ທ່ານໂດຍອັດຕະໂນມັດໃນເວລາ 30 ວັນ</1> ຖ້າຕ້ອງການມອບໝາຍຫ້ອງ/ເອກະສານທີ່ແບ່ງປັນໃຫ້ຜູ້ອື່ນ, ກະລຸນາຄລິກລິ້ງລຸ່ມນີ້.",
   "PersonalDataDeletion": "ເອກະສານ ແລະ ໂຟນເດີທັງໝົດໃນພາກສ່ວນ {{sectionName}} ຂອງການຕິດຕໍ່ນີ້ຈະຖືກ <1>ລົບຖິ້ມຢ່າງຖາວອນໃນ 30 ວັນ</1>.",
   "SuccessChangeGuestType": "ການປ່ຽນປະເພດແຂກສຳເລັດດ້ວຍດີ",
-  "SuccessChangeUserType": "ປະເພດຜູ້ໃຊ້ຖືກປ່ຽນແປງສຳເລັດຜົນແລ້ວ.",
-  "ChangeGuestsTypeMessage": "ແຂກ <strong>{{userName}}</strong> ຈະຖືກຍ້າຍໄປຍັງພາກສ່ວນ {{membersSection}} ແລະ ຖືກກຳນົດໃຫ້ເປັນປະເພດ ຜູ້ໃຊ້. ຜູ້ໃຊ້ຈະມີພາກສ່ວນ {{documentsSection}} ເປັນຂອງຕົນເອງ, ສາມາດສ້າງ ແລະ ແກ້ໄຂໄຟລ໌ໄດ້, ແຕ່ບໍ່ສາມາດສ້າງຫ້ອງໄດ້.",
-  "ChangeGuestsTypeToAdmin": "ແຂກ <strong>{{userName}}</strong> ຈະຖືກຍ້າຍໄປຍັງພາກສ່ວນ {{membersSection}} ແລະ ຖືກກຳນົດປະເພດເປັນ <strong>'{{ secondType }}'</strong>. ຜູ້ດູແລ {{productName}} ສາມາດເຂົ້າເຖິງການຕັ້ງຄ່າ {{productName}}, ຈັດການ ແລະ ສ້າງບ່ອນເກັບຂໍ້ມູນ (archive) ຫ້ອງຕ່າງໆ, ເຊີນຜູ້ໃຊ້ໃໝ່ ແລະ ກຳນົດບົດບາດໃຫ້ກັບຜູ້ທີ່ຢູ່ລະດັບຕ່ຳກວ່າພວກເຂົາ. ຜູ້ດູແລ {{productName}} ສາມາດເຂົ້າເຖິງພາກສ່ວນ {{documentsSection}}.",
-  "ChangeGuestsTypeToAdminMulti": "ແຂກທີ່ຖືກເລືອກຈະຖືກຍ້າຍໄປຍັງສ່ວນ {{membersSection}} ແລະ ຖືກກຳນົດໃຫ້ເປັນປະເພດ <strong>'{{ secondType }}'</strong>. ຜູ້ດູແລ {{productName}} ສາມາດເຂົ້າເຖິງການຕັ້ງຄ່າ {{productName}}, ຈັດການ ແລະ ສ້າງບ່ອນເກັບເອກະສານ (archive) ຫ້ອງຕ່າງໆ, ເຊີນຜູ້ໃຊ້ໃໝ່ ແລະ ກຳນົດບົດບາດໃຫ້ກັບຜູ້ທີ່ຢູ່ລະດັບຕ່ຳກວ່າພວກເຂົາ. ຜູ້ດູແລ {{productName}} ສາມາດເຂົ້າເຖິງສ່ວນ {{documentsSection}}.",
-  "ChangeGuestsTypeToManager": "ແຂກ <strong>{{userName}}</strong> ຈະຖືກຍ້າຍໄປຍັງພາກສ່ວນ {{membersSection}} ແລະ ຖືກກຳນົດປະເພດເປັນ <strong>'{{ secondType }}'</strong>. ຜູ້ດູແລຫ້ອງສາມາດສ້າງ ແລະ ຈັດການຫ້ອງທີ່ຖືກມອບໝາຍ, ເຊີນຜູ້ໃຊ້ໃໝ່, ແລະ ກຳນົດບົດບາດເປັນຜູ້ດູແລຫ້ອງ ຫຼື ຕຳແໜ່ງທີ່ຕ່ຳກວ່ານັ້ນ. ຜູ້ດູແລຫ້ອງສາມາດເຂົ້າເຖິງພາກສ່ວນ {{documentsSection}}."
+  "SuccessChangeUserType": "ປະເພດຜູ້ໃຊ້ຖືກປ່ຽນແປງສຳເລັດຜົນແລ້ວ."
 }

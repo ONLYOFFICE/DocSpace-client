@@ -3,16 +3,17 @@
   "content": "Backup room",
   "content_en_sha1_hash": "d713be356f0517828e717778afb3cc8136c8c476",
   "created_at": "2025-05-26T07:15:47.386Z",
-  "updated_at": "2026-04-08T00:15:15.607Z",
+  "updated_at": "2026-04-13T07:46:02.780Z",
   "comment": {
-    "text": "This translation key is used to display the label \"Backup room\" in a radio button group within a backup settings page. It is intended for use by users who need to select a specific type of file or resource to back up. This option appears in various UI contexts, including restore backup and manual backup pages.",
+    "text": "This is a radio button label or an option in a dropdown menu. It refers to the \"Rooms\" module within DocSpace, indicating that the backup or restore operation will apply to rooms.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:03:54.388Z"
+    "updated_at": "2026-04-11T20:44:04.788Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 493,
+      "line_number": 494,
       "context": "<div className={styles.modules}>\n <RadioButton\n key={0}\n {...commonRadioButtonProps}\n id=\"backup-room\"\n label={t(\"Common:RoomsModule\")}\n name={`${BackupStorageType.DocumentModuleType}`}\n isChecked={isCheckedDocuments}\n isDisabled={isLoadingData}\n testId=\"auto_backup_room_radio_button\"\n />",
       "module": "/packages/shared"
     },
@@ -24,7 +25,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/index.tsx",
-      "line_number": 228,
+      "line_number": 229,
       "context": "options={[\n { id: \"local-file\", value: LOCAL_FILE, label: t(\"Common:LocalFile\") },\n {\n id: \"backup-room\",\n value: BACKUP_ROOM,\n label: t(\"Common:RoomsModule\"),\n },\n {\n id: \"third-party-resource\",\n value: DISK_SPACE,\n label: t(\"Common:ThirdPartyResource\"),",
       "module": "/packages/shared"
     }
@@ -45,13 +46,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ehtiyat otaq' is grammatically incorrect in Azerbaijani for this context. 'Ehtiyat otaq' translates literally to 'Reserve room' (noun-noun), but in Azerbaijani, when using 'ehtiyat' as an adjective for 'room', it should be 'Ehtiyat otağı' (using the possessive/compound construction).",
-          "suggestion": "Ehtiyat otağı"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -60,8 +55,10 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Резервна стая' literally means a 'spare room' in a house (like a guest bedroom). In the context of DocSpace (a collaborative workspace), 'Room' refers to a digital workspace/module. The translation should reflect a digital storage/workspace context rather than a physical room.",
-          "suggestion": "Резервни стаи"
+          "description": "The Bulgarian translation uses plural form 'стаи' (rooms) instead of singular 'стая' (room) to match the English 'Backup room'. The gerund construction 'Архивиране на' also differs from the simple noun phrase structure of the English label.",
+          "suggestion": "Архивна стая",
+          "checked_at": "2026-04-13T07:43:32.768Z",
+          "checked_by": "claude-code/haiku"
         }
       ],
       "approved_at": null
@@ -72,8 +69,10 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Záložní místnost' refers to a physical room (like a spare room in a house). In the context of ONLYOFFICE DocSpace, 'Room' refers to a digital workspace/module. The translation should reflect a digital space/module rather than a physical location.",
-          "suggestion": "Záložní místa"
+          "description": "The Czech translation 'Zálohovat místnosti' is a verb phrase (to backup rooms), but the English 'Backup room' is a noun phrase used as a UI label. This changes the grammatical function and meaning. In the radio button context, the Czech version reads as an action rather than a label option.",
+          "suggestion": "Záloha místností or Zálohování místností (noun phrase equivalent to convey 'Backup of rooms' as a label)",
+          "checked_at": "2026-04-13T07:43:15.552Z",
+          "checked_by": "claude-code/haiku"
         }
       ],
       "approved_at": null
@@ -81,25 +80,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation 'Ersatzraum' means 'spare room' or 'replacement room' (as in a physical room used as a substitute). In the context of cloud storage and backup settings, 'Backup room' refers to a 'Backup-Raum' (a digital space/module for backups).",
-          "suggestion": "Backup-Raum"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation 'Δημιουργία αντιγράφου ασφαλείας δωματίου' means 'Create room backup' (an action/verb phrase), whereas the English source 'Backup room' is a noun phrase acting as a label for a selection option.",
-          "suggestion": "Δωμάτιο αντίγραφα ασφαλείας"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -114,8 +101,10 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Finnish translation 'Varmuuskopioi huone' is an imperative verb phrase meaning 'Back up the room'. The English source 'Backup room' is a noun phrase referring to a specific resource type (a Room) to be selected in a radio button group.",
-          "suggestion": "Varmuuskopioitava huone"
+          "description": "Finnish translation shifts meaning from 'Backup room' (indicating the backup operation/destination) to 'Varmuuskopioitava huone' (a room that can be backed up). In the UI context of backup storage options, the English emphasizes the action/operation, while the Finnish emphasizes the capability of the room. This changes the semantic meaning of the UI option.",
+          "suggestion": "Huoneen varmuuskopio (room backup) or Huoneiden varmuuskopiointi (backing up of rooms)",
+          "checked_at": "2026-04-13T07:43:47.464Z",
+          "checked_by": "claude-code/haiku"
         }
       ],
       "approved_at": null
@@ -141,37 +130,19 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Backup room' is a noun phrase acting as a label for a selection option. The Japanese translation 'ルームをバックアップする' is a verb phrase meaning 'To back up the room', which is grammatically inappropriate for a radio button label.",
-          "suggestion": "ルームのバックアップ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '백업 방' (Backup room/chamber) is a literal translation of 'room' as a physical space. In the context of ONLYOFFICE DocSpace, 'Rooms' refers to a specific software module/feature (Spaces/Rooms). A more appropriate technical term for a 'Room' module in a software context is '룸'.",
-          "suggestion": "백업 룸"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ສຳຮອງຂໍ້ມູນຫ້ອງ' means 'Backup room data' or 'Back up room information'. In the context of a radio button selection for a storage type (Rooms Module), it should refer to the 'Room' itself as the source/module, not the action of backing up data within it.",
-          "suggestion": "ຫ້ອງ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -183,37 +154,19 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Backup kamer' is a literal translation that sounds unnatural in Dutch for a technical UI context. In the context of ONLYOFFICE DocSpace, 'Rooms' refers to 'Spaces' or 'Workspaces'. 'Kamer' is too literal and refers to a physical room.",
-          "suggestion": "Backup-ruimtes"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Backup room' is a noun phrase acting as a label for a selection option. The Polish translation 'Stwórz kopię zapasową pokoju' is an imperative sentence meaning 'Create a backup of the room', which changes the meaning from a category/type to an action.",
-          "suggestion": "Kopia zapasowa pokoju"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Sala de Apoio' means 'Support Room' or 'Break Room', which refers to a physical space for people. In the context of backup settings and file resources, 'Backup room' refers to a storage area or repository for backups. A more accurate technical term is needed.",
-          "suggestion": "Sala de backup"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -225,25 +178,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Copiere de rezervă a sălii' means 'Backup of the room' (the action of backing up), whereas the English 'Backup room' in this context refers to a specific resource type (the Room itself) to be selected in a radio button group.",
-          "suggestion": "Sală de backup"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Резервная комната' literally means a physical spare room in a house. In the context of ONLYOFFICE DocSpace, 'Rooms' refers to digital workspaces/modules. The translation should reflect 'Rooms' as a functional unit/module rather than a physical room.",
-          "suggestion": "Резервные комнаты"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -255,13 +196,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English 'Backup room' is a noun phrase referring to a specific resource type (a room to be backed up). The Slovak translation 'Zálohovať miestnosť' is a verb phrase meaning 'To back up a room', which changes the grammatical function from a label/option to an action.",
-          "suggestion": "Záloha miestnosti"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -270,8 +205,10 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Varnostno kopiranje sobe' means 'Backup of the room' or 'Room's backup'. In the context of ONLYOFFICE DocSpace, 'Rooms' refers to a specific module/entity, and 'Backup room' refers to the 'Rooms module' being selected for backup. The current translation sounds like a process being performed on a physical room rather than a selection of the 'Rooms' module.",
-          "suggestion": "Soba"
+          "description": "Singular/plural mismatch: English 'Backup room' (singular) is translated as 'Varnostno kopiranje sob' with plural 'sob' (rooms), changing the grammatical number.",
+          "suggestion": "Varnostno kopiranje sobe (using singular genitive 'sobe' to match English singular 'room')",
+          "checked_at": "2026-04-13T07:45:33.842Z",
+          "checked_by": "claude-code/haiku"
         }
       ],
       "approved_at": null
@@ -279,13 +216,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Соба' (Soba) is a misspelling of 'Soba' (Room) in Serbian; the correct spelling is 'Соба' is not a word, it should be 'Соба' (incorrect) -> 'Соба' is actually 'Soba' but in Cyrillic it is 'Соба'. Wait, 'Соба' is actually a typo for 'Соба' (Soba) - actually, 'Soba' in Cyrillic is 'Соба'. However, 'Соба' is not a standard word; the correct word for 'Room' is 'Соба' (Soba). Looking closer, 'Соба' is a misspelling of 'Соба' (Soba) is actually correct, but 'Соба' is often confused with 'Соба' (dog in some languages) or is simply a typo for 'Соба'. Actually, the error is 'Соба' (Soba) vs 'Соба' (Soba). In Serbian, 'Room' is 'Soba' (Latin) or 'Соба' (Cyrillic). The provided translation 'Соба' is actually correct in spelling, but 'Соба' is often used for 'dog' in other Slavic languages. In Serbian, 'Room' is 'Soba' (Latin) / 'Соба' (Cyrillic). Wait, the error is that 'Соба' is a typo for 'Соба' (Soba) - actually, the word for room is 'Soba'. The translation provided is 'Соба за резервне копије'. This is a literal translation of 'Room for backups'. However, in the context of ONLYOFFICE DocSpace, 'Rooms' refers to 'Spaces' or 'Workspaces'. But strictly following the English 'Backup room', 'Соба' is a literal translation of 'Room'. The critical error is that 'Соба' is a misspelling of 'Соба' (Soba) - no, 'Соба' is correct. Let's re-evaluate: 'Соба' is 'Room'. 'за резервне копије' is 'for backups'. The translation is technically correct but 'Соба' is a very literal and unnatural translation for a software 'Room' (which usually means a workspace/module). However, per instructions, I should not report style preferences. BUT, 'Соба' is actually a misspelling of 'Соба' (Soba) - no, it is 'Soba'. Let's look at the word: С-О-Б-А. That is 'Soba'. It is correct. Wait, looking at the English 'Backup room' and the context 'RoomsModule', 'Room' in DocSpace refers to a specific functional area. 'Соба' is a physical room. In software, 'Room' is usually translated as 'Простор' or 'Модул'. But 'Соба' is not 'incorrect' in meaning, just 'unnatural'. \n\nActually, there is a typo in the provided Serbian: 'Соба' is 'Soba'. There is no typo. \n\nWait, I see the error: 'Соба' is 'Soba'. The translation is 'Соба за резервне копије'. This is a literal translation. In the context of 'RoomsModule', 'Room' refers to a 'Space'. 'Соба' is a physical room (like in a house). Using 'Соба' for a software module is a semantic error (incorrect_translation) because it conveys the meaning of a physical room rather than a digital space/module.",
-          "suggestion": "Резервна просторија"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -297,13 +228,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Backup room' is a noun phrase representing a category/type of resource (a 'Room' to be backed up). The Turkish translation 'Odayı yedekle' is an imperative command meaning 'Back up the room', which changes the meaning from a selection label to an action command.",
-          "suggestion": "Yedekleme odası"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -321,13 +246,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '备份房间' (Backup Room/Bedroom) is a literal translation of 'room' as a physical space. In the context of ONLYOFFICE DocSpace, 'Rooms' refers to collaborative workspaces or digital modules. A more accurate technical translation for a UI module/workspace is '空间' (Space) or '工作区' (Workspace).",
-          "suggestion": "备份空间"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

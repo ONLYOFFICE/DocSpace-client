@@ -3,16 +3,17 @@
   "content": "Login History",
   "content_en_sha1_hash": "d755284b3b68f68fa53e1d95ff88d8d202c5bbc1",
   "created_at": "2025-05-19T21:30:51.828Z",
-  "updated_at": "2026-04-09T02:28:43.843Z",
+  "updated_at": "2026-04-11T21:23:25.821Z",
   "comment": {
-    "text": "The \"LoginHistoryTitle\" translation key is used to display the title \"Login History\" in various parts of the application's UI. It appears on a category page and is also set as the document title when accessing login history data. Translators should ensure this phrase accurately reflects the content being displayed.",
+    "text": "This is the title for the \"Login History\" section within the portal settings, displaying a list of past login attempts.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:59.179Z"
+    "updated_at": "2026-04-11T21:23:25.821Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/index.js",
-      "line_number": 87,
+      "line_number": 88,
       "context": "await getAccessPortalData();\n },\n },\n {\n id: \"login-history\",\n name: t(\"LoginHistoryTitle\"),\n content: <LoginHistory />,\n onClick: async () => {\n clearAbortControllerArr();\n await getLoginHistoryData();\n },",
       "module": "/packages/client"
     },
@@ -39,13 +40,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation 'قم بتسجيل الدخول' means 'Log in' (a command/action), whereas the English source 'Login History' is a noun phrase referring to a record of past logins.",
-          "suggestion": "سجل الدخول"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {

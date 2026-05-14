@@ -45,6 +45,8 @@ import {
 } from "@docspace/ui-kit/components/modal-dialog";
 
 import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
+import { useKeyboardAwareSheet } from "@docspace/ui-kit/hooks/useKeyboardAwareSheet";
+import { isReliableAndroidViewport } from "@docspace/ui-kit/utils/device";
 
 import { TagManagementProvider } from "./TagManagement.provider";
 import { TagManagementFilter } from "./TagManagement.filter";
@@ -71,12 +73,18 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
+  const sheetRef = useRef<HTMLDivElement>(null);
 
   const isMobile = useIsMobile();
   useClickOutside(isMobile ? modalRef : ref, onClose, EVENT_OPTIONS);
   useEventListener("resize", onClose, undefined, {
     enabled: !isMobile && !isTablet,
   });
+
+  // Lift the sheet above the on-screen keyboard. Only needed on Android
+  // browsers with reliable visualViewport (Edge Android excluded). iOS WebKit
+  // handles `position: fixed` against the visual viewport itself.
+  useKeyboardAwareSheet(sheetRef, isMobile && isReliableAndroidViewport());
 
   const { data: fetchedTags, status } = useTagsQuery();
 
@@ -85,7 +93,7 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
 
     if (!anchor.current || !ref.current) return onClose();
 
-    const cleanup = autoUpdate(anchor.current, ref.current, () => {
+    const updatePosition = () => {
       if (!anchor.current || !ref.current || isMobile) return;
 
       computePosition(anchor.current, ref.current, {
@@ -104,9 +112,24 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
         ref.current.style.left = `${x}px`;
         ref.current.style.top = `${y}px`;
       });
-    });
+    };
 
-    return cleanup;
+    const cleanup = autoUpdate(anchor.current, ref.current, updatePosition);
+
+    const viewport = window.visualViewport;
+
+    if (isTablet && viewport) {
+      viewport.addEventListener("resize", updatePosition);
+      viewport.addEventListener("scroll", updatePosition);
+    }
+
+    return () => {
+      cleanup();
+      if (isTablet && viewport) {
+        viewport.removeEventListener("resize", updatePosition);
+        viewport.removeEventListener("scroll", updatePosition);
+      }
+    };
   }, [anchor, anchor.current, ref, isMobile, onClose]);
 
   const element = (
@@ -143,7 +166,12 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
 
   if (isMobile) {
     return (
-      <ModalDialog visible autoMaxHeight displayType={ModalDialogType.modal}>
+      <ModalDialog
+        sheetRef={sheetRef}
+        visible
+        autoMaxHeight
+        displayType={ModalDialogType.modal}
+      >
         <ModalDialog.Body className={styles.modalBody} ref={modalRef}>
           {element}
         </ModalDialog.Body>
@@ -153,4 +181,3 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
 
   return createPortal(element, document.body);
 };
-

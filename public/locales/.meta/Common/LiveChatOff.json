@@ -3,11 +3,12 @@
   "content": "Live chat was successfully disconnected",
   "content_en_sha1_hash": "ae2a6017f6a674929d0c42e27c69de090c46cd8b",
   "created_at": "2025-05-19T21:30:46.244Z",
-  "updated_at": "2026-04-08T05:26:46.279Z",
+  "updated_at": "2026-04-11T20:49:24.474Z",
   "comment": {
-    "text": "The \"LiveChatOff\" translation key is used to display a success message when a live chat widget is successfully hidden or disconnected. This message appears after clicking on a support button, indicating that the chat has been removed from view.",
+    "text": "This is a toast message confirming that the live chat widget has been successfully hidden or disconnected.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:37.833Z"
+    "updated_at": "2026-04-11T20:49:24.474Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -153,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'සජීව සංවාදයෙන් විසන්ධි විය' translates to 'Disconnected from live chat' (passive/intransitive), which lacks the subject/agent and the 'successfully' aspect. It sounds like the user was disconnected, rather than the chat session being successfully terminated/hidden as a system notification.",
-          "suggestion": "සජීව සංවාදය සාර්ථකව විසන්ධි කරන ලදී"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

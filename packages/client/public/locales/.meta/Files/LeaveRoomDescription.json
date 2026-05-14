@@ -3,16 +3,17 @@
   "content": "You are the owner of this room. Before you leave the room, you must transfer the owner's role to another user.",
   "content_en_sha1_hash": "7fad132658521906219ad21519aa804777ae5ed8",
   "created_at": "2025-05-19T21:30:55.732Z",
-  "updated_at": "2026-04-07T19:35:05.086Z",
+  "updated_at": "2026-04-23T17:24:01.830Z",
   "comment": {
-    "text": "This translation key is used to display a message when leaving a room, explaining that the owner must transfer their role to another user. It appears in a leave room dialog modal. The purpose is to inform users of the required action before leaving the room.",
+    "text": "This is a dialog message that appears when a room owner attempts to leave their room. It informs them that they must transfer ownership before leaving.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:39:40.118Z"
+    "updated_at": "2026-04-11T21:09:21.484Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
-      "line_number": 81,
+      "line_number": 82,
       "context": "const titleText = isAIAgent\n ? t(\"Files:LeaveTheAgent\")\n : t(\"Files:LeaveTheRoom\");\n \n const roomDescription = isRoomOwner\n ? t(\"Files:LeaveRoomDescription\")\n : t(\"Files:WantLeaveRoom\");\n \n const agentDescription = isRoomOwner\n ? t(\"Files:LeaveAgentDescription\")\n : t(\"Files:WantLeaveAgent\");",
       "module": "/packages/client"
     }

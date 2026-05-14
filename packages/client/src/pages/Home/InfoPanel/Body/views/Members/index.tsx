@@ -58,6 +58,7 @@ import LinkRow from "./sub-components/LinkRow";
 
 import { MembersProps } from "./Members.types";
 import styles from "./Members.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const TooltipContent = ({ content }: { content: React.ReactNode }) => (
   <Text fontSize="12px">{content}</Text>
@@ -328,7 +329,7 @@ const Members = ({
             <>
               <div className="template-access_description">
                 {t("Files:TemplateAvailableDescription", {
-                  productName: t("Common:ProductName"),
+                  productName: getBrandName("ProductName"),
                 })}
               </div>
               {isTemplateOwner ? (
@@ -341,7 +342,7 @@ const Members = ({
                   onClick={onOpenAccessSettings}
                   dataTestId="info_panel_members_template_access_settings_link"
                 >
-                  {t("Files:AccessSettings")}
+                  {t("Files:AccessSettingsTitle")}
                 </Link>
               ) : null}
             </>

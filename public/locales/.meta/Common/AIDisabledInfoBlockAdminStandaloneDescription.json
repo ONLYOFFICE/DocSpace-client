@@ -3,18 +3,19 @@
   "content": "AI capabilities are currently turned off, which means this agent can’t process chats or tasks. Connect your own AI service to unlock advanced features in {{productName}}.",
   "content_en_sha1_hash": "4237f79a7117c22de53d1d53a9dbcf53a353051b",
   "created_at": "2025-11-03T12:10:13.570Z",
-  "updated_at": "2026-04-08T17:28:45.900Z",
+  "updated_at": "2026-04-11T21:00:27.987Z",
   "comment": {
-    "text": "This text explains to users (particularly standalone admins) that AI features are disabled, preventing chat and task processing. It prompts them to connect their own AI service to enable advanced functionality within the product. It appears within a chat info block.",
+    "text": "This is a descriptive text displayed in an information block for an administrator in a standalone DocSpace instance. It informs the administrator that AI capabilities are disabled and explains how to enable them. `{{productName}}` will be replaced with the product's brand name.",
     "is_auto": true,
-    "updated_at": "2025-11-03T12:16:01.879Z"
+    "updated_at": "2026-04-11T21:00:27.987Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/chat/components/chat-info-block/index.tsx",
-      "line_number": 49,
-      "context": "const bodyText = !isPortalAdmin\n ? t(\"Common:AIDisabledInfoBlockUserDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : standalone\n ? t(\"Common:AIDisabledInfoBlockAdminStandaloneDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"Common:AIDisabledInfoBlockAdminSaasDescription\", {\n productName: t(\"Common:ProductName\"),\n });",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-info-block/index.tsx",
+      "line_number": 48,
+      "context": "const bodyText = !isPortalAdmin\n ? t(\"AIDisabledInfoBlockUserDescription\", {\n productName: getBrandName(\"ProductName\"),\n })\n : standalone\n ? t(\"AIDisabledInfoBlockAdminStandaloneDescription\", {\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"AIDisabledInfoBlockAdminSaasDescription\", {\n productName: getBrandName(\"ProductName\"),\n });",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'İnqadarı' is used incorrectly. It appears to be a mistranslation or a typo for 'imkanları' (capabilities/features) or 'funksiyaları'. 'İnqadarı' is not a standard Azerbaijani word in this context and obscures the meaning of 'unlock advanced features'.",
-          "suggestion": "Süni intellekt funksiyaları hazırda söndürülmüşdür, bu da agentin söhbətləri və tapşırıqları işləməyə bilməsi deməkdir. Təkmilləşdirilmiş funksiyaları açmaq üçün öz SI xidmətinizi {{productName}} ilə qoşun."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {

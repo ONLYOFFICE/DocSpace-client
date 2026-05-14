@@ -3,17 +3,18 @@
   "content": "Form Submitted",
   "content_en_sha1_hash": "c3117651e1e0b1ea58d24491198b043cd335cb06",
   "created_at": "2026-03-20T09:07:38.937Z",
-  "updated_at": "2026-04-08T19:55:52.503Z",
+  "updated_at": "2026-04-13T14:59:05.881Z",
   "comment": {
-    "text": "This key displays a confirmation message when a form has been successfully submitted. It's likely used to inform the user that their form submission was processed. This message would appear within a user interface element, such as a confirmation dialog or notification.",
+    "text": "This is a toast message indicating that a form has been successfully submitted. It appears briefly after a user completes and sends a form.",
     "is_auto": true,
-    "updated_at": "2026-03-20T10:30:59.746Z"
+    "updated_at": "2026-04-11T21:28:50.025Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
-      "line_number": 92,
-      "context": "return t(\"RoomCopied\");\n case WebhookTriggers.FormFilledOut:\n return t(\"FormFilledOut\");\n case WebhookTriggers.FormStopped:\n return t(\"FormStopped\");\n case WebhookTriggers.FormSubmit:\n return t(\"FormSubmit\");\n case WebhookTriggers.AgentCreated:\n return t(\"AgentCreated\");\n case WebhookTriggers.AgentUpdated:\n return t(\"AgentUpdated\");",
+      "line_number": 93,
+      "context": "case WebhookTriggers.FormFilledOut:\n return t(\"FormFilledOut\");\n case WebhookTriggers.FormStopped:\n return t(\"FormStopped\");\n case WebhookTriggers.FormSubmit:\n return t(\"FormSubmit\");\n case WebhookTriggers.AgentCreated:\n return t(\"AgentCreated\");\n case WebhookTriggers.AgentUpdated:\n return t(\"AgentUpdated\");\n case WebhookTriggers.AgentDeleted:",
       "module": "/packages/client"
     }
   ],
@@ -57,13 +58,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation 'Υποβλήθηκε' (Submitted) is missing the subject 'Form' (Φόρμα). While grammatically acceptable in some contexts, it fails to convey the full meaning of 'Form Submitted' as specified in the English source.",
-          "suggestion": "Η φόρμα υποβλήθηκε"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -129,13 +124,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation contains a grammatical gender error. 'Formularz' (form) is masculine, so the participle must be 'przesłany', not 'przesłane' (which is neuter).",
-          "suggestion": "Formularz przesłany"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -171,13 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation 'Odoslanie formulára' means 'Form submission' (a noun phrase describing the action), whereas the English 'Form Submitted' is a status message indicating the action has been completed (past participle).",
-          "suggestion": "Formulár bol odoslaný"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -201,13 +184,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Podneseno' is a passive participle meaning 'Submitted', but it lacks the subject 'Form' (Obrazac), making it grammatically incomplete and potentially ambiguous in a UI context.",
-          "suggestion": "Obrazac je podnet"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

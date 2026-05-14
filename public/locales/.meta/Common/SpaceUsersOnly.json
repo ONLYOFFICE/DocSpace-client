@@ -3,23 +3,24 @@
   "content": "{{productName}} users only",
   "content_en_sha1_hash": "0beea2f05fa9af55a0c63adb5ee8fc835cf3d5e9",
   "created_at": "2025-05-19T21:30:48.990Z",
-  "updated_at": "2026-04-07T22:33:00.970Z",
+  "updated_at": "2026-04-12T17:56:03.604Z",
   "comment": {
-    "text": "This translation key is used to display a label indicating that a feature or action is restricted to space users only. It appears in a share component and is triggered by the \"SpaceUsersOnly\" internal property.",
+    "text": "This is a label for a sharing option. It indicates that access is restricted to users within the current DocSpace, with `{{productName}}` being replaced by the product's brand name.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:39:08.162Z"
+    "updated_at": "2026-04-11T20:42:14.804Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 97,
-      "context": "icon: withIcon ? UniverseIcon : undefined,\n },\n {\n internal: true,\n key: \"users\",\n label: t(\"Common:SpaceUsersOnly\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: withIcon ? PeopleIcon : undefined,\n },\n ];",
+      "line_number": 98,
+      "context": "icon: withIcon ? UniverseIcon : undefined,\n },\n {\n internal: true,\n key: \"users\",\n label: t(\"Common:SpaceUsersOnly\", {\n productName: getBrandName(\"ProductName\"),\n }),\n icon: withIcon ? PeopleIcon : undefined,\n },\n ];",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 97,
-      "context": "icon: withIcon ? UniverseIcon : undefined,\n },\n {\n internal: true,\n key: \"users\",\n label: t(\"Common:SpaceUsersOnly\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: withIcon ? PeopleIcon : undefined,\n },\n ];",
+      "line_number": 98,
+      "context": "icon: withIcon ? UniverseIcon : undefined,\n },\n {\n internal: true,\n key: \"users\",\n label: t(\"Common:SpaceUsersOnly\", {\n productName: getBrandName(\"ProductName\"),\n }),\n icon: withIcon ? PeopleIcon : undefined,\n },\n ];",
       "module": "/packages/shared"
     }
   ],
@@ -159,13 +160,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'පරිශ්‍රීලකයින්' is a misspelling of 'පරිශීලකයින්' (users). The current spelling is incorrect in Sinhala.",
-          "suggestion": "{{productName}} පරිශීලකයින් පමණි"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

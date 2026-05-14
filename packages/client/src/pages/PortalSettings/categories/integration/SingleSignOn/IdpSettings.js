@@ -94,7 +94,7 @@ const IdpSettings = (props) => {
       />
 
       <SsoFormField
-        labelText={t("ProviderURL")}
+        labelText={t("IdpEntityId")}
         name="entityId"
         placeholder={PROVIDER_URL}
         tabIndex={5}

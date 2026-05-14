@@ -40,16 +40,16 @@ type FormRoomBlockProps = {
   setRoomParams: (params: Record<string, unknown>) => void;
   isDisabled?: boolean;
   hasDatabaseConnection?: boolean;
-  canShowIntegrationsBar?: boolean;
+  isRoomAdmin?: boolean;
 };
 
 const FormRoomBlock = ({
   t,
   roomParams,
-  setRoomParams,
   isDisabled,
+  isRoomAdmin,
+  setRoomParams,
   hasDatabaseConnection,
-  canShowIntegrationsBar = true,
 }: FormRoomBlockProps) => {
   const onSaveFormAsXLSXChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRoomParams({
@@ -85,9 +85,11 @@ const FormRoomBlock = ({
         onCheckedChange={onSendFormToExternalDBChange}
         isDisabled={isDisabled || !hasDatabaseConnection}
       />
-      {canShowIntegrationsBar && (
-        <IntegrationBar t={t} hasDatabaseConnection={hasDatabaseConnection} />
-      )}
+      <IntegrationBar
+        t={t}
+        isRoomAdmin={isRoomAdmin}
+        hasDatabaseConnection={hasDatabaseConnection}
+      />
     </div>
   );
 };

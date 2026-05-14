@@ -44,6 +44,7 @@ const EditRoomEvent = ({
   isDefaultRoomsQuotaSet,
   cover,
   onSaveEditRoom,
+  cb,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
 
@@ -63,7 +64,7 @@ const EditRoomEvent = ({
   const onSave = async (roomParams) => {
     setIsLoading(true);
 
-    await onSaveEditRoom(t, roomParams, item);
+    await onSaveEditRoom(t, roomParams, item, { cb });
 
     setIsLoading(false);
     onClose();

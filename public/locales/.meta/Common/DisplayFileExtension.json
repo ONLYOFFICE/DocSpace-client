@@ -3,11 +3,12 @@
   "content": "Display file extension next to file name",
   "content_en_sha1_hash": "5aca0949443f945850e45a5d1a5def5c80406042",
   "created_at": "2026-04-03T21:51:34.715Z",
-  "updated_at": "2026-04-08T11:53:31.369Z",
+  "updated_at": "2026-04-13T14:59:05.906Z",
   "comment": {
-    "text": "This is a label for a toggle switch in the file management settings. It describes the option to show or hide file extensions next to the file names.",
+    "text": "This is a label for a toggle button in the user's profile settings. It controls whether file extensions (e.g., \".docx\", \".pdf\") are shown next to file names in the interface.",
     "is_auto": true,
-    "updated_at": "2026-04-03T21:55:06.124Z"
+    "updated_at": "2026-04-11T20:54:56.849Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -15,6 +16,12 @@
       "line_number": 179,
       "context": "className={classNames(\"display-file-extension\", styles.toggleBtn)}\n onChange={onChangeDisplayFileExtension}\n isChecked={displayFileExtension}\n dataTestId=\"display_file_extension_toggle_button\"\n />\n <Text>{t(\"Common:DisplayFileExtension\")}</Text>\n </div>\n <div className={styles.toggleBtnWrapper}>\n <ToggleButton\n className={classNames(\n \"cancelletion-notification\",",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/settings/category/FileManagement.tsx",
+      "line_number": 154,
+      "context": "<ToggleButton\n className={styles.toggleBtn}\n onChange={onChangeDisplayFileExtension}\n isChecked={settings.displayFileExtension}\n />\n <Text>{t(\"DisplayFileExtension\")}</Text>\n </div>\n </div>\n </div>\n );\n });",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -99,25 +106,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation uses an imperative/command tone ('~하세요' - 'Please do...') which is inappropriate for a UI toggle label. A UI setting label should be a noun phrase or a descriptive statement.",
-          "suggestion": "파일 이름 옆에 파일 확장자 표시"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation uses 'ຕໍ່ໄປກັບ' (next to/following) which in this context sounds like 'next in sequence' or 'subsequently'. For a spatial position (beside/next to), 'ຂ້າງ' is the correct preposition.",
-          "suggestion": "ສະແດງນາມສະກຸນໄຟລ໌ຂ້າງຊື່ໄຟລ໌"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {

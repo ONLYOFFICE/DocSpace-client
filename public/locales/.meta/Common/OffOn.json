@@ -3,13 +3,21 @@
   "content": "Off/On",
   "content_en_sha1_hash": "80992795b814b85328bd3dd85a4a30f6c24dbf19",
   "created_at": "2026-04-10T13:53:45.522Z",
-  "updated_at": "2026-04-10T13:53:45.522Z",
+  "updated_at": "2026-04-12T05:39:18.083Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Table header for a column indicating whether a feature is off or on.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:47:20.595Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/sub-components/ModelSettingsTable/TableView/TableHeader.tsx",
+      "line_number": 48,
+      "context": "enable: true,\n resizable: true,\n minWidth: 120,\n },\n {\n key: \"OffOn\",\n title: t(\"OffOn\"),\n enable: true,\n resizable: true,\n minWidth: 90,\n },",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

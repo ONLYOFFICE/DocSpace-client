@@ -3,11 +3,12 @@
   "content": "Plugin enabled",
   "content_en_sha1_hash": "3063607d780a2074562d9247ffab948b5167f20d",
   "created_at": "2025-05-19T21:30:47.389Z",
-  "updated_at": "2026-04-10T08:21:04.378Z",
+  "updated_at": "2026-04-12T04:23:59.246Z",
   "comment": {
-    "text": "This translation key is used for a success message that appears when a plugin is enabled or disabled. It provides feedback to the user about the result of an action in the Plugin Store UI.",
+    "text": "This is a toast message confirming that a plugin has been successfully enabled. It appears briefly after a user activates a plugin.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:01.065Z"
+    "updated_at": "2026-04-11T20:46:20.120Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -105,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'ໂພ້ໂລຄຳ' is a phonetic transliteration of 'Plugin' that is nonsensical/incorrect in Lao. The standard technical term for 'Plugin' in Lao is 'ປລັກອິນ'.",
-          "suggestion": "ປລັກອິນ ຖືກເປີດໃຊ້ງານ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -159,25 +154,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "wrong_language",
-          "description": "The provided translation is in Slovenian, not Sinhala.",
-          "suggestion": "ප්ලගිනය සක්‍රිය කර ඇත"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Doplnok' refers to a physical supplement or an extra item (like a car accessory). In software context, 'Plugin' should be translated as 'Plugin'.",
-          "suggestion": "Plugin aktivovaný"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {

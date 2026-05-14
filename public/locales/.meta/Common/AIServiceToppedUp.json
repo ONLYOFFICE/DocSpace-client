@@ -3,13 +3,21 @@
   "content": "{{organizationName}} AI service successfully enabled.",
   "content_en_sha1_hash": "6d9b84bc8398817d9663776a20d8c407ab725922",
   "created_at": "2026-04-10T13:53:44.673Z",
-  "updated_at": "2026-04-10T13:53:44.673Z",
+  "updated_at": "2026-04-13T14:59:06.027Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a toast message confirming that the AI service has been successfully activated for an organization. `{{organizationName}}` will be replaced with the name of the organization.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:59:41.470Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/TopUpButtons.tsx",
+      "line_number": 109,
+      "context": "await Promise.allSettled(requests);\n \n const toastMessage =\n serviceName === AI_TOOLS\n ? t(\"AIServiceToppedUp\", { organizationName: logoText })\n : t(\"WalletToppedUp\");\n \n toastr.success(toastMessage);\n afterTopUp ? afterTopUp() : onClose(true);\n } catch (e) {",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

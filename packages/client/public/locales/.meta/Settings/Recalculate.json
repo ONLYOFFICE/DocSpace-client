@@ -3,17 +3,18 @@
   "content": "Recalculate",
   "content_en_sha1_hash": "3298e1d39481606de3841cfddc8d851a3e8fa018",
   "created_at": "2025-05-19T21:30:52.371Z",
-  "updated_at": "2026-04-09T01:46:23.590Z",
+  "updated_at": "2026-04-13T14:59:05.903Z",
   "comment": {
-    "text": "The translation key \"Recalculate\" is used for a button that triggers a recalculation of stored data. It appears in a sub-component within a Portal Settings page and is intended to be displayed as \"Recalculate\".",
+    "text": "Button label. This button triggers a recalculation process, likely for storage usage or similar metrics.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:40.355Z"
+    "updated_at": "2026-04-11T21:22:42.790Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/RecalculateButton.js",
-      "line_number": 40,
-      "context": "import { toastr } from \"@docspace/ui-kit/components/toast\";\n \n import { Text } from \"@docspace/ui-kit/components/text\";\n import { Button } from \"@docspace/ui-kit/components/button\";\n \n const RecalculateButton = (props) => {\n const { t } = useTranslation(\"Settings\");\n \n const {\n isRecalculating,\n setIsRecalculating,",
+      "line_number": 66,
+      "context": "return (\n <div className=\"button-container\">\n <Button\n size=\"small\"\n label={t(\"Recalculate\")}\n onClick={onRecalculateClick}\n isLoading={isRecalculating}\n isDisabled={isRecalculating}\n testId=\"recalculate_quota_button\"\n />",
       "module": "/packages/client"
     }
   ],
@@ -171,13 +172,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Поново израчунај' uses an imperative form (command) which is grammatically awkward for a button label in this context. A more standard UI term for 'Recalculate' is 'Прерачунај'.",
-          "suggestion": "Прерачунај"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

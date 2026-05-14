@@ -3,11 +3,12 @@
   "content": "Not available under this license",
   "content_en_sha1_hash": "fc7d2762ca5286b81d400f0c8ae1c6279cc8c56a",
   "created_at": "2025-05-26T07:15:45.537Z",
-  "updated_at": "2026-04-08T04:02:33.886Z",
+  "updated_at": "2026-04-11T20:47:49.489Z",
   "comment": {
-    "text": "This translation key displays a message indicating that content is not available due to licensing restrictions, appearing on branding pages. It's used in two different contexts: one as part of a page component and another as part of a white label version of the same page. Translators should adapt this text to convey the same meaning while varying tone according to the context.",
+    "text": "This is a short text label displayed when a feature or option is unavailable due to the current license. It indicates that the user's license does not permit access to the displayed item.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:04:30.917Z"
+    "updated_at": "2026-04-11T20:47:49.489Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -153,13 +154,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses the wrong grammatical case for 'licenco' (accusative) instead of 'licenco' (instrumental/locative context), making it sound like 'Not available under this license [as an object]' rather than 'Not available under this license [as a condition]'. More importantly, 'Ni na voljo pod to licenco' is grammatically incorrect in Slovenian; it should use the preposition 'z' or 's' with the instrumental case, or 'pod' with the instrumental case 'licenco' (which is technically correct but the phrasing 'Ni na voljo pod...' is a literal calque from English that sounds unnatural/incorrect in this context).",
-          "suggestion": "Ni na voljo s to licenco"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

@@ -17,7 +17,6 @@
   "InviteViaLinkDescriptionAgentMembers": "Направите универзалну везу за чланове {{productName}} за самоовлашћење у агенту.",
   "InviteViaLinkDescriptionRoomGuest": "Креирајте универзални линк за самосталну ауторизацију у соби као гост.",
   "InviteViaLinkDescriptionRoomMembers": "Креирајте универзални линк за чланове {{productName}} за самосталну ауторизацију у соби.",
-  "LinkCopySuccess": "Линк је копиран",
   "SendInvitation": "Пошаљи позивницу",
   "UserAgentMaxAvailableRoleWarning": "Гости и корисници не могу бити додељени као менаџери агената. Само администратори собе и {{productName}} су погодни за наведну улогу.",
   "UserMaxAvailableRoleWarning": "Гости и Корисници не могу бити постављени као Менаџери собе. Само администратори собе и {{productName}} су погодни за одређену улогу.",

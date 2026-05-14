@@ -3,11 +3,12 @@
   "content": "Logo settings",
   "content_en_sha1_hash": "cde0dbbc94f797482701f082adcc8ce183018e62",
   "created_at": "2025-05-26T07:15:49.607Z",
-  "updated_at": "2026-04-07T19:59:31.693Z",
+  "updated_at": "2026-04-13T14:59:05.903Z",
   "comment": {
-    "text": "The \"Logo settings\" translation key is used to display a description for a logo-related setting in the portal settings. It appears in the branding section of the portal and might be seen in a header or on a button related to logo customization. Translators should provide a clear and concise text that explains the purpose of logo settings.",
+    "text": "This is a section title in the portal settings, referring to the \"White Label\" branding options. It appears as a short label in navigation menus and as a page title.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:01:52.421Z"
+    "updated_at": "2026-04-11T20:38:54.161Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -24,14 +25,14 @@
     },
     {
       "file_path": "/packages/shared/pages/Branding/MobileView/index.tsx",
-      "line_number": 60,
+      "line_number": 61,
       "context": "withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}\n />\n <CategoryItem\n title={t(\"WhiteLabel\")}\n subtitle={t(\"BrandingSubtitleMobile\")}\n url={`${baseUrl}/branding/white-label`}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/WhiteLabelHeader.tsx",
-      "line_number": 47,
-      "context": "InputSize,\n } from \"@docspace/ui-kit/components/text-input\";\n import { Button, ButtonSize } from \"@docspace/ui-kit/components/button\";\n import { useTheme } from \"@docspace/ui-kit/context/ThemeContext\";\n \n import { IHeaderProps } from \"./WhiteLabel.types\";\n import styles from \"./WhiteLabel.module.scss\";\n \n export const WhiteLabelHeader = ({\n isSettingPaid,\n standalone,",
+      "line_number": 66,
+      "context": "return (\n <div className={styles.header}>\n <div className={classNames(styles.headerContainer, \"header-container\")}>\n <Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"WhiteLabel\")}\n </Text>\n \n {!isSettingPaid && !standalone ? (\n <Badge\n className={classNames(styles.paidBadge, \"paid-badge\")}",
       "module": "/packages/shared"
     }
   ],
@@ -147,13 +148,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Portuguese translation 'Definições de login' means 'Login settings', which is completely different from the English 'Logo settings'.",
-          "suggestion": "Definições de logótipo"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -195,25 +190,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order is incorrect, making it sound like 'Logo settings' (noun phrase) is 'Logo is settings' or 'Logo configuration' in a broken way. In Serbian, the noun being modified should come first, or a preposition should be used.",
-          "suggestion": "Подешавања логотипа"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order is unnatural in Serbian. 'Logotip podešavanja' sounds like 'Logo settings' in a literal, broken way. In Serbian, the noun being modified should come first, or a preposition should be used.",
-          "suggestion": "Podešavanja logotipa"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

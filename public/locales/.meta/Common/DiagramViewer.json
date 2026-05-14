@@ -3,16 +3,17 @@
   "content": "Diagram Viewer",
   "content_en_sha1_hash": "efc325eb22799039f69cef2d57bc575842e16a98",
   "created_at": "2025-08-07T11:18:30.575Z",
-  "updated_at": "2026-04-08T12:02:30.338Z",
+  "updated_at": "2026-04-11T20:55:08.672Z",
   "comment": {
-    "text": "This key displays the text \"Diagram Viewer\" within a settings section, likely related to logo configuration. It's used to indicate the viewer used for displaying diagrams, alongside logo dimensions. Translators should ensure the term accurately reflects the diagram viewing functionality.",
+    "text": "This is a label for the \"Diagram Viewer\" application within the ONLYOFFICE DocSpace suite. It appears in the settings for branding, specifically when configuring the logo for the diagram viewer.",
     "is_auto": true,
-    "updated_at": "2025-08-07T11:22:33.053Z"
+    "updated_at": "2026-04-11T20:55:08.672Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 564,
+      "line_number": 565,
       "context": "<Text\n fontSize=\"15px\"\n fontWeight=\"600\"\n className=\"settings_unavailable\"\n >\n {t(\"LogoForViewer\", { diagramViewer: t(\"Common:DiagramViewer\") })} (\n {logoUrls[14].size.width}x{logoUrls[14].size.height})\n </Text>\n <div className={styles.logosWrapper}>\n <Logo\n name={logoUrls[14].name}",
       "module": "/packages/shared"
     }
@@ -171,13 +172,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Redaktori i Visio-s' means 'Visio Editor', which is a specific third-party software and a different functionality (editing vs viewing) than the English 'Diagram Viewer'.",
-          "suggestion": "Shfaqësi i Diagramit"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

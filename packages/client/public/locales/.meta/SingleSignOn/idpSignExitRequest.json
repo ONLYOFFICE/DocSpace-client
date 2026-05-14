@@ -3,11 +3,12 @@
   "content": "Verify Logout Requests Sign",
   "content_en_sha1_hash": "d1e9cfb60289741be68e1d5067a26a70cb1050f1",
   "created_at": "2025-05-19T21:30:50.098Z",
-  "updated_at": "2026-04-08T23:21:59.392Z",
+  "updated_at": "2026-04-11T21:26:47.362Z",
   "comment": {
-    "text": "The translation key \"idpSignExitRequest\" is used to describe a checkbox label in the Single Sign On settings page. It prompts the user to verify logout requests and sign out of the IdP system. This text appears on a checkbox input field with a disabled state, indicating that it's part of a set of options related to signing out from an Identity Provider (IdP).",
+    "text": "This is a checkbox label in the Single Sign-On settings. It allows administrators to enable or disable the verification of logout requests when using an Identity Provider (IdP).",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:14.880Z"
+    "updated_at": "2026-04-11T21:26:47.362Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -87,13 +88,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Italian translation 'Verifica il segno delle richieste di disconnessione' incorrectly translates 'Sign' as 'segno' (a mark/symbol). In the context of SSO/IdP, 'Sign' refers to the cryptographic signing of the request. The translation should reflect the action of signing the logout requests.",
-          "suggestion": "Verifica la firma delle richieste di disconnessione"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -111,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'Sign' (referring to the digital signature/signing process) is missing from the Lao translation. The current translation only means 'Verify Logout Requests'.",
-          "suggestion": "ຢືນຢັນ ແລະ ເຊັນການຮ້ອງຂໍອອກຈາກລະບົບ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -129,13 +118,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Dutch translation is a literal word-for-word string of nouns ('Verifieer Uitloggen Verzoek Ondertekening') which results in a nonsensical phrase. It fails to convey the functional meaning of 'signing' (digitally signing) the logout requests.",
-          "suggestion": "Verifieer en onderteken uitlogverzoeken"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -153,25 +136,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'sinal de solicitação' (request signal) is a literal and incorrect interpretation of 'Sign' in this technical context. In SSO/IdP settings, 'Sign' refers to the cryptographic digital signature used to verify the authenticity of the logout request, not a physical or metaphorical signal.",
-          "suggestion": "Verificar assinatura de solicitações de logout"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'Verificarea semnăturii cu solicitarea de deconectare' implies 'Verifying the signature WITH the logout request', which changes the technical meaning. The English 'Verify Logout Requests Sign' (likely a shorthand for 'Verify Logout Request Signature') refers to the action of verifying the signature of the logout request itself.",
-          "suggestion": "Verificarea semnăturii solicitărilor de deconectare"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -183,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'Sign' (referring to the digital signature/signing process) is missing from the Sinhala translation. The current translation only means 'Verify Logout Requests'.",
-          "suggestion": "නික්මීමේ ඉල්ලීම් සත්‍යාපනය සහ අත්සන් කිරීම"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -201,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'Sign' (referring to the action of signing/signing out) is missing from the Slovenian translation, which changes the meaning from 'Verify and Sign Logout Requests' to just 'Verify Logout Requests'.",
-          "suggestion": "Preveri in podpiši zahteve za odjavo"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -225,13 +184,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Turkish translation 'Çıkış İsteklerini İmzasını Doğrula' is grammatically broken and conveys a confusing meaning. It literally translates to 'Verify the signature of the logout requests', whereas the English 'Verify Logout Requests Sign' (in the context of IdP settings) refers to the action of signing the logout requests to verify them. The current Turkish phrasing 'İsteklerini İmzasını' uses two possessive suffixes incorrectly, making it nonsensical.",
-          "suggestion": "Çıkış İsteklerini İmzala ve Doğrula"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -243,13 +196,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'Sign' (referring to the digital signature/signing process in the context of IdP/SSO) is missing from the Vietnamese translation. The current translation only means 'Verify logout requests'.",
-          "suggestion": "Xác minh chữ ký yêu cầu đăng xuất"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
@@ -261,13 +208,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'shenjën' (sign/mark) is a literal and incorrect translation of 'Sign' in this technical context. In SSO/IdP settings, 'Sign' refers to the cryptographic digital signature (signing the request), not a physical sign or mark.",
-          "suggestion": "Verifikoni nënshkrimin e kërkesave për dalje"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

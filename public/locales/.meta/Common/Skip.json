@@ -3,13 +3,21 @@
   "content": "Skip",
   "content_en_sha1_hash": "3da474537ac378c616d6b301acc1674bc348cecd",
   "created_at": "2026-03-31T15:18:26.591Z",
-  "updated_at": "2026-04-07T22:50:02.576Z",
+  "updated_at": "2026-04-23T17:24:02.160Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Button label. This button allows users to skip a step in a multi-step process, such as a tour or wizard.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:42:24.616Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsTour.ts",
+      "line_number": 140,
+      "context": "locale: {\n back: t(\"Common:Back\"),\n close: t(\"Common:CloseButton\"),\n last: t(\"Common:Done\"),\n next: t(\"Common:Next\"),\n skip: t(\"Common:Skip\"),\n },\n });\n \n useEffect(() => {\n if (isMobile && tourStore.isRunning) {",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -104,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian word 'Pielāgot' means 'Customize' or 'Adjust', which is the opposite of the English 'Skip'.",
-          "suggestion": "Izlaist"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -140,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Să sar' means 'To jump' (physical movement), whereas 'Skip' in a UI context means to bypass or omit a step.",
-          "suggestion": "Omite"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -176,13 +172,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Albanian word 'Shkepo' means 'to detach' or 'to unfasten' (like a clip or a button), whereas 'Skip' in a UI context means to bypass or move past something.",
-          "suggestion": "Anashkaloj"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

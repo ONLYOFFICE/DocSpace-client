@@ -3,13 +3,21 @@
   "content": "Invitation message",
   "content_en_sha1_hash": "ffa7e8f52712711975f6f05898db3f313c2abbe9",
   "created_at": "2026-03-31T15:18:14.267Z",
-  "updated_at": "2026-04-08T06:37:06.670Z",
+  "updated_at": "2026-04-11T20:50:39.563Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label for a text field where users can enter a custom message to be included in an invitation email.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:50:39.563Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/ContactsForm.tsx",
+      "line_number": 168,
+      "context": "invitations: selectedItems.map((item) => ({\n id: item.id,\n access,\n })),\n notify: true,\n message: t(\"Common:InvitationMessage\"),\n }),\n ];\n \n promises.push(\n updateUserType(",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -38,13 +46,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Czech translation 'Pozvánka' means 'Invitation', whereas the English text is 'Invitation message'. The word 'message' (zpráva) is missing.",
-          "suggestion": "Zpráva k pozvánce"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -158,13 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation 'Pozvánka' means 'Invitation', whereas the English text is 'Invitation message'. The word 'message' is missing.",
-          "suggestion": "Správa pozvánky"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {

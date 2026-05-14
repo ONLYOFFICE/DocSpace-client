@@ -3,16 +3,17 @@
   "content": "You can't move the folder to its subfolder",
   "content_en_sha1_hash": "506393764de44f23f65ce73e264a120055299986",
   "created_at": "2025-05-19T21:30:46.641Z",
-  "updated_at": "2026-04-08T04:32:25.065Z",
+  "updated_at": "2026-04-11T20:48:27.436Z",
   "comment": {
-    "text": "This translation key is used for displaying an error message when attempting to move a folder into its own subfolder in the FilesSelector component. The message appears as an alert after selecting a file or folder.",
+    "text": "This is an error toast message that appears when a user attempts to move a folder into one of its own subfolders, which is an invalid operation.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:26.807Z"
+    "updated_at": "2026-04-11T20:48:27.436Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesSelector/index.tsx",
-      "line_number": 282,
+      "line_number": 283,
       "context": "(\"fileExst\" in item && item.fileExst) ||\n (\"contentLength\" in item && item.contentLength)\n ) {\n fileIds.push(item.id);\n } else if (item.id === selectedItemId) {\n toastr.error(t(\"Common:MoveToFolderMessage\"));\n } else {\n folderIds.push(item.id);\n }\n }",
       "module": "/packages/client"
     },
@@ -87,13 +88,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation is grammatically incomplete and logically incorrect. It ends with 'ենթաթղթապանակ' (subfolder) without a preposition or a verb indicating 'into' or 'to', making the sentence 'You can't move the folder to its subfolder' sound like 'You can't move the folder to its subfolder [noun phrase]'. It lacks the necessary case ending or preposition to convey the direction of movement.",
-          "suggestion": "Դուք չեք կարող պանակը տեղափոխել իր ենթաթղթապանակի մեջ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -153,13 +148,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'subdosarul propriu' translates to 'its own subfolder', which implies the folder is being moved into a subfolder that belongs to it. However, the English logic and context describe the error of moving a folder into one of its own descendants (a subfolder). The Romanian phrasing is awkward and slightly changes the logical relationship intended by the error message.",
-          "suggestion": "Nu puteți muta folderul într-unul dintre subfolderele sale"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -171,13 +160,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation says 'A container cannot be moved to its sub-container' (බහාලුමක්...), whereas the English text specifically refers to 'the folder' (singular/specific). More importantly, the Sinhala grammar implies a general rule rather than the specific error message intended for the user action.",
-          "suggestion": "ඔබට එම ෆෝල්ඩරය එහි උප ෆෝල්ඩරයකට ගෙන යාමට නොහැකිය"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

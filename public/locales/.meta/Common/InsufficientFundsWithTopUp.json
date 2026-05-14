@@ -3,11 +3,12 @@
   "content": "Your wallet has insufficient funds. Please <1>top up your wallet</1> and try purchasing again.",
   "content_en_sha1_hash": "07dbe513ca56a7e51250ec293567785288b68468",
   "created_at": "2025-08-26T11:14:10.391Z",
-  "updated_at": "2026-04-10T08:58:38.054Z",
+  "updated_at": "2026-04-11T20:50:45.240Z",
   "comment": {
-    "text": "This key displays an error message informing the user that their wallet has insufficient funds and prompts them to top it up. It appears within a UI element (likely a dialog or alert) on the manual backup page, providing a direct link to the wallet top-up page. Translators should ensure the phrasing accurately conveys the need for a wallet top-up.",
+    "text": "This is an error message displayed to a user when a purchase fails due to insufficient funds in their wallet. It includes a clickable link (`<1>`) to top up their wallet.",
     "is_auto": true,
-    "updated_at": "2025-08-26T11:25:33.072Z"
+    "updated_at": "2026-04-11T20:50:45.240Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -57,13 +58,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation contains a grammatical inconsistency in person/form: it starts with the formal 'σας' (your) but switches to the informal 'σου' (your) and the informal imperative 'φόρτισε' (top up) within the tagged link. This creates a clash in tone.",
-          "suggestion": "Το πορτοφόλι σας έχει ανεπαρκή κεφάλαια. Παρακαλώ <1>φορτώστε το πορτοφόλι σας</1> και προσπαθήστε να αγοράσετε ξανά."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -117,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'maksā' in Latvian is a verb meaning 'to pay'. The noun for 'wallet' is 'maksa'. The sentence currently reads 'Your pay has insufficient funds'.",
-          "suggestion": "Jūsu maksa nepietiek līdzekļu. Lūdzu <1>papildiniet savu maku</1> un mēģiniet iegādāties vēlreiz."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -177,25 +166,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical gender error: 'denarnica' is a feminine noun in Slovenian, so the possessive pronoun must be 'Vaša' instead of 'Vaš'.",
-          "suggestion": "Vaša denarnica nima dovolj sredstev. Prosim <1>nakladite denar na denarnico</1> in poskusite z nakupom znova."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase inside the <1> tag was not translated; it remains in English ('top up your wallet').",
-          "suggestion": "Portofoli juaj nuk ka fonde të mjaftueshme. Ju lutem <1>mbushni portofolin tuaj</1> dhe provoni sërish blerjen."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

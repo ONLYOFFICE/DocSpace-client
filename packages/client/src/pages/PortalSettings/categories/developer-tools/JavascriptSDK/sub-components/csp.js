@@ -37,6 +37,7 @@ import { SelectedItem } from "@docspace/ui-kit/components/selected-item";
 import { InfoBar } from "@docspace/shared/components/info-bar";
 import { injectDefaultTheme, tablet } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const CategoryHeader = styled.div`
   margin-top: 24px;
@@ -171,11 +172,11 @@ const CSP = ({
   return (
     <>
       <CategoryHeader>
-        {t("CSPHeader", { productName: t("Common:ProductName") })}
+        {t("CSPHeader", { productName: getBrandName("ProductName") })}
       </CategoryHeader>
       <Container className="description-holder">
         {t("CSPDescription", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
           organizationName: logoText,
         })}
         <HelpButton
@@ -191,7 +192,7 @@ const CSP = ({
           description={
             <>
               {t("CSPInfoBarDescription", {
-                productName: t("Common:ProductName"),
+                productName: getBrandName("ProductName"),
               })}{" "}
               {installationGuidesUrl ? (
                 <Link
@@ -228,7 +229,7 @@ const CSP = ({
         lineHeight="20px"
         color={error ? theme?.input.focusErrorBorderColor : globalColors.gray}
       >
-        {error || t("CSPUrlHelp", { productName: t("Common:ProductName") })}
+        {error || t("CSPUrlHelp", { productName: getBrandName("ProductName") })}
       </Text>
       <ChipsContainer>{getChips(cspDomains)}</ChipsContainer>
     </>

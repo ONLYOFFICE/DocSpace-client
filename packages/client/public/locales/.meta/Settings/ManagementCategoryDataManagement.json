@@ -3,16 +3,17 @@
   "content": "Data Management",
   "content_en_sha1_hash": "d5d83b763809dbf1782ea117dc9885e64311acdd",
   "created_at": "2025-05-19T21:30:51.903Z",
-  "updated_at": "2026-04-09T02:26:02.071Z",
+  "updated_at": "2026-04-11T21:23:23.095Z",
   "comment": {
-    "text": "The \"ManagementCategoryDataManagement\" translation key is used to display the text \"Data Management\" in a UI context. It likely appears on a settings page or button related to data management features.",
+    "text": "This is a category title in the portal settings, grouping options related to data handling.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:55.968Z"
+    "updated_at": "2026-04-11T21:23:23.095Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 216,
+      "line_number": 217,
       "context": "return t(\"Migration\");\n case \"Backup\":\n return t(\"Common:Backup\");\n case \"Common:PaymentsTitle\":\n return standalone ? t(\"Common:PaymentsTitle\") : t(\"Common:Billing\");\n case \"ManagementCategoryDataManagement\":\n return t(\"ManagementCategoryDataManagement\");\n case \"LdapSettings\":\n return t(\"Ldap:LdapSettings\");\n case \"LdapSyncTitle\":\n return t(\"Ldap:LdapSyncTitle\");",
       "module": "/packages/client"
     }
@@ -63,13 +64,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Spanish translation 'Archivo local' means 'Local file' or 'Local archive', which is a completely different concept from 'Data Management'.",
-          "suggestion": "Gestión de datos"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -111,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order in Lao is reversed. 'ຂໍ້ມູນ ການ​ຄຸ້ມ​ຄອງ' translates to 'Data Management' in a way that sounds like 'Data [is] Management' or 'Information Management' but the syntax is awkward. In Lao, the noun being described should follow the modifier, or the phrase should be structured as 'Management of Data'. The current translation is a literal word-for-word swap that lacks proper grammatical connection.",
-          "suggestion": "ການຄຸ້ມຄອງຂໍ້ມູນ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {

@@ -3,11 +3,12 @@
   "content": "Any integrations using this token will no longer be able to access the API. You cannot undo this action.",
   "content_en_sha1_hash": "79302397ee86c7a499f68d74b556077608115ed1",
   "created_at": "2025-05-19T21:30:54.021Z",
-  "updated_at": "2026-04-07T19:35:05.167Z",
+  "updated_at": "2026-04-11T21:18:23.572Z",
   "comment": {
-    "text": "This translation key is used to display a warning message when revoking an OAuth token, informing users that any integrations using the token will be disabled. The message appears in a modal dialog header.",
+    "text": "This is the descriptive text within a dialog box that appears when a user attempts to revoke an API token. It explains the consequences of revoking the token and that the action is irreversible.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:36.773Z"
+    "updated_at": "2026-04-11T21:18:23.572Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

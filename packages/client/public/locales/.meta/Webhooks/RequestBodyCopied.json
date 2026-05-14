@@ -3,11 +3,12 @@
   "content": "POST request body successfully copied to clipboard",
   "content_en_sha1_hash": "4689b1eb5beec2b99c1ded7be635ae79b2e3c7bd",
   "created_at": "2025-05-19T21:30:49.791Z",
-  "updated_at": "2026-04-08T19:37:43.013Z",
+  "updated_at": "2026-04-11T21:28:39.578Z",
   "comment": {
-    "text": "This translation key is used to display a message indicating that the request body has been successfully copied to the clipboard. It appears as a label on a button in the UI, informing users of the outcome of an action. Translators should focus on conveying a sense of confirmation and success.",
+    "text": "This is a toast message confirming that the content of a POST request body has been copied to the user's clipboard. It appears briefly after the user clicks a copy button within the Webhook Event Details section.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:57.531Z"
+    "updated_at": "2026-04-11T21:28:39.578Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -57,25 +58,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek word 'πρόχειρο' means 'draft' or 'miscellaneous', whereas 'clipboard' in a technical context should be translated as 'πρόχειρο σημειωματάριο' or more commonly 'clipboard' (transliterated) or 'προσωρινή μνήμη'. Using 'πρόχειρο' alone is misleading as it implies a document draft.",
-          "suggestion": "Το σώμα της αίτησης POST αντιγράφηκε επιτυχώς στο clipboard"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Spanish word 'portapapele' is a typo; the correct word is 'portapapeles'.",
-          "suggestion": "El cuerpo de la solicitud POST se ha copiado correctamente en el portapapeles"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {

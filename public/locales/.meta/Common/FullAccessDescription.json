@@ -3,17 +3,18 @@
   "content": "Operations with files and folders: sharing, creating, uploading, editing, reviewing, moving, and deleting.",
   "content_en_sha1_hash": "7ee17dbf4813015e7b3ca9419c9a3d0b429d38b6",
   "created_at": "2025-09-29T18:22:04.702Z",
-  "updated_at": "2026-04-08T08:28:24.659Z",
+  "updated_at": "2026-04-13T14:59:05.941Z",
   "comment": {
-    "text": "This text describes the scope of \"Full Access\" permissions. It explains that full access allows users to perform all file and folder actions, including sharing, creating, uploading, editing, reviewing, moving, and deleting. It’s used to clarify the extent of permissions granted within the UI, likely in a sharing or access control dialog.",
+    "text": "This is a description of the \"Full Access\" permission level for files and folders, displayed in a tooltip or information panel. It lists the actions a user with full access can perform.",
     "is_auto": true,
-    "updated_at": "2025-09-29T18:24:27.518Z"
+    "updated_at": "2026-04-11T20:51:45.782Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 626,
-      "context": "return (\n match({ fileType: file.fileType, access, isForm: file.isForm })\n // Document\n .with(\n { fileType: FileType.Document, access: ShareAccessRights.FullAccess },\n () => t(\"Common:FullAccessDescriptionDocument\"),\n )\n .with(\n { fileType: FileType.Document, access: ShareAccessRights.Editing },\n () => t(\"Common:EditingDescriptionDocument\"),\n )",
+      "line_number": 814,
+      "context": "> = {\n [ShareRights.ReadWrite]: {\n access: ShareAccessRights.FullAccess,\n key: \"full-access\",\n label: t(\"Common:FullAccess\"),\n description: t(\"Common:FullAccessDescription\"),\n },\n [ShareRights.Editing]: {\n access: ShareAccessRights.Editing,\n key: \"editor\",\n label: t(\"Common:Editing\"),",
       "module": "/packages/shared"
     }
   ],
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'sharing' (مشاركة) is missing from the Arabic translation.",
-          "suggestion": "العمليات على الملفات والمجلدات: المشاركة، والإنشاء، والتحميل، والتحرير، والمراجعة، والنقل، والحذف."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -57,13 +52,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The German translation omits 'sharing' (Teilen) from the list of operations.",
-          "suggestion": "Funktionen für Dateien und Ordner: Teilen, Erstellen, Hochladen, Bearbeiten, Überprüfen, Verschieben und Löschen."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -75,13 +64,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'sharing' is missing from the Spanish translation.",
-          "suggestion": "Operaciones con archivos y carpetas: compartir, crear, cargar, editar, revisar, mover y eliminar."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -93,49 +76,25 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The French translation omits 'sharing' (partage) and 'uploading' (téléchargement is used for downloading in many contexts, but 'téléversement' is more accurate for uploading; however, the primary issue is the omission of 'sharing').",
-          "suggestion": "Opérations avec les fichiers et dossiers : partage, création, téléchargement, modification, révision, déplacement et suppression."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'sharing' is missing from the Armenian translation.",
-          "suggestion": "Ֆայլերի և թղթապանակների գործողություններ՝ տարածում, ստեղծում, վերբեռնում, խմբագրում, վերանայում, տեղափոխում և ջնջում։"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Italian translation omits the word 'sharing' (condivisione), which is a key part of the 'Full Access' permission description.",
-          "suggestion": "Operazioni su file e cartelle: condivisione, creazione, caricamento, modifica, revisione, spostamento ed eliminazione."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'sharing' (共有) is missing from the Japanese translation.",
-          "suggestion": "ファイルとフォルダーに関する操作：共有、作成、アップロード、編集、レビュー、移動、および削除。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -177,25 +136,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation is missing the 'sharing' action present in the English source.",
-          "suggestion": "Operações com arquivos e pastas: compartilhamento, criação, upload, edição, revisão, movimentação e exclusão."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'sharing' is missing from the Romanian translation.",
-          "suggestion": "Operațiuni cu fișiere și dosare: partajare, creare, încărcare, editare, revizuire, mutare și ștergere."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -213,13 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'marenie' means 'spoiling', 'wasting', or 'undermining', which is a completely wrong translation for 'deleting' (mazanie) in the context of file operations.",
-          "suggestion": "Operácie so súbormi a priečinkami: zdieľanie, vytváranie, nahrávanie, upravovanie, prezeranie, presúvanie a mazanie."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -231,37 +172,19 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'sharing' (ndarja) is missing from the Albanian translation.",
-          "suggestion": "Veprime me skedarë dhe dosje: ndarje, krijim, ngarkim, redaktim, shqyrtim, zhvendosje dhe fshirje."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'sharing' (делињење) is missing from the Serbian translation.",
-          "suggestion": "Операције са фајловима и фолдерима: делињење, креирање, отпремање, уређивање, рецензирање, премештање и брисање."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'sharing' (deljenje) is missing from the Serbian translation.",
-          "suggestion": "Operacije sa fajlovima i folderima: deljenje, kreiranje, otpremanje, uređivanje, recenziranje, premeštanje i brisanje."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -285,13 +208,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'sharing' (分享) is missing from the Chinese translation.",
-          "suggestion": "支持对文件和文件夹执行以下操作：分享、创建、上传、编辑、审阅、移动和删除。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

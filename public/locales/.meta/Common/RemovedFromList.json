@@ -3,13 +3,20 @@
   "content": "Removed from list",
   "content_en_sha1_hash": "2f2bdcb4c73e77431fff3aae539197cbb5befd21",
   "created_at": "2025-05-19T21:30:47.817Z",
-  "updated_at": "2026-04-08T01:33:30.939Z",
+  "updated_at": "2026-04-12T02:54:18.600Z",
   "comment": {
-    "text": "This translation key is used to display a message indicating that an item has been removed from a list. It is typically displayed in a download dialog when removing a file from a list of available files. The translation should be used for a \"Removed from List\" label or prompt, such as in a button or dialog title.",
+    "text": "This is a toast message indicating that an item has been successfully removed from a list, such as recent files. It also appears as a label in a dialog related to protected files.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:34:45.009Z"
+    "updated_at": "2026-04-11T20:45:11.713Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useFavoritesActions.ts",
+      "line_number": 76,
+      "context": "const removeFromRecent = useCallback(\n async (item: TFileItem) => {\n try {\n await api.files.deleteFilesFromRecent([item.id as number]);\n filesListStore.removeItem(item.id);\n toastr.success(t(\"Common:RemovedFromList\"));\n } catch {\n toastr.error(t(\"Common:UnexpectedError\"));\n }\n },\n [t, filesListStore],",
+      "module": "/packages/sdk"
+    },
     {
       "file_path": "/packages/shared/dialogs/download-dialog/sub-components/PasswordContent.tsx",
       "line_number": 134,
@@ -153,13 +160,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation means 'Removed from the document' (ලේඛනයෙන්) instead of 'Removed from the list' (ලැයිස්තුවෙන්).",
-          "suggestion": "ලැයිස්තුවෙන් ඉවත් කරන ලදී"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

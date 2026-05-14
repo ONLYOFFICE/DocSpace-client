@@ -3,13 +3,21 @@
   "content": "Folder deleted",
   "content_en_sha1_hash": "80fa7315b0ebe24ae6902123622edb0e1f4c01f3",
   "created_at": "2025-05-19T21:30:49.752Z",
-  "updated_at": "2026-04-08T20:00:35.490Z",
+  "updated_at": "2026-04-13T14:59:05.878Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a toast message indicating that a folder has been permanently removed. It appears after a user deletes a folder.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:28:55.402Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
+      "line_number": 69,
+      "context": "case WebhookTriggers.FolderUpdated:\n return t(\"FolderUpdated\");\n case WebhookTriggers.FolderTrashed:\n return t(\"FolderTrashed\");\n case WebhookTriggers.FolderDeleted:\n return t(\"FolderDeleted\");\n case WebhookTriggers.FolderRestored:\n return t(\"FolderRestored\");\n case WebhookTriggers.FolderCopied:\n return t(\"FolderCopied\");\n case WebhookTriggers.FolderMoved:",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -164,13 +172,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Фасцикла' is not a standard Serbian word for 'Folder'. The correct term is 'Овртик' or 'Фолдер'.",
-          "suggestion": "Фолдер је обрисан"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

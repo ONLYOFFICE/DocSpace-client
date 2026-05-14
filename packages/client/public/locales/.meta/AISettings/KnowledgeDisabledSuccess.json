@@ -3,11 +3,12 @@
   "content": "Knowledge base successfully disabled",
   "content_en_sha1_hash": "32a12c2e2f5e35f800042408285aaf5c30bd51c6",
   "created_at": "2025-11-13T07:58:04.693Z",
-  "updated_at": "2025-11-25T06:36:56.700Z",
+  "updated_at": "2026-04-11T21:02:46.951Z",
   "comment": {
-    "text": "This key displays a success message in the UI, confirming that the knowledge base has been successfully disabled. It appears after a user disables knowledge base settings, likely within a dialog or notification area. Translators should ensure the message conveys a positive outcome related to disabling knowledge base functionality.",
+    "text": "Toast message. This message appears briefly to confirm that the knowledge base feature has been successfully turned off.",
     "is_auto": true,
-    "updated_at": "2025-11-13T08:12:24.451Z"
+    "updated_at": "2026-04-11T21:02:46.951Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

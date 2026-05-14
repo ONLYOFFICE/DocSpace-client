@@ -3,13 +3,20 @@
   "content": "Use VDR for advanced file security and transparency. Set watermarks, automatically index and track all content, restrict downloading and copying.",
   "content_en_sha1_hash": "442334b85570c01c1f3c6137eb5b49e4dc948796",
   "created_at": "2025-05-19T21:30:49.557Z",
-  "updated_at": "2026-04-07T20:16:59.171Z",
+  "updated_at": "2026-04-12T12:07:00.104Z",
   "comment": {
-    "text": "This translation key is used to describe a virtual data room feature, explaining its purpose and key benefits. The translated text will be displayed in a UI context where users interact with this feature, such as a settings or configuration page.",
+    "text": "This is a description of the Virtual Data Room (VDR) functionality, appearing when a user selects the VDR room type. It highlights key security and transparency features like watermarks, indexing, tracking, and download/copy restrictions.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:35:10.686Z"
+    "updated_at": "2026-04-11T20:39:19.781Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/components/room-type/RoomType.utils.ts",
+      "line_number": 40,
+      "context": "switch (roomType) {\n case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRoomDescription\");\n case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoomDescription\");\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRoomDescription\");\n case RoomsType.AIRoom:\n return t(\"Common:AIRoomDescription\");\n case RoomsType.PublicRoom:",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
       "line_number": 40,
@@ -27,25 +34,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation includes a significant hallucination/addition: 'أثناء تعبئة وتوقيع المستندات خطوة بخطوة' (during step-by-step filling and signing of documents), which is not present in the English source text.",
-          "suggestion": "استخدم غرفة البيانات الافتراضية لأمان متقدم للملفات وشفافية. ضع علامات مائية، وارقم وتابع كل المحتوى تلقائيًا، وقيّد التنزيل والنسخ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation adds a completely unrelated clause at the beginning: 'Sənədləri addım-addım doldurub imzalayarkən' (While filling out and signing documents step-by-step), which is not present in the English source.",
-          "suggestion": "Təkmilləşdirilmiş fayl təhlükəsizliyi və şəffaflıq üçün VDR-dən istifadə edin. Su nişanlarını təyin edin, bütün məzmunu avtomatik indeksləşdirib izləyin, yükləmə və kopyalamağı məhdudlaşdırın."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -111,13 +106,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation includes an entirely new clause ('문서를 단계별로 작성하고 서명하는 동안' - while creating and signing documents step-by-step) that does not exist in the English source text, altering the intended meaning.",
-          "suggestion": "VDR을 사용하여 고급 파일 보안 및 투명성을 확보하세요. 워터마크를 설정하고, 모든 콘텐츠를 자동으로 인덱싱하고 추적하며, 다운로드 및 복사를 제한하세요."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -129,13 +118,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation includes an entirely different clause ('soli pa solim aizpildot un parakstot dokumentus' - step by step filling and signing documents) that does not exist in the English source, while failing to accurately reflect the core purpose of the VDR as described.",
-          "suggestion": "Izmantojiet VDR papildu failu drošībai un pārredzamībai. Iestatiet ūdenszīmes, automātiski indeksējiet un izsekojiet visu saturu, ierobežojiet lejupielādi un kopēšanu."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -165,13 +148,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation incorrectly translates 'Set watermarks' as 'Adăugați incripționări' (Add encryptions) and 'restrict downloading' as 'restricționați încărcarea' (restrict uploading). This changes the technical meaning of the feature.",
-          "suggestion": "Folosiți CVD pentru securitate și transparență avansată a fișierelor. Setați filigrane, indexați și urmăriți automat tot conținutul, restricționați descărcarea și copierea."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -189,25 +166,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The acronym 'VDR' (Virtual Data Room) was translated as 'VDM', which is a different term and changes the technical meaning.",
-          "suggestion": "Používajte VDR na pokročilé zabezpečenie a transparentnosť súborov. Nastavte vodoznaky, automaticky indexujte a sledujte všetok obsah, obmedzte sťahovanie a kopírovanie."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'nalaganje' in Slovenian means 'uploading', whereas the English source text specifies 'downloading'.",
-          "suggestion": "Uporabite VDR za napredno varnost in preglednost datotek. Nastavite vodne žige, samodejno indeksirajte in sledite vsebini, omejite prenos in kopiranje."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -243,13 +208,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation adds significant information not present in the English source ('在逐步填写和签署文档时' - 'when filling out and signing documents step by step'), which changes the scope of the feature description.",
-          "suggestion": "使用 VDR 实现高级文件安全性和透明度。设置水印，自动索引并跟踪所有内容，限制下载和复制。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

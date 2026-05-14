@@ -3,13 +3,21 @@
   "content": "Subscription will be automatically renewed on {{finalDate}} with updated pricing and specifications.",
   "content_en_sha1_hash": "8307de2dd47b43d6e83883bbbf81a6111a782a4a",
   "created_at": "2026-04-10T13:53:43.467Z",
-  "updated_at": "2026-04-10T13:53:43.467Z",
+  "updated_at": "2026-04-23T17:24:02.175Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a text string displayed to the user, informing them that their subscription will automatically renew on a specific date. The `{{finalDate}}` variable will be replaced with the renewal date.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:41:45.847Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "line_number": 147,
+      "context": "<Text fontSize=\"12px\">\n {nextStoragePlanSize === 0\n ? t(\"SubscriptionAutoCancellation\", {\n finalDate: storageExpiryDate,\n })\n : t(\"SubscriptionAutoRenewed\", {\n finalDate: storageExpiryDate,\n })}\n </Text>\n </>\n );",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

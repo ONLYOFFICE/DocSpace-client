@@ -3,11 +3,12 @@
   "content": "Default Sign Verifying Algorithm",
   "content_en_sha1_hash": "4efdddea5f21717488ef95e4e69bbf2ef43a5df9",
   "created_at": "2025-05-19T21:30:50.101Z",
-  "updated_at": "2026-04-08T23:20:36.423Z",
+  "updated_at": "2026-04-11T21:26:45.834Z",
   "comment": {
-    "text": "This translation key describes the default signing algorithm used by an Identity Provider. It is displayed as a label in a combo box used to select or configure this setting in the Single Sign-On settings page.",
+    "text": "This is a combo box label in the Single Sign-On settings, prompting the user to select the algorithm used to verify signatures from the Identity Provider.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:14.410Z"
+    "updated_at": "2026-04-11T21:26:45.834Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation means 'Default algorithm for verifying login' instead of 'Default Sign Verifying Algorithm'. It incorrectly refers to 'login' (تسجيل الدخول) instead of 'signing' (التوقيع).",
-          "suggestion": "خوارزمية التحقق من التوقيع الافتراضية"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -69,13 +64,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'Default' is missing from the Spanish translation, which changes the meaning from a specific setting (the default one) to a general description of a signature verification algorithm.",
-          "suggestion": "Algoritmo de verificación de firma predeterminado"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -87,13 +76,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'signe' (which means 'sign' as in a symbol or gesture) instead of 'signature' (the cryptographic process). In the context of an Identity Provider and signing algorithms, 'signature' is the correct technical term.",
-          "suggestion": "Algorithme de vérification de la signature par défaut"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -105,13 +88,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Italian translation uses 'segni' (signs/marks) instead of 'firma' (signature). In a technical context regarding Identity Providers and SSO, 'Sign Verifying' refers to digital signatures, not physical or general signs.",
-          "suggestion": "Algoritmo di verifica della firma predefinito"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -129,25 +106,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation translates to 'Default signing verification process' instead of 'Default Sign Verifying Algorithm'. 'Algorithm' (ອັນກໍຣິທຶມ) is missing and replaced by 'Process' (ຂັ້ນຕອນ).",
-          "suggestion": "ອັນກໍຣິທຶມການຢືນຢັນການເຊັນເລີ່ມຕົ້ນ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Noklusējuma zīmju verifikācijas algoritms' translates to 'Default signature verification algorithm'. While close, the English 'Default Sign Verifying Algorithm' refers to the algorithm used for the *signing* process (the action of creating the signature), whereas the Latvian translation focuses on the *verification* of existing signatures. In the context of an Identity Provider setting, this is a critical distinction between the algorithm used to sign tokens and the algorithm used to verify them.",
-          "suggestion": "Noklusais parakstīšanas verifikācijas algoritms"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -165,13 +130,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation introduces completely unrelated content ('Verificação dos logins' / 'Login verification') that is not present in the English source, which refers to a 'Sign Verifying Algorithm'.",
-          "suggestion": "Algoritmo de Verificação de Assinatura Padrão"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -189,25 +148,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Russian translation uses 'Стандартный' (Standard) instead of 'Default' (По умолчанию) in a technical configuration context, and adds a colon ':' which is not present in the source.",
-          "suggestion": "Алгоритм проверки подписи по умолчанию"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'පෙරනිමි සත්‍යාපන ඇල්ගොරිතම' means 'Default Verification Algorithm'. It misses the word 'Sign' (සංඥා කිරීම/අත්සන් කිරීම), which is crucial for distinguishing between a general verification algorithm and a digital signing algorithm in an Identity Provider context.",
-          "suggestion": "පෙරනිමි අත්සන් සත්‍යාපන ඇල්ගොරිතමය"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -219,13 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation uses 'Privzeti algoritem' (Default algorithm - singular) instead of 'Privzeti algoritem za preverjanje podpisov' (Default signing algorithm). More importantly, 'znakov' means 'signs/characters' instead of 'podpisov' (signatures), which changes the technical meaning from 'signing' to 'verifying characters'.",
-          "suggestion": "Privzeti algoritem za preverjanje podpisov"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

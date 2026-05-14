@@ -3,16 +3,17 @@
   "content": "<2>{{qty}} elements</2> successfully copied to <1>{{folderName}}</1>",
   "content_en_sha1_hash": "9e396de69dbfcb3455d1d720f76841e35a0ccf20",
   "created_at": "2025-05-19T21:30:55.357Z",
-  "updated_at": "2026-04-07T19:35:05.079Z",
+  "updated_at": "2026-04-23T17:24:02.083Z",
   "comment": {
-    "text": "This translation key is used to display a success message when copying items, indicating the number of elements successfully copied and their destination folder. It appears in a toast notification after a successful copy operation.",
+    "text": "This is a toast message confirming that multiple items were successfully copied. It appears after a copy operation is completed. `{{qty}}` is the number of items, and `{{folderName}}` is the destination folder.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:40:04.567Z"
+    "updated_at": "2026-04-11T21:10:15.887Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/store/SecondaryProgressDataStore.js",
-      "line_number": 244,
+      "line_number": 246,
       "context": "if (operation === OPERATIONS_NAME.copy) {\n toastTranslation = isSuccess ? (\n <Trans\n t={t}\n i18nKey=\"CopyItems\"\n components={commonComponents}\n values={commonProps}\n />\n ) : (\n <Trans t={t} i18nKey=\"ErrorCopyItems\">",
       "module": "/packages/client"
     }

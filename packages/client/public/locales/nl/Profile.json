@@ -24,7 +24,7 @@
   "SuccessLogout": "De actieve verbinding werd afgemeld: {{platform}}, {{browser}}",
   "TelegramAccount": "Telegram account",
   "TelegramAccountDescription": "Om TelegramBot met uw account te verbinden, volg dan de geheime link en klik op de “Verbind Telegram” knop.",
-  "TelegramAccountDisconnect": "Verbind Telegram verbreken",
+  "TelegramAccountDisconnect": "Telegram verbreken",
   "TelegramAccountDisconnectDescription": "Uw @{{username}} account is verbonden voor telegram notificaties. U kunt zich van dit account loskoppelen. In dat geval ontvangt u geen notificaties.",
   "TerminateAllSessions": "Beëindig alle sessies behalve de huidige",
   "TwoFactorDescription": "Twee-factor authenticatie via een code-genererende app was ingeschakeld voor alle gebruikers door de beheerder."

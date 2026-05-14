@@ -3,11 +3,12 @@
   "content": "Your turn",
   "content_en_sha1_hash": "8a4e60471b34b8af985c6dd2d93792af71788f57",
   "created_at": "2025-05-19T21:30:49.657Z",
-  "updated_at": "2026-04-07T19:50:15.488Z",
+  "updated_at": "2026-04-24T09:07:34.719Z",
   "comment": {
-    "text": "\"This translation key displays the message 'Your turn' to indicate whose action is being requested or awaited. It is used in UI elements where a user's input or submission is required.\"",
+    "text": "This is a short status label indicating that it is the user's turn to take action on a file or task.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:24:16.337Z"
+    "updated_at": "2026-04-11T20:38:35.180Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -28,78 +29,122 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:05:36.834Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "815aaef608d11f55"
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:05:36.834Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "a96c8aaf404f960d"
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:05:36.834Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "668353f3d1f4c369"
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:05:45.261Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "6ba91e963d6894a8"
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:05:45.261Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "5dbead18d028dc65"
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:05:45.261Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "6e811023ba98c3ab"
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:05:54.594Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "83c8fc3b79ead6d8"
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:05:54.594Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "fd17b2faec85e0de"
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:05:54.594Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "1a849179d43e1e7c"
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:06:01.884Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "1116c301510bf7ca"
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:06:01.884Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "d223232cb2020daa"
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:06:01.884Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "2a91f9d4614c2485"
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation uses '고객님' (customer) which incorrectly refers to the user as a customer, while the original 'Your' refers to the current DocSpace user who needs to take action on the file or task.",
+          "suggestion": "귀하의 차례입니다",
+          "checked_at": "2026-04-24T09:06:42.239Z",
+          "checked_by": "openrouter/tencent/hy3-preview:free"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -108,8 +153,10 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ເປັນຂອງເຈົ້າແລ້ວ' means 'It is already yours' (ownership), whereas the English 'Your turn' refers to a sequence of actions or a waiting state in a process.",
-          "suggestion": "ຮອດຕາເຈົ້າແລ້ວ"
+          "description": "The Lao translation 'ເປັນຂອງເຈົ້າແລ້ວ' means 'It is yours now', which does not convey the intended meaning of 'Your turn' (indicating the user's turn to take action on a file or task).",
+          "suggestion": "ເຖິງຄັງຂອງເຈົ້າແລ້ວ",
+          "checked_at": "2026-04-24T09:06:13.869Z",
+          "checked_by": "openrouter/tencent/hy3-preview:free"
         }
       ],
       "approved_at": null
@@ -118,103 +165,159 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:06:42.240Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "3b00187a32dbbe53"
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:06:47.586Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "7791ca15a67ae79f"
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:06:47.586Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "0063a2503b499d14"
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:06:47.586Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "6ec08ec2ed2fe0c3"
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:06:57.450Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "4bcadd40ebdd3f78"
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:06:57.450Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "14f0c8a4f7ccb447"
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:06:57.450Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "0ad22cf068bab683"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:07:07.259Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "1a62997869781251"
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:07:07.259Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "4647825eba208495"
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:07:07.259Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "fe4dd10e93dca96e"
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:07:13.622Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "668353f3d1f4c369"
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:07:13.622Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "61f88dc978c6fa9b"
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:07:31.110Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "3b02f623ad6289ab"
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:07:31.110Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "63742b8499287e91"
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Vietnamese translation 'Phiên của bạn' translates to 'Your session' which does not convey the intended meaning of 'Your turn' (indicating it is the user's turn to take action on a file or task) in this context.",
+          "suggestion": "Lượt của bạn",
+          "checked_at": "2026-04-24T09:07:31.110Z",
+          "checked_by": "openrouter/tencent/hy3-preview:free"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:07:34.719Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "04e8112b63261425"
     },
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:07:13.622Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "99eb0e0ceaef34f0"
     }
   }
 }

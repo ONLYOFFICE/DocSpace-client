@@ -3,13 +3,21 @@
   "content": "<1>Input tokens</1> — Text and data you send to AI models",
   "content_en_sha1_hash": "af1702604f2bc560883bc961bbbe70782f08252e",
   "created_at": "2026-04-10T13:53:44.638Z",
-  "updated_at": "2026-04-10T13:53:44.638Z",
+  "updated_at": "2026-04-11T20:59:48.075Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is the content of a tooltip that appears when hovering over \"Input tokens\" in the AI service pricing section. It explains what input tokens are. The `<1>` tag highlights \"Input tokens\" in bold.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:59:48.075Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/PricingBillingBody.tsx",
+      "line_number": 86,
+      "context": "style={{ height: \"15px\", margin: \"0\" }}\n tooltipContent={\n <>\n <CommonTrans\n \n i18nKey=\"AIPricingTokensTooltipInput\"\n components={{\n 1: <strong />,\n }}\n />\n <br />",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

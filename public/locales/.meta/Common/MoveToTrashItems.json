@@ -3,13 +3,21 @@
   "content": "These {{itemCount}} items will be moved to Trash.",
   "content_en_sha1_hash": "376801e3e09ca786042c3c56c04667dc6dacc5ae",
   "created_at": "2026-04-03T21:51:30.652Z",
-  "updated_at": "2026-04-08T04:27:08.431Z",
+  "updated_at": "2026-04-11T20:48:22.967Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a confirmation message in a dialog box, informing the user that multiple selected items will be moved to the Trash. `{{itemCount}}` is a number representing how many items will be moved.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:48:22.967Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/delete-dialog/index.tsx",
+      "line_number": 61,
+      "context": "? itemCount === 1\n ? t(\"Common:DeleteItemForever\")\n : t(\"Common:DeleteItemsForever\", { itemCount })\n : itemCount === 1\n ? t(\"Common:MoveToTrashItem\")\n : t(\"Common:MoveToTrashItems\", { itemCount });\n \n return (\n <ModalDialog visible={visible} onClose={onClose} autoMaxHeight>\n <ModalDialog.Header>{t(\"Common:Delete\")}</ModalDialog.Header>\n <ModalDialog.Body>",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -50,13 +58,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Κάμινα Απορριμμάτων' is a literal, nonsensical translation of 'Trash'. In software UI, 'Trash' (the bin/folder) is translated as 'Κάδος Απορριμμάτων' or simply 'Απορρίμματα'. 'Κάμινα' refers to a furnace/kiln.",
-          "suggestion": "Αυτά τα {{itemCount}} στοιχεία θα μετακινηθούν στον Κάδο Απορριμμάτων."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -146,13 +148,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical error in noun declension: 'элемента' (singular genitive) is used instead of 'элементов' (plural genitive) which is required for the number {{itemCount}}.",
-          "suggestion": "Эти {{itemCount}} элементов будут перемещены в Корзину."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {

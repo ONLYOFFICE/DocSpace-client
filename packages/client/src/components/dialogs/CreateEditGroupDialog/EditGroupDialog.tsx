@@ -67,7 +67,7 @@ type InjectedProps = Pick<
   | "title"
   | "setTitle"
   | "hasChanges"
->;
+> & { currentUserId?: string };
 
 type EditGroupDialogProps = {
   group: TGroup;
@@ -99,6 +99,7 @@ const EditGroupDialog = ({
     title,
     setTitle,
     hasChanges,
+    currentUserId,
   } = injectedProps!;
 
   const { t } = useTranslation(["PeopleTranslations", "Common"]);
@@ -263,6 +264,7 @@ const EditGroupDialog = ({
             addManager(user);
             setSelectGroupMangerPanelIsVisible(false);
           }}
+          currentUserId={currentUserId}
         />
       ) : null}
 
@@ -280,9 +282,30 @@ const EditGroupDialog = ({
   );
 };
 
-export default inject<{ editGroupStore: EditGroupStore }>(
-  ({ editGroupStore }) => {
-    const {
+export default inject<{
+  editGroupStore: EditGroupStore;
+  userStore: { user?: { id?: string } };
+}>(({ editGroupStore, userStore }) => {
+  const {
+    initGroupData,
+    resetGroupData,
+    isInit,
+    loadMembers,
+    manager,
+    addManager,
+    removeManager,
+    members,
+    addMembers,
+    removeMember,
+    currentTotal,
+    submitChanges,
+    title,
+    setTitle,
+    hasChanges,
+  } = editGroupStore;
+
+  return {
+    injectedProps: {
       initGroupData,
       resetGroupData,
       isInit,
@@ -298,26 +321,7 @@ export default inject<{ editGroupStore: EditGroupStore }>(
       title,
       setTitle,
       hasChanges,
-    } = editGroupStore;
-
-    return {
-      injectedProps: {
-        initGroupData,
-        resetGroupData,
-        isInit,
-        loadMembers,
-        manager,
-        addManager,
-        removeManager,
-        members,
-        addMembers,
-        removeMember,
-        currentTotal,
-        submitChanges,
-        title,
-        setTitle,
-        hasChanges,
-      },
-    };
-  },
-)(observer(EditGroupDialog));
+      currentUserId: userStore.user?.id,
+    },
+  };
+})(observer(EditGroupDialog));

@@ -3,11 +3,12 @@
   "content": "Show backup codes",
   "content_en_sha1_hash": "ef39b662d908a8305219bddff4da149f743f9ad9",
   "created_at": "2025-05-19T21:30:53.382Z",
-  "updated_at": "2026-04-09T07:00:57.887Z",
+  "updated_at": "2026-04-11T21:20:36.559Z",
   "comment": {
-    "text": "The translation key \"ShowBackupCodes\" represents a button label that displays instructions to show backup codes for two-factor authentication. It is used in a login settings page, where clicking this button will toggle a dialog open for managing backup codes. Translators should ensure the phrase provides clarity and accuracy in this context.",
+    "text": "This is the label for a button that, when clicked, displays a user's backup codes for two-factor authentication.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:49.517Z"
+    "updated_at": "2026-04-11T21:20:36.559Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

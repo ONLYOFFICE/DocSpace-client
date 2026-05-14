@@ -29,6 +29,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
 import { CategoryItem } from "@docspace/ui-kit/components/category-item";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const StyledWrapper = styled.div`
   margin-top: 24px;
@@ -64,7 +65,7 @@ const MobileView = ({ isSSOAvailable, logoText }) => {
           organizationName: logoText,
         })}
         subtitle={t("SpMetadataDescription", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
           organizationName: logoText,
         })}
         url="/portal-settings/integration/sso/metadata"

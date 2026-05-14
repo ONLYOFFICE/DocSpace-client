@@ -8,7 +8,7 @@
   "DisablingRoomGroups": "ルームグループの無効化",
   "DisablingRoomGroupsDescription": "グループは保存されますが、非表示になります。「プロフィール」の「ファイル管理」で再度有効にしてください。",
   "EditRoomGroups": "ルームグループの編集",
-  "EmptyGroupDescription": "ここに部屋はありません。部屋を追加するか、このグループを削除してみてください。",
+  "EmptyGroupRoomsDescription": "ここに部屋はありません。部屋を追加するか、このグループを削除してみてください。",
   "GroupHasBeenDeleted": "グループは削除されました",
   "GroupIcon": "グループアイコン",
   "GroupIsEmpty": "グループが空です",
@@ -17,6 +17,7 @@
   "RemoveFromGroup": "グループから削除",
   "RemoveGroup": "グループを削除",
   "RemoveGroupConfirmation": "部屋のグループを削除します。続行してもよろしいですか？",
+  "RemoveGroupInfo": "グループに含まれる部屋は、<strong>すべての部屋</strong>セクションに表示されます。",
   "RoomAddedToGroup": "選択された部屋が<1>{{groupName}}</1>に追加されました。",
   "RoomGrouping": "ルームのグループ化",
   "RoomGroupingDisabled": "ルームのグループ化は無効になっています",
@@ -24,6 +25,5 @@
   "RoomGroupingSettingDescription": "部屋をフォルダにグループ化し、簡単に切り替えることができます。",
   "RoomRemovedFromGroup": "選択された部屋が<1>{{groupName}}</1>から削除されました。",
   "RoomsAddedToGroup": "選択された部屋が<1>{{groupName}}</1>に追加されました。",
-  "RoomsRemovedFromGroup": "選択された部屋は<1>{{groupName}}</1>から削除されました。",
-  "RemoveGroupInfo": "グループに含まれる部屋は、<strong>すべての部屋</strong>セクションに表示されます。"
+  "RoomsRemovedFromGroup": "選択された部屋は<1>{{groupName}}</1>から削除されました。"
 }

@@ -3,11 +3,12 @@
   "content": "The Identity provider public certificates used for either verification or decryption (or both) of the requests and responses from the IdP.",
   "content_en_sha1_hash": "7846c6461388c273f52adc2c6ee4a3e2120da395",
   "created_at": "2025-05-19T21:30:50.096Z",
-  "updated_at": "2026-04-08T23:22:52.903Z",
+  "updated_at": "2026-04-11T21:26:49.410Z",
   "comment": {
-    "text": "This translation key is used to display a tooltip describing identity provider public certificates in the portal settings page. It provides context on the certificates' purpose and usage in single sign-on processes.",
+    "text": "This is a tooltip that appears when hovering over the \"IdP Certificates\" field. It explains the purpose of these certificates in verifying or decrypting requests and responses from the Identity Provider.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:15.125Z"
+    "updated_at": "2026-04-11T21:26:49.410Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -153,13 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation changes the sentence structure from a noun phrase (a definition) to a complete sentence with a subject/verb mismatch. The English text is a definition of 'The Identity provider public certificates', whereas the Sinhala text reads as 'IdP uses the identity provider's public certificates...', which changes the grammatical intent of a tooltip description.",
-          "suggestion": "IdP වෙතින් එවන ඉල්ලීම් සහ ප්‍රතිචාර සත්‍යාපනය කිරීම හෝ විසංකේතනය කිරීම (හෝ දෙකම) සඳහා භාවිතා කරන අනන්‍යතා සපයන්නාගේ (Identity provider) ප්‍රසිද්ධ සහතික."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -207,25 +202,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation omits 'responses' (响应), only mentioning 'requests and information' (请求与信息). The English text specifies 'requests and responses'.",
-          "suggestion": "用于对来自 IdP 的请求与响应进行验证或解密（或两者皆有）的身份供应商公共证书。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation incorrectly translates 'The Identity provider public certificates' as 'Identiteti i ofruesit të certifikatave publike', which means 'The identity of the provider of public certificates'. This changes the subject from the certificates themselves to the identity of the provider.",
-          "suggestion": "Certifikatat publike të ofruesit të identitetit përdoren për verifikimin ose deshifrimin (ose të dyja) e kërkesave dhe përgjigjeve nga IdP."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -3,11 +3,12 @@
   "content": "Download SP metadata XML",
   "content_en_sha1_hash": "69cdbb542da10c910280c5a6dd9347606d5ba14e",
   "created_at": "2025-05-19T21:30:50.077Z",
-  "updated_at": "2026-04-08T23:33:18.570Z",
+  "updated_at": "2026-04-11T21:26:56.191Z",
   "comment": {
-    "text": "This translation key is used to display the label for a button that allows users to download SP metadata XML. It appears on the \"Download\" button in a portal settings category.",
+    "text": "This is the label for a button that allows users to download the Service Provider (SP) metadata XML file, typically used for Single Sign-On (SSO) configuration.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:17.436Z"
+    "updated_at": "2026-04-11T21:26:56.191Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation omits the specific file format 'XML' and the technical term 'SP' (Service Provider), which are essential for the user to know exactly what they are downloading.",
-          "suggestion": "تنزيل ملف XML لبيانات SP"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -45,13 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation expands 'SP' (Service Provider) to 'доставчика на услуги' (Service Provider), but in a technical context involving XML metadata, 'SP' is a specific technical term (Service Provider) that should either be kept as 'SP' or translated more precisely to avoid ambiguity with general service providers.",
-          "suggestion": "Изтеглете XML с метаданните на SP"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -69,13 +58,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation incorrectly expands 'SP' (Service Provider) to 'παρόχου υπηρεσιών' (Service Provider), but in a technical context involving metadata, 'SP' is a specific technical acronym that should either be kept as 'SP' or translated more precisely. More importantly, the current Greek phrasing 'μεταδεδομένων παρόχου υπηρεσιών XML' is syntactically awkward; it reads as 'metadata of the service provider XML' rather than 'SP metadata XML'.",
-          "suggestion": "Λήψη XML μεταδεδομένων SP"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -141,25 +124,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'SP' (Service Provider) is translated as 'usługodawcy' (provider), which is a generic term. In technical SAML/SSO contexts, 'SP' is a specific technical acronym that should ideally be preserved or translated as 'Dostawca usług' to maintain technical accuracy, but more importantly, 'SP metadata' refers to a specific technical entity.",
-          "suggestion": "Pobierz XML z metadanymi SP"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order in Portuguese 'a metadata do SP XML' implies 'the metadata of the SP XML', whereas the English 'SP metadata XML' refers to an XML file containing SP metadata. Additionally, 'metadata' is typically treated as a feminine plural or masculine singular noun in Portuguese, but the phrasing 'do SP XML' is syntactically awkward for a technical label.",
-          "suggestion": "Descarregar XML de metadados do SP"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -171,13 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation adds 'a furnizorului de servicii' (of the service provider), which is not present in the English source. While 'SP' stands for Service Provider, in a UI label, adding extra words that aren't in the source can lead to layout issues or confusion if the context changes.",
-          "suggestion": "Descărcare metadate XML SP"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -195,13 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak verb 'Načítať' means 'Load' or 'Upload', whereas the English verb is 'Download'.",
-          "suggestion": "Stiahnuť SP metadáta XML"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -237,13 +196,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation contains redundant information: 'siêu dữ liệu' and 'metadata' mean the same thing in Vietnamese, making the phrase 'siêu dữ liệu SP metadata' repetitive and unnatural.",
-          "suggestion": "Tải XML metadata SP"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

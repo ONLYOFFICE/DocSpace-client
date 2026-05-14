@@ -144,7 +144,6 @@
   "NoExternalLinks": "Brez zunanjih povezav",
   "OpenCreatedTemplate": "Odprite ustvarjeno predlogo",
   "OpenedViaLink": "Odprto preko povezave: dostop <strong>{{access}}</strong>.",
-  "OpenLocation": "Odpri lokacijo",
   "OtherProcesses": "Drugi procesi",
   "PersonalContentRemovalNotice": "Vaše osebne datoteke in mape v razdelku {{sectionName}} bodo <1>izbrisane</1>, ker gosti nimajo dostopa do tega razdelka. Datoteke so na voljo za ogled in prenos <1>30 dni</1>.",
   "PersonalFolderErasureWarning": "Vaš tip uporabnika je bil spremenjena v Gost. Osebne datoteke bodo izbrisane v 30 dneh.",

@@ -48,22 +48,22 @@ export const useFeedTranslation = (
   const getFeedTranslation = (): React.ReactNode => {
     switch (feed.action.key) {
       case FeedActionKeys.FileCreated:
-        return t("InfoPanel:FileCreatedNotify");
+        return t("Common:FileCreatedNotify");
       case FeedActionKeys.FileUploaded:
         if (hasRelatedItems)
           return t("InfoPanel:FileUploadedCount", {
             count,
           });
-        return t("InfoPanel:FilesAddedNotify");
+        return t("Common:FilesAddedNotify");
       case FeedActionKeys.UserFileUpdated:
-        return t("InfoPanel:UserFileUpdated");
+        return t("Common:UserFileUpdated");
       case FeedActionKeys.FileConverted:
-        return t("InfoPanel:FileConverted");
+        return t("Common:FileConverted");
       case FeedActionKeys.FileRenamed:
-        return t("InfoPanel:FileRenamedNotify");
+        return t("Common:FileRenamedNotify");
       case FeedActionKeys.FileMoved:
         if ("fromParentTitle" in feed.data && feed.data.fromParentTitle) {
-          return t("InfoPanel:FileMovedTo", {
+          return t("Common:FileMovedTo", {
             folderTitle: feed.data.parentTitle,
           });
         }
@@ -71,19 +71,19 @@ export const useFeedTranslation = (
           return t("InfoPanel:FileMovedCount", {
             count,
           });
-        return t("InfoPanel:FilesMovedNotify");
+        return t("Common:FilesMovedNotify");
       case FeedActionKeys.FileMovedToTrash:
         if (hasRelatedItems)
           return t("InfoPanel:FilesTrashMoveCompletedCount", {
             count,
             sectionName: t("Common:TrashSection"),
           });
-        return t("InfoPanel:FilesTrashMoveCompleted", {
+        return t("Common:FilesTrashMoveCompleted", {
           sectionName: t("Common:TrashSection"),
         });
       case FeedActionKeys.FileCopied:
         if ("fromParentTitle" in feed.data && feed.data.fromParentTitle) {
-          return t("InfoPanel:FileCopiedTo", {
+          return t("Common:FileCopiedTo", {
             folderTitle: feed.data.parentTitle,
           });
         }
@@ -91,13 +91,13 @@ export const useFeedTranslation = (
           return t("InfoPanel:FileCopiedCount", {
             count,
           });
-        return t("InfoPanel:FilesCopiedNotify");
+        return t("Common:FilesCopiedNotify");
       case FeedActionKeys.FileDeleted:
         if (hasRelatedItems)
           return t("InfoPanel:FileDeletedCount", {
             count,
           });
-        return t("InfoPanel:FilesRemovedNotify");
+        return t("Common:FilesRemovedNotify");
       case FeedActionKeys.FileLocked:
         return `${t("Translations:FileLocked")}.`;
       case FeedActionKeys.FileUnlocked:
@@ -114,22 +114,22 @@ export const useFeedTranslation = (
       case FeedActionKeys.FolderIndexReordered:
         return t("InfoPanel:FolderIndexReordered");
       case FeedActionKeys.FolderCreated:
-        return t("InfoPanel:FolderCreatedNotify");
+        return t("Common:FolderCreatedNotify");
       case FeedActionKeys.FolderRenamed:
-        return t("InfoPanel:FolderRenamedNotify");
+        return t("Common:FolderRenamedNotify");
       case FeedActionKeys.FolderMoved:
         if (hasRelatedItems)
           return t("InfoPanel:FolderMovedCount", {
             count,
           });
-        return t("InfoPanel:FoldersMovedNotify");
+        return t("Common:FoldersMovedNotify");
       case FeedActionKeys.FolderMovedToTrash:
         if (hasRelatedItems)
           return t("InfoPanel:FoldersTrashMoveCompletedCount", {
             count,
             sectionName: t("Common:TrashSection"),
           });
-        return t("InfoPanel:FoldersTrashMoveCompleted", {
+        return t("Common:FoldersTrashMoveCompleted", {
           sectionName: t("Common:TrashSection"),
         });
       case FeedActionKeys.FolderCopied:
@@ -137,13 +137,13 @@ export const useFeedTranslation = (
           return t("InfoPanel:FolderCopiedCount", {
             count,
           });
-        return t("InfoPanel:FoldersCopiedNotify");
+        return t("Common:FoldersCopiedNotify");
       case FeedActionKeys.FolderDeleted:
         if (hasRelatedItems)
           return t("InfoPanel:FolderDeletedCount", {
             count,
           });
-        return t("InfoPanel:FoldersRemovedNotify");
+        return t("Common:FoldersRemovedNotify");
       case FeedActionKeys.AgentCreated:
         return (
           <Trans

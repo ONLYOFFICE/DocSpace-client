@@ -144,7 +144,6 @@
   "NoExternalLinks": "Pas de liens externes",
   "OpenCreatedTemplate": "Ouvrir le modèle créé",
   "OpenedViaLink": "Ouvert via le lien : accès <strong>« {{access}} »</strong>.",
-  "OpenLocation": "Ouvrir un emplacement ",
   "OtherProcesses": "Autres processus",
   "PersonalContentRemovalNotice": "Vos fichiers et dossiers personnels dans la section {{sectionName}} seront <1>supprimés</1>, car les invités n'ont pas accès à cette section. Les fichiers restent disponibles à la lecture et au téléchargement <1>pendant 30 jours</1>.",
   "PersonalFolderErasureWarning": "Votre type d'utilisateur a été changé en invité. Les fichiers personnels seront supprimés dans 30 jours.",

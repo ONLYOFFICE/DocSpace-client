@@ -144,7 +144,6 @@
   "NoExternalLinks": "外部リンクなし",
   "OpenCreatedTemplate": "作成したテンプレートを開く",
   "OpenedViaLink": "リンクを介して開きました: アクセス <strong>「{{access}}」</strong>.",
-  "OpenLocation": "オープンロケーション",
   "OtherProcesses": "他のプロセス",
   "PersonalContentRemovalNotice": "あなたの{{sectionName}}セクション内の個人ファイルとフォルダは、ゲストはこのセクションにアクセスできないため<1>削除されます</1>。ファイルは<1>30日間</1>、閲覧およびダウンロードが可能です。",
   "PersonalFolderErasureWarning": "ユーザータイプが「ゲスト」に変更されました。個人ファイルは30日後に削除されます。",

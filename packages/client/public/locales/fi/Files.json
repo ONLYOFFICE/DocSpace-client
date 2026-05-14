@@ -144,7 +144,6 @@
   "NoExternalLinks": "EI ulkoisia linkkejä",
   "OpenCreatedTemplate": "Avaa luotu malli",
   "OpenedViaLink": "Avattu linkin kautta: pääsy <strong>{{access}}</strong>.",
-  "OpenLocation": "Avaa sijainti",
   "OtherProcesses": "Muut prosessit",
   "PersonalContentRemovalNotice": "Henkilökohtaiset tiedostosi {{sectionName}}-osiossa <1>poistetaan</1>, koska Vieras-käyttäjätyypillä ei ole oikeuksia tähän osioon. Tiedostot ovat katseltavissa ja ladattavissa <1>30 päivän ajan</1>.",
   "PersonalFolderErasureWarning": "Käyttäjätyyppisi on muutettu Vieraaksi. Henkilökohtaiset tiedostot poistetaan 30 päivän kuluttua.",

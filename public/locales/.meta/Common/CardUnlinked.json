@@ -3,7 +3,7 @@
   "content": "Card unlinked",
   "content_en_sha1_hash": "e03b19150f5805fbb3aba830ef26e26249fb29e2",
   "created_at": "2026-04-10T13:53:42.208Z",
-  "updated_at": "2026-04-23T17:24:02.172Z",
+  "updated_at": "2026-05-08T13:10:45.728Z",
   "comment": {
     "text": "This is an error message or status text indicating that a credit card is no longer associated with the account. It appears when a card has been unlinked, often prompting the user to link a new one.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/UpdatePlanButtonContainer.tsx",
-      "line_number": 183,
+      "line_number": 189,
       "context": "if (res === false) {\n const errorText =\n cardLinkedOnFreeTariff && walletCustomerStatusNotActive ? (\n <>\n {t(\"CardUnlinked\")} <br />\n {t(\"LinkNewCard\")} {\"  \"}\n <Link\n onClick={goLinkCard}\n fontWeight={600}\n style={{ textDecoration: \"underline\" }}",
       "module": "/libs/ui-kit"
     },

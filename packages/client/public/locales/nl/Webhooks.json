@@ -24,6 +24,7 @@
   "FileCopied": "Bestand gekopieerd",
   "FileCreated": "Bestand aangemaakt",
   "FileDeleted": "Bestand verwijderd",
+  "FileDownloaded": "Bestand gedownload",
   "FileMoved": "Bestand verplaatst",
   "FileRestored": "Bestand hersteld",
   "FileTrashed": "Bestand naar prullenbak gedaan",
@@ -32,6 +33,7 @@
   "FolderCopied": "Map gekopieerd",
   "FolderCreated": "Map aangemaakt",
   "FolderDeleted": "Map verwijderd",
+  "FolderDownloaded": "Map gedownload",
   "FolderMoved": "Map verplaatst",
   "FolderRestored": "Map hersteld",
   "FolderTrashed": "Map naar prullenbak gedaan",
@@ -95,7 +97,5 @@
   "WebhookRemoved": "Webhook verwijderd",
   "Webhooks": "Webhooks",
   "WebhooksGuide": "Webhooks Gids",
-  "WebhooksInfo": "Gebruik webhooks om aangepaste acties uit te voeren aan de kant van elke toepassing of website die u gebruikt op basis van verschillende gebeurtenissen in {{organizationName}} {{productName}}.\nHier kunt u al uw webhooks aanmaken en beheren, ze configureren en door de geschiedenis van elke webhook bladeren om hun prestaties te controleren.",
-  "FileDownloaded": "Bestand gedownload",
-  "FolderDownloaded": "Map gedownload"
+  "WebhooksInfo": "Gebruik webhooks om aangepaste acties uit te voeren aan de kant van elke toepassing of website die u gebruikt op basis van verschillende gebeurtenissen in {{organizationName}} {{productName}}.\nHier kunt u al uw webhooks aanmaken en beheren, ze configureren en door de geschiedenis van elke webhook bladeren om hun prestaties te controleren."
 }

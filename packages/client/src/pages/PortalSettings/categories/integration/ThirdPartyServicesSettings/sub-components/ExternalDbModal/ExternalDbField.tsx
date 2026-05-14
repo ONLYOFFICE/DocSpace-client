@@ -58,6 +58,7 @@ const ExternalDbField: React.FC<ExternalDbFieldProps> = ({
           }}
           onSelect={(option) => onChange(fieldName, String(option.key))}
           scaled
+          tabIndex={0}
         />
       </div>
     ))
@@ -73,6 +74,7 @@ const ExternalDbField: React.FC<ExternalDbFieldProps> = ({
           onChange={(e) => onChange(fieldName, e.target.value)}
           placeholder={passwordField.title}
           scale
+          tabIndex={0}
         />
       </div>
     ))
@@ -83,6 +85,7 @@ const ExternalDbField: React.FC<ExternalDbFieldProps> = ({
             isChecked={Boolean(value)}
             onChange={(e) => onChange(fieldName, e.target.checked)}
             label={toggleField.title}
+            tabIndex={0}
           />
         </div>
       );
@@ -99,6 +102,7 @@ const ExternalDbField: React.FC<ExternalDbFieldProps> = ({
           placeholder={textField.title}
           type={InputType.number}
           scale
+          tabIndex={0}
         />
       </div>
     ))
@@ -114,6 +118,7 @@ const ExternalDbField: React.FC<ExternalDbFieldProps> = ({
           placeholder={textField.title}
           type={InputType.text}
           scale
+          tabIndex={0}
         />
       </div>
     ))

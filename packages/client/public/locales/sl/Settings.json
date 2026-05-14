@@ -319,6 +319,5 @@
   "WantToCancelUpload": "Ali želite preklicati nalaganje?",
   "WantToContinueQuota": "Ali želite nadaljevati ali spremeniti uporabniško kvoto prostora za shranjevanje?",
   "WebhooksDescription": "Izvedite prilagojene akcije na strani vsake aplikacije ali spletne strani, ki jo uporabljate, na podlagi različnih dogodkov v {{organizationName}} {{productName}}.",
-  "WhiteLabelLogoSubtitle": "Naložite logotipe s transparentno ozadjem (PNG, SVG, JPG) za svetlo in temno temo ali pa hitro ustvarite enega z vnosom vašega logotipa spodaj.",
   "WithoutEmailHint": "Nimate uporabnikov brez e-maila. Nadaljujte z naslednjim korakom."
 }

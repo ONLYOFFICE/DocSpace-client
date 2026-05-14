@@ -79,6 +79,7 @@ import useProfileHeader from "SRC_DIR/pages/Profile/Section/Header/useProfileHea
 
 import { useContactsHeader } from "./useContacts";
 import { getWarningText } from "../getWarningText";
+import { AnalyzeResponsesButton } from "./sub-components/AnalyzeResponses";
 
 const SectionHeaderContent = (props) => {
   const {
@@ -1044,6 +1045,11 @@ const SectionHeaderContent = (props) => {
               isPlusButtonVisible={isPlusButtonVisible}
               showBackButton={isProfile}
               contextMenuHeader={isProfile ? undefined : contextMenuHeader}
+              analyzeResponsesButton={
+                <AnalyzeResponsesButton
+                  className={styles.analyzeResponsesButton}
+                />
+              }
             />
             {showSignInButton ? (
               <Button
@@ -1455,4 +1461,3 @@ export default inject(
     "GroupingRooms",
   ])(observer(SectionHeaderContent)),
 );
-

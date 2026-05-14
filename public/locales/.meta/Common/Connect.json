@@ -3,7 +3,7 @@
   "content": "Connect",
   "content_en_sha1_hash": "b65463cb6a42a17de514acc4659f7fd331e0876a",
   "created_at": "2025-05-19T21:30:43.652Z",
-  "updated_at": "2026-04-23T17:24:01.725Z",
+  "updated_at": "2026-05-08T19:46:44.980Z",
   "comment": {
     "text": "This is a button label that initiates a connection to an external service or account, such as a third-party storage provider or an AI agent.",
     "is_auto": true,
@@ -27,6 +27,18 @@
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/ThirdPartyComboBox.tsx",
       "line_number": 373,
       "context": "!!storageLocation?.thirdpartyAccount ||\n isDisabled\n }\n className=\"set_room_params-thirdparty-connect\"\n size={ButtonSize.small}\n label={t(\"Common:Connect\")}\n onClick={onShowService}\n testId=\"create_edit_room_thirdparty_connect\"\n />\n </div>\n </StyledStorageLocation>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/sub-components/FormInfo/AICard.tsx",
+      "line_number": 179,
+      "context": "if (!canEditRoom) return null;\n \n return (\n <ActionButton\n label={t(\"Common:Connect\")}\n icon={<ExternalLinkSvg />}\n onClick={onConnect}\n />\n );\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/sub-components/FormInfo/CollectionCard.tsx",
+      "line_number": 115,
+      "context": "if (!canEditRoom) return null;\n \n return (\n <ActionButton\n label={t(\"Common:Connect\")}\n icon={<ExternalLinkSvg />}\n onClick={onConnect}\n />\n );\n };",
       "module": "/packages/client"
     },
     {

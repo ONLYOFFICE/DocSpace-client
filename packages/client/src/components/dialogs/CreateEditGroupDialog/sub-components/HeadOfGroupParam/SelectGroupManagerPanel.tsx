@@ -28,16 +28,19 @@ import { TUser } from "@docspace/shared/api/people/types";
 import PeopleSelector from "@docspace/ui-kit/selectors/People";
 import { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import { Portal } from "@docspace/ui-kit/components/portal";
+
 interface SelectGroupManagerPanelProps {
   onClose: () => void;
   onParentPanelClose: () => void;
   setGroupManager: (groupManager: TUser) => void;
+  currentUserId?: string;
 }
 
 const SelectGroupManagerPanel = ({
   onClose,
   onParentPanelClose,
   setGroupManager,
+  currentUserId,
 }: SelectGroupManagerPanelProps) => {
   const onSelectGroupManager = (newGroupManager: TSelectorItem[]) => {
     setGroupManager(newGroupManager[0] as unknown as TUser);
@@ -67,6 +70,7 @@ const SelectGroupManagerPanel = ({
             onBackClick: onClose,
             onCloseClick: onParentPanelClose,
           }}
+          currentUserId={currentUserId}
         />
       }
     />

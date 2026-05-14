@@ -3,7 +3,7 @@
   "content": "Go to portal billing",
   "content_en_sha1_hash": "28d60736c33a7e913b50b827b7a1dc5604a6f771",
   "created_at": "2026-04-10T08:20:53.270Z",
-  "updated_at": "2026-04-23T17:24:02.140Z",
+  "updated_at": "2026-05-08T13:10:45.720Z",
   "comment": {
     "text": "This is the label for a link that, when clicked, redirects the user to the billing section of the portal.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/BillingForm.tsx",
-      "line_number": 138,
+      "line_number": 142,
       "context": "fontSize=\"12px\"\n isTextOverflow={false}\n className={styles.billingPortalLink}\n onClick={onOpenBilling}\n >\n {t(\"OpenPortalBilling\")}\n </Link>\n </Text>\n \n <BillingCards\n tabs={tabs}",
       "module": "/packages/sdk"
     },

@@ -24,6 +24,7 @@
   "FileCopied": "Datei kopiert",
   "FileCreated": "Datei erstellt",
   "FileDeleted": "Datei gelöscht",
+  "FileDownloaded": "Datei heruntergeladen",
   "FileMoved": "Datei verschoben",
   "FileRestored": "Datei wiederhergestellt",
   "FileTrashed": "Datei gelöscht",
@@ -32,6 +33,7 @@
   "FolderCopied": "Ordner kopiert",
   "FolderCreated": "Ordner erstellt",
   "FolderDeleted": "Ordner gelöscht",
+  "FolderDownloaded": "Ordner heruntergeladen",
   "FolderMoved": "Ordner verschoben",
   "FolderRestored": "Ordner wiederhergestellt",
   "FolderTrashed": "Ordner gelöscht",
@@ -95,7 +97,5 @@
   "WebhookRemoved": "Webhook entfernt",
   "Webhooks": "Webhooks",
   "WebhooksGuide": "Anleitung für Webhooks",
-  "WebhooksInfo": "Verwenden Sie Webhooks, um benutzerdefinierte Aktionen auf der Seite jeder von Ihnen verwendeten Anwendung oder Website basierend auf verschiedenen Events in {{organizationName}} {{productName}} durchzuführen.\nHier können Sie alle Ihre Webhooks erstellen und verwalten, diese konfigurieren und den Verlauf jedes Webhooks durchsuchen, um seine Leistung zu überprüfen.",
-  "FileDownloaded": "Datei heruntergeladen",
-  "FolderDownloaded": "Ordner heruntergeladen"
+  "WebhooksInfo": "Verwenden Sie Webhooks, um benutzerdefinierte Aktionen auf der Seite jeder von Ihnen verwendeten Anwendung oder Website basierend auf verschiedenen Events in {{organizationName}} {{productName}} durchzuführen.\nHier können Sie alle Ihre Webhooks erstellen und verwalten, diese konfigurieren und den Verlauf jedes Webhooks durchsuchen, um seine Leistung zu überprüfen."
 }

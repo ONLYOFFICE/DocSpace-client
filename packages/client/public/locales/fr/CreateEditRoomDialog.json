@@ -23,6 +23,7 @@
   "NeedMoreIntegrations": "Besoin de plus d'intégrations ?",
   "NeedMoreIntegrationsDescription": "Utilisez des webhooks pour envoyer des données à votre propre système, ou connectez des formulaires à des milliers de services via Zapier.",
   "NoDatabaseConnections": "Aucune connexion à la base de données configurée",
+  "NoDatabaseConnectionsRoomAdmin": "Les connexions à la base de données sont configurées par un administrateur. Une fois qu'une base de données sera configurée, vous pourrez activer l'exportation ici.",
   "PeopleSelectorInfo": "Seul l'administrateur d'une salle ou l'administrateur de {{productName}} peut devenir le propriétaire d'une salle",
   "Position": "Position",
   "PublicRoomBarDescription": "Cette salle est accessible à toute personne disposant du lien. L'accès pour les utilisateurs externes est fourni en fonction du type de droits d'accès sélectionné.",
@@ -44,6 +45,5 @@
   "UserName": "Nom de l'utilisateur",
   "ViewerInfo": "Informations sur le lecteur",
   "WatermarkPreview": "Aperçu du filigrane",
-  "WatermarkPreviewHelp": "Cet image avec l'aperçu montre approximativement comment le filigrane s'affichera dans vos fichiers.",
-  "NoDatabaseConnectionsRoomAdmin": "Les connexions à la base de données sont configurées par un administrateur. Une fois qu'une base de données sera configurée, vous pourrez activer l'exportation ici."
+  "WatermarkPreviewHelp": "Cet image avec l'aperçu montre approximativement comment le filigrane s'affichera dans vos fichiers."
 }

@@ -3,7 +3,7 @@
   "content": "Edit Agent",
   "content_en_sha1_hash": "07c504c5b4e6c55a509698a594e6e99f8b1b3ec9",
   "created_at": "2025-10-27T16:14:13.848Z",
-  "updated_at": "2026-04-23T17:24:01.730Z",
+  "updated_at": "2026-05-08T13:10:45.536Z",
   "comment": {
     "text": "This is the title of a dialog window and a menu item label. It allows users to modify the settings of an existing agent.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2208,
+      "line_number": 2271,
       "context": "disabled: false,\n },\n {\n id: \"option_edit-agent\",\n key: \"edit-agent\",\n label: t(\"Common:EditAgent\"),\n icon: SettingsReactSvgUrl,\n onClick: () => this.onClickEditAgent(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     }

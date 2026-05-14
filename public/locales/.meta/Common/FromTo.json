@@ -3,7 +3,7 @@
   "content": "From <1>{{fromDate}}</1> To <2>{{toDate}}</2>",
   "content_en_sha1_hash": "2beac382b2359cd84f93b1d8ec9aafa6db41a774",
   "created_at": "2026-04-10T13:53:42.532Z",
-  "updated_at": "2026-04-23T17:24:02.187Z",
+  "updated_at": "2026-05-08T13:10:45.741Z",
   "comment": {
     "text": "This is a date range display, showing the start and end dates of a period. `{{fromDate}}` and `{{toDate}}` are placeholders for the actual dates.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
-      "line_number": 400,
+      "line_number": 404,
       "context": ": filterEndDate;\n \n const datesComponent = (\n <div className={styles.transactionDates}>\n <CommonTrans\n i18nKey=\"FromTo\"\n components={{\n 1: (\n <DatePicker\n key=\"start-date-picker\"\n initialDate={startDate}",
       "module": "/libs/ui-kit"
     }

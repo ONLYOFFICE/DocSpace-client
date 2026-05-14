@@ -199,6 +199,7 @@ const GlobalEvents = ({
     setEditRoomDialogProps({
       visible,
       item: e.item,
+      cb: e.cb,
       onClose: () => {
         setCover();
         setEditRoomDialogProps({

@@ -3,7 +3,7 @@
   "content": "Enable {{organizationName}} AI",
   "content_en_sha1_hash": "024a33e3f78ccdea58a2b60e3876fc4434533ac2",
   "created_at": "2026-04-10T13:53:45.131Z",
-  "updated_at": "2026-04-23T17:24:02.179Z",
+  "updated_at": "2026-05-08T13:10:45.733Z",
   "comment": {
     "text": "This is the title for a toggle switch. It enables or disables AI tools for the organization, with `{{organizationName}}` replaced by the organization's name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
-      "line_number": 290,
+      "line_number": 292,
       "context": "<div className={styles.toggleSection}>\n <ServiceToggleSection\n isEnabled={isAiToolsServiceOn}\n onToggle={onToggleChange}\n title={t(\"EnableOrganizationAI\", { organizationName: logoText })}\n description={t(\"EnableAIDescription\")}\n testId=\"service-ai-toggle-button\"\n isDisabled={isDisabled}\n />",
       "module": "/libs/ui-kit"
     }

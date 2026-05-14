@@ -376,6 +376,21 @@
       }
     },
     {
+      "label": "Frontend | storybook (ui-kit)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/libs/ui-kit ; pnpm run storybook",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Frontend | storybook",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm run storybook",

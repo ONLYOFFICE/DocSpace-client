@@ -208,6 +208,9 @@ class DetailsHelper {
                 "Author",
               "sharedBy" in this.item && this.item.sharedBy && "Shared by",
               this.item.access && "Access level",
+              "externalDbTableName" in this.item &&
+                this.item.externalDbTableName &&
+                "externalDbTableName",
               "Comments",
             ]
     ).filter((nP) => nP) as string[];
@@ -260,6 +263,8 @@ class DetailsHelper {
         return this.t("Files:SharedBy");
       case "Access level":
         return this.t("Files:AccessLevel");
+      case "externalDbTableName":
+        return this.t("Files:TableName");
 
       case "Storage":
         if ("usedSpace" in this.item && this.item.usedSpace !== undefined) {
@@ -329,9 +334,16 @@ class DetailsHelper {
         return this.getAuthorDecoration("sharedBy");
       case "Access level":
         return this.getItemAccessLevel();
+      case "externalDbTableName":
+        return this.getExternalDbTableName();
       default:
         break;
     }
+  };
+
+  getExternalDbTableName = () => {
+    if (!("externalDbTableName" in this.item)) return null;
+    return text(this.item.externalDbTableName);
   };
 
   getItemAccessLevel = () => {

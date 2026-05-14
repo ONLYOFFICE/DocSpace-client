@@ -24,6 +24,7 @@
   "FileCopied": "Fails nokopēta",
   "FileCreated": "Fails izveidots",
   "FileDeleted": "Fails dzēsts",
+  "FileDownloaded": "Fails lejupielādēts",
   "FileMoved": "Fails pārvietots",
   "FileRestored": "Fails atgriezts",
   "FileTrashed": "Fails pārvietots uz atkritni",
@@ -32,6 +33,7 @@
   "FolderCopied": "Mape nokopēta",
   "FolderCreated": "Mape izveidota",
   "FolderDeleted": "Mape dzēsta",
+  "FolderDownloaded": "Mape lejupielādēta",
   "FolderMoved": "Mape pārvietota",
   "FolderRestored": "Mape atjaunota",
   "FolderTrashed": "Mape pārvietota uz atkritni",
@@ -95,7 +97,5 @@
   "WebhookRemoved": "Tīmekļa aizķere ir noņemta",
   "Webhooks": "Tīmekļa aizķeres",
   "WebhooksGuide": "Tīmekļa aizķeru rokasgrāmata",
-  "WebhooksInfo": "Izmantojiet tīmekļa aizķeres, lai veiktu pielāgotas darbības jebkurā izmantotajā lietojumprogrammā vai tīmekļa vietnē, pamatojoties uz dažādiem notikumiem {{organizationName}} {{productName}}.\nŠeit varat izveidot un pārvaldīt visas savas tīmekļa aizķeres, konfigurēt tās un pārlūkot katras tīmekļa aizķeres vēsturi, lai pārbaudītu to veiktspēju.",
-  "FileDownloaded": "Fails lejupielādēts",
-  "FolderDownloaded": "Mape lejupielādēta"
+  "WebhooksInfo": "Izmantojiet tīmekļa aizķeres, lai veiktu pielāgotas darbības jebkurā izmantotajā lietojumprogrammā vai tīmekļa vietnē, pamatojoties uz dažādiem notikumiem {{organizationName}} {{productName}}.\nŠeit varat izveidot un pārvaldīt visas savas tīmekļa aizķeres, konfigurēt tās un pārlūkot katras tīmekļa aizķeres vēsturi, lai pārbaudītu to veiktspēju."
 }

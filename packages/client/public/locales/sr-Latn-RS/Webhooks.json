@@ -24,6 +24,7 @@
   "FileCopied": "Fajl kopiran",
   "FileCreated": "Fajl kreiran",
   "FileDeleted": "Fajl obrisan",
+  "FileDownloaded": "Datoteka preuzeta",
   "FileMoved": "Fajl premešten",
   "FileRestored": "Fajl vraćen",
   "FileTrashed": "Fajl izbačen u korpu",
@@ -32,6 +33,7 @@
   "FolderCopied": "Fascikla kopirana",
   "FolderCreated": "Fascikla kreirana",
   "FolderDeleted": "Fascikla obrisana",
+  "FolderDownloaded": "Preuzeta fascikla",
   "FolderMoved": "Fascikla premeštena",
   "FolderRestored": "Fascikla vraćena",
   "FolderTrashed": "Fascikla izbačena u korpu",
@@ -95,7 +97,5 @@
   "WebhookRemoved": "Webhook uklonjen",
   "Webhooks": "Webhooks",
   "WebhooksGuide": "Webhooks vodič",
-  "WebhooksInfo": "Koristite webhooks da biste izvršili prilagođene akcije na strani bilo koje aplikacije ili web stranice koju koristite na osnovu različitih događaja u {{organizationName}} {{productName}}-u. Ovde možete kreirati i upravljati svim svojim webhook-ovima, konfigurisati ih i pregledati istoriju svakog webhook-a kako biste proverili njihovu izvedbu.",
-  "FileDownloaded": "Datoteka preuzeta",
-  "FolderDownloaded": "Preuzeta fascikla"
+  "WebhooksInfo": "Koristite webhooks da biste izvršili prilagođene akcije na strani bilo koje aplikacije ili web stranice koju koristite na osnovu različitih događaja u {{organizationName}} {{productName}}-u. Ovde možete kreirati i upravljati svim svojim webhook-ovima, konfigurisati ih i pregledati istoriju svakog webhook-a kako biste proverili njihovu izvedbu."
 }

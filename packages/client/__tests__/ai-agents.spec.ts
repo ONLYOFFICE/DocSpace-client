@@ -133,7 +133,7 @@ test.describe("AI agents", () => {
 
     await btn.click();
 
-    const asideHeader = page.getByTestId("aside-header");
+    const asideHeader = page.getByTestId("aside-header").last();
 
     await expect(asideHeader).toBeVisible();
   });
@@ -159,7 +159,7 @@ test.describe("AI agents", () => {
 
     await mainBtn.click();
 
-    const asideHeader = page.getByTestId("aside-header");
+    const asideHeader = page.getByTestId("aside-header").last();
 
     await expect(asideHeader).toBeVisible();
     await expect(page.getByText("Claude AI").first()).toBeVisible();

@@ -3,7 +3,7 @@
   "content": "Groups",
   "content_en_sha1_hash": "ae9629f4ebb82c6331c0809fa9a0e54b00e578e6",
   "created_at": "2025-05-19T21:30:45.668Z",
-  "updated_at": "2026-04-13T14:59:05.727Z",
+  "updated_at": "2026-05-08T13:10:45.484Z",
   "comment": {
     "text": "This is a label for a section or category within the application, referring to collections of users. It appears in selectors for filtering or organizing users, and as a title for a dedicated \"Groups\" page.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/Groups/index.tsx",
-      "line_number": 178,
+      "line_number": 174,
       "context": "withHeader\n {...withAside}\n headerProps={{\n ...headerProps,\n onCloseClick: headerProps?.onCloseClick ?? onClose ?? (() => {}),\n headerLabel: headerProps?.headerLabel || t(\"Groups\"),\n }}\n alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}\n withSearch\n searchPlaceholder={t(\"Search\")}\n onSearch={onSearch}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/People/index.tsx",
-      "line_number": 704,
+      "line_number": 691,
       "context": "content: null,\n },\n ...[\n withGroups && {\n id: GROUP_TAB_ID,\n name: t(\"Groups\"),\n onClick: () => changeActiveTab(GROUP_TAB_ID),\n content: null,\n },\n ],\n ...[",
       "module": "/libs/ui-kit"
     },
@@ -43,7 +43,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 714,
+      "line_number": 715,
       "context": "if (isContactsPage) {\n switch (contactsTab) {\n case \"people\":\n return t(\"Common:Members\");\n case \"groups\":\n return t(\"Common:Groups\");\n case \"inside_group\": {\n return isLoading && insideGroupTempTitle\n ? insideGroupTempTitle\n : currentGroupName;\n }",
       "module": "/packages/client"
     },

@@ -435,7 +435,6 @@ class FilesActionStore {
     const filesList = [];
     await this.createFolderTree(tree, toFolderId, filesList);
 
-
     if (withoutHiddenFiles.length) {
       setPrimaryProgressBarData({ ...pbData, completed: uploaded });
     }
@@ -2122,6 +2121,17 @@ class FilesActionStore {
     }
   };
 
+  /**
+   * @param {{
+   *  id: number | string,
+   *  isRoom?: boolean,
+   *  isTemplate?: boolean,
+   *  isAIAgent?: boolean,
+   *  title?: string,
+   *  rootFolderType : import("@docspace/ui-kit/enums/index").FolderType
+   * }} item
+   * @returns {void}
+   */
   openLocationAction = async (item) => {
     if (this.publicRoomStore.isPublicRoom)
       return this.moveToPublicRoom(item.id);
@@ -4333,4 +4343,3 @@ class FilesActionStore {
 }
 
 export default FilesActionStore;
-

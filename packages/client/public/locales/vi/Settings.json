@@ -319,6 +319,5 @@
   "WantToCancelUpload": "Bạn có muốn hủy tải lên không?",
   "WantToContinueQuota": "Bạn có muốn tiếp tục hoặc thay đổi hạn mức lưu trữ người dùng không?",
   "WebhooksDescription": "Thực hiện các hành động tùy chỉnh cùng với bất kỳ ứng dụng hoặc trang web nào bạn đang sử dụng dựa trên các sự kiện khác nhau trong {{organizationName}} {{productName}}.",
-  "WhiteLabelLogoSubtitle": "Tải lên logo có nền trong suốt (PNG, SVG, JPG) cho giao diện sáng và tối, hoặc tạo ngay lập tức bằng cách nhập logo của bạn bên dưới.",
   "WithoutEmailHint": "Bạn chưa có người dùng nào có email. Vui lòng chuyển sang bước tiếp theo."
 }

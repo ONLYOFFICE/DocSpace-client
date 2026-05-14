@@ -319,6 +319,5 @@
   "WantToCancelUpload": "업로드를 취소하시겠습니까?",
   "WantToContinueQuota": "사용자 스토리지 할당량을 계속 유지하거나 변경하시겠습니까?",
   "WebhooksDescription": "{{organizationName}} {{productName}}의 다양한 이벤트를 기반으로 사용 중인 모든 애플리케이션이나 웹사이트의 측면에서 사용자 지정 작업을 수행합니다.",
-  "WhiteLabelLogoSubtitle": "라이트 및 다크 테마를 위해 투명한 배경의 로고(PNG, SVG, JPG)를 업로드하거나, 아래에 로고를 입력하여 즉시 생성하세요.",
   "WithoutEmailHint": "이메일이 없는 사용자가 없습니다. 다음 단계를 진행하세요."
 }

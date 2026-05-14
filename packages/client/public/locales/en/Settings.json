@@ -319,6 +319,5 @@
   "WantToCancelUpload": "Do you want to cancel the upload?",
   "WantToContinueQuota": "Do you want to continue or change the user storage quota?",
   "WebhooksDescription": "Perform custom actions on the side of any application or website you are using based on various events in {{organizationName}} {{productName}}.",
-  "WhiteLabelLogoSubtitle": "Upload logos with a transparent background (PNG, SVG, JPG) for light and dark themes, or generate one instantly by entering your Your logo below.",
   "WithoutEmailHint": "You don’t have users without emails. Please proceed to the next step."
 }

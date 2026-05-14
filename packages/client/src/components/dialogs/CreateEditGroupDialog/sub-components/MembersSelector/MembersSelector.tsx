@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { inject, observer } from "mobx-react";
+
 import { Portal } from "@docspace/ui-kit/components/portal";
 import PeopleSelector from "@docspace/ui-kit/selectors/People";
 import { TOnSubmit } from "@docspace/ui-kit/components/selector";
@@ -33,8 +35,8 @@ type MembersSelectorProps = {
   isVisible: boolean;
   onClose: () => void;
   onParentPanelClose: () => void;
-
   addMembers: TOnSubmit;
+  currentUserId?: string;
 } & (
   | {
       checkIfUserInvited: PeopleSelectorProps["checkIfUserInvited"];
@@ -43,12 +45,13 @@ type MembersSelectorProps = {
   | { invitedUsers: string[]; checkIfUserInvited?: undefined }
 );
 
-export const MembersSelector = ({
+const MembersSelectorBase = ({
   addMembers,
   onParentPanelClose,
   onClose,
   checkIfUserInvited,
   invitedUsers,
+  currentUserId,
 }: MembersSelectorProps) => {
   const invitedProps = checkIfUserInvited
     ? { checkIfUserInvited }
@@ -79,9 +82,16 @@ export const MembersSelector = ({
             onCloseClick: onParentPanelClose,
           }}
           disableDisabledUsers
+          currentUserId={currentUserId}
           {...invitedProps}
         />
       }
     />
   );
 };
+
+export const MembersSelector = inject(
+  ({ userStore }: { userStore: { user?: { id?: string } } }) => ({
+    currentUserId: userStore.user?.id,
+  }),
+)(observer(MembersSelectorBase));

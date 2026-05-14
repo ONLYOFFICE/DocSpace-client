@@ -3,7 +3,7 @@
   "content": "Hide menu",
   "content_en_sha1_hash": "93066aecf8f75fbb8e34e32fb582d55ae44b9cb5",
   "created_at": "2025-05-19T21:30:45.764Z",
-  "updated_at": "2026-04-23T17:24:02.133Z",
+  "updated_at": "2026-05-08T13:10:45.713Z",
   "comment": {
     "text": "This is a button label and tooltip content for an action that hides a menu or sidebar. It appears as a short label.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/sidebar/index.tsx",
-      "line_number": 253,
+      "line_number": 249,
       "context": "e.preventDefault();\n toggleShowText();\n }\n }}\n data-tooltip-id=\"sidebar-toggle-tooltip\"\n data-tooltip-content={showText ? t(\"Common:HideArticleMenu\") : t(\"Common:ShowArticleMenu\")}\n />\n <Tooltip id=\"sidebar-toggle-tooltip\" place=\"right\" float />\n </div>\n );\n };",
       "module": "/packages/sdk"
     },

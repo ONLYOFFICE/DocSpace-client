@@ -3,7 +3,7 @@
   "content": "Clear all",
   "content_en_sha1_hash": "c043160a89ba0acd714977735d49455f662b1c79",
   "created_at": "2025-05-19T21:30:43.466Z",
-  "updated_at": "2026-04-11T20:57:13.367Z",
+  "updated_at": "2026-05-08T13:10:45.630Z",
   "comment": {
     "text": "This is a button label that, when clicked, clears all applied filters or all entries in a log.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/components/filter/index.tsx",
-      "line_number": 695,
+      "line_number": 702,
       "context": "isSemitransparent\n type={LinkType.action}\n onClick={clearAll}\n dataTestId=\"filter_clear_all_link\"\n >\n {t(\"ClearAll\")}\n </Link>\n ) : null}\n </div>\n ) : null}",
       "module": "/libs/ui-kit"
     },

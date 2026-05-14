@@ -1,0 +1,29 @@
+{
+  "key_path": "AnalyzeResponses",
+  "content": "Analyze responses",
+  "content_en_sha1_hash": "46e903d2491f229806f1d44900b64de628b52b4a",
+  "created_at": "2026-05-08T13:10:42.862Z",
+  "updated_at": "2026-05-08T13:14:04.194Z",
+  "comment": {
+    "text": "Button label that triggers the analysis of responses.",
+    "is_auto": true,
+    "updated_at": "2026-05-08T13:14:04.194Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Header/sub-components/AnalyzeResponses.tsx",
+      "line_number": 89,
+      "context": "} finally {\n endLoader(() => setIsLoading(false));\n }\n };\n \n const label = t(\"Files:AnalyzeResponses\");\n \n return (\n <Button\n accent\n onClick={onClick}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

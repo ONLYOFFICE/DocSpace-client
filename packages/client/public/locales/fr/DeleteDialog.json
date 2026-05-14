@@ -17,7 +17,7 @@
   "DeleteItemsSharedNote": "Veuillez noter que si vous les avez partagés avec quelqu'un, ils deviendront indisponibles.",
   "DeleteRoomConfirm": "La salle <strong>« {{roomName}} »</strong> sera définitivement supprimée. Toutes les données et les accès utilisateurs seront perdus.",
   "DeleteRooms": "Les <strong>salles sélectionnées ({{count}})</strong> seront définitivement supprimées. Toutes les données et tous les accès utilisateurs seront perdus.",
-  "DeleteRoomsTitle": "Supprimer cette salle ?",
+  "DeleteRoomsTitle": "Supprimer ces salles ?",
   "DeleteRoomTitle": "Supprimer cette salle ?",
   "DeleteRoomWarning": "Je comprends les conséquences et souhaite supprimer la salle",
   "DeleteTemplate": "Voulez-vous vraiment supprimer le modèle de salle <1>«{{templateName}}»</1> ? Le modèle ne peut pas être restauré.",

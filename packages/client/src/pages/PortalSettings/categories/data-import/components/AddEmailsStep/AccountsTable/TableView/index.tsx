@@ -30,16 +30,16 @@ import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url
 
 import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
-import { useTheme } from "styled-components";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { EmptyScreenContainer } from "@docspace/ui-kit/components/empty-screen-container";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { TableBody } from "@docspace/ui-kit/components/table";
+import { TableContainer, TableBody } from "@docspace/ui-kit/components/table";
 
 import UsersTableHeader from "./UsersTableHeader";
 import UsersTableRow from "./UsersTableRow";
-import { StyledTableContainer } from "../../../../StyledDataImport";
+import styles from "../../../../StyledDataImport.module.scss";
 
 import { TableViewProps, AddEmailTableProps } from "../../../../types";
 
@@ -89,7 +89,8 @@ const TableView = (props: TableViewProps) => {
     checkedUsers.withoutEmail.length !== usersWithFilledEmails.length;
 
   return (
-    <StyledTableContainer
+    <TableContainer
+      className={styles.styledTableContainer}
       forwardedRef={tableRef as React.RefObject<HTMLDivElement>}
       useReactWindow
     >
@@ -165,7 +166,7 @@ const TableView = (props: TableViewProps) => {
           }
         />
       )}
-    </StyledTableContainer>
+    </TableContainer>
   );
 };
 

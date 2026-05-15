@@ -24,64 +24,41 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-const StyledLoader = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0px;
-
-  .description_loader {
-    max-width: 700px;
-    margin-bottom: 5px;
-  }
-
-  .header_loader {
-    margin-bottom: 16px;
-  }
-
-  .text-input_loader {
-    margin-bottom: 16px;
-  }
-
-  .subtitle_loader {
-    margin-top: 20px;
-    margin-bottom: 16px;
-  }
-
-  .buttons_loader {
-    margin-button: 24px;
-  }
-`;
+import styles from "./loaderWhiteLabel.module.scss";
 
 const LoaderWhiteLabel = () => {
   return (
-    <StyledLoader>
-      <RectangleSkeleton height="22px" width="95px" className="header_loader" />
-      <RectangleSkeleton height="16px" className="description_loader" />
+    <div className={styles.loader}>
+      <RectangleSkeleton
+        height="22px"
+        width="95px"
+        className={styles.headerLoader}
+      />
+      <RectangleSkeleton height="16px" className={styles.descriptionLoader} />
       <RectangleSkeleton
         height="16px"
         width="200px"
-        className="description_loader"
+        className={styles.descriptionLoader}
       />
 
       <RectangleSkeleton
         height="20px"
         width="151px"
-        className="subtitle_loader"
+        className={styles.subtitleLoader}
       />
       <RectangleSkeleton
         height="32px"
         width="350px"
-        className="text-input_loader"
+        className={styles.textInputLoader}
       />
       <RectangleSkeleton
         height="32px"
         width="115px"
-        className="buttons_loader"
+        className={styles.buttonsLoader}
       />
-    </StyledLoader>
+    </div>
   );
 };
 

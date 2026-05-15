@@ -567,8 +567,8 @@ importers:
         specifier: 2.3.14
         version: 2.3.14
       '@onlyoffice/docspace-plugin-sdk':
-        specifier: file:onlyoffice-docspace-plugin-sdk-2.1.0.tgz
-        version: file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz(@types/node@24.10.7)(react@19.2.4)
+        specifier: file:onlyoffice-docspace-plugin-sdk-3.0.0.tgz
+        version: file:packages/client/onlyoffice-docspace-plugin-sdk-3.0.0.tgz(@types/node@24.10.7)(react@19.2.4)
       '@playwright/test':
         specifier: 1.58.1
         version: 1.58.1
@@ -3182,12 +3182,12 @@ packages:
     resolution: {integrity: sha512-Sp2tFtcc8Yq9BrO8fnaFst6uJYR7LJYmvFuvj3J2QWHaA2ugVnauTUAfwg7dIbzdmpyD8IzM8iIct1EdXvnJkQ==, tarball: file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.7.0.tgz}
     version: 3.7.0
 
-  '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz':
-    resolution: {integrity: sha512-7+08SesgNjnxUl3TrlMFoqkW4IpSXqcCxlH5dAwUhtdb3vfGaNqGIYLiyG09FLs3Z7+7Zd5GmYax6s2utv/Htw==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz}
-    version: 2.1.0
+  '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-3.0.0.tgz':
+    resolution: {integrity: sha512-//c99zzXwvdPQ5G5ELR00R+sWkNZXRC16LOL3YNVYzmRa68KTGqHaFZHbRKwbaekd9DCSfyJbUhaLXKPA8m10w==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-3.0.0.tgz}
+    version: 3.0.0
     hasBin: true
     peerDependencies:
-      react: '>=18.0.0'
+      react: '>=19.0.0'
     peerDependenciesMeta:
       react:
         optional: true
@@ -10898,7 +10898,7 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz(@types/node@24.10.7)(react@19.2.4)':
+  '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-3.0.0.tgz(@types/node@24.10.7)(react@19.2.4)':
     dependencies:
       inquirer: 9.3.8(@types/node@24.10.7)
       jszip: 3.10.1
@@ -14835,7 +14835,7 @@ snapshots:
       bl: 4.1.0
       chalk: 4.1.2
       cli-cursor: 3.1.0
-      cli-spinners: 2.6.1
+      cli-spinners: 2.9.2
       is-interactive: 1.0.0
       log-symbols: 4.1.0
       strip-ansi: 6.0.1

@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect, useTransition, Suspense } from "react";
-import styled from "styled-components";
 
 import { useParams } from "react-router";
 import { inject, observer } from "mobx-react";
@@ -36,13 +35,7 @@ import DetailsBar from "./sub-components/DetailsBar";
 import MessagesDetails from "./sub-components/MessagesDetails";
 import { WebhookDetailsLoader } from "../sub-components/Loaders";
 
-const DetailsWrapper = styled.div`
-  width: 100%;
-`;
-
-const EventDetailsHeader = styled.header`
-  padding: 20px 0;
-`;
+import styles from "./WebhookEventDetails.styled.module.scss";
 
 const WebhookEventDetails = (props) => {
   const { fetchEventData, fetchConfigName, configName } = props;
@@ -63,15 +56,15 @@ const WebhookEventDetails = (props) => {
 
   return (
     <Suspense fallback={WebhookDetailsLoader}>
-      <DetailsWrapper>
+      <div className={styles.detailsWrapper}>
         <main>
-          <EventDetailsHeader>
+          <header className={styles.eventDetailsHeader}>
             <Text fontWeight={600}>{configName}</Text>
             <DetailsBar />
-          </EventDetailsHeader>
+          </header>
           <MessagesDetails />
         </main>
-      </DetailsWrapper>
+      </div>
     </Suspense>
   );
 };

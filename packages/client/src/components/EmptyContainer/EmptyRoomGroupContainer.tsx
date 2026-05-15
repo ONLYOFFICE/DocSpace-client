@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
+import { useTheme } from "@docspace/ui-kit/context";
 
 import { EmptyView } from "@docspace/shared/components/empty-view";
 import type { EmptyViewOptionsType } from "@docspace/shared/components/empty-view";
@@ -45,9 +45,9 @@ const EmptyRoomGroupContainer = ({
   onManageGroups,
 }: EmptyRoomGroupContainerProps) => {
   const { t } = useTranslation(["GroupingRooms", "Common"]);
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
-  const icon = theme.isBase ? (
+  const icon = isBase ? (
     <EmptyRoomGroupsLightIcon />
   ) : (
     <EmptyRoomGroupsDarkIcon />

@@ -27,99 +27,9 @@
 import PlusThemeSvgUrl from "PUBLIC_DIR/images/plus.theme.svg?url";
 import { useEffect } from "react";
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
-import styled, { css } from "styled-components";
 import { Button } from "@docspace/ui-kit/components/button";
 import { withTranslation } from "react-i18next";
-import { isMobileOnly } from "react-device-detect";
-import { isMobile } from "@docspace/shared/utils";
-
-const StyledBodyContent = styled.div`
-  margin-top: 20px;
-
-  .flex {
-    display: flex;
-    justify-content: space-between;
-
-    :not(:last-child) {
-      padding-bottom: 20px;
-    }
-
-    ${
-      !isMobile() &&
-      css`
-      max-width: 448px;
-    `
-    }
-  }
-
-  .name-color {
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 24px;
-  }
-
-  .relative {
-    position: relative;
-  }
-
-  .accent-box {
-    background: ${(props) =>
-      props.currentColorAccent
-        ? props.currentColorAccent
-        : `${props.theme.client.settings.common.appearance.accentBoxBackground} url(${PlusThemeSvgUrl}) no-repeat center`};
-  }
-
-  .buttons-box {
-    background: ${(props) =>
-      props.currentColorButtons
-        ? props.currentColorButtons
-        : `${props.theme.client.settings.common.appearance.buttonBoxBackground} url(${PlusThemeSvgUrl}) no-repeat center`};
-  }
-
-  .modal-add-theme {
-    width: 46px;
-    height: 46px;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-
-  .drop-down-container-hex {
-    ${
-      isMobileOnly &&
-      css`
-      width: 100%;
-    `
-    }
-  }
-
-  .drop-down-item-hex {
-    ${
-      isMobileOnly &&
-      css`
-      width: calc(100vw - 32px);
-    `
-    }
-
-    :hover {
-      background-color: unset;
-    }
-
-    ${
-      !isMobile() &&
-      css`
-      max-width: 227px;
-
-      .hex-color-picker {
-        max-width: 195px;
-      }
-
-      .react-colorful__interactive {
-        max-width: 183px;
-      }
-    `
-    }
-  }
-`;
+import styles from "./colorSchemeDialog.module.scss";
 
 const ColorSchemeDialog = (props) => {
   const {
@@ -137,13 +47,21 @@ const ColorSchemeDialog = (props) => {
     currentColorButtons,
   } = props;
 
+  const accentBg = currentColorAccent
+    ? currentColorAccent
+    : `var(--settings-appearance-theme-add-bg) url(${PlusThemeSvgUrl}) no-repeat center`;
+
+  const buttonsBg = currentColorButtons
+    ? currentColorButtons
+    : `var(--settings-appearance-theme-add-bg) url(${PlusThemeSvgUrl}) no-repeat center`;
+
   const onKeyPress = (e) =>
     (e.key === "Esc" || e.key === "Escape") && onClose();
 
   useEffect(() => {
     window.addEventListener("keyup", onKeyPress);
     return () => window.removeEventListener("keyup", onKeyPress);
-  });
+  }, [onClose]);
 
   return (
     <ModalDialog
@@ -155,16 +73,13 @@ const ColorSchemeDialog = (props) => {
     >
       <ModalDialog.Header>{header}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledBodyContent
-          className="new-colors-container"
-          currentColorAccent={currentColorAccent}
-          currentColorButtons={currentColorButtons}
-        >
-          <div className="flex relative">
-            <div className="name-color">{t("Settings:AccentColor")}</div>
+        <div className={`${styles.bodyContent} new-colors-container`}>
+          <div className={`${styles.flex} ${styles.relative}`}>
+            <div className={styles.nameColor}>{t("Settings:AccentColor")}</div>
             <div
               id="accent"
-              className="modal-add-theme accent-box"
+              className={styles.modalAddTheme}
+              style={{ background: accentBg }}
               data-testid="color_scheme_dialog_accent"
               onClick={onClickColor}
             />
@@ -172,18 +87,21 @@ const ColorSchemeDialog = (props) => {
             {!viewMobile ? nodeHexColorPickerAccent : null}
           </div>
 
-          <div className="flex relative">
-            <div className="name-color">{t("Settings:ButtonsColor")}</div>
+          <div className={`${styles.flex} ${styles.relative}`}>
+            <div className={styles.nameColor}>
+              {t("Settings:ButtonsColor")}
+            </div>
             <div
               id="buttons"
-              className="modal-add-theme buttons-box"
+              className={styles.modalAddTheme}
+              style={{ background: buttonsBg }}
               data-testid="color_scheme_dialog_buttons"
               onClick={onClickColor}
             />
 
             {!viewMobile ? nodeHexColorPickerButtons : null}
           </div>
-        </StyledBodyContent>
+        </div>
       </ModalDialog.Body>
 
       <ModalDialog.Footer>

@@ -27,6 +27,7 @@
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { Link } from "@docspace/ui-kit/components/link";
+import { terminateOperation } from "@docspace/shared/api/files";
 
 import { makeAutoObservable } from "mobx";
 import { Trans } from "react-i18next";
@@ -72,10 +73,29 @@ class SecondaryProgressDataStore {
     )
       return;
 
-    if (!currentOperation.title && !currentOperation.itemsCount) return;
+    if (
+      !currentOperation ||
+      (!currentOperation.title && !currentOperation.itemsCount)
+    )
+      return;
 
     const { error, title, itemsCount, destFolderInfo, isFolder } =
       currentOperation;
+
+    const getError = () => {
+      const errorMessage = error;
+
+      if (typeof errorMessage === "string") return errorMessage;
+
+      if (errorMessage.message) return errorMessage?.message;
+
+      if (errorMessage.error) return errorMessage.error;
+    };
+
+    if (!isSuccess && !getError()) {
+      return;
+    }
+
     const t = (key, options) =>
       i18n.t(key, { ...options, ns: ["Files", "Common"] });
 
@@ -95,16 +115,6 @@ class SecondaryProgressDataStore {
       if (window.ClientConfig?.isFrame) return;
 
       window.DocSpace.navigate(url, { state });
-    };
-
-    const getError = () => {
-      const errorMessage = error;
-
-      if (typeof errorMessage === "string") return errorMessage;
-
-      if (errorMessage.message) return errorMessage?.message;
-
-      if (errorMessage.error) return errorMessage.error;
     };
 
     const commonComponents = {
@@ -304,13 +314,21 @@ class SecondaryProgressDataStore {
 
       const isCompleted = updatedItems.every((item) => item.completed);
 
-      const cuttentOperation = updatedItems[itemIndex];
+      const currentOperation =
+        itemIndex !== -1
+          ? updatedItems[itemIndex]
+          : updatedItems[updatedItems.length - 1];
 
-      if (progressInfo.completed && !progressInfo.alert) {
-        this.showToast(cuttentOperation, operation);
+      if (progressInfo.completed && !progressInfo.alert && currentOperation) {
+        this.showToast(currentOperation, operation);
       }
-      if (progressInfo.completed && progressInfo.alert) {
-        this.showToast(cuttentOperation, operation, false);
+      if (
+        progressInfo.completed &&
+        progressInfo.alert &&
+        !progressInfo.skipToast &&
+        currentOperation
+      ) {
+        this.showToast(currentOperation, operation, false);
       }
 
       this.secondaryOperationsArray.splice(operationIndex, 1, {
@@ -318,6 +336,7 @@ class SecondaryProgressDataStore {
         ...(progressInfo.label && { label: progressInfo.label }),
         ...(description !== undefined && { description }),
         alert: progressInfo.alert,
+        stopped: progressInfo.stopped || operationObject.stopped,
         items: updatedItems,
         completed: isCompleted,
         percent: progressInfo.percent,
@@ -328,6 +347,7 @@ class SecondaryProgressDataStore {
         showPanel,
         description,
         alert: progressInfo.alert,
+        stopped: progressInfo.stopped,
         items: [progressInfo],
         label: progressInfo.label ?? getOperationsProgressTitle(operation),
         completed: progressInfo.completed,
@@ -430,8 +450,71 @@ class SecondaryProgressDataStore {
     };
   };
 
+  terminateItem = async (operation, item) => {
+    try {
+      await terminateOperation(item.serverOperationId);
+      this.setSecondaryProgressBarData({
+        operation,
+        operationId: item.operationId,
+        alert: true,
+        completed: true,
+        stopped: true,
+        skipToast: true,
+      });
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  };
+
+  cancelSecondaryOperationById = async (operation, operationId) => {
+    const op = this.secondaryOperationsArray.find(
+      (o) => o.operation === operation,
+    );
+    if (!op) return;
+
+    const item = op.items.find((i) => i.operationId === operationId);
+    if (!item || !item.serverOperationId || item.completed) return;
+
+    const terminated = await this.terminateItem(operation, item);
+    if (terminated) {
+      toastr.success(i18n.t("Common:OperationStopped"));
+    }
+  };
+
+  cancelSecondaryOperation = async () => {
+    const activeOperations = this.secondaryOperationsArray.filter(
+      (op) => !op.completed,
+    );
+
+    const results = await Promise.all(
+      activeOperations.map(async (op) => {
+        const activeItems = op.items.filter(
+          (item) => item.serverOperationId && !item.completed,
+        );
+
+        const itemResults = await Promise.all(
+          activeItems.map((item) =>
+            this.terminateItem(op.operation, item),
+          ),
+        );
+
+        return itemResults.some(Boolean);
+      }),
+    );
+
+    if (results.some(Boolean)) {
+      toastr.success(i18n.t("Common:OperationStopped"));
+    }
+  };
+
+  get secondaryOperationsStopped() {
+    return this.secondaryOperationsArray.some((op) => op.stopped);
+  }
+
   get secondaryOperationsAlert() {
-    return this.secondaryOperationsArray.some((op) => op.alert);
+    return this.secondaryOperationsArray.some((op) => op.alert && !op.stopped);
   }
 
   get secondaryOperationsCompleted() {

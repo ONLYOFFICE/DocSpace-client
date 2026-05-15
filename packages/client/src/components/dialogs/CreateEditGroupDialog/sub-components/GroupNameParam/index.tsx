@@ -29,7 +29,7 @@ import { Label } from "@docspace/ui-kit/components/label";
 import { InputType, TextInput } from "@docspace/ui-kit/components/text-input";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { useTranslation } from "react-i18next";
-import * as Styled from "./index.styled";
+import styles from "../../CreateEditGroupDialog.module.scss";
 
 interface GroupNameParamProps {
 	groupName: string;
@@ -43,7 +43,7 @@ const GroupNameParam = ({
 	const { t } = useTranslation(["Common"]);
 
 	return (
-		<Styled.GroupNameParam>
+		<div className={styles.groupNameParam}>
 			<Label
 				title={t("Common:Label")}
 				className="input-label"
@@ -78,7 +78,7 @@ const GroupNameParam = ({
 					testId="create_edit_group_name"
 				/>
 			</FieldContainer>
-		</Styled.GroupNameParam>
+		</div>
 	);
 };
 

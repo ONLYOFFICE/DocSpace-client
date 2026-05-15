@@ -27,24 +27,9 @@
 import { useEffect } from "react";
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Button } from "@docspace/ui-kit/components/button";
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 
-const StyledBodyText = styled.div`
-  line-height: 20px;
-`;
-
-const Footer = styled.div`
-  width: 100%;
-  display: flex;
-
-  button {
-    width: 100%;
-  }
-  button:first-of-type {
-    margin-inline-end: 10px;
-  }
-`;
+import styles from "../Webhooks.styled.module.scss";
 
 export const DeleteWebhookDialog = ({
   visible,
@@ -73,11 +58,11 @@ export const DeleteWebhookDialog = ({
     <ModalDialog visible={visible} onClose={onClose} displayType="modal">
       <ModalDialog.Header>{header}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledBodyText>{t("DeleteHint")}</StyledBodyText>
+        <div className={styles.styledBodyText}>{t("DeleteHint")}</div>
       </ModalDialog.Body>
 
       <ModalDialog.Footer>
-        <Footer>
+        <div className={styles.footer}>
           <Button
             id="delete-forever-button"
             label={t("Common:DeleteForeverButton")}
@@ -93,7 +78,7 @@ export const DeleteWebhookDialog = ({
             onClick={onClose}
             testId="delete_webhook_cancel_button"
           />
-        </Footer>
+        </div>
       </ModalDialog.Footer>
     </ModalDialog>
   );

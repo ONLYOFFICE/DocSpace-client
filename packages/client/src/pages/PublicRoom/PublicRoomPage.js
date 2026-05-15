@@ -67,6 +67,7 @@ const PublicRoomPage = (props) => {
     secondaryOperationsCompleted,
     clearSecondaryProgressData,
     secondaryActiveOperations,
+    secondaryOperationsStopped,
     secondaryOperationsAlert,
     onOpenSignInWindow,
     windowIsOpen,
@@ -157,6 +158,7 @@ const PublicRoomPage = (props) => {
     secondaryOperationsCompleted,
     clearSecondaryProgressData,
     secondaryActiveOperations,
+    secondaryOperationsStopped,
     secondaryOperationsAlert,
   };
 
@@ -231,6 +233,7 @@ export default inject(
       secondaryOperationsCompleted,
       clearSecondaryProgressData,
       secondaryActiveOperations,
+      secondaryOperationsStopped,
       secondaryOperationsAlert,
     } = uploadDataStore.secondaryProgressDataStore;
 
@@ -251,6 +254,7 @@ export default inject(
       secondaryOperationsCompleted,
       clearSecondaryProgressData,
       secondaryActiveOperations,
+      secondaryOperationsStopped,
       secondaryOperationsAlert,
 
       isAuthenticated,

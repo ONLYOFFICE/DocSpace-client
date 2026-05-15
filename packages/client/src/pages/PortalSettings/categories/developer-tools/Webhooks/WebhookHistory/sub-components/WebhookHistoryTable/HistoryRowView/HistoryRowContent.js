@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
@@ -36,25 +35,7 @@ import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 
 import StatusBadge from "../../../../sub-components/StatusBadge";
 
-const StyledRowContent = styled(RowContent)`
-  display: flex;
-  padding-bottom: 10px;
-
-  .rowMainContainer {
-    height: 100%;
-    width: 100%;
-  }
-`;
-
-const ContentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-items: center;
-`;
-
-const StatusHeader = styled.div`
-  display: flex;
-`;
+import styles from "../../../WebhookHistory.styled.module.scss";
 
 export const HistoryRowContent = ({ sectionWidth, historyItem }) => {
   const { i18n } = useTranslation("Webhooks");
@@ -62,23 +43,23 @@ export const HistoryRowContent = ({ sectionWidth, historyItem }) => {
   const formattedDelivery = getCorrectDate(i18n.language, historyItem.delivery);
 
   return (
-    <StyledRowContent sectionWidth={sectionWidth}>
-      <ContentWrapper>
-        <StatusHeader>
+    <RowContent className={styles.historyRowContent} sectionWidth={sectionWidth}>
+      <div className={styles.historyContentWrapper}>
+        <div className={styles.statusHeader}>
           <Text
             fontWeight={600}
             fontSize="14px"
-            style={{ marginInlineEnd: "8px" }}
+            className={styles.historyItemId}
           >
             {historyItem.id}
           </Text>
           <StatusBadge status={historyItem.status} />
-        </StatusHeader>
+        </div>
         <Text fontWeight={600} fontSize="12px" color={globalColors.gray}>
           {formattedDelivery}
         </Text>
-      </ContentWrapper>
+      </div>
       <span />
-    </StyledRowContent>
+    </RowContent>
   );
 };

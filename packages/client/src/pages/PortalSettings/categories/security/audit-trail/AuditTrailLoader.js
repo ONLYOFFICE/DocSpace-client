@@ -24,119 +24,52 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { tablet, mobile } from "@docspace/shared/utils";
 
-const StyledLoader = styled.div`
-  .header {
-    height: 30px;
-    margin-bottom: 8px;
-    max-width: 700px;
-    @media ${mobile} {
-      height: 60px;
-    }
-  }
-
-  .second-container {
-    margin: 16px 0;
-    display: grid;
-    gap: 8px;
-    max-width: 350px;
-  }
-
-  .second-header {
-    max-width: 132px;
-    display: block;
-    @media ${mobile} {
-      max-width: 100%;
-    }
-  }
-
-  .description {
-    margin-top: 16px;
-    max-width: 645px;
-  }
-
-  .third-container {
-    margin: 16px 0;
-    display: flex;
-    justify-content: space-between;
-    grid-template-columns: repeat(3, 1fr);
-    max-width: 700px;
-
-    @media ${tablet} {
-      display: none;
-    }
-  }
-
-  .fourth-container {
-    display: grid;
-    gap: 4px;
-    margin-top: 16px;
-
-    .rows-header {
-      max-width: 197px;
-      display: none;
-      @media ${tablet} {
-        display: block;
-      }
-    }
-    .rows {
-      max-width: 700px;
-      display: block;
-      margin-bottom: 8px;
-    }
-  }
-
-  .button {
-    margin-top: 32px;
-    max-width: 163px;
-  }
-`;
+import styles from "./AuditTrailLoader.module.scss";
 
 const AuditTrailLoader = () => {
   return (
-    <StyledLoader>
-      <RectangleSkeleton className="header" height="100%" />
-      <RectangleSkeleton className="header" height="100%" />
-      <div className="second-container">
+    <div className={styles.loader}>
+      <RectangleSkeleton className={styles.header} height="100%" />
+      <RectangleSkeleton className={styles.header} height="100%" />
+      <div className={styles["second-container"]}>
         <RectangleSkeleton height="20px" width="94px" />
         <RectangleSkeleton height="32px" />
       </div>
 
-      <RectangleSkeleton className="second-header" height="32px" />
-      <RectangleSkeleton className="description" height="40px" />
+      <RectangleSkeleton className={styles["second-header"]} height="32px" />
+      <RectangleSkeleton className={styles.description} height="40px" />
 
-      <div className="third-container">
+      <div className={styles["third-container"]}>
         <RectangleSkeleton height="16px" width="28px" />
         <RectangleSkeleton height="16px" width="28px" />
         <RectangleSkeleton height="16px" width="28px" />
       </div>
 
-      <div className="fourth-container">
-        <RectangleSkeleton height="16px" className="rows-header" />
-        <RectangleSkeleton height="20px" className="rows" />
+      <div className={styles["fourth-container"]}>
+        <RectangleSkeleton height="16px" className={styles["rows-header"]} />
+        <RectangleSkeleton height="20px" className={styles.rows} />
       </div>
-      <div className="fourth-container">
-        <RectangleSkeleton height="16px" className="rows-header" />
-        <RectangleSkeleton height="20px" className="rows" />
+      <div className={styles["fourth-container"]}>
+        <RectangleSkeleton height="16px" className={styles["rows-header"]} />
+        <RectangleSkeleton height="20px" className={styles.rows} />
       </div>
-      <div className="fourth-container">
-        <RectangleSkeleton height="16px" className="rows-header" />
-        <RectangleSkeleton height="20px" className="rows" />
+      <div className={styles["fourth-container"]}>
+        <RectangleSkeleton height="16px" className={styles["rows-header"]} />
+        <RectangleSkeleton height="20px" className={styles.rows} />
       </div>
-      <div className="fourth-container">
-        <RectangleSkeleton height="16px" className="rows-header" />
-        <RectangleSkeleton height="20px" className="rows" />
+      <div className={styles["fourth-container"]}>
+        <RectangleSkeleton height="16px" className={styles["rows-header"]} />
+        <RectangleSkeleton height="20px" className={styles.rows} />
       </div>
-      <div className="fourth-container">
-        <RectangleSkeleton height="16px" className="rows-header" />
-        <RectangleSkeleton height="20px" className="rows" />
+      <div className={styles["fourth-container"]}>
+        <RectangleSkeleton height="16px" className={styles["rows-header"]} />
+        <RectangleSkeleton height="20px" className={styles.rows} />
       </div>
 
-      <RectangleSkeleton height="32px" className="button" />
-    </StyledLoader>
+      <RectangleSkeleton height="32px" className={styles.button} />
+    </div>
   );
 };
 

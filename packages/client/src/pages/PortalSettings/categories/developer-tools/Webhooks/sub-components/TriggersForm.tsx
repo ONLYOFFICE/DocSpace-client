@@ -30,7 +30,10 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 
-import { getTriggerTranslate } from "../Webhooks.helpers";
+import {
+  getTriggerTranslate
+} from "../Webhooks.helpers";
+import styles from "../Webhooks.styled.module.scss";
 
 type TWebhookTrigger = {
   name: string;
@@ -62,8 +65,8 @@ const TriggersForm = ({
   );
 
   return (
-    <div style={{ marginTop: "22px" }}>
-      <Text fontWeight={600} style={{ marginBottom: "10px" }}>
+    <div className={styles.triggersWrapper}>
+      <Text fontWeight={600} className={styles.triggersTitle}>
         {t("EventToTriggerThisWebhook")}
       </Text>
       <RadioButtonGroup
@@ -94,13 +97,7 @@ const TriggersForm = ({
       />
       {!triggerAll ? (
         <div
-          style={{
-            display: "grid",
-            gap: "8px",
-            gridTemplateColumns: "repeat(2, 1fr)",
-            marginTop: "10px",
-            marginInlineStart: "24px",
-          }}
+          className={styles.triggersCheckboxGroup}
           data-testid="triggers_form_checkbox_group"
         >
           {individualTriggers.map((trigger) => {

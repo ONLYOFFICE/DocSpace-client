@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect, useRef } from "react";
-import styled from "styled-components";
 
 import { Link } from "@docspace/ui-kit/components/link";
 
@@ -38,38 +37,9 @@ import { PasswordInput } from "@docspace/ui-kit/components/password-input";
 import { inject, observer } from "mobx-react";
 
 import { useTranslation } from "react-i18next";
-import { Hint } from "../styled-components";
 
-const SecretKeyWrapper = styled.div`
-  .link {
-    display: inline-block;
-    margin-top: 6px;
-    color: ${(props) => props.theme.tooltip.textColor};
-  }
-
-  .dotted {
-    text-decoration: underline dotted;
-  }
-`;
-
-const Header = styled.h4`
-  margin-top: 21px;
-  margin-bottom: 5px;
-
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-
-  cursor: default;
-
-  .secretKeyHelpButton {
-    margin-inline-start: 4px;
-  }
-
-  img {
-    margin-inline-start: 4px;
-  }
-`;
+import styles from "../Webhooks.styled.module.scss";
+import hintStyles from "../Hint.module.scss";
 
 const SecretKeyInput = (props) => {
   const {
@@ -118,8 +88,8 @@ const SecretKeyInput = (props) => {
   }, [isResetVisible]);
 
   return (
-    <SecretKeyWrapper>
-      <Header>
+    <div className={styles.secretKeyWrapper}>
+      <h4 className={styles.secretKeyHeader}>
         {t("SecretKey")}
         <HelpButton
           className="secretKeyHelpButton"
@@ -146,9 +116,9 @@ const SecretKeyInput = (props) => {
           place="bottom"
           dataTestId="secret_key_help_button"
         />
-      </Header>
+      </h4>
       {isResetVisible ? (
-        <Hint>
+        <div className={hintStyles.hint}>
           {t("SecretKeyWarning")} <br />
           <Link
             id="reset-key-link"
@@ -161,7 +131,7 @@ const SecretKeyInput = (props) => {
           >
             {t("ResetKey")}
           </Link>
-        </Hint>
+        </div>
       ) : null}
       <div hidden={isResetVisible}>
         <PasswordInput
@@ -193,7 +163,7 @@ const SecretKeyInput = (props) => {
           {t("Generate")}
         </Link>
       </div>
-    </SecretKeyWrapper>
+    </div>
   );
 };
 

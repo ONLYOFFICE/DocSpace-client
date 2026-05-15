@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-
 import { Text } from "@docspace/ui-kit/components/text";
 import {
 	Avatar,
@@ -34,14 +32,7 @@ import {
 } from "@docspace/ui-kit/components/avatar";
 import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 
-const StyledAvatar = styled(Avatar)`
-  width: 16px !important;
-  margin-inline-end: 4px;
-  max-width: 16px !important;
-  height: 16px !important;
-
-  min-width: unset !important;
-`;
+import styles from "../TableView.styled.module.scss";
 
 interface CreatorCellProps {
 	avatar: string;
@@ -53,11 +44,11 @@ const CreatorCell = ({ avatar, displayName }: CreatorCellProps) => {
 
 	return (
 		<>
-			<StyledAvatar
+			<Avatar
 				source={avatar}
 				size={AvatarSize.small}
 				role={AvatarRole.user}
-				className="textOverflow"
+				className={`textOverflow ${styles.creatorAvatar}`}
 			/>
 
 			<Text

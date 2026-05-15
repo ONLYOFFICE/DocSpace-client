@@ -109,7 +109,6 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
         "react-router",
         "mobx",
         "mobx-react",
-        "styled-components",
         "i18next",
         "react-i18next",
         "axios",

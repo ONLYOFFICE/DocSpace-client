@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
-import { useTheme } from "styled-components";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { withTranslation, WithTranslation, Trans } from "react-i18next";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import {
@@ -16,11 +16,7 @@ import { DeviceType } from "@docspace/shared/enums";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import WelcomeAuthSocial from "PUBLIC_DIR/images/welcome-social_auth.svg?url";
 import WelcomeAuthSocialDark from "PUBLIC_DIR/images/welcome-social_auth_dark.svg?url";
-import {
-  StyledBodyContent,
-  StyledInfoRow,
-  StyledModalDialog,
-} from "./StyledSocialAuthWelcome";
+import styles from "./SocialAuthWelcome.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 interface SocialAuthWelcomeDialogProps extends WithTranslation {
@@ -46,7 +42,7 @@ const SocialAuthWelcomeDialogComponent = ({
   currentDeviceType,
 }: SocialAuthWelcomeDialogProps) => {
   const navigate = useNavigate();
-  const theme = useTheme();
+  const { isBase } = useTheme();
   const [showDialog, setShowDialog] = useState(false);
   const [isLoaded, setIsLoaded] = React.useState(false);
 
@@ -61,7 +57,7 @@ const SocialAuthWelcomeDialogComponent = ({
     }
   };
 
-  const welcomeAuthSocialImage = theme.isBase
+  const welcomeAuthSocialImage = isBase
     ? WelcomeAuthSocial
     : WelcomeAuthSocialDark;
 
@@ -82,7 +78,8 @@ const SocialAuthWelcomeDialogComponent = ({
   if (!visible) return null;
 
   return (
-    <StyledModalDialog
+    <ModalDialog
+      className={styles.modalDialog}
       visible={visible}
       onClose={onClose}
       displayType={ModalDialogType.modal}
@@ -98,7 +95,7 @@ const SocialAuthWelcomeDialogComponent = ({
         })}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledBodyContent>
+        <div className={styles.bodyContent}>
           <div className="welcome-image">
             <img
               src={welcomeAuthSocialImage}
@@ -114,7 +111,7 @@ const SocialAuthWelcomeDialogComponent = ({
           </Text>
 
           <div className="account-details">
-            <StyledInfoRow className="welcome-product-name">
+            <div className={`${styles.infoRow} welcome-product-name`}>
               <Text className="welcome-text">
                 {t("SocialAuthWelcomeDialog:ProductNameDetail", {
                   productName: getBrandName("ProductName"),
@@ -125,9 +122,9 @@ const SocialAuthWelcomeDialogComponent = ({
                   ? `${baseDomain}`
                   : `${tenantAlias}.${baseDomain}`}
               </Text>
-            </StyledInfoRow>
+            </div>
 
-            <StyledInfoRow className="no-gap">
+            <div className={`${styles.infoRow} no-gap`}>
               <Text className="welcome-text" />
               <Link
                 isHovered
@@ -143,41 +140,41 @@ const SocialAuthWelcomeDialogComponent = ({
                 className="paid-badge"
                 fontWeight="700"
                 backgroundColor={
-                  theme.isBase
+                  isBase
                     ? globalColors.favoritesStatus
                     : globalColors.favoriteStatusDark
                 }
                 label={t("Common:Paid")}
                 isPaidBadge
               />
-            </StyledInfoRow>
+            </div>
 
-            <StyledInfoRow>
+            <div className={styles.infoRow}>
               <Text className="welcome-text">{t("Common:Name")}</Text>
               <Text
                 fontWeight="600"
                 truncate
                 className="welcome-text"
               >{`${user?.firstName} ${user?.lastName}`}</Text>
-            </StyledInfoRow>
+            </div>
 
-            <StyledInfoRow>
+            <div className={styles.infoRow}>
               <Text className="welcome-text">{t("Common:Email")}</Text>
               <Text fontWeight="600" truncate className="welcome-text">
                 {user?.email}
               </Text>
-            </StyledInfoRow>
+            </div>
 
-            <StyledInfoRow>
+            <div className={styles.infoRow}>
               <Text className="welcome-text">
                 {t("SocialAuthWelcomeDialog:GeneratedPassword")}
               </Text>
               <Text fontWeight="600" className="welcome-text">
                 ********
               </Text>
-            </StyledInfoRow>
+            </div>
 
-            <StyledInfoRow className="no-gap">
+            <div className={`${styles.infoRow} no-gap`}>
               <Text className="welcome-text" />
               <Link
                 isHovered
@@ -189,7 +186,7 @@ const SocialAuthWelcomeDialogComponent = ({
               >
                 {t("SocialAuthWelcomeDialog:ChangeData")}
               </Link>
-            </StyledInfoRow>
+            </div>
           </div>
 
           <Text textAlign="center" lineHeight="20px" className="welcome-text">
@@ -210,7 +207,7 @@ const SocialAuthWelcomeDialogComponent = ({
               />
             )}
           </Text>
-        </StyledBodyContent>
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -224,7 +221,7 @@ const SocialAuthWelcomeDialogComponent = ({
           scale={currentDeviceType === DeviceType.mobile}
         />
       </ModalDialog.Footer>
-    </StyledModalDialog>
+    </ModalDialog>
   );
 };
 

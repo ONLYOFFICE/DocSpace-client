@@ -1,0 +1,361 @@
+// (c) Copyright Ascensio System SIA 2009-2026
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+@use "@docspace/ui-kit/styles/variables/colors" as *;
+
+.confirmBody,
+.installingBody,
+.doneBody,
+.failedBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 4px 0;
+  text-align: center;
+}
+
+.heroBadge {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--aside-header-background-color, rgba(71, 129, 209, 0.08));
+  position: relative;
+  animation: badgeEnter 0.4s ease-out backwards;
+
+  svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  &[data-status="success"] {
+    background: color-mix(
+      in srgb,
+      var(--status-icon-color-positive) 12%,
+      transparent
+    );
+
+    svg {
+      color: var(--status-icon-color-positive);
+
+      path {
+        fill: var(--status-icon-color-positive);
+      }
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 2px solid var(--status-icon-color-positive);
+      animation: successPulse 0.9s ease-out 1 forwards;
+      pointer-events: none;
+    }
+  }
+
+  &[data-status="error"] {
+    background: color-mix(in srgb, $main-red 14%, transparent);
+
+    svg {
+      color: $main-red;
+
+      path {
+        fill: $main-red;
+      }
+    }
+  }
+}
+
+.heroText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  animation: stateEnter 0.4s ease-out 0.1s backwards;
+}
+
+.confirmText {
+  font-size: 13px;
+  line-height: 20px;
+  margin: 0;
+  color: var(--text-color);
+}
+
+.confirmHint {
+  font-size: 12px;
+  line-height: 18px;
+  margin: 0;
+  color: var(--text-disable-color);
+  max-width: 360px;
+}
+
+.bulletList {
+  list-style: none;
+  padding: 12px 16px;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--aside-header-background-color, rgba(71, 129, 209, 0.05));
+  border-radius: 8px;
+  box-sizing: border-box;
+  animation: stateEnter 0.4s ease-out 0.15s backwards;
+}
+
+.bulletItem {
+  display: grid;
+  grid-template-columns: 16px 1fr;
+  column-gap: 10px;
+  align-items: start;
+  text-align: start;
+}
+
+.bulletIcon {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  flex-shrink: 0;
+
+  path {
+    fill: var(--status-icon-color-positive);
+  }
+}
+
+.bulletText {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--text-color);
+
+  strong {
+    font-weight: 600;
+  }
+}
+
+.keepOpenCallout {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: color-mix(in srgb, $main-orange 10%, transparent);
+  border: 1px solid color-mix(in srgb, $main-orange 30%, transparent);
+  color: var(--text-color);
+  font-size: 12px;
+  line-height: 16px;
+  text-align: start;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.keepOpenCalloutIcon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+
+  path {
+    fill: $main-orange;
+  }
+}
+
+.error {
+  margin: 0;
+  font-size: 13px;
+  color: $main-red;
+}
+
+.timeline {
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 0;
+  width: 100%;
+}
+
+.timelineItem {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  column-gap: 12px;
+  position: relative;
+  padding-bottom: 18px;
+  text-align: start;
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+}
+
+.timelineConnector {
+  position: absolute;
+  inset-inline-start: 11px;
+  top: 24px;
+  bottom: -2px;
+  width: 2px;
+  background: var(--aside-header-border-color);
+  transition: background 0.4s ease;
+  z-index: 0;
+}
+
+.timelineDot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--background-color, white);
+  border: 2px solid var(--aside-header-border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: transparent;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.timelineLabel {
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--text-disable-color);
+  padding-top: 2px;
+  transition: color 0.3s ease;
+}
+
+.timelineItem[data-state="done"] {
+  .timelineDot {
+    background: var(--status-icon-color-positive);
+    border-color: var(--status-icon-color-positive);
+    color: var(--background-color);
+
+    svg path {
+      fill: var(--background-color);
+    }
+  }
+
+  .timelineConnector {
+    background: var(--status-icon-color-positive);
+  }
+
+  .timelineLabel {
+    color: var(--text-color);
+  }
+}
+
+.timelineItem[data-state="active"] {
+  .timelineDot {
+    border-color: var(--color-scheme-main-buttons);
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+      background: var(--color-scheme-main-buttons);
+      animation: pulseDot 1.4s ease-in-out infinite;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: 50%;
+      border: 2px solid var(--color-scheme-main-buttons);
+      animation: pulseRing 1.6s ease-out infinite;
+    }
+  }
+
+  .timelineLabel {
+    color: var(--text-color);
+    font-weight: 600;
+  }
+}
+
+@keyframes pulseDot {
+  0%,
+  100% {
+    transform: scale(0.7);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulseRing {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  80%,
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes badgeEnter {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes stateEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes successPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}

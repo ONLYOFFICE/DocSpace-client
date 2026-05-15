@@ -55,6 +55,7 @@ import { generateFilesItemValue } from "@/app/(docspace)/(files)/_utils";
 import useContextMenuModel from "@/app/(docspace)/_hooks/useContextMenuModel";
 import useDownloadActions from "@/app/(docspace)/_hooks/useDownloadActions";
 import { ShareContext } from "@/app/(docspace)/_contexts/ShareContext";
+import { InfoContext } from "@/app/(docspace)/_contexts/InfoContext";
 import { DeleteContext } from "@/app/(docspace)/_contexts/DeleteContext";
 import { FileOperationsContext } from "@/app/(docspace)/_contexts/FileOperationsContext";
 import { RenameContext } from "@/app/(docspace)/_contexts/RenameContext";
@@ -95,12 +96,14 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
   const { openFile } = useFilesActions({ t });
   const { openFolder } = useFolderActions({ t });
   const onShareClick = React.useContext(ShareContext);
+  const onInfoClick = React.useContext(InfoContext);
   const deleteCtx = React.useContext(DeleteContext);
   const fileOpsCtx = React.useContext(FileOperationsContext);
   const renameCtx = React.useContext(RenameContext);
   const { getContextMenuModel } = useContextMenuModel({
     item: observableItem,
     onShareClick: onShareClick ?? undefined,
+    onInfoClick: onInfoClick ?? undefined,
     onDeleteClick: deleteCtx?.deleteItem,
     onCopyClick: fileOpsCtx?.copyItem,
     onMoveClick: fileOpsCtx?.moveItem,

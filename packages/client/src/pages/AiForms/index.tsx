@@ -24,10 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
+import { inject, observer } from "mobx-react";
 import { useSearchParams } from "react-router";
 import { useTranslation } from "react-i18next";
 
 import SdkIframe from "SRC_DIR/components/SdkIframe";
+import { InstallAiFormsDialog } from "SRC_DIR/pages/Dashboard/InstallModuleDialog";
+import type { AiFormsSettings } from "SRC_DIR/pages/Dashboard/utils";
 
 const SECTION_TO_PATH: Record<string, string> = {
   "in-progress": "/sdk/forms/in-progress",
@@ -35,12 +39,55 @@ const SECTION_TO_PATH: Record<string, string> = {
   settings: "/sdk/forms/settings",
 };
 
-export const AiForms = () => {
+type AiFormsProps = {
+  roomId: number | null;
+  ensureAppsLoaded: () => void;
+};
+
+const AiForms = ({ roomId, ensureAppsLoaded }: AiFormsProps) => {
   const { t } = useTranslation(["Common"]);
   const [searchParams] = useSearchParams();
+  const [showSetupDialog, setShowSetupDialog] = React.useState(roomId === null);
+
+  React.useEffect(() => {
+    ensureAppsLoaded();
+  }, [ensureAppsLoaded]);
+
+  React.useEffect(() => {
+    setShowSetupDialog(roomId === null);
+  }, [roomId]);
+
+  const handleSetupComplete = () => {
+    setShowSetupDialog(false);
+  };
+
+  if (roomId === null) {
+    return (
+      <>
+        <InstallAiFormsDialog
+          visible={showSetupDialog}
+          onClose={handleSetupComplete}
+          onInstalled={handleSetupComplete}
+          skipConfirm={true}
+        />
+      </>
+    );
+  }
+
   const section = searchParams.get("section") ?? "";
-  const src = SECTION_TO_PATH[section] ?? "/sdk/forms/my-forms";
+  const basePath = SECTION_TO_PATH[section] ?? "/sdk/forms/my-forms";
+  const params = new URLSearchParams({ showMenu: "false" });
+  if (roomId !== null) params.set("roomId", String(roomId));
+  const src = `${basePath}?${params}`;
   return <SdkIframe src={src} title={t("Common:DashboardAIFormsTitle")} />;
 };
 
-export default AiForms;
+const AiFormsConnected = inject<TStore>(({ appsStore }) => ({
+  roomId: appsStore.getSettings<AiFormsSettings>("ai-forms")?.roomId ?? null,
+  ensureAppsLoaded: appsStore.ensureLoaded,
+}))(observer(AiForms));
+
+export { AiFormsConnected as AiForms };
+
+export default AiFormsConnected;
+

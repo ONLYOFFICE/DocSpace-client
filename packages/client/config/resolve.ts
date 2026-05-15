@@ -39,10 +39,5 @@ export const resolve: UserConfig["resolve"] = {
     "@docspace/ui-kit": path.resolve(rootDir, "../../libs/ui-kit"),
   },
   extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
-  dedupe: [
-    "styled-components",
-    "react",
-    "react-dom",
-    "@onlyoffice/ai-chat",
-  ],
+  dedupe: ["styled-components", "react", "react-dom", "@onlyoffice/ai-chat"],
 };

@@ -45,6 +45,7 @@ import { Component as Payments } from "../categories/payments";
 import { Component as Bonus } from "../../Bonus";
 import { Component as AISettings } from "../categories/ai-settings";
 import NewAISettings from "../categories/new-ai-settings";
+import { Component as Apps } from "../categories/apps";
 
 import useSecurity from "../categories/security/useSecurity";
 import useBackup from "../categories/data-management/backup/useBackup";
@@ -79,6 +80,8 @@ const getViewFromPathname = (pathname: string): TView => {
 
   if (pathname.includes("new-ai-settings")) return "new-ai-settings";
   if (pathname.includes("ai-settings")) return "ai-settings";
+
+  if (pathname.includes("apps")) return "apps";
 
   return "";
 };
@@ -336,6 +339,7 @@ const View = ({
       {currentView === "bonus" ? <Bonus /> : null}
       {currentView === "ai-settings" ? <AISettings /> : null}
       {currentView === "new-ai-settings" ? <NewAISettings /> : null}
+      {currentView === "apps" ? <Apps /> : null}
       {currentView === "ai-services" ||
       currentView === "backup-service" ||
       currentView === "disk-storage" ? (
@@ -423,4 +427,3 @@ export const ViewComponent = inject(
     };
   },
 )(observer(View));
-

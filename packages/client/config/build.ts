@@ -83,7 +83,6 @@ export const getBuildConfig = (
             id.includes("scheduler")
           )
             return "vendor-react";
-          if (id.includes("styled-components")) return "vendor-styled";
           if (id.includes("lodash")) return "vendor-lodash";
           if (id.includes("docspace-api-sdk")) return "vendor-docspace-api-sdk";
         }

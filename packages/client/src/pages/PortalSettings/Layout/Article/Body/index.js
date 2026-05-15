@@ -153,6 +153,10 @@ const ArticleBodyContent = (props) => {
         setSelectedKeys(["7-0"]);
       }
 
+      if (location.pathname.includes("/apps")) {
+        setSelectedKeys(["8-0"]);
+      }
+
       if (location.pathname.includes("delete-data")) {
         setSelectedKeys(["9-0"]);
       }
@@ -225,7 +229,9 @@ const ArticleBodyContent = (props) => {
       case "Common:RestoreBackup":
         return t("Common:RestoreBackup");
       case "PortalDeletion":
-        return t("PortalDeletion", { productName: getBrandName("ProductName") });
+        return t("PortalDeletion", {
+          productName: getBrandName("ProductName"),
+        });
       case "Common:Bonus":
         return t("Common:Bonus");
       case "Common:FreeAccessToLicensedVersion":
@@ -240,6 +246,8 @@ const ArticleBodyContent = (props) => {
         return t("Settings:AISettings");
       case "NewAISettings":
         return t("Settings:NewAISettings");
+      case "OAuth:Apps":
+        return t("OAuth:Apps");
       default:
         throw new Error("Unexpected translation key");
     }
@@ -339,9 +347,7 @@ const ArticleBodyContent = (props) => {
   return !isLoadedArticleBody || isProfileLoading ? (
     <ArticleFolderLoader />
   ) : (
-    <>
-      {items}
-    </>
+    <>{items}</>
   );
 };
 
@@ -394,9 +400,8 @@ export default inject(
   },
 )(
   withLoading(
-    withTranslation(["Settings", "Common", "Ldap"])(
+    withTranslation(["Settings", "Common", "Ldap", "OAuth"])(
       observer(ArticleBodyContent),
     ),
   ),
 );
-

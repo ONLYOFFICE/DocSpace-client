@@ -26,9 +26,9 @@
 import React, { useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import styled, { css } from "styled-components";
 
-import { mobile, tablet, isMobile } from "@docspace/shared/utils";
+import { isMobile } from "@docspace/shared/utils";
+import styles from "../RoomLogoCover.module.scss";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import type { ICover } from "@docspace/ui-kit/types";
@@ -41,94 +41,6 @@ import { SelectIcon } from "./SelectIcon";
 
 import { ILogo, RoomLogoCoverProps } from "../RoomLogoCoverDialog.types";
 
-const RoomLogoCoverContainer = styled.div<{
-	isScrollLocked: boolean;
-}>`
-  color: ${(props) => props.theme.logoCover.textColor};
-  .room-logo-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 16px;
-    padding-right: 16px;
-  }
-
-  .color-select-container {
-    margin-bottom: 16px;
-  }
-
-  .color-name {
-    font-weight: 600;
-    font-size: 13px;
-    line-height: 20px;
-  }
-  .colors-container {
-    flex-wrap: nowrap;
-  }
-
-  .colors-container,
-  .cover-icon-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    box-sizing: border-box;
-    width: 390px;
-  }
-
-  @media ${tablet} {
-    .select-container {
-      text-align: center;
-    }
-    .select-color-container {
-      margin-bottom: 16px;
-    }
-
-    .cover-icon-container {
-      flex-wrap: wrap;
-      gap: 16px;
-      width: 432px;
-    }
-  }
-  @media ${mobile} {
-    .cover-icon-container {
-      width: 100%;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .color-select-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .room-logo-container {
-      padding-right: 0px;
-    }
-
-    .icon-select-container {
-      text-align: center;
-    }
-    .colors-container {
-      width: 100%;
-    }
-  }
-
-  .cover-icon-container,
-  .color-name {
-    user-select: none;
-  }
-
-  ${(props) =>
-		props.isScrollLocked &&
-		css`
-      .scroll-wrapper > .scroller {
-        overflow: hidden !important;
-      }
-    `}
-`;
 
 const RoomLogoCover = ({
 	isBaseTheme,
@@ -238,7 +150,7 @@ const RoomLogoCover = ({
 	);
 
 	return (
-		<RoomLogoCoverContainer ref={forwardedRef} isScrollLocked={isScrollLocked}>
+		<div ref={forwardedRef} className={`${styles.roomLogoCoverContainer}${isScrollLocked ? ` ${styles.scrollLocked}` : ""}`}>
 			<div className="room-logo-container">
 				<CustomLogo
 					isBaseTheme={!!isBaseTheme}
@@ -257,7 +169,7 @@ const RoomLogoCover = ({
 					</Scrollbar>
 				)}
 			</div>
-		</RoomLogoCoverContainer>
+		</div>
 	);
 };
 

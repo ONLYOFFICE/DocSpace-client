@@ -41,7 +41,6 @@ import {
 } from "./types";
 import { Nullable } from "../../types";
 import { Encoder } from "@docspace/ui-kit/utils/encoder";
-import { AI_TOOLS } from "@docspace/ui-kit/billing/constants";
 
 const baseURL = "/apisystem";
 
@@ -432,7 +431,6 @@ export function getPaymentTariff() {
 }
 
 export async function getServiceQuotaBalance(
-  serviceName: string = AI_TOOLS,
   refresh?: boolean,
   signal?: AbortSignal,
 ) {
@@ -440,7 +438,7 @@ export async function getServiceQuotaBalance(
 
   return request({
     method: "get",
-    url: `/portal/payment/customer/servicequota?serviceName=${serviceName}`,
+    url: `/portal/payment/customer/aibalance`,
     params,
     signal,
   }) as TBalance;
@@ -482,16 +480,7 @@ export async function saveDeposite(amount: number, currency: string) {
   }) as string;
 }
 
-export async function buyWalletService(quantity: number, serviceName: string) {
-  return request({
-    method: "post",
-    url: "/portal/payment/buywalletservice",
-    data: {
-      quantity,
-      serviceName,
-    },
-  }) as string;
-}
+
 
 export async function startTransactionHistoryReport(
   startDate: string,

@@ -42,12 +42,8 @@ import { DropDown } from "@docspace/ui-kit/components/drop-down";
 import { ColorPicker } from "@docspace/ui-kit/components/color-picker";
 import { SelectColorProps } from "../../RoomLogoCoverDialog.types";
 
-import {
-  StyledModalDialog,
-  StyledColorItem,
-  SelectedColorItem,
-  CustomSelectedColor,
-} from "./SelectColor.styled";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import styles from "../../RoomLogoCover.module.scss";
 
 export const SelectColor = ({
   logoColors,
@@ -95,26 +91,40 @@ export const SelectColor = ({
       <div className="colors-container">
         {logoColors.map((color, index) =>
           color === selectedColor ? (
-            <SelectedColorItem
+            <div
               key={color}
-              color={color}
+              className={styles.selectedColorItem}
+              style={{ "--item-color": color } as React.CSSProperties}
               data-testid={`color_item_selected_${index}`}
             >
-              <div className="circle" color={color} />
-            </SelectedColorItem>
+              <div className="circle" />
+            </div>
           ) : (
-            <StyledColorItem
+            <div
               key={color}
-              color={color}
+              className={styles.colorItem}
+              style={{ "--item-color": color } as React.CSSProperties}
               onClick={() => onChangeColor(color)}
               data-testid={`color_item_${index}`}
             />
           ),
         )}
         {roomColor ? (
-          <CustomSelectedColor
-            isSelected={isSelectedColorPicker}
-            color={pickerColor!}
+          <div
+            className={`${styles.customSelectedColor}${isSelectedColorPicker ? ` ${styles.isSelected}` : ""}${pickerColor === globalColors.white ? ` ${styles.whiteBorder}` : ""}`}
+            style={
+              {
+                "--item-color": pickerColor,
+                "--item-border-color":
+                  pickerColor === globalColors.white
+                    ? globalColors.black
+                    : pickerColor,
+                "--icon-fill":
+                  pickerColor === globalColors.white
+                    ? globalColors.black
+                    : globalColors.white,
+              } as React.CSSProperties
+            }
             ref={iconRef}
             data-testid="color_item_custom_selected"
           >
@@ -137,11 +147,10 @@ export const SelectColor = ({
                 isFill
               />
             )}
-          </CustomSelectedColor>
+          </div>
         ) : (
-          <StyledColorItem
-            isEmptyColor
-            isSelected={openColorPicker}
+          <div
+            className={`${styles.colorItem}${openColorPicker ? ` ${styles.isSelected}` : ""}`}
             ref={iconRef}
             data-testid="color_item_add_custom"
           >
@@ -152,10 +161,11 @@ export const SelectColor = ({
               onClick={onOpenColorPicker}
               isFill
             />
-          </StyledColorItem>
+          </div>
         )}
         {isMobile() ? (
-          <StyledModalDialog
+          <ModalDialog
+            className={styles.colorPickerModal}
             displayType={ModalDialogType.modal}
             visible={openColorPicker}
             onClose={() => setOpenColorPicker(false)}
@@ -173,7 +183,7 @@ export const SelectColor = ({
                 cancelButtonLabel={t("Common:CancelButton")}
               />
             </ModalDialog.Body>
-          </StyledModalDialog>
+          </ModalDialog>
         ) : (
           <DropDown
             directionY="both"

@@ -46,10 +46,6 @@
     justify-content: center;
     padding-inline: 0;
   }
-
-  @include mixins.mobile {
-    justify-content: center;
-  }
 }
 
 .logoWrapper {
@@ -82,8 +78,23 @@
   }
 }
 
-.footer {
+.bottom {
   flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+// ArticleProfile renders profileWrapper with position:absolute; bottom:0 —
+// override to place it in normal flex flow.
+.profileBlockWrapper {
+  > div {
+    position: static;
+    min-width: unset;
+    max-width: unset;
+  }
+}
+
+.footer {
   padding-block: 8px;
   padding-inline: 12px;
 

@@ -17,7 +17,7 @@
   "DeleteItemsSharedNote": "Als u ze met iemand heeft gedeeld, zijn ze niet meer beschikbaar.",
   "DeleteRoomConfirm": "De kamer <strong>{{roomName}}</strong> wordt permanent verwijderd. Alle data en gebruikersrechten gaan verloren.",
   "DeleteRooms": "De geselecteerde <strong>kamers ({{count}})</strong> worden permanent verwijderd. Alle data en gebruikers toegang zullen verloren gaan.",
-  "DeleteRoomsTitle": "Deze kamer verwijderen?",
+  "DeleteRoomsTitle": "Deze kamers verwijderen?",
   "DeleteRoomTitle": "Deze kamer verwijderen?",
   "DeleteRoomWarning": "Ik begrijp de gevolgen en wil de kamer verwijderen.",
   "DeleteTemplate": "Wilt u sjabloon kamer <1>“{{templateName}}”</1> echt verwijderen? Het sjabloon kan niet hersteld worden.",

@@ -24,67 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-
-export const GroupMemberRow = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 8px;
-
-  width: 100%;
-  height: 48px;
-
-  .avatar {
-  }
-
-  .info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 9px 0;
-    overflow: hidden;
-    margin-inline-end: 16px;
-
-    .info-box {
-      box-sizing: border-box;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      width: 100%;
-    }
-
-    .name {
-      color: ${({ theme }) => theme.sideBarRow.titleColor};
-      font-size: 14px;
-      font-weight: 600;
-      line-height: 16px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .email {
-      color: ${({ theme }) => theme.sideBarRow.metaDataColor};
-      font-size: 12px;
-      font-weight: 400;
-      line-height: 16px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      width: 100%;
-    }
-  }
-
-  .remove-icon {
-    cursor: pointer;
-    margin-inline-start: auto;
-
-    svg {
-      path {
-        fill: ${(props) => props.theme.createEditGroupDialog.iconFill};
-      }
-    }
-  }
-`;
+export type TApp = {
+  id: string;
+  enabled: boolean;
+  settings?: Record<string, unknown>;
+};

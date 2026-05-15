@@ -46,32 +46,37 @@ import {
   CreateSpreadsheetIcon,
 } from "@docspace/ui-kit/components/quick-actions/icons";
 
-import CatalogFolderIcon from "@docspace/ui-kit/assets/icons/16/catalog.folder.react.svg";
-import CatalogRoomsIcon from "@docspace/ui-kit/assets/icons/16/catalog.rooms.react.svg";
-import CatalogDocumentsIcon from "@docspace/ui-kit/assets/icons/16/catalog.documents.react.svg";
-import AiAgentsIcon from "@docspace/ui-kit/assets/icons/16/ai-agents.svg";
-
 import BgPatternGreenUrl from "PUBLIC_DIR/images/background.pattern.green.react.svg?url";
 
+import { useAppsCatalog, type AppId } from "SRC_DIR/helpers/apps-catalog";
+
 import { ModuleCard, type ModuleItem } from "./ModuleCard";
-import {
-  getGreetingKey,
-  isModuleInstalled,
-  makeCreateUrl,
-  NEW_FILE_NAMES,
-} from "./utils";
+import { getGreetingKey, makeCreateUrl, NEW_FILE_NAMES } from "./utils";
+import { InstallAiFormsDialog } from "./InstallModuleDialog";
 import styles from "./Dashboard.module.scss";
 
 interface DashboardProps {
   firstName?: string;
   pricingUrl?: string;
+  isAppEnabled: (id: string) => boolean;
+  ensureAppsLoaded: () => void;
 }
 
-const Dashboard = ({ firstName, pricingUrl }: DashboardProps) => {
+const Dashboard = ({
+  firstName,
+  pricingUrl,
+  isAppEnabled,
+  ensureAppsLoaded,
+}: DashboardProps) => {
   const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [myFolderId, setMyFolderId] = React.useState<number | null>(null);
+  const [installDialogVisible, setInstallDialogVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    ensureAppsLoaded();
+  }, [ensureAppsLoaded]);
 
   React.useEffect(() => {
     getPersonalFolderTree()
@@ -124,8 +129,19 @@ const Dashboard = ({ firstName, pricingUrl }: DashboardProps) => {
     [t, myFolderId],
   );
 
-  const handleInstall = () => {
+  const appsCatalog = useAppsCatalog();
+
+  const handleInstall = (modId: AppId) => {
+    if (modId === "ai-forms") {
+      setInstallDialogVisible(true);
+      return;
+    }
     toastr.info(t("Common:UnderDevelopment"));
+  };
+
+  const handleInstalled = () => {
+    setInstallDialogVisible(false);
+    navigate("/ai-forms");
   };
 
   const greetingName = firstName ? `, ${firstName}` : "";
@@ -147,38 +163,14 @@ const Dashboard = ({ firstName, pricingUrl }: DashboardProps) => {
     return <Navigate to="/dashboard" replace />;
   }
 
-  const moduleItems: ModuleItem[] = [
-    {
-      id: "ai-files",
-      icon: <CatalogFolderIcon />,
-      title: t("Common:DashboardAIFilesTitle"),
-      description: t("Common:DashboardAIFilesDescription"),
-      installed: isModuleInstalled("ai-files"),
-      href: "/ai-files",
-    },
-    {
-      id: "ai-rooms",
-      icon: <CatalogRoomsIcon />,
-      title: t("Common:DashboardAIRoomsTitle"),
-      description: t("Common:DashboardAIRoomsDescription"),
-      installed: isModuleInstalled("ai-rooms"),
-    },
-    {
-      id: "ai-forms",
-      icon: <CatalogDocumentsIcon />,
-      title: t("Common:DashboardAIFormsTitle"),
-      description: t("Common:DashboardAIFormsDescription"),
-      installed: isModuleInstalled("ai-forms"),
-      href: "/ai-forms",
-    },
-    {
-      id: "ai-agents",
-      icon: <AiAgentsIcon />,
-      title: t("Common:DashboardAIChatAgentsTitle"),
-      description: t("Common:DashboardAIChatAgentsDescription"),
-      installed: isModuleInstalled("ai-agents"),
-    },
-  ];
+  const moduleItems: ModuleItem[] = appsCatalog.map((app) => ({
+    id: app.id,
+    icon: app.icon,
+    title: app.title,
+    description: app.description,
+    installed: app.alwaysOn ? true : isAppEnabled(app.id),
+    href: app.href,
+  }));
 
   return (
     <div className={styles.dashboard}>
@@ -244,24 +236,30 @@ const Dashboard = ({ firstName, pricingUrl }: DashboardProps) => {
 
         <div className={styles.modulesGrid}>
           {moduleItems.map((mod) => (
-            <ModuleCard key={mod.id} mod={mod} onInstall={handleInstall} />
+            <ModuleCard
+              key={mod.id}
+              mod={mod}
+              onInstall={() => handleInstall(mod.id as AppId)}
+            />
           ))}
         </div>
       </section>
+
+      <InstallAiFormsDialog
+        visible={installDialogVisible}
+        onClose={() => setInstallDialogVisible(false)}
+        onInstalled={handleInstalled}
+      />
     </div>
   );
 };
 
-const DashboardConnected = inject(
-  ({
-    userStore,
-    settingsStore,
-  }: {
-    userStore: { user: { firstName?: string } | null };
-    settingsStore: { docspacePricesUrl?: string };
-  }) => ({
+const DashboardConnected = inject<TStore>(
+  ({ userStore, settingsStore, appsStore }) => ({
     firstName: userStore.user?.firstName,
     pricingUrl: settingsStore.docspacePricesUrl,
+    isAppEnabled: appsStore.isEnabled,
+    ensureAppsLoaded: appsStore.ensureLoaded,
   }),
 )(observer(Dashboard));
 

@@ -24,53 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
+import { inject, observer } from "mobx-react";
+
 import {
-  Avatar,
-  AvatarRole,
-  AvatarSize,
-} from "@docspace/ui-kit/components/avatar";
-import { Text } from "@docspace/ui-kit/components/text";
-import { Encoder } from "@docspace/ui-kit/utils/encoder";
-import type { TUser } from "@docspace/shared/api/people/types";
+  ArticleProfile,
+  type ArticleProfileProps,
+} from "@docspace/ui-kit/components/article";
+import { DeviceType } from "@docspace/shared/enums";
 
-import styles from "./ProfileBlock.module.scss";
+type ProfileBlockInjectedProps = Pick<ArticleProfileProps, "user" | "showText">;
 
-type ProfileBlockProps = {
-  user: TUser;
-  showText: boolean;
-};
+// ArticleProfile switches to compact (tablet) mode based on currentDeviceType.
+// We mirror that: when the sidebar is collapsed (showText=false) pass tablet,
+// so the avatar shrinks and avatar-click opens the context menu instead of navigating.
+const ProfileBlockInner = observer(
+  ({ showText, ...rest }: ArticleProfileProps) => (
+    <ArticleProfile
+      {...rest}
+      showText={showText}
+      currentDeviceType={
+        showText ? rest.currentDeviceType : DeviceType.tablet
+      }
+    />
+  ),
+);
 
-const ProfileBlock = ({ user, showText }: ProfileBlockProps) => {
-  const displayName = user.displayName
-    ? Encoder.htmlDecode(user.displayName)
-    : "";
+const ProfileBlockConnected = inject<TStore>(
+  ({ settingsStore, profileActionsStore }) => ({
+    currentDeviceType: settingsStore.currentDeviceType,
+    getActions: profileActionsStore.getActions,
+    onProfileClick: profileActionsStore.onProfileClick,
+  }),
+)(ProfileBlockInner) as unknown as React.ComponentType<ProfileBlockInjectedProps>;
 
-  return (
-    <div
-      className={styles.profileBlock}
-      data-show-text={showText ? "true" : "false"}
-      onClick={() => window.location.assign("/profile")}
-    >
-      <Avatar
-        className={styles.avatar}
-        size={AvatarSize.min}
-        role={AvatarRole.user}
-        source={user.avatar || ""}
-        userName={displayName}
-      />
-      {showText ? (
-        <Text
-          className={styles.name}
-          fontWeight={600}
-          noSelect
-          truncate
-          dir="auto"
-        >
-          {displayName}
-        </Text>
-      ) : null}
-    </div>
-  );
-};
-
-export default ProfileBlock;
+export default ProfileBlockConnected;

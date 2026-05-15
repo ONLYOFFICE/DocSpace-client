@@ -24,38 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+import React from "react";
 
-export const StyledBodyContent = styled.div<{
-  needReassignData: boolean;
-}>`
-  display: contents;
+import type { TFileItem, TFolderItem } from "../_hooks/useItemList";
 
-  .user-delete {
-    line-height: 20px;
-
-    padding-bottom: 16px;
-  }
-
-  .text-warning {
-    color: ${(props) => props.theme.peopleDialogs.deleteUser.textColor};
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 22px;
-  }
-
-  .text-delete-description {
-    line-height: 20px;
-    padding: 8px 0;
-
-    ${(props) =>
-      !props.needReassignData &&
-      css`
-        padding-bottom: 0;
-      `}
-  }
-
-  .reassign-data {
-    line-height: 15px;
-  }
-`;
+/**
+ * When set, provides a callback to open the Info panel (Details tab) for a file/folder.
+ * Wired in the layout that owns the InfoPanel instance.
+ */
+export const InfoContext = React.createContext<
+  ((item: TFileItem | TFolderItem) => void) | null
+>(null);

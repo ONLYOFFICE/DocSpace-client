@@ -17,7 +17,7 @@
   "DeleteItemsSharedNote": "Bitte beachten Sie, dass die Daten nicht mehr verfügbar sind, wenn Sie diese mit jemandem geteilt haben.",
   "DeleteRoomConfirm": "Der Raum <strong>\"{{roomName}}\"</strong> wird dauerhaft gelöscht. Alle Daten und Benutzerzugriffe gehen verloren.",
   "DeleteRooms": "Die ausgewählten <strong>Räume ({{count}})</strong> werden dauerhaft gelöscht. Alle Daten und Benutzerzugriffe gehen verloren.",
-  "DeleteRoomsTitle": "Diesen Raum löschen?",
+  "DeleteRoomsTitle": "Diese Räume löschen?",
   "DeleteRoomTitle": "Raum löschen?",
   "DeleteRoomWarning": "Ich verstehe die Konsequenzen und möchte den Raum löschen.",
   "DeleteTemplate": "Möchten Sie den Vorlagenraum <1>«{{templateName}}»</1> wirklich löschen? Die Vorlage kann nicht wiederhergestellt werden.",

@@ -109,8 +109,8 @@ const InfoPanelHeaderGeneral = ({
         isTemplate ? t("Common:Accesses") : t("Common:Contacts"),
       )
       .with(InfoPanelView.infoShare, () => t("Common:Share"))
-      .with(InfoPanelView.infoHistory, () => t("InfoPanel:SubmenuHistory"))
-      .with(InfoPanelView.infoDetails, () => t("InfoPanel:SubmenuDetails"))
+      .with(InfoPanelView.infoHistory, () => t("Common:SubmenuHistory"))
+      .with(InfoPanelView.infoDetails, () => t("Common:SubmenuDetails"))
       .with(InfoPanelView.infoAIChat, () => t("InfoPanel:SubmenuAIChat"))
       .otherwise(() => {
         const key = id.replace("info_plugin-", "");

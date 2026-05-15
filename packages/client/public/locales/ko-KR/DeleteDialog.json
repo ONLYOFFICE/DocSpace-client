@@ -17,7 +17,7 @@
   "DeleteItemsSharedNote": "사용할 수 없게 되므로, 다른 사람과 공유한 경우 주의하시기 바랍니다.",
   "DeleteRoomConfirm": "방 <strong>\"{{roomName}}\"</strong>은 영구적으로 삭제됩니다. 모든 데이터 및 사용자 접근 권한은 사라집니다.",
   "DeleteRooms": "선택한 <strong>방({{count}})</strong>이 영구적으로 삭제됩니다. 모든 데이터와 사용자 액세스가 손실됩니다.",
-  "DeleteRoomsTitle": "이 방을 삭제하시겠습니까?",
+  "DeleteRoomsTitle": "이 방들을 삭제하시겠습니까?",
   "DeleteRoomTitle": "이 방 삭제하시겠습니까?",
   "DeleteRoomWarning": "결과를 이해하며 방을 삭제하고 싶습니다.",
   "DeleteTemplate": "정말로 <1>«{{templateName}}»</1> 룸 템플릿을 삭제하시겠습니까? 템플릿을 삭제하면 복원할 수 없습니다.",

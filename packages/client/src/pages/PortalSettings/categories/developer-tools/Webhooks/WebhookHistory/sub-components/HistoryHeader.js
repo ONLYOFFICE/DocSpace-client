@@ -62,7 +62,7 @@ const NavigationHeader = ({ t, onBack }) => (
       className="arrow-button"
     />
     <Heading type="content" truncate className="headline">
-      {t("InfoPanel:SubmenuHistory")}
+      {t("Common:SubmenuHistory")}
     </Heading>
   </>
 );

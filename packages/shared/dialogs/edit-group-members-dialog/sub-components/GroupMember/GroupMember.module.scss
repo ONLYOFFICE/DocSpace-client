@@ -24,15 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+@use "@docspace/ui-kit/styles/variables/colors" as *;
 
-import SendClockIcon from "PUBLIC_DIR/images/send.clock.react.svg";
-
-import { injectDefaultTheme, commonIconsStyles } from "../../../../utils";
-
-export const GroupMember = styled.div.attrs(injectDefaultTheme)<{
-  isExpect: boolean;
-}>`
+.groupMember {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -43,19 +37,19 @@ export const GroupMember = styled.div.attrs(injectDefaultTheme)<{
     min-height: 32px;
   }
 
-  .user_body-wrapper {
+  .userBodyWrapper {
     overflow: auto;
   }
 
   .info,
-  .role-email {
+  .roleEmail {
     display: flex;
   }
 
   .info {
     flex-direction: column;
 
-    .info-box {
+    .infoBox {
       box-sizing: border-box;
       display: flex;
       align-items: center;
@@ -70,56 +64,69 @@ export const GroupMember = styled.div.attrs(injectDefaultTheme)<{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    ${(props) =>
-      props.isExpect && `color: ${props.theme.infoPanel.members.isExpectName}`};
   }
 
   .email {
-    color: ${({ theme }) => theme.sideBarRow.metaDataColor};
+    color: $gray;
     font-size: 12px;
     line-height: 16px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
+    :global(.dark) & {
+      color: $gray-dark;
+    }
   }
 
-  .me-label {
+  .meLabel {
     font-weight: 600;
     font-size: 14px;
     line-height: 16px;
-    color: ${(props) => props.theme.infoPanel.members.meLabelColor};
+    color: $gray;
     padding-inline-start: 8px;
     margin-inline-start: -8px;
   }
 
-  .individual-rights-tooltip {
+  .individualRightsTooltip {
     margin-inline-start: auto;
   }
 
-  .role-wrapper {
+  .roleWrapper {
     font-weight: 600;
     font-size: 13px;
     line-height: 20px;
     white-space: nowrap;
 
-    .disabled-role-combobox {
-      color: ${(props) =>
-        props.theme.infoPanel.members.disabledRoleSelectorColor};
-
+    .disabledRoleCombobox {
+      color: $gray;
       margin-inline-end: 16px;
     }
 
-    .combo-button {
+    :global(.combo-button) {
       padding: 0 8px;
     }
   }
-`;
+}
 
-export const StyledSendClockIcon = styled(SendClockIcon)`
-  min-width: 12px;
-
-  ${commonIconsStyles}
-  path {
-    fill: ${(props) => props.theme.accountsBadges.pendingColor};
+.groupMemberExpect {
+  .name {
+    color: $gray;
   }
-`;
+}
+
+.sendClockIcon {
+  min-width: 12px;
+  overflow: hidden;
+  vertical-align: middle;
+
+  path {
+    fill: $gray;
+  }
+
+  :global(.dark) & {
+    path {
+      fill: $gray-dark;
+    }
+  }
+}

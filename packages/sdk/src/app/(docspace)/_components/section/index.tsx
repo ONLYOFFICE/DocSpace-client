@@ -41,6 +41,11 @@ type SectionProps = {
   sectionFilterContent: React.ReactNode;
   sectionBodyContent: React.ReactNode;
 
+  infoPanelHeaderContent?: React.ReactNode;
+  infoPanelBodyContent?: React.ReactNode;
+  isInfoPanelVisible?: boolean;
+  setIsInfoPanelVisible?: (visible: boolean) => void;
+
   isEmptyPage: boolean;
   filesFilter: string;
 
@@ -54,6 +59,10 @@ export const SectionWrapper = observer(
     sectionHeaderContent,
     sectionFilterContent,
     sectionBodyContent,
+    infoPanelHeaderContent,
+    infoPanelBodyContent,
+    isInfoPanelVisible,
+    setIsInfoPanelVisible,
     isEmptyPage,
     filesFilter,
     showFilter = true,
@@ -76,6 +85,10 @@ export const SectionWrapper = observer(
 
     const isEmptyList = settingsStore.isEmptyList || isEmptyPage;
 
+    const showInfoPanel = !!(
+      infoPanelHeaderContent || infoPanelBodyContent
+    );
+
     return (
       <Section
         withBodyScroll
@@ -83,6 +96,10 @@ export const SectionWrapper = observer(
         viewAs={viewAs ?? settingsStore.filesViewAs ?? "row"}
         isEmptyPage={isEmptyList}
         currentDeviceType={currentDeviceType}
+        isInfoPanelAvailable={showInfoPanel}
+        isInfoPanelVisible={isInfoPanelVisible}
+        setIsInfoPanelVisible={setIsInfoPanelVisible}
+        canDisplay={showInfoPanel}
       >
         <Section.SectionHeader>{sectionHeaderContent}</Section.SectionHeader>
 
@@ -91,6 +108,9 @@ export const SectionWrapper = observer(
         </Section.SectionFilter>
 
         <Section.SectionBody>{sectionBodyContent}</Section.SectionBody>
+
+        <Section.InfoPanelHeader>{infoPanelHeaderContent}</Section.InfoPanelHeader>
+        <Section.InfoPanelBody>{infoPanelBodyContent}</Section.InfoPanelBody>
       </Section>
     );
   },

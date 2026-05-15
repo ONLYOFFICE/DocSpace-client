@@ -79,7 +79,6 @@ const Item = ({
 	t,
 	item,
 	index,
-	theme,
 	setInviteItems,
 	inviteItems,
 	changeInviteItem,
@@ -356,7 +355,7 @@ const Item = ({
 						}
 						openOnClick={false}
 						size={16}
-						color={theme.infoPanel.errorColor}
+						color="--warning-color"
 					/>
 					<DeleteIcon
 						className={classNames(styles.rowIcons, {

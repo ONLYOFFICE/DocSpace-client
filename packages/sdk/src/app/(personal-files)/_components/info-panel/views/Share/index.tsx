@@ -24,18 +24,52 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+"use client";
 
-import { Text } from "@docspace/ui-kit/components/text";
+import React from "react";
+import { observer } from "mobx-react";
 
-export const StyledHeaderText = styled(Text)`
-  margin-inline-end: 16px;
-`;
+import Share from "@docspace/shared/components/share";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
-export const StyledBodyContent = styled.div`
-  height: 100%;
+import { useInfoPanelStore } from "../../../../_store/InfoPanelStore";
+import { useDocsUserStore } from "../../../../_store/DocsUserStore";
+import { useShareData } from "../../../../_hooks/useShareData";
 
-  .search-input {
-    margin: 16px 16px 12px;
-  }
-`;
+type ShareViewProps = {
+  selection: TFile | TFolder;
+};
+
+const ShareView = observer(({ selection }: ShareViewProps) => {
+  const infoPanelStore = useInfoPanelStore();
+  const docsUserStore = useDocsUserStore();
+
+  const {
+    shareChanged,
+    setShareChanged,
+    setEditLinkPanelIsVisible,
+    setLinkParams,
+    setEmbeddingPanelData,
+  } = infoPanelStore;
+
+  const { filesLink } = useShareData({ selection });
+
+  const selfId = docsUserStore.user?.id ?? "";
+
+  return (
+    <Share
+      infoPanelSelection={selection}
+      fileLinkProps={filesLink}
+      selfId={selfId}
+      shareChanged={shareChanged}
+      setShareChanged={setShareChanged}
+      setEditLinkPanelIsVisible={setEditLinkPanelIsVisible}
+      setLinkParams={setLinkParams}
+      setEmbeddingPanelData={setEmbeddingPanelData}
+      disabledSharedUser
+      hideLinkTypeSelector
+    />
+  );
+});
+
+export default ShareView;

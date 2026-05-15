@@ -24,64 +24,55 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { injectDefaultTheme } from "@docspace/shared/utils";
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { RoomsType, ShareAccessRights } from "@docspace/ui-kit/enums";
+import { createRoom, setRoomSecurity } from "@docspace/shared/api/rooms";
+import { createFile } from "@docspace/shared/api/files";
+import type { TRoom } from "@docspace/shared/api/rooms/types";
 
-export const ModalDialogStyled = styled(ModalDialog).attrs(injectDefaultTheme)`
-  .info {
-    line-height: 20px;
-    padding-bottom: 16px;
-  }
+export const AI_FORMS_ROOM_TITLE = "AI Forms";
+export const AI_FORMS_BLANK_FORM_TITLE = "Untitled form.pdf";
 
-  ${(props) =>
-    !props.isLarge &&
-    `
-        .info:last-child {
-            padding-bottom: 0;
-        }
-        `};
+// System group id for "Everyone" — used to invite all portal users at once.
+const EVERYONE_GROUP_ID = "c5cc67d1-c3e8-43c0-a3ad-3928ae3e5b5e";
 
-  .item-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    border: ${({ theme }) => theme.oformGallery.submitToGalleryTile.border};
-    border-radius: 6px;
-    padding: 4px;
-    width: max-content;
-    user-select: none;
-  }
+export type AiFormsInstallStepId =
+  | "create-room"
+  | "invite-everyone"
+  | "create-blank-form";
 
-  .icon {
-    width: 24px;
-    height: 24px;
-    margin-inline-end: 4px;
-    svg {
-      width: 24px;
-      height: 24px;
-    }
-  }
+export const AI_FORMS_INSTALL_STEPS: AiFormsInstallStepId[] = [
+  "create-room",
+  "invite-everyone",
+  "create-blank-form",
+];
 
-  .item-title {
-    font-weight: 600;
-    font-size: 13px;
-    display: flex;
-    min-width: 0;
-    gap: 0;
+export interface InstallAiFormsResult {
+  roomId: number;
+}
 
-    .name {
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-    }
+export const installAiFormsModule = async (
+  onStep: (step: AiFormsInstallStepId) => void,
+): Promise<InstallAiFormsResult> => {
+  onStep("create-room");
+  const room = (await createRoom({
+    title: AI_FORMS_ROOM_TITLE,
+    roomType: RoomsType.FormRoom,
+  })) as TRoom;
 
-    .exst {
-      flex-shrink: 0;
-      color: ${({ theme }) => theme.oformGallery.submitToGalleryTile.colorExt};
-    }
-  }
-`;
+  onStep("invite-everyone");
+  await setRoomSecurity(room.id, {
+    invitations: [
+      {
+        id: EVERYONE_GROUP_ID,
+        access: ShareAccessRights.FormFilling,
+      },
+    ],
+    notify: false,
+    message: "",
+  });
+
+  onStep("create-blank-form");
+  await createFile(room.id, AI_FORMS_BLANK_FORM_TITLE);
+
+  return { roomId: room.id };
+};

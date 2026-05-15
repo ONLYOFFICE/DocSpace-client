@@ -24,32 +24,47 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+"use client";
+
+import React from "react";
+import { useTranslation } from "react-i18next";
+
 import { Text } from "@docspace/ui-kit/components/text";
-import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
-export const SystemFoldersTitle = styled(Text)`
-  font-weight: 600;
-  line-height: 20px;
-`;
+import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/emptyview/empty.files.info.light.svg?url";
+import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/emptyview/empty.files.info.dark.svg?url";
 
-export const SystemFoldersDescription = styled(Text)`
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
-  color: ${(props) =>
-    props.theme.createEditRoomDialog.roomType.dropdownItem.descriptionText};
-`;
+import styles from "./EmptyStates.module.scss";
 
-export const SystemFoldersHeader = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+export const NoItem = () => {
+  const { t } = useTranslation(["Common"]);
+  const { isBase } = useTheme();
 
-  margin-bottom: 2px;
-`;
+  const imgSrc = isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl;
 
-export const SystemFoldersToggleButton = styled(ToggleButton)`
-  width: 30px;
-  height: 16px;
-`;
+  return (
+    <div className={styles.noItemContainer}>
+      {/* biome-ignore lint/performance/noImgElement: static SVG via ?url import */}
+      <img className={styles.image} src={imgSrc} alt="No item" />
+      <Text className={styles.text}>{t("Common:FilesEmptyScreenText")}</Text>
+    </div>
+  );
+};
+
+export const SeveralItems = ({ count }: { count: number }) => {
+  const { t } = useTranslation(["Common"]);
+  const { isBase } = useTheme();
+
+  const imgSrc = isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl;
+
+  return (
+    <div className={styles.severalItemsContainer}>
+      {/* biome-ignore lint/performance/noImgElement: static SVG via ?url import */}
+      <img className={styles.image} src={imgSrc} alt="Several items" />
+      <Text fontSize="16px" fontWeight={700}>
+        {`${t("Common:ItemsSelected")}: ${count}`}
+      </Text>
+    </div>
+  );
+};

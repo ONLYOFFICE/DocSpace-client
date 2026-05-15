@@ -24,83 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import styled from "styled-components";
+.noItemContainer {
+  width: 100%;
+  padding-top: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 32px;
 
-const StyledWatermark = styled.div<{
-  isEdit?: boolean;
-  rotate?: number;
-  scale?: number;
-}>`
-  margin-top: 16px;
-
-  .watermark-title {
-    margin: 16px 0 8px 0;
-  }
-  .title-without-top {
-    margin-top: 0px;
-  }
-  .watermark-checkbox {
-    margin: 18px 0 0 0;
+  .image {
+    width: 150px;
+    height: 105px;
   }
 
-  .options-wrapper {
-    display: grid;
-    grid-template-rows: 56px 56px;
-    gap: 16px;
-
-    .options {
-      color: ${(props) => props.theme.comboBox.label.selectedColor};
-    }
+  .text {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
   }
+}
 
-  .image-wrapper {
-    display: grid;
-    grid-template-columns: 216px auto;
-    gap: 16px;
+.severalItemsContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  padding-top: 80px;
 
-    .image-description {
-      display: flex;
-      gap: 8px;
-      align-items: baseline;
-
-      .image-watermark_text {
-        margin-bottom: 8px;
-      }
-    }
-
-    .image-watermark_wrapper {
-      width: 216px;
-      height: 216px;
-      border: 1px solid ${globalColors.grayLightMid};
-
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      img {
-        width: 88%;
-        height: 88%;
-        transform: ${(props) =>
-          `rotate(${props.rotate}deg) scale(${props.scale})`};
-
-        opacity: 0.4;
-        margin: auto;
-      }
-    }
+  .image {
+    width: 150px;
   }
-
-  .watermark-tab_items {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding-bottom: 20px;
-  }
-`;
-const StyledBody = styled.div`
-  .types-content {
-  }
-`;
-
-export { StyledWatermark, StyledBody };
+}

@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { isMobile } from "react-device-detect";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
+import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 
 import CheckBoxReactSvgUrl from "PUBLIC_DIR/images/check-box.react.svg?url";
 import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
@@ -21,6 +22,7 @@ import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 import DuplicateReactSvgUrl from "PUBLIC_DIR/images/icons/16/duplicate.react.svg?url";
 import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
 import RenameReactSvgUrl from "PUBLIC_DIR/images/rename.react.svg?url";
+import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
 import { useFilesSelectionStore } from "../_store/FilesSelectionStore";
 import { AVAILABLE_CONTEXT_ITEMS } from "../_enums/context-items";
@@ -34,6 +36,7 @@ import useFavoritesActions from "./useFavoritesActions";
 type UseContextMenuModelProps = {
   item?: TFileItem | TFolderItem;
   onShareClick?: (item: TFileItem | TFolderItem) => void;
+  onInfoClick?: (item: TFileItem | TFolderItem) => void;
   onDeleteClick?: (item: TFileItem | TFolderItem) => void;
   onDeleteSelectedClick?: (items: (TFileItem | TFolderItem)[]) => void;
   onCopyClick?: (item: TFileItem | TFolderItem) => void;
@@ -49,6 +52,7 @@ type UseContextMenuModelProps = {
 export default function useContextMenuModel({
   item,
   onShareClick,
+  onInfoClick,
   onDeleteClick,
   onDeleteSelectedClick,
   onCopyClick,
@@ -319,6 +323,21 @@ export default function useContextMenuModel({
     [t, onMoveClick],
   );
 
+  const getShowInfoItem = useCallback(
+    (i: TFileItem | TFolderItem) => {
+      const isFolder = "isFolder" in i && i.isFolder;
+      return {
+        id: "option_show-info",
+        key: "show-info",
+        label: isFolder ? t("Common:FolderInfo") : t("Common:FileInfo"),
+        icon: InfoOutlineReactSvgUrl,
+        onClick: () => onInfoClick?.(i),
+        disabled: !onInfoClick,
+      };
+    },
+    [t, onInfoClick],
+  );
+
   const getRenameItem = useCallback(
     (i: TFileItem | TFolderItem) => {
       return {
@@ -522,75 +541,118 @@ export default function useContextMenuModel({
         }
       }
 
-      const model = [];
+      const openGroup: ContextMenuModel[] = [];
+      const actionGroup: ContextMenuModel[] = [];
+      const favoritesGroup: ContextMenuModel[] = [];
+      const deleteGroup: ContextMenuModel[] = [];
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.select))
-        model.push(getSelectItem(item!));
+        openGroup.push(getSelectItem(item!));
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.open))
-        model.push(getOpenItem(item!));
+        openGroup.push(getOpenItem(item!));
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.view))
-        model.push(getViewItem(item as TFileItem));
+        openGroup.push(getViewItem(item as TFileItem));
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.openPDF))
-        model.push(getOpenPDFItem(item as TFileItem));
+        openGroup.push(getOpenPDFItem(item as TFileItem));
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.fillForm))
-        model.push(getFillFormItem(item as TFileItem));
+        openGroup.push(getFillFormItem(item as TFileItem));
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.edit))
-        model.push(getEditItem(item as TFileItem));
+        openGroup.push(getEditItem(item as TFileItem));
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.preview))
-        model.push(getPreviewItem(item as TFileItem));
+        openGroup.push(getPreviewItem(item as TFileItem));
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.share))
-        model.push(getShareItem(item!));
+        actionGroup.push(getShareItem(item!));
+
+      const moveOrCopyItems: ContextMenuModel[] = [];
+      if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.moveTo))
+        moveOrCopyItems.push(getMoveToItem(item!));
+      if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.copy))
+        moveOrCopyItems.push(getCopyItem(item!));
+      if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.duplicate))
+        moveOrCopyItems.push(getDuplicateItem(item!));
+
+      if (moveOrCopyItems.length) {
+        actionGroup.push({
+          id: "option_move-or-copy",
+          key: "move-or-copy",
+          label: t("Common:MoveOrCopy"),
+          icon: MoveReactSvgUrl,
+          items: moveOrCopyItems,
+        });
+      }
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.copyLink))
-        model.push(getLinkForRoomMembersItem(item!));
+        actionGroup.push(getLinkForRoomMembersItem(item!));
 
-      if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.download))
-        model.push(getDownloadItem(item));
+      const hasDownload = contextOptions.includes(
+        AVAILABLE_CONTEXT_ITEMS.download,
+      );
+      const hasDownloadAs = contextOptions.includes(
+        AVAILABLE_CONTEXT_ITEMS.downloadAs,
+      );
 
-      if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.downloadAs))
-        model.push(getDownloadAsItem());
-
-      if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.moveTo))
-        model.push(getMoveToItem(item!));
-
-      if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.copy))
-        model.push(getCopyItem(item!));
-
-      if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.duplicate))
-        model.push(getDuplicateItem(item!));
+      if (hasDownload && hasDownloadAs) {
+        actionGroup.push({
+          id: "option_download-menu",
+          key: "download-menu",
+          label: t("Common:Download"),
+          icon: DownloadReactSvgUrl,
+          items: [getDownloadItem(item), getDownloadAsItem()],
+        });
+      } else if (hasDownload) {
+        actionGroup.push(getDownloadItem(item));
+      } else if (hasDownloadAs) {
+        actionGroup.push(getDownloadAsItem());
+      }
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.rename))
-        model.push(getRenameItem(item!));
+        actionGroup.push(getRenameItem(item!));
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.restore))
-        model.push(getRestoreItem(item!));
+        actionGroup.push(getRestoreItem(item!));
+
+      if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.showInfo))
+        actionGroup.push(getShowInfoItem(item!));
 
       if (
         contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.markAsFavorite) ||
         contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.removeFromFavorites)
       ) {
         if (item!.isFavorite) {
-          model.push(getRemoveFromFavoritesItem(item!));
+          favoritesGroup.push(getRemoveFromFavoritesItem(item!));
         } else {
-          model.push(getMarkAsFavoriteItem(item!));
+          favoritesGroup.push(getMarkAsFavoriteItem(item!));
         }
       }
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.removeFromRecent))
-        model.push(getRemoveFromRecentItem(item as TFileItem));
+        favoritesGroup.push(getRemoveFromRecentItem(item as TFileItem));
 
       if (
         contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.delete) ||
         contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.deletePermanently)
       )
-        model.push(getDeleteItem(item!));
+        deleteGroup.push(getDeleteItem(item!));
+
+      const groups = [openGroup, actionGroup, favoritesGroup, deleteGroup];
+      const model: ContextMenuModel[] = [];
+      groups.forEach((group) => {
+        if (!group.length) return;
+        if (model.length) {
+          model.push({
+            key: `separator-${model.length}`,
+            isSeparator: true,
+          });
+        }
+        model.push(...group);
+      });
 
       return model;
     },
@@ -615,6 +677,7 @@ export default function useContextMenuModel({
       getMoveToItem,
       getRenameItem,
       getRestoreItem,
+      getShowInfoItem,
       getDeleteItem,
       getHeaderContextMenuModel,
       getGroupContextMenuModel,

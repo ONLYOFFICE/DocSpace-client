@@ -3,7 +3,7 @@
   "content": "Contacts",
   "content_en_sha1_hash": "b0dd615cbbdcbf21ffb72115599ca915634fcb85",
   "created_at": "2025-05-19T21:30:43.662Z",
-  "updated_at": "2026-05-15T14:00:06.627Z",
+  "updated_at": "2026-05-15T15:37:40.174Z",
   "comment": {
     "text": "This is a header label for a people selector or invitation panel, identifying the section as \"Contacts\".",
     "is_auto": true,
@@ -55,7 +55,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 163,
+      "line_number": 157,
       "context": "t={t}\n i18nKey=\"GroupsSectionDescription\"\n ns=\"Settings\"\n values={{\n serviceName,\n sectionName: t(\"Common:Contacts\"),\n }}\n components={{\n 1: <span />,\n }}\n />",
       "module": "/packages/client"
     },

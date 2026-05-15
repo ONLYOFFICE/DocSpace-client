@@ -3,7 +3,7 @@
   "content": "Name",
   "content_en_sha1_hash": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
   "created_at": "2025-05-19T21:30:46.029Z",
-  "updated_at": "2026-05-15T14:00:06.629Z",
+  "updated_at": "2026-05-15T15:37:40.174Z",
   "comment": {
     "text": "This is a label for an input field. It prompts the user to enter a name for a group or a room.",
     "is_auto": true,
@@ -14,19 +14,19 @@
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditGroupDialog/sub-components/GroupNameParam/index.tsx",
       "line_number": 57,
-      "context": "const { t } = useTranslation([\"Common\"]);\n \n return (\n <Styled.GroupNameParam>\n <Label\n title={t(\"Common:Label\")}\n className=\"input-label\"\n display=\"display\"\n htmlFor=\"create-group-name\"\n text={t(\"Common:Label\")}\n />",
+      "context": "const { t } = useTranslation([\"Common\"]);\n \n return (\n <div className={styles.groupNameParam}>\n <Label\n title={t(\"Common:Label\")}\n className=\"input-label\"\n display=\"display\"\n htmlFor=\"create-group-name\"\n text={t(\"Common:Label\")}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditGroupDialog/sub-components/GroupNameParam/index.tsx",
       "line_number": 57,
-      "context": "const { t } = useTranslation([\"Common\"]);\n \n return (\n <Styled.GroupNameParam>\n <Label\n title={t(\"Common:Label\")}\n className=\"input-label\"\n display=\"display\"\n htmlFor=\"create-group-name\"\n text={t(\"Common:Label\")}\n />",
+      "context": "const { t } = useTranslation([\"Common\"]);\n \n return (\n <div className={styles.groupNameParam}>\n <Label\n title={t(\"Common:Label\")}\n className=\"input-label\"\n display=\"display\"\n htmlFor=\"create-group-name\"\n text={t(\"Common:Label\")}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/SetRoomParams.js",
-      "line_number": 491,
-      "context": "const tagsTitle = isTemplateSelected || isTemplate ? t(\"Files:RoomTagsLabel\") : \"\";\n \n const inputTitle =\n isTemplateSelected || isTemplate\n ? `${t(\"Files:TemplateName\")}:`\n : `${t(\"Common:Label\")}:`;\n \n return (\n <StyledSetRoomParams disableImageRescaling={disableImageRescaling}>\n {isEdit || disabledChangeRoomType || isTemplateSelected || isTemplate ? (\n <RoomType",
+      "line_number": 435,
+      "context": "const tagsTitle = isTemplateSelected || isTemplate ? t(\"Files:RoomTagsLabel\") : \"\";\n \n const inputTitle =\n isTemplateSelected || isTemplate\n ? `${t(\"Files:TemplateName\")}:`\n : `${t(\"Common:Label\")}:`;\n \n return (\n <div\n className={`${styles.setRoomParams}${disableImageRescaling ? ` ${styles.disableImageRescaling}` : \"\"}`}\n >",
       "module": "/packages/client"
     },
     {

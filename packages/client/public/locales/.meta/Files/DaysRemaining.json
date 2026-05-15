@@ -3,7 +3,7 @@
   "content": "Days remaining: {{daysRemaining}}",
   "content_en_sha1_hash": "0e94f2f4c0003d4ac110575e4374ddbe1195c476",
   "created_at": "2025-05-19T21:30:55.420Z",
-  "updated_at": "2026-05-15T14:00:06.746Z",
+  "updated_at": "2026-05-15T15:37:40.222Z",
   "comment": {
     "text": "This text appears in file and folder lists, indicating the number of days until an item is permanently deleted. `{{daysRemaining}}` is a number representing the remaining days.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/sub-components/ErasureCell.js",
-      "line_number": 41,
-      "context": "import React from \"react\";\n import { StyledText } from \"./CellStyles\";\n \n const ErasureCell = ({ t, sideColor, item }) => {\n const { daysRemaining } = item;\n const title = t(\"Files:DaysRemaining\", { daysRemaining });\n \n return (\n <StyledText\n title={title}\n fontSize=\"12px\"",
+      "line_number": 43,
+      "context": "import styles from \"./CellStyles.module.scss\";\n \n const ErasureCell = ({ t, sideColor, item }) => {\n const { daysRemaining } = item;\n const title = t(\"Files:DaysRemaining\", { daysRemaining });\n \n return (\n <Text\n title={title}\n fontSize=\"12px\"",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Add",
   "content_en_sha1_hash": "61cc55aa0453184734c3fa0b621eda6fa874bd83",
   "created_at": "2025-05-19T21:30:42.915Z",
-  "updated_at": "2026-05-15T14:00:06.622Z",
+  "updated_at": "2026-05-15T15:37:40.172Z",
   "comment": {
     "text": "This is a button label that initiates an \"add\" action, such as adding a file, a server, or an item to a selection.",
     "is_auto": true,
@@ -43,14 +43,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/MultiInputGroup.tsx",
-      "line_number": 229,
-      "context": "fontSize=\"13px\"\n fontWeight={400}\n lineHeight=\"20px\"\n truncate\n >\n {t(\"Common:AddButton\")}\n </Text>\n <ArrowIcon />\n </div>\n </StyledInputAddBlock>\n <AddButton",
+      "line_number": 225,
+      "context": "fontSize=\"13px\"\n fontWeight={400}\n lineHeight=\"20px\"\n truncate\n >\n {t(\"Common:AddButton\")}\n </Text>\n <ArrowIcon />\n </div>\n </div>\n <AddButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/FilterDialog/DeliveryDatePicker.js",
-      "line_number": 317,
-      "context": "/>\n </TimePickerCell>\n ) : (\n <TimePickerCell>\n <AddButton\n title={t(\"Common:AddButton\")}\n onClick={showTimePicker}\n className=\"mr-8 add-delivery-time-button\"\n label={t(\"SelectDeliveryTime\")}\n />\n </TimePickerCell>",
+      "line_number": 277,
+      "context": "/>\n </span>\n ) : (\n <span className={styles.timePickerCell}>\n <AddButton\n title={t(\"Common:AddButton\")}\n onClick={showTimePicker}\n className=\"mr-8 add-delivery-time-button\"\n label={t(\"SelectDeliveryTime\")}\n />\n </span>",
       "module": "/packages/client"
     },
     {

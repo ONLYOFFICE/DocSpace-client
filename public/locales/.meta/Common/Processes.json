@@ -3,7 +3,7 @@
   "content": "Processes: {{count}}",
   "content_en_sha1_hash": "8639427b5a2102ce300664c4558ef8bc76a91ab0",
   "created_at": "2025-05-26T07:15:46.362Z",
-  "updated_at": "2026-05-15T14:00:07.030Z",
+  "updated_at": "2026-05-15T15:37:40.338Z",
   "comment": {
     "text": "This is a tooltip label for a button that shows the number of ongoing background processes. `{{count}}` is a number representing the total number of processes.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/components/operations-progress-button/index.tsx",
-      "line_number": 317,
-      "context": "const getTooltipLabel = () => {\n if (isSeveralOperations) {\n return (\n <Text fontWeight={600}>\n {t(\"Processes\", { count: allOperationsLength })}\n </Text>\n );\n }\n \n if (operationsCanceled) {",
+      "line_number": 319,
+      "context": "const getTooltipLabel = () => {\n if (isSeveralOperations) {\n return (\n <Text fontWeight={600}>\n {t(\"Processes\", { count: allOperationsLength })}\n </Text>\n );\n }\n \n if (operationsStopped) {",
       "module": "/libs/ui-kit"
     }
   ],

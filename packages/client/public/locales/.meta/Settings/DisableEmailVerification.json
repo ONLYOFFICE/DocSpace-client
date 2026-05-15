@@ -3,7 +3,7 @@
   "content": "Disable email verification",
   "content_en_sha1_hash": "6752c83196d2f72faefb0d749546f8b3600209a5",
   "created_at": "2025-05-19T21:30:51.198Z",
-  "updated_at": "2026-05-15T14:00:06.844Z",
+  "updated_at": "2026-05-15T15:37:40.273Z",
   "comment": {
     "text": "This is a checkbox label. It allows administrators to disable the email verification step for new user accounts created through LDAP or Single Sign-On integration.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/AdvancedSettings.tsx",
-      "line_number": 115,
-      "context": "<div className=\"advanced-block\">\n <Checkbox\n id=\"disable-email-verification\"\n className=\"checkbox-input\"\n label={t(\"Settings:DisableEmailVerification\")}\n name=\"disableEmailVerification\"\n isChecked={disableEmailVerification}\n isDisabled={!enableSso || isLoadingXml}\n onChange={setCheckbox}\n dataTestId=\"disable_email_verification_checkbox\"",
+      "line_number": 93,
+      "context": "<div className={styles.advancedBlock}>\n <Checkbox\n id=\"disable-email-verification\"\n className={styles.checkboxInput}\n label={t(\"Settings:DisableEmailVerification\")}\n name=\"disableEmailVerification\"\n isChecked={disableEmailVerification}\n isDisabled={!enableSso || isLoadingXml}\n onChange={setCheckbox}\n dataTestId=\"disable_email_verification_checkbox\"",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Deleting users",
   "content_en_sha1_hash": "ef72e6a554f2b6e1a2e4fc6258787996c2e58d5f",
   "created_at": "2025-05-19T21:30:56.671Z",
-  "updated_at": "2026-05-15T14:00:06.677Z",
+  "updated_at": "2026-05-15T15:37:40.196Z",
   "comment": {
     "text": "Dialog title. This title appears when multiple users are being deleted.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/index.tsx",
       "line_number": 281,
-      "context": "? isGuests\n ? t(\"DeleteGuest\")\n : t(\"DeleteUser\")\n : isGuests\n ? t(\"DeleteGuests\")\n : t(\"DeletingUsers\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <StyledBodyContent needReassignData={needReassignData}>\n <BodyComponent\n needReassignData={needReassignData}",
+      "context": "? isGuests\n ? t(\"DeleteGuest\")\n : t(\"DeleteUser\")\n : isGuests\n ? t(\"DeleteGuests\")\n : t(\"DeletingUsers\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div\n className={`${styles.bodyContent}${!needReassignData ? ` ${styles.noReassign}` : \"\"}`}\n >",
       "module": "/packages/client"
     }
   ],

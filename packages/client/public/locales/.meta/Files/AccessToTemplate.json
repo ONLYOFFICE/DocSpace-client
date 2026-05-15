@@ -3,7 +3,7 @@
   "content": "Access to template",
   "content_en_sha1_hash": "678bbfe48f2257d467715657fc03edc26cc09c72",
   "created_at": "2025-05-19T21:30:55.192Z",
-  "updated_at": "2026-05-15T14:00:06.662Z",
+  "updated_at": "2026-05-15T15:37:40.187Z",
   "comment": {
     "text": "This is a label indicating settings related to who can access a template. It appears in dialogs and panels where template access permissions are configured.",
     "is_auto": true,
@@ -20,13 +20,13 @@
     {
       "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/index.tsx",
       "line_number": 379,
-      "context": "isDisabled={isAvailable}\n roomId={templateId}\n />\n \n <StyledSubHeader className=\"invite-input-text\">\n {t(\"Files:AccessToTemplate\")}\n </StyledSubHeader>\n {hasInvitedUsers ? (\n <ItemsList\n t={t}\n inviteItems={accessItems}",
+      "context": "<Heading\n className={`${styles.subHeader} invite-input-text`}\n fontSize=\"16px\"\n fontWeight={700}\n >\n {t(\"Files:AccessToTemplate\")}\n </Heading>\n {hasInvitedUsers ? (\n <ItemsList\n t={t}\n inviteItems={accessItems}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/index.tsx",
       "line_number": 379,
-      "context": "isDisabled={isAvailable}\n roomId={templateId}\n />\n \n <StyledSubHeader className=\"invite-input-text\">\n {t(\"Files:AccessToTemplate\")}\n </StyledSubHeader>\n {hasInvitedUsers ? (\n <ItemsList\n t={t}\n inviteItems={accessItems}",
+      "context": "<Heading\n className={`${styles.subHeader} invite-input-text`}\n fontSize=\"16px\"\n fontWeight={700}\n >\n {t(\"Files:AccessToTemplate\")}\n </Heading>\n {hasInvitedUsers ? (\n <ItemsList\n t={t}\n inviteItems={accessItems}",
       "module": "/packages/client"
     }
   ],

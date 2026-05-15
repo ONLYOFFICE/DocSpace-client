@@ -3,7 +3,7 @@
   "content": "Anonymous",
   "content_en_sha1_hash": "9bed5104004c5fe4e3e46673da174472bff1360a",
   "created_at": "2025-05-19T21:30:43.013Z",
-  "updated_at": "2026-05-15T14:00:06.727Z",
+  "updated_at": "2026-05-15T15:37:40.216Z",
   "comment": {
     "text": "This text identifies a user as \"Anonymous\" when their name is not available or they are not logged in. It appears in various places, such as the details panel, history logs, and author cells in tables, to indicate the creator or initiator of an action or file.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/sub-components/AuthorCell.js",
-      "line_number": 54,
-      "context": "const { avatarSmall, hasAvatar, isAnonim } = item.createdBy;\n \n const avatarSource = hasAvatar ? avatarSmall : DefaultUserPhotoSize32PngUrl;\n \n const name = React.useMemo(\n () => (isAnonim ? t(\"Common:Anonymous\") : decode(fileOwner)),\n [fileOwner, isAnonim],\n );\n \n return (\n <StyledAuthorCell className=\"author-cell\">",
+      "line_number": 56,
+      "context": "const { avatarSmall, hasAvatar, isAnonim } = item.createdBy;\n \n const avatarSource = hasAvatar ? avatarSmall : DefaultUserPhotoSize32PngUrl;\n \n const name = React.useMemo(\n () => (isAnonim ? t(\"Common:Anonymous\") : decode(fileOwner)),\n [fileOwner, isAnonim],\n );\n \n return (\n <div className={`${styles.styledAuthorCell} author-cell`}>",
       "module": "/packages/client"
     },
     {

@@ -1,0 +1,29 @@
+{
+  "key_path": "StoppedOperation",
+  "content": "{{operationName}}: Stopped",
+  "content_en_sha1_hash": "84a28f7b3e0fff0633090face00ca117dc7de160",
+  "created_at": "2026-05-15T15:37:32.780Z",
+  "updated_at": "2026-05-15T15:38:01.516Z",
+  "comment": {
+    "text": "Button label indicating that a specific operation has ended; {{operationName}} represents the name of the task.",
+    "is_auto": true,
+    "updated_at": "2026-05-15T15:38:01.516Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/components/operations-progress-button/index.tsx",
+      "line_number": 331,
+      "context": "? operations[0].label\n : panelOperations[0].label;\n \n return (\n <Text fontWeight={600}>\n {t(\"StoppedOperation\", {\n operationName,\n })}\n </Text>\n );\n }",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

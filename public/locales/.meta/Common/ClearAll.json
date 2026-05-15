@@ -3,7 +3,7 @@
   "content": "Clear all",
   "content_en_sha1_hash": "c043160a89ba0acd714977735d49455f662b1c79",
   "created_at": "2025-05-19T21:30:43.466Z",
-  "updated_at": "2026-05-15T14:00:06.810Z",
+  "updated_at": "2026-05-15T15:37:40.256Z",
   "comment": {
     "text": "This is a button label that, when clicked, clears all applied filters or all entries in a log.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/EventLogBlock.js",
-      "line_number": 322,
-      "context": "</FilterButtonWrapper>\n )}\n </HeaderActions>\n {events.length > 0 && (\n <Link type=\"action\" fontSize=\"13px\" onClick={onClear}>\n {t(\"Common:ClearAll\")}\n </Link>\n )}\n </Header>\n <LogScroller ref={scrollerRef}>\n {displayedEvents.length === 0 ? (",
+      "line_number": 160,
+      "context": "</div>\n )}\n </div>\n {events.length > 0 && (\n <Link type=\"action\" fontSize=\"13px\" onClick={onClear}>\n {t(\"Common:ClearAll\")}\n </Link>\n )}\n </div>\n <div className={styles.logScroller} ref={scrollerRef}>\n {displayedEvents.length === 0 ? (",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "If you'd like to log in using your email, please set your own password. <br /> Once ready, please click the button below.",
   "content_en_sha1_hash": "39efdaa8209b2d54904408defbd2496f9aae28d0",
   "created_at": "2025-05-19T21:30:50.039Z",
-  "updated_at": "2026-04-11T21:27:12.086Z",
+  "updated_at": "2026-05-15T15:37:40.205Z",
   "comment": {
     "text": "This is a paragraph of text within a dialog, instructing the user to set a password and then click a button to log in via email. It appears when a user is logging in via social authentication on a mobile device.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/SocialAuthWelcomeDialog/index.tsx",
-      "line_number": 199,
+      "line_number": 196,
       "context": "<Text textAlign=\"center\" lineHeight=\"20px\" className=\"welcome-text\">\n {currentDeviceType === DeviceType.mobile ? (\n <Trans\n t={t}\n i18nKey=\"SocialAuthWelcomeDialog:ClickButtonBelow\"\n ns=\"SocialAuthWelcomeDialog\"\n components={{\n br: <span style={{ display: \"none\" }} />,\n }}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/SocialAuthWelcomeDialog/index.tsx",
-      "line_number": 199,
+      "line_number": 196,
       "context": "<Text textAlign=\"center\" lineHeight=\"20px\" className=\"welcome-text\">\n {currentDeviceType === DeviceType.mobile ? (\n <Trans\n t={t}\n i18nKey=\"SocialAuthWelcomeDialog:ClickButtonBelow\"\n ns=\"SocialAuthWelcomeDialog\"\n components={{\n br: <span style={{ display: \"none\" }} />,\n }}\n />",
       "module": "/packages/client"
     }

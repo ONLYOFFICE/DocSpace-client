@@ -3,7 +3,7 @@
   "content": "Hide",
   "content_en_sha1_hash": "34d8b60fe25332f7b98585e82e753eaf502c3e50",
   "created_at": "2025-05-19T21:30:50.084Z",
-  "updated_at": "2026-05-15T14:00:06.766Z",
+  "updated_at": "2026-05-15T15:37:40.231Z",
   "comment": {
     "text": "This is a button label that, when clicked, hides additional settings or parameters within the integration settings.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/HideButton.js",
-      "line_number": 94,
-      "context": "dataTestId={dataTestId}\n >\n {value\n ? isAdditionalParameters\n ? t(\"HideAdditionalParameters\")\n : t(\"Hide\")\n : isAdditionalParameters\n ? t(\"ShowAdditionalParameters\")\n : t(\"Show\")}\n </Link>\n </StyledWrapper>",
+      "line_number": 86,
+      "context": "dataTestId={dataTestId}\n >\n {value\n ? isAdditionalParameters\n ? t(\"HideAdditionalParameters\")\n : t(\"Hide\")\n : isAdditionalParameters\n ? t(\"ShowAdditionalParameters\")\n : t(\"Show\")}\n </Link>\n </div>",
       "module": "/packages/client"
     }
   ],

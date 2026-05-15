@@ -3,7 +3,7 @@
   "content": "Customization",
   "content_en_sha1_hash": "d7f0ac9e007291a6ccc21d036f4711505ad9d0b1",
   "created_at": "2025-05-19T21:30:51.004Z",
-  "updated_at": "2026-05-15T14:00:06.755Z",
+  "updated_at": "2026-05-15T15:37:40.225Z",
   "comment": {
     "text": "This is a section title in the portal settings, referring to the customization options for the portal's appearance and behavior.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization.js",
-      "line_number": 116,
+      "line_number": 70,
       "context": "} = props;\n \n const isLoadedSetting = isLoaded && tReady;\n \n useEffect(() => {\n setDocumentTitle(t(\"Settings:Customization\"));\n \n return () => {\n resetIsInit();\n };\n }, []);",
       "module": "/packages/client"
     },

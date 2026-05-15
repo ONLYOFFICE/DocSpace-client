@@ -3,7 +3,7 @@
   "content": "Member",
   "content_en_sha1_hash": "6853c98a6f4358bbfed1b3b9c81d308649299b0f",
   "created_at": "2025-05-19T21:30:46.439Z",
-  "updated_at": "2026-05-15T14:00:06.752Z",
+  "updated_at": "2026-05-15T15:37:40.224Z",
   "comment": {
     "text": "This is a label for a filter option or a toggle button. It refers to a user who is part of a group or organization.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
-      "line_number": 486,
+      "line_number": 429,
       "context": ") : (\n <>\n <Label className=\"label\" text={t(\"RoomFilter\")} />\n <ToggleButton\n className=\"toggle\"\n label={t(\"Common:Member\")}\n onChange={toggleMembers}\n isChecked={isUserFilterSet}\n dataTestId=\"member_toggle_button\"\n />\n {isUserFilterSet ? (",
       "module": "/packages/client"
     }

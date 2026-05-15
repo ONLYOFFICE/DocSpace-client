@@ -3,7 +3,7 @@
   "content": "days",
   "content_en_sha1_hash": "5548ae4f34cbb6e30414532924e2088d915b460f",
   "created_at": "2025-05-19T21:30:44.423Z",
-  "updated_at": "2026-05-15T14:00:06.658Z",
+  "updated_at": "2026-05-15T15:37:40.185Z",
   "comment": {
     "text": "This is a label for a time period, specifically \"days\". It appears in dropdown menus or as part of a sentence to indicate a duration, such as for file lifetime settings.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/FileLifetime.js",
-      "line_number": 57,
+      "line_number": 19,
       "context": "};\n \n const dateOptions = [\n {\n key: 1,\n label: capitalize(t(\"Common:Days\")),\n value: 0,\n dataTestId: \"virtual_data_room_file_lifetime_period_days\",\n },\n {\n key: 2,",
       "module": "/packages/client"
     },

@@ -3,7 +3,7 @@
   "content": "Sending...",
   "content_en_sha1_hash": "c338c191ab1e9319ba354d56467b938e0ba4e119",
   "created_at": "2025-05-19T21:30:48.541Z",
-  "updated_at": "2026-05-15T14:00:06.862Z",
+  "updated_at": "2026-05-15T15:37:40.285Z",
   "comment": {
     "text": "This is the label for a button that appears while an action, such as sending a request or enabling a service, is in progress.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/sub-components/consumerModalDialog.js",
-      "line_number": 328,
+      "line_number": 319,
       "context": "<ModalDialog.Footer>\n <Button\n primary\n size=\"normal\"\n id=\"enable-button\"\n label={isLoading ? t(\"Common:Sending\") : t(\"Common:Enable\")}\n isLoading={isLoading}\n isDisabled={isLoading || isDisabled}\n scale\n onClick={updateConsumerValues}\n testId=\"consumer_dialog_enable_button\"",
       "module": "/packages/client"
     },

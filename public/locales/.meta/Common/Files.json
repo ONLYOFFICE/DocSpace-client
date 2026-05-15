@@ -3,7 +3,7 @@
   "content": "Files",
   "content_en_sha1_hash": "6ce6c512ea433a7fc5c8841628e7696cd0ff7f2b",
   "created_at": "2025-05-19T21:30:45.269Z",
-  "updated_at": "2026-05-15T14:00:06.600Z",
+  "updated_at": "2026-05-15T15:37:40.164Z",
   "comment": {
     "text": "This is a noun, used as a label for a button to upload files, a heading in a file list, and as part of a sentence displaying a count of files.",
     "is_auto": true,
@@ -55,7 +55,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
-      "line_number": 157,
+      "line_number": 99,
       "context": "label: t(\"Common:Folders\"),\n typeKey: FilterType.FoldersOnly,\n },\n {\n key: \"filter-type-all\",\n label: t(\"Common:Files\"),\n typeKey: FilterType.FilesOnly,\n },\n {\n key: \"filter-type-documents\",\n label: t(\"Common:Documents\"),",
       "module": "/packages/client"
     },

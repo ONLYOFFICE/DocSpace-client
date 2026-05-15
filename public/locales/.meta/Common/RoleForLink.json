@@ -3,7 +3,7 @@
   "content": "Role for link",
   "content_en_sha1_hash": "69c2c795dae8fa5a3e6f70b13ed8b5690d284d62",
   "created_at": "2025-08-26T11:15:03.689Z",
-  "updated_at": "2026-05-15T14:00:06.712Z",
+  "updated_at": "2026-05-15T15:37:40.211Z",
   "comment": {
     "text": "This is a label for a dropdown menu or selection field that allows users to choose a role or permission level for a shared link. It appears in panels related to link settings or editing.",
     "is_auto": true,
@@ -20,7 +20,7 @@
     {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/RoleLinkBlock/RoleLinkBlock.tsx",
       "line_number": 67,
-      "context": "};\n \n return (\n <RoleLinkBlockWrapper>\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"Common:RoleForLink\")}\n </Text>\n <AccessRightSelect\n fillIcon\n scaledOptions\n fixedDirection",
+      "context": "};\n \n return (\n <div className={styles.roleLinkBlockWrapper}>\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"Common:RoleForLink\")}\n </Text>\n <AccessRightSelect\n fillIcon\n scaledOptions\n fixedDirection",
       "module": "/packages/shared"
     }
   ],

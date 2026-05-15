@@ -3,7 +3,7 @@
   "content": "Show",
   "content_en_sha1_hash": "d97d1ee339e4eeaba8cac91dca37c8b4ec8f5501",
   "created_at": "2025-05-19T21:30:50.132Z",
-  "updated_at": "2026-05-15T14:00:06.766Z",
+  "updated_at": "2026-05-15T15:37:40.231Z",
   "comment": {
     "text": "This is a button label. It appears when additional settings are hidden and allows the user to reveal them.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/HideButton.js",
-      "line_number": 97,
-      "context": "? isAdditionalParameters\n ? t(\"HideAdditionalParameters\")\n : t(\"Hide\")\n : isAdditionalParameters\n ? t(\"ShowAdditionalParameters\")\n : t(\"Show\")}\n </Link>\n </StyledWrapper>\n );\n };",
+      "line_number": 89,
+      "context": "? isAdditionalParameters\n ? t(\"HideAdditionalParameters\")\n : t(\"Hide\")\n : isAdditionalParameters\n ? t(\"ShowAdditionalParameters\")\n : t(\"Show\")}\n </Link>\n </div>\n );\n };",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "DNS Settings",
   "content_en_sha1_hash": "7f2a7680272773297fb8efa578de3f25d6399c36",
   "created_at": "2025-05-19T21:30:51.213Z",
-  "updated_at": "2026-05-15T14:00:06.770Z",
+  "updated_at": "2026-05-15T15:37:40.235Z",
   "comment": {
     "text": "This is the title for a section in the portal settings where users can configure DNS settings. It appears as a clickable link in the navigation menu and as the heading of the DNS settings page.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
-      "line_number": 92,
+      "line_number": 85,
       "context": "subtitle={t(\"CustomTitlesSettingsNavDescription\")}\n url=\"/portal-settings/customization/general/welcome-page-settings\"\n onClickLink={onClickLink}\n />\n <CategoryItem\n title={t(\"DNSSettings\")}\n subtitle={t(\"DNSSettingsNavDescription\")}\n url=\"/portal-settings/customization/general/dns-settings\"\n onClickLink={onClickLink}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Common:Paid\")}",
       "module": "/packages/client"
     },

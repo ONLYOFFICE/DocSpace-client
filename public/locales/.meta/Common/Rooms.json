@@ -3,7 +3,7 @@
   "content": "Rooms",
   "content_en_sha1_hash": "3a28d6f078fd35a505195a0f8ec6f59e9801d7c2",
   "created_at": "2025-05-19T21:30:48.236Z",
-  "updated_at": "2026-05-15T14:00:06.594Z",
+  "updated_at": "2026-05-15T15:37:40.162Z",
   "comment": {
     "text": "This is a label for a section or category within the file selector, representing a collection of collaborative workspaces.",
     "is_auto": true,
@@ -37,8 +37,8 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Body/Progress.js",
-      "line_number": 211,
-      "context": "<StyledProgress>\n <div className=\"data-start\"> {reassigningDataStart}</div>\n <div className=\"progress-container\">\n <div className=\"progress-section\">\n {!noRooms ? (\n <Text className=\"progress-section-text\">{t(\"Common:Rooms\")}</Text>\n ) : null}\n {noRoomFilesToMove ? null : (\n <Text className=\"progress-section-text\">\n {t(\"Common:Documents\")}\n </Text>",
+      "line_number": 122,
+      "context": "<div className={styles.progress}>\n <div className=\"data-start\"> {reassigningDataStart}</div>\n <div className=\"progress-container\">\n <div className=\"progress-section\">\n {!noRooms ? (\n <Text className=\"progress-section-text\">{t(\"Common:Rooms\")}</Text>\n ) : null}\n {noRoomFilesToMove ? null : (\n <Text className=\"progress-section-text\">\n {t(\"Common:Documents\")}\n </Text>",
       "module": "/packages/client"
     },
     {
@@ -97,13 +97,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 277,
+      "line_number": 271,
       "context": "sectionName: t(\"Common:Common\"),\n workspace: serviceName,\n sectionIcon: PortfolioIcon,\n }}\n importSection={{\n sectionName: t(\"Common:Rooms\"),\n workspace: getBrandName(\"ProductName\"),\n sectionIcon: RoomsIcon,\n }}\n isDisabled={false}\n dataTestId=\"import_common_files_section\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 277,
+      "line_number": 271,
       "context": "sectionName: t(\"Common:Common\"),\n workspace: serviceName,\n sectionIcon: PortfolioIcon,\n }}\n importSection={{\n sectionName: t(\"Common:Rooms\"),\n workspace: getBrandName(\"ProductName\"),\n sectionIcon: RoomsIcon,\n }}\n isDisabled={false}\n dataTestId=\"import_common_files_section\"",
       "module": "/packages/client"
     },

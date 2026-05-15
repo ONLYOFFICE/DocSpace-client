@@ -3,7 +3,7 @@
   "content": "Icon",
   "content_en_sha1_hash": "716f63b96e0c263222949a3b8a00cdb4f46d3183",
   "created_at": "2025-05-19T21:30:56.808Z",
-  "updated_at": "2026-05-15T14:00:06.682Z",
+  "updated_at": "2026-05-15T15:37:40.198Z",
   "comment": {
     "text": "This is a label for a section where users can select an icon for a room or group.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/sub-components/SelectIcon.tsx",
-      "line_number": 160,
-      "context": "};\n \n return (\n <div>\n <div className=\"icon-container\">\n <div className=\"color-name\">{t(\"CreateEditRoomDialog:Icon\")}</div>\n <StyledWithoutIcon\n onClick={toggleWithoutIcon}\n isSelected={withoutIcon}\n data-testid=\"room_logo_cover_without_icon\"\n >",
+      "line_number": 60,
+      "context": "};\n \n return (\n <div>\n <div className=\"icon-container\">\n <div className=\"color-name\">{t(\"CreateEditRoomDialog:Icon\")}</div>\n <div\n className={`${styles.withoutIcon}${withoutIcon ? ` ${styles.isSelected}` : \"\"}`}\n onClick={toggleWithoutIcon}\n data-testid=\"room_logo_cover_without_icon\"\n >",
       "module": "/packages/client"
     }
   ],

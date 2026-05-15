@@ -3,7 +3,7 @@
   "content": "Show advanced settings",
   "content_en_sha1_hash": "065144e113594429bdaf3fda3f9534ebb1eb21c8",
   "created_at": "2025-05-19T21:30:50.135Z",
-  "updated_at": "2026-05-15T14:00:06.851Z",
+  "updated_at": "2026-05-15T15:37:40.276Z",
   "comment": {
     "text": "This is a button label. It appears in settings pages (e.g., LDAP, Single Sign-On) and, when clicked, expands a section to reveal more configuration options.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/HideButton.js",
-      "line_number": 96,
-      "context": "{value\n ? isAdditionalParameters\n ? t(\"HideAdditionalParameters\")\n : t(\"Hide\")\n : isAdditionalParameters\n ? t(\"ShowAdditionalParameters\")\n : t(\"Show\")}\n </Link>\n </StyledWrapper>\n );\n };",
+      "line_number": 88,
+      "context": "{value\n ? isAdditionalParameters\n ? t(\"HideAdditionalParameters\")\n : t(\"Hide\")\n : isAdditionalParameters\n ? t(\"ShowAdditionalParameters\")\n : t(\"Show\")}\n </Link>\n </div>\n );\n };",
       "module": "/packages/client"
     }
   ],

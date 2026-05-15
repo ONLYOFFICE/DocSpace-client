@@ -24,35 +24,55 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const getGreetingKey = (): string => {
-  const hour = new Date().getHours();
-  if (hour >= 5 && hour < 12) return "GoodMorning";
-  if (hour >= 12 && hour < 18) return "GoodAfternoon";
-  return "GoodEvening";
-};
+import { RoomsType, ShareAccessRights } from "@docspace/ui-kit/enums";
+import { createRoom, setRoomSecurity } from "@docspace/shared/api/rooms";
+import { createFile } from "@docspace/shared/api/files";
+import type { TRoom } from "@docspace/shared/api/rooms/types";
 
-export const NEW_FILE_NAMES = {
-  document: "New document.docx",
-  spreadsheet: "New spreadsheet.xlsx",
-  presentation: "New presentation.pptx",
-  pdf: "New PDF form.pdf",
-} as const;
+export const AI_FORMS_ROOM_TITLE = "AI Forms";
+export const AI_FORMS_BLANK_FORM_TITLE = "Untitled form.pdf";
 
-export const makeCreateUrl = (
-  fileTitle: string,
-  parentId: number | null,
-): string => {
-  const params = new URLSearchParams({ fileTitle });
-  if (parentId) params.set("parentId", String(parentId));
-  return `/sdk/personal-files/editor/create?${params.toString()}`;
-};
+// System group id for "Everyone" — used to invite all portal users at once.
+const EVERYONE_GROUP_ID = "c5cc67d1-c3e8-43c0-a3ad-3928ae3e5b5e";
 
-export type DashboardModuleId =
-  | "ai-files"
-  | "ai-rooms"
-  | "ai-forms"
-  | "ai-agents";
+export type AiFormsInstallStepId =
+  | "create-room"
+  | "invite-everyone"
+  | "create-blank-form";
 
-export type AiFormsSettings = {
+export const AI_FORMS_INSTALL_STEPS: AiFormsInstallStepId[] = [
+  "create-room",
+  "invite-everyone",
+  "create-blank-form",
+];
+
+export interface InstallAiFormsResult {
   roomId: number;
+}
+
+export const installAiFormsModule = async (
+  onStep: (step: AiFormsInstallStepId) => void,
+): Promise<InstallAiFormsResult> => {
+  onStep("create-room");
+  const room = (await createRoom({
+    title: AI_FORMS_ROOM_TITLE,
+    roomType: RoomsType.FormRoom,
+  })) as TRoom;
+
+  onStep("invite-everyone");
+  await setRoomSecurity(room.id, {
+    invitations: [
+      {
+        id: EVERYONE_GROUP_ID,
+        access: ShareAccessRights.FormFilling,
+      },
+    ],
+    notify: false,
+    message: "",
+  });
+
+  onStep("create-blank-form");
+  await createFile(room.id, AI_FORMS_BLANK_FORM_TITLE);
+
+  return { roomId: room.id };
 };

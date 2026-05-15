@@ -55,23 +55,42 @@ import BgPatternGreenUrl from "PUBLIC_DIR/images/background.pattern.green.react.
 
 import { ModuleCard, type ModuleItem } from "./ModuleCard";
 import {
+  type DashboardModuleId,
   getGreetingKey,
-  isModuleInstalled,
   makeCreateUrl,
   NEW_FILE_NAMES,
 } from "./utils";
+import { InstallAiFormsDialog } from "./InstallModuleDialog";
 import styles from "./Dashboard.module.scss";
 
 interface DashboardProps {
   firstName?: string;
   pricingUrl?: string;
+  aiFilesEnabled: boolean;
+  aiFormsEnabled: boolean;
+  aiRoomsEnabled: boolean;
+  aiAgentsEnabled: boolean;
+  ensureAppsLoaded: () => void;
 }
 
-const Dashboard = ({ firstName, pricingUrl }: DashboardProps) => {
+const Dashboard = ({
+  firstName,
+  pricingUrl,
+  aiFilesEnabled,
+  aiFormsEnabled,
+  aiRoomsEnabled,
+  aiAgentsEnabled,
+  ensureAppsLoaded,
+}: DashboardProps) => {
   const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [myFolderId, setMyFolderId] = React.useState<number | null>(null);
+  const [installDialogVisible, setInstallDialogVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    ensureAppsLoaded();
+  }, [ensureAppsLoaded]);
 
   React.useEffect(() => {
     getPersonalFolderTree()
@@ -124,8 +143,17 @@ const Dashboard = ({ firstName, pricingUrl }: DashboardProps) => {
     [t, myFolderId],
   );
 
-  const handleInstall = () => {
+  const handleInstall = (modId: DashboardModuleId) => {
+    if (modId === "ai-forms") {
+      setInstallDialogVisible(true);
+      return;
+    }
     toastr.info(t("Common:UnderDevelopment"));
+  };
+
+  const handleInstalled = () => {
+    setInstallDialogVisible(false);
+    navigate("/ai-forms");
   };
 
   const greetingName = firstName ? `, ${firstName}` : "";
@@ -153,7 +181,7 @@ const Dashboard = ({ firstName, pricingUrl }: DashboardProps) => {
       icon: <CatalogFolderIcon />,
       title: t("Common:DashboardAIFilesTitle"),
       description: t("Common:DashboardAIFilesDescription"),
-      installed: isModuleInstalled("ai-files"),
+      installed: aiFilesEnabled,
       href: "/ai-files",
     },
     {
@@ -161,14 +189,14 @@ const Dashboard = ({ firstName, pricingUrl }: DashboardProps) => {
       icon: <CatalogRoomsIcon />,
       title: t("Common:DashboardAIRoomsTitle"),
       description: t("Common:DashboardAIRoomsDescription"),
-      installed: isModuleInstalled("ai-rooms"),
+      installed: aiRoomsEnabled,
     },
     {
       id: "ai-forms",
       icon: <CatalogDocumentsIcon />,
       title: t("Common:DashboardAIFormsTitle"),
       description: t("Common:DashboardAIFormsDescription"),
-      installed: isModuleInstalled("ai-forms"),
+      installed: aiFormsEnabled,
       href: "/ai-forms",
     },
     {
@@ -176,7 +204,7 @@ const Dashboard = ({ firstName, pricingUrl }: DashboardProps) => {
       icon: <AiAgentsIcon />,
       title: t("Common:DashboardAIChatAgentsTitle"),
       description: t("Common:DashboardAIChatAgentsDescription"),
-      installed: isModuleInstalled("ai-agents"),
+      installed: aiAgentsEnabled,
     },
   ];
 
@@ -244,24 +272,33 @@ const Dashboard = ({ firstName, pricingUrl }: DashboardProps) => {
 
         <div className={styles.modulesGrid}>
           {moduleItems.map((mod) => (
-            <ModuleCard key={mod.id} mod={mod} onInstall={handleInstall} />
+            <ModuleCard
+              key={mod.id}
+              mod={mod}
+              onInstall={() => handleInstall(mod.id as DashboardModuleId)}
+            />
           ))}
         </div>
       </section>
+
+      <InstallAiFormsDialog
+        visible={installDialogVisible}
+        onClose={() => setInstallDialogVisible(false)}
+        onInstalled={handleInstalled}
+      />
     </div>
   );
 };
 
-const DashboardConnected = inject(
-  ({
-    userStore,
-    settingsStore,
-  }: {
-    userStore: { user: { firstName?: string } | null };
-    settingsStore: { docspacePricesUrl?: string };
-  }) => ({
+const DashboardConnected = inject<TStore>(
+  ({ userStore, settingsStore, appsStore }) => ({
     firstName: userStore.user?.firstName,
     pricingUrl: settingsStore.docspacePricesUrl,
+    aiFilesEnabled: appsStore.isEnabled("ai-files"),
+    aiFormsEnabled: appsStore.isEnabled("ai-forms"),
+    aiRoomsEnabled: appsStore.isEnabled("ai-rooms"),
+    aiAgentsEnabled: appsStore.isEnabled("ai-agents"),
+    ensureAppsLoaded: appsStore.ensureLoaded,
   }),
 )(observer(Dashboard));
 

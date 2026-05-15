@@ -30,9 +30,11 @@ import { useLocation, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
-import type { NavMenuGroup } from "@docspace/ui-kit/components/nav-menu";
+import type { NavMenuGroup, NavMenuItem } from "@docspace/ui-kit/components/nav-menu";
 import { DeviceType } from "@docspace/shared/enums";
 import type { TUser } from "@docspace/shared/api/people/types";
+
+import { InstallAiFormsDialog } from "SRC_DIR/pages/Dashboard/InstallModuleDialog";
 
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url";
@@ -74,12 +76,30 @@ const AI_FORMS_SECTION_TO_ID: Record<string, string> = {
 type NewArticleProps = {
   user?: TUser | null;
   currentDeviceType: DeviceType;
+  aiFilesEnabled: boolean;
+  aiFormsEnabled: boolean;
+  aiRoomsEnabled: boolean;
+  aiAgentsEnabled: boolean;
+  ensureAppsLoaded: () => void;
 };
 
-const NewArticle = ({ user, currentDeviceType }: NewArticleProps) => {
+const NewArticle = ({
+  user,
+  currentDeviceType,
+  aiFilesEnabled,
+  aiFormsEnabled,
+  aiRoomsEnabled,
+  aiAgentsEnabled,
+  ensureAppsLoaded,
+}: NewArticleProps) => {
   const { t } = useTranslation(["Common"]);
   const location = useLocation();
   const navigate = useNavigate();
+  const [installDialogVisible, setInstallDialogVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    ensureAppsLoaded();
+  }, [ensureAppsLoaded]);
 
   const { showText, toggleShowText } = useSidebarShowText({
     storageKey: "home_showSidebarText",
@@ -100,111 +120,155 @@ const NewArticle = ({ user, currentDeviceType }: NewArticleProps) => {
     return undefined;
   }, [location.pathname, location.search]);
 
-  const groups = React.useMemo<NavMenuGroup[]>(
-    () => [
-      {
+  const groups = React.useMemo<NavMenuGroup[]>(() => {
+    const underDevelopment = () => toastr.info(t("Common:UnderDevelopment"));
+
+    const aiFilesItem: NavMenuItem = {
+      id: AI_FILES_ID,
+      label: t("Common:DashboardAIFilesTitle"),
+      icon: CatalogFolderReactSvgUrl,
+      onClick: () => navigate("/ai-files"),
+      children: aiFilesEnabled
+        ? [
+            {
+              id: "ai-files-recent",
+              label: t("Common:Recent"),
+              icon: CatalogRestoreReactSvgUrl,
+              onClick: () => navigate("/ai-files?section=recent"),
+            },
+            {
+              id: "ai-files-favorites",
+              label: t("Common:Favorites"),
+              icon: CatalogFavoritesReactSvgUrl,
+              onClick: () => navigate("/ai-files?section=favorites"),
+            },
+            {
+              id: "ai-files-trash",
+              label: t("Common:TrashSection"),
+              icon: CatalogTrashReactSvgUrl,
+              onClick: () => navigate("/ai-files?section=trash"),
+            },
+            {
+              id: "ai-files-settings",
+              label: t("Common:Settings"),
+              icon: CatalogSettingsReactSvgUrl,
+              onClick: () => navigate("/ai-files?section=settings"),
+            },
+          ]
+        : undefined,
+    };
+
+    const aiFormsItem: NavMenuItem = {
+      id: AI_FORMS_ID,
+      label: t("Common:DashboardAIFormsTitle"),
+      icon: FormFileReactSvgUrl,
+      onClick: aiFormsEnabled
+        ? () => navigate("/ai-forms")
+        : () => setInstallDialogVisible(true),
+      children: aiFormsEnabled
+        ? [
+            {
+              id: "ai-forms-in-progress",
+              label: t("Common:InProgress"),
+              icon: FormFillRectSvgUrl,
+              onClick: () => navigate("/ai-forms?section=in-progress"),
+            },
+            {
+              id: "ai-forms-completed",
+              label: t("Common:CompletedForms"),
+              icon: FormGalleryReactSvgUrl,
+              onClick: () => navigate("/ai-forms?section=completed-forms"),
+            },
+            {
+              id: "ai-forms-settings",
+              label: t("Common:Settings"),
+              icon: CatalogSettingsReactSvgUrl,
+              onClick: () => navigate("/ai-forms?section=settings"),
+            },
+          ]
+        : undefined,
+    };
+
+    const aiRoomsItem: NavMenuItem = {
+      id: AI_ROOMS_ID,
+      label: t("Common:DashboardAIRoomsTitle"),
+      icon: CatalogRoomsReactSvgUrl,
+      onClick: underDevelopment,
+    };
+
+    const aiAgentsItem: NavMenuItem = {
+      id: AI_AGENTS_ID,
+      label: t("Common:DashboardAIChatAgentsTitle"),
+      icon: CatalogAiAgentsReactSvgUrl,
+      onClick: underDevelopment,
+    };
+
+    const all: { item: NavMenuItem; enabled: boolean }[] = [
+      { item: aiFilesItem, enabled: aiFilesEnabled },
+      { item: aiFormsItem, enabled: aiFormsEnabled },
+      { item: aiRoomsItem, enabled: aiRoomsEnabled },
+      { item: aiAgentsItem, enabled: aiAgentsEnabled },
+    ];
+
+    const enabled = all.filter((x) => x.enabled).map((x) => x.item);
+    const available = all.filter((x) => !x.enabled).map((x) => x.item);
+
+    const result: NavMenuGroup[] = [];
+    if (enabled.length > 0) {
+      result.push({
         id: "enabled",
         label: t("Common:EnabledApps"),
-        items: [
-          {
-            id: AI_FILES_ID,
-            label: t("Common:DashboardAIFilesTitle"),
-            icon: CatalogFolderReactSvgUrl,
-            onClick: () => navigate("/ai-files"),
-            children: [
-              {
-                id: "ai-files-recent",
-                label: t("Common:Recent"),
-                icon: CatalogRestoreReactSvgUrl,
-                onClick: () => navigate("/ai-files?section=recent"),
-              },
-              {
-                id: "ai-files-favorites",
-                label: t("Common:Favorites"),
-                icon: CatalogFavoritesReactSvgUrl,
-                onClick: () => navigate("/ai-files?section=favorites"),
-              },
-              {
-                id: "ai-files-trash",
-                label: t("Common:TrashSection"),
-                icon: CatalogTrashReactSvgUrl,
-                onClick: () => navigate("/ai-files?section=trash"),
-              },
-              {
-                id: "ai-files-settings",
-                label: t("Common:Settings"),
-                icon: CatalogSettingsReactSvgUrl,
-                onClick: () => navigate("/ai-files?section=settings"),
-              },
-            ],
-          },
-          {
-            id: AI_FORMS_ID,
-            label: t("Common:DashboardAIFormsTitle"),
-            icon: FormFileReactSvgUrl,
-            onClick: () => navigate("/ai-forms"),
-            children: [
-              {
-                id: "ai-forms-in-progress",
-                label: t("Common:InProgress"),
-                icon: FormFillRectSvgUrl,
-                onClick: () => navigate("/ai-forms?section=in-progress"),
-              },
-              {
-                id: "ai-forms-completed",
-                label: t("Common:CompletedForms"),
-                icon: FormGalleryReactSvgUrl,
-                onClick: () => navigate("/ai-forms?section=completed-forms"),
-              },
-              {
-                id: "ai-forms-settings",
-                label: t("Common:Settings"),
-                icon: CatalogSettingsReactSvgUrl,
-                onClick: () => navigate("/ai-forms?section=settings"),
-              },
-            ],
-          },
-
-        ],
-      },
-      {
+        items: enabled,
+      });
+    }
+    if (available.length > 0) {
+      result.push({
         id: "available",
         label: t("Common:AvailableApps"),
-        items: [
-          {
-            id: AI_ROOMS_ID,
-            label: t("Common:DashboardAIRoomsTitle"),
-            icon: CatalogRoomsReactSvgUrl,
-            onClick: () => toastr.info(t("Common:UnderDevelopment")),
-          },
-          {
-            id: AI_AGENTS_ID,
-            label: t("Common:DashboardAIChatAgentsTitle"),
-            icon: CatalogAiAgentsReactSvgUrl,
-            onClick: () => toastr.info(t("Common:UnderDevelopment")),
-          },
-        ],
-      },
-    ],
-    [t, navigate],
-  );
+        items: available,
+      });
+    }
+    return result;
+  }, [
+    t,
+    navigate,
+    aiFilesEnabled,
+    aiFormsEnabled,
+    aiRoomsEnabled,
+    aiAgentsEnabled,
+  ]);
 
   return (
-    <AppsSidebar
-      groups={groups}
-      activeId={activeId}
-      showText={showText}
-      toggleShowText={toggleShowText}
-      currentDeviceType={currentDeviceType}
-      user={user}
-    />
+    <>
+      <AppsSidebar
+        groups={groups}
+        activeId={activeId}
+        showText={showText}
+        toggleShowText={toggleShowText}
+        currentDeviceType={currentDeviceType}
+        user={user}
+      />
+      <InstallAiFormsDialog
+        visible={installDialogVisible}
+        onClose={() => setInstallDialogVisible(false)}
+        onInstalled={() => {
+          setInstallDialogVisible(false);
+          navigate("/ai-forms");
+        }}
+      />
+    </>
   );
 };
 
 const NewArticleConnected = inject<TStore>(
-  ({ userStore, settingsStore }) => ({
+  ({ userStore, settingsStore, appsStore }) => ({
     user: userStore.user,
     currentDeviceType: settingsStore.currentDeviceType,
+    aiFilesEnabled: appsStore.isEnabled("ai-files"),
+    aiFormsEnabled: appsStore.isEnabled("ai-forms"),
+    aiRoomsEnabled: appsStore.isEnabled("ai-rooms"),
+    aiAgentsEnabled: appsStore.isEnabled("ai-agents"),
+    ensureAppsLoaded: appsStore.ensureLoaded,
   }),
 )(observer(NewArticle));
 

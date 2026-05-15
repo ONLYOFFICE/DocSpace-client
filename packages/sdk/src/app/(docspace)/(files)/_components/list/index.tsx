@@ -142,6 +142,13 @@ const List = ({
     requestRunning.current = true;
     const newFilter = FilesFilter.getFilter(window.location)!;
 
+    const urlHasFolder = new URLSearchParams(window.location.search).has(
+      "folder",
+    );
+    if (!urlHasFolder) {
+      newFilter.folder = String(currentFolderId);
+    }
+
     newFilter.page = 0;
     newFilter.pageCount = PAGE_COUNT;
 

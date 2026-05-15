@@ -131,7 +131,9 @@ const DocsLayout = observer(({
   const { headerOffset, frameHeaderVars } = useFrameHeaderConfig();
 
   const isMyDocuments = rootFolderType === FolderType.USER;
-  const isActionButtonEnabled = isMyDocuments && !sdkConfig?.disableActionButton;
+  const isInRooms = rootFolderType === FolderType.Rooms;
+  const isActionButtonEnabled =
+    (isMyDocuments || isInRooms) && !sdkConfig?.disableActionButton;
 
   const docsActions = useDocsActions();
   const {

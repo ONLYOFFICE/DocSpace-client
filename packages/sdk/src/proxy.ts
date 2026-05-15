@@ -107,6 +107,16 @@ export async function proxy(request: NextRequest) {
     });
   }
 
+  if (request.nextUrl.pathname.includes("rooms")) {
+    requestHeaders.set(FILTER_HEADER, searchParams.toString());
+
+    return NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    });
+  }
+
   if (request.nextUrl.pathname === "/chat") {
     const agentId = searchParams.get("agentId") ?? "";
 
@@ -190,6 +200,8 @@ export const config = {
     "/chat",
     "/personal-files",
     "/personal-files/:path*",
+    "/rooms",
+    "/rooms/:path*",
   ],
 };
 

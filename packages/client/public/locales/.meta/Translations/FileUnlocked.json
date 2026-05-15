@@ -3,7 +3,7 @@
   "content": "File unlocked",
   "content_en_sha1_hash": "c60e9fe76b848fe79d0d3970f5c0c61d094278c2",
   "created_at": "2025-05-19T21:30:49.968Z",
-  "updated_at": "2026-05-15T14:00:06.578Z",
+  "updated_at": "2026-05-15T16:22:23.993Z",
   "comment": {
     "text": "A toast message confirming that a file has been successfully unlocked.",
     "is_auto": true,
@@ -26,13 +26,13 @@
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
       "line_number": 113,
-      "context": "});\n return t(\"InfoPanel:FilesRemovedNotify\");\n case FeedActionKeys.FileLocked:\n return `${t(\"Translations:FileLocked\")}.`;\n case FeedActionKeys.FileUnlocked:\n return `${t(\"Translations:FileUnlocked\")}.`;\n case FeedActionKeys.FileVersionRemoved:\n if (\"version\" in feed.data && feed.data.version) {\n return t(\"InfoPanel:FileVersionRemoved\", {\n version: feed.data.version,\n });",
+      "context": "});\n return t(\"Common:FilesRemovedNotify\");\n case FeedActionKeys.FileLocked:\n return `${t(\"Translations:FileLocked\")}.`;\n case FeedActionKeys.FileUnlocked:\n return `${t(\"Translations:FileUnlocked\")}.`;\n case FeedActionKeys.FileVersionRemoved:\n if (\"version\" in feed.data && feed.data.version) {\n return t(\"InfoPanel:FileVersionRemoved\", {\n version: feed.data.version,\n });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 107,
-      "context": "});\n return t(\"InfoPanel:FilesRemovedNotify\");\n case FeedActionKeys.FileLocked:\n return `${t(\"Translations:FileLocked\")}.`;\n case FeedActionKeys.FileUnlocked:\n return `${t(\"Translations:FileUnlocked\")}.`;\n case FeedActionKeys.FileVersionRemoved:\n if (feed.data.version) {\n return t(\"InfoPanel:FileVersionRemoved\", {\n version: feed.data.version,\n });",
+      "context": "});\n return t(\"Common:FilesRemovedNotify\");\n case FeedActionKeys.FileLocked:\n return `${t(\"Translations:FileLocked\")}.`;\n case FeedActionKeys.FileUnlocked:\n return `${t(\"Translations:FileUnlocked\")}.`;\n case FeedActionKeys.FileVersionRemoved:\n if (feed.data.version) {\n return t(\"InfoPanel:FileVersionRemoved\", {\n version: feed.data.version,\n });",
       "module": "/packages/client"
     },
     {

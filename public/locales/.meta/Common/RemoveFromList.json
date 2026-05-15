@@ -3,7 +3,7 @@
   "content": "Remove from list",
   "content_en_sha1_hash": "23a97691b4e6c4fdf5bb0cb8f8d5ab31d1af9fd4",
   "created_at": "2025-05-19T21:30:47.827Z",
-  "updated_at": "2026-05-15T15:37:40.195Z",
+  "updated_at": "2026-05-15T16:22:24.044Z",
   "comment": {
     "text": "This is a button label or a confirmation dialog title. It appears when a user wants to remove an item from a list, such as unsubscribing from a shared room or removing a shared file/folder.",
     "is_auto": true,
@@ -61,7 +61,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 257,
+      "line_number": 261,
       "context": "const getRemoveFromRecentItem = useCallback(\n (i: TFileItem) => {\n return {\n id: \"option_remove-from-recent\",\n key: \"remove-from-recent\",\n label: t(\"Common:RemoveFromList\"),\n icon: RemoveOutlineSvgUrl,\n onClick: () => removeFromRecent(i),\n disabled: false,\n };\n },",
       "module": "/packages/sdk"
     },

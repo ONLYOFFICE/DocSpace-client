@@ -35,6 +35,7 @@
   "ApiKeysShareDescription": "Nu împărtășiți cheile dvs API nimănui și nu expuneți cheile în browser sau în codul pe partea client.",
   "ApiKeyViewUsage": "Vizualizați utilizarea fiecărei chei API pe",
   "Appearance": "Aspect",
+  "AppsDescription": "Gestionați aplicațiile disponibile în {{productName}}. Aplicațiile activate vor apărea în meniul principal pentru utilizatorii care au acces la ele.",
   "AuditSubheader": "Subsecțiunea vă permite să răsfoiți lista celor mai recente modificări (creare, modificare, ştergere etc.) efectuate de utilizatori asupra elementelor (săli, oportunităţi, fişiere etc.) din cadrul {{productName}}.",
   "AuditTrailNav": "Lanţ de audit",
   "AuthorizationKeysInfo": "Cu cheile de autorizare, vă puteți conecta spațiul dvs. la servicii terțe. Conectați-vă cu ușurință cu Facebook, Google sau LinkedIn. Adăugați Dropbox, OneDrive și alte conturi pentru a lucra cu fișierele stocate acolo.",

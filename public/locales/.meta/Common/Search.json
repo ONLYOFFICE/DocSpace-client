@@ -3,7 +3,7 @@
   "content": "Search",
   "content_en_sha1_hash": "bce06414177f72ab70e6387b6af9f8ceef0d6049",
   "created_at": "2025-05-19T21:30:48.328Z",
-  "updated_at": "2026-05-15T14:00:06.629Z",
+  "updated_at": "2026-05-15T16:22:24.021Z",
   "comment": {
     "text": "This is a placeholder text for a search input field, prompting the user to type their search query.",
     "is_auto": true,
@@ -105,6 +105,12 @@
       "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/index.tsx",
       "line_number": 112,
       "context": "getFilterData={getFilterData}\n userId=\"\"\n isRecentFolder\n currentDeviceType={currentDeviceType}\n filterHeader={t(\"Common:AdvancedFilter\")}\n placeholder={t(\"Common:Search\")}\n view={t(\"Common:View\")}\n filterTitle={t(\"Files:Filter\")}\n sortByTitle={t(\"Common:SortBy\")}\n selectorLabel=\"\"\n isIndexing={false}",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/forms-filter/index.tsx",
+      "line_number": 55,
+      "context": "<SearchInput\n style={{ marginBottom: \"16px\" }}\n id=\"forms-filter_search-input\"\n size={InputSize.base}\n value={searchValue}\n placeholder={t(\"Common:Search\")}\n scale\n onChange={setSearchValue}\n onClearSearch={() => setSearchValue(\"\")}\n showMainButton={showMainButton}\n mainButtonProps={mainButtonProps}",
       "module": "/packages/sdk"
     },
     {

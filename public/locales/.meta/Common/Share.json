@@ -3,7 +3,7 @@
   "content": "Share",
   "content_en_sha1_hash": "09ca55ca52d207f2cc1d9339e0226a88e9e96e2f",
   "created_at": "2025-05-19T21:30:48.615Z",
-  "updated_at": "2026-05-15T14:00:06.624Z",
+  "updated_at": "2026-05-15T16:22:24.019Z",
   "comment": {
     "text": "This is a button label that initiates the sharing process for a file or document.",
     "is_auto": true,
@@ -32,7 +32,7 @@
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/headerGeneral.tsx",
       "line_number": 121,
-      "context": "} else if (id === InfoPanelView.infoHistory) {\n name = t(\"InfoPanel:SubmenuHistory\");\n } else if (id === InfoPanelView.infoDetails) {\n name = t(\"InfoPanel:SubmenuDetails\");\n } else if (id === InfoPanelView.infoShare) {\n name = t(\"Common:Share\");\n } else {\n const key = id.replace(\"info_plugin-\", \"\");\n name =\n infoPanelItemsList.find((item) => item.key === key)?.value.subMenu\n .name ?? id;",
+      "context": "} else if (id === InfoPanelView.infoHistory) {\n name = t(\"Common:SubmenuHistory\");\n } else if (id === InfoPanelView.infoDetails) {\n name = t(\"Common:SubmenuDetails\");\n } else if (id === InfoPanelView.infoShare) {\n name = t(\"Common:Share\");\n } else {\n const key = id.replace(\"info_plugin-\", \"\");\n name =\n infoPanelItemsList.find((item) => item.key === key)?.value.subMenu\n .name ?? id;",
       "module": "/packages/client"
     },
     {
@@ -61,14 +61,14 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 271,
+      "line_number": 275,
       "context": "const getShareItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_share\",\n key: \"share\",\n label: t(\"Common:Share\"),\n icon: ShareSvgUrl,\n onClick: () => onShareClick?.(i),\n disabled: !onShareClick,\n };\n },",
       "module": "/packages/sdk"
     },
     {
-      "file_path": "/packages/sdk/src/app/(personal-files)/_components/info-panel/index.tsx",
-      "line_number": 139,
-      "context": "onClose={onClose}\n />\n ) : null}\n </ModalDialog.Container>\n \n <ModalDialog.Header>{t(\"Common:Share\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {selection ? (\n <Share\n infoPanelSelection={selection}\n fileLinkProps={filesLink}",
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/info-panel/Header.tsx",
+      "line_number": 72,
+      "context": "}, [selectedTabId, fileView, setView]);\n \n const tabItems = availableTabs.map((id) => {\n let name: string;\n if (id === InfoPanelView.infoShare) {\n name = t(\"Common:Share\");\n } else if (id === InfoPanelView.infoHistory) {\n name = t(\"Common:SubmenuHistory\");\n } else {\n name = t(\"Common:SubmenuDetails\");\n }",
       "module": "/packages/sdk"
     }
   ],

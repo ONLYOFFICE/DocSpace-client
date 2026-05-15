@@ -35,6 +35,7 @@
   "ApiKeysShareDescription": "Geben Sie Ihren API-Schlüssel nicht an Dritte weiter und legen Sie ihn nicht im Browser oder anderem clientseitigen Code offen.",
   "ApiKeyViewUsage": "Verwendung pro API-Schlüssel anzeigen auf:",
   "Appearance": "Erscheinungsbild",
+  "AppsDescription": "Verwalten Sie, welche Apps in Ihrem {{productName}} verfügbar sind. Aktivierte Apps werden im Hauptmenü für Benutzer angezeigt, die Zugriff darauf haben.",
   "AuditSubheader": "Der Unterabschnitt ermöglicht es Ihnen, die Liste der neuesten Änderungen (Erstellung, Änderung, Löschung usw.) zu durchsuchen, die von Benutzern an den Entitäten (Räume, Gelegenheiten, Dateien usw.) innerhalb Ihres {{productName}} vorgenommen wurden.",
   "AuditTrailNav": "Audit-Trail",
   "AuthorizationKeysInfo": "Mit Autorisierungsschlüsseln können Sie Drittanbieterdienste mit Ihrem Bereich verbinden. Melden Sie sich einfach mit Facebook, Google oder LinkedIn an. Fügen Sie Dropbox, OneDrive und andere Konten hinzu, um mit dort gespeicherten Dateien zu arbeiten.",

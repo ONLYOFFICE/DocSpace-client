@@ -208,6 +208,17 @@ describe("streamingEncryption", () => {
       expect(() => parseDSE3Header(good)).toThrow(InvalidFormatError);
     });
 
+    it("throws InvalidFormatError when chunkCount exceeds DSE3_MAX_CHUNK_COUNT", () => {
+      const nonce = freshNonce();
+      const good = writeDSE3Header(1, nonce, null);
+      good[11] = 0xff;
+      good[12] = 0xff;
+      good[13] = 0xff;
+      good[14] = 0xff;
+
+      expect(() => parseDSE3Header(good)).toThrow(InvalidFormatError);
+    });
+
     it("getDSE3HeaderSize returns DSE3_FIXED_HEADER_SIZE when there is no encrypted name", () => {
       const nonce = freshNonce();
       const headerBytes = writeDSE3Header(2, nonce, null);
@@ -278,6 +289,44 @@ describe("streamingEncryption", () => {
       );
 
       expect((await blobToUint8Array(decBlob)).byteLength).toBe(0);
+    });
+
+    it("round-trips a single byte (smallest non-empty input)", async () => {
+      const dek = generateDEK();
+      const plaintext = new Uint8Array([0xa5]);
+
+      const encBlob = await encryptChunked(plaintext, dek, null);
+      const encBytes = await blobToUint8Array(encBlob);
+      const header = parseDSE3Header(encBytes);
+
+      expect(header.chunkCount).toBe(1);
+
+      const decBlob = await decryptChunked(
+        encBytes,
+        dek,
+        header,
+        getDSE3HeaderSize(header),
+      );
+      expect(bytesEqual(await blobToUint8Array(decBlob), plaintext)).toBe(true);
+    });
+
+    it("round-trips exactly chunkSize+1 bytes (off-by-one boundary)", async () => {
+      const dek = generateDEK();
+      const plaintext = fillRandom(new Uint8Array(C.CHUNK_PLAINTEXT_SIZE + 1));
+
+      const encBlob = await encryptChunked(plaintext, dek, null);
+      const encBytes = await blobToUint8Array(encBlob);
+      const header = parseDSE3Header(encBytes);
+
+      expect(header.chunkCount).toBe(2);
+
+      const decBlob = await decryptChunked(
+        encBytes,
+        dek,
+        header,
+        getDSE3HeaderSize(header),
+      );
+      expect(bytesEqual(await blobToUint8Array(decBlob), plaintext)).toBe(true);
     });
 
     it("round-trips a small buffer (1 KB, single chunk)", async () => {

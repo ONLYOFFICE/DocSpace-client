@@ -468,10 +468,12 @@ describe("addMembersToEncryptedRoom", () => {
 describe("validateMembersForEncryption", () => {
   let alice: IdentityKeyPair;
   let bob: IdentityKeyPair;
+  let attacker: IdentityKeyPair;
 
   beforeEach(async () => {
     alice = await generateIdentityKeyPair();
     bob = await generateIdentityKeyPair();
+    attacker = await generateIdentityKeyPair();
 
     getRoomEncryptionKeysMock.mockReset();
 
@@ -528,6 +530,40 @@ describe("validateMembersForEncryption", () => {
     expect(result.valid).toEqual([]);
     expect(result.skipped).toEqual([
       { id: BOB, displayName: "Bob", reason: "no-key" },
+    ]);
+  });
+
+  it("reports 'key-mismatch-refused' when TOFU detects swap and resolver refuses", async () => {
+    getRoomEncryptionKeysMock.mockResolvedValueOnce([
+      { userId: BOB, publicKey: pubB64(bob) },
+    ]);
+    const firstRun = await validateMembersForEncryption(
+      ROOM_ID,
+      [BOB],
+      ALICE,
+      undefined,
+      { [BOB]: "Bob" },
+    );
+    expect(firstRun.skipped).toEqual([]);
+    expect(firstRun.valid).toHaveLength(1);
+
+    getRoomEncryptionKeysMock.mockResolvedValue([
+      { userId: BOB, publicKey: pubB64(attacker) },
+    ]);
+
+    const refuseResolver = vi.fn(async () => "refuse" as const);
+    const result = await validateMembersForEncryption(
+      ROOM_ID,
+      [BOB],
+      ALICE,
+      refuseResolver,
+      { [BOB]: "Bob" },
+    );
+
+    expect(refuseResolver).toHaveBeenCalledTimes(1);
+    expect(result.valid).toEqual([]);
+    expect(result.skipped).toEqual([
+      { id: BOB, displayName: "Bob", reason: "key-mismatch-refused" },
     ]);
   });
 });

@@ -30,6 +30,11 @@
 
 import { unwrapDEK, wrapDEK, inspectWrap } from "./hpke";
 import { NoAccessError, AuthenticationError } from "./errors";
+import {
+  getKeyMismatchHandler,
+  getTofuStore,
+  type KeyMismatchResolver,
+} from "./tofu-store";
 import type { IdentityKeyPair, ServerAccessKeyDto } from "./types";
 
 export type RoomMemberPublicKey = {
@@ -39,13 +44,16 @@ export type RoomMemberPublicKey = {
   publicKeyId?: string;
 };
 
-/** Throws NoAccessError when no entry; AuthenticationError on HPKE-Auth fail. */
+/** Throws NoAccessError when no entry; AuthenticationError on HPKE-Auth fail
+ * or on TOFU mismatch when no resolver accepts the new sender key. */
 export async function unwrapDekForCurrentUser(params: {
   fileKeys: ServerAccessKeyDto[];
   roomMemberKeys: RoomMemberPublicKey[];
   currentUserId: string;
   currentIdentity: IdentityKeyPair;
   fileId: number;
+  onKeyChange?: KeyMismatchResolver;
+  senderDisplayName?: string;
 }): Promise<Uint8Array> {
   const {
     fileKeys,
@@ -53,6 +61,8 @@ export async function unwrapDekForCurrentUser(params: {
     currentUserId,
     currentIdentity,
     fileId,
+    onKeyChange,
+    senderDisplayName,
   } = params;
 
   if (!Number.isFinite(fileId) || fileId <= 0) {
@@ -80,6 +90,14 @@ export async function unwrapDekForCurrentUser(params: {
     );
   }
 
+  await verifySenderKeyAgainstTofu(
+    currentUserId,
+    senderUserId,
+    senderEntry.publicKey,
+    onKeyChange,
+    senderDisplayName,
+  );
+
   const senderPubBytes = decodeBase64(senderEntry.publicKey);
 
   return unwrapDEK({
@@ -90,6 +108,48 @@ export async function unwrapDekForCurrentUser(params: {
     expectedSenderUserId: senderUserId,
     fileId,
   });
+}
+
+async function verifySenderKeyAgainstTofu(
+  scopeUserId: string,
+  senderUserId: string,
+  senderPublicKey: string,
+  resolver: KeyMismatchResolver | undefined,
+  displayName: string | undefined,
+): Promise<void> {
+  const tofu = getTofuStore(scopeUserId);
+  const result = await tofu.checkKey(senderUserId, senderPublicKey);
+  if (result.kind === "first-seen" || result.kind === "match") return;
+
+  const handler = resolver ?? getKeyMismatchHandler();
+  if (!handler) {
+    throw new AuthenticationError(
+      `sender ${senderUserId} key changed; no resolver registered`,
+    );
+  }
+
+  let decision: "accept" | "refuse";
+  try {
+    decision = await handler({
+      userId: senderUserId,
+      knownKey: result.known.publicKey,
+      newKey: result.submitted,
+      knownFirstSeenAt: result.known.firstSeenAt,
+      knownLastSeenAt: result.known.lastSeenAt,
+      displayName,
+    });
+  } catch {
+    throw new AuthenticationError(
+      `sender ${senderUserId} key change resolver threw`,
+    );
+  }
+
+  if (decision !== "accept") {
+    throw new AuthenticationError(
+      `sender ${senderUserId} key change refused`,
+    );
+  }
+  await tofu.acceptKey(senderUserId, senderPublicKey);
 }
 
 export async function wrapDekForRecipients(params: {

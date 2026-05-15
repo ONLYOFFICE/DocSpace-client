@@ -3,7 +3,7 @@
   "content": "Create sample Room selector embed",
   "content_en_sha1_hash": "93d831166dcad24892ee84ef09c7ee51f7c5531b",
   "created_at": "2025-05-19T21:30:54.405Z",
-  "updated_at": "2026-04-11T21:16:05.215Z",
+  "updated_at": "2026-05-15T14:00:06.804Z",
   "comment": {
     "text": "This is the header for a section in the developer tools settings, indicating the creation of a sample Room selector embed.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
-      "line_number": 248,
+      "line_number": 257,
       "context": ");\n \n return (\n <PresetWrapper\n description={t(\"RoomSelectorDescription\")}\n header={t(\"CreateSampleRoomSelector\")}\n >\n <Container>\n <PreviewBlock\n loadCurrentFrame={initFrame}\n preview={preview}",
       "module": "/packages/client"
     }

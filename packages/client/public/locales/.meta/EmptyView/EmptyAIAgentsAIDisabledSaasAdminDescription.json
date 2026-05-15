@@ -3,7 +3,7 @@
   "content": "To create and use {{aiAgents}}, connect your wallet and enable the AI features service in the {{productName}} settings. Once it’s done, you’ll be able to work with {{aiAgents}} and collaborate with your team.",
   "content_en_sha1_hash": "e9039bbb2d8739a5cf69e11958a08d5532a0dbfb",
   "created_at": "2025-12-19T13:03:52.176Z",
-  "updated_at": "2026-04-11T21:07:12.168Z",
+  "updated_at": "2026-05-15T14:00:06.603Z",
   "comment": {
     "text": "This is an informational message displayed when AI Agents are disabled for a SaaS administrator. It explains how to enable AI features by connecting a wallet and adjusting settings. `{{aiAgents}}` refers to the AI Agents feature, and `{{productName}}` is the name of the product.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 227,
+      "line_number": 236,
       "context": "productName: getBrandName(\"ProductName\"),\n aiChats: t(\"Common:AIChats\"),\n }),\n )\n .with([false, true], () =>\n t(\"EmptyView:EmptyAIAgentsAIDisabledSaasAdminDescription\", {\n productName: getBrandName(\"ProductName\"),\n aiAgents: t(\"Common:AIAgents\"),\n }),\n )\n .otherwise(() =>",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

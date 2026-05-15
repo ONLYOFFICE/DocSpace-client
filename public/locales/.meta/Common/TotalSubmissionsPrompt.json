@@ -3,7 +3,7 @@
   "content": "How many times has the form \"{{formName}}\" been submitted?",
   "content_en_sha1_hash": "e0f429db1b42b106eec7f0e62a00cf8810eab3d9",
   "created_at": "2026-03-31T15:18:24.717Z",
-  "updated_at": "2026-05-08T13:10:45.715Z",
+  "updated_at": "2026-05-15T14:00:06.975Z",
   "comment": {
     "text": "This is a prompt for an AI chat panel, asking about the submission count for a specific form. The `{{formName}}` variable will be replaced with the title of the form.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/ai-chat-panel/index.tsx",
-      "line_number": 130,
+      "line_number": 139,
       "context": "() =>\n pendingAttachmentFile?.title\n ? [\n {\n title: t(\"Common:TotalSubmissions\"),\n prompt: t(\"Common:TotalSubmissionsPrompt\", {\n formName: pendingAttachmentFile.title,\n }),\n },\n {\n title: t(\"Common:RecentResponses\"),",
       "module": "/packages/sdk"
     }
@@ -157,7 +157,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

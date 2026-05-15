@@ -3,7 +3,7 @@
   "content": "PB",
   "content_en_sha1_hash": "a092b2d4c9d52807932bfedae96b01210db7e06b",
   "created_at": "2025-05-19T21:30:47.361Z",
-  "updated_at": "2026-04-13T14:59:06.030Z",
+  "updated_at": "2026-05-15T14:00:07.022Z",
   "comment": {
     "text": "A short label for the unit of digital information, Petabyte. It appears in contexts where storage sizes are displayed, such as billing or storage usage reports.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/utils/common.ts",
-      "line_number": 55,
+      "line_number": 64,
       "context": "t(\"Common:Bytes\"),\n t(\"Common:Kilobyte\"),\n t(\"Common:Megabyte\"),\n t(\"Common:Gigabyte\"),\n t(\"Common:Terabyte\"),\n t(\"Common:Petabyte\"),\n t(\"Common:Exabyte\"),\n ];\n \n if (bytes <= 0) return `${`0 ${t(\"Bytes\")}`}`;",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

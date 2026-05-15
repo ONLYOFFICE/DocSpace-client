@@ -3,7 +3,7 @@
   "content": "Drop files here or create new ones.",
   "content_en_sha1_hash": "b7cdc5efa37d7e19706293b7a41a3d3e01cbcb1a",
   "created_at": "2025-05-19T21:30:56.470Z",
-  "updated_at": "2026-04-11T21:07:13.878Z",
+  "updated_at": "2026-05-15T14:00:06.602Z",
   "comment": {
     "text": "This is a placeholder text displayed in an empty folder to instruct users on how to add content.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 164,
+      "line_number": 173,
       "context": "t(\"EmptyView:FormFolderDefaultDescription\", {\n productName: getBrandName(\"ProductName\"),\n }),\n )\n .with([P._, DefaultFolderType, P.when(isAdmin)], () =>\n t(\"EmptyView:DefaultFolderDescription\"),\n )\n .with([P._, DefaultFolderType, P.when(isUser)], () =>\n t(\"Common:UserEmptyDescription\"),\n )\n .otherwise(() => \"\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 164,
+      "line_number": 173,
       "context": "t(\"EmptyView:FormFolderDefaultDescription\", {\n productName: getBrandName(\"ProductName\"),\n }),\n )\n .with([P._, DefaultFolderType, P.when(isAdmin)], () =>\n t(\"EmptyView:DefaultFolderDescription\"),\n )\n .with([P._, DefaultFolderType, P.when(isUser)], () =>\n t(\"Common:UserEmptyDescription\"),\n )\n .otherwise(() => \"\");",
       "module": "/packages/client"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

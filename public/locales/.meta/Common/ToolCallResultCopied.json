@@ -3,7 +3,7 @@
   "content": "Tool call result successfully copied to clipboard",
   "content_en_sha1_hash": "8b63e6b7899370bb88c052d110771279e9653b50",
   "created_at": "2025-11-25T11:52:53.792Z",
-  "updated_at": "2026-04-12T15:21:21.200Z",
+  "updated_at": "2026-05-15T14:00:06.989Z",
   "comment": {
     "text": "This is a toast message that appears briefly to confirm that the output of an AI tool call has been copied to the user's clipboard.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/ToolCallMessage/ToolCallBody/code-view/index.tsx",
-      "line_number": 108,
+      "line_number": 115,
       "context": "<MarkdownField\n chatMessage={formatJsonWithMarkdown(\n isJson ? JSON.parse(result) : result,\n )}\n propLanguage={isErrorResult && !isJson ? \"text\" : undefined}\n successCopyMessage={t(\"ToolCallResultCopied\")}\n />\n </div>\n ) : null}\n </>\n );",
       "module": "/libs/ui-kit"
     }
@@ -157,7 +157,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

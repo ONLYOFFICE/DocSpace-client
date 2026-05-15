@@ -36,7 +36,7 @@
     "date-and-time": "3.6.0",
     "i18next": "23.7.19",
     "nconf": "0.12.1",
-    "next": "16.2.3",
+    "next": "16.2.6",
     "react": "19.2.4",
     "react-device-detect": "2.2.3",
     "react-dom": "19.2.4",

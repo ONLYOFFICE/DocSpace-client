@@ -3,7 +3,7 @@
   "content": "{{productName}} name",
   "content_en_sha1_hash": "0f1403b43faa94c0dc6b13a5e45c10558ce66b12",
   "created_at": "2025-05-19T21:30:57.465Z",
-  "updated_at": "2026-04-13T14:59:05.984Z",
+  "updated_at": "2026-05-15T14:00:06.972Z",
   "comment": {
     "text": "This is a placeholder text for an input field where the user enters the name for their ONLYOFFICE DocSpace portal. The `{{productName}}` variable will be replaced with \"ONLYOFFICE DocSpace\".",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/management/src/app/spaces/configuration/body.tsx",
-      "line_number": 158,
+      "line_number": 167,
       "context": "scale\n />\n </FieldContainer>\n <FieldContainer\n isVertical\n labelText={t(\"PortalName\", { productName: getBrandName(\"ProductName\") })}\n labelVisible\n hasError={!!(portalNameError || checkDomainError)}\n errorMessage={portalNameError || checkDomainError}\n >\n <TextInput",
       "module": "/packages/management"
     },
     {
       "file_path": "/packages/management/src/dialogs/create-portal/index.tsx",
-      "line_number": 163,
+      "line_number": 172,
       "context": "<Text\n fontSize=\"13px\"\n fontWeight=\"600\"\n style={{ paddingBottom: \"5px\" }}\n >\n {t(\"PortalName\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <TextInput\n testId=\"create-portal-input\"",
       "module": "/packages/management"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-04T13:03:19.496195Z"
+      "approved_at": "2026-05-15T15:04:54.651494Z"
     },
     "si": {
       "ai_translated": false,

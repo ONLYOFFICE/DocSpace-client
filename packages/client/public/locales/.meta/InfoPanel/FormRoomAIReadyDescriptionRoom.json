@@ -3,7 +3,7 @@
   "content": "Analyze data with Ask AI, create charts, and uncover insights. Select a form and click 'Ask AI' to get started.",
   "content_en_sha1_hash": "90bc0263a141f413ec8b2470c9e4abe4558ec043",
   "created_at": "2026-05-08T13:10:42.355Z",
-  "updated_at": "2026-05-08T19:46:45.002Z",
+  "updated_at": "2026-05-15T14:00:06.728Z",
   "comment": {
     "text": "Informational text in the Info Panel that appears when AI is active in a Form Room, providing instructions on how to use the 'Ask AI' feature.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/sub-components/FormInfo/AICard.tsx",
-      "line_number": 87,
+      "line_number": 96,
       "context": "const description = useMemo(() => {\n if (aiConnected) {\n if (isDone) return t(\"InfoPanel:FormRoomAIReadyDescriptionFolder\");\n if (isFile) return t(\"InfoPanel:FormRoomAIReadyDescriptionFile\");\n return t(\"InfoPanel:FormRoomAIReadyDescriptionRoom\");\n }\n \n if (!aiReady) {\n if (isAdmin) {\n return t(\"InfoPanel:FormRoomAIProviderNotConnected\", {",
       "module": "/packages/client"
     }

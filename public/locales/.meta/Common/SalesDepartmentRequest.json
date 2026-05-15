@@ -3,7 +3,7 @@
   "content": "Sales department request",
   "content_en_sha1_hash": "0e3ac6e1bce337108997dca6f6f3b9a728a8e578",
   "created_at": "2026-04-11T18:34:14.915Z",
-  "updated_at": "2026-04-13T14:59:06.009Z",
+  "updated_at": "2026-05-15T14:00:06.991Z",
   "comment": {
     "text": "This is the title of a dialog box that appears when a user wants to contact the sales department.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
-      "line_number": 161,
+      "line_number": 170,
       "context": "autoMaxHeight\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>\n <Text isBold fontSize=\"21px\">\n {t(\"SalesDepartmentRequest\")}\n </Text>\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text\n key=\"text-body\"",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

@@ -1,0 +1,29 @@
+{
+  "key_path": "AIPricingBilledPerUsageAndPricing",
+  "content": "Usage-based billing. <1>Pricing & billing</1>",
+  "content_en_sha1_hash": "8a11fd227c33271c2b576c33e91f38db1aea3c1f",
+  "created_at": "2026-05-15T15:48:56.093Z",
+  "updated_at": "2026-05-15T15:49:38.882Z",
+  "comment": {
+    "text": "A description for a service item in the billing list, consisting of a text sentence followed by a clickable link wrapped in `<1>` tags.",
+    "is_auto": true,
+    "updated_at": "2026-05-15T15:49:38.882Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "line_number": 243,
+      "context": "}\n \n \n \n return    <CommonTrans\n i18nKey=\"AIPricingBilledPerUsageAndPricing\"\n components={{\n 1: (\n <Link\n fontSize=\"13px\"\n fontWeight={600}",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

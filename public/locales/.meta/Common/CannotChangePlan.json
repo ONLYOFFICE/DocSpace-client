@@ -3,7 +3,7 @@
   "content": "You cannot change your plan because the used storage volume or the number of admins exceeds the limitations of the selected plan:",
   "content_en_sha1_hash": "4bdb41a36f148f1de76272d60696b987b70a76a0",
   "created_at": "2025-05-19T21:30:56.593Z",
-  "updated_at": "2026-04-11T21:06:19.169Z",
+  "updated_at": "2026-05-15T14:00:06.991Z",
   "comment": {
     "text": "This is an error message displayed in a modal dialog. It informs the user that they cannot change their pricing plan because their current usage (storage or number of administrators) exceeds the limits of the plan they are trying to select.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/dialogs/ChangePricingPlanDialog.tsx",
-      "line_number": 104,
+      "line_number": 113,
       "context": ">\n <ModalDialog.Header>{t(\"ChangePricingPlan\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.content}>\n <Text fontSize=\"13px\" isBold className={styles.cannotDowngradePlan}>\n {t(\"CannotChangePlan\")}\n </Text>\n {planUsersLimitations}\n <br />\n {storagePlanLimitations}",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

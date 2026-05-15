@@ -3,7 +3,7 @@
   "content": "Recover access",
   "content_en_sha1_hash": "3f0e9f892fde12d93db01b89396951762c8bb282",
   "created_at": "2025-05-19T21:30:57.252Z",
-  "updated_at": "2026-04-13T14:59:05.928Z",
+  "updated_at": "2026-05-15T14:00:06.920Z",
   "comment": {
     "text": "This is the label for a link that, when clicked, opens a dialog to help users regain access to their account.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/components/RecoverAccess.tsx",
-      "line_number": 67,
+      "line_number": 76,
       "context": "isHovered\n className=\"login-link recover-link\"\n onClick={openRecoverDialog}\n dataTestId=\"recover_access_link\"\n >\n {t(\"RecoverAccess\")}\n </Link>\n {recoverDialogVisible ? (\n <RecoverAccessModalDialog\n visible={recoverDialogVisible}\n onClose={closeRecoverDialog}",
       "module": "/packages/login"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-04T13:03:19.470988Z"
+      "approved_at": "2026-05-15T15:04:54.629887Z"
     },
     "si": {
       "ai_translated": false,

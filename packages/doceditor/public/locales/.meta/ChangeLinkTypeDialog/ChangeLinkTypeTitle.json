@@ -3,7 +3,7 @@
   "content": "Change link type",
   "content_en_sha1_hash": "85b52eccc3ad049741c44630c48bebcececce91a",
   "created_at": "2025-05-19T21:30:57.198Z",
-  "updated_at": "2026-04-11T21:29:26.822Z",
+  "updated_at": "2026-05-15T14:00:06.903Z",
   "comment": {
     "text": "This is the title of a dialog box that allows users to change the type of a link.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/ChangeLinkTypeDialog.tsx",
-      "line_number": 56,
+      "line_number": 65,
       "context": "withBodyScroll\n visible={visible}\n onClose={onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"ChangeLinkTypeDialog:ChangeLinkTypeTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {t(\"ChangeLinkTypeDialog:ChangeLinkTypeDescription\")}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
       "module": "/packages/doceditor"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-04T13:03:19.452785Z"
+      "approved_at": "2026-05-15T15:04:54.611151Z"
     },
     "si": {
       "ai_translated": false,

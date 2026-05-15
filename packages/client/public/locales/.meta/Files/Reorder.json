@@ -3,7 +3,7 @@
   "content": "Reorder",
   "content_en_sha1_hash": "33d9978c44777f5262fb2dbe921b919fa3fad96c",
   "created_at": "2025-05-19T21:30:56.040Z",
-  "updated_at": "2026-05-08T13:10:45.582Z",
+  "updated_at": "2026-05-15T14:00:06.693Z",
   "comment": {
     "text": "This is a button label that allows users to change the order of items in a list or index.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ReorderIndexDialog/index.tsx",
-      "line_number": 87,
+      "line_number": 96,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"create-room\"\n key=\"OKButton\"\n label={t(\"Files:Reorder\")}\n size={ButtonSize.normal}\n primary\n onClick={onReorder}\n scale\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 601,
+      "line_number": 610,
       "context": "if (!isIndexEditingMode) return EMPTY_ARRAY;\n \n return [\n {\n id: \"reorder-index\",\n label: t(\"Files:Reorder\"),\n onClick: onIndexReorder,\n iconUrl: RoundedArrowSvgUrl,\n },\n {\n id: \"save-index\",",
       "module": "/packages/client"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

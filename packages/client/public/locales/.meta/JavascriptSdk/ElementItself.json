@@ -3,7 +3,7 @@
   "content": "The element itself",
   "content_en_sha1_hash": "9aced7d006e732132bb5f1f09abdcbdbbc8dea2e",
   "created_at": "2025-05-19T21:30:54.464Z",
-  "updated_at": "2026-04-11T21:15:49.623Z",
+  "updated_at": "2026-05-15T14:00:06.813Z",
   "comment": {
     "text": "Radio button label. It refers to the element itself, as opposed to a button.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/MainElementParameter.js",
-      "line_number": 55,
+      "line_number": 64,
       "context": "isButtonMode = false,\n }) => {\n const elementDisplayOptions = [\n {\n value: \"element\",\n label: t(\"ElementItself\"),\n dataTestId: \"element_radio_button\",\n },\n {\n value: \"button\",\n label: (",
       "module": "/packages/client"
     }

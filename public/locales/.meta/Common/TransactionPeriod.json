@@ -3,7 +3,7 @@
   "content": "Transaction period",
   "content_en_sha1_hash": "0ee3785ea63a0f415777955ae3de2c11a47ad857",
   "created_at": "2026-04-10T13:53:43.739Z",
-  "updated_at": "2026-04-12T14:21:58.265Z",
+  "updated_at": "2026-05-15T14:00:07.021Z",
   "comment": {
     "text": "This is a section heading within a filter panel, indicating the date range for transactions.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/FilterPanel.tsx",
-      "line_number": 127,
+      "line_number": 136,
       "context": "<div className={styles.filterDialogDivider} />\n </>\n ) : null}\n <div className={styles.filterDialogSection}>\n <Text fontWeight={600} fontSize=\"15px\">\n {t(\"TransactionPeriod\")}\n </Text>\n <div>{datesComponent}</div>\n </div>\n <div className={styles.filterDialogDivider} />\n <div className={styles.filterDialogSection}>",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

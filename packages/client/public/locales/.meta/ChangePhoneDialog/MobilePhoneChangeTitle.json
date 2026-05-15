@@ -3,7 +3,7 @@
   "content": "Change mobile phone",
   "content_en_sha1_hash": "e7bdb793e871f330d24dd0b1c18fcb0e91b3e5c2",
   "created_at": "2025-05-19T21:30:57.009Z",
-  "updated_at": "2026-04-11T21:03:25.296Z",
+  "updated_at": "2026-05-15T14:00:06.642Z",
   "comment": {
     "text": "This is the title of a dialog window that allows users to change their registered mobile phone number.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePhoneDialog/index.js",
-      "line_number": 63,
+      "line_number": 72,
       "context": "const { t, tReady, visible, onClose } = this.props;\n const { isRequestRunning } = this.state;\n \n return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"MobilePhoneChangeTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{t(\"MobilePhoneEraseDescription\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

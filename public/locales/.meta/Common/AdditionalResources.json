@@ -3,7 +3,7 @@
   "content": "Additional resources",
   "content_en_sha1_hash": "a15fa56393dfeea6e8ddbb0e0c2a6f3cc24b93de",
   "created_at": "2025-05-26T07:15:40.217Z",
-  "updated_at": "2026-04-11T21:01:02.644Z",
+  "updated_at": "2026-05-15T14:00:06.874Z",
   "comment": {
     "text": "This is a section title in the portal settings, referring to extra links or information provided to users.",
     "is_auto": true,
@@ -13,25 +13,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 138,
+      "line_number": 147,
       "context": "{\n id: \"portal-settings_catalog-additional-resources\",\n key: \"0-1-3\",\n icon: \"\",\n link: \"additional-resources\",\n tKey: \"Common:AdditionalResources\",\n },\n ],\n },\n {\n id: \"portal-settings_catalog-appearance\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/management/src/lib/index.ts",
-      "line_number": 65,
+      "line_number": 74,
       "context": "case \"white-label\":\n return { key: t(\"Common:WhiteLabel\"), isSubPage: true };\n case \"company-info\":\n return { key: t(\"Common:CompanyInfoSettings\"), isSubPage: true };\n case \"additional-resources\":\n return { key: t(\"Common:AdditionalResources\"), isSubPage: true };\n case \"brand-name\":\n return { key: t(\"Common:BrandName\"), isSubPage: true };\n case \"bonus\":\n return { key: t(\"Common:Bonus\"), isSubPage: false };\n default:",
       "module": "/packages/management"
     },
     {
       "file_path": "/packages/shared/pages/Branding/AdditionalResources/index.tsx",
-      "line_number": 88,
+      "line_number": 97,
       "context": "[\"settings_unavailable\"]: !isSettingPaid,\n })}\n >\n <div className={classNames(styles.header, \"header\")}>\n <div className={styles.additionalHeader}>\n {t(\"Common:AdditionalResources\")}\n </div>\n </div>\n <div className={styles.additionalDescription}>\n {t(\"Common:AdditionalResourcesDescription\", {\n productName: getBrandName(\"ProductName\"),",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/MobileView/index.tsx",
-      "line_number": 82,
+      "line_number": 91,
       "context": "onClickLink={onClickLink}\n />\n ) : null}\n {displayAdditional ? (\n <CategoryItem\n title={t(\"AdditionalResources\")}\n subtitle={t(\"AdditionalResourcesSubtitle\")}\n url={`${baseUrl}/branding/additional-resources`}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}",
       "module": "/packages/shared"
     }
@@ -167,7 +167,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

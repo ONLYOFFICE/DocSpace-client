@@ -3,7 +3,7 @@
   "content": "* <1>OpenRouter pricing</1> + 20% service fee applies at usage",
   "content_en_sha1_hash": "cb4e5aaec06b5a9175e1338bc4806bca278f67a8",
   "created_at": "2026-04-10T13:53:44.479Z",
-  "updated_at": "2026-05-13T17:07:46.222Z",
+  "updated_at": "2026-05-15T14:00:07.016Z",
   "comment": {
     "text": "This is a note displayed below the AI service pricing, informing users about the pricing model. It includes a link to the OpenRouter pricing details.",
     "is_auto": true,
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

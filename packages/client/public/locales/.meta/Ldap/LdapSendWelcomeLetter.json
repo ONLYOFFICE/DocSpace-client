@@ -3,7 +3,7 @@
   "content": "Send welcome letter",
   "content_en_sha1_hash": "9a770b109558f84680cf019bd25bba994749b961",
   "created_at": "2025-05-19T21:30:54.263Z",
-  "updated_at": "2026-04-11T21:16:51.557Z",
+  "updated_at": "2026-05-15T14:00:06.844Z",
   "comment": {
     "text": "This is a checkbox label. It allows the administrator to choose whether a welcome email is sent to new users provisioned via LDAP.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AdvancedSettings.js",
-      "line_number": 65,
+      "line_number": 74,
       "context": "</Text>\n \n <div className=\"ldap_advanced-settings-header\">\n <Checkbox\n className=\"ldap_checkbox-send-welcome-email\"\n label={t(\"LdapSendWelcomeLetter\")}\n isChecked={isSendWelcomeEmail}\n onChange={onChangeSendWelcomeEmail}\n isDisabled={!isLdapEnabled || isUIDisabled}\n />\n <HelpButton tooltipContent={t(\"LdapSendWelcomeLetterTooltip\")} />",
       "module": "/packages/client"
     }

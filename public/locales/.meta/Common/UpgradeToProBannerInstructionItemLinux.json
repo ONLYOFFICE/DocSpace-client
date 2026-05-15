@@ -3,7 +3,7 @@
   "content": "Linux instruction.",
   "content_en_sha1_hash": "4b856283dbe4b6431a050771a1ebbbed5a4f4760",
   "created_at": "2025-05-26T07:15:49.197Z",
-  "updated_at": "2026-04-12T13:26:58.926Z",
+  "updated_at": "2026-05-15T14:00:06.954Z",
   "comment": {
     "text": "This is a short label for an item in a list of instructions, specifically referring to Linux. It appears as part of a sentence providing a link to Linux installation instructions.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/Payments/Bonus/sub-components/OfficialDocumentation.tsx",
-      "line_number": 66,
+      "line_number": 75,
       "context": "{t(\"UpgradeToProBannerInstructionReadNow\")}\n </Link>\n </Text>\n —\n <Text fontWeight={600}>\n {t(\"UpgradeToProBannerInstructionItemLinux\")}{\" \"}\n <Link\n tag=\"a\"\n fontSize=\"13px\"\n fontWeight=\"600\"\n href={enterpriseInstallScriptUrl}",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

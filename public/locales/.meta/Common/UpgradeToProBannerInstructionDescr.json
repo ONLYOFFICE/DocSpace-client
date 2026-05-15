@@ -3,7 +3,7 @@
   "content": "Use the official documentation to upgrade:",
   "content_en_sha1_hash": "543e777ff5b1b9ec51febc46ab0a1b341669aea6",
   "created_at": "2025-05-26T07:15:49.164Z",
-  "updated_at": "2026-04-12T13:31:49.738Z",
+  "updated_at": "2026-05-15T14:00:06.954Z",
   "comment": {
     "text": "This is a line of text appearing in a banner that instructs users on how to upgrade their ONLYOFFICE DocSpace. It is part of a sentence providing a link to official documentation.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/Payments/Bonus/index.tsx",
-      "line_number": 71,
+      "line_number": 80,
       "context": "{t(\"UpgradeToProBannerInstructionHeader\", {\n organizationName: logoText,\n license: t(\"Common:EnterpriseLicense\"),\n })}\n </Text>\n <Text>{t(\"UpgradeToProBannerInstructionDescr\")}</Text>\n \n <OfficialDocumentation\n dataBackupUrl={dataBackupUrl}\n enterpriseInstallScriptUrl={enterpriseInstallScriptUrl}\n enterpriseInstallWindowsUrl={enterpriseInstallWindowsUrl}",
       "module": "/packages/shared"
     }
@@ -157,7 +157,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

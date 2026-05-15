@@ -3,7 +3,7 @@
   "content": "This user account is loaded from SSO. If you need to change the user name and email address, refer to the SSO server.",
   "content_en_sha1_hash": "1d49453415a6a5acd60e0631a6a68b712b362f82",
   "created_at": "2025-05-19T21:30:53.515Z",
-  "updated_at": "2026-04-11T21:20:00.923Z",
+  "updated_at": "2026-05-15T14:00:06.744Z",
   "comment": {
     "text": "This is a tooltip that appears when hovering over an SSO badge, informing the user that the account is managed by an SSO server and changes to name/email must be made there.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/ItemTitle.tsx",
-      "line_number": 180,
+      "line_number": 189,
       "context": "</Text>\n ) : null}\n {isSSO ? (\n <div\n data-tooltip-id=\"system-tooltip\"\n data-tooltip-content={t(\"PeopleTranslations:SSOAccountTooltip\")}\n data-tooltip-place=\"bottom\"\n >\n <Badge\n className={styles.ssoBadge}\n label={getConstName(\"SSO\")}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 444,
+      "line_number": 453,
       "context": "fontSize=\"9px\"\n fontWeight={800}\n noHover\n />\n <Tooltip anchorSelect={`div[id='sso-badge-profile'] div`}>\n {t(\"PeopleTranslations:SSOAccountTooltip\")}\n </Tooltip>\n </>\n ) : null}\n \n {profile!.isLDAP ? (",
       "module": "/packages/client"
     }

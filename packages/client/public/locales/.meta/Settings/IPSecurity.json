@@ -3,7 +3,7 @@
   "content": "IP Security",
   "content_en_sha1_hash": "6384288df2a9807354de1df765c871288d7c2492",
   "created_at": "2025-05-19T21:30:51.718Z",
-  "updated_at": "2026-04-23T17:24:02.039Z",
+  "updated_at": "2026-05-15T14:00:06.866Z",
   "comment": {
     "text": "This is a section title and menu item label for the IP Security settings. It refers to the feature that allows administrators to restrict access to the portal based on IP addresses.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 284,
+      "line_number": 293,
       "context": "<InvitationSettingsSection />\n \n <StyledSettingsSeparator />\n \n <Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"IPSecurity\")}\n </Text>\n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"IPSecuritySettingDescription\")}\n </Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 110,
+      "line_number": 119,
       "context": "}\n url=\"/portal-settings/security/access-portal/invitation-settings\"\n onClickLink={onClickLink}\n />\n <CategoryItem\n title={t(\"IPSecurity\")}\n subtitle={\n <Trans i18nKey=\"IPSecurityMobileDescription\" ns=\"Settings\" t={t} />\n }\n url=\"/portal-settings/security/access-portal/ip\"\n onClickLink={onClickLink}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 227,
+      "line_number": 236,
       "context": "{\n id: \"portal-settings_catalog-ip-security\",\n key: \"1-0-4\",\n icon: \"\",\n link: \"ip\",\n tKey: \"IPSecurity\",\n },\n {\n id: \"portal-settings_catalog-invitation-settings\",\n key: \"1-0-5\",\n icon: \"\",",
       "module": "/packages/client"
     }

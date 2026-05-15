@@ -3,7 +3,7 @@
   "content": "Fill in",
   "content_en_sha1_hash": "d20fc7ca1f2cd76352a54a4eafef3df897d87c84",
   "created_at": "2025-05-19T21:30:55.156Z",
-  "updated_at": "2026-04-11T21:11:00.989Z",
+  "updated_at": "2026-05-15T14:00:06.683Z",
   "comment": {
     "text": "This is a button label that appears in a dialog for filling out PDF forms, prompting the user to begin the form-filling process.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/FillPDFDialog/FillPDFDialog.tsx",
-      "line_number": 108,
+      "line_number": 117,
       "context": "const cards = [\n {\n id: \"form-yourself\",\n title: t(\"FillPDFDialog:FillOutTitle\"),\n description: t(\"FillPDFDialog:FillOutDescription\"),\n buttonLabel: t(\"FillPDFDialog:FillOutButtonLabel\"),\n onClick: openEditorFill,\n icon: <FillOutYourselfIcon />,\n },\n {\n id: \"form-data-collection\",",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

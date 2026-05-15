@@ -3,7 +3,7 @@
   "content": "Delete this room?",
   "content_en_sha1_hash": "efa9534b795643580e429b3ae955bc0e86472b24",
   "created_at": "2025-09-22T13:39:49.178Z",
-  "updated_at": "2026-04-11T21:05:33.189Z",
+  "updated_at": "2026-05-15T14:00:06.673Z",
   "comment": {
     "text": "This is a dialog title. It appears when a user is about to delete a single room.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 214,
+      "line_number": 223,
       "context": "return `${t(\"Files:DeleteTemplateAction\")}?`;\n }\n \n if (isRoomDelete) {\n if (selection.length > 1) return t(\"DeleteRoomsTitle\");\n return t(\"DeleteRoomTitle\");\n }\n \n if (isRecycleBinFolder) return t(\"EmptyTrashDialog:DeleteForeverTitle\");\n \n if (isPrivacyFolder || selection[0]?.providerKey)",
       "module": "/packages/client"
     }
@@ -24,6 +24,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [],
       "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     }
   }
 }

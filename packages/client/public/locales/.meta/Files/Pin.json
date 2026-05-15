@@ -3,7 +3,7 @@
   "content": "Pin",
   "content_en_sha1_hash": "9c918414710c579b80732bc369eb7087f0d8c8d1",
   "created_at": "2025-05-19T21:30:55.960Z",
-  "updated_at": "2026-04-13T14:59:05.917Z",
+  "updated_at": "2026-05-15T14:00:06.895Z",
   "comment": {
     "text": "This is a button label that allows users to pin a file or folder, making it easily accessible.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 300,
+      "line_number": 309,
       "context": "};\n case \"pin\":\n return {\n id: \"menu-pin\",\n key: \"pin\",\n label: t(\"Pin\"),\n iconUrl: PinReactSvgUrl,\n onClick: this.pinHandle,\n disabled: false,\n };\n case \"unpin\":",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

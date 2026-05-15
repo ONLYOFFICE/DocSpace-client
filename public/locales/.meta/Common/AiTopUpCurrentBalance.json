@@ -2,18 +2,18 @@
   "key_path": "AiTopUpCurrentBalance",
   "content": "Current AI balance",
   "content_en_sha1_hash": "1e15f3120363a6e99a2f59a947a316138cb65f23",
-  "created_at": "2026-05-13T17:07:23.946Z",
-  "updated_at": "2026-05-13T17:22:09.580Z",
+  "created_at": "2026-05-15T13:59:46.489Z",
+  "updated_at": "2026-05-15T14:01:05.721Z",
   "comment": {
-    "text": "Label in the AI top-up dialog body that precedes the user's current balance amount, appearing alongside a formatted numeric value.",
+    "text": "Label in the AI top-up dialog body that precedes a numeric value representing the user's existing credits.",
     "is_auto": true,
-    "updated_at": "2026-05-13T17:22:09.580Z",
+    "updated_at": "2026-05-15T14:01:05.721Z",
     "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/panels/ai-service/AiSimpleTopUpDialog.tsx",
-      "line_number": 167,
+      "line_number": 176,
       "context": "<ModalDialog.Body>\n <div className={styles.body}>\n <div className={styles.balanceRow}>\n <Text fontSize=\"13px\" className={styles.balanceRowLabel}>\n {t(\"AiTopUpCurrentBalance\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight={600}>\n {formattedCurrent}\n </Text>\n </div>",
       "module": "/libs/ui-kit"
     }

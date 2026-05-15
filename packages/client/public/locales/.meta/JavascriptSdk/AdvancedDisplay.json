@@ -3,7 +3,7 @@
   "content": "Advanced display settings",
   "content_en_sha1_hash": "1c98932cf18b30cb931fa36dd7e0b1a0299a438d",
   "created_at": "2025-05-19T21:30:54.356Z",
-  "updated_at": "2026-04-11T21:16:20.944Z",
+  "updated_at": "2026-05-15T14:00:06.802Z",
   "comment": {
     "text": "This is a subheader for a section in the advanced settings of the Javascript SDK, indicating options related to advanced display configurations for file, manager, or room selectors.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 496,
+      "line_number": 505,
       "context": "</ControlsGroup>\n ) : null}\n </ControlsSection>\n \n <ControlsSection>\n <CategorySubHeader>{t(\"AdvancedDisplay\")}</CategorySubHeader>\n <Label className=\"label\" text={t(\"FileTypeDisplay\")} />\n <RadioButtonGroup\n orientation=\"vertical\"\n options={fileTypeDisplay}\n name=\"columnsDisplayOptions\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 681,
+      "line_number": 690,
       "context": ") : null}\n </ControlsGroup>\n ) : null}\n </ControlsSection>\n <ControlsSection>\n <CategorySubHeader>{t(\"AdvancedDisplay\")}</CategorySubHeader>\n <ColumnContainer>\n <FilterBlock t={t} config={config} setConfig={setConfig} />\n </ColumnContainer>\n <ControlsGroup>\n <SearchTerm t={t} config={config} setConfig={setConfig} />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
-      "line_number": 309,
+      "line_number": 318,
       "context": "<SelectTextInput t={t} config={config} setConfig={setConfig} />\n <CancelTextInput t={t} config={config} setConfig={setConfig} />\n </ControlsSection>\n \n <ControlsSection>\n <CategorySubHeader>{t(\"AdvancedDisplay\")}</CategorySubHeader>\n \n <Label className=\"label\" text={t(\"RoomTypeDisplay\")} />\n <ComboBox\n onSelect={changeRoomType}\n options={roomTypeOptions}",
       "module": "/packages/client"
     }

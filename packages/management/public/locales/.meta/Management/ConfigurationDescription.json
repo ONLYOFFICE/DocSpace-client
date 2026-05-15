@@ -3,7 +3,7 @@
   "content": "You need to connect your domain to your current IP to change the address settings. Please make sure you have access to the domain settings to be able to do that. After connecting the domain, create a {{productName}} name. You can change the created {{productName}} name later using the space settings.",
   "content_en_sha1_hash": "6428b4f823da2c4393fa0d6b961f1bfec647cf0a",
   "created_at": "2025-05-19T21:30:57.414Z",
-  "updated_at": "2026-04-11T21:32:01.275Z",
+  "updated_at": "2026-05-15T14:00:06.973Z",
   "comment": {
     "text": "This is a descriptive text that appears below the \"ConfigurationHeader\" in the space settings. It explains the steps required to connect a domain and create a product name, with `{{productName}}` being replaced by the brand name (e.g., \"DocSpace\").",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/management/src/app/spaces/configuration/header.tsx",
-      "line_number": 46,
+      "line_number": 55,
       "context": "</Text>\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"ConfigurationHeader\")}\n </Text>\n <Text fontSize=\"12px\" lineHeight=\"16px\" fontWeight={400}>\n {t(\"ConfigurationDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n </div>\n );",
       "module": "/packages/management"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-04T13:03:19.496195Z"
+      "approved_at": "2026-05-15T15:04:54.651494Z"
     },
     "si": {
       "ai_translated": false,

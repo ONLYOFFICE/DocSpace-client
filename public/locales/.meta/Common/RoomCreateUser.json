@@ -3,7 +3,7 @@
   "content": "Users added.",
   "content_en_sha1_hash": "a878f78eb9713716912f998404ed3dca2a7b8005",
   "created_at": "2025-09-23T07:24:16.863Z",
-  "updated_at": "2026-04-13T08:13:22.047Z",
+  "updated_at": "2026-05-15T14:00:06.738Z",
   "comment": {
     "text": "This is a toast message confirming that users have been successfully added to a room. It appears after a user addition operation is completed.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 324,
+      "line_number": 333,
       "context": "/>\n );\n case FeedActionKeys.RoomCreateUser:\n if (hasRelatedItems)\n return t(\"InfoPanel:RoomCreateUserCount\", { count });\n return t(\"Common:RoomCreateUser\");\n case FeedActionKeys.RoomUpdateAccessForUser:\n return t(\"InfoPanel:RoomUpdateAccess\");\n case FeedActionKeys.RoomRemoveUser:\n return t(\"InfoPanel:RoomRemoveUser\");\n case FeedActionKeys.RoomInviteResend:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 268,
+      "line_number": 277,
       "context": "}}\n />\n );\n case FeedActionKeys.RoomCreateUser:\n if (hasRelatedItems) return t(\"InfoPanel:RoomCreateUserCount\", { count });\n return t(\"Common:RoomCreateUser\");\n case FeedActionKeys.RoomUpdateAccessForUser:\n return t(\"InfoPanel:RoomUpdateAccess\");\n case FeedActionKeys.RoomRemoveUser:\n return t(\"InfoPanel:RoomRemoveUser\");\n case FeedActionKeys.RoomInviteResend:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/share/selector/index.tsx",
-      "line_number": 82,
+      "line_number": 91,
       "context": "try {\n const list = await ShareLinkService.shareItemToUser(share, item);\n \n onSubmit?.(list);\n \n toastr.success(t(\"Common:RoomCreateUser\"));\n } catch (error) {\n toastr.error(error as TData);\n console.error(error);\n } finally {\n onClose();",
       "module": "/packages/shared"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

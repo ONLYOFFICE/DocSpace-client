@@ -3,7 +3,7 @@
   "content": "Folders moved.",
   "content_en_sha1_hash": "95d3399265d8232c4895fbd790a035ba8ae0057d",
   "created_at": "2025-05-19T21:30:54.849Z",
-  "updated_at": "2026-04-11T21:13:19.688Z",
+  "updated_at": "2026-05-15T14:00:06.735Z",
   "comment": {
     "text": "This is a toast message displayed to confirm that one or more folders have been successfully moved.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 125,
+      "line_number": 134,
       "context": "case FeedActionKeys.FolderMoved:\n if (hasRelatedItems)\n return t(\"InfoPanel:FolderMovedCount\", {\n count,\n });\n return t(\"InfoPanel:FoldersMovedNotify\");\n case FeedActionKeys.FolderMovedToTrash:\n if (hasRelatedItems)\n return t(\"InfoPanel:FoldersTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 119,
+      "line_number": 128,
       "context": "case FeedActionKeys.FolderMoved:\n if (hasRelatedItems)\n return t(\"InfoPanel:FolderMovedCount\", {\n count,\n });\n return t(\"InfoPanel:FoldersMovedNotify\");\n case FeedActionKeys.FolderMovedToTrash:\n if (hasRelatedItems)\n return t(\"InfoPanel:FoldersTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),",
       "module": "/packages/client"
     }

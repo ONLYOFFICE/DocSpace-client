@@ -3,7 +3,7 @@
   "content": "Group removed",
   "content_en_sha1_hash": "587c704467c3ef25e9a2b18a68181777f6352ac6",
   "created_at": "2025-05-19T21:30:54.925Z",
-  "updated_at": "2026-04-11T21:12:47.903Z",
+  "updated_at": "2026-05-15T14:00:06.738Z",
   "comment": {
     "text": "This is a toast message displayed in the activity feed when a group has been removed from a room.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 340,
+      "line_number": 349,
       "context": "});\n return t(\"InfoPanel:RoomGroupAdded\");\n case FeedActionKeys.RoomUpdateAccessForGroup:\n return t(\"InfoPanel:RoomUpdateAccess\");\n case FeedActionKeys.RoomGroupRemove:\n return t(\"InfoPanel:RoomGroupRemove\");\n case FeedActionKeys.RoomWatermarkSet:\n return t(\"InfoPanel:RoomWatermarkSet\");\n case FeedActionKeys.RoomWatermarkDisabled:\n return t(\"InfoPanel:RoomWatermarkDisabled\");\n case FeedActionKeys.RoomIndexingEnabled:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 284,
+      "line_number": 293,
       "context": "});\n return t(\"InfoPanel:RoomGroupAdded\");\n case FeedActionKeys.RoomUpdateAccessForGroup:\n return t(\"InfoPanel:RoomUpdateAccess\");\n case FeedActionKeys.RoomGroupRemove:\n return t(\"InfoPanel:RoomGroupRemove\");\n case FeedActionKeys.RoomWatermarkSet:\n return t(\"InfoPanel:RoomWatermarkSet\");\n case FeedActionKeys.RoomWatermarkDisabled:\n return t(\"InfoPanel:RoomWatermarkDisabled\");\n case FeedActionKeys.RoomIndexingEnabled:",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Fill",
   "content_en_sha1_hash": "7adb6736cf2c9ae017b128f98738ffbae0e58655",
   "created_at": "2025-05-19T21:30:45.342Z",
-  "updated_at": "2026-05-08T13:10:45.667Z",
+  "updated_at": "2026-05-15T14:00:06.886Z",
   "comment": {
     "text": "This is the label for a button that allows users to fill out a form.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2158,
+      "line_number": 2167,
       "context": "disabled: false,\n },\n {\n id: \"option_fill-form\",\n key: \"fill-form\",\n label: t(\"Common:FillFormButton\"),\n icon: FormFillRectSvgUrl,\n onClick: () => this.onClickLinkFillForm(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
@@ -25,13 +25,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsContextMenu.ts",
-      "line_number": 188,
+      "line_number": 197,
       "context": "> = {\n \"fill-form\": canFillForm\n ? {\n id: \"option_fill-form\",\n key: \"fill-form\",\n label: t(\"Common:FillFormButton\"),\n icon: FormFillRectSvgUrl,\n onClick: () => openForm(file, \"fill\"),\n disabled: false,\n }\n : null,",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/dialogs/FillingStatusPanel/index.tsx",
-      "line_number": 183,
+      "line_number": 192,
       "context": "scale\n primary\n onClick={() => onFill?.(file)}\n id=\"panel_button_fill\"\n key=\"panel_button_fill\"\n label={t(\"Common:FillFormButton\")}\n size={ButtonSize.normal}\n />\n ) : null}\n {file.security.StopFilling ? (\n <Button",
       "module": "/packages/shared"
     }
@@ -167,7 +167,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "Edit room groups",
   "content_en_sha1_hash": "c26b9bcc520a61b56eb5c44b7c3f4ed012e0c91b",
   "created_at": "2026-02-19T13:36:24.873Z",
-  "updated_at": "2026-04-11T21:11:35.943Z",
+  "updated_at": "2026-05-15T14:00:06.681Z",
   "comment": {
     "text": "This is the title of a dialog window that allows users to manage and modify groups of rooms.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/index.tsx",
-      "line_number": 350,
+      "line_number": 359,
       "context": "hideContent={isOpenGroupIcon}\n className={styles.editRoomGroupsDialog}\n onClose={onCloseEditRoomGroupsDialog}\n >\n <ModalDialog.Header>\n {t(\"GroupingRooms:EditRoomGroups\")}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n {isTooltipVisible && (\n <PublicRoomBar",
       "module": "/packages/client"
     }

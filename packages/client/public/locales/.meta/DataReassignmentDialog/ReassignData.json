@@ -3,7 +3,7 @@
   "content": "Reassign data",
   "content_en_sha1_hash": "22c68a0740223ff4ac25287bac3de5829dc35cf3",
   "created_at": "2025-05-19T21:30:56.751Z",
-  "updated_at": "2026-04-11T21:05:06.778Z",
+  "updated_at": "2026-05-15T14:00:06.901Z",
   "comment": {
     "text": "This is a button label. Clicking it opens a dialog to reassign data ownership from one user to another.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 241,
+      "line_number": 250,
       "context": "case \"reassign-data\":\n return {\n id: \"option_reassign-data\",\n key: option,\n icon: ReassignDataReactSvgUrl,\n label: t(\"DataReassignmentDialog:ReassignData\"),\n onClick: () => this.toggleDataReassignmentDialog(item),\n };\n case \"delete-personal-data\":\n return {\n id: \"option_delete-personal-data\",",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

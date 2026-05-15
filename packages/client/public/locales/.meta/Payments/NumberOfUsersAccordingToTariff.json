@@ -3,7 +3,7 @@
   "content": "Number of admins according to your tariff plan: {{currentValue}}/{{maxValue}}",
   "content_en_sha1_hash": "810503379392ed3bd1fd1c2e5cdeaffc01287a43",
   "created_at": "2025-05-19T21:30:53.712Z",
-  "updated_at": "2026-04-11T21:19:36.926Z",
+  "updated_at": "2026-05-15T14:00:06.688Z",
   "comment": {
     "text": "This is a line of text within a dialog, informing the user about the number of administrators they currently have versus the maximum allowed by their tariff plan. `{{currentValue}}` is the current number of administrators, and `{{maxValue}}` is the maximum allowed.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/sub-components/UsersContent.tsx",
-      "line_number": 100,
+      "line_number": 118,
       "context": "return (\n <>\n <Text fontWeight={600}>{t(\"UsersQuotaAlmostExhausted\")}</Text>\n <br />\n <Text>\n {t(\"NumberOfUsersAccordingToTariff\", {\n currentValue: addedManagersCount,\n maxValue: maxCountManagersByQuota,\n })}\n </Text>\n <br />",
       "module": "/packages/client"
     }

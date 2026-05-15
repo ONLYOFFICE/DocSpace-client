@@ -3,7 +3,7 @@
   "content": "Nothing found",
   "content_en_sha1_hash": "fed1f5cd946a327d187f842db23041ecd3553315",
   "created_at": "2025-05-19T21:30:46.918Z",
-  "updated_at": "2026-04-11T20:47:42.317Z",
+  "updated_at": "2026-05-15T14:00:06.630Z",
   "comment": {
     "text": "This is a header text displayed in an empty state screen when no results are found after applying a filter or performing a search.",
     "is_auto": true,
@@ -13,37 +13,37 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/Files/hooks/useSelectorBody.tsx",
-      "line_number": 270,
+      "line_number": 279,
       "context": "<EmptyScreenFilterFilesLight />\n ) : (\n <EmptyScreenFilterFilesDark />\n )\n }\n searchEmptyScreenHeader={t(\"NotFoundTitle\")}\n searchEmptyScreenDescription={t(\"EmptyFilterDescriptionText\")}\n isLoading={showLoader}\n rowLoader={\n <RowLoader\n isMultiSelect={false}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/MCPServers/index.tsx",
-      "line_number": 243,
+      "line_number": 252,
       "context": "<EmptyScreenRoomSelectorLight />\n ) : (\n <EmptyScreenRoomSelectorDark />\n )\n }\n searchEmptyScreenHeader={t(\"NotFoundTitle\")}\n searchEmptyScreenDescription={t(\"SearchEmptyRoomsDescription\")}\n submitButtonLabel={t(\"AddButton\")}\n disableSubmitButton={false}\n onSubmit={onSubmitAction}\n rowLoader={<RowLoader />}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/Room/index.tsx",
-      "line_number": 349,
+      "line_number": 358,
       "context": "<EmptyScreenFilterRoomsLight />\n ) : (\n <EmptyScreenFilterRoomsDark />\n )\n }\n searchEmptyScreenHeader={t(\"NotFoundTitle\")}\n searchEmptyScreenDescription={t(\"SearchEmptyRoomsDescription\")}\n totalItems={total}\n hasNextPage={hasNextPage}\n isNextPageLoading={isNextPageLoading}\n loadNextPage={onLoadNextPage}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/TemplateGallery/TilesContainer/index.tsx",
-      "line_number": 114,
+      "line_number": 123,
       "context": "<EmptyScreenContainer\n imageSrc={\n isBase ? EmptyScreenFilterAltSvgUrl : EmptyScreenFilterAltDarkSvgUrl\n }\n imageAlt=\"Empty Screen Gallery image\"\n headerText={t(\"Common:NotFoundTitle\")}\n descriptionText={t(\"FormGallery:EmptyFormGalleryScreenDescription\")}\n buttons={\n <div className={styles.links}>\n <IconButton\n className={styles.icon}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/EmptyFilter.js",
-      "line_number": 66,
+      "line_number": 75,
       "context": "];\n \n return (\n <EmptyView\n icon={theme.isBase ? <EmptyFilterImg /> : <EmptyFilterDarkImg />}\n title={t(\"Common:NotFoundTitle\")}\n options={options}\n description={t(\"NoResultsMatched\")}\n />\n );\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/library-landing/HeroSearchBar.tsx",
-      "line_number": 212,
+      "line_number": 221,
       "context": "<div className={styles.searchLoading}>\n <Loader type={LoaderTypes.dualRing} size=\"32px\" />\n </div>\n ) : results.length === 0 ? (\n <div className={styles.searchNoResults}>\n {t(\"Common:NotFoundTitle\")}\n </div>\n ) : (\n <>\n {results.map((result) => (\n <div",
       "module": "/packages/sdk"
     }
@@ -179,7 +179,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

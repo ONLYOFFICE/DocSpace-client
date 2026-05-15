@@ -3,7 +3,7 @@
   "content": "To continue getting support and updates, buy a renewal.",
   "content_en_sha1_hash": "ec58935d8687f19ed9ad71853d7932c9a2c5e29f",
   "created_at": "2025-05-26T07:15:40.078Z",
-  "updated_at": "2026-04-11T21:48:25.808Z",
+  "updated_at": "2026-05-15T14:00:06.955Z",
   "comment": {
     "text": "This is a text label displayed when a license is about to expire or has expired. It prompts the user to renew their license to continue receiving support and updates.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/EnterpriseContainer.tsx",
-      "line_number": 102,
+      "line_number": 111,
       "context": ") : null}\n \n <Text fontSize=\"14px\" className={styles.paymentsRenewSubscription}>\n {isLicenseDateExpired\n ? t(\"ActivatePurchaseBuyLicense\")\n : t(\"ActivatePurchaseRenewLicense\")}\n </Text>\n <ButtonContainer buyUrl={buyUrl} />\n \n <div className={styles.paymentsSupport}>\n <Text>",
       "module": "/packages/shared"
     }
@@ -157,7 +157,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-04T13:03:19.390474Z"
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

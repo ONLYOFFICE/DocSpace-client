@@ -3,7 +3,7 @@
   "content": "Real-time Tracking",
   "content_en_sha1_hash": "426c7f19fa1e289b594c7485e18d51efe61a187a",
   "created_at": "2026-03-31T15:18:26.941Z",
-  "updated_at": "2026-04-23T17:24:02.158Z",
+  "updated_at": "2026-05-15T14:00:06.982Z",
   "comment": {
     "text": "This is a title for a feature card in the welcome tour dialog. It describes a key capability of the software.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/welcome-tour-dialog/index.tsx",
-      "line_number": 119,
+      "line_number": 128,
       "context": "<div className={styles.featureCard}>\n <div className={styles.featureIcon}>\n <ReactSVG src={featureIcons[1]} />\n </div>\n <div className={styles.featureText}>\n <Text fontWeight={600} fontSize=\"13px\">{t(\"Common:WelcomeFeature2Title\", \"Real-time Tracking\")}</Text>\n <Text fontSize=\"12px\" className={styles.featureDesc}>{t(\"Common:WelcomeFeature2\", \"Monitor progress and submissions instantly\")}</Text>\n </div>\n </div>\n <div className={styles.featureCard}>\n <div className={styles.featureIcon}>",
       "module": "/packages/sdk"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

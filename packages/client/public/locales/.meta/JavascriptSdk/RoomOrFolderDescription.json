@@ -3,7 +3,7 @@
   "content": "You can select the section, room or folder you want to display",
   "content_en_sha1_hash": "35bc5102629f27da03df522abca9976c119d659a",
   "created_at": "2025-05-19T21:30:54.629Z",
-  "updated_at": "2026-04-11T21:14:49.645Z",
+  "updated_at": "2026-05-15T14:00:06.801Z",
   "comment": {
     "text": "This is a tooltip that explains how to use the file selector to choose a specific section, room, or folder to display within the ONLYOFFICE DocSpace portal settings.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 457,
+      "line_number": 466,
       "context": "<Label className=\"label\" text={t(\"RoomOrFolder\")} />\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"RoomOrFolderDescription\")}</Text>\n }\n dataTestId=\"room_or_folder_help_button\"\n />\n </LabelGroup>\n <FilesSelectorInputWrapper>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 634,
+      "line_number": 643,
       "context": "<Label className=\"label\" text={t(\"RoomOrFolder\")} />\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"RoomOrFolderDescription\")}</Text>\n }\n dataTestId=\"room_or_folder_help_button\"\n />\n </LabelGroup>\n <FilesSelectorInputWrapper>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
-      "line_number": 345,
+      "line_number": 354,
       "context": "<Label className=\"label\" text={t(\"Common:Room\")} />\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"RoomOrFolderDescription\")}</Text>\n }\n dataTestId=\"room_selector_help_button\"\n />\n </LabelGroup>\n <FilesSelectorInputWrapper>",
       "module": "/packages/client"
     }

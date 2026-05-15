@@ -3,7 +3,7 @@
   "content": "Search by Head of group",
   "content_en_sha1_hash": "38790b414bc3ff27122ec8675023f26f062c1686",
   "created_at": "2025-05-19T21:30:50.003Z",
-  "updated_at": "2026-04-11T21:27:23.904Z",
+  "updated_at": "2026-05-15T14:00:06.752Z",
   "comment": {
     "text": "This is a checkbox label within a filter menu. It allows users to filter groups by their designated head.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 727,
+      "line_number": 736,
       "context": "},\n {\n id: \"filter_group-manager\",\n key: FilterKeys.byManager,\n group: FilterGroups.groupsFilterManager,\n label: t(\"Translations:SearchByHeadOfGroup\"),\n isDisabled: true,\n isCheckbox: true,\n },\n ];",
       "module": "/packages/client"
     }

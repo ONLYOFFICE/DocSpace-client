@@ -3,7 +3,7 @@
   "content": "Enable guests",
   "content_en_sha1_hash": "160e61b5e02191e607c2c62478b654f447e6a4b0",
   "created_at": "2025-05-19T21:30:56.966Z",
-  "updated_at": "2026-04-11T21:03:41.387Z",
+  "updated_at": "2026-05-15T14:00:06.647Z",
   "comment": {
     "text": "This is a button label within a dialog. It enables multiple guest users.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
-      "line_number": 195,
+      "line_number": 204,
       "context": "header = onlyOneUser\n ? isGuests\n ? t(\"EnableGuest\")\n : t(\"EnableUser\")\n : isGuests\n ? t(\"EnableGuests\")\n : t(\"EnableUsers\");\n \n bodyText = onlyOneUser\n ? isGuests\n ? t(\"EnableGuestDescription\", { productName: getBrandName(\"ProductName\") })",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

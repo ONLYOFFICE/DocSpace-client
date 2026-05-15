@@ -3,7 +3,7 @@
   "content": "Form responses are automatically saved in the Complete folder as a spreadsheet.",
   "content_en_sha1_hash": "5448d4ca174345fca6ce2103d7d91c91a3a18eec",
   "created_at": "2026-05-08T13:10:42.373Z",
-  "updated_at": "2026-05-08T19:46:45.003Z",
+  "updated_at": "2026-05-15T14:00:06.729Z",
   "comment": {
     "text": "Description text in the InfoPanel details view that appears when a form collection is connected to a room, explaining the automatic saving process for responses.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/sub-components/FormInfo/CollectionCard.tsx",
-      "line_number": 74,
+      "line_number": 83,
       "context": ");\n \n const description = useMemo(() => {\n if (collectionConnected) {\n if (isRoom)\n return t(\"InfoPanel:FormRoomCollectionConnectedDescriptionRoom\");\n return t(\"InfoPanel:FormRoomCollectionConnectedDescription\");\n }\n return t(\"InfoPanel:FormRoomCollectionNotConnectedDescription\");\n }, [collectionConnected, isRoom, t]);",
       "module": "/packages/client"
     }

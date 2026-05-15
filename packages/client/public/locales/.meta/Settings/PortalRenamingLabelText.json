@@ -3,7 +3,7 @@
   "content": "New space name",
   "content_en_sha1_hash": "09609f05aae47160f36f4e04d315dc2f8abf446b",
   "created_at": "2025-05-19T21:30:52.270Z",
-  "updated_at": "2026-04-11T21:22:54.729Z",
+  "updated_at": "2026-05-15T14:00:06.772Z",
   "comment": {
     "text": "This is the label for a text input field where the user can enter a new name for their DocSpace portal.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 300,
+      "line_number": 309,
       "context": "const settingsBlock = (\n <div className=\"settings-block\">\n <FieldContainer\n id=\"fieldContainerPortalRenaming\"\n className=\"field-container-width\"\n labelText={`${t(\"PortalRenamingLabelText\")}`}\n isVertical\n >\n <TextInput\n tabIndex={10}\n id=\"textInputContainerPortalRenaming\"",
       "module": "/packages/client"
     }

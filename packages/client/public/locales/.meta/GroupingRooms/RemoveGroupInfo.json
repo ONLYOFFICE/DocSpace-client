@@ -3,7 +3,7 @@
   "content": "The rooms included in group will be displayed in the <strong>All Rooms</strong> section.",
   "content_en_sha1_hash": "3b90f01308bc168aeaa213c4f963cd2dfa36dbed",
   "created_at": "2026-02-19T13:36:24.881Z",
-  "updated_at": "2026-04-11T21:11:28.010Z",
+  "updated_at": "2026-05-15T14:00:06.682Z",
   "comment": {
     "text": "This is an informational message within a confirmation dialog. It appears when a user is about to remove a room group and explains that the rooms previously in the group will still be visible in the \"All Rooms\" section. The `<strong>` tag highlights \"All Rooms\".",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/sub-components/DeleteGroupDialog.tsx",
-      "line_number": 112,
+      "line_number": 121,
       "context": "{t(\"GroupingRooms:RemoveGroupConfirmation\")}\n </Text>\n <Text style={{ marginTop: \"16px\" }} lineHeight=\"24px\">\n <Trans\n t={t}\n i18nKey=\"GroupingRooms:RemoveGroupInfo\"\n components={{ strong: <strong style={{ fontWeight: 700 }} /> }}\n />\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
       "module": "/packages/client"
     }

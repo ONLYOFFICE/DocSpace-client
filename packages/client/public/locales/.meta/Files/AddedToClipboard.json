@@ -3,7 +3,7 @@
   "content": "Items added to clipboard",
   "content_en_sha1_hash": "ec9189ec885c2481ccbf1eaee77e1a3ada301a5f",
   "created_at": "2025-05-19T21:30:55.207Z",
-  "updated_at": "2026-04-11T21:10:48.456Z",
+  "updated_at": "2026-05-15T14:00:06.896Z",
   "comment": {
     "text": "Toast message indicating that selected items have been copied or cut to the clipboard. It appears briefly after a copy or cut action. The number of items is appended to this text.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/HotkeyStore.js",
-      "line_number": 624,
+      "line_number": 633,
       "context": "if (!canCopy || (isCut && !canMove) || !selection.length) return;\n \n setHotkeysClipboard();\n this.hotkeysClipboardAction = isCut ? \"move\" : \"copy\";\n \n const copyText = `${t(\"AddedToClipboard\")}: ${selection.length}`;\n toastr.success(copyText);\n };\n \n moveFilesFromClipboard = (t) => {\n const fileIds = [];",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "Subscription will be automatically renewed <1>on {{finalDate}}</1> with updated pricing and specifications — <1>{{price}}/month ({{amount}})</1>",
   "content_en_sha1_hash": "970e60c3a629d39134d3e840abb8947cdfd43b05",
   "created_at": "2026-04-10T13:53:43.498Z",
-  "updated_at": "2026-05-08T13:10:45.733Z",
+  "updated_at": "2026-05-15T14:00:07.003Z",
   "comment": {
     "text": "This is a text string displayed to the user, informing them about the automatic renewal of their subscription. It appears when a user's storage plan is downgraded, indicating the new renewal date ({{finalDate}}), the updated monthly price ({{price}}), and the new storage amount ({{amount}}).",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
-      "line_number": 310,
+      "line_number": 323,
       "context": "{currentStoragePlanSize ? (\n <Text className={styles.renewalText}>\n {isDowngrade ? (\n <CommonTrans\n i18nKey=\"SubscriptionAutoRenewedWithUpdate\"\n values={{\n finalDate: storageExpiryDate,\n price: formatWalletCurrency(monthlyPrice, 2),\n amount: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n }}",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

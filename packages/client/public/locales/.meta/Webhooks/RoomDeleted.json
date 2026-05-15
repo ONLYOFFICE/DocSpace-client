@@ -3,7 +3,7 @@
   "content": "Room deleted",
   "content_en_sha1_hash": "65fee5daecf29b47c6ec9d434be65a53c5f1d509",
   "created_at": "2025-05-19T21:30:49.821Z",
-  "updated_at": "2026-04-13T14:59:05.879Z",
+  "updated_at": "2026-05-15T14:00:06.835Z",
   "comment": {
     "text": "This is a toast message that appears briefly to confirm that a room has been successfully deleted.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
-      "line_number": 83,
+      "line_number": 92,
       "context": "case WebhookTriggers.RoomUpdated:\n return t(\"RoomUpdated\");\n case WebhookTriggers.RoomArchived:\n return t(\"RoomArchived\");\n case WebhookTriggers.RoomDeleted:\n return t(\"RoomDeleted\");\n case WebhookTriggers.RoomRestored:\n return t(\"RoomRestored\");\n case WebhookTriggers.RoomCopied:\n return t(\"RoomCopied\");\n case WebhookTriggers.FormFilledOut:",
       "module": "/packages/client"
     }

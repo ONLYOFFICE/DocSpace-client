@@ -3,7 +3,7 @@
   "content": "Service URL",
   "content_en_sha1_hash": "077225837f3d213b1dc433defc47c2a4e06d2b94",
   "created_at": "2025-05-26T07:15:47.778Z",
-  "updated_at": "2026-04-12T21:16:00.204Z",
+  "updated_at": "2026-05-15T14:00:06.924Z",
   "comment": {
     "text": "This is a placeholder text for an input field where the user enters the URL of a storage service.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/amazon-settings/AmazonSettings.tsx",
-      "line_number": 87,
+      "line_number": 96,
       "context": "selectedStorage && selectedStorage.properties[0]?.title;\n const forcePathStylePlaceholder = t(\"Common:ForcePathStyle\");\n const regionPlaceholder =\n selectedStorage && selectedStorage.properties[2]?.title;\n \n const serviceUrlPlaceholder = t(\"Common:ServiceUrl\");\n const SSEPlaceholder = t(\"Common:ServerSideEncryptionMethod\");\n const useHttpPlaceholder = t(\"Common:UseHttp\");\n const serverSideEncryption = t(\"Common:AmazonSSE\");\n const clientSideEncryption = t(\"Common:AmazonCSE\");",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

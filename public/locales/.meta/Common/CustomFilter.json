@@ -3,7 +3,7 @@
   "content": "Custom filter",
   "content_en_sha1_hash": "389c48e9de9a170c1fc6fcbbcade4710c271dddb",
   "created_at": "2025-05-19T21:30:44.271Z",
-  "updated_at": "2026-04-11T20:55:47.914Z",
+  "updated_at": "2026-05-15T14:00:06.933Z",
   "comment": {
     "text": "This is a label for a sharing permission option. It allows users to apply a custom filter to the shared content.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 127,
+      "line_number": 136,
       "context": "icon: AccessEditReactSvgUrl,\n },\n [ShareRights.CustomFilter]: {\n access: ShareAccessRights.CustomFilter,\n key: \"custom-filter\",\n label: t(\"Common:CustomFilter\"),\n icon: CustomFilterReactSvgUrl,\n },\n [ShareRights.Review]: {\n access: ShareAccessRights.Review,\n key: \"review\",",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 127,
+      "line_number": 136,
       "context": "icon: AccessEditReactSvgUrl,\n },\n [ShareRights.CustomFilter]: {\n access: ShareAccessRights.CustomFilter,\n key: \"custom-filter\",\n label: t(\"Common:CustomFilter\"),\n icon: CustomFilterReactSvgUrl,\n },\n [ShareRights.Review]: {\n access: ShareAccessRights.Review,\n key: \"review\",",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 127,
+      "line_number": 136,
       "context": "icon: AccessEditReactSvgUrl,\n },\n [ShareRights.CustomFilter]: {\n access: ShareAccessRights.CustomFilter,\n key: \"custom-filter\",\n label: t(\"Common:CustomFilter\"),\n icon: CustomFilterReactSvgUrl,\n },\n [ShareRights.Review]: {\n access: ShareAccessRights.Review,\n key: \"review\",",
       "module": "/packages/shared"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

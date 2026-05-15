@@ -3,7 +3,7 @@
   "content": "Groups will be saved but hidden. Re-enable in Profile, File management.",
   "content_en_sha1_hash": "2ceef816d8c798e357707dc2a86437ae22b42d10",
   "created_at": "2026-02-19T13:36:24.873Z",
-  "updated_at": "2026-04-11T21:11:36.916Z",
+  "updated_at": "2026-05-15T14:00:06.681Z",
   "comment": {
     "text": "This is the body text of a tooltip that appears when a user hovers over the \"Disable groups\" option in the room settings. It explains that existing groups will be hidden but not deleted, and can be re-enabled later.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/index.tsx",
-      "line_number": 370,
+      "line_number": 379,
       "context": "{t(\"GroupingRooms:DisablingRoomGroups\")}\n </span>\n }\n bodyText={\n <span style={{ display: \"block\", marginTop: \"2px\" }}>\n {t(\"GroupingRooms:DisablingRoomGroupsDescription\")}\n </span>\n }\n iconName={InfoIcon}\n onClose={onDismissTooltip}\n />",
       "module": "/packages/client"
     }

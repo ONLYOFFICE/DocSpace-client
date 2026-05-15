@@ -3,7 +3,7 @@
   "content": "Sync with Desktop Editor settings",
   "content_en_sha1_hash": "a8a7da11fabd075e939eef96ebf7c7edd247b5f8",
   "created_at": "2025-05-19T21:30:53.348Z",
-  "updated_at": "2026-04-11T21:20:51.110Z",
+  "updated_at": "2026-05-15T14:00:06.878Z",
   "comment": {
     "text": "This is a label for a radio button or checkbox in the user's profile settings. It allows the user to choose to synchronize the application's theme (light/dark mode) with the operating system's theme settings on a desktop client.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/interface-theme/index.tsx",
-      "line_number": 109,
+      "line_number": 118,
       "context": "const isSystemTheme = currentTheme === ThemeKeys.SystemStr;\n const systemThemeValue = getSystemTheme();\n \n const systemThemeLabel = isDesktopClient\n ? t(\"Profile:DesktopTheme\")\n : t(\"SystemTheme\");\n const systemThemeDescriptionLabel = isDesktopClient\n ? t(\"Profile:DesktopThemeDescription\")\n : t(\"SystemThemeDescription\");",
       "module": "/packages/client"
     }

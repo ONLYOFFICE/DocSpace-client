@@ -3,7 +3,7 @@
   "content": "Upload limits",
   "content_en_sha1_hash": "ab26eecf0b4b303f9854781189f5868cf320026c",
   "created_at": "2026-03-20T09:07:42.401Z",
-  "updated_at": "2026-04-11T21:14:18.544Z",
+  "updated_at": "2026-05-15T14:00:06.807Z",
   "comment": {
     "text": "This is a section header in the portal settings. It introduces options for configuring restrictions on file uploads.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
-      "line_number": 490,
+      "line_number": 499,
       "context": "dataTestId=\"upload_quantity_radiobutton_group\"\n />\n </ControlsSection>\n \n <ControlsSection>\n <CategorySubHeader>{t(\"UploadLimits\")}</CategorySubHeader>\n <SizeLimitSetter\n labelText={\n config.isMultipleUpload\n ? config.isFolderUpload\n ? t(\"MaximumFolderSizePerFolder\")",
       "module": "/packages/client"
     }

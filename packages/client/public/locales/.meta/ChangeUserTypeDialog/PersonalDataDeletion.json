@@ -3,7 +3,7 @@
   "content": "All files and folders in the {{sectionName}} section of this contact will be <1>permanently deleted in 30 days</1>.",
   "content_en_sha1_hash": "efedc55b4dc3c8a9767b5211ae77051ca71c7130",
   "created_at": "2025-05-19T21:30:56.935Z",
-  "updated_at": "2026-04-11T21:03:55.333Z",
+  "updated_at": "2026-05-15T14:00:06.648Z",
   "comment": {
     "text": "This is a message within a dialog box, informing the user that all files and folders in a specified section (`{{sectionName}}`) of a contact will be permanently deleted in 30 days. The `<1>` tag highlights the permanent deletion.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserTypeDialog/index.tsx",
-      "line_number": 148,
+      "line_number": 157,
       "context": "t={t}\n />\n ) : (\n <>\n <Trans\n i18nKey=\"PersonalDataDeletion\"\n ns=\"ChangeUserTypeDialog\"\n t={t}\n values={{ sectionName: t(\"Common:MyDocuments\") }}\n components={{\n 1: <span style={{ fontWeight: 600 }} />,",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "sk": {
       "ai_translated": false,

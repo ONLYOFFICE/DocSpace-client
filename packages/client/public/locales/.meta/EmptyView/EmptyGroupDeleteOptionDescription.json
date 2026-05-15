@@ -3,7 +3,7 @@
   "content": "If you don't need this group anymore",
   "content_en_sha1_hash": "dec428ad0d9c4eb325b59aad694e50d589cf6317",
   "created_at": "2025-05-19T21:30:56.484Z",
-  "updated_at": "2026-04-11T21:07:02.138Z",
+  "updated_at": "2026-05-15T14:00:06.748Z",
   "comment": {
     "text": "This is a description for a \"Delete group\" option in a context menu. It appears when a user views an empty group and provides a reason for deleting the group.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/EmptyScreen.tsx",
-      "line_number": 130,
+      "line_number": 139,
       "context": "onClick: () => editGroup(currentGroup),\n },\n {\n key: \"delete-group\",\n title: t(\"DeleteDialog:DeleteGroupTitle\"),\n description: t(\"EmptyView:EmptyGroupDeleteOptionDescription\"),\n disabled: isRoomAdmin || currentGroup?.isLDAP,\n icon: <TrashIcon />,\n onClick: () => deleteGroup!(currentGroup, true),\n },\n ];",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

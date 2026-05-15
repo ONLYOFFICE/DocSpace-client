@@ -3,7 +3,7 @@
   "content": "{{count}} Free days left",
   "content_en_sha1_hash": "00a662738fd8c9e8f2a747858170f89777247fd7",
   "created_at": "2025-05-26T07:15:43.878Z",
-  "updated_at": "2026-04-11T20:51:52.549Z",
+  "updated_at": "2026-05-15T14:00:06.956Z",
   "comment": {
     "text": "This is a text label indicating the remaining days of a free trial period. It appears on the payment page, with `{{count}}` representing the number of days.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/TariffTitleContainer.tsx",
-      "line_number": 88,
+      "line_number": 97,
       "context": "[styles.isTrial]: isTrial,\n })}\n fontWeight={600}\n fontSize=\"14px\"\n >\n {t(\"FreeDaysLeft\", { count: Number(trialDaysLeft) })}\n </Text>\n );\n }\n \n if (!isLifetimeLicense && isGracePeriod) {",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

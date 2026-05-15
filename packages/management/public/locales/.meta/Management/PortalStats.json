@@ -3,7 +3,7 @@
   "content": "Rooms: {{roomCount}} | Users: {{userCount}} | Storage space used: {{storageSpace}}",
   "content_en_sha1_hash": "4659b3b5379878abe9dab17bbcc3d1c54ba69117",
   "created_at": "2025-05-19T21:30:57.466Z",
-  "updated_at": "2026-04-11T21:31:36.808Z",
+  "updated_at": "2026-05-15T14:00:06.973Z",
   "comment": {
     "text": "This string displays statistics about the DocSpace portal, including the number of rooms, users, and storage space used. It appears as a short label in a table row, with `{{roomCount}}`, `{{userCount}}`, and `{{storageSpace}}` representing numerical values.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/management/src/app/spaces/multiple/row-content.tsx",
-      "line_number": 133,
+      "line_number": 142,
       "context": "{isMobileView ? (\n <div />\n ) : isWizardCompleted ? (\n <Text fontSize=\"12px\" as=\"div\" fontWeight={600} truncate>\n {`${t(\"PortalStats\", {\n roomCount: roomsCount,\n userCount: roomAdminCount + usersCount,\n storageSpace,\n })}`}\n </Text>",
       "module": "/packages/management"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-04T13:03:19.496195Z"
+      "approved_at": "2026-05-15T15:04:54.651494Z"
     },
     "si": {
       "ai_translated": false,

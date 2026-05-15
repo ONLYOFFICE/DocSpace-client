@@ -3,7 +3,7 @@
   "content": "Backup: {{progress}}%",
   "content_en_sha1_hash": "67556deadd1d0bbd475e81e5accc92229e607451",
   "created_at": "2025-05-26T07:15:40.772Z",
-  "updated_at": "2026-04-13T14:59:05.976Z",
+  "updated_at": "2026-05-15T14:00:06.960Z",
   "comment": {
     "text": "This is a progress indicator that appears during a backup operation. It shows the current percentage of completion, where `{{progress}}` is a number from 0 to 100.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 687,
+      "line_number": 696,
       "context": "{\n label: operationsCompleted\n ? t(\"Common:Backup\")\n : downloadingProgress === 0\n ? t(\"Common:PreparingBackup\")\n : t(\"Common:BackupProgress\", {\n progress: downloadingProgress,\n }),\n percent: downloadingProgress,\n operation: OPERATIONS_NAME.backup,\n alert: false,",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 685,
+      "line_number": 694,
       "context": "label:\n downloadingProgress === 100\n ? t(\"Common:Backup\")\n : downloadingProgress === 0\n ? t(\"Common:PreparingBackup\")\n : t(\"Common:BackupProgress\", {\n progress: downloadingProgress,\n }),\n percent: downloadingProgress,\n operation: OPERATIONS_NAME.backup,\n alert: false,",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/button-component/ButtonComponent.tsx",
-      "line_number": 210,
+      "line_number": 219,
       "context": "label:\n downloadingProgress === 100\n ? t(\"Backup\")\n : downloadingProgress === 0\n ? t(\"PreparingBackup\")\n : t(\"BackupProgress\", { progress: downloadingProgress }),\n percent: downloadingProgress,\n operation: OPERATIONS_NAME.backup,\n alert: false,\n completed: false,\n },",
       "module": "/packages/shared"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "sk": {
       "ai_translated": false,

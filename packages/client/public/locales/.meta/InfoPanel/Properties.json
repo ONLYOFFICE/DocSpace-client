@@ -3,7 +3,7 @@
   "content": "Properties",
   "content_en_sha1_hash": "bc6c88db2f0703a9e2461a4a8060ccf1cb881998",
   "created_at": "2025-05-19T21:30:54.899Z",
-  "updated_at": "2026-05-08T13:10:45.596Z",
+  "updated_at": "2026-05-15T14:00:06.728Z",
   "comment": {
     "text": "This is a section header in the information panel, indicating the display of an item's characteristics or attributes.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/index.tsx",
-      "line_number": 291,
+      "line_number": 300,
       "context": "/>\n </div>\n )}\n <div className={commonStyles.subtitle}>\n <Text fontWeight=\"600\" fontSize=\"14px\">\n {t(\"Properties\")}\n </Text>\n </div>\n <div className={commonStyles.properties}>\n {itemProperties.map((property) => {\n return (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Gallery/index.tsx",
-      "line_number": 163,
+      "line_number": 172,
       "context": "<div\n className={classNames(styles.select, commonStyles.subtitle)}\n data-testid=\"info_panel_gallery_properties_header\"\n >\n <Text fontWeight=\"600\" fontSize=\"14px\">\n {t(\"Properties\")}\n </Text>\n </div>\n <div\n className={commonStyles.properties}\n data-testid=\"info_panel_gallery_properties\"",
       "module": "/packages/client"
     }

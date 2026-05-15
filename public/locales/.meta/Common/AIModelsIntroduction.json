@@ -1,26 +1,26 @@
 {
-  "key_path": "AIModelsIntro",
-  "content": "Pick the right model for your task — from budget-friendly to advanced. <1>OpenRouter pricing</1> shown. A 20% service fee applies to usage.",
-  "content_en_sha1_hash": "492e823238522323727e2946ca4fada2e8f5996c",
-  "created_at": "2026-04-10T13:53:44.343Z",
-  "updated_at": "2026-04-23T17:24:02.180Z",
+  "key_path": "AIModelsIntroduction",
+  "content": "Pick the right model for your task — from budget-friendly to advanced. Prices shown are <1>OpenRouter base rates</1>. A 20% service fee is added to each charge based on token consumption.",
+  "content_en_sha1_hash": "e37e4fd71d8fd071531935d4ccea9bea894233ce",
+  "created_at": "2026-05-15T15:48:55.752Z",
+  "updated_at": "2026-05-15T15:49:56.824Z",
   "comment": {
-    "text": "This is an introductory text displayed above a table of AI models. It informs users about model selection, pricing, and service fees, with a link to OpenRouter pricing.",
+    "text": "Introductory text in the AI models settings table explaining model selection and pricing. The <1> tag contains a clickable link to OpenRouter base rates.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:00:05.564Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-05-15T15:49:56.824Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/sub-components/ModelSettingsTable/RowView/index.tsx",
       "line_number": 53,
-      "context": "return (\n <div className={styles.rowContainer}>\n <Text className={styles.introText}>\n <CommonTrans\n i18nKey=\"AIModelsIntro\"\n components={{\n 1: (\n <Link\n fontWeight={600}\n fontSize=\"12px\"",
+      "context": "return (\n <div className={styles.rowContainer}>\n <Text className={styles.introText}>\n <CommonTrans\n i18nKey=\"AIModelsIntroduction\"\n components={{\n 1: (\n <Link\n fontWeight={600}\n fontSize=\"12px\"",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/sub-components/ModelSettingsTable/TableView/index.tsx",
       "line_number": 66,
-      "context": "return (\n <div className={styles.tableWrapper}>\n <Text className={styles.introText}>\n <CommonTrans\n i18nKey=\"AIModelsIntro\"\n components={{\n 1: (\n <Link\n fontWeight={600}\n fontSize=\"12px\"",
+      "context": "return (\n <div className={styles.tableWrapper}>\n <Text className={styles.introText}>\n <CommonTrans\n i18nKey=\"AIModelsIntroduction\"\n components={{\n 1: (\n <Link\n fontWeight={600}\n fontSize=\"12px\"",
       "module": "/libs/ui-kit"
     }
   ],

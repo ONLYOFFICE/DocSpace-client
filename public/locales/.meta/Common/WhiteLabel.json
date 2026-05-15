@@ -3,7 +3,7 @@
   "content": "Logo settings",
   "content_en_sha1_hash": "cde0dbbc94f797482701f082adcc8ce183018e62",
   "created_at": "2025-05-26T07:15:49.607Z",
-  "updated_at": "2026-04-13T14:59:05.903Z",
+  "updated_at": "2026-05-15T14:00:06.874Z",
   "comment": {
     "text": "This is a section title in the portal settings, referring to the \"White Label\" branding options. It appears as a short label in navigation menus and as a page title.",
     "is_auto": true,
@@ -13,25 +13,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 124,
+      "line_number": 133,
       "context": "{\n id: \"portal-settings_catalog-white-label\",\n key: \"0-1-1\",\n icon: \"\",\n link: \"white-label\",\n tKey: \"Common:WhiteLabel\",\n },\n {\n id: \"portal-settings_catalog-company-info-settings\",\n key: \"0-1-2\",\n icon: \"\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/management/src/lib/index.ts",
-      "line_number": 61,
+      "line_number": 70,
       "context": "case \"encrypt-data\":\n return { key: t(\"Common:Settings\"), isSubPage: false };\n case \"payments\":\n return { key: t(\"Common:PaymentsTitle\"), isSubPage: false };\n case \"white-label\":\n return { key: t(\"Common:WhiteLabel\"), isSubPage: true };\n case \"company-info\":\n return { key: t(\"Common:CompanyInfoSettings\"), isSubPage: true };\n case \"additional-resources\":\n return { key: t(\"Common:AdditionalResources\"), isSubPage: true };\n case \"brand-name\":",
       "module": "/packages/management"
     },
     {
       "file_path": "/packages/shared/pages/Branding/MobileView/index.tsx",
-      "line_number": 61,
+      "line_number": 70,
       "context": "withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}\n />\n <CategoryItem\n title={t(\"WhiteLabel\")}\n subtitle={t(\"BrandingSubtitleMobile\")}\n url={`${baseUrl}/branding/white-label`}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/WhiteLabelHeader.tsx",
-      "line_number": 66,
+      "line_number": 75,
       "context": "return (\n <div className={styles.header}>\n <div className={classNames(styles.headerContainer, \"header-container\")}>\n <Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"WhiteLabel\")}\n </Text>\n \n {!isSettingPaid && !standalone ? (\n <Badge\n className={classNames(styles.paidBadge, \"paid-badge\")}",
       "module": "/packages/shared"
     }
@@ -167,7 +167,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

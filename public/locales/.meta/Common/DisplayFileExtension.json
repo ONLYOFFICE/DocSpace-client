@@ -3,7 +3,7 @@
   "content": "Display file extension next to file name",
   "content_en_sha1_hash": "5aca0949443f945850e45a5d1a5def5c80406042",
   "created_at": "2026-04-03T21:51:34.715Z",
-  "updated_at": "2026-04-13T14:59:05.906Z",
+  "updated_at": "2026-05-15T14:00:06.877Z",
   "comment": {
     "text": "This is a label for a toggle button in the user's profile settings. It controls whether file extensions (e.g., \".docx\", \".pdf\") are shown next to file names in the interface.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/index.tsx",
-      "line_number": 179,
+      "line_number": 188,
       "context": "className={classNames(\"display-file-extension\", styles.toggleBtn)}\n onChange={onChangeDisplayFileExtension}\n isChecked={displayFileExtension}\n dataTestId=\"display_file_extension_toggle_button\"\n />\n <Text>{t(\"Common:DisplayFileExtension\")}</Text>\n </div>\n <div className={styles.toggleBtnWrapper}>\n <ToggleButton\n className={classNames(\n \"cancelletion-notification\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/settings/category/FileManagement.tsx",
-      "line_number": 154,
+      "line_number": 163,
       "context": "<ToggleButton\n className={styles.toggleBtn}\n onChange={onChangeDisplayFileExtension}\n isChecked={settings.displayFileExtension}\n />\n <Text>{t(\"DisplayFileExtension\")}</Text>\n </div>\n </div>\n </div>\n );\n });",
       "module": "/packages/sdk"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

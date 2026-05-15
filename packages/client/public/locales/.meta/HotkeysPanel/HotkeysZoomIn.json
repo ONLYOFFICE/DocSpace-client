@@ -3,7 +3,7 @@
   "content": "Zoom in",
   "content_en_sha1_hash": "4fc05f2763ba31e2d3be5f08e7d0bab5d5dcbf78",
   "created_at": "2025-05-19T21:30:55.104Z",
-  "updated_at": "2026-04-11T21:11:46.575Z",
+  "updated_at": "2026-05-15T14:00:06.705Z",
   "comment": {
     "text": "This is a hotkey description in the Hotkeys panel, indicating the keyboard shortcut to zoom in on the document.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/PreviewActionsBlock.js",
-      "line_number": 54,
+      "line_number": 63,
       "context": "<Text {...keyTextStyles}>Space</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>\n <Text {...textStyles}>{t(\"HotkeysZoomIn\")}</Text>\n <Text {...keyTextStyles}>+ {t(\"Common:Or\")} =</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>",
       "module": "/packages/client"
     }

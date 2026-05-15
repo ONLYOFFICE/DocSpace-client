@@ -3,7 +3,7 @@
   "content": "Add room",
   "content_en_sha1_hash": "fcc94bf98664e334d906689ed7808e64059c15f2",
   "created_at": "2026-02-19T13:36:24.867Z",
-  "updated_at": "2026-04-11T21:11:43.050Z",
+  "updated_at": "2026-05-15T14:00:06.632Z",
   "comment": {
     "text": "This is a dialog header label. It appears when adding a new room to a group, indicating the action being performed.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/AddRoomToGroupDialog/index.tsx",
-      "line_number": 173,
+      "line_number": 182,
       "context": "onSubmit={onSubmitRoom}\n withHeader\n headerProps={{\n onBackClick: onClose,\n onCloseClick: onClose,\n headerLabel: groupData?.name || t(\"GroupingRooms:AddRoom\"),\n withoutBorder: false,\n withoutBackButton: false,\n }}\n withSearch\n isMultiSelect",
       "module": "/packages/client"
     }

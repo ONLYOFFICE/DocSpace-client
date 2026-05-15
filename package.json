@@ -38,7 +38,8 @@
     "format:fix": "pnpm nx run-many -t format:fix -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk @docspace/shared",
     "tsc": "pnpm nx run-many -t tsc @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk @docspace/shared",
     "prepare": "node -e \"if (!process.env.CI) { try { require('child_process').execSync('git --version', {stdio: 'ignore'}); require('child_process').execSync('lefthook install', {stdio: 'inherit'}); } catch (e) { console.error('Lefthook installation skipped:', e.message); } }\" && npm --prefix ./common/tests ci",
-    "update-ui-kit-lock": "mv pnpm-workspace.yaml pnpm-workspace.yaml.bak && cd libs/ui-kit && pnpm install --lockfile-only; cd ../.. && mv pnpm-workspace.yaml.bak pnpm-workspace.yaml"
+    "update-ui-kit-lock": "mv pnpm-workspace.yaml pnpm-workspace.yaml.bak && cd libs/ui-kit && pnpm install --lockfile-only; cd ../.. && mv pnpm-workspace.yaml.bak pnpm-workspace.yaml",
+    "update-translation-app-lock": "npm --prefix common/translation-app/frontend install --package-lock-only && npm --prefix common/translation-app/backend install --package-lock-only"
   },
   "devDependencies": {
     "@types/node": "24.10.7",

@@ -3,7 +3,7 @@
   "content": "Your account has been successfully reactivated. In 10 seconds you will be redirected to the <1>portal</1>.",
   "content_en_sha1_hash": "195e32502a9fca30b006e6c21cb6247dacd2348c",
   "created_at": "2025-05-19T21:30:57.398Z",
-  "updated_at": "2026-04-11T21:30:03.194Z",
+  "updated_at": "2026-05-15T14:00:06.910Z",
   "comment": {
     "text": "This is a success message displayed after a user's account has been reactivated. It informs the user that they will be redirected to the portal, with `<1>portal</1>` being a clickable link.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PortalContinue/page.client.tsx",
-      "line_number": 79,
+      "line_number": 88,
       "context": "window.location.href = \"/\";\n };\n \n return isReactivate ? (\n <Text>\n <Trans t={t} i18nKey=\"SuccessReactivate\" ns=\"Confirm\">\n Your account has been successfully reactivated. In 10 seconds you will\n be redirected to the\n <Link isHovered href=\"/\" dataTestId=\"redirect_portal_link\">\n portal\n </Link>",
       "module": "/packages/login"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-04T13:03:19.470988Z"
+      "approved_at": "2026-05-15T15:04:54.629887Z"
     },
     "si": {
       "ai_translated": false,

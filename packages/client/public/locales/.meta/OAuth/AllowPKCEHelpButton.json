@@ -3,7 +3,7 @@
   "content": "PKCE is not a form of client authentication, and PKCE is not a replacement for a client secret or another client authentication type. PKCE is recommended even if a client is using a client secret or another form of client authentication like private_key_jwt.<br/> <strong>Note</strong>: Since PKCE is not a replacement for client authentication, it does not allow treating a public client as confidential one.",
   "content_en_sha1_hash": "496655408d794ecbf08fdb73df854af8a077605c",
   "created_at": "2025-05-19T21:30:53.790Z",
-  "updated_at": "2026-04-11T21:19:23.657Z",
+  "updated_at": "2026-05-15T14:00:06.819Z",
   "comment": {
     "text": "This is the tooltip text for a help button related to PKCE (Proof Key for Code Exchange) settings. It explains what PKCE is and isn't, and clarifies its role in client authentication.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
-      "line_number": 129,
+      "line_number": 138,
       "context": "img.src = URL.createObjectURL(file);\n }\n };\n \n const pkceHelpButtonText = (\n <Trans t={t as TFunction} i18nKey=\"AllowPKCEHelpButton\" ns=\"OAuth\" />\n );\n \n const isNameRequiredError = requiredErrorFields.includes(\"name\");\n const isWebsiteRequiredError = requiredErrorFields.includes(\"website_url\");\n const isNameError = errorFields.includes(\"name\");",
       "module": "/packages/client"
     }

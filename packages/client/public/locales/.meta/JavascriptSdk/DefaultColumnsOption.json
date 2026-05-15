@@ -3,7 +3,7 @@
   "content": "Default (Quantity depends on screen width)",
   "content_en_sha1_hash": "c9cffe920b3fe39998cc9c0a0c4b442c111c6746",
   "created_at": "2025-05-19T21:30:54.447Z",
-  "updated_at": "2026-04-11T21:15:54.411Z",
+  "updated_at": "2026-05-15T14:00:06.802Z",
   "comment": {
     "text": "This is a radio button label for a column display option. It indicates that the number of columns will automatically adjust based on the screen width.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 137,
+      "line_number": 146,
       "context": "];\n \n const columnDisplayOptions = [\n {\n value: \"default\",\n label: t(\"DefaultColumnsOption\"),\n dataTestId: \"default_radio_button\",\n },\n { value: \"custom\", label: t(\"SetItUp\"), dataTestId: \"custom_radio_button\" },\n ];",
       "module": "/packages/client"
     }

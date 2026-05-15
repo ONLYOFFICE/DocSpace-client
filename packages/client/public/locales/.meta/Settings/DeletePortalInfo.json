@@ -3,7 +3,7 @@
   "content": "Before you delete the space, please make sure that automatic billing is turned off. You may check the status of automatic billing in <1>your Stripe customer portal</1>.",
   "content_en_sha1_hash": "dc639bafcacea9cc342c82a0e94c2353a9bf2d96",
   "created_at": "2025-05-19T21:30:51.120Z",
-  "updated_at": "2026-04-11T21:49:08.490Z",
+  "updated_at": "2026-05-15T14:00:06.676Z",
   "comment": {
     "text": "This is a warning message displayed in a dialog when a user attempts to delete their DocSpace portal. It advises them to disable automatic billing in their Stripe customer portal (linked via `<1>`) before proceeding.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeletePortalDialog/index.js",
-      "line_number": 62,
+      "line_number": 71,
       "context": ">\n <ModalDialog.Header>\n {t(\"Common:DeletePortal\", { productName: getBrandName(\"ProductName\") })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Trans t={t} i18nKey=\"DeletePortalInfo\" ns=\"Settings\">\n Before you delete the portal, please make sure that automatic billing\n is turned off. You may check the status of automatic billing in\n <Link\n className=\"stripe-url-link\"\n tag=\"a\"",
       "module": "/packages/client"
     }

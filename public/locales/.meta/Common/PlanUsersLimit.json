@@ -3,7 +3,7 @@
   "content": "You wish to downgrade the team to <1>{{usersCount}}</1> admins, and current number of such users in your {{productName}} is <1>{{currentUsersCount}}</1>.",
   "content_en_sha1_hash": "45b989647c55526d7bbbed7c65ba98724bf414a9",
   "created_at": "2025-05-19T21:30:56.601Z",
-  "updated_at": "2026-04-11T21:06:16.317Z",
+  "updated_at": "2026-05-15T14:00:06.991Z",
   "comment": {
     "text": "This is an error message displayed in a dialog when a user attempts to downgrade their plan. It informs them that the new plan's user limit ({{usersCount}}) is lower than their current number of users ({{currentUsersCount}}) in {{productName}}.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/dialogs/ChangePricingPlanDialog.tsx",
-      "line_number": 63,
+      "line_number": 72,
       "context": "const currentStorageSpace = getConvertedSize(t, usedTotalStorageSizeCount);\n \n const planUsersLimitations = (\n <Text as=\"span\" fontSize=\"13px\">\n <CommonTrans\n i18nKey=\"PlanUsersLimit\"\n \n values={{\n usersCount: managersCount,\n productName: getBrandName(\"ProductName\"),\n currentUsersCount: addedManagersCount,",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

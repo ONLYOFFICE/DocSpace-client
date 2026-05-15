@@ -3,7 +3,7 @@
   "content": "Custom format",
   "content_en_sha1_hash": "a46b312c4f1de482da10ac2adcad64ead5ef6d6b",
   "created_at": "2025-05-19T21:30:44.281Z",
-  "updated_at": "2026-04-11T20:55:46.103Z",
+  "updated_at": "2026-05-15T14:00:06.946Z",
   "comment": {
     "text": "This string labels a custom format option in a download dialog. It appears when a user is selecting a file format for download, indicating a user-defined or non-standard format.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
-      "line_number": 221,
+      "line_number": 228,
       "context": ") => {\n // Set all documents format\n if (!fileId) {\n array.forEach((file) => {\n file.format =\n format === t(\"Common:CustomFormat\") ||\n (isFile(file) && file.fileExst === format)\n ? t(\"Common:OriginalFormat\")\n : format;\n });\n return array;",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
-      "line_number": 221,
+      "line_number": 228,
       "context": ") => {\n // Set all documents format\n if (!fileId) {\n array.forEach((file) => {\n file.format =\n format === t(\"Common:CustomFormat\") ||\n (isFile(file) && file.fileExst === format)\n ? t(\"Common:OriginalFormat\")\n : format;\n });\n return array;",
       "module": "/packages/shared"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "<1>Storage used:</1> {{amount}}",
   "content_en_sha1_hash": "6ac65ec4729587229cea4b251a5ff3412be7422a",
   "created_at": "2026-04-10T13:53:43.432Z",
-  "updated_at": "2026-05-08T13:10:45.727Z",
+  "updated_at": "2026-05-15T14:00:06.992Z",
   "comment": {
     "text": "This text appears in dialogs related to storage, indicating the amount of storage currently in use. `{{amount}}` is a variable representing the specific storage size (e.g., \"10 GB\").",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/dialogs/StorageTariffDeactivated.tsx",
-      "line_number": 125,
+      "line_number": 134,
       "context": "}}\n />\n </Text>\n <Text>\n <CommonTrans\n i18nKey=\"StorageUsed\"\n \n values={{\n amount: getConvertedSize(t, usedTotalStorageSizeCount!),\n }}\n components={{",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanCancel.tsx",
-      "line_number": 144,
+      "line_number": 153,
       "context": "}}\n />\n </Text>\n <Text>\n <CommonTrans\n i18nKey=\"StorageUsed\"\n values={{\n amount: getConvertedSize(t, usedTotalStorageSizeCount),\n }}\n components={{\n 1: <Text fontWeight={600} as=\"span\" />,",
       "module": "/libs/ui-kit"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

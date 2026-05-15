@@ -3,7 +3,7 @@
   "content": "No submissions yet.",
   "content_en_sha1_hash": "2e10e6dedc2f8d285ff0ae473070b258a38a0b45",
   "created_at": "2026-05-08T13:10:42.560Z",
-  "updated_at": "2026-05-08T19:46:45.003Z",
+  "updated_at": "2026-05-15T14:00:06.730Z",
   "comment": {
     "text": "Status message in the InfoPanel displayed when no submissions have been recorded in the results folder for a form room.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/sub-components/FormInfo/CollectionCard.tsx",
-      "line_number": 95,
+      "line_number": 104,
       "context": "onClick={() => onGoToCompleteFolder(selection)}\n disabled={!selection.resultsFolderId}\n />\n {!selection.resultsFolderId ? (\n <Tooltip anchorSelect=\"#complete-folder\" clickable>\n <Text>{t(\"InfoPanel:FormRoomNoSubmissionsYet\")}</Text>\n <Text>{t(\"InfoPanel:FormRoomResultsFolderNote\")}</Text>\n <LinkButton\n color=\"accent\"\n onClick={onFillForm}\n type={LinkType.page}",
       "module": "/packages/client"
     }

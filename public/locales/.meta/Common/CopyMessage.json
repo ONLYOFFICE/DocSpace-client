@@ -3,7 +3,7 @@
   "content": "Copy message",
   "content_en_sha1_hash": "26902efda37d4a30d3f6fd110ba9cc653bae0c8b",
   "created_at": "2025-10-27T16:14:24.116Z",
-  "updated_at": "2026-04-11T20:56:15.691Z",
+  "updated_at": "2026-05-15T14:00:06.991Z",
   "comment": {
     "text": "Tooltip for a button that copies the content of a chat message to the clipboard.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/buttons/index.tsx",
-      "line_number": 188,
+      "line_number": 195,
       "context": "<>\n <div className={styles.buttonsBlock}>\n <div\n className={styles.buttonsBlockItem}\n onClick={onCopyAction}\n title={t(\"CopyMessage\")}\n data-testid=\"copy-message-button\"\n >\n <CopyIcon />\n </div>",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/index.tsx",
-      "line_number": 204,
+      "line_number": 213,
       "context": "})\n .join(\"\");\n \n copy(fullText);\n }}\n title={t(\"CopyMessage\")}\n >\n <CopyIcon />\n </div>\n </div>\n </div>",
       "module": "/libs/ui-kit"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

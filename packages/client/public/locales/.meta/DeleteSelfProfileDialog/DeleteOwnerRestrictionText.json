@@ -3,7 +3,7 @@
   "content": "Being an owner of this {{productName}}, you must transfer the ownership to another user before you can disable your account. Please choose a new owner to proceed.",
   "content_en_sha1_hash": "de13d05e32215de7ca034dfd288a7c79aefa0aab",
   "created_at": "2025-05-19T21:30:56.616Z",
-  "updated_at": "2026-04-11T21:06:14.265Z",
+  "updated_at": "2026-05-15T14:00:06.675Z",
   "comment": {
     "text": "This is a message displayed in a dialog box when an owner of a DocSpace account attempts to disable their account. It informs them that they must transfer ownership to another user first, and includes the variable `{{productName}}` for the product's brand name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteOwnerProfileDialog/index.js",
-      "line_number": 54,
+      "line_number": 63,
       "context": "return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"DeleteProfileTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\">\n {t(\"DeleteOwnerRestrictionText\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

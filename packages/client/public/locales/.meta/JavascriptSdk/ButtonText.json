@@ -3,7 +3,7 @@
   "content": "Button text",
   "content_en_sha1_hash": "2c1bff44c81120a2a08aa9cde226b916847d6ef4",
   "created_at": "2025-05-19T21:30:54.376Z",
-  "updated_at": "2026-04-13T14:59:05.860Z",
+  "updated_at": "2026-05-15T14:00:06.808Z",
   "comment": {
     "text": "This is the text displayed on a button. It allows users to customize the button's label.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
-      "line_number": 545,
+      "line_number": 554,
       "context": "<FileTypesFilter t={t} config={config} setConfig={setConfig} />\n )}\n \n <ControlsSection>\n <ControlsGroup>\n <Label className=\"label\" text={t(\"ButtonText\")} />\n <TextInput\n scale\n value={config.linkMainText}\n onChange={onChangeLinkFileText}\n tabIndex={5}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/MainElementParameter.js",
-      "line_number": 134,
+      "line_number": 143,
       "context": "defaultColor={globalColors.lightSecondMain}\n dataTestId=\"button_mode_color_input\"\n />\n </ControlsGroup>\n <ControlsGroup>\n <Label className=\"label\" text={t(\"ButtonText\")} />\n <TextInput\n scale\n onChange={setButtonText}\n placeholder={t(\"SelectToPortal\", {\n productName: getBrandName(\"ProductName\"),",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "You are about to rename your portal. Are you sure you want to continue?",
   "content_en_sha1_hash": "8ae03c382738f295876768a6e4f154f0d2fdee68",
   "created_at": "2025-05-19T21:30:52.277Z",
-  "updated_at": "2026-04-11T21:22:53.820Z",
+  "updated_at": "2026-05-15T14:00:06.692Z",
   "comment": {
     "text": "This is the body text of a confirmation dialog that appears when a user attempts to rename their portal. It asks the user to confirm their action.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/PortalRenamingDialog/index.js",
-      "line_number": 51,
+      "line_number": 60,
       "context": "<ModalDialog.Header>\n {t(\"Settings:PortalRenaming\", { productName: getBrandName(\"ProductName\") })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\" fontWeight={400}>\n {t(\"Settings:PortalRenamingModalText\")}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"PortalRenamingContinueBtn\"",
       "module": "/packages/client"
     }

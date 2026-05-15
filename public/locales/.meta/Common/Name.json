@@ -3,7 +3,7 @@
   "content": "Name",
   "content_en_sha1_hash": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
   "created_at": "2025-05-19T21:30:46.705Z",
-  "updated_at": "2026-05-13T17:07:46.064Z",
+  "updated_at": "2026-05-15T15:37:40.204Z",
   "comment": {
     "text": "This is a label for a user's name, appearing in a welcome dialog, as a sorting option in a filter, and as a column header in a table.",
     "is_auto": true,
@@ -13,79 +13,79 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/SocialAuthWelcomeDialog/index.tsx",
-      "line_number": 156,
-      "context": "isPaidBadge\n />\n </StyledInfoRow>\n \n <StyledInfoRow>\n <Text className=\"welcome-text\">{t(\"Common:Name\")}</Text>\n <Text\n fontWeight=\"600\"\n truncate\n className=\"welcome-text\"\n >{`${user?.firstName} ${user?.lastName}`}</Text>",
+      "line_number": 153,
+      "context": "isPaidBadge\n />\n </div>\n \n <div className={styles.infoRow}>\n <Text className=\"welcome-text\">{t(\"Common:Name\")}</Text>\n <Text\n fontWeight=\"600\"\n truncate\n className=\"welcome-text\"\n >{`${user?.firstName} ${user?.lastName}`}</Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 759,
+      "line_number": 768,
       "context": "const options = [];\n \n const firstName = {\n id: \"sort-by_displayname\",\n key: \"displayname\",\n label: t(\"Common:Name\"),\n default: true,\n };\n \n const type = {\n id: \"sort-by_type\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/RowView/index.tsx",
-      "line_number": 96,
+      "line_number": 105,
       "context": "checked={isChecked}\n onSelect={toggleAll}\n indeterminate={isIndeterminate}\n isDisabled={usersWithFilledEmails.length === 0}\n >\n <Text className=\"row-header-title\">{t(\"Common:Name\")}</Text>\n </Row>\n {accountsData.map((data) => (\n <UsersRow\n t={t}\n key={data.key}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/TableView/UsersTableHeader.tsx",
-      "line_number": 68,
+      "line_number": 77,
       "context": "} = props;\n \n const [columns, setColumns] = useState<TTableColumn[]>([\n {\n key: \"Name\",\n title: t(\"Common:Name\"),\n resizable: true,\n enable: true,\n default: true,\n active: true,\n minWidth: 180,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/TableView/UsersTableHeader.tsx",
-      "line_number": 68,
+      "line_number": 77,
       "context": "} = props;\n \n const [columns, setColumns] = useState<TTableColumn[]>([\n {\n key: \"Name\",\n title: t(\"Common:Name\"),\n resizable: true,\n enable: true,\n default: true,\n active: true,\n minWidth: 180,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/RowView/index.tsx",
-      "line_number": 86,
+      "line_number": 95,
       "context": "{checkedUsers.withEmail.length > 0 ? (\n <Checkbox\n isIndeterminate={isIndeterminate}\n isChecked={isChecked}\n onChange={toggleAll}\n label={t(\"Common:Name\")}\n />\n ) : null}\n </div>\n </Row>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/TableView/UsersTableHeader.tsx",
-      "line_number": 67,
+      "line_number": 76,
       "context": "} = props;\n \n const [columns, setColumns] = useState<TTableColumn[]>([\n {\n key: \"Name\",\n title: t(\"Common:Name\"),\n resizable: true,\n enable: true,\n default: true,\n active: true,\n minWidth: 180,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/TableView/UsersTableHeader.tsx",
-      "line_number": 67,
+      "line_number": 76,
       "context": "} = props;\n \n const [columns, setColumns] = useState<TTableColumn[]>([\n {\n key: \"Name\",\n title: t(\"Common:Name\"),\n resizable: true,\n enable: true,\n default: true,\n active: true,\n minWidth: 180,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/RowView/index.tsx",
-      "line_number": 109,
+      "line_number": 118,
       "context": "</div>\n ) : null}\n {accountsData.length > 0 ? (\n <>\n <Row className={styles.styledRowType} key=\"Name\">\n <Text className=\"row-header-title\">{t(\"Common:Name\")}</Text>\n </Row>\n \n {accountsData.map((data) => (\n <UsersRow\n key={data.key}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/TableView/UsersTableHeader.tsx",
-      "line_number": 65,
+      "line_number": 74,
       "context": "} = props;\n \n const [columns, setColumns] = useState<TTableColumn[]>([\n {\n key: \"Name\",\n title: t(\"Common:Name\"),\n resizable: true,\n enable: true,\n default: true,\n active: true,\n minWidth: 180,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/TableView/UsersTableHeader.tsx",
-      "line_number": 65,
+      "line_number": 74,
       "context": "} = props;\n \n const [columns, setColumns] = useState<TTableColumn[]>([\n {\n key: \"Name\",\n title: t(\"Common:Name\"),\n resizable: true,\n enable: true,\n default: true,\n active: true,\n minWidth: 180,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 421,
+      "line_number": 430,
       "context": ") : null}\n </div>\n <div className={styles.infoWrapper}>\n <div className={styles.rowsContainer}>\n <Text as=\"div\" className={styles.label}>\n {t(\"Common:Name\")}\n </Text>\n <div className={styles.profileBlockField}>\n <Text fontWeight={600} truncate title={profile!.displayName}>\n {profile!.displayName}\n </Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 421,
+      "line_number": 430,
       "context": ") : null}\n </div>\n <div className={styles.infoWrapper}>\n <div className={styles.rowsContainer}>\n <Text as=\"div\" className={styles.label}>\n {t(\"Common:Name\")}\n </Text>\n <div className={styles.profileBlockField}>\n <Text fontWeight={600} truncate title={profile!.displayName}>\n {profile!.displayName}\n </Text>",
       "module": "/packages/client"
     }
@@ -221,7 +221,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

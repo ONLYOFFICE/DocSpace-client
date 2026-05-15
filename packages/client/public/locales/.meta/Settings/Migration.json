@@ -3,7 +3,7 @@
   "content": "Migration",
   "content_en_sha1_hash": "6e458173eef4a800366eeb68965cf8f147c4756b",
   "created_at": "2025-05-19T21:30:51.947Z",
-  "updated_at": "2026-04-11T21:23:20.192Z",
+  "updated_at": "2026-05-15T14:00:06.756Z",
   "comment": {
     "text": "This is a navigation link label in the portal settings, leading to the migration management section.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 211,
+      "line_number": 220,
       "context": "return t(\"TwoFactorAuth\");\n case \"ManagementCategoryIntegration\":\n return t(\"ManagementCategoryIntegration\");\n case \"ThirdPartyAuthorization\":\n return t(\"ThirdPartyAuthorization\");\n case \"Migration\":\n return t(\"Migration\");\n case \"Backup\":\n return t(\"Common:Backup\");\n case \"Common:PaymentsTitle\":\n return standalone ? t(\"Common:PaymentsTitle\") : t(\"Common:Billing\");",
       "module": "/packages/client"
     }

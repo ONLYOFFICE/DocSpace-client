@@ -3,7 +3,7 @@
   "content": "No rooms match this filter. Try a different one or clear filter to view all rooms.",
   "content_en_sha1_hash": "f23a94b4f404fdc1101c69caa60118df9f3d9514",
   "created_at": "2025-05-19T21:30:48.337Z",
-  "updated_at": "2026-04-13T02:29:42.691Z",
+  "updated_at": "2026-05-15T14:00:07.042Z",
   "comment": {
     "text": "This is an informational message displayed when a search or filter for rooms yields no results. It suggests trying a different filter or clearing the current one.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/MCPServers/index.tsx",
-      "line_number": 244,
+      "line_number": 253,
       "context": ") : (\n <EmptyScreenRoomSelectorDark />\n )\n }\n searchEmptyScreenHeader={t(\"NotFoundTitle\")}\n searchEmptyScreenDescription={t(\"SearchEmptyRoomsDescription\")}\n submitButtonLabel={t(\"AddButton\")}\n disableSubmitButton={false}\n onSubmit={onSubmitAction}\n rowLoader={<RowLoader />}\n hasNextPage={servers.length < totalServers}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/Room/index.tsx",
-      "line_number": 350,
+      "line_number": 359,
       "context": ") : (\n <EmptyScreenFilterRoomsDark />\n )\n }\n searchEmptyScreenHeader={t(\"NotFoundTitle\")}\n searchEmptyScreenDescription={t(\"SearchEmptyRoomsDescription\")}\n totalItems={total}\n hasNextPage={hasNextPage}\n isNextPageLoading={isNextPageLoading}\n loadNextPage={onLoadNextPage}\n isLoading={isFirstLoad}",
       "module": "/libs/ui-kit"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

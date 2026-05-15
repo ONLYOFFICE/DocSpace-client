@@ -46,10 +46,16 @@ import styles from "./Apps.module.scss";
 type AppsProps = {
   isEnabled?: AppsStore["isEnabled"];
   enable?: AppsStore["enable"];
+  activate?: AppsStore["activate"];
   ensureLoaded?: AppsStore["ensureLoaded"];
 };
 
-const Apps = ({ isEnabled, enable, ensureLoaded }: AppsProps) => {
+const Apps = ({
+  isEnabled,
+  enable,
+  activate,
+  ensureLoaded,
+}: AppsProps) => {
   const { t, ready } = useTranslation(["Settings", "Common", "OAuth"]);
   const navigate = useNavigate();
   const apps = useAppsCatalog();
@@ -72,11 +78,12 @@ const Apps = ({ isEnabled, enable, ensureLoaded }: AppsProps) => {
       toastr.info(t("Common:UnderDevelopment"));
       return;
     }
-    if (next && id === "ai-forms") {
-      setInstallDialogVisible(true);
-      return;
-    }
     try {
+      if (next && id === "ai-forms") {
+        const activated = await activate?.("ai-forms");
+        if (activated === false) setInstallDialogVisible(true);
+        return;
+      }
       await enable?.(id, next);
     } catch (err) {
       console.error(`Failed to ${next ? "enable" : "disable"} app ${id}`, err);
@@ -144,6 +151,7 @@ const Apps = ({ isEnabled, enable, ensureLoaded }: AppsProps) => {
 export const Component = inject(({ appsStore }: TStore) => ({
   isEnabled: appsStore.isEnabled,
   enable: appsStore.enable,
+  activate: appsStore.activate,
   ensureLoaded: appsStore.ensureLoaded,
 }))(observer(Apps));
 

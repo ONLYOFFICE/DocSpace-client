@@ -81,6 +81,7 @@ type NewArticleProps = {
   aiFormsEnabled: boolean;
   aiRoomsEnabled: boolean;
   aiAgentsEnabled: boolean;
+  activate: (id: string) => Promise<boolean>;
   ensureAppsLoaded: () => void;
   toggleArticleOpen: () => void;
 };
@@ -93,6 +94,7 @@ const NewArticle = ({
   aiFormsEnabled,
   aiRoomsEnabled,
   aiAgentsEnabled,
+  activate,
   ensureAppsLoaded,
   toggleArticleOpen,
 }: NewArticleProps) => {
@@ -162,13 +164,29 @@ const NewArticle = ({
         : undefined,
     };
 
+    const handleAiFormsClick = async () => {
+      if (aiFormsEnabled) {
+        navigate("/ai-forms");
+        return;
+      }
+      try {
+        const activated = await activate("ai-forms");
+        if (activated) {
+          navigate("/ai-forms");
+        } else {
+          setInstallDialogVisible(true);
+        }
+      } catch (err) {
+        console.error("Failed to activate ai-forms", err);
+        toastr.error(t("Common:SomethingWentWrong"));
+      }
+    };
+
     const aiFormsItem: NavMenuItem = {
       id: AI_FORMS_ID,
       label: t("Common:DashboardAIFormsTitle"),
       icon: FormFileReactSvgUrl,
-      onClick: aiFormsEnabled
-        ? () => navigate("/ai-forms")
-        : () => setInstallDialogVisible(true),
+      onClick: handleAiFormsClick,
       children: aiFormsEnabled
         ? [
             {
@@ -240,6 +258,7 @@ const NewArticle = ({
     aiFormsEnabled,
     aiRoomsEnabled,
     aiAgentsEnabled,
+    activate,
   ]);
 
   return (
@@ -276,6 +295,7 @@ const NewArticleConnected = inject<TStore>(
     aiFormsEnabled: appsStore.isEnabled("ai-forms"),
     aiRoomsEnabled: appsStore.isEnabled("ai-rooms"),
     aiAgentsEnabled: appsStore.isEnabled("ai-agents"),
+    activate: appsStore.activate,
     ensureAppsLoaded: appsStore.ensureLoaded,
   }),
 )(observer(NewArticle));

@@ -137,6 +137,84 @@ export const privacyroomKeysHandlers = (
   ];
 };
 
+export type PrivacyroomAccessHandlerHandle = {
+  getRoomKeys: (roomId: number | string) => TEncryptionKeyPair[];
+  setRoomKeys: (
+    roomId: number | string,
+    keys: TEncryptionKeyPair[],
+  ) => void;
+  getFileKeys: (fileId: number | string) => TEncryptionKeyPair[];
+  getRequests: () => RequestLog[];
+  reset: () => void;
+};
+
+export type PrivacyroomAccessOptions = {
+  roomKeys?: Record<string, TEncryptionKeyPair[]>;
+  fileKeys?: Record<string, TEncryptionKeyPair[]>;
+  handle?: { current: PrivacyroomAccessHandlerHandle | null };
+};
+
+export const privacyroomAccessHandlers = (
+  port: string,
+  opts: PrivacyroomAccessOptions = {},
+) => {
+  const roomKeys = new Map<string, TEncryptionKeyPair[]>(
+    Object.entries(opts.roomKeys ?? {}),
+  );
+  const fileKeys = new Map<string, TEncryptionKeyPair[]>(
+    Object.entries(opts.fileKeys ?? {}),
+  );
+  const requests: RequestLog[] = [];
+
+  const handle: PrivacyroomAccessHandlerHandle = {
+    getRoomKeys: (id) => [...(roomKeys.get(String(id)) ?? [])],
+    setRoomKeys: (id, keys) => {
+      roomKeys.set(String(id), [...keys]);
+    },
+    getFileKeys: (id) => [...(fileKeys.get(String(id)) ?? [])],
+    getRequests: () => [...requests],
+    reset: () => {
+      roomKeys.clear();
+      fileKeys.clear();
+      requests.length = 0;
+    },
+  };
+  if (opts.handle) opts.handle.current = handle;
+
+  const base = `${BASE_URL}:${port}/${API_PREFIX}/privacyroom`;
+
+  return [
+    http.get(`${base}/:roomId(\\d+)/access`, ({ params, request }) => {
+      const id = String(params.roomId);
+      requests.push({ method: "GET", url: new URL(request.url).pathname });
+      return okResponse(roomKeys.get(id) ?? []);
+    }),
+
+    http.get(`${base}/access/:fileId(\\d+)`, ({ params, request }) => {
+      const id = String(params.fileId);
+      requests.push({ method: "GET", url: new URL(request.url).pathname });
+      return okResponse(fileKeys.get(id) ?? []);
+    }),
+
+    http.post(
+      `${base}/access/:fileId(\\d+)`,
+      async ({ params, request }) => {
+        const id = String(params.fileId);
+        const body = (await request.json()) as {
+          keys?: TEncryptionKeyPair[];
+        };
+        requests.push({
+          method: "POST",
+          url: new URL(request.url).pathname,
+          body,
+        });
+        fileKeys.set(id, body.keys ?? []);
+        return okResponse({ keys: body.keys ?? [] });
+      },
+    ),
+  ];
+};
+
 /** Default handler set: empty state. Tests can override with a fresh factory call. */
 export const privacyroomHandlers = (port: string) =>
   privacyroomKeysHandlers(port);

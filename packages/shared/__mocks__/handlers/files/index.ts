@@ -83,9 +83,19 @@ import {
   deleteRoomGroupHandler,
   updateRoomGroupIconHandler,
 } from "./roomGroups";
+import { encryptedFilesHandlers } from "./encryptedFiles";
 
 export { TypeFolder } from "./folder";
 export { TypeRoomList } from "./roomList";
+export {
+  encryptedFilesHandlers,
+  type EncryptedFileKey,
+  type EncryptedFileSeed,
+  type EncryptedFileRecord,
+  type UploadSessionRecord,
+  type EncryptedFilesHandlerHandle,
+  type EncryptedFilesHandlerOptions,
+} from "./encryptedFiles";
 
 export {
   foldersTreeHandler,

@@ -29,8 +29,8 @@
 
 import { RoomsType } from "../../enums";
 import { getFileExtension } from "../../utils/common";
-import { encryptFile } from "../encryption/fileKeys";
-import { estimateEncryptedSize } from "../encryption/streamingEncryption";
+import { encryptFile } from "../encryption/file-keys";
+import { estimateEncryptedSize } from "../encryption/streaming-encryption";
 
 export type UploadConfig = {
   file: File;

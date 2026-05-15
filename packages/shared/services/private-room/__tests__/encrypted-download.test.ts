@@ -34,18 +34,18 @@ import {
   deduplicateFileNames,
   downloadAndDecryptFile,
   downloadAndDecryptFileToBuffer,
-} from "../encryptedDownload";
+} from "../encrypted-download";
 import type { IdentityKeyPair } from "../../encryption/types";
 
-vi.mock("../../encryption/fileKeys", () => ({
+vi.mock("../../encryption/file-keys", () => ({
   decryptFile: vi.fn(),
 }));
-vi.mock("../../encryption/roomFileAccess", () => ({
+vi.mock("../../encryption/room-file-access", () => ({
   unwrapDekForCurrentUser: vi.fn(),
 }));
 
-import { decryptFile } from "../../encryption/fileKeys";
-import { unwrapDekForCurrentUser } from "../../encryption/roomFileAccess";
+import { decryptFile } from "../../encryption/file-keys";
+import { unwrapDekForCurrentUser } from "../../encryption/room-file-access";
 
 const dummyIdentity: IdentityKeyPair = {
   publicKey: new Uint8Array(32),

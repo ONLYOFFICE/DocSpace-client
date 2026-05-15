@@ -60,7 +60,7 @@ vi.mock("@docspace/shared/services/encryption/identity", () => ({
   serializeIdentity: vi.fn(),
   unlockWithRecoveryPhrase: vi.fn(),
 }));
-vi.mock("@docspace/shared/services/encryption/secretStorage", () => ({
+vi.mock("@docspace/shared/services/encryption/secret-storage", () => ({
   SecretStorage: { cacheUnlocked: vi.fn(), lock: vi.fn() },
 }));
 vi.mock("@docspace/shared/api/privacy", () => ({
@@ -72,7 +72,7 @@ import {
   unlockWithRecoveryPhrase,
 } from "@docspace/shared/services/encryption/identity";
 import { InvalidRecoveryPhraseError } from "@docspace/shared/services/encryption/errors";
-import { SecretStorage } from "@docspace/shared/services/encryption/secretStorage";
+import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import { updateEncryptionKeys } from "@docspace/shared/api/privacy";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 

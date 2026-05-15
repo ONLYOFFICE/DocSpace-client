@@ -85,14 +85,14 @@ import {
   createZipFromBuffers,
   deduplicateFileNames,
   triggerFileDownload,
-} from "@docspace/shared/services/private-room/encryptedDownload";
+} from "@docspace/shared/services/private-room/encrypted-download";
 import {
   decryptEncryptedItemToFile,
   addCopySuffix,
   tagFileForCopy,
-} from "@docspace/shared/services/private-room/encryptedCopy";
-import { requireUnlock } from "@docspace/shared/services/encryption/secretStorage";
-import { forgetEncryptedFilename } from "@docspace/shared/services/encryption/filenameCache";
+} from "@docspace/shared/services/private-room/encrypted-copy";
+import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
+import { forgetEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
 
 import {
   getCategoryTypeByFolderType,

@@ -27,9 +27,9 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 
 import { generateIdentityKeyPair } from "../../encryption/identity";
-import { generateDEK } from "../../encryption/fileKeys";
-import { wrapDekForRecipients } from "../../encryption/roomFileAccess";
-import { resetTofuStores } from "../../encryption/tofuStore";
+import { generateDEK } from "../../encryption/file-keys";
+import { wrapDekForRecipients } from "../../encryption/room-file-access";
+import { resetTofuStores } from "../../encryption/tofu-store";
 import type {
   IdentityKeyPair,
   ServerAccessKeyDto,
@@ -40,7 +40,7 @@ import {
   revokeMemberFromEncryptedRoom,
   rotateOwnIdentityForRoom,
   validateMembersForEncryption,
-} from "../roomEncryption";
+} from "../room-encryption";
 
 const getFolderMock = vi.fn();
 const getFileEncryptionAccessMock = vi.fn();

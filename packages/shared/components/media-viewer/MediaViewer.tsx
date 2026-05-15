@@ -42,10 +42,10 @@ import { isNullOrUndefined } from "../../utils/typeGuards";
 import { ViewerWrapper } from "./sub-components/ViewerWrapper";
 
 import { getFileEncryptionAccess } from "../../api/files";
-import { decryptFile } from "../../services/encryption/fileKeys";
-import { unwrapDekForCurrentUser } from "../../services/encryption/roomFileAccess";
-import { requireUnlock } from "../../services/encryption/secretStorage";
-import { getCachedEncryptedFilename } from "../../services/encryption/filenameCache";
+import { decryptFile } from "../../services/encryption/file-keys";
+import { unwrapDekForCurrentUser } from "../../services/encryption/room-file-access";
+import { requireUnlock } from "../../services/encryption/secret-storage";
+import { getCachedEncryptedFilename } from "../../services/encryption/filename-cache";
 
 import { mapSupplied, mediaTypes } from "./MediaViewer.constants";
 import type { MediaViewerProps } from "./MediaViewer.types";

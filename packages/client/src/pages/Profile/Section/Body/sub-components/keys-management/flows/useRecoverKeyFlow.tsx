@@ -33,7 +33,7 @@ import {
   serializeIdentity,
   unlockWithRecoveryPhrase,
 } from "@docspace/shared/services/encryption/identity";
-import { SecretStorage } from "@docspace/shared/services/encryption/secretStorage";
+import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import { InvalidRecoveryPhraseError } from "@docspace/shared/services/encryption/errors";
 import { updateEncryptionKeys } from "@docspace/shared/api/privacy";
 import type {

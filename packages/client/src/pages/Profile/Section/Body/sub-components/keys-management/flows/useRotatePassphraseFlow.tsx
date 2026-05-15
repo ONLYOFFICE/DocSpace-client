@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { changePassphrase } from "@docspace/shared/services/encryption/identity";
-import { SecretStorage } from "@docspace/shared/services/encryption/secretStorage";
+import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import { updateEncryptionKeys } from "@docspace/shared/api/privacy";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 

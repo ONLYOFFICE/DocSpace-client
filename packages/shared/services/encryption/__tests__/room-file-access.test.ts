@@ -27,12 +27,12 @@
 import { describe, it, expect, beforeAll } from "vitest";
 
 import { generateIdentityKeyPair } from "../identity";
-import { generateDEK } from "../fileKeys";
+import { generateDEK } from "../file-keys";
 import {
   wrapDekForRecipients,
   unwrapDekForCurrentUser,
   type RoomMemberPublicKey,
-} from "../roomFileAccess";
+} from "../room-file-access";
 import { NoAccessError, AuthenticationError } from "../errors";
 import { type IdentityKeyPair, type ServerAccessKeyDto } from "../types";
 import { arrayBufferToBase64 } from "../utils";

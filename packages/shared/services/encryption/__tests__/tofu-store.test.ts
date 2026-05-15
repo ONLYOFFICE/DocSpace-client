@@ -30,9 +30,9 @@ import {
   TofuStore,
   getTofuStore,
   resetTofuStores,
-} from "../tofuStore";
+} from "../tofu-store";
 
-// Minimal in-memory IDBFactory good enough for tofuStore.ts. Persists data
+// Minimal in-memory IDBFactory good enough for tofu-store.ts. Persists data
 // per-database in a module-level Map so reopening a DB returns the same data
 // (mirrors real IndexedDB). Object-store schema is fixed (keyPath: "userId"),
 // matching what tofuStore.openDB creates on upgrade.

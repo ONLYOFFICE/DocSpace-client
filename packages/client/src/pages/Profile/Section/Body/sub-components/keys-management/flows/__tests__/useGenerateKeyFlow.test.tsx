@@ -75,7 +75,7 @@ vi.mock("@docspace/shared/services/encryption/identity", () => ({
 vi.mock("@docspace/shared/services/encryption/recovery", () => ({
   generateRecoveryMnemonic: vi.fn(),
 }));
-vi.mock("@docspace/shared/services/encryption/secretStorage", () => ({
+vi.mock("@docspace/shared/services/encryption/secret-storage", () => ({
   SecretStorage: { cacheUnlocked: vi.fn(), lock: vi.fn() },
 }));
 vi.mock("@docspace/shared/api/privacy", () => ({
@@ -89,7 +89,7 @@ import {
   serializeIdentity,
 } from "@docspace/shared/services/encryption/identity";
 import { generateRecoveryMnemonic } from "@docspace/shared/services/encryption/recovery";
-import { SecretStorage } from "@docspace/shared/services/encryption/secretStorage";
+import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import {
   setEncryptionKeys,
   updateEncryptionKeys,

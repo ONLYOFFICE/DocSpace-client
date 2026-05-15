@@ -490,7 +490,7 @@ class AuthStore {
     this.userStore?.clearEncryptionKeys();
     try {
       const { SecretStorage } = await import(
-        "../services/encryption/secretStorage"
+        "../services/encryption/secret-storage"
       );
       SecretStorage.lock();
     } catch {

@@ -27,7 +27,7 @@
 import { describe, it, expect, beforeAll } from "vitest";
 
 import { generateIdentityKeyPair } from "../identity";
-import { generateDEK } from "../fileKeys";
+import { generateDEK } from "../file-keys";
 import { wrapDEK, unwrapDEK, inspectWrap } from "../hpke";
 import {
   AuthenticationError,

@@ -34,13 +34,13 @@ import {
   unwrapDekForCurrentUser,
   wrapDekForRecipients,
   type RoomMemberPublicKey,
-} from "../encryption/roomFileAccess";
-import { wipeDek } from "../encryption/fileKeys";
+} from "../encryption/room-file-access";
+import { wipeDek } from "../encryption/file-keys";
 import {
   getTofuStore,
   getKeyMismatchHandler,
   type KeyMismatchResolver,
-} from "../encryption/tofuStore";
+} from "../encryption/tofu-store";
 import FilesFilter from "../../api/files/filter";
 import type { TFile } from "../../api/files/types";
 import type { IdentityKeyPair, ServerAccessKeyDto } from "../encryption/types";

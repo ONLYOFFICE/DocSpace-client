@@ -29,9 +29,9 @@
 
 import { Zip, ZipPassThrough } from "fflate";
 
-import { decryptFile } from "../encryption/fileKeys";
-import { unwrapDekForCurrentUser } from "../encryption/roomFileAccess";
-import type { RoomMemberPublicKey } from "../encryption/roomFileAccess";
+import { decryptFile } from "../encryption/file-keys";
+import { unwrapDekForCurrentUser } from "../encryption/room-file-access";
+import type { RoomMemberPublicKey } from "../encryption/room-file-access";
 import type { IdentityKeyPair, ServerAccessKeyDto } from "../encryption/types";
 
 export type DecryptConfig = {

@@ -43,8 +43,8 @@ import {
   getDSE3HeaderSize,
   isDSE3Format,
   parseDSE3Header,
-} from "./streamingEncryption";
-import { rememberEncryptedFilename } from "./filenameCache";
+} from "./streaming-encryption";
+import { rememberEncryptedFilename } from "./filename-cache";
 
 export function generateDEK(): Uint8Array {
   return getRandomBytes(AES_KEY_SIZE_BYTES);

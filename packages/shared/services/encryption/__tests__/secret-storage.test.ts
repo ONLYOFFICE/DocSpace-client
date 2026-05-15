@@ -31,7 +31,7 @@ import {
   registerUnlockHandler,
   unregisterUnlockHandler,
   requireUnlock,
-} from "../secretStorage";
+} from "../secret-storage";
 import { SESSION_CACHE_DURATION_MS } from "../types";
 import type { IdentityKeyPair } from "../types";
 

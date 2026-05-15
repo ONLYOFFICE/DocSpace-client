@@ -36,12 +36,12 @@ import {
   type KeyChangeDialogModalProps,
   type PassphraseDialogProps,
 } from "../EncryptionContext";
-import { SecretStorage } from "../../../services/encryption/secretStorage";
+import { SecretStorage } from "../../../services/encryption/secret-storage";
 import type {
   IdentityKeyPair,
   SerializedIdentity,
 } from "../../../services/encryption/types";
-import type { KeyMismatchInfo } from "../../../services/encryption/tofuStore";
+import type { KeyMismatchInfo } from "../../../services/encryption/tofu-store";
 
 vi.mock("../../../services/encryption/identity", () => ({
   unlockWithPassphrase: vi.fn(),

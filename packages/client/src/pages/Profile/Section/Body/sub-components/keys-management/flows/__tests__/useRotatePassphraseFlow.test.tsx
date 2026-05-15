@@ -49,7 +49,7 @@ vi.mock("@docspace/ui-kit/components/toast", () => ({
 vi.mock("@docspace/shared/services/encryption/identity", () => ({
   changePassphrase: vi.fn(),
 }));
-vi.mock("@docspace/shared/services/encryption/secretStorage", () => ({
+vi.mock("@docspace/shared/services/encryption/secret-storage", () => ({
   SecretStorage: { lock: vi.fn() },
 }));
 vi.mock("@docspace/shared/api/privacy", () => ({
@@ -58,7 +58,7 @@ vi.mock("@docspace/shared/api/privacy", () => ({
 
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { changePassphrase } from "@docspace/shared/services/encryption/identity";
-import { SecretStorage } from "@docspace/shared/services/encryption/secretStorage";
+import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import { updateEncryptionKeys } from "@docspace/shared/api/privacy";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 

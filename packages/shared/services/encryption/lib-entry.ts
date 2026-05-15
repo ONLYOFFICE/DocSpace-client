@@ -99,7 +99,7 @@ export {
 export { wrapDEK, unwrapDEK, inspectWrap } from "./hpke";
 
 // File-level encryption
-export { generateDEK, encryptFile, decryptFile, wipeDek } from "./fileKeys";
+export { generateDEK, encryptFile, decryptFile, wipeDek } from "./file-keys";
 
 // DSE3 streaming primitives
 export {
@@ -107,7 +107,7 @@ export {
   parseDSE3Header,
   estimateEncryptedSize,
   shouldUseChunkedEncryption,
-} from "./streamingEncryption";
+} from "./streaming-encryption";
 
 // Recovery mnemonic
 export {

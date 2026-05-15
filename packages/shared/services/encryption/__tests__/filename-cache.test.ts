@@ -32,7 +32,7 @@ import {
   forgetEncryptedFilename,
   clearEncryptedFilenameCache,
   subscribeFilenameCache,
-} from "../filenameCache";
+} from "../filename-cache";
 
 // Vitest's jsdom environment provides a real sessionStorage. We clear it
 // between tests so each case starts from a clean state.

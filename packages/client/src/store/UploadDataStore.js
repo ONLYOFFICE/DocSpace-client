@@ -34,7 +34,7 @@ import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
 import {
   prepareEncryptedUpload,
   shouldEncryptUpload,
-} from "@docspace/shared/services/private-room/encryptedUpload";
+} from "@docspace/shared/services/private-room/encrypted-upload";
 import {
   getFileInfo,
   getFolderInfo,
@@ -56,14 +56,14 @@ import { getFilePublicKeys } from "@docspace/shared/api/privacy";
 import {
   unwrapDekForCurrentUser,
   wrapDekForRecipients,
-} from "@docspace/shared/services/encryption/roomFileAccess";
-import { wipeDek } from "@docspace/shared/services/encryption/fileKeys";
-import { requireUnlock } from "@docspace/shared/services/encryption/secretStorage";
+} from "@docspace/shared/services/encryption/room-file-access";
+import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
+import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import {
   getTofuStore,
   getKeyMismatchHandler,
-} from "@docspace/shared/services/encryption/tofuStore";
-import { rememberEncryptedFilename } from "@docspace/shared/services/encryption/filenameCache";
+} from "@docspace/shared/services/encryption/tofu-store";
+import { rememberEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
 

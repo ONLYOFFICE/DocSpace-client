@@ -34,7 +34,7 @@ import {
   serializeIdentity,
 } from "@docspace/shared/services/encryption/identity";
 import { generateRecoveryMnemonic } from "@docspace/shared/services/encryption/recovery";
-import { SecretStorage } from "@docspace/shared/services/encryption/secretStorage";
+import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import {
   setEncryptionKeys,
   updateEncryptionKeys,

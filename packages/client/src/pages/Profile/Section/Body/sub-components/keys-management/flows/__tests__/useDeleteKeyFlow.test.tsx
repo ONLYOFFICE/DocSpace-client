@@ -46,7 +46,7 @@ vi.mock("@docspace/ui-kit/components/toast", () => ({
   toastr: { success: vi.fn(), error: vi.fn() },
 }));
 
-vi.mock("@docspace/shared/services/encryption/secretStorage", () => ({
+vi.mock("@docspace/shared/services/encryption/secret-storage", () => ({
   SecretStorage: { lock: vi.fn() },
 }));
 vi.mock("@docspace/shared/api/privacy", () => ({
@@ -54,7 +54,7 @@ vi.mock("@docspace/shared/api/privacy", () => ({
 }));
 
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { SecretStorage } from "@docspace/shared/services/encryption/secretStorage";
+import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import { deleteEncryptionKey } from "@docspace/shared/api/privacy";
 
 import {

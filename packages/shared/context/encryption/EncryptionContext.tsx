@@ -39,13 +39,13 @@ import {
   SecretStorage,
   registerUnlockHandler,
   unregisterUnlockHandler,
-} from "../../services/encryption/secretStorage";
+} from "../../services/encryption/secret-storage";
 import {
   registerKeyMismatchHandler,
   unregisterKeyMismatchHandler,
   type KeyMismatchInfo,
   type KeyMismatchDecision,
-} from "../../services/encryption/tofuStore";
+} from "../../services/encryption/tofu-store";
 import { unlockWithPassphrase } from "../../services/encryption/identity";
 import type {
   IdentityKeyPair,

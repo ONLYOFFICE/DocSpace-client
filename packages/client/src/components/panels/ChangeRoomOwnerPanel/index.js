@@ -43,7 +43,7 @@ import {
 } from "@docspace/ui-kit/components/modal-dialog";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { validateMembersForEncryption } from "@docspace/shared/services/private-room/roomEncryption";
+import { validateMembersForEncryption } from "@docspace/shared/services/private-room/room-encryption";
 import styles from "./ChangeRoomOwnerPanel.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";
 

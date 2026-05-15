@@ -26,7 +26,7 @@
 
 import { describe, it, expect } from "vitest";
 
-import { generateDEK, encryptFile, decryptFile } from "../fileKeys";
+import { generateDEK, encryptFile, decryptFile } from "../file-keys";
 import { DecryptionError } from "../errors";
 import { AES_KEY_SIZE_BYTES } from "../types";
 

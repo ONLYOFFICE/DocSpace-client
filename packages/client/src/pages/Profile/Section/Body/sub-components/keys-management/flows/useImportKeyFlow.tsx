@@ -33,7 +33,7 @@ import {
   importIdentityFromFile,
   unlockWithPassphrase,
 } from "@docspace/shared/services/encryption/identity";
-import { SecretStorage } from "@docspace/shared/services/encryption/secretStorage";
+import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import {
   setEncryptionKeys,
   updateEncryptionKeys,

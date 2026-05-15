@@ -68,9 +68,9 @@ import {
 import {
   getCachedEncryptedFilename,
   subscribeFilenameCache,
-} from "@docspace/shared/services/encryption/filenameCache";
-import { SecretStorage } from "@docspace/shared/services/encryption/secretStorage";
-import { recoverEncryptedFilenames } from "@docspace/shared/services/private-room/encryptedFilenameRecovery";
+} from "@docspace/shared/services/encryption/filename-cache";
+import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
+import { recoverEncryptedFilenames } from "@docspace/shared/services/private-room/encrypted-filename-recovery";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { getI18n } from "react-i18next";

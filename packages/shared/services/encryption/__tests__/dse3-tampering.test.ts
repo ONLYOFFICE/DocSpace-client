@@ -33,8 +33,8 @@ import {
   decryptChunked,
   parseDSE3Header,
   getDSE3HeaderSize,
-} from "../streamingEncryption";
-import { encryptFile, decryptFile, generateDEK } from "../fileKeys";
+} from "../streaming-encryption";
+import { encryptFile, decryptFile, generateDEK } from "../file-keys";
 import { DecryptionError, InvalidFormatError } from "../errors";
 import {
   AES_GCM_IV_SIZE,

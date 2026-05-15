@@ -34,7 +34,7 @@ import {
   decryptChunked,
   getDSE3HeaderSize,
   estimateEncryptedSize,
-} from "../streamingEncryption";
+} from "../streaming-encryption";
 import {
   AES_GCM_IV_SIZE,
   AES_GCM_TAG_SIZE,
@@ -48,7 +48,7 @@ import {
   InvalidFormatError,
   UnsupportedVersionError,
 } from "../errors";
-import { generateDEK } from "../fileKeys";
+import { generateDEK } from "../file-keys";
 
 // Convenience aliases preserved from previous shape.
 const C = {

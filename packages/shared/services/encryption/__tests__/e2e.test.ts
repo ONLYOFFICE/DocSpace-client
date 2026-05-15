@@ -51,7 +51,7 @@ import {
   unlockWithRecoveryPhrase,
 } from "../identity";
 import { wrapDEK, unwrapDEK } from "../hpke";
-import { encryptFile, decryptFile } from "../fileKeys";
+import { encryptFile, decryptFile } from "../file-keys";
 import { generateRecoveryMnemonic } from "../recovery";
 import { AuthenticationError, DecryptionError } from "../errors";
 import { type IdentityKeyPair, type SerializedIdentity } from "../types";

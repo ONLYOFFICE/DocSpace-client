@@ -25,11 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { getFileEncryptionAccess } from "../../api/files";
-import { decryptFile, wipeDek } from "../encryption/fileKeys";
+import { decryptFile, wipeDek } from "../encryption/file-keys";
 import {
   unwrapDekForCurrentUser,
   type RoomMemberPublicKey,
-} from "../encryption/roomFileAccess";
+} from "../encryption/room-file-access";
 import type { IdentityKeyPair } from "../encryption/types";
 
 type EncryptedItem = {

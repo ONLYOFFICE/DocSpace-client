@@ -32,7 +32,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 import { SecretStorage } from "@docspace/shared/services/encryption/secretStorage";
 import { deleteEncryptionKey } from "@docspace/shared/api/privacy";
 
-import { ConfirmationModal } from "../ConfirmationModal";
+import { ConfirmationModal } from "../modals/ConfirmationModal";
 
 type Deps = {
   refreshKeysFromServer: () => Promise<void>;

@@ -41,9 +41,9 @@ import {
 } from "@docspace/shared/api/privacy";
 import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types";
 
-import { ConfirmationModal } from "../ConfirmationModal";
-import { PassphraseModal } from "../PassphraseModal";
-import { RecoveryPhraseDisplayModal } from "../RecoveryPhraseDisplayModal";
+import { ConfirmationModal } from "../modals/ConfirmationModal";
+import { PassphraseModal } from "../modals/PassphraseModal";
+import { RecoveryPhraseDisplayModal } from "../modals/RecoveryPhraseDisplayModal";
 
 type Step = "idle" | "confirm-replace" | "passphrase" | "recovery-display";
 

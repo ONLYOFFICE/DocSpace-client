@@ -41,7 +41,7 @@ import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url
 import { getPublicKeyFingerprint } from "@docspace/shared/services/encryption/identity";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
-import styles from "./keys-management.module.scss";
+import styles from "./KeysManagement.module.scss";
 
 type KeyItemProps = {
   keyData: TEncryptionKeyPair;

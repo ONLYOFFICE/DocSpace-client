@@ -35,7 +35,7 @@ import {
   type EncryptionUserKeys,
   type KeyChangeDialogModalProps,
   type PassphraseDialogProps,
-} from "../index";
+} from "../EncryptionContext";
 import { SecretStorage } from "../../../services/encryption/secretStorage";
 import type {
   IdentityKeyPair,

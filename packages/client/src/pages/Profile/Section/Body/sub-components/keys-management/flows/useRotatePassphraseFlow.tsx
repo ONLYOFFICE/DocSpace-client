@@ -34,7 +34,7 @@ import { SecretStorage } from "@docspace/shared/services/encryption/secretStorag
 import { updateEncryptionKeys } from "@docspace/shared/api/privacy";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
-import { KeyRotationDialog } from "../KeyRotationDialog";
+import { KeyRotationDialog } from "../modals/KeyRotationDialog";
 
 type Deps = {
   userId: string | undefined;

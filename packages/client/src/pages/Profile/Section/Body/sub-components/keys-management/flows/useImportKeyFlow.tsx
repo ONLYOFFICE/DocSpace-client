@@ -40,8 +40,8 @@ import {
 } from "@docspace/shared/api/privacy";
 import type { SerializedIdentity } from "@docspace/shared/services/encryption/types";
 
-import { ConfirmationModal } from "../ConfirmationModal";
-import { PassphraseModal } from "../PassphraseModal";
+import { ConfirmationModal } from "../modals/ConfirmationModal";
+import { PassphraseModal } from "../modals/PassphraseModal";
 
 type Step = "idle" | "passphrase" | "confirm-replace";
 

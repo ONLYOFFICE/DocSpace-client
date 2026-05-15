@@ -32,7 +32,7 @@ const captured = {
   rotation: null as Record<string, unknown> | null,
 };
 
-vi.mock("../../KeyRotationDialog", () => ({
+vi.mock("../../modals/KeyRotationDialog", () => ({
   KeyRotationDialog: (props: Record<string, unknown>) => {
     captured.rotation = props;
     useEffect(() => () => {

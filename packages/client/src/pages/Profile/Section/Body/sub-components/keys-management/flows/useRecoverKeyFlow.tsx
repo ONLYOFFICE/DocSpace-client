@@ -42,8 +42,8 @@ import type {
 } from "@docspace/shared/services/encryption/types";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
-import { PassphraseModal } from "../PassphraseModal";
-import { RecoveryPhraseInputModal } from "../RecoveryPhraseInputModal";
+import { PassphraseModal } from "../modals/PassphraseModal";
+import { RecoveryPhraseInputModal } from "../modals/RecoveryPhraseInputModal";
 
 type Step = "idle" | "phrase" | "new-passphrase";
 

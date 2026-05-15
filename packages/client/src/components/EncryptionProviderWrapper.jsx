@@ -30,7 +30,7 @@ import { inject, observer } from "mobx-react";
 import {
   EncryptionProvider,
   useEncryption,
-} from "@docspace/shared/context/EncryptionContext";
+} from "@docspace/shared/context/encryption";
 import { PassphraseDialog } from "@docspace/shared/dialogs/passphrase-dialog";
 import { KeyChangeDialog } from "@docspace/shared/dialogs/key-change-dialog";
 

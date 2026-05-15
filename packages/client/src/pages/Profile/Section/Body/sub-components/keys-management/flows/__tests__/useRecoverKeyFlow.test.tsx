@@ -33,7 +33,7 @@ const captured = {
   passphrase: null as Record<string, unknown> | null,
 };
 
-vi.mock("../../PassphraseModal", () => ({
+vi.mock("../../modals/PassphraseModal", () => ({
   PassphraseModal: (props: Record<string, unknown>) => {
     captured.passphrase = props;
     useEffect(() => () => {
@@ -42,7 +42,7 @@ vi.mock("../../PassphraseModal", () => ({
     return null;
   },
 }));
-vi.mock("../../RecoveryPhraseInputModal", () => ({
+vi.mock("../../modals/RecoveryPhraseInputModal", () => ({
   RecoveryPhraseInputModal: (props: Record<string, unknown>) => {
     captured.phrase = props;
     useEffect(() => () => {

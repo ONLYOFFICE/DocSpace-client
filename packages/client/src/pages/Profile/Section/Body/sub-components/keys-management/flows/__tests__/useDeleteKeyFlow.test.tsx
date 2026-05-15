@@ -32,7 +32,7 @@ const captured = {
   confirmation: null as Record<string, unknown> | null,
 };
 
-vi.mock("../../ConfirmationModal", () => ({
+vi.mock("../../modals/ConfirmationModal", () => ({
   ConfirmationModal: (props: Record<string, unknown>) => {
     captured.confirmation = props;
     useEffect(() => () => {

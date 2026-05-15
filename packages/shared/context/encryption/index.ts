@@ -24,4 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { default } from "./KeysManagement";
+export {
+  EncryptionProvider,
+  useEncryption,
+  useEncryptionOptional,
+  withEncryption,
+} from "./EncryptionContext";
+export type {
+  EncryptionContextValue,
+  EncryptionUserKeys,
+  KeyChangeDialogModalProps,
+  PassphraseDialogProps,
+} from "./EncryptionContext";
+export { default } from "./EncryptionContext";

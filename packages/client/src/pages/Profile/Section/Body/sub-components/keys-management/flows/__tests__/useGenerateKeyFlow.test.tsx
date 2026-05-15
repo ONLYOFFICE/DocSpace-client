@@ -36,7 +36,7 @@ const captured = {
   recovery: null as Record<string, unknown> | null,
 };
 
-vi.mock("../../ConfirmationModal", () => ({
+vi.mock("../../modals/ConfirmationModal", () => ({
   ConfirmationModal: (props: Record<string, unknown>) => {
     captured.confirmation = props;
     useEffect(() => () => {
@@ -45,7 +45,7 @@ vi.mock("../../ConfirmationModal", () => ({
     return null;
   },
 }));
-vi.mock("../../PassphraseModal", () => ({
+vi.mock("../../modals/PassphraseModal", () => ({
   PassphraseModal: (props: Record<string, unknown>) => {
     captured.passphrase = props;
     useEffect(() => () => {
@@ -54,7 +54,7 @@ vi.mock("../../PassphraseModal", () => ({
     return null;
   },
 }));
-vi.mock("../../RecoveryPhraseDisplayModal", () => ({
+vi.mock("../../modals/RecoveryPhraseDisplayModal", () => ({
   RecoveryPhraseDisplayModal: (props: Record<string, unknown>) => {
     captured.recovery = props;
     useEffect(() => () => {

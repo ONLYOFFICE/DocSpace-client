@@ -41,6 +41,7 @@ import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.rooms.re
 import CatalogAiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
 import CatalogFavoritesReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.favorites.react.svg?url";
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
+import CatalogArchiveReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.archive.react.svg?url";
 import CatalogSettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import CatalogRestoreReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-restore.svg?url";
 import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
@@ -58,6 +59,7 @@ const AI_AGENTS_ID = "ai-agents";
 const PATH_TO_PARENT_ID: Record<string, string> = {
   "/ai-files": AI_FILES_ID,
   "/ai-forms": AI_FORMS_ID,
+  "/ai-rooms": AI_ROOMS_ID,
 };
 
 const AI_FILES_SECTION_TO_ID: Record<string, string> = {
@@ -71,6 +73,13 @@ const AI_FORMS_SECTION_TO_ID: Record<string, string> = {
   "in-progress": "ai-forms-in-progress",
   "completed-forms": "ai-forms-completed",
   settings: "ai-forms-settings",
+};
+
+const AI_ROOMS_SECTION_TO_ID: Record<string, string> = {
+  rooms: "ai-rooms-rooms",
+  archive: "ai-rooms-archive",
+  trash: "ai-rooms-trash",
+  settings: "ai-rooms-settings",
 };
 
 type NewArticleProps = {
@@ -117,6 +126,9 @@ const NewArticle = ({
     }
     if (location.pathname.startsWith("/ai-forms")) {
       return AI_FORMS_SECTION_TO_ID[section] ?? AI_FORMS_ID;
+    }
+    if (location.pathname.startsWith("/ai-rooms")) {
+      return AI_ROOMS_SECTION_TO_ID[section] ?? AI_ROOMS_ID;
     }
     for (const [path, id] of Object.entries(PATH_TO_PARENT_ID)) {
       if (location.pathname.startsWith(path)) return id;
@@ -197,7 +209,35 @@ const NewArticle = ({
       id: AI_ROOMS_ID,
       label: t("Common:DashboardAIRoomsTitle"),
       icon: CatalogRoomsReactSvgUrl,
-      onClick: underDevelopment,
+      onClick: aiRoomsEnabled ? () => navigate("/ai-rooms") : underDevelopment,
+      children: aiRoomsEnabled
+        ? [
+            {
+              id: "ai-rooms-rooms",
+              label: t("Common:Rooms"),
+              icon: CatalogRoomsReactSvgUrl,
+              onClick: () => navigate("/ai-rooms?section=rooms"),
+            },
+            {
+              id: "ai-rooms-archive",
+              label: t("Common:Archive"),
+              icon: CatalogArchiveReactSvgUrl,
+              onClick: () => navigate("/ai-rooms?section=archive"),
+            },
+            {
+              id: "ai-rooms-trash",
+              label: t("Common:TrashSection"),
+              icon: CatalogTrashReactSvgUrl,
+              onClick: () => navigate("/ai-rooms?section=trash"),
+            },
+            {
+              id: "ai-rooms-settings",
+              label: t("Common:Settings"),
+              icon: CatalogSettingsReactSvgUrl,
+              onClick: () => navigate("/ai-rooms?section=settings"),
+            },
+          ]
+        : undefined,
     };
 
     const aiAgentsItem: NavMenuItem = {

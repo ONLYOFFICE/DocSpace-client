@@ -28,7 +28,7 @@ import { useState, useEffect, useRef, memo, useCallback } from "react";
 import { FixedSizeList as List } from "react-window";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import useResizeObserver from "use-resize-observer";
-import { useTheme } from "styled-components";
+import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
 import { TTranslation } from "@docspace/shared/types";
 import { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import { ShareAccessRights } from "@docspace/shared/enums";
@@ -101,7 +101,7 @@ const ItemsList = ({
 	const { height } = useResizeObserver({
 		ref: bodyRef as React.RefObject<HTMLDivElement>,
 	});
-	const { interfaceDirection } = useTheme();
+	const { interfaceDirection } = useInterfaceDirection();
 
 	const listItems = [...inviteItems].filter(
 		(l) => l.templateAccess !== ShareAccessRights.None,
@@ -155,7 +155,7 @@ const ItemsList = ({
 		>
 			<List
 				style={{ overflow: overflowStyle, willChange: "transform" }}
-				direction={interfaceDirection as "ltr" | "rtl"}
+				direction={interfaceDirection}
 				height={bodyHeight}
 				width="auto"
 				itemCount={listItems.length}

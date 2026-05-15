@@ -55,6 +55,21 @@ function formatDate(ts: number): string {
   }
 }
 
+function formatDurationSince(ts: number, now: number = Date.now()): string {
+  const ms = Math.max(0, now - ts);
+  const seconds = Math.floor(ms / 1000);
+  if (seconds < 60) return `${seconds}s`;
+  const minutes = Math.floor(seconds / 60);
+  if (minutes < 60) return `${minutes}m`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours}h`;
+  const days = Math.floor(hours / 24);
+  if (days < 30) return `${days}d`;
+  const months = Math.floor(days / 30);
+  if (months < 12) return `${months}mo`;
+  return `${Math.floor(months / 12)}y`;
+}
+
 const KeyChangeDialog: React.FC<KeyChangeDialogProps> = ({
   visible,
   displayName,
@@ -129,6 +144,11 @@ const KeyChangeDialog: React.FC<KeyChangeDialogProps> = ({
                   date: formatDate(knownLastSeenAt),
                 })}
               </Text>
+              <Text className={styles.activeFor}>
+                {t("Common:KeyChangedActiveFor", {
+                  duration: formatDurationSince(knownFirstSeenAt, Date.now()),
+                })}
+              </Text>
             </div>
             <div className={styles.fingerprintRow}>
               <Text fontSize="12px" className={styles.fingerprintLabel}>
@@ -139,6 +159,42 @@ const KeyChangeDialog: React.FC<KeyChangeDialogProps> = ({
               </Text>
             </div>
           </div>
+
+          <details className={styles.disclosure}>
+            <summary className={styles.disclosureSummary}>
+              {t("Common:KeyChangedWhyTitle")}
+            </summary>
+            <div className={styles.disclosureBody}>
+              <Text fontSize="12px" color="var(--text-secondary)">
+                {t("Common:KeyChangedWhyIntro")}
+              </Text>
+              <ul className={styles.reasonList}>
+                <li>
+                  <Text fontSize="12px" color="var(--text-secondary)">
+                    {t("Common:KeyChangedReasonReset")}
+                  </Text>
+                </li>
+                <li>
+                  <Text fontSize="12px" color="var(--text-secondary)">
+                    {t("Common:KeyChangedReasonRecovery")}
+                  </Text>
+                </li>
+                <li>
+                  <Text fontSize="12px" color="var(--text-secondary)">
+                    {t("Common:KeyChangedReasonDevice")}
+                  </Text>
+                </li>
+                <li>
+                  <Text fontSize="12px" color="var(--text-secondary)">
+                    {t("Common:KeyChangedReasonAttack")}
+                  </Text>
+                </li>
+              </ul>
+              <Text fontSize="12px" color="var(--text-secondary)">
+                {t("Common:KeyChangedVerifyOutOfBand")}
+              </Text>
+            </div>
+          </details>
         </div>
       </ModalDialog.Body>
 

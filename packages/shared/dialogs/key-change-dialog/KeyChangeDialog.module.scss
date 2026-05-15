@@ -74,3 +74,55 @@
   color: var(--text-secondary);
   font-size: 12px;
 }
+
+.activeFor {
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-style: italic;
+  margin-top: 2px;
+}
+
+.disclosure {
+  border-top: 1px solid var(--divider-color);
+  padding-top: 12px;
+}
+
+.disclosureSummary {
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  color: var(--accent-main);
+  font-size: 13px;
+  font-weight: 600;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  &::before {
+    content: "▶";
+    display: inline-block;
+    margin-right: 6px;
+    transition: transform 0.15s ease;
+    font-size: 9px;
+  }
+}
+
+.disclosure[open] .disclosureSummary::before {
+  transform: rotate(90deg);
+}
+
+.disclosureBody {
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.reasonList {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}

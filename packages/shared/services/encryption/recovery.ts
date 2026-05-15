@@ -131,10 +131,19 @@ export function pickQuizPositions(
   rng: () => number = Math.random,
 ): number[] {
   const count = Math.min(Math.max(0, questionCount), wordCount);
+  if (count === 0) return [];
   const positions = new Set<number>();
-  while (positions.size < count) {
+  const maxAttempts = count * 20;
+  let attempts = 0;
+  while (positions.size < count && attempts < maxAttempts) {
     const idx = Math.floor(rng() * wordCount);
     positions.add(Math.min(wordCount - 1, idx));
+    attempts += 1;
+  }
+  if (positions.size < count) {
+    for (let i = 0; i < wordCount && positions.size < count; i++) {
+      positions.add(i);
+    }
   }
   return Array.from(positions).sort((a, b) => a - b);
 }

@@ -115,15 +115,22 @@ describe("recovery", () => {
   });
 
   describe("pickQuizPositions", () => {
+    function sequencer(values: number[]): () => number {
+      let i = 0;
+      return () => values[i++ % values.length];
+    }
+
     it("returns RECOVERY_QUIZ_QUESTION_COUNT positions by default", () => {
-      const positions = pickQuizPositions(24, undefined, () => 0.5);
+      const positions = pickQuizPositions(
+        24,
+        undefined,
+        sequencer([0.1, 0.5, 0.9]),
+      );
       expect(positions).toHaveLength(RECOVERY_QUIZ_QUESTION_COUNT);
     });
 
     it("positions are unique and sorted ascending", () => {
-      let calls = 0;
-      const samples = [0.05, 0.5, 0.95, 0.4, 0.7];
-      const rng = () => samples[calls++ % samples.length];
+      const rng = sequencer([0.05, 0.5, 0.95, 0.4, 0.7]);
       const positions = pickQuizPositions(24, 3, rng);
       expect(new Set(positions).size).toBe(positions.length);
       const sorted = [...positions].sort((a, b) => a - b);
@@ -131,7 +138,11 @@ describe("recovery", () => {
     });
 
     it("positions are within [0, wordCount)", () => {
-      const positions = pickQuizPositions(24, 3, () => 0.99999);
+      const positions = pickQuizPositions(
+        24,
+        3,
+        sequencer([0.0, 0.4, 0.99999]),
+      );
       for (const p of positions) {
         expect(p).toBeGreaterThanOrEqual(0);
         expect(p).toBeLessThan(24);
@@ -139,14 +150,21 @@ describe("recovery", () => {
     });
 
     it("returns at most wordCount positions when asked for more", () => {
-      let i = 0;
-      const rng = () => (i++ * 0.2) % 1;
-      const positions = pickQuizPositions(3, 10, rng);
+      const positions = pickQuizPositions(3, 10, sequencer([0, 0.4, 0.8]));
       expect(positions.length).toBeLessThanOrEqual(3);
     });
 
     it("returns empty array when questionCount is 0", () => {
       expect(pickQuizPositions(24, 0)).toEqual([]);
+    });
+
+    it("does not hang when rng returns a constant value (falls back to fill)", () => {
+      const positions = pickQuizPositions(24, 3, () => 0.5);
+      expect(positions).toHaveLength(3);
+      for (const p of positions) {
+        expect(p).toBeGreaterThanOrEqual(0);
+        expect(p).toBeLessThan(24);
+      }
     });
   });
 

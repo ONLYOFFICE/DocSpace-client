@@ -16,21 +16,12 @@ import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import {
-  AUTO_LOCK_PRESETS,
   type AutoLockPresetId,
   getCurrentAutoLockPresetId,
   setAutoLockPreset,
 } from "@docspace/shared/services/encryption/auto-lock-preference";
 
 import styles from "./AutoLockSetting.module.scss";
-
-const PRESET_LABEL_KEY: Record<AutoLockPresetId, string> = {
-  off: "Common:AutoLockOff",
-  "5m": "Common:AutoLock5m",
-  "15m": "Common:AutoLock15m",
-  "30m": "Common:AutoLock30m",
-  "1h": "Common:AutoLock1h",
-};
 
 export const AutoLockSetting = () => {
   const { t } = useTranslation(["Common"]);
@@ -63,11 +54,11 @@ export const AutoLockSetting = () => {
         value={presetId}
         onChange={handleChange}
       >
-        {AUTO_LOCK_PRESETS.map((p) => (
-          <option key={p.id} value={p.id}>
-            {t(PRESET_LABEL_KEY[p.id])}
-          </option>
-        ))}
+        <option value="off">{t("Common:AutoLockOff")}</option>
+        <option value="5m">{t("Common:AutoLock5m")}</option>
+        <option value="15m">{t("Common:AutoLock15m")}</option>
+        <option value="30m">{t("Common:AutoLock30m")}</option>
+        <option value="1h">{t("Common:AutoLock1h")}</option>
       </select>
     </div>
   );

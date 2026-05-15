@@ -378,6 +378,24 @@ const ClientRoutes = [
           return { Component };
         },
       },
+      {
+        path: "/ai-rooms",
+        async lazy() {
+          const { AiRooms } = await componentLoader(
+            () => import("SRC_DIR/pages/AiRooms"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ErrorBoundary>
+                <AiRooms />
+              </ErrorBoundary>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
     ],
   },
   {

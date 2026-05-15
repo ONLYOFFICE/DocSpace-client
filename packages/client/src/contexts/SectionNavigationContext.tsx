@@ -37,6 +37,7 @@ const SECTION_PREFIXES = [
   "/dashboard",
   "/ai-files",
   "/ai-forms",
+  "/ai-rooms",
 ] as const;
 
 function getSectionPrefix(pathname: string): string {

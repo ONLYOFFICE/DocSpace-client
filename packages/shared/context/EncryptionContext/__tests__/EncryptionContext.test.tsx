@@ -285,7 +285,7 @@ describe("EncryptionContext / EncryptionProvider", () => {
       newKey: "pub-new",
       knownFirstSeenAt: 1000,
       knownLastSeenAt: 2000,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
     } as any;
 
     it("returns 'refuse' immediately when no KeyChangeDialog is registered", async () => {

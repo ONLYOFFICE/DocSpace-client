@@ -75,12 +75,12 @@ const happyMocks = () => {
   vi.mocked(parseDSE3Header).mockImplementation(() => ({
     encryptedName: new Uint8Array([1, 2, 3]),
     fileNonce: new Uint8Array(12),
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // biome-ignore lint/suspicious/noExplicitAny: test mock
   }) as any);
   vi.mocked(getFileEncryptionAccess).mockResolvedValue({
     fileKeys: [{ userId: "u1" }],
     userKeys: [],
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // biome-ignore lint/suspicious/noExplicitAny: test mock
   } as any);
   vi.mocked(unwrapDekForCurrentUser).mockResolvedValue(new Uint8Array(32));
   vi.mocked(decryptFileNameRaw).mockResolvedValue("real-name.docx");
@@ -180,7 +180,7 @@ describe("encryptedFilenameRecovery", () => {
     vi.mocked(parseDSE3Header).mockImplementation(() => ({
       encryptedName: null,
       fileNonce: new Uint8Array(12),
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // biome-ignore lint/suspicious/noExplicitAny: test mock
     }) as any);
 
     await recoverEncryptedFilenames(makeCandidates([1]), "u1", identity);
@@ -196,7 +196,7 @@ describe("encryptedFilenameRecovery", () => {
     vi.mocked(getFileEncryptionAccess).mockResolvedValue({
       fileKeys: [],
       userKeys: [],
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // biome-ignore lint/suspicious/noExplicitAny: test mock
     } as any);
 
     await recoverEncryptedFilenames(makeCandidates([1]), "u1", identity);
@@ -259,7 +259,7 @@ describe("encryptedFilenameRecovery", () => {
     vi.mocked(parseDSE3Header).mockImplementation(() => ({
       encryptedName: null,
       fileNonce: new Uint8Array(12),
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // biome-ignore lint/suspicious/noExplicitAny: test mock
     }) as any);
 
     const ids = Array.from({ length: 12 }, (_, i) => i + 1);

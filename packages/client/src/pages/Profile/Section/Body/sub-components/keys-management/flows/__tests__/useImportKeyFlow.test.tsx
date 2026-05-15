@@ -126,11 +126,11 @@ const fireFileChosen = (file?: File) => {
 
 const happyImport = () => {
   vi.mocked(importIdentityFromFile).mockResolvedValue(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // biome-ignore lint/suspicious/noExplicitAny: test mock
     dummyImported as any,
   );
   vi.mocked(unlockWithPassphrase).mockResolvedValue(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // biome-ignore lint/suspicious/noExplicitAny: test mock
     dummyKeyPair as any,
   );
   vi.mocked(setEncryptionKeys).mockResolvedValue(undefined as never);
@@ -225,7 +225,7 @@ describe("useImportKeyFlow", () => {
 
     it("toasts InvalidPassphrase and stays in passphrase step on unlock failure", async () => {
       vi.mocked(importIdentityFromFile).mockResolvedValue(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // biome-ignore lint/suspicious/noExplicitAny: test mock
         dummyImported as any,
       );
       vi.mocked(unlockWithPassphrase).mockRejectedValueOnce(

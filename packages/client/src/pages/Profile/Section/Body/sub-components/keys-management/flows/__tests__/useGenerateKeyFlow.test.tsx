@@ -117,7 +117,7 @@ const dummyKeyPair = {
 
 const happyMocks = () => {
   vi.mocked(generateIdentityKeyPair).mockResolvedValue(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // biome-ignore lint/suspicious/noExplicitAny: test mock
     dummyKeyPair as any,
   );
   vi.mocked(generateRecoveryMnemonic).mockResolvedValue("twelve word phrase");

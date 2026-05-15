@@ -77,7 +77,7 @@ describe("encryptedDownload", () => {
   beforeAll(() => {
     // jsdom v27 doesn't implement File.arrayBuffer().
     if (!File.prototype.arrayBuffer) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
       (File.prototype as any).arrayBuffer = function arrayBuffer() {
         return new Promise<ArrayBuffer>((resolve, reject) => {
           const reader = new FileReader();

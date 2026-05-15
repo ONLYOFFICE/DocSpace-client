@@ -102,7 +102,7 @@ const makeKeys = (count: number): TEncryptionKeyPair[] =>
     userId: "42",
     publicKey: `pub-${i}`,
     privateKeyEnc: `enc-${i}`,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // biome-ignore lint/suspicious/noExplicitAny: test mock
   })) as any;
 
 describe("useRecoverKeyFlow", () => {
@@ -182,7 +182,7 @@ describe("useRecoverKeyFlow", () => {
     it("uses encryptionKeys[0] only — multi-key users get the first envelope", async () => {
       const keys = makeKeys(3);
       vi.mocked(unlockWithRecoveryPhrase).mockResolvedValueOnce(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // biome-ignore lint/suspicious/noExplicitAny: test mock
         dummyKeyPair as any,
       );
       render(
@@ -210,7 +210,7 @@ describe("useRecoverKeyFlow", () => {
 
     it("advances to new-passphrase step after a successful unlock", async () => {
       vi.mocked(unlockWithRecoveryPhrase).mockResolvedValueOnce(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // biome-ignore lint/suspicious/noExplicitAny: test mock
         dummyKeyPair as any,
       );
       render(
@@ -231,7 +231,7 @@ describe("useRecoverKeyFlow", () => {
 
     it("re-serializes the keypair WITH the recovery mnemonic preserved", async () => {
       vi.mocked(unlockWithRecoveryPhrase).mockResolvedValueOnce(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // biome-ignore lint/suspicious/noExplicitAny: test mock
         dummyKeyPair as any,
       );
       vi.mocked(serializeIdentity).mockResolvedValue({

@@ -81,7 +81,7 @@ const dummyKey: TEncryptionKeyPair = {
   userId: "42",
   publicKey: "pub-old",
   privateKeyEnc: "enc-old",
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // biome-ignore lint/suspicious/noExplicitAny: test mock
 } as any;
 
 describe("useRotatePassphraseFlow", () => {

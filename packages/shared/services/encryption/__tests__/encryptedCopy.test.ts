@@ -89,7 +89,7 @@ describe("encryptedCopy", () => {
 
     it("throws when fileKeys is missing", async () => {
       vi.mocked(getFileEncryptionAccess).mockResolvedValueOnce({
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
       } as any);
       await expect(
         decryptEncryptedItemToFile(baseItem, "u1", identity),
@@ -99,7 +99,7 @@ describe("encryptedCopy", () => {
     it("throws when the current user has no entry in fileKeys", async () => {
       vi.mocked(getFileEncryptionAccess).mockResolvedValueOnce({
         fileKeys: [{ userId: "other-user" }],
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
       } as any);
       await expect(
         decryptEncryptedItemToFile(baseItem, "u1", identity),
@@ -111,7 +111,7 @@ describe("encryptedCopy", () => {
     it("hasOwnEntry uses String() coercion on both sides", async () => {
       vi.mocked(getFileEncryptionAccess).mockResolvedValueOnce({
         fileKeys: [{ userId: 42 }],
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
       } as any);
       vi.stubGlobal(
         "fetch",
@@ -140,7 +140,7 @@ describe("encryptedCopy", () => {
 
     it("throws when the viewUrl fetch is not ok", async () => {
       vi.mocked(getFileEncryptionAccess).mockResolvedValueOnce(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
         validAccess as any,
       );
       vi.stubGlobal(
@@ -157,7 +157,7 @@ describe("encryptedCopy", () => {
 
     it("returns a File with the decrypted name and correct MIME on success", async () => {
       vi.mocked(getFileEncryptionAccess).mockResolvedValueOnce(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
         validAccess as any,
       );
       vi.stubGlobal(
@@ -180,7 +180,7 @@ describe("encryptedCopy", () => {
 
     it("falls back to item.title when the DSE3 header has no encryptedName", async () => {
       vi.mocked(getFileEncryptionAccess).mockResolvedValueOnce(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
         validAccess as any,
       );
       vi.stubGlobal(
@@ -201,7 +201,7 @@ describe("encryptedCopy", () => {
 
     it("wipes the DEK even if decryptFile throws", async () => {
       vi.mocked(getFileEncryptionAccess).mockResolvedValueOnce(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
         validAccess as any,
       );
       vi.stubGlobal(
@@ -223,7 +223,7 @@ describe("encryptedCopy", () => {
 
     it("does NOT wipe when the failure is BEFORE the DEK is unwrapped", async () => {
       vi.mocked(getFileEncryptionAccess).mockResolvedValueOnce(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
         validAccess as any,
       );
       vi.stubGlobal(
@@ -242,7 +242,7 @@ describe("encryptedCopy", () => {
 
     it("falls back contentType to octet-stream when item.contentType is missing", async () => {
       vi.mocked(getFileEncryptionAccess).mockResolvedValueOnce(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
         validAccess as any,
       );
       vi.stubGlobal(

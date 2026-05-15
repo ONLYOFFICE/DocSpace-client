@@ -3,7 +3,7 @@
   "content": "All data transferred",
   "content_en_sha1_hash": "602b537e3d5df8b38ad8795886467332fc9b284b",
   "created_at": "2025-05-19T21:30:56.733Z",
-  "updated_at": "2026-04-11T21:05:15.618Z",
+  "updated_at": "2026-05-15T14:00:06.669Z",
   "comment": {
     "text": "This is a status message displayed in a dialog. It indicates that all data has been successfully transferred during a data reassignment process.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Body/Progress.js",
-      "line_number": 156,
+      "line_number": 165,
       "context": "const allDataTransferredNode = (\n <div className=\"transfer-information\">\n <StyledCheckIcon size=\"medium\" className=\"status-icon\" />\n <Text className=\"status\">\n {t(\"DataReassignmentDialog:AllDataTransferred\")}\n </Text>\n </div>\n );\n \n const interruptedNode = (",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

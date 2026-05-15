@@ -3,7 +3,7 @@
   "content": "Please create the first room.",
   "content_en_sha1_hash": "d81ffd8917231e32c17f72ee8658dc82cb505c46",
   "created_at": "2025-05-19T21:30:56.086Z",
-  "updated_at": "2026-04-11T21:08:27.025Z",
+  "updated_at": "2026-05-15T14:00:06.604Z",
   "comment": {
     "text": "This is a message displayed in an empty \"Rooms\" section, prompting the user to create their first room.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 272,
+      "line_number": 281,
       "context": "aiReady\n ? getAIAgentsAIEnabledDescription(t, access)\n : getAIAgentsAIDisabledDescription(t, true, isPortalAdmin), // NOTE: AI SaaS same as AI Standalone in v.4.0\n )\n .with([FolderType.Rooms, ShareAccessRights.None], () =>\n t(\"Files:RoomEmptyContainerDescription\"),\n )\n .with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>\n t(\"EmptyView:EmptyRootRoomUserDescription\"),\n )\n .with([FolderType.RoomTemplates, P._], () =>",
       "module": "/packages/client"
     }

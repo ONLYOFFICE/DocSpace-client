@@ -3,7 +3,7 @@
   "content": "Number of active employees: {{count}}",
   "content_en_sha1_hash": "3426852c597717b5b595fdec1fb5d104c8bf3d3c",
   "created_at": "2025-05-19T21:30:52.083Z",
-  "updated_at": "2026-04-11T21:23:13.211Z",
+  "updated_at": "2026-05-15T14:00:06.871Z",
   "comment": {
     "text": "This is a text label displaying the current number of active employees on the portal. The `{{count}}` variable will be replaced with a numerical value.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/MainInfo.js",
-      "line_number": 53,
+      "line_number": 62,
       "context": "<StyledMainInfo>\n <Text fontSize=\"14px\" fontWeight={400} dataTestId=\"portal_created_date\">\n {t(\"PortalCreatedDate\", { date: creationDate })}\n </Text>\n <Text fontSize=\"14px\" fontWeight={400}>\n {t(\"NumberOfActiveEmployees\", { count: activeUsersCount })}\n </Text>\n </StyledMainInfo>\n );\n };",
       "module": "/packages/client"
     }

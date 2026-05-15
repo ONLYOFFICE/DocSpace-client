@@ -3,7 +3,7 @@
   "content": "Quota per room",
   "content_en_sha1_hash": "c6d44419e178bb95bb2e8d662bb28b6b56efd1ec",
   "created_at": "2025-05-19T21:30:52.338Z",
-  "updated_at": "2026-04-13T14:59:05.902Z",
+  "updated_at": "2026-05-15T14:00:06.873Z",
   "comment": {
     "text": "This is a title for a settings section or a link label that allows administrators to configure storage quotas for individual rooms within ONLYOFFICE DocSpace.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/MobileQuotas.js",
-      "line_number": 48,
+      "line_number": 57,
       "context": "};\n \n return (\n <StyledBaseQuotaComponent>\n <CategoryItem\n title={t(\"QuotaPerRoom\")}\n onClickLink={onClickLink}\n url=\"portal-settings/management/disk-space/quota-per-room\"\n subtitle={t(\"SetDefaultRoomQuota\", {\n productName: getBrandName(\"ProductName\"),\n })}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerRoom.js",
-      "line_number": 43,
+      "line_number": 52,
       "context": "? { initialSize: defaultRoomsQuota }\n : {};\n \n return (\n <QuotaPerItemComponent\n formLabel={t(\"QuotaPerRoom\")}\n toggleLabel={t(\"DefineQuotaPerRoom\")}\n disableQuota={() => setRoomQuota(-1, t)}\n saveQuota={(size) => setRoomQuota(size, t)}\n {...initialSizeProp}\n isQuotaSet={isDefaultRoomsQuotaSet}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 471,
+      "line_number": 480,
       "context": "{\n id: \"portal-settings_catalog-storageManagement_quota-per-room\",\n key: \"6-0-1\",\n icon: \"\",\n link: \"quota-per-room\",\n tKey: \"QuotaPerRoom\",\n },\n {\n id: \"portal-settings_catalog-storageManagement_quota-per-user\",\n key: \"6-0-2\",\n icon: \"\",",
       "module": "/packages/client"
     }

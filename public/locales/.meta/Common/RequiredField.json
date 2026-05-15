@@ -3,7 +3,7 @@
   "content": "Required field",
   "content_en_sha1_hash": "04148d61b0b7212b69dd8b267c98c74a3ae36942",
   "created_at": "2025-05-19T21:30:47.872Z",
-  "updated_at": "2026-05-08T13:10:45.530Z",
+  "updated_at": "2026-05-15T14:00:06.641Z",
   "comment": {
     "text": "Error text. This message appears when a required input field is left empty or invalid, indicating that the user must provide information to proceed.",
     "is_auto": true,
@@ -13,163 +13,163 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
-      "line_number": 181,
+      "line_number": 190,
       "context": "className=\"name_field\"\n key=\"name\"\n isVertical\n hasError={!isValidName}\n labelVisible={false}\n errorMessage={t(\"RequiredField\")}\n dataTestId=\"request_name_field\"\n >\n <TextInput\n id=\"your-name\"\n hasError={!isValidName}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
-      "line_number": 181,
+      "line_number": 190,
       "context": "className=\"name_field\"\n key=\"name\"\n isVertical\n hasError={!isValidName}\n labelVisible={false}\n errorMessage={t(\"RequiredField\")}\n dataTestId=\"request_name_field\"\n >\n <TextInput\n id=\"your-name\"\n hasError={!isValidName}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeNameDialog/index.js",
-      "line_number": 137,
+      "line_number": 146,
       "context": "onChange: handleNameChange,\n placeholder: t(\"Common:FirstName\"),\n hasError: !isNameValid,\n errorMessage:\n firstName.trim().length === 0\n ? t(\"Common:RequiredField\")\n : t(\"Common:IncorrectFirstName\"),\n className: \"first-name\",\n dataTestId: \"change_name_first_name_field\",\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeNameDialog/index.js",
-      "line_number": 137,
+      "line_number": 146,
       "context": "onChange: handleNameChange,\n placeholder: t(\"Common:FirstName\"),\n hasError: !isNameValid,\n errorMessage:\n firstName.trim().length === 0\n ? t(\"Common:RequiredField\")\n : t(\"Common:IncorrectFirstName\"),\n className: \"first-name\",\n dataTestId: \"change_name_first_name_field\",\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/SetAgentParams.tsx",
-      "line_number": 502,
+      "line_number": 511,
       "context": "isValidTitle={isValidTitle}\n isWrongTitle={isWrongTitle}\n errorMessage={\n isWrongTitle\n ? t(\"Common:ContainsSpecCharacter\")\n : t(\"Common:RequiredField\")\n }\n onKeyUp={onKeyUp}\n isAutoFocussed\n dataTestId=\"create_edit_agent_input\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/SetRoomParams.js",
-      "line_number": 530,
+      "line_number": 539,
       "context": "onFocus={() => setForceHideRoomTypeDropdown(true)}\n onBlur={() => setForceHideRoomTypeDropdown(false)}\n errorMessage={\n isWrongTitle\n ? t(\"Common:ContainsSpecCharacter\")\n : t(\"Common:RequiredField\")\n }\n onKeyUp={onKeyUp}\n isAutoFocussed\n dataTestId=\"create_edit_room_input\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/PasswordEntryDialog/PasswordEntryDialog.component.tsx",
-      "line_number": 78,
+      "line_number": 87,
       "context": "const handleSubmit = async () => {\n if (!item.requestToken) return;\n \n if (password.trim().length === 0) {\n return setErrorMessage(t(\"Common:RequiredField\"));\n }\n \n setIsLoading(true);\n try {\n abortControllerRef.current?.abort();",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/sub-components/ExternalDbModal/ExternalDbField.utils.ts",
-      "line_number": 60,
+      "line_number": 69,
       "context": "export const getFieldValidationRules = (\n field: ConsumerProp,\n t: (key: string) => string,\n ) => {\n const rules: Record<string, unknown> = {\n required: isFieldRequired(field) ? t(\"Common:RequiredField\") : false,\n };\n \n return rules;\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/EmailInputForm.tsx",
-      "line_number": 84,
+      "line_number": 93,
       "context": "hasError={isEmailErrorShow ? !emailValid : undefined}\n errorMessage={\n emailErrorText\n // biome-ignore lint/plugin/no-dynamic-i18n-key: errorText is a runtime-provided key fragment composed with \"Common:\" prefix\n ? t(`Common:${emailErrorText}`)\n : t(\"Common:RequiredField\")\n }\n dataTestId=\"email_field_container\"\n >\n <EmailInput\n id=\"login\"",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/RegistrationForm.tsx",
-      "line_number": 179,
+      "line_number": 188,
       "context": "labelVisible={false}\n hasError={!fnameValid}\n errorMessage={\n errorText ||\n (fname.trim().length === 0\n ? t(\"Common:RequiredField\")\n : t(\"Common:IncorrectFirstName\"))\n }\n dataTestId=\"first_name_field_container\"\n >\n <TextInput",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/RegistrationForm.tsx",
-      "line_number": 179,
+      "line_number": 188,
       "context": "labelVisible={false}\n hasError={!fnameValid}\n errorMessage={\n errorText ||\n (fname.trim().length === 0\n ? t(\"Common:RequiredField\")\n : t(\"Common:IncorrectFirstName\"))\n }\n dataTestId=\"first_name_field_container\"\n >\n <TextInput",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/RegistrationForm.tsx",
-      "line_number": 179,
+      "line_number": 188,
       "context": "labelVisible={false}\n hasError={!fnameValid}\n errorMessage={\n errorText ||\n (fname.trim().length === 0\n ? t(\"Common:RequiredField\")\n : t(\"Common:IncorrectFirstName\"))\n }\n dataTestId=\"first_name_field_container\"\n >\n <TextInput",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/Activation/page.client.tsx",
-      "line_number": 202,
+      "line_number": 211,
       "context": "<FieldContainer\n className=\"form-field\"\n isVertical\n labelVisible={false}\n hasError={!nameValid}\n errorMessage={t(\"Common:RequiredField\")}\n dataTestId=\"name_field\"\n >\n <TextInput\n id=\"name\"\n name=\"name\"",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/Activation/page.client.tsx",
-      "line_number": 202,
+      "line_number": 211,
       "context": "<FieldContainer\n className=\"form-field\"\n isVertical\n labelVisible={false}\n hasError={!nameValid}\n errorMessage={t(\"Common:RequiredField\")}\n dataTestId=\"name_field\"\n >\n <TextInput\n id=\"name\"\n name=\"name\"",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/index.tsx",
-      "line_number": 571,
+      "line_number": 580,
       "context": "const onChangeLdapLoginCheckbox = () =>\n setIsLdapLoginChecked(!isLdapLoginChecked);\n \n const errorMessage = () => {\n if (!password.trim()) {\n return t(\"Common:RequiredField\");\n }\n if (emailFromInvitation) {\n return errorText || t(\"Common:RequiredField\");\n }\n };",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/index.tsx",
-      "line_number": 571,
+      "line_number": 580,
       "context": "const onChangeLdapLoginCheckbox = () =>\n setIsLdapLoginChecked(!isLdapLoginChecked);\n \n const errorMessage = () => {\n if (!password.trim()) {\n return t(\"Common:RequiredField\");\n }\n if (emailFromInvitation) {\n return errorText || t(\"Common:RequiredField\");\n }\n };",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/sub-components/EmailContainer.tsx",
-      "line_number": 141,
+      "line_number": 150,
       "context": "hasError={isEmailErrorShow}\n errorMessage={\n errorText\n // biome-ignore lint/plugin/no-dynamic-i18n-key: errorText is a runtime-provided key fragment composed with \"Common:\" prefix\n ? t(`Common:${errorText}`, errorText)\n : t(\"Common:RequiredField\")\n } // TODO: Add wrong login server error\n dataTestId=\"email_field\"\n >\n {isLdapLogin ? (\n <TextInput",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/sub-components/ForgotPasswordModalDialog.tsx",
-      "line_number": 218,
+      "line_number": 227,
       "context": "labelVisible={false}\n errorMessage={\n errorText\n // biome-ignore lint/plugin/no-dynamic-i18n-key: errorText is a runtime-provided key fragment composed with \"Common:\" prefix\n ? t(`Common:${errorText}`)\n : t(\"Common:RequiredField\")\n }\n dataTestId=\"email_input_field\"\n >\n <EmailInput\n hasError={isShowError ? emailError : undefined}",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/Register/sub-components/RegisterModalDialog.tsx",
-      "line_number": 116,
+      "line_number": 125,
       "context": "labelVisible={false}\n errorMessage={\n errorText\n // biome-ignore lint/plugin/no-dynamic-i18n-key: errorText is a runtime-provided key fragment composed with \"Common:\" prefix\n ? t(`Common:${errorText}`)\n : t(\"Common:RequiredField\")\n }\n dataTestId=\"register_email_field\"\n >\n <EmailInput\n hasError={isShowError ? emailErr : undefined}",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
-      "line_number": 322,
+      "line_number": 331,
       "context": "labelVisible\n isRequired\n labelText={t(\"Common:ConnectionUrl\")}\n isVertical\n hasError={!isUrlValid}\n errorMessage={t(\"Common:RequiredField\")}\n >\n <TextInput\n id=\"connection-url-input\"\n isAutoFocussed\n hasError={!isUrlValid}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
-      "line_number": 322,
+      "line_number": 331,
       "context": "labelVisible\n isRequired\n labelText={t(\"Common:ConnectionUrl\")}\n isVertical\n hasError={!isUrlValid}\n errorMessage={t(\"Common:RequiredField\")}\n >\n <TextInput\n id=\"connection-url-input\"\n isAutoFocussed\n hasError={!isUrlValid}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
-      "line_number": 322,
+      "line_number": 331,
       "context": "labelVisible\n isRequired\n labelText={t(\"Common:ConnectionUrl\")}\n isVertical\n hasError={!isUrlValid}\n errorMessage={t(\"Common:RequiredField\")}\n >\n <TextInput\n id=\"connection-url-input\"\n isAutoFocussed\n hasError={!isUrlValid}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
-      "line_number": 322,
+      "line_number": 331,
       "context": "labelVisible\n isRequired\n labelText={t(\"Common:ConnectionUrl\")}\n isVertical\n hasError={!isUrlValid}\n errorMessage={t(\"Common:RequiredField\")}\n >\n <TextInput\n id=\"connection-url-input\"\n isAutoFocussed\n hasError={!isUrlValid}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/PasswordAccessBlock.tsx",
-      "line_number": 96,
+      "line_number": 105,
       "context": "const onValidatePassword = (isValidate: boolean) => {\n setIsPasswordValid(isValidate);\n };\n \n const errorMessage = !passwordValue\n ? t(\"Common:RequiredField\")\n : t(\"Common:IncorrectPassword\");\n \n const hasError = isPasswordErrorShow && !isPasswordValid;\n \n const tooltipData = {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog.tsx",
-      "line_number": 271,
+      "line_number": 280,
       "context": "labelVisible={false}\n hasError={isShowError ? emailErr : undefined}\n errorMessage={\n emailErrorMessage\n ? t(`Common:${emailErrorMessage}`)\n : t(\"Common:RequiredField\")\n }\n dataTestId=\"recover_access_modal_email_container\"\n >\n <EmailInput\n scale",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog.tsx",
-      "line_number": 271,
+      "line_number": 280,
       "context": "labelVisible={false}\n hasError={isShowError ? emailErr : undefined}\n errorMessage={\n emailErrorMessage\n ? t(`Common:${emailErrorMessage}`)\n : t(\"Common:RequiredField\")\n }\n dataTestId=\"recover_access_modal_email_container\"\n >\n <EmailInput\n scale",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/PublicRoom/PublicRoomPasswordForm/index.tsx",
-      "line_number": 106,
+      "line_number": 113,
       "context": "};\n \n const onSubmitAction = async () => {\n if (!password.trim()) {\n setPasswordValid(false);\n setErrorMessage(t(\"Common:RequiredField\"));\n }\n \n if (!passwordValid || !password.trim()) {\n setIsLoading(false);\n return;",
       "module": "/packages/shared"
     }
@@ -305,7 +305,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

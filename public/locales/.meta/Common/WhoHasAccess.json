@@ -3,7 +3,7 @@
   "content": "Who has access",
   "content_en_sha1_hash": "b82540c6a77efe28089091e2a93027edf47bac9e",
   "created_at": "2025-08-26T11:15:03.431Z",
-  "updated_at": "2026-04-12T08:30:17.715Z",
+  "updated_at": "2026-05-15T14:00:06.937Z",
   "comment": {
     "text": "This is a section title in sharing dialogs, indicating the area where users can view or manage who has access to a shared item.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/hooks/useMembers.tsx",
-      "line_number": 287,
+      "line_number": 296,
       "context": ");\n \n const header = (\n <ShareHeader\n key=\"share-header-users\"\n title={t(\"Common:WhoHasAccess\")}\n options={options}\n isShareTitle\n />\n );",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/AccessSelectorBlock/AccessSelectorBlock.tsx",
-      "line_number": 47,
+      "line_number": 56,
       "context": "const { t } = useTranslation(\"Common\");\n \n return (\n <div className={styles.accessSelectorBlock}>\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"Common:WhoHasAccess\")}\n </Text>\n <ComboBox\n options={options}\n selectedOption={selectedOption}\n scaledOptions",
       "module": "/packages/shared"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

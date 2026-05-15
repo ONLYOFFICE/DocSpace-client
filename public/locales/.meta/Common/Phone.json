@@ -3,7 +3,7 @@
   "content": "Phone",
   "content_en_sha1_hash": "77064d5265236e0ac252f3fc4a5ba7b274b6a583",
   "created_at": "2025-05-19T21:30:47.371Z",
-  "updated_at": "2026-04-12T04:27:19.765Z",
+  "updated_at": "2026-05-15T14:00:06.856Z",
   "comment": {
     "text": "This is a label for an input field where users enter a phone number. It appears in various settings pages, including Single Sign-On field mapping, the \"About\" dialog, and company information settings.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/FieldMapping.js",
-      "line_number": 129,
+      "line_number": 138,
       "context": "value={title}\n hasError={titleHasError}\n />\n \n <SsoFormField\n labelText={t(\"Common:Phone\")}\n name=\"phone\"\n placeholder={SSO_PHONE}\n tabIndex={21}\n value={phone}\n hasError={phoneHasError}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/about-dialog/About.content.tsx",
-      "line_number": 231,
+      "line_number": 240,
       "context": "<div className={classNames(styles.row, \"row\")}>\n <Text\n className={classNames(styles.telTitle, \"tel-title\")}\n fontSize=\"13px\"\n >\n {t(\"Common:Phone\")}:{\" \"}\n </Text>\n <Text\n className={classNames(\n styles.telTitle,\n styles.selectEl,",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 240,
+      "line_number": 249,
       "context": "/>\n </FieldContainer>\n <FieldContainer\n id=\"fieldContainerPhone\"\n className=\"field-container-width\"\n labelText={t(\"Common:Phone\")}\n isVertical\n >\n <TextInput\n id=\"textInputContainerPhone\"\n testId=\"company_info_settings_phone_input\"",
       "module": "/packages/shared"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

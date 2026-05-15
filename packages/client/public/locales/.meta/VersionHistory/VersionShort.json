@@ -3,7 +3,7 @@
   "content": "Ver.",
   "content_en_sha1_hash": "ad13edd94b15126ad9e0d50572bd122fefa36cb1",
   "created_at": "2025-05-19T21:30:49.939Z",
-  "updated_at": "2026-04-11T21:27:42.223Z",
+  "updated_at": "2026-05-15T14:00:06.828Z",
   "comment": {
     "text": "This is a short label for \"Version\". It appears next to a version number in plugin information and in the version history.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/PluginSDK/index.js",
-      "line_number": 99,
+      "line_number": 108,
       "context": "alt=\"Plugin logo\"\n />\n <div className=\"plugin-info-container\">\n <Text>{p.name}</Text>\n <Text className=\"description\">\n {t(\"VersionHistory:VersionShort\")} {p.version}\n </Text>\n </div>\n </div>\n <Text className=\"description-text\" title={p.description}>\n {p.description}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/VersionHistory/Section/Body/VersionBadge/VersionBadge.js",
-      "line_number": 71,
+      "line_number": 80,
       "context": "isBold\n fontSize=\"12px\"\n >\n {isVersion ? (\n <>\n <span>{t(\"VersionShort\")}</span>\n <span>{versionGroup}</span>\n </>\n ) : null}\n </Text>\n </div>",
       "module": "/packages/client"
     }

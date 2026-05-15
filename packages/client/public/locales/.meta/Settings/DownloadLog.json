@@ -3,7 +3,7 @@
   "content": "Download log",
   "content_en_sha1_hash": "97b1248a2147299746e5cc6dae4da0ceebc6b304",
   "created_at": "2025-05-19T21:30:51.443Z",
-  "updated_at": "2026-04-11T21:24:15.339Z",
+  "updated_at": "2026-05-15T14:00:06.784Z",
   "comment": {
     "text": "Button label. Appears on a confirmation screen after a data import is complete, allowing the user to download a log file of the import process.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportCompleteStep.tsx",
-      "line_number": 180,
+      "line_number": 189,
       "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onFinishClick}\n onCancelClick={onDownloadLog}\n saveButtonLabel={t(\"Common:Finish\")}\n cancelButtonLabel={t(\"Settings:DownloadLog\")}\n displaySettings\n showReminder\n saveButtonDataTestId=\"finish_import_button\"\n cancelButtonDataTestId=\"download_log_button\"\n />",
       "module": "/packages/client"
     }

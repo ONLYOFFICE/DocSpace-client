@@ -3,7 +3,7 @@
   "content": "Owner",
   "content_en_sha1_hash": "89ff31225c5f042fff61e92ec8cf80e417a7140c",
   "created_at": "2025-05-19T21:30:47.205Z",
-  "updated_at": "2026-05-12T08:51:58.421Z",
+  "updated_at": "2026-05-15T14:00:06.643Z",
   "comment": {
     "text": "This is a label identifying the owner of a document or a portal. It appears as a short, standalone text.",
     "is_auto": true,
@@ -13,115 +13,115 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/components/tiles/template-tile/index.tsx",
-      "line_number": 73,
+      "line_number": 82,
       "context": "const bottomContent = (\n <div className={styles.wrapper}>\n <div className={styles.field}>\n <Text truncate fontSize=\"13px\" fontWeight={400} className={styles.text}>\n {t(\"Owner\")}\n </Text>\n {showStorageInfo ? (\n <Text\n truncate\n fontSize=\"13px\"",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 167,
+      "line_number": 176,
       "context": "<Avatar className=\"avatar\" role=\"owner\" source={avatar} size=\"big\" />\n <div className={styles.info}>\n <Text className={styles.displayName} title={displayName}>\n {displayName}\n </Text>\n <Text className={styles.status} title={t(\"Common:Owner\")}>\n {t(\"Common:Owner\")}\n </Text>\n </div>\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 167,
+      "line_number": 176,
       "context": "<Avatar className=\"avatar\" role=\"owner\" source={avatar} size=\"big\" />\n <div className={styles.info}>\n <Text className={styles.displayName} title={displayName}>\n {displayName}\n </Text>\n <Text className={styles.status} title={t(\"Common:Owner\")}>\n {t(\"Common:Owner\")}\n </Text>\n </div>\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
-      "line_number": 223,
+      "line_number": 232,
       "context": "getPropertyTitle = (propertyId: string) => {\n switch (propertyId) {\n case \"Owner\":\n case \"OwnedBy\":\n return this.t(\"Common:Owner\");\n case \"Location\":\n return this.t(\"Common:Location\");\n \n case \"Type\":\n return this.t(\"Common:Type\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
-      "line_number": 42,
+      "line_number": 51,
       "context": "getOptions = () => {\n return {\n portalAdmin: {\n key: \"owner\",\n label: this.t(\"Common:Owner\"),\n access: ShareAccessRights.FullAccess,\n type: \"admin\",\n },\n roomAdmin: {\n key: \"roomAdmin\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 752,
+      "line_number": 761,
       "context": "onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,\n },\n {\n key: \"Owner\",\n title: t(\"Common:Owner\"),\n enable: roomColumnOwnerIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Author,\n onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 752,
+      "line_number": 761,
       "context": "onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,\n },\n {\n key: \"Owner\",\n title: t(\"Common:Owner\"),\n enable: roomColumnOwnerIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Author,\n onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 752,
+      "line_number": 761,
       "context": "onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,\n },\n {\n key: \"Owner\",\n title: t(\"Common:Owner\"),\n enable: roomColumnOwnerIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Author,\n onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 653,
+      "line_number": 662,
       "context": "label,\n };\n \n if (roomsFilter.subjectFilter?.toString()) {\n if (roomsFilter.subjectFilter.toString() === FilterSubject.Owner) {\n subject.selectedLabel = `${t(\"Common:Owner\")}: ${label}`;\n }\n \n filterValues.push(subject);\n \n filterValues.push({",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 653,
+      "line_number": 662,
       "context": "label,\n };\n \n if (roomsFilter.subjectFilter?.toString()) {\n if (roomsFilter.subjectFilter.toString() === FilterSubject.Owner) {\n subject.selectedLabel = `${t(\"Common:Owner\")}: ${label}`;\n }\n \n filterValues.push(subject);\n \n filterValues.push({",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 653,
+      "line_number": 662,
       "context": "label,\n };\n \n if (roomsFilter.subjectFilter?.toString()) {\n if (roomsFilter.subjectFilter.toString() === FilterSubject.Owner) {\n subject.selectedLabel = `${t(\"Common:Owner\")}: ${label}`;\n }\n \n filterValues.push(subject);\n \n filterValues.push({",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 653,
+      "line_number": 662,
       "context": "label,\n };\n \n if (roomsFilter.subjectFilter?.toString()) {\n if (roomsFilter.subjectFilter.toString() === FilterSubject.Owner) {\n subject.selectedLabel = `${t(\"Common:Owner\")}: ${label}`;\n }\n \n filterValues.push(subject);\n \n filterValues.push({",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 653,
+      "line_number": 662,
       "context": "label,\n };\n \n if (roomsFilter.subjectFilter?.toString()) {\n if (roomsFilter.subjectFilter.toString() === FilterSubject.Owner) {\n subject.selectedLabel = `${t(\"Common:Owner\")}: ${label}`;\n }\n \n filterValues.push(subject);\n \n filterValues.push({",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 144,
+      "line_number": 153,
       "context": "},\n { value: \"custom\", label: t(\"SetItUp\"), dataTestId: \"custom_radio_button\" },\n ];\n \n const [columnsOptions, setColumnsOptions] = useState([\n { key: \"Owner\", label: t(\"Common:Owner\") },\n { key: \"Activity\", label: t(\"Files:LastActivity\") },\n ]);\n \n const [version, onSetVersion] = useState(sdkVersion[220]);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 554,
+      "line_number": 563,
       "context": "expected.push(member);\n } else if (isOwner && location.pathname.includes(\"rooms/personal\")) {\n if (owner.length === 0) {\n owner.push({\n id: \"owner\",\n displayName: t(\"Common:Owner\"),\n isTitle: true,\n } satisfies TTitleShare);\n }\n \n owner.push(member);",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 554,
+      "line_number": 563,
       "context": "expected.push(member);\n } else if (isOwner && location.pathname.includes(\"rooms/personal\")) {\n if (owner.length === 0) {\n owner.push({\n id: \"owner\",\n displayName: t(\"Common:Owner\"),\n isTitle: true,\n } satisfies TTitleShare);\n }\n \n owner.push(member);",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 346,
+      "line_number": 355,
       "context": "};\n \n export const getUserTypeTranslation = (type: EmployeeType, t: TTranslation) => {\n switch (type) {\n case EmployeeType.Owner:\n return t(\"Common:Owner\");\n case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: getBrandName(\"ProductName\"),\n });\n case EmployeeType.RoomAdmin:",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 346,
+      "line_number": 355,
       "context": "};\n \n export const getUserTypeTranslation = (type: EmployeeType, t: TTranslation) => {\n switch (type) {\n case EmployeeType.Owner:\n return t(\"Common:Owner\");\n case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: getBrandName(\"ProductName\"),\n });\n case EmployeeType.RoomAdmin:",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/room-members/getUserRoleOptions.ts",
-      "line_number": 33,
+      "line_number": 42,
       "context": "import { TTranslation } from \"../../types\";\n \n export const getUserRoleOptions = (t: TTranslation) => ({\n portalAdmin: {\n key: \"owner\",\n label: t(\"Common:Owner\"),\n access: ShareAccessRights.FullAccess,\n type: \"admin\",\n },\n roomAdmin: {\n key: \"roomAdmin\",",
       "module": "/packages/shared"
     }
@@ -257,7 +257,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

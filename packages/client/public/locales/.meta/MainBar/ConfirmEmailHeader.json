@@ -3,7 +3,7 @@
   "content": "Please activate your email ({{ email }}) to get access to the {{productName}} features.",
   "content_en_sha1_hash": "2460f1b5dab6b675bb302b34cc81639f46c34ae9",
   "created_at": "2025-05-19T21:30:54.106Z",
-  "updated_at": "2026-04-11T21:17:49.424Z",
+  "updated_at": "2026-05-15T14:00:06.615Z",
   "comment": {
     "text": "This is a message displayed in a snack bar or as a small text block, informing the user that they need to activate their email address ({{ email }}) to access full {{productName}} features.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/MainBar/ConfirmEmailBar.js",
-      "line_number": 46,
+      "line_number": 55,
       "context": "userEmail,\n }) => {\n return (\n tReady && (\n <SnackBar\n headerText={t(\"ConfirmEmailHeader\", {\n email: userEmail,\n productName: getBrandName(\"ProductName\"),\n })}\n text={\n <>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/delete-data/portalDeactivation.js",
-      "line_number": 100,
+      "line_number": 109,
       "context": "isDisabled={notActivatedEmail}\n testId=\"request_deactivate_portal_button\"\n />\n {notActivatedEmail && tReady ? (\n <Text fontSize=\"12px\" fontWeight=\"600\">\n {t(\"MainBar:ConfirmEmailHeader\", {\n email: owner.email,\n productName: getBrandName(\"ProductName\"),\n })}\n <Link\n className=\"request-again-link\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/delete-data/portalDeletion.js",
-      "line_number": 110,
+      "line_number": 119,
       "context": "isDisabled={notActivatedEmail}\n testId=\"delete_portal_button\"\n />\n {notActivatedEmail && tReady ? (\n <Text fontSize=\"12px\" fontWeight=\"600\">\n {t(\"MainBar:ConfirmEmailHeader\", {\n email: owner.email,\n productName: getBrandName(\"ProductName\"),\n })}\n <Link\n className=\"request-again-link\"",
       "module": "/packages/client"
     }

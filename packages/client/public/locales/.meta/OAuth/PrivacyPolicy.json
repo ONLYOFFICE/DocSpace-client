@@ -3,7 +3,7 @@
   "content": "Privacy policy",
   "content_en_sha1_hash": "7ceacdcaab4c898f58352ac7759cc808a85290da",
   "created_at": "2025-05-19T21:30:53.969Z",
-  "updated_at": "2026-04-11T21:18:38.301Z",
+  "updated_at": "2026-05-15T14:00:06.826Z",
   "comment": {
     "text": "This is a link label that directs users to the privacy policy of an OAuth client. It appears within an information dialog.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/InfoDialog.tsx",
-      "line_number": 312,
+      "line_number": 321,
       "context": "href={client?.policyUrl}\n type={LinkType.action}\n target={LinkTarget.blank}\n dataTestId=\"client_info_policy_link\"\n >\n {t(\"PrivacyPolicy\")}\n </Link>\n <span className=\"separator\" />\n \n <Link\n fontSize=\"13px\"",
       "module": "/packages/client"
     }

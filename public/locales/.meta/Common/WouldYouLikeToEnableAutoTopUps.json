@@ -3,7 +3,7 @@
   "content": "Would you like to enable automatic top-ups so your balance never runs out?",
   "content_en_sha1_hash": "4e8a95782e3c4f52d937db0d2d9ae74053cc4d62",
   "created_at": "2026-04-10T13:53:43.989Z",
-  "updated_at": "2026-04-12T08:23:43.470Z",
+  "updated_at": "2026-05-15T14:00:07.023Z",
   "comment": {
     "text": "This is a question displayed in a modal dialog, asking the user if they want to enable automatic top-ups for their balance.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/wallet/WalletRefilledModal.tsx",
-      "line_number": 117,
+      "line_number": 126,
       "context": "1: <span style={{ fontWeight: 600 }} />,\n }}\n />\n </Text>\n </div>\n <Text>{t(\"WouldYouLikeToEnableAutoTopUps\")}</Text>\n \n <AutomaticPaymentsBlock\n onAdditionalSave={onAdditionalSave}\n noMargin\n />",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

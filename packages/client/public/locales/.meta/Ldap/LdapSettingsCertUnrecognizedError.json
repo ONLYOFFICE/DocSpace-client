@@ -3,7 +3,7 @@
   "content": "Unrecognized Error",
   "content_en_sha1_hash": "cdf46b187ce1d45ffbf838adecf1a4aecd46b5da",
   "created_at": "2025-05-19T21:30:54.285Z",
-  "updated_at": "2026-04-11T21:16:44.466Z",
+  "updated_at": "2026-05-15T14:00:06.847Z",
   "comment": {
     "text": "This is an error message displayed when an unknown issue occurs during LDAP certificate validation.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/CertificateDialog.js",
-      "line_number": 80,
+      "line_number": 89,
       "context": "case LDAPCertificateProblem.CertUntrustedRoot:\n return t(\"LdapSettingsCertUntrustedRoot\");\n case LDAPCertificateProblem.CertMalformed:\n return t(\"LdapSettingsCertMalformed\");\n case LDAPCertificateProblem.CertUnrecognizedError:\n return t(\"LdapSettingsCertUnrecognizedError\");\n case LDAPCertificateProblem.CertValidityPeriodNesting:\n case LDAPCertificateProblem.CertRole:\n case LDAPCertificateProblem.CertPathLenConst:\n case LDAPCertificateProblem.CertCritical:\n case LDAPCertificateProblem.CertPurpose:",
       "module": "/packages/client"
     }

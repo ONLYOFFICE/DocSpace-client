@@ -3,7 +3,7 @@
   "content": "The files will be permanently removed from the {{trashSection}}.",
   "content_en_sha1_hash": "9754d3c7756464ae37faa758bbd7b093ec47ff89",
   "created_at": "2025-10-01T15:20:12.295Z",
-  "updated_at": "2026-04-11T21:05:24.945Z",
+  "updated_at": "2026-05-15T14:00:06.671Z",
   "comment": {
     "text": "This is a sentence fragment in a confirmation dialog. It informs the user that files will be permanently deleted from the trash. `{{trashSection}}` is a variable representing the name of the trash section (e.g., \"Trash\").",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 179,
+      "line_number": 188,
       "context": "<>\n <Trans t={t} i18nKey=\"DeleteFilesForever\" ns=\"DeleteDialog\">\n You are about to delete <strong>files ({{ filesCount }})</strong>.\n </Trans>{\" \"}\n {!isThirdParty\n ? t(\"FilesPermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"DeleteItemsSharedNote\")}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

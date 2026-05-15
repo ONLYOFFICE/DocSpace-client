@@ -3,7 +3,7 @@
   "content": "Enable this option if you want to add users from SSO service to your space automatically.",
   "content_en_sha1_hash": "53b0b644d322e1cc595b46ed2bd913242f06931c",
   "created_at": "2025-05-19T21:30:50.193Z",
-  "updated_at": "2026-04-11T21:26:13.617Z",
+  "updated_at": "2026-05-15T14:00:06.861Z",
   "comment": {
     "text": "This is a descriptive text displayed below a toggle switch. It explains that enabling the SSO option will automatically add users from the SSO service to the user's space.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/ToggleSSO.js",
-      "line_number": 119,
+      "line_number": 128,
       "context": "fontSize=\"12px\"\n fontWeight={400}\n lineHeight=\"16px\"\n className=\"settings_unavailable\"\n >\n {t(\"TurnOnSSOCaption\")}\n </Text>\n </div>\n </StyledWrapper>\n );\n };",
       "module": "/packages/client"
     }

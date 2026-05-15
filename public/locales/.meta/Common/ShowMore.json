@@ -3,7 +3,7 @@
   "content": "Show more",
   "content_en_sha1_hash": "25911d48e023cd10fc08d378641ee620f5e39d86",
   "created_at": "2025-05-19T21:30:48.725Z",
-  "updated_at": "2026-04-12T19:08:20.672Z",
+  "updated_at": "2026-05-15T14:00:06.873Z",
   "comment": {
     "text": "This is a button label. It appears when there are more than 5 items in a list (e.g., AI agents, rooms, or users) to reveal the remaining items.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/AIAgentList.js",
-      "line_number": 113,
+      "line_number": 122,
       "context": "{agentsList}\n \n {agentsListLength > 5 ? (\n <Button\n {...buttonProps}\n label={t(\"Common:ShowMore\")}\n onClick={onClickRooms}\n testId=\"show_more_rooms_button\"\n />\n ) : null}\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/RoomsList.js",
-      "line_number": 112,
+      "line_number": 121,
       "context": "{roomsList}\n \n {roomsListLength > 5 ? (\n <Button\n {...buttonProps}\n label={t(\"Common:ShowMore\")}\n onClick={onClickRooms}\n testId=\"show_more_rooms_button\"\n />\n ) : null}\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/UsersList.js",
-      "line_number": 106,
+      "line_number": 115,
       "context": "{usersList}\n \n {peopleListLength > 5 ? (\n <Button\n {...buttonProps}\n label={t(\"Common:ShowMore\")}\n onClick={onClickUsers}\n testId=\"show_more_users_button\"\n />\n ) : null}\n </div>",
       "module": "/packages/client"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

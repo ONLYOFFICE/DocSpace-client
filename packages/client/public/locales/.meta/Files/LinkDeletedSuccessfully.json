@@ -3,7 +3,7 @@
   "content": "Link deleted successfully",
   "content_en_sha1_hash": "1d0682ce997a2ffc32592cbebffe9839b47dab71",
   "created_at": "2025-05-19T21:30:55.776Z",
-  "updated_at": "2026-04-11T21:09:13.241Z",
+  "updated_at": "2026-05-15T14:00:06.674Z",
   "comment": {
     "text": "This is a toast message confirming that a shared link has been successfully removed. It appears after a user deletes a link to a file or folder.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteLinkDialog/index.js",
-      "line_number": 74,
+      "line_number": 83,
       "context": ".then((res) => {\n deleteExternalLink(res, newLink.sharedTo.id);\n \n if (link.sharedTo.primary && (isPublicRoomType || isFormRoom)) {\n toastr.success(t(\"Common:GeneralLinkRevokedAndCreatedSuccessfully\"));\n } else toastr.success(t(\"Files:LinkDeletedSuccessfully\"));\n })\n .catch((err) => {\n console.log(err);\n toastr.error(err.response?.data?.error.message);\n })",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/sub-components/LinkRow.tsx",
-      "line_number": 226,
+      "line_number": 235,
       "context": "},\n });\n \n if (!isReactivate) {\n deleteExternalLink!(null, link.sharedTo.id);\n toastr.success(t(\"Files:LinkDeletedSuccessfully\"));\n }\n } catch (err: unknown) {\n console.log(err);\n toastr.error((err as Error)?.message);\n } finally {",
       "module": "/packages/client"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

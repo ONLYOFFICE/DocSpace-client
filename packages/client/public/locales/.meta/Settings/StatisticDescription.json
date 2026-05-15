@@ -3,7 +3,7 @@
   "content": "Here, you can view the detailed storage usage data in this {{productName}}.",
   "content_en_sha1_hash": "c25e93f04d549177e51dc81450d226b9b0dfe235",
   "created_at": "2025-05-19T21:30:52.761Z",
-  "updated_at": "2026-04-11T21:22:02.394Z",
+  "updated_at": "2026-05-15T14:00:06.872Z",
   "comment": {
     "text": "This is a descriptive text that appears below the storage usage statistics, explaining that the user can view detailed storage data for the product. `{{productName}}` will be replaced with the brand name of the product (e.g., ONLYOFFICE DocSpace).",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/Statistics.js",
-      "line_number": 110,
+      "line_number": 119,
       "context": "isPaidBadge\n />\n ) : null}\n </div>\n <Text className=\"statistics-description\">\n {t(\"StatisticDescription\", { productName: getBrandName(\"ProductName\") })}\n </Text>\n {isStatisticsAvailable ? (\n <>\n <RoomsList\n buttonProps={buttonProps}",
       "module": "/packages/client"
     }

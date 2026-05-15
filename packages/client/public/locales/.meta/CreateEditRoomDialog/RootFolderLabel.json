@@ -3,7 +3,7 @@
   "content": "Root folder",
   "content_en_sha1_hash": "aa608b6955d74fbf2015416119d097d0da2bf762",
   "created_at": "2025-05-19T21:30:56.834Z",
-  "updated_at": "2026-04-11T21:04:31.748Z",
+  "updated_at": "2026-05-15T14:00:06.662Z",
   "comment": {
     "text": "This is a label for a folder selection input field. It appears when no specific folder path is selected, indicating the top-level directory.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/FolderInput.tsx",
-      "line_number": 184,
+      "line_number": 193,
       "context": "getPathValue();\n }, [treeNode]);\n \n if (!thirdpartyAccount.id) return null;\n \n let title = createNewFolderIsChecked || path ? \"/\" : t(\"RootFolderLabel\");\n title += path;\n if (createNewFolderIsChecked) {\n title += path ? \"/\" : \"\";\n title += roomTitle || t(\"Common:NewRoom\");\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/FolderInput.tsx",
-      "line_number": 184,
+      "line_number": 193,
       "context": "getPathValue();\n }, [treeNode]);\n \n if (!thirdpartyAccount.id) return null;\n \n let title = createNewFolderIsChecked || path ? \"/\" : t(\"RootFolderLabel\");\n title += path;\n if (createNewFolderIsChecked) {\n title += path ? \"/\" : \"\";\n title += roomTitle || t(\"Common:NewRoom\");\n }",
       "module": "/packages/client"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "Default Sign Verifying Algorithm",
   "content_en_sha1_hash": "4efdddea5f21717488ef95e4e69bbf2ef43a5df9",
   "created_at": "2025-05-19T21:30:50.101Z",
-  "updated_at": "2026-04-11T21:26:45.834Z",
+  "updated_at": "2026-05-15T14:00:06.856Z",
   "comment": {
     "text": "This is a combo box label in the Single Sign-On settings, prompting the user to select the algorithm used to verify signatures from the Identity Provider.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/Certificates.js",
-      "line_number": 194,
+      "line_number": 203,
       "context": "<CheckboxSet prefix={prefix} />\n \n {provider === \"IdentityProvider\" ? (\n <SsoComboBox\n isDisabled={isDisabledIdpSigning}\n labelText={t(\"idpSigningAlgorithm\")}\n name=\"idpVerifyAlgorithm\"\n options={verifyAlgorithmsOptions}\n tabIndex={14}\n value={idpVerifyAlgorithm}\n dataTestId=\"idp_signing_combobox\"",
       "module": "/packages/client"
     }

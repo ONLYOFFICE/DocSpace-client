@@ -3,7 +3,7 @@
   "content": "Reset",
   "content_en_sha1_hash": "44c57abd888a66b36d4b7c902134063e4a097223",
   "created_at": "2025-05-19T21:30:53.995Z",
-  "updated_at": "2026-04-13T14:59:05.775Z",
+  "updated_at": "2026-05-15T14:00:06.694Z",
   "comment": {
     "text": "This is a button label that resets settings or a template to their default values.",
     "is_auto": true,
@@ -13,25 +13,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ResetTemplateDialog/index.tsx",
-      "line_number": 63,
+      "line_number": 72,
       "context": "<ModalDialog.Footer>\n <Button\n testId=\"reset-button\"\n id=\"reset-button\"\n label={t(\"OAuth:Reset\")}\n onClick={onReset}\n primary\n scale\n size={ButtonSize.normal}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/dialogs/reset/index.tsx",
-      "line_number": 86,
+      "line_number": 95,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n size={ButtonSize.normal}\n label={t(\"OAuth:Reset\")}\n scale\n onClick={onSubmitAction}\n isLoading={loading}\n testId=\"reset-button\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/dialogs/reset/index.tsx",
-      "line_number": 93,
+      "line_number": 102,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n size={ButtonSize.normal}\n label={t(\"OAuth:Reset\")}\n scale\n onClick={onSubmitAction}\n isLoading={loading}\n testId=\"reset-button\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/ClientBlock.tsx",
-      "line_number": 102,
+      "line_number": 111,
       "context": "value={value.secret}\n error=\"\"\n onChange={onChange}\n withCopy\n isPassword\n buttonLabel={t(\"Reset\")}\n onButtonClick={onResetClick}\n onCopyClick={() => onCopyClick(\"secret\")}\n dataTestId=\"secret_input_group\"\n />\n </StyledInputBlock>",
       "module": "/packages/client"
     }

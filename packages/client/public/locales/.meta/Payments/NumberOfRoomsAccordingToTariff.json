@@ -3,7 +3,7 @@
   "content": "Number of rooms according to your tariff plan: {{currentValue}}/{{maxValue}}",
   "content_en_sha1_hash": "50c21689104208a689abc871f03f39356411633c",
   "created_at": "2025-05-19T21:30:53.710Z",
-  "updated_at": "2026-04-11T21:19:37.964Z",
+  "updated_at": "2026-05-15T14:00:06.687Z",
   "comment": {
     "text": "This is a line of text within a dialog warning the user about their room quota. It displays the current number of rooms used (`{{currentValue}}`) out of the maximum allowed (`{{maxValue}}`) by their tariff plan.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/sub-components/RoomsContent.tsx",
-      "line_number": 84,
+      "line_number": 93,
       "context": "return (\n <>\n <Text fontWeight={600}>{t(\"RoomsQuotaAlmostExhausted\")}</Text>\n <br />\n <Text>\n {t(\"NumberOfRoomsAccordingToTariff\", {\n currentValue: usedRoomsCount,\n maxValue: maxCountRoomsByQuota,\n })}\n </Text>\n <br />",
       "module": "/packages/client"
     }

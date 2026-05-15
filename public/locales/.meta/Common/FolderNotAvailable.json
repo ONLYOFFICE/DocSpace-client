@@ -3,7 +3,7 @@
   "content": "Folder not available",
   "content_en_sha1_hash": "e2620e8a4f8771e2e1c12697fa8bb94fd77939c9",
   "created_at": "2025-10-13T13:22:03.877Z",
-  "updated_at": "2026-05-08T13:10:45.592Z",
+  "updated_at": "2026-05-15T14:00:06.722Z",
   "comment": {
     "text": "This is a toast message title or a title within an info panel, indicating that a folder cannot be accessed, often because its link has expired or it's otherwise unavailable.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/NoItem/ExpiredItem.tsx",
-      "line_number": 88,
+      "line_number": 106,
       "context": "description: t(\"Common:FileLinkExpired\"),\n };\n \n if (isFolder(infoPanelSelection))\n return {\n title: t(\"Common:FolderNotAvailable\"),\n description: t(\"Common:FolderLinkExpired\"),\n };\n \n return {\n title: t(\"Common:RoomNotAvailable\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 287,
+      "line_number": 296,
       "context": "? t(\"Common:RoomLinkExpired\")\n : t(\"Common:FolderLinkExpired\");\n \n const title = isRoom\n ? t(\"Common:RoomNotAvailable\")\n : t(\"Common:FolderNotAvailable\");\n \n return toastr.error(description, title);\n }\n \n if (isLockedSharedRoom(item))",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2699,
+      "line_number": 2708,
       "context": ": t(\"Common:RoomLinkExpired\");\n \n const title = isFile\n ? t(\"Common:FileNotAvailable\")\n : isFolder\n ? t(\"Common:FolderNotAvailable\")\n : t(\"Common:RoomNotAvailable\");\n \n return toastr.error(description, title);\n }",
       "module": "/packages/client"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

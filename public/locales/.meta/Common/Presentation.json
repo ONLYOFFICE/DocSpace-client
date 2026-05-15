@@ -3,7 +3,7 @@
   "content": "Presentation",
   "content_en_sha1_hash": "6e875951a6f9aa1374d93572de657c12ded57355",
   "created_at": "2025-05-19T21:30:47.449Z",
-  "updated_at": "2026-04-23T17:24:01.625Z",
+  "updated_at": "2026-05-15T14:00:06.587Z",
   "comment": {
     "text": "This is a label for a presentation file type or a button to create a new presentation. It appears in menus and file listings.",
     "is_auto": true,
@@ -13,43 +13,43 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 491,
+      "line_number": 500,
       "context": "const createNewPresentationPptx = {\n id: \"actions_new-presentation\",\n className: \"main-button_drop-down\",\n icon: ActionsPresentationReactSvgUrl,\n label: t(\"Common:Presentation\"),\n onClick: onCreate,\n action: \"pptx\",\n key: \"pptx\",\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 479,
+      "line_number": 488,
       "context": "icon: SpreadsheetReactSvgUrl,\n onClick: () => actions.onCreate(\"xlsx\"),\n },\n {\n key: \"create-presentation\",\n label: t(\"Common:Presentation\"),\n icon: PresentationReactSvgUrl,\n onClick: () => actions.onCreate(\"pptx\"),\n },\n {\n key: \"create-pdf-form\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/sub-components/TypeCell.js",
-      "line_number": 51,
+      "line_number": 60,
       "context": "case FileType.Image:\n return t(\"Common:Image\");\n case FileType.Spreadsheet:\n return t(\"Common:Spreadsheet\");\n case FileType.Presentation:\n return t(\"Common:Presentation\");\n case FileType.Document:\n return t(\"Common:Document\");\n case FileType.Diagram:\n return t(\"Common:Diagram\");\n case FileType.OForm:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/create-file-dialog/index.tsx",
-      "line_number": 60,
+      "line_number": 69,
       "context": "case \"docx\":\n return t(\"Common:Document\");\n case \"xlsx\":\n return t(\"Common:Spreadsheet\");\n case \"pptx\":\n return t(\"Common:Presentation\");\n case \"pdf\":\n return t(\"Common:NewPDFForm\");\n case \"folder\":\n return t(\"Common:Folder\");\n }",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/main-button/index.tsx",
-      "line_number": 101,
+      "line_number": 110,
       "context": "onClick: () => openCreateDialog(\"xlsx\"),\n },\n {\n id: \"actions_new-presentation\",\n key: \"pptx\",\n label: t(\"Common:Presentation\"),\n icon: ActionsPresentationReactSvgUrl,\n onClick: () => openCreateDialog(\"pptx\"),\n },\n {\n id: \"actions_new-form\",",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/main-button/index.tsx",
-      "line_number": 101,
+      "line_number": 110,
       "context": "onClick: () => openCreateDialog(\"xlsx\"),\n },\n {\n id: \"actions_new-presentation\",\n key: \"pptx\",\n label: t(\"Common:Presentation\"),\n icon: ActionsPresentationReactSvgUrl,\n onClick: () => openCreateDialog(\"pptx\"),\n },\n {\n id: \"actions_new-form\",",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 483,
+      "line_number": 492,
       "context": "<Text\n fontSize=\"15px\"\n fontWeight=\"600\"\n className=\"settings_unavailable\"\n >\n {t(\"LogoForEditors\", { editorName: t(\"Common:Presentation\") })} (\n {logoUrls[10].size.width}x{logoUrls[10].size.height})\n </Text>\n <div className={styles.logosWrapper}>\n <Logo\n name={logoUrls[10].name}",
       "module": "/packages/shared"
     },
@@ -191,7 +191,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

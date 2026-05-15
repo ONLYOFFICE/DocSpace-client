@@ -3,7 +3,7 @@
   "content": "Done",
   "content_en_sha1_hash": "e9b450d14bc2363d292c84f17cfad5cfbd58a458",
   "created_at": "2025-05-19T21:30:44.608Z",
-  "updated_at": "2026-04-23T17:24:01.863Z",
+  "updated_at": "2026-05-15T14:00:06.698Z",
   "comment": {
     "text": "Button label or toast message indicating the completion of an action.",
     "is_auto": true,
@@ -13,49 +13,49 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/uploader/index.tsx",
-      "line_number": 333,
+      "line_number": 342,
       "context": "{getCommonTranslation(\"Open\")}\n </a>\n </>\n )}\n </>,\n getCommonTranslation(\"Done\"),\n );\n \n onUploadSuccess?.(uploadedFiles);\n } catch (err) {\n const message =",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/SubmitToFormGallery/index.js",
-      "line_number": 118,
+      "line_number": 127,
       "context": "\"en\",\n abortControllerRef.current?.signal,\n )\n .then((res) => {\n if (!res.data) throw new Error(res.statusText);\n toastr.success(t(\"Common:Done\"));\n window.location.replace(res.data);\n })\n .catch(() => {\n toastr.error(t(\"Common:SomethingWentWrong\"));\n onClose();",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
-      "line_number": 535,
+      "line_number": 544,
       "context": ");\n \n const keyFooter = (\n <Button\n key=\"OKButton\"\n label={t(\"Common:Done\")}\n size={ButtonSize.normal}\n primary\n onClick={onClose}\n scale\n testId=\"secret_key_done_button\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/DetailsNavigationHeader.js",
-      "line_number": 114,
+      "line_number": 123,
       "context": "navigate(`/developer-tools/webhooks/${id}`);\n };\n \n const handleRetryEvent = async () => {\n await retryWebhook(eventId);\n toastr.success(t(\"WebhookRedilivered\"), <b>{t(\"Common:Done\")}</b>);\n };\n \n return (\n <HeaderContainer>\n <div className=\"headerNavigation\">",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/HistoryHeader.js",
-      "line_number": 225,
+      "line_number": 234,
       "context": "...(historyFilters ? formatFilters(historyFilters) : {}),\n configId: id,\n });\n toastr.success(\n `${t(\"WebhookRedilivered\")}: ${checkedEventIds.length}`,\n <b>{t(\"Common:Done\")}</b>,\n );\n } catch (error) {\n console.error(error);\n toastr.error(error);\n } finally {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/WebhookHistoryTable/HistoryRowView/HistoryRow.js",
-      "line_number": 66,
+      "line_number": 75,
       "context": "await retryWebhook(historyItem.id);\n await fetchHistoryItems({\n ...(historyFilters ? formatFilters(historyFilters) : {}),\n configId: id,\n });\n toastr.success(t(\"WebhookRedilivered\"), <b>{t(\"Common:Done\")}</b>);\n };\n const handleOnSelect = () => toggleEventId(historyItem.id);\n const handleRowClick = (e) => {\n if (\n e.target.closest(\".checkbox\") ||",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/WebhookHistoryTable/HistoryTableView/HistoryTableRow.js",
-      "line_number": 107,
+      "line_number": 116,
       "context": "await retryWebhook(item.id);\n await fetchHistoryItems({\n ...(historyFilters ? formatFilters(historyFilters) : {}),\n configId: id,\n });\n toastr.success(t(\"WebhookRedilivered\"), <b>{t(\"Common:Done\")}</b>);\n };\n \n const contextOptions = [\n {\n id: \"webhook-details\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsTour.ts",
-      "line_number": 138,
+      "line_number": 147,
       "context": "targetWaitTimeout: 15000,\n },\n locale: {\n back: t(\"Common:Back\"),\n close: t(\"Common:CloseButton\"),\n last: t(\"Common:Done\"),\n next: t(\"Common:Next\"),\n skip: t(\"Common:Skip\"),\n },\n });",
       "module": "/packages/sdk"
     }
@@ -191,7 +191,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

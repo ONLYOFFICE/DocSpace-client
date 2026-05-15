@@ -3,7 +3,7 @@
   "content": "If you have {{OnlyofficeDesktopEditors}} installed but can't open it from this page, your browser might be blocking it.",
   "content_en_sha1_hash": "6584633736a73c5fdfee6f60b4fb3ee9a2e67b10",
   "created_at": "2026-04-11T18:34:17.086Z",
-  "updated_at": "2026-04-11T21:20:27.295Z",
+  "updated_at": "2026-05-15T14:00:06.876Z",
   "comment": {
     "text": "This is a paragraph of text displayed on the Private Rooms page. It informs the user that their browser might be blocking the ONLYOFFICE Desktop Editors if it's installed but not opening. The `{{OnlyofficeDesktopEditors}}` variable will be replaced with the brand name \"ONLYOFFICE Desktop Editors\".",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PrivateRoomsPage/index.js",
-      "line_number": 230,
+      "line_number": 239,
       "context": "fontSize=\"12px\"\n textAlign=\"center\"\n className=\"privacy-rooms-text-description\"\n >\n <p>\n {t(\"PrivacyDescriptionEditors\", {\n OnlyofficeDesktopEditors: getBrandName(\"OnlyofficeDesktopEditors\"),\n })}\n .\n </p>\n <p>{t(\"PrivacyDescriptionConnect\")}.</p>",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Drop PDF forms here or upload from {{productName}} or device.",
   "content_en_sha1_hash": "97750a613b8c03b3f21e2f52d0fddbd5e0284429",
   "created_at": "2025-05-19T21:30:56.506Z",
-  "updated_at": "2026-04-11T21:06:54.097Z",
+  "updated_at": "2026-05-15T14:00:06.602Z",
   "comment": {
     "text": "This is a placeholder text displayed in an empty folder designated for PDF forms. It instructs users on how to add forms, either by dragging and dropping, or by uploading from the application (`{{productName}}`) or their device.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 159,
+      "line_number": 168,
       "context": "P.when(() => isNotAdmin || isArchiveFolderRoot),\n ],\n () => t(\"EmptyView:FormFolderDefaultUserDescription\"),\n )\n .with([FolderType.FormRoom, DefaultFolderType, P._], () =>\n t(\"EmptyView:FormFolderDefaultDescription\", {\n productName: getBrandName(\"ProductName\"),\n }),\n )\n .with([P._, DefaultFolderType, P.when(isAdmin)], () =>\n t(\"EmptyView:DefaultFolderDescription\"),",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

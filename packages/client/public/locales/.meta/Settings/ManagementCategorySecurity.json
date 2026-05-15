@@ -3,7 +3,7 @@
   "content": "Security",
   "content_en_sha1_hash": "f25ce1b8a399bd8621a57427a20039b4b13935db",
   "created_at": "2025-05-19T21:30:51.918Z",
-  "updated_at": "2026-04-11T21:23:21.042Z",
+  "updated_at": "2026-05-15T14:00:06.756Z",
   "comment": {
     "text": "This is a category title in the portal settings, labeling the section related to security configurations.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/index.js",
-      "line_number": 86,
+      "line_number": 95,
       "context": "}, [isLdapAvailable, load, t, ready]);\n \n if ((showPortalSettingsLoader && isLdapAvailable) || !ready)\n return <LdapLoader />;\n \n const link = `${`${t(\"Settings:ManagementCategorySecurity\")} > ${t(\"Settings:InvitationSettings\")}.`}`;\n \n return (\n <StyledLdapPage isSmallWindow={isSmallWindow}>\n <Text className=\"intro-text settings_unavailable\">\n <Trans",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 201,
+      "line_number": 210,
       "context": "return t(\"SettingsGeneral\");\n case \"StudioTimeLanguageSettings\":\n return t(\"StudioTimeLanguageSettings\");\n case \"CustomTitlesWelcome\":\n return t(\"CustomTitlesWelcome\");\n case \"ManagementCategorySecurity\":\n return t(\"ManagementCategorySecurity\");\n case \"PortalAccess\":\n return t(\"PortalAccess\", { productName: getBrandName(\"ProductName\") });\n case \"TwoFactorAuth\":\n return t(\"TwoFactorAuth\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 183,
+      "line_number": 192,
       "context": "{\n id: \"portal-settings_catalog-security\",\n key: \"1\",\n type: PageType.security,\n link: \"security\",\n tKey: \"ManagementCategorySecurity\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-access-portal\",\n key: \"1-0\",",
       "module": "/packages/client"
     }

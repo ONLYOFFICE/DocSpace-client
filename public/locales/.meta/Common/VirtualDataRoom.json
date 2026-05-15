@@ -3,7 +3,7 @@
   "content": "Virtual Data Room",
   "content_en_sha1_hash": "29f2e3affa77388673134388754b5295d908047b",
   "created_at": "2025-05-19T21:30:49.548Z",
-  "updated_at": "2026-04-12T12:17:13.504Z",
+  "updated_at": "2026-05-15T14:00:06.717Z",
   "comment": {
     "text": "This is a label for a type of room. It appears in various places, such as when displaying room types or filtering rooms.",
     "is_auto": true,
@@ -19,25 +19,25 @@
     },
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 67,
+      "line_number": 76,
       "context": "case RoomsType.PublicRoom:\n return t(\"Common:PublicRoom\");\n \n case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoom\");\n \n case RoomsType.FormRoom:\n return t(\"Common:FormRoom\");\n default:\n break;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1156,
+      "line_number": 1165,
       "context": "case RoomsType.VirtualDataRoom:\n return {\n id: \"filter_type-virtual-data\",\n key: RoomsType.VirtualDataRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:VirtualDataRoom\"),\n };\n case RoomsType.AIRoom:\n return {\n id: \"filter_type-ai\",\n key: RoomsType.AIRoom,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
-      "line_number": 116,
+      "line_number": 125,
       "context": "roomType: RoomsType.EditingRoom,\n // dataTestId: \"room_type_editing_option\",\n },\n {\n key: \"room-type-vdr\",\n label: t(\"Common:VirtualDataRoom\"),\n roomType: RoomsType.VirtualDataRoom,\n },\n {\n key: \"room-type-custom\",\n label: t(\"Common:CustomRoomTitle\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
-      "line_number": 130,
+      "line_number": 139,
       "context": "label: t(\"Common:CollaborationRoomTitle\"),\n roomType: RoomsType.EditingRoom,\n },\n {\n key: \"room-type-vdr\",\n label: t(\"Common:VirtualDataRoom\"),\n roomType: RoomsType.VirtualDataRoom,\n },\n {\n key: \"room-type-custom\",\n label: t(\"Common:CustomRoomTitle\"),",
       "module": "/packages/client"
     },
@@ -49,7 +49,7 @@
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 346,
+      "line_number": 355,
       "context": "return \"AI Room\";\n \n case `room-${RoomsType.PublicRoom}`:\n return t(\"Common:PublicRoomLabel\");\n case `room-${RoomsType.VirtualDataRoom}`:\n return t(\"Common:VirtualDataRoom\");\n \n default:\n return \"\";\n }\n };",
       "module": "/packages/shared"
     }
@@ -193,7 +193,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

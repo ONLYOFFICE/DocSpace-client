@@ -3,7 +3,7 @@
   "content": "The title can't contain any of the following characters: *+:\"<>?|/",
   "content_en_sha1_hash": "2988d94a573dbf375e5668150d952ca1022bdb80",
   "created_at": "2025-05-26T07:15:41.554Z",
-  "updated_at": "2026-05-08T13:10:45.509Z",
+  "updated_at": "2026-05-15T14:00:06.614Z",
   "comment": {
     "text": "This is an error message that appears when a user enters an invalid character in a title field, such as for a room or an agent.",
     "is_auto": true,
@@ -13,31 +13,31 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/components/selector/sub-components/Footer.tsx",
-      "line_number": 126,
+      "line_number": 135,
       "context": "<Text\n className={styles.errorText}\n fontSize=\"12px\"\n lineHeight=\"16px\"\n >\n {t(\"ContainsSpecCharacter\") || \"\"}\n </Text>\n ) : null}\n </div>\n \n {withFooterCheckbox ? (",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/SetAgentParams.tsx",
-      "line_number": 501,
+      "line_number": 510,
       "context": "isDisabled={isDisabled}\n isValidTitle={isValidTitle}\n isWrongTitle={isWrongTitle}\n errorMessage={\n isWrongTitle\n ? t(\"Common:ContainsSpecCharacter\")\n : t(\"Common:RequiredField\")\n }\n onKeyUp={onKeyUp}\n isAutoFocussed\n dataTestId=\"create_edit_agent_input\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/SetRoomParams.js",
-      "line_number": 529,
+      "line_number": 538,
       "context": "isWrongTitle={isWrongTitle}\n onFocus={() => setForceHideRoomTypeDropdown(true)}\n onBlur={() => setForceHideRoomTypeDropdown(false)}\n errorMessage={\n isWrongTitle\n ? t(\"Common:ContainsSpecCharacter\")\n : t(\"Common:RequiredField\")\n }\n onKeyUp={onKeyUp}\n isAutoFocussed\n dataTestId=\"create_edit_room_input\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/GlobalEvents/sub-components/Dialog.js",
-      "line_number": 190,
+      "line_number": 199,
       "context": "<ModalDialog.Body>\n <FieldContainer\n hasError={hasError}\n labelVisible={false}\n errorMessageWidth=\"100%\"\n errorMessage={errorText || t(\"Common:ContainsSpecCharacter\")}\n removeMargin\n >\n <TextInput\n id=\"create-text-input\"\n name=\"create\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
-      "line_number": 127,
+      "line_number": 136,
       "context": "setIsTitleValid(true);\n let newTitle = e.target.value;\n // const chars = '*+:\"<>?|/'; TODO: think how to solve problem with interpolation escape values in i18n translate\n \n if (newTitle.match(folderFormValidation)) {\n toastr.warning(t(\"Common:ContainsSpecCharacter\"));\n }\n newTitle = newTitle.replace(folderFormValidation, \"_\");\n \n setCustomerTitleValue(newTitle);\n };",
       "module": "/packages/shared"
     }
@@ -173,7 +173,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

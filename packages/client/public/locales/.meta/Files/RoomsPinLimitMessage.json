@@ -3,7 +3,7 @@
   "content": "You can't pin more than 10 rooms to the top. Unpin some that are currently pinned.",
   "content_en_sha1_hash": "f7482a38a156fedb2aa60db7554e918934affe1d",
   "created_at": "2025-05-19T21:30:56.124Z",
-  "updated_at": "2026-05-08T13:10:45.676Z",
+  "updated_at": "2026-05-15T14:00:06.893Z",
   "comment": {
     "text": "This is an error toast message. It appears when a user tries to pin more than 10 rooms to the top of their list, informing them of the limit and suggesting they unpin existing rooms.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1392,
+      "line_number": 1401,
       "context": "if (isError) {\n isAIAgent\n ? toastr.error(\n t(\"AIAgentPinLimitMessage\", { aiAgents: t(\"Common:AIAgents\") }),\n )\n : toastr.error(t(\"RoomsPinLimitMessage\"));\n }\n \n return;\n }",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

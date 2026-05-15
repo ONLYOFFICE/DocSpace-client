@@ -3,7 +3,7 @@
   "content": "POST response header",
   "content_en_sha1_hash": "7f2adfe37c167c810ce7ffd4e55249c87d28d23e",
   "created_at": "2025-05-19T21:30:49.812Z",
-  "updated_at": "2026-04-11T21:28:31.822Z",
+  "updated_at": "2026-05-15T14:00:06.830Z",
   "comment": {
     "text": "This is a heading for a section displaying the HTTP response headers received after a webhook event.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/ResponseDetails.js",
-      "line_number": 114,
+      "line_number": 123,
       "context": "};\n \n return (\n <DetailsWrapper>\n <Text as=\"h3\" fontWeight={600} className=\"mb-4 mt-7\">\n {t(\"ResponsePostHeader\")}\n </Text>\n {isJSON(eventDetails.responseHeaders) ? (\n <Textarea\n classNameCopyIcon=\"response-header-copy\"\n value={eventDetails.responseHeaders}",
       "module": "/packages/client"
     }

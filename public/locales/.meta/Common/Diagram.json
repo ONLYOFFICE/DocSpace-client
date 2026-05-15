@@ -3,7 +3,7 @@
   "content": "Diagram",
   "content_en_sha1_hash": "df5415960cfe95d2038cf9f52aaf8f174457596d",
   "created_at": "2025-07-01T15:57:10.981Z",
-  "updated_at": "2026-04-11T20:55:10.150Z",
+  "updated_at": "2026-05-15T14:00:06.748Z",
   "comment": {
     "text": "This is a noun, used as a file type label. It identifies a diagram file in lists or displays.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/sub-components/TypeCell.js",
-      "line_number": 55,
+      "line_number": 64,
       "context": "case FileType.Presentation:\n return t(\"Common:Presentation\");\n case FileType.Document:\n return t(\"Common:Document\");\n case FileType.Diagram:\n return t(\"Common:Diagram\");\n case FileType.OForm:\n case FileType.OFormTemplate:\n case FileType.PDF: {\n return getSinglePDFTitle(t, isPDFForm);\n }",
       "module": "/packages/client"
     },
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

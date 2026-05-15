@@ -1,0 +1,29 @@
+{
+  "key_path": "AIPaywallHeroTitleCompleted",
+  "content": "Adding AI to your workspace — almost ready...",
+  "content_en_sha1_hash": "9afd2fe86a56208009b9d808717be6fe60429579",
+  "created_at": "2026-05-15T13:59:46.080Z",
+  "updated_at": "2026-05-15T14:03:49.322Z",
+  "comment": {
+    "text": "Hero title on the AI paywall page shown when the AI activation process is in its final stage.",
+    "is_auto": true,
+    "updated_at": "2026-05-15T14:03:49.322Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallPage.tsx",
+      "line_number": 267,
+      "context": "fontWeight={700}\n lineHeight=\"24px\"\n className={styles.heroTitle}\n >\n {waitingPhase === \"completed\"\n ? t(\"AIPaywallHeroTitleCompleted\")\n : t(\"AIPaywallHeroTitle\", { price: START_AMOUNT })}\n </Text>\n </div>\n \n <div className={styles.balanceSection}>",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

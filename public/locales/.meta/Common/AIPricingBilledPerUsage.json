@@ -3,7 +3,7 @@
   "content": "Usage-based billing",
   "content_en_sha1_hash": "4ffaad3abe39b74d187676c8855c97154a556cae",
   "created_at": "2026-04-10T13:53:44.464Z",
-  "updated_at": "2026-04-23T17:24:02.177Z",
+  "updated_at": "2026-05-15T14:00:07.000Z",
   "comment": {
     "text": "This is a short label indicating that pricing for a service is determined by its usage. It appears in the billing section.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
-      "line_number": 215,
+      "line_number": 224,
       "context": "return t(\"AIPricingAvailableCredits\", {\n price: formatAiServiceCurrency(),\n });\n }\n \n return t(\"AIPricingBilledPerUsage\");\n default:\n return \"\";\n }\n };",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

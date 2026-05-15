@@ -3,7 +3,7 @@
   "content": "Each folder corresponds to a specific form and contains draft files from people who started filling but haven't submitted yet.",
   "content_en_sha1_hash": "065878dbee3e177aedc9fbc1ef4a058a2dece394",
   "created_at": "2026-03-31T15:18:26.779Z",
-  "updated_at": "2026-04-23T17:24:02.163Z",
+  "updated_at": "2026-05-15T14:00:06.984Z",
   "comment": {
     "text": "This is a tooltip that appears during a product tour, explaining the purpose of the \"In Progress\" section within the forms module. It describes that this section holds draft forms from users who have started but not yet submitted them.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(forms)/_utils/tourSteps.ts",
-      "line_number": 263,
+      "line_number": 272,
       "context": "),\n navSectionStep(\n \"in-progress\",\n t(\"Common:InProgress\"),\n t(\n \"Common:TourInProgress\",\n \"Each folder corresponds to a specific form and contains draft files from people who started filling but haven't submitted yet.\",\n ),\n showMenu,\n callbacks,\n ),",
       "module": "/packages/sdk"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

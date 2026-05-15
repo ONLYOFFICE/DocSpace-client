@@ -3,7 +3,7 @@
   "content": "The rooms are archived",
   "content_en_sha1_hash": "de470fe0cbfca725b66465dd7aec74208860139c",
   "created_at": "2025-05-19T21:30:55.272Z",
-  "updated_at": "2026-05-08T13:10:45.677Z",
+  "updated_at": "2026-05-15T14:00:06.894Z",
   "comment": {
     "text": "Toast message. Appears after successfully archiving multiple rooms.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1530,
+      "line_number": 1539,
       "context": "})\n \n .then(() => {\n const successTranslation =\n folders.length !== 1 && Array.isArray(folders)\n ? t(\"ArchivedRoomsAction\")\n : Array.isArray(folders)\n ? t(\"Common:ArchivedRoomAction\", { name: folders[0].title })\n : t(\"Common:ArchivedRoomAction\", { name: folders.title });\n \n toastr.success(successTranslation);",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

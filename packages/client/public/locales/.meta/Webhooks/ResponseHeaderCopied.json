@@ -3,7 +3,7 @@
   "content": "POST response header successfully copied to clipboard",
   "content_en_sha1_hash": "50da04dc146d7120bc3518082ec95e554fbcc735",
   "created_at": "2025-05-19T21:30:49.808Z",
-  "updated_at": "2026-04-11T21:28:33.434Z",
+  "updated_at": "2026-05-15T14:00:06.830Z",
   "comment": {
     "text": "This is a toast message that appears briefly after a user successfully copies the content of a POST response header to their clipboard.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/ResponseDetails.js",
-      "line_number": 124,
+      "line_number": 133,
       "context": "value={eventDetails.responseHeaders}\n enableCopy\n hasNumeration\n isFullHeight\n isJSONField\n copyInfoText={t(\"ResponseHeaderCopied\")}\n />\n ) : (\n <Textarea\n value={eventDetails.responseHeaders}\n heightScale",
       "module": "/packages/client"
     }

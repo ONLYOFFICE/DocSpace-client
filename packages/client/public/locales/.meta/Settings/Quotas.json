@@ -3,7 +3,7 @@
   "content": "Quotas",
   "content_en_sha1_hash": "34ed58657019e0ff061ea2eef787a27a97813fe2",
   "created_at": "2025-05-19T21:30:52.354Z",
-  "updated_at": "2026-04-13T14:59:05.901Z",
+  "updated_at": "2026-05-15T14:00:06.871Z",
   "comment": {
     "text": "This is a section title within the portal settings. It labels the area where administrators can manage storage limits for users and rooms.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/Quotas.js",
-      "line_number": 66,
+      "line_number": 75,
       "context": "return (\n <StyledBaseQuotaComponent>\n <div className=\"title-container\">\n <StyledMainTitle fontSize=\"16px\" fontWeight={700}>\n {t(\"Quotas\")}\n </StyledMainTitle>\n \n {!isStatisticsAvailable ? (\n <Badge\n backgroundColor={",
       "module": "/packages/client"
     }

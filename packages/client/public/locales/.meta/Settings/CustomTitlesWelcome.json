@@ -3,7 +3,7 @@
   "content": "Welcome Page Settings",
   "content_en_sha1_hash": "087c1337487e8e7c3390215fdbb3d1c85858045c",
   "created_at": "2025-05-19T21:30:51.034Z",
-  "updated_at": "2026-04-11T21:25:04.136Z",
+  "updated_at": "2026-05-15T14:00:06.756Z",
   "comment": {
     "text": "This is a page title and a navigation item label. It refers to the settings section where administrators can customize the welcome page of ONLYOFFICE DocSpace.",
     "is_auto": true,
@@ -13,31 +13,31 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
-      "line_number": 77,
+      "line_number": 86,
       "context": "subtitle={t(\"LanguageAndTimeZoneSettingsNavDescription\")}\n url=\"/portal-settings/customization/general/language-and-time-zone\"\n onClickLink={onClickLink}\n />\n <CategoryItem\n title={t(\"CustomTitlesWelcome\")}\n subtitle={t(\"CustomTitlesSettingsNavDescription\")}\n url=\"/portal-settings/customization/general/welcome-page-settings\"\n onClickLink={onClickLink}\n />\n <CategoryItem",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/welcome-page-settings.js",
-      "line_number": 162,
+      "line_number": 171,
       "context": "greetingTitleDefaultFromSessionStorage = getFromSessionStorage(\n \"greetingTitleDefault\",\n );\n \n setDocumentTitle(t(\"CustomTitlesWelcome\"));\n \n const greetingTitle =\n greetingTitleFromSessionStorage === null ||\n greetingTitleFromSessionStorage === \"none\"\n ? greetingSettings",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/welcome-page-settings.js",
-      "line_number": 162,
+      "line_number": 171,
       "context": "greetingTitleDefaultFromSessionStorage = getFromSessionStorage(\n \"greetingTitleDefault\",\n );\n \n setDocumentTitle(t(\"CustomTitlesWelcome\"));\n \n const greetingTitle =\n greetingTitleFromSessionStorage === null ||\n greetingTitleFromSessionStorage === \"none\"\n ? greetingSettings",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 199,
+      "line_number": 208,
       "context": "return t(\"Customization\");\n case \"SettingsGeneral\":\n return t(\"SettingsGeneral\");\n case \"StudioTimeLanguageSettings\":\n return t(\"StudioTimeLanguageSettings\");\n case \"CustomTitlesWelcome\":\n return t(\"CustomTitlesWelcome\");\n case \"ManagementCategorySecurity\":\n return t(\"ManagementCategorySecurity\");\n case \"PortalAccess\":\n return t(\"PortalAccess\", { productName: getBrandName(\"ProductName\") });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 65,
+      "line_number": 74,
       "context": "{\n id: \"portal-settings_catalog-welcome-page-settings\",\n key: \"0-0-1\",\n icon: \"\",\n link: \"welcome-page-settings\",\n tKey: \"CustomTitlesWelcome\",\n },\n {\n id: \"portal-settings_catalog-dns-settings\",\n key: \"0-0-2\",\n icon: \"\",",
       "module": "/packages/client"
     }

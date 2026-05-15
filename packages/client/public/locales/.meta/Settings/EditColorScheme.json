@@ -3,7 +3,7 @@
   "content": "Edit color scheme",
   "content_en_sha1_hash": "e4b8ec853d190dec813a72518343f018e0a210e4",
   "created_at": "2025-05-19T21:30:51.466Z",
-  "updated_at": "2026-04-11T21:24:13.499Z",
+  "updated_at": "2026-05-15T14:00:06.774Z",
   "comment": {
     "text": "This is the title for a dialog that appears when a user is modifying an existing color scheme within the portal settings.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 84,
+      "line_number": 93,
       "context": "const defaultAppliedColorButtons = currentColorScheme.main.buttons;\n \n const isMobileView = currentDeviceType === DeviceType.mobile;\n \n const headerAddTheme = t(\"Settings:NewColorScheme\");\n const headerEditTheme = t(\"Settings:EditColorScheme\");\n \n const checkImgHover = (\n <ReactSVG className=\"check-hover\" src={CheckWhiteSvgUrl} />\n );",
       "module": "/packages/client"
     }

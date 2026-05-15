@@ -3,7 +3,7 @@
   "content": "Terms of Service",
   "content_en_sha1_hash": "0c8a9a95e21aeb403402ed64338810d787cc5f91",
   "created_at": "2025-05-19T21:30:54.051Z",
-  "updated_at": "2026-04-11T21:18:13.175Z",
+  "updated_at": "2026-05-15T14:00:06.826Z",
   "comment": {
     "text": "This is a link label that, when clicked, opens the Terms of Service for an OAuth client in a new tab.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/InfoDialog.tsx",
-      "line_number": 326,
+      "line_number": 335,
       "context": "href={client?.termsUrl}\n type={LinkType.action}\n target={LinkTarget.blank}\n dataTestId=\"client_info_terms_link\"\n >\n {t(\"TermsOfService\")}\n </Link>\n </Text>\n {!isProfile ? (\n <>\n <Text",
       "module": "/packages/client"
     }

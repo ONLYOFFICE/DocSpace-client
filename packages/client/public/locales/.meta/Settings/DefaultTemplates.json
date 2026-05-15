@@ -3,7 +3,7 @@
   "content": "Default Templates",
   "content_en_sha1_hash": "25a73de07cb5568979d641c9cdc35f2af9be1da8",
   "created_at": "2026-02-18T14:56:26.335Z",
-  "updated_at": "2026-04-13T14:59:05.839Z",
+  "updated_at": "2026-05-15T14:00:06.774Z",
   "comment": {
     "text": "This is a section title in the portal settings, referring to the management of default document templates.",
     "is_auto": true,
@@ -13,25 +13,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/DefaultTemplates/index.tsx",
-      "line_number": 47,
+      "line_number": 56,
       "context": "const DefaultTemplates = ({ templates }: Props) => {\n const { t } = useTranslation(\"Settings\");\n \n useEffect(() => {\n setDocumentTitle(t(\"DefaultTemplates\"));\n }, []);\n \n return (\n <div className={styles.wrapper} data-testid=\"default-templates\">\n <Text className={styles.description}>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/index.tsx",
-      "line_number": 123,
+      "line_number": 132,
       "context": "content: <Appearance />,\n onClick: () => {},\n },\n {\n id: \"default-templates\",\n name: t(\"DefaultTemplates\"),\n content: <DefaultTemplates />,\n onClick: async () => {\n clearAbortControllerArr();\n await getTemplatesData();\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 164,
+      "line_number": 173,
       "context": "{\n id: \"portal-settings_catalog-default-templates\",\n key: \"0-3\",\n icon: \"\",\n link: \"default-templates\",\n tKey: \"DefaultTemplates\",\n isCategory: true,\n children: [\n {\n id: \"portal-settings_catalog-default-templates_subLink\",\n key: \"0-3-0\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 164,
+      "line_number": 173,
       "context": "{\n id: \"portal-settings_catalog-default-templates\",\n key: \"0-3\",\n icon: \"\",\n link: \"default-templates\",\n tKey: \"DefaultTemplates\",\n isCategory: true,\n children: [\n {\n id: \"portal-settings_catalog-default-templates_subLink\",\n key: \"0-3-0\",",
       "module": "/packages/client"
     }

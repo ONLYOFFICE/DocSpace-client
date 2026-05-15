@@ -3,7 +3,7 @@
   "content": "Javascript SDK",
   "content_en_sha1_hash": "e6c94f16090ac34b87010e6e2af5e5e55d93af88",
   "created_at": "2025-05-19T21:30:54.548Z",
-  "updated_at": "2026-04-13T14:59:05.854Z",
+  "updated_at": "2026-05-15T14:00:06.797Z",
   "comment": {
     "text": "This is a page title for the Javascript SDK settings. It appears as the main heading for the Javascript SDK configuration section.",
     "is_auto": true,
@@ -13,55 +13,55 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 139,
+      "line_number": 148,
       "context": "handleOnClick: navigateToUploader,\n },\n ];\n \n useEffect(() => {\n if (tReady) setDocumentTitle(t(\"JavascriptSdk\"));\n }, [tReady]);\n \n useEffect(() => {\n const content = document.querySelector(\".section-wrapper-content\");\n if (!content) return;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/DocSpace.js",
-      "line_number": 80,
+      "line_number": 89,
       "context": "];\n \n const DocSpace = (props) => {\n const { t, theme, currentColorScheme } = props;\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const [version, onSetVersion] = useState(sdkVersion[220]);\n \n const [source, onSetSource] = useState(sdkSource.Package);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor.js",
-      "line_number": 84,
+      "line_number": 93,
       "context": "];\n \n const Editor = (props) => {\n const { t, theme } = props;\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const [version, onSetVersion] = useState(sdkVersion[220]);\n \n const [source, onSetSource] = useState(sdkSource.Package);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 100,
+      "line_number": 109,
       "context": "];\n \n const FileSelector = (props) => {\n const { t, fetchExternalLinks, theme, logoText } = props;\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const fileTypeDisplay = [\n {\n value: FilesSelectorFilterTypes.ALL,\n label: t(\"AllTypes\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 118,
+      "line_number": 127,
       "context": "const Manager = (props) => {\n const { t, fetchExternalLinks, theme, currentColorScheme } = props;\n const navigate = useNavigate();\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
-      "line_number": 86,
+      "line_number": 95,
       "context": "];\n \n const RoomSelector = (props) => {\n const { t, theme } = props;\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const roomTypeOptions = [\n {\n key: \"room-type-all\",\n label: t(\"AllTypes\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
-      "line_number": 104,
+      "line_number": 113,
       "context": "const SimpleRoom = (props) => {\n const { t, fetchExternalLinks, currentColorScheme, theme } = props;\n const navigate = useNavigate();\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const [version, onSetVersion] = useState(sdkVersion[220]);\n \n const [source, onSetSource] = useState(sdkSource.Package);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
-      "line_number": 93,
+      "line_number": 102,
       "context": "];\n \n const Uploader = (props) => {\n const { t, theme, myFolderId, fetchTreeFolders } = props;\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const [version, onSetVersion] = useState(sdkVersion[220]);\n const [source, onSetSource] = useState(sdkSource.Package);\n const [uploadMode, setUploadMode] = useState(\"files\");\n const [uploadQuantity, setUploadQuantity] = useState(\"single\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Viewer.js",
-      "line_number": 84,
+      "line_number": 93,
       "context": "];\n \n const Viewer = (props) => {\n const { t, theme } = props;\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const [version, onSetVersion] = useState(sdkVersion[220]);\n \n const [source, onSetSource] = useState(sdkSource.Package);",
       "module": "/packages/client"
     }

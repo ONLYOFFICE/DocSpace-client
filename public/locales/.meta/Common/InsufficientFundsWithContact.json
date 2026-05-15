@@ -3,7 +3,7 @@
   "content": "Your wallet has insufficient funds. Please reach out to the payer (<1>{{email}}</1>) to top it up and try the purchase again.",
   "content_en_sha1_hash": "1f785d03d45e0508ea978a95009741c8647a53a0",
   "created_at": "2026-03-20T09:07:31.780Z",
-  "updated_at": "2026-04-11T20:50:46.229Z",
+  "updated_at": "2026-05-15T14:00:06.960Z",
   "comment": {
     "text": "This is an error message displayed when a user attempts a purchase with insufficient funds. It informs the user about the issue and provides a clickable email address ({{email}}) to contact the payer for a top-up.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 104,
+      "line_number": 113,
       "context": "/>\n ) : (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"InsufficientFundsWithContact\"\n values={{ email: walletCustomerEmail }}\n components={{\n 1: (\n <Link\n key=\"contact-payer-link\"",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

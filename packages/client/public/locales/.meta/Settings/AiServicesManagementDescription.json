@@ -3,7 +3,7 @@
   "content": "Control the activation of AI features across {{productName}} and {{organizationName}} editors. When disabled, the {{aiSettings}} section will be hidden, {{aiAgents}} will be unavailable to all users (with history preserved), and the paid {{organizationName}} {{aiServices}} will no longer be accessible. However, all interaction history with the AI will be securely saved and fully restored upon re-enabling {{aiServices}}.",
   "content_en_sha1_hash": "804862e60d57ab10abceb8ef36877c2a3d804896",
   "created_at": "2026-03-26T08:26:46.818Z",
-  "updated_at": "2026-04-11T21:25:50.752Z",
+  "updated_at": "2026-05-15T14:00:06.769Z",
   "comment": {
     "text": "This is a descriptive text that appears below the \"AI Services Management\" setting. It explains the consequences of disabling AI features, including hiding the {{aiSettings}} section, making {{aiAgents}} unavailable, and restricting access to paid {{aiServices}} for {{organizationName}}. It also clarifies that interaction history will be preserved and restored upon re-enabling {{aiServices}}.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
-      "line_number": 120,
+      "line_number": 129,
       "context": ") : null}\n <CategoryItem\n title={t(\"AiServicesManagement\", {\n aiServices: t(\"Common:AIServices\"),\n })}\n subtitle={t(\"AiServicesManagementDescription\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: getBrandName(\"OrganizationName\"),\n aiSettings: t(\"AISettings\"),\n aiAgents: t(\"Common:AIAgents\"),\n aiServices: t(\"Common:AIServices\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ai-services-management.tsx",
-      "line_number": 229,
+      "line_number": 238,
       "context": "aiServices: t(\"Common:AIServices\"),\n })}\n </Text>\n ) : null}\n <Text className=\"category-item-description\" fontSize=\"13px\">\n {t(\"AiServicesManagementDescription\", {\n productName: getBrandName(\"ProductName\"),\n aiAgents: t(\"Common:AIAgents\"),\n aiSettings: t(\"AISettings\"),\n aiServices: t(\"Common:AIServices\"),\n organizationName: getBrandName(\"OrganizationName\"),",
       "module": "/packages/client"
     }

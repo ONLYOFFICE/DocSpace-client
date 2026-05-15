@@ -3,7 +3,7 @@
   "content": "AI agent",
   "content_en_sha1_hash": "ab15eb3d82fcf6e76a2ede7896d22471a681f18e",
   "created_at": "2025-12-19T10:16:17.398Z",
-  "updated_at": "2026-05-08T13:10:45.499Z",
+  "updated_at": "2026-05-15T14:00:06.595Z",
   "comment": {
     "text": "This string refers to an AI agent, likely a feature or service within the application. It appears as a label in various contexts, including a selector and an empty screen description.",
     "is_auto": true,
@@ -13,175 +13,175 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/AIAgent/index.tsx",
-      "line_number": 186,
+      "line_number": 195,
       "context": "const { getAgentList: onLoadNextPage } = useAgentsHelper({\n withCreate: true,\n isInit: isInitRef.current,\n setIsInit,\n createDefineLabel: t(\"CreateAIAgent\", {\n aiAgent: t(\"AIAgent\"),\n }),\n excludeItems,\n searchValue,\n setHasNextPage,\n setTotal,",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/AIAgent/index.tsx",
-      "line_number": 186,
+      "line_number": 195,
       "context": "const { getAgentList: onLoadNextPage } = useAgentsHelper({\n withCreate: true,\n isInit: isInitRef.current,\n setIsInit,\n createDefineLabel: t(\"CreateAIAgent\", {\n aiAgent: t(\"AIAgent\"),\n }),\n excludeItems,\n searchValue,\n setHasNextPage,\n setTotal,",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/MCPServers/index.tsx",
-      "line_number": 234,
+      "line_number": 243,
       "context": "mcpServers: t(\"MCPSettingTitle\"),\n })}\n emptyScreenDescription={t(\"NoMCPServersDescription\", {\n mcpServers: t(\"MCPSettingTitle\"),\n productName: getBrandName(\"ProductName\"),\n aiAgent: t(\"AIAgent\"),\n })}\n searchEmptyScreenImage={\n isBase ? (\n <EmptyScreenRoomSelectorLight />\n ) : (",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/Instructions.tsx",
-      "line_number": 75,
+      "line_number": 84,
       "context": "fontWeight={400}\n className=\"set_room_params-info-description\"\n noSelect\n >\n {t(\"InstructionsDescriptionAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n </Text>\n </div>\n <Textarea\n value={value}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/NoAccessContainer.tsx",
-      "line_number": 140,
+      "line_number": 149,
       "context": "break;\n // TODO: for AI agents\n case NoAccessContainerType.Agent:\n emptyViewProps = {\n title: t(\"AIRoom:NoAccessAIAgentTitle\", {\n aiAgent: t(\"Common:AIAgent\"),\n }),\n description: t(\"AIRoom:AIAgentAccessRedirectNote\", {\n sectionName: t(\"Common:AIAgents\"),\n }),\n icon: theme.isBase ? (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 385,
+      "line_number": 394,
       "context": "};\n \n const createAIAgent = {\n title: t(\"EmptyView:CreateNewAIAgent\"),\n description: t(\"EmptyView:CreateAIAgentDescription\", {\n aiAgent: t(\"Common:AIAgent\"),\n }),\n icon: <CreateAIAgentIcon />,\n key: \"create-ai-agent\",\n onClick: actions.onCreateAIAgent,\n disabled: !security?.Create,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 189,
+      "line_number": 198,
       "context": "return isUser(access)\n ? t(\"EmptyView:EmptyAIAgentsUserTitle\", {\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"EmptyView:EmptyAIAgentsTitle\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n };\n \n const getAIAgentsAIDisabledTitle = (\n t: TTranslation,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/CreationBlock.js",
-      "line_number": 81,
+      "line_number": 90,
       "context": "</Row>\n \n <Row className={styles.hotkeysRow}>\n <>\n <Text {...textStyles}>\n {t(\"Common:CreateAIAgent\", { aiAgent: t(\"Common:AIAgent\") })}\n </Text>\n <Text {...keyTextStyles}>{`Shift + a`}</Text>\n </>\n </Row>\n </>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/NoItem/NoAgentItem.tsx",
-      "line_number": 56,
+      "line_number": 65,
       "context": ")}\n >\n <div className=\"no-thumbnail-img-wrapper\">\n <img\n src={imageSrc}\n alt={t(\"NoAgent\", { aiAgent: t(\"Common:AIAgent\") })}\n />\n </div>\n <Text className=\"no-item-text\" textAlign=\"center\">\n {t(\"AIAgentsEmptyScreenTent\", { aiAgents: t(\"Common:AIAgents\") })}\n </Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/View/index.tsx",
-      "line_number": 556,
+      "line_number": 565,
       "context": "ns=\"AIRoom\"\n i18nKey=\"AgentInViewModeWarning\"\n components={{\n strong: <strong />,\n }}\n values={{ aiAgent: t(\"Common:AIAgent\"), aiChat: t(\"AIRoom:AIChat\") }}\n />,\n );\n }\n }, [\n selectedFolderStore.isInsideResultStorage,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/MobileQuotas.js",
-      "line_number": 68,
+      "line_number": 77,
       "context": "})}\n isDisabled={isDisabled}\n />\n <CategoryItem\n title={t(\"QuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-ai-agent\"\n subtitle={t(\"SetDefaultAIAgentQuota\", {\n productName: getBrandName(\"ProductName\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/MobileQuotas.js",
-      "line_number": 68,
+      "line_number": 77,
       "context": "})}\n isDisabled={isDisabled}\n />\n <CategoryItem\n title={t(\"QuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-ai-agent\"\n subtitle={t(\"SetDefaultAIAgentQuota\", {\n productName: getBrandName(\"ProductName\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerAIAgent.tsx",
-      "line_number": 55,
+      "line_number": 64,
       "context": "return (\n <QuotaPerItemComponent\n type=\"agent\"\n formLabel={t(\"QuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n toggleLabel={t(\"DefineQuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n disableQuota={disableQuota}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerAIAgent.tsx",
-      "line_number": 55,
+      "line_number": 64,
       "context": "return (\n <QuotaPerItemComponent\n type=\"agent\"\n formLabel={t(\"QuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n toggleLabel={t(\"DefineQuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n disableQuota={disableQuota}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerAIAgent.tsx",
-      "line_number": 55,
+      "line_number": 64,
       "context": "return (\n <QuotaPerItemComponent\n type=\"agent\"\n formLabel={t(\"QuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n toggleLabel={t(\"DefineQuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n disableQuota={disableQuota}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 399,
+      "line_number": 408,
       "context": "const size = getConvertedSize(t, roomFolder.quotaLimit);\n \n const error = isAIAgentsFolderRoot\n ? t(\"Common:AIAgentSpaceQuotaExceeded\", {\n aiAgent: t(\"Common:AIAgent\"),\n size,\n })\n : t(\"Common:RoomSpaceQuotaExceeded\", {\n size,\n });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 399,
+      "line_number": 408,
       "context": "const size = getConvertedSize(t, roomFolder.quotaLimit);\n \n const error = isAIAgentsFolderRoot\n ? t(\"Common:AIAgentSpaceQuotaExceeded\", {\n aiAgent: t(\"Common:AIAgent\"),\n size,\n })\n : t(\"Common:RoomSpaceQuotaExceeded\", {\n size,\n });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 399,
+      "line_number": 408,
       "context": "const size = getConvertedSize(t, roomFolder.quotaLimit);\n \n const error = isAIAgentsFolderRoot\n ? t(\"Common:AIAgentSpaceQuotaExceeded\", {\n aiAgent: t(\"Common:AIAgent\"),\n size,\n })\n : t(\"Common:RoomSpaceQuotaExceeded\", {\n size,\n });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 399,
+      "line_number": 408,
       "context": "const size = getConvertedSize(t, roomFolder.quotaLimit);\n \n const error = isAIAgentsFolderRoot\n ? t(\"Common:AIAgentSpaceQuotaExceeded\", {\n aiAgent: t(\"Common:AIAgent\"),\n size,\n })\n : t(\"Common:RoomSpaceQuotaExceeded\", {\n size,\n });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 399,
+      "line_number": 408,
       "context": "const size = getConvertedSize(t, roomFolder.quotaLimit);\n \n const error = isAIAgentsFolderRoot\n ? t(\"Common:AIAgentSpaceQuotaExceeded\", {\n aiAgent: t(\"Common:AIAgent\"),\n size,\n })\n : t(\"Common:RoomSpaceQuotaExceeded\", {\n size,\n });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/login/src/components/GreetingContainer/GreetingCreateUserContainer/index.tsx",
-      "line_number": 81,
+      "line_number": 90,
       "context": "i18nKey=\"InvitationToAgent\"\n defaults={DEFAULT_AGENT_TEXT}\n values={{\n displayName,\n agentName: roomData.title,\n aiAgent: t(\"Common:AIAgent\"),\n }}\n />\n );\n }",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/ai-chat-panel/index.tsx",
-      "line_number": 204,
+      "line_number": 213,
       "context": "tooltipId=\"close-panel-tooltip\"\n tooltipContent={t(\"Common:CloseButton\")}\n />\n )}\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"Common:AIAgent\")}\n </Text>\n {isSyncing && (\n <span\n title={t(\"Common:SyncingKnowledgeBase\")}\n style={{ display: \"flex\", alignItems: \"center\" }}",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_utils/tourSteps.ts",
-      "line_number": 323,
+      "line_number": 332,
       "context": "callbacks,\n ),\n showSettings &&\n settingsStep(\n \"ai-agent\",\n t(\"Common:AIAgent\"),\n t(\n \"Common:TourAiAgent\",\n \"Enable the AI agent to automatically process submitted forms, extract data, and assist with form review.\",\n ),\n callbacks,",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/forms/settings/layout.client.tsx",
-      "line_number": 157,
+      "line_number": 166,
       "context": "name: t(\"Common:Billing\"),\n content: wrappedContent,\n },\n {\n id: SettingsSubSection.AiAgent,\n name: t(\"Common:AIAgent\"),\n content: wrappedContent,\n },\n {\n id: SettingsSubSection.Access,\n name: t(\"Common:AccessSettings\"),",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/store/CurrentQuotaStore.ts",
-      "line_number": 537,
+      "line_number": 546,
       "context": "const isEnable = +quota !== -1;\n \n try {\n await setDefaultAIAgentQuota(isEnable, +quota);\n const toastrText = isEnable\n ? t(\"AIAgentQuotaEnabled\", { aiAgent: t(\"Common:AIAgent\") })\n : t(\"AIAgentQuotaDisabled\", { aiAgent: t(\"Common:AIAgent\") });\n \n toastr.success(toastrText);\n } catch (e: unknown) {\n toastr.error(e as TData);",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/store/CurrentQuotaStore.ts",
-      "line_number": 537,
+      "line_number": 546,
       "context": "const isEnable = +quota !== -1;\n \n try {\n await setDefaultAIAgentQuota(isEnable, +quota);\n const toastrText = isEnable\n ? t(\"AIAgentQuotaEnabled\", { aiAgent: t(\"Common:AIAgent\") })\n : t(\"AIAgentQuotaDisabled\", { aiAgent: t(\"Common:AIAgent\") });\n \n toastr.success(toastrText);\n } catch (e: unknown) {\n toastr.error(e as TData);",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 59,
+      "line_number": 68,
       "context": "switch (roomType) {\n case RoomsType.FormRoom:\n return t(\"Common:RoleRoomAdminFormRoomDescription\");\n case RoomsType.AIRoom:\n return t(\"Common:RoleAIAgentManagerDescription\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n case None:\n return (\n <Trans\n t={t as TFunction}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 59,
+      "line_number": 68,
       "context": "switch (roomType) {\n case RoomsType.FormRoom:\n return t(\"Common:RoleRoomAdminFormRoomDescription\");\n case RoomsType.AIRoom:\n return t(\"Common:RoleAIAgentManagerDescription\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n case None:\n return (\n <Trans\n t={t as TFunction}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getUserTypeDescription.tsx",
-      "line_number": 85,
+      "line_number": 94,
       "context": "components={{\n 1: <strong></strong>,\n }}\n values={{\n agentSection: t(\"Common:AIAgents\"),\n aiAgent: t(\"Common:AIAgent\"),\n }}\n />\n );\n \n return t(\"Translations:RoleGuestDescriprion\");",
       "module": "/packages/shared"
     }
@@ -317,7 +317,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "Available {{mcpServers}}",
   "content_en_sha1_hash": "9684aad5701521b48b37d8cea8feb7399340b203",
   "created_at": "2025-12-19T10:16:18.690Z",
-  "updated_at": "2026-04-11T20:58:45.305Z",
+  "updated_at": "2026-05-15T14:00:07.042Z",
   "comment": {
     "text": "This is a dialog header label. It displays the title for a list of available servers, where `{{mcpServers}}` will be replaced by the localized term for \"MCP Servers\".",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/MCPServers/index.tsx",
-      "line_number": 259,
+      "line_number": 268,
       "context": "isMultiSelect\n {...withAsideProps}\n onSelect={onSelect}\n withHeader\n headerProps={{\n headerLabel: t(\"AvailableMCPServers\", {\n mcpServers: t(\"MCPSettingTitle\"),\n }),\n withoutBackButton: false,\n onBackClick: onBackClick,\n onCloseClick: onClose ?? onBackClick,",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

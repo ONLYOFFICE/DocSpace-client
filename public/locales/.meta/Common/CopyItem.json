@@ -3,7 +3,7 @@
   "content": "<2>{{title}}</2> successfully copied to <1>{{folderName}}</1>",
   "content_en_sha1_hash": "230031d75ca57d38f165f05a0fbf2c89bf74c2c6",
   "created_at": "2025-05-19T21:30:43.772Z",
-  "updated_at": "2026-04-23T17:24:02.082Z",
+  "updated_at": "2026-05-15T14:00:06.898Z",
   "comment": {
     "text": "This is a toast message confirming that an item has been successfully copied. `{{title}}` is the name of the copied item, and `{{folderName}}` is the destination folder.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/SecondaryProgressDataStore.js",
-      "line_number": 172,
+      "line_number": 181,
       "context": "/>\n ) : (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"CopyItem\"\n components={commonComponents}\n values={commonProps}\n />\n )\n ) : (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/hooks/useStartFillingSelectDialog.tsx",
-      "line_number": 213,
+      "line_number": 222,
       "context": "toastr.success(\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"CopyItem\"\n values={values}\n components={components}\n />,\n );",
       "module": "/packages/doceditor"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "Add certificate",
   "content_en_sha1_hash": "631b330b27d1a4930628f96ea352593dfee627ba",
   "created_at": "2025-05-19T21:30:50.051Z",
-  "updated_at": "2026-04-11T21:27:03.737Z",
+  "updated_at": "2026-05-15T14:00:06.855Z",
   "comment": {
     "text": "This is the label for a button that allows users to add a new certificate for Single Sign-On (SSO) identity provider (IdP) settings.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/Certificates.js",
-      "line_number": 145,
+      "line_number": 154,
       "context": "{prefix === \"idp\" ? (\n <>\n <Button\n id=\"idp-add-certificate\"\n isDisabled={!enableSso || isLoadingXml}\n label={t(\"AddCertificate\")}\n onClick={openIdpModal}\n size=\"small\"\n tabIndex={9}\n testId=\"idp_add_certificate_button\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/Certificates.js",
-      "line_number": 145,
+      "line_number": 154,
       "context": "{prefix === \"idp\" ? (\n <>\n <Button\n id=\"idp-add-certificate\"\n isDisabled={!enableSso || isLoadingXml}\n label={t(\"AddCertificate\")}\n onClick={openIdpModal}\n size=\"small\"\n tabIndex={9}\n testId=\"idp_add_certificate_button\"\n />",
       "module": "/packages/client"
     }

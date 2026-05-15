@@ -3,7 +3,7 @@
   "content": "Files and folders shared by other users will be imported into <1>{{sectionName}}</1>.<br><1>Please note:</1> some access rights may get lost during import.",
   "content_en_sha1_hash": "e22c23d457bed53fabab5837d1f1d5d30dd96fc4",
   "created_at": "2025-10-03T10:07:00.021Z",
-  "updated_at": "2026-04-11T21:48:43.324Z",
+  "updated_at": "2026-05-15T14:00:06.785Z",
   "comment": {
     "text": "This is a description displayed during the data import process. It informs the user that shared files and folders will be imported into a specific section, indicated by the `{{sectionName}}` variable, and warns about potential loss of access rights.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 213,
+      "line_number": 222,
       "context": "onChange={(e) => onChange(e, \"importSharedFilesAndFolders\")}\n sectionName={t(\"Settings:SharedFilesAndFolders\")}\n description={\n <Trans\n t={t}\n i18nKey=\"SharedFilesAndFoldersDescription\"\n ns=\"Settings\"\n values={{\n sectionName: t(\"Common:SharedWithMe\"),\n }}\n components={{",
       "module": "/packages/client"
     }

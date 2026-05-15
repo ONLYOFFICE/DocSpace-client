@@ -3,7 +3,7 @@
   "content": "<1>Web search</1> — AI fetches real-time information from the web when needed for your request.",
   "content_en_sha1_hash": "76d991403ee56fe7521576f64ad52140952b99cc",
   "created_at": "2026-04-10T13:53:44.406Z",
-  "updated_at": "2026-04-11T21:00:01.356Z",
+  "updated_at": "2026-05-15T14:00:07.016Z",
   "comment": {
     "text": "This is a tooltip explaining the \"Web search\" feature of the AI assistant. It clarifies that the AI uses web search to retrieve real-time information for user requests. The `<1>` tag highlights \"Web search\" in bold.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/panels/ai-service/PricingBillingBody.tsx",
-      "line_number": 196,
-      "context": "}}\n />\n <br />\n <CommonTrans\n \n i18nKey=\"AIPricingAdditionalTooltipWebSearch\"\n components={{\n 1: <strong />,\n }}\n />\n <br />",
+      "line_number": 189,
+      "context": "1: <strong />,\n }}\n />\n <br />\n <CommonTrans\n i18nKey=\"AIPricingAdditionalTooltipWebSearch\"\n components={{\n 1: <strong />,\n }}\n />\n <br />",
       "module": "/libs/ui-kit"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

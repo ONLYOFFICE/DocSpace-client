@@ -3,7 +3,7 @@
   "content": "Tags",
   "content_en_sha1_hash": "848eed0fbd5429f556b2982dec3ea87136e33e44",
   "created_at": "2025-05-19T21:30:49.252Z",
-  "updated_at": "2026-05-12T08:51:58.407Z",
+  "updated_at": "2026-05-15T14:00:06.626Z",
   "comment": {
     "text": "This is a label for a column header in a table, a section in an information panel, or a field for entering tags. It refers to keywords or labels associated with an item.",
     "is_auto": true,
@@ -13,55 +13,55 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/TagInput/index.tsx",
-      "line_number": 133,
+      "line_number": 142,
       "context": "})}\n >\n <InputParam\n ref={inputRef}\n id=\"shared_tags-input\"\n title={title ? `${title}:` : `${t(\"Common:Tags\")}:`}\n placeholder={t(\"TagsPlaceholder\")}\n value={tagInput}\n onChange={onTagInputChange}\n onFocus={handleFocus}\n onBlur={handleBlur}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
-      "line_number": 258,
+      "line_number": 267,
       "context": "case \"Versions\":\n return this.t(\"InfoPanel:Versions\");\n case \"Comments\":\n return this.t(\"Common:Comments\");\n case \"Tags\":\n return this.t(\"Common:Tags\");\n \n case \"Author\":\n return this.t(\"Files:ByAuthor\");\n case \"Shared by\":\n return this.t(\"Files:SharedBy\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 742,
+      "line_number": 751,
       "context": "onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,\n },\n {\n key: \"Tags\",\n title: t(\"Common:Tags\"),\n enable: roomColumnTagsIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Tags,\n withTagRef: true,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 742,
+      "line_number": 751,
       "context": "onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,\n },\n {\n key: \"Tags\",\n title: t(\"Common:Tags\"),\n enable: roomColumnTagsIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Tags,\n withTagRef: true,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 742,
+      "line_number": 751,
       "context": "onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,\n },\n {\n key: \"Tags\",\n title: t(\"Common:Tags\"),\n enable: roomColumnTagsIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Tags,\n withTagRef: true,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1351,
+      "line_number": 1360,
       "context": "const isLast = connectedThirdParty.length === 0;\n \n filterOptions.push({\n key: FilterGroups.roomFilterTags,\n group: FilterGroups.roomFilterTags,\n label: t(\"Common:Tags\"),\n isHeader: true,\n isLast,\n });\n \n filterOptions.push(...tagsOptions);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1351,
+      "line_number": 1360,
       "context": "const isLast = connectedThirdParty.length === 0;\n \n filterOptions.push({\n key: FilterGroups.roomFilterTags,\n group: FilterGroups.roomFilterTags,\n label: t(\"Common:Tags\"),\n isHeader: true,\n isLast,\n });\n \n filterOptions.push(...tagsOptions);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1351,
+      "line_number": 1360,
       "context": "const isLast = connectedThirdParty.length === 0;\n \n filterOptions.push({\n key: FilterGroups.roomFilterTags,\n group: FilterGroups.roomFilterTags,\n label: t(\"Common:Tags\"),\n isHeader: true,\n isLast,\n });\n \n filterOptions.push(...tagsOptions);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 163,
+      "line_number": 172,
       "context": "const [selectedColumns, setSelectedColumns] = useState([\n { key: \"Index\", label: t(\"Files:Index\") },\n { key: \"Name\", label: t(\"Common:Label\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Tags\", label: t(\"Common:Tags\") },\n ]);\n \n const [selectedLink, setSelectedLink] = useState(null);\n \n const [config, setConfig] = useState({",
       "module": "/packages/client"
     }
@@ -197,7 +197,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "Submit your template to the public gallery to let others use it in their work. Once the template passes moderation, you will be notified and rewarded for your contribution.",
   "content_en_sha1_hash": "645c4561d7076e7c7c166c6add10dd927257e1c2",
   "created_at": "2025-12-22T14:24:51.385Z",
-  "updated_at": "2026-04-11T21:11:15.183Z",
+  "updated_at": "2026-05-15T14:00:06.698Z",
   "comment": {
     "text": "This is the main informational text displayed within the \"Submit to Gallery\" dialog. It explains the benefits and process of submitting a template to the public gallery, including moderation and rewards.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/SubmitToFormGallery/index.js",
-      "line_number": 201,
+      "line_number": 210,
       "context": "<ModalDialog.Header>\n {t(\"Common:SubmitToTemplateGallery\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className=\"info\">\n {t(\"FormGallery:SubmitToGalleryDialogMainInfo\")}\n </div>\n \n {formItem ? (\n <div className=\"item-wrapper\">\n <ReactSVG className=\"icon\" src={getIcon(24, formItem.fileExst)} />",
       "module": "/packages/client"
     }

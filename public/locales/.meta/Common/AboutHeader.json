@@ -3,7 +3,7 @@
   "content": "About this program",
   "content_en_sha1_hash": "56fb7336f231f3007d1a564b2c67ede83691a9e3",
   "created_at": "2025-05-26T07:15:39.902Z",
-  "updated_at": "2026-04-13T14:59:05.788Z",
+  "updated_at": "2026-05-15T14:00:06.721Z",
   "comment": {
     "text": "This is the title of the \"About\" dialog, which displays information about the program.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/About/AboutHeader.js",
-      "line_number": 76,
+      "line_number": 85,
       "context": "isFill\n onClick={onBack}\n className=\"arrow-button\"\n />\n <Heading type=\"content\" truncate>\n {!ready ? \"\" : t(\"AboutHeader\")}\n </Heading>\n </HeaderContainer>\n );\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/about-dialog/index.tsx",
-      "line_number": 57,
+      "line_number": 66,
       "context": "visible={visible}\n onClose={onClose}\n displayType={ModalDialogType.modal}\n isLarge\n >\n <ModalDialog.Header>{t(\"AboutHeader\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.bodyContent}>\n <AboutContent\n buildVersionInfo={buildVersionInfo}\n previewData={previewData}",
       "module": "/packages/shared"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-04T13:03:19.390474Z"
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

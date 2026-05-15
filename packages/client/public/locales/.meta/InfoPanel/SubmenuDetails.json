@@ -3,7 +3,7 @@
   "content": "Details",
   "content_en_sha1_hash": "dc3decbb93847518f1a049dcf49d0d7c6560bcc6",
   "created_at": "2025-05-19T21:30:54.969Z",
-  "updated_at": "2026-05-08T13:10:45.605Z",
+  "updated_at": "2026-05-15T14:00:06.745Z",
   "comment": {
     "text": "This is a tab label in the information panel. It displays details about the selected item.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/headerGeneral.tsx",
-      "line_number": 110,
+      "line_number": 119,
       "context": "if (id === InfoPanelView.infoMembers) {\n name = isTemplate ? t(\"Common:Accesses\") : t(\"Common:Contacts\");\n } else if (id === InfoPanelView.infoHistory) {\n name = t(\"InfoPanel:SubmenuHistory\");\n } else if (id === InfoPanelView.infoDetails) {\n name = t(\"InfoPanel:SubmenuDetails\");\n } else if (id === InfoPanelView.infoShare) {\n name = t(\"Common:Share\");\n } else {\n const key = id.replace(\"info_plugin-\", \"\");\n name =",
       "module": "/packages/client"
     }

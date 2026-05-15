@@ -3,7 +3,7 @@
   "content": "Color",
   "content_en_sha1_hash": "1d0c8304baedcf8e3a78982c2e7c0b04622bf2a0",
   "created_at": "2025-05-19T21:30:43.522Z",
-  "updated_at": "2026-04-11T20:57:03.758Z",
+  "updated_at": "2026-05-15T14:00:06.695Z",
   "comment": {
     "text": "This is a label for a color selection option, used in dialogs for customizing room logos or portal appearance settings.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/sub-components/SelectColor/SelectColor.tsx",
-      "line_number": 94,
+      "line_number": 103,
       "context": "const isSelectedColorPicker = pickerColor === selectedColor;\n \n return (\n <div className=\"select-color-container\">\n <div className=\"color-name\">{t(\"Common:Color\")}</div>\n <div className=\"colors-container\">\n {logoColors.map((color, index) =>\n color === selectedColor ? (\n <SelectedColorItem\n key={color}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 666,
+      "line_number": 675,
       "context": "<StyledComponent\n colorCheckImg={colorCheckImg}\n isShowDeleteButton={isShowDeleteButton}\n >\n <div className=\"header\">{t(\"Common:Color\")}</div>\n \n <div className=\"theme-standard-container\">\n <div className=\"theme-name\">{t(\"Common:Standard\")}</div>\n \n <div className=\"theme-container\">",
       "module": "/packages/client"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "HTTPS required",
   "content_en_sha1_hash": "61b83d2d44a85c0926a570851f3a01e8ab6c10aa",
   "created_at": "2025-05-19T21:30:54.424Z",
-  "updated_at": "2026-04-11T21:15:59.433Z",
+  "updated_at": "2026-05-15T14:00:06.816Z",
   "comment": {
     "text": "This is the title of an informational bar that appears when the DocSpace portal is accessed via HTTP instead of HTTPS, indicating that HTTPS is required for certain features.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/csp.js",
-      "line_number": 191,
+      "line_number": 200,
       "context": "tooltipContent={<Text fontSize=\"12px\">{t(\"CSPHelp\")}</Text>}\n />\n </Container>\n {standalone && window.location.protocol !== \"https:\" ? (\n <InfoBar\n title={t(\"CSPInfoBarHeader\")}\n description={\n <>\n {t(\"CSPInfoBarDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}{\" \"}",
       "module": "/packages/client"
     }

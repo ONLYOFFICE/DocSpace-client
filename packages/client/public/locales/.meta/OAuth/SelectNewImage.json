@@ -3,7 +3,7 @@
   "content": "Select new image",
   "content_en_sha1_hash": "0cfab96c757b48543e5dee1d93361135769c716e",
   "created_at": "2025-05-19T21:30:54.043Z",
-  "updated_at": "2026-04-11T21:18:15.869Z",
+  "updated_at": "2026-05-15T14:00:06.768Z",
   "comment": {
     "text": "This is a button label that allows users to choose a new image file, typically for an application icon or similar graphic.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/hooks/useIcon.tsx",
-      "line_number": 126,
+      "line_number": 135,
       "context": ">\n {t(\"AISettings:DeleteImage\")}\n </Link>\n </>\n ) : (\n <AddButton label={t(\"OAuth:SelectNewImage\")} onClick={onClick} />\n )}\n </div>\n <input\n ref={inputRef}\n id=\"customFileInput\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
-      "line_number": 192,
+      "line_number": 201,
       "context": "dataTestId=\"app_icon_field\"\n >\n <SelectGroup\n label={t(\"AppIcon\")}\n value={logoValue}\n selectLabel={t(\"SelectNewImage\")}\n description={t(\"IconDescription\")}\n onSelect={onSelect}\n dataTestId=\"select_new_image_container\"\n />\n </FieldContainer>",
       "module": "/packages/client"
     }

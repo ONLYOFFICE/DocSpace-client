@@ -3,7 +3,7 @@
   "content": "This subsection allows you to change the look and feel of your space. You can use your own company logo, name and text to match your organization brand.",
   "content_en_sha1_hash": "3ed304aa4cbda2d1fbc3a0c1d04d2decae6a4ba6",
   "created_at": "2025-05-19T21:30:51.011Z",
-  "updated_at": "2026-04-11T21:25:06.778Z",
+  "updated_at": "2026-05-15T14:00:06.777Z",
   "comment": {
     "text": "This is a descriptive text displayed on the Customization settings page, explaining that users can personalize their DocSpace with company branding elements.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization.js",
-      "line_number": 131,
+      "line_number": 140,
       "context": "<StyledComponent>\n {!isLoadedPage ? (\n <LoaderDescriptionCustomization />\n ) : (\n <div className=\"category-description\">\n {t(\"Settings:CustomizationDescription\")}\n </div>\n )}\n <LanguageAndTimeZoneSettings isMobileView={viewMobile} />\n <StyledSettingsSeparator />\n <WelcomePageSettings isMobileView={viewMobile} />",
       "module": "/packages/client"
     }

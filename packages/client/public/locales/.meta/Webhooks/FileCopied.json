@@ -3,7 +3,7 @@
   "content": "File copied",
   "content_en_sha1_hash": "4a6bc2861eef671be7f536859194a8d6b3428164",
   "created_at": "2025-05-19T21:30:49.720Z",
-  "updated_at": "2026-04-13T14:59:05.877Z",
+  "updated_at": "2026-05-15T14:00:06.834Z",
   "comment": {
     "text": "This is a toast message indicating that a file has been successfully duplicated. It appears briefly after a copy operation is completed.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
-      "line_number": 59,
+      "line_number": 68,
       "context": "case WebhookTriggers.FileDeleted:\n return t(\"FileDeleted\");\n case WebhookTriggers.FileRestored:\n return t(\"FileRestored\");\n case WebhookTriggers.FileCopied:\n return t(\"FileCopied\");\n case WebhookTriggers.FileMoved:\n return t(\"FileMoved\");\n case WebhookTriggers.FolderCreated:\n return t(\"FolderCreated\");\n case WebhookTriggers.FolderUpdated:",
       "module": "/packages/client"
     }

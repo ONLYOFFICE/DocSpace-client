@@ -3,7 +3,7 @@
   "content": "Filling out the form was forcibly stopped",
   "content_en_sha1_hash": "68653a48592c18289fe22fc2b2c53f991e86ce35",
   "created_at": "2025-05-19T21:30:43.225Z",
-  "updated_at": "2026-04-11T20:58:29.886Z",
+  "updated_at": "2026-05-15T14:00:06.969Z",
   "comment": {
     "text": "This is a badge title indicating that a form-filling process was prematurely terminated. It appears as a short status label.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 259,
+      "line_number": 268,
       "context": "case FileFillingFormStatus.YourTurn:\n return t(\"Common:BadgeYourTurnTitle\");\n case FileFillingFormStatus.InProgress:\n return t(\"Common:BadgeInProgressTitle\");\n case FileFillingFormStatus.Stopped:\n return t(\"Common:BadgeStoppedTitle\");\n case FileFillingFormStatus.Completed:\n return t(\"Common:BadgeCompletedTitle\");\n default:\n return \"\";\n }",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

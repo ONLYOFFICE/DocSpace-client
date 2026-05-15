@@ -3,7 +3,7 @@
   "content": "Void",
   "content_en_sha1_hash": "207c7c00630b836d3afb46848bdb24a92023331d",
   "created_at": "2026-03-20T09:07:42.431Z",
-  "updated_at": "2026-04-11T21:14:16.082Z",
+  "updated_at": "2026-05-15T14:00:06.810Z",
   "comment": {
     "text": "This is a short label indicating that a function or operation returned no value. It appears in the event log for developer tools.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/EventLogBlock.js",
-      "line_number": 339,
+      "line_number": 348,
       "context": "</Chevron>\n <span>{formatTime(entry.timestamp)}</span>\n </Gutter>\n <EventName>{entry.event}</EventName>\n <Arrow>→</Arrow>\n <EventData>{formatCompact(entry.data, t(\"VoidReturn\"))}</EventData>\n </LogEntry>\n {expanded && (\n <ExpandedRow>\n <ExpandedContent>\n {formatExpanded(entry.data)}",
       "module": "/packages/client"
     }

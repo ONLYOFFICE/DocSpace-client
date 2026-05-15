@@ -3,7 +3,7 @@
   "content": "Only <1>{{productName}}</1> and <1>Room admins</1> from the selected groups will be able to create rooms using this template.",
   "content_en_sha1_hash": "52d7251a5ba9f653029bd6363ccd951396dfadc6",
   "created_at": "2025-05-19T21:30:55.244Z",
-  "updated_at": "2026-04-11T21:10:45.150Z",
+  "updated_at": "2026-05-15T14:00:06.627Z",
   "comment": {
     "text": "This is an informational message displayed when configuring access to a room template. It explains that only users and Room admins from specified groups can create rooms using the template. The `{{productName}}` variable will be replaced with the product's brand name, and `<1>` tags indicate bold text.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/TemplateAccessSelector/index.tsx",
-      "line_number": 79,
+      "line_number": 88,
       "context": "/>\n ) : (\n <Trans\n t={t}\n ns=\"Files\"\n i18nKey=\"AddUsersOrGroupsInfoGroups\"\n values={{ productName: getBrandName(\"ProductName\") }}\n components={{ 1: <strong /> }}\n />\n );\n };",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

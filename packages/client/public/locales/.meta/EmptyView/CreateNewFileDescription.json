@@ -3,7 +3,7 @@
   "content": "Start working in the room by creating files or folders",
   "content_en_sha1_hash": "b56bfa9dcd9738c6041f0bf7c598799e68e184c6",
   "created_at": "2025-05-19T21:30:56.453Z",
-  "updated_at": "2026-04-11T21:07:21.454Z",
+  "updated_at": "2026-05-15T14:00:06.600Z",
   "comment": {
     "text": "This is the descriptive text for an empty state in a room, guiding users to create files or folders to begin working. It appears below a title like \"Create New File\".",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 460,
+      "line_number": 469,
       "context": "disabled: false,\n };\n \n const createFile: EmptyViewItemType = {\n title: t(\"EmptyView:CreateNewFileTitle\"),\n description: t(\"EmptyView:CreateNewFileDescription\"),\n icon: <CreateNewFormIcon />,\n key: \"create-form-form\",\n disabled: !security?.Create,\n model: [\n {",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

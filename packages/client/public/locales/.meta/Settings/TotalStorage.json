@@ -3,7 +3,7 @@
   "content": "Total storage: {{size}}",
   "content_en_sha1_hash": "e06c93dc0bbbd266fdd9420f93b6eccfba049adc",
   "created_at": "2025-05-19T21:30:52.974Z",
-  "updated_at": "2026-04-13T14:59:05.901Z",
+  "updated_at": "2026-05-15T14:00:06.872Z",
   "comment": {
     "text": "This is a label displaying the total storage used in the storage management settings. `{{size}}` represents the total storage amount.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/StorageSpaceUsed.js",
-      "line_number": 122,
+      "line_number": 131,
       "context": "</StyledMainTitle>\n <div className=\"disk-space_content\">\n <div className=\"disk-space_size-info\">\n {!standalone || (standalone && isTenantCustomQuotaSet) ? (\n <Text fontWeight={400} fontSize=\"14px\" className=\"disk-space_title\">\n {t(\"TotalStorage\", {\n size: totalSize,\n })}\n </Text>\n ) : null}\n <Text fontWeight={400} fontSize=\"14px\" className=\"disk-space_title\">",
       "module": "/packages/client"
     }

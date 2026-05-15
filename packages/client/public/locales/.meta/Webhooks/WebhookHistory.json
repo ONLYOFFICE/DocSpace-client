@@ -3,7 +3,7 @@
   "content": "Webhook history",
   "content_en_sha1_hash": "d5c876e94d902e5dbeaa0db16f985a22a99969df",
   "created_at": "2025-05-19T21:30:49.879Z",
-  "updated_at": "2026-04-11T21:28:07.494Z",
+  "updated_at": "2026-05-15T14:00:06.841Z",
   "comment": {
     "text": "This is the label for a dropdown menu item that, when clicked, navigates the user to the history of a specific webhook.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhooksTable/WebhooksRowView/WebhookRow.js",
-      "line_number": 100,
+      "line_number": 109,
       "context": "onClick: onSettingsOpen,\n },\n {\n id: \"webhook-history\",\n key: \"Webhook history dropdownItem\",\n label: t(\"WebhookHistory\"),\n icon: HistoryIcon,\n onClick: redirectToHistory,\n },\n {\n key: \"Separator dropdownItem\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhooksTable/WebhooksTableView/WebhooksTableRow.js",
-      "line_number": 140,
+      "line_number": 149,
       "context": "onClick: onSettingsOpen,\n dataTestId: \"webhook_settings_item\",\n },\n {\n key: \"Webhook history dropdownItem\",\n label: t(\"WebhookHistory\"),\n icon: HistoryIcon,\n onClick: redirectToHistory,\n dataTestId: \"webhook_history_item\",\n },\n {",
       "module": "/packages/client"
     }

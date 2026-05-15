@@ -3,7 +3,7 @@
   "content": "Groups can be added to a room with the {{roleName}} role as maximum. However, you can change the role of individual users in the group after it has been successfully added.",
   "content_en_sha1_hash": "545f4276e8b6ebffc216035f1c8815efb100182f",
   "created_at": "2025-05-19T21:30:54.720Z",
-  "updated_at": "2026-04-11T21:14:13.103Z",
+  "updated_at": "2026-05-15T14:00:06.712Z",
   "comment": {
     "text": "This is a warning message displayed when adding a group to a room. It informs the user that the group will be added with a maximum role, but individual user roles can be adjusted later. `{{roleName}}` is the name of the maximum available role.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/utils/index.js",
-      "line_number": 79,
+      "line_number": 88,
       "context": "export const makeFreeRole = (item, t, freeRole) => {\n if (!freeRole) return item;\n \n item.access = freeRole.access;\n item.warning = item.isGroup\n ? t(\"GroupMaxAvailableRoleWarning\", {\n roleName: freeRole.label,\n })\n : t(\"UserMaxAvailableRoleWarning\", {\n productName: getBrandName(\"ProductName\"),\n });",
       "module": "/packages/client"
     }

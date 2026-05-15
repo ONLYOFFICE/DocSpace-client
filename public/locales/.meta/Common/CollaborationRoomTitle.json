@@ -3,7 +3,7 @@
   "content": "Collaboration room",
   "content_en_sha1_hash": "020e5e753e7a2509b4e791bcc1a8abc08bb1e51d",
   "created_at": "2025-05-19T21:30:43.513Z",
-  "updated_at": "2026-04-11T20:57:07.482Z",
+  "updated_at": "2026-05-15T14:00:06.804Z",
   "comment": {
     "text": "This is a label for a type of room in DocSpace, specifically an \"Editing Room\" where multiple users can collaborate on documents. It appears in room selection menus and settings.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
-      "line_number": 110,
+      "line_number": 119,
       "context": "roomType: RoomsType.FormRoom,\n // dataTestId: \"room_type_form_option\",\n },\n {\n key: \"room-type-collaboration\",\n label: t(\"Common:CollaborationRoomTitle\"),\n roomType: RoomsType.EditingRoom,\n // dataTestId: \"room_type_editing_option\",\n },\n {\n key: \"room-type-vdr\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
-      "line_number": 125,
+      "line_number": 134,
       "context": "label: t(\"Common:FormFilingRoomTitle\"),\n roomType: RoomsType.FormRoom,\n },\n {\n key: \"room-type-collaboration\",\n label: t(\"Common:CollaborationRoomTitle\"),\n roomType: RoomsType.EditingRoom,\n },\n {\n key: \"room-type-vdr\",\n label: t(\"Common:VirtualDataRoom\"),",
       "module": "/packages/client"
     },
@@ -167,7 +167,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

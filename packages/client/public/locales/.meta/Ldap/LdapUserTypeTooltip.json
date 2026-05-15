@@ -3,7 +3,7 @@
   "content": "All users will be added to {{productName}} with the selected type.",
   "content_en_sha1_hash": "bd24725f827ea436cfa30beb57d8b76e208843dc",
   "created_at": "2025-05-19T21:30:54.340Z",
-  "updated_at": "2026-04-11T21:16:24.457Z",
+  "updated_at": "2026-05-15T14:00:06.845Z",
   "comment": {
     "text": "This is a tooltip that appears next to the \"LDAP Users Type\" setting. It explains that all users imported via LDAP will be assigned the selected user type in {{productName}}, which is a placeholder for the product's brand name.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
-      "line_number": 270,
+      "line_number": 279,
       "context": "<Text fontWeight={600} fontSize=\"15px\" lineHeight=\"16px\">\n {t(\"LdapUsersType\")}\n </Text>\n </div>\n <Text fontWeight={400} fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"LdapUserTypeTooltip\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n </div>\n <div className=\"access-selector-wrapper\">",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/UsersType.tsx",
-      "line_number": 76,
+      "line_number": 85,
       "context": "{t(\"LdapUsersType\")}\n </Text>\n </div>\n <StyledInputWrapper>\n <Text fontWeight={400} fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"LdapUserTypeTooltip\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <AccessSelector\n className=\"access-selector\"",
       "module": "/packages/client"
     }

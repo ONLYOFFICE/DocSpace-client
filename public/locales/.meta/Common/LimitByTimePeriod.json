@@ -3,7 +3,7 @@
   "content": "Limit by time period",
   "content_en_sha1_hash": "03e40a5e784a8aec64ccc72778ffd126b2588b86",
   "created_at": "2025-08-26T11:15:03.626Z",
-  "updated_at": "2026-04-11T20:49:50.949Z",
+  "updated_at": "2026-05-15T14:00:06.713Z",
   "comment": {
     "text": "This is a section header or dialog title. It indicates that the following settings allow the user to restrict access or availability based on a specific time frame.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/LinkSettingsPanel/index.tsx",
-      "line_number": 291,
+      "line_number": 300,
       "context": "<Text\n fontSize=\"16px\"\n fontWeight={700}\n className={styles.linkSettingsText}\n >\n {t(\"Common:LimitByTimePeriod\")}\n </Text>\n \n <Text\n fontSize=\"12px\"\n fontWeight={400}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/index.tsx",
-      "line_number": 573,
+      "line_number": 582,
       "context": "bodyText={expiredLinkText}\n setIsExpired={setIsExpired}\n expirationDate={expirationDate}\n setExpirationDate={setExpirationDate}\n canChangeLifetime={canChangeLifetime}\n headerText={t(\"Common:LimitByTimePeriod\")}\n />\n </StyledEditLinkBodyContent>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
       "module": "/packages/shared"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

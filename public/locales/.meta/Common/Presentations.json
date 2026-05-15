@@ -3,7 +3,7 @@
   "content": "Presentations",
   "content_en_sha1_hash": "25c4116b66b152694c7300d8d3f73ff01eb60a35",
   "created_at": "2025-05-19T21:30:47.458Z",
-  "updated_at": "2026-04-23T17:24:01.686Z",
+  "updated_at": "2026-05-15T14:00:06.631Z",
   "comment": {
     "text": "This is a label for a tab or filter option that displays presentation files.",
     "is_auto": true,
@@ -13,31 +13,31 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/TemplateGallery/index.tsx",
-      "line_number": 83,
+      "line_number": 92,
       "context": "),\n onClick: async () => await resetFilters(FILE_EXTENSIONS.XLSX),\n },\n {\n id: TAB_IDS.PRESENTATION,\n name: t(\"Common:Presentations\"),\n content: (\n <TilesContainer ext={FILE_EXTENSIONS.PPTX} isShowInitSkeleton={false} />\n ),\n onClick: async () => await resetFilters(FILE_EXTENSIONS.PPTX),\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 794,
+      "line_number": 803,
       "context": "break;\n case FilterType.ArchiveOnly.toString():\n label = t(\"Common:Archives\");\n break;\n case FilterType.PresentationsOnly.toString():\n label = t(\"Common:Presentations\");\n break;\n case FilterType.ImagesOnly.toString():\n label = t(\"Common:Images\");\n break;\n case FilterType.MediaOnly.toString():",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 794,
+      "line_number": 803,
       "context": "break;\n case FilterType.ArchiveOnly.toString():\n label = t(\"Common:Archives\");\n break;\n case FilterType.PresentationsOnly.toString():\n label = t(\"Common:Presentations\");\n break;\n case FilterType.ImagesOnly.toString():\n label = t(\"Common:Images\");\n break;\n case FilterType.MediaOnly.toString():",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 133,
+      "line_number": 142,
       "context": "key: FilterType.DocumentsOnly,\n label: t(\"Common:Documents\"),\n },\n {\n key: FilterType.PresentationsOnly,\n label: t(\"Common:Presentations\"),\n },\n {\n key: FilterType.SpreadsheetsOnly,\n label: t(\"Common:Spreadsheets\"),\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
-      "line_number": 163,
+      "line_number": 172,
       "context": "label: t(\"Common:Spreadsheets\"),\n typeKey: FilterType.SpreadsheetsOnly,\n },\n {\n key: \"filter-type-presentations\",\n label: t(\"Common:Presentations\"),\n typeKey: FilterType.PresentationsOnly,\n },\n {\n key: \"filter-type-pdf\",\n label: getManyPDFTitle(t, false),",
       "module": "/packages/client"
     },
@@ -55,13 +55,13 @@
     },
     {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
-      "line_number": 489,
+      "line_number": 496,
       "context": "isChecked={state.presentations.isChecked}\n isIndeterminate={state.presentations.isIndeterminate}\n items={state.presentations.files}\n titleFormat={state.presentations.format || t(\"Common:OriginalFormat\")}\n type={DownloadedDocumentType.Presentations}\n title={t(\"Common:Presentations\")}\n dataTestId=\"download_dialog_presentations\"\n />\n ) : null}\n {state.masterForms.files.length > 0 ? (\n <DownloadContent",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 318,
+      "line_number": 327,
       "context": "case FilterType.FoldersOnly:\n return t(\"Common:Folders\");\n case FilterType.DocumentsOnly:\n return t(\"Common:Documents\");\n case FilterType.PresentationsOnly:\n return t(\"Common:Presentations\");\n case FilterType.SpreadsheetsOnly:\n return t(\"Common:Spreadsheets\");\n case FilterType.ImagesOnly:\n return t(\"Common:Images\");\n case FilterType.MediaOnly:",
       "module": "/packages/shared"
     }
@@ -197,7 +197,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "Files",
   "content_en_sha1_hash": "6ce6c512ea433a7fc5c8841628e7696cd0ff7f2b",
   "created_at": "2025-05-19T21:30:45.269Z",
-  "updated_at": "2026-05-12T08:51:58.392Z",
+  "updated_at": "2026-05-15T14:00:06.600Z",
   "comment": {
     "text": "This is a noun, used as a label for a button to upload files, a heading in a file list, and as part of a sentence displaying a count of files.",
     "is_auto": true,
@@ -13,49 +13,49 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 433,
+      "line_number": 442,
       "context": "key: \"uploads\",\n disabled: !security?.Create,\n model: [\n {\n key: \"upload-files\",\n label: t(\"Common:Files\"),\n icon: FormBlankIcon,\n onClick: () => actions.onUploadAction(\"file\"),\n },\n {\n key: \"upload-folder\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
-      "line_number": 402,
+      "line_number": 411,
       "context": "getItemContent = () => {\n if (!(\"foldersCount\" in this.item) || !(\"filesCount\" in this.item))\n return null;\n return text(\n `${this.t(\"Common:Folders\")}: ${this.item.foldersCount} | ${this.t(\n \"Common:Files\",\n )}: ${this.item.filesCount}`,\n );\n };\n \n getItemSize = () => {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TilesView/FilesTileContainer.js",
-      "line_number": 163,
+      "line_number": 172,
       "context": "isDesc={isDesc}\n className=\"tile-container\"\n useReactWindow\n infiniteGrid={InfiniteGrid}\n headingFolders={t(\"Common:Folders\")}\n headingFiles={t(\"Common:Files\")}\n noSelect={!withContentSelection}\n >\n {filesListNode}\n </TileContainer>\n </FileTileProvider>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 803,
+      "line_number": 812,
       "context": "break;\n case FilterType.MediaOnly.toString():\n label = t(\"Common:Media\");\n break;\n case FilterType.FilesOnly.toString():\n label = t(\"Common:Files\");\n break;\n case FilterType.PDFForm.toString():\n label = getManyPDFTitle(t, true);\n break;\n case FilterType.Pdf.toString():",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 803,
+      "line_number": 812,
       "context": "break;\n case FilterType.MediaOnly.toString():\n label = t(\"Common:Media\");\n break;\n case FilterType.FilesOnly.toString():\n label = t(\"Common:Files\");\n break;\n case FilterType.PDFForm.toString():\n label = getManyPDFTitle(t, true);\n break;\n case FilterType.Pdf.toString():",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 165,
+      "line_number": 174,
       "context": "key: FilterType.MediaOnly,\n label: t(\"Common:Media\"),\n },\n {\n key: FilterType.FilesOnly,\n label: t(\"Common:Files\"),\n },\n ];\n \n const [version, onSetVersion] = useState(sdkVersion[220]);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
-      "line_number": 133,
+      "line_number": 142,
       "context": "const uploadModeOptions = [\n {\n value: \"files\",\n label: (\n <LabelGroup>\n {t(\"Common:Files\")}\n <HelpButton\n offsetRight={0}\n size={12}\n place=\"right\"\n tooltipContent={",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
-      "line_number": 148,
+      "line_number": 157,
       "context": "label: t(\"Common:Folders\"),\n typeKey: FilterType.FoldersOnly,\n },\n {\n key: \"filter-type-all\",\n label: t(\"Common:Files\"),\n typeKey: FilterType.FilesOnly,\n },\n {\n key: \"filter-type-documents\",\n label: t(\"Common:Documents\"),",
       "module": "/packages/client"
     },
@@ -73,13 +73,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/tile-view/index.tsx",
-      "line_number": 65,
+      "line_number": 72,
       "context": ">\n {children}\n </InfiniteGrid>\n )}\n headingFolders={t(\"Common:Folders\")}\n headingFiles={t(\"Common:Files\")}\n >\n {items.map((item, index) => (\n <Tile\n key={`${item?.isFolder ? \"folder\" : \"file\"}_${item.id}`}\n item={item}",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 328,
+      "line_number": 337,
       "context": "case FilterType.MediaOnly:\n return t(\"Common:Media\");\n case FilterType.ArchiveOnly:\n return t(\"Common:Archives\");\n case FilterType.FilesOnly:\n return t(\"Common:Files\");\n case FilterType.DiagramsOnly:\n return t(\"Common:Diagrams\");\n \n case `room-${RoomsType.CustomRoom}`:\n return t(\"Common:CustomRooms\");",
       "module": "/packages/shared"
     }
@@ -215,7 +215,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

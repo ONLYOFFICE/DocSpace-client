@@ -3,7 +3,7 @@
   "content": "Enterprise",
   "content_en_sha1_hash": "b4afff317fb189b9020c5c4b47338ed3d2b0662a",
   "created_at": "2025-05-19T21:30:45.018Z",
-  "updated_at": "2026-04-23T17:24:01.915Z",
+  "updated_at": "2026-05-15T14:00:06.759Z",
   "comment": {
     "text": "This is a short label for the \"Enterprise\" license type, used in various headers and banners related to billing, upgrades, and product features.",
     "is_auto": true,
@@ -13,49 +13,49 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
-      "line_number": 380,
+      "line_number": 389,
       "context": ": !standalone && isPaymentPage\n ? t(\"Common:Billing\")\n // biome-ignore lint/plugin/no-dynamic-i18n-key: header is passed from route config; underlying keys are declared as literals at callsites\n : t(header, {\n organizationName: logoText,\n license: t(\"Common:EnterpriseLicense\"),\n productName: getBrandName(\"ProductName\"),\n aiServices: t(\"Common:AIServices\"),\n });\n \n // console.log(translatedHeader, header);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/pages/Payments/Bonus/index.tsx",
-      "line_number": 68,
+      "line_number": 77,
       "context": "isDeveloper={isDeveloper}\n />\n <Text fontWeight={600}>\n {t(\"UpgradeToProBannerInstructionHeader\", {\n organizationName: logoText,\n license: t(\"Common:EnterpriseLicense\"),\n })}\n </Text>\n <Text>{t(\"UpgradeToProBannerInstructionDescr\")}</Text>\n \n <OfficialDocumentation",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Payments/common/BenefitsContainer.tsx",
-      "line_number": 56,
+      "line_number": 65,
       "context": "const title = isEnterprise\n ? t(\"ActivateToProBannerHeaderTrial\", {\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")\n : t(\"Common:EnterpriseLicense\"),\n })\n : t(\"UpgradeToProBannerHeader\");\n \n const features = () => {\n const getFeatures = () => {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Payments/common/ContactContainer.tsx",
-      "line_number": 64,
+      "line_number": 73,
       "context": "<Text className={styles.text} fontWeight={600}>\n <Trans\n i18nKey=\"UpgradeToProBannerInformationAboutShort\"\n ns=\"Common\"\n t={t}\n values={{ license: t(\"Common:EnterpriseLicense\") }}\n components={{\n 1: (\n <Link\n key=\"enterprise-license-link\"\n target={LinkTarget.blank}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/EnterpriseContainer.tsx",
-      "line_number": 69,
+      "line_number": 78,
       "context": "{!isLifetimeLicense\n ? t(\"RenewTheLicense\")\n : t(\"ActivateRenewSubscriptionHeader\", {\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")\n : t(\"Common:EnterpriseLicense\"),\n })}\n </Text>\n \n <TariffTitleContainer\n isLicenseDateExpired={isLicenseDateExpired}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/TariffTitleContainer.tsx",
-      "line_number": 167,
+      "line_number": 176,
       "context": "values={{\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")\n : t(\"Common:EnterpriseLicense\"),\n editingCount: usersStatistics.totalUsers ?? 0,\n limit: usersStatistics.limitUsers ?? 0,\n }}\n t={t}\n ns=\"Common\"",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/TariffTitleContainer.tsx",
-      "line_number": 167,
+      "line_number": 176,
       "context": "values={{\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")\n : t(\"Common:EnterpriseLicense\"),\n editingCount: usersStatistics.totalUsers ?? 0,\n limit: usersStatistics.limitUsers ?? 0,\n }}\n t={t}\n ns=\"Common\"",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/TrialContainer.tsx",
-      "line_number": 60,
+      "line_number": 69,
       "context": "<div className={styles.enterpriseComponent}>\n <Text fontWeight={700} fontSize=\"16px\">\n {t(\"ActivateSwithToProHeader\", {\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")\n : t(\"Common:EnterpriseLicense\"),\n })}\n </Text>\n \n <TariffTitleContainer\n isLicenseDateExpired={isLicenseDateExpired}",
       "module": "/packages/shared"
     }
@@ -191,7 +191,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

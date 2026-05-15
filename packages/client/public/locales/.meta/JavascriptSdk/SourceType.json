@@ -3,7 +3,7 @@
   "content": "Connect type",
   "content_en_sha1_hash": "f2f5d6b96589cfbba8fc184ea280940374144cf9",
   "created_at": "2025-05-19T21:30:54.694Z",
-  "updated_at": "2026-04-11T21:14:26.837Z",
+  "updated_at": "2026-05-15T14:00:06.815Z",
   "comment": {
     "text": "This is a label for a combo box in the developer tools settings. It indicates the type of source being selected for the JavaScript SDK version.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/VersionSelector.tsx",
-      "line_number": 82,
+      "line_number": 91,
       "context": "onSetSource(source.label);\n }, [source.key, version.key]);\n \n return disabled ? null : (\n <ControlsGroup>\n <Label className=\"label\" text={t(\"SourceType\")} />\n <ComboBox\n scaled\n scaledOptions\n onSelect={onChangeSource}\n options={sources}",
       "module": "/packages/client"
     }

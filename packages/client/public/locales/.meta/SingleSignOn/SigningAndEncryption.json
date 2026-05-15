@@ -3,7 +3,7 @@
   "content": "Signing and encryption",
   "content_en_sha1_hash": "5533490cb1522e35d43bd8fdc3c4facfa9076a63",
   "created_at": "2025-05-19T21:30:50.142Z",
-  "updated_at": "2026-04-11T21:26:32.154Z",
+  "updated_at": "2026-05-15T14:00:06.860Z",
   "comment": {
     "text": "This is a label for a combobox option, indicating that both signing and encryption functionalities are enabled.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/ModalComboBox.js",
-      "line_number": 41,
+      "line_number": 50,
       "context": "const { isDisabled, spAction, setComboBoxOption, className } = props;\n \n const certificateOptions = [\n { key: \"signing\", label: t(\"Signing\") },\n { key: \"encrypt\", label: t(\"Encryption\") },\n { key: \"signing and encrypt\", label: t(\"SigningAndEncryption\") },\n ];\n \n const currentOption = certificateOptions.find(\n (option) => option.key === spAction,\n );",
       "module": "/packages/client"
     }

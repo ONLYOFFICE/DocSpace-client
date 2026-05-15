@@ -3,7 +3,7 @@
   "content": "Connect your social networks",
   "content_en_sha1_hash": "3a18b50746f026e86d03625c28c76cefe4402bb9",
   "created_at": "2025-05-19T21:30:53.342Z",
-  "updated_at": "2026-04-11T21:20:52.960Z",
+  "updated_at": "2026-05-15T14:00:06.879Z",
   "comment": {
     "text": "This is a section heading on the user's profile page. It introduces a section where users can link their social media accounts to their ONLYOFFICE DocSpace profile.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/login/social-networks/index.tsx",
-      "line_number": 171,
+      "line_number": 180,
       "context": "<div\n className={styles.socialNetworksWrapper}\n data-testid=\"profile-social-networks\"\n >\n <Text fontSize=\"16px\" fontWeight={700} lineHeight=\"22px\">\n {t(\"ConnectSocialNetworks\")}\n </Text>\n <div className={styles.buttons}>{providerButtons}</div>\n </div>\n );\n };",
       "module": "/packages/client"
     }

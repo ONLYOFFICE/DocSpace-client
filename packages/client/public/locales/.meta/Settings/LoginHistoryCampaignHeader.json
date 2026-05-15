@@ -3,7 +3,7 @@
   "content": "Secure your {{productName}}",
   "content_en_sha1_hash": "dd0cf4fa1223874a80abb7d22c5bd183f7f2cc2d",
   "created_at": "2025-08-04T07:29:46.167Z",
-  "updated_at": "2026-04-11T21:23:29.041Z",
+  "updated_at": "2026-05-15T14:00:06.950Z",
   "comment": {
     "text": "This is the header for a campaign banner promoting security features. It appears at the top of the banner and includes a variable `{{productName}}` which will be replaced by the product's brand name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/hooks/useTwoFactorCampaignBanner.ts",
-      "line_number": 56,
+      "line_number": 65,
       "context": "return () => window.removeEventListener(\"resize\", handleResize);\n }, []);\n \n const loginHistoryTranslates = useMemo(\n () => ({\n Header: t(\"LoginHistoryCampaignHeader\", {\n productName: getBrandName(\"ProductName\"),\n }),\n SubHeader: t(\"LoginHistoryCampaignTitle\"),\n Text: t(\"LoginHistoryCampaignText\"),\n Link: isMobile",
       "module": "/packages/shared"
     }

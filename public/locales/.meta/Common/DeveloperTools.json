@@ -3,7 +3,7 @@
   "content": "Developer Tools",
   "content_en_sha1_hash": "b0608ab1bd96359355856ec5aafa9740f6d63c4d",
   "created_at": "2025-05-19T21:30:44.517Z",
-  "updated_at": "2026-04-23T17:24:01.934Z",
+  "updated_at": "2026-05-15T14:00:06.796Z",
   "comment": {
     "text": "This is a label for a section or menu item that provides access to developer-related tools and settings. It appears in the UI as a navigation link or a heading.",
     "is_auto": true,
@@ -13,25 +13,25 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/components/article/sub-components/DevToolsBar.tsx",
-      "line_number": 84,
+      "line_number": 93,
       "context": "data-with-custom-slot={withCustomSlot ? \"true\" : \"false\"}\n data-hide-profile-block={articleOpen ? \"true\" : \"false\"}\n >\n <DeveloperReactSvg className=\"icon\" />\n <Text fontWeight={600} fontSize=\"12px\" className=\"label\">\n {t(\"DeveloperTools\")}\n </Text>\n <ArrowReactSvg className=\"arrow\" />\n </div>\n );\n };",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DeveloperToolsHeader.tsx",
-      "line_number": 92,
+      "line_number": 101,
       "context": "return t(\"Settings:EmbedSDK\");\n if (pathname.includes(\"/developer-tools/plugin-sdk\"))\n return t(\"WebPlugins:PluginSDK\");\n if (pathname.includes(\"/developer-tools/webhooks\")) return t(\"Webhooks:Webhooks\");\n if (pathname.includes(\"/developer-tools/oauth\")) return t(\"OAuth:OAuth\");\n return t(\"Common:DeveloperTools\");\n };\n \n const isSubPage = (pathname: string): boolean => {\n const path = pathname.replace(/\\/$/, \"\");\n const segments = path.split(\"/\").filter(Boolean);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 54,
+      "line_number": 63,
       "context": "const Main = (props: { apiBasicLink: string }) => {\n const { t, ready } = useTranslation([\"Common\", \"Settings\", \"JavascriptSdk\", \"WebPlugins\", \"Webhooks\", \"OAuth\"]);\n const { apiBasicLink } = props;\n \n useEffect(() => {\n if (ready) setDocumentTitle(t(\"Common:DeveloperTools\"));\n }, [ready]);\n \n useEffect(() => {\n const elements = document.querySelectorAll<HTMLElement>(\n \".section-sticky-container, .section-header\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 54,
+      "line_number": 63,
       "context": "const Main = (props: { apiBasicLink: string }) => {\n const { t, ready } = useTranslation([\"Common\", \"Settings\", \"JavascriptSdk\", \"WebPlugins\", \"Webhooks\", \"OAuth\"]);\n const { apiBasicLink } = props;\n \n useEffect(() => {\n if (ready) setDocumentTitle(t(\"Common:DeveloperTools\"));\n }, [ready]);\n \n useEffect(() => {\n const elements = document.querySelectorAll<HTMLElement>(\n \".section-sticky-container, .section-header\",",
       "module": "/packages/client"
     }
@@ -167,7 +167,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

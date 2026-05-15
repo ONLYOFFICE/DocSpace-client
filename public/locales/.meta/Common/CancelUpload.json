@@ -3,7 +3,7 @@
   "content": "The upload has been interrupted. Some files have not been uploaded.",
   "content_en_sha1_hash": "bdd44a182da7fa647ddf3d79689ffad7919ab44e",
   "created_at": "2025-05-26T07:15:41.114Z",
-  "updated_at": "2026-04-11T20:57:36.523Z",
+  "updated_at": "2026-05-15T14:00:06.900Z",
   "comment": {
     "text": "This is a toast message that appears when a user cancels an ongoing file upload, informing them that some files may not have been uploaded.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/UploadDataStore.js",
-      "line_number": 312,
+      "line_number": 321,
       "context": "label: i18n.t(\"Common:CanceledOperation\", {\n operationName: i18n.t(\"Files:Uploading\"),\n }),\n });\n \n toastr.info(i18n.t(\"Common:CancelUpload\"));\n };\n \n cancelConversion = () => {\n const newFiles = [];",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

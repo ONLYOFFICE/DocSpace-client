@@ -3,7 +3,7 @@
   "content": "Software license",
   "content_en_sha1_hash": "cb2cde9860819e645714e5902ea20dfa6c78f38b",
   "created_at": "2025-05-26T07:15:48.283Z",
-  "updated_at": "2026-04-12T18:03:52.992Z",
+  "updated_at": "2026-05-15T14:00:06.924Z",
   "comment": {
     "text": "This is a label in the \"About\" dialog, indicating the type of license under which the software is distributed. It appears next to a link to the license details.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/about-dialog/About.content.tsx",
-      "line_number": 173,
+      "line_number": 182,
       "context": "</div>\n </div>\n \n <div className={classNames(styles.row, \"row\")}>\n <Text className={classNames(styles.rowEl, \"row-el\")} fontSize=\"13px\">\n {t(\"SoftwareLicense\")}:{\" \"}\n </Text>\n {isCommercial ? (\n <Link\n tag=\"a\"\n className={classNames(styles.rowEl, \"row-el\")}",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

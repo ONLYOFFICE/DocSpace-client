@@ -3,7 +3,7 @@
   "content": "Folders",
   "content_en_sha1_hash": "19adc47be34bed86af37b8e8dc882af424402561",
   "created_at": "2025-05-19T21:30:45.434Z",
-  "updated_at": "2026-05-12T08:51:58.452Z",
+  "updated_at": "2026-05-15T14:00:06.727Z",
   "comment": {
     "text": "This is a label for a count of folders or a filter option. It appears in the file list view to indicate the number of folders or as a filter to show only folders.",
     "is_auto": true,
@@ -13,43 +13,43 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
-      "line_number": 401,
+      "line_number": 410,
       "context": "getItemContent = () => {\n if (!(\"foldersCount\" in this.item) || !(\"filesCount\" in this.item))\n return null;\n return text(\n `${this.t(\"Common:Folders\")}: ${this.item.foldersCount} | ${this.t(\n \"Common:Files\",\n )}: ${this.item.filesCount}`,\n );\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TilesView/FilesTileContainer.js",
-      "line_number": 162,
+      "line_number": 171,
       "context": "<TileContainer\n isDesc={isDesc}\n className=\"tile-container\"\n useReactWindow\n infiniteGrid={InfiniteGrid}\n headingFolders={t(\"Common:Folders\")}\n headingFiles={t(\"Common:Files\")}\n noSelect={!withContentSelection}\n >\n {filesListNode}\n </TileContainer>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 785,
+      "line_number": 794,
       "context": "switch (filter.filterType.toString()) {\n case FilterType.DocumentsOnly.toString():\n label = t(\"Common:Documents\");\n break;\n case FilterType.FoldersOnly.toString():\n label = t(\"Common:Folders\");\n break;\n case FilterType.SpreadsheetsOnly.toString():\n label = t(\"Common:Spreadsheets\");\n break;\n case FilterType.ArchiveOnly.toString():",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 785,
+      "line_number": 794,
       "context": "switch (filter.filterType.toString()) {\n case FilterType.DocumentsOnly.toString():\n label = t(\"Common:Documents\");\n break;\n case FilterType.FoldersOnly.toString():\n label = t(\"Common:Folders\");\n break;\n case FilterType.SpreadsheetsOnly.toString():\n label = t(\"Common:Spreadsheets\");\n break;\n case FilterType.ArchiveOnly.toString():",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 125,
+      "line_number": 134,
       "context": "];\n \n const fileOptions = [\n {\n key: FilterType.FoldersOnly,\n label: t(\"Common:Folders\"),\n },\n {\n key: FilterType.DocumentsOnly,\n label: t(\"Common:Documents\"),\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
-      "line_number": 150,
+      "line_number": 159,
       "context": "},\n {\n value: \"folders\",\n label: (\n <LabelGroup>\n {t(\"Common:Folders\")}\n <HelpButton\n offsetRight={0}\n size={12}\n place=\"right\"\n tooltipContent={",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
-      "line_number": 143,
+      "line_number": 152,
       "context": "];\n \n const filterOptions = [\n {\n key: \"filter-type-folders\",\n label: t(\"Common:Folders\"),\n typeKey: FilterType.FoldersOnly,\n },\n {\n key: \"filter-type-all\",\n label: t(\"Common:Files\"),",
       "module": "/packages/client"
     },
@@ -67,13 +67,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/tile-view/index.tsx",
-      "line_number": 64,
+      "line_number": 71,
       "context": "filesLength={filesLength}\n >\n {children}\n </InfiniteGrid>\n )}\n headingFolders={t(\"Common:Folders\")}\n headingFiles={t(\"Common:Files\")}\n >\n {items.map((item, index) => (\n <Tile\n key={`${item?.isFolder ? \"folder\" : \"file\"}_${item.id}`}",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 314,
+      "line_number": 323,
       "context": ") => {\n switch (key) {\n case \"all\":\n return t(\"Common:All\");\n case FilterType.FoldersOnly:\n return t(\"Common:Folders\");\n case FilterType.DocumentsOnly:\n return t(\"Common:Documents\");\n case FilterType.PresentationsOnly:\n return t(\"Common:Presentations\");\n case FilterType.SpreadsheetsOnly:",
       "module": "/packages/shared"
     }
@@ -209,7 +209,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

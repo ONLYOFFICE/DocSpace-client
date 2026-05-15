@@ -3,7 +3,7 @@
   "content": "Remove",
   "content_en_sha1_hash": "e963907dac5cd5c017869b4c96c18021c9bd058b",
   "created_at": "2025-05-19T21:30:47.809Z",
-  "updated_at": "2026-04-12T02:56:30.424Z",
+  "updated_at": "2026-05-15T14:00:06.673Z",
   "comment": {
     "text": "This is a button label that confirms the removal of an item, such as a guest from a room, a user, or a subscription.",
     "is_auto": true,
@@ -13,79 +13,79 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 198,
+      "line_number": 207,
       "context": "return t(\"Common:DeleteForeverButton\");\n \n if (isPrivacyFolder || selection[0]?.providerKey)\n return t(\"Common:OKButton\");\n \n if (unsubscribe) return t(\"Common:Remove\");\n \n return t(\"Common:MoveTo\");\n };\n \n const getDialogTitle = () => {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/RemoveGuest/index.tsx",
-      "line_number": 135,
+      "line_number": 144,
       "context": "</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"change-user-type-modal_submit\"\n label={t(\"Common:Remove\")}\n size={ButtonSize.normal}\n scale\n primary\n onClick={onRemove}\n isLoading={isRequestRunning}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/RemoveUserConfirmationDialog/index.tsx",
-      "line_number": 89,
+      "line_number": 98,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"delete-file-modal_submit\"\n key=\"OKButton\"\n label={t(\"Common:Remove\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={onDelete}\n isLoading={isLoading}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
-      "line_number": 114,
+      "line_number": 123,
       "context": "const deleteOption = canChangeUserRole\n ? [\n { key: \"s2\", isSeparator: true },\n {\n key: \"remove\",\n label: this.t(\"Common:Remove\"),\n access: ShareAccessRights.None,\n },\n ]\n : [];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 320,
+      "line_number": 329,
       "context": "};\n case \"remove-guest\":\n return {\n id: \"option_remove-guests\",\n key: option,\n label: t(\"Common:Remove\"),\n onClick: () => this.dialogStore.setRemoveGuestDialogVisible(true),\n icon: DisableReactSvgUrl,\n };\n default:\n break;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 320,
+      "line_number": 329,
       "context": "};\n case \"remove-guest\":\n return {\n id: \"option_remove-guests\",\n key: option,\n label: t(\"Common:Remove\"),\n onClick: () => this.dialogStore.setRemoveGuestDialogVisible(true),\n icon: DisableReactSvgUrl,\n };\n default:\n break;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/HeaderMenuStore.ts",
-      "line_number": 238,
+      "line_number": 247,
       "context": "onClick: () => toggleDeleteProfileEverDialog(selection),\n iconUrl: DeleteReactSvgUrl,\n },\n {\n key: \"menu-remove\",\n label: t(\"Common:Remove\"),\n disabled: !isGuests || !isRoomAdmin,\n onClick: () => setRemoveGuestDialogVisible(true),\n iconUrl: DisableReactSvgUrl,\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/ContactsForm.tsx",
-      "line_number": 238,
+      "line_number": 247,
       "context": "{currentUser?.id !== user.id && (\n <IconButton\n iconName={CrossReactSvgUrl}\n size={12}\n onClick={() => onRemoveMember(String(user.id), true)}\n title={t(\"Common:Remove\")}\n />\n )}\n </div>\n );\n })}",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/ContactsForm.tsx",
-      "line_number": 238,
+      "line_number": 247,
       "context": "{currentUser?.id !== user.id && (\n <IconButton\n iconName={CrossReactSvgUrl}\n size={12}\n onClick={() => onRemoveMember(String(user.id), true)}\n title={t(\"Common:Remove\")}\n />\n )}\n </div>\n );\n })}",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 857,
+      "line_number": 866,
       "context": "access: ShareAccessRights.None,\n },\n {\n access: ShareAccessRights.None,\n key: \"remove\",\n label: t(\"Common:Remove\"),\n },\n ]\n : [],\n };",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 857,
+      "line_number": 866,
       "context": "access: ShareAccessRights.None,\n },\n {\n access: ShareAccessRights.None,\n key: \"remove\",\n label: t(\"Common:Remove\"),\n },\n ]\n : [],\n };",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 354,
+      "line_number": 363,
       "context": "key: \"s2\",\n isSeparator: true,\n },\n {\n key: \"remove\",\n label: t(\"Common:Remove\"),\n },\n ];\n \n return withRemove ? [...options, ...removeOption] : options;\n };",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/room-members/getUserRoleOptionsByRoomType.ts",
-      "line_number": 45,
+      "line_number": 54,
       "context": "const deleteOption = canChangeUserRole\n ? [\n { key: \"s2\", isSeparator: true },\n {\n key: \"remove\",\n label: t(\"Common:Remove\"),\n access: ShareAccessRights.None,\n },\n ]\n : [];",
       "module": "/packages/shared"
     }
@@ -221,7 +221,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

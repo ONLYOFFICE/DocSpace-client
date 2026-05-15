@@ -3,7 +3,7 @@
   "content": "Link no longer available",
   "content_en_sha1_hash": "1d52403106fa5fba380048135d3e461ea5794d73",
   "created_at": "2026-02-18T14:56:01.433Z",
-  "updated_at": "2026-04-23T17:24:01.884Z",
+  "updated_at": "2026-05-15T14:00:06.708Z",
   "comment": {
     "text": "This is an error message displayed in a toast notification or on an error page, indicating that an invitation link is no longer valid, possibly due to an expired limit.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 501,
+      "line_number": 510,
       "context": "if (!showToast) return;\n return toastr.error(t(\"Common:LinkExpired\"));\n }\n if (isLimit) {\n if (!showToast) return;\n return toastr.error(t(\"Common:LinkNoLongerAvailable\"));\n }\n \n const date = getDate(expirationDate);\n \n const toastTranslation = date ? (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/login/src/components/InviteLinkError.tsx",
-      "line_number": 55,
+      "line_number": 64,
       "context": "return () => clearTimeout(timeout);\n }, [router]);\n \n return (\n <ErrorContainer\n headerText={t(\"Common:LinkNoLongerAvailable\")}\n bodyText={bodyText}\n >\n <Text fontSize=\"13px\" fontWeight=\"600\">\n <Trans\n t={t}",
       "module": "/packages/login"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

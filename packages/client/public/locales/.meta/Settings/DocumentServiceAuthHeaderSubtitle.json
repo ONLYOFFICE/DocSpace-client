@@ -3,7 +3,7 @@
   "content": "Leave blank to use default header",
   "content_en_sha1_hash": "aae1a22631ce0f516828a9dbc92850fbbd6386dd",
   "created_at": "2025-05-19T21:30:51.353Z",
-  "updated_at": "2026-04-11T21:24:23.844Z",
+  "updated_at": "2026-05-15T14:00:06.843Z",
   "comment": {
     "text": "This is a subtitle displayed below an input field for an authentication header. It instructs the user to leave the field empty to use the default value.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 358,
+      "line_number": 367,
       "context": "onChange={onChangeAuthHeader}\n isDisabled={isSaveLoading || isResetLoading}\n dataTestId=\"auth_header_input_block\"\n />\n <Text className=\"subtitle\">\n {t(\"Settings:DocumentServiceAuthHeaderSubtitle\")}\n </Text>\n </div>\n <div className=\"input-wrapper\">\n <Label\n htmlFor=\"internalAdress\"",
       "module": "/packages/client"
     }

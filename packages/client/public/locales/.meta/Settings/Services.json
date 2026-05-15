@@ -3,7 +3,7 @@
   "content": "Services",
   "content_en_sha1_hash": "5cbd584046863bc7b753e57e8681a98a87f36f0f",
   "created_at": "2025-06-03T20:59:25.520Z",
-  "updated_at": "2026-04-23T17:24:01.913Z",
+  "updated_at": "2026-05-15T14:00:06.758Z",
   "comment": {
     "text": "This is a tab label in the portal settings, referring to various services available within the application.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/index.js",
-      "line_number": 110,
+      "line_number": 119,
       "context": "clearAbortControllerArr();\n },\n },\n !isNotPaidPeriod && {\n id: \"services\",\n name: t(\"Settings:Services\"),\n content: <ServicesList getAIConfig={getAIConfig} />,\n onClick: () => {\n clearAbortControllerArr();\n },\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 235,
+      "line_number": 244,
       "context": "return \"Common:FreeAccessToLicensedVersion\";\n case \"DataImport\":\n return t(\"DataImport\");\n case \"StorageManagement\":\n return t(\"StorageManagement\");\n case \"Services\":\n return t(\"Services\");\n case \"AISettings\":\n return t(\"Settings:AISettings\");\n default:\n throw new Error(\"Unexpected translation key\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 583,
+      "line_number": 592,
       "context": "{\n id: \"portal-settings_catalog-services\",\n key: \"10-3\",\n icon: \"\",\n link: \"services\",\n tKey: \"Services\",\n isCategory: true,\n },\n ],\n },\n {",
       "module": "/packages/client"
     }

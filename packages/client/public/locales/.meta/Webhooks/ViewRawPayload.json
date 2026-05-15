@@ -3,7 +3,7 @@
   "content": "View raw payload",
   "content_en_sha1_hash": "f9816af43fcbbce0fd79cf925d8a03b716aa0802",
   "created_at": "2025-05-19T21:30:49.865Z",
-  "updated_at": "2026-04-11T21:28:11.769Z",
+  "updated_at": "2026-05-15T14:00:06.831Z",
   "comment": {
     "text": "Button label. Clicking it opens a modal window displaying the raw data of a webhook response.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/ResponseDetails.js",
-      "line_number": 145,
+      "line_number": 154,
       "context": "</Text>\n <Button\n className=\"view-raw-payload\"\n size=\"small\"\n onClick={openRawPayload}\n label={t(\"ViewRawPayload\")}\n scale={isMobile()}\n />\n </LargePayloadStub>\n ) : responsePayload === \"\" ? (\n <Textarea isDisabled />",
       "module": "/packages/client"
     }

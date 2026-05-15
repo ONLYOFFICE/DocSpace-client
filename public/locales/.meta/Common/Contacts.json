@@ -3,7 +3,7 @@
   "content": "Contacts",
   "content_en_sha1_hash": "b0dd615cbbdcbf21ffb72115599ca915634fcb85",
   "created_at": "2025-05-19T21:30:43.662Z",
-  "updated_at": "2026-05-08T13:10:45.515Z",
+  "updated_at": "2026-05-15T14:00:06.627Z",
   "comment": {
     "text": "This is a header label for a people selector or invitation panel, identifying the section as \"Contacts\".",
     "is_auto": true,
@@ -13,91 +13,91 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/People/index.tsx",
-      "line_number": 568,
+      "line_number": 573,
       "context": "const headerSelectorProps: TSelectorHeader = withHeader\n ? {\n withHeader,\n headerProps: {\n ...headerProps,\n headerLabel: headerProps.headerLabel || t(\"Contacts\"),\n },\n }\n : ({} as TSelectorHeader);\n \n const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 894,
+      "line_number": 903,
       "context": "withGuests={showGuestsTab}\n withHeader\n dataTestId=\"invite_panel_people_selector\"\n headerProps={{\n // Todo: Update groups empty screen texts when they are ready\n headerLabel: t(\"Common:Contacts\"),\n withoutBackButton: false,\n withoutBorder: true,\n isCloseable: true,\n onBackClick: closeUsersPanel,\n onCloseClick: () => {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/TemplateAccessSelector/index.tsx",
-      "line_number": 110,
+      "line_number": 119,
       "context": "disableInvitedUsers={disableInvitedUsers}\n checkIfUserInvited={checkIfUserInvited}\n withHeader\n filter={filter as unknown as PeopleFilter}\n headerProps={{\n headerLabel: t(\"Common:Contacts\"),\n withoutBackButton: false,\n withoutBorder: true,\n isCloseable: true,\n onBackClick,\n onCloseClick,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Hooks/useContacts.ts",
-      "line_number": 82,
+      "line_number": 91,
       "context": "const isGroups = contactsView === \"groups\";\n \n const node = isInsideGroup || isGuests ? \"people\" : contactsView;\n setSelectedNode([\"accounts\", node, \"filter\"]);\n \n setDocumentTitle(t(\"Common:Contacts\"));\n \n const getList = async () => {\n if (isGroups) {\n const newFilter = GroupsFilter.getFilter(location)!;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/headerGeneral.tsx",
-      "line_number": 106,
+      "line_number": 115,
       "context": ": (availableTabs[0] ?? InfoPanelView.infoDetails);\n \n const tabItems = availableTabs.map((id) => {\n let name: string;\n if (id === InfoPanelView.infoMembers) {\n name = isTemplate ? t(\"Common:Accesses\") : t(\"Common:Contacts\");\n } else if (id === InfoPanelView.infoHistory) {\n name = t(\"InfoPanel:SubmenuHistory\");\n } else if (id === InfoPanelView.infoDetails) {\n name = t(\"InfoPanel:SubmenuDetails\");\n } else if (id === InfoPanelView.infoShare) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1231,
+      "line_number": 1240,
       "context": "const subjectOptions = [\n {\n key: FilterGroups.roomFilterSubject,\n group: FilterGroups.roomFilterSubject,\n label: isTemplatesFolder ? t(\"TemplateOwner\") : t(\"Common:Contacts\"),\n isHeader: true,\n isLast: isAIAgentsFolder && !tags?.length,\n withMultiItems: true,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 806,
+      "line_number": 815,
       "context": "const accountsNavigationPath = React.useMemo(() => {\n if (isContactsInsideGroupPage) {\n return [\n {\n id: 0,\n title: t(\"Common:Contacts\"),\n isRoom: false,\n isRootRoom: true,\n },\n ];\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 154,
+      "line_number": 163,
       "context": "t={t}\n i18nKey=\"GroupsSectionDescription\"\n ns=\"Settings\"\n values={{\n serviceName,\n sectionName: t(\"Common:Contacts\"),\n }}\n components={{\n 1: <span />,\n }}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/index.js",
-      "line_number": 97,
+      "line_number": 106,
       "context": "t={t}\n i18nKey=\"LdapIntegrationDescription\"\n ns=\"Ldap\"\n values={{\n productName: getBrandName(\"ProductName\"),\n sectionName: t(\"Common:Contacts\"),\n link,\n }}\n components={{\n 1: (\n <Link",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
-      "line_number": 225,
+      "line_number": 234,
       "context": "isVertical\n labelVisible\n hasError={errors.userQuotaLimit}\n labelText={t(\"LdapQuota\")}\n tooltipContent={t(\"LdapUserQuotaTooltip\", {\n contactsName: t(\"Common:Contacts\"),\n })}\n inlineHelpButton\n dataTestId=\"quota_field_container\"\n >\n <TextInput",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 291,
+      "line_number": 300,
       "context": "onClick={onChangeContacts}\n noSelect\n >\n {t(\"InviteViaContacts\", {\n productName: getBrandName(\"ProductName\"),\n sectionName: t(\"Common:Contacts\"),\n })}\n </Text>\n </div>\n \n <Text",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 291,
+      "line_number": 300,
       "context": "onClick={onChangeContacts}\n noSelect\n >\n {t(\"InviteViaContacts\", {\n productName: getBrandName(\"ProductName\"),\n sectionName: t(\"Common:Contacts\"),\n })}\n </Text>\n </div>\n \n <Text",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.js",
-      "line_number": 431,
+      "line_number": 440,
       "context": "const accounts =\n !isNotPaidPeriod && !isVisitor && !isCollaborator\n ? {\n key: \"user-menu-accounts\",\n icon: CatalogAccountsReactSvgUrl,\n label: t(\"Common:Contacts\"),\n onClick: (obj) =>\n this.onAccountsClick(PEOPLE_ROUTE_WITH_FILTER, obj),\n url: PEOPLE_ROUTE_WITH_FILTER,\n preventNewTab: true,\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/GuestShareLink/page.client.tsx",
-      "line_number": 101,
+      "line_number": 110,
       "context": "onClick={onDenyInvite}\n testId=\"deny_button\"\n />\n </div>\n <Text fontSize=\"12px\" fontWeight=\"400\" className=\"guest-info\">\n {t(\"Common:GuestApprovalNote\", { sectionName: t(\"Common:Contacts\") })}\n </Text>\n </FormWrapper>\n );\n };",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/shared/components/share/selector/index.tsx",
-      "line_number": 147,
+      "line_number": 156,
       "context": "targetEntityType={targetEntityType}\n data-test-id=\"share_to_people_selector\"\n disabledInvitedText={t(\"Common:Shared\")}\n {...accessRightsProps}\n headerProps={{\n headerLabel: t(\"Common:Contacts\"),\n withoutBackButton: false,\n withoutBorder: true,\n isCloseable: true,\n onBackClick,\n onCloseClick,",
       "module": "/packages/shared"
     }
@@ -233,7 +233,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

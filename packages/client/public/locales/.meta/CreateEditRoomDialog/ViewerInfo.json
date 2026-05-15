@@ -3,7 +3,7 @@
   "content": "Viewer info",
   "content_en_sha1_hash": "385809faaca8c195a870ce993d7a47d41ad6c453",
   "created_at": "2025-05-19T21:30:56.857Z",
-  "updated_at": "2026-04-13T14:59:05.761Z",
+  "updated_at": "2026-05-15T14:00:06.666Z",
   "comment": {
     "text": "This is a radio button label within the watermark settings for a room. It allows users to select \"Viewer info\" as the type of watermark to apply, which typically displays information about the document viewer.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/Watermarks/index.tsx",
-      "line_number": 44,
+      "line_number": 53,
       "context": "const imageWatermark = \"image\";\n const viewerInfoWatermark = \"viewerInfo\";\n \n const options = (t: TFunction) => [\n {\n label: t(\"ViewerInfo\"),\n value: viewerInfoWatermark,\n dataTestId: \"virtual_data_room_watermarks_radio_viewer_info\",\n },\n {\n label: t(\"Common:Image\"),",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

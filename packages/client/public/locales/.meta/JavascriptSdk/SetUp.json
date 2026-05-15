@@ -3,7 +3,7 @@
   "content": "Start setting up",
   "content_en_sha1_hash": "68e48268020a3f2798df84f3bd36e4a12273da4c",
   "created_at": "2025-05-19T21:30:54.689Z",
-  "updated_at": "2026-04-11T21:14:32.028Z",
+  "updated_at": "2026-05-15T14:00:06.814Z",
   "comment": {
     "text": "This is a button label. It appears on a tile to initiate the setup process for a JavaScript SDK preset.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/PresetTile.js",
-      "line_number": 99,
+      "line_number": 108,
       "context": "</div>\n \n <Button\n testId={`sdk_preset_${title}_button`}\n className=\"navigationButton\"\n label={t(\"SetUp\")}\n icon={<ArrowIcon />}\n scale\n isClicked\n size=\"small\"\n />",
       "module": "/packages/client"
     }

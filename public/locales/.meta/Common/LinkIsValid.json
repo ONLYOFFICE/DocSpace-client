@@ -3,7 +3,7 @@
   "content": "The link is valid for <1>{{date}}</1>",
   "content_en_sha1_hash": "963d9b3a0d59aabbefdcf5cad77bdbe0fa590621",
   "created_at": "2025-05-19T21:30:46.198Z",
-  "updated_at": "2026-04-11T20:49:38.790Z",
+  "updated_at": "2026-05-15T14:00:06.937Z",
   "comment": {
     "text": "This is a sentence displayed in a dropdown menu, indicating the validity period of a shared link. The `<1>{{date}}</1>` tag represents the expiration date or \"unlimited\".",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/sub-components/ExpiredComboBox.tsx",
-      "line_number": 144,
+      "line_number": 153,
       "context": ");\n }\n const date = t(\"Common:Unlimited\").toLowerCase();\n \n return (\n <Trans t={t} i18nKey=\"LinkIsValid\" ns=\"Common\">\n The link is valid for\n <LinkWithDropdown\n className={styles.expiredOptions}\n color={globalColors.lightBlueMain}\n dropdownType=\"alwaysDashed\"",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

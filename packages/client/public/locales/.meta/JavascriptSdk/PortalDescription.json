@@ -3,7 +3,7 @@
   "content": "Embed the whole {{productName}} to allow users to interact with all rooms, files, and settings.",
   "content_en_sha1_hash": "bb2ba090ea6b7d4f2d0a63738da632aa07737985",
   "created_at": "2025-05-19T21:30:54.616Z",
-  "updated_at": "2026-04-11T21:14:53.824Z",
+  "updated_at": "2026-05-15T14:00:06.796Z",
   "comment": {
     "text": "This is a description for a preset in the JavaScript SDK settings. It explains that embedding the entire product allows users to interact with all rooms, files, and settings. `{{productName}}` will be replaced with the actual product name (e.g., ONLYOFFICE DocSpace).",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 86,
+      "line_number": 95,
       "context": "const navigateToUploader = () => navigate(\"uploader\");\n \n const presetsData = [\n {\n title: getBrandName(\"ProductName\"),\n description: t(\"PortalDescription\", {\n productName: getBrandName(\"ProductName\"),\n }),\n image: theme.isBase ? PortalImg : PortalImgDark,\n handleOnClick: navigateToPortal,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/DocSpace.js",
-      "line_number": 194,
+      "line_number": 203,
       "context": "</>\n );\n \n return (\n <PresetWrapper\n description={t(\"PortalDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n header={t(\"CreateSamplePortal\", {\n productName: getBrandName(\"ProductName\"),\n })}",
       "module": "/packages/client"
     }

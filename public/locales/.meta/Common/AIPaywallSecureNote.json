@@ -1,0 +1,29 @@
+{
+  "key_path": "AIPaywallSecureNote",
+  "content": "Powered by Stripe. Your card is only charged when you top up — AI usage is deducted from this balance.",
+  "content_en_sha1_hash": "45c1930719d3f1fa4a2ee33cab1bb1ebe9e3b03a",
+  "created_at": "2026-05-15T13:59:46.114Z",
+  "updated_at": "2026-05-15T14:02:47.986Z",
+  "comment": {
+    "text": "Informational disclaimer text on the AI Paywall page explaining the Stripe billing mechanism and how AI usage impacts the account balance.",
+    "is_auto": true,
+    "updated_at": "2026-05-15T14:02:47.986Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallPage.tsx",
+      "line_number": 334,
+      "context": "isDisabled={isWaiting}\n testId=\"enable_ai_button\"\n />\n \n <Text fontSize=\"12px\" className={styles.secureNote}>\n {t(\"AIPaywallSecureNote\")}\n </Text>\n </>\n )}\n </div>\n </div>",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

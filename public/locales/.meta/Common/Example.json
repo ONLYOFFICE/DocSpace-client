@@ -3,7 +3,7 @@
   "content": "Example: {{example}}",
   "content_en_sha1_hash": "293ca42e3dda6b344ea17733c7b72ab1a0dc1b5e",
   "created_at": "2025-05-19T21:30:45.215Z",
-  "updated_at": "2026-04-11T20:53:04.138Z",
+  "updated_at": "2026-05-15T14:00:06.842Z",
   "comment": {
     "text": "This is an example of a document service URL, displayed as a subtitle below the input field in the Document Service settings. The `{{example}}` variable will be replaced with a placeholder URL.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 279,
+      "line_number": 288,
       "context": "hasError={!docServiceUrlIsValid}\n isDisabled={isSaveLoading || isResetLoading}\n dataTestId=\"editor_url_input_block\"\n />\n <Text className=\"subtitle\">\n {t(\"Common:Example\", {\n example: EDITOR_URL_PLACEHOLDER,\n })}\n </Text>\n <Checkbox\n id=\"isDisabledCertificat\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 279,
+      "line_number": 288,
       "context": "hasError={!docServiceUrlIsValid}\n isDisabled={isSaveLoading || isResetLoading}\n dataTestId=\"editor_url_input_block\"\n />\n <Text className=\"subtitle\">\n {t(\"Common:Example\", {\n example: EDITOR_URL_PLACEHOLDER,\n })}\n </Text>\n <Checkbox\n id=\"isDisabledCertificat\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 279,
+      "line_number": 288,
       "context": "hasError={!docServiceUrlIsValid}\n isDisabled={isSaveLoading || isResetLoading}\n dataTestId=\"editor_url_input_block\"\n />\n <Text className=\"subtitle\">\n {t(\"Common:Example\", {\n example: EDITOR_URL_PLACEHOLDER,\n })}\n </Text>\n <Checkbox\n id=\"isDisabledCertificat\"",
       "module": "/packages/client"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

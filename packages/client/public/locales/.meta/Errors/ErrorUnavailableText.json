@@ -3,7 +3,7 @@
   "content": "{{productName}} unavailable",
   "content_en_sha1_hash": "cea8f8fad51c09003165080355d21a1507a41869",
   "created_at": "2025-05-19T21:30:56.422Z",
-  "updated_at": "2026-04-11T21:07:29.814Z",
+  "updated_at": "2026-05-15T14:00:06.875Z",
   "comment": {
     "text": "This is an error message displayed when the ONLYOFFICE DocSpace portal is unavailable. The `{{productName}}` variable will be replaced with the product's brand name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalUnavailable/index.js",
-      "line_number": 90,
+      "line_number": 99,
       "context": "})}\n onClose={onCloseDialog}\n />\n <ErrorContainer\n className=\"portal-unavailable_container\"\n headerText={t(\"ErrorUnavailableText\", {\n productName: getBrandName(\"ProductName\"),\n })}\n >\n <StyledBodyContent>\n <Text textAlign=\"center\" className=\"portal-unavailable_text\">",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

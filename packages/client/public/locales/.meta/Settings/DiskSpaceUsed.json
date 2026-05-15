@@ -3,7 +3,7 @@
   "content": "Disk space used",
   "content_en_sha1_hash": "104ed45d8f5388c7eaf77455256de2e83dea4cc1",
   "created_at": "2025-05-19T21:30:51.205Z",
-  "updated_at": "2026-04-13T14:59:05.901Z",
+  "updated_at": "2026-05-15T14:00:06.872Z",
   "comment": {
     "text": "This is a label indicating the amount of storage space currently occupied. It appears in the storage management settings to show users their disk usage.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/StorageSpaceUsed.js",
-      "line_number": 116,
+      "line_number": 125,
       "context": "onClose={onClose}\n portalInfo={portalInfo}\n />\n ) : null}\n <StyledMainTitle fontSize=\"16px\" fontWeight={700}>\n {t(\"DiskSpaceUsed\")}\n </StyledMainTitle>\n <div className=\"disk-space_content\">\n <div className=\"disk-space_size-info\">\n {!standalone || (standalone && isTenantCustomQuotaSet) ? (\n <Text fontWeight={400} fontSize=\"14px\" className=\"disk-space_title\">",
       "module": "/packages/client"
     }

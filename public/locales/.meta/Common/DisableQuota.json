@@ -3,7 +3,7 @@
   "content": "Disable quota",
   "content_en_sha1_hash": "13a8e1d1f088c27730510bb9d3e85366580a74b1",
   "created_at": "2025-05-19T21:30:44.544Z",
-  "updated_at": "2026-04-11T20:55:00.046Z",
+  "updated_at": "2026-05-15T14:00:06.625Z",
   "comment": {
     "text": "This is a button label that disables the storage quota for a user or the entire portal.",
     "is_auto": true,
@@ -13,37 +13,37 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/SpaceQuota/index.js",
-      "line_number": 63,
+      "line_number": 72,
       "context": "id: \"info-account-quota_no-quota\",\n key: \"no-quota\",\n label:\n item?.quotaLimit === -1\n ? t(\"Common:Unlimited\")\n : t(\"Common:DisableQuota\"),\n action: \"no-quota\",\n },\n ];\n \n if (item.isCustomQuota)",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/StorageSpaceUsed.js",
-      "line_number": 86,
+      "line_number": 95,
       "context": "icon: ChangQuotaReactSvgUrl,\n onClick: onChangeDialogClick,\n },\n {\n key: \"disable-quota\",\n label: t(\"Common:DisableQuota\"),\n icon: DisableQuotaReactSvgUrl,\n onClick: onDisableDialogClick,\n },\n ];\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/HeaderMenuStore.ts",
-      "line_number": 222,
+      "line_number": 231,
       "context": "onClick: () => this.resetUserQuota(selection as unknown as TUser[], t),\n },\n {\n id: \"menu-disable-quota\",\n key: \"disable-quota\",\n label: t(\"Common:DisableQuota\"),\n disabled: !hasUsersToDisableQuota || isGuests,\n iconUrl: DisableQuotaReactSvgUrl,\n onClick: () =>\n this.disableUserQuota(selection as unknown as TUser[], t),\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 428,
+      "line_number": 437,
       "context": "case \"disable-quota\":\n if (!this.isAvailableOption(\"disable-quota\")) return null;\n return {\n id: \"menu-disable-quota\",\n key: \"disable-quota\",\n label: t(\"Common:DisableQuota\"),\n iconUrl: DisableQuotaReactSvgUrl,\n onClick: this.disableRoomQuotaHandle,\n disabled: !showStorageInfo,\n };\n case \"disable-agent-quota\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 428,
+      "line_number": 437,
       "context": "case \"disable-quota\":\n if (!this.isAvailableOption(\"disable-quota\")) return null;\n return {\n id: \"menu-disable-quota\",\n key: \"disable-quota\",\n label: t(\"Common:DisableQuota\"),\n iconUrl: DisableQuotaReactSvgUrl,\n onClick: this.disableRoomQuotaHandle,\n disabled: !showStorageInfo,\n };\n case \"disable-agent-quota\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/management/src/app/spaces/multiple/spaces-row.tsx",
-      "line_number": 135,
+      "line_number": 144,
       "context": "icon: ChangeQuotaReactSvgUrl,\n onClick: onChangeQuota,\n },\n {\n key: \"disable_quota\",\n label: t(\"Common:DisableQuota\"),\n icon: DisableQuotaReactSvgUrl,\n onClick: onDisableQuota,\n },\n );\n }",
       "module": "/packages/management"
     }
@@ -179,7 +179,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

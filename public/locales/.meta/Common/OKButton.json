@@ -3,7 +3,7 @@
   "content": "OK",
   "content_en_sha1_hash": "9ce3bd4224c8c1780db56b4125ecf3f24bf748b7",
   "created_at": "2025-06-05T23:02:58.880Z",
-  "updated_at": "2026-04-23T17:24:01.687Z",
+  "updated_at": "2026-05-15T14:00:06.633Z",
   "comment": {
     "text": "This is the label for an \"OK\" button, typically used to confirm an action or close a dialog box.",
     "is_auto": true,
@@ -13,55 +13,55 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/dialogs/ChangePricingPlanDialog.tsx",
-      "line_number": 118,
+      "line_number": 127,
       "context": "</div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"ok-button\"\n label={t(\"OKButton\")}\n size={ButtonSize.normal}\n primary\n onClick={onCloseModal}\n tabIndex={3}\n />",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ArchiveDialog/index.js",
-      "line_number": 106,
+      "line_number": 115,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"shared_move-to-archived-modal_submit\"\n key=\"OKButton\"\n label={t(\"Common:OKButton\")}\n size=\"normal\"\n primary\n onClick={onAction}\n scale\n isDisabled={isLoading}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeQuotaDialog/index.js",
-      "line_number": 66,
+      "line_number": 75,
       "context": "/>\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:OKButton\")}\n size=\"normal\"\n primary\n onClick={onSaveClick}\n isLoading={isLoading}\n isDisabled={initialSize == size || size.trim() === \"\"}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
-      "line_number": 338,
+      "line_number": 347,
       "context": "headerLabel={t(\"Common:ActionRequired\")}\n isLoading={!ready}\n onSubmit={isUploadConflict ? onAcceptUploadType : onAcceptType}\n onClose={onCloseConflictDialog}\n cancelButtonLabel={t(\"CancelButton\")}\n submitButtonLabel={t(\"OKButton\")}\n messageText={messageText}\n selectActionText={t(\"Common:ConflictResolveSelectAction\")}\n overwriteTitle={overwriteTitle}\n overwriteDescription={overwriteDescription}\n duplicateTitle={duplicateTitle}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Footer/index.js",
-      "line_number": 55,
+      "line_number": 64,
       "context": "<Button\n label={\n isAbortTransfer && percent !== 100\n ? t(\"DataReassignmentDialog:StartTransferAgain\")\n : percent === 100\n ? t(\"Common:OKButton\")\n : t(\"DataReassignmentDialog:AbortTransfer\")\n }\n size=\"normal\"\n scale\n onClick={",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 196,
+      "line_number": 205,
       "context": "if (isRecycleBinFolder)\n return t(\"Common:DeleteForeverButton\");\n \n if (isPrivacyFolder || selection[0]?.providerKey)\n return t(\"Common:OKButton\");\n \n if (unsubscribe) return t(\"Common:Remove\");\n \n return t(\"Common:MoveTo\");\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeletePluginDialog/index.tsx",
-      "line_number": 72,
+      "line_number": 81,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"delete-button\"\n key=\"DeletePortalBtn\"\n label={t(\"Common:OKButton\")}\n size={ButtonSize.normal}\n scale\n primary\n isLoading={isRequestRunning}\n testId=\"confirm_delete_plugin_button\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/index.js",
-      "line_number": 185,
+      "line_number": 194,
       "context": "<Button\n key=\"OKButton\"\n label={\n isPaymentPageAvailable\n ? t(\"Common:UpgradePlan\")\n : t(\"Common:OKButton\")\n }\n size=\"normal\"\n primary\n onClick={isPaymentPageAvailable ? onUpgradePlan : onClose}\n scale",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
-      "line_number": 97,
+      "line_number": 106,
       "context": "const okButtonLabel = isRoomOwner\n ? t(\"Files:AssignOwner\")\n : showFormFillingWarning\n ? t(\"Files:LeaveButton\")\n : t(\"Common:OKButton\");\n \n return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{titleText}</ModalDialog.Header>\n <ModalDialog.Body>",
       "module": "/packages/client"
     },
@@ -73,7 +73,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/MoveToPublicRoom/index.js",
-      "line_number": 135,
+      "line_number": 144,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"delete-file-modal_submit\"\n key=\"OKButton\"\n label={t(\"Common:OKButton\")}\n size=\"normal\"\n primary\n scale\n onClick={onMoveTo}\n isLoading={isLoading}",
       "module": "/packages/client"
     },
@@ -85,91 +85,91 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ResetConfirmationDialog/ResetConfirmationModal.js",
-      "line_number": 53,
+      "line_number": 62,
       "context": "</ModalDialog.Body>\n \n <ModalDialog.Footer>\n <Button\n id=\"ok-button\"\n label={t(\"Common:OKButton\")}\n onClick={confirmReset}\n primary\n scale\n size=\"normal\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/dialogs/disable/index.tsx",
-      "line_number": 85,
+      "line_number": 94,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n size={ButtonSize.normal}\n label={t(\"Common:OKButton\")}\n scale\n onClick={onSubmitAction}\n isLoading={loading}\n testId=\"disable-mcp-button\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/DeleteDialog.tsx",
-      "line_number": 91,
+      "line_number": 100,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"delete-button\"\n key=\"DeletePortalBtn\"\n label={t(\"Common:OKButton\")}\n size={ButtonSize.normal}\n scale\n primary\n isLoading={isRequestRunning}\n onClick={onDeleteClick}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/DisableDialog.tsx",
-      "line_number": 96,
+      "line_number": 105,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"delete-button\"\n key=\"DeletePortalBtn\"\n label={t(\"Common:OKButton\")}\n size={ButtonSize.normal}\n scale\n primary\n isLoading={isRequestRunning}\n onClick={onDisableClick}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/PreviewDialog.tsx",
-      "line_number": 289,
+      "line_number": 298,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n size={ButtonSize.normal}\n scale\n label={t(\"Common:OKButton\")}\n onClick={onClose}\n testId=\"preview_dialog_ok_button\"\n />\n </ModalDialog.Footer>\n </ModalDialog>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ResetDialog.tsx",
-      "line_number": 83,
+      "line_number": 92,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"delete-button\"\n key=\"DeletePortalBtn\"\n label={t(\"Common:OKButton\")}\n size={ButtonSize.normal}\n scale\n primary\n isLoading={isRequestRunning}\n onClick={onResetClick}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/CertificateDialog.js",
-      "line_number": 157,
+      "line_number": 166,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"submit\"\n key=\"LdapCertificateConfirmBtn\"\n label={t(\"Common:OKButton\")}\n size=\"normal\"\n type=\"submit\"\n primary\n onClick={onSaveAction}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/sub-components/PluginCacheWarningDialog.tsx",
-      "line_number": 69,
+      "line_number": 78,
       "context": "/>\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:OKButton\")}\n size={ButtonSize.normal}\n onClick={onClose}\n scale\n testId=\"plugin_cache_warning_ok_button\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/AddIdpCertificateModal.js",
-      "line_number": 79,
+      "line_number": 88,
       "context": "</ModalDialog.Body>\n \n <ModalDialog.Footer>\n <Button\n id=\"ok-button\"\n label={t(\"Common:OKButton\")}\n onClick={() => addIdpCertificate(t)}\n primary\n scale\n isLoading={isCertificateLoading}\n isDisabled={!idpCertificate}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/AddSpCertificateModal.js",
-      "line_number": 119,
+      "line_number": 128,
       "context": "</ModalDialog.Body>\n \n <ModalDialog.Footer>\n <Button\n id=\"ok-button\"\n label={t(\"Common:OKButton\")}\n onClick={() => addSpCertificate(t)}\n primary\n size=\"normal\"\n isLoading={isCertificateLoading}\n isDisabled={isGeneratedCertificate || !spCertificate || !spPrivateKey}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/components/ConflictResolveDialog/ConflictResolveDialog.tsx",
-      "line_number": 51,
+      "line_number": 60,
       "context": "isLoading={false}\n visible={visible}\n onClose={reject}\n onSubmit={resolve}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n submitButtonLabel={t(\"Common:OKButton\")}\n messageText={\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"FileActionRequired\"",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/management/src/app/settings/encrypt-data/EncryptWarningDialog.tsx",
-      "line_number": 88,
+      "line_number": 97,
       "context": "</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"CreateButton\"\n label={t(\"Common:OKButton\")}\n size={ButtonSize.normal}\n scale\n primary\n onClick={onConfirm}\n />",
       "module": "/packages/management"
     },
     {
       "file_path": "/packages/shared/dialogs/backup-to-public-room-dialog/index.tsx",
-      "line_number": 88,
+      "line_number": 97,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"delete-file-modal_submit\"\n key=\"OKButton\"\n label={t(\"Common:OKButton\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={onBackupTo}\n testId=\"save_backup_to_room_button\"",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/change-storage-quota/index.tsx",
-      "line_number": 163,
+      "line_number": 172,
       "context": "/>\n ) : null}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:OKButton\")}\n size={ButtonSize.normal}\n primary\n onClick={onSaveClick}\n isLoading={isLoading}\n isDisabled={!isDisableQuota ? size.trim() === \"\" : false}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/delete-third-party/DeleteThirdPartyDialog.tsx",
-      "line_number": 139,
+      "line_number": 148,
       "context": "<Button\n scale\n primary\n isLoading={isLoading}\n size={ButtonSize.normal}\n label={t(\"Common:OKButton\")}\n onClick={onDeleteThirdParty}\n testId=\"delete_third_party_button\"\n />\n <Button\n scale",
       "module": "/packages/shared"
     }
@@ -305,7 +305,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

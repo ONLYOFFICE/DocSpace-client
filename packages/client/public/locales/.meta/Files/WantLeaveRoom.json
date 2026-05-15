@@ -3,7 +3,7 @@
   "content": "Do you really want to leave this room? You will be able to join it again via new invitation by a room admin.",
   "content_en_sha1_hash": "13519137916019126edd61d57af7ca5d5cc99ed0",
   "created_at": "2025-05-19T21:30:56.317Z",
-  "updated_at": "2026-04-23T17:24:01.830Z",
+  "updated_at": "2026-05-15T14:00:06.688Z",
   "comment": {
     "text": "This is a confirmation message displayed in a dialog when a user who is not the room owner attempts to leave a room. It informs them that they will need a new invitation to rejoin.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
-      "line_number": 83,
+      "line_number": 92,
       "context": "? t(\"Files:LeaveTheAgent\")\n : t(\"Files:LeaveTheRoom\");\n \n const roomDescription = isRoomOwner\n ? t(\"Files:LeaveRoomDescription\")\n : t(\"Files:WantLeaveRoom\");\n \n const agentDescription = isRoomOwner\n ? t(\"Files:LeaveAgentDescription\")\n : t(\"Files:WantLeaveAgent\");",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

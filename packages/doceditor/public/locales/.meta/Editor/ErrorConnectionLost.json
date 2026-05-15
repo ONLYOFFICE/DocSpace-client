@@ -3,7 +3,7 @@
   "content": "Connection is lost",
   "content_en_sha1_hash": "c25e346b41b0f7af8ceb5d0105edc96661aa8cae",
   "created_at": "2025-05-19T21:30:57.122Z",
-  "updated_at": "2026-04-11T21:29:55.318Z",
+  "updated_at": "2026-05-15T14:00:06.907Z",
   "comment": {
     "text": "This is an error message displayed in a toast notification when the connection to the document editor is lost.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/hooks/useEditorEvents.ts",
-      "line_number": 184,
+      "line_number": 193,
       "context": "const winEditor = window.open(\"\", windowName);\n \n winEditor?.close();\n docEditor?.showMessage?.(\n (e as { message?: string })?.message ??\n t(\"ErrorConnectionLost\") ??\n \"\",\n );\n }\n },\n [fileInfo?.id, t],",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/doceditor/src/hooks/useEditorEvents.ts",
-      "line_number": 184,
+      "line_number": 193,
       "context": "const winEditor = window.open(\"\", windowName);\n \n winEditor?.close();\n docEditor?.showMessage?.(\n (e as { message?: string })?.message ??\n t(\"ErrorConnectionLost\") ??\n \"\",\n );\n }\n },\n [fileInfo?.id, t],",
       "module": "/packages/doceditor"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-04T13:03:19.452785Z"
+      "approved_at": "2026-05-15T15:04:54.611151Z"
     },
     "si": {
       "ai_translated": false,

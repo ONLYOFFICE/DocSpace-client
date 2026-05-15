@@ -3,7 +3,7 @@
   "content": "URL not valid, example",
   "content_en_sha1_hash": "350049133db4d2b9f084821bdef5f6282c6d77ec",
   "created_at": "2025-05-19T21:30:53.887Z",
-  "updated_at": "2026-04-11T21:18:53.895Z",
+  "updated_at": "2026-05-15T14:00:06.818Z",
   "comment": {
     "text": "This is an error message displayed when a user enters an invalid URL in an input field, indicating that the provided URL format is incorrect. It is followed by an example URL, which is the current origin of the application.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/ClientForm.utils.ts",
-      "line_number": 45,
+      "line_number": 54,
       "context": "export function getOAuthValidationCodeTranslation(\n t: TTranslation,\n code: string,\n ): string {\n switch (code) {\n case \"ErrorWrongURL\":\n return `${t(\"ErrorWrongURL\")}: ${window.location.origin}`;\n case \"ErrorName\":\n return `${t(\"ErrorName\")} 3`;\n \n case \"EmptyFieldError\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/MultiInputGroup.tsx",
-      "line_number": 183,
+      "line_number": 192,
       "context": "value={value}\n placeholder={placeholder}\n onChange={onChange}\n error={\n isError\n ? `${t(\"ErrorWrongURL\")}: ${window.location.origin}`\n : t(\"ThisRequiredField\")\n }\n isRequired\n isError={isError || hasError}\n dataTestId={dataTestId ? `${dataTestId}_input_group` : undefined}",
       "module": "/packages/client"
     }

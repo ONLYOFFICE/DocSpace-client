@@ -1,0 +1,29 @@
+{
+  "key_path": "AIPaywallWaitingPayment",
+  "content": "Waiting for payment...",
+  "content_en_sha1_hash": "99225404d6364c8f2152e6c4b5d94a7a4083fed9",
+  "created_at": "2026-05-15T13:59:46.136Z",
+  "updated_at": "2026-05-15T14:02:06.334Z",
+  "comment": {
+    "text": "Button label displayed during the payment phase of the AI paywall process.",
+    "is_auto": true,
+    "updated_at": "2026-05-15T14:02:06.334Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallPage.tsx",
+      "line_number": 322,
+      "context": "<Button\n size={ButtonSize.small}\n primary\n label={\n waitingPhase === \"payment\"\n ? t(\"AIPaywallWaitingPayment\")\n : waitingPhase === \"topup\"\n ? t(\"AIPaywallWaitingTopUp\")\n : t(\"AIPaywallEnableButton\", { price: selectedAmount })\n }\n onClick={onEnableAI}",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

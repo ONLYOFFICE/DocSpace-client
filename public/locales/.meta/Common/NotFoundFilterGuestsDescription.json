@@ -3,7 +3,7 @@
   "content": "No guests match your search. Please adjust your search parameters or clear the search field to view the full list of guests.",
   "content_en_sha1_hash": "1297a129afd4993c61bd2730abb16504a0df9cfe",
   "created_at": "2025-05-19T21:30:46.855Z",
-  "updated_at": "2026-05-08T13:10:45.606Z",
+  "updated_at": "2026-05-15T14:00:06.748Z",
   "comment": {
     "text": "This is an error message displayed when a search for guests yields no results. It suggests adjusting the search or clearing the field.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/People/index.tsx",
-      "line_number": 783,
+      "line_number": 788,
       "context": "? t(\"NotFoundMembers\")\n : t(\"NotFoundGroups\")\n }\n searchEmptyScreenDescription={\n activeTabId === GUESTS_TAB_ID\n ? t(\"NotFoundFilterGuestsDescription\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"NotFoundUsersDescription\")\n : t(\"GroupsNotFoundDescription\")\n }\n hasNextPage={hasNextPage}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/EmptyScreen.tsx",
-      "line_number": 92,
+      "line_number": 101,
       "context": ": t(\"Common:NotFoundGuests\")\n : t(\"Common:NotFoundMembers\");\n \n const description = isEmptyGuests\n ? isFiltered\n ? t(\"Common:NotFoundFilterGuestsDescription\")\n : t(\"Common:NotFoundGuestsDescription\")\n : isEmptyGroup\n ? t(\"Common:EmptyGroupDescription\")\n : t(\"Common:NotFoundUsersDescription\");",
       "module": "/packages/client"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

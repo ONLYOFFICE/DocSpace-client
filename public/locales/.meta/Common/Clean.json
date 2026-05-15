@@ -3,7 +3,7 @@
   "content": "Clean",
   "content_en_sha1_hash": "fa893d87e1fa0a69c7942dd1e65f3bd1932e53d1",
   "created_at": "2025-08-26T11:15:03.639Z",
-  "updated_at": "2026-04-11T20:57:14.114Z",
+  "updated_at": "2026-05-15T14:00:06.940Z",
   "comment": {
     "text": "This is a button label that, when clicked, clears the password set for a shared link.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/PasswordAccessBlock.tsx",
-      "line_number": 171,
+      "line_number": 180,
       "context": "fontWeight={600}\n type={LinkType.action}\n onClick={onCleanClick}\n dataTestId=\"edit_link_panel_clean_password_link\"\n >\n {t(\"Common:Clean\")}\n </Link>\n <Link\n isHovered\n fontSize=\"13px\"\n fontWeight={600}",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

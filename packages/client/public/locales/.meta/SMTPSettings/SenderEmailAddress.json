@@ -3,7 +3,7 @@
   "content": "Sender Email Address",
   "content_en_sha1_hash": "6024d73decdbc08c243c279344fce41f143a2909",
   "created_at": "2025-05-19T21:30:53.309Z",
-  "updated_at": "2026-04-11T21:21:03.476Z",
+  "updated_at": "2026-05-15T14:00:06.854Z",
   "comment": {
     "text": "This is a label for an input field where the user enters the email address that will appear as the sender of emails sent from the system.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/sub-components/CustomSettings.js",
-      "line_number": 227,
+      "line_number": 236,
       "context": "scale\n testId=\"smtp_sender_display_name_input\"\n />\n \n <div className=\"smtp-settings_title\">\n <Text {...commonTextProps}>{t(\"SenderEmailAddress\")}</Text>\n <Text as=\"span\" {...requirementColor}>\n *\n </Text>\n </div>\n <FieldContainer",
       "module": "/packages/client"
     }

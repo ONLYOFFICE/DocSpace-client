@@ -3,7 +3,7 @@
   "content": "Upload files from  {{sectionNameFirst}} or {{sectionNameSecond}}",
   "content_en_sha1_hash": "999378b1fec3d96479479987437a554a9464d2ac",
   "created_at": "2025-10-27T16:14:31.672Z",
-  "updated_at": "2026-04-11T21:01:43.634Z",
+  "updated_at": "2026-05-15T14:00:06.600Z",
   "comment": {
     "text": "This is a descriptive text displayed in an empty container, prompting the user to upload files. It appears when a folder or section is empty, offering two sources for file uploads, represented by `{{sectionNameFirst}}` and `{{sectionNameSecond}}`.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 551,
+      "line_number": 560,
       "context": "if (isKnowledgeTab) {\n const uploadFilesFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: getBrandName(\"ProductName\"),\n }),\n t(\"AIRoom:UploadFilesPortal\", {\n sectionNameFirst: t(\"Common:MyDocuments\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n \"\",\n true,",
       "module": "/packages/client"
     }
@@ -24,6 +24,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [],
       "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     }
   }
 }

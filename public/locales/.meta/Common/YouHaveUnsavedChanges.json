@@ -3,7 +3,7 @@
   "content": "You have unsaved changes",
   "content_en_sha1_hash": "5ea3902f149163da1cf57472568ec3a89d52e790",
   "created_at": "2025-05-19T21:30:53.245Z",
-  "updated_at": "2026-04-24T09:35:23.096Z",
+  "updated_at": "2026-05-15T14:00:06.769Z",
   "comment": {
     "text": "This is a reminder message displayed above \"Save\" and \"Cancel\" buttons, indicating that changes have been made but not yet saved.",
     "is_auto": true,
@@ -13,133 +13,133 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ad-management.tsx",
-      "line_number": 208,
+      "line_number": 217,
       "context": "<SaveCancelButtons\n className={styles.saveCancelButtons}\n onSaveClick={onSave}\n onCancelClick={onCancel}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ai-services-management.tsx",
-      "line_number": 279,
+      "line_number": 288,
       "context": "<SaveCancelButtons\n className={styles.saveCancelButtons}\n onSaveClick={onSave}\n onCancelClick={onCancel}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/configure-deep-link.tsx",
-      "line_number": 250,
+      "line_number": 259,
       "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSave}\n onCancelClick={onCancel}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/language-and-time-zone.js",
-      "line_number": 558,
+      "line_number": 567,
       "context": "tabIndex={3}\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={hasScroll}\n additionalClassSaveButton=\"language-time-zone-save\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 382,
+      "line_number": 391,
       "context": "onSaveClick={onOpenModal}\n onCancelClick={onCancelPortalName}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n displaySettings\n hasScroll={hasScroll}\n saveButtonDisabled={!!errorValue}\n additionalClassSaveButton=\"portal-renaming-save\"\n additionalClassCancelButton=\"portal-renaming-cancel\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/welcome-page-settings.js",
-      "line_number": 413,
+      "line_number": 422,
       "context": "id=\"buttonsWelcomePage\"\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveGreetingSettings}\n onCancelClick={onRestoreGreetingSettings}\n showReminder={state.showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n hasScroll={state.hasScroll}\n disableRestoreToDefault={greetingSettingsIsDefault}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 424,
+      "line_number": 433,
       "context": "<SaveCancelButtons\n onSaveClick={onSubmit}\n onCancelClick={onReset}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Settings:DefaultSettings\")}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonDisabled={saveButtonDisabled}\n disableRestoreToDefault={\n isDefaultSettings || isSaveLoading || isResetLoading\n }\n displaySettings",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/adminMessage.js",
-      "line_number": 210,
+      "line_number": 219,
       "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n additionalClassSaveButton=\"admin-message-save\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/devToolsAccess.tsx",
-      "line_number": 245,
+      "line_number": 254,
       "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 346,
+      "line_number": 355,
       "context": "<SaveCancelButtons\n className={styles.saveCancelButtons}\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
-      "line_number": 341,
+      "line_number": 350,
       "context": "<SaveCancelButtons\n className={styles.saveCancelButtons}\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/passwordStrength.js",
-      "line_number": 317,
+      "line_number": 326,
       "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/sessionLifetime.js",
-      "line_number": 310,
+      "line_number": 319,
       "context": "<SaveCancelButtons\n className={styles.saveCancelButtons}\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n additionalClassSaveButton=\"session-lifetime-save\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 296,
+      "line_number": 305,
       "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/trustedMail.js",
-      "line_number": 338,
+      "line_number": 347,
       "context": "<SaveCancelButtons\n className={styles.saveCancelButtons}\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/sub-components/HistoryMainContent.js",
-      "line_number": 277,
+      "line_number": 286,
       "context": "onSaveClick={setLifeTimeSettings}\n onCancelClick={onCancelLoginLifeTime}\n saveButtonLabel={saveButtonLabel}\n cancelButtonLabel={cancelButtonLabel}\n showReminder={loginLifeTimeReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n displaySettings={true}\n hasScroll={false}\n isDisabled={isSettingNotPaid}\n />\n </>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/sub-components/HistoryMainContent.js",
-      "line_number": 277,
+      "line_number": 286,
       "context": "onSaveClick={setLifeTimeSettings}\n onCancelClick={onCancelLoginLifeTime}\n saveButtonLabel={saveButtonLabel}\n cancelButtonLabel={cancelButtonLabel}\n showReminder={loginLifeTimeReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n displaySettings={true}\n hasScroll={false}\n isDisabled={isSettingNotPaid}\n />\n </>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/quota-form/index.tsx",
-      "line_number": 297,
+      "line_number": 306,
       "context": "isSaving={isLoading}\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n displaySettings\n saveButtonDisabled={isDefaultQuota}\n disableRestoreToDefault={isDefaultQuota}\n showReminder={!isDefaultQuota}\n saveButtonDataTestId={",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/AdditionalResources/index.tsx",
-      "line_number": 124,
+      "line_number": 133,
       "context": "onSaveClick={onSaveAction}\n onCancelClick={onRestore}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n showReminder={(isSettingPaid && hasChanges) || isLoading}\n disableRestoreToDefault={additionalResourcesIsDefault || isLoading}\n additionalClassSaveButton=\"additional-resources-save\"\n additionalClassCancelButton=\"additional-resources-cancel\"\n saveButtonDataTestId=\"additional-resources-save-button\"",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/BrandName/index.tsx",
-      "line_number": 193,
+      "line_number": 202,
       "context": ")}\n onSaveClick={onSaveAction}\n onCancelClick={onCancelAction}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n displaySettings\n saveButtonDisabled={isEqualText || hasError}\n disableRestoreToDefault={isEqualText}\n showReminder={showReminder}\n saveButtonDataTestId=\"brand_name_save_button\"",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 304,
+      "line_number": 313,
       "context": ")}\n onSaveClick={onSaveAction}\n onCancelClick={onRestoreAction}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n displaySettings\n saveButtonDisabled={isDisabled}\n hasScroll\n hideBorder\n showReminder={(isSettingPaid && hasChanges) || isLoading}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 616,
+      "line_number": 625,
       "context": "cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n hasScroll\n hideBorder\n showReminder={!isEqualLogo}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonDisabled={isEqualLogo}\n disableRestoreToDefault={!enableRestoreButton}\n isSaving={isSaving}\n additionalClassSaveButton=\"white-label-save\"\n additionalClassCancelButton=\"white-label-cancel\"",
       "module": "/packages/shared"
     }
@@ -335,7 +335,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null,
+      "approved_at": "2026-05-15T15:04:54.259137Z",
       "ai_spell_check_verified_at": "2026-04-24T09:33:59.814Z",
       "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
       "ai_spell_check_verified_hash": "268a25548f5c4a84"

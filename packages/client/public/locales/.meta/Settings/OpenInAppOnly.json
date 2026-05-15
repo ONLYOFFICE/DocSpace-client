@@ -3,7 +3,7 @@
   "content": "Open in app only",
   "content_en_sha1_hash": "b846e99fcf5e7930f2706ee5cc4592c7f355bb61",
   "created_at": "2025-05-19T21:30:52.110Z",
-  "updated_at": "2026-04-11T21:23:10.286Z",
+  "updated_at": "2026-05-15T14:00:06.770Z",
   "comment": {
     "text": "This is a radio button label in the deep link configuration settings. It indicates that documents should only open in the ONLYOFFICE application, not in a web browser.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/configure-deep-link.tsx",
-      "line_number": 237,
+      "line_number": 246,
       "context": "value: 1,\n dataTestId: \"deep_link_by-web\",\n },\n {\n id: \"by-app\",\n label: t(\"OpenInAppOnly\"),\n value: 2,\n dataTestId: \"deep_link_by-app\",\n },\n ]}\n selected={type}",
       "module": "/packages/client"
     }

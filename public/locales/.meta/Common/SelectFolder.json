@@ -3,7 +3,7 @@
   "content": "Select folder",
   "content_en_sha1_hash": "20e97c9844509f09cc9df74473a387bfe234b56e",
   "created_at": "2025-05-19T21:30:48.430Z",
-  "updated_at": "2026-04-12T22:00:36.677Z",
+  "updated_at": "2026-05-15T14:00:06.610Z",
   "comment": {
     "text": "This is a button label or tooltip text that prompts the user to choose a folder. It appears when selecting a destination for files or when configuring a folder input.",
     "is_auto": true,
@@ -13,25 +13,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/FolderInput.tsx",
-      "line_number": 211,
+      "line_number": 220,
       "context": "</span>\n ) : null}\n </TooltipContainer>\n <TooltipContainer\n as=\"div\"\n title={t(\"Common:SelectFolder\")}\n className=\"icon-wrapper\"\n >\n <IconButton size={16} iconName={FolderReactSvgUrl} isClickable />\n </TooltipContainer>\n </StyledFolderInput>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 51,
+      "line_number": 60,
       "context": "isFormRoom?: boolean,\n isThirdParty?: boolean,\n isSelectFolder?: boolean,\n ) => {\n if (isRestore) return t(\"Common:RestoreTo\");\n if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isMove) return t(\"Common:MoveTo\");\n if (isCopy && !isEditorDialog) return t(\"Common:Copy\");\n if (isRestoreAll) return t(\"Common:Restore\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
-      "line_number": 439,
+      "line_number": 448,
       "context": "/>\n <ControlsSection>\n <CategorySubHeader>{t(\"DestinationFolderId\")}</CategorySubHeader>\n <ControlsGroup>\n <LabelGroup>\n <Label className=\"label\" text={t(\"Common:SelectFolder\")} />\n <HelpButton\n offsetRight={0}\n size={12}\n place=\"right-end\"\n tooltipContent={",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/files-selector-input/FilesSelector.helpers.ts",
-      "line_number": 35,
+      "line_number": 44,
       "context": "t: TTranslation,\n isSelect?: boolean,\n filterParam?: string,\n isSelectFolder?: boolean,\n ) => {\n if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (filterParam === FilesSelectorFilterTypes.DOCX)",
       "module": "/packages/shared"
     }

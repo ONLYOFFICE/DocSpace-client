@@ -3,7 +3,7 @@
   "content": "Section \"Users\" includes the users you selected in the previous step. By default, it is always enabled and can't be unselected.",
   "content_en_sha1_hash": "a1aa96cf088012a8b3bb36cb32c986c521187c04",
   "created_at": "2025-05-19T21:30:53.169Z",
-  "updated_at": "2026-04-11T21:21:22.684Z",
+  "updated_at": "2026-05-15T14:00:06.784Z",
   "comment": {
     "text": "Description for a section in the data import settings. It explains that the \"Users\" section is always enabled and cannot be deselected during the import process.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 128,
+      "line_number": 137,
       "context": "return (\n <Wrapper>\n <ImportSection\n isChecked\n sectionName={t(\"InfoPanel:Users\")}\n description={t(\"Settings:UsersSectionDescription\")}\n exportSection={{\n sectionName: usersExportDetails.name,\n workspace: serviceName,\n sectionIcon: usersExportDetails.icon,\n }}",
       "module": "/packages/client"
     }

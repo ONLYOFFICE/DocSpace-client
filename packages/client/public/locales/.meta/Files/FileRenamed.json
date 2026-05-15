@@ -3,7 +3,7 @@
   "content": "The document '{{oldTitle}}' is renamed to '{{newTitle}}'",
   "content_en_sha1_hash": "336eeeca9a65f25c4a36baaba98cd68b80c397f5",
   "created_at": "2025-05-19T21:30:55.681Z",
-  "updated_at": "2026-04-11T21:09:33.810Z",
+  "updated_at": "2026-05-15T14:00:06.613Z",
   "comment": {
     "text": "This is a toast message confirming a file rename. It appears after a user successfully renames a file, informing them of the old and new file names. `{{oldTitle}}` and `{{newTitle}}` are placeholders for the original and new file names, respectively.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/GlobalEvents/RenameEvent.js",
-      "line_number": 95,
+      "line_number": 104,
       "context": "isFile\n ? await updateFile(item.id, value)\n .then(() => completeAction(item, type))\n .then(() =>\n toastr.success(\n t(\"FileRenamed\", {\n oldTitle: item.title,\n newTitle: value + item.fileExst,\n }),\n ),\n )",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

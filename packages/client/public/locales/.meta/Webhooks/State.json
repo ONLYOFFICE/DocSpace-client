@@ -3,7 +3,7 @@
   "content": "State",
   "content_en_sha1_hash": "a72502067518684f9deeec70cf119fd26326cd33",
   "created_at": "2025-05-19T21:30:49.847Z",
-  "updated_at": "2026-04-13T14:59:05.852Z",
+  "updated_at": "2026-05-15T14:00:06.794Z",
   "comment": {
     "text": "This is a table column header. It indicates the current status or condition of an item, such as an API key, OAuth application, or webhook.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/TableView/TableHeader.tsx",
-      "line_number": 88,
+      "line_number": 97,
       "context": "title: t(\"Common:Permissions\"),\n enable: true,\n resizable: true,\n },\n {\n key: \"State\",\n title: t(\"State\"),\n enable: true,\n resizable: true,\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/List/TableView/sub-components/Header.tsx",
-      "line_number": 71,
+      "line_number": 80,
       "context": "withTagRef: true,\n minWidth: 150,\n },\n {\n key: \"State\",\n title: t(\"Webhooks:State\"),\n enable: true,\n resizable: false,\n defaultSize: 64,\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhooksTable/WebhooksTableView/WebhookTableHeader.js",
-      "line_number": 111,
+      "line_number": 120,
       "context": "enable: true,\n resizable: true,\n onChange: onColumnChange,\n },\n {\n key: \"State\",\n title: t(\"State\"),\n enable: true,\n resizable: true,\n onChange: onColumnChange,\n },",
       "module": "/packages/client"
     }

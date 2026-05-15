@@ -3,7 +3,7 @@
   "content": "Expires",
   "content_en_sha1_hash": "a99be3da0c9da2f3c64500b5ef8a8e48f503d127",
   "created_at": "2025-05-19T21:30:53.889Z",
-  "updated_at": "2026-04-11T21:18:52.989Z",
+  "updated_at": "2026-05-15T14:00:06.825Z",
   "comment": {
     "text": "This is a label indicating the expiration date of a developer token. It appears next to a specific date.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/GenerateDeveloperTokenDialog.tsx",
-      "line_number": 240,
+      "line_number": 249,
       "context": "testId=\"generate_token_input\"\n />\n <Text dataTestId=\"generate_token_dates\" className=\"dates\">\n <strong>{t(\"Files:ByCreation\")}</strong>: {dates.created}\n <br />\n <strong>{t(\"Expires\")}</strong>: {dates.expires}\n </Text>\n </>\n )}\n </StyledGenerateDevelopTokenContainer>\n </ModalDialog.Body>",
       "module": "/packages/client"
     }

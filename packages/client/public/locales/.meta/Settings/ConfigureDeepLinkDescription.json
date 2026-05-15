@@ -3,7 +3,7 @@
   "content": "When handling documents in a mobile browser, users can be offered (or not) the choice of opening the file in a browser or in the mobile app.",
   "content_en_sha1_hash": "afb876d6cee5ba727fb68bd3489940d7d4460ac1",
   "created_at": "2025-05-19T21:30:50.957Z",
-  "updated_at": "2026-04-11T21:49:14.367Z",
+  "updated_at": "2026-05-15T14:00:06.770Z",
   "comment": {
     "text": "This is a subtitle for a settings category. It explains the purpose of the \"Configure Deep Link\" setting, which allows administrators to control how mobile users open documents.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
-      "line_number": 102,
+      "line_number": 111,
       "context": "badgeLabel={t(\"Common:Paid\")}\n />\n ) : null}\n <CategoryItem\n title={t(\"ConfigureDeepLink\")}\n subtitle={t(\"ConfigureDeepLinkDescription\")}\n url=\"/portal-settings/customization/general/configure-deep-link\"\n onClickLink={onClickLink}\n />\n {isEnterprise ? (\n <CategoryItem",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/configure-deep-link.tsx",
-      "line_number": 202,
+      "line_number": 211,
       "context": "{!isMobileView ? (\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"ConfigureDeepLink\")}\n </Text>\n ) : null}\n <Text>{t(\"ConfigureDeepLinkDescription\")}</Text>\n {configureDeepLinkUrl ? (\n <Link\n className=\"link-learn-more\"\n color={currentColorScheme?.main?.accent ?? undefined}\n target={LinkTarget.blank}",
       "module": "/packages/client"
     }

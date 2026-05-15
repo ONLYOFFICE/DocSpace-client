@@ -3,7 +3,7 @@
   "content": "Webhook removed",
   "content_en_sha1_hash": "80509c5a189f693eee965d8eb57cef6201a59d6e",
   "created_at": "2025-05-19T21:30:49.885Z",
-  "updated_at": "2026-04-11T21:28:05.103Z",
+  "updated_at": "2026-05-15T14:00:06.837Z",
   "comment": {
     "text": "Toast message. Appears after a webhook has been successfully deleted.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/index.js",
-      "line_number": 118,
+      "line_number": 127,
       "context": "};\n \n const handleWebhookDelete = async () => {\n try {\n await deleteWebhook(currentWebhook);\n toastr.success(t(\"WebhookRemoved\"));\n } catch (error) {\n toastr.error(error);\n }\n };",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Select date",
   "content_en_sha1_hash": "b84a6ecbc04c1f54b6fa504c6441ca78e07db586",
   "created_at": "2025-05-19T21:30:48.374Z",
-  "updated_at": "2026-05-08T13:10:45.589Z",
+  "updated_at": "2026-05-15T14:00:06.713Z",
   "comment": {
     "text": "This is the label for a date picker component, prompting the user to choose a specific date.",
     "is_auto": true,
@@ -13,31 +13,31 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
-      "line_number": 411,
+      "line_number": 418,
       "context": "1: (\n <DatePicker\n key=\"start-date-picker\"\n initialDate={startDate}\n onChange={onStartDateChange}\n selectDateText={t(\"SelectDate\")}\n locale={getCookie(LANGUAGE) ?? \"en\"}\n openDate={startDate}\n minDate={undefined}\n maxDate={endDate}\n outerDate={startDate}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
-      "line_number": 411,
+      "line_number": 418,
       "context": "1: (\n <DatePicker\n key=\"start-date-picker\"\n initialDate={startDate}\n onChange={onStartDateChange}\n selectDateText={t(\"SelectDate\")}\n locale={getCookie(LANGUAGE) ?? \"en\"}\n openDate={startDate}\n minDate={undefined}\n maxDate={endDate}\n outerDate={startDate}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/panels/LinkSettingsPanel/index.tsx",
-      "line_number": 312,
+      "line_number": 321,
       "context": "locale={locale}\n hasError={false}\n onChange={(date) => setLimitDate(date)}\n openDate={new Date()}\n className={styles.linkSettingsDatePicker}\n selectDateText={t(\"Common:SelectDate\")}\n initialDate={limitDate}\n minDate={subtractFromDate(now(), 1, \"days\") ?? undefined}\n maxDate={maxDate}\n useMaxTime={!activeLink.expirationDate}\n translations={{ AM: t(\"Common:AM\"), PM: getConstName(\"PM\") }}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/FilterDialog/DeliveryDatePicker.js",
-      "line_number": 257,
+      "line_number": 266,
       "context": ") : (\n <DatePicker\n outerDate={filters.deliveryDate}\n isMobile={isMobile()}\n onChange={onDateSet}\n selectDateText={t(\"Common:SelectDate\")}\n showCalendarIcon={false}\n locale={i18n.language}\n dataTestId=\"delivery_date_picker\"\n />\n )}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/LimitTimeBlock.tsx",
-      "line_number": 87,
+      "line_number": 96,
       "context": "hasError={false}\n onChange={onChange}\n openDate={new Date()}\n initialDate={expirationDate}\n className=\"public-room_date-picker\"\n selectDateText={t(\"Common:SelectDate\")}\n dataTestId=\"edit_link_panel_date_time_picker\"\n useMaxTime\n translations={{ AM: t(\"Common:AM\"), PM: getConstName(\"PM\") }}\n />\n </ToggleBlock>",
       "module": "/packages/shared"
     }
@@ -173,7 +173,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

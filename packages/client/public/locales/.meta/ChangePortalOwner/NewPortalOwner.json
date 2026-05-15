@@ -3,7 +3,7 @@
   "content": "New {{productName}} owner",
   "content_en_sha1_hash": "1dbd9dfcd68022a3ab1a7bcc8a0dea635c19ff3c",
   "created_at": "2025-05-19T21:30:56.996Z",
-  "updated_at": "2026-04-11T21:03:28.624Z",
+  "updated_at": "2026-05-15T14:00:06.644Z",
   "comment": {
     "text": "This text is a label for the new owner in the \"Change Portal Owner\" dialog. It indicates the user who will become the new owner of the portal, with `{{productName}}` being replaced by the product's brand name.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 176,
+      "line_number": 185,
       "context": "</div>\n \n <div className={styles.peopleSelectorInfo}>\n <Text\n className={styles.newOwner}\n title={t(\"NewPortalOwner\", {\n productName: getBrandName(\"ProductName\"),\n })}\n >\n {t(\"NewPortalOwner\", { productName: getBrandName(\"ProductName\") })}\n </Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 176,
+      "line_number": 185,
       "context": "</div>\n \n <div className={styles.peopleSelectorInfo}>\n <Text\n className={styles.newOwner}\n title={t(\"NewPortalOwner\", {\n productName: getBrandName(\"ProductName\"),\n })}\n >\n {t(\"NewPortalOwner\", { productName: getBrandName(\"ProductName\") })}\n </Text>",
       "module": "/packages/client"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

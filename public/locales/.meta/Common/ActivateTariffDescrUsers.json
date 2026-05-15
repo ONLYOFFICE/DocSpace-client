@@ -3,7 +3,7 @@
   "content": "You are using {{organizationName}} {{productName}} {{license}} for <1>{{editingCount}}/{{limit}}</1> users.",
   "content_en_sha1_hash": "fc8824f903419dfbfec80b3c858dc7f474ba087b",
   "created_at": "2025-09-19T15:39:04.596Z",
-  "updated_at": "2026-04-11T21:01:14.799Z",
+  "updated_at": "2026-05-15T14:00:06.957Z",
   "comment": {
     "text": "This is a descriptive text displayed in the tariff title container. It informs the user about their current license usage, specifically the number of active users versus the total allowed. `{{organizationName}}` is the name of the organization, `{{productName}}` is the product name (e.g., DocSpace), `{{license}}` is the type of license, `{{editingCount}}` is the number of users currently editing, and `{{limit}}` is the maximum number of users allowed.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/TariffTitleContainer.tsx",
-      "line_number": 161,
+      "line_number": 170,
       "context": "const getDescription = () => {\n return (\n <Text fontWeight={600} fontSize=\"13px\" as=\"span\">\n {usersStatistics ? (\n <Trans\n i18nKey=\"ActivateTariffDescrUsers\"\n values={{\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

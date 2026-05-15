@@ -3,7 +3,7 @@
   "content": "LDAP Authentication",
   "content_en_sha1_hash": "d11fef55a0f4f7f77f5a743808a9e2af4cfab644",
   "created_at": "2025-05-19T21:30:54.318Z",
-  "updated_at": "2026-04-11T21:16:32.562Z",
+  "updated_at": "2026-05-15T14:00:06.852Z",
   "comment": {
     "text": "This is the label for a toggle switch that enables or disables LDAP authentication for the DocSpace portal.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ToggleLDAP.js",
-      "line_number": 113,
+      "line_number": 122,
       "context": "fontWeight={600}\n lineHeight=\"20px\"\n noSelect\n className=\"settings_unavailable\"\n >\n {t(\"LdapToggle\")}\n </Text>\n {!isLdapAvailable ? (\n <Badge\n backgroundColor={\n theme.isBase",
       "module": "/packages/client"
     }

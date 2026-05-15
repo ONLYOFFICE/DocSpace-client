@@ -3,7 +3,7 @@
   "content": "Import from Nextcloud",
   "content_en_sha1_hash": "404cbbe6db5d9f6a20a347688fdc4598b4e7dce7",
   "created_at": "2025-05-19T21:30:51.664Z",
-  "updated_at": "2026-04-11T21:23:54.656Z",
+  "updated_at": "2026-05-15T14:00:06.758Z",
   "comment": {
     "text": "This is a button label or header text for importing data. It appears when a user chooses to import files from a Nextcloud instance.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
-      "line_number": 369,
+      "line_number": 378,
       "context": "const translatedHeader =\n header === IMPORT_HEADER_CONST\n ? workspace === \"GoogleWorkspace\"\n ? t(\"ImportFromGoogle\")\n : workspace === \"Nextcloud\"\n ? t(\"ImportFromNextcloud\")\n : workspace === \"Workspace\"\n ? t(\"ImportFromPortal\", {\n organizationName: logoText,\n })\n : t(\"DataImport\")",
       "module": "/packages/client"
     }

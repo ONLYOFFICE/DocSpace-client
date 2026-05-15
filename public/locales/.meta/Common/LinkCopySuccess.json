@@ -3,7 +3,7 @@
   "content": "Link has been copied to the clipboard",
   "content_en_sha1_hash": "2254c41229de93951969596ba422451fa0eff387",
   "created_at": "2025-05-19T21:30:46.142Z",
-  "updated_at": "2026-05-08T13:10:45.534Z",
+  "updated_at": "2026-05-15T14:00:06.652Z",
   "comment": {
     "text": "This is a toast message that appears after a user successfully copies a link to their clipboard.",
     "is_auto": true,
@@ -13,79 +13,79 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ConnectAccountDialog/index.tsx",
-      "line_number": 100,
+      "line_number": 109,
       "context": "iconName={CopyReactSvgUrl}\n iconColor={globalColors.lightGrayDark}\n isIconFill\n onIconClick={() => {\n copy(botUrl || \"\");\n toastr.success(t(\"Common:LinkCopySuccess\"));\n }}\n />\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreatedPDFFormDialog/CreatedPDFFormDialog.tsx",
-      "line_number": 78,
+      "line_number": 87,
       "context": "copyShareLink(fileItem, primaryLink, t, getManageLinkOptions(fileItem));\n } catch (error) {\n const url = getItemUrl(file.id, false, false, false);\n if (url) {\n clipboardCopy(url);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n }\n \n console.error(error);\n } finally {\n onClose();",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/MetadataUrlField.js",
-      "line_number": 73,
+      "line_number": 82,
       "context": "}) => {\n const { t } = useTranslation(\"Translations\");\n \n const onCopyClick = () => {\n copy(placeholder);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n return (\n <StyledWrapper>\n <Text className=\"label\" fontSize=\"13px\" as=\"div\" fontWeight={600}>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 509,
+      "line_number": 518,
       "context": "? `${window.location.href}&preview=${id}`\n : webUrl\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n onCopyLink = async (item, t) => {\n const { shared, navigationPath } = this.selectedFolderStore;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 509,
+      "line_number": 518,
       "context": "? `${window.location.href}&preview=${id}`\n : webUrl\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n onCopyLink = async (item, t) => {\n const { shared, navigationPath } = this.selectedFolderStore;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 509,
+      "line_number": 518,
       "context": "? `${window.location.href}&preview=${id}`\n : webUrl\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n onCopyLink = async (item, t) => {\n const { shared, navigationPath } = this.selectedFolderStore;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 509,
+      "line_number": 518,
       "context": "? `${window.location.href}&preview=${id}`\n : webUrl\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n onCopyLink = async (item, t) => {\n const { shared, navigationPath } = this.selectedFolderStore;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 509,
+      "line_number": 518,
       "context": "? `${window.location.href}&preview=${id}`\n : webUrl\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n onCopyLink = async (item, t) => {\n const { shared, navigationPath } = this.selectedFolderStore;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 509,
+      "line_number": 518,
       "context": "? `${window.location.href}&preview=${id}`\n : webUrl\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n onCopyLink = async (item, t) => {\n const { shared, navigationPath } = this.selectedFolderStore;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 509,
+      "line_number": 518,
       "context": "? `${window.location.href}&preview=${id}`\n : webUrl\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n onCopyLink = async (item, t) => {\n const { shared, navigationPath } = this.selectedFolderStore;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 509,
+      "line_number": 518,
       "context": "? `${window.location.href}&preview=${id}`\n : webUrl\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n onCopyLink = async (item, t) => {\n const { shared, navigationPath } = this.selectedFolderStore;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedForm.tsx",
-      "line_number": 105,
+      "line_number": 114,
       "context": "const origin = window.location.origin;\n \n const url = `${origin}/doceditor?fileId=${completedForm.id}`;\n \n await copyShareLink(url);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n const handleDownload = () => {\n window.open(completedForm.viewUrl, \"_self\");\n };",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedVDRForm.tsx",
-      "line_number": 176,
+      "line_number": 185,
       "context": "window.location.assign(fileURL);\n };\n \n const copyLinkFile = async () => {\n await copyShareLink(fileURL);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n const handleClickFile = () => {\n if (isYournTurn) handleFillForm();\n else handleViewForm();",
       "module": "/packages/doceditor"
     },
@@ -233,7 +233,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

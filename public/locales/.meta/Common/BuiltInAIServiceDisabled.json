@@ -3,7 +3,7 @@
   "content": "Built-in AI service, enabled on the <1>Services</1> page",
   "content_en_sha1_hash": "6360bf2a3ac5810fd065a8e703dd6b3d454975c9",
   "created_at": "2026-03-20T09:07:38.718Z",
-  "updated_at": "2026-04-11T20:58:02.999Z",
+  "updated_at": "2026-05-15T14:00:06.964Z",
   "comment": {
     "text": "This is a descriptive text indicating that the built-in AI service is currently disabled. It appears as part of a sentence, with `<1>` and `</1>` tags wrapping a clickable link to the \"Services\" page where the AI service can be enabled.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/ai/getAiProviderLabel.tsx",
-      "line_number": 79,
+      "line_number": 86,
       "context": "return enabled ? (\n (t?.(\"Common:BuiltInAIService\") ?? \"\")\n ) : (\n <Trans\n t={t}\n i18nKey=\"Common:BuiltInAIServiceDisabled\"\n components={{\n 1: (\n <Link\n type={LinkType.action}\n color=\"accent\"",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

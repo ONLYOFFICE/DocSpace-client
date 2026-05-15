@@ -3,7 +3,7 @@
   "content": "Assign Owner",
   "content_en_sha1_hash": "65778d169276fd3b457d09651534e9f5172891db",
   "created_at": "2025-05-19T21:30:55.291Z",
-  "updated_at": "2026-04-23T17:24:01.836Z",
+  "updated_at": "2026-05-15T14:00:06.689Z",
   "comment": {
     "text": "This is a button label. It appears in a dialog when leaving a room, or in a panel for changing the room owner, to confirm the action of assigning ownership to another user.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
-      "line_number": 94,
+      "line_number": 103,
       "context": "const descriptionText = isAIAgent ? agentDescription : roomDescription;\n \n const showFormFillingWarning = isFormFiller && !isAIAgent && !isRoomOwner;\n \n const okButtonLabel = isRoomOwner\n ? t(\"Files:AssignOwner\")\n : showFormFillingWarning\n ? t(\"Files:LeaveButton\")\n : t(\"Common:OKButton\");\n \n return (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
-      "line_number": 113,
+      "line_number": 122,
       "context": "<PeopleSelector\n withCancelButton\n onCancel={handleClosePanel}\n cancelButtonLabel=\"\"\n disableSubmitButton={false}\n submitButtonLabel={showBackButton ? \"\" : t(\"Files:AssignOwner\")}\n onSubmit={onChangeRoomOwner}\n withHeader\n headerProps={{\n onCloseClick: handleClosePanel,\n onBackClick,",
       "module": "/packages/client"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

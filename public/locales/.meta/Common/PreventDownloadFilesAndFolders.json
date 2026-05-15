@@ -3,7 +3,7 @@
   "content": "Enable this setting to disable downloads of files and folders from this room shared via a link",
   "content_en_sha1_hash": "2ea92290a035527ea6287be4963fdb388e78c6ae",
   "created_at": "2025-08-26T11:15:03.614Z",
-  "updated_at": "2026-04-12T03:58:19.601Z",
+  "updated_at": "2026-05-15T14:00:06.940Z",
   "comment": {
     "text": "This is a checkbox label in the link sharing settings for a room. It prevents users who access the room via a shared link from downloading its files and folders.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/index.tsx",
-      "line_number": 427,
+      "line_number": 436,
       "context": ": t(\"Common:ChooseExpirationDate\");\n };\n \n const getDisableDownloadText = () => {\n if (isRoom(item)) {\n return t(\"Common:PreventDownloadFilesAndFolders\");\n }\n \n if (isFile(item)) {\n return t(\"Common:PreventDownloadFile\");\n }",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/index.tsx",
-      "line_number": 427,
+      "line_number": 436,
       "context": ": t(\"Common:ChooseExpirationDate\");\n };\n \n const getDisableDownloadText = () => {\n if (isRoom(item)) {\n return t(\"Common:PreventDownloadFilesAndFolders\");\n }\n \n if (isFile(item)) {\n return t(\"Common:PreventDownloadFile\");\n }",
       "module": "/packages/shared"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "Room cover",
   "content_en_sha1_hash": "629fe77eb87170248f519263ffdf53af11eb35b4",
   "created_at": "2025-05-19T21:30:53.318Z",
-  "updated_at": "2026-04-11T21:21:00.449Z",
+  "updated_at": "2026-05-15T14:00:06.635Z",
   "comment": {
     "text": "This is a dialog title for uploading or editing the cover image for a room. It appears when a user wants to customize the visual representation of a room.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/AvatarEditorDialog/index.js",
-      "line_number": 138,
+      "line_number": 147,
       "context": "const avatarTitle = isProfileUpload\n ? t(\"Ldap:LdapAvatar\")\n : isAIAgentsFolderRoot\n ? t(\"RoomLogoCover:AgentCover\")\n : t(\"RoomLogoCover:RoomCover\");\n \n const onResize = () => {\n const imageCropperModalHeight = IMAGE_CROPPER_HEIGHT + HEADER + BUTTONS;\n const screenHeight = document.documentElement.clientHeight;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/index.tsx",
-      "line_number": 297,
+      "line_number": 306,
       "context": "dataTestId=\"room_logo_cover_dialog\"\n >\n <ModalDialog.Header>\n {isAIAgentsFolderRoot\n ? t(\"RoomLogoCover:AgentCover\")\n : t(\"RoomLogoCover:RoomCover\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <RoomLogoCover\n forwardedRef={contentRef}\n scrollHeight={scrollH}",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Specify your company information, add links to external resources, and email addresses displayed within the online office interface.",
   "content_en_sha1_hash": "db911289c0b4e88a03b617d34244ece86530d80e",
   "created_at": "2025-05-19T21:30:54.243Z",
-  "updated_at": "2026-04-11T21:16:58.252Z",
+  "updated_at": "2026-05-15T14:00:06.851Z",
   "comment": {
     "text": "This is a subtitle for a category item in the LDAP integration settings. It describes the purpose of the \"Sync Data\" section, which is to configure company information, external links, and email addresses for display in the online office.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/LdapMobileView.js",
-      "line_number": 62,
+      "line_number": 71,
       "context": "disabled={!isLdapEnabled}\n dataTestId=\"ldap_settings\"\n />\n <CategoryItem\n title={t(\"Ldap:LdapSyncTitle\")}\n subtitle={t(\"LdapMobileSyncDescription\")}\n url=\"/portal-settings/integration/ldap/sync-data\"\n withPaidBadge={!isLDAPAvailable}\n badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}\n disabled={!isLdapEnabled}",
       "module": "/packages/client"
     }

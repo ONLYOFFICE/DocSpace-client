@@ -3,7 +3,7 @@
   "content": "Activity history will be shown here",
   "content_en_sha1_hash": "4b5dabb38bf7263ad4beff9d5a35d1a36b679bf6",
   "created_at": "2025-05-19T21:30:54.876Z",
-  "updated_at": "2026-04-11T21:13:10.297Z",
+  "updated_at": "2026-05-15T14:00:06.724Z",
   "comment": {
     "text": "This is a text displayed on an empty state screen within the InfoPanel, indicating where the activity history will appear once there is activity to show.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/NoItem/NoHistory.tsx",
-      "line_number": 55,
+      "line_number": 64,
       "context": ">\n <div className=\"no-thumbnail-img-wrapper\">\n <img src={imageSrc} alt=\"No History\" />\n </div>\n <Text className=\"no-history-text\" textAlign=\"center\">\n {t(\"HistoryEmptyScreenText\")}\n </Text>\n </div>\n );\n };",
       "module": "/packages/client"
     }

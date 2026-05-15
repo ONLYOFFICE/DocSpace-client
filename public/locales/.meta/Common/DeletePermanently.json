@@ -3,7 +3,7 @@
   "content": "Delete permanently",
   "content_en_sha1_hash": "e63b5153bde0d2b885dec00616d064be3e88c11b",
   "created_at": "2025-05-19T21:30:44.471Z",
-  "updated_at": "2026-05-08T13:10:45.555Z",
+  "updated_at": "2026-05-15T14:00:06.659Z",
   "comment": {
     "text": "This is a button label or a confirmation dialog message. It indicates that an item will be permanently removed and cannot be recovered, bypassing the trash or recycle bin.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 189,
+      "line_number": 198,
       "context": "if (isTemplate) {\n return t(\"Common:Delete\");\n }\n \n if (isRoomDelete || isAIAgent) {\n return t(\"Common:DeletePermanently\");\n }\n \n if (isRecycleBinFolder)\n return t(\"Common:DeleteForeverButton\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/delete-form-dialog/index.tsx",
-      "line_number": 50,
+      "line_number": 59,
       "context": "void confirm();\n }, [confirm]);\n \n return (\n <ModalDialog visible={visible} onClose={close} autoMaxHeight>\n <ModalDialog.Header>{t(\"Common:DeletePermanently\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{t(\"Common:DeleteItemForever\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
       "module": "/packages/sdk"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

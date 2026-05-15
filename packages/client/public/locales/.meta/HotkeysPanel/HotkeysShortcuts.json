@@ -3,7 +3,7 @@
   "content": "Display keyboard hotkeys list",
   "content_en_sha1_hash": "d746272ad6b80ffced97e2fad978a577b415f8db",
   "created_at": "2025-05-19T21:30:55.096Z",
-  "updated_at": "2026-04-11T21:11:49.660Z",
+  "updated_at": "2026-05-15T14:00:06.704Z",
   "comment": {
     "text": "This is a label for a keyboard shortcut that opens a list of available hotkeys.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/ApplicationActionsBlock.js",
-      "line_number": 35,
+      "line_number": 44,
       "context": "const ApplicationActionsBlock = ({ t, textStyles, keyTextStyles, CtrlKey }) => {\n return (\n <Row className={styles.hotkeysRow}>\n <>\n <Text {...textStyles}>{t(\"HotkeysShortcuts\")}</Text>\n <Text {...keyTextStyles}>\n {CtrlKey} + / {t(\"Common:Or\")} ?\n </Text>\n </>\n </Row>",
       "module": "/packages/client"
     }

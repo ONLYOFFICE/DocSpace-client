@@ -3,7 +3,7 @@
   "content": "Load metadata from XML to fill the required fields automatically.",
   "content_en_sha1_hash": "5dc7828aee10be08ff27972ea80701e595ddd1d2",
   "created_at": "2025-05-19T21:30:50.195Z",
-  "updated_at": "2026-04-13T14:59:05.894Z",
+  "updated_at": "2026-05-15T14:00:06.861Z",
   "comment": {
     "text": "This is a tooltip that appears when hovering over an icon button, explaining that clicking it will load metadata from an XML file to automatically populate required fields.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/UploadXML.js",
-      "line_number": 144,
+      "line_number": 153,
       "context": "return (\n <FieldContainer\n className=\"xml-input\"\n errorMessage=\"Error text. Lorem ipsum dolor sit amet, consectetuer adipiscing elit\"\n isVertical\n labelText={t(\"UploadXML\")}\n >\n <StyledWrapper>\n <div className=\"upload-input\">\n <SsoTextInput\n className=\"upload-xml-input\"",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Hide",
   "content_en_sha1_hash": "34d8b60fe25332f7b98585e82e753eaf502c3e50",
   "created_at": "2025-05-19T21:30:50.084Z",
-  "updated_at": "2026-04-23T17:24:01.922Z",
+  "updated_at": "2026-05-15T14:00:06.766Z",
   "comment": {
     "text": "This is a button label that, when clicked, hides additional settings or parameters within the integration settings.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/hooks/useAdvancedSettings.tsx",
-      "line_number": 125,
+      "line_number": 134,
       "context": "type={LinkType.action}\n isHovered\n data-testid=\"mcp-headers-block-toggle\"\n >\n {showAdvancedSettings\n ? t(\"SingleSignOn:Hide\")\n : t(\"SingleSignOn:Show\")}\n </Link>\n </div>\n {showAdvancedSettings ? (\n <Text className={baseParamsStyles.fieldHint}>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/HideButton.js",
-      "line_number": 72,
+      "line_number": 81,
       "context": "dataTestId=\"hide_show_ldap_link\"\n >\n {value\n ? isAdditionalParameters\n ? t(\"HideAdditionalParameters\")\n : t(\"Hide\")\n : isAdditionalParameters\n ? t(\"ShowAdditionalParameters\")\n : t(\"Show\")}\n </Link>\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/HideButton.js",
-      "line_number": 85,
+      "line_number": 94,
       "context": "dataTestId={dataTestId}\n >\n {value\n ? isAdditionalParameters\n ? t(\"HideAdditionalParameters\")\n : t(\"Hide\")\n : isAdditionalParameters\n ? t(\"ShowAdditionalParameters\")\n : t(\"Show\")}\n </Link>\n </StyledWrapper>",
       "module": "/packages/client"
     }

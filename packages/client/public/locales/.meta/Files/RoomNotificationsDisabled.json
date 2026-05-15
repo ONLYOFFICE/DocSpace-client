@@ -3,7 +3,7 @@
   "content": "Room notifications disabled",
   "content_en_sha1_hash": "66e212657f39607ac6632eb53f57a7c8a6d38fe5",
   "created_at": "2025-05-19T21:30:56.101Z",
-  "updated_at": "2026-05-08T13:10:45.676Z",
+  "updated_at": "2026-05-15T14:00:06.894Z",
   "comment": {
     "text": "This is a toast message indicating that notifications for a room have been turned off. It appears briefly to confirm the action.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1431,
+      "line_number": 1440,
       "context": "if (muteStatus) {\n treeFolders[treeIndex].newItems = newCount >= 0 ? count - newCount : 0;\n } else treeFolders[treeIndex].newItems = count + newCount;\n }\n \n let notificationsDisabled = t(\"RoomNotificationsDisabled\");\n let notificationsEnabled = t(\"RoomNotificationsEnabled\");\n \n if (isAIAgent) {\n notificationsDisabled = t(\"AIAgentNotificationsDisabled\", {\n aiAgent: t(\"Common:AIAgent\"),",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "Embed a file selector to allow users to access any file from the list of the available ones.",
   "content_en_sha1_hash": "ebf79504392ba71c2020434596bead7b73d2608b",
   "created_at": "2025-05-19T21:30:54.503Z",
-  "updated_at": "2026-04-11T21:15:39.055Z",
+  "updated_at": "2026-05-15T14:00:06.797Z",
   "comment": {
     "text": "This is a description of the File Selector feature, displayed in the Developer Tools section of Portal Settings and within the File Selector preset. It explains that the feature allows users to embed a file selector to access available files.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 118,
+      "line_number": 127,
       "context": "image: theme.isBase ? RoomSelectorImg : RoomSelectorImgDark,\n handleOnClick: navigateToRoomSelector,\n },\n {\n title: t(\"Common:FileSelector\"),\n description: t(\"FileSelectorDescription\"),\n image: theme.isBase ? FileSelectorImg : FileSelectorImgDark,\n handleOnClick: navigateToFileSelector,\n },\n {\n title: t(\"Common:Custom\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 349,
+      "line_number": 358,
       "context": "</>\n );\n \n return (\n <PresetWrapper\n description={t(\"FileSelectorDescription\")}\n header={t(\"CreateSampleFileSelector\")}\n >\n <Container>\n <PreviewBlock\n loadCurrentFrame={initFrame}",
       "module": "/packages/client"
     }

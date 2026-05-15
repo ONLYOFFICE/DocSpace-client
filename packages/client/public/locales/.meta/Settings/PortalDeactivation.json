@@ -3,7 +3,7 @@
   "content": "Deactivate {{productName}}",
   "content_en_sha1_hash": "54fe2d3e5e6088fc60b02a8e670df55142d8e8e1",
   "created_at": "2025-05-19T21:30:52.177Z",
-  "updated_at": "2026-04-13T14:59:05.850Z",
+  "updated_at": "2026-05-15T14:00:06.790Z",
   "comment": {
     "text": "This is the title for a section in the portal settings. It refers to the action of deactivating the entire portal, where `{{productName}}` will be replaced with the product's brand name (e.g., \"DocSpace\").",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/delete-data/index.js",
-      "line_number": 72,
+      "line_number": 81,
       "context": "await fetchPortalDeletionData();\n },\n },\n {\n id: \"deactivation\",\n name: t(\"PortalDeactivation\", { productName: getBrandName(\"ProductName\") }),\n content: <PortalDeactivationSection />,\n onClick: async () => {\n clearAbortControllerArr();\n await fetchPortalDeactivationData();\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/delete-data/portalDeactivation.js",
-      "line_number": 53,
+      "line_number": 62,
       "context": "else setIsDesktopView(false);\n };\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalDeactivation\", { productName: getBrandName(\"ProductName\") }),\n );\n onCheckView();\n window.addEventListener(\"resize\", onCheckView);\n return () => window.removeEventListener(\"resize\", onCheckView);\n }, []);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 541,
+      "line_number": 550,
       "context": "},\n {\n key: \"9-1\",\n icon: \"\",\n link: \"deactivation\",\n tKey: \"PortalDeactivation\",\n isCategory: true,\n },\n ],\n },\n {",
       "module": "/packages/client"
     }

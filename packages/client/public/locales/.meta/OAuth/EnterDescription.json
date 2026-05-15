@@ -3,7 +3,7 @@
   "content": "Enter description",
   "content_en_sha1_hash": "4841a72a99c70608a67394ab003dc3eadc91c8c4",
   "created_at": "2025-05-19T21:30:53.876Z",
-  "updated_at": "2026-04-11T21:18:57.109Z",
+  "updated_at": "2026-05-15T14:00:06.767Z",
   "comment": {
     "text": "This is a placeholder text for a text area where the user can input a description. It prompts the user to enter descriptive text.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/hooks/useBaseParams.tsx",
-      "line_number": 188,
+      "line_number": 197,
       "context": ">\n <Textarea\n heightTextArea={64}\n value={description}\n onChange={(e) => onChangeDescription(e.target.value)}\n placeholder={t(\"OAuth:EnterDescription\")}\n maxLength={256}\n dataTestId=\"mcp-description-textarea\"\n />\n <Text className={styles.fieldHint}>\n {t(\"AISettings:MCPServerDescriptionHint\")}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
-      "line_number": 202,
+      "line_number": 211,
       "context": "</FieldContainer>\n \n <TextAreaGroup\n label={t(\"Common:DescriptionLabel\")}\n name=\"description\"\n placeholder={t(\"EnterDescription\")}\n value={descriptionValue}\n onChange={onChange}\n increaseHeight={isLogoRequiredError}\n dataTestId=\"description_textarea_group\"\n />",
       "module": "/packages/client"
     }

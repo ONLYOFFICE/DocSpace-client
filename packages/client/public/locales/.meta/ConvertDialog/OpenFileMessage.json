@@ -3,7 +3,7 @@
   "content": "The document file you open will be converted to the Office Open XML format for quick viewing and editing.",
   "content_en_sha1_hash": "9de0c615b3fdd60d1a33c6f1aab9a1102479e8e0",
   "created_at": "2025-05-19T21:30:56.890Z",
-  "updated_at": "2026-04-11T21:04:09.474Z",
+  "updated_at": "2026-05-15T14:00:06.652Z",
   "comment": {
     "text": "This is a message displayed in a dialog box, informing the user that a non-Office Open XML document will be converted for viewing and editing.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ConvertDialog/index.js",
-      "line_number": 155,
+      "line_number": 164,
       "context": "<ModalDialog.Body style={{ paddingBottom: \"0px\" }}>\n <Text>\n {convertSingleFile\n ? isXML\n ? t(\"ConversionXmlMessage\")\n : t(\"OpenFileMessage\")\n : t(\"ConversionMessage\")}\n </Text>\n \n {isXML ? (\n <div style={{ boxSizing: \"border-box\", padding: \"16px 0 0\" }}>",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

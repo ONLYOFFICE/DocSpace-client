@@ -3,7 +3,7 @@
   "content": "Search by group members",
   "content_en_sha1_hash": "184145132a97e055ac3dffd682c055646ed6d938",
   "created_at": "2025-10-07T15:38:57.553Z",
-  "updated_at": "2026-04-13T02:30:11.529Z",
+  "updated_at": "2026-05-15T14:00:06.948Z",
   "comment": {
     "text": "This is a placeholder text for a search input field. It prompts the user to type in the name of a group member they wish to find within a list.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/edit-group-members-dialog/index.tsx",
-      "line_number": 162,
+      "line_number": 171,
       "context": "infoPanelSelection={infoPanelSelection}\n standalone={standalone}\n >\n <SearchInput\n className=\"search-input\"\n placeholder={t(\"Common:SearchByGroupMembers\")}\n value={searchValue}\n onChange={onChangeSearchValue}\n onClearSearch={onClearSearch}\n size={InputSize.base}\n />",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

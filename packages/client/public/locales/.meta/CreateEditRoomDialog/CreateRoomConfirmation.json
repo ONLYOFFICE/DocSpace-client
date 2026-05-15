@@ -3,7 +3,7 @@
   "content": "Continue without connecting the storage?\nYou have selected a third-party storage option that is not connected yet. If you proceed without connecting the service, this option will not be added.",
   "content_en_sha1_hash": "2d29b440ea315d9ac9d67057564aa95d991d43fd",
   "created_at": "2025-05-19T21:30:56.786Z",
-  "updated_at": "2026-04-11T21:04:52.794Z",
+  "updated_at": "2026-05-15T14:00:06.666Z",
   "comment": {
     "text": "This is the body text of a confirmation dialog that appears when a user tries to create a room with a third-party storage option that hasn't been connected yet.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateRoomConfirmDialog/index.js",
-      "line_number": 53,
+      "line_number": 62,
       "context": "};\n \n const bodyText =\n selectedRoomType === RoomsType.VirtualDataRoom\n ? t(\"CreateEditRoomDialog:CreateRoomWatermarksConfirmation\")\n : t(\"CreateEditRoomDialog:CreateRoomConfirmation\");\n \n return (\n <ModalDialog\n visible={visible || confirmDialogIsLoading}\n onClose={onClose}",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

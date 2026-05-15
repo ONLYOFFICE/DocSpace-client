@@ -3,7 +3,7 @@
   "content": "Document Service address for internal requests from the {{productName}}",
   "content_en_sha1_hash": "2e77cbaa428ed8b0c1752c38f06e1df3760ca3af",
   "created_at": "2025-05-19T21:30:51.393Z",
-  "updated_at": "2026-04-11T21:24:19.446Z",
+  "updated_at": "2026-05-15T14:00:06.843Z",
   "comment": {
     "text": "This is a label for an input field in the portal settings. It describes the internal network address used by the product for document service requests. `{{productName}}` will be replaced with the product's brand name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 364,
+      "line_number": 373,
       "context": "</Text>\n </div>\n <div className=\"input-wrapper\">\n <Label\n htmlFor=\"internalAdress\"\n text={t(\"Settings:DocumentServiceLocationUrlInternal\", {\n productName: getBrandName(\"ProductName\"),\n })}\n />\n <InputBlock\n id=\"internalAdress\"",
       "module": "/packages/client"
     }

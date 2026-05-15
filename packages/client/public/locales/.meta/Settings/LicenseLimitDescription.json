@@ -3,7 +3,7 @@
   "content": "The license limit counter consists of: already existing accounts in {{productName}} and new users that you want to import. If you import users who already have a {{productName}} account, they will not be counted again in the counter. Your {{productName}} license allows you to have a maximum of {{maxLimit}} users.",
   "content_en_sha1_hash": "48bb127c07477ce132bbeea9ad21b81eedf91b24",
   "created_at": "2025-05-19T21:30:51.797Z",
-  "updated_at": "2026-04-11T21:23:31.746Z",
+  "updated_at": "2026-05-15T14:00:06.789Z",
   "comment": {
     "text": "This is a tooltip that appears when hovering over an information icon next to the \"License Limit\" field. It explains how the license limit is calculated, including existing and imported users, and states the maximum allowed users. `{{productName}}` is the product name (e.g., ONLYOFFICE DocSpace), and `{{maxLimit}}` is the maximum number of users allowed by the license.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/sub-components/AdminsInfoBlock.tsx",
-      "line_number": 66,
+      "line_number": 75,
       "context": "dataTestId=\"license_limit_help_button\"\n place=\"right\"\n offsetRight={0}\n tooltipContent={\n <Text fontSize=\"12px\">\n {t(\"LicenseLimitDescription\", {\n productName: getBrandName(\"ProductName\"),\n maxLimit: limitAdmins,\n })}\n </Text>\n }",
       "module": "/packages/client"
     }

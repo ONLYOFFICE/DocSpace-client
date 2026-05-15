@@ -3,7 +3,7 @@
   "content": "After files will be moved to {{sectionName}}.",
   "content_en_sha1_hash": "772c05fb87bfce6033351176146d02a6a2363a1e",
   "created_at": "2025-06-02T10:19:22.898Z",
-  "updated_at": "2026-05-08T13:10:45.609Z",
+  "updated_at": "2026-05-15T14:00:06.752Z",
   "comment": {
     "text": "This is a toast message that appears after files are moved to the trash. It is part of a sentence and includes the `{{sectionName}}` variable, which will be replaced by the localized name of the trash section.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 572,
+      "line_number": 581,
       "context": "days: lifetime.value,\n period: getLifetimePeriodTranslation(lifetime.period, t),\n })}. ${\n lifetime.deletePermanently\n ? t(\"Files:AfterFilesWillBeDeletedPermanently\")\n : t(\"Files:FilesMovedToTrashNotice\", {\n sectionName: t(\"Common:TrashSection\"),\n })\n }`;\n \n return null;",
       "module": "/packages/client"
     }
@@ -24,6 +24,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [],
       "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     }
   }
 }

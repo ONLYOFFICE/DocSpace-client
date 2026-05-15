@@ -3,7 +3,7 @@
   "content": "Room editing",
   "content_en_sha1_hash": "7e94cbdf2a5ee908ecc10921847ef048385a3221",
   "created_at": "2025-05-19T21:30:56.831Z",
-  "updated_at": "2026-04-11T21:04:32.448Z",
+  "updated_at": "2026-05-15T14:00:06.658Z",
   "comment": {
     "text": "This is the title of a dialog window used to modify the settings or details of an existing room.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/EditRoomDialog.js",
-      "line_number": 311,
+      "line_number": 320,
       "context": ")}\n \n <ModalDialog.Header>\n {isTemplate\n ? t(\"Files:EditTemplate\")\n : t(\"CreateEditRoomDialog:RoomEditing\")}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <SetRoomParams\n t={t}",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

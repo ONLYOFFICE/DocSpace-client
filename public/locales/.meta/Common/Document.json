@@ -3,7 +3,7 @@
   "content": "Document",
   "content_en_sha1_hash": "e214b8a29923056887b7edf6635d90dcbb2abe88",
   "created_at": "2025-05-19T21:30:44.571Z",
-  "updated_at": "2026-04-23T17:24:01.618Z",
+  "updated_at": "2026-05-15T14:00:06.586Z",
   "comment": {
     "text": "This is a button label or option label for creating or converting a document. It appears in menus and dialogs where users can choose to create a new document or convert a file to a document format.",
     "is_auto": true,
@@ -13,43 +13,43 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 443,
+      "line_number": 452,
       "context": "const createNewDocumentDocx = {\n id: \"actions_new-document\",\n className: \"main-button_drop-down\",\n icon: ActionsDocumentsReactSvgUrl,\n label: t(\"Common:Document\"),\n onClick: onCreate,\n action: \"docx\",\n key: \"docx\",\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ConvertDialog/index.js",
-      "line_number": 66,
+      "line_number": 75,
       "context": "conversionFiles,\n } = props;\n \n const options = [\n {\n label: t(\"Document\"),\n value: \".docx\",\n },\n {\n label: t(\"Spreadsheet\"),\n value: \".xlsx\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 467,
+      "line_number": 476,
       "context": "key: \"create-form-form\",\n disabled: !security?.Create,\n model: [\n {\n key: \"create-Document\",\n label: t(\"Common:Document\"),\n icon: DocumentsReactSvgUrl,\n onClick: () => actions.onCreate(\"docx\"),\n },\n {\n key: \"create-spreadsheet\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/sub-components/TypeCell.js",
-      "line_number": 53,
+      "line_number": 62,
       "context": "case FileType.Spreadsheet:\n return t(\"Common:Spreadsheet\");\n case FileType.Presentation:\n return t(\"Common:Presentation\");\n case FileType.Document:\n return t(\"Common:Document\");\n case FileType.Diagram:\n return t(\"Common:Diagram\");\n case FileType.OForm:\n case FileType.OFormTemplate:\n case FileType.PDF: {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/create-file-dialog/index.tsx",
-      "line_number": 56,
+      "line_number": 65,
       "context": "type: CreateFileDialogType,\n t: (key: string) => string,\n ): string => {\n switch (type) {\n case \"docx\":\n return t(\"Common:Document\");\n case \"xlsx\":\n return t(\"Common:Spreadsheet\");\n case \"pptx\":\n return t(\"Common:Presentation\");\n case \"pdf\":",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/main-button/index.tsx",
-      "line_number": 87,
+      "line_number": 96,
       "context": "const desktopModel = React.useMemo<ContextMenuModel[]>(\n () => [\n {\n id: \"actions_new-document\",\n key: \"docx\",\n label: t(\"Common:Document\"),\n icon: ActionsDocumentsReactSvgUrl,\n onClick: () => openCreateDialog(\"docx\"),\n },\n {\n id: \"actions_new-spreadsheet\",",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/main-button/index.tsx",
-      "line_number": 87,
+      "line_number": 96,
       "context": "const desktopModel = React.useMemo<ContextMenuModel[]>(\n () => [\n {\n id: \"actions_new-document\",\n key: \"docx\",\n label: t(\"Common:Document\"),\n icon: ActionsDocumentsReactSvgUrl,\n onClick: () => openCreateDialog(\"docx\"),\n },\n {\n id: \"actions_new-spreadsheet\",",
       "module": "/packages/sdk"
     },
@@ -61,8 +61,8 @@
     },
     {
       "file_path": "/packages/shared/utils/getPDFTite.ts",
-      "line_number": 30,
-      "context": "// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode\n \n import { TTranslation } from \"../types\";\n \n export const getSinglePDFTitle = (t: TTranslation, isForm: boolean) => {\n return isForm ? t(\"Common:Form\") : t(\"Common:Document\");\n };\n \n export const getManyPDFTitle = (t: TTranslation, isForms: boolean) => {\n return `PDF-${(isForms ? t(\"Common:Forms\") : t(\"Common:Documents\")).toLowerCase()}`;\n };",
+      "line_number": 39,
+      "context": "*/\n \n import { TTranslation } from \"../types\";\n \n export const getSinglePDFTitle = (t: TTranslation, isForm: boolean) => {\n return isForm ? t(\"Common:Form\") : t(\"Common:Document\");\n };\n \n export const getManyPDFTitle = (t: TTranslation, isForms: boolean) => {\n return `PDF-${(isForms ? t(\"Common:Forms\") : t(\"Common:Documents\")).toLowerCase()}`;\n };",
       "module": "/packages/shared"
     }
   ],
@@ -197,7 +197,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

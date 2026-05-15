@@ -3,7 +3,7 @@
   "content": "Room removed",
   "content_en_sha1_hash": "650e240a06004bc3edb792413633404c35651205",
   "created_at": "2025-05-19T21:30:56.119Z",
-  "updated_at": "2026-05-08T13:10:45.572Z",
+  "updated_at": "2026-05-15T14:00:06.672Z",
   "comment": {
     "text": "This is a toast message confirming the successful removal of a single room.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 123,
+      "line_number": 132,
       "context": "const onDeleteRoom = async () => {\n const translations = {\n successRemoveRoom: isAIAgent\n ? t(\"Files:AgentRemoved\")\n : t(\"Files:RoomRemoved\"),\n successRemoveRooms: isAIAgent\n ? t(\"Files:AgentsRemoved\")\n : t(\"Files:RoomsRemoved\"),\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 868,
+      "line_number": 877,
       "context": "let translations;\n \n if (isRoom) {\n translations = {\n successRemoveRoom: t(\"Files:RoomRemoved\"),\n successRemoveRooms: t(\"Files:RoomsRemoved\"),\n };\n \n deleteRoomsAction([selectedFolderId], translations).catch((err) =>\n toastr.error(err),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2195,
+      "line_number": 2204,
       "context": "selection.forEach((item) => {\n items.push(item.id);\n });\n \n const translations = {\n successRemoveRoom: t(\"Files:RoomRemoved\"),\n successRemoveRooms: t(\"Files:RoomsRemoved\"),\n };\n \n this.deleteItemAction(items, \"\", translations, null, null, true);\n };",
       "module": "/packages/client"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

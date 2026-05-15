@@ -3,7 +3,7 @@
   "content": "The folder <2>{{title}}</2> successfully duplicated",
   "content_en_sha1_hash": "6ab852c5789cb4008e34de3226d75f1555709889",
   "created_at": "2025-05-19T21:30:55.484Z",
-  "updated_at": "2026-04-23T17:24:02.082Z",
+  "updated_at": "2026-05-15T14:00:06.898Z",
   "comment": {
     "text": "This is a toast message confirming a folder was successfully duplicated. The `{{title}}` variable is the name of the duplicated folder.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/SecondaryProgressDataStore.js",
-      "line_number": 192,
+      "line_number": 201,
       "context": "if (operation === OPERATIONS_NAME.duplicate) {\n toastTranslation = isSuccess ? (\n isFolder ? (\n <Trans\n t={t}\n i18nKey=\"DuplicateFolderItem\"\n components={commonComponents}\n values={commonProps}\n />\n ) : (\n <Trans",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

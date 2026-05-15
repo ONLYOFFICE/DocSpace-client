@@ -3,7 +3,7 @@
   "content": "Tab Plugins",
   "content_en_sha1_hash": "e55bd87644d60d366a8efd44d8bb849c63a4a8f9",
   "created_at": "2025-05-19T21:30:54.702Z",
-  "updated_at": "2026-04-11T21:14:24.231Z",
+  "updated_at": "2026-05-15T14:00:06.799Z",
   "comment": {
     "text": "Label for a checkbox in the developer tools settings. It enables or disables the \"Plugins\" tab within the editor interface.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor.js",
-      "line_number": 285,
+      "line_number": 294,
       "context": "onChange={() => {}}\n isChecked\n />\n <Checkbox\n className=\"checkbox\"\n label={t(\"TabPlugins\")}\n onChange={() => {}}\n isChecked\n />\n <RowContainer>\n <Checkbox label={t(\"Chat\")} onChange={() => {}} isChecked />",
       "module": "/packages/client"
     }

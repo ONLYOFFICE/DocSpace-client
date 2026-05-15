@@ -3,7 +3,7 @@
   "content": "Tools",
   "content_en_sha1_hash": "4fa8cc860c52b268dc6a3adcde7305e9415db5bb",
   "created_at": "2025-10-27T16:14:24.060Z",
-  "updated_at": "2026-04-23T17:24:02.170Z",
+  "updated_at": "2026-05-15T14:00:06.989Z",
   "comment": {
     "text": "This is a button label that opens a menu or dialog for managing tools within the AI chat feature.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-input/tools-settings/index.tsx",
-      "line_number": 500,
+      "line_number": 507,
       "context": "data-testid=\"chat-input-tools-button\"\n aria-disabled={!aiReady}\n >\n <IconButton iconNode={<McpToolReactSvg />} size={16} isFill={false} />\n <Text lineHeight=\"16px\" fontSize=\"13px\" fontWeight={600} noSelect>\n {t(\"Tools\")}\n </Text>\n <ContextMenu\n ref={contextMenuRef}\n model={model}\n onHide={hideMcpTools}",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

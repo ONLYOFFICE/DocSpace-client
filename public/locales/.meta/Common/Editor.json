@@ -3,7 +3,7 @@
   "content": "Editor",
   "content_en_sha1_hash": "c7e9fb2ea6c3b8c3ce97645eb902c348d859f36d",
   "created_at": "2025-05-19T21:30:44.767Z",
-  "updated_at": "2026-04-23T17:24:01.905Z",
+  "updated_at": "2026-05-15T14:00:06.741Z",
   "comment": {
     "text": "This is a label for the \"Editor\" access right, indicating a user has full editing permissions. It appears in various contexts, such as user role selections and descriptions of document access levels.",
     "is_auto": true,
@@ -13,43 +13,43 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
-      "line_number": 81,
+      "line_number": 90,
       "context": "access: ShareAccessRights.ReadOnly,\n type: \"user\",\n },\n editor: {\n key: \"editor\",\n label: this.t(\"Common:Editor\"),\n access: ShareAccessRights.Editing,\n type: \"user\",\n },\n formFiller: {\n key: \"formFiller\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DeveloperToolsHeader.tsx",
-      "line_number": 62,
+      "line_number": 71,
       "context": "): string | null => {\n switch (slug) {\n case \"public-room\":\n return t(\"Common:PublicRoom\");\n case \"editor\":\n return t(\"Common:Editor\");\n case \"viewer\":\n return t(\"Common:Viewer\");\n case \"room-selector\":\n return t(\"Common:RoomSelector\");\n case \"file-selector\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 99,
+      "line_number": 108,
       "context": "description: t(\"JavascriptSdk:PublicRoomPresetInfo\"),\n image: theme.isBase ? PublicRoomImg : PublicRoomImgDark,\n handleOnClick: navigateToPublicRoom,\n },\n {\n title: t(\"Common:Editor\"),\n description: t(\"EditorPresetDescription\"),\n image: theme.isBase ? EditorImg : EditorImgDark,\n handleOnClick: navigateToEditor,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PublicRoom/PublicRoomPage.js",
-      "line_number": 98,
+      "line_number": 107,
       "context": "case ShareAccessRights.Comment:\n return t(\"Common:Commenting\");\n case ShareAccessRights.Review:\n return t(\"Common:Reviewing\");\n case ShareAccessRights.Editing:\n return t(\"Common:Editor\");\n case ShareAccessRights.FormFilling:\n return t(\"Common:FillingOnly\");\n default:\n return t(\"Common:ViewOnly\");\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 178,
+      "line_number": 187,
       "context": "> = {\n [ShareRights.Editing]: {\n access: ShareAccessRights.Editing,\n description: t(\"Common:RoleEditorDescription\"),\n key: \"editing\",\n label: t(\"Common:Editor\"),\n icon: AccessEditReactSvgUrl,\n },\n [ShareRights.Review]: {\n access: ShareAccessRights.Review,\n description: t(\"Common:RoleReviewerDescription\"),",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 207,
+      "line_number": 216,
       "context": "access: isNone ? EmployeeType.User : ShareAccessRights.Collaborator,\n type: EmployeeType.User,\n },\n editor: {\n key: \"editor\",\n label: t(\"Common:Editor\"),\n description: t(\"Common:RoleEditorDescription\"),\n access: ShareAccessRights.Editing,\n type: EmployeeType.User,\n },\n formFiller: {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/room-members/getUserRoleOptions.ts",
-      "line_number": 57,
+      "line_number": 66,
       "context": "access: ShareAccessRights.ReadOnly,\n type: \"user\",\n },\n editor: {\n key: \"editor\",\n label: t(\"Common:Editor\"),\n access: ShareAccessRights.Editing,\n type: \"user\",\n },\n formFiller: {\n key: \"formFiller\",",
       "module": "/packages/shared"
     }
@@ -185,7 +185,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

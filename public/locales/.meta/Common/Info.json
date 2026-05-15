@@ -3,7 +3,7 @@
   "content": "Info",
   "content_en_sha1_hash": "4b631f69842530d659306c8f06dbad594a6b1807",
   "created_at": "2025-05-19T21:30:45.900Z",
-  "updated_at": "2026-05-08T13:10:45.605Z",
+  "updated_at": "2026-05-15T14:00:06.745Z",
   "comment": {
     "text": "This is the title for various information panels and dialogs, indicating that the content within provides details or context.",
     "is_auto": true,
@@ -13,67 +13,67 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/headerGeneral.tsx",
-      "line_number": 130,
+      "line_number": 139,
       "context": "className={classNames(styles.infoPanelHeader, {\n [styles.withTabs]: withTabs,\n })}\n >\n <AsideHeader\n header={t(\"Common:Info\")}\n onCloseClick={closeInfoPanel}\n withoutBorder\n className=\"header-text\"\n isCloseable\n dataTestId=\"info_panel_aside_header\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/headerTemplateGallery.tsx",
-      "line_number": 79,
+      "line_number": 88,
       "context": ");\n \n return (\n <div className={classNames(styles.infoPanelHeader)}>\n <AsideHeader\n header={t(\"Common:Info\")}\n onCloseClick={onClose}\n withoutBorder\n className=\"header-text\"\n isCloseable\n dataTestId=\"info_panel_aside_header\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/InfoDialog.tsx",
-      "line_number": 124,
+      "line_number": 133,
       "context": "visible={visible}\n displayType={ModalDialogType.aside}\n onClose={onClose}\n withBodyScroll\n >\n <ModalDialog.Header>{t(\"Common:Info\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <StyledInfoContainer\n showDescription={showDescription}\n withShowText={withShowText}\n >",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 268,
+      "line_number": 277,
       "context": "case \"details\":\n return {\n id: \"option_details\",\n key: option,\n icon: InfoOutlineReactSvgUrl,\n label: t(\"Common:Info\"),\n onClick: () => this.onDetailsClick(item),\n };\n \n case \"invite-again\":\n return !this.settingsStore.allowInvitingMembers",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 268,
+      "line_number": 277,
       "context": "case \"details\":\n return {\n id: \"option_details\",\n key: option,\n icon: InfoOutlineReactSvgUrl,\n label: t(\"Common:Info\"),\n onClick: () => this.onDetailsClick(item),\n };\n \n case \"invite-again\":\n return !this.settingsStore.allowInvitingMembers",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
-      "line_number": 493,
+      "line_number": 502,
       "context": "return [\n {\n id: \"info\",\n key: \"group-info\",\n className: \"group-menu_drop-down\",\n label: t(\"Common:Info\"),\n title: t(\"Common:Info\"),\n icon: InfoReactSvgUrl,\n onClick: showInfoPanel,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
-      "line_number": 493,
+      "line_number": 502,
       "context": "return [\n {\n id: \"info\",\n key: \"group-info\",\n className: \"group-menu_drop-down\",\n label: t(\"Common:Info\"),\n title: t(\"Common:Info\"),\n icon: InfoReactSvgUrl,\n onClick: showInfoPanel,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
-      "line_number": 493,
+      "line_number": 502,
       "context": "return [\n {\n id: \"info\",\n key: \"group-info\",\n className: \"group-menu_drop-down\",\n label: t(\"Common:Info\"),\n title: t(\"Common:Info\"),\n icon: InfoReactSvgUrl,\n onClick: showInfoPanel,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
-      "line_number": 493,
+      "line_number": 502,
       "context": "return [\n {\n id: \"info\",\n key: \"group-info\",\n className: \"group-menu_drop-down\",\n label: t(\"Common:Info\"),\n title: t(\"Common:Info\"),\n icon: InfoReactSvgUrl,\n onClick: showInfoPanel,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/HeaderMenuStore.ts",
-      "line_number": 169,
+      "line_number": 178,
       "context": ": this.contextOptionsStore.getUsersChangeTypeOptions(t),\n },\n {\n id: \"menu-info\",\n key: \"info\",\n label: t(\"Common:Info\"),\n disabled:\n isInfoPanelVisible ||\n !(isTablet() || isMobile() || !isDesktop()) ||\n selection.length > 1,\n onClick: showInfoPanel,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 248,
+      "line_number": 257,
       "context": "case \"show-info\":\n if (isDesktop()) return null;\n return {\n id: \"menu-show-info\",\n key: \"show-info\",\n label: t(\"Common:Info\"),\n iconUrl: InfoOutlineReactSvgUrl,\n onClick: showInfoPanel,\n };\n case \"copy\":\n if (!this.isAvailableOption(\"copy\")) return null;",
       "module": "/packages/client"
     },
@@ -85,7 +85,7 @@
     },
     {
       "file_path": "/packages/shared/components/media-viewer/MediaViewer.helpers.tsx",
-      "line_number": 167,
+      "line_number": 176,
       "context": "const options = [\n {\n id: \"option_room-info\",\n key: \"room-info\",\n label: t(\"Common:Info\"),\n icon: InfoOutlineReactSvgUrl,\n onClick: () => {\n return onShowInfoPanel?.(targetFile);\n },\n disabled: isPublicFile,",
       "module": "/packages/shared"
     }
@@ -221,7 +221,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

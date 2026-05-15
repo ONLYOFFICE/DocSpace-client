@@ -3,7 +3,7 @@
   "content": "Users can upload several folders in one action.",
   "content_en_sha1_hash": "438bdc7de73703678eae59555dfb60c4b3cdc44b",
   "created_at": "2026-03-20T09:07:42.391Z",
-  "updated_at": "2026-04-11T21:15:03.366Z",
+  "updated_at": "2026-05-15T14:00:06.805Z",
   "comment": {
     "text": "This is a tooltip that appears when hovering over a help icon. It explains that users can upload multiple folders simultaneously.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
-      "line_number": 201,
+      "line_number": 210,
       "context": "size={12}\n place=\"right\"\n tooltipContent={\n <Text fontSize=\"12px\">\n {isFolderMode\n ? t(\"MultipleFoldersDescription\")\n : t(\"MultipleFilesDescription\")}\n </Text>\n }\n dataTestId=\"multiple_help_button\"\n />",
       "module": "/packages/client"
     }

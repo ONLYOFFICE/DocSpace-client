@@ -3,7 +3,7 @@
   "content": "POST request header successfully copied to clipboard",
   "content_en_sha1_hash": "ca124d3d017bd3d886527d03bb4cc89a5a901183",
   "created_at": "2025-05-19T21:30:49.793Z",
-  "updated_at": "2026-04-11T21:28:38.675Z",
+  "updated_at": "2026-05-15T14:00:06.830Z",
   "comment": {
     "text": "This is a toast message that appears briefly to confirm that the content of a POST request header has been copied to the user's clipboard.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/RequestDetails.js",
-      "line_number": 78,
+      "line_number": 87,
       "context": "value={eventDetails.requestHeaders}\n enableCopy\n hasNumeration\n isFullHeight\n isJSONField\n copyInfoText={t(\"RequestHeaderCopied\")}\n />\n )}\n \n <Text as=\"h3\" fontWeight={600} className=\"mb-4 mt-16\">\n {t(\"RequestPostBody\")}",
       "module": "/packages/client"
     }

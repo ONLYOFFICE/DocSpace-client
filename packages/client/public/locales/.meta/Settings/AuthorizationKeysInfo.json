@@ -3,7 +3,7 @@
   "content": "With Authorization keys, you can connect third-party services to your space. Sign in easily with Facebook, Google, or LinkedIn. Add Dropbox, OneDrive, and other accounts to work with files stored there.",
   "content_en_sha1_hash": "dd9feaeb132234a03c190fb0d06cdfd14c0f9fb7",
   "created_at": "2025-05-19T21:30:50.608Z",
-  "updated_at": "2026-04-11T21:25:35.141Z",
+  "updated_at": "2026-05-15T14:00:06.861Z",
   "comment": {
     "text": "This is a descriptive text displayed on the Third-Party Services settings page. It explains the purpose of authorization keys, which allow users to connect external services like social media logins and cloud storage to their DocSpace.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/index.js",
-      "line_number": 227,
+      "line_number": 236,
       "context": "{!consumers.length || !tReady ? (\n <ThirdPartyLoader />\n ) : (\n <RootContainer className=\"RootContainer\">\n <Text className=\"third-party-description\">\n {t(\"AuthorizationKeysInfo\")}\n </Text>\n <div className=\"third-party-box\">\n {integrationSettingsUrl ? (\n <Link\n className=\"third-party-link\"",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Viewer",
   "content_en_sha1_hash": "dbad9f126b33570e09839a2d60720898de1a512d",
   "created_at": "2025-05-19T21:30:48.141Z",
-  "updated_at": "2026-04-13T08:18:09.238Z",
+  "updated_at": "2026-05-15T14:00:06.664Z",
   "comment": {
     "text": "This is a label for the \"Viewer\" role, indicating a user with read-only access. It appears in dialogs and panels where user roles or access rights are defined.",
     "is_auto": true,
@@ -19,19 +19,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
-      "line_number": 75,
+      "line_number": 84,
       "context": "}),\n type: \"collaborator\",\n },\n viewer: {\n key: \"viewer\",\n label: this.t(\"Common:RoleViewer\"),\n access: ShareAccessRights.ReadOnly,\n type: \"user\",\n },\n editor: {\n key: \"editor\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 235,
+      "line_number": 244,
       "context": "access: ShareAccessRights.Comment,\n type: EmployeeType.User,\n },\n viewer: {\n key: \"viewer\",\n label: t(\"Common:RoleViewer\"),\n description:\n roomType === RoomsType.AIRoom\n ? t(\"Common:RoleAIAgentViewerDescription\")\n : t(\"Common:RoleViewerDescription\"),\n access: ShareAccessRights.ReadOnly,",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/room-members/getUserRoleOptions.ts",
-      "line_number": 51,
+      "line_number": 60,
       "context": "access: ShareAccessRights.Collaborator,\n type: \"collaborator\",\n },\n viewer: {\n key: \"viewer\",\n label: t(\"Common:RoleViewer\"),\n access: ShareAccessRights.ReadOnly,\n type: \"user\",\n },\n editor: {\n key: \"editor\",",
       "module": "/packages/shared"
     }
@@ -175,7 +175,7 @@
           "checked_by": "claude-code/haiku"
         }
       ],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

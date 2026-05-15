@@ -1,0 +1,29 @@
+{
+  "key_path": "AIPaywallIncludedFeaturesLine1",
+  "content": "Chat & agents · Text & image generation · Translation · Summaries",
+  "content_en_sha1_hash": "6bb81126b1b4aeec9617e217b516d2d1ec9abfb3",
+  "created_at": "2026-05-15T13:59:46.091Z",
+  "updated_at": "2026-05-15T14:03:29.516Z",
+  "comment": {
+    "text": "A line of text in a features list on the AI paywall page, listing included AI capabilities separated by middle dots.",
+    "is_auto": true,
+    "updated_at": "2026-05-15T14:03:29.516Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallPage.tsx",
+      "line_number": 343,
+      "context": "</div>\n </div>\n \n <div className={styles.featuresBlock}>\n <Text fontSize=\"12px\" className={styles.featuresLine}>\n {t(\"AIPaywallIncludedFeaturesLine1\")}\n </Text>\n <Text fontSize=\"12px\" className={styles.featuresLine}>\n {t(\"AIPaywallIncludedFeaturesLine2\")}\n </Text>\n </div>",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

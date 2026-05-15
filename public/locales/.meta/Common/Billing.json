@@ -3,7 +3,7 @@
   "content": "Billing",
   "content_en_sha1_hash": "abaec4522bf67bd0d3efd4801a63c5080b63aa56",
   "created_at": "2026-03-20T09:07:27.552Z",
-  "updated_at": "2026-04-23T17:24:01.674Z",
+  "updated_at": "2026-05-15T14:00:06.620Z",
   "comment": {
     "text": "This is a navigation link or page title that refers to the section where users can manage their subscription, payments, and billing information.",
     "is_auto": true,
@@ -13,43 +13,43 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/main-tariff/index.tsx",
-      "line_number": 75,
+      "line_number": 84,
       "context": "init(t);\n return () => resetTariffContainerToBasic();\n }, [isQuotasLoaded]);\n \n useEffect(() => {\n const title = t(\"Billing\");\n if (onSetDocumentTitle) {\n onSetDocumentTitle(title);\n } else {\n document.title = title;\n }",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/PaidQuotaLimitError/index.js",
-      "line_number": 63,
+      "line_number": 72,
       "context": "return (\n <>\n <Text>{t(\"Common:QuotaPaidUserLimitError\")}</Text>\n {!isRoomAdmin ? (\n <Link isHovered onClick={onClickPayments} color=\"accent\">\n {t(\"Common:Billing\")}\n </Link>\n ) : null}\n </>\n );\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 216,
+      "line_number": 225,
       "context": "case \"Migration\":\n return t(\"Migration\");\n case \"Backup\":\n return t(\"Common:Backup\");\n case \"Common:PaymentsTitle\":\n return standalone ? t(\"Common:PaymentsTitle\") : t(\"Common:Billing\");\n case \"ManagementCategoryDataManagement\":\n return t(\"ManagementCategoryDataManagement\");\n case \"LdapSettings\":\n return t(\"Ldap:LdapSettings\");\n case \"LdapSyncTitle\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
-      "line_number": 376,
+      "line_number": 385,
       "context": "? t(\"ImportFromPortal\", {\n organizationName: logoText,\n })\n : t(\"DataImport\")\n : !standalone && isPaymentPage\n ? t(\"Common:Billing\")\n // biome-ignore lint/plugin/no-dynamic-i18n-key: header is passed from route config; underlying keys are declared as literals at callsites\n : t(header, {\n organizationName: logoText,\n license: t(\"Common:EnterpriseLicense\"),\n productName: getBrandName(\"ProductName\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.js",
-      "line_number": 464,
+      "line_number": 473,
       "context": "!isNotPaidPeriod &&\n isAdmin &&\n !isCommunity && {\n key: \"user-menu-payments\",\n icon: PaymentsReactSvgUrl,\n label: standalone ? t(\"Common:PaymentsTitle\") : t(\"Common:Billing\"),\n onClick: (obj) => this.onPaymentsClick(obj),\n additionalElement: <TariffBar />,\n url: PAYMENTS_URL,\n preventNewTab: true,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_utils/tourSteps.ts",
-      "line_number": 313,
+      "line_number": 322,
       "context": "callbacks,\n ),\n showSettings &&\n settingsStep(\n \"billing\",\n t(\"Common:Billing\", \"Billing\"),\n t(\n \"Common:TourBilling\",\n \"Manage your subscription plan and payment details for this forms room.\",\n ),\n callbacks,",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/forms/settings/layout.client.tsx",
-      "line_number": 152,
+      "line_number": 161,
       "context": "const tabs: TTabItem[] = React.useMemo(\n () => [\n {\n id: SettingsSubSection.Billing,\n name: t(\"Common:Billing\"),\n content: wrappedContent,\n },\n {\n id: SettingsSubSection.AiAgent,\n name: t(\"Common:AIAgent\"),",
       "module": "/packages/sdk"
     }
@@ -185,7 +185,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

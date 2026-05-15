@@ -3,7 +3,7 @@
   "content": "Coming soon",
   "content_en_sha1_hash": "e4115be258dbdd1661c5f1ff14670c19ef1048da",
   "created_at": "2025-05-19T21:30:43.531Z",
-  "updated_at": "2026-04-11T20:57:02.971Z",
+  "updated_at": "2026-05-15T14:00:06.755Z",
   "comment": {
     "text": "This is a short label indicating that a feature or content is not yet available. It appears in various contexts, such as on buttons or as standalone text.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/index.js",
-      "line_number": 190,
+      "line_number": 199,
       "context": "// clear state\n window.history.replaceState({}, document.title);\n }\n }, [location.state, setIsAboutDialogVisible]);\n \n // console.log(t(\"Common:ComingSoon\"))\n \n const isSettingsPage =\n location.pathname.includes(\"settings\") &&\n !location.pathname.includes(\"settings/plugins\");",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

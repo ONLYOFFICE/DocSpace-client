@@ -3,7 +3,7 @@
   "content": "Integration examples",
   "content_en_sha1_hash": "60297aa2a3ac5f89baf109d372361add038feaa4",
   "created_at": "2025-05-19T21:30:54.533Z",
-  "updated_at": "2026-04-11T21:15:29.027Z",
+  "updated_at": "2026-05-15T14:00:06.812Z",
   "comment": {
     "text": "This is a section header in the Developer Tools settings. It introduces a list of examples demonstrating how to integrate ONLYOFFICE DocSpace with other applications.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/Integration.tsx",
-      "line_number": 75,
+      "line_number": 84,
       "context": "className={className}\n theme={theme}\n color={currentColorScheme?.main?.accent ?? \"\"}\n >\n <CategoryHeader className=\"integration-header\">\n {t(\"IntegrationExamples\")}\n </CategoryHeader>\n <Text lineHeight=\"20px\" color={theme.sdkPresets.secondaryColor}>\n {t(\"IntegrationDescription\", { productName: getBrandName(\"ProductName\") })}\n </Text>\n <div className=\"icons\">",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Edit comment",
   "content_en_sha1_hash": "3b168257183896cf72ca48607075940bcabeb683",
   "created_at": "2025-05-19T21:30:49.937Z",
-  "updated_at": "2026-04-13T14:59:05.910Z",
+  "updated_at": "2026-05-15T14:00:06.883Z",
   "comment": {
     "text": "This is the label for a button that allows users to modify an existing comment.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/VersionHistory/Section/Body/VersionRow.js",
-      "line_number": 211,
+      "line_number": 220,
       "context": "onClick: onOpenFile,\n },\n canChangeVersionFileHistory && {\n key: \"edit\",\n icon: AccessCommentReactSvgUrl,\n label: t(\"EditComment\"),\n onClick: onEditComment,\n },\n index !== 0 &&\n canChangeVersionFileHistory && {\n key: \"restore\",",
       "module": "/packages/client"
     }

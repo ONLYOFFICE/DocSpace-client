@@ -3,7 +3,7 @@
   "content": "View usage per API key on the",
   "content_en_sha1_hash": "7fb63f56b0f710797397bac7b4ab4ee84d6c2d62",
   "created_at": "2025-05-19T21:30:50.560Z",
-  "updated_at": "2026-04-11T21:25:38.761Z",
+  "updated_at": "2026-05-15T14:00:06.791Z",
   "comment": {
     "text": "This is a partial sentence displayed as static text within the API Keys section of the Developer Tools settings. It introduces a link to view API key usage statistics.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/index.tsx",
-      "line_number": 176,
+      "line_number": 185,
       "context": "</Text>\n \n <Text\n className={classNames(styles.apiKeysText, styles.apiKeysUsageText)}\n >\n {t(\"Settings:ApiKeyViewUsage\")}\n </Text>\n {apiKeysUrl ? (\n <Link\n isHovered\n color={currentColorScheme?.main?.accent ?? undefined}",
       "module": "/packages/client"
     }

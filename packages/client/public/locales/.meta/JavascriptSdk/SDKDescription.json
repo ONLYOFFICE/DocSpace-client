@@ -3,7 +3,7 @@
   "content": "Embed SDK allows you to embed the whole {{productName}} or its part into your web interface. Select ready-to-use modes with the pre-defined parameters or a custom one to configure it manually. To learn more about SDK, refer to the ",
   "content_en_sha1_hash": "f68b6c2c4b3bf6eb423cc56c815aa49f6a90fc88",
   "created_at": "2026-04-03T21:51:38.222Z",
-  "updated_at": "2026-04-11T21:14:44.916Z",
+  "updated_at": "2026-05-15T14:00:06.798Z",
   "comment": {
     "text": "This is a descriptive text that appears below the \"Javascript SDK\" heading in the Developer Tools settings. It explains the functionality of the Embed SDK, with `{{productName}}` being replaced by the product's brand name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 161,
+      "line_number": 170,
       "context": "return (\n <SDKContainer>\n <CategoryDescription theme={theme}>\n <Text className=\"sdk-description\">\n {t(\"SDKDescription\", { productName: getBrandName(\"ProductName\") })}\n </Text>\n <Link\n color={currentColorScheme?.main?.accent}\n fontSize=\"13px\"\n fontWeight=\"400\"",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Set the default storage quota for rooms in this {{productName}}. It can later be adjusted for each room individually by the room admin.",
   "content_en_sha1_hash": "70a076e65a43bd6bbbe50850d4834ecd8ec75cad",
   "created_at": "2025-05-19T21:30:52.660Z",
-  "updated_at": "2026-04-11T21:22:12.098Z",
+  "updated_at": "2026-05-15T14:00:06.873Z",
   "comment": {
     "text": "This string is used as a subtitle for a \"Quota Per Room\" setting and as a toggle description within the \"Quota Per Room\" settings page. It describes the functionality of setting a default storage quota for rooms, which can be overridden by room admins. `{{productName}}` will be replaced with the product's brand name.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/MobileQuotas.js",
-      "line_number": 51,
+      "line_number": 60,
       "context": "<StyledBaseQuotaComponent>\n <CategoryItem\n title={t(\"QuotaPerRoom\")}\n onClickLink={onClickLink}\n url=\"portal-settings/management/disk-space/quota-per-room\"\n subtitle={t(\"SetDefaultRoomQuota\", {\n productName: getBrandName(\"ProductName\"),\n })}\n isDisabled={isDisabled}\n />\n <CategoryItem",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerRoom.js",
-      "line_number": 51,
+      "line_number": 60,
       "context": "saveQuota={(size) => setRoomQuota(size, t)}\n {...initialSizeProp}\n isQuotaSet={isDefaultRoomsQuotaSet}\n tabIndex={1}\n dataTestId=\"quota_room\"\n toggleDescription={t(\"SetDefaultRoomQuota\", {\n productName: getBrandName(\"ProductName\"),\n })}\n />\n );\n };",
       "module": "/packages/client"
     }

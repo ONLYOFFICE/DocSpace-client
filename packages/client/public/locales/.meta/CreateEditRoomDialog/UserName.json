@@ -3,7 +3,7 @@
   "content": "User Name",
   "content_en_sha1_hash": "a951840b9198d73fc05820af063286d958ede53b",
   "created_at": "2025-05-19T21:30:56.855Z",
-  "updated_at": "2026-04-11T21:04:22.523Z",
+  "updated_at": "2026-05-15T14:00:06.665Z",
   "comment": {
     "text": "This is a label for a tab in the watermark settings dialog, allowing users to configure the display of the user's name as a watermark.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/Watermarks/ViewerInfo.tsx",
-      "line_number": 43,
+      "line_number": 52,
       "context": "import { StyledWatermark } from \"./StyledComponent\";\n \n const tabsOptions = (t: TFunction) => [\n {\n id: \"UserName\",\n name: t(\"UserName\"),\n index: 0,\n content: null,\n },\n {",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

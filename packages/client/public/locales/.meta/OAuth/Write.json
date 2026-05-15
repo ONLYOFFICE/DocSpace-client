@@ -3,7 +3,7 @@
   "content": "Write",
   "content_en_sha1_hash": "4a48932789d199bbed709777e2d743ca2bafdc6c",
   "created_at": "2025-05-19T21:30:54.069Z",
-  "updated_at": "2026-04-23T17:24:01.932Z",
+  "updated_at": "2026-05-15T14:00:06.792Z",
   "comment": {
     "text": "This is a short label indicating \"write\" permissions or access, used in API key and OAuth settings.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
-      "line_number": 208,
+      "line_number": 217,
       "context": "</Text>\n <Text\n className=\"api-key_permission-container-text separator\"\n fontWeight={600}\n >\n {t(\"OAuth:Write\")}\n </Text>\n \n {permissionsList.map((item) => {\n return item;\n })}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/ScopesBlock.tsx",
-      "line_number": 261,
+      "line_number": 270,
       "context": "className=\"header header-last\"\n fontSize=\"14px\"\n fontWeight={600}\n lineHeight=\"22px\"\n >\n {t(\"Write\")}\n </Text>\n {isRequiredError ? (\n <>\n <Text\n className=\"header-error\"",
       "module": "/packages/client"
     }

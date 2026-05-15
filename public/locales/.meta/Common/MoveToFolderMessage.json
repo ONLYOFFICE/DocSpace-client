@@ -3,7 +3,7 @@
   "content": "You can't move the folder to its subfolder",
   "content_en_sha1_hash": "506393764de44f23f65ce73e264a120055299986",
   "created_at": "2025-05-19T21:30:46.641Z",
-  "updated_at": "2026-04-11T20:48:27.436Z",
+  "updated_at": "2026-05-15T14:00:06.609Z",
   "comment": {
     "text": "This is an error toast message that appears when a user attempts to move a folder into one of its own subfolders, which is an invalid operation.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesSelector/index.tsx",
-      "line_number": 283,
+      "line_number": 292,
       "context": "(\"fileExst\" in item && item.fileExst) ||\n (\"contentLength\" in item && item.contentLength)\n ) {\n fileIds.push(item.id);\n } else if (item.id === selectedItemId) {\n toastr.error(t(\"Common:MoveToFolderMessage\"));\n } else {\n folderIds.push(item.id);\n }\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/HotkeyStore.js",
-      "line_number": 662,
+      "line_number": 671,
       "context": "const fileInAction = activeFiles.includes(item.id);\n if (!fileInAction) {\n fileIds.push(item.id);\n }\n } else if (item.id === selectedItemId) {\n toastr.error(t(\"Common:MoveToFolderMessage\"));\n } else {\n const folderInAction = activeFolders.includes(item.id);\n \n if (!folderInAction) {\n folderIds.push(item.id);",
       "module": "/packages/client"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

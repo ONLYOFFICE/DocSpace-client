@@ -3,7 +3,7 @@
   "content": "Select next item up",
   "content_en_sha1_hash": "5f64a2463187ada6fc34e1aee18d04b790dc954c",
   "created_at": "2025-05-19T21:30:55.095Z",
-  "updated_at": "2026-04-11T21:11:50.439Z",
+  "updated_at": "2026-05-15T14:00:06.706Z",
   "comment": {
     "text": "This is a hotkey description that explains the action of selecting the previous item in a list or menu.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/SelectionBlock.js",
-      "line_number": 48,
+      "line_number": 57,
       "context": "<Text {...keyTextStyles}>j {t(\"Common:Or\")} ↓</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>\n <Text {...textStyles}>{t(\"HotkeysSelectUp\")}</Text>\n <Text {...keyTextStyles}>k {t(\"Common:Or\")} ↑</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>",
       "module": "/packages/client"
     }

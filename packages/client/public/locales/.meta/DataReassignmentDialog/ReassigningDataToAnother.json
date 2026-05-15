@@ -3,7 +3,7 @@
   "content": "The process of data reassignment from user <0>{{fromUser}}</0> to user <1>{{toUser}}</1> has started. Please note that it may take a considerable time.",
   "content_en_sha1_hash": "0768bba0a79f1a717b7b0f99e5d910c7fed76dcf",
   "created_at": "2025-05-19T21:30:56.755Z",
-  "updated_at": "2026-04-11T21:05:06.018Z",
+  "updated_at": "2026-05-15T14:00:06.669Z",
   "comment": {
     "text": "This is a message displayed in a dialog box, informing the user that the data reassignment process has begun. It includes variables for the source user (`{{fromUser}}`) and the target user (`{{toUser}}`).",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Body/Progress.js",
-      "line_number": 185,
+      "line_number": 194,
       "context": "<div className=\"user\"> {{ toUser }}</div>\n <div className=\"user\"> {{ you }}</div>\n </Trans>\n ) : (\n <Trans\n i18nKey=\"ReassigningDataToAnother\"\n ns=\"DataReassignmentDialog\"\n t={t}\n fromUser={fromUser}\n toUser={toUser}\n you={you}",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

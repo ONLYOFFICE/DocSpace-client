@@ -3,7 +3,7 @@
   "content": "Describe how the {{aiAgent}} should behave and respond. Define its role, tone, and main tasks.",
   "content_en_sha1_hash": "8238ab2060f016eb0cb209c6678c7866738414f4",
   "created_at": "2025-12-19T13:03:55.841Z",
-  "updated_at": "2026-04-11T21:01:59.995Z",
+  "updated_at": "2026-05-15T14:00:06.654Z",
   "comment": {
     "text": "This is a description for a text area. It instructs the user on how to describe the AI agent's behavior, role, tone, and main tasks. The variable `{{aiAgent}}` will be replaced with \"AI Agent\".",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/Instructions.tsx",
-      "line_number": 74,
+      "line_number": 83,
       "context": "lineHeight=\"16px\"\n fontWeight={400}\n className=\"set_room_params-info-description\"\n noSelect\n >\n {t(\"InstructionsDescriptionAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n </Text>\n </div>\n <Textarea",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

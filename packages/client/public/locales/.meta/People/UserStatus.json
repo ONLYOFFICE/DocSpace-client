@@ -3,7 +3,7 @@
   "content": "Status",
   "content_en_sha1_hash": "bae7d5be70820ed56467bd9a63744e23b47bd711",
   "created_at": "2025-05-19T21:30:53.557Z",
-  "updated_at": "2026-04-13T14:59:05.776Z",
+  "updated_at": "2026-05-15T14:00:06.697Z",
   "comment": {
     "text": "A label indicating a user's current status, such as \"online\" or \"offline,\" displayed in user information panels and settings dialogs.",
     "is_auto": true,
@@ -13,43 +13,43 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Info.tsx",
-      "line_number": 141,
+      "line_number": 150,
       "context": "</Text>\n </>\n ) : null}\n \n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\" truncate>\n {t(\"People:UserStatus\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight={600} lineHeight=\"20px\">\n {pluginStatus}\n </Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 319,
+      "line_number": 328,
       "context": "{!standalone ? (\n <>\n <Text\n tooltipFitToContent\n className={styles.infoField}\n title={t(\"UserStatus\")}\n >\n {t(\"UserStatus\")}\n </Text>\n <Text\n tooltipFitToContent",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 319,
+      "line_number": 328,
       "context": "{!standalone ? (\n <>\n <Text\n tooltipFitToContent\n className={styles.infoField}\n title={t(\"UserStatus\")}\n >\n {t(\"UserStatus\")}\n </Text>\n <Text\n tooltipFitToContent",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 550,
+      "line_number": 559,
       "context": "const statusItems = [\n {\n id: \"filter_status-user\",\n key: \"filter-status\",\n group: \"filter-status\",\n label: t(\"People:UserStatus\"),\n isHeader: true,\n },\n {\n id: \"filter_status-active\",\n key: EmployeeStatus.Active,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/DetailsBar.js",
-      "line_number": 98,
+      "line_number": 107,
       "context": "const trigger = getTriggerTranslate(eventDetails.trigger, t);\n \n return (\n <BarWrapper>\n <BarItem>\n <BarItemHeader>{t(\"People:UserStatus\")}</BarItemHeader>\n <FlexWrapper>\n <StatusBadge status={eventDetails.status} />\n </FlexWrapper>\n </BarItem>\n <BarItem>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/FilterDialog/StatusPicker.js",
-      "line_number": 114,
+      "line_number": 123,
       "context": ");\n \n return (\n <>\n <Text fontWeight={600} fontSize=\"15px\">\n {t(\"People:UserStatus\")}\n </Text>\n <Selectors>{StatusBadgeElements}</Selectors>\n </>\n );\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/WebhookHistoryTable/HistoryTableView/HistoryTableHeader.js",
-      "line_number": 92,
+      "line_number": 101,
       "context": "minWidth: 210,\n onChange: onColumnChange,\n },\n {\n key: \"Status\",\n title: t(\"People:UserStatus\"),\n enable: true,\n resizable: true,\n onChange: onColumnChange,\n },\n {",
       "module": "/packages/client"
     }

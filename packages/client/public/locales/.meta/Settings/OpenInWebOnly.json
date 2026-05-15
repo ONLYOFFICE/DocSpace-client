@@ -3,7 +3,7 @@
   "content": "Open in web only",
   "content_en_sha1_hash": "caf9fca0de7a5b1f6294fbe7075e3be24b469aa3",
   "created_at": "2025-05-19T21:30:52.127Z",
-  "updated_at": "2026-04-11T21:23:09.104Z",
+  "updated_at": "2026-05-15T14:00:06.770Z",
   "comment": {
     "text": "This is a radio button label in the deep link configuration settings. It indicates that a document link will always open in the web browser, not in a desktop application.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/configure-deep-link.tsx",
-      "line_number": 231,
+      "line_number": 240,
       "context": "value: 0,\n dataTestId: \"deep_link_provide-a-choice\",\n },\n {\n id: \"by-web\",\n label: t(\"OpenInWebOnly\"),\n value: 1,\n dataTestId: \"deep_link_by-web\",\n },\n {\n id: \"by-app\",",
       "module": "/packages/client"
     }

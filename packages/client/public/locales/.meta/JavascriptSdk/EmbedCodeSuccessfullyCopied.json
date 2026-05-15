@@ -3,7 +3,7 @@
   "content": "Embed code successfully copied to clipboard",
   "content_en_sha1_hash": "436fc62d95bda252fc9791a3d3313539c3e69fd8",
   "created_at": "2025-05-19T21:30:54.467Z",
-  "updated_at": "2026-04-11T21:15:48.885Z",
+  "updated_at": "2026-05-15T14:00:06.811Z",
   "comment": {
     "text": "This is a toast message confirming that the embed code has been successfully copied to the user's clipboard. It appears briefly after the user clicks the \"Copy\" button.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/GetCodeDialog.js",
-      "line_number": 49,
+      "line_number": 58,
       "context": "const { t, codeBlock, visible, onClose } = props;\n \n const onCopyClick = () => {\n copy(codeBlock);\n onClose();\n toastr.success(t(\"EmbedCodeSuccessfullyCopied\"));\n };\n \n return (\n <ModalDialog visible={visible} isLarge onClose={onClose}>\n <ModalDialog.Header>{t(\"CopyWindowCode\")}</ModalDialog.Header>",
       "module": "/packages/client"
     }

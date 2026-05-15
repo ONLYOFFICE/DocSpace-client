@@ -3,7 +3,7 @@
   "content": "OAuth 2.0",
   "content_en_sha1_hash": "11ff1c5f1bf611e663f09de411b0c9a4d410b907",
   "created_at": "2025-05-19T21:30:53.924Z",
-  "updated_at": "2026-04-23T17:24:01.934Z",
+  "updated_at": "2026-05-15T14:00:06.796Z",
   "comment": {
     "text": "This is a navigation link and card title for the OAuth 2.0 settings section. It appears in the developer tools settings, allowing users to manage OAuth applications.",
     "is_auto": true,
@@ -13,43 +13,43 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DeveloperToolsHeader.tsx",
-      "line_number": 91,
+      "line_number": 100,
       "context": "if (pathname.includes(\"/developer-tools/javascript-sdk\"))\n return t(\"Settings:EmbedSDK\");\n if (pathname.includes(\"/developer-tools/plugin-sdk\"))\n return t(\"WebPlugins:PluginSDK\");\n if (pathname.includes(\"/developer-tools/webhooks\")) return t(\"Webhooks:Webhooks\");\n if (pathname.includes(\"/developer-tools/oauth\")) return t(\"OAuth:OAuth\");\n return t(\"Common:DeveloperTools\");\n };\n \n const isSubPage = (pathname: string): boolean => {\n const path = pathname.replace(/\\/$/, \"\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 112,
+      "line_number": 121,
       "context": "color={globalColors.mainRed}\n linkTitle={t(\"Webhooks:CreateWebhook\")}\n />\n <Card\n icon={<OAuthSvg />}\n title={t(\"OAuth:OAuth\")}\n description={t(\"Settings:OAuthDescription\", { organizationName: getBrandName(\"OrganizationName\"), productName: getBrandName(\"ProductName\") })}\n url=\"/developer-tools/oauth/create\"\n color={globalColors.purple}\n linkTitle={t(\"Settings:RegisterApp\")}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/index.tsx",
-      "line_number": 67,
+      "line_number": 76,
       "context": "revokeDeveloperTokenDialogVisible,\n apiOAuthLink,\n logoText,\n error,\n }: OAuthProps) => {\n const { t } = useTranslation([\"OAuth\"]);\n \n useViewEffect({\n view: viewAs,\n setView: setViewAs,\n currentDeviceType,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/OAuthCreatePage/index.tsx",
-      "line_number": 35,
+      "line_number": 44,
       "context": "import { setDocumentTitle } from \"SRC_DIR/helpers/utils\";\n \n import ClientForm from \"../sub-components/ClientForm\";\n \n const Component = () => {\n const { t } = useTranslation([\"OAuth\"]);\n \n React.useEffect(() => {\n setDocumentTitle(t(\"OAuth\"));\n }, [t]);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/OAuthEditPage/index.tsx",
-      "line_number": 38,
+      "line_number": 47,
       "context": "import ClientForm from \"../sub-components/ClientForm\";\n \n const Component = () => {\n const { id } = useParams();\n \n const { t } = useTranslation([\"OAuth\"]);\n \n React.useEffect(() => {\n setDocumentTitle(t(\"OAuth\"));\n }, [t]);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/EmptyScreen.tsx",
-      "line_number": 94,
+      "line_number": 103,
       "context": "tag=\"a\"\n style={{ marginBottom: \"20px\" }}\n color=\"accent\"\n dataTestId=\"oauth_guide_link\"\n >\n {t(\"OAuth:OAuth\")} {t(\"Common:Guide\")}\n </Link>\n ) : null}\n </p>\n \n <RegisterNewButton />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/List/index.tsx",
-      "line_number": 102,
+      "line_number": 111,
       "context": "tag=\"a\"\n style={isError ? undefined : { marginBottom: \"20px\" }}\n color=\"accent\"\n dataTestId=\"oauth_guide_link\"\n >\n {t(\"OAuth:OAuth\")} {t(\"Common:Guide\")}\n </Link>\n ) : null}\n \n {isError ? (\n <EmptyServerErrorContainer />",
       "module": "/packages/client"
     }

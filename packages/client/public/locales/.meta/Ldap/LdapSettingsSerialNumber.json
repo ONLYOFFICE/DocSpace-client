@@ -3,7 +3,7 @@
   "content": "Serial number",
   "content_en_sha1_hash": "a5349d62e6c174c229df311a7ebe9c1a78acdc94",
   "created_at": "2025-05-19T21:30:54.296Z",
-  "updated_at": "2026-04-11T21:16:40.666Z",
+  "updated_at": "2026-05-15T14:00:06.847Z",
   "comment": {
     "text": "This is a label for a certificate's serial number, displayed within a dialog showing certificate details.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/CertificateDialog.js",
-      "line_number": 119,
+      "line_number": 128,
       "context": "{t(\"LdapAddCertificateToStoreConfirmation\")}\n </Text>\n </div>\n <div className=\"ldap-settings-crt-details\">\n <Text as=\"p\">\n {t(\"LdapSettingsSerialNumber\")}: {cerficateIssue.serialNumber}\n </Text>\n \n <Text as=\"p\">\n {t(\"LdapSettingsIssuerName\")}: {cerficateIssue.issuerName}\n </Text>",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "SP Assertion Consumer URL (support POST and Redirect binding)",
   "content_en_sha1_hash": "2b8529e9db8bb8d718ee9270222543091dfae4c0",
   "created_at": "2025-05-19T21:30:50.149Z",
-  "updated_at": "2026-04-11T21:26:29.689Z",
+  "updated_at": "2026-05-15T14:00:06.858Z",
   "comment": {
     "text": "This is a label for a text input field. It identifies the URL where the Service Provider (ONLYOFFICE DocSpace) expects to receive SAML assertions from an Identity Provider.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/ProviderMetadata.js",
-      "line_number": 92,
+      "line_number": 101,
       "context": "tooltipClass=\"sp-entity-id-tooltip icon-button\"\n dataTestId=\"sp_entity_id\"\n />\n \n <MetadataUrlField\n labelText={t(\"SPAssertionConsumerURL\")}\n name=\"spAssertionConsumerUrl\"\n placeholder={`${url}/sso/acs`}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"SPAssertionConsumerURLTooltip\")}</Text>\n }",
       "module": "/packages/client"
     }

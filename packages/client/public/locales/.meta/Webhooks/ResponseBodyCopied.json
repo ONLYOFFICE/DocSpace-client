@@ -3,7 +3,7 @@
   "content": "POST response body successfully copied to clipboard",
   "content_en_sha1_hash": "f5f28000edb21336f906315e981a240dc481c228",
   "created_at": "2025-05-19T21:30:49.805Z",
-  "updated_at": "2026-04-11T21:28:34.320Z",
+  "updated_at": "2026-05-15T14:00:06.831Z",
   "comment": {
     "text": "This is a toast message that appears briefly to confirm that the content of a POST response body has been successfully copied to the user's clipboard.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/ResponseDetails.js",
-      "line_number": 159,
+      "line_number": 168,
       "context": "value={responsePayload}\n isJSONField\n enableCopy\n hasNumeration\n isFullHeight\n copyInfoText={t(\"ResponseBodyCopied\")}\n />\n ) : (\n <Textarea\n classNameCopyIcon=\"response-body-copy\"\n value={responsePayload}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/ResponseDetails.js",
-      "line_number": 159,
+      "line_number": 168,
       "context": "value={responsePayload}\n isJSONField\n enableCopy\n hasNumeration\n isFullHeight\n copyInfoText={t(\"ResponseBodyCopied\")}\n />\n ) : (\n <Textarea\n classNameCopyIcon=\"response-body-copy\"\n value={responsePayload}",
       "module": "/packages/client"
     }

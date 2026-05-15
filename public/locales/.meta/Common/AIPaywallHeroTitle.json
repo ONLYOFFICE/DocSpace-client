@@ -1,0 +1,29 @@
+{
+  "key_path": "AIPaywallHeroTitle",
+  "content": "Add AI to your workspace — ${{price}} to get started.",
+  "content_en_sha1_hash": "1f0faff73f17d56e62047c9a326146abeba89f24",
+  "created_at": "2026-05-15T13:59:46.070Z",
+  "updated_at": "2026-05-15T14:04:11.981Z",
+  "comment": {
+    "text": "Hero title on the AI paywall page that prompts users to add AI features; includes a `${{price}}` variable representing the starting cost.",
+    "is_auto": true,
+    "updated_at": "2026-05-15T14:04:11.981Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallPage.tsx",
+      "line_number": 268,
+      "context": "lineHeight=\"24px\"\n className={styles.heroTitle}\n >\n {waitingPhase === \"completed\"\n ? t(\"AIPaywallHeroTitleCompleted\")\n : t(\"AIPaywallHeroTitle\", { price: START_AMOUNT })}\n </Text>\n </div>\n \n <div className={styles.balanceSection}>\n <div className={styles.balanceCard}>",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

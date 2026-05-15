@@ -3,7 +3,7 @@
   "content": "Professional templates with AI-powered data collection",
   "content_en_sha1_hash": "7e1c98dde39455c416d028c168723a05b7ef5d8c",
   "created_at": "2026-03-31T15:18:15.013Z",
-  "updated_at": "2026-04-11T20:50:10.937Z",
+  "updated_at": "2026-05-15T14:00:06.979Z",
   "comment": {
     "text": "This is a subtitle displayed on the library landing page, describing the benefits of using professional templates.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/library-landing/StatsBar.tsx",
-      "line_number": 51,
+      "line_number": 60,
       "context": "return (\n <section className={styles.stats}>\n <h2 className={styles.statsTitle}>{t(\"Common:LibraryStatsTitle\")}</h2>\n <p className={styles.statsSubtitle}>\n {t(\"Common:LibraryStatsSubtitle\")}\n </p>\n \n <div className={styles.statsCards}>\n <div className={styles.statsCard}>\n <span className={styles.statsNumber}>{templatesCount}</span>",
       "module": "/packages/sdk"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

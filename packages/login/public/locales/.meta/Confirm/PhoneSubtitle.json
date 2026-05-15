@@ -3,7 +3,7 @@
   "content": "The two-factor authentication is enabled to provide additional security. Enter your mobile phone number to continue working in the {{productName}}. Mobile phone number must be entered using an international format with the country code.",
   "content_en_sha1_hash": "278e2e7917f39bdf597e5758e552fdbe95b7626a",
   "created_at": "2025-05-19T21:30:57.376Z",
-  "updated_at": "2026-04-11T21:30:11.048Z",
+  "updated_at": "2026-05-15T14:00:06.910Z",
   "comment": {
     "text": "This is a paragraph of text displayed on the phone activation screen during two-factor authentication setup. It informs the user about the security benefits and instructs them to enter their mobile number in international format, using the `productName` variable to refer to the application.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PhoneActivation/page.client.tsx",
-      "line_number": 55,
+      "line_number": 64,
       "context": "</Text>\n <Text>\n {t(\"CurrentNumber\")}: {currentNumber}\n </Text>\n <Text>\n {t(\"PhoneSubtitle\", { productName: getBrandName(\"ProductName\") })}\n </Text>\n </div>\n \n <TextInput\n className=\"phone-input\"",
       "module": "/packages/login"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-04T13:03:19.470988Z"
+      "approved_at": "2026-05-15T15:04:54.629887Z"
     },
     "si": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "Language and Time Zone Settings is a way to change the language of the whole portal for all portal users and to configure the time zone so that all the events of the portal will be shown with the correct date and time.",
   "content_en_sha1_hash": "9503b26b14f5ba17a6a5797217e4af9ffe524df3",
   "created_at": "2025-05-19T21:30:51.767Z",
-  "updated_at": "2026-04-11T21:23:35.193Z",
+  "updated_at": "2026-05-15T14:00:06.776Z",
   "comment": {
     "text": "This is a subtitle for a navigation item. It describes the purpose of the \"Language and Time Zone Settings\" section, which allows administrators to change the portal's language for all users and set the time zone for event display.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
-      "line_number": 72,
+      "line_number": 81,
       "context": "<LoaderCustomizationNavbar />\n ) : (\n <StyledComponent>\n <CategoryItem\n title={t(\"StudioTimeLanguageSettings\")}\n subtitle={t(\"LanguageAndTimeZoneSettingsNavDescription\")}\n url=\"/portal-settings/customization/general/language-and-time-zone\"\n onClickLink={onClickLink}\n />\n <CategoryItem\n title={t(\"CustomTitlesWelcome\")}",
       "module": "/packages/client"
     }

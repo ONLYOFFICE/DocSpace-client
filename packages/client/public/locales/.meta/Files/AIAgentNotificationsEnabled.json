@@ -3,7 +3,7 @@
   "content": "{{aiAgent}} notifications enabled",
   "content_en_sha1_hash": "55a05d04314af2a52ec03bd6713f7eceef33e3c9",
   "created_at": "2025-12-19T13:03:47.513Z",
-  "updated_at": "2026-05-08T13:10:45.677Z",
+  "updated_at": "2026-05-15T14:00:06.894Z",
   "comment": {
     "text": "This is a toast message indicating that notifications for the AI assistant have been enabled. The `{{aiAgent}}` variable will be replaced with the localized name of the AI assistant.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1438,
+      "line_number": 1447,
       "context": "if (isAIAgent) {\n notificationsDisabled = t(\"AIAgentNotificationsDisabled\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n notificationsEnabled = t(\"AIAgentNotificationsEnabled\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n }\n \n muteRoomNotification(id, muteStatus)",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

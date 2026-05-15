@@ -3,7 +3,7 @@
   "content": "Branding",
   "content_en_sha1_hash": "d17dc3843de8e54fc084f0b952690209018ca128",
   "created_at": "2025-05-26T07:15:40.963Z",
-  "updated_at": "2026-04-11T20:58:11.659Z",
+  "updated_at": "2026-05-15T14:00:06.776Z",
   "comment": {
     "text": "This is a navigation item and section title in the portal settings, allowing users to customize the visual branding of their ONLYOFFICE DocSpace.",
     "is_auto": true,
@@ -13,25 +13,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/branding.js",
-      "line_number": 64,
+      "line_number": 73,
       "context": "}) => {\n const navigate = useNavigate();\n const isMobileView = deviceType === DeviceType.mobile;\n \n useEffect(() => {\n setDocumentTitle(t(\"Common:Branding\"));\n }, []);\n \n const hideBlock = isManagement() ? false : portals?.length > 1;\n \n const showSettings = standalone && !hideBlock;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/index.tsx",
-      "line_number": 135,
+      "line_number": 144,
       "context": "];\n \n if (!isCommunity) {\n data.splice(1, 0, {\n id: \"branding\",\n name: t(\"Common:Branding\"),\n content: <Branding />,\n onClick: async () => {\n clearAbortControllerArr();\n await getBrandingData();\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 109,
+      "line_number": 118,
       "context": "{\n id: \"portal-settings_catalog-branding\",\n key: \"0-1\",\n icon: \"\",\n link: \"branding\",\n tKey: \"Common:Branding\",\n isCategory: true,\n children: [\n {\n id: \"portal-settings_catalog-brand-name\",\n key: \"0-1-0\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/management/src/app/settings/layout.tsx",
-      "line_number": 60,
+      "line_number": 69,
       "context": "const standalone = settings?.standalone;\n \n const data = [\n {\n id: \"branding\",\n name: t(\"Common:Branding\"),\n content: <LoaderWrapper isLoading={isLoading}>{children}</LoaderWrapper>,\n },\n {\n id: \"data-backup\",\n name: t(\"Common:DataBackup\"),",
       "module": "/packages/management"
     }
@@ -167,7 +167,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

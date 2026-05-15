@@ -3,7 +3,7 @@
   "content": "To access paid services, please link a payment card. The person who connects the card will automatically be assigned as the Payer for this account.",
   "content_en_sha1_hash": "a57a45e94ed53261ecc611afff0f4cc604ea39e9",
   "created_at": "2026-04-10T13:53:42.763Z",
-  "updated_at": "2026-05-08T13:10:45.730Z",
+  "updated_at": "2026-05-15T14:00:06.999Z",
   "comment": {
     "text": "This text appears as a description below the \"No Payment Method\" heading on the billing page. It explains why a payment method is needed and clarifies the role of the person who adds it.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
-      "line_number": 209,
+      "line_number": 220,
       "context": "<div>\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"NoPaymentMethod\")}\n </Text>\n <Text className={styles.noPaymentDescription}>\n {t(\"NoPaymentMethodDescription\")}\n </Text>\n <div className={styles.buttonWrapper}>\n <Button\n label={t(\"AddPaymentMethod\")}\n size={ButtonSize.small}",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

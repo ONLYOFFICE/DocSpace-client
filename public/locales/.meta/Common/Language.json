@@ -3,7 +3,7 @@
   "content": "Language",
   "content_en_sha1_hash": "89b86ab0e66f527166d98df92ddbcf5416ed58f6",
   "created_at": "2025-05-19T21:30:46.038Z",
-  "updated_at": "2026-04-11T20:50:25.717Z",
+  "updated_at": "2026-05-15T14:00:06.771Z",
   "comment": {
     "text": "This is a label for a dropdown menu or a section heading where users can select their preferred language for the interface.",
     "is_auto": true,
@@ -13,25 +13,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/language-and-time-zone.js",
-      "line_number": 464,
+      "line_number": 473,
       "context": "const settingsBlock = (\n <div className=\"settings-block\">\n <FieldContainer\n id=\"fieldContainerLanguage\"\n labelText={`${t(\"Common:Language\")}`}\n isVertical\n >\n <div className=\"settings-block__wrapper-language\">\n <ComboBox\n tabIndex={1}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 560,
+      "line_number": 569,
       "context": "<Text\n as=\"div\"\n className={classNames(styles.label, styles.profileLanguage)}\n >\n {t(\"Common:Language\")}\n {documentationEmail ? (\n <HelpButton\n size={12}\n offsetRight={0}\n place={dirTooltip}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 560,
+      "line_number": 569,
       "context": "<Text\n as=\"div\"\n className={classNames(styles.label, styles.profileLanguage)}\n >\n {t(\"Common:Language\")}\n {documentationEmail ? (\n <HelpButton\n size={12}\n offsetRight={0}\n place={dirTooltip}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/login/src/app/(root)/wizard/page.client.tsx",
-      "line_number": 460,
+      "line_number": 469,
       "context": "</Text>\n </div>\n \n <div className={styles.infoWrapper}>\n <Text className={styles.text} fontWeight={400}>\n {t(\"Common:Language\")}\n </Text>\n <div className={styles.wrapperLanguageSelector}>\n <ComboBox\n withoutPadding\n directionY=\"both\"",
       "module": "/packages/login"
     }
@@ -167,7 +167,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

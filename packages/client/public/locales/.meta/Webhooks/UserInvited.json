@@ -3,7 +3,7 @@
   "content": "User invited",
   "content_en_sha1_hash": "8bd59dce4d9b99916a96dbf05d0767dce87fdc89",
   "created_at": "2025-05-19T21:30:49.860Z",
-  "updated_at": "2026-04-13T14:59:05.875Z",
+  "updated_at": "2026-05-15T14:00:06.832Z",
   "comment": {
     "text": "This is a short label indicating that a user has been invited, displayed in a list of webhook triggers.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
-      "line_number": 35,
+      "line_number": 44,
       "context": "export const getTriggerTranslate = (trigger: number, t: TTranslation) => {\n switch (trigger) {\n case WebhookTriggers.UserCreated:\n return t(\"UserCreated\");\n case WebhookTriggers.UserInvited:\n return t(\"UserInvited\");\n case WebhookTriggers.UserUpdated:\n return t(\"UserUpdated\");\n case WebhookTriggers.UserDeleted:\n return t(\"UserDeleted\");\n case WebhookTriggers.GroupCreated:",
       "module": "/packages/client"
     }

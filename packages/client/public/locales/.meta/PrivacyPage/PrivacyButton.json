@@ -3,7 +3,7 @@
   "content": "Open {{OnlyofficeDesktopEditors}}",
   "content_en_sha1_hash": "a2915ecbfe5ccb5180bc2267623eca4283dd2200",
   "created_at": "2026-04-11T18:34:17.077Z",
-  "updated_at": "2026-04-11T21:20:30.158Z",
+  "updated_at": "2026-05-15T14:00:06.876Z",
   "comment": {
     "text": "This is the label for a button that opens the ONLYOFFICE Desktop Editors application. The variable `{{OnlyofficeDesktopEditors}}` will be replaced with the localized brand name of the desktop application.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PrivateRoomsPage/index.js",
-      "line_number": 196,
+      "line_number": 205,
       "context": "<Button\n onClick={onOpenEditorsPopup}\n size=\"medium\"\n primary\n isDisabled={isDisabled}\n label={t(\"PrivacyButton\", {\n OnlyofficeDesktopEditors: getBrandName(\"OnlyofficeDesktopEditors\"),\n })}\n />\n \n <label className=\"privacy-rooms-text-separator\" />",
       "module": "/packages/client"
     }

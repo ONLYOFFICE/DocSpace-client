@@ -3,7 +3,7 @@
   "content": "To",
   "content_en_sha1_hash": "ae79ea1e9c6391a9ed83a2e18a031b835feec0c9",
   "created_at": "2026-04-10T13:53:43.629Z",
-  "updated_at": "2026-04-12T15:06:24.976Z",
+  "updated_at": "2026-05-15T14:00:07.015Z",
   "comment": {
     "text": "This is a short label indicating the destination of a top-up transaction, typically appearing in billing interfaces to specify where funds are being added.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/FromWalletToAi.tsx",
-      "line_number": 88,
+      "line_number": 97,
       "context": "onTopUp={isBalanceInsufficient ? onTopUpBalance : undefined}\n />\n </div>\n \n <div className={modalStyles.transferBlock}>\n <Text fontWeight=\"600\">{t(\"TopUpTo\")}</Text>\n \n <WalletInfo\n title={t(\"OrganizationAI\", {\n organizationName: logoText,\n })}",
       "module": "/libs/ui-kit"
     }
@@ -163,7 +163,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

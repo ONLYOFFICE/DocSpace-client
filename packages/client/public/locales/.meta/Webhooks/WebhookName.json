@@ -3,7 +3,7 @@
   "content": "Webhook name",
   "content_en_sha1_hash": "90a60b50b8283a74080813d5ee3eef80b8678776",
   "created_at": "2025-05-19T21:30:49.881Z",
-  "updated_at": "2026-04-23T17:24:02.009Z",
+  "updated_at": "2026-05-15T14:00:06.840Z",
   "comment": {
     "text": "This is the label for an input field where the user enters a name for a webhook.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhookDialog.js",
-      "line_number": 214,
+      "line_number": 223,
       "context": "<ModalDialog.Header>{header}</ModalDialog.Header>\n <ModalDialog.Body>\n <StyledWebhookForm onSubmit={onFormSubmit}>\n <LabledInput\n id={`${additionalId}-name-input`}\n label={t(\"WebhookName\")}\n placeholder={t(\"EnterWebhookName\")}\n name=\"name\"\n value={webhookInfo.name}\n onChange={onInputChange}\n hasError={!isValid.name}",
       "module": "/packages/client"
     }

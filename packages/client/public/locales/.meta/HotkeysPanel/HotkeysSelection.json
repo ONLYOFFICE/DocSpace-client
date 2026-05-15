@@ -3,7 +3,7 @@
   "content": "Selecting items",
   "content_en_sha1_hash": "ff107295cec9a49c5dc0fa042fb492445682889f",
   "created_at": "2025-05-19T21:30:55.086Z",
-  "updated_at": "2026-04-11T21:11:58.317Z",
+  "updated_at": "2026-05-15T14:00:06.707Z",
   "comment": {
     "text": "This is a subheading within the hotkeys panel. It introduces a section detailing hotkeys related to selecting items.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/index.js",
-      "line_number": 120,
+      "line_number": 129,
       "context": "keyTextStyles={keyTextStyles}\n />\n </>\n ) : null}\n <Heading className={styles.hotkeysSubHeader}>\n {t(\"HotkeysSelection\")}\n </Heading>\n <SelectionBlock\n t={t}\n textStyles={textStyles}\n keyTextStyles={keyTextStyles}",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Authorization header",
   "content_en_sha1_hash": "b4e71c87b167fcd1f2219f26ed7bbc978140646c",
   "created_at": "2025-05-19T21:30:51.346Z",
-  "updated_at": "2026-04-11T21:24:24.647Z",
+  "updated_at": "2026-05-15T14:00:06.843Z",
   "comment": {
     "text": "This is a label for an input field where users can enter an authorization header for document service integration.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 343,
+      "line_number": 352,
       "context": "{isShowAdvancedSettings ? (\n <>\n <div className=\"input-wrapper\">\n <Label\n htmlFor=\"authHeader\"\n text={t(\"Settings:DocumentServiceAuthHeader\")}\n />\n <InputBlock\n id=\"authHeader\"\n type=\"text\"\n autoComplete=\"off\"",
       "module": "/packages/client"
     }

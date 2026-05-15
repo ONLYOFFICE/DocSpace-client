@@ -3,7 +3,7 @@
   "content": "Location",
   "content_en_sha1_hash": "d219c68101f532de10add2cf42fb9dbeca73d3be",
   "created_at": "2025-05-19T21:30:46.299Z",
-  "updated_at": "2026-05-12T08:51:58.449Z",
+  "updated_at": "2026-05-15T14:00:06.724Z",
   "comment": {
     "text": "This is a column header or a label in the details panel, indicating the storage path or physical location of a file or folder within DocSpace.",
     "is_auto": true,
@@ -13,55 +13,55 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
-      "line_number": 225,
+      "line_number": 234,
       "context": "switch (propertyId) {\n case \"Owner\":\n case \"OwnedBy\":\n return this.t(\"Common:Owner\");\n case \"Location\":\n return this.t(\"Common:Location\");\n \n case \"Type\":\n return this.t(\"Common:Type\");\n case \"Storage Type\":\n return this.t(\"InfoPanel:StorageType\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 533,
+      "line_number": 542,
       "context": "resizable: true,\n onChange: this.onColumnChange,\n },\n {\n key: \"LocationRecent\",\n title: t(\"Common:Location\"),\n enable: locationRecentColumnIsEnabled,\n resizable: true,\n onChange: this.onColumnChange,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 533,
+      "line_number": 542,
       "context": "resizable: true,\n onChange: this.onColumnChange,\n },\n {\n key: \"LocationRecent\",\n title: t(\"Common:Location\"),\n enable: locationRecentColumnIsEnabled,\n resizable: true,\n onChange: this.onColumnChange,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 533,
+      "line_number": 542,
       "context": "resizable: true,\n onChange: this.onColumnChange,\n },\n {\n key: \"LocationRecent\",\n title: t(\"Common:Location\"),\n enable: locationRecentColumnIsEnabled,\n resizable: true,\n onChange: this.onColumnChange,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1448,
+      "line_number": 1457,
       "context": "if (isRecentFolder) {\n const locationOption = [\n {\n key: FilterGroups.filterLocation,\n group: FilterGroups.filterLocation,\n label: t(\"Common:Location\"),\n isHeader: true,\n isLast: true,\n },\n {\n id: \"filter_location-rooms\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1448,
+      "line_number": 1457,
       "context": "if (isRecentFolder) {\n const locationOption = [\n {\n key: FilterGroups.filterLocation,\n group: FilterGroups.filterLocation,\n label: t(\"Common:Location\"),\n isHeader: true,\n isLast: true,\n },\n {\n id: \"filter_location-rooms\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/FieldMapping.js",
-      "line_number": 111,
+      "line_number": 120,
       "context": "hasError={emailHasError}\n dataTestId=\"email_field\"\n />\n \n {/* <SsoFormField\n labelText={t(\"Common:Location\")}\n name=\"location\"\n placeholder={SSO_LOCATION}\n tabIndex={19}\n value={location}\n hasError={locationHasError}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/TableView/TableHeader.js",
-      "line_number": 61,
+      "line_number": 70,
       "context": "resizable: true,\n onChange: this.onColumnChange,\n },\n {\n key: \"Room\",\n title: t(\"Common:Location\"),\n enable: true,\n resizable: true,\n onChange: this.onColumnChange,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/login/active-session/SessionsTable/TableView/SessionsTableHeader.js",
-      "line_number": 97,
+      "line_number": 106,
       "context": "resizable: true,\n onChange: onColumnChange,\n },\n {\n key: \"Location\",\n title: t(\"Common:Location\"),\n enable: true,\n resizable: true,\n onChange: onColumnChange,\n },\n ];",
       "module": "/packages/client"
     }
@@ -197,7 +197,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "You",
   "content_en_sha1_hash": "905cb326c779f0123e079bf8ccb223176a3cf32d",
   "created_at": "2025-05-19T21:30:49.648Z",
-  "updated_at": "2026-04-12T08:17:18.598Z",
+  "updated_at": "2026-05-15T14:00:06.669Z",
   "comment": {
     "text": "This is a short label for the pronoun \"You\". It appears in various contexts, often within parentheses, to indicate the current user.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Body/Progress.js",
-      "line_number": 168,
+      "line_number": 177,
       "context": "<InterruptIcon className=\"status-icon\" />\n <Text className=\"status\">{t(\"DataReassignmentDialog:Interrupted\")}</Text>\n </div>\n );\n \n const you = `${`(${t(\"Common:You\")})`}`;\n \n const reassigningDataStart = isReassignCurrentUser ? (\n <Trans\n i18nKey=\"ReassigningDataToItself\"\n ns=\"DataReassignmentDialog\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 80,
+      "line_number": 89,
       "context": "ns=\"DeleteProfileEverDialog\"\n t={t as TFunction}\n values={{\n warningMessageMyDocuments,\n userPerformedDeletion: userPerformedDeletion!.displayName,\n userYou: t(\"Common:You\"),\n }}\n components={{\n 1: <strong />,\n }}\n />",
       "module": "/packages/client"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

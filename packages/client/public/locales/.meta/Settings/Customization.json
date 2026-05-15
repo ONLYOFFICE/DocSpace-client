@@ -3,7 +3,7 @@
   "content": "Customization",
   "content_en_sha1_hash": "d7f0ac9e007291a6ccc21d036f4711505ad9d0b1",
   "created_at": "2025-05-19T21:30:51.004Z",
-  "updated_at": "2026-04-11T21:25:07.595Z",
+  "updated_at": "2026-05-15T14:00:06.755Z",
   "comment": {
     "text": "This is a section title in the portal settings, referring to the customization options for the portal's appearance and behavior.",
     "is_auto": true,
@@ -13,25 +13,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization.js",
-      "line_number": 107,
+      "line_number": 116,
       "context": "} = props;\n \n const isLoadedSetting = isLoaded && tReady;\n \n useEffect(() => {\n setDocumentTitle(t(\"Settings:Customization\"));\n \n return () => {\n resetIsInit();\n };\n }, []);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 193,
+      "line_number": 202,
       "context": "const mapKeys = (tKey) => {\n switch (tKey) {\n case \"AccessRights\":\n return t(\"Common:AccessRights\");\n case \"Customization\":\n return t(\"Customization\");\n case \"SettingsGeneral\":\n return t(\"SettingsGeneral\");\n case \"StudioTimeLanguageSettings\":\n return t(\"StudioTimeLanguageSettings\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 42,
+      "line_number": 51,
       "context": "{\n id: \"portal-settings_catalog-customization\",\n key: \"0\",\n type: PageType.customization,\n link: \"customization\",\n tKey: \"Customization\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-general\",\n key: \"0-0\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/pages/Payments/common/BenefitsContainer.tsx",
-      "line_number": 119,
+      "line_number": 128,
       "context": "description: t(\"RegularUpdatesDescription\"),\n };\n \n const customization = {\n imag: CustomizationReactSvgUrl,\n title: t(\"Settings:Customization\"),\n description: t(\"ProvideBrandedExperience\"),\n };\n \n const featuresArray = getFeatures();",
       "module": "/packages/shared"
     }

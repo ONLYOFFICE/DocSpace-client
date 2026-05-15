@@ -3,7 +3,7 @@
   "content": "Select",
   "content_en_sha1_hash": "8598222918d3c6e513d63060cf55e2971ded729a",
   "created_at": "2025-05-19T21:30:49.307Z",
-  "updated_at": "2026-04-13T14:59:05.803Z",
+  "updated_at": "2026-05-15T14:00:06.747Z",
   "comment": {
     "text": "This is a tooltip for a checkbox or a combobox. It appears when hovering over a checkbox in a table row or a combobox in a table group menu, indicating that the element is used to select a file or files.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/components/table/table-group-menu/TableGroupMenu.tsx",
-      "line_number": 144,
+      "line_number": 153,
       "context": "className={classNames(styles.combobox, \"not-selectable\")}\n options={EMPTY_ARRAY}\n selectedOption={EMPTY_OBJECT as TOption}\n manualY=\"42px\"\n manualX=\"-32px\"\n title={t(\"TitleSelectFile\")}\n isMobileView={isMobileView}\n onSelect={FUNCTION_EMPTY}\n dataTestId=\"table_group_menu_combobox\"\n withBackground={isMobileView}\n />",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/sub-components/FileNameCell/index.tsx",
-      "line_number": 100,
+      "line_number": 109,
       "context": "{!isIndexEditingMode ? (\n <Checkbox\n className=\"table-container_row-checkbox\"\n onChange={onChange}\n isChecked={checked}\n title={t(\"Common:TitleSelectFile\")}\n />\n ) : null}\n </div>\n </TableCell>\n )}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/table-view/sub-components/TableViewRow.tsx",
-      "line_number": 203,
+      "line_number": 212,
       "context": "</div>\n <Checkbox\n className=\"table-container_row-checkbox\"\n onChange={onCheckboxChange}\n isChecked={isChecked}\n title={t(\"Common:TitleSelectFile\")}\n />\n </div>\n <span className={styles.nameCellText} onClick={onNameClick}>\n {titleWithoutExt}\n {displayFileExtension && \"fileExst\" in item ? (",
       "module": "/packages/sdk"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

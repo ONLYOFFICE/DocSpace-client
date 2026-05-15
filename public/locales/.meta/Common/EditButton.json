@@ -3,7 +3,7 @@
   "content": "Edit",
   "content_en_sha1_hash": "5301648dcf6b53cefc9ed52999aaa92d4603cae0",
   "created_at": "2025-05-19T21:30:44.738Z",
-  "updated_at": "2026-05-08T13:10:45.582Z",
+  "updated_at": "2026-05-15T14:00:06.691Z",
   "comment": {
     "text": "This is a button label. It allows users to edit settings, such as auto-payments or submission configurations.",
     "is_auto": true,
@@ -13,61 +13,61 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/AutoPayments.tsx",
-      "line_number": 314,
+      "line_number": 323,
       "context": "<CurrentPaymentSettings\n autoPayments={autoPayments!}\n formatWalletCurrency={formatWalletCurrency}\n />\n <Button\n key=\"EditButton\"\n label={t(\"EditButton\")}\n size={ButtonSize.small}\n onClick={onEditClick}\n isDisabled={isDisabled}\n testId=\"edit_auto_payment_button\"",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/wallet/sub-components/AutoPaymentInfo.tsx",
-      "line_number": 85,
+      "line_number": 94,
       "context": "<Link\n onClick={onOpen}\n textDecoration=\"underline\"\n dataTestId=\"auto_edit_button\"\n >\n {t(\"EditButton\")}\n </Link>\n ) : null}\n </Text>\n </div>\n </div>",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/PauseSubmissionsDialog/index.tsx",
-      "line_number": 96,
+      "line_number": 105,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"pause-submissions-dialog_edit\"\n key=\"EditButton\"\n label={t(\"Common:EditButton\")}\n size={ButtonSize.normal}\n primary\n onClick={handleEdit}\n isLoading={isLoading}\n isDisabled={isLoading}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/CommentEditor.tsx",
-      "line_number": 140,
+      "line_number": 149,
       "context": "onClick={onOpenEditor}\n data-testid=\"info_panel_details_comment_edit_toggle\"\n >\n <ReactSVG className=\"edit_toggle-icon\" src={PencilReactSvgUrl} />\n <div className=\"property-content edit_toggle-text\">\n {comment ? t(\"Common:EditButton\") : t(\"Common:AddButton\")}\n </div>\n </div>\n ) : null}\n </div>\n ) : (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 801,
+      "line_number": 810,
       "context": "testId=\"appearance_save_button\"\n />\n \n <Button\n className=\"edit-current-theme button\"\n label={t(\"Common:EditButton\")}\n onClick={onClickEdit}\n size={buttonSize}\n isDisabled={isDisabledEditButton}\n testId=\"appearance_edit_button\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
-      "line_number": 513,
+      "line_number": 522,
       "context": "const createFooter = (\n <>\n <Button\n key=\"OKButton\"\n label={isEdit ? t(\"Common:EditButton\") : t(\"Webhooks:Generate\")}\n size={ButtonSize.normal}\n primary\n onClick={onGenerate}\n scale\n isDisabled={isRequestRunning || editIsDisabled || generateIsDisabled}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/useContextOptions.ts",
-      "line_number": 41,
+      "line_number": 50,
       "context": "onDeleteApiKey: (id: TApiKey[\"id\"]) => void,\n ) => {\n const contextOptions = [\n {\n key: \"api-key_edit\",\n label: t(\"Common:EditButton\"),\n icon: SettingsReactSvgUrl,\n onClick: () => onEditApiKey(item.id),\n },\n {\n key: \"separator\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/CertificatesTable.js",
-      "line_number": 70,
+      "line_number": 79,
       "context": "const contextOptions = [\n {\n id: \"edit\",\n key: \"edit\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: onEdit,\n },\n {\n id: \"delete\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2174,
+      "line_number": 2183,
       "context": "disabled: false,\n },\n {\n id: \"option_edit-pdf\",\n key: \"edit-pdf\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n if (isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2174,
+      "line_number": 2183,
       "context": "disabled: false,\n },\n {\n id: \"option_edit-pdf\",\n key: \"edit-pdf\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n if (isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;",
       "module": "/packages/client"
     },
@@ -79,7 +79,7 @@
     },
     {
       "file_path": "/packages/management/src/app/spaces/multiple/domain-settings.tsx",
-      "line_number": 84,
+      "line_number": 93,
       "context": "size={\n currentDeviceType === DeviceType.desktop\n ? ButtonSize.small\n : ButtonSize.normal\n }\n label={t(\"Common:EditButton\")}\n primary\n onClick={onEditButtonClick}\n scale={false}\n />\n </div>",
       "module": "/packages/management"
     },
@@ -91,31 +91,31 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/forms-grid/FormStatusBadge.tsx",
-      "line_number": 113,
+      "line_number": 122,
       "context": "<div className=\"badges\">\n <div className=\"badge\">\n <IconButton\n size={16}\n iconName={PencilIcon}\n title={t(\"Common:EditButton\")}\n isClickable={false}\n />\n </div>\n </div>\n );",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsContextMenu.ts",
-      "line_number": 198,
+      "line_number": 207,
       "context": ": null,\n edit: canEdit\n ? {\n id: \"option_edit\",\n key: \"edit\",\n label: t(\"Common:EditButton\"),\n icon: PencilReactSvgUrl,\n onClick: () => openForm(file, \"edit\"),\n disabled: false,\n }\n : null,",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/media-viewer/MediaViewer.helpers.tsx",
-      "line_number": 62,
+      "line_number": 71,
       "context": ") => {\n const options: ContextMenuModel[] = [\n {\n id: \"option_edit\",\n key: \"edit\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => funcs.onClickLinkEdit?.(item),\n disabled: !item.viewAccessibility.WebEdit,\n },\n {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 331,
+      "line_number": 340,
       "context": "};\n \n export const getNameAccess = (access: ShareAccessRights, t: TTranslation) => {\n switch (access) {\n case ShareAccessRights.Editing:\n return t(\"Common:EditButton\");\n case ShareAccessRights.CustomFilter:\n return t(\"Common:UseCustomFilter\");\n case ShareAccessRights.Review:\n return t(\"Common:Review\");\n case ShareAccessRights.Comment:",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 331,
+      "line_number": 340,
       "context": "};\n \n export const getNameAccess = (access: ShareAccessRights, t: TTranslation) => {\n switch (access) {\n case ShareAccessRights.Editing:\n return t(\"Common:EditButton\");\n case ShareAccessRights.CustomFilter:\n return t(\"Common:UseCustomFilter\");\n case ShareAccessRights.Review:\n return t(\"Common:Review\");\n case ShareAccessRights.Comment:",
       "module": "/packages/shared"
     }
@@ -251,7 +251,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

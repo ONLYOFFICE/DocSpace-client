@@ -3,7 +3,7 @@
   "content": "Individual events",
   "content_en_sha1_hash": "500875d6366d707999bfdf9346e38456a552c5b2",
   "created_at": "2025-05-19T21:30:49.775Z",
-  "updated_at": "2026-04-23T17:24:02.009Z",
+  "updated_at": "2026-05-15T14:00:06.840Z",
   "comment": {
     "text": "This is a radio button label in the Webhooks settings. It allows users to select specific events for a webhook trigger, rather than all events.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/TriggersForm.tsx",
-      "line_number": 83,
+      "line_number": 92,
       "context": "value: \"true\",\n dataTestId: \"enable_all_radio_button\",\n },\n {\n id: \"select-from-list\",\n label: t(\"IndividualEvents\"),\n value: \"false\",\n dataTestId: \"select_from_list_radio_button\",\n },\n ]}\n selected={triggerAll ? \"true\" : \"false\"}",
       "module": "/packages/client"
     }

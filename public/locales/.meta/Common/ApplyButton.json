@@ -3,7 +3,7 @@
   "content": "Apply",
   "content_en_sha1_hash": "cfea419c3b4e8b02ee586e70a28bf846e44cdda4",
   "created_at": "2025-05-19T21:30:43.032Z",
-  "updated_at": "2026-05-08T13:10:45.583Z",
+  "updated_at": "2026-05-15T14:00:06.694Z",
   "comment": {
     "text": "This is the label for a button that confirms and applies changes or filter selections within a dialog or panel.",
     "is_auto": true,
@@ -13,67 +13,67 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/FilterPanel.tsx",
-      "line_number": 144,
+      "line_number": 153,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n onClick={onApplyFilter}\n size={ButtonSize.medium}\n label={t(\"ApplyButton\")}\n isDisabled={!isChanged}\n primary\n scale\n testId=\"apply_filter_button\"\n />",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/components/filter/sub-components/FilterBlock.tsx",
-      "line_number": 555,
+      "line_number": 564,
       "context": "<ModalDialog.Footer>\n <Button\n id=\"filter_apply-button\"\n size={ButtonSize.normal}\n primary\n label={t(\"ApplyButton\") ?? \"\"}\n scale\n onClick={onFilterAction}\n isDisabled={!showFooter}\n testId=\"filter_apply_button\"\n />",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/index.tsx",
-      "line_number": 322,
+      "line_number": 331,
       "context": "<Button\n scale\n primary\n tabIndex={0}\n size={ButtonSize.normal}\n label={t(\"Common:ApplyButton\")}\n onClick={handleSubmit}\n testId=\"room_logo_cover_apply_button\"\n />\n <Button\n scale",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/sub-components/SelectColor/SelectColor.tsx",
-      "line_number": 172,
+      "line_number": 181,
       "context": "onClose={() => setOpenColorPicker(false)}\n onApply={onApply}\n isPickerOnly\n handleChange={onApply}\n appliedColor={selectedColor!}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n />\n </ModalDialog.Body>\n </StyledModalDialog>\n ) : (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/sub-components/SelectColor/SelectColor.tsx",
-      "line_number": 172,
+      "line_number": 181,
       "context": "onClose={() => setOpenColorPicker(false)}\n onApply={onApply}\n isPickerOnly\n handleChange={onApply}\n appliedColor={selectedColor!}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n />\n </ModalDialog.Body>\n </StyledModalDialog>\n ) : (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 607,
+      "line_number": 616,
       "context": "onClick: onIndexReorder,\n iconUrl: RoundedArrowSvgUrl,\n },\n {\n id: \"save-index\",\n label: t(\"Common:ApplyButton\"),\n onClick: onIndexApply,\n iconUrl: CheckIcon,\n },\n ];\n }, [t, onIndexReorder, onIndexApply, isIndexEditingMode]);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 569,
+      "line_number": 578,
       "context": "<ColorPicker\n id=\"buttons-hex\"\n onClose={onCloseHexColorPickerButtons}\n onApply={onAppliedColorButtons}\n appliedColor={appliedColorButtons}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n hexCodeLabel={t(\"Settings:HexCode\")}\n />\n </StyledBodyContent>\n </ModalDialog.Body>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 569,
+      "line_number": 578,
       "context": "<ColorPicker\n id=\"buttons-hex\"\n onClose={onCloseHexColorPickerButtons}\n onApply={onAppliedColorButtons}\n appliedColor={appliedColorButtons}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n hexCodeLabel={t(\"Settings:HexCode\")}\n />\n </StyledBodyContent>\n </ModalDialog.Body>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 569,
+      "line_number": 578,
       "context": "<ColorPicker\n id=\"buttons-hex\"\n onClose={onCloseHexColorPickerButtons}\n onApply={onAppliedColorButtons}\n appliedColor={appliedColorButtons}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n hexCodeLabel={t(\"Settings:HexCode\")}\n />\n </StyledBodyContent>\n </ModalDialog.Body>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 569,
+      "line_number": 578,
       "context": "<ColorPicker\n id=\"buttons-hex\"\n onClose={onCloseHexColorPickerButtons}\n onApply={onAppliedColorButtons}\n appliedColor={appliedColorButtons}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n hexCodeLabel={t(\"Settings:HexCode\")}\n />\n </StyledBodyContent>\n </ModalDialog.Body>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/FilterDialog/index.js",
-      "line_number": 158,
+      "line_number": 167,
       "context": "{!areFiltersChanged ? (\n <ModalDialog.Footer>\n <Footer>\n <Button\n className=\"apply-button\"\n label={t(\"Common:ApplyButton\")}\n size=\"normal\"\n primary\n onClick={handleApplyFilters}\n isDisabled={filters.deliveryTo <= filters.deliveryFrom}\n testId=\"apply_filter_button\"",
       "module": "/packages/client"
     }
@@ -209,7 +209,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

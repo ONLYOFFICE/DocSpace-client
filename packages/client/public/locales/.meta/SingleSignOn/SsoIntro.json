@@ -3,7 +3,7 @@
   "content": "The Single Sign-On section allows you to enable/disable third-party authentication using SAML, thereby providing a quicker, easier and more secure way to access the space for users.",
   "content_en_sha1_hash": "934dd1dc1e384a2a4a53a740d7eba5216ea9f77b",
   "created_at": "2025-05-19T21:30:50.185Z",
-  "updated_at": "2026-04-11T21:26:16.522Z",
+  "updated_at": "2026-05-15T14:00:06.859Z",
   "comment": {
     "text": "This is an introductory paragraph displayed on the Single Sign-On settings page. It explains the purpose of the section, which is to manage third-party authentication via SAML for easier and more secure user access.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/index.js",
-      "line_number": 76,
+      "line_number": 85,
       "context": "<StyledSsoPage\n hideSettings={serviceProviderSettings}\n hideMetadata={spMetadata}\n withoutExternalLink={!singleSignOnUrl}\n >\n <Text className=\"intro-text settings_unavailable\">{t(\"SsoIntro\")}</Text>\n \n {singleSignOnUrl ? (\n <Link\n className=\"link-learn-more\"\n color={currentColorScheme.main?.accent}",
       "module": "/packages/client"
     }

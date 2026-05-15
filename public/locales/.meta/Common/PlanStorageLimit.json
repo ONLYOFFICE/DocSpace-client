@@ -3,7 +3,7 @@
   "content": "New tariff's limitation is <1>{{storageValue}}</1> of storage, and your current used storage is <1>{{currentStorageValue}}</1>.",
   "content_en_sha1_hash": "5e8d475c4890b9bb2d2969225b61368be000c553",
   "created_at": "2025-05-19T21:30:56.600Z",
-  "updated_at": "2026-04-11T21:06:17.258Z",
+  "updated_at": "2026-05-15T14:00:06.991Z",
   "comment": {
     "text": "This is an informational message within a dialog, appearing when a user is changing their pricing plan. It informs the user about the storage limit of the new plan (`{{storageValue}}`) and their currently used storage (`{{currentStorageValue}}`).",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/dialogs/ChangePricingPlanDialog.tsx",
-      "line_number": 80,
+      "line_number": 89,
       "context": ");\n \n const storagePlanLimitations = (\n <Text as=\"span\" fontSize=\"13px\">\n <CommonTrans\n i18nKey=\"PlanStorageLimit\"\n \n values={{\n storageValue: allowedStorageSpace,\n currentStorageValue: currentStorageSpace,\n }}",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "Title",
   "content_en_sha1_hash": "768e0c1c69573fb588f61f1308a015c11468e05f",
   "created_at": "2025-05-19T21:30:49.298Z",
-  "updated_at": "2026-04-12T15:36:29.448Z",
+  "updated_at": "2026-05-15T14:00:06.701Z",
   "comment": {
     "text": "This is a label for a text input field or a column header, referring to the name of a document, project, or other item.",
     "is_auto": true,
@@ -13,55 +13,55 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 519,
+      "line_number": 528,
       "context": "{t(\"JavascriptSdk:InterfaceElements\")}\n </Text>\n \n <div className={styles.embeddingPanelCheckboxContainer}>\n <CheckboxElement\n label={t(\"Common:Title\")}\n onChange={onHeaderChange}\n isChecked={embeddingConfig.showTitle}\n img={theme.isBase ? HeaderUrl : HeaderDarkUrl}\n title={t(\"JavascriptSdk:Header\")}\n description={t(\"JavascriptSdk:HeaderDescription\", {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 824,
+      "line_number": 833,
       "context": "const groupsOptions = [];\n \n const title = {\n id: \"sort-by_title\",\n key: \"title\",\n label: t(\"Common:Title\"),\n default: true,\n };\n \n const people = {\n id: \"sort-by_people\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/welcome-page-settings.js",
-      "line_number": 354,
+      "line_number": 363,
       "context": "const settingsBlock = (\n <div className=\"settings-block\">\n <FieldContainer\n id=\"fieldContainerWelcomePage\"\n className=\"field-container-width\"\n labelText={`${t(\"Common:Title\")}`}\n isVertical\n hasError={!state.isValidTitle}\n >\n <TextInput\n tabIndex={5}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 122,
+      "line_number": 131,
       "context": "setDocumentTitle(t(\"JavascriptSdk\"));\n \n const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"DateAndTimeCreation\", label: t(\"Files:ByCreation\") },\n { key: \"Author\", label: t(\"Files:ByAuthor\") },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 122,
+      "line_number": 131,
       "context": "setDocumentTitle(t(\"JavascriptSdk\"));\n \n const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"DateAndTimeCreation\", label: t(\"Files:ByCreation\") },\n { key: \"Author\", label: t(\"Files:ByAuthor\") },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 122,
+      "line_number": 131,
       "context": "setDocumentTitle(t(\"JavascriptSdk\"));\n \n const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"DateAndTimeCreation\", label: t(\"Files:ByCreation\") },\n { key: \"Author\", label: t(\"Files:ByAuthor\") },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
-      "line_number": 424,
+      "line_number": 433,
       "context": "<CheckboxGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"Common:Title\")}\n onChange={onChangeShowTitle}\n isChecked={config.showTitle}\n dataTestId=\"title_checkbox\"\n />\n <HelpButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
-      "line_number": 424,
+      "line_number": 433,
       "context": "<CheckboxGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"Common:Title\")}\n onChange={onChangeShowTitle}\n isChecked={config.showTitle}\n dataTestId=\"title_checkbox\"\n />\n <HelpButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/FieldMapping.js",
-      "line_number": 120,
+      "line_number": 129,
       "context": "value={location}\n hasError={locationHasError}\n />\n \n <SsoFormField\n labelText={t(\"Common:Title\")}\n name=\"title\"\n placeholder={SSO_TITLE}\n tabIndex={20}\n value={title}\n hasError={titleHasError}",
       "module": "/packages/client"
     }
@@ -197,7 +197,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

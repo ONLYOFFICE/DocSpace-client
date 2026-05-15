@@ -3,7 +3,7 @@
   "content": "Users added ({{count}}).",
   "content_en_sha1_hash": "8c7b1ab7b60a1cc8856412fa9c57d6d974a69ffb",
   "created_at": "2025-05-19T21:30:54.905Z",
-  "updated_at": "2026-04-11T21:12:56.576Z",
+  "updated_at": "2026-05-15T14:00:06.738Z",
   "comment": {
     "text": "This is a message displayed in the InfoPanel's history feed, indicating how many users were added to a room. `{{count}}` is a number representing the total users added.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 323,
+      "line_number": 332,
       "context": "}}\n />\n );\n case FeedActionKeys.RoomCreateUser:\n if (hasRelatedItems)\n return t(\"InfoPanel:RoomCreateUserCount\", { count });\n return t(\"Common:RoomCreateUser\");\n case FeedActionKeys.RoomUpdateAccessForUser:\n return t(\"InfoPanel:RoomUpdateAccess\");\n case FeedActionKeys.RoomRemoveUser:\n return t(\"InfoPanel:RoomRemoveUser\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 267,
+      "line_number": 276,
       "context": "1: <strong title={feed.data.title || feed.data.sharedTo?.title} />,\n }}\n />\n );\n case FeedActionKeys.RoomCreateUser:\n if (hasRelatedItems) return t(\"InfoPanel:RoomCreateUserCount\", { count });\n return t(\"Common:RoomCreateUser\");\n case FeedActionKeys.RoomUpdateAccessForUser:\n return t(\"InfoPanel:RoomUpdateAccess\");\n case FeedActionKeys.RoomRemoveUser:\n return t(\"InfoPanel:RoomRemoveUser\");",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Reset application",
   "content_en_sha1_hash": "93e3b88bc025a8b58df20fb4ea9f533c792cfd53",
   "created_at": "2025-05-19T21:30:47.892Z",
-  "updated_at": "2026-04-12T02:42:12.316Z",
+  "updated_at": "2026-05-15T14:00:06.693Z",
   "comment": {
     "text": "This is the label for a button that opens a dialog to reset the application, and also the label for the button within that dialog that performs the reset.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ResetApplicationDialog/index.js",
-      "line_number": 58,
+      "line_number": 67,
       "context": "<Text>{t(\"ResetApplicationDescription\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"ResetSendBtn\"\n label={t(\"Common:ResetApplication\")}\n size=\"normal\"\n scale\n primary\n onClick={resetApp}\n testId=\"dialog_reset_app_button\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/login/login-settings/index.tsx",
-      "line_number": 96,
+      "line_number": 105,
       "context": "isHovered\n type={LinkType.action}\n onClick={() => setResetAppDialogVisible(true)}\n dataTestId=\"reset_app_link\"\n >\n {t(\"Common:ResetApplication\")}\n </Link>\n </div>\n \n {resetAppDialogVisible ? (\n <ResetApplicationDialog",
       "module": "/packages/client"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

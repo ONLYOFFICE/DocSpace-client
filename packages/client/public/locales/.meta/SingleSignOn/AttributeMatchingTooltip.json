@@ -3,7 +3,7 @@
   "content": "The correspondence of the Single Sign-On attributes to the entries of the 'Accounts' section.",
   "content_en_sha1_hash": "c7591a0a501267c1ec099b33a718569ff4884c4e",
   "created_at": "2025-05-19T21:30:50.065Z",
-  "updated_at": "2026-04-11T21:27:00.191Z",
+  "updated_at": "2026-05-15T14:00:06.856Z",
   "comment": {
     "text": "This is a tooltip that appears when hovering over the \"Attribute Matching\" section. It explains how Single Sign-On attributes map to user account fields.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/FieldMapping.js",
-      "line_number": 74,
+      "line_number": 83,
       "context": "<HelpButton\n className=\"attribute-matching-tooltip icon-button\"\n offsetRight={0}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"AttributeMatchingTooltip\")}</Text>\n }\n dataTestId=\"attribute_mapping_help_button\"\n />\n </div>",
       "module": "/packages/client"
     }

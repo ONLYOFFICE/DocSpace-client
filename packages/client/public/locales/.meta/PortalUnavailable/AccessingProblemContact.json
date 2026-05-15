@@ -3,7 +3,7 @@
   "content": "If you have problems accessing this {{productName}}, please contact the administrator.",
   "content_en_sha1_hash": "af425c7d33708c349709ce72580df5e20f7523a0",
   "created_at": "2025-05-19T21:30:53.444Z",
-  "updated_at": "2026-04-11T21:20:22.742Z",
+  "updated_at": "2026-05-15T14:00:06.875Z",
   "comment": {
     "text": "This is an error message displayed in a dialog when a user cannot access the product. It informs the user to contact the administrator and includes a variable `{{productName}}` which will be replaced with the actual product name (e.g., ONLYOFFICE DocSpace).",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalUnavailable/index.js",
-      "line_number": 83,
+      "line_number": 92,
       "context": "<StyledBody>\n <RecoverAccessModalDialog\n visible={isVisible}\n t={t}\n emailPlaceholderText={t(\"Common:RegistrationEmail\")}\n textBody={t(\"PortalUnavailable:AccessingProblemContact\", {\n productName: getBrandName(\"ProductName\"),\n })}\n onClose={onCloseDialog}\n />\n <ErrorContainer",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalUnavailable/index.js",
-      "line_number": 83,
+      "line_number": 92,
       "context": "<StyledBody>\n <RecoverAccessModalDialog\n visible={isVisible}\n t={t}\n emailPlaceholderText={t(\"Common:RegistrationEmail\")}\n textBody={t(\"PortalUnavailable:AccessingProblemContact\", {\n productName: getBrandName(\"ProductName\"),\n })}\n onClose={onCloseDialog}\n />\n <ErrorContainer",
       "module": "/packages/client"
     }

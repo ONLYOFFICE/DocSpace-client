@@ -3,7 +3,7 @@
   "content": "Select or deselect item",
   "content_en_sha1_hash": "c55dd249fffabde37969cf62f277edca80967e6b",
   "created_at": "2025-05-19T21:30:55.089Z",
-  "updated_at": "2026-04-11T21:11:57.507Z",
+  "updated_at": "2026-05-15T14:00:06.705Z",
   "comment": {
     "text": "This is a hotkey description. It appears in the hotkeys panel and describes the action of selecting or deselecting an item.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/SelectionBlock.js",
-      "line_number": 36,
+      "line_number": 45,
       "context": "const SelectionBlock = ({ t, textStyles, keyTextStyles, CtrlKey, AltKey }) => {\n return (\n <>\n <Row className={styles.hotkeysRow}>\n <>\n <Text {...textStyles}>{t(\"HotkeysSelectItem\")}</Text>\n <Text {...keyTextStyles}>x</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>",
       "module": "/packages/client"
     }

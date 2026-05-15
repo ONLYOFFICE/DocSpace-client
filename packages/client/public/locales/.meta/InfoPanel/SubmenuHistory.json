@@ -3,7 +3,7 @@
   "content": "History",
   "content_en_sha1_hash": "90ccd6497400b5576aeca1bd94af74aae1e0a250",
   "created_at": "2025-05-19T21:30:54.971Z",
-  "updated_at": "2026-05-08T13:10:45.605Z",
+  "updated_at": "2026-05-15T14:00:06.745Z",
   "comment": {
     "text": "This is a tab label or heading for a section displaying historical information, such as document versions or webhook activity.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/headerGeneral.tsx",
-      "line_number": 108,
+      "line_number": 117,
       "context": "const tabItems = availableTabs.map((id) => {\n let name: string;\n if (id === InfoPanelView.infoMembers) {\n name = isTemplate ? t(\"Common:Accesses\") : t(\"Common:Contacts\");\n } else if (id === InfoPanelView.infoHistory) {\n name = t(\"InfoPanel:SubmenuHistory\");\n } else if (id === InfoPanelView.infoDetails) {\n name = t(\"InfoPanel:SubmenuDetails\");\n } else if (id === InfoPanelView.infoShare) {\n name = t(\"Common:Share\");\n } else {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/HistoryHeader.js",
-      "line_number": 155,
+      "line_number": 164,
       "context": "isFill\n onClick={onBack}\n className=\"arrow-button\"\n />\n <Heading type=\"content\" truncate className=\"headline\">\n {t(\"InfoPanel:SubmenuHistory\")}\n </Heading>\n </>\n );\n \n const GroupMenu = ({",
       "module": "/packages/client"
     }

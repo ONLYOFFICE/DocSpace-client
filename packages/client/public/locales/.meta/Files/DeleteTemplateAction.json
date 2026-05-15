@@ -3,7 +3,7 @@
   "content": "Delete template",
   "content_en_sha1_hash": "399bf72aa291de43b5c1c104b4f9d4aacf6ea977",
   "created_at": "2025-05-19T21:30:55.439Z",
-  "updated_at": "2026-05-08T13:10:45.574Z",
+  "updated_at": "2026-05-15T14:00:06.673Z",
   "comment": {
     "text": "This is a button label or part of a dialog title. It appears when a user is prompted to confirm the deletion of a template.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 209,
+      "line_number": 218,
       "context": "if (isAIAgent) {\n return t(\"DeleteDialog:DeleteAIAgentTitle\");\n }\n \n if (isTemplate) {\n return `${t(\"Files:DeleteTemplateAction\")}?`;\n }\n \n if (isRoomDelete) {\n if (selection.length > 1) return t(\"DeleteRoomsTitle\");\n return t(\"DeleteRoomTitle\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2748,
+      "line_number": 2757,
       "context": "label: isRootThirdPartyFolder\n ? t(\"Common:Disconnect\")\n : isAIAgent\n ? t(\"DeleteAgent\")\n : item.isTemplate\n ? t(\"Files:DeleteTemplateAction\")\n : item.isRoom\n ? t(\"Common:DeleteRoom\")\n : t(\"Common:Delete\"),\n icon:\n item.isRoom && !isAIAgent ? RemoveOutlineSvgUrl : TrashReactSvgUrl,",
       "module": "/packages/client"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

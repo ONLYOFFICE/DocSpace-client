@@ -3,7 +3,7 @@
   "content": "The rooms are unarchived.",
   "content_en_sha1_hash": "309be23ffc42f49c87cb88b71417b839f9c77761",
   "created_at": "2025-05-19T21:30:56.280Z",
-  "updated_at": "2026-05-08T13:10:45.677Z",
+  "updated_at": "2026-05-15T14:00:06.894Z",
   "comment": {
     "text": "This is a toast message confirming that multiple rooms have been successfully unarchived.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1588,
+      "line_number": 1597,
       "context": "})\n \n .then(() => {\n const successTranslation =\n folders.length !== 1 && Array.isArray(folders)\n ? t(\"UnarchivedRoomsAction\")\n : Array.isArray(folders)\n ? t(\"UnarchivedRoomAction\", { name: folders[0].title })\n : t(\"UnarchivedRoomAction\", { name: folders.title });\n \n toastr.success(successTranslation);",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

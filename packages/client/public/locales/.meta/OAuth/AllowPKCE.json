@@ -3,7 +3,7 @@
   "content": "Allow public client (PKCE)",
   "content_en_sha1_hash": "1d8744c94f9db618bd1791df5c0f1839c47e717d",
   "created_at": "2025-05-19T21:30:53.787Z",
-  "updated_at": "2026-04-13T14:59:05.869Z",
+  "updated_at": "2026-05-15T14:00:06.820Z",
   "comment": {
     "text": "This is a checkbox label in the OAuth client settings. It allows enabling or disabling the Proof Key for Code Exchange (PKCE) for public clients.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
-      "line_number": 219,
+      "line_number": 228,
       "context": "onChange={() => {}}\n dataTestId=\"auth_method_input_group\"\n >\n <div className=\"pkce\">\n <Checkbox\n label={t(\"AllowPKCE\")}\n isChecked={allowPkce}\n onChange={() => {\n changeValue(\"allow_pkce\", !allowPkce);\n }}\n dataTestId=\"allow_pkce_checkbox\"",
       "module": "/packages/client"
     }

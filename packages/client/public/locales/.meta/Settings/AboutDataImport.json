@@ -3,7 +3,7 @@
   "content": "Data import includes several steps: data upload, parsing, import configuration, and import. Your backup file will be stored in {{organizationName}} {{productName}} servers for 24 hours, and then it will be automatically deleted.",
   "content_en_sha1_hash": "e0f675b298d8f6211666ee36285131ed498e9ed6",
   "created_at": "2025-05-19T21:30:50.265Z",
-  "updated_at": "2026-04-11T21:26:10.018Z",
+  "updated_at": "2026-05-15T14:00:06.789Z",
   "comment": {
     "text": "This is a descriptive text explaining the data import process and data retention policy. It appears on the data import settings page and includes variables for `productName` (e.g., \"DocSpace\") and `organizationName` (e.g., \"ONLYOFFICE\").",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/sub-components/StepLayout.tsx",
-      "line_number": 59,
+      "line_number": 68,
       "context": "return (\n <>\n <DescriptionWrapper>\n <Text className=\"data-import-description\" lineHeight=\"20px\">\n {t(\"Settings:AboutDataImport\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n })}\n </Text>\n <Text",
       "module": "/packages/client"
     }

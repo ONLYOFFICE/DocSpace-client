@@ -3,7 +3,7 @@
   "content": "Provider",
   "content_en_sha1_hash": "7ceee3f3615a2bbe4ce0ac5a269a311e4821daf4",
   "created_at": "2025-10-27T16:14:31.653Z",
-  "updated_at": "2026-05-08T13:10:45.614Z",
+  "updated_at": "2026-05-15T14:00:06.760Z",
   "comment": {
     "text": "This is a label for a field where users select or view an AI service provider. It appears in AI settings, either for knowledge base configuration or when managing individual AI providers.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/index.tsx",
-      "line_number": 285,
+      "line_number": 292,
       "context": ") : null}\n <div className={styles.knowledgeForm} data-testid=\"knowledge-form\">\n <FieldContainer\n labelVisible\n isVertical\n labelText={t(\"AISettings:Provider\")}\n removeMargin\n >\n <ComboBox\n options={items}\n showDisabledItems",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/DefaultProvider.tsx",
-      "line_number": 369,
+      "line_number": 376,
       "context": "<div className={styles.defaultProviderForm}>\n <FieldContainer\n labelVisible\n isVertical\n labelText={t(\"AISettings:Provider\")}\n removeMargin\n hasError={!!defaultProviderModelsError}\n errorMessage={defaultProviderModelsError || \"\"}\n errorMessageWidth=\"100%\"\n >",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
-      "line_number": 457,
+      "line_number": 464,
       "context": "data-testid={\n variant === \"add\" ? \"add-provider-form\" : \"update-provider-form\"\n }\n >\n <FieldContainer\n labelText={t(\"AISettings:Provider\")}\n labelVisible\n isVertical\n removeMargin\n >\n <ComboBox",
       "module": "/packages/client"
     }
@@ -36,6 +36,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [],
       "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     }
   }
 }

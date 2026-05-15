@@ -3,7 +3,7 @@
   "content": "Binding:",
   "content_en_sha1_hash": "f2886990d903944b4327ac362e3de88962586c2c",
   "created_at": "2025-05-19T21:30:50.068Z",
-  "updated_at": "2026-04-13T14:59:05.892Z",
+  "updated_at": "2026-05-15T14:00:06.857Z",
   "comment": {
     "text": "This is a label for a dropdown menu or input field in the Single Sign-On (SSO) settings, indicating the type of binding used for communication between the service provider and the identity provider.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/IdpSettings.js",
-      "line_number": 131,
+      "line_number": 140,
       "context": "}\n dataTestId=\"sso_endpoint_url\"\n >\n <div className=\"radio-button-box\">\n <Text fontSize=\"12px\" fontWeight={400} noSelect>\n {t(\"Binding\")}\n </Text>\n \n <RadioButtonGroup\n className=\"radio-button-group\"\n isDisabled={!enableSso}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/IdpSettings.js",
-      "line_number": 131,
+      "line_number": 140,
       "context": "}\n dataTestId=\"sso_endpoint_url\"\n >\n <div className=\"radio-button-box\">\n <Text fontSize=\"12px\" fontWeight={400} noSelect>\n {t(\"Binding\")}\n </Text>\n \n <RadioButtonGroup\n className=\"radio-button-group\"\n isDisabled={!enableSso}",
       "module": "/packages/client"
     }

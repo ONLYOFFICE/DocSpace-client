@@ -3,7 +3,7 @@
   "content": "Interrupted, some data could not be transferred",
   "content_en_sha1_hash": "349c59e28f97d2eab653eea99278d4df6d2558a5",
   "created_at": "2025-05-19T21:30:56.740Z",
-  "updated_at": "2026-04-11T21:05:11.966Z",
+  "updated_at": "2026-05-15T14:00:06.669Z",
   "comment": {
     "text": "This is a status message displayed in a dialog, indicating that a data transfer process was interrupted and some data failed to transfer.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Body/Progress.js",
-      "line_number": 164,
+      "line_number": 173,
       "context": ");\n \n const interruptedNode = (\n <div className=\"transfer-information\">\n <InterruptIcon className=\"status-icon\" />\n <Text className=\"status\">{t(\"DataReassignmentDialog:Interrupted\")}</Text>\n </div>\n );\n \n const you = `${`(${t(\"Common:You\")})`}`;",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

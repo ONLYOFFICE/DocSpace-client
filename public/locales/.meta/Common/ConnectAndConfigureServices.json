@@ -3,7 +3,7 @@
   "content": "This section is used to connect and configure the services.",
   "content_en_sha1_hash": "56fead1ac3c0ee9e9cfc0757f75de60cb30caef9",
   "created_at": "2026-04-10T13:53:42.277Z",
-  "updated_at": "2026-04-23T17:24:02.177Z",
+  "updated_at": "2026-05-15T14:00:07.000Z",
   "comment": {
     "text": "This is a descriptive text displayed on the Billing page, informing the user that this section allows them to connect and configure various services.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
-      "line_number": 225,
+      "line_number": 234,
       "context": "return (\n <div style={{ width: \"100%\" }}>\n <Text className={styles.storageDescription}>\n {isPayer || !isCardLinkedToPortal\n ? t(\"ConnectAndConfigureServices\")\n : t(\"ServiceConfigurationNotice\")}\n </Text>\n \n <div\n className={classNames(styles.servicesWrapper, {",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

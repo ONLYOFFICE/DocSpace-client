@@ -3,7 +3,7 @@
   "content": "Event ID",
   "content_en_sha1_hash": "894b1c749d25e8c3e7119c9df315a6b3f7fc899a",
   "created_at": "2025-05-19T21:30:49.709Z",
-  "updated_at": "2026-04-11T21:29:07.155Z",
+  "updated_at": "2026-05-15T14:00:06.828Z",
   "comment": {
     "text": "This is a label for an event identifier, appearing in a table header and as a detail in a webhook event log.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/DetailsBar.js",
-      "line_number": 104,
+      "line_number": 113,
       "context": "<FlexWrapper>\n <StatusBadge status={eventDetails.status} />\n </FlexWrapper>\n </BarItem>\n <BarItem>\n <BarItemHeader>{t(\"EventID\")}</BarItemHeader>\n <Text isInline fontWeight={600}>\n {eventDetails.id}\n </Text>\n </BarItem>\n <BarItem>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/WebhookHistoryTable/HistoryTableView/HistoryTableHeader.js",
-      "line_number": 82,
+      "line_number": 91,
       "context": "}\n \n const defaultColumns = [\n {\n key: \"Event ID\",\n title: t(\"EventID\"),\n resizable: true,\n enable: true,\n default: true,\n active: true,\n minWidth: 210,",
       "module": "/packages/client"
     }

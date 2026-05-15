@@ -3,7 +3,7 @@
   "content": "Show backup codes",
   "content_en_sha1_hash": "ef39b662d908a8305219bddff4da149f743f9ad9",
   "created_at": "2025-05-19T21:30:53.382Z",
-  "updated_at": "2026-04-11T21:20:36.559Z",
+  "updated_at": "2026-05-15T14:00:06.879Z",
   "comment": {
     "text": "This is the label for a button that, when clicked, displays a user's backup codes for two-factor authentication.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/login/login-settings/index.tsx",
-      "line_number": 84,
+      "line_number": 93,
       "context": "<Text className={styles.description}>{t(\"TwoFactorDescription\")}</Text>\n </div>\n <div className={styles.actions}>\n <Button\n className={styles.button}\n label={t(\"ShowBackupCodes\")}\n onClick={() => setBackupCodesDialogVisible(true)}\n size={ButtonSize.small}\n testId=\"show_backup_codes_button\"\n />\n <Link",
       "module": "/packages/client"
     }

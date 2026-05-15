@@ -3,7 +3,7 @@
   "content": "Paid",
   "content_en_sha1_hash": "dc9d4584a55464cd571719ee0066acb16d411f86",
   "created_at": "2025-05-19T21:30:47.223Z",
-  "updated_at": "2026-04-23T17:24:01.858Z",
+  "updated_at": "2026-05-15T14:00:06.698Z",
   "comment": {
     "text": "This is a short label indicating a paid status. It appears on a badge or as part of a user's status description.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/components/drop-down-item/index.tsx",
-      "line_number": 152,
+      "line_number": 161,
       "context": "const t = useCommonTranslation();\n const { isRTL } = useInterfaceDirection();\n const { isBase } = useTheme();\n \n const resolvedBetaLabel = betaLabel || getConstName(\"BetaLabel\") || \"\";\n const resolvedPaidLabel = paidLabel || t(\"Paid\") || \"\";\n \n const withDisabledTooltip = disabled && tooltip;\n \n const handleMouseDown = (e: React.MouseEvent<HTMLElement>) => {\n // Stop propagation to prevent click-outside detection from closing dropdown",
       "module": "/libs/ui-kit"
     },
@@ -25,199 +25,199 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 225,
+      "line_number": 234,
       "context": "const typeData = renderTypeData();\n \n const { isVisitor, isCollaborator } = userSelection;\n \n const statusText =\n isVisitor || isCollaborator ? t(\"Common:Free\") : t(\"Common:Paid\");\n \n if (!ready) return <InfoPanelViewLoader view=\"users\" />;\n \n return (\n <>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/Badges.tsx",
-      "line_number": 155,
+      "line_number": 164,
       "context": "/>\n ) : null}\n {!withoutPaid && isPaid ? (\n <StyledPaidBadge\n className=\"paid-badge accounts-badge\"\n label={t(\"Paid\")}\n backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 407,
+      "line_number": 416,
       "context": "if (usersFilter?.payments?.toString()) {\n filterValues.push({\n key: usersFilter.payments?.toString(),\n label:\n PaymentsType.Paid === usersFilter.payments?.toString()\n ? t(\"Common:Paid\")\n : t(\"Common:Free\"),\n group: FilterGroups.filterAccount,\n });\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 407,
+      "line_number": 416,
       "context": "if (usersFilter?.payments?.toString()) {\n filterValues.push({\n key: usersFilter.payments?.toString(),\n label:\n PaymentsType.Paid === usersFilter.payments?.toString()\n ? t(\"Common:Paid\")\n : t(\"Common:Free\"),\n group: FilterGroups.filterAccount,\n });\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
-      "line_number": 88,
+      "line_number": 97,
       "context": "title={t(\"DNSSettings\")}\n subtitle={t(\"DNSSettingsNavDescription\")}\n url=\"/portal-settings/customization/general/dns-settings\"\n onClickLink={onClickLink}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Common:Paid\")}\n />\n {enablePortalRename ? (\n <CategoryItem\n title={t(\"PortalRenaming\", { productName: getBrandName(\"ProductName\") })}\n subtitle={t(\"PortalRenamingNavDescription\")}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
-      "line_number": 88,
+      "line_number": 97,
       "context": "title={t(\"DNSSettings\")}\n subtitle={t(\"DNSSettingsNavDescription\")}\n url=\"/portal-settings/customization/general/dns-settings\"\n onClickLink={onClickLink}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Common:Paid\")}\n />\n {enablePortalRename ? (\n <CategoryItem\n title={t(\"PortalRenaming\", { productName: getBrandName(\"ProductName\") })}\n subtitle={t(\"PortalRenamingNavDescription\")}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/dns-settings.js",
-      "line_number": 310,
+      "line_number": 319,
       "context": "backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n isPaidBadge\n />\n ) : null}\n </div>\n ) : null}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 345,
+      "line_number": 354,
       "context": "backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n isPaidBadge\n />\n ) : null}\n </div>\n ) : null}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/LdapMobileView.js",
-      "line_number": 55,
+      "line_number": 64,
       "context": "<CategoryItem\n title={t(\"Ldap:LdapSettings\")}\n subtitle={t(\"Ldap:LdapMobileSettingsDescription\")}\n url=\"/portal-settings/integration/ldap/settings\"\n withPaidBadge={!isLDAPAvailable}\n badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}\n disabled={!isLdapEnabled}\n dataTestId=\"ldap_settings\"\n />\n <CategoryItem",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/LdapMobileView.js",
-      "line_number": 55,
+      "line_number": 64,
       "context": "<CategoryItem\n title={t(\"Ldap:LdapSettings\")}\n subtitle={t(\"Ldap:LdapMobileSettingsDescription\")}\n url=\"/portal-settings/integration/ldap/settings\"\n withPaidBadge={!isLDAPAvailable}\n badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}\n disabled={!isLdapEnabled}\n dataTestId=\"ldap_settings\"\n />\n <CategoryItem",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ToggleAutoSync.js",
-      "line_number": 127,
+      "line_number": 136,
       "context": "backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n className=\"toggle-caption_title_badge\"\n isPaidBadge\n />\n ) : null}\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ToggleLDAP.js",
-      "line_number": 122,
+      "line_number": 131,
       "context": "backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n className=\"toggle-caption_title_badge\"\n isPaidBadge\n />\n ) : null}\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/MobileView.js",
-      "line_number": 59,
+      "line_number": 68,
       "context": "organizationName: logoText,\n })}\n subtitle={t(\"ServiceProviderSettingsDescription\")}\n url=\"/portal-settings/integration/sso/settings\"\n withPaidBadge={!isSSOAvailable}\n badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}\n dataTestId=\"sp_settings\"\n />\n <CategoryItem\n title={t(\"SpMetadata\", {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/MobileView.js",
-      "line_number": 59,
+      "line_number": 68,
       "context": "organizationName: logoText,\n })}\n subtitle={t(\"ServiceProviderSettingsDescription\")}\n url=\"/portal-settings/integration/sso/settings\"\n withPaidBadge={!isSSOAvailable}\n badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}\n dataTestId=\"sp_settings\"\n />\n <CategoryItem\n title={t(\"SpMetadata\", {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/ToggleSSO.js",
-      "line_number": 106,
+      "line_number": 115,
       "context": "backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n fontWeight=\"700\"\n className=\"toggle-caption_title_badge\"\n isPaidBadge\n />\n ) : null}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/index.js",
-      "line_number": 300,
+      "line_number": 309,
       "context": "theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n fontWeight=\"700\"\n label={t(\"Common:Paid\")}\n isPaidBadge\n />\n </div>\n ) : null}\n {paidConsumers.map((consumer) => (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/sub-components/HistoryMainContent.js",
-      "line_number": 241,
+      "line_number": 250,
       "context": "backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n isPaidBadge\n />\n ) : null}\n <div className=\"main-wrapper\">\n <Text fontSize=\"13px\" className=\"login-history-description\">",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/Quotas.js",
-      "line_number": 76,
+      "line_number": 85,
       "context": "backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n className=\"paid-badge\"\n isPaidBadge\n />\n ) : null}\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/Statistics.js",
-      "line_number": 103,
+      "line_number": 112,
       "context": "backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n className=\"paid-badge\"\n isPaidBadge\n />\n ) : null}\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
-      "line_number": 430,
+      "line_number": 439,
       "context": "backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n fontWeight=\"700\"\n className=\"settings-section_badge\"\n isPaidBadge\n />\n ) : (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 357,
+      "line_number": 366,
       "context": "id: \"menu_change-user_administrator\",\n className: \"group-menu_drop-down\",\n label: getUserTypeTranslation(EmployeeType.Admin, t),\n title: getUserTypeTranslation(EmployeeType.Admin, t),\n icon: isGuests ? PersonAdminReactSvgUrl : null,\n badgeLabel: isGuests && !standalone ? t(\"Common:Paid\") : undefined,\n isPaidBadge: !standalone,\n onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),\n \"data-action\": EmployeeType.Admin,\n action: EmployeeType.Admin,\n key: EmployeeType.Admin,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 357,
+      "line_number": 366,
       "context": "id: \"menu_change-user_administrator\",\n className: \"group-menu_drop-down\",\n label: getUserTypeTranslation(EmployeeType.Admin, t),\n title: getUserTypeTranslation(EmployeeType.Admin, t),\n icon: isGuests ? PersonAdminReactSvgUrl : null,\n badgeLabel: isGuests && !standalone ? t(\"Common:Paid\") : undefined,\n isPaidBadge: !standalone,\n onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),\n \"data-action\": EmployeeType.Admin,\n action: EmployeeType.Admin,\n key: EmployeeType.Admin,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/drop-down-item/index.tsx",
-      "line_number": 41,
+      "line_number": 50,
       "context": "const { t } = useTranslation([\"Common\"]);\n return (\n <Component\n {...props}\n betaLabel={getConstName(\"BetaLabel\")}\n paidLabel={t(\"Common:Paid\")}\n />\n );\n };\n \n export { DropDownItem };",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/BrandName/index.tsx",
-      "line_number": 144,
+      "line_number": 153,
       "context": "{!isSettingPaid && !standalone ? (\n <Badge\n className={classNames(styles.paidBadge, \"paid-badge\")}\n fontWeight=\"700\"\n label={t(\"Common:Paid\")}\n isPaidBadge\n backgroundColor={\n isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/MobileView/index.tsx",
-      "line_number": 57,
+      "line_number": 66,
       "context": "<CategoryItem\n title={t(\"BrandName\")}\n subtitle={t(\"BrandNameSubtitleMobile\")}\n url={`${baseUrl}/branding/brand-name`}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}\n />\n <CategoryItem\n title={t(\"WhiteLabel\")}\n subtitle={t(\"BrandingSubtitleMobile\")}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/MobileView/index.tsx",
-      "line_number": 57,
+      "line_number": 66,
       "context": "<CategoryItem\n title={t(\"BrandName\")}\n subtitle={t(\"BrandNameSubtitleMobile\")}\n url={`${baseUrl}/branding/brand-name`}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}\n />\n <CategoryItem\n title={t(\"WhiteLabel\")}\n subtitle={t(\"BrandingSubtitleMobile\")}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/MobileView/index.tsx",
-      "line_number": 57,
+      "line_number": 66,
       "context": "<CategoryItem\n title={t(\"BrandName\")}\n subtitle={t(\"BrandNameSubtitleMobile\")}\n url={`${baseUrl}/branding/brand-name`}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}\n />\n <CategoryItem\n title={t(\"WhiteLabel\")}\n subtitle={t(\"BrandingSubtitleMobile\")}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/MobileView/index.tsx",
-      "line_number": 57,
+      "line_number": 66,
       "context": "<CategoryItem\n title={t(\"BrandName\")}\n subtitle={t(\"BrandNameSubtitleMobile\")}\n url={`${baseUrl}/branding/brand-name`}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}\n />\n <CategoryItem\n title={t(\"WhiteLabel\")}\n subtitle={t(\"BrandingSubtitleMobile\")}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/WhiteLabelHeader.tsx",
-      "line_number": 73,
+      "line_number": 82,
       "context": "{!isSettingPaid && !standalone ? (\n <Badge\n className={classNames(styles.paidBadge, \"paid-badge\")}\n fontWeight=\"700\"\n label={t(\"Common:Paid\")}\n isPaidBadge\n backgroundColor={\n isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 147,
+      "line_number": 156,
       "context": "sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n ) as unknown as string,\n ...(!standalone && isNone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access: isNone ? EmployeeType.Admin : ShareAccessRights.FullAccess,\n type: EmployeeType.Admin,\n },\n roomAdmin: {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 147,
+      "line_number": 156,
       "context": "sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n ) as unknown as string,\n ...(!standalone && isNone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access: isNone ? EmployeeType.Admin : ShareAccessRights.FullAccess,\n type: EmployeeType.Admin,\n },\n roomAdmin: {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 147,
+      "line_number": 156,
       "context": "sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n ) as unknown as string,\n ...(!standalone && isNone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access: isNone ? EmployeeType.Admin : ShareAccessRights.FullAccess,\n type: EmployeeType.Admin,\n },\n roomAdmin: {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 147,
+      "line_number": 156,
       "context": "sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n ) as unknown as string,\n ...(!standalone && isNone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access: isNone ? EmployeeType.Admin : ShareAccessRights.FullAccess,\n type: EmployeeType.Admin,\n },\n roomAdmin: {",
       "module": "/packages/shared"
     }
@@ -353,7 +353,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

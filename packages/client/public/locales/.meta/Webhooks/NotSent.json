@@ -3,7 +3,7 @@
   "content": "Not sent",
   "content_en_sha1_hash": "587c501eb4069b3a59c57ceec50534b82deec57e",
   "created_at": "2025-05-19T21:30:49.779Z",
-  "updated_at": "2026-04-11T21:28:43.565Z",
+  "updated_at": "2026-05-15T14:00:06.832Z",
   "comment": {
     "text": "This is a status label indicating that a webhook has not been sent. It appears in a filter dialog for webhook history and as a badge next to the webhook status.",
     "is_auto": true,
@@ -12,15 +12,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/FilterDialog/StatusPicker.js",
-      "line_number": 93,
-      "context": "const StatusBadgeElements = StatusCodes.map((code) =>\n code === \"Not sent\" ? (\n <StatusBadgeSelector\n id=\"not-sent\"\n label={t(\"NotSent\")}\n statusCode={code}\n isStatusSelected={isStatusSelected}\n handleStatusClick={handleStatusClick}\n key={code}\n />",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/StatusBadge.js",
+      "line_number": 84,
+      "context": "return (\n <StyledBadge\n id=\"webhook-status\"\n backgroundColor={badgeColorScheme.backgroundColor}\n color={badgeColorScheme.color}\n label={status === 0 ? t(\"NotSent\") : status.toString()}\n fontSize=\"9px\"\n maxWidth=\"80px\"\n fontWeight={700}\n noHover\n isVersionBadge",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/StatusBadge.js",
-      "line_number": 75,
-      "context": "return (\n <StyledBadge\n id=\"webhook-status\"\n backgroundColor={badgeColorScheme.backgroundColor}\n color={badgeColorScheme.color}\n label={status === 0 ? t(\"NotSent\") : status.toString()}\n fontSize=\"9px\"\n maxWidth=\"80px\"\n fontWeight={700}\n noHover\n isVersionBadge",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/FilterDialog/StatusPicker.js",
+      "line_number": 102,
+      "context": "const StatusBadgeElements = StatusCodes.map((code) =>\n code === \"Not sent\" ? (\n <StatusBadgeSelector\n id=\"not-sent\"\n label={t(\"NotSent\")}\n statusCode={code}\n isStatusSelected={isStatusSelected}\n handleStatusClick={handleStatusClick}\n key={code}\n />",
       "module": "/packages/client"
     }
   ],

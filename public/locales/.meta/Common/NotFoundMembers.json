@@ -3,7 +3,7 @@
   "content": "No members found",
   "content_en_sha1_hash": "2f9524453596c315ea26d2daec2af8d6792b16f1",
   "created_at": "2025-05-19T21:30:46.909Z",
-  "updated_at": "2026-05-08T13:10:45.585Z",
+  "updated_at": "2026-05-15T14:00:06.700Z",
   "comment": {
     "text": "This is an empty state header text displayed when no members are found after applying a filter or search in a people selector.",
     "is_auto": true,
@@ -13,37 +13,37 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
-      "line_number": 530,
+      "line_number": 537,
       "context": "isCloseable: true,\n headerLabel: t(\"ListContacts\"),\n }}\n filter={() => filter(withoutRoleFilter)}\n {...infoProps}\n emptyScreenHeader={t(\"NotFoundMembers\")}\n emptyScreenDescription={t(\"PeopleSelectorInfo\", {\n productName: getBrandName(\"ProductName\"),\n })}\n />\n ) : null;",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/People/index.tsx",
-      "line_number": 778,
+      "line_number": 783,
       "context": "searchEmptyScreenImage={emptyScreenImage}\n searchEmptyScreenHeader={\n activeTabId === GUESTS_TAB_ID\n ? t(\"NotFoundGuestsFilter\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"NotFoundMembers\")\n : t(\"NotFoundGroups\")\n }\n searchEmptyScreenDescription={\n activeTabId === GUESTS_TAB_ID\n ? t(\"NotFoundFilterGuestsDescription\")",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
-      "line_number": 132,
+      "line_number": 141,
       "context": "filterUserId={roomOwnerId}\n currentUserId={userId}\n disableDisabledUsers\n withInfo\n infoText={infoText}\n emptyScreenHeader={t(\"Common:NotFoundMembers\")}\n emptyScreenDescription={infoText}\n className={styles.changeOwnerPeopleSelector}\n data-test-id=\"change_owner_people_selector\"\n />\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/sub-components/EmptyContainer.tsx",
-      "line_number": 49,
+      "line_number": 58,
       "context": "return (\n <EmptyScreenContainer\n imageSrc={imageSrc}\n imageAlt=\"Empty screen image\"\n headerText={t(\"NotFoundMembers\")}\n descriptionText={t(\"NotFoundUsersDescription\")}\n className={styles.emptyScreen}\n />\n );\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/EmptyScreen.tsx",
-      "line_number": 88,
+      "line_number": 97,
       "context": "const title = isEmptyGuests\n ? isFiltered\n ? t(\"Common:NotFoundGuestsFilter\")\n : t(\"Common:NotFoundGuests\")\n : t(\"Common:NotFoundMembers\");\n \n const description = isEmptyGuests\n ? isFiltered\n ? t(\"Common:NotFoundFilterGuestsDescription\")\n : t(\"Common:NotFoundGuestsDescription\")",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/dialogs/edit-group-members-dialog/EmptyContainer.tsx",
-      "line_number": 53,
+      "line_number": 62,
       "context": "return (\n <StyledEmptyScreen\n imageSrc={imageSrc}\n imageAlt=\"Empty screen image\"\n headerText={t(\"NotFoundMembers\")}\n descriptionText={t(\"NotFoundUsersDescription\")}\n />\n );\n };",
       "module": "/packages/shared"
     }
@@ -179,7 +179,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

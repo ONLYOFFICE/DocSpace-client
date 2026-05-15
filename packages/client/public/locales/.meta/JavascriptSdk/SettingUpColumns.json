@@ -3,7 +3,7 @@
   "content": "Setting up Columns",
   "content_en_sha1_hash": "9c3fb7fb9f0ad28973475952ac36c53654ca8162",
   "created_at": "2025-05-19T21:30:54.684Z",
-  "updated_at": "2026-04-11T21:14:33.541Z",
+  "updated_at": "2026-05-15T14:00:06.803Z",
   "comment": {
     "text": "This is a checkbox label in the Developer Tools settings. It controls the visibility of column setup options within the JavaScript SDK preset manager.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 535,
+      "line_number": 544,
       "context": "/>\n </LabelGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"SettingUpColumns\")}\n onChange={toggleShowSettings}\n isChecked={config.showSettings}\n dataTestId=\"show_settings_checkbox\"\n />\n <HelpButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 535,
+      "line_number": 544,
       "context": "/>\n </LabelGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"SettingUpColumns\")}\n onChange={toggleShowSettings}\n isChecked={config.showSettings}\n dataTestId=\"show_settings_checkbox\"\n />\n <HelpButton",
       "module": "/packages/client"
     }

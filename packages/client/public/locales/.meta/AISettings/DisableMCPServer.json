@@ -3,7 +3,7 @@
   "content": "Disable server",
   "content_en_sha1_hash": "265e807fc34e11374d7051b3a1cd0ac6d8901ad9",
   "created_at": "2025-10-27T16:14:31.648Z",
-  "updated_at": "2026-04-11T21:02:54.538Z",
+  "updated_at": "2026-05-15T14:00:06.766Z",
   "comment": {
     "text": "This is the title of a confirmation dialog that appears when a user attempts to disable an AI server.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/dialogs/disable/index.tsx",
-      "line_number": 74,
+      "line_number": 83,
       "context": "};\n \n return (\n <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>\n <ModalDialog.Header>\n {t(\"AISettings:DisableMCPServer\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n <Trans t={t} i18nKey=\"DisableServerDescription\" ns=\"AISettings\" />\n </Text>",
       "module": "/packages/client"
     }
@@ -24,6 +24,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [],
       "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     }
   }
 }

@@ -3,7 +3,7 @@
   "content": "First name",
   "content_en_sha1_hash": "7e568a90221d853052b3466e581eb5f7c030b901",
   "created_at": "2025-05-19T21:30:45.407Z",
-  "updated_at": "2026-04-11T20:52:25.479Z",
+  "updated_at": "2026-05-15T14:00:06.641Z",
   "comment": {
     "text": "This is a label for an input field where users enter their first name. It appears in dialogs for changing user information and in portal settings for LDAP attribute mapping.",
     "is_auto": true,
@@ -13,37 +13,37 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeNameDialog/index.js",
-      "line_number": 130,
+      "line_number": 139,
       "context": "<div className={styles.content}>\n {(() => {\n const fields = [\n {\n id: \"firstName\",\n label: t(\"Common:FirstName\"),\n value: firstName,\n onChange: handleNameChange,\n placeholder: t(\"Common:FirstName\"),\n hasError: !isNameValid,\n errorMessage:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeNameDialog/index.js",
-      "line_number": 130,
+      "line_number": 139,
       "context": "<div className={styles.content}>\n {(() => {\n const fields = [\n {\n id: \"firstName\",\n label: t(\"Common:FirstName\"),\n value: firstName,\n onChange: handleNameChange,\n placeholder: t(\"Common:FirstName\"),\n hasError: !isNameValid,\n errorMessage:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
-      "line_number": 138,
+      "line_number": 147,
       "context": "style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.firstName}\n labelText={t(\"Common:FirstName\")}\n isRequired\n dataTestId=\"first_name_field_container\"\n >\n <LdapFieldComponent\n name={FIRST_NAME}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/FieldMapping.js",
-      "line_number": 81,
+      "line_number": 90,
       "context": "dataTestId=\"attribute_mapping_help_button\"\n />\n </div>\n \n <SsoFormField\n labelText={t(\"Common:FirstName\")}\n name=\"firstName\"\n placeholder={SSO_GIVEN_NAME}\n tabIndex={16}\n value={firstName}\n hasError={firstNameHasError}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/RegistrationForm.tsx",
-      "line_number": 191,
+      "line_number": 200,
       "context": "name=\"first-name\"\n type={InputType.text}\n size={InputSize.large}\n hasError={!fnameValid}\n value={fname}\n placeholder={t(\"Common:FirstName\")}\n scale\n tabIndex={1}\n isDisabled={isLoading}\n onChange={onChangeFname}\n onKeyDown={onKeyPress}",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/Activation/page.client.tsx",
-      "line_number": 209,
+      "line_number": 218,
       "context": ">\n <TextInput\n id=\"name\"\n name=\"name\"\n value={name}\n placeholder={t(\"Common:FirstName\")}\n type={InputType.text}\n size={InputSize.large}\n scale\n tabIndex={1}\n isAutoFocussed",
       "module": "/packages/login"
     }
@@ -179,7 +179,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

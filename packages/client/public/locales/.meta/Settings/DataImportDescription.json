@@ -3,7 +3,7 @@
   "content": "Import data from a third party service to {{organizationName}} {{productName}}. Data import allows transferring data such as all users, their personal and shared documents.",
   "content_en_sha1_hash": "d3eff090b70a55f1d87037e6d061a57396691184",
   "created_at": "2025-05-19T21:30:51.065Z",
-  "updated_at": "2026-04-11T21:25:00.676Z",
+  "updated_at": "2026-05-15T14:00:06.786Z",
   "comment": {
     "text": "This is a descriptive text explaining the Data Import feature. It appears on the Data Import settings page and informs the user about transferring data from a third-party service. `{{organizationName}}` is the name of the user's organization, and `{{productName}}` is the name of the ONLYOFFICE product.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/Providers.tsx",
-      "line_number": 88,
+      "line_number": 97,
       "context": "if (showPortalSettingsLoader || !ready) return <DataImportLoader />;\n \n return (\n <WorkspacesContainer>\n <Text className=\"data-import-description\">\n {t(\"DataImportDescription\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n })}\n \n {dataImportUrl ? (",
       "module": "/packages/client"
     }

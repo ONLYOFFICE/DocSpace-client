@@ -3,7 +3,7 @@
   "content": "Room admin",
   "content_en_sha1_hash": "50dcd25d31ede11f1a215aad608488dd7f404e89",
   "created_at": "2025-05-19T21:30:48.170Z",
-  "updated_at": "2026-04-23T17:24:01.929Z",
+  "updated_at": "2026-05-15T14:00:06.788Z",
   "comment": {
     "text": "This is a label for a user role, indicating a room administrator. It appears in billing information, user type selection, and an invitation menu.",
     "is_auto": true,
@@ -13,37 +13,37 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/main-tariff/PaymentContainer.tsx",
-      "line_number": 88,
+      "line_number": 96,
       "context": "{t(\"AdministratorDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <br />\n <Text isBold>{t(\"RoomAdmin\")}</Text>\n <Text>{t(\"RoomManagerDescription\")}</Text>\n </>\n }\n dataTestId=\"admin_accounts_help_button\"\n />",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/index.tsx",
-      "line_number": 70,
+      "line_number": 79,
       "context": "};\n \n const typeOptions = [\n {\n key: UserTypes.RoomAdmin,\n label: t(\"Common:RoomAdmin\"),\n onClick: setTypeRoomAdmin,\n },\n {\n key: UserTypes.User,\n label: t(\"Common:User\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 691,
+      "line_number": 700,
       "context": "? [\n {\n id: \"accounts-add_manager\",\n className: \"main-button_drop-down\",\n icon: PersonManagerReactSvgUrl,\n label: t(\"Common:RoomAdmin\"),\n onClick: () => this.inviteUser(EmployeeType.RoomAdmin),\n \"data-type\": EmployeeType.RoomAdmin,\n action: EmployeeType.RoomAdmin,\n key: \"manager\",\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 352,
+      "line_number": 361,
       "context": "case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: getBrandName(\"ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");\n case EmployeeType.Guest:\n default:\n return t(\"Common:Guest\");",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 352,
+      "line_number": 361,
       "context": "case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: getBrandName(\"ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");\n case EmployeeType.Guest:\n default:\n return t(\"Common:Guest\");",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/room-members/getUserRoleOptions.ts",
-      "line_number": 39,
+      "line_number": 48,
       "context": "access: ShareAccessRights.FullAccess,\n type: \"admin\",\n },\n roomAdmin: {\n key: \"roomAdmin\",\n label: t(\"Common:RoomAdmin\"),\n access: ShareAccessRights.RoomManager,\n type: \"manager\",\n },\n collaborator: {\n key: \"collaborator\",",
       "module": "/packages/shared"
     }
@@ -187,7 +187,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

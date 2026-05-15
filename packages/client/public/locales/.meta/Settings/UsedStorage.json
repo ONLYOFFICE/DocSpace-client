@@ -3,7 +3,7 @@
   "content": "Used: {{size}}",
   "content_en_sha1_hash": "a1f147a74895697927042157e570c03e8d3e41f3",
   "created_at": "2025-05-19T21:30:53.093Z",
-  "updated_at": "2026-04-11T21:21:29.585Z",
+  "updated_at": "2026-05-15T14:00:06.872Z",
   "comment": {
     "text": "This is a label indicating the amount of storage space currently in use. It appears on the storage management page, with `{{size}}` representing the formatted storage amount (e.g., \"10 GB\").",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/StorageSpaceUsed.js",
-      "line_number": 128,
+      "line_number": 137,
       "context": "size: totalSize,\n })}\n </Text>\n ) : null}\n <Text fontWeight={400} fontSize=\"14px\" className=\"disk-space_title\">\n {t(\"UsedStorage\", {\n size: usedSize,\n })}\n </Text>\n {standalone && !isTenantCustomQuotaSet ? (\n <Link",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Media",
   "content_en_sha1_hash": "0c77aeece8c258113148c6fb487946bf97b34672",
   "created_at": "2025-05-19T21:30:46.398Z",
-  "updated_at": "2026-04-23T17:24:01.910Z",
+  "updated_at": "2026-05-15T14:00:06.750Z",
   "comment": {
     "text": "This is a filter option label. It appears in the file filter dropdown to show only media files (audio, video).",
     "is_auto": true,
@@ -13,25 +13,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 800,
+      "line_number": 809,
       "context": "break;\n case FilterType.ImagesOnly.toString():\n label = t(\"Common:Images\");\n break;\n case FilterType.MediaOnly.toString():\n label = t(\"Common:Media\");\n break;\n case FilterType.FilesOnly.toString():\n label = t(\"Common:Files\");\n break;\n case FilterType.PDFForm.toString():",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 800,
+      "line_number": 809,
       "context": "break;\n case FilterType.ImagesOnly.toString():\n label = t(\"Common:Images\");\n break;\n case FilterType.MediaOnly.toString():\n label = t(\"Common:Media\");\n break;\n case FilterType.FilesOnly.toString():\n label = t(\"Common:Files\");\n break;\n case FilterType.PDFForm.toString():",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 161,
+      "line_number": 170,
       "context": "key: FilterType.ImagesOnly,\n label: t(\"Common:Images\"),\n },\n {\n key: FilterType.MediaOnly,\n label: t(\"Common:Media\"),\n },\n {\n key: FilterType.FilesOnly,\n label: t(\"Common:Files\"),\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
-      "line_number": 193,
+      "line_number": 202,
       "context": "label: t(\"Common:Images\"),\n typeKey: FilterType.ImagesOnly,\n },\n {\n key: \"filter-type-media\",\n label: t(\"Common:Media\"),\n typeKey: FilterType.MediaOnly,\n },\n ];\n \n const [filterBy, setFilterBy] = useState({",
       "module": "/packages/client"
     },
@@ -49,13 +49,13 @@
     },
     {
       "file_path": "/packages/shared/utils/getSelectFormatTranslation.ts",
-      "line_number": 71,
+      "line_number": 78,
       "context": "case FilterType.FoldersOnly:\n return getTranslatedType(\"Common:Folders\");\n \n case FilterType.MediaOnly:\n return t(\"Common:SelectExtensionFiles\", {\n extension: t(\"Common:Media\").toLowerCase(),\n });\n \n case FilterType.Pdf:\n return getTranslatedType(getManyPDFTitle(t, false));",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 324,
+      "line_number": 333,
       "context": "case FilterType.SpreadsheetsOnly:\n return t(\"Common:Spreadsheets\");\n case FilterType.ImagesOnly:\n return t(\"Common:Images\");\n case FilterType.MediaOnly:\n return t(\"Common:Media\");\n case FilterType.ArchiveOnly:\n return t(\"Common:Archives\");\n case FilterType.FilesOnly:\n return t(\"Common:Files\");\n case FilterType.DiagramsOnly:",
       "module": "/packages/shared"
     }
@@ -191,7 +191,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

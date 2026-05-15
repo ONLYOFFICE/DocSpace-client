@@ -3,7 +3,7 @@
   "content": "Yesterday",
   "content_en_sha1_hash": "da24830f1f7072d55862afb6969c1a4c433ac056",
   "created_at": "2025-05-19T21:30:49.639Z",
-  "updated_at": "2026-04-12T08:18:57.520Z",
+  "updated_at": "2026-05-15T14:00:06.620Z",
   "comment": {
     "text": "This is a short label indicating the previous day. It appears in the \"New Files\" panel and in the file history to categorize recent activity.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/NewFilesBadge/sub-components/NewFilesPanelItemDate.tsx",
-      "line_number": 56,
+      "line_number": 65,
       "context": "}\n \n now.setDate(now.getDate() - 1);\n \n if (now.getDate() === enteredDate.getDate()) {\n return t(\"Yesterday\");\n }\n \n const locale = getCookie(LANGUAGE);\n \n const correctDate = getCorrectDate(",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/index.tsx",
-      "line_number": 71,
+      "line_number": 80,
       "context": "const halfYearAgo = subtractFromDate(currentDate, 6, \"months\");\n const yesterday = subtractFromDate(currentDate, 1, \"days\");\n \n if (isAfter(given, weekAgo)) {\n if (isSameDay(currentDate, given)) return t(\"Common:Today\");\n if (isSameDay(yesterday, given)) return t(\"Common:Yesterday\");\n \n const weekday = getWeekdayName(given.weekday, \"long\", locale);\n return weekday.charAt(0).toUpperCase() + weekday.slice(1);\n }",
       "module": "/packages/client"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

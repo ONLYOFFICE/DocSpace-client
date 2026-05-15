@@ -3,7 +3,7 @@
   "content": "Certificate Authority who issued the certificate is not trusted",
   "content_en_sha1_hash": "6078238aac04c61650578d328250ffb239e3e9c8",
   "created_at": "2025-05-19T21:30:54.288Z",
-  "updated_at": "2026-04-11T21:16:43.861Z",
+  "updated_at": "2026-05-15T14:00:06.846Z",
   "comment": {
     "text": "This is an error message displayed in a dialog related to LDAP certificate validation. It indicates that the Certificate Authority that issued the certificate is not recognized as trustworthy.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/CertificateDialog.js",
-      "line_number": 74,
+      "line_number": 83,
       "context": "case LDAPCertificateProblem.CertCnNoMatch:\n return t(\"LdapSettingsCertCnNoMatch\");\n case LDAPCertificateProblem.CertIssuerChaining:\n return t(\"LdapSettingsCertIssuerChaining\");\n case LDAPCertificateProblem.CertUntrustedCa:\n return t(\"LdapSettingsCertUntrustedCa\");\n case LDAPCertificateProblem.CertUntrustedRoot:\n return t(\"LdapSettingsCertUntrustedRoot\");\n case LDAPCertificateProblem.CertMalformed:\n return t(\"LdapSettingsCertMalformed\");\n case LDAPCertificateProblem.CertUnrecognizedError:",
       "module": "/packages/client"
     }

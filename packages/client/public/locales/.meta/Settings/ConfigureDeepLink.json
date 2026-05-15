@@ -3,7 +3,7 @@
   "content": "Configure deep link",
   "content_en_sha1_hash": "edfb8002794be0c3c97a60c2efb077b54207446d",
   "created_at": "2025-05-19T21:30:50.950Z",
-  "updated_at": "2026-04-13T14:59:05.832Z",
+  "updated_at": "2026-05-15T14:00:06.769Z",
   "comment": {
     "text": "This is a menu item label in the portal settings. It links to a page where users can set up a deep link for their ONLYOFFICE DocSpace.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
-      "line_number": 101,
+      "line_number": 110,
       "context": "withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Common:Paid\")}\n />\n ) : null}\n <CategoryItem\n title={t(\"ConfigureDeepLink\")}\n subtitle={t(\"ConfigureDeepLinkDescription\")}\n url=\"/portal-settings/customization/general/configure-deep-link\"\n onClickLink={onClickLink}\n />\n {isEnterprise ? (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/configure-deep-link.tsx",
-      "line_number": 199,
+      "line_number": 208,
       "context": "return (\n <StyledWrapper>\n {!isMobileView ? (\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"ConfigureDeepLink\")}\n </Text>\n ) : null}\n <Text>{t(\"ConfigureDeepLinkDescription\")}</Text>\n {configureDeepLinkUrl ? (\n <Link",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 86,
+      "line_number": 95,
       "context": "{\n id: \"portal-settings_catalog-configure-deep-link\",\n key: \"0-0-4\",\n icon: \"\",\n link: \"configure-deep-link\",\n tKey: \"ConfigureDeepLink\",\n },\n {\n id: \"portal-settings_catalog-ad-management\",\n key: \"0-0-5\",\n icon: \"\",",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "{{tenantQuotaLimit}} for {{productName}}",
   "content_en_sha1_hash": "09355ae23ccbff3fb98fc3c1e3efa0079105eed8",
   "created_at": "2025-05-19T21:30:52.865Z",
-  "updated_at": "2026-04-11T21:21:53.543Z",
+  "updated_at": "2026-05-15T14:00:06.699Z",
   "comment": {
     "text": "This is a line item in a list of quota limits, displayed within a warning dialog. It indicates the total storage limit for the entire tenant, with `{{tenantQuotaLimit}}` representing the specific storage amount (e.g., \"10 GB\") and `{{productName}}` being the name of the product (e.g., \"DocSpace\").",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/WarningQuotaDialog/WarningQuotaDialog.tsx",
-      "line_number": 69,
+      "line_number": 78,
       "context": "}),\n );\n }\n if (isTenantCustomQuotaSet) {\n quotaLimits.push(\n t(\"Settings:TenantQuotaLimit\", {\n tenantQuotaLimit: getConvertedSize(t, tenantCustomQuota),\n productName: getBrandName(\"ProductName\"),\n }),\n );\n }",
       "module": "/packages/client"
     }

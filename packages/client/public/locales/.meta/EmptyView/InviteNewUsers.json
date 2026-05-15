@@ -3,7 +3,7 @@
   "content": "Invite new users",
   "content_en_sha1_hash": "d996e6455c940edb191c294cd00ca3e24b39dd46",
   "created_at": "2025-05-19T21:30:56.518Z",
-  "updated_at": "2026-04-11T21:06:49.442Z",
+  "updated_at": "2026-05-15T14:00:06.600Z",
   "comment": {
     "text": "Button label. This button allows users to invite new members to the current DocSpace or a specific room.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 394,
+      "line_number": 403,
       "context": "onClick: actions.onCreateAIAgent,\n disabled: !security?.Create,\n };\n \n const inviteRootRoom = {\n title: t(\"EmptyView:InviteNewUsers\"),\n description: t(\"EmptyView:InviteRootRoomDescription\", {\n productName: getBrandName(\"ProductName\"),\n }),\n icon: <InviteUserFormIcon />,\n key: \"invite-root-room\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/EmptyScreen.tsx",
-      "line_number": 142,
+      "line_number": 151,
       "context": "if (isFiltered)\n return [\n {\n key: \"empty-view-invite-new-users\",\n title: t(\"EmptyView:InviteNewUsers\"),\n description: t(\"EmptyView:SendInvitationLetter\"),\n disabled: isRoomAdmin || currentGroup?.isLDAP || isEmptyGuests,\n icon: <InviteUserIcon />,\n model: (getContactsModel?.(t, false) ?? []).filter(\n (m) => typeof m !== \"boolean\",",
       "module": "/packages/client"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

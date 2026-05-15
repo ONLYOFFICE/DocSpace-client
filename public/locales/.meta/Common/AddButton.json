@@ -3,7 +3,7 @@
   "content": "Add",
   "content_en_sha1_hash": "61cc55aa0453184734c3fa0b621eda6fa874bd83",
   "created_at": "2025-05-19T21:30:42.915Z",
-  "updated_at": "2026-05-08T13:10:45.513Z",
+  "updated_at": "2026-05-15T14:00:06.622Z",
   "comment": {
     "text": "This is a button label that initiates an \"add\" action, such as adding a file, a server, or an item to a selection.",
     "is_auto": true,
@@ -13,61 +13,61 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-input/attachment/index.tsx",
-      "line_number": 138,
+      "line_number": 145,
       "context": "withCreate={false}\n withSubFolders={false}\n withFooterCheckbox={false}\n withFooterInput={false}\n cancelButtonLabel={t(\"CancelButton\")}\n submitButtonLabel={t(\"AddButton\")}\n disabledItems={[]}\n isRoomsOnly={false}\n isThirdParty={false}\n currentFolderId=\"\"\n rootFolderType={FolderType.Rooms}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/MCPServers/index.tsx",
-      "line_number": 245,
+      "line_number": 254,
       "context": "<EmptyScreenRoomSelectorDark />\n )\n }\n searchEmptyScreenHeader={t(\"NotFoundTitle\")}\n searchEmptyScreenDescription={t(\"SearchEmptyRoomsDescription\")}\n submitButtonLabel={t(\"AddButton\")}\n disableSubmitButton={false}\n onSubmit={onSubmitAction}\n rowLoader={<RowLoader />}\n hasNextPage={servers.length < totalServers}\n isNextPageLoading={false}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/PluginSelector/PluginFilesSelector/PluginFilesSelector.tsx",
-      "line_number": 212,
+      "line_number": 221,
       "context": "getIcon={getIcon!}\n withSearch={!!withSearch}\n withBreadCrumbs={!!withBreadCrumbs}\n withCancelButton={!!withCancelButton}\n cancelButtonLabel={cancelButtonLabel ?? t(\"Common:CancelButton\")}\n submitButtonLabel={submitButtonLabel ?? t(\"Common:AddButton\")}\n withCreate={!!withCreate}\n withFooterCheckbox={!!withFooterCheckbox}\n withFooterInput={!!withFooterInput}\n disabledItems={[]}\n isRoomsOnly={!!isRoomsOnly}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/TemplateAccessSelector/index.tsx",
-      "line_number": 96,
+      "line_number": 105,
       "context": "return (\n <PeopleSelector\n useAside\n onClose={onClose!}\n onSubmit={onSubmit}\n submitButtonLabel={t(\"Common:AddButton\")}\n disableSubmitButton={false}\n isMultiSelect\n disableDisabledUsers\n withGroups\n withInfo",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/CommentEditor.tsx",
-      "line_number": 140,
+      "line_number": 149,
       "context": "onClick={onOpenEditor}\n data-testid=\"info_panel_details_comment_edit_toggle\"\n >\n <ReactSVG className=\"edit_toggle-icon\" src={PencilReactSvgUrl} />\n <div className=\"property-content edit_toggle-text\">\n {comment ? t(\"Common:EditButton\") : t(\"Common:AddButton\")}\n </div>\n </div>\n ) : null}\n </div>\n ) : (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/MultiInputGroup.tsx",
-      "line_number": 220,
+      "line_number": 229,
       "context": "fontSize=\"13px\"\n fontWeight={400}\n lineHeight=\"20px\"\n truncate\n >\n {t(\"Common:AddButton\")}\n </Text>\n <ArrowIcon />\n </div>\n </StyledInputAddBlock>\n <AddButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/FilterDialog/DeliveryDatePicker.js",
-      "line_number": 308,
+      "line_number": 317,
       "context": "/>\n </TimePickerCell>\n ) : (\n <TimePickerCell>\n <AddButton\n title={t(\"Common:AddButton\")}\n onClick={showTimePicker}\n className=\"mr-8 add-delivery-time-button\"\n label={t(\"SelectDeliveryTime\")}\n />\n </TimePickerCell>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/ContactsForm.tsx",
-      "line_number": 204,
+      "line_number": 213,
       "context": "<Text fontSize=\"12px\" fontWeight={400}>\n {t(\"Common:FormAdminsDescription\")}\n </Text>\n <div className={styles.buttonWrapper}>\n <Button\n label={t(\"Common:AddButton\")}\n size={ButtonSize.small}\n primary\n onClick={onAddAdmin}\n />\n </div>",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/ContactsForm.tsx",
-      "line_number": 204,
+      "line_number": 213,
       "context": "<Text fontSize=\"12px\" fontWeight={400}>\n {t(\"Common:FormAdminsDescription\")}\n </Text>\n <div className={styles.buttonWrapper}>\n <Button\n label={t(\"Common:AddButton\")}\n size={ButtonSize.small}\n primary\n onClick={onAddAdmin}\n />\n </div>",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/ContactsForm.tsx",
-      "line_number": 204,
+      "line_number": 213,
       "context": "<Text fontSize=\"12px\" fontWeight={400}>\n {t(\"Common:FormAdminsDescription\")}\n </Text>\n <div className={styles.buttonWrapper}>\n <Button\n label={t(\"Common:AddButton\")}\n size={ButtonSize.small}\n primary\n onClick={onAddAdmin}\n />\n </div>",
       "module": "/packages/sdk"
     }
@@ -203,7 +203,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

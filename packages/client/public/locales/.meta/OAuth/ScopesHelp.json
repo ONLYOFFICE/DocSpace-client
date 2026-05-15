@@ -3,7 +3,7 @@
   "content": "Scopes are used to limit your app's access to all user-related data, and they'll let you specify exactly what kind of access you need.",
   "content_en_sha1_hash": "626ffa4197cd8a9b599084855d2df9504318e839",
   "created_at": "2025-05-19T21:30:54.034Z",
-  "updated_at": "2026-04-23T17:24:02.003Z",
+  "updated_at": "2026-05-15T14:00:06.821Z",
   "comment": {
     "text": "This is the help text for the \"Scopes\" section in the OAuth client settings. It explains what scopes are used for when configuring an application's access permissions.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/ScopesBlock.tsx",
-      "line_number": 242,
+      "line_number": 251,
       "context": "return (\n <StyledScopesContainer isRequiredError={isRequiredError}>\n <BlockHeader\n className=\"header\"\n header={t(\"ScopesHeader\")}\n helpButtonText={t(\"ScopesHelp\")}\n isRequired\n />\n \n <Text\n className=\"header\"",
       "module": "/packages/client"
     }

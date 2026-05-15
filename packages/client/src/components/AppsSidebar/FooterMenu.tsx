@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
 import { ArticleItem } from "@docspace/ui-kit/components/article/item";
@@ -40,11 +41,8 @@ type FooterMenuProps = {
 };
 
 const FooterMenu = ({ showText }: FooterMenuProps) => {
+  const navigate = useNavigate();
   const { t } = useTranslation(["Common"]);
-
-  const onNavigate = (href: string) => () => {
-    window.location.assign(href);
-  };
 
   return (
     <>
@@ -55,7 +53,7 @@ const FooterMenu = ({ showText }: FooterMenuProps) => {
         icon={ContactsIconUrl}
         showText={showText}
         linkData={EMPTY_LINK}
-        onClick={onNavigate("/accounts/people")}
+        onClick={() => navigate("/accounts/people")}
       />
       <ArticleItem
         key="billing"
@@ -64,7 +62,7 @@ const FooterMenu = ({ showText }: FooterMenuProps) => {
         icon={BillingIconUrl}
         showText={showText}
         linkData={EMPTY_LINK}
-        onClick={onNavigate("/portal-settings/payments/services")}
+        onClick={() => navigate("/portal-settings/payments/portal-payments")}
       />
       <ArticleItem
         key="developer-tools"
@@ -73,7 +71,7 @@ const FooterMenu = ({ showText }: FooterMenuProps) => {
         icon={DeveloperIconUrl}
         showText={showText}
         linkData={EMPTY_LINK}
-        onClick={onNavigate("/developer-tools/overview")}
+        onClick={() => navigate("/developer-tools/overview")}
       />
       <ArticleItem
         key="settings"
@@ -82,10 +80,11 @@ const FooterMenu = ({ showText }: FooterMenuProps) => {
         icon={SettingsIconUrl}
         showText={showText}
         linkData={EMPTY_LINK}
-        onClick={onNavigate("/portal-settings")}
+        onClick={() => navigate("/portal-settings")}
       />
     </>
   );
 };
 
 export default FooterMenu;
+

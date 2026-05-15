@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useNavigate } from "react-router";
+
 import {
   Avatar,
   AvatarRole,
@@ -41,6 +43,7 @@ type ProfileBlockProps = {
 };
 
 const ProfileBlock = ({ user, showText }: ProfileBlockProps) => {
+  const navigate = useNavigate();
   const displayName = user.displayName
     ? Encoder.htmlDecode(user.displayName)
     : "";
@@ -49,7 +52,7 @@ const ProfileBlock = ({ user, showText }: ProfileBlockProps) => {
     <div
       className={styles.profileBlock}
       data-show-text={showText ? "true" : "false"}
-      onClick={() => window.location.assign("/profile")}
+      onClick={() => navigate("/profile")}
     >
       <Avatar
         className={styles.avatar}

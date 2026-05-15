@@ -39,6 +39,7 @@ import {
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 import { getEncryptionKeys } from "@docspace/shared/api/privacy";
 
+import { AutoLockSetting } from "./AutoLockSetting";
 import { KeysList } from "./KeysList";
 import { useGenerateKeyFlow } from "./flows/useGenerateKeyFlow";
 import { useImportKeyFlow } from "./flows/useImportKeyFlow";
@@ -169,6 +170,7 @@ const KeysManagement = ({
             />
           ) : null}
         </div>
+        {hasKeys ? <AutoLockSetting /> : null}
       </div>
       {generate.modals}
       {importFlow.modals}

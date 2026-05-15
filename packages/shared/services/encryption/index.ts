@@ -37,3 +37,4 @@ export * from "./room-file-access";
 export * from "./tofu-store";
 export * from "./filename-cache";
 export * from "./passphrase-strength";
+export * from "./auto-lock-preference";

@@ -40,6 +40,7 @@ import {
   registerUnlockHandler,
   unregisterUnlockHandler,
 } from "../../services/encryption/secret-storage";
+import { getAutoLockTimeoutSeconds } from "../../services/encryption/auto-lock-preference";
 import {
   registerKeyMismatchHandler,
   unregisterKeyMismatchHandler,
@@ -231,6 +232,47 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
       document.removeEventListener("visibilitychange", handler);
     };
   }, []);
+
+  // Auto-lock on idle timeout (configurable via Profile → keys management).
+  useEffect(() => {
+    if (!isUnlocked) return undefined;
+    if (typeof document === "undefined" || typeof window === "undefined") {
+      return undefined;
+    }
+
+    const timeoutSeconds = getAutoLockTimeoutSeconds();
+    if (timeoutSeconds <= 0) return undefined;
+    const timeoutMs = timeoutSeconds * 1000;
+
+    let timerId: ReturnType<typeof setTimeout> | null = null;
+    const lockNow = () => {
+      SecretStorage.lock();
+      setIsUnlocked(false);
+    };
+    const resetTimer = () => {
+      if (timerId !== null) clearTimeout(timerId);
+      timerId = setTimeout(lockNow, timeoutMs);
+    };
+
+    const events: Array<keyof DocumentEventMap> = [
+      "mousedown",
+      "keydown",
+      "scroll",
+      "touchstart",
+      "click",
+    ];
+    for (const ev of events) {
+      document.addEventListener(ev, resetTimer, { passive: true });
+    }
+    resetTimer();
+
+    return () => {
+      if (timerId !== null) clearTimeout(timerId);
+      for (const ev of events) {
+        document.removeEventListener(ev, resetTimer);
+      }
+    };
+  }, [isUnlocked]);
 
   const resolveKeyMismatch = useCallback(
     async (info: KeyMismatchInfo): Promise<KeyMismatchDecision> => {

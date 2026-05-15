@@ -122,3 +122,37 @@ export function splitMnemonicForDisplay(
 export function normalizeMnemonic(input: string): string {
   return input.normalize("NFKD").trim().toLowerCase().replace(/\s+/g, " ");
 }
+
+export const RECOVERY_QUIZ_QUESTION_COUNT = 3;
+
+export function pickQuizPositions(
+  wordCount: number,
+  questionCount: number = RECOVERY_QUIZ_QUESTION_COUNT,
+  rng: () => number = Math.random,
+): number[] {
+  const count = Math.min(Math.max(0, questionCount), wordCount);
+  const positions = new Set<number>();
+  while (positions.size < count) {
+    const idx = Math.floor(rng() * wordCount);
+    positions.add(Math.min(wordCount - 1, idx));
+  }
+  return Array.from(positions).sort((a, b) => a - b);
+}
+
+export function verifyQuizAnswers(
+  mnemonic: string,
+  positions: number[],
+  answers: ReadonlyArray<string>,
+): boolean {
+  if (positions.length !== answers.length) return false;
+  if (positions.length === 0) return false;
+  const words = normalizeMnemonic(mnemonic).split(" ");
+  for (let i = 0; i < positions.length; i++) {
+    const pos = positions[i];
+    if (pos < 0 || pos >= words.length) return false;
+    const expected = words[pos];
+    const given = answers[i].normalize("NFKD").trim().toLowerCase();
+    if (expected !== given) return false;
+  }
+  return true;
+}

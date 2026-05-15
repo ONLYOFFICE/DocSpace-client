@@ -28,7 +28,7 @@
 
 import React from "react";
 import { observer } from "mobx-react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 import api from "@docspace/shared/api";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
@@ -84,7 +84,6 @@ const RoomsList = ({
   const timezone = portalSettings.timezone;
   const displayFileExtension = filesSettings.displayFileExtension;
   const searchParams = useSearchParams();
-  const pathname = usePathname();
 
   const { setIsEmptyList, filesViewAs, setFilesViewAs, currentDeviceType } =
     useSettingsStore();

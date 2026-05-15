@@ -60,9 +60,21 @@ const buildMemberDto = (m: RoomMember) => ({
     id: m.id,
     displayName: m.displayName ?? m.id,
     email: m.email ?? `${m.id}@example.com`,
+    avatar: "",
+    avatarOriginal: "",
+    avatarMax: "",
+    avatarMedium: "",
+    avatarSmall: "",
+    profileUrl: "",
+    hasAvatar: false,
+    isAnonim: false,
+    activationStatus: 1,
+    status: 1,
   },
   isOwner: m.access === 0,
+  isLocked: false,
   canEditAccess: true,
+  subjectType: 0,
 });
 
 export const roomMembersHandlers = (
@@ -90,9 +102,10 @@ export const roomMembersHandlers = (
   const baseUrl = `${BASE_URL}:${port}/${API_PREFIX}/files/rooms/${roomId}/share`;
 
   return [
-    http.get(baseUrl, () => {
-      requests.push({ method: "GET", url: baseUrl });
-      return okResponse(state.map(buildMemberDto));
+    http.get(baseUrl, ({ request }) => {
+      requests.push({ method: "GET", url: new URL(request.url).pathname });
+      const items = state.map(buildMemberDto);
+      return okResponse({ items, total: items.length });
     }),
 
     http.put(baseUrl, async ({ request }) => {

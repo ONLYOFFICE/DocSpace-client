@@ -42,49 +42,19 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { PasswordInput } from "@docspace/ui-kit/components/password-input";
 import { InputSize } from "@docspace/ui-kit/components/text-input";
 
+import {
+  PASSPHRASE_MIN_LENGTH,
+  checkPassphraseStrength,
+  type PassphraseStrength,
+} from "@docspace/shared/services/encryption/passphrase-strength";
+
 import type {
   PassphraseDialogProps,
   PassphraseFormState,
-  PassphraseStrength,
-  StrengthCheckResult,
 } from "./PassphraseDialog.types";
 import styles from "./PassphraseDialog.module.scss";
 
-const DEFAULT_MIN_LENGTH = 8;
-
-function checkPassphraseStrength(
-  passphrase: string,
-  minLength: number,
-): StrengthCheckResult {
-  const suggestions: string[] = [];
-  let score = 0;
-
-  if (passphrase.length >= minLength) score += 25;
-  else suggestions.push("Use at least 8 characters");
-
-  if (passphrase.length >= 12) score += 10;
-  if (passphrase.length >= 16) score += 10;
-
-  if (/[a-z]/.test(passphrase)) score += 15;
-  else suggestions.push("Add lowercase letters");
-
-  if (/[A-Z]/.test(passphrase)) score += 15;
-  else suggestions.push("Add uppercase letters");
-
-  if (/\d/.test(passphrase)) score += 15;
-  else suggestions.push("Add numbers");
-
-  if (/[!@#$%^&*()_+\-=[\]{}|;:'",.<>?/`~]/.test(passphrase)) score += 10;
-  else suggestions.push("Add special characters");
-
-  let strength: PassphraseStrength;
-  if (score >= 80) strength = "strong";
-  else if (score >= 60) strength = "good";
-  else if (score >= 40) strength = "fair";
-  else strength = "weak";
-
-  return { strength, score: Math.min(score, 100), suggestions };
-}
+const DEFAULT_MIN_LENGTH = PASSPHRASE_MIN_LENGTH;
 
 function getStrengthColor(strength: PassphraseStrength): string {
   switch (strength) {
@@ -129,7 +99,7 @@ const PassphraseDialog: React.FC<PassphraseDialogProps> = ({
   error: externalError,
   isLoading = false,
   minLength = DEFAULT_MIN_LENGTH,
-  requireStrong = false,
+  requireStrong = true,
 }) => {
   const { t, ready } = useTranslation(["Common"]);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -248,9 +218,15 @@ const PassphraseDialog: React.FC<PassphraseDialogProps> = ({
 
   const errorMessage = externalError || state.localError;
 
+  const strengthGate =
+    isNewPassphrase && requireStrong
+      ? strengthResult !== null && strengthResult.strength !== "weak"
+      : true;
+
   const isValid =
     state.passphrase.length >= minLength &&
-    (!isNewPassphrase || state.passphrase === state.confirmPassphrase);
+    (!isNewPassphrase || state.passphrase === state.confirmPassphrase) &&
+    strengthGate;
 
   const isDisabled = !isValid || isLoading;
 
@@ -321,6 +297,17 @@ const PassphraseDialog: React.FC<PassphraseDialogProps> = ({
               >
                 {getStrengthLabelKey(strengthResult.strength, t)}
               </Text>
+              {strengthResult.suggestions.length > 0 && (
+                <ul className={styles.suggestions}>
+                  {strengthResult.suggestions.map((s) => (
+                    <li key={s}>
+                      <Text fontSize="12px" color="var(--color-text-tertiary)">
+                        {s}
+                      </Text>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           )}
 

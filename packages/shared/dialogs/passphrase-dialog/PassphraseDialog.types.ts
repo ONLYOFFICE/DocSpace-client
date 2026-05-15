@@ -44,10 +44,7 @@ export type PassphraseFormState = {
   showPassword: boolean;
 };
 
-export type PassphraseStrength = "weak" | "fair" | "good" | "strong";
-
-export type StrengthCheckResult = {
-  strength: PassphraseStrength;
-  score: number;
-  suggestions: string[];
-};
+export type {
+  PassphraseStrength,
+  PassphraseStrengthResult as StrengthCheckResult,
+} from "@docspace/shared/services/encryption/passphrase-strength";

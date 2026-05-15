@@ -36,6 +36,11 @@ import { PasswordInput } from "@docspace/ui-kit/components/password-input";
 import { InputSize } from "@docspace/ui-kit/components/text-input";
 import { Text } from "@docspace/ui-kit/components/text";
 
+import {
+  PASSPHRASE_MIN_LENGTH,
+  isPassphraseAcceptable,
+} from "@docspace/shared/services/encryption/passphrase-strength";
+
 import styles from "./PassphraseModal.module.scss";
 
 type PassphraseModalProps = {
@@ -46,7 +51,7 @@ type PassphraseModalProps = {
   isLoading?: boolean;
 };
 
-const MIN_LENGTH = 8;
+const MIN_LENGTH = PASSPHRASE_MIN_LENGTH;
 
 export const PassphraseModal: React.FC<PassphraseModalProps> = ({
   visible,
@@ -75,6 +80,11 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
   const handleSubmit = useCallback(() => {
     if (passphrase.length < MIN_LENGTH) {
       setError(t("Common:PassphraseTooShort", { length: MIN_LENGTH }));
+      return;
+    }
+
+    if (isNew && !isPassphraseAcceptable(passphrase)) {
+      setError(t("Common:PassphraseWeak"));
       return;
     }
 

@@ -46,40 +46,26 @@ import {
   CreateSpreadsheetIcon,
 } from "@docspace/ui-kit/components/quick-actions/icons";
 
-import CatalogFolderIcon from "@docspace/ui-kit/assets/icons/16/catalog.folder.react.svg";
-import CatalogRoomsIcon from "@docspace/ui-kit/assets/icons/16/catalog.rooms.react.svg";
-import CatalogDocumentsIcon from "@docspace/ui-kit/assets/icons/16/catalog.documents.react.svg";
-import AiAgentsIcon from "@docspace/ui-kit/assets/icons/16/ai-agents.svg";
-
 import BgPatternGreenUrl from "PUBLIC_DIR/images/background.pattern.green.react.svg?url";
 
+import { useAppsCatalog, type AppId } from "SRC_DIR/helpers/apps-catalog";
+
 import { ModuleCard, type ModuleItem } from "./ModuleCard";
-import {
-  type DashboardModuleId,
-  getGreetingKey,
-  makeCreateUrl,
-  NEW_FILE_NAMES,
-} from "./utils";
+import { getGreetingKey, makeCreateUrl, NEW_FILE_NAMES } from "./utils";
 import { InstallAiFormsDialog } from "./InstallModuleDialog";
 import styles from "./Dashboard.module.scss";
 
 interface DashboardProps {
   firstName?: string;
   pricingUrl?: string;
-  aiFilesEnabled: boolean;
-  aiFormsEnabled: boolean;
-  aiRoomsEnabled: boolean;
-  aiAgentsEnabled: boolean;
+  isAppEnabled: (id: string) => boolean;
   ensureAppsLoaded: () => void;
 }
 
 const Dashboard = ({
   firstName,
   pricingUrl,
-  aiFilesEnabled,
-  aiFormsEnabled,
-  aiRoomsEnabled,
-  aiAgentsEnabled,
+  isAppEnabled,
   ensureAppsLoaded,
 }: DashboardProps) => {
   const { t } = useTranslation(["Common"]);
@@ -143,7 +129,9 @@ const Dashboard = ({
     [t, myFolderId],
   );
 
-  const handleInstall = (modId: DashboardModuleId) => {
+  const appsCatalog = useAppsCatalog();
+
+  const handleInstall = (modId: AppId) => {
     if (modId === "ai-forms") {
       setInstallDialogVisible(true);
       return;
@@ -175,38 +163,14 @@ const Dashboard = ({
     return <Navigate to="/dashboard" replace />;
   }
 
-  const moduleItems: ModuleItem[] = [
-    {
-      id: "ai-files",
-      icon: <CatalogFolderIcon />,
-      title: t("Common:DashboardAIFilesTitle"),
-      description: t("Common:DashboardAIFilesDescription"),
-      installed: aiFilesEnabled,
-      href: "/ai-files",
-    },
-    {
-      id: "ai-rooms",
-      icon: <CatalogRoomsIcon />,
-      title: t("Common:DashboardAIRoomsTitle"),
-      description: t("Common:DashboardAIRoomsDescription"),
-      installed: aiRoomsEnabled,
-    },
-    {
-      id: "ai-forms",
-      icon: <CatalogDocumentsIcon />,
-      title: t("Common:DashboardAIFormsTitle"),
-      description: t("Common:DashboardAIFormsDescription"),
-      installed: aiFormsEnabled,
-      href: "/ai-forms",
-    },
-    {
-      id: "ai-agents",
-      icon: <AiAgentsIcon />,
-      title: t("Common:DashboardAIChatAgentsTitle"),
-      description: t("Common:DashboardAIChatAgentsDescription"),
-      installed: aiAgentsEnabled,
-    },
-  ];
+  const moduleItems: ModuleItem[] = appsCatalog.map((app) => ({
+    id: app.id,
+    icon: app.icon,
+    title: app.title,
+    description: app.description,
+    installed: app.alwaysOn ? true : isAppEnabled(app.id),
+    href: app.href,
+  }));
 
   return (
     <div className={styles.dashboard}>
@@ -275,7 +239,7 @@ const Dashboard = ({
             <ModuleCard
               key={mod.id}
               mod={mod}
-              onInstall={() => handleInstall(mod.id as DashboardModuleId)}
+              onInstall={() => handleInstall(mod.id as AppId)}
             />
           ))}
         </div>
@@ -294,10 +258,7 @@ const DashboardConnected = inject<TStore>(
   ({ userStore, settingsStore, appsStore }) => ({
     firstName: userStore.user?.firstName,
     pricingUrl: settingsStore.docspacePricesUrl,
-    aiFilesEnabled: appsStore.isEnabled("ai-files"),
-    aiFormsEnabled: appsStore.isEnabled("ai-forms"),
-    aiRoomsEnabled: appsStore.isEnabled("ai-rooms"),
-    aiAgentsEnabled: appsStore.isEnabled("ai-agents"),
+    isAppEnabled: appsStore.isEnabled,
     ensureAppsLoaded: appsStore.ensureLoaded,
   }),
 )(observer(Dashboard));

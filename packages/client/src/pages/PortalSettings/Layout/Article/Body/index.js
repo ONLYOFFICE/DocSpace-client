@@ -151,6 +151,10 @@ const ArticleBodyContent = (props) => {
         setSelectedKeys(["7-0"]);
       }
 
+      if (location.pathname.includes("/apps")) {
+        setSelectedKeys(["8-0"]);
+      }
+
       if (location.pathname.includes("delete-data")) {
         setSelectedKeys(["9-0"]);
       }
@@ -236,6 +240,8 @@ const ArticleBodyContent = (props) => {
         return t("Services");
       case "AISettings":
         return t("Settings:AISettings");
+      case "Apps":
+        return t("Settings:Apps");
       default:
         throw new Error("Unexpected translation key");
     }

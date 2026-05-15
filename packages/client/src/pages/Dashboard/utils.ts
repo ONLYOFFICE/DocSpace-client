@@ -47,12 +47,6 @@ export const makeCreateUrl = (
   return `/sdk/personal-files/editor/create?${params.toString()}`;
 };
 
-export type DashboardModuleId =
-  | "ai-files"
-  | "ai-rooms"
-  | "ai-forms"
-  | "ai-agents";
-
 export type AiFormsSettings = {
   roomId: number;
 };

@@ -76,6 +76,7 @@ const AI_FORMS_SECTION_TO_ID: Record<string, string> = {
 type NewArticleProps = {
   user?: TUser | null;
   currentDeviceType: DeviceType;
+  articleOpen: boolean;
   aiFilesEnabled: boolean;
   aiFormsEnabled: boolean;
   aiRoomsEnabled: boolean;
@@ -86,6 +87,7 @@ type NewArticleProps = {
 const NewArticle = ({
   user,
   currentDeviceType,
+  articleOpen,
   aiFilesEnabled,
   aiFormsEnabled,
   aiRoomsEnabled,
@@ -247,6 +249,7 @@ const NewArticle = ({
         toggleShowText={toggleShowText}
         currentDeviceType={currentDeviceType}
         user={user}
+        articleOpen={articleOpen}
       />
       <InstallAiFormsDialog
         visible={installDialogVisible}
@@ -264,6 +267,7 @@ const NewArticleConnected = inject<TStore>(
   ({ userStore, settingsStore, appsStore }) => ({
     user: userStore.user,
     currentDeviceType: settingsStore.currentDeviceType,
+    articleOpen: settingsStore.articleOpen,
     aiFilesEnabled: appsStore.isEnabled("ai-files"),
     aiFormsEnabled: appsStore.isEnabled("ai-forms"),
     aiRoomsEnabled: appsStore.isEnabled("ai-rooms"),

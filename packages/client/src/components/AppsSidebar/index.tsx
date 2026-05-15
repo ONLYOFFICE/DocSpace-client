@@ -30,11 +30,13 @@ import { useTheme } from "styled-components";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { NavMenu } from "@docspace/ui-kit/components/nav-menu";
 import type { NavMenuGroup } from "@docspace/ui-kit/components/nav-menu";
+import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 import { getLogoUrl } from "@docspace/ui-kit/utils/getLogoUrl";
 import { WhiteLabelLogoType } from "@docspace/ui-kit/enums";
 import articleStyles from "@docspace/ui-kit/components/article/Article.module.scss";
 import { DeviceType } from "@docspace/shared/enums";
 import type { TUser } from "@docspace/shared/api/people/types";
+import type { ArticleProfileProps } from "@docspace/ui-kit/components/article";
 
 import CollapseButton from "./CollapseButton";
 import FooterMenu from "./FooterMenu";
@@ -49,6 +51,7 @@ export type AppsSidebarProps = {
   toggleShowText: () => void;
   currentDeviceType: DeviceType;
   user?: TUser | null;
+  articleOpen?: boolean;
 };
 
 const AppsSidebar = ({
@@ -59,6 +62,7 @@ const AppsSidebar = ({
   toggleShowText,
   currentDeviceType,
   user,
+  articleOpen = true,
 }: AppsSidebarProps) => {
   const { t } = useTranslation(["Common"]);
   const theme = useTheme() as { isBase?: boolean };
@@ -83,26 +87,31 @@ const AppsSidebar = ({
     true,
   );
 
+  const handleBackdropClick = () => {
+    toggleShowText?.();
+  };
+
   return (
-    <div
+    <>
+      <div
       id="article-container"
       className={`${articleStyles.article} ${styles.articleFlex}`}
       data-show-text={showText ? "true" : "false"}
-      data-open="true"
+      data-open={articleOpen ? "true" : "false"}
+      data-sidebar-open={articleOpen ? "true" : "false"}
       data-with-main-button="false"
     >
-      <div
-        className={`${articleStyles.articleHeader} ${styles.header}`}
-        data-show-text={showText ? "true" : "false"}
-      >
-        <a href="/" className={styles.logoWrapper}>
+      {!isMobile && (
+        <div
+          className={`${articleStyles.articleHeader} ${styles.header}`}
+          data-show-text={showText ? "true" : "false"}
+        >
           <img
-            className={showText ? styles.logoFull : styles.logoBurger}
             src={showText ? fullLogo : burgerLogo}
             alt="portal logo"
           />
-        </a>
-      </div>
+        </div>
+      )}
 
       <Scrollbar
         className={`article-body__scrollbar ${styles.scrollbar}`}
@@ -116,20 +125,36 @@ const AppsSidebar = ({
         />
       </Scrollbar>
 
-      <div className={styles.footer}>
-        <FooterMenu showText={showText} />
+      <div className={styles.bottom}>
+        <div className={styles.footer}>
+          <FooterMenu showText={showText} />
+        </div>
+
+        <CollapseButton
+          showText={showText}
+          toggleShowText={toggleShowText}
+          label={collapseLabel}
+        />
+
+        {user && !isMobile ? (
+          <div className={styles.profileBlockWrapper}>
+            <ProfileBlock
+              user={user as unknown as ArticleProfileProps["user"]}
+              showText={showText}
+            />
+          </div>
+        ) : null}
       </div>
-
-      <CollapseButton
-        showText={showText}
-        toggleShowText={toggleShowText}
-        label={collapseLabel}
-      />
-
-      {user && !isMobile ? (
-        <ProfileBlock user={user} showText={showText} />
-      ) : null}
-    </div>
+      </div>
+      {isMobile && articleOpen && (
+        <Backdrop
+          visible={true}
+          isAside={true}
+          onClick={handleBackdropClick}
+          zIndex={229}
+        />
+      )}
+    </>
   );
 };
 

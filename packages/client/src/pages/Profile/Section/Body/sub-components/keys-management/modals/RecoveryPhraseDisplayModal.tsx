@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useMemo, useState, useCallback } from "react";
+import React, { useEffect, useMemo, useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -35,7 +35,11 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Text } from "@docspace/ui-kit/components/text";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { splitMnemonicForDisplay } from "@docspace/shared/services/encryption/recovery";
+import {
+  pickQuizPositions,
+  splitMnemonicForDisplay,
+  verifyQuizAnswers,
+} from "@docspace/shared/services/encryption/recovery";
 
 import styles from "./RecoveryPhraseDisplayModal.module.scss";
 
@@ -47,13 +51,33 @@ type RecoveryPhraseDisplayModalProps = {
   isLoading?: boolean;
 };
 
+type Step = "display" | "quiz";
+
 export const RecoveryPhraseDisplayModal: React.FC<
   RecoveryPhraseDisplayModalProps
 > = ({ visible, mnemonic, onConfirm, onCancel, isLoading = false }) => {
   const { t, ready } = useTranslation(["Common"]);
   const [acknowledged, setAcknowledged] = useState(false);
+  const [step, setStep] = useState<Step>("display");
+  const [quizPositions, setQuizPositions] = useState<number[]>([]);
+  const [answers, setAnswers] = useState<string[]>([]);
+  const [quizError, setQuizError] = useState<string>("");
 
   const groups = useMemo(() => splitMnemonicForDisplay(mnemonic, 4), [mnemonic]);
+  const wordCount = useMemo(
+    () => mnemonic.trim().split(/\s+/).length,
+    [mnemonic],
+  );
+
+  useEffect(() => {
+    if (visible) {
+      setAcknowledged(false);
+      setStep("display");
+      setQuizPositions([]);
+      setAnswers([]);
+      setQuizError("");
+    }
+  }, [visible]);
 
   const handleCopy = useCallback(async () => {
     try {
@@ -66,8 +90,42 @@ export const RecoveryPhraseDisplayModal: React.FC<
 
   const handleCancel = useCallback(() => {
     setAcknowledged(false);
+    setStep("display");
     onCancel();
   }, [onCancel]);
+
+  const startQuiz = useCallback(() => {
+    const positions = pickQuizPositions(wordCount);
+    setQuizPositions(positions);
+    setAnswers(new Array(positions.length).fill(""));
+    setQuizError("");
+    setStep("quiz");
+  }, [wordCount]);
+
+  const submitQuiz = useCallback(() => {
+    if (verifyQuizAnswers(mnemonic, quizPositions, answers)) {
+      setQuizError("");
+      onConfirm();
+    } else {
+      setQuizError(t("Common:RecoveryQuizMismatch"));
+    }
+  }, [mnemonic, quizPositions, answers, onConfirm, t]);
+
+  const goBackToDisplay = useCallback(() => {
+    setStep("display");
+    setQuizError("");
+  }, []);
+
+  const updateAnswer = useCallback((idx: number, value: string) => {
+    setAnswers((prev) => {
+      const next = [...prev];
+      next[idx] = value;
+      return next;
+    });
+    setQuizError("");
+  }, []);
+
+  const allAnswersFilled = answers.every((a) => a.trim().length > 0);
 
   return (
     <ModalDialog
@@ -79,79 +137,158 @@ export const RecoveryPhraseDisplayModal: React.FC<
       autoMaxHeight
     >
       <ModalDialog.Header>
-        {t("Common:RecoveryPhraseTitle")}
+        {step === "display"
+          ? t("Common:RecoveryPhraseTitle")
+          : t("Common:RecoveryQuizTitle")}
       </ModalDialog.Header>
 
       <ModalDialog.Body>
-        <div className={styles.container}>
-          <Text className={styles.description}>
-            {t("Common:RecoveryPhraseHint")}
-          </Text>
-
-          <div className={styles.warningBox}>
-            <Text fontSize="13px" fontWeight={600}>
-              {t("Common:RecoveryPhraseWarning")}
+        {step === "display" ? (
+          <div className={styles.container}>
+            <Text className={styles.description}>
+              {t("Common:RecoveryPhraseHint")}
             </Text>
-          </div>
 
-          <div className={styles.wordsGrid}>
-            {groups.map((group, rowIdx) => (
-              <div key={`row-${rowIdx}`} className={styles.wordsRow}>
-                {group.map((word, colIdx) => {
-                  const number = rowIdx * 4 + colIdx + 1;
-                  return (
-                    <div key={`word-${number}`} className={styles.wordCell}>
-                      <span className={styles.wordIndex}>{number}.</span>
-                      <span className={styles.wordText}>{word}</span>
-                    </div>
-                  );
-                })}
-              </div>
-            ))}
-          </div>
+            <div className={styles.warningBox}>
+              <Text fontSize="13px" fontWeight={600}>
+                {t("Common:RecoveryPhraseWarning")}
+              </Text>
+            </div>
 
-          <Button
-            scale
-            size={ButtonSize.small}
-            onClick={handleCopy}
-            label={t("Common:CopyToClipboard")}
-            isDisabled={isLoading}
-          />
+            <div className={styles.wordsGrid}>
+              {groups.map((group, rowIdx) => (
+                <div key={`row-${rowIdx}`} className={styles.wordsRow}>
+                  {group.map((word, colIdx) => {
+                    const number = rowIdx * 4 + colIdx + 1;
+                    return (
+                      <div key={`word-${number}`} className={styles.wordCell}>
+                        <span className={styles.wordIndex}>{number}.</span>
+                        <span className={styles.wordText}>{word}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              ))}
+            </div>
 
-          <div className={styles.checkboxRow}>
-            <Checkbox
-              id="recoveryPhraseAcknowledged"
-              isChecked={acknowledged}
+            <Button
+              scale
+              size={ButtonSize.small}
+              onClick={handleCopy}
+              label={t("Common:CopyToClipboard")}
               isDisabled={isLoading}
-              onChange={(e) => setAcknowledged(e.target.checked)}
-              label={t("Common:RecoveryPhraseAcknowledge")}
-              tabIndex={1}
             />
+
+            <div className={styles.checkboxRow}>
+              <Checkbox
+                id="recoveryPhraseAcknowledged"
+                isChecked={acknowledged}
+                isDisabled={isLoading}
+                onChange={(e) => setAcknowledged(e.target.checked)}
+                label={t("Common:RecoveryPhraseAcknowledge")}
+                tabIndex={1}
+              />
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className={styles.container}>
+            <Text className={styles.description}>
+              {t("Common:RecoveryQuizHint")}
+            </Text>
+
+            <div className={styles.quizContainer}>
+              {quizPositions.map((pos, idx) => (
+                <div key={`q-${pos}`} className={styles.quizQuestion}>
+                  <label
+                    htmlFor={`quiz-input-${idx}`}
+                    className={styles.quizLabel}
+                  >
+                    {t("Common:RecoveryQuizWordLabel", { number: pos + 1 })}
+                  </label>
+                  <input
+                    id={`quiz-input-${idx}`}
+                    name={`quiz-input-${idx}`}
+                    type="text"
+                    autoComplete="off"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    className={`${styles.quizInput} ${
+                      quizError ? styles.quizInputError : ""
+                    }`}
+                    value={answers[idx] ?? ""}
+                    disabled={isLoading}
+                    onChange={(e) => updateAnswer(idx, e.target.value)}
+                    tabIndex={idx + 1}
+                  />
+                </div>
+              ))}
+
+              {quizError ? (
+                <Text className={styles.quizError}>{quizError}</Text>
+              ) : null}
+
+              <button
+                type="button"
+                className={styles.quizBackLink}
+                onClick={goBackToDisplay}
+                disabled={isLoading}
+              >
+                {t("Common:RecoveryQuizShowPhraseAgain")}
+              </button>
+            </div>
+          </div>
+        )}
       </ModalDialog.Body>
 
       <ModalDialog.Footer>
-        <Button
-          scale
-          primary
-          key="ConfirmButton"
-          onClick={onConfirm}
-          size={ButtonSize.normal}
-          label={t("Common:ContinueButton")}
-          isDisabled={!acknowledged || isLoading}
-          isLoading={isLoading}
-          tabIndex={2}
-        />
-        <Button
-          scale
-          key="CancelButton"
-          onClick={handleCancel}
-          size={ButtonSize.normal}
-          label={t("Common:CancelButton")}
-          isDisabled={isLoading}
-          tabIndex={3}
-        />
+        {step === "display" ? (
+          <>
+            <Button
+              scale
+              primary
+              key="StartQuizButton"
+              onClick={startQuiz}
+              size={ButtonSize.normal}
+              label={t("Common:ContinueButton")}
+              isDisabled={!acknowledged || isLoading}
+              isLoading={isLoading}
+              tabIndex={2}
+            />
+            <Button
+              scale
+              key="CancelButton"
+              onClick={handleCancel}
+              size={ButtonSize.normal}
+              label={t("Common:CancelButton")}
+              isDisabled={isLoading}
+              tabIndex={3}
+            />
+          </>
+        ) : (
+          <>
+            <Button
+              scale
+              primary
+              key="VerifyButton"
+              onClick={submitQuiz}
+              size={ButtonSize.normal}
+              label={t("Common:RecoveryQuizVerify")}
+              isDisabled={!allAnswersFilled || isLoading}
+              isLoading={isLoading}
+              tabIndex={quizPositions.length + 1}
+            />
+            <Button
+              scale
+              key="CancelButton"
+              onClick={handleCancel}
+              size={ButtonSize.normal}
+              label={t("Common:CancelButton")}
+              isDisabled={isLoading}
+              tabIndex={quizPositions.length + 2}
+            />
+          </>
+        )}
       </ModalDialog.Footer>
     </ModalDialog>
   );

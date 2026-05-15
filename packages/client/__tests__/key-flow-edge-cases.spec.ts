@@ -190,12 +190,27 @@ test.describe("Keys management — edge cases", () => {
 
     const acknowledge = page.locator("#recoveryPhraseAcknowledged");
     await expect(acknowledge).toBeVisible({ timeout: 5000 });
-    await acknowledge.check();
 
-    await page
-      .getByRole("dialog")
+    const words = await page.locator("[class*='wordText']").allTextContents();
+    expect(words).toHaveLength(24);
+
+    await acknowledge.check();
+    const recoveryDialog = page.getByRole("dialog");
+    await recoveryDialog
       .getByRole("button", { name: "Continue", exact: true })
       .click();
+
+    const quizInputs = recoveryDialog.locator('input[name^="quiz-input-"]');
+    await expect(quizInputs.first()).toBeVisible({ timeout: 5000 });
+    const inputCount = await quizInputs.count();
+    for (let i = 0; i < inputCount; i++) {
+      const label = await recoveryDialog
+        .locator(`label[for="quiz-input-${i}"]`)
+        .textContent();
+      const wordNumber = Number.parseInt(label?.match(/#(\d+)/)?.[1] ?? "0", 10);
+      await quizInputs.nth(i).fill(words[wordNumber - 1]);
+    }
+    await recoveryDialog.getByRole("button", { name: "Verify" }).click();
 
     const errorToast = page
       .getByTestId("toast-content")

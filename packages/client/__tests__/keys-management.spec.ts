@@ -88,8 +88,23 @@ test.describe("Profile > Keys Management", () => {
     const continueBtn = recoveryDialog.getByRole("button", { name: "Continue" });
     await expect(continueBtn).toBeDisabled();
 
+    const words = await page.locator("[class*='wordText']").allTextContents();
+    expect(words).toHaveLength(24);
+
     await acknowledge.check();
     await expect(continueBtn).toBeEnabled();
+    await continueBtn.click();
+
+    const quizInputs = recoveryDialog.locator('input[name^="quiz-input-"]');
+    await expect(quizInputs.first()).toBeVisible({ timeout: 5_000 });
+    const inputCount = await quizInputs.count();
+    for (let i = 0; i < inputCount; i++) {
+      const label = await recoveryDialog
+        .locator(`label[for="quiz-input-${i}"]`)
+        .textContent();
+      const wordNumber = Number.parseInt(label?.match(/#(\d+)/)?.[1] ?? "0", 10);
+      await quizInputs.nth(i).fill(words[wordNumber - 1]);
+    }
 
     const postPromise = page.waitForRequest(
       (req) =>
@@ -97,7 +112,7 @@ test.describe("Profile > Keys Management", () => {
         req.url().endsWith("/privacyroom/keys"),
     );
 
-    await continueBtn.click();
+    await recoveryDialog.getByRole("button", { name: "Verify" }).click();
 
     const post = await postPromise;
     const body = post.postDataJSON() as {

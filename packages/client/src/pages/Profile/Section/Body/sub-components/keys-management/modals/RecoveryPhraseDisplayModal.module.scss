@@ -85,3 +85,59 @@
   align-items: flex-start;
   margin-top: 4px;
 }
+
+.quizContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.quizQuestion {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.quizLabel {
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.quizInput {
+  padding: 8px 10px;
+  border: 1px solid var(--input-border-color);
+  border-radius: 4px;
+  background: var(--input-block-bg);
+  color: var(--input-color);
+  font-family: "Roboto Mono", monospace;
+  font-size: 13px;
+  width: 100%;
+
+  &:focus-visible {
+    outline: 2px solid var(--accent-main);
+    outline-offset: 1px;
+  }
+
+  &.quizInputError {
+    border-color: var(--status-error);
+  }
+}
+
+.quizError {
+  color: var(--status-error);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.quizBackLink {
+  margin-top: 4px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: var(--accent-main);
+  cursor: pointer;
+  font-size: 13px;
+  text-decoration: underline;
+  align-self: flex-start;
+}

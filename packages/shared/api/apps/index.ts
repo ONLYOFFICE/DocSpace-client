@@ -24,50 +24,36 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// @ts-nocheck
+import { request } from "../client";
+import type { TApp } from "./types";
 
-import Filter from "./people/filter";
-import FilesFilter from "./files/filter";
-import RoomsFilter from "./rooms/filter";
-import OformsFilter from "./oforms/filter";
-import * as people from "./people";
-import * as user from "./user";
-import * as settings from "./settings";
-import * as modules from "./modules";
-import * as portal from "./portal";
-import * as groups from "./groups";
-import * as files from "./files";
-import * as rooms from "./rooms";
-import * as plugins from "./plugins";
-import * as management from "./management";
-import * as oforms from "./oforms";
-import * as oauth from "./oauth";
-import * as debuginfo from "./debuginfo";
-import * as apiKeys from "./api-keys";
-import * as backup from "./backup";
-import * as ai from "./ai";
-import * as apps from "./apps";
+export async function getApps() {
+  const res = (await request({
+    method: "get",
+    url: "/apps",
+  })) as TApp[];
 
-export default {
-  Filter,
-  FilesFilter,
-  RoomsFilter,
-  OformsFilter,
-  people,
-  user,
-  settings,
-  modules,
-  portal,
-  backup,
-  groups,
-  files,
-  rooms,
-  plugins,
-  oforms,
-  oauth,
-  management,
-  debuginfo,
-  apiKeys,
-  ai,
-  apps,
-};
+  return res;
+}
+
+export async function setAppEnabled(id: string, enabled: boolean) {
+  const res = (await request({
+    method: "put",
+    url: `/apps/${encodeURIComponent(id)}/enabled`,
+    data: { enabled },
+  })) as TApp;
+
+  return res;
+}
+
+export async function setAppSettings<
+  T extends Record<string, unknown> | null,
+>(id: string, settings: T) {
+  const res = (await request({
+    method: "put",
+    url: `/apps/${encodeURIComponent(id)}/settings`,
+    data: { settings },
+  })) as TApp;
+
+  return res;
+}

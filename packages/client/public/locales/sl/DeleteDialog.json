@@ -17,7 +17,7 @@
   "DeleteItemsSharedNote": "Upoštevajte, da ti ne bodo na voljo, če ste jih dali v skupno rabo z nekom drugim.",
   "DeleteRoomConfirm": "Prostor <strong>{{roomName}}</strong> bo trajno izbrisan. Vsi podatki in uporabniški dostopi bodo izgubljeni.",
   "DeleteRooms": "Izbrane <strong>sobe ({{count}})</strong> bodo trajno izbrisane. Vse podatke in uporabniški dostop boste izgubili.",
-  "DeleteRoomsTitle": "Ali želite izbrisati to sobo?",
+  "DeleteRoomsTitle": "Ali izbrisati te sobe?",
   "DeleteRoomTitle": "Ali izbrisati to sobo?",
   "DeleteRoomWarning": "Razumem posledice in želim izbrisati sobo.",
   "DeleteTemplate": "Ali res želite izbrisati predlogo sobe <1>«{{templateName}}»</1>? Predloge ne bo mogoče obnoviti.",

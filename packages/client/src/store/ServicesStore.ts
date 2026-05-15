@@ -48,7 +48,6 @@ import { formatterCurrencyWithoutTranction } from "@docspace/ui-kit/billing/wall
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
 import {
   AI_ENUM,
-  AI_TOOLS,
   BACKUP_SERVICE,
   STORAGE_ENUM,
 } from "@docspace/ui-kit/billing/constants";
@@ -194,7 +193,6 @@ class ServicesStore {
 
     try {
       const res = await getServiceQuotaBalance(
-        AI_TOOLS,
         isRefresh,
         abortController.signal,
       );

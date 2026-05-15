@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import { FixedSizeList as List } from "react-window";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import useResizeObserver from "use-resize-observer";
-import { useTheme } from "styled-components";
+import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 import classNames from "classnames";
 import Item from "./Item";
@@ -64,8 +64,6 @@ const Row = memo(({ data, index, style }) => {
 		allowInvitingGuests,
 	} = data;
 
-	const theme = useTheme();
-
 	if (inviteItems === undefined) return;
 
 	const item = inviteItems[index];
@@ -77,7 +75,6 @@ const Row = memo(({ data, index, style }) => {
 			index={index}
 			key={item.id}
 			style={style}
-			theme={theme}
 			setInviteItems={setInviteItems}
 			changeInviteItem={changeInviteItem}
 			inviteItems={inviteItems}
@@ -119,7 +116,7 @@ const ItemsList = ({
 	const [isOpenItemAccess, setIsOpenItemAccess] = useState(false);
 	const bodyRef = useRef();
 	const { height } = useResizeObserver({ ref: bodyRef });
-	const { interfaceDirection } = useTheme();
+	const { interfaceDirection } = useInterfaceDirection();
 
 	const onBodyResize = useCallback(() => {
 		const scrollHeight = bodyRef?.current?.firstChild.scrollHeight;

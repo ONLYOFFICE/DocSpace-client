@@ -53,7 +53,9 @@ const AiForms = ({ roomId, ensureAppsLoaded }: AiFormsProps) => {
 
   const section = searchParams.get("section") ?? "";
   const basePath = SECTION_TO_PATH[section] ?? "/sdk/forms/my-forms";
-  const src = roomId !== null ? `${basePath}?roomId=${roomId}` : basePath;
+  const params = new URLSearchParams({ showMenu: "false" });
+  if (roomId !== null) params.set("roomId", String(roomId));
+  const src = `${basePath}?${params}`;
   return <SdkIframe src={src} title={t("Common:DashboardAIFormsTitle")} />;
 };
 

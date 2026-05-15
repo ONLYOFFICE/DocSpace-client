@@ -58,6 +58,7 @@ const FormsFilter = ({ showMainButton, mainButtonProps }: FormsFilterProps) => {
       onClearSearch={() => setSearchValue("")}
       showMainButton={showMainButton}
       mainButtonProps={mainButtonProps}
+      mainButtonDataTestId={showMainButton ? "plus-button" : undefined}
       dataTestId="forms-filter_search-input"
     />
   );

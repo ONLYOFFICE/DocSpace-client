@@ -34,16 +34,16 @@ import {
   unwrapDekForCurrentUser,
   wrapDekForRecipients,
   type RoomMemberPublicKey,
-} from "./roomFileAccess";
-import { wipeDek } from "./fileKeys";
+} from "../encryption/roomFileAccess";
+import { wipeDek } from "../encryption/fileKeys";
 import {
   getTofuStore,
   getKeyMismatchHandler,
   type KeyMismatchResolver,
-} from "./tofuStore";
+} from "../encryption/tofuStore";
 import FilesFilter from "../../api/files/filter";
 import type { TFile } from "../../api/files/types";
-import type { IdentityKeyPair, ServerAccessKeyDto } from "./types";
+import type { IdentityKeyPair, ServerAccessKeyDto } from "../encryption/types";
 
 export interface NewRoomMember {
   id: string;

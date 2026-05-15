@@ -29,10 +29,10 @@
 
 import { Zip, ZipPassThrough } from "fflate";
 
-import { decryptFile } from "./fileKeys";
-import { unwrapDekForCurrentUser } from "./roomFileAccess";
-import type { RoomMemberPublicKey } from "./roomFileAccess";
-import type { IdentityKeyPair, ServerAccessKeyDto } from "./types";
+import { decryptFile } from "../encryption/fileKeys";
+import { unwrapDekForCurrentUser } from "../encryption/roomFileAccess";
+import type { RoomMemberPublicKey } from "../encryption/roomFileAccess";
+import type { IdentityKeyPair, ServerAccessKeyDto } from "../encryption/types";
 
 export type DecryptConfig = {
   encryptedData: ArrayBuffer;

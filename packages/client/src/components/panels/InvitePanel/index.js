@@ -42,7 +42,7 @@ import {
 } from "@docspace/shared/enums";
 import { LOADER_TIMEOUT, OPERATIONS_NAME } from "@docspace/shared/constants";
 import uniqueid from "lodash/uniqueId";
-import { addMembersToEncryptedRoom } from "@docspace/shared/services/encryption/roomEncryption";
+import { addMembersToEncryptedRoom } from "@docspace/shared/services/private-room/roomEncryption";
 import { requireUnlock } from "@docspace/shared/services/encryption/secretStorage";
 
 import { Button } from "@docspace/ui-kit/components/button";

@@ -35,10 +35,10 @@ import {
   prepareMultipleEncryptedUploads,
   shouldEncryptUpload,
 } from "../encryptedUpload";
-import { AES_KEY_SIZE_BYTES } from "../types";
+import { AES_KEY_SIZE_BYTES } from "../../encryption/types";
 
 // Mocked to bypass jsdom's broken Blob.slice().arrayBuffer().
-vi.mock("../fileKeys", () => ({
+vi.mock("../../encryption/fileKeys", () => ({
   encryptFile: vi.fn(
     async (
       _data: File | Blob | Uint8Array,

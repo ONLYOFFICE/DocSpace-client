@@ -31,7 +31,7 @@ import {
   decryptEncryptedItemToFile,
   tagFileForCopy,
 } from "../encryptedCopy";
-import type { IdentityKeyPair } from "../types";
+import type { IdentityKeyPair } from "../../encryption/types";
 
 // TS lib.dom rejects Uint8Array<ArrayBufferLike> as BodyInit on some lib versions.
 const respond = (bytes: number | Uint8Array, init?: ResponseInit): Response => {
@@ -39,20 +39,20 @@ const respond = (bytes: number | Uint8Array, init?: ResponseInit): Response => {
   return new Response(body as unknown as BodyInit, init);
 };
 
-vi.mock("../fileKeys", () => ({
+vi.mock("../../encryption/fileKeys", () => ({
   decryptFile: vi.fn(),
   wipeDek: vi.fn(),
 }));
-vi.mock("../roomFileAccess", () => ({
+vi.mock("../../encryption/roomFileAccess", () => ({
   unwrapDekForCurrentUser: vi.fn(),
 }));
 vi.mock("../../../api/files", () => ({
   getFileEncryptionAccess: vi.fn(),
 }));
 
-import { decryptFile, wipeDek } from "../fileKeys";
+import { decryptFile, wipeDek } from "../../encryption/fileKeys";
 import { getFileEncryptionAccess } from "../../../api/files";
-import { unwrapDekForCurrentUser } from "../roomFileAccess";
+import { unwrapDekForCurrentUser } from "../../encryption/roomFileAccess";
 
 const identity: IdentityKeyPair = {
   publicKey: new Uint8Array(32),

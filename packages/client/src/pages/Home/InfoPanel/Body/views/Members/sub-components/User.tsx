@@ -44,7 +44,7 @@ import type { TGroup } from "@docspace/shared/api/groups/types";
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
 import { filterNotReadOnlyOptions } from "@docspace/shared/utils/filterNotReadOnlyOptions";
 
-import { revokeMemberFromEncryptedRoom } from "@docspace/shared/services/encryption/roomEncryption";
+import { revokeMemberFromEncryptedRoom } from "@docspace/shared/services/private-room/roomEncryption";
 
 import MembersHelper from "../Members.utils";
 import type { UserProps } from "../Members.types";

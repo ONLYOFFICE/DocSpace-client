@@ -34,7 +34,7 @@ import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
 import {
   prepareEncryptedUpload,
   shouldEncryptUpload,
-} from "@docspace/shared/services/encryption/encryptedUpload";
+} from "@docspace/shared/services/private-room/encryptedUpload";
 import {
   getFileInfo,
   getFolderInfo,

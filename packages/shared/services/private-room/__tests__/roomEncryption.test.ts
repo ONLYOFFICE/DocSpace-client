@@ -26,12 +26,15 @@
 
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 
-import { generateIdentityKeyPair } from "../identity";
-import { generateDEK } from "../fileKeys";
-import { wrapDekForRecipients } from "../roomFileAccess";
-import { resetTofuStores } from "../tofuStore";
-import type { IdentityKeyPair, ServerAccessKeyDto } from "../types";
-import { arrayBufferToBase64 } from "../utils";
+import { generateIdentityKeyPair } from "../../encryption/identity";
+import { generateDEK } from "../../encryption/fileKeys";
+import { wrapDekForRecipients } from "../../encryption/roomFileAccess";
+import { resetTofuStores } from "../../encryption/tofuStore";
+import type {
+  IdentityKeyPair,
+  ServerAccessKeyDto,
+} from "../../encryption/types";
+import { arrayBufferToBase64 } from "../../encryption/utils";
 import {
   addMembersToEncryptedRoom,
   revokeMemberFromEncryptedRoom,

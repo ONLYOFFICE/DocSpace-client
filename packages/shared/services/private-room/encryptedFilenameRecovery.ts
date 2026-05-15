@@ -30,17 +30,17 @@
 // the result to the session-wide filename cache.
 
 import { getFileEncryptionAccess } from "../../api/files";
-import { wipeDek } from "./fileKeys";
+import { wipeDek } from "../encryption/fileKeys";
 import {
   getCachedEncryptedFilename,
   rememberEncryptedFilename,
-} from "./filenameCache";
-import { unwrapDekForCurrentUser } from "./roomFileAccess";
+} from "../encryption/filenameCache";
+import { unwrapDekForCurrentUser } from "../encryption/roomFileAccess";
 import {
   decryptFileNameRaw,
   parseDSE3Header,
-} from "./streamingEncryption";
-import type { IdentityKeyPair } from "./types";
+} from "../encryption/streamingEncryption";
+import type { IdentityKeyPair } from "../encryption/types";
 
 export type RecoveryCandidate = {
   id: number;

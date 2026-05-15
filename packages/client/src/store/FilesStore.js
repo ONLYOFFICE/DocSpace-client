@@ -70,7 +70,7 @@ import {
   subscribeFilenameCache,
 } from "@docspace/shared/services/encryption/filenameCache";
 import { SecretStorage } from "@docspace/shared/services/encryption/secretStorage";
-import { recoverEncryptedFilenames } from "@docspace/shared/services/encryption/encryptedFilenameRecovery";
+import { recoverEncryptedFilenames } from "@docspace/shared/services/private-room/encryptedFilenameRecovery";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { getI18n } from "react-i18next";

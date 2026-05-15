@@ -85,12 +85,12 @@ import {
   createZipFromBuffers,
   deduplicateFileNames,
   triggerFileDownload,
-} from "@docspace/shared/services/encryption/encryptedDownload";
+} from "@docspace/shared/services/private-room/encryptedDownload";
 import {
   decryptEncryptedItemToFile,
   addCopySuffix,
   tagFileForCopy,
-} from "@docspace/shared/services/encryption/encryptedCopy";
+} from "@docspace/shared/services/private-room/encryptedCopy";
 import { requireUnlock } from "@docspace/shared/services/encryption/secretStorage";
 import { forgetEncryptedFilename } from "@docspace/shared/services/encryption/filenameCache";
 

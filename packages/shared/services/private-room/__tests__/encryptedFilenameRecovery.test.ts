@@ -33,16 +33,16 @@ import {
 import {
   getCachedEncryptedFilename,
   rememberEncryptedFilename,
-} from "../filenameCache";
-import type { IdentityKeyPair } from "../types";
+} from "../../encryption/filenameCache";
+import type { IdentityKeyPair } from "../../encryption/types";
 
-vi.mock("../fileKeys", () => ({
+vi.mock("../../encryption/fileKeys", () => ({
   wipeDek: vi.fn(),
 }));
-vi.mock("../roomFileAccess", () => ({
+vi.mock("../../encryption/roomFileAccess", () => ({
   unwrapDekForCurrentUser: vi.fn(),
 }));
-vi.mock("../streamingEncryption", () => ({
+vi.mock("../../encryption/streamingEncryption", () => ({
   parseDSE3Header: vi.fn(),
   decryptFileNameRaw: vi.fn(),
 }));
@@ -50,13 +50,13 @@ vi.mock("../../../api/files", () => ({
   getFileEncryptionAccess: vi.fn(),
 }));
 
-import { wipeDek } from "../fileKeys";
+import { wipeDek } from "../../encryption/fileKeys";
 import { getFileEncryptionAccess } from "../../../api/files";
-import { unwrapDekForCurrentUser } from "../roomFileAccess";
+import { unwrapDekForCurrentUser } from "../../encryption/roomFileAccess";
 import {
   decryptFileNameRaw,
   parseDSE3Header,
-} from "../streamingEncryption";
+} from "../../encryption/streamingEncryption";
 
 const identity: IdentityKeyPair = {
   publicKey: new Uint8Array(32),

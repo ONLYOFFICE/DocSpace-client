@@ -1323,6 +1323,8 @@ class FilesStore {
 
     this.files = files;
 
+    this.recoverEncryptedFilenamesForCurrentView();
+
     if (roomPartsToSub.length > 0) {
       SocketHelper?.emit(SocketCommands.Subscribe, {
         roomParts: roomPartsToSub,

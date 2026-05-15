@@ -52,6 +52,7 @@ type InstallAiFormsDialogProps = {
   onClose: () => void;
   onInstalled: () => void;
   installAiForms?: (roomId: number) => Promise<void>;
+  skipConfirm?: boolean;
 };
 
 type Phase = "confirm" | "installing" | "done" | "failed";
@@ -61,19 +62,13 @@ const InstallAiFormsDialogComponent = ({
   onClose,
   onInstalled,
   installAiForms,
+  skipConfirm = false,
 }: InstallAiFormsDialogProps) => {
   const { t } = useTranslation(["Common"]);
-  const [phase, setPhase] = React.useState<Phase>("confirm");
+  const [phase, setPhase] = React.useState<Phase>(skipConfirm ? "installing" : "confirm");
   const [stepIndex, setStepIndex] = React.useState(0);
 
-  React.useEffect(() => {
-    if (!visible) {
-      setPhase("confirm");
-      setStepIndex(0);
-    }
-  }, [visible]);
-
-  const handleInstallClick = async () => {
+  const handleInstallClick = React.useCallback(async () => {
     setPhase("installing");
     setStepIndex(0);
 
@@ -92,7 +87,20 @@ const InstallAiFormsDialogComponent = ({
       setPhase("failed");
       toastr.error(t("Common:DashboardInstallFailed"));
     }
-  };
+  }, [installAiForms, t]);
+
+  React.useEffect(() => {
+    if (!visible) {
+      setPhase(skipConfirm ? "installing" : "confirm");
+      setStepIndex(0);
+    }
+  }, [visible, skipConfirm]);
+
+  React.useEffect(() => {
+    if (visible && skipConfirm && phase === "installing") {
+      handleInstallClick();
+    }
+  }, [visible, skipConfirm, phase, handleInstallClick]);
 
   const inProgress = phase === "installing";
 

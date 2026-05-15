@@ -30,6 +30,7 @@ import { useSearchParams } from "react-router";
 import { useTranslation } from "react-i18next";
 
 import SdkIframe from "SRC_DIR/components/SdkIframe";
+import { InstallAiFormsDialog } from "SRC_DIR/pages/Dashboard/InstallModuleDialog";
 import type { AiFormsSettings } from "SRC_DIR/pages/Dashboard/utils";
 
 const SECTION_TO_PATH: Record<string, string> = {
@@ -46,14 +47,38 @@ type AiFormsProps = {
 const AiForms = ({ roomId, ensureAppsLoaded }: AiFormsProps) => {
   const { t } = useTranslation(["Common"]);
   const [searchParams] = useSearchParams();
+  const [showSetupDialog, setShowSetupDialog] = React.useState(
+    roomId === null,
+  );
 
   React.useEffect(() => {
     ensureAppsLoaded();
   }, [ensureAppsLoaded]);
 
+  React.useEffect(() => {
+    setShowSetupDialog(roomId === null);
+  }, [roomId]);
+
+  const handleSetupComplete = () => {
+    setShowSetupDialog(false);
+  };
+
+  if (roomId === null) {
+    return (
+      <>
+        <InstallAiFormsDialog
+          visible={showSetupDialog}
+          onClose={handleSetupComplete}
+          onInstalled={handleSetupComplete}
+          skipConfirm={true}
+        />
+      </>
+    );
+  }
+
   const section = searchParams.get("section") ?? "";
   const basePath = SECTION_TO_PATH[section] ?? "/sdk/forms/my-forms";
-  const src = roomId !== null ? `${basePath}?roomId=${roomId}` : basePath;
+  const src = `${basePath}?roomId=${roomId}`;
   return <SdkIframe src={src} title={t("Common:DashboardAIFormsTitle")} />;
 };
 

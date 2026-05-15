@@ -118,7 +118,7 @@
   "AIPricingAndBilling": "මිලකරණය සහ බිල්පත්කරණය",
   "AIPricingAvailableCredits": "ලබාගත හැකි ක්‍රෙඩිට්: {{price}}",
   "AIPricingAvailableCreditsLowBalance": "ලබාගත හැකි ක්‍රෙඩිට්: {{price}}. ශේෂය අඩුයි",
-  "AIPricingBilledPerUsage": "භාවිතා කිරීම මත පදනම් වූ බිල්පත්කරණය",
+  "AIPricingBilledPerUsageAndPricing": "භාවිතය-පදනම් කළ බිල්පත්කරණය. <1>මිලකරණය සහ බිල්පත්කරණය</1>",
   "AIPricingFeeNoteUsage": "* <1>OpenRouter මිලකරණය</1> සමඟ භාවිතය මත 20% සේවා ගාස්තුවක් අදාළ වේ",
   "AIPricingFeeNoteWithoutLink": "* + 20% සේවා ගාස්තුව භාවිතයේදී අදාළ වේ",
   "AIPricingInputTokens": "ආදාන ටෝකන",

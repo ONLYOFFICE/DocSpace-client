@@ -118,7 +118,7 @@
   "AIPricingAndBilling": "Prezzi e fatturazione",
   "AIPricingAvailableCredits": "Crediti disponibili: {{price}}",
   "AIPricingAvailableCreditsLowBalance": "Crediti disponibili: {{price}}. Saldo basso",
-  "AIPricingBilledPerUsage": "Fatturazione basata sull'utilizzo",
+  "AIPricingBilledPerUsageAndPricing": "Fatturazione basata sull'utilizzo. <1>Prezzi e fatturazione</1>",
   "AIPricingFeeNoteUsage": "* <1>Prezzi di OpenRouter</1> + una commissione di servizio del 20% si applica all'utilizzo",
   "AIPricingFeeNoteWithoutLink": "Viene applicata una commissione di servizio del 20% sull'utilizzo",
   "AIPricingInputTokens": "Token di input",

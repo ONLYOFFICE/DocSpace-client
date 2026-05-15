@@ -118,7 +118,7 @@
   "AIPricingAndBilling": "Cennik i rozliczenia",
   "AIPricingAvailableCredits": "Dostępne kredyty: {{price}}",
   "AIPricingAvailableCreditsLowBalance": "Dostępne kredyty: {{price}}. Niski stan konta",
-  "AIPricingBilledPerUsage": "Rozliczenie oparte na zużyciu",
+  "AIPricingBilledPerUsageAndPricing": "Płatność według zużycia. <1>Cennik i rozliczenia</1>",
   "AIPricingFeeNoteUsage": "* <1>Cennik OpenRouter</1> + 20% opłaty usługowej naliczane są na podstawie zużycia",
   "AIPricingFeeNoteWithoutLink": "* + 20% opłaty usługowej naliczane przy użyciu",
   "AIPricingInputTokens": "Tokeny wejściowe",

@@ -2,12 +2,12 @@
   "key_path": "AIModelsIntroduction",
   "content": "Pick the right model for your task — from budget-friendly to advanced. Prices shown are <1>OpenRouter base rates</1>. A 20% service fee is added to each charge based on token consumption.",
   "content_en_sha1_hash": "e37e4fd71d8fd071531935d4ccea9bea894233ce",
-  "created_at": "2026-05-15T15:37:19.208Z",
-  "updated_at": "2026-05-15T15:38:34.892Z",
+  "created_at": "2026-05-15T15:48:55.752Z",
+  "updated_at": "2026-05-15T15:49:56.824Z",
   "comment": {
-    "text": "Introductory text in the AI model settings table explaining model selection and pricing. The `<1>` tag contains a link to OpenRouter base rates.",
+    "text": "Introductory text in the AI models settings table explaining model selection and pricing. The <1> tag contains a clickable link to OpenRouter base rates.",
     "is_auto": true,
-    "updated_at": "2026-05-15T15:38:34.892Z",
+    "updated_at": "2026-05-15T15:49:56.824Z",
     "model": "gemma4:26b"
   },
   "usage": [

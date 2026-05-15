@@ -3,7 +3,7 @@
   "content": "{{fromSize}} → {{toSize}} in total",
   "content_en_sha1_hash": "f5956c89eebee8013effcde95cc2ef4fb441a16b",
   "created_at": "2026-04-10T13:53:43.393Z",
-  "updated_at": "2026-05-15T14:00:06.999Z",
+  "updated_at": "2026-05-15T15:49:17.108Z",
   "comment": {
     "text": "This string indicates a storage upgrade, showing the current storage size (`{{fromSize}}`) and the new total storage size (`{{toSize}}`). It appears in billing summaries and tooltips.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
-      "line_number": 146,
+      "line_number": 162,
       "context": "};\n \n const textTooltip = (\n <>\n <Text fontWeight={600} fontSize=\"12px\">\n {t(\"StorageUpgradeMessage\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize} ${t(\"Gigabyte\")}`,\n })}\n </Text>\n <Text fontSize=\"12px\">",
       "module": "/libs/ui-kit"
     }

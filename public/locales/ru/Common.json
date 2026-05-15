@@ -118,7 +118,7 @@
   "AIPricingAndBilling": "Цены и выставление счетов",
   "AIPricingAvailableCredits": "Доступные кредиты: {{price}}",
   "AIPricingAvailableCreditsLowBalance": "Доступные кредиты: {{price}}. Низкий баланс",
-  "AIPricingBilledPerUsage": "Выставление счетов на основе фактического использования",
+  "AIPricingBilledPerUsageAndPricing": "Тарификация по факту использования. <1>Цены и выставление счетов</1>",
   "AIPricingFeeNoteUsage": "* <1>Тарифы OpenRouter</1> + сервисный сбор в размере 20% (взимается по факту использования)",
   "AIPricingFeeNoteWithoutLink": "* При использовании взимается сервисный сбор в размере 20%",
   "AIPricingInputTokens": "Входные токены",

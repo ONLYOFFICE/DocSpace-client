@@ -118,7 +118,7 @@
   "AIPricingAndBilling": "Giá cả & Thanh toán",
   "AIPricingAvailableCredits": "Số tín dụng khả dụng: {{price}}",
   "AIPricingAvailableCreditsLowBalance": "Số tín dụng còn lại: {{price}}. Số dư thấp",
-  "AIPricingBilledPerUsage": "Tính phí dựa trên mức sử dụng",
+  "AIPricingBilledPerUsageAndPricing": "Thanh toán theo mức sử dụng. <1>Giá cả & Thanh toán</1>",
   "AIPricingFeeNoteUsage": "* <1>Giá OpenRouter</1> + phí dịch vụ 20% áp dụng khi sử dụng",
   "AIPricingFeeNoteWithoutLink": "* + Phí dịch vụ 20% áp dụng khi sử dụng",
   "AIPricingInputTokens": "Tokens đầu vào",

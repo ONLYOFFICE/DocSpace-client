@@ -118,7 +118,7 @@
   "AIPricingAndBilling": "Qiymətləndirmə və fakturalaşdırma",
   "AIPricingAvailableCredits": "Mövcud kreditlər: {{price}}",
   "AIPricingAvailableCreditsLowBalance": "Mövcud kreditlər: {{price}}. Aşağı balans",
-  "AIPricingBilledPerUsage": "İstifadəyə əsaslanan ödəniş",
+  "AIPricingBilledPerUsageAndPricing": "İstifadəyə əsaslanan ödəniş. <1>Qiymətləndirmə və fakturalaşdırma</1>",
   "AIPricingFeeNoteUsage": "* <1>OpenRouter qiymətləndirməsi</1> + 20% xidmət haqqı istifadə zamanı tətbiq olunur",
   "AIPricingFeeNoteWithoutLink": "* + 20% xidmət rüsumu istifadə zamanı tətbiq edilir",
   "AIPricingInputTokens": "Giriş tokenləri",

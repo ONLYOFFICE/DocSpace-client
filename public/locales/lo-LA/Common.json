@@ -118,7 +118,7 @@
   "AIPricingAndBilling": "ລາຄາ ແລະ ການຊຳລະເງິນ",
   "AIPricingAvailableCredits": "ເຄຣດິດທີ່ມີ: {{price}}",
   "AIPricingAvailableCreditsLowBalance": "ເຄຣດິດທີ່ມີ: {{price}}. ຍອດເງິນຕໍ່າ",
-  "AIPricingBilledPerUsage": "ການເກັບເງິນຕາມການນຳໃຊ້",
+  "AIPricingBilledPerUsageAndPricing": "ການຊຳລະເງິນຕາມການນຳໃຊ້. <1>ລາຄາ ແລະ ການຊຳລະເງິນ</1>",
   "AIPricingFeeNoteUsage": "* <1>ລາຄາ OpenRouter</1> + ຄ່າບໍລິການ 20% ຖືກນຳໃຊ້ໃນການນຳໃຊ້",
   "AIPricingFeeNoteWithoutLink": "* + ຄ່າບໍລິການ 20% ຖືກນຳໃຊ້ເມື່ອໃຊ້ງານ",
   "AIPricingInputTokens": "ໂຕ້ເຄນທີ່ປ້ອນເຂົ້າ",

@@ -118,7 +118,7 @@
   "AIPricingAndBilling": "التسعير و الفوترة",
   "AIPricingAvailableCredits": "الرصيد المتاح: {{price}}",
   "AIPricingAvailableCreditsLowBalance": "الرصيد المتاح: {{price}}. رصيد منخفض",
-  "AIPricingBilledPerUsage": "الفوترة القائمة على الاستخدام",
+  "AIPricingBilledPerUsageAndPricing": "الفوترة بناءً على الاستخدام. <1>التسعير و الفوترة</1>",
   "AIPricingFeeNoteUsage": "* <1>OpenRouter pricing</1> + تُطبق رسوم خدمة بنسبة 20% عند الاستخدام",
   "AIPricingFeeNoteWithoutLink": "* + 20% من رسوم الخدمة تُطبق عند الاستخدام",
   "AIPricingInputTokens": "وحدات الإدخال",

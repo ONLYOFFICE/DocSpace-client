@@ -118,7 +118,7 @@
   "AIPricingAndBilling": "가격 책정 및 청구",
   "AIPricingAvailableCredits": "사용 가능한 크레딧: {{price}}",
   "AIPricingAvailableCreditsLowBalance": "사용 가능한 크레딧: {{price}}. 잔액 부족",
-  "AIPricingBilledPerUsage": "사용량 기반 청구",
+  "AIPricingBilledPerUsageAndPricing": "사용량 기반 청구. <1>가격 책정 및 청구</1>",
   "AIPricingFeeNoteUsage": "<1>OpenRouter 가격</1> + 사용량에 따라 20% 서비스 수수료가 부과됩니다.",
   "AIPricingFeeNoteWithoutLink": "사용 시 20% 서비스 수수료가 부과됩니다.",
   "AIPricingInputTokens": "입력 토큰",

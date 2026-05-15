@@ -118,7 +118,7 @@
   "AIPricingAndBilling": "Pricing & billing",
   "AIPricingAvailableCredits": "Available credits: {{price}}",
   "AIPricingAvailableCreditsLowBalance": "Available credits: {{price}}. Low balance",
-  "AIPricingBilledPerUsage": "Usage-based billing",
+  "AIPricingBilledPerUsageAndPricing": "Usage-based billing. <1>Pricing & billing</1>",
   "AIPricingFeeNoteUsage": "* <1>OpenRouter pricing</1> + 20% service fee applies at usage",
   "AIPricingFeeNoteWithoutLink": "* + 20% service fee applies at usage",
   "AIPricingInputTokens": "Input tokens",

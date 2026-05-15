@@ -118,7 +118,7 @@
   "AIPricingAndBilling": "Fiyatlandırma ve faturalandırma",
   "AIPricingAvailableCredits": "Mevcut krediler: {{price}}",
   "AIPricingAvailableCreditsLowBalance": "Mevcut krediler: {{price}}. Düşük bakiye",
-  "AIPricingBilledPerUsage": "Kullanıma dayalı faturalandırma",
+  "AIPricingBilledPerUsageAndPricing": "Kullanıma dayalı faturalandırma. <1>Fiyatlandırma ve faturalandırma</1>",
   "AIPricingFeeNoteUsage": "* <1>OpenRouter fiyatlandırması</1> + kullanımda %20 hizmet ücreti uygulanır",
   "AIPricingFeeNoteWithoutLink": "Kullanımda %20 hizmet ücreti uygulanır",
   "AIPricingInputTokens": "Giriş belirteçleri",

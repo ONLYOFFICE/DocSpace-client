@@ -118,7 +118,7 @@
   "AIPricingAndBilling": "定价与账单",
   "AIPricingAvailableCredits": "可用积分：{{price}}",
   "AIPricingAvailableCreditsLowBalance": "可用积分：{{price}}。余额不足",
-  "AIPricingBilledPerUsage": "基于用量的计费",
+  "AIPricingBilledPerUsageAndPricing": "按使用量计费。<1>定价与账单</1>",
   "AIPricingFeeNoteUsage": "* <1>OpenRouter 定价</1> + 20% 服务费，按使用量计费",
   "AIPricingFeeNoteWithoutLink": "使用时需支付 20% 的服务费",
   "AIPricingInputTokens": "输入令牌",

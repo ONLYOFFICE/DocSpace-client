@@ -118,7 +118,7 @@
   "AIPricingAndBilling": "Τιμολόγηση & τιμολόγηση",
   "AIPricingAvailableCredits": "Διαθέσιμα πιστώματα: {{price}}",
   "AIPricingAvailableCreditsLowBalance": "Διαθέσιμα πιστώματα: {{price}}. Χαμηλό υπόλοιπο",
-  "AIPricingBilledPerUsage": "Χρέωση βάσει χρήσης",
+  "AIPricingBilledPerUsageAndPricing": "Χρέωση βάσει χρήσης. <1>Τιμολόγηση & τιμολόγηση</1>",
   "AIPricingFeeNoteUsage": "* <1>OpenRouter τιμολόγηση</1> + εφαρμόζεται τέλος υπηρεσίας 20% κατά τη χρήση",
   "AIPricingFeeNoteWithoutLink": "* + 20% τέλη υπηρεσίας εφαρμόζονται κατά τη χρήση",
   "AIPricingInputTokens": "Tokens Εισόδου",

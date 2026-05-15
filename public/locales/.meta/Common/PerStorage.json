@@ -3,7 +3,7 @@
   "content": "{{currency}} per {{amount}}/month",
   "content_en_sha1_hash": "b3e722041cae4be17aabcb1fd49cf3f279e601f0",
   "created_at": "2026-04-10T13:53:43.000Z",
-  "updated_at": "2026-05-15T14:00:07.000Z",
+  "updated_at": "2026-05-15T15:49:17.109Z",
   "comment": {
     "text": "This string displays the price for additional storage, appearing next to a toggle switch or as part of a service item. It includes `{{currency}}` for the price and `{{amount}}` for the storage size (e.g., \"GB\").",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
-      "line_number": 191,
+      "line_number": 207,
       "context": "),\n size: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n });\n }\n \n return t(\"PerStorage\", {\n currency: formatWalletCurrency(storagePriceIncrement, 2),\n amount: getConvertedSize(t, storageSizeIncrement || 0),\n });\n \n case BACKUP_SERVICE:",
       "module": "/libs/ui-kit"
     }

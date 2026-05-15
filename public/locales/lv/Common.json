@@ -118,7 +118,7 @@
   "AIPricingAndBilling": "Cenas un fakturēšana",
   "AIPricingAvailableCredits": "Pieejami kredīti: {{price}}",
   "AIPricingAvailableCreditsLowBalance": "Pieejami kredīti: {{price}}. Minimāls balansu",
-  "AIPricingBilledPerUsage": "P lietošanas bāriņojums",
+  "AIPricingBilledPerUsageAndPricing": "Lietošanas bāzēts norēķins. <1>Cenas un fakturēšana</1>",
   "AIPricingFeeNoteUsage": "* <1>OpenRouter cenotne</1> + 20% pakalpojuma maksa piemīt lietojumā",
   "AIPricingFeeNoteWithoutLink": "* + 20% pakalpojuma maksa par lietošanu",
   "AIPricingInputTokens": "Ievietot tokenus",

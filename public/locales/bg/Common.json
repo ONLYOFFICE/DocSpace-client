@@ -118,7 +118,7 @@
   "AIPricingAndBilling": "Ценообразуване и фактуриране",
   "AIPricingAvailableCredits": "Налични кредити: {{price}}",
   "AIPricingAvailableCreditsLowBalance": "Налични кредити: {{price}}. Ниско равно",
-  "AIPricingBilledPerUsage": "Тарфиране въз основа на употреба",
+  "AIPricingBilledPerUsageAndPricing": "Таксуване въз основа на използването. <1>Ценообразуване и фактуриране</1>",
   "AIPricingFeeNoteUsage": "* <1>OpenRouter ценообразуване</1> + 20% такса за услуга се прилага при използване",
   "AIPricingFeeNoteWithoutLink": "* + 20% такса за услуга се прилага при използване",
   "AIPricingInputTokens": "Токени за вход",

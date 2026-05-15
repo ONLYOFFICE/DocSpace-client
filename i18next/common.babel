@@ -16088,7 +16088,7 @@
 								</translations>
 							</concept_node>
 							<concept_node>
-								<name>AIPricingBilledPerUsage</name>
+								<name>AIPricingBilledPerUsageAndPricing</name>
 								<description/>
 								<comment/>
 								<translations>

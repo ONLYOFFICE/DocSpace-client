@@ -118,7 +118,7 @@
   "AIPricingAndBilling": "価格設定と請求",
   "AIPricingAvailableCredits": "利用可能なクレジット: {{price}}",
   "AIPricingAvailableCreditsLowBalance": "利用可能なクレジット: {{price}}。残高が低いです",
-  "AIPricingBilledPerUsage": "利用量ベースの請求",
+  "AIPricingBilledPerUsageAndPricing": "従量課金制。<1>価格設定と請求</1>",
   "AIPricingFeeNoteUsage": "<1>OpenRouterの料金</1>に20%のサービス料が利用時に適用されます",
   "AIPricingFeeNoteWithoutLink": "ご利用の場合、20%のサービス料が適用されます",
   "AIPricingInputTokens": "入力トークン",

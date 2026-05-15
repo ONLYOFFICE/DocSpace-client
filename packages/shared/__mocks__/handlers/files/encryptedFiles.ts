@@ -239,7 +239,7 @@ export const encryptedFilesHandlers = (
   let nextSessionId = 1;
 
   const handle: EncryptedFilesHandlerHandle = {
-    getFiles: () => [...files.values()],
+    getFiles: () => Array.from(files.values()),
     getFile: (id) => {
       const f = files.get(id);
       if (!f) throw new Error(`Mock encrypted file ${id} not found`);
@@ -257,7 +257,7 @@ export const encryptedFilesHandlers = (
     setRoomUserKeys: (keys) => {
       roomUserKeys = [...keys];
     },
-    getSessions: () => [...sessions.values()],
+    getSessions: () => Array.from(sessions.values()),
     getRequests: () => [...requests],
     reset: () => {
       files.clear();
@@ -280,7 +280,7 @@ export const encryptedFilesHandlers = (
       }
       requests.push({ method: "GET", url: new URL(request.url).pathname });
 
-      const all = [...files.values()];
+      const all = Array.from(files.values());
       return okResponse({
         files: all.map((f) => buildFileDto(f, roomId, ownerId)),
         folders: [],

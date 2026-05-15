@@ -24,16 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { getFileEncryptionAccess } from "@docspace/shared/api/files";
-import {
-  decryptFile,
-  wipeDek,
-} from "@docspace/shared/services/encryption/fileKeys";
+import { getFileEncryptionAccess } from "../../api/files";
+import { decryptFile, wipeDek } from "./fileKeys";
 import {
   unwrapDekForCurrentUser,
   type RoomMemberPublicKey,
-} from "@docspace/shared/services/encryption/roomFileAccess";
-import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types";
+} from "./roomFileAccess";
+import type { IdentityKeyPair } from "./types";
 
 type EncryptedItem = {
   id: number;

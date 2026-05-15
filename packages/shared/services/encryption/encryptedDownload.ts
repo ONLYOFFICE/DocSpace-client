@@ -29,13 +29,10 @@
 
 import { Zip, ZipPassThrough } from "fflate";
 
-import { decryptFile } from "@docspace/shared/services/encryption/fileKeys";
-import { unwrapDekForCurrentUser } from "@docspace/shared/services/encryption/roomFileAccess";
-import type {
-  IdentityKeyPair,
-  ServerAccessKeyDto,
-} from "@docspace/shared/services/encryption/types";
-import type { RoomMemberPublicKey } from "@docspace/shared/services/encryption/roomFileAccess";
+import { decryptFile } from "./fileKeys";
+import { unwrapDekForCurrentUser } from "./roomFileAccess";
+import type { RoomMemberPublicKey } from "./roomFileAccess";
+import type { IdentityKeyPair, ServerAccessKeyDto } from "./types";
 
 export type DecryptConfig = {
   encryptedData: ArrayBuffer;

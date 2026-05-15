@@ -85,12 +85,12 @@ import {
   createZipFromBuffers,
   deduplicateFileNames,
   triggerFileDownload,
-} from "SRC_DIR/helpers/encryptedDownload";
+} from "@docspace/shared/services/encryption/encryptedDownload";
 import {
   decryptEncryptedItemToFile,
   addCopySuffix,
   tagFileForCopy,
-} from "SRC_DIR/helpers/encryptedCopy";
+} from "@docspace/shared/services/encryption/encryptedCopy";
 import { requireUnlock } from "@docspace/shared/services/encryption/secretStorage";
 import { forgetEncryptedFilename } from "@docspace/shared/services/encryption/filenameCache";
 

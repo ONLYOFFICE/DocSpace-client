@@ -29,18 +29,18 @@
 // fetch the DSE3 header, decrypt only the encryptedName field, and write
 // the result to the session-wide filename cache.
 
-import { getFileEncryptionAccess } from "@docspace/shared/api/files";
+import { getFileEncryptionAccess } from "../../api/files";
+import { wipeDek } from "./fileKeys";
 import {
-  parseDSE3Header,
-  decryptFileNameRaw,
-} from "@docspace/shared/services/encryption/streamingEncryption";
-import { unwrapDekForCurrentUser } from "@docspace/shared/services/encryption/roomFileAccess";
-import { wipeDek } from "@docspace/shared/services/encryption/fileKeys";
-import {
-  rememberEncryptedFilename,
   getCachedEncryptedFilename,
-} from "@docspace/shared/services/encryption/filenameCache";
-import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types";
+  rememberEncryptedFilename,
+} from "./filenameCache";
+import { unwrapDekForCurrentUser } from "./roomFileAccess";
+import {
+  decryptFileNameRaw,
+  parseDSE3Header,
+} from "./streamingEncryption";
+import type { IdentityKeyPair } from "./types";
 
 export type RecoveryCandidate = {
   id: number;

@@ -27,10 +27,10 @@
 // Client-side prep for encrypted uploads. Caller wraps the returned DEK for
 // recipients via wrapDekForRecipients after the server assigns a fileId.
 
-import { RoomsType } from "@docspace/shared/enums";
-import { encryptFile } from "@docspace/shared/services/encryption/fileKeys";
-import { estimateEncryptedSize } from "@docspace/shared/services/encryption/streamingEncryption";
-import { getFileExtension } from "@docspace/shared/utils/common";
+import { RoomsType } from "../../enums";
+import { getFileExtension } from "../../utils/common";
+import { encryptFile } from "./fileKeys";
+import { estimateEncryptedSize } from "./streamingEncryption";
 
 export type UploadConfig = {
   file: File;

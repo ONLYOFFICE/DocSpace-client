@@ -34,6 +34,8 @@ import type { IdentityKeyPair, ServerAccessKeyDto } from "../types";
 import { arrayBufferToBase64 } from "../utils";
 import {
   addMembersToEncryptedRoom,
+  revokeMemberFromEncryptedRoom,
+  rotateOwnIdentityForRoom,
   validateMembersForEncryption,
 } from "../roomEncryption";
 
@@ -524,5 +526,395 @@ describe("validateMembersForEncryption", () => {
     expect(result.skipped).toEqual([
       { id: BOB, displayName: "Bob", reason: "no-key" },
     ]);
+  });
+});
+
+const CAROL = "33333333-3333-3333-3333-333333333333";
+
+describe("revokeMemberFromEncryptedRoom", () => {
+  let alice: IdentityKeyPair;
+  let bob: IdentityKeyPair;
+  let aliceAndBobWraps: ServerAccessKeyDto[];
+
+  beforeEach(async () => {
+    alice = await generateIdentityKeyPair();
+    bob = await generateIdentityKeyPair();
+    const dek = generateDEK();
+    aliceAndBobWraps = await wrapDekForRecipients({
+      dek,
+      senderIdentity: alice,
+      senderUserId: ALICE,
+      recipients: [
+        { userId: ALICE, publicKey: pubB64(alice) },
+        { userId: BOB, publicKey: pubB64(bob) },
+      ],
+      fileId: FILE_ID,
+    });
+
+    getFolderMock.mockReset();
+    getFileEncryptionAccessMock.mockReset();
+    setFileEncryptionKeysMock.mockReset();
+    setFileEncryptionKeysMock.mockResolvedValue({});
+
+    resetMockIDB();
+    resetTofuStores();
+    vi.stubGlobal("indexedDB", mockIDB);
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it("returns empty result when revokedUserIds is empty", async () => {
+    const result = await revokeMemberFromEncryptedRoom(ROOM_ID, [], {});
+    expect(result).toEqual([]);
+    expect(getFolderMock).not.toHaveBeenCalled();
+  });
+
+  it("returns empty result when the room has no encrypted files", async () => {
+    getFolderMock.mockResolvedValue({ files: [], folders: [] });
+
+    const result = await revokeMemberFromEncryptedRoom(ROOM_ID, [BOB], {});
+
+    expect(result).toEqual([]);
+    expect(getFileEncryptionAccessMock).not.toHaveBeenCalled();
+    expect(setFileEncryptionKeysMock).not.toHaveBeenCalled();
+  });
+
+  it("removes the revoked user's entry and writes back the filtered fileKeys", async () => {
+    getFolderMock.mockResolvedValue({
+      files: singleFile(FILE_ID),
+      folders: [],
+    });
+    getFileEncryptionAccessMock.mockResolvedValue({
+      fileKeys: aliceAndBobWraps,
+      userKeys: [],
+    });
+
+    const result = await revokeMemberFromEncryptedRoom(ROOM_ID, [BOB], {});
+
+    expect(result).toEqual([{ fileId: FILE_ID, success: true }]);
+    expect(setFileEncryptionKeysMock).toHaveBeenCalledTimes(1);
+    const [fileId, keysPosted] = setFileEncryptionKeysMock.mock.calls[0];
+    expect(fileId).toBe(FILE_ID);
+    const userIds = (keysPosted as ServerAccessKeyDto[]).map((k) =>
+      String(k.userId),
+    );
+    expect(userIds).toEqual([ALICE]);
+    expect(userIds).not.toContain(BOB);
+  });
+
+  it("skips the API write when the revoked user is not in fileKeys (no-op)", async () => {
+    getFolderMock.mockResolvedValue({
+      files: singleFile(FILE_ID),
+      folders: [],
+    });
+    getFileEncryptionAccessMock.mockResolvedValue({
+      fileKeys: aliceAndBobWraps,
+      userKeys: [],
+    });
+
+    const result = await revokeMemberFromEncryptedRoom(ROOM_ID, [CAROL], {});
+
+    expect(result).toEqual([{ fileId: FILE_ID, success: true }]);
+    expect(setFileEncryptionKeysMock).not.toHaveBeenCalled();
+  });
+
+  it("accepts a single userId string in addition to an array", async () => {
+    getFolderMock.mockResolvedValue({
+      files: singleFile(FILE_ID),
+      folders: [],
+    });
+    getFileEncryptionAccessMock.mockResolvedValue({
+      fileKeys: aliceAndBobWraps,
+      userKeys: [],
+    });
+
+    await revokeMemberFromEncryptedRoom(ROOM_ID, BOB, {});
+
+    expect(setFileEncryptionKeysMock).toHaveBeenCalledTimes(1);
+    const [, keysPosted] = setFileEncryptionKeysMock.mock.calls[0];
+    expect(
+      (keysPosted as ServerAccessKeyDto[]).map((k) => String(k.userId)),
+    ).toEqual([ALICE]);
+  });
+
+  it("returns an error result when fileKeys is missing", async () => {
+    getFolderMock.mockResolvedValue({
+      files: singleFile(FILE_ID),
+      folders: [],
+    });
+    getFileEncryptionAccessMock.mockResolvedValue({ fileKeys: null });
+
+    const result = await revokeMemberFromEncryptedRoom(ROOM_ID, [BOB], {});
+
+    expect(result).toEqual([
+      {
+        fileId: FILE_ID,
+        success: false,
+        error: "no encryption keys for file",
+      },
+    ]);
+    expect(setFileEncryptionKeysMock).not.toHaveBeenCalled();
+  });
+
+  it("records per-file errors and KEEPS processing the rest", async () => {
+    const fileA = 4242;
+    const fileB = 4343;
+    getFolderMock.mockResolvedValue({
+      files: [
+        { id: fileA, encrypted: true },
+        { id: fileB, encrypted: true },
+      ],
+      folders: [],
+    });
+    getFileEncryptionAccessMock.mockResolvedValue({
+      fileKeys: aliceAndBobWraps,
+      userKeys: [],
+    });
+    setFileEncryptionKeysMock.mockImplementationOnce(async () => {
+      throw new Error("file A access denied");
+    });
+
+    const result = await revokeMemberFromEncryptedRoom(ROOM_ID, [BOB], {});
+
+    expect(result).toHaveLength(2);
+    expect(result[0]).toEqual({
+      fileId: fileA,
+      success: false,
+      error: "file A access denied",
+    });
+    expect(result[1]).toEqual({ fileId: fileB, success: true });
+  });
+
+  it("reports progress 0/N at start and N/N at end", async () => {
+    getFolderMock.mockResolvedValue({
+      files: [
+        { id: 1, encrypted: true },
+        { id: 2, encrypted: true },
+      ],
+      folders: [],
+    });
+    getFileEncryptionAccessMock.mockResolvedValue({
+      fileKeys: aliceAndBobWraps,
+      userKeys: [],
+    });
+
+    const progress: Array<[number, number]> = [];
+    await revokeMemberFromEncryptedRoom(ROOM_ID, [BOB], {
+      onProgress: (p, total) => progress.push([p, total]),
+    });
+
+    expect(progress[0]).toEqual([0, 2]);
+    expect(progress.at(-1)).toEqual([2, 2]);
+  });
+});
+
+describe("rotateOwnIdentityForRoom", () => {
+  let aliceOld: IdentityKeyPair;
+  let aliceNew: IdentityKeyPair;
+  let bob: IdentityKeyPair;
+  let dek: Uint8Array;
+  let initialWraps: ServerAccessKeyDto[];
+
+  beforeEach(async () => {
+    aliceOld = await generateIdentityKeyPair();
+    aliceNew = await generateIdentityKeyPair();
+    bob = await generateIdentityKeyPair();
+    dek = generateDEK();
+
+    initialWraps = await wrapDekForRecipients({
+      dek,
+      senderIdentity: aliceOld,
+      senderUserId: ALICE,
+      recipients: [
+        { userId: ALICE, publicKey: pubB64(aliceOld) },
+        { userId: BOB, publicKey: pubB64(bob) },
+      ],
+      fileId: FILE_ID,
+    });
+
+    getFolderMock.mockReset();
+    getFileEncryptionAccessMock.mockReset();
+    setFileEncryptionKeysMock.mockReset();
+    setFileEncryptionKeysMock.mockResolvedValue({});
+    getRoomEncryptionKeysMock.mockReset();
+
+    resetMockIDB();
+    resetTofuStores();
+    vi.stubGlobal("indexedDB", mockIDB);
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  const opts = () => ({
+    currentUserId: ALICE,
+    oldIdentity: aliceOld,
+    newIdentity: aliceNew,
+  });
+
+  it("returns empty result when the room has no encrypted files", async () => {
+    getFolderMock.mockResolvedValue({ files: [], folders: [] });
+
+    const result = await rotateOwnIdentityForRoom(ROOM_ID, opts());
+
+    expect(result).toEqual([]);
+    expect(getRoomEncryptionKeysMock).not.toHaveBeenCalled();
+    expect(setFileEncryptionKeysMock).not.toHaveBeenCalled();
+  });
+
+  it("re-wraps Alice's own entry with the new identity, preserving Bob's untouched", async () => {
+    getFolderMock.mockResolvedValue({
+      files: singleFile(FILE_ID),
+      folders: [],
+    });
+    getFileEncryptionAccessMock.mockResolvedValue({
+      fileKeys: initialWraps,
+      userKeys: [],
+    });
+    getRoomEncryptionKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(aliceOld) },
+      { userId: BOB, publicKey: pubB64(bob) },
+    ]);
+
+    const result = await rotateOwnIdentityForRoom(ROOM_ID, opts());
+
+    expect(result).toEqual([{ fileId: FILE_ID, success: true }]);
+    expect(setFileEncryptionKeysMock).toHaveBeenCalledTimes(1);
+    const [fileId, posted] = setFileEncryptionKeysMock.mock.calls[0];
+    expect(fileId).toBe(FILE_ID);
+
+    const aliceOriginal = initialWraps.find(
+      (k) => String(k.userId) === ALICE,
+    )!;
+    const bobOriginal = initialWraps.find(
+      (k) => String(k.userId) === BOB,
+    )!;
+    const aliceNewEntry = (posted as ServerAccessKeyDto[]).find(
+      (k) => String(k.userId) === ALICE,
+    )!;
+    const bobAfter = (posted as ServerAccessKeyDto[]).find(
+      (k) => String(k.userId) === BOB,
+    )!;
+
+    expect(bobAfter.privateKeyEnc).toBe(bobOriginal.privateKeyEnc);
+    expect(aliceNewEntry.privateKeyEnc).not.toBe(aliceOriginal.privateKeyEnc);
+  });
+
+  it("returns an error when fileKeys is missing", async () => {
+    getFolderMock.mockResolvedValue({
+      files: singleFile(FILE_ID),
+      folders: [],
+    });
+    getRoomEncryptionKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(aliceOld) },
+    ]);
+    getFileEncryptionAccessMock.mockResolvedValue({ fileKeys: null });
+
+    const result = await rotateOwnIdentityForRoom(ROOM_ID, opts());
+    expect(result).toEqual([
+      {
+        fileId: FILE_ID,
+        success: false,
+        error: "no encryption keys for file",
+      },
+    ]);
+    expect(setFileEncryptionKeysMock).not.toHaveBeenCalled();
+  });
+
+  it("reports a per-file error when unwrap fails (wrong old identity)", async () => {
+    getFolderMock.mockResolvedValue({
+      files: singleFile(FILE_ID),
+      folders: [],
+    });
+    getRoomEncryptionKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(aliceOld) },
+    ]);
+    getFileEncryptionAccessMock.mockResolvedValue({
+      fileKeys: initialWraps,
+      userKeys: [],
+    });
+
+    // Pass `bob` as oldIdentity so unwrap fails.
+    const result = await rotateOwnIdentityForRoom(ROOM_ID, {
+      currentUserId: ALICE,
+      oldIdentity: bob,
+      newIdentity: aliceNew,
+    });
+
+    expect(result).toHaveLength(1);
+    expect(result[0].success).toBe(false);
+    expect(result[0].error).toBeTruthy();
+    expect(setFileEncryptionKeysMock).not.toHaveBeenCalled();
+  });
+
+  it("continues processing other files when one file fails", async () => {
+    const fileA = 4242;
+    const fileB = 4343;
+    getFolderMock.mockResolvedValue({
+      files: [
+        { id: fileA, encrypted: true },
+        { id: fileB, encrypted: true },
+      ],
+      folders: [],
+    });
+    getRoomEncryptionKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(aliceOld) },
+      { userId: BOB, publicKey: pubB64(bob) },
+    ]);
+
+    getFileEncryptionAccessMock
+      .mockResolvedValueOnce({ fileKeys: initialWraps, userKeys: [] })
+      .mockResolvedValueOnce({ fileKeys: null });
+
+    const result = await rotateOwnIdentityForRoom(ROOM_ID, opts());
+
+    expect(result).toHaveLength(2);
+    expect(result[0]).toEqual({ fileId: fileA, success: true });
+    expect(result[1].success).toBe(false);
+  });
+
+  it("reports progress 0/N then N/N", async () => {
+    // Wraps are bound to fileId via AAD — separate wrap set per fileId.
+    const fileA = FILE_ID;
+    const fileB = FILE_ID + 1;
+    const wrapsA = initialWraps;
+    const wrapsB = await wrapDekForRecipients({
+      dek,
+      senderIdentity: aliceOld,
+      senderUserId: ALICE,
+      recipients: [
+        { userId: ALICE, publicKey: pubB64(aliceOld) },
+        { userId: BOB, publicKey: pubB64(bob) },
+      ],
+      fileId: fileB,
+    });
+
+    getFolderMock.mockResolvedValue({
+      files: [
+        { id: fileA, encrypted: true },
+        { id: fileB, encrypted: true },
+      ],
+      folders: [],
+    });
+    getRoomEncryptionKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(aliceOld) },
+      { userId: BOB, publicKey: pubB64(bob) },
+    ]);
+    getFileEncryptionAccessMock
+      .mockResolvedValueOnce({ fileKeys: wrapsA, userKeys: [] })
+      .mockResolvedValueOnce({ fileKeys: wrapsB, userKeys: [] });
+
+    const progress: Array<[number, number]> = [];
+    const result = await rotateOwnIdentityForRoom(ROOM_ID, {
+      ...opts(),
+      onProgress: (p, total) => progress.push([p, total]),
+    });
+
+    expect(result.every((r) => r.success)).toBe(true);
+    expect(progress[0]).toEqual([0, 2]);
+    expect(progress.at(-1)).toEqual([2, 2]);
   });
 });

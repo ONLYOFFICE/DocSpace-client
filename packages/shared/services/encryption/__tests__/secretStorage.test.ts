@@ -277,4 +277,88 @@ describe("requireUnlock", () => {
   it("rejects empty userId", async () => {
     await expect(requireUnlock("")).rejects.toThrow();
   });
+
+  describe("concurrent dedup (pendingUnlocks)", () => {
+    it("two concurrent calls for the SAME userId share a single handler invocation", async () => {
+      const kp = makeIdentity(7);
+      let resolveHandler: (kp: IdentityKeyPair) => void = () => {};
+      const handler = vi.fn(
+        () =>
+          new Promise<IdentityKeyPair>((resolve) => {
+            resolveHandler = resolve;
+          }),
+      );
+      registerUnlockHandler(handler);
+
+      const callA = requireUnlock("alice");
+      const callB = requireUnlock("alice");
+
+      await Promise.resolve();
+
+      expect(handler).toHaveBeenCalledTimes(1);
+
+      resolveHandler(kp);
+      const [outA, outB] = await Promise.all([callA, callB]);
+
+      expect(handler).toHaveBeenCalledTimes(1);
+      expect(outA).not.toBeNull();
+      expect(outB).not.toBeNull();
+      expect(outA?.publicKey).toEqual(outB?.publicKey);
+    });
+
+    it("clears pendingUnlocks after resolution so the NEXT call prompts again", async () => {
+      const handler = vi
+        .fn<() => Promise<IdentityKeyPair | null>>()
+        .mockResolvedValueOnce(makeIdentity(1))
+        .mockResolvedValueOnce(makeIdentity(2));
+      registerUnlockHandler(handler);
+
+      const first = await requireUnlock("alice");
+      expect(first).not.toBeNull();
+
+      // Force a second handler invocation — without lock, getCached would
+      // short-circuit before pendingUnlocks is consulted.
+      SecretStorage.lock();
+
+      const second = await requireUnlock("alice");
+      expect(second).not.toBeNull();
+      expect(handler).toHaveBeenCalledTimes(2);
+    });
+
+    it("does NOT dedup across DIFFERENT userIds (per-user keying)", async () => {
+      let resolveAlice: (kp: IdentityKeyPair) => void = () => {};
+      let resolveBob: (kp: IdentityKeyPair) => void = () => {};
+      const handler = vi.fn((_reason: string, userId?: string) => {
+        return new Promise<IdentityKeyPair>((resolve) => {
+          if (userId === "alice") resolveAlice = resolve;
+          else resolveBob = resolve;
+        });
+      });
+      registerUnlockHandler(handler);
+
+      const callAlice = requireUnlock("alice");
+      const callBob = requireUnlock("bob");
+
+      await Promise.resolve();
+      expect(handler).toHaveBeenCalledTimes(2);
+
+      resolveAlice(makeIdentity(1));
+      resolveBob(makeIdentity(2));
+      await Promise.all([callAlice, callBob]);
+    });
+
+    it("releases the pendingUnlocks slot even when the handler throws", async () => {
+      const handler = vi
+        .fn<() => Promise<IdentityKeyPair | null>>()
+        .mockRejectedValueOnce(new Error("boom"))
+        .mockResolvedValueOnce(makeIdentity(1));
+      registerUnlockHandler(handler);
+
+      await expect(requireUnlock("alice")).rejects.toThrow("boom");
+
+      const out = await requireUnlock("alice");
+      expect(out).not.toBeNull();
+      expect(handler).toHaveBeenCalledTimes(2);
+    });
+  });
 });

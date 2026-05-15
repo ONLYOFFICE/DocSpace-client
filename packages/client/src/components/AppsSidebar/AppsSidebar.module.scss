@@ -48,6 +48,26 @@
   }
 }
 
+.logoWrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.logoFull {
+  display: block;
+  height: 24px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.logoBurger {
+  display: block;
+  height: 28px;
+  width: 28px;
+  object-fit: contain;
+}
 
 .scrollbar {
   flex: 1;

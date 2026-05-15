@@ -52,6 +52,7 @@ export type AppsSidebarProps = {
   currentDeviceType: DeviceType;
   user?: TUser | null;
   articleOpen?: boolean;
+  toggleArticleOpen?: () => void;
 };
 
 const AppsSidebar = ({
@@ -63,6 +64,7 @@ const AppsSidebar = ({
   currentDeviceType,
   user,
   articleOpen = true,
+  toggleArticleOpen,
 }: AppsSidebarProps) => {
   const { t } = useTranslation(["Common"]);
   const theme = useTheme() as { isBase?: boolean };
@@ -88,7 +90,7 @@ const AppsSidebar = ({
   );
 
   const handleBackdropClick = () => {
-    toggleShowText?.();
+    toggleArticleOpen?.();
   };
 
   return (
@@ -106,10 +108,13 @@ const AppsSidebar = ({
           className={`${articleStyles.articleHeader} ${styles.header}`}
           data-show-text={showText ? "true" : "false"}
         >
-          <img
-            src={showText ? fullLogo : burgerLogo}
-            alt="portal logo"
-          />
+          <a href="/" className={styles.logoWrapper}>
+            <img
+              className={showText ? styles.logoFull : styles.logoBurger}
+              src={showText ? fullLogo : burgerLogo}
+              alt="portal logo"
+            />
+          </a>
         </div>
       )}
 

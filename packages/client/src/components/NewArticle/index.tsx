@@ -82,6 +82,7 @@ type NewArticleProps = {
   aiRoomsEnabled: boolean;
   aiAgentsEnabled: boolean;
   ensureAppsLoaded: () => void;
+  toggleArticleOpen: () => void;
 };
 
 const NewArticle = ({
@@ -93,6 +94,7 @@ const NewArticle = ({
   aiRoomsEnabled,
   aiAgentsEnabled,
   ensureAppsLoaded,
+  toggleArticleOpen,
 }: NewArticleProps) => {
   const { t } = useTranslation(["Common"]);
   const location = useLocation();
@@ -250,6 +252,7 @@ const NewArticle = ({
         currentDeviceType={currentDeviceType}
         user={user}
         articleOpen={articleOpen}
+        toggleArticleOpen={toggleArticleOpen}
       />
       <InstallAiFormsDialog
         visible={installDialogVisible}
@@ -268,6 +271,7 @@ const NewArticleConnected = inject<TStore>(
     user: userStore.user,
     currentDeviceType: settingsStore.currentDeviceType,
     articleOpen: settingsStore.articleOpen,
+    toggleArticleOpen: settingsStore.toggleArticleOpen,
     aiFilesEnabled: appsStore.isEnabled("ai-files"),
     aiFormsEnabled: appsStore.isEnabled("ai-forms"),
     aiRoomsEnabled: appsStore.isEnabled("ai-rooms"),

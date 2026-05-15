@@ -50,7 +50,7 @@ type AppsProps = {
 };
 
 const Apps = ({ isEnabled, enable, ensureLoaded }: AppsProps) => {
-  const { t, ready } = useTranslation(["Settings", "Common"]);
+  const { t, ready } = useTranslation(["Settings", "Common", "OAuth"]);
   const navigate = useNavigate();
   const apps = useAppsCatalog();
   const [installDialogVisible, setInstallDialogVisible] = React.useState(false);
@@ -60,7 +60,7 @@ const Apps = ({ isEnabled, enable, ensureLoaded }: AppsProps) => {
   }, [ensureLoaded]);
 
   useEffect(() => {
-    if (ready) setDocumentTitle(t("Settings:Apps"));
+    if (ready) setDocumentTitle(t("OAuth:Apps"));
   }, [ready, t]);
 
   const handleToggle = async (

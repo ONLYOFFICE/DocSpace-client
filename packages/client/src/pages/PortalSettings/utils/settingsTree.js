@@ -524,14 +524,14 @@ export const settingsTree = [
     key: "8",
     type: PageType.apps,
     link: "apps",
-    tKey: "Apps",
+    tKey: "OAuth:Apps",
     isHeader: true,
     children: [
       {
         id: "portal-settings_catalog-apps-list",
         key: "8-0",
         link: "",
-        tKey: "Apps",
+        tKey: "OAuth:Apps",
         isCategory: true,
       },
     ],

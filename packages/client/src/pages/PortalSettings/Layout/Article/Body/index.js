@@ -240,8 +240,8 @@ const ArticleBodyContent = (props) => {
         return t("Services");
       case "AISettings":
         return t("Settings:AISettings");
-      case "Apps":
-        return t("Settings:Apps");
+      case "OAuth:Apps":
+        return t("OAuth:Apps");
       default:
         throw new Error("Unexpected translation key");
     }
@@ -396,7 +396,7 @@ export default inject(
   },
 )(
   withLoading(
-    withTranslation(["Settings", "Common", "Ldap"])(
+    withTranslation(["Settings", "Common", "Ldap", "OAuth"])(
       observer(ArticleBodyContent),
     ),
   ),

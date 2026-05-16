@@ -36,7 +36,7 @@ import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 
 import resizeImage from "resize-image";
 import api from "@docspace/shared/api";
-import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
+import { calculateRoomLogoParams } from "@docspace/ui-kit/utils";
 
 class AvatarEditorDialogStore {
   uploadedFile = null;

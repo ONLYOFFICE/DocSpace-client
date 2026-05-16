@@ -57,7 +57,7 @@ import useItemList, {
 import RowView from "@/app/(docspace)/(files)/_components/row-view";
 import TileView from "@/app/(docspace)/(files)/_components/tile-view";
 import TableView from "@/app/(docspace)/(files)/_components/table-view";
-import EmptyView from "@/app/(docspace)/(files)/_components/empty-view";
+import EmptyView from "../empty-view";
 import useResetSelectionClick from "@/app/(docspace)/(files)/_components/list/hooks/useResetSelectionClick";
 
 type RoomsListProps = {
@@ -66,7 +66,6 @@ type RoomsListProps = {
   filesSettings: TFilesSettings;
   filesFilter: string;
   portalSettings: TSettings;
-  shareKey?: string;
   total: number;
   current: TFolder;
 };
@@ -77,7 +76,6 @@ const RoomsList = ({
   filesSettings,
   filesFilter,
   portalSettings,
-  shareKey,
   total: totalProp,
   current,
 }: RoomsListProps) => {
@@ -268,14 +266,7 @@ const RoomsList = ({
     filesListStore.items.length > 0 ? filesListStore.items : filesList;
 
   if (visibleItems.length === 0) {
-    return (
-      <EmptyView
-        current={current}
-        folderId={String(current.id)}
-        isFiltered={false}
-        shareKey={shareKey}
-      />
-    );
+    return <EmptyView isFiltered={!!filter.filterValue} />;
   }
 
   if (filesViewAs === "tile") {
@@ -330,3 +321,4 @@ const RoomsList = ({
 };
 
 export default observer(RoomsList);
+

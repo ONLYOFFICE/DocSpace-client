@@ -1,0 +1,42 @@
+@use "@docspace/ui-kit/styles/mixins";
+
+.body {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	padding-top: 16px;
+}
+
+.logoNameRow {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	gap: 16px;
+}
+
+.nameInputWrapper {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.inputLabel {
+	margin-bottom: 4px;
+}
+
+.errorText {
+	color: var(--input-error-border-color, #f21c0e);
+}
+
+.tagsSection {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.tagsList {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+}

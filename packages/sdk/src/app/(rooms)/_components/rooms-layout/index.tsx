@@ -43,7 +43,6 @@ import {
   CreateRoomIcon,
   UseTemplateIcon,
 } from "@docspace/ui-kit/components/quick-actions/icons";
-import { toastr } from "@docspace/ui-kit/components/toast";
 import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
@@ -59,6 +58,7 @@ import useFrameHeaderConfig from "@/hooks/useFrameHeaderConfig";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 
 import RoomsList from "../rooms-list";
+import CreateRoomDialog from "../create-edit-room-dialog";
 
 import styles from "./RoomsLayout.module.scss";
 
@@ -88,10 +88,12 @@ const RoomsLayout = observer(
     const { isEmptyList } = useSettingsStore();
     const { headerOffset, frameHeaderVars } = useFrameHeaderConfig();
 
+    const [isCreateRoomDialogVisible, setIsCreateRoomDialogVisible] =
+      React.useState(false);
+
     const createCustomRoom = React.useCallback(() => {
-      // TODO: open create-room dialog
-      toastr.info(t("Common:UnderDevelopment"));
-    }, [t]);
+      setIsCreateRoomDialogVisible(true);
+    }, []);
 
     const quickActionItems = React.useMemo<QuickActionItem[]>(
       () => [
@@ -177,6 +179,10 @@ const RoomsLayout = observer(
           <SelectionArea />
           <DeviceTypeObserver />
         </RootScrollbar>
+        <CreateRoomDialog
+          visible={isCreateRoomDialogVisible}
+          onClose={() => setIsCreateRoomDialogVisible(false)}
+        />
       </div>
     );
   },

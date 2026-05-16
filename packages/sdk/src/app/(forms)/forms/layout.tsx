@@ -44,6 +44,7 @@ import { getFormsFolder } from "@/api/forms";
 import { getSelf } from "@/api/people";
 import { getDefaultProvider } from "@/api/ai";
 import { getSettings } from "@/api/settings";
+import { getAppSettings } from "@/api/apps";
 import {
   FILTER_HEADER,
   LIBRARY_ID_HEADER,
@@ -65,8 +66,21 @@ export default async function FormsServerLayout({
   const hdrs = await headers();
   const cookieStore = await cookies();
 
-  const roomId = hdrs.get(ROOM_ID_HEADER) || "";
-  const libraryId = hdrs.get(LIBRARY_ID_HEADER) || "";
+  let roomId = hdrs.get(ROOM_ID_HEADER) || "";
+  let libraryId = hdrs.get(LIBRARY_ID_HEADER) || "";
+
+  if (!roomId) {
+    const appSettings = await getAppSettings<{
+      roomId?: string | number;
+      libraryId?: string | number;
+    }>("ai-forms");
+    if (appSettings?.roomId) {
+      roomId = String(appSettings.roomId);
+      if (!libraryId && appSettings.libraryId) {
+        libraryId = String(appSettings.libraryId);
+      }
+    }
+  }
   const authToken = cookieStore.get("asc_auth_key")?.value || "";
   const pathname = hdrs.get(PATHNAME_HEADER) ?? "";
 

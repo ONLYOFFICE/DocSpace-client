@@ -152,7 +152,14 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
   const contextMenuModel = getContextMenuModel(true);
 
   const element = (
-    <RoomIcon logo={item.icon} title={item.title} showDefault={false} />
+    <RoomIcon
+      logo={"isRoom" in item && item.isRoom ? item.roomLogo : item.icon}
+      color={"isRoom" in item && item.isRoom ? item.roomIconColor : undefined}
+      title={item.title}
+      showDefault={"isRoom" in item && item.isRoom ? !item.hasRoomImage : false}
+      size="96px"
+      radius="16px"
+    />
   );
 
   const tileContent = (

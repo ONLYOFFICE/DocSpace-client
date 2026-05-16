@@ -30,6 +30,7 @@ import { useCallback, useRef } from "react";
 
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { FileStatus } from "@docspace/shared/enums";
+import type { TLogo } from "@docspace/ui-kit/types";
 
 import getItemUrl from "../_utils/get-item-url";
 
@@ -120,7 +121,23 @@ export default function useItemList({
 
       const contextOptions = getFoldersContextMenu(folder);
 
-      return { ...folder, isFolder, folderUrl, icon, contextOptions };
+      const rawLogo = (folder as unknown as { logo?: TLogo }).logo;
+      const isRoom = folder.roomType !== undefined;
+      const hasRoomImage = !!(rawLogo?.medium || rawLogo?.large || rawLogo?.cover);
+      const roomLogo = hasRoomImage ? rawLogo : undefined;
+      const roomIconColor = rawLogo?.color?.replace("#", "") ?? undefined;
+
+      return {
+        ...folder,
+        isFolder,
+        folderUrl,
+        icon,
+        contextOptions,
+        isRoom,
+        roomLogo,
+        roomIconColor,
+        hasRoomImage,
+      };
     },
     [getFoldersContextMenu, getIcon],
   );

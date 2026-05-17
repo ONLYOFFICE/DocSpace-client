@@ -3,7 +3,7 @@
   "content": "Valid until:",
   "content_en_sha1_hash": "5a57c6ff3f3187ce7b7d4681008a08bf4cc0f31a",
   "created_at": "2026-02-19T13:36:27.570Z",
-  "updated_at": "2026-04-11T21:07:45.943Z",
+  "updated_at": "2026-05-15T14:00:06.709Z",
   "comment": {
     "text": "This is a label indicating the expiration date of an external link. It appears next to the actual date.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/ExternalLinks.js",
-      "line_number": 268,
+      "line_number": 277,
       "context": "<Text\n className={styles.inviteViaLinkSettingsText}\n fontSize=\"12px\"\n fontWeight={400}\n >\n {t(\"Files:ValidUntil\")}\n </Text>\n <Text\n fontSize=\"12px\"\n fontWeight={600}\n className={classNames(styles.inviteViaLinkText, {",
       "module": "/packages/client"
     }
@@ -24,6 +24,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [],
       "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     }
   }
 }

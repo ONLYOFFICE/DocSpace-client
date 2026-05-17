@@ -3,7 +3,7 @@
   "content": "Reactivate",
   "content_en_sha1_hash": "cd28a172590d6deb9c3e1d656864b9d7abbc7ba5",
   "created_at": "2025-05-19T21:30:57.384Z",
-  "updated_at": "2026-04-13T14:59:05.924Z",
+  "updated_at": "2026-05-15T14:00:06.910Z",
   "comment": {
     "text": "This is a button label that appears after a user has successfully reactivated their portal. Clicking it allows the user to continue to their reactivated portal.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PortalContinue/page.client.tsx",
-      "line_number": 99,
+      "line_number": 108,
       "context": "<div className={styles.buttonsWrapper}>\n <Button\n primary\n scale\n size={ButtonSize.medium}\n label={t(\"Reactivate\")}\n tabIndex={1}\n onClick={onRestoreClick}\n testId=\"continue_reactivate_button\"\n />\n <Button",
       "module": "/packages/login"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-04T13:03:19.470988Z"
+      "approved_at": "2026-05-15T15:04:54.629887Z"
     },
     "si": {
       "ai_translated": false,

@@ -33,6 +33,7 @@ import SocketHelper, {
 } from "@docspace/ui-kit/utils/socket";
 import {
   getApps,
+  getAppSettings,
   setAppEnabled,
   setAppSettings,
 } from "@docspace/shared/api/apps";
@@ -109,6 +110,37 @@ class AppsStore {
     return this.apps.find((a) => a.id === id)?.settings as T | undefined;
   };
 
+  // Fetches the app's persisted settings from the server and caches them.
+  // Returns null when the tenant has no overrides for this app.
+  fetchAppSettings = async <T extends Record<string, unknown>>(
+    id: string,
+  ): Promise<T | null> => {
+    const settings = await getAppSettings<T>(id);
+    runInAction(() => {
+      const idx = this.apps.findIndex((a) => a.id === id);
+      const next = settings ?? undefined;
+      if (idx >= 0) {
+        this.apps[idx] = { ...this.apps[idx], settings: next };
+      } else {
+        this.apps.push({ id, enabled: false, settings: next });
+      }
+    });
+    return settings;
+  };
+
+  // Source of truth for "has this app been configured": always asks the
+  // server, so a stale local cache cannot trigger a duplicate install flow.
+  needsSetupAsync = async (id: string): Promise<boolean> => {
+    if (id === "ai-forms") {
+      const settings = await this.fetchAppSettings<{ roomId?: number }>(
+        "ai-forms",
+      );
+      return !settings?.roomId;
+    }
+    const settings = await this.fetchAppSettings(id);
+    return !settings;
+  };
+
   enable = async (id: string, enabled: boolean) => {
     const updated = await setAppEnabled(id, enabled);
     runInAction(() => {
@@ -135,6 +167,16 @@ class AppsStore {
   installAiForms = async (roomId: number) => {
     await this.saveSettings("ai-forms", { roomId });
     await this.enable("ai-forms", true);
+  };
+
+  // Re-enable a previously configured app without recreating its resources.
+  // Returns false when the server reports no configuration yet — callers
+  // should open the install dialog in that case.
+  activate = async (id: string): Promise<boolean> => {
+    const needsSetup = await this.needsSetupAsync(id);
+    if (needsSetup) return false;
+    if (!this.isEnabled(id)) await this.enable(id, true);
+    return true;
   };
 }
 

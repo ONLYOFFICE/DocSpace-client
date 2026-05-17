@@ -3,7 +3,7 @@
   "content": "GB",
   "content_en_sha1_hash": "505a44facaa3e758845f6e101f4e21f9d99acf63",
   "created_at": "2025-05-19T21:30:45.623Z",
-  "updated_at": "2026-05-08T13:10:45.629Z",
+  "updated_at": "2026-05-15T15:49:17.055Z",
   "comment": {
     "text": "This is a unit of measurement for storage size, \"Gigabyte\", used in billing-related dialogs and pages. It appears as a short label, often alongside a numerical value (e.g., \"10 GB\").",
     "is_auto": true,
@@ -13,199 +13,199 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/dialogs/StorageTariffDeactivated.tsx",
-      "line_number": 114,
+      "line_number": 123,
       "context": "<Text as=\"span\">\n <CommonTrans\n i18nKey=\"PreviousPlan\"\n \n values={{\n amount: `${previousStoragePlanSize} ${t(\"Gigabyte\")}`,\n price: formatWalletCurrency(totalPrice, 2),\n }}\n components={{\n 1: <Text fontWeight={600} as=\"span\" />,\n 2: <Text className={styles.monthPayment} as=\"span\" />,",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
-      "line_number": 142,
+      "line_number": 154,
       "context": "const isScheduled = !!hasScheduledStorageChange;\n const isDowngrade = isScheduled && !isStorageCancellation();\n \n const warningTitle = isStorageCancellation()\n ? t(\"CancellationScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,\n })\n : t(\"DowngradeScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
-      "line_number": 142,
+      "line_number": 154,
       "context": "const isScheduled = !!hasScheduledStorageChange;\n const isDowngrade = isScheduled && !isStorageCancellation();\n \n const warningTitle = isStorageCancellation()\n ? t(\"CancellationScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,\n })\n : t(\"DowngradeScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
-      "line_number": 142,
+      "line_number": 154,
       "context": "const isScheduled = !!hasScheduledStorageChange;\n const isDowngrade = isScheduled && !isStorageCancellation();\n \n const warningTitle = isStorageCancellation()\n ? t(\"CancellationScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,\n })\n : t(\"DowngradeScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
-      "line_number": 142,
+      "line_number": 154,
       "context": "const isScheduled = !!hasScheduledStorageChange;\n const isDowngrade = isScheduled && !isStorageCancellation();\n \n const warningTitle = isStorageCancellation()\n ? t(\"CancellationScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,\n })\n : t(\"DowngradeScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
-      "line_number": 142,
+      "line_number": 154,
       "context": "const isScheduled = !!hasScheduledStorageChange;\n const isDowngrade = isScheduled && !isStorageCancellation();\n \n const warningTitle = isStorageCancellation()\n ? t(\"CancellationScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,\n })\n : t(\"DowngradeScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
-      "line_number": 142,
+      "line_number": 154,
       "context": "const isScheduled = !!hasScheduledStorageChange;\n const isDowngrade = isScheduled && !isStorageCancellation();\n \n const warningTitle = isStorageCancellation()\n ? t(\"CancellationScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,\n })\n : t(\"DowngradeScheduled\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize ?? 0} ${t(\"Gigabyte\")}`,",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/CurrentSubscription.tsx",
-      "line_number": 65,
+      "line_number": 74,
       "context": "<Text\n fontWeight=\"600\"\n fontSize=\"14px\"\n className={styles.storageName}\n >\n {currentStoragePlanSize} {t(\"Gigabyte\")}\n </Text>\n </div>\n </div>\n <div className={styles.priceInfo}>\n <Text fontWeight=\"600\" fontSize=\"14px\">",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
-      "line_number": 154,
+      "line_number": 163,
       "context": "const tooltipText = () => (\n <>\n <Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\", {\n storageUnit: t(\"Gigabyte\"),\n })\n : t(\"PartialPaymentWithDate\", {\n startDate: formatDateLocalized(\n now().setZone(window.timezone),\n \"DATE_MED\",",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
-      "line_number": 154,
+      "line_number": 163,
       "context": "const tooltipText = () => (\n <>\n <Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\", {\n storageUnit: t(\"Gigabyte\"),\n })\n : t(\"PartialPaymentWithDate\", {\n startDate: formatDateLocalized(\n now().setZone(window.timezone),\n \"DATE_MED\",",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
-      "line_number": 154,
+      "line_number": 163,
       "context": "const tooltipText = () => (\n <>\n <Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\", {\n storageUnit: t(\"Gigabyte\"),\n })\n : t(\"PartialPaymentWithDate\", {\n startDate: formatDateLocalized(\n now().setZone(window.timezone),\n \"DATE_MED\",",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
-      "line_number": 154,
+      "line_number": 163,
       "context": "const tooltipText = () => (\n <>\n <Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\", {\n storageUnit: t(\"Gigabyte\"),\n })\n : t(\"PartialPaymentWithDate\", {\n startDate: formatDateLocalized(\n now().setZone(window.timezone),\n \"DATE_MED\",",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
-      "line_number": 154,
+      "line_number": 163,
       "context": "const tooltipText = () => (\n <>\n <Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\", {\n storageUnit: t(\"Gigabyte\"),\n })\n : t(\"PartialPaymentWithDate\", {\n startDate: formatDateLocalized(\n now().setZone(window.timezone),\n \"DATE_MED\",",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
-      "line_number": 154,
+      "line_number": 163,
       "context": "const tooltipText = () => (\n <>\n <Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\", {\n storageUnit: t(\"Gigabyte\"),\n })\n : t(\"PartialPaymentWithDate\", {\n startDate: formatDateLocalized(\n now().setZone(window.timezone),\n \"DATE_MED\",",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
-      "line_number": 154,
+      "line_number": 163,
       "context": "const tooltipText = () => (\n <>\n <Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\", {\n storageUnit: t(\"Gigabyte\"),\n })\n : t(\"PartialPaymentWithDate\", {\n startDate: formatDateLocalized(\n now().setZone(window.timezone),\n \"DATE_MED\",",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
-      "line_number": 154,
+      "line_number": 163,
       "context": "const tooltipText = () => (\n <>\n <Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\", {\n storageUnit: t(\"Gigabyte\"),\n })\n : t(\"PartialPaymentWithDate\", {\n startDate: formatDateLocalized(\n now().setZone(window.timezone),\n \"DATE_MED\",",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/PlanUpgradePreview.tsx",
-      "line_number": 86,
+      "line_number": 95,
       "context": "const tooltipText = () => {\n return (\n <>\n <Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\", { storageUnit: t(\"Gigabyte\") })\n : t(\"PartialPaymentWithDate\", {\n startDate: formatDateLocalized(\n now().setZone(window.timezone),\n \"DATE_MED\",\n ),",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/PlanUpgradePreview.tsx",
-      "line_number": 86,
+      "line_number": 95,
       "context": "const tooltipText = () => {\n return (\n <>\n <Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\", { storageUnit: t(\"Gigabyte\") })\n : t(\"PartialPaymentWithDate\", {\n startDate: formatDateLocalized(\n now().setZone(window.timezone),\n \"DATE_MED\",\n ),",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/PlanUpgradePreview.tsx",
-      "line_number": 86,
+      "line_number": 95,
       "context": "const tooltipText = () => {\n return (\n <>\n <Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\", { storageUnit: t(\"Gigabyte\") })\n : t(\"PartialPaymentWithDate\", {\n startDate: formatDateLocalized(\n now().setZone(window.timezone),\n \"DATE_MED\",\n ),",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanCancel.tsx",
-      "line_number": 133,
+      "line_number": 142,
       "context": "<br />\n <Text as=\"span\">\n <CommonTrans\n i18nKey=\"YourCurrentPlan\"\n values={{\n amount: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n price: formatWalletCurrency(totalPrice, 2),\n }}\n components={{\n 1: <Text fontWeight={600} as=\"span\" />,\n 2: <Text className={styles.monthPayment} as=\"span\" />,",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
-      "line_number": 408,
+      "line_number": 417,
       "context": "<div className={styles.inputSection}>\n <Text fontWeight={600}>\n {!hasStorageSubscription\n ? t(\"AmoutWithStorageUnit\", {\n storageUnit: t(\"Gigabyte\"),\n })\n : t(\"NewTotalStorage\", {\n storageUnit: t(\"Gigabyte\"),\n })}\n </Text>",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
-      "line_number": 408,
+      "line_number": 417,
       "context": "<div className={styles.inputSection}>\n <Text fontWeight={600}>\n {!hasStorageSubscription\n ? t(\"AmoutWithStorageUnit\", {\n storageUnit: t(\"Gigabyte\"),\n })\n : t(\"NewTotalStorage\", {\n storageUnit: t(\"Gigabyte\"),\n })}\n </Text>",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
-      "line_number": 408,
+      "line_number": 417,
       "context": "<div className={styles.inputSection}>\n <Text fontWeight={600}>\n {!hasStorageSubscription\n ? t(\"AmoutWithStorageUnit\", {\n storageUnit: t(\"Gigabyte\"),\n })\n : t(\"NewTotalStorage\", {\n storageUnit: t(\"Gigabyte\"),\n })}\n </Text>",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
-      "line_number": 408,
+      "line_number": 417,
       "context": "<div className={styles.inputSection}>\n <Text fontWeight={600}>\n {!hasStorageSubscription\n ? t(\"AmoutWithStorageUnit\", {\n storageUnit: t(\"Gigabyte\"),\n })\n : t(\"NewTotalStorage\", {\n storageUnit: t(\"Gigabyte\"),\n })}\n </Text>",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
-      "line_number": 408,
+      "line_number": 417,
       "context": "<div className={styles.inputSection}>\n <Text fontWeight={600}>\n {!hasStorageSubscription\n ? t(\"AmoutWithStorageUnit\", {\n storageUnit: t(\"Gigabyte\"),\n })\n : t(\"NewTotalStorage\", {\n storageUnit: t(\"Gigabyte\"),\n })}\n </Text>",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StorageWarning.tsx",
-      "line_number": 79,
+      "line_number": 88,
       "context": ")}\n </div>\n \n <Text>\n {t(\"StorageWarning\", {\n amount: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n storageUnit: t(\"Gigabyte\"),\n })}\n </Text>\n \n {!isDisabled && isCancellationMode ? (",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StorageWarning.tsx",
-      "line_number": 79,
+      "line_number": 88,
       "context": ")}\n </div>\n \n <Text>\n {t(\"StorageWarning\", {\n amount: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n storageUnit: t(\"Gigabyte\"),\n })}\n </Text>\n \n {!isDisabled && isCancellationMode ? (",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
-      "line_number": 138,
+      "line_number": 163,
       "context": "const textTooltip = (\n <>\n <Text fontWeight={600} fontSize=\"12px\">\n {t(\"StorageUpgradeMessage\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize} ${t(\"Gigabyte\")}`,\n })}\n </Text>\n <Text fontSize=\"12px\">\n {nextStoragePlanSize === 0",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
-      "line_number": 138,
+      "line_number": 163,
       "context": "const textTooltip = (\n <>\n <Text fontWeight={600} fontSize=\"12px\">\n {t(\"StorageUpgradeMessage\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize} ${t(\"Gigabyte\")}`,\n })}\n </Text>\n <Text fontSize=\"12px\">\n {nextStoragePlanSize === 0",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
-      "line_number": 138,
+      "line_number": 163,
       "context": "const textTooltip = (\n <>\n <Text fontWeight={600} fontSize=\"12px\">\n {t(\"StorageUpgradeMessage\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n toSize: `${nextStoragePlanSize} ${t(\"Gigabyte\")}`,\n })}\n </Text>\n <Text fontSize=\"12px\">\n {nextStoragePlanSize === 0",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/utils/common.ts",
-      "line_number": 53,
+      "line_number": 62,
       "context": "const sizeNames = [\n t(\"Common:Bytes\"),\n t(\"Common:Kilobyte\"),\n t(\"Common:Megabyte\"),\n t(\"Common:Gigabyte\"),\n t(\"Common:Terabyte\"),\n t(\"Common:Petabyte\"),\n t(\"Common:Exabyte\"),\n ];",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
-      "line_number": 104,
+      "line_number": 113,
       "context": "const [perFileSize, setPerFileSize] = useState({ value: \"25\", unit: \"mb\" });\n const [totalSize, setTotalSize] = useState({ value: \"100\", unit: \"mb\" });\n const fileSizeUnits = [\n { key: \"kb\", label: t(\"Common:Kilobyte\") },\n { key: \"mb\", label: t(\"Common:Megabyte\") },\n { key: \"gb\", label: t(\"Common:Gigabyte\") },\n ];\n \n const defaultSizeUnit = fileSizeUnits[1];\n \n const toBytes = (value, unit) => {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/quota-form/index.tsx",
-      "line_number": 91,
+      "line_number": 100,
       "context": "const getOptions = (t: TTranslation) => [\n { key: 0, label: t(\"Common:Bytes\") },\n { key: 1, label: t(\"Common:Kilobyte\") },\n { key: 2, label: t(\"Common:Megabyte\") },\n { key: 3, label: t(\"Common:Gigabyte\") },\n { key: 4, label: t(\"Common:Terabyte\") },\n ];\n \n const getConvertedSize = (value: string, power: number) => {\n if (value.trim() === \"\") return \"\";",
       "module": "/packages/shared"
     }
@@ -341,7 +341,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

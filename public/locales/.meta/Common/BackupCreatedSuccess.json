@@ -3,7 +3,7 @@
   "content": "The backup copy has been successfully created.",
   "content_en_sha1_hash": "485e01d52f6d2054b1caa6b7e516d51227b99e65",
   "created_at": "2025-05-19T21:30:50.661Z",
-  "updated_at": "2026-04-23T17:24:02.129Z",
+  "updated_at": "2026-05-15T14:00:06.967Z",
   "comment": {
     "text": "This is a toast message confirming that a backup operation has completed successfully. It appears briefly after a user initiates a backup.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 1381,
+      "line_number": 1390,
       "context": "if (error) {\n return { error };\n }\n \n return { success: t(\"Common:BackupCreatedSuccess\") };\n }\n };\n \n type OpenUrlParams = {\n url: string;",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

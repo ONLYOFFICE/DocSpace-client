@@ -3,7 +3,7 @@
   "content": "The {{mcpServer}} is unavailable",
   "content_en_sha1_hash": "06f13e6c23363c51607c13666ac3f4e2f842ecd2",
   "created_at": "2025-12-19T10:17:03.051Z",
-  "updated_at": "2026-04-11T21:02:38.460Z",
+  "updated_at": "2026-05-15T14:00:06.769Z",
   "comment": {
     "text": "This is an error message displayed in a tooltip when the MCP server is unavailable. `{{mcpServer}}` refers to the \"ONLYOFFICE DocSpace AI Assistant server\".",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/mcp-tile/index.tsx",
-      "line_number": 121,
+      "line_number": 128,
       "context": "<AiTile.Header\n title={name}\n hasError={item.needReset}\n getErrorTooltipContent={() => (\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"AISettings:MCPUnavailableError\", {\n mcpServer: t(\"Common:MCPServer\"),\n })}\n </Text>\n )}\n >",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

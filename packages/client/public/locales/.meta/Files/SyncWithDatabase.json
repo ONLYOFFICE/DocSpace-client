@@ -3,7 +3,7 @@
   "content": "Synchronization with database",
   "content_en_sha1_hash": "a216e9d2932fd6f51aef2ff5e94c9cec5fee5a5c",
   "created_at": "2026-05-08T13:10:43.417Z",
-  "updated_at": "2026-05-08T13:13:47.762Z",
+  "updated_at": "2026-05-15T14:00:06.702Z",
   "comment": {
     "text": "Dialog title and operation label indicating the process of synchronizing data with the database.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/ExternalSyncDbPanel/index.tsx",
-      "line_number": 78,
+      "line_number": 87,
       "context": "withBodyScroll\n headerIcons={[\n { key: \"sync-db-clear\", url: ClearReactSvgUrl, onClick: onClear },\n ]}\n >\n <ModalDialog.Header>{t(\"SyncWithDatabase\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.list}>\n {data.forms.map((form) => (\n <div key={form.id} className={styles.row}>\n <PDFIcon className={styles.fileIcon} />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/CreateEditRoomStore.ts",
-      "line_number": 805,
+      "line_number": 814,
       "context": "return;\n }\n \n const basePayload = {\n operation: OPERATIONS_NAME.syncDatabase,\n label: t(\"Files:SyncWithDatabase\"),\n operationId: roomId,\n showPanel: () => this.dialogsStore.setIsSyncDbPanelVisible(true),\n };\n \n setSecondaryProgressBarData({ ...basePayload, percent: 0 });",
       "module": "/packages/client"
     }

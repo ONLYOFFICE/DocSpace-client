@@ -3,7 +3,7 @@
   "content": "List contacts",
   "content_en_sha1_hash": "094b6fdf495423bd14fa097cffe40c5a271f14bd",
   "created_at": "2026-04-10T13:53:42.690Z",
-  "updated_at": "2026-05-08T13:10:45.742Z",
+  "updated_at": "2026-05-15T14:00:07.021Z",
   "comment": {
     "text": "This is the title of a dialog box that allows users to select contacts.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
-      "line_number": 526,
+      "line_number": 533,
       "context": "onSubmit={onSubmitContactSelector}\n withHeader\n headerProps={{\n onCloseClick: onCloseContactSelector,\n isCloseable: true,\n headerLabel: t(\"ListContacts\"),\n }}\n filter={() => filter(withoutRoleFilter)}\n {...infoProps}\n emptyScreenHeader={t(\"NotFoundMembers\")}\n emptyScreenDescription={t(\"PeopleSelectorInfo\", {",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

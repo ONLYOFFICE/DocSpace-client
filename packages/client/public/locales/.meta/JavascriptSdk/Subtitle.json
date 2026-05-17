@@ -3,7 +3,7 @@
   "content": "Subtitle",
   "content_en_sha1_hash": "e159d05a124cfbe60229903bf1f8e6a61682bee5",
   "created_at": "2025-05-19T21:30:54.697Z",
-  "updated_at": "2026-04-13T14:59:05.856Z",
+  "updated_at": "2026-05-15T14:00:06.800Z",
   "comment": {
     "text": "This is a label for a subtitle field or element, likely used to provide additional descriptive text below a main title.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 403,
+      "line_number": 412,
       "context": "<Label className=\"label\">{t(\"InterfaceElements\")}</Label>\n \n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"Subtitle\")}\n onChange={toggleWithSubtitle}\n isChecked={config.withSubtitle}\n dataTestId=\"subtitle_checkbox\"\n />\n <HelpButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 403,
+      "line_number": 412,
       "context": "<Label className=\"label\">{t(\"InterfaceElements\")}</Label>\n \n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"Subtitle\")}\n onChange={toggleWithSubtitle}\n isChecked={config.withSubtitle}\n dataTestId=\"subtitle_checkbox\"\n />\n <HelpButton",
       "module": "/packages/client"
     }

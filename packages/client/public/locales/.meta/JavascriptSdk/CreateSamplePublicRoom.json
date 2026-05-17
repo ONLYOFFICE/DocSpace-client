@@ -3,7 +3,7 @@
   "content": "Create sample Public room embed",
   "content_en_sha1_hash": "1b93783d2de58b201928a571c81e9ce53f4ce3b9",
   "created_at": "2025-05-19T21:30:54.403Z",
-  "updated_at": "2026-04-11T21:16:05.992Z",
+  "updated_at": "2026-05-15T14:00:06.804Z",
   "comment": {
     "text": "This is a button label that creates a sample public room embed.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
-      "line_number": 318,
+      "line_number": 327,
       "context": ");\n \n return (\n <PresetWrapper\n description={t(\"JavascriptSdk:PublicRoomPresetInfo\")}\n header={t(\"CreateSamplePublicRoom\")}\n >\n <Container>\n <PreviewBlock\n loadCurrentFrame={initFrame}\n preview={preview}",
       "module": "/packages/client"
     }

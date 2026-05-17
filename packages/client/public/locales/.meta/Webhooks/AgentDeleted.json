@@ -3,7 +3,7 @@
   "content": "AI Agent Deleted",
   "content_en_sha1_hash": "ac362a1f6d3e03d9bfa7411bac6cad32d1a12f64",
   "created_at": "2026-03-31T15:18:27.261Z",
-  "updated_at": "2026-04-27T12:45:07.507Z",
+  "updated_at": "2026-05-15T14:00:06.836Z",
   "comment": {
     "text": "This is a toast message indicating that an AI agent has been successfully removed.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
-      "line_number": 99,
+      "line_number": 108,
       "context": "case WebhookTriggers.AgentCreated:\n return t(\"AgentCreated\");\n case WebhookTriggers.AgentUpdated:\n return t(\"AgentUpdated\");\n case WebhookTriggers.AgentDeleted:\n return t(\"AgentDeleted\");\n case WebhookTriggers.FileDownloaded:\n return t(\"FileDownloaded\");\n case WebhookTriggers.FolderDownloaded:\n return t(\"FolderDownloaded\");\n default:",
       "module": "/packages/client"
     }

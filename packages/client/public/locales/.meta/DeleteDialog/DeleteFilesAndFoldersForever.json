@@ -3,7 +3,7 @@
   "content": "You are about to delete the <strong>files ({{filesCount}})</strong> and <strong>folders ({{foldersCount}})</strong>.",
   "content_en_sha1_hash": "8835009707c55340cb17b9a28925b9ff148c948d",
   "created_at": "2025-10-01T15:20:12.156Z",
-  "updated_at": "2026-04-11T21:05:45.432Z",
+  "updated_at": "2026-05-15T14:00:06.671Z",
   "comment": {
     "text": "This is the main text of a confirmation dialog that appears when a user attempts to delete both files and folders. It informs the user about the impending deletion, with `{{filesCount}}` and `{{foldersCount}}` representing the number of files and folders, respectively.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 157,
+      "line_number": 166,
       "context": "const foldersCount = items.folders.length;\n \n if (filesCount && foldersCount) {\n return (\n <>\n <Trans t={t} i18nKey=\"DeleteFilesAndFoldersForever\" ns=\"DeleteDialog\">\n You are about to delete the{\" \"}\n <strong>files ({{ filesCount }})</strong> and{\" \"}\n <strong>folders ({{ foldersCount }})</strong>.\n </Trans>{\" \"}\n {!isThirdParty",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

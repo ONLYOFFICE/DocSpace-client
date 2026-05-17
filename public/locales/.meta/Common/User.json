@@ -3,7 +3,7 @@
   "content": "User",
   "content_en_sha1_hash": "9f8a2389a20ca0752aa9e95093515517e90e194c",
   "created_at": "2025-05-19T21:30:49.454Z",
-  "updated_at": "2026-04-23T17:24:01.813Z",
+  "updated_at": "2026-05-15T14:00:06.677Z",
   "comment": {
     "text": "This is a label for a user type, appearing in tables, dropdowns, and dialogs. It refers to a standard user account.",
     "is_auto": true,
@@ -13,55 +13,55 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 99,
+      "line_number": 108,
       "context": "<Trans\n i18nKey=\"DeleteUserMessage\"\n ns=\"DeleteProfileEverDialog\"\n t={t as TFunction}\n values={{\n userCaption: onlyGuests ? t(\"Common:Guest\") : t(\"Common:User\"),\n user: users[0].displayName,\n }}\n components={{\n 1: <strong />,\n }}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/index.tsx",
-      "line_number": 75,
+      "line_number": 84,
       "context": "label: t(\"Common:RoomAdmin\"),\n onClick: setTypeRoomAdmin,\n },\n {\n key: UserTypes.User,\n label: t(\"Common:User\"),\n onClick: setTypeUser,\n },\n ];\n \n if (isOwner) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/TableView/TableHeader.js",
-      "line_number": 44,
+      "line_number": 53,
       "context": "const { t } = props;\n \n const defaultColumns = [\n {\n key: \"User\",\n title: t(\"Common:User\"),\n resizable: true,\n enable: true,\n sortBy: \"AZ\",\n active: true,\n minWidth: 210,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/login-history/TableView/TableHeader.js",
-      "line_number": 44,
+      "line_number": 53,
       "context": "const { t } = props;\n \n const defaultColumns = [\n {\n key: \"User\",\n title: t(\"Common:User\"),\n resizable: true,\n enable: true,\n default: true,\n sortBy: \"AZ\",\n active: true,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 704,
+      "line_number": 713,
       "context": "{\n id: \"accounts-add_collaborator\",\n className: \"main-button_drop-down\",\n icon: PersonDefaultReactSvgUrl,\n label: t(\"Common:User\"),\n onClick: () => this.inviteUser(EmployeeType.User),\n \"data-type\": EmployeeType.User,\n action: EmployeeType.User,\n key: \"collaborator\",\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/ConnectDatabaseForm.tsx",
-      "line_number": 255,
+      "line_number": 264,
       "context": "/>\n </div>\n \n <div className={styles.fieldGroup}>\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"Common:User\")}\n </Text>\n <TextInput\n scale\n type={InputType.text}\n value={store.user}",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 354,
+      "line_number": 363,
       "context": "productName: getBrandName(\"ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");\n case EmployeeType.Guest:\n default:\n return t(\"Common:Guest\");\n }\n };",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 354,
+      "line_number": 363,
       "context": "productName: getBrandName(\"ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");\n case EmployeeType.Guest:\n default:\n return t(\"Common:Guest\");\n }\n };",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/room-members/getUserRoleOptions.ts",
-      "line_number": 45,
+      "line_number": 54,
       "context": "access: ShareAccessRights.RoomManager,\n type: \"manager\",\n },\n collaborator: {\n key: \"collaborator\",\n label: t(\"Common:User\"),\n access: ShareAccessRights.Collaborator,\n type: \"collaborator\",\n },\n viewer: {\n key: \"viewer\",",
       "module": "/packages/shared"
     }
@@ -197,7 +197,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

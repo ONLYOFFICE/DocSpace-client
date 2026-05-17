@@ -3,7 +3,7 @@
   "content": "Shared by",
   "content_en_sha1_hash": "a5fe3b3e382690e112e5d06a9d9588409cdd93a3",
   "created_at": "2025-11-13T07:58:01.497Z",
-  "updated_at": "2026-05-12T08:51:58.451Z",
+  "updated_at": "2026-05-15T14:00:06.726Z",
   "comment": {
     "text": "This is a label indicating who shared a file or folder. It appears in file details, table headers, and filter options.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
-      "line_number": 263,
+      "line_number": 272,
       "context": "return this.t(\"Common:Tags\");\n \n case \"Author\":\n return this.t(\"Files:ByAuthor\");\n case \"Shared by\":\n return this.t(\"Files:SharedBy\");\n case \"Access level\":\n return this.t(\"Files:AccessLevel\");\n case \"externalDbTableName\":\n return this.t(\"Files:TableName\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 435,
+      "line_number": 444,
       "context": "const sharedByBlock =\n !isPublicRoom && !isInSharedFolder\n ? {\n key: \"SharedByShareWithMe\",\n title: t(\"SharedBy\"),\n enable: sharedByShareWithMeColumnIsEnabled,\n resizable: true,\n onChange: this.onColumnChange,\n }\n : {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 925,
+      "line_number": 934,
       "context": "return [\n {\n key: FilterGroups.filterSharedBy,\n group: FilterGroups.filterSharedBy,\n label: t(\"Files:SharedBy\"),\n isHeader: true,\n },\n {\n id: \"filter_author-user-button\",\n key: FilterKeys.user,",
       "module": "/packages/client"
     }
@@ -36,6 +36,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [],
       "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     }
   }
 }

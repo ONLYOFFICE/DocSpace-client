@@ -3,7 +3,7 @@
   "content": "To share your form and collect responses, please create the Form filling room.",
   "content_en_sha1_hash": "82979fcf50788d5adca337649ceba62db8b45855",
   "created_at": "2025-05-19T21:30:48.459Z",
-  "updated_at": "2026-04-12T21:41:24.927Z",
+  "updated_at": "2026-05-15T14:00:07.030Z",
   "comment": {
     "text": "This is a descriptive text displayed on an empty screen when no form filling rooms exist. It instructs the user to create a room to share forms and collect responses.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/components/selector/sub-components/EmptySreen/EmptyScreenFormRoom.tsx",
-      "line_number": 56,
+      "line_number": 65,
       "context": "? FormRoomEmptyLightImage\n : FormRoomEmptyDarkImage;\n \n const description =\n createDefineRoomType === RoomType.FillingFormsRoom\n ? t(\"SelectorFormRoomEmptyScreenDescription\") || \"\"\n : t(\"SelectorVDREmptyScreenDescription\") || \"\";\n \n const buttonLabel =\n createDefineRoomType === RoomType.FillingFormsRoom\n ? t(\"CreateFormFillingRoom\") || \"\"",
       "module": "/libs/ui-kit"
     }
@@ -157,7 +157,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

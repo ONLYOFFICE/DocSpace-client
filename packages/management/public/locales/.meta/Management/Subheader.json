@@ -3,7 +3,7 @@
   "content": "Use this section to create several spaces and make them accessible for your users",
   "content_en_sha1_hash": "79f5c82d08ab04703fb38185b6e24a16b816534d",
   "created_at": "2025-05-19T21:30:57.479Z",
-  "updated_at": "2026-04-11T21:31:32.597Z",
+  "updated_at": "2026-05-15T14:00:06.972Z",
   "comment": {
     "text": "This subheader text appears on pages related to space management. It instructs the user to create and manage multiple spaces for their users.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/management/src/app/spaces/configuration/header.tsx",
-      "line_number": 40,
+      "line_number": 49,
       "context": "const { t } = useTranslation([\"Management\", \"Common\"]);\n \n return (\n <div className={styles.header}>\n <Text fontSize=\"12px\" fontWeight={400}>\n {t(\"Subheader\")}\n </Text>\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"ConfigurationHeader\")}\n </Text>\n <Text fontSize=\"12px\" lineHeight=\"16px\" fontWeight={400}>",
       "module": "/packages/management"
     },
     {
       "file_path": "/packages/management/src/app/spaces/multiple/header.tsx",
-      "line_number": 50,
+      "line_number": 59,
       "context": "};\n \n return (\n <>\n <Text fontSize=\"12px\" fontWeight={400}>\n {t(\"Subheader\")}\n </Text>\n \n <Button\n testId=\"create-new-space\"\n size={",
       "module": "/packages/management"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-04T13:03:19.496195Z"
+      "approved_at": "2026-05-15T15:04:54.651494Z"
     },
     "si": {
       "ai_translated": false,

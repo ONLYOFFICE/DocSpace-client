@@ -3,7 +3,7 @@
   "content": "Please note that the editors will be unavailable during the upgrade. We also recommend to <1>backup your data</1> before you start.",
   "content_en_sha1_hash": "6254435f524d28160ed4c7af92aa2d841ada3ca0",
   "created_at": "2025-05-26T07:15:49.220Z",
-  "updated_at": "2026-04-12T13:23:52.381Z",
+  "updated_at": "2026-05-15T14:00:06.954Z",
   "comment": {
     "text": "This is an instructional note displayed in a banner, informing users about the implications of upgrading to a Pro plan. It advises them that editors will be unavailable and suggests backing up data before starting the upgrade process. The `<1>backup your data</1>` tag indicates a clickable link within the sentence.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/Payments/Bonus/sub-components/OfficialDocumentation.tsx",
-      "line_number": 97,
+      "line_number": 106,
       "context": "</Link>\n </Text>\n </div>\n \n <Text className={styles.upgradeInfo}>\n <Trans i18nKey=\"UpgradeToProBannerInstructionNote\" ns=\"Common\" t={t}>\n Please note that the editors will be unavailable during the upgrade.\n We also recommend to\n <Link\n tag=\"a\"\n fontWeight=\"600\"",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

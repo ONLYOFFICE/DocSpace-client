@@ -3,7 +3,7 @@
   "content": "Work in progress",
   "content_en_sha1_hash": "e47daa7a6731608211a6729ba435943b8d544c06",
   "created_at": "2025-10-27T16:14:24.228Z",
-  "updated_at": "2026-04-12T08:25:27.748Z",
+  "updated_at": "2026-05-15T14:00:06.654Z",
   "comment": {
     "text": "This toast message indicates that a feature is not yet fully implemented.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/buttons/index.tsx",
-      "line_number": 199,
+      "line_number": 206,
       "context": "{/*{isLast ? (*/}\n {/*  <div*/}\n {/*    className={styles.buttonsBlockItem}*/}\n {/*    title={t(\"RefreshMessage\")}*/}\n {/*    onClick={() => {*/}\n {/*      toastr.info(t(\"WorkInProgress\"));*/}\n {/*    }}*/}\n {/*  >*/}\n {/*    <RefreshIcon />*/}\n {/*  </div>*/}\n {/*) : null}*/}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/Knowledge.tsx",
-      "line_number": 44,
+      "line_number": 53,
       "context": "import { getBrandName } from \"@docspace/shared/constants/brands\";\n \n const KnowledgeSettings = () => {\n const { t } = useTranslation([\"AIRoom\", \"Common\", \"Article\"]);\n \n const onClickAction = () => toastr.info(t(\"Common:WorkInProgress\"));\n \n return (\n <StyledParam increaseGap>\n <div className=\" set_room_params-info\">\n <div>",
       "module": "/packages/client"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

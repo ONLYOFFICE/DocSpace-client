@@ -3,7 +3,7 @@
   "content": "Reminder:",
   "content_en_sha1_hash": "ecad37f9b3850ac8c48d2f17f5a77c854889d954",
   "created_at": "2026-04-10T13:53:43.161Z",
-  "updated_at": "2026-04-12T02:57:36.278Z",
+  "updated_at": "2026-05-15T14:00:07.009Z",
   "comment": {
     "text": "This is a bold label that introduces a reminder message within a modal dialog. It appears when a grace period for a service is activated.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/GracePeriodModal.tsx",
-      "line_number": 77,
+      "line_number": 86,
       "context": "<ModalDialog.Body>\n <Text fontWeight={600}>\n {t(\"ServiceManagementUnavailable\", { planName: tariffPlanTitle })}\n </Text>\n <br />\n <Text fontWeight={600}>{t(\"Reminder\")}</Text>\n <Text as=\"span\" dataTestId=\"grace_period_info\">\n <CommonTrans\n \n i18nKey=\"GracePeriodActivatedInfo\"\n values={{",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

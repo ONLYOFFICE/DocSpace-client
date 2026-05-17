@@ -3,7 +3,7 @@
   "content": "{{productName}} admins can access {{productName}} settings, manage and archive rooms, invite new users and assign roles below their level. All admins have access to the {{sectionName}} section.<br/> <1>In {{agentSection}}</1>: can create, configure and manage {{agentSection}}, including their knowledge base and access settings.",
   "content_en_sha1_hash": "bab4e02ce9aa9451d52b5912286876ff2522a52d",
   "created_at": "2025-12-16T07:24:33.027Z",
-  "updated_at": "2026-04-13T08:35:42.804Z",
+  "updated_at": "2026-05-15T14:00:06.968Z",
   "comment": {
     "text": "This is a description of the Portal Admin role, displayed when viewing user roles or assigning a new role. It explains the permissions of a Portal Admin, including managing rooms, inviting users, and accessing settings. `{{productName}}` is the product name (e.g., ONLYOFFICE DocSpace), `{{sectionName}}` is the name of a specific section, and `{{agentSection}}` refers to a section related to agents. The `<1>` tag bolds the text within it.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 136,
+      "line_number": 145,
       "context": "label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: (\n <Trans\n t={t as TFunction}\n ns=\"Common\"\n i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n productName: getBrandName(\"ProductName\"),",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getUserTypeDescription.tsx",
-      "line_number": 46,
+      "line_number": 55,
       "context": "if (isPortalAdmin)\n return (\n <Trans\n t={t as TFunction}\n ns=\"Common\"\n i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n productName: getBrandName(\"ProductName\"),",
       "module": "/packages/shared"
     }
@@ -163,7 +163,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

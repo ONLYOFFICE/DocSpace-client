@@ -3,7 +3,7 @@
   "content": "You are currently assigned to form completion in this room. Leaving will halt those forms at your step. You can rejoin only via a new invitation from a room admin.",
   "content_en_sha1_hash": "d5730b7d0c963f664e3c6a8deee57af5df7f44a0",
   "created_at": "2026-04-23T17:23:59.278Z",
-  "updated_at": "2026-04-23T17:43:36.174Z",
+  "updated_at": "2026-05-15T14:00:06.689Z",
   "comment": {
     "text": "Warning text within a modal dialog body that appears when a user attempts to leave a room while actively assigned to form completion.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
-      "line_number": 106,
+      "line_number": 115,
       "context": "<ModalDialog.Header>{titleText}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className=\"modal-dialog-content-body\">\n {showFormFillingWarning ? (\n <>\n <Text>{t(\"Files:LeaveRoomFormFillingWarning\")}</Text>\n <Text style={{ marginTop: \"12px\" }}>\n {t(\"Files:AreYouSureWantLeaveRoom\")}\n </Text>\n </>\n ) : (",
       "module": "/packages/client"
     }

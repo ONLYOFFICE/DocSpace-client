@@ -3,7 +3,7 @@
   "content": "{{roomsQuotaLimit}} for rooms",
   "content_en_sha1_hash": "ee9270f5c126fdf6af89661d474505448542d564",
   "created_at": "2025-05-19T21:30:52.473Z",
-  "updated_at": "2026-04-11T21:22:32.581Z",
+  "updated_at": "2026-05-15T14:00:06.699Z",
   "comment": {
     "text": "This is a line item in a warning dialog about quota limits. It indicates the maximum storage allocated for rooms, where `{{roomsQuotaLimit}}` is the converted size (e.g., \"10 GB\").",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/WarningQuotaDialog/WarningQuotaDialog.tsx",
-      "line_number": 55,
+      "line_number": 64,
       "context": "const getWarningDescription = () => {\n const quotaLimits = [];\n \n if (isDefaultRoomsQuotaSet) {\n quotaLimits.push(\n t(\"Settings:RoomsQuotaLimit\", {\n roomsQuotaLimit: getConvertedSize(t, defaultRoomsQuota),\n }),\n );\n }\n if (isDefaultUsersQuotaSet) {",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Editing is currently unavailable for this file.",
   "content_en_sha1_hash": "81538d0f7dce9f77f60d11d44a2922c532824dd9",
   "created_at": "2026-02-18T14:55:51.922Z",
-  "updated_at": "2026-04-11T20:54:23.006Z",
+  "updated_at": "2026-05-15T14:00:06.902Z",
   "comment": {
     "text": "This is an error message displayed in a toast or notification bar. It informs the user that they cannot currently edit the file, likely due to a quota limit being reached.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/Bar/index.tsx",
-      "line_number": 55,
+      "line_number": 64,
       "context": "): QuotaInfo => {\n switch (type) {\n case \"room\":\n return {\n description: initial\n ? t(\"EditingUnavailable\")\n : t(\"YourFurtherEditsNotSaved\"),\n header: initial ? t(\"RoomQuotaReached\") : t(\"RoomQuotaLimitWarning\"),\n };\n case \"user\":\n return {",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/doceditor/src/components/Bar/index.tsx",
-      "line_number": 55,
+      "line_number": 64,
       "context": "): QuotaInfo => {\n switch (type) {\n case \"room\":\n return {\n description: initial\n ? t(\"EditingUnavailable\")\n : t(\"YourFurtherEditsNotSaved\"),\n header: initial ? t(\"RoomQuotaReached\") : t(\"RoomQuotaLimitWarning\"),\n };\n case \"user\":\n return {",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/doceditor/src/components/Bar/index.tsx",
-      "line_number": 55,
+      "line_number": 64,
       "context": "): QuotaInfo => {\n switch (type) {\n case \"room\":\n return {\n description: initial\n ? t(\"EditingUnavailable\")\n : t(\"YourFurtherEditsNotSaved\"),\n header: initial ? t(\"RoomQuotaReached\") : t(\"RoomQuotaLimitWarning\"),\n };\n case \"user\":\n return {",
       "module": "/packages/doceditor"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

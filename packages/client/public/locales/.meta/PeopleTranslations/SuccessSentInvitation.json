@@ -3,7 +3,7 @@
   "content": "The invitation was successfully sent",
   "content_en_sha1_hash": "111da91469d6f8d042a07154deded5ad1c84977e",
   "created_at": "2025-05-19T21:30:53.530Z",
-  "updated_at": "2026-04-11T21:19:54.178Z",
+  "updated_at": "2026-05-15T14:00:06.695Z",
   "comment": {
     "text": "This is a toast message confirming that an invitation has been successfully sent to one or more users. It appears briefly after the user attempts to send an invitation.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/SendInviteDialog/index.js",
-      "line_number": 60,
+      "line_number": 69,
       "context": "const { userIds } = this.state;\n \n this.setState({ isRequestRunning: true }, () => {\n resendUserInvites(userIds)\n .then(() =>\n toastr.success(t(\"PeopleTranslations:SuccessSentInvitation\")),\n )\n .catch((error) => toastr.error(error))\n .finally(() => {\n this.setState({ isRequestRunning: false }, () => {\n setSelected(\"close\");",
       "module": "/packages/client"
     }

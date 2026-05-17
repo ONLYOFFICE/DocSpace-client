@@ -3,7 +3,7 @@
   "content": "Reset client secret",
   "content_en_sha1_hash": "0801d7f7175fdcf12e141a570e84a590edfa9dd1",
   "created_at": "2025-05-19T21:30:54.001Z",
-  "updated_at": "2026-04-11T21:18:30.047Z",
+  "updated_at": "2026-05-15T14:00:06.827Z",
   "comment": {
     "text": "This is the title of a dialog box that appears when a user is about to reset their client secret.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ResetDialog.tsx",
-      "line_number": 75,
+      "line_number": 84,
       "context": "isLoading={!ready}\n visible={isVisible}\n onClose={onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"ResetHeader\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Trans t={t} i18nKey=\"ResetDescription\" ns=\"OAuth\" />\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
       "module": "/packages/client"
     }

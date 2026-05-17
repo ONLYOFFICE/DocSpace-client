@@ -3,7 +3,7 @@
   "content": "Remove guests",
   "content_en_sha1_hash": "1bc076269975c2b2351348b46ceb6faca2bc7ec4",
   "created_at": "2025-05-19T21:30:53.504Z",
-  "updated_at": "2026-04-11T21:20:05.132Z",
+  "updated_at": "2026-05-15T14:00:06.692Z",
   "comment": {
     "text": "This is the title of a dialog box that appears when a user is about to remove multiple guest users from a DocSpace.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/RemoveGuest/index.tsx",
-      "line_number": 116,
+      "line_number": 125,
       "context": "onClose={onClose}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n >\n <ModalDialog.Header>\n {isMulti ? t(\"RemoveGuests\") : t(\"RemoveGuest\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n {!isMulti ? (\n <Trans",
       "module": "/packages/client"
     }

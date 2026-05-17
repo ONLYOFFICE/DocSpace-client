@@ -3,7 +3,7 @@
   "content": "By disabling {{organizationName}} AI, the following changes will take effect:",
   "content_en_sha1_hash": "24635b4d0cae6095d5694c9227cd5d9ee63d01a5",
   "created_at": "2026-03-26T08:26:46.840Z",
-  "updated_at": "2026-04-11T21:49:07.404Z",
+  "updated_at": "2026-05-15T14:00:06.680Z",
   "comment": {
     "text": "This is a descriptive text within a dialog, explaining the consequences of disabling AI services for the organization. It appears when a user chooses to disable AI services and includes the variable `{{organizationName}}` for the organization's name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DisableAiServicesDialog/index.js",
-      "line_number": 84,
+      "line_number": 93,
       "context": "fontSize=\"13px\"\n fontWeight={400}\n className={styles.description}\n lineHeight=\"20px\"\n >\n {t(\"DisableAiServicesDescription\", {\n organizationName: getBrandName(\"OrganizationName\"),\n })}\n </Text>\n <Text fontSize=\"13px\" fontWeight={400} as=\"div\">\n <ul className={styles.effectsList}>",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Create a universal link for {{productName}} members for self-authorization in the agent.",
   "content_en_sha1_hash": "9e89fc44cfe6d18ee9a9329c04f94970ad054766",
   "created_at": "2025-11-03T12:10:31.355Z",
-  "updated_at": "2026-04-11T21:14:02.864Z",
+  "updated_at": "2026-05-15T14:00:06.709Z",
   "comment": {
     "text": "This is a description displayed when inviting users to an AI Room. It explains that a universal link will be created for existing {{productName}} members to self-authorize as agents.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/ExternalLinks.js",
-      "line_number": 179,
+      "line_number": 188,
       "context": "productName: getBrandName(\"ProductName\"),\n })\n : roomType === RoomsType.AIRoom\n ? allowInvitingGuests\n ? t(\"InviteViaLinkDescriptionAgentGuest\")\n : t(\"InviteViaLinkDescriptionAgentMembers\", {\n productName: getBrandName(\"ProductName\"),\n })\n : allowInvitingGuests\n ? t(\"InviteViaLinkDescriptionRoomGuest\")\n : t(\"InviteViaLinkDescriptionRoomMembers\", {",
       "module": "/packages/client"
     }

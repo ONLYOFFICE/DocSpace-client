@@ -3,7 +3,7 @@
   "content": "Create document",
   "content_en_sha1_hash": "fc51cb7ddc24a62bd43599b45c07fa0ba5a16d12",
   "created_at": "2025-05-19T21:30:55.034Z",
-  "updated_at": "2026-04-11T21:12:20.767Z",
+  "updated_at": "2026-05-15T14:00:06.704Z",
   "comment": {
     "text": "This is a label in the Hotkeys panel, indicating the keyboard shortcut for creating a new document.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/CreationBlock.js",
-      "line_number": 36,
+      "line_number": 45,
       "context": "const CreationBlock = ({ t, textStyles, keyTextStyles, AltKey }) => {\n return (\n <>\n <Row className={styles.hotkeysRow}>\n <>\n <Text {...textStyles}>{t(\"HotkeysCreateDocument\")}</Text>\n <Text {...keyTextStyles}>Shift + d</Text>\n </>\n </Row>\n <Row className={styles.hotkeysRow}>\n <>",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Files generated in {{aiChat}} will appear here automatically. Whenever you generate content, start a chat, or send a message with output, the result will be saved in this section.",
   "content_en_sha1_hash": "7a39094c0e0c2d40e35838b93986f87af2d1fbbb",
   "created_at": "2025-12-23T10:30:51.145Z",
-  "updated_at": "2026-04-11T21:02:02.580Z",
+  "updated_at": "2026-05-15T14:00:06.596Z",
   "comment": {
     "text": "This is the description text shown in an empty \"AI Results\" tab. It explains that AI-generated files will automatically appear there, and mentions that `{{aiChat}}` refers to the AI Chat feature.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 133,
+      "line_number": 142,
       "context": "</>\n );\n \n if (isResultsTab)\n return security && \"UseChat\" in security && security.UseChat\n ? t(\"AIRoom:EmptyResultsDescription\", {\n aiChat: t(\"AIRoom:AIChat\"),\n })\n : t(\"AIRoom:EmptyResultsViewerDescription\", {\n aiChat: t(\"AIRoom:AIChat\"),\n });",
       "module": "/packages/client"
     }
@@ -24,6 +24,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [],
       "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     }
   }
 }

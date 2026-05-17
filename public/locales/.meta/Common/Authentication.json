@@ -3,7 +3,7 @@
   "content": "Authentication",
   "content_en_sha1_hash": "ee1acfa55eb1476c86c5c4a68f256a67b25289ab",
   "created_at": "2025-05-19T21:30:43.148Z",
-  "updated_at": "2026-04-11T20:58:56.607Z",
+  "updated_at": "2026-05-15T14:00:06.845Z",
   "comment": {
     "text": "This is a toggle button label for enabling or disabling authentication settings in LDAP and SMTP configurations.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AuthenticationContainer.js",
-      "line_number": 73,
+      "line_number": 82,
       "context": "return (\n <>\n <div className=\"ldap_authentication-header\">\n <ToggleButton\n label={t(\"Common:Authentication\")}\n className=\"toggle\"\n isChecked={authentication}\n onChange={setIsAuthentication}\n isDisabled={!isLdapEnabled || isUIDisabled}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/sub-components/CustomSettings.js",
-      "line_number": 120,
+      "line_number": 129,
       "context": "<div className=\"smtp-settings_auth\">\n <ToggleButton\n className=\"smtp-settings_toggle\"\n isChecked={settings[AUTHENTICATION]}\n onChange={onChangeToggle}\n label={t(\"Common:Authentication\")}\n isDisabled={isLoading}\n dataTestId=\"smtp_auth_toggle_button\"\n />\n \n <div className=\"smtp-settings_title smtp-settings_login\">",
       "module": "/packages/client"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

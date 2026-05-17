@@ -3,7 +3,7 @@
   "content": "New application",
   "content_en_sha1_hash": "3c9a5e52344fe5d1311b3b6f36b19391cf89eac0",
   "created_at": "2025-05-19T21:30:53.916Z",
-  "updated_at": "2026-04-11T21:18:44.177Z",
+  "updated_at": "2026-05-15T14:00:06.818Z",
   "comment": {
     "text": "This is a heading that appears on a page for creating a new application.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/OAuthSectionHeader/index.tsx",
-      "line_number": 66,
+      "line_number": 75,
       "context": "onClick={onBack}\n className=\"arrow-button\"\n dataTestId=\"arrow_back_button\"\n />\n \n {isEdit ? t(\"EditApp\") : t(\"NewApp\")}\n </div>\n </Heading>\n </HeaderContainer>\n </StyledContainer>\n );",
       "module": "/packages/client"
     }

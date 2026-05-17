@@ -3,7 +3,7 @@
   "content": "Add users",
   "content_en_sha1_hash": "4bf1ec54401a70c2cb001d175de1313c924cef61",
   "created_at": "2025-09-23T07:24:16.851Z",
-  "updated_at": "2026-04-11T21:00:55.132Z",
+  "updated_at": "2026-05-15T14:00:06.904Z",
   "comment": {
     "text": "This is the tooltip text for an icon button that allows users to add new participants to a shared document or room.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/ShareDialog/ShareDialog.header.tsx",
-      "line_number": 76,
+      "line_number": 85,
       "context": "<IconButton\n size={16}\n isFill\n id=\"share-panel_add-user\"\n className={styles.icon}\n title={t(\"Common:AddUsers\")}\n iconName={PersonPlusReactSvgUrl}\n onClick={onClickAddUser}\n />\n )}\n </div>",
       "module": "/packages/doceditor"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

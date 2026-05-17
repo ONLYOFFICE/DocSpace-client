@@ -59,6 +59,7 @@ interface DashboardProps {
   firstName?: string;
   pricingUrl?: string;
   isAppEnabled: (id: string) => boolean;
+  activate: (id: string) => Promise<boolean>;
   ensureAppsLoaded: () => void;
 }
 
@@ -66,6 +67,7 @@ const Dashboard = ({
   firstName,
   pricingUrl,
   isAppEnabled,
+  activate,
   ensureAppsLoaded,
 }: DashboardProps) => {
   const { t } = useTranslation(["Common"]);
@@ -131,12 +133,22 @@ const Dashboard = ({
 
   const appsCatalog = useAppsCatalog();
 
-  const handleInstall = (modId: AppId) => {
-    if (modId === "ai-forms") {
-      setInstallDialogVisible(true);
+  const handleInstall = async (modId: AppId) => {
+    if (modId !== "ai-forms") {
+      toastr.info(t("Common:UnderDevelopment"));
       return;
     }
-    toastr.info(t("Common:UnderDevelopment"));
+    try {
+      const activated = await activate("ai-forms");
+      if (activated) {
+        navigate("/ai-forms");
+      } else {
+        setInstallDialogVisible(true);
+      }
+    } catch (err) {
+      console.error("Failed to activate ai-forms", err);
+      toastr.error(t("Common:SomethingWentWrong"));
+    }
   };
 
   const handleInstalled = () => {
@@ -259,6 +271,7 @@ const DashboardConnected = inject<TStore>(
     firstName: userStore.user?.firstName,
     pricingUrl: settingsStore.docspacePricesUrl,
     isAppEnabled: appsStore.isEnabled,
+    activate: appsStore.activate,
     ensureAppsLoaded: appsStore.ensureLoaded,
   }),
 )(observer(Dashboard));

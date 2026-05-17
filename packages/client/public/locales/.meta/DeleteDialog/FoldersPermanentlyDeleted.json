@@ -3,7 +3,7 @@
   "content": "The folders will be permanently removed from the {{trashSection}}.",
   "content_en_sha1_hash": "7ee99c73e52751be1f10fd78b8af7cb84fb4902b",
   "created_at": "2025-10-01T15:20:12.326Z",
-  "updated_at": "2026-04-11T21:05:21.047Z",
+  "updated_at": "2026-05-15T14:00:06.671Z",
   "comment": {
     "text": "This is a sentence fragment that appears in a confirmation dialog when a user is about to permanently delete folders. It informs the user that the folders will be permanently removed from the trash. `{{trashSection}}` will be replaced with the localized word for \"Trash\".",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 196,
+      "line_number": 205,
       "context": "<Trans t={t} i18nKey=\"DeleteFoldersForever\" ns=\"DeleteDialog\">\n You are about to delete{\" \"}\n <strong>folders ({{ foldersCount }})</strong>.\n </Trans>{\" \"}\n {!isThirdParty\n ? t(\"FoldersPermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"DeleteItemsSharedNote\")}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

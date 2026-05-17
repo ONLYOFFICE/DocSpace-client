@@ -3,7 +3,7 @@
   "content": "Your current domain",
   "content_en_sha1_hash": "b3923c670b1406884e6e252bae5cd97477f25260",
   "created_at": "2025-05-26T07:15:49.720Z",
-  "updated_at": "2026-04-24T09:26:56.946Z",
+  "updated_at": "2026-05-15T14:00:06.771Z",
   "comment": {
     "text": "This is a label for a text input field that displays the user's current domain name. It appears in the portal settings and domain settings sections.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/dns-settings.js",
-      "line_number": 255,
+      "line_number": 264,
       "context": "{t(\"DNSSettingsMobile\")}\n </div>\n <FieldContainer\n id=\"fieldContainerDNSSettings\"\n className=\"field-container-width settings_unavailable\"\n labelText={`${t(\"Common:YourCurrentDomain\")}`}\n isVertical\n >\n <TextInput\n {...textInputProps}\n isDisabled",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/management/src/app/spaces/multiple/domain-settings.tsx",
-      "line_number": 66,
+      "line_number": 75,
       "context": "{t(\"DomainSettings\")}\n </Text>\n <FieldContainer\n className={styles.fieldContainer}\n isVertical\n labelText={t(\"Common:YourCurrentDomain\")}\n labelVisible\n >\n <TextInput\n type={InputType.text}\n size={InputSize.base}",
       "module": "/packages/management"
     }
@@ -220,7 +220,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null,
+      "approved_at": "2026-05-15T15:04:54.259137Z",
       "ai_spell_check_verified_at": "2026-04-24T09:25:43.411Z",
       "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
       "ai_spell_check_verified_hash": "290a3025d300810b"

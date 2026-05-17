@@ -3,7 +3,7 @@
   "content": "Search block",
   "content_en_sha1_hash": "56c6cf7793ee4ba51ec0088f1810351bb7bb5a27",
   "created_at": "2025-05-19T21:30:54.653Z",
-  "updated_at": "2026-04-11T21:14:43.219Z",
+  "updated_at": "2026-05-15T14:00:06.702Z",
   "comment": {
     "text": "This is a tooltip title or checkbox label referring to the search functionality within the application.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 534,
+      "line_number": 543,
       "context": "<CheckboxElement\n label={t(\"JavascriptSdk:SearchFilterAndSort\")}\n onChange={onTitleChange}\n isChecked={embeddingConfig.showFilter}\n img={theme.isBase ? SearchUrl : SearchDarkUrl}\n title={t(\"JavascriptSdk:SearchBlock\")}\n dataTestId=\"show_filter\"\n description={t(\n \"JavascriptSdk:ManagerSearchBlockDescription\",\n )}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 590,
+      "line_number": 599,
       "context": "place=\"right\"\n offsetRight={4}\n size={12}\n tooltipContent={\n <TooltipContent\n title={t(\"SearchBlock\")}\n description={t(\"ManagerSearchBlockDescription\")}\n img={theme.isBase ? SearchUrl : SearchDarkUrl}\n />\n }\n dataTestId=\"show_filter_help_button\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
-      "line_number": 458,
+      "line_number": 467,
       "context": "offsetRight={4}\n size={12}\n dataTestId=\"filter_help_button\"\n tooltipContent={\n <TooltipContent\n title={t(\"SearchBlock\")}\n description={t(\"ManagerSearchBlockDescription\")}\n img={theme.isBase ? SearchUrl : SearchDarkUrl}\n />\n }\n />",
       "module": "/packages/client"
     }

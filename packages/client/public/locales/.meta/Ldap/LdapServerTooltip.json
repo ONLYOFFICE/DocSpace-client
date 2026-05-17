@@ -3,7 +3,7 @@
   "content": "Enter the LDAP server without the port number.",
   "content_en_sha1_hash": "680c834775f4c15824cec517ae01ba2229a60c4e",
   "created_at": "2025-05-19T21:30:54.271Z",
-  "updated_at": "2026-04-11T21:16:48.920Z",
+  "updated_at": "2026-05-15T14:00:06.848Z",
   "comment": {
     "text": "This is a tooltip that appears when hovering over the LDAP server input field. It provides a hint to the user about the expected format for the server address.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ConnectionSettings.js",
-      "line_number": 96,
+      "line_number": 105,
       "context": "isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.server}\n labelText={t(\"LdapServer\")}\n tooltipContent={t(\"LdapServerTooltip\")}\n inlineHelpButton\n isRequired\n dataTestId=\"server_field_container\"\n >\n <LdapFieldComponent",
       "module": "/packages/client"
     }

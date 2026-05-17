@@ -3,7 +3,7 @@
   "content": "Backup codes",
   "content_en_sha1_hash": "e7cba1a232c33bc65ed4971b30b922911010f6e5",
   "created_at": "2025-05-19T21:30:57.034Z",
-  "updated_at": "2026-04-11T21:03:17.461Z",
+  "updated_at": "2026-05-15T14:00:06.635Z",
   "comment": {
     "text": "This is the title of a dialog window that displays backup codes for two-factor authentication. It also appears as the title of the printed page containing these codes.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/BackupCodesDialog/index.js",
-      "line_number": 59,
+      "line_number": 68,
       "context": "const printWindow = window.open(\n \"about:blank\",\n \"\",\n \"toolbar=0,scrollbars=1,status=0\",\n );\n printWindow.document.write(`<h1>${t(\"BackupCodesTitle\")}</h1>`);\n printWindow.document.write(printContent.innerHTML);\n printWindow.document.close();\n printWindow.focus();\n printWindow.print();\n printWindow.close();",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/BackupCodesDialog/index.js",
-      "line_number": 59,
+      "line_number": 68,
       "context": "const printWindow = window.open(\n \"about:blank\",\n \"\",\n \"toolbar=0,scrollbars=1,status=0\",\n );\n printWindow.document.write(`<h1>${t(\"BackupCodesTitle\")}</h1>`);\n printWindow.document.write(printContent.innerHTML);\n printWindow.document.close();\n printWindow.focus();\n printWindow.print();\n printWindow.close();",
       "module": "/packages/client"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

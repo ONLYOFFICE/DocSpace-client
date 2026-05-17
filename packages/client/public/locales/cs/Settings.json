@@ -35,6 +35,7 @@
   "ApiKeysShareDescription": "Nesdílejte svůj klíč API s ostatními ani jej nezveřejňujte v prohlížeči nebo jiném kódu na straně klienta.",
   "ApiKeyViewUsage": "Zobrazení využití jednotlivých klíčů API na",
   "Appearance": "Vzhled",
+  "AppsDescription": "Spravujte, které aplikace jsou dostupné ve vašem {{productName}}. Aktivní aplikace se zobrazí v hlavní nabídce uživatelům, kteří k nim mají přístup.",
   "AuditSubheader": "Tato podsekce umožňuje procházet seznam nejnovějších změn (vytvoření, úpravy, odstranění atd.), které uživatelé provedli v entitách (místnostech, příležitostech, souborech atd.) v rámci vašeho prostoru {{productName}}.",
   "AuditTrailNav": "Auditní stopa",
   "AuthorizationKeysInfo": "S Autorizačními klíči můžete připojit služby třetích stran ke svému prostoru. Přihlaste se snadno pomocí Facebooku, Googlu nebo LinkedInu. Přidejte Dropbox, OneDrive a další účty pro práci se soubory uloženými tam.",

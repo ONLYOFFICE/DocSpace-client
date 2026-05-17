@@ -3,7 +3,7 @@
   "content": "Link was deleted",
   "content_en_sha1_hash": "7ec9741f0ef568382146dd5d0aabb201e06b9fe7",
   "created_at": "2025-05-19T21:30:54.778Z",
-  "updated_at": "2026-04-11T21:13:46.488Z",
+  "updated_at": "2026-05-15T14:00:06.732Z",
   "comment": {
     "text": "This is an error toast message displayed when a user attempts to edit a shared link that has already been deleted.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/HistoryBlockContent/RoomExternalLink.tsx",
-      "line_number": 68,
+      "line_number": 77,
       "context": "const { t } = useTranslation([\"InfoPanel\"]);\n \n const onEditLink = () => {\n if (!feedData.sharedTo) {\n toastr.error(t(\"FeedLinkWasDeleted\"));\n return;\n }\n \n if (!selection || !isSharedLink(feedData)) {\n return;",
       "module": "/packages/client"
     }

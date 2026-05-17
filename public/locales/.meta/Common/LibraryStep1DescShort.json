@@ -3,7 +3,7 @@
   "content": "Browse available templates in the library",
   "content_en_sha1_hash": "30c4b329e6ca09c9c2c89624e7099ee9d1e7708c",
   "created_at": "2026-03-31T15:18:14.880Z",
-  "updated_at": "2026-04-23T17:24:02.166Z",
+  "updated_at": "2026-05-15T14:00:06.985Z",
   "comment": {
     "text": "This is a short description displayed below a step title in a multi-step process. It instructs the user to browse templates in the library.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(forms)/forms/library/[langId]/[categoryId]/template/[templateId]/page.client.tsx",
-      "line_number": 254,
+      "line_number": 263,
       "context": "<div>\n <div className={styles.stepTitle}>\n {t(\"Common:LibraryStep1Title\")}\n </div>\n <div className={styles.stepDesc}>\n {t(\"Common:LibraryStep1DescShort\")}\n </div>\n </div>\n </li>\n <li className={styles.stepItem}>\n <span className={styles.stepNumber}>2</span>",
       "module": "/packages/sdk"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

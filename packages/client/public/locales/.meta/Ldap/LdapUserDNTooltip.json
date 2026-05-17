@@ -3,7 +3,7 @@
   "content": "Enter the distinguished name to the directory containing users you want to add.",
   "content_en_sha1_hash": "dfbb9f74a6136fd400079b30d4221dfa2f8e5f81",
   "created_at": "2025-05-19T21:30:54.328Z",
-  "updated_at": "2026-04-11T21:16:28.978Z",
+  "updated_at": "2026-05-15T14:00:06.849Z",
   "comment": {
     "text": "This is a tooltip that appears when hovering over the \"User DN\" input field in the LDAP connection settings. It explains what distinguished name should be entered.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ConnectionSettings.js",
-      "line_number": 119,
+      "line_number": 128,
       "context": "isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.userDN}\n labelText={t(\"LdapUserDN\")}\n tooltipContent={t(\"LdapUserDNTooltip\")}\n inlineHelpButton\n isRequired\n dataTestId=\"user_dn_field_container\"\n >\n <LdapFieldComponent",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Started filling it out.",
   "content_en_sha1_hash": "0afd3774a6163c57940bf1cf8a56d110341db913",
   "created_at": "2025-05-19T21:30:54.964Z",
-  "updated_at": "2026-04-11T21:12:33.065Z",
+  "updated_at": "2026-05-15T14:00:06.740Z",
   "comment": {
     "text": "This is a feed message that appears in the InfoPanel when a user opens a form to begin filling it out.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 396,
+      "line_number": 405,
       "context": "case FeedActionKeys.RoomChangeOwner:\n return t(\"InfoPanel:RoomChangeOwner\");\n case FeedActionKeys.FormSubmit:\n return t(\"InfoPanel:FilledOutForm\");\n case FeedActionKeys.FormOpenedForFilling:\n return t(\"InfoPanel:StartedFillingItOut\");\n case FeedActionKeys.FileCustomFilterEnabled:\n return t(\"InfoPanel:FileCustomFilterEnabled\");\n case FeedActionKeys.FileCustomFilterDisabled:\n return t(\"InfoPanel:FileCustomFilterDisabled\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 338,
+      "line_number": 347,
       "context": "sectionName: t(\"Common:MyDocuments\"),\n });\n case FeedActionKeys.FormSubmit:\n return t(\"InfoPanel:FilledOutForm\");\n case FeedActionKeys.FormOpenedForFilling:\n return t(\"InfoPanel:StartedFillingItOut\");\n case FeedActionKeys.FileCustomFilterEnabled:\n return t(\"InfoPanel:FileCustomFilterEnabled\");\n case FeedActionKeys.FileCustomFilterDisabled:\n return t(\"InfoPanel:FileCustomFilterDisabled\");",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "All items from the {{sectionName}} section will be deleted forever. You won’t be able to restore them.",
   "content_en_sha1_hash": "f63c0cba122e23660d36c3dff04f53bc9ffd90a4",
   "created_at": "2025-05-19T21:30:56.569Z",
-  "updated_at": "2026-04-11T21:06:29.578Z",
+  "updated_at": "2026-05-15T14:00:06.683Z",
   "comment": {
     "text": "This is the descriptive text within a confirmation dialog that appears when a user attempts to empty a section, such as the trash. It warns the user that all items in the specified `{{sectionName}}` will be permanently deleted and cannot be recovered.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/EmptyTrashDialog/index.js",
-      "line_number": 89,
+      "line_number": 98,
       "context": "window.addEventListener(\"keydown\", onKeyPress);\n \n return () => window.removeEventListener(\"keydown\", onKeyPress);\n }, []);\n \n const description = t(\"DeleteForeverNote\", { sectionName });\n \n return (\n <ModalDialog\n isLoading={!tReady}\n visible={visible}",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

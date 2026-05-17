@@ -3,7 +3,7 @@
   "content": "<1>«{{roomTitle}}»</1> agent created",
   "content_en_sha1_hash": "d417cc806d4a82a7289f23aad8f177222782249c",
   "created_at": "2025-11-03T12:10:31.497Z",
-  "updated_at": "2026-04-11T21:13:11.196Z",
+  "updated_at": "2026-05-15T14:00:06.736Z",
   "comment": {
     "text": "This is a history feed message indicating that an AI agent has been created. `{{roomTitle}}` is the name of the room where the agent was created.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 152,
+      "line_number": 161,
       "context": "case FeedActionKeys.AgentCreated:\n return (\n <Trans\n t={t}\n ns=\"InfoPanel\"\n i18nKey=\"HistoryAgentCreated\"\n values={{ roomTitle: (feed.data as TFeedData).title }}\n components={{\n 1: (\n <HistoryText\n key={(feed.data as TFeedData).title!}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 146,
+      "line_number": 155,
       "context": "case FeedActionKeys.AgentCreated:\n return (\n <Trans\n t={t as TFunction}\n ns=\"InfoPanel\"\n i18nKey=\"HistoryAgentCreated\"\n values={{ roomTitle: feed.data.title }}\n components={{\n 1: <HistoryText key={feed.data.title!} title={feed.data.title!} />,\n }}\n />",
       "module": "/packages/client"
     }

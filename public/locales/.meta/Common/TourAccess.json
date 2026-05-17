@@ -3,7 +3,7 @@
   "content": "Manage who can access this forms room. Add Form Admins and Form Managers to control permissions.",
   "content_en_sha1_hash": "078fcc4c3542bc262bcd04cb949d8d84b3073446",
   "created_at": "2026-03-31T15:18:26.607Z",
-  "updated_at": "2026-04-23T17:24:02.165Z",
+  "updated_at": "2026-05-15T14:00:06.985Z",
   "comment": {
     "text": "This is a tooltip that appears when hovering over the \"Access\" settings for a forms room. It explains how to manage user permissions for the room.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(forms)/_utils/tourSteps.ts",
-      "line_number": 335,
+      "line_number": 344,
       "context": "showSettings &&\n settingsStep(\n \"access\",\n t(\"Common:AccessSettings\", \"Access Settings\"),\n t(\n \"Common:TourAccess\",\n \"Manage who can access this forms room. Add Form Admins and Form Managers to control permissions.\",\n ),\n callbacks,\n ),\n showSettings &&",
       "module": "/packages/sdk"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

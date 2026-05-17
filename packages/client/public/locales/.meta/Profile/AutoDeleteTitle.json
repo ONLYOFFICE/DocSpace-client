@@ -3,7 +3,7 @@
   "content": "All the sessions older than 60 days will be automatically deleted.",
   "content_en_sha1_hash": "42cea0e4de85140efc8de6763eece38362e5d638",
   "created_at": "2025-05-19T21:30:53.337Z",
-  "updated_at": "2026-04-11T21:20:55.204Z",
+  "updated_at": "2026-05-15T14:00:06.879Z",
   "comment": {
     "text": "This is a descriptive text that appears below the \"Active Sessions\" heading in the user's profile settings. It informs the user about the automatic deletion policy for old sessions.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/login/active-session/index.js",
-      "line_number": 132,
+      "line_number": 141,
       "context": "<Text fontSize=\"16px\" fontWeight={700} lineHeight=\"22px\">\n {t(\"Profile:ActiveSessions\")}\n </Text>\n \n {/* TODO: Uncomment after fix on backend */}\n {/* <Text className={styles.autoDeleteTitle}>{t(\"Profile:AutoDeleteTitle\")}</Text> */}\n \n <div className={styles.terminateSessionContainer}>\n <Link\n className={styles.terminateAllSessions}\n type=\"action\"",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "AI providers are not configured on this portal. Contact your administrator.",
   "content_en_sha1_hash": "6b933de511bbd710821df581fd29b4cfca67f711",
   "created_at": "2026-03-20T09:07:26.690Z",
-  "updated_at": "2026-04-23T17:24:02.139Z",
+  "updated_at": "2026-05-15T14:00:06.980Z",
   "comment": {
     "text": "This is an error message displayed when no AI providers are configured on the portal, prompting the user to contact their administrator.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/AIAgentForm.tsx",
-      "line_number": 309,
+      "line_number": 318,
       "context": "</div>\n )}\n {!tourStore.showMockItems && !isCheckingProviders && !aiProvidersAvailable && (\n <div className={styles.statusRow}>\n <Text fontSize=\"12px\" fontWeight={400} color={globalColors.gray}>\n {t(\"Common:AIProvidersNotAvailable\")}\n </Text>\n <Button\n label={t(\"Common:TryAgain\")}\n size={ButtonSize.extraSmall}\n onClick={() => store.checkAiAvailability()}",
       "module": "/packages/sdk"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

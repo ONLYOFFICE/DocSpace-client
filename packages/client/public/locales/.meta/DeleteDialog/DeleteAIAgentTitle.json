@@ -3,7 +3,7 @@
   "content": "Delete this agent?",
   "content_en_sha1_hash": "346fba156dd926e2feaa82d4353a4322146ba0d1",
   "created_at": "2025-10-27T16:14:31.194Z",
-  "updated_at": "2026-04-11T21:05:51.756Z",
+  "updated_at": "2026-05-15T14:00:06.673Z",
   "comment": {
     "text": "This is the title of a confirmation dialog. It appears when a user attempts to delete an AI agent, asking for confirmation.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 205,
+      "line_number": 214,
       "context": "return t(\"Common:MoveTo\");\n };\n \n const getDialogTitle = () => {\n if (isAIAgent) {\n return t(\"DeleteDialog:DeleteAIAgentTitle\");\n }\n \n if (isTemplate) {\n return `${t(\"Files:DeleteTemplateAction\")}?`;\n }",
       "module": "/packages/client"
     }
@@ -24,6 +24,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [],
       "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     }
   }
 }

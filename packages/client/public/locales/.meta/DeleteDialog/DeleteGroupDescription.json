@@ -3,7 +3,7 @@
   "content": "Group {{groupName}} will be deleted. Users in the group will not be removed from {{productName}}. Are you sure you want to continue?",
   "content_en_sha1_hash": "1def40bc5db30b6384216cdbb18e26567e154700",
   "created_at": "2025-05-19T21:30:56.699Z",
-  "updated_at": "2026-04-11T21:05:41.551Z",
+  "updated_at": "2026-05-15T14:00:06.674Z",
   "comment": {
     "text": "This is a confirmation message displayed in a dialog when a user attempts to delete a single group. It informs the user that the group will be deleted but its members will remain in the product. `{{groupName}}` is the name of the group being deleted, and `{{productName}}` is the name of the application.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteGroupDialog/index.js",
-      "line_number": 90,
+      "line_number": 99,
       "context": "<Text>\n {hasMoreGroups\n ? t(\"DeleteDialog:DeleteAllGroupDescription\", {\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"DeleteDialog:DeleteGroupDescription\", {\n productName: getBrandName(\"ProductName\"),\n groupName,\n })}\n </Text>\n </ModalDialog.Body>",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

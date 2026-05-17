@@ -3,7 +3,7 @@
   "content": "Server disabled successfully",
   "content_en_sha1_hash": "76482d89c727a7a5e18e9b3e0c45c2e71e48d841",
   "created_at": "2025-10-27T16:14:31.649Z",
-  "updated_at": "2026-04-11T21:02:21.136Z",
+  "updated_at": "2026-05-15T14:00:06.766Z",
   "comment": {
     "text": "This is a toast message confirming that a server has been successfully disabled. It appears briefly after the user disables a server in the AI settings.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/dialogs/disable/index.tsx",
-      "line_number": 61,
+      "line_number": 70,
       "context": "const onSubmitAction = async () => {\n setLoading(true);\n \n try {\n await updateMCPStatus?.(serverId, false);\n toastr.success(t(\"AISettings:ServerDisabledSuccess\"));\n } catch (error) {\n console.error(error);\n toastr.error(error as string);\n } finally {\n setLoading(false);",
       "module": "/packages/client"
     }
@@ -24,6 +24,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [],
       "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     }
   }
 }

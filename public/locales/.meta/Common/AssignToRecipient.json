@@ -3,7 +3,7 @@
   "content": "Assign to recipient",
   "content_en_sha1_hash": "e3a067738d081fe9791779a3510cc3a0c8f3b0d1",
   "created_at": "2025-10-13T13:21:58.769Z",
-  "updated_at": "2026-04-11T20:58:59.114Z",
+  "updated_at": "2026-05-15T14:00:06.949Z",
   "comment": {
     "text": "This is the title of a dialog box where users can assign roles to recipients.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/role-mapping/RoleMappingPanel.tsx",
-      "line_number": 246,
+      "line_number": 255,
       "context": "const disabledSubmit = roles.some((role) => !role.user);\n \n const headerProps = useMemo(\n () =>\n ({\n headerLabel: t(\"Common:AssignToRecipient\"),\n withoutBackButton: false,\n withoutBorder: false,\n isCloseable: true,\n onBackClick: closeUsersPanel,\n onCloseClick: () => {",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

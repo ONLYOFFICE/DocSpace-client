@@ -3,7 +3,7 @@
   "content": "Badges",
   "content_en_sha1_hash": "2c578dc888bc9805915a1839502adddce2592af7",
   "created_at": "2025-05-19T21:30:54.078Z",
-  "updated_at": "2026-04-11T21:18:05.067Z",
+  "updated_at": "2026-05-15T14:00:06.880Z",
   "comment": {
     "text": "This is a section title in the user profile settings, labeling the area where users can manage their badges.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/index.tsx",
-      "line_number": 52,
+      "line_number": 61,
       "context": "const badgesContent = (\n <>\n <div className={styles.textContent}>\n <Text fontSize=\"14px\" fontWeight={600}>\n {t(\"Badges\")}\n </Text>\n </div>\n <div className={styles.badgesContainer}>\n <RoomsActionsContainer\n t={t}",
       "module": "/packages/client"
     }

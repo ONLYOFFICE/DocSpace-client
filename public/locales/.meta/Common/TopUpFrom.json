@@ -3,7 +3,7 @@
   "content": "From",
   "content_en_sha1_hash": "3f66052a107eaf9bae7cad0f61fb462f47ec2c47",
   "created_at": "2026-04-10T13:53:43.613Z",
-  "updated_at": "2026-04-12T15:11:05.888Z",
+  "updated_at": "2026-05-15T14:00:07.015Z",
   "comment": {
     "text": "This is a short label indicating the source of funds for a top-up transaction, appearing in a billing or payment interface.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/FromWalletToAi.tsx",
-      "line_number": 78,
+      "line_number": 87,
       "context": "}, [isBalanceInsufficient]);\n \n return (\n <div className={modalStyles.transferSection}>\n <div className={modalStyles.transferBlock}>\n <Text fontWeight=\"600\">{t(\"TopUpFrom\")}</Text>\n \n <WalletInfo\n balance={balanceValue}\n isBalanceInsufficient={isBalanceInsufficient}\n onTopUp={isBalanceInsufficient ? onTopUpBalance : undefined}",
       "module": "/libs/ui-kit"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

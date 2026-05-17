@@ -3,7 +3,7 @@
   "content": "Enable automatic backup.",
   "content_en_sha1_hash": "3940fbf299c4c76fb3bd58c6a6f346f85e30bb03",
   "created_at": "2025-05-26T07:15:43.051Z",
-  "updated_at": "2026-04-11T20:53:42.074Z",
+  "updated_at": "2026-05-15T14:00:06.959Z",
   "comment": {
     "text": "This is a label for a checkbox or toggle switch. It enables or disables the automatic backup feature within the application settings.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 474,
+      "line_number": 483,
       "context": "fontWeight={600}\n lineHeight=\"20px\"\n noSelect\n className={styles.settingsUnavailable}\n >\n {t(\"Common:EnableAutomaticBackup\")}\n </Text>\n </div>\n <Text\n className={classNames(\n styles.settingsUnavailable,",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

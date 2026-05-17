@@ -3,7 +3,7 @@
   "content": "The link will expire <1>{{date}}</1>",
   "content_en_sha1_hash": "63d96a2e07ed56dd44d5d336a0581f8168e94aad",
   "created_at": "2026-02-18T14:56:01.209Z",
-  "updated_at": "2026-04-23T17:24:01.884Z",
+  "updated_at": "2026-05-15T14:00:06.708Z",
   "comment": {
     "text": "This is a toast message or part of a sentence indicating when a shared link will become inactive. The variable `{{date}}` will be replaced with a specific date.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 511,
+      "line_number": 520,
       "context": "const toastTranslation = date ? (\n <Trans\n t={t}\n ns=\"Common\"\n values={{ date }}\n i18nKey=\"LinkExpireAfter\"\n components={{ 1: <strong key=\"strong-expire-after\" /> }}\n />\n ) : (\n <Trans\n t={t}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 379,
+      "line_number": 388,
       "context": "return (\n <Trans\n t={t}\n ns=\"Common\"\n values={{ date }}\n i18nKey=\"LinkExpireAfter\"\n components={{ 1: <strong key=\"strong-expire-after\" /> }}\n />\n );\n }",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/sub-components/ExpiredComboBox.tsx",
-      "line_number": 122,
+      "line_number": 131,
       "context": "const getExpirationTrans = () => {\n if (expirationDate) {\n const date = getDate(expirationDate);\n \n return (\n <Trans t={t} i18nKey=\"LinkExpireAfter\" ns=\"Common\">\n The link will expire\n <LinkWithDropdown\n className={styles.expiredOptions}\n color={globalColors.lightBlueMain}\n dropdownType=\"alwaysDashed\"",
       "module": "/packages/shared"
     }
@@ -41,7 +41,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "ar-SA": {
       "ai_translated": false,

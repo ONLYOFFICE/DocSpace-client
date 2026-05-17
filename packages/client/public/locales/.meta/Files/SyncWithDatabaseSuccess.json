@@ -3,7 +3,7 @@
   "content": "All forms will synchronized with the external database in the background",
   "content_en_sha1_hash": "9579d01ad82a281f787740c9ee8535a0414ec868",
   "created_at": "2026-05-08T13:10:43.429Z",
-  "updated_at": "2026-05-08T13:12:24.713Z",
+  "updated_at": "2026-05-15T14:00:06.891Z",
   "comment": {
     "text": "Success toast message appearing after a database synchronization task completes, informing the user that forms are being updated in the background.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/CreateEditRoomStore.ts",
-      "line_number": 799,
+      "line_number": 808,
       "context": "if (!res) return;\n \n if (res.isCompleted) {\n DbSyncService.assertTaskSucceeded(res);\n toastr.success(t(\"Files:SyncWithDatabaseSuccess\"));\n return;\n }\n \n const basePayload = {\n operation: OPERATIONS_NAME.syncDatabase,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/CreateEditRoomStore.ts",
-      "line_number": 799,
+      "line_number": 808,
       "context": "if (!res) return;\n \n if (res.isCompleted) {\n DbSyncService.assertTaskSucceeded(res);\n toastr.success(t(\"Files:SyncWithDatabaseSuccess\"));\n return;\n }\n \n const basePayload = {\n operation: OPERATIONS_NAME.syncDatabase,",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Horizontal",
   "content_en_sha1_hash": "4f57a1ce99e68a7b05c42d0a7ea0070eafabd31c",
   "created_at": "2025-05-19T21:30:56.806Z",
-  "updated_at": "2026-04-11T21:04:42.822Z",
+  "updated_at": "2026-05-15T14:00:06.666Z",
   "comment": {
     "text": "This is a label for a radio button or dropdown option, indicating a horizontal orientation for a watermark.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/Watermarks/ViewerInfo.tsx",
-      "line_number": 124,
+      "line_number": 133,
       "context": "label: t(\"Diagonal\"),\n dataTestId: \"virtual_data_room_watermark_position_diagonal\",\n },\n {\n key: 0,\n label: t(\"Horizontal\"),\n dataTestId: \"virtual_data_room_watermark_position_horizontal\",\n },\n ];\n \n const getInitialRotate = (",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

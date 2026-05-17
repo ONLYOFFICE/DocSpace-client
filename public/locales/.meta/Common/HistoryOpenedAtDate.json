@@ -3,7 +3,7 @@
   "content": "Opened the form to fill out",
   "content_en_sha1_hash": "ba71e193153034a9fff8236f5236eb1cacef1cb3",
   "created_at": "2025-05-19T21:30:45.773Z",
-  "updated_at": "2026-04-11T20:51:17.102Z",
+  "updated_at": "2026-05-15T14:00:06.930Z",
   "comment": {
     "text": "This is a history log entry describing an action. It indicates that a form was opened for completion.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/filling-role-process/sub-components/role-histories/RoleHistories.tsx",
-      "line_number": 49,
+      "line_number": 58,
       "context": "const stoppedByUserName = stoppedBy ? decode(stoppedBy.displayName) : \"\";\n \n const historyTexts = useMemo(() => {\n return {\n [FillingFormStatusHistory.OpenedAtDate.toString()]: t(\n \"Common:HistoryOpenedAtDate\",\n ),\n [FillingFormStatusHistory.SubmissionDate.toString()]: t(\n \"Common:HistorySubmittedPartDescription\",\n ),\n [FillingFormStatusHistory.StopDate.toString()]: (",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

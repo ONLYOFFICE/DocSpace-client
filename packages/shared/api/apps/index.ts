@@ -36,6 +36,15 @@ export async function getApps() {
   return res;
 }
 
+export async function getAppSettings<T = Record<string, unknown>>(id: string) {
+  const res = (await request({
+    method: "get",
+    url: `/apps/${encodeURIComponent(id)}/settings`,
+  })) as T | null;
+
+  return res ?? null;
+}
+
 export async function setAppEnabled(id: string, enabled: boolean) {
   const res = (await request({
     method: "put",

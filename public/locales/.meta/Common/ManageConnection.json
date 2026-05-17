@@ -3,7 +3,7 @@
   "content": "Manage connection",
   "content_en_sha1_hash": "3ca4794faf5c82e76336e37b70c07375fb9ed946",
   "created_at": "2025-10-27T16:14:24.262Z",
-  "updated_at": "2026-04-23T17:24:02.169Z",
+  "updated_at": "2026-05-15T14:00:06.988Z",
   "comment": {
     "text": "This is a button label that opens a dialog to manage connections for AI tools.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-input/tools-settings/index.tsx",
-      "line_number": 446,
+      "line_number": 453,
       "context": ": []),\n ...(showManageConnectionItem\n ? [\n {\n key: \"manage-connections\",\n label: t(\"ManageConnection\"),\n onClick: () => {\n setShowManageConnections(true);\n },\n iconNode: <ManageConnectionsReactSvg />,\n disabled: !showManageConnectionItem,",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-input/tools-settings/index.tsx",
-      "line_number": 446,
+      "line_number": 453,
       "context": ": []),\n ...(showManageConnectionItem\n ? [\n {\n key: \"manage-connections\",\n label: t(\"ManageConnection\"),\n onClick: () => {\n setShowManageConnections(true);\n },\n iconNode: <ManageConnectionsReactSvg />,\n disabled: !showManageConnectionItem,",
       "module": "/libs/ui-kit"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

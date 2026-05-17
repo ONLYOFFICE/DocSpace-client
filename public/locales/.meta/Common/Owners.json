@@ -3,7 +3,7 @@
   "content": "Owners",
   "content_en_sha1_hash": "4eaec4bc0f1df68ab2a7c896845068f9bba671b9",
   "created_at": "2026-03-31T15:18:18.114Z",
-  "updated_at": "2026-04-12T05:14:28.516Z",
+  "updated_at": "2026-05-15T14:00:06.751Z",
   "comment": {
     "text": "This is a label for a filter option in the Home section, allowing users to filter items by their owners.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1264,
+      "line_number": 1273,
       "context": "const ownerOptions = [\n {\n key: FilterGroups.roomFilterOwner,\n group: FilterGroups.roomFilterOwner,\n label: t(\"Common:Owners\"),\n isHeader: true,\n withoutSeparator: true,\n withMultiItems: true,\n },\n {",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "Local part can't contain spaces",
   "content_en_sha1_hash": "1303a27e549235cda77cad1ed3ebba10af960eb5",
   "created_at": "2025-05-19T21:30:48.980Z",
-  "updated_at": "2026-04-23T17:24:01.691Z",
+  "updated_at": "2026-05-15T14:00:06.640Z",
   "comment": {
     "text": "This is an error message displayed when a user enters a space in the local part of an email address (the part before the \"@\" symbol).",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
-      "line_number": 135,
+      "line_number": 144,
       "context": "case ErrorKeys.PunycodeLocalPart:\n return t(\"PunycodeLocalPart\");\n case ErrorKeys.IncorrectLocalPart:\n return t(\"IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:\n return t(\"SpacesInLocalPart\");\n case ErrorKeys.MaxLengthExceeded:\n return t(\"MaxLengthExceeded\");\n case ErrorKeys.IncorrectEmail:\n return t(\"IncorrectEmail\");\n case ErrorKeys.ManyEmails:",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeEmailDialog/index.js",
-      "line_number": 139,
+      "line_number": 148,
       "context": "case ErrorKeys.PunycodeLocalPart:\n return t(\"Common:PunycodeLocalPart\");\n case ErrorKeys.IncorrectLocalPart:\n return t(\"Common:IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:\n return t(\"Common:SpacesInLocalPart\");\n case ErrorKeys.MaxLengthExceeded:\n return t(\"Common:MaxLengthExceeded\");\n case ErrorKeys.IncorrectEmail:\n return t(\"Common:IncorrectEmail\");\n case ErrorKeys.ManyEmails:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 193,
+      "line_number": 202,
       "context": "case ErrorKeys.PunycodeLocalPart:\n return t(\"Common:PunycodeLocalPart\");\n case ErrorKeys.IncorrectLocalPart:\n return t(\"Common:IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:\n return t(\"Common:SpacesInLocalPart\");\n case ErrorKeys.MaxLengthExceeded:\n return t(\"Common:MaxLengthExceeded\");\n default:\n return t(\"Common:IncorrectDomain\");\n }",
       "module": "/packages/shared"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

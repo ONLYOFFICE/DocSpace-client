@@ -3,7 +3,7 @@
   "content": "See {{aiAgents}} details here",
   "content_en_sha1_hash": "a07a55c2387018588dc7f74c24bc55c8c19cdf99",
   "created_at": "2025-12-19T13:03:44.751Z",
-  "updated_at": "2026-04-11T21:13:52.983Z",
+  "updated_at": "2026-05-15T14:00:06.723Z",
   "comment": {
     "text": "This is a text string displayed on an empty state screen for AI agents. It informs the user where to find more information about AI agents, with `{{aiAgents}}` being a plural noun referring to AI agents.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/NoItem/NoAgentItem.tsx",
-      "line_number": 60,
+      "line_number": 69,
       "context": "src={imageSrc}\n alt={t(\"NoAgent\", { aiAgent: t(\"Common:AIAgent\") })}\n />\n </div>\n <Text className=\"no-item-text\" textAlign=\"center\">\n {t(\"AIAgentsEmptyScreenTent\", { aiAgents: t(\"Common:AIAgents\") })}\n </Text>\n </div>\n );\n };",
       "module": "/packages/client"
     }

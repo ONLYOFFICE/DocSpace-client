@@ -3,7 +3,7 @@
   "content": "We will transfer rooms created by contact.",
   "content_en_sha1_hash": "ecadc43845f163b0194851cbc47e4b338ba1785e",
   "created_at": "2025-05-19T21:30:56.759Z",
-  "updated_at": "2026-04-11T21:05:03.720Z",
+  "updated_at": "2026-05-15T14:00:06.668Z",
   "comment": {
     "text": "This is a line of text within a dialog box that appears when reassigning data. It informs the user that only rooms created by the contact will be transferred.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Body/Description.js",
-      "line_number": 42,
+      "line_number": 51,
       "context": "return (\n <div className={classNames(styles.availableList, \"list-container\")}>\n <Text className={styles.listItem}>\n {noRoomFilesToMove\n ? t(\"RoomsOnlyReassignment\")\n : t(\"DescriptionDataReassignment\")}\n </Text>\n <Text className={styles.listItem}>{t(\"NoteDataReassignment\")}</Text>\n \n {dataReassignmentUrl ? (",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

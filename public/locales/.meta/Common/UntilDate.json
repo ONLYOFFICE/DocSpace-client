@@ -3,7 +3,7 @@
   "content": "until {{date}}",
   "content_en_sha1_hash": "c3717d11ed3589f3f0ea0359c9c06b79a8717b5d",
   "created_at": "2026-04-10T13:53:45.841Z",
-  "updated_at": "2026-05-08T13:10:45.737Z",
+  "updated_at": "2026-05-15T14:00:07.011Z",
   "comment": {
     "text": "This text appears as a short label next to a date, indicating the expiration date of a storage plan. `{{date}}` will be replaced with a specific date.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
-      "line_number": 274,
+      "line_number": 283,
       "context": "<Text\n as=\"span\"\n fontSize=\"14px\"\n className={styles.rowSubtext}\n >\n ({t(\"UntilDate\", { date: storageExpiryDate })})\n </Text>\n </>\n )}\n </Text>\n </div>",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

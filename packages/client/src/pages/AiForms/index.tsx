@@ -42,24 +42,46 @@ const SECTION_TO_PATH: Record<string, string> = {
 type AiFormsProps = {
   roomId: number | null;
   ensureAppsLoaded: () => void;
+  fetchAppSettings: <T extends Record<string, unknown>>(
+    id: string,
+  ) => Promise<T | null>;
 };
 
-const AiForms = ({ roomId, ensureAppsLoaded }: AiFormsProps) => {
+const AiForms = ({
+  roomId,
+  ensureAppsLoaded,
+  fetchAppSettings,
+}: AiFormsProps) => {
   const { t } = useTranslation(["Common"]);
   const [searchParams] = useSearchParams();
-  const [showSetupDialog, setShowSetupDialog] = React.useState(roomId === null);
+  const [settingsChecked, setSettingsChecked] = React.useState(false);
+  const [showSetupDialog, setShowSetupDialog] = React.useState(false);
 
   React.useEffect(() => {
     ensureAppsLoaded();
   }, [ensureAppsLoaded]);
 
+  // Always verify configuration against the server before deciding whether
+  // to open the install flow — the cache may be empty on direct navigation.
   React.useEffect(() => {
-    setShowSetupDialog(roomId === null);
-  }, [roomId]);
+    let cancelled = false;
+    fetchAppSettings<AiFormsSettings>("ai-forms")
+      .catch(() => null)
+      .then((settings) => {
+        if (cancelled) return;
+        setShowSetupDialog(!settings?.roomId);
+        setSettingsChecked(true);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [fetchAppSettings]);
 
   const handleSetupComplete = () => {
     setShowSetupDialog(false);
   };
+
+  if (!settingsChecked) return null;
 
   if (roomId === null) {
     return (
@@ -85,6 +107,7 @@ const AiForms = ({ roomId, ensureAppsLoaded }: AiFormsProps) => {
 const AiFormsConnected = inject<TStore>(({ appsStore }) => ({
   roomId: appsStore.getSettings<AiFormsSettings>("ai-forms")?.roomId ?? null,
   ensureAppsLoaded: appsStore.ensureLoaded,
+  fetchAppSettings: appsStore.fetchAppSettings,
 }))(observer(AiForms));
 
 export { AiFormsConnected as AiForms };

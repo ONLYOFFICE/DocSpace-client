@@ -3,7 +3,7 @@
   "content": "Try these actions to get started:",
   "content_en_sha1_hash": "1d5a237debc93b5c7c381cce2838e4fb65d3a79c",
   "created_at": "2025-11-13T07:58:04.728Z",
-  "updated_at": "2026-04-11T21:02:04.091Z",
+  "updated_at": "2026-05-15T14:00:06.595Z",
   "comment": {
     "text": "This is a short sentence that appears below a main description in an empty state view, suggesting actions the user can take to get started.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 126,
+      "line_number": 135,
       "context": "<Text\n as=\"span\"\n fontSize=\"12px\"\n style={{ display: \"block\", marginTop: \"8px\" }}\n >\n {t(\"AIRoom:EmptyKnowledgeDescriptionActions\")}\n </Text>\n </>\n );\n \n if (isResultsTab)",
       "module": "/packages/client"
     }
@@ -24,6 +24,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [],
       "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     }
   }
 }

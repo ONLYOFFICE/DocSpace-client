@@ -3,7 +3,7 @@
   "content": "Collaboration",
   "content_en_sha1_hash": "0a4d7a1ab7027fe1ecc947122932b427b1c9e59b",
   "created_at": "2025-05-19T21:30:43.503Z",
-  "updated_at": "2026-04-11T20:57:08.302Z",
+  "updated_at": "2026-05-15T14:00:06.717Z",
   "comment": {
     "text": "This is a label for a type of room where users can collaboratively edit documents. It appears in filters, room type selections, and other UI elements to identify editing rooms.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 55,
+      "line_number": 64,
       "context": "case RoomsType.FillingFormsRoom:\n return t(\"Common:FillingFormRooms\");\n \n case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRooms\");\n \n case RoomsType.ReviewRoom:\n return t(\"Common:Review\");\n \n case RoomsType.ReadOnlyRoom:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1121,
+      "line_number": 1130,
       "context": "case RoomsType.EditingRoom:\n return {\n id: \"filter_type-collaboration\",\n key: RoomsType.EditingRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:CollaborationRooms\"),\n };\n case RoomsType.ReviewRoom:\n return {\n id: \"filter_type-review\",\n key: RoomsType.ReviewRoom,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 335,
+      "line_number": 344,
       "context": "return t(\"Common:Diagrams\");\n \n case `room-${RoomsType.CustomRoom}`:\n return t(\"Common:CustomRooms\");\n case `room-${RoomsType.EditingRoom}`:\n return t(\"Common:CollaborationRooms\");\n \n case `room-${RoomsType.FormRoom}`:\n return t(\"Common:FormRoom\");\n \n case `room-${RoomsType.AIRoom}`:",
       "module": "/packages/shared"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

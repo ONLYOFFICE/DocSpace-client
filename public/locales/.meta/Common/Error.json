@@ -3,7 +3,7 @@
   "content": "Error",
   "content_en_sha1_hash": "7f2f6a15cf8da2b27e5a4af47b58e7ad71c0b3d9",
   "created_at": "2025-05-19T21:30:45.027Z",
-  "updated_at": "2026-05-08T13:10:45.632Z",
+  "updated_at": "2026-05-15T14:00:06.819Z",
   "comment": {
     "text": "This is a general error message displayed in toast notifications or as part of a larger error message when an unexpected issue occurs.",
     "is_auto": true,
@@ -13,103 +13,103 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/ClientForm.utils.ts",
-      "line_number": 53,
+      "line_number": 62,
       "context": "return `${t(\"ErrorName\")} 3`;\n \n case \"EmptyFieldError\":\n return t(\"Common:EmptyFieldError\");\n default:\n return t(\"Common:Error\");\n }\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1304,
+      "line_number": 1313,
       "context": "...transProps,\n }),\n );\n } catch (error) {\n console.error(\"Error adding rooms to group:\", error);\n toastr.error(t(\"Common:Error\"));\n }\n };\n \n onRemoveRoomsFromGroup = async (roomIds, t) => {\n const currentGroupId = this.filesStore.roomsFilter?.groupId;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1304,
+      "line_number": 1313,
       "context": "...transProps,\n }),\n );\n } catch (error) {\n console.error(\"Error adding rooms to group:\", error);\n toastr.error(t(\"Common:Error\"));\n }\n };\n \n onRemoveRoomsFromGroup = async (roomIds, t) => {\n const currentGroupId = this.filesStore.roomsFilter?.groupId;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 159,
+      "line_number": 168,
       "context": "}),\n );\n this.filesStore.resetSelections();\n } catch (error) {\n console.error(\"Error adding rooms to group:\", error);\n toastr.error(this.t(\"Common:Error\"));\n }\n };\n \n private removeFromGroupHandle = async () => {\n const roomIds = this.filesStore.selection.map((room) => room.id);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 159,
+      "line_number": 168,
       "context": "}),\n );\n this.filesStore.resetSelections();\n } catch (error) {\n console.error(\"Error adding rooms to group:\", error);\n toastr.error(this.t(\"Common:Error\"));\n }\n };\n \n private removeFromGroupHandle = async () => {\n const roomIds = this.filesStore.selection.map((room) => room.id);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/portal-settings/DefaultTemplatesStore.ts",
-      "line_number": 97,
+      "line_number": 106,
       "context": "getTemplates = async () => {\n try {\n const res = await getDefaultTemplates();\n this.formTemplatesArray(res);\n } catch (e) {\n toastr.error((e as TData) ?? i18n.t(\"Common:Error\"));\n }\n };\n \n setTemplate = async (selectedFile: number | null, fileExtension: string) => {\n try {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/portal-settings/DefaultTemplatesStore.ts",
-      "line_number": 97,
+      "line_number": 106,
       "context": "getTemplates = async () => {\n try {\n const res = await getDefaultTemplates();\n this.formTemplatesArray(res);\n } catch (e) {\n toastr.error((e as TData) ?? i18n.t(\"Common:Error\"));\n }\n };\n \n setTemplate = async (selectedFile: number | null, fileExtension: string) => {\n try {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/portal-settings/DefaultTemplatesStore.ts",
-      "line_number": 97,
+      "line_number": 106,
       "context": "getTemplates = async () => {\n try {\n const res = await getDefaultTemplates();\n this.formTemplatesArray(res);\n } catch (e) {\n toastr.error((e as TData) ?? i18n.t(\"Common:Error\"));\n }\n };\n \n setTemplate = async (selectedFile: number | null, fileExtension: string) => {\n try {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/portal-settings/DefaultTemplatesStore.ts",
-      "line_number": 97,
+      "line_number": 106,
       "context": "getTemplates = async () => {\n try {\n const res = await getDefaultTemplates();\n this.formTemplatesArray(res);\n } catch (e) {\n toastr.error((e as TData) ?? i18n.t(\"Common:Error\"));\n }\n };\n \n setTemplate = async (selectedFile: number | null, fileExtension: string) => {\n try {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/components/Root.tsx",
-      "line_number": 336,
+      "line_number": 345,
       "context": "setIsShowDeepLink={setIsShowDeepLink}\n deepLinkSettings={deepLinkSettings ?? 0}\n />\n ) : error && error.message === \"restore-backup\" && !isSkipError ? (\n <ErrorContainer\n headerText={t(\"Common:Error\")}\n customizedBodyText={getErrorMessage()}\n isEditor\n />\n ) : (\n <div style={{ width: \"100%\", height: \"100%\" }}>",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/login/src/components/ConfirmRoute.tsx",
-      "line_number": 155,
+      "line_number": 164,
       "context": "validationResult: confirmLinkResult.result,\n });\n if (confirmLinkParams.type === \"LinkInvite\") {\n window.location.href = \"/login/error/link-quota\";\n } else {\n throw new Error(t(\"Common:Error\"));\n }\n return;\n default:\n console.error(\"unknown link\", {\n confirmLinkParams,",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/utils/index.ts",
-      "line_number": 67,
+      "line_number": 76,
       "context": "};\n \n export const getMessageKeyTranslate = (t: TTranslation, message: string) => {\n switch (message) {\n case \"Error\":\n return t(\"Common:Error\");\n case \"None\":\n return t(\"Common:UnknownError\");\n case \"ErrorUserNotFound\":\n return t(\"Errors:ErrorUserNotFound\");\n case \"ErrorExpiredActivationLink\":",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/utils/index.ts",
-      "line_number": 67,
+      "line_number": 76,
       "context": "};\n \n export const getMessageKeyTranslate = (t: TTranslation, message: string) => {\n switch (message) {\n case \"Error\":\n return t(\"Common:Error\");\n case \"None\":\n return t(\"Common:UnknownError\");\n case \"ErrorUserNotFound\":\n return t(\"Errors:ErrorUserNotFound\");\n case \"ErrorExpiredActivationLink\":",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/utils/index.ts",
-      "line_number": 67,
+      "line_number": 76,
       "context": "};\n \n export const getMessageKeyTranslate = (t: TTranslation, message: string) => {\n switch (message) {\n case \"Error\":\n return t(\"Common:Error\");\n case \"None\":\n return t(\"Common:UnknownError\");\n case \"ErrorUserNotFound\":\n return t(\"Errors:ErrorUserNotFound\");\n case \"ErrorExpiredActivationLink\":",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/shared/pages/Branding/BrandName/index.tsx",
-      "line_number": 122,
+      "line_number": 131,
       "context": "maxLength: 40,\n });\n case \"SpecSymbols\":\n return t(\"Common:BrandNameForbidden\");\n default:\n return t(\"Common:Error\");\n }\n };\n \n return (\n <div",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/EncryptionPortal/index.tsx",
-      "line_number": 155,
+      "line_number": 164,
       "context": "};\n getSettings();\n }, [statusEncryption]);\n \n const headerText = errorMessage\n ? t(\"Error\")\n : statusEncryption === EncryptionStatus.Decrypted ||\n statusEncryption === EncryptionStatus.DecryptionStarted\n ? t(\"DecryptionPortalTitle\")\n : t(\"EncryptionPortalTitle\");",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/PreparationPortal/index.tsx",
-      "line_number": 147,
+      "line_number": 156,
       "context": "if (!isDialog) getRecoveryProgress();\n }, [ready, getRecoveryProgress, isDialog]);\n \n const headerText = errorMessage\n ? t(\"Common:Error\")\n : t(\"Common:PreparationPortalTitle\");\n \n const componentBody = errorMessage ? (\n <Text className={styles.preparationPortalError}>{`${errorMessage}`}</Text>\n ) : (",
       "module": "/packages/shared"
     }
@@ -245,7 +245,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

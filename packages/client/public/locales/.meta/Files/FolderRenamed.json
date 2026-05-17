@@ -3,7 +3,7 @@
   "content": "The folder '{{folderTitle}}' is renamed to '{{newFoldedTitle}}'",
   "content_en_sha1_hash": "00e0cd3e6f810877e66c2784d96ec62ae9adc140",
   "created_at": "2025-05-19T21:30:55.695Z",
-  "updated_at": "2026-04-11T21:09:30.458Z",
+  "updated_at": "2026-05-15T14:00:06.614Z",
   "comment": {
     "text": "This is a toast message confirming a folder has been successfully renamed. It appears after a user renames a folder, with `{{folderTitle}}` being the original name and `{{newFoldedTitle}}` being the new name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/GlobalEvents/RenameEvent.js",
-      "line_number": 116,
+      "line_number": 125,
       "context": "})\n : await renameFolder(item.id, value)\n .then(() => completeAction(item, type))\n .then(() => {\n toastr.success(\n t(\"FolderRenamed\", {\n folderTitle: item.title,\n newFoldedTitle: value,\n }),\n );\n })",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:53.938772Z"
     },
     "si": {
       "ai_translated": false,

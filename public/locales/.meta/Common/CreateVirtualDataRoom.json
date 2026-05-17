@@ -3,7 +3,7 @@
   "content": "Create virtual data room",
   "content_en_sha1_hash": "cffe205b69e44d4beb86299712697b1f2e680fe5",
   "created_at": "2025-05-19T21:30:43.931Z",
-  "updated_at": "2026-04-23T17:24:01.676Z",
+  "updated_at": "2026-05-15T14:00:06.623Z",
   "comment": {
     "text": "This is a button label that allows users to create a new virtual data room. It appears on empty screens where no rooms exist yet, and in selection dialogs for creating different room types.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/components/selector/sub-components/EmptySreen/EmptyScreenFormRoom.tsx",
-      "line_number": 62,
+      "line_number": 71,
       "context": ": t(\"SelectorVDREmptyScreenDescription\") || \"\";\n \n const buttonLabel =\n createDefineRoomType === RoomType.FillingFormsRoom\n ? t(\"CreateFormFillingRoom\") || \"\"\n : t(\"CreateVirtualDataRoom\") || \"\";\n \n return (\n <section className={styles.newEmptyScreen}>\n <FormRoomEmptyScreenImage className=\"empty-image\" />\n <Heading level={3} className=\"empty-header\">",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/ShareCollectSelector/ShareCollectSelector.tsx",
-      "line_number": 283,
+      "line_number": 292,
       "context": "icon: InfoIcon,\n onClose: onCloseInfoBar,\n };\n \n const createDefineRoomLabels: Partial<Record<RoomsType, string>> = {\n [RoomsType.VirtualDataRoom]: t(\"Common:CreateVirtualDataRoom\"),\n [RoomsType.FormRoom]: t(\"Common:CreateFormFillingRoom\"),\n };\n \n return (\n <FilesSelectorWrapper",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/components/StartFillingSelectDialog.tsx",
-      "line_number": 74,
+      "line_number": 83,
       "context": "icon: InfoIcon,\n onClose: onCloseInfoBar,\n };\n \n const createDefineRoomLabels: Partial<Record<RoomsType, string>> = {\n [RoomsType.VirtualDataRoom]: t(\"Common:CreateVirtualDataRoom\"),\n [RoomsType.FormRoom]: t(\"Common:CreateFormFillingRoom\"),\n };\n \n return (\n <FilesSelectorWrapper",
       "module": "/packages/doceditor"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

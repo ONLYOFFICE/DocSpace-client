@@ -3,7 +3,7 @@
   "content": "Every month",
   "content_en_sha1_hash": "7f3932f9cb96cb99072771c992c0ce3c0b342bfb",
   "created_at": "2025-05-19T21:30:45.176Z",
-  "updated_at": "2026-04-11T20:53:07.673Z",
+  "updated_at": "2026-05-15T14:00:06.927Z",
   "comment": {
     "text": "This is a placeholder text for a dropdown menu or a label in a list, indicating a monthly recurrence for a scheduled event or setting.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/cron/Cron.utils.ts",
-      "line_number": 527,
+      "line_number": 536,
       "context": "export const getLabel = (period: PeriodType, t: TFunction) => {\n switch (period) {\n case \"Year\":\n return t(\"EveryYear\");\n case \"Month\":\n return t(\"EveryMonth\");\n case \"Week\":\n return t(\"EveryWeek\");\n case \"Day\":\n return t(\"EveryDay\");\n case \"Hour\":",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/cron/sub-components/Months.tsx",
-      "line_number": 41,
+      "line_number": 50,
       "context": "<Select\n unit={unit}\n value={months}\n setValue={setMonths}\n dropDownMaxHeight={300}\n placeholder={t(\"EveryMonth\")}\n isDisabled={isDisabled}\n dataTestId={dataTestId}\n />\n );\n },",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/hooks/index.ts",
-      "line_number": 54,
+      "line_number": 63,
       "context": "key: 1,\n label: t(\"Common:EveryWeek\"),\n },\n {\n key: 2,\n label: t(\"Common:EveryMonth\"),\n },\n ],\n [t],\n );",
       "module": "/packages/shared"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "File is currently edited by:",
   "content_en_sha1_hash": "92b2cc7ef909ac1b88cb53e3754ac541b1861a48",
   "created_at": "2026-02-18T14:55:55.967Z",
-  "updated_at": "2026-04-11T21:47:56.781Z",
+  "updated_at": "2026-05-15T14:00:06.590Z",
   "comment": {
     "text": "This is the header text for a tooltip or mobile panel that lists users currently editing a file. It appears when multiple users are collaborating on a document.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EditorsTooltip/index.tsx",
-      "line_number": 95,
+      "line_number": 104,
       "context": "minWidth: \"200px\",\n }}\n >\n <Scrollbar autoHide={false}>\n <div className={styles.tooltipHeader}>\n {t(\"FileCurrentlyEditedBy\")}\n </div>\n <EditorsList editors={editors} avatarSize={AvatarSize.extraSmall} />\n </Scrollbar>\n </div>\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EditorsTooltip/sub-components/EditorsTooltipMobile.tsx",
-      "line_number": 62,
+      "line_number": 71,
       "context": "data-testid=\"editors-tooltip-mobile\"\n onClick={(e) => e.stopPropagation()}\n >\n <Scrollbar autoHide={false}>\n <div className={styles.tooltipHeader}>\n {t(\"FileCurrentlyEditedBy\")}\n </div>\n <EditorsList\n editors={editors}\n avatarSize={AvatarSize.min}\n isMobile={true}",
       "module": "/packages/client"
     }
@@ -163,7 +163,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

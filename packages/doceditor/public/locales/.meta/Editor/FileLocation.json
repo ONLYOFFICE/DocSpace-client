@@ -3,7 +3,7 @@
   "content": "Open file location",
   "content_en_sha1_hash": "3e3e6fccc753b74da3c1194baf8f98ec4f2b9768",
   "created_at": "2025-05-19T21:30:57.126Z",
-  "updated_at": "2026-04-13T14:59:05.923Z",
+  "updated_at": "2026-05-15T14:00:06.907Z",
   "comment": {
     "text": "This is a button label that, when clicked, navigates the user to the folder containing the currently open file.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/hooks/useGoBackAndClose.ts",
-      "line_number": 54,
+      "line_number": 63,
       "context": "Editor: { [key: string]: string };\n }\n )?.Editor as {\n [key: string]: string;\n }\n )?.FileLocation; // t(\"FileLocation\");\n \n const withoutGoBackText = sdkConfig?.withoutGoBackText;\n \n if (editorGoBack === false || user?.isVisitor || !user) {\n console.log(\"goBack\", goBack);",
       "module": "/packages/doceditor"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-04T13:03:19.452785Z"
+      "approved_at": "2026-05-15T15:04:54.611151Z"
     },
     "si": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "Model",
   "content_en_sha1_hash": "68c2cc7f0ceaa3e499ecb4db331feb4debbbcc23",
   "created_at": "2026-03-31T15:18:16.635Z",
-  "updated_at": "2026-04-23T17:24:02.139Z",
+  "updated_at": "2026-05-15T14:00:06.980Z",
   "comment": {
     "text": "This is a short label for a dropdown menu in the AI Agent settings, allowing users to select a specific AI model.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/AIAgentForm.tsx",
-      "line_number": 357,
+      "line_number": 366,
       "context": "</FieldContainer>\n \n <FieldContainer\n labelVisible\n isVertical\n labelText={t(\"Common:AIAgentModel\")}\n removeMargin\n >\n <ComboBox\n options={modelOptions}\n selectedOption={selectedModelOption}",
       "module": "/packages/sdk"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

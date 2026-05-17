@@ -3,7 +3,7 @@
   "content": "Date",
   "content_en_sha1_hash": "eb9a4bc1c0c153e4e4b042a79113b815b7e3021d",
   "created_at": "2025-05-19T21:30:44.395Z",
-  "updated_at": "2026-04-13T14:59:05.900Z",
+  "updated_at": "2026-05-15T14:00:06.870Z",
   "comment": {
     "text": "This is a table header label for a column displaying a date. It appears in transaction history, audit trail, and login history tables.",
     "is_auto": true,
@@ -13,25 +13,25 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/TableView/TableHeader.tsx",
-      "line_number": 50,
+      "line_number": 59,
       "context": "const isAiTools = serviceName === AI_TOOLS;\n \n const defaultColumns = [\n {\n key: \"Date\",\n title: t(\"Date\"),\n enable: true,\n resizable: true,\n sortBy: \"AZ\",\n active: true,",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/TableView/TableHeader.js",
-      "line_number": 54,
+      "line_number": 63,
       "context": "minWidth: 210,\n },\n \n {\n key: \"Date\",\n title: t(\"Common:Date\"),\n enable: true,\n resizable: true,\n onChange: this.onColumnChange,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/login-history/TableView/TableHeader.js",
-      "line_number": 54,
+      "line_number": 63,
       "context": "active: true,\n minWidth: 210,\n },\n {\n key: \"Date\",\n title: t(\"Common:Date\"),\n enable: true,\n resizable: true,\n onChange: this.onColumnChange,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/login/active-session/SessionsTable/TableView/SessionsTableHeader.js",
-      "line_number": 90,
+      "line_number": 99,
       "context": "isDisabled: true,\n onChange: onColumnChange,\n },\n {\n key: \"Date\",\n title: t(\"Common:Date\"),\n enable: true,\n resizable: true,\n onChange: onColumnChange,\n },\n {",
       "module": "/packages/client"
     }
@@ -167,7 +167,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

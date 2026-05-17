@@ -3,7 +3,7 @@
   "content": "Download {{organizationName}} Desktop Editors for Linux",
   "content_en_sha1_hash": "98bd0b5fb107da6bfa3818ccecab0023295ef88d",
   "created_at": "2025-05-19T21:30:46.576Z",
-  "updated_at": "2026-04-11T20:48:38.025Z",
+  "updated_at": "2026-05-15T14:00:07.023Z",
   "comment": {
     "text": "This is the tooltip text for a button that, when clicked, opens a new tab to download the ONLYOFFICE Desktop Editors for Linux. `{{organizationName}}` is the name of the organization, typically \"ONLYOFFICE\".",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/components/article/sub-components/Apps.tsx",
-      "line_number": 109,
+      "line_number": 118,
       "context": "className={styles.linuxIcon}\n onClick={() => window.open(downloaddesktopUrl)}\n iconNode={<LinuxReactSvgUrl />}\n size={32}\n isFill\n title={t(\"MobileLinux\", {\n organizationName: logoText,\n })}\n />\n ) : null}",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "{{productName}} restoring",
   "content_en_sha1_hash": "1a4df26daa825b316038b98a7979d755b829dc9b",
   "created_at": "2025-05-19T21:30:53.435Z",
-  "updated_at": "2026-04-12T04:14:00.797Z",
+  "updated_at": "2026-05-15T14:00:06.692Z",
   "comment": {
     "text": "This is the title of a modal dialog box that appears when the DocSpace portal is being restored. `{{productName}}` will be replaced with the product's brand name (e.g., \"ONLYOFFICE DocSpace\").",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/PreparationPortalDialog/index.js",
-      "line_number": 50,
+      "line_number": 59,
       "context": "displayType=\"modal\"\n isCloseable={false}\n isLarge\n >\n <ModalDialog.Header>\n {t(\"PortalRestoring\", { productName: getBrandName(\"ProductName\") })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.wrapper}>\n <PreparationPortal withoutHeader isDialog style={{ padding: \"0\" }} />\n </div>",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

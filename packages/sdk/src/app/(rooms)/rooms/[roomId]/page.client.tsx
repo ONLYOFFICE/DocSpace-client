@@ -35,16 +35,11 @@ import type {
 } from "@docspace/shared/api/files/types";
 import type { TSettings } from "@docspace/shared/api/settings/types";
 import type { TUser } from "@docspace/shared/api/people/types";
-import { useTranslation } from "react-i18next";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
 import { OpenFolderContext } from "@/app/(docspace)/_contexts/OpenFolderContext";
-import { RootBreadcrumbContext } from "@/app/(docspace)/_contexts/RootBreadcrumbContext";
-
 import { useDocsPageInit } from "../../../(personal-files)/_hooks/useDocsPageInit";
 import DocsLayout from "../../../(personal-files)/_components/docs-layout";
-
-const ROOMS_ROOT_ID = "__rooms_root__";
 
 type RoomFilesPageProps = {
   authToken: string;
@@ -64,7 +59,7 @@ export default function RoomFilesPage({
   user,
 }: RoomFilesPageProps) {
   const router = useRouter();
-  const { t } = useTranslation(["Common"]);
+
   const isReady = useDocsPageInit({
     authToken,
     filesSettings,
@@ -72,20 +67,17 @@ export default function RoomFilesPage({
     user,
   });
 
+  const roomsRootId = folderData.pathParts?.[0]?.id;
+
   const handleOpenFolder = React.useCallback(
     (folderId: number | string) => {
-      if (folderId === ROOMS_ROOT_ID) {
+      if (roomsRootId !== undefined && folderId === roomsRootId) {
         router.push("/rooms");
         return true;
       }
       return false;
     },
-    [router],
-  );
-
-  const roomsRootBreadcrumb = React.useMemo(
-    () => ({ id: ROOMS_ROOT_ID, title: t("Common:Rooms") }),
-    [t],
+    [router, roomsRootId],
   );
 
   if (!isReady) {
@@ -108,18 +100,16 @@ export default function RoomFilesPage({
 
   return (
     <OpenFolderContext.Provider value={handleOpenFolder}>
-      <RootBreadcrumbContext.Provider value={roomsRootBreadcrumb}>
-        <DocsLayout
-          folders={folders}
-          files={files}
-          total={total}
-          current={current}
-          pathParts={pathParts}
-          filesSettings={filesSettings}
-          portalSettings={portalSettings}
-          filesFilter={filesFilter}
-        />
-      </RootBreadcrumbContext.Provider>
+      <DocsLayout
+        folders={folders}
+        files={files}
+        total={total}
+        current={current}
+        pathParts={pathParts}
+        filesSettings={filesSettings}
+        portalSettings={portalSettings}
+        filesFilter={filesFilter}
+      />
     </OpenFolderContext.Provider>
   );
 }

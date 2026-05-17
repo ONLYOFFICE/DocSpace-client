@@ -48,7 +48,6 @@ import useContextMenuModel from "../../_hooks/useContextMenuModel";
 import useHeaderMenu from "../../_hooks/useHeaderMenu";
 import { DeleteContext } from "../../_contexts/DeleteContext";
 import { FileOperationsContext } from "../../_contexts/FileOperationsContext";
-import { RootBreadcrumbContext } from "../../_contexts/RootBreadcrumbContext";
 
 import type { HeaderProps } from "./Header.types";
 
@@ -90,7 +89,9 @@ const Header = ({
     onRestoreClick: isTrashSection ? fileOpsCtx?.restoreItem : undefined,
     onCopySelectedClick: !isTrashSection ? fileOpsCtx?.copyItems : undefined,
     onMoveSelectedClick: !isTrashSection ? fileOpsCtx?.moveItems : undefined,
-    onRestoreSelectedClick: isTrashSection ? fileOpsCtx?.restoreItems : undefined,
+    onRestoreSelectedClick: isTrashSection
+      ? fileOpsCtx?.restoreItems
+      : undefined,
   });
   const { getHeaderMenu, onCheckboxChange } = useHeaderMenu();
 
@@ -101,13 +102,13 @@ const Header = ({
   const { t } = useTranslation(["Common"]);
 
   const { openFolder } = useFolderActions({ t });
-  const rootBreadcrumb = React.useContext(RootBreadcrumbContext);
 
   const title = current?.title;
   const rootFolderId = current?.rootFolderId;
   const id = current?.id;
 
   const isRoomsFolder = pathParts?.[0]?.id === rootFolderId;
+  const isInRoomsContext = pathParts?.[0]?.folderType === FolderType.Rooms;
 
   const navigationItems: TNavigationItem[] = useMemo(() => {
     if (!pathParts) return [];
@@ -118,20 +119,12 @@ const Header = ({
         title: p.title,
         isRootRoom: !p.roomType,
       }))
-      .filter((item) => item.isRootRoom);
+      .filter((item) => isInRoomsContext || item.isRootRoom);
 
     items.pop();
 
-    const reversed = items.reverse();
-    if (rootBreadcrumb) {
-      reversed.push({
-        id: rootBreadcrumb.id,
-        title: rootBreadcrumb.title,
-        isRootRoom: true,
-      });
-    }
-    return reversed;
-  }, [pathParts, rootBreadcrumb]);
+    return items.reverse();
+  }, [pathParts, isInRoomsContext]);
 
   useEffect(() => {
     navigationStore.setNavigationItems(navigationItems);
@@ -247,3 +240,4 @@ const Header = ({
 };
 
 export default observer(Header);
+

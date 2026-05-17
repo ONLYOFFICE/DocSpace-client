@@ -56,7 +56,7 @@ import useItemList, {
 
 import RowView from "@/app/(docspace)/(files)/_components/row-view";
 import TileView from "@/app/(docspace)/(files)/_components/tile-view";
-import TableView from "@/app/(docspace)/(files)/_components/table-view";
+import RoomsTableView from "../rooms-table-view";
 import EmptyView from "../empty-view";
 import useResetSelectionClick from "@/app/(docspace)/(files)/_components/list/hooks/useResetSelectionClick";
 
@@ -80,7 +80,6 @@ const RoomsList = ({
   current,
 }: RoomsListProps) => {
   const timezone = portalSettings.timezone;
-  const displayFileExtension = filesSettings.displayFileExtension;
   const searchParams = useSearchParams();
 
   const { setIsEmptyList, filesViewAs, setFilesViewAs, currentDeviceType } =
@@ -284,7 +283,7 @@ const RoomsList = ({
 
   if (filesViewAs === "table") {
     return (
-      <TableView
+      <RoomsTableView
         total={total}
         items={visibleItems}
         hasMoreFiles={hasNextPage}
@@ -301,7 +300,6 @@ const RoomsList = ({
           window.history.pushState(null, "", `?${newFilter.toUrlParams()}`);
         }}
         timezone={timezone}
-        displayFileExtension={displayFileExtension}
         fetchMoreFiles={fetchMoreRooms}
       />
     );
@@ -314,7 +312,7 @@ const RoomsList = ({
       hasMoreFiles={hasNextPage}
       filterSortBy={filter.sortBy as TSortBy}
       timezone={timezone}
-      displayFileExtension={displayFileExtension}
+      displayFileExtension={false}
       fetchMoreFiles={fetchMoreRooms}
     />
   );

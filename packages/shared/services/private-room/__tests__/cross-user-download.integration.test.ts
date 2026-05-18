@@ -41,22 +41,20 @@ import {
   type PrivacyroomAccessHandlerHandle,
 } from "../../../__mocks__/handlers";
 
+import { getRoomEncryptionKeys } from "../../../api/privacy";
 import { generateIdentityKeyPair } from "../../encryption/identity";
 import { encryptFile } from "../../encryption/file-keys";
 import { wrapDekForRecipients } from "../../encryption/room-file-access";
 import { resetTofuStores } from "../../encryption/tofu-store";
 import { arrayBufferToBase64 } from "../../encryption/utils";
-import {
-  getCachedEncryptedFilename,
-  clearEncryptedFilenameCache,
-} from "../../encryption/filename-cache";
 import type { IdentityKeyPair } from "../../encryption/types";
 
-import { recoverEncryptedFilenames } from "../encrypted-filename-recovery";
+import { downloadAndDecryptFile } from "../encrypted-download";
 
 const PORT = "3000";
-const ROOM_ID = 6600;
+const ROOM_ID = 6700;
 const ALICE_ID = "11111111-1111-1111-1111-111111111111";
+const BOB_ID = "22222222-2222-2222-2222-222222222222";
 
 function pubB64(kp: IdentityKeyPair): string {
   return arrayBufferToBase64(kp.publicKey.buffer as ArrayBuffer);
@@ -120,27 +118,31 @@ afterAll(() => server.close());
 beforeEach(() => {
   filesHandle.current?.reset();
   accessHandle.current?.reset();
-  clearEncryptedFilenameCache();
   resetTofuStores();
   // biome-ignore lint/suspicious/noExplicitAny: jsdom missing indexedDB
   (globalThis as any).indexedDB = mockIDB;
 });
 
-describe("recoverEncryptedFilenames — integration via MSW", () => {
-  it("decrypts and caches the original filename via Range fetch + access lookup", async () => {
+describe("download of file uploaded by another room member", () => {
+  it("Bob decrypts a file Alice uploaded when roomMemberKeys include Alice's publicKey", async () => {
     const alice = await generateIdentityKeyPair();
+    const bob = await generateIdentityKeyPair();
 
-    const plain = new TextEncoder().encode("Body content for filename recovery.");
-    const { encryptedBlob, dek } = await encryptFile(plain, {
-      fileName: "quarterly-report.pdf",
+    const originalText = "Alice's secret memo for the team.";
+    const plainBytes = new TextEncoder().encode(originalText);
+    const { encryptedBlob, dek } = await encryptFile(plainBytes, {
+      fileName: "team-memo.txt",
     });
+    const fileId = 8801;
 
-    const fileId = 8888;
     const wrapped = await wrapDekForRecipients({
       dek,
       senderIdentity: alice,
       senderUserId: ALICE_ID,
-      recipients: [{ userId: ALICE_ID, publicKey: pubB64(alice) }],
+      recipients: [
+        { userId: ALICE_ID, publicKey: pubB64(alice) },
+        { userId: BOB_ID, publicKey: pubB64(bob) },
+      ],
       fileId,
     });
 
@@ -148,109 +150,109 @@ describe("recoverEncryptedFilenames — integration via MSW", () => {
     filesHandle.current!.setFiles([
       {
         id: fileId,
-        title: "quarterly-report.pdf",
-        serverTitle: "obfuscated-uuid.pdf",
-        size: plain.byteLength,
+        title: "team-memo.txt",
+        serverTitle: "obfuscated.txt",
+        size: plainBytes.byteLength,
         encrypted: true,
         fileKeys: wrapped,
         bytes: encryptedBytes,
       },
     ]);
 
-    filesHandle.current!.setRoomUserKeys([
-      {
-        id: "1",
-        userId: ALICE_ID,
-        publicKey: pubB64(alice),
-        privateKeyEnc: "",
-        date: "2026-01-01T00:00:00.000Z",
-        cryptoEngineId: "",
-      },
-    ]);
+    // Server-side: /privacyroom/{roomId}/access returns ALL room members'
+    // identity public keys. This is the source of truth for roomMemberKeys
+    // during unwrap, not the per-user `userKeys` field on /files/{id}/access.
     accessHandle.current!.setRoomKeys(ROOM_ID, [
       {
-        id: "1",
+        id: "alice-1",
         userId: ALICE_ID,
         publicKey: pubB64(alice),
         privateKeyEnc: "",
       },
+      {
+        id: "bob-1",
+        userId: BOB_ID,
+        publicKey: pubB64(bob),
+        privateKeyEnc: "",
+      },
     ]);
 
-    expect(getCachedEncryptedFilename(fileId)).toBeNull();
+    // This is the call client code now does (mirrors what
+    // FilesActionsStore.loadRoomMemberKeysFor / encrypted-filename-recovery.
+    // loadRoomMemberKeys do): fetch full room roster, pass to unwrap.
+    const roomKeys = await getRoomEncryptionKeys(ROOM_ID);
+    const roomMemberKeys = roomKeys
+      .filter((k) => k.userId && k.publicKey)
+      .map((k) => ({ userId: String(k.userId), publicKey: k.publicKey }));
 
-    await recoverEncryptedFilenames(
-      [
-        {
-          id: fileId,
-          viewUrl: `http://localhost:${PORT}/api/2.0/files/file/${fileId}/download`,
-        },
-      ],
-      ALICE_ID,
-      alice,
-      ROOM_ID,
-    );
+    const result = await downloadAndDecryptFile({
+      downloadUrl: `http://localhost:${PORT}/api/2.0/files/file/${fileId}/download`,
+      fileId,
+      fileKeys: wrapped,
+      roomMemberKeys,
+      userId: BOB_ID,
+      identity: bob,
+      originalFileName: "obfuscated.txt",
+      originalFileType: "text/plain",
+    });
 
-    expect(getCachedEncryptedFilename(fileId)).toBe("quarterly-report.pdf");
+    expect(result.success).toBe(true);
+    expect(result.file).toBeDefined();
+    const decryptedBytes = await blobToUint8Array(result.file!);
+    expect(new TextDecoder().decode(decryptedBytes)).toBe(originalText);
   });
 
-  it("skips files already in the filename cache", async () => {
+  it("regression: unwrap fails when roomMemberKeys omit the sender (mirrors the pre-fix bug)", async () => {
     const alice = await generateIdentityKeyPair();
+    const bob = await generateIdentityKeyPair();
 
-    const plain = new TextEncoder().encode("Anything");
-    const { encryptedBlob, dek } = await encryptFile(plain, {
-      fileName: "should-not-be-fetched.docx",
+    const plainBytes = new TextEncoder().encode("Anything.");
+    const { encryptedBlob, dek } = await encryptFile(plainBytes, {
+      fileName: "secret.txt",
     });
-    const fileId = 8889;
+    const fileId = 8802;
+
     const wrapped = await wrapDekForRecipients({
       dek,
       senderIdentity: alice,
       senderUserId: ALICE_ID,
-      recipients: [{ userId: ALICE_ID, publicKey: pubB64(alice) }],
+      recipients: [
+        { userId: ALICE_ID, publicKey: pubB64(alice) },
+        { userId: BOB_ID, publicKey: pubB64(bob) },
+      ],
       fileId,
     });
+
     const encryptedBytes = await blobToUint8Array(encryptedBlob);
     filesHandle.current!.setFiles([
       {
         id: fileId,
-        title: "cached.docx",
-        serverTitle: "obfuscated-uuid.docx",
+        title: "secret.txt",
+        serverTitle: "obfuscated2.txt",
+        size: plainBytes.byteLength,
         encrypted: true,
         fileKeys: wrapped,
         bytes: encryptedBytes,
       },
     ]);
 
-    const { rememberEncryptedFilename } = await import(
-      "../../encryption/filename-cache"
-    );
-    rememberEncryptedFilename(fileId, "from-cache.docx");
+    // The OLD buggy path passed `encryptionInfo.userKeys` here — which is the
+    // CURRENT user's identity keys only. For Bob downloading Alice's file
+    // this contains Bob's own keys, not Alice's. Unwrap can't find the sender.
+    const bobOnlyKeys = [{ userId: BOB_ID, publicKey: pubB64(bob) }];
 
-    accessHandle.current!.setRoomKeys(ROOM_ID, [
-      {
-        id: "1",
-        userId: ALICE_ID,
-        publicKey: pubB64(alice),
-        privateKeyEnc: "",
-      },
-    ]);
+    const result = await downloadAndDecryptFile({
+      downloadUrl: `http://localhost:${PORT}/api/2.0/files/file/${fileId}/download`,
+      fileId,
+      fileKeys: wrapped,
+      roomMemberKeys: bobOnlyKeys,
+      userId: BOB_ID,
+      identity: bob,
+      originalFileName: "obfuscated2.txt",
+      originalFileType: "text/plain",
+    });
 
-    await recoverEncryptedFilenames(
-      [
-        {
-          id: fileId,
-          viewUrl: `http://localhost:${PORT}/api/2.0/files/file/${fileId}/download`,
-        },
-      ],
-      ALICE_ID,
-      alice,
-      ROOM_ID,
-    );
-
-    expect(getCachedEncryptedFilename(fileId)).toBe("from-cache.docx");
-
-    const downloads = filesHandle.current!
-      .getRequests()
-      .filter((r) => r.url.endsWith(`/files/file/${fileId}/download`));
-    expect(downloads).toHaveLength(0);
+    expect(result.success).toBe(false);
+    expect(result.error).toMatch(/sender|public key|access/i);
   });
 });

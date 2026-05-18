@@ -1464,6 +1464,8 @@
   "ThirdPartyStorage": "Stocare de la terți",
   "ThirdPartyStorageDescription": "Utilizaţi servicii terțe de stocare a datelor pentru această sală. Puteți crea un folder nou sau selectați unul existent din spaţiul de stocare conectat.",
   "ThisDevice": "Acest dispozitiv",
+  "UseOnThisDevice": "Folosește pe acest dispozitiv",
+  "EncryptionKeyActivated": "Cheia a fost setată ca activă pe acest dispozitiv",
   "ThisSectionIsEmpty": "Secțiunea nu conține niciun element",
   "Title": "Titlu",
   "TitleSelectFile": "Selectează",

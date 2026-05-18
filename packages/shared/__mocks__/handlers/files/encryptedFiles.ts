@@ -273,6 +273,10 @@ export const encryptedFilesHandlers = (
   const apiBase = `${BASE_URL}:${port}/${API_PREFIX}`;
 
   return [
+    /**
+     * Mirrors VirtualRoomsCommonController.GetVirtualRooms / FoldersControllerHelper
+     * folder listing — returns the room's files+folders in the standard DTO shape.
+     */
     http.get(`${apiBase}/files/:folderId(\\d+)`, ({ params, request }) => {
       const folderId = Number(params.folderId);
       if (folderId !== roomId) {
@@ -293,6 +297,10 @@ export const encryptedFilesHandlers = (
       });
     }),
 
+    /**
+     * Mirrors FoldersController.GetFolder.
+     * @see server/products/ASC.Files/Server/Api/FoldersController.cs (HttpGet "folder/{folderId}")
+     */
     http.get(
       `${apiBase}/files/folder/:folderId(\\d+)`,
       ({ params, request }) => {
@@ -303,6 +311,10 @@ export const encryptedFilesHandlers = (
       },
     ),
 
+    /**
+     * Mirrors UploadController.CheckUpload — preflight collision check; returns
+     * the list of files in the destination folder that would conflict.
+     */
     http.post(
       `${apiBase}/files/:folderId(\\d+)/upload/check`,
       async ({ params, request }) => {
@@ -318,6 +330,18 @@ export const encryptedFilesHandlers = (
       },
     ),
 
+    /**
+     * Mirrors FilesController.GetEncryptionInfoAsync.
+     * @see server/products/ASC.Files/Server/Api/FilesController.cs (HttpGet "{fileId}/access")
+     *
+     * Response shape (FileEncryptionInfoDto):
+     *  - userKeys: CURRENT user's identity keys (from
+     *    encryptionKeyPairDtoHelper.GetKeyPairAsync()). NOT room members' keys.
+     *  - fileKeys: per-recipient wrapped DEKs scoped to current user.
+     *
+     * Clients that need room members' public keys for unwrap MUST call
+     * GET /privacyroom/{roomId}/access (GetUserKeysForRoom) instead.
+     */
     http.get(
       `${apiBase}/files/:fileId(\\d+)/access`,
       ({ params, request }) => {
@@ -340,6 +364,13 @@ export const encryptedFilesHandlers = (
       },
     ),
 
+    /**
+     * Mirrors FilesController.SetEncryptionInfoAsync.
+     * @see server/products/ASC.Files/Server/Api/FilesController.cs (HttpPut "{fileId}/access")
+     *
+     * Replaces the file's per-recipient wrapped DEKs. Body is either
+     * EncryptedFileKey[] (legacy) or { keys: EncryptedFileKey[] }.
+     */
     http.put(
       `${apiBase}/files/:fileId(\\d+)/access`,
       async ({ params, request }) => {
@@ -360,6 +391,32 @@ export const encryptedFilesHandlers = (
       },
     ),
 
+    /**
+     * Mirrors SecurityController.GetEncryptionAccess.
+     * @see server/products/ASC.Files/Server/Api/SecurityController.cs (HttpGet "file/{fileId}/publickeys")
+     *
+     * Returns identity public keys of every user who currently has share/read
+     * access to the file. Used by re-wrap flow (UploadDataStore.encryptKeysForRoomMembers)
+     * to find new recipients AND to look up the sender's public key during unwrap.
+     */
+    http.get(
+      `${apiBase}/files/file/:fileId(\\d+)/publickeys`,
+      ({ params, request }) => {
+        const fileId = Number(params.fileId);
+        const f = files.get(fileId);
+        requests.push({
+          method: "GET",
+          url: new URL(request.url).pathname,
+        });
+        if (!f) return errorResponse(404, `file ${fileId} not found`);
+        return okResponse(roomUserKeys);
+      },
+    ),
+
+    /**
+     * Mock-only: serves the encrypted blob for download. Real server routes
+     * download via FileHandler.ashx with a signed token; tests use this stub.
+     */
     http.get(
       `${apiBase}/files/file/:fileId(\\d+)/download`,
       ({ params, request }) => {
@@ -383,6 +440,13 @@ export const encryptedFilesHandlers = (
       },
     ),
 
+    /**
+     * Mirrors UploadController.CreateUploadSession.
+     * @see server/products/ASC.Files/Server/Api/UploadController.cs
+     *
+     * Starts a chunked upload session for the given folder; returns
+     * { id, path, bytes_total, bytes_uploaded, created, expired }.
+     */
     http.post(
       `${apiBase}/files/:folderId(\\d+)/session`,
       async ({ params, request }) => {
@@ -419,6 +483,11 @@ export const encryptedFilesHandlers = (
       },
     ),
 
+    /**
+     * Mirrors UploadController.UploadChunkInSession — accepts one chunk of the
+     * session's payload as multipart/form-data. On the final chunk the server
+     * materialises the file record and returns its full FileDto.
+     */
     http.post(
       `${apiBase}/files/:folderId(\\d+)/session/:sessionId/upload`,
       async ({ params, request }) => {

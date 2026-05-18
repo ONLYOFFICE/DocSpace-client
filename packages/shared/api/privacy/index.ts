@@ -29,8 +29,6 @@ import type {
   TPrivacyRoomRequest,
   TPrivacySettingsRequest,
   TEncryptionKeyPair,
-  TPrivacyRoomKeysResponse,
-  TSetFileAccessKeysRequest,
 } from "./types";
 
 export async function getPrivacySettings() {
@@ -57,19 +55,19 @@ export async function setEncryptionKeys(data: TPrivacyRoomRequest) {
     method: "post",
     url: "privacyroom/keys",
     data,
-  })) as TPrivacyRoomKeysResponse;
+  })) as TEncryptionKeyPair[];
 
-  return res;
+  return res ?? [];
 }
 
 export async function updateEncryptionKeys(data: TPrivacyRoomRequest) {
   const res = (await request({
     method: "put",
     url: "privacyroom/keys",
-    data: { update: true, ...data },
-  })) as TPrivacyRoomKeysResponse;
+    data,
+  })) as TEncryptionKeyPair[];
 
-  return res;
+  return res ?? [];
 }
 
 export async function getEncryptionKeys() {
@@ -78,14 +76,6 @@ export async function getEncryptionKeys() {
     url: "privacyroom/keys",
   })) as TEncryptionKeyPair[];
   return res ?? [];
-}
-
-export async function getFileAccessKeys(fileId: string | number) {
-  const res = (await request({
-    method: "get",
-    url: `privacyroom/access/${fileId}`,
-  })) as TEncryptionKeyPair[];
-  return res;
 }
 
 export async function getRoomEncryptionKeys(roomId: string | number) {
@@ -110,17 +100,5 @@ export async function deleteEncryptionKey(keyId: string) {
     url: `privacyroom/keys/${keyId}`,
   })) as TEncryptionKeyPair[];
 
-  return res;
-}
-
-export async function setFileAccessKeys(
-  fileId: string | number,
-  keys: TSetFileAccessKeysRequest[],
-) {
-  const res = await request({
-    method: "post",
-    url: `privacyroom/access/${fileId}`,
-    data: { keys },
-  });
-  return res;
+  return res ?? [];
 }

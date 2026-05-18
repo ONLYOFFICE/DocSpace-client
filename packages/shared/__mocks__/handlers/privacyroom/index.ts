@@ -26,6 +26,13 @@
 
 // In-memory mock of the privacyroom API surface. Each call to
 // `privacyroomKeysHandlers()` closes over fresh state, so tests are isolated.
+//
+// SOURCE OF TRUTH (server):
+//   - Controller: server/products/ASC.Files/Server/Api/PrivacyRoomController.cs
+//   - Helper:     server/products/ASC.Files/Core/Core/Entries/EncryptionKeyPairDto.cs
+//
+// When changing handler behavior, verify it matches the linked server methods.
+// Invariants are locked by services/private-room/__tests__/privacyroom-mock-contract.test.ts.
 
 import { http } from "msw";
 
@@ -83,11 +90,29 @@ export const privacyroomKeysHandlers = (
   const base = `${BASE_URL}:${port}/${API_PREFIX}/privacyroom/keys`;
 
   return [
+    /**
+     * Mirrors PrivacyRoomController.GetUserKeys.
+     * @see server/products/ASC.Files/Server/Api/PrivacyRoomController.cs (HttpGet "keys")
+     *
+     * Returns the full list of current user's encryption keys.
+     */
     http.get(base, () => {
       requests.push({ method: "GET", url: base });
       return okResponse(state);
     }),
 
+    /**
+     * Mirrors PrivacyRoomController.SetKeys → CreateKeysAsync(replace=false)
+     * → EncryptionKeyPairDtoHelper.SetKeyPairAsync(replace=false).
+     * @see server/products/ASC.Files/Server/Api/PrivacyRoomController.cs (HttpPost "keys")
+     * @see server/products/ASC.Files/Core/Core/Entries/EncryptionKeyPairDto.cs:SetKeyPairAsync
+     *
+     * Invariants:
+     *  - If body.id matches an existing key.id → NO-OP (no replace on POST).
+     *  - If body.id is new → appends new key to the list.
+     *  - Missing body.id deserializes to Guid.Empty on the server, so first
+     *    POST without id adds a Guid.Empty entry and subsequent ones are no-ops.
+     */
     http.post(base, async ({ request }) => {
       const body = (await request.json()) as {
         id?: string;
@@ -109,6 +134,16 @@ export const privacyroomKeysHandlers = (
       return okResponse(state);
     }),
 
+    /**
+     * Mirrors PrivacyRoomController.ReplaceKey → CreateKeysAsync(replace=true)
+     * → EncryptionKeyPairDtoHelper.SetKeyPairAsync(replace=true).
+     * @see server/products/ASC.Files/Server/Api/PrivacyRoomController.cs (HttpPut "keys")
+     * @see server/products/ASC.Files/Core/Core/Entries/EncryptionKeyPairDto.cs:SetKeyPairAsync
+     *
+     * Invariants:
+     *  - If body.id matches an existing key.id → replaces that entry.
+     *  - If body.id is new → NO-OP (no insert on PUT).
+     */
     http.put(base, async ({ request }) => {
       const body = (await request.json()) as {
         id?: string;
@@ -131,6 +166,12 @@ export const privacyroomKeysHandlers = (
       return okResponse(state);
     }),
 
+    /**
+     * Mirrors PrivacyRoomController.DeleteKeys → EncryptionKeyPairDtoHelper.DeleteAsync.
+     * @see server/products/ASC.Files/Server/Api/PrivacyRoomController.cs (HttpDelete "keys/{id:guid}")
+     *
+     * Removes the entry whose id matches the path param; returns remaining list.
+     */
     http.delete(`${base}/:keyId`, ({ params }) => {
       const keyId = String(params.keyId);
       requests.push({ method: "DELETE", url: `${base}/${keyId}` });
@@ -147,14 +188,12 @@ export type PrivacyroomAccessHandlerHandle = {
     roomId: number | string,
     keys: TEncryptionKeyPair[],
   ) => void;
-  getFileKeys: (fileId: number | string) => TEncryptionKeyPair[];
   getRequests: () => RequestLog[];
   reset: () => void;
 };
 
 export type PrivacyroomAccessOptions = {
   roomKeys?: Record<string, TEncryptionKeyPair[]>;
-  fileKeys?: Record<string, TEncryptionKeyPair[]>;
   handle?: { current: PrivacyroomAccessHandlerHandle | null };
 };
 
@@ -165,9 +204,6 @@ export const privacyroomAccessHandlers = (
   const roomKeys = new Map<string, TEncryptionKeyPair[]>(
     Object.entries(opts.roomKeys ?? {}),
   );
-  const fileKeys = new Map<string, TEncryptionKeyPair[]>(
-    Object.entries(opts.fileKeys ?? {}),
-  );
   const requests: RequestLog[] = [];
 
   const handle: PrivacyroomAccessHandlerHandle = {
@@ -175,11 +211,9 @@ export const privacyroomAccessHandlers = (
     setRoomKeys: (id, keys) => {
       roomKeys.set(String(id), [...keys]);
     },
-    getFileKeys: (id) => [...(fileKeys.get(String(id)) ?? [])],
     getRequests: () => [...requests],
     reset: () => {
       roomKeys.clear();
-      fileKeys.clear();
       requests.length = 0;
     },
   };
@@ -188,34 +222,19 @@ export const privacyroomAccessHandlers = (
   const base = `${BASE_URL}:${port}/${API_PREFIX}/privacyroom`;
 
   return [
+    /**
+     * Mirrors PrivacyRoomController.GetUserKeysForRoom → EncryptionKeyPairDtoHelper.GetKeyPairForRoomAsync.
+     * @see server/products/ASC.Files/Server/Api/PrivacyRoomController.cs (HttpGet "{roomId:int}/access")
+     *
+     * Returns the list of identity public keys for every member of the given
+     * room — used by the client as `roomMemberKeys` during unwrap, because
+     * /files/{fileId}/access.userKeys only carries the CURRENT user's keys.
+     */
     http.get(`${base}/:roomId(\\d+)/access`, ({ params, request }) => {
       const id = String(params.roomId);
       requests.push({ method: "GET", url: new URL(request.url).pathname });
       return okResponse(roomKeys.get(id) ?? []);
     }),
-
-    http.get(`${base}/access/:fileId(\\d+)`, ({ params, request }) => {
-      const id = String(params.fileId);
-      requests.push({ method: "GET", url: new URL(request.url).pathname });
-      return okResponse(fileKeys.get(id) ?? []);
-    }),
-
-    http.post(
-      `${base}/access/:fileId(\\d+)`,
-      async ({ params, request }) => {
-        const id = String(params.fileId);
-        const body = (await request.json()) as {
-          keys?: TEncryptionKeyPair[];
-        };
-        requests.push({
-          method: "POST",
-          url: new URL(request.url).pathname,
-          body,
-        });
-        fileKeys.set(id, body.keys ?? []);
-        return okResponse({ keys: body.keys ?? [] });
-      },
-    ),
   ];
 };
 

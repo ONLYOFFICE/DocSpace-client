@@ -25,12 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { getFileEncryptionAccess } from "../../api/files";
+import { getRoomEncryptionKeys } from "../../api/privacy";
 import { wipeDek } from "../encryption/file-keys";
 import {
   getCachedEncryptedFilename,
   rememberEncryptedFilename,
 } from "../encryption/filename-cache";
-import { unwrapDekForCurrentUser } from "../encryption/room-file-access";
+import {
+  unwrapDekForCurrentUser,
+  type RoomMemberPublicKey,
+} from "../encryption/room-file-access";
 import { reportPotentialGhostState } from "../encryption/ghost-state-notifier";
 import {
   decryptFileNameRaw,
@@ -63,6 +67,7 @@ async function recoverOne(
   file: RecoveryCandidate,
   userId: string,
   identity: IdentityKeyPair,
+  roomMemberKeys: RoomMemberPublicKey[],
 ): Promise<void> {
   if (getCachedEncryptedFilename(file.id)) return;
 
@@ -83,7 +88,7 @@ async function recoverOne(
     if (!info?.fileKeys || info.fileKeys.length === 0) return;
     dek = await unwrapDekForCurrentUser({
       fileKeys: info.fileKeys,
-      roomMemberKeys: info.userKeys ?? [],
+      roomMemberKeys,
       currentUserId: userId,
       currentIdentity: identity,
       fileId: file.id,
@@ -101,12 +106,31 @@ async function recoverOne(
   }
 }
 
+async function loadRoomMemberKeys(
+  roomId: number | string,
+): Promise<RoomMemberPublicKey[]> {
+  try {
+    const keys = await getRoomEncryptionKeys(roomId);
+    if (!Array.isArray(keys)) return [];
+    return keys
+      .filter((k) => k.userId && k.publicKey)
+      .map((k) => ({ userId: String(k.userId), publicKey: k.publicKey }));
+  } catch {
+    return [];
+  }
+}
+
 export async function recoverEncryptedFilenames(
   candidates: RecoveryCandidate[],
   userId: string,
   identity: IdentityKeyPair,
+  roomId: number | string | null | undefined,
 ): Promise<void> {
   if (candidates.length === 0) return;
+  if (roomId === null || roomId === undefined) return;
+
+  const roomMemberKeys = await loadRoomMemberKeys(roomId);
+  if (roomMemberKeys.length === 0) return;
 
   const queue = candidates.slice();
   const workers: Promise<void>[] = [];
@@ -116,7 +140,7 @@ export async function recoverEncryptedFilenames(
         while (queue.length > 0) {
           const next = queue.shift();
           if (!next) return;
-          await recoverOne(next, userId, identity);
+          await recoverOne(next, userId, identity, roomMemberKeys);
         }
       })(),
     );

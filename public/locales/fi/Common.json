@@ -1464,6 +1464,8 @@
   "ThirdPartyStorage": "Kolmannen osapuolen tallennus",
   "ThirdPartyStorageDescription": "Käytä kolmannen osapuolen palveluita tallennustilana tälle huoneelle. Voit luoda uuden kansion tai valita olemassa olevan yhdistetystä tallennustilasta.",
   "ThisDevice": "Tämä laite",
+  "UseOnThisDevice": "Käytä tällä laitteella",
+  "EncryptionKeyActivated": "Avain asetettu aktiiviseksi tällä laitteella",
   "ThisSectionIsEmpty": "Tämä osio on tyhjä",
   "Title": "Otsikko",
   "TitleSelectFile": "Valitse",

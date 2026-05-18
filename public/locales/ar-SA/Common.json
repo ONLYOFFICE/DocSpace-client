@@ -1464,6 +1464,8 @@
   "ThirdPartyStorage": "تخزين من طرف ثالث",
   "ThirdPartyStorageDescription": "استخدم التخزين عبر طرف ثالث لحفظ بيانات هذه الغرفة. يمكنك إنشاء مجلد جديد، أو اختيار مجلد موجود في وحدة التخزين المتصلة.",
   "ThisDevice": "هذا الجهاز",
+  "UseOnThisDevice": "استخدم على هذا الجهاز",
+  "EncryptionKeyActivated": "تم تعيين المفتاح كنشط على هذا الجهاز",
   "ThisSectionIsEmpty": "هذا القسم فارغ",
   "Title": "العنوان",
   "TitleSelectFile": "اختر",

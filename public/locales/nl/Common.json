@@ -1464,6 +1464,8 @@
   "ThirdPartyStorage": "Opslag door derden",
   "ThirdPartyStorageDescription": "Gebruik diensten van derden als gegevensopslag voor deze ruimte. U kunt een nieuwe map aanmaken of een bestaande map selecteren in de aangesloten opslag.",
   "ThisDevice": "Dit apparaat",
+  "UseOnThisDevice": "Op dit apparaat gebruiken",
+  "EncryptionKeyActivated": "Sleutel ingesteld als actief op dit apparaat",
   "ThisSectionIsEmpty": "Deze sectie is leeg",
   "Title": "Titel",
   "TitleSelectFile": "Selecteren",

@@ -1464,6 +1464,8 @@
   "ThirdPartyStorage": "第三者ストレージ",
   "ThirdPartyStorageDescription": "このルームのデータ保存先として、サードパーティのサービスを利用します。接続されたストレージ内に、新しいフォルダを作成するか、既存のフォルダを選択できます。",
   "ThisDevice": "このデバイス",
+  "UseOnThisDevice": "このデバイスで使用",
+  "EncryptionKeyActivated": "このデバイスでキーがアクティブに設定されました",
   "ThisSectionIsEmpty": "このセクションは空です",
   "Title": "タイトル",
   "TitleSelectFile": "選択",

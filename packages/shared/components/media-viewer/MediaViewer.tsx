@@ -42,8 +42,12 @@ import { isNullOrUndefined } from "../../utils/typeGuards";
 import { ViewerWrapper } from "./sub-components/ViewerWrapper";
 
 import { getFileEncryptionAccess } from "../../api/files";
+import { getRoomEncryptionKeys } from "../../api/privacy";
 import { decryptFile } from "../../services/encryption/file-keys";
-import { unwrapDekForCurrentUser } from "../../services/encryption/room-file-access";
+import {
+  unwrapDekForCurrentUser,
+  type RoomMemberPublicKey,
+} from "../../services/encryption/room-file-access";
 import { requireUnlock } from "../../services/encryption/secret-storage";
 import { getCachedEncryptedFilename } from "../../services/encryption/filename-cache";
 
@@ -428,7 +432,12 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
   }, [fileId, onChangeUrl, currentFileId]);
 
   const fetchAndDecryptFile = useCallback(
-    async (src: string, fileId: number, title: string) => {
+    async (
+      src: string,
+      fileId: number,
+      title: string,
+      roomId: number | string | null | undefined,
+    ) => {
       EncryptedAbortSignalRef.current?.abort();
       EncryptedAbortSignalRef.current = new AbortController();
       setIsDecrypting(true);
@@ -457,9 +466,26 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
 
         const encryptedData = await response.arrayBuffer();
 
+        let roomMemberKeys: RoomMemberPublicKey[] = [];
+        if (roomId !== null && roomId !== undefined) {
+          try {
+            const keys = await getRoomEncryptionKeys(roomId);
+            if (Array.isArray(keys)) {
+              roomMemberKeys = keys
+                .filter((k) => k.userId && k.publicKey)
+                .map((k) => ({
+                  userId: String(k.userId),
+                  publicKey: k.publicKey,
+                }));
+            }
+          } catch {
+            roomMemberKeys = [];
+          }
+        }
+
         const dek = await unwrapDekForCurrentUser({
           fileKeys: encryptionInfo.fileKeys,
-          roomMemberKeys: encryptionInfo.userKeys ?? [],
+          roomMemberKeys,
           currentUserId: String(userId),
           currentIdentity: identity,
           fileId,
@@ -532,7 +558,13 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       TiffAbortSignalRef.current?.abort();
       HeicAbortSignalRef.current?.abort();
       setFileUrl(undefined);
-      fetchAndDecryptFile(src, fileId, currentTitle);
+      const fileForRoom = files.find((file) => file.id === fileId);
+      fetchAndDecryptFile(
+        src,
+        fileId,
+        currentTitle,
+        fileForRoom?.originRoomId ?? null,
+      );
     } else if (!isTiff(extension) && !isHeic(extension)) {
       TiffAbortSignalRef.current?.abort();
       HeicAbortSignalRef.current?.abort();

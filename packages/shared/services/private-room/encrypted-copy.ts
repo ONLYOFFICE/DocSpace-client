@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { getFileEncryptionAccess } from "../../api/files";
+import { getRoomEncryptionKeys } from "../../api/privacy";
 import { decryptFile, wipeDek } from "../encryption/file-keys";
 import {
   unwrapDekForCurrentUser,
@@ -41,10 +42,25 @@ type EncryptedItem = {
   fileExst?: string;
 };
 
+async function loadRoomMemberKeys(
+  roomId: number | string,
+): Promise<RoomMemberPublicKey[]> {
+  try {
+    const keys = await getRoomEncryptionKeys(roomId);
+    if (!Array.isArray(keys)) return [];
+    return keys
+      .filter((k) => k.userId && k.publicKey)
+      .map((k) => ({ userId: String(k.userId), publicKey: k.publicKey }));
+  } catch {
+    return [];
+  }
+}
+
 export async function decryptEncryptedItemToFile(
   item: EncryptedItem,
   currentUserId: string,
   identity: IdentityKeyPair,
+  roomId: number | string,
 ): Promise<File> {
   const encryptionInfo = await getFileEncryptionAccess(item.id);
   if (!encryptionInfo || !encryptionInfo.fileKeys) {
@@ -64,11 +80,13 @@ export async function decryptEncryptedItemToFile(
   }
   const encryptedData = await response.arrayBuffer();
 
+  const roomMemberKeys = await loadRoomMemberKeys(roomId);
+
   let dek;
   try {
     dek = await unwrapDekForCurrentUser({
       fileKeys: encryptionInfo.fileKeys,
-      roomMemberKeys: (encryptionInfo.userKeys ?? []) as RoomMemberPublicKey[],
+      roomMemberKeys,
       currentUserId,
       currentIdentity: identity,
       fileId: item.id,

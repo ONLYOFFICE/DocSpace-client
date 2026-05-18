@@ -49,10 +49,15 @@ vi.mock("../../encryption/room-file-access", () => ({
 vi.mock("../../../api/files", () => ({
   getFileEncryptionAccess: vi.fn(),
 }));
+vi.mock("../../../api/privacy", () => ({
+  getRoomEncryptionKeys: vi.fn().mockResolvedValue([]),
+}));
 
 import { decryptFile, wipeDek } from "../../encryption/file-keys";
 import { getFileEncryptionAccess } from "../../../api/files";
 import { unwrapDekForCurrentUser } from "../../encryption/room-file-access";
+
+const ROOM_ID = 9100;
 
 const identity: IdentityKeyPair = {
   publicKey: new Uint8Array(32),
@@ -81,7 +86,7 @@ describe("encryptedCopy", () => {
         null as never,
       );
       await expect(
-        decryptEncryptedItemToFile(baseItem, "u1", identity),
+        decryptEncryptedItemToFile(baseItem, "u1", identity, ROOM_ID),
       ).rejects.toThrow(/Encryption access info missing/);
       expect(unwrapDekForCurrentUser).not.toHaveBeenCalled();
       expect(wipeDek).not.toHaveBeenCalled();
@@ -92,7 +97,7 @@ describe("encryptedCopy", () => {
       // biome-ignore lint/suspicious/noExplicitAny: test mock
       } as any);
       await expect(
-        decryptEncryptedItemToFile(baseItem, "u1", identity),
+        decryptEncryptedItemToFile(baseItem, "u1", identity, ROOM_ID),
       ).rejects.toThrow(/Encryption access info missing/);
     });
 
@@ -102,7 +107,7 @@ describe("encryptedCopy", () => {
       // biome-ignore lint/suspicious/noExplicitAny: test mock
       } as any);
       await expect(
-        decryptEncryptedItemToFile(baseItem, "u1", identity),
+        decryptEncryptedItemToFile(baseItem, "u1", identity, ROOM_ID),
       ).rejects.toThrow(/no decrypt access/);
       expect(unwrapDekForCurrentUser).not.toHaveBeenCalled();
       expect(wipeDek).not.toHaveBeenCalled();
@@ -127,7 +132,12 @@ describe("encryptedCopy", () => {
         fileName: "ok.docx",
       });
 
-      const out = await decryptEncryptedItemToFile(baseItem, "42", identity);
+      const out = await decryptEncryptedItemToFile(
+        baseItem,
+        "42",
+        identity,
+        ROOM_ID,
+      );
       expect(out.name).toBe("ok.docx");
     });
   });
@@ -149,7 +159,7 @@ describe("encryptedCopy", () => {
       );
 
       await expect(
-        decryptEncryptedItemToFile(baseItem, "u1", identity),
+        decryptEncryptedItemToFile(baseItem, "u1", identity, ROOM_ID),
       ).rejects.toThrow(/Failed to fetch encrypted blob: 403/);
       expect(unwrapDekForCurrentUser).not.toHaveBeenCalled();
       expect(wipeDek).not.toHaveBeenCalled();
@@ -172,7 +182,7 @@ describe("encryptedCopy", () => {
         fileName: "real.docx",
       });
 
-      const file = await decryptEncryptedItemToFile(baseItem, "u1", identity);
+      const file = await decryptEncryptedItemToFile(baseItem, "u1", identity, ROOM_ID);
       expect(file.name).toBe("real.docx");
       expect(file.type).toBe("application/x-doc");
       expect(wipeDek).toHaveBeenCalledTimes(1);
@@ -195,7 +205,7 @@ describe("encryptedCopy", () => {
         fileName: null,
       });
 
-      const file = await decryptEncryptedItemToFile(baseItem, "u1", identity);
+      const file = await decryptEncryptedItemToFile(baseItem, "u1", identity, ROOM_ID);
       expect(file.name).toBe("fallback.docx");
     });
 
@@ -216,7 +226,7 @@ describe("encryptedCopy", () => {
       );
 
       await expect(
-        decryptEncryptedItemToFile(baseItem, "u1", identity),
+        decryptEncryptedItemToFile(baseItem, "u1", identity, ROOM_ID),
       ).rejects.toThrow(/auth tag mismatch/);
       expect(wipeDek).toHaveBeenCalledTimes(1);
     });
@@ -235,7 +245,7 @@ describe("encryptedCopy", () => {
       );
 
       await expect(
-        decryptEncryptedItemToFile(baseItem, "u1", identity),
+        decryptEncryptedItemToFile(baseItem, "u1", identity, ROOM_ID),
       ).rejects.toThrow(/no access/);
       expect(wipeDek).not.toHaveBeenCalled();
     });
@@ -261,6 +271,7 @@ describe("encryptedCopy", () => {
         { ...baseItem, contentType: undefined },
         "u1",
         identity,
+        ROOM_ID,
       );
       expect(file.type).toBe("application/octet-stream");
     });

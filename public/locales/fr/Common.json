@@ -1464,6 +1464,8 @@
   "ThirdPartyStorage": "Stockage tiers",
   "ThirdPartyStorageDescription": "Utilisez des services tiers comme espace de stockage des données pour cette salle. Vous pouvez créer un nouveau dossier ou sélectionner un dossier existant dans l'espace de stockage connecté.",
   "ThisDevice": "Cet appareil",
+  "UseOnThisDevice": "Utiliser sur cet appareil",
+  "EncryptionKeyActivated": "Clé définie comme active sur cet appareil",
   "ThisSectionIsEmpty": "Cette section est vide",
   "Title": "Titre",
   "TitleSelectFile": "Sélectionner",

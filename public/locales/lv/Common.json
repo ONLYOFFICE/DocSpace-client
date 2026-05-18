@@ -1464,6 +1464,8 @@
   "ThirdPartyStorage": "Trešās puses krātuve",
   "ThirdPartyStorageDescription": "Izmantojiet trešās puses pakalpojumus kā šīs telpas datu krātuvi. Jūs varat izveidot jaunu mappi vai izvēlēties esošo pievienotajā krātuvē.",
   "ThisDevice": "Šī ierīce",
+  "UseOnThisDevice": "Lietot šajā ierīcē",
+  "EncryptionKeyActivated": "Atslēga iestatīta kā aktīva šajā ierīcē",
   "ThisSectionIsEmpty": "Šī sadaļa ir tukša",
   "Title": "Nosaukums",
   "TitleSelectFile": "Atlasīt",

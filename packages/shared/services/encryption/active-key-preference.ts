@@ -46,3 +46,25 @@ export function clearActiveKeyId(userId: string | undefined): void {
   if (!storage) return;
   storage.removeItem(key(userId));
 }
+
+/**
+ * Picks the encryption key that should be active on this device, given the
+ * server list and a locally stored preference. Multi-key aware.
+ *
+ *   - 0 keys                       → null (user has no identity yet)
+ *   - exactly 1 key                → that one key (legacy single-device)
+ *   - 2+ keys, preferred id matches → the preferred key
+ *   - 2+ keys, no preferred match   → null (force user to pick on the keys-management page;
+ *     auto-picking keys[0] would silently use another device's key and fail unlock).
+ */
+export function selectActiveKey<
+  T extends { id: string },
+>(
+  keys: T[] | null | undefined,
+  preferredId: string | null | undefined,
+): T | null {
+  if (!keys || keys.length === 0) return null;
+  if (keys.length === 1) return keys[0];
+  if (!preferredId) return null;
+  return keys.find((k) => k.id === preferredId) ?? null;
+}

@@ -1464,6 +1464,8 @@
   "ThirdPartyStorage": "Skladište treće strane",
   "ThirdPartyStorageDescription": "Koristite usluge trećih strana kao skladište podataka za ovu sobu. Možete kreirati novu fasciklu ili izabrati postojeću u povezanom skladištu.",
   "ThisDevice": "Ovaj uređaj",
+  "UseOnThisDevice": "Koristi na ovom uređaju",
+  "EncryptionKeyActivated": "Ključ je postavljen kao aktivan na ovom uređaju",
   "ThisSectionIsEmpty": "Odeljak je prazan",
   "Title": "Naslov",
   "TitleSelectFile": "Izaberi",

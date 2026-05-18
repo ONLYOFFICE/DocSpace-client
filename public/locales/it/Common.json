@@ -1464,6 +1464,8 @@
   "ThirdPartyStorage": "Archiviazione di terze parti",
   "ThirdPartyStorageDescription": "Utilizza servizi di terze parti come spazio di archiviazione dati per questa stanza. Puoi creare una nuova cartella o selezionare quella esistente nello storage connesso.",
   "ThisDevice": "Questo dispositivo",
+  "UseOnThisDevice": "Usa su questo dispositivo",
+  "EncryptionKeyActivated": "Chiave impostata come attiva su questo dispositivo",
   "ThisSectionIsEmpty": "Questa sezione è vuota",
   "Title": "Titolo",
   "TitleSelectFile": "Seleziona",

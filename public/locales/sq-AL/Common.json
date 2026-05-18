@@ -1464,6 +1464,8 @@
   "ThirdPartyStorage": "Ruajtja e palëve të treta",
   "ThirdPartyStorageDescription": "Përdorni shërbime të palëve të treta si ruajtje të dhënash për këtë dhomë. Mund të krijoni një dosje të re ose të zgjidhni një ekzistuese në ruajtjen e lidhur.",
   "ThisDevice": "Kjo pajisje",
+  "UseOnThisDevice": "Përdor në këtë pajisje",
+  "EncryptionKeyActivated": "Çelësi është caktuar si aktiv në këtë pajisje",
   "ThisSectionIsEmpty": "Ky seksion është bosh",
   "Title": "Titulli",
   "TitleSelectFile": "Selektoni",

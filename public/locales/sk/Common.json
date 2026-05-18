@@ -1464,6 +1464,8 @@
   "ThirdPartyStorage": "Úložisko tretích strán",
   "ThirdPartyStorageDescription": "Použite služby tretích strán ako úložisko dát pre túto miestnosť. V pripojenom úložisku môžete vytvoriť nový priečinok alebo vybrať existujúci.",
   "ThisDevice": "Toto zariadenie",
+  "UseOnThisDevice": "Použiť na tomto zariadení",
+  "EncryptionKeyActivated": "Kľúč nastavený ako aktívny na tomto zariadení",
   "ThisSectionIsEmpty": "Táto časť je prázdna",
   "Title": "Názov",
   "TitleSelectFile": "Vybrať",

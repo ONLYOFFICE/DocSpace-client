@@ -1464,6 +1464,8 @@
   "ThirdPartyStorage": "Üçüncü tərəf saxlama yeri",
   "ThirdPartyStorageDescription": "Bu otaq üçün məlumat yaddaşı kimi üçüncü tərəf xidmətlərindən istifadə edin. Əlaqələndirilmiş yaddaşda yeni qovluq yarada və ya mövcud olanı seçə bilərsiniz.",
   "ThisDevice": "Bu cihaz",
+  "UseOnThisDevice": "Bu cihazda istifadə et",
+  "EncryptionKeyActivated": "Açar bu cihazda aktiv olaraq təyin edildi",
   "ThisSectionIsEmpty": "Bu bölmə boşdur",
   "Title": "Başlıq",
   "TitleSelectFile": "Seçin",

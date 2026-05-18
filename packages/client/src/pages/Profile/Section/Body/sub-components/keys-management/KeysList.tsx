@@ -29,6 +29,7 @@ import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Badge } from "@docspace/ui-kit/components/badge";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
@@ -49,9 +50,11 @@ type KeyItemProps = {
   onDelete: (keyId: string) => void;
   onExport: (keyData: TEncryptionKeyPair) => void;
   onRotate: (keyData: TEncryptionKeyPair) => void;
+  onSelectActive: (keyId: string) => void;
   isDeleting: boolean;
   deletingKeyId: string | null;
   isCurrentDevice: boolean;
+  canSwitchActive: boolean;
 };
 
 const KeyItem: React.FC<KeyItemProps> = ({
@@ -59,9 +62,11 @@ const KeyItem: React.FC<KeyItemProps> = ({
   onDelete,
   onExport,
   onRotate,
+  onSelectActive,
   isDeleting,
   deletingKeyId,
   isCurrentDevice,
+  canSwitchActive,
 }) => {
   const { t } = useTranslation(["Common"]);
   const [fingerprint, setFingerprint] = useState<string>("");
@@ -91,6 +96,10 @@ const KeyItem: React.FC<KeyItemProps> = ({
     onRotate(keyData);
   }, [onRotate, keyData]);
 
+  const handleSelectActive = useCallback(() => {
+    onSelectActive(keyData.id);
+  }, [onSelectActive, keyData.id]);
+
   const isCurrentlyDeleting = isDeleting && deletingKeyId === keyData.id;
   const locale = getCookie(LANGUAGE) || "";
   const createdDate = keyData.date
@@ -111,6 +120,13 @@ const KeyItem: React.FC<KeyItemProps> = ({
               label={t("Common:ThisDevice")}
               backgroundColor={globalColors.lightBlueMain}
               maxWidth="none"
+            />
+          ) : canSwitchActive ? (
+            <Button
+              size={ButtonSize.extraSmall}
+              label={t("Common:UseOnThisDevice")}
+              onClick={handleSelectActive}
+              isDisabled={isDeleting}
             />
           ) : null}
         </div>
@@ -189,6 +205,7 @@ type KeysListProps = {
   onDelete: (keyId: string) => void;
   onExport: (keyData: TEncryptionKeyPair) => void;
   onRotate: (keyData: TEncryptionKeyPair) => void;
+  onSelectActive: (keyId: string) => void;
   isDeleting: boolean;
   deletingKeyId: string | null;
 };
@@ -198,6 +215,7 @@ export const KeysList: React.FC<KeysListProps> = ({
   onDelete,
   onExport,
   onRotate,
+  onSelectActive,
   isDeleting,
   deletingKeyId,
 }) => {
@@ -232,11 +250,13 @@ export const KeysList: React.FC<KeysListProps> = ({
             onDelete={onDelete}
             onExport={onExport}
             onRotate={onRotate}
+            onSelectActive={onSelectActive}
             isDeleting={isDeleting}
             deletingKeyId={deletingKeyId}
             isCurrentDevice={
               !!currentPublicKey && key.publicKey === currentPublicKey
             }
+            canSwitchActive={keys.length > 1}
           />
         ))}
       </div>

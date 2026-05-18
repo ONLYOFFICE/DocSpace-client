@@ -1464,6 +1464,8 @@
   "ThirdPartyStorage": "Drittanbieter-Speicher",
   "ThirdPartyStorageDescription": "Verwenden Sie Drittanbieterdienste als Datenspeicher für diesen Raum. Sie können einen neuen Ordner erstellen oder einen vorhandenen im verbundenen Speicher auswählen.",
   "ThisDevice": "Dieses Gerät",
+  "UseOnThisDevice": "Auf diesem Gerät verwenden",
+  "EncryptionKeyActivated": "Schlüssel auf diesem Gerät als aktiv festgelegt",
   "ThisSectionIsEmpty": "Dieser Abschnitt ist leer",
   "Title": "Titel",
   "TitleSelectFile": "Wählen",

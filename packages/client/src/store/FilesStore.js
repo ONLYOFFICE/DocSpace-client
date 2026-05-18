@@ -3952,7 +3952,16 @@ class FilesStore {
       .filter((f) => f.encrypted && f.id && f.viewUrl)
       .map((f) => ({ id: f.id, viewUrl: f.viewUrl }));
     if (candidates.length === 0) return;
-    void recoverEncryptedFilenames(candidates, String(userId), identity);
+    const roomId =
+      this.selectedFolderStore.navigationPath.find((r) => r.isRoom)?.id ??
+      (this.selectedFolderStore.isRoom ? this.selectedFolderStore.id : null);
+    if (!roomId) return;
+    void recoverEncryptedFilenames(
+      candidates,
+      String(userId),
+      identity,
+      roomId,
+    );
   };
 
   renameFolder = (folderId, title) => {

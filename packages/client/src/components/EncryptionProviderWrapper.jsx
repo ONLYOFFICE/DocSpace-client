@@ -32,7 +32,10 @@ import {
   EncryptionProvider,
   useEncryption,
 } from "@docspace/shared/context/encryption";
-import { getActiveKeyId } from "@docspace/shared/services/encryption/active-key-preference";
+import {
+  getActiveKeyId,
+  selectActiveKey,
+} from "@docspace/shared/services/encryption/active-key-preference";
 import {
   registerGhostStateHandler,
   clearGhostStateHandler,
@@ -174,12 +177,7 @@ export default inject(({ userStore }) => {
   const ownerId = userStore?.user?.id;
   const ownerIdStr = ownerId ? String(ownerId) : undefined;
 
-  let chosen = null;
-  if (keys && keys.length > 0) {
-    const preferredId = getActiveKeyId(ownerIdStr);
-    chosen =
-      (preferredId && keys.find((k) => k.id === preferredId)) || keys[0];
-  }
+  const chosen = selectActiveKey(keys, getActiveKeyId(ownerIdStr));
 
   const userKeys =
     chosen && ownerIdStr

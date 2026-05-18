@@ -1464,6 +1464,8 @@
   "ThirdPartyStorage": "타사 저장소",
   "ThirdPartyStorageDescription": "이 방의 데이터 스토리지로 제3자 서비스를 사용합니다. 연결된 스토리지에서 새 폴더를 생성하거나 기존 폴더를 선택할 수 있습니다.",
   "ThisDevice": "이 기기",
+  "UseOnThisDevice": "이 기기에서 사용",
+  "EncryptionKeyActivated": "이 기기에서 키가 활성으로 설정되었습니다",
   "ThisSectionIsEmpty": "이 섹션이 비어 있습니다",
   "Title": "제목",
   "TitleSelectFile": "선택",

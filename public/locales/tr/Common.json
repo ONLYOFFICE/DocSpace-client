@@ -1464,6 +1464,8 @@
   "ThirdPartyStorage": "Üçüncü taraf depolama",
   "ThirdPartyStorageDescription": "Bu oda için veri depolama olarak üçüncü taraf hizmetleri kullanın. Bağlı depolama alanında yeni bir klasör oluşturabilir veya mevcut olanı seçebilirsiniz.",
   "ThisDevice": "Bu cihaz",
+  "UseOnThisDevice": "Bu cihazda kullan",
+  "EncryptionKeyActivated": "Anahtar bu cihazda aktif olarak ayarlandı",
   "ThisSectionIsEmpty": "Bu bölüm boş",
   "Title": "Başlık",
   "TitleSelectFile": "Seç",

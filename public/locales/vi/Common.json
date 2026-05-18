@@ -1464,6 +1464,8 @@
   "ThirdPartyStorage": "Lưu trữ của bên thứ ba",
   "ThirdPartyStorageDescription": "Sử dụng dịch vụ của bên thứ ba làm nơi lưu trữ dữ liệu cho phòng này. Bạn có thể tạo thư mục mới hoặc chọn thư mục đã có trong bộ nhớ được kết nối.",
   "ThisDevice": "Thiết bị này",
+  "UseOnThisDevice": "Sử dụng trên thiết bị này",
+  "EncryptionKeyActivated": "Khoá đã được đặt làm khoá hoạt động trên thiết bị này",
   "ThisSectionIsEmpty": "Phần này trống",
   "Title": "Tiêu đề",
   "TitleSelectFile": "Chọn",

@@ -315,11 +315,20 @@ class UploadDataStore {
       const identity = await requireUnlock(String(currentUserId));
       if (!identity) return;
 
+      const roomMemberKeys = Array.isArray(publicKeys)
+        ? publicKeys
+            .filter((k) => k.userId && k.publicKey)
+            .map((k) => ({
+              userId: String(k.userId),
+              publicKey: k.publicKey,
+            }))
+        : [];
+
       let dek;
       try {
         dek = await unwrapDekForCurrentUser({
           fileKeys: existingFileKeys,
-          roomMemberKeys: encryptionInfo.userKeys ?? [],
+          roomMemberKeys,
           currentUserId: String(currentUserId),
           currentIdentity: identity,
           fileId,

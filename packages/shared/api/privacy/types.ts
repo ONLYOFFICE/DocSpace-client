@@ -28,15 +28,10 @@ export type TPrivacyRoomRequest = {
   id?: string;
   publicKey: string;
   privateKeyEnc: string;
-  update?: boolean;
 };
 
 export type TPrivacySettingsRequest = {
   enable?: boolean;
-};
-
-export type TPrivacyRoomKeysResponse = {
-  isSet: boolean;
 };
 
 export type TEncryptionKeyPair = {
@@ -46,10 +41,4 @@ export type TEncryptionKeyPair = {
   userId: string;
   date?: string;
   cryptoEngineId?: string;
-};
-
-export type TSetFileAccessKeysRequest = {
-  userId: string;
-  publicKeyId: string;
-  privateKeyEnc: string;
 };

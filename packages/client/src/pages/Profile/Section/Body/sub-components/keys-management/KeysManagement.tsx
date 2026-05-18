@@ -36,6 +36,8 @@ import {
   exportIdentityToBlob,
   getPublicKeyFingerprint,
 } from "@docspace/shared/services/encryption/identity";
+import { setActiveKeyId } from "@docspace/shared/services/encryption/active-key-preference";
+import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 import { getEncryptionKeys } from "@docspace/shared/api/privacy";
 
@@ -101,6 +103,20 @@ const KeysManagement = ({
     recover.isPending ||
     reset.isPending;
 
+  const handleSelectActive = useCallback(
+    (keyId: string) => {
+      if (!userId) return;
+      setActiveKeyId(userId, keyId);
+      // The cached identity belongs to the previously-active key. Lock so the
+      // next op prompts for the new key's passphrase rather than silently
+      // failing with a wrap/identity mismatch.
+      SecretStorage.lock();
+      void refreshKeysFromServer();
+      toastr.success(t("Common:EncryptionKeyActivated"));
+    },
+    [userId, refreshKeysFromServer, t],
+  );
+
   const handleExport = useCallback(
     async (keyData: TEncryptionKeyPair) => {
       try {
@@ -133,6 +149,7 @@ const KeysManagement = ({
         onDelete={remove.request}
         onExport={handleExport}
         onRotate={rotate.request}
+        onSelectActive={handleSelectActive}
         isDeleting={remove.isPending}
         deletingKeyId={remove.pendingId}
       />

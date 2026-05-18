@@ -48,6 +48,7 @@ import {
   enableCustomFilter,
   getFileEncryptionAccess,
 } from "@docspace/shared/api/files";
+import { getRoomEncryptionKeys } from "@docspace/shared/api/privacy";
 import {
   Events,
   ExportRoomIndexTaskStatus,
@@ -987,6 +988,29 @@ class FilesActionStore {
     );
   };
 
+  resolveRoomIdForFile = (file) => {
+    if (file?.originRoomId) return file.originRoomId;
+    const navRoom = this.selectedFolderStore.navigationPath?.find(
+      (r) => r.isRoom,
+    );
+    if (navRoom?.id) return navRoom.id;
+    if (this.selectedFolderStore.isRoom) return this.selectedFolderStore.id;
+    return null;
+  };
+
+  loadRoomMemberKeysFor = async (roomId) => {
+    if (!roomId) return [];
+    try {
+      const keys = await getRoomEncryptionKeys(roomId);
+      if (!Array.isArray(keys)) return [];
+      return keys
+        .filter((k) => k.userId && k.publicKey)
+        .map((k) => ({ userId: String(k.userId), publicKey: k.publicKey }));
+    } catch {
+      return [];
+    }
+  };
+
   downloadEncryptedFile = async (file) => {
     const { encryptionKeys, user } = this.userStore;
 
@@ -1024,6 +1048,9 @@ class FilesActionStore {
         return Promise.resolve();
       }
 
+      const roomId = this.resolveRoomIdForFile(file);
+      const roomMemberKeys = await this.loadRoomMemberKeysFor(roomId);
+
       setSecondaryProgressBarData({
         operation: OPERATIONS_NAME.download,
         percent: 0,
@@ -1034,7 +1061,7 @@ class FilesActionStore {
         downloadUrl: file.viewUrl,
         fileId: file.id,
         fileKeys: encryptionInfo.fileKeys,
-        roomMemberKeys: encryptionInfo.userKeys ?? [],
+        roomMemberKeys,
         userId: String(userId),
         identity,
         originalFileName: file.title,
@@ -1116,6 +1143,7 @@ class FilesActionStore {
       const totalFiles = encryptedFiles.length;
       const results = [];
       const failures = [];
+      const roomMemberKeysCache = new Map();
 
       setSecondaryProgressBarData({
         operation: OPERATIONS_NAME.download,
@@ -1152,11 +1180,18 @@ class FilesActionStore {
             continue;
           }
 
+          const roomId = this.resolveRoomIdForFile(file);
+          let roomMemberKeys = roomMemberKeysCache.get(String(roomId));
+          if (!roomMemberKeys) {
+            roomMemberKeys = await this.loadRoomMemberKeysFor(roomId);
+            roomMemberKeysCache.set(String(roomId), roomMemberKeys);
+          }
+
           const result = await downloadAndDecryptFileToBuffer({
             downloadUrl: file.viewUrl,
             fileId: file.id,
             fileKeys: encryptionInfo.fileKeys,
-            roomMemberKeys: encryptionInfo.userKeys ?? [],
+            roomMemberKeys,
             userId: String(userId),
             identity,
             originalFileName: fileName,
@@ -1650,10 +1685,12 @@ class FilesActionStore {
 
     for (const item of items) {
       try {
+        const sourceRoomId = this.resolveRoomIdForFile(item);
         const decryptedFile = await decryptEncryptedItemToFile(
           item,
           String(userId),
           identity,
+          sourceRoomId,
         );
 
         const newName = sameRoomRoot

@@ -1464,6 +1464,8 @@
   "ThirdPartyStorage": "Przechowywanie przez strony trzecie",
   "ThirdPartyStorageDescription": "Użyj usług podmiotów trzecich jako pamięci dla tego pokoju. Możesz utworzyć nowy katalog lub wybrać istniejący w podłączonej pamięci.",
   "ThisDevice": "To urządzenie",
+  "UseOnThisDevice": "Użyj na tym urządzeniu",
+  "EncryptionKeyActivated": "Klucz ustawiony jako aktywny na tym urządzeniu",
   "ThisSectionIsEmpty": "Dana sekcja jest pusta",
   "Title": "Tytuł",
   "TitleSelectFile": "Wybierz",

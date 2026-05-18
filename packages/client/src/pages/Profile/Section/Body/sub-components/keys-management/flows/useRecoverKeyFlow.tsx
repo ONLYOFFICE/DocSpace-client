@@ -71,12 +71,14 @@ export function useRecoverKeyFlow({
   const [isPending, setIsPending] = useState(false);
   const [keyPair, setKeyPair] = useState<IdentityKeyPair | null>(null);
   const [mnemonic, setMnemonic] = useState<string | null>(null);
+  const [targetKeyId, setTargetKeyId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const reset = useCallback(() => {
     setStep("idle");
     setKeyPair(null);
     setMnemonic(null);
+    setTargetKeyId(null);
     setError(null);
   }, []);
 
@@ -90,25 +92,35 @@ export function useRecoverKeyFlow({
   const onPhraseSubmit = useCallback(
     async (input: string) => {
       if (!encryptionKeys || encryptionKeys.length === 0) return;
-      const target = encryptionKeys[0];
       setError(null);
       setIsPending(true);
       try {
-        const envelope: SerializedIdentity = {
-          publicKey: target.publicKey,
-          privateKeyEnc: target.privateKeyEnc,
-        };
-        const kp = await unlockWithRecoveryPhrase(envelope, input);
-        setKeyPair(kp);
+        let unlocked: { kp: IdentityKeyPair; id: string } | null = null;
+        for (const candidate of encryptionKeys) {
+          try {
+            const envelope: SerializedIdentity = {
+              publicKey: candidate.publicKey,
+              privateKeyEnc: candidate.privateKeyEnc,
+            };
+            const kp = await unlockWithRecoveryPhrase(envelope, input);
+            unlocked = { kp, id: candidate.id };
+            break;
+          } catch (e) {
+            if (e instanceof InvalidRecoveryPhraseError) continue;
+            throw e;
+          }
+        }
+        if (!unlocked) {
+          setError(t("Common:InvalidRecoveryPhrase"));
+          return;
+        }
+        setKeyPair(unlocked.kp);
+        setTargetKeyId(unlocked.id);
         setMnemonic(input);
         setStep("new-passphrase");
       } catch (e) {
-        if (e instanceof InvalidRecoveryPhraseError) {
-          setError(t("Common:InvalidRecoveryPhrase"));
-        } else {
-          console.error("Recovery unlock failed:", e);
-          setError(t("Common:EncryptionError"));
-        }
+        console.error("Recovery unlock failed:", e);
+        setError(t("Common:EncryptionError"));
       } finally {
         setIsPending(false);
       }
@@ -118,20 +130,18 @@ export function useRecoverKeyFlow({
 
   const onNewPassphrase = useCallback(
     async (newPassphrase: string) => {
-      if (!keyPair || !mnemonic || !userId) return;
-      const targetId = encryptionKeys?.[0]?.id;
-      if (!targetId) return;
+      if (!keyPair || !mnemonic || !userId || !targetKeyId) return;
       setIsPending(true);
       try {
         const serialized = await serializeIdentity(keyPair, newPassphrase, {
           recoveryMnemonic: mnemonic,
         });
         await updateEncryptionKeys({
-          id: targetId,
+          id: targetKeyId,
           publicKey: serialized.publicKey,
           privateKeyEnc: serialized.privateKeyEnc,
         });
-        setActiveKeyId(userId, targetId);
+        setActiveKeyId(userId, targetKeyId);
         SecretStorage.cacheUnlocked(userId, keyPair);
         await refreshKeysFromServer();
         toastr.success(t("Common:RecoveryPhraseRestored"));
@@ -143,7 +153,7 @@ export function useRecoverKeyFlow({
         reset();
       }
     },
-    [keyPair, mnemonic, userId, encryptionKeys, refreshKeysFromServer, reset, t],
+    [keyPair, mnemonic, userId, targetKeyId, refreshKeysFromServer, reset, t],
   );
 
   const modals = (

@@ -1464,6 +1464,8 @@
   "ThirdPartyStorage": "Shranjevanje pri tretji osebi",
   "ThirdPartyStorageDescription": "Uporabite storitve tretjih oseb kot shrambo podatkov za to sobo. V povezani shrambi lahko ustvarite novo mapo ali izberete obstoječo.",
   "ThisDevice": "Ta naprava",
+  "UseOnThisDevice": "Uporabi na tej napravi",
+  "EncryptionKeyActivated": "Ključ nastavljen kot aktiven na tej napravi",
   "ThisSectionIsEmpty": "Ta razdelek je prazen",
   "Title": "Naslov",
   "TitleSelectFile": "Izberi",

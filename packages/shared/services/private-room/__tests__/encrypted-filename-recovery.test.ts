@@ -49,9 +49,13 @@ vi.mock("../../encryption/streaming-encryption", () => ({
 vi.mock("../../../api/files", () => ({
   getFileEncryptionAccess: vi.fn(),
 }));
+vi.mock("../../../api/privacy", () => ({
+  getRoomEncryptionKeys: vi.fn(),
+}));
 
 import { wipeDek } from "../../encryption/file-keys";
 import { getFileEncryptionAccess } from "../../../api/files";
+import { getRoomEncryptionKeys } from "../../../api/privacy";
 import { unwrapDekForCurrentUser } from "../../encryption/room-file-access";
 import {
   decryptFileNameRaw,
@@ -71,6 +75,8 @@ const okHeaderBytes = (size = 64) =>
   // versions; Response accepts it at runtime.
   new Response(new Uint8Array(size) as unknown as BodyInit, { status: 206 });
 
+const ROOM_ID = 42;
+
 const happyMocks = () => {
   vi.mocked(parseDSE3Header).mockImplementation(() => ({
     encryptedName: new Uint8Array([1, 2, 3]),
@@ -82,6 +88,15 @@ const happyMocks = () => {
     userKeys: [],
   // biome-ignore lint/suspicious/noExplicitAny: test mock
   } as any);
+  vi.mocked(getRoomEncryptionKeys).mockResolvedValue([
+    {
+      id: "k1",
+      userId: "u1",
+      publicKey: "pk-u1",
+      privateKeyEnc: "",
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
+    } as any,
+  ]);
   vi.mocked(unwrapDekForCurrentUser).mockResolvedValue(new Uint8Array(32));
   vi.mocked(decryptFileNameRaw).mockResolvedValue("real-name.docx");
 };
@@ -99,7 +114,7 @@ describe("encryptedFilenameRecovery", () => {
   it("returns immediately when candidates is empty (no fetch)", async () => {
     const fetchSpy = vi.fn();
     vi.stubGlobal("fetch", fetchSpy);
-    await recoverEncryptedFilenames([], "u1", identity);
+    await recoverEncryptedFilenames([], "u1", identity, ROOM_ID);
     expect(fetchSpy).not.toHaveBeenCalled();
   });
 
@@ -108,7 +123,7 @@ describe("encryptedFilenameRecovery", () => {
     const fetchSpy = vi.fn();
     vi.stubGlobal("fetch", fetchSpy);
 
-    await recoverEncryptedFilenames(makeCandidates([7]), "u1", identity);
+    await recoverEncryptedFilenames(makeCandidates([7]), "u1", identity, ROOM_ID);
 
     expect(fetchSpy).not.toHaveBeenCalled();
     expect(getCachedEncryptedFilename(7)).toBe("already-known.docx");
@@ -121,7 +136,7 @@ describe("encryptedFilenameRecovery", () => {
     );
     happyMocks();
 
-    await recoverEncryptedFilenames(makeCandidates([42]), "u1", identity);
+    await recoverEncryptedFilenames(makeCandidates([42]), "u1", identity, ROOM_ID);
 
     expect(getCachedEncryptedFilename(42)).toBe("real-name.docx");
     expect(wipeDek).toHaveBeenCalledTimes(1);
@@ -132,7 +147,7 @@ describe("encryptedFilenameRecovery", () => {
     vi.stubGlobal("fetch", fetchSpy);
     happyMocks();
 
-    await recoverEncryptedFilenames(makeCandidates([1]), "u1", identity);
+    await recoverEncryptedFilenames(makeCandidates([1]), "u1", identity, ROOM_ID);
 
     expect(fetchSpy).toHaveBeenCalledTimes(1);
     const [, init] = fetchSpy.mock.calls[0];
@@ -144,7 +159,7 @@ describe("encryptedFilenameRecovery", () => {
     vi.stubGlobal("fetch", vi.fn().mockRejectedValue(new Error("network")));
 
     await expect(
-      recoverEncryptedFilenames(makeCandidates([1]), "u1", identity),
+      recoverEncryptedFilenames(makeCandidates([1]), "u1", identity, ROOM_ID),
     ).resolves.toBeUndefined();
     expect(getCachedEncryptedFilename(1)).toBeNull();
     expect(unwrapDekForCurrentUser).not.toHaveBeenCalled();
@@ -157,7 +172,7 @@ describe("encryptedFilenameRecovery", () => {
       vi.fn().mockResolvedValue(new Response(null, { status: 416 })),
     );
     await expect(
-      recoverEncryptedFilenames(makeCandidates([1]), "u1", identity),
+      recoverEncryptedFilenames(makeCandidates([1]), "u1", identity, ROOM_ID),
     ).resolves.toBeUndefined();
     expect(getCachedEncryptedFilename(1)).toBeNull();
   });
@@ -169,7 +184,7 @@ describe("encryptedFilenameRecovery", () => {
     });
 
     await expect(
-      recoverEncryptedFilenames(makeCandidates([1]), "u1", identity),
+      recoverEncryptedFilenames(makeCandidates([1]), "u1", identity, ROOM_ID),
     ).resolves.toBeUndefined();
     expect(getCachedEncryptedFilename(1)).toBeNull();
     expect(wipeDek).not.toHaveBeenCalled();
@@ -183,7 +198,7 @@ describe("encryptedFilenameRecovery", () => {
     // biome-ignore lint/suspicious/noExplicitAny: test mock
     }) as any);
 
-    await recoverEncryptedFilenames(makeCandidates([1]), "u1", identity);
+    await recoverEncryptedFilenames(makeCandidates([1]), "u1", identity, ROOM_ID);
 
     expect(getCachedEncryptedFilename(1)).toBeNull();
     expect(unwrapDekForCurrentUser).not.toHaveBeenCalled();
@@ -199,7 +214,7 @@ describe("encryptedFilenameRecovery", () => {
     // biome-ignore lint/suspicious/noExplicitAny: test mock
     } as any);
 
-    await recoverEncryptedFilenames(makeCandidates([1]), "u1", identity);
+    await recoverEncryptedFilenames(makeCandidates([1]), "u1", identity, ROOM_ID);
 
     expect(unwrapDekForCurrentUser).not.toHaveBeenCalled();
     expect(wipeDek).not.toHaveBeenCalled();
@@ -213,7 +228,7 @@ describe("encryptedFilenameRecovery", () => {
     );
 
     await expect(
-      recoverEncryptedFilenames(makeCandidates([1]), "u1", identity),
+      recoverEncryptedFilenames(makeCandidates([1]), "u1", identity, ROOM_ID),
     ).resolves.toBeUndefined();
     expect(getCachedEncryptedFilename(1)).toBeNull();
     expect(wipeDek).not.toHaveBeenCalled();
@@ -227,16 +242,13 @@ describe("encryptedFilenameRecovery", () => {
     );
 
     await expect(
-      recoverEncryptedFilenames(makeCandidates([1]), "u1", identity),
+      recoverEncryptedFilenames(makeCandidates([1]), "u1", identity, ROOM_ID),
     ).resolves.toBeUndefined();
     expect(getCachedEncryptedFilename(1)).toBeNull();
     expect(wipeDek).toHaveBeenCalledTimes(1);
   });
 
   it("caps in-flight fetches at MAX_PARALLEL=5", async () => {
-    // recoverEncryptedFilenames synchronously spawns workers up to their
-    // first `await`, so inFlight reaches the cap before the call returns —
-    // no microtask yielding needed to observe it.
     let inFlight = 0;
     let maxInFlight = 0;
     let totalStarted = 0;
@@ -261,13 +273,28 @@ describe("encryptedFilenameRecovery", () => {
       fileNonce: new Uint8Array(12),
     // biome-ignore lint/suspicious/noExplicitAny: test mock
     }) as any);
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValue([
+      {
+        id: "k1",
+        userId: "u1",
+        publicKey: "pk-u1",
+        privateKeyEnc: "",
+        // biome-ignore lint/suspicious/noExplicitAny: test mock
+      } as any,
+    ]);
 
     const ids = Array.from({ length: 12 }, (_, i) => i + 1);
     const done = recoverEncryptedFilenames(
       makeCandidates(ids),
       "u1",
       identity,
+      ROOM_ID,
     );
+
+    // recoverEncryptedFilenames awaits getRoomEncryptionKeys before spawning
+    // workers, so we need to drain the microtask queue before observing the cap.
+    await Promise.resolve();
+    await Promise.resolve();
 
     expect(inFlight).toBe(5);
     expect(maxInFlight).toBe(5);

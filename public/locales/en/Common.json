@@ -1656,6 +1656,8 @@
   "ResetEncryptionKeysPartialFailure": "Reset finished, but {{count}} key(s) could not be deleted on the server. Try again later.",
   "ResetEncryptionKeysFailed": "Failed to reset your encryption identity. Try again later.",
   "ThisDevice": "This device",
+  "UseOnThisDevice": "Use on this device",
+  "EncryptionKeyActivated": "Key set as active on this device",
   "EncryptionDeviceSetupHint": "You don't have encryption keys on this device. <0>Set up encryption</0> to access encrypted files.",
   "GhostStateDetected": "Your encryption identity on this device cannot unwrap some files. Other members may have changed their keys, or your identity may be out of sync. <0>Open key management</0> to re-verify or reset.",
   "EncryptionLockedAddMembers": "Encryption is locked — new members cannot access existing files until you unlock your key.",

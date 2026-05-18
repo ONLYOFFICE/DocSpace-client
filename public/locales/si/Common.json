@@ -1464,6 +1464,8 @@
   "ThirdPartyStorage": "තෙවන පාර්ශ්ව ගබඩාව",
   "ThirdPartyStorageDescription": "මෙම කාමරයේ දත්ත ආචයනය සඳහා තෙවන පාර්ශ්ව සේවා භාවිතා කරන්න. ඔබට නව ෆෝල්ඩරයක් නිර්මාණය කළ හැකිය හෝ සම්බන්ධිත ආචයනයේ ඇති පවතින එකක් තෝරාගත හැකිය.",
   "ThisDevice": "මෙම උපකරණය",
+  "UseOnThisDevice": "මෙම උපකරණයේ භාවිතා කරන්න",
+  "EncryptionKeyActivated": "මෙම උපකරණයේ යතුර සක්‍රීය ලෙස සකසා ඇත",
   "ThisSectionIsEmpty": "මෙම කොටස හිස්ය.",
   "Title": "සිරැසිය",
   "TitleSelectFile": "තෝරන්න",

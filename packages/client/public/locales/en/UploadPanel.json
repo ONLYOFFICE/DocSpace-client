@@ -3,7 +3,7 @@
   "QuotaExceededDuringUpload": "<0>{{uploaded}} of {{total}}</0> uploaded. Storage quota exceeded — <1>view details</1>.",
   "QuotaExceededTooltip": "Storage quota exceeded. Free up space or upgrade your plan, then retry.",
   "Ready": "Done",
-  "Retry": "Retry",
+  "RetryUpload": "Retry",
   "RetryAfterQuotaUpgrade": "Retry after upgrading quota",
   "UploadingAndConversion": "Uploading & Conversion",
   "UploadingError": "Uploading error"

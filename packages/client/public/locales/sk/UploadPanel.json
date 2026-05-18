@@ -1,6 +1,10 @@
 {
   "HideInput": "Skryť",
+  "QuotaExceededDuringUpload": "<0>{{uploaded}} z {{total}}</0> nahratých. Kvóta úložiska bola prekročená — <1>zobraziť podrobnosti</1>.",
+  "QuotaExceededTooltip": "Kvóta úložiska bola prekročená. Uvoľnite miesto alebo upgradujte plán a potom to skúste znova.",
   "Ready": "Hotovo",
+  "RetryAfterQuotaUpgrade": "Opakovať po zvýšení kvóty",
+  "RetryUpload": "Opakovať",
   "UploadingAndConversion": "Nahrávanie a konverzia",
   "UploadingError": "Chyba pri nahrávaní"
 }

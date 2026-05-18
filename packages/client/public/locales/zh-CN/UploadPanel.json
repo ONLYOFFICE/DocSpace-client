@@ -1,6 +1,10 @@
 {
   "HideInput": "隐藏",
+  "QuotaExceededDuringUpload": "已上传 <0>{{uploaded}} / {{total}}</0>。存储配额已超限 — <1>查看详情</1>。",
+  "QuotaExceededTooltip": "存储配额已超限。请释放空间或升级套餐，然后重试。",
   "Ready": "完成",
+  "RetryAfterQuotaUpgrade": "升级配额后重试",
+  "RetryUpload": "重试",
   "UploadingAndConversion": "上传 & 转换",
   "UploadingError": "上传错误"
 }

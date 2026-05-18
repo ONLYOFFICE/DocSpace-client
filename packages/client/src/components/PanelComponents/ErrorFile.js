@@ -47,7 +47,7 @@ const ErrorFile = ({
 
   const retryLabel = item.isQuotaError
     ? t("RetryAfterQuotaUpgrade")
-    : t("Retry");
+    : t("RetryUpload");
 
   return (
     <div

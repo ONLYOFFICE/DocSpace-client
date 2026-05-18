@@ -1254,7 +1254,6 @@ class FilesStore {
         requests.push(getIsEncryptionSupport(), getEncryptionKeys());
       }
 
-      // Load user encryption keys for private rooms (web and desktop)
       if (this.userStore?.getEncryptionKeys) {
         requests.push(
           this.userStore.getEncryptionKeys().catch(() => {}),
@@ -1859,7 +1858,6 @@ class FilesStore {
           await this.publicRoomStore.getExternalLinks(data.current.id);
         }
 
-        // Warn if entering a private room without encryption keys configured
         if (data.current.private) {
           const keys = this.userStore?.encryptionKeys;
           if (!Array.isArray(keys) || keys.length === 0) {

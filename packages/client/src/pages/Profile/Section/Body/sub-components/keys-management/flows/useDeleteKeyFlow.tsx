@@ -64,7 +64,6 @@ export function useDeleteKeyFlow({
     setConfirming(null);
     try {
       await deleteEncryptionKey(confirming);
-      // Wipe local cache so a stale unlocked identity doesn't survive.
       SecretStorage.lock();
       await refreshKeysFromServer();
       toastr.success(t("Common:EncryptionKeyDeleted"));

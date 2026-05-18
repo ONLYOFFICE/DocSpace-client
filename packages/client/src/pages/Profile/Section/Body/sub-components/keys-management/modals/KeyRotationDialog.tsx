@@ -142,7 +142,6 @@ export const KeyRotationDialog: React.FC<KeyRotationDialogProps> = ({
             </div>
           )}
 
-          {/* Current Passphrase */}
           <div className={styles.inputGroup}>
             <Text fontSize="13px" fontWeight={600}>
               {t("Common:CurrentPassphrase")}

@@ -24,9 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// Client-side prep for encrypted uploads. Caller wraps the returned DEK for
-// recipients via wrapDekForRecipients after the server assigns a fileId.
-
 import { RoomsType } from "../../enums";
 import { getFileExtension } from "../../utils/common";
 import { encryptFile } from "../encryption/file-keys";
@@ -45,7 +42,6 @@ export type PreparedUpload = {
   encrypted: boolean;
   /** Raw 32-byte AES-256 DEK; null if not encrypted. Caller wipes after wrap. */
   dek: Uint8Array | null;
-  /** What the server stores; obfuscated `${uuid}${.ext}` for encrypted uploads. */
   uploadFileName: string;
   originalFileType: string;
   originalFileSize: number;
@@ -58,7 +54,6 @@ export function isEncryptableRoomType(roomType: RoomsType): boolean {
   return ENCRYPTABLE_ROOM_TYPES.includes(roomType);
 }
 
-/** Caller is responsible for the user-key check. */
 export function shouldEncryptUpload(
   roomType: RoomsType,
   isPrivate: boolean = false,
@@ -88,8 +83,6 @@ export async function prepareEncryptedUpload(
     };
   }
 
-  // Server name is `${uuid}${.ext}`: random uuid hides the user-chosen
-  // name; the extension stays so editor / preview routing keeps working.
   const { encryptedBlob, dek } = await encryptFile(file, {
     fileName: file.name,
     onProgress,

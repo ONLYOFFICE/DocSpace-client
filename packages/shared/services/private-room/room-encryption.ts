@@ -138,7 +138,6 @@ async function verifyUserPublicKey(
     return { kind: "ok", publicKey };
   }
 
-  // Mismatch: ask the resolver.
   const handler = resolver ?? getKeyMismatchHandler();
   if (!handler) return { kind: "key-mismatch-refused" };
 

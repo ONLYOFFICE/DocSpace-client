@@ -43,10 +43,8 @@ import styles from "./RecoveryPhraseInputModal.module.scss";
 
 type RecoveryPhraseInputModalProps = {
   visible: boolean;
-  /** Receives the normalized mnemonic if validation passes. */
   onSubmit: (mnemonic: string) => void;
   onCancel: () => void;
-  /** External error from the unlock attempt (e.g. "this envelope has no recovery slot"). */
   error?: string | null;
   isLoading?: boolean;
 };

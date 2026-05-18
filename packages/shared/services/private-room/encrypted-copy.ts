@@ -30,6 +30,7 @@ import {
   unwrapDekForCurrentUser,
   type RoomMemberPublicKey,
 } from "../encryption/room-file-access";
+import { reportPotentialGhostState } from "../encryption/ghost-state-notifier";
 import type { IdentityKeyPair } from "../encryption/types";
 
 type EncryptedItem = {
@@ -63,13 +64,19 @@ export async function decryptEncryptedItemToFile(
   }
   const encryptedData = await response.arrayBuffer();
 
-  const dek = await unwrapDekForCurrentUser({
-    fileKeys: encryptionInfo.fileKeys,
-    roomMemberKeys: (encryptionInfo.userKeys ?? []) as RoomMemberPublicKey[],
-    currentUserId,
-    currentIdentity: identity,
-    fileId: item.id,
-  });
+  let dek;
+  try {
+    dek = await unwrapDekForCurrentUser({
+      fileKeys: encryptionInfo.fileKeys,
+      roomMemberKeys: (encryptionInfo.userKeys ?? []) as RoomMemberPublicKey[],
+      currentUserId,
+      currentIdentity: identity,
+      fileId: item.id,
+    });
+  } catch (error) {
+    reportPotentialGhostState(error);
+    throw error;
+  }
 
   try {
     const { data: decryptedBlob, fileName: decryptedName } = await decryptFile(

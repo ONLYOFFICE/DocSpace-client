@@ -153,8 +153,6 @@ const User = ({
 
   const revokeEncryptedAccess = async () => {
     try {
-      // Groups need expansion to individual user ids — file wraps are
-      // keyed per recipient, not per group.
       const isGroup = "isGroup" in user && user.isGroup;
       let revokedIds: string[] = [String(user.id)];
       if (isGroup) {
@@ -192,10 +190,6 @@ const User = ({
     const isRemoval = option.access === ShareAccessRights.None;
     const isPrivateRoom = room.private;
     if (isRemoval && isPrivateRoom) {
-      // Block revoke while uploads to this room are still in flight: the
-      // upload finalizer wraps the new file's DEK for every current member,
-      // so revoking mid-batch would let the removed user keep access to the
-      // files that finish after the revoke API call returns.
       const activeUploads = getActiveUploadCountForRoom?.(room.id) ?? 0;
       if (activeUploads > 0) {
         toastr.warning(

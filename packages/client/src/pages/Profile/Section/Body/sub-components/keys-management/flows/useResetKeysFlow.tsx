@@ -30,6 +30,7 @@ import { useTranslation } from "react-i18next";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
+import { resetGhostStateGate } from "@docspace/shared/services/encryption/ghost-state-notifier";
 import { deleteEncryptionKey } from "@docspace/shared/api/privacy";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
@@ -47,20 +48,6 @@ export type ResetKeysFlow = {
   modals: ReactNode;
 };
 
-/**
- * Hard reset of the user's encryption identity.
- *
- * Use case: user has lost both their passphrase AND their recovery phrase
- * for every device, so there is no path back to the existing wrapped DEKs.
- * This flow deletes every encryption key the user has registered on the
- * server, wipes the in-memory unlocked state, and re-fetches so the UI
- * drops back to the "no identity" entry point.
- *
- * Existing encrypted files become permanently inaccessible to this user
- * unless a room owner re-shares them after the user generates a new
- * identity. The confirmation dialog requires the user to type a literal
- * token to defend against accidental clicks.
- */
 export function useResetKeysFlow({
   encryptionKeys,
   refreshKeysFromServer,
@@ -86,13 +73,13 @@ export function useResetKeysFlow({
 
     setIsPending(true);
     try {
-      // Delete every server-side envelope. We must drop the in-memory
-      // unlocked state regardless of partial failure, otherwise a stale
-      // cached identity could silently outlive a half-completed reset.
+      // Drop in-memory state regardless of partial failure — a stale cached
+      // identity must not outlive a half-completed reset.
       const results = await Promise.allSettled(
         keys.map((k) => deleteEncryptionKey(String(k.id))),
       );
       SecretStorage.lock();
+      resetGhostStateGate();
       await refreshKeysFromServer();
 
       const failures = results.filter((r) => r.status === "rejected").length;

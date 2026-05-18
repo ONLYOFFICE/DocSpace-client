@@ -32,6 +32,10 @@ import {
   EncryptionProvider,
   useEncryption,
 } from "@docspace/shared/context/encryption";
+import {
+  registerGhostStateHandler,
+  clearGhostStateHandler,
+} from "@docspace/shared/services/encryption/ghost-state-notifier";
 import { PassphraseDialog } from "@docspace/shared/dialogs/passphrase-dialog";
 import { KeyChangeDialog } from "@docspace/shared/dialogs/key-change-dialog";
 import { Link } from "@docspace/ui-kit/components/link";
@@ -49,14 +53,39 @@ const FilenameRecoveryEffect = inject(({ filesStore }) => ({
   }),
 );
 
+const GhostStateToastEffect = () => {
+  const { t } = useTranslation(["Common"]);
+  React.useEffect(() => {
+    registerGhostStateHandler(() => {
+      toastr.warning(
+        <Trans
+          i18nKey="Common:GhostStateDetected"
+          t={t}
+          components={[
+            <Link
+              key="reset"
+              tag="a"
+              isHovered
+              color="accent"
+              onClick={() => {
+                toastr.clear();
+                window.location.href = "/profile/keys-management";
+              }}
+            />,
+          ]}
+        />,
+        null,
+        60000,
+        true,
+      );
+    });
+    return () => clearGhostStateHandler();
+  }, [t]);
+  return null;
+};
+
 const DEVICE_SETUP_HINT_SESSION_KEY = "encryption-device-setup-hint-shown";
 
-// Onboarding nudge: when a user lands inside a private room on a device
-// that has no identity configured (per-device-identity by design — keys
-// don't roam), surface a one-time toast with a deep link to
-// Profile → Keys management. Per-session via sessionStorage so it doesn't
-// re-appear on every folder switch but does come back next session if the
-// user dismissed without acting.
 const DeviceSetupHintEffect = inject(({ selectedFolderStore }) => ({
   isPrivate: selectedFolderStore?.private,
 }))(
@@ -71,15 +100,11 @@ const DeviceSetupHintEffect = inject(({ selectedFolderStore }) => ({
           return;
         sessionStorage.setItem(DEVICE_SETUP_HINT_SESSION_KEY, "1");
       } catch {
-        // sessionStorage can throw in private-mode Safari; fall through and
-        // show the toast anyway — better one extra surface than none at all.
+        // sessionStorage throws in private-mode Safari; fall through.
       }
 
-      // NOTE: EncryptionProviderWrapper is mounted OUTSIDE <RouterProvider>
-      // in App.js, so useNavigate() throws "may be used only in the context
-      // of a <Router> component" and tears down the whole render tree —
-      // this used to crash Profile entirely. window.location.href is a
-      // full page transition into Profile, which is the intended UX anyway.
+      // useNavigate() is unavailable here — EncryptionProviderWrapper is
+      // mounted outside <RouterProvider> in App.js and would crash.
       toastr.info(
         <Trans
           i18nKey="Common:EncryptionDeviceSetupHint"
@@ -136,13 +161,13 @@ const EncryptionProviderWrapper = ({ userKeys, children }) => {
     >
       <FilenameRecoveryEffect />
       <DeviceSetupHintEffect />
+      <GhostStateToastEffect />
       {children}
     </EncryptionProvider>
   );
 };
 
-// userId comes from userStore.user — encryptionKeys[].userId is sometimes
-// blank in the server response.
+// encryptionKeys[].userId is sometimes blank in the server response; use userStore.user.id instead.
 export default inject(({ userStore }) => {
   const keys = userStore?.encryptionKeys;
   const firstKey = keys && keys.length > 0 ? keys[0] : null;

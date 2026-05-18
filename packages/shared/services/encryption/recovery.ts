@@ -106,7 +106,6 @@ export async function validateMnemonic(mnemonic: string): Promise<boolean> {
   return checksumByte === expectedChecksum;
 }
 
-/** Split into N-word groups for grid display. */
 export function splitMnemonicForDisplay(
   mnemonic: string,
   groupSize = 4,

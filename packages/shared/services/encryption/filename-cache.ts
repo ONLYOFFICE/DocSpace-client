@@ -100,7 +100,7 @@ export function forgetEncryptedFilename(fileId: number | string): void {
   try {
     s.removeItem(`${KEY_PREFIX}${fileId}`);
   } catch {
-    /* ignore */
+    //
   }
 }
 

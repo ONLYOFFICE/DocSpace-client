@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// Constants and types for the Private Rooms encryption stack.
-
 export const SUITE_X25519_HKDF_AES256GCM = 0x01;
 export type SuiteId = typeof SUITE_X25519_HKDF_AES256GCM;
 

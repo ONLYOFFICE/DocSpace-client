@@ -66,7 +66,6 @@ const KeysManagement = ({
 
   const hasKeys = !!encryptionKeys && encryptionKeys.length > 0;
 
-  // Re-fetch after each POST/PUT so we have server-assigned key ids.
   const refreshKeysFromServer = useCallback(async () => {
     try {
       const fresh = await getEncryptionKeys();

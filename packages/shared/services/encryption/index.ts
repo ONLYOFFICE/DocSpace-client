@@ -38,3 +38,4 @@ export * from "./tofu-store";
 export * from "./filename-cache";
 export * from "./passphrase-strength";
 export * from "./auto-lock-preference";
+export * from "./ghost-state-notifier";

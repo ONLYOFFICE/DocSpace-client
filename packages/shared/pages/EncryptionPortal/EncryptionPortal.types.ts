@@ -26,10 +26,6 @@
 
 import type { PropsWithChildren } from "react";
 
-/**
- * Type definition for the EncryptionPortal component
- */
 export type EncryptionPortalProps = PropsWithChildren & {
-  /** Optional className for custom styling */
   className?: string;
 };

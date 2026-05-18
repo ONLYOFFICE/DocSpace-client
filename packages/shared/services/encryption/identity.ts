@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// X25519 identity envelope with passphrase and recovery slots.
-
 import { argon2id as argon2idWasm } from "hash-wasm";
 import { X25519 as HpkeX25519 } from "@hpke/dhkem-x25519";
 
@@ -311,11 +309,6 @@ export const DEFAULT_ARGON2_PARAMS: Argon2idParams = {
   p: ARGON2ID_DEFAULT_P,
 };
 
-/**
- * Encrypt an identity keypair under a passphrase (and optionally a recovery
- * mnemonic), producing the wire-format `SerializedIdentity` ready for upload
- * to the server.
- */
 export async function serializeIdentity(
   keyPair: IdentityKeyPair,
   passphrase: string,
@@ -331,7 +324,6 @@ export async function serializeIdentity(
     throw new InvalidFormatError("privateKey must be 32 bytes");
   }
 
-  // Passphrase slot
   const saltPp = getRandomBytes(SALT_SIZE);
   const ivPp = getRandomBytes(AES_GCM_IV_SIZE);
   const kekPp = await deriveKek(
@@ -343,7 +335,6 @@ export async function serializeIdentity(
   const ctPp = await aesGcmEncrypt(kekPp, ivPp, privateKey, aadPp);
   zeroBuffer(kekPp);
 
-  // Recovery slot (optional)
   let flags = 0;
   let recoveryEncoded: Uint8Array = new Uint8Array(0);
   if (options.recoveryMnemonic) {
@@ -411,10 +402,6 @@ function parseEnvelope(envelopeBase64: string): ParsedEnvelope {
   return { publicKey, flags, passphraseSlot, recoverySlot };
 }
 
-/**
- * Decrypt the identity private key using the passphrase. Throws
- * InvalidPassphraseError on bad input.
- */
 export async function unlockWithPassphrase(
   serialized: SerializedIdentity,
   passphrase: string,
@@ -458,11 +445,6 @@ export async function unlockWithPassphrase(
   return { publicKey: env.publicKey, privateKey };
 }
 
-/**
- * Decrypt the identity private key using the BIP-39 recovery mnemonic.
- * Throws InvalidRecoveryPhraseError on bad input or if the envelope has no
- * recovery slot.
- */
 export async function unlockWithRecoveryPhrase(
   serialized: SerializedIdentity,
   mnemonic: string,
@@ -526,7 +508,6 @@ export async function changePassphrase(
   // mnemonic, which the user still knows).
   let result: SerializedIdentity;
   if (env.recoverySlot) {
-    // Build a fresh passphrase slot, keep the recovery slot untouched.
     const params = env.passphraseSlot.params;
     const saltPp = getRandomBytes(SALT_SIZE);
     const ivPp = getRandomBytes(AES_GCM_IV_SIZE);
@@ -632,7 +613,6 @@ export async function importIdentityFromFile(
   if (!parsed.data?.publicKey || !parsed.data?.privateKeyEnc) {
     throw new InvalidFormatError("identity import: missing required fields");
   }
-  // Round-trip parse to validate the inner envelope.
   parseEnvelope(parsed.data.privateKeyEnc);
   return parsed.data;
 }

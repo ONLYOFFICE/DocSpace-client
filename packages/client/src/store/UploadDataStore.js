@@ -411,11 +411,6 @@ class UploadDataStore {
     });
   };
 
-  // Count uploads whose destination folder is `roomId` (matches a room root
-  // when files are uploaded directly into it). Used by InfoPanel to block
-  // member revoke in encrypted rooms while a batch is still in flight —
-  // re-wrap of an in-progress file would otherwise race the revoke API and
-  // re-grant the revoked user access to the new content.
   getActiveUploadCountForRoom = (roomId) => {
     return countActiveUploadsForRoom(this.files, roomId);
   };
@@ -1887,7 +1882,6 @@ class UploadDataStore {
     retryFileUploaded.errorShown = false;
     retryFileUploaded.percent = 0;
 
-    // Allow the batch to re-arm if user retries a quota-flagged file.
     this.quotaErrorRaised = false;
 
     if (this.uploaded) {
@@ -2176,9 +2170,6 @@ class UploadDataStore {
             this.uploadedFilesHistory[fileIndex].isQuotaError = isQuota;
           }
 
-          // Quota is a batch-fatal condition: every still-queued upload will
-          // hit the same error. Short-circuit them now so users see the full
-          // failure state and only need a single retry after upgrading.
           if (isQuota && !this.quotaErrorRaised) {
             this.quotaErrorRaised = true;
             const currentUniqueId = this.files[indexOfFile].uniqueId;
@@ -2206,14 +2197,6 @@ class UploadDataStore {
           }
         });
 
-        // const index = error?.chunkIndex ?? 0;
-
-        // const uploadedSize = error?.isFinalize
-        //   ? 0
-        //   : fileSize <= chunkUploadSize
-        //     ? fileSize
-        //     : fileSize - index * chunkUploadSize;
-
         const newPercent = this.getFilesPercent();
         this.percent = newPercent;
 
@@ -2236,8 +2219,6 @@ class UploadDataStore {
 
         this.currentUploadNumber -= 1;
 
-        // Skip launching a next session when quota has been raised: every
-        // remaining file is already flagged with the same error.
         if (!this.quotaErrorRaised) {
           const nextFileIndex = this.files.findIndex((f) => !f.inAction);
 

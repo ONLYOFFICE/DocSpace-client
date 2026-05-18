@@ -169,7 +169,6 @@ export function isDSE3Format(data: ArrayBuffer | Uint8Array): boolean {
   return true;
 }
 
-// AAD construction
 function buildChunkAad(
   fileNonce: Uint8Array,
   chunkCount: number,
@@ -212,7 +211,6 @@ async function importDek(
   );
 }
 
-// Filename encryption (single-shot, AES-GCM under DEK with name AAD)
 export async function encryptFileNameRaw(
   name: string,
   dek: Uint8Array,
@@ -265,7 +263,6 @@ export async function decryptFileNameRaw(
   }
 }
 
-// Streaming chunked encryption
 export async function encryptChunked(
   data: File | Blob | ArrayBuffer | Uint8Array,
   dek: Uint8Array,

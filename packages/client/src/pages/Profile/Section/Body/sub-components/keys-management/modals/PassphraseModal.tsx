@@ -67,7 +67,6 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
   const [confirmPassphrase, setConfirmPassphrase] = useState("");
   const [error, setError] = useState("");
 
-  // Reset form and focus when dialog opens
   useEffect(() => {
     if (visible) {
       setPassphrase("");

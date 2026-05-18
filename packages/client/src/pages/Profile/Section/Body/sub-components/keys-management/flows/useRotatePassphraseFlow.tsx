@@ -81,7 +81,6 @@ export function useRotatePassphraseFlow({
           publicKey: updated.publicKey,
           privateKeyEnc: updated.privateKeyEnc,
         });
-        // Force the next op to prompt with the new passphrase.
         SecretStorage.lock();
         await refreshKeysFromServer();
         toastr.success(t("Common:PassphraseUpdated"));

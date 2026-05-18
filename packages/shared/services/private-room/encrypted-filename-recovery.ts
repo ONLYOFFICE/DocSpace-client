@@ -24,11 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// Eager recovery of encrypted-file display names. Invoked after identity
-// unlock; for each visible encrypted file lacking a cached name we range-
-// fetch the DSE3 header, decrypt only the encryptedName field, and write
-// the result to the session-wide filename cache.
-
 import { getFileEncryptionAccess } from "../../api/files";
 import { wipeDek } from "../encryption/file-keys";
 import {
@@ -36,6 +31,7 @@ import {
   rememberEncryptedFilename,
 } from "../encryption/filename-cache";
 import { unwrapDekForCurrentUser } from "../encryption/room-file-access";
+import { reportPotentialGhostState } from "../encryption/ghost-state-notifier";
 import {
   decryptFileNameRaw,
   parseDSE3Header,
@@ -98,17 +94,13 @@ async function recoverOne(
       header.fileNonce,
     );
     if (name) rememberEncryptedFilename(file.id, name);
-  } catch {
-    // Swallow — recovery is best-effort; UI still has the obfuscated name.
+  } catch (error) {
+    reportPotentialGhostState(error);
   } finally {
     if (dek) wipeDek(dek);
   }
 }
 
-/**
- * Concurrent over MAX_PARALLEL slots; rejects nothing. Caller fires-and-
- * forgets — the cache writes propagate via subscribeFilenameCache.
- */
 export async function recoverEncryptedFilenames(
   candidates: RecoveryCandidate[],
   userId: string,

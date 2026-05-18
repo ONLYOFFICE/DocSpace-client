@@ -24,13 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// Decrypt + zip helpers. No UI / API calls beyond the actual download —
-// callers pass in the unlocked identity and the file's encryption access info.
-
 import { Zip, ZipPassThrough } from "fflate";
 
 import { decryptFile } from "../encryption/file-keys";
 import { unwrapDekForCurrentUser } from "../encryption/room-file-access";
+import { reportPotentialGhostState } from "../encryption/ghost-state-notifier";
 import type { RoomMemberPublicKey } from "../encryption/room-file-access";
 import type { IdentityKeyPair, ServerAccessKeyDto } from "../encryption/types";
 
@@ -78,6 +76,7 @@ export async function decryptDownloadedFile(
 
     return { success: true, file: decryptedFile };
   } catch (error) {
+    reportPotentialGhostState(error);
     return {
       success: false,
       error:
@@ -244,7 +243,6 @@ export function deduplicateFileNames(names: string[]): string[] {
   return result;
 }
 
-/** Returns true if `userId` has an entry in the file's `fileKeys`. */
 export function canUserDecrypt(
   fileKeys:
     | Array<{ userId: string }>

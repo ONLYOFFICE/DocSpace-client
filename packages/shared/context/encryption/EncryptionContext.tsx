@@ -53,9 +53,6 @@ import type {
   SerializedIdentity,
 } from "../../services/encryption/types";
 
-// React context for the unlocked X25519 identity. `userKeys` carries the
-// serialized envelope plus the userId required to verify cache ownership.
-
 export type EncryptionUserKeys = SerializedIdentity & { userId: string };
 
 export type EncryptionContextValue = {
@@ -224,7 +221,6 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     };
   }, [requireIdentity]);
 
-  // Auto-lock on tab visibility hidden.
   useEffect(() => {
     if (typeof document === "undefined") return undefined;
     const handler = () => {
@@ -239,7 +235,6 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     };
   }, []);
 
-  // Auto-lock on idle timeout (configurable via Profile → keys management).
   useEffect(() => {
     if (!isUnlocked) return undefined;
     if (typeof document === "undefined" || typeof window === "undefined") {
@@ -290,7 +285,6 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
         }
         return "refuse";
       }
-      // Concurrent prompt: refuse the in-flight one and show the new.
       if (keyChangeResolveRef.current) {
         keyChangeResolveRef.current("refuse");
         keyChangeResolveRef.current = null;

@@ -58,7 +58,6 @@ export {
   VERSION_DSE3_FILE,
 } from "./types";
 
-// Errors
 export {
   CryptoError,
   InvalidPassphraseError,
@@ -73,7 +72,6 @@ export {
   KeyNotFoundError,
 } from "./errors";
 
-// Buffer / encoding utilities
 export {
   arrayBufferToBase64,
   base64ToArrayBuffer,
@@ -82,7 +80,6 @@ export {
   bytesToUuid,
 } from "./utils";
 
-// Identity (X25519 keypair, dual-envelope passphrase + recovery)
 export {
   generateIdentityKeyPair,
   serializeIdentity,
@@ -95,13 +92,10 @@ export {
   DEFAULT_ARGON2_PARAMS,
 } from "./identity";
 
-// HPKE-Auth wrap/unwrap for DEKs
 export { wrapDEK, unwrapDEK, inspectWrap } from "./hpke";
 
-// File-level encryption
 export { generateDEK, encryptFile, decryptFile, wipeDek } from "./file-keys";
 
-// DSE3 streaming primitives
 export {
   isDSE3Format,
   parseDSE3Header,
@@ -109,7 +103,6 @@ export {
   shouldUseChunkedEncryption,
 } from "./streaming-encryption";
 
-// Recovery mnemonic
 export {
   generateRecoveryMnemonic,
   validateMnemonic,

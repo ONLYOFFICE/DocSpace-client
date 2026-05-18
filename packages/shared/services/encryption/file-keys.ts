@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// File-level encrypt/decrypt and DEK lifecycle.
-
 import {
   AES_KEY_SIZE_BYTES,
   DSE3_FILE_NONCE_SIZE,

@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// HPKE-Auth wrap/unwrap of DEKs.
 // Suite: DHKEM(X25519, HKDF-SHA256) / HKDF-SHA256 / AES-256-GCM.
 
 import { Aes256Gcm, CipherSuite, HkdfSha256 } from "@hpke/core";
@@ -303,7 +302,6 @@ export async function unwrapDEK(
   return dek;
 }
 
-/** Read the senderUserId from a wrap blob without unwrapping. */
 export function inspectWrap(wrappedBase64: string): {
   version: number;
   suite: number;

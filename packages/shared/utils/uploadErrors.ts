@@ -87,14 +87,6 @@ const extractType = (error: unknown): string => {
   return typeof raw === "string" ? raw.toLowerCase() : "";
 };
 
-/**
- * Recognises a server-side quota / out-of-storage error in an upload flow.
- *
- * DocSpace BE can signal storage exhaustion via several channels: HTTP 507
- * (Insufficient Storage), a typed payload (`TenantQuotaException`), or a
- * plain message. We match all three so callers don't have to repeat the
- * sniffing logic.
- */
 export const isQuotaError = (error: unknown): boolean => {
   if (!error) return false;
 
@@ -117,14 +109,6 @@ export interface UploadQueueItem {
   cancel?: boolean;
 }
 
-/**
- * Counts how many files in the upload queue are still in flight against a
- * given destination folder id (room root for the common case). Used by the
- * InfoPanel to block member revoke in encrypted rooms while a batch is in
- * progress — the upload finalizer wraps the new file's DEK for every current
- * member, so revoking mid-batch would let the removed user keep access to
- * files that finish after the revoke API returns.
- */
 export const countActiveUploadsForRoom = (
   files: ReadonlyArray<UploadQueueItem>,
   roomId: string | number | null | undefined,

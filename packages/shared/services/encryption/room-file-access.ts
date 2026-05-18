@@ -39,7 +39,6 @@ import type { IdentityKeyPair, ServerAccessKeyDto } from "./types";
 
 export type RoomMemberPublicKey = {
   userId: string;
-  /** Base64-encoded raw 32-byte X25519 public key. */
   publicKey: string;
   publicKeyId?: string;
 };

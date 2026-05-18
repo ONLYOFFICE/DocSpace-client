@@ -26,7 +26,6 @@
 
 export type KeyChangeDialogProps = {
   visible: boolean;
-  /** Display name to show; falls back to userId if missing. */
   displayName?: string;
   userId: string;
   /** Base64 raw X25519 public key currently stored in TOFU. */

@@ -123,7 +123,7 @@
     },
     {
       "label": "Backend | run DE - full (Aspire)",
-      "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; SKIP_CLIENT=true dotnet run --launch-profile development",
+      "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile development",
       "type": "shell",
       "options": {
         "env": {

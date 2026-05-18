@@ -14,6 +14,7 @@ export enum AVAILABLE_CONTEXT_ITEMS {
   markAsFavorite = "mark-as-favorite",
   removeFromFavorites = "remove-from-favorites",
   removeFromRecent = "remove-from-recent",
+  removeFromSharedWithMe = "remove-from-shared-with-me",
   share = "share",
   showInfo = "show-info",
   copy = "copy",

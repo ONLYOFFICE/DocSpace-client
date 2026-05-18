@@ -41,6 +41,7 @@ const NAVIGABLE_SECTIONS = new Set<string>([
   DocsSection.MyDocuments,
   DocsSection.Favorites,
   DocsSection.Recent,
+  DocsSection.SharedWithMe,
   DocsSection.Trash,
 ]);
 

@@ -78,6 +78,8 @@ const sectionFromPathnameAndFolder = (
       return DocsSection.Favorites;
     case "@recent":
       return DocsSection.Recent;
+    case "@share":
+      return DocsSection.SharedWithMe;
     case "@trash":
       return DocsSection.Trash;
     default:

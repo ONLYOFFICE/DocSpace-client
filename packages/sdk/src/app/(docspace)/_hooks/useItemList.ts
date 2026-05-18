@@ -51,6 +51,7 @@ type useItemListProps = {
   isRecentSection?: boolean;
   isTrashSection?: boolean;
   isDocsSection?: boolean;
+  isShareSection?: boolean;
 
   getIcon: ReturnType<typeof useItemIcon>["getIcon"];
 };
@@ -62,12 +63,14 @@ export default function useItemList({
   isRecentSection,
   isTrashSection,
   isDocsSection,
+  isShareSection,
 }: useItemListProps) {
   const { getFilesContextMenu, getFoldersContextMenu } = useItemContextMenu({
     isFavoritesSection,
     isRecentSection,
     isTrashSection,
     isDocsSection,
+    isShareSection,
   });
 
   const getFilesContextMenuRef = useRef(getFilesContextMenu);

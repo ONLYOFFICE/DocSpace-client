@@ -110,6 +110,7 @@ const List = ({
     isRecentSection: rootFolderType === FolderType.Recent,
     isTrashSection: rootFolderType === FolderType.TRASH,
     isDocsSection: rootFolderType === FolderType.USER,
+    isShareSection: rootFolderType === FolderType.SHARE,
   });
 
   const [filter, setFilter] = React.useState<FilesFilter>(

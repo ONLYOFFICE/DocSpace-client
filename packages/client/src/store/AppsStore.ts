@@ -164,9 +164,17 @@ class AppsStore {
     return updated;
   };
 
-  installAiForms = async (roomId: number) => {
-    await this.saveSettings("ai-forms", { roomId });
+  installAiForms = async (roomId: number, libraryId?: number) => {
+    await this.saveSettings("ai-forms", { roomId, libraryId });
     await this.enable("ai-forms", true);
+  };
+
+  // Disable ai-forms and wipe its stored settings so a subsequent re-enable
+  // goes through the full install flow (new room + library) rather than
+  // silently re-pointing at the orphaned rooms.
+  uninstallAiForms = async () => {
+    await this.enable("ai-forms", false);
+    await this.saveSettings("ai-forms", null);
   };
 
   // Re-enable a previously configured app without recreating its resources.

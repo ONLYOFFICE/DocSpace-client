@@ -75,6 +75,7 @@ const AI_FILES_SECTION_TO_ID: Record<string, string> = {
 const AI_FORMS_SECTION_TO_ID: Record<string, string> = {
   "in-progress": "ai-forms-in-progress",
   "completed-forms": "ai-forms-completed",
+  library: "ai-forms-library",
   settings: "ai-forms-settings",
 };
 
@@ -211,6 +212,12 @@ const NewArticle = ({
               label: t("Common:CompletedForms"),
               icon: FormGalleryReactSvgUrl,
               onClick: () => navigate("/ai-forms?section=completed-forms"),
+            },
+            {
+              id: "ai-forms-library",
+              label: t("Common:Library"),
+              icon: FormGalleryReactSvgUrl,
+              onClick: () => navigate("/ai-forms?section=library"),
             },
             {
               id: "ai-forms-settings",

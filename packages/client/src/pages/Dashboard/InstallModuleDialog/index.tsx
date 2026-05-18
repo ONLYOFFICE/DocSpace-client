@@ -26,23 +26,28 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import CheckIcon from "@docspace/ui-kit/assets/check.react.svg";
 import DangerIcon from "@docspace/ui-kit/assets/danger.toast.react.svg";
 import InfoIcon from "@docspace/ui-kit/assets/info.outline.react.svg";
-import CatalogDocumentsIcon from "@docspace/ui-kit/assets/icons/16/catalog.documents.react.svg";
+import CatalogRoomsIcon from "@docspace/ui-kit/assets/icons/16/catalog.rooms.react.svg";
+import PeopleIcon from "@docspace/ui-kit/assets/icons/16/people.react.svg";
+import TemplateIcon from "@docspace/ui-kit/assets/icons/16/catalog.documents.react.svg";
+import FormRoomLightIllustration from "PUBLIC_DIR/images/emptyview/empty.form.room.light.svg";
+import FormRoomDarkIllustration from "PUBLIC_DIR/images/emptyview/empty.form.room.dark.svg";
 
 import {
   AI_FORMS_INSTALL_STEPS,
-  AI_FORMS_ROOM_TITLE,
   installAiFormsModule,
   type AiFormsInstallStepId,
+  type LibraryUploadProgress,
 } from "../installFlow";
 
 import styles from "./InstallModuleDialog.module.scss";
@@ -51,7 +56,8 @@ type InstallAiFormsDialogProps = {
   visible: boolean;
   onClose: () => void;
   onInstalled: () => void;
-  installAiForms?: (roomId: number) => Promise<void>;
+  installAiForms?: (roomId: number, libraryId?: number) => Promise<void>;
+  uninstallAiForms?: () => Promise<void>;
   skipConfirm?: boolean;
 };
 
@@ -62,37 +68,69 @@ const InstallAiFormsDialogComponent = ({
   onClose,
   onInstalled,
   installAiForms,
+  uninstallAiForms,
   skipConfirm = false,
 }: InstallAiFormsDialogProps) => {
   const { t } = useTranslation(["Common"]);
+  const { isBase } = useTheme();
   const [phase, setPhase] = React.useState<Phase>(skipConfirm ? "installing" : "confirm");
   const [stepIndex, setStepIndex] = React.useState(0);
+  const [libraryProgress, setLibraryProgress] =
+    React.useState<LibraryUploadProgress | null>(null);
+  const abortRef = React.useRef<AbortController | null>(null);
+  const cancelledRef = React.useRef(false);
 
   const handleInstallClick = React.useCallback(async () => {
     setPhase("installing");
     setStepIndex(0);
+    setLibraryProgress(null);
+
+    abortRef.current = new AbortController();
+    cancelledRef.current = false;
 
     try {
-      const { roomId } = await installAiFormsModule((stepId) => {
-        const idx = AI_FORMS_INSTALL_STEPS.indexOf(stepId);
-        if (idx >= 0) setStepIndex(idx);
-      });
+      const { roomId, libraryId } = await installAiFormsModule(
+        (stepId) => {
+          const idx = AI_FORMS_INSTALL_STEPS.indexOf(stepId);
+          if (idx >= 0) setStepIndex(idx);
+        },
+        (progress) => setLibraryProgress(progress),
+        abortRef.current.signal,
+      );
 
-      await installAiForms?.(roomId);
+      if (cancelledRef.current) return;
+
+      await installAiForms?.(roomId, libraryId);
 
       setStepIndex(AI_FORMS_INSTALL_STEPS.length);
       setPhase("done");
     } catch (err) {
+      if (cancelledRef.current) return;
       console.error("AI Forms install failed", err);
       setPhase("failed");
       toastr.error(t("Common:DashboardInstallFailed"));
+    } finally {
+      abortRef.current = null;
     }
   }, [installAiForms, t]);
+
+  const handleCancelInstalling = React.useCallback(async () => {
+    cancelledRef.current = true;
+    abortRef.current?.abort();
+    try {
+      await uninstallAiForms?.();
+    } catch (err) {
+      console.error("AI Forms cleanup after cancel failed", err);
+    }
+    toastr.info(t("Common:DashboardInstallCancelled"));
+    onClose();
+  }, [onClose, uninstallAiForms, t]);
 
   React.useEffect(() => {
     if (!visible) {
       setPhase(skipConfirm ? "installing" : "confirm");
       setStepIndex(0);
+      setLibraryProgress(null);
     }
   }, [visible, skipConfirm]);
 
@@ -110,59 +148,83 @@ const InstallAiFormsDialogComponent = ({
     "create-room": t("Common:DashboardInstallStepCreateRoom"),
     "invite-everyone": t("Common:DashboardInstallStepInviteEveryone"),
     "create-blank-form": t("Common:DashboardInstallStepCreateBlankForm"),
+    "upload-library": t("Common:DashboardInstallStepUploadLibrary"),
   };
+
+  const stepDescriptions: Record<AiFormsInstallStepId, string> = {
+    "create-room": t("Common:DashboardInstallStepCreateRoomDescription"),
+    "invite-everyone": t("Common:DashboardInstallStepInviteEveryoneDescription"),
+    "create-blank-form": t(
+      "Common:DashboardInstallStepCreateBlankFormDescription",
+    ),
+    "upload-library": t("Common:DashboardInstallStepUploadLibraryDescription"),
+  };
+
+  const getStepDescription = (id: AiFormsInstallStepId): string => {
+    if (id === "upload-library" && libraryProgress?.total) {
+      const percent = Math.min(
+        100,
+        Math.floor((libraryProgress.uploaded / libraryProgress.total) * 100),
+      );
+      return t("Common:DashboardInstallStepUploadLibraryProgress", { percent });
+    }
+    return stepDescriptions[id];
+  };
+
+  const confirmBullets: {
+    icon: typeof CatalogRoomsIcon;
+    title: string;
+    description: string;
+  }[] = [
+    {
+      icon: CatalogRoomsIcon,
+      title: t("Common:DashboardInstallBulletCreateRoom"),
+      description: t("Common:DashboardInstallBulletCreateRoomDescription"),
+    },
+    {
+      icon: PeopleIcon,
+      title: t("Common:DashboardInstallBulletInvite"),
+      description: t("Common:DashboardInstallBulletInviteDescription"),
+    },
+    {
+      icon: TemplateIcon,
+      title: t("Common:DashboardInstallBulletStarter"),
+      description: t("Common:DashboardInstallBulletStarterDescription"),
+    },
+  ];
 
   const renderConfirmBody = () => (
     <div className={styles.confirmBody}>
-      <div className={styles.heroBadge} aria-hidden="true">
-        <CatalogDocumentsIcon />
+      <div className={styles.heroIllustration} aria-hidden="true">
+        {isBase ? <FormRoomLightIllustration /> : <FormRoomDarkIllustration />}
       </div>
 
-      <div className={styles.heroText}>
-        <Text as="p" className={styles.confirmText}>
-          {t("Common:DashboardAIFormsDescription")}
-        </Text>
-        <Text as="p" className={styles.confirmHint}>
-          {t("Common:DashboardInstallConfirmHint")}
-        </Text>
-      </div>
+      <Text as="p" className={styles.confirmText}>
+        {t("Common:DashboardInstallConfirmIntro")}
+      </Text>
 
       <ul className={styles.bulletList}>
-        <li className={styles.bulletItem}>
-          <CheckIcon aria-hidden="true" className={styles.bulletIcon} />
-          <Text as="span" className={styles.bulletText}>
-            <Trans
-              t={t}
-              i18nKey="Common:DashboardInstallBulletCreateRoom"
-              values={{ room: AI_FORMS_ROOM_TITLE }}
-              components={{ 1: <strong /> }}
-            />
-          </Text>
-        </li>
-        <li className={styles.bulletItem}>
-          <CheckIcon aria-hidden="true" className={styles.bulletIcon} />
-          <Text as="span" className={styles.bulletText}>
-            {t("Common:DashboardInstallBulletInvite")}
-          </Text>
-        </li>
-        <li className={styles.bulletItem}>
-          <CheckIcon aria-hidden="true" className={styles.bulletIcon} />
-          <Text as="span" className={styles.bulletText}>
-            {t("Common:DashboardInstallBulletStarter")}
-          </Text>
-        </li>
+        {confirmBullets.map(({ icon: Icon, title, description }) => (
+          <li key={title} className={styles.bulletItem}>
+            <span className={styles.bulletIconWrap} aria-hidden="true">
+              <Icon className={styles.bulletIcon} />
+            </span>
+            <div className={styles.bulletTexts}>
+              <Text as="span" className={styles.bulletTitle}>
+                {title}
+              </Text>
+              <Text as="span" className={styles.bulletDescription}>
+                {description}
+              </Text>
+            </div>
+          </li>
+        ))}
       </ul>
     </div>
   );
 
   const renderInstallingBody = () => (
     <div className={styles.installingBody}>
-      <div className={styles.heroText}>
-        <Text as="p" className={styles.confirmHint}>
-          {t("Common:DashboardInstallProcessingHint")}
-        </Text>
-      </div>
-
       <div className={styles.keepOpenCallout} role="status">
         <InfoIcon className={styles.keepOpenCalloutIcon} aria-hidden="true" />
         <span>{t("Common:DashboardInstallKeepOpen")}</span>
@@ -189,9 +251,14 @@ const InstallAiFormsDialogComponent = ({
               >
                 {state === "done" ? <CheckIcon /> : null}
               </Text>
-              <Text className={styles.timelineLabel} as="span">
-                {stepLabels[id]}
-              </Text>
+              <div className={styles.timelineLabelWrap}>
+                <Text className={styles.timelineLabel} as="span">
+                  {stepLabels[id]}
+                </Text>
+                <Text className={styles.timelineCounter} as="span">
+                  {getStepDescription(id)}
+                </Text>
+              </div>
             </li>
           );
         })}
@@ -269,14 +336,13 @@ const InstallAiFormsDialogComponent = ({
         />
       );
     }
+    // installing
     return (
       <Button
-        primary
         scale
         size={ButtonSize.normal}
         label={t("Common:CancelButton")}
-        onClick={onClose}
-        isDisabled
+        onClick={handleCancelInstalling}
       />
     );
   };
@@ -289,10 +355,12 @@ const InstallAiFormsDialogComponent = ({
     return t("Common:DashboardInstallTitle", { module: moduleTitle });
   };
 
+  const handleModalClose = inProgress ? handleCancelInstalling : onClose;
+
   return (
     <ModalDialog
       visible={visible}
-      onClose={inProgress ? () => {} : onClose}
+      onClose={handleModalClose}
       isLarge
       autoMaxHeight
     >
@@ -310,6 +378,7 @@ const InstallAiFormsDialogComponent = ({
 
 export const InstallAiFormsDialog = inject<TStore>(({ appsStore }) => ({
   installAiForms: appsStore.installAiForms,
+  uninstallAiForms: appsStore.uninstallAiForms,
 }))(observer(InstallAiFormsDialogComponent));
 
 export default InstallAiFormsDialog;

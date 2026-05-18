@@ -47,6 +47,7 @@ type AppsProps = {
   isEnabled?: AppsStore["isEnabled"];
   enable?: AppsStore["enable"];
   activate?: AppsStore["activate"];
+  uninstallAiForms?: AppsStore["uninstallAiForms"];
   ensureLoaded?: AppsStore["ensureLoaded"];
 };
 
@@ -54,6 +55,7 @@ const Apps = ({
   isEnabled,
   enable,
   activate,
+  uninstallAiForms,
   ensureLoaded,
 }: AppsProps) => {
   const { t, ready } = useTranslation(["Settings", "Common", "OAuth"]);
@@ -79,9 +81,13 @@ const Apps = ({
       return;
     }
     try {
-      if (next && id === "ai-forms") {
-        const activated = await activate?.("ai-forms");
-        if (activated === false) setInstallDialogVisible(true);
+      if (id === "ai-forms") {
+        if (next) {
+          const activated = await activate?.("ai-forms");
+          if (activated === false) setInstallDialogVisible(true);
+        } else {
+          await uninstallAiForms?.();
+        }
         return;
       }
       await enable?.(id, next);
@@ -154,6 +160,7 @@ export const Component = inject(({ appsStore }: TStore) => ({
   isEnabled: appsStore.isEnabled,
   enable: appsStore.enable,
   activate: appsStore.activate,
+  uninstallAiForms: appsStore.uninstallAiForms,
   ensureLoaded: appsStore.ensureLoaded,
 }))(observer(Apps));
 

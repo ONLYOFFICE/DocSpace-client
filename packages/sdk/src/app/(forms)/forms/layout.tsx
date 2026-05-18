@@ -69,16 +69,19 @@ export default async function FormsServerLayout({
   let roomId = hdrs.get(ROOM_ID_HEADER) || "";
   let libraryId = hdrs.get(LIBRARY_ID_HEADER) || "";
 
-  if (!roomId) {
+  // The host client (packages/client) always passes roomId via the iframe URL
+  // but never libraryId — it lives only in the ai-forms app settings. Read
+  // settings whenever any required id is still missing.
+  if (!roomId || !libraryId) {
     const appSettings = await getAppSettings<{
       roomId?: string | number;
       libraryId?: string | number;
     }>("ai-forms");
-    if (appSettings?.roomId) {
+    if (!roomId && appSettings?.roomId) {
       roomId = String(appSettings.roomId);
-      if (!libraryId && appSettings.libraryId) {
-        libraryId = String(appSettings.libraryId);
-      }
+    }
+    if (!libraryId && appSettings?.libraryId) {
+      libraryId = String(appSettings.libraryId);
     }
   }
   const authToken = cookieStore.get("asc_auth_key")?.value || "";

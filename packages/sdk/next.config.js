@@ -63,7 +63,7 @@ const isDev = process.env.NODE_ENV !== productionMode;
 const nextConfig = {
   basePath: "/sdk",
   outputFileTracingIncludes: {
-    "/forms/**": ["./src/app/(forms)/_styles/*.scss"],
+    "/forms/**": ["./src/app/(forms)/_styles/*.scss", "./data.zip"],
   },
   serverExternalPackages: [
     "nconf",
